@@ -45,7 +45,7 @@ export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
   return (
     <section className="error">
       <section className="image">
-        <img src={IMAGE_ILLUSTRATION_EMPTY} />
+        <img src={IMAGE_ILLUSTRATION_EMPTY} alt="illustration" />
       </section>
 
       {shouldShowStatusCode && <h3 className="error-code">{statusCode}</h3>}

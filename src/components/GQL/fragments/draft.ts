@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export default {
+const fragments = {
   publishState: gql`
     fragment PublishStateDraft on Draft {
       id
@@ -18,3 +18,5 @@ export default {
     }
   `,
 }
+
+export default fragments

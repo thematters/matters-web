@@ -1,6 +1,6 @@
 import NP from 'number-precision'
 
-import abbr from './abbr'
+import { abbr } from './abbr'
 
 NP.enableBoundaryChecking(false)
 

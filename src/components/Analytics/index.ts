@@ -1,9 +1,16 @@
+import {
+  Analytics,
+  getAnalytics,
+  logEvent,
+  setUserId,
+} from 'firebase/analytics'
+import { initializeApp } from 'firebase/app'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useEffect, useRef } from 'react'
 
 import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
-import { deferTry, initializeFirebase } from '~/common/utils'
+import { deferTry } from '~/common/utils'
 import { AnalyticsUserFragment } from '~/gql/graphql'
 
 import { useEventListener } from '../Hook'
@@ -13,6 +20,12 @@ declare global {
     gtag: any
   }
 }
+
+const FIREBASE_CONFIG = process.env.NEXT_PUBLIC_FIREBASE_CONFIG
+  ? JSON.parse(
+      Buffer.from(process.env.NEXT_PUBLIC_FIREBASE_CONFIG, 'base64').toString()
+    )
+  : {}
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -35,7 +48,7 @@ const handleAnalytics = async ({
 }: {
   detail: CustomEvent['detail']
   user: AnalyticsUserFragment | {}
-  analytics?: firebase.analytics.Analytics
+  analytics?: Analytics
 }) => {
   let id
   if (user && 'id' in user) {
@@ -61,14 +74,18 @@ const handleAnalytics = async ({
         page_referrer: referrer,
         user_id: id,
       }
-      analytics?.logEvent('page_view', eventData)
+      if (analytics) {
+        logEvent(analytics, 'page_view', eventData)
+      }
       analyticsDebugger('page_view', eventData)
     } else {
       const eventData = {
         user_id: id,
         ...args[1],
       }
-      analytics?.logEvent(args[0], eventData)
+      if (analytics) {
+        logEvent(analytics, args[0], eventData)
+      }
       analyticsDebugger(args[0], eventData)
     }
   }
@@ -81,7 +98,10 @@ const handleAnalytics = async ({
         user_id: id,
       }) */
 
-      analytics?.setUserId(id, { global: true })
+      if (analytics) {
+        setUserId(analytics, id, { global: true })
+      }
+
       analyticsDebugger(ANALYTIC_TYPES.IDENTIFY, {
         id,
       })
@@ -94,13 +114,11 @@ export const AnalyticsListener = ({
 }: {
   user: AnalyticsUserFragment | {}
 }) => {
-  const analyticsRef = useRef<firebase.analytics.Analytics>()
+  const analyticsRef = useRef<Analytics>()
 
   const initAnalytics = async () => {
-    const firebase = await initializeFirebase()
-    await import('firebase/analytics')
-
-    const analytics = firebase?.analytics()
+    const app = initializeApp(FIREBASE_CONFIG)
+    const analytics = getAnalytics(app)
     analyticsRef.current = analytics
   }
 

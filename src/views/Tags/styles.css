@@ -34,10 +34,12 @@ li {
       margin-right: var(--spacing-x-tight);
       margin-left: var(--spacing-xx-tight);
     }
+
     &:nth-child(2n + 1) {
       margin-right: var(--spacing-xx-tight);
       margin-left: var(--spacing-x-tight);
     }
+
     &::after {
       left: var(--spacing-x-tight);
       width: calc(100% - var(--spacing-base));

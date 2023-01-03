@@ -15,6 +15,7 @@ svg {
   & :global(.tick:first-of-type text) {
     text-anchor: start;
   }
+
   & :global(.tick:last-of-type text) {
     text-anchor: end;
   }
@@ -22,6 +23,6 @@ svg {
 
 .yAxis {
   & :global(line) {
-    stroke: rgba(13, 103, 99, 0.08);
+    stroke: rgb(13 103 99 / 8%);
   }
 }

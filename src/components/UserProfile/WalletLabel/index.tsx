@@ -35,7 +35,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({ user, isMe }) => {
     chainId: targetNetork.id,
   })
   const { data: contenthashData, isSuccess } = useContractRead({
-    address: resolverData?.address,
+    address: resolverData?.address as `0x${string}` | undefined,
     abi: PublicResolverABI,
     functionName: 'contenthash',
     args: ensName ? [namehash(ensName) as `0x${string}`] : undefined,

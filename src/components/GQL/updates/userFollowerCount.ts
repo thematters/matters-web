@@ -11,7 +11,7 @@ const update = ({
 }: {
   cache: DataProxy
   type: 'increment' | 'decrement'
-  userName: string
+  userName: string | null
 }) => {
   try {
     if (!userName) {

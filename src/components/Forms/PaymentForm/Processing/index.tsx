@@ -204,7 +204,7 @@ const USDTProcessingForm: React.FC<Props> = ({
     write: curate,
   } = useContractWrite({
     mode: 'recklesslyUnprepared',
-    address: process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS || '',
+    address: process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS as `0x${string}`,
     abi: CurationABI,
     functionName: 'curate',
     args: [

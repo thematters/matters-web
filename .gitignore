@@ -110,7 +110,7 @@ tests_output
 # misc
 TODO
 service-worker.js*
-workbox-*.js
+workbox-*
 
 # editors & IDEs
 .idea/

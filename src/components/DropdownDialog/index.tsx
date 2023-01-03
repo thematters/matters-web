@@ -1,5 +1,5 @@
 import VisuallyHidden from '@reach/visually-hidden'
-import { AriaAttributes, forwardRef, useContext } from 'react'
+import React, { AriaAttributes, forwardRef, useContext } from 'react'
 import FocusLock from 'react-focus-lock'
 
 import { KEYCODES, TextId, Z_INDEX } from '~/common/enums'
@@ -96,7 +96,7 @@ const BaseDropdownDialog = ({
     event.stopPropagation()
   }
 
-  const Content: React.FC<React.PropsWithChildren<React.ReactNode>> = ({
+  const Content: React.FC<{ children?: React.ReactNode }> = ({
     children: contentChildren,
   }) => {
     return (

@@ -3,7 +3,7 @@
   margin: 1rem -1rem -1rem;
 
   & :global(section.card) {
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0 4px rgb(0 0 0 / 16%);
   }
 }
 

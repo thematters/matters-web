@@ -78,7 +78,7 @@ export const Avatar = (props: AvatarProps) => {
       {hasLogbook && (
         <section className="badge">
           {inProfile ? (
-            <img className="logbook" src={LOGBOOK.src} />
+            <img className="logbook" src={LOGBOOK.src} alt="logbook icon" />
           ) : (
             <IconLogbookBadge16 />
           )}

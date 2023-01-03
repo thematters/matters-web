@@ -11,6 +11,7 @@ const PickIntroHeader = () => {
         className="avatar"
         src={IMAGE_ILLUSTRATION_AVATAR}
         aria-hidden="true"
+        alt="illustration"
       />
       <section className="intro">
         <p>

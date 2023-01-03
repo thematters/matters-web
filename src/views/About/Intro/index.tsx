@@ -13,7 +13,7 @@ const Intro = () => {
       <ul>
         <li className="l-container full ecosystem">
           <div className="l-row">
-            <img src={IMAGE_ILLUSTRATION_1.src} />
+            <img src={IMAGE_ILLUSTRATION_1.src} alt="illustration 1" />
 
             <section className="content">
               <h3>
@@ -53,7 +53,7 @@ const Intro = () => {
         </li>
         <li className="l-container full community">
           <div className="l-row">
-            <img src={IMAGE_ILLUSTRATION_2.src} />
+            <img src={IMAGE_ILLUSTRATION_2.src} alt="illustration 2" />
 
             <section className="content">
               <h3>
@@ -138,7 +138,7 @@ const Intro = () => {
               </section>
             </section>
 
-            <img src={IMAGE_ILLUSTRATION_3.src} />
+            <img src={IMAGE_ILLUSTRATION_3.src} alt="illustration 3" />
           </div>
         </li>
       </ul>

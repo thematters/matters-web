@@ -170,7 +170,7 @@ const Team = () => {
                   {people.map((person, pid) => (
                     <li key={pid}>
                       <figure>
-                        <img src={person.avatar} />
+                        <img src={person.avatar} alt="team member" />
                         <figcaption>
                           <p>{person.title}</p>
                           <h4>{person.name}</h4>

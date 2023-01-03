@@ -88,6 +88,7 @@ h3 {
     @mixin flex-start-space-between;
 
     width: 100%;
+
     & .left-btn {
       @mixin flex-center-end;
 

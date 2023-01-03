@@ -30,7 +30,7 @@ const Wall = ({ circle }: WallProps) => {
       <picture>
         <source media="(min-width: 768px)" srcSet={CIRCLE_DISCUSSION_WALL} />
 
-        <img src={CIRCLE_DISCUSSION_WALL_SM} />
+        <img src={CIRCLE_DISCUSSION_WALL_SM} alt="illustration" />
       </picture>
 
       <section className="brief">
