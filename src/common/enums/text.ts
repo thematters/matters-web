@@ -961,7 +961,7 @@ export const TEXT = {
     forgetPaymentPassword: 'Forget Payment Password',
     frequentSearch: 'Search trends',
     guide: 'Explore Matters',
-    hasSupportedArticle: 'supported this article',
+    hasSupportedArticle: 'People supported this article',
     help: 'Help',
     helpCenter: 'Help Center',
     hintAddTag:
