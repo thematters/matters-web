@@ -112,7 +112,7 @@ let plugins = [
   [
     require('next-pwa')({
       dest: 'public',
-      disable: !isLocal,
+      disable: isLocal,
       register: true,
       sw: 'service-worker.js',
       publicExcludes: ['!static/**/*'],
