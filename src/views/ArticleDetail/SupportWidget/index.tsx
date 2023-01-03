@@ -83,6 +83,12 @@ const SupportWidget = ({ article }: DonationProps) => {
   const requestForDonation = article.requestForDonation
   const replyToDonator = hasDonatedArticle?.replyToDonator
 
+  useEffect(() => {
+    if (showAnimation) {
+      jump('#animation', { offset: -10 })
+    }
+  }, [showAnimation])
+
   useEventListener(
     SUPPORT_SUCCESS_ANIMATION,
     async (payload: { [key: string]: any }) => {
@@ -91,9 +97,6 @@ const SupportWidget = ({ article }: DonationProps) => {
       }
       setCurrency(payload.currency)
       setShowAvatarAnimation(true)
-      if (showAnimation) {
-        jump('#animation')
-      }
 
       // HKD
       if (payload.currency === CURRENCY.HKD) {
@@ -107,7 +110,11 @@ const SupportWidget = ({ article }: DonationProps) => {
       setShowAnimation(true)
       await sleep(5 * 1000)
       setPlayShipWaiting(false)
-      hasDonatedRefetch()
+      hasDonatedRefetch()      
+
+      if (showAnimation) {
+        jump('#animation', { offset: -10 })
+      }
       return
     }
   )
