@@ -163,6 +163,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
         if (values.q.length <= 0) return
 
+        searchTextInput.current?.blur()
+
         if (isInSearch) {
           router.replace(path.href)
         } else {
