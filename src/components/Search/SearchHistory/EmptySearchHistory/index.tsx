@@ -1,6 +1,5 @@
-import { Translate } from '~/components'
-
 import IMAGE_EMPTY_SEARCH_HISTORY from '@/public/static/images/illustration-empty-search-history.png'
+import { Translate } from '~/components'
 
 import styles from './styles.css'
 

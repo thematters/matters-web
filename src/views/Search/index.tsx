@@ -2,6 +2,8 @@ import _uniq from 'lodash/uniq'
 import _without from 'lodash/without'
 import { useContext, useEffect, useState } from 'react'
 
+import { STORAGE_KEY_SEARCH_HISTORY } from '~/common/enums'
+import { storage, toPath } from '~/common/utils'
 import {
   Head,
   Layout,
@@ -15,9 +17,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-
-import { STORAGE_KEY_SEARCH_HISTORY } from '~/common/enums'
-import { storage, toPath } from '~/common/utils'
 
 import AggregateResults from './AggregateResults'
 import styles from './styles.css'

@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 
+import { analytics, mergeConnections, toPath } from '~/common/utils'
 import {
   EmptySearch,
   InfiniteScroll,
@@ -10,8 +11,6 @@ import {
   useRoute,
 } from '~/components'
 import { SearchAggregateUsersPublicQuery } from '~/gql/graphql'
-
-import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_USERS_PUBLIC } from './gql'

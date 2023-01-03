@@ -1,6 +1,5 @@
-import { IconArrowRight16, Menu, TextIcon, Translate } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { IconArrowRight16, Menu, TextIcon, Translate } from '~/components'
 
 interface TriggerFullSearchItemProps {
   searchKey: string

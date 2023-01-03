@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptySearch,
@@ -10,8 +11,6 @@ import {
   useRoute,
 } from '~/components'
 import { SearchAggregateArticlesPublicQuery } from '~/gql/graphql'
-
-import { analytics, mergeConnections } from '~/common/utils'
 
 import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'

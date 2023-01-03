@@ -1,15 +1,13 @@
 import gql from 'graphql-tag'
 
-import { IconArticle16, IconHashTag16, TextIcon } from '~/components'
-
 import { numAbbr } from '~/common/utils'
+import { IconArticle16, IconHashTag16, TextIcon } from '~/components'
+import { TagDigestConciseTagFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { TagDigestConciseTag } from './__generated__/TagDigestConciseTag'
-
 export type TagDigestConciseTagProps = {
-  tag: TagDigestConciseTag
+  tag: TagDigestConciseTagFragment
   textSize?: 'sm' | 'md-s'
   showArticlesNum?: boolean
 }
