@@ -1,5 +1,3 @@
-const withPlugins = require('next-compose-plugins')
-
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
@@ -100,25 +98,18 @@ const nextConfig = {
   },
 }
 
-let plugins = [
-  // bundle analyzer
-  [
-    require('@next/bundle-analyzer')({
-      enabled: process.env.ANALYZE === 'true',
-    }),
-  ],
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 
-  [
-    require('next-pwa')({
-      dest: 'public',
-      disable: isLocal,
-      register: true,
-      sw: 'service-worker.js',
-      publicExcludes: ['!static/**/*'],
-      cacheStartUrl: false,
-      dynamicStartUrl: true,
-    }),
-  ],
-]
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  disable: isLocal,
+  register: true,
+  sw: 'service-worker.js',
+  publicExcludes: ['!static/**/*'],
+  cacheStartUrl: false,
+  dynamicStartUrl: true,
+})
 
-module.exports = withPlugins(plugins, nextConfig)
+module.exports = withPWA(withBundleAnalyzer(nextConfig))
