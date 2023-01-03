@@ -1,8 +1,11 @@
+import { ENTITY_TYPE } from '~/common/enums'
 import { toDigestTagPlaceholder } from '~/components'
 import Sidebar from '~/components/Editor/Sidebar'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
-
-import { ENTITY_TYPE } from '~/common/enums'
+import {
+  DigestRichCirclePublicFragment,
+  EditMetaDraftFragment,
+} from '~/gql/graphql'
 
 import {
   useEditDraftAccess,
@@ -14,12 +17,9 @@ import {
 } from '../hooks'
 import styles from './styles.css'
 
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { EditMetaDraft } from '../__generated__/EditMetaDraft'
-
 interface BaseSidebarProps {
-  draft: EditMetaDraft
-  ownCircles?: DigestRichCirclePublic[]
+  draft: EditMetaDraftFragment
+  ownCircles?: DigestRichCirclePublicFragment[]
 }
 
 type SidebarProps = BaseSidebarProps & { disabled: boolean }

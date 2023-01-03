@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyWarning,
   InfiniteScroll,
@@ -13,15 +14,12 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { UserFollowingUsersPublicQuery } from '~/gql/graphql'
 
 import {
   USER_FOLLOWING_USERS_PRIVATE,
   USER_FOLLOWING_USERS_PUBLIC,
 } from './gql'
-
-import { UserFollowingUsersPublic } from './__generated__/UserFollowingUsersPublic'
 
 const UsersFeed = () => {
   const viewer = useContext(ViewerContext)
@@ -39,9 +37,12 @@ const UsersFeed = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserFollowingUsersPublic>(USER_FOLLOWING_USERS_PUBLIC, {
-    variables: { userName },
-  })
+  } = usePublicQuery<UserFollowingUsersPublicQuery>(
+    USER_FOLLOWING_USERS_PUBLIC,
+    {
+      variables: { userName },
+    }
+  )
 
   // pagination
   const user = data?.user
@@ -49,7 +50,7 @@ const UsersFeed = () => {
   const { edges, pageInfo } = user?.following?.users || {}
 
   // private data
-  const loadPrivate = (publicData?: UserFollowingUsersPublic) => {
+  const loadPrivate = (publicData?: UserFollowingUsersPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !user) {
       return
     }

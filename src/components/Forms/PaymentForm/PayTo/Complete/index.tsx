@@ -3,6 +3,7 @@ import _random from 'lodash/random'
 import _range from 'lodash/range'
 import { useContext, useEffect, useRef } from 'react'
 
+import { analytics } from '~/common/utils'
 import {
   ArticleDigestSidebar,
   Avatar,
@@ -18,18 +19,17 @@ import {
   ViewerContext,
 } from '~/components'
 import { TextIcon } from '~/components/TextIcon'
-
-import { analytics } from '~/common/utils'
+import {
+  RelatedDonationsQuery,
+  UserDonationRecipientFragment,
+} from '~/gql/graphql'
 
 import { RELATED_DONATIONS } from './gql'
 import styles from './styles.css'
 
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { RelatedDonations } from './__generated__/RelatedDonations'
-
 interface Props {
   callback?: () => void
-  recipient: UserDonationRecipient
+  recipient: UserDonationRecipientFragment
   targetId: string
 }
 
@@ -43,9 +43,8 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
   /**
    * Data Fetching
    */
-  const { data, refetch, networkStatus } = usePublicQuery<RelatedDonations>(
-    RELATED_DONATIONS,
-    {
+  const { data, refetch, networkStatus } =
+    usePublicQuery<RelatedDonationsQuery>(RELATED_DONATIONS, {
       notifyOnNetworkStatusChange: true,
       variables: {
         senderUserName: viewer.userName,
@@ -54,8 +53,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
         first: PAGE_COUNT,
         random: DEFAULT_RANDOM,
       },
-    }
-  )
+    })
   const isLoading = networkStatus === NetworkStatus.loading
   const isRefetching = networkStatus === NetworkStatus.setVariables
 

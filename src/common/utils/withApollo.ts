@@ -18,7 +18,6 @@ import {
   COOKIE_USER_GROUP,
   GQL_CONTEXT_PUBLIC_QUERY_KEY,
   STORAGE_KEY_AGENT_HASH,
-  STORAGE_KEY_AUTH_TOKEN,
 } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
@@ -35,7 +34,6 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 })
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
-const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 /**
  * Links
@@ -119,13 +117,6 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
     )
   }
 
-  // Get token from local storage if it's a static-build client
-  if (process.env.NEXT_PUBLIC_BUILD_TYPE === 'static') {
-    const token = storage.get(STORAGE_KEY_AUTH_TOKEN)
-    if (token && isStaticBuild) {
-      headers['x-access-token'] = token
-    }
-  }
   return {
     credentials: isPublicOperation ? 'omit' : 'include',
     headers: {

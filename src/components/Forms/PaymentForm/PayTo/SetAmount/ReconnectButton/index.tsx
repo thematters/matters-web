@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { useDisconnect } from 'wagmi'
 
+import { maskAddress, translate } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
@@ -11,8 +12,6 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
-
-import { maskAddress, translate } from '~/common/utils'
 
 import styles from './styles.css'
 

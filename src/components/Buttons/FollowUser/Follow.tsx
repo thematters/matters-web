@@ -3,6 +3,10 @@ import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
 import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import {
   Button,
   ButtonHeight,
   ButtonWidth,
@@ -14,26 +18,22 @@ import {
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
-
 import {
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
+  FollowButtonUserPrivateFragment,
+  ToggleFollowUserMutation,
+} from '~/gql/graphql'
 
 import { FollowUserButtonSize } from './index'
 
-import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
-import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
-
 interface FollowUserProps {
-  user: Partial<FollowButtonUserPrivate>
+  user: Partial<FollowButtonUserPrivateFragment>
   size: FollowUserButtonSize
 }
 
 const FollowUser = ({ user, size }: FollowUserProps) => {
   const viewer = useContext(ViewerContext)
 
-  const [follow] = useMutation<ToggleFollowUser>(TOGGLE_FOLLOW_USER, {
+  const [follow] = useMutation<ToggleFollowUserMutation>(TOGGLE_FOLLOW_USER, {
     variables: { id: user.id, enabled: true },
     optimisticResponse:
       !_isNil(user.id) && !_isNil(user.isFollower)

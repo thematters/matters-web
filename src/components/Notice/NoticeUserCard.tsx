@@ -1,10 +1,9 @@
 import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components/UserDigest'
+import { NoticeUserCardFragment } from '~/gql/graphql'
 
-import { NoticeUserCard as NoticeUserCardType } from './__generated__/NoticeUserCard'
-
-const NoticeUserCard = ({ user }: { user: NoticeUserCardType | null }) => {
+const NoticeUserCard = ({ user }: { user: NoticeUserCardFragment | null }) => {
   if (!user) {
     return null
   }

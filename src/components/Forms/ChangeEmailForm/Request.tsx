@@ -3,6 +3,12 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
+  parseFormSubmitErrors,
+  translate,
+  validateCode,
+  validateEmail,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   LanguageContext,
@@ -12,15 +18,7 @@ import {
   VerificationSendCodeButton,
 } from '~/components'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
-
-import {
-  parseFormSubmitErrors,
-  translate,
-  validateCode,
-  validateEmail,
-} from '~/common/utils'
-
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
+import { ConfirmVerificationCodeMutation } from '~/gql/graphql'
 
 interface FormProps {
   defaultEmail: string
@@ -40,7 +38,8 @@ const Request: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
+  const [confirmCode] =
+    useMutation<ConfirmVerificationCodeMutation>(CONFIRM_CODE)
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
   const formId = 'change-email-request-form'

@@ -1,13 +1,10 @@
+import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useMutation } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
-
-import { ADD_TOAST } from '~/common/enums'
+import { TagMaintainersQuery, UpdateTagSettingMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
-import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/queries/__generated__/TagMaintainers'
 
 /**
  * This a sub-component of <TagEditorDialog>. It ask user to confirm
@@ -23,16 +20,21 @@ import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/q
  *   />
  * ```
  */
+
+type TagMaintainersNodeTagEditor = NonNullable<
+  NonNullable<TagMaintainersQuery['node'] & { __typename: 'Tag' }>['editors']
+>[0]
+
 interface Props {
   id: string
-  editor: TagEditor
+  editor: TagMaintainersNodeTagEditor
 
   closeDialog: () => void
 }
 
 const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
   const [update, { loading }] =
-    useMutation<UpdateTagSetting>(UPDATE_TAG_SETTING)
+    useMutation<UpdateTagSettingMutation>(UPDATE_TAG_SETTING)
 
   return (
     <>

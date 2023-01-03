@@ -1,11 +1,8 @@
 import gql from 'graphql-tag'
 
-import { Button, TextIcon, Translate, useMutation } from '~/components'
-
 import { ADD_TOAST } from '~/common/enums'
-
-import { ClearHistory } from './__generated__/ClearHistory'
-import { ViewerRecentSearches } from './__generated__/ViewerRecentSearches'
+import { Button, TextIcon, Translate, useMutation } from '~/components'
+import { ClearHistoryMutation, ViewerRecentSearchesQuery } from '~/gql/graphql'
 
 const fragments = {
   user: gql`
@@ -44,10 +41,10 @@ const VIEWER_RECENT_SEARCHES = gql`
 `
 
 const ClearHistoryButton = () => {
-  const [clear] = useMutation<ClearHistory>(CLEAR_HISTORY, {
+  const [clear] = useMutation<ClearHistoryMutation>(CLEAR_HISTORY, {
     update: (cache) => {
       try {
-        const data = cache.readQuery<ViewerRecentSearches>({
+        const data = cache.readQuery<ViewerRecentSearchesQuery>({
           query: VIEWER_RECENT_SEARCHES,
         })
 

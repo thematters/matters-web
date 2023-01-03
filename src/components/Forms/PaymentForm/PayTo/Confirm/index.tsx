@@ -4,6 +4,8 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 import { useAccount, useNetwork } from 'wagmi'
 
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import {
   Button,
   Dialog,
@@ -19,31 +21,26 @@ import {
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 import updateDonation from '~/components/GQL/updates/donation'
-
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
+import {
+  ArticleDetailPublicQuery,
+  PayToMutation,
+  UserDonationRecipientFragment,
+  WalletBalanceQuery,
+} from '~/gql/graphql'
 
 import PaymentInfo from '../../PaymentInfo'
 import styles from './styles.css'
 
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import {
-  PayTo as PayToMutate,
-  PayTo_payTo_transaction as PayToTx,
-} from '~/components/GQL/mutations/__generated__/PayTo'
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
-
 interface SetAmountOpenTabCallbackValues {
   window: Window
-  transaction: PayToTx
+  transaction: PayToMutation['payTo']['transaction']
 }
 
 interface FormProps {
   amount: number
-  article: ArticleDetailPublic_article
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   currency: CURRENCY
-  recipient: UserDonationRecipient
+  recipient: UserDonationRecipientFragment
   targetId: string
   submitCallback: () => void
   switchToSetAmount: () => void
@@ -51,7 +48,7 @@ interface FormProps {
   switchToCurrencyChoice: () => void
   openTabCallback: (values: SetAmountOpenTabCallbackValues) => void
   tabUrl?: string
-  tx?: PayToTx
+  tx?: PayToMutation['payTo']['transaction']
 }
 
 interface FormValues {
@@ -76,11 +73,11 @@ const Confirm: React.FC<FormProps> = ({
 
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
-  const [payTo] = useMutation<PayToMutate>(PAY_TO, undefined, {
+  const [payTo] = useMutation<PayToMutation>(PAY_TO, undefined, {
     showToast: false,
   })
 
-  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
+  const { data, loading } = useQuery<WalletBalanceQuery>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
 

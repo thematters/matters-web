@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 
-import { Form, LanguageContext, Translate } from '~/components'
-
 import { PAYOUT_COUNTRY } from '~/common/enums'
+import { Form, LanguageContext, Translate } from '~/components'
 
 interface Props {
   country: PAYOUT_COUNTRY

@@ -1,16 +1,18 @@
 import { useContext } from 'react'
 
-import { Form, LanguageContext, Switch, Translate } from '~/components'
-
 import { translate } from '~/common/utils'
+import { Form, LanguageContext, Switch, Translate } from '~/components'
+import { ViewerNotificationSettingsQuery } from '~/gql/graphql'
 
-import { ViewerNotificationSettings_viewer_settings_notification } from './__generated__/ViewerNotificationSettings'
+type NotificationType = NonNullable<
+  NonNullable<
+    ViewerNotificationSettingsQuery['viewer']
+  >['settings']['notification']
+>
 
 interface PreferenceProps {
-  settings: ViewerNotificationSettings_viewer_settings_notification
-  toggle: (
-    type: keyof ViewerNotificationSettings_viewer_settings_notification
-  ) => void
+  settings: NotificationType
+  toggle: (type: keyof NotificationType) => void
 }
 
 const Preference = ({ settings, toggle }: PreferenceProps) => {

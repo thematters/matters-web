@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { LANG_TEXT_MAP } from '~/common/enums'
 import {
   DropdownDialog,
   Form,
@@ -7,8 +8,6 @@ import {
   LanguageSwitchContent,
   Translate,
 } from '~/components'
-
-import { LANG_TEXT_MAP } from '~/common/enums'
 
 const SwitchLanguage = () => {
   const { lang } = useContext(LanguageContext)

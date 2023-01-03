@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { clampTagLength, toPath } from '~/common/utils'
 import {
   IconClear16,
   IconHashTag16,
@@ -9,15 +10,12 @@ import {
   TextIcon,
   TextIconProps,
 } from '~/components'
-
-import { clampTagLength, toPath } from '~/common/utils'
+import { DigestTagFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { DigestTag } from './__generated__/DigestTag'
-
 interface TagProps {
-  tag: DigestTag
+  tag: DigestTagFragment
   type?: 'list' | 'title' | 'inline' | 'plain'
   iconProps?: IconProps
   textIconProps?: TextIconProps
@@ -26,7 +24,7 @@ interface TagProps {
   hasCount?: boolean
   hasClose?: boolean
   canClamp?: boolean
-  removeTag?: (tag: DigestTag) => void
+  removeTag?: (tag: DigestTagFragment) => void
   onClick?: () => void
 }
 
@@ -52,7 +50,7 @@ export const toDigestTagPlaceholder = (content: string) =>
     },
     numArticles: 0,
     numAuthors: 0,
-  } as DigestTag)
+  } as DigestTagFragment)
 
 export const Tag = ({
   tag,
@@ -181,7 +179,7 @@ export const Tag = ({
   }
 
   return (
-    <Link {...path}>
+    <Link {...path} legacyBehavior>
       <a className={tagClasses} onClick={onClick}>
         <Inner />
         <style jsx>{styles}</style>

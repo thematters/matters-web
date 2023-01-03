@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
 
+import { TEST_ID } from '~/common/enums'
+import { analytics, mergeConnections, translate } from '~/common/utils'
 import {
   ArticleDigestSidebar,
   LanguageContext,
@@ -15,17 +17,13 @@ import {
   ViewMoreButton,
 } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
-
-import { TEST_ID } from '~/common/enums'
-import { analytics, mergeConnections, translate } from '~/common/utils'
+import { ArticleDetailPublicQuery, CollectionListQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
-import {
-  CollectionList as CollectionListTypes,
-  CollectionList_article_Article,
-} from './__generated__/CollectionList'
+type CollectionListArticle = NonNullable<
+  CollectionListQuery['article'] & { __typename: 'Article' }
+>
 
 const COLLECTION_LIST = gql`
   query CollectionList($id: ID!, $after: String, $first: first_Int_min_0) {
@@ -40,19 +38,19 @@ const COLLECTION_LIST = gql`
 `
 
 const Collection: React.FC<{
-  article: ArticleDetailPublic_article
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   collectionCount?: number
 }> = ({ article, collectionCount }) => {
   const { lang } = useContext(LanguageContext)
 
   const isMediumUp = useResponsive('md-up')
-  const { data, loading, error, fetchMore } = useQuery<CollectionListTypes>(
+  const { data, loading, error, fetchMore } = useQuery<CollectionListQuery>(
     COLLECTION_LIST,
     { variables: { id: article.id, first: 3 } }
   )
   const connectionPath = 'article.collection'
   const { edges, pageInfo } =
-    (data?.article as CollectionList_article_Article)?.collection || {}
+    (data?.article as CollectionListArticle)?.collection || {}
   const loadAll = () =>
     fetchMore({
       variables: {

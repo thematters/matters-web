@@ -1,6 +1,5 @@
-import { PageHeader, Translate, ViewAllButton } from '~/components'
-
 import { PATHS } from '~/common/enums'
+import { PageHeader, Translate, ViewAllButton } from '~/components'
 
 import styles from './styles.css'
 

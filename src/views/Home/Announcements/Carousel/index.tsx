@@ -1,6 +1,7 @@
 import { useEmblaCarousel } from 'embla-carousel/react'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 
+import { translate } from '~/common/utils'
 import {
   Button,
   Card,
@@ -9,17 +10,14 @@ import {
   ResponsiveImage,
   useCarousel,
 } from '~/components'
-
-import { translate } from '~/common/utils'
+import { VisibleAnnouncementsQuery } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsProps } from '../DropdownActions'
 import Dot from './Dot'
 import styles from './styles.css'
 
-import { VisibleAnnouncements_official_announcements as VisibleAnnouncementsType } from '../__generated__/VisibleAnnouncements'
-
 type CarouselProps = {
-  items: VisibleAnnouncementsType[]
+  items: VisibleAnnouncementsQuery['official']['announcements']
   hide: () => void
 } & DropdownActionsProps
 
@@ -114,7 +112,7 @@ const Carousel = ({
           <DropdownActions type={type} setType={setType} {...controlsProps} />
 
           <section className="dots">
-            {items.map((_, index) => (
+            {items?.map((_, index) => (
               <Dot
                 key={index}
                 index={index}
@@ -140,7 +138,7 @@ const Carousel = ({
         onClickCapture={onCaptureClick}
       >
         <div className="container">
-          {items.map((item) => {
+          {items?.map((item) => {
             if (!item.cover) {
               return null
             }

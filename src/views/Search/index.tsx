@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { toPath } from '~/common/utils'
 import {
   Head,
   Layout,
@@ -10,8 +11,6 @@ import {
   useResponsive,
   useRoute,
 } from '~/components'
-
-import { toPath } from '~/common/utils'
 
 import AggregateResults from './AggregateResults'
 // import EmptySearch from './EmptySearch'

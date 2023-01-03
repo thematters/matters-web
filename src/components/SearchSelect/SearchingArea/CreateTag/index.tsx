@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { ADD_TOAST, TEST_ID } from '~/common/enums'
+import { validateTagName } from '~/common/utils'
 import {
   Card,
   IconAdd16,
@@ -7,17 +9,13 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { ADD_TOAST, TEST_ID } from '~/common/enums'
-import { validateTagName } from '~/common/utils'
+import { DigestTagFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
-
 interface CreateTagProps {
-  tag: DigestTag
-  onClick: (tag: DigestTag) => void
+  tag: DigestTagFragment
+  onClick: (tag: DigestTagFragment) => void
 }
 
 const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {

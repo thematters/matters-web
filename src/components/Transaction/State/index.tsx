@@ -1,3 +1,4 @@
+import { featureSupportedChains } from '~/common/utils'
 import {
   Button,
   IconExternalLink16,
@@ -6,13 +7,9 @@ import {
   Tooltip,
   Translate,
 } from '~/components'
-
-import { featureSupportedChains } from '~/common/utils'
+import { DigestTransactionFragment, TransactionState } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { TransactionState } from '@/__generated__/globalTypes'
-import { DigestTransaction_blockchainTx } from '../__generated__/DigestTransaction'
 
 /***
  * This is a sub component of Transaction that presents canceled, failed
@@ -26,8 +23,8 @@ import { DigestTransaction_blockchainTx } from '../__generated__/DigestTransacti
  */
 interface StateProps {
   state: TransactionState
-  message: string | null
-  blockchainTx: DigestTransaction_blockchainTx | null
+  message?: string | null
+  blockchainTx: DigestTransactionFragment['blockchainTx'] | null
 }
 
 const State = ({ state, message, blockchainTx }: StateProps) => {
@@ -35,7 +32,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
     return null
   }
 
-  if (state === TransactionState.succeeded && !!blockchainTx) {
+  if (state === TransactionState.Succeeded && !!blockchainTx) {
     const targetNetwork = featureSupportedChains.curation[0]
     const explorerUrl = targetNetwork.blockExplorers?.default.url!
 
@@ -81,11 +78,11 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
 
   const StateText = () => {
     switch (state) {
-      case TransactionState.canceled:
+      case TransactionState.Canceled:
         return <Translate id="cancel" />
-      case TransactionState.failed:
+      case TransactionState.Failed:
         return <Translate zh_hant="失敗" zh_hans="失敗" en="Failed" />
-      case TransactionState.pending:
+      case TransactionState.Pending:
         return <Translate zh_hant="進行中…" zh_hans="进行中…" en="Processing" />
       default:
         return null

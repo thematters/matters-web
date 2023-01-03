@@ -5,7 +5,7 @@ import styles from './styles.css'
 const PaymentPointerExplainer = () => (
   <>
     <p>
-      <a href="https://interledger.org/" target="_blank">
+      <a href="https://interledger.org/" target="_blank" rel="noreferrer">
         <Translate
           zh_hant="跨賬本協議"
           zh_hans="跨账本协议"
@@ -17,7 +17,7 @@ const PaymentPointerExplainer = () => (
         zh_hans="：为增加创作者的收入来源，Matters 引入了"
         en=": In order to increase the sources of income for creators, Matters introduced "
       />
-      <a href="https://interledger.org/" target="_blank">
+      <a href="https://interledger.org/" target="_blank" rel="noreferrer">
         <Translate
           zh_hant="跨賬本協議"
           zh_hans="跨账本协议"
@@ -25,7 +25,7 @@ const PaymentPointerExplainer = () => (
         />
       </a>
       <Translate zh_hant=" 與 " zh_hans=" 与 " en=" and " />
-      <a href="https://webmonetization.org/" target="_blank">
+      <a href="https://webmonetization.org/" target="_blank" rel="noreferrer">
         <Translate
           zh_hant="Web Monetization 標準"
           zh_hans="Web Monetization 标准"
@@ -37,11 +37,11 @@ const PaymentPointerExplainer = () => (
         zh_hans="，实现付款方与收款方即使使用不同的货币进行交易，也可以对交易进行自动币种转换。你可以通过 "
         en=", enabling the payer and the payee to conduct transactions in different currencies. Through "
       />
-      <a href="https://uphold.com/" target="_blank">
+      <a href="https://uphold.com/" target="_blank" rel="noreferrer">
         Uphold
       </a>
       <Translate zh_hant="、" zh_hans="、" en=", " />
-      <a href="https://gatehub.net" target="_blank">
+      <a href="https://gatehub.net" target="_blank" rel="noreferrer">
         GateHub
       </a>
       <Translate
@@ -49,7 +49,11 @@ const PaymentPointerExplainer = () => (
         zh_hans=" 等服务配置"
         en=" and other services you can acqure a "
       />
-      <a href="https://webmonetization.org/docs/ilp-wallets" target="_blank">
+      <a
+        href="https://webmonetization.org/docs/ilp-wallets"
+        target="_blank"
+        rel="noreferrer"
+      >
         <Translate zh_hant="錢包地址" zh_hans="钱包地址" en="wallet address" />
       </a>
       <Translate
@@ -57,7 +61,7 @@ const PaymentPointerExplainer = () => (
         zh_hans="，获得来自 "
         en=", and receive payments from "
       />
-      <a href="https://coil.com" target="_blank">
+      <a href="https://coil.com" target="_blank" rel="noreferrer">
         Coil
       </a>
       <Translate

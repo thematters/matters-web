@@ -1,8 +1,7 @@
 import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import { UnsubscribeCircleMutation } from '~/gql/graphql'
 
 import { UNSUBSCRIBE_CIRCLE } from './gql'
-
-import { UnsubscribeCircle } from './__generated__/UnsubscribeCircle'
 
 interface BaseUnsubscribeCircleDialogProps {
   id: string
@@ -15,12 +14,10 @@ const BaseUnsubscribeCircleDialog = ({
 }: BaseUnsubscribeCircleDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  const [unsubscribe, { loading, data }] = useMutation<UnsubscribeCircle>(
-    UNSUBSCRIBE_CIRCLE,
-    {
+  const [unsubscribe, { loading, data }] =
+    useMutation<UnsubscribeCircleMutation>(UNSUBSCRIBE_CIRCLE, {
       variables: { id },
-    }
-  )
+    })
   const isMember = data?.unsubscribeCircle.isMember
   const isUnsubscribed = typeof isMember === 'boolean' && !isMember
 

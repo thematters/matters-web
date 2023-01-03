@@ -1,11 +1,10 @@
 import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, Translate, useDialogSwitch } from '~/components'
-
-import { ProfileCirclePublic } from '../__generated__/ProfileCirclePublic'
+import { ProfileCirclePublicFragment } from '~/gql/graphql'
 
 interface FollowersDialogProps {
-  circle: ProfileCirclePublic
+  circle: ProfileCirclePublicFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

@@ -3,9 +3,8 @@ import classNames from 'classnames'
 import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import TextTruncate from 'react-text-truncate'
 
-import { Button, IconArrowUp16, TextIcon, Translate } from '~/components'
-
 import { stripHtml } from '~/common/utils/text'
+import { Button, IconArrowUp16, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 
@@ -19,7 +18,7 @@ type CollapseTextColor =
 
 interface ExpandableProps {
   children: ReactElement
-  content: string | null
+  content?: string | null
   limit?: number
   buffer?: number
   color?: CollapseTextColor

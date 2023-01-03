@@ -1,3 +1,4 @@
+import { analytics, toPath } from '~/common/utils'
 import {
   Card,
   List,
@@ -7,14 +8,11 @@ import {
   usePullToRefresh,
   useRoute,
 } from '~/components'
-
-import { analytics, toPath } from '~/common/utils'
+import { SearchAggregateTagsPublicQuery } from '~/gql/graphql'
 
 import { SEARCH_AGGREGATE_TAGS_PUBLIC } from './gql'
 import styles from './styles.css'
 import ViewMoreButton from './ViewMoreButton'
-
-import { SearchAggregateTagsPublic } from './__generated__/SearchAggregateTagsPublic'
 
 const AggregateTagResults = () => {
   const { getQuery } = useRoute()
@@ -24,10 +22,11 @@ const AggregateTagResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, refetch } = usePublicQuery<SearchAggregateTagsPublic>(
-    SEARCH_AGGREGATE_TAGS_PUBLIC,
-    { variables: { key: q } }
-  )
+  const { data, loading, refetch } =
+    usePublicQuery<SearchAggregateTagsPublicQuery>(
+      SEARCH_AGGREGATE_TAGS_PUBLIC,
+      { variables: { key: q } }
+    )
 
   const { edges, pageInfo } = data?.search || {}
 

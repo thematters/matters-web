@@ -1,3 +1,4 @@
+import { analytics } from '~/common/utils'
 import {
   IconHashTag24,
   SearchSelectDialog,
@@ -5,18 +6,15 @@ import {
   Tag,
 } from '~/components'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
-
-import { analytics } from '~/common/utils'
+import { DigestTagFragment } from '~/gql/graphql'
 
 import TagCustomStagingArea from '../../TagCustomStagingArea'
 import Box from '../Box'
 import styles from './styles.css'
 
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
-
 export interface SidebarTagsProps {
-  tags: DigestTag[]
-  editTags: (tag: DigestTag[]) => any
+  tags: DigestTagFragment[]
+  editTags: (tag: DigestTagFragment[]) => any
   saving?: boolean
   disabled?: boolean
 }
@@ -33,7 +31,9 @@ const SidebarTags = ({
       title="addTag"
       hint="hintAddTag"
       searchType="Tag"
-      onSave={(nodes: SearchSelectNode[]) => editTags(nodes as DigestTag[])}
+      onSave={(nodes: SearchSelectNode[]) =>
+        editTags(nodes as DigestTagFragment[])
+      }
       nodes={tags}
       saving={saving}
       createTag

@@ -1,6 +1,5 @@
-import { Dialog, Layout, Translate } from '~/components'
-
 import { redirectToTarget } from '~/common/utils'
+import { Dialog, Layout, Translate } from '~/components'
 
 const Complete = ({
   purpose,

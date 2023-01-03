@@ -1,18 +1,16 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import { toPath } from '~/common/utils'
 import { Card, CardProps } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-
-import { toPath } from '~/common/utils'
+import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
 import styles from './styles.css'
 
-import { ArticleDigestDropdownArticle } from './__generated__/ArticleDigestDropdownArticle'
-
 export type ArticleDigestDropdownProps = {
-  article: ArticleDigestDropdownArticle
+  article: ArticleDigestDropdownArticleFragment
 
   titleTextSize?: ArticleDigestTitleTextSize
   disabled?: boolean

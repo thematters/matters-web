@@ -1,6 +1,5 @@
-import { Card, CardProps, IconArrowRight16, withIcon } from '~/components'
-
 import { ReactComponent as IconOnboardChecked } from '@/public/static/icons/40px/done.svg'
+import { Card, CardProps, IconArrowRight16, withIcon } from '~/components'
 
 import styles from './styles.css'
 

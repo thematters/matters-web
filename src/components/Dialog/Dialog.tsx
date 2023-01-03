@@ -5,10 +5,9 @@ import { useEffect, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
-import { useOutsideClick, useResponsive } from '~/components'
-
 import { KEYCODES } from '~/common/enums'
 import { dom } from '~/common/utils'
+import { useOutsideClick, useResponsive } from '~/components'
 
 import Handle from './Handle'
 import Overlay from './Overlay'

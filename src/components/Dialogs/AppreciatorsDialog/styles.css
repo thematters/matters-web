@@ -47,8 +47,6 @@
 }
 
 .dialog-appreciators-list {
-  padding: var(--spacing-tight) 0;
-
   & .appreciation-amount {
     @mixin inline-flex-center-all;
 

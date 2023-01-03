@@ -1,3 +1,4 @@
+import { analytics, toPath } from '~/common/utils'
 import {
   ArticleDigestTitle,
   Card,
@@ -7,14 +8,11 @@ import {
   usePullToRefresh,
   useRoute,
 } from '~/components'
-
-import { analytics, toPath } from '~/common/utils'
+import { SearchAggregateArticlesPublicQuery } from '~/gql/graphql'
 
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
 import styles from './styles.css'
 import ViewMoreButton from './ViewMoreButton'
-
-import { SearchAggregateArticlesPublic } from './__generated__/SearchAggregateArticlesPublic'
 
 const AggregateArticleResults = () => {
   const { getQuery } = useRoute()
@@ -25,7 +23,7 @@ const AggregateArticleResults = () => {
    */
   // public data
   const { data, loading, refetch } =
-    usePublicQuery<SearchAggregateArticlesPublic>(
+    usePublicQuery<SearchAggregateArticlesPublicQuery>(
       SEARCH_AGGREGATE_ARTICLES_PUBLIC,
       { variables: { key: q } }
     )

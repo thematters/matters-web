@@ -1,17 +1,15 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { ArticleDigestTitle } from '~/components/ArticleDigest'
-
 import { toPath } from '~/common/utils'
-
-import { NoticeArticleTitle as NoticeArticleTitleType } from './__generated__/NoticeArticleTitle'
+import { ArticleDigestTitle } from '~/components/ArticleDigest'
+import { NoticeArticleTitleFragment } from '~/gql/graphql'
 
 const NoticeArticleTitle = ({
   article,
   isBlock = false,
 }: {
-  article: NoticeArticleTitleType | null
+  article: NoticeArticleTitleFragment | null
   isBlock?: boolean
 }) => {
   if (!article) {
@@ -24,11 +22,7 @@ const NoticeArticleTitle = ({
   })
 
   if (!isBlock) {
-    return (
-      <Link {...path}>
-        <a>{article.title}</a>
-      </Link>
-    )
+    return <Link {...path}>{article.title}</Link>
   }
 
   return <ArticleDigestTitle article={article} textSize="md-s" />

@@ -1,8 +1,6 @@
-import { Layout, Translate, useRoute } from '~/components'
-
-import { PATHS, PAYMENT_PROVIDER } from '~/common/enums'
-
 import ICON_LIKECOIN from '@/public/static/icons/likecoin.svg'
+import { PATHS, PAYMENT_PROVIDER } from '~/common/enums'
+import { Layout, Translate, useRoute } from '~/components'
 
 import { Box } from '../../Box'
 import styles from '../styles.css'

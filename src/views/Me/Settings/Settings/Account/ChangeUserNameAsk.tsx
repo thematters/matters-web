@@ -1,6 +1,5 @@
-import { Dialog, Translate, useDialogSwitch } from '~/components'
-
 import { PATHS } from '~/common/enums'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 interface AskProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode

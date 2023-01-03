@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { translate } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
@@ -11,15 +12,9 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { translate } from '~/common/utils'
+import { ArticleSecretQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import {
-  ArticleSecret,
-  ArticleSecret_article_Article,
-} from './__generated__/ArticleSecret'
 
 type ArticleSecretSectionProps = {
   id: string
@@ -40,11 +35,12 @@ export const QUERY_SECRET = gql`
 
 const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
   const { lang } = useContext(LanguageContext)
-  const { data } = useQuery<ArticleSecret>(QUERY_SECRET, {
+  const { data } = useQuery<ArticleSecretQuery>(QUERY_SECRET, {
     variables: { id },
   })
-  const article = data?.article as ArticleSecret_article_Article
-  const secret = article?.access?.secret
+  const article = data?.article
+  const secret =
+    article?.__typename === 'Article' ? article?.access?.secret : undefined
 
   if (!secret) {
     return null

@@ -1,6 +1,9 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
+import { TEST_ID } from '~/common/enums'
+import { captureClicks, numAbbr, toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
@@ -10,18 +13,12 @@ import {
   Tag,
   TextIcon,
 } from '~/components'
-
-import { TEST_ID } from '~/common/enums'
-import { captureClicks, numAbbr, toPath } from '~/common/utils'
-
-import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
+import { TagDigestFeedTagFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { TagDigestFeedTag } from './__generated__/TagDigestFeedTag'
-
 export type TagDigestFeedProps = {
-  tag: TagDigestFeedTag
+  tag: TagDigestFeedTagFragment
 } & CardProps
 
 const fragments = {
@@ -103,7 +100,10 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
           <ul className="articles">
             {articles?.map(({ node, cursor }) => (
               <li key={cursor}>
-                <Link {...toPath({ page: 'articleDetail', article: node })}>
+                <Link
+                  {...toPath({ page: 'articleDetail', article: node })}
+                  legacyBehavior
+                >
                   <a className="title" onClick={captureClicks}>
                     {node.title}
                   </a>
@@ -113,7 +113,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
           </ul>
 
           <section className="cover">
-            <Link {...path}>
+            <Link {...path} legacyBehavior>
               <a>
                 <ResponsiveImage
                   url={tag.cover || IMAGE_TAG_COVER.src}

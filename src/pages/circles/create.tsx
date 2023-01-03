@@ -1,6 +1,5 @@
-import CreateCircle from '~/views/CreateCircle'
-
 import { Protected } from '~/components'
+import CreateCircle from '~/views/CreateCircle'
 
 const ProtectedCreateCircle = () => (
   <Protected>

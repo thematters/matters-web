@@ -6,6 +6,12 @@ import { useContext, useEffect, useState } from 'react'
 import { useAccount, useContractWrite, useNetwork } from 'wagmi'
 
 import {
+  CHAIN,
+  PAYMENT_CURRENCY as CURRENCY,
+  SUPPORT_SUCCESS_ANIMATION,
+} from '~/common/enums'
+import { CurationABI } from '~/common/utils'
+import {
   Dialog,
   Spinner,
   Translate,
@@ -15,28 +21,22 @@ import {
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import updateDonation from '~/components/GQL/updates/donation'
-
 import {
-  CHAIN,
-  PAYMENT_CURRENCY as CURRENCY,
-  SUPPORT_SUCCESS_ANIMATION,
-} from '~/common/enums'
-import { CurationABI } from '~/common/utils'
+  ArticleDetailPublicQuery,
+  PayToMutation,
+  UserDonationRecipientFragment,
+  ViewerTxStateQuery,
+} from '~/gql/graphql'
 
 import PaymentInfo from '../PaymentInfo'
 import PayToFallback from './PayToFallback'
 import styles from './styles.css'
 
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
-import { ViewerTxState } from './__generated__/ViewerTxState'
-
 interface Props {
   amount: number
   currency: CURRENCY
-  recipient: UserDonationRecipient
-  article: ArticleDetailPublic_article
+  recipient: UserDonationRecipientFragment
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   targetId: string
   txId: string
   nextStep: () => void
@@ -77,7 +77,7 @@ const OthersProcessingForm: React.FC<Props> = ({
   windowRef,
 }) => {
   const [polling, setPolling] = useState(true)
-  const { data, error } = useQuery<ViewerTxState>(VIEWER_TX_STATE, {
+  const { data, error } = useQuery<ViewerTxStateQuery>(VIEWER_TX_STATE, {
     variables: { id: txId },
     pollInterval: polling ? 1000 : undefined,
     errorPolicy: 'none',
@@ -182,7 +182,7 @@ const USDTProcessingForm: React.FC<Props> = ({
   switchToConfirm,
   switchToCurrencyChoice,
 }) => {
-  const [payTo] = useMutation<PayToMutate>(PAY_TO)
+  const [payTo] = useMutation<PayToMutation>(PAY_TO)
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
   const { data: balanceUSDTData } = useBalanceUSDT({})

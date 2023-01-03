@@ -4,16 +4,18 @@ import { useContext } from 'react'
 import { Spinner, Translate, usePublicQuery, ViewerContext } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { CustomStagingAreaProps } from '~/components/SearchSelect/StagingArea'
+import { EditorRecommendedTagsQuery } from '~/gql/graphql'
 
 import { EDITOR_RECOMMENDED_TAGS } from './gql'
 import RecommendedTags from './RecommendedTags'
 import SelectedTags from './SelectedTags'
 import styles from './styles.css'
 
-import {
-  EditorRecommendedTags,
-  EditorRecommendedTags_user_tags_edges_node as TagType,
-} from './__generated__/EditorRecommendedTags'
+type EditorRecommendedTagsUserTagsEdgesNode = Required<
+  NonNullable<
+    NonNullable<EditorRecommendedTagsQuery['user']>['tags']['edges']
+  >[0]['node']
+>
 
 const TagCustomStagingArea = ({
   nodes: tags,
@@ -26,7 +28,7 @@ const TagCustomStagingArea = ({
    * Data Fetching
    */
   // public data
-  const { data, loading } = usePublicQuery<EditorRecommendedTags>(
+  const { data, loading } = usePublicQuery<EditorRecommendedTagsQuery>(
     EDITOR_RECOMMENDED_TAGS,
     {
       variables: { userName: viewer.userName },
@@ -80,13 +82,18 @@ const TagCustomStagingArea = ({
     <section className="customTagArea">
       {hasTag && (
         <SelectedTags
-          tags={tags.map((t) => t.node as TagType)}
+          tags={tags.map(
+            (t) => t.node as EditorRecommendedTagsUserTagsEdgesNode
+          )}
           onRemoveTag={removeTag}
         />
       )}
       {hasRecommendedTags && <hr />}
       {hasRecommendedTags && (
-        <RecommendedTags tags={recommendedTags} onAddTag={addTag} />
+        <RecommendedTags
+          tags={recommendedTags as EditorRecommendedTagsUserTagsEdgesNode[]}
+          onAddTag={addTag}
+        />
       )}
     </section>
   )

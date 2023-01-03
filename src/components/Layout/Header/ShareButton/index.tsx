@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { translate } from '~/common/utils'
 import {
   Button,
   IconShare32,
@@ -7,8 +8,6 @@ import {
   ShareDialog,
   ShareDialogProps,
 } from '~/components'
-
-import { translate } from '~/common/utils'
 
 export const ShareButton: React.FC<Omit<ShareDialogProps, 'children'>> = (
   props

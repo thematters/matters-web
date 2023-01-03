@@ -4,6 +4,13 @@ import jump from 'jump.js'
 // import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
 
+import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
+import {
+  dom,
+  filterComments,
+  mergeConnections,
+  translate,
+} from '~/common/utils'
 import {
   CommentForm,
   EmptyComment,
@@ -20,14 +27,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-
-import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
-import {
-  dom,
-  filterComments,
-  mergeConnections,
-  translate,
-} from '~/common/utils'
+import { DiscussionCommentsQuery, DiscussionPublicQuery } from '~/gql/graphql'
 
 import CircleDetailTabs from '../CircleDetailTabs'
 import {
@@ -38,13 +38,9 @@ import {
 import styles from './styles.css'
 import Wall from './Wall'
 
-import {
-  DiscussionComments,
-  DiscussionComments_circle_discussion_edges_node,
-} from './__generated__/DiscussionComments'
-import { DiscussionPublic } from './__generated__/DiscussionPublic'
-
-type Comment = DiscussionComments_circle_discussion_edges_node
+type Comment = NonNullable<
+  NonNullable<DiscussionCommentsQuery['circle']>['discussion']['edges']
+>[0]['node']
 
 const RESPONSES_COUNT = 15
 
@@ -55,12 +51,10 @@ const CricleDiscussion = () => {
   const name = getQuery('name')
 
   // public data
-  const { data, loading, error, client } = usePublicQuery<DiscussionPublic>(
-    DISCUSSION_PUBLIC,
-    {
+  const { data, loading, error, client } =
+    usePublicQuery<DiscussionPublicQuery>(DISCUSSION_PUBLIC, {
       variables: { name },
-    }
-  )
+    })
   const circle = data?.circle
   const isOwner = circle?.owner.id === viewer.id
   const isMember = circle?.circleIsMember
@@ -68,7 +62,7 @@ const CricleDiscussion = () => {
 
   // private data
   const [privateFetched, setPrivateFetched] = useState(false)
-  const loadPrivate = async (publicData?: DiscussionPublic) => {
+  const loadPrivate = async (publicData?: DiscussionPublicQuery) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }
@@ -120,7 +114,7 @@ const CricleDiscussion = () => {
       loading: discussionLoading,
       fetchMore,
       refetch,
-    } = usePublicQuery<DiscussionComments>(
+    } = usePublicQuery<DiscussionCommentsQuery>(
       DISCUSSION_COMMENTS,
       {
         fetchPolicy: 'network-only',

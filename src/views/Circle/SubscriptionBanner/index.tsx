@@ -1,37 +1,37 @@
 import { useContext } from 'react'
 
 import {
+  OPEN_SUBSCRIBE_CIRCLE_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import { analytics } from '~/common/utils'
+import {
   Card,
   IconCircle16,
   TextIcon,
   Translate,
   ViewerContext,
 } from '~/components'
-
 import {
-  OPEN_SUBSCRIBE_CIRCLE_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-import { analytics } from '~/common/utils'
+  InvitationState,
+  SubscriptionBannerCirclePrivateFragment,
+  SubscriptionBannerCirclePublicFragment,
+} from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.css'
 
-import { InvitationState } from '@/__generated__/globalTypes'
-import { SubscriptionBannerCirclePrivate } from './__generated__/SubscriptionBannerCirclePrivate'
-import { SubscriptionBannerCirclePublic } from './__generated__/SubscriptionBannerCirclePublic'
-
 type SubscriptionBannerProps = {
-  circle: SubscriptionBannerCirclePublic &
-    Partial<SubscriptionBannerCirclePrivate>
+  circle: SubscriptionBannerCirclePublicFragment &
+    Partial<SubscriptionBannerCirclePrivateFragment>
 }
 
 const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
   const viewer = useContext(ViewerContext)
   const isMember = circle.isMember
   const isOwner = circle?.owner?.id === viewer.id
-  const isInvited = circle?.invitedBy?.state === InvitationState.pending
+  const isInvited = circle?.invitedBy?.state === InvitationState.Pending
 
   if (isMember || isOwner) {
     return null

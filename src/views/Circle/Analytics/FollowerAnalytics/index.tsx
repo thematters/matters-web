@@ -1,6 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 
+import { ReactComponent as IconAnalyticsFollower24 } from '@/public/static/icons/24px/analytics-follower.svg'
+import { CHART_COLOR } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   QueryError,
   Spinner,
@@ -8,24 +11,18 @@ import {
   Translate,
   useRoute,
 } from '~/components'
-
-import { CHART_COLOR } from '~/common/enums'
-import { translate } from '~/common/utils'
-
-import { ReactComponent as IconAnalyticsFollower24 } from '@/public/static/icons/24px/analytics-follower.svg'
+import { CircleFollowerAnalyticsQuery } from '~/gql/graphql'
 
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
 import { CIRCLE_FOLLOWER_ANALYTICS } from './gql'
 import styles from './styles.css'
 
-import { CircleFollowerAnalytics } from './__generated__/CircleFollowerAnalytics'
-
 const Content = () => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
-  const { data, error, loading } = useQuery<CircleFollowerAnalytics>(
+  const { data, error, loading } = useQuery<CircleFollowerAnalyticsQuery>(
     CIRCLE_FOLLOWER_ANALYTICS,
     {
       variables: { name },

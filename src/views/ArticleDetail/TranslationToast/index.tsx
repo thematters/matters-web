@@ -1,11 +1,10 @@
-import { Translate } from '~/components'
-
 import { CONTENT_LANG_TEXT_MAP } from '~/common/enums'
 import { toLocale } from '~/common/utils'
+import { Translate } from '~/components'
 
 import styles from './styles.css'
 
-const Content = ({ language }: { language: string | null }) => {
+const Content = ({ language }: { language?: string | null }) => {
   if (language && toLocale(language) !== '') {
     const targetLang = {
       zh_hant: '',

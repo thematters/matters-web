@@ -1,9 +1,7 @@
-import { Layout, Translate, useRoute } from '~/components'
-
-import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
-
 import ICON_LIKECOIN from '@/public/static/icons/likecoin.svg'
 import ICON_STRIPE from '@/public/static/icons/stripe.svg'
+import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
+import { Layout, Translate, useRoute } from '~/components'
 
 import { Box } from '../../Box'
 import styles from '../styles.css'

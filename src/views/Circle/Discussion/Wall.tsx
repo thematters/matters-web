@@ -1,18 +1,15 @@
 import { useContext } from 'react'
 
-import { LanguageContext, Translate } from '~/components'
-
-import { translate } from '~/common/utils'
-
-import CIRCLE_DISCUSSION_WALL_SM from '@/public/static/images/circle-discussion-wall-sm.svg'
 import CIRCLE_DISCUSSION_WALL from '@/public/static/images/circle-discussion-wall.svg'
+import CIRCLE_DISCUSSION_WALL_SM from '@/public/static/images/circle-discussion-wall-sm.svg'
+import { translate } from '~/common/utils'
+import { LanguageContext, Translate } from '~/components'
+import { DiscussionPublicQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { DiscussionPublic_circle } from './__generated__/DiscussionPublic'
-
 type WallProps = {
-  circle: DiscussionPublic_circle
+  circle: NonNullable<DiscussionPublicQuery['circle']>
 }
 
 const Wall = ({ circle }: WallProps) => {

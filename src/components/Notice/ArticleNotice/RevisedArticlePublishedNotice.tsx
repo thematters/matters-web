@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
+import { Translate } from '~/components'
+import { RevisedArticlePublishedNoticeFragment } from '~/gql/graphql'
 
 import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeDate from '../NoticeDate'
@@ -10,9 +10,11 @@ import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
-import { RevisedArticlePublishedNotice as NoticeType } from './__generated__/RevisedArticlePublishedNotice'
-
-const RevisedArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
+const RevisedArticlePublishedNotice = ({
+  notice,
+}: {
+  notice: RevisedArticlePublishedNoticeFragment
+}) => {
   return (
     <section
       className="container"

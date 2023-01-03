@@ -1,6 +1,5 @@
-import { Tabs, Translate, useRoute } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Tabs, Translate, useRoute } from '~/components'
 
 type UserTabsProps = {
   hasSubscriptions?: boolean

@@ -2,12 +2,11 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useEffect, useRef } from 'react'
 
-import { ANALYTICS, ANALYTIC_TYPES } from '~/common/enums'
+import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
 import { deferTry, initializeFirebase } from '~/common/utils'
+import { AnalyticsUserFragment } from '~/gql/graphql'
 
 import { useEventListener } from '../Hook'
-
-import { AnalyticsUser } from './__generated__/AnalyticsUser'
 
 declare global {
   interface Window {
@@ -35,7 +34,7 @@ const handleAnalytics = async ({
   analytics,
 }: {
   detail: CustomEvent['detail']
-  user: AnalyticsUser | {}
+  user: AnalyticsUserFragment | {}
   analytics?: firebase.analytics.Analytics
 }) => {
   let id
@@ -90,7 +89,11 @@ const handleAnalytics = async ({
   }
 }
 
-export const AnalyticsListener = ({ user }: { user: AnalyticsUser | {} }) => {
+export const AnalyticsListener = ({
+  user,
+}: {
+  user: AnalyticsUserFragment | {}
+}) => {
   const analyticsRef = useRef<firebase.analytics.Analytics>()
 
   const initAnalytics = async () => {

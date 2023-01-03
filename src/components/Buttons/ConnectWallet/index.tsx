@@ -1,6 +1,5 @@
-import { Button, TextIcon, Translate } from '~/components'
-
 import { PATHS } from '~/common/enums'
+import { Button, TextIcon, Translate } from '~/components'
 
 export const ConnectWalletButton = () => {
   return (

@@ -1,12 +1,9 @@
 import { useState } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import { Button, TextIcon, Translate, useMutation } from '~/components'
 import INVITE_CIRCLE from '~/components/GQL/mutations/invite'
-
-import { ADD_TOAST } from '~/common/enums'
-
-import { InviteCircleInvitee } from '@/__generated__/globalTypes'
-import { InviteCircle } from '~/components/GQL/mutations/__generated__/InviteCircle'
+import { InviteCircleInvitee, InviteCircleMutation } from '~/gql/graphql'
 
 interface CircleInvitationResendProps {
   circleId: string
@@ -33,7 +30,7 @@ const CircleInvitationResendButton = ({
   invitees,
 }: CircleInvitationResendProps) => {
   const [disabled, setDisabled] = useState<boolean>(false)
-  const [invite] = useMutation<InviteCircle>(INVITE_CIRCLE)
+  const [invite] = useMutation<InviteCircleMutation>(INVITE_CIRCLE)
   const resend = async () => {
     setDisabled(true)
 

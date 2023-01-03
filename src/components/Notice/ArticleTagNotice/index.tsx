@@ -1,12 +1,12 @@
 import gql from 'graphql-tag'
 
+import { ArticleTagNoticeFragment } from '~/gql/graphql'
+
 import ArticleTagAddedNotice from './ArticleTagAddedNotice'
 import ArticleTagRemovedNotice from './ArticleTagRemovedNotice'
 import ArticleTagUnselectedNotice from './ArticleTagUnselectedNotice'
 
-import { ArticleTagNotice as NoticeType } from './__generated__/ArticleTagNotice'
-
-const ArticleTagNotice = ({ notice }: { notice: NoticeType }) => {
+const ArticleTagNotice = ({ notice }: { notice: ArticleTagNoticeFragment }) => {
   switch (notice.articleTagNoticeType) {
     case 'ArticleTagAdded':
       return <ArticleTagAddedNotice notice={notice} />

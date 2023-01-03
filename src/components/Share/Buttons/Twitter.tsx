@@ -1,11 +1,9 @@
 // import queryString from 'query-string'
 
-import { TextIcon, withIcon } from '~/components'
-
-import { analytics, stripNonEnglishUrl } from '~/common/utils'
-
 import { ReactComponent as IconShareTwitter } from '@/public/static/icons/16px/share-twitter.svg'
 import { ReactComponent as IconShareTwitterCircle } from '@/public/static/icons/40px/share-twitter-circle.svg'
+import { analytics, stripNonEnglishUrl } from '~/common/utils'
+import { TextIcon, withIcon } from '~/components'
 
 const Twitter = ({
   title,

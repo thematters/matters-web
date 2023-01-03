@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Appreciation,
   EmptyAppreciation,
@@ -10,12 +11,9 @@ import {
   List,
   Spinner,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { MeAppreciationsSentQuery } from '~/gql/graphql'
 
 import AppreciationTabs from '../AppreciationTabs'
-
-import { MeAppreciationsSent } from './__generated__/MeAppreciationsSent'
 
 const ME_APPRECIATIONS_SENT = gql`
   query MeAppreciationsSent($after: String) {
@@ -44,9 +42,8 @@ const ME_APPRECIATIONS_SENT = gql`
 `
 
 const BaseAppreciationsSent = () => {
-  const { data, loading, fetchMore, refetch } = useQuery<MeAppreciationsSent>(
-    ME_APPRECIATIONS_SENT
-  )
+  const { data, loading, fetchMore, refetch } =
+    useQuery<MeAppreciationsSentQuery>(ME_APPRECIATIONS_SENT)
 
   if (loading) {
     return <Spinner />

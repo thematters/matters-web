@@ -10,18 +10,19 @@ import {
 } from '~/components'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
-
-import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
-import { FollowButtonTagPrivate } from './__generated__/FollowButtonTagPrivate'
+import {
+  FollowButtonTagPrivateFragment,
+  ToggleFollowTagMutation,
+} from '~/gql/graphql'
 
 interface UnfollowTagProps {
-  tag: FollowButtonTagPrivate
+  tag: FollowButtonTagPrivateFragment
 }
 
 const Unfollow = ({ tag }: UnfollowTagProps) => {
   const viewer = useContext(ViewerContext)
   const [hover, setHover] = useState(false)
-  const [unfollow] = useMutation<ToggleFollowTag>(TOGGLE_FOLLOW_TAG, {
+  const [unfollow] = useMutation<ToggleFollowTagMutation>(TOGGLE_FOLLOW_TAG, {
     variables: { id: tag.id, enabled: false },
     optimisticResponse:
       !_isNil(tag.id) && !_isNil(tag.isFollower)

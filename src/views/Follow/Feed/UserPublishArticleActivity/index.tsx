@@ -1,3 +1,4 @@
+import { analytics } from '~/common/utils'
 import {
   ArticleDigestFeed,
   CardExposureTracker,
@@ -6,14 +7,11 @@ import {
   Translate,
   UserDigest,
 } from '~/components'
-
-import { analytics } from '~/common/utils'
+import { UserPublishArticleActivityFragment } from '~/gql/graphql'
 
 import UnfollowUserActionButton from '../DropdownActions/UnfollowUser'
 import FeedHead from '../FollowingFeedHead'
 import { fragments } from './gql'
-
-import { UserPublishArticleActivity as Activity } from './__generated__/UserPublishArticleActivity'
 
 const UserPublishArticleActivity = ({
   actor,
@@ -21,7 +19,7 @@ const UserPublishArticleActivity = ({
   createdAt,
   location,
   __typename,
-}: Activity & { location: number }) => (
+}: UserPublishArticleActivityFragment & { location: number }) => (
   <>
     <ArticleDigestFeed
       header={
@@ -42,7 +40,7 @@ const UserPublishArticleActivity = ({
       onClick={() => {
         analytics.trackEvent('click_feed', {
           type: 'following',
-          contentType: __typename,
+          contentType: __typename!,
           location,
           id: node.id,
         })
@@ -58,7 +56,7 @@ const UserPublishArticleActivity = ({
       id={node.id}
       location={location}
       feedType="following"
-      contentType={__typename}
+      contentType={__typename!}
     />
   </>
 )

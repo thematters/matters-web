@@ -4,6 +4,12 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
+  parseFormSubmitErrors,
+  translate,
+  validateComparedPassword,
+  validatePassword,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   LanguageContext,
@@ -12,16 +18,10 @@ import {
   useMutation,
 } from '~/components'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
-
 import {
-  parseFormSubmitErrors,
-  translate,
-  validateComparedPassword,
-  validatePassword,
-} from '~/common/utils'
-
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
-import { ResetPassword } from './__generated__/ResetPassword'
+  ConfirmVerificationCodeMutation,
+  ResetPasswordMutation,
+} from '~/gql/graphql'
 
 interface FormProps {
   email: string
@@ -51,14 +51,18 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [confirm] = useMutation<ConfirmVerificationCode>(
+  const [confirm] = useMutation<ConfirmVerificationCodeMutation>(
     CONFIRM_CODE,
     undefined,
     { showToast: false }
   )
-  const [reset] = useMutation<ResetPassword>(RESET_PASSWORD, undefined, {
-    showToast: false,
-  })
+  const [reset] = useMutation<ResetPasswordMutation>(
+    RESET_PASSWORD,
+    undefined,
+    {
+      showToast: false,
+    }
+  )
   const { lang } = useContext(LanguageContext)
 
   const isForget = type === 'forget'

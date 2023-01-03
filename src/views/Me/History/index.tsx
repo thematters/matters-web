@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptyHistory,
@@ -11,10 +12,7 @@ import {
   QueryError,
   Spinner,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
-
-import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
+import { MeHistoryFeedQuery } from '~/gql/graphql'
 
 const ME_HISTORY_FEED = gql`
   query MeHistoryFeed($after: String) {
@@ -46,7 +44,7 @@ const ME_HISTORY_FEED = gql`
 
 const BaseMeHistory = () => {
   const { data, loading, error, fetchMore, refetch } =
-    useQuery<MeHistoryFeed>(ME_HISTORY_FEED)
+    useQuery<MeHistoryFeedQuery>(ME_HISTORY_FEED)
 
   if (loading) {
     return <Spinner />

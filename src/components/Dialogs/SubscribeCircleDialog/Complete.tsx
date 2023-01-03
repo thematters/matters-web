@@ -1,11 +1,9 @@
-import { Dialog, Translate } from '~/components'
-
 import { toPath } from '~/common/utils'
-
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
+import { Dialog, Translate } from '~/components'
+import { DigestRichCirclePublicFragment } from '~/gql/graphql'
 
 interface CompleteProps {
-  circle: DigestRichCirclePublic
+  circle: DigestRichCirclePublicFragment
 }
 
 const Complete: React.FC<CompleteProps> = ({ circle }) => {

@@ -4,20 +4,6 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
 
 import {
-  Dialog,
-  Form,
-  IconHelp24,
-  LanguageContext,
-  Spinner,
-  TextIcon,
-  Tooltip,
-  Translate,
-  useMutation,
-} from '~/components'
-import PAYOUT from '~/components/GQL/mutations/payout'
-import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-
-import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MINIMAL_PAYOUT_AMOUNT,
   Z_INDEX,
@@ -30,11 +16,22 @@ import {
   validatePaymentPassword,
   validatePayoutAmount,
 } from '~/common/utils'
+import {
+  Dialog,
+  Form,
+  IconHelp24,
+  LanguageContext,
+  Spinner,
+  TextIcon,
+  Tooltip,
+  Translate,
+  useMutation,
+} from '~/components'
+import PAYOUT from '~/components/GQL/mutations/payout'
+import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import { PayoutMutation, WalletBalanceQuery } from '~/gql/graphql'
 
 import ConfirmTable from '../ConfirmTable'
-
-import { Payout as PayoutMutate } from '~/components/GQL/mutations/__generated__/Payout'
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
 interface FormProps {
   balance: number
@@ -58,7 +55,7 @@ const BaseConfirm: React.FC<FormProps> = ({
 
   const { lang } = useContext(LanguageContext)
   const inputRef: React.RefObject<any> | null = useRef(null)
-  const [payout] = useMutation<PayoutMutate>(PAYOUT, undefined, {
+  const [payout] = useMutation<PayoutMutation>(PAYOUT, undefined, {
     showToast: false,
   })
 
@@ -258,7 +255,7 @@ const BaseConfirm: React.FC<FormProps> = ({
 }
 
 const Confirm = (props: Omit<FormProps, 'balance'>) => {
-  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
+  const { data, loading } = useQuery<WalletBalanceQuery>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
   const balance = data?.viewer?.wallet.balance.HKD || 0

@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
   Button,
   IconAvatarEmpty24,
@@ -9,15 +10,11 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
-
-import { ADD_TOAST } from '~/common/enums'
+import { TagFragmentFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-// import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
-import { TagFragment } from '../__generated__/TagFragment'
-
-const Owner = ({ tag }: { tag: TagFragment }) => {
+const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
   const viewer = useContext(ViewerContext)
 
   const forbid = () => {

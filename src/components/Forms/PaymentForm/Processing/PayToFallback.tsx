@@ -1,6 +1,5 @@
-import { Dialog, Translate } from '~/components'
-
 import IMAGE_PAYMENT_FAILURE from '@/public/static/images/payment-failure.png'
+import { Dialog, Translate } from '~/components'
 
 import styles from './styles.css'
 

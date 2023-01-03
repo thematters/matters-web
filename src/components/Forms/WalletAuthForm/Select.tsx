@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
+import { GUIDE_LINKS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -14,9 +16,6 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
-
-import { GUIDE_LINKS } from '~/common/enums'
-import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -75,6 +74,7 @@ const Hint = () => {
           className="u-link-green"
           href={GUIDE_LINKS.connectWallet[lang]}
           target="_blank"
+          rel="noreferrer"
         >
           <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
         </a>
@@ -94,6 +94,7 @@ const Hint = () => {
         className="u-link-green"
         href={GUIDE_LINKS.mobilePayment[lang]}
         target="_blank"
+        rel="noreferrer"
       >
         <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
       </a>

@@ -1,6 +1,9 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
+import { TEST_ID } from '~/common/enums'
+import { numAbbr, toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
@@ -10,18 +13,12 @@ import {
   Tag,
   TextIcon,
 } from '~/components'
-
-import { TEST_ID } from '~/common/enums'
-import { numAbbr, toPath } from '~/common/utils'
-
-import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
+import { TagDigestSidebarTagFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { TagDigestSidebarTag } from './__generated__/TagDigestSidebarTag'
-
 export type TagDigestSidebarProps = {
-  tag: TagDigestSidebarTag
+  tag: TagDigestSidebarTagFragment
 } & CardProps
 
 const fragments = {
@@ -55,7 +52,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
     >
       <section className="container">
         <section className="cover">
-          <Link {...path}>
+          <Link {...path} legacyBehavior>
             <a>
               <ResponsiveImage
                 url={tag.cover || IMAGE_TAG_COVER.src}

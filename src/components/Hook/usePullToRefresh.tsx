@@ -1,11 +1,9 @@
 import { useEffect } from 'react'
 import ReactDOMServer from 'react-dom/server'
 
-import { IconSpinner16, withIcon } from '~/components'
-
-import { analytics, sleep } from '~/common/utils'
-
 import { ReactComponent as IconPullToRefresh } from '@/public/static/icons/24px/pull-to-refresh.svg'
+import { analytics, sleep } from '~/common/utils'
+import { IconSpinner16, withIcon } from '~/components'
 
 import { useEventListener } from './useEventListener'
 

@@ -1,11 +1,9 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-import { Dialog, ShareDialog, Translate } from '~/components'
-
 import { toPath } from '~/common/utils'
-
-import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
+import { Dialog, ShareDialog, Translate } from '~/components'
+import { PublishStateDraftFragment } from '~/gql/graphql'
 
 const BasePublishedState = ({
   openShareDialog,
@@ -19,7 +17,7 @@ const BasePublishedState = ({
   return null
 }
 
-const PublishedState = ({ draft }: { draft: PublishStateDraft }) => {
+const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   const router = useRouter()
 
   if (!draft.article) {

@@ -3,6 +3,12 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
+  ADD_TOAST,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import { toPath, translate } from '~/common/utils'
+import {
   IconCollection24,
   LanguageContext,
   Menu,
@@ -11,16 +17,10 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-
 import {
-  ADD_TOAST,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
-
-import { ExtendArticle } from './__generated__/ExtendArticle'
-import { ExtendButtonArticle } from './__generated__/ExtendButtonArticle'
+  ExtendArticleMutation,
+  ExtendButtonArticleFragment,
+} from '~/gql/graphql'
 
 const EXTEND_ARTICLE = gql`
   mutation ExtendArticle($title: String!, $collection: [ID]) {
@@ -40,11 +40,15 @@ const fragments = {
   `,
 }
 
-const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
+const ExtendButton = ({
+  article,
+}: {
+  article: ExtendButtonArticleFragment
+}) => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
-  const [collectArticle] = useMutation<ExtendArticle>(EXTEND_ARTICLE, {
+  const [collectArticle] = useMutation<ExtendArticleMutation>(EXTEND_ARTICLE, {
     variables: {
       title: translate({ id: 'untitle', lang }),
       collection: [article.id],

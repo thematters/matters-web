@@ -1,3 +1,12 @@
+// import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
+import {
+  analytics,
+  mergeConnections,
+  stripSpaces,
+  toPath,
+} from '~/common/utils'
 import {
   Card,
   EmptyTag,
@@ -12,23 +21,11 @@ import {
   usePullToRefresh,
   useRoute,
 } from '~/components'
-
-import {
-  analytics,
-  mergeConnections,
-  stripSpaces,
-  toPath,
-} from '~/common/utils'
-
-// import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
-import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
+import { UserTagsPublicQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
 import { USER_TAGS_PUBLIC } from './gql'
 import styles from './styles.css'
-
-import { UserTagsPublic } from './__generated__/UserTagsPublic'
 
 const UserTags = () => {
   const { getQuery } = useRoute()
@@ -44,7 +41,7 @@ const UserTags = () => {
     error,
     fetchMore,
     refetch: refetchPublic,
-  } = usePublicQuery<UserTagsPublic>(USER_TAGS_PUBLIC, {
+  } = usePublicQuery<UserTagsPublicQuery>(USER_TAGS_PUBLIC, {
     variables: { userName },
   })
 

@@ -1,17 +1,15 @@
 import classNames from 'classnames'
 
-import { Card, IconChecked, IconUnChecked, Tag } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
+import { Card, IconChecked, IconUnChecked, Tag } from '~/components'
+import { DigestTagFragment } from '~/gql/graphql'
 
 import styles from '../styles.css'
 
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
-
 interface SearchSelectTagProps {
-  tag: DigestTag
+  tag: DigestTagFragment
   selected?: boolean
-  onClick: (tag: DigestTag) => void
+  onClick: (tag: DigestTagFragment) => void
   inStagingArea?: boolean
 }
 

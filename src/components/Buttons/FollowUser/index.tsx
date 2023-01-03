@@ -2,15 +2,14 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import { ViewerContext } from '~/components'
+import { FollowButtonUserPrivateFragment } from '~/gql/graphql'
 
 import Follow from './Follow'
 import FollowState from './FollowState'
 import Unfollow from './Unfollow'
 
-import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
-
 interface FollowUserButtonProps {
-  user: Partial<FollowButtonUserPrivate>
+  user: Partial<FollowButtonUserPrivateFragment>
   size?: FollowUserButtonSize
 }
 

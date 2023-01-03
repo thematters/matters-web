@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
   InfiniteScroll,
@@ -8,20 +9,16 @@ import {
   Translate,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import {
+  ArticleDonatorsQuery,
+  DonatorDialogArticleFragment,
+} from '~/gql/graphql'
 
 import { ARTICLE_DONATORS } from './gql'
 import styles from './styles.css'
 
-import {
-  ArticleDonators,
-  ArticleDonators_article_Article,
-} from './__generated__/ArticleDonators'
-import { DonatorDialogArticle } from './__generated__/DonatorDialogArticle'
-
 interface DonatorsDialogContentProps {
-  article: DonatorDialogArticle
+  article: DonatorDialogArticleFragment
   closeDialog: () => void
 }
 
@@ -29,14 +26,18 @@ const DonatorsDialogContent = ({
   article,
   closeDialog,
 }: DonatorsDialogContentProps) => {
-  const { data, loading, error, fetchMore } = useQuery<ArticleDonators>(
+  const { data, loading, error, fetchMore } = useQuery<ArticleDonatorsQuery>(
     ARTICLE_DONATORS,
     { variables: { id: article.id } }
   )
 
   const connectionPath = 'article.donations'
   const { edges, pageInfo } =
-    (data?.article as ArticleDonators_article_Article)?.donations || {}
+    (data?.article?.__typename === 'Article' && data?.article?.donations) || {}
+  const totalCount =
+    (data?.article?.__typename === 'Article' &&
+      data?.article?.donations.totalCount) ||
+    0
 
   if (loading) {
     return <Spinner />
@@ -67,10 +68,6 @@ const DonatorsDialogContent = ({
     })
   }
 
-  const totalCount =
-    (data?.article as ArticleDonators_article_Article)?.donations.totalCount ||
-    0
-
   return (
     <>
       <Dialog.Header
@@ -91,21 +88,18 @@ const DonatorsDialogContent = ({
           hasNextPage={pageInfo.hasNextPage}
         >
           {edges.map(({ node, cursor }, i) => (
-            <div className="dialog-donator-list" key={cursor}>
-              {node && (
-                <UserDigest.Rich
-                  user={node}
-                  onClick={() => {
-                    analytics.trackEvent('click_feed', {
-                      type: 'donators',
-                      contentType: 'user',
-                      location: i,
-                      id: node.id,
-                    })
-                  }}
-                />
-              )}
-            </div>
+            <UserDigest.Rich
+              user={node}
+              key={cursor}
+              onClick={() => {
+                analytics.trackEvent('click_feed', {
+                  type: 'donators',
+                  contentType: 'user',
+                  location: i,
+                  id: node.id,
+                })
+              }}
+            />
           ))}
         </InfiniteScroll>
 

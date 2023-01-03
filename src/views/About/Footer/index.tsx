@@ -1,3 +1,9 @@
+import { ReactComponent as IconFooterBlog } from '@/public/static/icons/24px/footer-blog.svg'
+import { ReactComponent as IconFooterDiscord } from '@/public/static/icons/24px/footer-discord.svg'
+import { ReactComponent as IconFooterFacebook } from '@/public/static/icons/24px/footer-facebook.svg'
+import { ReactComponent as IconFooterInstagram } from '@/public/static/icons/24px/footer-instagram.svg'
+import { ReactComponent as IconFooterLinkedin } from '@/public/static/icons/24px/footer-linkedin.svg'
+import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/24px/footer-twitter.svg'
 import {
   Button,
   LanguageSwitch,
@@ -6,13 +12,6 @@ import {
   useResponsive,
   withIcon,
 } from '~/components'
-
-import { ReactComponent as IconFooterBlog } from '@/public/static/icons/24px/footer-blog.svg'
-import { ReactComponent as IconFooterDiscord } from '@/public/static/icons/24px/footer-discord.svg'
-import { ReactComponent as IconFooterFacebook } from '@/public/static/icons/24px/footer-facebook.svg'
-import { ReactComponent as IconFooterInstagram } from '@/public/static/icons/24px/footer-instagram.svg'
-import { ReactComponent as IconFooterLinkedin } from '@/public/static/icons/24px/footer-linkedin.svg'
-import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/24px/footer-twitter.svg'
 
 import styles from './styles.css'
 
@@ -50,6 +49,7 @@ const Footer = () => {
                     className="u-link-green"
                     href="mailto:hi@matters.news"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     hi@matters.news
                   </a>
@@ -65,6 +65,7 @@ const Footer = () => {
                     className="u-link-green"
                     href="mailto:hi@matters.news"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     ask@matters.news
                   </a>
@@ -80,6 +81,7 @@ const Footer = () => {
                     className="u-link-green"
                     href="https://matters-lab.io/"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Matters Lab
                   </a>
@@ -97,7 +99,11 @@ const Footer = () => {
                 <div className="socials">
                   <ul>
                     <li>
-                      <a href="https://twitter.com/MattersLab" target="_blank">
+                      <a
+                        href="https://twitter.com/MattersLab"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         <TextIcon
                           icon={withIcon(IconFooterTwitter)({
                             size: 'md',
@@ -112,7 +118,11 @@ const Footer = () => {
                       </a>
                     </li>
                     <li>
-                      <a href="https://twitter.com/Mattersw3b" target="_blank">
+                      <a
+                        href="https://twitter.com/Mattersw3b"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         <TextIcon
                           icon={withIcon(IconFooterTwitter)({
                             size: 'md',
@@ -128,7 +138,11 @@ const Footer = () => {
                     </li>
 
                     <li>
-                      <a href="https://discord.gg/matterslab" target="_blank">
+                      <a
+                        href="https://discord.gg/matterslab"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         <TextIcon
                           icon={withIcon(IconFooterDiscord)({
                             size: 'md',
@@ -146,6 +160,7 @@ const Footer = () => {
                       <a
                         href="https://www.facebook.com/MattersLab2018/"
                         target="_blank"
+                        rel="noreferrer"
                       >
                         <TextIcon
                           icon={withIcon(IconFooterFacebook)({
@@ -164,7 +179,11 @@ const Footer = () => {
 
                   <ul>
                     <li>
-                      <a href="https://matters-lab.io/blog" target="_blank">
+                      <a
+                        href="https://matters-lab.io/blog"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         <TextIcon
                           icon={withIcon(IconFooterBlog)({
                             size: 'md',
@@ -183,6 +202,7 @@ const Footer = () => {
                       <a
                         href="https://www.linkedin.com/company/matters-lab"
                         target="_blank"
+                        rel="noreferrer"
                       >
                         <TextIcon
                           icon={withIcon(IconFooterLinkedin)({
@@ -201,6 +221,7 @@ const Footer = () => {
                       <a
                         href="https://www.instagram.com/matterslab2018/"
                         target="_blank"
+                        rel="noreferrer"
                       >
                         <TextIcon
                           icon={withIcon(IconFooterInstagram)({
@@ -236,7 +257,7 @@ const Footer = () => {
                     borderWidth="sm"
                     htmlHref="https://matters.news/signup"
                     htmlTarget="_blank"
-                    rel="noopener"
+                    rel="noreferrer"
                   >
                     <TextIcon size="md">
                       <Translate

@@ -1,15 +1,13 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { AppreciatorsDialog, LanguageContext, Translate } from '~/components'
-import { Avatar } from '~/components/Avatar'
-
 import { IMAGE_PIXEL } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
+import { AppreciatorsDialog, LanguageContext, Translate } from '~/components'
+import { Avatar } from '~/components/Avatar'
+import { AppreciatorsArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle'
 
 const fragments = {
   article: gql`
@@ -37,7 +35,11 @@ const fragments = {
   `,
 }
 
-const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
+const Appreciators = ({
+  article,
+}: {
+  article: AppreciatorsArticleFragment
+}) => {
   const { lang } = useContext(LanguageContext)
 
   const edges = article.received.edges

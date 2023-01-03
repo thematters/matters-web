@@ -1,6 +1,5 @@
-import { Dialog, Translate } from '~/components'
-
 import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
+import { Dialog, Translate } from '~/components'
 
 import styles from './styles.css'
 

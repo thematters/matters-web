@@ -4,6 +4,11 @@ import _pickBy from 'lodash/pickBy'
 import React, { useContext, useEffect } from 'react'
 
 import {
+  parseFormSubmitErrors,
+  validateComparedPassword,
+  validatePaymentPassword,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   LanguageContext,
@@ -12,16 +17,9 @@ import {
   useMutation,
   useStep,
 } from '~/components'
-
-import {
-  parseFormSubmitErrors,
-  validateComparedPassword,
-  validatePaymentPassword,
-} from '~/common/utils'
+import { SetPaymentPasswordMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { SetPaymentPassword } from './__generated__/SetPaymentPassword'
 
 interface FormProps {
   submitCallback: () => void
@@ -44,7 +42,7 @@ const SET_PAYMENT_PASSWORD = gql`
 `
 
 const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
-  const [setPassword] = useMutation<SetPaymentPassword>(
+  const [setPassword] = useMutation<SetPaymentPasswordMutation>(
     SET_PAYMENT_PASSWORD,
     undefined,
     { showToast: false }

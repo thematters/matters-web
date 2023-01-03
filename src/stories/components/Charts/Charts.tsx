@@ -1,9 +1,8 @@
 import { sum as d3Sum } from 'd3-array'
 import _random from 'lodash/random'
 
-import { StackedAreaChart } from '~/components'
-
 import { CHART_COLOR } from '~/common/enums'
+import { StackedAreaChart } from '~/components'
 
 const MOCK_INCOME_ANALYTICS = [
   { time: new Date(2021, 0, 1), income: 255 },

@@ -9,9 +9,10 @@ import {
   useMutation,
 } from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
-
-import { StickyButtonArticle } from './__generated__/StickyButtonArticle'
-import { ToggleSticky } from './__generated__/ToggleSticky'
+import {
+  StickyButtonArticleFragment,
+  ToggleStickyMutation,
+} from '~/gql/graphql'
 
 const TOGGLE_STICKY = gql`
   mutation ToggleSticky($id: ID!, $sticky: Boolean!) {
@@ -35,8 +36,12 @@ const fragments = {
   `,
 }
 
-const StickyButton = ({ article }: { article: StickyButtonArticle }) => {
-  const [toggleSticky] = useMutation<ToggleSticky>(TOGGLE_STICKY, {
+const StickyButton = ({
+  article,
+}: {
+  article: StickyButtonArticleFragment
+}) => {
+  const [toggleSticky] = useMutation<ToggleStickyMutation>(TOGGLE_STICKY, {
     variables: { id: article.id, sticky: !article.sticky },
     optimisticResponse: {
       editArticle: {

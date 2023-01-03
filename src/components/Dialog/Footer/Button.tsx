@@ -49,4 +49,6 @@ const DialogFooterButton: React.FC<
   )
 )
 
+DialogFooterButton.displayName = 'DialogFooterButton'
+
 export default DialogFooterButton

@@ -1,8 +1,5 @@
 import { useContext } from 'react'
 
-import { DonationDialog, Translate, ViewerContext } from '~/components'
-import DonationButton from '~/components/Buttons/DonationButton'
-
 import {
   ADD_TOAST,
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -10,14 +7,17 @@ import {
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
-
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
+import { DonationDialog, Translate, ViewerContext } from '~/components'
+import DonationButton from '~/components/Buttons/DonationButton'
+import {
+  ArticleDetailPublicQuery,
+  UserDonationRecipientFragment,
+} from '~/gql/graphql'
 
 interface SupportButtonProps {
-  recipient: UserDonationRecipient
+  recipient: UserDonationRecipientFragment
   targetId: string
-  article: ArticleDetailPublic_article
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   supported?: boolean
 }
 

@@ -1,6 +1,5 @@
-import MeSettingsBlocked from '~/views/Me/Settings/Blocked'
-
 import { Protected } from '~/components'
+import MeSettingsBlocked from '~/views/Me/Settings/Blocked'
 
 const ProtectedMeSettingsBlocked = () => (
   <Protected>

@@ -3,16 +3,8 @@
  */
 
 const withPlugins = require('next-compose-plugins')
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
-
-const withOffline = require('next-offline')
-
-const packageJson = require('./package.json')
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
-const isStatic = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
 
 const nextConfig = {
@@ -21,8 +13,6 @@ const nextConfig = {
    */
   assetPrefix: nextAssetDomain ? `https://${nextAssetDomain}` : undefined,
   pageExtensions: ['tsx'],
-  // swcMinify: false,
-  crossOrigin: 'anonymous',
 
   webpack(config, { defaultLoaders, isServer }) {
     /**
@@ -57,22 +47,6 @@ const nextConfig = {
     })
 
     return config
-  },
-
-  // filter out server side path for static export
-  exportPathMap: async function (
-    defaultPathMap,
-    { dev, dir, outDir, distDir, buildId }
-  ) {
-    const excludePath = ['oauth', 'pay']
-
-    const filtered = Object.keys(defaultPathMap)
-      .filter((key) => !excludePath.includes(key.split('/')[1]))
-      .reduce((obj, key) => {
-        obj[key] = defaultPathMap[key]
-        return obj
-      }, {})
-    return filtered
   },
 
   /**
@@ -114,43 +88,23 @@ const nextConfig = {
 
 let plugins = [
   // bundle analyzer
-  [withBundleAnalyzer],
-]
+  [
+    require('@next/bundle-analyzer')({
+      enabled: process.env.ANALYZE === 'true',
+    }),
+  ],
 
-if (!isStatic) {
-  plugins = [
-    ...plugins,
-    // offline
-    [
-      withOffline,
-      {
-        // FIXME: https://github.com/hanford/next-offline/issues/195
-        generateInDevMode: false,
-        workboxOpts: {
-          swDest: '../public/service-worker.js',
-          runtimeCaching: [
-            {
-              urlPattern: '/',
-              handler: 'NetworkFirst',
-              options: {
-                cacheName: 'homepage-cache',
-              },
-            },
-            {
-              urlPattern: new RegExp('/_next/static/'),
-              handler: 'CacheFirst',
-              options: {
-                cacheName: 'static-cache',
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-              },
-            },
-          ],
-        },
-      },
-    ],
-  ]
-}
+  [
+    require('next-pwa')({
+      dest: 'public',
+      disable: !isProd,
+      register: true,
+      sw: 'service-worker.js',
+      publicExcludes: ['!static/**/*'],
+      cacheStartUrl: false,
+      dynamicStartUrl: true,
+    }),
+  ],
+]
 
 module.exports = withPlugins(plugins, nextConfig)

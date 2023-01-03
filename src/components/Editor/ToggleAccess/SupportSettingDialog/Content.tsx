@@ -2,6 +2,8 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
+import { translate, validateSupportWords } from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -11,22 +13,17 @@ import {
   Translate,
   useRoute,
 } from '~/components'
-
-import { ADD_TOAST } from '~/common/enums'
-import { translate, validateSupportWords } from '~/common/utils'
+import { ArticleDetailPublicQuery, EditMetaDraftFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 import SupportPreview from './SupportPreview'
 import Tab, { TabType } from './Tab'
 
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
-import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
-
 interface FormProps {
   closeDialog: () => void
   onBack?: () => any
-  draft?: EditMetaDraft
-  article?: ArticleDetailPublic_article
+  draft?: EditMetaDraftFragment
+  article?: ArticleDetailPublicQuery['article']
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null
@@ -64,8 +61,10 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     isValid,
   } = useFormik<FormValues>({
     initialValues: {
-      requestForDonation: content ? content.requestForDonation : '',
-      replyToDonator: content ? content.replyToDonator : '',
+      requestForDonation: content?.requestForDonation
+        ? content.requestForDonation
+        : '',
+      replyToDonator: content?.replyToDonator ? content.replyToDonator : '',
     },
     validate: ({ requestForDonation, replyToDonator }) =>
       _pickBy({

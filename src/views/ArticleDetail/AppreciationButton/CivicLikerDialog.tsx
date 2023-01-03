@@ -1,13 +1,11 @@
 import gql from 'graphql-tag'
 
-import { Dialog, Translate, useDialogSwitch } from '~/components'
-
 import { EXTERNAL_LINKS } from '~/common/enums'
-
-import { CivicLikerAppreciateButtonUser } from './__generated__/CivicLikerAppreciateButtonUser'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
+import { CivicLikerAppreciateButtonUserFragment } from '~/gql/graphql'
 
 interface CivicLikerDialogProps {
-  user: CivicLikerAppreciateButtonUser
+  user: CivicLikerAppreciateButtonUserFragment
   onClose: () => void
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
@@ -66,6 +64,7 @@ const CivicLikerDialog = ({
                 className="u-link-green"
                 href={EXTERNAL_LINKS.SUPER_LIKE}
                 target="_blank"
+                rel="noreferrer"
               >
                 Super Like
               </a>
@@ -101,6 +100,7 @@ const CivicLikerDialog = ({
               className="u-link-green"
               href={EXTERNAL_LINKS.CIVIC_LIKER_SUPPORT}
               target="_blank"
+              rel="noreferrer"
             >
               <Translate
                 zh_hant="讚賞公民福利"

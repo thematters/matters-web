@@ -1,10 +1,9 @@
-import { Button, TextIcon, Translate } from '~/components'
-
 import IMAGE_ILLUSTRATION_1 from '@/public/static/images/about/intro-illustration-1.png'
 import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/intro-illustration-2.png'
 import IMAGE_ILLUSTRATION_3 from '@/public/static/images/about/intro-illustration-3.png'
 import IMAGE_WAVE_1 from '@/public/static/images/about/wave-intro-1.svg'
 import IMAGE_WAVE_2 from '@/public/static/images/about/wave-intro-2.svg'
+import { Button, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 

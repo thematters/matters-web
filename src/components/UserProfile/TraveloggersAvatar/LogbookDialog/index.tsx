@@ -49,6 +49,7 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
               className="u-link-green"
               href={process.env.NEXT_PUBLIC_LOGBOOKS_URL}
               target="_blank"
+              rel="noreferrer"
             >
               <Translate en="link" zh_hant="鏈接" zh_hans="链接" />
             </a>

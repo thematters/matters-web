@@ -13,20 +13,21 @@ import {
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
+import {
+  FollowButtonUserPrivateFragment,
+  ToggleFollowUserMutation,
+} from '~/gql/graphql'
 
 import { FollowUserButtonSize } from './index'
 
-import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
-import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
-
 interface UnfollowProps {
-  user: Partial<FollowButtonUserPrivate>
+  user: Partial<FollowButtonUserPrivateFragment>
   size: FollowUserButtonSize
 }
 
 const UnfollowUser = ({ user, size }: UnfollowProps) => {
   const [hover, setHover] = useState(false)
-  const [unfollow] = useMutation<ToggleFollowUser>(TOGGLE_FOLLOW_USER, {
+  const [unfollow] = useMutation<ToggleFollowUserMutation>(TOGGLE_FOLLOW_USER, {
     variables: { id: user.id, enabled: false },
     optimisticResponse:
       !_isNil(user.id) && !_isNil(user.isFollower)

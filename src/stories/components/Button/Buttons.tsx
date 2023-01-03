@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { TEXT } from '~/common/enums'
 import {
   Button,
   Dialog,
@@ -11,8 +12,6 @@ import {
   WriteButton,
 } from '~/components'
 import NavListItem from '~/components/Layout/NavBar/NavListItem'
-
-import { TEXT } from '~/common/enums'
 
 const Buttons = () => (
   <section>

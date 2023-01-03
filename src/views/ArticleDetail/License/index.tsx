@@ -1,26 +1,23 @@
-import { TextIcon, Translate, withIcon } from '~/components'
-
-import { TEST_ID } from '~/common/enums'
-
 import { ReactComponent as IconLicenseARR } from '@/public/static/icons/24px/license-arr.svg'
 import { ReactComponent as IconLicenseBY } from '@/public/static/icons/24px/license-by.svg'
-import { ReactComponent as IconLicenseCC0 } from '@/public/static/icons/24px/license-cc-0.svg'
 import { ReactComponent as IconLicenseCC } from '@/public/static/icons/24px/license-cc.svg'
+import { ReactComponent as IconLicenseCC0 } from '@/public/static/icons/24px/license-cc-0.svg'
 import { ReactComponent as IconLicenseNC } from '@/public/static/icons/24px/license-nc.svg'
 import { ReactComponent as IconLicenseND } from '@/public/static/icons/24px/license-nd.svg'
+import { TEST_ID } from '~/common/enums'
+import { TextIcon, Translate, withIcon } from '~/components'
+import { ArticleLicenseType } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { ArticleLicenseType } from '@/__generated__/globalTypes'
 
 type LicenseProps = {
   license: ArticleLicenseType
 }
 
 const License: React.FC<LicenseProps> = ({ license }) => {
-  const isCC0 = license === ArticleLicenseType.cc_0
-  const isARR = license === ArticleLicenseType.arr
-  const isCCBYNCND2 = license === ArticleLicenseType.cc_by_nc_nd_2
+  const isCC0 = license === ArticleLicenseType.Cc_0
+  const isARR = license === ArticleLicenseType.Arr
+  const isCCBYNCND2 = license === ArticleLicenseType.CcByNcNd_2
 
   return (
     <section className="license" data-test-id={TEST_ID.ARTICLE_LICENSE}>

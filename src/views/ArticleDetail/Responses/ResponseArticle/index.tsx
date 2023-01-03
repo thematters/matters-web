@@ -1,17 +1,16 @@
 import gql from 'graphql-tag'
 
 import { ArticleDigestSidebar, Translate, UserDigest } from '~/components'
+import { ResponseArticleArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { ResponseArticleArticle } from './__generated__/ResponseArticleArticle'
 
 interface ResponseArticleControls {
   hasCover?: boolean
 }
 
 type ResponseArticleProps = {
-  article: ResponseArticleArticle
+  article: ResponseArticleArticleFragment
 } & ResponseArticleControls
 
 const fragments = {
