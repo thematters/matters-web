@@ -68,7 +68,7 @@ const LinkENS = ({
   const [txConfirming, setTxConfirming] = useState<boolean>(false)
   const ipnsHash = user?.info.ipnsKey
   const { config, error } = usePrepareContractWrite({
-    address: resolverData?.address,
+    address: resolverData?.address as `0x${string}` | undefined,
     abi: PublicResolverABI,
     functionName: 'setContenthash',
     args: [

@@ -19,7 +19,7 @@ import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.css'
 
-export const Layout: React.FC<React.PropsWithChildren<React.ReactNode>> & {
+export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Main: typeof Main
   Header: typeof Header
   Spacing: typeof Spacing

@@ -41,6 +41,7 @@ img {
   img {
     grid-column: col-start 1 / span 5;
   }
+
   .content {
     grid-column: col-start 7 / span 6;
   }
@@ -49,6 +50,7 @@ img {
     & .content {
       grid-column: col-start 1 / span 5;
     }
+
     & img {
       grid-column: col-start 7 / span 6;
     }

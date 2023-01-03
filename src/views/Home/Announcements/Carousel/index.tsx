@@ -1,4 +1,4 @@
-import { useEmblaCarousel } from 'embla-carousel/react'
+import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 
 import { translate } from '~/common/utils'

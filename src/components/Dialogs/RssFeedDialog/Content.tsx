@@ -59,7 +59,7 @@ const RssFeedDialogContent = ({
     chainId: targetNetork.id,
   })
   const { data: readData } = useContractRead({
-    address: resolverData?.address,
+    address: resolverData?.address as `0x${string}` | undefined,
     abi: PublicResolverABI,
     functionName: 'contenthash',
     args: ensName ? [namehash(ensName) as `0x${string}`] : undefined,

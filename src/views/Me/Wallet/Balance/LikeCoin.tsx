@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 
 import { PATHS } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
@@ -35,7 +35,7 @@ const VIEWER_LIKE_BALANCE = gql`
   }
 `
 
-const Wrapper: React.FC = ({ children }) => (
+const Wrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
   <section className="assetsItem">
     <TextIcon icon={<IconLikeCoin40 size="xl-m" />} size="md" spacing="xtight">
       <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />

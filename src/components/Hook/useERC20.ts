@@ -16,7 +16,7 @@ export const useAllowanceUSDT = () => {
   const { address } = useAccount()
 
   return useContractRead({
-    address: process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS || '',
+    address: process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
     abi: erc20ABI,
     functionName: 'allowance',
     args: [
@@ -62,7 +62,7 @@ export const useBalanceEther = ({
 
 export const useApproveUSDT = () => {
   const { config } = usePrepareContractWrite({
-    address: process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS || '',
+    address: process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
     abi: erc20ABI,
     functionName: 'approve',
     args: [

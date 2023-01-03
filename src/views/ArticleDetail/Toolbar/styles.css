@@ -23,6 +23,7 @@
       & :global(> *) {
         height: auto;
       }
+
       & :global(> * + *) {
         margin-left: var(--spacing-loose);
       }

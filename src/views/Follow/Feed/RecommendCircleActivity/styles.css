@@ -1,4 +1,4 @@
 .item {
   border-radius: var(--spacing-x-tight);
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 16px rgb(0 0 0 / 6%);
 }

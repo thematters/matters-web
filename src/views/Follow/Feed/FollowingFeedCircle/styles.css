@@ -4,11 +4,9 @@
 
 .content {
   display: grid;
-  grid-template-areas:
-    'title avatar'
-    'description avatar';
-  grid-template-rows: auto;
-  grid-template-columns: 1fr auto;
+  grid-template:
+    'title avatar' auto
+    'description avatar' auto / 1fr auto;
 }
 
 .title {

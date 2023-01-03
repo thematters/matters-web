@@ -73,6 +73,7 @@
 .text-weight-md {
   font-weight: var(--font-weight-medium);
 }
+
 .text-weight-semibold {
   font-weight: var(--font-weight-semibold);
 }

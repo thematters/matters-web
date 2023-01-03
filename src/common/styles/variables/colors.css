@@ -24,7 +24,7 @@
   --color-grey-lighter-active: #ededed;
 
   /* line */
-  --color-line-grey-light: rgba(0, 0, 0, 0.08);
-  --color-line-grey: rgba(0, 0, 0, 0.16);
-  --color-line-grey-dark: rgba(0, 0, 0, 0.24);
+  --color-line-grey-light: rgb(0 0 0 / 8%);
+  --color-line-grey: rgb(0 0 0 / 16%);
+  --color-line-grey-dark: rgb(0 0 0 / 24%);
 }

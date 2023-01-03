@@ -47,9 +47,11 @@
       content: '';
       background: var(--color-grey-light);
     }
+
     &::before {
       left: 0;
     }
+
     &::after {
       right: 0;
     }
@@ -110,6 +112,7 @@
     &.product {
       grid-column: 1 / span 4;
     }
+
     &.brandBusiness {
       grid-column: 5 / span 4;
     }
@@ -127,6 +130,7 @@
     &.product {
       grid-column: 3 / span 4;
     }
+
     &.brandBusiness {
       grid-column: 7 / span 4;
     }
@@ -134,6 +138,7 @@
     &.dev {
       grid-column: 3 / span 8;
     }
+
     &.community {
       grid-column: 3 / span 8;
     }

@@ -35,7 +35,7 @@
       left: calc(100% + 0.5rem);
       width: 0.5rem;
       height: 0.5rem;
-      background: currentColor;
+      background: currentcolor;
       border-radius: 50%;
     }
   }
@@ -72,6 +72,7 @@
         transform: rotate(180deg);
       }
     }
+
     &.negative {
       color: var(--color-red);
       background-color: var(--color-red-lighter);
@@ -98,6 +99,7 @@
       & :global(> *) {
         margin-left: 0;
       }
+
       & :global(> * + *) {
         margin-left: var(--spacing-x-tight);
       }
@@ -129,6 +131,7 @@
     & .title {
       color: var(--color-black);
     }
+
     & .value {
       font-size: var(--font-size-xl);
       font-weight: var(--font-weight-bold);

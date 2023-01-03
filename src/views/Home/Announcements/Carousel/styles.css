@@ -86,13 +86,14 @@ header {
         font-size: var(--font-size-xm);
         -webkit-line-clamp: 1;
       }
+
       & p {
         @mixin line-clamp;
 
         margin-top: var(--spacing-xx-tight);
         font-size: var(--font-size-sm-s);
         line-height: 1.25rem;
-        color: rgba(255, 255, 255, 0.8);
+        color: rgb(255 255 255 / 80%);
         -webkit-line-clamp: 1;
       }
     }
@@ -108,13 +109,13 @@ header {
   height: 0.25rem;
   margin-right: var(--spacing-x-tight);
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.7);
-  border: 2px solid rgba(255, 255, 255, 0);
+  background: rgb(255 255 255 / 70%);
+  border: 2px solid rgb(255 255 255 / 0%);
   border-radius: 100%;
   transition-property: border-color, border-width, background-color;
 
   &.selected {
-    background: rgba(255, 255, 255, 1);
+    background: rgb(255 255 255 / 100%);
     border-color: var(--color-white);
     border-width: 4px;
   }
