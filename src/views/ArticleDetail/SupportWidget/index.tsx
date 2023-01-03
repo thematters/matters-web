@@ -1,5 +1,6 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
+import jump from 'jump.js'
 import { useContext, useEffect, useState } from 'react'
 
 import {
@@ -87,6 +88,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       }
       setCurrency(payload.currency)
       setShowAvatarAnimation(true)
+
       // HKD
       if (payload.currency === CURRENCY.HKD) {
         setShowAnimation(true)
@@ -100,6 +102,10 @@ const SupportWidget = ({ article }: DonationProps) => {
       await sleep(5 * 1000)
       setPlayShipWaiting(false)
       hasDonatedRefetch()
+
+      if (showAnimation) {
+        jump('#animation')
+      }
       return
     }
   )
@@ -107,7 +113,7 @@ const SupportWidget = ({ article }: DonationProps) => {
   return (
     <section className={supportWidgetClasses}>
       {showAnimation && (
-        <section className="donation">
+        <section className="donation" id="animation">
           <Animation
             playShipWaiting={playShipWaiting}
             playEnd={() => {

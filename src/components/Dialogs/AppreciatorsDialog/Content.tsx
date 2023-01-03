@@ -4,12 +4,10 @@ import gql from 'graphql-tag'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
-  InfiniteList,
+  InfiniteScroll,
   QueryError,
-  RowRendererProps,
   Spinner,
   Translate,
-  useResponsive,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ArticleAppreciatorsQuery } from '~/gql/graphql'
@@ -20,16 +18,6 @@ interface AppreciatorsDialogContentProps {
   id: string
   closeDialog: () => void
 }
-
-type Edges = NonNullable<
-  NonNullable<
-    NonNullable<
-      ArticleAppreciatorsQuery['article'] & {
-        __typename: 'Article'
-      }
-    >['appreciationsReceived']
-  >['edges']
->[0]
 
 const ARTICLE_APPRECIATORS = gql`
   query ArticleAppreciators($id: ID!, $after: String) {
@@ -68,7 +56,6 @@ const AppreciatorsDialogContent = ({
   id,
   closeDialog,
 }: AppreciatorsDialogContentProps) => {
-  const isSmallUp = useResponsive('sm-up')
   const { data, loading, error, fetchMore } =
     useQuery<ArticleAppreciatorsQuery>(ARTICLE_APPRECIATORS, {
       variables: { id },
@@ -95,62 +82,21 @@ const AppreciatorsDialogContent = ({
     return null
   }
 
-  const ListRow = ({ index, datum }: RowRendererProps<Edges>) => {
-    const { node, cursor } = datum
-
-    return (
-      <div className="appreciator-item" key={cursor}>
-        {node.sender && (
-          <UserDigest.Rich
-            user={node.sender}
-            avatarBadge={
-              <span className="appreciation-amount">{node.amount}</span>
-            }
-            onClick={() => {
-              analytics.trackEvent('click_feed', {
-                type: 'appreciators',
-                contentType: 'user',
-                location: index,
-                id: node.sender?.id,
-              })
-            }}
-          />
-        )}
-        <style jsx>{styles}</style>
-      </div>
-    )
-  }
-
-  const loadMore = (callback: () => void) => {
+  const loadMore = () => {
     analytics.trackEvent('load_more', {
       type: 'appreciators',
       location: edges.length,
     })
     return fetchMore({
       variables: { after: pageInfo.endCursor },
-      updateQuery: (previousResult, { fetchMoreResult }) => {
-        callback()
-        return mergeConnections({
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
           path: connectionPath,
-        })
-      },
+        }),
     })
   }
-
-  // estimate a safe default height
-  const calcContentMaxHeight = () => {
-    if (window) {
-      const dialogMaxHeight = window.innerHeight * 0.01 * 90
-      const head = 1.5 + (isSmallUp ? 2 + 0.5 : 0.75 * 2)
-      const spacing = 0.75 * 2
-      return dialogMaxHeight - (head + spacing + 1) * 16
-    }
-    return
-  }
-
-  const defaultListMaxHeight = calcContentMaxHeight()
 
   return (
     <>
@@ -166,18 +112,33 @@ const AppreciatorsDialogContent = ({
       />
 
       <Dialog.Content>
-        <div className="dialog-appreciators-list">
-          <InfiniteList
-            data={edges}
-            defaultListMaxHeight={defaultListMaxHeight}
-            defaultRowHeight={70}
-            loader={<Spinner />}
-            loadMore={loadMore}
-            renderer={ListRow}
-            totalCount={totalCount}
-          />
-        </div>
-        <style jsx>{styles}</style>
+        <InfiniteScroll
+          loader={<Spinner />}
+          loadMore={loadMore}
+          hasNextPage={pageInfo.hasNextPage}
+        >
+          {edges.map(({ node, cursor }, index) =>
+            node.sender ? (
+              <div className="dialog-appreciators-list" key={cursor}>
+                <UserDigest.Rich
+                  user={node.sender}
+                  avatarBadge={
+                    <span className="appreciation-amount">{node.amount}</span>
+                  }
+                  onClick={() => {
+                    analytics.trackEvent('click_feed', {
+                      type: 'appreciators',
+                      contentType: 'user',
+                      location: index,
+                      id: node.sender?.id,
+                    })
+                  }}
+                />
+                <style jsx>{styles}</style>
+              </div>
+            ) : null
+          )}
+        </InfiniteScroll>
       </Dialog.Content>
     </>
   )
