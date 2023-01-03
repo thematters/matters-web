@@ -1,13 +1,12 @@
-/**
- * @type {import('next').NextConfig}
- */
-
 const withPlugins = require('next-compose-plugins')
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
 
+/**
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
   /**
    * Build time configs

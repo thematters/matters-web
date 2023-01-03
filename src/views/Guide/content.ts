@@ -1,6 +1,6 @@
 import { GUIDE_LINKS } from '~/common/enums'
 
-export default {
+const content = {
   zh_hant: /* html */ `
 <p>歡迎來到 Matters.News 馬特市！</p>
 
@@ -173,3 +173,5 @@ export default {
 </ul>
 `,
 }
+
+export default content

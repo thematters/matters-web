@@ -31,7 +31,7 @@ const PayToFallback: React.FC<Props> = ({ closeDialog }) => {
               en="The network connection is abnormal, please check and try again"
             />
           </p>
-          <img src={IMAGE_PAYMENT_FAILURE.src} />
+          <img src={IMAGE_PAYMENT_FAILURE.src} alt="payment failure" />
         </section>
       </Dialog.Content>
       <Dialog.Footer>

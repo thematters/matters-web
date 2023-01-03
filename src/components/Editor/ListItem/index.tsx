@@ -13,7 +13,7 @@ type ListItemProps = {
 
 const CoverIndicator = ({ cover }: { cover?: string | null }) => (
   <span className="rect">
-    {cover ? <img src={cover} /> : <IconAdd16 size="xs" />}
+    {cover ? <img src={cover} alt="cover" /> : <IconAdd16 size="xs" />}
     <style jsx>{styles}</style>
   </span>
 )

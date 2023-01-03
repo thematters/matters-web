@@ -85,7 +85,7 @@ const Step = ({
 
   return (
     <section className="step">
-      <img src={src} />
+      <img src={src} alt="illustration" />
       <p className="title">
         <span className="number">{step}.</span>
         <Translate

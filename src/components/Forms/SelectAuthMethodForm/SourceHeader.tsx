@@ -214,7 +214,7 @@ const SourceHeader = ({ source }: { source: UNIVERSAL_AUTH_SOURCE }) => {
 
   return (
     <section className="source-header">
-      <img src={AUTH_SOURCE_IMG[source].image} />
+      <img src={AUTH_SOURCE_IMG[source].image} alt="banner image" />
 
       <h3 className="title">
         <TextIcon size="xm" weight="md">

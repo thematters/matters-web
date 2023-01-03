@@ -53,7 +53,7 @@ const Selector: React.FC<SelectorProps> = ({
                 lang,
               })}
             >
-              <img src={asset.path} />
+              <img src={asset.path} alt="cover" />
 
               {asset.path === selected?.path && (
                 <IconChecked size="md" color="green" />
