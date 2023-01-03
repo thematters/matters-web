@@ -83,11 +83,6 @@ const SupportWidget = ({ article }: DonationProps) => {
   const requestForDonation = article.requestForDonation
   const replyToDonator = hasDonatedArticle?.replyToDonator
 
-  useEffect(() => {
-    if (showAnimation) {
-      jump('#animation', { offset: -10 })
-    }
-  }, [showAnimation])
 
   useEventListener(
     SUPPORT_SUCCESS_ANIMATION,
@@ -113,7 +108,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       hasDonatedRefetch()      
 
       if (showAnimation) {
-        jump('#animation', { offset: -10 })
+        jump('#animation')
       }
       return
     }
