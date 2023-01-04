@@ -157,7 +157,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       onSubmit={(values) => {
         const path = toPath({
           page: 'search',
-          q: values.q.slice(0, 100),
+          q: values.q.slice(0, 60),
           type,
         })
 
@@ -196,6 +196,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                   setSearch(e.target.value)
                 }}
                 value={values.q}
+                maxLength={60}
               />
 
               <SearchButton />
@@ -256,6 +257,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 }}
                 onFocus={openDropdown}
                 onClick={openDropdown}
+                maxLength={60}
               />
 
               <SearchButton />
