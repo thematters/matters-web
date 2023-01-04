@@ -31,6 +31,7 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
 
   return (
     <ShareDialog
+      disableNativeShare
       title={draft.article.title}
       path={encodeURI(path.href)}
       description={
