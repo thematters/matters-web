@@ -18,8 +18,8 @@ interface PreferenceProps {
 const Preference = ({ settings, toggle }: PreferenceProps) => {
   const { lang } = useContext(LanguageContext)
   const label = translate({
-    zh_hant: '電子信箱通知',
-    zh_hans: '邮箱通知',
+    zh_hant: 'Matters 日報通知',
+    zh_hans: 'Matters 日報通知',
     en: 'Email Notification',
     lang,
   })
