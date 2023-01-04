@@ -82,7 +82,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
               spacing="xxtight"
               color="grey-dark"
             >
-              {numAbbr(tag.numAuthors)}
+              {numAbbr(tag.numAuthors, 1)}
             </TextIcon>
 
             <TextIcon
@@ -91,7 +91,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
               spacing="xxtight"
               color="grey-dark"
             >
-              {numAbbr(tag.numArticles)}
+              {numAbbr(tag.numArticles, 1)}
             </TextIcon>
           </section>
         </header>

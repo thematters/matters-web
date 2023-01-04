@@ -217,7 +217,7 @@ const CircleProfile = () => {
                   aria-haspopup="dialog"
                 >
                   <span className="count">
-                    {numAbbr(circle.members.totalCount)}
+                    {numAbbr(circle.members.totalCount, 1)}
                   </span>
                   <Translate id="members" />
                 </button>
@@ -232,7 +232,7 @@ const CircleProfile = () => {
                   aria-haspopup="dialog"
                 >
                   <span className="count">
-                    {numAbbr(circle.followers.totalCount)}
+                    {numAbbr(circle.followers.totalCount, 1)}
                   </span>
                   <Translate id="follower" />
                 </button>

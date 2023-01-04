@@ -74,7 +74,7 @@ const Footer = ({ circle }: Props) => {
             lang,
           })}
         >
-          {numAbbr(members.totalCount)}
+          {numAbbr(members.totalCount, 1)}
         </TextIcon>
 
         <TextIcon
@@ -89,7 +89,7 @@ const Footer = ({ circle }: Props) => {
             lang,
           })}
         >
-          {numAbbr(works.totalCount)}
+          {numAbbr(works.totalCount, 1)}
         </TextIcon>
 
         {price && (

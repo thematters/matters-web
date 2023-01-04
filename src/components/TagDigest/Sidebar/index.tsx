@@ -79,7 +79,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
               spacing="xxtight"
               color="grey-dark"
             >
-              {numAbbr(tag.numAuthors)}
+              {numAbbr(tag.numAuthors, 1)}
             </TextIcon>
 
             <TextIcon
@@ -88,7 +88,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
               spacing="xxtight"
               color="grey-dark"
             >
-              {numAbbr(tag.numArticles)}
+              {numAbbr(tag.numArticles, 1)}
             </TextIcon>
           </section>
         </section>
