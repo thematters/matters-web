@@ -78,11 +78,13 @@ const SupportWidget = ({ article }: DonationProps) => {
     if (isViewerDonated) {
       setSupported(true)
     }
-  }, [isViewerDonated])
+    if (showAnimation) {
+      jump('#animation')
+    }
+  }, [isViewerDonated, showAnimation])
 
   const requestForDonation = article.requestForDonation
   const replyToDonator = hasDonatedArticle?.replyToDonator
-
 
   useEventListener(
     SUPPORT_SUCCESS_ANIMATION,
@@ -105,11 +107,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       setShowAnimation(true)
       await sleep(5 * 1000)
       setPlayShipWaiting(false)
-      hasDonatedRefetch()      
-
-      if (showAnimation) {
-        jump('#animation')
-      }
+      hasDonatedRefetch()
       return
     }
   )
