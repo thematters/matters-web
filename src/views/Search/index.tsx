@@ -15,7 +15,6 @@ import {
 } from '~/components'
 
 import AggregateResults from './AggregateResults'
-import styles from './styles.css'
 // import EmptySearch from './EmptySearch'
 
 const Search = () => {
