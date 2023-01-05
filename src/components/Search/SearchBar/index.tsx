@@ -157,7 +157,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       onSubmit={(values) => {
         const path = toPath({
           page: 'search',
-          q: values.q.slice(0, MAX_SEARCH_KEY_LENGTH),
+          q: encodeURIComponent(values.q.slice(0, MAX_SEARCH_KEY_LENGTH)),
           type,
         })
 
