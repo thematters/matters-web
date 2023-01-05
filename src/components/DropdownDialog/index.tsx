@@ -154,7 +154,7 @@ const BaseDropdownDialog = ({
     <>
       {children({ openDialog: toggle, type })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} {...dialog} slideIn>
+      <Dialog isOpen={show} onDismiss={closeDialog} {...dialog}>
         <Dialog.Header
           title={dialog.title}
           closeDialog={closeDialog}
