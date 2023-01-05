@@ -1,6 +1,11 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { Fragment, useEffect, useState } from 'react'
 
+import {
+  MAX_QUICK_SEARCH_KEY_LENGTH,
+  MIN_QUICK_SEARCH_KEY_LENGTH,
+  SEARCH_START_FLAG,
+} from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Menu,
@@ -50,13 +55,18 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
     ;(async () => {
       clearData()
       if (
-        '@#＠＃'.includes(searchKey[0]) &&
-        (searchKey.length < 3 || searchKey.length > 11)
+        SEARCH_START_FLAG.includes(searchKey[0]) &&
+        (searchKey.length < MIN_QUICK_SEARCH_KEY_LENGTH + 1 ||
+          searchKey.length > MAX_QUICK_SEARCH_KEY_LENGTH + 1)
       ) {
         return
       }
 
-      if (searchKey.length < 2 || searchKey.length > 10) return
+      if (
+        searchKey.length < MIN_QUICK_SEARCH_KEY_LENGTH ||
+        searchKey.length > MAX_QUICK_SEARCH_KEY_LENGTH
+      )
+        return
 
       setLoading(true)
       // Why not useLazyQuery 👇🔗

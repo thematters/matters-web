@@ -2,7 +2,7 @@ import { Formik } from 'formik'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
-import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
+import { INPUT_DEBOUNCE, MAX_SEARCH_KEY_LENGTH, Z_INDEX } from '~/common/enums'
 import { getSearchType, toPath, translate } from '~/common/utils'
 import {
   Button,
@@ -157,7 +157,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       onSubmit={(values) => {
         const path = toPath({
           page: 'search',
-          q: values.q.slice(0, 60),
+          q: values.q.slice(0, MAX_SEARCH_KEY_LENGTH),
           type,
         })
 
@@ -196,7 +196,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                   setSearch(e.target.value)
                 }}
                 value={values.q}
-                maxLength={60}
+                maxLength={MAX_SEARCH_KEY_LENGTH}
               />
 
               <SearchButton />
@@ -257,7 +257,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 }}
                 onFocus={openDropdown}
                 onClick={openDropdown}
-                maxLength={60}
+                maxLength={MAX_SEARCH_KEY_LENGTH}
               />
 
               <SearchButton />
