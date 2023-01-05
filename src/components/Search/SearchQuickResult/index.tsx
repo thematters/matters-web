@@ -74,7 +74,9 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
       const response = await client.query({
         query: QUICK_RESULT,
         variables: {
-          key: searchKey,
+          key: SEARCH_START_FLAG.includes(searchKey[0])
+            ? searchKey.slice(1)
+            : searchKey,
           version: version === '' ? undefined : version,
         },
         fetchPolicy: 'no-cache',

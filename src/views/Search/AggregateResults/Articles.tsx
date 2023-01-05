@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 
+import { SEARCH_START_FLAG } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
@@ -30,7 +31,10 @@ const AggregateArticleResults = () => {
     useQuery<SearchAggregateArticlesPublicQuery>(
       SEARCH_AGGREGATE_ARTICLES_PUBLIC,
       {
-        variables: { key: q, version: version === '' ? undefined : version },
+        variables: {
+          key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+          version: version === '' ? undefined : version,
+        },
         fetchPolicy: 'network-only',
       }
     )

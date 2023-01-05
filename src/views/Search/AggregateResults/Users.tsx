@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 
+import { SEARCH_START_FLAG } from '~/common/enums'
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 import {
   EmptySearch,
@@ -28,7 +29,10 @@ const AggregateUserResults = () => {
   // public data
   const { data, loading, fetchMore } =
     useQuery<SearchAggregateUsersPublicQuery>(SEARCH_AGGREGATE_USERS_PUBLIC, {
-      variables: { key: q, version: version === '' ? undefined : version },
+      variables: {
+        key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+        version: version === '' ? undefined : version,
+      },
       fetchPolicy: 'network-only',
     })
 

@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { Fragment } from 'react'
 
+import { SEARCH_START_FLAG } from '~/common/enums'
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 import {
   EmptySearch,
@@ -30,7 +31,10 @@ const AggregateTagResults = () => {
   const { data, loading, fetchMore } = useQuery<SearchAggregateTagsPublicQuery>(
     SEARCH_AGGREGATE_TAGS_PUBLIC,
     {
-      variables: { key: q, version: version === '' ? undefined : version },
+      variables: {
+        key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+        version: version === '' ? undefined : version,
+      },
       fetchPolicy: 'network-only',
     }
   )
