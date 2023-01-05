@@ -13,7 +13,6 @@
 
 .active-outline-auto {
   &:not(.disabled) {
-    &:hover,
     &:focus {
       outline: auto;
     }
