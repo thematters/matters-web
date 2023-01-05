@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext, useEffect } from 'react'
 
+import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   validateComparedPassword,
@@ -110,13 +111,13 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
     <Form onSubmit={handleSubmit}>
       {isInPassword && (
         <Form.PinInput
-          length={6}
+          length={PAYMENT_PASSSWORD_LENGTH}
           name="password"
           value={values.password}
           error={touched.password && errors.password}
           hint={<Translate id="hintPaymentPassword" />}
           onChange={(value) => {
-            const shouldValidate = value.length === 6
+            const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
             setTouched({ password: true }, shouldValidate)
             setFieldValue('password', value, shouldValidate)
           }}
@@ -124,13 +125,13 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
       )}
       {isInComparedPassword && (
         <Form.PinInput
-          length={6}
+          length={PAYMENT_PASSSWORD_LENGTH}
           name="compared-password"
           value={values.comparedPassword}
           error={touched.comparedPassword && errors.comparedPassword}
           hint={<Translate id="hintPaymentPassword" />}
           onChange={(value) => {
-            const shouldValidate = value.length === 6
+            const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
             setTouched({ comparedPassword: true }, shouldValidate)
             setFieldValue('comparedPassword', value, shouldValidate)
           }}
@@ -141,10 +142,14 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
 
   useEffect(() => {
     // submit on validate
-    if (isValid && values.password && values.comparedPassword) {
+    if (
+      isValid &&
+      values.password.length === PAYMENT_PASSSWORD_LENGTH &&
+      values.comparedPassword.length === PAYMENT_PASSSWORD_LENGTH
+    ) {
       handleSubmit()
     }
-  }, [isValid])
+  }, [isValid, values.password, values.comparedPassword])
 
   if (isSubmitting) {
     return (

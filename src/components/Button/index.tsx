@@ -117,6 +117,7 @@ export type ButtonProps = {
   disabled?: boolean
   form?: string
   rel?: string
+  tabIndex?: number
   onClick?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
   onMouseEnter?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
   onMouseLeave?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any

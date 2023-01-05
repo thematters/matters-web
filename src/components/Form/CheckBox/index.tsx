@@ -38,7 +38,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
           color="grey-dark"
           spacing="xtight"
         >
-          {hint}
+          <span>{hint}</span>
         </TextIcon>
 
         <VisuallyHidden>

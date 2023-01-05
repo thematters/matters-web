@@ -4,7 +4,10 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 import { useAccount, useNetwork } from 'wagmi'
 
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import {
+  PAYMENT_CURRENCY as CURRENCY,
+  PAYMENT_PASSSWORD_LENGTH,
+} from '~/common/enums'
 import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import {
   Button,
@@ -123,9 +126,6 @@ const Confirm: React.FC<FormProps> = ({
             recipientId: recipient.id,
             targetId,
           },
-          // optimisticResponse: {
-
-          // },
           update: (cache) => {
             updateDonation({
               cache,
@@ -155,12 +155,12 @@ const Confirm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.PinInput
-        length={6}
+        length={PAYMENT_PASSSWORD_LENGTH}
         name="password"
         value={values.password}
         error={touched.password && errors.password}
         onChange={(value) => {
-          const shouldValidate = value.length === 6
+          const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
           setTouched({ password: true }, shouldValidate)
           setFieldValue('password', value, shouldValidate)
         }}
@@ -169,10 +169,10 @@ const Confirm: React.FC<FormProps> = ({
   )
 
   useEffect(() => {
-    if (isValid && values.password) {
+    if (isValid && values.password.length === PAYMENT_PASSSWORD_LENGTH) {
       handleSubmit()
     }
-  }, [isValid])
+  }, [isValid, values.password])
 
   const balance = data?.viewer?.wallet.balance.HKD || 0
   const isWalletInsufficient = balance < amount

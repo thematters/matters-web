@@ -45,6 +45,7 @@ const PublishedState = ({ article, draft, cancel }: Props) => {
 
   return (
     <ShareDialog
+      disableNativeShare
       title={article.title}
       path={encodeURI(path.href)}
       description={

@@ -46,6 +46,8 @@ export const PLATFORM_FEE = {
   HKD: '3.4% + HKD 2.35',
 }
 
+export const PAYMENT_PASSSWORD_LENGTH = 6
+
 /**
  * Error Messages
  *

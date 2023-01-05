@@ -6,6 +6,7 @@ import { useContext, useRef } from 'react'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MINIMAL_PAYOUT_AMOUNT,
+  PAYMENT_PASSSWORD_LENGTH,
   Z_INDEX,
 } from '~/common/enums'
 import {
@@ -218,13 +219,13 @@ const BaseConfirm: React.FC<FormProps> = ({
           </ConfirmTable>
 
           <Form.PinInput
-            length={6}
+            length={PAYMENT_PASSSWORD_LENGTH}
             name="password"
             value={values.password}
             error={touched.password && errors.password}
             hint={<Translate id="hintPaymentPassword" />}
             onChange={(value) => {
-              const shouldValidate = value.length === 6
+              const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
               setTouched({ amount: true, password: true }, shouldValidate)
               setFieldValue('password', value, shouldValidate)
             }}
