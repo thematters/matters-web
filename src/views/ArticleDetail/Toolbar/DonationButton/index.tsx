@@ -2,6 +2,13 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  ADD_TOAST,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  TEXT,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import { analytics, numAbbr, translate } from '~/common/utils'
+import {
   Button,
   DonationDialog,
   IconDonate24,
@@ -10,22 +17,15 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
-
 import {
-  ADD_TOAST,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  TEXT,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-import { analytics, numAbbr, translate } from '~/common/utils'
-
-import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
-import { DonationButtonArticle } from './__generated__/DonationButtonArticle'
+  ArticleDetailPublicQuery,
+  DonationButtonArticleFragment,
+} from '~/gql/graphql'
 
 interface DonationButtonProps {
-  article: DonationButtonArticle
+  article: DonationButtonArticleFragment
   disabled: boolean
-  articleDetail: ArticleDetailPublic_article
+  articleDetail: NonNullable<ArticleDetailPublicQuery['article']>
 }
 
 const fragments = {

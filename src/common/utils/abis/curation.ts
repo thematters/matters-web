@@ -1,4 +1,4 @@
-export const curationABI = [
+export const CurationABI = [
   { inputs: [], name: 'InvalidURI', type: 'error' },
   { inputs: [], name: 'SelfCuration', type: 'error' },
   { inputs: [], name: 'TransferFailed', type: 'error' },

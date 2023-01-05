@@ -27,7 +27,7 @@ const ChangeEmail = () => {
   )
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'changeEmail' }} />
 
       {currStep === 'request' && (

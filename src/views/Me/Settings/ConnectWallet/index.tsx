@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { PATHS } from '~/common/enums'
 import {
   EmptyWarning,
   Head,
@@ -9,8 +10,6 @@ import {
   ViewerContext,
   WalletAuthForm,
 } from '~/components'
-
-import { PATHS } from '~/common/enums'
 
 type Step = 'wallet-select' | 'wallet-connect'
 
@@ -23,7 +22,7 @@ const ConnectWallet = () => {
 
   if (viewerEthAddress) {
     return (
-      <Layout.Main bgColor="grey-lighter">
+      <Layout.Main smBgColor="grey-lighter">
         <Head title={{ id: 'loginWithWallet' }} />
 
         <Layout.Header
@@ -45,7 +44,7 @@ const ConnectWallet = () => {
   }
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'loginWithWallet' }} />
 
       {currStep === 'wallet-select' && (

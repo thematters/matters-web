@@ -1,0 +1,62 @@
+import { featureSupportedChains } from '~/common/utils'
+import { Dialog, Translate } from '~/components'
+
+import styles from './styles.css'
+
+type CompleteProps = {
+  txHash: string
+}
+
+const Complete: React.FC<CompleteProps> = ({ txHash }) => {
+  const targetNetwork = featureSupportedChains.ens[0]
+  const { name: explorerName, url: explorerUrl } =
+    targetNetwork.blockExplorers?.default!
+
+  return (
+    <>
+      <Dialog.Content>
+        <section className="content">
+          <p>
+            <Translate
+              zh_hans="已成功关联，稍后完成。在&nbsp;"
+              zh_hant="已成功關聯，稍後完成。在&nbsp;"
+              en="Successfully linked. It would take couple hours to resolve. View transaction on&nbsp;"
+            />
+            <a
+              href={`${explorerUrl}/tx/${txHash}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {explorerName}
+            </a>
+            <Translate
+              zh_hans="&nbsp;查看记录"
+              zh_hant="&nbsp;查看紀錄"
+              en="."
+            />
+          </p>
+        </section>
+      </Dialog.Content>
+
+      <Dialog.Footer>
+        <Dialog.Footer.Button
+          bgColor="grey-lighter"
+          textColor="black"
+          onClick={() => {
+            window.location.reload()
+          }}
+        >
+          <Translate
+            zh_hans="回到个人页"
+            zh_hant="回到個人頁"
+            en="Back to Profile"
+          />
+        </Dialog.Footer.Button>
+      </Dialog.Footer>
+
+      <style jsx>{styles}</style>
+    </>
+  )
+}
+
+export default Complete

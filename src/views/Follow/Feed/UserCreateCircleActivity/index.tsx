@@ -1,13 +1,11 @@
-import { Translate, UserDigest } from '~/components'
-
 import { analytics } from '~/common/utils'
+import { Translate, UserDigest } from '~/components'
+import { UserCreateCircleActivityFragment } from '~/gql/graphql'
 
 import UnfollowUserActionButton from '../DropdownActions/UnfollowUser'
 import FeedCircle from '../FollowingFeedCircle'
 import FeedHead from '../FollowingFeedHead'
 import { fragments } from './gql'
-
-import { UserCreateCircleActivity as Activity } from './__generated__/UserCreateCircleActivity'
 
 const UserCreateCircleActivity = ({
   actor,
@@ -15,7 +13,7 @@ const UserCreateCircleActivity = ({
   createdAt,
   location,
   __typename,
-}: Activity & { location: number }) => {
+}: UserCreateCircleActivityFragment & { location: number }) => {
   return (
     <FeedCircle
       header={
@@ -32,7 +30,7 @@ const UserCreateCircleActivity = ({
       onClick={() => {
         analytics.trackEvent('click_feed', {
           type: 'following',
-          contentType: __typename,
+          contentType: __typename!,
           location,
           id: node.id,
         })

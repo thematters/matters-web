@@ -7,7 +7,7 @@
   visibility: visible;
   border-radius: var(--spacing-x-tight);
   box-shadow: var(--shadow-light);
-  animation: toastFadeIn 0.25s ease;
+  animation: toast-fade-in 0.25s ease;
 
   &.top {
     @mixin flex-start-space-between;
@@ -68,7 +68,7 @@
 
 .black {
   color: var(--color-white);
-  background: rgba(0, 0, 0, 0.8);
+  background: rgb(0 0 0 / 80%);
 }
 
 .clearButton {
@@ -78,7 +78,7 @@
   color: black;
 }
 
-@keyframes toastFadeIn {
+@keyframes toast-fade-in {
   from {
     visibility: hidden;
     opacity: 0;

@@ -2,24 +2,18 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import { MattersArticleEditor } from '@matters/matters-editor'
 import { FC, useContext } from 'react'
 
-import { LanguageContext } from '~/components'
-import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
-
 import { ADD_TOAST, ASSET_TYPE } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.article.css'
 import themeStyles from '~/common/styles/vendors/quill.bubble.css'
+import { LanguageContext } from '~/components'
+import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
+import { EditorDraftFragment, SearchUsersQuery } from '~/gql/graphql'
 
 import MentionUserList from '../MentionUserList'
 import styles from './styles.css'
 
-import {
-  SearchUsers,
-  SearchUsers_search_edges_node_User,
-} from '~/components/GQL/queries/__generated__/SearchUsers'
-import { EditorDraft } from '../__generated__/EditorDraft'
-
 interface Props {
-  draft: EditorDraft
+  draft: EditorDraftFragment
 
   isReviseMode?: boolean
   isSummaryReadOnly?: boolean
@@ -41,6 +35,12 @@ interface Props {
   }>
 }
 
+type SearchUsersSearchEdgesNodeUser = NonNullable<
+  NonNullable<SearchUsersQuery['search']['edges']>[0]['node'] & {
+    __typename: 'User'
+  }
+>
+
 const ArticleEditor: FC<Props> = ({
   draft,
 
@@ -51,7 +51,7 @@ const ArticleEditor: FC<Props> = ({
   update,
   upload,
 }) => {
-  const [search, searchResult] = useLazyQuery<SearchUsers>(SEARCH_USERS)
+  const [search, searchResult] = useLazyQuery<SearchUsersQuery>(SEARCH_USERS)
   const { lang } = useContext(LanguageContext)
 
   const { id, content, publishState, summary, summaryCustomized, title } = draft
@@ -62,7 +62,7 @@ const ArticleEditor: FC<Props> = ({
 
   const mentionUsers = (data?.search.edges || []).map(
     ({ node }: any) => node
-  ) as SearchUsers_search_edges_node_User[]
+  ) as SearchUsersSearchEdgesNodeUser[]
 
   const mentionKeywordChange = (keyword: string) => {
     search({ variables: { search: keyword, exclude: 'blocked' } })

@@ -1,9 +1,8 @@
 import _get from 'lodash/get'
 import { useEffect } from 'react'
 
-import { Dialog, Translate, useDialogSwitch } from '~/components'
-
 import { captureClicks, dom } from '~/common/utils'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 import globalStyles from './styles.global.css'
 
@@ -104,7 +103,7 @@ const BaseGoogleSearchDialog = ({ children }: GoogleSearchDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           closeDialog={closeDialog}
           title={<Translate zh_hant="Google 搜尋" zh_hans="Google 搜索" />}

@@ -2,13 +2,11 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { Form, Translate, usePullToRefresh, ViewerContext } from '~/components'
-
 import { PATHS } from '~/common/enums'
+import { Form, Translate, usePullToRefresh, ViewerContext } from '~/components'
+import { ViewerTotalBlockCountQuery } from '~/gql/graphql'
 
 import ChangeUserNameAsk from './ChangeUserNameAsk'
-
-import { ViewerTotalBlockCount } from './__generated__/ViewerTotalBlockCount'
 
 const VIEWER_TOTAL_BLOCK_COUNT = gql`
   query ViewerTotalBlockCount {
@@ -23,7 +21,7 @@ const VIEWER_TOTAL_BLOCK_COUNT = gql`
 
 const AccountSettings = () => {
   const viewer = useContext(ViewerContext)
-  const { data, refetch } = useQuery<ViewerTotalBlockCount>(
+  const { data, refetch } = useQuery<ViewerTotalBlockCountQuery>(
     VIEWER_TOTAL_BLOCK_COUNT,
     {
       errorPolicy: 'none',

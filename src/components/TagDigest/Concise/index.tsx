@@ -1,15 +1,18 @@
 import gql from 'graphql-tag'
 
-import { IconArticle16, IconHashTag16, TextIcon } from '~/components'
-
-import { numAbbr } from '~/common/utils'
+import { numAbbr, toPath } from '~/common/utils'
+import {
+  IconArticle16,
+  IconHashTag16,
+  LinkWrapper,
+  TextIcon,
+} from '~/components'
+import { TagDigestConciseTagFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { TagDigestConciseTag } from './__generated__/TagDigestConciseTag'
-
 export type TagDigestConciseTagProps = {
-  tag: TagDigestConciseTag
+  tag: TagDigestConciseTagFragment
   textSize?: 'sm' | 'md-s'
   showArticlesNum?: boolean
 }
@@ -29,30 +32,36 @@ const Concise = ({
   textSize = 'md-s',
   showArticlesNum,
 }: TagDigestConciseTagProps) => {
+  const path = toPath({
+    page: 'tagDetail',
+    tag,
+  })
   return (
-    <section className="content">
-      <TextIcon
-        icon={<IconHashTag16 color="grey" />}
-        color="black"
-        size={textSize}
-        spacing="xxtight"
-        weight="md"
-      >
-        {tag.content}
-      </TextIcon>
-
-      {showArticlesNum && (
+    <LinkWrapper {...path}>
+      <section className="content">
         <TextIcon
-          icon={<IconArticle16 color="grey-dark" size="xs" />}
-          size="xs"
+          icon={<IconHashTag16 color="grey" />}
+          color="black"
+          size={textSize}
           spacing="xxtight"
-          color="grey-dark"
+          weight="md"
         >
-          {numAbbr(tag.numArticles)}
+          {tag.content}
         </TextIcon>
-      )}
-      <style jsx>{styles}</style>
-    </section>
+
+        {showArticlesNum && (
+          <TextIcon
+            icon={<IconArticle16 color="grey-dark" size="xs" />}
+            size="xs"
+            spacing="xxtight"
+            color="grey-dark"
+          >
+            {numAbbr(tag.numArticles)}
+          </TextIcon>
+        )}
+        <style jsx>{styles}</style>
+      </section>
+    </LinkWrapper>
   )
 }
 

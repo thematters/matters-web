@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { PATHS, TEXT } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import {
   IconNavHome24,
   IconNavHomeActive24,
@@ -9,9 +11,6 @@ import {
   ViewerContext,
   WriteButton,
 } from '~/components'
-
-import { PATHS, TEXT } from '~/common/enums'
-import { toPath } from '~/common/utils'
 
 import UnreadIcon from '../UnreadIcon'
 import NavListItem from './NavListItem'

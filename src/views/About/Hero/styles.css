@@ -110,7 +110,7 @@
 
           & a {
             @mixin border-grey;
-            @mixin all-transition;
+            @mixin transition;
 
             position: relative;
             display: block;
@@ -120,6 +120,7 @@
             cursor: inherit;
             background: var(--color-grey-lighter);
             border-radius: 0.5rem;
+            transition-property: border-color;
 
             &:hover,
             &:focus {
@@ -162,6 +163,7 @@
 
     & .container {
       grid-column: content;
+
       & .emblaViewport {
         & ul {
           & li {
@@ -190,11 +192,14 @@
 
     & .container {
       grid-column: content;
+
       & .emblaViewport {
         padding-top: 17rem;
+
         & ul {
           & li {
             flex: 0 0 auto;
+
             & a {
               width: 344px;
               height: 206px;

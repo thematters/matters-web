@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
   Button,
   IconAvatarEmpty24,
@@ -9,15 +10,11 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
-
-import { ADD_TOAST } from '~/common/enums'
+import { TagFragmentFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-// import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
-import { TagFragment } from '../__generated__/TagFragment'
-
-const Owner = ({ tag }: { tag: TagFragment }) => {
+const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
   const viewer = useContext(ViewerContext)
 
   const forbid = () => {
@@ -48,7 +45,7 @@ const Owner = ({ tag }: { tag: TagFragment }) => {
             <Translate
               zh_hant="此標籤目前無人主理"
               zh_hans="此标签目前無人主理"
-              en="this tag has no manager currently"
+              en="This tag has no manager currently"
             />
           </TextIcon>
         </section>
@@ -65,7 +62,7 @@ const Owner = ({ tag }: { tag: TagFragment }) => {
                 aria-haspopup="dialog"
               >
                 <TextIcon weight="md" size="xs">
-                  <Translate zh_hant="認領" zh_hans="认领" en="maintain" />
+                  <Translate zh_hant="認領" zh_hans="认领" en="Maintain" />
                 </TextIcon>
               </Button>
             )}

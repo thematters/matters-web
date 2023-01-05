@@ -1,13 +1,11 @@
 import gql from 'graphql-tag'
 
-import { Tag, TagExposureTracker } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import { analytics } from '~/common/utils'
+import { Tag, TagExposureTracker } from '~/components'
+import { TagListArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { TagListArticle } from './__generated__/TagListArticle'
 
 const fragments = {
   article: gql`
@@ -20,7 +18,7 @@ const fragments = {
   `,
 }
 
-const TagList = ({ article }: { article: TagListArticle }) => {
+const TagList = ({ article }: { article: TagListArticleFragment }) => {
   if (!article || !article.tags || article.tags.length <= 0) {
     return null
   }

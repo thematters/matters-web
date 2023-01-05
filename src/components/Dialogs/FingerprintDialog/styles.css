@@ -1,35 +1,25 @@
 .container {
-  padding: var(--spacing-base) var(--spacing-base) var(--spacing-xx-loose);
+  padding: var(--spacing-base);
   text-align: left;
-  background-color: var(--color-grey-lighter);
 
-  & > section:global(.card) + section:global(.card) {
+  & :global(> .card + .card) {
     margin-top: var(--spacing-base);
-  }
-
-  @media (--sm-up) {
-    padding: var(--spacing-base);
   }
 }
 
 .gateways {
-  margin-bottom: var(--spacing-base);
-
   & ul {
     @mixin hide-scrollbar;
 
-    max-height: 12rem;
     padding: var(--spacing-x-tight) var(--spacing-base) 0;
     margin: 0 calc(var(--spacing-base) * -1);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
 
     & li {
       @mixin flex-center-space-between;
 
       position: relative;
       background-color: var(--color-grey-lighter);
-      border-radius: 4px;
+      border-radius: 0.25rem;
 
       & :global(:not(.gateway-url)) {
         flex-shrink: 0;
@@ -45,11 +35,15 @@
         font-size: var(--font-size-md);
         line-height: 2.5rem;
         color: var(--color-grey-darker);
+
+        &.disabled {
+          opacity: 0.5;
+        }
       }
     }
 
-    & > li + li {
-      margin-top: 0.5rem;
+    & li + li {
+      margin-top: var(--spacing-x-tight);
     }
   }
 }
@@ -57,58 +51,40 @@
 .secret {
   @mixin flex-center-space-between;
 
+  margin-top: var(--spacing-base);
   color: var(--color-matters-gold);
+
   & .key {
     @mixin flex-center-space-between;
+  }
 
-    padding: 8px 16px 8px 8px;
-    background: var(--color-yellow-lighter);
-    border-radius: var(--spacing-base);
-
-    & input {
-      max-width: 60px;
-      margin: 0 8px 0 4px;
-      font-family: var(--font-mono);
-      font-size: 1rem;
-      background: transparent;
-    }
+  & .description {
+    color: var(--color-matters-gold);
   }
 }
 
-.subtitle {
+.description {
   font-size: var(--font-size-sm-s);
   font-weight: var(--font-weight-normal);
   color: var(--color-grey);
+
+  &.error {
+    color: var(--color-red);
+  }
 }
 
 .hash {
-  margin-bottom: var(--spacing-x-tight);
-
-  & .data-hash {
-    position: relative;
-
-    & input {
-      padding: var(--spacing-x-tight) var(--spacing-x-loose)
-        var(--spacing-x-tight) var(--spacing-x-tight);
-      font-family: var(--font-mono);
-      font-size: var(--font-size-sm);
-      color: var(--color-matters-gold);
-      background: var(--color-green-lighter);
-    }
-  }
-
   & .copy {
     @mixin flex-center-space-between;
 
     position: relative;
-    padding: 12px 8px;
-    margin: 8px 0 0 0;
+    padding: var(--spacing-tight) var(--spacing-x-tight);
+    margin-top: var(--spacing-x-tight);
     color: var(--color-matters-green);
     background: var(--color-green-lighter);
-    border-radius: 4px;
+    border-radius: 0.25rem;
 
     & input {
-      padding: 0 8px 0 0;
       font-family: var(--font-mono);
       font-size: var(--font-size-sm);
       background: transparent;
@@ -116,19 +92,27 @@
   }
 }
 
-.item {
-  & .title {
-    @mixin flex-center-space-between;
+.warning-card {
+  color: var(--color-matters-gold);
+  background: var(--color-yellow-lighter);
+  border-radius: 0.5rem;
+}
 
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
-    line-height: 1;
-  }
+.warning-input {
+  color: var(--color-matters-green);
+  background: var(--color-green-lighter);
+  border-radius: 0.25rem;
+}
 
-  &:hover,
-  &:focus {
-    & .rect {
-      background: var(--color-grey-light);
-    }
+.warning-card,
+.warning-input {
+  @mixin flex-start-start;
+
+  padding: var(--spacing-x-tight) var(--spacing-base);
+  font-size: var(--font-size-md-s);
+  line-height: 1.5rem;
+
+  & :global(svg) {
+    margin-right: var(--spacing-xx-tight);
   }
 }

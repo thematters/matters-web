@@ -69,4 +69,6 @@ const Item = forwardRef(
   }
 )
 
+Item.displayName = 'PinInput.Item'
+
 export default Item

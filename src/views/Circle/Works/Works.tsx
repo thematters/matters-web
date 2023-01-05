@@ -1,5 +1,7 @@
 import { useContext, useEffect } from 'react'
 
+import { REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptyArticle,
@@ -14,14 +16,10 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-
-import { REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { CircleWorksPublicQuery } from '~/gql/graphql'
 
 import CircleDetailTabs from '../CircleDetailTabs'
 import { CIRCLE_WORKS_PRIVATE, CIRCLE_WORKS_PUBLIC } from './gql'
-
-import { CircleWorksPublic } from './__generated__/CircleWorksPublic'
 
 const CircleDetailWorks = () => {
   const { getQuery } = useRoute()
@@ -39,7 +37,7 @@ const CircleDetailWorks = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<CircleWorksPublic>(CIRCLE_WORKS_PUBLIC, {
+  } = usePublicQuery<CircleWorksPublicQuery>(CIRCLE_WORKS_PUBLIC, {
     variables: { name },
   })
 
@@ -49,7 +47,7 @@ const CircleDetailWorks = () => {
   const { edges, pageInfo } = circle?.articles || {}
 
   // private data
-  const loadPrivate = (publicData?: CircleWorksPublic) => {
+  const loadPrivate = (publicData?: CircleWorksPublicQuery) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }

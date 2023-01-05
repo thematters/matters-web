@@ -5,13 +5,24 @@ import Link from 'next/link'
 import { useContext, useEffect } from 'react'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
+import { ADD_TOAST, PATHS } from '~/common/enums'
+import {
+  analytics,
+  maskAddress,
+  parseFormSubmitErrors,
+  redirectToTarget,
+  translate,
+  validateCode,
+  validateEmail,
+  validateToS,
+  WALLET_ERROR_MESSAGES,
+} from '~/common/utils'
 import {
   Dialog,
   Form,
   IconInfo16,
   LanguageContext,
   Layout,
-  Spacer,
   TextIcon,
   Translate,
   useMutation,
@@ -19,31 +30,16 @@ import {
   ViewerContext,
 } from '~/components'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
-
-import { ADD_TOAST, PATHS, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
 import {
-  analytics,
-  maskAddress,
-  parseFormSubmitErrors,
-  redirectToTarget,
-  storage,
-  translate,
-  validateCode,
-  validateEmail,
-  validateToS,
-  WALLET_ERROR_MESSAGES,
-} from '~/common/utils'
+  AuthResultType,
+  ConfirmVerificationCodeMutation,
+  EthAddressUserQuery,
+  GenerateSigningMessageMutation,
+  WalletLoginMutation,
+} from '~/gql/graphql'
 
 import { ETH_ADDRESS_USER, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
 import styles from './styles.css'
-
-import { AuthResultType } from '@/__generated__/globalTypes'
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
-import { ETHAddressUser } from './__generated__/ETHAddressUser'
-import { GenerateSigningMessage } from './__generated__/GenerateSigningMessage'
-import { WalletLogin } from './__generated__/WalletLogin'
-
-const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -102,18 +98,23 @@ const Connect: React.FC<FormProps> = ({
   const formId = 'wallet-auth-connect-form'
   const fieldMsgId = 'wallet-auth-connect-msg'
 
-  const [generateSigningMessage] = useMutation<GenerateSigningMessage>(
+  const [generateSigningMessage] = useMutation<GenerateSigningMessageMutation>(
     GENERATE_SIGNING_MESSAGE,
     undefined,
     { showToast: false }
   )
-  const [walletLogin] = useMutation<WalletLogin>(WALLET_LOGIN, undefined, {
-    showToast: false,
-  })
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
+  const [walletLogin] = useMutation<WalletLoginMutation>(
+    WALLET_LOGIN,
+    undefined,
+    {
+      showToast: false,
+    }
+  )
+  const [confirmCode] =
+    useMutation<ConfirmVerificationCodeMutation>(CONFIRM_CODE)
 
   const [queryEthAddressUser, { data, loading }] =
-    useLazyQuery<ETHAddressUser>(ETH_ADDRESS_USER)
+    useLazyQuery<EthAddressUserQuery>(ETH_ADDRESS_USER)
 
   const { disconnect } = useDisconnect()
   const { address: account } = useAccount()
@@ -227,11 +228,6 @@ const Connect: React.FC<FormProps> = ({
         })
 
         analytics.identifyUser()
-
-        const token = loginData?.walletLogin.token
-        if (isStaticBuild && token) {
-          storage.set(STORAGE_KEY_AUTH_TOKEN, token)
-        }
 
         if (loginData?.walletLogin.type === AuthResultType.Login) {
           window.dispatchEvent(
@@ -362,8 +358,6 @@ const Connect: React.FC<FormProps> = ({
         />
       )}
 
-      {!isSignUp && <Spacer size="loose" />}
-
       {isSignUp && (
         <Form.CheckBox
           name="tos"
@@ -378,7 +372,7 @@ const Connect: React.FC<FormProps> = ({
                 en="I have read and agree to"
               />
 
-              <Link href={PATHS.TOS}>
+              <Link href={PATHS.TOS} legacyBehavior>
                 <a className="u-link-green" target="_blank">
                   &nbsp;
                   <Translate

@@ -1,14 +1,13 @@
 import classNames from 'classnames'
 import { useContext } from 'react'
 
-import { ViewerContext } from '~/components'
-
 import { ReactComponent as IconCheck1 } from '@/public/static/images/onboarding/check-1.svg'
 import { ReactComponent as IconCheck2 } from '@/public/static/images/onboarding/check-2.svg'
 import { ReactComponent as IconCheck3 } from '@/public/static/images/onboarding/check-3.svg'
 import { ReactComponent as IconCheck4 } from '@/public/static/images/onboarding/check-4.svg'
 import { ReactComponent as IconCheck5 } from '@/public/static/images/onboarding/check-5.svg'
 import IMAGE_GALAXY from '@/public/static/images/onboarding/galaxy.png'
+import { ViewerContext } from '~/components'
 
 import styles from './styles.css'
 

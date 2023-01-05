@@ -1,19 +1,25 @@
 import React from 'react'
 
-import { Card, CircleDigest, DateTime, ResponsiveImage } from '~/components'
-import { UserDigest } from '~/components/UserDigest'
-
 import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
+import {
+  Card,
+  CardProps,
+  CircleDigest,
+  DateTime,
+  ResponsiveImage,
+} from '~/components'
+import { UserDigest } from '~/components/UserDigest'
+import {
+  ArticleDigestFeedArticlePrivateFragment,
+  ArticleDigestFeedArticlePublicFragment,
+} from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
 import FollowButton from './FollowButton'
 import FooterActions, { FooterActionsProps } from './FooterActions'
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { ArticleDigestFeedArticlePrivate } from './__generated__/ArticleDigestFeedArticlePrivate'
-import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFeedArticlePublic'
 
 export type ArticleDigestFeedControls = {
   onClick?: () => any
@@ -24,12 +30,13 @@ export type ArticleDigestFeedControls = {
 }
 
 export type ArticleDigestFeedProps = {
-  article: ArticleDigestFeedArticlePublic &
-    Partial<ArticleDigestFeedArticlePrivate>
+  article: ArticleDigestFeedArticlePublicFragment &
+    Partial<ArticleDigestFeedArticlePrivateFragment>
   header?: React.ReactNode
 } & ArticleDigestFeedControls &
   FooterActionsProps &
-  UtmParams
+  UtmParams &
+  Pick<CardProps, 'is'>
 
 const BaseArticleDigestFeed = ({
   article,
@@ -44,6 +51,7 @@ const BaseArticleDigestFeed = ({
 
   utm_source,
   utm_medium,
+  is,
 
   ...controls
 }: ArticleDigestFeedProps) => {
@@ -68,6 +76,7 @@ const BaseArticleDigestFeed = ({
       spacing={['base', 'base']}
       onClick={onClick}
       testId={TEST_ID.DIGEST_ARTICLE_FEED}
+      is={is}
     >
       {header ||
         (hasCircle && circle && (

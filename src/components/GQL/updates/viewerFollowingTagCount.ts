@@ -2,8 +2,7 @@ import { DataProxy } from 'apollo-cache'
 import gql from 'graphql-tag'
 
 import { ERROR_CODES } from '~/common/enums'
-
-import { ViewerFollowingTagCount } from './__generated__/ViewerFollowingTagCount'
+import { ViewerFollowingTagCountQuery } from '~/gql/graphql'
 
 const VIEWER_FOLLOWING_TAG_COUNT = gql`
   query ViewerFollowingTagCount {
@@ -26,7 +25,7 @@ const update = ({
   type: 'increment' | 'decrement'
 }) => {
   try {
-    const cacheData = cache.readQuery<ViewerFollowingTagCount>({
+    const cacheData = cache.readQuery<ViewerFollowingTagCountQuery>({
       query: VIEWER_FOLLOWING_TAG_COUNT,
     })
 

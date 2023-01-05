@@ -9,7 +9,6 @@ import {
 } from '~/components'
 
 // import { redirectToLogin } from '~/common/utils'
-
 import AnonymousSettings from '../AnonymousSettings'
 import AccountSettings from './Account'
 import UISettings from './UI'
@@ -23,7 +22,7 @@ const Settings = () => {
   }
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={<Layout.Header.Title id="settings" />}

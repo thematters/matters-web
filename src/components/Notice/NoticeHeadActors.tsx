@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 import { Fragment } from 'react'
 
-import { Translate } from '~/components'
-
 import { numAbbr } from '~/common/utils'
+import { Translate } from '~/components'
 
 import NoticeActorName from './NoticeActorName'
 

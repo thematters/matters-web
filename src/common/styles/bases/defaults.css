@@ -9,12 +9,12 @@ html {
   line-height: var(--line-height-base);
   word-break: break-word;
   background-color: var(--color-white);
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeSpeed;
+  text-rendering: optimizespeed;
 }
 
 body {
@@ -30,7 +30,9 @@ body {
 
 a,
 button {
-  @mixin all-transition;
+  @mixin transition;
+
+  transition-property: opacity;
 
   &:disabled,
   &[aria-disabled='true'] {

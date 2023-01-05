@@ -16,6 +16,8 @@ export const EXTERNAL_LINKS = {
   SUPER_LIKE:
     'https://docs.like.co/v/zh/user-guide/likecoin-button/superlike?utm_source=Matters&utm_medium=website&utm_campaign=superlike_funnel',
   PLANET: 'https://www.planetable.xyz/',
+  ENS_DOCS: 'https://docs.ens.domains/',
+  CLOUDFLARE_GATEWAY_LINK: 'https://cloudflare-ipfs.com/ipns/',
 }
 
 export const GUIDE_LINKS = {

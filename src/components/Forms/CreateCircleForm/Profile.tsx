@@ -3,6 +3,15 @@ import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
+import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
+import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import {
+  parseFormSubmitErrors,
+  toPath,
+  translate,
+  validateCircleDisplayName,
+  validateDescription,
+} from '~/common/utils'
 import {
   AvatarUploader,
   CoverUploader,
@@ -14,28 +23,13 @@ import {
   useMutation,
 } from '~/components'
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
-
-import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
-import {
-  parseFormSubmitErrors,
-  toPath,
-  translate,
-  validateCircleDisplayName,
-  validateDescription,
-} from '~/common/utils'
-
-import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
+import { PutCircleMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import {
-  PutCircle,
-  PutCircle_putCircle,
-} from '~/components/GQL/mutations/__generated__/PutCircle'
-
 interface FormProps {
   circle: Pick<
-    PutCircle_putCircle,
+    PutCircleMutation['putCircle'],
     'id' | 'avatar' | 'cover' | 'displayName' | 'description' | '__typename'
   >
   type: 'edit' | 'create'
@@ -57,7 +51,7 @@ const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
 const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
   const router = useRouter()
-  const [update] = useMutation<PutCircle>(PUT_CIRCLE, undefined, {
+  const [update] = useMutation<PutCircleMutation>(PUT_CIRCLE, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)

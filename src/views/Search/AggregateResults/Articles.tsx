@@ -1,6 +1,12 @@
 import { useQuery } from '@apollo/react-hooks'
 
 import {
+  LATER_SEARCH_RESULTS_LENGTH,
+  MAX_SEARCH_RESULTS_LENGTH,
+  SEARCH_START_FLAG,
+} from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
+import {
   ArticleDigestFeed,
   EmptySearch,
   InfiniteScroll,
@@ -9,14 +15,11 @@ import {
   Translate,
   useRoute,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { SearchAggregateArticlesPublicQuery } from '~/gql/graphql'
 
 import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
 import styles from './styles.css'
-
-import { SearchAggregateArticlesPublic } from './__generated__/SearchAggregateArticlesPublic'
 
 const AggregateArticleResults = () => {
   const { getQuery } = useRoute()
@@ -28,11 +31,17 @@ const AggregateArticleResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore, refetch } =
-    useQuery<SearchAggregateArticlesPublic>(SEARCH_AGGREGATE_ARTICLES_PUBLIC, {
-      variables: { key: q, version: version === '' ? undefined : version },
-      fetchPolicy: 'network-only',
-    })
+  const { data, loading, fetchMore } =
+    useQuery<SearchAggregateArticlesPublicQuery>(
+      SEARCH_AGGREGATE_ARTICLES_PUBLIC,
+      {
+        variables: {
+          key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+          version: version === '' ? undefined : version,
+        },
+        fetchPolicy: 'network-only',
+      }
+    )
 
   // pagination
   const connectionPath = 'search'
@@ -64,7 +73,13 @@ const AggregateArticleResults = () => {
     })
 
     return fetchMore({
-      variables: { after: pageInfo?.endCursor },
+      variables: {
+        first:
+          edges.length === MAX_SEARCH_RESULTS_LENGTH - 10
+            ? 10
+            : LATER_SEARCH_RESULTS_LENGTH,
+        after: pageInfo?.endCursor,
+      },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
@@ -77,9 +92,10 @@ const AggregateArticleResults = () => {
   return (
     <section className="aggregate-section">
       <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
+        hasNextPage={
+          pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
+        }
         loadMore={loadMore}
-        pullToRefresh={refetch}
       >
         <List>
           {edges.map(
@@ -88,6 +104,7 @@ const AggregateArticleResults = () => {
                 <List.Item key={cursor}>
                   <ArticleDigestFeed
                     article={node}
+                    is="link"
                     isConciseFooter={true}
                     hasCircle={false}
                     hasFollow={false}
@@ -97,7 +114,9 @@ const AggregateArticleResults = () => {
           )}
         </List>
       </InfiniteScroll>
-      {!pageInfo.hasNextPage && <EndOfResults />}
+      {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
+        <EndOfResults />
+      )}
       <style jsx>{styles}</style>
     </section>
   )

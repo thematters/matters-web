@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { Avatar } from '~/components/Avatar'
 
-export default {
+const fragments = {
   followers: gql`
     fragment FollowersTag on Tag {
       id
@@ -32,3 +32,5 @@ export default {
     }
   `,
 }
+
+export default fragments

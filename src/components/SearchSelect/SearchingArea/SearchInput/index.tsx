@@ -1,9 +1,8 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import { useContext } from 'react'
 
-import { IconClear16, IconSearch16, LanguageContext } from '~/components'
-
 import { translate } from '~/common/utils'
+import { IconClear16, IconSearch16, LanguageContext } from '~/components'
 
 import styles from './styles.css'
 

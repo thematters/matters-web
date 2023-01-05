@@ -24,15 +24,7 @@ jobs:
           node-version: '16.14'
           cache: 'npm'
 
-      - name: Cache NPM dependencies
-        uses: actions/cache@v3
-        id: node_modules_cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-npm-v3-${{ hashFiles('package-lock.json') }}
-
       - name: Install Dependencies
-        if: steps.node_modules_cache.outputs.cache-hit != 'true'
         run: npm ci --legacy-peer-deps
 
       - name: Get installed Playwright version
@@ -53,15 +45,11 @@ jobs:
 
       - name: Generate Types (Develop)
         if: github.base_ref != 'master'
-        run: |
-          npm run gen:clean \
-          && npm run gen:type
+        run: npm run gen:type
 
       - name: Generate Types (production)
         if: github.base_ref == 'master'
-        run: |
-          npm run gen:clean \
-          && npm run gen:type:prod
+        run: npm run gen:type:prod
 
       - name: Run Playwright tests
         run: npm run test

@@ -1,6 +1,5 @@
-import MeHistory from '~/views/Me/History'
-
 import { Protected } from '~/components'
+import MeHistory from '~/views/Me/History'
 
 const ProtectedMeHistory = () => (
   <Protected>

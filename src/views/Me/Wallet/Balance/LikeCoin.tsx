@@ -1,7 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 
+import { PATHS } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
@@ -12,14 +14,9 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
-
-import { PATHS } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
+import { QuoteCurrency, ViewerLikeBalanceQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { QuoteCurrency } from '@/__generated__/globalTypes'
-import { ViewerLikeBalance } from './__generated__/ViewerLikeBalance'
 
 interface LikeCoinBalanceProps {
   currency: QuoteCurrency
@@ -38,7 +35,7 @@ const VIEWER_LIKE_BALANCE = gql`
   }
 `
 
-const Wrapper: React.FC = ({ children }) => (
+const Wrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
   <section className="assetsItem">
     <TextIcon icon={<IconLikeCoin40 size="xl-m" />} size="md" spacing="xtight">
       <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
@@ -57,7 +54,7 @@ export const LikeCoinBalance = ({
   const viewer = useContext(ViewerContext)
 
   const likerId = viewer.liker.likerId
-  const { data, loading, error } = useQuery<ViewerLikeBalance>(
+  const { data, loading, error } = useQuery<ViewerLikeBalanceQuery>(
     VIEWER_LIKE_BALANCE,
     {
       errorPolicy: 'none',

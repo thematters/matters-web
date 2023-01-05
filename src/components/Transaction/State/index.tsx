@@ -1,5 +1,4 @@
-import { etherscanBlockExplorers } from 'wagmi'
-
+import { featureSupportedChains } from '~/common/utils'
 import {
   Button,
   IconExternalLink16,
@@ -8,13 +7,9 @@ import {
   Tooltip,
   Translate,
 } from '~/components'
+import { DigestTransactionFragment, TransactionState } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { TransactionState } from '@/__generated__/globalTypes'
-import { DigestTransaction_blockchainTx } from '../__generated__/DigestTransaction'
-
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 /***
  * This is a sub component of Transaction that presents canceled, failed
@@ -28,23 +23,24 @@ const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
  */
 interface StateProps {
   state: TransactionState
-  message: string | null
-  blockchainTx: DigestTransaction_blockchainTx | null
+  message?: string | null
+  blockchainTx: DigestTransactionFragment['blockchainTx'] | null
 }
 
 const State = ({ state, message, blockchainTx }: StateProps) => {
   if (!state) {
     return null
   }
-  if (state === TransactionState.succeeded && !!blockchainTx) {
-    const scanUrl = isProd
-      ? etherscanBlockExplorers.polygon.url
-      : etherscanBlockExplorers.polygonMumbai.url
+
+  if (state === TransactionState.Succeeded && !!blockchainTx) {
+    const targetNetwork = featureSupportedChains.curation[0]
+    const explorerUrl = targetNetwork.blockExplorers?.default.url!
+
     return (
       <Button
         spacing={['xxtight', 'tight']}
         bgColor="grey-lighter"
-        htmlHref={`${scanUrl}/tx/${blockchainTx.txHash}`}
+        htmlHref={`${explorerUrl}/tx/${blockchainTx.txHash}`}
         htmlTarget="_blank"
         onClick={(event) => event?.stopPropagation()}
       >
@@ -82,11 +78,11 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
 
   const StateText = () => {
     switch (state) {
-      case TransactionState.canceled:
+      case TransactionState.Canceled:
         return <Translate id="cancel" />
-      case TransactionState.failed:
+      case TransactionState.Failed:
         return <Translate zh_hant="失敗" zh_hans="失敗" en="Failed" />
-      case TransactionState.pending:
+      case TransactionState.Pending:
         return <Translate zh_hant="進行中…" zh_hans="进行中…" en="Processing" />
       default:
         return null
@@ -105,6 +101,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
       >
         <StateText />
       </TextIcon>
+
       <style jsx>{styles}</style>
     </section>
   )

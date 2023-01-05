@@ -3,6 +3,14 @@ import classNames from 'classnames'
 import { useContext, useState } from 'react'
 
 import {
+  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  ADD_TOAST,
+  ASSET_TYPE,
+  ENTITY_TYPE,
+  UPLOAD_IMAGE_SIZE_LIMIT,
+} from '~/common/enums'
+import { translate } from '~/common/utils'
+import {
   Avatar,
   AvatarProps,
   CircleAvatar,
@@ -14,19 +22,9 @@ import {
   useMutation,
 } from '~/components'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-
-import {
-  ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ADD_TOAST,
-  ASSET_TYPE,
-  ENTITY_TYPE,
-  UPLOAD_IMAGE_SIZE_LIMIT,
-} from '~/common/enums'
-import { translate } from '~/common/utils'
+import { SingleFileUploadMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 
 export type AvatarUploaderProps = {
   onUpload: (assetId: string) => void
@@ -47,7 +45,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const [upload, { loading }] = useMutation<SingleFileUpload>(
+  const [upload, { loading }] = useMutation<SingleFileUploadMutation>(
     UPLOAD_FILE,
     undefined,
     { showToast: false }

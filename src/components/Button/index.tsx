@@ -117,6 +117,7 @@ export type ButtonProps = {
   disabled?: boolean
   form?: string
   rel?: string
+  tabIndex?: number
   onClick?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
   onMouseEnter?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
   onMouseLeave?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
@@ -267,7 +268,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       // link
       if (href) {
         return (
-          <Link href={href} replace={replace}>
+          <Link href={href} replace={replace} legacyBehavior>
             <a {...containerProps}>
               <div className="content" style={contentStyle}>
                 <div className="hotarea" style={hotAreaStyle} />
@@ -291,3 +292,5 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       )
     }
   )
+
+Button.displayName = 'Button'

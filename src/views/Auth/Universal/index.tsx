@@ -9,8 +9,7 @@ import {
   useStep,
   VerificationLinkSent,
 } from '~/components'
-
-import { AuthResultType } from '@/__generated__/globalTypes'
+import { AuthResultType } from '~/gql/graphql'
 
 const DynamicSelectAuthMethodForm = dynamic<any>(
   () =>
@@ -73,7 +72,7 @@ const UniversalAuth = () => {
   const { currStep, forward } = useStep<Step>(initStep)
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'authEntries' }} />
 
       {currStep === 'select-login-method' && (

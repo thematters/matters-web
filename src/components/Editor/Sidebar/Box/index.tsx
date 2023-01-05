@@ -1,6 +1,8 @@
 import classNames from 'classnames'
 import { useContext } from 'react'
 
+import { TextId } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Button,
   IconEdit16,
@@ -8,9 +10,6 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { TextId } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 

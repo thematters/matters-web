@@ -3,16 +3,6 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
 
 import {
-  Dialog,
-  Form,
-  LanguageContext,
-  Layout,
-  Translate,
-  useMutation,
-} from '~/components'
-import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
-
-import {
   PAYMENT_CURRENCY,
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
   PAYMENT_MINIMAL_CIRCLE_AMOUNT,
@@ -25,17 +15,22 @@ import {
   validateCircleDisplayName,
   validateCircleName,
 } from '~/common/utils'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Layout,
+  Translate,
+  useMutation,
+} from '~/components'
+import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
+import { PutCircleMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import {
-  PutCircle,
-  PutCircle_putCircle,
-} from '~/components/GQL/mutations/__generated__/PutCircle'
-
 interface FormProps {
   purpose: 'dialog' | 'page'
-  submitCallback: (circle: PutCircle_putCircle) => void
+  submitCallback: (circle: PutCircleMutation['putCircle']) => void
   closeDialog?: () => void
 }
 
@@ -50,7 +45,7 @@ const Init: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [create] = useMutation<PutCircle>(PUT_CIRCLE, undefined, {
+  const [create] = useMutation<PutCircleMutation>(PUT_CIRCLE, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)

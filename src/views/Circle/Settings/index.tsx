@@ -1,13 +1,12 @@
-import { Form, Head, Layout, Spacer, Translate, useRoute } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Form, Head, Layout, Spacer, Translate, useRoute } from '~/components'
 
 const Settings = () => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={<Layout.Header.Title id="manageCircle" />}

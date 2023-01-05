@@ -5,10 +5,9 @@ import { useEffect, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
-import { useOutsideClick, useResponsive } from '~/components'
-
 import { KEYCODES } from '~/common/enums'
 import { dom } from '~/common/utils'
+import { useOutsideClick, useResponsive } from '~/components'
 
 import Handle from './Handle'
 import Overlay from './Overlay'
@@ -23,6 +22,8 @@ export interface DialogOverlayProps {
 
 export type DialogProps = {
   size?: 'sm' | 'lg'
+  smBgColor?: 'grey-lighter'
+  smUpBgColor?: 'grey-lighter'
   fixedHeight?: boolean
   slideIn?: boolean
 
@@ -38,6 +39,8 @@ const Container: React.FC<
   >
 > = ({
   size = 'lg',
+  smBgColor,
+  smUpBgColor,
   fixedHeight,
   testId,
   onDismiss,
@@ -52,6 +55,8 @@ const Container: React.FC<
     container: true,
     'fixed-height': !!fixedHeight,
     [size]: true,
+    [`bg-${smBgColor}`]: !!smBgColor,
+    [`bg-${smUpBgColor}-sm-up`]: !!smUpBgColor,
   })
 
   const closeTopDialog = () => {

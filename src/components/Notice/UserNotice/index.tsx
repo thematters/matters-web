@@ -1,10 +1,10 @@
 import gql from 'graphql-tag'
 
+import { UserNoticeFragment } from '~/gql/graphql'
+
 import UserNewFollowerNotice from './UserNewFollowerNotice'
 
-import { UserNotice as NoticeType } from './__generated__/UserNotice'
-
-const UserNotice = ({ notice }: { notice: NoticeType }) => {
+const UserNotice = ({ notice }: { notice: UserNoticeFragment }) => {
   switch (notice.userNoticeType) {
     case 'UserNewFollower':
       return <UserNewFollowerNotice notice={notice} />

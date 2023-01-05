@@ -3,6 +3,7 @@ import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 
+import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 import {
   EmptyLayout,
   Layout,
@@ -22,8 +23,18 @@ import BottomBar from '~/components/Editor/BottomBar'
 import Sidebar from '~/components/Editor/Sidebar'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import { QueryError, useImperativeQuery, useMutation } from '~/components/GQL'
-
-import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
+import {
+  ArticleAccessType,
+  ArticleDetailPublicQuery,
+  ArticleDigestDropdownArticleFragment,
+  ArticleLicenseType,
+  AssetFragment,
+  DigestRichCirclePublicFragment,
+  DigestTagFragment,
+  EditArticleSupportSettingMutation,
+  EditModeArticleAssetsQuery,
+  EditModeArticleQuery,
+} from '~/gql/graphql'
 
 import ConfirmExitDialog from './ConfirmExitDialog'
 import {
@@ -35,35 +46,18 @@ import EditModeHeader from './Header'
 import PublishState from './PublishState'
 import styles from './styles.css'
 
-import {
-  ArticleAccessType,
-  ArticleLicenseType,
-} from '@/__generated__/globalTypes'
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
-import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
-import { EditArticleSupportSetting } from './__generated__/EditArticleSupportSetting'
-import {
-  EditModeArticle,
-  EditModeArticle_article_Article,
-} from './__generated__/EditModeArticle'
-import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
-
 interface EditModeProps {
-  article: ArticleDetailPublic_article
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   onCancel: () => void
   onSaved: () => void
 }
 
 export const useEditArticleDetailSupportSetting = (
-  article?: ArticleDetailPublic_article
+  article?: ArticleDetailPublicQuery['article']
 ) => {
   const articleId = article?.id
-  const [update, { loading: saving }] = useMutation<EditArticleSupportSetting>(
-    EDIT_ARTICLE_SUPPORT_SETTING
-  )
+  const [update, { loading: saving }] =
+    useMutation<EditArticleSupportSettingMutation>(EDIT_ARTICLE_SUPPORT_SETTING)
 
   const edit = (
     requestForDonation: string | null,
@@ -88,19 +82,23 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const isLargeUp = useResponsive('lg-up')
 
   const [editData, setEditData] = useState<Record<string, any>>({})
-  const { data, loading, error } = useQuery<EditModeArticle>(
+  const { data, loading, error } = useQuery<EditModeArticleQuery>(
     EDIT_MODE_ARTICLE,
     {
       variables: { id: article.id },
       fetchPolicy: 'network-only',
     }
   )
-  const editModeArticle = data?.article as EditModeArticle_article_Article
+  const editModeArticle = data?.article as NonNullable<
+    EditModeArticleQuery['article'] & {
+      __typename: 'Article'
+    }
+  >
 
   // cover
   const assets = editModeArticle?.assets || []
-  const [cover, editCover] = useState<Asset>()
-  const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
+  const [cover, editCover] = useState<AssetFragment>()
+  const refetchAssets = useImperativeQuery<EditModeArticleAssetsQuery>(
     EDIT_MODE_ARTICLE_ASSETS,
     {
       variables: { id: article.id },
@@ -109,15 +107,15 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   )
 
   // tags
-  const [tags, editTags] = useState<DigestTag[]>(article.tags || [])
-  const [collection, editCollection] = useState<ArticleDigestDropdownArticle[]>(
-    []
-  )
+  const [tags, editTags] = useState<DigestTagFragment[]>(article.tags || [])
+  const [collection, editCollection] = useState<
+    ArticleDigestDropdownArticleFragment[]
+  >([])
 
   // access
-  const [circle, editCircle] = useState<DigestRichCirclePublic | null>(
-    article.access.circle
-  )
+  const [circle, editCircle] = useState<
+    DigestRichCirclePublicFragment | null | undefined
+  >(article.access.circle)
   const [accessType, editAccessType] = useState<ArticleAccessType>(
     article.access.type
   )
@@ -136,7 +134,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
 
     editCircle(addToCircle ? ownCircles[0] : null)
     editAccessType(
-      paywalled ? ArticleAccessType.paywall : ArticleAccessType.public
+      paywalled ? ArticleAccessType.Paywall : ArticleAccessType.Public
     )
     editLicense(newLicense)
   }
@@ -207,7 +205,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     cover: cover?.path,
     assets,
     coverSaving: false,
-    editCover: async (asset?: Asset) => editCover(asset),
+    editCover: async (asset?: AssetFragment) => editCover(asset),
     refetchAssets,
     entityId: article.id,
     entityType: ENTITY_TYPE.article,
@@ -215,12 +213,12 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const tagsProps: SetTagsProps = {
     tags,
     tagsSaving: false,
-    editTags: async (t: DigestTag[]) => editTags(t),
+    editTags: async (t: DigestTagFragment[]) => editTags(t),
   }
   const collectionProps: SetCollectionProps = {
     collection,
     collectionSaving: false,
-    editCollection: async (c: ArticleDigestDropdownArticle[]) =>
+    editCollection: async (c: ArticleDigestDropdownArticleFragment[]) =>
       editCollection(c),
   }
   const accessProps: ToggleAccessProps = {

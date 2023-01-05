@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { formatAmount, maskAddress, translate } from '~/common/utils'
 import {
   Avatar,
   Button,
@@ -9,17 +11,13 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount, maskAddress, translate } from '~/common/utils'
+import { UserDonationRecipientFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 interface PaymentInfoProps {
   amount: number
   currency: CURRENCY
-  recipient: UserDonationRecipient
+  recipient: UserDonationRecipientFragment
   children?: React.ReactNode
   showLikerID?: boolean
   showEthAddress?: boolean

@@ -1,10 +1,9 @@
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { Head, IconLogo, LanguageContext } from '~/components'
-
 import { PATHS } from '~/common/enums'
 import { translate } from '~/common/utils'
+import { Head, IconLogo, LanguageContext } from '~/components'
 
 import Footer from '../About/Footer'
 import Banner from './Banner'
@@ -36,7 +35,7 @@ const Migration = () => {
       <header className="l-container">
         <div className="l-row">
           <div className="l-col-full">
-            <Link href={PATHS.HOME}>
+            <Link href={PATHS.HOME} legacyBehavior>
               <a
                 className="logo"
                 aira-label={translate({ id: 'discover', lang })}

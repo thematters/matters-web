@@ -1,6 +1,5 @@
-import { Head, Layout, Translate } from '~/components'
-
 import IMAGE_ILLUSTRATION_AVATAR from '@/public/static/images/illustration-avatar.svg'
+import { Head, Layout, Translate } from '~/components'
 
 import { AuthorPicker } from './AuthorPicker'
 import styles from './styles.css'
@@ -12,6 +11,7 @@ const PickIntroHeader = () => {
         className="avatar"
         src={IMAGE_ILLUSTRATION_AVATAR}
         aria-hidden="true"
+        alt="illustration"
       />
       <section className="intro">
         <p>

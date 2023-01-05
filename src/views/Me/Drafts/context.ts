@@ -1,6 +1,8 @@
 import { createCacheContext } from '~/components/Hook'
+import { MeDraftFeedQuery } from '~/gql/graphql'
 
-import { MeDraftFeed_viewer_drafts_edges } from './__generated__/MeDraftFeed'
+type Edges = NonNullable<
+  NonNullable<MeDraftFeedQuery['viewer']>['drafts']['edges']
+>
 
-export const DraftsContext =
-  createCacheContext<MeDraftFeed_viewer_drafts_edges[]>()
+export const DraftsContext = createCacheContext<Edges>()

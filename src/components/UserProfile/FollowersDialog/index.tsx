@@ -1,11 +1,10 @@
 import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, Translate, useDialogSwitch } from '~/components'
-
-import { UserProfileUserPublic_user } from '../__generated__/UserProfileUserPublic'
+import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 interface FollowersDialogProps {
-  user: UserProfileUserPublic_user
+  user: NonNullable<UserProfileUserPublicQuery['user']>
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
@@ -18,7 +17,7 @@ const BaseFollowersDialog = ({ user, children }: FollowersDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate

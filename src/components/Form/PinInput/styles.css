@@ -6,7 +6,7 @@
   margin: 0 auto;
 
   & .pin-input-item {
-    @mixin all-transition;
+    @mixin transition;
 
     display: flex;
     width: 16.6%;
@@ -17,6 +17,7 @@
     text-align: center;
     border: 1px solid var(--color-grey-light);
     border-radius: 4px;
+    transition-property: border-color;
 
     & + .pin-input-item {
       margin-left: var(--spacing-tight);

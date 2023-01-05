@@ -1,10 +1,9 @@
 import { useContext } from 'react'
 
-import { LanguageContext } from '~/components'
-
 import termStyles from '~/common/styles/utils/content.article.css'
 import detailsStyles from '~/common/styles/utils/details.css'
 import { translate } from '~/common/utils'
+import { LanguageContext } from '~/components'
 
 import Privacy from './privacy'
 import styles from './styles.css'

@@ -36,12 +36,14 @@
 
 .title {
   padding: 0 1rem;
-  margin: 2rem 0 1rem 0;
+  margin: 2rem 0 1rem;
+
   & h2 {
-    margin: 0 0 8px 0;
+    margin: 0 0 8px;
     font-size: 18px;
     color: var(--color-black);
   }
+
   & p {
     font-size: var(--font-size-sm);
     color: var(--color-grey-dark);

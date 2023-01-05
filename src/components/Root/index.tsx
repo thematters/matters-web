@@ -2,10 +2,11 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
-import { createClient, WagmiConfig } from 'wagmi'
+import { createClient, createStorage, WagmiConfig } from 'wagmi'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
+import { chains, sleep, wagmiProvider } from '~/common/utils'
 import {
   AnalyticsListener,
   Error,
@@ -21,16 +22,9 @@ import {
 } from '~/components'
 import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import SplashScreen from '~/components/SplashScreen'
-
-import { chains, sleep, wagmiProvider } from '~/common/utils'
+import { RootQueryPrivateQuery, RootQueryPublicQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
-
-import {
-  RootQueryPrivate,
-  RootQueryPrivate_viewer,
-} from './__generated__/RootQueryPrivate'
-import { RootQueryPublic } from './__generated__/RootQueryPublic'
 
 const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
   ssr: false,
@@ -60,7 +54,14 @@ import('@sentry/browser').then((Sentry) => {
 const wagmiClient = createClient({
   autoConnect: true,
   connectors: [
-    new MetaMaskConnector({ chains }),
+    new MetaMaskConnector({
+      chains,
+      options: {
+        // For disconnecting from metamask
+        shimDisconnect: true,
+        UNSTABLE_shimOnConnectSelectAccount: true,
+      },
+    }),
     new WalletConnectConnector({
       chains,
       options: {
@@ -69,6 +70,16 @@ const wagmiClient = createClient({
     }),
   ],
   provider: wagmiProvider,
+  /*
+  FIXME: need to find a way of clearing ens name cache instead of clearing the global cache
+  */
+  storage: createStorage({
+    storage: {
+      getItem: () => null,
+      setItem: () => null,
+      removeItem: () => null,
+    },
+  }),
 })
 
 const Root = ({
@@ -87,17 +98,18 @@ const Root = ({
 
   // anonymous
   const { loading, data, error } =
-    usePublicQuery<RootQueryPublic>(ROOT_QUERY_PUBLIC)
+    usePublicQuery<RootQueryPublicQuery>(ROOT_QUERY_PUBLIC)
   const viewer = data?.viewer
   const official = data?.official
 
   // viewer
-  const [privateViewer, setPrivateViewer] = useState<RootQueryPrivate_viewer>()
+  const [privateViewer, setPrivateViewer] =
+    useState<RootQueryPrivateQuery['viewer']>()
   const [privateFetched, setPrivateFetched] = useState(false)
 
   const fetchPrivateViewer = async () => {
     try {
-      const privateWatcher = client.watchQuery<RootQueryPrivate>({
+      const privateWatcher = client.watchQuery<RootQueryPrivateQuery>({
         query: ROOT_QUERY_PRIVATE,
         fetchPolicy: 'network-only',
       })

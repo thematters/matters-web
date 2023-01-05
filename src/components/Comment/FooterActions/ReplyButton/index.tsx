@@ -2,6 +2,13 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  PATHS,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import { appendTarget, translate } from '~/common/utils'
+import {
   Button,
   ButtonProps,
   CommentFormDialog,
@@ -11,21 +18,12 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
-
-import {
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-import { appendTarget, translate } from '~/common/utils'
+import { ReplyComemntFragment } from '~/gql/graphql'
 
 import ReplyTo from '../../ReplyTo'
 
-import { ReplyComemnt } from './__generated__/ReplyComemnt'
-
 export interface ReplyButtonProps {
-  comment: ReplyComemnt
+  comment: ReplyComemntFragment
   type: CommentFormType
   replySubmitCallback?: () => void
   onClick?: () => void

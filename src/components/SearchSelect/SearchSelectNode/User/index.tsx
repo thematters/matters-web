@@ -1,17 +1,15 @@
 import classNames from 'classnames'
 
-import { Card, IconChecked, IconUnChecked, UserDigest } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
+import { Card, IconChecked, IconUnChecked, UserDigest } from '~/components'
+import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
 import styles from '../styles.css'
 
-import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
-
 interface SearchSelectUserProps {
-  user: UserDigestMiniUser
+  user: UserDigestMiniUserFragment
   selected?: boolean
-  onClick: (user: UserDigestMiniUser) => void
+  onClick: (user: UserDigestMiniUserFragment) => void
   inStagingArea?: boolean
 }
 

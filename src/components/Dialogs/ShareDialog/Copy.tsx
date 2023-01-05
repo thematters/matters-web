@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { translate } from '~/common/utils'
 import {
   CopyToClipboard,
   IconLink16,
@@ -7,8 +8,6 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 

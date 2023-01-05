@@ -1,6 +1,5 @@
-import { Button, IconClose32, Menu, TextIcon, Translate } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Button, IconClose32, Menu, TextIcon, Translate } from '~/components'
 
 interface SearchHistoryProps {
   data: string[]
@@ -42,7 +41,7 @@ export const SearchHistory = ({
                   removeSearchHistoryItem(value)
                 }}
               >
-                <IconClose32 color="grey" />
+                <IconClose32 color="grey" size="md" />
               </Button>
             </section>
           </Menu.Item>

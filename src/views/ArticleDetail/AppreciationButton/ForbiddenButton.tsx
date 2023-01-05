@@ -1,6 +1,5 @@
-import { Translate } from '~/components'
-
 import { ADD_TOAST } from '~/common/enums'
+import { Translate } from '~/components'
 
 import AppreciateButton from './AppreciateButton'
 

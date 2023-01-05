@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import _chunk from 'lodash/chunk'
 import { useContext, useEffect } from 'react'
 
+import { PATHS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   QueryError,
   ShuffleButton,
@@ -15,15 +17,10 @@ import {
   ViewMoreCard,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
-
-import { PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { FeedTagsPublicQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import styles from './styles.css'
-
-import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
-import { FeedTagsPublic } from './__generated__/FeedTagsPublic'
 
 const FEED_TAGS = gql`
   query FeedTagsPublic($random: random_Int_min_0_max_49) {
@@ -48,14 +45,14 @@ const FEED_TAGS = gql`
 const TagsFeed = () => {
   const viewer = useContext(ViewerContext)
 
-  const { data: lastFetchRandom, client } = useQuery<LastFetchRandom>(
+  const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
     FETCH_RECORD,
     { variables: { id: 'local' } }
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.feedTags
   const randomMaxSize = 50
 
-  const { data, loading, error, refetch } = usePublicQuery<FeedTagsPublic>(
+  const { data, loading, error, refetch } = usePublicQuery<FeedTagsPublicQuery>(
     FEED_TAGS,
     {
       notifyOnNetworkStatusChange: true,

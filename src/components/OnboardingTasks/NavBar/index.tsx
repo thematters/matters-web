@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconOnboardLaunch } from '@/public/static/icons/40px/navigation.svg'
 import {
   Card,
   IconArrowRight16,
@@ -10,8 +11,6 @@ import {
   ViewerContext,
   withIcon,
 } from '~/components'
-
-import { ReactComponent as IconOnboardLaunch } from '@/public/static/icons/40px/navigation.svg'
 
 import OnboardingTasksDialog from '../Dialog'
 import styles from './styles.css'

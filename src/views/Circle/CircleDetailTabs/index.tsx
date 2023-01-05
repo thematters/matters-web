@@ -1,6 +1,5 @@
-import { Tabs, Translate, useRoute } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Tabs, Translate, useRoute } from '~/components'
 
 const CircleDetailTabs = () => {
   const { isInPath, getQuery } = useRoute()

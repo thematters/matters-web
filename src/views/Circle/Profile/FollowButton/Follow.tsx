@@ -2,6 +2,10 @@ import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
 import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import {
   Button,
   TextIcon,
   Translate,
@@ -11,47 +15,46 @@ import {
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
 import updateCircleFollowerCount from '~/components/GQL/updates/circleFollowerCount'
 import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
-
 import {
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-
-import { ToggleFollowCircle } from '~/components/GQL/mutations/__generated__/ToggleFollowCircle'
-import { FollowButtonCirclePrivate } from './__generated__/FollowButtonCirclePrivate'
+  FollowButtonCirclePrivateFragment,
+  ToggleFollowCircleMutation,
+} from '~/gql/graphql'
 
 interface FollowProps {
-  circle: Partial<FollowButtonCirclePrivate>
+  circle: Partial<FollowButtonCirclePrivateFragment>
 }
 
 const Follow = ({ circle }: FollowProps) => {
   const viewer = useContext(ViewerContext)
-  const [follow] = useMutation<ToggleFollowCircle>(TOGGLE_FOLLOW_CIRCLE, {
-    variables: { id: circle.id, enabled: true },
-    optimisticResponse:
-      !_isNil(circle.id) && !_isNil(circle.isFollower)
-        ? {
-            toggleFollowCircle: {
-              id: circle.id,
-              isFollower: true,
-              __typename: 'Circle',
-            },
-          }
-        : undefined,
-    update: (cache) => {
-      updateCircleFollowerCount({
-        cache,
-        name: circle.name || '',
-        type: 'increment',
-      })
-      updateCircleFollowers({
-        cache,
-        name: circle.name || '',
-        type: 'follow',
-        viewer,
-      })
-    },
-  })
+  const [follow] = useMutation<ToggleFollowCircleMutation>(
+    TOGGLE_FOLLOW_CIRCLE,
+    {
+      variables: { id: circle.id, enabled: true },
+      optimisticResponse:
+        !_isNil(circle.id) && !_isNil(circle.isFollower)
+          ? {
+              toggleFollowCircle: {
+                id: circle.id,
+                isFollower: true,
+                __typename: 'Circle',
+              },
+            }
+          : undefined,
+      update: (cache) => {
+        updateCircleFollowerCount({
+          cache,
+          name: circle.name || '',
+          type: 'increment',
+        })
+        updateCircleFollowers({
+          cache,
+          name: circle.name || '',
+          type: 'follow',
+          viewer,
+        })
+      },
+    }
+  )
 
   const onClick = () => {
     if (!viewer.isAuthed) {

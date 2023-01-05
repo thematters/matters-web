@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { PATHS } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
@@ -9,13 +11,9 @@ import {
   useBalanceUSDT,
   ViewerContext,
 } from '~/components'
-
-import { PATHS } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
+import { QuoteCurrency } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { QuoteCurrency } from '@/__generated__/globalTypes'
 
 interface USDTBalanceProps {
   currency: QuoteCurrency

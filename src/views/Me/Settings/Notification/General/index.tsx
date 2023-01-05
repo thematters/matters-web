@@ -9,13 +9,14 @@ import {
   Spinner,
   useMutation,
 } from '~/components'
+import {
+  UpdateViewerNotificationGeneralMutation,
+  ViewerNotificationGeneralSettingsQuery,
+} from '~/gql/graphql'
 
 import ArticleSettings from './Article'
 import CommentSettings from './Comment'
 import MeSettings from './Me'
-
-import { UpdateViewerNotificationGeneral } from './__generated__/UpdateViewerNotificationGeneral'
-import { ViewerNotificationGeneralSettings } from './__generated__/ViewerNotificationGeneralSettings'
 
 const VIEWER_NOTIFICATION_GENERAL_SETTINGS = gql`
   query ViewerNotificationGeneralSettings {
@@ -62,11 +63,11 @@ const UPDATE_VIEWER_NOTIFICATION_GENERAL = gql`
 `
 
 const BaseNotificationSettings = () => {
-  const [update] = useMutation<UpdateViewerNotificationGeneral>(
+  const [update] = useMutation<UpdateViewerNotificationGeneralMutation>(
     UPDATE_VIEWER_NOTIFICATION_GENERAL
   )
   const { data, loading, refetch } =
-    useQuery<ViewerNotificationGeneralSettings>(
+    useQuery<ViewerNotificationGeneralSettingsQuery>(
       VIEWER_NOTIFICATION_GENERAL_SETTINGS
     )
   const settings = data?.viewer?.settings.notification
@@ -109,7 +110,7 @@ const BaseNotificationSettings = () => {
 }
 
 const NotificationGeneralSettings = () => (
-  <Layout.Main bgColor="grey-lighter">
+  <Layout.Main smBgColor="grey-lighter">
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="settingsNotificationGeneral" />}

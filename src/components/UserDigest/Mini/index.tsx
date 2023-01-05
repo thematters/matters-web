@@ -1,15 +1,13 @@
 import classNames from 'classnames'
 
-import { LinkWrapper, Translate } from '~/components'
-import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
-
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
+import { LinkWrapper, Translate } from '~/components'
+import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
+import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 
 /**
  * UserDigest.Mini is a component for presenting user's:
@@ -24,7 +22,7 @@ import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
  */
 
 export type UserDigestMiniProps = {
-  user: UserDigestMiniUser
+  user: UserDigestMiniUserFragment
 
   avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
   textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s' | 'md'
@@ -53,7 +51,7 @@ export const toUserDigestMiniPlaceholder = (displayName: string) =>
       __typename: 'Liker',
       civicLiker: false,
     },
-  } as UserDigestMiniUser)
+  } as UserDigestMiniUserFragment)
 
 const Mini = ({
   user,

@@ -4,6 +4,12 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
+  parseFormSubmitErrors,
+  translate,
+  validateCode,
+  validateEmail,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   LanguageContext,
@@ -14,16 +20,10 @@ import {
 } from '~/components'
 import { CHANGE_EMAIL } from '~/components/GQL/mutations/changeEmail'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
-
 import {
-  parseFormSubmitErrors,
-  translate,
-  validateCode,
-  validateEmail,
-} from '~/common/utils'
-
-import { ChangeEmail } from '~/components/GQL/mutations/__generated__/ChangeEmail'
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
+  ChangeEmailMutation,
+  ConfirmVerificationCodeMutation,
+} from '~/gql/graphql'
 
 interface FormProps {
   oldData: { email: string; codeId: string }
@@ -43,14 +43,18 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(
+  const [confirmCode] = useMutation<ConfirmVerificationCodeMutation>(
     CONFIRM_CODE,
     undefined,
     { showToast: false }
   )
-  const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL, undefined, {
-    showToast: false,
-  })
+  const [changeEmail] = useMutation<ChangeEmailMutation>(
+    CHANGE_EMAIL,
+    undefined,
+    {
+      showToast: false,
+    }
+  )
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
 

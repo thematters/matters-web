@@ -1,7 +1,7 @@
+import { CivicLikerAppreciateButtonUserFragment } from '~/gql/graphql'
+
 import AppreciateButton from './AppreciateButton'
 import CivicLikerDialog from './CivicLikerDialog'
-
-import { CivicLikerAppreciateButtonUser } from './__generated__/CivicLikerAppreciateButtonUser'
 
 const CivicLikerButton = ({
   user,
@@ -9,7 +9,7 @@ const CivicLikerButton = ({
   count,
   total,
 }: {
-  user: CivicLikerAppreciateButtonUser
+  user: CivicLikerAppreciateButtonUserFragment
   onClose: () => void
   count?: number
   total: number

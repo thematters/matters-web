@@ -69,10 +69,11 @@ span.container {
    ========================================================================== */
 .hotarea {
   @mixin expand-to-container;
-  @mixin all-transition;
+  @mixin transition;
 
   z-index: 0;
   background: transparent;
+  transition-property: color, background;
 
   & :global(+ *) {
     z-index: 1;
@@ -282,13 +283,13 @@ span.container {
 
 .bg-half-black {
   & .hotarea {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgb(0 0 0 / 50%);
   }
 
   &:hover,
   &:focus {
     & .hotarea {
-      background: rgba(0, 0, 0, 1);
+      background: rgb(0 0 0 / 100%);
     }
   }
 }

@@ -1,14 +1,12 @@
 import gql from 'graphql-tag'
 
-import { Card, Expandable } from '~/components'
-import CommentContent from '~/components/Comment/Content'
-
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
+import { Card, Expandable } from '~/components'
+import CommentContent from '~/components/Comment/Content'
+import { NoticeCommentFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { NoticeComment as NoticeCommentType } from './__generated__/NoticeComment'
 
 const fragments = {
   comment: gql`
@@ -43,7 +41,11 @@ const fragments = {
   `,
 }
 
-const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
+const NoticeComment = ({
+  comment,
+}: {
+  comment: NoticeCommentFragment | null
+}) => {
   const article =
     comment?.node.__typename === 'Article' ? comment.node : undefined
   const circle =

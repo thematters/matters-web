@@ -1,7 +1,5 @@
 import { useEffect } from 'react'
 
-import { useWindowResize } from '~/components'
-
 import defaultsStyles from '~/common/styles/bases/defaults.css'
 import resetStyles from '~/common/styles/bases/reset.css'
 import layoutStyles from '~/common/styles/layouts.css'
@@ -11,6 +9,7 @@ import linkStyles from '~/common/styles/utils/link.css'
 import motionStyles from '~/common/styles/utils/motion.css'
 import ptrStyles from '~/common/styles/vendors/ptr.css'
 import tippyStyles from '~/common/styles/vendors/tippy.css'
+import { useWindowResize } from '~/components'
 
 export const GlobalStyles = () => {
   const size = useWindowResize()

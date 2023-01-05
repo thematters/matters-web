@@ -1,12 +1,21 @@
 .card {
-  @mixin all-transition;
+  @mixin transition;
 
   position: relative;
   display: block;
   outline: none;
+  transition-property: background-color;
 
   &:not(.disabled) {
     cursor: pointer;
+  }
+}
+
+.active-outline-auto {
+  &:not(.disabled) {
+    &:focus {
+      outline: auto;
+    }
   }
 }
 

@@ -1,9 +1,8 @@
 import { useState } from 'react'
 
+import { OPEN_RECOMMEND_TAG_DIALOG } from '~/common/enums'
 import { Dialog, Tabs, Translate, useDialogSwitch } from '~/components'
 import { useEventListener } from '~/components/Hook'
-
-import { OPEN_RECOMMEND_TAG_DIALOG } from '~/common/enums'
 
 import Feed, { FeedType } from './Feed'
 import styles from './styles.css'
@@ -27,7 +26,7 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
     <>
       {children && children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={<Translate zh_hant="追蹤標籤" zh_hans="追踪标签" />}
           closeDialog={closeDialog}

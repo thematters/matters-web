@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { useContext, useRef } from 'react'
 
+import { numAbbr, translate } from '~/common/utils'
 import {
   Button,
   IconClap16,
@@ -8,8 +9,6 @@ import {
   LanguageContext,
   TextIcon,
 } from '~/components'
-
-import { numAbbr, translate } from '~/common/utils'
 
 import * as clap from './clap'
 import clapStyles from './styles.clap.css'

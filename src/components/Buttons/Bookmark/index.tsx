@@ -2,14 +2,13 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import { IconSize, ViewerContext } from '~/components'
+import { BookmarkArticlePrivateFragment } from '~/gql/graphql'
 
 import Subscribe from './Subscribe'
 import Unsubscribe from './Unsubscribe'
 
-import { BookmarkArticlePrivate } from './__generated__/BookmarkArticlePrivate'
-
 interface BookmarkButtonProps {
-  article: Partial<BookmarkArticlePrivate>
+  article: Partial<BookmarkArticlePrivateFragment>
   size?: Extract<IconSize, 'md-s'>
   inCard?: boolean
 }

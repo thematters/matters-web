@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Button,
   DropdownDialog,
@@ -15,18 +17,13 @@ import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
-
-import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { AddArticlesTagsMutation, TagFragmentFragment } from '~/gql/graphql'
 
 import AddMyArticlesButton from './AddMyArticlesButton'
 import CreateDraftMenuItem from './CreateDraftMenuItem'
 
-import { AddArticlesTags } from '~/components/GQL/mutations/__generated__/AddArticlesTags'
-import { TagFragment } from '../../__generated__/TagFragment'
-
 interface DropdownActionsProps {
-  tag: TagFragment
+  tag: TagFragmentFragment
 }
 
 interface DialogProps {
@@ -86,7 +83,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
   /**
    * Data
    */
-  const [add, { loading }] = useMutation<AddArticlesTags>(ADD_ARTICLES_TAGS)
+  const [add, { loading }] =
+    useMutation<AddArticlesTagsMutation>(ADD_ARTICLES_TAGS)
   const addArticlesToTag =
     (selected: boolean) => async (articles: SearchSelectNode[]) => {
       const articleIds = articles.map((article) => article.id)

@@ -1,10 +1,9 @@
-import { Button, TextIcon, Translate } from '~/components'
-
 import IMAGE_ILLUSTRATION_1 from '@/public/static/images/about/intro-illustration-1.png'
 import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/intro-illustration-2.png'
 import IMAGE_ILLUSTRATION_3 from '@/public/static/images/about/intro-illustration-3.png'
 import IMAGE_WAVE_1 from '@/public/static/images/about/wave-intro-1.svg'
 import IMAGE_WAVE_2 from '@/public/static/images/about/wave-intro-2.svg'
+import { Button, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 
@@ -14,7 +13,7 @@ const Intro = () => {
       <ul>
         <li className="l-container full ecosystem">
           <div className="l-row">
-            <img src={IMAGE_ILLUSTRATION_1.src} />
+            <img src={IMAGE_ILLUSTRATION_1.src} alt="illustration 1" />
 
             <section className="content">
               <h3>
@@ -54,7 +53,7 @@ const Intro = () => {
         </li>
         <li className="l-container full community">
           <div className="l-row">
-            <img src={IMAGE_ILLUSTRATION_2.src} />
+            <img src={IMAGE_ILLUSTRATION_2.src} alt="illustration 2" />
 
             <section className="content">
               <h3>
@@ -139,7 +138,7 @@ const Intro = () => {
               </section>
             </section>
 
-            <img src={IMAGE_ILLUSTRATION_3.src} />
+            <img src={IMAGE_ILLUSTRATION_3.src} alt="illustration 3" />
           </div>
         </li>
       </ul>

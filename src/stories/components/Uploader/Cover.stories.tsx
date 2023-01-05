@@ -2,12 +2,10 @@ import { MockedProvider } from '@apollo/react-testing'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
-import { CoverUploader } from '~/components'
-
-import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
-
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import { CoverUploader } from '~/components'
 
 export default {
   title: 'Components/Uploader',

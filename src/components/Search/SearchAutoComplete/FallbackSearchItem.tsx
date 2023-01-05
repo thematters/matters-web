@@ -1,8 +1,7 @@
 import classNames from 'classnames'
 
-import { Menu, Translate } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Menu, Translate } from '~/components'
 
 import styles from './styles.css'
 

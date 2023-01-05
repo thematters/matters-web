@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 
-import { Form, LanguageContext, Layout, Spacer, Translate } from '~/components'
-
 import { GUIDE_LINKS, PATHS } from '~/common/enums'
+import { Form, LanguageContext, Layout, Spacer, Translate } from '~/components'
 
 import styles from './styles.css'
 
@@ -62,6 +61,7 @@ const BaseHelp = () => {
             className="u-link-green"
             href="mailto:ask@matters.news"
             target="_blank"
+            rel="noreferrer"
           >
             ask@matters.news
           </a>
@@ -85,7 +85,7 @@ const BaseHelp = () => {
 }
 
 const Help = () => (
-  <Layout.Main bgColor="grey-lighter">
+  <Layout.Main smBgColor="grey-lighter">
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="helpCenter" />}

@@ -1,22 +1,19 @@
+import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
+import { measureDiffs } from '~/common/utils'
 import { Button, TextIcon, Translate, useMutation } from '~/components'
 import {
   ConfirmStepContentProps,
   EditorSettingsDialog,
   EditorSettingsDialogProps,
 } from '~/components/Editor/SettingsDialog'
-
-import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
-import { measureDiffs } from '~/common/utils'
+import { ArticleDetailPublicQuery, EditArticleMutation } from '~/gql/graphql'
 
 import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE } from './gql'
 import styles from './styles.css'
 
-import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
-import { EditArticle } from './__generated__/EditArticle'
-
 type EditModeHeaderProps = {
-  article: ArticleDetailPublic_article
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   editData: Record<string, any>
   coverId?: string
 
@@ -59,7 +56,8 @@ const EditModeHeader = ({
 
   // save or republish
   const { tags, collection, circle, accessType, license } = restProps
-  const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
+  const [editArticle, { loading }] =
+    useMutation<EditArticleMutation>(EDIT_ARTICLE)
   const onSave = async () => {
     try {
       await editArticle({

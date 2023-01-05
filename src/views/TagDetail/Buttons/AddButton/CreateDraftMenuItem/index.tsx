@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
+import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
+import { analytics, toPath, translate } from '~/common/utils'
 import {
   IconAdd24,
   LanguageContext,
@@ -11,15 +13,10 @@ import {
   ViewerContext,
 } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-
-import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
-
-import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
-import { TagFragment } from '../../../__generated__/TagFragment'
+import { CreateDraftMutation, TagFragmentFragment } from '~/gql/graphql'
 
 interface CreateDraftButtonProps {
-  tag: TagFragment
+  tag: TagFragmentFragment
 }
 
 const BaseCreateDraftButton = ({ onClick }: { onClick: () => any }) => (
@@ -28,7 +25,7 @@ const BaseCreateDraftButton = ({ onClick }: { onClick: () => any }) => (
       <Translate
         zh_hant="創作新的作品"
         zh_hans="创作新的作品"
-        en="create new work"
+        en="New Article"
       />
     </TextIcon>
   </Menu.Item>
@@ -39,7 +36,7 @@ const CreateDraftButton: React.FC<CreateDraftButtonProps> = ({ tag }) => {
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
 
-  const [putDraft] = useMutation<CreateDraft>(CREATE_DRAFT, {
+  const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
     variables: {
       title: translate({ id: 'untitle', lang }),
       tags: [tag.content],

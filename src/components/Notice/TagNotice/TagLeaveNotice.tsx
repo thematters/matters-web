@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
+import { Translate } from '~/components'
+import { TagLeaveNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
@@ -11,9 +11,7 @@ import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
 import styles from '../styles.css'
 
-import { TagLeaveNotice as NoticeType } from './__generated__/TagLeaveNotice'
-
-const TagLeaveNotice = ({ notice }: { notice: NoticeType }) => {
+const TagLeaveNotice = ({ notice }: { notice: TagLeaveNoticeFragment }) => {
   if (!notice.actors) {
     return null
   }

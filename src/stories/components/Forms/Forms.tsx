@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { Form, Translate } from '~/components'
-
 import { translate } from '~/common/utils'
+import { Form, Translate } from '~/components'
 
 const Forms = () => (
   <section>
@@ -30,7 +29,7 @@ const Forms = () => (
 
       {/* Form.PinInput */}
       <li>
-        <Form noBackground>
+        <Form>
           <Form.PinInput
             length={6}
             value=""
@@ -41,7 +40,7 @@ const Forms = () => (
         </Form>
       </li>
 
-      {/* Form.DropdownInput & Form.Textarea */}
+      {/* Form.Textarea */}
       <li>
         <Form>
           <Form.Textarea

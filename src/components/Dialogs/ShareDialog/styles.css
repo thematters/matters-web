@@ -3,10 +3,6 @@
   padding-top: var(--spacing-x-tight);
 }
 
-.spacing-bottom {
-  padding-bottom: var(--spacing-xx-loose);
-}
-
 .left,
 .right {
   display: inline-block;
@@ -48,6 +44,7 @@
     display: flex;
     flex-direction: column;
     line-height: 1.5;
+
     & .share-translation {
       font-size: var(--font-size-xs);
       line-height: 1;

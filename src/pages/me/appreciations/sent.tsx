@@ -1,6 +1,5 @@
-import MeAppreciationsSent from '~/views/Me/AppreciationsSent'
-
 import { Protected } from '~/components'
+import MeAppreciationsSent from '~/views/Me/AppreciationsSent'
 
 const ProtectedMeAppreciationsSent = () => (
   <Protected>

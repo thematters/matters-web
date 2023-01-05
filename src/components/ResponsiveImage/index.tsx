@@ -25,25 +25,27 @@ const BaseResponsiveImage = ({
 
   // Fallback to the raw `url` if manually disable or responsive image is failed to load
   if (disabled || error) {
-    return <img src={url} loading="lazy" />
+    return <img src={url} loading="lazy" alt="" />
   }
 
   return (
     <picture onError={() => setError(true)}>
-      <source
-        type="image/webp"
-        media="(min-width: 768px)"
-        srcSet={toSizedImageURL({
-          url,
-          size: smUpSize,
-          ext: 'webp',
-        })}
-      />
       {smUpSize && (
-        <source
-          media="(min-width: 768px)"
-          srcSet={toSizedImageURL({ url, size: smUpSize })}
-        />
+        <>
+          <source
+            type="image/webp"
+            media="(min-width: 768px)"
+            srcSet={toSizedImageURL({
+              url,
+              size: smUpSize,
+              ext: 'webp',
+            })}
+          />
+          <source
+            media="(min-width: 768px)"
+            srcSet={toSizedImageURL({ url, size: smUpSize })}
+          />
+        </>
       )}
 
       <source
@@ -55,7 +57,12 @@ const BaseResponsiveImage = ({
         })}
       />
 
-      <img src={url} srcSet={toSizedImageURL({ url, size })} loading="lazy" />
+      <img
+        src={url}
+        srcSet={toSizedImageURL({ url, size })}
+        loading="lazy"
+        alt=""
+      />
     </picture>
   )
 }

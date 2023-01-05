@@ -1,8 +1,7 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
-
 import { analytics, isMobile } from '~/common/utils'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
 import { ShareDialogContentProps } from './Content'
 
@@ -10,6 +9,8 @@ export type ShareDialogProps = {
   title?: string
   path?: string
   tags?: string[]
+
+  disableNativeShare?: boolean
 
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & Pick<
@@ -77,7 +78,7 @@ export const ShareDialog = (props: ShareDialogProps) => {
 
     analytics.trackEvent('share_dialog', { step: 'open_share' })
 
-    if (navigator.share && isMobile()) {
+    if (navigator.share && isMobile() && !props.disableNativeShare) {
       try {
         await navigator.share({
           title: shareTitle,

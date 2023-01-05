@@ -1,18 +1,22 @@
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
+import {
+  ArticleDigestDropdownArticleFragment,
+  DigestTagFragment,
+} from '~/gql/graphql'
 
 export * from './SetCover'
 export * from './ToggleAccess'
 
 export type SetCollectionProps = {
-  collection: ArticleDigestDropdownArticle[]
-  editCollection: (articles: ArticleDigestDropdownArticle[]) => Promise<any>
+  collection: ArticleDigestDropdownArticleFragment[]
+  editCollection: (
+    articles: ArticleDigestDropdownArticleFragment[]
+  ) => Promise<any>
   collectionSaving?: boolean
 }
 
 export type SetTagsProps = {
-  tags: DigestTag[]
-  editTags: (tag: DigestTag[]) => Promise<any>
+  tags: DigestTagFragment[]
+  editTags: (tag: DigestTagFragment[]) => Promise<any>
   tagsSaving: boolean
 }
 

@@ -1,24 +1,24 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG, TextId } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   CommentFormType,
   LanguageContext,
   Translate,
   ViewerContext,
 } from '~/components'
-
-import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG, TextId } from '~/common/enums'
-import { translate } from '~/common/utils'
+import {
+  FooterActionsCommentPrivateFragment,
+  FooterActionsCommentPublicFragment,
+} from '~/gql/graphql'
 
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
 import DownvoteButton from './DownvoteButton'
 import ReplyButton, { ReplyButtonProps } from './ReplyButton'
 import styles from './styles.css'
 import UpvoteButton from './UpvoteButton'
-
-import { FooterActionsCommentPrivate } from './__generated__/FooterActionsCommentPrivate'
-import { FooterActionsCommentPublic } from './__generated__/FooterActionsCommentPublic'
 
 export type FooterActionsControls = {
   hasReply?: boolean
@@ -31,7 +31,8 @@ export type FooterActionsControls = {
   Pick<ReplyButtonProps, 'replySubmitCallback'>
 
 export type FooterActionsProps = {
-  comment: FooterActionsCommentPublic & Partial<FooterActionsCommentPrivate>
+  comment: FooterActionsCommentPublicFragment &
+    Partial<FooterActionsCommentPrivateFragment>
   type: CommentFormType
 } & FooterActionsControls
 

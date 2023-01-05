@@ -24,7 +24,7 @@ const BaseMigrationDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title="migration"
           closeDialog={closeDialog}

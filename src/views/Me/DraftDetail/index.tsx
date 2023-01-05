@@ -2,6 +2,8 @@ import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
+import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import { stripHtml } from '~/common/utils'
 import {
   EmptyLayout,
   Head,
@@ -13,9 +15,11 @@ import {
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-
-import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
-import { stripHtml } from '~/common/utils'
+import {
+  DraftDetailQueryQuery,
+  SetDraftContentMutation,
+  SingleFileUploadMutation,
+} from '~/gql/graphql'
 
 import BottomBar from './BottomBar'
 import { DRAFT_DETAIL, SET_CONTENT } from './gql'
@@ -23,10 +27,6 @@ import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
 import Sidebar from './Sidebar'
-
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
-import { DraftDetailQuery } from './__generated__/DraftDetailQuery'
-import { SetDraftContent } from './__generated__/SetDraftContent'
 
 const Editor = dynamic(() => import('~/components/Editor/Article'), {
   ssr: false,
@@ -38,17 +38,20 @@ const DraftDetail = () => {
   const { getQuery } = useRoute()
   const id = getQuery('draftId')
 
-  const [setContent] = useMutation<SetDraftContent>(SET_CONTENT)
-  const [singleFileUpload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+  const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
+  const [singleFileUpload] = useMutation<SingleFileUploadMutation>(UPLOAD_FILE)
   const [saveStatus, setSaveStatus] = useState<
     'saved' | 'saving' | 'saveFailed'
   >()
   const [hasValidSummary, setHasValidSummary] = useState<boolean>(true)
 
-  const { data, loading, error } = useQuery<DraftDetailQuery>(DRAFT_DETAIL, {
-    variables: { id },
-    fetchPolicy: 'network-only',
-  })
+  const { data, loading, error } = useQuery<DraftDetailQueryQuery>(
+    DRAFT_DETAIL,
+    {
+      variables: { id },
+      fetchPolicy: 'network-only',
+    }
+  )
   const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined
   const ownCircles = data?.viewer?.ownCircles || undefined
 

@@ -1,10 +1,9 @@
 import gql from 'graphql-tag'
 
 import { Toast, Translate } from '~/components'
+import { StateArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { StateArticle } from './__generated__/StateArticle'
 
 const fragments = {
   article: gql`
@@ -29,7 +28,7 @@ const ArchivedHeader = () => (
   />
 )
 
-const State = ({ article }: { article: StateArticle }) => {
+const State = ({ article }: { article: StateArticleFragment }) => {
   const isBanned = article.state === 'banned'
   const isArchived = article.state === 'archived'
 

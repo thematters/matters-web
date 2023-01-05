@@ -2,6 +2,11 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import React from 'react'
 
 import { AvatarSize, CommentFormType, UserDigest } from '~/components'
+import {
+  FeedCommentPrivateFragment,
+  FeedCommentPublicFragment,
+  RefetchCommentQuery,
+} from '~/gql/graphql'
 
 import Content from '../Content'
 import DonatorLabel from '../DonatorLabel'
@@ -12,10 +17,6 @@ import ReplyTo from '../ReplyTo'
 import { fragments, REFETCH_COMMENT } from './gql'
 import styles from './styles.css'
 
-import { FeedCommentPrivate } from './__generated__/FeedCommentPrivate'
-import { FeedCommentPublic } from './__generated__/FeedCommentPublic'
-import { RefetchComment } from './__generated__/RefetchComment'
-
 export type CommentControls = {
   avatarSize?: Extract<AvatarSize, 'md' | 'lg'>
   hasUserName?: boolean
@@ -23,7 +24,7 @@ export type CommentControls = {
   DropdownActionsControls
 
 export type CommentProps = {
-  comment: FeedCommentPublic & Partial<FeedCommentPrivate>
+  comment: FeedCommentPublicFragment & Partial<FeedCommentPrivateFragment>
   type: CommentFormType
 } & CommentControls
 
@@ -35,7 +36,7 @@ export const BaseCommentFeed = ({
   replySubmitCallback,
   ...actionControls
 }: CommentProps) => {
-  const [refetchComment] = useLazyQuery<RefetchComment>(REFETCH_COMMENT, {
+  const [refetchComment] = useLazyQuery<RefetchCommentQuery>(REFETCH_COMMENT, {
     fetchPolicy: 'network-only',
   })
 

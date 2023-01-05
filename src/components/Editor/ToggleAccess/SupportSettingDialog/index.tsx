@@ -2,13 +2,11 @@ import _pickBy from 'lodash/pickBy'
 import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
-
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
-import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
+import { ArticleDetailPublicQuery, EditMetaDraftFragment } from '~/gql/graphql'
 
 interface SupportSettingDialogProps {
-  article?: ArticleDetailPublic_article
-  draft?: EditMetaDraft
+  article?: ArticleDetailPublicQuery['article']
+  draft?: EditMetaDraftFragment
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null
@@ -31,7 +29,8 @@ const BaseSupportSettingDialog = ({
   return (
     <>
       {children({ openDialog })}
-      <Dialog size="lg" isOpen={show} onDismiss={closeDialog} fixedHeight>
+
+      <Dialog size="lg" isOpen={show} onDismiss={closeDialog}>
         <DynamicContent
           closeDialog={closeDialog}
           draft={draft}

@@ -2,25 +2,29 @@ import { useApolloClient } from '@apollo/react-hooks'
 import { Fragment, useEffect, useState } from 'react'
 
 import {
+  MAX_QUICK_SEARCH_KEY_LENGTH,
+  MIN_QUICK_SEARCH_KEY_LENGTH,
+  SEARCH_START_FLAG,
+} from '~/common/enums'
+import { toPath } from '~/common/utils'
+import {
   Menu,
-  Spinner,
   TagDigest,
   UserDigest,
   useResponsive,
   useRoute,
 } from '~/components'
-
-import { toPath } from '~/common/utils'
+import { QuickResultQuery } from '~/gql/graphql'
 
 import { QUICK_RESULT } from './gql'
 import TriggerFullSearchItem from './TriggerFullSearchItem'
 
-import { QuickResult } from './__generated__/QuickResult'
-
 interface QuickSearchProps {
   searchKey: string
   activeItem?: string
-  onUpdateData?: (data: QuickResult | undefined) => void
+  onUpdateData?: (data: QuickResultQuery | undefined) => void
+  closeDropdown: () => void
+
   inPage?: boolean
 }
 
@@ -29,10 +33,10 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   const { getQuery } = useRoute()
   const version = getQuery('version')
 
-  const { searchKey, inPage, activeItem, onUpdateData } = props
+  const { searchKey, inPage, activeItem, onUpdateData, closeDropdown } = props
   const isLargeUp = useResponsive('lg-up')
   const client = useApolloClient()
-  const [data, setData] = useState<QuickResult>()
+  const [data, setData] = useState<QuickResultQuery>()
   const clearData = () => setData(undefined)
   const [loading, setLoading] = useState(false)
 
@@ -52,13 +56,18 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
     ;(async () => {
       clearData()
       if (
-        '@#＠＃'.includes(searchKey[0]) &&
-        (searchKey.length < 3 || searchKey.length > 11)
+        SEARCH_START_FLAG.includes(searchKey[0]) &&
+        (searchKey.length < MIN_QUICK_SEARCH_KEY_LENGTH + 1 ||
+          searchKey.length > MAX_QUICK_SEARCH_KEY_LENGTH + 1)
       ) {
         return
       }
 
-      if (searchKey.length < 2 || searchKey.length > 10) return
+      if (
+        searchKey.length < MIN_QUICK_SEARCH_KEY_LENGTH ||
+        searchKey.length > MAX_QUICK_SEARCH_KEY_LENGTH
+      )
+        return
 
       setLoading(true)
       // Why not useLazyQuery 👇🔗
@@ -66,7 +75,9 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
       const response = await client.query({
         query: QUICK_RESULT,
         variables: {
-          key: searchKey,
+          key: SEARCH_START_FLAG.includes(searchKey[0])
+            ? searchKey.slice(1)
+            : searchKey,
           version: version === '' ? undefined : version,
         },
         fetchPolicy: 'no-cache',
@@ -77,11 +88,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   }, [searchKey])
 
   if (loading) {
-    return (
-      <Menu width={inPage ? undefined : 'md'}>
-        <Spinner />
-      </Menu>
-    )
+    return null
   }
 
   if (!hasUsers && !hasTags) {
@@ -103,11 +110,13 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
               <Fragment key={cursor}>
                 <Menu.Item
                   bgActiveColor="grey-lighter"
+                  activeOutline="auto"
                   isActive={`user${cursor}` === activeItem}
                   {...toPath({
                     page: 'userProfile',
                     userName: node.userName || '',
                   })}
+                  onClick={closeDropdown}
                 >
                   <UserDigest.Concise
                     user={node}
@@ -127,11 +136,13 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
                 <Menu.Item
                   spacing={['base', 'base']}
                   bgActiveColor="grey-lighter"
+                  activeOutline="auto"
                   isActive={`tag${cursor}` === activeItem}
                   {...toPath({
                     page: 'tagDetail',
                     tag: node,
                   })}
+                  onClick={closeDropdown}
                 >
                   <TagDigest.Concise tag={node} textSize="sm" />
                 </Menu.Item>

@@ -1,14 +1,12 @@
 import classNames from 'classnames'
 
+import { toPath } from '~/common/utils'
 import { LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
-
-import { toPath } from '~/common/utils'
+import { UserDigestConciseUserFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { UserDigestConciseUser } from './__generated__/UserDigestConciseUser'
 
 /**
  * UserDigest.Concise is a component for presenting user's:
@@ -23,8 +21,7 @@ import { UserDigestConciseUser } from './__generated__/UserDigestConciseUser'
  */
 
 export type UserDigestConciseProps = {
-  user: UserDigestConciseUser
-
+  user: UserDigestConciseUserFragment
   avatarSize?: Extract<AvatarSize, 'lg' | 'xl'>
   nameStyle?: 'tight' | 'loose'
 
@@ -44,7 +41,7 @@ export const toUserDigestConcisePlaceholder = (displayName: string) =>
       __typename: 'Liker',
       civicLiker: false,
     },
-  } as UserDigestConciseUser)
+  } as UserDigestConciseUserFragment)
 
 const Concise = ({
   user,

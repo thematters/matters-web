@@ -1,3 +1,5 @@
+import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
+import { Z_INDEX } from '~/common/enums'
 import {
   Button,
   DropdownDialog,
@@ -6,10 +8,6 @@ import {
   Translate,
   withIcon,
 } from '~/components'
-
-import { Z_INDEX } from '~/common/enums'
-
-import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
 
 type SelectProps = {
   period: number

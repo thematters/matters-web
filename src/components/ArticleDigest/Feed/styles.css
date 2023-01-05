@@ -6,11 +6,9 @@
 
 .content {
   display: grid;
-  grid-template-areas:
-    'head cover'
-    'description description';
-  grid-template-rows: auto;
-  grid-template-columns: 1fr auto;
+  grid-template:
+    'head cover' auto
+    'description description' auto/ 1fr auto;
 
   @media (--sm-up) {
     grid-template-areas:

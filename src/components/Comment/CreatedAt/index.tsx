@@ -1,17 +1,15 @@
 import gql from 'graphql-tag'
 
-import { DateTime, LinkWrapper } from '~/components'
-
 import { toPath } from '~/common/utils'
-
-import { CreatedAtComment } from './__generated__/CreatedAtComment'
+import { DateTime, LinkWrapper } from '~/components'
+import { CreatedAtCommentFragment } from '~/gql/graphql'
 
 export interface CreatedAtControls {
   hasLink?: boolean
 }
 
 export type CreatedAtProps = {
-  comment: CreatedAtComment
+  comment: CreatedAtCommentFragment
 } & CreatedAtControls
 
 const fragments = {

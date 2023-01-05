@@ -1,10 +1,8 @@
 import classNames from 'classnames'
 
-import { TextIcon, withIcon } from '~/components'
-
-import { numRound } from '~/common/utils'
-
 import { ReactComponent as IconAnalyticsChangeArrow12 } from '@/public/static/icons/12px/analytics-change-arrow.svg'
+import { numRound } from '~/common/utils'
+import { TextIcon, withIcon } from '~/components'
 
 import styles from './styles.css'
 
@@ -83,7 +81,7 @@ const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
   )
 }
 
-const InfoTiles: React.FC<React.PropsWithChildren<React.ReactNode>> & {
+const InfoTiles: React.FC<{ children?: React.ReactNode }> & {
   Group: typeof InfoTilesGroup
   Tile: typeof InfoTilesTile
 } = ({ children }) => {

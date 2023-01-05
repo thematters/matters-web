@@ -4,7 +4,7 @@ import commentDraft from './commentDraft'
 import gatewayUrls from './gatewayUrls'
 import lastFetchRandom from './lastFetchRandom'
 
-export default {
+export const resolvers = {
   Query: {
     commentDraft,
     clientPreference,

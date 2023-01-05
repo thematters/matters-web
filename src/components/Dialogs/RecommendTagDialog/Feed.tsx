@@ -13,26 +13,26 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
+import { HottestTagsQuery, SelectedTagsQuery } from '~/gql/graphql'
 
 import { HOTTEST_TAGS, SELECTED_TAGS } from './gql'
 import styles from './styles.css'
 
-import {
-  HottestTags,
-  HottestTags_viewer_recommendation_hottestTags_edges,
-} from './__generated__/HottestTags'
-import {
-  SelectedTags,
-  SelectedTags_viewer_recommendation_selectedTags_edges,
-} from './__generated__/SelectedTags'
-
 export type FeedType = 'hottest' | 'selected'
 
-export type FeedQuery = HottestTags | SelectedTags
+export type FeedQuery = HottestTagsQuery | SelectedTagsQuery
 
 export type FeedEdges =
-  | HottestTags_viewer_recommendation_hottestTags_edges
-  | SelectedTags_viewer_recommendation_selectedTags_edges
+  | NonNullable<
+      NonNullable<
+        HottestTagsQuery['viewer']
+      >['recommendation']['hottestTags']['edges']
+    >[0]
+  | NonNullable<
+      NonNullable<
+        SelectedTagsQuery['viewer']
+      >['recommendation']['selectedTags']['edges']
+    >[0]
 
 interface Props {
   type: FeedType

@@ -4,6 +4,12 @@ import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 
 import {
+  parseFormSubmitErrors,
+  translate,
+  validateComparedUserName,
+  validateUserName,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   LanguageContext,
@@ -11,15 +17,7 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-
-import {
-  parseFormSubmitErrors,
-  translate,
-  validateComparedUserName,
-  validateUserName,
-} from '~/common/utils'
-
-import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName'
+import { UpdateUserInfoUserNameMutation } from '~/gql/graphql'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -46,7 +44,7 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [update] = useMutation<UpdateUserInfoUserName>(
+  const [update] = useMutation<UpdateUserInfoUserNameMutation>(
     UPDATE_USER_INFO,
     undefined,
     { showToast: false }

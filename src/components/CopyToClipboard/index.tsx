@@ -1,8 +1,7 @@
 import C2C from 'react-copy-to-clipboard'
 
-import { Translate } from '~/components'
-
 import { ADD_TOAST } from '~/common/enums'
+import { Translate } from '~/components'
 
 interface CopyToClipboardProps {
   text: string

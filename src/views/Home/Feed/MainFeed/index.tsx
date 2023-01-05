@@ -1,6 +1,7 @@
 import { NetworkStatus } from 'apollo-client'
 import { useContext, useEffect, useRef } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
   CardExposureTracker,
@@ -13,28 +14,21 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import {
+  HottestFeedPublicQuery,
+  IcymiFeedPublicQuery,
+  NewestFeedPublicQuery,
+} from '~/gql/graphql'
 
 import Authors from '../Authors'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
 
-import {
-  HottestFeedPublic,
-  HottestFeedPublic_viewer_recommendation_feed_edges,
-} from '../__generated__/HottestFeedPublic'
-import {
-  IcymiFeedPublic,
-  IcymiFeedPublic_viewer_recommendation_feed_edges,
-} from '../__generated__/IcymiFeedPublic'
-import {
-  NewestFeedPublic,
-  NewestFeedPublic_viewer_recommendation_feed_edges,
-} from '../__generated__/NewestFeedPublic'
-
-type FeedArticlesPublic = HottestFeedPublic | NewestFeedPublic | IcymiFeedPublic
+type FeedArticlesPublic =
+  | HottestFeedPublicQuery
+  | NewestFeedPublicQuery
+  | IcymiFeedPublicQuery
 
 type HorizontalFeed = React.FC<{ after?: string; first?: number }>
 
@@ -45,9 +39,21 @@ interface HorizontalFeedEdge {
 
 type FeedEdge =
   | HorizontalFeedEdge
-  | HottestFeedPublic_viewer_recommendation_feed_edges
-  | IcymiFeedPublic_viewer_recommendation_feed_edges
-  | NewestFeedPublic_viewer_recommendation_feed_edges
+  | NonNullable<
+      NonNullable<
+        HottestFeedPublicQuery['viewer']
+      >['recommendation']['feed']['edges']
+    >[0]
+  | NonNullable<
+      NonNullable<
+        IcymiFeedPublicQuery['viewer']
+      >['recommendation']['feed']['edges']
+    >[0]
+  | NonNullable<
+      NonNullable<
+        NewestFeedPublicQuery['viewer']
+      >['recommendation']['feed']['edges']
+    >[0]
 
 interface FeedLocation {
   [key: number]: HorizontalFeed
@@ -200,7 +206,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
     >
       <List>
         {mixFeed.map((edge, i) => {
-          if (edge.__typename === 'HorizontalFeed') {
+          if (edge?.__typename === 'HorizontalFeed') {
             const { Feed } = edge
             return <Feed key={edge.__typename + i} />
           }

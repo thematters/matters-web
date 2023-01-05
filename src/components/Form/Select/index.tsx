@@ -1,8 +1,7 @@
 import classNames from 'classnames'
 
-import { DropdownDialog } from '~/components'
-
 import { Z_INDEX } from '~/common/enums'
+import { DropdownDialog } from '~/components'
 
 import Field, { FieldProps } from '../Field'
 import Option from './Option'

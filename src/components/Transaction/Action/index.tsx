@@ -1,11 +1,7 @@
 import { Avatar, IconCircle24, IconSupport, IconWallet24 } from '~/components'
+import { DigestTransactionFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import {
-  DigestTransaction_recipient as Recipient,
-  DigestTransaction_sender as Sender,
-} from '../__generated__/DigestTransaction'
 
 /**
  * This a sub component of Transaction that depicts a donation
@@ -27,8 +23,8 @@ interface ActionProps {
   isSender?: boolean
   isSubscription?: boolean
   isWalletAction?: boolean
-  sender?: Sender | null
-  recipient?: Recipient | null
+  sender?: DigestTransactionFragment['sender'] | null
+  recipient?: DigestTransactionFragment['recipient'] | null
 }
 
 const Action = ({

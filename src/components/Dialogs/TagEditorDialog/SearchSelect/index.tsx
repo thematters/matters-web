@@ -1,6 +1,7 @@
 import _get from 'lodash/get'
 import { useState } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useMutation } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
@@ -8,10 +9,7 @@ import SearchingArea, {
   SelectNode,
 } from '~/components/SearchSelect/SearchingArea'
 import StagingArea, { StagingNode } from '~/components/SearchSelect/StagingArea'
-
-import { ADD_TOAST } from '~/common/enums'
-
-import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
+import { UpdateTagSettingMutation } from '~/gql/graphql'
 
 interface Props {
   id: string
@@ -38,7 +36,7 @@ type Area = 'staging' | 'searching'
  */
 const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
   const [update, { loading }] =
-    useMutation<UpdateTagSetting>(UPDATE_TAG_SETTING)
+    useMutation<UpdateTagSettingMutation>(UPDATE_TAG_SETTING)
 
   // area
   const [area, setArea] = useState<Area>('staging')

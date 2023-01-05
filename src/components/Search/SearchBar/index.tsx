@@ -2,6 +2,8 @@ import { Formik } from 'formik'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
+import { INPUT_DEBOUNCE, MAX_SEARCH_KEY_LENGTH, Z_INDEX } from '~/common/enums'
+import { getSearchType, toPath, translate } from '~/common/utils'
 import {
   Button,
   Dropdown,
@@ -12,13 +14,9 @@ import {
   useNativeEventListener,
   useRoute,
 } from '~/components'
-
-import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
-import { getSearchType, toPath, translate } from '~/common/utils'
+import { QuickResultQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { QuickResult } from '../SearchQuickResult/__generated__/QuickResult'
 
 interface SearchBarProps {
   onChange?: (key: string) => void
@@ -63,7 +61,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   hasDropdown = true,
 }) => {
   const { getQuery, router, isInPath } = useRoute()
-  const isSearch = isInPath('SEARCH')
+  const isInSearch = isInPath('SEARCH')
   const q = getQuery('q')
   const type = getSearchType(getQuery('type'))
   const { lang } = useContext(LanguageContext)
@@ -80,8 +78,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const openDropdown = () => setShowDropdown(true)
 
   // quick result hotkeys
-  const [data, setData] = useState<QuickResult>()
+  const [data, setData] = useState<QuickResultQuery>()
   const [activeItem, setActiveItem] = useState('input')
+  const resetActiveItem = () => setActiveItem('input')
   const items = ['input']
   const { edges: userEdges } = data?.user || {}
   const { edges: tagEdges } = data?.tag || {}
@@ -159,13 +158,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       onSubmit={(values) => {
         const path = toPath({
           page: 'search',
-          q: values.q.slice(0, 100),
+          q: encodeURIComponent(values.q.slice(0, MAX_SEARCH_KEY_LENGTH)),
           type,
         })
 
         if (values.q.length <= 0) return
 
-        if (isSearch) {
+        searchTextInput.current?.blur()
+
+        if (isInSearch) {
           router.replace(path.href)
         } else {
           router.push(path.href)
@@ -196,6 +197,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                   setSearch(e.target.value)
                 }}
                 value={values.q}
+                maxLength={MAX_SEARCH_KEY_LENGTH}
               />
 
               <SearchButton />
@@ -216,11 +218,19 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         return (
           <Dropdown
             content={
+              !isInSearch &&
               debouncedSearch && (
                 <SearchQuickResult
                   searchKey={debouncedSearch}
-                  onUpdateData={(newData: QuickResult | undefined) => {
+                  onUpdateData={(newData: QuickResultQuery | undefined) => {
                     setData(newData)
+                  }}
+                  closeDropdown={() => {
+                    closeDropdown()
+
+                    // clear input
+                    setValues({ q: '' })
+                    setSearch('')
                   }}
                   activeItem={activeItem}
                 />
@@ -244,10 +254,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 onChange={(e) => {
                   handleChange(e)
                   setSearch(e.target.value)
+                  resetActiveItem()
                   openDropdown()
                 }}
                 onFocus={openDropdown}
                 onClick={openDropdown}
+                maxLength={MAX_SEARCH_KEY_LENGTH}
               />
 
               <SearchButton />

@@ -82,4 +82,6 @@ const AmountInput = forwardRef(
   }
 )
 
+AmountInput.displayName = 'AmountInput'
+
 export default AmountInput

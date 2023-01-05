@@ -1,10 +1,8 @@
 import { DataProxy } from 'apollo-cache'
 
-import USER_FOLLOWER_COUNT from '~/components/GQL/queries/userFollowerCount'
-
 import { ERROR_CODES } from '~/common/enums'
-
-import { UserFollowerCount } from '~/components/GQL/queries/__generated__/UserFollowerCount'
+import USER_FOLLOWER_COUNT from '~/components/GQL/queries/userFollowerCount'
+import { UserFollowerCountQuery } from '~/gql/graphql'
 
 const update = ({
   cache,
@@ -13,7 +11,7 @@ const update = ({
 }: {
   cache: DataProxy
   type: 'increment' | 'decrement'
-  userName: string
+  userName: string | null
 }) => {
   try {
     if (!userName) {
@@ -21,7 +19,7 @@ const update = ({
     }
 
     const variables = { userName }
-    const cacheData = cache.readQuery<UserFollowerCount>({
+    const cacheData = cache.readQuery<UserFollowerCountQuery>({
       query: USER_FOLLOWER_COUNT,
       variables,
     })

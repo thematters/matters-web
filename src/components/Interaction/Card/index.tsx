@@ -10,10 +10,9 @@ import {
   useRef,
 } from 'react'
 
-import { LanguageContext } from '~/components'
-
 import { KEYCODES, TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
+import { LanguageContext } from '~/components'
 
 import styles from './styles.css'
 
@@ -33,6 +32,8 @@ export interface CardProps {
   borderRadius?: CardBorderRadius
 
   isActive?: boolean
+  activeOutline?: 'auto'
+
 
   href?: string
 
@@ -62,6 +63,8 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       borderRadius,
 
       isActive,
+      activeOutline,
+
 
       href,
 
@@ -95,6 +98,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       [`bg-active-${bgActiveColor}`]: !!bgActiveColor,
       [`border-${borderColor}`]: !!borderColor,
       [`border-radius-${borderRadius}`]: !!borderRadius,
+      ['active-outline-auto']: !!activeOutline,
 
       hasBorder: !!borderColor || !!borderRadius,
       disabled,
@@ -119,6 +123,18 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       const target = event.target as HTMLElement
 
       if (disabled) {
+        return
+      }
+
+      // skip if there is text selection
+      const selection = window.getSelection()
+      const selectedText = selection?.toString() || ''
+      const selectedNode = selection?.anchorNode?.parentNode
+      if (
+        selectedText?.length > 0 &&
+        selectedNode &&
+        target.contains(selectedNode)
+      ) {
         return
       }
 
@@ -165,7 +181,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
     if (is === 'link' && href) {
       return (
-        <Link href={href}>
+        <Link href={href} legacyBehavior>
           <a
             className={cardClasses}
             ref={cardRef}
@@ -223,3 +239,5 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
     )
   }
 )
+
+Card.displayName = 'Card'

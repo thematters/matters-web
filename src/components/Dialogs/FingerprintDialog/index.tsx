@@ -6,22 +6,23 @@ import {
   Dialog,
   Spinner,
   useDialogSwitch,
-  // usePublicLazyQuery,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-
-import { ArticleAccessType } from '@/__generated__/globalTypes'
 import {
-  ArticleFingerprintPublic,
-  ArticleFingerprintPublic_article_Article,
-} from './__generated__/ArticleFingerprintPublic'
-import { FingerprintArticle } from './__generated__/FingerprintArticle'
+  ArticleAccessType,
+  ArticleFingerprintPublicQuery,
+  FingerprintArticleFragment,
+} from '~/gql/graphql'
 
 interface FingerprintDialogProps {
-  article: FingerprintArticle
+  article: FingerprintArticleFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
+
+type ArticleFingerprintPublicArticle = NonNullable<
+  ArticleFingerprintPublicQuery['article'] & { __typename: 'Article' }
+>
 
 const fragments = {
   article: gql`
@@ -66,19 +67,16 @@ const BaseFingerprintDialog = ({
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const viewer = useContext(ViewerContext)
 
-  const {
-    data,
-    loading, // error,
-    refetch,
-  } = usePublicQuery<ArticleFingerprintPublic>(ArticleFingerprintGQL, {
-    variables: { id: article.id },
-    skip: true, // skip first call
-  })
+  const { data, loading, refetch } =
+    usePublicQuery<ArticleFingerprintPublicQuery>(ArticleFingerprintGQL, {
+      variables: { id: article.id },
+      skip: true, // skip first call
+    })
 
   // only show secret when viewer is author and access type is paywall
   const showSecret =
     viewer.id === article.author.id &&
-    article?.access.type === ArticleAccessType.paywall
+    article?.access.type === ArticleAccessType.Paywall
 
   useEffect(() => {
     if (show) {
@@ -90,7 +88,12 @@ const BaseFingerprintDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        smBgColor="grey-lighter"
+        smUpBgColor="grey-lighter"
+      >
         <Dialog.Header
           title="IPFSEntrance"
           closeDialog={closeDialog}
@@ -102,8 +105,7 @@ const BaseFingerprintDialog = ({
             dataHash={article.dataHash || ''}
             iscnId={
               article?.iscnId ||
-              (data?.article as ArticleFingerprintPublic_article_Article)
-                ?.iscnId ||
+              (data?.article as ArticleFingerprintPublicArticle)?.iscnId ||
               ''
             }
             iscnPublish={!!article.drafts?.[0]?.iscnPublish}

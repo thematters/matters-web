@@ -1,7 +1,9 @@
 import VisuallyHidden from '@reach/visually-hidden'
-import { AriaAttributes, forwardRef, useContext } from 'react'
+import React, { AriaAttributes, forwardRef, useContext } from 'react'
 import FocusLock from 'react-focus-lock'
 
+import { KEYCODES, TextId, Z_INDEX } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Button,
   Dialog,
@@ -14,9 +16,6 @@ import {
   useDialogSwitch,
   useResponsive,
 } from '~/components'
-
-import { KEYCODES, TextId, Z_INDEX } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 /**
  * This is a responsive component which will show
@@ -75,6 +74,7 @@ const ForwardChildren = forwardRef(
     <>{children({ openDialog, type, ref })}</>
   )
 )
+ForwardChildren.displayName = 'ForwardChildren'
 
 const BaseDropdownDialog = ({
   dropdown,
@@ -96,7 +96,7 @@ const BaseDropdownDialog = ({
     event.stopPropagation()
   }
 
-  const Content: React.FC<React.PropsWithChildren<React.ReactNode>> = ({
+  const Content: React.FC<{ children?: React.ReactNode }> = ({
     children: contentChildren,
   }) => {
     return (
@@ -140,7 +140,9 @@ const BaseDropdownDialog = ({
           </FocusLock>
         }
       >
-        <ForwardChildren openDialog={toggle} type={type} children={children} />
+        <ForwardChildren openDialog={toggle} type={type}>
+          {children}
+        </ForwardChildren>
       </Dropdown>
     )
   }
@@ -152,7 +154,7 @@ const BaseDropdownDialog = ({
     <>
       {children({ openDialog: toggle, type })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} {...dialog} slideIn>
+      <Dialog isOpen={show} onDismiss={closeDialog} {...dialog}>
         <Dialog.Header
           title={dialog.title}
           closeDialog={closeDialog}

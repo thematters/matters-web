@@ -10,6 +10,10 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import {
+  UpdateViewerNotificationCircleMutation,
+  ViewerNotificationCircleSettingsQuery,
+} from '~/gql/graphql'
 
 import styles from '../styles.css'
 import MyBroadcastSettings from './MyBroadcast'
@@ -18,9 +22,6 @@ import MyManageSettings from './MyManage'
 import SubscribeArticleSettings from './SubscribeArticle'
 import SubscribeBroadcastSettings from './SubscribeBroadcast'
 import SubscribeDiscussionSettings from './SubscribeDiscussion'
-
-import { UpdateViewerNotificationCircle } from './__generated__/UpdateViewerNotificationCircle'
-import { ViewerNotificationCircleSettings } from './__generated__/ViewerNotificationCircleSettings'
 
 const VIEWER_NOTIFICATION_CIRCLE_SETTINGS = gql`
   query ViewerNotificationCircleSettings {
@@ -75,12 +76,13 @@ const UPDATE_VIEWER_NOTIFICATION_CIRCLE = gql`
 `
 
 const BaseNotificationSettings = () => {
-  const [update] = useMutation<UpdateViewerNotificationCircle>(
+  const [update] = useMutation<UpdateViewerNotificationCircleMutation>(
     UPDATE_VIEWER_NOTIFICATION_CIRCLE
   )
-  const { data, loading, refetch } = useQuery<ViewerNotificationCircleSettings>(
-    VIEWER_NOTIFICATION_CIRCLE_SETTINGS
-  )
+  const { data, loading, refetch } =
+    useQuery<ViewerNotificationCircleSettingsQuery>(
+      VIEWER_NOTIFICATION_CIRCLE_SETTINGS
+    )
   const settings = data?.viewer?.settings.notification
   const id = data?.viewer?.id
 
@@ -160,7 +162,7 @@ const BaseNotificationSettings = () => {
 }
 
 const NotificationCircleSettings = () => (
-  <Layout.Main bgColor="grey-lighter">
+  <Layout.Main smBgColor="grey-lighter">
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="settingsNotificationCircle" />}

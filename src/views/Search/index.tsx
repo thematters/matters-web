@@ -2,22 +2,17 @@ import _uniq from 'lodash/uniq'
 import _without from 'lodash/without'
 import { useContext, useEffect, useState } from 'react'
 
+import { STORAGE_KEY_SEARCH_HISTORY } from '~/common/enums'
+import { storage, toPath } from '~/common/utils'
 import {
   Head,
   Layout,
-  PullToRefresh,
-  // SearchAutoComplete,
   SearchBar,
   SearchHistory,
-  // SearchOverview,
-  SearchQuickResult,
   useResponsive,
   useRoute,
   ViewerContext,
 } from '~/components'
-
-import { STORAGE_KEY_SEARCH_HISTORY } from '~/common/enums'
-import { storage, toPath } from '~/common/utils'
 
 import AggregateResults from './AggregateResults'
 import styles from './styles.css'
@@ -54,16 +49,13 @@ const Search = () => {
 
   const isLargeUp = useResponsive('lg-up')
 
-  const [typingKey, setTypingKey] = useState('')
-  const resetAutoComplete = () => setTypingKey('')
   const onCancel = () => {
     const path = toPath({ page: 'search' })
     router.replace(path.href)
   }
 
-  const isHistory = !q && !typingKey
-  const isQuickResult = !q && typingKey
-  const isAggregate = !isHistory && !isQuickResult
+  const isHistory = !q
+  const isAggregate = !isHistory
 
   // const showBackButton = isSmallUp && isOverview
   // const showMeButton = !isSmallUp && isOverview
@@ -82,11 +74,6 @@ const Search = () => {
     addSearchHistory(q)
   }, [isAggregate, q, storageKey])
 
-  useEffect(() => {
-    router.events.on('routeChangeStart', resetAutoComplete)
-    return () => router.events.off('routeChangeStart', resetAutoComplete)
-  }, [])
-
   return (
     <Layout.Main>
       <Layout.Header
@@ -96,8 +83,7 @@ const Search = () => {
             <Layout.Header.Title id="search" />
           ) : (
             <>
-              <SearchBar hasDropdown={false} onChange={setTypingKey} />
-
+              <SearchBar hasDropdown={false} />
               {showCancelButton && (
                 <span style={{ marginLeft: '1rem' }}>
                   <Layout.Header.CancelButton onClick={onCancel} />
@@ -111,18 +97,13 @@ const Search = () => {
 
       <Head title={{ id: 'search' }} />
 
-      <PullToRefresh>
-        {isHistory && !isLargeUp && (
-          <SearchHistory
-            data={searchHistory.slice(0, 10)}
-            removeSearchHistoryItem={removeSearchHistory}
-          />
-        )}
-        {isQuickResult && <SearchQuickResult searchKey={typingKey} inPage />}
-
-        {isAggregate && <AggregateResults />}
-      </PullToRefresh>
-      <style jsx>{styles}</style>
+      {isHistory && !isLargeUp && (
+        <SearchHistory
+          data={searchHistory.slice(0, 10)}
+          removeSearchHistoryItem={removeSearchHistory}
+        />
+      )}
+      {isAggregate && <AggregateResults />}
     </Layout.Main>
   )
 }

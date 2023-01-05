@@ -1,6 +1,5 @@
-import { Dialog, useDialogSwitch, useEventListener } from '~/components'
-
 import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
+import { Dialog, useDialogSwitch, useEventListener } from '~/components'
 
 import { SetupLikeCoin } from './SetupLikeCoin'
 

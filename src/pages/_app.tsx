@@ -5,12 +5,11 @@ import { ApolloClient } from 'apollo-client'
 import { NextPageContext } from 'next'
 import { AppProps } from 'next/app'
 
+import withApollo from '~/common/utils/withApollo'
 import { ErrorBoundary } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
 import { GlobalStyles } from '~/components/GlobalStyles'
 import Root from '~/components/Root'
-
-import withApollo from '~/common/utils/withApollo'
 
 const InnerApp = ({
   Component,

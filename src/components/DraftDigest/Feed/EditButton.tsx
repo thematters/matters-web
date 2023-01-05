@@ -1,13 +1,11 @@
 import gql from 'graphql-tag'
 
-import { Button, IconDraftEdit12, TextIcon, Translate } from '~/components'
-
 import { toPath } from '~/common/utils'
-
-import { EditButtonDraft } from './__generated__/EditButtonDraft'
+import { Button, IconDraftEdit12, TextIcon, Translate } from '~/components'
+import { EditButtonDraftFragment } from '~/gql/graphql'
 
 interface EditButtonProps {
-  draft: EditButtonDraft
+  draft: EditButtonDraftFragment
 }
 
 const fragments = {

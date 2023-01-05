@@ -2,6 +2,13 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import { useContext, useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
+import { INPUT_DEBOUNCE } from '~/common/enums'
+import {
+  analytics,
+  isValidEmail,
+  mergeConnections,
+  normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
+} from '~/common/utils'
 import {
   EmptySearch,
   InfiniteScroll,
@@ -11,14 +18,12 @@ import {
   ViewerContext,
 } from '~/components'
 import { toUserDigestMiniPlaceholder } from '~/components/UserDigest/Mini'
-
-import { INPUT_DEBOUNCE } from '~/common/enums'
 import {
-  analytics,
-  isValidEmail,
-  mergeConnections,
-  normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
-} from '~/common/utils'
+  ListViewerArticlesQuery,
+  SearchExclude,
+  SearchFilter,
+  SelectSearchQuery,
+} from '~/gql/graphql'
 
 import SearchSelectNode from '../SearchSelectNode'
 import styles from '../styles.css'
@@ -27,16 +32,6 @@ import { LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
 import InviteEmail from './InviteEmail'
 import SearchInput, { SearchType as SearchInputType } from './SearchInput'
 
-import { SearchExclude, SearchFilter } from '@/__generated__/globalTypes'
-import { ListViewerArticles } from './__generated__/ListViewerArticles'
-import {
-  SelectSearch,
-  SelectSearch_search_edges_node,
-  SelectSearch_search_edges_node_Article,
-  SelectSearch_search_edges_node_Tag,
-  SelectSearch_search_edges_node_User,
-} from './__generated__/SelectSearch'
-
 /**
  * This is a sub-component of search-and-select, and it will show
  * search results after typing in <SearchInput>. Node will be
@@ -44,10 +39,18 @@ import {
  *
  */
 export type SearchType = SearchInputType
-export type SelectNode = SelectSearch_search_edges_node
-export type SelectArticle = SelectSearch_search_edges_node_Article
-export type SelectTag = SelectSearch_search_edges_node_Tag
-export type SelectUser = SelectSearch_search_edges_node_User
+export type SelectNode = NonNullable<
+  SelectSearchQuery['search']['edges']
+>[0]['node']
+export type SelectArticle = NonNullable<
+  SelectSearchQuery['search']['edges']
+>[0]['node'] & { __typename: 'Article' }
+export type SelectTag = NonNullable<
+  SelectSearchQuery['search']['edges']
+>[0]['node'] & { __typename: 'Tag' }
+export type SelectUser = NonNullable<
+  SelectSearchQuery['search']['edges']
+>[0]['node'] & { __typename: 'User' }
 
 interface SearchingAreaProps {
   searchType: SearchType
@@ -101,7 +104,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
 
   // Data Fetching
   const [lazySearch, { data, loading, fetchMore }] =
-    usePublicLazyQuery<SelectSearch>(
+    usePublicLazyQuery<SelectSearchQuery>(
       SELECT_SEARCH,
       {},
       { publicQuery: !viewer.isAuthed }
@@ -109,7 +112,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const [
     loadList,
     { data: listData, loading: listLoading, fetchMore: fetchMoreList },
-  ] = useLazyQuery<ListViewerArticles>(LIST_VIEWER_ARTICLES)
+  ] = useLazyQuery<ListViewerArticlesQuery>(LIST_VIEWER_ARTICLES)
 
   // pagination
   const { edges: searchEdges, pageInfo: searchPageInfo } = data?.search || {}

@@ -1,12 +1,11 @@
 import { Card, IconAdd16, TextIcon, Translate } from '~/components'
+import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
-
 interface InviteEmailProps {
-  user: UserDigestMiniUser
-  onClick: (user: UserDigestMiniUser) => void
+  user: UserDigestMiniUserFragment
+  onClick: (user: UserDigestMiniUserFragment) => void
 }
 
 const InviteEmail: React.FC<InviteEmailProps> = ({ user, onClick }) => {

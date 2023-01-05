@@ -1,5 +1,8 @@
 import { useContext } from 'react'
 
+import IMAGE_STEP_1 from '@/public/static/images/migration-step-1.svg'
+import IMAGE_STEP_2 from '@/public/static/images/migration-step-2.svg'
+import IMAGE_STEP_3 from '@/public/static/images/migration-step-3.svg'
 import {
   Avatar,
   Button,
@@ -11,10 +14,6 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
-
-import IMAGE_STEP_1 from '@/public/static/images/migration-step-1.svg'
-import IMAGE_STEP_2 from '@/public/static/images/migration-step-2.svg'
-import IMAGE_STEP_3 from '@/public/static/images/migration-step-3.svg'
 
 import styles from './styles.css'
 
@@ -86,7 +85,7 @@ const Step = ({
 
   return (
     <section className="step">
-      <img src={src} />
+      <img src={src} alt="illustration" />
       <p className="title">
         <span className="number">{step}.</span>
         <Translate

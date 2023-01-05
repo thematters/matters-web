@@ -1,3 +1,4 @@
+import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
 import {
   Dialog,
   Form,
@@ -9,8 +10,6 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
 
 import SourceHeader from './SourceHeader'
 import styles from './styles.css'
@@ -108,7 +107,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
         {InnerForm}
 
-        <Spacer size="xloose" />
+        <Spacer />
       </Dialog.Content>
     </>
   )

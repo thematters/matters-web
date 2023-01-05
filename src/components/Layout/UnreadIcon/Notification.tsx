@@ -8,10 +8,9 @@ import {
   ViewerContext,
 } from '~/components'
 import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
+import { UnreadNoticeCountQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
 
 interface UnreadIconProps {
   active?: boolean
@@ -19,7 +18,7 @@ interface UnreadIconProps {
 
 const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
   const viewer = useContext(ViewerContext)
-  const { data, startPolling } = useQuery<UnreadNoticeCount>(
+  const { data, startPolling } = useQuery<UnreadNoticeCountQuery>(
     UNREAD_NOTICE_COUNT,
     {
       errorPolicy: 'ignore',

@@ -2,18 +2,15 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { ResponsiveImage } from '~/components'
-
-import { toPath } from '~/common/utils'
-
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
+import { toPath } from '~/common/utils'
+import { ResponsiveImage } from '~/components'
+import { CardTagFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { CardTag } from './__generated__/CardTag'
-
 interface CardProps {
-  tag: CardTag
+  tag: CardTagFragment
 }
 
 const Card = ({ tag }: CardProps) => {
@@ -22,7 +19,7 @@ const Card = ({ tag }: CardProps) => {
   const nameClasses = classNames({ name: true, mask: !!tag.cover })
 
   return (
-    <Link {...path}>
+    <Link {...path} legacyBehavior>
       <a>
         <section className="card">
           <ResponsiveImage url={url} size="360w" />

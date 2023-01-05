@@ -1,24 +1,21 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { IconLogbookBadge16, ResponsiveImage } from '~/components'
-
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 import LOGBOOK from '@/public/static/images/logbook.gif'
+import { IconLogbookBadge16, ResponsiveImage } from '~/components'
+import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { AvatarUser } from './__generated__/AvatarUser'
-import { AvatarUserLogbook } from './__generated__/AvatarUserLogbook'
-
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
 
-export type AvatarLogbook = PartialDeep<AvatarUserLogbook>
+export type AvatarLogbook = PartialDeep<AvatarUserLogbookFragment>
 
 export interface AvatarProps {
-  user?: AvatarUser & AvatarLogbook
+  user?: AvatarUserFragment & AvatarLogbook
   size?: AvatarSize
   src?: string | null
   inEditor?: boolean
@@ -81,7 +78,7 @@ export const Avatar = (props: AvatarProps) => {
       {hasLogbook && (
         <section className="badge">
           {inProfile ? (
-            <img className="logbook" src={LOGBOOK.src} />
+            <img className="logbook" src={LOGBOOK.src} alt="logbook icon" />
           ) : (
             <IconLogbookBadge16 />
           )}

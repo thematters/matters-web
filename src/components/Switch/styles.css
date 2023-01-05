@@ -15,7 +15,7 @@
 }
 
 .switch input {
-  @mixin all-transition;
+  @mixin transition;
 
   position: relative;
   display: inline-block;
@@ -25,6 +25,7 @@
   cursor: pointer;
   background: var(--switch-background);
   border-radius: var(--switch-border-radius);
+  transition-property: box-shadow;
 }
 
 .switch input::after {
@@ -37,13 +38,14 @@
 
 .switch input::after,
 .switch .loading {
-  @mixin all-transition;
+  @mixin transition;
 
   position: absolute;
   top: var(--switch-spacing);
   left: 0;
   width: var(--switch-thumb-width);
   height: var(--switch-thumb-width);
+  transition-property: transform;
   transform: translateX(var(--switch-spacing));
 }
 

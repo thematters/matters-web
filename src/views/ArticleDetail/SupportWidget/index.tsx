@@ -1,7 +1,15 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
+import jump from 'jump.js'
 import { useContext, useEffect, useState } from 'react'
 
+import {
+  PATHS,
+  PAYMENT_CURRENCY as CURRENCY,
+  SUPPORT_SUCCESS_ANIMATION,
+  TEST_ID,
+} from '~/common/enums'
+import { analytics, sleep } from '~/common/utils'
 import {
   Avatar,
   Button,
@@ -14,14 +22,7 @@ import {
   useEventListener,
   ViewerContext,
 } from '~/components'
-
-import {
-  PATHS,
-  PAYMENT_CURRENCY as CURRENCY,
-  SUPPORT_SUCCESS_ANIMATION,
-  TEST_ID,
-} from '~/common/enums'
-import { analytics, sleep } from '~/common/utils'
+import { ArticleDetailPublicQuery, HasDonatedQuery } from '~/gql/graphql'
 
 import Animation from './Animation'
 import Donators from './Donators'
@@ -29,15 +30,13 @@ import { fragments, HAS_DONATED } from './gql'
 import styles from './styles.css'
 import SupportButton from './SupportButton'
 
-import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
-import {
-  HasDonated,
-  HasDonated_article_Article,
-} from './__generated__/HasDonated'
-
 interface DonationProps {
-  article: ArticleDetailPublic_article
+  article: NonNullable<ArticleDetailPublicQuery['article']>
 }
+
+type HasDonatedArticle = NonNullable<
+  HasDonatedQuery['article'] & { __typename: 'Article' }
+>
 
 const SupportWidget = ({ article }: DonationProps) => {
   const viewer = useContext(ViewerContext)
@@ -48,13 +47,13 @@ const SupportWidget = ({ article }: DonationProps) => {
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const supportWidgetClasses = classNames({
     'support-widget': true,
-    hasCircle: article.access.circle,
+    hasCircle: article?.access.circle,
   })
 
   const [
     getHasDonated,
     { data: hasDonatedData, loading, refetch: hasDonatedRefetch },
-  ] = useLazyQuery<HasDonated>(HAS_DONATED, {
+  ] = useLazyQuery<HasDonatedQuery>(HAS_DONATED, {
     fetchPolicy: 'network-only',
   })
 
@@ -69,8 +68,7 @@ const SupportWidget = ({ article }: DonationProps) => {
     })
   }, [viewer.id])
 
-  const hasDonatedArticle =
-    hasDonatedData?.article as HasDonated_article_Article
+  const hasDonatedArticle = hasDonatedData?.article as HasDonatedArticle
 
   const isViewerDonated = hasDonatedArticle?.donation?.totalCount === 1
   useEffect(() => {
@@ -79,7 +77,7 @@ const SupportWidget = ({ article }: DonationProps) => {
     }
   }, [isViewerDonated])
 
-  const requestForDonation = article.requestForDonation
+  const requestForDonation = article?.requestForDonation
   const replyToDonator = hasDonatedArticle?.replyToDonator
 
   useEventListener(
@@ -90,16 +88,19 @@ const SupportWidget = ({ article }: DonationProps) => {
       }
       setCurrency(payload.currency)
       setShowAvatarAnimation(true)
+
       // HKD
       if (payload.currency === CURRENCY.HKD) {
         setShowAnimation(true)
         hasDonatedRefetch()
+        jump('#animation', { offset: -100 })
         return
       }
 
       // LIKE、USDT
       setPlayShipWaiting(true)
       setShowAnimation(true)
+      jump('#animation', { offset: -100 })
       await sleep(5 * 1000)
       setPlayShipWaiting(false)
       hasDonatedRefetch()
@@ -108,7 +109,7 @@ const SupportWidget = ({ article }: DonationProps) => {
   )
 
   return (
-    <section className={supportWidgetClasses}>
+    <section className={supportWidgetClasses} id="animation">
       {showAnimation && (
         <section className="donation">
           <Animation
@@ -129,10 +130,10 @@ const SupportWidget = ({ article }: DonationProps) => {
                 <>
                   {replyToDonator && (
                     <section>
-                      <Avatar user={article.author} size="xl" />
+                      <Avatar user={article?.author} size="xl" />
                       <p>
                         <TextIcon weight="md">
-                          {article.author.displayName}
+                          {article?.author.displayName}
                         </TextIcon>
                         <TextIcon color="grey-darker">
                           <Translate

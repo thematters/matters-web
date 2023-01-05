@@ -1,3 +1,4 @@
+import { ADD_TOAST } from '~/common/enums'
 import {
   IconMute24,
   IconUnMute24,
@@ -7,30 +8,32 @@ import {
   useMutation,
 } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
-
-import { ADD_TOAST } from '~/common/enums'
-
-import { ToggleBlockUser } from '~/components/GQL/mutations/__generated__/ToggleBlockUser'
-import { BlockUserPrivate } from '../__generated__/BlockUserPrivate'
-import { BlockUserPublic } from '../__generated__/BlockUserPublic'
+import {
+  BlockUserPrivateFragment,
+  BlockUserPublicFragment,
+  ToggleBlockUserMutation,
+} from '~/gql/graphql'
 
 const BlockUserButton = ({
   user,
   openDialog,
 }: {
-  user: BlockUserPublic & Partial<BlockUserPrivate>
+  user: BlockUserPublicFragment & Partial<BlockUserPrivateFragment>
   openDialog: () => void
 }) => {
-  const [unblockUser] = useMutation<ToggleBlockUser>(TOGGLE_BLOCK_USER, {
-    variables: { id: user.id, enabled: false },
-    optimisticResponse: {
-      toggleBlockUser: {
-        id: user.id,
-        isBlocked: false,
-        __typename: 'User',
+  const [unblockUser] = useMutation<ToggleBlockUserMutation>(
+    TOGGLE_BLOCK_USER,
+    {
+      variables: { id: user.id, enabled: false },
+      optimisticResponse: {
+        toggleBlockUser: {
+          id: user.id,
+          isBlocked: false,
+          __typename: 'User',
+        },
       },
-    },
-  })
+    }
+  )
   const onUnblock = async () => {
     await unblockUser()
     window.dispatchEvent(

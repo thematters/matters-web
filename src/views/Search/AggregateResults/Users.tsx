@@ -1,6 +1,12 @@
 import { useQuery } from '@apollo/react-hooks'
 
 import {
+  LATER_SEARCH_RESULTS_LENGTH,
+  MAX_SEARCH_RESULTS_LENGTH,
+  SEARCH_START_FLAG,
+} from '~/common/enums'
+import { analytics, mergeConnections, toPath } from '~/common/utils'
+import {
   EmptySearch,
   InfiniteScroll,
   Menu,
@@ -9,14 +15,11 @@ import {
   UserDigest,
   useRoute,
 } from '~/components'
-
-import { analytics, mergeConnections, toPath } from '~/common/utils'
+import { SearchAggregateUsersPublicQuery } from '~/gql/graphql'
 
 import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_USERS_PUBLIC } from './gql'
 import styles from './styles.css'
-
-import { SearchAggregateUsersPublic } from './__generated__/SearchAggregateUsersPublic'
 
 const AggregateUserResults = () => {
   const { getQuery } = useRoute()
@@ -28,9 +31,12 @@ const AggregateUserResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore, refetch } =
-    useQuery<SearchAggregateUsersPublic>(SEARCH_AGGREGATE_USERS_PUBLIC, {
-      variables: { key: q, version: version === '' ? undefined : version },
+  const { data, loading, fetchMore } =
+    useQuery<SearchAggregateUsersPublicQuery>(SEARCH_AGGREGATE_USERS_PUBLIC, {
+      variables: {
+        key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+        version: version === '' ? undefined : version,
+      },
       fetchPolicy: 'network-only',
     })
 
@@ -67,7 +73,13 @@ const AggregateUserResults = () => {
     })
 
     return fetchMore({
-      variables: { after: pageInfo.endCursor },
+      variables: {
+        first:
+          edges.length === MAX_SEARCH_RESULTS_LENGTH - 10
+            ? 10
+            : LATER_SEARCH_RESULTS_LENGTH,
+        after: pageInfo.endCursor,
+      },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
@@ -80,9 +92,10 @@ const AggregateUserResults = () => {
   return (
     <section className="aggregate-section">
       <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
+        hasNextPage={
+          pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
+        }
         loadMore={loadMore}
-        pullToRefresh={refetch}
       >
         <Menu>
           {edges.map(
@@ -110,7 +123,9 @@ const AggregateUserResults = () => {
           )}
         </Menu>
       </InfiniteScroll>
-      {!pageInfo.hasNextPage && <EndOfResults />}
+      {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
+        <EndOfResults />
+      )}
       <style jsx>{styles}</style>
     </section>
   )

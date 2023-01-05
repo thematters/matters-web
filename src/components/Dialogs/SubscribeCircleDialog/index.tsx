@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 
+import { OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   Dialog,
   Spinner,
@@ -12,14 +14,12 @@ import {
   ViewerContext,
 } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
-
-import { OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import {
+  DigestRichCirclePrivateFragment,
+  DigestRichCirclePublicFragment,
+} from '~/gql/graphql'
 
 import Complete from './Complete'
-
-import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
 type Step =
   | 'setPaymentPassword'
@@ -28,7 +28,7 @@ type Step =
   | 'complete'
 
 interface SubscribeCircleDialogProps {
-  circle: DigestRichCirclePublic & DigestRichCirclePrivate
+  circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
   children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

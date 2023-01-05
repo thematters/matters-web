@@ -2,7 +2,6 @@ import AmountInput from './AmountInput'
 import CheckBox from './CheckBox'
 import ComposedAmountInput from './ComposedAmountInput'
 import CurrencyRadioInput from './CurrencyRadioInput'
-import DropdownInput from './DropdownInput'
 import Field from './Field'
 import Input from './Input'
 import List from './List'
@@ -11,9 +10,7 @@ import Select from './Select'
 import styles from './styles.css'
 import Textarea from './Textarea'
 
-type FormProps = {
-  noBackground?: boolean
-} & React.DetailedHTMLProps<
+type FormProps = React.DetailedHTMLProps<
   React.FormHTMLAttributes<HTMLFormElement>,
   HTMLFormElement
 >
@@ -23,20 +20,14 @@ export const Form: React.FC<FormProps> & {
   Textarea: typeof Textarea
   CheckBox: typeof CheckBox
   PinInput: typeof PinInput
-  DropdownInput: typeof DropdownInput
   AmountInput: typeof AmountInput
   List: typeof List
   Field: typeof Field
   Select: typeof Select
   ComposedAmountInput: typeof ComposedAmountInput
   CurrencyRadioInput: typeof CurrencyRadioInput
-} = ({ noBackground, children, ...formProps }) => (
-  <form
-    method="POST"
-    className={noBackground ? 'no-background' : ''}
-    autoComplete="off"
-    {...formProps}
-  >
+} = ({ children, ...formProps }) => (
+  <form method="POST" autoComplete="off" {...formProps}>
     {children}
 
     <style jsx>{styles}</style>
@@ -47,7 +38,6 @@ Form.Input = Input
 Form.Textarea = Textarea
 Form.CheckBox = CheckBox
 Form.PinInput = PinInput
-Form.DropdownInput = DropdownInput
 Form.AmountInput = AmountInput
 Form.List = List
 Form.Field = Field

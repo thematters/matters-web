@@ -1,5 +1,9 @@
 import { useContext, useEffect } from 'react'
 
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
+import { URL_QS } from '~/common/enums'
+import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptyArticle,
@@ -15,12 +19,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-
-import { URL_QS } from '~/common/enums'
-import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
-
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
-import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
+import { UserArticlesPublicQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
 import {
@@ -30,12 +29,11 @@ import {
 } from './gql'
 import styles from './styles.css'
 
-import {
-  UserArticlesPublic,
-  UserArticlesPublic_user,
-} from './__generated__/UserArticlesPublic'
-
-const ArticleSummaryInfo = ({ user }: { user: UserArticlesPublic_user }) => {
+const ArticleSummaryInfo = ({
+  user,
+}: {
+  user: NonNullable<UserArticlesPublicQuery['user']>
+}) => {
   const { articleCount: articles, totalWordCount: words } = user.status || {
     articleCount: 0,
     totalWordCount: 0,
@@ -82,7 +80,7 @@ const UserArticles = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserArticlesPublic>(
+  } = usePublicQuery<UserArticlesPublicQuery>(
     query,
     {
       variables: { userName },
@@ -97,7 +95,7 @@ const UserArticles = () => {
   const hasSubscriptions = (user?.subscribedCircles.totalCount || 0) > 0
 
   // private data
-  const loadPrivate = (publicData?: UserArticlesPublic) => {
+  const loadPrivate = (publicData?: UserArticlesPublicQuery) => {
     if (!viewer.isAuthed || isViewer || !publicData || !user) {
       return
     }

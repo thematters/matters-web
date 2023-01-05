@@ -32,9 +32,11 @@ form {
     width: var(--search-input-button-width);
     height: 100%;
   }
+
   & button.search {
     left: var(--spacing-x-tight);
   }
+
   & button.clear {
     right: var(--spacing-x-tight);
   }

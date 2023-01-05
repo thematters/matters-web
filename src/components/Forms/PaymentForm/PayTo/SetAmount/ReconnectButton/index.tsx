@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { useDisconnect } from 'wagmi'
 
+import { maskAddress, translate } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
@@ -12,8 +13,6 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { maskAddress, translate } from '~/common/utils'
-
 import styles from './styles.css'
 
 const ReconnectButton = () => {
@@ -24,11 +23,7 @@ const ReconnectButton = () => {
   return (
     <>
       <p className="reconnect-hint">
-        <Translate
-          zh_hant="當前錢包地址與帳戶綁定不同，若要變更請直接操作錢包或重新連接為："
-          zh_hans="当前钱包地址与帐户绑定不同，若要变更请直接操作钱包或重新连接为："
-          en="The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as: "
-        />
+        <Translate id="reconnectHint" />
         <CopyToClipboard text={viewer.info.ethAddress || ''}>
           <Button
             spacing={['xtight', 'xtight']}

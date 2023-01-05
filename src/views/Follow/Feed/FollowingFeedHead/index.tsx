@@ -1,6 +1,6 @@
 import styles from './styles.css'
 
-const FollowingFeedHead: React.FC<React.PropsWithChildren<React.ReactNode>> = ({
+const FollowingFeedHead: React.FC<{ children?: React.ReactNode }> = ({
   children,
 }) => {
   return (

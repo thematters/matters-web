@@ -11,17 +11,16 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { CircleBasicProfileQuery } from '~/gql/graphql'
 
 import { CIRCLE_BASIC_PROFILE } from './gql'
-
-import { CircleBasicProfile } from './__generated__/CircleBasicProfile'
 
 const EditProfile = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
-  const { data, loading } = usePublicQuery<CircleBasicProfile>(
+  const { data, loading } = usePublicQuery<CircleBasicProfileQuery>(
     CIRCLE_BASIC_PROFILE,
     {
       variables: { name },
@@ -47,7 +46,7 @@ const EditProfile = () => {
   }
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'basicProfile' }} />
 
       <CreateCircleForm.Profile circle={circle} type="edit" purpose="page" />

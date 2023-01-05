@@ -2,15 +2,13 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext } from 'react'
 
-import { Button, IconComment16, LanguageContext, TextIcon } from '~/components'
-
 import { URL_FRAGMENT } from '~/common/enums'
 import { numAbbr, toPath, translate } from '~/common/utils'
-
-import { ActionsResponseCountArticle } from './__generated__/ActionsResponseCountArticle'
+import { Button, IconComment16, LanguageContext, TextIcon } from '~/components'
+import { ActionsResponseCountArticleFragment } from '~/gql/graphql'
 
 interface ResponseCountProps {
-  article: ActionsResponseCountArticle
+  article: ActionsResponseCountArticleFragment
 }
 
 const fragments = {

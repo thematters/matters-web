@@ -9,12 +9,10 @@ import {
   // usePublicLazyQuery,
   usePublicQuery,
 } from '~/components'
-
-import { AuthorRssFeed } from './__generated__/AuthorRssFeed'
-import { AuthorRssFeedPublic } from './__generated__/AuthorRssFeedPublic'
+import { AuthorRssFeedFragment, AuthorRssFeedPublicQuery } from '~/gql/graphql'
 
 interface RssFeedDialogProps {
-  user: AuthorRssFeed
+  user: AuthorRssFeedFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
@@ -58,10 +56,13 @@ export type SearchSelectFormProps = {
 const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  const { refetch } = usePublicQuery<AuthorRssFeedPublic>(AuthorRssFeedGQL, {
-    variables: { userName: user.userName },
-    skip: true, // skip first call
-  })
+  const { refetch } = usePublicQuery<AuthorRssFeedPublicQuery>(
+    AuthorRssFeedGQL,
+    {
+      variables: { userName: user.userName },
+      skip: true, // skip first call
+    }
+  )
 
   useEffect(() => {
     if (show) {
@@ -73,18 +74,19 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        smBgColor="grey-lighter"
+        smUpBgColor="grey-lighter"
+      >
         <Dialog.Header
           title="contentFeedEntrance"
           closeDialog={closeDialog}
           closeTextId="close"
         />
         <Dialog.Content hasGrow>
-          <DynamicContent
-            ipnsKey={user?.info.ipnsKey || ''}
-            articlesCount={user?.articles.totalCount || 0}
-            refetch={refetch}
-          />
+          <DynamicContent user={user} refetch={refetch} />
         </Dialog.Content>
       </Dialog>
     </>

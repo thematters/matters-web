@@ -2,16 +2,14 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { Fragment, useContext, useEffect } from 'react'
 
+import { toPath } from '~/common/utils'
 import { Menu, Translate, usePublicQuery, ViewerContext } from '~/components'
 import { Spinner } from '~/components/Spinner'
-
-import { toPath } from '~/common/utils'
+import { SearchOverviewPublicQuery } from '~/gql/graphql'
 
 import ClearHistoryButton from './ClearHistoryButton'
 import { SEARCH_AUTOCOMPLETE_PRIVATE, SEARCH_AUTOCOMPLETE_PUBLIC } from './gql'
 import styles from './styles.css'
-
-import { SearchOverviewPublic } from './__generated__/SearchOverviewPublic'
 
 interface SearchOverviewProps {
   inPage?: boolean
@@ -24,7 +22,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
    * Data Fetching
    */
   // public data
-  const { data, loading, client } = usePublicQuery<SearchOverviewPublic>(
+  const { data, loading, client } = usePublicQuery<SearchOverviewPublicQuery>(
     SEARCH_AUTOCOMPLETE_PUBLIC
   )
 
@@ -92,6 +90,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                     page: 'search',
                     q: key,
                   })}
+                  legacyBehavior
                 >
                   <a className="key">{key}</a>
                 </Link>

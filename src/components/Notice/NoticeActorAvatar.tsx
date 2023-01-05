@@ -1,17 +1,15 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Avatar } from '~/components/Avatar'
-
 import { toPath } from '~/common/utils'
-
-import { NoticeActorAvatarUser } from './__generated__/NoticeActorAvatarUser'
+import { Avatar } from '~/components/Avatar'
+import { NoticeActorAvatarUserFragment } from '~/gql/graphql'
 
 const NoticeActorAvatar = ({
   user,
   size = 'lg',
 }: {
-  user: NoticeActorAvatarUser | null
+  user: NoticeActorAvatarUserFragment | null
   size?: 'md' | 'lg'
 }) => {
   if (!user) {
@@ -25,9 +23,7 @@ const NoticeActorAvatar = ({
 
   return (
     <Link {...path}>
-      <a>
-        <Avatar user={user} size={size} />
-      </a>
+      <Avatar user={user} size={size} />
     </Link>
   )
 }
