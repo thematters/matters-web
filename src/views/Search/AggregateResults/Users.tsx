@@ -1,6 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
 
-import { SEARCH_START_FLAG } from '~/common/enums'
+import {
+  LATER_SEARCH_RESULTS_LENGTH,
+  MAX_SEARCH_RESULTS_LENGTH,
+  SEARCH_START_FLAG,
+} from '~/common/enums'
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 import {
   EmptySearch,
@@ -69,7 +73,13 @@ const AggregateUserResults = () => {
     })
 
     return fetchMore({
-      variables: { after: pageInfo.endCursor },
+      variables: {
+        first:
+          edges.length === MAX_SEARCH_RESULTS_LENGTH - 10
+            ? 10
+            : LATER_SEARCH_RESULTS_LENGTH,
+        after: pageInfo.endCursor,
+      },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
@@ -81,7 +91,12 @@ const AggregateUserResults = () => {
 
   return (
     <section className="aggregate-section">
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <InfiniteScroll
+        hasNextPage={
+          pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
+        }
+        loadMore={loadMore}
+      >
         <Menu>
           {edges.map(
             ({ node, cursor }, i) =>
@@ -108,7 +123,9 @@ const AggregateUserResults = () => {
           )}
         </Menu>
       </InfiniteScroll>
-      {!pageInfo.hasNextPage && <EndOfResults />}
+      {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
+        <EndOfResults />
+      )}
       <style jsx>{styles}</style>
     </section>
   )

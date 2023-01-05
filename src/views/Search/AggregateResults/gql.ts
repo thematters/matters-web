@@ -5,19 +5,19 @@ import { ArticleDigestFeed, TagDigest, UserDigest } from '~/components'
 export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
   query SearchAggregateArticlesPublic(
     $key: String!
+    $first: first_Int_min_0 = 30
     $after: String
     $version: SearchAPIVersion = v20221212
   ) {
     search(
       input: {
         type: Article
-        first: 30
+        first: $first
         version: $version
         key: $key
         after: $after
       }
     ) {
-      totalCount
       pageInfo {
         startCursor
         endCursor
@@ -41,6 +41,7 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
 export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
   query SearchAggregateTagsPublic(
     $key: String!
+    $first: first_Int_min_0 = 30
     $after: String
     $version: SearchAPIVersion = v20221212
   ) {
@@ -48,7 +49,7 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
       input: {
         type: Tag
         version: $version
-        first: 30
+        first: $first
         key: $key
         after: $after
       }
@@ -74,6 +75,7 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
 export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
   query SearchAggregateUsersPublic(
     $key: String!
+    $first: first_Int_min_0 = 30
     $after: String
     $version: SearchAPIVersion = v20221212
   ) {
@@ -81,7 +83,7 @@ export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
       input: {
         type: User
         version: $version
-        first: 30
+        first: $first
         key: $key
         after: $after
       }
