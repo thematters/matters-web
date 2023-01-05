@@ -91,7 +91,7 @@ const LinkENS = ({
       setTxConfirming(false)
       switchToComplete(tx.hash)
       analytics.trackEvent('click_button', {
-        type: 'bind_ens',
+        type: 'bind_ens_successfully',
         pageType: 'user_profile',
       })
     }

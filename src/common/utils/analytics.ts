@@ -69,6 +69,7 @@ interface ClickButtonProp {
     | 'click_tag'
     | 'try_login_from_visitor'
     | 'bind_ens'
+    | 'bind_ens_successfully'
   pageType?: PageType
 }
 
