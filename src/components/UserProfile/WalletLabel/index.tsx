@@ -2,7 +2,11 @@ import contentHash from '@ensdomains/content-hash'
 import { namehash } from 'ethers/lib/utils'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
-import { featureSupportedChains, PublicResolverABI } from '~/common/utils'
+import {
+  analytics,
+  featureSupportedChains,
+  PublicResolverABI,
+} from '~/common/utils'
 import {
   Button,
   ENSDialog,
@@ -69,6 +73,10 @@ const WalletLabel: React.FC<WalletLabelProps> = ({ user, isMe }) => {
               textColor="green"
               onClick={() => {
                 openDialog()
+                analytics.trackEvent('click_button', {
+                  type: 'bind_ens',
+                  pageType: 'user_profile',
+                })
               }}
               aria-haspopup="dialog"
             >
