@@ -108,6 +108,7 @@ const withPWA = require('next-pwa')({
   register: true,
   sw: 'service-worker.js',
   publicExcludes: ['!static/**/*'],
+  buildExcludes: [/.*\.svg/],
   cacheStartUrl: false,
   dynamicStartUrl: true,
 })
