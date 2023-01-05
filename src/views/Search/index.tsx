@@ -15,6 +15,7 @@ import {
 } from '~/components'
 
 import AggregateResults from './AggregateResults'
+import styles from './styles.css'
 // import EmptySearch from './EmptySearch'
 
 const Search = () => {
@@ -83,7 +84,6 @@ const Search = () => {
           ) : (
             <>
               <SearchBar hasDropdown={false} />
-
               {showCancelButton && (
                 <span style={{ marginLeft: '1rem' }}>
                   <Layout.Header.CancelButton onClick={onCancel} />

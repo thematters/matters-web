@@ -34,6 +34,7 @@ export interface CardProps {
   isActive?: boolean
   activeOutline?: 'auto'
 
+
   href?: string
 
   htmlHref?: string
@@ -63,6 +64,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
       isActive,
       activeOutline,
+
 
       href,
 

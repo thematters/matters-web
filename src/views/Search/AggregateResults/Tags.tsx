@@ -7,6 +7,7 @@ import {
   SEARCH_START_FLAG,
 } from '~/common/enums'
 import { analytics, mergeConnections, toPath } from '~/common/utils'
+
 import {
   EmptySearch,
   InfiniteScroll,

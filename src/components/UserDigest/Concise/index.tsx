@@ -22,7 +22,6 @@ import styles from './styles.css'
 
 export type UserDigestConciseProps = {
   user: UserDigestConciseUserFragment
-
   avatarSize?: Extract<AvatarSize, 'lg' | 'xl'>
   nameStyle?: 'tight' | 'loose'
 

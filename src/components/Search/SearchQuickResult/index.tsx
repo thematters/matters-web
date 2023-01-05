@@ -24,6 +24,7 @@ interface QuickSearchProps {
   activeItem?: string
   onUpdateData?: (data: QuickResultQuery | undefined) => void
   closeDropdown: () => void
+
   inPage?: boolean
 }
 
