@@ -1,4 +1,4 @@
-import { featureSupportedChains } from '~/common/utils'
+import { analytics, featureSupportedChains } from '~/common/utils'
 import { Dialog, Translate } from '~/components'
 
 import styles from './styles.css'
@@ -43,6 +43,10 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
           bgColor="grey-lighter"
           textColor="black"
           onClick={() => {
+            analytics.trackEvent('click_button', {
+              type: 'bind_ens',
+              pageType: 'user_profile',
+            })
             window.location.reload()
           }}
         >
