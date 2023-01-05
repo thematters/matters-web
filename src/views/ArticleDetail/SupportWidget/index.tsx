@@ -78,10 +78,7 @@ const SupportWidget = ({ article }: DonationProps) => {
     if (isViewerDonated) {
       setSupported(true)
     }
-    if (showAnimation) {
-      jump('#animation')
-    }
-  }, [isViewerDonated, showAnimation])
+  }, [isViewerDonated])
 
   const requestForDonation = article.requestForDonation
   const replyToDonator = hasDonatedArticle?.replyToDonator
@@ -99,12 +96,14 @@ const SupportWidget = ({ article }: DonationProps) => {
       if (payload.currency === CURRENCY.HKD) {
         setShowAnimation(true)
         hasDonatedRefetch()
+        jump('#animation')
         return
       }
 
       // LIKE、USDT
       setPlayShipWaiting(true)
       setShowAnimation(true)
+      jump('#animation')
       await sleep(5 * 1000)
       setPlayShipWaiting(false)
       hasDonatedRefetch()
@@ -113,9 +112,9 @@ const SupportWidget = ({ article }: DonationProps) => {
   )
 
   return (
-    <section className={supportWidgetClasses}>
+    <section className={supportWidgetClasses} id="animation">
       {showAnimation && (
-        <section className="donation" id="animation">
+        <section className="donation">
           <Animation
             playShipWaiting={playShipWaiting}
             playEnd={() => {
