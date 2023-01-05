@@ -96,14 +96,14 @@ const SupportWidget = ({ article }: DonationProps) => {
       if (payload.currency === CURRENCY.HKD) {
         setShowAnimation(true)
         hasDonatedRefetch()
-        jump('#animation')
+        jump('#animation', { offset: -10 })
         return
       }
 
       // LIKE、USDT
       setPlayShipWaiting(true)
       setShowAnimation(true)
-      jump('#animation')
+      jump('#animation', { offset: -10 })
       await sleep(5 * 1000)
       setPlayShipWaiting(false)
       hasDonatedRefetch()
