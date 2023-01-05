@@ -11,6 +11,7 @@ import {
 } from 'wagmi'
 
 import {
+  analytics,
   featureSupportedChains,
   maskAddress,
   PublicResolverABI,
@@ -89,6 +90,10 @@ const LinkENS = ({
       await tx.wait()
       setTxConfirming(false)
       switchToComplete(tx.hash)
+      analytics.trackEvent('click_button', {
+        type: 'bind_ens',
+        pageType: 'user_profile',
+      })
     }
   }
 
