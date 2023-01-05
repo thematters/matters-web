@@ -80,6 +80,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   // quick result hotkeys
   const [data, setData] = useState<QuickResultQuery>()
   const [activeItem, setActiveItem] = useState('input')
+  const resetActiveItem = () => setActiveItem('input')
   const items = ['input']
   const { edges: userEdges } = data?.user || {}
   const { edges: tagEdges } = data?.tag || {}
@@ -253,6 +254,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 onChange={(e) => {
                   handleChange(e)
                   setSearch(e.target.value)
+                  resetActiveItem()
                   openDropdown()
                 }}
                 onFocus={openDropdown}
