@@ -6,7 +6,7 @@ import styles from './styles.css'
 const EmptySearchHistory = () => {
   return (
     <section className="container">
-      <img src={IMAGE_EMPTY_SEARCH_HISTORY.src} />
+      <img src={IMAGE_EMPTY_SEARCH_HISTORY.src} alt="empty search history" />
       <section className="hint">
         <Translate
           zh_hant="輸入關鍵詞餵食搜尋怪，幫你找到相關內容哦！"

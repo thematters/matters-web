@@ -41,7 +41,7 @@ export const SearchHistory = ({
                   removeSearchHistoryItem(value)
                 }}
               >
-                <IconClose32 color="grey" />
+                <IconClose32 color="grey" size="md" />
               </Button>
             </section>
           </Menu.Item>
