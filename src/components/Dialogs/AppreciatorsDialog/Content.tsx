@@ -1,26 +1,18 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
-  InfiniteList,
+  InfiniteScroll,
   QueryError,
-  RowRendererProps,
   Spinner,
   Translate,
-  useResponsive,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { ArticleAppreciatorsQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import {
-  ArticleAppreciators,
-  ArticleAppreciators_article_Article,
-  ArticleAppreciators_article_Article_appreciationsReceived_edges,
-} from './__generated__/ArticleAppreciators'
 
 interface AppreciatorsDialogContentProps {
   id: string
@@ -64,15 +56,19 @@ const AppreciatorsDialogContent = ({
   id,
   closeDialog,
 }: AppreciatorsDialogContentProps) => {
-  const isSmallUp = useResponsive('sm-up')
-  const { data, loading, error, fetchMore } = useQuery<ArticleAppreciators>(
-    ARTICLE_APPRECIATORS,
-    { variables: { id } }
-  )
+  const { data, loading, error, fetchMore } =
+    useQuery<ArticleAppreciatorsQuery>(ARTICLE_APPRECIATORS, {
+      variables: { id },
+    })
 
-  const article = data?.article as ArticleAppreciators_article_Article
+  const article = data?.article
   const connectionPath = 'article.appreciationsReceived'
-  const { edges, pageInfo } = article?.appreciationsReceived || {}
+  const { edges, pageInfo } =
+    (article?.__typename === 'Article' && article?.appreciationsReceived) || {}
+  const totalCount =
+    (article?.__typename === 'Article' &&
+      article?.appreciationsReceived.totalCount) ||
+    0
 
   if (loading) {
     return <Spinner />
@@ -86,67 +82,21 @@ const AppreciatorsDialogContent = ({
     return null
   }
 
-  const ListRow = ({
-    index,
-    datum,
-  }: RowRendererProps<ArticleAppreciators_article_Article_appreciationsReceived_edges>) => {
-    const { node, cursor } = datum
-
-    return (
-      <div className="appreciator-item" key={cursor}>
-        {node.sender && (
-          <UserDigest.Rich
-            user={node.sender}
-            avatarBadge={
-              <span className="appreciation-amount">{node.amount}</span>
-            }
-            onClick={() => {
-              analytics.trackEvent('click_feed', {
-                type: 'appreciators',
-                contentType: 'user',
-                location: index,
-                id: node.sender?.id,
-              })
-            }}
-          />
-        )}
-        <style jsx>{styles}</style>
-      </div>
-    )
-  }
-
-  const loadMore = (callback: () => void) => {
+  const loadMore = () => {
     analytics.trackEvent('load_more', {
       type: 'appreciators',
       location: edges.length,
     })
     return fetchMore({
       variables: { after: pageInfo.endCursor },
-      updateQuery: (previousResult, { fetchMoreResult }) => {
-        callback()
-        return mergeConnections({
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
           path: connectionPath,
-        })
-      },
+        }),
     })
   }
-
-  const totalCount = article?.appreciationsReceived.totalCount || 0
-
-  // estimate a safe default height
-  const calcContentMaxHeight = () => {
-    if (window) {
-      const dialogMaxHeight = window.innerHeight * 0.01 * 90
-      const head = 1.5 + (isSmallUp ? 2 + 0.5 : 0.75 * 2)
-      const spacing = 0.75 * 2
-      return dialogMaxHeight - (head + spacing + 1) * 16
-    }
-    return
-  }
-
-  const defaultListMaxHeight = calcContentMaxHeight()
 
   return (
     <>
@@ -162,18 +112,33 @@ const AppreciatorsDialogContent = ({
       />
 
       <Dialog.Content>
-        <div className="dialog-appreciators-list">
-          <InfiniteList
-            data={edges}
-            defaultListMaxHeight={defaultListMaxHeight}
-            defaultRowHeight={70}
-            loader={<Spinner />}
-            loadMore={loadMore}
-            renderer={ListRow}
-            totalCount={totalCount}
-          />
-        </div>
-        <style jsx>{styles}</style>
+        <InfiniteScroll
+          loader={<Spinner />}
+          loadMore={loadMore}
+          hasNextPage={pageInfo.hasNextPage}
+        >
+          {edges.map(({ node, cursor }, index) =>
+            node.sender ? (
+              <div className="dialog-appreciators-list" key={cursor}>
+                <UserDigest.Rich
+                  user={node.sender}
+                  avatarBadge={
+                    <span className="appreciation-amount">{node.amount}</span>
+                  }
+                  onClick={() => {
+                    analytics.trackEvent('click_feed', {
+                      type: 'appreciators',
+                      contentType: 'user',
+                      location: index,
+                      id: node.sender?.id,
+                    })
+                  }}
+                />
+                <style jsx>{styles}</style>
+              </div>
+            ) : null
+          )}
+        </InfiniteScroll>
       </Dialog.Content>
     </>
   )

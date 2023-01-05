@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
+import { Translate } from '~/components'
+import { CircleNewUserNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeDate from '../NoticeDate'
@@ -12,10 +12,8 @@ import NoticeTypeIcon from '../NoticeTypeIcon'
 import NoticeUserCard from '../NoticeUserCard'
 import styles from '../styles.css'
 
-import { CircleNewUserNotice as NoticeType } from './__generated__/CircleNewUserNotice'
-
 type CircleNewUserNotice = {
-  notice: NoticeType
+  notice: CircleNewUserNoticeFragment
   userType: 'follower' | 'subscriber' | 'unsubscriber'
 }
 

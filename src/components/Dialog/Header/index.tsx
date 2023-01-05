@@ -1,9 +1,8 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
 
-import { Spacer, Translate } from '~/components'
-
 import { TextId } from '~/common/enums'
+import { Spacer, Translate } from '~/components'
 
 import { BackButton, CloseButton, RightButton } from './Button'
 import styles from './styles.css'

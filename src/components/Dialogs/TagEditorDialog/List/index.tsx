@@ -10,13 +10,9 @@ import {
   UserDigest,
 } from '~/components'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
+import { TagMaintainersQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import {
-  TagMaintainers,
-  TagMaintainers_node_Tag_editors as TagEditor,
-} from '~/components/GQL/queries/__generated__/TagMaintainers'
 
 /**
  * This a sub-component of <TagEditorDialog>. It shows editors of a tag, and
@@ -33,12 +29,16 @@ import {
  *   />
  * ```
  */
+type TagMaintainersNodeTagEditor = NonNullable<
+  NonNullable<TagMaintainersQuery['node'] & { __typename: 'Tag' }>['editors']
+>[0]
+
 interface Props {
   id: string
 
   closeDialog: () => void
   toAddStep: () => void
-  toRemoveStep: (editor: TagEditor) => void
+  toRemoveStep: (editor: TagMaintainersNodeTagEditor) => void
 }
 
 const RemoveButton = ({ remove }: { remove: () => void }) => (
@@ -58,9 +58,12 @@ const RemoveButton = ({ remove }: { remove: () => void }) => (
 )
 
 const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
-  const { data, loading, error } = useQuery<TagMaintainers>(TAG_MAINTAINERS, {
-    variables: { id },
-  })
+  const { data, loading, error } = useQuery<TagMaintainersQuery>(
+    TAG_MAINTAINERS,
+    {
+      variables: { id },
+    }
+  )
 
   if (loading) {
     return <Spinner />

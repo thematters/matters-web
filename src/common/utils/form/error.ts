@@ -1,9 +1,8 @@
 import { ApolloError } from 'apollo-client'
 
-import { getErrorCodes } from '~/components/GQL'
-
 import { ErrorCodeKeys, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
+import { getErrorCodes } from '~/components/GQL'
 
 type ErrorMessages = { [key in ErrorCodeKeys]: string }
 

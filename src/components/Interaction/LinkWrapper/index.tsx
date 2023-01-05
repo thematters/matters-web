@@ -37,7 +37,7 @@ export const LinkWrapper: React.FC<
   })
 
   return (
-    <Link href={href}>
+    <Link href={href} legacyBehavior>
       <a
         className={linkClasses}
         onClick={(e) => {

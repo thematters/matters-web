@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useRef } from 'react'
 
-import { ViewerContext } from '~/components'
-
 import { analytics } from '~/common/utils'
+import { ViewerContext } from '~/components'
 
 // get referrer without query string
 // should be same as window.location.origin + window.location.pathname

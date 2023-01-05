@@ -1,6 +1,7 @@
 import { NetworkStatus } from 'apollo-client'
 import { Fragment, useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptySearch,
@@ -11,13 +12,10 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { SearchArticlesPublicQuery } from '~/gql/graphql'
 
 import GoogleSearchButton from '../GoogleSearchButton'
 import { SEARCH_ARTICLES_PRIVATE, SEARCH_ARTICLES_PUBLIC } from './gql'
-
-import { SearchArticlesPublic } from './__generated__/SearchArticlesPublic'
 
 const SearchArticles = () => {
   const viewer = useContext(ViewerContext)
@@ -35,7 +33,7 @@ const SearchArticles = () => {
     networkStatus,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<SearchArticlesPublic>(SEARCH_ARTICLES_PUBLIC, {
+  } = usePublicQuery<SearchArticlesPublicQuery>(SEARCH_ARTICLES_PUBLIC, {
     variables: { key: q, first: 10 },
     notifyOnNetworkStatusChange: true,
   })
@@ -46,7 +44,7 @@ const SearchArticles = () => {
   const { edges, pageInfo } = data?.search || {}
 
   // private data
-  const loadPrivate = (publicData?: SearchArticlesPublic) => {
+  const loadPrivate = (publicData?: SearchArticlesPublicQuery) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }

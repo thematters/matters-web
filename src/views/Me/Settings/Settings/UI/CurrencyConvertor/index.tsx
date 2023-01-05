@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
   DropdownDialog,
   Form,
@@ -10,11 +11,7 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-
-import { ADD_TOAST } from '~/common/enums'
-
-import { QuoteCurrency } from '@/__generated__/globalTypes'
-import { SetCurrency } from './__generated__/SetCurrency'
+import { QuoteCurrency, SetCurrencyMutation } from '~/gql/graphql'
 
 const SET_CURRENCY = gql`
   mutation SetCurrency($input: SetCurrencyInput!) {
@@ -30,7 +27,7 @@ const SET_CURRENCY = gql`
 const CurrencyConvertor = () => {
   const viewer = useContext(ViewerContext)
   const currency = viewer.settings.currency
-  const [setCurrency] = useMutation<SetCurrency>(SET_CURRENCY)
+  const [setCurrency] = useMutation<SetCurrencyMutation>(SET_CURRENCY)
 
   const updateCurrency = async (c: QuoteCurrency) => {
     if (!viewer.isAuthed) {
@@ -63,37 +60,37 @@ const CurrencyConvertor = () => {
     }
   }
 
-  const isUSDActive = currency === QuoteCurrency.USD
-  const isHKDActive = currency === QuoteCurrency.HKD
-  const isTWDActive = currency === QuoteCurrency.TWD
+  const isUSDActive = currency === QuoteCurrency.Usd
+  const isHKDActive = currency === QuoteCurrency.Hkd
+  const isTWDActive = currency === QuoteCurrency.Twd
 
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
-      <Menu.Item onClick={() => updateCurrency(QuoteCurrency.USD)}>
+      <Menu.Item onClick={() => updateCurrency(QuoteCurrency.Usd)}>
         <TextIcon
           spacing="base"
           size="md"
           weight={isUSDActive ? 'bold' : 'normal'}
         >
-          {QuoteCurrency.USD}
+          {QuoteCurrency.Usd}
         </TextIcon>
       </Menu.Item>
-      <Menu.Item onClick={() => updateCurrency(QuoteCurrency.HKD)}>
+      <Menu.Item onClick={() => updateCurrency(QuoteCurrency.Hkd)}>
         <TextIcon
           spacing="base"
           size="md"
           weight={isHKDActive ? 'bold' : 'normal'}
         >
-          {QuoteCurrency.HKD}
+          {QuoteCurrency.Hkd}
         </TextIcon>
       </Menu.Item>
-      <Menu.Item onClick={() => updateCurrency(QuoteCurrency.TWD)}>
+      <Menu.Item onClick={() => updateCurrency(QuoteCurrency.Twd)}>
         <TextIcon
           spacing="base"
           size="md"
           weight={isTWDActive ? 'bold' : 'normal'}
         >
-          {QuoteCurrency.TWD}
+          {QuoteCurrency.Twd}
         </TextIcon>
       </Menu.Item>
     </Menu>

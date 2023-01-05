@@ -5,11 +5,10 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { FingerprintArticle } from '~/components/Dialogs/FingerprintDialog/__generated__/FingerprintArticle'
+import { FingerprintArticleFragment } from '~/gql/graphql'
 
 interface FingerprintButtonProps {
-  article: FingerprintArticle
+  article: FingerprintArticleFragment
 }
 
 const FingerprintButton = ({ article }: FingerprintButtonProps) => {

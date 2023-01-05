@@ -3,8 +3,7 @@ import gql from 'graphql-tag'
 import { useState } from 'react'
 
 import { Dialog, Spinner, Translate } from '~/components'
-
-import { ViewerStripeAccount } from './__generated__/ViewerStripeAccount'
+import { ViewerStripeAccountQuery } from '~/gql/graphql'
 
 interface Props {
   nextStep: () => void
@@ -26,12 +25,15 @@ const VIEWER_STRIPE_ACCOUNT = gql`
 
 const Onboarding: React.FC<Props> = ({ nextStep }) => {
   const [polling, setPolling] = useState(true)
-  const { data, error } = useQuery<ViewerStripeAccount>(VIEWER_STRIPE_ACCOUNT, {
-    pollInterval: polling ? 1000 : undefined,
-    errorPolicy: 'none',
-    fetchPolicy: 'network-only',
-    skip: typeof window === 'undefined',
-  })
+  const { data, error } = useQuery<ViewerStripeAccountQuery>(
+    VIEWER_STRIPE_ACCOUNT,
+    {
+      pollInterval: polling ? 1000 : undefined,
+      errorPolicy: 'none',
+      fetchPolicy: 'network-only',
+      skip: typeof window === 'undefined',
+    }
+  )
   const stripeAccount = data?.viewer?.wallet.stripeAccount?.id
 
   if (stripeAccount) {

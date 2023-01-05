@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
+import { ADD_TOAST, PAYOUT_COUNTRY } from '~/common/enums'
+import { parseFormSubmitErrors, sleep } from '~/common/utils'
 import {
   Dialog,
   LanguageContext,
@@ -8,13 +10,9 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-
-import { ADD_TOAST, PAYOUT_COUNTRY } from '~/common/enums'
-import { parseFormSubmitErrors, sleep } from '~/common/utils'
+import { ConnectStripeAccountMutation } from '~/gql/graphql'
 
 import SelectCountry from './SelectCountry'
-
-import { ConnectStripeAccount } from './__generated__/ConnectStripeAccount'
 
 interface Props {
   nextStep: () => void
@@ -34,9 +32,8 @@ const Request: React.FC<Props> = ({ nextStep, closeDialog }) => {
   const [country, setCountry] = useState<PAYOUT_COUNTRY>(
     PAYOUT_COUNTRY.HongKong
   )
-  const [connectStripeAccount, { loading }] = useMutation<ConnectStripeAccount>(
-    CONNECT_STRIPE_ACCOUNT
-  )
+  const [connectStripeAccount, { loading }] =
+    useMutation<ConnectStripeAccountMutation>(CONNECT_STRIPE_ACCOUNT)
 
   const request = async () => {
     try {

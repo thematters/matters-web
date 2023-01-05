@@ -1,6 +1,8 @@
 import { Fragment, useContext } from 'react'
 import { animated, useSpring } from 'react-spring'
 
+import { IMAGE_PIXEL } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   DonatorsDialog,
   IconArrowRight16,
@@ -10,14 +12,10 @@ import {
   UserDigest,
 } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
-
-import { IMAGE_PIXEL } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { DonatorsArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { DonatorsArticle } from './__generated__/DonatorsArticle'
 
 type AvatarItemPros = Pick<AvatarProps, 'user'>
 
@@ -32,7 +30,7 @@ const AvatarItem = ({ user }: AvatarItemPros) => {
 }
 
 interface DonatorsProps {
-  article: DonatorsArticle
+  article: DonatorsArticleFragment
   showAvatarAnimation?: boolean
 }
 
@@ -132,9 +130,9 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                   textPlacement="left"
                 >
                   <Translate
-                    zh_hant="個人支持過本文・看全部"
-                    zh_hans="个人支持过本文・看全部"
-                    en="others have supported the article. All supporters"
+                    zh_hant="個人支持過本文・查看全部"
+                    zh_hans="个人支持过本文・查看全部"
+                    en="People have supported the article. All supporters"
                   />
                 </TextIcon>
               </button>

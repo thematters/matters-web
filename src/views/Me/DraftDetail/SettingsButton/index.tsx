@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { ENTITY_TYPE, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 import {
   Button,
   TextIcon,
@@ -14,8 +15,10 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import { EditorSettingsDialog } from '~/components/Editor/SettingsDialog'
-
-import { ENTITY_TYPE, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
+import {
+  DigestRichCirclePublicFragment,
+  EditMetaDraftFragment,
+} from '~/gql/graphql'
 
 import {
   useEditDraftAccess,
@@ -27,12 +30,9 @@ import {
 } from '../hooks'
 import ConfirmPublishDialogContent from './ConfirmPublishDialogContent'
 
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { EditMetaDraft } from '../__generated__/EditMetaDraft'
-
 interface SettingsButtonProps {
-  draft: EditMetaDraft
-  ownCircles?: DigestRichCirclePublic[]
+  draft: EditMetaDraftFragment
+  ownCircles?: DigestRichCirclePublicFragment[]
   publishable?: boolean
 }
 

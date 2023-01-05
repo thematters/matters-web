@@ -1,13 +1,13 @@
 import gql from 'graphql-tag'
 
+import { TagNoticeFragment } from '~/gql/graphql'
+
 import TagAddEditorNotice from './TagAddEditorNotice'
 import TagAdoptionNotice from './TagAdoptionNotice'
 import TagLeaveEditorNotice from './TagLeaveEditorNotice'
 import TagLeaveNotice from './TagLeaveNotice'
 
-import { TagNotice as NoticeType } from './__generated__/TagNotice'
-
-const TagNotice = ({ notice }: { notice: NoticeType }) => {
+const TagNotice = ({ notice }: { notice: TagNoticeFragment }) => {
   switch (notice.tagNoticeType) {
     case 'TagAdoption':
       return <TagAdoptionNotice notice={notice} />

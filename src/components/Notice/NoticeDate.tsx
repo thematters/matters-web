@@ -1,12 +1,11 @@
 import gql from 'graphql-tag'
 
 import { DateTime } from '~/components'
+import { NoticeDateFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { NoticeDate as NoticeDateType } from './__generated__/NoticeDate'
-
-const NoticeDate = ({ notice }: { notice: NoticeDateType }) => (
+const NoticeDate = ({ notice }: { notice: NoticeDateFragment }) => (
   <section className="date">
     <DateTime date={notice.createdAt} type="relative" />
 

@@ -1,6 +1,5 @@
-import { Dialog, Translate } from '~/components'
-
 import { PATHS } from '~/common/enums'
+import { Dialog, Translate } from '~/components'
 
 import styles from './styles.css'
 

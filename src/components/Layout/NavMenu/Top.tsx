@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { PATHS } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import {
   CardSpacing,
   IconAnalytics24,
@@ -16,9 +18,6 @@ import {
   useFeatures,
   ViewerContext,
 } from '~/components'
-
-import { PATHS } from '~/common/enums'
-import { toPath } from '~/common/utils'
 
 interface NavMenuTopProps {
   isInSideDrawerNav?: boolean

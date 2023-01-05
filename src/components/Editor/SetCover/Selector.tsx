@@ -1,18 +1,16 @@
 import { useContext } from 'react'
 
-import { IconChecked, LanguageContext, Translate } from '~/components'
-
 import { ASSET_TYPE } from '~/common/enums'
 import { translate } from '~/common/utils'
+import { IconChecked, LanguageContext, Translate } from '~/components'
+import { AssetFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
-
 interface SelectorProps {
-  assets: Asset[]
-  selected?: Asset
-  setSelected: (asset?: Asset) => any
+  assets: AssetFragment[]
+  selected?: AssetFragment
+  setSelected: (asset?: AssetFragment) => any
 }
 
 const Selector: React.FC<SelectorProps> = ({
@@ -55,7 +53,7 @@ const Selector: React.FC<SelectorProps> = ({
                 lang,
               })}
             >
-              <img src={asset.path} />
+              <img src={asset.path} alt="cover" />
 
               {asset.path === selected?.path && (
                 <IconChecked size="md" color="green" />

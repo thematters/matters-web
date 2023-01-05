@@ -3,13 +3,10 @@ import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
 import { createContext, useContext, useState } from 'react'
 
-import { Translate, useMutation, ViewerContext } from '~/components'
-
 import { ADD_TOAST, COOKIE_LANGUAGE, DEFAULT_LOCALE } from '~/common/enums'
 import { extractRootDomain, getCookie, toUserLanguage } from '~/common/utils'
-
-import { UserLanguage } from '@/__generated__/globalTypes'
-import { UpdateLanguage } from './__generated__/UpdateLanguage'
+import { Translate, useMutation, ViewerContext } from '~/components'
+import { UpdateLanguageMutation, UserLanguage } from '~/gql/graphql'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
   mutation UpdateLanguage($input: UpdateUserInfoInput!) {
@@ -39,7 +36,9 @@ export const LanguageProvider = ({
   headers?: any
   children: React.ReactNode
 }) => {
-  const [updateLanguage] = useMutation<UpdateLanguage>(UPDATE_VIEWER_LANGUAGE)
+  const [updateLanguage] = useMutation<UpdateLanguageMutation>(
+    UPDATE_VIEWER_LANGUAGE
+  )
 
   // read from authed viewer object
   const viewer = useContext(ViewerContext)
@@ -71,7 +70,7 @@ export const LanguageProvider = ({
       .map((l: string) => l.trim())[0]
     fallbackLang = toUserLanguage(acceptLanguage)
   }
-  fallbackLang = fallbackLang || UserLanguage.zh_hant
+  fallbackLang = fallbackLang || UserLanguage.ZhHans
 
   const initLocalLang = (viewerLang ||
     cookieLang ||

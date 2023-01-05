@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
   Dialog,
   Term,
@@ -12,14 +13,12 @@ import {
   ViewerContext,
 } from '~/components'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
-
-import { ADD_TOAST, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
-import { storage } from '~/common/utils'
+import {
+  UpdateUserInfoAgreeOnMutation,
+  UserLogoutMutation,
+} from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
-import { UpdateUserInfoAgreeOn } from './__generated__/UpdateUserInfoAgreeOn'
 
 interface TermContentProps {
   closeDialog: () => void
@@ -38,10 +37,10 @@ const UPDATE_AGREE_ON = gql`
 
 const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
   const router = useRouter()
-  const [logout] = useMutation<UserLogout>(USER_LOGOUT, undefined, {
+  const [logout] = useMutation<UserLogoutMutation>(USER_LOGOUT, undefined, {
     showToast: false,
   })
-  const [update] = useMutation<UpdateUserInfoAgreeOn>(UPDATE_AGREE_ON)
+  const [update] = useMutation<UpdateUserInfoAgreeOnMutation>(UPDATE_AGREE_ON)
 
   const { handleSubmit, isSubmitting } = useFormik({
     initialValues: {},
@@ -58,9 +57,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
 
   const onLogout = async () => {
     try {
-      await logout().then(() => {
-        storage.remove(STORAGE_KEY_AUTH_TOKEN)
-      })
+      await logout()
 
       // await clearPersistCache()
 

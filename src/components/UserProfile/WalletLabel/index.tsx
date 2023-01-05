@@ -2,6 +2,7 @@ import contentHash from '@ensdomains/content-hash'
 import { namehash } from 'ethers/lib/utils'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
+import { featureSupportedChains, PublicResolverABI } from '~/common/utils'
 import {
   Button,
   ENSDialog,
@@ -10,16 +11,13 @@ import {
   Tooltip,
   Translate,
 } from '~/components'
-
-import { featureSupportedChains, PublicResolverABI } from '~/common/utils'
+import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
 import WalletAddress from './WalletAddress'
 
-import { UserProfileUserPublic_user } from '../__generated__/UserProfileUserPublic'
-
 type WalletLabelProps = {
-  user: UserProfileUserPublic_user
+  user: NonNullable<UserProfileUserPublicQuery['user']>
   isMe: boolean
 }
 
@@ -37,7 +35,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({ user, isMe }) => {
     chainId: targetNetork.id,
   })
   const { data: contenthashData, isSuccess } = useContractRead({
-    address: resolverData?.address,
+    address: resolverData?.address as `0x${string}` | undefined,
     abi: PublicResolverABI,
     functionName: 'contenthash',
     args: ensName ? [namehash(ensName) as `0x${string}`] : undefined,

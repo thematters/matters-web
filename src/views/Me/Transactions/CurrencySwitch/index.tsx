@@ -1,3 +1,4 @@
+import { Z_INDEX } from '~/common/enums'
 import {
   Button,
   DropdownDialog,
@@ -6,8 +7,6 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { Z_INDEX } from '~/common/enums'
 
 export enum Currency {
   ALL = 'ALL',

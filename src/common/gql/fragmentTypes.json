@@ -18,8 +18,6 @@
           { "name": "ArticleTagNotice" },
           { "name": "TagNotice" },
           { "name": "TransactionNotice" },
-          { "name": "CircleArticleNotice" },
-          { "name": "CircleCommentNotice" },
           { "name": "CircleNotice" },
           { "name": "CryptoNotice" },
           { "name": "OfficialAnnouncementNotice" }
@@ -54,6 +52,7 @@
           { "name": "NoticeConnection" },
           { "name": "SearchResultConnection" },
           { "name": "SkippedListItemsConnection" },
+          { "name": "TopDonatorConnection" },
           { "name": "UserConnection" },
           { "name": "ReadHistoryConnection" },
           { "name": "RecentSearchConnection" },

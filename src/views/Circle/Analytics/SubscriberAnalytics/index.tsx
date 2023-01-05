@@ -1,8 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
 import { sum as d3Sum } from 'd3-array'
 import _get from 'lodash/get'
-import { MembersDialog } from '~/views/Circle/Profile/MembersDialog'
 
+import { ReactComponent as IconAnalyticsSubscriber24 } from '@/public/static/icons/24px/analytics-subscriber.svg'
+import { CHART_COLOR } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Button,
   QueryError,
@@ -12,19 +14,14 @@ import {
   Translate,
   useRoute,
 } from '~/components'
-
-import { CHART_COLOR } from '~/common/enums'
-import { translate } from '~/common/utils'
-
-import { ReactComponent as IconAnalyticsSubscriber24 } from '@/public/static/icons/24px/analytics-subscriber.svg'
+import { CircleSubscriberAnalyticsQuery } from '~/gql/graphql'
+import { MembersDialog } from '~/views/Circle/Profile/MembersDialog'
 
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
 import { CIRCLE_SUBSCRIBER_ANALYTICS } from './gql'
 import styles from './styles.css'
 import globalStyles from './styles.global.css'
-
-import { CircleSubscriberAnalytics } from './__generated__/CircleSubscriberAnalytics'
 
 enum DatumKey {
   invitee = 'invitee',
@@ -35,7 +32,7 @@ const Content = () => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
-  const { data, error, loading } = useQuery<CircleSubscriberAnalytics>(
+  const { data, error, loading } = useQuery<CircleSubscriberAnalyticsQuery>(
     CIRCLE_SUBSCRIBER_ANALYTICS,
     {
       variables: { name },

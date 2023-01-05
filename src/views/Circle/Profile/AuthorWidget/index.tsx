@@ -1,15 +1,13 @@
+import { toPath } from '~/common/utils'
 import { Card, Expandable, IconBroadcast24, UserDigest } from '~/components'
 import CommentContent from '~/components/Comment/Content'
-
-import { toPath } from '~/common/utils'
+import { AuthorWidgetCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.css'
 
-import { AuthorWidgetCircle } from './__generated__/AuthorWidgetCircle'
-
 type AuthorWidgetProps = {
-  circle: AuthorWidgetCircle
+  circle: AuthorWidgetCircleFragment
 }
 
 const AuthorWidget = ({ circle }: AuthorWidgetProps) => {

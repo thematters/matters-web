@@ -3,8 +3,7 @@ import gql from 'graphql-tag'
 import { useEffect, useState } from 'react'
 
 import { Dialog, Spinner, Translate } from '~/components'
-
-import { ViewerLikerId } from './__generated__/ViewerLikerId'
+import { ViewerLikerIdQuery } from '~/gql/graphql'
 
 interface Props {
   prevStep: () => void
@@ -25,7 +24,7 @@ const VIEWER_LIKER_ID = gql`
 
 const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
   const [polling, setPolling] = useState(true)
-  const { data, error } = useQuery<ViewerLikerId>(VIEWER_LIKER_ID, {
+  const { data, error } = useQuery<ViewerLikerIdQuery>(VIEWER_LIKER_ID, {
     pollInterval: polling ? 1000 : undefined,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',

@@ -7,7 +7,7 @@
   --input-padding-height: 3px;
   --background-color: var(--color-white);
   --text-color: var(--color-black);
-  --border-color: rgba(0, 0, 0, 0.08);
+  --border-color: rgb(0 0 0 / 8%);
   --inactive-color: var(--color-black);
   --active-color: var(--color-matters-gold);
   --arrow-width: 6px;

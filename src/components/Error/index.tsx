@@ -1,8 +1,7 @@
 import Alert from '@reach/alert'
 
-import { Translate } from '~/components'
-
 import IMAGE_ILLUSTRATION_EMPTY from '@/public/static/images/illustration-empty.svg'
+import { Translate } from '~/components'
 
 import styles from './styles.css'
 
@@ -46,7 +45,7 @@ export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
   return (
     <section className="error">
       <section className="image">
-        <img src={IMAGE_ILLUSTRATION_EMPTY} />
+        <img src={IMAGE_ILLUSTRATION_EMPTY} alt="illustration" />
       </section>
 
       {shouldShowStatusCode && <h3 className="error-code">{statusCode}</h3>}

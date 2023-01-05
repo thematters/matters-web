@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyWarning,
   InfiniteScroll,
@@ -13,12 +14,9 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { UserFollowingTagsPublicQuery } from '~/gql/graphql'
 
 import { USER_FOLLOWING_TAGS_PRIVATE, USER_FOLLOWING_TAGS_PUBLIC } from './gql'
-
-import { UserFollowingTagsPublic } from './__generated__/UserFollowingTagsPublic'
 
 const TagsFeed = () => {
   const viewer = useContext(ViewerContext)
@@ -36,7 +34,7 @@ const TagsFeed = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserFollowingTagsPublic>(USER_FOLLOWING_TAGS_PUBLIC, {
+  } = usePublicQuery<UserFollowingTagsPublicQuery>(USER_FOLLOWING_TAGS_PUBLIC, {
     variables: { userName },
   })
 
@@ -46,7 +44,7 @@ const TagsFeed = () => {
   const { edges, pageInfo } = user?.following?.tags || {}
 
   // private data
-  const loadPrivate = (publicData?: UserFollowingTagsPublic) => {
+  const loadPrivate = (publicData?: UserFollowingTagsPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !user) {
       return
     }

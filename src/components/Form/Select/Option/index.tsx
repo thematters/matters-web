@@ -77,4 +77,6 @@ const Option: React.FC<OptionProps> = forwardRef(
   }
 )
 
+Option.displayName = 'Option'
+
 export default Option

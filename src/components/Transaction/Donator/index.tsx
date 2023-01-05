@@ -1,11 +1,7 @@
 import { UserDigest } from '~/components'
+import { DigestTransactionFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import {
-  DigestTransaction_recipient as Recipient,
-  DigestTransaction_sender as Sender,
-} from '../__generated__/DigestTransaction'
 
 /***
  * This is a sub component of Transaction which displays
@@ -18,7 +14,10 @@ import {
  * ```
  */
 interface DonatorProps {
-  user: Sender | Recipient | null
+  user:
+    | DigestTransactionFragment['recipient']
+    | DigestTransactionFragment['sender']
+    | null
 }
 
 const Donator = ({ user }: DonatorProps) => {

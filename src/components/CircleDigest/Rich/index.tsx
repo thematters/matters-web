@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 
+import { toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
@@ -9,15 +10,14 @@ import {
   LinkWrapper,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-
-import { toPath } from '~/common/utils'
+import {
+  DigestRichCirclePrivateFragment,
+  DigestRichCirclePublicFragment,
+} from '~/gql/graphql'
 
 import Footer, { FooterControls } from './Footer'
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { DigestRichCirclePrivate } from './__generated__/DigestRichCirclePrivate'
-import { DigestRichCirclePublic } from './__generated__/DigestRichCirclePublic'
 
 export type CircleDigestRichControls = {
   hasOwner?: boolean
@@ -28,7 +28,8 @@ export type CircleDigestRichControls = {
 } & FooterControls
 
 export type CircleDigestRichProps = {
-  circle: DigestRichCirclePublic & Partial<DigestRichCirclePrivate>
+  circle: DigestRichCirclePublicFragment &
+    Partial<DigestRichCirclePrivateFragment>
   avatarSize?: CircleAvatarSize
   textSize?: 'md-s' | 'xm'
 } & CircleDigestRichControls &

@@ -4,17 +4,16 @@ import parseISO from 'date-fns/parseISO'
 import { useContext, useEffect, useRef } from 'react'
 
 import {
+  ONBOARDING_TASKS_HIDE,
+  STORAGE_KEY_ONBOARDING_TASKS,
+} from '~/common/enums'
+import { storage } from '~/common/utils'
+import {
   useEventListener,
   useRoute,
   useWindowResize,
   ViewerContext,
 } from '~/components'
-
-import {
-  ONBOARDING_TASKS_HIDE,
-  STORAGE_KEY_ONBOARDING_TASKS,
-} from '~/common/enums'
-import { storage } from '~/common/utils'
 
 export const ClientUpdater = () => {
   const { router, isInPath, setQuery } = useRoute()

@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { useEmblaCarousel } from 'embla-carousel/react'
+import useEmblaCarousel from 'embla-carousel-react'
 import { useEffect, useState } from 'react'
 
 import styles from './styles.css'

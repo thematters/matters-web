@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+import { mergeConnections } from '~/common/utils'
 import {
   EmptyWarning,
   InfiniteScroll,
@@ -10,10 +11,7 @@ import {
   Translate,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-
-import { mergeConnections } from '~/common/utils'
-
-import { ViewerBlockList } from './__generated__/ViewerBlockList'
+import { ViewerBlockListQuery } from '~/gql/graphql'
 
 const VIEWER_BLOCK_LIST = gql`
   query ViewerBlockList($after: String) {
@@ -41,7 +39,7 @@ const VIEWER_BLOCK_LIST = gql`
 
 const SettingsBlocked = () => {
   const { data, loading, error, fetchMore, refetch } =
-    useQuery<ViewerBlockList>(VIEWER_BLOCK_LIST)
+    useQuery<ViewerBlockListQuery>(VIEWER_BLOCK_LIST)
 
   if (loading) {
     return <Spinner />

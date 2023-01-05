@@ -1,17 +1,16 @@
 import {
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  PATHS,
+} from '~/common/enums'
+import { analytics, appendTarget } from '~/common/utils'
+import {
   Button,
   ButtonProps,
   TextIcon,
   Translate,
   useResponsive,
 } from '~/components'
-
-import {
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
-} from '~/common/enums'
-import { analytics, appendTarget } from '~/common/utils'
 
 type SignUpButtonProps = {
   isPlain?: boolean

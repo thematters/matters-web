@@ -123,7 +123,7 @@
    * Calculated by RGB_background rgb(255, 255, 255) and RGBA_color rgba(0, 0, 0, 0.08)
    * https://marcodiiga.github.io/rgba-to-rgb-conversion
    */
-  --popper-border-color: rgba(0, 0, 0, 0.04);
+  --popper-border-color: rgb(0 0 0 / 4%);
 }
 
 .tippy-box {

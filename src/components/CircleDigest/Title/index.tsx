@@ -1,20 +1,18 @@
 import classNames from 'classnames'
 
-import { LinkWrapper, LinkWrapperProps } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { LinkWrapper, LinkWrapperProps } from '~/components'
+import { DigestTitleCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { DigestTitleCircle } from './__generated__/DigestTitleCircle'
 
 export type CircleDigestTitleTextSize = 'md'
 export type CircleDigestTitleTextWeight = 'md'
 export type CircleDigestTitleIs = 'h2'
 
 type CircleDigestTitleProps = {
-  circle: DigestTitleCircle
+  circle: DigestTitleCircleFragment
 
   textSize?: CircleDigestTitleTextSize
   textWeight?: CircleDigestTitleTextWeight

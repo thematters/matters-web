@@ -3,6 +3,8 @@ import _find from 'lodash/find'
 import _some from 'lodash/some'
 import React, { useContext, useEffect, useRef } from 'react'
 
+import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptyTagArticles,
@@ -20,17 +22,12 @@ import {
   TAG_ARTICLES_PRIVATE,
   TAG_ARTICLES_PUBLIC,
 } from '~/components/GQL/queries/tagArticles'
-
-import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { TagArticlesPublicQuery, TagFragmentFragment } from '~/gql/graphql'
 
 import RelatedTags from '../RelatedTags'
 
-import { TagArticlesPublic } from '~/components/GQL/queries/__generated__/TagArticlesPublic'
-import { TagFragment } from '../__generated__/TagFragment'
-
 interface TagArticlesProps {
-  tag: TagFragment
+  tag: TagFragmentFragment
   feedType: string
 }
 
@@ -54,7 +51,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
     refetch: refetchPublic,
     networkStatus,
     client,
-  } = usePublicQuery<TagArticlesPublic>(TAG_ARTICLES_PUBLIC, {
+  } = usePublicQuery<TagArticlesPublicQuery>(TAG_ARTICLES_PUBLIC, {
     variables: {
       id: tag.id,
       selected: feedType === 'selected',
@@ -73,7 +70,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
     ) >= 0
 
   // private data
-  const loadPrivate = (publicData?: TagArticlesPublic) => {
+  const loadPrivate = (publicData?: TagArticlesPublicQuery) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }

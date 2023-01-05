@@ -5,7 +5,7 @@
 html {
   box-sizing: border-box;
   border-collapse: collapse;
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html,
@@ -210,7 +210,7 @@ textarea {
 [type='search']::-webkit-search-cancel-button,
 [type='search']::-webkit-search-results-button,
 [type='search']::-webkit-search-results-decoration {
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 ::-webkit-file-upload-button {

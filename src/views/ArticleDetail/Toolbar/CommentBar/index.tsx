@@ -2,6 +2,16 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  ADD_TOAST,
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_LIKE_COIN_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  PATHS,
+  REFETCH_RESPONSES,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import { appendTarget, numAbbr, translate } from '~/common/utils'
+import {
   Button,
   ButtonProps,
   Card,
@@ -14,25 +24,15 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
-
 import {
-  ADD_TOAST,
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_LIKE_COIN_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
-  REFETCH_RESPONSES,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-import { appendTarget, numAbbr, translate } from '~/common/utils'
+  CommentBarArticlePrivateFragment,
+  CommentBarArticlePublicFragment,
+} from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { CommentBarArticlePrivate } from './__generated__/CommentBarArticlePrivate'
-import { CommentBarArticlePublic } from './__generated__/CommentBarArticlePublic'
-
-type CommentBarArticle = CommentBarArticlePublic &
-  Partial<CommentBarArticlePrivate>
+type CommentBarArticle = CommentBarArticlePublicFragment &
+  Partial<CommentBarArticlePrivateFragment>
 
 interface CommentBarProps {
   article: CommentBarArticle

@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 
+import { analytics } from '~/common/utils'
 import {
   Dialog,
   Spinner,
@@ -8,8 +9,6 @@ import {
   useStep,
   ViewerContext,
 } from '~/components'
-
-import { analytics } from '~/common/utils'
 
 type Step = 'setPaymentPassword' | 'addCredit'
 

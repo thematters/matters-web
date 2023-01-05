@@ -7,6 +7,18 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { useAccount } from 'wagmi'
 
 import {
+  PAYMENT_CURRENCY as CURRENCY,
+  PAYMENT_MAXIMUM_PAYTO_AMOUNT,
+} from '~/common/enums'
+import {
+  featureSupportedChains,
+  formatAmount,
+  numRound,
+  validateCurrency,
+  validateDonationAmount,
+  WALLET_ERROR_MESSAGES,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   LanguageContext,
@@ -24,33 +36,18 @@ import PAY_TO from '~/components/GQL/mutations/payTo'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 import updateDonation from '~/components/GQL/updates/donation'
-
 import {
-  PAYMENT_CURRENCY as CURRENCY,
-  PAYMENT_MAXIMUM_PAYTO_AMOUNT,
-} from '~/common/enums'
-import {
-  featureSupportedChains,
-  formatAmount,
-  numRound,
-  validateCurrency,
-  validateDonationAmount,
-  WALLET_ERROR_MESSAGES,
-} from '~/common/utils'
+  ArticleDetailPublicQuery,
+  ExchangeRatesQuery,
+  PayToMutation,
+  UserDonationRecipientFragment,
+  WalletBalanceQuery,
+} from '~/gql/graphql'
 
 import CivicLikerButton from '../CivicLikerButton'
 import ReconnectButton from './ReconnectButton'
 import SetAmountBalance from './SetAmountBalance'
 import SetAmountHeader from './SetAmountHeader'
-
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import {
-  PayTo as PayToMutate,
-  PayTo_payTo_transaction as PayToTx,
-} from '~/components/GQL/mutations/__generated__/PayTo'
-import { ExchangeRates } from '~/components/GQL/queries/__generated__/ExchangeRates'
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 interface SetAmountCallbackValues {
   amount: number
@@ -59,13 +56,13 @@ interface SetAmountCallbackValues {
 
 interface FormProps {
   currency: CURRENCY
-  recipient: UserDonationRecipient
-  article: ArticleDetailPublic_article
+  recipient: UserDonationRecipientFragment
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   submitCallback: (values: SetAmountCallbackValues) => void
   switchToCurrencyChoice: () => void
   switchToAddCredit: () => void
   setTabUrl: (url: string) => void
-  setTx: (tx: PayToTx) => void
+  setTx: (tx: PayToMutation['payTo']['transaction']) => void
   targetId: string
 }
 
@@ -118,10 +115,10 @@ const SetAmount: React.FC<FormProps> = ({
     useTargetNetwork(targetNetork)
 
   // states
-  const [payTo] = useMutation<PayToMutate>(PAY_TO)
+  const [payTo] = useMutation<PayToMutation>(PAY_TO)
 
   const { data: exchangeRateDate, loading: exchangeRateLoading } =
-    useQuery<ExchangeRates>(EXCHANGE_RATES, {
+    useQuery<ExchangeRatesQuery>(EXCHANGE_RATES, {
       variables: {
         from: currency,
         to: quoteCurrency,
@@ -129,9 +126,12 @@ const SetAmount: React.FC<FormProps> = ({
     })
 
   // HKD balance
-  const { data, loading, error } = useQuery<WalletBalance>(WALLET_BALANCE, {
-    fetchPolicy: 'network-only',
-  })
+  const { data, loading, error } = useQuery<WalletBalanceQuery>(
+    WALLET_BALANCE,
+    {
+      fetchPolicy: 'network-only',
+    }
+  )
 
   // USDT balance & allowance
   const [approveConfirming, setApproveConfirming] = useState(false)

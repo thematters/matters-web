@@ -7,7 +7,7 @@
     width: 0.3125rem;
     height: 0.3125rem;
     margin-right: 0.25rem;
-    background: currentColor;
+    background: currentcolor;
     border-radius: 50%;
 
     &.rect {

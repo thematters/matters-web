@@ -3,6 +3,12 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
+import {
+  parseFormSubmitErrors,
+  translate,
+  validatePaymentPointer,
+} from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -11,17 +17,9 @@ import {
   ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
-
-import { ADD_TOAST } from '~/common/enums'
-import {
-  parseFormSubmitErrors,
-  translate,
-  validatePaymentPointer,
-} from '~/common/utils'
+import { UpdatePaymentPointerMutation } from '~/gql/graphql'
 
 import Explainer from './Explainer'
-
-import { UpdatePaymentPointer } from './__generated__/UpdatePaymentPointer'
 
 interface FormProps {
   setIsSubmitting: (submitting: boolean) => void
@@ -48,7 +46,7 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
   closeDialog,
   formId = `set-payment-pointer-form`,
 }) => {
-  const [submitPaymentPointer] = useMutation<UpdatePaymentPointer>(
+  const [submitPaymentPointer] = useMutation<UpdatePaymentPointerMutation>(
     UPDATE_PAYMENT_POINTER
   )
   const { lang } = useContext(LanguageContext)

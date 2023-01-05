@@ -1,3 +1,5 @@
+import { ADD_TOAST, PATHS } from '~/common/enums'
+import { redirectToTarget } from '~/common/utils'
 import {
   CardSpacing,
   IconHelp24,
@@ -9,25 +11,19 @@ import {
   useMutation,
 } from '~/components'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
-
-import { ADD_TOAST, PATHS, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
-import { redirectToTarget, storage } from '~/common/utils'
-
-import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
+import { UserLogoutMutation } from '~/gql/graphql'
 
 interface NavMenuBottomProps {
   isInSideDrawerNav?: boolean
 }
 
 const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
-  const [logout] = useMutation<UserLogout>(USER_LOGOUT, undefined, {
+  const [logout] = useMutation<UserLogoutMutation>(USER_LOGOUT, undefined, {
     showToast: false,
   })
   const onClickLogout = async () => {
     try {
-      await logout().then(() => {
-        storage.remove(STORAGE_KEY_AUTH_TOKEN)
-      })
+      await logout()
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {

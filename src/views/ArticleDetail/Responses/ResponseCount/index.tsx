@@ -1,13 +1,11 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { LanguageContext } from '~/components'
-
 import { translate } from '~/common/utils'
+import { LanguageContext } from '~/components'
+import { ResponseCountArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { ResponseCountArticle } from './__generated__/ResponseCountArticle'
 
 const fragments = {
   article: gql`
@@ -18,7 +16,11 @@ const fragments = {
   `,
 }
 
-const ResponseCount = ({ article }: { article: ResponseCountArticle }) => {
+const ResponseCount = ({
+  article,
+}: {
+  article: ResponseCountArticleFragment
+}) => {
   const { lang } = useContext(LanguageContext)
   const count = article?.responseCount || 0
 

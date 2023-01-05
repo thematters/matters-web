@@ -1,11 +1,9 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-import { Dialog, ShareDialog, Translate } from '~/components'
-
 import { toPath } from '~/common/utils'
-
-import { EditModeArticle_article_Article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
+import { Dialog, ShareDialog, Translate } from '~/components'
+import { EditModeArticleQuery } from '~/gql/graphql'
 
 interface Props {
   article: {
@@ -13,10 +11,14 @@ interface Props {
     title: string
     slug: string
     author: {
-      userName: string | null
+      userName?: string | null
     }
   }
-  draft: EditModeDraft
+  draft: NonNullable<
+    NonNullable<
+      EditModeArticleQuery['article'] & { __typename: 'Article' }
+    >['drafts']
+  >[0]
 
   cancel: () => void
 }
@@ -43,6 +45,7 @@ const PublishedState = ({ article, draft, cancel }: Props) => {
 
   return (
     <ShareDialog
+      disableNativeShare
       title={article.title}
       path={encodeURI(path.href)}
       description={

@@ -1,10 +1,12 @@
 import gql from 'graphql-tag'
 import React from 'react'
 
-import { ViewerUserPrivate } from './__generated__/ViewerUserPrivate'
-import { ViewerUserPublic } from './__generated__/ViewerUserPublic'
+import {
+  ViewerUserPrivateFragment,
+  ViewerUserPublicFragment,
+} from '~/gql/graphql'
 
-export type ViewerUser = ViewerUserPublic & ViewerUserPrivate
+export type ViewerUser = ViewerUserPublicFragment & ViewerUserPrivateFragment
 
 const ViewerFragments = {
   user: {

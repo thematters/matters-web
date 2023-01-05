@@ -1,14 +1,13 @@
 import { Menu, Spinner, UserDigest } from '~/components'
-
-import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
+import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
 export const DropdownUserList = ({
   users,
   onClick,
   loading,
 }: {
-  users: UserDigestMiniUser[]
-  onClick: (user: UserDigestMiniUser) => void
+  users: UserDigestMiniUserFragment[]
+  onClick: (user: UserDigestMiniUserFragment) => void
   loading?: boolean
 }) => {
   if (loading) {

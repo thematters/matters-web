@@ -1,6 +1,5 @@
-import CircleSettingsManageInvitation from '~/views/Circle/Settings/ManageInvitation'
-
 import { EmptyLayout, Protected, Throw404, useRoute } from '~/components'
+import CircleSettingsManageInvitation from '~/views/Circle/Settings/ManageInvitation'
 
 const NameSettingsManageInvitation = () => {
   const { isPathStartWith } = useRoute()

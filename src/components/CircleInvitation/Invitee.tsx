@@ -1,14 +1,9 @@
 import { UserDigest } from '~/components'
 import { toUserDigestMiniPlaceholder } from '~/components/UserDigest/Mini'
-
-import {
-  CircleInvitation_invitee as CircleInvitationInviteeType,
-  CircleInvitation_invitee_Person as CircleInvitationInviteePerson,
-  CircleInvitation_invitee_User as CircleInvitationInviteeUser,
-} from './__generated__/CircleInvitation'
+import { CircleInvitationFragment } from '~/gql/graphql'
 
 interface CircleInvitationInviteeProps {
-  invitee: CircleInvitationInviteeType
+  invitee: CircleInvitationFragment['invitee']
 }
 
 /**
@@ -24,7 +19,7 @@ interface CircleInvitationInviteeProps {
 const CircleInvitationInvitee = ({ invitee }: CircleInvitationInviteeProps) => {
   switch (invitee.__typename) {
     case 'Person': {
-      const user = invitee as CircleInvitationInviteePerson
+      const user = invitee
       return (
         <UserDigest.Mini
           user={toUserDigestMiniPlaceholder(user.email)}
@@ -35,7 +30,7 @@ const CircleInvitationInvitee = ({ invitee }: CircleInvitationInviteeProps) => {
       )
     }
     case 'User': {
-      const user = invitee as CircleInvitationInviteeUser
+      const user = invitee
       return (
         <UserDigest.Mini
           user={user}

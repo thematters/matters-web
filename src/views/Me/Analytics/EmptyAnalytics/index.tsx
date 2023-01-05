@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
+import { ReactComponent as SupporterListRocket } from '@/public/static/images/supporter-list-rocket.svg'
+import { GUIDE_LINKS } from '~/common/enums'
+import { toPath, translate } from '~/common/utils'
 import {
   Button,
   IconDonateBg24,
@@ -10,21 +13,15 @@ import {
   useMutation,
 } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-
-import { GUIDE_LINKS } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
-
-import { ReactComponent as SupporterListRocket } from '@/public/static/images/supporter-list-rocket.svg'
+import { CreateDraftMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 
 const EmptyAnalytics = () => {
   const router = useRouter()
   const { lang } = useContext(LanguageContext)
 
-  const [putDraft] = useMutation<CreateDraft>(CREATE_DRAFT, {
+  const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
     variables: { title: translate({ id: 'untitle', lang }) },
   })
 
@@ -80,6 +77,7 @@ const EmptyAnalytics = () => {
               className="u-link-green"
               href={GUIDE_LINKS.authorToolbox[lang]}
               target="_blank"
+              rel="noreferrer"
             >
               <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
             </a>

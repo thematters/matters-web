@@ -3,6 +3,14 @@ import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
 import { useContext } from 'react'
 
+import { PATHS } from '~/common/enums'
+import {
+  parseFormSubmitErrors,
+  translate,
+  validateDisplayName,
+  validateEmail,
+  validateToS,
+} from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -14,20 +22,10 @@ import {
   useMutation,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
-
-import { PATHS } from '~/common/enums'
-import {
-  parseFormSubmitErrors,
-  translate,
-  validateDisplayName,
-  validateEmail,
-  validateToS,
-} from '~/common/utils'
+import { SendVerificationCodeMutation } from '~/gql/graphql'
 
 import { EmailLoginButton } from './Buttons'
 import styles from './styles.css'
-
-import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -55,9 +53,13 @@ const Init: React.FC<FormProps> = ({
   const formId = 'email-sign-up-init-form'
 
   const { token, refreshToken } = useContext(ReCaptchaContext)
-  const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE, undefined, {
-    showToast: false,
-  })
+  const [sendCode] = useMutation<SendVerificationCodeMutation>(
+    SEND_CODE,
+    undefined,
+    {
+      showToast: false,
+    }
+  )
 
   const {
     values,
@@ -157,7 +159,7 @@ const Init: React.FC<FormProps> = ({
               en="I have read and agree to"
             />
 
-            <Link href={PATHS.TOS}>
+            <Link href={PATHS.TOS} legacyBehavior>
               <a className="u-link-green" target="_blank">
                 &nbsp;
                 <Translate

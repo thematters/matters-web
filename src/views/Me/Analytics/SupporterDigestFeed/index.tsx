@@ -1,13 +1,13 @@
-import { Card, IconDonate24, TextIcon, UserDigest } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Card, IconDonate24, TextIcon, UserDigest } from '~/components'
+import { MeAnalyticsQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { MeAnalytics_viewer_analytics_topDonators_edges_node } from '../__generated__/MeAnalytics'
-
 interface SupporterDigestFeedProps {
-  user: MeAnalytics_viewer_analytics_topDonators_edges_node
+  user: NonNullable<
+    NonNullable<MeAnalyticsQuery['viewer']>['analytics']['topDonators']['edges']
+  >[0]['node']
   index: number
   donationCount: number
 }

@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import {
   Dialog,
   Spinner,
@@ -7,8 +8,6 @@ import {
   useDialogSwitch,
   useStep,
 } from '~/components'
-
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
 type Step =
   | 'complete'

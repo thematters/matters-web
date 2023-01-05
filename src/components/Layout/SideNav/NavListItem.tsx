@@ -66,4 +66,6 @@ const NavListItem = forwardRef(
   }
 )
 
+NavListItem.displayName = 'NavListItem'
+
 export default NavListItem

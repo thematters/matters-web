@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
+import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
 import {
   Button,
   DropdownDialog,
@@ -11,12 +13,7 @@ import {
   Translate,
   withIcon,
 } from '~/components'
-
-import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
-
-import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
-
-import { UserLanguage } from '@/__generated__/globalTypes'
+import { UserLanguage } from '~/gql/graphql'
 
 export const LanguageSwitchContent = ({
   isInDropdown,
@@ -31,7 +28,7 @@ export const LanguageSwitchContent = ({
 
       return (
         <Menu width={isInDropdown ? 'sm' : undefined}>
-          <Menu.Item onClick={() => setLang(UserLanguage.zh_hant)}>
+          <Menu.Item onClick={() => setLang(UserLanguage.ZhHant)}>
             <TextIcon
               spacing="base"
               size="md"
@@ -41,7 +38,7 @@ export const LanguageSwitchContent = ({
             </TextIcon>
           </Menu.Item>
 
-          <Menu.Item onClick={() => setLang(UserLanguage.zh_hans)}>
+          <Menu.Item onClick={() => setLang(UserLanguage.ZhHans)}>
             <TextIcon
               spacing="base"
               size="md"
@@ -51,7 +48,7 @@ export const LanguageSwitchContent = ({
             </TextIcon>
           </Menu.Item>
 
-          <Menu.Item onClick={() => setLang(UserLanguage.en)}>
+          <Menu.Item onClick={() => setLang(UserLanguage.En)}>
             <TextIcon
               spacing="base"
               size="md"

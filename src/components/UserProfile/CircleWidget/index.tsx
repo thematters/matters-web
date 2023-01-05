@@ -1,3 +1,5 @@
+import { PATHS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   Form,
   SubscribeCircleDialog,
@@ -5,17 +7,21 @@ import {
   useFeatures,
 } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
-
-import { PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import {
+  UserProfileUserPrivateQuery,
+  UserProfileUserPublicQuery,
+} from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { UserProfileUserPrivate_user_ownCircles } from '../__generated__/UserProfileUserPrivate'
-import { UserProfileUserPublic_user_ownCircles } from '../__generated__/UserProfileUserPublic'
-
-type CircleWidgetCircle = UserProfileUserPublic_user_ownCircles &
-  Partial<UserProfileUserPrivate_user_ownCircles>
+type CircleWidgetCircle = NonNullable<
+  NonNullable<UserProfileUserPublicQuery['user']>['ownCircles']
+>[0] &
+  Partial<
+    NonNullable<
+      NonNullable<UserProfileUserPrivateQuery['user']>['ownCircles']
+    >[0]
+  >
 
 type CircleWidgetProps = {
   circles: CircleWidgetCircle[]

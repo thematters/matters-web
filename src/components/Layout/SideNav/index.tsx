@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import FocusLock from 'react-focus-lock'
 
+import { PATHS, Z_INDEX } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Dropdown,
   hidePopperOnClick,
@@ -20,9 +22,6 @@ import {
   ViewerContext,
   WriteButton,
 } from '~/components'
-
-import { PATHS, Z_INDEX } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 import MeAvatar from '../MeAvatar'
 import NavMenu from '../NavMenu'
@@ -53,7 +52,7 @@ const SideNav = () => {
   return (
     <section className="side-nav">
       <section className="logo">
-        <Link href={PATHS.HOME}>
+        <Link href={PATHS.HOME} legacyBehavior>
           <a aria-label={translate({ id: 'discover', lang })}>
             {isMediumUp ? <IconLogo /> : <IconLogoGraph />}
           </a>

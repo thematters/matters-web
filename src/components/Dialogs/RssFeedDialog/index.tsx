@@ -9,12 +9,10 @@ import {
   // usePublicLazyQuery,
   usePublicQuery,
 } from '~/components'
-
-import { AuthorRssFeed } from './__generated__/AuthorRssFeed'
-import { AuthorRssFeedPublic } from './__generated__/AuthorRssFeedPublic'
+import { AuthorRssFeedFragment, AuthorRssFeedPublicQuery } from '~/gql/graphql'
 
 interface RssFeedDialogProps {
-  user: AuthorRssFeed
+  user: AuthorRssFeedFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
@@ -58,10 +56,13 @@ export type SearchSelectFormProps = {
 const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  const { refetch } = usePublicQuery<AuthorRssFeedPublic>(AuthorRssFeedGQL, {
-    variables: { userName: user.userName },
-    skip: true, // skip first call
-  })
+  const { refetch } = usePublicQuery<AuthorRssFeedPublicQuery>(
+    AuthorRssFeedGQL,
+    {
+      variables: { userName: user.userName },
+      skip: true, // skip first call
+    }
+  )
 
   useEffect(() => {
     if (show) {

@@ -1,10 +1,10 @@
 import gql from 'graphql-tag'
 import { Fragment } from 'react'
 
-import { Translate } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
+import { Translate } from '~/components'
+import { ArticleNewSubscriberNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
@@ -14,9 +14,11 @@ import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
-import { ArticleNewSubscriberNotice as NoticeType } from './__generated__/ArticleNewSubscriberNotice'
-
-const ArticleNewSubscriberNotice = ({ notice }: { notice: NoticeType }) => {
+const ArticleNewSubscriberNotice = ({
+  notice,
+}: {
+  notice: ArticleNewSubscriberNoticeFragment
+}) => {
   if (!notice.actors) {
     return null
   }

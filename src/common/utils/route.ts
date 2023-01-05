@@ -1,7 +1,7 @@
 import Router from 'next/router'
 import { Key, pathToRegexp } from 'path-to-regexp'
-// import queryString from 'query-string'
 
+// import queryString from 'query-string'
 import { PATHS, ROUTES } from '~/common/enums'
 
 import { UtmParams } from './analytics'
@@ -12,9 +12,9 @@ import { parseURL } from './url'
 interface ArticleArgs {
   id?: string
   slug: string
-  mediaHash: string | null
+  mediaHash?: string | null
   author: {
-    userName: string | null
+    userName?: string | null
   }
 }
 
@@ -32,7 +32,7 @@ interface TagArgs {
 interface CommentArgs {
   id: string
   type: 'article' | 'circleDiscussion' | 'circleBroadcast' // comment type: article/discussion/broadcast
-  parentComment: {
+  parentComment?: {
     id: string
   } | null
 }

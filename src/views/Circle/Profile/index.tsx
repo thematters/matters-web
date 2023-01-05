@@ -1,5 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
 
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
+import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
+import { numAbbr, stripSpaces } from '~/common/utils'
 import {
   CircleAvatar,
   Cover,
@@ -17,12 +21,7 @@ import {
   ViewerContext,
 } from '~/components'
 import ShareButton from '~/components/Layout/Header/ShareButton'
-
-import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
-import { numAbbr, stripSpaces } from '~/common/utils'
-
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
-import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
+import { CircleProfileCirclePublicQuery } from '~/gql/graphql'
 
 import SubscriptionBanner from '../SubscriptionBanner'
 import { AddCircleArticle } from './AddCircleArticle'
@@ -33,8 +32,6 @@ import { FollowersDialog } from './FollowersDialog'
 import { CIRCLE_PROFILE_PRIVATE, CIRCLE_PROFILE_PUBLIC } from './gql'
 import { MembersDialog } from './MembersDialog'
 import styles from './styles.css'
-
-import { CircleProfileCirclePublic } from './__generated__/CircleProfileCirclePublic'
 
 const CircleProfile = () => {
   const viewer = useContext(ViewerContext)
@@ -47,7 +44,7 @@ const CircleProfile = () => {
     loading,
     client,
     refetch: refetchPublic,
-  } = usePublicQuery<CircleProfileCirclePublic>(CIRCLE_PROFILE_PUBLIC, {
+  } = usePublicQuery<CircleProfileCirclePublicQuery>(CIRCLE_PROFILE_PUBLIC, {
     variables: { name },
   })
   const circle = data?.circle

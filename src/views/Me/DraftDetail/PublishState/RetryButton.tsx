@@ -7,8 +7,7 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-
-import { RetryPublish } from './__generated__/RetryPublish'
+import { RetryPublishMutation } from '~/gql/graphql'
 
 const RETRY_PUBLISH = gql`
   mutation RetryPublish($id: ID!) {
@@ -20,7 +19,7 @@ const RETRY_PUBLISH = gql`
 `
 
 const RetryButton = ({ id }: { id: string }) => {
-  const [retry] = useMutation<RetryPublish>(RETRY_PUBLISH, {
+  const [retry] = useMutation<RetryPublishMutation>(RETRY_PUBLISH, {
     variables: { id },
     optimisticResponse: {
       retryPublish: {

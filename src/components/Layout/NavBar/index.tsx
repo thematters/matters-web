@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { PATHS, TEXT } from '~/common/enums'
 import {
   IconNavHome24,
   IconNavHomeActive24,
@@ -9,8 +10,6 @@ import {
   ViewerContext,
   WriteButton,
 } from '~/components'
-
-import { PATHS, TEXT } from '~/common/enums'
 
 import UnreadIcon from '../UnreadIcon'
 import NavListItem from './NavListItem'

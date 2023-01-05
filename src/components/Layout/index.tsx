@@ -9,6 +9,7 @@ import {
   useRoute,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import { ClientPreferenceQuery } from '~/gql/graphql'
 
 import FixedMain from './FixedMain'
 import Header from './Header'
@@ -18,9 +19,7 @@ import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.css'
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-
-export const Layout: React.FC<React.PropsWithChildren<React.ReactNode>> & {
+export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Main: typeof Main
   Header: typeof Header
   Spacing: typeof Spacing
@@ -73,7 +72,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   const isInCircle = isPathStartWith('/~', true)
   const isLargeUp = useResponsive('lg-up')
 
-  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+  const { data } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
   const onboardingTasks = data?.clientPreference.onboardingTasks

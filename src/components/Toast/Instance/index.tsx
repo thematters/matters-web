@@ -2,10 +2,9 @@ import Alert from '@reach/alert'
 import classNames from 'classnames'
 import { useEffect } from 'react'
 
-import { Button, IconClear16 } from '~/components'
-
 import { REMOVE_TOAST, TOAST_DURATION } from '~/common/enums'
 import { sleep } from '~/common/utils'
+import { Button, IconClear16 } from '~/components'
 
 import styles from './styles.css'
 

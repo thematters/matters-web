@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import { analytics } from '~/common/utils'
 import {
   ArticleDigestCard,
   ArticleDigestSidebar,
@@ -8,15 +9,12 @@ import {
   Slides,
   Translate,
 } from '~/components'
-
-import { analytics } from '~/common/utils'
+import { RelatedArticlesFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { RelatedArticles as RelatedArticlesType } from './__generated__/RelatedArticles'
-
 interface RelatedArticlesProps {
-  article: RelatedArticlesType
+  article: RelatedArticlesFragment
   inSidebar?: boolean
 }
 

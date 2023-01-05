@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyWarning,
   Head,
@@ -13,12 +14,9 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { AllAuthorsPublicQuery } from '~/gql/graphql'
 
 import { ALL_AUTHORS_PRIVATE, ALL_AUTHORS_PUBLIC } from './gql'
-
-import { AllAuthorsPublic } from './__generated__/AllAuthorsPublic'
 
 const BaseAuthors = () => {
   const viewer = useContext(ViewerContext)
@@ -34,14 +32,14 @@ const BaseAuthors = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<AllAuthorsPublic>(ALL_AUTHORS_PUBLIC)
+  } = usePublicQuery<AllAuthorsPublicQuery>(ALL_AUTHORS_PUBLIC)
 
   // pagination
   const connectionPath = 'viewer.recommendation.authors'
   const { edges, pageInfo } = data?.viewer?.recommendation.authors || {}
 
   // private data
-  const loadPrivate = (publicData?: AllAuthorsPublic) => {
+  const loadPrivate = (publicData?: AllAuthorsPublicQuery) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }

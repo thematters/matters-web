@@ -1,6 +1,5 @@
-import { Dialog, GoogleSearchDialog, TextIcon, Translate } from '~/components'
-
 import { analytics } from '~/common/utils'
+import { Dialog, GoogleSearchDialog, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 

@@ -2,6 +2,7 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
+import { toPath, translate } from '~/common/utils'
 import {
   Button,
   DropdownDialog,
@@ -17,21 +18,22 @@ import {
   UnsubscribeCircleDialog,
   ViewerContext,
 } from '~/components'
-
-import { toPath, translate } from '~/common/utils'
+import {
+  DropdownActionsCirclePrivateFragment,
+  DropdownActionsCirclePublicFragment,
+} from '~/gql/graphql'
 
 import { fragments } from './gql'
 
-import { DropdownActionsCirclePrivate } from './__generated__/DropdownActionsCirclePrivate'
-import { DropdownActionsCirclePublic } from './__generated__/DropdownActionsCirclePublic'
-
 interface DialogProps {
-  circle: DropdownActionsCirclePublic & Partial<DropdownActionsCirclePrivate>
+  circle: DropdownActionsCirclePublicFragment &
+    Partial<DropdownActionsCirclePrivateFragment>
   openUnsubscribeCircleDialog: () => void
 }
 
 type DropdownActionsProps = {
-  circle: DropdownActionsCirclePublic & Partial<DropdownActionsCirclePrivate>
+  circle: DropdownActionsCirclePublicFragment &
+    Partial<DropdownActionsCirclePrivateFragment>
 }
 
 interface Controls {

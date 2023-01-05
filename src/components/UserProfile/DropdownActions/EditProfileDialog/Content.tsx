@@ -3,6 +3,14 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 
+import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import {
+  parseFormSubmitErrors,
+  translate,
+  validateDescription,
+  validateDisplayName,
+} from '~/common/utils'
 import {
   AvatarUploader,
   CoverUploader,
@@ -12,29 +20,18 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-
-import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
-  parseFormSubmitErrors,
-  translate,
-  validateDescription,
-  validateDisplayName,
-} from '~/common/utils'
-
-import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+  EditProfileDialogUserPrivateFragment,
+  EditProfileDialogUserPublicFragment,
+  UpdateUserInfoProfileMutation,
+} from '~/gql/graphql'
 
 import NFTCollection from './NFTCollection'
 import styles from './styles.css'
 
-import {
-  EditProfileDialogUserPrivate,
-  EditProfileDialogUserPrivate_info_cryptoWallet_nfts,
-} from './__generated__/EditProfileDialogUserPrivate'
-import { EditProfileDialogUserPublic } from './__generated__/EditProfileDialogUserPublic'
-import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
-
 interface FormProps {
-  user: EditProfileDialogUserPublic & Partial<EditProfileDialogUserPrivate>
+  user: EditProfileDialogUserPublicFragment &
+    Partial<EditProfileDialogUserPrivateFragment>
   // user: DropdownActionsUserPublic & Partial<DropdownActionsUserPrivate>
   closeDialog: () => void
 }
@@ -45,6 +42,12 @@ interface FormValues {
   displayName: string
   description: string
 }
+
+type EditProfileDialogUserPrivateInfoCryptoWalletNft = NonNullable<
+  NonNullable<
+    EditProfileDialogUserPrivateFragment['info']['cryptoWallet']
+  >['nfts']
+>[0]
 
 const UPDATE_USER_INFO = gql`
   mutation UpdateUserInfoProfile($input: UpdateUserInfoInput!) {
@@ -69,7 +72,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   user,
   closeDialog,
 }) => {
-  const [update] = useMutation<UpdateUserInfoProfile>(
+  const [update] = useMutation<UpdateUserInfoProfileMutation>(
     UPDATE_USER_INFO,
     undefined,
     { showToast: false }
@@ -146,7 +149,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   })
 
   const nfts = user.info.cryptoWallet
-    ?.nfts as EditProfileDialogUserPrivate_info_cryptoWallet_nfts[]
+    ?.nfts as EditProfileDialogUserPrivateInfoCryptoWalletNft[]
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>

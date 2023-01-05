@@ -13,6 +13,7 @@
   @mixin flex-center-all;
 
   line-height: 1.75;
+
   & h4 {
     margin-left: var(--spacing-x-tight);
   }

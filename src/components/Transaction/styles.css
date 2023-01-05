@@ -18,9 +18,8 @@
 
     & .left {
       display: flex;
-      flex-direction: column;
+      flex-flow: column wrap;
       flex-grow: 1;
-      flex-wrap: wrap;
 
       & .title {
         @mixin line-clamp;

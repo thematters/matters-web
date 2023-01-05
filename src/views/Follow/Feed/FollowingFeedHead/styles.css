@@ -12,13 +12,16 @@
     & :global(a) {
       color: var(--color-black);
     }
+
     & :global(> *) {
       flex-shrink: 0;
       line-height: 1;
     }
+
     & :global(> :last-child) {
       flex-shrink: initial;
     }
+
     & :global(> * + *) {
       margin-left: var(--spacing-xx-tight);
     }

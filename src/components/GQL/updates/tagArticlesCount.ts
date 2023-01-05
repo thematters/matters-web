@@ -1,11 +1,9 @@
 import { DataProxy } from 'apollo-cache'
 import _cloneDeep from 'lodash/cloneDeep'
 
-import TAG_ARTICLES_COUNT from '~/components/GQL/queries/tagArticlesCount'
-
 import { ERROR_CODES } from '~/common/enums'
-
-import { TagArticlesCount } from '~/components/GQL/queries/__generated__/TagArticlesCount'
+import TAG_ARTICLES_COUNT from '~/components/GQL/queries/tagArticlesCount'
+import { TagArticlesCountQuery } from '~/gql/graphql'
 
 const update = ({
   cache,
@@ -24,7 +22,7 @@ const update = ({
     }
 
     const variables = { id }
-    const cacheData = cache.readQuery<TagArticlesCount>({
+    const cacheData = cache.readQuery<TagArticlesCountQuery>({
       query: TAG_ARTICLES_COUNT,
       variables,
     })

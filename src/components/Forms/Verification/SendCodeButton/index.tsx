@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 
+import { SEND_CODE_COUNTDOWN, VERIFICATION_CODE_TYPES } from '~/common/enums'
 import {
   Button,
   ReCaptchaContext,
@@ -9,12 +10,9 @@ import {
   useMutation,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
-
-import { SEND_CODE_COUNTDOWN, VERIFICATION_CODE_TYPES } from '~/common/enums'
+import { SendVerificationCodeMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 
 /**
  * This component is for sending verification code to user with built-in mutation.
@@ -40,7 +38,7 @@ export const VerificationSendCodeButton: React.FC<
 > = ({ email, type, disabled }) => {
   const { token, refreshToken } = useContext(ReCaptchaContext)
 
-  const [send] = useMutation<SendVerificationCode>(SEND_CODE)
+  const [send] = useMutation<SendVerificationCodeMutation>(SEND_CODE)
   const [sent, setSent] = useState(false)
 
   const { countdown, setCountdown, formattedTimeLeft } = useCountdown({

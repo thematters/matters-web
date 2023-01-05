@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
+import { dom, stripHtml, translate, trimLineBreaks } from '~/common/utils'
 import {
   Button,
   IconSpinner16,
@@ -13,13 +14,9 @@ import {
 } from '~/components'
 import PUT_COMMENT from '~/components/GQL/mutations/putComment'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
-
-import { dom, stripHtml, translate, trimLineBreaks } from '~/common/utils'
+import { CommentDraftQuery, PutCommentMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { PutComment } from '~/components/GQL/mutations/__generated__/PutComment'
-import { CommentDraft } from '~/components/GQL/queries/__generated__/CommentDraft'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
@@ -63,11 +60,11 @@ export const CommentForm: React.FC<CommentFormProps> = ({
   }-${replyToId || 0}`
   const formId = `comment-form-${commentDraftId}`
 
-  const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
+  const { data, client } = useQuery<CommentDraftQuery>(COMMENT_DRAFT, {
     variables: { id: commentDraftId },
   })
 
-  const [putComment] = useMutation<PutComment>(PUT_COMMENT)
+  const [putComment] = useMutation<PutCommentMutation>(PUT_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''

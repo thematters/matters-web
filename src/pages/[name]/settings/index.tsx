@@ -1,6 +1,5 @@
-import CircleSettings from '~/views/Circle/Settings'
-
 import { EmptyLayout, Protected, Throw404, useRoute } from '~/components'
+import CircleSettings from '~/views/Circle/Settings'
 
 const NameSettings = () => {
   const { isPathStartWith } = useRoute()

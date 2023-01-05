@@ -1,14 +1,16 @@
 import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import {
+  EditProfileDialogUserPrivateFragment,
+  EditProfileDialogUserPublicFragment,
+} from '~/gql/graphql'
 
 import { fragments } from './gql'
 
-import { EditProfileDialogUserPrivate } from './__generated__/EditProfileDialogUserPrivate'
-import { EditProfileDialogUserPublic } from './__generated__/EditProfileDialogUserPublic'
-
 interface EditProfileDialogProps {
-  user: EditProfileDialogUserPublic & Partial<EditProfileDialogUserPrivate>
+  user: EditProfileDialogUserPublicFragment &
+    Partial<EditProfileDialogUserPrivateFragment>
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

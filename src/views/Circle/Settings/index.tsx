@@ -1,6 +1,5 @@
-import { Form, Head, Layout, Spacer, Translate, useRoute } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Form, Head, Layout, Spacer, Translate, useRoute } from '~/components'
 
 const Settings = () => {
   const { getQuery } = useRoute()

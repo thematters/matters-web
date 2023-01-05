@@ -4,6 +4,20 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
 
 import {
+  PAYMENT_CURRENCY as CURRENCY,
+  PAYMENT_MINIMAL_PAYOUT_AMOUNT,
+  PAYMENT_PASSSWORD_LENGTH,
+  Z_INDEX,
+} from '~/common/enums'
+import {
+  calcMattersFee,
+  formatAmount,
+  numRound,
+  parseFormSubmitErrors,
+  validatePaymentPassword,
+  validatePayoutAmount,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   IconHelp24,
@@ -16,25 +30,9 @@ import {
 } from '~/components'
 import PAYOUT from '~/components/GQL/mutations/payout'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-
-import {
-  PAYMENT_CURRENCY as CURRENCY,
-  PAYMENT_MINIMAL_PAYOUT_AMOUNT,
-  Z_INDEX,
-} from '~/common/enums'
-import {
-  calcMattersFee,
-  formatAmount,
-  numRound,
-  parseFormSubmitErrors,
-  validatePaymentPassword,
-  validatePayoutAmount,
-} from '~/common/utils'
+import { PayoutMutation, WalletBalanceQuery } from '~/gql/graphql'
 
 import ConfirmTable from '../ConfirmTable'
-
-import { Payout as PayoutMutate } from '~/components/GQL/mutations/__generated__/Payout'
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
 interface FormProps {
   balance: number
@@ -58,7 +56,7 @@ const BaseConfirm: React.FC<FormProps> = ({
 
   const { lang } = useContext(LanguageContext)
   const inputRef: React.RefObject<any> | null = useRef(null)
-  const [payout] = useMutation<PayoutMutate>(PAYOUT, undefined, {
+  const [payout] = useMutation<PayoutMutation>(PAYOUT, undefined, {
     showToast: false,
   })
 
@@ -221,13 +219,13 @@ const BaseConfirm: React.FC<FormProps> = ({
           </ConfirmTable>
 
           <Form.PinInput
-            length={6}
+            length={PAYMENT_PASSSWORD_LENGTH}
             name="password"
             value={values.password}
             error={touched.password && errors.password}
             hint={<Translate id="hintPaymentPassword" />}
             onChange={(value) => {
-              const shouldValidate = value.length === 6
+              const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
               setTouched({ amount: true, password: true }, shouldValidate)
               setFieldValue('password', value, shouldValidate)
             }}
@@ -258,7 +256,7 @@ const BaseConfirm: React.FC<FormProps> = ({
 }
 
 const Confirm = (props: Omit<FormProps, 'balance'>) => {
-  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
+  const { data, loading } = useQuery<WalletBalanceQuery>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
   const balance = data?.viewer?.wallet.balance.HKD || 0

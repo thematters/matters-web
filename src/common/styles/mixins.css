@@ -182,6 +182,7 @@
     background-color: var(--color-green-lighter);
     border-color: var(--color-matters-green);
   }
+
   &.error {
     border-color: var(--color-red);
 
@@ -196,12 +197,12 @@
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     margin: 0;
-    -webkit-appearance: none;
+    appearance: none;
   }
 
   /* Firefox */
   &[type='number'] {
-    -moz-appearance: textfield;
+    appearance: textfield;
   }
 }
 
@@ -227,6 +228,7 @@
       padding-left: var(--spacing-xx-tight);
     }
   }
+
   & .right {
     color: var(--color-black);
 

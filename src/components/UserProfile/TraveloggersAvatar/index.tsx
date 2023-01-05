@@ -1,11 +1,10 @@
 import { Avatar, Tooltip, Translate } from '~/components'
+import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 import LogbookDialog from './LogbookDialog'
 
-import { UserProfileUserPublic_user } from '../__generated__/UserProfileUserPublic'
-
 type TraveloggersAvatarProps = {
-  user: UserProfileUserPublic_user
+  user: NonNullable<UserProfileUserPublicQuery['user']>
   isMe: boolean
 }
 

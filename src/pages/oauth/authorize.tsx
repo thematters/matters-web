@@ -1,6 +1,5 @@
-import OAuthAuthorize from '~/views/OAuth/Authorize'
-
 import { Protected } from '~/components'
+import OAuthAuthorize from '~/views/OAuth/Authorize'
 
 const ProtectedOAuthAuthorize = () => (
   <Protected>

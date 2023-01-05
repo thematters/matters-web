@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
+import { ADD_TOAST, APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
 import {
   ReCaptchaContext,
   Tooltip,
@@ -11,8 +12,12 @@ import {
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import updateAppreciation from '~/components/GQL/updates/appreciation'
-
-import { ADD_TOAST, APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
+import {
+  AppreciateArticleMutation,
+  AppreciationButtonArticlePrivateFragment,
+  AppreciationButtonArticlePublicFragment,
+  ClientPreferenceQuery,
+} from '~/gql/graphql'
 
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
@@ -23,14 +28,9 @@ import { APPRECIATE_ARTICLE, fragments } from './gql'
 import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 import ViewSuperLikeButton from './ViewSuperLikeButton'
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { AppreciateArticle } from './__generated__/AppreciateArticle'
-import { AppreciationButtonArticlePrivate } from './__generated__/AppreciationButtonArticlePrivate'
-import { AppreciationButtonArticlePublic } from './__generated__/AppreciationButtonArticlePublic'
-
 interface AppreciationButtonProps {
-  article: AppreciationButtonArticlePublic &
-    Partial<AppreciationButtonArticlePrivate>
+  article: AppreciationButtonArticlePublicFragment &
+    Partial<AppreciationButtonArticlePrivateFragment>
   privateFetched: boolean
   disabled?: boolean
 }
@@ -42,7 +42,7 @@ const AppreciationButton = ({
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
   const { token, refreshToken } = useContext(ReCaptchaContext)
-  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+  const { data, client } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
   const isArticleAuthor = article.author.id === viewer.id
@@ -51,7 +51,8 @@ const AppreciationButton = ({
    * Normal Appreciation
    */
   const [amount, setAmount] = useState(0)
-  const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
+  const [sendAppreciation] =
+    useMutation<AppreciateArticleMutation>(APPRECIATE_ARTICLE)
   const limit = article.appreciateLimit
   const left =
     (typeof article.appreciateLeft === 'number'

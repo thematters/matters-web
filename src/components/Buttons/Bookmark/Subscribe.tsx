@@ -1,6 +1,12 @@
 import { useContext } from 'react'
 
 import {
+  ADD_TOAST,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import { translate } from '~/common/utils'
+import {
   Button,
   IconBookmark16,
   IconSize,
@@ -9,17 +15,9 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-
-import {
-  ADD_TOAST,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-import { translate } from '~/common/utils'
+import { ToggleSubscribeArticleMutation } from '~/gql/graphql'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
-
-import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle'
 
 interface SubscribeProps {
   articleId?: string
@@ -32,7 +30,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
 
-  const [subscribe] = useMutation<ToggleSubscribeArticle>(
+  const [subscribe] = useMutation<ToggleSubscribeArticleMutation>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
       variables: { id: articleId, enabled: true },

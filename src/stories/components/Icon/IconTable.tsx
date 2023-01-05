@@ -26,14 +26,12 @@ export default function IconTable(props: IconProps) {
           .keys()
           .filter((key) => !LOGO_REQUEST.test(key))
           .map((key) => {
-            const module = icons(key)
+            const mod = icons(key)
             return (
               <>
-                {Object.keys(module).map((exportedName) => (
+                {Object.keys(mod).map((exportedName) => (
                   <Tooltip key={exportedName} content={exportedName}>
-                    <span>
-                      {React.createElement(module[exportedName], props)}
-                    </span>
+                    <span>{React.createElement(mod[exportedName], props)}</span>
                   </Tooltip>
                 ))}
               </>

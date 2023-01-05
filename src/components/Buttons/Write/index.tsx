@@ -2,6 +2,13 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
+  ADD_TOAST,
+  OPEN_LIKE_COIN_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import { analytics, toPath, translate } from '~/common/utils'
+import {
   Button,
   IconPen16,
   IconSpinner16,
@@ -11,16 +18,7 @@ import {
   useMutation,
 } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-
-import {
-  ADD_TOAST,
-  OPEN_LIKE_COIN_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
-
-import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
+import { CreateDraftMutation } from '~/gql/graphql'
 
 interface Props {
   allowed: boolean
@@ -65,9 +63,12 @@ const BaseWriteButton = ({
 export const WriteButton = ({ allowed, authed, isLarge, forbidden }: Props) => {
   const router = useRouter()
   const { lang } = useContext(LanguageContext)
-  const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
-    variables: { title: translate({ id: 'untitle', lang }) },
-  })
+  const [putDraft, { loading }] = useMutation<CreateDraftMutation>(
+    CREATE_DRAFT,
+    {
+      variables: { title: translate({ id: 'untitle', lang }) },
+    }
+  )
 
   if (!allowed) {
     return (

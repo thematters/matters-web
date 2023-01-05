@@ -7,7 +7,7 @@ import _get from 'lodash/get'
  */
 interface Comment {
   state: string
-  parentComment: {
+  parentComment?: {
     id: string
   } | null
 }

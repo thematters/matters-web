@@ -3,6 +3,8 @@ import _chunk from 'lodash/chunk'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
 
+import { PATHS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   QueryError,
   ShuffleButton,
@@ -15,21 +17,16 @@ import {
   ViewMoreCard,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
-
-import { PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { FeedAuthorsQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import { FEED_AUTHORS } from './gql'
 import styles from './styles.css'
 
-import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
-import { FeedAuthors } from './__generated__/FeedAuthors'
-
 const Authors = () => {
   const viewer = useContext(ViewerContext)
 
-  const { data: lastFetchRandom, client } = useQuery<LastFetchRandom>(
+  const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
     FETCH_RECORD,
     { variables: { id: 'local' } }
   )
@@ -38,7 +35,7 @@ const Authors = () => {
   /**
    * Data Fetching
    */
-  const { data, loading, error, refetch } = usePublicQuery<FeedAuthors>(
+  const { data, loading, error, refetch } = usePublicQuery<FeedAuthorsQuery>(
     FEED_AUTHORS,
     {
       notifyOnNetworkStatusChange: true,

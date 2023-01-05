@@ -1,7 +1,6 @@
-import { Button, Form, TextIcon, Translate } from '~/components'
-
 import { PATHS } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
+import { Button, Form, TextIcon, Translate } from '~/components'
 
 export const PasswordResetDialogButton = ({
   gotoResetPassword,

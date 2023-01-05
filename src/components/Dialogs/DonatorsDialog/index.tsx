@@ -2,11 +2,10 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
-
-import { DonatorDialogArticle } from './__generated__/DonatorDialogArticle'
+import { DonatorDialogArticleFragment } from '~/gql/graphql'
 
 interface DonatorsDialogProps {
-  article: DonatorDialogArticle
+  article: DonatorDialogArticleFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

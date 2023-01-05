@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestDropdown, ArticleDigestSidebar } from '~/components'
 
-export default {
+const fragments = {
   editorCollection: gql`
     fragment EditorCollection on Article {
       id
@@ -45,3 +45,5 @@ export default {
     ${ArticleDigestSidebar.fragments.article}
   `,
 }
+
+export default fragments

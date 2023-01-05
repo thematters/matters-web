@@ -1,12 +1,15 @@
 import { Tag, Translate } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
+import { EditorRecommendedTagsQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { EditorRecommendedTags_user_tags_edges_node as TagType } from '../__generated__/EditorRecommendedTags'
+type EditorRecommendedTagsUserTagsEdgesNode = NonNullable<
+  NonNullable<EditorRecommendedTagsQuery['user']>['tags']['edges']
+>[0]['node'] & { __typename: 'Tag' }
 
 type RecommendedTagsProps = {
-  tags: TagType[]
+  tags: EditorRecommendedTagsUserTagsEdgesNode[]
   onAddTag: (tag: SelectTag) => void
 }
 

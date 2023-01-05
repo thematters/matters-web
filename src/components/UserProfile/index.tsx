@@ -1,5 +1,7 @@
 import { useContext, useEffect } from 'react'
 
+import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+import { numAbbr, translate } from '~/common/utils'
 import {
   Avatar,
   Button,
@@ -19,10 +21,10 @@ import {
   ViewerContext,
 } from '~/components'
 import ShareButton from '~/components/Layout/Header/ShareButton'
-
-import { numAbbr, translate } from '~/common/utils'
-
-import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+import {
+  AuthorRssFeedFragment,
+  UserProfileUserPublicQuery,
+} from '~/gql/graphql'
 
 import {
   ArchitectBadge,
@@ -40,11 +42,8 @@ import styles from './styles.css'
 import TraveloggersAvatar from './TraveloggersAvatar'
 import WalletLabel from './WalletLabel'
 
-import { AuthorRssFeed } from '~/components/Dialogs/RssFeedDialog/__generated__/AuthorRssFeed'
-import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
-
 interface FingerprintButtonProps {
-  user: AuthorRssFeed
+  user: AuthorRssFeedFragment
 }
 
 const RssFeedButton = ({ user }: FingerprintButtonProps) => {
@@ -73,7 +72,7 @@ export const UserProfile = () => {
   // public user data
   const userName = getQuery('name')
   const isMe = !userName || viewer.userName === userName
-  const { data, loading, client } = usePublicQuery<UserProfileUserPublic>(
+  const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
     {
       variables: { userName },

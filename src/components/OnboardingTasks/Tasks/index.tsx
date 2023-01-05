@@ -2,6 +2,15 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
+  CLOSE_ONBOARDING_TASKS_DIALOG,
+  ONBOARDING_TASKS_HIDE,
+  OPEN_LIKE_COIN_DIALOG,
+  OPEN_RECOMMEND_AUTHOR_DIALOG,
+  OPEN_RECOMMEND_TAG_DIALOG,
+  URL_QS,
+} from '~/common/enums'
+import { analytics, toPath, translate } from '~/common/utils'
+import {
   Dialog,
   EmbedShare,
   LanguageContext,
@@ -11,21 +20,10 @@ import {
   ViewerContext,
 } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-
-import {
-  CLOSE_ONBOARDING_TASKS_DIALOG,
-  ONBOARDING_TASKS_HIDE,
-  OPEN_LIKE_COIN_DIALOG,
-  OPEN_RECOMMEND_AUTHOR_DIALOG,
-  OPEN_RECOMMEND_TAG_DIALOG,
-  URL_QS,
-} from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
+import { CreateDraftMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
 import TaskItem from './TaskItem'
-
-import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 
 interface Props {
   task: number
@@ -37,7 +35,7 @@ const Tasks = ({ task }: Props) => {
   const { lang } = useContext(LanguageContext)
   const isLargeUp = useResponsive('lg-up')
 
-  const [putDraft] = useMutation<CreateDraft>(CREATE_DRAFT, {
+  const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
     variables: {
       title: translate({ id: 'untitle', lang }),
       tags: ['新人打卡'],
