@@ -5,6 +5,8 @@ import { useState } from 'react'
 import {
   Button,
   ButtonHeight,
+  ButtonSpacingX,
+  ButtonSpacingY,
   ButtonWidth,
   TextIcon,
   Translate,
@@ -49,14 +51,20 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
 
   const sizes: Record<FollowUserButtonSize, [ButtonWidth, ButtonHeight]> = {
     lg: ['6rem', '2rem'],
-    md: ['4rem', '1.5rem'],
-    'md-s': ['4rem', '1.5rem'],
+    md: [null, '1.5rem'],
+  }
+  const spacings: Record<
+    FollowUserButtonSize,
+    [ButtonSpacingY, ButtonSpacingX]
+  > = {
+    lg: [0, 0],
+    md: [0, 'tight'],
   }
 
   return (
     <Button
       size={sizes[size]}
-      // spacing={['xxtight', 'xtight']}
+      spacing={spacings[size]}
       textColor="white"
       bgColor="green"
       bgActiveColor="red"
