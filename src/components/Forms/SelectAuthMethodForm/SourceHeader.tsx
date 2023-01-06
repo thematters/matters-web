@@ -27,11 +27,7 @@ const AUTH_SOURCE_IMG = {
   [UNIVERSAL_AUTH_SOURCE.appreciation]: {
     image: IMAGE_AUTH_SOURCE_APPRECIATION.src,
     title: () => (
-      <Translate
-        zh_hant="讚賞作品"
-        zh_hans="赞赏作品"
-        en="Appreciate the Work"
-      />
+      <Translate zh_hant="讚賞作品" zh_hans="赞赏作品" en="Like the Work" />
     ),
     intro: () => (
       <>
@@ -44,7 +40,7 @@ const AUTH_SOURCE_IMG = {
         <Translate
           zh_hant=""
           zh_hans=""
-          en="Turn your appreciation into actual income."
+          en="Turn your likes into actual income."
         />
       </>
     ),

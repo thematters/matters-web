@@ -25,7 +25,7 @@ const DonatorLabel = ({
 
   return (
     <span className="label">
-      <Translate zh_hant="支持者" zh_hans="支持者" en="Backer" />
+      <Translate zh_hant="支持者" zh_hans="支持者" en="Supporter" />
 
       <style jsx>{styles}</style>
     </span>

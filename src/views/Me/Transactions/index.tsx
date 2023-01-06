@@ -183,7 +183,7 @@ const Transactions = () => {
           selected={isDonaion}
           onClick={() => setPurpose(Purpose.DONATION)}
         >
-          <Translate zh_hans="支持" zh_hant="支持" en="Support" />
+          <Translate zh_hans="支持" zh_hant="支持" en="Supports" />
         </Tabs.Tab>
 
         <Tabs.Tab
