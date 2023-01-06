@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
@@ -9,8 +10,6 @@ import {
   Translate,
   useResponsive,
 } from '~/components'
-
-import { translate } from '~/common/utils'
 
 const CancelButton = (props: ButtonProps) => {
   const { lang } = useContext(LanguageContext)

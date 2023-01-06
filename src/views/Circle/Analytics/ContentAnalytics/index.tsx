@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
+import { ReactComponent as IconAnalyticsContent24 } from '@/public/static/icons/24px/analytics-content.svg'
 import {
   EmptyAnalytics,
   List,
@@ -10,8 +11,10 @@ import {
   Translate,
   useRoute,
 } from '~/components'
-
-import { ReactComponent as IconAnalyticsContent24 } from '@/public/static/icons/24px/analytics-content.svg'
+import {
+  CircleContentAnalyticsPaywallQuery,
+  CircleContentAnalyticsPublicQuery,
+} from '~/gql/graphql'
 
 import SectionHead from '../SectionHead'
 import ContentDigest from './ContentDigest'
@@ -21,20 +24,21 @@ import CircleContentAnalyticsTabs, {
 import { CIRCLE_CONTENT_ANALYTICS } from './gql'
 import styles from './styles.css'
 
-import {
-  CircleContentAnalyticsPaywall,
-  CircleContentAnalyticsPaywall_circle_analytics_content_paywall,
-} from './__generated__/CircleContentAnalyticsPaywall'
-import {
-  CircleContentAnalyticsPublic,
-  CircleContentAnalyticsPublic_circle_analytics_content_public,
-} from './__generated__/CircleContentAnalyticsPublic'
-
-type FeedType = CircleContentAnalyticsPaywall | CircleContentAnalyticsPublic
+type FeedType =
+  | CircleContentAnalyticsPaywallQuery
+  | CircleContentAnalyticsPublicQuery
 
 type FeedContent =
-  | CircleContentAnalyticsPaywall_circle_analytics_content_paywall
-  | CircleContentAnalyticsPublic_circle_analytics_content_public
+  | NonNullable<
+      NonNullable<
+        CircleContentAnalyticsPaywallQuery['circle']
+      >['analytics']['content']['paywall']
+    >[0]
+  | NonNullable<
+      NonNullable<
+        CircleContentAnalyticsPublicQuery['circle']
+      >['analytics']['content']['public']
+    >[0]
 
 interface FeedProps {
   type: CircleContentAnalyticsType

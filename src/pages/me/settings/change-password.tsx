@@ -1,6 +1,5 @@
-import MeSettingsChangePassword from '~/views/Me/Settings/ChangePassword'
-
 import { Protected } from '~/components'
+import MeSettingsChangePassword from '~/views/Me/Settings/ChangePassword'
 
 const ProtectedMeSettingsChangePassword = () => (
   <Protected>

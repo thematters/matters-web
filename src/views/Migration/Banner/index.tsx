@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import IMAGE_BANNER from '@/public/static/images/migration-banner.svg'
+import { translate } from '~/common/utils'
 import {
   LanguageContext,
   ShareButton,
@@ -7,10 +9,6 @@ import {
   Translate,
   useResponsive,
 } from '~/components'
-
-import { translate } from '~/common/utils'
-
-import IMAGE_BANNER from '@/public/static/images/migration-banner.svg'
 
 import styles from './styles.css'
 

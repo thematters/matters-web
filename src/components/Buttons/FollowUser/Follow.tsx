@@ -3,8 +3,14 @@ import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
 import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import {
   Button,
   ButtonHeight,
+  ButtonSpacingX,
+  ButtonSpacingY,
   ButtonWidth,
   TextIcon,
   Translate,
@@ -14,26 +20,22 @@ import {
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
-
 import {
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
+  FollowButtonUserPrivateFragment,
+  ToggleFollowUserMutation,
+} from '~/gql/graphql'
 
 import { FollowUserButtonSize } from './index'
 
-import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
-import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
-
 interface FollowUserProps {
-  user: Partial<FollowButtonUserPrivate>
+  user: Partial<FollowButtonUserPrivateFragment>
   size: FollowUserButtonSize
 }
 
 const FollowUser = ({ user, size }: FollowUserProps) => {
   const viewer = useContext(ViewerContext)
 
-  const [follow] = useMutation<ToggleFollowUser>(TOGGLE_FOLLOW_USER, {
+  const [follow] = useMutation<ToggleFollowUserMutation>(TOGGLE_FOLLOW_USER, {
     variables: { id: user.id, enabled: true },
     optimisticResponse:
       !_isNil(user.id) && !_isNil(user.isFollower)
@@ -55,8 +57,14 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
 
   const sizes: Record<FollowUserButtonSize, [ButtonWidth, ButtonHeight]> = {
     lg: ['6rem', '2rem'],
-    md: ['4rem', '1.5rem'],
-    'md-s': ['3rem', '1.5rem'],
+    md: [null, '1.5rem'],
+  }
+  const spacings: Record<
+    FollowUserButtonSize,
+    [ButtonSpacingY, ButtonSpacingX]
+  > = {
+    lg: [0, 0],
+    md: [0, 'tight'],
   }
 
   const onClick = () => {
@@ -75,6 +83,7 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
   return (
     <Button
       size={sizes[size]}
+      spacing={spacings[size]}
       textColor="green"
       textActiveColor="white"
       bgActiveColor="green"

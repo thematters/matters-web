@@ -1,10 +1,9 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import { useContext, useRef } from 'react'
 
-import { Button, LanguageContext, Menu, useOutsideClick } from '~/components'
-
 import { KEYCODES } from '~/common/enums'
 import { translate } from '~/common/utils'
+import { Button, LanguageContext, Menu, useOutsideClick } from '~/components'
 
 import NavMenu from '../../../../NavMenu'
 import MeDigest from './MeDigest'

@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
   IconRemove24,
   Menu,
@@ -12,14 +13,13 @@ import {
 } from '~/components'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
 import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
-
-import { ADD_TOAST } from '~/common/enums'
-
-import { ToggleFollowCircle } from '~/components/GQL/mutations/__generated__/ToggleFollowCircle'
-import { UnfollowActionButtonCirclePrivate } from './__generated__/UnfollowActionButtonCirclePrivate'
+import {
+  ToggleFollowCircleMutation,
+  UnfollowActionButtonCirclePrivateFragment,
+} from '~/gql/graphql'
 
 type UnfollowCircleActionButtonProps = {
-  circle: UnfollowActionButtonCirclePrivate
+  circle: UnfollowActionButtonCirclePrivateFragment
 }
 
 const fragments = {
@@ -40,24 +40,27 @@ const UnfollowCircleActionButton = ({
 }: UnfollowCircleActionButtonProps) => {
   const viewer = useContext(ViewerContext)
 
-  const [unfollow] = useMutation<ToggleFollowCircle>(TOGGLE_FOLLOW_CIRCLE, {
-    variables: { id: circle.id, enabled: false },
-    optimisticResponse: {
-      toggleFollowCircle: {
-        id: circle.id,
-        isFollower: false,
-        __typename: 'Circle',
+  const [unfollow] = useMutation<ToggleFollowCircleMutation>(
+    TOGGLE_FOLLOW_CIRCLE,
+    {
+      variables: { id: circle.id, enabled: false },
+      optimisticResponse: {
+        toggleFollowCircle: {
+          id: circle.id,
+          isFollower: false,
+          __typename: 'Circle',
+        },
       },
-    },
-    update: (cache) => {
-      updateCircleFollowers({
-        cache,
-        type: 'unfollow',
-        name: circle.name,
-        viewer,
-      })
-    },
-  })
+      update: (cache) => {
+        updateCircleFollowers({
+          cache,
+          type: 'unfollow',
+          name: circle.name,
+          viewer,
+        })
+      },
+    }
+  )
 
   return (
     <Menu.Item

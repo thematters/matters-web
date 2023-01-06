@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+import { PATHS } from '~/common/enums'
 import {
   Form,
   Head,
@@ -11,13 +12,12 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-
-import { PATHS } from '~/common/enums'
+import {
+  UpdateViewerNotificationMutation,
+  ViewerNotificationSettingsQuery,
+} from '~/gql/graphql'
 
 import PreferenceSettings from './Preference'
-
-import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
-import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'
 
 const VIEWER_NOTIFICATION_SETTINGS = gql`
   query ViewerNotificationSettings {
@@ -52,10 +52,10 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
 `
 
 const BaseNotificationSettings = () => {
-  const [update] = useMutation<UpdateViewerNotification>(
+  const [update] = useMutation<UpdateViewerNotificationMutation>(
     UPDATE_VIEWER_NOTIFICATION
   )
-  const { data, loading, refetch } = useQuery<ViewerNotificationSettings>(
+  const { data, loading, refetch } = useQuery<ViewerNotificationSettingsQuery>(
     VIEWER_NOTIFICATION_SETTINGS
   )
   const settings = data?.viewer?.settings.notification

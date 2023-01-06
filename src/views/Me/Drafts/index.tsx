@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useEffect } from 'react'
 
+import { mergeConnections } from '~/common/utils'
 import {
   DraftDigest,
   EmptyDraft,
@@ -13,15 +14,9 @@ import {
   Spinner,
   useCache,
 } from '~/components'
-
-import { mergeConnections } from '~/common/utils'
+import { MeDraftFeedQuery } from '~/gql/graphql'
 
 import { DraftsContext } from './context'
-
-import {
-  MeDraftFeed,
-  MeDraftFeed_viewer_drafts_edges,
-} from './__generated__/MeDraftFeed'
 
 const ME_DRAFTS_FEED = gql`
   query MeDraftFeed($after: String) {
@@ -46,13 +41,18 @@ const ME_DRAFTS_FEED = gql`
   ${DraftDigest.Feed.fragments.draft}
 `
 
+type Edge = NonNullable<
+  NonNullable<MeDraftFeedQuery['viewer']>['drafts']['edges']
+>
+
 export const BaseMeDrafts = () => {
-  const [edges, setEdges, DraftsContextProvider] = useCache<
-    MeDraftFeed_viewer_drafts_edges[]
-  >([], DraftsContext)
+  const [edges, setEdges, DraftsContextProvider] = useCache<Edge>(
+    [],
+    DraftsContext
+  )
 
   const { data, loading, error, fetchMore, refetch } =
-    useQuery<MeDraftFeed>(ME_DRAFTS_FEED)
+    useQuery<MeDraftFeedQuery>(ME_DRAFTS_FEED)
 
   useEffect(() => {
     setEdges(data?.viewer?.drafts.edges ?? [])

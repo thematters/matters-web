@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react'
 
+import { redirectToLogin } from '~/common/utils'
 import { Layout, Spinner, ViewerContext } from '~/components'
 
-import { redirectToLogin } from '~/common/utils'
-
-export const Protected: React.FC<React.PropsWithChildren<React.ReactNode>> = ({
+export const Protected: React.FC<{ children?: React.ReactNode }> = ({
   children,
 }) => {
   const viewer = useContext(ViewerContext)

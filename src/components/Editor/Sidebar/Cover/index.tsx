@@ -21,7 +21,7 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
           {cover && (
             <section className="container">
               <div className="cover">
-                <img src={cover} />
+                <img src={cover} alt="cover" />
               </div>
 
               <style jsx>{styles}</style>

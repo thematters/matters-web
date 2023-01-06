@@ -9,17 +9,14 @@ import {
   usePrepareContractWrite,
 } from 'wagmi'
 
-import { ViewerContext } from '~/components'
-
 import { featureSupportedChains } from '~/common/utils'
-
-const targetNetwork = featureSupportedChains.curation[0]
+import { ViewerContext } from '~/components'
 
 export const useAllowanceUSDT = () => {
   const { address } = useAccount()
 
   return useContractRead({
-    address: process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS || '',
+    address: process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
     abi: erc20ABI,
     functionName: 'allowance',
     args: [
@@ -36,6 +33,7 @@ export const useBalanceUSDT = ({
 }) => {
   const viewer = useContext(ViewerContext)
   const viewerEthAddress = viewer.info.ethAddress
+  const targetNetwork = featureSupportedChains.curation[0]
 
   return useBalance({
     address: (addr || viewerEthAddress) as `0x${string}`,
@@ -53,6 +51,7 @@ export const useBalanceEther = ({
 }) => {
   const viewer = useContext(ViewerContext)
   const viewerEthAddress = viewer.info.ethAddress
+  const targetNetwork = featureSupportedChains.curation[0]
 
   return useBalance({
     address: (addr || viewerEthAddress) as `0x${string}`,
@@ -63,7 +62,7 @@ export const useBalanceEther = ({
 
 export const useApproveUSDT = () => {
   const { config } = usePrepareContractWrite({
-    address: process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS || '',
+    address: process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
     abi: erc20ABI,
     functionName: 'approve',
     args: [

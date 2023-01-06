@@ -1,10 +1,10 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { Translate, ViewerContext } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
+import { Translate, ViewerContext } from '~/components'
+import { CircleNewBroadcastCommentsFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeCircleCard from '../NoticeCircleCard'
@@ -15,10 +15,8 @@ import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
-import { CircleNewBroadcastComments as NoticeType } from './__generated__/CircleNewBroadcastComments'
-
 type CircleNewBroadcastCommentsType = {
-  notice: NoticeType
+  notice: CircleNewBroadcastCommentsFragment
 }
 
 const CircleNewBroadcastComments = ({

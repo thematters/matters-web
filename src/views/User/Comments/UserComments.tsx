@@ -2,6 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import _flatten from 'lodash/flatten'
 import { useContext, useEffect } from 'react'
 
+import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
+import {
+  analytics,
+  filterComments,
+  mergeConnections,
+  toPath,
+} from '~/common/utils'
 import {
   ArticleDigestTitle,
   Card,
@@ -17,36 +24,31 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-
-import {
-  analytics,
-  filterComments,
-  mergeConnections,
-  toPath,
-} from '~/common/utils'
-
-import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
+import { UserCommentsPublicQuery, UserIdUserQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
 import { USER_COMMENTS_PRIVATE, USER_COMMENTS_PUBLIC, USER_ID } from './gql'
 
-import {
-  UserCommentsPublic,
-  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node,
-  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node_node_Article,
-} from './__generated__/UserCommentsPublic'
-import { UserIdUser } from './__generated__/UserIdUser'
-
-type CommentedArticleComment =
-  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node
-type CommentArticle =
-  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node_node_Article
+type CommentedArticleComment = NonNullable<
+  NonNullable<
+    NonNullable<
+      UserCommentsPublicQuery['node'] & { __typename: 'User' }
+    >['commentedArticles']['edges']
+  >[0]['node']['comments']['edges']
+>[0]['node']
+type CommentArticle = NonNullable<
+  NonNullable<
+    NonNullable<
+      UserCommentsPublicQuery['node'] & { __typename: 'User' }
+    >['commentedArticles']['edges']
+  >[0]['node']['comments']['edges']
+>[0]['node'] & { __typename: 'Article' }
 
 const UserComments = () => {
   const { getQuery } = useRoute()
   const userName = getQuery('name')
 
-  const { data, loading, error } = useQuery<UserIdUser>(USER_ID, {
+  const { data, loading, error } = useQuery<UserIdUserQuery>(USER_ID, {
     variables: { userName },
   })
   const user = data?.user
@@ -97,7 +99,7 @@ const UserComments = () => {
   )
 }
 
-const BaseUserComments = ({ user }: UserIdUser) => {
+const BaseUserComments = ({ user }: UserIdUserQuery) => {
   const viewer = useContext(ViewerContext)
 
   /**
@@ -111,7 +113,7 @@ const BaseUserComments = ({ user }: UserIdUser) => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserCommentsPublic>(USER_COMMENTS_PUBLIC, {
+  } = usePublicQuery<UserCommentsPublicQuery>(USER_COMMENTS_PUBLIC, {
     variables: { id: user?.id },
   })
 
@@ -124,7 +126,7 @@ const BaseUserComments = ({ user }: UserIdUser) => {
     {}
 
   // private data
-  const loadPrivate = (publicData?: UserCommentsPublic) => {
+  const loadPrivate = (publicData?: UserCommentsPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !user) {
       return
     }

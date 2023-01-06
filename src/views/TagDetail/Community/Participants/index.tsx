@@ -1,5 +1,6 @@
 import { NetworkStatus } from 'apollo-client'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   InfiniteScroll,
   List,
@@ -10,13 +11,10 @@ import {
   usePullToRefresh,
   UserDigest,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { TagParticipantsQuery } from '~/gql/graphql'
 
 import styles from '../styles.css'
 import TAG_PARTICIPANTS from './gql'
-
-import { TagParticipants } from './__generated__/TagParticipants'
 
 interface Props {
   id: string
@@ -24,7 +22,7 @@ interface Props {
 
 const Participants = ({ id }: Props) => {
   const { data, loading, error, fetchMore, refetch, networkStatus } =
-    usePublicQuery<TagParticipants>(TAG_PARTICIPANTS, {
+    usePublicQuery<TagParticipantsQuery>(TAG_PARTICIPANTS, {
       variables: { id },
       notifyOnNetworkStatusChange: true,
     })

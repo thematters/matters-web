@@ -1,13 +1,12 @@
 import { useContext } from 'react'
 
+import { translate } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
   IconCopy16,
   LanguageContext,
 } from '~/components'
-
-import { translate } from '~/common/utils'
 
 export const CopyButton: React.FC<
   React.PropsWithChildren<{ text: string }>

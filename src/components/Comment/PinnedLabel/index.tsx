@@ -1,10 +1,9 @@
 import gql from 'graphql-tag'
 
 import { IconPin24, TextIcon, Translate } from '~/components'
+import { PinnedLabelCommentFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { PinnedLabelComment } from './__generated__/PinnedLabelComment'
 
 const fragments = {
   comment: gql`
@@ -23,7 +22,7 @@ const fragments = {
   `,
 }
 
-const PinnedLabel = ({ comment }: { comment: PinnedLabelComment }) => {
+const PinnedLabel = ({ comment }: { comment: PinnedLabelCommentFragment }) => {
   if (!comment.pinned) {
     return null
   }

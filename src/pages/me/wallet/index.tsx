@@ -1,6 +1,5 @@
-import MeWallet from '~/views/Me/Wallet'
-
 import { Protected } from '~/components'
+import MeWallet from '~/views/Me/Wallet'
 
 const ProtectedMeWallet = () => (
   <Protected>

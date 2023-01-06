@@ -1,21 +1,21 @@
 import { useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { CardExposureTracker, Slides } from '~/components'
-
 import { analytics } from '~/common/utils'
+import { CardExposureTracker, Slides } from '~/components'
+import {
+  ArticleRecommendationActivitySource,
+  RecommendArticleActivityFragment,
+} from '~/gql/graphql'
 
 import FollowingRecommendArticle from '../FollowingRecommendArticle'
 import FollowingRecommendHead from '../FollowingRecommendHead'
 import { fragments } from './gql'
 import styles from './styles.css'
 
-import { ArticleRecommendationActivitySource } from '@/__generated__/globalTypes'
-import { RecommendArticleActivity_recommendArticles } from './__generated__/RecommendArticleActivity'
-
 interface Props {
-  articles: RecommendArticleActivity_recommendArticles[] | null
-  source: ArticleRecommendationActivitySource | null
+  articles: RecommendArticleActivityFragment['recommendArticles'] | null
+  source?: ArticleRecommendationActivitySource | null
   location: number
 }
 

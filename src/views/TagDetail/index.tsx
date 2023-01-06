@@ -1,6 +1,17 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
+import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
+import { ERROR_CODES } from '~/common/enums'
+import {
+  fromGlobalId,
+  // makeTitle,
+  // stripPunctPrefixSuffix,
+  stripAllPunct,
+  stripSpaces,
+  toGlobalId,
+  toPath,
+} from '~/common/utils'
 import {
   EmptyLayout,
   EmptyTag,
@@ -20,19 +31,11 @@ import {
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
 import ShareButton from '~/components/Layout/Header/ShareButton'
-
-import { ERROR_CODES } from '~/common/enums'
 import {
-  fromGlobalId,
-  // makeTitle,
-  // stripPunctPrefixSuffix,
-  stripAllPunct,
-  stripSpaces,
-  toGlobalId,
-  toPath,
-} from '~/common/utils'
-
-import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
+  TagDetailPublicBySearchQuery,
+  TagDetailPublicQuery,
+  TagFragmentFragment,
+} from '~/gql/graphql'
 
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
@@ -49,10 +52,6 @@ import Owner from './Owner'
 import RelatedTags from './RelatedTags'
 import styles from './styles.css'
 
-import { TagDetailPublic } from './__generated__/TagDetailPublic'
-import { TagDetailPublicBySearch } from './__generated__/TagDetailPublicBySearch'
-import { TagFragment } from './__generated__/TagFragment'
-
 const DynamicCommunity = dynamic(() => import('./Community'), {
   ssr: false,
   loading: Spinner,
@@ -61,7 +60,7 @@ const DynamicCommunity = dynamic(() => import('./Community'), {
 const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const
 type TagFeedType = typeof validTagFeedTypes[number]
 
-const TagDetail = ({ tag }: { tag: TagFragment }) => {
+const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const { router } = useRoute()
   const viewer = useContext(ViewerContext)
   const features = useFeatures()
@@ -279,12 +278,12 @@ const TagDetailContainer = () => {
     error,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<TagDetailPublic>(TAG_DETAIL_PUBLIC, {
+  } = usePublicQuery<TagDetailPublicQuery>(TAG_DETAIL_PUBLIC, {
     variables: { id: tagId },
     skip: !!searchKey,
   })
 
-  const resultBySearch = usePublicQuery<TagDetailPublicBySearch>(
+  const resultBySearch = usePublicQuery<TagDetailPublicBySearchQuery>(
     TAG_DETAIL_BY_SEARCH,
     {
       variables: { key: searchKey },
@@ -305,7 +304,7 @@ const TagDetailContainer = () => {
     })
   }
   const searchedTag = resultBySearch?.data?.search.edges?.[0]
-    .node as TagFragment
+    .node as TagFragmentFragment
 
   // fetch private data for first page
   useEffect(() => {
@@ -365,7 +364,11 @@ const TagDetailContainer = () => {
     )
   }
 
-  return <TagDetail tag={(dataByTagId?.node as TagFragment) || searchedTag} />
+  return (
+    <TagDetail
+      tag={(dataByTagId?.node as TagFragmentFragment) || searchedTag}
+    />
+  )
 }
 
 export default TagDetailContainer

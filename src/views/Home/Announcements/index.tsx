@@ -4,27 +4,21 @@ import _get from 'lodash/get'
 import _some from 'lodash/some'
 import { useState } from 'react'
 
-import { QueryError, Spinner, Translate } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-
 import { ADD_TOAST, STORAGE_KEY_ANNOUNCEMENT } from '~/common/enums'
 import { storage } from '~/common/utils'
+import { QueryError, Spinner, Translate } from '~/components'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import { ClientPreferenceQuery, VisibleAnnouncementsQuery } from '~/gql/graphql'
 
 import Carousel from './Carousel'
 import { VISIBLE_ANNOUNCEMENTS } from './gql'
-
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import {
-  VisibleAnnouncements,
-  VisibleAnnouncements_official_announcements as VisibleAnnouncementsType,
-} from './__generated__/VisibleAnnouncements'
 
 type BaseAnnouncementsProps = {
   hide: () => void
 }
 
 const BaseAnnouncements = ({ hide }: BaseAnnouncementsProps) => {
-  const { data, error, loading } = useQuery<VisibleAnnouncements>(
+  const { data, error, loading } = useQuery<VisibleAnnouncementsQuery>(
     VISIBLE_ANNOUNCEMENTS,
     { variables: { input: { visible: true } } }
   )
@@ -42,7 +36,7 @@ const BaseAnnouncements = ({ hide }: BaseAnnouncementsProps) => {
     data,
     'official.announcements',
     []
-  ) as VisibleAnnouncementsType[]
+  ) as VisibleAnnouncementsQuery['official']['announcements']
 
   if (!allItems || allItems.length === 0) {
     return null
@@ -73,7 +67,7 @@ const BaseAnnouncements = ({ hide }: BaseAnnouncementsProps) => {
 }
 
 const Announcements = () => {
-  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+  const { data, client } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
 

@@ -1,15 +1,14 @@
 import gql from 'graphql-tag'
 
 import { CircleDigest } from '~/components/CircleDigest'
+import { NoticeCircleCardFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { NoticeCircleCard as NoticeCircleCardType } from './__generated__/NoticeCircleCard'
 
 const NoticeCircleCard = ({
   circle,
 }: {
-  circle: NoticeCircleCardType | null
+  circle: NoticeCircleCardFragment | null
 }) => {
   if (!circle) {
     return null

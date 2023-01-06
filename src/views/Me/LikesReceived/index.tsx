@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Appreciation,
   EmptyAppreciation,
@@ -10,20 +11,19 @@ import {
   List,
   Spinner,
 } from '~/components'
+import { MeLikesReceivedQuery } from '~/gql/graphql'
 
-import { analytics, mergeConnections } from '~/common/utils'
+import LikesTabs from '../LikesTabs'
 
-import AppreciationTabs from '../AppreciationTabs'
-
-import { MeAppreciationsSent } from './__generated__/MeAppreciationsSent'
-
-const ME_APPRECIATIONS_SENT = gql`
-  query MeAppreciationsSent($after: String) {
+const ME_APPRECIATED_RECEIVED = gql`
+  query MeLikesReceived($after: String) {
     viewer {
       id
       activity {
-        ...AppreciationTabsUserActivity
-        appreciationsSent(input: { first: 20, after: $after }) {
+        ...LikesTabsUserActivity
+        likesReceived: appreciationsReceived(
+          input: { first: 20, after: $after }
+        ) {
           pageInfo {
             startCursor
             endCursor
@@ -40,12 +40,12 @@ const ME_APPRECIATIONS_SENT = gql`
     }
   }
   ${Appreciation.fragments.appreciation}
-  ${AppreciationTabs.fragments.userActivity}
+  ${LikesTabs.fragments.userActivity}
 `
 
-const BaseAppreciationsSent = () => {
-  const { data, loading, fetchMore, refetch } = useQuery<MeAppreciationsSent>(
-    ME_APPRECIATIONS_SENT
+const BaseLikesReceived = () => {
+  const { data, loading, fetchMore, refetch } = useQuery<MeLikesReceivedQuery>(
+    ME_APPRECIATED_RECEIVED
   )
 
   if (loading) {
@@ -56,13 +56,13 @@ const BaseAppreciationsSent = () => {
     return null
   }
 
-  const connectionPath = 'viewer.activity.appreciationsSent'
-  const { edges, pageInfo } = data.viewer.activity.appreciationsSent
+  const connectionPath = 'viewer.activity.likesReceived'
+  const { edges, pageInfo } = data.viewer.activity.likesReceived
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <>
-        <AppreciationTabs activity={data.viewer.activity} />
+        <LikesTabs activity={data.viewer.activity} />
         <EmptyAppreciation />
       </>
     )
@@ -70,7 +70,7 @@ const BaseAppreciationsSent = () => {
 
   const loadMore = () => {
     analytics.trackEvent('load_more', {
-      type: 'appreciations_sent',
+      type: 'appreciations_received',
       location: edges.length,
     })
     return fetchMore({
@@ -86,7 +86,7 @@ const BaseAppreciationsSent = () => {
 
   return (
     <>
-      <AppreciationTabs activity={data.viewer.activity} />
+      <LikesTabs activity={data.viewer.activity} />
 
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
@@ -96,7 +96,7 @@ const BaseAppreciationsSent = () => {
         <List>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
-              <Appreciation appreciation={node} type="sent" />
+              <Appreciation appreciation={node} type="received" />
             </List.Item>
           ))}
         </List>
@@ -105,17 +105,17 @@ const BaseAppreciationsSent = () => {
   )
 }
 
-const AppreciationsSent = () => (
+const LikesReceived = () => (
   <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="appreciationsSent" />}
+      right={<Layout.Header.Title id="likesReceived" />}
     />
 
-    <Head title={{ id: 'appreciationsSent' }} />
+    <Head title={{ id: 'likesReceived' }} />
 
-    <BaseAppreciationsSent />
+    <BaseLikesReceived />
   </Layout.Main>
 )
 
-export default AppreciationsSent
+export default LikesReceived

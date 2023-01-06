@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useContext } from 'react'
 
+import { mergeConnections } from '~/common/utils'
 import {
   CircleInvitation,
   EmptyWarning,
@@ -15,12 +16,9 @@ import {
   ViewerContext,
 } from '~/components'
 import CIRCLE_ACCEPTED_INVITES from '~/components/GQL/queries/circleAcceptedInvites'
-
-import { mergeConnections } from '~/common/utils'
+import { CircleAcceptedInvitesQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { CircleAcceptedInvites } from '~/components/GQL/queries/__generated__/CircleAcceptedInvites'
 
 /**
  * This component is for listing circle accepted invitations.
@@ -40,7 +38,7 @@ const AcceptedInvites = () => {
    * Data Fetching
    */
   const { data, loading, error, fetchMore, refetch } =
-    useQuery<CircleAcceptedInvites>(CIRCLE_ACCEPTED_INVITES, {
+    useQuery<CircleAcceptedInvitesQuery>(CIRCLE_ACCEPTED_INVITES, {
       variables: { name },
     })
 

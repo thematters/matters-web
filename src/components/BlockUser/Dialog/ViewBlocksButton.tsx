@@ -1,3 +1,4 @@
+import { PATHS } from '~/common/enums'
 import {
   Button,
   IconArrowRight16,
@@ -5,8 +6,6 @@ import {
   Translate,
   useResponsive,
 } from '~/components'
-
-import { PATHS } from '~/common/enums'
 
 const ViewBlocksButton = () => {
   const isMediumUp = useResponsive('md-up')

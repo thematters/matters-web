@@ -20,7 +20,7 @@ export type FieldProps = FooterProps & HeaderProps
  *
  */
 
-const Field: React.FC<React.PropsWithChildren<React.ReactNode>> & {
+const Field: React.FC<{ children?: React.ReactNode }> & {
   Header: typeof Header
   Footer: typeof Footer
   Content: typeof Content

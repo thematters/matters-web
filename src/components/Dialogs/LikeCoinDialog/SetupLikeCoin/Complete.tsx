@@ -1,6 +1,5 @@
-import { Dialog, Translate } from '~/components'
-
 import { redirectToTarget } from '~/common/utils'
+import { Dialog, Translate } from '~/components'
 
 const Complete: React.FC = () => {
   return (

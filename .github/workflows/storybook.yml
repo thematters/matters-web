@@ -27,15 +27,11 @@ jobs:
 
       - name: Generate Types
         if: github.base_ref == 'develop'
-        run: |
-          npm run gen:clean \
-          && npm run gen:type
+        run: npm run gen:type
 
       - name: Generate Types
         if: github.base_ref == 'stage'
-        run: |
-          npm run gen:clean \
-          && npm run gen:type
+        run: npm run gen:type
 
       - name: Build
         run: npm run build-storybook

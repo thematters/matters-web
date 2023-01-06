@@ -33,6 +33,7 @@ footer {
   & .followUs {
     & .socials {
       display: flex;
+
       & :global(> *) {
         display: inline-block;
       }
@@ -81,11 +82,13 @@ footer {
     & .contactUs {
       grid-area: topLeft;
     }
+
     & .copyright {
       grid-area: bottomLeft;
       align-self: end;
       text-align: left;
     }
+
     & .followUs {
       grid-column: topRight;
     }
@@ -114,10 +117,12 @@ footer {
     & .contactUs {
       grid-area: topLeft;
     }
+
     & .copyright {
       grid-area: bottomLeft;
       align-self: initial;
     }
+
     & .followUs {
       grid-area: topMiddle;
     }

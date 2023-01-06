@@ -1,4 +1,4 @@
-export default {
+const content = {
   zh_hant: /* html */ `
 <p>社區的事情社區作主，是 Matters 社區的主旨。Matters 社區由 Matters 用戶共同創建，只要你是 Matters 註冊用戶，就能夠透過以下方式參與社區建設。</p>
 <p>隨著用戶提出更多不同的社區建設方法，此頁面也會不斷更新。</p>
@@ -76,3 +76,5 @@ export default {
 <p id="sup-2"><sup>[2]</sup> <small>公共标签是指创建日期在主理标签功能上线之前（即 2020 年 7 月 27 日），使用这个标签的作者数达到 40 人或以上的标签。</small></p>
   `,
 }
+
+export default content

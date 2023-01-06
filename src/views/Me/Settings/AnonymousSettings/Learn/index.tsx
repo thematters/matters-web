@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 
-import { Form, LanguageContext, Translate } from '~/components'
-
 import { GUIDE_LINKS, PATHS } from '~/common/enums'
+import { Form, LanguageContext, Translate } from '~/components'
 
 const Learn = () => {
   const { lang } = useContext(LanguageContext)

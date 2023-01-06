@@ -1,12 +1,11 @@
 import gql from 'graphql-tag'
 
 import { Tag } from '~/components/Tag'
+import { NoticeTagFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { NoticeTag as NoticeTagType } from './__generated__/NoticeTag'
-
-const NoticeTag = ({ tag }: { tag: NoticeTagType | null }) => {
+const NoticeTag = ({ tag }: { tag: NoticeTagFragment | null }) => {
   if (!tag) {
     return null
   }

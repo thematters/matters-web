@@ -1,3 +1,4 @@
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   CircleDigest,
   EmptyWarning,
@@ -10,12 +11,9 @@ import {
   usePullToRefresh,
   useRoute,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { UserFollowingCirclesPublicQuery } from '~/gql/graphql'
 
 import { USER_FOLLOWING_CIRCLES_PUBLIC } from './gql'
-
-import { UserFollowingCirclesPublic } from './__generated__/UserFollowingCirclesPublic'
 
 const CirclesFeed = () => {
   const { getQuery } = useRoute()
@@ -26,9 +24,12 @@ const CirclesFeed = () => {
    */
   // public data
   const { data, loading, error, fetchMore, refetch } =
-    usePublicQuery<UserFollowingCirclesPublic>(USER_FOLLOWING_CIRCLES_PUBLIC, {
-      variables: { userName },
-    })
+    usePublicQuery<UserFollowingCirclesPublicQuery>(
+      USER_FOLLOWING_CIRCLES_PUBLIC,
+      {
+        variables: { userName },
+      }
+    )
 
   // pagination
   const user = data?.user

@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { PATHS } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import {
   CardSpacing,
   IconAnalytics24,
@@ -16,9 +18,6 @@ import {
   useFeatures,
   ViewerContext,
 } from '~/components'
-
-import { PATHS } from '~/common/enums'
-import { toPath } from '~/common/utils'
 
 interface NavMenuTopProps {
   isInSideDrawerNav?: boolean
@@ -105,11 +104,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           <Translate id="myBookmarks" />
         </TextIcon>
       </Menu.Item>
-      <Menu.Item
-        spacing={menuItemSpacing}
-        href={PATHS.ME_APPRECIATIONS_SENT}
-        is="link"
-      >
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_LIKES_SENT} is="link">
         <TextIcon
           icon={<IconClap24 size="md" />}
           spacing="base"

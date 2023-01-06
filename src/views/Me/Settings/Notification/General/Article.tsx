@@ -1,16 +1,18 @@
 import { useContext } from 'react'
 
-import { Form, LanguageContext, Switch, Translate } from '~/components'
-
 import { translate } from '~/common/utils'
+import { Form, LanguageContext, Switch, Translate } from '~/components'
+import { ViewerNotificationGeneralSettingsQuery } from '~/gql/graphql'
 
-import { ViewerNotificationGeneralSettings_viewer_settings_notification } from './__generated__/ViewerNotificationGeneralSettings'
+type NotificationType = NonNullable<
+  NonNullable<
+    ViewerNotificationGeneralSettingsQuery['viewer']
+  >['settings']['notification']
+>
 
 interface ArticleProps {
-  settings: ViewerNotificationGeneralSettings_viewer_settings_notification
-  toggle: (
-    type: keyof ViewerNotificationGeneralSettings_viewer_settings_notification
-  ) => void
+  settings: NotificationType
+  toggle: (type: keyof NotificationType) => void
 }
 
 const Article = ({ settings, toggle }: ArticleProps) => {
@@ -18,7 +20,7 @@ const Article = ({ settings, toggle }: ArticleProps) => {
   const newAppreciationLabel = translate({
     zh_hant: '作品被贊賞',
     zh_hans: '作品被赞赏',
-    en: 'New appreciations',
+    en: 'New likes',
     lang,
   })
   const newBookmarkedLabel = translate({

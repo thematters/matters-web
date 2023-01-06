@@ -1,9 +1,8 @@
 import { useState } from 'react'
 
+import { OPEN_RECOMMEND_TAG_DIALOG } from '~/common/enums'
 import { Dialog, Tabs, Translate, useDialogSwitch } from '~/components'
 import { useEventListener } from '~/components/Hook'
-
-import { OPEN_RECOMMEND_TAG_DIALOG } from '~/common/enums'
 
 import Feed, { FeedType } from './Feed'
 import styles from './styles.css'

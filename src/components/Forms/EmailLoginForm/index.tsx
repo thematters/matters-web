@@ -3,6 +3,16 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
+import {
+  analytics,
+  // clearPersistCache,
+  parseFormSubmitErrors,
+  redirectToTarget,
+  translate,
+  validateEmail,
+  validatePassword,
+} from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -12,18 +22,7 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-
-import { ADD_TOAST, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
-import {
-  analytics,
-  // clearPersistCache,
-  parseFormSubmitErrors,
-  redirectToTarget,
-  storage,
-  translate,
-  validateEmail,
-  validatePassword,
-} from '~/common/utils'
+import { UserLoginMutation } from '~/gql/graphql'
 
 import {
   EmailSignUpDialogButton,
@@ -31,8 +30,6 @@ import {
   PasswordResetRedirectButton,
 } from './Buttons'
 import styles from './styles.css'
-
-import { UserLogin } from './__generated__/UserLogin'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -47,8 +44,6 @@ interface FormValues {
   email: string
   password: ''
 }
-
-const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 export const USER_LOGIN = gql`
   mutation UserLogin($input: UserLoginInput!) {
@@ -67,7 +62,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   closeDialog,
   back,
 }) => {
-  const [login] = useMutation<UserLogin>(USER_LOGIN, undefined, {
+  const [login] = useMutation<UserLoginMutation>(USER_LOGIN, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)
@@ -97,7 +92,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
       try {
-        const result = await login({
+        await login({
           variables: { input: { email, password } },
         })
 
@@ -114,13 +109,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           })
         )
         analytics.identifyUser()
-
-        const token = result.data?.userLogin.token
-
-        // security discussion see: https://github.com/apollographql/apollo-feature-requests/issues/149
-        if (isStaticBuild && token) {
-          storage.set(STORAGE_KEY_AUTH_TOKEN, token)
-        }
 
         setSubmitting(false)
         redirectToTarget({

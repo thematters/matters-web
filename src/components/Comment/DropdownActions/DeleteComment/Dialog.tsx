@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { ADD_TOAST, COMMENT_TYPE_TEXT } from '~/common/enums'
 import {
   CommentFormType,
   Dialog,
@@ -7,11 +8,10 @@ import {
   useDialogSwitch,
   useMutation,
 } from '~/components'
-
-import { ADD_TOAST, COMMENT_TYPE_TEXT } from '~/common/enums'
-
-import { DropdownActionsCommentPublic } from '../__generated__/DropdownActionsCommentPublic'
-import { DeleteComment } from './__generated__/DeleteComment'
+import {
+  DeleteCommentMutation,
+  DropdownActionsCommentPublicFragment,
+} from '~/gql/graphql'
 
 const DELETE_COMMENT = gql`
   mutation DeleteComment($id: ID!) {
@@ -23,7 +23,7 @@ const DELETE_COMMENT = gql`
 `
 
 interface DeleteCommentDialogProps {
-  comment: DropdownActionsCommentPublic
+  comment: DropdownActionsCommentPublicFragment
   type: CommentFormType
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
@@ -36,7 +36,7 @@ const DeleteCommentDialog = ({
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const commentId = comment.id
 
-  const [deleteComment] = useMutation<DeleteComment>(DELETE_COMMENT, {
+  const [deleteComment] = useMutation<DeleteCommentMutation>(DELETE_COMMENT, {
     variables: { id: commentId },
     optimisticResponse: {
       deleteComment: {

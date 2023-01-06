@@ -7,8 +7,7 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-
-import { UncollapseComment } from './__generated__/UncollapseComment'
+import { UncollapseCommentMutation } from '~/gql/graphql'
 
 const UNCOLLAPSE_COMMENT = gql`
   mutation UncollapseComment($id: ID!, $state: CommentState!) {
@@ -20,7 +19,7 @@ const UNCOLLAPSE_COMMENT = gql`
 `
 
 const UncollapseButton = ({ commentId }: { commentId: string }) => {
-  const [uncollapseComment] = useMutation<UncollapseComment>(
+  const [uncollapseComment] = useMutation<UncollapseCommentMutation>(
     UNCOLLAPSE_COMMENT,
     {
       variables: { id: commentId, state: 'active' },

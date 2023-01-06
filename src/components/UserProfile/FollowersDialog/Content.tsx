@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
   EmptyWarning,
@@ -14,12 +15,9 @@ import {
   ViewerContext,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { UserFollowerPublicQuery } from '~/gql/graphql'
 
 import { USER_FOLLOWERS_PRIVATE, USER_FOLLOWERS_PUBLIC } from './gql'
-
-import { UserFollowerPublic } from './__generated__/UserFollowerPublic'
 
 const FollowersDialogContent = () => {
   const viewer = useContext(ViewerContext)
@@ -37,7 +35,7 @@ const FollowersDialogContent = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserFollowerPublic>(USER_FOLLOWERS_PUBLIC, {
+  } = usePublicQuery<UserFollowerPublicQuery>(USER_FOLLOWERS_PUBLIC, {
     variables: { userName },
   })
 
@@ -47,7 +45,7 @@ const FollowersDialogContent = () => {
   const { edges, pageInfo } = user?.followers || {}
 
   // private data
-  const loadPrivate = (publicData?: UserFollowerPublic) => {
+  const loadPrivate = (publicData?: UserFollowerPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !user) {
       return
     }

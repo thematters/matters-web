@@ -2,10 +2,13 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { toPath } from '~/common/utils'
+import { NoticeActorNameUserFragment } from '~/gql/graphql'
 
-import { NoticeActorNameUser } from './__generated__/NoticeActorNameUser'
-
-const NoticeActorName = ({ user }: { user: NoticeActorNameUser | null }) => {
+const NoticeActorName = ({
+  user,
+}: {
+  user: NoticeActorNameUserFragment | null
+}) => {
   if (!user) {
     return null
   }
@@ -15,11 +18,7 @@ const NoticeActorName = ({ user }: { user: NoticeActorNameUser | null }) => {
     userName: user.userName || '',
   })
 
-  return (
-    <Link {...path}>
-      <a>{user.displayName}</a>
-    </Link>
-  )
+  return <Link {...path}>{user.displayName}</Link>
 }
 
 NoticeActorName.fragments = {

@@ -3,10 +3,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { AriaAttributes, AriaRole, forwardRef, useContext, useRef } from 'react'
 
-import { LanguageContext } from '~/components'
-
 import { KEYCODES, TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
+import { LanguageContext } from '~/components'
 
 import styles from './styles.css'
 
@@ -160,7 +159,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
     if (is === 'link' && href) {
       return (
-        <Link href={href}>
+        <Link href={href} legacyBehavior>
           <a
             className={cardClasses}
             ref={cardRef}
@@ -218,3 +217,5 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
     )
   }
 )
+
+Card.displayName = 'Card'

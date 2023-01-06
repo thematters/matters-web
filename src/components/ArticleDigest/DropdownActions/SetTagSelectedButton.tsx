@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 
-import { IconAdd24, Menu, TextIcon, Translate, useMutation } from '~/components'
-
 import { ADD_TOAST } from '~/common/enums'
-
-import { SetTagSelected } from './__generated__/SetTagSelected'
-import { SetTagSelectedButtonArticle } from './__generated__/SetTagSelectedButtonArticle'
+import { IconAdd24, Menu, TextIcon, Translate, useMutation } from '~/components'
+import {
+  SetTagSelectedButtonArticleFragment,
+  SetTagSelectedMutation,
+} from '~/gql/graphql'
 
 const SET_TAG_SELECTED = gql`
   mutation SetTagSelected($id: ID!, $articles: [ID!]) {
@@ -41,10 +41,10 @@ const SetTagSelectedButton = ({
   article,
   tagId,
 }: {
-  article: SetTagSelectedButtonArticle
+  article: SetTagSelectedButtonArticleFragment
   tagId: string
 }) => {
-  const [update] = useMutation<SetTagSelected>(SET_TAG_SELECTED, {
+  const [update] = useMutation<SetTagSelectedMutation>(SET_TAG_SELECTED, {
     variables: { id: tagId, articles: [article.id] },
   })
 

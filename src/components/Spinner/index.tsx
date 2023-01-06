@@ -1,9 +1,8 @@
 import { useContext } from 'react'
 
-import { IconSpinner16, LanguageContext } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
+import { IconSpinner16, LanguageContext } from '~/components'
 
 import styles from './styles.css'
 

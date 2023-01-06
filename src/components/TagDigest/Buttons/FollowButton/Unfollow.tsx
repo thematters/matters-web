@@ -4,17 +4,18 @@ import { useState } from 'react'
 import { Button, TextIcon, Translate, useMutation } from '~/components'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateViewerFollowingTagCount from '~/components/GQL/updates/viewerFollowingTagCount'
-
-import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
-import { TagDigestFollowButtonPrivate } from './__generated__/TagDigestFollowButtonPrivate'
+import {
+  TagDigestFollowButtonPrivateFragment,
+  ToggleFollowTagMutation,
+} from '~/gql/graphql'
 
 interface UnfollowTagProps {
-  tag: Partial<TagDigestFollowButtonPrivate>
+  tag: Partial<TagDigestFollowButtonPrivateFragment>
 }
 
 const Unfollow = ({ tag }: UnfollowTagProps) => {
   const [hover, setHover] = useState(false)
-  const [unfollow] = useMutation<ToggleFollowTag>(TOGGLE_FOLLOW_TAG, {
+  const [unfollow] = useMutation<ToggleFollowTagMutation>(TOGGLE_FOLLOW_TAG, {
     variables: { id: tag.id, enabled: false },
     optimisticResponse:
       !_isNil(tag.id) && !_isNil(tag.isFollower)

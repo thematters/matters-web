@@ -1,11 +1,10 @@
 import gql from 'graphql-tag'
 
 import { Button, TextIcon, Translate } from '~/components'
-
-import { FollowStateUserPrivate } from './__generated__/FollowStateUserPrivate'
+import { FollowStateUserPrivateFragment } from '~/gql/graphql'
 
 interface FollowStateProps {
-  user: Partial<FollowStateUserPrivate>
+  user: Partial<FollowStateUserPrivateFragment>
 }
 
 const FollowState = ({ user }: FollowStateProps) => {

@@ -1,20 +1,19 @@
 {
-    "recommendations": [
-        "esbenp.prettier-vscode",
-        "editorconfig.editorconfig",
-        "dbaeumer.vscode-eslint",
-        "apollographql.vscode-apollo",
-        "naumovs.color-highlight",
-        "ms-azuretools.vscode-docker",
-        "tobermory.es6-string-html",
-        "graphql.vscode-graphql",
-        "wix.vscode-import-cost",
-        "oderwat.indent-rainbow",
-        "ms-vscode.vscode-typescript-tslint-plugin",
-        "stylelint.vscode-stylelint",
-        "github.github-vscode-theme",
-        "ricard.postcss",
-        "blanu.vscode-styled-jsx",
-        "wayou.vscode-todo-highlight"
-    ]
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "apollographql.vscode-apollo",
+    "naumovs.color-highlight",
+    "ms-azuretools.vscode-docker",
+    "tobermory.es6-string-html",
+    "graphql.vscode-graphql",
+    "wix.vscode-import-cost",
+    "oderwat.indent-rainbow",
+    "stylelint.vscode-stylelint",
+    "github.github-vscode-theme",
+    "ricard.postcss",
+    "blanu.vscode-styled-jsx",
+    "wayou.vscode-todo-highlight"
+  ]
 }

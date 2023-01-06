@@ -1,6 +1,5 @@
-import MeSettingsChangeEmail from '~/views/Me/Settings/ChangeEmail'
-
 import { Protected } from '~/components'
+import MeSettingsChangeEmail from '~/views/Me/Settings/ChangeEmail'
 
 const ProtectedMeSettingsChangeEmail = () => (
   <Protected>

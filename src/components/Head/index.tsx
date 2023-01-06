@@ -1,17 +1,15 @@
 import NextHead from 'next/head'
+import NextScript from 'next/script'
 import { useContext } from 'react'
-
-import { LanguageContext, useRoute } from '~/components'
-
-import { toLocale, translate, TranslateArgs } from '~/common/utils'
 
 import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
 import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png'
 import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
 import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
-
-import { UserLanguage } from '@/__generated__/globalTypes'
+import { toLocale, translate, TranslateArgs } from '~/common/utils'
+import { LanguageContext, useRoute } from '~/components'
+import { UserLanguage } from '~/gql/graphql'
 
 const siteDomain =
   process.env.NEXT_PUBLIC_SITE_DOMAIN_CANONICAL || // for web-next, set this different as serving domain; suggested canonical domain ('matters.news') to robots
@@ -146,28 +144,28 @@ export const Head: React.FC<HeadProps> = (props) => {
       <meta name="twitter:image" key="twitter:image" content={head.image} />
 
       {/* i18n */}
-      {props.availableLanguages?.includes(UserLanguage.en) && (
+      {props.availableLanguages?.includes(UserLanguage.En) && (
         <link
           rel="alternate"
-          hrefLang={toLocale(UserLanguage.en)}
-          href={i18nUrl(toLocale(UserLanguage.en))}
-          key={`alternate:${UserLanguage.en}`}
+          hrefLang={toLocale(UserLanguage.En)}
+          href={i18nUrl(toLocale(UserLanguage.En))}
+          key={`alternate:${UserLanguage.En}`}
         />
       )}
-      {props.availableLanguages?.includes(UserLanguage.zh_hans) && (
+      {props.availableLanguages?.includes(UserLanguage.ZhHans) && (
         <link
           rel="alternate"
-          hrefLang={toLocale(UserLanguage.zh_hans)}
-          href={i18nUrl(toLocale(UserLanguage.zh_hans))}
-          key={`alternate:${UserLanguage.zh_hans}`}
+          hrefLang={toLocale(UserLanguage.ZhHans)}
+          href={i18nUrl(toLocale(UserLanguage.ZhHans))}
+          key={`alternate:${UserLanguage.ZhHans}`}
         />
       )}
-      {props.availableLanguages?.includes(UserLanguage.zh_hant) && (
+      {props.availableLanguages?.includes(UserLanguage.ZhHant) && (
         <link
           rel="alternate"
-          hrefLang={toLocale(UserLanguage.zh_hant)}
-          href={i18nUrl(toLocale(UserLanguage.zh_hant))}
-          key={`alternate:${UserLanguage.zh_hant}`}
+          hrefLang={toLocale(UserLanguage.ZhHant)}
+          href={i18nUrl(toLocale(UserLanguage.ZhHant))}
+          key={`alternate:${UserLanguage.ZhHant}`}
         />
       )}
       <link
@@ -221,6 +219,13 @@ export const Head: React.FC<HeadProps> = (props) => {
           key="ld-json-data"
         />
       )}
+
+      <NextScript
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5129054622209245"
+        strategy="lazyOnload"
+        crossOrigin="anonymous"
+      />
     </NextHead>
   )
 }

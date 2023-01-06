@@ -1,6 +1,8 @@
 import { ethers } from 'ethers'
 import { useContext } from 'react'
 
+import { EXTERNAL_LINKS } from '~/common/enums'
+import { maskAddress, translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
@@ -11,9 +13,6 @@ import {
   TextIcon,
   TextIconProps,
 } from '~/components'
-
-import { EXTERNAL_LINKS } from '~/common/enums'
-import { maskAddress, translate } from '~/common/utils'
 
 type WalletAddressProps = {
   address: string

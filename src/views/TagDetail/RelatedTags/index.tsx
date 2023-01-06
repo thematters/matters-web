@@ -4,6 +4,8 @@ import _chunk from 'lodash/chunk'
 import _get from 'lodash/get'
 import _random from 'lodash/random'
 
+import { PATHS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   List,
   PageHeader,
@@ -16,15 +18,10 @@ import {
   ViewMoreCard,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
-
-import { PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { LastFetchRandomQuery, TagDetailRecommendedQuery } from '~/gql/graphql'
 
 import { RELATED_TAGS } from './gql'
 import styles from './styles.css'
-
-import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
-import { TagDetailRecommended } from './__generated__/TagDetailRecommended'
 
 interface RelatedTagsProps {
   tagId: string
@@ -58,16 +55,19 @@ const RelatedTagsHeader = ({
 }
 
 const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
-  const { data: lastFetchRandom, client } = useQuery<LastFetchRandom>(
+  const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
     FETCH_RECORD,
     { variables: { id: 'local' } }
   )
 
   const lastRandom = lastFetchRandom?.lastFetchRandom.feedTags
 
-  const { data, refetch } = usePublicQuery<TagDetailRecommended>(RELATED_TAGS, {
-    variables: { id: tagId, random: lastRandom || 0 },
-  })
+  const { data, refetch } = usePublicQuery<TagDetailRecommendedQuery>(
+    RELATED_TAGS,
+    {
+      variables: { id: tagId, random: lastRandom || 0 },
+    }
+  )
 
   const { edges } =
     (data?.node?.__typename === 'Tag' && data.node.recommended) || {}

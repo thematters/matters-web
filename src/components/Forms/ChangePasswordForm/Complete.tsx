@@ -1,7 +1,6 @@
-import { BackToHomeButton, Dialog, Layout, Translate } from '~/components'
-
 import { PATHS } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
+import { BackToHomeButton, Dialog, Layout, Translate } from '~/components'
 
 interface Props {
   type: 'forget' | 'change'

@@ -2,18 +2,16 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 
-import { Card, CardProps, CircleAvatar } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Card, CardProps, CircleAvatar } from '~/components'
+import { DigestMiniCircleFragment } from '~/gql/graphql'
 
 import Counts from '../Counts'
 import { fragments } from './gql'
 import styles from './styles.css'
 
-import { DigestMiniCircle } from './__generated__/DigestMiniCircle'
-
 export type CircleDigestMiniProps = {
-  circle: DigestMiniCircle
+  circle: DigestMiniCircleFragment
 } & CardProps
 
 const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
@@ -30,7 +28,7 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
   return (
     <Card {...path} spacing={[0, 0]} {...cardProps}>
       <section className={containerClasses}>
-        <Link {...path}>
+        <Link {...path} legacyBehavior>
           <a className="avatar">
             <CircleAvatar circle={circle} size="xl" />
           </a>
@@ -38,7 +36,7 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
 
         <section className="content">
           <header>
-            <Link {...path}>
+            <Link {...path} legacyBehavior>
               <a className="name">{displayName}</a>
             </Link>
 

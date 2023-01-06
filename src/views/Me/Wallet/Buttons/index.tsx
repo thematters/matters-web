@@ -1,6 +1,5 @@
-import { AddCreditDialog, Dialog, Translate, useFeatures } from '~/components'
-
 import { analytics } from '~/common/utils'
+import { AddCreditDialog, Dialog, Translate, useFeatures } from '~/components'
 
 import PayoutButton from './PayoutButton'
 import styles from './styles.css'

@@ -3,6 +3,8 @@ import { ethers } from 'ethers'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { OPEN_LIKE_COIN_DIALOG, PATHS } from '~/common/enums'
+import { maskAddress, translate } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
@@ -13,13 +15,9 @@ import {
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
-
-import { OPEN_LIKE_COIN_DIALOG, PATHS } from '~/common/enums'
-import { maskAddress, translate } from '~/common/utils'
+import { ViewerLikeInfoQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
 
 const VIEWER_LIKE_INFO = gql`
   query ViewerLikeInfo {
@@ -42,7 +40,7 @@ const WalletSettings = () => {
   const { lang } = useContext(LanguageContext)
 
   const likerId = viewer.liker.likerId
-  const { data, refetch } = useQuery<ViewerLikeInfo>(VIEWER_LIKE_INFO, {
+  const { data, refetch } = useQuery<ViewerLikeInfoQuery>(VIEWER_LIKE_INFO, {
     errorPolicy: 'none',
     skip: typeof window === 'undefined',
   })

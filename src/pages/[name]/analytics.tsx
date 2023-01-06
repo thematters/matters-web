@@ -1,6 +1,5 @@
-import CircleAnalytics from '~/views/Circle/Analytics'
-
 import { EmptyLayout, Protected, Throw404, useRoute } from '~/components'
+import CircleAnalytics from '~/views/Circle/Analytics'
 
 const NameCircleAnalytics = () => {
   const { isPathStartWith } = useRoute()

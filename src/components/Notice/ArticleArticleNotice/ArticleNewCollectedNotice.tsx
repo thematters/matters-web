@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
+import { Translate } from '~/components'
+import { ArticleNewCollectedNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
@@ -12,9 +12,11 @@ import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import styles from '../styles.css'
 
-import { ArticleNewCollectedNotice as NoticeType } from './__generated__/ArticleNewCollectedNotice'
-
-const ArticleNewCollectedNotice = ({ notice }: { notice: NoticeType }) => {
+const ArticleNewCollectedNotice = ({
+  notice,
+}: {
+  notice: ArticleNewCollectedNoticeFragment
+}) => {
   if (!notice.actors) {
     return null
   }

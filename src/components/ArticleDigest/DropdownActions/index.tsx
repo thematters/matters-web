@@ -2,10 +2,11 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   AppreciatorsDialog,
   Button,
-  DonatorsDialog,
   DropdownDialog,
   FingerprintDialog,
   IconMore16,
@@ -13,12 +14,11 @@ import {
   LanguageContext,
   Menu,
   ShareDialog,
+  SupportersDialog,
   Translate,
   ViewerContext,
 } from '~/components'
-
-import { ADD_TOAST } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
@@ -32,8 +32,6 @@ import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
 import ShareButton from './ShareButton'
 import StickyButton from './StickyButton'
-
-import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 
 export interface DropdownActionsControls {
   icon?: React.ReactNode
@@ -62,7 +60,7 @@ export interface DropdownActionsControls {
 }
 
 type DropdownActionsProps = {
-  article: DropdownActionsArticle
+  article: DropdownActionsArticleFragment
 } & DropdownActionsControls
 
 interface Controls {
@@ -83,7 +81,7 @@ interface DialogProps {
   openShareDialog: () => void
   openFingerprintDialog: () => void
   openAppreciatorsDialog: () => void
-  openDonatorsDialog: () => void
+  openSupportersDialog: () => void
   openArchiveDialog: () => void
 }
 
@@ -114,7 +112,7 @@ const BaseDropdownActions = ({
   openShareDialog,
   openFingerprintDialog,
   openAppreciatorsDialog,
-  openDonatorsDialog,
+  openSupportersDialog,
   openArchiveDialog,
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
@@ -140,7 +138,7 @@ const BaseDropdownActions = ({
       {hasAppreciators && (
         <AppreciatorsButton openDialog={openAppreciatorsDialog} />
       )}
-      {hasDonators && <DonatorsButton openDialog={openDonatorsDialog} />}
+      {hasDonators && <DonatorsButton openDialog={openSupportersDialog} />}
       {hasFingerprint && (
         <FingerprintButton openDialog={openFingerprintDialog} />
       )}
@@ -227,7 +225,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const controls = {
     // public
     hasShare: !!hasShare,
-    hasAppreciators: article.appreciationsReceived.totalCount > 0 && !inCard,
+    hasAppreciators: article.likesReceived.totalCount > 0 && !inCard,
     hasDonators: article.donationsDialog.totalCount > 0 && !inCard,
     hasFingerprint: hasFingerprint && (isActive || isArticleAuthor) && !inCard,
     hasExtend: hasExtend && !!isActive && !inCard,
@@ -258,8 +256,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
           {({ openDialog: openFingerprintDialog }) => (
             <AppreciatorsDialog article={article}>
               {({ openDialog: openAppreciatorsDialog }) => (
-                <DonatorsDialog article={article}>
-                  {({ openDialog: openDonatorsDialog }) => (
+                <SupportersDialog article={article}>
+                  {({ openDialog: openSupportersDialog }) => (
                     <ArchiveArticle.Dialog article={article}>
                       {({ openDialog: openArchiveDialog }) => (
                         <BaseDropdownActions
@@ -268,7 +266,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
                           openShareDialog={openShareDialog}
                           openFingerprintDialog={openFingerprintDialog}
                           openAppreciatorsDialog={openAppreciatorsDialog}
-                          openDonatorsDialog={openDonatorsDialog}
+                          openSupportersDialog={openSupportersDialog}
                           openArchiveDialog={
                             viewer.isFrozen ? forbid : openArchiveDialog
                           }
@@ -276,7 +274,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
                       )}
                     </ArchiveArticle.Dialog>
                   )}
-                </DonatorsDialog>
+                </SupportersDialog>
               )}
             </AppreciatorsDialog>
           )}

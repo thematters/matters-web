@@ -1,5 +1,5 @@
 module.exports = {
   src: '',
   srcSet: '',
-  images: []
+  images: [],
 }

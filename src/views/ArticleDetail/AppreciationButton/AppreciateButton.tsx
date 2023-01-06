@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { useContext, useRef } from 'react'
 
+import { numAbbr, translate } from '~/common/utils'
 import {
   Button,
   IconClap16,
@@ -8,8 +9,6 @@ import {
   LanguageContext,
   TextIcon,
 } from '~/components'
-
-import { numAbbr, translate } from '~/common/utils'
 
 import * as clap from './clap'
 import clapStyles from './styles.clap.css'
@@ -49,7 +48,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         aria-label={translate({
           zh_hant: `讚賞作品（當前 ${total} 次讚賞）`,
           zh_hans: `赞赏作品（当前 ${total} 次赞赏）`,
-          en: `appreciate article (current ${total} appreciations)`,
+          en: `like article (current ${total} likes)`,
           lang,
         })}
         disabled={disabled}

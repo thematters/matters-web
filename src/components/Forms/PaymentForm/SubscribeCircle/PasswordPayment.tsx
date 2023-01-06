@@ -2,6 +2,9 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 
+import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
+import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
+import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -12,22 +15,19 @@ import {
   useMutation,
   withIcon,
 } from '~/components'
-
-import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
-
-import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
+import {
+  DigestRichCirclePrivateFragment,
+  DigestRichCirclePublicFragment,
+  SubscribeCircleMutation,
+} from '~/gql/graphql'
 
 import { SUBSCRIBE_CIRCLE } from './gql'
 import Head from './Head'
 import Hint from './Hint'
 import styles from './styles.css'
 
-import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { SubscribeCircle as SubscribeCircleType } from './__generated__/SubscribeCircle'
-
 interface FormProps {
-  circle: DigestRichCirclePublic & DigestRichCirclePrivate
+  circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
   cardLast4: string
   submitCallback: () => void
   switchToCardPayment: () => void
@@ -48,7 +48,7 @@ const Confirm: React.FC<FormProps> = ({
   const formId = 'subscirbe-circle-form'
 
   const { lang } = useContext(LanguageContext)
-  const [subscribeCircle] = useMutation<SubscribeCircleType>(
+  const [subscribeCircle] = useMutation<SubscribeCircleMutation>(
     SUBSCRIBE_CIRCLE,
     undefined,
     { showToast: false }
@@ -90,13 +90,13 @@ const Confirm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.PinInput
-        length={6}
+        length={PAYMENT_PASSSWORD_LENGTH}
         name="password"
         value={values.password}
         error={touched.password && errors.password}
         hint={<Translate id="hintPaymentPassword" />}
         onChange={(value) => {
-          const shouldValidate = value.length === 6
+          const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
           setTouched({ password: true }, shouldValidate)
           setFieldValue('password', value, shouldValidate)
         }}
@@ -105,10 +105,10 @@ const Confirm: React.FC<FormProps> = ({
   )
 
   useEffect(() => {
-    if (isValid && values.password) {
+    if (isValid && values.password.length === PAYMENT_PASSSWORD_LENGTH) {
       handleSubmit()
     }
-  }, [isValid])
+  }, [isValid, values.password])
 
   if (isSubmitting) {
     return (

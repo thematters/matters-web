@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import React from 'react'
 
-import { FeatureOfficial } from './__generated__/FeatureOfficial'
+import { FeatureOfficialFragment } from '~/gql/graphql'
 
 type FeatureName =
   | 'payment'
@@ -27,7 +27,7 @@ export const FeaturesProvider = ({
   official,
 }: {
   children: React.ReactNode
-  official: FeatureOfficial | undefined
+  official: FeatureOfficialFragment | undefined
 }) => {
   const featuresList = official?.features || []
   const featureObject = featuresList.reduce(

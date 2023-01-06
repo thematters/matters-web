@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyTransaction,
   EmptyTransactionCurrency,
@@ -16,13 +17,10 @@ import {
   Transaction,
   Translate,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { MeTransactionsQuery } from '~/gql/graphql'
 
 import { Currency, CurrencySwitch } from './CurrencySwitch'
 import styles from './styles.css'
-
-import { MeTransactions } from './__generated__/MeTransactions'
 
 const ME_TRANSACTIONS = gql`
   query MeTransactions(
@@ -74,7 +72,7 @@ interface BaseTransactionsProps {
 }
 
 const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
-  const { data, loading, fetchMore, refetch } = useQuery<MeTransactions>(
+  const { data, loading, fetchMore, refetch } = useQuery<MeTransactionsQuery>(
     ME_TRANSACTIONS,
     {
       variables: {
@@ -185,7 +183,7 @@ const Transactions = () => {
           selected={isDonaion}
           onClick={() => setPurpose(Purpose.DONATION)}
         >
-          <Translate zh_hans="支持" zh_hant="支持" en="Support" />
+          <Translate zh_hans="支持" zh_hant="支持" en="Supports" />
         </Tabs.Tab>
 
         <Tabs.Tab

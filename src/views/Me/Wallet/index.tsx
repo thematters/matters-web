@@ -4,6 +4,10 @@ import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
 
 import {
+  PAYMENT_CURRENCY as CURRENCY,
+  PAYMENT_MINIMAL_PAYOUT_AMOUNT,
+} from '~/common/enums'
+import {
   Form,
   Head,
   Layout,
@@ -13,11 +17,7 @@ import {
 } from '~/components'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-
-import {
-  PAYMENT_CURRENCY as CURRENCY,
-  PAYMENT_MINIMAL_PAYOUT_AMOUNT,
-} from '~/common/enums'
+import { ExchangeRatesQuery, WalletBalanceQuery } from '~/gql/graphql'
 
 import { FiatCurrencyBalance, LikeCoinBalance, USDTBalance } from './Balance'
 import PaymentPassword from './PaymentPassword'
@@ -27,16 +27,13 @@ import TotalAssets from './TotalAssets'
 import ViewStripeAccount from './ViewStripeAccount'
 import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 
-import { ExchangeRates } from '~/components/GQL/queries/__generated__/ExchangeRates'
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
-
 const Wallet = () => {
   const viewer = useContext(ViewerContext)
 
   const currency = viewer.settings.currency
 
   const { data: exchangeRateDate, loading: exchangeRateLoading } =
-    useQuery<ExchangeRates>(EXCHANGE_RATES, {
+    useQuery<ExchangeRatesQuery>(EXCHANGE_RATES, {
       variables: {
         to: currency,
       },
@@ -57,11 +54,14 @@ const Wallet = () => {
     _matchesProperty('from', CURRENCY.LIKE)
   )
 
-  const { data, loading, refetch } = useQuery<WalletBalance>(WALLET_BALANCE, {
-    fetchPolicy: 'network-only',
-    errorPolicy: 'none',
-    skip: typeof window === 'undefined',
-  })
+  const { data, loading, refetch } = useQuery<WalletBalanceQuery>(
+    WALLET_BALANCE,
+    {
+      fetchPolicy: 'network-only',
+      errorPolicy: 'none',
+      skip: typeof window === 'undefined',
+    }
+  )
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const canPayout = balanceHKD >= PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD
   const hasStripeAccount = !!data?.viewer?.wallet.stripeAccount?.id

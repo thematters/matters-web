@@ -2,8 +2,7 @@ import gql from 'graphql-tag'
 import { useEffect } from 'react'
 
 import { Dialog, Spinner, Translate, useMutation } from '~/components'
-
-import { GenerateLikerId } from './__generated__/GenerateLikerId'
+import { GenerateLikerIdMutation } from '~/gql/graphql'
 
 interface Props {
   prevStep: () => void
@@ -25,7 +24,8 @@ const GENERATE_LIKER_ID = gql`
 `
 
 const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
-  const [generate, { error }] = useMutation<GenerateLikerId>(GENERATE_LIKER_ID)
+  const [generate, { error }] =
+    useMutation<GenerateLikerIdMutation>(GENERATE_LIKER_ID)
 
   useEffect(() => {
     generate().then((result) => {

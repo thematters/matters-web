@@ -2,6 +2,10 @@ import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
 import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import {
   Button,
   IconAdd16,
   TextIcon,
@@ -11,22 +15,18 @@ import {
 } from '~/components'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
-
 import {
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-
-import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
-import { FollowButtonTagPrivate } from './__generated__/FollowButtonTagPrivate'
+  FollowButtonTagPrivateFragment,
+  ToggleFollowTagMutation,
+} from '~/gql/graphql'
 
 interface FollowProps {
-  tag: FollowButtonTagPrivate
+  tag: FollowButtonTagPrivateFragment
 }
 
 const Follow = ({ tag }: FollowProps) => {
   const viewer = useContext(ViewerContext)
-  const [follow] = useMutation<ToggleFollowTag>(TOGGLE_FOLLOW_TAG, {
+  const [follow] = useMutation<ToggleFollowTagMutation>(TOGGLE_FOLLOW_TAG, {
     variables: { id: tag.id, enabled: true },
     optimisticResponse:
       !_isNil(tag.id) && !_isNil(tag.isFollower)

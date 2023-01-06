@@ -2,19 +2,19 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 
+import { TEST_ID } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import { Card, CardProps, Translate } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
 import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
-
-import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import {
+  UserDigestRichUserPrivateFragment,
+  UserDigestRichUserPublicFragment,
+} from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { UserDigestRichUserPrivate } from './__generated__/UserDigestRichUserPrivate'
-import { UserDigestRichUserPublic } from './__generated__/UserDigestRichUserPublic'
 
 /**
  * UeserDigest.Rich is a component for presenting user's avatar, display
@@ -25,7 +25,8 @@ import { UserDigestRichUserPublic } from './__generated__/UserDigestRichUserPubl
  *   <UserDigest.Rich user={user} />
  */
 export type UserDigestRichProps = {
-  user: UserDigestRichUserPublic & Partial<UserDigestRichUserPrivate>
+  user: UserDigestRichUserPublicFragment &
+    Partial<UserDigestRichUserPrivateFragment>
 
   size?: 'sm' | 'lg'
   avatarBadge?: React.ReactNode
@@ -65,7 +66,11 @@ const Rich = ({
     container: true,
     [`size-${size}`]: !!size,
     disabled: isArchived,
-    clamp: canClamp,
+  })
+
+  const contentClasses = classNames({
+    content: true,
+    'has-extra-button': hasUnblock || hasFollow || !!extraButton,
   })
 
   if (isArchived) {
@@ -80,8 +85,8 @@ const Rich = ({
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
           </span>
 
-          <section className="content">
-            <header>
+          <section className={contentClasses}>
+            <header className="header">
               <span className="name">
                 <Translate id="accountArchived" />
               </span>
@@ -106,16 +111,16 @@ const Rich = ({
       testId={TEST_ID.DIGEST_USER_RICH}
     >
       <section className={containerClasses}>
-        <Link {...path}>
+        <Link {...path} legacyBehavior>
           <a className="avatar">
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} user={user} />
             {avatarBadge && <span className="badge">{avatarBadge}</span>}
           </a>
         </Link>
 
-        <section className="content">
-          <header>
-            <Link {...path}>
+        <section className={contentClasses}>
+          <header className="header">
+            <Link {...path} legacyBehavior>
               <a className="name">{user.displayName}</a>
             </Link>
             {hasState && <FollowUserButton.State user={user} />}
@@ -131,7 +136,7 @@ const Rich = ({
 
         <section className="extra-button">
           {hasUnblock && <UnblockUserButton user={user} />}
-          {hasFollow && <FollowUserButton user={user} size="md-s" />}
+          {hasFollow && <FollowUserButton user={user} />}
           {extraButton}
         </section>
 

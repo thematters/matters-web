@@ -1,6 +1,5 @@
-import MyAnalytics from '~/views/Me/Analytics'
-
 import { Protected } from '~/components'
+import MyAnalytics from '~/views/Me/Analytics'
 
 const ProtectedMyAnalytics = () => (
   <Protected>

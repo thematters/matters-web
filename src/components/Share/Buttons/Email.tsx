@@ -1,11 +1,9 @@
 // import queryString from 'query-string'
 
-import { TextIcon, Translate, withIcon } from '~/components'
-
-import { analytics, dom } from '~/common/utils'
-
 import { ReactComponent as IconShareEmail } from '@/public/static/icons/16px/share-email.svg'
 import { ReactComponent as IconShareEmailCircle } from '@/public/static/icons/40px/share-email-circle.svg'
+import { analytics, dom } from '~/common/utils'
+import { TextIcon, Translate, withIcon } from '~/components'
 
 const Email = ({
   title,

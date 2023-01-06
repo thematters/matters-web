@@ -1,16 +1,14 @@
 import React from 'react'
 
-import { IconCircle16, LinkWrapper, TextIcon } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { IconCircle16, LinkWrapper, TextIcon } from '~/components'
+import { DigestPlainCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.css'
 
-import { DigestPlainCircle } from './__generated__/DigestPlainCircle'
-
 export type CircleDigestPlainProps = {
-  circle: DigestPlainCircle
+  circle: DigestPlainCircleFragment
 
   onClick?: () => void
 }

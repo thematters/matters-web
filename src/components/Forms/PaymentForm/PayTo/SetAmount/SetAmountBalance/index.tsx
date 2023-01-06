@@ -1,9 +1,8 @@
 import { useContext } from 'react'
 
-import { Button, LanguageContext, TextIcon, Translate } from '~/components'
-
 import { GUIDE_LINKS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
+import { Button, LanguageContext, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 
@@ -60,7 +59,7 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
         </Button>
       )}
       {isUSDT && balanceUSDT <= 0 && (
-        <a href={GUIDE_LINKS.payment[lang]} target="_blank">
+        <a href={GUIDE_LINKS.payment[lang]} target="_blank" rel="noreferrer">
           <TextIcon size="xs" textDecoration="underline" color="grey-dark">
             <Translate
               zh_hant="如何移轉資金到 Polygon？"

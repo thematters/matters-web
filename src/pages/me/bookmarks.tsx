@@ -1,6 +1,5 @@
-import MeBookmarks from '~/views/Me/Bookmarks'
-
 import { Protected } from '~/components'
+import MeBookmarks from '~/views/Me/Bookmarks'
 
 const ProtectedMeBookMarks = () => (
   <Protected>

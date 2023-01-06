@@ -1,5 +1,6 @@
 import { Fragment, useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptySearch,
   InfiniteScroll,
@@ -10,13 +11,10 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { SearchUsersPublicQuery } from '~/gql/graphql'
 
 import GoogleSearchButton from '../GoogleSearchButton'
 import { SEARCH_USERS_PRIVATE, SEARCH_USERS_PUBLIC } from './gql'
-
-import { SearchUsersPublic } from './__generated__/SearchUsersPublic'
 
 const SearchUser = () => {
   const viewer = useContext(ViewerContext)
@@ -33,7 +31,7 @@ const SearchUser = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<SearchUsersPublic>(SEARCH_USERS_PUBLIC, {
+  } = usePublicQuery<SearchUsersPublicQuery>(SEARCH_USERS_PUBLIC, {
     variables: { key: q },
   })
 
@@ -42,7 +40,7 @@ const SearchUser = () => {
   const { edges, pageInfo } = data?.search || {}
 
   // private data
-  const loadPrivate = (publicData?: SearchUsersPublic) => {
+  const loadPrivate = (publicData?: SearchUsersPublicQuery) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }
@@ -114,7 +112,7 @@ const SearchUser = () => {
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'User' && (
-              <Fragment>
+              <Fragment key={i}>
                 <List.Item key={cursor}>
                   <UserDigest.Rich
                     user={node}

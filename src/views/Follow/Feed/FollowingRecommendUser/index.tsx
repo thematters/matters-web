@@ -1,21 +1,21 @@
 import Link from 'next/link'
 import React from 'react'
 
+import { toPath } from '~/common/utils'
 import { Card, CardProps } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
-
-import { toPath } from '~/common/utils'
+import {
+  FollowingFeedRecommendUserPrivateFragment,
+  FollowingFeedRecommendUserPublicFragment,
+} from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.css'
 
-import { FollowingFeedRecommendUserPrivate } from './__generated__/FollowingFeedRecommendUserPrivate'
-import { FollowingFeedRecommendUserPublic } from './__generated__/FollowingFeedRecommendUserPublic'
-
 type Props = {
-  user: FollowingFeedRecommendUserPublic &
-    Partial<FollowingFeedRecommendUserPrivate>
+  user: FollowingFeedRecommendUserPublicFragment &
+    Partial<FollowingFeedRecommendUserPrivateFragment>
 } & CardProps &
   AvatarProps
 
@@ -37,19 +37,19 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
     >
       <section className="container">
         <section className="head">
-          <Link {...path}>
+          <Link {...path} legacyBehavior>
             <a className="avatar">
               <Avatar size="xxl" user={user} />
             </a>
           </Link>
 
           <section className="wrap">
-            <Link {...path}>
+            <Link {...path} legacyBehavior>
               <a className="name">{displayName}</a>
             </Link>
 
             <section className="follow">
-              <FollowUserButton user={user} size="md-s" />
+              <FollowUserButton user={user} />
             </section>
           </section>
         </section>

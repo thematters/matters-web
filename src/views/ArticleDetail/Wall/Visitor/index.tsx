@@ -2,6 +2,8 @@ import { useApolloClient } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useContext } from 'react'
 
+import IMG_AD from '@/public/static/images/ad.svg'
+import { analytics, translate } from '~/common/utils'
 import {
   Button,
   IconClear16,
@@ -10,10 +12,6 @@ import {
   LoginButton,
   Translate,
 } from '~/components'
-
-import { analytics, translate } from '~/common/utils'
-
-import IMG_AD from '@/public/static/images/ad.svg'
 
 import styles from './styles.css'
 

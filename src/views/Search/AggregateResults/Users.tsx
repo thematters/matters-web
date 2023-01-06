@@ -1,3 +1,4 @@
+import { analytics, toPath } from '~/common/utils'
 import {
   Card,
   List,
@@ -7,14 +8,11 @@ import {
   UserDigest,
   useRoute,
 } from '~/components'
-
-import { analytics, toPath } from '~/common/utils'
+import { SearchAggregateUsersPublicQuery } from '~/gql/graphql'
 
 import { SEARCH_AGGREGATE_USERS_PUBLIC } from './gql'
 import styles from './styles.css'
 import ViewMoreButton from './ViewMoreButton'
-
-import { SearchAggregateUsersPublic } from './__generated__/SearchAggregateUsersPublic'
 
 const AggregateUserResults = () => {
   const { getQuery } = useRoute()
@@ -24,10 +22,11 @@ const AggregateUserResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, refetch } = usePublicQuery<SearchAggregateUsersPublic>(
-    SEARCH_AGGREGATE_USERS_PUBLIC,
-    { variables: { key: q } }
-  )
+  const { data, loading, refetch } =
+    usePublicQuery<SearchAggregateUsersPublicQuery>(
+      SEARCH_AGGREGATE_USERS_PUBLIC,
+      { variables: { key: q } }
+    )
 
   const { edges, pageInfo } = data?.search || {}
 

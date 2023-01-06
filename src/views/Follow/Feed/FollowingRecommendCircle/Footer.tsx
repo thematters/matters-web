@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { numAbbr, translate } from '~/common/utils'
 import {
   IconArticle16,
   IconPrice12,
@@ -9,17 +10,16 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { numAbbr, translate } from '~/common/utils'
+import {
+  FollowingFeedRecommendCircleFooterPrivateFragment,
+  FollowingFeedRecommendCircleFooterPublicFragment,
+} from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { FollowingFeedRecommendCircleFooterPrivate } from './__generated__/FollowingFeedRecommendCircleFooterPrivate'
-import { FollowingFeedRecommendCircleFooterPublic } from './__generated__/FollowingFeedRecommendCircleFooterPublic'
-
 type Props = {
-  circle: FollowingFeedRecommendCircleFooterPublic &
-    Partial<FollowingFeedRecommendCircleFooterPrivate>
+  circle: FollowingFeedRecommendCircleFooterPublicFragment &
+    Partial<FollowingFeedRecommendCircleFooterPrivateFragment>
 }
 
 const fragments = {

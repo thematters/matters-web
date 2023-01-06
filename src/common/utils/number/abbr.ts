@@ -26,7 +26,7 @@ const abbreviate = (num: number, decPlaces: number): string => {
   return num + ''
 }
 
-export default (num: number, decPlaces: number): string => {
+export const abbr = (num: number, decPlaces: number): string => {
   const isNegative = num < 0
   const abbreviatedNumber = abbreviate(Math.abs(num), decPlaces || 0)
 

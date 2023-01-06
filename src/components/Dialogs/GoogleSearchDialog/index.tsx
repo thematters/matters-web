@@ -1,9 +1,8 @@
 import _get from 'lodash/get'
 import { useEffect } from 'react'
 
-import { Dialog, Translate, useDialogSwitch } from '~/components'
-
 import { captureClicks, dom } from '~/common/utils'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 import globalStyles from './styles.global.css'
 

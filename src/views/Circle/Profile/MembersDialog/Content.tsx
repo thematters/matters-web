@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
   EmptyWarning,
@@ -14,12 +15,9 @@ import {
   ViewerContext,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-
-import { analytics, mergeConnections } from '~/common/utils'
+import { CircleMembersPublicQuery } from '~/gql/graphql'
 
 import { CIRCLE_MEMBERS_PRIVATE, CIRCLE_MEMBERS_PUBLIC } from './gql'
-
-import { CircleMembersPublic } from './__generated__/CircleMembersPublic'
 
 const MembersDialogContent = () => {
   const viewer = useContext(ViewerContext)
@@ -36,7 +34,7 @@ const MembersDialogContent = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<CircleMembersPublic>(CIRCLE_MEMBERS_PUBLIC, {
+  } = usePublicQuery<CircleMembersPublicQuery>(CIRCLE_MEMBERS_PUBLIC, {
     variables: { name },
   })
 
@@ -47,7 +45,7 @@ const MembersDialogContent = () => {
   /**
    * Private data fetching
    */
-  const loadPrivate = (publicData?: CircleMembersPublic) => {
+  const loadPrivate = (publicData?: CircleMembersPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !circle) {
       return
     }

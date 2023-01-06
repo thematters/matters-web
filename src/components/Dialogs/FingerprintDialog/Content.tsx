@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
 
+import { iscnLinkUrl, translate } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
@@ -16,15 +17,11 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-
-import { iscnLinkUrl, translate } from '~/common/utils'
+import { GatewaysQuery, RetryEditArticleMutation } from '~/gql/graphql'
 
 import ArticleSecret from './ArticleSecret'
 import SectionCard from './SectionCard'
 import styles from './styles.css'
-
-import { Gateways } from './__generated__/Gateways'
-import { RetryEditArticle } from './__generated__/RetryEditArticle'
 
 const EDIT_ARTICLE = gql`
   mutation RetryEditArticle($id: ID!, $iscnPublish: Boolean) {
@@ -76,12 +73,12 @@ const FingerprintDialogContent = ({
   refetch: () => any
 }) => {
   const { lang } = useContext(LanguageContext)
-  const { loading, data } = useQuery<Gateways>(GATEWAYS)
+  const { loading, data } = useQuery<GatewaysQuery>(GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
 
   const [editArticle, { loading: retryPublishing }] =
-    useMutation<RetryEditArticle>(EDIT_ARTICLE)
+    useMutation<RetryEditArticleMutation>(EDIT_ARTICLE)
 
   const [timeCooling, setTimeCooling] = useState(false)
   let timer: any = null
@@ -165,7 +162,12 @@ const FingerprintDialogContent = ({
 
               return (
                 <li key={url}>
-                  <a href={gatewayUrl} target="_blank" className="gateway-url">
+                  <a
+                    href={gatewayUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="gateway-url"
+                  >
                     {hostname}
                     <IconExternalLink16 />
                   </a>
@@ -242,7 +244,7 @@ const FingerprintDialogContent = ({
           warning={!iscnId}
           right={
             iscnId ? (
-              <a href={iscnLinkUrl(iscnId)} target="_blank">
+              <a href={iscnLinkUrl(iscnId)} target="_blank" rel="noreferrer">
                 <IconExternalLink16 color="grey-darker" />
               </a>
             ) : isAuthor ? (

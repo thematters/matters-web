@@ -163,6 +163,7 @@
 
     & .container {
       grid-column: content;
+
       & .emblaViewport {
         & ul {
           & li {
@@ -191,11 +192,14 @@
 
     & .container {
       grid-column: content;
+
       & .emblaViewport {
         padding-top: 17rem;
+
         & ul {
           & li {
             flex: 0 0 auto;
+
             & a {
               width: 344px;
               height: 206px;

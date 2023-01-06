@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
+import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
 import {
   Head,
   IconDonateBg24,
@@ -13,15 +14,12 @@ import {
   Translate,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-
-import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
+import { MeAnalyticsQuery } from '~/gql/graphql'
 
 import EmptyAnalytics from './EmptyAnalytics'
 import SelectPeriod from './SelectPeriod'
 import styles from './styles.css'
 import SupporterDigestFeed from './SupporterDigestFeed/index'
-
-import { MeAnalytics } from './__generated__/MeAnalytics'
 
 const ME_ANALYTICS = gql`
   query MeAnalytics($after: String, $filter: TopDonatorFilter) {
@@ -61,7 +59,7 @@ const BaseAnalytics = () => {
       : new Date(now - period * 24 * 60 * 60 * 1000).toISOString()
   const rangeEnd = rangeStart === null ? null : new Date(now).toISOString()
 
-  const { data, loading, error } = useQuery<MeAnalytics>(ME_ANALYTICS, {
+  const { data, loading, error } = useQuery<MeAnalyticsQuery>(ME_ANALYTICS, {
     variables: {
       filter: {
         inRangeStart: rangeStart,

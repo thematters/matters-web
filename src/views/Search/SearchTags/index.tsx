@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 
+import { analytics, mergeConnections, toPath } from '~/common/utils'
 import {
   Card,
   EmptySearch,
@@ -10,13 +11,10 @@ import {
   usePublicQuery,
   useRoute,
 } from '~/components'
-
-import { analytics, mergeConnections, toPath } from '~/common/utils'
+import { SearchTagsPublicQuery } from '~/gql/graphql'
 
 import GoogleSearchButton from '../GoogleSearchButton'
 import { SEARCH_TAGS_PUBLIC } from './gql'
-
-import { SearchTagsPublic } from './__generated__/SearchTagsPublic'
 
 const SearchTag = () => {
   const { getQuery } = useRoute()
@@ -27,7 +25,7 @@ const SearchTag = () => {
    */
   // public data
   const { data, loading, fetchMore, refetch } =
-    usePublicQuery<SearchTagsPublic>(SEARCH_TAGS_PUBLIC, {
+    usePublicQuery<SearchTagsPublicQuery>(SEARCH_TAGS_PUBLIC, {
       variables: { key: q },
     })
 
@@ -77,7 +75,7 @@ const SearchTag = () => {
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Tag' && (
-              <Fragment>
+              <Fragment key={i}>
                 <List.Item key={cursor}>
                   <Card
                     spacing={['base', 'base']}

@@ -9,16 +9,15 @@ import {
   // UserDigest,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
+import { CircleInvitationFragment } from '~/gql/graphql'
 
 import CircleInvitationInvitee from './Invitee'
 import CircleInvitationPeriod from './Period'
 import CircleInvitationResendButton from './Resend'
 import styles from './styles.css'
 
-import { CircleInvitation as CircleInvitationType } from './__generated__/CircleInvitation'
-
 interface CircleInvitationProps {
-  invitation: CircleInvitationType
+  invitation: CircleInvitationFragment
 }
 
 const CircleInvitationFailedInfo = () => (

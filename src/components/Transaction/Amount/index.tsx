@@ -1,10 +1,8 @@
-import { TextIcon } from '~/components'
-
 import { formatAmount } from '~/common/utils'
+import { TextIcon } from '~/components'
+import { TransactionState } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { TransactionState } from '@/__generated__/globalTypes'
 
 /***
  * This is a sub component of Transaction that presents
@@ -29,7 +27,7 @@ interface AmountProps {
 
 const Amount = ({ amount, currency, state }: AmountProps) => {
   const color =
-    state !== TransactionState.succeeded
+    state !== TransactionState.Succeeded
       ? 'grey'
       : amount > 0
       ? 'gold'

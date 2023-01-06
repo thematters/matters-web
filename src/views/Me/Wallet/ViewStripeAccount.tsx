@@ -8,8 +8,7 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { GetStripeLoginUrl } from './__generated__/GetStripeLoginUrl'
+import { GetStripeLoginUrlQuery } from '~/gql/graphql'
 
 const GET_STRIPE_LOGIN_URL = gql`
   query GetStripeLoginUrl {
@@ -26,7 +25,8 @@ const GET_STRIPE_LOGIN_URL = gql`
 `
 
 const ViewStripeAccount = () => {
-  const { data, loading } = useQuery<GetStripeLoginUrl>(GET_STRIPE_LOGIN_URL)
+  const { data, loading } =
+    useQuery<GetStripeLoginUrlQuery>(GET_STRIPE_LOGIN_URL)
   const loginUrl = data?.viewer?.wallet.stripeAccount?.loginUrl
 
   return (

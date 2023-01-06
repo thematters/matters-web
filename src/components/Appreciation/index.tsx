@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
+import { toPath, translate } from '~/common/utils'
 import {
   // ArticleDigestTitle,
   Card,
@@ -12,16 +13,13 @@ import {
 } from '~/components'
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { UserDigest } from '~/components/UserDigest'
-
-import { toPath, translate } from '~/common/utils'
+import { DigestAppreciationFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { DigestAppreciation } from './__generated__/DigestAppreciation'
-
 interface AppreciationProps {
   type: 'received' | 'sent'
-  appreciation: DigestAppreciation
+  appreciation: DigestAppreciationFragment
 }
 
 const fragments = {
@@ -78,7 +76,7 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
               />
               <span>
                 &nbsp;
-                <Translate zh_hant="讚賞了" zh_hans="赞赏了" en="appreciated" />
+                <Translate zh_hant="讚賞了" zh_hans="赞赏了" en="liked" />
               </span>
             </header>
           )}

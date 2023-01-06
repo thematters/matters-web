@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { TextId } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
@@ -11,9 +13,6 @@ import {
   Translate,
 } from '~/components'
 import { useResponsive } from '~/components/Hook'
-
-import { TextId } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 interface CloseButtonProps {
   closeDialog: () => void

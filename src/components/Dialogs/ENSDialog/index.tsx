@@ -2,13 +2,12 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
 import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
-
-import { UserProfileUserPublic_user } from '~/components/UserProfile/__generated__/UserProfileUserPublic'
+import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 type Step = 'connectWallet' | 'walletSelect' | 'linkENS' | 'complete'
 
 interface ENSDialogProps {
-  user: UserProfileUserPublic_user
+  user: UserProfileUserPublicQuery['user']
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   completeCallback?: () => void
   defaultStep?: Step

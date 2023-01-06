@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useContext } from 'react'
 
+import { PATHS } from '~/common/enums'
+import { appendTarget, toReadableScope } from '~/common/utils'
 import {
   Dialog,
   LanguageContext,
@@ -14,14 +16,10 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-
-import { PATHS } from '~/common/enums'
-import { appendTarget, toReadableScope } from '~/common/utils'
+import { OAuthClientInfoQuery } from '~/gql/graphql'
 
 import { Box } from '../Box'
 import styles from './styles.css'
-
-import { OAuthClientInfo } from './__generated__/OAuthClientInfo'
 
 const OAUTH_AUTHORIZE_ENDPOINT = `${process.env.NEXT_PUBLIC_OAUTH_URL}/authorize`
 
@@ -47,7 +45,7 @@ const BaseOAuthAuthorize = () => {
   const requestScopes = getQuery('scope')
   const redirectUri = getQuery('redirect_uri')
 
-  const { data, loading } = useQuery<OAuthClientInfo>(OAUTH_CLIENT_INFO, {
+  const { data, loading } = useQuery<OAuthClientInfoQuery>(OAUTH_CLIENT_INFO, {
     variables: { id: clientId },
   })
 
@@ -81,6 +79,7 @@ const BaseOAuthAuthorize = () => {
             className="u-link-green"
             href={website || undefined}
             target="_blank"
+            rel="noreferrer"
           >
             {name}
           </a>
@@ -145,7 +144,7 @@ const BaseOAuthAuthorize = () => {
               <Translate zh_hant="不是你？" zh_hans="不是你？" en="Not you?" />
             </span>
 
-            <Link {...appendTarget(PATHS.LOGIN, true)}>
+            <Link {...appendTarget(PATHS.LOGIN, true)} legacyBehavior>
               <a className="u-link-green">
                 <Translate
                   zh_hant="切換帳戶"

@@ -2,8 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import { Form, IconExternalLink16, TextIcon, Translate } from '~/components'
-
-import { GetCustomerPortal } from './__generated__/GetCustomerPortal'
+import { GetCustomerPortalQuery } from '~/gql/graphql'
 
 const GET_CUSTOMER_PORTAL = gql`
   query GetCustomerPortal {
@@ -17,7 +16,7 @@ const GET_CUSTOMER_PORTAL = gql`
 `
 
 const ViewStripeCustomerPortal = () => {
-  const { data } = useQuery<GetCustomerPortal>(GET_CUSTOMER_PORTAL)
+  const { data } = useQuery<GetCustomerPortalQuery>(GET_CUSTOMER_PORTAL)
   const url = data?.viewer?.wallet.customerPortal
 
   if (!url) {

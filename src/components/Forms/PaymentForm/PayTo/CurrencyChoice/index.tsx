@@ -3,6 +3,8 @@ import _find from 'lodash/find'
 import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
 
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 import {
   CurrencyFormatter,
   Dialog,
@@ -15,23 +17,21 @@ import {
 } from '~/components'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
+import {
+  ArticleDetailPublicQuery,
+  ExchangeRatesQuery,
+  UserDonationRecipientFragment,
+  WalletBalanceQuery,
+} from '~/gql/graphql'
 
 import LikeCoinChoice from './LikeCoinChoice'
 import styles from './styles.css'
 import Tips from './Tips'
 import USDTChoice from './USDTChoice'
 
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { ExchangeRates } from '~/components/GQL/queries/__generated__/ExchangeRates'
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
-
 interface FormProps {
-  article: ArticleDetailPublic_article
-  recipient: UserDonationRecipient
+  article: NonNullable<ArticleDetailPublicQuery['article']>
+  recipient: UserDonationRecipientFragment
   switchToSetAmount: (c: CURRENCY) => void
   switchToWalletSelect: () => void
 }
@@ -46,14 +46,14 @@ const CurrencyChoice: React.FC<FormProps> = ({
   const currency = viewer.settings.currency
 
   const { data: exchangeRateDate, loading: exchangeRateLoading } =
-    useQuery<ExchangeRates>(EXCHANGE_RATES, {
+    useQuery<ExchangeRatesQuery>(EXCHANGE_RATES, {
       variables: {
         to: currency,
       },
     })
 
   // HKD、Like balance
-  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
+  const { data, loading } = useQuery<WalletBalanceQuery>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
 

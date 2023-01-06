@@ -1,18 +1,16 @@
+import { numAbbr, numRound } from '~/common/utils'
 import {
   IconDotDivider,
   IconReadTimeTotal16,
   TextIcon,
   Translate,
 } from '~/components'
-
-import { numAbbr, numRound } from '~/common/utils'
+import { ActionsReadTimeArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 
-import { ActionsReadTimeArticle } from './__generated__/ActionsReadTimeArticle'
-
 interface ResponseCountProps {
-  article: ActionsReadTimeArticle
+  article: ActionsReadTimeArticleFragment
   hasDivider: boolean
 }
 

@@ -1,21 +1,19 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { numAbbr, translate } from '~/common/utils'
 import {
   IconArticle16,
   IconUser16,
   LanguageContext,
   TextIcon,
 } from '~/components'
-
-import { numAbbr, translate } from '~/common/utils'
+import { CountsCircleFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { CountsCircle } from './__generated__/CountsCircle'
-
 export type CountsProps = {
-  circle: CountsCircle
+  circle: CountsCircleFragment
 }
 
 const fragments = {

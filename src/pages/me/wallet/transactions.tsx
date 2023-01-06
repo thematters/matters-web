@@ -1,6 +1,5 @@
-import MeTransactions from '~/views/Me/Transactions'
-
 import { Protected } from '~/components'
+import MeTransactions from '~/views/Me/Transactions'
 
 const ProtectedMeTransactions = () => (
   <Protected>

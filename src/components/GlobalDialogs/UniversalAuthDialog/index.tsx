@@ -2,6 +2,12 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
 import {
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  TEST_ID,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import {
   Dialog,
   ReCaptchaProvider,
   Spinner,
@@ -10,15 +16,7 @@ import {
   useStep,
   VerificationLinkSent,
 } from '~/components'
-
-import {
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  TEST_ID,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-
-import { AuthResultType } from '@/__generated__/globalTypes'
+import { AuthResultType } from '~/gql/graphql'
 
 const DynamicSelectAuthMethodForm = dynamic<any>(
   () =>

@@ -1,5 +1,7 @@
 import { createRef, useEffect, useState } from 'react'
 
+import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
+
 import Field, { FieldProps } from '../Field'
 import Item from './Item'
 import styles from './styles.css'
@@ -29,7 +31,7 @@ type InputProps = {
 } & Omit<FieldProps, 'fieldMsgId'>
 
 const Input: React.FC<InputProps> = ({
-  length = 6,
+  length = PAYMENT_PASSSWORD_LENGTH,
   onChange,
   onComplete,
 

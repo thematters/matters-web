@@ -3,6 +3,14 @@ import classNames from 'classnames'
 import { useContext } from 'react'
 
 import {
+  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  ADD_TOAST,
+  ASSET_TYPE,
+  ENTITY_TYPE,
+  UPLOAD_IMAGE_SIZE_LIMIT,
+} from '~/common/enums'
+import { translate } from '~/common/utils'
+import {
   IconCamera16,
   IconSpinner16,
   LanguageContext,
@@ -12,20 +20,9 @@ import {
 } from '~/components'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import updateDraftAssets from '~/components/GQL/updates/draftAssets'
-
-import {
-  ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ADD_TOAST,
-  ASSET_TYPE,
-  ENTITY_TYPE,
-  UPLOAD_IMAGE_SIZE_LIMIT,
-} from '~/common/enums'
-import { translate } from '~/common/utils'
+import { AssetFragment, SingleFileUploadMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 
 export interface UploadEntity {
   entityId: string
@@ -33,7 +30,7 @@ export interface UploadEntity {
 }
 
 type UploaderProps = {
-  setSelected: (asset: Asset) => any
+  setSelected: (asset: AssetFragment) => any
   refetchAssets: () => any
 } & UploadEntity
 
@@ -45,7 +42,7 @@ const Uploader: React.FC<UploaderProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const [upload, { loading }] = useMutation<SingleFileUpload>(
+  const [upload, { loading }] = useMutation<SingleFileUploadMutation>(
     UPLOAD_FILE,
     {
       update: (cache, { data }) => {

@@ -1,3 +1,4 @@
+import { ENTITY_TYPE } from '~/common/enums'
 import { toDigestTagPlaceholder } from '~/components'
 import {
   SetCollectionProps,
@@ -7,8 +8,10 @@ import {
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
-
-import { ENTITY_TYPE } from '~/common/enums'
+import {
+  DigestRichCirclePublicFragment,
+  EditMetaDraftFragment,
+} from '~/gql/graphql'
 
 import {
   useEditDraftAccess,
@@ -19,12 +22,9 @@ import {
   useEditSupportSetting,
 } from './hooks'
 
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { EditMetaDraft } from './__generated__/EditMetaDraft'
-
 interface BottomBarProps {
-  draft: EditMetaDraft
-  ownCircles?: DigestRichCirclePublic[]
+  draft: EditMetaDraftFragment
+  ownCircles?: DigestRichCirclePublicFragment[]
 }
 
 const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {

@@ -1,11 +1,9 @@
 import { useContext } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
 
-import { LanguageContext, ViewerContext, withIcon } from '~/components'
-
-import { translate } from '~/common/utils'
-
 import { ReactComponent as IconSplashScreenLogo } from '@/public/static/icons/splash-scren-logo.svg'
+import { translate } from '~/common/utils'
+import { LanguageContext, ViewerContext, withIcon } from '~/components'
 
 import styles from './styles.css'
 

@@ -5,6 +5,8 @@ import { useState } from 'react'
 import {
   Button,
   ButtonHeight,
+  ButtonSpacingX,
+  ButtonSpacingY,
   ButtonWidth,
   TextIcon,
   Translate,
@@ -13,20 +15,21 @@ import {
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
+import {
+  FollowButtonUserPrivateFragment,
+  ToggleFollowUserMutation,
+} from '~/gql/graphql'
 
 import { FollowUserButtonSize } from './index'
 
-import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
-import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
-
 interface UnfollowProps {
-  user: Partial<FollowButtonUserPrivate>
+  user: Partial<FollowButtonUserPrivateFragment>
   size: FollowUserButtonSize
 }
 
 const UnfollowUser = ({ user, size }: UnfollowProps) => {
   const [hover, setHover] = useState(false)
-  const [unfollow] = useMutation<ToggleFollowUser>(TOGGLE_FOLLOW_USER, {
+  const [unfollow] = useMutation<ToggleFollowUserMutation>(TOGGLE_FOLLOW_USER, {
     variables: { id: user.id, enabled: false },
     optimisticResponse:
       !_isNil(user.id) && !_isNil(user.isFollower)
@@ -48,14 +51,20 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
 
   const sizes: Record<FollowUserButtonSize, [ButtonWidth, ButtonHeight]> = {
     lg: ['6rem', '2rem'],
-    md: ['4rem', '1.5rem'],
-    'md-s': ['4rem', '1.5rem'],
+    md: [null, '1.5rem'],
+  }
+  const spacings: Record<
+    FollowUserButtonSize,
+    [ButtonSpacingY, ButtonSpacingX]
+  > = {
+    lg: [0, 0],
+    md: [0, 'tight'],
   }
 
   return (
     <Button
       size={sizes[size]}
-      // spacing={['xxtight', 'xtight']}
+      spacing={spacings[size]}
       textColor="white"
       bgColor="green"
       bgActiveColor="red"

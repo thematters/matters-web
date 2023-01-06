@@ -12,6 +12,7 @@
   &.sm {
     font-size: var(--font-size-sm);
   }
+
   &.md {
     font-size: var(--font-size-md);
   }
@@ -20,6 +21,7 @@
 [aria-selected='true'] .name {
   font-weight: var(--font-weight-medium);
 }
+
 [aria-selected='false'] .name {
   font-weight: var(--font-weight-normal);
 }

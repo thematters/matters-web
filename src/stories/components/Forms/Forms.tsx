@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { Form, Translate } from '~/components'
-
 import { translate } from '~/common/utils'
+import { Form, Translate } from '~/components'
 
 const Forms = () => (
   <section>

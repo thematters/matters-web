@@ -1,7 +1,6 @@
-import { Button, Form, TextIcon, Translate } from '~/components'
-
 import { PATHS } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
+import { Button, Form, TextIcon, Translate } from '~/components'
 
 export const PasswordResetDialogButton = ({
   gotoResetPassword,
@@ -12,6 +11,7 @@ export const PasswordResetDialogButton = ({
     spacing={['xtight', 0]}
     aria-haspopup="dialog"
     onClick={gotoResetPassword}
+    tabIndex={-1}
   >
     <TextIcon color="green" weight="md">
       <Translate id="forgetPassword" />？

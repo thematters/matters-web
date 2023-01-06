@@ -1,9 +1,8 @@
 import { FC } from 'react'
 
-import { Button, IconTranslate16, TextIcon, Translate } from '~/components'
-
 import { CONTENT_LANG_TEXT_MAP } from '~/common/enums'
 import { analytics } from '~/common/utils'
+import { Button, IconTranslate16, TextIcon, Translate } from '~/components'
 
 const TranslationButton: FC<{
   translated: boolean

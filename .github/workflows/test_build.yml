@@ -20,15 +20,11 @@ jobs:
 
       - name: Generate Types (Develop)
         if: github.base_ref != 'master'
-        run: |
-          npm run gen:clean \
-          && npm run gen:type
+        run: npm run gen:type
 
       - name: Generate Types (production)
         if: github.base_ref == 'master'
-        run: |
-          npm run gen:clean \
-          && npm run gen:type:prod
+        run: npm run gen:type:prod
 
       - name: Lint
         run: |

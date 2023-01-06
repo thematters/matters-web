@@ -6,6 +6,12 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
+import { EXTERNAL_LINKS } from '~/common/enums'
+import {
+  featureSupportedChains,
+  PublicResolverABI,
+  translate,
+} from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
@@ -17,19 +23,10 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { EXTERNAL_LINKS } from '~/common/enums'
-import {
-  featureSupportedChains,
-  PublicResolverABI,
-  translate,
-} from '~/common/utils'
+import { AuthorRssFeedFragment, RssGatewaysQuery } from '~/gql/graphql'
 
 import SectionCard from '../FingerprintDialog/SectionCard'
 import styles from '../FingerprintDialog/styles.css'
-
-import { AuthorRssFeed } from './__generated__/AuthorRssFeed'
-import { RssGateways } from './__generated__/RssGateways'
 
 const RSS_GATEWAYS = gql`
   query RssGateways {
@@ -42,11 +39,11 @@ const RSS_GATEWAYS = gql`
 const RssFeedDialogContent = ({
   user,
 }: {
-  user: AuthorRssFeed
+  user: AuthorRssFeedFragment
   refetch: () => any
 }) => {
   const { lang } = useContext(LanguageContext)
-  const { loading, data } = useQuery<RssGateways>(RSS_GATEWAYS)
+  const { loading, data } = useQuery<RssGatewaysQuery>(RSS_GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
   const ipnsKey = user.info.ipnsKey
@@ -62,7 +59,7 @@ const RssFeedDialogContent = ({
     chainId: targetNetork.id,
   })
   const { data: readData } = useContractRead({
-    address: resolverData?.address,
+    address: resolverData?.address as `0x${string}` | undefined,
     abi: PublicResolverABI,
     functionName: 'contenthash',
     args: ensName ? [namehash(ensName) as `0x${string}`] : undefined,
@@ -111,6 +108,7 @@ const RssFeedDialogContent = ({
               className="u-link-green"
               href={EXTERNAL_LINKS.PLANET}
               target="_blank"
+              rel="noreferrer"
             >
               Planet
             </a>

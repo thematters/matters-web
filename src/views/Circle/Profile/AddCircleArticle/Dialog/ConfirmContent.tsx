@@ -2,8 +2,7 @@ import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 import SelectLicense from '~/components/Editor/ToggleAccess/SelectLicense'
-
-import { ArticleLicenseType } from '@/__generated__/globalTypes'
+import { ArticleLicenseType } from '~/gql/graphql'
 
 interface ContentProps {
   loading: boolean
@@ -17,7 +16,7 @@ const ConfirmContent: React.FC<ContentProps> = ({
   onBack,
 }) => {
   const [license, setLicense] = useState<ArticleLicenseType>(
-    ArticleLicenseType.cc_by_nc_nd_2
+    ArticleLicenseType.CcByNcNd_2
   )
 
   return (
@@ -28,7 +27,7 @@ const ConfirmContent: React.FC<ContentProps> = ({
         rightButton={
           <Dialog.Header.RightButton
             onClick={() =>
-              onConfirm(license === ArticleLicenseType.arr, license)
+              onConfirm(license === ArticleLicenseType.Arr, license)
             }
             text={<Translate zh_hant="確認" zh_hans="确认" en="Confirm" />}
             loading={loading}

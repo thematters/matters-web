@@ -68,8 +68,7 @@
 
 .multi-actor-avatars {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   margin-top: var(--spacing-tight);
 
   & :global(a) {

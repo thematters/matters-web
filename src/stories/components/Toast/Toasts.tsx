@@ -1,9 +1,8 @@
 import React from 'react'
-import ViewSuperLikeButton from '~/views/ArticleDetail/AppreciationButton/ViewSuperLikeButton'
-
-import { Button, TextIcon, Toast, Translate } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
+import { Button, TextIcon, Toast, Translate } from '~/components'
+import ViewSuperLikeButton from '~/views/ArticleDetail/AppreciationButton/ViewSuperLikeButton'
 
 const Toasts = () => (
   <section>

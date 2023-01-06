@@ -1,3 +1,4 @@
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import {
   Button,
   IconFiatCurrency40,
@@ -6,8 +7,6 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
 import styles from './styles.css'
 

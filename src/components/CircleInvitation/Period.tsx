@@ -3,12 +3,14 @@ import differenceInDays from 'date-fns/differenceInDays'
 import parseISO from 'date-fns/parseISO'
 
 import { Translate } from '~/components'
+import { CircleInvitationFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-import { CircleInvitation } from './__generated__/CircleInvitation'
-
-type PeriodProps = Pick<CircleInvitation, 'freePeriod' | 'acceptedAt' | 'state'>
+type PeriodProps = Pick<
+  CircleInvitationFragment,
+  'freePeriod' | 'acceptedAt' | 'state'
+>
 
 /**
  * CircleInvitationPeriod is a component for displaying free period in days.

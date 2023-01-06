@@ -9,7 +9,6 @@ import {
 } from '~/components'
 
 // import { redirectToLogin } from '~/common/utils'
-
 import AnonymousSettings from '../AnonymousSettings'
 import AccountSettings from './Account'
 import UISettings from './UI'
