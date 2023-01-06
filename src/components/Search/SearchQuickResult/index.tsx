@@ -9,6 +9,7 @@ import {
 import { toPath } from '~/common/utils'
 import {
   Menu,
+  Spacer,
   TagDigest,
   UserDigest,
   useResponsive,
@@ -127,7 +128,9 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
               </Fragment>
             )
         )}
+      {hasUsers && <Spacer size="xtight" />}
       {hasUsers && hasTags && <Menu.Divider />}
+      {hasUsers && <Spacer size="xtight" />}
       {hasTags &&
         tagEdges.map(
           ({ node, cursor }, i) =>
