@@ -58,7 +58,7 @@ const AppreciationButton = ({
     (typeof article.appreciateLeft === 'number'
       ? article.appreciateLeft
       : limit) - amount
-  const total = article.appreciationsReceivedTotal + amount
+  const total = article.likesReceivedTotal + amount
   const appreciatedCount = limit - left
   const isReachLimit = left <= 0 || isArticleAuthor
   const debouncedSendAppreciation = useDebouncedCallback(async () => {
@@ -137,7 +137,7 @@ const AppreciationButton = ({
    *   1) Show Setup LikerID modal on click
    *
    * Non-Civic Liker:
-   *   1) Allow to appreciate 5 times
+   *   1) Allow to like 5 times
    *   2) Show modal to introduce Civic Liker on click
    *   3) Show "MAX" on close
    *
@@ -146,7 +146,7 @@ const AppreciationButton = ({
    *   2) Show "∞" on click
    *
    * Civic Liker in others' articles:
-   *   1) Allow to appreciate 5 times
+   *   1) Allow to like 5 times
    *   2) Show SuperLike
    *   3) Show "∞" on click
    *

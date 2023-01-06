@@ -17,7 +17,6 @@ import {
 } from '~/gql/graphql'
 
 import AppreciationButton from '../AppreciationButton'
-import Appreciators from './Appreciators'
 import CommentBar from './CommentBar'
 import DonationButton from './DonationButton'
 import styles from './styles.css'
@@ -40,13 +39,11 @@ const fragments = {
         tags {
           content
         }
-        ...AppreciatorsArticle
         ...DropdownActionsArticle
         ...DonationButtonArticle
         ...AppreciationButtonArticlePublic
         ...CommentBarArticlePublic
       }
-      ${Appreciators.fragments.article}
       ${DonationButton.fragments.article}
       ${DropdownActions.fragments.article}
       ${AppreciationButton.fragments.article.public}

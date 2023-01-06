@@ -185,7 +185,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                       <Translate
                         zh_hant="喜歡我的文章嗎？"
                         zh_hans="喜欢我的文章吗？"
-                        en="Like my work??"
+                        en="Like my work?"
                       />
                       <br />
                       <Translate
@@ -231,7 +231,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                         <Translate
                           zh_hant="交易紀錄"
                           zh_hans="交易纪录"
-                          en="transaction history"
+                          en="Transaction History"
                         />
                       </TextIcon>
                     </span>

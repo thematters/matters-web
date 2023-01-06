@@ -2,16 +2,16 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
-import { DonatorDialogArticleFragment } from '~/gql/graphql'
+import { SupportsDialogArticleFragment } from '~/gql/graphql'
 
-interface DonatorsDialogProps {
-  article: DonatorDialogArticleFragment
+interface SupportersDialogProps {
+  article: SupportsDialogArticleFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const fragments = {
   article: gql`
-    fragment DonatorDialogArticle on Article {
+    fragment SupportsDialogArticle on Article {
       id
       mediaHash
       donationsDialog: transactionsReceivedBy(
@@ -25,7 +25,7 @@ const fragments = {
 
 const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
-const BaseDonatorsDialog = ({ article, children }: DonatorsDialogProps) => {
+const BaseSupportersDialog = ({ article, children }: SupportersDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
@@ -39,10 +39,10 @@ const BaseDonatorsDialog = ({ article, children }: DonatorsDialogProps) => {
   )
 }
 
-export const DonatorsDialog = (props: DonatorsDialogProps) => (
-  <Dialog.Lazy mounted={<BaseDonatorsDialog {...props} />}>
+export const SupportersDialog = (props: SupportersDialogProps) => (
+  <Dialog.Lazy mounted={<BaseSupportersDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 
-DonatorsDialog.fragments = fragments
+SupportersDialog.fragments = fragments

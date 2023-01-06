@@ -48,7 +48,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         aria-label={translate({
           zh_hant: `讚賞作品（當前 ${total} 次讚賞）`,
           zh_hans: `赞赏作品（当前 ${total} 次赞赏）`,
-          en: `appreciate article (current ${total} appreciations)`,
+          en: `like article (current ${total} likes)`,
           lang,
         })}
         disabled={disabled}

@@ -36,8 +36,8 @@ type ROUTE_KEY =
   | 'ME_DRAFTS'
   | 'ME_BOOKMARKS'
   | 'ME_HISTORY'
-  | 'ME_APPRECIATIONS_SENT'
-  | 'ME_APPRECIATIONS_RECEIVED'
+  | 'ME_LIKES_SENT'
+  | 'ME_LIKES_RECEIVED'
   | 'ME_NOTIFICATIONS'
   | 'ME_ANALYTICS'
   | 'ME_WALLET'
@@ -134,8 +134,8 @@ export const ROUTES: {
   { key: 'ME_DRAFTS', pathname: '/me/drafts' },
   { key: 'ME_BOOKMARKS', pathname: '/me/bookmarks' },
   { key: 'ME_HISTORY', pathname: '/me/history' },
-  { key: 'ME_APPRECIATIONS_SENT', pathname: '/me/appreciations/sent' },
-  { key: 'ME_APPRECIATIONS_RECEIVED', pathname: '/me/appreciations/received' },
+  { key: 'ME_LIKES_SENT', pathname: '/me/likes/sent' },
+  { key: 'ME_LIKES_RECEIVED', pathname: '/me/likes/received' },
   { key: 'ME_NOTIFICATIONS', pathname: '/me/notifications' },
   { key: 'ME_WALLET', pathname: '/me/wallet' },
   { key: 'ME_WALLET_TRANSACTIONS', pathname: '/me/wallet/transactions' },

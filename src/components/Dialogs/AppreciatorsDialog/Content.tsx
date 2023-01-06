@@ -24,7 +24,9 @@ const ARTICLE_APPRECIATORS = gql`
     article: node(input: { id: $id }) {
       ... on Article {
         id
-        appreciationsReceived(input: { first: 10, after: $after }) {
+        likesReceived: appreciationsReceived(
+          input: { first: 10, after: $after }
+        ) {
           totalCount
           pageInfo {
             startCursor
@@ -62,12 +64,11 @@ const AppreciatorsDialogContent = ({
     })
 
   const article = data?.article
-  const connectionPath = 'article.appreciationsReceived'
+  const connectionPath = 'article.likesReceived'
   const { edges, pageInfo } =
-    (article?.__typename === 'Article' && article?.appreciationsReceived) || {}
+    (article?.__typename === 'Article' && article?.likesReceived) || {}
   const totalCount =
-    (article?.__typename === 'Article' &&
-      article?.appreciationsReceived.totalCount) ||
+    (article?.__typename === 'Article' && article?.likesReceived.totalCount) ||
     0
 
   if (loading) {
@@ -105,6 +106,7 @@ const AppreciatorsDialogContent = ({
           <Translate
             zh_hant={`${totalCount} 人讚賞了作品`}
             zh_hans={`${totalCount} 人赞赏了作品`}
+            en={`${totalCount} people have liked the article.`}
           />
         }
         closeDialog={closeDialog}

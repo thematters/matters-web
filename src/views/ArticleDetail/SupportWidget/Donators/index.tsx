@@ -4,9 +4,9 @@ import { animated, useSpring } from 'react-spring'
 import { IMAGE_PIXEL } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
-  DonatorsDialog,
   IconArrowRight16,
   LanguageContext,
+  SupportersDialog,
   TextIcon,
   Translate,
   UserDigest,
@@ -52,7 +52,7 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
   })
 
   return (
-    <DonatorsDialog article={article}>
+    <SupportersDialog article={article}>
       {({ openDialog }) => (
         <section>
           <button
@@ -132,7 +132,7 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                   <Translate
                     zh_hant="個人支持過本文・查看全部"
                     zh_hans="个人支持过本文・查看全部"
-                    en="People have supported the article. All supporters"
+                    en="people have supported the article. All supporters"
                   />
                 </TextIcon>
               </button>
@@ -142,7 +142,7 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
           <style jsx>{styles}</style>
         </section>
       )}
-    </DonatorsDialog>
+    </SupportersDialog>
   )
 }
 

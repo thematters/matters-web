@@ -76,7 +76,7 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
               />
               <span>
                 &nbsp;
-                <Translate zh_hant="讚賞了" zh_hans="赞赏了" en="appreciated" />
+                <Translate zh_hant="讚賞了" zh_hans="赞赏了" en="liked" />
               </span>
             </header>
           )}

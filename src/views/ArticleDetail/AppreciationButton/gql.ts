@@ -11,7 +11,7 @@ export const fragments = {
           id
           ...CivicLikerAppreciateButtonUser
         }
-        appreciationsReceivedTotal
+        likesReceivedTotal: appreciationsReceivedTotal
         appreciateLimit
       }
       ${CivicLikerDialog.fragments.user}

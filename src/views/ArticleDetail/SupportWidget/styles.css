@@ -42,9 +42,10 @@
 
     margin-top: var(--spacing-loose);
     font-size: var(--font-size-xs);
+    line-height: 1;
 
     & .transaction-left {
-      display: inline-block;
+      display: inline-flex;
       border-bottom: 1px solid transparent;
     }
 

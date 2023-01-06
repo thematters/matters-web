@@ -72,7 +72,7 @@ export class ArticleDetailPage {
 
     // toolbar
     this.toolbarAppreciationButton = this.page.getByRole('button', {
-      name: 'appreciate article',
+      name: 'like article',
     })
     this.toolbarSupportButton = this.page.getByRole('button', {
       name: 'support author',

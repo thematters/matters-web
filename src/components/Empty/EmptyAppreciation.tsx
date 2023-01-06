@@ -7,7 +7,7 @@ export const EmptyAppreciation = () => (
       <Translate
         zh_hant="還沒有讚賞記錄"
         zh_hans="还没有赞赏记录"
-        en="No Appreications ."
+        en="No Likes."
       />
     }
   />
