@@ -2,7 +2,11 @@ import _uniq from 'lodash/uniq'
 import _without from 'lodash/without'
 import { useContext, useEffect, useState } from 'react'
 
-import { STORAGE_KEY_SEARCH_HISTORY } from '~/common/enums'
+import {
+  SEARCH_HISTORY_DISPLAY_LENGTH,
+  SEARCH_HISTORY_LENGTH,
+  STORAGE_KEY_SEARCH_HISTORY,
+} from '~/common/enums'
 import { storage, toPath } from '~/common/utils'
 import {
   Head,
@@ -31,7 +35,7 @@ const Search = () => {
   const addSearchHistory = (searchKey: string) => {
     const nsh = _uniq([searchKey, ...(storage.get(storageKey) || [])]).slice(
       0,
-      20
+      SEARCH_HISTORY_LENGTH
     )
     updateSearchHistory(nsh)
   }
@@ -98,7 +102,7 @@ const Search = () => {
 
       {isHistory && !isLargeUp && (
         <SearchHistory
-          data={searchHistory.slice(0, 10)}
+          data={searchHistory?.slice(0, SEARCH_HISTORY_DISPLAY_LENGTH)}
           removeSearchHistoryItem={removeSearchHistory}
         />
       )}

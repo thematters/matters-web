@@ -2,7 +2,7 @@ import { toPath } from '~/common/utils'
 import { Button, IconClose32, Menu, TextIcon, Translate } from '~/components'
 
 interface SearchHistoryProps {
-  data: string[]
+  data: string[] | undefined
   removeSearchHistoryItem: (value: string) => void
 }
 import EmptySearchHistory from './EmptySearchHistory'
@@ -12,7 +12,7 @@ export const SearchHistory = ({
   data,
   removeSearchHistoryItem,
 }: SearchHistoryProps) => {
-  if (data.length <= 0) {
+  if (!data || data.length <= 0) {
     return <EmptySearchHistory />
   }
 
