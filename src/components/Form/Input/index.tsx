@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { useId } from 'react'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
@@ -41,8 +42,9 @@ const Input: React.FC<InputProps> = ({
 
   ...inputProps
 }) => {
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const fieldId = useId()
+  const fieldMsgId = `${fieldId}-msg`
+
   const inputClasses = classNames({
     error,
   })

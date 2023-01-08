@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
@@ -106,8 +106,8 @@ const Connect: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
   const isInPage = purpose === 'page'
   const isInDialog = purpose === 'dialog'
-  const formId = 'wallet-auth-connect-form'
-  const fieldMsgId = 'wallet-auth-connect-msg'
+  const formId = useId()
+  const fieldMsgId = useId()
 
   const [generateSigningMessage] = useMutation<GenerateSigningMessageMutation>(
     GENERATE_SIGNING_MESSAGE,

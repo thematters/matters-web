@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { Avatar, Form, IconChecked } from '~/components'
@@ -50,8 +50,8 @@ const NFTCollectionItem = ({
 
 const NFTCollection: React.FC<NFTCollectionProps> = ({ nfts, setField }) => {
   const [selectedNFTIndex, setSelectedNFTIndex] = useState<number>(-1)
-  const fieldId = `field-nft-collection`
-  const fieldMsgId = `field-msg-nft-collection`
+  const fieldId = useId()
+  const fieldMsgId = `${fieldId}-msg`
 
   const intl = useIntl()
   return (

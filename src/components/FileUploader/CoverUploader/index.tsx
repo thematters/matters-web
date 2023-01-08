@@ -1,5 +1,5 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
-import { useContext, useState } from 'react'
+import { useContext, useId, useState } from 'react'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
@@ -74,7 +74,7 @@ export const CoverUploader = ({
   )
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = 'cover-upload-form'
+  const fieldId = useId()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()

@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useContext, useId, useState } from 'react'
 
 import { dom, stripHtml, translate, trimLineBreaks } from '~/common/utils'
 import {
@@ -58,7 +58,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
   const commentDraftId = `${articleId || circleId}-${type}-${commentId || 0}-${
     parentId || 0
   }-${replyToId || 0}`
-  const formId = `comment-form-${commentDraftId}`
+  const formId = useId()
 
   const { data, client } = useQuery<CommentDraftQuery>(COMMENT_DRAFT, {
     variables: { id: commentDraftId },

@@ -1,6 +1,6 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { Formik } from 'formik'
-import { useContext } from 'react'
+import { useContext, useId } from 'react'
 
 import { translate } from '~/common/utils'
 import { IconClear16, IconSearch16, LanguageContext } from '~/components'
@@ -28,7 +28,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onBlur,
   autoFocus,
 }) => {
-  const fieldId = `search-input-${type}`.toLocaleLowerCase()
+  const fieldId = useId()
   const { lang } = useContext(LanguageContext)
   const textAriaLabel = translate({ id: 'search', lang })
   const textPlaceholder = {

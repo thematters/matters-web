@@ -1,6 +1,6 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount, translate } from '~/common/utils'
@@ -72,7 +72,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
 }) => {
   const inputRef: React.RefObject<any> = useRef(null)
 
-  const fieldId = `field-${name}-${amount}`
+  const fieldId = useId()
 
   const isBalanceInsufficient =
     typeof balance === 'number' ? balance < amount : false
@@ -131,7 +131,7 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
 
   ...inputProps
 }) => {
-  const fieldMsgId = `field-msg-${name}`
+  const fieldMsgId = useId()
 
   const options = amounts[currency]
 

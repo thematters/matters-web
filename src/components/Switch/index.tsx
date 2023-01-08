@@ -1,5 +1,6 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
+import { useId } from 'react'
 
 import { IconSpinner16 } from '~/components'
 
@@ -22,7 +23,7 @@ export const Switch: React.FC<SwitchProps> = ({
   loading,
   disabled,
 }) => {
-  const fieldId = `switch-${name}`
+  const fieldId = useId()
 
   const switchClasses = classNames({
     switch: true,

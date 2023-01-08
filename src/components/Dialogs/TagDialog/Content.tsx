@@ -2,7 +2,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useId } from 'react'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import {
@@ -88,7 +88,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
   const { lang } = useContext(LanguageContext)
   const isEditing = id && content
 
-  const formId = 'put-tag-form'
+  const formId = useId()
 
   const {
     values,
