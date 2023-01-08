@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
-import { useContext } from 'react'
+import { useContext, useId } from 'react'
 
 import { PATHS } from '~/common/enums'
 import {
@@ -50,7 +50,7 @@ const Init: React.FC<FormProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
-  const formId = 'email-sign-up-init-form'
+  const formId = useId()
 
   const { token, refreshToken } = useContext(ReCaptchaContext)
   const [sendCode] = useMutation<SendVerificationCodeMutation>(

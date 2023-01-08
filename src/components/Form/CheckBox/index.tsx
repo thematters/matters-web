@@ -1,4 +1,5 @@
 import VisuallyHidden from '@reach/visually-hidden'
+import { useId } from 'react'
 
 import { IconChecked } from '~/components'
 import { TextIcon } from '~/components/TextIcon'
@@ -22,8 +23,8 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
   ...inputProps
 }) => {
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const fieldId = useId()
+  const fieldMsgId = `${fieldId}-msg`
 
   return (
     <Field>
