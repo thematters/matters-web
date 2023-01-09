@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, useId } from 'react'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
@@ -44,8 +44,8 @@ const AmountInput = forwardRef(
     }: AmountInputProps,
     ref: any
   ) => {
-    const fieldId = `field-${name}`
-    const fieldMsgId = `field-msg-${name}`
+    const fieldId = useId()
+    const fieldMsgId = `${fieldId}-msg`
 
     return (
       <Field>
