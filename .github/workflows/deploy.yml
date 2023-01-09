@@ -117,7 +117,7 @@ jobs:
       #     aws s3 sync .next s3://matters.news/_next
 
       - name: Upload Assets (production - R2)
-        if: github.base_ref == 'develop'
+        if: github.base_ref == 'master'
         uses: wei/rclone@v1
         env:
           RCLONE_CONFIG_R2_TYPE: s3
