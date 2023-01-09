@@ -105,7 +105,7 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
   const operationVariables = operation.variables || {}
   const isPublicOperation = restCtx[GQL_CONTEXT_PUBLIC_QUERY_KEY]
 
-  if (!isProd) {
+  if (process.env.DEBUG) {
     console.log(
       `%c[GraphQL operation]%c ${operationName} ` +
         `${isPublicOperation ? '' : '(w/ credentials)'}` +
