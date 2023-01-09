@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext, useId } from 'react'
+import React, { useContext } from 'react'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
@@ -79,7 +79,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   )
   const { lang } = useContext(LanguageContext)
 
-  const formId = useId()
+  const formId = 'edit-profile-form'
 
   const {
     values,

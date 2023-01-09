@@ -2,7 +2,7 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
-import { useContext, useEffect, useId } from 'react'
+import { useContext, useEffect } from 'react'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
 import { ADD_TOAST, PATHS } from '~/common/enums'
@@ -95,8 +95,8 @@ const Connect: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
   const isInPage = purpose === 'page'
-  const formId = useId()
-  const fieldMsgId = useId()
+  const formId = 'wallet-auth-connect-form'
+  const fieldMsgId = 'wallet-auth-connect-msg'
 
   const [generateSigningMessage] = useMutation<GenerateSigningMessageMutation>(
     GENERATE_SIGNING_MESSAGE,

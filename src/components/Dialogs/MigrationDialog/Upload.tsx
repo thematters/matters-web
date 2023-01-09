@@ -1,5 +1,5 @@
 import VisuallyHidden from '@reach/visually-hidden'
-import { useContext, useId } from 'react'
+import { useContext } from 'react'
 
 import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
@@ -126,7 +126,7 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
     }
   }
 
-  const fieldId = useId()
+  const fieldId = 'migration-uploader'
 
   return (
     <>

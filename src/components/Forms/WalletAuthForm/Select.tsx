@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useId } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 import { GUIDE_LINKS } from '~/common/enums'
@@ -112,8 +112,8 @@ const Select: React.FC<FormProps> = ({
 }) => {
   const viewer = useContext(ViewerContext)
 
-  const formId = useId()
-  const fieldMsgId = useId()
+  const formId = 'wallet-auth-select-form'
+  const fieldMsgId = 'wall-auth-select-msg'
   const isInPage = purpose === 'page'
   const isConnect = type === 'connect'
 

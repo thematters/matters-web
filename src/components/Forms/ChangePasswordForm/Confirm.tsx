@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useId } from 'react'
+import { useContext } from 'react'
 
 import {
   parseFormSubmitErrors,
@@ -67,7 +67,7 @@ const Confirm: React.FC<FormProps> = ({
 
   const isForget = type === 'forget'
   const isInPage = purpose === 'page'
-  const formId = useId()
+  const formId = 'password-change-confirm-form'
   const titleId = isForget ? 'resetPassword' : 'changePassword'
 
   const {

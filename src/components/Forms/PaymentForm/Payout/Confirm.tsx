@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useId, useRef } from 'react'
+import { useContext, useRef } from 'react'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -52,7 +52,7 @@ const BaseConfirm: React.FC<FormProps> = ({
   submitCallback,
   switchToResetPassword,
 }: FormProps) => {
-  const formId = useId()
+  const formId = 'payout-confirm-form'
 
   const { lang } = useContext(LanguageContext)
   const inputRef: React.RefObject<any> | null = useRef(null)

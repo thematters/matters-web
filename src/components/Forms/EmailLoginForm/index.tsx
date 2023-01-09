@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useId } from 'react'
+import { useContext } from 'react'
 
 import { ADD_TOAST } from '~/common/enums'
 import {
@@ -69,7 +69,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
-  const formId = useId()
+  const formId = 'email-login-form'
 
   const {
     values,

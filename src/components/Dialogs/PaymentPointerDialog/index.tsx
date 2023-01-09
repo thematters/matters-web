@@ -1,4 +1,4 @@
-import { useId, useState } from 'react'
+import { useState } from 'react'
 
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 
@@ -11,7 +11,7 @@ interface PaymentPointerProps {
 const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
   children,
 }) => {
-  const formId = useId()
+  const formId = `set-payment-pointer-form`
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isValid, setIsValid] = useState(false)
   const { show, openDialog, closeDialog } = useDialogSwitch(true)

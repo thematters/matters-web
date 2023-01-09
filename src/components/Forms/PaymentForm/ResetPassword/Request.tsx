@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useId } from 'react'
+import { useContext } from 'react'
 
 import {
   parseFormSubmitErrors,
@@ -40,7 +40,7 @@ const Request: React.FC<FormProps> = ({
   )
   const { lang } = useContext(LanguageContext)
 
-  const formId = useId()
+  const formId = `payment-password-reset-request-form`
 
   const {
     values,

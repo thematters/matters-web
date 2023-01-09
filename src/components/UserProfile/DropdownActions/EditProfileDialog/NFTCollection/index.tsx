@@ -1,4 +1,4 @@
-import { useContext, useId, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { translate } from '~/common/utils'
 import {
@@ -57,8 +57,8 @@ const NFTCollectionItem = ({
 const NFTCollection: React.FC<NFTCollectionProps> = ({ nfts, setField }) => {
   const { lang } = useContext(LanguageContext)
   const [selectedNFTIndex, setSelectedNFTIndex] = useState<number>(-1)
-  const fieldId = useId()
-  const fieldMsgId = `${fieldId}-msg`
+  const fieldId = `field-nft-collection`
+  const fieldMsgId = `field-msg-nft-collection`
 
   return (
     <Form.Field>

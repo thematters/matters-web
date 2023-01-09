@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
-import { useContext, useId } from 'react'
+import { useContext } from 'react'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
@@ -58,7 +58,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
   const isInPage = purpose === 'page'
 
   const isCreate = type === 'create'
-  const formId = useId()
+  const formId = 'edit-circle-profile-form'
   const titleId = isCreate ? 'circleCreation' : 'basicProfile'
 
   const {

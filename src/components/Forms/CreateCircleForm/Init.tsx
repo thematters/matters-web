@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useId, useRef } from 'react'
+import { useContext, useRef } from 'react'
 
 import {
   PAYMENT_CURRENCY,
@@ -52,7 +52,7 @@ const Init: React.FC<FormProps> = ({
   const inputRef: React.RefObject<any> | null = useRef(null)
   // const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
-  const formId = useId()
+  const formId = 'create-circle-init-form'
 
   const {
     values,
