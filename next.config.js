@@ -65,6 +65,7 @@ const nextConfig = {
    * Runtime configs
    *
    */
+  reactStrictMode: true,
   compress: false,
   poweredByHeader: false,
   i18n: {

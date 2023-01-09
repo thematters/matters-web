@@ -27,10 +27,8 @@ const FIREBASE_CONFIG = process.env.NEXT_PUBLIC_FIREBASE_CONFIG
     )
   : {}
 
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
-
 const analyticsDebugger = (event: string, params: any) => {
-  if (!isProd) {
+  if (process.env.DEBUG) {
     console.log(
       `%c[Analytics debugger]%c ${event} %cVariables`,
       'background: #800080; color: #fff',
