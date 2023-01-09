@@ -1,6 +1,6 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
-import { useContext, useId, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
@@ -55,7 +55,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   )
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = useId()
+  const fieldId = 'avatar-upload-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()

@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useEffect, useId } from 'react'
+import { useContext, useEffect } from 'react'
 
 import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
@@ -45,7 +45,7 @@ const Confirm: React.FC<FormProps> = ({
   switchToCardPayment,
   switchToResetPassword,
 }) => {
-  const formId = useId()
+  const formId = 'subscirbe-circle-form'
 
   const { lang } = useContext(LanguageContext)
   const [subscribeCircle] = useMutation<SubscribeCircleMutation>(

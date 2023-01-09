@@ -1,5 +1,3 @@
-import { useId } from 'react'
-
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
@@ -41,8 +39,8 @@ const Input: React.FC<InputProps> = ({
 
   ...inputProps
 }) => {
-  const fieldId = useId()
-  const fieldMsgId = `${fieldId}-msg`
+  const fieldId = `field-${name}`
+  const fieldMsgId = `field-msg-${name}`
 
   return (
     <Field>

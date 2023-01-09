@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useId } from 'react'
+import { useContext } from 'react'
 
 import { parseFormSubmitErrors, translate, validateEmail } from '~/common/utils'
 import {
@@ -39,7 +39,7 @@ const Request: React.FC<FormProps> = ({
 
   const isForget = type === 'forget'
   const isInPage = purpose === 'page'
-  const formId = useId()
+  const formId = `password-change-request-form`
   const titleId = isForget ? 'resetPassword' : 'changePassword'
   const redirectPath = isForget ? '/forget' : '/me/settings/change-password'
 

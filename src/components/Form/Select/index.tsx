@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import { useId } from 'react'
 
 import { Z_INDEX } from '~/common/enums'
 import { DropdownDialog } from '~/components'
@@ -46,8 +45,8 @@ const Select: React.FC<SelectProps> = ({
 
   size,
 }) => {
-  const fieldId = useId()
-  const selectedOptionId = `${fieldId}-selected-option`
+  const fieldId = `field-${name}`
+  const selectedOptionId = `${fieldId}-selected`
 
   const selectedOption = options.find((o) => o.selected) || options[0]
 

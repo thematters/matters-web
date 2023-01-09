@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useEffect, useId } from 'react'
+import { useContext, useEffect } from 'react'
 import { useAccount, useNetwork } from 'wagmi'
 
 import {
@@ -72,7 +72,7 @@ const Confirm: React.FC<FormProps> = ({
   tabUrl,
   tx,
 }) => {
-  const formId = useId()
+  const formId = 'pay-to-confirm-form'
 
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)

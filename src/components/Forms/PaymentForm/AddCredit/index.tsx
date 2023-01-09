@@ -10,7 +10,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useId, useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 
 import {
   PAYMENT_CURRENCY,
@@ -104,7 +104,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
     }
   }
 
-  const formId = useId()
+  const formId = 'add-credit-form'
   const currency = PAYMENT_CURRENCY.HKD
   const inputRef: React.RefObject<any> | null = useRef(null)
 
