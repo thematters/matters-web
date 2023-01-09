@@ -78,10 +78,10 @@ jobs:
           && zip -r --symlinks deploy.zip . -x .git/\*
 
       # === `develop` branch ===
-      - name: Upload Assets (develop)
-        if: github.base_ref == 'develop'
-        run: |
-          aws s3 sync .next s3://web-develop.matters.news/_next
+      # - name: Upload Assets (develop)
+      #   if: github.base_ref == 'develop'
+      #   run: |
+      #     aws s3 sync .next s3://web-develop.matters.news/_next
 
       - name: Upload Assets (develop - R2)
         if: github.base_ref == 'develop'
@@ -111,10 +111,22 @@ jobs:
           wait_for_deployment: true
 
       # === `master` branch ===
-      - name: Upload Assets (production)
-        if: github.base_ref == 'master'
-        run: |
-          aws s3 sync .next s3://matters.news/_next
+      # - name: Upload Assets (production)
+      #   if: github.base_ref == 'master'
+      #   run: |
+      #     aws s3 sync .next s3://matters.news/_next
+
+      - name: Upload Assets (production - R2)
+        if: github.base_ref == 'develop'
+        uses: wei/rclone@v1
+        env:
+          RCLONE_CONFIG_R2_TYPE: s3
+          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.RCLONE_CONFIG_R2_ACCESS_KEY_ID }}
+          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.RCLONE_CONFIG_R2_SECRET_ACCESS_KEY }}
+          RCLONE_CONFIG_R2_ENDPOINT: ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
+        with:
+          args: sync .next r2:matters-assets-next/_next -P
 
       - name: Deploy to EB (production)
         if: github.base_ref == 'master'
