@@ -11,17 +11,17 @@ import {
   List,
   Spinner,
 } from '~/components'
-import { MeAppreciationsSentQuery } from '~/gql/graphql'
+import { MeLikesSentQuery } from '~/gql/graphql'
 
-import AppreciationTabs from '../AppreciationTabs'
+import LikesTabs from '../LikesTabs'
 
-const ME_APPRECIATIONS_SENT = gql`
-  query MeAppreciationsSent($after: String) {
+const ME_LIKES_SENT = gql`
+  query MeLikesSent($after: String) {
     viewer {
       id
       activity {
-        ...AppreciationTabsUserActivity
-        appreciationsSent(input: { first: 20, after: $after }) {
+        ...LikesTabsUserActivity
+        likesSent: appreciationsSent(input: { first: 20, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -38,12 +38,12 @@ const ME_APPRECIATIONS_SENT = gql`
     }
   }
   ${Appreciation.fragments.appreciation}
-  ${AppreciationTabs.fragments.userActivity}
+  ${LikesTabs.fragments.userActivity}
 `
 
-const BaseAppreciationsSent = () => {
+const BaseLikesSent = () => {
   const { data, loading, fetchMore, refetch } =
-    useQuery<MeAppreciationsSentQuery>(ME_APPRECIATIONS_SENT)
+    useQuery<MeLikesSentQuery>(ME_LIKES_SENT)
 
   if (loading) {
     return <Spinner />
@@ -53,13 +53,13 @@ const BaseAppreciationsSent = () => {
     return null
   }
 
-  const connectionPath = 'viewer.activity.appreciationsSent'
-  const { edges, pageInfo } = data.viewer.activity.appreciationsSent
+  const connectionPath = 'viewer.activity.likesSent'
+  const { edges, pageInfo } = data.viewer.activity.likesSent
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <>
-        <AppreciationTabs activity={data.viewer.activity} />
+        <LikesTabs activity={data.viewer.activity} />
         <EmptyAppreciation />
       </>
     )
@@ -83,7 +83,7 @@ const BaseAppreciationsSent = () => {
 
   return (
     <>
-      <AppreciationTabs activity={data.viewer.activity} />
+      <LikesTabs activity={data.viewer.activity} />
 
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
@@ -102,17 +102,17 @@ const BaseAppreciationsSent = () => {
   )
 }
 
-const AppreciationsSent = () => (
+const LikesSent = () => (
   <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="appreciationsSent" />}
+      right={<Layout.Header.Title id="likesSent" />}
     />
 
-    <Head title={{ id: 'appreciationsSent' }} />
+    <Head title={{ id: 'likesSent' }} />
 
-    <BaseAppreciationsSent />
+    <BaseLikesSent />
   </Layout.Main>
 )
 
-export default AppreciationsSent
+export default LikesSent

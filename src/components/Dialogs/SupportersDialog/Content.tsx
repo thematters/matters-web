@@ -11,21 +11,20 @@ import {
 import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleDonatorsQuery,
-  DonatorDialogArticleFragment,
+  SupportsDialogArticleFragment,
 } from '~/gql/graphql'
 
 import { ARTICLE_DONATORS } from './gql'
-import styles from './styles.css'
 
-interface DonatorsDialogContentProps {
-  article: DonatorDialogArticleFragment
+interface SupportersDialogContentProps {
+  article: SupportsDialogArticleFragment
   closeDialog: () => void
 }
 
-const DonatorsDialogContent = ({
+const SupportersDialogContent = ({
   article,
   closeDialog,
-}: DonatorsDialogContentProps) => {
+}: SupportersDialogContentProps) => {
   const { data, loading, error, fetchMore } = useQuery<ArticleDonatorsQuery>(
     ARTICLE_DONATORS,
     { variables: { id: article.id } }
@@ -102,11 +101,9 @@ const DonatorsDialogContent = ({
             />
           ))}
         </InfiniteScroll>
-
-        <style jsx>{styles}</style>
       </Dialog.Content>
     </>
   )
 }
 
-export default DonatorsDialogContent
+export default SupportersDialogContent

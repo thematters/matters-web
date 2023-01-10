@@ -11,17 +11,19 @@ import {
   List,
   Spinner,
 } from '~/components'
-import { MeAppreciationsReceivedQuery } from '~/gql/graphql'
+import { MeLikesReceivedQuery } from '~/gql/graphql'
 
-import AppreciationTabs from '../AppreciationTabs'
+import LikesTabs from '../LikesTabs'
 
 const ME_APPRECIATED_RECEIVED = gql`
-  query MeAppreciationsReceived($after: String) {
+  query MeLikesReceived($after: String) {
     viewer {
       id
       activity {
-        ...AppreciationTabsUserActivity
-        appreciationsReceived(input: { first: 20, after: $after }) {
+        ...LikesTabsUserActivity
+        likesReceived: appreciationsReceived(
+          input: { first: 20, after: $after }
+        ) {
           pageInfo {
             startCursor
             endCursor
@@ -38,12 +40,13 @@ const ME_APPRECIATED_RECEIVED = gql`
     }
   }
   ${Appreciation.fragments.appreciation}
-  ${AppreciationTabs.fragments.userActivity}
+  ${LikesTabs.fragments.userActivity}
 `
 
-const BaseAppreciationsReceived = () => {
-  const { data, loading, fetchMore, refetch } =
-    useQuery<MeAppreciationsReceivedQuery>(ME_APPRECIATED_RECEIVED)
+const BaseLikesReceived = () => {
+  const { data, loading, fetchMore, refetch } = useQuery<MeLikesReceivedQuery>(
+    ME_APPRECIATED_RECEIVED
+  )
 
   if (loading) {
     return <Spinner />
@@ -53,13 +56,13 @@ const BaseAppreciationsReceived = () => {
     return null
   }
 
-  const connectionPath = 'viewer.activity.appreciationsReceived'
-  const { edges, pageInfo } = data.viewer.activity.appreciationsReceived
+  const connectionPath = 'viewer.activity.likesReceived'
+  const { edges, pageInfo } = data.viewer.activity.likesReceived
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <>
-        <AppreciationTabs activity={data.viewer.activity} />
+        <LikesTabs activity={data.viewer.activity} />
         <EmptyAppreciation />
       </>
     )
@@ -83,7 +86,7 @@ const BaseAppreciationsReceived = () => {
 
   return (
     <>
-      <AppreciationTabs activity={data.viewer.activity} />
+      <LikesTabs activity={data.viewer.activity} />
 
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
@@ -102,17 +105,17 @@ const BaseAppreciationsReceived = () => {
   )
 }
 
-const AppreciationsReceived = () => (
+const LikesReceived = () => (
   <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="appreciationsReceived" />}
+      right={<Layout.Header.Title id="likesReceived" />}
     />
 
-    <Head title={{ id: 'appreciationsReceived' }} />
+    <Head title={{ id: 'likesReceived' }} />
 
-    <BaseAppreciationsReceived />
+    <BaseLikesReceived />
   </Layout.Main>
 )
 
-export default AppreciationsReceived
+export default LikesReceived

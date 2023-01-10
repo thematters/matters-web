@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { DonatorsDialog, UserDigest } from '~/components'
+import { SupportersDialog, UserDigest } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
 export const fragments = {
@@ -22,10 +22,10 @@ export const fragments = {
           }
         }
       }
-      ...DonatorDialogArticle
+      ...SupportsDialogArticle
     }
     ${Avatar.fragments.user}
     ${UserDigest.Plain.fragments.user}
-    ${DonatorsDialog.fragments.article}
+    ${SupportersDialog.fragments.article}
   `,
 }

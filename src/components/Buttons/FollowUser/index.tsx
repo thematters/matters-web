@@ -25,7 +25,7 @@ const fragments = {
   },
 }
 
-export type FollowUserButtonSize = 'lg' | 'md' | 'md-s'
+export type FollowUserButtonSize = 'lg' | 'md'
 
 export const FollowUserButton = ({
   user,

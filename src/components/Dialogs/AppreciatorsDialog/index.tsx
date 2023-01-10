@@ -14,7 +14,7 @@ const fragments = {
     fragment AppreciatorsDialogArticle on Article {
       id
       id
-      appreciationsReceived(input: { first: 0 }) {
+      likesReceived: appreciationsReceived(input: { first: 0 }) {
         totalCount
       }
     }

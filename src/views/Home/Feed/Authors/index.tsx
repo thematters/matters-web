@@ -108,7 +108,6 @@ const Authors = () => {
                         id: node.id,
                       })
                     }
-                    canClamp
                   />
                 ))}
               </section>

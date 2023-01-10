@@ -4,8 +4,8 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 
 import { AppreciatorsDialog } from '~/components/Dialogs/AppreciatorsDialog'
-import { DonatorsDialog } from '~/components/Dialogs/DonatorsDialog'
 import { FingerprintDialog } from '~/components/Dialogs/FingerprintDialog'
+import { SupportersDialog } from '~/components/Dialogs/SupportersDialog'
 
 import ArchiveArticle from './ArchiveArticle'
 import EditButton from './EditButton'
@@ -20,7 +20,7 @@ export const fragments = {
     fragment DropdownActionsArticle on Article {
       id
       ...AppreciatorsDialogArticle
-      ...DonatorDialogArticle
+      ...SupportsDialogArticle
       ...FingerprintArticle
       ...ArchiveArticleArticle
       ...StickyButtonArticle
@@ -31,7 +31,7 @@ export const fragments = {
       ...SetTagUnselectedButtonArticle
     }
     ${AppreciatorsDialog.fragments.article}
-    ${DonatorsDialog.fragments.article}
+    ${SupportersDialog.fragments.article}
     ${FingerprintDialog.fragments.article}
     ${StickyButton.fragments.article}
     ${ArchiveArticle.fragments.article}

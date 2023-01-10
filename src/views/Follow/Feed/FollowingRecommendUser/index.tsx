@@ -49,7 +49,7 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
             </Link>
 
             <section className="follow">
-              <FollowUserButton user={user} size="md-s" />
+              <FollowUserButton user={user} />
             </section>
           </section>
         </section>
