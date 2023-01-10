@@ -25,6 +25,7 @@ interface ExpandableProps {
   size?: 'sm' | 'md-s' | 'md'
   spacingTop?: 'base'
   textIndent?: boolean
+  isRichShow?: boolean
 }
 
 export const Expandable: React.FC<ExpandableProps> = ({
@@ -36,8 +37,10 @@ export const Expandable: React.FC<ExpandableProps> = ({
   size,
   spacingTop,
   textIndent = false,
+  isRichShow = false,
 }) => {
   const [expandable, setExpandable] = useState(false)
+  const [lineHeight, setLineHeight] = useState(24)
   const [expand, setExpand] = useState(true)
   const [truncated, setTruncated] = useState(false)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
@@ -63,7 +66,9 @@ export const Expandable: React.FC<ExpandableProps> = ({
         const lineHeight = window
           .getComputedStyle(node.current, null)
           .getPropertyValue('line-height')
+        setLineHeight(parseInt(lineHeight, 10))
         const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
+        console.log({ height, lineHeight, limit, lines, content })
 
         if (lines > limit + buffer) {
           setExpandable(true)
@@ -99,27 +104,37 @@ export const Expandable: React.FC<ExpandableProps> = ({
       )}
       {expandable && !expand && (
         <p>
-          <TextTruncate
-            line={limit}
-            element="span"
-            truncateText=""
-            text={collapseContent}
-            onTruncated={() => {
-              setTruncated(true)
-            }}
-            textTruncateChild={
-              <span
-                onClick={(e) => {
-                  setExpand(!expand)
-                  e.stopPropagation()
-                }}
-                className="expandButton"
-              >
-                ...
-                <Translate id="expand" />
-              </span>
-            }
-          />
+          {!isRichShow && (
+            <TextTruncate
+              line={limit}
+              element="span"
+              truncateText=""
+              text={collapseContent}
+              onTruncated={() => {
+                setTruncated(true)
+              }}
+              textTruncateChild={
+                <span
+                  onClick={(e) => {
+                    setExpand(!expand)
+                    e.stopPropagation()
+                  }}
+                  className="expandButton"
+                >
+                  ...
+                  <Translate id="expand" />
+                </span>
+              }
+            />
+          )}
+          {isRichShow && (
+            <div
+              className="richWrapper"
+              style={{ maxHeight: `${limit * lineHeight}px` }}
+            >
+              {children}
+            </div>
+          )}
           {!truncated && (
             <span
               onClick={(e) => {

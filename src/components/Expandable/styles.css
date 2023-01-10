@@ -10,6 +10,10 @@
   & .collapseWrapper {
     @mixin flex-center-end;
   }
+
+  & .richWrapper {
+    overflow-y: clip;
+  }
 }
 
 /* color */
