@@ -4,7 +4,13 @@ import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import TextTruncate from 'react-text-truncate'
 
 import { stripHtml } from '~/common/utils/text'
-import { Button, IconArrowUp16, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  IconArrowDown16,
+  IconArrowUp16,
+  TextIcon,
+  Translate,
+} from '~/components'
 
 import styles from './styles.css'
 
@@ -68,7 +74,6 @@ export const Expandable: React.FC<ExpandableProps> = ({
           .getPropertyValue('line-height')
         setLineHeight(parseInt(lineHeight, 10))
         const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
-        console.log({ height, lineHeight, limit, lines, content })
 
         if (lines > limit + buffer) {
           setExpandable(true)
@@ -127,15 +132,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
               }
             />
           )}
-          {isRichShow && (
-            <div
-              className="richWrapper"
-              style={{ maxHeight: `${limit * lineHeight}px` }}
-            >
-              {children}
-            </div>
-          )}
-          {!truncated && (
+          {!isRichShow && !truncated && (
             <span
               onClick={(e) => {
                 setExpand(!expand)
@@ -146,6 +143,30 @@ export const Expandable: React.FC<ExpandableProps> = ({
               ...
               <Translate id="expand" />
             </span>
+          )}
+          {isRichShow && (
+            <>
+              <div
+                className="richWrapper"
+                style={{ maxHeight: `${limit * lineHeight}px` }}
+              >
+                {children}
+              </div>
+              <section className="collapseWrapper">
+                <Button
+                  spacing={['xxtight', 'xtight']}
+                  bgColor="grey-lighter"
+                  textColor="grey"
+                  onClick={() => {
+                    setExpand(!expand)
+                  }}
+                >
+                  <TextIcon icon={<IconArrowDown16 />}>
+                    <Translate id="expand" />
+                  </TextIcon>
+                </Button>
+              </section>
+            </>
           )}
         </p>
       )}
