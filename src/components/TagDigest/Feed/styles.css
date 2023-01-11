@@ -8,6 +8,7 @@ header {
 
 .nums {
   display: inline-flex;
+  flex-shrink: 0;
 
   & :global(> * + *) {
     margin-left: var(--spacing-x-tight);
