@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { useEffect } from 'react'
 
 import { Toast, Translate } from '~/components'
 import { EditModeArticleDraftsQuery, EditModeArticleQuery } from '~/gql/graphql'
@@ -16,13 +17,23 @@ const PendingState = ({
   >[0]
   id: string
 }) => {
-  useQuery<EditModeArticleDraftsQuery>(EDIT_MODE_ARTICLE_DRAFTS, {
-    variables: { id },
-    pollInterval: 1000 * 2,
-    errorPolicy: 'none',
-    fetchPolicy: 'network-only',
-    skip: typeof window === 'undefined',
-  })
+  const { startPolling, stopPolling } = useQuery<EditModeArticleDraftsQuery>(
+    EDIT_MODE_ARTICLE_DRAFTS,
+    {
+      variables: { id },
+      errorPolicy: 'none',
+      fetchPolicy: 'network-only',
+      skip: typeof window === 'undefined',
+    }
+  )
+
+  useEffect(() => {
+    startPolling(1000 * 2)
+
+    return () => {
+      stopPolling()
+    }
+  }, [])
 
   return (
     <Toast.Instance

@@ -480,9 +480,10 @@ const ArticleDetail = ({
 
   const onEditSaved = async () => {
     setEditMode(false)
+    exitEditMode()
+
     await refetchPublic()
     loadPrivate()
-    exitEditMode()
   }
 
   useEffect(() => {
