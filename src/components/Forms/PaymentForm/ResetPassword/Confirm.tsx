@@ -145,7 +145,7 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
     ) {
       handleSubmit()
     }
-  }, [isValid, values.password, values.comparedPassword])
+  }, [values.password, values.comparedPassword])
 
   if (isSubmitting) {
     return (
