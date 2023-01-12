@@ -108,7 +108,7 @@ const Confirm: React.FC<FormProps> = ({
     if (isValid && values.password.length === PAYMENT_PASSSWORD_LENGTH) {
       handleSubmit()
     }
-  }, [isValid, values.password])
+  }, [values.password])
 
   if (isSubmitting) {
     return (
