@@ -46,11 +46,13 @@
 
     & .transaction-left {
       display: inline-flex;
-      border-bottom: 1px solid transparent;
+      line-height: 1.25rem;
     }
 
     & .transaction-button {
       display: inline-flex;
+      padding-top: 2px;
+      padding-bottom: 1px;
       margin-left: var(--spacing-xx-tight);
       border-bottom: 1px solid var(--color-matters-gold);
     }
