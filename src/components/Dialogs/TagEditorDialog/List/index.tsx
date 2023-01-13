@@ -144,7 +144,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
             <Translate
               zh_hant="協作者可以與你共同管理精選"
               zh_hans="协作者可以与你共同管理精选"
-              en="collaborator can manage selected feed with you"
+              en="Collaborator can manage selected feed with you."
             />
             <br />
             {(isHavingNoneEditors || isReachingLimit) && (
@@ -152,9 +152,14 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                 <Translate
                   zh_hant="每個標籤最多添加"
                   zh_hans="每个标签最多添加"
-                  en="every tag can have maximum"
+                  en="Every tag can have maximum"
                 />
-                <span className="count">{' 4 '}</span>
+                <span className="count"> 4 </span>
+                <Translate
+                  zh_hant="名協作者"
+                  zh_hans="名协作者"
+                  en="collaborators."
+                />
               </>
             )}
             {isAllowAdd && isHavingEditors && (
@@ -162,16 +167,16 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                 <Translate
                   zh_hant="你還可以添加"
                   zh_hans="你还可以添加"
-                  en="you can add"
+                  en="You can add"
                 />
                 <span className="count"> {4 - count} </span>
+                <Translate
+                  zh_hant="名協作者"
+                  zh_hans="名协作者"
+                  en="more collaborators."
+                />
               </>
             )}
-            <Translate
-              zh_hant="名協作者"
-              zh_hans="名协作者"
-              en="more collaborators"
-            />
           </p>
         </Dialog.Message>
       </Dialog.Content>
@@ -186,7 +191,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
             <Translate
               zh_hant="新增協作者"
               zh_hans="新增协作者"
-              en="add collaborator"
+              en="Add collaborator"
             />
           </Dialog.Footer.Button>
         </Dialog.Footer>
