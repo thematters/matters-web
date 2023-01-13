@@ -19,6 +19,8 @@ export const Spinner = () => {
         en: 'Loading...',
         lang,
       })}
+      aria-busy="true"
+      aria-live="polite"
     >
       <IconSpinner16 color="grey-light" size="lg" />
 

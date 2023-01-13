@@ -1,3 +1,4 @@
+import { VisuallyHidden } from '@reach/visually-hidden'
 import Link from 'next/link'
 import { useContext } from 'react'
 
@@ -36,10 +37,10 @@ const Migration = () => {
         <div className="l-row">
           <div className="l-col-full">
             <Link href={PATHS.HOME} legacyBehavior>
-              <a
-                className="logo"
-                aira-label={translate({ id: 'discover', lang })}
-              >
+              <a className="logo">
+                <VisuallyHidden>
+                  <span>{translate({ id: 'discover', lang })}</span>
+                </VisuallyHidden>
                 <IconLogo />
               </a>
             </Link>
