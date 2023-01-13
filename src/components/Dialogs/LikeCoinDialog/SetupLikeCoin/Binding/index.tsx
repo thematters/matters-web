@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { Dialog, Spinner, Translate } from '~/components'
 import { ViewerLikerIdQuery } from '~/gql/graphql'
@@ -23,14 +23,21 @@ const VIEWER_LIKER_ID = gql`
 `
 
 const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
-  const [polling, setPolling] = useState(true)
-  const { data, error } = useQuery<ViewerLikerIdQuery>(VIEWER_LIKER_ID, {
-    pollInterval: polling ? 1000 : undefined,
-    errorPolicy: 'none',
-    fetchPolicy: 'network-only',
-    skip: typeof window === 'undefined',
-  })
+  const { data, error, startPolling, stopPolling } =
+    useQuery<ViewerLikerIdQuery>(VIEWER_LIKER_ID, {
+      errorPolicy: 'none',
+      fetchPolicy: 'network-only',
+      skip: typeof window === 'undefined',
+    })
   const likerId = data?.viewer?.liker.likerId
+
+  useEffect(() => {
+    startPolling(1000)
+
+    return () => {
+      stopPolling()
+    }
+  }, [])
 
   useEffect(() => {
     if (likerId) {
@@ -44,7 +51,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
     }
 
     if (error) {
-      setPolling(false)
+      stopPolling()
     }
   })
 

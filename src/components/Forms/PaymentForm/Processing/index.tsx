@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { ethers } from 'ethers'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { useAccount, useContractWrite, useNetwork } from 'wagmi'
 
 import {
@@ -76,14 +76,13 @@ const OthersProcessingForm: React.FC<Props> = ({
   closeDialog,
   windowRef,
 }) => {
-  const [polling, setPolling] = useState(true)
-  const { data, error } = useQuery<ViewerTxStateQuery>(VIEWER_TX_STATE, {
-    variables: { id: txId },
-    pollInterval: polling ? 1000 : undefined,
-    errorPolicy: 'none',
-    fetchPolicy: 'network-only',
-    skip: typeof window === 'undefined',
-  })
+  const { data, error, startPolling, stopPolling } =
+    useQuery<ViewerTxStateQuery>(VIEWER_TX_STATE, {
+      variables: { id: txId },
+      errorPolicy: 'none',
+      fetchPolicy: 'network-only',
+      skip: typeof window === 'undefined',
+    })
   const txState = _get(data, 'viewer.wallet.transactions.edges.0.node.state')
 
   const succeededFn = () => {
@@ -101,19 +100,27 @@ const OthersProcessingForm: React.FC<Props> = ({
     }
   }
 
-  if (txState === 'succeeded') {
-    if (currency === CURRENCY.HKD) {
-      setTimeout(() => {
-        succeededFn()
-      }, 3 * 1000)
+  useEffect(() => {
+    if (error) {
+      stopPolling()
     } else {
-      succeededFn()
+      startPolling(1000)
     }
-  }
 
-  if (error) {
-    setPolling(false)
-  }
+    return () => {}
+  }, [error])
+
+  useEffect(() => {
+    if (txState === 'succeeded') {
+      if (currency === CURRENCY.HKD) {
+        setTimeout(() => {
+          succeededFn()
+        }, 3 * 1000)
+      } else {
+        succeededFn()
+      }
+    }
+  }, [txState])
 
   return (
     <>
