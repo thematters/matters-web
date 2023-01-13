@@ -43,6 +43,10 @@ const nextConfig = {
                   name: 'removeDimensions',
                   active: true,
                 },
+                {
+                  name: 'prefixIds',
+                  active: true,
+                },
               ],
             },
           },
