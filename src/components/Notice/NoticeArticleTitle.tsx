@@ -22,7 +22,11 @@ const NoticeArticleTitle = ({
   })
 
   if (!isBlock) {
-    return <Link {...path}>{article.title}</Link>
+    return (
+      <Link {...path}>
+        <a>{article.title}</a>
+      </Link>
+    )
   }
 
   return <ArticleDigestTitle article={article} textSize="md-s" />
