@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Dialog, Spinner, Translate } from '~/components'
 import { ViewerStripeAccountQuery } from '~/gql/graphql'
@@ -25,16 +25,23 @@ const VIEWER_STRIPE_ACCOUNT = gql`
 
 const Onboarding: React.FC<Props> = ({ nextStep }) => {
   const [polling, setPolling] = useState(true)
-  const { data, error } = useQuery<ViewerStripeAccountQuery>(
-    VIEWER_STRIPE_ACCOUNT,
-    {
-      pollInterval: polling ? 1000 : undefined,
+  const { data, error, startPolling, stopPolling } =
+    useQuery<ViewerStripeAccountQuery>(VIEWER_STRIPE_ACCOUNT, {
       errorPolicy: 'none',
       fetchPolicy: 'network-only',
       skip: typeof window === 'undefined',
-    }
-  )
+    })
   const stripeAccount = data?.viewer?.wallet.stripeAccount?.id
+
+  useEffect(() => {
+    if (polling) {
+      startPolling(1000)
+    }
+
+    return () => {
+      stopPolling()
+    }
+  }, [polling])
 
   if (stripeAccount) {
     nextStep()

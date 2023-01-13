@@ -9,7 +9,7 @@ export const numPrefix = (num: number | string) => {
   return parsedNum > 0 ? `+${num}` : num
 }
 
-export const numAbbr = (num: number, decPlaces: number = 2) =>
+export const numAbbr = (num: number, decPlaces: number = 1) =>
   abbr(num, decPlaces)
 
 export const numRound = (num: number, decPlaces: number = 2) => {

@@ -52,7 +52,7 @@ const EditModeHeader = ({
   const diff = measureDiffs(initText || '', currText || '') || 0
   const diffCount = `${diff}`.padStart(2, '0')
   const isOverDiffLimit = diff > MAX_ARTICLE_REVISION_DIFF
-  const isRevised = diff > 0
+  const isContentRevised = diff > 0
 
   // save or republish
   const { tags, collection, circle, accessType, license } = restProps
@@ -69,13 +69,13 @@ const EditModeHeader = ({
           circle: circle ? circle.id : null,
           accessType,
           license,
-          ...(isRevised ? { content } : {}),
+          ...(isContentRevised ? { content } : {}),
           first: null,
           iscnPublish: restProps.iscnPublish,
         },
       })
 
-      if (!isRevised) {
+      if (!isContentRevised) {
         onSaved()
       }
     } catch (e) {
@@ -83,7 +83,7 @@ const EditModeHeader = ({
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: isRevised ? (
+            content: isContentRevised ? (
               <Translate
                 zh_hant="發布失敗"
                 zh_hans="發布失敗"
@@ -149,7 +149,7 @@ const EditModeHeader = ({
         saving={loading}
         disabled={loading}
         confirmButtonText={
-          isRevised ? (
+          isContentRevised ? (
             <Translate zh_hant="立即發布" zh_hans="立即发布" en="Publish" />
           ) : (
             <Translate
@@ -160,7 +160,7 @@ const EditModeHeader = ({
           )
         }
         cancelButtonText={<Translate id="cancel" />}
-        onConfirm={isRevised ? undefined : onSave}
+        onConfirm={isContentRevised ? undefined : onSave}
         ConfirmStepContent={ConfirmStepContent}
       >
         {({ openDialog: openEditorSettingsDialog }) => (
