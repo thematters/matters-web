@@ -20,7 +20,11 @@ const NoticeCircleName = ({
     circle,
   })
 
-  return <Link {...(path || circlePath)}>{circle.displayName}</Link>
+  return (
+    <Link {...(path || circlePath)}>
+      <a>{circle.displayName}</a>
+    </Link>
+  )
 }
 
 NoticeCircleName.fragments = {

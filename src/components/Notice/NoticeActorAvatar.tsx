@@ -23,7 +23,9 @@ const NoticeActorAvatar = ({
 
   return (
     <Link {...path}>
-      <Avatar user={user} size={size} />
+      <a>
+        <Avatar user={user} size={size} />
+      </a>
     </Link>
   )
 }
