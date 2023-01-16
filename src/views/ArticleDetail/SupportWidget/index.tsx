@@ -75,7 +75,6 @@ const SupportWidget = ({ article }: DonationProps) => {
     if (isViewerDonated) {
       setSupported(true)
     }
-    console.log('in useEffect', showAnimation)
   }, [isViewerDonated])
 
   const requestForDonation = article?.requestForDonation
@@ -111,6 +110,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       return
     }
   )
+  console.log('before return', showAnimation)
 
   return (
     <section className={supportWidgetClasses} id="animation">
