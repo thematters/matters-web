@@ -100,6 +100,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       // LIKE、USDT
       setPlayShipWaiting(true)
       setShowAnimation(true)
+      console.log('refuse, showanimation', showAnimation)
       jump('#animation', { offset: -100 })
       await sleep(5 * 1000)
       setPlayShipWaiting(false)
