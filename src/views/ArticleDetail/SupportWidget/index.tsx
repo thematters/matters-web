@@ -75,6 +75,7 @@ const SupportWidget = ({ article }: DonationProps) => {
     if (isViewerDonated) {
       setSupported(true)
     }
+    console.log('in useEffect', showAnimation)
   }, [isViewerDonated])
 
   const requestForDonation = article?.requestForDonation
@@ -88,6 +89,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       }
       setCurrency(payload.currency)
       setShowAvatarAnimation(true)
+      console.log('in useEvent listener', showAnimation)
 
       // HKD
       if (payload.currency === CURRENCY.HKD) {
