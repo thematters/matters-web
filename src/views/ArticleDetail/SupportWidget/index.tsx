@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import jump from 'jump.js'
+// import jump from 'jump.js'
 import { useContext, useEffect, useState } from 'react'
 
 import {
