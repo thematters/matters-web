@@ -22,6 +22,7 @@ export enum TEST_ID {
   ARTICLE_COLLECTION = 'article/collection',
   ARTICLE_TAGS = 'article/tags',
   ARTICLE_LICENSE = 'article/license',
+  ARTICLE_COMMENT_BUTTON = 'article/comment-button',
   ARTICLE_SUPPORT_REQUEST = 'article/support/request',
   ARTICLE_SUPPORT_REPLY = 'article/support/reply',
   // comment
@@ -62,4 +63,6 @@ export enum TEST_ID {
   OFFICIAL_ANNOUNCEMENT = 'notice/official-announcement',
   // misc
   SPINNER = 'spinner',
+  NAV_NOTIFICATIONS = 'navigation/notifications',
+  ME_BUTTON = 'me-button',
 }
