@@ -40,12 +40,17 @@ export class UserProfilePage {
     this.dialog = this.page.getByRole('dialog')
   }
 
-  async gotoMeProfile() {
+  async gotoMeProfile(isMobile?: boolean) {
     // go to homepage
     await this.page.goto('/')
 
-    // click "My Page" button
-    await this.page.getByRole('button', { name: 'My Page' }).click()
+    if (isMobile) {
+      // Click "me-avatar" button
+      await this.page.getByTestId(TEST_ID.ME_BUTTON).click()
+    } else {
+      // click "My Page" button
+      await this.page.getByRole('button', { name: 'My Page' }).click()
+    }
 
     // click "Profile" link
     await this.page.getByRole('link', { name: 'Profile' }).click()

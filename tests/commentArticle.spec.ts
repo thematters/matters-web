@@ -13,10 +13,10 @@ import {
 test.describe('Comment to article', () => {
   authedTest(
     "Alice' article is commented by Bob, and received notification",
-    async ({ alicePage, bobPage }) => {
+    async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
       const aliceProfile = new UserProfilePage(alicePage)
-      await aliceProfile.gotoMeProfile()
+      await aliceProfile.gotoMeProfile(isMobile)
 
       // [Alice] Get first article
       const aliceArticleLink = (await aliceProfile.feedArticles
@@ -28,7 +28,7 @@ test.describe('Comment to article', () => {
 
       // [Bob] Go to Alice's article page
       await bobPage.goto(aliceArticleLink)
-      const aliceArticleDetail = new ArticleDetailPage(bobPage)
+      const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
 
       // [Bob] Send a comment
       const commentContent = await aliceArticleDetail.sendComment()
