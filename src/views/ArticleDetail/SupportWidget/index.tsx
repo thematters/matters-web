@@ -89,13 +89,13 @@ const SupportWidget = ({ article }: DonationProps) => {
       }
       setCurrency(payload.currency)
       setShowAvatarAnimation(true)
-      console.log('in useEvent listener', showAnimation)
-
+      console.log('in useEvent listener: showAnimation)', showAnimation)
+      console.log('payload.currency', payload.currency)
       // HKD
       if (payload.currency === CURRENCY.HKD) {
         setShowAnimation(true)
         hasDonatedRefetch()
-        console.log('refuse hkd, showanimation', showAnimation)
+        console.log('refuse hkd: showanimation', showAnimation)
         // jump('#animation', { offset: -100 })
         return
       }
