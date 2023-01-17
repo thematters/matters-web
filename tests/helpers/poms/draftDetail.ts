@@ -17,18 +17,22 @@ type License = 'CC BY-NC-ND 2.0 License' | 'CC0 License' | 'All Rights Reserved'
 
 export class DraftDetailPage {
   readonly page: Page
+  readonly isMobile: boolean | undefined
 
   // header
   readonly publishButton: Locator
 
-  // sidebar
-  readonly sidebarAddTag: Locator
-  readonly sidebarSetCover: Locator
-  readonly sidebarCollectArticle: Locator
-  readonly sidebarToggleAddToCircle: Locator
-  readonly sidebarToggleISCN: Locator
-  readonly sidebarSetLicense: Locator
-  readonly sidebarSupportSetting: Locator
+  // bar
+  readonly barAddTag: Locator
+  readonly barSetCover: Locator
+  readonly barCollectArticle: Locator
+  readonly barToggleAddToCircle: Locator
+  readonly barToggleISCN: Locator
+  readonly barSetLicense: Locator
+  readonly barSupportSetting: Locator
+
+  // bottombar
+  readonly bottombarManage: Locator
 
   // editing
   readonly titleInput: Locator
@@ -41,26 +45,37 @@ export class DraftDetailPage {
   readonly dialogPublishButton: Locator
   readonly dialogViewArticleButton: Locator
   readonly dialogSaveButton: Locator
+  readonly dialogDoneButton: Locator
 
-  constructor(page: Page) {
+  constructor(page: Page, isMobile?: boolean) {
     this.page = page
+    this.isMobile = isMobile
 
     // header
     this.publishButton = this.page.getByRole('button', { name: 'Publish' })
 
-    // sidebar
-    this.sidebarAddTag = this.page.getByRole('button', { name: 'Add Tag' })
-    this.sidebarSetCover = this.page.getByRole('button', { name: 'Set Cover' })
-    this.sidebarCollectArticle = this.page.getByRole('button', {
-      name: 'Collect Article',
+    // bar
+    this.barAddTag = this.page.getByRole('button', {
+      name: isMobile ? 'Tag' : 'Add Tag',
     })
-    this.sidebarToggleAddToCircle = this.page.getByLabel('Add to Circle')
-    this.sidebarToggleISCN = this.page.getByLabel('Register for ISCN')
-    this.sidebarSetLicense = this.page.getByRole('button', {
+    this.barSetCover = this.page.getByRole('button', {
+      name: isMobile ? 'Cover' : 'Set Cover',
+    })
+    this.barCollectArticle = this.page.getByRole('button', {
+      name: isMobile ? 'Collect' : 'Collect Article',
+    })
+    this.barToggleAddToCircle = this.page.getByLabel('Add to Circle')
+    this.barToggleISCN = this.page.getByLabel('Register for ISCN')
+    this.barSetLicense = this.page.getByRole('button', {
       name: 'CC BY-NC-ND 2.0 License',
     })
-    this.sidebarSupportSetting = this.page.getByRole('button', {
+    this.barSupportSetting = this.page.getByRole('button', {
       name: 'Support Setting',
+    })
+
+    // bottombar
+    this.bottombarManage = this.page.getByRole('button', {
+      name: 'Article Management',
     })
 
     // editing
@@ -81,6 +96,9 @@ export class DraftDetailPage {
     })
     this.dialogSaveButton = this.dialog.getByRole('button', {
       name: 'Save',
+    })
+    this.dialogDoneButton = this.dialog.getByRole('button', {
+      name: 'Done',
     })
   }
 
@@ -124,7 +142,7 @@ export class DraftDetailPage {
   }
 
   async setTags() {
-    await this.sidebarAddTag.click()
+    await this.barAddTag.click()
 
     const tags = _uniq(generateTags({ count: 3 }))
     for (const tag of tags) {
@@ -138,7 +156,7 @@ export class DraftDetailPage {
   }
 
   async setCover() {
-    await this.sidebarSetCover.click()
+    await this.barSetCover.click()
 
     await this.page
       .getByLabel('Upload Cover')
@@ -161,7 +179,11 @@ export class DraftDetailPage {
     replyToDonator?: boolean
     requestForDonation?: boolean
   }) {
-    await this.sidebarSupportSetting.click()
+    if (this.isMobile) {
+      await this.bottombarManage.click()
+    }
+
+    await this.barSupportSetting.click()
 
     replyToDonator =
       typeof replyToDonator === 'boolean'
@@ -193,7 +215,7 @@ export class DraftDetailPage {
   }
 
   async setCollection() {
-    await this.sidebarCollectArticle.click()
+    await this.barCollectArticle.click()
 
     // type and search
     const searchKey = 'test'
@@ -220,32 +242,52 @@ export class DraftDetailPage {
   }
 
   async checkAddToCicle() {
-    const hasAddToCircle = await this.sidebarToggleAddToCircle.isVisible()
+    if (this.isMobile) {
+      await this.bottombarManage.click()
+    }
+
+    const hasAddToCircle = await this.barToggleAddToCircle.isVisible()
     if (!hasAddToCircle) {
+      if (this.isMobile) {
+        await this.dialogDoneButton.click()
+      }
       return
     }
 
-    await waitForAPIResponse({
-      page: this.page,
-      path: 'data.putDraft.access.circle',
-    })
-
     // FIXME: error will be throw if using .check()
     // https://github.com/microsoft/playwright/issues/13470
-    await this.sidebarToggleAddToCircle.click()
+    await Promise.all([
+      this.barToggleAddToCircle.click(),
+      waitForAPIResponse({
+        page: this.page,
+        path: 'data.putDraft.access.circle',
+      }),
+    ])
+
+    if (this.isMobile) {
+      await this.dialogDoneButton.click()
+    }
 
     return true
   }
 
   async checkISCN() {
+    if (this.isMobile) {
+      await this.bottombarManage.click()
+    }
+
     // FIXME: error will be throw if using .check()
     // https://github.com/microsoft/playwright/issues/13470
-    await this.sidebarToggleISCN.click()
+    await this.barToggleISCN.click()
 
     await waitForAPIResponse({
       page: this.page,
       path: 'data.putDraft.iscnPublish',
     })
+
+    if (this.isMobile) {
+      await this.dialogDoneButton.click()
+    }
 
     return true
   }
@@ -254,8 +296,18 @@ export class DraftDetailPage {
     license =
       license ||
       _sample(['CC BY-NC-ND 2.0 License', 'CC0 License', 'All Rights Reserved'])
-    await this.sidebarSetLicense.click()
+
+    if (this.isMobile) {
+      await this.bottombarManage.click()
+    }
+
+    await this.barSetLicense.click()
     await this.page.getByRole('option', { name: license }).click()
+
+    if (this.isMobile) {
+      await this.dialogDoneButton.click()
+    }
+
     return license
   }
 
