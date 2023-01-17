@@ -9,6 +9,8 @@
 
   & .collapseWrapper {
     @mixin flex-center-end;
+
+    margin-top: var(--spacing-x-tight);
   }
 
   & .richWrapper {
