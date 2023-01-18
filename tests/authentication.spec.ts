@@ -30,27 +30,19 @@ test.describe('Authentication', () => {
     await expect(page).toHaveURL('/')
 
     // Expect homepage has "Notification" button on the left side
-    if (isMobile) {
-      await expect(page.getByTestId(TEST_ID.NAV_NOTIFICATIONS)).toBeVisible()
-    } else {
-      await expect(
-        page.getByRole('link', { name: 'Notifications' })
-      ).toBeVisible()
-    }
+    await expect(
+      page.getByRole('link', { name: 'Notifications' })
+    ).toBeVisible()
   })
 
-  test('can login in login page', async ({ page, isMobile }) => {
+  test('can login in login page', async ({ page }) => {
     await login({ page, waitForNavigation: true })
     await expect(page).toHaveURL('/')
 
     // Expect homepage has "Notification" button on the left side
-    if (isMobile) {
-      await expect(page.getByTestId(TEST_ID.NAV_NOTIFICATIONS)).toBeVisible()
-    } else {
-      await expect(
-        page.getByRole('link', { name: 'Notifications' })
-      ).toBeVisible()
-    }
+    await expect(
+      page.getByRole('link', { name: 'Notifications' })
+    ).toBeVisible()
   })
 
   authedTest(
@@ -59,16 +51,12 @@ test.describe('Authentication', () => {
       await page.goto('/')
 
       // [Logged-in] Expect homepage has "Notification" button on the left side
-      if (isMobile) {
-        await expect(page.getByTestId(TEST_ID.NAV_NOTIFICATIONS)).toBeVisible()
-      } else {
-        await expect(
-          page.getByRole('link', { name: 'Notifications' })
-        ).toBeVisible()
-      }
+      await expect(
+        page.getByRole('link', { name: 'Notifications' })
+      ).toBeVisible()
 
       // Logout
-      await logout({ page, isMobile })
+      await logout({ page })
 
       // [Logged-out] Expect homepage has "Enter" button
       let enterButton

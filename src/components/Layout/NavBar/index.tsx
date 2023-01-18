@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { PATHS, TEST_ID, TEXT } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
 import {
   IconNavHome24,
   IconNavHomeActive24,
@@ -71,7 +71,7 @@ const NavBar = () => {
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}
             href={PATHS.ME_NOTIFICATIONS}
-            data-test-id={TEST_ID.NAV_NOTIFICATIONS}
+            aria-label={TEXT[lang].notifications}
           />
         )}
 

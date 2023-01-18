@@ -62,6 +62,4 @@ export enum TEST_ID {
   OFFICIAL_ANNOUNCEMENT = 'notice/official-announcement',
   // misc
   SPINNER = 'spinner',
-  NAV_NOTIFICATIONS = 'navigation/notifications',
-  ME_BUTTON = 'me-button',
 }
