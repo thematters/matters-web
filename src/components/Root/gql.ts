@@ -33,19 +33,6 @@ const fragments = {
   `,
 }
 
-export const ROOT_QUERY_PUBLIC = gql`
-  query RootQueryPublic {
-    viewer {
-      ...ViewerPublic
-    }
-    official {
-      ...Official
-    }
-  }
-  ${fragments.user.public}
-  ${fragments.official}
-`
-
 export const ROOT_QUERY_PRIVATE = gql`
   query RootQueryPrivate {
     viewer {

@@ -1,12 +1,13 @@
+import { useQuery } from '@apollo/react-hooks'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { createClient, createStorage, WagmiConfig } from 'wagmi'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
-import { chains, sleep, wagmiProvider } from '~/common/utils'
+import { chains, wagmiProvider } from '~/common/utils'
 import {
   AnalyticsListener,
   Error,
@@ -15,16 +16,14 @@ import {
   Layout,
   QueryError,
   Toast,
-  usePublicQuery,
   useRoute,
   ViewerProvider,
   ViewerUser,
 } from '~/components'
 import PageViewTracker from '~/components/Analytics/PageViewTracker'
-import SplashScreen from '~/components/SplashScreen'
-import { RootQueryPrivateQuery, RootQueryPublicQuery } from '~/gql/graphql'
+import { RootQueryPrivateQuery } from '~/gql/graphql'
 
-import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
+import { ROOT_QUERY_PRIVATE } from './gql'
 
 const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
   ssr: false,
@@ -96,56 +95,10 @@ const Root = ({
   const isInMigration = isInPath('MIGRATION')
   const shouldApplyLayout = !isInAbout && !isInMigration
 
-  // anonymous
   const { loading, data, error } =
-    usePublicQuery<RootQueryPublicQuery>(ROOT_QUERY_PUBLIC)
+    useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)
   const viewer = data?.viewer
   const official = data?.official
-
-  // viewer
-  const [privateViewer, setPrivateViewer] =
-    useState<RootQueryPrivateQuery['viewer']>()
-  const [privateFetched, setPrivateFetched] = useState(false)
-
-  const fetchPrivateViewer = async () => {
-    try {
-      const privateWatcher = client.watchQuery<RootQueryPrivateQuery>({
-        query: ROOT_QUERY_PRIVATE,
-        fetchPolicy: 'network-only',
-      })
-      privateWatcher.subscribe({
-        next: (result) => {
-          // set private viewer
-          if (result?.data?.viewer) {
-            setPrivateViewer(result?.data?.viewer)
-          }
-          // mark private fetched as true
-          setPrivateFetched(true)
-        },
-        error: (e) => {
-          // mark private fetched as true
-          setPrivateFetched(true)
-
-          console.error(e)
-        },
-      })
-
-      // timeout to mark private fetched as true
-      await sleep(2000)
-      if (!privateFetched) {
-        setPrivateFetched(true)
-      }
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  useEffect(() => {
-    if (!data) {
-      return
-    }
-    fetchPrivateViewer()
-  }, [!!data])
 
   /**
    * Render
@@ -164,11 +117,7 @@ const Root = ({
 
   return (
     <WagmiConfig client={wagmiClient}>
-      <ViewerProvider
-        viewer={(privateViewer || viewer) as ViewerUser}
-        privateFetched={privateFetched}
-      >
-        <SplashScreen />
+      <ViewerProvider viewer={viewer as ViewerUser}>
         <PageViewTracker />
 
         <LanguageProvider headers={headers}>

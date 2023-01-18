@@ -50,7 +50,7 @@ const BaseFollow = () => {
     }
   }, [])
 
-  if (loading || !viewer.privateFetched) {
+  if (loading) {
     return <Spinner />
   }
 

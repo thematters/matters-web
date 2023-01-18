@@ -9,12 +9,12 @@ export const Protected: React.FC<{ children?: React.ReactNode }> = ({
   const viewer = useContext(ViewerContext)
 
   useEffect(() => {
-    if (viewer.privateFetched && !viewer.isAuthed) {
+    if (!viewer.isAuthed) {
       redirectToLogin()
     }
-  }, [viewer.privateFetched])
+  }, [])
 
-  if (viewer.isAuthed && viewer.privateFetched) {
+  if (viewer.isAuthed) {
     return <>{children}</>
   }
 

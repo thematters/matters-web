@@ -75,10 +75,10 @@ const CircleProfile = () => {
 
     if (viewer.isAuthed) {
       loadPrivate()
-    } else if (viewer.privateFetched) {
+    } else {
       setPrivateFetched(true)
     }
-  }, [circle?.id, viewer.privateFetched])
+  }, [circle?.id])
 
   // refetch & pull to refresh
   const refetch = async () => {

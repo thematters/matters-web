@@ -84,10 +84,10 @@ const CricleDiscussion = () => {
 
     if (viewer.isAuthed) {
       loadPrivate(data)
-    } else if (viewer.privateFetched) {
+    } else {
       setPrivateFetched(true)
     }
-  }, [circle?.id, viewer.privateFetched])
+  }, [circle?.id])
 
   /**
    * Fragment Patterns

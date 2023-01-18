@@ -17,7 +17,7 @@ import WalletSettings from './Wallet'
 const Settings = () => {
   const viewer = useContext(ViewerContext)
 
-  if (viewer.privateFetched && !viewer.isAuthed) {
+  if (!viewer.isAuthed) {
     return <AnonymousSettings />
   }
 
