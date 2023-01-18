@@ -8,7 +8,6 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
   REFETCH_RESPONSES,
-  TEST_ID,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { appendTarget, numAbbr, translate } from '~/common/utils'
@@ -78,7 +77,6 @@ const Content = ({
       role="button"
       ariaHasPopup="dialog"
       {...(props as CardProps)}
-      testId={TEST_ID.ARTICLE_COMMENT_BUTTON}
     >
       <p>
         <Translate id="putComment" />
@@ -90,10 +88,9 @@ const Content = ({
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor="grey-lighter"
-      aria-label={translate({ id: 'putComment', lang })}
+      aria-label={`${translate({ id: 'putComment', lang })}…`}
       aria-haspopup="dialog"
       {...(props as ButtonProps)}
-      data-test-id={TEST_ID.ARTICLE_COMMENT_BUTTON}
     >
       <TextIcon
         icon={<IconComment16 size="md-s" />}
