@@ -1,3 +1,4 @@
+import { VisuallyHidden } from '@reach/visually-hidden'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
 import { useCallback, useContext, useEffect, useState } from 'react'
@@ -66,7 +67,10 @@ const Hero = () => {
           <div className="l-row">
             <div className="l-col-full">
               <Link href={PATHS.HOME} legacyBehavior>
-                <a aria-label={translate({ id: 'discover', lang })}>
+                <a>
+                  <VisuallyHidden>
+                    <span>{translate({ id: 'discover', lang })}</span>
+                  </VisuallyHidden>
                   <IconLogo />
                 </a>
               </Link>

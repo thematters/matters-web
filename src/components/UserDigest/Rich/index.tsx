@@ -1,3 +1,4 @@
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
@@ -113,6 +114,9 @@ const Rich = ({
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
           <a className="avatar">
+            <VisuallyHidden>
+              <span>{user.displayName}</span>
+            </VisuallyHidden>
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} user={user} />
             {avatarBadge && <span className="badge">{avatarBadge}</span>}
           </a>
