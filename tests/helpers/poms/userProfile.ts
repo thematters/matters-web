@@ -4,6 +4,7 @@ import { TEST_ID } from '~/common/enums'
 
 export class UserProfilePage {
   readonly page: Page
+  readonly isMobile: boolean | undefined
 
   // header
   // moreButton: Locator
@@ -25,8 +26,9 @@ export class UserProfilePage {
   // dialog
   readonly dialog: Locator
 
-  constructor(page: Page) {
+  constructor(page: Page, isMobile?: boolean) {
     this.page = page
+    this.isMobile = isMobile
 
     this.feedArticles = page.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
 
@@ -40,17 +42,12 @@ export class UserProfilePage {
     this.dialog = this.page.getByRole('dialog')
   }
 
-  async gotoMeProfile(isMobile?: boolean) {
+  async gotoMeProfile() {
     // go to homepage
     await this.page.goto('/')
 
-    if (isMobile) {
-      // Click "me-avatar" button
-      await this.page.getByTestId(TEST_ID.ME_BUTTON).click()
-    } else {
-      // click "My Page" button
-      await this.page.getByRole('button', { name: 'My Page' }).click()
-    }
+    // click "My Page" button
+    await this.page.getByRole('button', { name: 'My Page' }).click()
 
     // click "Profile" link
     await this.page.getByRole('link', { name: 'Profile' }).click()

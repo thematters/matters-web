@@ -15,14 +15,13 @@ test.describe('Comment to article', () => {
     "Alice' article is commented by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
-      const aliceProfile = new UserProfilePage(alicePage)
-      await aliceProfile.gotoMeProfile(isMobile)
+      const aliceProfile = new UserProfilePage(alicePage, isMobile)
+      await aliceProfile.gotoMeProfile()
 
       // [Alice] Get first article
       const aliceArticleLink = (await aliceProfile.feedArticles
         .first()
-        .getByRole('link')
-        .first()
+        .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
         .getAttribute('href')) as string
       expect(aliceArticleLink).toBeTruthy()
 
