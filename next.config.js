@@ -26,7 +26,26 @@ const nextConfig = {
         },
       ],
     })
-
+    config.module.rules.push({
+      test: /\.tsx?$/,
+      use: [
+        {
+          loader: 'ts-loader',
+          options: {
+            getCustomTransformers() {
+              return {
+                before: [
+                  transform({
+                    overrideIdFn: '[sha512:contenthash:base64:6]',
+                  }),
+                ],
+              }
+            },
+          },
+        },
+      ],
+      exclude: /node_modules/,
+    })
     config.module.rules.push({
       test: /\.svg$/,
       use: [
