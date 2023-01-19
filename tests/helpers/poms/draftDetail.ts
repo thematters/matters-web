@@ -257,11 +257,11 @@ export class DraftDetailPage {
     // FIXME: error will be throw if using .check()
     // https://github.com/microsoft/playwright/issues/13470
     await Promise.all([
-      this.barToggleAddToCircle.click(),
       waitForAPIResponse({
         page: this.page,
         path: 'data.putDraft.access.circle',
       }),
+      this.barToggleAddToCircle.click(),
     ])
 
     if (this.isMobile) {

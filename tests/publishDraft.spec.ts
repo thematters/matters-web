@@ -63,8 +63,8 @@ test.describe('Publish draft', () => {
       // Goto published article page
       // Promise.all prevents a race condition between clicking and waiting.
       await Promise.all([
-        draftDetail.dialogViewArticleButton.click(),
         page.waitForNavigation(),
+        draftDetail.dialogViewArticleButton.click(),
       ])
 
       // Expect article data are same as previous draft inputs
