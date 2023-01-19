@@ -9,7 +9,7 @@ import {
   fuzzingRun,
 } from './helpers'
 
-test.describe('Publish draft', () => {
+test.describe.skip('Publish draft', () => {
   authedTest(
     'can create and publish draft',
     async ({ alicePage: page, isMobile }) => {

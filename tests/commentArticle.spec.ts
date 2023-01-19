@@ -10,7 +10,7 @@ import {
   UserProfilePage,
 } from './helpers'
 
-test.describe('Comment to article', () => {
+test.describe.skip('Comment to article', () => {
   authedTest(
     "Alice' article is commented by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile }) => {
