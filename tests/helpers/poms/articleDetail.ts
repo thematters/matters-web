@@ -77,9 +77,7 @@ export class ArticleDetailPage {
     this.toolbarSupportButton = this.page.getByRole('button', {
       name: 'support author',
     })
-    // this.toolbarCommentButton = this.page.getByTestId(
-    //   isMobile ? TEST_ID.ARTICLE_COMMENT_BUTTON : 'Comment…'
-    // )
+
     this.toolbarCommentButton = this.page.getByRole('button', {
       name: 'Comment…',
     })
