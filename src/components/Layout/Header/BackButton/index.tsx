@@ -10,7 +10,7 @@ import {
   IconBack32,
   IconLeft32,
   LanguageContext,
-  useResponsive,
+  Media,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ClientPreferenceQuery } from '~/gql/graphql'
@@ -28,7 +28,6 @@ export const BackButton: React.FC<BackButtonProps> = ({
   const { lang } = useContext(LanguageContext)
 
   const router = useRouter()
-  const isSmallUp = useResponsive('sm-up')
   const { data } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
@@ -61,27 +60,28 @@ export const BackButton: React.FC<BackButtonProps> = ({
     )
   }
 
-  if (isSmallUp) {
-    return (
-      <Button
-        aria-label={translate({ id: 'back', lang })}
-        bgColor="green-lighter"
-        onClick={onBack}
-        {...props}
-      >
-        <IconBack32 size="lg" color="green" />
-      </Button>
-    )
-  }
-
   return (
-    <Button
-      aria-label={translate({ id: 'back', lang })}
-      onClick={onBack}
-      {...props}
-    >
-      <IconLeft32 size="lg" />
-    </Button>
+    <>
+      <Media at="sm">
+        <Button
+          aria-label={translate({ id: 'back', lang })}
+          onClick={onBack}
+          {...props}
+        >
+          <IconLeft32 size="lg" />
+        </Button>
+      </Media>
+      <Media greaterThan="sm">
+        <Button
+          aria-label={translate({ id: 'back', lang })}
+          bgColor="green-lighter"
+          onClick={onBack}
+          {...props}
+        >
+          <IconBack32 size="lg" color="green" />
+        </Button>
+      </Media>
+    </>
   )
 }
 

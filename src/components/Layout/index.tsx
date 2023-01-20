@@ -1,13 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 
-import {
-  Head,
-  OnboardingTasks,
-  SearchBar,
-  useResponsive,
-  useRoute,
-} from '~/components'
+import { Head, Media, OnboardingTasks, SearchBar, useRoute } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ClientPreferenceQuery } from '~/gql/graphql'
 
@@ -72,7 +66,6 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInCircle = isPathStartWith('/~', true)
-  const isLargeUp = useResponsive('lg-up')
 
   const { data } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
@@ -97,10 +90,10 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
       <article className={articleClasses}>
         {children}
 
-        {showOnboardingTasks && !isLargeUp && (
-          <section className="u-lg-up-hide">
+        {!showOnboardingTasks && (
+          <Media lessThan="xl">
             <OnboardingTasks.NavBar />
-          </section>
+          </Media>
         )}
       </article>
 
@@ -111,10 +104,10 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
           </section>
         )}
 
-        {showOnboardingTasks && isLargeUp && (
-          <section className="u-lg-down-hide">
+        {!showOnboardingTasks && (
+          <Media greaterThanOrEqual="xl">
             <OnboardingTasks.Widget />
-          </section>
+          </Media>
         )}
 
         {aside}
