@@ -8,9 +8,9 @@ import {
   EmptyLayout,
   Head,
   Layout,
+  Media,
   Spinner,
   Throw404,
-  useResponsive,
   useRoute,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
@@ -34,7 +34,6 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
 })
 
 const DraftDetail = () => {
-  const isLargeUp = useResponsive('lg-up')
   const { getQuery } = useRoute()
   const id = getQuery('draftId')
 
@@ -181,7 +180,9 @@ const DraftDetail = () => {
         <Editor draft={draft} update={update} upload={upload} />
       </Layout.Spacing>
 
-      {!isLargeUp && <BottomBar draft={draft} ownCircles={ownCircles} />}
+      <Media lessThan="xl">
+        <BottomBar draft={draft} ownCircles={ownCircles} />
+      </Media>
     </Layout.Main>
   )
 }

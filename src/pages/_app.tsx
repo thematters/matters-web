@@ -27,7 +27,6 @@ const InnerApp = ({
 
         <Root client={apollo} headers={headers}>
           <Component {...pageProps} />
-
           <ClientUpdater />
         </Root>
       </ApolloProvider>

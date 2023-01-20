@@ -11,6 +11,7 @@ import {
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ClientPreferenceQuery } from '~/gql/graphql'
 
+import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
 import Header from './Header'
 import NavBar from './NavBar'
@@ -24,6 +25,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Header: typeof Header
   Spacing: typeof Spacing
   FixedMain: typeof FixedMain
+  AuthHeader: typeof AuthHeader
 } = ({ children }) => {
   const { isInPath } = useRoute()
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
@@ -133,3 +135,4 @@ Layout.Main = Main
 Layout.Header = Header
 Layout.Spacing = Spacing
 Layout.FixedMain = FixedMain
+Layout.AuthHeader = AuthHeader

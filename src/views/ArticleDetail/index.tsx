@@ -19,6 +19,7 @@ import {
   Head,
   LanguageContext,
   Layout,
+  Media,
   PullToRefresh,
   QueryError,
   Spinner,
@@ -27,9 +28,7 @@ import {
   Title,
   Translate,
   useFeatures,
-  // usePublicLazyQuery,
   usePublicQuery,
-  useResponsive,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -107,7 +106,6 @@ const BaseArticleDetail = ({
   const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   const features = useFeatures()
-  const isLargeUp = useResponsive('lg-up')
   const [fixedWall, setFixedWall] = useState(false)
 
   const authorId = article.author?.id
@@ -306,7 +304,9 @@ const BaseArticleDetail = ({
           <section className="block">
             <DynamicResponse id={article.id} lock={!canReadFullContent} />
           </section>
-          {!isLargeUp && <RelatedArticles article={article} />}
+          <Media lessThan="xl">
+            <RelatedArticles article={article} />
+          </Media>
         </section>
 
         <Toolbar

@@ -13,6 +13,7 @@ import {
   IconPen16,
   IconSpinner16,
   LanguageContext,
+  Media,
   TextIcon,
   Translate,
   useMutation,
@@ -23,18 +24,15 @@ import { CreateDraftMutation } from '~/gql/graphql'
 interface Props {
   allowed: boolean
   authed?: boolean
-  isLarge?: boolean
   forbidden?: boolean
 }
 
 const BaseWriteButton = ({
   onClick,
   loading,
-  isLarge,
 }: {
   onClick: () => any
   loading?: boolean
-  isLarge?: boolean
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -46,21 +44,33 @@ const BaseWriteButton = ({
 
   return (
     <>
-      <Button
-        size={isLarge ? ['5rem', '2.25rem'] : ['2rem', '2rem']}
-        bgColor="gold"
-        onClick={onClick}
-        aria-label={translate({ id: 'write', lang })}
-      >
-        <TextIcon icon={WriteIcon} weight="md" color="white">
-          {isLarge && <Translate id="write" />}
-        </TextIcon>
-      </Button>
+      <Media greaterThanOrEqual="lg">
+        <Button
+          size={['5rem', '2.25rem']}
+          bgColor="gold"
+          onClick={onClick}
+          aria-label={translate({ id: 'write', lang })}
+        >
+          <TextIcon icon={WriteIcon} weight="md" color="white">
+            <Translate id="write" />
+          </TextIcon>
+        </Button>
+      </Media>
+      <Media lessThan="lg">
+        <Button
+          size={['2rem', '2rem']}
+          bgColor="gold"
+          onClick={onClick}
+          aria-label={translate({ id: 'write', lang })}
+        >
+          <TextIcon icon={WriteIcon} weight="md" color="white" />
+        </Button>
+      </Media>
     </>
   )
 }
 
-export const WriteButton = ({ allowed, authed, isLarge, forbidden }: Props) => {
+export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
   const router = useRouter()
   const { lang } = useContext(LanguageContext)
   const [putDraft, { loading }] = useMutation<CreateDraftMutation>(
@@ -76,14 +86,12 @@ export const WriteButton = ({ allowed, authed, isLarge, forbidden }: Props) => {
         onClick={() =>
           window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
         }
-        isLarge={isLarge}
       />
     )
   }
 
   return (
     <BaseWriteButton
-      isLarge={isLarge}
       onClick={async () => {
         if (!authed) {
           window.dispatchEvent(

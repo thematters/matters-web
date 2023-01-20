@@ -7,16 +7,15 @@ import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/24px/
 import {
   Button,
   LanguageSwitch,
+  Media,
   TextIcon,
   Translate,
-  useResponsive,
   withIcon,
 } from '~/components'
 
 import styles from './styles.css'
 
 const Footer = () => {
-  const isSmallUp = useResponsive('sm-up')
   const year = new Date().getFullYear()
 
   return (
@@ -25,11 +24,12 @@ const Footer = () => {
         <div className="l-row">
           <div className="l-col-full">
             <div className="container">
-              {!isSmallUp && (
+              <Media at="sm">
                 <section className="languageSwitch">
                   <LanguageSwitch size="lg" bgColor="grey-darkest" />
                 </section>
-              )}
+              </Media>
+
               <section className="contactUs">
                 <h2>
                   <Translate
@@ -268,11 +268,12 @@ const Footer = () => {
                     </TextIcon>
                   </Button>
                 </div>
-                {isSmallUp && (
+
+                <Media greaterThan="sm">
                   <section className="languageSwitch">
                     <LanguageSwitch size="lg" bgColor="grey-darkest" />
                   </section>
-                )}
+                </Media>
               </section>
               <section className="copyright">
                 © {year} Matters, Inc. All rights reserved.

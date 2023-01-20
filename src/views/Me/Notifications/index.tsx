@@ -9,13 +9,13 @@ import {
   InfiniteScroll,
   Layout,
   List,
+  Media,
   Notice,
   PullToRefresh,
   Spacer,
   Spinner,
   useMutation,
   usePullToRefresh,
-  useResponsive,
 } from '~/components'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
 import {
@@ -107,13 +107,18 @@ const BaseNotifications = () => {
 }
 
 const Notifications = () => {
-  const isSmallUp = useResponsive('sm-up')
-
   return (
     <Layout.Main>
       <Layout.Header
         left={
-          isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
+          <>
+            <Media at="sm">
+              <Layout.Header.MeButton />
+            </Media>
+            <Media greaterThan="sm">
+              <Layout.Header.BackButton />
+            </Media>
+          </>
         }
         right={<Layout.Header.Title id="notifications" />}
       />

@@ -8,17 +8,14 @@ import {
   Spinner,
   TagDigest,
   usePublicQuery,
-  // useResponsive,
 } from '~/components'
 import { AllTagsHottestQuery } from '~/gql/graphql'
 
 import { ALL_TAGS_HOTTEST } from './gql'
-// import SidebarTags from './Sidebar'
 import styles from './styles.css'
 
 export type FeedType = 'recommended' | 'hottest'
 
-// export type FeedQuery = AllTagsRecommended | AllTagsHottest
 export type FeedQuery = AllTagsHottestQuery
 
 interface Props {
@@ -26,11 +23,8 @@ interface Props {
 }
 
 const Feed = ({ type }: Props) => {
-  // const isLargeUp = useResponsive('lg-up')
-
   const isRecommended = type === 'recommended'
 
-  // const query = isRecommended ? ALL_TAGS_RECOMMENDED : ALL_TAGS_HOTTEST
   const query = ALL_TAGS_HOTTEST
 
   const { data, loading, error, fetchMore, refetch } =

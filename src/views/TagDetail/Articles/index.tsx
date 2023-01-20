@@ -1,5 +1,4 @@
 import { NetworkStatus } from 'apollo-client'
-import _find from 'lodash/find'
 import _some from 'lodash/some'
 import React, { useContext, useEffect, useRef } from 'react'
 
@@ -10,12 +9,12 @@ import {
   EmptyTagArticles,
   InfiniteScroll,
   List,
+  Media,
   QueryError,
   Spinner,
   useEventListener,
   usePublicQuery,
   usePullToRefresh,
-  useResponsive,
   ViewerContext,
 } from '~/components'
 import {
@@ -34,7 +33,6 @@ interface TagArticlesProps {
 const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
   const viewer = useContext(ViewerContext)
   const feed = useRef(feedType)
-  const isLargeUp = useResponsive('lg-up')
 
   const isSelected = feedType === 'selected'
   const isHottest = feedType === 'hottest'
@@ -214,14 +212,20 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
               />
             </List.Item>
 
-            {!isLargeUp && edges.length >= 4 && i === 3 && (
-              <RelatedTags tagId={tag.id} />
+            {edges.length >= 4 && i === 3 && (
+              <Media lessThan="xl">
+                <RelatedTags tagId={tag.id} />
+              </Media>
             )}
           </React.Fragment>
         ))}
       </List>
 
-      {!isLargeUp && edges.length < 4 && <RelatedTags tagId={tag.id} />}
+      {edges.length < 4 && (
+        <Media lessThan="xl">
+          <RelatedTags tagId={tag.id} />
+        </Media>
+      )}
     </InfiniteScroll>
   )
 }

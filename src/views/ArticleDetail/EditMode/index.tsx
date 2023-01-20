@@ -7,15 +7,14 @@ import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 import {
   EmptyLayout,
   Layout,
+  Media,
   ReviseArticleDialog,
   Spinner,
   Throw404,
-  useResponsive,
 } from '~/components'
 import {
   SetCollectionProps,
   SetCoverProps,
-  // SetPublishISCNProps,
   SetTagsProps,
   ToggleAccessProps,
 } from '~/components/Editor'
@@ -79,8 +78,6 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
 })
 
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
-  const isLargeUp = useResponsive('lg-up')
-
   const [editData, setEditData] = useState<Record<string, any>>({})
   const { data, loading, error } = useQuery<EditModeArticleQuery>(
     EDIT_MODE_ARTICLE,
@@ -314,7 +311,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
               />
             </Layout.Spacing>
 
-            {!isLargeUp && (
+            <Media lessThan="xl">
               <SupportSettingDialog
                 article={article}
                 editSupportSetting={editSupport}
@@ -332,7 +329,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                   />
                 )}
               </SupportSettingDialog>
-            )}
+            </Media>
           </Layout.Main>
         )}
       </ConfirmExitDialog>

@@ -7,7 +7,7 @@ import { useDrag } from 'react-use-gesture'
 
 import { KEYCODES } from '~/common/enums'
 import { dom } from '~/common/utils'
-import { useOutsideClick, useResponsive } from '~/components'
+import { Media, useOutsideClick } from '~/components'
 
 import Handle from './Handle'
 import Overlay from './Overlay'
@@ -25,7 +25,6 @@ export type DialogProps = {
   smBgColor?: 'grey-lighter'
   smUpBgColor?: 'grey-lighter'
   fixedHeight?: boolean
-  slideIn?: boolean
 
   testId?: string
 } & DialogOverlayProps
@@ -48,7 +47,6 @@ const Container: React.FC<
   style,
   setDragGoal,
 }) => {
-  const isSmallUp = useResponsive('sm-up')
   const node: React.RefObject<any> | null = useRef(null)
 
   const containerClasses = classNames({
@@ -98,7 +96,9 @@ const Container: React.FC<
       >
         {children}
 
-        {!isSmallUp && <Handle closeDialog={onDismiss} {...bind()} />}
+        <Media at="sm">
+          <Handle closeDialog={onDismiss} {...bind()} />
+        </Media>
 
         <style jsx>{styles}</style>
       </div>
@@ -107,21 +107,18 @@ const Container: React.FC<
 }
 
 const Dialog: React.FC<DialogProps> = (props) => {
-  const { isOpen, onRest, slideIn } = props
+  const { isOpen, onRest } = props
   const [mounted, setMounted] = useState(isOpen)
-  const isSmallUp = useResponsive('sm-up')
 
   // Drag
   const [{ top }, setDragGoal] = useSpring(() => ({ top: 0 }))
 
   // Fade In/ Fade Out
-  const [{ opacity, transform }, setFade] = useSpring<{
+  const [{ opacity }, setFade] = useSpring<{
     opacity: number
-    transform: string
   }>(() => ({
     opacity: 0,
-    transform: 'translateY(100%)',
-    config: { tension: 270, friction: isSmallUp ? undefined : 30 },
+    config: { tension: 270 },
     onRest: (val: any) => {
       const isFadedOut = _get(val, 'value.opacity') <= 0
 
@@ -139,9 +136,9 @@ const Dialog: React.FC<DialogProps> = (props) => {
   useEffect(() => {
     if (isOpen) {
       setMounted(true)
-      setFade({ opacity: 1, transform: 'translateY(0%)' })
+      setFade({ opacity: 1 })
     } else {
-      setFade({ opacity: 0, transform: 'translateY(100%)' })
+      setFade({ opacity: 0 })
     }
   })
 
@@ -163,11 +160,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
           aria-labelledby="dialog-title"
         >
           <AnimatedContainer
-            style={{
-              transform: !isSmallUp && slideIn ? transform : undefined,
-              opacity: isSmallUp || !slideIn ? (opacity as any) : undefined,
-              top: !isSmallUp ? top : undefined,
-            }}
+            style={{ opacity: opacity as any, top }}
             setDragGoal={setDragGoal}
             {...props}
           />

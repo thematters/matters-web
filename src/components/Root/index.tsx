@@ -14,6 +14,7 @@ import {
   FeaturesProvider,
   LanguageProvider,
   Layout,
+  MediaContextProvider,
   QueryError,
   Toast,
   useRoute,
@@ -122,13 +123,15 @@ const Root = ({
 
         <LanguageProvider headers={headers}>
           <FeaturesProvider official={official}>
-            {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+            <MediaContextProvider>
+              {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-            <Toast.Container />
-            <AnalyticsListener user={viewer || {}} />
-            <DynamicGlobalDialogs />
-            <DynamicProgressBar />
-            <DynamicFingerprint />
+              <Toast.Container />
+              <AnalyticsListener user={viewer || {}} />
+              <DynamicGlobalDialogs />
+              <DynamicProgressBar />
+              <DynamicFingerprint />
+            </MediaContextProvider>
           </FeaturesProvider>
         </LanguageProvider>
       </ViewerProvider>

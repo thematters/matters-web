@@ -18,20 +18,22 @@
 }
 
 .logo {
-  margin-bottom: var(--spacing-xx-loose);
-
   & a {
     display: inline-flex;
   }
 }
 
 ul {
-  & li {
-    @mixin flex-center-start;
+  @mixin flex-center-all;
 
-    & + li {
-      margin-top: var(--spacing-xx-loose);
-    }
+  flex-direction: column;
+
+  @media (--md-up) {
+    display: initial;
+  }
+
+  & li {
+    margin-top: var(--spacing-xx-loose);
   }
 }
 
