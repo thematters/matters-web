@@ -90,7 +90,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
       <article className={articleClasses}>
         {children}
 
-        {!showOnboardingTasks && (
+        {showOnboardingTasks && (
           <Media lessThan="xl">
             <OnboardingTasks.NavBar />
           </Media>
@@ -104,7 +104,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
           </section>
         )}
 
-        {!showOnboardingTasks && (
+        {showOnboardingTasks && (
           <Media greaterThanOrEqual="xl">
             <OnboardingTasks.Widget />
           </Media>
