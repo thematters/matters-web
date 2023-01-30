@@ -13,7 +13,6 @@ import {
   Spinner,
   Title,
   Translate,
-  useResponsive,
   ViewMoreButton,
 } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
@@ -43,7 +42,6 @@ const Collection: React.FC<{
 }> = ({ article, collectionCount }) => {
   const { lang } = useContext(LanguageContext)
 
-  const isMediumUp = useResponsive('md-up')
   const { data, loading, error, fetchMore } = useQuery<CollectionListQuery>(
     COLLECTION_LIST,
     { variables: { id: article.id, first: 3 } }
@@ -103,7 +101,6 @@ const Collection: React.FC<{
           <List.Item key={cursor}>
             <ArticleDigestSidebar
               article={node}
-              hasCover={isMediumUp}
               hasBackground
               onClick={() =>
                 analytics.trackEvent('click_feed', {

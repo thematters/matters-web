@@ -24,7 +24,20 @@ ul {
     border-top: none;
   }
 
-  &.greyStyle {
+  &.grey {
+    margin-right: var(--spacing-base);
+    margin-left: var(--spacing-base);
+    border-radius: var(--spacing-x-tight);
+
+    & :global(> li) {
+      border: none;
+    }
+
+    & :global(> li + li) {
+      border-top: 1px solid var(--color-white);
+    }
+  }
+  @media (--sm-up) {
     margin-right: var(--spacing-base);
     margin-left: var(--spacing-base);
     border-radius: var(--spacing-x-tight);

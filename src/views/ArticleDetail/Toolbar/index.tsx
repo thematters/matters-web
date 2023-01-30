@@ -3,9 +3,9 @@ import gql from 'graphql-tag'
 import { stripAllPunct, toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,
+  Media,
   ReCaptchaProvider,
   ShareButton,
-  useResponsive,
 } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
@@ -72,8 +72,6 @@ const Toolbar = ({
   lock,
   ...props
 }: ToolbarProps) => {
-  const isSmallUp = useResponsive('sm-up')
-
   const path = toPath({ page: 'articleDetail', article })
   const sharePath =
     translated && translatedLanguage
@@ -103,7 +101,7 @@ const Toolbar = ({
 
         <BookmarkButton article={article} size="md-s" inCard={false} />
 
-        {isSmallUp && (
+        <Media greaterThan="sm">
           <ShareButton
             iconSize="md-s"
             inCard={false}
@@ -115,13 +113,13 @@ const Toolbar = ({
               .split(/\s+/)
               .map(stripAllPunct)}
           />
-        )}
+        </Media>
 
         <DropdownActions
           article={article}
           size="md-s"
           inCard={false}
-          hasShare={!isSmallUp}
+          // hasShare={!isSmallUp}
           sharePath={sharePath}
           hasExtend={!lock}
           {...props}

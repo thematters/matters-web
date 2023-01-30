@@ -11,10 +11,10 @@ import {
   DialogProps,
   Dropdown,
   LanguageContext,
+  Media,
   PopperProps,
   Translate,
   useDialogSwitch,
-  useResponsive,
 } from '~/components'
 
 /**
@@ -83,9 +83,6 @@ const BaseDropdownDialog = ({
 }: DropdownDialogProps) => {
   const { lang } = useContext(LanguageContext)
 
-  const isSmallUp = useResponsive('sm-up')
-  const type = isSmallUp ? 'dialog' : 'listbox'
-
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const toggle = () => (show ? closeDialog() : openDialog())
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
@@ -121,70 +118,65 @@ const BaseDropdownDialog = ({
     )
   }
 
-  /**
-   * Desktop: <Dropdown>
-   */
-  if (isSmallUp) {
-    return (
-      <Dropdown
-        trigger={undefined}
-        onHidden={closeDialog}
-        onClickOutside={closeDialog}
-        visible={show}
-        zIndex={Z_INDEX.OVER_BOTTOM_BAR}
-        appendTo={typeof window !== 'undefined' ? document.body : undefined}
-        {...dropdown}
-        content={
-          <FocusLock>
-            <Content>{dropdown.content}</Content>
-          </FocusLock>
-        }
-      >
-        <ForwardChildren openDialog={toggle} type={type}>
-          {children}
-        </ForwardChildren>
-      </Dropdown>
-    )
-  }
-
-  /**
-   * Mobile: <Dialog>
-   */
   return (
     <>
-      {children({ openDialog: toggle, type })}
+      {/* Mobile: <Dialog> */}
+      <Media at="sm">
+        {children({ openDialog: toggle, type: 'dialog' })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} {...dialog}>
-        <Dialog.Header
-          title={dialog.title}
-          closeDialog={closeDialog}
-          closeTextId="close"
-          mode="hidden"
-        />
+        <Dialog isOpen={show} onDismiss={closeDialog} {...dialog}>
+          <Dialog.Header
+            title={dialog.title}
+            closeDialog={closeDialog}
+            closeTextId="close"
+            mode="hidden"
+          />
 
-        <Content>{dialog.content}</Content>
+          <Content>{dialog.content}</Content>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="close" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-      </Dialog>
+          <Dialog.Footer>
+            <Dialog.Footer.Button
+              bgColor="grey-lighter"
+              textColor="black"
+              onClick={closeDialog}
+            >
+              <Translate id="close" />
+            </Dialog.Footer.Button>
+          </Dialog.Footer>
+        </Dialog>
+      </Media>
+
+      {/* Desktop: <Dropdown> */}
+      <Media greaterThan="sm">
+        <Dropdown
+          trigger={undefined}
+          onHidden={closeDialog}
+          onClickOutside={closeDialog}
+          visible={show}
+          zIndex={Z_INDEX.OVER_BOTTOM_BAR}
+          appendTo={typeof window !== 'undefined' ? document.body : undefined}
+          {...dropdown}
+          content={
+            <FocusLock>
+              <Content>{dropdown.content}</Content>
+            </FocusLock>
+          }
+        >
+          <ForwardChildren openDialog={toggle} type="listbox">
+            {children}
+          </ForwardChildren>
+        </Dropdown>
+      </Media>
     </>
   )
 }
 
 export const DropdownDialog: React.FC<DropdownDialogProps> = (props) => {
-  const isSmallUp = useResponsive('sm-up')
-  const type = isSmallUp ? 'listbox' : 'dialog'
-
   return (
     <Dialog.Lazy mounted={<BaseDropdownDialog {...props} />}>
-      {({ openDialog }) => <>{props.children({ openDialog, type })}</>}
+      {({ openDialog }) => (
+        <>{props.children({ openDialog, type: 'dialog' })}</>
+      )}
     </Dialog.Lazy>
   )
 }

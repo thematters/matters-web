@@ -1,5 +1,3 @@
-import classNames from 'classnames'
-
 import { TextIcon } from '~/components/TextIcon'
 
 import { ShareButtons } from '../Buttons'
@@ -11,7 +9,6 @@ export interface EmbedShareProps {
   description?: React.ReactNode
 
   headerTitle: React.ReactNode
-  wrap?: boolean
 }
 
 /**
@@ -19,12 +16,7 @@ export interface EmbedShareProps {
  * Unlike <ShareDialog>, it's flat and unfoled by default with circle icons.
  *
  */
-export const EmbedShare = ({
-  title,
-  path,
-  headerTitle,
-  wrap,
-}: EmbedShareProps) => {
+export const EmbedShare = ({ title, path, headerTitle }: EmbedShareProps) => {
   const shareLink =
     typeof window !== 'undefined'
       ? path
@@ -33,11 +25,6 @@ export const EmbedShare = ({
       : ''
   const shareTitle =
     title || (typeof window !== 'undefined' ? window.document.title || '' : '')
-
-  const buttonClasses = classNames({
-    buttons: true,
-    wrap,
-  })
 
   return (
     <section className="share">
@@ -49,7 +36,7 @@ export const EmbedShare = ({
         </h4>
       </header>
 
-      <section className={buttonClasses}>
+      <section className="buttons">
         <span className="left">
           <ShareButtons.LINE title={shareTitle} link={shareLink} circle />
           <ShareButtons.WhatsApp title={shareTitle} link={shareLink} circle />

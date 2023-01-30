@@ -8,10 +8,10 @@ import {
   EmptyArticle,
   InfiniteScroll,
   List,
+  Media,
   QueryError,
   Spinner,
   usePublicQuery,
-  useResponsive,
   ViewerContext,
 } from '~/components'
 import {
@@ -64,13 +64,20 @@ interface MainFeedProps {
 }
 
 const horizontalFeeds: FeedLocation = {
-  2: () => <Tags />,
-  5: () => <Authors />,
+  2: () => (
+    <Media lessThan="xl">
+      <Tags />
+    </Media>
+  ),
+  5: () => (
+    <Media lessThan="xl">
+      <Authors />
+    </Media>
+  ),
 }
 
 const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
-  const isLargeUp = useResponsive('lg-up')
   const isHottestFeed = sortBy === 'hottest'
 
   /**
@@ -179,7 +186,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   // insert other feeds
   let mixFeed: FeedEdge[] = edges
 
-  if (!isLargeUp && isHottestFeed) {
+  if (isHottestFeed) {
     // get copy
     mixFeed = JSON.parse(JSON.stringify(edges))
 
