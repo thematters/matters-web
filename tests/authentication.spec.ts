@@ -4,7 +4,7 @@ import { TEST_ID } from '~/common/enums'
 
 import { authedTest, login, logout } from './helpers'
 
-test.describe.skip('Authentication', () => {
+test.describe('Authentication', () => {
   test('can login in homepage dialog', async ({ page, isMobile }) => {
     await page.goto('/')
 
