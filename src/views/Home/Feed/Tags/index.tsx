@@ -57,6 +57,7 @@ const TagsFeed = () => {
     {
       notifyOnNetworkStatusChange: true,
       variables: { random: lastRandom || 0 },
+      skip: !lastRandom,
     },
     { publicQuery: !viewer.isAuthed }
   )

@@ -3,7 +3,7 @@ const lastFetchRandomResolver = (_: any) => {
   const minutes = new Date().getMinutes()
   const max = 10
   const random = minutes % max
-  console.log('random: ', random)
+
   return {
     __typename: 'LastFetchRandom',
     id: 'local',
