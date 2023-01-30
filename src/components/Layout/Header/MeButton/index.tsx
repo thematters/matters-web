@@ -16,7 +16,10 @@ const MeButton = () => {
 
   return (
     <>
-      <Button onClick={() => setShowNav(!showNav)}>
+      <Button
+        onClick={() => setShowNav(!showNav)}
+        aria-label={viewer.displayName}
+      >
         <MeAvatar user={viewer} size="lg" />
       </Button>
 

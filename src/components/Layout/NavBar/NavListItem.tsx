@@ -1,3 +1,4 @@
+import { VisuallyHidden } from '@reach/visually-hidden'
 import jump from 'jump.js'
 
 import { Button, ButtonProps } from '~/components'
@@ -35,10 +36,12 @@ const NavListItem = ({
       <Button
         bgActiveColor="grey-lighter"
         size={['2rem', '2rem']}
-        aira-label={name}
         {...props}
         onClick={onClick}
       >
+        <VisuallyHidden>
+          <span>{name}</span>
+        </VisuallyHidden>
         {active ? activeIcon : icon}
       </Button>
 
