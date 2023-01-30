@@ -44,7 +44,7 @@ export class ArticleDetailPage {
   readonly dialog: Locator
   readonly dialogCommentInput: Locator
 
-  constructor(page: Page) {
+  constructor(page: Page, isMobile?: boolean) {
     this.page = page
 
     // header
@@ -77,6 +77,7 @@ export class ArticleDetailPage {
     this.toolbarSupportButton = this.page.getByRole('button', {
       name: 'support author',
     })
+
     this.toolbarCommentButton = this.page.getByRole('button', {
       name: 'Comment…',
     })
