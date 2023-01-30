@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import defaultsStyles from '~/common/styles/bases/defaults.css'
 import resetStyles from '~/common/styles/bases/reset.css'
 import layoutStyles from '~/common/styles/layouts.css'
-import displayStyles from '~/common/styles/utils/display.css'
 import interactionStyles from '~/common/styles/utils/interaction.css'
 import linkStyles from '~/common/styles/utils/link.css'
 import motionStyles from '~/common/styles/utils/motion.css'
@@ -49,9 +48,6 @@ export const GlobalStyles = () => {
       </style>
       <style jsx global>
         {motionStyles}
-      </style>
-      <style jsx global>
-        {displayStyles}
       </style>
       <style jsx global>
         {interactionStyles}

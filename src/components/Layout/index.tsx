@@ -30,8 +30,10 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
       <div className="l-container full">
         <main className="l-row">
-          <nav role="navigation" className="l-col-three-left u-sm-down-hide">
-            <SideNav />
+          <nav role="navigation" className="l-col-three-left">
+            <Media greaterThan="sm">
+              <SideNav />
+            </Media>
           </nav>
 
           {children}
@@ -39,9 +41,11 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
       </div>
 
       {!isInDraftDetail && (
-        <footer className="u-sm-up-hide">
-          <NavBar />
-        </footer>
+        <Media at="sm">
+          <footer>
+            <NavBar />
+          </footer>
+        </Media>
       )}
 
       <style jsx>{styles}</style>
@@ -80,10 +84,6 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
     hasNavBar: !isInArticleDetail,
     hasOnboardingTasks: showOnboardingTasks,
   })
-  const asideClasses = classNames({
-    'l-col-three-right': true,
-    'u-lg-down-hide': true,
-  })
 
   return (
     <>
@@ -97,26 +97,18 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
         )}
       </article>
 
-      <aside className={asideClasses}>
-        {!isInSearch && !inEditor && (
-          <section className="u-lg-down-hide">
-            <SearchBar />
+      <aside className="l-col-three-right">
+        <Media greaterThanOrEqual="xl">
+          <section className="content">
+            {!isInSearch && !inEditor && <SearchBar />}
+
+            {showOnboardingTasks && <OnboardingTasks.Widget />}
+
+            {aside}
+
+            {!inEditor && !isInSettings && <SideFooter />}
           </section>
-        )}
-
-        {showOnboardingTasks && (
-          <Media greaterThanOrEqual="xl">
-            <OnboardingTasks.Widget />
-          </Media>
-        )}
-
-        {aside}
-
-        {!inEditor && !isInSettings && (
-          <section className="u-lg-down-hide">
-            <SideFooter />
-          </section>
-        )}
+        </Media>
       </aside>
 
       <style jsx>{styles}</style>

@@ -2,7 +2,7 @@ import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
 
 import { TextId } from '~/common/enums'
-import { Spacer, Translate } from '~/components'
+import { Media, Spacer, Translate } from '~/components'
 
 import { BackButton, CloseButton, RightButton } from './Button'
 import styles from './styles.css'
@@ -67,9 +67,9 @@ const Header: React.FC<HeaderProps> & {
 
   return (
     <>
-      <div className="u-sm-up-hide">
+      <Media at="sm">
         <Spacer size="xloose" />
-      </div>
+      </Media>
 
       <VisuallyHidden>
         <BaseHeader {...props} />
