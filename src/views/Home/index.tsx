@@ -6,7 +6,7 @@ import Feed from './Feed'
 import Sidebar from './Sidebar'
 
 const DynamicAnnouncements = dynamic(() => import('./Announcements'), {
-  ssr: false,
+  ssr: true,
 })
 
 const Home = () => {

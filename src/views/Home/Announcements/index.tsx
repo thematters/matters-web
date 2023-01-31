@@ -72,7 +72,8 @@ const Announcements = () => {
   })
 
   // determine whether announcement should be shown or not
-  const storedValue = storage.get(STORAGE_KEY_ANNOUNCEMENT)
+  const storedValue =
+    typeof window !== 'undefined' ? storage.get(STORAGE_KEY_ANNOUNCEMENT) : {}
   const storedTime =
     typeof storedValue === 'number'
       ? storedValue
