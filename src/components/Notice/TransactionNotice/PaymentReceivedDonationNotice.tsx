@@ -41,7 +41,10 @@ const PaymentReceivedDonationNotice = ({
             en="supported your article "
           />
           {tx && (
-            <span className="highlight">
+            <span
+              className="highlight"
+              data-test-id={TEST_ID.PAYMENT_RECEIVE_DONATION_AMOUNT}
+            >
               {tx.amount} {tx.currency}
             </span>
           )}
