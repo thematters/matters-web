@@ -107,21 +107,20 @@ const CricleDiscussion = () => {
   /**
    * Data Fetching
    */
-  const // fetchDicussion,
+  const {
+    data: discussionData,
+    loading: discussionLoading,
+    fetchMore,
+    refetch,
+  } = usePublicQuery<DiscussionCommentsQuery>(
+    DISCUSSION_COMMENTS,
     {
-      data: discussionData,
-      loading: discussionLoading,
-      fetchMore,
-      refetch,
-    } = usePublicQuery<DiscussionCommentsQuery>(
-      DISCUSSION_COMMENTS,
-      {
-        fetchPolicy: 'network-only',
-        variables: { name },
-        skip: !hasPermission,
-      },
-      { publicQuery: !viewer.isAuthed }
-    )
+      fetchPolicy: 'network-only',
+      variables: { name },
+      skip: !hasPermission,
+    },
+    { publicQuery: !viewer.isAuthed }
+  )
 
   // load next page
   const loadMore = async (params?: { before: string }) => {
