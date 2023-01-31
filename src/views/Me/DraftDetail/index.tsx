@@ -147,7 +147,11 @@ const DraftDetail = () => {
 
   return (
     <Layout.Main
-      aside={<Sidebar draft={draft} ownCircles={ownCircles} />}
+      aside={
+        <Media greaterThanOrEqual="xl">
+          <Sidebar draft={draft} ownCircles={ownCircles} />
+        </Media>
+      }
       inEditor
     >
       <Layout.Header

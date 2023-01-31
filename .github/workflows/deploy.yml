@@ -77,12 +77,6 @@ jobs:
           && npm install --production --legacy-peer-deps \
           && zip -r --symlinks deploy.zip . -x .git/\*
 
-      # === `develop` branch ===
-      # - name: Upload Assets (develop)
-      #   if: github.base_ref == 'develop'
-      #   run: |
-      #     aws s3 sync .next s3://web-develop.matters.news/_next
-
       - name: Upload Assets (develop - R2)
         if: github.base_ref == 'develop'
         uses: wei/rclone@v1
@@ -93,7 +87,7 @@ jobs:
           RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.RCLONE_CONFIG_R2_SECRET_ACCESS_KEY }}
           RCLONE_CONFIG_R2_ENDPOINT: ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
         with:
-          args: sync .next r2:matters-assets-next-develop/_next -P
+          args: sync .next/static r2:matters-assets-next-develop/_next/static -P
 
       - name: Deploy to EB (develop)
         if: github.base_ref == 'develop'
@@ -110,12 +104,6 @@ jobs:
           use_existing_version_if_available: true
           wait_for_deployment: true
 
-      # === `master` branch ===
-      # - name: Upload Assets (production)
-      #   if: github.base_ref == 'master'
-      #   run: |
-      #     aws s3 sync .next s3://matters.news/_next
-
       - name: Upload Assets (production - R2)
         if: github.base_ref == 'master'
         uses: wei/rclone@v1
@@ -126,7 +114,7 @@ jobs:
           RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.RCLONE_CONFIG_R2_SECRET_ACCESS_KEY }}
           RCLONE_CONFIG_R2_ENDPOINT: ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
         with:
-          args: sync .next r2:matters-assets-next/_next -P
+          args: sync .next/static r2:matters-assets-next/_next/static -P
 
       - name: Deploy to EB (production)
         if: github.base_ref == 'master'
