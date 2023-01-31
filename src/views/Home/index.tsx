@@ -6,7 +6,7 @@ import Feed from './Feed'
 import Sidebar from './Sidebar'
 
 const DynamicAnnouncements = dynamic(() => import('./Announcements'), {
-  ssr: true,
+  ssr: true, // enable for first screen
 })
 
 const Home = () => {

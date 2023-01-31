@@ -16,7 +16,6 @@ import {
   Translate,
   useEventListener,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -86,8 +85,6 @@ const CircleProfile = () => {
     loadPrivate()
   }
   useEventListener(REFETCH_CIRCLE_DETAIL, refetch)
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
 
   const description = circle ? stripSpaces(circle.description) : ''
 

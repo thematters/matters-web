@@ -5,7 +5,6 @@ import {
   setUserId,
 } from 'firebase/analytics'
 import { initializeApp } from 'firebase/app'
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useEffect, useRef } from 'react'
 
@@ -131,19 +130,3 @@ export const AnalyticsListener = ({
   })
   return null
 }
-
-AnalyticsListener.fragments = {
-  user: gql`
-    fragment AnalyticsUser on User {
-      id
-      userName
-      info {
-        email
-      }
-    }
-  `,
-}
-
-export * from './CardExposureTracker'
-export * from './PageViewTracker'
-export * from './TagExposureTracker'

@@ -39,7 +39,7 @@ const ME_BOOKMARK_FEED = gql`
 `
 
 const BaseMeBookmarks = () => {
-  const { data, loading, error, fetchMore, refetch } =
+  const { data, loading, error, fetchMore } =
     useQuery<MeBookmarkFeedQuery>(ME_BOOKMARK_FEED)
 
   if (loading) {
@@ -69,11 +69,7 @@ const BaseMeBookmarks = () => {
     })
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>

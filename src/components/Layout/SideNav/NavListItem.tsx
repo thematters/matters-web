@@ -24,6 +24,7 @@ const NavListItemButton = forwardRef(
       active,
       onClick,
       isMdUp,
+      canScrollTop,
       ...props
     }: NavListItemButtonProps,
     ref

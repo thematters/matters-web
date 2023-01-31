@@ -9,14 +9,12 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
 import { chains, wagmiProvider } from '~/common/utils'
 import {
-  AnalyticsListener,
   Error,
   FeaturesProvider,
   LanguageProvider,
   Layout,
   MediaContextProvider,
   QueryError,
-  Toast,
   useRoute,
   ViewerProvider,
   ViewerUser,
@@ -26,6 +24,14 @@ import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
 
+const DynamicToastContainer = dynamic(
+  () => import('~/components/Toast').then((mod) => mod.Toast.Container),
+  { ssr: false }
+)
+const DynamicAnalyticsListener = dynamic(
+  () => import('~/components/Analytics').then((mod) => mod.AnalyticsListener),
+  { ssr: false }
+)
 const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
   ssr: false,
 })
@@ -126,8 +132,8 @@ const Root = ({
             <MediaContextProvider>
               {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-              <Toast.Container />
-              <AnalyticsListener user={viewer || {}} />
+              <DynamicToastContainer />
+              <DynamicAnalyticsListener user={viewer || {}} />
               <DynamicGlobalDialogs />
               <DynamicProgressBar />
               <DynamicFingerprint />

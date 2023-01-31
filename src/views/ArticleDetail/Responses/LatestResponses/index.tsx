@@ -23,7 +23,6 @@ import {
   Translate,
   useEventListener,
   usePublicQuery,
-  usePullToRefresh,
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
@@ -163,7 +162,6 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
     loadPrivate(newData)
   }
   useEventListener(REFETCH_RESPONSES, refetch)
-  usePullToRefresh.Handler(refetch)
 
   useEffect(() => {
     if (pageInfo?.startCursor) {

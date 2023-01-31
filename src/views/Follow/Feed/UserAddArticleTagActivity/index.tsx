@@ -1,11 +1,6 @@
 import { analytics } from '~/common/utils'
-import {
-  ArticleDigestFeed,
-  CardExposureTracker,
-  IconUnfollow24,
-  Tag,
-  Translate,
-} from '~/components'
+import { ArticleDigestFeed, IconUnfollow24, Tag, Translate } from '~/components'
+import { CardExposureTracker } from '~/components/Analytics/CardExposureTracker'
 import { UserAddArticleTagActivityFragment } from '~/gql/graphql'
 
 import UnfollowTagActionButton from '../DropdownActions/UnfollowTag'

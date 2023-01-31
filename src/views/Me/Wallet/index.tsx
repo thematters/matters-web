@@ -7,14 +7,7 @@ import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MINIMAL_PAYOUT_AMOUNT,
 } from '~/common/enums'
-import {
-  Form,
-  Head,
-  Layout,
-  PullToRefresh,
-  Spinner,
-  ViewerContext,
-} from '~/components'
+import { Form, Head, Layout, Spinner, ViewerContext } from '~/components'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 import { ExchangeRatesQuery, WalletBalanceQuery } from '~/gql/graphql'
@@ -54,14 +47,11 @@ const Wallet = () => {
     _matchesProperty('from', CURRENCY.LIKE)
   )
 
-  const { data, loading, refetch } = useQuery<WalletBalanceQuery>(
-    WALLET_BALANCE,
-    {
-      fetchPolicy: 'network-only',
-      errorPolicy: 'none',
-      skip: typeof window === 'undefined',
-    }
-  )
+  const { data, loading } = useQuery<WalletBalanceQuery>(WALLET_BALANCE, {
+    fetchPolicy: 'network-only',
+    errorPolicy: 'none',
+    skip: typeof window === 'undefined',
+  })
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const canPayout = balanceHKD >= PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD
   const hasStripeAccount = !!data?.viewer?.wallet.stripeAccount?.id
@@ -88,35 +78,33 @@ const Wallet = () => {
 
       <Head title={{ id: 'myWallet' }} />
 
-      <PullToRefresh refresh={refetch}>
-        <TotalAssets />
+      <TotalAssets />
 
-        <section className="assetsContainer">
-          <FiatCurrencyBalance
-            balanceHKD={balanceHKD}
-            canPayout={canPayout}
-            hasStripeAccount={hasStripeAccount}
-            currency={currency}
-            exchangeRate={exchangeRateHKD?.rate || 0}
-          />
-          <LikeCoinBalance
-            currency={currency}
-            exchangeRate={exchangeRateLIKE?.rate || 0}
-          />
-          <USDTBalance
-            currency={currency}
-            exchangeRate={exchangeRateUSDT?.rate || 0}
-          />
-        </section>
+      <section className="assetsContainer">
+        <FiatCurrencyBalance
+          balanceHKD={balanceHKD}
+          canPayout={canPayout}
+          hasStripeAccount={hasStripeAccount}
+          currency={currency}
+          exchangeRate={exchangeRateHKD?.rate || 0}
+        />
+        <LikeCoinBalance
+          currency={currency}
+          exchangeRate={exchangeRateLIKE?.rate || 0}
+        />
+        <USDTBalance
+          currency={currency}
+          exchangeRate={exchangeRateUSDT?.rate || 0}
+        />
+      </section>
 
-        <Form.List>
-          {hasPaymentPassword && <PaymentPassword />}
-          <ViewStripeCustomerPortal />
-          {hasStripeAccount && <ViewStripeAccount />}
-          <PaymentPointer />
-        </Form.List>
-        <style jsx>{styles}</style>
-      </PullToRefresh>
+      <Form.List>
+        {hasPaymentPassword && <PaymentPassword />}
+        <ViewStripeCustomerPortal />
+        {hasStripeAccount && <ViewStripeAccount />}
+        <PaymentPointer />
+      </Form.List>
+      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

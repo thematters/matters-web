@@ -12,7 +12,6 @@ import {
   IconCopy16,
   LanguageContext,
   Translate,
-  usePullToRefresh,
   ViewerContext,
 } from '~/components'
 import { ViewerLikeInfoQuery } from '~/gql/graphql'
@@ -40,7 +39,7 @@ const WalletSettings = () => {
   const { lang } = useContext(LanguageContext)
 
   const likerId = viewer.liker.likerId
-  const { data, refetch } = useQuery<ViewerLikeInfoQuery>(VIEWER_LIKE_INFO, {
+  const { data } = useQuery<ViewerLikeInfoQuery>(VIEWER_LIKE_INFO, {
     errorPolicy: 'none',
     skip: typeof window === 'undefined',
   })
@@ -49,8 +48,6 @@ const WalletSettings = () => {
     ? ethers.utils.getAddress(data.viewer.info.ethAddress)
     : ''
   const shortAddress = ethAddress ? maskAddress(ethAddress) : ''
-
-  usePullToRefresh.Handler(refetch)
 
   return (
     <Form.List groupName={<Translate id="settingsWallet" />}>

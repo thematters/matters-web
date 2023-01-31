@@ -23,7 +23,6 @@ import {
   Throw404,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -153,9 +152,6 @@ const CricleDiscussion = () => {
   const comments = filterComments<Comment>(
     (edges || []).map(({ node }) => node)
   )
-
-  // refetch & pull to refresh
-  usePullToRefresh.Handler(refetch)
 
   const submitCallback = () => {
     window.dispatchEvent(

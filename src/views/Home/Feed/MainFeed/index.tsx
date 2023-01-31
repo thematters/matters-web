@@ -4,7 +4,6 @@ import { useContext, useEffect, useRef } from 'react'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
-  CardExposureTracker,
   EmptyArticle,
   InfiniteScroll,
   List,
@@ -14,6 +13,7 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
+import { CardExposureTracker } from '~/components/Analytics/CardExposureTracker'
 import {
   HottestFeedPublicQuery,
   IcymiFeedPublicQuery,
@@ -85,17 +85,10 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
    */
   // public data
   const query = FEED_ARTICLES_PUBLIC[sortBy]
-  const {
-    data,
-    error,
-    loading,
-    fetchMore,
-    networkStatus,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<FeedArticlesPublic>(query, {
-    notifyOnNetworkStatusChange: true,
-  })
+  const { data, error, loading, fetchMore, networkStatus, client } =
+    usePublicQuery<FeedArticlesPublic>(query, {
+      notifyOnNetworkStatusChange: true,
+    })
 
   // pagination
   const connectionPath = 'viewer.recommendation.feed'
@@ -158,12 +151,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
     loadPrivate(newData)
   }
 
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-
   /**
    * Render
    */
@@ -206,11 +193,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {mixFeed.map((edge, i) => {
           if (edge?.__typename === 'HorizontalFeed') {

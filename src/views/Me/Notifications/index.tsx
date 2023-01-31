@@ -11,11 +11,9 @@ import {
   List,
   Media,
   Notice,
-  PullToRefresh,
   Spacer,
   Spinner,
   useMutation,
-  usePullToRefresh,
 } from '~/components'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
 import {
@@ -58,7 +56,7 @@ const BaseNotifications = () => {
       update: updateViewerUnreadNoticeCount,
     }
   )
-  const { data, loading, fetchMore, refetch } = useQuery<
+  const { data, loading, fetchMore } = useQuery<
     MeNotificationsQuery,
     { first: number; after?: number }
   >(ME_NOTIFICATIONS, {
@@ -68,8 +66,6 @@ const BaseNotifications = () => {
   useEffect(() => {
     markAllNoticesAsRead()
   }, [])
-
-  usePullToRefresh.Handler(refetch)
 
   const connectionPath = 'viewer.notices'
   const { edges, pageInfo } = data?.viewer?.notices || {}
@@ -125,11 +121,9 @@ const Notifications = () => {
 
       <Head title={{ id: 'notifications' }} />
 
-      <PullToRefresh>
-        <Spacer />
+      <Spacer />
 
-        <BaseNotifications />
-      </PullToRefresh>
+      <BaseNotifications />
     </Layout.Main>
   )
 }

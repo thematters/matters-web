@@ -2,7 +2,8 @@ import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { Tag, TagExposureTracker } from '~/components'
+import { Tag } from '~/components'
+import { TagExposureTracker } from '~/components/Analytics/TagExposureTracker'
 import { TagListArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.css'

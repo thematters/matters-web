@@ -25,14 +25,8 @@ const BaseAuthors = () => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<AllAuthorsPublicQuery>(ALL_AUTHORS_PUBLIC)
+  const { data, loading, error, fetchMore, client } =
+    usePublicQuery<AllAuthorsPublicQuery>(ALL_AUTHORS_PUBLIC)
 
   // pagination
   const connectionPath = 'viewer.recommendation.authors'
@@ -80,12 +74,6 @@ const BaseAuthors = () => {
     loadPrivate(newData)
   }
 
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-
   /**
    * Render
    */
@@ -112,11 +100,7 @@ const BaseAuthors = () => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List hasBorder={false}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>

@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import { analytics } from '~/common/utils'
-import { CardExposureTracker, Slides } from '~/components'
+import { Slides } from '~/components'
+import { CardExposureTracker } from '~/components/Analytics/CardExposureTracker'
 import {
   ArticleRecommendationActivitySource,
   RecommendArticleActivityFragment,

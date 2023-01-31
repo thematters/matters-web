@@ -27,8 +27,7 @@ const Feed = ({ type }: Props) => {
 
   const query = ALL_TAGS_HOTTEST
 
-  const { data, loading, error, fetchMore, refetch } =
-    usePublicQuery<FeedQuery>(query)
+  const { data, loading, error, fetchMore } = usePublicQuery<FeedQuery>(query)
 
   if (loading) {
     return <Spinner />
@@ -64,11 +63,7 @@ const Feed = ({ type }: Props) => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <ul>
         {edges.map(({ node: tag }, i) => (
           <li key={tag.id}>

@@ -1,5 +1,5 @@
 import { providers } from 'ethers'
-import { configureChains } from 'wagmi'
+import { Chain, configureChains } from 'wagmi'
 import { goerli, mainnet, polygon, polygonMumbai } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
@@ -14,7 +14,9 @@ export const featureSupportedChains = {
   ens: isProd ? [mainnet] : [goerli],
 }
 
-const defaultChains = isProd ? [mainnet, polygon] : [goerli, polygonMumbai]
+const defaultChains: Chain[] = isProd
+  ? [mainnet, polygon]
+  : [goerli, polygonMumbai]
 
 export const { chains } = configureChains(defaultChains, [
   alchemyProvider({ apiKey: alchemyId }),
