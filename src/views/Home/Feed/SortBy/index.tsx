@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import {FormattedMessage} from 'react-intl'
 
 import {
   ConnectWalletButton,
@@ -38,8 +37,7 @@ const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
       }
     >
       <Tabs.Tab onClick={() => setFeedType('hottest')} selected={isHottest}>
-        {/* <Translate id="hottest" /> */}
-        <FormattedMessage defaultMessage="Hottest" description="hottest" />
+        <Translate id="hottest" />
       </Tabs.Tab>
 
       <Tabs.Tab onClick={() => setFeedType('newest')} selected={isNewset}>

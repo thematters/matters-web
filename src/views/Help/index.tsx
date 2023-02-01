@@ -1,25 +1,46 @@
+import type { GetStaticPropsContext } from 'next'
 import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
 import { GUIDE_LINKS, PATHS } from '~/common/enums'
+import loadIntlMessages from '~/common/utils/loadIntlMessages'
 import { Form, LanguageContext, Layout, Spacer, Translate } from '~/components'
 
 import styles from './styles.css'
 
+export async function getStaticProps({
+  defaultLocale,
+  locale,
+}: GetStaticPropsContext) {
+  return {
+    props: {
+      intlMessages: await loadIntlMessages(locale as string, defaultLocale),
+    },
+  }
+}
+
 const BaseHelp = () => {
   const { lang } = useContext(LanguageContext)
   const year = new Date().getFullYear()
+  const intl = useIntl()
 
   return (
     <>
       <Form.List>
         <Form.List.Item
           role="link"
-          title={<Translate id="about" />}
+          title={intl.formatMessage({
+            defaultMessage: '關於我們',
+            description: '關於',
+          })}
           href={PATHS.ABOUT}
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="guide" />}
+          title={intl.formatMessage({
+            defaultMessage: '玩轉 Matters 實用指南',
+            description: '指南',
+          })}
           href={PATHS.GUIDE}
         />
         <Form.List.Item
