@@ -7,7 +7,14 @@ import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MINIMAL_PAYOUT_AMOUNT,
 } from '~/common/enums'
-import { Form, Head, Layout, Spinner, ViewerContext } from '~/components'
+import {
+  Form,
+  Head,
+  Layout,
+  Spinner,
+  ViewerContext,
+  WagmiProvider,
+} from '~/components'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 import { ExchangeRatesQuery, WalletBalanceQuery } from '~/gql/graphql'
@@ -92,10 +99,12 @@ const Wallet = () => {
           currency={currency}
           exchangeRate={exchangeRateLIKE?.rate || 0}
         />
-        <USDTBalance
-          currency={currency}
-          exchangeRate={exchangeRateUSDT?.rate || 0}
-        />
+        <WagmiProvider>
+          <USDTBalance
+            currency={currency}
+            exchangeRate={exchangeRateUSDT?.rate || 0}
+          />
+        </WagmiProvider>
       </section>
 
       <Form.List>

@@ -1,5 +1,7 @@
-import { Chain, configureChains } from 'wagmi'
+import { Chain, configureChains, createClient, createStorage } from 'wagmi'
 import { goerli, mainnet, polygon, polygonMumbai } from 'wagmi/chains'
+import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 
@@ -21,6 +23,37 @@ export const { provider: wagmiProvider, chains } = configureChains(
   defaultChains,
   [alchemyProvider({ apiKey: alchemyId }), publicProvider()]
 )
+
+export const wagmiClient = createClient({
+  autoConnect: true,
+  connectors: [
+    new MetaMaskConnector({
+      chains,
+      options: {
+        // For disconnecting from metamask
+        shimDisconnect: true,
+        UNSTABLE_shimOnConnectSelectAccount: true,
+      },
+    }),
+    new WalletConnectConnector({
+      chains,
+      options: {
+        qrcode: true,
+      },
+    }),
+  ],
+  provider: wagmiProvider,
+  /*
+  FIXME: need to find a way of clearing ens name cache instead of clearing the global cache
+  */
+  storage: createStorage({
+    storage: {
+      getItem: () => null,
+      setItem: () => null,
+      removeItem: () => null,
+    },
+  }),
+})
 
 export const maskAddress = (address: string, prefixLen: number = 6) => {
   return `${address.substring(0, prefixLen)}...${address.substring(

@@ -1,39 +1,6 @@
-import { createClient, createStorage, WagmiConfig } from 'wagmi'
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+import { WagmiConfig } from 'wagmi'
 
-import { chains, wagmiProvider } from '~/common/utils'
-
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors: [
-    new MetaMaskConnector({
-      chains,
-      options: {
-        // For disconnecting from metamask
-        shimDisconnect: true,
-        UNSTABLE_shimOnConnectSelectAccount: true,
-      },
-    }),
-    new WalletConnectConnector({
-      chains,
-      options: {
-        qrcode: true,
-      },
-    }),
-  ],
-  provider: wagmiProvider,
-  /*
-  FIXME: need to find a way of clearing ens name cache instead of clearing the global cache
-  */
-  storage: createStorage({
-    storage: {
-      getItem: () => null,
-      setItem: () => null,
-      removeItem: () => null,
-    },
-  }),
-})
+import { wagmiClient } from '~/common/utils'
 
 /**
  * Currently, we don't use this component on <Root>
