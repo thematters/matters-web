@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 import { FeaturesProvider, ViewerProvider } from '~/components'
-import { analyticsUserFragment } from '~/components/Analytics/gql'
+import { analyticsUserFragment } from '~/components/Analytics/AnalyticsListener/gql'
 
 const fragments = {
   user: {

@@ -1,5 +1,5 @@
 import contentHash from '@ensdomains/content-hash'
-import { namehash } from 'ethers/lib/utils'
+import { namehash } from '@ethersproject/hash'
 import { Fragment, useContext, useEffect, useState } from 'react'
 import {
   useAccount,

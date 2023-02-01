@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import contentHash from '@ensdomains/content-hash'
+import { namehash } from '@ethersproject/hash'
 import classNames from 'classnames'
-import { namehash } from 'ethers/lib/utils'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'

@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
@@ -40,11 +41,14 @@ import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
 import TraveloggersAvatar from './TraveloggersAvatar'
-import WalletLabel from './WalletLabel'
 
 interface FingerprintButtonProps {
   user: AuthorRssFeedFragment
 }
+
+const DynamicWalletLabel = dynamic(() => import('./WalletLabel'), {
+  ssr: false,
+})
 
 const RssFeedButton = ({ user }: FingerprintButtonProps) => {
   const { lang } = useContext(LanguageContext)
@@ -243,7 +247,9 @@ export const UserProfile = () => {
             {!isMe && <FollowUserButton.State user={user} />}
           </section>
 
-          {user?.info.ethAddress && <WalletLabel user={user} isMe={isMe} />}
+          {user?.info.ethAddress && (
+            <DynamicWalletLabel user={user} isMe={isMe} />
+          )}
 
           <Expandable
             content={user.info.description}

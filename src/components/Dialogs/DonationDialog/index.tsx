@@ -11,6 +11,7 @@ import {
   useDialogSwitch,
   useStep,
   ViewerContext,
+  WagmiProvider,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
@@ -57,17 +58,14 @@ const DynamicPayToFormConfirm = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/Confirm'),
   { loading: Spinner }
 )
-
 const DynamicPayToFormCurrencyChoice = dynamic(
-  () => import('~/components/Forms/PaymentForm/PayTo/CurrencyChoice/index'),
+  () => import('~/components/Forms/PaymentForm/PayTo/CurrencyChoice'),
   { loading: Spinner }
 )
-
 const DynamicWalletAuthFormSelect = dynamic(
   () => import('~/components/Forms/WalletAuthForm/Select'),
   { ssr: false, loading: Spinner }
 )
-
 const DynamicPayToFormSetAmount = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/SetAmount'),
   { loading: Spinner }
@@ -236,110 +234,112 @@ const BaseDonationDialog = ({
           />
         )}
 
-        {isCurrencyChoice && (
-          <DynamicPayToFormCurrencyChoice
-            recipient={recipient}
-            article={article}
-            switchToSetAmount={(c: CURRENCY) => {
-              setCurrency(c)
-              forward('setAmount')
-            }}
-            switchToWalletSelect={() => {
-              forward('walletSelect')
-            }}
-          />
-        )}
+        <WagmiProvider>
+          {isCurrencyChoice && (
+            <DynamicPayToFormCurrencyChoice
+              recipient={recipient}
+              article={article}
+              switchToSetAmount={(c: CURRENCY) => {
+                setCurrency(c)
+                forward('setAmount')
+              }}
+              switchToWalletSelect={() => {
+                forward('walletSelect')
+              }}
+            />
+          )}
 
-        {isWalletSelect && (
-          <DynamicWalletAuthFormSelect
-            purpose="dialog"
-            submitCallback={() => {
-              forward('currencyChoice')
-            }}
-            back={() => {
-              forward('currencyChoice')
-            }}
-            closeDialog={closeDialog}
-          />
-        )}
+          {isWalletSelect && (
+            <DynamicWalletAuthFormSelect
+              purpose="dialog"
+              submitCallback={() => {
+                forward('currencyChoice')
+              }}
+              back={() => {
+                forward('currencyChoice')
+              }}
+              closeDialog={closeDialog}
+            />
+          )}
 
-        {isSetAmount && (
-          <DynamicPayToFormSetAmount
-            currency={currency}
-            recipient={recipient}
-            article={article}
-            submitCallback={setAmountCallback}
-            switchToCurrencyChoice={() => {
-              forward('currencyChoice')
-            }}
-            switchToAddCredit={() => {
-              forward('addCredit')
-            }}
-            setTabUrl={setTabUrl}
-            setTx={setTx}
-            targetId={targetId}
-          />
-        )}
+          {isSetAmount && (
+            <DynamicPayToFormSetAmount
+              currency={currency}
+              recipient={recipient}
+              article={article}
+              submitCallback={setAmountCallback}
+              switchToCurrencyChoice={() => {
+                forward('currencyChoice')
+              }}
+              switchToAddCredit={() => {
+                forward('addCredit')
+              }}
+              setTabUrl={setTabUrl}
+              setTx={setTx}
+              targetId={targetId}
+            />
+          )}
 
-        {isConfirm && (
-          <DynamicPayToFormConfirm
-            article={article}
-            amount={amount}
-            currency={currency}
-            recipient={recipient}
-            switchToSetAmount={() => forward('setAmount')}
-            submitCallback={() => forward('processing')}
-            switchToResetPassword={() => forward('resetPassword')}
-            switchToCurrencyChoice={() => forward('currencyChoice')}
-            targetId={targetId}
-            openTabCallback={setAmountOpenTabCallback}
-            tabUrl={tabUrl}
-            tx={tx}
-          />
-        )}
+          {isConfirm && (
+            <DynamicPayToFormConfirm
+              article={article}
+              amount={amount}
+              currency={currency}
+              recipient={recipient}
+              switchToSetAmount={() => forward('setAmount')}
+              submitCallback={() => forward('processing')}
+              switchToResetPassword={() => forward('resetPassword')}
+              switchToCurrencyChoice={() => forward('currencyChoice')}
+              targetId={targetId}
+              openTabCallback={setAmountOpenTabCallback}
+              tabUrl={tabUrl}
+              tx={tx}
+            />
+          )}
 
-        {isProcessing && (
-          <DynamicPaymentProcessingForm
-            amount={amount}
-            currency={currency}
-            recipient={recipient}
-            closeDialog={closeDialog}
-            nextStep={() => {
-              closeDialog()
-            }}
-            txId={payToTx?.id || ''}
-            windowRef={windowRef}
-            article={article}
-            targetId={targetId}
-            switchToConfirm={() => forward('confirm')}
-            switchToCurrencyChoice={() => forward('currencyChoice')}
-          />
-        )}
+          {isProcessing && (
+            <DynamicPaymentProcessingForm
+              amount={amount}
+              currency={currency}
+              recipient={recipient}
+              closeDialog={closeDialog}
+              nextStep={() => {
+                closeDialog()
+              }}
+              txId={payToTx?.id || ''}
+              windowRef={windowRef}
+              article={article}
+              targetId={targetId}
+              switchToConfirm={() => forward('confirm')}
+              switchToCurrencyChoice={() => forward('currencyChoice')}
+            />
+          )}
 
-        {isComplete && (
-          <DynamicPayToFormComplete
-            callback={completeCallback}
-            recipient={recipient}
-            targetId={targetId}
-          />
-        )}
+          {isComplete && (
+            <DynamicPayToFormComplete
+              callback={completeCallback}
+              recipient={recipient}
+              targetId={targetId}
+            />
+          )}
 
-        {isSetPaymentPassword && (
-          <DynamicPaymentSetPasswordForm
-            submitCallback={() => forward('confirm')}
-          />
-        )}
+          {isSetPaymentPassword && (
+            <DynamicPaymentSetPasswordForm
+              submitCallback={() => forward('confirm')}
+            />
+          )}
 
-        {isAddCredit && (
-          <DynamicAddCreditForm callbackButtons={ContinueDonationButton} />
-        )}
+          {isAddCredit && (
+            <DynamicAddCreditForm callbackButtons={ContinueDonationButton} />
+          )}
 
-        {isResetPassword && (
-          <DynamicPaymentResetPasswordForm
-            callbackButtons={ContinueDonationButton}
-            closeDialog={closeDialog}
-          />
-        )}
+          {isResetPassword && (
+            <DynamicPaymentResetPasswordForm
+              callbackButtons={ContinueDonationButton}
+              closeDialog={closeDialog}
+            />
+          )}
+        </WagmiProvider>
       </Dialog>
     </>
   )

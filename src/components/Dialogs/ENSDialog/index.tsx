@@ -13,21 +13,22 @@ interface ENSDialogProps {
   defaultStep?: Step
 }
 
+const DynamicWagmiProvider = dynamic(
+  () => import('~/components/WagmiProvider').then((mod) => mod.WagmiProvider),
+  { loading: Spinner }
+)
 const DynamicConnectWallet = dynamic(() => import('./ConnectWallet'), {
   ssr: false,
   loading: Spinner,
 })
-
 const DynamicWalletAuthFormSelect = dynamic(
   () => import('~/components/Forms/WalletAuthForm/Select'),
   { ssr: false, loading: Spinner }
 )
-
 const DynamicLinkENS = dynamic(() => import('./LinkENS'), {
   ssr: false,
   loading: Spinner,
 })
-
 const DynamicComplete = dynamic(() => import('./Complete'), {
   ssr: false,
   loading: Spinner,
@@ -71,41 +72,43 @@ const BaseENSDilaog = ({
           <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
         )}
 
-        {isConfirmAddress && (
-          <DynamicConnectWallet
-            switchToWalletSelect={() => {
-              forward('walletSelect')
-            }}
-            switchToLinkENS={() => {
-              forward('linkENS')
-            }}
-          />
-        )}
+        <DynamicWagmiProvider>
+          {isConfirmAddress && (
+            <DynamicConnectWallet
+              switchToWalletSelect={() => {
+                forward('walletSelect')
+              }}
+              switchToLinkENS={() => {
+                forward('linkENS')
+              }}
+            />
+          )}
 
-        {isWalletSelect && (
-          <DynamicWalletAuthFormSelect
-            purpose="dialog"
-            submitCallback={() => {
-              forward('linkENS')
-            }}
-            closeDialog={closeDialog}
-          />
-        )}
+          {isWalletSelect && (
+            <DynamicWalletAuthFormSelect
+              purpose="dialog"
+              submitCallback={() => {
+                forward('linkENS')
+              }}
+              closeDialog={closeDialog}
+            />
+          )}
 
-        {isLinkENS && (
-          <DynamicLinkENS
-            user={user}
-            switchToWalletSelect={() => {
-              forward('walletSelect')
-            }}
-            switchToComplete={(hash: string) => {
-              setTxHash(hash)
-              forward('complete')
-            }}
-          />
-        )}
+          {isLinkENS && (
+            <DynamicLinkENS
+              user={user}
+              switchToWalletSelect={() => {
+                forward('walletSelect')
+              }}
+              switchToComplete={(hash: string) => {
+                setTxHash(hash)
+                forward('complete')
+              }}
+            />
+          )}
 
-        {isComplete && txHash && <DynamicComplete txHash={txHash} />}
+          {isComplete && txHash && <DynamicComplete txHash={txHash} />}
+        </DynamicWagmiProvider>
       </Dialog>
     </>
   )

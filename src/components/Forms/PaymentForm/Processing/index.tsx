@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import { ethers } from 'ethers'
+import { parseUnits } from '@ethersproject/units'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
@@ -217,7 +217,7 @@ const USDTProcessingForm: React.FC<Props> = ({
     args: [
       recipient.info.ethAddress as `0x${string}`,
       process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
-      ethers.utils.parseUnits(amount.toString(), balanceUSDTData?.decimals),
+      parseUnits(amount.toString(), balanceUSDTData?.decimals),
       `ipfs://${article?.dataHash}`,
     ],
   })

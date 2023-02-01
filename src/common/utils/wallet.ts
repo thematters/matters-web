@@ -1,4 +1,3 @@
-import { providers } from 'ethers'
 import { Chain, configureChains } from 'wagmi'
 import { goerli, mainnet, polygon, polygonMumbai } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
@@ -18,13 +17,10 @@ const defaultChains: Chain[] = isProd
   ? [mainnet, polygon]
   : [goerli, polygonMumbai]
 
-export const { chains } = configureChains(defaultChains, [
-  alchemyProvider({ apiKey: alchemyId }),
-  publicProvider(),
-])
-
-export const wagmiProvider = ({ chainId }: { chainId?: any }) =>
-  new providers.AlchemyProvider(chainId, alchemyId)
+export const { provider: wagmiProvider, chains } = configureChains(
+  defaultChains,
+  [alchemyProvider({ apiKey: alchemyId }), publicProvider()]
+)
 
 export const maskAddress = (address: string, prefixLen: number = 6) => {
   return `${address.substring(0, prefixLen)}...${address.substring(

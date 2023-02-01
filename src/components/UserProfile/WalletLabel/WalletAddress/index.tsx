@@ -1,4 +1,4 @@
-import { ethers } from 'ethers'
+import { getAddress } from '@ethersproject/address'
 import { useContext } from 'react'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
@@ -56,7 +56,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
     <CopyToClipboard text={ensName || address}>
       <Button {...buttonProps} aria-label={translate({ id: 'copy', lang })}>
         <TextIcon {...textIconProps} icon={<IconCopy16 size="sm" />}>
-          {ensName || maskAddress(ethers.utils.getAddress(address))}
+          {ensName || maskAddress(getAddress(address))}
         </TextIcon>
       </Button>
     </CopyToClipboard>

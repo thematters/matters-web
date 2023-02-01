@@ -6,18 +6,21 @@ import {
 } from 'firebase/analytics'
 import { initializeApp } from 'firebase/app'
 import _get from 'lodash/get'
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
 import { deferTry } from '~/common/utils'
+import { useEventListener } from '~/components'
 import { AnalyticsUserFragment } from '~/gql/graphql'
-
-import { useEventListener } from '../Hook'
 
 declare global {
   interface Window {
     gtag: any
   }
+}
+
+export type AnalyticsListenerProps = {
+  user: AnalyticsUserFragment | {}
 }
 
 const FIREBASE_CONFIG = process.env.NEXT_PUBLIC_FIREBASE_CONFIG
@@ -106,10 +109,8 @@ const handleAnalytics = async ({
   }
 }
 
-export const AnalyticsListener = ({
+export const AnalyticsListener: React.FC<AnalyticsListenerProps> = ({
   user,
-}: {
-  user: AnalyticsUserFragment | {}
 }) => {
   const analyticsRef = useRef<Analytics>()
 
@@ -128,5 +129,6 @@ export const AnalyticsListener = ({
       handleAnalytics({ detail, user, analytics: analyticsRef.current })
     )
   })
+
   return null
 }
