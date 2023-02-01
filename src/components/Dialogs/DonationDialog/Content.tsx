@@ -1,8 +1,7 @@
 import dynamic from 'next/dynamic'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { analytics } from '~/common/utils'
 import {
   Dialog,
   Spinner,
@@ -10,22 +9,9 @@ import {
   ViewerContext,
   WagmiProvider,
 } from '~/components'
-import {
-  ArticleDetailPublicQuery,
-  PayToMutation,
-  UserDonationRecipientFragment,
-} from '~/gql/graphql'
+import { PayToMutation } from '~/gql/graphql'
 
-type Step =
-  | 'currencyChoice'
-  | 'walletSelect'
-  | 'setAmount'
-  | 'addCredit'
-  | 'complete'
-  | 'confirm'
-  | 'processing'
-  | 'resetPassword'
-  | 'setPaymentPassword'
+import { BaseDonationDialogProps, Step } from './types'
 
 interface SetAmountCallbackValues {
   amount: number
@@ -37,15 +23,11 @@ interface SetAmountOpenTabCallbackValues {
   transaction: PayToMutation['payTo']['transaction']
 }
 
-export interface DonationDialogContentProps {
+export type DonationDialogContentProps = BaseDonationDialogProps & {
   closeDialog: () => void
   forward: (step: Step) => void
   back: () => void
   currStep: Step
-  completeCallback?: () => void
-  recipient: UserDonationRecipientFragment
-  article: NonNullable<ArticleDetailPublicQuery['article']>
-  targetId: string
 }
 
 const DynamicPayToFormComplete = dynamic(
@@ -84,8 +66,17 @@ const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
   { loading: Spinner }
 )
+const ContinueDonationButton = ({
+  forward,
+}: {
+  forward: (step: Step) => void
+}) => (
+  <Dialog.Footer.Button onClick={() => forward('setAmount')}>
+    <Translate zh_hant="回到支持" zh_hans="回到支持" />
+  </Dialog.Footer.Button>
+)
 
-const BaseDonationDialogContent = ({
+const DonationDialogContent = ({
   closeDialog: baseCloseDialog,
   forward,
   back,
@@ -128,22 +119,14 @@ const BaseDonationDialogContent = ({
     baseCloseDialog()
   }
 
-  const ContinueDonationButton = (
-    <Dialog.Footer.Button onClick={() => forward('setAmount')}>
-      <Translate zh_hant="回到支持" zh_hans="回到支持" />
-    </Dialog.Footer.Button>
-  )
-
   /**
    * Wallet
    */
-
   const isWalletSelect = currStep === 'walletSelect'
 
   /**
    * Donation
    */
-
   const isCurrencyChoice = currStep === 'currencyChoice'
   // complete dialog for donation
   const isComplete = currStep === 'complete'
@@ -165,14 +148,8 @@ const BaseDonationDialogContent = ({
   const isResetPassword = currStep === 'resetPassword'
   const isSetPaymentPassword = currStep === 'setPaymentPassword'
 
-  // const isHKD = currency === CURRENCY.HKD
-
-  useEffect(() => {
-    analytics.trackEvent('view_donation_dialog', { step: currStep })
-  }, [currStep])
-
   return (
-    <>
+    <WagmiProvider>
       {!isProcessing && !isWalletSelect && (
         <Dialog.Header
           closeDialog={closeDialog}
@@ -292,23 +269,19 @@ const BaseDonationDialogContent = ({
       )}
 
       {isAddCredit && (
-        <DynamicAddCreditForm callbackButtons={ContinueDonationButton} />
+        <DynamicAddCreditForm
+          callbackButtons={<ContinueDonationButton forward={forward} />}
+        />
       )}
 
       {isResetPassword && (
         <DynamicPaymentResetPasswordForm
-          callbackButtons={ContinueDonationButton}
+          callbackButtons={<ContinueDonationButton forward={forward} />}
           closeDialog={closeDialog}
         />
       )}
-    </>
+    </WagmiProvider>
   )
 }
-
-const DonationDialogContent: React.FC<DonationDialogContentProps> = (props) => (
-  <WagmiProvider>
-    <BaseDonationDialogContent {...props} />
-  </WagmiProvider>
-)
 
 export default DonationDialogContent

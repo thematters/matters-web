@@ -3,31 +3,13 @@ import { useEffect } from 'react'
 
 import { analytics } from '~/common/utils'
 import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
-import {
-  ArticleDetailPublicQuery,
-  UserDonationRecipientFragment,
-} from '~/gql/graphql'
 
 import { fragments } from './gql'
+import { BaseDonationDialogProps, Step } from './types'
 
-type Step =
-  | 'currencyChoice'
-  | 'walletSelect'
-  | 'setAmount'
-  | 'addCredit'
-  | 'complete'
-  | 'confirm'
-  | 'processing'
-  | 'resetPassword'
-  | 'setPaymentPassword'
-
-interface DonationDialogProps {
+type DonationDialogProps = BaseDonationDialogProps & {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-  completeCallback?: () => void
   defaultStep?: Step
-  recipient: UserDonationRecipientFragment
-  article: NonNullable<ArticleDetailPublicQuery['article']>
-  targetId: string
 }
 
 const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
@@ -53,6 +35,7 @@ const BaseDonationDialog = ({
     baseCloseDialog()
   }
 
+  // complete dialog for donation
   const isComplete = currStep === 'complete'
 
   useEffect(() => {
