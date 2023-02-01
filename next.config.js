@@ -74,7 +74,7 @@ const nextConfig = {
   i18n: {
     locales: ['zh-Hant', 'zh-Hans', 'en', '__defaultLocale'],
     // FIXME: Disable Next.js auto detection and prefixing since we have a fallback strategy based on user request and browser perference in `<LanguageContext>`
-    defaultLocale: 'en',
+    defaultLocale: '__defaultLocale',
     localeDetection: false,
   },
 
