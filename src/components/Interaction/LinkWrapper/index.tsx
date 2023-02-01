@@ -26,6 +26,8 @@ export const LinkWrapper: React.FC<
   disabled,
   onClick,
 
+  testId,
+
   children,
 }) => {
   if (disabled) {
@@ -46,6 +48,7 @@ export const LinkWrapper: React.FC<
             e.stopPropagation()
           }
         }}
+        {...(testId ? { ['data-test-id']: testId } : {})}
       >
         {children}
 

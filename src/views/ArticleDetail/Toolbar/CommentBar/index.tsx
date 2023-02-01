@@ -88,7 +88,7 @@ const Content = ({
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor="grey-lighter"
-      aria-label={translate({ id: 'putComment', lang })}
+      aria-label={`${translate({ id: 'putComment', lang })}…`}
       aria-haspopup="dialog"
       {...(props as ButtonProps)}
     >

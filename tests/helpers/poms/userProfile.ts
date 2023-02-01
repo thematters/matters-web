@@ -4,6 +4,7 @@ import { TEST_ID } from '~/common/enums'
 
 export class UserProfilePage {
   readonly page: Page
+  readonly isMobile: boolean | undefined
 
   // header
   // moreButton: Locator
@@ -25,8 +26,9 @@ export class UserProfilePage {
   // dialog
   readonly dialog: Locator
 
-  constructor(page: Page) {
+  constructor(page: Page, isMobile?: boolean) {
     this.page = page
+    this.isMobile = isMobile
 
     this.feedArticles = page.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
 
