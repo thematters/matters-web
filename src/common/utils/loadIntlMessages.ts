@@ -9,7 +9,7 @@ export default async function loadI18nMessages(
   }
 
   try {
-    return import(`@/compiled-lang/${locale}.json`).then(
+    return import(`@/compiled-lang/${locale.toLocaleLowerCase()}.json`).then(
       (module) => module.default
     )
   } catch (error) {

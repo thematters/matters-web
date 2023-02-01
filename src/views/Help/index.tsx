@@ -1,23 +1,10 @@
-import type { GetStaticPropsContext } from 'next'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
 import { GUIDE_LINKS, PATHS } from '~/common/enums'
-import loadIntlMessages from '~/common/utils/loadIntlMessages'
 import { Form, LanguageContext, Layout, Spacer, Translate } from '~/components'
 
 import styles from './styles.css'
-
-export async function getStaticProps({
-  defaultLocale,
-  locale,
-}: GetStaticPropsContext) {
-  return {
-    props: {
-      intlMessages: await loadIntlMessages(locale as string, defaultLocale),
-    },
-  }
-}
 
 const BaseHelp = () => {
   const { lang } = useContext(LanguageContext)
