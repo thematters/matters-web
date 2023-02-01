@@ -4,9 +4,13 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
     "lib": [
+      "esnext.intl",
+      "es2017.intl",
+      "es2018.intl",
       "dom",
       "dom.iterable",
-      "es2021"
+      "es2021",
+      "es6"
     ],
     "module": "esnext",
     "moduleResolution": "node",
@@ -22,31 +26,15 @@
     "target": "esnext",
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "~/*": [
-        "./src/*"
-      ]
+      "@/*": ["./*"],
+      "~/*": ["./src/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "isolatedModules": true,
     "incremental": true
   },
-  "includes": [
-    "./src/definitions/**/*.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    ".next",
-    "storybook-static",
-    "out"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "includes": ["./src/definitions/**/*.d.ts"],
+  "exclude": ["node_modules", "build", ".next", "storybook-static", "out"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

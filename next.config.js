@@ -27,26 +27,6 @@ const nextConfig = {
       ],
     })
     config.module.rules.push({
-      test: /\.tsx?$/,
-      use: [
-        {
-          loader: 'ts-loader',
-          options: {
-            getCustomTransformers() {
-              return {
-                before: [
-                  transform({
-                    overrideIdFn: '[sha512:contenthash:base64:6]',
-                  }),
-                ],
-              }
-            },
-          },
-        },
-      ],
-      exclude: /node_modules/,
-    })
-    config.module.rules.push({
       test: /\.svg$/,
       use: [
         {
@@ -94,7 +74,7 @@ const nextConfig = {
   i18n: {
     locales: ['zh-Hant', 'zh-Hans', 'en', '__defaultLocale'],
     // FIXME: Disable Next.js auto detection and prefixing since we have a fallback strategy based on user request and browser perference in `<LanguageContext>`
-    defaultLocale: '__defaultLocale',
+    defaultLocale: 'en',
     localeDetection: false,
   },
 
