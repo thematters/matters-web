@@ -6,12 +6,14 @@ import {
 } from 'firebase/analytics'
 import { initializeApp } from 'firebase/app'
 import _get from 'lodash/get'
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
 import { deferTry } from '~/common/utils'
 import { useEventListener } from '~/components'
 import { AnalyticsUserFragment } from '~/gql/graphql'
+
+import { fragments } from './gql'
 
 declare global {
   interface Window {
@@ -109,9 +111,7 @@ const handleAnalytics = async ({
   }
 }
 
-export const AnalyticsListener: React.FC<AnalyticsListenerProps> = ({
-  user,
-}) => {
+export const AnalyticsListener = ({ user }: AnalyticsListenerProps) => {
   const analyticsRef = useRef<Analytics>()
 
   const initAnalytics = async () => {
@@ -132,3 +132,5 @@ export const AnalyticsListener: React.FC<AnalyticsListenerProps> = ({
 
   return null
 }
+
+AnalyticsListener.fragments = fragments

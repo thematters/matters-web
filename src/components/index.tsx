@@ -35,6 +35,7 @@ export * from './Toast'
 /**
  * Compositions
  */
+export * from './Analytics'
 export * from './Appreciation'
 export * from './ArticleDigest'
 export * from './Buttons'

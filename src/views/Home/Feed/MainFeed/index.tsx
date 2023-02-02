@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef } from 'react'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
+  CardExposureTracker,
   EmptyArticle,
   InfiniteScroll,
   List,
@@ -13,7 +14,6 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-import { CardExposureTracker } from '~/components/Analytics/CardExposureTracker'
 import {
   HottestFeedPublicQuery,
   IcymiFeedPublicQuery,
