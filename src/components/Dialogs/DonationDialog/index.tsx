@@ -35,6 +35,41 @@ const BaseDonationDialog = ({
     baseCloseDialog()
   }
 
+  const setAmountCallback = (values: SetAmountCallbackValues) => {
+    setAmount(values.amount)
+    setCurrency(values.currency)
+    if (values.currency === CURRENCY.HKD) {
+      forward(
+        viewer.status?.hasPaymentPassword ? 'confirm' : 'setPaymentPassword'
+      )
+    } else {
+      forward('confirm')
+    }
+  }
+
+  const setAmountOpenTabCallback = (values: SetAmountOpenTabCallbackValues) => {
+    setWindowRef(values.window)
+    setPayToTx(values.transaction)
+    forward('processing')
+  }
+
+  const ContinueDonationButton = (
+    <Dialog.Footer.Button onClick={() => forward('setAmount')}>
+      <Translate zh_hant="回到支持" zh_hans="回到支持" en="Back to support" />
+    </Dialog.Footer.Button>
+  )
+
+  /**
+   * Wallet
+   */
+
+  const isWalletSelect = currStep === 'walletSelect'
+
+  /**
+   * Donation
+   */
+
+  const isCurrencyChoice = currStep === 'currencyChoice'
   // complete dialog for donation
   const isComplete = currStep === 'complete'
 
