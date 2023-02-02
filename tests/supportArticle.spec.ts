@@ -14,7 +14,7 @@ import { users } from './helpers/auth'
 
 test.describe('Support article', () => {
   authedTest(
-    "Alice' article is supported by Bob, and received notification",
+    "Alice' article is supported with HKD by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
       const aliceProfile = new UserProfilePage(alicePage, isMobile)
