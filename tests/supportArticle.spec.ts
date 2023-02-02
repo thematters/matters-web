@@ -2,7 +2,6 @@ import { expect, test } from '@playwright/test'
 import _random from 'lodash/random'
 
 import { TEST_ID } from '~/common/enums'
-import { numAbbr } from '~/common/utils'
 import { stripSpaces } from '~/common/utils/text'
 
 import {
@@ -32,13 +31,15 @@ test.describe('Support article', () => {
       await bobPage.goto(aliceArticleLink)
       const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
 
-      const amount = numAbbr(_random(1, 100, true), 2)
+      const amount = _random(1, 10, false)
 
       // [Bob] Support HKD
       await aliceArticleDetail.supportHKD(users.bob.paymentPassword, amount)
 
-      // [Bob] Expect article detail shows this comment
-      // await expect(bobPage.getByText(commentContent)).toBeVisible()
+      // [Bob] Expect support detail shows View transaction history
+      await expect(
+        bobPage.getByRole('link', { name: 'Transaction History' })
+      ).toBeVisible()
 
       // [Alice] Go to notifications page
       const aliceNotifications = new NotificationsPage(alicePage)

@@ -162,15 +162,36 @@ export class ArticleDetailPage {
     return content
   }
 
-  async supportHKD(password: string, amount: string) {
+  async supportHKD(password: string, amount: number) {
     // Open support dialog
     await this.supportButton.click()
 
     // select fiat currency
     await this.dialog.getByRole('button', { name: 'Fiat Currency' }).click()
 
+    // top-up
+    await this.dialog.getByRole('button', { name: 'Top Up' }).click()
+    await this.dialog
+      .getByLabel('Enter amount')
+      .fill(Math.max(20, amount).toString())
+    await this.dialog.locator('#field-checkout').click() // activate form to fillable
+    await this.dialog
+      .frameLocator('iframe')
+      .getByPlaceholder('Card number')
+      .fill('4242424242424242')
+    const YY = new Date(Date.now()).getFullYear() - 2000 + 1
+    await this.dialog
+      .frameLocator('iframe')
+      .getByPlaceholder('MM / YY')
+      .fill(`12${YY}`)
+    await this.dialog.frameLocator('iframe').getByPlaceholder('CVC').fill('123')
+    await this.dialog.getByRole('button', { name: 'Confirm' }).click()
+    await this.dialog.getByRole('button', { name: 'Back to support' }).click()
+
     // fill amount hkd
-    await this.dialog.getByPlaceholder('Enter a custom amount').fill(amount)
+    await this.dialog
+      .getByPlaceholder('Enter a custom amount')
+      .fill(amount.toString())
 
     // click next step
     await this.dialog.getByRole('button', { name: 'Next' }).click()
