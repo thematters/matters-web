@@ -11,6 +11,7 @@ interface ResponsiveImageProps {
   size: ToSizedImageURLSize
   smUpSize?: ToSizedImageURLSize
   disabled?: boolean
+  loading?: 'eager' | 'lazy'
 }
 
 const BaseResponsiveImage = ({
@@ -18,6 +19,7 @@ const BaseResponsiveImage = ({
   size,
   smUpSize,
   disabled,
+  loading,
 }: ResponsiveImageProps) => {
   const [error, setError] = useState(false)
 
@@ -25,7 +27,7 @@ const BaseResponsiveImage = ({
 
   // Fallback to the raw `url` if manually disable or responsive image is failed to load
   if (disabled || error) {
-    return <img src={url} loading="lazy" alt="" />
+    return <img src={url} loading={loading} alt="" />
   }
 
   return (
@@ -60,7 +62,7 @@ const BaseResponsiveImage = ({
       <img
         src={url}
         srcSet={toSizedImageURL({ url, size })}
-        loading="lazy"
+        loading={loading}
         alt=""
       />
     </picture>
