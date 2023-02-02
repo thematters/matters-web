@@ -148,7 +148,7 @@ const DraftDetail = () => {
 
   return (
     <Layout.Main
-      aside={<Sidebar draft={draft} ownCircles={ownCircles} />}
+      aside={isLargeUp && <Sidebar draft={draft} ownCircles={ownCircles} />}
       inEditor
     >
       <Layout.Header

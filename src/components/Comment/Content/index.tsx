@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
-import { CommentFormType, Translate } from '~/components'
+import { CommentFormType, Expandable, Translate, useRoute } from '~/components'
 import {
   ContentCommentPrivateFragment,
   ContentCommentPublicFragment,
@@ -44,6 +44,10 @@ const Content = ({ comment, type, size }: ContentProps) => {
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
 
+  // TODO: Will be removed, just for dev
+  const { getQuery } = useRoute()
+  const limit = parseInt(getQuery('limit')) || 8
+
   const contentClasses = classNames({
     content: true,
     [`size-${size}`]: !!size,
@@ -71,14 +75,16 @@ const Content = ({ comment, type, size }: ContentProps) => {
   if (state === 'active') {
     return (
       <>
-        <section
-          className={`${contentClasses} u-content-comment`}
-          dangerouslySetInnerHTML={{
-            __html: content || '',
-          }}
-          onClick={captureClicks}
-          data-test-id={TEST_ID.COMMENT_CONETNT}
-        />
+        <Expandable content={content} limit={limit} isRichShow>
+          <section
+            className={`${contentClasses} u-content-comment`}
+            dangerouslySetInnerHTML={{
+              __html: content || '',
+            }}
+            onClick={captureClicks}
+            data-test-id={TEST_ID.COMMENT_CONETNT}
+          />
+        </Expandable>
 
         <style jsx>{styles}</style>
         <style jsx>{contentCommentStyles}</style>

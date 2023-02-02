@@ -1,3 +1,4 @@
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
@@ -30,6 +31,9 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
           <a className="avatar">
+            <VisuallyHidden>
+              <span>{circle.displayName}</span>
+            </VisuallyHidden>
             <CircleAvatar circle={circle} size="xl" />
           </a>
         </Link>
