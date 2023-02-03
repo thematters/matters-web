@@ -5,20 +5,24 @@ import {
   setUserId,
 } from 'firebase/analytics'
 import { initializeApp } from 'firebase/app'
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useEffect, useRef } from 'react'
 
 import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
 import { deferTry } from '~/common/utils'
+import { useEventListener } from '~/components'
 import { AnalyticsUserFragment } from '~/gql/graphql'
 
-import { useEventListener } from '../Hook'
+import { fragments } from './gql'
 
 declare global {
   interface Window {
     gtag: any
   }
+}
+
+export type AnalyticsListenerProps = {
+  user: AnalyticsUserFragment | {}
 }
 
 const FIREBASE_CONFIG = process.env.NEXT_PUBLIC_FIREBASE_CONFIG
@@ -107,11 +111,7 @@ const handleAnalytics = async ({
   }
 }
 
-export const AnalyticsListener = ({
-  user,
-}: {
-  user: AnalyticsUserFragment | {}
-}) => {
+export const AnalyticsListener = ({ user }: AnalyticsListenerProps) => {
   const analyticsRef = useRef<Analytics>()
 
   const initAnalytics = async () => {
@@ -129,21 +129,8 @@ export const AnalyticsListener = ({
       handleAnalytics({ detail, user, analytics: analyticsRef.current })
     )
   })
+
   return null
 }
 
-AnalyticsListener.fragments = {
-  user: gql`
-    fragment AnalyticsUser on User {
-      id
-      userName
-      info {
-        email
-      }
-    }
-  `,
-}
-
-export * from './CardExposureTracker'
-export * from './PageViewTracker'
-export * from './TagExposureTracker'
+AnalyticsListener.fragments = fragments

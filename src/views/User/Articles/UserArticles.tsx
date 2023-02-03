@@ -15,7 +15,6 @@ import {
   Spinner,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -73,20 +72,14 @@ const UserArticles = () => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<UserArticlesPublicQuery>(
-    query,
-    {
-      variables: { userName },
-    },
-    { publicQuery }
-  )
+  const { data, loading, error, fetchMore, client } =
+    usePublicQuery<UserArticlesPublicQuery>(
+      query,
+      {
+        variables: { userName },
+      },
+      { publicQuery }
+    )
 
   // pagination
   const connectionPath = 'user.articles'
@@ -134,14 +127,6 @@ const UserArticles = () => {
 
     loadPrivate(newData)
   }
-
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

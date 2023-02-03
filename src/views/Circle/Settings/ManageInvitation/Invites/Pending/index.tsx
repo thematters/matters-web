@@ -13,7 +13,6 @@ import {
   Throw404,
   Translate,
   useEventListener,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -64,7 +63,6 @@ const PendingInvites = () => {
   }
 
   useEventListener(REFETCH_CIRCLE_PENDING_INVITES, refetch)
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

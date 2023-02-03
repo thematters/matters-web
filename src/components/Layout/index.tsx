@@ -1,7 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
+import dynamic from 'next/dynamic'
 
-import { Head, Media, OnboardingTasks, SearchBar, useRoute } from '~/components'
+import { Head, Media, SearchBar, useRoute } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ClientPreferenceQuery } from '~/gql/graphql'
 
@@ -13,6 +14,25 @@ import SideFooter from './SideFooter'
 import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.css'
+
+const DynamicOnboardingTasksNavBar = dynamic(
+  () =>
+    import('~/components/OnboardingTasks').then(
+      (mod) => mod.OnboardingTasks.NavBar
+    ),
+  {
+    ssr: true, // enable for first screen
+  }
+)
+const DynamicOnboardingTasksWidget = dynamic(
+  () =>
+    import('~/components/OnboardingTasks').then(
+      (mod) => mod.OnboardingTasks.Widget
+    ),
+  {
+    ssr: true, // enable for first screen
+  }
+)
 
 export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Main: typeof Main
@@ -92,7 +112,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
 
         {showOnboardingTasks && (
           <Media lessThan="xl">
-            <OnboardingTasks.NavBar />
+            <DynamicOnboardingTasksNavBar />
           </Media>
         )}
       </article>
@@ -102,7 +122,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
           <section className="content">
             {!isInSearch && !inEditor && <SearchBar />}
 
-            {showOnboardingTasks && <OnboardingTasks.Widget />}
+            {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
 
             {aside}
 

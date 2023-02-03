@@ -24,10 +24,12 @@ const SearchTag = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore, refetch } =
-    usePublicQuery<SearchTagsPublicQuery>(SEARCH_TAGS_PUBLIC, {
+  const { data, loading, fetchMore } = usePublicQuery<SearchTagsPublicQuery>(
+    SEARCH_TAGS_PUBLIC,
+    {
       variables: { key: q },
-    })
+    }
+  )
 
   // pagination
   const connectionPath = 'search'
@@ -66,11 +68,7 @@ const SearchTag = () => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {edges.map(
           ({ node, cursor }, i) =>

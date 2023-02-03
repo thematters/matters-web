@@ -6,7 +6,6 @@ import {
   Form,
   Head,
   Layout,
-  PullToRefresh,
   Spacer,
   Spinner,
   Translate,
@@ -55,7 +54,7 @@ const BaseNotificationSettings = () => {
   const [update] = useMutation<UpdateViewerNotificationMutation>(
     UPDATE_VIEWER_NOTIFICATION
   )
-  const { data, loading, refetch } = useQuery<ViewerNotificationSettingsQuery>(
+  const { data, loading } = useQuery<ViewerNotificationSettingsQuery>(
     VIEWER_NOTIFICATION_SETTINGS
   )
   const settings = data?.viewer?.settings.notification
@@ -90,7 +89,7 @@ const BaseNotificationSettings = () => {
   }
 
   return (
-    <PullToRefresh refresh={refetch}>
+    <>
       <PreferenceSettings toggle={toggle} settings={settings} />
       <Form.List
         groupName={
@@ -108,7 +107,7 @@ const BaseNotificationSettings = () => {
           href={PATHS.ME_SETTINGS_NOTIFICATION_CIRCLE}
         />
       </Form.List>
-    </PullToRefresh>
+    </>
   )
 }
 

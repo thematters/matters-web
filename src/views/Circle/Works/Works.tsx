@@ -12,7 +12,6 @@ import {
   Throw404,
   useEventListener,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -99,7 +98,6 @@ const CircleDetailWorks = () => {
   }
 
   useEventListener(REFETCH_CIRCLE_DETAIL_ARTICLES, refetch)
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

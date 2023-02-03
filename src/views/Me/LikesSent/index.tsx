@@ -42,8 +42,7 @@ const ME_LIKES_SENT = gql`
 `
 
 const BaseLikesSent = () => {
-  const { data, loading, fetchMore, refetch } =
-    useQuery<MeLikesSentQuery>(ME_LIKES_SENT)
+  const { data, loading, fetchMore } = useQuery<MeLikesSentQuery>(ME_LIKES_SENT)
 
   if (loading) {
     return <Spinner />
@@ -85,11 +84,7 @@ const BaseLikesSent = () => {
     <>
       <LikesTabs activity={data.viewer.activity} />
 
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        pullToRefresh={refetch}
-      >
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>

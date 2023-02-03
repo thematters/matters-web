@@ -5,7 +5,6 @@ import {
   Head,
   Layout,
   Media,
-  PullToRefresh,
   SearchAutoComplete,
   SearchBar,
   SearchOverview,
@@ -78,15 +77,13 @@ const Search = () => {
 
       <Head title={{ id: 'search' }} />
 
-      <PullToRefresh>
-        {isOverview && <SearchOverview inPage />}
-        {isAutoComplete && <SearchAutoComplete searchKey={typingKey} inPage />}
+      {isOverview && <SearchOverview inPage />}
+      {isAutoComplete && <SearchAutoComplete searchKey={typingKey} inPage />}
 
-        {isTagOnly && <SearchTags />}
-        {isUserOnly && <SearchUsers />}
-        {isArticleOnly && <SearchArticles />}
-        {isAggregate && <AggregateResults />}
-      </PullToRefresh>
+      {isTagOnly && <SearchTags />}
+      {isUserOnly && <SearchUsers />}
+      {isArticleOnly && <SearchArticles />}
+      {isAggregate && <AggregateResults />}
     </Layout.Main>
   )
 }

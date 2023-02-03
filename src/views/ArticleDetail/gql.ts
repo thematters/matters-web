@@ -6,10 +6,10 @@ import Content from './Content'
 import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
-import SupportWidget from './SupportWidget'
+import { fragments as supportWidgetFragments } from './SupportWidget/gql'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
-import CircleWall from './Wall/Circle'
+import { fragments as circleWallFragments } from './Wall/Circle/gql'
 
 const articlePublicFragment = gql`
   fragment ArticlePublicArticle on Article {
@@ -77,10 +77,10 @@ const articlePublicFragment = gql`
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.public}
   ${Toolbar.fragments.article.private}
-  ${SupportWidget.fragments.article.public}
-  ${SupportWidget.fragments.article.private}
-  ${CircleWall.fragments.circle.public}
-  ${CircleWall.fragments.circle.private}
+  ${supportWidgetFragments.article.public}
+  ${supportWidgetFragments.article.private}
+  ${circleWallFragments.circle.public}
+  ${circleWallFragments.circle.private}
 `
 
 export const ARTICLE_AVAILABLE_TRANSLATIONS = gql`
@@ -157,8 +157,8 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
   }
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.private}
-  ${SupportWidget.fragments.article.private}
-  ${CircleWall.fragments.circle.private}
+  ${supportWidgetFragments.article.private}
+  ${circleWallFragments.circle.private}
 `
 
 export const ARTICLE_TRANSLATION = gql`

@@ -5,7 +5,6 @@ import {
   Spinner,
   Tag,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
 } from '~/components'
 import { SearchAggregateTagsPublicQuery } from '~/gql/graphql'
@@ -22,15 +21,12 @@ const AggregateTagResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, refetch } =
-    usePublicQuery<SearchAggregateTagsPublicQuery>(
-      SEARCH_AGGREGATE_TAGS_PUBLIC,
-      { variables: { key: q } }
-    )
+  const { data, loading } = usePublicQuery<SearchAggregateTagsPublicQuery>(
+    SEARCH_AGGREGATE_TAGS_PUBLIC,
+    { variables: { key: q } }
+  )
 
   const { edges, pageInfo } = data?.search || {}
-
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

@@ -14,7 +14,6 @@ import {
   Spinner,
   useEventListener,
   usePublicQuery,
-  usePullToRefresh,
   ViewerContext,
 } from '~/components'
 import {
@@ -125,12 +124,6 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
     loadPrivate(newData)
   }
 
-  // refetch, sync & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-
   const sync = async ({
     event,
     differences = 0,
@@ -156,7 +149,6 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
   }
 
   useEventListener(REFETCH_TAG_DETAIL_ARTICLES, sync)
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

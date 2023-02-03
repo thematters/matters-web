@@ -26,17 +26,11 @@ const SearchArticles = () => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    fetchMore,
-    networkStatus,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<SearchArticlesPublicQuery>(SEARCH_ARTICLES_PUBLIC, {
-    variables: { key: q, first: 10 },
-    notifyOnNetworkStatusChange: true,
-  })
+  const { data, loading, fetchMore, networkStatus, client } =
+    usePublicQuery<SearchArticlesPublicQuery>(SEARCH_ARTICLES_PUBLIC, {
+      variables: { key: q, first: 10 },
+      notifyOnNetworkStatusChange: true,
+    })
   const isNewLoading = networkStatus === NetworkStatus.setVariables
 
   // pagination
@@ -89,12 +83,6 @@ const SearchArticles = () => {
     loadPrivate(newData)
   }
 
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-
   /**
    * Render
    */
@@ -107,11 +95,7 @@ const SearchArticles = () => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {edges.map(
           ({ node, cursor }, i) =>

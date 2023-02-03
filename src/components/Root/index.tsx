@@ -3,29 +3,30 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
 import React from 'react'
-import { createClient, createStorage, WagmiConfig } from 'wagmi'
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
-import { chains, wagmiProvider } from '~/common/utils'
 import {
-  AnalyticsListener,
   Error,
   FeaturesProvider,
   LanguageProvider,
   Layout,
   MediaContextProvider,
   QueryError,
-  Toast,
   useRoute,
   ViewerProvider,
   ViewerUser,
 } from '~/components'
-import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
 
+const DynamicToastContainer = dynamic(
+  () => import('~/components/Toast').then((mod) => mod.Toast.Container),
+  { ssr: false }
+)
+const DynamicAnalyticsInitilizer = dynamic(
+  () => import('~/components/Analytics').then((mod) => mod.AnalyticsInitilizer),
+  { ssr: false }
+)
 const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
   ssr: false,
 })
@@ -48,38 +49,6 @@ import('@sentry/browser').then((Sentry) => {
     ignoreErrors: [/.*Timeout.*/, /.*Network.*/],
     sampleRate: 0.1,
   })
-})
-
-// WAGMI
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors: [
-    new MetaMaskConnector({
-      chains,
-      options: {
-        // For disconnecting from metamask
-        shimDisconnect: true,
-        UNSTABLE_shimOnConnectSelectAccount: true,
-      },
-    }),
-    new WalletConnectConnector({
-      chains,
-      options: {
-        qrcode: true,
-      },
-    }),
-  ],
-  provider: wagmiProvider,
-  /*
-  FIXME: need to find a way of clearing ens name cache instead of clearing the global cache
-  */
-  storage: createStorage({
-    storage: {
-      getItem: () => null,
-      setItem: () => null,
-      removeItem: () => null,
-    },
-  }),
 })
 
 const Root = ({
@@ -117,25 +86,21 @@ const Root = ({
   }
 
   return (
-    <WagmiConfig client={wagmiClient}>
-      <ViewerProvider viewer={viewer as ViewerUser}>
-        <PageViewTracker />
+    <ViewerProvider viewer={viewer as ViewerUser}>
+      <LanguageProvider headers={headers}>
+        <FeaturesProvider official={official}>
+          <MediaContextProvider>
+            {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-        <LanguageProvider headers={headers}>
-          <FeaturesProvider official={official}>
-            <MediaContextProvider>
-              {shouldApplyLayout ? <Layout>{children}</Layout> : children}
-
-              <Toast.Container />
-              <AnalyticsListener user={viewer || {}} />
-              <DynamicGlobalDialogs />
-              <DynamicProgressBar />
-              <DynamicFingerprint />
-            </MediaContextProvider>
-          </FeaturesProvider>
-        </LanguageProvider>
-      </ViewerProvider>
-    </WagmiConfig>
+            <DynamicToastContainer />
+            <DynamicAnalyticsInitilizer user={viewer || {}} />
+            <DynamicGlobalDialogs />
+            <DynamicProgressBar />
+            <DynamicFingerprint />
+          </MediaContextProvider>
+        </FeaturesProvider>
+      </LanguageProvider>
+    </ViewerProvider>
   )
 }
 

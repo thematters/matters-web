@@ -1,42 +1,15 @@
 import dynamic from 'next/dynamic'
 
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import {
-  Dialog,
-  Spinner,
-  Translate,
-  useDialogSwitch,
-  useStep,
-} from '~/components'
+import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
 
-type Step =
-  | 'complete'
-  | 'connectStripeAccount'
-  | 'confirm'
-  | 'processing'
-  | 'resetPassword'
+import { Step } from './types'
 
 interface PayoutDialogProps {
   hasStripeAccount: boolean
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicPaymentResetPasswordForm = dynamic(
-  () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: Spinner }
-)
-const DynamicPayoutFormComplete = dynamic(
-  () => import('~/components/Forms/PaymentForm/Payout/Complete'),
-  { loading: Spinner }
-)
-const DynamicPayoutFormConfirm = dynamic(
-  () => import('~/components/Forms/PaymentForm/Payout/Confirm'),
-  { loading: Spinner }
-)
-const DynamicConnectStripeAccountForm = dynamic(
-  () => import('~/components/Forms/PaymentForm/ConnectStripeAccount'),
-  { loading: Spinner }
-)
+const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
 const BasePayoutDialog = ({
   hasStripeAccount,
@@ -49,75 +22,26 @@ const BasePayoutDialog = ({
     openDialog: baseOpenDialog,
     closeDialog,
   } = useDialogSwitch(true)
-  const { currStep, forward, prevStep, back } = useStep<Step>(initialStep)
+  const { currStep, prevStep, forward, back } = useStep<Step>(initialStep)
 
   const openDialog = () => {
     forward(initialStep)
     baseOpenDialog()
   }
 
-  const ContinuePayoutButton = (
-    <Dialog.Footer.Button type="button" onClick={() => forward('confirm')}>
-      <Translate zh_hant="繼續提現" zh_hans="继续提现" />
-    </Dialog.Footer.Button>
-  )
-
-  const isComplete = currStep === 'complete'
-  const isConnectStripeAccount = currStep === 'connectStripeAccount'
-  const isConfirm = currStep === 'confirm'
-  const isResetPassword = currStep === 'resetPassword'
-
   return (
     <>
       {children({ openDialog })}
 
       <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header
-          leftButton={
-            prevStep ? <Dialog.Header.BackButton onClick={back} /> : <span />
-          }
-          rightButton={
-            <Dialog.Header.CloseButton
-              closeDialog={closeDialog}
-              textId="close"
-            />
-          }
-          title={
-            isConnectStripeAccount
-              ? 'connectStripeAccount'
-              : isResetPassword
-              ? 'resetPaymentPassword'
-              : isComplete
-              ? 'paymentPayoutComplete'
-              : 'paymentPayout'
-          }
+        <DynamicContent
           closeDialog={closeDialog}
-          closeTextId="close"
+          forward={forward}
+          back={back}
+          currStep={currStep}
+          prevStep={prevStep}
+          hasStripeAccount={hasStripeAccount}
         />
-
-        {isConnectStripeAccount && (
-          <DynamicConnectStripeAccountForm
-            nextStep={() => forward('confirm')}
-            closeDialog={closeDialog}
-          />
-        )}
-
-        {isConfirm && (
-          <DynamicPayoutFormConfirm
-            currency={CURRENCY.HKD}
-            submitCallback={() => forward('complete')}
-            switchToResetPassword={() => forward('resetPassword')}
-          />
-        )}
-
-        {isComplete && <DynamicPayoutFormComplete closeDialog={closeDialog} />}
-
-        {isResetPassword && (
-          <DynamicPaymentResetPasswordForm
-            callbackButtons={ContinuePayoutButton}
-            closeDialog={closeDialog}
-          />
-        )}
       </Dialog>
     </>
   )

@@ -8,6 +8,7 @@ import {
   Translate,
   useStep,
   ViewerContext,
+  WagmiProvider,
   WalletAuthForm,
 } from '~/components'
 
@@ -20,7 +21,7 @@ const ConnectWallet = () => {
   const initStep = 'wallet-select'
   const { currStep, forward } = useStep<Step>(initStep)
 
-  if (viewerEthAddress) {
+  if (!viewerEthAddress) {
     return (
       <Layout.Main smBgColor="grey-lighter">
         <Head title={{ id: 'loginWithWallet' }} />
@@ -47,22 +48,24 @@ const ConnectWallet = () => {
     <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'loginWithWallet' }} />
 
-      {currStep === 'wallet-select' && (
-        <WalletAuthForm.Select
-          purpose="page"
-          type="connect"
-          submitCallback={() => {
-            forward('wallet-connect')
-          }}
-        />
-      )}
-      {currStep === 'wallet-connect' && (
-        <WalletAuthForm.Connect
-          purpose="page"
-          submitCallback={() => (window.location.href = PATHS.ME_SETTINGS)}
-          back={() => forward('wallet-select')}
-        />
-      )}
+      <WagmiProvider>
+        {currStep === 'wallet-select' && (
+          <WalletAuthForm.Select
+            purpose="page"
+            type="connect"
+            submitCallback={() => {
+              forward('wallet-connect')
+            }}
+          />
+        )}
+        {currStep === 'wallet-connect' && (
+          <WalletAuthForm.Connect
+            purpose="page"
+            submitCallback={() => (window.location.href = PATHS.ME_SETTINGS)}
+            back={() => forward('wallet-select')}
+          />
+        )}
+      </WagmiProvider>
     </Layout.Main>
   )
 }

@@ -7,7 +7,6 @@ import interactionStyles from '~/common/styles/utils/interaction.css'
 import linkStyles from '~/common/styles/utils/link.css'
 import motionStyles from '~/common/styles/utils/motion.css'
 import fresnelStyles from '~/common/styles/vendors/fresnel.css'
-import ptrStyles from '~/common/styles/vendors/ptr.css'
 import tippyStyles from '~/common/styles/vendors/tippy.css'
 import { useWindowResize } from '~/components'
 
@@ -56,9 +55,6 @@ export const GlobalStyles = () => {
       {/* vendors */}
       <style jsx global>
         {tippyStyles}
-      </style>
-      <style jsx global>
-        {ptrStyles}
       </style>
       <style jsx global>
         {fresnelStyles}
