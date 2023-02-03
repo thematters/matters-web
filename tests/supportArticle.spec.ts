@@ -12,7 +12,7 @@ import {
 } from './helpers'
 import { users } from './helpers/auth'
 
-test.describe.skip('Support article', () => {
+test.describe('Support article', () => {
   authedTest(
     "Alice' article is supported with HKD by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile }) => {
@@ -41,11 +41,23 @@ test.describe.skip('Support article', () => {
         bobPage.getByRole('link', { name: 'Transaction History' })
       ).toBeVisible()
 
+      // [Bob] Check Transactions History
+      await bobPage.getByRole('link', { name: 'Transaction History' }).click()
+      const transactionItemAmount = await bobPage
+        .getByTestId(TEST_ID.ME_WALLET_TRANSACTIONS_ITEM)
+        .first()
+        .getByTestId(TEST_ID.ME_WALLET_TRANSACTIONS_ITEM_AMOUNT)
+        .first()
+        .innerText()
+      expect(stripSpaces(transactionItemAmount)).toBe(
+        stripSpaces(`- HKD ${parseFloat(amount.toString()).toFixed(2)}`)
+      )
+
       // [Alice] Go to notifications page
       const aliceNotifications = new NotificationsPage(alicePage)
       await aliceNotifications.goto()
 
-      // [Alice] Expect it has "article new comment" notice
+      // [Alice] Expect it has "article new donation" notice
       const noticeReceiveDonationAmount = await alicePage
         .getByTestId(TEST_ID.PAYMENT_RECEIVE_DONATION)
         .first()

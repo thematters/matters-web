@@ -162,7 +162,6 @@ const Transactions = () => {
       <Tabs
         sticky
         side={
-          // TODO: hide when purpose is subscription?
           <section className="CurrencySwitch">
             <CurrencySwitch
               currency={currency}
