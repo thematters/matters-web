@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
 import { createContext, useContext, useState } from 'react'
+import { IntlProvider } from 'react-intl'
 
 import { ADD_TOAST, COOKIE_LANGUAGE, DEFAULT_LOCALE } from '~/common/enums'
 import { extractRootDomain, getCookie, toUserLanguage } from '~/common/utils'
@@ -27,14 +28,28 @@ export const LanguageContext = createContext(
   }
 )
 
+async function loadI18nMessages(locale: string) {
+  try {
+    return import(`@/compiled-lang/${locale}.json`).then(
+      (module) => module.default
+    )
+  } catch (error) {
+    throw new Error(
+      'Could not load compiled language files. Please run "npm run i18n:compile" first"'
+    )
+  }
+}
+
 export const LanguageConsumer = LanguageContext.Consumer
 
 export const LanguageProvider = ({
   headers,
+  messages: msgs,
   children,
 }: {
   headers?: any
   children: React.ReactNode
+  messages?: any
 }) => {
   const [updateLanguage] = useMutation<UpdateLanguageMutation>(
     UPDATE_VIEWER_LANGUAGE
@@ -77,8 +92,14 @@ export const LanguageProvider = ({
     routerLang ||
     fallbackLang) as UserLanguage
   const [localLang, setLocalLang] = useState(initLocalLang)
+  const [messages, setMessages] = useState(
+    (msgs || {})[localLang.replace('_', '-')] || {}
+  )
 
   const setLang = async (language: UserLanguage) => {
+    const msgs = await loadI18nMessages(language.replace('_', '-'))
+    setMessages(msgs)
+
     setLocalLang(language)
 
     Cookie.set(COOKIE_LANGUAGE, language, {
@@ -127,7 +148,9 @@ export const LanguageProvider = ({
         setLang,
       }}
     >
-      {children}
+      <IntlProvider locale={localLang.replace('_', '-')} messages={messages}>
+        {children}
+      </IntlProvider>
     </LanguageContext.Provider>
   )
 }
