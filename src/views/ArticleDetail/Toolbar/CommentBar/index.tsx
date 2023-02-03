@@ -19,9 +19,9 @@ import {
   CommentFormDialog,
   IconComment16,
   LanguageContext,
+  Media,
   TextIcon,
   Translate,
-  useResponsive,
   ViewerContext,
 } from '~/components'
 import {
@@ -60,71 +60,70 @@ const fragments = {
 }
 
 const Content = ({
-  isSmallUp,
   article,
   ...props
 }: (CardProps | ButtonProps) & {
-  isSmallUp: boolean
   article: CommentBarArticle
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  return isSmallUp ? (
-    <Card
-      bgColor="grey-lighter"
-      spacing={[0, 0]}
-      borderRadius="base"
-      role="button"
-      ariaHasPopup="dialog"
-      {...(props as CardProps)}
-    >
-      <p>
-        <Translate id="putComment" />
-        <Translate zh_hant="…" zh_hans="…" en="…" />
-        <style jsx>{styles}</style>
-      </p>
-    </Card>
-  ) : (
-    <Button
-      spacing={['xtight', 'xtight']}
-      bgActiveColor="grey-lighter"
-      aria-label={`${translate({ id: 'putComment', lang })}…`}
-      aria-haspopup="dialog"
-      {...(props as ButtonProps)}
-    >
-      <TextIcon
-        icon={<IconComment16 size="md-s" />}
-        weight="md"
-        spacing="xtight"
-        size="sm"
-      >
-        {article.responseCount > 0 ? numAbbr(article.responseCount) : undefined}
-      </TextIcon>
-    </Button>
+  return (
+    <>
+      <Media at="sm">
+        <Button
+          spacing={['xtight', 'xtight']}
+          bgActiveColor="grey-lighter"
+          aria-label={`${translate({ id: 'putComment', lang })}…`}
+          aria-haspopup="dialog"
+          {...(props as ButtonProps)}
+        >
+          <TextIcon
+            icon={<IconComment16 size="md-s" />}
+            weight="md"
+            spacing="xtight"
+            size="sm"
+          >
+            {article.responseCount > 0
+              ? numAbbr(article.responseCount)
+              : undefined}
+          </TextIcon>
+        </Button>
+      </Media>
+      <Media greaterThan="sm">
+        <Card
+          bgColor="grey-lighter"
+          spacing={[0, 0]}
+          borderRadius="base"
+          role="button"
+          ariaHasPopup="dialog"
+          {...(props as CardProps)}
+        >
+          <p>
+            <Translate id="putComment" />
+            <Translate zh_hant="…" zh_hans="…" en="…" />
+            <style jsx>{styles}</style>
+          </p>
+        </Card>
+      </Media>
+    </>
   )
 }
 
 const CommentBar = ({ article, disabled }: CommentBarProps) => {
   const viewer = useContext(ViewerContext)
-  const isSmallUp = useResponsive('sm-up')
 
   const refetchResponses = () => {
     window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}))
   }
 
-  const props = {
-    isSmallUp,
-    article,
-  }
-
   if (disabled) {
-    return <Content {...props} disabled />
+    return <Content article={article} disabled />
   }
 
   if (viewer.shouldSetupLikerID) {
     return (
       <Content
-        {...props}
+        article={article}
         aria-haspopup="dialog"
         onClick={() =>
           window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
@@ -136,7 +135,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
   if (viewer.isOnboarding && article.author?.id !== viewer.id) {
     return (
       <Content
-        {...props}
+        article={article}
         onClick={() => {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
@@ -154,7 +153,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
   if (viewer.isInactive) {
     return (
       <Content
-        {...props}
+        article={article}
         onClick={() => {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
@@ -172,7 +171,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
   if (article.author?.isBlocking) {
     return (
       <Content
-        {...props}
+        article={article}
         onClick={() => {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
@@ -188,20 +187,28 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
   }
 
   if (!viewer.isAuthed) {
-    const clickProps = isSmallUp
-      ? {
-          onClick: () => {
-            window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            window.dispatchEvent(
-              new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-                detail: { source: UNIVERSAL_AUTH_SOURCE.comment },
-              })
-            )
-          },
-        }
-      : appendTarget(PATHS.LOGIN, true)
+    const smUpProps = {
+      onClick: () => {
+        window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+        window.dispatchEvent(
+          new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+            detail: { source: UNIVERSAL_AUTH_SOURCE.comment },
+          })
+        )
+      },
+    }
+    const smProps = appendTarget(PATHS.LOGIN, true)
 
-    return <Content {...props} {...clickProps} />
+    return (
+      <>
+        <Media at="sm">
+          <Content article={article} {...smProps} />
+        </Media>
+        <Media greaterThan="sm">
+          <Content aria-haspopup="dialog" article={article} {...smUpProps} />
+        </Media>
+      </>
+    )
   }
 
   return (
@@ -211,7 +218,11 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
       submitCallback={refetchResponses}
     >
       {({ openDialog }) => (
-        <Content {...props} aria-haspopup="dialog" onClick={openDialog} />
+        <Content
+          article={article}
+          aria-haspopup="dialog"
+          onClick={openDialog}
+        />
       )}
     </CommentFormDialog>
   )

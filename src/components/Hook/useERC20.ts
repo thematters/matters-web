@@ -1,4 +1,4 @@
-import { ethers } from 'ethers'
+import { MaxUint256 } from '@ethersproject/constants'
 import { useContext } from 'react'
 import {
   erc20ABI,
@@ -67,7 +67,7 @@ export const useApproveUSDT = () => {
     functionName: 'approve',
     args: [
       process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS as `0x${string}`,
-      ethers.constants.MaxUint256,
+      MaxUint256,
     ],
   })
 

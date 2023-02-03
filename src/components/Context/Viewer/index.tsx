@@ -89,7 +89,6 @@ export type Viewer = ViewerUser & {
   isInactive: boolean
   isCivicLiker: boolean
   shouldSetupLikerID: boolean
-  privateFetched: boolean
   onboardingTasks: {
     finished: boolean
     tasks: {
@@ -102,10 +101,7 @@ export type Viewer = ViewerUser & {
   }
 }
 
-export const processViewer = (
-  viewer: ViewerUser,
-  privateFetched: boolean
-): Viewer => {
+export const processViewer = (viewer: ViewerUser): Viewer => {
   // User state
   const isAuthed = !!viewer.id
   const state = viewer?.status?.state
@@ -153,7 +149,6 @@ export const processViewer = (
     isInactive,
     isCivicLiker,
     shouldSetupLikerID,
-    privateFetched,
     onboardingTasks: {
       finished: isOnboardingTasksFinished,
       tasks: {
@@ -174,14 +169,12 @@ export const ViewerConsumer = ViewerContext.Consumer
 export const ViewerProvider = ({
   children,
   viewer,
-  privateFetched,
 }: {
   children: React.ReactNode
   viewer: ViewerUser
-  privateFetched: boolean
 }) => {
   return (
-    <ViewerContext.Provider value={processViewer(viewer, privateFetched)}>
+    <ViewerContext.Provider value={processViewer(viewer)}>
       {children}
     </ViewerContext.Provider>
   )

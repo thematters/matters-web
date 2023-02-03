@@ -18,14 +18,12 @@ import {
   Expandable,
   Head,
   Layout,
-  PullToRefresh,
   Spinner,
   Tabs,
   Throw404,
   Translate,
   useFeatures,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -58,7 +56,7 @@ const DynamicCommunity = dynamic(() => import('./Community'), {
 })
 
 const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const
-type TagFeedType = typeof validTagFeedTypes[number]
+type TagFeedType = (typeof validTagFeedTypes)[number]
 
 const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const { router } = useRoute()
@@ -176,66 +174,61 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         }}
       />
 
-      <PullToRefresh>
-        <TagCover tag={tag} />
+      <TagCover tag={tag} />
 
-        <section className="info">
-          {features.tag_adoption && <Owner tag={tag} />}
+      <section className="info">
+        {features.tag_adoption && <Owner tag={tag} />}
 
-          <section className="statistics">
-            <Followers tag={tag} />
-            <ArticlesCount tag={tag} />
-          </section>
-
-          {tag.description && (
-            <Expandable
-              content={tag.description}
-              color="grey-darker"
-              spacingTop="base"
-              size="md-s"
-            >
-              <p>{tag.description}</p>
-            </Expandable>
-          )}
-
-          <section className="buttons">
-            {canAdd && <TagDetailButtons.AddButton tag={tag} />}
-            <TagDetailButtons.FollowButton tag={tag} />
-          </section>
+        <section className="statistics">
+          <Followers tag={tag} />
+          <ArticlesCount tag={tag} />
         </section>
 
-        <Tabs sticky>
-          <Tabs.Tab selected={isHottest} onClick={() => changeFeed('hottest')}>
-            <Translate id="hottest" />
-          </Tabs.Tab>
-
-          <Tabs.Tab selected={isLatest} onClick={() => changeFeed('latest')}>
-            <Translate id="latest" />
-          </Tabs.Tab>
-
-          {hasSelectedFeed && (
-            <Tabs.Tab
-              selected={isSelected}
-              onClick={() => changeFeed('selected')}
-            >
-              <Translate zh_hant="精選" zh_hans="精选" en="Featured" />
-            </Tabs.Tab>
-          )}
-
-          <Tabs.Tab
-            selected={isCreators}
-            onClick={() => changeFeed('creators')}
+        {tag.description && (
+          <Expandable
+            content={tag.description}
+            color="grey-darker"
+            spacingTop="base"
+            size="md-s"
           >
-            <Translate zh_hant="創作者" zh_hans="创作者" en="Creators" />
-          </Tabs.Tab>
-        </Tabs>
-
-        {(isHottest || isLatest || isSelected) && (
-          <TagDetailArticles tag={tag} feedType={feedType} />
+            <p>{tag.description}</p>
+          </Expandable>
         )}
 
-        {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
-      </PullToRefresh>
+        <section className="buttons">
+          {canAdd && <TagDetailButtons.AddButton tag={tag} />}
+          <TagDetailButtons.FollowButton tag={tag} />
+        </section>
+      </section>
+
+      <Tabs sticky>
+        <Tabs.Tab selected={isHottest} onClick={() => changeFeed('hottest')}>
+          <Translate id="hottest" />
+        </Tabs.Tab>
+
+        <Tabs.Tab selected={isLatest} onClick={() => changeFeed('latest')}>
+          <Translate id="latest" />
+        </Tabs.Tab>
+
+        {hasSelectedFeed && (
+          <Tabs.Tab
+            selected={isSelected}
+            onClick={() => changeFeed('selected')}
+          >
+            <Translate zh_hant="精選" zh_hans="精选" en="Featured" />
+          </Tabs.Tab>
+        )}
+
+        <Tabs.Tab selected={isCreators} onClick={() => changeFeed('creators')}>
+          <Translate zh_hant="創作者" zh_hans="创作者" en="Creators" />
+        </Tabs.Tab>
+      </Tabs>
+
+      {(isHottest || isLatest || isSelected) && (
+        <TagDetailArticles tag={tag} feedType={feedType} />
+      )}
+
+      {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
 
       <style jsx>{styles}</style>
     </Layout.Main>
@@ -276,7 +269,6 @@ const TagDetailContainer = () => {
     data: dataByTagId,
     loading,
     error,
-    refetch: refetchPublic,
     client,
   } = usePublicQuery<TagDetailPublicQuery>(TAG_DETAIL_PUBLIC, {
     variables: { id: tagId },
@@ -313,15 +305,6 @@ const TagDetailContainer = () => {
       loadPrivate(retryTagId)
     }
   }, [tagId, resultBySearch?.data, viewer.id])
-
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const retryTagId = tagId || searchedTag?.id
-    await refetchPublic({ id: retryTagId })
-    loadPrivate(retryTagId)
-  }
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

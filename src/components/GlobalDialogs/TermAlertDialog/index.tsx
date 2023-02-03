@@ -3,7 +3,8 @@ import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
+import { removeCookies } from '@/src/common/utils'
+import { ADD_TOAST, COOKIE_TOKEN_NAME, COOKIE_USER_GROUP } from '~/common/enums'
 import {
   Dialog,
   Term,
@@ -58,8 +59,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
   const onLogout = async () => {
     try {
       await logout()
-
-      // await clearPersistCache()
+      removeCookies([COOKIE_TOKEN_NAME, COOKIE_USER_GROUP])
 
       closeDialog()
 

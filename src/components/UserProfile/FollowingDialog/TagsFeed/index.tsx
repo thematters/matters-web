@@ -10,7 +10,6 @@ import {
   TagDigest,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -27,16 +26,10 @@ const TagsFeed = () => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<UserFollowingTagsPublicQuery>(USER_FOLLOWING_TAGS_PUBLIC, {
-    variables: { userName },
-  })
+  const { data, loading, error, fetchMore, client } =
+    usePublicQuery<UserFollowingTagsPublicQuery>(USER_FOLLOWING_TAGS_PUBLIC, {
+      variables: { userName },
+    })
 
   // pagination
   const user = data?.user
@@ -81,14 +74,6 @@ const TagsFeed = () => {
 
     loadPrivate(newData)
   }
-
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

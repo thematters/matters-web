@@ -1,10 +1,7 @@
 import gql from 'graphql-tag'
 
-import {
-  AnalyticsListener,
-  FeaturesProvider,
-  ViewerProvider,
-} from '~/components'
+import { FeaturesProvider, ViewerProvider } from '~/components'
+import { fragments as analyticsUserFragment } from '~/components/Analytics/AnalyticsListener/gql'
 
 const fragments = {
   user: {
@@ -15,7 +12,7 @@ const fragments = {
         ...AnalyticsUser
       }
       ${ViewerProvider.fragments.user.public}
-      ${AnalyticsListener.fragments.user}
+      ${analyticsUserFragment.user}
     `,
     private: gql`
       fragment ViewerPrivate on User {
@@ -32,19 +29,6 @@ const fragments = {
     ${FeaturesProvider.fragments.official}
   `,
 }
-
-export const ROOT_QUERY_PUBLIC = gql`
-  query RootQueryPublic {
-    viewer {
-      ...ViewerPublic
-    }
-    official {
-      ...Official
-    }
-  }
-  ${fragments.user.public}
-  ${fragments.official}
-`
 
 export const ROOT_QUERY_PRIVATE = gql`
   query RootQueryPrivate {

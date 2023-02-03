@@ -25,15 +25,10 @@ const SearchUser = () => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    fetchMore,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<SearchUsersPublicQuery>(SEARCH_USERS_PUBLIC, {
-    variables: { key: q },
-  })
+  const { data, loading, fetchMore, client } =
+    usePublicQuery<SearchUsersPublicQuery>(SEARCH_USERS_PUBLIC, {
+      variables: { key: q },
+    })
 
   // pagination
   const connectionPath = 'search'
@@ -85,12 +80,6 @@ const SearchUser = () => {
     loadPrivate(newData)
   }
 
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-
   /**
    * Render
    */
@@ -103,11 +92,7 @@ const SearchUser = () => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List hasBorder={false}>
         {edges.map(
           ({ node, cursor }, i) =>

@@ -11,7 +11,6 @@ import {
   Spinner,
   Throw404,
   Translate,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -37,7 +36,7 @@ const AcceptedInvites = () => {
   /**
    * Data Fetching
    */
-  const { data, loading, error, fetchMore, refetch } =
+  const { data, loading, error, fetchMore } =
     useQuery<CircleAcceptedInvitesQuery>(CIRCLE_ACCEPTED_INVITES, {
       variables: { name },
     })
@@ -60,8 +59,6 @@ const AcceptedInvites = () => {
         }),
     })
   }
-
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

@@ -1,16 +1,12 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
+import dynamic from 'next/dynamic'
 
-import {
-  Head,
-  OnboardingTasks,
-  SearchBar,
-  useResponsive,
-  useRoute,
-} from '~/components'
+import { Head, Media, SearchBar, useRoute } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ClientPreferenceQuery } from '~/gql/graphql'
 
+import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
 import Header from './Header'
 import NavBar from './NavBar'
@@ -19,11 +15,31 @@ import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.css'
 
+const DynamicOnboardingTasksNavBar = dynamic(
+  () =>
+    import('~/components/OnboardingTasks').then(
+      (mod) => mod.OnboardingTasks.NavBar
+    ),
+  {
+    ssr: true, // enable for first screen
+  }
+)
+const DynamicOnboardingTasksWidget = dynamic(
+  () =>
+    import('~/components/OnboardingTasks').then(
+      (mod) => mod.OnboardingTasks.Widget
+    ),
+  {
+    ssr: true, // enable for first screen
+  }
+)
+
 export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Main: typeof Main
   Header: typeof Header
   Spacing: typeof Spacing
   FixedMain: typeof FixedMain
+  AuthHeader: typeof AuthHeader
 } = ({ children }) => {
   const { isInPath } = useRoute()
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
@@ -34,8 +50,10 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
       <div className="l-container full">
         <main className="l-row">
-          <nav role="navigation" className="l-col-three-left u-sm-down-hide">
-            <SideNav />
+          <nav role="navigation" className="l-col-three-left">
+            <Media greaterThan="sm">
+              <SideNav />
+            </Media>
           </nav>
 
           {children}
@@ -43,9 +61,11 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
       </div>
 
       {!isInDraftDetail && (
-        <footer className="u-sm-up-hide">
-          <NavBar />
-        </footer>
+        <Media at="sm">
+          <footer>
+            <NavBar />
+          </footer>
+        </Media>
       )}
 
       <style jsx>{styles}</style>
@@ -70,7 +90,6 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInCircle = isPathStartWith('/~', true)
-  const isLargeUp = useResponsive('lg-up')
 
   const { data } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
@@ -85,43 +104,31 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
     hasNavBar: !isInArticleDetail,
     hasOnboardingTasks: showOnboardingTasks,
   })
-  const asideClasses = classNames({
-    'l-col-three-right': true,
-    'u-lg-down-hide': true,
-  })
 
   return (
     <>
       <article className={articleClasses}>
         {children}
 
-        {showOnboardingTasks && !isLargeUp && (
-          <section className="u-lg-up-hide">
-            <OnboardingTasks.NavBar />
-          </section>
+        {showOnboardingTasks && (
+          <Media lessThan="xl">
+            <DynamicOnboardingTasksNavBar />
+          </Media>
         )}
       </article>
 
-      <aside className={asideClasses}>
-        {!isInSearch && !inEditor && (
-          <section className="u-lg-down-hide">
-            <SearchBar />
-          </section>
-        )}
+      <aside className="l-col-three-right">
+        <Media greaterThanOrEqual="xl">
+          <section className="content">
+            {!isInSearch && !inEditor && <SearchBar />}
 
-        {showOnboardingTasks && isLargeUp && (
-          <section className="u-lg-down-hide">
-            <OnboardingTasks.Widget />
-          </section>
-        )}
+            {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
 
-        {aside}
+            {aside}
 
-        {!inEditor && !isInSettings && (
-          <section className="u-lg-down-hide">
-            <SideFooter />
+            {!inEditor && !isInSettings && <SideFooter />}
           </section>
-        )}
+        </Media>
       </aside>
 
       <style jsx>{styles}</style>
@@ -133,3 +140,4 @@ Layout.Main = Main
 Layout.Header = Header
 Layout.Spacing = Spacing
 Layout.FixedMain = FixedMain
+Layout.AuthHeader = AuthHeader

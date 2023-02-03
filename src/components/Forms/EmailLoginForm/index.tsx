@@ -3,12 +3,17 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
+import {
+  ADD_TOAST,
+  COOKIE_LANGUAGE,
+  COOKIE_TOKEN_NAME,
+  COOKIE_USER_GROUP,
+} from '~/common/enums'
 import {
   analytics,
-  // clearPersistCache,
   parseFormSubmitErrors,
   redirectToTarget,
+  setCookies,
   translate,
   validateEmail,
   validatePassword,
@@ -50,6 +55,15 @@ export const USER_LOGIN = gql`
     userLogin(input: $input) {
       auth
       token
+      user {
+        id
+        settings {
+          language
+        }
+        info {
+          group
+        }
+      }
     }
   }
 `
@@ -92,8 +106,17 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
       try {
-        await login({
+        const { data } = await login({
           variables: { input: { email, password } },
+        })
+
+        const token = data?.userLogin.token || ''
+        const language = data?.userLogin.user?.settings.language || ''
+        const group = data?.userLogin.user?.info.group || ''
+        setCookies({
+          [COOKIE_TOKEN_NAME]: token,
+          [COOKIE_LANGUAGE]: language,
+          [COOKIE_USER_GROUP]: group,
         })
 
         if (submitCallback) {

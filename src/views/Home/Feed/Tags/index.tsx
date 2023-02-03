@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _chunk from 'lodash/chunk'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -57,6 +57,7 @@ const TagsFeed = () => {
     {
       notifyOnNetworkStatusChange: true,
       variables: { random: lastRandom || 0 },
+      skip: !lastRandom,
     },
     { publicQuery: !viewer.isAuthed }
   )
@@ -75,15 +76,6 @@ const TagsFeed = () => {
       data: { feedTags: random },
     })
   }
-
-  useEffect(() => {
-    if (
-      viewer.isAuthed &&
-      lastRandom == null // null or undefined
-    ) {
-      shuffle()
-    }
-  }, [viewer.isAuthed])
 
   if (error) {
     return <QueryError error={error} />

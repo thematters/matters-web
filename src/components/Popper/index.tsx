@@ -6,7 +6,7 @@ export type PopperInstance = any
 export type PopperProps = import('@tippyjs/react').TippyProps
 
 const DynamicLazyTippy = dynamic(() => import('./LazyTippy'), {
-  ssr: false,
+  ssr: true, // enable for first screen
 })
 
 /**

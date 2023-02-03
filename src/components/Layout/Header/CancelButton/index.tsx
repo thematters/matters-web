@@ -6,30 +6,34 @@ import {
   ButtonProps,
   IconClose32,
   LanguageContext,
+  Media,
   TextIcon,
   Translate,
-  useResponsive,
 } from '~/components'
 
 const CancelButton = (props: ButtonProps) => {
   const { lang } = useContext(LanguageContext)
 
-  const isSmallUp = useResponsive('sm-up')
-
   return (
-    <Button
-      aria-label={translate({ id: 'cancel', lang })}
-      bgColor={isSmallUp ? 'green-lighter' : undefined}
-      size={isSmallUp ? ['2rem', '2rem'] : undefined}
-      {...props}
-    >
-      {!isSmallUp && (
-        <TextIcon color="green" size="md">
-          <Translate id="cancel" />
-        </TextIcon>
-      )}
-      {isSmallUp && <IconClose32 size="lg" color="green" />}
-    </Button>
+    <>
+      <Media at="sm">
+        <Button aria-label={translate({ id: 'cancel', lang })} {...props}>
+          <TextIcon color="green" size="md">
+            <Translate id="cancel" />
+          </TextIcon>
+        </Button>
+      </Media>
+      <Media greaterThan="sm">
+        <Button
+          aria-label={translate({ id: 'cancel', lang })}
+          bgColor="green-lighter"
+          size={['2rem', '2rem']}
+          {...props}
+        >
+          <IconClose32 size="lg" color="green" />
+        </Button>
+      </Media>
+    </>
   )
 }
 

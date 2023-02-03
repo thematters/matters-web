@@ -6,13 +6,7 @@ import {
   PATHS,
 } from '~/common/enums'
 import { analytics, appendTarget } from '~/common/utils'
-import {
-  Button,
-  ButtonProps,
-  TextIcon,
-  Translate,
-  useResponsive,
-} from '~/components'
+import { Button, ButtonProps, Media, TextIcon, Translate } from '~/components'
 
 type UniversalAuthButtonProps = {
   isPlain?: boolean
@@ -21,46 +15,62 @@ type UniversalAuthButtonProps = {
 export const UniversalAuthButton: React.FC<
   React.PropsWithChildren<UniversalAuthButtonProps>
 > = ({ children, isPlain, size }) => {
-  const isSmallUp = useResponsive('sm-up')
-
-  const clickProps = isSmallUp
-    ? {
-        onClick: () => {
-          analytics.trackEvent('click_button', {
-            type: 'login/signup',
-          })
-          window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-          window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
-        },
-      }
-    : {
-        ...appendTarget(PATHS.SIGNUP, true),
-        onClick: () => {
-          analytics.trackEvent('click_button', {
-            type: 'login/signup',
-          })
-        },
-      }
+  const smUpProps = {
+    onClick: () => {
+      analytics.trackEvent('click_button', {
+        type: 'login/signup',
+      })
+      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+    },
+  }
+  const smProps = {
+    ...appendTarget(PATHS.SIGNUP, true),
+    onClick: () => {
+      analytics.trackEvent('click_button', {
+        type: 'login/signup',
+      })
+    },
+  }
 
   if (isPlain) {
     return (
-      <Button aria-haspopup="dialog" {...clickProps}>
-        {children}
-      </Button>
+      <>
+        <Media at="sm">
+          <Button {...smProps}>{children}</Button>
+        </Media>
+        <Media greaterThan="sm">
+          <Button aria-haspopup="dialog" {...smUpProps}>
+            {children}
+          </Button>
+        </Media>
+      </>
     )
   }
 
+  const buttonProps: ButtonProps = {
+    bgColor: 'green',
+    size: size || [null, '2rem'],
+    spacing: [0, 'loose'],
+  }
+  const ButtonText = () => (
+    <TextIcon color="white" weight="md">
+      <Translate id="authEntries" />
+    </TextIcon>
+  )
+
   return (
-    <Button
-      bgColor="green"
-      size={size || [null, '2rem']}
-      spacing={[0, 'loose']}
-      aria-haspopup="dialog"
-      {...clickProps}
-    >
-      <TextIcon color="white" weight="md">
-        <Translate id="authEntries" />
-      </TextIcon>
-    </Button>
+    <>
+      <Media at="sm">
+        <Button {...buttonProps} {...smProps}>
+          <ButtonText />
+        </Button>
+      </Media>
+      <Media greaterThan="sm">
+        <Button aria-haspopup="dialog" {...buttonProps} {...smUpProps}>
+          <ButtonText />
+        </Button>
+      </Media>
+    </>
   )
 }

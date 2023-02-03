@@ -8,17 +8,14 @@ import {
   Spinner,
   TagDigest,
   usePublicQuery,
-  // useResponsive,
 } from '~/components'
 import { AllTagsHottestQuery } from '~/gql/graphql'
 
 import { ALL_TAGS_HOTTEST } from './gql'
-// import SidebarTags from './Sidebar'
 import styles from './styles.css'
 
 export type FeedType = 'recommended' | 'hottest'
 
-// export type FeedQuery = AllTagsRecommended | AllTagsHottest
 export type FeedQuery = AllTagsHottestQuery
 
 interface Props {
@@ -26,15 +23,11 @@ interface Props {
 }
 
 const Feed = ({ type }: Props) => {
-  // const isLargeUp = useResponsive('lg-up')
-
   const isRecommended = type === 'recommended'
 
-  // const query = isRecommended ? ALL_TAGS_RECOMMENDED : ALL_TAGS_HOTTEST
   const query = ALL_TAGS_HOTTEST
 
-  const { data, loading, error, fetchMore, refetch } =
-    usePublicQuery<FeedQuery>(query)
+  const { data, loading, error, fetchMore } = usePublicQuery<FeedQuery>(query)
 
   if (loading) {
     return <Spinner />
@@ -70,11 +63,7 @@ const Feed = ({ type }: Props) => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <ul>
         {edges.map(({ node: tag }, i) => (
           <li key={tag.id}>

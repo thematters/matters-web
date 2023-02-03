@@ -16,7 +16,6 @@ import {
   LanguageContext,
   Translate,
   useMutation,
-  useResponsive,
   ViewerContext,
 } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
@@ -33,7 +32,6 @@ const Tasks = ({ task }: Props) => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
-  const isLargeUp = useResponsive('lg-up')
 
   const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
     variables: {
@@ -236,7 +234,6 @@ const Tasks = ({ task }: Props) => {
                     en="Invite more firends to join galaxy journey"
                   />
                 }
-                wrap={isLargeUp}
               />
             </section>
           </>

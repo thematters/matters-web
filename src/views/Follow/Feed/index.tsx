@@ -27,7 +27,7 @@ import UserCreateCircleActivity from './UserCreateCircleActivity'
 import UserPublishArticleActivity from './UserPublishArticleActivity'
 
 const FollowingFeed = () => {
-  const { data, loading, error, fetchMore, refetch } =
+  const { data, loading, error, fetchMore } =
     useQuery<FollowingFeedQuery>(FOLLOWING_FEED)
 
   if (loading) {
@@ -87,11 +87,7 @@ const FollowingFeed = () => {
         <Help hasTime />
       </section>
 
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        pullToRefresh={refetch}
-      >
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List>
           {edges.map(({ node }, i) => (
             <List.Item key={`${node.__typename}:${i}`}>

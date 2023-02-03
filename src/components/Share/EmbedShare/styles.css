@@ -17,21 +17,23 @@
   }
 
   &.wrap {
-    overflow: inherit;
-    white-space: inherit;
+    @media (--lg-up) {
+      overflow: inherit;
+      white-space: inherit;
 
-    & .left,
-    & .right {
-      display: block;
-      width: 100%;
+      & .left,
+      & .right {
+        display: block;
+        width: 100%;
 
-      & :global(button:last-child) {
-        margin-right: 0;
+        & :global(button:last-child) {
+          margin-right: 0;
+        }
       }
-    }
 
-    & .right {
-      margin-top: var(--spacing-x-tight);
+      & .right {
+        margin-top: var(--spacing-x-tight);
+      }
     }
   }
 }

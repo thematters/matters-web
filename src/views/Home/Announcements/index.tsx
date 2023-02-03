@@ -1,14 +1,12 @@
-import { useQuery } from '@apollo/react-hooks'
-import differenceInDays from 'date-fns/differenceInDays'
+import { useApolloClient, useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 import _some from 'lodash/some'
 import { useState } from 'react'
 
 import { ADD_TOAST, STORAGE_KEY_ANNOUNCEMENT } from '~/common/enums'
 import { storage } from '~/common/utils'
-import { QueryError, Spinner, Translate } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { ClientPreferenceQuery, VisibleAnnouncementsQuery } from '~/gql/graphql'
+import { Translate } from '~/components'
+import { VisibleAnnouncementsQuery } from '~/gql/graphql'
 
 import Carousel from './Carousel'
 import { VISIBLE_ANNOUNCEMENTS } from './gql'
@@ -24,12 +22,8 @@ const BaseAnnouncements = ({ hide }: BaseAnnouncementsProps) => {
   )
   const [type, setType] = useState('all')
 
-  if (loading) {
-    return <Spinner />
-  }
-
-  if (error) {
-    return <QueryError error={error} />
+  if (loading || error) {
+    return null
   }
 
   const allItems = _get(
@@ -67,22 +61,11 @@ const BaseAnnouncements = ({ hide }: BaseAnnouncementsProps) => {
 }
 
 const Announcements = () => {
-  const { data, client } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
-
-  // determine whether announcement should be shown or not
-  const storedValue = storage.get(STORAGE_KEY_ANNOUNCEMENT)
-  const storedTime =
-    typeof storedValue === 'number'
-      ? storedValue
-      : data?.clientPreference?.announcement || 0
-  const enabled = differenceInDays(Date.now(), storedTime) > 7
+  const client = useApolloClient()
 
   const hide = () => {
     const now = Date.now()
     storage.set(STORAGE_KEY_ANNOUNCEMENT, now)
-
     client.writeData({
       id: 'ClientPreference:local',
       data: {
@@ -105,10 +88,6 @@ const Announcements = () => {
         },
       })
     )
-  }
-
-  if (!enabled) {
-    return null
   }
 
   return <BaseAnnouncements hide={hide} />
