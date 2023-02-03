@@ -44,7 +44,7 @@ const AddCircleArticleDialog = ({
   const {
     show,
     openDialog: baseOpenDialog,
-    closeDialog,
+    closeDialog: baseCloseDialog,
   } = useDialogSwitch(true)
 
   const initialStep = 'select'
@@ -96,6 +96,11 @@ const AddCircleArticleDialog = ({
   const onSaveArticles = async (nodes: SearchSelectNode[]) => {
     setArticles(nodes)
     forward('confirm')
+  }
+
+  const closeDialog = () => {
+    setArticles([])
+    baseCloseDialog()
   }
 
   return (
