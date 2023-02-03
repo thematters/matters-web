@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
+import { TEST_ID } from '@/src/common/enums'
 import { toPath } from '~/common/utils'
 import { Card, DateTime, Translate, ViewerContext } from '~/components'
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
@@ -89,7 +90,10 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
 
   return (
     <Card {...path} spacing={['base', 'base']}>
-      <section className="container">
+      <section
+        className="container"
+        data-test-id={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM}
+      >
         <section className="tx-icon">
           <Currency currency={currency} />
         </section>
@@ -140,7 +144,12 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
           </section>
 
           <section className="right">
-            <Amount amount={amount} currency={currency} state={state} />
+            <Amount
+              amount={amount}
+              currency={currency}
+              state={state}
+              testId={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM_AMOUNT}
+            />
             <State
               state={state}
               message={message}

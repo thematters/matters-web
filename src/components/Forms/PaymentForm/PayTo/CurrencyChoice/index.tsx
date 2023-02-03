@@ -3,12 +3,13 @@ import _find from 'lodash/find'
 import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
 
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
+import { PAYMENT_CURRENCY as CURRENCY, TEST_ID } from '~/common/enums'
+import { formatAmount, translate } from '~/common/utils'
 import {
   CurrencyFormatter,
   Dialog,
   IconFiatCurrency40,
+  LanguageContext,
   Spinner,
   TextIcon,
   Translate,
@@ -42,6 +43,8 @@ const CurrencyChoice: React.FC<FormProps> = ({
   switchToSetAmount,
   switchToWalletSelect,
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   const viewer = useContext(ViewerContext)
   const currency = viewer.settings.currency
 
@@ -76,7 +79,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
   const balanceLike = data?.viewer?.liker.total || 0
 
   const InnerForm = (
-    <section className="wrapper">
+    <section className="wrapper" data-test-id={TEST_ID.PAY_TO_CURRENCY_CHOICE}>
       <section className="header">
         <span>
           <Translate zh_hant="選擇支持" zh_hans="选择支持" en="Support " />
@@ -115,13 +118,14 @@ const CurrencyChoice: React.FC<FormProps> = ({
         onClick={() => {
           switchToSetAmount(CURRENCY.HKD)
         }}
+        aria-label={translate({ id: 'fiatCurrency', lang })}
       >
         <TextIcon
           icon={<IconFiatCurrency40 size="xl-m" />}
           size="md"
           spacing="xtight"
         >
-          <Translate zh_hant="法幣" zh_hans="法币" en="Fiat Currency" />
+          <Translate id="fiatCurrency" />
         </TextIcon>
         <CurrencyFormatter
           value={formatAmount(balanceHKD)}
