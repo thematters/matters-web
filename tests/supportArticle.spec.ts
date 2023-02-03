@@ -43,13 +43,13 @@ test.describe('Support article', () => {
 
       // [Bob] Check Transactions History
       await bobPage.getByRole('link', { name: 'Transaction History' }).click()
-      const transactionItemAmount = await bobPage
+      const bobTransactionItemAmount = await bobPage
         .getByTestId(TEST_ID.ME_WALLET_TRANSACTIONS_ITEM)
         .first()
         .getByTestId(TEST_ID.ME_WALLET_TRANSACTIONS_ITEM_AMOUNT)
         .first()
         .innerText()
-      expect(stripSpaces(transactionItemAmount)).toBe(
+      expect(stripSpaces(bobTransactionItemAmount)).toBe(
         stripSpaces(`- HKD ${parseFloat(amount.toString()).toFixed(2)}`)
       )
 
@@ -69,6 +69,18 @@ test.describe('Support article', () => {
         })
       expect(stripSpaces(noticeReceiveDonationAmount)).toBe(
         stripSpaces(`${amount} HKD`)
+      )
+
+      // [Alice] Check Transactions History
+      await alicePage.goto('/me/wallet/transactions')
+      const aliceTransactionItemAmount = await alicePage
+        .getByTestId(TEST_ID.ME_WALLET_TRANSACTIONS_ITEM)
+        .first()
+        .getByTestId(TEST_ID.ME_WALLET_TRANSACTIONS_ITEM_AMOUNT)
+        .first()
+        .innerText()
+      expect(stripSpaces(aliceTransactionItemAmount)).toBe(
+        stripSpaces(`+ HKD ${parseFloat(amount.toString()).toFixed(2)}`)
       )
     }
   )
