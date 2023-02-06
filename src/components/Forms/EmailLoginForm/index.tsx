@@ -36,6 +36,8 @@ import {
 } from './Buttons'
 import styles from './styles.css'
 
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
@@ -114,9 +116,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         const language = data?.userLogin.user?.settings.language || ''
         const group = data?.userLogin.user?.info.group || ''
         setCookies({
-          [COOKIE_TOKEN_NAME]: token,
           [COOKIE_LANGUAGE]: language,
           [COOKIE_USER_GROUP]: group,
+          ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
         })
 
         if (submitCallback) {

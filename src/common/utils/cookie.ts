@@ -2,13 +2,11 @@ import Cookie, { CookieAttributes } from 'js-cookie'
 
 import { COOKIE_EXPIRES_IN_DAYS } from '~/common/enums'
 
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
-
 export const getCookieOptions = () => {
   return {
     expires: COOKIE_EXPIRES_IN_DAYS,
-    secure: isProd ? window.location.href.includes('https://') : undefined,
-    sameSite: isProd ? 'Strict' : undefined,
+    secure: window.location.href.includes('https://'),
+    sameSite: 'Strict',
   } as CookieAttributes
 }
 
