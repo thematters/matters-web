@@ -50,7 +50,7 @@ type DropdownDialogNode = ({
   openDialog: () => void
   type: AriaAttributes['aria-haspopup']
   ref?: React.Ref<any>
-}) => React.ReactChild | React.ReactChild[]
+}) => React.ReactNode
 
 interface DropdownDialogChildren {
   children: DropdownDialogNode

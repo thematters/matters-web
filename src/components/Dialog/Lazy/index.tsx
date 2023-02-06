@@ -1,12 +1,8 @@
 import { useState } from 'react'
 
 interface DialogLazyProps {
-  children: ({
-    openDialog,
-  }: {
-    openDialog: () => void
-  }) => React.ReactChild | React.ReactChild[] | React.ReactNode
-  mounted: React.ReactChild | React.ReactChild[] | React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
+  mounted: React.ReactNode
 }
 
 const DialogLazy = ({

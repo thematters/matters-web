@@ -51,9 +51,11 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
       <div className="l-container full">
         <main className="l-row">
           <nav role="navigation" className="l-col-three-left">
-            <Media greaterThan="sm">
-              <SideNav />
-            </Media>
+            <section className="sidenav">
+              <Media greaterThan="sm">
+                <SideNav />
+              </Media>
+            </section>
           </nav>
 
           {children}
