@@ -146,7 +146,7 @@ export class DraftDetailPage {
 
     const tags = _uniq(generateTags({ count: 3 }))
     for (const tag of tags) {
-      await this.page.getByLabel('Search').fill(tag)
+      await this.page.getByPlaceholder('Search tags...').fill(tag)
       await this.page.getByTestId(TEST_ID.SEARCH_RESULTS_ITEM).first().click()
     }
 
