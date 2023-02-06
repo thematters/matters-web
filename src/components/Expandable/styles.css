@@ -15,6 +15,7 @@
 
   & .richWrapper {
     overflow-y: hidden;
+    overflow-y: clip;
   }
 }
 
