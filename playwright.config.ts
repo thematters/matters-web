@@ -33,7 +33,7 @@ const config: PlaywrightTestConfig = {
   },
   projects: [
     {
-      name: 'chromium',
+      name: 'Chromium',
       use: {
         ...devices['Desktop Chrome'],
         locale: LOCALE,
