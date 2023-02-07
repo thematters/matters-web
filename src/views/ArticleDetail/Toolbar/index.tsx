@@ -78,6 +78,14 @@ const Toolbar = ({
       ? `/${toLocale(translatedLanguage)}${path.href}`
       : path.href
 
+  const dropdonwActionsProps: DropdownActionsControls = {
+    size: 'md-s',
+    inCard: false,
+    sharePath,
+    hasExtend: !lock,
+    ...props,
+  }
+
   return (
     <section className="toolbar">
       <section className="buttons">
@@ -115,15 +123,16 @@ const Toolbar = ({
           />
         </Media>
 
-        <DropdownActions
-          article={article}
-          size="md-s"
-          inCard={false}
-          // hasShare={!isSmallUp}
-          sharePath={sharePath}
-          hasExtend={!lock}
-          {...props}
-        />
+        <Media at="sm">
+          <DropdownActions
+            article={article}
+            {...dropdonwActionsProps}
+            hasShare
+          />
+        </Media>
+        <Media greaterThan="sm">
+          <DropdownActions article={article} {...dropdonwActionsProps} />
+        </Media>
       </section>
 
       <style jsx>{styles}</style>
