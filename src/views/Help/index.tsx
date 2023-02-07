@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { GUIDE_LINKS, PATHS } from '~/common/enums'
 import { Form, LanguageContext, Layout, Spacer, Translate } from '~/components'
@@ -65,11 +66,7 @@ const BaseHelp = () => {
           >
             ask@matters.news
           </a>
-          <Translate
-            zh_hant="，我們會儘快回覆！"
-            zh_hans="，我们会尽快回复！"
-            en="for bug reports or suggestions. We will reply to you as soon we can!"
-          />
+          <FormattedMessage id="replyEarly" />
         </p>
 
         <p className="copyright">

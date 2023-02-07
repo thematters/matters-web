@@ -55,10 +55,12 @@ const Root = ({
   client,
   headers,
   children,
+  messages,
 }: {
   client: ApolloClient<InMemoryCache>
   headers?: any
   children: React.ReactNode
+  messages?: any
 }) => {
   const { isInPath } = useRoute()
   const isInAbout = isInPath('ABOUT')
@@ -87,7 +89,7 @@ const Root = ({
 
   return (
     <ViewerProvider viewer={viewer as ViewerUser}>
-      <LanguageProvider headers={headers}>
+      <LanguageProvider headers={headers} messages={messages}>
         <FeaturesProvider official={official}>
           <MediaContextProvider>
             {shouldApplyLayout ? <Layout>{children}</Layout> : children}

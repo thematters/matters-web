@@ -1,3 +1,6 @@
+import { createIntl } from 'react-intl'
+
+import ZH_HANT from '@/compiled-lang/zh-hant.json'
 import {
   PAYMENT_CURRENCY,
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
@@ -190,14 +193,18 @@ export const validateDisplayName = (value: string, lang: Language) => {
 }
 
 export const validateDescription = (value: string, lang: Language) => {
+  const intl = createIntl({ locale: lang.replace('_', '-'), messages: ZH_HANT })
   if (!value) {
     return translate({ id: 'required', lang })
   } else if (value.length > 200) {
-    return translate({
-      zh_hant: `已超過 200 字，目前 ${value.length} 字`,
-      zh_hans: `已超过 200 字，目前 ${value.length} 字`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        id: 'over200Words',
+      },
+      {
+        numbers: value.length,
+      }
+    )
   }
 }
 
