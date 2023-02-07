@@ -66,7 +66,10 @@ const BaseHelp = () => {
           >
             ask@matters.news
           </a>
-          <FormattedMessage id="replyEarly" />
+          <FormattedMessage
+            id="replyEarly"
+            defaultMessage="，我們會儘快回覆！"
+          />
         </p>
 
         <p className="copyright">

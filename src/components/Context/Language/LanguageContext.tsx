@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { createContext, useContext, useState } from 'react'
-import { IntlProvider } from 'react-intl'
 
 import { ADD_TOAST, COOKIE_LANGUAGE, DEFAULT_LOCALE } from '~/common/enums'
 import {
@@ -34,27 +33,12 @@ export const LanguageContext = createContext(
 
 export const LanguageConsumer = LanguageContext.Consumer
 
-// TODO: extract it into utils
-async function loadI18nMessages(locale: string) {
-  try {
-    return import(`@/compiled-lang/${locale}.json`).then(
-      (module) => module.default
-    )
-  } catch (error) {
-    throw new Error(
-      'Could not load compiled language files. Please run "npm run i18n:compile" first"'
-    )
-  }
-}
-
 export const LanguageProvider = ({
   headers,
   children,
-  messages: msgs,
 }: {
   headers?: any
   children: React.ReactNode
-  messages?: any
 }) => {
   const [updateLanguage] = useMutation<UpdateLanguageMutation>(
     UPDATE_VIEWER_LANGUAGE
@@ -97,13 +81,8 @@ export const LanguageProvider = ({
     routerLang ||
     fallbackLang) as UserLanguage
   const [localLang, setLocalLang] = useState(initLocalLang)
-  const [messages, setMessages] = useState(
-    (msgs || {})[localLang.replace('_', '-')] || {}
-  )
 
   const setLang = async (language: UserLanguage) => {
-    const msgs = await loadI18nMessages(language.replace('_', '-'))
-    setMessages(msgs)
     // update local cookie
     setCookies({ [COOKIE_LANGUAGE]: language })
     // update local cache
@@ -148,9 +127,7 @@ export const LanguageProvider = ({
         setLang,
       }}
     >
-      <IntlProvider locale={localLang.replace('_', '-')} messages={messages}>
-        {children}
-      </IntlProvider>
+      {children}
     </LanguageContext.Provider>
   )
 }
