@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+import { TEST_ID } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 import {
   Avatar,
@@ -211,7 +212,7 @@ export const UserProfile = () => {
     <>
       <LayoutHeader />
 
-      <section className="user-profile">
+      <section className="user-profile" data-test-id={TEST_ID.USER_PROFILE}>
         <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
 
         <header>
