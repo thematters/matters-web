@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import { removeCookies } from '@/src/common/utils'
 import { ADD_TOAST, COOKIE_TOKEN_NAME, COOKIE_USER_GROUP } from '~/common/enums'
+import { removeCookies } from '~/common/utils'
 import {
   Dialog,
   Term,
