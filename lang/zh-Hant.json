@@ -4,27 +4,19 @@
     "description": "src/views/Guide/index.tsx"
   },
   "cfL5uk": {
-    "defaultMessage": "已超過 200 字，目前 {numbers} 字",
+    "defaultMessage": "Over 200 words, current {numbers}",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
   },
   "dnsfmR": {
-    "defaultMessage": "，我們會儘快回覆！",
+    "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
     "description": "src/views/Help/index.tsx"
   },
   "nmmItN": {
-    "defaultMessage": "關於我們",
+    "defaultMessage": "About Us",
     "description": "src/views/Help/index.tsx"
   },
-  "cfL5uk": {
-    "defaultMessage": "已超過 200 字，目前 {numbers} 字",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
-  },
-  "8bnDej": {
-    "defaultMessage": "{content}",
-    "description": "src/views/Guide/index.tsx"
-  },
   "qXcvBF": {
-    "defaultMessage": "玩轉 Matters 實用指南",
+    "defaultMessage": "Explore Matters",
     "description": "src/views/Help/index.tsx"
   }
 }
