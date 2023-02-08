@@ -45,7 +45,10 @@ const BaseHelp = () => {
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="term" />}
+          title={intl.formatMessage({
+            defaultMessage: 'Term of Services',
+            description: 'src/views/Help/index.tsx',
+          })}
           href={PATHS.TOS}
         />
         <Form.List.Item

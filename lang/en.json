@@ -19,6 +19,10 @@
     "defaultMessage": "About Us",
     "description": "src/views/Help/index.tsx"
   },
+  "q7jZPx": {
+    "defaultMessage": "Term of Services",
+    "description": "src/views/Help/index.tsx"
+  },
   "qXcvBF": {
     "defaultMessage": "Explore Matters",
     "description": "src/views/Help/index.tsx"
