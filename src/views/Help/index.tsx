@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { GUIDE_LINKS, PATHS } from '~/common/enums'
-import { Form, LanguageContext, Layout, Spacer, Translate } from '~/components'
+import { Form, LanguageContext, Layout, Spacer } from '~/components'
 
 import styles from './styles.css'
 
@@ -24,43 +24,60 @@ const BaseHelp = () => {
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="guide" />}
+          title={intl.formatMessage({
+            defaultMessage: 'Explore Matters',
+            description: 'src/views/Help/index.tsx',
+          })}
           href={PATHS.GUIDE}
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="community" />}
+          title={intl.formatMessage({
+            defaultMessage: 'Matters Community',
+            description: 'src/views/Help/index.tsx',
+          })}
           href={PATHS.COMMUNITY}
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="migrationSideBar" />}
+          title={intl.formatMessage({
+            defaultMessage: 'Migrate to Matters',
+            description: 'src/views/Help/index.tsx',
+          })}
           href={PATHS.MIGRATION}
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="term" />}
+          title={intl.formatMessage({
+            defaultMessage: 'Term of Services',
+            description: 'src/views/Help/index.tsx',
+          })}
           href={PATHS.TOS}
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="openCommunity" />}
+          title={intl.formatMessage({
+            defaultMessage: 'Open Source',
+            description: 'src/views/Help/index.tsx',
+          })}
           htmlHref="https://github.com/thematters/developer-resource"
           htmlTarget="_blank"
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="downloadApp" />}
+          title={intl.formatMessage({
+            defaultMessage: 'Download App',
+            description: 'src/views/Help/index.tsx',
+          })}
           href={GUIDE_LINKS.PWA[lang]}
         />
       </Form.List>
 
       <footer>
         <p>
-          <Translate
-            zh_hant="若你希望向 Matters 提出建議，或遭遇操作異常，請發送郵件至 "
-            zh_hans="若你希望向 Matters 提出建议，或遭遇操作异常，请发送邮件至 "
-            en="Please email"
+          <FormattedMessage
+            defaultMessage="Please email"
+            description="src/views/Help/index.tsx"
           />
           <a
             className="u-link-green"

@@ -7,13 +7,8 @@
     "defaultMessage": "已超过 200 字，目前 {numbers} 字",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
   },
-  "dnsfmR": {
-    "defaultMessage": "，我们会尽快回复",
-    "description": "src/views/Help/index.tsx"
-  },
-  "nmmItN": {
-    "defaultMessage": "关于我们",
-    "description": "src/views/Help/index.tsx"
+  "8bnDej": {
+    "defaultMessage": "{content}",
+    "description": "src/views/Guide/index.tsx"
   }
 }
-
