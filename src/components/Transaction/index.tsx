@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
-import { TEST_ID } from '@/src/common/enums'
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Card, DateTime, Translate, ViewerContext } from '~/components'
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
