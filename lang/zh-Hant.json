@@ -19,6 +19,10 @@
     "defaultMessage": "關於我們",
     "description": "src/views/Help/index.tsx"
   },
+  "q7jZPx": {
+    "defaultMessage": "Term of Services",
+    "description": "src/views/Help/index.tsx"
+  },
   "qXcvBF": {
     "defaultMessage": "玩轉 Matters 實用指南",
     "description": "src/views/Help/index.tsx"
