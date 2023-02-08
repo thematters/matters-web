@@ -1,5 +1,18 @@
 {
-  "replyEarly": {
-    "defaultMessage": " for bug reports or suggestions. We will reply to you as soon we can!"
+  "8bnDej": {
+    "defaultMessage": "{content}",
+    "description": "src/views/Guide/index.tsx"
+  },
+  "cfL5uk": {
+    "defaultMessage": "Over 200 words, current {numbers}",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+  },
+  "dnsfmR": {
+    "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
+    "description": "src/views/Help/index.tsx"
+  },
+  "nmmItN": {
+    "defaultMessage": "About Us",
+    "description": "src/views/Help/index.tsx"
   }
 }

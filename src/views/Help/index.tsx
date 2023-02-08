@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { GUIDE_LINKS, PATHS } from '~/common/enums'
 import { Form, LanguageContext, Layout, Spacer, Translate } from '~/components'
@@ -10,12 +10,16 @@ const BaseHelp = () => {
   const { lang } = useContext(LanguageContext)
   const year = new Date().getFullYear()
 
+  const intl = useIntl()
   return (
     <>
       <Form.List>
         <Form.List.Item
           role="link"
-          title={<Translate id="about" />}
+          title={intl.formatMessage({
+            defaultMessage: 'About Us',
+            description: 'src/views/Help/index.tsx',
+          })}
           href={PATHS.ABOUT}
         />
         <Form.List.Item
@@ -67,8 +71,8 @@ const BaseHelp = () => {
             ask@matters.news
           </a>
           <FormattedMessage
-            id="replyEarly"
-            defaultMessage="，我們會儘快回覆！"
+            defaultMessage="for bug reports or suggestions. We will reply to you as soon we can!"
+            description="src/views/Help/index.tsx"
           />
         </p>
 

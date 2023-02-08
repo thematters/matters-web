@@ -29,7 +29,7 @@
     "build-storybook": "build-storybook",
     "prepare": "husky install",
     "vercel-build": "set -xe; npm run gen:type && if [[ \"$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" =~ release/* ]] ; then cp -va .env.prod .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-next.matters.news' | tee -a .env.local; else cp -va .env.dev .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-dev.matters.news' | tee -a .env.local ; fi && echo 'NEXT_PUBLIC_NEXT_ASSET_DOMAIN=' | tee -a .env.local && npm run build",
-    "i18n:extract": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file lang/zh-Hant.json",
+    "i18n:extract": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file lang/en.json",
     "i18n:compile": "formatjs compile-folder --ast lang compiled-lang",
     "i18n": "npm run i18n:extract && npm run i18n:compile"
   },

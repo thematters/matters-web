@@ -1,8 +1,9 @@
 import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
 import detailsStyles from '~/common/styles/utils/details.css'
-import { captureClicks, translate } from '~/common/utils'
+import { captureClicks } from '~/common/utils'
 import { Head, LanguageContext, Layout } from '~/components'
 
 import content from './content'
@@ -10,6 +11,7 @@ import content from './content'
 const Guide = () => {
   const { lang } = useContext(LanguageContext)
 
+  const intl = useIntl()
   return (
     <Layout.Main>
       <Layout.Header
@@ -22,10 +24,16 @@ const Guide = () => {
       <Layout.Spacing>
         <section
           dangerouslySetInnerHTML={{
-            __html: translate({
-              ...content,
-              lang,
-            }),
+            // richtext translation
+            __html: intl.formatMessage(
+              {
+                defaultMessage: '{content}',
+                description: 'src/views/Guide/index.tsx',
+              },
+              {
+                content: content[lang],
+              }
+            ),
           }}
           className="u-content"
           onClick={captureClicks}
