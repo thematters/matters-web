@@ -14,6 +14,18 @@
   "nmmItN": {
     "defaultMessage": "關於我們",
     "description": "src/views/Help/index.tsx"
+  },
+  "cfL5uk": {
+    "defaultMessage": "已超過 200 字，目前 {numbers} 字",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+  },
+  "8bnDej": {
+    "defaultMessage": "{content}",
+    "description": "src/views/Guide/index.tsx"
+  },
+  "qXcvBF": {
+    "defaultMessage": "玩轉 Matters 實用指南",
+    "description": "src/views/Help/index.tsx"
   }
 }
 

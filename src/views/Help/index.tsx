@@ -24,7 +24,10 @@ const BaseHelp = () => {
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="guide" />}
+          title={intl.formatMessage({
+            defaultMessage: 'Explore Matters',
+            description: 'src/views/Help/index.tsx',
+          })}
           href={PATHS.GUIDE}
         />
         <Form.List.Item
