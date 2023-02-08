@@ -8,19 +8,19 @@
     "description": "src/views/Help/index.tsx"
   },
   "cfL5uk": {
-    "defaultMessage": "Over 200 words, current {numbers}",
+    "defaultMessage": "已超过 200 字，目前 {numbers} 字",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
   },
   "dnsfmR": {
-    "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
+    "defaultMessage": "，我们会尽快回复",
     "description": "src/views/Help/index.tsx"
   },
   "nmmItN": {
-    "defaultMessage": "About Us",
+    "defaultMessage": "关于我们",
     "description": "src/views/Help/index.tsx"
   },
   "qXcvBF": {
-    "defaultMessage": "Explore Matters",
+    "defaultMessage": "玩转 Matters 实用指南",
     "description": "src/views/Help/index.tsx"
   }
 }
