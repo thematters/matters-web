@@ -4,7 +4,7 @@
     "description": "src/views/Guide/index.tsx"
   },
   "JMRVO6": {
-    "defaultMessage": "Matters Community",
+    "defaultMessage": "Matters 社区",
     "description": "src/views/Help/index.tsx"
   },
   "cfL5uk": {
@@ -17,6 +17,10 @@
   },
   "nmmItN": {
     "defaultMessage": "关于我们",
+    "description": "src/views/Help/index.tsx"
+  },
+  "q7jZPx": {
+    "defaultMessage": "Term of Services",
     "description": "src/views/Help/index.tsx"
   },
   "qXcvBF": {
