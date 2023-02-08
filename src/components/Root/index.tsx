@@ -11,6 +11,7 @@ import {
   Layout,
   MediaContextProvider,
   QueryError,
+  TranslationsProvider,
   useRoute,
   ViewerProvider,
   ViewerUser,
@@ -55,12 +56,10 @@ const Root = ({
   client,
   headers,
   children,
-  messages,
 }: {
   client: ApolloClient<InMemoryCache>
   headers?: any
   children: React.ReactNode
-  messages?: any
 }) => {
   const { isInPath } = useRoute()
   const isInAbout = isInPath('ABOUT')
@@ -89,16 +88,18 @@ const Root = ({
 
   return (
     <ViewerProvider viewer={viewer as ViewerUser}>
-      <LanguageProvider headers={headers} messages={messages}>
+      <LanguageProvider headers={headers}>
         <FeaturesProvider official={official}>
           <MediaContextProvider>
-            {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+            <TranslationsProvider>
+              {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-            <DynamicToastContainer />
-            <DynamicAnalyticsInitilizer user={viewer || {}} />
-            <DynamicGlobalDialogs />
-            <DynamicProgressBar />
-            <DynamicFingerprint />
+              <DynamicToastContainer />
+              <DynamicAnalyticsInitilizer user={viewer || {}} />
+              <DynamicGlobalDialogs />
+              <DynamicProgressBar />
+              <DynamicFingerprint />
+            </TranslationsProvider>
           </MediaContextProvider>
         </FeaturesProvider>
       </LanguageProvider>

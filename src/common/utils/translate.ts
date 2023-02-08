@@ -1,6 +1,8 @@
 import _get from 'lodash/get'
 
 import { TEXT, TextId } from '~/common/enums'
+import { toLocale } from '~/common/utils'
+import { UserLanguage } from '~/gql/graphql'
 
 /**
  *
@@ -55,4 +57,16 @@ export const translate = ({ lang, ...props }: TranslateArgs): string => {
   const translation = translations[lang || 'zh_hant']
 
   return typeof translation === 'string' ? translation : translations.zh_hant
+}
+
+export async function loadTranslations(lang: UserLanguage) {
+  try {
+    return import(`@/compiled-lang/${toLocale(lang)}.json`).then(
+      (module) => module.default
+    )
+  } catch (error) {
+    throw new Error(
+      'Could not load compiled language files. Please run "npm run i18n:compile" first"'
+    )
+  }
 }

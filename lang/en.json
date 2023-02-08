@@ -1,11 +1,5 @@
 {
-  "D1MZKl": {
-    "defaultMessage": "About us",
-    "description": "about"
-  },
-  "jHWbhG": {
-    "defaultMessage": "Guide",
-    "description": "Guide"
-  },
-  "archive": "Archiveaaaa"
+  "replyEarly": {
+    "defaultMessage": " for bug reports or suggestions. We will reply to you as soon we can!"
+  }
 }
