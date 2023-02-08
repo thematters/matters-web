@@ -32,7 +32,10 @@ const BaseHelp = () => {
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="community" />}
+          title={intl.formatMessage({
+            defaultMessage: 'Matters Community',
+            description: 'src/views/Help/index.tsx',
+          })}
           href={PATHS.COMMUNITY}
         />
         <Form.List.Item
