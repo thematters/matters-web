@@ -5,7 +5,12 @@ import { TEST_ID } from '~/common/enums'
 import { stripSpaces } from '~/common/utils/text'
 
 import { publishDraft } from './common'
-import { ArticleDetailPage, authedTest, NotificationsPage } from './helpers'
+import {
+  ArticleDetailPage,
+  authedTest,
+  NotificationsPage,
+  UserProfilePage,
+} from './helpers'
 
 test.describe('Mutate article', () => {
   authedTest(
@@ -78,6 +83,39 @@ test.describe('Mutate article', () => {
         .getByTestId(TEST_ID.ARTICLE_APPRECIATION_TOTAL)
         .innerText()
       expect(aliceAppreciationAmount).toBe(amount.toString())
+    }
+  )
+
+  authedTest.only(
+    "Alice' article is bookmarked by Bob",
+    async ({ alicePage, bobPage, isMobile }) => {
+      // [Alice] Go to profile page
+      const aliceProfile = new UserProfilePage(alicePage, isMobile)
+      await aliceProfile.gotoMeProfile()
+
+      // [Alice] Get first article
+      const aliceArticleLink = (await aliceProfile.feedArticles
+        .first()
+        .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
+        .getAttribute('href')) as string
+      expect(aliceArticleLink).toBeTruthy()
+
+      // [Bob] Go to Alice's article page
+      await bobPage.goto(aliceArticleLink)
+      const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
+
+      const firstLabel =
+        await aliceArticleDetail.toolbarBookmarkButton.getAttribute(
+          'aria-label'
+        )
+      // [Bob] bookmark
+      await aliceArticleDetail.sendBookmark()
+      const secondLabel =
+        await aliceArticleDetail.toolbarBookmarkButton.getAttribute(
+          'aria-label'
+        )
+
+      expect(firstLabel !== secondLabel).toBeTruthy()
     }
   )
 })
