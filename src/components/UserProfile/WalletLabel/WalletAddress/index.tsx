@@ -39,7 +39,11 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
 
   if (ensName && hasLinkedIPNS) {
     return (
-      <Button {...buttonProps} htmlHref={`${ensName}.limo`} htmlTarget="_blank">
+      <Button
+        {...buttonProps}
+        htmlHref={`https://${ensName}.limo`}
+        htmlTarget="_blank"
+      >
         <TextIcon {...textIconProps} icon={<IconExternalLink16 />}>
           {ensName}
         </TextIcon>
