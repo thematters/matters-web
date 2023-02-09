@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test'
+import { expect, Locator, Page } from '@playwright/test'
 
 import { TEST_ID } from '~/common/enums'
 
@@ -73,6 +73,9 @@ export class UserProfilePage {
 
     // click "Profile" link
     await this.page.getByRole('link', { name: 'Profile' }).click()
+
+    // confirm User Profile Page
+    await expect(this.page.getByTestId(TEST_ID.USER_PROFILE)).toBeVisible()
   }
 
   async goto(userName: string) {
