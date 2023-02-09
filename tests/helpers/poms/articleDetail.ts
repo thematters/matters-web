@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test'
+import _range from 'lodash/range'
 
 import { TEST_ID } from '~/common/enums'
 import { stripSpaces } from '~/common/utils/text'
@@ -104,6 +105,10 @@ export class ArticleDetailPage {
     this.dialogCommentInput = this.dialog.locator('.ql-editor')
   }
 
+  async getTitle() {
+    return this.title.innerText()
+  }
+
   async getSummary() {
     await this.summary.waitFor({ state: 'visible' })
     return this.summary.innerText()
@@ -160,6 +165,10 @@ export class ArticleDetailPage {
     })
 
     return content
+  }
+
+  async sendAppreciation(count: number) {
+    _range(count).map(async () => await this.toolbarAppreciationButton.click())
   }
 
   async supportHKD(password: string, amount: number) {
