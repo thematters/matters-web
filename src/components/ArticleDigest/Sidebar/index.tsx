@@ -46,7 +46,7 @@ export const ArticleDigestSidebar = ({
 
   titleTextSize = 'md-s',
   hasBackground,
-  hasCover,
+  hasCover = true,
   onClick,
   onClickAuthor,
 

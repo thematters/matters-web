@@ -17,6 +17,15 @@ export const WALLET_LOGIN = gql`
       token
       auth
       type
+      user {
+        id
+        settings {
+          language
+        }
+        info {
+          group
+        }
+      }
     }
   }
 `

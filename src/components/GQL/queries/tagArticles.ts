@@ -14,7 +14,7 @@ export const TAG_ARTICLES_PUBLIC = gql`
         id
         articles(
           input: {
-            first: 30
+            first: 20
             after: $after
             selected: $selected
             sortBy: $sortBy

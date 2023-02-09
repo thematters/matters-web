@@ -3,6 +3,8 @@
 }
 
 .buttons {
+  display: inline-flex;
+
   & :global(> * + *) {
     margin-left: var(--spacing-base);
   }

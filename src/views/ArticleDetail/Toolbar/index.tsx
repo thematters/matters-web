@@ -3,9 +3,9 @@ import gql from 'graphql-tag'
 import { stripAllPunct, toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,
+  Media,
   ReCaptchaProvider,
   ShareButton,
-  useResponsive,
 } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
@@ -72,13 +72,19 @@ const Toolbar = ({
   lock,
   ...props
 }: ToolbarProps) => {
-  const isSmallUp = useResponsive('sm-up')
-
   const path = toPath({ page: 'articleDetail', article })
   const sharePath =
     translated && translatedLanguage
       ? `/${toLocale(translatedLanguage)}${path.href}`
       : path.href
+
+  const dropdonwActionsProps: DropdownActionsControls = {
+    size: 'md-s',
+    inCard: false,
+    sharePath,
+    hasExtend: !lock,
+    ...props,
+  }
 
   return (
     <section className="toolbar">
@@ -103,7 +109,7 @@ const Toolbar = ({
 
         <BookmarkButton article={article} size="md-s" inCard={false} />
 
-        {isSmallUp && (
+        <Media greaterThan="sm">
           <ShareButton
             iconSize="md-s"
             inCard={false}
@@ -115,17 +121,18 @@ const Toolbar = ({
               .split(/\s+/)
               .map(stripAllPunct)}
           />
-        )}
+        </Media>
 
-        <DropdownActions
-          article={article}
-          size="md-s"
-          inCard={false}
-          hasShare={!isSmallUp}
-          sharePath={sharePath}
-          hasExtend={!lock}
-          {...props}
-        />
+        <Media at="sm">
+          <DropdownActions
+            article={article}
+            {...dropdonwActionsProps}
+            hasShare
+          />
+        </Media>
+        <Media greaterThan="sm">
+          <DropdownActions article={article} {...dropdonwActionsProps} />
+        </Media>
       </section>
 
       <style jsx>{styles}</style>

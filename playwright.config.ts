@@ -1,4 +1,4 @@
-import { type PlaywrightTestConfig, devices } from '@playwright/test'
+import { devices, type PlaywrightTestConfig } from '@playwright/test'
 import dotenv from 'dotenv'
 import path from 'path'
 
@@ -33,7 +33,7 @@ const config: PlaywrightTestConfig = {
   },
   projects: [
     {
-      name: 'chromium',
+      name: 'Chromium',
       use: {
         ...devices['Desktop Chrome'],
         locale: LOCALE,

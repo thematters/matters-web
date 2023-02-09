@@ -9,13 +9,11 @@ import {
   InfiniteScroll,
   Layout,
   List,
+  Media,
   Notice,
-  PullToRefresh,
   Spacer,
   Spinner,
   useMutation,
-  usePullToRefresh,
-  useResponsive,
 } from '~/components'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
 import {
@@ -58,7 +56,7 @@ const BaseNotifications = () => {
       update: updateViewerUnreadNoticeCount,
     }
   )
-  const { data, loading, fetchMore, refetch } = useQuery<
+  const { data, loading, fetchMore } = useQuery<
     MeNotificationsQuery,
     { first: number; after?: number }
   >(ME_NOTIFICATIONS, {
@@ -68,8 +66,6 @@ const BaseNotifications = () => {
   useEffect(() => {
     markAllNoticesAsRead()
   }, [])
-
-  usePullToRefresh.Handler(refetch)
 
   const connectionPath = 'viewer.notices'
   const { edges, pageInfo } = data?.viewer?.notices || {}
@@ -107,24 +103,27 @@ const BaseNotifications = () => {
 }
 
 const Notifications = () => {
-  const isSmallUp = useResponsive('sm-up')
-
   return (
     <Layout.Main>
       <Layout.Header
         left={
-          isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
+          <>
+            <Media at="sm">
+              <Layout.Header.MeButton />
+            </Media>
+            <Media greaterThan="sm">
+              <Layout.Header.BackButton />
+            </Media>
+          </>
         }
         right={<Layout.Header.Title id="notifications" />}
       />
 
       <Head title={{ id: 'notifications' }} />
 
-      <PullToRefresh>
-        <Spacer />
+      <Spacer />
 
-        <BaseNotifications />
-      </PullToRefresh>
+      <BaseNotifications />
     </Layout.Main>
   )
 }

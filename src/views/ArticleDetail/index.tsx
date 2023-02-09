@@ -19,17 +19,14 @@ import {
   Head,
   LanguageContext,
   Layout,
-  PullToRefresh,
+  Media,
   QueryError,
   Spinner,
-  SubscribeCircleDialog,
   Throw404,
   Title,
   Translate,
   useFeatures,
-  // usePublicLazyQuery,
   usePublicQuery,
-  useResponsive,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -44,7 +41,6 @@ import {
   UserLanguage,
 } from '~/gql/graphql'
 
-import Collection from './Collection'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
 import {
@@ -60,18 +56,22 @@ import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.css'
-import SupportWidget from './SupportWidget'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationToast from './TranslationToast'
-import CircleWall from './Wall/Circle'
-import VisitorWall from './Wall/Visitor'
 
+const DynamicSupportWidget = dynamic(() => import('./SupportWidget'), {
+  ssr: true, // enable for first screen
+  loading: Spinner,
+})
+const DynamicCollection = dynamic(() => import('./Collection'), {
+  ssr: false,
+  loading: Spinner,
+})
 const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
   loading: Spinner,
 })
-
 const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ssr: false,
   loading: () => (
@@ -80,6 +80,20 @@ const DynamicEditMode = dynamic(() => import('./EditMode'), {
     </EmptyLayout>
   ),
 })
+const DynamicVisitorWall = dynamic(() => import('./Wall/Visitor'), {
+  ssr: false,
+})
+const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
+  ssr: true, // enable for first screen
+  loading: Spinner,
+})
+const DynamicSubscribeCircleDialog = dynamic(
+  () =>
+    import('~/components/Dialogs/SubscribeCircleDialog').then(
+      (mod) => mod.SubscribeCircleDialog
+    ),
+  { ssr: false }
+)
 
 const isMediaHashPossiblyValid = (mediaHash?: string | null) => {
   // is there a better way to detect valid?
@@ -107,7 +121,6 @@ const BaseArticleDetail = ({
   const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   const features = useFeatures()
-  const isLargeUp = useResponsive('lg-up')
   const [fixedWall, setFixedWall] = useState(false)
 
   const authorId = article.author?.id
@@ -260,76 +273,77 @@ const BaseArticleDetail = ({
         availableLanguages={article.availableTranslations || []}
       />
 
-      <PullToRefresh>
-        <State article={article} />
+      <State article={article} />
 
-        <section className="content">
-          <TagList article={article} />
-          <section className="title">
-            <Title type="article">{title}</Title>
+      <section className="content">
+        <TagList article={article} />
+        <section className="title">
+          <Title type="article">{title}</Title>
 
-            <Waypoint
-              topOffset={-400}
-              onLeave={() => {
-                if (shouldShowWall) {
-                  setFixedWall(true)
-                }
-              }}
-            />
-
-            <MetaInfo
-              article={article}
-              translated={translated}
-              canTranslate={canTranslate}
-              toggleTranslate={toggleTranslate}
-              canReadFullContent={canReadFullContent}
-            />
-          </section>
-          {article?.summaryCustomized && (
-            <CustomizedSummary summary={summary} />
-          )}
-          <Content
-            article={article}
-            content={content}
-            translating={translating}
+          <Waypoint
+            topOffset={-400}
+            onLeave={() => {
+              if (shouldShowWall) {
+                setFixedWall(true)
+              }
+            }}
           />
-          <License license={article.license} />
-          {circle && !canReadFullContent && <CircleWall circle={circle} />}
-          {features.payment && canReadFullContent && (
-            <SupportWidget article={article} />
-          )}
-          {collectionCount > 0 && (
-            <section className="block">
-              <Collection article={article} collectionCount={collectionCount} />
-            </section>
-          )}
-          <section className="block">
-            <DynamicResponse id={article.id} lock={!canReadFullContent} />
-          </section>
-          {!isLargeUp && <RelatedArticles article={article} />}
+
+          <MetaInfo
+            article={article}
+            translated={translated}
+            canTranslate={canTranslate}
+            toggleTranslate={toggleTranslate}
+            canReadFullContent={canReadFullContent}
+          />
         </section>
-
-        <Toolbar
+        {article?.summaryCustomized && <CustomizedSummary summary={summary} />}
+        <Content
           article={article}
-          articleDetails={article}
-          translated={translated}
-          translatedLanguage={translatedLanguage}
-          privateFetched={privateFetched}
-          hasFingerprint={canReadFullContent}
-          hasExtend={!article.author?.isBlocking}
-          lock={!canReadFullContent}
+          content={content}
+          translating={translating}
         />
-
-        {shouldShowWall && (
-          <>
-            <span id="comments" />
-            <VisitorWall show={fixedWall} />
-          </>
+        <License license={article.license} />
+        {circle && !canReadFullContent && <DynamicCircleWall circle={circle} />}
+        {features.payment && canReadFullContent && (
+          <DynamicSupportWidget article={article} />
         )}
-      </PullToRefresh>
+        {collectionCount > 0 && (
+          <section className="block">
+            <DynamicCollection
+              article={article}
+              collectionCount={collectionCount}
+            />
+          </section>
+        )}
+        <section className="block">
+          <DynamicResponse id={article.id} lock={!canReadFullContent} />
+        </section>
+        <Media lessThan="xl">
+          <RelatedArticles article={article} />
+        </Media>
+      </section>
+
+      <Toolbar
+        article={article}
+        articleDetails={article}
+        translated={translated}
+        translatedLanguage={translatedLanguage}
+        privateFetched={privateFetched}
+        hasFingerprint={canReadFullContent}
+        hasExtend={!article.author?.isBlocking}
+        lock={!canReadFullContent}
+      />
+
+      {shouldShowWall && (
+        <>
+          <span id="comments" />
+          <DynamicVisitorWall show={fixedWall} />
+        </>
+      )}
 
       {article.access.circle && (
-        <SubscribeCircleDialog circle={article.access.circle} />
+        <DynamicSubscribeCircleDialog circle={article.access.circle} />
       )}
 
       <style jsx>{styles}</style>

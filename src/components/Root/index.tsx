@@ -1,31 +1,32 @@
+import { useQuery } from '@apollo/react-hooks'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
-import React, { useEffect, useState } from 'react'
-import { createClient, createStorage, WagmiConfig } from 'wagmi'
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+import React from 'react'
 
-import { chains, sleep, wagmiProvider } from '~/common/utils'
 import {
-  AnalyticsListener,
   Error,
   FeaturesProvider,
   LanguageProvider,
   Layout,
+  MediaContextProvider,
   QueryError,
-  Toast,
-  usePublicQuery,
   useRoute,
   ViewerProvider,
   ViewerUser,
 } from '~/components'
-import PageViewTracker from '~/components/Analytics/PageViewTracker'
-import SplashScreen from '~/components/SplashScreen'
-import { RootQueryPrivateQuery, RootQueryPublicQuery } from '~/gql/graphql'
+import { RootQueryPrivateQuery } from '~/gql/graphql'
 
-import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
+import { ROOT_QUERY_PRIVATE } from './gql'
 
+const DynamicToastContainer = dynamic(
+  () => import('~/components/Toast').then((mod) => mod.Toast.Container),
+  { ssr: false }
+)
+const DynamicAnalyticsInitilizer = dynamic(
+  () => import('~/components/Analytics').then((mod) => mod.AnalyticsInitilizer),
+  { ssr: false }
+)
 const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
   ssr: false,
 })
@@ -50,38 +51,6 @@ import('@sentry/browser').then((Sentry) => {
   })
 })
 
-// WAGMI
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors: [
-    new MetaMaskConnector({
-      chains,
-      options: {
-        // For disconnecting from metamask
-        shimDisconnect: true,
-        UNSTABLE_shimOnConnectSelectAccount: true,
-      },
-    }),
-    new WalletConnectConnector({
-      chains,
-      options: {
-        qrcode: true,
-      },
-    }),
-  ],
-  provider: wagmiProvider,
-  /*
-  FIXME: need to find a way of clearing ens name cache instead of clearing the global cache
-  */
-  storage: createStorage({
-    storage: {
-      getItem: () => null,
-      setItem: () => null,
-      removeItem: () => null,
-    },
-  }),
-})
-
 const Root = ({
   client,
   headers,
@@ -96,56 +65,10 @@ const Root = ({
   const isInMigration = isInPath('MIGRATION')
   const shouldApplyLayout = !isInAbout && !isInMigration
 
-  // anonymous
   const { loading, data, error } =
-    usePublicQuery<RootQueryPublicQuery>(ROOT_QUERY_PUBLIC)
+    useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)
   const viewer = data?.viewer
   const official = data?.official
-
-  // viewer
-  const [privateViewer, setPrivateViewer] =
-    useState<RootQueryPrivateQuery['viewer']>()
-  const [privateFetched, setPrivateFetched] = useState(false)
-
-  const fetchPrivateViewer = async () => {
-    try {
-      const privateWatcher = client.watchQuery<RootQueryPrivateQuery>({
-        query: ROOT_QUERY_PRIVATE,
-        fetchPolicy: 'network-only',
-      })
-      privateWatcher.subscribe({
-        next: (result) => {
-          // set private viewer
-          if (result?.data?.viewer) {
-            setPrivateViewer(result?.data?.viewer)
-          }
-          // mark private fetched as true
-          setPrivateFetched(true)
-        },
-        error: (e) => {
-          // mark private fetched as true
-          setPrivateFetched(true)
-
-          console.error(e)
-        },
-      })
-
-      // timeout to mark private fetched as true
-      await sleep(2000)
-      if (!privateFetched) {
-        setPrivateFetched(true)
-      }
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  useEffect(() => {
-    if (!data) {
-      return
-    }
-    fetchPrivateViewer()
-  }, [!!data])
 
   /**
    * Render
@@ -163,27 +86,21 @@ const Root = ({
   }
 
   return (
-    <WagmiConfig client={wagmiClient}>
-      <ViewerProvider
-        viewer={(privateViewer || viewer) as ViewerUser}
-        privateFetched={privateFetched}
-      >
-        <SplashScreen />
-        <PageViewTracker />
-
-        <LanguageProvider headers={headers}>
-          <FeaturesProvider official={official}>
+    <ViewerProvider viewer={viewer as ViewerUser}>
+      <LanguageProvider headers={headers}>
+        <FeaturesProvider official={official}>
+          <MediaContextProvider>
             {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-            <Toast.Container />
-            <AnalyticsListener user={viewer || {}} />
+            <DynamicToastContainer />
+            <DynamicAnalyticsInitilizer user={viewer || {}} />
             <DynamicGlobalDialogs />
             <DynamicProgressBar />
             <DynamicFingerprint />
-          </FeaturesProvider>
-        </LanguageProvider>
-      </ViewerProvider>
-    </WagmiConfig>
+          </MediaContextProvider>
+        </FeaturesProvider>
+      </LanguageProvider>
+    </ViewerProvider>
   )
 }
 

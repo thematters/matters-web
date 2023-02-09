@@ -1,7 +1,8 @@
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import jump from 'jump.js'
-import { useContext, useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
+import { useContext, useState } from 'react'
 
 import {
   PATHS,
@@ -17,6 +18,7 @@ import {
   IconDollarCircle16,
   IconSpinner16,
   Spacer,
+  Spinner,
   TextIcon,
   Translate,
   useEventListener,
@@ -24,7 +26,6 @@ import {
 } from '~/components'
 import { ArticleDetailPublicQuery, HasDonatedQuery } from '~/gql/graphql'
 
-import Animation from './Animation'
 import Donators from './Donators'
 import { fragments, HAS_DONATED } from './gql'
 import styles from './styles.css'
@@ -38,45 +39,33 @@ type HasDonatedArticle = NonNullable<
   HasDonatedQuery['article'] & { __typename: 'Article' }
 >
 
+const DynamicAnimation = dynamic(() => import('./Animation'), {
+  ssr: false,
+  loading: Spinner,
+})
+
 const SupportWidget = ({ article }: DonationProps) => {
   const viewer = useContext(ViewerContext)
   const [playShipWaiting, setPlayShipWaiting] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
   const [showAvatarAnimation, setShowAvatarAnimation] = useState(false)
-  const [supported, setSupported] = useState(false)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const supportWidgetClasses = classNames({
     'support-widget': true,
     hasCircle: article?.access.circle,
   })
 
-  const [
-    getHasDonated,
-    { data: hasDonatedData, loading, refetch: hasDonatedRefetch },
-  ] = useLazyQuery<HasDonatedQuery>(HAS_DONATED, {
-    fetchPolicy: 'network-only',
+  const {
+    data: hasDonatedData,
+    loading,
+    refetch: hasDonatedRefetch,
+  } = useQuery<HasDonatedQuery>(HAS_DONATED, {
+    variables: { id: article.id, senderId: viewer.id },
   })
 
-  useEffect(() => {
-    if (!viewer.id) return
-
-    getHasDonated({
-      variables: {
-        id: article.id,
-        senderId: viewer.id,
-      },
-    })
-  }, [viewer.id])
-
   const hasDonatedArticle = hasDonatedData?.article as HasDonatedArticle
-
-  const isViewerDonated = hasDonatedArticle?.donation?.totalCount === 1
-  useEffect(() => {
-    if (isViewerDonated) {
-      setSupported(true)
-    }
-  }, [isViewerDonated])
-
+  const isViewerDonated =
+    !!viewer.id && hasDonatedArticle?.donation?.totalCount >= 1
   const requestForDonation = article?.requestForDonation
   const replyToDonator = hasDonatedArticle?.replyToDonator
 
@@ -112,7 +101,7 @@ const SupportWidget = ({ article }: DonationProps) => {
     <section className={supportWidgetClasses} id="animation">
       {showAnimation && (
         <section className="donation">
-          <Animation
+          <DynamicAnimation
             playShipWaiting={playShipWaiting}
             playEnd={() => {
               setShowAnimation(false)
@@ -121,12 +110,14 @@ const SupportWidget = ({ article }: DonationProps) => {
           />
         </section>
       )}
+
       {!showAnimation && (
         <section className="donation note">
           {loading && <IconSpinner16 color="grey-light" size="lg" />}
+
           {!loading && (
             <>
-              {supported && (
+              {isViewerDonated && (
                 <>
                   {replyToDonator && (
                     <section>
@@ -173,7 +164,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                 </>
               )}
 
-              {!supported && (
+              {!isViewerDonated && (
                 <>
                   {requestForDonation && (
                     <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
@@ -203,7 +194,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                   recipient={article.author}
                   targetId={article.id}
                   article={article}
-                  supported={supported}
+                  supported={isViewerDonated}
                 />
               </section>
 
@@ -216,7 +207,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                 </section>
               )}
 
-              {supported && (
+              {isViewerDonated && (
                 <section className="transaction">
                   <span className="transaction-left">
                     <Translate zh_hant="查看" zh_hans="查看" en="View" />

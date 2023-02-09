@@ -4,16 +4,14 @@ import { toPath } from '~/common/utils'
 import {
   Head,
   Layout,
-  PullToRefresh,
+  Media,
   SearchAutoComplete,
   SearchBar,
   SearchOverview,
-  useResponsive,
   useRoute,
 } from '~/components'
 
 import AggregateResults from './AggregateResults'
-// import EmptySearch from './EmptySearch'
 import SearchArticles from './SearchArticles'
 import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
@@ -22,7 +20,6 @@ const Search = () => {
   const { getQuery, router } = useRoute()
   const type = getQuery('type')
   const q = getQuery('q')
-  const isSmallUp = useResponsive('sm-up')
   const [typingKey, setTypingKey] = useState('')
   const resetAutoComplete = () => setTypingKey('')
   const onCancel = () => {
@@ -41,8 +38,6 @@ const Search = () => {
     !isTagOnly &&
     !isUserOnly &&
     !isArticleOnly
-  const showBackButton = isSmallUp && isOverview
-  const showMeButton = !isSmallUp && isOverview
   const showCancelButton = !isOverview
 
   useEffect(() => {
@@ -54,10 +49,15 @@ const Search = () => {
     <Layout.Main smBgColor={isAggregate ? 'grey-lighter' : undefined}>
       <Layout.Header
         left={
-          showBackButton ? (
-            <Layout.Header.BackButton />
-          ) : showMeButton ? (
-            <Layout.Header.MeButton />
+          isOverview ? (
+            <>
+              <Media at="sm">
+                <Layout.Header.MeButton />
+              </Media>
+              <Media greaterThan="sm">
+                <Layout.Header.BackButton />
+              </Media>
+            </>
           ) : null
         }
         right={
@@ -75,15 +75,13 @@ const Search = () => {
 
       <Head title={{ id: 'search' }} />
 
-      <PullToRefresh>
-        {isOverview && <SearchOverview inPage />}
-        {isAutoComplete && <SearchAutoComplete searchKey={typingKey} inPage />}
+      {isOverview && <SearchOverview inPage />}
+      {isAutoComplete && <SearchAutoComplete searchKey={typingKey} inPage />}
 
-        {isTagOnly && <SearchTags />}
-        {isUserOnly && <SearchUsers />}
-        {isArticleOnly && <SearchArticles />}
-        {isAggregate && <AggregateResults />}
-      </PullToRefresh>
+      {isTagOnly && <SearchTags />}
+      {isUserOnly && <SearchUsers />}
+      {isArticleOnly && <SearchArticles />}
+      {isAggregate && <AggregateResults />}
     </Layout.Main>
   )
 }

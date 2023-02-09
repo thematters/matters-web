@@ -11,9 +11,9 @@ import {
   IconWalletConnect24,
   LanguageContext,
   Layout,
+  Media,
   TextIcon,
   Translate,
-  useResponsive,
   ViewerContext,
 } from '~/components'
 
@@ -60,46 +60,46 @@ const Desc = {
 
 const Hint = () => {
   const { lang } = useContext(LanguageContext)
-  const isSmallUp = useResponsive('sm-up')
-
-  if (isSmallUp) {
-    return (
-      <p>
-        <Translate
-          zh_hant="剛接觸加密錢包？參考 "
-          zh_hans="刚接触加密钱包？参考 "
-          en="Don't have a wallet yet? Check the "
-        />
-        <a
-          className="u-link-green"
-          href={GUIDE_LINKS.connectWallet[lang]}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
-        </a>
-        <Translate zh_hant="" zh_hans="" en="." />
-      </p>
-    )
-  }
 
   return (
-    <p>
-      <Translate
-        zh_hant="在行動裝置上使用問題，參考 "
-        zh_hans="在行动装置上使用问题，参考"
-        en="Have wallet questions on mobile device ? Click the "
-      />
-      <a
-        className="u-link-green"
-        href={GUIDE_LINKS.mobilePayment[lang]}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
-      </a>
-      <Translate zh_hant="" zh_hans="" en="." />
-    </p>
+    <>
+      <Media at="sm">
+        <p>
+          <Translate
+            zh_hant="在行動裝置上使用問題，參考 "
+            zh_hans="在行动装置上使用问题，参考"
+            en="Have wallet questions on mobile device ? Click the "
+          />
+          <a
+            className="u-link-green"
+            href={GUIDE_LINKS.mobilePayment[lang]}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
+          </a>
+          <Translate zh_hant="" zh_hans="" en="." />
+        </p>
+      </Media>
+      <Media greaterThan="sm">
+        <p>
+          <Translate
+            zh_hant="剛接觸加密錢包？參考 "
+            zh_hans="刚接触加密钱包？参考 "
+            en="Don't have a wallet yet? Check the "
+          />
+          <a
+            className="u-link-green"
+            href={GUIDE_LINKS.connectWallet[lang]}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
+          </a>
+          <Translate zh_hant="" zh_hans="" en="." />
+        </p>
+      </Media>
+    </>
   )
 }
 

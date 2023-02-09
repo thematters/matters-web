@@ -14,7 +14,7 @@ interface Props {
   submitCallback?: () => void
 }
 
-export const SetupLikeCoin: React.FC<Props> = ({
+const LikeCoinDialogContent: React.FC<Props> = ({
   closeDialog,
   submitCallback,
 }) => {
@@ -68,3 +68,5 @@ export const SetupLikeCoin: React.FC<Props> = ({
     </>
   )
 }
+
+export default LikeCoinDialogContent

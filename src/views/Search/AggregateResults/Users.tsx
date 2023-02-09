@@ -4,7 +4,6 @@ import {
   List,
   Spinner,
   usePublicQuery,
-  usePullToRefresh,
   UserDigest,
   useRoute,
 } from '~/components'
@@ -22,15 +21,12 @@ const AggregateUserResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, refetch } =
-    usePublicQuery<SearchAggregateUsersPublicQuery>(
-      SEARCH_AGGREGATE_USERS_PUBLIC,
-      { variables: { key: q } }
-    )
+  const { data, loading } = usePublicQuery<SearchAggregateUsersPublicQuery>(
+    SEARCH_AGGREGATE_USERS_PUBLIC,
+    { variables: { key: q } }
+  )
 
   const { edges, pageInfo } = data?.search || {}
-
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

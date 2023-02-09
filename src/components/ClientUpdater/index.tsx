@@ -8,39 +8,12 @@ import {
   STORAGE_KEY_ONBOARDING_TASKS,
 } from '~/common/enums'
 import { storage } from '~/common/utils'
-import {
-  useEventListener,
-  useRoute,
-  useWindowResize,
-  ViewerContext,
-} from '~/components'
+import { useEventListener, useRoute, ViewerContext } from '~/components'
 
 export const ClientUpdater = () => {
   const { router, isInPath, setQuery } = useRoute()
   const client = useApolloClient()
   const viewer = useContext(ViewerContext)
-
-  /**
-   * Update viewportSize
-   */
-  const [width, height] = useWindowResize()
-
-  useEffect(() => {
-    if (!width || !height) {
-      return
-    }
-
-    client.writeData({
-      id: `ClientInfo:local`,
-      data: {
-        viewportSize: {
-          width,
-          height,
-          __typename: 'ViewportSize',
-        },
-      },
-    })
-  })
 
   /**
    * Update routeHistory

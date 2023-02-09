@@ -15,7 +15,7 @@ import {
   CommentFormType,
   IconComment16,
   LanguageContext,
-  useResponsive,
+  Media,
   ViewerContext,
 } from '~/components'
 import { ReplyComemntFragment } from '~/gql/graphql'
@@ -89,7 +89,6 @@ const ReplyButton = ({
   inCard,
 }: ReplyButtonProps) => {
   const viewer = useContext(ViewerContext)
-  const isSmallUp = useResponsive('sm-up')
 
   const { id, parentComment, author, node } = comment
   const article = node.__typename === 'Article' ? node : undefined
@@ -102,20 +101,33 @@ const ReplyButton = ({
   }
 
   if (!viewer.isAuthed) {
-    const clickProps = isSmallUp
-      ? {
-          onClick: () => {
-            window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            window.dispatchEvent(
-              new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-                detail: { source: UNIVERSAL_AUTH_SOURCE.comment },
-              })
-            )
-          },
-        }
-      : appendTarget(PATHS.LOGIN, true)
+    const smUpProps = {
+      onClick: () => {
+        window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+        window.dispatchEvent(
+          new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+            detail: { source: UNIVERSAL_AUTH_SOURCE.comment },
+          })
+        )
+      },
+    }
+    const smProps = appendTarget(PATHS.LOGIN, true)
 
-    return <CommentButton {...clickProps} inCard={inCard} disabled={disabled} />
+    return (
+      <>
+        <Media at="sm">
+          <CommentButton inCard={inCard} disabled={disabled} {...smProps} />
+        </Media>
+        <Media greaterThan="sm">
+          <CommentButton
+            aria-haspopup="dialog"
+            inCard={inCard}
+            disabled={disabled}
+            {...smUpProps}
+          />
+        </Media>
+      </>
+    )
   }
 
   if (onClick) {

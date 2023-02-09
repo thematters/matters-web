@@ -1,6 +1,6 @@
 import { Waypoint } from 'react-waypoint'
 
-import { PullToRefresh, Spinner } from '~/components'
+import { Spinner } from '~/components'
 
 /**
  *  Usage:
@@ -38,32 +38,14 @@ interface Props {
    * A React component to act as loader
    */
   loader?: React.ReactNode
-
-  /**
-   * Refetch function to be called by Pull to Refresh
-   */
-  pullToRefresh?: () => any
 }
 
 export const InfiniteScroll: React.FC<React.PropsWithChildren<Props>> = ({
   hasNextPage,
   loader = <Spinner />,
   loadMore,
-  pullToRefresh,
   children,
 }) => {
-  if (pullToRefresh) {
-    return (
-      <PullToRefresh refresh={pullToRefresh}>
-        <>
-          {children}
-          {hasNextPage && <Waypoint onEnter={loadMore} />}
-          {hasNextPage && loader}
-        </>
-      </PullToRefresh>
-    )
-  }
-
   return (
     <>
       {children}

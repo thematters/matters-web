@@ -44,7 +44,7 @@ const ME_APPRECIATED_RECEIVED = gql`
 `
 
 const BaseLikesReceived = () => {
-  const { data, loading, fetchMore, refetch } = useQuery<MeLikesReceivedQuery>(
+  const { data, loading, fetchMore } = useQuery<MeLikesReceivedQuery>(
     ME_APPRECIATED_RECEIVED
   )
 
@@ -88,11 +88,7 @@ const BaseLikesReceived = () => {
     <>
       <LikesTabs activity={data.viewer.activity} />
 
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        pullToRefresh={refetch}
-      >
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>

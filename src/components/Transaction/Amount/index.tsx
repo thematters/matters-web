@@ -1,3 +1,4 @@
+import { TEST_ID } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import { TextIcon } from '~/components'
 import { TransactionState } from '~/gql/graphql'
@@ -23,9 +24,10 @@ interface AmountProps {
   amount: number
   currency: string
   state: TransactionState
+  testId?: TEST_ID
 }
 
-const Amount = ({ amount, currency, state }: AmountProps) => {
+const Amount = ({ amount, currency, state, testId }: AmountProps) => {
   const color =
     state !== TransactionState.Succeeded
       ? 'grey'
@@ -34,7 +36,7 @@ const Amount = ({ amount, currency, state }: AmountProps) => {
       : 'black'
 
   return (
-    <section>
+    <section {...(testId ? { ['data-test-id']: testId } : {})}>
       <TextIcon spacing="xtight" size="md-s" weight="semibold" color={color}>
         {amount > 0 ? '+' : '-'}
         &nbsp;

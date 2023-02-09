@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Lottie, { EventListener } from 'react-lottie'
-import { Waypoint } from 'react-waypoint'
 
+import coinShipData from '@/public/static/json/coin-ship.json'
+import openHeartData from '@/public/static/json/open-heart.json'
+import shipSprinkHeartData from '@/public/static/json/ship-sprinkle-heart.json'
+import shipWaitingData from '@/public/static/json/ship-waiting.json'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { IconSpinner16, Translate, useStep } from '~/components'
+import { Translate, useStep } from '~/components'
 
 import styles from './styles.css'
 
@@ -27,26 +30,6 @@ const Animation: React.FC<Props> = ({
   const isShipWaiting = currStep === 'shipWaiting'
   const isShipSprinkHeart = currStep === 'shipSprinkleHeart'
   const isOpenHeart = currStep === 'openHeart'
-
-  const [coinShipData, setCoinShipData] = useState<any>()
-  const [shipWaitingData, setShipWaitingData] = useState<any>()
-  const [shipSprinkHeartData, setShipSprinkHeartData] = useState<any>()
-  const [openHeartData, setOpenHeartData] = useState<any>()
-
-  useEffect(() => {
-    import('@/public/static/json/coin-ship.json').then((res) =>
-      setCoinShipData(res.default)
-    )
-    import('@/public/static/json/ship-waiting.json').then((res) =>
-      setShipWaitingData(res.default)
-    )
-    import('@/public/static/json/ship-sprinkle-heart.json').then((res) =>
-      setShipSprinkHeartData(res.default)
-    )
-    import('@/public/static/json/open-heart.json').then((res) =>
-      setOpenHeartData(res.default)
-    )
-  }, [])
 
   useEffect(() => {
     if (isShipWaiting) {
@@ -110,61 +93,50 @@ const Animation: React.FC<Props> = ({
     width: 166,
   }
 
-  if (
-    !coinShipData ||
-    !shipWaitingData ||
-    !shipSprinkHeartData ||
-    !openHeartData
-  ) {
-    return <IconSpinner16 size="lg" color="grey-light" />
-  }
-
   return (
-    <Waypoint>
-      <section>
-        <p className="animation-hint">
-          {isShipWaiting && currency === CURRENCY.LIKE && (
-            <Translate
-              zh_hant="持續與 LikeCoin 網絡同步，稍後更新至 Matters"
-              zh_hans="持续与 LikeCoin 网络同步，稍后更新至 Matters"
-              en="Request on LikeCoin network will be confirmed and synced to Matters in a bit"
-            />
-          )}
-          {isShipWaiting && currency === CURRENCY.USDT && (
-            <Translate
-              zh_hant="持續與 Polygon 網絡同步，稍後更新至 Matters"
-              zh_hans="持续与 Polygon 网络同步，稍后更新至 Matters"
-              en="Request on Polygon network will be confirmed and synced to Matters in a bit"
-            />
-          )}
-        </p>
-        {isCoinShip && (
-          <Lottie
-            options={coinShipOptions}
-            eventListeners={[coinShipListener]}
-            {...LottieProps}
+    <section>
+      <p className="animation-hint">
+        {isShipWaiting && currency === CURRENCY.LIKE && (
+          <Translate
+            zh_hant="持續與 LikeCoin 網絡同步，稍後更新至 Matters"
+            zh_hans="持续与 LikeCoin 网络同步，稍后更新至 Matters"
+            en="Request on LikeCoin network will be confirmed and synced to Matters in a bit"
           />
         )}
-        {isShipWaiting && (
-          <Lottie options={shipWaitingOptions} {...LottieProps} />
-        )}
-        {isShipSprinkHeart && (
-          <Lottie
-            options={shipSprinkleHeartOptions}
-            eventListeners={[shipSprinkleHeartListener]}
-            {...LottieProps}
+        {isShipWaiting && currency === CURRENCY.USDT && (
+          <Translate
+            zh_hant="持續與 Polygon 網絡同步，稍後更新至 Matters"
+            zh_hans="持续与 Polygon 网络同步，稍后更新至 Matters"
+            en="Request on Polygon network will be confirmed and synced to Matters in a bit"
           />
         )}
-        {isOpenHeart && (
-          <Lottie
-            options={openHeartOptions}
-            eventListeners={[openHeartListener]}
-            {...LottieProps}
-          />
-        )}
-        <style jsx>{styles}</style>
-      </section>
-    </Waypoint>
+      </p>
+      {isCoinShip && (
+        <Lottie
+          options={coinShipOptions}
+          eventListeners={[coinShipListener]}
+          {...LottieProps}
+        />
+      )}
+      {isShipWaiting && (
+        <Lottie options={shipWaitingOptions} {...LottieProps} />
+      )}
+      {isShipSprinkHeart && (
+        <Lottie
+          options={shipSprinkleHeartOptions}
+          eventListeners={[shipSprinkleHeartListener]}
+          {...LottieProps}
+        />
+      )}
+      {isOpenHeart && (
+        <Lottie
+          options={openHeartOptions}
+          eventListeners={[openHeartListener]}
+          {...LottieProps}
+        />
+      )}
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 

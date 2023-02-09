@@ -3,9 +3,9 @@ import { useContext } from 'react'
 import {
   ConnectWalletButton,
   Help,
+  Media,
   Tabs,
   Translate,
-  useResponsive,
   ViewerContext,
 } from '~/components'
 
@@ -16,26 +16,33 @@ interface SortByProps {
   setFeedType: (sortBy: HomeFeedType) => void
 }
 
-const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
+const TabSide = () => {
   const viewer = useContext(ViewerContext)
+  const isConnectedWallet = !!viewer.info.ethAddress
+
+  if (viewer.isAuthed && !isConnectedWallet) {
+    return (
+      <>
+        <Media at="sm">
+          <Help hasTime />
+        </Media>
+        <Media greaterThan="sm">
+          <ConnectWalletButton />
+        </Media>
+      </>
+    )
+  }
+
+  return <Help hasTime />
+}
+
+const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
   const isHottest = feedType === 'hottest'
   const isNewset = feedType === 'newest'
   const isICYMI = feedType === 'icymi'
-  const isSmallUp = useResponsive('sm-up')
-
-  const isConnectedWallet = !!viewer.info.ethAddress
 
   return (
-    <Tabs
-      sticky
-      side={
-        viewer.isAuthed && !isConnectedWallet && isSmallUp ? (
-          <ConnectWalletButton />
-        ) : (
-          <Help hasTime />
-        )
-      }
-    >
+    <Tabs sticky side={<TabSide />}>
       <Tabs.Tab onClick={() => setFeedType('hottest')} selected={isHottest}>
         <Translate id="hottest" />
       </Tabs.Tab>

@@ -1,12 +1,6 @@
 import React, { useContext } from 'react'
 
-import {
-  Head,
-  Layout,
-  PullToRefresh,
-  Spacer,
-  ViewerContext,
-} from '~/components'
+import { Head, Layout, Spacer, ViewerContext } from '~/components'
 
 // import { redirectToLogin } from '~/common/utils'
 import AnonymousSettings from '../AnonymousSettings'
@@ -17,7 +11,7 @@ import WalletSettings from './Wallet'
 const Settings = () => {
   const viewer = useContext(ViewerContext)
 
-  if (viewer.privateFetched && !viewer.isAuthed) {
+  if (!viewer.isAuthed) {
     return <AnonymousSettings />
   }
 
@@ -29,11 +23,9 @@ const Settings = () => {
       />
       <Head title={{ id: 'settings' }} />
 
-      <PullToRefresh>
-        <UISettings />
-        <AccountSettings />
-        <WalletSettings />
-      </PullToRefresh>
+      <UISettings />
+      <AccountSettings />
+      <WalletSettings />
 
       <Spacer size="xxxloose" />
     </Layout.Main>

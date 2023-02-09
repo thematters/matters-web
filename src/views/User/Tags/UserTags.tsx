@@ -18,7 +18,6 @@ import {
   Tag,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
 } from '~/components'
 import { UserTagsPublicQuery } from '~/gql/graphql'
@@ -35,15 +34,10 @@ const UserTags = () => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch: refetchPublic,
-  } = usePublicQuery<UserTagsPublicQuery>(USER_TAGS_PUBLIC, {
-    variables: { userName },
-  })
+  const { data, loading, error, fetchMore } =
+    usePublicQuery<UserTagsPublicQuery>(USER_TAGS_PUBLIC, {
+      variables: { userName },
+    })
 
   // pagination
   const user = data?.user
@@ -68,13 +62,6 @@ const UserTags = () => {
         }),
     })
   }
-
-  // refetch & pull to refresh
-  const refetch = async () => {
-    await refetchPublic()
-  }
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

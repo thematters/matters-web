@@ -22,7 +22,7 @@ import {
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
 
-import { getCookie } from './cookie'
+import { getIsomorphicCookie } from './cookie'
 import { resolvers } from './resolvers'
 import { storage } from './storage'
 import typeDefs from './types'
@@ -131,7 +131,7 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
  */
 const userGroupLink = ({ cookie }: { cookie: string }) =>
   setContext((_, { headers }) => {
-    const userGroup = getCookie(cookie, COOKIE_USER_GROUP)
+    const userGroup = getIsomorphicCookie(cookie, COOKIE_USER_GROUP)
 
     return {
       headers: {

@@ -1,10 +1,14 @@
 import gql from 'graphql-tag'
-import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
 import { createContext, useContext, useState } from 'react'
 
 import { ADD_TOAST, COOKIE_LANGUAGE, DEFAULT_LOCALE } from '~/common/enums'
-import { extractRootDomain, getCookie, toUserLanguage } from '~/common/utils'
+import {
+  getCookie,
+  getIsomorphicCookie,
+  setCookies,
+  toUserLanguage,
+} from '~/common/utils'
 import { Translate, useMutation, ViewerContext } from '~/components'
 import { UpdateLanguageMutation, UserLanguage } from '~/gql/graphql'
 
@@ -52,9 +56,9 @@ export const LanguageProvider = ({
       : ''
 
   // read from cookie (both server-side and client-side)
-  let cookieLang = getCookie(headers?.cookie, COOKIE_LANGUAGE)
+  let cookieLang = getIsomorphicCookie(headers?.cookie, COOKIE_LANGUAGE)
   if (typeof window !== 'undefined') {
-    const cookieLanguage = Cookie.get(COOKIE_LANGUAGE)
+    const cookieLanguage = getCookie(COOKIE_LANGUAGE)
     if (cookieLanguage) {
       cookieLang = cookieLanguage
     }
@@ -79,15 +83,13 @@ export const LanguageProvider = ({
   const [localLang, setLocalLang] = useState(initLocalLang)
 
   const setLang = async (language: UserLanguage) => {
+    // update local cache
     setLocalLang(language)
 
-    Cookie.set(COOKIE_LANGUAGE, language, {
-      domain: extractRootDomain(window.location.href),
-      expires: 90,
-      secure: false,
-      sameSite: 'Lax',
-    })
+    // update local cookie
+    setCookies({ [COOKIE_LANGUAGE]: language })
 
+    // anonymous
     if (!viewer.isAuthed) {
       return
     }

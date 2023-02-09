@@ -17,9 +17,9 @@ import {
   Button,
   IconLogo,
   LanguageContext,
+  Media,
   TextIcon,
   Translate,
-  useResponsive,
   withIcon,
 } from '~/components'
 
@@ -27,8 +27,6 @@ import styles from './styles.css'
 
 const Hero = () => {
   const { lang } = useContext(LanguageContext)
-  const isSmallUp = useResponsive('sm-up')
-  const buttonSize = isSmallUp ? 32 : 24
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     dragFree: true,
@@ -124,9 +122,10 @@ const Hero = () => {
         <section className="container">
           <section className="scrollButton scrollLeft">
             <Button onClick={scrollPrev} disabled={!prevBtnEnabled}>
-              {withIcon(IconButtonLeft)({
-                style: { height: buttonSize, width: buttonSize },
-              })}
+              <Media at="sm">{withIcon(IconButtonLeft)({ size: 'md' })}</Media>
+              <Media greaterThan="sm">
+                {withIcon(IconButtonLeft)({ size: 'lg' })}
+              </Media>
             </Button>
           </section>
           <section className="emblaViewport" ref={emblaRef}>
@@ -307,11 +306,10 @@ const Hero = () => {
           </section>
           <section className="scrollButton scrollRight">
             <Button onClick={scrollNext} disabled={!nextBtnEnabled}>
-              <>
-                {withIcon(IconButtonRight)({
-                  style: { height: buttonSize, width: buttonSize },
-                })}
-              </>
+              <Media at="sm">{withIcon(IconButtonRight)({ size: 'md' })}</Media>
+              <Media greaterThan="sm">
+                {withIcon(IconButtonRight)({ size: 'lg' })}
+              </Media>
             </Button>
           </section>
         </section>

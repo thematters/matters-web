@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import { PATHS } from '~/common/enums'
-import { Form, Translate, usePullToRefresh, ViewerContext } from '~/components'
+import { Form, Translate, ViewerContext } from '~/components'
 import { ViewerTotalBlockCountQuery } from '~/gql/graphql'
 
 import ChangeUserNameAsk from './ChangeUserNameAsk'
@@ -21,7 +21,7 @@ const VIEWER_TOTAL_BLOCK_COUNT = gql`
 
 const AccountSettings = () => {
   const viewer = useContext(ViewerContext)
-  const { data, refetch } = useQuery<ViewerTotalBlockCountQuery>(
+  const { data } = useQuery<ViewerTotalBlockCountQuery>(
     VIEWER_TOTAL_BLOCK_COUNT,
     {
       errorPolicy: 'none',
@@ -30,8 +30,6 @@ const AccountSettings = () => {
   const totalBlockCount = data?.viewer?.blockList?.totalCount
   const userNameEditable = viewer.info.userNameEditable
   const userPasswordEditable = !viewer.info.isWalletAuth
-
-  usePullToRefresh.Handler(refetch)
 
   return (
     <Form.List groupName={<Translate id="settingsAccount" />}>

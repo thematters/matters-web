@@ -8,7 +8,6 @@ import {
   Spinner,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
   UserDigest,
 } from '~/components'
 import { TagParticipantsQuery } from '~/gql/graphql'
@@ -21,7 +20,7 @@ interface Props {
 }
 
 const Participants = ({ id }: Props) => {
-  const { data, loading, error, fetchMore, refetch, networkStatus } =
+  const { data, loading, error, fetchMore, networkStatus } =
     usePublicQuery<TagParticipantsQuery>(TAG_PARTICIPANTS, {
       variables: { id },
       notifyOnNetworkStatusChange: true,
@@ -56,8 +55,6 @@ const Participants = ({ id }: Props) => {
         }),
     })
   }
-
-  usePullToRefresh.Handler(refetch)
 
   if (loading && (!edges || isNewLoading)) {
     return <Spinner />

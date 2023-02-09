@@ -30,6 +30,10 @@
     }
   }
 
+  & .comment-bar {
+    font-size: 0;
+  }
+
   @media (--sm-up) {
     & .comment-bar {
       display: block;

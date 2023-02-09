@@ -23,9 +23,6 @@ import {
   Translate,
   useEventListener,
   usePublicQuery,
-  usePullToRefresh,
-  useResponsive,
-  // useRoute,
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
@@ -59,7 +56,6 @@ type ResponseArticle = NonNullable<
 const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
-  const isMediumUp = useResponsive('md-up')
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
   const storedCursorRef = useRef<string | null>(null)
 
@@ -166,7 +162,6 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
     loadPrivate(newData)
   }
   useEventListener(REFETCH_RESPONSES, refetch)
-  usePullToRefresh.Handler(refetch)
 
   useEffect(() => {
     if (pageInfo?.startCursor) {
@@ -282,7 +277,7 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
         {responses.map((response) => (
           <List.Item key={response.id}>
             {response.__typename === 'Article' ? (
-              <ResponseArticle article={response} hasCover={isMediumUp} />
+              <ResponseArticle article={response} />
             ) : response.__typename === 'Comment' ? (
               <ThreadComment
                 comment={response}

@@ -1,14 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import {
-  Head,
-  Layout,
-  PullToRefresh,
-  Spacer,
-  Spinner,
-  useMutation,
-} from '~/components'
+import { Head, Layout, Spacer, Spinner, useMutation } from '~/components'
 import {
   UpdateViewerNotificationGeneralMutation,
   ViewerNotificationGeneralSettingsQuery,
@@ -66,10 +59,9 @@ const BaseNotificationSettings = () => {
   const [update] = useMutation<UpdateViewerNotificationGeneralMutation>(
     UPDATE_VIEWER_NOTIFICATION_GENERAL
   )
-  const { data, loading, refetch } =
-    useQuery<ViewerNotificationGeneralSettingsQuery>(
-      VIEWER_NOTIFICATION_GENERAL_SETTINGS
-    )
+  const { data, loading } = useQuery<ViewerNotificationGeneralSettingsQuery>(
+    VIEWER_NOTIFICATION_GENERAL_SETTINGS
+  )
   const settings = data?.viewer?.settings.notification
   const id = data?.viewer?.id
 
@@ -101,11 +93,11 @@ const BaseNotificationSettings = () => {
     })
   }
   return (
-    <PullToRefresh refresh={refetch}>
+    <>
       <MeSettings toggle={toggle} settings={settings} />
       <ArticleSettings toggle={toggle} settings={settings} />
       <CommentSettings toggle={toggle} settings={settings} />
-    </PullToRefresh>
+    </>
   )
 }
 

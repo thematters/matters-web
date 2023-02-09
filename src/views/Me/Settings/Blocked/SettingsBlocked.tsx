@@ -38,7 +38,7 @@ const VIEWER_BLOCK_LIST = gql`
 `
 
 const SettingsBlocked = () => {
-  const { data, loading, error, fetchMore, refetch } =
+  const { data, loading, error, fetchMore } =
     useQuery<ViewerBlockListQuery>(VIEWER_BLOCK_LIST)
 
   if (loading) {
@@ -81,11 +81,7 @@ const SettingsBlocked = () => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List hasBorder={false}>
         {filteredUsers.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>

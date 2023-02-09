@@ -8,7 +8,6 @@ import {
   Spinner,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
 } from '~/components'
 import { UserFollowingCirclesPublicQuery } from '~/gql/graphql'
@@ -23,7 +22,7 @@ const CirclesFeed = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, fetchMore, refetch } =
+  const { data, loading, error, fetchMore } =
     usePublicQuery<UserFollowingCirclesPublicQuery>(
       USER_FOLLOWING_CIRCLES_PUBLIC,
       {
@@ -53,9 +52,6 @@ const CirclesFeed = () => {
         }),
     })
   }
-
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

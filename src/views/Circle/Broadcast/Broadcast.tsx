@@ -22,7 +22,6 @@ import {
   Throw404,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -130,7 +129,6 @@ const CricleBroadcast = () => {
     const { data: newData } = await refetchPublic()
     loadPrivate(newData)
   }
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Fragment Patterns

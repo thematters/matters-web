@@ -1,4 +1,3 @@
-import clientInfo from './clientInfo'
 import clientPreference from './clientPreference'
 import commentDraft from './commentDraft'
 import gatewayUrls from './gatewayUrls'
@@ -8,7 +7,6 @@ export const resolvers = {
   Query: {
     commentDraft,
     clientPreference,
-    clientInfo,
     lastFetchRandom,
   },
   Official: {

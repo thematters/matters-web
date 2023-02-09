@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router'
-import { useContext, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { analytics } from '~/common/utils'
-import { ViewerContext } from '~/components'
 
 // get referrer without query string
 // should be same as window.location.origin + window.location.pathname
@@ -12,15 +11,10 @@ function getPageReferrer(url: string = window.location.href) {
 
 const PageViewTracker = () => {
   const router = useRouter()
-  const viewer = useContext(ViewerContext)
   const referrer = useRef('')
 
   // first load
   useEffect(() => {
-    if (!viewer.privateFetched) {
-      return
-    }
-
     // add time out to wait for analytic listener to be ready
     setTimeout(() => {
       analytics.identifyUser()
@@ -28,15 +22,11 @@ const PageViewTracker = () => {
     }, 1000)
 
     referrer.current = getPageReferrer() // window.location.origin + window.location.pathname
-  }, [viewer.privateFetched])
+  }, [])
 
   // subsequent changes
   useEffect(() => {
     const trackPage = () => {
-      if (!viewer.privateFetched) {
-        return
-      }
-
       analytics.trackPage('page_view', { page_referrer: referrer.current })
       referrer.current = getPageReferrer() // window.location.origin + window.location.pathname
     }
@@ -46,7 +36,7 @@ const PageViewTracker = () => {
     return () => {
       router.events.off('routeChangeComplete', trackPage)
     }
-  }, [viewer.privateFetched])
+  }, [])
 
   return null
 }
