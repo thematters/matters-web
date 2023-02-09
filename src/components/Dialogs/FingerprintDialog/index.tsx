@@ -85,7 +85,7 @@ const BaseFingerprintDialog = ({
   }, [show])
 
   return (
-    <Dialog.Content hasGrow>
+    <>
       {children({ openDialog })}
 
       <Dialog
@@ -116,7 +116,7 @@ const BaseFingerprintDialog = ({
           refetch={refetch}
         />
       </Dialog>
-    </Dialog.Content>
+    </>
   )
 }
 
