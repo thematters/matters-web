@@ -170,11 +170,13 @@ export class ArticleDetailPage {
   }
 
   async sendBookmark() {
-    await this.toolbarBookmarkButton.click()
-    await waitForAPIResponse({
-      page: this.page,
-      path: 'data.toggleSubscribeArticle.subscribed',
-    })
+    await Promise.all([
+      this.toolbarBookmarkButton.click(),
+      waitForAPIResponse({
+        page: this.page,
+        path: 'data.toggleSubscribeArticle.subscribed',
+      }),
+    ])
   }
 
   async supportHKD(password: string, amount: number) {
