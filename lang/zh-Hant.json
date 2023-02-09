@@ -4,7 +4,11 @@
     "description": "src/views/Guide/index.tsx"
   },
   "JMRVO6": {
-    "defaultMessage": "Matters Community",
+    "defaultMessage": "社區共建基地",
+    "description": "src/views/Help/index.tsx"
+  },
+  "RKs1fz": {
+    "defaultMessage": "開放社區",
     "description": "src/views/Help/index.tsx"
   },
   "cfL5uk": {
