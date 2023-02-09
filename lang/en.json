@@ -7,6 +7,10 @@
     "defaultMessage": "Matters Community",
     "description": "src/views/Help/index.tsx"
   },
+  "RKs1fz": {
+    "defaultMessage": "Open Source",
+    "description": "src/views/Help/index.tsx"
+  },
   "cfL5uk": {
     "defaultMessage": "Over 200 words, current {numbers}",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"

@@ -53,7 +53,10 @@ const BaseHelp = () => {
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="openCommunity" />}
+          title={intl.formatMessage({
+            defaultMessage: 'Open Source',
+            description: 'src/views/Help/index.tsx',
+          })}
           htmlHref="https://github.com/thematters/developer-resource"
           htmlTarget="_blank"
         />
