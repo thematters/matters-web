@@ -26,6 +26,7 @@ export enum TEST_ID {
   ARTICLE_SUPPORT_REQUEST = 'article/support/request',
   ARTICLE_SUPPORT_REPLY = 'article/support/reply',
   ARTICLE_APPRECIATION_TOTAL = 'article/appreciation/total',
+  ARTICLE_BOOKMARK = 'article/bookmark',
   // payto
   PAY_TO_CURRENCY_CHOICE = 'payto/currency-choice',
   // comment

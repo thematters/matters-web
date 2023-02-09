@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Button,
@@ -73,6 +73,7 @@ const Unsubscribe = ({
         await unsubscribe()
       }}
       disabled={disabled}
+      data-test-id={TEST_ID.ARTICLE_BOOKMARK}
     >
       <IconBookmarked16 color="black" size={size} />
     </Button>

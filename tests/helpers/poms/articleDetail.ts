@@ -82,9 +82,7 @@ export class ArticleDetailPage {
     this.toolbarCommentButton = this.page.getByRole('button', {
       name: 'Comment…',
     })
-    this.toolbarBookmarkButton = this.page.getByRole('button', {
-      name: 'Bookmark',
-    })
+    this.toolbarBookmarkButton = this.page.getByTestId(TEST_ID.ARTICLE_BOOKMARK)
     this.toolbarShareButton = this.page.getByRole('button', { name: 'Share' })
     this.toolbarMoreButton = this.page.getByRole('button', {
       name: 'More Action',
