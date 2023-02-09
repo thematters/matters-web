@@ -171,6 +171,14 @@ export class ArticleDetailPage {
     _range(count).map(async () => await this.toolbarAppreciationButton.click())
   }
 
+  async sendBookmark() {
+    await this.toolbarBookmarkButton.click()
+    await waitForAPIResponse({
+      page: this.page,
+      path: 'data.toggleSubscribeArticle.subscribed',
+    })
+  }
+
   async supportHKD(password: string, amount: number) {
     // Open support dialog
     await this.supportButton.click()
