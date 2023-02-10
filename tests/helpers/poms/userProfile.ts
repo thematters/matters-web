@@ -30,8 +30,6 @@ export class UserProfilePage {
     this.page = page
     this.isMobile = isMobile
 
-    this.feedArticles = page.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
-
     // feeds
     this.tabArticles = page.getByRole('tab').filter({ hasText: 'Articles' })
     this.tabComments = page.getByRole('tab').filter({ hasText: 'Responses' })

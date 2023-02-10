@@ -2,6 +2,7 @@ export enum TEST_ID {
   // digests
   DIGEST_ARTICLE_CARD = 'digest/article/card',
   DIGEST_ARTICLE_FEED = 'digest/article/feed',
+  DIGEST_ARTICLE_FEED_FOOTER_PIN = 'digest/article/feed/footer/pin',
   DIGEST_ARTICLE_SIDEBAR = 'digest/article/sidebar',
   DIGEST_ARTICLE_TITLE = 'digest/article/title',
   DIGEST_USER_MINI = 'digest/user/mini',
@@ -69,7 +70,9 @@ export enum TEST_ID {
   // me
   ME_WALLET_TRANSACTIONS_ITEM = 'me/wallet/transactions/item',
   ME_WALLET_TRANSACTIONS_ITEM_AMOUNT = 'me/wallet/transactions/item/amount',
+  // user profile
+  USER_PROFILE = 'user-profile',
+
   // misc
   SPINNER = 'spinner',
-  USER_PROFILE = 'user-profile',
 }
