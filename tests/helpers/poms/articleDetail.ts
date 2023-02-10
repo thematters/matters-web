@@ -171,11 +171,11 @@ export class ArticleDetailPage {
 
   async sendBookmark() {
     await Promise.all([
-      this.toolbarBookmarkButton.click(),
       waitForAPIResponse({
         page: this.page,
         path: 'data.toggleSubscribeArticle.subscribed',
       }),
+      this.toolbarBookmarkButton.click(),
     ])
   }
 
