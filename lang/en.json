@@ -3,10 +3,6 @@
     "defaultMessage": "Please email",
     "description": "src/views/Help/index.tsx"
   },
-  "8bnDej": {
-    "defaultMessage": "{content}",
-    "description": "src/views/Guide/index.tsx"
-  },
   "BqXRy4": {
     "defaultMessage": "Download App",
     "description": "src/views/Help/index.tsx"
