@@ -38,7 +38,7 @@ test.describe('Mutate article', () => {
         }
       )
       console.log({ mediaHashState })
-      console.log(mediaHashState.json())
+      console.log(await mediaHashState.json())
 
       // [Alice] Get new article link
       const aliceArticleLink = alicePage.url()
