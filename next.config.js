@@ -55,7 +55,9 @@ const nextConfig = {
           loader: 'url-loader',
           options: {
             limit: 1024,
-            publicPath: '/_next/static/',
+            publicPath: nextAssetDomain
+              ? `https://${nextAssetDomain}/_next/static/`
+              : '/_next/static/',
             outputPath: `${isServer ? '../' : ''}static/`,
           },
         },
