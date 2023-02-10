@@ -46,11 +46,7 @@ const persistedQueryLink = createPersistedQueryLink({
  * Dynamic API endpoint based on hostname
  */
 const httpLink = ({ host, headers }: { host: string; headers: any }) => {
-  const isOAuthSite = process.env.NEXT_PUBLIC_OAUTH_SITE_DOMAIN === host
-
-  const apiUrl = isOAuthSite
-    ? process.env.NEXT_PUBLIC_OAUTH_API_URL
-    : process.env.NEXT_PUBLIC_API_URL
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
   const hostname = new URL(apiUrl as string).hostname
 
