@@ -78,29 +78,6 @@ const nextConfig = {
     defaultLocale: '__defaultLocale',
     localeDetection: false,
   },
-
-  // custom HTTP headers
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        has: !isProd
-          ? undefined
-          : [
-              {
-                type: 'host',
-                value: process.env.NEXT_PUBLIC_OAUTH_SITE_DOMAIN,
-              },
-            ],
-        headers: [
-          {
-            key: 'X-Robots-Tag',
-            value: 'noindex',
-          },
-        ],
-      },
-    ]
-  },
 }
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
