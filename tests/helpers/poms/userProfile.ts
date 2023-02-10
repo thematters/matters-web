@@ -76,6 +76,7 @@ export class UserProfilePage {
 
     // confirm User Profile Page
     await expect(this.page.getByTestId(TEST_ID.USER_PROFILE)).toBeVisible()
+    await expect(this.feedArticles.first()).toBeVisible()
   }
 
   async goto(userName: string) {
