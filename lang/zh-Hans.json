@@ -1,4 +1,8 @@
 {
+  "3uQKhx": {
+    "defaultMessage": "Please email",
+    "description": "src/views/Help/index.tsx"
+  },
   "8bnDej": {
     "defaultMessage": "{content}",
     "description": "src/views/Guide/index.tsx"
