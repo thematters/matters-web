@@ -3,6 +3,18 @@
     "defaultMessage": "{content}",
     "description": "src/views/Guide/index.tsx"
   },
+  "BqXRy4": {
+    "defaultMessage": "Download App",
+    "description": "src/views/Help/index.tsx"
+  },
+  "JMRVO6": {
+    "defaultMessage": "Matters 社区",
+    "description": "src/views/Help/index.tsx"
+  },
+  "RKs1fz": {
+    "defaultMessage": "开放社区",
+    "description": "src/views/Help/index.tsx"
+  },
   "cfL5uk": {
     "defaultMessage": "已超过 200 字，目前 {numbers} 字",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
@@ -15,16 +27,16 @@
     "defaultMessage": "关于我们",
     "description": "src/views/Help/index.tsx"
   },
-  "cfL5uk": {
-    "defaultMessage": "已超过 200 字，目前 {numbers} 字",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
-  },
-  "8bnDej": {
-    "defaultMessage": "{content}",
-    "description": "src/views/Guide/index.tsx"
+  "q7jZPx": {
+    "defaultMessage": "用户协议",
+    "description": "src/views/Help/index.tsx"
   },
   "qXcvBF": {
     "defaultMessage": "玩转 Matters 实用指南",
+    "description": "src/views/Help/index.tsx"
+  },
+  "rXbLl7": {
+    "defaultMessage": "Migrate to Matters",
     "description": "src/views/Help/index.tsx"
   }
 }
