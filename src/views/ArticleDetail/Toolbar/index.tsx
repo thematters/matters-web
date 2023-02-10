@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { TEST_ID } from '@/src/common/enums'
 import { stripAllPunct, toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,
@@ -87,7 +88,7 @@ const Toolbar = ({
   }
 
   return (
-    <section className="toolbar">
+    <section className="toolbar" data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
       <section className="buttons">
         <ReCaptchaProvider action="appreciateArticle">
           <AppreciationButton
