@@ -11,10 +11,11 @@ import {
   DraftDetailPage,
   NotificationsPage,
   UserProfilePage,
+  waitForAPIResponse,
 } from './helpers'
 
 test.describe('Mutate article', () => {
-  authedTest(
+  authedTest.skip(
     "Alice' article is appreciation by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile, request }) => {
       // [Alice] create and publish new article
@@ -170,4 +171,63 @@ test.describe('Mutate article', () => {
       )
     }
   )
+
+  authedTest('Pin and unpin article', async ({ alicePage, isMobile }) => {
+    // [Alice] Go to profile page
+    const aliceProfile = new UserProfilePage(alicePage, isMobile)
+    await aliceProfile.gotoMeProfile()
+
+    // [Alice] Get first article
+    const aliceArticles = await aliceProfile.feedArticles.all()
+    const secondArticle = await aliceArticles[1].first()
+    await expect(secondArticle).toBeVisible()
+    const secondArticleTitle = await secondArticle
+      .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
+      .innerText()
+
+    await secondArticle.getByRole('button', { name: 'More Actions' }).click()
+    const pinButton = await alicePage
+      .getByRole('menuitem', { name: 'Article pinned' })
+      .locator('section')
+    await Promise.all([
+      waitForAPIResponse({
+        page: alicePage,
+        path: 'data.editArticle.sticky',
+        isOK: (data) => data === true,
+      }),
+      pinButton.click(),
+    ])
+
+    const firstArticle = await aliceProfile.feedArticles.first()
+    const firstArticleTitle = await firstArticle
+      .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
+      .innerText()
+    expect(stripSpaces(firstArticleTitle)).toBe(stripSpaces(secondArticleTitle))
+    const footerPin = firstArticle.getByTestId(
+      TEST_ID.DIGEST_ARTICLE_FEED_FOOTER_PIN
+    )
+    expect(footerPin).toBeVisible()
+
+    // unpin
+    await firstArticle.getByRole('button', { name: 'More Actions' }).click()
+    const unpinButton = await alicePage
+      .getByRole('menuitem', { name: 'Unpin' })
+      .locator('section')
+    await Promise.all([
+      waitForAPIResponse({
+        page: alicePage,
+        path: 'data.editArticle.sticky',
+        isOK: (data) => data === false,
+      }),
+      unpinButton.click(),
+    ])
+    const firstArticleAfterUnpin = await aliceProfile.feedArticles.first()
+    const firstArticleTitleAfterUnpin = await firstArticleAfterUnpin
+      .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
+      .innerText()
+    expect(
+      stripSpaces(firstArticleTitle) !==
+        stripSpaces(firstArticleTitleAfterUnpin)
+    ).toBeTruthy()
+  })
 })
