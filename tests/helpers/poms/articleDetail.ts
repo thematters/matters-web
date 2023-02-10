@@ -179,6 +179,11 @@ export class ArticleDetailPage {
     ])
   }
 
+  async forkArticle() {
+    await this.toolbarMoreButton.click()
+    await this.toolbarCollectButton.click()
+  }
+
   async supportHKD(password: string, amount: number) {
     // Open support dialog
     await this.supportButton.click()
