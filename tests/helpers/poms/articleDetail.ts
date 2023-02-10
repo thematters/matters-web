@@ -30,6 +30,7 @@ export class ArticleDetailPage {
   readonly toggleArticleOnly: Locator
 
   // toolbar
+  readonly toolbar: Locator
   readonly toolbarAppreciationButton: Locator
   readonly toolbarSupportButton: Locator
   readonly toolbarCommentButton: Locator
@@ -72,6 +73,7 @@ export class ArticleDetailPage {
     this.toggleArticleOnly = this.page.getByLabel('Articles Only')
 
     // toolbar
+    this.toolbar = this.page.getByTestId(TEST_ID.ARTICLE_TOOLBAR)
     this.toolbarAppreciationButton = this.page.getByRole('button', {
       name: 'like article',
     })
@@ -84,7 +86,7 @@ export class ArticleDetailPage {
     })
     this.toolbarBookmarkButton = this.page.getByTestId(TEST_ID.ARTICLE_BOOKMARK)
     this.toolbarShareButton = this.page.getByRole('button', { name: 'Share' })
-    this.toolbarMoreButton = this.page.getByRole('button', {
+    this.toolbarMoreButton = this.toolbar.getByRole('button', {
       name: 'More Action',
     })
     this.toolbarViewLikersButton = this.page.getByRole('menuitem', {
