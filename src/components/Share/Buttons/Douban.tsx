@@ -1,5 +1,3 @@
-// import queryString from 'query-string'
-
 import { ReactComponent as IconShareDouban } from '@/public/static/icons/16px/share-douban.svg'
 import { ReactComponent as IconShareDoubanCircle } from '@/public/static/icons/40px/share-douban-circle.svg'
 import { analytics, dom } from '~/common/utils'
