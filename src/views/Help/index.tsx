@@ -40,7 +40,10 @@ const BaseHelp = () => {
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="migrationSideBar" />}
+          title={intl.formatMessage({
+            defaultMessage: 'Migrate to Matters',
+            description: 'src/views/Help/index.tsx',
+          })}
           href={PATHS.MIGRATION}
         />
         <Form.List.Item
@@ -62,7 +65,10 @@ const BaseHelp = () => {
         />
         <Form.List.Item
           role="link"
-          title={<Translate id="downloadApp" />}
+          title={intl.formatMessage({
+            defaultMessage: 'Download App',
+            description: 'src/views/Help/index.tsx',
+          })}
           href={GUIDE_LINKS.PWA[lang]}
         />
       </Form.List>
