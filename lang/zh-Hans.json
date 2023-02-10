@@ -3,6 +3,10 @@
     "defaultMessage": "{content}",
     "description": "src/views/Guide/index.tsx"
   },
+  "BqXRy4": {
+    "defaultMessage": "Download App",
+    "description": "src/views/Help/index.tsx"
+  },
   "JMRVO6": {
     "defaultMessage": "Matters 社区",
     "description": "src/views/Help/index.tsx"
@@ -29,6 +33,10 @@
   },
   "qXcvBF": {
     "defaultMessage": "玩转 Matters 实用指南",
+    "description": "src/views/Help/index.tsx"
+  },
+  "rXbLl7": {
+    "defaultMessage": "Migrate to Matters",
     "description": "src/views/Help/index.tsx"
   }
 }
