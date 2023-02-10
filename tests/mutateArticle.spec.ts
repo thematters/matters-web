@@ -13,23 +13,32 @@ import {
 } from './helpers'
 
 test.describe('Mutate article', () => {
-  authedTest(
+  authedTest.only(
     "Alice' article is appreciation by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile, request }) => {
       // [Alice] create and publish new article
       await publishDraft({ page: alicePage, isMobile })
 
-      // const mediaHashState = await request.post(
-      //   'https://server-develop.matters.news/graphql',
-      //   {
-      //     data: {
-      //       variables: {},
-      //       query:
-      //         '{\n  node(input: {id: "QXJ0aWNsZTo5MDI2"}) {\n    ... on Article {\n      id\n      mediaHash\n    }\n  }\n}\n',
-      //     },
-      //   }
-      // )
-      // console.log({ mediaHashState })
+      const mediaHashState = await request.post(
+        'https://server-develop.matters.news/graphql',
+        {
+          data: {
+            variables: {},
+            query:
+              // '{\n  node(input: {id: "QXJ0aWNsZTo5MDI2"}) {\n    ... on Article {\n      id\n      mediaHash\n    }\n  }\n}\n',
+              `{
+                node(input: {id: "QXJ0aWNsZTo5MDI2"}) {
+                   ... on Article {
+                    id
+                    mediaHash
+                  }
+                }
+              }`,
+          },
+        }
+      )
+      console.log({ mediaHashState })
+      console.log(mediaHashState.json())
 
       // [Alice] Get new article link
       const aliceArticleLink = alicePage.url()
