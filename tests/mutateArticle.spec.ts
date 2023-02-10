@@ -86,7 +86,7 @@ test.describe('Mutate article', () => {
     }
   )
 
-  authedTest.only(
+  authedTest(
     "Alice' article is bookmarked by Bob",
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
