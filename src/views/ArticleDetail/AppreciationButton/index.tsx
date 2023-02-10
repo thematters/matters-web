@@ -209,7 +209,7 @@ const AppreciationButton = ({
 
   // Blocked by private query
   if (!privateFetched) {
-    return <AppreciateButton total={total} />
+    return <AppreciateButton total={total} disabled />
   }
 
   // Appreciable
