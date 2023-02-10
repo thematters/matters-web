@@ -19,26 +19,18 @@ test.describe('Mutate article', () => {
       // [Alice] create and publish new article
       await publishDraft({ page: alicePage, isMobile })
 
-      const mediaHashState = await request.post(
-        'https://server-develop.matters.news/graphql',
-        {
-          data: {
-            variables: {},
-            query:
-              // '{\n  node(input: {id: "QXJ0aWNsZTo5MDI2"}) {\n    ... on Article {\n      id\n      mediaHash\n    }\n  }\n}\n',
-              `{
-                node(input: {id: "QXJ0aWNsZTo5MDI2"}) {
-                   ... on Article {
-                    id
-                    mediaHash
-                  }
-                }
-              }`,
-          },
-        }
-      )
-      console.log({ mediaHashState })
-      console.log(await mediaHashState.json())
+      // const mediaHashState = await request.post(
+      //   'https://server-develop.matters.news/graphql',
+      //   {
+      //     data: {
+      //       variables: {},
+      //       query:
+      //         '{\n  node(input: {id: "QXJ0aWNsZTo5MDI2"}) {\n    ... on Article {\n      id\n      mediaHash\n    }\n  }\n}\n',
+      //     },
+      //   }
+      // )
+      // console.log({ mediaHashState })
+      // console.log(await mediaHashState.json())
 
       // [Alice] Get new article link
       const aliceArticleLink = alicePage.url()
