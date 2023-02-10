@@ -69,4 +69,5 @@ export enum TEST_ID {
   ME_WALLET_TRANSACTIONS_ITEM_AMOUNT = 'me/wallet/transactions/item/amount',
   // misc
   SPINNER = 'spinner',
+  USER_PROFILE = 'user-profile',
 }

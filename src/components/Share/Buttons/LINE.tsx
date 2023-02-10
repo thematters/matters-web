@@ -1,5 +1,3 @@
-// import queryString from 'query-string'
-
 import { ReactComponent as IconShareLINE } from '@/public/static/icons/16px/share-line.svg'
 import { ReactComponent as IconShareLINECircle } from '@/public/static/icons/40px/share-line-circle.svg'
 import { analytics } from '~/common/utils'

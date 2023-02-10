@@ -55,7 +55,9 @@ const nextConfig = {
           loader: 'url-loader',
           options: {
             limit: 1024,
-            publicPath: '/_next/static/',
+            publicPath: nextAssetDomain
+              ? `https://${nextAssetDomain}/_next/static/`
+              : '/_next/static/',
             outputPath: `${isServer ? '../' : ''}static/`,
           },
         },
@@ -77,29 +79,6 @@ const nextConfig = {
     // FIXME: Disable Next.js auto detection and prefixing since we have a fallback strategy based on user request and browser perference in `<LanguageContext>`
     defaultLocale: '__defaultLocale',
     localeDetection: false,
-  },
-
-  // custom HTTP headers
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        has: !isProd
-          ? undefined
-          : [
-              {
-                type: 'host',
-                value: process.env.NEXT_PUBLIC_OAUTH_SITE_DOMAIN,
-              },
-            ],
-        headers: [
-          {
-            key: 'X-Robots-Tag',
-            value: 'noindex',
-          },
-        ],
-      },
-    ]
   },
 }
 

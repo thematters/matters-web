@@ -1,2 +1,6 @@
 User-agent: *
 Disallow: /me/*
+Disallow: /en/
+Disallow: /zh-Hant/
+Disallow: /zh-Hans/
+

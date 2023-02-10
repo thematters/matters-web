@@ -34,8 +34,6 @@ aside {
   @mixin border-left-grey;
   @mixin border-right-grey;
 
-  padding: var(--spacing-base);
-
   & .content :global(> * + *) {
     margin-top: var(--spacing-xx-loose);
   }
@@ -48,4 +46,9 @@ aside {
     border-right: none;
     border-left: none;
   }
+}
+
+.sidenav {
+  position: sticky;
+  top: 0;
 }

@@ -38,8 +38,6 @@ const Search = () => {
     !isTagOnly &&
     !isUserOnly &&
     !isArticleOnly
-  // const showBackButton = isSmallUp && isOverview
-  // const showMeButton = !isSmallUp && isOverview
   const showCancelButton = !isOverview
 
   useEffect(() => {

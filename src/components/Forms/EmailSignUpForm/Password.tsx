@@ -4,8 +4,14 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
+  COOKIE_LANGUAGE,
+  COOKIE_TOKEN_NAME,
+  COOKIE_USER_GROUP,
+} from '~/common/enums'
+import {
   analytics,
   parseFormSubmitErrors,
+  setCookies,
   translate,
   validateComparedPassword,
   validatePassword,
@@ -23,6 +29,8 @@ import {
   ConfirmVerificationCodeMutation,
   UserRegisterMutation,
 } from '~/gql/graphql'
+
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 interface FormProps {
   email: string
@@ -42,6 +50,16 @@ const USER_REGISTER = gql`
   mutation UserRegister($input: UserRegisterInput!) {
     userRegister(input: $input) {
       auth
+      token
+      user {
+        id
+        settings {
+          language
+        }
+        info {
+          group
+        }
+      }
     }
   }
 `
@@ -102,8 +120,18 @@ const Password: React.FC<FormProps> = ({
         const codeId = data?.confirmVerificationCode
 
         // finish registration
-        await register({
+        const { data: registerData } = await register({
           variables: { input: { email, codeId, displayName, password } },
+        })
+
+        const token = registerData?.userRegister.token || ''
+        const language =
+          registerData?.userRegister.user?.settings.language || ''
+        const group = registerData?.userRegister.user?.info.group || ''
+        setCookies({
+          [COOKIE_LANGUAGE]: language,
+          [COOKIE_USER_GROUP]: group,
+          ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
         })
 
         analytics.identifyUser()

@@ -1,7 +1,6 @@
 import { getAddress } from '@ethersproject/address'
 import { useContext } from 'react'
 
-import { EXTERNAL_LINKS } from '~/common/enums'
 import { maskAddress, translate } from '~/common/utils'
 import {
   Button,
@@ -42,7 +41,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
     return (
       <Button
         {...buttonProps}
-        htmlHref={`${EXTERNAL_LINKS.CLOUDFLARE_GATEWAY_LINK}${ensName}`}
+        htmlHref={`https://${ensName}.limo`}
         htmlTarget="_blank"
       >
         <TextIcon {...textIconProps} icon={<IconExternalLink16 />}>
