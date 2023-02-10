@@ -8,6 +8,7 @@ import { publishDraft } from './common'
 import {
   ArticleDetailPage,
   authedTest,
+  DraftDetailPage,
   NotificationsPage,
   UserProfilePage,
 } from './helpers'
@@ -117,6 +118,56 @@ test.describe('Mutate article', () => {
         )
 
       expect(firstLabel !== secondLabel).toBeTruthy()
+    }
+  )
+
+  authedTest.only(
+    "Alice' article is forked by Bob",
+    async ({ alicePage, bobPage, isMobile }) => {
+      // [Alice] Go to profile page
+      const aliceProfile = new UserProfilePage(alicePage, isMobile)
+      await aliceProfile.gotoMeProfile()
+
+      // [Alice] Get first article
+      const aliceArticleLink = (await aliceProfile.feedArticles
+        .first()
+        .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
+        .getAttribute('href')) as string
+      expect(aliceArticleLink).toBeTruthy()
+
+      // [Bob] Go to Alice's article page
+      await bobPage.goto(aliceArticleLink)
+      const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
+      const aliceTitle = await aliceArticleDetail.getTitle()
+
+      await aliceArticleDetail.forkArticle()
+
+      // [Bob] create and publish article
+      const draftDetail = new DraftDetailPage(bobPage, isMobile)
+      // Required: Fill title and content
+      const title = await draftDetail.fillTitle()
+      const content = await draftDetail.fillContent()
+      await draftDetail.publish()
+
+      // Goto published article page
+      // Promise.all prevents a race condition between clicking and waiting.
+      await Promise.all([
+        bobPage.waitForNavigation(),
+        draftDetail.dialogViewArticleButton.click(),
+      ])
+
+      const bobArticleDetail = new ArticleDetailPage(bobPage, isMobile)
+      const bobTitle = await bobArticleDetail.getTitle()
+      expect(stripSpaces(bobTitle)).toBe(stripSpaces(title))
+
+      const bobContent = await bobArticleDetail.content.innerText()
+      expect(stripSpaces(bobContent)).toBe(stripSpaces(content))
+
+      const firstCollectionArticleTitle =
+        await bobArticleDetail.getFirstCollectionArticleTitle()
+      expect(stripSpaces(firstCollectionArticleTitle)).toBe(
+        stripSpaces(aliceTitle)
+      )
     }
   )
 })
