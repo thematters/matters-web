@@ -206,7 +206,7 @@ test.describe('Mutate article', () => {
     const footerPin = firstArticle.getByTestId(
       TEST_ID.DIGEST_ARTICLE_FEED_FOOTER_PIN
     )
-    expect(footerPin).toBeVisible()
+    await expect(footerPin).toBeVisible()
 
     // unpin
     await firstArticle.getByRole('button', { name: 'More Actions' }).click()
