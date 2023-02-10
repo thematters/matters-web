@@ -83,12 +83,10 @@ export const LanguageProvider = ({
   const [localLang, setLocalLang] = useState(initLocalLang)
 
   const setLang = async (language: UserLanguage) => {
-    // update local cache
-    setLocalLang(language)
-
     // update local cookie
     setCookies({ [COOKIE_LANGUAGE]: language })
-
+    // update local cache
+    setLocalLang(language)
     // anonymous
     if (!viewer.isAuthed) {
       return

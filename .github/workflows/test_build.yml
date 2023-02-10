@@ -28,7 +28,8 @@ jobs:
 
       - name: Lint
         run: |
-          npm run lint \
+          npm run i18n \
+          && npm run lint \
           && npm run format:check
 
       - name: Build
