@@ -28,7 +28,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm ci
 
       - name: Generate Types (develop)
         if: github.base_ref == 'develop'
@@ -75,7 +75,7 @@ jobs:
         if: github.base_ref == 'develop' || github.base_ref == 'master'
         run: |
           rm -rf node_modules \
-          && npm install --production --legacy-peer-deps \
+          && npm install --production \
           && zip -r --symlinks deploy.zip . -x .git/\*
 
       - name: Upload Assets (develop - R2)
