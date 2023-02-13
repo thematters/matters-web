@@ -23,6 +23,9 @@
     "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
     "description": "src/views/Help/index.tsx"
   },
+  "jaHpV7": {
+    "defaultMessage": "<p>Welcome to Matters!</p> <h2>For Creators and Readers</h2> <p>If you have just landed in Matterverse, here are two must-read features guidance to help you sail. How to use Matters.News' editor? What is IPFS? How to check your income and balance? How to discover more writing communities and participate in this self-regulated community?</p> {link}"
+  },
   "nmmItN": {
     "defaultMessage": "About Us",
     "description": "src/views/Help/index.tsx"
