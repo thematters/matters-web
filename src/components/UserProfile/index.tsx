@@ -235,7 +235,12 @@ export const UserProfile = () => {
 
         <section className="info">
           <section className="display-name">
-            <h1 className="name">{user.displayName}</h1>
+            <h1
+              className="name"
+              data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
+            >
+              {user.displayName}
+            </h1>
             {hasTraveloggersBadge && <TraveloggersBadge />}
             {hasSeedBadge && <SeedBadge />}
             {hasGoldenMotorBadge && <GoldenMotorBadge />}
@@ -266,7 +271,10 @@ export const UserProfile = () => {
           <FollowersDialog user={user}>
             {({ openDialog: openFollowersDialog }) => (
               <button type="button" onClick={openFollowersDialog}>
-                <span className="count">
+                <span
+                  className="count"
+                  data-test-id={TEST_ID.USER_PROFILE_FOLLOWERS_COUNT}
+                >
                   {numAbbr(user.followers.totalCount)}
                 </span>
                 <Translate id="follower" />

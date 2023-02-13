@@ -125,7 +125,12 @@ const Rich = ({
         <section className={contentClasses}>
           <header className="header">
             <Link {...path} legacyBehavior>
-              <a className="name">{user.displayName}</a>
+              <a
+                className="name"
+                data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
+              >
+                {user.displayName}
+              </a>
             </Link>
             {hasState && <FollowUserButton.State user={user} />}
           </header>

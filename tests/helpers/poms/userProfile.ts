@@ -11,6 +11,7 @@ export class UserProfilePage {
   // shareButton: Locator
 
   // profile
+  displayName: Locator
   // followButton: Locator
   // rssButton: Locator
   // ethAddress: Locator
@@ -31,6 +32,9 @@ export class UserProfilePage {
     this.isMobile = isMobile
 
     this.feedArticles = page.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
+
+    // profile
+    this.displayName = page.getByTestId(TEST_ID.USER_PROFILE_DISPLAY_NAME)
 
     // feeds
     this.tabArticles = page.getByRole('tab').filter({ hasText: 'Articles' })
