@@ -2,13 +2,13 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   translate,
-  validateDescription,
   validateDisplayName,
 } from '~/common/utils'
 import {
@@ -81,6 +81,23 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
 
   const formId = 'edit-profile-form'
 
+  const intl = useIntl()
+  const validateDescription = (value: string, lang: Language) => {
+    if (!value) {
+      return translate({ id: 'required', lang })
+    } else if (value.length > 200) {
+      return intl.formatMessage(
+        {
+          defaultMessage: 'Over 200 words, current {numbers}',
+          description:
+            'src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx',
+        },
+        {
+          numbers: value.length,
+        }
+      )
+    }
+  }
   const {
     values,
     errors,

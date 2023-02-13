@@ -1,0 +1,14 @@
+{
+  "8bnDej": {
+    "defaultMessage": "{content}",
+    "description": "src/views/Guide/index.tsx"
+  },
+  "cfL5uk": {
+    "defaultMessage": "已超过 200 字，目前 {numbers} 字",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+  },
+  "8bnDej": {
+    "defaultMessage": "{content}",
+    "description": "src/views/Guide/index.tsx"
+  }
+}
