@@ -47,8 +47,8 @@ export const login = async ({
   await page.getByRole('button', { name: 'Continue with Email' }).click()
 
   // Fill the form
-  await page.getByLabel('Email').fill(email)
-  await page.getByLabel('Password').fill(password)
+  await page.getByPlaceholder('Email').fill(email)
+  await page.getByPlaceholder('Password').fill(password)
 
   // Submit
   await page.getByRole('button', { name: 'Confirm' }).click()
