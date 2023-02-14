@@ -19,6 +19,9 @@ const follow = async (page: Page) => {
     }),
     page.getByRole('button', { name: 'Follow', exact: true }).click(),
   ])
+  await expect(
+    page.getByRole('button', { name: 'Followed', exact: true })
+  ).toBeVisible()
 }
 
 const unfollow = async (page: Page) => {
@@ -30,6 +33,9 @@ const unfollow = async (page: Page) => {
     }),
     page.getByRole('button', { name: 'Followed', exact: true }).click(),
   ])
+  await expect(
+    page.getByRole('button', { name: 'Follow', exact: true })
+  ).toBeVisible()
 }
 
 test.describe('User Mutation', () => {
@@ -106,6 +112,8 @@ test.describe('User Mutation', () => {
 
       await unfollow(bobPage)
 
+      await bobPage.reload()
+
       const unfollowCount = await bobPage
         .getByTestId(TEST_ID.USER_PROFILE_FOLLOWERS_COUNT)
         .innerText()
@@ -129,13 +137,14 @@ test.describe('User Mutation', () => {
       // [Bob] Go to Alice's User Profile
       await bobPage.goto(alicePage.url())
 
-      await bobPage.getByRole('button', { name: 'More Actions' }).click()
+      await bobPage
+        .getByTestId(TEST_ID.LAYOUT_HEADER)
+        .getByRole('button', { name: 'More Actions' })
+        .click()
 
       // [Bob] check block state
       if (
-        await bobPage
-          .getByRole('menuitem', { name: 'Unblock user' })
-          .isVisible()
+        await bobPage.getByRole('menuitem', { name: 'Unblock' }).isVisible()
       ) {
         await Promise.all([
           waitForAPIResponse({
@@ -144,11 +153,14 @@ test.describe('User Mutation', () => {
             isOK: (value) => value === false,
           }),
           bobPage
-            .getByRole('menuitem', { name: 'Unblock user' })
+            .getByRole('menuitem', { name: 'Unblock' })
             .locator('section')
             .click(),
         ])
-        await bobPage.getByRole('button', { name: 'More Actions' }).click()
+        await bobPage
+          .getByTestId(TEST_ID.LAYOUT_HEADER)
+          .getByRole('button', { name: 'More Actions' })
+          .click()
       }
 
       await bobPage
@@ -191,7 +203,10 @@ test.describe('User Mutation', () => {
 
       // [Bob] Go to Alice's User Profile and Check Block state
       await bobPage.goto(alicePage.url())
-      await bobPage.getByRole('button', { name: 'More Actions' }).click()
+      await bobPage
+        .getByTestId(TEST_ID.LAYOUT_HEADER)
+        .getByRole('button', { name: 'More Actions' })
+        .click()
       await expect(
         bobPage.getByRole('menuitem', { name: 'Block user' })
       ).toBeVisible()
@@ -203,7 +218,7 @@ test.describe('User Mutation', () => {
     const aliceProfile = new UserProfilePage(alicePage, isMobile)
     await aliceProfile.gotoMeProfile()
 
-    await alicePage.getByRole('button', { name: 'More Actions' }).click()
+    await aliceProfile.moreButton.click()
     await alicePage
       .getByRole('menuitem', { name: 'Edit' })
       .locator('section')
@@ -230,10 +245,10 @@ test.describe('User Mutation', () => {
     ])
 
     const aliceDisplayName = await aliceProfile.displayName.innerText()
-    expect(aliceDisplayName).toBe(displayName)
+    expect(stripSpaces(aliceDisplayName)).toBe(stripSpaces(displayName))
 
     const aliceBio = await aliceProfile.bio.first().innerText()
-    expect(aliceBio).toBe(bio)
+    expect(stripSpaces(aliceBio)).toBe(stripSpaces(bio))
   })
 
   authedTest(
@@ -259,6 +274,8 @@ test.describe('User Mutation', () => {
           .click(),
       ])
 
+      await alicePage.reload()
+
       await alicePage.getByRole('button', { name: '介面語言 繁體中文' }).click()
       await Promise.all([
         waitForAPIResponse({
@@ -271,6 +288,8 @@ test.describe('User Mutation', () => {
           .locator('section')
           .click(),
       ])
+
+      await alicePage.reload()
 
       await alicePage.getByRole('button', { name: '界面语言 简体中文' }).click()
       await Promise.all([
