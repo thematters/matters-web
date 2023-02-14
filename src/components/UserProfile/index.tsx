@@ -263,7 +263,9 @@ export const UserProfile = () => {
             size="md"
             spacingTop="base"
           >
-            <p className="description">{user.info.description}</p>
+            <p className="description" data-test-id={TEST_ID.USER_PROFILE_BIO}>
+              {user.info.description}
+            </p>
           </Expandable>
         </section>
 

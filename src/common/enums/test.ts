@@ -71,6 +71,7 @@ export enum TEST_ID {
   // user profile
   USER_PROFILE_DISPLAY_NAME = 'user-profile/display-name',
   USER_PROFILE_FOLLOWERS_COUNT = 'user-profile/followers/count',
+  USER_PROFILE_BIO = 'user-profile/bio',
   // misc
   SPINNER = 'spinner',
   USER_PROFILE = 'user-profile',
