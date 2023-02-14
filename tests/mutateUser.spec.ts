@@ -114,7 +114,7 @@ test.describe('User Mutation', () => {
     }
   )
 
-  authedTest.only(
+  authedTest(
     'Alice is blocked and unblocked by Bob',
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
@@ -195,6 +195,48 @@ test.describe('User Mutation', () => {
       await expect(
         bobPage.getByRole('menuitem', { name: 'Block user' })
       ).toBeVisible()
+    }
+  )
+
+  authedTest(
+    'Alice edit user profile',
+    async ({ alicePage, isMobile }) => {
+      // [Alice] Go to profile page
+      const aliceProfile = new UserProfilePage(alicePage, isMobile)
+      await aliceProfile.gotoMeProfile()
+
+
+      await alicePage.getByRole('button', { name: 'More Actions' }).click()
+      await alicePage
+        .getByRole('menuitem', { name: 'Edit' })
+        .locator('section')
+        .click()
+
+      await aliceProfile.setCover()
+      await aliceProfile.setAvatar()
+
+      const displayName = await aliceProfile.fillDisplayName()
+      const bio = await aliceProfile.fillBio()
+
+      await Promise.all([
+        waitForAPIResponse({
+          page: alicePage,
+          path: 'data.updateUserInfo.displayName',
+          isOK: value => value === displayName
+        }),
+        waitForAPIResponse({
+          page: alicePage,
+          path: 'data.updateUserInfo.info.description',
+          isOK: value => value === bio
+        }),
+        aliceProfile.dialogSaveButton.click()
+      ])
+
+      const aliceDisplayName = await aliceProfile.displayName.innerText()
+      expect(aliceDisplayName).toBe(displayName)
+
+      const aliceBio = await aliceProfile.bio.first().innerText()
+      expect(aliceBio).toBe(bio)
     }
   )
 })
