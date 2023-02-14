@@ -113,4 +113,88 @@ test.describe('User Mutation', () => {
       expect(Number(followCount) === Number(unfollowCount) + 1)
     }
   )
+
+  authedTest.only(
+    'Alice is blocked and unblocked by Bob',
+    async ({ alicePage, bobPage, isMobile }) => {
+      // [Alice] Go to profile page
+      const aliceProfile = new UserProfilePage(alicePage, isMobile)
+      await aliceProfile.gotoMeProfile()
+      const aliceDisplayName = await aliceProfile.displayName.innerText()
+
+      // [Bob] Go to profile page
+      const bobProfile = new UserProfilePage(bobPage, isMobile)
+      await bobProfile.gotoMeProfile()
+
+      // [Bob] Go to Alice's User Profile
+      await bobPage.goto(alicePage.url())
+
+      await bobPage.getByRole('button', { name: 'More Actions' }).click()
+
+      // [Bob] check block state
+      if (
+        await bobPage
+          .getByRole('menuitem', { name: 'Unblock user' })
+          .isVisible()
+      ) {
+        await Promise.all([
+          waitForAPIResponse({
+            page: bobPage,
+            path: 'data.toggleBlockUser.isBlocked',
+            isOK: (value) => value === false,
+          }),
+          bobPage
+            .getByRole('menuitem', { name: 'Unblock user' })
+            .locator('section')
+            .click(),
+        ])
+        await bobPage.getByRole('button', { name: 'More Actions' }).click()
+      }
+
+      await bobPage
+        .getByRole('menuitem', { name: 'Block user' })
+        .locator('section')
+        .click()
+
+      await Promise.all([
+        waitForAPIResponse({
+          page: bobPage,
+          path: 'data.toggleBlockUser.isBlocked',
+          isOK: (value) => value === true,
+        }),
+        bobPage.getByRole('button', { name: 'Block' }).click(),
+      ])
+
+      await bobPage.goto('/me/settings/blocked')
+
+      const blockDisplayName = await bobPage
+        .getByTestId(TEST_ID.DIGEST_USER_RICH)
+        .first()
+        .getByTestId(TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME)
+        .innerText()
+
+      expect(stripSpaces(blockDisplayName)).toBe(stripSpaces(aliceDisplayName))
+
+      // Unblock
+      await Promise.all([
+        waitForAPIResponse({
+          page: bobPage,
+          path: 'data.toggleBlockUser.isBlocked',
+          isOK: (value) => value === false,
+        }),
+        bobPage
+          .getByTestId(TEST_ID.DIGEST_USER_RICH)
+          .first()
+          .getByRole('button', { name: 'Unblock' })
+          .click(),
+      ])
+
+      // [Bob] Go to Alice's User Profile and Check Block state
+      await bobPage.goto(alicePage.url())
+      await bobPage.getByRole('button', { name: 'More Actions' }).click()
+      await expect(
+        bobPage.getByRole('menuitem', { name: 'Block user' })
+      ).toBeVisible()
+    }
+  )
 })
