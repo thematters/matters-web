@@ -1,4 +1,6 @@
 export enum TEST_ID {
+  // layout
+  LAYOUT_HEADER = 'layout/header',
   // digests
   DIGEST_ARTICLE_CARD = 'digest/article/card',
   DIGEST_ARTICLE_FEED = 'digest/article/feed',
@@ -7,6 +9,7 @@ export enum TEST_ID {
   DIGEST_USER_MINI = 'digest/user/mini',
   DIGEST_USER_PLAIN = 'digest/user/plain',
   DIGEST_USER_RICH = 'digest/user/rich',
+  DIGEST_USER_RICH_DISPLAY_NAME = 'digest/user/rich/display-name',
   DIGEST_USER_VERBOSE = 'digest/user/verbose',
   DIGEST_TAG_FEED = 'digest/tag/feed',
   DIGEST_TAG_RICH = 'digest/tag/rich',
@@ -67,6 +70,10 @@ export enum TEST_ID {
   // me
   ME_WALLET_TRANSACTIONS_ITEM = 'me/wallet/transactions/item',
   ME_WALLET_TRANSACTIONS_ITEM_AMOUNT = 'me/wallet/transactions/item/amount',
+  // user profile
+  USER_PROFILE_DISPLAY_NAME = 'user-profile/display-name',
+  USER_PROFILE_FOLLOWERS_COUNT = 'user-profile/followers/count',
+  USER_PROFILE_BIO = 'user-profile/bio',
   // misc
   SPINNER = 'spinner',
   USER_PROFILE = 'user-profile',

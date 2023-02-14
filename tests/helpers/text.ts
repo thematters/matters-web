@@ -61,3 +61,21 @@ export const generateComment = ({
     paragraphUpperBound: 1,
     units: 'paragraphs',
   })
+
+export const generateDisplayName = () =>
+  loremIpsum({
+    count: 1,
+    format: 'plain',
+    sentenceLowerBound: 2,
+    sentenceUpperBound: 3,
+    units: 'sentences',
+  }).slice(0, 20)
+
+export const generateBio = () =>
+  loremIpsum({
+    count: 1,
+    format: 'plain',
+    paragraphLowerBound: 1,
+    paragraphUpperBound: 1,
+    units: 'paragraphs',
+  }).slice(0, 200)
