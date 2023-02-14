@@ -10,7 +10,7 @@ export class UserProfilePage {
   readonly isMobile: boolean | undefined
 
   // header
-  // moreButton: Locator
+  moreButton: Locator
   // shareButton: Locator
 
   // profile
@@ -37,6 +37,11 @@ export class UserProfilePage {
   constructor(page: Page, isMobile?: boolean) {
     this.page = page
     this.isMobile = isMobile
+
+    // header
+    this.moreButton = page
+      .getByTestId(TEST_ID.LAYOUT_HEADER)
+      .getByRole('button', { name: 'More Actions' })
 
     this.feedArticles = page.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
 

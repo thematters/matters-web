@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 
+import { TEST_ID } from '@/src/common/enums'
+
 import BackButton from './BackButton'
 import CancelButton from './CancelButton'
 import MeButton from './MeButton'
@@ -26,7 +28,7 @@ const Header: React.FC<HeaderProps> & {
   })
 
   return (
-    <header className={headerClasses}>
+    <header className={headerClasses} data-test-id={TEST_ID.LAYOUT_HEADER}>
       <section className="content">
         {left && <section className="left">{left}</section>}
         {right && <section className="right">{right}</section>}

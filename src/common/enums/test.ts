@@ -1,4 +1,6 @@
 export enum TEST_ID {
+  // layout
+  LAYOUT_HEADER = 'layout/header',
   // digests
   DIGEST_ARTICLE_CARD = 'digest/article/card',
   DIGEST_ARTICLE_FEED = 'digest/article/feed',
