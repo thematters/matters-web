@@ -1205,7 +1205,7 @@ export const TEXT = {
       'File upload failed, please verify the file link is valid, or manually download and upload again.',
     UNAUTHENTICATED: 'Please log in.',
     unblockSuccess: 'User unblocked and can reply your articles now.',
-    unblockUser: 'Unblock user',
+    unblockUser: 'Unblock',
     uncollapseComment: 'Unfold',
     understood: 'I see',
     unfollow: 'Unfollow',
