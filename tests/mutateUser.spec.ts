@@ -198,45 +198,92 @@ test.describe('User Mutation', () => {
     }
   )
 
+  authedTest('Alice edit user profile', async ({ alicePage, isMobile }) => {
+    // [Alice] Go to profile page
+    const aliceProfile = new UserProfilePage(alicePage, isMobile)
+    await aliceProfile.gotoMeProfile()
+
+    await alicePage.getByRole('button', { name: 'More Actions' }).click()
+    await alicePage
+      .getByRole('menuitem', { name: 'Edit' })
+      .locator('section')
+      .click()
+
+    await aliceProfile.setCover()
+    await aliceProfile.setAvatar()
+
+    const displayName = await aliceProfile.fillDisplayName()
+    const bio = await aliceProfile.fillBio()
+
+    await Promise.all([
+      waitForAPIResponse({
+        page: alicePage,
+        path: 'data.updateUserInfo.displayName',
+        isOK: (value) => value === displayName,
+      }),
+      waitForAPIResponse({
+        page: alicePage,
+        path: 'data.updateUserInfo.info.description',
+        isOK: (value) => value === bio,
+      }),
+      aliceProfile.dialogSaveButton.click(),
+    ])
+
+    const aliceDisplayName = await aliceProfile.displayName.innerText()
+    expect(aliceDisplayName).toBe(displayName)
+
+    const aliceBio = await aliceProfile.bio.first().innerText()
+    expect(aliceBio).toBe(bio)
+  })
+
   authedTest(
-    'Alice edit user profile',
+    'Alice switch display language',
     async ({ alicePage, isMobile }) => {
-      // [Alice] Go to profile page
-      const aliceProfile = new UserProfilePage(alicePage, isMobile)
-      await aliceProfile.gotoMeProfile()
-
-
-      await alicePage.getByRole('button', { name: 'More Actions' }).click()
+      // [Alice] Go to setting page
+      await alicePage.goto('/')
+      await alicePage.getByRole('button', { name: 'My Page' }).click()
       await alicePage
-        .getByRole('menuitem', { name: 'Edit' })
-        .locator('section')
+        .getByRole('link', { name: 'Settings', exact: true })
         .click()
 
-      await aliceProfile.setCover()
-      await aliceProfile.setAvatar()
-
-      const displayName = await aliceProfile.fillDisplayName()
-      const bio = await aliceProfile.fillBio()
-
+      await alicePage.getByRole('button', { name: 'Language English' }).click()
       await Promise.all([
         waitForAPIResponse({
           page: alicePage,
-          path: 'data.updateUserInfo.displayName',
-          isOK: value => value === displayName
+          path: 'data.updateUserInfo.settings.language',
+          isOK: (value) => value === 'zh_hant',
         }),
-        waitForAPIResponse({
-          page: alicePage,
-          path: 'data.updateUserInfo.info.description',
-          isOK: value => value === bio
-        }),
-        aliceProfile.dialogSaveButton.click()
+        alicePage
+          .getByRole('menuitem', { name: '繁體中文' })
+          .locator('section')
+          .click(),
       ])
 
-      const aliceDisplayName = await aliceProfile.displayName.innerText()
-      expect(aliceDisplayName).toBe(displayName)
+      await alicePage.getByRole('button', { name: '介面語言 繁體中文' }).click()
+      await Promise.all([
+        waitForAPIResponse({
+          page: alicePage,
+          path: 'data.updateUserInfo.settings.language',
+          isOK: (value) => value === 'zh_hans',
+        }),
+        alicePage
+          .getByRole('menuitem', { name: '简体中文' })
+          .locator('section')
+          .click(),
+      ])
 
-      const aliceBio = await aliceProfile.bio.first().innerText()
-      expect(aliceBio).toBe(bio)
+      await alicePage.getByRole('button', { name: '界面语言 简体中文' }).click()
+      await Promise.all([
+        waitForAPIResponse({
+          page: alicePage,
+          path: 'data.updateUserInfo.settings.language',
+          isOK: (value) => value === 'en',
+        }),
+        alicePage
+          .getByRole('menuitem', { name: 'English' })
+          .locator('section')
+          .click(),
+      ])
     }
   )
 })
