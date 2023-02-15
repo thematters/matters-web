@@ -6,7 +6,7 @@ export const getCookieOptions = () => {
   return {
     expires: COOKIE_EXPIRES_IN_DAYS,
     secure: window.location.href.includes('https://'),
-    sameSite: 'Strict',
+    sameSite: 'Lax',
   } as CookieAttributes
 }
 
