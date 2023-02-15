@@ -15,7 +15,7 @@ import {
 } from './helpers'
 
 test.describe('Mutate article', () => {
-  authedTest.skip(
+  authedTest(
     "Alice' article is appreciation by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile, request }) => {
       // [Alice] create and publish new article
