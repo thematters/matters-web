@@ -240,7 +240,8 @@ test.describe('User Mutation', () => {
       waitForAPIResponse({
         page: alicePage,
         path: 'data.updateUserInfo',
-        isOK: (value) => value.displayName === displayName && value.info.description === bio,
+        isOK: (value) =>
+          value.displayName === displayName && value.info.description === bio,
       }),
       aliceProfile.dialogSaveButton.click(),
     ])

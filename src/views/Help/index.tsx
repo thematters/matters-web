@@ -85,8 +85,9 @@ const BaseHelp = () => {
             target="_blank"
             rel="noreferrer"
           >
-            ask@matters.news
+            &nbsp; ask@matters.news
           </a>
+          &nbsp;
           <FormattedMessage
             defaultMessage="for bug reports or suggestions. We will reply to you as soon we can!"
             description="src/views/Help/index.tsx"
