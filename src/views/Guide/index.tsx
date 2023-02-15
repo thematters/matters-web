@@ -1,4 +1,3 @@
-import Markdown from 'markdown-to-jsx'
 import { useContext } from 'react'
 import ReactMarkdown from 'react-markdown'
 
@@ -31,7 +30,6 @@ const Guide = () => {
 
       <Layout.Spacing>
         <section className="u-content" onClick={captureClicks}>
-          {/* <Markdown></Markdown> */}
           <ReactMarkdown>
             {content[toLocale(lang) || 'en']}
           </ReactMarkdown>
