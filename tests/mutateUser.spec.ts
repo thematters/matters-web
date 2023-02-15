@@ -19,12 +19,18 @@ const follow = async (page: Page) => {
     }),
     page.getByRole('button', { name: 'Follow', exact: true }).click(),
   ])
+
+  // Note: Some mouse cursor hover button now, button text is 'Unfollow'.
+  // Move the mouse to (0, 0) to avoid button hover state
+  await page.mouse.move(0, 0)
+
   await expect(
     page.getByRole('button', { name: 'Followed', exact: true })
   ).toBeVisible()
 }
 
 const unfollow = async (page: Page) => {
+  await page.mouse.move(0, 0)
   await Promise.all([
     waitForAPIResponse({
       page: page,
