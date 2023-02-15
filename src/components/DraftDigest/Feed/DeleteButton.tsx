@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
 import {
@@ -117,8 +118,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
             textColor="black"
             onClick={closeDialog}
           >
-            <Translate id="cancel" />
-          </Dialog.Footer.Button>
+            <FormattedMessage defaultMessage="Cancel" description="Cancel button" />          </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>
     </>

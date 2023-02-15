@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Card,
   IconInfo16,
   TextIcon,
   Tooltip,
-  Translate,
   // UserDigest,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
@@ -23,11 +23,7 @@ interface CircleInvitationProps {
 const CircleInvitationFailedInfo = () => (
   <Tooltip
     content={
-      <Translate
-        zh_hant="轉付費訂閱過程出錯"
-        zh_hans="转付费订阅过程出错"
-        en="Subscription Failed"
-      />
+      <FormattedMessage defaultMessage="Subscription Failed" description="src/components/CircleInvitation/index.tsx" />
     }
     placement="left"
   >
@@ -39,7 +35,7 @@ const CircleInvitationFailedInfo = () => (
         spacing="xxxtight"
         textPlacement="left"
       >
-        <Translate zh_hant="失敗" zh_hans="失败" en="Failed" />
+        <FormattedMessage defaultMessage="Failed" description="src/components/CircleInvitation/index.tsx" />
       </TextIcon>
     </span>
   </Tooltip>
@@ -101,11 +97,7 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
 
           {isSucceeded && (
             <span className="succeeded">
-              <Translate
-                zh_hant="付費訂閱中"
-                zh_hans="付费订阅中"
-                en="Subscribed"
-              />
+              <FormattedMessage defaultMessage="Subscribed" description="src/components/CircleInvitation/index.tsx" />
             </span>
           )}
         </section>

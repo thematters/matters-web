@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { toPath, translate } from '~/common/utils'
 import {
@@ -76,7 +77,7 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
               />
               <span>
                 &nbsp;
-                <Translate zh_hant="讚賞了" zh_hans="赞赏了" en="liked" />
+                <FormattedMessage defaultMessage="liked" description="src/components/Appreciation/index.tsx"/>
               </span>
             </header>
           )}

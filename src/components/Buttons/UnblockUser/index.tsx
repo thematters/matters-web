@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
-import { Button, TextIcon, Translate, useMutation } from '~/components'
+import { Button, TextIcon, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {
   ToggleBlockUserMutation,
@@ -31,12 +32,12 @@ export const UnblockUserButton = ({ user }: UnblockUserButtonProps) => {
       variables: { id: user.id, enabled: false },
       optimisticResponse: !_isNil(user.id)
         ? {
-            toggleBlockUser: {
-              id: user.id,
-              isBlocked: false,
-              __typename: 'User',
-            },
-          }
+          toggleBlockUser: {
+            id: user.id,
+            isBlocked: false,
+            __typename: 'User',
+          },
+        }
         : undefined,
     }
   )
@@ -54,14 +55,14 @@ export const UnblockUserButton = ({ user }: UnblockUserButtonProps) => {
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: <Translate id="successUnblock" />,
+              content: <FormattedMessage defaultMessage="User unblocked. User can now comment on your articles." description="src/components/Buttons/UnblockUser/index.tsx" />,
             },
           })
         )
       }}
     >
       <TextIcon weight="md" size="xs">
-        <Translate id="unblockUser" />
+        <FormattedMessage defaultMessage="Unblock User" description="Unblock User button" />
       </TextIcon>
     </Button>
   )

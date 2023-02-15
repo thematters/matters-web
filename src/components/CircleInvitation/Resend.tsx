@@ -1,7 +1,8 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
-import { Button, TextIcon, Translate, useMutation } from '~/components'
+import { Button, TextIcon, useMutation } from '~/components'
 import INVITE_CIRCLE from '~/components/GQL/mutations/invite'
 import { InviteCircleInvitee, InviteCircleMutation } from '~/gql/graphql'
 
@@ -48,11 +49,7 @@ const CircleInvitationResendButton = ({
           detail: {
             color: 'green',
             content: (
-              <Translate
-                zh_hant="邀請已送出"
-                zh_hans="邀请已送出"
-                en="Invitation sent"
-              />
+              <FormattedMessage defaultMessage="Invitation sent" description="src/components/CircleInvitation/Resend.tsx" />
             ),
           },
         })
@@ -73,7 +70,7 @@ const CircleInvitationResendButton = ({
       disabled={disabled}
     >
       <TextIcon size="sm-s" color="black" weight="md">
-        <Translate id="resend" />
+        <FormattedMessage defaultMessage="Resend" description="Resend button" />
       </TextIcon>
     </Button>
   )

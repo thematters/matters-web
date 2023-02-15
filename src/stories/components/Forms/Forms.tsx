@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { translate } from '~/common/utils'
 import { Form, Translate } from '~/components'
@@ -101,7 +102,8 @@ const Forms = () => (
           options={[30, 90, 180, 360].map((value) => ({
             name: (
               <>
-                {value} <Translate id="days" />
+                {value}         
+                <FormattedMessage defaultMessage="days" description='days'/>
               </>
             ),
             value,

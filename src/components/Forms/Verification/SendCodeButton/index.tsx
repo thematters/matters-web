@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { SEND_CODE_COUNTDOWN, VERIFICATION_CODE_TYPES } from '~/common/enums'
 import {
@@ -66,7 +67,7 @@ export const VerificationSendCodeButton: React.FC<
     >
       <TextIcon color="green" weight="md" size="sm">
         {sent ? (
-          <Translate id="resend" />
+          <FormattedMessage defaultMessage="Resend" description="Resend button"/>
         ) : (
           <Translate id="sendVerificationCode" />
         )}

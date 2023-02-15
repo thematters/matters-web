@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
@@ -7,7 +8,7 @@ import {
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Button, TextIcon, Translate, ViewerContext } from '~/components'
+import { Button, TextIcon, ViewerContext } from '~/components'
 import {
   PriceCirclePrivateFragment,
   PriceCirclePublicFragment,
@@ -68,7 +69,7 @@ const Price = ({ circle, onClick }: PriceProps) => {
         {...path}
       >
         <TextIcon weight="md" size="sm" color="white">
-          <Translate zh_hant="進入圍爐" zh_hans="进入围炉" />
+          <FormattedMessage defaultMessage="Enter Circle" description="src/components/CircleDigest/Price/index.tsx" />
         </TextIcon>
       </Button>
     )
@@ -101,7 +102,8 @@ const Price = ({ circle, onClick }: PriceProps) => {
       }}
     >
       <TextIcon weight="md" size="sm" color="white">
-        {price.amount} {price.currency} / <Translate id="month" />
+        {price.amount} {price.currency} / 
+        <FormattedMessage defaultMessage="month" description="src/components/CircleDigest/Price/index.tsx" />
       </TextIcon>
     </Button>
   )

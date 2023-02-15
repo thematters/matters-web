@@ -1,4 +1,6 @@
-import { Button, TextIcon, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Button, TextIcon } from '~/components'
 
 const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
   <Button
@@ -8,7 +10,7 @@ const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
     onClick={onClick}
   >
     <TextIcon color="grey" weight="md">
-      <Translate id="cancel" />
+      <FormattedMessage defaultMessage="Cancel" description="Cancel button"/>
     </TextIcon>
   </Button>
 )

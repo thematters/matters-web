@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   CLOSE_ACTIVE_DIALOG,
@@ -6,7 +7,7 @@ import {
   PATHS,
 } from '~/common/enums'
 import { analytics, appendTarget } from '~/common/utils'
-import { Button, ButtonProps, Media, TextIcon, Translate } from '~/components'
+import { Button, ButtonProps, Media, TextIcon } from '~/components'
 
 type UniversalAuthButtonProps = {
   isPlain?: boolean
@@ -55,7 +56,7 @@ export const UniversalAuthButton: React.FC<
   }
   const ButtonText = () => (
     <TextIcon color="white" weight="md">
-      <Translate id="authEntries" />
+      <FormattedMessage defaultMessage="Enter" description="src/components/Buttons/UniversalAuth/index.tsx" />
     </TextIcon>
   )
 

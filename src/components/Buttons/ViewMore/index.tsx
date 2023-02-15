@@ -1,10 +1,11 @@
+import { FormattedMessage } from 'react-intl'
+
 import {
   Button,
   ButtonProps,
   IconArrowDown16,
   Spinner,
   TextIcon,
-  Translate,
 } from '~/components'
 
 import styles from './styles.css'
@@ -34,7 +35,7 @@ export const ViewMoreButton: React.FC<ViewMoreButtonProps> = ({
           weight="md"
           textPlacement="left"
         >
-          <Translate zh_hans="查看更多" zh_hant="查看更多" en="View More" />
+          <FormattedMessage defaultMessage="View More" description="src/components/Buttons/ViewMore/index.tsx" />
         </TextIcon>
       </Button>
     )}

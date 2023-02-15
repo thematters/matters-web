@@ -1,13 +1,12 @@
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   Button,
   IconBookmarked16,
   IconSize,
   LanguageContext,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -31,18 +30,20 @@ const Unsubscribe = ({
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
 
+  const intl = useIntl()
+
   const [unsubscribe] = useMutation<ToggleSubscribeArticleMutation>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
       variables: { id: articleId, enabled: false },
       optimisticResponse: articleId
         ? {
-            toggleSubscribeArticle: {
-              id: articleId,
-              subscribed: false,
-              __typename: 'Article',
-            },
-          }
+          toggleSubscribeArticle: {
+            id: articleId,
+            subscribed: false,
+            __typename: 'Article',
+          },
+        }
         : undefined,
     }
   )
@@ -51,19 +52,19 @@ const Unsubscribe = ({
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
-      aria-label={translate({
-        zh_hant: '取消收藏',
-        zh_hans: '取消收藏',
-        en: 'Undo bookmark',
-        lang,
-      })}
+      aria-label={
+        intl.formatMessage({
+          defaultMessage: 'Undo bookmark',
+          description: 'src/components/Buttons/Bookmark/Unsubscribe.tsx'
+        })}
       onClick={async () => {
         if (viewer.isFrozen) {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'red',
-                content: <Translate id="FORBIDDEN_BY_STATE" />,
+                content:
+                  <FormattedMessage defaultMessage="You do not have permission to perform this operation" description="FORBIDDEN_BY_STATE" />,
               },
             })
           )

@@ -1,13 +1,10 @@
-import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   Button,
   IconDonate24,
-  LanguageContext,
   TextIcon,
-  Translate,
 } from '~/components'
 
 interface DonationButtonProps {
@@ -16,7 +13,8 @@ interface DonationButtonProps {
 }
 
 const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
-  const { lang } = useContext(LanguageContext)
+
+  const intl = useIntl()
 
   if (supported) {
     return (
@@ -26,7 +24,11 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
         borderColor="gold"
         borderWidth="sm"
         aria-haspopup="dialog"
-        aria-label={translate({ id: 'donationAgain', lang })}
+        aria-label={
+          intl.formatMessage({
+            defaultMessage: 'Support Again',
+            description: 'src/components/Buttons/DonationButton/index.tsx'
+          })}
         onClick={() => {
           if (onClick) {
             onClick()
@@ -35,7 +37,7 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
         data-test-id={TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON}
       >
         <TextIcon icon={<IconDonate24 />} weight="md" color="gold" size="md">
-          <Translate id="donationAgain" />
+          <FormattedMessage defaultMessage="Support Again" description="src/components/Buttons/DonationButton/index.tsx" />
         </TextIcon>
       </Button>
     )
@@ -46,7 +48,11 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
       size={['19.5rem', '3rem']}
       bgColor="gold-linear-gradient"
       aria-haspopup="dialog"
-      aria-label={translate({ id: 'donation', lang })}
+      aria-label={
+        intl.formatMessage({
+          defaultMessage: 'Support Author',
+          description: 'src/components/Buttons/DonationButton/index.tsx'
+        })}
       onClick={() => {
         if (onClick) {
           onClick()
@@ -55,7 +61,9 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
       data-test-id={TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON}
     >
       <TextIcon icon={<IconDonate24 />} weight="md" color="white" size="md">
-        <Translate id="donation" />
+        <FormattedMessage defaultMessage="Support Author"
+          description="src/components/Buttons/DonationButton/index.tsx"
+        />
       </TextIcon>
     </Button>
   )

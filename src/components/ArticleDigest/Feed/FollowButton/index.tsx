@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -10,7 +11,6 @@ import {
 import {
   IconDotDivider,
   TextIcon,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -45,13 +45,13 @@ const FollowButton = ({ user }: FollowButtonProps) => {
     optimisticResponse:
       !_isNil(user.id) && !_isNil(user.isFollower)
         ? {
-            toggleFollowUser: {
-              id: user.id,
-              isFollowee: true,
-              isFollower: user.isFollower,
-              __typename: 'User',
-            },
-          }
+          toggleFollowUser: {
+            id: user.id,
+            isFollowee: true,
+            isFollower: user.isFollower,
+            __typename: 'User',
+          },
+        }
         : undefined,
     update: (cache) => {
       const userName = _get(user, 'userName', null)
@@ -89,7 +89,7 @@ const FollowButton = ({ user }: FollowButtonProps) => {
       spacing={0}
     >
       <button type="button" onClick={onClick}>
-        <Translate id="follow" />
+        <FormattedMessage defaultMessage="Follow" description="src/components/ArticleDigest/Feed/FollowButton/index.tsx" />
       </button>
     </TextIcon>
   )

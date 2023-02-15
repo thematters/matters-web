@@ -1,10 +1,11 @@
+import { FormattedMessage } from 'react-intl'
+
 import { PATHS } from '~/common/enums'
 import {
   Button,
   IconArrowRight16,
   Media,
   TextIcon,
-  Translate,
 } from '~/components'
 
 const ViewBlocksButton = () => {
@@ -19,10 +20,10 @@ const ViewBlocksButton = () => {
         textPlacement="left"
       >
         <Media at="sm">
-          <Translate zh_hant="管理封鎖" zh_hans="管理屏蔽" />
+          <FormattedMessage defaultMessage="Manage Block" description="src/components/BlockUser/Dialog/ViewBlocksButton.tsx" />
         </Media>
         <Media greaterThan="sm">
-          <Translate zh_hant="查看" zh_hans="查看" />
+          <FormattedMessage defaultMessage="View" description="src/components/BlockUser/Dialog/ViewBlocksButton.tsx" />
         </Media>
       </TextIcon>
     </Button>

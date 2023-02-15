@@ -1,9 +1,9 @@
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   AppreciatorsDialog,
   Button,
@@ -15,7 +15,6 @@ import {
   Menu,
   ShareDialog,
   SupportersDialog,
-  Translate,
   ViewerContext,
 } from '~/components'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
@@ -117,6 +116,8 @@ const BaseDropdownActions = ({
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
 
+  const intl = useIntl()
+
   const hasPublic =
     hasShare ||
     hasAppreciators ||
@@ -178,7 +179,10 @@ const BaseDropdownActions = ({
         <Button
           spacing={['xtight', 'xtight']}
           bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
-          aria-label={translate({ id: 'moreActions', lang })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'More Actions',
+            description: 'src/components/ArticleDigest/DropdownActions/index.tsx'
+          })}
           aria-haspopup={type}
           onClick={openDialog}
           ref={ref}
@@ -216,7 +220,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'red',
-          content: <Translate id="FORBIDDEN_BY_STATE" />,
+          content: <FormattedMessage
+            defaultMessage="You do not have permission to perform this operation" description="FORBIDDEN_BY_STATE"
+          />,
         },
       })
     )

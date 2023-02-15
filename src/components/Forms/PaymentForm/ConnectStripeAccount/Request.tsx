@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST, PAYOUT_COUNTRY } from '~/common/enums'
 import { parseFormSubmitErrors, sleep } from '~/common/utils'
@@ -76,7 +77,7 @@ const Request: React.FC<Props> = ({ nextStep, closeDialog }) => {
           textColor="black"
           onClick={closeDialog}
         >
-          <Translate id="cancel" />
+          <FormattedMessage defaultMessage="Cancel" description="Cancel button" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>

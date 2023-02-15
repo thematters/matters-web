@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST, COMMENT_TYPE_TEXT } from '~/common/enums'
 import {
@@ -108,7 +109,7 @@ const DeleteCommentDialog = ({
             textColor="black"
             onClick={closeDialog}
           >
-            <Translate id="cancel" />
+            <FormattedMessage defaultMessage="Cancel" description="Cancel button" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>

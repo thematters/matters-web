@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { Translate } from '~/components'
 import { DonatorLabelCommentFragment } from '~/gql/graphql'
@@ -26,7 +27,7 @@ const DonatorLabel = ({
   return (
     <span className="label">
       <Translate zh_hant="支持者" zh_hans="支持者" en="Supporter" />
-
+      <FormattedMessage  defaultMessage=""/> 
       <style jsx>{styles}</style>
     </span>
   )

@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import { Dialog, useDialogSwitch, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {
   BlockUserPrivateFragment,
@@ -35,7 +37,8 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate id="successBlock" />,
+          content:
+            <FormattedMessage defaultMessage="User blocked. User now can't reply to your articles and user's comments have been hidden from you." description="src/components/BlockUser/Dialog/index.tsx" />,
           customButton: <ViewBlocksButton />,
           buttonPlacement: 'center',
         },
@@ -56,11 +59,10 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
 
         <Dialog.Message>
           <p>
-            <Translate
-              zh_hant={`封鎖之後，${user.displayName} 將無法評論、關聯你的作品，不能 @ 你，並且不能加入你的圍爐。你可以在設置裏管理你的封鎖用戶列表。`}
-              zh_hans={`封锁之后，${user.displayName} 将无法评论、关联你的作品，不能 @ 你，并且不能加入你的围炉。你可以在设置里管理你的封锁用户列表。`}
-              en={`${user.displayName} won't be able to comment and collect your article. Besides, he or she can't @ you and subscribe your circle. You can manage blocked list in settings.`}
-            />
+            <FormattedMessage defaultMessage="{displayName} won't be able to comment and collect your article. Besides, he or she can't @ you and subscribe your circle. You can manage blocked list in settings." description="src/components/BlockUser/Dialog/index.tsx"
+              values={{
+                displayName: user.displayName
+              }} />
           </p>
         </Dialog.Message>
 
@@ -72,7 +74,8 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
               closeDialog()
             }}
           >
-            <Translate id="block" />
+            {/* has the same block text */}
+            <FormattedMessage defaultMessage="Block User" description="src/components/BlockUser/Button/index.tsx" />
           </Dialog.Footer.Button>
 
           <Dialog.Footer.Button
@@ -80,7 +83,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
             textColor="black"
             onClick={closeDialog}
           >
-            <Translate id="cancel" />
+            <FormattedMessage defaultMessage="Cancel" description="src/components/BlockUser/Dialog/index.tsx" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>

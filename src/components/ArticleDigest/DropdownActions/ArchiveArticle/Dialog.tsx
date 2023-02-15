@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import { Dialog, useDialogSwitch, useMutation } from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 import {
   ArchiveArticleArticleFragment,
@@ -59,7 +60,10 @@ const ArchiveArticleDialog = ({
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate zh_hant="作品已隱藏" zh_hans="作品已隐藏" />,
+          content: <FormattedMessage
+            defaultMessage="The article is hidden"
+            description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+          />,
           buttonPlacement: 'center',
         },
       })
@@ -75,11 +79,7 @@ const ArchiveArticleDialog = ({
 
         <Dialog.Message>
           <p>
-            <Translate
-              zh_hant="確認隱藏，其他用戶將無法從站內訪問該作品。隱藏後無法回退，如需再次呈現作品，你需要重新發布。"
-              zh_hans="确认隐藏，其他用户将无法从站内访问该作品。隐藏后无法回退，如需再次呈现作品，你需要重新发布。"
-              en="Are you sure you want to archive the article?"
-            />
+            <FormattedMessage defaultMessage="Are you sure you want to archive the article?" description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx" />
           </p>
         </Dialog.Message>
 
@@ -91,7 +91,9 @@ const ArchiveArticleDialog = ({
               closeDialog()
             }}
           >
-            <Translate id="archive" />
+            {/* has the same archive text */}
+            <FormattedMessage defaultMessage="Archive"
+              description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Button.tsx" />
           </Dialog.Footer.Button>
 
           <Dialog.Footer.Button
@@ -99,7 +101,8 @@ const ArchiveArticleDialog = ({
             textColor="black"
             onClick={closeDialog}
           >
-            <Translate id="cancel" />
+            <FormattedMessage defaultMessage="Cancel"
+              description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>

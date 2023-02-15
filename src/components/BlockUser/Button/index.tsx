@@ -1,10 +1,11 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ADD_TOAST } from '~/common/enums'
 import {
   IconMute24,
   IconUnMute24,
   Menu,
   TextIcon,
-  Translate,
   useMutation,
 } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
@@ -40,7 +41,8 @@ const BlockUserButton = ({
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate id="successUnblock" />,
+          content:
+            <FormattedMessage defaultMessage="User unblocked. User can now comment on your articles." description="src/components/BlockUser/Button/index.tsx" />,
         },
       })
     )
@@ -50,7 +52,7 @@ const BlockUserButton = ({
     return (
       <Menu.Item onClick={onUnblock}>
         <TextIcon icon={<IconUnMute24 size="md" />} size="md" spacing="base">
-          <Translate id="unblockUser" />
+          <FormattedMessage defaultMessage="Unblock User" description="Unblock User button" />
         </TextIcon>
       </Menu.Item>
     )
@@ -59,7 +61,7 @@ const BlockUserButton = ({
   return (
     <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
       <TextIcon icon={<IconMute24 size="md" />} size="md" spacing="base">
-        <Translate id="blockUser" />
+        <FormattedMessage defaultMessage="Block User" description="src/components/BlockUser/Button/index.tsx" />
       </TextIcon>
     </Menu.Item>
   )

@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -10,7 +12,6 @@ import {
   IconSize,
   Media,
   TextIcon,
-  Translate,
 } from '~/components'
 
 interface LoginButtonBaseProps {
@@ -43,12 +44,12 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
       <>
         <Media at="sm">
           <Button {...smProps}>
-            <Translate id="login" />
+            <FormattedMessage defaultMessage="Login" description="src/components/Buttons/Login/index.tsx" />
           </Button>
         </Media>
         <Media greaterThan="sm">
           <Button aria-haspopup="dialog" {...smUpProps}>
-            <Translate id="login" />
+            <FormattedMessage defaultMessage="Login" description="src/components/Buttons/Login/index.tsx" />
           </Button>
         </Media>
       </>
@@ -69,7 +70,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   }
   const ButtonText = () => (
     <TextIcon color={textIconColor} size={textIconSize} weight="md">
-      <Translate id="login" />
+      <FormattedMessage defaultMessage="Login" description="src/components/Buttons/Login/index.tsx" />    
     </TextIcon>
   )
 

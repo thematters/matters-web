@@ -1,6 +1,7 @@
 import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Button,
@@ -9,7 +10,6 @@ import {
   ButtonSpacingY,
   ButtonWidth,
   TextIcon,
-  Translate,
   useMutation,
 } from '~/components'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
@@ -34,13 +34,13 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
     optimisticResponse:
       !_isNil(user.id) && !_isNil(user.isFollower)
         ? {
-            toggleFollowUser: {
-              id: user.id,
-              isFollowee: false,
-              isFollower: user.isFollower,
-              __typename: 'User',
-            },
-          }
+          toggleFollowUser: {
+            id: user.id,
+            isFollowee: false,
+            isFollower: user.isFollower,
+            __typename: 'User',
+          },
+        }
         : undefined,
     update: (cache) => {
       const userName = _get(user, 'userName', null)
@@ -73,7 +73,9 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
       onMouseLeave={() => setHover(false)}
     >
       <TextIcon weight="md" size={size === 'lg' ? 'sm' : 'xs'}>
-        {hover ? <Translate id="unfollow" /> : <Translate id="followed" />}
+        {hover ?
+          <FormattedMessage defaultMessage="Unfollow" description="src/components/Buttons/FollowUser/Unfollow.tsx" />
+          : <FormattedMessage defaultMessage="Followed" description="src/components/Buttons/FollowUser/Unfollow.tsx" />}
       </TextIcon>
     </Button>
   )

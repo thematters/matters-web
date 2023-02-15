@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { translate } from '~/common/utils'
 import {
@@ -8,7 +9,6 @@ import {
   LanguageContext,
   Media,
   TextIcon,
-  Translate,
 } from '~/components'
 
 const CancelButton = (props: ButtonProps) => {
@@ -19,8 +19,7 @@ const CancelButton = (props: ButtonProps) => {
       <Media at="sm">
         <Button aria-label={translate({ id: 'cancel', lang })} {...props}>
           <TextIcon color="green" size="md">
-            <Translate id="cancel" />
-          </TextIcon>
+            <FormattedMessage defaultMessage="Cancel" description="Cancel button" />          </TextIcon>
         </Button>
       </Media>
       <Media greaterThan="sm">

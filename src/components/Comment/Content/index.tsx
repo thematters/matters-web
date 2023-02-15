@@ -1,10 +1,12 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
-import { CommentFormType, Expandable, Translate, useRoute } from '~/components'
+import { CommentFormType, Expandable, LanguageContext, useRoute } from '~/components'
 import {
   ContentCommentPrivateFragment,
   ContentCommentPublicFragment,
@@ -44,6 +46,8 @@ const Content = ({ comment, type, size }: ContentProps) => {
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
 
+  const { lang } = useContext(LanguageContext)
+
   // TODO: Will be removed, just for dev
   const { getQuery } = useRoute()
   const limit = parseInt(getQuery('limit')) || 8
@@ -59,12 +63,11 @@ const Content = ({ comment, type, size }: ContentProps) => {
         content={content}
         collapsedContent={
           isBlocked ? (
-            <Translate zh_hant="你屏蔽了该用户" zh_hans="你封鎖了該用戶" />
+            <FormattedMessage defaultMessage="You have blocked this user" description="src/components/Comment/Content/index.tsx" />
           ) : (
-            <Translate
-              zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}被創作者闔上`}
-              zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}被创作者折叠`}
-            />
+            <FormattedMessage defaultMessage="{commentType} has been collapsed by creator" description="src/components/Comment/Content/index.tsx" values={{
+              commentType: COMMENT_TYPE_TEXT[lang][type]
+            }} />
           )
         }
         className={contentClasses}
@@ -98,11 +101,9 @@ const Content = ({ comment, type, size }: ContentProps) => {
         className={`${contentClasses} inactive`}
         data-test-id={TEST_ID.COMMENT_CONETNT}
       >
-        <Translate
-          zh_hant={`此${COMMENT_TYPE_TEXT.zh_hant[type]}因違反用戶協定而被隱藏`}
-          zh_hans={`此${COMMENT_TYPE_TEXT.zh_hans[type]}因违反用户协定而被隐藏`}
-        />
-
+        <FormattedMessage defaultMessage="{commentType} was hidden for violation of user agreement" description="src/components/Comment/Content/index.tsx" values={{
+          commentType: COMMENT_TYPE_TEXT[lang][type]
+        }} />
         <style jsx>{styles}</style>
       </p>
     )
@@ -111,11 +112,7 @@ const Content = ({ comment, type, size }: ContentProps) => {
   if (state === 'archived') {
     return (
       <p className={`${contentClasses} inactive`}>
-        <Translate
-          zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}被原作者刪除`}
-          zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}被原作者删除`}
-        />
-
+        <FormattedMessage defaultMessage="{commentType} was deleted by the author" description="src/components/Comment/Content/index.tsx" />
         <style jsx>{styles}</style>
       </p>
     )

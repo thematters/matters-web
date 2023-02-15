@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
 import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
@@ -10,7 +11,6 @@ import {
   LanguageContext,
   Menu,
   TextIcon,
-  Translate,
   withIcon,
 } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
@@ -87,11 +87,7 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
       dialog={{
         content: <LanguageSwitchContent />,
         title: (
-          <Translate
-            zh_hant="修改界面語言"
-            zh_hans="修改介面语言"
-            en="Language"
-          />
+          <FormattedMessage defaultMessage="Language" description="src/components/Buttons/LanguageSwitch/index.tsx"/>
         ),
       }}
     >

@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import differenceInDays from 'date-fns/differenceInDays'
 import parseISO from 'date-fns/parseISO'
+import { FormattedMessage } from 'react-intl'
 
-import { Translate } from '~/components'
 import { CircleInvitationFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
@@ -37,7 +37,8 @@ const Period = ({ freePeriod, acceptedAt, state }: PeriodProps) => {
   if (isPending) {
     return (
       <span className={classes}>
-        {freePeriod} <Translate id="days" />
+        {freePeriod} 
+        <FormattedMessage defaultMessage="days" description='days'/>
         <style jsx>{styles}</style>
       </span>
     )
@@ -50,8 +51,9 @@ const Period = ({ freePeriod, acceptedAt, state }: PeriodProps) => {
 
     return (
       <span className={classes}>
-        <Translate zh_hant="剩餘" zh_hans="剩余" en="Trial ends in" />{' '}
-        {remainDays} <Translate id="days" />
+        <FormattedMessage defaultMessage="Trial ends in" description="src/components/CircleInvitation/Period.tsx"/>
+        {remainDays}         
+        <FormattedMessage defaultMessage="days" description='days'/>
         <style jsx>{styles}</style>
       </span>
     )

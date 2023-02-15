@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
-import { Button, IconExpand16, TextIcon, Translate } from '~/components'
+import { Button, IconExpand16, TextIcon } from '~/components'
 
 import styles from './styles.css'
 
@@ -56,7 +57,7 @@ const Collapsed = ({
             weight="normal"
             color="grey"
           >
-            <Translate zh_hant="打開" zh_hans="展开" en="Expand" />
+            <FormattedMessage defaultMessage="Expand" description="src/components/Comment/Content/Collapsed.tsx"/>
           </TextIcon>
         </Button>
       )}

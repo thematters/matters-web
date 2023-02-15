@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   ADD_TOAST,
@@ -7,7 +8,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 import {
   Button,
   IconPen16,
@@ -15,7 +16,6 @@ import {
   LanguageContext,
   Media,
   TextIcon,
-  Translate,
   useMutation,
 } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
@@ -36,6 +36,8 @@ const BaseWriteButton = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
+  const intl = useIntl()
+
   const WriteIcon = loading ? (
     <IconSpinner16 size="sm" color="white" />
   ) : (
@@ -49,10 +51,14 @@ const BaseWriteButton = ({
           size={['5rem', '2.25rem']}
           bgColor="gold"
           onClick={onClick}
-          aria-label={translate({ id: 'write', lang })}
+          aria-label={
+            intl.formatMessage({
+              defaultMessage: 'Write',
+              description: 'src/components/Buttons/Write/index.tsx'
+            })}
         >
           <TextIcon icon={WriteIcon} weight="md" color="white">
-            <Translate id="write" />
+            <FormattedMessage defaultMessage="Write" description="src/components/Buttons/Write/index.tsx" />
           </TextIcon>
         </Button>
       </Media>
@@ -61,7 +67,10 @@ const BaseWriteButton = ({
           size={['2rem', '2rem']}
           bgColor="gold"
           onClick={onClick}
-          aria-label={translate({ id: 'write', lang })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Write',
+            description: 'src/components/Buttons/Write/index.tsx'
+          })}
         >
           <TextIcon icon={WriteIcon} weight="md" color="white" />
         </Button>
@@ -72,11 +81,15 @@ const BaseWriteButton = ({
 
 export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
   const router = useRouter()
-  const { lang } = useContext(LanguageContext)
+
+  const intl = useIntl()
   const [putDraft, { loading }] = useMutation<CreateDraftMutation>(
     CREATE_DRAFT,
     {
-      variables: { title: translate({ id: 'untitle', lang }) },
+      variables: { title: intl.formatMessage({
+        defaultMessage: 'Untitled',
+        description: 'Untitled state'
+      })},
     }
   )
 
@@ -107,7 +120,9 @@ export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
             new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'red',
-                content: <Translate id="FORBIDDEN_BY_STATE" />,
+                content: <FormattedMessage
+                  defaultMessage="You do not have permission to perform this operation" description="FORBIDDEN_BY_STATE"
+                />
               },
             })
           )

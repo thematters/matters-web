@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { featureSupportedChains } from '~/common/utils'
 import {
   Button,
@@ -79,7 +81,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
   const StateText = () => {
     switch (state) {
       case TransactionState.Canceled:
-        return <Translate id="cancel" />
+        return <FormattedMessage defaultMessage="Cancel" description="Cancel button"/>
       case TransactionState.Failed:
         return <Translate zh_hant="失敗" zh_hans="失敗" en="Failed" />
       case TransactionState.Pending:

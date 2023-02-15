@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 interface ConfirmExitDialogProps {
@@ -47,7 +49,7 @@ const ConfirmExitDialog = ({ onExit, children }: ConfirmExitDialogProps) => {
             textColor="black"
             onClick={closeDialog}
           >
-            <Translate id="cancel" />
+            <FormattedMessage defaultMessage="Cancel" description="Cancel button" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>

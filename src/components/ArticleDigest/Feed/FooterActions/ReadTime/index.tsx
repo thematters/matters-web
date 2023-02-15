@@ -1,9 +1,10 @@
+import { FormattedMessage } from 'react-intl'
+
 import { numAbbr, numRound } from '~/common/utils'
 import {
   IconDotDivider,
   IconReadTimeTotal16,
   TextIcon,
-  Translate,
 } from '~/components'
 import { ActionsReadTimeArticleFragment } from '~/gql/graphql'
 
@@ -30,7 +31,7 @@ const ReadTime = ({ article, hasDivider }: ResponseCountProps) => {
       <button type="button">
         <TextIcon icon={<IconReadTimeTotal16 />} size="xs" color="grey-dark">
           {numAbbr(readHour, 1)}{' '}
-          <Translate zh_hant="小時" zh_hans="小时" en="hours" />
+          <FormattedMessage defaultMessage="hours" description="src/components/ArticleDigest/Feed/FooterActions/ReadTime/index.tsx" />
         </TextIcon>
       </button>
 

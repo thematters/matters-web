@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
 import { measureDiffs } from '~/common/utils'
 import { Button, TextIcon, Translate, useMutation } from '~/components'
@@ -159,7 +161,7 @@ const EditModeHeader = ({
             />
           )
         }
-        cancelButtonText={<Translate id="cancel" />}
+        cancelButtonText={<FormattedMessage defaultMessage="Cancel" description="Cancel button"/>}
         onConfirm={isContentRevised ? undefined : onSave}
         ConfirmStepContent={ConfirmStepContent}
       >

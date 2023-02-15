@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   ADD_TOAST,
@@ -61,7 +62,8 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id="FORBIDDEN_BY_STATE" />,
+            content: 
+            <FormattedMessage defaultMessage="You do not have permission to perform this operation" description="FORBIDDEN_BY_STATE"/>,
           },
         })
       )
