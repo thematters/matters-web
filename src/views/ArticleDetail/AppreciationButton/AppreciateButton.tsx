@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { useContext, useRef } from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 import {
   Button,
@@ -81,7 +82,9 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
             </span>
           }
         >
-          {total > 0 ? numAbbr(total) : undefined}
+          <span data-test-id={TEST_ID.ARTICLE_APPRECIATION_TOTAL}>
+            {total > 0 ? numAbbr(total) : undefined}
+          </span>
         </TextIcon>
       </Button>
 

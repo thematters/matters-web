@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import {
   ADD_TOAST,
   OPEN_UNIVERSAL_AUTH_DIALOG,
+  TEST_ID,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { translate } from '~/common/utils'
@@ -83,6 +84,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
       })}
       onClick={onClick}
       disabled={disabled}
+      data-test-id={TEST_ID.ARTICLE_BOOKMARK}
     >
       <IconBookmark16 size={size} />
     </Button>
