@@ -6,7 +6,7 @@
 
 ### Start local dev
 
-- Install dependencies: `npm i --legacy-peer-deps`
+- Install dependencies: `npm i`
 - Environment variables: `cp .env.local.example .env.local`
 - Run `npm run gen:type`
 - Run `npm run dev`, then go to `http://localhost:3000/`
