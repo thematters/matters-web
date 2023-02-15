@@ -24,7 +24,7 @@ Matters.News 的经济系统支援法币（港币）及 USDT、LikeCoin 等虚�
 
 如果你想用手机进行登入、绑定钱包及进行 USDT 支付，请参考我们的手机版专属指南，可以为你解决绝大部分的疑惑。
 
-*   [Matters 钱包与支付指南（手机版）](https://matters.news/zh_Hans/@hi176/343938-%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%9C%A8%E6%89%8B%E6%A9%9F%E4%B8%8A%E9%80%A3%E6%8E%A5%E9%8C%A2%E5%8C%85%E4%B8%A6%E4%BD%BF%E7%94%A8-usdt-%E6%94%AF%E6%8C%81%E5%8A%9F%E8%83%BD-bafyreifil6hcprdl5g4vtui5sy3gvimbkphib5xcziddixptmy4dckmtiu)
+*   [Matters 钱包与支付指南（手机版）](https://matters.news/@hi176/343938-%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%9C%A8%E6%89%8B%E6%A9%9F%E4%B8%8A%E9%80%A3%E6%8E%A5%E9%8C%A2%E5%8C%85%E4%B8%A6%E4%BD%BF%E7%94%A8-usdt-%E6%94%AF%E6%8C%81%E5%8A%9F%E8%83%BD-bafyreifil6hcprdl5g4vtui5sy3gvimbkphib5xcziddixptmy4dckmtiu)
 
 好文章不遗漏，我们也支援 RSS 、JSON 阅读器或 IPNS 兼容的 Planet 阅读器来订阅作者。
 
