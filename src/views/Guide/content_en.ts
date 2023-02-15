@@ -1,7 +1,6 @@
 const en = `Welcome to Matters!
 
-For Creators and Readers
-----------------------------------------------   
+## For Creators and Readers   
 
 If you have just landed in Matterverse, here are two must-read features guidance to help you sail. How to use Matters.News' editor? What is IPFS? How to check your income and balance? How to discover more writing communities and participate in this self-regulated community?
 
@@ -12,8 +11,7 @@ Currently, Matters.News is not yet available as an application, so if you want t
 
 *   [Install Matters PWA Step by Step](https://matters.news/en/@hi176/342215-%E6%8C%87%E5%8D%97-%E6%83%B3%E5%9C%A8%E6%89%8B%E6%A9%9F%E4%B8%8A%E6%96%B9%E4%BE%BF%E5%9C%B0%E4%BD%BF%E7%94%A8-matters-%E9%80%99%E8%A3%A1%E6%9C%89%E4%B8%80%E5%80%8B%E5%BE%88%E5%A5%BD%E7%9A%84%E6%96%B9%E6%B3%95-bafyreiclzb52uisucbf7gch2k2ll7mcc6kiivaxxqdqo7drnx5oj4sqvu4)
 
-Explore Web3 with us in Matters.News
-------------------------------------
+## Explore Web3 with us in Matters.News
 
 Matters.News is dedicated to exploring Web3 and the creator economy ecosystem. We encourage wallet registration and login for on-chain payment and withdrawal functions.
 
