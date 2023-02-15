@@ -31,7 +31,7 @@ test.describe('Support article', () => {
       await bobPage.goto(aliceArticleLink)
       const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
 
-      const amount = _random(1, 100, false)
+      const amount = _random(1, 50, false)
 
       // [Bob] Support HKD
       await aliceArticleDetail.supportHKD(users.bob.paymentPassword, amount)
