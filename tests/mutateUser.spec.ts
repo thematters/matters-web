@@ -239,13 +239,8 @@ test.describe('User Mutation', () => {
     await Promise.all([
       waitForAPIResponse({
         page: alicePage,
-        path: 'data.updateUserInfo.displayName',
-        isOK: (value) => value === displayName,
-      }),
-      waitForAPIResponse({
-        page: alicePage,
-        path: 'data.updateUserInfo.info.description',
-        isOK: (value) => value === bio,
+        path: 'data.updateUserInfo',
+        isOK: (value) => value.displayName === displayName && value.info.description === bio,
       }),
       aliceProfile.dialogSaveButton.click(),
     ])
