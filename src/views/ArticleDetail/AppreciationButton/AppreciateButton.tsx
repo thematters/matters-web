@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { useContext, useRef } from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 import {
   Button,
@@ -48,7 +49,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         aria-label={translate({
           zh_hant: `讚賞作品（當前 ${total} 次讚賞）`,
           zh_hans: `赞赏作品（当前 ${total} 次赞赏）`,
-          en: `appreciate article (current ${total} appreciations)`,
+          en: `like article (current ${total} likes)`,
           lang,
         })}
         disabled={disabled}
@@ -81,7 +82,9 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
             </span>
           }
         >
-          {total > 0 ? numAbbr(total) : undefined}
+          <span data-test-id={TEST_ID.ARTICLE_APPRECIATION_TOTAL}>
+            {total > 0 ? numAbbr(total) : undefined}
+          </span>
         </TextIcon>
       </Button>
 

@@ -44,7 +44,7 @@ const AddCircleArticleDialog = ({
   const {
     show,
     openDialog: baseOpenDialog,
-    closeDialog,
+    closeDialog: baseCloseDialog,
   } = useDialogSwitch(true)
 
   const initialStep = 'select'
@@ -98,11 +98,16 @@ const AddCircleArticleDialog = ({
     forward('confirm')
   }
 
+  const closeDialog = () => {
+    setArticles([])
+    baseCloseDialog()
+  }
+
   return (
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm" fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
         {isSelect && (
           <DynamicSearchSelectForm
             title="addArticles"

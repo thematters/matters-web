@@ -1,3 +1,4 @@
+import { VisuallyHidden } from '@reach/visually-hidden'
 import Link from 'next/link'
 import React from 'react'
 
@@ -39,6 +40,9 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
         <section className="head">
           <Link {...path} legacyBehavior>
             <a className="avatar">
+              <VisuallyHidden>
+                <span>{user.displayName}</span>
+              </VisuallyHidden>
               <Avatar size="xxl" user={user} />
             </a>
           </Link>
@@ -49,7 +53,7 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
             </Link>
 
             <section className="follow">
-              <FollowUserButton user={user} size="md-s" />
+              <FollowUserButton user={user} />
             </section>
           </section>
         </section>

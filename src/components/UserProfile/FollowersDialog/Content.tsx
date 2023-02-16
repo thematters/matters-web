@@ -10,7 +10,6 @@ import {
   Spinner,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -28,16 +27,10 @@ const FollowersDialogContent = () => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<UserFollowerPublicQuery>(USER_FOLLOWERS_PUBLIC, {
-    variables: { userName },
-  })
+  const { data, loading, error, fetchMore, client } =
+    usePublicQuery<UserFollowerPublicQuery>(USER_FOLLOWERS_PUBLIC, {
+      variables: { userName },
+    })
 
   // pagination
   const user = data?.user
@@ -83,14 +76,6 @@ const FollowersDialogContent = () => {
 
     loadPrivate(newData)
   }
-
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

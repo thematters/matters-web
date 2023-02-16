@@ -23,7 +23,6 @@ import {
   Throw404,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -84,10 +83,10 @@ const CricleDiscussion = () => {
 
     if (viewer.isAuthed) {
       loadPrivate(data)
-    } else if (viewer.privateFetched) {
+    } else {
       setPrivateFetched(true)
     }
-  }, [circle?.id, viewer.privateFetched])
+  }, [circle?.id])
 
   /**
    * Fragment Patterns
@@ -108,21 +107,20 @@ const CricleDiscussion = () => {
   /**
    * Data Fetching
    */
-  const // fetchDicussion,
+  const {
+    data: discussionData,
+    loading: discussionLoading,
+    fetchMore,
+    refetch,
+  } = usePublicQuery<DiscussionCommentsQuery>(
+    DISCUSSION_COMMENTS,
     {
-      data: discussionData,
-      loading: discussionLoading,
-      fetchMore,
-      refetch,
-    } = usePublicQuery<DiscussionCommentsQuery>(
-      DISCUSSION_COMMENTS,
-      {
-        fetchPolicy: 'network-only',
-        variables: { name },
-        skip: !hasPermission,
-      },
-      { publicQuery: !viewer.isAuthed }
-    )
+      fetchPolicy: 'network-only',
+      variables: { name },
+      skip: !hasPermission,
+    },
+    { publicQuery: !viewer.isAuthed }
+  )
 
   // load next page
   const loadMore = async (params?: { before: string }) => {
@@ -153,9 +151,6 @@ const CricleDiscussion = () => {
   const comments = filterComments<Comment>(
     (edges || []).map(({ node }) => node)
   )
-
-  // refetch & pull to refresh
-  usePullToRefresh.Handler(refetch)
 
   const submitCallback = () => {
     window.dispatchEvent(

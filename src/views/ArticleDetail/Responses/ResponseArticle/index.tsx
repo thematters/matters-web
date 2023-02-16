@@ -5,13 +5,9 @@ import { ResponseArticleArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
-interface ResponseArticleControls {
-  hasCover?: boolean
-}
-
 type ResponseArticleProps = {
   article: ResponseArticleArticleFragment
-} & ResponseArticleControls
+}
 
 const fragments = {
   article: gql`
@@ -29,7 +25,7 @@ const fragments = {
   `,
 }
 
-const ResponseArticle = ({ hasCover, article }: ResponseArticleProps) => {
+const ResponseArticle = ({ article }: ResponseArticleProps) => {
   return (
     <section className="container">
       <header>
@@ -52,11 +48,7 @@ const ResponseArticle = ({ hasCover, article }: ResponseArticleProps) => {
       </header>
 
       <section className="article-digest">
-        <ArticleDigestSidebar
-          article={article}
-          hasCover={hasCover}
-          hasBackground
-        />
+        <ArticleDigestSidebar article={article} hasBackground />
       </section>
 
       <style jsx>{styles}</style>

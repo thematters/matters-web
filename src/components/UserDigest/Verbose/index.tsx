@@ -1,3 +1,4 @@
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
@@ -110,6 +111,9 @@ const Verbose = ({
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
           <a className="avatar">
+            <VisuallyHidden>
+              <span>{user.displayName}</span>
+            </VisuallyHidden>
             <Avatar size={avatarSize} user={user} />
           </a>
         </Link>
@@ -124,7 +128,7 @@ const Verbose = ({
 
         <section className="extra-button">
           {hasUnblock && <UnblockUserButton user={user} />}
-          {hasFollow && <FollowUserButton user={user} size="md-s" />}
+          {hasFollow && <FollowUserButton user={user} />}
         </section>
       </section>
 

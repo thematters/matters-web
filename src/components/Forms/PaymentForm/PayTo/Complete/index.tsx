@@ -15,7 +15,6 @@ import {
   Translate,
   usePublicQuery,
   UserDigest,
-  useResponsive,
   ViewerContext,
 } from '~/components'
 import { TextIcon } from '~/components/TextIcon'
@@ -38,7 +37,6 @@ const PAGE_COUNT = 3
 
 const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
   const viewer = useContext(ViewerContext)
-  const isMediumUp = useResponsive('md-up')
 
   /**
    * Data Fetching
@@ -161,7 +159,6 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
                   <List.Item key={cursor}>
                     <ArticleDigestSidebar
                       article={node}
-                      hasCover={isMediumUp}
                       hasBackground
                       onClick={() =>
                         analytics.trackEvent('click_feed', {

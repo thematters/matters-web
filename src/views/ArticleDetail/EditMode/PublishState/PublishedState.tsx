@@ -70,7 +70,7 @@ const PublishedState = ({ article, draft, cancel }: Props) => {
         <Translate
           zh_hant="修訂作品已發佈"
           zh_hans="修订作品已发布"
-          en="Your work has been republished"
+          en="Article republished"
         />
       }
       footerButtons={
@@ -83,7 +83,7 @@ const PublishedState = ({ article, draft, cancel }: Props) => {
           <Translate
             zh_hant="查看修訂作品"
             zh_hans="查看修订作品"
-            en="view republished work"
+            en="View republished article"
           />
         </Dialog.Footer.Button>
       }

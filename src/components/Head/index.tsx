@@ -1,5 +1,4 @@
 import NextHead from 'next/head'
-import NextScript from 'next/script'
 import { useContext } from 'react'
 
 import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
@@ -219,13 +218,6 @@ export const Head: React.FC<HeadProps> = (props) => {
           key="ld-json-data"
         />
       )}
-
-      <NextScript
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5129054622209245"
-        strategy="lazyOnload"
-        crossOrigin="anonymous"
-      />
     </NextHead>
   )
 }

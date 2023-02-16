@@ -16,7 +16,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm ci
 
       - name: Generate Types (Develop)
         if: github.base_ref != 'master'
@@ -28,7 +28,8 @@ jobs:
 
       - name: Lint
         run: |
-          npm run lint \
+          npm run i18n \
+          && npm run lint \
           && npm run format:check
 
       - name: Build

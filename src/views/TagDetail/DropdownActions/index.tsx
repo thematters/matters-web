@@ -85,7 +85,7 @@ const BaseDropdownActions = ({
             <Translate
               zh_hant="添加精選"
               zh_hans="添加精选"
-              en="Add Articles into Featured"
+              en="Add Articles into Trending"
             />
           </TextIcon>
         </Menu.Item>

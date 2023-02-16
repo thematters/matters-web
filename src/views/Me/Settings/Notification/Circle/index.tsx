@@ -4,7 +4,6 @@ import gql from 'graphql-tag'
 import {
   Head,
   Layout,
-  PullToRefresh,
   Spacer,
   Spinner,
   Translate,
@@ -79,10 +78,9 @@ const BaseNotificationSettings = () => {
   const [update] = useMutation<UpdateViewerNotificationCircleMutation>(
     UPDATE_VIEWER_NOTIFICATION_CIRCLE
   )
-  const { data, loading, refetch } =
-    useQuery<ViewerNotificationCircleSettingsQuery>(
-      VIEWER_NOTIFICATION_CIRCLE_SETTINGS
-    )
+  const { data, loading } = useQuery<ViewerNotificationCircleSettingsQuery>(
+    VIEWER_NOTIFICATION_CIRCLE_SETTINGS
+  )
   const settings = data?.viewer?.settings.notification
   const id = data?.viewer?.id
 
@@ -115,7 +113,7 @@ const BaseNotificationSettings = () => {
   }
 
   return (
-    <PullToRefresh refresh={refetch}>
+    <>
       <div className="title">
         <h2>
           {' '}
@@ -157,7 +155,7 @@ const BaseNotificationSettings = () => {
       <SubscribeBroadcastSettings toggle={toggle} settings={settings} />
       <SubscribeDiscussionSettings toggle={toggle} settings={settings} />
       <style jsx>{styles}</style>
-    </PullToRefresh>
+    </>
   )
 }
 

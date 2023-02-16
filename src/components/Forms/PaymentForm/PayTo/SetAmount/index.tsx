@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import { BigNumber } from 'ethers'
+import { BigNumber } from '@ethersproject/bignumber'
 import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'

@@ -1,14 +1,4 @@
-import { useContext } from 'react'
-
-import {
-  ConnectWalletButton,
-  Head,
-  IconLogo,
-  Layout,
-  UniversalAuthButton,
-  useResponsive,
-  ViewerContext,
-} from '~/components'
+import { Head, Layout } from '~/components'
 
 import DisplayPreferences from './DisplayPreferences'
 import Enhance from './Enhance'
@@ -16,37 +6,13 @@ import Learn from './Learn'
 import styles from './styles.css'
 
 const Settings = () => {
-  const isSmallUp = useResponsive('sm-up')
-  const viewer = useContext(ViewerContext)
-
   const year = new Date().getFullYear()
-
-  const showConnect = viewer.isAuthed && !viewer.info.ethAddress
 
   return (
     <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'settings' }} />
 
-      <Layout.Header
-        right={
-          <>
-            {isSmallUp ? (
-              <section className="title">Settings</section>
-            ) : (
-              <section className="logo">
-                <IconLogo />
-              </section>
-            )}
-
-            {(!viewer.isAuthed || showConnect) && (
-              <section className="buttons">
-                {showConnect && <ConnectWalletButton />}
-                {!viewer.isAuthed && <UniversalAuthButton />}
-              </section>
-            )}
-          </>
-        }
-      />
+      <Layout.AuthHeader title="settings" />
 
       <DisplayPreferences />
       <Learn />

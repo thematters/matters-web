@@ -51,7 +51,7 @@ export const BaseMeDrafts = () => {
     DraftsContext
   )
 
-  const { data, loading, error, fetchMore, refetch } =
+  const { data, loading, error, fetchMore } =
     useQuery<MeDraftFeedQuery>(ME_DRAFTS_FEED)
 
   useEffect(() => {
@@ -86,11 +86,7 @@ export const BaseMeDrafts = () => {
 
   return (
     <DraftsContextProvider>
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        pullToRefresh={refetch}
-      >
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>

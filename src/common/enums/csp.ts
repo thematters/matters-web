@@ -76,7 +76,6 @@ const CONNECT_SRC = [
 
   // API
   process.env.NEXT_PUBLIC_API_URL,
-  process.env.NEXT_PUBLIC_OAUTH_API_URL,
 
   // Sentry
   '*.ingest.sentry.io',

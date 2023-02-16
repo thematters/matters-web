@@ -8,10 +8,10 @@ import {
   EmptyArticle,
   InfiniteScroll,
   List,
+  Media,
   QueryError,
   Spinner,
   usePublicQuery,
-  useResponsive,
   ViewerContext,
 } from '~/components'
 import {
@@ -64,13 +64,20 @@ interface MainFeedProps {
 }
 
 const horizontalFeeds: FeedLocation = {
-  2: () => <Tags />,
-  5: () => <Authors />,
+  2: () => (
+    <Media lessThan="xl">
+      <Tags />
+    </Media>
+  ),
+  5: () => (
+    <Media lessThan="xl">
+      <Authors />
+    </Media>
+  ),
 }
 
 const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
-  const isLargeUp = useResponsive('lg-up')
   const isHottestFeed = sortBy === 'hottest'
 
   /**
@@ -78,17 +85,10 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
    */
   // public data
   const query = FEED_ARTICLES_PUBLIC[sortBy]
-  const {
-    data,
-    error,
-    loading,
-    fetchMore,
-    networkStatus,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<FeedArticlesPublic>(query, {
-    notifyOnNetworkStatusChange: true,
-  })
+  const { data, error, loading, fetchMore, networkStatus, client } =
+    usePublicQuery<FeedArticlesPublic>(query, {
+      notifyOnNetworkStatusChange: true,
+    })
 
   // pagination
   const connectionPath = 'viewer.recommendation.feed'
@@ -151,12 +151,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
     loadPrivate(newData)
   }
 
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-
   /**
    * Render
    */
@@ -179,7 +173,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   // insert other feeds
   let mixFeed: FeedEdge[] = edges
 
-  if (!isLargeUp && isHottestFeed) {
+  if (isHottestFeed) {
     // get copy
     mixFeed = JSON.parse(JSON.stringify(edges))
 
@@ -199,11 +193,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {mixFeed.map((edge, i) => {
           if (edge?.__typename === 'HorizontalFeed') {

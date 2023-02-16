@@ -47,9 +47,7 @@ export type InnerChart = {
 
 type StackedAreaChartProps = {
   data: Data
-  children: (
-    props: InnerChart
-  ) => React.ReactChild | React.ReactChild[] | React.ReactNode
+  children: (props: InnerChart) => React.ReactNode
 } & Dimensions &
   Ticks
 

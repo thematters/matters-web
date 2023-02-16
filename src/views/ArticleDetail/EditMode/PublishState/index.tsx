@@ -35,7 +35,7 @@ const PublishState = ({
 }: Props) => {
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
-  const isValidHash = typeof draft.mediaHash === 'string' && draft.mediaHash
+  const isValidHash = typeof draft.mediaHash === 'string' && !!draft.mediaHash
 
   if (!isPending && !isPublished) {
     return null

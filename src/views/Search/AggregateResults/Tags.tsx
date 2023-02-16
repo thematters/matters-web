@@ -14,6 +14,7 @@ import {
   Spinner,
   TagDigest,
   Translate,
+  usePublicQuery,
   useRoute,
 } from '~/components'
 import { SearchAggregateTagsPublicQuery } from '~/gql/graphql'
@@ -32,21 +33,25 @@ const AggregateTagResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore } = useQuery<SearchAggregateTagsPublicQuery>(
-    SEARCH_AGGREGATE_TAGS_PUBLIC,
-    {
-      variables: {
-        key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
-        version: version === '' ? undefined : version,
-      },
-      fetchPolicy: 'network-only',
-    }
-  )
+  const { data, loading, fetchMore } =
+    usePublicQuery<SearchAggregateTagsPublicQuery>(
+      SEARCH_AGGREGATE_TAGS_PUBLIC,
+      {
+        variables: {
+          key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+          version: version === '' ? undefined : version,
+        },
+        fetchPolicy: 'network-only',
+      }
+    )
 
   // pagination
   const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
 
+  /**
+   * Render
+   */
   if (loading) {
     return <Spinner />
   }

@@ -8,8 +8,6 @@ import {
   Title,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
-  // useRoute,
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
@@ -44,16 +42,11 @@ const FeaturedComments = ({ id, lock }: { id: string; lock: boolean }) => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    fetchMore,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<FeaturedCommentsPublicQuery>(FEATURED_COMMENTS_PUBLIC, {
-    variables: { id },
-    notifyOnNetworkStatusChange: true,
-  })
+  const { data, loading, fetchMore, client } =
+    usePublicQuery<FeaturedCommentsPublicQuery>(FEATURED_COMMENTS_PUBLIC, {
+      variables: { id },
+      notifyOnNetworkStatusChange: true,
+    })
 
   // pagination
   const connectionPath = 'article.featuredComments'
@@ -103,13 +96,6 @@ const FeaturedComments = ({ id, lock }: { id: string; lock: boolean }) => {
 
     loadPrivate(newData)
   }
-
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-  usePullToRefresh.Handler(refetch)
 
   if (loading && !data) {
     return <Spinner />

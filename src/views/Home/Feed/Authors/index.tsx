@@ -40,6 +40,7 @@ const Authors = () => {
     {
       notifyOnNetworkStatusChange: true,
       variables: { random: lastRandom || 0 },
+      skip: !lastRandom,
     },
     { publicQuery: !viewer.isAuthed }
   )
@@ -108,7 +109,6 @@ const Authors = () => {
                         id: node.id,
                       })
                     }
-                    canClamp
                   />
                 ))}
               </section>

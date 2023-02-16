@@ -4,9 +4,9 @@ import { useContext, useEffect } from 'react'
 
 import {
   Layout,
+  Media,
   Spinner,
   useMutation,
-  useResponsive,
   ViewerContext,
 } from '~/components'
 import viewerUnreadFollowing from '~/components/GQL/updates/viewerUnreadFollowing'
@@ -50,7 +50,7 @@ const BaseFollow = () => {
     }
   }, [])
 
-  if (loading || !viewer.privateFetched) {
+  if (loading) {
     return <Spinner />
   }
 
@@ -68,13 +68,18 @@ const BaseFollow = () => {
 }
 
 const Follow = () => {
-  const isSmallUp = useResponsive('sm-up')
-
   return (
     <Layout.Main>
       <Layout.Header
         left={
-          isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
+          <>
+            <Media at="sm">
+              <Layout.Header.MeButton />
+            </Media>
+            <Media greaterThan="sm">
+              <Layout.Header.BackButton />
+            </Media>
+          </>
         }
         right={<Layout.Header.Title id="following" />}
       />

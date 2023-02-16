@@ -1,5 +1,3 @@
-import gql from 'graphql-tag'
-
 import IMAGE_WALL_BACKGROUND_MD from '@/public/static/images/circle-wall-background-md.jpg'
 import IMAGE_WALL_BACKGROUND_SM from '@/public/static/images/circle-wall-background-sm.jpg'
 import { analytics } from '~/common/utils'
@@ -10,6 +8,7 @@ import {
   CircleWallCirclePublicFragment,
 } from '~/gql/graphql'
 
+import { fragments } from './gql'
 import styles from './styles.css'
 
 interface CircleWallProps {
@@ -56,23 +55,6 @@ const CircleWall = ({ circle }: CircleWallProps) => {
   )
 }
 
-CircleWall.fragments = {
-  circle: {
-    public: gql`
-      fragment CircleWallCirclePublic on Circle {
-        id
-        ...DigestRichCirclePublic
-      }
-      ${CircleDigest.Rich.fragments.circle.public}
-    `,
-    private: gql`
-      fragment CircleWallCirclePrivate on Circle {
-        id
-        ...DigestRichCirclePrivate
-      }
-      ${CircleDigest.Rich.fragments.circle.private}
-    `,
-  },
-}
+CircleWall.fragments = fragments
 
 export default CircleWall

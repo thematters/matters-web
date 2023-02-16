@@ -7,6 +7,7 @@ import {
   IconNavHomeActive24,
   IconNavSearch24,
   IconNavSettings24,
+  LanguageContext,
   useRoute,
   ViewerContext,
   WriteButton,
@@ -19,6 +20,7 @@ import styles from './styles.css'
 const NavBar = () => {
   const viewer = useContext(ViewerContext)
   const { router, isInPath } = useRoute()
+  const { lang } = useContext(LanguageContext)
   const isInHome = isInPath('HOME')
   const isInFollow = isInPath('FOLLOW')
   const isInNotification = isInPath('ME_NOTIFICATIONS')
@@ -30,7 +32,7 @@ const NavBar = () => {
     <section className="nav-bar" role="navigation">
       <ul>
         <NavListItem
-          name={TEXT.zh_hant.discover}
+          name={TEXT[lang].discover}
           icon={<IconNavHome24 size="md" />}
           activeIcon={<IconNavHomeActive24 size="md" color="green" />}
           active={isInHome}
@@ -38,7 +40,7 @@ const NavBar = () => {
         />
 
         <NavListItem
-          name={TEXT.zh_hant.follow}
+          name={TEXT[lang].follow}
           icon={<UnreadIcon.Follow />}
           activeIcon={<UnreadIcon.Follow active />}
           active={isInFollow}
@@ -46,7 +48,7 @@ const NavBar = () => {
         />
 
         {!isInDraftDetail && (
-          <li role="menuitem">
+          <li>
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
               authed={viewer.isAuthed}
@@ -56,7 +58,7 @@ const NavBar = () => {
         )}
 
         <NavListItem
-          name={TEXT.zh_hant.search}
+          name={TEXT[lang].search}
           icon={<IconNavSearch24 size="md" />}
           activeIcon={<IconNavSearch24 size="md" color="green" />}
           active={isInSearch}
@@ -75,17 +77,18 @@ const NavBar = () => {
 
         {viewer.isAuthed && (
           <NavListItem
-            name={TEXT.zh_hant.notifications}
+            name={TEXT[lang].notifications}
             icon={<UnreadIcon.Notification />}
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}
             href={PATHS.ME_NOTIFICATIONS}
+            aria-label={TEXT[lang].notifications}
           />
         )}
 
         {!viewer.isAuthed && (
           <NavListItem
-            name={TEXT.zh_hant.settings}
+            name={TEXT[lang].settings}
             icon={<IconNavSettings24 size="md" />}
             activeIcon={<IconNavSettings24 size="md" color="green" />}
             active={isInSettings}

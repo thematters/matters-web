@@ -1,8 +1,12 @@
 import contentHash from '@ensdomains/content-hash'
-import { namehash } from 'ethers/lib/utils'
+import { namehash } from '@ethersproject/hash'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
-import { featureSupportedChains, PublicResolverABI } from '~/common/utils'
+import {
+  analytics,
+  featureSupportedChains,
+  PublicResolverABI,
+} from '~/common/utils'
 import {
   Button,
   ENSDialog,
@@ -10,6 +14,7 @@ import {
   TextIcon,
   Tooltip,
   Translate,
+  WagmiProvider,
 } from '~/components'
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
@@ -21,7 +26,7 @@ type WalletLabelProps = {
   isMe: boolean
 }
 
-const WalletLabel: React.FC<WalletLabelProps> = ({ user, isMe }) => {
+const BaseWalletLabel: React.FC<WalletLabelProps> = ({ user, isMe }) => {
   const address = user?.info.ethAddress
   const ipnsHash = user?.info.ipnsKey
   const targetNetork = featureSupportedChains.ens[0]
@@ -69,6 +74,10 @@ const WalletLabel: React.FC<WalletLabelProps> = ({ user, isMe }) => {
               textColor="green"
               onClick={() => {
                 openDialog()
+                analytics.trackEvent('click_button', {
+                  type: 'bind_ens',
+                  pageType: 'user_profile',
+                })
               }}
               aria-haspopup="dialog"
             >
@@ -100,5 +109,11 @@ const WalletLabel: React.FC<WalletLabelProps> = ({ user, isMe }) => {
     </section>
   )
 }
+
+const WalletLabel: React.FC<WalletLabelProps> = (props) => (
+  <WagmiProvider>
+    <BaseWalletLabel {...props} />
+  </WagmiProvider>
+)
 
 export default WalletLabel

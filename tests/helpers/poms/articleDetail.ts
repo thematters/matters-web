@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test'
+import _range from 'lodash/range'
 
 import { TEST_ID } from '~/common/enums'
 import { stripSpaces } from '~/common/utils/text'
@@ -29,6 +30,7 @@ export class ArticleDetailPage {
   readonly toggleArticleOnly: Locator
 
   // toolbar
+  readonly toolbar: Locator
   readonly toolbarAppreciationButton: Locator
   readonly toolbarSupportButton: Locator
   readonly toolbarCommentButton: Locator
@@ -44,7 +46,7 @@ export class ArticleDetailPage {
   readonly dialog: Locator
   readonly dialogCommentInput: Locator
 
-  constructor(page: Page) {
+  constructor(page: Page, isMobile?: boolean) {
     this.page = page
 
     // header
@@ -58,9 +60,9 @@ export class ArticleDetailPage {
     this.tagList = this.page.getByTestId(TEST_ID.ARTICLE_TAGS)
     this.collection = this.page.getByTestId(TEST_ID.ARTICLE_COLLECTION)
     this.license = this.page.getByTestId(TEST_ID.ARTICLE_LICENSE)
-    this.supportButton = this.page.getByRole('button', {
-      name: 'Support Author',
-    })
+    this.supportButton = this.page.getByTestId(
+      TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON
+    )
     this.supportRequest = this.page.getByTestId(TEST_ID.ARTICLE_SUPPORT_REQUEST)
     this.supportReply = this.page.getByTestId(TEST_ID.ARTICLE_SUPPORT_REPLY)
     this.viewSupportersButton = this.page.getByRole('button', {
@@ -71,20 +73,20 @@ export class ArticleDetailPage {
     this.toggleArticleOnly = this.page.getByLabel('Articles Only')
 
     // toolbar
+    this.toolbar = this.page.getByTestId(TEST_ID.ARTICLE_TOOLBAR)
     this.toolbarAppreciationButton = this.page.getByRole('button', {
-      name: 'appreciate article',
+      name: 'like article',
     })
     this.toolbarSupportButton = this.page.getByRole('button', {
       name: 'support author',
     })
+
     this.toolbarCommentButton = this.page.getByRole('button', {
       name: 'Comment…',
     })
-    this.toolbarBookmarkButton = this.page.getByRole('button', {
-      name: 'Bookmark',
-    })
+    this.toolbarBookmarkButton = this.page.getByTestId(TEST_ID.ARTICLE_BOOKMARK)
     this.toolbarShareButton = this.page.getByRole('button', { name: 'Share' })
-    this.toolbarMoreButton = this.page.getByRole('button', {
+    this.toolbarMoreButton = this.toolbar.getByRole('button', {
       name: 'More Action',
     })
     this.toolbarViewLikersButton = this.page.getByRole('menuitem', {
@@ -101,6 +103,10 @@ export class ArticleDetailPage {
     // dialog
     this.dialog = this.page.getByRole('dialog')
     this.dialogCommentInput = this.dialog.locator('.ql-editor')
+  }
+
+  async getTitle() {
+    return this.title.innerText()
   }
 
   async getSummary() {
@@ -159,5 +165,67 @@ export class ArticleDetailPage {
     })
 
     return content
+  }
+
+  async sendAppreciation(count: number) {
+    _range(count).map(async () => await this.toolbarAppreciationButton.click())
+  }
+
+  async sendBookmark() {
+    await Promise.all([
+      waitForAPIResponse({
+        page: this.page,
+        path: 'data.toggleSubscribeArticle.subscribed',
+      }),
+      this.toolbarBookmarkButton.click(),
+    ])
+  }
+
+  async forkArticle() {
+    await this.toolbarMoreButton.click()
+    await this.toolbarCollectButton.click()
+  }
+
+  async supportHKD(password: string, amount: number) {
+    // Open support dialog
+    await this.supportButton.click()
+
+    // select fiat currency
+    await this.dialog.getByRole('button', { name: 'Fiat Currency' }).click()
+
+    // top-up
+    await this.dialog.getByRole('button', { name: 'Top Up' }).click()
+    await this.dialog
+      .getByLabel('Enter amount')
+      .fill(Math.max(20, amount).toString())
+    await this.dialog.locator('#field-checkout').click() // activate form to fillable
+    await this.dialog
+      .frameLocator('iframe')
+      .getByPlaceholder('Card number')
+      .fill('4242424242424242')
+    const YY = new Date(Date.now()).getFullYear() - 2000 + 1
+    await this.dialog
+      .frameLocator('iframe')
+      .getByPlaceholder('MM / YY')
+      .fill(`12${YY}`)
+    await this.dialog.frameLocator('iframe').getByPlaceholder('CVC').fill('123')
+    await this.dialog.getByRole('button', { name: 'Confirm' }).click()
+    await this.dialog.getByRole('button', { name: 'Back to support' }).click()
+
+    // fill amount hkd
+    await this.dialog
+      .getByPlaceholder('Enter a custom amount')
+      .fill(amount.toString())
+
+    // click next step
+    await this.dialog.getByRole('button', { name: 'Next' }).click()
+
+    // fill payment password
+    await this.dialog.locator('#field-password-1').fill(password[0])
+    await this.dialog.locator('#field-password-2').fill(password[1])
+    await this.dialog.locator('#field-password-3').fill(password[2])
+    await this.dialog.locator('#field-password-4').fill(password[3])
+    await this.dialog.locator('#field-password-5').fill(password[4])
+    await this.dialog.locator('#field-password-6').fill(password[5])
   }
 }

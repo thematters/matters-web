@@ -1,3 +1,4 @@
+import { TEST_ID } from '@/src/common/enums'
 import {
   BookmarkButton,
   DateTime,
@@ -44,7 +45,7 @@ const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
         {controls.inUserArticles && article.sticky && (
           <>
             <IconDotDivider />
-            <IconPin24 />
+            <IconPin24 data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_FOOTER_PIN} />
           </>
         )}
 

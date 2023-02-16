@@ -93,7 +93,7 @@ export const MOCK_ARTILCE = {
   author: MOCK_USER,
   createdAt: '2020-12-24T07:29:17.682Z',
   revisedAt: null,
-  appreciationsReceived: {
+  likesReceived: {
     __typename: 'AppreciationConnection' as any,
     totalCount: 0,
   },
@@ -102,7 +102,7 @@ export const MOCK_ARTILCE = {
   sticky: false,
   readTime: 1234.5,
   tags: [],
-  appreciationsReceivedTotal: 1,
+  likesReceivedTotal: 1,
   responseCount: 10,
   transactionsReceivedBy: {
     __typename: 'AppreciationConnection' as any,

@@ -10,7 +10,6 @@ import {
   Spinner,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -27,16 +26,10 @@ const MembersDialogContent = () => {
   /**
    * Public data fetching
    */
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<CircleMembersPublicQuery>(CIRCLE_MEMBERS_PUBLIC, {
-    variables: { name },
-  })
+  const { data, loading, error, fetchMore, client } =
+    usePublicQuery<CircleMembersPublicQuery>(CIRCLE_MEMBERS_PUBLIC, {
+      variables: { name },
+    })
 
   const circle = data?.circle
   const connectionPath = 'circle.members'
@@ -83,14 +76,6 @@ const MembersDialogContent = () => {
 
     loadPrivate(newData)
   }
-
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

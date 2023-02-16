@@ -105,7 +105,6 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
             <ArticleDigestSidebar
               article={node}
               titleTextSize="sm"
-              hasCover
               onClick={onClick(i, node.id)}
               onClickAuthor={onClickAuthor(i, node.author.id)}
               bgActiveColor="grey-lighter"

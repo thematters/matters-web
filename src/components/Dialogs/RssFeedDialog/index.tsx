@@ -85,9 +85,8 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
           closeDialog={closeDialog}
           closeTextId="close"
         />
-        <Dialog.Content hasGrow>
-          <DynamicContent user={user} refetch={refetch} />
-        </Dialog.Content>
+
+        <DynamicContent user={user} refetch={refetch} />
       </Dialog>
     </>
   )

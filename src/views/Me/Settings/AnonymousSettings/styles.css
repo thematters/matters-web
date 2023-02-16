@@ -1,9 +1,3 @@
-.title {
-  font-size: var(--font-size-nav-title);
-  font-weight: var(--font-weight-nav-title);
-  line-height: 1.6;
-}
-
 .copyright {
   @mixin flex-center-all;
 

@@ -15,9 +15,9 @@ import {
   IconNavSearch24,
   IconNavSettings24,
   LanguageContext,
+  Media,
   Menu,
   Translate,
-  useResponsive,
   useRoute,
   ViewerContext,
   WriteButton,
@@ -33,8 +33,6 @@ const SideNav = () => {
   const { lang } = useContext(LanguageContext)
 
   const { router, isInPath, isPathStartWith, getQuery } = useRoute()
-  const isMediumUp = useResponsive('md-up')
-  const isLargeUp = useResponsive('lg-up')
   const viewer = useContext(ViewerContext)
 
   const userName = getQuery('name')
@@ -54,7 +52,12 @@ const SideNav = () => {
       <section className="logo">
         <Link href={PATHS.HOME} legacyBehavior>
           <a aria-label={translate({ id: 'discover', lang })}>
-            {isMediumUp ? <IconLogo /> : <IconLogoGraph />}
+            <Media at="md">
+              <IconLogoGraph />
+            </Media>
+            <Media greaterThan="md">
+              <IconLogo />
+            </Media>
           </a>
         </Link>
       </section>
@@ -65,7 +68,6 @@ const SideNav = () => {
           icon={<IconNavHome24 size="md" />}
           activeIcon={<IconNavHomeActive24 size="md" />}
           active={isInHome}
-          isMediumUp={isMediumUp}
           href={PATHS.HOME}
         />
 
@@ -74,7 +76,6 @@ const SideNav = () => {
           icon={<UnreadIcon.Follow />}
           activeIcon={<UnreadIcon.Follow active />}
           active={isInFollow}
-          isMediumUp={isMediumUp}
           href={PATHS.FOLLOW}
         />
 
@@ -84,18 +85,16 @@ const SideNav = () => {
             icon={<UnreadIcon.Notification />}
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}
-            isMediumUp={isMediumUp}
             href={PATHS.ME_NOTIFICATIONS}
           />
         )}
 
-        {!isLargeUp && (
+        <Media lessThan="xl">
           <NavListItem
             name={<Translate id="search" />}
             icon={<IconNavSearch24 size="md" />}
             activeIcon={<IconNavSearch24 size="md" color="green" />}
             active={isInSearch}
-            isMediumUp={isMediumUp}
             onClick={() => {
               const path = toPath({
                 page: 'search',
@@ -108,7 +107,7 @@ const SideNav = () => {
               }
             }}
           />
-        )}
+        </Media>
 
         {!viewer.isAuthed && (
           <NavListItem
@@ -116,7 +115,6 @@ const SideNav = () => {
             icon={<IconNavSettings24 size="md" />}
             activeIcon={<IconNavSettings24 size="md" color="green" />}
             active={isInSettings}
-            isMediumUp={isMediumUp}
             href={PATHS.ME_SETTINGS}
           />
         )}
@@ -144,11 +142,10 @@ const SideNav = () => {
             onShown={hidePopperOnClick}
           >
             <NavListItem
-              name={<Translate zh_hant="我的" zh_hans="我的" en="My Page" />}
+              name={<Translate id="myPage" />}
               icon={<MeAvatar user={viewer} />}
               activeIcon={<MeAvatar user={viewer} active />}
               active={isInMe}
-              isMediumUp={isMediumUp}
               canScrollTop={false}
               aira-haspopup="menu"
             />
@@ -160,7 +157,6 @@ const SideNav = () => {
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
               authed={viewer.isAuthed}
-              isLarge={isMediumUp}
               forbidden={viewer.isInactive}
             />
           </li>

@@ -5,16 +5,19 @@ import { waitForAPIResponse } from './api'
 export type User = {
   email: string
   password: string
+  paymentPassword: string
 }
 
 export const users = {
   alice: {
     email: process.env.PLAYWRIGHT_AUTH_EMAIL_ALICE as string,
     password: process.env.PLAYWRIGHT_AUTH_PWD_ALICE as string,
+    paymentPassword: process.env.PLAYWRIGHT_PAYMENT_PWD_ALICE as string,
   } as User,
   bob: {
     email: process.env.PLAYWRIGHT_AUTH_EMAIL_BOB as string,
     password: process.env.PLAYWRIGHT_AUTH_PWD_BOB as string,
+    paymentPassword: process.env.PLAYWRIGHT_PAYMENT_PWD_BOB as string,
   } as User,
 }
 
@@ -41,11 +44,11 @@ export const login = async ({
   }
 
   // Login with email & password
-  await page.getByText('Continue with Email').click()
+  await page.getByRole('button', { name: 'Continue with Email' }).click()
 
   // Fill the form
-  await page.getByLabel('Email').fill(email)
-  await page.getByLabel('Password').fill(password)
+  await page.getByPlaceholder('Email').fill(email)
+  await page.getByPlaceholder('Password').fill(password)
 
   // Submit
   await page.getByRole('button', { name: 'Confirm' }).click()

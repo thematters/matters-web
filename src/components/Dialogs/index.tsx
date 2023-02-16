@@ -7,11 +7,11 @@ export * from './RssFeedDialog'
 // Article
 export * from './AppreciatorsDialog'
 export * from './CommentFormDialog'
-export * from './DonatorsDialog'
 export * from './FingerprintDialog'
 export * from './MigrationDialog'
 export * from './ReviseArticleDialog'
 export * from './ShareDialog'
+export * from './SupportersDialog'
 
 // Tag
 export * from './RecommendTagDialog'

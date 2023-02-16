@@ -149,7 +149,7 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
     ) {
       handleSubmit()
     }
-  }, [isValid, values.password, values.comparedPassword])
+  }, [values.password, values.comparedPassword])
 
   if (isSubmitting) {
     return (

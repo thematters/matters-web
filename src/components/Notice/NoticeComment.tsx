@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Card, Expandable } from '~/components'
+import { Card } from '~/components'
 import CommentContent from '~/components/Comment/Content'
 import { NoticeCommentFragment } from '~/gql/graphql'
 
@@ -74,9 +74,7 @@ const NoticeComment = ({
         borderRadius="xtight"
         testId={TEST_ID.DIGEST_COMMENT_NOTICE}
       >
-        <Expandable content={comment.content} size="sm">
-          <CommentContent comment={comment} type="article" size="sm" />
-        </Expandable>
+        <CommentContent comment={comment} type="article" size="sm" />
       </Card>
 
       <style jsx>{styles}</style>
