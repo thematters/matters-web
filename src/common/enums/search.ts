@@ -6,7 +6,7 @@ export const SEARCH_START_FLAG = '@#＠＃'
 
 export const MAX_SEARCH_KEY_LENGTH = 60
 
-export const MAX_SEARCH_RESULTS_LENGTH = 100
+export const MAX_SEARCH_RESULTS_LENGTH = 200
 
 export const FIRST_SEARCH_RESULTS_LENGTH = 30
 
