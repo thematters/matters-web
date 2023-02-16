@@ -38,7 +38,6 @@ const AggregateArticleResults = () => {
           key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
           version: version === '' ? undefined : version,
         },
-        fetchPolicy: 'network-only',
       }
     )
 
