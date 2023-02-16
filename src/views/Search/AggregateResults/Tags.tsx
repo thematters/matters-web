@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { Fragment } from 'react'
 
 import {
