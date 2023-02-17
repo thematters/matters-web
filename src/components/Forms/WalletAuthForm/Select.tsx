@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 import { EXTERNAL_LINKS, GUIDE_LINKS } from '~/common/enums'
@@ -220,7 +221,9 @@ const Select: React.FC<FormProps> = ({
                 size="md"
                 spacing="xtight"
               >
-                Install MetaMask
+                <FormattedMessage
+                  defaultMessage="Install MetaMask"
+                  description="src/components/Forms/WalletAuthForm/Select.tsx" />
               </TextIcon>
             }
             htmlHref={EXTERNAL_LINKS.METAMASK}
