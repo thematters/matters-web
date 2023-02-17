@@ -7,6 +7,10 @@
     "defaultMessage": "Download App",
     "description": "src/views/Help/index.tsx"
   },
+  "FaTb0A": {
+    "defaultMessage": "Install MetaMask",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
   "JMRVO6": {
     "defaultMessage": "Matters Community",
     "description": "src/views/Help/index.tsx"
