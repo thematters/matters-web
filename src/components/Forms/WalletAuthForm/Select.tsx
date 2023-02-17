@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
-import { GUIDE_LINKS } from '~/common/enums'
+import { EXTERNAL_LINKS, GUIDE_LINKS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   Dialog,
@@ -190,7 +190,7 @@ const Select: React.FC<FormProps> = ({
       )}
 
       <Form.List groupName={<Translate id="connectWallet" />}>
-        {injectedConnector?.ready && (
+        {injectedConnector?.ready ? (
           <Form.List.Item
             title={
               <TextIcon
@@ -210,6 +210,26 @@ const Select: React.FC<FormProps> = ({
             }}
             role="button"
             right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
+          />
+        ) : (
+          <Form.List.Item
+            title={
+              <TextIcon
+                color="black"
+                icon={<IconMetaMask24 size="md" />}
+                size="md"
+                spacing="xtight"
+              >
+                Install MetaMask
+              </TextIcon>
+            }
+            htmlHref={EXTERNAL_LINKS.METAMASK}
+            onClick={() => {
+              analytics.trackEvent('click_button', {
+                type: 'installMetaMask',
+              })
+            }}
+            role="button"
           />
         )}
         <Form.List.Item
