@@ -11,6 +11,10 @@
     "defaultMessage": "下载应用",
     "description": "src/views/Help/index.tsx"
   },
+  "FaTb0A": {
+    "defaultMessage": "安装 MetaMask",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
   "JMRVO6": {
     "defaultMessage": "社区共建基地",
     "description": "src/views/Help/index.tsx"
