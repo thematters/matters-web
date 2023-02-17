@@ -1,0 +1,46 @@
+{
+  "cfL5uk": {
+    "defaultMessage": "已超过 200 字，目前 {numbers} 字",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+  },
+  "3uQKhx": {
+    "defaultMessage": "若你希望向 Matters 提出建议，或遭遇操作异常，请发送邮件至",
+    "description": "src/views/Help/index.tsx"
+  },
+  "BqXRy4": {
+    "defaultMessage": "下载应用",
+    "description": "src/views/Help/index.tsx"
+  },
+  "FaTb0A": {
+    "defaultMessage": "安装 MetaMask",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "JMRVO6": {
+    "defaultMessage": "社区共建基地",
+    "description": "src/views/Help/index.tsx"
+  },
+  "RKs1fz": {
+    "defaultMessage": "开放社区",
+    "description": "src/views/Help/index.tsx"
+  },
+  "dnsfmR": {
+    "defaultMessage": "，我们会尽快回复!",
+    "description": "src/views/Help/index.tsx"
+  },
+  "nmmItN": {
+    "defaultMessage": "关于我们",
+    "description": "src/views/Help/index.tsx"
+  },
+  "q7jZPx": {
+    "defaultMessage": "用户协议",
+    "description": "src/views/Help/index.tsx"
+  },
+  "qXcvBF": {
+    "defaultMessage": "玩转 Matters 实用指南",
+    "description": "src/views/Help/index.tsx"
+  },
+  "rXbLl7": {
+    "defaultMessage": "一键搬家",
+    "description": "src/views/Help/index.tsx"
+  }
+}

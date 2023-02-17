@@ -127,3 +127,6 @@ tsconfig.tsbuildinfo
 
 # Codegen
 /src/gql/
+
+# i18n
+compiled-lang

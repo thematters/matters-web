@@ -24,7 +24,6 @@ const InnerApp = ({
     <ErrorBoundary>
       <ApolloProvider client={apollo}>
         <GlobalStyles />
-
         <Root client={apollo} headers={headers}>
           <Component {...pageProps} />
           <ClientUpdater />
@@ -39,7 +38,9 @@ InnerApp.getInitialProps = async ({ ctx }: { ctx: NextPageContext }) => {
     return { headers: {} }
   }
 
-  return { headers: ctx?.req?.headers }
+  return {
+    headers: ctx?.req?.headers,
+  }
 }
 
 const MattersApp = withApollo(InnerApp as any, { getDataFromTree })

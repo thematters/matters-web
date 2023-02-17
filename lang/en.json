@@ -1,0 +1,46 @@
+{
+  "3uQKhx": {
+    "defaultMessage": "Please email",
+    "description": "src/views/Help/index.tsx"
+  },
+  "BqXRy4": {
+    "defaultMessage": "Download App",
+    "description": "src/views/Help/index.tsx"
+  },
+  "FaTb0A": {
+    "defaultMessage": "Install MetaMask",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "JMRVO6": {
+    "defaultMessage": "Matters Community",
+    "description": "src/views/Help/index.tsx"
+  },
+  "RKs1fz": {
+    "defaultMessage": "Open Source",
+    "description": "src/views/Help/index.tsx"
+  },
+  "cfL5uk": {
+    "defaultMessage": "Over 200 words, current {numbers}",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+  },
+  "dnsfmR": {
+    "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
+    "description": "src/views/Help/index.tsx"
+  },
+  "nmmItN": {
+    "defaultMessage": "About Us",
+    "description": "src/views/Help/index.tsx"
+  },
+  "q7jZPx": {
+    "defaultMessage": "Term of Services",
+    "description": "src/views/Help/index.tsx"
+  },
+  "qXcvBF": {
+    "defaultMessage": "Explore Matters",
+    "description": "src/views/Help/index.tsx"
+  },
+  "rXbLl7": {
+    "defaultMessage": "Migrate to Matters",
+    "description": "src/views/Help/index.tsx"
+  }
+}

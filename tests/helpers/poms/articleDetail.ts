@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test'
+import _range from 'lodash/range'
 
 import { TEST_ID } from '~/common/enums'
 import { stripSpaces } from '~/common/utils/text'
@@ -29,6 +30,7 @@ export class ArticleDetailPage {
   readonly toggleArticleOnly: Locator
 
   // toolbar
+  readonly toolbar: Locator
   readonly toolbarAppreciationButton: Locator
   readonly toolbarSupportButton: Locator
   readonly toolbarCommentButton: Locator
@@ -71,6 +73,7 @@ export class ArticleDetailPage {
     this.toggleArticleOnly = this.page.getByLabel('Articles Only')
 
     // toolbar
+    this.toolbar = this.page.getByTestId(TEST_ID.ARTICLE_TOOLBAR)
     this.toolbarAppreciationButton = this.page.getByRole('button', {
       name: 'like article',
     })
@@ -81,11 +84,9 @@ export class ArticleDetailPage {
     this.toolbarCommentButton = this.page.getByRole('button', {
       name: 'Comment…',
     })
-    this.toolbarBookmarkButton = this.page.getByRole('button', {
-      name: 'Bookmark',
-    })
+    this.toolbarBookmarkButton = this.page.getByTestId(TEST_ID.ARTICLE_BOOKMARK)
     this.toolbarShareButton = this.page.getByRole('button', { name: 'Share' })
-    this.toolbarMoreButton = this.page.getByRole('button', {
+    this.toolbarMoreButton = this.toolbar.getByRole('button', {
       name: 'More Action',
     })
     this.toolbarViewLikersButton = this.page.getByRole('menuitem', {
@@ -102,6 +103,10 @@ export class ArticleDetailPage {
     // dialog
     this.dialog = this.page.getByRole('dialog')
     this.dialogCommentInput = this.dialog.locator('.ql-editor')
+  }
+
+  async getTitle() {
+    return this.title.innerText()
   }
 
   async getSummary() {
@@ -160,6 +165,25 @@ export class ArticleDetailPage {
     })
 
     return content
+  }
+
+  async sendAppreciation(count: number) {
+    _range(count).map(async () => await this.toolbarAppreciationButton.click())
+  }
+
+  async sendBookmark() {
+    await Promise.all([
+      waitForAPIResponse({
+        page: this.page,
+        path: 'data.toggleSubscribeArticle.subscribed',
+      }),
+      this.toolbarBookmarkButton.click(),
+    ])
+  }
+
+  async forkArticle() {
+    await this.toolbarMoreButton.click()
+    await this.toolbarCollectButton.click()
   }
 
   async supportHKD(password: string, amount: number) {
