@@ -1,5 +1,5 @@
-import { Formik } from 'formik'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import dynamic from 'next/dynamic'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import { INPUT_DEBOUNCE, MAX_SEARCH_KEY_LENGTH, Z_INDEX } from '~/common/enums'
@@ -22,6 +22,13 @@ interface SearchBarProps {
   onChange?: (key: string) => void
   hasDropdown?: boolean
 }
+
+const DynamicFormik = dynamic(
+  () => import('formik').then((mod) => mod.Formik),
+  {
+    ssr: true, // enable for first screen
+  }
+)
 
 const SearchButton = () => {
   const { lang } = useContext(LanguageContext)
@@ -152,7 +159,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }, [debouncedSearch])
 
   return (
-    <Formik
+    <DynamicFormik
       initialValues={{ q }}
       enableReinitialize
       onSubmit={(values) => {
@@ -269,6 +276,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           </Dropdown>
         )
       }}
-    </Formik>
+    </DynamicFormik>
   )
 }

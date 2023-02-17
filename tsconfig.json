@@ -4,9 +4,13 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
     "lib": [
+      "esnext.intl",
+      "es2017.intl",
+      "es2018.intl",
       "dom",
       "dom.iterable",
-      "es2021"
+      "es2021",
+      "es6"
     ],
     "module": "esnext",
     "moduleResolution": "node",

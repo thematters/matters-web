@@ -8,6 +8,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  Media,
   Spacer,
   TextIcon,
   Translate,
@@ -156,9 +157,9 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       />
 
       <Dialog.Content>
-        <div className="u-sm-up-hide">
+        <Media at="sm">
           <Spacer size="base" />
-        </div>
+        </Media>
 
         <Tab tabType={tabType} setTabType={changeTabType} />
 

@@ -1,5 +1,3 @@
-// import queryString from 'query-string'
-
 import { ReactComponent as IconShareFacebook } from '@/public/static/icons/16px/share-facebook.svg'
 import { ReactComponent as IconShareFacebookCircle } from '@/public/static/icons/40px/share-facebook-circle.svg'
 import { analytics } from '~/common/utils'

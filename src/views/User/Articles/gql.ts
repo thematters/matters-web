@@ -12,7 +12,7 @@ const fragment = gql`
       description
       profileCover
     }
-    articles(input: { first: 30, after: $after }) {
+    articles(input: { first: 20, after: $after }) {
       totalCount
       pageInfo {
         startCursor

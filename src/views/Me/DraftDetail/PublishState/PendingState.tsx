@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { useEffect } from 'react'
 
 import { Toast, Translate } from '~/components'
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
@@ -8,13 +9,23 @@ import {
 } from '~/gql/graphql'
 
 const PendingState = ({ draft }: { draft: PublishStateDraftFragment }) => {
-  useQuery<DraftPublishStateQuery>(DRAFT_PUBLISH_STATE, {
-    variables: { id: draft.id },
-    pollInterval: 1000 * 2,
-    errorPolicy: 'none',
-    fetchPolicy: 'network-only',
-    skip: typeof window === 'undefined',
-  })
+  const { startPolling, stopPolling } = useQuery<DraftPublishStateQuery>(
+    DRAFT_PUBLISH_STATE,
+    {
+      variables: { id: draft.id },
+      errorPolicy: 'none',
+      fetchPolicy: 'network-only',
+      skip: typeof window === 'undefined',
+    }
+  )
+
+  useEffect(() => {
+    startPolling(1000 * 2)
+
+    return () => {
+      stopPolling()
+    }
+  }, [])
 
   return (
     <Toast.Instance

@@ -20,7 +20,7 @@ const Article = ({ settings, toggle }: ArticleProps) => {
   const newAppreciationLabel = translate({
     zh_hant: '作品被贊賞',
     zh_hans: '作品被赞赏',
-    en: 'New appreciations',
+    en: 'New likes',
     lang,
   })
   const newBookmarkedLabel = translate({

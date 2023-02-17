@@ -1,9 +1,16 @@
+import { useApolloClient } from '@apollo/react-hooks'
 import { useState } from 'react'
 
+import { SEARCH_START_FLAG } from '~/common/enums'
 import { getSearchType } from '~/common/utils'
 import { Tabs, Translate, useRoute } from '~/components'
 
 import Articles from './Articles'
+import {
+  SEARCH_AGGREGATE_ARTICLES_PUBLIC,
+  SEARCH_AGGREGATE_TAGS_PUBLIC,
+  SEARCH_AGGREGATE_USERS_PUBLIC,
+} from './gql'
 import styles from './styles.css'
 import Tags from './Tags'
 import Users from './Users'
@@ -16,10 +23,12 @@ enum Type {
 
 const AggregateResults = () => {
   const { getQuery, replaceQuery } = useRoute()
+  const client = useApolloClient()
   const [type, setType] = useState(
     getSearchType(getQuery('type')) || Type.ARTICLE
   )
   const q = getQuery('q')
+  const version = getQuery('version')
 
   const isArticle = type === Type.ARTICLE
   const isUser = type === Type.USER
@@ -28,6 +37,35 @@ const AggregateResults = () => {
   const updateType = (t: Type) => {
     setType(t)
     replaceQuery('type', t)
+  }
+
+  // Prefetch first search results
+  if (type !== Type.ARTICLE) {
+    client.query({
+      query: SEARCH_AGGREGATE_ARTICLES_PUBLIC,
+      variables: {
+        key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+        version: version === '' ? undefined : version,
+      },
+    })
+  }
+  if (type !== Type.USER) {
+    client.query({
+      query: SEARCH_AGGREGATE_USERS_PUBLIC,
+      variables: {
+        key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+        version: version === '' ? undefined : version,
+      },
+    })
+  }
+  if (type !== Type.TAG) {
+    client.query({
+      query: SEARCH_AGGREGATE_TAGS_PUBLIC,
+      variables: {
+        key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+        version: version === '' ? undefined : version,
+      },
+    })
   }
 
   return (

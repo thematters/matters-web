@@ -8,9 +8,9 @@ import {
   Button,
   ButtonProps,
   IconSize,
+  Media,
   TextIcon,
   Translate,
-  useResponsive,
 } from '~/components'
 
 interface LoginButtonBaseProps {
@@ -29,22 +29,29 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   spacing,
   onClick,
 }) => {
-  const isSmallUp = useResponsive('sm-up')
-  const clickProps = isSmallUp
-    ? {
-        onClick: () => {
-          window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-          window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
-          onClick?.()
-        },
-      }
-    : appendTarget(PATHS.LOGIN, true)
+  const smUpProps = {
+    onClick: () => {
+      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+      onClick?.()
+    },
+  }
+  const smProps = appendTarget(PATHS.LOGIN, true)
 
   if (isPlain) {
     return (
-      <Button aria-haspopup="dialog" {...clickProps}>
-        <Translate id="login" />
-      </Button>
+      <>
+        <Media at="sm">
+          <Button {...smProps}>
+            <Translate id="login" />
+          </Button>
+        </Media>
+        <Media greaterThan="sm">
+          <Button aria-haspopup="dialog" {...smUpProps}>
+            <Translate id="login" />
+          </Button>
+        </Media>
+      </>
     )
   }
 
@@ -54,19 +61,30 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   const buttonSpacing = spacing || [0, 'loose']
   const textIconColor = isGreen ? 'white' : 'green'
   const textIconSize = iconSize || undefined
+  const buttonProps: ButtonProps = {
+    bgColor,
+    size: buttonSize,
+    spacing: buttonSpacing,
+    bgActiveColor: buttonBgActiveColor,
+  }
+  const ButtonText = () => (
+    <TextIcon color={textIconColor} size={textIconSize} weight="md">
+      <Translate id="login" />
+    </TextIcon>
+  )
 
   return (
-    <Button
-      bgColor={bgColor}
-      size={buttonSize}
-      spacing={buttonSpacing}
-      bgActiveColor={buttonBgActiveColor}
-      aria-haspopup="dialog"
-      {...clickProps}
-    >
-      <TextIcon color={textIconColor} size={textIconSize} weight="md">
-        <Translate id="login" />
-      </TextIcon>
-    </Button>
+    <>
+      <Media at="sm">
+        <Button {...buttonProps} {...smProps}>
+          <ButtonText />
+        </Button>
+      </Media>
+      <Media greaterThan="sm">
+        <Button aria-haspopup="dialog" {...buttonProps} {...smUpProps}>
+          <ButtonText />
+        </Button>
+      </Media>
+    </>
   )
 }

@@ -72,7 +72,7 @@ interface BaseTransactionsProps {
 }
 
 const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
-  const { data, loading, fetchMore, refetch } = useQuery<MeTransactionsQuery>(
+  const { data, loading, fetchMore } = useQuery<MeTransactionsQuery>(
     ME_TRANSACTIONS,
     {
       variables: {
@@ -129,11 +129,7 @@ const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
@@ -166,7 +162,6 @@ const Transactions = () => {
       <Tabs
         sticky
         side={
-          // TODO: hide when purpose is subscription?
           <section className="CurrencySwitch">
             <CurrencySwitch
               currency={currency}
@@ -183,7 +178,7 @@ const Transactions = () => {
           selected={isDonaion}
           onClick={() => setPurpose(Purpose.DONATION)}
         >
-          <Translate zh_hans="支持" zh_hant="支持" en="Support" />
+          <Translate zh_hans="支持" zh_hant="支持" en="Supports" />
         </Tabs.Tab>
 
         <Tabs.Tab

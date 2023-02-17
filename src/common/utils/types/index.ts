@@ -4,7 +4,6 @@ export default gql`
   extend type Query {
     commentDraft(input: CommentDraftInput!): CommentDraft!
     clientPreference: ClientPreference!
-    clientInfo: ClientInfo!
     lastFetchRandom: LastFetchRandom!
   }
 
@@ -45,11 +44,6 @@ export default gql`
     language: Language
   }
 
-  type ClientInfo {
-    id: ID!
-    viewportSize: ViewportSize!
-  }
-
   "To record the last random variable on homepage queries"
   type LastFetchRandom {
     id: ID!
@@ -57,11 +51,6 @@ export default gql`
     feedTags: Int
     sidebarAuthors: Int
     feedAuthors: Int
-  }
-
-  type ViewportSize {
-    width: Int
-    height: Int
   }
 
   type OnboardingTasks {

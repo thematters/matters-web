@@ -22,7 +22,7 @@ import {
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
 
-import { getCookie } from './cookie'
+import { getIsomorphicCookie } from './cookie'
 import { resolvers } from './resolvers'
 import { storage } from './storage'
 import typeDefs from './types'
@@ -46,11 +46,7 @@ const persistedQueryLink = createPersistedQueryLink({
  * Dynamic API endpoint based on hostname
  */
 const httpLink = ({ host, headers }: { host: string; headers: any }) => {
-  const isOAuthSite = process.env.NEXT_PUBLIC_OAUTH_SITE_DOMAIN === host
-
-  const apiUrl = isOAuthSite
-    ? process.env.NEXT_PUBLIC_OAUTH_API_URL
-    : process.env.NEXT_PUBLIC_API_URL
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
   const hostname = new URL(apiUrl as string).hostname
 
@@ -105,7 +101,7 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
   const operationVariables = operation.variables || {}
   const isPublicOperation = restCtx[GQL_CONTEXT_PUBLIC_QUERY_KEY]
 
-  if (!isProd) {
+  if (process.env.DEBUG) {
     console.log(
       `%c[GraphQL operation]%c ${operationName} ` +
         `${isPublicOperation ? '' : '(w/ credentials)'}` +
@@ -131,7 +127,7 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
  */
 const userGroupLink = ({ cookie }: { cookie: string }) =>
   setContext((_, { headers }) => {
-    const userGroup = getCookie(cookie, COOKIE_USER_GROUP)
+    const userGroup = getIsomorphicCookie(cookie, COOKIE_USER_GROUP)
 
     return {
       headers: {

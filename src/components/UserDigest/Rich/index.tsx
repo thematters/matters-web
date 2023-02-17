@@ -1,3 +1,4 @@
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
@@ -66,7 +67,11 @@ const Rich = ({
     container: true,
     [`size-${size}`]: !!size,
     disabled: isArchived,
-    clamp: canClamp,
+  })
+
+  const contentClasses = classNames({
+    content: true,
+    'has-extra-button': hasUnblock || hasFollow || !!extraButton,
   })
 
   if (isArchived) {
@@ -81,8 +86,8 @@ const Rich = ({
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
           </span>
 
-          <section className="content">
-            <header>
+          <section className={contentClasses}>
+            <header className="header">
               <span className="name">
                 <Translate id="accountArchived" />
               </span>
@@ -109,15 +114,23 @@ const Rich = ({
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
           <a className="avatar">
+            <VisuallyHidden>
+              <span>{user.displayName}</span>
+            </VisuallyHidden>
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} user={user} />
             {avatarBadge && <span className="badge">{avatarBadge}</span>}
           </a>
         </Link>
 
-        <section className="content">
-          <header>
+        <section className={contentClasses}>
+          <header className="header">
             <Link {...path} legacyBehavior>
-              <a className="name">{user.displayName}</a>
+              <a
+                className="name"
+                data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
+              >
+                {user.displayName}
+              </a>
             </Link>
             {hasState && <FollowUserButton.State user={user} />}
           </header>
@@ -132,7 +145,7 @@ const Rich = ({
 
         <section className="extra-button">
           {hasUnblock && <UnblockUserButton user={user} />}
-          {hasFollow && <FollowUserButton user={user} size="md-s" />}
+          {hasFollow && <FollowUserButton user={user} />}
           {extraButton}
         </section>
 

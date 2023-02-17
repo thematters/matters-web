@@ -1,7 +1,6 @@
-import { ethers } from 'ethers'
+import { getAddress } from '@ethersproject/address'
 import { useContext } from 'react'
 
-import { EXTERNAL_LINKS } from '~/common/enums'
 import { maskAddress, translate } from '~/common/utils'
 import {
   Button,
@@ -42,7 +41,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
     return (
       <Button
         {...buttonProps}
-        htmlHref={`${EXTERNAL_LINKS.CLOUDFLARE_GATEWAY_LINK}${ensName}`}
+        htmlHref={`https://${ensName}.limo`}
         htmlTarget="_blank"
       >
         <TextIcon {...textIconProps} icon={<IconExternalLink16 />}>
@@ -56,7 +55,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
     <CopyToClipboard text={ensName || address}>
       <Button {...buttonProps} aria-label={translate({ id: 'copy', lang })}>
         <TextIcon {...textIconProps} icon={<IconCopy16 size="sm" />}>
-          {ensName || maskAddress(ethers.utils.getAddress(address))}
+          {ensName || maskAddress(getAddress(address))}
         </TextIcon>
       </Button>
     </CopyToClipboard>

@@ -43,45 +43,12 @@ const update = ({
       ArticleDetailPublicByNodeIdQuery['article']
     > & { __typename: 'Article' }
     article.appreciateLeft = left
-    article.appreciationsReceivedTotal = total
+    article.likesReceivedTotal = total
     article.hasAppreciate = true
 
     // update SuperLike
     if (typeof canSuperLike === 'boolean') {
       article.canSuperLike = canSuperLike
-    }
-
-    // inject viewer into appreciators
-    const appreciators = article?.received?.edges || []
-    const appreciatorsCount = article?.received?.totalCount || 0
-    const hasApprecaitor = _some(appreciators, {
-      node: { sender: { id: viewer.id } },
-    })
-    if (!hasApprecaitor) {
-      article.received.totalCount = appreciatorsCount + 1
-
-      appreciators.push({
-        cursor: window.btoa(`arrayconnection:${appreciators.length}`) || '',
-        node: {
-          sender: {
-            avatar: viewer.avatar,
-            id: viewer.id,
-            liker: {
-              civicLiker: viewer.liker.civicLiker,
-              __typename: 'Liker',
-            },
-            info: {
-              badges: viewer.info.badges,
-              __typename: 'UserInfo',
-            },
-            __typename: 'User',
-          },
-          __typename: 'Appreciation',
-        },
-        __typename: 'AppreciationEdge',
-      })
-
-      article.received.edges = appreciators
     }
 
     // write to local cache

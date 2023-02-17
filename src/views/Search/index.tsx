@@ -11,9 +11,9 @@ import { storage, toPath } from '~/common/utils'
 import {
   Head,
   Layout,
+  Media,
   SearchBar,
   SearchHistory,
-  useResponsive,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -50,8 +50,6 @@ const Search = () => {
   // TODO: Just test for product team, will be removed when release
   const cancelable = getQuery('cancelable')
 
-  const isLargeUp = useResponsive('lg-up')
-
   const onCancel = () => {
     const path = toPath({ page: 'search' })
     router.replace(path.href)
@@ -80,31 +78,38 @@ const Search = () => {
   return (
     <Layout.Main>
       <Layout.Header
-        left={isLargeUp && <Layout.Header.BackButton />}
+        left={
+          <Media greaterThan="lg">
+            <Layout.Header.BackButton />
+          </Media>
+        }
         right={
-          isLargeUp ? (
-            <Layout.Header.Title id="search" />
-          ) : (
-            <>
+          <>
+            <Media at="lg">
+              <Layout.Header.Title id="search" />
+            </Media>
+            <Media lessThan="lg">
               <SearchBar hasDropdown={false} />
               {showCancelButton && (
                 <span style={{ marginLeft: '1rem' }}>
                   <Layout.Header.CancelButton onClick={onCancel} />
                 </span>
               )}
-            </>
-          )
+            </Media>
+          </>
         }
         className="layoutHeader"
       />
 
       <Head title={{ id: 'search' }} />
 
-      {isHistory && !isLargeUp && (
-        <SearchHistory
-          data={searchHistory?.slice(0, SEARCH_HISTORY_DISPLAY_LENGTH)}
-          removeSearchHistoryItem={removeSearchHistory}
-        />
+      {isHistory && (
+        <Media lessThan="lg">
+          <SearchHistory
+            data={searchHistory?.slice(0, SEARCH_HISTORY_DISPLAY_LENGTH)}
+            removeSearchHistoryItem={removeSearchHistory}
+          />
+        </Media>
       )}
       {isAggregate && <AggregateResults />}
     </Layout.Main>

@@ -9,10 +9,10 @@ import {
   IconClose32,
   IconSpinner16,
   LanguageContext,
+  Media,
   TextIcon,
   Translate,
 } from '~/components'
-import { useResponsive } from '~/components/Hook'
 
 interface CloseButtonProps {
   closeDialog: () => void
@@ -22,22 +22,29 @@ interface CloseButtonProps {
 export const CloseButton = ({ closeDialog, textId }: CloseButtonProps) => {
   const { lang } = useContext(LanguageContext)
 
-  const isSmallUp = useResponsive('sm-up')
-
   return (
-    <Button
-      onClick={closeDialog}
-      aria-label={translate({ id: textId || 'cancel', lang })}
-      bgColor={isSmallUp ? 'green-lighter' : undefined}
-      size={isSmallUp ? ['2rem', '2rem'] : undefined}
-    >
-      {!isSmallUp && (
-        <TextIcon color="green" size="md">
-          <Translate id={textId || 'cancel'} />
-        </TextIcon>
-      )}
-      {isSmallUp && <IconClose32 size="lg" color="green" />}
-    </Button>
+    <>
+      <Media at="sm">
+        <Button
+          onClick={closeDialog}
+          aria-label={translate({ id: textId || 'cancel', lang })}
+        >
+          <TextIcon color="green" size="md">
+            <Translate id={textId || 'cancel'} />
+          </TextIcon>
+        </Button>
+      </Media>
+      <Media greaterThan="sm">
+        <Button
+          onClick={closeDialog}
+          aria-label={translate({ id: textId || 'cancel', lang })}
+          bgColor="green-lighter"
+          size={['2rem', '2rem']}
+        >
+          <IconClose32 size="lg" color="green" />
+        </Button>
+      </Media>
+    </>
   )
 }
 
@@ -46,22 +53,27 @@ type BackButton = ButtonProps
 export const BackButton: React.FC<BackButton> = (props) => {
   const { lang } = useContext(LanguageContext)
 
-  const isSmallUp = useResponsive('sm-up')
-
   return (
-    <Button
-      aria-label={translate({ id: 'previousStep', lang })}
-      bgColor={isSmallUp ? 'green-lighter' : undefined}
-      size={isSmallUp ? ['2rem', '2rem'] : undefined}
-      {...props}
-    >
-      {!isSmallUp && (
-        <TextIcon color="green" size="md">
-          <Translate id="previousStep" />
-        </TextIcon>
-      )}
-      {isSmallUp && <IconBack32 size="lg" color="green" />}
-    </Button>
+    <>
+      <Media at="sm">
+        <Button aria-label={translate({ id: 'previousStep', lang })} {...props}>
+          <TextIcon color="green" size="md">
+            <Translate id="previousStep" />
+          </TextIcon>
+        </Button>
+      </Media>
+
+      <Media greaterThan="sm">
+        <Button
+          aria-label={translate({ id: 'previousStep', lang })}
+          bgColor="green-lighter"
+          size={['2rem', '2rem']}
+          {...props}
+        >
+          <IconBack32 size="lg" color="green" />
+        </Button>
+      </Media>
+    </>
   )
 }
 
@@ -75,23 +87,37 @@ export const RightButton: React.FC<RightButtonProps> = ({
   loading,
   ...buttonProps
 }) => {
-  const isSmallUp = useResponsive('sm-up')
-
   return (
-    <Button
-      {...buttonProps}
-      size={isSmallUp ? [null, '2rem'] : undefined}
-      spacing={isSmallUp ? [0, 'base'] : undefined}
-      bgColor={isSmallUp ? 'green' : undefined}
-    >
-      <TextIcon
-        color={isSmallUp ? 'white' : 'green'}
-        size={isSmallUp ? 'md-s' : 'md'}
-        weight="md"
-        icon={loading && <IconSpinner16 size="sm" />}
-      >
-        {loading ? null : text}
-      </TextIcon>
-    </Button>
+    <>
+      <Media at="sm">
+        <Button {...buttonProps}>
+          <TextIcon
+            color="green"
+            size="md"
+            weight="md"
+            icon={loading && <IconSpinner16 size="sm" />}
+          >
+            {loading ? null : text}
+          </TextIcon>
+        </Button>
+      </Media>
+      <Media greaterThan="sm">
+        <Button
+          {...buttonProps}
+          size={[null, '2rem']}
+          spacing={[0, 'base']}
+          bgColor="green"
+        >
+          <TextIcon
+            color="white"
+            size="md-s"
+            weight="md"
+            icon={loading && <IconSpinner16 size="sm" />}
+          >
+            {loading ? null : text}
+          </TextIcon>
+        </Button>
+      </Media>
+    </>
   )
 }

@@ -100,23 +100,21 @@ const BaseFingerprintDialog = ({
           closeTextId="close"
         />
 
-        <Dialog.Content hasGrow>
-          <DynamicContent
-            dataHash={article.dataHash || ''}
-            iscnId={
-              article?.iscnId ||
-              (data?.article as ArticleFingerprintPublicArticle)?.iscnId ||
-              ''
-            }
-            iscnPublish={!!article.drafts?.[0]?.iscnPublish}
-            showSecret={showSecret}
-            isAuthor={viewer.id === article.author.id}
-            articleId={article.id}
-            articleLastModified={article.revisedAt || article.createdAt}
-            pending={loading}
-            refetch={refetch}
-          />
-        </Dialog.Content>
+        <DynamicContent
+          dataHash={article.dataHash || ''}
+          iscnId={
+            article?.iscnId ||
+            (data?.article as ArticleFingerprintPublicArticle)?.iscnId ||
+            ''
+          }
+          iscnPublish={!!article.drafts?.[0]?.iscnPublish}
+          showSecret={showSecret}
+          isAuthor={viewer.id === article.author.id}
+          articleId={article.id}
+          articleLastModified={article.revisedAt || article.createdAt}
+          pending={loading}
+          refetch={refetch}
+        />
       </Dialog>
     </>
   )

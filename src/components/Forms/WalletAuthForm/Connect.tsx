@@ -5,12 +5,19 @@ import Link from 'next/link'
 import { useContext, useEffect } from 'react'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
-import { ADD_TOAST, PATHS } from '~/common/enums'
+import {
+  ADD_TOAST,
+  COOKIE_LANGUAGE,
+  COOKIE_TOKEN_NAME,
+  COOKIE_USER_GROUP,
+  PATHS,
+} from '~/common/enums'
 import {
   analytics,
   maskAddress,
   parseFormSubmitErrors,
   redirectToTarget,
+  setCookies,
   translate,
   validateCode,
   validateEmail,
@@ -40,6 +47,8 @@ import {
 
 import { ETH_ADDRESS_USER, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
 import styles from './styles.css'
+
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -225,6 +234,15 @@ const Connect: React.FC<FormProps> = ({
               ...(codeId ? { codeId } : {}),
             },
           },
+        })
+
+        const token = loginData?.walletLogin.token || ''
+        const language = loginData?.walletLogin.user?.settings.language || ''
+        const group = loginData?.walletLogin.user?.info.group || ''
+        setCookies({
+          [COOKIE_LANGUAGE]: language,
+          [COOKIE_USER_GROUP]: group,
+          ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
         })
 
         analytics.identifyUser()

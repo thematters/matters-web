@@ -8,11 +8,11 @@ import {
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
+  Media,
   Menu,
   Spacer,
   TagDigest,
   UserDigest,
-  useResponsive,
   useRoute,
 } from '~/components'
 import { QuickResultQuery } from '~/gql/graphql'
@@ -35,7 +35,6 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   const version = getQuery('version')
 
   const { searchKey, inPage, activeItem, onUpdateData, closeDropdown } = props
-  const isLargeUp = useResponsive('lg-up')
   const client = useApolloClient()
   const [data, setData] = useState<QuickResultQuery>()
   const clearData = () => setData(undefined)
@@ -98,12 +97,10 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
 
   return (
     <Menu width={inPage ? undefined : 'md'}>
-      {!isLargeUp && (
-        <>
-          <TriggerFullSearchItem searchKey={searchKey} />
-          <Menu.Divider />
-        </>
-      )}
+      <Media lessThan="lg">
+        <TriggerFullSearchItem searchKey={searchKey} />
+        <Menu.Divider />
+      </Media>
       {hasUsers &&
         userEdges.map(
           ({ node, cursor }, i) =>

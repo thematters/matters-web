@@ -1,5 +1,10 @@
-import { ADD_TOAST, PATHS } from '~/common/enums'
-import { redirectToTarget } from '~/common/utils'
+import {
+  ADD_TOAST,
+  COOKIE_TOKEN_NAME,
+  COOKIE_USER_GROUP,
+  PATHS,
+} from '~/common/enums'
+import { redirectToTarget, removeCookies } from '~/common/utils'
 import {
   CardSpacing,
   IconHelp24,
@@ -24,6 +29,8 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
   const onClickLogout = async () => {
     try {
       await logout()
+
+      removeCookies([COOKIE_TOKEN_NAME, COOKIE_USER_GROUP])
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {

@@ -36,10 +36,10 @@ const OAUTH_CLIENT_INFO = gql`
 `
 
 const BaseOAuthAuthorize = () => {
-  const { getQuery } = useRoute()
+  const { getQuery, router } = useRoute()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
-  const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}${window.location.search}`
+  const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}?${router.asPath.split('?')[1]}`
   const clientId = getQuery('client_id')
   const state = getQuery('state')
   const requestScopes = getQuery('scope')

@@ -1,7 +1,7 @@
 import jump from 'jump.js'
 import { forwardRef } from 'react'
 
-import { Button, ButtonProps, TextIcon } from '~/components'
+import { Button, ButtonProps, Media, TextIcon } from '~/components'
 
 import styles from './styles.css'
 
@@ -10,61 +10,76 @@ type NavListItemProps = {
   icon: React.ReactNode
   activeIcon: React.ReactNode
   active: boolean
-  isMediumUp: boolean
   canScrollTop?: boolean
 } & ButtonProps
 
-const NavListItem = forwardRef(
+type NavListItemButtonProps = NavListItemProps & { isMdUp?: boolean }
+
+const NavListItemButton = forwardRef(
   (
     {
       name,
       icon,
       activeIcon,
       active,
-      isMediumUp,
-      canScrollTop = true,
+      onClick,
+      isMdUp,
+      canScrollTop,
       ...props
-    }: NavListItemProps,
+    }: NavListItemButtonProps,
     ref
   ) => {
-    const { onClick: baseOnClick } = props
-    const onClick = (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      if (baseOnClick) {
-        baseOnClick()
-      }
-
-      if (active && canScrollTop) {
-        event?.preventDefault()
-        jump(document.body)
-      }
-    }
-
     return (
-      <li role="menuitem">
-        <Button
-          bgActiveColor="grey-lighter"
-          spacing={isMediumUp ? ['xtight', 'base'] : undefined}
-          size={isMediumUp ? undefined : ['2rem', '2rem']}
-          ref={ref}
-          {...props}
-          onClick={onClick}
+      <Button
+        bgActiveColor="grey-lighter"
+        spacing={isMdUp ? ['xtight', 'base'] : undefined}
+        size={isMdUp ? undefined : ['2rem', '2rem']}
+        ref={ref}
+        {...props}
+        onClick={onClick}
+      >
+        <TextIcon
+          icon={active ? activeIcon : icon}
+          size="lg"
+          weight="semibold"
+          spacing="tight"
+          color={active ? 'green' : 'black'}
         >
-          <TextIcon
-            icon={active ? activeIcon : icon}
-            size="lg"
-            weight="semibold"
-            spacing="tight"
-            color={active ? 'green' : 'black'}
-          >
-            {isMediumUp && name}
-          </TextIcon>
-        </Button>
-
-        <style jsx>{styles}</style>
-      </li>
+          {isMdUp && name}
+        </TextIcon>
+      </Button>
     )
   }
 )
+
+NavListItemButton.displayName = 'NavListItemButton'
+
+const NavListItem = forwardRef((props: NavListItemProps, ref) => {
+  const { active, canScrollTop = true, onClick: baseOnClick } = props
+  const onClick = (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    if (baseOnClick) {
+      baseOnClick()
+    }
+
+    if (active && canScrollTop) {
+      event?.preventDefault()
+      jump(document.body)
+    }
+  }
+
+  return (
+    <li role="menuitem">
+      <Media greaterThanOrEqual="lg">
+        <NavListItemButton {...props} onClick={onClick} ref={ref} isMdUp />
+      </Media>
+      <Media lessThan="lg">
+        <NavListItemButton {...props} onClick={onClick} ref={ref} />
+      </Media>
+
+      <style jsx>{styles}</style>
+    </li>
+  )
+})
 
 NavListItem.displayName = 'NavListItem'
 

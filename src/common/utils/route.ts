@@ -1,7 +1,6 @@
 import Router from 'next/router'
 import { Key, pathToRegexp } from 'path-to-regexp'
 
-// import queryString from 'query-string'
 import { PATHS, ROUTES } from '~/common/enums'
 
 import { UtmParams } from './analytics'

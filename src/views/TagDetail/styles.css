@@ -12,6 +12,7 @@
 }
 
 .buttons {
+  display: inline-flex;
   margin-top: var(--spacing-loose);
 
   & :global(> * + *) {

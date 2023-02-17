@@ -20,7 +20,6 @@ import {
   QueryError,
   Spinner,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -106,16 +105,10 @@ const BaseUserComments = ({ user }: UserIdUserQuery) => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<UserCommentsPublicQuery>(USER_COMMENTS_PUBLIC, {
-    variables: { id: user?.id },
-  })
+  const { data, loading, error, fetchMore, client } =
+    usePublicQuery<UserCommentsPublicQuery>(USER_COMMENTS_PUBLIC, {
+      variables: { id: user?.id },
+    })
 
   // pagination
   const connectionPath = 'node.commentedArticles'
@@ -173,14 +166,6 @@ const BaseUserComments = ({ user }: UserIdUserQuery) => {
 
     loadPrivate(newData)
   }
-
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

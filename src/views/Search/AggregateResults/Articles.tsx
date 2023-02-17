@@ -1,5 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
-
 import {
   LATER_SEARCH_RESULTS_LENGTH,
   MAX_SEARCH_RESULTS_LENGTH,
@@ -13,6 +11,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePublicQuery,
   useRoute,
 } from '~/components'
 import { SearchAggregateArticlesPublicQuery } from '~/gql/graphql'
@@ -32,14 +31,14 @@ const AggregateArticleResults = () => {
    */
   // public data
   const { data, loading, fetchMore } =
-    useQuery<SearchAggregateArticlesPublicQuery>(
+    usePublicQuery<SearchAggregateArticlesPublicQuery>(
       SEARCH_AGGREGATE_ARTICLES_PUBLIC,
       {
         variables: {
           key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
           version: version === '' ? undefined : version,
         },
-        fetchPolicy: 'network-only',
+        fetchPolicy: 'cache-first',
       }
     )
 
@@ -47,6 +46,9 @@ const AggregateArticleResults = () => {
   const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
 
+  /**
+   * Render
+   */
   if (loading) {
     return <Spinner />
   }

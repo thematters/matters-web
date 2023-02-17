@@ -2,20 +2,12 @@ import { useContext } from 'react'
 
 import IMAGE_BANNER from '@/public/static/images/migration-banner.svg'
 import { translate } from '~/common/utils'
-import {
-  LanguageContext,
-  ShareButton,
-  TextIcon,
-  Translate,
-  useResponsive,
-} from '~/components'
+import { LanguageContext, ShareButton, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 
 const Banner = () => {
   const { lang } = useContext(LanguageContext)
-
-  const isSmallUp = useResponsive('sm-up')
 
   return (
     <div className="l-container full">
@@ -40,7 +32,7 @@ const Banner = () => {
             <ShareButton
               bgColor="green"
               hasIcon={false}
-              size={[isSmallUp ? '8rem' : '7rem', '2.5rem']}
+              size={['7rem', '2.5rem']}
               spacing={[0, 0]}
               inCard={false}
               title={translate({
@@ -50,11 +42,7 @@ const Banner = () => {
                 lang,
               })}
             >
-              <TextIcon
-                color="white"
-                size={isSmallUp ? 'md' : 'sm'}
-                weight="md"
-              >
+              <TextIcon color="white" size="sm" weight="md">
                 <Translate
                   zh_hant="邀請朋友搬家"
                   zh_hans="邀请朋友搬家"

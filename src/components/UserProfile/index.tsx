@@ -1,6 +1,8 @@
+import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+import { TEST_ID } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 import {
   Avatar,
@@ -40,11 +42,14 @@ import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
 import TraveloggersAvatar from './TraveloggersAvatar'
-import WalletLabel from './WalletLabel'
 
 interface FingerprintButtonProps {
   user: AuthorRssFeedFragment
 }
+
+const DynamicWalletLabel = dynamic(() => import('./WalletLabel'), {
+  ssr: false,
+})
 
 const RssFeedButton = ({ user }: FingerprintButtonProps) => {
   const { lang } = useContext(LanguageContext)
@@ -207,7 +212,7 @@ export const UserProfile = () => {
     <>
       <LayoutHeader />
 
-      <section className="user-profile">
+      <section className="user-profile" data-test-id={TEST_ID.USER_PROFILE}>
         <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
 
         <header>
@@ -230,7 +235,12 @@ export const UserProfile = () => {
 
         <section className="info">
           <section className="display-name">
-            <h1 className="name">{user.displayName}</h1>
+            <h1
+              className="name"
+              data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
+            >
+              {user.displayName}
+            </h1>
             {hasTraveloggersBadge && <TraveloggersBadge />}
             {hasSeedBadge && <SeedBadge />}
             {hasGoldenMotorBadge && <GoldenMotorBadge />}
@@ -243,7 +253,9 @@ export const UserProfile = () => {
             {!isMe && <FollowUserButton.State user={user} />}
           </section>
 
-          {user?.info.ethAddress && <WalletLabel user={user} isMe={isMe} />}
+          {user?.info.ethAddress && (
+            <DynamicWalletLabel user={user} isMe={isMe} />
+          )}
 
           <Expandable
             content={user.info.description}
@@ -251,7 +263,9 @@ export const UserProfile = () => {
             size="md"
             spacingTop="base"
           >
-            <p className="description">{user.info.description}</p>
+            <p className="description" data-test-id={TEST_ID.USER_PROFILE_BIO}>
+              {user.info.description}
+            </p>
           </Expandable>
         </section>
 
@@ -259,7 +273,10 @@ export const UserProfile = () => {
           <FollowersDialog user={user}>
             {({ openDialog: openFollowersDialog }) => (
               <button type="button" onClick={openFollowersDialog}>
-                <span className="count">
+                <span
+                  className="count"
+                  data-test-id={TEST_ID.USER_PROFILE_FOLLOWERS_COUNT}
+                >
                   {numAbbr(user.followers.totalCount)}
                 </span>
                 <Translate id="follower" />

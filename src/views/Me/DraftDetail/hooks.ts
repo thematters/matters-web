@@ -26,6 +26,7 @@ import {
   SET_SUPPORT_REQUEST_REPLY,
   SET_TAGS,
 } from './gql'
+
 /**
  * Hooks for editing draft cover, tags and collection
  */

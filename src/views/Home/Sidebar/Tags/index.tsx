@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 
 import { analytics } from '~/common/utils'
 import {
@@ -57,6 +57,7 @@ const Tags = () => {
       {
         notifyOnNetworkStatusChange: true,
         variables: { random: lastRandom || 0 },
+        skip: !lastRandom,
       },
       { publicQuery: !viewer.isAuthed }
     )
@@ -75,12 +76,6 @@ const Tags = () => {
       data: { sidebarTags: random },
     })
   }
-
-  useEffect(() => {
-    if (viewer.isAuthed && lastRandom == null) {
-      shuffle()
-    }
-  }, [viewer.isAuthed])
 
   if (error) {
     return <QueryError error={error} />

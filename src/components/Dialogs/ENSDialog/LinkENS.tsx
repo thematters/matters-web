@@ -1,5 +1,5 @@
 import contentHash from '@ensdomains/content-hash'
-import { namehash } from 'ethers/lib/utils'
+import { namehash } from '@ethersproject/hash'
 import { Fragment, useContext, useEffect, useState } from 'react'
 import {
   useAccount,
@@ -11,6 +11,7 @@ import {
 } from 'wagmi'
 
 import {
+  analytics,
   featureSupportedChains,
   maskAddress,
   PublicResolverABI,
@@ -89,6 +90,10 @@ const LinkENS = ({
       await tx.wait()
       setTxConfirming(false)
       switchToComplete(tx.hash)
+      analytics.trackEvent('click_button', {
+        type: 'bind_ens_successfully',
+        pageType: 'user_profile',
+      })
     }
   }
 

@@ -1,4 +1,4 @@
-import { type PlaywrightTestConfig, devices } from '@playwright/test'
+import { devices, type PlaywrightTestConfig } from '@playwright/test'
 import dotenv from 'dotenv'
 import path from 'path'
 
@@ -33,7 +33,7 @@ const config: PlaywrightTestConfig = {
   },
   projects: [
     {
-      name: 'chromium',
+      name: 'Chromium',
       use: {
         ...devices['Desktop Chrome'],
         locale: LOCALE,
@@ -59,16 +59,18 @@ const config: PlaywrightTestConfig = {
         ]),
 
     /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['Pixel 5'],
-    //   },
-    // },
+    {
+      name: 'Mobile Chrome',
+      use: {
+        ...devices['Pixel 5'],
+        locale: LOCALE,
+      },
+    },
     // {
     //   name: 'Mobile Safari',
     //   use: {
     //     ...devices['iPhone 12'],
+    //     locale: LOCALE,
     //   },
     // },
 

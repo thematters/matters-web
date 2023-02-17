@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import _get from 'lodash/get'
-import { useState } from 'react'
+import { useEffect } from 'react'
 
 import { Dialog, Spinner, Translate } from '~/components'
 import { ViewerCircleStateQuery } from '~/gql/graphql'
@@ -13,27 +12,30 @@ interface Props {
 }
 
 const Processing: React.FC<Props> = ({ circleName, nextStep }) => {
-  const [polling, setPolling] = useState(true)
-  const { data, error } = useQuery<ViewerCircleStateQuery>(
-    VIEWER_CIRLCE_STATE,
-    {
+  const { data, error, startPolling, stopPolling } =
+    useQuery<ViewerCircleStateQuery>(VIEWER_CIRLCE_STATE, {
       variables: { name: circleName },
-      pollInterval: polling ? 1000 : undefined,
       errorPolicy: 'none',
       fetchPolicy: 'network-only',
       skip: typeof window === 'undefined',
-    }
-  )
+    })
   const isMember = data?.circle?.isMember
 
-  if (isMember) {
-    nextStep()
-    return null
-  }
+  useEffect(() => {
+    if (error) {
+      stopPolling()
+    } else {
+      startPolling(1000)
+    }
 
-  if (error) {
-    setPolling(false)
-  }
+    return () => {}
+  }, [error])
+
+  useEffect(() => {
+    if (isMember) {
+      nextStep()
+    }
+  }, [isMember])
 
   return (
     <Dialog.Message type={error ? 'error' : undefined} spacing="md">

@@ -9,7 +9,6 @@ import {
   Spinner,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
   UserDigest,
   useRoute,
   ViewerContext,
@@ -30,19 +29,10 @@ const UsersFeed = () => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<UserFollowingUsersPublicQuery>(
-    USER_FOLLOWING_USERS_PUBLIC,
-    {
+  const { data, loading, error, fetchMore, client } =
+    usePublicQuery<UserFollowingUsersPublicQuery>(USER_FOLLOWING_USERS_PUBLIC, {
       variables: { userName },
-    }
-  )
+    })
 
   // pagination
   const user = data?.user
@@ -87,14 +77,6 @@ const UsersFeed = () => {
 
     loadPrivate(newData)
   }
-
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render

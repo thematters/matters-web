@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import _random from 'lodash/random'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 
 import { analytics } from '~/common/utils'
 import {
@@ -36,6 +36,7 @@ const Authors = () => {
     {
       notifyOnNetworkStatusChange: true,
       variables: { random: lastRandom || 0 },
+      skip: !lastRandom,
     },
     { publicQuery: !viewer.isAuthed }
   )
@@ -50,12 +51,6 @@ const Authors = () => {
       data: { sidebarAuthors: random },
     })
   }
-
-  useEffect(() => {
-    if (viewer.isAuthed && lastRandom === null) {
-      shuffle()
-    }
-  }, [viewer.isAuthed])
 
   /**
    * Render

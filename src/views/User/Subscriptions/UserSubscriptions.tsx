@@ -13,7 +13,6 @@ import {
   Title,
   Translate,
   usePublicQuery,
-  usePullToRefresh,
   useRoute,
 } from '~/components'
 import { UserSubscriptionsQuery } from '~/gql/graphql'
@@ -30,7 +29,7 @@ const Subscriptions = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, refetch, fetchMore } =
+  const { data, loading, error, fetchMore } =
     usePublicQuery<UserSubscriptionsQuery>(USER_SUBSCRIPTIONS, {
       variables: { userName },
     })
@@ -39,9 +38,6 @@ const Subscriptions = () => {
   const connectionPath = 'user.subscribedCircles'
   const user = data?.user
   const { edges, pageInfo } = user?.subscribedCircles || {}
-
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
 
   // load next page
   const loadMore = async () => {

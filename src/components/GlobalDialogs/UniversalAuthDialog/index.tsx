@@ -18,6 +18,10 @@ import {
 } from '~/components'
 import { AuthResultType } from '~/gql/graphql'
 
+const DynamicWagmiProvider = dynamic(
+  () => import('~/components/WagmiProvider').then((mod) => mod.WagmiProvider),
+  { loading: Spinner }
+)
 const DynamicSelectAuthMethodForm = dynamic<any>(
   () =>
     import('~/components/Forms/SelectAuthMethodForm').then(
@@ -114,30 +118,32 @@ const BaseUniversalAuthDialog = ({
       )}
 
       {/* Wallet */}
-      {currStep === 'wallet-select' && (
-        <DynamicWalletAuthFormSelect
-          purpose="dialog"
-          submitCallback={() => {
-            forward('wallet-connect')
-          }}
-          closeDialog={closeDialog}
-          back={() => forward('select-login-method')}
-        />
-      )}
-      {currStep === 'wallet-connect' && (
-        <ReCaptchaProvider>
-          <DynamicWalletAuthFormConnect
+      <DynamicWagmiProvider>
+        {currStep === 'wallet-select' && (
+          <DynamicWalletAuthFormSelect
             purpose="dialog"
-            submitCallback={(type?: AuthResultType) => {
-              if (type === AuthResultType.Signup) {
-                forward('complete')
-              }
+            submitCallback={() => {
+              forward('wallet-connect')
             }}
             closeDialog={closeDialog}
-            back={() => forward('wallet-select')}
+            back={() => forward('select-login-method')}
           />
-        </ReCaptchaProvider>
-      )}
+        )}
+        {currStep === 'wallet-connect' && (
+          <ReCaptchaProvider>
+            <DynamicWalletAuthFormConnect
+              purpose="dialog"
+              submitCallback={(type?: AuthResultType) => {
+                if (type === AuthResultType.Signup) {
+                  forward('complete')
+                }
+              }}
+              closeDialog={closeDialog}
+              back={() => forward('wallet-select')}
+            />
+          </ReCaptchaProvider>
+        )}
+      </DynamicWagmiProvider>
 
       {/* Email */}
       {currStep === 'email-login' && (

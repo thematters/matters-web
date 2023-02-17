@@ -3,7 +3,7 @@
 
   & :global(> *) {
     position: relative;
-    box-shadow: 0 0 0 2px var(--color-white);
+    box-shadow: 0 0 0 2px var(--color-yellow-lighter);
 
     &:nth-child(1) {
       z-index: 9;

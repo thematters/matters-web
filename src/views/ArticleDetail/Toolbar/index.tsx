@@ -1,11 +1,12 @@
 import gql from 'graphql-tag'
 
+import { TEST_ID } from '@/src/common/enums'
 import { stripAllPunct, toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,
+  Media,
   ReCaptchaProvider,
   ShareButton,
-  useResponsive,
 } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
@@ -17,7 +18,6 @@ import {
 } from '~/gql/graphql'
 
 import AppreciationButton from '../AppreciationButton'
-import Appreciators from './Appreciators'
 import CommentBar from './CommentBar'
 import DonationButton from './DonationButton'
 import styles from './styles.css'
@@ -40,13 +40,11 @@ const fragments = {
         tags {
           content
         }
-        ...AppreciatorsArticle
         ...DropdownActionsArticle
         ...DonationButtonArticle
         ...AppreciationButtonArticlePublic
         ...CommentBarArticlePublic
       }
-      ${Appreciators.fragments.article}
       ${DonationButton.fragments.article}
       ${DropdownActions.fragments.article}
       ${AppreciationButton.fragments.article.public}
@@ -75,16 +73,22 @@ const Toolbar = ({
   lock,
   ...props
 }: ToolbarProps) => {
-  const isSmallUp = useResponsive('sm-up')
-
   const path = toPath({ page: 'articleDetail', article })
   const sharePath =
     translated && translatedLanguage
       ? `/${toLocale(translatedLanguage)}${path.href}`
       : path.href
 
+  const dropdonwActionsProps: DropdownActionsControls = {
+    size: 'md-s',
+    inCard: false,
+    sharePath,
+    hasExtend: !lock,
+    ...props,
+  }
+
   return (
-    <section className="toolbar">
+    <section className="toolbar" data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
       <section className="buttons">
         <ReCaptchaProvider action="appreciateArticle">
           <AppreciationButton
@@ -106,7 +110,7 @@ const Toolbar = ({
 
         <BookmarkButton article={article} size="md-s" inCard={false} />
 
-        {isSmallUp && (
+        <Media greaterThan="sm">
           <ShareButton
             iconSize="md-s"
             inCard={false}
@@ -118,17 +122,18 @@ const Toolbar = ({
               .split(/\s+/)
               .map(stripAllPunct)}
           />
-        )}
+        </Media>
 
-        <DropdownActions
-          article={article}
-          size="md-s"
-          inCard={false}
-          hasShare={!isSmallUp}
-          sharePath={sharePath}
-          hasExtend={!lock}
-          {...props}
-        />
+        <Media at="sm">
+          <DropdownActions
+            article={article}
+            {...dropdonwActionsProps}
+            hasShare
+          />
+        </Media>
+        <Media greaterThan="sm">
+          <DropdownActions article={article} {...dropdonwActionsProps} />
+        </Media>
       </section>
 
       <style jsx>{styles}</style>

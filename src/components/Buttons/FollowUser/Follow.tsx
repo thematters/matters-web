@@ -9,6 +9,8 @@ import {
 import {
   Button,
   ButtonHeight,
+  ButtonSpacingX,
+  ButtonSpacingY,
   ButtonWidth,
   TextIcon,
   Translate,
@@ -55,8 +57,14 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
 
   const sizes: Record<FollowUserButtonSize, [ButtonWidth, ButtonHeight]> = {
     lg: ['6rem', '2rem'],
-    md: ['4rem', '1.5rem'],
-    'md-s': ['3rem', '1.5rem'],
+    md: [null, '1.5rem'],
+  }
+  const spacings: Record<
+    FollowUserButtonSize,
+    [ButtonSpacingY, ButtonSpacingX]
+  > = {
+    lg: [0, 0],
+    md: [0, 'tight'],
   }
 
   const onClick = () => {
@@ -75,6 +83,7 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
   return (
     <Button
       size={sizes[size]}
+      spacing={spacings[size]}
       textColor="green"
       textActiveColor="white"
       bgActiveColor="green"
