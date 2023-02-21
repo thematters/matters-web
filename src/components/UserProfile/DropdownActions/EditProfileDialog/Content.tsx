@@ -19,6 +19,7 @@ import {
   LanguageContext,
   Translate,
   useMutation,
+  ViewerContext,
 } from '~/components'
 import {
   EditProfileDialogUserPrivateFragment,
@@ -78,6 +79,8 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     { showToast: false }
   )
   const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
+  const isAdmin = viewer.status?.role === 'admin'
 
   const formId = 'edit-profile-form'
 
@@ -117,7 +120,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     },
     validate: ({ displayName, description }) =>
       _pickBy({
-        displayName: validateDisplayName(displayName, lang),
+        displayName: validateDisplayName(displayName, lang, isAdmin),
         description: validateDescription(description, lang),
       }),
     onSubmit: async (
