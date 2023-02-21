@@ -3,7 +3,6 @@ import { goerli, mainnet, polygon, polygonMumbai } from 'wagmi/chains'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
-import { publicProvider } from 'wagmi/providers/public'
 
 import { WalletErrorType } from '~/common/enums'
 
@@ -21,7 +20,7 @@ const defaultChains: Chain[] = isProd
 
 export const { provider: wagmiProvider, chains } = configureChains(
   defaultChains,
-  [alchemyProvider({ apiKey: alchemyId }), publicProvider()]
+  [alchemyProvider({ apiKey: alchemyId })]
 )
 
 export const wagmiClient = createClient({
