@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { UserNewFollowerNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -36,8 +36,10 @@ const UserNewFollowerNotice = ({
       <section className="content-wrap">
         <NoticeHead>
           <NoticeHeadActors actors={notice.actors} />
-
-          <Translate zh_hant="追蹤了你" zh_hans="追踪了你" en=" Followed You" />
+          <FormattedMessage
+            defaultMessage="Followed You"
+            description="src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
+          />
         </NoticeHead>
 
         {isMultiActors ? (

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { CommentNewReplyNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -47,24 +47,28 @@ const CommentNewReplyNotice = ({
 
           {replyCommentArticle && (
             <>
-              <Translate
-                zh_hant="回覆了你在作品 "
-                zh_hans="回复了你在作品 "
-                en=" replied to your comment on "
+              <FormattedMessage
+                defaultMessage=" replied to your comment on "
+                description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
               />
               <NoticeArticleTitle article={replyCommentArticle} />
-              <Translate zh_hant=" 的評論" zh_hans=" 的评论" en="" />
+              <FormattedMessage
+                defaultMessage="comment"
+                description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+              />
             </>
           )}
           {replyCommentCircle && (
             <>
-              <Translate
-                zh_hant="回覆了你在圍爐 "
-                zh_hans="回复了你在围炉 "
-                en=" replied to your discussion on "
+              <FormattedMessage
+                defaultMessage=" replied to your discussion on"
+                description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
               />
               <NoticeCircleName circle={replyCommentCircle} />
-              <Translate zh_hant=" 中的發言" zh_hans=" 中的发言" en="" />
+              <FormattedMessage
+                defaultMessage="comment_circle"
+                description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+              />
             </>
           )}
         </NoticeHead>

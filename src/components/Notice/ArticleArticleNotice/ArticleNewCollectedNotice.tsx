@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { ArticleNewCollectedNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -35,11 +35,11 @@ const ArticleNewCollectedNotice = ({
       <section className="content-wrap">
         <NoticeHead>
           <NoticeActorName user={actor} />
-          <Translate
-            zh_hant=" 關聯了你的作品 "
-            zh_hans=" 关联了你的作品 "
-            en=" replied to "
+          <FormattedMessage
+            defaultMessage=" replied to "
+            description="src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
           />
+
           <NoticeArticleTitle article={notice.article} />
         </NoticeHead>
 

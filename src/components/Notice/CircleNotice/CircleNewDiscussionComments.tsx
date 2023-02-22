@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { LanguageContext, Translate, ViewerContext } from '~/components'
+import { LanguageContext, ViewerContext } from '~/components'
 import { CircleNewDiscussionCommentsFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -80,13 +81,16 @@ const CircleNewDiscussionComments = ({
             {!isEn ? (
               <>
                 {isCircleOwner ? (
-                  <Translate
-                    zh_hant="在你的圍爐 "
-                    zh_hans="在你的围炉 "
-                    en=" in your circle "
+                  <FormattedMessage
+                    defaultMessage="commented in your circle "
+                    description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
                   />
                 ) : (
-                  <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en=" in " />
+                  // <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en=" in " />
+                  <FormattedMessage
+                    defaultMessage="commented_circle"
+                    description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+                  />
                 )}
                 <NoticeCircleName
                   circle={notice.circle}
@@ -96,52 +100,45 @@ const CircleNewDiscussionComments = ({
             ) : null}
 
             {newDiscussionCount && !replyCount && !mentionCount && (
-              <Translate
-                zh_hant=" 眾聊中發表話題 "
-                zh_hans=" 众聊中发表话题 "
-                en=" started a new topic "
+              <FormattedMessage
+                defaultMessage="started a new topic"
+                description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
               />
             )}
             {!newDiscussionCount && replyCount && !mentionCount && (
-              <Translate
-                zh_hant=" 眾聊中回覆話題 "
-                zh_hans=" 众聊中回复话题 "
-                en=" replied to topics "
+              <FormattedMessage
+                defaultMessage="replied to topics"
+                description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
               />
             )}
             {!newDiscussionCount && !replyCount && mentionCount && (
-              <Translate
-                zh_hant=" 眾聊提及了你 "
-                zh_hans=" 众聊提及了你 "
-                en=" mentioned you "
+              <FormattedMessage
+                defaultMessage="mentioned you"
+                description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
               />
             )}
             {newDiscussionCount && replyCount && !mentionCount && (
-              <Translate
-                zh_hant=" 眾聊中發表與回覆話題 "
-                zh_hans=" 众聊中发表与回复话题 "
-                en=" posted and replied to topics "
+              <FormattedMessage
+                defaultMessage="posted and replied to topics"
+                description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
               />
             )}
             {newDiscussionCount && !replyCount && mentionCount && (
-              <Translate
-                zh_hant=" 眾聊中發表話題，其中有提及你 "
-                zh_hans=" 众聊中发表话题，其中有提及你 "
-                en=" posted a new topic and mentioned you "
+              <FormattedMessage
+                defaultMessage="posted a new topic and mentioned you"
+                description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
               />
             )}
             {!newDiscussionCount && replyCount && mentionCount && (
-              <Translate
-                zh_hant=" 眾聊中回覆話題，其中有提到你 "
-                zh_hans=" 众聊中回复话题，其中有提到你 "
-                en=" replied to topics and mentioned you "
+              <FormattedMessage
+                defaultMessage="replied to topics and mentioned you"
+                description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
               />
             )}
             {newDiscussionCount && replyCount && mentionCount && (
-              <Translate
-                zh_hant=" 眾聊中發表與回覆話題，其中有提到你 "
-                zh_hans=" 众聊中发表与回复话题，其中有提到你 "
-                en=" posted and replied to topics and mentioned you "
+              <FormattedMessage
+                defaultMessage="posted and replied to topics and mentioned you"
+                description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
               />
             )}
             {isEn ? (

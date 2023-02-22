@@ -223,7 +223,8 @@ const Select: React.FC<FormProps> = ({
               >
                 <FormattedMessage
                   defaultMessage="Install MetaMask"
-                  description="src/components/Forms/WalletAuthForm/Select.tsx" />
+                  description="src/components/Forms/WalletAuthForm/Select.tsx"
+                />
               </TextIcon>
             }
             htmlHref={EXTERNAL_LINKS.METAMASK}

@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Translate, ViewerContext } from '~/components'
+import { ViewerContext } from '~/components'
 import { CircleNewBroadcastCommentsFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -70,38 +71,52 @@ const CircleNewBroadcastComments = ({
 
           <>
             {isCircleOwner ? (
-              <Translate
-                zh_hant="在你的圍爐 "
-                zh_hans="在你的围炉 "
-                en=" commented in your circle "
+              <FormattedMessage
+                defaultMessage="commented in your circle "
+                description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
               />
             ) : (
-              <Translate
-                zh_hant="在圍爐 "
-                zh_hans="在围炉 "
-                en=" commented in "
+              <FormattedMessage
+                defaultMessage="commented_circle"
+                description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
               />
             )}
-            <NoticeCircleName circle={notice.circle} path={circleCommentPath} />
             {replyCount && !mentionCount && (
-              <Translate
-                zh_hant=" 廣播中留言 "
-                zh_hans=" 广播中留言 "
-                en=" Broadcast "
+              <FormattedMessage
+                defaultMessage="{circlename} Broadcast "
+                description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+                values={{
+                  circlename: (
+                    <NoticeCircleName
+                      circle={notice.circle}
+                      path={circleCommentPath}
+                    />
+                  ),
+                }}
               />
             )}
+            <FormattedMessage
+              defaultMessage="commented in {circlename} Broadcast "
+              description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+              values={{
+                circlename: (
+                  <NoticeCircleName
+                    circle={notice.circle}
+                    path={circleCommentPath}
+                  />
+                ),
+              }}
+            />
             {!replyCount && mentionCount && (
-              <Translate
-                zh_hant=" 廣播中留言，其中有提及你 "
-                zh_hans=" 广播中留言，其中有提及你 "
-                en=" Broadcast and mentioned you "
+              <FormattedMessage
+                defaultMessage="Broadcast and mentioned you in comment"
+                description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
               />
             )}
             {replyCount && mentionCount && (
-              <Translate
-                zh_hant=" 廣播中留言，其中有提及你 "
-                zh_hans=" 广播中留言，其中有提及你 "
-                en=" Broadcast and mentioned you "
+              <FormattedMessage
+                defaultMessage="Broadcast and mentioned you in comment"
+                description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
               />
             )}
           </>
