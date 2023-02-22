@@ -79,13 +79,13 @@ const Search = () => {
     <Layout.Main>
       <Layout.Header
         left={
-          <Media at="xl">
+          <Media greaterThanOrEqual="xl">
             <Layout.Header.BackButton />
           </Media>
         }
         right={
           <>
-            <Media at="xl">
+            <Media greaterThanOrEqual="xl">
               <Layout.Header.Title id="search" />
             </Media>
             <Media lessThan="xl">
