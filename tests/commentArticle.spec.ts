@@ -33,7 +33,7 @@ test.describe('Comment to article', () => {
       const commentContent = await aliceArticleDetail.sendComment()
 
       // [Bob] Expect article detail shows this comment
-      await expect(bobPage.getByText(commentContent)).toBeVisible()
+      await expect(bobPage.getByText(commentContent).first()).toBeVisible()
 
       // [Alice] Go to notifications page
       const aliceNotifications = new NotificationsPage(alicePage)
