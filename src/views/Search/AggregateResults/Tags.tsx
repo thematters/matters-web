@@ -40,7 +40,6 @@ const AggregateTagResults = () => {
           key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
           version: version === '' ? undefined : version,
         },
-        fetchPolicy: 'cache-first',
       }
     )
 
@@ -105,7 +104,7 @@ const AggregateTagResults = () => {
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'Tag' && (
-                <Fragment key={cursor}>
+                <Fragment key={cursor + node.id}>
                   <Menu.Item
                     spacing={['base', 'base']}
                     {...toPath({

@@ -38,7 +38,6 @@ const AggregateArticleResults = () => {
           key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
           version: version === '' ? undefined : version,
         },
-        fetchPolicy: 'cache-first',
       }
     )
 
@@ -103,7 +102,7 @@ const AggregateArticleResults = () => {
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'Article' && (
-                <List.Item key={cursor}>
+                <List.Item key={cursor + node.id}>
                   <ArticleDigestFeed
                     article={node}
                     is="link"

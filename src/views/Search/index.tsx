@@ -79,16 +79,16 @@ const Search = () => {
     <Layout.Main>
       <Layout.Header
         left={
-          <Media greaterThan="lg">
+          <Media greaterThanOrEqual="xl">
             <Layout.Header.BackButton />
           </Media>
         }
         right={
           <>
-            <Media at="lg">
+            <Media greaterThanOrEqual="xl">
               <Layout.Header.Title id="search" />
             </Media>
-            <Media lessThan="lg">
+            <Media lessThan="xl">
               <SearchBar hasDropdown={false} />
               {showCancelButton && (
                 <span style={{ marginLeft: '1rem' }}>
@@ -104,7 +104,7 @@ const Search = () => {
       <Head title={{ id: 'search' }} />
 
       {isHistory && (
-        <Media lessThan="lg">
+        <Media lessThan="xl">
           <SearchHistory
             data={searchHistory?.slice(0, SEARCH_HISTORY_DISPLAY_LENGTH)}
             removeSearchHistoryItem={removeSearchHistory}
