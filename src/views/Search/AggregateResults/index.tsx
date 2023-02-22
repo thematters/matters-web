@@ -1,5 +1,5 @@
 import { useApolloClient } from '@apollo/react-hooks'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { SEARCH_START_FLAG } from '~/common/enums'
 import { getSearchType } from '~/common/utils'
@@ -40,33 +40,32 @@ const AggregateResults = () => {
   }
 
   // Prefetch first search results
-  if (type !== Type.ARTICLE) {
+  useEffect(() => {
     client.query({
       query: SEARCH_AGGREGATE_ARTICLES_PUBLIC,
       variables: {
         key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
         version: version === '' ? undefined : version,
       },
+      fetchPolicy: 'network-only',
     })
-  }
-  if (type !== Type.USER) {
     client.query({
       query: SEARCH_AGGREGATE_USERS_PUBLIC,
       variables: {
         key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
         version: version === '' ? undefined : version,
       },
+      fetchPolicy: 'network-only',
     })
-  }
-  if (type !== Type.TAG) {
     client.query({
       query: SEARCH_AGGREGATE_TAGS_PUBLIC,
       variables: {
         key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
         version: version === '' ? undefined : version,
       },
+      fetchPolicy: 'network-only',
     })
-  }
+  }, [q])
 
   return (
     <>
