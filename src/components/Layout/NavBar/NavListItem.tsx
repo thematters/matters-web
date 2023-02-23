@@ -39,10 +39,10 @@ const NavListItem = ({
         {...props}
         onClick={onClick}
       >
+        {active ? activeIcon : icon}
         <VisuallyHidden>
           <span>{name}</span>
         </VisuallyHidden>
-        {active ? activeIcon : icon}
       </Button>
 
       <style jsx>{styles}</style>
