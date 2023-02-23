@@ -21,7 +21,7 @@ const config: PlaywrightTestConfig = {
   fullyParallel: true,
   forbidOnly: !!isCI,
   retries: isCI ? 2 : 1,
-  workers: isCI ? 2 : undefined,
+  workers: isCI ? 1 : undefined,
   // maxFailures: process.env.CI ? 2 : 0,
   reporter: 'html',
   globalSetup: require.resolve('./tests/globalSetup'),
