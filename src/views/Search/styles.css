@@ -1,5 +1,3 @@
-:global(.layoutHeader) {
-  @media (--lg-down) {
-    padding-top: 2.5rem !important;
-  }
+.layoutHeaderRight {
+  width: 100%;
 }
