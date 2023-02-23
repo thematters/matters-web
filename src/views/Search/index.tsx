@@ -20,7 +20,7 @@ import {
 
 import AggregateResults from './AggregateResults'
 // import EmptySearch from './EmptySearch'
-
+import styles from './styles.css'
 const Search = () => {
   const viewer = useContext(ViewerContext)
   const storageKey = STORAGE_KEY_SEARCH_HISTORY + '_' + viewer.id
@@ -77,32 +77,28 @@ const Search = () => {
 
   return (
     <Layout.Main>
-      <Layout.Header
-        left={
-          <Media greaterThanOrEqual="xl">
-            <Layout.Header.BackButton />
-          </Media>
-        }
-        right={
-          <>
-            <Media greaterThanOrEqual="xl">
-              <Layout.Header.Title id="search" />
-            </Media>
-            <Media lessThan="xl">
+      <Media greaterThanOrEqual="xl">
+        <Layout.Header
+          left={<Layout.Header.BackButton />}
+          right={<Layout.Header.Title id="search" />}
+        />
+      </Media>
+      <Media lessThan="xl">
+        <Layout.Header
+          right={
+            <section className="layoutHeaderRight">
               <SearchBar hasDropdown={false} />
               {showCancelButton && (
                 <span style={{ marginLeft: '1rem' }}>
                   <Layout.Header.CancelButton onClick={onCancel} />
                 </span>
               )}
-            </Media>
-          </>
-        }
-        className="layoutHeader"
-      />
+            </section>
+          }
+        />
+      </Media>
 
       <Head title={{ id: 'search' }} />
-
       {isHistory && (
         <Media lessThan="xl">
           <SearchHistory
@@ -112,6 +108,7 @@ const Search = () => {
         </Media>
       )}
       {isAggregate && <AggregateResults />}
+      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }
