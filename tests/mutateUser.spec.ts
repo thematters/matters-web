@@ -59,6 +59,7 @@ test.describe('User Mutation', () => {
 
       // [Bob] Go to Alice's User Profile
       await bobPage.goto(alicePage.url())
+      await bobPage.waitForLoadState('networkidle')
 
       if (
         await bobPage

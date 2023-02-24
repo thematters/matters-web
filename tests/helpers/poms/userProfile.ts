@@ -75,6 +75,7 @@ export class UserProfilePage {
 
     // click "Profile" link
     await this.page.getByRole('link', { name: 'Profile' }).click()
+    await this.page.waitForLoadState('networkidle')
 
     // confirm User Profile Page
     // await expect(this.page.getByTestId(TEST_ID.USER_PROFILE)).toBeVisible()
