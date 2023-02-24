@@ -49,6 +49,7 @@ test.describe('Homepage', () => {
   test('sidebar tags and users can be shuffled', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
+    await page.waitForLoadState('networkidle')
 
     // Expect the sidebar has recommended tags
     const firstTag = home.sidebarTags.first()
