@@ -45,7 +45,7 @@ const unfollow = async (page: Page) => {
 }
 
 test.describe('User Mutation', () => {
-  authedTest(
+  authedTest.only(
     'Alice is followed by Bob',
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
