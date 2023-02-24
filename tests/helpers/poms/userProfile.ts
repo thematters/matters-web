@@ -66,7 +66,7 @@ export class UserProfilePage {
 
   async gotoMeProfile() {
     // go to homepage
-    await this.page.goto('/')
+    await this.page.goto('/', { waitUntil: 'networkidle' })
 
     // click "My Page" button
     await this.page.getByRole('button', { name: 'My Page' }).click()
@@ -81,7 +81,7 @@ export class UserProfilePage {
   }
 
   async goto(userName: string) {
-    await this.page.goto(`/@${userName}`)
+    await this.page.goto(`/@${userName}`, { waitUntil: 'networkidle' })
   }
 
   async setCover() {
