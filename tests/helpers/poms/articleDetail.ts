@@ -192,7 +192,7 @@ export class ArticleDetailPage {
   async supportHKD(password: string, amount: number) {
     // Open support dialog
     await this.supportButton.click()
-    await this.page.waitForLoadState('networkidle')
+    await this.page.waitForLoadState('networkidle', { timeout: 5 * 1000 })
 
     // select fiat currency
     await this.dialog.getByRole('button', { name: 'Fiat Currency' }).click()
