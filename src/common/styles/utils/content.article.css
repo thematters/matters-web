@@ -8,7 +8,8 @@
  * Article Detail & Editor
  */
 .u-content,
-#editor-article-container .ql-editor {
+#editor-article-container .ql-editor,
+.ProseMirror {
   line-height: var(--line-height-article-base);
   outline: none;
 
@@ -372,7 +373,8 @@
 #editor-article-container {
   position: relative;
 
-  & .ql-editor {
+  & .ql-editor,
+  & .ProseMirror {
     & input.embed-clipboard {
       line-height: 1.875;
     }

@@ -14,7 +14,8 @@
 .container {
   position: relative;
 
-  & :global(.ql-editor) {
+  & :global(.ql-editor),
+  & :global(.ProseMirror) {
     height: calc(
       100vh - var(--global-header-height-mobile) -
         var(--editor-content-spacing-mobile)
