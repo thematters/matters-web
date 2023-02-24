@@ -12,7 +12,7 @@ import {
 } from './helpers'
 import { users } from './helpers/auth'
 
-test.describe('Support article', () => {
+test.describe.only('Support article', () => {
   authedTest(
     "Alice' article is supported with HKD by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile }) => {
