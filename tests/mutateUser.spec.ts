@@ -44,8 +44,8 @@ const unfollow = async (page: Page) => {
   ).toBeVisible()
 }
 
-test.describe('User Mutation', () => {
-  authedTest.only(
+test.describe.only('User Mutation', () => {
+  authedTest(
     'Alice is followed by Bob',
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
@@ -104,6 +104,7 @@ test.describe('User Mutation', () => {
 
       // [Bob] Go to Alice's User Profile
       await bobPage.goto(alicePage.url())
+      await bobPage.waitForLoadState('networkidle')
 
       if (
         await bobPage
@@ -120,6 +121,7 @@ test.describe('User Mutation', () => {
       await unfollow(bobPage)
 
       await bobPage.reload()
+      await bobPage.waitForLoadState('networkidle')
 
       const unfollowCount = await bobPage
         .getByTestId(TEST_ID.USER_PROFILE_FOLLOWERS_COUNT)
@@ -143,6 +145,7 @@ test.describe('User Mutation', () => {
 
       // [Bob] Go to Alice's User Profile
       await bobPage.goto(alicePage.url())
+      await bobPage.waitForLoadState('networkidle')
 
       await bobPage
         .getByTestId(TEST_ID.LAYOUT_HEADER)
@@ -185,6 +188,7 @@ test.describe('User Mutation', () => {
       ])
 
       await bobPage.goto('/me/settings/blocked')
+      await bobPage.waitForLoadState('networkidle')
 
       const blockDisplayName = await bobPage
         .getByTestId(TEST_ID.DIGEST_USER_RICH)
@@ -210,6 +214,7 @@ test.describe('User Mutation', () => {
 
       // [Bob] Go to Alice's User Profile and Check Block state
       await bobPage.goto(alicePage.url())
+      await bobPage.waitForLoadState('networkidle')
       await bobPage
         .getByTestId(TEST_ID.LAYOUT_HEADER)
         .getByRole('button', { name: 'More Actions' })
