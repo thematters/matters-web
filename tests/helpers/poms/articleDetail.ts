@@ -1,6 +1,7 @@
 import { Locator, Page } from '@playwright/test'
 import _range from 'lodash/range'
 
+import { sleep } from '@/src/common/utils/time'
 import { TEST_ID } from '~/common/enums'
 import { stripSpaces } from '~/common/utils/text'
 
@@ -151,6 +152,7 @@ export class ArticleDetailPage {
 
   async sendComment() {
     // Open comment editor
+    await sleep(5 * 1000)
     await this.toolbarCommentButton.click()
 
     // Fill with content
