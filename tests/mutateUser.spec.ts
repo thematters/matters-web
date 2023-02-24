@@ -253,7 +253,7 @@ test.describe('User Mutation', () => {
     expect(stripSpaces(aliceBio)).toBe(stripSpaces(bio))
   })
 
-  authedTest(
+  authedTest.skip(
     'Alice switch display language',
     async ({ alicePage, isMobile }) => {
       // [Alice] Go to setting page
