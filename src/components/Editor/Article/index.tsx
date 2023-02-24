@@ -1,11 +1,23 @@
 // import { useLazyQuery } from '@apollo/react-hooks'
 // import { MattersArticleEditor } from '@matters/matters-editor'
+import Blockquote from '@tiptap/extension-blockquote'
+import Bold from '@tiptap/extension-bold'
+import BulletList from '@tiptap/extension-bullet-list'
+import Code from '@tiptap/extension-code'
+import CodeBlock from '@tiptap/extension-code-block'
+import Document from '@tiptap/extension-document'
+import Gapcursor from '@tiptap/extension-gapcursor'
+import HardBreak from '@tiptap/extension-hard-break'
+import Heading from '@tiptap/extension-heading'
+import History from '@tiptap/extension-history'
+import HorizontalRule from '@tiptap/extension-horizontal-rule'
+import Italic from '@tiptap/extension-italic'
+import ListItem from '@tiptap/extension-list-item'
+import OrderedList from '@tiptap/extension-ordered-list'
+import Paragraph from '@tiptap/extension-paragraph'
+import Strike from '@tiptap/extension-strike'
+import Text from '@tiptap/extension-text'
 import { EditorContent, useEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import {
-  FC,
-  // useContext
-} from 'react'
 
 import {
   // ADD_TOAST,
@@ -19,6 +31,7 @@ import {
   // SearchUsersQuery
 } from '~/gql/graphql'
 
+import MenuBar from './MenuBar'
 // import MentionUserList from '../MentionUserList'
 import styles from './styles.css'
 import EditorSummary from './Summary'
@@ -53,7 +66,7 @@ interface Props {
 //   }
 // >
 
-const ArticleEditor: FC<Props> = ({
+const ArticleEditor: React.FC<Props> = ({
   draft,
 
   isReviseMode = false,
@@ -81,11 +94,33 @@ const ArticleEditor: FC<Props> = ({
   // }
 
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      Document,
+      Paragraph,
+      Text,
+      Heading.configure({
+        levels: [2, 3],
+      }),
+      OrderedList,
+      ListItem,
+      BulletList,
+      Strike,
+      Italic,
+      Bold,
+      Code,
+      CodeBlock,
+      Blockquote,
+      HorizontalRule,
+      HardBreak,
+      HorizontalRule,
+      History,
+      Gapcursor,
+    ],
     content,
-    editable: isReadOnly,
+    editable: !isReadOnly,
     onUpdate: ({ editor }) => {
       const content = editor.getHTML()
+      console.log(editor)
       update({ content })
     },
   })
@@ -105,6 +140,8 @@ const ArticleEditor: FC<Props> = ({
           update={update}
           enable
         />
+
+        {editor && <MenuBar editor={editor} />}
 
         <EditorContent editor={editor} />
       </div>
