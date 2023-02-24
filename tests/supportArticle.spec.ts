@@ -29,6 +29,7 @@ test.describe('Support article', () => {
 
       // [Bob] Go to Alice's article page
       await bobPage.goto(aliceArticleLink)
+      await bobPage.waitForLoadState('networkidle')
       const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
 
       const amount = _random(1, 50, false)
