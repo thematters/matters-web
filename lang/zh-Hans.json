@@ -56,7 +56,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZUPQzl": {
-    "defaultMessage": "的评论",
+    "defaultMessage": " 的评论",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "b+LSgI": {
@@ -104,7 +104,7 @@
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
   "qPPrzm": {
-    "defaultMessage": "支持了你的作品 ",
+    "defaultMessage": " 支持了你的作品 ",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
   "BjzRe8": {
@@ -143,11 +143,11 @@
     "defaultMessage": " 天，前去免费体验，与大家谈天说地吧。",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
-  "ldnt+K": {
+  "wqaNK4": {
     "defaultMessage": "在你的围炉 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+    "description": ""
   },
-  "PNok6+": {
+  "FALWef": {
     "defaultMessage": " 广播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
@@ -206,5 +206,53 @@
   "uuEGON": {
     "defaultMessage": " 众聊中发表与回复话题，其中有提到你 ",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "J3yk6u": {
+    "defaultMessage": "在围炉",
+    "description": ""
+  },
+  "hk2aiz": {
+    "defaultMessage": " 追踪了你的",
+    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "mPe6DK": {
+    "defaultMessage": " 订阅了你的围炉",
+    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "JIjMWL": {
+    "defaultMessage": "你的作品已发布到分布式网络",
+    "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
+  },
+  "sncOwi": {
+    "defaultMessage": " 在作品中提及你",
+    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
+  "2eebTb": {
+    "defaultMessage": " 收藏了你的作品",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "YIes/F": {
+    "defaultMessage": "等 {actorsCount} 人",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "PjT72J": {
+    "defaultMessage": "喜欢并赞赏了你的作品",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
+  },
+  "4vkwo0": {
+    "defaultMessage": "你的修订作品已发布到分布式网络",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
+  },
+  "QV19cI": {
+    "defaultMessage": "你的修订作品发布失败",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
+  },
+  "euNJsE": {
+    "defaultMessage": "新作品已经加入围炉，马上前往阅读吧!",
+    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+  },
+  "/3G89K": {
+    "defaultMessage": " 又成长了",
+    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   }
 }

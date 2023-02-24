@@ -82,14 +82,13 @@ const CircleNewDiscussionComments = ({
               <>
                 {isCircleOwner ? (
                   <FormattedMessage
-                    defaultMessage="commented in your circle "
-                    description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+                    defaultMessage="in your circle"
+                    description=""
                   />
                 ) : (
-                  // <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en=" in " />
                   <FormattedMessage
-                    defaultMessage="commented_circle"
-                    description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+                    defaultMessage="in circle"
+                    description=""
                   />
                 )}
                 <NoticeCircleName

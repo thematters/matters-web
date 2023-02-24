@@ -7,13 +7,29 @@
     "defaultMessage": "sent a new broadcast on {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "/3G89K": {
+    "defaultMessage": "is growing",
+    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+  },
   "/nu5ho": {
     "defaultMessage": "replied to your comment on",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "2eebTb": {
+    "defaultMessage": "bookmarked your article",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "3WKlPP": {
+    "defaultMessage": "commented in",
+    "description": ""
+  },
   "3uQKhx": {
     "defaultMessage": "Please email",
     "description": "src/views/Help/index.tsx"
+  },
+  "4vkwo0": {
+    "defaultMessage": "Your article has been republished to decentralized network",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "5sAbzJ": {
     "defaultMessage": "started a new topic",
@@ -27,10 +43,6 @@
     "defaultMessage": "replied to topics",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
-  "An0rpe": {
-    "defaultMessage": "commented in {circlename} Broadcast",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
   "BHFHeY": {
     "defaultMessage": "commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -43,6 +55,10 @@
     "defaultMessage": "Download App",
     "description": "src/views/Help/index.tsx"
   },
+  "FALWef": {
+    "defaultMessage": "commented in Broadcast",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -54,6 +70,14 @@
   "ISn3eZ": {
     "defaultMessage": "Broadcast and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "J3yk6u": {
+    "defaultMessage": "in circle",
+    "description": ""
+  },
+  "JIjMWL": {
+    "defaultMessage": "Your article has been published to decentralized network",
+    "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
   "JMRVO6": {
     "defaultMessage": "Matters Community",
@@ -71,9 +95,13 @@
     "defaultMessage": "Congrats!",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
-  "NNCFpf": {
-    "defaultMessage": "commented_circle",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  "PjT72J": {
+    "defaultMessage": "liked your article",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
+  },
+  "QV19cI": {
+    "defaultMessage": "Failed to republish article",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
   "RKs1fz": {
     "defaultMessage": "Open Source",
@@ -94,6 +122,10 @@
   "VjxGd7": {
     "defaultMessage": "commented on",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
+  },
+  "YIes/F": {
+    "defaultMessage": "etc. {actorsCount} users",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
   "YlxpJl": {
     "defaultMessage": "Broadcast and mentioned you in comment",
@@ -123,6 +155,10 @@
     "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
     "description": "src/views/Help/index.tsx"
   },
+  "euNJsE": {
+    "defaultMessage": "A new article has been added to the circle, read it now!",
+    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+  },
   "ftD7Hy": {
     "defaultMessage": "mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
@@ -131,10 +167,6 @@
     "defaultMessage": "posted and replied to topics",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
-  "gAdgU7": {
-    "defaultMessage": "{circlename} Broadcast",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
   "hk2aiz": {
     "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -142,10 +174,6 @@
   "jF+Mle": {
     "defaultMessage": "days for free. Try it and have fun!",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-  },
-  "ldnt+K": {
-    "defaultMessage": "commented in your circle",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "mPe6DK": {
     "defaultMessage": "subscribed your circle",
@@ -182,6 +210,10 @@
     "defaultMessage": "Migrate to Matters",
     "description": "src/views/Help/index.tsx"
   },
+  "sncOwi": {
+    "defaultMessage": "mentioned you in an article",
+    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
   "tQsujN": {
     "defaultMessage": "replied to topics and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
@@ -193,6 +225,10 @@
   "uuEGON": {
     "defaultMessage": "posted and replied to topics and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "wqaNK4": {
+    "defaultMessage": "in your circle",
+    "description": ""
   },
   "z4NaU2": {
     "defaultMessage": "Your",

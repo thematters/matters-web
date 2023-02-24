@@ -67,19 +67,6 @@ const CircleNewBroadcastNotice = ({
             }}
             description="src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
           />
-          {/* <Translate
-            zh_hant="在圍爐 "
-            zh_hans="在围炉 "
-            en={` sent a new broadcast on `}
-          />
-          {commentCircle && (
-            <NoticeCircleName circle={commentCircle} path={circleCommentPath} />
-          )}
-          <Translate
-            zh_hant={` 發布了新廣播`}
-            zh_hans={` 发布了新广播`}
-            en=""
-          /> */}
         </NoticeHead>
 
         {isMultiActors ? (

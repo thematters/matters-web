@@ -72,41 +72,19 @@ const CircleNewBroadcastComments = ({
           <>
             {isCircleOwner ? (
               <FormattedMessage
-                defaultMessage="commented in your circle "
-                description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+                defaultMessage="in your circle"
+                description=""
               />
             ) : (
-              <FormattedMessage
-                defaultMessage="commented_circle"
-                description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-              />
+              <FormattedMessage defaultMessage="commented in" description="" />
             )}
+            <NoticeCircleName circle={notice.circle} path={circleCommentPath} />
             {replyCount && !mentionCount && (
               <FormattedMessage
-                defaultMessage="{circlename} Broadcast "
+                defaultMessage=" commented in Broadcast"
                 description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-                values={{
-                  circlename: (
-                    <NoticeCircleName
-                      circle={notice.circle}
-                      path={circleCommentPath}
-                    />
-                  ),
-                }}
               />
             )}
-            <FormattedMessage
-              defaultMessage="commented in {circlename} Broadcast "
-              description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-              values={{
-                circlename: (
-                  <NoticeCircleName
-                    circle={notice.circle}
-                    path={circleCommentPath}
-                  />
-                ),
-              }}
-            />
             {!replyCount && mentionCount && (
               <FormattedMessage
                 defaultMessage="Broadcast and mentioned you in comment"
