@@ -44,7 +44,7 @@ const unfollow = async (page: Page) => {
   ).toBeVisible()
 }
 
-test.describe.only('User Mutation', () => {
+test.describe('User Mutation', () => {
   authedTest(
     'Alice is followed by Bob',
     async ({ alicePage, bobPage, isMobile }) => {
