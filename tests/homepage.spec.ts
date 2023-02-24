@@ -8,6 +8,7 @@ test.describe('Homepage', () => {
   test('has paginated article feed', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
+    await page.waitForLoadState('networkidle')
 
     // Expect title to be "Matters"
     await expect(page).toHaveTitle(/Matters/)
@@ -34,6 +35,7 @@ test.describe('Homepage', () => {
   test('has article feed and can switch to latest feed', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
+    await page.waitForLoadState('networkidle')
 
     // Expect home feed is a "Trending" feed
     expect(await home.tabTrending.getAttribute('aria-selected')).toBe('true')
