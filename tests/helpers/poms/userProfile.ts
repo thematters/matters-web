@@ -1,6 +1,5 @@
 import { Locator, Page } from '@playwright/test'
 
-// import { sleep } from '@/src/common/utils/time'
 import { TEST_ID } from '~/common/enums'
 
 import { waitForAPIResponse } from '../api'
@@ -69,7 +68,6 @@ export class UserProfilePage {
     // go to homepage
     await this.page.goto('/', { waitUntil: 'networkidle' })
 
-    // await sleep(5 * 1000)
     // click "My Page" button
     await this.page.getByRole('button', { name: 'My Page' }).click()
 

@@ -1,7 +1,6 @@
 import { Locator, Page } from '@playwright/test'
 import _range from 'lodash/range'
 
-// import { sleep } from '@/src/common/utils/time'
 import { TEST_ID } from '~/common/enums'
 import { stripSpaces } from '~/common/utils/text'
 
