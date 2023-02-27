@@ -35,7 +35,6 @@ test.describe('Homepage', () => {
   test('has article feed and can switch to latest feed', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
-    await page.waitForLoadState('networkidle')
 
     // Expect home feed is a "Trending" feed
     expect(await home.tabTrending.getAttribute('aria-selected')).toBe('true')
@@ -51,7 +50,6 @@ test.describe('Homepage', () => {
   test('sidebar tags and users can be shuffled', async ({ page }) => {
     const home = new HomePage(page)
     await home.goto()
-    await page.waitForLoadState('networkidle')
 
     // Expect the sidebar has recommended tags
     const firstTag = home.sidebarTags.first()
