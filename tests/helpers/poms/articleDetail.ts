@@ -193,9 +193,11 @@ export class ArticleDetailPage {
 
     // select fiat currency
     await this.dialog.getByRole('button', { name: 'Fiat Currency' }).click()
+    await this.page.waitForLoadState('networkidle')
 
     // top-up
     await this.dialog.getByRole('button', { name: 'Top Up' }).click()
+    await this.page.waitForLoadState('networkidle')
     await this.dialog
       .getByLabel('Enter amount')
       .fill(Math.max(20, amount).toString())
