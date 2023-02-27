@@ -28,7 +28,9 @@ test.describe('Support article', () => {
       expect(aliceArticleLink).toBeTruthy()
 
       // [Bob] Go to Alice's article page
-      await bobPage.goto(aliceArticleLink)
+      await bobPage.goto(aliceArticleLink, {
+        waitUntil: 'networkidle',
+      })
       const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
 
       const amount = _random(1, 50, false)
@@ -72,7 +74,9 @@ test.describe('Support article', () => {
       )
 
       // [Alice] Check Transactions History
-      await alicePage.goto('/me/wallet/transactions')
+      await alicePage.goto('/me/wallet/transactions', {
+        waitUntil: 'networkidle',
+      })
       const aliceTransactionItemAmount = await alicePage
         .getByTestId(TEST_ID.ME_WALLET_TRANSACTIONS_ITEM)
         .first()

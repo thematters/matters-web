@@ -58,7 +58,7 @@ test.describe('User Mutation', () => {
       const bobDisplayName = await bobProfile.displayName.innerText()
 
       // [Bob] Go to Alice's User Profile
-      await bobPage.goto(alicePage.url())
+      await bobPage.goto(alicePage.url(), { waitUntil: 'networkidle' })
 
       if (
         await bobPage
@@ -102,7 +102,7 @@ test.describe('User Mutation', () => {
       await bobProfile.gotoMeProfile()
 
       // [Bob] Go to Alice's User Profile
-      await bobPage.goto(alicePage.url())
+      await bobPage.goto(alicePage.url(), { waitUntil: 'networkidle' })
 
       if (
         await bobPage
@@ -119,6 +119,7 @@ test.describe('User Mutation', () => {
       await unfollow(bobPage)
 
       await bobPage.reload()
+      await bobPage.waitForLoadState('networkidle')
 
       const unfollowCount = await bobPage
         .getByTestId(TEST_ID.USER_PROFILE_FOLLOWERS_COUNT)
@@ -141,7 +142,7 @@ test.describe('User Mutation', () => {
       await bobProfile.gotoMeProfile()
 
       // [Bob] Go to Alice's User Profile
-      await bobPage.goto(alicePage.url())
+      await bobPage.goto(alicePage.url(), { waitUntil: 'networkidle' })
 
       await bobPage
         .getByTestId(TEST_ID.LAYOUT_HEADER)
@@ -183,7 +184,7 @@ test.describe('User Mutation', () => {
         bobPage.getByRole('button', { name: 'Block' }).click(),
       ])
 
-      await bobPage.goto('/me/settings/blocked')
+      await bobPage.goto('/me/settings/blocked', { waitUntil: 'networkidle' })
 
       const blockDisplayName = await bobPage
         .getByTestId(TEST_ID.DIGEST_USER_RICH)
@@ -208,7 +209,7 @@ test.describe('User Mutation', () => {
       ])
 
       // [Bob] Go to Alice's User Profile and Check Block state
-      await bobPage.goto(alicePage.url())
+      await bobPage.goto(alicePage.url(), { waitUntil: 'networkidle' })
       await bobPage
         .getByTestId(TEST_ID.LAYOUT_HEADER)
         .getByRole('button', { name: 'More Actions' })
@@ -257,7 +258,7 @@ test.describe('User Mutation', () => {
     'Alice switch display language',
     async ({ alicePage, isMobile }) => {
       // [Alice] Go to setting page
-      await alicePage.goto('/')
+      await alicePage.goto('/', { waitUntil: 'networkidle' })
       await alicePage.getByRole('button', { name: 'My Page' }).click()
       await alicePage
         .getByRole('link', { name: 'Settings', exact: true })
@@ -277,6 +278,7 @@ test.describe('User Mutation', () => {
       ])
 
       await alicePage.reload()
+      await alicePage.waitForLoadState('networkidle')
 
       await alicePage.getByRole('button', { name: '介面語言 繁體中文' }).click()
       await Promise.all([
@@ -292,6 +294,7 @@ test.describe('User Mutation', () => {
       ])
 
       await alicePage.reload()
+      await alicePage.waitForLoadState('networkidle')
 
       await alicePage.getByRole('button', { name: '界面语言 简体中文' }).click()
       await Promise.all([

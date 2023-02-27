@@ -80,7 +80,7 @@ export class UserProfilePage {
   }
 
   async goto(userName: string) {
-    await this.page.goto(`/@${userName}`)
+    await this.page.goto(`/@${userName}`, { waitUntil: 'networkidle' })
   }
 
   async setCover() {

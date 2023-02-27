@@ -26,7 +26,7 @@ test.describe('Comment to article', () => {
       expect(aliceArticleLink).toBeTruthy()
 
       // [Bob] Go to Alice's article page
-      await bobPage.goto(aliceArticleLink)
+      await bobPage.goto(aliceArticleLink, { waitUntil: 'networkidle' })
       const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
 
       // [Bob] Send a comment

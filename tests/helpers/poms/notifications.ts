@@ -8,6 +8,6 @@ export class NotificationsPage {
   }
 
   async goto() {
-    await this.page.goto('/me/notifications')
+    await this.page.goto('/me/notifications', { waitUntil: 'networkidle' })
   }
 }
