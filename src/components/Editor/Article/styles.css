@@ -31,4 +31,12 @@
       );
     }
   }
+
+  & :global(.ProseMirror p.is-editor-empty:first-child::before) {
+    float: left;
+    height: 0;
+    color: var(--color-grey);
+    pointer-events: none;
+    content: attr(data-placeholder);
+  }
 }

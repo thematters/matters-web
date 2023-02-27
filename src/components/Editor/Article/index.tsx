@@ -16,17 +16,20 @@ import Link from '@tiptap/extension-link'
 import ListItem from '@tiptap/extension-list-item'
 import OrderedList from '@tiptap/extension-ordered-list'
 import Paragraph from '@tiptap/extension-paragraph'
+import Placeholder from '@tiptap/extension-placeholder'
 import Strike from '@tiptap/extension-strike'
 import Text from '@tiptap/extension-text'
 import Underline from '@tiptap/extension-underline'
 import { EditorContent, useEditor } from '@tiptap/react'
+import { useContext } from 'react'
 
 import {
   // ADD_TOAST,
   ASSET_TYPE,
 } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.article.css'
-// import { LanguageContext } from '~/components'
+import { translate } from '~/common/utils'
+import { LanguageContext } from '~/components'
 // import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import {
   EditorDraftFragment,
@@ -79,7 +82,7 @@ const ArticleEditor: React.FC<Props> = ({
   upload,
 }) => {
   // const [search, searchResult] = useLazyQuery<SearchUsersQuery>(SEARCH_USERS)
-  // const { lang } = useContext(LanguageContext)
+  const { lang } = useContext(LanguageContext)
 
   const { content, publishState, summary, summaryCustomized, title } = draft
   const isPending = publishState === 'pending'
@@ -119,6 +122,14 @@ const ArticleEditor: React.FC<Props> = ({
       HorizontalRule,
       History,
       Gapcursor,
+      Placeholder.configure({
+        placeholder: translate({
+          zh_hant: '請輸入正文…',
+          zh_hans: '请输入正文…',
+          en: 'Enter content ...',
+          lang,
+        }),
+      }),
     ],
     content,
     editable: !isReadOnly,
