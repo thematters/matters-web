@@ -7,6 +7,7 @@ import {
   ArticleDetailPage,
   authedTest,
   NotificationsPage,
+  pageGoto,
   UserProfilePage,
 } from './helpers'
 
@@ -26,7 +27,7 @@ test.describe('Comment to article', () => {
       expect(aliceArticleLink).toBeTruthy()
 
       // [Bob] Go to Alice's article page
-      await bobPage.goto(aliceArticleLink, { waitUntil: 'networkidle' })
+      await pageGoto(bobPage, aliceArticleLink)
       const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
 
       // [Bob] Send a comment

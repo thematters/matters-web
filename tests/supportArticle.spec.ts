@@ -8,6 +8,7 @@ import {
   ArticleDetailPage,
   authedTest,
   NotificationsPage,
+  pageGoto,
   UserProfilePage,
 } from './helpers'
 import { users } from './helpers/auth'
@@ -28,9 +29,7 @@ test.describe('Support article', () => {
       expect(aliceArticleLink).toBeTruthy()
 
       // [Bob] Go to Alice's article page
-      await bobPage.goto(aliceArticleLink, {
-        waitUntil: 'networkidle',
-      })
+      await pageGoto(bobPage, aliceArticleLink)
       const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
 
       const amount = _random(1, 50, false)
@@ -74,9 +73,7 @@ test.describe('Support article', () => {
       )
 
       // [Alice] Check Transactions History
-      await alicePage.goto('/me/wallet/transactions', {
-        waitUntil: 'networkidle',
-      })
+      await pageGoto(alicePage, '/me/wallet/transactions')
       const aliceTransactionItemAmount = await alicePage
         .getByTestId(TEST_ID.ME_WALLET_TRANSACTIONS_ITEM)
         .first()

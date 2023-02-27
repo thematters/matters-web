@@ -12,6 +12,7 @@ import {
   generateTags,
   generateTitle,
 } from '../text'
+import { pageGoto } from '../utils'
 
 type License = 'CC BY-NC-ND 2.0 License' | 'CC0 License' | 'All Rights Reserved'
 
@@ -103,7 +104,7 @@ export class DraftDetailPage {
   }
 
   async createDraft() {
-    await this.page.goto('/')
+    await pageGoto(this.page, '/')
 
     // Promise.all prevents a race condition between clicking and waiting.
     await Promise.all([

@@ -1,5 +1,7 @@
 import { Page } from '@playwright/test'
 
+import { pageGoto } from '../utils'
+
 export class NotificationsPage {
   readonly page: Page
 
@@ -8,6 +10,6 @@ export class NotificationsPage {
   }
 
   async goto() {
-    await this.page.goto('/me/notifications', { waitUntil: 'networkidle' })
+    await pageGoto(this.page, '/me/notifications')
   }
 }

@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 import { TEST_ID } from '~/common/enums'
 
-import { authedTest, login, logout } from './helpers'
+import { authedTest, login, logout, pageGoto } from './helpers'
 
 test.describe('Authentication', () => {
   test('can login in homepage dialog', async ({ page, isMobile }) => {
@@ -48,7 +48,7 @@ test.describe('Authentication', () => {
   authedTest(
     'can login and logout with worker-scoped fixtures',
     async ({ alicePage: page, isMobile }) => {
-      await page.goto('/', { waitUntil: 'networkidle' })
+      await pageGoto(page, '/')
 
       // [Logged-in] Expect homepage has "Notification" button on the left side
       await expect(

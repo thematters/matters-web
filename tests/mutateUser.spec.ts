@@ -6,6 +6,7 @@ import { stripSpaces } from '~/common/utils/text'
 import {
   authedTest,
   NotificationsPage,
+  pageGoto,
   UserProfilePage,
   waitForAPIResponse,
 } from './helpers'
@@ -58,7 +59,7 @@ test.describe('User Mutation', () => {
       const bobDisplayName = await bobProfile.displayName.innerText()
 
       // [Bob] Go to Alice's User Profile
-      await bobPage.goto(alicePage.url(), { waitUntil: 'networkidle' })
+      await pageGoto(bobPage, alicePage.url())
 
       if (
         await bobPage
@@ -102,7 +103,7 @@ test.describe('User Mutation', () => {
       await bobProfile.gotoMeProfile()
 
       // [Bob] Go to Alice's User Profile
-      await bobPage.goto(alicePage.url(), { waitUntil: 'networkidle' })
+      await pageGoto(bobPage, alicePage.url())
 
       if (
         await bobPage
@@ -142,7 +143,7 @@ test.describe('User Mutation', () => {
       await bobProfile.gotoMeProfile()
 
       // [Bob] Go to Alice's User Profile
-      await bobPage.goto(alicePage.url(), { waitUntil: 'networkidle' })
+      await pageGoto(bobPage, alicePage.url())
 
       await bobPage
         .getByTestId(TEST_ID.LAYOUT_HEADER)
@@ -184,7 +185,7 @@ test.describe('User Mutation', () => {
         bobPage.getByRole('button', { name: 'Block' }).click(),
       ])
 
-      await bobPage.goto('/me/settings/blocked', { waitUntil: 'networkidle' })
+      await pageGoto(bobPage, '/me/settings/blocked')
 
       const blockDisplayName = await bobPage
         .getByTestId(TEST_ID.DIGEST_USER_RICH)
@@ -258,7 +259,7 @@ test.describe('User Mutation', () => {
     'Alice switch display language',
     async ({ alicePage, isMobile }) => {
       // [Alice] Go to setting page
-      await alicePage.goto('/', { waitUntil: 'networkidle' })
+      await pageGoto(alicePage, '/')
       await alicePage.getByRole('button', { name: 'My Page' }).click()
       await alicePage
         .getByRole('link', { name: 'Settings', exact: true })

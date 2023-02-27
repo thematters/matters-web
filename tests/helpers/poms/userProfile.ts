@@ -4,6 +4,7 @@ import { TEST_ID } from '~/common/enums'
 
 import { waitForAPIResponse } from '../api'
 import { generateBio, generateDisplayName } from '../text'
+import { pageGoto } from '../utils'
 
 export class UserProfilePage {
   readonly page: Page
@@ -66,7 +67,7 @@ export class UserProfilePage {
 
   async gotoMeProfile() {
     // go to homepage
-    await this.page.goto('/')
+    await pageGoto(this.page, '/')
 
     // click "My Page" button
     await this.page.getByRole('button', { name: 'My Page' }).click()
@@ -80,7 +81,7 @@ export class UserProfilePage {
   }
 
   async goto(userName: string) {
-    await this.page.goto(`/@${userName}`, { waitUntil: 'networkidle' })
+    await pageGoto(this.page, `/@${userName}`)
   }
 
   async setCover() {

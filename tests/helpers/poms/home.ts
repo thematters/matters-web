@@ -3,6 +3,7 @@ import { Locator, Page } from '@playwright/test'
 import { TEST_ID } from '~/common/enums'
 
 import { waitForAPIResponse } from '../api'
+import { pageGoto } from '../utils'
 
 export class HomePage {
   readonly page: Page
@@ -26,7 +27,7 @@ export class HomePage {
   }
 
   async goto() {
-    await this.page.goto('/', { waitUntil: 'networkidle' })
+    await pageGoto(this.page, '/')
   }
 
   async shuffleSidebarTags() {
