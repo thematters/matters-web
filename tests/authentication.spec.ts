@@ -6,7 +6,7 @@ import { authedTest, login, logout, pageGoto } from './helpers'
 
 test.describe('Authentication', () => {
   test('can login in homepage dialog', async ({ page, isMobile }) => {
-    await page.goto('/', { waitUntil: 'networkidle' })
+    await pageGoto(page, '/')
 
     // Expect homepage has "Enter" button
     let enterButton
