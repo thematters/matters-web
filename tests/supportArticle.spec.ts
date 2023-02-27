@@ -73,7 +73,9 @@ test.describe('Support article', () => {
       )
 
       // [Alice] Check Transactions History
-      await alicePage.goto('/me/wallet/transactions')
+      await alicePage.goto('/me/wallet/transactions', {
+        waitUntil: 'networkidle',
+      })
       const aliceTransactionItemAmount = await alicePage
         .getByTestId(TEST_ID.ME_WALLET_TRANSACTIONS_ITEM)
         .first()
