@@ -40,7 +40,7 @@ export const login = async ({
     target = encodeURIComponent(
       `${process.env.PLAYWRIGHT_TEST_BASE_URL}${target}`
     )
-    await page.goto(`/login?target=${target}`)
+    await page.goto(`/login?target=${target}`, { waitUntil: 'networkidle' })
   }
 
   // Login with email & password

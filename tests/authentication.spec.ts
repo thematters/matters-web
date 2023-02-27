@@ -6,7 +6,7 @@ import { authedTest, login, logout } from './helpers'
 
 test.describe('Authentication', () => {
   test('can login in homepage dialog', async ({ page, isMobile }) => {
-    await page.goto('/')
+    await page.goto('/', { waitUntil: 'networkidle' })
 
     // Expect homepage has "Enter" button
     let enterButton
@@ -48,7 +48,7 @@ test.describe('Authentication', () => {
   authedTest(
     'can login and logout with worker-scoped fixtures',
     async ({ alicePage: page, isMobile }) => {
-      await page.goto('/')
+      await page.goto('/', { waitUntil: 'networkidle' })
 
       // [Logged-in] Expect homepage has "Notification" button on the left side
       await expect(
