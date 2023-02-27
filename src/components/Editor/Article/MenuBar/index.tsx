@@ -35,6 +35,13 @@ const MenuBar: React.FC<MenuBarProps> = ({ editor }) => {
         strike
       </button>
       <button
+        onClick={() => editor.chain().focus().toggleUnderline().run()}
+        disabled={!editor.can().chain().focus().toggleUnderline().run()}
+        className={editor.isActive('underline') ? 'is-active' : ''}
+      >
+        underline
+      </button>
+      <button
         onClick={() => editor.chain().focus().toggleCode().run()}
         disabled={!editor.can().chain().focus().toggleCode().run()}
         className={editor.isActive('code') ? 'is-active' : ''}

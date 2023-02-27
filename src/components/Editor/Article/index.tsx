@@ -12,11 +12,13 @@ import Heading from '@tiptap/extension-heading'
 import History from '@tiptap/extension-history'
 import HorizontalRule from '@tiptap/extension-horizontal-rule'
 import Italic from '@tiptap/extension-italic'
+import Link from '@tiptap/extension-link'
 import ListItem from '@tiptap/extension-list-item'
 import OrderedList from '@tiptap/extension-ordered-list'
 import Paragraph from '@tiptap/extension-paragraph'
 import Strike from '@tiptap/extension-strike'
 import Text from '@tiptap/extension-text'
+import Underline from '@tiptap/extension-underline'
 import { EditorContent, useEditor } from '@tiptap/react'
 
 import {
@@ -98,6 +100,7 @@ const ArticleEditor: React.FC<Props> = ({
       Document,
       Paragraph,
       Text,
+      Link,
       Heading.configure({
         levels: [2, 3],
       }),
@@ -107,6 +110,7 @@ const ArticleEditor: React.FC<Props> = ({
       Strike,
       Italic,
       Bold,
+      Underline,
       Code,
       CodeBlock,
       Blockquote,
@@ -118,9 +122,9 @@ const ArticleEditor: React.FC<Props> = ({
     ],
     content,
     editable: !isReadOnly,
-    onUpdate: ({ editor }) => {
+    onUpdate: ({ editor, transaction }) => {
       const content = editor.getHTML()
-      console.log(editor)
+      console.log(editor, transaction)
       update({ content })
     },
   })
