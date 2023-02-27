@@ -152,8 +152,6 @@ export class ArticleDetailPage {
 
   async sendComment() {
     // Open comment editor
-    // await sleep(5 * 1000)
-    await this.page.waitForLoadState('networkidle')
     await this.toolbarCommentButton.click()
 
     // Fill with content
