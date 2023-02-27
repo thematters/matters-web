@@ -19,7 +19,7 @@ const config: PlaywrightTestConfig = {
     timeout: 10e3,
   },
   fullyParallel: true,
-  forbidOnly: true,
+  forbidOnly: !!isCI,
   retries: isCI ? 2 : 1,
   workers: isCI ? 2 : undefined,
   // maxFailures: process.env.CI ? 2 : 0,
