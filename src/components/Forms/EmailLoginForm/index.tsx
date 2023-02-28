@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   ADD_TOAST,
@@ -14,7 +15,6 @@ import {
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
-  translate,
   validateEmail,
   validatePassword,
 } from '~/common/utils'
@@ -24,7 +24,6 @@ import {
   LanguageContext,
   LanguageSwitch,
   Layout,
-  Translate,
   useMutation,
 } from '~/components'
 import { UserLoginMutation } from '~/gql/graphql'
@@ -87,6 +86,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const isInPage = purpose === 'page'
   const formId = 'email-login-form'
 
+  const intl = useIntl()
   const {
     values,
     errors,
@@ -129,7 +129,12 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: <Translate id="successLogin" />,
+              content: (
+                <FormattedMessage
+                  defaultMessage="Logged in successfully"
+                  description=""
+                />
+              ),
             },
           })
         )
@@ -158,11 +163,14 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<Translate id="email" />}
+        label={<FormattedMessage defaultMessage="Email" description="" />}
         type="email"
         name="email"
         required
-        placeholder={translate({ id: 'enterEmail', lang })}
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter Email',
+          description: '',
+        })}
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
@@ -170,11 +178,14 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       />
 
       <Form.Input
-        label={<Translate id="password" />}
+        label={<FormattedMessage defaultMessage="Password" description="" />}
         type="password"
         name="password"
         required
-        placeholder={translate({ id: 'enterPassword', lang })}
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter Password',
+          description: 'src/components/Forms/EmailLoginForm/index.tsx',
+        })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
@@ -202,7 +213,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={<Translate id="confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={isSubmitting}
     />
   )

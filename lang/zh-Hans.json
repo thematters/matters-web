@@ -42,5 +42,201 @@
   "rXbLl7": {
     "defaultMessage": "一键搬家",
     "description": "src/views/Help/index.tsx"
+  },
+  "fOgusL": {
+    "defaultMessage": "选择进入方式",
+    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "t8/r8X": {
+    "defaultMessage": "连接加密钱包",
+    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "iCFXtS": {
+    "defaultMessage": "欢迎未注册或已启用钱包登入的朋友使用",
+    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "xiKjd/": {
+    "defaultMessage": "使用电子邮箱",
+    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "J+LXrH": {
+    "defaultMessage": "持续支持邮箱進入，未來可随时启用钱包登入",
+    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "XcTMMM": {
+    "defaultMessage": "已有帐户？",
+    "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
+  },
+  "ipQlDG": {
+    "defaultMessage": "以邮箱登入",
+    "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
+  },
+  "fw3tYQ": {
+    "defaultMessage": "姓名",
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+  },
+  "4mbdyI": {
+    "defaultMessage": "邮箱",
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+  },
+  "0Rw3H/": {
+    "defaultMessage": "我已阅读并同意",
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+  },
+  "nmZI+U": {
+    "defaultMessage": "Matters 用户协议和隐私政策",
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+  },
+  "agfumL": {
+    "defaultMessage": "下一步",
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+  },
+  "l5vWO8": {
+    "defaultMessage": "你的站内暱称，之后可以修改",
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+  },
+  "Jw2dhR": {
+    "defaultMessage": "密码",
+    "description": ""
+  },
+  "vYKecW": {
+    "defaultMessage": "至少 8 个字符，支持英文大小写字母、数字和特殊符号",
+    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
+  },
+  "NzfL1d": {
+    "defaultMessage": "再次输入密码",
+    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
+  },
+  "JsK5CJ": {
+    "defaultMessage": "确认",
+    "description": ""
+  },
+  "XH0Lb6": {
+    "defaultMessage": "欢迎加入 Matters！",
+    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
+  },
+  "stjoBH": {
+    "defaultMessage": "现在，去为你喜欢的作者打赏吧！你的每一次打赏都将为作者带来收入。",
+    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
+  },
+  "reOeq5": {
+    "defaultMessage": "你已拥有个人创作空间站，期待你的第一篇作品。",
+    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
+  },
+  "ANhCde": {
+    "defaultMessage": "马上开始你的创作吧！",
+    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
+  },
+  "/asuIY": {
+    "defaultMessage": "进入社区",
+    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
+  },
+  "ejLphg": {
+    "defaultMessage": "上站成功",
+    "description": ""
+  },
+  "ITLe+5": {
+    "defaultMessage": "请输入邮箱",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
+  "IFY8r4": {
+    "defaultMessage": "请输入密码",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
+  "z+209N": {
+    "defaultMessage": "注册",
+    "description": ""
+  },
+  "nYeDrI": {
+    "defaultMessage": "沒有帐户？",
+    "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "xGh9O7": {
+    "defaultMessage": "提醒：信箱将不作为登入使用，仅作为联系渠道",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "N3K1H9": {
+    "defaultMessage": "Matters 不会透过任何渠道询问你的钱包私钥。",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "hWs95P": {
+    "defaultMessage": "重要讯息将透过邮件通知，请填入信箱完成设定。",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "cg1VJ2": {
+    "defaultMessage": "连接加密钱包",
+    "description": ""
+  },
+  "NR4iCw": {
+    "defaultMessage": "若要变更地址，请直接操作钱包切換",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "wSEOxH": {
+    "defaultMessage": "联系渠道",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "CwSpld": {
+    "defaultMessage": "非登入用途",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "PUcDNi": {
+    "defaultMessage": "邮箱将不作为登入使用，仅作为联系渠道",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "EfJYPI": {
+    "defaultMessage": "验证码",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "0Rw3H/": {
+    "defaultMessage": "我已阅读并同意",
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+  },
+  "/A/biR": {
+    "defaultMessage": "Matters 用户协议和隐私政策",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "jgLiba": {
+    "defaultMessage": "请输入验证码",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "yIHSZS": {
+    "defaultMessage": "验证码有效期 20 分钟",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "4giHJT": {
+    "defaultMessage": "在行动装置上使用问题，参考 ",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "GZ1iwf": {
+    "defaultMessage": "教学指南",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "hrfF+i": {
+    "defaultMessage": "刚接触加密钱包？参考 ",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "HxcjQl": {
+    "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "LqxIEU": {
+    "defaultMessage": "钱包地址将作为身份识别之一在个人页公开显示。",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "UOdEqi": {
+    "defaultMessage": "原有透过电子信箱登入方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "VrOoVf": {
+    "defaultMessage": "Matters 不会透过任何渠道主动询问你的钱包私钥。",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "v6YjIn": {
+    "defaultMessage": "账户",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "fxAOT2": {
+    "defaultMessage": "进入",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   }
 }

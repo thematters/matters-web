@@ -14,7 +14,6 @@ import {
   Layout,
   Media,
   TextIcon,
-  Translate,
   ViewerContext,
 } from '~/components'
 
@@ -28,37 +27,6 @@ export interface FormProps {
   back?: () => void
 }
 
-const Desc = {
-  section1: {
-    zh_hant:
-      'Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。',
-    zh_hans:
-      'Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。',
-    en:
-      'Matters continues to provide services that combine creativity with blockchain ' +
-      'technology. You will be the first to experience them after completing connecting wallet.',
-  },
-  section2: {
-    zh_hant: '錢包地址將作為身份識別之一在個人頁公開顯示。',
-    zh_hans: '钱包地址将作为身份识别之一在个人页公开显示。',
-    en: 'Wallet address will be part of your digital identity and shown in your profile page.',
-  },
-  section3: {
-    zh_hant:
-      '原有透過電子信箱登入方式將為你保留。為維護你的帳戶安全，加密錢包連接後無法重設。',
-    zh_hans:
-      '原有透过电子信箱登入方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。',
-    en:
-      'The original login via email will be kept for you. Please note that your wallet ' +
-      'cannot be reset once it is connected because of your account security.',
-  },
-  section4: {
-    zh_hant: 'Matters 不會透過任何渠道主動詢問你的錢包私鑰。',
-    zh_hans: 'Matters 不会透过任何渠道主动询问你的钱包私钥。',
-    en: 'Matters will never ask your wallet key through any channel.',
-  },
-}
-
 const Hint = () => {
   const { lang } = useContext(LanguageContext)
 
@@ -66,10 +34,9 @@ const Hint = () => {
     <>
       <Media at="sm">
         <p>
-          <Translate
-            zh_hant="在行動裝置上使用問題，參考 "
-            zh_hans="在行动装置上使用问题，参考"
-            en="Have wallet questions on mobile device ? Click the "
+          <FormattedMessage
+            defaultMessage="Have wallet questions on mobile device ? Click the "
+            description="src/components/Forms/WalletAuthForm/Select.tsx"
           />
           <a
             className="u-link-green"
@@ -77,17 +44,18 @@ const Hint = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
+            <FormattedMessage
+              defaultMessage="tutorial"
+              description="src/components/Forms/WalletAuthForm/Select.tsx"
+            />
           </a>
-          <Translate zh_hant="" zh_hans="" en="." />
         </p>
       </Media>
       <Media greaterThan="sm">
         <p>
-          <Translate
-            zh_hant="剛接觸加密錢包？參考 "
-            zh_hans="刚接触加密钱包？参考 "
-            en="Don't have a wallet yet? Check the "
+          <FormattedMessage
+            defaultMessage="Don't have a wallet yet? Check the "
+            description="src/components/Forms/WalletAuthForm/Select.tsx"
           />
           <a
             className="u-link-green"
@@ -95,9 +63,11 @@ const Hint = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
+            <FormattedMessage
+              defaultMessage="tutorial"
+              description="src/components/Forms/WalletAuthForm/Select.tsx"
+            />
           </a>
-          <Translate zh_hant="" zh_hans="" en="." />
         </p>
       </Media>
     </>
@@ -160,19 +130,31 @@ const Select: React.FC<FormProps> = ({
       <Dialog.Message align="left">
         <ul>
           <li>
-            <Translate {...Desc.section1} />
+            <FormattedMessage
+              defaultMessage="Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet."
+              description="src/components/Forms/WalletAuthForm/Select.tsx"
+            />
           </li>
           <li>
             <strong>
-              <Translate {...Desc.section2} />
+              <FormattedMessage
+                defaultMessage="Wallet address will be part of your digital identity and shown in your profile page."
+                description="src/components/Forms/WalletAuthForm/Select.tsx"
+              />
             </strong>
           </li>
           <li>
-            <Translate {...Desc.section3} />
+            <FormattedMessage
+              defaultMessage="The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security."
+              description="src/components/Forms/WalletAuthForm/Select.tsx"
+            />
           </li>
           <li>
             <strong>
-              <Translate {...Desc.section4} />
+              <FormattedMessage
+                defaultMessage="Matters will never ask your wallet key through any channel."
+                description="src/components/Forms/WalletAuthForm/Select.tsx"
+              />
             </strong>
           </li>
         </ul>
@@ -184,13 +166,22 @@ const Select: React.FC<FormProps> = ({
     <Form id={formId} onSubmit={submitCallback}>
       {isConnect && (
         <Form.List
-          groupName={<Translate zh_hant="帳戶" zh_hans="帳戶" en="Account" />}
+          groupName={
+            <FormattedMessage
+              defaultMessage="Account"
+              description="src/components/Forms/WalletAuthForm/Select.tsx"
+            />
+          }
         >
           <Form.List.Item title="Matters ID" rightText={viewer.userName} />
         </Form.List>
       )}
 
-      <Form.List groupName={<Translate id="connectWallet" />}>
+      <Form.List
+        groupName={
+          <FormattedMessage defaultMessage="Connect Wallet" description="" />
+        }
+      >
         {injectedConnector?.ready ? (
           <Form.List.Item
             title={
@@ -297,7 +288,17 @@ const Select: React.FC<FormProps> = ({
             back ? <Dialog.Header.BackButton onClick={onBack} /> : null
           }
           title={
-            <Translate id={isConnect ? 'loginWithWallet' : 'authEntries'} />
+            isConnect ? (
+              <FormattedMessage
+                defaultMessage="Connect Wallet"
+                description=""
+              />
+            ) : (
+              <FormattedMessage
+                defaultMessage="Enter"
+                description="src/components/Forms/WalletAuthForm/Select.tsx"
+              />
+            )
           }
           closeDialog={closeDialog}
         />
