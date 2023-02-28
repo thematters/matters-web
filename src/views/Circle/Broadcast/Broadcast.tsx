@@ -134,9 +134,8 @@ const CricleBroadcast = () => {
    * Fragment Patterns
    *
    * 0. ``
-   * 1. `#comment`
-   * 2. `#parentCommentId`
-   * 3. `#parentComemntId-childCommentId`
+   * 1. `#parentCommentId`
+   * 2. `#parentComemntId-childCommentId`
    */
   let fragment = ''
   let parentId = ''
@@ -148,10 +147,6 @@ const CricleBroadcast = () => {
 
   // jump to comment area
   useEffect(() => {
-    if (window.location.hash && circle) {
-      jump('#comments', { offset: -10 })
-    }
-
     if (!fragment || !circle?.id) {
       return
     }
@@ -226,7 +221,7 @@ const CricleBroadcast = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="broadcast" id="comments">
+      <section className="broadcast">
         {isOwner && (
           <header>
             <CommentForm
