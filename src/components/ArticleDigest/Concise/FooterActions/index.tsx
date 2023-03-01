@@ -8,14 +8,16 @@ export type FooterActionsProps = {
   article: FooterActionsConciseArticlePublicFragment
   date?: Date | string | number | boolean
   inCard?: boolean
+  tag?: React.ReactNode
 }
 
-const FooterActions = ({ article, date, inCard }: FooterActionsProps) => {
+const FooterActions = ({ article, date, inCard, tag }: FooterActionsProps) => {
   const hasDate = date !== false
 
   return (
     <footer>
       <section className="left">
+        {tag}
         {article.access.circle && (
           <CircleDigest.Plain circle={article.access.circle} />
         )}

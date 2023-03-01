@@ -24,6 +24,7 @@ export type ArticleDigestConciseProps = {
   article: ArticleDigestConciseArticlePublicFragment &
     Partial<ArticleDigestConciseArticlePrivateFragment>
   header?: React.ReactNode
+  footerTag?: React.ReactNode
 } & ArticleDigestConciseControls &
   FooterActionsProps &
   UtmParams
@@ -31,6 +32,7 @@ export type ArticleDigestConciseProps = {
 const BaseArticleDigestFeed = ({
   article,
   header,
+  footerTag,
   date,
 
   hasFollow,
@@ -83,7 +85,13 @@ const BaseArticleDigestFeed = ({
         )}
       </section>
 
-      <FooterActions article={article} inCard date={date} {...controls} />
+      <FooterActions
+        article={article}
+        inCard
+        date={date}
+        tag={footerTag}
+        {...controls}
+      />
 
       <style jsx>{styles}</style>
     </Card>
