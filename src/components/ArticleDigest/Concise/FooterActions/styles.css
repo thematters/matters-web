@@ -1,0 +1,9 @@
+footer {
+  @mixin feed-footer-actions;
+
+  & .left {
+    & :global(> * + *) {
+      padding-left: var(--spacing-x-tight);
+    }
+  }
+}
