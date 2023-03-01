@@ -2,6 +2,8 @@ footer {
   @mixin feed-footer-actions;
 
   & .left {
+    padding-right: var(--spacing-base);
+
     & :global(> * + *) {
       padding-left: var(--spacing-x-tight);
     }
