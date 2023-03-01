@@ -83,17 +83,13 @@
     "defaultMessage": "Display Name",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
-  "0Rw3H/": {
-    "defaultMessage": "I have read and agree to",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
-  },
   "nmZI+U": {
     "defaultMessage": "Terms and Privacy Policy",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
   "agfumL": {
     "defaultMessage": "Next",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+    "description": ""
   },
   "l5vWO8": {
     "defaultMessage": "Your Matters display name, can be changed later",
@@ -101,11 +97,11 @@
   },
   "Jw2dhR": {
     "defaultMessage": "Password",
-    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
+    "description": ""
   },
   "vYKecW": {
     "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed",
-    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
+    "description": ""
   },
   "NzfL1d": {
     "defaultMessage": "Enter password again",
@@ -169,7 +165,7 @@
   },
   "NR4iCw": {
     "defaultMessage": "To change, switch it directly on your wallet",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+    "description": ""
   },
   "wSEOxH": {
     "defaultMessage": "Contact Channel",
@@ -181,7 +177,7 @@
   },
   "PUcDNi": {
     "defaultMessage": "Email will not be used as a login but only as a contact channel.",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+    "description": ""
   },
   "EfJYPI": {
     "defaultMessage": "Verification Code",
@@ -189,7 +185,7 @@
   },
   "0Rw3H/": {
     "defaultMessage": "I have read and agree to",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+    "description": ""
   },
   "/A/biR": {
     "defaultMessage": "Terms and Privacy Policy",
@@ -201,7 +197,7 @@
   },
   "yIHSZS": {
     "defaultMessage": "Code will expire after 20 minutes",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+    "description": ""
   },
   "4giHJT": {
     "defaultMessage": "Have wallet questions on mobile device ? Click the ",
@@ -237,6 +233,6 @@
   },
   "fxAOT2": {
     "defaultMessage": "Enter",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+    "description": ""
   }
 }

@@ -15,7 +15,13 @@ export const PasswordResetDialogButton = ({
     onClick={gotoResetPassword}
     tabIndex={-1}
   >
-    <TextIcon color="green" weight="md"></TextIcon>
+    <TextIcon color="green" weight="md">
+      {' '}
+      <FormattedMessage
+        defaultMessage="Forget Password"
+        description="src/components/Forms/EmailLoginForm/Buttons.tsx"
+      />
+    </TextIcon>
   </Button>
 )
 

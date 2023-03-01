@@ -7,10 +7,6 @@
     "defaultMessage": "Enter Community",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
-  "0Rw3H/": {
-    "defaultMessage": "I have read and agree to",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
-  },
   "3uQKhx": {
     "defaultMessage": "Please email",
     "description": "src/views/Help/index.tsx"
@@ -23,8 +19,12 @@
     "defaultMessage": "Password",
     "description": ""
   },
-  "8cv9D4": {
-    "defaultMessage": "Next Step",
+  "9+Ddtu": {
+    "defaultMessage": "Next",
+    "description": ""
+  },
+  "A41QIy": {
+    "defaultMessage": "Enter Password",
     "description": ""
   },
   "ANhCde": {
@@ -43,6 +43,10 @@
     "defaultMessage": "Verification Code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "EwVnoC": {
+    "defaultMessage": "I have read and agree to",
+    "description": ""
+  },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -50,6 +54,10 @@
   "GZ1iwf": {
     "defaultMessage": "tutorial",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "H8KGyc": {
+    "defaultMessage": "Enter",
+    "description": ""
   },
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
@@ -67,10 +75,6 @@
     "defaultMessage": "Matters Community",
     "description": "src/views/Help/index.tsx"
   },
-  "Jw2dhR": {
-    "defaultMessage": "Password",
-    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
-  },
   "JxlxVc": {
     "defaultMessage": "Forget Password",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
@@ -87,17 +91,9 @@
     "defaultMessage": "Matters will never ask for your wallet mnemonic through any channel.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "NR4iCw": {
-    "defaultMessage": "To change, switch it directly on your wallet",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
   "NzfL1d": {
     "defaultMessage": "Enter password again",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
-  },
-  "PUcDNi": {
-    "defaultMessage": "Email will not be used as a login but only as a contact channel.",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "RKs1fz": {
     "defaultMessage": "Open Source",
@@ -119,13 +115,9 @@
     "defaultMessage": "Have an account?",
     "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
   },
-  "agfumL": {
-    "defaultMessage": "Next",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
-  },
-  "cOmxYM": {
-    "defaultMessage": "I have read and agree to",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  "YjNkcK": {
+    "defaultMessage": "To change, switch it directly on your wallet",
+    "description": ""
   },
   "cfL5uk": {
     "defaultMessage": "Over 200 words, current {numbers}",
@@ -151,10 +143,6 @@
     "defaultMessage": "Display Name",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
-  "fxAOT2": {
-    "defaultMessage": "Enter",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "hWs95P": {
     "defaultMessage": "Important information will be notified by email. So filling in your email address will be required.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -171,6 +159,10 @@
     "defaultMessage": "Login with Email",
     "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
   },
+  "jL2ZHb": {
+    "defaultMessage": "Code will expire after 20 minutes",
+    "description": ""
+  },
   "jgLiba": {
     "defaultMessage": "Enter verification code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -181,6 +173,10 @@
   },
   "lD4FPZ": {
     "defaultMessage": "Enter Email",
+    "description": ""
+  },
+  "ml3SZN": {
+    "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed",
     "description": ""
   },
   "nYeDrI": {
@@ -206,6 +202,10 @@
   "qXcvBF": {
     "defaultMessage": "Explore Matters",
     "description": "src/views/Help/index.tsx"
+  },
+  "qswU4E": {
+    "defaultMessage": "Email will not be used as a login but only as a contact channel.",
+    "description": ""
   },
   "rXbLl7": {
     "defaultMessage": "Migrate to Matters",
@@ -235,10 +235,6 @@
     "defaultMessage": "Account",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "vYKecW": {
-    "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed",
-    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
-  },
   "wSEOxH": {
     "defaultMessage": "Contact Channel",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -250,9 +246,5 @@
   "xiKjd/": {
     "defaultMessage": "Continue with Email",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
-  "yIHSZS": {
-    "defaultMessage": "Code will expire after 20 minutes",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   }
 }

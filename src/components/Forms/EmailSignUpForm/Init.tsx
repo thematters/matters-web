@@ -157,7 +157,7 @@ const Init: React.FC<FormProps> = ({
           <>
             <FormattedMessage
               defaultMessage="I have read and agree to"
-              description="src/components/Forms/EmailSignUpForm/Init.tsx"
+              description=""
             />
             <Link href={PATHS.TOS} legacyBehavior>
               <a className="u-link-green" target="_blank">
@@ -182,12 +182,7 @@ const Init: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={
-        <FormattedMessage
-          defaultMessage="Next"
-          description="src/components/Forms/EmailSignUpForm/Init.tsx"
-        />
-      }
+      text={<FormattedMessage defaultMessage="Next" description="" />}
       loading={isSubmitting}
     />
   )

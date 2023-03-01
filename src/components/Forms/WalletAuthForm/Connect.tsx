@@ -296,7 +296,7 @@ const Connect: React.FC<FormProps> = ({
             !errors.address ? (
               <FormattedMessage
                 defaultMessage="To change, switch it directly on your wallet"
-                description="src/components/Forms/WalletAuthForm/Connect.tsx"
+                description=""
               />
             ) : undefined
           }
@@ -350,7 +350,7 @@ const Connect: React.FC<FormProps> = ({
           hint={
             <FormattedMessage
               defaultMessage="Email will not be used as a login but only as a contact channel."
-              description="src/components/Forms/WalletAuthForm/Connect.tsx"
+              description=""
             />
           }
         />
@@ -373,7 +373,7 @@ const Connect: React.FC<FormProps> = ({
           })}
           hint={intl.formatMessage({
             defaultMessage: 'Code will expire after 20 minutes',
-            description: 'src/components/Forms/WalletAuthForm/Connect.tsx',
+            description: '',
           })}
           value={values.code}
           error={touched.code && errors.code}
@@ -399,7 +399,7 @@ const Connect: React.FC<FormProps> = ({
             <>
               <FormattedMessage
                 defaultMessage="I have read and agree to"
-                description="src/components/Forms/WalletAuthForm/Connect.tsx"
+                description=""
               />
               <Link href={PATHS.TOS} legacyBehavior>
                 <a className="u-link-green" target="_blank">
@@ -427,7 +427,7 @@ const Connect: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting || loading || !account}
-      text={<FormattedMessage defaultMessage="Next Step" description="" />}
+      text={<FormattedMessage defaultMessage="Next" description="" />}
       loading={isSubmitting || loading}
     />
   )

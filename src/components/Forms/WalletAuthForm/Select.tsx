@@ -294,10 +294,7 @@ const Select: React.FC<FormProps> = ({
                 description=""
               />
             ) : (
-              <FormattedMessage
-                defaultMessage="Enter"
-                description="src/components/Forms/WalletAuthForm/Select.tsx"
-              />
+              <FormattedMessage defaultMessage="Enter" description="" />
             )
           }
           closeDialog={closeDialog}

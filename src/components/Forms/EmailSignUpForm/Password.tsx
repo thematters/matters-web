@@ -153,17 +153,12 @@ const Password: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={
-          <FormattedMessage
-            defaultMessage="Password"
-            description="src/components/Forms/EmailSignUpForm/Password.tsx"
-          />
-        }
+        label={<FormattedMessage defaultMessage="Password" description="" />}
         type="password"
         name="password"
         required
         placeholder={intl.formatMessage({
-          defaultMessage: 'Password',
+          defaultMessage: 'Enter Password',
           description: '',
         })}
         value={values.password}
@@ -173,7 +168,7 @@ const Password: React.FC<FormProps> = ({
         hint={
           <FormattedMessage
             defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
-            description="src/components/Forms/EmailSignUpForm/Password.tsx"
+            description=""
           />
         }
       />
@@ -197,7 +192,7 @@ const Password: React.FC<FormProps> = ({
         hint={
           <FormattedMessage
             defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
-            description="src/components/Forms/EmailSignUpForm/Password.tsx"
+            description=""
           />
         }
         onBlur={handleBlur}
