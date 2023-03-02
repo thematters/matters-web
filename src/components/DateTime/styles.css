@@ -3,4 +3,5 @@ time {
   font-weight: var(--font-weight-timestamp);
   line-height: var(--line-height-timestamp);
   color: var(--color-grey-dark);
+  white-space: nowrap;
 }
