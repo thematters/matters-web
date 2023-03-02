@@ -23,18 +23,21 @@
 .size-xs {
   & .text {
     font-size: var(--font-size-xs);
+    line-height: 1.06;
   }
 }
 
 .size-sm {
   & .text {
     font-size: var(--font-size-sm);
+    line-height: 1.06;
   }
 }
 
 .size-sm-s {
   & .text {
     font-size: var(--font-size-sm-s);
+    line-height: 1.06;
   }
 }
 
