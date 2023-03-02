@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   COOKIE_LANGUAGE,
@@ -12,7 +13,6 @@ import {
   analytics,
   parseFormSubmitErrors,
   setCookies,
-  translate,
   validateComparedPassword,
   validatePassword,
 } from '~/common/utils'
@@ -21,7 +21,6 @@ import {
   Form,
   LanguageContext,
   Layout,
-  Translate,
   useMutation,
 } from '~/components'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
@@ -88,6 +87,7 @@ const Password: React.FC<FormProps> = ({
   const isInPage = purpose === 'page'
   const formId = 'email-sign-up-password-form'
 
+  const intl = useIntl()
   const {
     values,
     errors,
@@ -153,30 +153,48 @@ const Password: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<Translate id="password" />}
+        label={<FormattedMessage defaultMessage="Password" description="" />}
         type="password"
         name="password"
         required
-        placeholder={translate({
-          id: 'enterPassword',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter Password',
+          description: '',
         })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
         onChange={handleChange}
-        hint={<Translate id="hintPassword" />}
+        hint={
+          <FormattedMessage
+            defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
+            description=""
+          />
+        }
       />
 
       <Form.Input
-        label={<Translate id="passwordAgain" />}
+        label={
+          <FormattedMessage
+            defaultMessage="Enter password again"
+            description="src/components/Forms/EmailSignUpForm/Password.tsx"
+          />
+        }
         type="password"
         name="comparedPassword"
         required
-        placeholder={translate({ id: 'enterPasswordAgain', lang })}
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter password again',
+          description: 'src/components/Forms/EmailSignUpForm/Password.tsx',
+        })}
         value={values.comparedPassword}
         error={touched.comparedPassword && errors.comparedPassword}
-        hint={<Translate id="hintPassword" />}
+        hint={
+          <FormattedMessage
+            defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
+            description=""
+          />
+        }
         onBlur={handleBlur}
         onChange={handleChange}
       />
@@ -188,7 +206,7 @@ const Password: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={<Translate id="confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={isSubmitting}
     />
   )
