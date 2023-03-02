@@ -63,9 +63,8 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
    * Fragment Patterns
    *
    * 0. ``
-   * 1. `#comment`
-   * 2. `#parentCommentId`
-   * 3. `#parentComemntId-childCommentId`
+   * 1. `#parentCommentId`
+   * 2. `#parentComemntId-childCommentId`
    */
   let fragment = ''
   let parentId = ''
