@@ -199,9 +199,9 @@
     "defaultMessage": "请输入验证码",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "yIHSZS": {
+  "jL2ZHb": {
     "defaultMessage": "验证码有效期 20 分钟",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+    "description": ""
   },
   "4giHJT": {
     "defaultMessage": "在行动装置上使用问题，参考 ",
