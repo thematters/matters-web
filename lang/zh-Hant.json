@@ -199,9 +199,9 @@
     "defaultMessage": "請輸入驗證碼",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "yIHSZS": {
+  "jL2ZHb": {
     "defaultMessage": "驗證碼有效期 20 分鐘",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+    "description": ""
   },
   "4giHJT": {
     "defaultMessage": "在行動裝置上使用問題，參考 ",
