@@ -1,12 +1,4 @@
 {
-  "/A/biR": {
-    "defaultMessage": "Terms and Privacy Policy",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
-  "/asuIY": {
-    "defaultMessage": "Enter Community",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  }, 
   "+AdTsY": {
     "defaultMessage": "Discussion and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -18,6 +10,14 @@
   "/3G89K": {
     "defaultMessage": "is growing",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+  },
+  "/A/biR": {
+    "defaultMessage": "Terms and Privacy Policy",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "/asuIY": {
+    "defaultMessage": "Enter Community",
+    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "/nu5ho": {
     "defaultMessage": "replied to your comment on",
@@ -39,22 +39,6 @@
     "defaultMessage": "Have wallet questions on mobile device ? Click the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "5sg7KC": {
-    "defaultMessage": "Password",
-    "description": ""
-  },
-  "9+Ddtu": {
-    "defaultMessage": "Next",
-    "description": ""
-  },
-  "A41QIy": {
-    "defaultMessage": "Enter Password",
-    "description": ""
-  },
-  "ANhCde": {
-    "defaultMessage": "Start creating now!",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  },
   "4vkwo0": {
     "defaultMessage": "Your article has been republished to decentralized network",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
@@ -63,13 +47,29 @@
     "defaultMessage": "started a new topic",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "5sg7KC": {
+    "defaultMessage": "Password",
+    "description": ""
+  },
   "7wEMbb": {
     "defaultMessage": "Followed You",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
+  "9+Ddtu": {
+    "defaultMessage": "Next",
+    "description": ""
+  },
   "A3LOng": {
     "defaultMessage": "replied to topics",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "A41QIy": {
+    "defaultMessage": "Enter Password",
+    "description": ""
+  },
+  "ANhCde": {
+    "defaultMessage": "Start creating now!",
+    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "BHFHeY": {
     "defaultMessage": "commented in {commentCircle}",
@@ -93,8 +93,8 @@
   },
   "EwVnoC": {
     "defaultMessage": "I have read and agree to",
-    "description": ""},
-    
+    "description": ""
+  },
   "FALWef": {
     "defaultMessage": "commented in Broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -102,6 +102,10 @@
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "GBm/sD": {
+    "defaultMessage": "posted a new topic and mentioned you",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "GZ1iwf": {
     "defaultMessage": "tutorial",
@@ -119,16 +123,13 @@
     "defaultMessage": "Enter Password",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
-  "J+LXrH": {
-    "defaultMessage": "User registered by email can login and enable wallet login later",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"},
-  "GBm/sD": {
-    "defaultMessage": "posted a new topic and mentioned you",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "ISn3eZ": {
     "defaultMessage": "Broadcast and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "J+LXrH": {
+    "defaultMessage": "User registered by email can login and enable wallet login later",
+    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "J3yk6u": {
     "defaultMessage": "in circle",
@@ -142,9 +143,25 @@
     "defaultMessage": "Matters Community",
     "description": "src/views/Help/index.tsx"
   },
+  "Jc+W6M": {
+    "defaultMessage": "resigned as tag maintainer. Would you like to be the new tag maintainer?",
+    "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+  },
   "JxlxVc": {
     "defaultMessage": "Forget Password",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "KZlRde": {
+    "defaultMessage": "replied to",
+    "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
+  },
+  "KyWDUu": {
+    "defaultMessage": "invites you to join Circle for",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
+  "LW1aX1": {
+    "defaultMessage": "Congrats!",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "LqxIEU": {
     "defaultMessage": "Wallet address will be part of your digital identity and shown in your profile page.",
@@ -160,18 +177,11 @@
   },
   "NzfL1d": {
     "defaultMessage": "Enter password again",
-    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"},
-  "KZlRde": {
-    "defaultMessage": "replied to",
-    "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
+    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
   },
-  "KyWDUu": {
-    "defaultMessage": "invites you to join Circle for",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-  },
-  "LW1aX1": {
-    "defaultMessage": "Congrats!",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  "O03Rkc": {
+    "defaultMessage": "resigned as tag collaborator. You can invite new collaborators to join",
+    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
   "PjT72J": {
     "defaultMessage": "liked your article",
@@ -185,28 +195,13 @@
     "defaultMessage": "Open Source",
     "description": "src/views/Help/index.tsx"
   },
-  "UOdEqi": {
-    "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
-  "VrOoVf": {
-    "defaultMessage": "Matters will never ask your wallet key through any channel.",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
-  "XH0Lb6": {
-    "defaultMessage": "Welcome to Matters!",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  },
-  "XcTMMM": {
-    "defaultMessage": "Have an account?",
-    "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
-  },
-  "YjNkcK": {
-    "defaultMessage": "To change, switch it directly on your wallet",
-    "description": ""},
   "U/Tqmx": {
     "defaultMessage": "commented on your bookmarked article",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
+  },
+  "UOdEqi": {
+    "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "UgvfcU": {
     "defaultMessage": "You have successfully completed Ethereum wallet settings. Please confirm wallet address:",
@@ -220,9 +215,25 @@
     "defaultMessage": "commented on",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
+  "VrOoVf": {
+    "defaultMessage": "Matters will never ask your wallet key through any channel.",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "XH0Lb6": {
+    "defaultMessage": "Welcome to Matters!",
+    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
+  },
+  "XcTMMM": {
+    "defaultMessage": "Have an account?",
+    "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
+  },
   "YIes/F": {
     "defaultMessage": "etc. {actorsCount} users",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "YjNkcK": {
+    "defaultMessage": "To change, switch it directly on your wallet",
+    "description": ""
   },
   "YlxpJl": {
     "defaultMessage": "Broadcast and mentioned you in comment",
@@ -260,17 +271,37 @@
     "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
     "description": "src/views/Help/index.tsx"
   },
+  "dsBCfK": {
+    "defaultMessage": "uh-oh,",
+    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "euNJsE": {
+    "defaultMessage": "A new article has been added to the circle, read it now!",
+    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+  },
   "fOgusL": {
     "defaultMessage": "Choose a method to enter",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "ftD7Hy": {
+    "defaultMessage": "mentioned you",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "fw3tYQ": {
     "defaultMessage": "Display Name",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
+  "g/L3Fm": {
+    "defaultMessage": "posted and replied to topics",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
   "hWs95P": {
     "defaultMessage": "Important information will be notified by email. So filling in your email address will be required.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "hk2aiz": {
+    "defaultMessage": "followed your circle",
+    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hrfF+i": {
     "defaultMessage": "Don't have a wallet yet? Check the",
@@ -283,6 +314,10 @@
   "ipQlDG": {
     "defaultMessage": "Login with Email",
     "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
+  },
+  "jF+Mle": {
+    "defaultMessage": "days for free. Try it and have fun!",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "jL2ZHb": {
     "defaultMessage": "Code will expire after 20 minutes",
@@ -300,6 +335,10 @@
     "defaultMessage": "Enter Email",
     "description": ""
   },
+  "mPe6DK": {
+    "defaultMessage": "subscribed your circle",
+    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
   "ml3SZN": {
     "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed",
     "description": ""
@@ -310,30 +349,7 @@
   },
   "nmZI+U": {
     "defaultMessage": "Terms and Privacy Policy",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"},
-  "euNJsE": {
-    "defaultMessage": "A new article has been added to the circle, read it now!",
-    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
-  },
-  "ftD7Hy": {
-    "defaultMessage": "mentioned you",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "g/L3Fm": {
-    "defaultMessage": "posted and replied to topics",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "hk2aiz": {
-    "defaultMessage": "followed your circle",
-    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
-  },
-  "jF+Mle": {
-    "defaultMessage": "days for free. Try it and have fun!",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-  },
-  "mPe6DK": {
-    "defaultMessage": "subscribed your circle",
-    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
   "nmmItN": {
     "defaultMessage": "About Us",
@@ -341,7 +357,8 @@
   },
   "nsaJRn": {
     "defaultMessage": "Logged in successfully",
-    "description": ""},
+    "description": ""
+  },
   "ntjlWR": {
     "defaultMessage": "comment"
   },
@@ -361,12 +378,13 @@
     "defaultMessage": "Explore Matters",
     "description": "src/views/Help/index.tsx"
   },
-  "qswU4E": {
-    "defaultMessage": "Email will not be used as a login but only as a contact channel.",
-    "description": ""},
   "qYzBk8": {
     "defaultMessage": "unsubscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "qswU4E": {
+    "defaultMessage": "Email will not be used as a login but only as a contact channel.",
+    "description": ""
   },
   "rXbLl7": {
     "defaultMessage": "Migrate to Matters",
@@ -380,6 +398,10 @@
     "defaultMessage": "Log in",
     "description": "src/components/Buttons/Login/index.tsx"
   },
+  "sncOwi": {
+    "defaultMessage": "mentioned you in an article",
+    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
   "stjoBH": {
     "defaultMessage": "Now, go like the authors you support! Your Likes will become their income",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
@@ -388,28 +410,13 @@
     "defaultMessage": "Email",
     "description": ""
   },
+  "t7ah39": {
+    "defaultMessage": "just became the maintainer of a tag your article is in. Check out more articles under this tag",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+  },
   "t8/r8X": {
     "defaultMessage": "Continue with Wallet",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
-  "v6YjIn": {
-    "defaultMessage": "Account",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
-  "wSEOxH": {
-    "defaultMessage": "Contact Channel",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
-  "xGh9O7": {
-    "defaultMessage": "As a reminder, the email address will not be used as a login but only as a contact channel.",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
-  "xiKjd/": {
-    "defaultMessage": "Continue with Email",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"},
-  "sncOwi": {
-    "defaultMessage": "mentioned you in an article",
-    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
   },
   "tQsujN": {
     "defaultMessage": "replied to topics and mentioned you",
@@ -423,9 +430,29 @@
     "defaultMessage": "posted and replied to topics and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "v6YjIn": {
+    "defaultMessage": "Account",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "wSEOxH": {
+    "defaultMessage": "Contact Channel",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
   "wqaNK4": {
     "defaultMessage": "in your circle",
     "description": ""
+  },
+  "xGh9O7": {
+    "defaultMessage": "As a reminder, the email address will not be used as a login but only as a contact channel.",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "xiKjd/": {
+    "defaultMessage": "Continue with Email",
+    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "xwj01D": {
+    "defaultMessage": "invites you to become a collaborator",
+    "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
   },
   "z4NaU2": {
     "defaultMessage": "Your",

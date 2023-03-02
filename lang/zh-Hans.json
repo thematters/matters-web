@@ -338,15 +338,11 @@
     "defaultMessage": " 提现流程已开始，到帐时间请关注银行提醒。",
     "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
   },
-  "G0AvRm": {
-    "defaultMessage": "追踪了你的圍爐",
-    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
-  },
   "nto8ly": {
     "defaultMessage": "订阅了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
-  "lh/zbl": {
+  "qYzBk8": {
     "defaultMessage": "退订了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
@@ -431,7 +427,7 @@
     "description": ""
   },
   "hk2aiz": {
-    "defaultMessage": " 追踪了你的",
+    "defaultMessage": " 追踪了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "mPe6DK": {
@@ -473,5 +469,25 @@
   "/3G89K": {
     "defaultMessage": " 又成长了",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+  },
+  "xwj01D": {
+    "defaultMessage": " 邀请你成为标签的协作者",
+    "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
+  },
+  "t7ah39": {
+    "defaultMessage": " 成为了标签的主理人，你的作品也在其中。快来看看其他作者的精彩创作吧",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+  },
+  "O03Rkc": {
+    "defaultMessage": " 辞去了权限。你可以邀请新的协作者加入了",
+    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "dsBCfK": {
+    "defaultMessage": "哎呀，标签协作者",
+    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "Jc+W6M": {
+    "defaultMessage": " 辞去了标签主理人权限，你要不要试试看成为新的主理人？",
+    "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
   }
 }
