@@ -6,6 +6,30 @@
   "/asuIY": {
     "defaultMessage": "Enter Community",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
+  }, 
+  "+AdTsY": {
+    "defaultMessage": "Discussion and mentioned you",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "+hfUcV": {
+    "defaultMessage": "sent a new broadcast on {circlename}",
+    "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
+  },
+  "/3G89K": {
+    "defaultMessage": "is growing",
+    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+  },
+  "/nu5ho": {
+    "defaultMessage": "replied to your comment on",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "2eebTb": {
+    "defaultMessage": "bookmarked your article",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "3WKlPP": {
+    "defaultMessage": "commented in",
+    "description": ""
   },
   "3uQKhx": {
     "defaultMessage": "Please email",
@@ -31,6 +55,30 @@
     "defaultMessage": "Start creating now!",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
+  "4vkwo0": {
+    "defaultMessage": "Your article has been republished to decentralized network",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
+  },
+  "5sAbzJ": {
+    "defaultMessage": "started a new topic",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "7wEMbb": {
+    "defaultMessage": "Followed You",
+    "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
+  },
+  "A3LOng": {
+    "defaultMessage": "replied to topics",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "BHFHeY": {
+    "defaultMessage": "commented in {commentCircle}",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "BjzRe8": {
+    "defaultMessage": ". Take a look at your income",
+    "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
   "BqXRy4": {
     "defaultMessage": "Download App",
     "description": "src/views/Help/index.tsx"
@@ -45,7 +93,11 @@
   },
   "EwVnoC": {
     "defaultMessage": "I have read and agree to",
-    "description": ""
+    "description": ""},
+    
+  "FALWef": {
+    "defaultMessage": "commented in Broadcast",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
@@ -69,7 +121,22 @@
   },
   "J+LXrH": {
     "defaultMessage": "User registered by email can login and enable wallet login later",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"},
+  "GBm/sD": {
+    "defaultMessage": "posted a new topic and mentioned you",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "ISn3eZ": {
+    "defaultMessage": "Broadcast and mentioned you",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "J3yk6u": {
+    "defaultMessage": "in circle",
+    "description": ""
+  },
+  "JIjMWL": {
+    "defaultMessage": "Your article has been published to decentralized network",
+    "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
   "JMRVO6": {
     "defaultMessage": "Matters Community",
@@ -93,7 +160,26 @@
   },
   "NzfL1d": {
     "defaultMessage": "Enter password again",
-    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
+    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"},
+  "KZlRde": {
+    "defaultMessage": "replied to",
+    "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
+  },
+  "KyWDUu": {
+    "defaultMessage": "invites you to join Circle for",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
+  "LW1aX1": {
+    "defaultMessage": "Congrats!",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
+  "PjT72J": {
+    "defaultMessage": "liked your article",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
+  },
+  "QV19cI": {
+    "defaultMessage": "Failed to republish article",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
   "RKs1fz": {
     "defaultMessage": "Open Source",
@@ -117,7 +203,46 @@
   },
   "YjNkcK": {
     "defaultMessage": "To change, switch it directly on your wallet",
-    "description": ""
+    "description": ""},
+  "U/Tqmx": {
+    "defaultMessage": "commented on your bookmarked article",
+    "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
+  },
+  "UgvfcU": {
+    "defaultMessage": "You have successfully completed Ethereum wallet settings. Please confirm wallet address:",
+    "description": "src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
+  },
+  "VO4Elt": {
+    "defaultMessage": "mentioned you in a comment on {commentArticle}",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "VjxGd7": {
+    "defaultMessage": "commented on",
+    "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
+  },
+  "YIes/F": {
+    "defaultMessage": "etc. {actorsCount} users",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "YlxpJl": {
+    "defaultMessage": "Broadcast and mentioned you in comment",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "ZUPQzl": {
+    "defaultMessage": "comment",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "aaUBvF": {
+    "defaultMessage": "comment_circle",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "b+LSgI": {
+    "defaultMessage": "replied to your discussion on",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "bVZDVx": {
+    "defaultMessage": "withdrawal process has started. Please refer to your bank for payout status.",
+    "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
   },
   "cfL5uk": {
     "defaultMessage": "Over 200 words, current {numbers}",
@@ -185,7 +310,30 @@
   },
   "nmZI+U": {
     "defaultMessage": "Terms and Privacy Policy",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"},
+  "euNJsE": {
+    "defaultMessage": "A new article has been added to the circle, read it now!",
+    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+  },
+  "ftD7Hy": {
+    "defaultMessage": "mentioned you",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "g/L3Fm": {
+    "defaultMessage": "posted and replied to topics",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "hk2aiz": {
+    "defaultMessage": "followed your circle",
+    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "jF+Mle": {
+    "defaultMessage": "days for free. Try it and have fun!",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
+  "mPe6DK": {
+    "defaultMessage": "subscribed your circle",
+    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "nmmItN": {
     "defaultMessage": "About Us",
@@ -193,11 +341,21 @@
   },
   "nsaJRn": {
     "defaultMessage": "Logged in successfully",
-    "description": ""
+    "description": ""},
+  "ntjlWR": {
+    "defaultMessage": "comment"
   },
   "q7jZPx": {
     "defaultMessage": "Term of Services",
     "description": "src/views/Help/index.tsx"
+  },
+  "qPPrzm": {
+    "defaultMessage": "supported your article",
+    "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
+  "qQmSxu": {
+    "defaultMessage": "Airdrop registration completed. Your NFT will be revealed on November 12. Confirm your ETH wallet address:",
+    "description": "src/components/Notice/CryptoNotice/CryptoWalletAirdropNotice.tsx"
   },
   "qXcvBF": {
     "defaultMessage": "Explore Matters",
@@ -205,7 +363,10 @@
   },
   "qswU4E": {
     "defaultMessage": "Email will not be used as a login but only as a contact channel.",
-    "description": ""
+    "description": ""},
+  "qYzBk8": {
+    "defaultMessage": "unsubscribed your circle",
+    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "rXbLl7": {
     "defaultMessage": "Migrate to Matters",
@@ -245,6 +406,29 @@
   },
   "xiKjd/": {
     "defaultMessage": "Continue with Email",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"},
+  "sncOwi": {
+    "defaultMessage": "mentioned you in an article",
+    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
+  "tQsujN": {
+    "defaultMessage": "replied to topics and mentioned you",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "uqmi/b": {
+    "defaultMessage": "pinned your comment on",
+    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
+  "uuEGON": {
+    "defaultMessage": "posted and replied to topics and mentioned you",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "wqaNK4": {
+    "defaultMessage": "in your circle",
+    "description": ""
+  },
+  "z4NaU2": {
+    "defaultMessage": "Your",
+    "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
   }
 }

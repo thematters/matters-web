@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { PaymentPayoutNoticeFragment } from '~/gql/graphql'
 
 import NoticeDate from '../NoticeDate'
@@ -23,18 +23,18 @@ const PaymentPayoutNotice = ({
 
       <section className="content-wrap">
         <p>
-          <Translate zh_hant="你的 " zh_hans="你的 " en="Your " />
+          <FormattedMessage
+            defaultMessage="Your"
+            description="src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
+          />
           {tx && (
             <span className="highlight">
               {tx.amount} {tx.currency}
             </span>
           )}
-          <Translate
-            zh_hant={' 提現流程已開始，到帳時間請關注銀行提醒。'}
-            zh_hans={' 提现流程已开始，到帐时间请关注银行提醒。'}
-            en={
-              ' withdrawal process has started. Please refer to your bank for payout status.'
-            }
+          <FormattedMessage
+            defaultMessage="withdrawal process has started. Please refer to your bank for payout status."
+            description="src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
           />
         </p>
 

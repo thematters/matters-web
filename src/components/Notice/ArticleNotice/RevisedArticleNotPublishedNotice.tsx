@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { RevisedArticleNotPublishedNoticeFragment } from '~/gql/graphql'
 
 import NoticeArticleCard from '../NoticeArticleCard'
@@ -26,10 +26,9 @@ const RevisedArticleNotPublishedNotice = ({
 
       <section className="content-wrap">
         <NoticeHead>
-          <Translate
-            zh_hant="你的修訂作品發布失敗"
-            zh_hans="你的修订作品发布失败"
-            en="Failed to republish article"
+          <FormattedMessage
+            defaultMessage="Failed to republish article"
+            description="src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
           />
         </NoticeHead>
 

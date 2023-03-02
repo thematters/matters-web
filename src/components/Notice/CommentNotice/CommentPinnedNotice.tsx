@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { CommentPinnedNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -36,13 +36,12 @@ const CommentPinnedNotice = ({
       <section className="content-wrap">
         <NoticeHead>
           <NoticeActorName user={actor} />
-          <Translate
-            zh_hant=" 置頂了你在作品 "
-            zh_hans=" 置顶了你在作品 "
-            en=" pinned your comment on "
+          <FormattedMessage
+            defaultMessage="pinned your comment on"
+            description="src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
           />
           {commentArticle && <NoticeArticleTitle article={commentArticle} />}
-          <Translate zh_hant=" 的評論" zh_hans=" 的评论" en="" />
+          <FormattedMessage defaultMessage="comment" />
         </NoticeHead>
 
         <NoticeComment comment={notice.comment} />
