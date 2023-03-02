@@ -179,7 +179,7 @@
     "defaultMessage": "Not for login",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "PUcDNi": {
+  "qswU4E": {
     "defaultMessage": "Email will not be used as a login but only as a contact channel.",
     "description": ""
   },
@@ -338,15 +338,11 @@
     "defaultMessage": " withdrawal process has started. Please refer to your bank for payout status.",
     "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
   },
-  "G0AvRm": {
-    "defaultMessage": " followed your circle",
-    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
-  },
   "nto8ly": {
     "defaultMessage": " subscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
-  "lh/zbl": {
+  "qYzBk8": {
     "defaultMessage": " unsubscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
@@ -473,5 +469,25 @@
   "wqaNK4": {
     "defaultMessage": " in your circle ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "xwj01D": {
+    "defaultMessage": " invites you to become a collaborator",
+    "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
+  },
+  "t7ah39": {
+    "defaultMessage": " just became the maintainer of a tag your article is in. Check out more articles under this tag",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+  },
+  "O03Rkc": {
+    "defaultMessage": " resigned as tag collaborator. You can invite new collaborators to join",
+    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "dsBCfK": {
+    "defaultMessage": "uh-oh,",
+    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "Jc+W6M": {
+    "defaultMessage": " resigned as tag maintainer. Would you like to be the new tag maintainer?",
+    "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
   }
 }

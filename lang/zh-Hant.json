@@ -179,7 +179,7 @@
     "defaultMessage": "非登入用途",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "PUcDNi": {
+  "qswU4E": {
     "defaultMessage": "信箱將不作為登入使用，僅作為聯繫渠道",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
@@ -338,15 +338,11 @@
     "defaultMessage": "提現流程已開始，到帳時間請關注銀行提醒。",
     "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
   },
-  "G0AvRm": {
-    "defaultMessage": "追蹤了你的圍爐",
-    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
-  },
   "nto8ly": {
     "defaultMessage": "訂閱了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
-  "lh/zbl": {
+  "qYzBk8": {
     "defaultMessage": "退訂了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
@@ -473,5 +469,26 @@
   "/3G89K": {
     "defaultMessage": " 又成長了",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
-  }
+  },
+  "xwj01D": {
+    "defaultMessage": " 邀请你成为標籤的协作者",
+    "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
+  },
+  "t7ah39": {
+    "defaultMessage": " 成為了標籤的主理人，你的作品也在其中。快來看看其他作者的精彩創作吧",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+  },
+  "O03Rkc": {
+    "defaultMessage": " 辭去了權限。你可以邀請新的協作者加入了",
+    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "dsBCfK": {
+  "defaultMessage": "哎呀，標籤協作者",
+  "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+},
+"Jc+W6M": {
+  "defaultMessage": " 辭去了標籤主理人權限，你要不要試試看成為新的主理人？",
+  "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
 }
+}
+

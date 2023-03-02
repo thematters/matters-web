@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { TagAdoptionNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -31,11 +31,7 @@ const TagAdoptionNotice = ({
       <section className="content-wrap">
         <NoticeHead>
           <NoticeActorName user={actor} />
-          <Translate
-            zh_hant=" 成為了標籤的主理人，你的作品也在其中。快來看看其他作者的精彩創作吧"
-            zh_hans=" 成为了标签的主理人，你的作品也在其中。快来看看其他作者的精彩创作吧"
-            en=" just became the maintainer of a tag your article is in. Check out more articles under this tag"
-          />
+          <FormattedMessage defaultMessage="just became the maintainer of a tag your article is in. Check out more articles under this tag" description="src/components/Notice/TagNotice/TagAdoptionNotice.tsx"/>
         </NoticeHead>
 
         <NoticeTag tag={notice.tag} />
