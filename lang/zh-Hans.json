@@ -42,5 +42,217 @@
   "rXbLl7": {
     "defaultMessage": "一键搬家",
     "description": "src/views/Help/index.tsx"
+  },
+  "7wEMbb": {
+    "defaultMessage": "追踪了你",
+    "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
+  },
+  "KZlRde": {
+    "defaultMessage": " 关联了你的作品 ",
+    "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
+  },
+  "/nu5ho": {
+    "defaultMessage": "回复了你在作品 ",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "ZUPQzl": {
+    "defaultMessage": " 的评论",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "b+LSgI": {
+    "defaultMessage": "回复了你在围炉 ",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "aaUBvF": {
+    "defaultMessage": " 中的发言",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "DIQKiC": {
+    "defaultMessage": " 在作品 ",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "jqACL/": {
+    "defaultMessage": " 的评论中提及你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "+AdTsY": {
+    "defaultMessage": " 众聊提及你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "ISn3eZ": {
+    "defaultMessage": " 广播提及你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "uqmi/b": {
+    "defaultMessage": " 置顶了你在作品 ",
+    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
+  "VjxGd7": {
+    "defaultMessage": "评论了作品 ",
+    "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
+  },
+  "U/Tqmx": {
+    "defaultMessage": "评论了你收藏的作品 ",
+    "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
+  },
+  "VoOZni": {
+    "defaultMessage": "在围炉 ",
+    "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
+  },
+  "oaDToH": {
+    "defaultMessage": " 发布了新广播",
+    "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
+  },
+  "qPPrzm": {
+    "defaultMessage": " 支持了你的作品 ",
+    "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
+  "BjzRe8": {
+    "defaultMessage": "，快去查看自己的收入吧！",
+    "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
+  "z4NaU2": {
+    "defaultMessage": "你的 ",
+    "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
+  },
+  "bVZDVx": {
+    "defaultMessage": " 提现流程已开始，到帐时间请关注银行提醒。",
+    "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
+  },
+  "G0AvRm": {
+    "defaultMessage": "追踪了你的圍爐",
+    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "nto8ly": {
+    "defaultMessage": "订阅了你的围炉",
+    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "lh/zbl": {
+    "defaultMessage": "退订了你的围炉",
+    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "LW1aX1": {
+    "defaultMessage": "恭喜你！",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
+  "KyWDUu": {
+    "defaultMessage": " 邀请你免费加入围炉 ",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
+  "jF+Mle": {
+    "defaultMessage": " 天，前去免费体验，与大家谈天说地吧。",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
+  "wqaNK4": {
+    "defaultMessage": "在你的围炉 ",
+    "description": ""
+  },
+  "FALWef": {
+    "defaultMessage": " 广播中留言 ",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "YlxpJl": {
+    "defaultMessage": " 广播中留言，其中有提及你 ",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "qQmSxu": {
+    "defaultMessage": "你已成功登记参加空投且完成以太坊钱包设定，空投活动将在 2021/11/12 进行。你设定的空投地址：",
+    "description": "src/components/Notice/CryptoNotice/CryptoWalletAirdropNotice.tsx"
+  },
+  "UgvfcU": {
+    "defaultMessage": "你已完成以太坊钱包设定。你设定的地址：",
+    "description": "src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
+  },
+  "+hfUcV": {
+    "defaultMessage": "在围炉 {circlename} 发布了新广播",
+    "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
+  },
+  "An0rpe": {
+    "defaultMessage": "{circlename} 广播中留言 ",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "VO4Elt": {
+    "defaultMessage": " 在作品 {commentArticle} 的评论中提及你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "BHFHeY": {
+    "defaultMessage": " 在围炉 {commentCircle}",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "5sAbzJ": {
+    "defaultMessage": " 众聊中发表话题 ",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "A3LOng": {
+    "defaultMessage": " 众聊中回复话题 ",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "ftD7Hy": {
+    "defaultMessage": " 众聊提及了你 ",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "g/L3Fm": {
+    "defaultMessage": " 众聊中发表与回复话题 ",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "GBm/sD": {
+    "defaultMessage": " 众聊中发表话题，其中有提及你 ",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "tQsujN": {
+    "defaultMessage": " 众聊中回复话题，其中有提到你 ",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "uuEGON": {
+    "defaultMessage": " 众聊中发表与回复话题，其中有提到你 ",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "J3yk6u": {
+    "defaultMessage": "在围炉 ",
+    "description": ""
+  },
+  "hk2aiz": {
+    "defaultMessage": " 追踪了你的",
+    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "mPe6DK": {
+    "defaultMessage": " 订阅了你的围炉",
+    "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "JIjMWL": {
+    "defaultMessage": "你的作品已发布到分布式网络",
+    "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
+  },
+  "sncOwi": {
+    "defaultMessage": " 在作品中提及你",
+    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
+  "2eebTb": {
+    "defaultMessage": " 收藏了你的作品",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "YIes/F": {
+    "defaultMessage": "等 {actorsCount} 人",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "PjT72J": {
+    "defaultMessage": "喜欢并赞赏了你的作品",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
+  },
+  "4vkwo0": {
+    "defaultMessage": "你的修订作品已发布到分布式网络",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
+  },
+  "QV19cI": {
+    "defaultMessage": "你的修订作品发布失败",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
+  },
+  "euNJsE": {
+    "defaultMessage": "新作品已经加入围炉，马上前往阅读吧!",
+    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+  },
+  "/3G89K": {
+    "defaultMessage": " 又成长了",
+    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   }
 }

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Translate } from '~/components'
 import { CircleNewBroadcastNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -55,19 +55,17 @@ const CircleNewBroadcastNotice = ({
       <section className="content-wrap">
         <NoticeHead>
           <NoticeHeadActors actors={notice.actors} />
-
-          <Translate
-            zh_hant="在圍爐 "
-            zh_hans="在围炉 "
-            en={` sent a new broadcast on `}
-          />
-          {commentCircle && (
-            <NoticeCircleName circle={commentCircle} path={circleCommentPath} />
-          )}
-          <Translate
-            zh_hant={` 發布了新廣播`}
-            zh_hans={` 发布了新广播`}
-            en=""
+          <FormattedMessage
+            defaultMessage=" sent a new broadcast on {circlename}"
+            values={{
+              circlename: commentCircle && (
+                <NoticeCircleName
+                  circle={commentCircle || null}
+                  path={circleCommentPath}
+                />
+              ),
+            }}
+            description="src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
           />
         </NoticeHead>
 
