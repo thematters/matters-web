@@ -95,7 +95,7 @@
     "defaultMessage": "你的站内暱称，之后可以修改",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
-  "Jw2dhR": {
+  "5sg7KC": {
     "defaultMessage": "密码",
     "description": ""
   },
@@ -135,9 +135,9 @@
     "defaultMessage": "上站成功",
     "description": ""
   },
-  "ITLe+5": {
+  "lD4FPZ": {
     "defaultMessage": "请输入邮箱",
-    "description": "src/components/Forms/EmailLoginForm/index.tsx"
+    "description": ""
   },
   "IFY8r4": {
     "defaultMessage": "请输入密码",
@@ -167,9 +167,9 @@
     "defaultMessage": "连接加密钱包",
     "description": ""
   },
-  "NR4iCw": {
+  "YjNkcK": {
     "defaultMessage": "若要变更地址，请直接操作钱包切換",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+    "description": ""
   },
   "wSEOxH": {
     "defaultMessage": "联系渠道",
@@ -235,8 +235,32 @@
     "defaultMessage": "账户",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "fxAOT2": {
+  "H8KGyc": {
     "defaultMessage": "进入",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+    "description": ""
+  },
+  "sy+pv5": {
+    "defaultMessage": "邮箱",
+    "description": ""
+  },
+  "JxlxVc": {
+    "defaultMessage": "忘记密码？",
+    "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "deEeEI": {
+    "defaultMessage": "注册",
+    "description": ""
+  },
+  "N2IrpM": {
+    "defaultMessage": "确认",
+    "description": ""
+  },
+  "EwVnoC": {
+    "defaultMessage": "我已阅读并同意",
+    "description": ""
+  },
+  "9+Ddtu": {
+    "defaultMessage": "下一步",
+    "description": ""
   }
 }

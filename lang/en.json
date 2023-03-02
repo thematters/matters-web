@@ -95,7 +95,7 @@
     "defaultMessage": "Your Matters display name, can be changed later",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
-  "Jw2dhR": {
+  "5sg7KC": {
     "defaultMessage": "Password",
     "description": ""
   },
@@ -135,7 +135,7 @@
     "defaultMessage": "Logged in successfully",
     "description": ""
   },
-  "ITLe+5": {
+  "lD4FPZ": {
     "defaultMessage": "Enter Email",
     "description": ""
   },
@@ -163,7 +163,7 @@
     "defaultMessage": "Connect Wallet",
     "description": ""
   },
-  "NR4iCw": {
+  "YjNkcK": {
     "defaultMessage": "To change, switch it directly on your wallet",
     "description": ""
   },
@@ -231,8 +231,32 @@
     "defaultMessage": "Account",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "fxAOT2": {
+  "H8KGyc": {
     "defaultMessage": "Enter",
+    "description": ""
+  },
+  "sy+pv5": {
+    "defaultMessage": "Email",
+    "description": ""
+  },
+  "JxlxVc": {
+    "defaultMessage": "Forget Password",
+    "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "deEeEI": {
+    "defaultMessage": "Register",
+    "description": ""
+  },
+  "N2IrpM": {
+    "defaultMessage": "Confirm",
+    "description": ""
+  },
+  "EwVnoC": {
+    "defaultMessage": "I have read and agree to",
+    "description": ""
+  },
+  "9+Ddtu": {
+    "defaultMessage": "Next",
     "description": ""
   }
 }
