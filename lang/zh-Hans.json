@@ -99,9 +99,9 @@
     "defaultMessage": "密码",
     "description": ""
   },
-  "vYKecW": {
+  "ml3SZN": {
     "defaultMessage": "至少 8 个字符，支持英文大小写字母、数字和特殊符号",
-    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
+    "description": ""
   },
   "NzfL1d": {
     "defaultMessage": "再次输入密码",
