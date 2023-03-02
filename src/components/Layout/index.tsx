@@ -2,7 +2,14 @@ import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 
-import { Head, Media, SearchBar, useRoute } from '~/components'
+import {
+  Head,
+  Media,
+  PullToRefresh,
+  SearchBar,
+  usePullToRefresh,
+  useRoute,
+} from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ClientPreferenceQuery } from '~/gql/graphql'
 
@@ -107,16 +114,21 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
     hasOnboardingTasks: showOnboardingTasks,
   })
 
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(() => window.location.reload())
+
   return (
     <>
       <article className={articleClasses}>
-        {children}
+        <PullToRefresh>
+          {children}
 
-        {showOnboardingTasks && (
-          <Media lessThan="xl">
-            <DynamicOnboardingTasksNavBar />
-          </Media>
-        )}
+          {showOnboardingTasks && (
+            <Media lessThan="xl">
+              <DynamicOnboardingTasksNavBar />
+            </Media>
+          )}
+        </PullToRefresh>
       </article>
 
       <aside className="l-col-three-right">

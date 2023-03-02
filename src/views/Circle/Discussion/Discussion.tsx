@@ -92,9 +92,8 @@ const CricleDiscussion = () => {
    * Fragment Patterns
    *
    * 0. ``
-   * 1. `#comments`
-   * 2. `#parentCommentId`
-   * 3. `#parentComemntId-childCommentId`
+   * 1. `#parentCommentId`
+   * 2. `#parentComemntId-childCommentId`
    */
   let fragment = ''
   let parentId = ''
@@ -251,7 +250,7 @@ const CricleDiscussion = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="discussion" id="comments">
+      <section className="discussion">
         {!circle.owner.isBlocking && (
           <header>
             <CommentForm

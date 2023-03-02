@@ -68,6 +68,9 @@ const ViewerFragments = {
     private: gql`
       fragment ViewerUserPrivate on User {
         id
+        status {
+          role
+        }
         articles(input: { first: 0 }) {
           totalCount
         }

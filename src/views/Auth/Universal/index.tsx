@@ -1,5 +1,7 @@
 import dynamic from 'next/dynamic'
+import { useContext, useEffect } from 'react'
 
+import { PATHS } from '~/common/enums'
 import {
   Head,
   Layout,
@@ -8,6 +10,7 @@ import {
   useRoute,
   useStep,
   VerificationLinkSent,
+  ViewerContext,
   WagmiProvider,
 } from '~/components'
 import { AuthResultType } from '~/gql/graphql'
@@ -61,7 +64,8 @@ type Step =
   | 'complete'
 
 const UniversalAuth = () => {
-  const { getQuery } = useRoute()
+  const viewer = useContext(ViewerContext)
+  const { getQuery, router } = useRoute()
   const email = getQuery('email')
   const code = getQuery('code')
   const displayName = getQuery('displayName')
@@ -71,6 +75,12 @@ const UniversalAuth = () => {
       ? 'email-sign-up-password'
       : 'select-login-method'
   const { currStep, forward } = useStep<Step>(initStep)
+
+  useEffect(() => {
+    if (!viewer.id) return
+
+    router.push(PATHS.HOME)
+  }, [viewer.id])
 
   return (
     <Layout.Main smBgColor="grey-lighter">

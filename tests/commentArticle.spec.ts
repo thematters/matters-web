@@ -7,6 +7,7 @@ import {
   ArticleDetailPage,
   authedTest,
   NotificationsPage,
+  pageGoto,
   UserProfilePage,
 } from './helpers'
 
@@ -26,14 +27,14 @@ test.describe('Comment to article', () => {
       expect(aliceArticleLink).toBeTruthy()
 
       // [Bob] Go to Alice's article page
-      await bobPage.goto(aliceArticleLink)
+      await pageGoto(bobPage, aliceArticleLink)
       const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
 
       // [Bob] Send a comment
       const commentContent = await aliceArticleDetail.sendComment()
 
       // [Bob] Expect article detail shows this comment
-      await expect(bobPage.getByText(commentContent)).toBeVisible()
+      await expect(bobPage.getByText(commentContent).first()).toBeVisible()
 
       // [Alice] Go to notifications page
       const aliceNotifications = new NotificationsPage(alicePage)

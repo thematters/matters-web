@@ -150,7 +150,11 @@ export const validateComparedUserName = (
   }
 }
 
-export const validateDisplayName = (value: string, lang: Language) => {
+export const validateDisplayName = (
+  value: string,
+  lang: Language,
+  isAdmin?: boolean
+) => {
   if (!value) {
     return translate({ id: 'required', lang })
   }
@@ -172,7 +176,7 @@ export const validateDisplayName = (value: string, lang: Language) => {
   }
 
   const invalidNameIndex = RESERVED_NAMES.indexOf(value.toLowerCase())
-  if (invalidNameIndex >= 0) {
+  if (invalidNameIndex >= 0 && !isAdmin) {
     return translate({
       zh_hant: `不能使用「${RESERVED_NAMES[invalidNameIndex]}」`,
       zh_hans: `不能使用 “${RESERVED_NAMES[invalidNameIndex]}”`,
