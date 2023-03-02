@@ -64,7 +64,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
     [`textIndent`]: textIndent,
   })
 
-  const richWrapperClassed = classNames({
+  const richWrapperClasses = classNames({
     richWrapper: true,
     [`${bgColor}`]: !!bgColor,
   })
@@ -154,7 +154,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
           {isRichShow && (
             <>
               <div
-                className={richWrapperClassed}
+                className={richWrapperClasses}
                 style={{ maxHeight: `${limit * lineHeight}px` }}
               >
                 {children}
