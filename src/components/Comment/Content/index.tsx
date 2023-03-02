@@ -17,6 +17,7 @@ interface ContentProps {
   comment: ContentCommentPublicFragment & Partial<ContentCommentPrivateFragment>
   type: CommentFormType
   size?: 'sm' | 'md-s'
+  bgColor?: 'grey-lighter' | 'white'
 }
 
 const fragments = {
@@ -40,7 +41,7 @@ const fragments = {
   },
 }
 
-const Content = ({ comment, type, size }: ContentProps) => {
+const Content = ({ comment, type, size, bgColor }: ContentProps) => {
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
 
@@ -75,7 +76,12 @@ const Content = ({ comment, type, size }: ContentProps) => {
   if (state === 'active') {
     return (
       <>
-        <Expandable content={content} limit={limit} isRichShow>
+        <Expandable
+          content={content}
+          limit={limit}
+          isRichShow
+          bgColor={bgColor}
+        >
           <section
             className={`${contentClasses} u-content-comment`}
             dangerouslySetInnerHTML={{

@@ -32,6 +32,7 @@ interface ExpandableProps {
   spacingTop?: 'base'
   textIndent?: boolean
   isRichShow?: boolean
+  bgColor?: 'grey-lighter' | 'white'
 }
 
 export const Expandable: React.FC<ExpandableProps> = ({
@@ -44,6 +45,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   spacingTop,
   textIndent = false,
   isRichShow = false,
+  bgColor = 'white',
 }) => {
   const [expandable, setExpandable] = useState(false)
   const [lineHeight, setLineHeight] = useState(24)
@@ -60,6 +62,11 @@ export const Expandable: React.FC<ExpandableProps> = ({
     [`size-${size}`]: !!size,
     [`spacing-top-${spacingTop}`]: !!spacingTop,
     [`textIndent`]: textIndent,
+  })
+
+  const richWrapperClassed = classNames({
+    richWrapper: true,
+    [`${bgColor}`]: !!bgColor,
   })
 
   useEffect(() => {
@@ -147,7 +154,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
           {isRichShow && (
             <>
               <div
-                className="richWrapper"
+                className={richWrapperClassed}
                 style={{ maxHeight: `${limit * lineHeight}px` }}
               >
                 {children}
