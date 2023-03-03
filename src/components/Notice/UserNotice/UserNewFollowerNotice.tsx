@@ -37,7 +37,7 @@ const UserNewFollowerNotice = ({
         <NoticeHead>
           <NoticeHeadActors actors={notice.actors} />
           <FormattedMessage
-            defaultMessage="Followed You"
+            defaultMessage="followed you"
             description="src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
           />
         </NoticeHead>
