@@ -93,13 +93,13 @@ const CommentMentionedYouNotice = ({
               />
               {commentCircleDiscussion && (
                 <FormattedMessage
-                  defaultMessage="Discussion and mentioned you"
+                  defaultMessage="discussion and mentioned you"
                   description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
                 />
               )}
               {commentCircleBroadcast && (
                 <FormattedMessage
-                  defaultMessage="Broadcast and mentioned you"
+                  defaultMessage="broadcast and mentioned you"
                   description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
                 />
               )}

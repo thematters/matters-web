@@ -262,7 +262,7 @@
   "9+Ddtu": {
     "defaultMessage": "下一步",
     "description": ""},
-  "7wEMbb": {
+  "k5NnNF": {
     "defaultMessage": "追踪了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
@@ -415,11 +415,11 @@
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "tQsujN": {
-    "defaultMessage": " 众聊中回复话题，其中有提到你 ",
+    "defaultMessage": " 众聊中回复话题，其中有提及你 ",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "uuEGON": {
-    "defaultMessage": " 众聊中发表与回复话题，其中有提到你 ",
+    "defaultMessage": " 众聊中发表与回复话题，其中有提及你 ",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "J3yk6u": {
