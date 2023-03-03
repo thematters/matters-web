@@ -1,5 +1,9 @@
 import { analytics } from '~/common/utils'
-import { ArticleDigestConcise, CardExposureTracker } from '~/components'
+import {
+  ArticleDigestConcise,
+  CardExposureTracker,
+  CircleDigest,
+} from '~/components'
 import { UserPublishArticleActivityFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -23,6 +27,9 @@ const UserPublishArticleActivity = ({
       }}
       article={node}
       date={createdAt}
+      footerCircle={
+        node.access.circle && <CircleDigest.Plain circle={node.access.circle} />
+      }
     />
     <CardExposureTracker
       id={node.id}

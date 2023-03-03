@@ -1,4 +1,4 @@
-import { BookmarkButton, CircleDigest, DateTime } from '~/components'
+import { BookmarkButton, DateTime } from '~/components'
 import { FooterActionsConciseArticlePublicFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -9,18 +9,23 @@ export type FooterActionsProps = {
   date?: Date | string | number | boolean
   inCard?: boolean
   tag?: React.ReactNode
+  circle?: React.ReactNode
 }
 
-const FooterActions = ({ article, date, inCard, tag }: FooterActionsProps) => {
+const FooterActions = ({
+  article,
+  date,
+  inCard,
+  tag,
+  circle,
+}: FooterActionsProps) => {
   const hasDate = date !== false
 
   return (
     <footer>
       <section className="left">
         {tag}
-        {article.access.circle && (
-          <CircleDigest.Plain circle={article.access.circle} />
-        )}
+        {circle}
         {hasDate && <DateTime date={date || article.createdAt} />}
       </section>
 
