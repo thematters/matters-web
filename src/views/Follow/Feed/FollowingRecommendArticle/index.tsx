@@ -8,7 +8,6 @@ import {
   ResponsiveImage,
   UserDigest,
 } from '~/components'
-import FollowButton from '~/components/ArticleDigest/Feed/FollowButton'
 import {
   FollowingFeedRecommendArticlePrivateFragment,
   FollowingFeedRecommendArticlePublicFragment,
@@ -57,8 +56,6 @@ const RecommendArticle = ({ article, ...cardProps }: Props) => {
                 hasAvatar
                 hasDisplayName
               />
-
-              <FollowButton user={author} />
             </section>
           </section>
 
