@@ -25,6 +25,7 @@ const AggregateUserResults = () => {
   const q = getQuery('q')
   // TODO: Just test for team, will be removed when release
   const version = getQuery('version')
+  const coefficients = getQuery('coefficients')
 
   /**
    * Data Fetching
@@ -37,6 +38,7 @@ const AggregateUserResults = () => {
         variables: {
           key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
           version: version === '' ? undefined : version,
+          coefficients: coefficients === '' ? undefined : coefficients,
         },
       }
     )
