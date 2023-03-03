@@ -8,6 +8,7 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
     $first: first_Int_min_0 = 30
     $after: String
     $version: SearchAPIVersion = v20230301
+    $coefficients: String
   ) {
     search(
       input: {
@@ -16,6 +17,7 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
         version: $version
         key: $key
         after: $after
+        coefficients: $coefficients
       }
     ) {
       pageInfo {
@@ -44,6 +46,7 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
     $first: first_Int_min_0 = 30
     $after: String
     $version: SearchAPIVersion = v20230301
+    $coefficients: String
   ) {
     search(
       input: {
@@ -52,6 +55,7 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
         first: $first
         key: $key
         after: $after
+        coefficients: $coefficients
       }
     ) {
       pageInfo {
@@ -78,6 +82,7 @@ export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
     $first: first_Int_min_0 = 30
     $after: String
     $version: SearchAPIVersion = v20230301
+    $coefficients: String
   ) {
     search(
       input: {
@@ -86,6 +91,7 @@ export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
         first: $first
         key: $key
         after: $after
+        coefficients: $coefficients
       }
     ) {
       pageInfo {
