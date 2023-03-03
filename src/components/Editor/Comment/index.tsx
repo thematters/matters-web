@@ -1,15 +1,15 @@
-import { useLazyQuery } from '@apollo/react-hooks'
-import { MattersCommentEditor } from '@matters/matters-editor'
-import { useContext } from 'react'
+// import { useLazyQuery } from '@apollo/react-hooks'
+// import { MattersCommentEditor } from '@matters/matters-editor'
+// import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
+// import { ADD_TOAST } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.comment.css'
 import themeStyles from '~/common/styles/vendors/quill.bubble.css'
-import { LanguageContext } from '~/components'
-import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
-import { SearchUsersQuery } from '~/gql/graphql'
+// import { LanguageContext } from '~/components'
+// import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
+// import { SearchUsersQuery } from '~/gql/graphql'
 
-import MentionUserList from '../MentionUserList'
+// import MentionUserList from '../MentionUserList'
 
 interface Props {
   content: string
@@ -17,26 +17,26 @@ interface Props {
   placeholder?: string
 }
 
-type SearchUsersSearchEdgesNodeUser = NonNullable<
-  NonNullable<SearchUsersQuery['search']['edges']>[0]
->['node']
+// type SearchUsersSearchEdgesNodeUser = NonNullable<
+//   NonNullable<SearchUsersQuery['search']['edges']>[0]
+// >['node']
 
 const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
-  const [search, { data, loading }] =
-    useLazyQuery<SearchUsersQuery>(SEARCH_USERS)
-  const { lang } = useContext(LanguageContext)
+  // const [search, { data, loading }] =
+  //   useLazyQuery<SearchUsersQuery>(SEARCH_USERS)
+  // const { lang } = useContext(LanguageContext)
 
-  const mentionUsers = (data?.search.edges || []).map(
-    ({ node }) => node
-  ) as SearchUsersSearchEdgesNodeUser[]
+  // const mentionUsers = (data?.search.edges || []).map(
+  //   ({ node }) => node
+  // ) as SearchUsersSearchEdgesNodeUser[]
 
-  const mentionKeywordChange = (keyword: string) => {
-    search({ variables: { search: keyword, exclude: 'blocked' } })
-  }
+  // const mentionKeywordChange = (keyword: string) => {
+  //   search({ variables: { search: keyword, exclude: 'blocked' } })
+  // }
 
   return (
     <>
-      <MattersCommentEditor
+      {/* <MattersCommentEditor
         editorContent={content}
         editorUpdate={update}
         eventName={ADD_TOAST}
@@ -48,7 +48,7 @@ const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
         readOnly={false}
         theme="bubble"
         texts={placeholder ? { COMMENT_PLACEHOLDER: placeholder } : {}}
-      />
+      /> */}
 
       <style jsx>{themeStyles}</style>
       <style jsx>{editorStyles}</style>

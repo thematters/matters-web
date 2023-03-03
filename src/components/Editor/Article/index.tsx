@@ -1,5 +1,5 @@
 // import { useLazyQuery } from '@apollo/react-hooks'
-// import { MattersArticleEditor } from '@matters/matters-editor'
+import { html2md } from '@matters/matters-editor'
 import Blockquote from '@tiptap/extension-blockquote'
 import Bold from '@tiptap/extension-bold'
 import BulletList from '@tiptap/extension-bullet-list'
@@ -133,9 +133,10 @@ const ArticleEditor: React.FC<Props> = ({
     ],
     content,
     editable: !isReadOnly,
-    onUpdate: ({ editor, transaction }) => {
+    onUpdate: async ({ editor, transaction }) => {
       const content = editor.getHTML()
       console.log(editor, transaction)
+      console.log(await html2md(content))
       update({ content })
     },
   })
