@@ -3,8 +3,8 @@
     "defaultMessage": "Please email",
     "description": "src/views/Help/index.tsx"
   },
-  "7wEMbb": {
-    "defaultMessage": " Followed You",
+  "k5NnNF": {
+    "defaultMessage": " followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
   "BqXRy4": {
@@ -296,11 +296,11 @@
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "+AdTsY": {
-    "defaultMessage": " Discussion and mentioned you",
+    "defaultMessage": " discussion and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "ISn3eZ": {
-    "defaultMessage": " Broadcast and mentioned you",
+    "defaultMessage": " broadcast and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "uqmi/b": {
