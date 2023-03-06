@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Card } from '~/components'
+import { Card, useHover } from '~/components'
 import CommentContent from '~/components/Comment/Content'
 import { NoticeCommentFragment } from '~/gql/graphql'
 
@@ -51,6 +51,8 @@ const NoticeComment = ({
   const circle =
     comment?.node.__typename === 'Circle' ? comment.node : undefined
 
+  const [hoverRef, isHovered] = useHover<HTMLDivElement>()
+
   if (!comment) {
     return null
   }
@@ -66,7 +68,7 @@ const NoticeComment = ({
       : {}
 
   return (
-    <section className="sub-content">
+    <section className="sub-content" ref={hoverRef}>
       <Card
         {...path}
         bgColor="grey-lighter"
@@ -79,6 +81,7 @@ const NoticeComment = ({
           type="article"
           size="sm"
           bgColor="grey-lighter"
+          bgActiveColor={isHovered ? 'grey-lighter' : undefined}
         />
       </Card>
 

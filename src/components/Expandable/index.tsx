@@ -33,6 +33,7 @@ interface ExpandableProps {
   textIndent?: boolean
   isRichShow?: boolean
   bgColor?: 'grey-lighter' | 'white'
+  bgActiveColor?: 'grey-lighter' | 'white'
 }
 
 export const Expandable: React.FC<ExpandableProps> = ({
@@ -46,6 +47,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   textIndent = false,
   isRichShow = false,
   bgColor = 'white',
+  bgActiveColor,
 }) => {
   const [expandable, setExpandable] = useState(false)
   const [lineHeight, setLineHeight] = useState(24)
@@ -67,6 +69,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const richWrapperClasses = classNames({
     richWrapper: true,
     [`${bgColor}`]: !!bgColor,
+    [`${bgActiveColor}-active`]: !!bgActiveColor,
   })
 
   useEffect(() => {
