@@ -1,6 +1,5 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import formatISO from 'date-fns/formatISO'
-import jump from 'jump.js'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
@@ -335,12 +334,7 @@ const BaseArticleDetail = ({
         lock={!canReadFullContent}
       />
 
-      {shouldShowWall && (
-        <>
-          <span id="comments" />
-          <DynamicVisitorWall show={fixedWall} />
-        </>
-      )}
+      {shouldShowWall && <DynamicVisitorWall show={fixedWall} />}
 
       {article.access.circle && (
         <DynamicSubscribeCircleDialog circle={article.access.circle} />
@@ -507,13 +501,6 @@ const ArticleDetail = ({
 
     setEditMode(mode === URL_QS.MODE_EDIT.value)
   }, [mode, article])
-
-  // jump to comment area
-  useEffect(() => {
-    if (window.location.hash && article) {
-      jump('#comments', { offset: -10 })
-    }
-  }, [mediaHash])
 
   /**
    * Render:Loading

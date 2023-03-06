@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { ArticleNewAppreciationNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -40,11 +40,9 @@ const ArticleNewAppreciationNotice = ({
       <section className="content-wrap">
         <NoticeHead>
           <NoticeHeadActors actors={notice.actors} />
-
-          <Translate
-            zh_hant="喜歡並讚賞了你的作品"
-            zh_hans="喜欢并赞赏了你的作品"
-            en=" liked your article"
+          <FormattedMessage
+            defaultMessage="liked your article"
+            description="src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
           />
         </NoticeHead>
 
