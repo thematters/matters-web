@@ -1,5 +1,5 @@
 import { toPath } from '~/common/utils'
-import { Card, Expandable, IconBroadcast24, UserDigest } from '~/components'
+import { Card, IconBroadcast24, UserDigest } from '~/components'
 import CommentContent from '~/components/Comment/Content'
 import { AuthorWidgetCircleFragment } from '~/gql/graphql'
 
@@ -38,16 +38,13 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
               <IconBroadcast24 size="md" />
             </span>
 
-            <Expandable
-              content={pinnedBroadcast.content}
+            <CommentContent
+              comment={pinnedBroadcast}
+              type="circleBroadcast"
               limit={2}
               textIndent={true}
-            >
-              <CommentContent
-                comment={pinnedBroadcast}
-                type="circleBroadcast"
-              />
-            </Expandable>
+              isRichShow={false}
+            />
           </section>
         )}
       </Card>
