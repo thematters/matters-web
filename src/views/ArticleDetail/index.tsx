@@ -406,7 +406,7 @@ const ArticleDetail = ({
    */
   const [privateFetched, setPrivateFetched] = useState(false)
   const loadPrivate = async () => {
-    if (!viewer.isAuthed || !article || !article?.mediaHash) {
+    if (!viewer.isAuthed || !article) {
       return
     }
 
@@ -414,7 +414,7 @@ const ArticleDetail = ({
       query: ARTICLE_DETAIL_PRIVATE,
       fetchPolicy: 'network-only',
       variables: {
-        mediaHash: article?.mediaHash,
+        id: article?.id,
         includeCanSuperLike: viewer.isCivicLiker,
       },
     })
