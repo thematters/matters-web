@@ -20,9 +20,9 @@
     &::after {
       position: absolute;
       right: 0;
-      bottom: 0;
+      bottom: 2rem;
       left: 0;
-      height: 50%;
+      height: 80%;
       pointer-events: none;
       content: '';
     }
