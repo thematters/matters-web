@@ -31,7 +31,10 @@ const TagAddEditorNotice = ({
       <section className="content-wrap">
         <NoticeHead>
           <NoticeActorName user={actor} />
-          <FormattedMessage defaultMessage="invites you to become a collaborator" description="src/components/Notice/TagNotice/TagAddEditorNotice.tsx"/>
+          <FormattedMessage
+            defaultMessage="invites you to become a collaborator"
+            description="src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
+          />
         </NoticeHead>
 
         <NoticeTag tag={notice.tag} />

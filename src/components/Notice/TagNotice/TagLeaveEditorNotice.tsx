@@ -30,9 +30,15 @@ const TagLeaveEditorNotice = ({
 
       <section className="content-wrap">
         <NoticeHead>
-          <FormattedMessage defaultMessage="uh-oh,"  description="src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"/>
+          <FormattedMessage
+            defaultMessage="uh-oh,"
+            description="src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+          />
           <NoticeActorName user={actor} />
-          <FormattedMessage defaultMessage="resigned as tag collaborator. You can invite new collaborators to join" description="src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"/>
+          <FormattedMessage
+            defaultMessage="resigned as tag collaborator. You can invite new collaborators to join"
+            description="src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+          />
         </NoticeHead>
 
         <NoticeTag tag={notice.tag} />

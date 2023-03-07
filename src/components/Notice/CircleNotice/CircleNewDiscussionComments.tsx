@@ -86,10 +86,7 @@ const CircleNewDiscussionComments = ({
                     description=""
                   />
                 ) : (
-                  <FormattedMessage
-                    defaultMessage="in circle"
-                    description=""
-                  />
+                  <FormattedMessage defaultMessage="in circle" description="" />
                 )}
                 <NoticeCircleName
                   circle={notice.circle}
