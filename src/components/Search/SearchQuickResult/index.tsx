@@ -11,6 +11,7 @@ import {
   Media,
   Menu,
   Spacer,
+  Spinner,
   TagDigest,
   UserDigest,
   useRoute,
@@ -86,7 +87,11 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   }, [searchKey])
 
   if (loading) {
-    return null
+    return (
+      <Menu width={inPage ? undefined : 'md'}>
+        <Spinner />
+      </Menu>
+    )
   }
 
   if (!hasUsers && !hasTags) {
