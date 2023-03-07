@@ -31,7 +31,10 @@ const TagAdoptionNotice = ({
       <section className="content-wrap">
         <NoticeHead>
           <NoticeActorName user={actor} />
-          <FormattedMessage defaultMessage="just became the maintainer of a tag your article is in. Check out more articles under this tag" description="src/components/Notice/TagNotice/TagAdoptionNotice.tsx"/>
+          <FormattedMessage
+            defaultMessage="just became the maintainer of a tag your article is in. Check out more articles under this tag"
+            description="src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+          />
         </NoticeHead>
 
         <NoticeTag tag={notice.tag} />

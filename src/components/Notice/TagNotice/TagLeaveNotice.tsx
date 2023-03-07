@@ -27,7 +27,10 @@ const TagLeaveNotice = ({ notice }: { notice: TagLeaveNoticeFragment }) => {
       <section className="content-wrap">
         <NoticeHead>
           <NoticeActorName user={actor} />
-          <FormattedMessage defaultMessage="resigned as tag maintainer. Would you like to be the new tag maintainer?" description="src/components/Notice/TagNotice/TagLeaveNotice.tsx" />
+          <FormattedMessage
+            defaultMessage="resigned as tag maintainer. Would you like to be the new tag maintainer?"
+            description="src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+          />
         </NoticeHead>
 
         <NoticeTag tag={notice.tag} />

@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
@@ -14,7 +15,7 @@ import {
   IconWallet24,
   Menu,
   TextIcon,
-  Translate,
+  // Translate,
   useFeatures,
   ViewerContext,
 } from '~/components'
@@ -52,7 +53,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           spacing="base"
           size={menuItemSize}
         >
-          <Translate id="myProfile" />
+          <FormattedMessage defaultMessage="Profile" description="" />
         </TextIcon>
       </Menu.Item>
       {circlePath && (
@@ -62,7 +63,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
             spacing="base"
             size={menuItemSize}
           >
-            <Translate id="myCircle" />
+            <FormattedMessage defaultMessage="Circle" description="" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -72,7 +73,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           spacing="base"
           size={menuItemSize}
         >
-          <Translate id="myDrafts" />
+          <FormattedMessage defaultMessage="Drafts" description="" />
         </TextIcon>
       </Menu.Item>
       {(features.add_credit || features.payout) && (
@@ -82,7 +83,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
             spacing="base"
             size={menuItemSize}
           >
-            <Translate id="myWallet" />
+            <FormattedMessage defaultMessage="Wallet" description="" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -92,7 +93,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           spacing="base"
           size={menuItemSize}
         >
-          <Translate id="myAnalytics" />
+          <FormattedMessage defaultMessage="Analytics" description="" />
         </TextIcon>
       </Menu.Item>
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_BOOKMARKS} is="link">
@@ -101,7 +102,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           spacing="base"
           size={menuItemSize}
         >
-          <Translate id="myBookmarks" />
+          <FormattedMessage defaultMessage="Bookmarks" description="" />
         </TextIcon>
       </Menu.Item>
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_LIKES_SENT} is="link">
@@ -110,7 +111,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           spacing="base"
           size={menuItemSize}
         >
-          <Translate id="myAppreciations" />
+          <FormattedMessage defaultMessage="Likes" description="" />
         </TextIcon>
       </Menu.Item>
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_HISTORY} is="link">
@@ -119,7 +120,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           spacing="base"
           size={menuItemSize}
         >
-          <Translate id="readHistory" />
+          <FormattedMessage defaultMessage="Read History" description="" />
         </TextIcon>
       </Menu.Item>
     </Menu>

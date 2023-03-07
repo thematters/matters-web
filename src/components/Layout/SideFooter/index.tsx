@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { GUIDE_LINKS, PATHS } from '~/common/enums'
-import { LanguageContext, LanguageSwitch, Translate } from '~/components'
+import { LanguageContext, LanguageSwitch } from '~/components'
 
 import styles from './styles.css'
 
@@ -19,31 +20,40 @@ const SideFooter = () => {
       <section className="links">
         <Link href={PATHS.ABOUT} legacyBehavior>
           <a>
-            <Translate id="about" />
+            <FormattedMessage defaultMessage="About Us" description="" />
           </a>
         </Link>
 
         <Link href={PATHS.GUIDE} legacyBehavior>
           <a>
-            <Translate id="guide" />
+            <FormattedMessage defaultMessage="Explore Matters" description="" />
           </a>
         </Link>
 
         <Link href={PATHS.COMMUNITY} legacyBehavior>
           <a>
-            <Translate id="community" />
+            <FormattedMessage
+              defaultMessage="Matters Community"
+              description=""
+            />
           </a>
         </Link>
 
         <Link href={PATHS.MIGRATION} legacyBehavior>
           <a>
-            <Translate id="migrationSideBar" />
+            <FormattedMessage
+              defaultMessage="Migrate to Matters"
+              description=""
+            />
           </a>
         </Link>
 
         <Link href={PATHS.TOS} legacyBehavior>
           <a>
-            <Translate id="term" />
+            <FormattedMessage
+              defaultMessage="Term of Services"
+              description=""
+            />
           </a>
         </Link>
 
@@ -52,7 +62,7 @@ const SideFooter = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <Translate id="openCommunity" />
+          <FormattedMessage defaultMessage="Open Source" description="" />
         </a>
 
         <a
@@ -60,12 +70,12 @@ const SideFooter = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <Translate id="bugBountyProgram" />
+          <FormattedMessage defaultMessage="Bug Bounty" description="" />
         </a>
 
         <Link href={GUIDE_LINKS.PWA[lang]} legacyBehavior>
           <a>
-            <Translate id="downloadApp" />
+            <FormattedMessage defaultMessage="Download App" description="" />
           </a>
         </Link>
 

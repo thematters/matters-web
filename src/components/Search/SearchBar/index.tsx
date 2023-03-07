@@ -1,14 +1,14 @@
 import dynamic from 'next/dynamic'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
 import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
+import { toPath } from '~/common/utils'
 import {
   Button,
   Dropdown,
   IconSearch16,
-  LanguageContext,
   SearchAutoComplete,
   SearchOverview,
   useRoute,
@@ -29,13 +29,15 @@ const DynamicFormik = dynamic(
 )
 
 const SearchButton = () => {
-  const { lang } = useContext(LanguageContext)
-
+  const intl = useIntl()
   return (
     <Button
       size={['2rem', '2rem']}
       type="submit"
-      aria-label={translate({ id: 'search', lang })}
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Search',
+        description: '',
+      })}
     >
       <IconSearch16 color="grey-dark" />
     </Button>
@@ -48,15 +50,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   const { getQuery, router } = useRoute()
   const q = getQuery('q')
-  const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-  const textAriaLabel = translate({ id: 'search', lang })
-  const textPlaceholder = translate({
-    zh_hant: '搜尋作品、標籤、作者',
-    zh_hans: '搜索作品、标签、作者',
-    en: 'Search articles, tags and authors',
-    lang,
+  const intl = useIntl()
+
+  const textAriaLabel = intl.formatMessage({
+    defaultMessage: 'Search',
+    description: '',
+  })
+  const textPlaceholder = intl.formatMessage({
+    defaultMessage: 'Search articles, tags and authors',
+    description: 'src/components/Search/SearchBar/index.tsx',
   })
 
   // dropdown

@@ -7,17 +7,17 @@
     "defaultMessage": "若你希望向 Matters 提出建議，或遭遇操作異常，请發送郵件至",
     "description": "src/views/Help/index.tsx"
   },
-  "BqXRy4": {
+  "/ns2st": {
     "defaultMessage": "下載應用",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "FaTb0A": {
     "defaultMessage": "安裝 MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "JMRVO6": {
+  "FhWC22": {
     "defaultMessage": "社區共建基地",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "RKs1fz": {
     "defaultMessage": "開放社區",
@@ -27,21 +27,21 @@
     "defaultMessage": "，我們會儘快回覆!",
     "description": "src/views/Help/index.tsx"
   },
-  "nmmItN": {
+  "ZjDH42": {
     "defaultMessage": "關於我們",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "q7jZPx": {
+  "6flWFg": {
     "defaultMessage": "用戶協議",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "qXcvBF": {
+  "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "rXbLl7": {
+  "HzaRKA": {
     "defaultMessage": "一鍵搬家",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "fOgusL": {
     "defaultMessage": "選擇進入方式",
@@ -261,7 +261,8 @@
   },
   "9+Ddtu": {
     "defaultMessage": "下一步",
-    "description": ""},
+    "description": ""
+  },
   "k5NnNF": {
     "defaultMessage": "追蹤了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
@@ -483,12 +484,147 @@
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
   "dsBCfK": {
-  "defaultMessage": "哎呀，標籤協作者",
-  "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
-},
-"Jc+W6M": {
-  "defaultMessage": " 辭去了標籤主理人權限，你要不要試試看成為新的主理人？",
-  "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+    "defaultMessage": "哎呀，標籤協作者",
+    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "Jc+W6M": {
+    "defaultMessage": " 辭去了標籤主理人權限，你要不要試試看成為新的主理人？",
+    "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+  },
+  "sT9HoG": {
+    "defaultMessage": "歡迎加入 Matters，一個自由、自主、永續的創作與公共討論空間。",
+    "description": "src/views/Follow/PickAuthors/index.tsx"
+  },
+  "7DIW6+": {
+    "defaultMessage": "暸解更多",
+    "description": ""
+  },
+  "Z6ewE3": {
+    "defaultMessage": "參與開發",
+    "description": "src/views/Me/Settings/AnonymousSettings/Enhance/index.tsx"
+  },
+  "1pFLGZ": {
+    "defaultMessage": "漏洞賞金計畫",
+    "description": ""
+  },
+  "mk+LCk": {
+    "defaultMessage": "介面設定",
+    "description": "src/views/Me/Settings/AnonymousSettings/DisplayPreferences/index.tsx"
+  },
+  "y1Z3or": {
+    "defaultMessage": "修改界面語言",
+    "description": ""
+  },
+  "itPgxd": {
+    "defaultMessage": "個人主頁",
+    "description": ""
+  },
+  "vH8sCb": {
+    "defaultMessage": "我的圍爐",
+    "description": ""
+  },
+  "2atspc": {
+    "defaultMessage": "我的草稿",
+    "description": ""
+  },
+  "3yk8fB": {
+    "defaultMessage": "我的錢包",
+    "description": ""
+  },
+  "GZJpDf": {
+    "defaultMessage": "數據後台",
+    "description": ""
+  },
+  "nGBrvw": {
+    "defaultMessage": "我的收藏",
+    "description": ""
+  },
+  "2slIPX": {
+    "defaultMessage": "我的讚賞",
+    "description": ""
+  },
+  "MkwOFW": {
+    "defaultMessage": "瀏覽紀錄",
+    "description": ""
+  },
+  "fG41Ux": {
+    "defaultMessage": "登出成功",
+    "description": ""
+  },
+  "Szd1tH": {
+    "defaultMessage": "登出失敗，請重試",
+    "description": ""
+  },
+  "HtSDyc": {
+    "defaultMessage": "幫助中心",
+    "description": ""
+  },
+  "D3idYv": {
+    "defaultMessage": "設定",
+    "description": ""
+  },
+  "H0JBH6": {
+    "defaultMessage": "登出",
+    "description": ""
+  },
+  "cE4Hfw": {
+    "defaultMessage": "發現",
+    "description": ""
+  },
+  "cPIKU2": {
+    "defaultMessage": "追蹤",
+    "description": ""
+  },
+  "NAidKb": {
+    "defaultMessage": "通知",
+    "description": ""
+  },
+  "enMIYK": {
+    "defaultMessage": "我的",
+    "description": ""
+  },
+  "xmcVZ0": {
+    "defaultMessage": "搜索",
+    "description": ""
+  },
+  "47FYwb": {
+    "defaultMessage": "關閉",
+    "description": ""
+  },
+  "ll/ufR": {
+    "defaultMessage": "熱門",
+    "description": ""
+  },
+  "adThp5": {
+    "defaultMessage": "最新",
+    "description": ""
+  },
+  "CnPG8j": {
+    "defaultMessage": "精華",
+    "description": ""
+  },
+  "zQvVDJ": {
+    "defaultMessage": "查看全部",
+    "description": ""
+  },
+  "XgdZSb": {
+    "defaultMessage": "值得關注",
+    "description": ""
+  },
+  "kc79d3": {
+    "defaultMessage": "找你想看的",
+    "description": ""
+  },
+  "Pp/0po": {
+    "defaultMessage": "換一批",
+    "description": ""
+  },
+  "6gOpfl": {
+    "defaultMessage": "暫時隱藏公告欄 7 天",
+    "description": "src/views/Home/Announcements/index.tsx"
+  },
+  "pla6ZF": {
+    "defaultMessage": "搜尋作品、標籤、作者",
+    "description": "src/components/Search/SearchBar/index.tsx"
+  }
 }
-}
-
