@@ -261,7 +261,8 @@
   },
   "9+Ddtu": {
     "defaultMessage": "下一步",
-    "description": ""},
+    "description": ""
+  },
   "k5NnNF": {
     "defaultMessage": "追踪了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"

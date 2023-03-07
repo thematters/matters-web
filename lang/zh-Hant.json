@@ -261,7 +261,8 @@
   },
   "9+Ddtu": {
     "defaultMessage": "下一步",
-    "description": ""},
+    "description": ""
+  },
   "k5NnNF": {
     "defaultMessage": "追蹤了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
@@ -483,12 +484,11 @@
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
   "dsBCfK": {
-  "defaultMessage": "哎呀，標籤協作者",
-  "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
-},
-"Jc+W6M": {
-  "defaultMessage": " 辭去了標籤主理人權限，你要不要試試看成為新的主理人？",
-  "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+    "defaultMessage": "哎呀，標籤協作者",
+    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "Jc+W6M": {
+    "defaultMessage": " 辭去了標籤主理人權限，你要不要試試看成為新的主理人？",
+    "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+  }
 }
-}
-

@@ -261,7 +261,8 @@
   },
   "9+Ddtu": {
     "defaultMessage": "Next",
-    "description": ""},
+    "description": ""
+  },
   "KZlRde": {
     "defaultMessage": " replied to ",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"

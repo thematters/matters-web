@@ -23,11 +23,14 @@ import SectionHeader from '../../SectionHeader'
 import styles from './styles.css'
 
 const FEED_TAGS = gql`
-  query FeedTagsPublic($random: random_Int_min_0_max_49) {
+  query FeedTagsPublic(
+    $random: random_Int_min_0_max_49
+    $first: first_Int_min_0
+  ) {
     viewer @connection(key: "viewerFeedTags") {
       id
       recommendation {
-        tags(input: { first: 10, filter: { random: $random } }) {
+        tags(input: { first: $first, filter: { random: $random } }) {
           totalCount
           edges {
             cursor
@@ -50,24 +53,23 @@ const TagsFeed = () => {
     { variables: { id: 'local' } }
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.feedTags
-  const randomMaxSize = 50
 
+  const perPage = 10
+  const randomMaxSize = 50
   const { data, loading, error, refetch } = usePublicQuery<FeedTagsPublicQuery>(
     FEED_TAGS,
     {
       notifyOnNetworkStatusChange: true,
       variables: { random: lastRandom || 0 },
-      skip: !lastRandom,
     },
     { publicQuery: !viewer.isAuthed }
-  )
-  const size = Math.round(
-    (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / 5
   )
   const edges = data?.viewer?.recommendation.tags.edges
 
   const shuffle = () => {
-    // const random = _random(0, Math.min(randomMaxSize, size))
+    const size = Math.round(
+      (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / perPage
+    )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
     refetch({ random })
 
