@@ -36,6 +36,7 @@ import {
   // SearchUsersQuery
 } from '~/gql/graphql'
 
+import { FigureImage } from './extensions'
 import MenuBar from './MenuBar'
 // import MentionUserList from '../MentionUserList'
 import styles from './styles.css'
@@ -130,6 +131,8 @@ const ArticleEditor: React.FC<Props> = ({
           lang,
         }),
       }),
+      // Custom
+      FigureImage,
     ],
     content,
     editable: !isReadOnly,

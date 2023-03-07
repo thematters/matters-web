@@ -93,6 +93,20 @@ const MenuBar: React.FC<MenuBarProps> = ({ editor }) => {
       <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
         horizontal rule
       </button>
+      <button
+        onClick={() => {
+          const url = window.prompt('URL') || ''
+          const caption = window.prompt('caption') || ''
+
+          if (!url) {
+            return
+          }
+
+          editor.chain().focus().setFigure({ src: url, caption }).run()
+        }}
+      >
+        image
+      </button>
 
       <style jsx>{styles}</style>
     </section>
