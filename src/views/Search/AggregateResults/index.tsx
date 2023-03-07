@@ -1,7 +1,6 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { useEffect, useState } from 'react'
 
-import { SEARCH_START_FLAG } from '~/common/enums'
 import { getSearchType } from '~/common/utils'
 import { Tabs, Translate, useRoute } from '~/components'
 
@@ -44,7 +43,7 @@ const AggregateResults = () => {
     client.query({
       query: SEARCH_AGGREGATE_ARTICLES_PUBLIC,
       variables: {
-        key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+        key: q,
         version: version === '' ? undefined : version,
       },
       fetchPolicy: 'network-only',
@@ -52,7 +51,7 @@ const AggregateResults = () => {
     client.query({
       query: SEARCH_AGGREGATE_USERS_PUBLIC,
       variables: {
-        key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+        key: q,
         version: version === '' ? undefined : version,
       },
       fetchPolicy: 'network-only',
@@ -60,7 +59,7 @@ const AggregateResults = () => {
     client.query({
       query: SEARCH_AGGREGATE_TAGS_PUBLIC,
       variables: {
-        key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+        key: q,
         version: version === '' ? undefined : version,
       },
       fetchPolicy: 'network-only',
