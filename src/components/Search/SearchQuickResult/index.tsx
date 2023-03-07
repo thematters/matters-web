@@ -11,6 +11,7 @@ import {
   Media,
   Menu,
   Spacer,
+  Spinner,
   TagDigest,
   UserDigest,
   useRoute,
@@ -75,9 +76,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
       const response = await client.query({
         query: QUICK_RESULT,
         variables: {
-          key: SEARCH_START_FLAG.includes(searchKey[0])
-            ? searchKey.slice(1)
-            : searchKey,
+          key: searchKey,
           version: version === '' ? undefined : version,
         },
         fetchPolicy: 'no-cache',
@@ -88,7 +87,11 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   }, [searchKey])
 
   if (loading) {
-    return null
+    return (
+      <Menu width={inPage ? undefined : 'md'}>
+        <Spinner />
+      </Menu>
+    )
   }
 
   if (!hasUsers && !hasTags) {

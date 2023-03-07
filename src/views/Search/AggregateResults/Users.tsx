@@ -1,7 +1,6 @@
 import {
   LATER_SEARCH_RESULTS_LENGTH,
   MAX_SEARCH_RESULTS_LENGTH,
-  SEARCH_START_FLAG,
 } from '~/common/enums'
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 import {
@@ -36,7 +35,7 @@ const AggregateUserResults = () => {
       SEARCH_AGGREGATE_USERS_PUBLIC,
       {
         variables: {
-          key: SEARCH_START_FLAG.includes(q[0]) ? q.slice(1) : q,
+          key: q,
           version: version === '' ? undefined : version,
           coefficients: coefficients === '' ? undefined : coefficients,
         },
