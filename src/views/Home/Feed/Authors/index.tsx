@@ -35,12 +35,13 @@ const Authors = () => {
   /**
    * Data Fetching
    */
+  const perPage = 9
+  const randomMaxSize = 50
   const { data, loading, error, refetch } = usePublicQuery<FeedAuthorsQuery>(
     FEED_AUTHORS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: { random: lastRandom || 0 },
-      skip: !lastRandom,
+      variables: { random: lastRandom || 0, first: perPage },
     },
     { publicQuery: !viewer.isAuthed }
   )
@@ -48,7 +49,11 @@ const Authors = () => {
   const edges = data?.viewer?.recommendation.authors.edges
 
   const shuffle = () => {
-    const random = _random(0, 49)
+    const size = Math.round(
+      (data?.viewer?.recommendation.authors.totalCount || randomMaxSize) /
+        perPage
+    )
+    const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
     refetch({ random })
 
     client.writeData({

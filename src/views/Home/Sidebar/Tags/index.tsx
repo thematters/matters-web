@@ -20,11 +20,14 @@ import SectionHeader from '../../SectionHeader'
 import styles from './styles.css'
 
 const SIDEBAR_TAGS = gql`
-  query SidebarTagsPublic($random: random_Int_min_0_max_49) {
+  query SidebarTagsPublic(
+    $random: random_Int_min_0_max_49
+    $first: first_Int_min_0
+  ) {
     viewer @connection(key: "viewerSidebarTags") {
       id
       recommendation {
-        tags(input: { first: 6, filter: { random: $random } }) {
+        tags(input: { first: $first, filter: { random: $random } }) {
           totalCount
           edges {
             cursor
@@ -49,25 +52,23 @@ const Tags = () => {
     { variables: { id: 'local' } }
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarTags // last Random
+  const perPage = 6
   const randomMaxSize = 50
-
   const { data, loading, error, refetch } =
     usePublicQuery<SidebarTagsPublicQuery>(
       SIDEBAR_TAGS,
       {
         notifyOnNetworkStatusChange: true,
-        variables: { random: lastRandom || 0 },
-        skip: !lastRandom,
+        variables: { random: lastRandom || 0, first: perPage },
       },
       { publicQuery: !viewer.isAuthed }
     )
-
-  const size = Math.round(
-    (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / 5
-  )
   const edges = data?.viewer?.recommendation.tags.edges
 
   const shuffle = () => {
+    const size = Math.round(
+      (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / perPage
+    )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
     refetch({ random })
 
