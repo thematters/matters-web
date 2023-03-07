@@ -18,7 +18,7 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'About Us',
-            description: 'src/views/Help/index.tsx',
+            description: '',
           })}
           href={PATHS.ABOUT}
         />
@@ -26,7 +26,7 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Explore Matters',
-            description: 'src/views/Help/index.tsx',
+            description: '',
           })}
           href={PATHS.GUIDE}
         />
@@ -34,7 +34,7 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Matters Community',
-            description: 'src/views/Help/index.tsx',
+            description: '',
           })}
           href={PATHS.COMMUNITY}
         />
@@ -42,7 +42,7 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Migrate to Matters',
-            description: 'src/views/Help/index.tsx',
+            description: '',
           })}
           href={PATHS.MIGRATION}
         />
@@ -50,7 +50,7 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Term of Services',
-            description: 'src/views/Help/index.tsx',
+            description: '',
           })}
           href={PATHS.TOS}
         />
@@ -58,7 +58,7 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Open Source',
-            description: 'src/views/Help/index.tsx',
+            description: '',
           })}
           htmlHref="https://github.com/thematters/developer-resource"
           htmlTarget="_blank"
@@ -67,7 +67,7 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Download App',
-            description: 'src/views/Help/index.tsx',
+            description: '',
           })}
           href={GUIDE_LINKS.PWA[lang]}
         />

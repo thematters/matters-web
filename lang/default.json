@@ -27,6 +27,10 @@
     "defaultMessage": "Enter Community",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
+  "/ns2st": {
+    "defaultMessage": "Download App",
+    "description": ""
+  },
   "/nu5ho": {
     "defaultMessage": "replied to your comment on",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
@@ -35,9 +39,21 @@
     "defaultMessage": "Tags",
     "description": ""
   },
+  "1pFLGZ": {
+    "defaultMessage": "Bug Bounty",
+    "description": ""
+  },
+  "2atspc": {
+    "defaultMessage": "Drafts",
+    "description": ""
+  },
   "2eebTb": {
     "defaultMessage": "bookmarked your article",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "2slIPX": {
+    "defaultMessage": "Likes",
+    "description": ""
   },
   "3KNMbJ": {
     "defaultMessage": "Articles",
@@ -50,6 +66,14 @@
   "3uQKhx": {
     "defaultMessage": "Please email",
     "description": "src/views/Help/index.tsx"
+  },
+  "3yk8fB": {
+    "defaultMessage": "Wallet",
+    "description": ""
+  },
+  "47FYwb": {
+    "defaultMessage": "Cancel",
+    "description": ""
   },
   "4giHJT": {
     "defaultMessage": "Have wallet questions on mobile device ? Click the",
@@ -65,6 +89,18 @@
   },
   "5sg7KC": {
     "defaultMessage": "Password",
+    "description": ""
+  },
+  "6flWFg": {
+    "defaultMessage": "Term of Services",
+    "description": ""
+  },
+  "6gOpfl": {
+    "defaultMessage": "You won't see announcements for 7 days",
+    "description": "src/views/Home/Announcements/index.tsx"
+  },
+  "7DIW6+": {
+    "defaultMessage": "Learn More",
     "description": ""
   },
   "9+Ddtu": {
@@ -95,9 +131,9 @@
     "defaultMessage": ". Take a look at your income",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
-  "BqXRy4": {
-    "defaultMessage": "Download App",
-    "description": "src/views/Help/index.tsx"
+  "CnPG8j": {
+    "defaultMessage": "Featured",
+    "description": ""
   },
   "CwSpld": {
     "defaultMessage": "Not for login",
@@ -106,6 +142,10 @@
   "D2Sw/t": {
     "defaultMessage": "Add any URL in the following list into RSS reader",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "D3idYv": {
+    "defaultMessage": "Settings",
+    "description": ""
   },
   "EfJYPI": {
     "defaultMessage": "Verification Code",
@@ -127,6 +167,10 @@
     "defaultMessage": "Install MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "FhWC22": {
+    "defaultMessage": "Matters Community",
+    "description": ""
+  },
   "GBm/sD": {
     "defaultMessage": "posted a new topic and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
@@ -135,13 +179,29 @@
     "defaultMessage": "tutorial",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "GZJpDf": {
+    "defaultMessage": "Analytics",
+    "description": ""
+  },
+  "H0JBH6": {
+    "defaultMessage": "Log Out",
+    "description": ""
+  },
   "H8KGyc": {
     "defaultMessage": "Enter",
+    "description": ""
+  },
+  "HtSDyc": {
+    "defaultMessage": "Help Center",
     "description": ""
   },
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "HzaRKA": {
+    "defaultMessage": "Migrate to Matters",
+    "description": ""
   },
   "IFY8r4": {
     "defaultMessage": "Enter Password",
@@ -162,10 +222,6 @@
   "JIjMWL": {
     "defaultMessage": "Your article has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
-  },
-  "JMRVO6": {
-    "defaultMessage": "Matters Community",
-    "description": "src/views/Help/index.tsx"
   },
   "Jc+W6M": {
     "defaultMessage": "resigned as tag maintainer. Would you like to be the new tag maintainer?",
@@ -195,6 +251,10 @@
     "defaultMessage": "Wallet address will be part of your digital identity and shown in your profile page.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "MkwOFW": {
+    "defaultMessage": "Read History",
+    "description": ""
+  },
   "N2IrpM": {
     "defaultMessage": "Confirm",
     "description": ""
@@ -202,6 +262,10 @@
   "N3K1H9": {
     "defaultMessage": "Matters will never ask for your wallet mnemonic through any channel.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "NAidKb": {
+    "defaultMessage": "Notifications",
+    "description": ""
   },
   "NONfAh": {
     "defaultMessage": "Douban",
@@ -227,13 +291,17 @@
     "defaultMessage": "liked your article",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
+  "Pp/0po": {
+    "defaultMessage": "Shuffle",
+    "description": ""
+  },
   "QV19cI": {
     "defaultMessage": "Failed to republish article",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
-  "RKs1fz": {
-    "defaultMessage": "Open Source",
-    "description": "src/views/Help/index.tsx"
+  "Szd1tH": {
+    "defaultMessage": "Failed to log out, please try again.",
+    "description": ""
   },
   "U/Tqmx": {
     "defaultMessage": "commented on your bookmarked article",
@@ -275,6 +343,14 @@
     "defaultMessage": "Have an account?",
     "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
   },
+  "Xd0J7Y": {
+    "defaultMessage": "Open Source",
+    "description": ""
+  },
+  "XgdZSb": {
+    "defaultMessage": "Authors",
+    "description": ""
+  },
   "Xz/AHp": {
     "defaultMessage": "broadcast and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -291,13 +367,25 @@
     "defaultMessage": "Broadcast and mentioned you in comment",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "Z6ewE3": {
+    "defaultMessage": "Build Together",
+    "description": "src/views/Me/Settings/AnonymousSettings/Enhance/index.tsx"
+  },
   "ZUPQzl": {
     "defaultMessage": "comment",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "ZjDH42": {
+    "defaultMessage": "About Us",
+    "description": ""
+  },
   "aaUBvF": {
     "defaultMessage": "comment_circle",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "adThp5": {
+    "defaultMessage": "Latest",
+    "description": ""
   },
   "b+LSgI": {
     "defaultMessage": "replied to your discussion on",
@@ -314,6 +402,10 @@
   "bVZDVx": {
     "defaultMessage": "withdrawal process has started. Please refer to your bank for payout status.",
     "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
+  },
+  "cE4Hfw": {
+    "defaultMessage": "Discover",
+    "description": ""
   },
   "cPIKU2": {
     "defaultMessage": "Following",
@@ -343,9 +435,17 @@
     "defaultMessage": "uh-oh,",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
+  "enMIYK": {
+    "defaultMessage": "My Page",
+    "description": ""
+  },
   "euNJsE": {
     "defaultMessage": "A new article has been added to the circle, read it now!",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+  },
+  "fG41Ux": {
+    "defaultMessage": "Logged out successfully",
+    "description": ""
   },
   "fOgusL": {
     "defaultMessage": "Choose a method to enter",
@@ -395,6 +495,10 @@
     "defaultMessage": "Login with Email",
     "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
   },
+  "itPgxd": {
+    "defaultMessage": "Profile",
+    "description": ""
+  },
   "jF+Mle": {
     "defaultMessage": "days for free. Try it and have fun!",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
@@ -411,12 +515,20 @@
     "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
+  "kc79d3": {
+    "defaultMessage": "Topics",
+    "description": ""
+  },
   "l5vWO8": {
     "defaultMessage": "Your Matters display name, can be changed later",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
   "lD4FPZ": {
     "defaultMessage": "Enter Email",
+    "description": ""
+  },
+  "ll/ufR": {
+    "defaultMessage": "Trending",
     "description": ""
   },
   "mPe6DK": {
@@ -427,8 +539,16 @@
     "defaultMessage": "User unblocked. User can now comment on your articles.",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
+  "mk+LCk": {
+    "defaultMessage": "Display Preferences",
+    "description": "src/views/Me/Settings/AnonymousSettings/DisplayPreferences/index.tsx"
+  },
   "ml3SZN": {
     "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed",
+    "description": ""
+  },
+  "nGBrvw": {
+    "defaultMessage": "Bookmarks",
     "description": ""
   },
   "nYeDrI": {
@@ -438,10 +558,6 @@
   "nmZI+U": {
     "defaultMessage": "Terms and Privacy Policy",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
-  },
-  "nmmItN": {
-    "defaultMessage": "About Us",
-    "description": "src/views/Help/index.tsx"
   },
   "nsaJRn": {
     "defaultMessage": "Logged in successfully",
@@ -454,13 +570,13 @@
     "defaultMessage": "Account Archived",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "pla6ZF": {
+    "defaultMessage": "Search articles, tags and authors",
+    "description": "src/components/Search/SearchBar/index.tsx"
+  },
   "pzTOmv": {
     "defaultMessage": "Followers",
     "description": ""
-  },
-  "q7jZPx": {
-    "defaultMessage": "Term of Services",
-    "description": "src/views/Help/index.tsx"
   },
   "qPPrzm": {
     "defaultMessage": "supported your article",
@@ -469,10 +585,6 @@
   "qQmSxu": {
     "defaultMessage": "Airdrop registration completed. Your NFT will be revealed on November 12. Confirm your ETH wallet address:",
     "description": "src/components/Notice/CryptoNotice/CryptoWalletAirdropNotice.tsx"
-  },
-  "qXcvBF": {
-    "defaultMessage": "Explore Matters",
-    "description": "src/views/Help/index.tsx"
   },
   "qYzBk8": {
     "defaultMessage": "unsubscribed your circle",
@@ -489,10 +601,6 @@
   "rBjwQy": {
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
-  },
-  "rXbLl7": {
-    "defaultMessage": "Migrate to Matters",
-    "description": "src/views/Help/index.tsx"
   },
   "reOeq5": {
     "defaultMessage": "You have created your personal creative space. Publish your first work!",
@@ -538,6 +646,10 @@
     "defaultMessage": "Copy Link",
     "description": ""
   },
+  "uVCg1l": {
+    "defaultMessage": "Explore Matters",
+    "description": ""
+  },
   "uqmi/b": {
     "defaultMessage": "pinned your comment on",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
@@ -554,6 +666,10 @@
     "defaultMessage": "Block User",
     "description": ""
   },
+  "vH8sCb": {
+    "defaultMessage": "Circle",
+    "description": ""
+  },
   "wEQDC6": {
     "defaultMessage": "Edit",
     "description": ""
@@ -561,6 +677,10 @@
   "wSEOxH": {
     "defaultMessage": "Contact Channel",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "wbcwKd": {
+    "defaultMessage": "View All",
+    "description": ""
   },
   "wqaNK4": {
     "defaultMessage": "in your circle",
@@ -574,9 +694,17 @@
     "defaultMessage": "Continue with Email",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
+  "xmcVZ0": {
+    "defaultMessage": "Search",
+    "description": ""
+  },
   "xwj01D": {
     "defaultMessage": "invites you to become a collaborator",
     "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
+  },
+  "y1Z3or": {
+    "defaultMessage": "Language",
+    "description": ""
   },
   "yZfKI4": {
     "defaultMessage": "discussion and mentioned you",
