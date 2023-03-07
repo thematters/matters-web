@@ -548,7 +548,7 @@
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "cf37Zy": {
-    "defaultMessage": "添加 IPFS 生成的 IPNS 指纹到阅读器，如:",
+    "defaultMessage": "添加 IPFS 生成的 IPNS 指纹到阅读器，如：",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "zxlwbc": {
