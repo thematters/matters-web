@@ -1,30 +1,26 @@
-import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
-import {
-  CopyToClipboard,
-  IconLink16,
-  LanguageContext,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { CopyToClipboard, IconLink16, TextIcon } from '~/components'
 
 import styles from './styles.css'
 
 const Copy = ({ link }: { link: string }) => {
-  const { lang } = useContext(LanguageContext)
-
+  const intl = useIntl()
   return (
     <section className="copy">
       <CopyToClipboard text={link}>
-        <button aria-label={translate({ id: 'copy', lang })}>
+        <button
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Copy Link',
+            description: 'src/components/Dialogs/ShareDialog/Copy.tsx',
+          })}
+        >
           <TextIcon icon={<IconLink16 color="grey" />} spacing="base">
             <div className="text">
               <span>
-                <Translate
-                  zh_hant="複製鏈接"
-                  zh_hans="复制链接"
-                  en="Copy Link"
+                <FormattedMessage
+                  defaultMessage="Copy Link"
+                  description="src/components/Dialogs/ShareDialog/Copy.tsx"
                 />
               </span>
             </div>

@@ -3,13 +3,25 @@
     "defaultMessage": "sent a new broadcast on {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "/+XWDi": {
+    "defaultMessage": "Logbook 2.0",
+    "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
   "/3G89K": {
     "defaultMessage": "is growing",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
+  "/3kw6k": {
+    "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
   "/A/biR": {
     "defaultMessage": "Terms and Privacy Policy",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "/IN9oo": {
+    "defaultMessage": "words",
+    "description": ""
   },
   "/asuIY": {
     "defaultMessage": "Enter Community",
@@ -19,9 +31,17 @@
     "defaultMessage": "replied to your comment on",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "1EYCdR": {
+    "defaultMessage": "Tags",
+    "description": ""
+  },
   "2eebTb": {
     "defaultMessage": "bookmarked your article",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "3KNMbJ": {
+    "defaultMessage": "Articles",
+    "description": ""
   },
   "3WKlPP": {
     "defaultMessage": "commented in",
@@ -59,6 +79,10 @@
     "defaultMessage": "Enter Password",
     "description": ""
   },
+  "A7ugfn": {
+    "defaultMessage": "More Actions",
+    "description": ""
+  },
   "ANhCde": {
     "defaultMessage": "Start creating now!",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
@@ -79,9 +103,17 @@
     "defaultMessage": "Not for login",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "D2Sw/t": {
+    "defaultMessage": "Add any URL in the following list into RSS reader",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
   "EfJYPI": {
     "defaultMessage": "Verification Code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "EoNvLu": {
+    "defaultMessage": "Created",
+    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "EwVnoC": {
     "defaultMessage": "I have read and agree to",
@@ -119,6 +151,10 @@
     "defaultMessage": "User registered by email can login and enable wallet login later",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
+  "J+dIsA": {
+    "defaultMessage": "Subscriptions",
+    "description": ""
+  },
   "J3yk6u": {
     "defaultMessage": "in circle",
     "description": ""
@@ -151,6 +187,10 @@
     "defaultMessage": "Congrats!",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "Lc/azT": {
+    "defaultMessage": "IPNS Subscription",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
   "LqxIEU": {
     "defaultMessage": "Wallet address will be part of your digital identity and shown in your profile page.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -163,13 +203,25 @@
     "defaultMessage": "Matters will never ask for your wallet mnemonic through any channel.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "NONfAh": {
+    "defaultMessage": "Douban",
+    "description": "src/components/Share/Buttons/Douban.tsx"
+  },
   "NzfL1d": {
     "defaultMessage": "Enter password again",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
   },
+  "O02Dsj": {
+    "defaultMessage": "Copy Link",
+    "description": "src/components/Dialogs/ShareDialog/Copy.tsx"
+  },
   "O03Rkc": {
     "defaultMessage": "resigned as tag collaborator. You can invite new collaborators to join",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "OKhRC6": {
+    "defaultMessage": "Share",
+    "description": ""
   },
   "PjT72J": {
     "defaultMessage": "liked your article",
@@ -195,6 +247,10 @@
     "defaultMessage": "You have successfully completed Ethereum wallet settings. Please confirm wallet address:",
     "description": "src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
   },
+  "UxfPXa": {
+    "defaultMessage": "In total",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "VO4Elt": {
     "defaultMessage": "mentioned you in a comment on {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -206,6 +262,10 @@
   "VrOoVf": {
     "defaultMessage": "Matters will never ask your wallet key through any channel.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "WBVVYd": {
+    "defaultMessage": "Responses",
+    "description": ""
   },
   "XH0Lb6": {
     "defaultMessage": "Welcome to Matters!",
@@ -243,9 +303,25 @@
     "defaultMessage": "replied to your discussion on",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "b1FfGy": {
+    "defaultMessage": "Content Feed",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "bBYO6x": {
+    "defaultMessage": "Unblock",
+    "description": "src/components/BlockUser/Button/index.tsx"
+  },
   "bVZDVx": {
     "defaultMessage": "withdrawal process has started. Please refer to your bank for payout status.",
     "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
+  },
+  "cPIKU2": {
+    "defaultMessage": "Following",
+    "description": ""
+  },
+  "cf37Zy": {
+    "defaultMessage": "Add hash from IPFS into compatible reader such as",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "cfL5uk": {
     "defaultMessage": "Over 200 words, current {numbers}",
@@ -287,6 +363,10 @@
     "defaultMessage": "posted and replied to topics",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "gMZfHO": {
+    "defaultMessage": "RSS Subscription",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
   "hWs95P": {
     "defaultMessage": "Important information will be notified by email. So filling in your email address will be required.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -299,9 +379,17 @@
     "defaultMessage": "Don't have a wallet yet? Check the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "i/4KO2": {
+    "defaultMessage": "This account is archived due to violation of community guidelines",
+    "description": "src/components/UserProfile/index.tsx"
+  },
   "iCFXtS": {
     "defaultMessage": "For unregistered or users enabled wallet login",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "ikVIu3": {
+    "defaultMessage": "articles",
+    "description": ""
   },
   "ipQlDG": {
     "defaultMessage": "Login with Email",
@@ -335,6 +423,10 @@
     "defaultMessage": "subscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
+  "mSAY3/": {
+    "defaultMessage": "User unblocked. User can now comment on your articles.",
+    "description": "src/components/BlockUser/Button/index.tsx"
+  },
   "ml3SZN": {
     "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed",
     "description": ""
@@ -357,6 +449,14 @@
   },
   "ntjlWR": {
     "defaultMessage": "comment"
+  },
+  "oNYnCM": {
+    "defaultMessage": "Account Archived",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "pzTOmv": {
+    "defaultMessage": "Followers",
+    "description": ""
   },
   "q7jZPx": {
     "defaultMessage": "Term of Services",
@@ -382,6 +482,14 @@
     "defaultMessage": "Email will not be used as a login but only as a contact channel.",
     "description": ""
   },
+  "qyzJxi": {
+    "defaultMessage": "Logbook 1.0",
+    "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "rBjwQy": {
+    "defaultMessage": "Weibo",
+    "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
   "rXbLl7": {
     "defaultMessage": "Migrate to Matters",
     "description": "src/views/Help/index.tsx"
@@ -389,6 +497,14 @@
   "reOeq5": {
     "defaultMessage": "You have created your personal creative space. Publish your first work!",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
+  },
+  "rf0ew3": {
+    "defaultMessage": "Come build a Circle and call on your supporters to join you!",
+    "description": "src/components/UserProfile/CircleWidget/index.tsx"
+  },
+  "rs0YS2": {
+    "defaultMessage": "Account Banned",
+    "description": "src/components/UserProfile/index.tsx"
   },
   "skbUBl": {
     "defaultMessage": "Log in",
@@ -418,6 +534,10 @@
     "defaultMessage": "replied to topics and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "u5aHb4": {
+    "defaultMessage": "Copy Link",
+    "description": ""
+  },
   "uqmi/b": {
     "defaultMessage": "pinned your comment on",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
@@ -429,6 +549,14 @@
   "v6YjIn": {
     "defaultMessage": "Account",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "vAc1Bw": {
+    "defaultMessage": "Block User",
+    "description": ""
+  },
+  "wEQDC6": {
+    "defaultMessage": "Edit",
+    "description": ""
   },
   "wSEOxH": {
     "defaultMessage": "Contact Channel",
@@ -457,5 +585,9 @@
   "z4NaU2": {
     "defaultMessage": "Your",
     "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
+  },
+  "zxlwbc": {
+    "defaultMessage": "Waiting ...",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   }
 }
