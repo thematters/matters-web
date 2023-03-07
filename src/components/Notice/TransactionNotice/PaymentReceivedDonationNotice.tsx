@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { PaymentReceivedDonationNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -34,11 +34,10 @@ const PaymentReceivedDonationNotice = ({
 
       <section className="content-wrap">
         <NoticeHead>
-          <NoticeActorName user={actor} />{' '}
-          <Translate
-            zh_hant="支持了你的作品 "
-            zh_hans="支持了你的作品 "
-            en="supported your article "
+          <NoticeActorName user={actor} />
+          <FormattedMessage
+            defaultMessage="supported your article"
+            description="src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
           />
           {tx && (
             <span
@@ -48,10 +47,9 @@ const PaymentReceivedDonationNotice = ({
               {tx.amount} {tx.currency}
             </span>
           )}
-          <Translate
-            zh_hant="，快去查看自己的收入吧！"
-            zh_hans="，快去查看自己的收入吧！"
-            en=". Take a look at your income"
+          <FormattedMessage
+            defaultMessage=". Take a look at your income"
+            description="src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
           />
         </NoticeHead>
 

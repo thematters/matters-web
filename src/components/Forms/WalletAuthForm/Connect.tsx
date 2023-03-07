@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
 import {
@@ -18,7 +19,6 @@ import {
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
-  translate,
   validateCode,
   validateEmail,
   validateToS,
@@ -31,7 +31,6 @@ import {
   LanguageContext,
   Layout,
   TextIcon,
-  Translate,
   useMutation,
   VerificationSendCodeButton,
   ViewerContext,
@@ -68,25 +67,22 @@ const ImportantNotice = () => {
   return (
     <section className="notice">
       <h4>
-        <Translate
-          zh_hant="提醒：信箱將不作為登入使用，僅作為聯繫渠道"
-          zh_hans="提醒：信箱将不作为登入使用，仅作为联系渠道"
-          en="As a reminder, the email address will not be used as a login but only as a contact channel."
+        <FormattedMessage
+          defaultMessage="As a reminder, the email address will not be used as a login but only as a contact channel."
+          description="src/components/Forms/WalletAuthForm/Connect.tsx"
         />
       </h4>
 
       <p>
         <b>
-          <Translate
-            zh_hant="Matters 不會透過任何渠道詢問你的錢包私鑰。"
-            zh_hans="Matters 不会透过任何渠道询问你的钱包私钥。"
-            en="Matters will never ask for your wallet mnemonic through any channel. "
+          <FormattedMessage
+            defaultMessage="Matters will never ask for your wallet mnemonic through any channel. "
+            description="src/components/Forms/WalletAuthForm/Connect.tsx"
           />
         </b>
-        <Translate
-          zh_hant="重要訊息將透過郵件通知，請填入信箱完成設定。"
-          zh_hans="重要讯息将透过邮件通知，请填入信箱完成设定。"
-          en="Important information will be notified by email. So filling in your email address will be required."
+        <FormattedMessage
+          defaultMessage="Important information will be notified by email. So filling in your email address will be required."
+          description="src/components/Forms/WalletAuthForm/Connect.tsx"
         />
       </p>
 
@@ -129,6 +125,7 @@ const Connect: React.FC<FormProps> = ({
   const { address: account } = useAccount()
   const { signMessageAsync } = useSignMessage()
 
+  const intl = useIntl()
   // sign up if eth address didn't bind with a user
   const isSignUp = !!(data && account && !data?.user?.id && !viewer.isAuthed)
 
@@ -252,7 +249,12 @@ const Connect: React.FC<FormProps> = ({
             new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'green',
-                content: <Translate id="successLogin" />,
+                content: (
+                  <FormattedMessage
+                    defaultMessage="Logged in successfully"
+                    description=""
+                  />
+                ),
               },
             })
           )
@@ -279,7 +281,11 @@ const Connect: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <Form.List groupName={<Translate id="connectWallet" />}>
+      <Form.List
+        groupName={
+          <FormattedMessage defaultMessage="Connect Wallet" description="" />
+        }
+      >
         <Form.List.Item title={maskAddress(values.address)} />
       </Form.List>
 
@@ -288,10 +294,9 @@ const Connect: React.FC<FormProps> = ({
           fieldMsgId={fieldMsgId}
           hint={
             !errors.address ? (
-              <Translate
-                zh_hans="若要变更地址，请直接操作钱包切換"
-                zh_hant="若要變更地址，請直接操作錢包切換"
-                en="To change, switch it directly on your wallet"
+              <FormattedMessage
+                defaultMessage="To change, switch it directly on your wallet"
+                description=""
               />
             ) : undefined
           }
@@ -307,23 +312,22 @@ const Connect: React.FC<FormProps> = ({
 
       {isSignUp && (
         <h3 className="subtitle">
-          <Translate
-            zh_hant="聯繫渠道"
-            zh_hans="联系渠道"
-            en="Contact Channel"
+          <FormattedMessage
+            defaultMessage="Contact Channel"
+            description="src/components/Forms/WalletAuthForm/Connect.tsx"
           />
         </h3>
       )}
 
       {isSignUp && (
         <Form.Input
-          label={<Translate id="email" />}
+          label={<FormattedMessage defaultMessage="Email" description="" />}
           type="email"
           name="email"
           required
-          placeholder={translate({
-            id: 'enterEmail',
-            lang,
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Enter Email',
+            description: '',
           })}
           extraButton={
             <TextIcon
@@ -333,10 +337,9 @@ const Connect: React.FC<FormProps> = ({
               weight="md"
               spacing="xxtight"
             >
-              <Translate
-                zh_hant="非登入用途"
-                zh_hans="非登入用途"
-                en="Not for login"
+              <FormattedMessage
+                defaultMessage="Not for login"
+                description="src/components/Forms/WalletAuthForm/Connect.tsx"
               />
             </TextIcon>
           }
@@ -345,10 +348,9 @@ const Connect: React.FC<FormProps> = ({
           onBlur={handleBlur}
           onChange={handleChange}
           hint={
-            <Translate
-              zh_hant="信箱將不作為登入使用，僅作為聯繫渠道"
-              zh_hans="邮箱将不作为登入使用，仅作为联系渠道"
-              en="Email will not be used as a login but only as a contact channel."
+            <FormattedMessage
+              defaultMessage="Email will not be used as a login but only as a contact channel."
+              description=""
             />
           }
         />
@@ -356,12 +358,23 @@ const Connect: React.FC<FormProps> = ({
 
       {isSignUp && (
         <Form.Input
-          label={<Translate id="verificationCode" />}
+          label={
+            <FormattedMessage
+              defaultMessage="Verification Code"
+              description="src/components/Forms/WalletAuthForm/Connect.tsx"
+            />
+          }
           type="text"
           name="code"
           required
-          placeholder={translate({ id: 'enterVerificationCode', lang })}
-          hint={translate({ id: 'hintVerificationCode', lang })}
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Enter verification code',
+            description: 'src/components/Forms/WalletAuthForm/Connect.tsx',
+          })}
+          hint={intl.formatMessage({
+            defaultMessage: 'Code will expire after 20 minutes',
+            description: '',
+          })}
           value={values.code}
           error={touched.code && errors.code}
           onBlur={handleBlur}
@@ -384,19 +397,16 @@ const Connect: React.FC<FormProps> = ({
           onChange={handleChange}
           hint={
             <>
-              <Translate
-                zh_hant="我已閱讀並同意"
-                zh_hans="我已阅读并同意"
-                en="I have read and agree to"
+              <FormattedMessage
+                defaultMessage="I have read and agree to"
+                description=""
               />
-
               <Link href={PATHS.TOS} legacyBehavior>
                 <a className="u-link-green" target="_blank">
                   &nbsp;
-                  <Translate
-                    zh_hant="Matters 用戶協議和隱私政策"
-                    zh_hans="Matters 用户协议和隐私政策"
-                    en="Terms and Privacy Policy"
+                  <FormattedMessage
+                    defaultMessage="Terms and Privacy Policy"
+                    description="src/components/Forms/WalletAuthForm/Connect.tsx"
                   />
                 </a>
               </Link>
@@ -417,7 +427,7 @@ const Connect: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting || loading || !account}
-      text={<Translate id="nextStep" />}
+      text={<FormattedMessage defaultMessage="Next" description="" />}
       loading={isSubmitting || loading}
     />
   )

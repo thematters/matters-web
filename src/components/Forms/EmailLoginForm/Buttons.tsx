@@ -1,6 +1,8 @@
+import { FormattedMessage } from 'react-intl'
+
 import { PATHS } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
-import { Button, Form, TextIcon, Translate } from '~/components'
+import { Button, Form, TextIcon } from '~/components'
 
 export const PasswordResetDialogButton = ({
   gotoResetPassword,
@@ -14,7 +16,11 @@ export const PasswordResetDialogButton = ({
     tabIndex={-1}
   >
     <TextIcon color="green" weight="md">
-      <Translate id="forgetPassword" />？
+      {' '}
+      <FormattedMessage
+        defaultMessage="Forget Password"
+        description="src/components/Forms/EmailLoginForm/Buttons.tsx"
+      />
     </TextIcon>
   </Button>
 )
@@ -22,7 +28,10 @@ export const PasswordResetDialogButton = ({
 export const PasswordResetRedirectButton = () => (
   <Button spacing={['xtight', 0]} {...appendTarget(PATHS.FORGET)}>
     <TextIcon color="green" weight="md">
-      <Translate id="forgetPassword" />？
+      <FormattedMessage
+        defaultMessage="Forget Password"
+        description="src/components/Forms/EmailLoginForm/Buttons.tsx"
+      />
     </TextIcon>
   </Button>
 )
@@ -35,13 +44,12 @@ export const EmailSignUpDialogButton = ({
   <Form.List spacing="xloose">
     <Form.List.Item
       title={
-        <Translate
-          zh_hant="沒有帳戶？"
-          zh_hans="沒有帐户？"
-          en="Not Registered?"
+        <FormattedMessage
+          defaultMessage="Not Registered?"
+          description="src/components/Forms/EmailLoginForm/Buttons.tsx"
         />
       }
-      rightText={<Translate id="register" />}
+      rightText={<FormattedMessage defaultMessage="Register" description="" />}
       rightTextColor="green"
       onClick={gotoEmailSignUp}
       role="button"

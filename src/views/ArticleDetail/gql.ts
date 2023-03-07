@@ -134,25 +134,24 @@ export const ARTICLE_DETAIL_PUBLIC_BY_NODE_ID = gql`
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
-  query ArticleDetailPrivate(
-    $mediaHash: String!
-    $includeCanSuperLike: Boolean!
-  ) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      content
-      author {
+  query ArticleDetailPrivate($id: ID!, $includeCanSuperLike: Boolean!) {
+    article: node(input: { id: $id }) {
+      ... on Article {
         id
-        ...UserDigestRichUserPrivate
-      }
-      access {
-        circle {
+        content
+        author {
           id
-          ...CircleWallCirclePrivate
+          ...UserDigestRichUserPrivate
         }
+        access {
+          circle {
+            id
+            ...CircleWallCirclePrivate
+          }
+        }
+        ...ToolbarArticlePrivate
+        ...SupportWidgetArticlePrivate
       }
-      ...ToolbarArticlePrivate
-      ...SupportWidgetArticlePrivate
     }
   }
   ${UserDigest.Rich.fragments.user.private}

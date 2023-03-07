@@ -134,7 +134,7 @@ const Subscriptions = () => {
     <>
       <CustomHead />
 
-      <UserTabs hasSubscriptions />
+      <UserTabs />
 
       <section className="subtitle">
         <Title type="feed" is="h2">

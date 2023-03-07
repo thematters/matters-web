@@ -41,7 +41,7 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
   const { article } = data
 
   return (
-    <section className="responses" id="comments">
+    <section className="responses">
       <header>
         <Title type="nav" is="h2">
           <Translate id="responses" />
