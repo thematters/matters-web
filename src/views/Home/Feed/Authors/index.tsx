@@ -124,7 +124,7 @@ const Authors = () => {
           textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
           textAlign="center"
         >
-          <FormattedMessage defaultMessage="All" description="" />{' '}
+          <FormattedMessage defaultMessage="View All" description="" />{' '}
         </ViewMoreCard>
       </section>
 

@@ -554,6 +554,10 @@
     "defaultMessage": "Contact Channel",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "wbcwKd": {
+    "defaultMessage": "View All",
+    "description": ""
+  },
   "wqaNK4": {
     "defaultMessage": "in your circle",
     "description": ""
@@ -585,9 +589,5 @@
   "z4NaU2": {
     "defaultMessage": "Your",
     "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
-  },
-  "zQvVDJ": {
-    "defaultMessage": "All",
-    "description": ""
   }
 }
