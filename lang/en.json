@@ -7,9 +7,9 @@
     "defaultMessage": " followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
-  "BqXRy4": {
+  "/ns2st": {
     "defaultMessage": "Download App",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
@@ -19,13 +19,13 @@
     "defaultMessage": "User registered by email can login and enable wallet login later",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
-  "JMRVO6": {
+  "FhWC22": {
     "defaultMessage": "Matters Community",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "RKs1fz": {
+  "Xd0J7Y": {
     "defaultMessage": "Open Source",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "cfL5uk": {
     "defaultMessage": "Over 200 words, current {numbers}",
@@ -43,21 +43,21 @@
     "defaultMessage": "For unregistered or users enabled wallet login",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
-  "nmmItN": {
+  "ZjDH42": {
     "defaultMessage": "About Us",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "q7jZPx": {
+  "6flWFg": {
     "defaultMessage": "Term of Services",
     "description": "src/views/Help/index.tsx"
   },
-  "qXcvBF": {
+  "uVCg1l": {
     "defaultMessage": "Explore Matters",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "rXbLl7": {
+  "HzaRKA": {
     "defaultMessage": "Migrate to Matters",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "skbUBl": {
     "defaultMessage": "Log in",
@@ -490,5 +490,141 @@
   "Jc+W6M": {
     "defaultMessage": " resigned as tag maintainer. Would you like to be the new tag maintainer?",
     "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+  },
+  "sT9HoG": {
+    "defaultMessage": "Welcome to Matters, a free, autonomous and permanent space for creation and civil discourse.",
+    "description": "src/views/Follow/PickAuthors/index.tsx"
+  },
+  "7DIW6+": {
+    "defaultMessage": "Learn More",
+    "description": ""
+  },
+  "Z6ewE3": {
+    "defaultMessage": "Build Together",
+    "description": "src/views/Me/Settings/AnonymousSettings/Enhance/index.tsx"
+  },
+  "1pFLGZ": {
+    "defaultMessage": "Bug Bounty",
+    "description": ""
+  },
+  "mk+LCk": {
+    "defaultMessage": "Display Preferences",
+    "description": "src/views/Me/Settings/AnonymousSettings/DisplayPreferences/index.tsx"
+  },
+  "y1Z3or": {
+    "defaultMessage": "Language",
+    "description": ""
+  },
+  "itPgxd": {
+    "defaultMessage": "Profile",
+    "description": ""
+  },
+  "vH8sCb": {
+    "defaultMessage": "Circle",
+    "description": ""
+  },
+  "2atspc": {
+    "defaultMessage": "Drafts",
+    "description": ""
+  },
+  "3yk8fB": {
+    "defaultMessage": "Wallet",
+    "description": ""
+  },
+  "GZJpDf": {
+    "defaultMessage": "Analytics",
+    "description": ""
+  },
+  "nGBrvw": {
+    "defaultMessage": "Bookmarks",
+    "description": ""
+  },
+  "2slIPX": {
+    "defaultMessage": "Likes",
+    "description": ""
+  },
+  "MkwOFW": {
+    "defaultMessage": "Read History",
+    "description": ""
+  },
+  "fG41Ux": {
+    "defaultMessage": "Logged out successfully",
+    "description": ""
+  },
+  "Szd1tH": {
+    "defaultMessage": "Failed to log out, please try again.",
+    "description": ""
+  },
+  "HtSDyc": {
+    "defaultMessage": "Help Center",
+    "description": ""
+  },
+  "D3idYv": {
+    "defaultMessage": "Settings",
+    "description": ""
+  },
+  "H0JBH6": {
+    "defaultMessage": "Log Out",
+    "description": ""
+  },
+  "cE4Hfw": {
+    "defaultMessage": "Discover",
+    "description": ""
+  },
+  "cPIKU2": {
+    "defaultMessage": "Following",
+    "description": ""
+  },
+  "NAidKb": {
+    "defaultMessage": "Notifications",
+    "description": ""
+  },
+  "enMIYK": {
+    "defaultMessage": "My Page",
+    "description": ""
+  },
+  "xmcVZ0": {
+    "defaultMessage": "Search",
+    "description": ""
+  },
+  "47FYwb": {
+    "defaultMessage": "Cancel",
+    "description": ""
+  },
+  "ll/ufR": {
+    "defaultMessage": "Trending",
+    "description": ""
+  },
+  "adThp5": {
+    "defaultMessage": "Latest",
+    "description": ""
+  },
+  "CnPG8j": {
+    "defaultMessage": "Featured",
+    "description": ""
+  },
+  "wbcwKd": {
+    "defaultMessage": "View All",
+    "description": ""
+  },
+  "XgdZSb": {
+    "defaultMessage": "Authors",
+    "description": ""
+  },
+  "kc79d3": {
+    "defaultMessage": "Topics",
+    "description": ""
+  },
+  "Pp/0po": {
+    "defaultMessage": "Shuffle",
+    "description": ""
+  },
+  "6gOpfl": {
+    "defaultMessage": "You won't see announcements for 7 days",
+    "description": "src/views/Home/Announcements/index.tsx"
+  },
+  "pla6ZF": {
+    "defaultMessage": "Search articles, tags and authors",
+    "description": "src/components/Search/SearchBar/index.tsx"
   }
 }

@@ -1,7 +1,8 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { GUIDE_LINKS, PATHS } from '~/common/enums'
-import { Form, LanguageContext, Translate } from '~/components'
+import { Form, LanguageContext } from '~/components'
 
 const Learn = () => {
   const { lang } = useContext(LanguageContext)
@@ -9,37 +10,50 @@ const Learn = () => {
   return (
     <Form.List
       groupName={
-        <Translate zh_hant="暸解更多" zh_hans="了解更多" en="Learn More" />
+        <FormattedMessage defaultMessage="Learn More" description="" />
       }
     >
       <Form.List.Item
         role="link"
-        title={<Translate id="about" />}
+        title={<FormattedMessage defaultMessage="About Us" description="" />}
         href={PATHS.ABOUT}
       />
       <Form.List.Item
         role="link"
-        title={<Translate id="guide" />}
+        title={
+          <FormattedMessage defaultMessage="Explore Matters" description="" />
+        }
         href={PATHS.GUIDE}
       />
       <Form.List.Item
         role="link"
-        title={<Translate id="community" />}
+        title={
+          <FormattedMessage defaultMessage="Matters Community" description="" />
+        }
         href={PATHS.COMMUNITY}
       />
       <Form.List.Item
         role="link"
-        title={<Translate id="migrationSideBar" />}
+        title={
+          <FormattedMessage
+            defaultMessage="Migrate to Matters"
+            description=""
+          />
+        }
         href={PATHS.MIGRATION}
       />
       <Form.List.Item
         role="link"
-        title={<Translate id="term" />}
+        title={
+          <FormattedMessage defaultMessage="Term of Services" description="" />
+        }
         href={PATHS.TOS}
       />
       <Form.List.Item
         role="link"
-        title={<Translate id="downloadApp" />}
+        title={
+          <FormattedMessage defaultMessage="Download App" description="" />
+        }
         href={GUIDE_LINKS.PWA[lang]}
       />
     </Form.List>

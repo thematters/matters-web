@@ -7,41 +7,41 @@
     "defaultMessage": "若你希望向 Matters 提出建议，或遭遇操作异常，请发送邮件至",
     "description": "src/views/Help/index.tsx"
   },
-  "BqXRy4": {
+  "/ns2st": {
     "defaultMessage": "下载应用",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "FaTb0A": {
     "defaultMessage": "安装 MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "JMRVO6": {
+  "FhWC22": {
     "defaultMessage": "社区共建基地",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "RKs1fz": {
+  "Xd0J7Y": {
     "defaultMessage": "开放社区",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "dnsfmR": {
     "defaultMessage": "，我们会尽快回复!",
     "description": "src/views/Help/index.tsx"
   },
-  "nmmItN": {
+  "ZjDH42": {
     "defaultMessage": "关于我们",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "q7jZPx": {
+  "6flWFg": {
     "defaultMessage": "用户协议",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "qXcvBF": {
+  "uVCg1l": {
     "defaultMessage": "玩转 Matters 实用指南",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "rXbLl7": {
+  "HzaRKA": {
     "defaultMessage": "一键搬家",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "fOgusL": {
     "defaultMessage": "选择进入方式",
@@ -490,5 +490,141 @@
   "Jc+W6M": {
     "defaultMessage": " 辞去了标签主理人权限，你要不要试试看成为新的主理人？",
     "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+  },
+  "sT9HoG": {
+    "defaultMessage": "欢迎加入 Matters，一个自由、自主、永续的创作与公共讨论空间。",
+    "description": "src/views/Follow/PickAuthors/index.tsx"
+  },
+  "7DIW6+": {
+    "defaultMessage": "了解更多",
+    "description": ""
+  },
+  "Z6ewE3": {
+    "defaultMessage": "参与开发",
+    "description": "src/views/Me/Settings/AnonymousSettings/Enhance/index.tsx"
+  },
+  "1pFLGZ": {
+    "defaultMessage": "漏洞赏金计划",
+    "description": ""
+  },
+  "mk+LCk": {
+    "defaultMessage": "界面设定",
+    "description": "src/views/Me/Settings/AnonymousSettings/DisplayPreferences/index.tsx"
+  },
+  "y1Z3or": {
+    "defaultMessage": "修改介面语言",
+    "description": ""
+  },
+  "itPgxd": {
+    "defaultMessage": "个人主页",
+    "description": ""
+  },
+  "vH8sCb": {
+    "defaultMessage": "我的围炉",
+    "description": ""
+  },
+  "2atspc": {
+    "defaultMessage": "我的草稿",
+    "description": ""
+  },
+  "3yk8fB": {
+    "defaultMessage": "我的钱包",
+    "description": ""
+  },
+  "GZJpDf": {
+    "defaultMessage": "数据后台",
+    "description": ""
+  },
+  "nGBrvw": {
+    "defaultMessage": "我的收藏",
+    "description": ""
+  },
+  "2slIPX": {
+    "defaultMessage": "我的赞赏",
+    "description": ""
+  },
+  "MkwOFW": {
+    "defaultMessage": "浏览记录",
+    "description": ""
+  },
+  "fG41Ux": {
+    "defaultMessage": "登出成功",
+    "description": ""
+  },
+  "Szd1tH": {
+    "defaultMessage": "登出失败，再来一次",
+    "description": ""
+  },
+  "HtSDyc": {
+    "defaultMessage": "帮助中心",
+    "description": ""
+  },
+  "D3idYv": {
+    "defaultMessage": "设定",
+    "description": ""
+  },
+  "H0JBH6": {
+    "defaultMessage": "登出",
+    "description": ""
+  },
+  "cE4Hfw": {
+    "defaultMessage": "发现",
+    "description": ""
+  },
+  "cPIKU2": {
+    "defaultMessage": "追踪",
+    "description": ""
+  },
+  "NAidKb": {
+    "defaultMessage": "通知",
+    "description": ""
+  },
+  "enMIYK": {
+    "defaultMessage": "我的",
+    "description": ""
+  },
+  "xmcVZ0": {
+    "defaultMessage": "搜索",
+    "description": ""
+  },
+  "47FYwb": {
+    "defaultMessage": "关闭",
+    "description": ""
+  },
+  "ll/ufR": {
+    "defaultMessage": "热门",
+    "description": ""
+  },
+  "adThp5": {
+    "defaultMessage": "最新",
+    "description": ""
+  },
+  "CnPG8j": {
+    "defaultMessage": "精华",
+    "description": ""
+  },
+  "wbcwKd": {
+    "defaultMessage": "查看全部",
+    "description": ""
+  },
+  "XgdZSb": {
+    "defaultMessage": "值得关注",
+    "description": ""
+  },
+  "kc79d3": {
+    "defaultMessage": "找你想看的",
+    "description": ""
+  },
+  "Pp/0po": {
+    "defaultMessage": "换一批",
+    "description": ""
+  },
+  "6gOpfl": {
+    "defaultMessage": "暂时隐藏公告栏 7 天",
+    "description": "src/views/Home/Announcements/index.tsx"
+  },
+  "pla6ZF": {
+    "defaultMessage": "搜索作品、标签、作者",
+    "description": "src/components/Search/SearchBar/index.tsx"
   }
 }

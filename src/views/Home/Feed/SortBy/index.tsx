@@ -1,11 +1,11 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   ConnectWalletButton,
   Help,
   Media,
   Tabs,
-  Translate,
   ViewerContext,
 } from '~/components'
 
@@ -44,15 +44,15 @@ const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
   return (
     <Tabs sticky side={<TabSide />}>
       <Tabs.Tab onClick={() => setFeedType('hottest')} selected={isHottest}>
-        <Translate id="hottest" />
+        <FormattedMessage defaultMessage="Trending" description="" />
       </Tabs.Tab>
 
       <Tabs.Tab onClick={() => setFeedType('newest')} selected={isNewset}>
-        <Translate id="latest" />
+        <FormattedMessage defaultMessage="Latest" description="" />
       </Tabs.Tab>
 
       <Tabs.Tab onClick={() => setFeedType('icymi')} selected={isICYMI}>
-        <Translate zh_hant="精華" zh_hans="精华" en="Featured" />
+        <FormattedMessage defaultMessage="Featured" description="" />
       </Tabs.Tab>
     </Tabs>
   )

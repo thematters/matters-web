@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { LANG_TEXT_MAP } from '~/common/enums'
 import {
@@ -6,7 +7,6 @@ import {
   Form,
   LanguageContext,
   LanguageSwitchContent,
-  Translate,
 } from '~/components'
 
 const SwitchLanguage = () => {
@@ -20,18 +20,12 @@ const SwitchLanguage = () => {
       }}
       dialog={{
         content: <LanguageSwitchContent />,
-        title: (
-          <Translate
-            zh_hant="修改界面語言"
-            zh_hans="修改介面语言"
-            en="Language"
-          />
-        ),
+        title: <FormattedMessage defaultMessage="Language" description="" />,
       }}
     >
       {({ openDialog, type, ref }) => (
         <Form.List.Item
-          title={<Translate id="settingsLanguage" />}
+          title={<FormattedMessage defaultMessage="Language" description="" />}
           onClick={openDialog}
           rightText={LANG_TEXT_MAP[lang]}
           ariaHasPopup={type}

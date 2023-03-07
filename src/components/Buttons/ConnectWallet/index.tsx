@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { PATHS } from '~/common/enums'
-import { Button, TextIcon, Translate } from '~/components'
+import { Button, TextIcon } from '~/components'
 
 export const ConnectWalletButton = () => {
   return (
@@ -11,7 +13,7 @@ export const ConnectWalletButton = () => {
       href={PATHS.ME_SETTINGS_CONNECT_WALLET}
     >
       <TextIcon color="white" weight="md">
-        <Translate id="connectWallet" />
+        <FormattedMessage defaultMessage="Connect Wallet" description="" />
       </TextIcon>
     </Button>
   )
