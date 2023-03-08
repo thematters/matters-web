@@ -42,7 +42,7 @@ const EmptyAnalytics = () => {
         >
           <FormattedMessage
             defaultMessage="Top Supporters"
-            description="src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+            description=""
           />
         </TextIcon>
       </section>

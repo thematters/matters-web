@@ -1,11 +1,7 @@
 import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import {
-  Avatar,
-  Form,
-  IconChecked,
-} from '~/components'
+import { Avatar, Form, IconChecked } from '~/components'
 import { EditProfileDialogUserPrivateFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
@@ -61,7 +57,12 @@ const NFTCollection: React.FC<NFTCollectionProps> = ({ nfts, setField }) => {
   return (
     <Form.Field>
       <Form.Field.Header
-        label={<FormattedMessage defaultMessage="My NFT Collections" description="src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx" />}
+        label={
+          <FormattedMessage
+            defaultMessage="My NFT Collections"
+            description="src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
+          />
+        }
         htmlFor={fieldId}
       />
 
@@ -86,12 +87,11 @@ const NFTCollection: React.FC<NFTCollectionProps> = ({ nfts, setField }) => {
 
       <Form.Field.Footer
         fieldMsgId={fieldMsgId}
-        hint={
-          intl.formatMessage({
-            defaultMessage: 'Select NFT as your avatar',
-            description: 'src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx'
-          })
-      }
+        hint={intl.formatMessage({
+          defaultMessage: 'Select NFT as your avatar',
+          description:
+            'src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx',
+        })}
       />
     </Form.Field>
   )

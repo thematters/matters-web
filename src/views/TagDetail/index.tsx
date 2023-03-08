@@ -207,7 +207,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         </Tabs.Tab>
 
         <Tabs.Tab selected={isLatest} onClick={() => changeFeed('latest')}>
-          <FormattedMessage defaultMessage="c" description="" />
+          <FormattedMessage defaultMessage="Latest" description="" />
         </Tabs.Tab>
 
         {hasSelectedFeed && (

@@ -643,9 +643,9 @@
     "defaultMessage": "Manage",
     "description": ""
   },
-  "tjvyrl": {
+  "eXDZGQ": {
     "defaultMessage": "Maintainer",
-    "description": "src/views/TagDetail/Community/Maintainers/index.tsx"
+    "description": ""
   },
   "dg3JCQ": {
     "defaultMessage": "collaborators",
@@ -794,5 +794,29 @@
   "QCo7Gc": {
     "defaultMessage": "Select NFT as your avatar",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
+  },
+  "eTpiYa": {
+    "defaultMessage": "No data yet.",
+    "description": ""
+  },
+  "/IMR+8": {
+    "defaultMessage": "Top Supporters",
+    "description": ""
+  },
+  "b3onWZ": {
+    "defaultMessage": "Last {days} days",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "Po+kJe": {
+    "defaultMessage": "Last {months} month",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "A3rLZt": {
+    "defaultMessage": "Last {months} months",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "zQvVDJ": {
+    "defaultMessage": "All",
+    "description": ""
   }
 }

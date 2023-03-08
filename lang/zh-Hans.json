@@ -639,9 +639,9 @@
     "defaultMessage": "管理",
     "description": ""
   },
-  "tjvyrl": {
+  "eXDZGQ": {
     "defaultMessage": "主理人",
-    "description": "src/views/TagDetail/Community/Maintainers/index.tsx"
+    "description": ""
   },
   "dg3JCQ": {
     "defaultMessage": "协作者",
@@ -794,5 +794,29 @@
   "QCo7Gc": {
     "defaultMessage": "选择 NFT 作为你的头像",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
+  },
+  "eTpiYa": {
+    "defaultMessage": "尚无支持数据",
+    "description": ""
+  },
+  "/IMR+8": {
+    "defaultMessage": "支持排行榜",
+    "description": ""
+  },
+  "b3onWZ": {
+    "defaultMessage": "最近 {days} 天",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "Po+kJe": {
+    "defaultMessage": "最近 {month} 个月",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "A3rLZt": {
+    "defaultMessage": "最近 {months} 个月",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "zQvVDJ": {
+    "defaultMessage": "全部",
+    "description": ""
   }
 }
