@@ -111,14 +111,7 @@ type ArticleDigestConcise = React.MemoExoticComponent<
 }
 
 export const ArticleDigestConcise = React.memo(
-  BaseArticleDigestFeed,
-  ({ article: prevArticle }, { article }) => {
-    return (
-      prevArticle.subscribed === article.subscribed &&
-      prevArticle.articleState === article.articleState &&
-      prevArticle.author.isFollowee === article.author.isFollowee
-    )
-  }
+  BaseArticleDigestFeed
 ) as ArticleDigestConcise
 
 ArticleDigestConcise.fragments = fragments
