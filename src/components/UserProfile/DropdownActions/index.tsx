@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
 import {
   Button,
   DropdownDialog,
@@ -16,7 +16,6 @@ import {
   LanguageContext,
   Menu,
   TextIcon,
-  Translate,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 import {
@@ -92,12 +91,13 @@ const BaseDropdownActions = ({
   }owner/${address}`
   const logbook2Url = `${process.env.NEXT_PUBLIC_LOGBOOKS_URL}/bookcase/?address=${address}`
 
+  const intl = useIntl()
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {hasEditProfile && (
         <Menu.Item onClick={openEditProfileDialog} ariaHasPopup="dialog">
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
-            <Translate id="editUserProfile" />
+            <FormattedMessage defaultMessage="Edit" description="" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -110,10 +110,9 @@ const BaseDropdownActions = ({
               size="md"
               spacing="base"
             >
-              <Translate
-                zh_hant="航行日誌 2.0"
-                zh_hans="航行日志 2.0"
-                en="Logbook 2.0"
+              <FormattedMessage
+                defaultMessage="Logbook 2.0"
+                description="src/components/UserProfile/DropdownActions/index.tsx"
               />
             </TextIcon>
           </Menu.Item>
@@ -123,10 +122,9 @@ const BaseDropdownActions = ({
               size="md"
               spacing="base"
             >
-              <Translate
-                zh_hant="航行日誌 1.0"
-                zh_hans="航行日志 1.0"
-                en="Logbook 1.0"
+              <FormattedMessage
+                defaultMessage="Logbook 1.0"
+                description="src/components/UserProfile/DropdownActions/index.tsx"
               />
             </TextIcon>
           </Menu.Item>
@@ -153,7 +151,10 @@ const BaseDropdownActions = ({
       {({ openDialog, type, ref }) => (
         <Button
           bgColor="half-black"
-          aria-label={translate({ id: 'moreActions', lang })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'More Actions',
+            description: '',
+          })}
           aria-haspopup={type}
           onClick={openDialog}
           ref={ref}

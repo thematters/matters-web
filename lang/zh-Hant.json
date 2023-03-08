@@ -491,6 +491,134 @@
     "defaultMessage": " 辭去了標籤主理人權限，你要不要試試看成為新的主理人？",
     "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
   },
+  "OKhRC6": {
+    "defaultMessage": "分享",
+    "description": ""
+  },
+  "u5aHb4": {
+    "defaultMessage": "複製鏈接",
+    "description": ""
+  },
+  "NONfAh": {
+    "defaultMessage": "豆瓣",
+    "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "rBjwQy": {
+    "defaultMessage": "微博",
+    "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "bBYO6x": {
+    "defaultMessage": "取消封鎖k",
+    "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "vAc1Bw": {
+    "defaultMessage": "封鎖用戶",
+    "description": ""
+  },
+  "mSAY3/": {
+    "defaultMessage": "已取消封鎖。該用戶現在可以評論你的作品和圍爐。",
+    "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "wEQDC6": {
+    "defaultMessage": "編輯資料",
+    "description": ""
+  },
+  "/+XWDi": {
+    "defaultMessage": "航行日誌 2.0",
+    "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "qyzJxi": {
+    "defaultMessage": "航行日誌 1.0",
+    "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "A7ugfn": {
+    "defaultMessage": "更多操作",
+    "description": ""
+  },
+  "b1FfGy": {
+    "defaultMessage": "内容訂閱",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "/3kw6k": {
+    "defaultMessage": "嘗試將內容寫入 IPFS 網絡中，需要一段時間，請耐心等候。若等候時間過久，可透過發佈文章來加速。",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "Lc/azT": {
+    "defaultMessage": "IPNS 訂閱",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "cf37Zy": {
+    "defaultMessage": "添加 IPFS 生成的 IPNS 指紋到閱讀器，如：",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "zxlwbc": {
+    "defaultMessage": "等候寫入完成...",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "gMZfHO": {
+    "defaultMessage": "RSS 訂閱",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "D2Sw/t": {
+    "defaultMessage": "添加以下任一網址到 RSS 閱讀器",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "rf0ew3": {
+    "defaultMessage": "快來搭建圍爐，呼召你的支持者加入",
+    "description": "src/components/UserProfile/CircleWidget/index.tsx"
+  },
+  "cPIKU2": {
+    "defaultMessage": "追蹤中",
+    "description": ""
+  },
+  "pzTOmv": {
+    "defaultMessage": "追蹤者",
+    "description": ""
+  },
+  "i/4KO2": {
+    "defaultMessage": "此帳戶因為違反社區約章而被註銷",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "oNYnCM": {
+    "defaultMessage": "已註銷用戶",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "rs0YS2": {
+    "defaultMessage": "已禁言用戶",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "EoNvLu": {
+    "defaultMessage": "創作了",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "ikVIu3": {
+    "defaultMessage": "篇作品",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "UxfPXa": {
+    "defaultMessage": "累積創作",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "Ic4hqD": {
+    "defaultMessage": "字",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "J+dIsA": {
+    "defaultMessage": "訂閱",
+    "description": ""
+  },
+  "3KNMbJ": {
+    "defaultMessage": "作品",
+    "description": ""
+  },
+  "WBVVYd": {
+    "defaultMessage": "回應",
+    "description": ""
+  },
+  "1EYCdR": {
+    "defaultMessage": "標籤",
+    "description": ""
+  },
   "sT9HoG": {
     "defaultMessage": "歡迎加入 Matters，一個自由、自主、永續的創作與公共討論空間。",
     "description": "src/views/Follow/PickAuthors/index.tsx"
