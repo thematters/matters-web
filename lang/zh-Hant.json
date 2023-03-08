@@ -495,9 +495,9 @@
     "defaultMessage": "分享",
     "description": ""
   },
-  "O02Dsj": {
+  "u5aHb4": {
     "defaultMessage": "複製鏈接",
-    "description": "src/components/Dialogs/ShareDialog/Copy.tsx"
+    "description": ""
   },
   "NONfAh": {
     "defaultMessage": "豆瓣",
@@ -593,15 +593,15 @@
   },
   "ikVIu3": {
     "defaultMessage": "篇作品",
-    "description": ""
+    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "UxfPXa": {
     "defaultMessage": "累積創作",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
-  "/IN9oo": {
+  "Ic4hqD": {
     "defaultMessage": "字",
-    "description": ""
+    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "J+dIsA": {
     "defaultMessage": "訂閱",

@@ -19,10 +19,6 @@
     "defaultMessage": "Terms and Privacy Policy",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "/IN9oo": {
-    "defaultMessage": "words",
-    "description": ""
-  },
   "/asuIY": {
     "defaultMessage": "Enter Community",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
@@ -207,6 +203,10 @@
     "defaultMessage": "Enter Password",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
+  "Ic4hqD": {
+    "defaultMessage": "words",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "J+LXrH": {
     "defaultMessage": "User registered by email can login and enable wallet login later",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
@@ -267,6 +267,10 @@
     "defaultMessage": "Notifications",
     "description": ""
   },
+  "NG8uih": {
+    "defaultMessage": "articles",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "NONfAh": {
     "defaultMessage": "Douban",
     "description": "src/components/Share/Buttons/Douban.tsx"
@@ -274,10 +278,6 @@
   "NzfL1d": {
     "defaultMessage": "Enter password again",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
-  },
-  "O02Dsj": {
-    "defaultMessage": "Copy Link",
-    "description": "src/components/Dialogs/ShareDialog/Copy.tsx"
   },
   "O03Rkc": {
     "defaultMessage": "resigned as tag collaborator. You can invite new collaborators to join",
@@ -486,10 +486,6 @@
   "iCFXtS": {
     "defaultMessage": "For unregistered or users enabled wallet login",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
-  "ikVIu3": {
-    "defaultMessage": "articles",
-    "description": ""
   },
   "ipQlDG": {
     "defaultMessage": "Login with Email",

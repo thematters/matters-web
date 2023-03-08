@@ -12,16 +12,13 @@ const Copy = ({ link }: { link: string }) => {
         <button
           aria-label={intl.formatMessage({
             defaultMessage: 'Copy Link',
-            description: 'src/components/Dialogs/ShareDialog/Copy.tsx',
+            description: '',
           })}
         >
           <TextIcon icon={<IconLink16 color="grey" />} spacing="base">
             <div className="text">
               <span>
-                <FormattedMessage
-                  defaultMessage="Copy Link"
-                  description="src/components/Dialogs/ShareDialog/Copy.tsx"
-                />
+                <FormattedMessage defaultMessage="Copy Link" description="" />
               </span>
             </div>
           </TextIcon>

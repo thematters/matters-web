@@ -495,9 +495,9 @@
     "defaultMessage": "Share",
     "description": ""
   },
-  "O02Dsj": {
+  "u5aHb4": {
     "defaultMessage": "Copy Link",
-    "description": "src/components/Dialogs/ShareDialog/Copy.tsx"
+    "description": ""
   },
   "NONfAh": {
     "defaultMessage": "Douban",
@@ -671,17 +671,17 @@
     "defaultMessage": "Created",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
-  "ikVIu3": {
+  "NG8uih": {
     "defaultMessage": "articles",
-    "description": ""
+    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "UxfPXa": {
     "defaultMessage": "In total",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
-  "/IN9oo": {
+  "Ic4hqD": {
     "defaultMessage": "words",
-    "description": ""
+    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "J+dIsA": {
     "defaultMessage": "Subscriptions",

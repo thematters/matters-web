@@ -45,7 +45,10 @@ const ArticleSummaryInfo = ({
         description="src/views/User/Articles/UserArticles.tsx"
       />
       <span className="num">&nbsp;{articles}&nbsp;</span>
-      <FormattedMessage defaultMessage="articles" description="" />
+      <FormattedMessage
+        defaultMessage="articles"
+        description="src/views/User/Articles/UserArticles.tsx"
+      />
 
       <IconDotDivider />
 
@@ -54,7 +57,10 @@ const ArticleSummaryInfo = ({
         description="src/views/User/Articles/UserArticles.tsx"
       />
       <span className="num">&nbsp;{words}&nbsp;</span>
-      <FormattedMessage defaultMessage="words" description="" />
+      <FormattedMessage
+        defaultMessage="words"
+        description="src/views/User/Articles/UserArticles.tsx"
+      />
       <style jsx>{styles}</style>
     </div>
   )
