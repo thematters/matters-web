@@ -1,8 +1,9 @@
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { toPath, translate } from '~/common/utils'
+import { toPath } from '~/common/utils'
 import {
   Button,
   DropdownDialog,
@@ -11,10 +12,8 @@ import {
   IconLogout24,
   IconMore32,
   IconSettings32,
-  LanguageContext,
   Menu,
   TextIcon,
-  Translate,
   UnsubscribeCircleDialog,
   ViewerContext,
 } from '~/components'
@@ -51,14 +50,16 @@ const BaseDropdownActions = ({
 
   openUnsubscribeCircleDialog,
 }: BaseDropdownActionsProps) => {
-  const { lang } = useContext(LanguageContext)
-
+  const intl = useIntl()
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {isCircleOwner && (
         <Menu.Item {...toPath({ page: 'circleSettings', circle })} is="link">
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
-            <Translate id="manageCircle" />
+            <FormattedMessage
+              defaultMessage="Manage Circle"
+              description="src/views/Circle/Profile/DropdownActions/index.tsx"
+            />
           </TextIcon>
         </Menu.Item>
       )}
@@ -70,7 +71,7 @@ const BaseDropdownActions = ({
             size="md"
             spacing="base"
           >
-            <Translate id="circleAnalytics" />
+            <FormattedMessage defaultMessage="Analytics" description="" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -78,7 +79,10 @@ const BaseDropdownActions = ({
       {hasUnsubscribeCircle && (
         <Menu.Item onClick={openUnsubscribeCircleDialog} aria-haspopup="dialog">
           <TextIcon icon={<IconLogout24 size="md" />} size="md" spacing="base">
-            <Translate id="unsubscribeCircle" />
+            <FormattedMessage
+              defaultMessage="Unsubscribe Circle"
+              description="src/views/Circle/Profile/DropdownActions/index.tsx"
+            />
           </TextIcon>
         </Menu.Item>
       )}
@@ -99,7 +103,10 @@ const BaseDropdownActions = ({
       {({ openDialog, type, ref }) => (
         <Button
           bgColor="half-black"
-          aria-label={translate({ id: 'moreActions', lang })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'More Actions',
+            description: '',
+          })}
           aria-haspopup={type}
           onClick={openDialog}
           ref={ref}

@@ -44,10 +44,7 @@ const Hint = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <FormattedMessage
-              defaultMessage="tutorial"
-              description="src/components/Forms/WalletAuthForm/Select.tsx"
-            />
+            <FormattedMessage defaultMessage="tutorial" description="" />
           </a>
         </p>
       </Media>
@@ -63,10 +60,7 @@ const Hint = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <FormattedMessage
-              defaultMessage="tutorial"
-              description="src/components/Forms/WalletAuthForm/Select.tsx"
-            />
+            <FormattedMessage defaultMessage="tutorial" description="" />
           </a>
         </p>
       </Media>

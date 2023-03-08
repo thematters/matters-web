@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
+import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Spinner, Translate, useDialogSwitch } from '~/components'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
 interface MembersDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -20,7 +21,12 @@ const BaseMembersDialog = ({ children }: MembersDialogProps) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={<Translate zh_hant="成員" zh_hans="成員" en="Members" />}
+          title={
+            <FormattedMessage
+              defaultMessage="Members"
+              description=""
+            />
+          }
           closeDialog={closeDialog}
           closeTextId="close"
         />

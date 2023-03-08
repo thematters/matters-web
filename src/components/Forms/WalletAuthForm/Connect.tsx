@@ -406,7 +406,7 @@ const Connect: React.FC<FormProps> = ({
                   &nbsp;
                   <FormattedMessage
                     defaultMessage="Terms and Privacy Policy"
-                    description="src/components/Forms/WalletAuthForm/Connect.tsx"
+                    description=""
                   />
                 </a>
               </Link>

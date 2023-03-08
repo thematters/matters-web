@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
 import { Z_INDEX } from '~/common/enums'
 import {
@@ -5,7 +7,6 @@ import {
   DropdownDialog,
   Menu,
   TextIcon,
-  Translate,
   withIcon,
 } from '~/components'
 
@@ -19,8 +20,9 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <Translate id="lately" /> 7{' '}
-          <Translate en="days" zh_hans="天" zh_hant="天" />
+          <FormattedMessage defaultMessage="Last {days} days" description="src/views/Me/Analytics/SelectPeriod/index.tsx" values={{
+            days: 7
+          }}/>
         </>
       ),
       value: 7,
@@ -28,8 +30,9 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <Translate id="lately" /> 1{' '}
-          <Translate en="month" zh_hans="个月" zh_hant="個月" />
+          <FormattedMessage defaultMessage="Last {month} month" description="src/views/Me/Analytics/SelectPeriod/index.tsx" values={{
+            month: 1
+          }}/>
         </>
       ),
       value: 30,
@@ -37,8 +40,9 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <Translate id="lately" /> 3{' '}
-          <Translate en="months" zh_hans="个月" zh_hant="個月" />
+          <FormattedMessage defaultMessage="Last {months} months" description="src/views/Me/Analytics/SelectPeriod/index.tsx" values={{
+            months: 3
+          }} />
         </>
       ),
       value: 90,
@@ -46,7 +50,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <Translate id="all" />
+          <FormattedMessage defaultMessage="All" description="" />
         </>
       ),
       value: 0,

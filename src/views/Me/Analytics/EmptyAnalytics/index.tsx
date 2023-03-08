@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as SupporterListRocket } from '@/public/static/images/supporter-list-rocket.svg'
 import { GUIDE_LINKS } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
+import { toPath } from '~/common/utils'
 import {
   Button,
   IconDonateBg24,
   LanguageContext,
   TextIcon,
-  Translate,
   useMutation,
 } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
@@ -21,8 +21,14 @@ const EmptyAnalytics = () => {
   const router = useRouter()
   const { lang } = useContext(LanguageContext)
 
+  const intl = useIntl()
   const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
-    variables: { title: translate({ id: 'untitle', lang }) },
+    variables: {
+      title: intl.formatMessage({
+        defaultMessage: 'Untitled',
+        description: '',
+      }),
+    },
   })
 
   return (
@@ -34,12 +40,18 @@ const EmptyAnalytics = () => {
           color="black"
           size="md"
         >
-          <Translate id="supporterRankingList" />
+          <FormattedMessage
+            defaultMessage="Top Supporters"
+            description=""
+          />
         </TextIcon>
       </section>
       <section className="content">
         <p>
-          <Translate id="analyticsNoArticle" />
+          <FormattedMessage
+            defaultMessage="You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!"
+            description="src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+          />
         </p>
         <section className="rocket">
           <SupporterListRocket />
@@ -59,19 +71,14 @@ const EmptyAnalytics = () => {
           }}
         >
           <TextIcon color="white" weight="md">
-            <Translate
-              zh_hant="開始創作"
-              zh_hans="开始创作"
-              en="Start Creating"
-            />
+            <FormattedMessage defaultMessage="Start Creating" description="" />
           </TextIcon>
         </Button>
         <section className="tips">
           <p>
-            <Translate
-              zh_hant="想了解更多？詳見 "
-              zh_hans="想了解更多？详见 "
-              en="Want to know more? Check the "
+            <FormattedMessage
+              defaultMessage="Want to know more? Check the "
+              description="src/views/Me/Analytics/EmptyAnalytics/index.tsx"
             />
             <a
               className="u-link-green"
@@ -79,9 +86,8 @@ const EmptyAnalytics = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
+              <FormattedMessage defaultMessage="tutorial" description="" />
             </a>
-            <Translate zh_hant="" zh_hans="" en="." />
           </p>
         </section>
       </section>
