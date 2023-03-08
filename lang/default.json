@@ -7,9 +7,17 @@
     "defaultMessage": "sent a new broadcast on {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "/+XWDi": {
+    "defaultMessage": "Logbook 2.0",
+    "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
   "/3G89K": {
     "defaultMessage": "is growing",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+  },
+  "/3kw6k": {
+    "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "/IMR+8": {
     "defaultMessage": "Top Supporters",
@@ -29,6 +37,10 @@
   },
   "0Azlrb": {
     "defaultMessage": "Manage",
+    "description": ""
+  },
+  "1EYCdR": {
+    "defaultMessage": "Tags",
     "description": ""
   },
   "1pFLGZ": {
@@ -187,6 +199,10 @@
     "defaultMessage": "Not for login",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "D2Sw/t": {
+    "defaultMessage": "Add any URL in the following list into RSS reader",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
   "D3idYv": {
     "defaultMessage": "Settings",
     "description": ""
@@ -198,6 +214,10 @@
   "EfJYPI": {
     "defaultMessage": "Verification Code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "EoNvLu": {
+    "defaultMessage": "Created",
+    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "EwVnoC": {
     "defaultMessage": "I have read and agree to",
@@ -259,9 +279,17 @@
     "defaultMessage": "Enter Password",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
+  "Ic4hqD": {
+    "defaultMessage": "words",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "J+LXrH": {
     "defaultMessage": "User registered by email can login and enable wallet login later",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "J+dIsA": {
+    "defaultMessage": "Subscriptions",
+    "description": ""
   },
   "J3yk6u": {
     "defaultMessage": "in circle",
@@ -307,6 +335,10 @@
     "defaultMessage": "Congrats!",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "Lc/azT": {
+    "defaultMessage": "IPNS Subscription",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
   "LphWYP": {
     "defaultMessage": "Terms and Privacy Policy",
     "description": ""
@@ -331,6 +363,14 @@
     "defaultMessage": "Notifications",
     "description": ""
   },
+  "NG8uih": {
+    "defaultMessage": "articles",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "NONfAh": {
+    "defaultMessage": "Douban",
+    "description": "src/components/Share/Buttons/Douban.tsx"
+  },
   "NzfL1d": {
     "defaultMessage": "Enter password again",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
@@ -338,6 +378,10 @@
   "O03Rkc": {
     "defaultMessage": "resigned as tag collaborator. You can invite new collaborators to join",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "OKhRC6": {
+    "defaultMessage": "Share",
+    "description": ""
   },
   "Pdx3j1": {
     "defaultMessage": "New Article",
@@ -403,6 +447,10 @@
     "defaultMessage": "Tags added",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
+  "UxfPXa": {
+    "defaultMessage": "In total",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "VO4Elt": {
     "defaultMessage": "mentioned you in a comment on {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -414,6 +462,10 @@
   "VrOoVf": {
     "defaultMessage": "Matters will never ask your wallet key through any channel.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "WBVVYd": {
+    "defaultMessage": "Responses",
+    "description": ""
   },
   "WuvE8X": {
     "defaultMessage": "Followers of {circleName}",
@@ -483,9 +535,17 @@
     "defaultMessage": "replied to your discussion on",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "b1FfGy": {
+    "defaultMessage": "Content Feed",
+    "description": "src/components/UserProfile/index.tsx"
+  },
   "b3onWZ": {
     "defaultMessage": "Last {days} days",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "bBYO6x": {
+    "defaultMessage": "Unblock",
+    "description": "src/components/BlockUser/Button/index.tsx"
   },
   "bVZDVx": {
     "defaultMessage": "withdrawal process has started. Please refer to your bank for payout status.",
@@ -502,6 +562,10 @@
   "cPIKU2": {
     "defaultMessage": "Following",
     "description": ""
+  },
+  "cf37Zy": {
+    "defaultMessage": "Add hash from IPFS into compatible reader such as",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "cfL5uk": {
     "defaultMessage": "Over 200 words, current {numbers}",
@@ -563,6 +627,10 @@
     "defaultMessage": "posted and replied to topics",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "gMZfHO": {
+    "defaultMessage": "RSS Subscription",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
   "hWs95P": {
     "defaultMessage": "Important information will be notified by email. So filling in your email address will be required.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -578,6 +646,10 @@
   "hrfF+i": {
     "defaultMessage": "Don't have a wallet yet? Check the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "i/4KO2": {
+    "defaultMessage": "This account is archived due to violation of community guidelines",
+    "description": "src/components/UserProfile/index.tsx"
   },
   "iCFXtS": {
     "defaultMessage": "For unregistered or users enabled wallet login",
@@ -643,6 +715,10 @@
     "defaultMessage": "subscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
+  "mSAY3/": {
+    "defaultMessage": "User unblocked. User can now comment on your articles.",
+    "description": "src/components/BlockUser/Button/index.tsx"
+  },
   "mk+LCk": {
     "defaultMessage": "Display Preferences",
     "description": "src/views/Me/Settings/AnonymousSettings/DisplayPreferences/index.tsx"
@@ -669,6 +745,10 @@
   "o2Na0B": {
     "defaultMessage": "Back to All",
     "description": ""
+  },
+  "oNYnCM": {
+    "defaultMessage": "Account Archived",
+    "description": "src/components/UserProfile/index.tsx"
   },
   "pla6ZF": {
     "defaultMessage": "Search articles, tags and authors",
@@ -702,13 +782,29 @@
     "defaultMessage": "Email will not be used as a login but only as a contact channel.",
     "description": ""
   },
+  "qyzJxi": {
+    "defaultMessage": "Logbook 1.0",
+    "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "rBjwQy": {
+    "defaultMessage": "Weibo",
+    "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
   "reOeq5": {
     "defaultMessage": "You have created your personal creative space. Publish your first work!",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
+  "rf0ew3": {
+    "defaultMessage": "Come build a Circle and call on your supporters to join you!",
+    "description": "src/components/UserProfile/CircleWidget/index.tsx"
+  },
   "rfz/fN": {
     "defaultMessage": "Recommended size: 1600px x 900px",
     "description": ""
+  },
+  "rs0YS2": {
+    "defaultMessage": "Account Banned",
+    "description": "src/components/UserProfile/index.tsx"
   },
   "skbUBl": {
     "defaultMessage": "Log in",
@@ -738,6 +834,10 @@
     "defaultMessage": "replied to topics and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "u5aHb4": {
+    "defaultMessage": "Copy Link",
+    "description": ""
+  },
   "uVCg1l": {
     "defaultMessage": "Explore Matters",
     "description": ""
@@ -757,6 +857,10 @@
   "v6YjIn": {
     "defaultMessage": "Account",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "vAc1Bw": {
+    "defaultMessage": "Block User",
+    "description": ""
   },
   "vH8sCb": {
     "defaultMessage": "Circle",
@@ -813,5 +917,9 @@
   "zQvVDJ": {
     "defaultMessage": "All",
     "description": ""
+  },
+  "zxlwbc": {
+    "defaultMessage": "Waiting ...",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   }
 }

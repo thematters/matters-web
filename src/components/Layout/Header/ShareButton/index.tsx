@@ -1,10 +1,8 @@
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
 import {
   Button,
   IconShare32,
-  LanguageContext,
   ShareDialog,
   ShareDialogProps,
 } from '~/components'
@@ -12,13 +10,15 @@ import {
 export const ShareButton: React.FC<Omit<ShareDialogProps, 'children'>> = (
   props
 ) => {
-  const { lang } = useContext(LanguageContext)
-
+  const intl = useIntl()
   return (
     <ShareDialog {...props}>
       {({ openDialog: openShareDialog }) => (
         <Button
-          aria-label={translate({ id: 'share', lang })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Share',
+            description: '',
+          })}
           aria-haspopup="dialog"
           bgColor="half-black"
           onClick={openShareDialog}

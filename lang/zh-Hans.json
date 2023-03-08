@@ -479,6 +479,130 @@
     "defaultMessage": " 辞去了标签主理人权限，你要不要试试看成为新的主理人？",
     "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
   },
+  "OKhRC6": {
+    "defaultMessage": "分享",
+    "description": ""
+  },
+  "u5aHb4": {
+    "defaultMessage": "复制链接",
+    "description": ""
+  },
+  "NONfAh": {
+    "defaultMessage": "豆瓣",
+    "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "rBjwQy": {
+    "defaultMessage": "微博",
+    "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "bBYO6x": {
+    "defaultMessage": "取消屏蔽",
+    "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "vAc1Bw": {
+    "defaultMessage": "封锁用户",
+    "description": ""
+  },
+  "mSAY3/": {
+    "defaultMessage": "已取消屏蔽。该用户现在可以评论你的作品和围炉。",
+    "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "wEQDC6": {
+    "defaultMessage": "编辑资料",
+    "description": ""
+  },
+  "/+XWDi": {
+    "defaultMessage": "航行日志 2.0",
+    "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "qyzJxi": {
+    "defaultMessage": "航行日志 1.0",
+    "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "A7ugfn": {
+    "defaultMessage": "更多操作",
+    "description": ""
+  },
+  "b1FfGy": {
+    "defaultMessage": "内容订阅",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "/3kw6k": {
+    "defaultMessage": "尝试将内容写入 IPFS 网络中，需要一段时间，请耐心等候。若等候时间过久，可通过发布文章来加速。",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "Lc/azT": {
+    "defaultMessage": "IPNS 订阅",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "cf37Zy": {
+    "defaultMessage": "添加 IPFS 生成的 IPNS 指纹到阅读器，如：",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "zxlwbc": {
+    "defaultMessage": "等待写入完成...",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "gMZfHO": {
+    "defaultMessage": "RSS 订阅",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "D2Sw/t": {
+    "defaultMessage": "添加以下任一网址到 RSS 阅读器",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "rf0ew3": {
+    "defaultMessage": "快来搭建围炉，呼召你的支持者加入!",
+    "description": "src/components/UserProfile/CircleWidget/index.tsx"
+  },
+  "cPIKU2": {
+    "defaultMessage": "追踪中",
+    "description": ""
+  },
+  "pzTOmv": {
+    "defaultMessage": "追踪者",
+    "description": ""
+  },
+  "i/4KO2": {
+    "defaultMessage": "此帐户因为违反社区约章而被注销",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "oNYnCM": {
+    "defaultMessage": "已注销用户",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "rs0YS2": {
+    "defaultMessage": "已禁言用户",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "EoNvLu": {
+    "defaultMessage": "创作了",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "UxfPXa": {
+    "defaultMessage": "累积创作",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "Ic4hqD": {
+    "defaultMessage": "字",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "J+dIsA": {
+    "defaultMessage": "订阅",
+    "description": ""
+  },
+  "3KNMbJ": {
+    "defaultMessage": "作品",
+    "description": ""
+  },
+  "WBVVYd": {
+    "defaultMessage": "回应",
+    "description": ""
+  },
+  "1EYCdR": {
+    "defaultMessage": "标签",
+    "description": ""
+  },
   "sT9HoG": {
     "defaultMessage": "欢迎加入 Matters，一个自由、自主、永续的创作与公共讨论空间。",
     "description": "src/views/Follow/PickAuthors/index.tsx"
@@ -557,10 +681,6 @@
   },
   "cE4Hfw": {
     "defaultMessage": "发现",
-    "description": ""
-  },
-  "cPIKU2": {
-    "defaultMessage": "追踪",
     "description": ""
   },
   "NAidKb": {
@@ -695,10 +815,6 @@
     "defaultMessage": "此标签目前无人主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "pzTOmv": {
-    "defaultMessage": "追踪者",
-    "description": ""
-  },
   "UjKkhq": {
     "defaultMessage": "作品已添加标签",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -714,10 +830,6 @@
   "aUPhEs": {
     "defaultMessage": "添加精选",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
-  },
-  "wEQDC6": {
-    "defaultMessage": "编辑标签",
-    "description": ""
   },
   "beLe/F": {
     "defaultMessage": "广播",
