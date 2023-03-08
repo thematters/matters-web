@@ -786,5 +786,13 @@
   "jvo0vs": {
     "defaultMessage": "保存",
     "description": ""
+  },
+  "A3wDZ8": {
+    "defaultMessage": "我的 NFT 收藏",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
+  },
+  "QCo7Gc": {
+    "defaultMessage": "选择 NFT 作为你的头像",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
   }
 }

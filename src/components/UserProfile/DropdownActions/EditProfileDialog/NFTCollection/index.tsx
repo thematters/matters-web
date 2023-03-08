@@ -1,12 +1,10 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
 import {
   Avatar,
   Form,
   IconChecked,
-  LanguageContext,
-  Translate,
 } from '~/components'
 import { EditProfileDialogUserPrivateFragment } from '~/gql/graphql'
 
@@ -55,15 +53,15 @@ const NFTCollectionItem = ({
 }
 
 const NFTCollection: React.FC<NFTCollectionProps> = ({ nfts, setField }) => {
-  const { lang } = useContext(LanguageContext)
   const [selectedNFTIndex, setSelectedNFTIndex] = useState<number>(-1)
   const fieldId = `field-nft-collection`
   const fieldMsgId = `field-msg-nft-collection`
 
+  const intl = useIntl()
   return (
     <Form.Field>
       <Form.Field.Header
-        label={<Translate id="myNFTCollections" />}
+        label={<FormattedMessage defaultMessage="My NFT Collections" description="src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx" />}
         htmlFor={fieldId}
       />
 
@@ -88,12 +86,12 @@ const NFTCollection: React.FC<NFTCollectionProps> = ({ nfts, setField }) => {
 
       <Form.Field.Footer
         fieldMsgId={fieldMsgId}
-        hint={translate({
-          lang,
-          zh_hant: '選擇 NFT 作為你的頭像',
-          zh_hans: '选择 NFT 作为你的头像',
-          en: 'Select NFT as your avatar',
-        })}
+        hint={
+          intl.formatMessage({
+            defaultMessage: 'Select NFT as your avatar',
+            description: 'src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx'
+          })
+      }
       />
     </Form.Field>
   )

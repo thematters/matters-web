@@ -786,5 +786,13 @@
   "jvo0vs": {
     "defaultMessage": "Save",
     "description": ""
+  },
+  "A3wDZ8": {
+    "defaultMessage": "My NFT Collections",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
+  },
+  "QCo7Gc": {
+    "defaultMessage": "Select NFT as your avatar",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
   }
 }

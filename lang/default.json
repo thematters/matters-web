@@ -135,6 +135,10 @@
     "defaultMessage": "replied to topics",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "A3wDZ8": {
+    "defaultMessage": "My NFT Collections",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
+  },
   "A41QIy": {
     "defaultMessage": "Enter Password",
     "description": ""
@@ -342,6 +346,10 @@
   "Q8Qw5B": {
     "defaultMessage": "Description",
     "description": ""
+  },
+  "QCo7Gc": {
+    "defaultMessage": "Select NFT as your avatar",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
   },
   "QV19cI": {
     "defaultMessage": "Failed to republish article",
