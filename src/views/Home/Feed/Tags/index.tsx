@@ -60,7 +60,7 @@ const TagsFeed = () => {
     FEED_TAGS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: { random: lastRandom || 0 },
+      variables: { random: lastRandom || 0, first: perPage },
     },
     { publicQuery: !viewer.isAuthed }
   )
