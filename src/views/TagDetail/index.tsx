@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { ERROR_CODES } from '~/common/enums'
@@ -21,7 +22,6 @@ import {
   Spinner,
   Tabs,
   Throw404,
-  Translate,
   useFeatures,
   usePublicQuery,
   useRoute,
@@ -203,11 +203,11 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
 
       <Tabs sticky>
         <Tabs.Tab selected={isHottest} onClick={() => changeFeed('hottest')}>
-          <Translate id="hottest" />
+          <FormattedMessage defaultMessage="Trending" description="" />
         </Tabs.Tab>
 
         <Tabs.Tab selected={isLatest} onClick={() => changeFeed('latest')}>
-          <Translate id="latest" />
+          <FormattedMessage defaultMessage="c" description="" />
         </Tabs.Tab>
 
         {hasSelectedFeed && (
@@ -215,12 +215,12 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             selected={isSelected}
             onClick={() => changeFeed('selected')}
           >
-            <Translate zh_hant="精選" zh_hans="精选" en="Featured" />
+            <FormattedMessage defaultMessage="Featured" description="" />
           </Tabs.Tab>
         )}
 
         <Tabs.Tab selected={isCreators} onClick={() => changeFeed('creators')}>
-          <Translate zh_hant="創作者" zh_hans="创作者" en="Creators" />
+          <FormattedMessage defaultMessage="Creators" description="" />
         </Tabs.Tab>
       </Tabs>
 

@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import _chunk from 'lodash/chunk'
 import _get from 'lodash/get'
 import _random from 'lodash/random'
+import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -12,7 +13,6 @@ import {
   ShuffleButton,
   Slides,
   TagDigest,
-  Translate,
   usePublicQuery,
   ViewAllButton,
   ViewMoreCard,
@@ -40,7 +40,10 @@ const RelatedTagsHeader = ({
   return (
     <PageHeader
       title={
-        <Translate zh_hant="相關標籤" zh_hans="相关标签" en="Related Tags" />
+        <FormattedMessage
+          defaultMessage="Related Tags"
+          description="src/views/TagDetail/RelatedTags/index.tsx"
+        />
       }
       is="h2"
       hasNoBorder
@@ -131,7 +134,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
             textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
             textAlign="center"
           >
-            <Translate id="backToAll" />
+            <FormattedMessage defaultMessage="Back to All" description="" />
           </ViewMoreCard>
         </section>
         <style jsx>{styles}</style>

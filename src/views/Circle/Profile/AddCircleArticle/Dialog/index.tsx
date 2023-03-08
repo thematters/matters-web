@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST, REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
 import { translate } from '~/common/utils'
@@ -7,7 +8,6 @@ import {
   Dialog,
   LanguageContext,
   Spinner,
-  Translate,
   useDialogSwitch,
   useMutation,
   useStep,
@@ -117,7 +117,9 @@ const AddCircleArticleDialog = ({
             onSave={onSaveArticles}
             nodes={articles}
             saving={loading}
-            headerRightButtonText={<Translate id="nextStep" />}
+            headerRightButtonText={
+              <FormattedMessage defaultMessage="Next Step" description="" />
+            }
             closeDialog={closeDialog}
           />
         )}

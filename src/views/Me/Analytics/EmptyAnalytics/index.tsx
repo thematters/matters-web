@@ -23,10 +23,12 @@ const EmptyAnalytics = () => {
 
   const intl = useIntl()
   const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
-    variables: { title: intl.formatMessage({
-      defaultMessage: 'Untitled',
-      description: ''
-    }) },
+    variables: {
+      title: intl.formatMessage({
+        defaultMessage: 'Untitled',
+        description: '',
+      }),
+    },
   })
 
   return (
@@ -38,12 +40,18 @@ const EmptyAnalytics = () => {
           color="black"
           size="md"
         >
-          <FormattedMessage defaultMessage="Top Supporters" description="src/views/Me/Analytics/EmptyAnalytics/index.tsx" />
+          <FormattedMessage
+            defaultMessage="Top Supporters"
+            description="src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+          />
         </TextIcon>
       </section>
       <section className="content">
         <p>
-          <FormattedMessage defaultMessage="You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!" description="src/views/Me/Analytics/EmptyAnalytics/index.tsx" />
+          <FormattedMessage
+            defaultMessage="You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!"
+            description="src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+          />
         </p>
         <section className="rocket">
           <SupporterListRocket />
@@ -68,7 +76,10 @@ const EmptyAnalytics = () => {
         </Button>
         <section className="tips">
           <p>
-            <FormattedMessage defaultMessage="Want to know more? Check the " description="src/views/Me/Analytics/EmptyAnalytics/index.tsx" />
+            <FormattedMessage
+              defaultMessage="Want to know more? Check the "
+              description="src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+            />
             <a
               className="u-link-green"
               href={GUIDE_LINKS.authorToolbox[lang]}

@@ -1,6 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { IMAGE_PIXEL } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
-import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import tagFragments from '~/components/GQL/fragments/tag'
 import { FollowersTagFragment } from '~/gql/graphql'
@@ -37,7 +38,7 @@ const Followers = ({ tag }: FollowersProps) => {
         <b>{numAbbr(totalCount)}</b>
         <span>
           &nbsp;
-          <Translate zh_hant="人追蹤" zh_hans="人追踪" en="Followers" />
+          <FormattedMessage defaultMessage="Followers" description="" />
         </span>
       </section>
 

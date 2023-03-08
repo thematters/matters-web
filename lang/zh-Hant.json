@@ -71,9 +71,9 @@
     "defaultMessage": "以郵箱登入",
     "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
   },
-  "fw3tYQ": {
+  "pwlQEY": {
     "defaultMessage": "姓名",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+    "description": ""
   },
   "4mbdyI": {
     "defaultMessage": "電子信箱",
@@ -83,9 +83,9 @@
     "defaultMessage": "我已閱讀並同意",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
-  "nmZI+U": {
+  "LphWYP": {
     "defaultMessage": "Matters 用戶協議和隱私政策",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+    "description": ""
   },
   "agfumL": {
     "defaultMessage": "下一步",
@@ -107,7 +107,7 @@
     "defaultMessage": "再次輸入密碼",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
   },
-  "JsK5CJ": {
+  "N2IrpM": {
     "defaultMessage": "確認",
     "description": ""
   },
@@ -187,14 +187,6 @@
     "defaultMessage": "驗證碼",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "0Rw3H/": {
-    "defaultMessage": "我已閱讀並同意",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
-  },
-  "/A/biR": {
-    "defaultMessage": "Matters 用戶協議和隱私政策",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
   "jgLiba": {
     "defaultMessage": "請輸入驗證碼",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -249,10 +241,6 @@
   },
   "deEeEI": {
     "defaultMessage": "註冊",
-    "description": ""
-  },
-  "N2IrpM": {
-    "defaultMessage": "確認",
     "description": ""
   },
   "EwVnoC": {
@@ -646,5 +634,157 @@
   "3ynsJ3": {
     "defaultMessage": "想了解更多？詳見 ",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "0Azlrb": {
+    "defaultMessage": "管理",
+    "description": ""
+  },
+  "tjvyrl": {
+    "defaultMessage": "主理人",
+    "description": "src/views/TagDetail/Community/Maintainers/index.tsx"
+  },
+  "dg3JCQ": {
+    "defaultMessage": "協作者",
+    "description": ""
+  },
+  "TzhzIH": {
+    "defaultMessage": "創作者",
+    "description": ""
+  },
+  "Pdx3j1": {
+    "defaultMessage": "創作新的作品",
+    "description": "src/views/TagDetail/Buttons/AddButton/CreateDraftMenuItem/index.tsx"
+  },
+  "5FO4vn": {
+    "defaultMessage": "你尚無權限進行該操作",
+    "description": ""
+  },
+  "8ttGfR": {
+    "defaultMessage": "添加我的作品",
+    "description": "src/views/TagDetail/Buttons/AddButton/AddMyArticlesButton/index.tsx"
+  },
+  "ieGrWo": {
+    "defaultMessage": "追蹤",
+    "description": ""
+  },
+  "izWS4J": {
+    "defaultMessage": "取消追蹤",
+    "description": ""
+  },
+  "LGox1K": {
+    "defaultMessage": "已追蹤",
+    "description": ""
+  },
+  "3KNMbJ": {
+    "defaultMessage": "篇作品",
+    "description": ""
+  },
+  "HFVDeB": {
+    "defaultMessage": "相關標籤",
+    "description": "src/views/TagDetail/RelatedTags/index.tsx"
+  },
+  "o2Na0B": {
+    "defaultMessage": "返回全部",
+    "description": ""
+  },
+  "ANA7sk": {
+    "defaultMessage": "認領",
+    "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "63HuBz": {
+    "defaultMessage": "此標籤目前無人主理",
+    "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "pzTOmv": {
+    "defaultMessage": "追蹤者",
+    "description": ""
+  },
+  "UjKkhq": {
+    "defaultMessage": "作品已添加標籤",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "GRtGnZ": {
+    "defaultMessage": "辭去權限",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "L7Si5/": {
+    "defaultMessage": "管理社群",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "aUPhEs": {
+    "defaultMessage": "添加精選",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "wEQDC6": {
+    "defaultMessage": "編輯標籤",
+    "description": ""
+  },
+  "beLe/F": {
+    "defaultMessage": "廣播",
+    "description": ""
+  },
+  "20bImY": {
+    "defaultMessage": "衆聊",
+    "description": ""
+  },
+  "jx7Hn3": {
+    "defaultMessage": "作品",
+    "description": ""
+  },
+  "U9IXic": {
+    "defaultMessage": "添加作品",
+    "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
+  },
+  "q+N5Wd": {
+    "defaultMessage": "管理圍爐",
+    "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "8xPi0N": {
+    "defaultMessage": "離開圍爐",
+    "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "WuvE8X": {
+    "defaultMessage": "{circleName} 的追蹤者",
+    "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
+  },
+  "XVYrS/": {
+    "defaultMessage": "還沒有追蹤者",
+    "description": ""
+  },
+  "RjE9E9": {
+    "defaultMessage": "成員",
+    "description": ""
+  },
+  "KL502d": {
+    "defaultMessage": "資料已保存",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+  },
+  "rfz/fN": {
+    "defaultMessage": "建議封面尺寸 1600 x 900 像素",
+    "description": ""
+  },
+  "lhaIoi": {
+    "defaultMessage": "請輸入姓名",
+    "description": ""
+  },
+  "E8W3qa": {
+    "defaultMessage": "2-20 個字元",
+    "description": ""
+  },
+  "Q8Qw5B": {
+    "defaultMessage": "個人簡介",
+    "description": ""
+  },
+  "A8MpFX": {
+    "defaultMessage": "請輸入個人簡介",
+    "description": ""
+  },
+  "UNUROl": {
+    "defaultMessage": "建議 50 字以內，最長 200 字",
+    "description": ""
+  },
+  "jvo0vs": {
+    "defaultMessage": "儲存",
+    "description": ""
   }
 }

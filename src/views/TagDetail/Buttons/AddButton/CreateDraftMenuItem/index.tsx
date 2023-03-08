@@ -1,14 +1,13 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 import {
   IconAdd24,
-  LanguageContext,
   Menu,
   TextIcon,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -22,10 +21,9 @@ interface CreateDraftButtonProps {
 const BaseCreateDraftButton = ({ onClick }: { onClick: () => any }) => (
   <Menu.Item onClick={onClick}>
     <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
-      <Translate
-        zh_hant="創作新的作品"
-        zh_hans="创作新的作品"
-        en="New Article"
+      <FormattedMessage
+        defaultMessage="New Article"
+        description="src/views/TagDetail/Buttons/AddButton/CreateDraftMenuItem/index.tsx"
       />
     </TextIcon>
   </Menu.Item>
@@ -33,12 +31,15 @@ const BaseCreateDraftButton = ({ onClick }: { onClick: () => any }) => (
 
 const CreateDraftButton: React.FC<CreateDraftButtonProps> = ({ tag }) => {
   const router = useRouter()
-  const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
 
+  const intl = useIntl()
   const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
     variables: {
-      title: translate({ id: 'untitle', lang }),
+      title: intl.formatMessage({
+        defaultMessage: 'Untitled',
+        description: '',
+      }),
       tags: [tag.content],
     },
   })
@@ -49,7 +50,12 @@ const CreateDraftButton: React.FC<CreateDraftButtonProps> = ({ tag }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id="FORBIDDEN" />,
+            content: (
+              <FormattedMessage
+                defaultMessage="You do not have permission to perform this operation"
+                description=""
+              />
+            ),
           },
         })
       )

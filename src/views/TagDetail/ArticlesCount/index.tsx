@@ -1,5 +1,6 @@
+import { FormattedMessage } from 'react-intl'
+
 import { numAbbr } from '~/common/utils'
-import { Translate } from '~/components'
 import tagFragments from '~/components/GQL/fragments/tag'
 import { ArticleCountTagFragment } from '~/gql/graphql'
 
@@ -17,7 +18,7 @@ const ArticlesCount = ({ tag }: ArticlesCountProps) => {
       <b>{numAbbr(totalCount)}</b>
       <span>
         &nbsp;
-        <Translate zh_hant="篇作品" zh_hans="篇作品" en="Articles" />
+        <FormattedMessage defaultMessage="Articles" description="" />
       </span>
 
       <style jsx>{styles}</style>

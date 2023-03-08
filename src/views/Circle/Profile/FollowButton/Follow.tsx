@@ -1,17 +1,12 @@
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
-import {
-  Button,
-  TextIcon,
-  Translate,
-  useMutation,
-  ViewerContext,
-} from '~/components'
+import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
 import updateCircleFollowerCount from '~/components/GQL/updates/circleFollowerCount'
 import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
@@ -79,7 +74,7 @@ const Follow = ({ circle }: FollowProps) => {
       onClick={onClick}
     >
       <TextIcon weight="md" size="md-s">
-        <Translate id="follow" />
+        <FormattedMessage defaultMessage="Follow" description="" />
       </TextIcon>
     </Button>
   )

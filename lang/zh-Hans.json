@@ -71,7 +71,7 @@
     "defaultMessage": "以邮箱登入",
     "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
   },
-  "fw3tYQ": {
+  "pwlQEY": {
     "defaultMessage": "姓名",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
@@ -83,9 +83,9 @@
     "defaultMessage": "我已阅读并同意",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
-  "nmZI+U": {
+  "LphWYP": {
     "defaultMessage": "Matters 用户协议和隐私政策",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+    "description": ""
   },
   "agfumL": {
     "defaultMessage": "下一步",
@@ -106,10 +106,6 @@
   "NzfL1d": {
     "defaultMessage": "再次输入密码",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
-  },
-  "JsK5CJ": {
-    "defaultMessage": "确认",
-    "description": ""
   },
   "XH0Lb6": {
     "defaultMessage": "欢迎加入 Matters！",
@@ -185,14 +181,6 @@
   },
   "EfJYPI": {
     "defaultMessage": "验证码",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
-  "0Rw3H/": {
-    "defaultMessage": "我已阅读并同意",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
-  },
-  "/A/biR": {
-    "defaultMessage": "Matters 用户协议和隐私政策",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "jgLiba": {
@@ -646,5 +634,157 @@
   "3ynsJ3": {
     "defaultMessage": "想了解更多？详见 ",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "0Azlrb": {
+    "defaultMessage": "管理",
+    "description": ""
+  },
+  "tjvyrl": {
+    "defaultMessage": "主理人",
+    "description": "src/views/TagDetail/Community/Maintainers/index.tsx"
+  },
+  "dg3JCQ": {
+    "defaultMessage": "协作者",
+    "description": ""
+  },
+  "TzhzIH": {
+    "defaultMessage": "创作者",
+    "description": ""
+  },
+  "Pdx3j1": {
+    "defaultMessage": "创作新的作品",
+    "description": "src/views/TagDetail/Buttons/AddButton/CreateDraftMenuItem/index.tsx"
+  },
+  "5FO4vn": {
+    "defaultMessage": "你尚无权限进行该操作",
+    "description": ""
+  },
+  "8ttGfR": {
+    "defaultMessage": "添加我的作品",
+    "description": "src/views/TagDetail/Buttons/AddButton/AddMyArticlesButton/index.tsx"
+  },
+  "ieGrWo": {
+    "defaultMessage": "追踪",
+    "description": ""
+  },
+  "izWS4J": {
+    "defaultMessage": "取消追踪",
+    "description": ""
+  },
+  "LGox1K": {
+    "defaultMessage": "已追踪",
+    "description": ""
+  },
+  "3KNMbJ": {
+    "defaultMessage": "篇作品",
+    "description": ""
+  },
+  "HFVDeB": {
+    "defaultMessage": "相关标签",
+    "description": "src/views/TagDetail/RelatedTags/index.tsx"
+  },
+  "o2Na0B": {
+    "defaultMessage": "返回全部",
+    "description": ""
+  },
+  "ANA7sk": {
+    "defaultMessage": "认领",
+    "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "63HuBz": {
+    "defaultMessage": "此标签目前无人主理",
+    "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "pzTOmv": {
+    "defaultMessage": "追踪者",
+    "description": ""
+  },
+  "UjKkhq": {
+    "defaultMessage": "作品已添加标签",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "GRtGnZ": {
+    "defaultMessage": "辞去权限",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "L7Si5/": {
+    "defaultMessage": "管理社群",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "aUPhEs": {
+    "defaultMessage": "添加精选",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "wEQDC6": {
+    "defaultMessage": "编辑标签",
+    "description": ""
+  },
+  "beLe/F": {
+    "defaultMessage": "广播",
+    "description": ""
+  },
+  "20bImY": {
+    "defaultMessage": "众聊",
+    "description": ""
+  },
+  "jx7Hn3": {
+    "defaultMessage": "作品",
+    "description": ""
+  },
+  "U9IXic": {
+    "defaultMessage": "添加作品",
+    "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
+  },
+  "q+N5Wd": {
+    "defaultMessage": "管理围炉",
+    "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "8xPi0N": {
+    "defaultMessage": "离开围炉",
+    "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "WuvE8X": {
+    "defaultMessage": "{circleName} 的追踪者",
+    "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
+  },
+  "XVYrS/": {
+    "defaultMessage": "还没有追踪者",
+    "description": ""
+  },
+  "RjE9E9": {
+    "defaultMessage": "成员",
+    "description": ""
+  },
+  "KL502d": {
+    "defaultMessage": "资料已保存",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+  },
+  "rfz/fN": {
+    "defaultMessage": "建议封面尺寸 1600 x 900 像素",
+    "description": ""
+  },
+  "lhaIoi": {
+    "defaultMessage": "请输入姓名",
+    "description": ""
+  },
+  "E8W3qa": {
+    "defaultMessage": "2-20 个字符",
+    "description": ""
+  },
+  "Q8Qw5B": {
+    "defaultMessage": "个人简介",
+    "description": ""
+  },
+  "A8MpFX": {
+    "defaultMessage": "请输入个人简介",
+    "description": ""
+  },
+  "UNUROl": {
+    "defaultMessage": "建议 50 字以内，最长 200 字",
+    "description": ""
+  },
+  "jvo0vs": {
+    "defaultMessage": "保存",
+    "description": ""
   }
 }
