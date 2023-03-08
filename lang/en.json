@@ -207,9 +207,9 @@
     "defaultMessage": "Have wallet questions on mobile device ? Click the ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "GZ1iwf": {
+  "uw32VR": {
     "defaultMessage": "tutorial",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+    "description": ""
   },
   "hrfF+i": {
     "defaultMessage": "Don't have a wallet yet? Check the ",
@@ -626,5 +626,25 @@
   "pla6ZF": {
     "defaultMessage": "Search articles, tags and authors",
     "description": "src/components/Search/SearchBar/index.tsx"
+  },
+   "3kbIhS": {
+    "defaultMessage": "Untitled",
+    "description": ""
+  },
+  "MW9PzQ": {
+    "defaultMessage": "支持排行榜",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "cmtHjM": {
+    "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "69+D96": {
+    "defaultMessage": "Start Creating",
+    "description": ""
+  },
+  "3ynsJ3": {
+    "defaultMessage": "Want to know more? Check the ",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   }
 }

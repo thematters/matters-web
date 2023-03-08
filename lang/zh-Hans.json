@@ -207,9 +207,9 @@
     "defaultMessage": "在行动装置上使用问题，参考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "GZ1iwf": {
+  "uw32VR": {
     "defaultMessage": "教学指南",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+    "description": ""
   },
   "hrfF+i": {
     "defaultMessage": "刚接触加密钱包？参考 ",
@@ -626,5 +626,25 @@
   "pla6ZF": {
     "defaultMessage": "搜索作品、标签、作者",
     "description": "src/components/Search/SearchBar/index.tsx"
+  },
+  "3kbIhS": {
+    "defaultMessage": "未命名",
+    "description": ""
+  },
+  "MW9PzQ": {
+    "defaultMessage": "Top Supporters",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "cmtHjM": {
+    "defaultMessage": "由于你尚未发布任何作品，这裡还没有任何数据能与你分享哦！发布第一篇作品来介绍你自己，以此开启你的创作之旅吧！",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "69+D96": {
+    "defaultMessage": "开始创作",
+    "description": ""
+  },
+  "3ynsJ3": {
+    "defaultMessage": "想了解更多？详见 ",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   }
 }

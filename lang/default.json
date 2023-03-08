@@ -43,6 +43,10 @@
     "defaultMessage": "commented in",
     "description": ""
   },
+  "3kbIhS": {
+    "defaultMessage": "Untitled",
+    "description": ""
+  },
   "3uQKhx": {
     "defaultMessage": "Please email",
     "description": "src/views/Help/index.tsx"
@@ -50,6 +54,10 @@
   "3yk8fB": {
     "defaultMessage": "Wallet",
     "description": ""
+  },
+  "3ynsJ3": {
+    "defaultMessage": "Want to know more? Check the",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "47FYwb": {
     "defaultMessage": "Cancel",
@@ -69,6 +77,10 @@
   },
   "5sg7KC": {
     "defaultMessage": "Password",
+    "description": ""
+  },
+  "69+D96": {
+    "defaultMessage": "Start Creating",
     "description": ""
   },
   "6flWFg": {
@@ -143,10 +155,6 @@
     "defaultMessage": "posted a new topic and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
-  "GZ1iwf": {
-    "defaultMessage": "tutorial",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "GZJpDf": {
     "defaultMessage": "Analytics",
     "description": ""
@@ -210,6 +218,10 @@
   "LqxIEU": {
     "defaultMessage": "Wallet address will be part of your digital identity and shown in your profile page.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "MW9PzQ": {
+    "defaultMessage": "Top Supporters",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "MkwOFW": {
     "defaultMessage": "Read History",
@@ -350,6 +362,10 @@
   "cg1VJ2": {
     "defaultMessage": "Connect Wallet",
     "description": ""
+  },
+  "cmtHjM": {
+    "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "deEeEI": {
     "defaultMessage": "Register",
@@ -541,6 +557,10 @@
   "uuEGON": {
     "defaultMessage": "posted and replied to topics and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "uw32VR": {
+    "defaultMessage": "tutorial",
+    "description": ""
   },
   "v6YjIn": {
     "defaultMessage": "Account",

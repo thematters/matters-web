@@ -207,9 +207,9 @@
     "defaultMessage": "在行動裝置上使用問題，參考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "GZ1iwf": {
+  "uw32VR": {
     "defaultMessage": "教學指南",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+    "description": ""
   },
   "hrfF+i": {
     "defaultMessage": "剛接觸加密錢包？參考 ",
@@ -626,5 +626,25 @@
   "pla6ZF": {
     "defaultMessage": "搜尋作品、標籤、作者",
     "description": "src/components/Search/SearchBar/index.tsx"
+  },
+  "3kbIhS": {
+    "defaultMessage": "未命名",
+    "description": ""
+  },
+  "MW9PzQ": {
+    "defaultMessage": "支持排行榜",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "cmtHjM": {
+    "defaultMessage": "由於你尚未發布任何作品，這裡還沒有任何數據能與你分享哦！發布第一篇作品來介紹你自己，以此開啟你的創作之旅吧！",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "69+D96": {
+    "defaultMessage": "開始創作",
+    "description": ""
+  },
+  "3ynsJ3": {
+    "defaultMessage": "想了解更多？詳見 ",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   }
 }

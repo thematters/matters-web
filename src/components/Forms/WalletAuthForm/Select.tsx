@@ -46,7 +46,7 @@ const Hint = () => {
           >
             <FormattedMessage
               defaultMessage="tutorial"
-              description="src/components/Forms/WalletAuthForm/Select.tsx"
+              description=""
             />
           </a>
         </p>
@@ -65,7 +65,7 @@ const Hint = () => {
           >
             <FormattedMessage
               defaultMessage="tutorial"
-              description="src/components/Forms/WalletAuthForm/Select.tsx"
+              description=""
             />
           </a>
         </p>
