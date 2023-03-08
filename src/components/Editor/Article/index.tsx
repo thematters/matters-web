@@ -1,5 +1,5 @@
 // import { useLazyQuery } from '@apollo/react-hooks'
-import { html2md } from '@matters/matters-editor'
+// import { html2md } from '@matters/matters-editor'
 import Blockquote from '@tiptap/extension-blockquote'
 import Bold from '@tiptap/extension-bold'
 import BulletList from '@tiptap/extension-bullet-list'
@@ -28,7 +28,7 @@ import {
   ASSET_TYPE,
 } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.article.css'
-import { translate } from '~/common/utils'
+import { initAudioPlayers, translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 // import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import {
@@ -36,7 +36,7 @@ import {
   // SearchUsersQuery
 } from '~/gql/graphql'
 
-import { FigureImage } from './extensions'
+import { FigureAudio, FigureImage } from './extensions'
 import MenuBar from './MenuBar'
 // import MentionUserList from '../MentionUserList'
 import styles from './styles.css'
@@ -133,13 +133,19 @@ const ArticleEditor: React.FC<Props> = ({
       }),
       // Custom
       FigureImage,
+      FigureAudio,
     ],
     content,
     editable: !isReadOnly,
+    onCreate: () => {
+      initAudioPlayers()
+    },
     onUpdate: async ({ editor, transaction }) => {
+      initAudioPlayers()
+
       const content = editor.getHTML()
-      console.log(editor, transaction)
-      console.log(await html2md(content))
+      // console.log(editor, transaction)
+      // console.log(await html2md(content))
       update({ content })
     },
   })

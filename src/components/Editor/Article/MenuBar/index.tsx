@@ -95,17 +95,33 @@ const MenuBar: React.FC<MenuBarProps> = ({ editor }) => {
       </button>
       <button
         onClick={() => {
-          const url = window.prompt('URL') || ''
-          const caption = window.prompt('caption') || ''
-
-          if (!url) {
-            return
-          }
-
-          editor.chain().focus().setFigure({ src: url, caption }).run()
+          editor
+            .chain()
+            .focus()
+            .setFigureImage({
+              src: 'https://assets-develop.matters.news/processed/1080w/embed/2bacd4f4-e2f3-4786-8948-ec301ca2ad5b.webp',
+              caption: 'image caption',
+            })
+            .run()
         }}
       >
         image
+      </button>
+      <button
+        onClick={() => {
+          editor
+            .chain()
+            .focus()
+            .setFigureAudio({
+              src: 'https://file-examples.com/storage/fe0b804ac5640668798b8d0/2017/11/file_example_MP3_700KB.mp3',
+              caption: 'audio placeholder',
+              title: 'audio title',
+              duration: '00:27',
+            })
+            .run()
+        }}
+      >
+        audio
       </button>
 
       <style jsx>{styles}</style>

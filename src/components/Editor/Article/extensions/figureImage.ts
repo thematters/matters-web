@@ -1,4 +1,4 @@
-import { mergeAttributes, Node, nodeInputRule } from '@tiptap/core'
+import { Node } from '@tiptap/core'
 
 /**
  * FigureImage extension:
@@ -13,29 +13,20 @@ import { mergeAttributes, Node, nodeInputRule } from '@tiptap/core'
  * ```
  */
 
-export interface FigureOptions {
+export interface FigureImageOptions {
   HTMLAttributes: Record<string, any>
 }
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
-    figure: {
-      setFigure: (options: { src: string; caption?: string }) => ReturnType
+    figureImage: {
+      setFigureImage: (options: { src: string; caption?: string }) => ReturnType
     }
   }
 }
 
-export const inputRegex = /!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\)/
-
-export const FigureImage = Node.create<FigureOptions>({
+export const FigureImage = Node.create({
   name: 'figureImage',
-  addOptions() {
-    return {
-      HTMLAttributes: {
-        class: 'image',
-      },
-    }
-  },
   group: 'block',
   content: 'inline*',
   draggable: true,
@@ -43,6 +34,10 @@ export const FigureImage = Node.create<FigureOptions>({
 
   addAttributes() {
     return {
+      class: {
+        default: null,
+        parseHTML: (element) => element.getAttribute('class'),
+      },
       src: {
         default: null,
         parseHTML: (element) =>
@@ -55,7 +50,15 @@ export const FigureImage = Node.create<FigureOptions>({
     return [
       {
         tag: 'figure',
+        attrs: { class: 'image' },
         contentElement: 'figcaption',
+        getAttrs: (node) => {
+          // matches only `<figure class="image">`
+          if (node instanceof HTMLElement) {
+            return node.classList.contains('image') && null
+          }
+          return false
+        },
       },
     ]
   },
@@ -63,13 +66,14 @@ export const FigureImage = Node.create<FigureOptions>({
   renderHTML({ HTMLAttributes }) {
     return [
       'figure',
-      this.options.HTMLAttributes,
+      { class: 'image' },
       [
         'img',
-        mergeAttributes(HTMLAttributes, {
+        {
+          src: HTMLAttributes.src,
           draggable: false,
           contenteditable: false,
-        }),
+        },
       ],
       ['figcaption', 0],
     ]
@@ -77,7 +81,7 @@ export const FigureImage = Node.create<FigureOptions>({
 
   addCommands() {
     return {
-      setFigure:
+      setFigureImage:
         ({ caption, ...attrs }) =>
         ({ chain }) => {
           return (
@@ -98,18 +102,5 @@ export const FigureImage = Node.create<FigureOptions>({
           )
         },
     }
-  },
-
-  addInputRules() {
-    return [
-      nodeInputRule({
-        find: inputRegex,
-        type: this.type,
-        getAttributes: (match) => {
-          const [, src] = match
-          return { src }
-        },
-      }),
-    ]
   },
 })
