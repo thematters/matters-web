@@ -691,8 +691,8 @@
     "defaultMessage": "Back to All",
     "description": ""
   },
-  "ANA7sk": {
-    "defaultMessage": "Maintain",
+  "KMcrz8": {
+    "defaultMessage": "Maintain Tag",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
   "63HuBz": {
@@ -751,7 +751,7 @@
     "defaultMessage": "No followers yet",
     "description": ""
   },
-  "RjE9E9": {
+  "+a+2ug": {
     "defaultMessage": "Members",
     "description": ""
   },
@@ -818,5 +818,21 @@
   "zQvVDJ": {
     "defaultMessage": "All",
     "description": ""
+  },
+  "FOOymB": {
+    "defaultMessage": "No members yet",
+    "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
+  },
+  "zPEMFy": {
+    "defaultMessage": "articles in total",
+    "description": ""
+  },
+  "hYG5fb": {
+    "defaultMessage": "are following",
+    "description": "src/views/TagDetail/Followers/index.tsx"
+  },
+  "ANA7sk": {
+    "defaultMessage": "Maintain",
+    "description": "src/views/TagDetail/Owner/index.tsx"
   }
 }

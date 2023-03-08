@@ -24,7 +24,7 @@ const BaseMembersDialog = ({ children }: MembersDialogProps) => {
           title={
             <FormattedMessage
               defaultMessage="Members"
-              description="src/views/Circle/Profile/MembersDialog/index.tsx"
+              description=""
             />
           }
           closeDialog={closeDialog}

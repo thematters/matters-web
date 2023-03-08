@@ -38,7 +38,7 @@ const Followers = ({ tag }: FollowersProps) => {
         <b>{numAbbr(totalCount)}</b>
         <span>
           &nbsp;
-          <FormattedMessage defaultMessage="Followers" description="" />
+          <FormattedMessage defaultMessage="are following" description="src/views/TagDetail/Followers/index.tsx" />
         </span>
       </section>
 

@@ -67,7 +67,7 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
               >
                 <TextIcon weight="md" size="xs">
                   <FormattedMessage
-                    defaultMessage="Maintain"
+                    defaultMessage="Maintain Tag"
                     description="src/views/TagDetail/Owner/index.tsx"
                   />
                 </TextIcon>
@@ -91,7 +91,7 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
         />
 
         <TextIcon size="sm" color="grey-dark">
-          <FormattedMessage defaultMessage="Maintainer" description="" />
+          <FormattedMessage defaultMessage="Maintain" description="src/views/TagDetail/Owner/index.tsx" />
         </TextIcon>
       </section>
       <section className="right">{/* editos */}</section>

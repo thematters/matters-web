@@ -675,7 +675,7 @@
     "defaultMessage": "已追蹤",
     "description": ""
   },
-  "3KNMbJ": {
+  "zPEMFy": {
     "defaultMessage": "篇作品",
     "description": ""
   },
@@ -687,7 +687,7 @@
     "defaultMessage": "返回全部",
     "description": ""
   },
-  "ANA7sk": {
+  "KMcrz8": {
     "defaultMessage": "認領",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
@@ -751,7 +751,7 @@
     "defaultMessage": "還沒有追蹤者",
     "description": ""
   },
-  "RjE9E9": {
+  "+a+2ug": {
     "defaultMessage": "成員",
     "description": ""
   },
@@ -817,6 +817,22 @@
   },
   "zQvVDJ": {
     "defaultMessage": "全部",
+    "description": ""
+  },
+  "FOOymB": {
+    "defaultMessage": "還沒有成員",
+    "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
+  },
+  "hYG5fb": {
+    "defaultMessage": "人追蹤",
+    "description": "src/views/TagDetail/Followers/index.tsx"
+  },
+  "ANA7sk": {
+    "defaultMessage": "主理",
+    "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "3KNMbJ": {
+    "defaultMessage": "作品",
     "description": ""
   }
 }
