@@ -119,7 +119,8 @@ const FRAME_SRC = [
   'button.like.co',
   'www.youtube.com',
   'player.vimeo.com',
-  'player.youku.com',
+  'player.bilibili.com',
+  'www.bilibili.com',
 
   // ReCaptcha
   'www.google.com/recaptcha/',

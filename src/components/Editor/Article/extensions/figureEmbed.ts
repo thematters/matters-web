@@ -37,11 +37,19 @@ declare module '@tiptap/core' {
 // }
 type NormalizeEmbedURLReturn = {
   url: string
+  provider?:
+    | 'youtube'
+    | 'vimeo'
+    | 'bilibili'
+    | 'twitter'
+    | 'instagram'
+    | 'jsfiddle'
+    | 'codepen'
   allowfullscreen: boolean
   sandbox: Array<'allow-scripts' | 'allow-same-origin' | 'allow-popups'>
 }
 export const normalizeEmbedURL = (url: string): NormalizeEmbedURLReturn => {
-  const fallbackReturn = {
+  const fallbackReturn: NormalizeEmbedURLReturn = {
     url: '',
     allowfullscreen: false,
     sandbox: [],
@@ -96,6 +104,7 @@ export const normalizeEmbedURL = (url: string): NormalizeEmbedURLReturn => {
 
     return {
       url: `https://www.youtube.com/embed/${id}` + (qs ? `?=${qs}` : ''),
+      provider: 'youtube',
       allowfullscreen: true,
       sandbox: [],
     }
@@ -108,17 +117,52 @@ export const normalizeEmbedURL = (url: string): NormalizeEmbedURLReturn => {
    *   - https://vimeo.com/332732612
    *   - https://player.vimeo.com/video/332732612
    */
-  const isVimeo = ['vimeo.com', 'player.vimeo.com'].includes(hostname)
+  const isVimeo = ['vimeo.com', 'www.vimeo.com', 'player.vimeo.com'].includes(
+    hostname
+  )
   if (isVimeo) {
     const id = pathname.split('/').slice(-1)[0]
     return {
       url: 'https://player.vimeo.com/video/' + id,
+      provider: 'vimeo',
       allowfullscreen: true,
       sandbox: [],
     }
   }
 
-  // Bilibili
+  /**
+   * bilibili
+   *
+   * URL:
+   *   - https://www.bilibili.com/video/BV1bW411n7fY/
+   *   - https://www.bilibili.com/BV1bW411n7fY/
+   *   - https://player.bilibili.com/player.html?bvid=BV1bW411n7fY
+   *
+   * Params:
+   *   - bvid=BV1bW411n7fY for video id
+   */
+  const isBilibili = [
+    'bilibili.com',
+    'player.bilibili.com',
+    'www.bilibili.com',
+  ].includes(hostname)
+  if (isBilibili) {
+    const bvid = searchParams.get('bvid')
+
+    let id = ''
+    if (bvid) {
+      id = bvid
+    } else {
+      id = pathname.split('/').slice(-1)[0]
+    }
+
+    return {
+      url: `https://player.bilibili.com/player.html?bvid=${id}`,
+      provider: 'bilibili',
+      allowfullscreen: true,
+      sandbox: [],
+    }
+  }
 
   // Twitter
 
@@ -173,13 +217,13 @@ export const FigureEmbed = Node.create({
   },
 
   renderHTML({ HTMLAttributes }) {
-    const { url, allowfullscreen, sandbox } = normalizeEmbedURL(
+    const { url, provider, allowfullscreen, sandbox } = normalizeEmbedURL(
       HTMLAttributes.src
     )
 
     return [
       'figure',
-      { class: 'embed' },
+      { class: 'embed', ...(provider ? { 'data-provider': provider } : {}) },
       [
         'div',
         { class: 'iframe-container' },
