@@ -3,25 +3,19 @@ import jump from 'jump.js'
 // import _differenceBy from 'lodash/differenceBy'
 // import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
-import {
-  dom,
-  filterComments,
-  mergeConnections,
-  translate,
-} from '~/common/utils'
+import { dom, filterComments, mergeConnections } from '~/common/utils'
 import {
   CommentForm,
   EmptyComment,
   InfiniteScroll,
-  LanguageContext,
   List,
   QueryError,
   Spinner,
   ThreadComment,
   Throw404,
-  Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -46,8 +40,8 @@ const RESPONSES_COUNT = 15
 const CricleDiscussion = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
   const name = getQuery('name')
+  const intl = useIntl()
 
   // public data
   const { data, loading, error, client } =
@@ -157,10 +151,9 @@ const CricleDiscussion = () => {
         detail: {
           color: 'green',
           content: (
-            <Translate
-              zh_hant="討論已送出"
-              zh_hans="讨论已送出"
-              en="Discussion sent"
+            <FormattedMessage
+              defaultMessage="Discussion sent"
+              description="src/views/Circle/Discussion/Discussion.tsx"
             />
           ),
           buttonPlacement: 'center',
@@ -256,10 +249,9 @@ const CricleDiscussion = () => {
             <CommentForm
               circleId={circle?.id}
               type="circleDiscussion"
-              placeholder={translate({
-                lang,
-                zh_hant: '催更、提問、分享、討論…',
-                zh_hans: '催更、提问、分享、讨论…',
+              placeholder={intl.formatMessage({
+                defaultMessage: 'Request an update, ask, share and discuss',
+                description: 'src/views/Circle/Discussion/Discussion.tsx',
               })}
               submitCallback={submitCallback}
             />
@@ -270,7 +262,10 @@ const CricleDiscussion = () => {
           (comments.length <= 0 && (
             <EmptyComment
               description={
-                <Translate zh_hant="還沒有眾聊" zh_hans="还没有众聊" />
+                <FormattedMessage
+                  defaultMessage="No discussion yet"
+                  description="src/views/Circle/Discussion/Discussion.tsx"
+                />
               }
             />
           ))}

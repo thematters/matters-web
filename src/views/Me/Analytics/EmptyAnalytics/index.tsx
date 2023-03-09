@@ -40,10 +40,7 @@ const EmptyAnalytics = () => {
           color="black"
           size="md"
         >
-          <FormattedMessage
-            defaultMessage="Top Supporters"
-            description=""
-          />
+          <FormattedMessage defaultMessage="Top Supporters" description="" />
         </TextIcon>
       </section>
       <section className="content">

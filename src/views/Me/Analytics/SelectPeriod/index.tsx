@@ -2,13 +2,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
 import { Z_INDEX } from '~/common/enums'
-import {
-  Button,
-  DropdownDialog,
-  Menu,
-  TextIcon,
-  withIcon,
-} from '~/components'
+import { Button, DropdownDialog, Menu, TextIcon, withIcon } from '~/components'
 
 type SelectProps = {
   period: number
@@ -20,9 +14,13 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <FormattedMessage defaultMessage="Last {days} days" description="src/views/Me/Analytics/SelectPeriod/index.tsx" values={{
-            days: 7
-          }}/>
+          <FormattedMessage
+            defaultMessage="Last {days} days"
+            description="src/views/Me/Analytics/SelectPeriod/index.tsx"
+            values={{
+              days: 7,
+            }}
+          />
         </>
       ),
       value: 7,
@@ -30,9 +28,13 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <FormattedMessage defaultMessage="Last {month} month" description="src/views/Me/Analytics/SelectPeriod/index.tsx" values={{
-            month: 1
-          }}/>
+          <FormattedMessage
+            defaultMessage="Last {month} month"
+            description="src/views/Me/Analytics/SelectPeriod/index.tsx"
+            values={{
+              month: 1,
+            }}
+          />
         </>
       ),
       value: 30,
@@ -40,9 +42,13 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <FormattedMessage defaultMessage="Last {months} months" description="src/views/Me/Analytics/SelectPeriod/index.tsx" values={{
-            months: 3
-          }} />
+          <FormattedMessage
+            defaultMessage="Last {months} months"
+            description="src/views/Me/Analytics/SelectPeriod/index.tsx"
+            values={{
+              months: 3,
+            }}
+          />
         </>
       ),
       value: 90,

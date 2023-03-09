@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
-import { IconAdd24, Menu, TextIcon, Translate, useMutation } from '~/components'
+import { IconAdd24, Menu, TextIcon, useMutation } from '~/components'
 import {
   SetTagSelectedButtonArticleFragment,
   SetTagSelectedMutation,
@@ -58,9 +59,9 @@ const SetTagSelectedButton = ({
             detail: {
               color: 'green',
               content: (
-                <Translate
-                  zh_hant="作品已添加至精選"
-                  zh_hans="作品已添加至精选"
+                <FormattedMessage
+                  defaultMessage="The article has been added to the Trending"
+                  description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
                 />
               ),
               duration: 2000,
@@ -70,7 +71,10 @@ const SetTagSelectedButton = ({
       }}
     >
       <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
-        <Translate zh_hant="添加到精選" zh_hans="添加到精选" />
+        <FormattedMessage
+          defaultMessage="Add to Trending"
+          description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+        />
       </TextIcon>
     </Menu.Item>
   )

@@ -74,7 +74,12 @@ const SideNav = () => {
         />
 
         <NavListItem
-          name={<FormattedMessage defaultMessage="Following" description="" />}
+          name={
+            <FormattedMessage
+              defaultMessage="Following"
+              description="src/components/Layout/SideNav/index.tsx"
+            />
+          }
           icon={<UnreadIcon.Follow />}
           activeIcon={<UnreadIcon.Follow active />}
           active={isInFollow}
