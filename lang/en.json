@@ -1041,5 +1041,13 @@
   "Cu3Cty": {
     "defaultMessage": "month",
     "description": ""
+  },
+  "qlki7w": {
+    "defaultMessage": "Remove Article",
+    "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
+  },
+  "pRV+UD": {
+    "defaultMessage": "Collapse",
+    "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   }
 }

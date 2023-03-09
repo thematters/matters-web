@@ -1037,5 +1037,13 @@
   "Cu3Cty": {
     "defaultMessage": "月",
     "description": ""
+  },
+  "qlki7w": {
+    "defaultMessage": "移除作品",
+    "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
+  },
+  "pRV+UD": {
+    "defaultMessage": "闔上",
+    "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   }
 }

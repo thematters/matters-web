@@ -830,6 +830,10 @@
     "defaultMessage": "Following",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "pRV+UD": {
+    "defaultMessage": "Collapse",
+    "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
+  },
   "pla6ZF": {
     "defaultMessage": "Search articles, tags and authors",
     "description": "src/components/Search/SearchBar/index.tsx"
@@ -857,6 +861,10 @@
   "qYzBk8": {
     "defaultMessage": "unsubscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "qlki7w": {
+    "defaultMessage": "Remove Article",
+    "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
   },
   "qswU4E": {
     "defaultMessage": "Email will not be used as a login but only as a contact channel.",

@@ -41,6 +41,7 @@ const CricleDiscussion = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
   const name = getQuery('name')
+  const intl = useIntl()
 
   // public data
   const { data, loading, error, client } =
@@ -52,7 +53,6 @@ const CricleDiscussion = () => {
   const isMember = circle?.circleIsMember
   const hasPermission = isOwner || isMember
 
-  const intl = useIntl()
   // private data
   const [privateFetched, setPrivateFetched] = useState(false)
   const loadPrivate = async (publicData?: DiscussionPublicQuery) => {
