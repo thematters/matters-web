@@ -28,7 +28,7 @@ import {
   ASSET_TYPE,
 } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.article.css'
-import { initAudioPlayers, translate } from '~/common/utils'
+import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 // import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import {
@@ -36,7 +36,7 @@ import {
   // SearchUsersQuery
 } from '~/gql/graphql'
 
-import { FigureAudio, FigureImage } from './extensions'
+import { FigureAudio, FigureEmbed, FigureImage } from './extensions'
 import MenuBar from './MenuBar'
 // import MentionUserList from '../MentionUserList'
 import styles from './styles.css'
@@ -134,14 +134,15 @@ const ArticleEditor: React.FC<Props> = ({
       // Custom
       FigureImage,
       FigureAudio,
+      FigureEmbed,
     ],
     content,
     editable: !isReadOnly,
-    onCreate: () => {
-      initAudioPlayers()
-    },
+    // onCreate: () => {
+    // initAudioPlayers()
+    // },
     onUpdate: async ({ editor, transaction }) => {
-      initAudioPlayers()
+      // initAudioPlayers()
 
       const content = editor.getHTML()
       // console.log(editor, transaction)

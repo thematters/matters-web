@@ -30,10 +30,6 @@ import { Node } from '@tiptap/core'
  * ```
  */
 
-export interface FigureAudioOptions {
-  HTMLAttributes: Record<string, any>
-}
-
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     figureAudio: {
@@ -47,7 +43,7 @@ declare module '@tiptap/core' {
   }
 }
 
-export const FigureAudio = Node.create<FigureAudioOptions>({
+export const FigureAudio = Node.create({
   name: 'figureAudio',
   group: 'block',
   content: 'inline*',

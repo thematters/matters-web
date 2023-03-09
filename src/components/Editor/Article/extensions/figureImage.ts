@@ -13,10 +13,6 @@ import { Node } from '@tiptap/core'
  * ```
  */
 
-export interface FigureImageOptions {
-  HTMLAttributes: Record<string, any>
-}
-
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     figureImage: {
