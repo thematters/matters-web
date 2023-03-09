@@ -551,10 +551,6 @@
     "defaultMessage": "快來搭建圍爐，呼召你的支持者加入",
     "description": "src/components/UserProfile/CircleWidget/index.tsx"
   },
-  "cPIKU2": {
-    "defaultMessage": "追蹤中",
-    "description": ""
-  },
   "pzTOmv": {
     "defaultMessage": "追蹤者",
     "description": ""
@@ -688,7 +684,7 @@
     "description": ""
   },
   "47FYwb": {
-    "defaultMessage": "關閉",
+    "defaultMessage": "取消",
     "description": ""
   },
   "ll/ufR": {
@@ -824,7 +820,7 @@
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "wEQDC6": {
-    "defaultMessage": "編輯標籤",
+    "defaultMessage": "編輯資料",
     "description": ""
   },
   "beLe/F": {
@@ -941,6 +937,105 @@
   },
   "3KNMbJ": {
     "defaultMessage": "作品",
+    "description": ""
+  },
+  "4HVCON": {
+    "defaultMessage": "置頂作品",
+    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
+  "TQLBox": {
+    "defaultMessage": "取消置頂",
+    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
+  "ZVoJan": {
+    "defaultMessage": "修訂作品",
+    "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
+  },
+  "hrgo+E": {
+    "defaultMessage": "隱藏",
+    "description": ""
+  },
+  "uIdMon": {
+    "defaultMessage": "確認隱藏，其他用戶將無法從站內訪問該作品。隱藏後無法回退，如需再次呈現作品，你需要重新發布。",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+  },
+  "oIkacT": {
+    "defaultMessage": "作品已隱藏",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+  },
+  "K3r6DQ": {
+    "defaultMessage": "刪除",
+    "description": ""
+  },
+  "mikY/9": {
+    "defaultMessage": "編輯",
+    "description": "src/components/Comment/DropdownActions/EditButton.tsx"
+  },
+  "50cquj": {
+    "defaultMessage": "還沒有眾聊",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "EW5R4p": {
+    "defaultMessage": "催更、提問、分享、討論…",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "9nNpKP": {
+    "defaultMessage": "討論已送出",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "TjWWxF": {
+    "defaultMessage": "廣播已送出",
+    "description": "src/views/Circle/Broadcast/Broadcast.tsx"
+  },
+  "mWjpk9": {
+    "defaultMessage": "還沒有廣播",
+    "description": "src/views/Circle/Broadcast/Broadcast.tsx"
+  },
+  "zb8Kx1": {
+    "defaultMessage": "公告、提醒、碎碎念…"
+  },
+  "AGcU5J": {
+    "defaultMessage": "置頂",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "jJ1Brc": {
+    "defaultMessage": "喜歡回應",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "RFzVUD": {
+    "defaultMessage": "取消置頂",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "X+Xvgq": {
+    "defaultMessage": "取消精選",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "7xnrxG": {
+    "defaultMessage": "作品已添加至精選",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "SY0cqp": {
+    "defaultMessage": "添加到精選",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "Js/Fij": {
+    "defaultMessage": "作品已取消精選",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+  },
+  "aa0nss": {
+    "defaultMessage": "取消精選",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+  },
+  "32bml8": {
+    "defaultMessage": "追蹤",
+    "description": "src/components/Layout/SideNav/index.tsx"
+  },
+  "ohgTH4": {
+    "defaultMessage": "追蹤中",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "Cu3Cty": {
+    "defaultMessage": "月",
     "description": ""
   }
 }

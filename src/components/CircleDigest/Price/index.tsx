@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
@@ -101,7 +102,8 @@ const Price = ({ circle, onClick }: PriceProps) => {
       }}
     >
       <TextIcon weight="md" size="sm" color="white">
-        {price.amount} {price.currency} / <Translate id="month" />
+        {price.amount} {price.currency} /
+        <FormattedMessage defaultMessage="month" description="" />
       </TextIcon>
     </Button>
   )

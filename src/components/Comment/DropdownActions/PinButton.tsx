@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import {
@@ -7,7 +8,6 @@ import {
   IconUnPin24,
   Menu,
   TextIcon,
-  Translate,
   useMutation,
 } from '~/components'
 import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
@@ -111,9 +111,17 @@ const PinButton = ({
         }}
       >
         <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
-          <Translate
-            id={circle ? 'unpinCircleComment' : 'unpinArticleComment'}
-          />
+          {circle ? (
+            <FormattedMessage
+              defaultMessage="Unpin Broadcast"
+              description="src/components/Comment/DropdownActions/PinButton.tsx"
+            />
+          ) : (
+            <FormattedMessage
+              defaultMessage="Unpin Comment"
+              description="src/components/Comment/DropdownActions/PinButton.tsx"
+            />
+          )}
         </TextIcon>
       </Menu.Item>
     )
@@ -131,7 +139,17 @@ const PinButton = ({
       }
     >
       <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
-        <Translate id={circle ? 'pinCircleComment' : 'pinArticleComment'} />
+        {circle ? (
+          <FormattedMessage
+            defaultMessage="Pin Broadcast"
+            description="src/components/Comment/DropdownActions/PinButton.tsx"
+          />
+        ) : (
+          <FormattedMessage
+            defaultMessage="Pin Comment"
+            description="src/components/Comment/DropdownActions/PinButton.tsx"
+          />
+        )}
       </TextIcon>
     </Menu.Item>
   )

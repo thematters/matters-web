@@ -635,10 +635,6 @@
     "defaultMessage": "Discover",
     "description": ""
   },
-  "cPIKU2": {
-    "defaultMessage": "Following",
-    "description": ""
-  },
   "i/4KO2": {
     "defaultMessage": "This account is archived due to violation of community guidelines",
     "description": "src/components/UserProfile/index.tsx"
@@ -946,5 +942,104 @@
   "ANA7sk": {
     "defaultMessage": "Maintain",
     "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "4HVCON": {
+    "defaultMessage": "Article pinned",
+    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
+  "TQLBox": {
+    "defaultMessage": "Unpin",
+    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
+  "ZVoJan": {
+    "defaultMessage": "Edit",
+    "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
+  },
+  "hrgo+E": {
+    "defaultMessage": "Archive",
+    "description": ""
+  },
+  "uIdMon": {
+    "defaultMessage": "Are you sure you want to archive the article?",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+  },
+  "oIkacT": {
+    "defaultMessage": "Article is hidden",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+  },
+  "K3r6DQ": {
+    "defaultMessage": "Delete",
+    "description": ""
+  },
+  "mikY/9": {
+    "defaultMessage": "Edit",
+    "description": "src/components/Comment/DropdownActions/EditButton.tsx"
+  },
+  "50cquj": {
+    "defaultMessage": "No discussion yet",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "EW5R4p": {
+    "defaultMessage": "Request an update, ask, share and discuss",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "9nNpKP": {
+    "defaultMessage": "Discussion sent",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "TjWWxF": {
+    "defaultMessage": "Broadcast sent",
+    "description": "src/views/Circle/Broadcast/Broadcast.tsx"
+  },
+  "mWjpk9": {
+    "defaultMessage": "No broadcast yet.",
+    "description": "src/views/Circle/Broadcast/Broadcast.tsx"
+  },
+  "zb8Kx1": {
+    "defaultMessage": "Announcement, reminder, chattering..."
+  },
+  "AGcU5J": {
+    "defaultMessage": "Pin Broadcast",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "jJ1Brc": {
+    "defaultMessage": "Pin Comment",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "RFzVUD": {
+    "defaultMessage": "Unpin Broadcast",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "X+Xvgq": {
+    "defaultMessage": "Unpin Comment",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "7xnrxG": {
+    "defaultMessage": "The article has been added to the Trending",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "SY0cqp": {
+    "defaultMessage": "Add to Trending",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "Js/Fij": {
+    "defaultMessage": "This article has been removed from Trending",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+  },
+  "aa0nss": {
+    "defaultMessage": "Unpin from Trending",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+  },
+  "32bml8": {
+    "defaultMessage": "Following",
+    "description": "src/components/Layout/SideNav/index.tsx"
+  },
+  "ohgTH4": {
+    "defaultMessage": "Following",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "Cu3Cty": {
+    "defaultMessage": "month",
+    "description": ""
   }
 }

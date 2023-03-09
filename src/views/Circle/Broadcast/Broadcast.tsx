@@ -2,25 +2,19 @@ import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
-import {
-  dom,
-  filterComments,
-  mergeConnections,
-  translate,
-} from '~/common/utils'
+import { dom, filterComments, mergeConnections } from '~/common/utils'
 import {
   CommentForm,
   EmptyComment,
   InfiniteScroll,
-  LanguageContext,
   List,
   QueryError,
   Spinner,
   ThreadComment,
   Throw404,
-  Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -44,9 +38,9 @@ const RESPONSES_COUNT = 15
 const CricleBroadcast = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
   const name = getQuery('name')
 
+  const intl = useIntl()
   /**
    * Data Fetching
    */
@@ -204,10 +198,9 @@ const CricleBroadcast = () => {
         detail: {
           color: 'green',
           content: (
-            <Translate
-              zh_hant="廣播已送出"
-              zh_hans="广播已送出"
-              en="Broadcast sent"
+            <FormattedMessage
+              defaultMessage="Broadcast sent"
+              description="src/views/Circle/Broadcast/Broadcast.tsx"
             />
           ),
           buttonPlacement: 'center',
@@ -227,10 +220,8 @@ const CricleBroadcast = () => {
             <CommentForm
               circleId={circle?.id}
               type="circleBroadcast"
-              placeholder={translate({
-                lang,
-                zh_hant: '公告、提醒、碎碎念…',
-                zh_hans: '公告、提醒、碎碎念…',
+              placeholder={intl.formatMessage({
+                defaultMessage: 'Announcement, reminder, chattering...',
               })}
               submitCallback={submitCallback}
             />
@@ -241,7 +232,10 @@ const CricleBroadcast = () => {
           (comments.length <= 0 && (
             <EmptyComment
               description={
-                <Translate zh_hant="還沒有廣播" zh_hans="还没有广播" />
+                <FormattedMessage
+                  defaultMessage="No broadcast yet."
+                  description="src/views/Circle/Broadcast/Broadcast.tsx"
+                />
               }
             />
           ))}

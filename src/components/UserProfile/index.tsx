@@ -301,7 +301,10 @@ export const UserProfile = () => {
                 <span className="count">
                   {numAbbr(user.following.users.totalCount)}
                 </span>
-                <FormattedMessage defaultMessage="Following" description="" />
+                <FormattedMessage
+                  defaultMessage="Following"
+                  description="src/components/UserProfile/index.tsx"
+                />
               </button>
             )}
           </FollowingDialog>

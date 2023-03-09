@@ -63,6 +63,10 @@
     "defaultMessage": "Likes",
     "description": ""
   },
+  "32bml8": {
+    "defaultMessage": "Following",
+    "description": "src/components/Layout/SideNav/index.tsx"
+  },
   "3KNMbJ": {
     "defaultMessage": "Articles",
     "description": ""
@@ -91,6 +95,10 @@
     "defaultMessage": "Cancel",
     "description": ""
   },
+  "4HVCON": {
+    "defaultMessage": "Article pinned",
+    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
   "4giHJT": {
     "defaultMessage": "Have wallet questions on mobile device ? Click the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -98,6 +106,10 @@
   "4vkwo0": {
     "defaultMessage": "Your article has been republished to decentralized network",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
+  },
+  "50cquj": {
+    "defaultMessage": "No discussion yet",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "5FO4vn": {
     "defaultMessage": "You do not have permission to perform this operation",
@@ -131,6 +143,10 @@
     "defaultMessage": "Learn More",
     "description": ""
   },
+  "7xnrxG": {
+    "defaultMessage": "The article has been added to the Trending",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
   "8cv9D4": {
     "defaultMessage": "Next Step",
     "description": ""
@@ -146,6 +162,10 @@
   "9+Ddtu": {
     "defaultMessage": "Next",
     "description": ""
+  },
+  "9nNpKP": {
+    "defaultMessage": "Discussion sent",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "A3LOng": {
     "defaultMessage": "replied to topics",
@@ -170,6 +190,10 @@
   "A8MpFX": {
     "defaultMessage": "Enter Bio",
     "description": ""
+  },
+  "AGcU5J": {
+    "defaultMessage": "Pin Broadcast",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "ANA7sk": {
     "defaultMessage": "Maintain",
@@ -210,6 +234,10 @@
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.",
     "description": ""
+  },
+  "EW5R4p": {
+    "defaultMessage": "Request an update, ask, share and discuss",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "EfJYPI": {
     "defaultMessage": "Verification Code",
@@ -303,9 +331,17 @@
     "defaultMessage": "resigned as tag maintainer. Would you like to be the new tag maintainer?",
     "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
   },
+  "Js/Fij": {
+    "defaultMessage": "This article has been removed from Trending",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+  },
   "JxlxVc": {
     "defaultMessage": "Forget Password",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "K3r6DQ": {
+    "defaultMessage": "Delete",
+    "description": ""
   },
   "KL502d": {
     "defaultMessage": "Profile updated",
@@ -363,10 +399,6 @@
     "defaultMessage": "Notifications",
     "description": ""
   },
-  "NG8uih": {
-    "defaultMessage": "articles",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "NONfAh": {
     "defaultMessage": "Douban",
     "description": "src/components/Share/Buttons/Douban.tsx"
@@ -411,6 +443,14 @@
     "defaultMessage": "Failed to republish article",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
+  "RFzVUD": {
+    "defaultMessage": "Unpin Broadcast",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "SY0cqp": {
+    "defaultMessage": "Add to Trending",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
   "Seanpx": {
     "defaultMessage": "Required",
     "description": ""
@@ -418,6 +458,14 @@
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again.",
     "description": ""
+  },
+  "TQLBox": {
+    "defaultMessage": "Unpin",
+    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
+  "TjWWxF": {
+    "defaultMessage": "Broadcast sent",
+    "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
   "TzhzIH": {
     "defaultMessage": "Creators",
@@ -471,6 +519,10 @@
     "defaultMessage": "Followers of {circleName}",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
   },
+  "X+Xvgq": {
+    "defaultMessage": "Unpin Comment",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
   "XH0Lb6": {
     "defaultMessage": "Welcome to Matters!",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
@@ -515,6 +567,10 @@
     "defaultMessage": "comment",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "ZVoJan": {
+    "defaultMessage": "Edit",
+    "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
+  },
   "ZjDH42": {
     "defaultMessage": "About Us",
     "description": ""
@@ -522,6 +578,10 @@
   "aUPhEs": {
     "defaultMessage": "Add Articles into Trending",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "aa0nss": {
+    "defaultMessage": "Unpin from Trending",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
   "aaUBvF": {
     "defaultMessage": "comment_circle",
@@ -557,10 +617,6 @@
   },
   "cE4Hfw": {
     "defaultMessage": "Discover",
-    "description": ""
-  },
-  "cPIKU2": {
-    "defaultMessage": "Following",
     "description": ""
   },
   "cf37Zy": {
@@ -647,6 +703,10 @@
     "defaultMessage": "Don't have a wallet yet? Check the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "hrgo+E": {
+    "defaultMessage": "Archive",
+    "description": ""
+  },
   "i/4KO2": {
     "defaultMessage": "This account is archived due to violation of community guidelines",
     "description": "src/components/UserProfile/index.tsx"
@@ -674,6 +734,10 @@
   "jF+Mle": {
     "defaultMessage": "days for free. Try it and have fun!",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
+  "jJ1Brc": {
+    "defaultMessage": "Pin Comment",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "jL2ZHb": {
     "defaultMessage": "Code will expire after 20 minutes",
@@ -719,6 +783,14 @@
     "defaultMessage": "User unblocked. User can now comment on your articles.",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
+  "mWjpk9": {
+    "defaultMessage": "No broadcast yet.",
+    "description": "src/views/Circle/Broadcast/Broadcast.tsx"
+  },
+  "mikY/9": {
+    "defaultMessage": "Edit",
+    "description": "src/components/Comment/DropdownActions/EditButton.tsx"
+  },
   "mk+LCk": {
     "defaultMessage": "Display Preferences",
     "description": "src/views/Me/Settings/AnonymousSettings/DisplayPreferences/index.tsx"
@@ -746,8 +818,16 @@
     "defaultMessage": "Back to All",
     "description": ""
   },
+  "oIkacT": {
+    "defaultMessage": "Article is hidden",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+  },
   "oNYnCM": {
     "defaultMessage": "Account Archived",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "ohgTH4": {
+    "defaultMessage": "Following",
     "description": "src/components/UserProfile/index.tsx"
   },
   "pla6ZF": {
@@ -838,6 +918,10 @@
     "defaultMessage": "Copy Link",
     "description": ""
   },
+  "uIdMon": {
+    "defaultMessage": "Are you sure you want to archive the article?",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+  },
   "uVCg1l": {
     "defaultMessage": "Explore Matters",
     "description": ""
@@ -917,6 +1001,9 @@
   "zQvVDJ": {
     "defaultMessage": "All",
     "description": ""
+  },
+  "zb8Kx1": {
+    "defaultMessage": "Announcement, reminder, chattering..."
   },
   "zxlwbc": {
     "defaultMessage": "Waiting ...",

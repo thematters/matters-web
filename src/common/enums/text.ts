@@ -1141,7 +1141,7 @@ export const TEXT = {
     settingsNotificationGeneral: 'General',
     settingsNotificationCircle: 'Circle',
     settingsUI: 'Display Preferences',
-    settingsWallet: 'Wallet Setting',
+    settingsWallet: 'Wallet Settings',
     setup: 'Settings',
     setupLikeCoin: 'Liker ID',
     share: 'Share',
