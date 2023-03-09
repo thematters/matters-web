@@ -121,9 +121,9 @@ export const normalizeEmbedURL = (url: string): NormalizeEmbedURLReturn => {
     hostname
   )
   if (isVimeo) {
-    const id = pathname.split('/').slice(-1)[0]
+    const id = pathname.replace(/\/$/, '').split('/').slice(-1)[0]
     return {
-      url: 'https://player.vimeo.com/video/' + id,
+      url: `https://player.vimeo.com/video/${id}`,
       provider: 'vimeo',
       allowfullscreen: true,
       sandbox: [],
@@ -153,7 +153,7 @@ export const normalizeEmbedURL = (url: string): NormalizeEmbedURLReturn => {
     if (bvid) {
       id = bvid
     } else {
-      id = pathname.split('/').slice(-1)[0]
+      id = pathname.replace(/\/$/, '').split('/').slice(-1)[0]
     }
 
     return {
@@ -166,12 +166,48 @@ export const normalizeEmbedURL = (url: string): NormalizeEmbedURLReturn => {
 
   // Twitter
 
-  // Instagram
+  /**
+   * Instagram
+   *
+   * URL:
+   *   - https://www.instagram.com/p/CkszmehL4hF/
+   */
+  const isInstagram = ['instagram.com', 'www.instagram.com'].includes(hostname)
+  if (isInstagram) {
+    const id = pathname
+      .replace('/embed', '')
+      .replace(/\/$/, '')
+      .split('/')
+      .slice(-1)[0]
+    return {
+      url: `https://www.instagram.com/p/${id}/embed`,
+      provider: 'instagram',
+      allowfullscreen: false,
+      sandbox: [],
+    }
+  }
 
-  // JSFiddle
-  // if (value.match(/http(s)?:\/\/jsfiddle.net\//)) {
-  //   return `https://jsfiddle.net/${getPath(value)}/embedded/`
-  // }
+  /**
+   * JSFiddle
+   *
+   * URL:
+   *   - https://jsfiddle.net/zfUyN/
+   *   - https://jsfiddle.net/kizu/zfUyN/
+   *   - https://jsfiddle.net/kizu/zfUyN/embedded/
+   *   - https://jsfiddle.net/kizu/zfUyN/embedded/result/
+   *   - https://jsfiddle.net/kizu/zfUyN/embed/js,result/
+   */
+  const isJSFiddle = ['jsfiddle.net', 'www.jsfiddle.net'].includes(hostname)
+  if (isJSFiddle) {
+    const parts = pathname.replace('/embedded', '').split('/').filter(Boolean)
+    const id = parts.length === 1 ? parts[0] : parts[1]
+    return {
+      url: `https://jsfiddle.net/${id}/embedded/`,
+      provider: 'jsfiddle',
+      allowfullscreen: false,
+      sandbox: [],
+    }
+  }
 
   // CodePen
 

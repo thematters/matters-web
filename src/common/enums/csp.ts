@@ -121,6 +121,7 @@ const FRAME_SRC = [
   'player.vimeo.com',
   'player.bilibili.com',
   'www.bilibili.com',
+  'www.instagram.com',
 
   // ReCaptcha
   'www.google.com/recaptcha/',
