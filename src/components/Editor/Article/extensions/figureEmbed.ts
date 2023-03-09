@@ -199,7 +199,11 @@ export const normalizeEmbedURL = (url: string): NormalizeEmbedURLReturn => {
    */
   const isJSFiddle = ['jsfiddle.net', 'www.jsfiddle.net'].includes(hostname)
   if (isJSFiddle) {
-    const parts = pathname.replace('/embedded', '').split('/').filter(Boolean)
+    const parts = pathname
+      .replace('/embedded', '')
+      .replace(/\/$/, '')
+      .split('/')
+      .filter(Boolean)
     const id = parts.length === 1 ? parts[0] : parts[1]
     return {
       url: `https://jsfiddle.net/${id}/embedded/`,
@@ -209,7 +213,25 @@ export const normalizeEmbedURL = (url: string): NormalizeEmbedURLReturn => {
     }
   }
 
-  // CodePen
+  /**
+   * CodePen
+   *
+   * URL:
+   *   - https://codepen.io/ykadosh/pen/jOwjmJe
+   *   - https://codepen.io/ykadosh/embed/jOwjmJe
+   *   - https://codepen.io/ykadosh/embed/preview/jOwjmJe
+   */
+  const isCodePen = ['codepen.io', 'www.codepen.io'].includes(hostname)
+  if (isCodePen) {
+    const author = pathname.split('/')[1]
+    const id = pathname.replace(/\/$/, '').split('/').slice(-1)[0]
+    return {
+      url: `https://codepen.io/${author}/embed/preview/${id}`,
+      provider: 'codepen',
+      allowfullscreen: false,
+      sandbox: [],
+    }
+  }
 
   return fallbackReturn
 }
