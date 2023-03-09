@@ -49,6 +49,19 @@ const MenuBar: React.FC<MenuBarProps> = ({ editor }) => {
         Code
       </button>
       <button
+        onClick={() =>
+          editor
+            .chain()
+            .focus()
+            .toggleLink({ href: 'https://google.com', target: '_blank' })
+            .run()
+        }
+        disabled={!editor.can().chain().focus().toggleCode().run()}
+        className={editor.isActive('link') ? 'is-active' : ''}
+      >
+        Link
+      </button>
+      <button
         onClick={() => editor.chain().focus().setParagraph().run()}
         className={editor.isActive('paragraph') ? 'is-active' : ''}
       >
