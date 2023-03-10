@@ -114,7 +114,7 @@ const AggregateTagResults = () => {
                     })}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
-                        type: 'search',
+                        type: 'search_tag',
                         contentType: 'tag',
                         location: i,
                         id: node.id,

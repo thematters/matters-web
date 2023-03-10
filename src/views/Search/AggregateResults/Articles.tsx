@@ -110,6 +110,22 @@ const AggregateArticleResults = () => {
                     isConciseFooter={true}
                     hasCircle={false}
                     hasFollow={false}
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'search_article',
+                        contentType: 'article',
+                        location: i,
+                        id: node.id,
+                      })
+                    }
+                    onClickAuthor={() => {
+                      analytics.trackEvent('click_feed', {
+                        type: 'search_article',
+                        contentType: 'user',
+                        location: i,
+                        id: node.author.id,
+                      })
+                    }}
                   />
                 </List.Item>
               )

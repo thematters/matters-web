@@ -112,7 +112,7 @@ const AggregateUserResults = () => {
                   })}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
-                      type: 'search',
+                      type: 'search_user',
                       contentType: 'user',
                       location: i,
                       id: node.id,
