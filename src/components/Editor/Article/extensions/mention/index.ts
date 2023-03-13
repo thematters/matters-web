@@ -13,8 +13,10 @@ export * from './suggestion'
  * <a
  *  class="mention"
  *  href="LINK"
+ *  data-id="ID"
  *  data-display-name="DISPLAYNAME"
  *  data-user-name="USERNAME"
+ *  rel="noopener noreferrer nofollow"
  *  >
  *   <span>@USERNAME</span>
  * </a>
@@ -29,6 +31,10 @@ export const MentionPluginKey = new PluginKey('mention')
 
 export const Mention = Node.create<MentionOptions>({
   name: 'mention',
+  group: 'inline',
+  inline: true,
+  selectable: false,
+  atom: true,
 
   addOptions() {
     return {
@@ -73,42 +79,19 @@ export const Mention = Node.create<MentionOptions>({
     }
   },
 
-  group: 'inline',
-
-  inline: true,
-
-  selectable: false,
-
-  atom: true,
-
   addAttributes() {
     return {
+      id: {
+        default: null,
+        parseHTML: (element) => element.getAttribute('data-id'),
+      },
       userName: {
         default: null,
         parseHTML: (element) => element.getAttribute('data-user-name'),
-        renderHTML: (attributes) => {
-          if (!attributes.userName) {
-            return {}
-          }
-
-          return {
-            'data-user-name': attributes.userName,
-          }
-        },
       },
-
       displayName: {
         default: null,
         parseHTML: (element) => element.getAttribute('data-display-name'),
-        renderHTML: (attributes) => {
-          if (!attributes.displayName) {
-            return {}
-          }
-
-          return {
-            'data-display-name': attributes.displayName,
-          }
-        },
       },
     }
   },
@@ -118,18 +101,28 @@ export const Mention = Node.create<MentionOptions>({
       {
         tag: 'a',
         attrs: { class: 'mention' },
+        getAttrs: (node) => {
+          console.log({ node })
+          // matches only `<a class="mention">`
+          if (node instanceof HTMLElement) {
+            return node.classList.contains('mention') && null
+          }
+          return false
+        },
       },
     ]
   },
 
-  renderHTML({ node, HTMLAttributes }) {
+  renderHTML({ node }) {
     return [
       'a',
       {
         class: 'mention',
         href: '/' + this.options.suggestion.char + node.attrs.userName,
+        'data-id': node.attrs.id,
         'data-user-name': node.attrs.userName,
         'data-display-name': node.attrs.displayName,
+        ref: 'noopener noreferrer nofollow',
       },
       ['span', `@${node.attrs.displayName ?? node.attrs.userName}`],
     ]

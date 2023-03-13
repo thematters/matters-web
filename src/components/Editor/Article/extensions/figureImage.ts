@@ -46,7 +46,6 @@ export const FigureImage = Node.create({
     return [
       {
         tag: 'figure',
-        attrs: { class: 'image' },
         contentElement: 'figcaption',
         getAttrs: (node) => {
           // matches only `<figure class="image">`

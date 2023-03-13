@@ -261,7 +261,6 @@ export const FigureEmbed = Node.create({
     return [
       {
         tag: 'figure',
-        attrs: { class: 'embed' },
         contentElement: 'figcaption',
         getAttrs: (node) => {
           // matches only `<figure class="embed">`

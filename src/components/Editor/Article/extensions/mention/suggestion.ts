@@ -55,6 +55,7 @@ export const mentionSuggestion = {
             users: props.items,
             onClick: (user: UserDigestMiniUserFragment) =>
               props.command({
+                id: user.id,
                 userName: user.userName,
                 displayName: user.displayName,
               }),
