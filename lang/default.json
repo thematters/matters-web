@@ -95,8 +95,8 @@
     "defaultMessage": "Cancel",
     "description": ""
   },
-  "4HVCON": {
-    "defaultMessage": "Article pinned",
+  "4Odb0J": {
+    "defaultMessage": "Pin article",
     "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "4giHJT": {
@@ -210,6 +210,10 @@
   "BjzRe8": {
     "defaultMessage": ". Take a look at your income",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
+  "Cdkhl8": {
+    "defaultMessage": "Delete {commentType}",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "CnPG8j": {
     "defaultMessage": "Featured",
@@ -443,13 +447,13 @@
     "defaultMessage": "Failed to republish article",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
+  "QvQPfZ": {
+    "defaultMessage": "Add Articles into featured",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
   "RFzVUD": {
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
-  },
-  "SY0cqp": {
-    "defaultMessage": "Add to Trending",
-    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "Seanpx": {
     "defaultMessage": "Required",
@@ -575,10 +579,6 @@
     "defaultMessage": "About Us",
     "description": ""
   },
-  "aUPhEs": {
-    "defaultMessage": "Add Articles into Trending",
-    "description": "src/views/TagDetail/DropdownActions/index.tsx"
-  },
   "aa0nss": {
     "defaultMessage": "Unpin from Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
@@ -687,6 +687,14 @@
     "defaultMessage": "RSS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "h9CG9E": {
+    "defaultMessage": "{commentType} has been deleted",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "hSxDqf": {
+    "defaultMessage": "Add to featured",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
   "hWs95P": {
     "defaultMessage": "Important information will be notified by email. So filling in your email address will be required.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -717,6 +725,10 @@
   },
   "ieGrWo": {
     "defaultMessage": "Follow",
+    "description": ""
+  },
+  "ikVIu3": {
+    "defaultMessage": "articles",
     "description": ""
   },
   "ipQlDG": {
@@ -849,6 +861,10 @@
   "q+N5Wd": {
     "defaultMessage": "Manage Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "q8xxel": {
+    "defaultMessage": "Confirm deletion of the {commentType}, The {commentType} will be removed immediately.",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "qPPrzm": {
     "defaultMessage": "supported your article",
@@ -1001,10 +1017,6 @@
   "z4NaU2": {
     "defaultMessage": "Your",
     "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
-  },
-  "zPEMFy": {
-    "defaultMessage": "articles in total",
-    "description": ""
   },
   "zQvVDJ": {
     "defaultMessage": "All",

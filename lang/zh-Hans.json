@@ -791,7 +791,7 @@
     "defaultMessage": "已追踪",
     "description": ""
   },
-  "zPEMFy": {
+  "ikVIu3": {
     "defaultMessage": "篇作品",
     "description": ""
   },
@@ -823,7 +823,7 @@
     "defaultMessage": "管理社群",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
-  "aUPhEs": {
+  "QvQPfZ": {
     "defaultMessage": "添加精选",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
@@ -939,7 +939,7 @@
     "defaultMessage": "主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "4HVCON": {
+  "4Odb0J": {
     "defaultMessage": "置顶作品",
     "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
@@ -1014,7 +1014,7 @@
     "defaultMessage": "作品已添加至精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
-  "SY0cqp": {
+  "hSxDqf": {
     "defaultMessage": "添加到精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
@@ -1045,5 +1045,17 @@
   "pRV+UD": {
     "defaultMessage": "折叠",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
+  },
+  "h9CG9E": {
+    "defaultMessage": "{commentType}已刪除",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "Cdkhl8": {
+    "defaultMessage": "刪除{commentType}",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "q8xxel": {
+    "defaultMessage": "确认删除{commentType}，{commentType}会马上消失。",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   }
 }

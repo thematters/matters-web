@@ -72,7 +72,7 @@ const StickyButton = ({
       ) : (
         <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
           <FormattedMessage
-            defaultMessage="Article pinned"
+            defaultMessage="Pin article"
             description="src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
           />
         </TextIcon>

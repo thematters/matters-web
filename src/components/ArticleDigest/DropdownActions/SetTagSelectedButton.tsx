@@ -72,7 +72,7 @@ const SetTagSelectedButton = ({
     >
       <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
         <FormattedMessage
-          defaultMessage="Add to Trending"
+          defaultMessage="Add to featured"
           description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
         />
       </TextIcon>
