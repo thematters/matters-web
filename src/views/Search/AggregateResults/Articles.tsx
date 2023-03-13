@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import {
   LATER_SEARCH_RESULTS_LENGTH,
   MAX_SEARCH_RESULTS_LENGTH,
@@ -41,6 +43,13 @@ const AggregateArticleResults = () => {
         },
       }
     )
+
+  useEffect(() => {
+    analytics.trackEvent('load_more', {
+      type: 'search_article',
+      location: 0,
+    })
+  }, [])
 
   // pagination
   const connectionPath = 'search'

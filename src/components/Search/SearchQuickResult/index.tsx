@@ -81,6 +81,10 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
         },
         fetchPolicy: 'no-cache',
       })
+      analytics.trackEvent('load_more', {
+        type: 'quick_search',
+        location: 0,
+      })
       setData(response.data)
       setLoading(response.loading)
     })()

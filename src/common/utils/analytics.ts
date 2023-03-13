@@ -83,6 +83,7 @@ interface LoadMoreProp {
     | UserFeedType
     | TagFeedType
     | CircleFeedType
+    | 'quick_search'
   location: number
 }
 

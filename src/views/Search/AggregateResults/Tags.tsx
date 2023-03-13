@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
@@ -43,6 +43,13 @@ const AggregateTagResults = () => {
         },
       }
     )
+
+  useEffect(() => {
+    analytics.trackEvent('load_more', {
+      type: 'search_tag',
+      location: 0,
+    })
+  }, [])
 
   // pagination
   const connectionPath = 'search'
