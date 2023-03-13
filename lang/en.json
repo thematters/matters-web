@@ -651,10 +651,6 @@
     "defaultMessage": "Created",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
-  "NG8uih": {
-    "defaultMessage": "articles",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "UxfPXa": {
     "defaultMessage": "In total",
     "description": "src/views/User/Articles/UserArticles.tsx"
@@ -823,8 +819,8 @@
     "defaultMessage": "Manage Community",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
-  "QvQPfZ": {
-    "defaultMessage": "Add Articles into featured",
+  "ySGgTo": {
+    "defaultMessage": "Add Articles into Featured",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "wEQDC6": {
@@ -1018,8 +1014,8 @@
     "defaultMessage": "The article has been added to the Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
-  "hSxDqf": {
-    "defaultMessage": "Add to featured",
+  "WSUAwk": {
+    "defaultMessage": "Add to Featured",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "Js/Fij": {
@@ -1061,5 +1057,9 @@
   "77tYPg": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "cd/II9": {
+    "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}",
+    "description": ""
   }
 }
