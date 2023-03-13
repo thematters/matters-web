@@ -15,6 +15,7 @@ import {
 import {
   SetCollectionProps,
   SetCoverProps,
+  SetResponseProps,
   SetTagsProps,
   ToggleAccessProps,
 } from '~/components/Editor'
@@ -161,6 +162,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
 
   const [iscnPublish, setIscnPublish] = useState<boolean>(false) // always start false
 
+  const [canComment, setCanComment] = useState<boolean>(article.canComment)
+
   /**
    * Render
    */
@@ -218,6 +221,12 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     editCollection: async (c: ArticleDigestDropdownArticleFragment[]) =>
       editCollection(c),
   }
+
+  const setCommentProps: SetResponseProps = {
+    canComment,
+    toggleComment: setCanComment,
+  }
+
   const accessProps: ToggleAccessProps = {
     circle,
     accessType,
@@ -248,6 +257,11 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                 <Sidebar.Tags {...tagsProps} />
                 <Sidebar.Cover {...coverProps} />
                 <Sidebar.Collection {...collectionProps} />
+                <Sidebar.Response
+                  inSidebar
+                  disableChangeCanComment={article.canComment}
+                  {...setCommentProps}
+                />
 
                 <SupportSettingDialog
                   article={article}
@@ -281,6 +295,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                   {...tagsProps}
                   {...collectionProps}
                   {...accessProps}
+                  {...setCommentProps}
                   article={article}
                   editData={editData}
                   coverId={cover?.id}
@@ -325,6 +340,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                     {...tagsProps}
                     {...collectionProps}
                     {...accessProps}
+                    {...setCommentProps}
                     onOpenSupportSetting={openDialog}
                   />
                 )}

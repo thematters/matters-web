@@ -72,6 +72,7 @@ const EditModeHeader = ({
           ...(isContentRevised ? { content } : {}),
           first: null,
           iscnPublish: restProps.iscnPublish,
+          canComment: restProps.canComment,
         },
       })
 
