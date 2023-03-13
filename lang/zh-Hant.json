@@ -815,7 +815,7 @@
     "defaultMessage": "管理社群",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
-  "QvQPfZ": {
+  "ySGgTo": {
     "defaultMessage": "添加精選",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
@@ -1014,7 +1014,7 @@
     "defaultMessage": "作品已添加至精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
-  "hSxDqf": {
+  "WSUAwk": {
     "defaultMessage": "添加到精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
@@ -1057,5 +1057,9 @@
   "77tYPg": {
     "defaultMessage": "確認刪除後，{commentType}會立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "cd/II9": {
+    "defaultMessage": "{totalCount, plural, =1 {篇文章} other {篇文章}}",
+    "description": ""
   }
 }
