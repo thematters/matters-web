@@ -451,10 +451,6 @@
     "defaultMessage": "你的修訂作品發布失敗",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
-  "QvQPfZ": {
-    "defaultMessage": "添加精選",
-    "description": "src/views/TagDetail/DropdownActions/index.tsx"
-  },
   "RFzVUD": {
     "defaultMessage": "取消置頂",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -522,6 +518,10 @@
   "WBVVYd": {
     "defaultMessage": "回應",
     "description": ""
+  },
+  "WSUAwk": {
+    "defaultMessage": "添加到精選",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "WuvE8X": {
     "defaultMessage": "{circleName} 的追蹤者",
@@ -623,6 +623,10 @@
     "defaultMessage": "發現",
     "description": ""
   },
+  "cd/II9": {
+    "defaultMessage": "{totalCount, plural, =1 {篇文章} other {篇文章}}",
+    "description": ""
+  },
   "cf37Zy": {
     "defaultMessage": "添加 IPFS 生成的 IPNS 指紋到閱讀器，如：",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -694,10 +698,6 @@
   "h9CG9E": {
     "defaultMessage": "{commentType}已刪除",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
-  },
-  "hSxDqf": {
-    "defaultMessage": "添加到精選",
-    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "hWs95P": {
     "defaultMessage": "重要訊息將透過郵件通知，請填入信箱完成設定。",
@@ -1009,6 +1009,10 @@
   "y1Z3or": {
     "defaultMessage": "修改界面語言",
     "description": ""
+  },
+  "ySGgTo": {
+    "defaultMessage": "添加精選",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "yZfKI4": {
     "defaultMessage": "discussion and mentioned you",
