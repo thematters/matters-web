@@ -451,10 +451,6 @@
     "defaultMessage": "Failed to republish article",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
-  "QvQPfZ": {
-    "defaultMessage": "Add Articles into featured",
-    "description": "src/views/TagDetail/DropdownActions/index.tsx"
-  },
   "RFzVUD": {
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -522,6 +518,10 @@
   "WBVVYd": {
     "defaultMessage": "Responses",
     "description": ""
+  },
+  "WSUAwk": {
+    "defaultMessage": "Add to Featured",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "WuvE8X": {
     "defaultMessage": "Followers of {circleName}",
@@ -623,6 +623,10 @@
     "defaultMessage": "Discover",
     "description": ""
   },
+  "cd/II9": {
+    "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}",
+    "description": ""
+  },
   "cf37Zy": {
     "defaultMessage": "Add hash from IPFS into compatible reader such as ",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -694,10 +698,6 @@
   "h9CG9E": {
     "defaultMessage": "{commentType} has been deleted",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
-  },
-  "hSxDqf": {
-    "defaultMessage": "Add to featured",
-    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "hWs95P": {
     "defaultMessage": "Important information will be notified by email. So filling in your email address will be required.",
@@ -1009,6 +1009,10 @@
   "y1Z3or": {
     "defaultMessage": "Language",
     "description": ""
+  },
+  "ySGgTo": {
+    "defaultMessage": "Add Articles into Featured",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "yZfKI4": {
     "defaultMessage": "discussion and mentioned you",
