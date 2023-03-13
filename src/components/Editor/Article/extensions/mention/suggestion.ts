@@ -75,6 +75,7 @@ export const mentionSuggestion = {
           interactive: true,
           trigger: 'manual',
           placement: 'bottom-start',
+          arrow: false,
         })
       },
 

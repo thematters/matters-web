@@ -40,31 +40,35 @@ export const Mention = Node.create<MentionOptions>({
     return {
       suggestion: {
         char: '@',
+        allowedPrefixes: null,
         pluginKey: MentionPluginKey,
         command: ({ editor, range, props }) => {
-          // increase range.to by one when the next node is of type "text"
-          // and starts with a space character
-          const nodeAfter = editor.view.state.selection.$to.nodeAfter
-          const overrideSpace = nodeAfter?.text?.startsWith(' ')
+          const { $from, $to } = editor.view.state.selection
+          const isNewLine = $from.parentOffset === 1
+          const nodeBefore = $to.nodeBefore
+          const nodeAfter = $to.nodeAfter
+          const hasBeforeSpace = nodeBefore?.text?.startsWith(' ')
+          const hasAfterSpace = nodeAfter?.text?.startsWith(' ')
 
-          if (overrideSpace) {
-            range.to += 1
+          const insertContent = []
+          if (!isNewLine && !hasBeforeSpace) {
+            insertContent.push({
+              type: 'text',
+              text: ' ',
+            })
+          }
+          insertContent.push({
+            type: this.name,
+            attrs: props,
+          })
+          if (!hasAfterSpace) {
+            insertContent.push({
+              type: 'text',
+              text: ' ',
+            })
           }
 
-          editor
-            .chain()
-            .focus()
-            .insertContentAt(range, [
-              {
-                type: this.name,
-                attrs: props,
-              },
-              {
-                type: 'text',
-                text: ' ',
-              },
-            ])
-            .run()
+          editor.chain().focus().insertContentAt(range, insertContent).run()
 
           window.getSelection()?.collapseToEnd()
         },
