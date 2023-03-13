@@ -80,7 +80,7 @@ const BaseDropdownActions = ({
         >
           <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
             <FormattedMessage
-              defaultMessage="Add Articles into Trending"
+              defaultMessage="Add Articles into featured"
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           </TextIcon>

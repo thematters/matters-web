@@ -823,8 +823,8 @@
     "defaultMessage": "Manage Community",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
-  "aUPhEs": {
-    "defaultMessage": "Add Articles into Trending",
+  "QvQPfZ": {
+    "defaultMessage": "Add Articles into featured",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "wEQDC6": {
@@ -840,7 +840,7 @@
     "description": ""
   },
   "U9IXic": {
-    "defaultMessage": "添加作品",
+    "defaultMessage": "Add Articles",
     "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
   },
   "q+N5Wd": {
@@ -931,8 +931,8 @@
     "defaultMessage": "No members yet",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
   },
-  "zPEMFy": {
-    "defaultMessage": "articles in total",
+  "ikVIu3": {
+    "defaultMessage": "articles",
     "description": ""
   },
   "hYG5fb": {
@@ -943,8 +943,8 @@
     "defaultMessage": "Maintain",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "4HVCON": {
-    "defaultMessage": "Article pinned",
+  "4Odb0J": {
+    "defaultMessage": "Pin article",
     "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "TQLBox": {
@@ -1018,8 +1018,8 @@
     "defaultMessage": "The article has been added to the Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
-  "SY0cqp": {
-    "defaultMessage": "Add to Trending",
+  "hSxDqf": {
+    "defaultMessage": "Add to featured",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "Js/Fij": {
@@ -1049,5 +1049,17 @@
   "pRV+UD": {
     "defaultMessage": "Collapse",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
+  },
+  "h9CG9E": {
+    "defaultMessage": "{commentType} has been deleted",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "Cdkhl8": {
+    "defaultMessage": "Delete {commentType}",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "77tYPg": {
+    "defaultMessage": "After deletion, the {commentType} will be removed immediately",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   }
 }

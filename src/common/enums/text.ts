@@ -1264,8 +1264,8 @@ export const COMMENT_TYPE_TEXT = {
     circleDiscussion: '众聊',
   },
   en: {
-    article: 'Article',
-    circleBroadcast: 'Broadcast',
-    circleDiscussion: 'Discussion',
+    article: 'comment',
+    circleBroadcast: 'broadcast',
+    circleDiscussion: 'thread',
   },
 }

@@ -45,7 +45,7 @@ const ArticleSummaryInfo = ({
         description="src/views/User/Articles/UserArticles.tsx"
       />
       <span className="num">&nbsp;{articles}&nbsp;</span>
-      <FormattedMessage defaultMessage="articles in total" description="" />
+      <FormattedMessage defaultMessage="articles" description="" />
 
       <IconDotDivider />
 
