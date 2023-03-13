@@ -139,6 +139,10 @@
     "defaultMessage": "You won't see announcements for 7 days",
     "description": "src/views/Home/Announcements/index.tsx"
   },
+  "77tYPg": {
+    "defaultMessage": "After deletion, the {commentType} will be removed immediately",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
   "7DIW6+": {
     "defaultMessage": "Learn More",
     "description": ""
@@ -861,10 +865,6 @@
   "q+N5Wd": {
     "defaultMessage": "Manage Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
-  },
-  "q8xxel": {
-    "defaultMessage": "Confirm deletion of the {commentType}, The {commentType} will be removed immediately.",
-    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "qPPrzm": {
     "defaultMessage": "supported your article",

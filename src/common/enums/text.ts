@@ -1265,7 +1265,7 @@ export const COMMENT_TYPE_TEXT = {
   },
   en: {
     article: 'comment',
-    circleBroadcast: 'Broadcast',
-    circleDiscussion: 'Discussion',
+    circleBroadcast: 'broadcast',
+    circleDiscussion: 'thread',
   },
 }

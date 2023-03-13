@@ -1058,8 +1058,8 @@
     "defaultMessage": "Delete {commentType}",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
-  "q8xxel": {
-    "defaultMessage": "Confirm deletion of this {commentType}, the {commentType} will be removed immediately.",
+  "77tYPg": {
+    "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   }
 }

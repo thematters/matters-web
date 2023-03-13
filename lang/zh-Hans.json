@@ -1054,8 +1054,8 @@
     "defaultMessage": "刪除{commentType}",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
-  "q8xxel": {
-    "defaultMessage": "确认删除{commentType}，{commentType}会马上消失。",
+  "77tYPg": {
+    "defaultMessage": "确认删除后，{commentType}会立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   }
 }
