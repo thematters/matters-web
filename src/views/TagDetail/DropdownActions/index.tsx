@@ -1,9 +1,9 @@
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   Button,
   DropdownDialog,
@@ -12,13 +12,11 @@ import {
   IconProfile24,
   IconRemove24,
   IconSettings32,
-  LanguageContext,
   Menu,
   TagDialog,
   TagEditorDialog,
   TagLeaveDialog,
   TextIcon,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -65,14 +63,13 @@ const BaseDropdownActions = ({
   openTagEditorDialog,
   openTagLeaveDialog,
 }: BaseDropdownActionsProps) => {
-  const { lang } = useContext(LanguageContext)
-
+  const intl = useIntl()
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {hasEditTag && (
         <Menu.Item onClick={openTagDialog} ariaHasPopup="dialog">
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
-            <Translate id="editTag" />
+            <FormattedMessage defaultMessage="Edit" description="" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -82,10 +79,9 @@ const BaseDropdownActions = ({
           ariaHasPopup="dialog"
         >
           <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
-            <Translate
-              zh_hant="添加精選"
-              zh_hans="添加精选"
-              en="Add Articles into Trending"
+            <FormattedMessage
+              defaultMessage="Add Articles into Featured"
+              description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           </TextIcon>
         </Menu.Item>
@@ -93,10 +89,9 @@ const BaseDropdownActions = ({
       {hasManageCommunity && (
         <Menu.Item onClick={openTagEditorDialog} ariaHasPopup="dialog">
           <TextIcon icon={<IconProfile24 size="md" />} size="md" spacing="base">
-            <Translate
-              zh_hant="管理社群"
-              zh_hans="管理社群"
-              en="Manage Community"
+            <FormattedMessage
+              defaultMessage="Manage Community"
+              description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           </TextIcon>
         </Menu.Item>
@@ -109,10 +104,9 @@ const BaseDropdownActions = ({
             size="md"
             spacing="base"
           >
-            <Translate
-              zh_hant="辭去權限"
-              zh_hans="辞去权限"
-              en="Resign From Maintainer"
+            <FormattedMessage
+              defaultMessage="Resign From Maintainer"
+              description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           </TextIcon>
         </Menu.Item>
@@ -135,7 +129,10 @@ const BaseDropdownActions = ({
         <section className="container">
           <Button
             bgColor="half-black"
-            aria-label={translate({ id: 'moreActions', lang })}
+            aria-label={intl.formatMessage({
+              defaultMessage: 'More Actions',
+              description: '',
+            })}
             onClick={openDialog}
             aria-haspopup={type}
             ref={ref}
@@ -151,9 +148,9 @@ const BaseDropdownActions = ({
 
 const DropdownActions = (props: DropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
   const { tag } = props
 
+  const intl = useIntl()
   /**
    * Data
    */
@@ -183,7 +180,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            content: translate({ id: 'addedArticleTag', lang }),
+            content: intl.formatMessage({
+              defaultMessage: 'Tags added',
+              description: 'src/views/TagDetail/DropdownActions/index.tsx',
+            }),
             duration: 2000,
           },
         })
@@ -204,7 +204,12 @@ const DropdownActions = (props: DropdownActionsProps) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'red',
-          content: <Translate id="FORBIDDEN_BY_STATE" />,
+          content: (
+            <FormattedMessage
+              defaultMessage="You do not have permission to perform this operation"
+              description=""
+            />
+          ),
         },
       })
     )

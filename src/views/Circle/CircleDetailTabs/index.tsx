@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { toPath } from '~/common/utils'
-import { Tabs, Translate, useRoute } from '~/components'
+import { Tabs, useRoute } from '~/components'
 
 const CircleDetailTabs = () => {
   const { isInPath, getQuery } = useRoute()
@@ -21,21 +23,21 @@ const CircleDetailTabs = () => {
   return (
     <Tabs sticky>
       <Tabs.Tab {...circleDetailPath} selected={isInPath('CIRCLE_DETAIL')}>
-        <Translate id="article" />
+        <FormattedMessage defaultMessage="Articles" description="" />
       </Tabs.Tab>
 
       <Tabs.Tab
         {...circleDiscussionPath}
         selected={isInPath('CIRCLE_DISCUSSION')}
       >
-        <Translate id="circleDiscussion" />
+        <FormattedMessage defaultMessage="Discussion" description="" />
       </Tabs.Tab>
 
       <Tabs.Tab
         {...circleBroadcastPath}
         selected={isInPath('CIRCLE_BROADCAST')}
       >
-        <Translate id="circleBroadcast" />
+        <FormattedMessage defaultMessage="Broadcast" description="" />
       </Tabs.Tab>
     </Tabs>
   )

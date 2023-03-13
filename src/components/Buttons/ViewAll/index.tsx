@@ -1,10 +1,6 @@
-import {
-  Button,
-  ButtonProps,
-  IconArrowRight8,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Button, ButtonProps, IconArrowRight8, TextIcon } from '~/components'
 
 type ViewAllButtonProps = ButtonProps
 
@@ -23,7 +19,7 @@ export const ViewAllButton: React.FC<ViewAllButtonProps> = ({ ...props }) => {
         weight="md"
         textPlacement="left"
       >
-        <Translate id="viewAll" />
+        <FormattedMessage defaultMessage="View All" description="" />
       </TextIcon>
     </Button>
   )

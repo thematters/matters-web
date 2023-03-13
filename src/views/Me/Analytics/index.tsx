@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
 import {
@@ -11,7 +12,6 @@ import {
   QueryError,
   Spinner,
   TextIcon,
-  Translate,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { MeAnalyticsQuery } from '~/gql/graphql'
@@ -92,7 +92,7 @@ const BaseAnalytics = () => {
           color="black"
           size="md"
         >
-          <Translate id="supporterRankingList" />
+          <FormattedMessage defaultMessage="Top Supporters" description="" />
         </TextIcon>
         <section className="filter">
           <SelectPeriod period={period} onChange={setPeriod} />
@@ -105,7 +105,7 @@ const BaseAnalytics = () => {
             <AnalyticsNoSupporter />
           </section>
           <p>
-            <Translate id="analyticsNoSupporter" />
+            <FormattedMessage defaultMessage="No data yet." description="" />
           </p>
         </section>
       )}

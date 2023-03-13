@@ -1141,7 +1141,7 @@ export const TEXT = {
     settingsNotificationGeneral: 'General',
     settingsNotificationCircle: 'Circle',
     settingsUI: 'Display Preferences',
-    settingsWallet: 'Wallet Setting',
+    settingsWallet: 'Wallet Settings',
     setup: 'Settings',
     setupLikeCoin: 'Liker ID',
     share: 'Share',
@@ -1264,8 +1264,8 @@ export const COMMENT_TYPE_TEXT = {
     circleDiscussion: '众聊',
   },
   en: {
-    article: 'Article',
-    circleBroadcast: 'Broadcast',
-    circleDiscussion: 'Discussion',
+    article: 'comment',
+    circleBroadcast: 'broadcast',
+    circleDiscussion: 'thread',
   },
 }

@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _chunk from 'lodash/chunk'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -11,7 +12,6 @@ import {
   Slides,
   Spinner,
   TagDigest,
-  Translate,
   usePublicQuery,
   ViewerContext,
   ViewMoreCard,
@@ -60,7 +60,7 @@ const TagsFeed = () => {
     FEED_TAGS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: { random: lastRandom || 0 },
+      variables: { random: lastRandom || 0, first: perPage },
     },
     { publicQuery: !viewer.isAuthed }
   )
@@ -135,7 +135,7 @@ const TagsFeed = () => {
           textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
           textAlign="center"
         >
-          <Translate id="viewAll" />
+          <FormattedMessage defaultMessage="View All" description="" />
         </ViewMoreCard>
       </section>
 

@@ -1,5 +1,6 @@
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -9,7 +10,6 @@ import {
   Button,
   IconAdd16,
   TextIcon,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -71,7 +71,7 @@ const Follow = ({ tag }: FollowProps) => {
       onClick={onClick}
     >
       <TextIcon icon={<IconAdd16 />} weight="md" size="md-s">
-        <Translate id="follow" />
+        <FormattedMessage defaultMessage="Follow" description="" />
       </TextIcon>
     </Button>
   )

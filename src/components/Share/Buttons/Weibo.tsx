@@ -1,7 +1,9 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ReactComponent as IconShareWeibo } from '@/public/static/icons/16px/share-weibo.svg'
 import { ReactComponent as IconShareWeiboCircle } from '@/public/static/icons/40px/share-weibo-circle.svg'
 import { dom } from '~/common/utils'
-import { TextIcon, Translate, withIcon } from '~/components'
+import { TextIcon, withIcon } from '~/components'
 
 const Weibo = ({
   title,
@@ -32,7 +34,10 @@ const Weibo = ({
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareWeibo)({})} spacing="base">
-        <Translate zh_hant="微博" zh_hans="微博" en="Weibo" />
+        <FormattedMessage
+          defaultMessage="Weibo"
+          description="src/components/Share/Buttons/Weibo.tsx"
+        />
       </TextIcon>
     )}
   </button>

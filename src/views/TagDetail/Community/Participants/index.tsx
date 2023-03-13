@@ -1,4 +1,5 @@
 import { NetworkStatus } from 'apollo-client'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -6,7 +7,6 @@ import {
   List,
   QueryError,
   Spinner,
-  Translate,
   usePublicQuery,
   UserDigest,
 } from '~/components'
@@ -77,7 +77,7 @@ const Participants = ({ id }: Props) => {
     <>
       <section className="category">
         <section>
-          <Translate zh_hant="創作者" zh_hans="创作者" en="Creators" />
+          <FormattedMessage defaultMessage="Creators" description="" />
           <span className="count">({count})</span>
         </section>
       </section>

@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
@@ -13,7 +14,6 @@ import {
   Spinner,
   SubscribeCircleDialog,
   Throw404,
-  Translate,
   useEventListener,
   usePublicQuery,
   useRoute,
@@ -184,7 +184,8 @@ const CircleProfile = () => {
             <section className="price">
               <span className="amount">{price.amount}</span>
               <br />
-              {price.currency} / <Translate id="month" />
+              {price.currency} /{' '}
+              <FormattedMessage defaultMessage="month" description="" />
             </section>
           )}
         </header>
@@ -216,7 +217,8 @@ const CircleProfile = () => {
                   <span className="count">
                     {numAbbr(circle.members.totalCount)}
                   </span>
-                  <Translate id="members" />
+                  {/* <Translate id="members" /> */}
+                  <FormattedMessage defaultMessage="Members" description="" />
                 </button>
               )}
             </MembersDialog>
@@ -231,7 +233,9 @@ const CircleProfile = () => {
                   <span className="count">
                     {numAbbr(circle.followers.totalCount)}
                   </span>
-                  <Translate id="follower" />
+                  {/* <Translate id="follower" />  */}
+
+                  <FormattedMessage defaultMessage="Followers" description="" />
                 </button>
               )}
             </FollowersDialog>

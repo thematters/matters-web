@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog } from '~/components'
 import SelectLicense from '~/components/Editor/ToggleAccess/SelectLicense'
 import { ArticleLicenseType } from '~/gql/graphql'
 
@@ -29,7 +30,7 @@ const ConfirmContent: React.FC<ContentProps> = ({
             onClick={() =>
               onConfirm(license === ArticleLicenseType.Arr, license)
             }
-            text={<Translate zh_hant="確認" zh_hans="确认" en="Confirm" />}
+            text={<FormattedMessage defaultMessage="Confirm" description="" />}
             loading={loading}
           />
         }

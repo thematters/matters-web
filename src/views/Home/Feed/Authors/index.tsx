@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import _chunk from 'lodash/chunk'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -10,7 +11,6 @@ import {
   ShuffleButton,
   Slides,
   Spinner,
-  Translate,
   usePublicQuery,
   UserDigest,
   ViewerContext,
@@ -129,7 +129,7 @@ const Authors = () => {
           textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
           textAlign="center"
         >
-          <Translate id="viewAll" />
+          <FormattedMessage defaultMessage="View All" description="" />{' '}
         </ViewMoreCard>
       </section>
 

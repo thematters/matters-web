@@ -2,10 +2,10 @@ import { useApolloClient, useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 import _some from 'lodash/some'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST, STORAGE_KEY_ANNOUNCEMENT } from '~/common/enums'
 import { storage } from '~/common/utils'
-import { Translate } from '~/components'
 import { VisibleAnnouncementsQuery } from '~/gql/graphql'
 
 import Carousel from './Carousel'
@@ -78,10 +78,9 @@ const Announcements = () => {
         detail: {
           color: 'green',
           content: (
-            <Translate
-              zh_hant="暫時隱藏公告欄 7 天"
-              zh_hans="暂时隐藏公告栏 7 天"
-              en="You won't see announcements for 7 days"
+            <FormattedMessage
+              defaultMessage="You won't see announcements for 7 days"
+              description="src/views/Home/Announcements/index.tsx"
             />
           ),
           buttonPlacement: 'center',

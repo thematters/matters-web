@@ -7,7 +7,6 @@ import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyWarning,
   Head,
-  Help,
   InfiniteScroll,
   List,
   QueryError,
@@ -82,10 +81,6 @@ const FollowingFeed = () => {
   return (
     <>
       <Head title={{ id: 'follow' }} />
-
-      <section className="help">
-        <Help hasTime />
-      </section>
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List>

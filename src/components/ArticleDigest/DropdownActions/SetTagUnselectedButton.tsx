@@ -1,15 +1,10 @@
 import gql from 'graphql-tag'
 import _filter from 'lodash/filter'
 import _get from 'lodash/get'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
-import {
-  IconUnPin24,
-  Menu,
-  TextIcon,
-  Translate,
-  useMutation,
-} from '~/components'
+import { IconUnPin24, Menu, TextIcon, useMutation } from '~/components'
 import {
   SetTagUnselectedButtonArticleFragment,
   SetTagUnselectedMutation,
@@ -106,7 +101,10 @@ const SetTagUnselectedButton = ({
         detail: {
           color: 'green',
           content: (
-            <Translate zh_hant="作品已取消精選" zh_hans="作品已取消精选" />
+            <FormattedMessage
+              defaultMessage="This article has been removed from Trending"
+              description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+            />
           ),
           duration: 2000,
         },
@@ -121,7 +119,10 @@ const SetTagUnselectedButton = ({
       }}
     >
       <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
-        <Translate zh_hant="取消精選" zh_hans="取消精选" />
+        <FormattedMessage
+          defaultMessage="Unpin from Trending"
+          description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+        />
       </TextIcon>
     </Menu.Item>
   )

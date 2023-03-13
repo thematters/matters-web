@@ -7,41 +7,41 @@
     "defaultMessage": "若你希望向 Matters 提出建议，或遭遇操作异常，请发送邮件至",
     "description": "src/views/Help/index.tsx"
   },
-  "BqXRy4": {
+  "/ns2st": {
     "defaultMessage": "下载应用",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "FaTb0A": {
     "defaultMessage": "安装 MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "JMRVO6": {
+  "FhWC22": {
     "defaultMessage": "社区共建基地",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "RKs1fz": {
+  "Xd0J7Y": {
     "defaultMessage": "开放社区",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "dnsfmR": {
     "defaultMessage": "，我们会尽快回复!",
     "description": "src/views/Help/index.tsx"
   },
-  "nmmItN": {
+  "ZjDH42": {
     "defaultMessage": "关于我们",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "q7jZPx": {
+  "6flWFg": {
     "defaultMessage": "用户协议",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "qXcvBF": {
+  "uVCg1l": {
     "defaultMessage": "玩转 Matters 实用指南",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "rXbLl7": {
+  "HzaRKA": {
     "defaultMessage": "一键搬家",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "fOgusL": {
     "defaultMessage": "选择进入方式",
@@ -71,7 +71,7 @@
     "defaultMessage": "以邮箱登入",
     "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
   },
-  "fw3tYQ": {
+  "pwlQEY": {
     "defaultMessage": "姓名",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
@@ -83,9 +83,9 @@
     "defaultMessage": "我已阅读并同意",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
-  "nmZI+U": {
+  "LphWYP": {
     "defaultMessage": "Matters 用户协议和隐私政策",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+    "description": ""
   },
   "agfumL": {
     "defaultMessage": "下一步",
@@ -106,10 +106,6 @@
   "NzfL1d": {
     "defaultMessage": "再次输入密码",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
-  },
-  "JsK5CJ": {
-    "defaultMessage": "确认",
-    "description": ""
   },
   "XH0Lb6": {
     "defaultMessage": "欢迎加入 Matters！",
@@ -187,14 +183,6 @@
     "defaultMessage": "验证码",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "0Rw3H/": {
-    "defaultMessage": "我已阅读并同意",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
-  },
-  "/A/biR": {
-    "defaultMessage": "Matters 用户协议和隐私政策",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
   "jgLiba": {
     "defaultMessage": "请输入验证码",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -207,9 +195,9 @@
     "defaultMessage": "在行动装置上使用问题，参考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "GZ1iwf": {
+  "uw32VR": {
     "defaultMessage": "教学指南",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+    "description": ""
   },
   "hrfF+i": {
     "defaultMessage": "刚接触加密钱包？参考 ",
@@ -490,5 +478,588 @@
   "Jc+W6M": {
     "defaultMessage": " 辞去了标签主理人权限，你要不要试试看成为新的主理人？",
     "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+  },
+  "OKhRC6": {
+    "defaultMessage": "分享",
+    "description": ""
+  },
+  "u5aHb4": {
+    "defaultMessage": "复制链接",
+    "description": ""
+  },
+  "NONfAh": {
+    "defaultMessage": "豆瓣",
+    "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "rBjwQy": {
+    "defaultMessage": "微博",
+    "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "bBYO6x": {
+    "defaultMessage": "取消屏蔽",
+    "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "vAc1Bw": {
+    "defaultMessage": "封锁用户",
+    "description": ""
+  },
+  "mSAY3/": {
+    "defaultMessage": "已取消屏蔽。该用户现在可以评论你的作品和围炉。",
+    "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "wEQDC6": {
+    "defaultMessage": "编辑资料",
+    "description": ""
+  },
+  "/+XWDi": {
+    "defaultMessage": "航行日志 2.0",
+    "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "qyzJxi": {
+    "defaultMessage": "航行日志 1.0",
+    "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "A7ugfn": {
+    "defaultMessage": "更多操作",
+    "description": ""
+  },
+  "b1FfGy": {
+    "defaultMessage": "内容订阅",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "/3kw6k": {
+    "defaultMessage": "尝试将内容写入 IPFS 网络中，需要一段时间，请耐心等候。若等候时间过久，可通过发布文章来加速。",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "Lc/azT": {
+    "defaultMessage": "IPNS 订阅",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "cf37Zy": {
+    "defaultMessage": "添加 IPFS 生成的 IPNS 指纹到阅读器，如：",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "zxlwbc": {
+    "defaultMessage": "等待写入完成...",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "gMZfHO": {
+    "defaultMessage": "RSS 订阅",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "D2Sw/t": {
+    "defaultMessage": "添加以下任一网址到 RSS 阅读器",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "rf0ew3": {
+    "defaultMessage": "快来搭建围炉，呼召你的支持者加入!",
+    "description": "src/components/UserProfile/CircleWidget/index.tsx"
+  },
+  "pzTOmv": {
+    "defaultMessage": "追踪者",
+    "description": ""
+  },
+  "i/4KO2": {
+    "defaultMessage": "此帐户因为违反社区约章而被注销",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "oNYnCM": {
+    "defaultMessage": "已注销用户",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "rs0YS2": {
+    "defaultMessage": "已禁言用户",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "EoNvLu": {
+    "defaultMessage": "创作了",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "UxfPXa": {
+    "defaultMessage": "累积创作",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "Ic4hqD": {
+    "defaultMessage": "字",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "J+dIsA": {
+    "defaultMessage": "订阅",
+    "description": ""
+  },
+  "3KNMbJ": {
+    "defaultMessage": "作品",
+    "description": ""
+  },
+  "WBVVYd": {
+    "defaultMessage": "回应",
+    "description": ""
+  },
+  "1EYCdR": {
+    "defaultMessage": "标签",
+    "description": ""
+  },
+  "sT9HoG": {
+    "defaultMessage": "欢迎加入 Matters，一个自由、自主、永续的创作与公共讨论空间。",
+    "description": "src/views/Follow/PickAuthors/index.tsx"
+  },
+  "7DIW6+": {
+    "defaultMessage": "了解更多",
+    "description": ""
+  },
+  "Z6ewE3": {
+    "defaultMessage": "参与开发",
+    "description": "src/views/Me/Settings/AnonymousSettings/Enhance/index.tsx"
+  },
+  "1pFLGZ": {
+    "defaultMessage": "漏洞赏金计划",
+    "description": ""
+  },
+  "mk+LCk": {
+    "defaultMessage": "界面设定",
+    "description": "src/views/Me/Settings/AnonymousSettings/DisplayPreferences/index.tsx"
+  },
+  "y1Z3or": {
+    "defaultMessage": "修改介面语言",
+    "description": ""
+  },
+  "itPgxd": {
+    "defaultMessage": "个人主页",
+    "description": ""
+  },
+  "vH8sCb": {
+    "defaultMessage": "我的围炉",
+    "description": ""
+  },
+  "2atspc": {
+    "defaultMessage": "我的草稿",
+    "description": ""
+  },
+  "3yk8fB": {
+    "defaultMessage": "我的钱包",
+    "description": ""
+  },
+  "GZJpDf": {
+    "defaultMessage": "数据后台",
+    "description": ""
+  },
+  "nGBrvw": {
+    "defaultMessage": "我的收藏",
+    "description": ""
+  },
+  "2slIPX": {
+    "defaultMessage": "我的赞赏",
+    "description": ""
+  },
+  "MkwOFW": {
+    "defaultMessage": "浏览记录",
+    "description": ""
+  },
+  "fG41Ux": {
+    "defaultMessage": "登出成功",
+    "description": ""
+  },
+  "Szd1tH": {
+    "defaultMessage": "登出失败，再来一次",
+    "description": ""
+  },
+  "HtSDyc": {
+    "defaultMessage": "帮助中心",
+    "description": ""
+  },
+  "D3idYv": {
+    "defaultMessage": "设定",
+    "description": ""
+  },
+  "H0JBH6": {
+    "defaultMessage": "登出",
+    "description": ""
+  },
+  "cE4Hfw": {
+    "defaultMessage": "发现",
+    "description": ""
+  },
+  "NAidKb": {
+    "defaultMessage": "通知",
+    "description": ""
+  },
+  "enMIYK": {
+    "defaultMessage": "我的",
+    "description": ""
+  },
+  "xmcVZ0": {
+    "defaultMessage": "搜索",
+    "description": ""
+  },
+  "47FYwb": {
+    "defaultMessage": "取消",
+    "description": ""
+  },
+  "ll/ufR": {
+    "defaultMessage": "热门",
+    "description": ""
+  },
+  "adThp5": {
+    "defaultMessage": "最新",
+    "description": ""
+  },
+  "CnPG8j": {
+    "defaultMessage": "精华",
+    "description": ""
+  },
+  "wbcwKd": {
+    "defaultMessage": "查看全部",
+    "description": ""
+  },
+  "XgdZSb": {
+    "defaultMessage": "值得关注",
+    "description": ""
+  },
+  "kc79d3": {
+    "defaultMessage": "找你想看的",
+    "description": ""
+  },
+  "Pp/0po": {
+    "defaultMessage": "换一批",
+    "description": ""
+  },
+  "6gOpfl": {
+    "defaultMessage": "暂时隐藏公告栏 7 天",
+    "description": "src/views/Home/Announcements/index.tsx"
+  },
+  "pla6ZF": {
+    "defaultMessage": "搜索作品、标签、作者",
+    "description": "src/components/Search/SearchBar/index.tsx"
+  },
+  "3kbIhS": {
+    "defaultMessage": "未命名",
+    "description": ""
+  },
+  "MW9PzQ": {
+    "defaultMessage": "Top Supporters",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "cmtHjM": {
+    "defaultMessage": "由于你尚未发布任何作品，这裡还没有任何数据能与你分享哦！发布第一篇作品来介绍你自己，以此开启你的创作之旅吧！",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "69+D96": {
+    "defaultMessage": "开始创作",
+    "description": ""
+  },
+  "3ynsJ3": {
+    "defaultMessage": "想了解更多？详见 ",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "0Azlrb": {
+    "defaultMessage": "管理",
+    "description": ""
+  },
+  "eXDZGQ": {
+    "defaultMessage": "主理人",
+    "description": ""
+  },
+  "dg3JCQ": {
+    "defaultMessage": "协作者",
+    "description": ""
+  },
+  "TzhzIH": {
+    "defaultMessage": "创作者",
+    "description": ""
+  },
+  "Pdx3j1": {
+    "defaultMessage": "创作新的作品",
+    "description": "src/views/TagDetail/Buttons/AddButton/CreateDraftMenuItem/index.tsx"
+  },
+  "5FO4vn": {
+    "defaultMessage": "你尚无权限进行该操作",
+    "description": ""
+  },
+  "8ttGfR": {
+    "defaultMessage": "添加我的作品",
+    "description": "src/views/TagDetail/Buttons/AddButton/AddMyArticlesButton/index.tsx"
+  },
+  "ieGrWo": {
+    "defaultMessage": "追踪",
+    "description": ""
+  },
+  "izWS4J": {
+    "defaultMessage": "取消追踪",
+    "description": ""
+  },
+  "LGox1K": {
+    "defaultMessage": "已追踪",
+    "description": ""
+  },
+  "ikVIu3": {
+    "defaultMessage": "篇作品",
+    "description": ""
+  },
+  "HFVDeB": {
+    "defaultMessage": "相关标签",
+    "description": "src/views/TagDetail/RelatedTags/index.tsx"
+  },
+  "o2Na0B": {
+    "defaultMessage": "返回全部",
+    "description": ""
+  },
+  "KMcrz8": {
+    "defaultMessage": "认领",
+    "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "63HuBz": {
+    "defaultMessage": "此标签目前无人主理",
+    "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "UjKkhq": {
+    "defaultMessage": "作品已添加标签",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "GRtGnZ": {
+    "defaultMessage": "辞去权限",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "L7Si5/": {
+    "defaultMessage": "管理社群",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "ySGgTo": {
+    "defaultMessage": "添加精选",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "beLe/F": {
+    "defaultMessage": "广播",
+    "description": ""
+  },
+  "20bImY": {
+    "defaultMessage": "众聊",
+    "description": ""
+  },
+  "jx7Hn3": {
+    "defaultMessage": "作品",
+    "description": ""
+  },
+  "U9IXic": {
+    "defaultMessage": "添加作品",
+    "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
+  },
+  "q+N5Wd": {
+    "defaultMessage": "管理围炉",
+    "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "8xPi0N": {
+    "defaultMessage": "离开围炉",
+    "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "WuvE8X": {
+    "defaultMessage": "{circleName} 的追踪者",
+    "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
+  },
+  "XVYrS/": {
+    "defaultMessage": "还没有追踪者",
+    "description": ""
+  },
+  "+a+2ug": {
+    "defaultMessage": "成员",
+    "description": ""
+  },
+  "KL502d": {
+    "defaultMessage": "资料已保存",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+  },
+  "rfz/fN": {
+    "defaultMessage": "建议封面尺寸 1600 x 900 像素",
+    "description": ""
+  },
+  "lhaIoi": {
+    "defaultMessage": "请输入姓名",
+    "description": ""
+  },
+  "E8W3qa": {
+    "defaultMessage": "2-20 个字符",
+    "description": ""
+  },
+  "Q8Qw5B": {
+    "defaultMessage": "个人简介",
+    "description": ""
+  },
+  "A8MpFX": {
+    "defaultMessage": "请输入个人简介",
+    "description": ""
+  },
+  "UNUROl": {
+    "defaultMessage": "建议 50 字以内，最长 200 字",
+    "description": ""
+  },
+  "jvo0vs": {
+    "defaultMessage": "保存",
+    "description": ""
+  },
+  "A3wDZ8": {
+    "defaultMessage": "我的 NFT 收藏",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
+  },
+  "QCo7Gc": {
+    "defaultMessage": "选择 NFT 作为你的头像",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
+  },
+  "eTpiYa": {
+    "defaultMessage": "尚无支持数据",
+    "description": ""
+  },
+  "/IMR+8": {
+    "defaultMessage": "支持排行榜",
+    "description": ""
+  },
+  "b3onWZ": {
+    "defaultMessage": "最近 {days} 天",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "Po+kJe": {
+    "defaultMessage": "最近 {month} 个月",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "A3rLZt": {
+    "defaultMessage": "最近 {months} 个月",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "zQvVDJ": {
+    "defaultMessage": "全部",
+    "description": ""
+  },
+  "FOOymB": {
+    "defaultMessage": "还没有成员",
+    "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
+  },
+  "hYG5fb": {
+    "defaultMessage": "人追踪",
+    "description": "src/views/TagDetail/Followers/index.tsx"
+  },
+  "ANA7sk": {
+    "defaultMessage": "主理",
+    "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "4Odb0J": {
+    "defaultMessage": "置顶作品",
+    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
+  "TQLBox": {
+    "defaultMessage": "取消置顶",
+    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
+  "ZVoJan": {
+    "defaultMessage": "修订作品",
+    "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
+  },
+  "hrgo+E": {
+    "defaultMessage": "隐藏",
+    "description": ""
+  },
+  "uIdMon": {
+    "defaultMessage": "确认隐藏，其他用户将无法从站内访问该作品。隐藏后无法回退，如需再次呈现作品，你需要重新发布。",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+  },
+  "oIkacT": {
+    "defaultMessage": "作品已隐藏",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+  },
+  "K3r6DQ": {
+    "defaultMessage": "刪除",
+    "description": ""
+  },
+  "mikY/9": {
+    "defaultMessage": "编辑",
+    "description": "src/components/Comment/DropdownActions/EditButton.tsx"
+  },
+  "50cquj": {
+    "defaultMessage": "还没有众聊",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "EW5R4p": {
+    "defaultMessage": "催更、提问、分享、讨论…",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "9nNpKP": {
+    "defaultMessage": "讨论已送出",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "TjWWxF": {
+    "defaultMessage": "广播已送出",
+    "description": "src/views/Circle/Broadcast/Broadcast.tsx"
+  },
+  "mWjpk9": {
+    "defaultMessage": "还没有广播",
+    "description": "src/views/Circle/Broadcast/Broadcast.tsx"
+  },
+  "zb8Kx1": {
+    "defaultMessage": "公告、提醒、碎碎念…"
+  },
+  "AGcU5J": {
+    "defaultMessage": "置顶",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "jJ1Brc": {
+    "defaultMessage": "喜欢回应",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "RFzVUD": {
+    "defaultMessage": "取消置顶",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "X+Xvgq": {
+    "defaultMessage": "取消精选",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "7xnrxG": {
+    "defaultMessage": "作品已添加至精选",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "WSUAwk": {
+    "defaultMessage": "添加到精选",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "Js/Fij": {
+    "defaultMessage": "作品已取消精选",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+  },
+  "aa0nss": {
+    "defaultMessage": "取消精选",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+  },
+  "32bml8": {
+    "defaultMessage": "追踪",
+    "description": "src/components/Layout/SideNav/index.tsx"
+  },
+  "ohgTH4": {
+    "defaultMessage": "追踪中",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "Cu3Cty": {
+    "defaultMessage": "月",
+    "description": ""
+  },
+  "qlki7w": {
+    "defaultMessage": "移除作品",
+    "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
+  },
+  "pRV+UD": {
+    "defaultMessage": "折叠",
+    "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
+  },
+  "h9CG9E": {
+    "defaultMessage": "{commentType}已刪除",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "Cdkhl8": {
+    "defaultMessage": "刪除{commentType}",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "77tYPg": {
+    "defaultMessage": "确认删除后，{commentType}会立即消失。",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "cd/II9": {
+    "defaultMessage": "{totalCount, plural, =1 {篇文章} other {篇文章}}",
+    "description": ""
   }
 }

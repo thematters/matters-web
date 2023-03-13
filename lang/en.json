@@ -7,9 +7,9 @@
     "defaultMessage": " followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
-  "BqXRy4": {
+  "/ns2st": {
     "defaultMessage": "Download App",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
@@ -19,13 +19,13 @@
     "defaultMessage": "User registered by email can login and enable wallet login later",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
-  "JMRVO6": {
+  "FhWC22": {
     "defaultMessage": "Matters Community",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "RKs1fz": {
+  "Xd0J7Y": {
     "defaultMessage": "Open Source",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "cfL5uk": {
     "defaultMessage": "Over 200 words, current {numbers}",
@@ -43,21 +43,21 @@
     "defaultMessage": "For unregistered or users enabled wallet login",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
-  "nmmItN": {
+  "ZjDH42": {
     "defaultMessage": "About Us",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "q7jZPx": {
+  "6flWFg": {
     "defaultMessage": "Term of Services",
     "description": "src/views/Help/index.tsx"
   },
-  "qXcvBF": {
+  "uVCg1l": {
     "defaultMessage": "Explore Matters",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
-  "rXbLl7": {
+  "HzaRKA": {
     "defaultMessage": "Migrate to Matters",
-    "description": "src/views/Help/index.tsx"
+    "description": ""
   },
   "skbUBl": {
     "defaultMessage": "Log in",
@@ -83,13 +83,13 @@
     "defaultMessage": "Login with Email",
     "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
   },
-  "fw3tYQ": {
+  "pwlQEY": {
     "defaultMessage": "Display Name",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+    "description": ""
   },
-  "nmZI+U": {
+  "LphWYP": {
     "defaultMessage": "Terms and Privacy Policy",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+    "description": ""
   },
   "agfumL": {
     "defaultMessage": "Next",
@@ -110,10 +110,6 @@
   "NzfL1d": {
     "defaultMessage": "Enter password again",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
-  },
-  "JsK5CJ": {
-    "defaultMessage": "Confirm",
-    "description": ""
   },
   "XH0Lb6": {
     "defaultMessage": "Welcome to Matters!",
@@ -191,10 +187,6 @@
     "defaultMessage": "I have read and agree to",
     "description": ""
   },
-  "/A/biR": {
-    "defaultMessage": "Terms and Privacy Policy",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
   "jgLiba": {
     "defaultMessage": "Enter verification code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -207,9 +199,9 @@
     "defaultMessage": "Have wallet questions on mobile device ? Click the ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "GZ1iwf": {
+  "uw32VR": {
     "defaultMessage": "tutorial",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+    "description": ""
   },
   "hrfF+i": {
     "defaultMessage": "Don't have a wallet yet? Check the ",
@@ -490,5 +482,584 @@
   "Jc+W6M": {
     "defaultMessage": " resigned as tag maintainer. Would you like to be the new tag maintainer?",
     "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+  },
+  "OKhRC6": {
+    "defaultMessage": "Share",
+    "description": ""
+  },
+  "u5aHb4": {
+    "defaultMessage": "Copy Link",
+    "description": ""
+  },
+  "NONfAh": {
+    "defaultMessage": "Douban",
+    "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "rBjwQy": {
+    "defaultMessage": "Weibo",
+    "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "bBYO6x": {
+    "defaultMessage": "Unblock",
+    "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "vAc1Bw": {
+    "defaultMessage": "Block User",
+    "description": ""
+  },
+  "mSAY3/": {
+    "defaultMessage": "User unblocked. User can now comment on your articles.",
+    "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "/+XWDi": {
+    "defaultMessage": "Logbook 2.0",
+    "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "qyzJxi": {
+    "defaultMessage": "Logbook 1.0",
+    "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "A7ugfn": {
+    "defaultMessage": "More Actions",
+    "description": ""
+  },
+  "b1FfGy": {
+    "defaultMessage": "Content Feed",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "/3kw6k": {
+    "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "Lc/azT": {
+    "defaultMessage": "IPNS Subscription",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "cf37Zy": {
+    "defaultMessage": "Add hash from IPFS into compatible reader such as ",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "zxlwbc": {
+    "defaultMessage": "Waiting ...",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "gMZfHO": {
+    "defaultMessage": "RSS Subscription",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "D2Sw/t": {
+    "defaultMessage": "Add any URL in the following list into RSS reader",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "rf0ew3": {
+    "defaultMessage": "Come build a Circle and call on your supporters to join you!",
+    "description": "src/components/UserProfile/CircleWidget/index.tsx"
+  },
+  "sT9HoG": {
+    "defaultMessage": "Welcome to Matters, a free, autonomous and permanent space for creation and civil discourse.",
+    "description": "src/views/Follow/PickAuthors/index.tsx"
+  },
+  "7DIW6+": {
+    "defaultMessage": "Learn More",
+    "description": ""
+  },
+  "Z6ewE3": {
+    "defaultMessage": "Build Together",
+    "description": "src/views/Me/Settings/AnonymousSettings/Enhance/index.tsx"
+  },
+  "1pFLGZ": {
+    "defaultMessage": "Bug Bounty",
+    "description": ""
+  },
+  "mk+LCk": {
+    "defaultMessage": "Display Preferences",
+    "description": "src/views/Me/Settings/AnonymousSettings/DisplayPreferences/index.tsx"
+  },
+  "y1Z3or": {
+    "defaultMessage": "Language",
+    "description": ""
+  },
+  "itPgxd": {
+    "defaultMessage": "Profile",
+    "description": ""
+  },
+  "vH8sCb": {
+    "defaultMessage": "Circle",
+    "description": ""
+  },
+  "2atspc": {
+    "defaultMessage": "Drafts",
+    "description": ""
+  },
+  "3yk8fB": {
+    "defaultMessage": "Wallet",
+    "description": ""
+  },
+  "GZJpDf": {
+    "defaultMessage": "Analytics",
+    "description": ""
+  },
+  "nGBrvw": {
+    "defaultMessage": "Bookmarks",
+    "description": ""
+  },
+  "2slIPX": {
+    "defaultMessage": "Likes",
+    "description": ""
+  },
+  "MkwOFW": {
+    "defaultMessage": "Read History",
+    "description": ""
+  },
+  "fG41Ux": {
+    "defaultMessage": "Logged out successfully",
+    "description": ""
+  },
+  "Szd1tH": {
+    "defaultMessage": "Failed to log out, please try again.",
+    "description": ""
+  },
+  "HtSDyc": {
+    "defaultMessage": "Help Center",
+    "description": ""
+  },
+  "D3idYv": {
+    "defaultMessage": "Settings",
+    "description": ""
+  },
+  "H0JBH6": {
+    "defaultMessage": "Log Out",
+    "description": ""
+  },
+  "cE4Hfw": {
+    "defaultMessage": "Discover",
+    "description": ""
+  },
+  "i/4KO2": {
+    "defaultMessage": "This account is archived due to violation of community guidelines",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "oNYnCM": {
+    "defaultMessage": "Account Archived",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "rs0YS2": {
+    "defaultMessage": "Account Banned",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "EoNvLu": {
+    "defaultMessage": "Created",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "UxfPXa": {
+    "defaultMessage": "In total",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "Ic4hqD": {
+    "defaultMessage": "words",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
+  "J+dIsA": {
+    "defaultMessage": "Subscriptions",
+    "description": ""
+  },
+  "WBVVYd": {
+    "defaultMessage": "Responses",
+    "description": ""
+  },
+  "1EYCdR": {
+    "defaultMessage": "Tags",
+    "description": ""
+  },
+  "NAidKb": {
+    "defaultMessage": "Notifications",
+    "description": ""
+  },
+  "enMIYK": {
+    "defaultMessage": "My Page",
+    "description": ""
+  },
+  "xmcVZ0": {
+    "defaultMessage": "Search",
+    "description": ""
+  },
+  "47FYwb": {
+    "defaultMessage": "Cancel",
+    "description": ""
+  },
+  "ll/ufR": {
+    "defaultMessage": "Trending",
+    "description": ""
+  },
+  "adThp5": {
+    "defaultMessage": "Latest",
+    "description": ""
+  },
+  "CnPG8j": {
+    "defaultMessage": "Featured",
+    "description": ""
+  },
+  "wbcwKd": {
+    "defaultMessage": "View All",
+    "description": ""
+  },
+  "XgdZSb": {
+    "defaultMessage": "Authors",
+    "description": ""
+  },
+  "kc79d3": {
+    "defaultMessage": "Topics",
+    "description": ""
+  },
+  "Pp/0po": {
+    "defaultMessage": "Shuffle",
+    "description": ""
+  },
+  "6gOpfl": {
+    "defaultMessage": "You won't see announcements for 7 days",
+    "description": "src/views/Home/Announcements/index.tsx"
+  },
+  "pla6ZF": {
+    "defaultMessage": "Search articles, tags and authors",
+    "description": "src/components/Search/SearchBar/index.tsx"
+  },
+  "3kbIhS": {
+    "defaultMessage": "Untitled",
+    "description": ""
+  },
+  "MW9PzQ": {
+    "defaultMessage": "支持排行榜",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "cmtHjM": {
+    "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "69+D96": {
+    "defaultMessage": "Start Creating",
+    "description": ""
+  },
+  "3ynsJ3": {
+    "defaultMessage": "Want to know more? Check the ",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "0Azlrb": {
+    "defaultMessage": "Manage",
+    "description": ""
+  },
+  "eXDZGQ": {
+    "defaultMessage": "Maintainer",
+    "description": ""
+  },
+  "dg3JCQ": {
+    "defaultMessage": "collaborators",
+    "description": ""
+  },
+  "TzhzIH": {
+    "defaultMessage": "Creators",
+    "description": ""
+  },
+  "Pdx3j1": {
+    "defaultMessage": "New Article",
+    "description": "src/views/TagDetail/Buttons/AddButton/CreateDraftMenuItem/index.tsx"
+  },
+  "5FO4vn": {
+    "defaultMessage": "You do not have permission to perform this operation",
+    "description": ""
+  },
+  "8ttGfR": {
+    "defaultMessage": "Add Article",
+    "description": "src/views/TagDetail/Buttons/AddButton/AddMyArticlesButton/index.tsx"
+  },
+  "ieGrWo": {
+    "defaultMessage": "Follow",
+    "description": ""
+  },
+  "izWS4J": {
+    "defaultMessage": "Unfollow",
+    "description": ""
+  },
+  "LGox1K": {
+    "defaultMessage": "Followed",
+    "description": ""
+  },
+  "3KNMbJ": {
+    "defaultMessage": "Articles",
+    "description": ""
+  },
+  "HFVDeB": {
+    "defaultMessage": "Related Tags",
+    "description": "src/views/TagDetail/RelatedTags/index.tsx"
+  },
+  "o2Na0B": {
+    "defaultMessage": "Back to All",
+    "description": ""
+  },
+  "KMcrz8": {
+    "defaultMessage": "Maintain Tag",
+    "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "63HuBz": {
+    "defaultMessage": "This tag has no manager currently",
+    "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "pzTOmv": {
+    "defaultMessage": "Followers",
+    "description": ""
+  },
+  "UjKkhq": {
+    "defaultMessage": "Tags added",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "GRtGnZ": {
+    "defaultMessage": "Resign From Maintainer",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "L7Si5/": {
+    "defaultMessage": "Manage Community",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "ySGgTo": {
+    "defaultMessage": "Add Articles into Featured",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "wEQDC6": {
+    "defaultMessage": "Edit",
+    "description": ""
+  },
+  "beLe/F": {
+    "defaultMessage": "Broadcast",
+    "description": ""
+  },
+  "20bImY": {
+    "defaultMessage": "Discussion",
+    "description": ""
+  },
+  "U9IXic": {
+    "defaultMessage": "Add Articles",
+    "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
+  },
+  "q+N5Wd": {
+    "defaultMessage": "Manage Circle",
+    "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "8xPi0N": {
+    "defaultMessage": "Unsubscribe Circle",
+    "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "WuvE8X": {
+    "defaultMessage": "Followers of {circleName}",
+    "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
+  },
+  "XVYrS/": {
+    "defaultMessage": "No followers yet",
+    "description": ""
+  },
+  "+a+2ug": {
+    "defaultMessage": "Members",
+    "description": ""
+  },
+  "KL502d": {
+    "defaultMessage": "Profile updated",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+  },
+  "rfz/fN": {
+    "defaultMessage": "Recommended size: 1600px x 900px",
+    "description": ""
+  },
+  "lhaIoi": {
+    "defaultMessage": "Enter Display Name",
+    "description": ""
+  },
+  "E8W3qa": {
+    "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.",
+    "description": ""
+  },
+  "Q8Qw5B": {
+    "defaultMessage": "Description",
+    "description": ""
+  },
+  "A8MpFX": {
+    "defaultMessage": "Enter Bio",
+    "description": ""
+  },
+  "UNUROl": {
+    "defaultMessage": "Maximum 200 characters.",
+    "description": ""
+  },
+  "jvo0vs": {
+    "defaultMessage": "Save",
+    "description": ""
+  },
+  "A3wDZ8": {
+    "defaultMessage": "My NFT Collections",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
+  },
+  "QCo7Gc": {
+    "defaultMessage": "Select NFT as your avatar",
+    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
+  },
+  "eTpiYa": {
+    "defaultMessage": "No data yet.",
+    "description": ""
+  },
+  "/IMR+8": {
+    "defaultMessage": "Top Supporters",
+    "description": ""
+  },
+  "b3onWZ": {
+    "defaultMessage": "Last {days} days",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "Po+kJe": {
+    "defaultMessage": "Last {months} month",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "A3rLZt": {
+    "defaultMessage": "Last {months} months",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "zQvVDJ": {
+    "defaultMessage": "All",
+    "description": ""
+  },
+  "FOOymB": {
+    "defaultMessage": "No members yet",
+    "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
+  },
+  "ikVIu3": {
+    "defaultMessage": "articles",
+    "description": ""
+  },
+  "hYG5fb": {
+    "defaultMessage": "are following",
+    "description": "src/views/TagDetail/Followers/index.tsx"
+  },
+  "ANA7sk": {
+    "defaultMessage": "Maintain",
+    "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "4Odb0J": {
+    "defaultMessage": "Pin article",
+    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
+  "TQLBox": {
+    "defaultMessage": "Unpin",
+    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
+  "ZVoJan": {
+    "defaultMessage": "Edit",
+    "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
+  },
+  "hrgo+E": {
+    "defaultMessage": "Archive",
+    "description": ""
+  },
+  "uIdMon": {
+    "defaultMessage": "Are you sure you want to archive the article?",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+  },
+  "oIkacT": {
+    "defaultMessage": "Article is hidden",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+  },
+  "K3r6DQ": {
+    "defaultMessage": "Delete",
+    "description": ""
+  },
+  "mikY/9": {
+    "defaultMessage": "Edit",
+    "description": "src/components/Comment/DropdownActions/EditButton.tsx"
+  },
+  "50cquj": {
+    "defaultMessage": "No discussion yet",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "EW5R4p": {
+    "defaultMessage": "Request an update, ask, share and discuss",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "9nNpKP": {
+    "defaultMessage": "Discussion sent",
+    "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "TjWWxF": {
+    "defaultMessage": "Broadcast sent",
+    "description": "src/views/Circle/Broadcast/Broadcast.tsx"
+  },
+  "mWjpk9": {
+    "defaultMessage": "No broadcast yet.",
+    "description": "src/views/Circle/Broadcast/Broadcast.tsx"
+  },
+  "zb8Kx1": {
+    "defaultMessage": "Announcement, reminder, chattering..."
+  },
+  "AGcU5J": {
+    "defaultMessage": "Pin Broadcast",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "jJ1Brc": {
+    "defaultMessage": "Pin Comment",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "RFzVUD": {
+    "defaultMessage": "Unpin Broadcast",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "X+Xvgq": {
+    "defaultMessage": "Unpin Comment",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "7xnrxG": {
+    "defaultMessage": "The article has been added to the Trending",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "WSUAwk": {
+    "defaultMessage": "Add to Featured",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "Js/Fij": {
+    "defaultMessage": "This article has been removed from Trending",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+  },
+  "aa0nss": {
+    "defaultMessage": "Unpin from Trending",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+  },
+  "32bml8": {
+    "defaultMessage": "Following",
+    "description": "src/components/Layout/SideNav/index.tsx"
+  },
+  "ohgTH4": {
+    "defaultMessage": "Following",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "Cu3Cty": {
+    "defaultMessage": "month",
+    "description": ""
+  },
+  "qlki7w": {
+    "defaultMessage": "Remove Article",
+    "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
+  },
+  "pRV+UD": {
+    "defaultMessage": "Collapse",
+    "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
+  },
+  "h9CG9E": {
+    "defaultMessage": "{commentType} has been deleted",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "Cdkhl8": {
+    "defaultMessage": "Delete {commentType}",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "77tYPg": {
+    "defaultMessage": "After deletion, the {commentType} will be removed immediately",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "cd/II9": {
+    "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}",
+    "description": ""
   }
 }

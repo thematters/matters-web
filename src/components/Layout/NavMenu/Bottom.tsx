@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import {
   ADD_TOAST,
   COOKIE_TOKEN_NAME,
@@ -12,7 +14,6 @@ import {
   IconSettings24,
   Menu,
   TextIcon,
-  Translate,
   useMutation,
 } from '~/components'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
@@ -36,7 +37,12 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            content: <Translate id="successLogout" />,
+            content: (
+              <FormattedMessage
+                defaultMessage="Logged out successfully"
+                description=""
+              />
+            ),
           },
         })
       )
@@ -49,7 +55,12 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id="failureLogout" />,
+            content: (
+              <FormattedMessage
+                defaultMessage="Failed to log out, please try again."
+                description=""
+              />
+            ),
           },
         })
       )
@@ -69,7 +80,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
           spacing="base"
           size={menuItemSize}
         >
-          <Translate id="helpCenter" />
+          <FormattedMessage defaultMessage="Help Center" description="" />
         </TextIcon>
       </Menu.Item>
 
@@ -79,7 +90,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
           spacing="base"
           size={menuItemSize}
         >
-          <Translate id="settings" />
+          <FormattedMessage defaultMessage="Settings" description="" />
         </TextIcon>
       </Menu.Item>
 
@@ -89,7 +100,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
           spacing="base"
           size={menuItemSize}
         >
-          <Translate id="logout" />
+          <FormattedMessage defaultMessage="Log Out" description="" />
         </TextIcon>
       </Menu.Item>
     </Menu>
