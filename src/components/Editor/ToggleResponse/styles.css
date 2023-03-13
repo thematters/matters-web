@@ -46,6 +46,12 @@
   }
 }
 
+.disableChange {
+  & .item {
+    cursor: not-allowed;
+  }
+}
+
 .container {
   & .title {
     padding-bottom: var(--spacing-base);

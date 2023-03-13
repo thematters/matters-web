@@ -1,12 +1,11 @@
 import { IconComment16 } from '~/components'
 
-import { SetPublishISCNProps } from '../..'
-import { ToggleAccessProps } from '../../ToggleAccess'
-import ToggleResponse from '../../ToggleResponse'
+import { SetResponseProps } from '../..'
+import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
 import Box from '../Box'
 import styles from './styles.css'
 
-export type SidebarManagementProps = ToggleAccessProps & SetPublishISCNProps
+export type SidebarManagementProps = ToggleResponseProps & SetResponseProps
 
 const SidebarArticleResponse: React.FC<SidebarManagementProps> = (props) => {
   return (
@@ -16,7 +15,7 @@ const SidebarArticleResponse: React.FC<SidebarManagementProps> = (props) => {
       footerSpace={false}
     >
       <section className="container">
-        <ToggleResponse inSidebar />
+        <ToggleResponse inSidebar {...props} />
         <style jsx>{styles}</style>
       </section>
     </Box>
