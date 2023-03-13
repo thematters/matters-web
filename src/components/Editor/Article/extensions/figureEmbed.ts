@@ -17,7 +17,7 @@ import { Node } from '@tiptap/core'
  *   </div>
  *
  *   <figcaption>CAPTION</figcaption>
- * </figure
+ * </figure>
  * ```
  */
 

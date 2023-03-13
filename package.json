@@ -72,6 +72,7 @@
     "@tiptap/extension-underline": "^2.0.0-beta.220",
     "@tiptap/pm": "^2.0.0-beta.220",
     "@tiptap/react": "^2.0.0-beta.220",
+    "@tiptap/suggestion": "^2.0.0-beta.220",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-cache-persist": "^0.1.1",
     "apollo-client": "^2.6.10",

@@ -9,7 +9,7 @@ import { Node } from '@tiptap/core'
  * <figure class="image">
  *   <img src="URL" />
  *   <figcaption>CAPTION</figcaption>
- * </figure
+ * </figure>
  * ```
  */
 

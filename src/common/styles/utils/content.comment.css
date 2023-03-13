@@ -156,17 +156,3 @@
 .quill {
   height: 100%;
 }
-
-.mention-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: var(--z-index-under-global-header);
-  width: var(--sizing-menu-md);
-  max-height: calc(4rem * 3);
-  overflow-y: auto;
-  color: var(--color-black);
-  background: var(--color-white);
-  border-radius: var(--spacing-x-tight);
-  box-shadow: var(--shadow-dark);
-}
