@@ -48,7 +48,7 @@
     "description": ""
   },
   "20bImY": {
-    "defaultMessage": "衆聊",
+    "defaultMessage": "眾聊",
     "description": ""
   },
   "2atspc": {
@@ -95,7 +95,7 @@
     "defaultMessage": "取消",
     "description": ""
   },
-  "4HVCON": {
+  "4Odb0J": {
     "defaultMessage": "置頂作品",
     "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
@@ -138,6 +138,10 @@
   "6gOpfl": {
     "defaultMessage": "暫時隱藏公告欄 7 天",
     "description": "src/views/Home/Announcements/index.tsx"
+  },
+  "77tYPg": {
+    "defaultMessage": "確認刪除後，{commentType}會立即消失。",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "7DIW6+": {
     "defaultMessage": "暸解更多",
@@ -210,6 +214,10 @@
   "BjzRe8": {
     "defaultMessage": "，快去查看自己的收入吧！",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
+  "Cdkhl8": {
+    "defaultMessage": "刪除{commentType}",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "CnPG8j": {
     "defaultMessage": "精華",
@@ -443,13 +451,13 @@
     "defaultMessage": "你的修訂作品發布失敗",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
+  "QvQPfZ": {
+    "defaultMessage": "添加精選",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
   "RFzVUD": {
     "defaultMessage": "取消置頂",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
-  },
-  "SY0cqp": {
-    "defaultMessage": "添加到精選",
-    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "Seanpx": {
     "defaultMessage": "Required",
@@ -575,10 +583,6 @@
     "defaultMessage": "關於我們",
     "description": ""
   },
-  "aUPhEs": {
-    "defaultMessage": "添加精選",
-    "description": "src/views/TagDetail/DropdownActions/index.tsx"
-  },
   "aa0nss": {
     "defaultMessage": "取消精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
@@ -687,6 +691,14 @@
     "defaultMessage": "RSS 訂閱",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "h9CG9E": {
+    "defaultMessage": "{commentType}已刪除",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "hSxDqf": {
+    "defaultMessage": "添加到精選",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
   "hWs95P": {
     "defaultMessage": "重要訊息將透過郵件通知，請填入信箱完成設定。",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -717,6 +729,10 @@
   },
   "ieGrWo": {
     "defaultMessage": "追蹤",
+    "description": ""
+  },
+  "ikVIu3": {
+    "defaultMessage": "篇作品",
     "description": ""
   },
   "ipQlDG": {
@@ -1001,10 +1017,6 @@
   "z4NaU2": {
     "defaultMessage": "你的 ",
     "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
-  },
-  "zPEMFy": {
-    "defaultMessage": "篇作品",
-    "description": ""
   },
   "zQvVDJ": {
     "defaultMessage": "全部",
