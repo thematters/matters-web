@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
@@ -44,6 +44,14 @@ const AggregateTagResults = () => {
       }
     )
 
+  useEffect(() => {
+    analytics.trackEvent('load_more', {
+      type: 'search_tag',
+      location: 0,
+      searchKey: q,
+    })
+  }, [])
+
   // pagination
   const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
@@ -74,6 +82,7 @@ const AggregateTagResults = () => {
     analytics.trackEvent('load_more', {
       type: 'search_tag',
       location: edges.length || 0,
+      searchKey: q,
     })
 
     return fetchMore({
@@ -114,10 +123,11 @@ const AggregateTagResults = () => {
                     })}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
-                        type: 'search',
+                        type: 'search_tag',
                         contentType: 'tag',
                         location: i,
                         id: node.id,
+                        searchKey: q,
                       })
                     }
                   >

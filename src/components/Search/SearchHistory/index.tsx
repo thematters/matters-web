@@ -1,4 +1,4 @@
-import { toPath } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 import { Button, IconClose32, Menu, TextIcon, Translate } from '~/components'
 
 interface SearchHistoryProps {
@@ -32,6 +32,14 @@ export const SearchHistory = ({
               q: value,
             })}
             spacing={['base', 'base']}
+            onClick={() => {
+              analytics.trackEvent('click_feed', {
+                type: 'search_history',
+                contentType: 'key',
+                location: i,
+                searchKey: value,
+              })
+            }}
           >
             <section className="item">
               <span className="key">{value}</span>

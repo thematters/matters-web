@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import {
   LATER_SEARCH_RESULTS_LENGTH,
   MAX_SEARCH_RESULTS_LENGTH,
@@ -42,6 +44,14 @@ const AggregateUserResults = () => {
       }
     )
 
+  useEffect(() => {
+    analytics.trackEvent('load_more', {
+      type: 'search_user',
+      location: 0,
+      searchKey: q,
+    })
+  }, [])
+
   // pagination
   const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
@@ -72,6 +82,7 @@ const AggregateUserResults = () => {
     analytics.trackEvent('load_more', {
       type: 'search_user',
       location: edges.length || 0,
+      searchKey: q,
     })
 
     return fetchMore({
@@ -112,10 +123,11 @@ const AggregateUserResults = () => {
                   })}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
-                      type: 'search',
+                      type: 'search_user',
                       contentType: 'user',
                       location: i,
                       id: node.id,
+                      searchKey: q,
                     })
                   }
                 >

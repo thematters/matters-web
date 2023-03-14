@@ -6,7 +6,7 @@ import {
   MIN_QUICK_SEARCH_KEY_LENGTH,
   SEARCH_START_FLAG,
 } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 import {
   Media,
   Menu,
@@ -81,6 +81,11 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
         },
         fetchPolicy: 'no-cache',
       })
+      analytics.trackEvent('load_more', {
+        type: 'quick_search',
+        location: 0,
+        searchKey: searchKey,
+      })
       setData(response.data)
       setLoading(response.loading)
     })()
@@ -117,7 +122,16 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
                     page: 'userProfile',
                     userName: node.userName || '',
                   })}
-                  onClick={closeDropdown}
+                  onClick={() => {
+                    closeDropdown()
+                    analytics.trackEvent('click_feed', {
+                      type: 'quick_search_user',
+                      contentType: 'user',
+                      location: i,
+                      id: node.id,
+                      searchKey: searchKey,
+                    })
+                  }}
                 >
                   <UserDigest.Concise
                     user={node}
@@ -145,7 +159,16 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
                     page: 'tagDetail',
                     tag: node,
                   })}
-                  onClick={closeDropdown}
+                  onClick={() => {
+                    closeDropdown()
+                    analytics.trackEvent('click_feed', {
+                      type: 'quick_search_tag',
+                      contentType: 'tag',
+                      location: i,
+                      id: node.id,
+                      searchKey: searchKey,
+                    })
+                  }}
                 >
                   <TagDigest.Concise tag={node} textSize="sm" />
                 </Menu.Item>

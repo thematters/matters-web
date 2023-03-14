@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import {
   LATER_SEARCH_RESULTS_LENGTH,
   MAX_SEARCH_RESULTS_LENGTH,
@@ -42,6 +44,14 @@ const AggregateArticleResults = () => {
       }
     )
 
+  useEffect(() => {
+    analytics.trackEvent('load_more', {
+      type: 'search_article',
+      location: 0,
+      searchKey: q,
+    })
+  }, [])
+
   // pagination
   const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
@@ -72,6 +82,7 @@ const AggregateArticleResults = () => {
     analytics.trackEvent('load_more', {
       type: 'search_article',
       location: edges?.length || 0,
+      searchKey: q,
     })
 
     return fetchMore({
@@ -110,6 +121,24 @@ const AggregateArticleResults = () => {
                     isConciseFooter={true}
                     hasCircle={false}
                     hasFollow={false}
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'search_article',
+                        contentType: 'article',
+                        location: i,
+                        id: node.id,
+                        searchKey: q,
+                      })
+                    }
+                    onClickAuthor={() => {
+                      analytics.trackEvent('click_feed', {
+                        type: 'search_article',
+                        contentType: 'user',
+                        location: i,
+                        id: node.author.id,
+                        searchKey: q,
+                      })
+                    }}
                   />
                 </List.Item>
               )
