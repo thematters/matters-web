@@ -54,6 +54,14 @@
     background: var(--color-matters-gold);
     border-radius: 50%;
   }
+
+  & .donator-name {
+    margin-left: var(--spacing-x-tight);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25rem;
+    color: var(--color-black);
+  }
 }
 
 .avatar-list-footer {
@@ -65,17 +73,6 @@
   & .count {
     padding-right: var(--spacing-xx-tight);
     font-weight: var(--font-weight-bold);
-    color: var(--color-black);
-  }
-
-  & .footer {
-    @mixin flex-center-start;
-  }
-
-  & .donator-name {
-    margin-right: var(--spacing-xx-tight);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-medium);
     color: var(--color-black);
   }
 }

@@ -98,11 +98,8 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                   {donatorsCount - (maxAvatarNum - 1)}
                 </span>
               )}
-            </section>
-          </button>
-          <section className="avatar-list-footer">
-            {donatorsCount === 1 && (
-              <section className="footer">
+
+              {donatorsCount === 1 && (
                 <span className="donator-name">
                   <UserDigest.Plain
                     user={donators[0]}
@@ -110,7 +107,12 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                     displayNameLimit={7}
                   />
                 </span>
-
+              )}
+            </section>
+          </button>
+          <section className="avatar-list-footer">
+            {donatorsCount === 1 && (
+              <section>
                 <span>
                   <Translate id="theFirstSupporter" />
                 </span>
