@@ -105,7 +105,10 @@ const Toolbar = ({
         />
 
         <section className="comment-bar">
-          <CommentBar article={article} disabled={lock} />
+          <CommentBar
+            article={article}
+            disabled={lock || !article.canComment}
+          />
         </section>
 
         <BookmarkButton article={article} size="md-s" inCard={false} />
