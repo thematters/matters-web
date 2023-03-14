@@ -6,12 +6,14 @@
   & .item {
     @mixin flex-center-space-between;
 
+    gap: var(--spacing-loose);
     cursor: pointer;
 
     & h3 {
-      font-size: var(--font-size-md-s);
+      font-size: var(--font-size-sm);
       font-weight: var(--font-weight-base);
       line-height: 1rem;
+      color: var(--color-black);
     }
 
     & .hint {
@@ -36,7 +38,7 @@
     padding: var(--spacing-base);
 
     & h3 {
-      font-size: var(--font-size-md);
+      font-size: var(--font-size-md-s);
       font-weight: var(--font-weight-medium);
     }
   }

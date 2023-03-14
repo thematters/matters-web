@@ -43,18 +43,10 @@ const ToggleResponse = ({
         <section className="item" onClick={allowResponse}>
           <section className="left">
             <h3>
-              <Translate
-                zh_hans="开启回应"
-                zh_hant="開啟回應"
-                en="Allow Responses"
-              />
+              <Translate id="allowResponses" />
             </h3>
             <p className="hint">
-              <Translate
-                zh_hans="允许读者回应本文（开启后无法关闭）"
-                zh_hant="允許讀者回應本文（開啟後無法關閉）"
-                en="Allow readers to respond to this article (can NOT be disabled afterwards)"
-              />
+              <Translate id="allowResponsesHint" />
             </p>
           </section>
           <section className="right">
@@ -71,18 +63,10 @@ const ToggleResponse = ({
         <section className="item" onClick={disableResponse}>
           <section className="left">
             <h3>
-              <Translate
-                zh_hans="关闭回应"
-                zh_hant="關閉回應"
-                en="Disable Responses"
-              />
+              <Translate id="disableResponses" />
             </h3>
             <p className="hint">
-              <Translate
-                zh_hans="不允许读者回应本文（可通过编辑打开回应功能）"
-                zh_hant="不允許讀者回應本文（可通過修訂打開回應功能）"
-                en="Disallow readers to respond to this article (you can enable responses later by editing this article)"
-              />
+              <Translate id="disableResponsesHint" />
             </p>
           </section>
           <section className="right">
@@ -111,18 +95,10 @@ const ToggleResponse = ({
         <section className="item" onClick={allowResponse}>
           <section className="left">
             <h3>
-              <Translate
-                zh_hans="开启回应"
-                zh_hant="開啟回應"
-                en="Allow Responses"
-              />
+              <Translate id="allowResponses" />
             </h3>
             <p className="hint">
-              <Translate
-                zh_hans="允许读者回应本文（开启后无法关闭）"
-                zh_hant="允許讀者回應本文（開啟後無法關閉）"
-                en="Allow readers to respond to this article (can NOT be disabled afterwards)"
-              />
+              <Translate id="allowResponsesHint" />
             </p>
           </section>
           <section className="right">
@@ -139,18 +115,10 @@ const ToggleResponse = ({
         <section className="item" onClick={disableResponse}>
           <section className="left">
             <h3>
-              <Translate
-                zh_hans="关闭回应"
-                zh_hant="關閉回應"
-                en="Disable Responses"
-              />
+              <Translate id="disableResponses" />
             </h3>
             <p className="hint">
-              <Translate
-                zh_hans="不允许读者回应本文（可通过编辑打开回应功能）"
-                zh_hant="不允許讀者回應本文（可通過修訂打開回應功能）"
-                en="Disallow readers to respond to this article (you can enable responses later by editing this article)"
-              />
+              <Translate id="disableResponsesHint" />
             </p>
           </section>
           <section className="right">
