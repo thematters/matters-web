@@ -48,6 +48,7 @@ const AggregateTagResults = () => {
     analytics.trackEvent('load_more', {
       type: 'search_tag',
       location: 0,
+      searchKey: q,
     })
   }, [])
 
@@ -81,6 +82,7 @@ const AggregateTagResults = () => {
     analytics.trackEvent('load_more', {
       type: 'search_tag',
       location: edges.length || 0,
+      searchKey: q,
     })
 
     return fetchMore({

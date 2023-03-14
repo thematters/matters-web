@@ -85,6 +85,7 @@ interface LoadMoreProp {
     | CircleFeedType
     | 'quick_search'
   location: number
+  searchKey?: string
 }
 
 /**

@@ -48,6 +48,7 @@ const AggregateUserResults = () => {
     analytics.trackEvent('load_more', {
       type: 'search_user',
       location: 0,
+      searchKey: q,
     })
   }, [])
 
@@ -81,6 +82,7 @@ const AggregateUserResults = () => {
     analytics.trackEvent('load_more', {
       type: 'search_user',
       location: edges.length || 0,
+      searchKey: q,
     })
 
     return fetchMore({
