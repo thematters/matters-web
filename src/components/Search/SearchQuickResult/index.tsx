@@ -84,6 +84,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
       analytics.trackEvent('load_more', {
         type: 'quick_search',
         location: 0,
+        searchKey: searchKey,
       })
       setData(response.data)
       setLoading(response.loading)
@@ -128,6 +129,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
                       contentType: 'user',
                       location: i,
                       id: node.id,
+                      searchKey: searchKey,
                     })
                   }}
                 >
@@ -164,6 +166,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
                       contentType: 'tag',
                       location: i,
                       id: node.id,
+                      searchKey: searchKey,
                     })
                   }}
                 >

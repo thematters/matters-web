@@ -127,6 +127,7 @@ const AggregateTagResults = () => {
                         contentType: 'tag',
                         location: i,
                         id: node.id,
+                        searchKey: q,
                       })
                     }
                   >

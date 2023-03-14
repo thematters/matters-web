@@ -127,6 +127,7 @@ const AggregateUserResults = () => {
                       contentType: 'user',
                       location: i,
                       id: node.id,
+                      searchKey: q,
                     })
                   }
                 >

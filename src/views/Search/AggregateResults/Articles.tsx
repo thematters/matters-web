@@ -127,6 +127,7 @@ const AggregateArticleResults = () => {
                         contentType: 'article',
                         location: i,
                         id: node.id,
+                        searchKey: q,
                       })
                     }
                     onClickAuthor={() => {
@@ -135,6 +136,7 @@ const AggregateArticleResults = () => {
                         contentType: 'user',
                         location: i,
                         id: node.author.id,
+                        searchKey: q,
                       })
                     }}
                   />

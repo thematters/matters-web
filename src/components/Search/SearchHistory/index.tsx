@@ -37,6 +37,7 @@ export const SearchHistory = ({
                 type: 'search_history',
                 contentType: 'key',
                 location: i,
+                searchKey: value,
               })
             }}
           >
