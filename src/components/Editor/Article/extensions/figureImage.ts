@@ -45,15 +45,8 @@ export const FigureImage = Node.create({
   parseHTML() {
     return [
       {
-        tag: 'figure',
+        tag: 'figure[class="image"]',
         contentElement: 'figcaption',
-        getAttrs: (node) => {
-          // matches only `<figure class="image">`
-          if (node instanceof HTMLElement) {
-            return node.classList.contains('image') && null
-          }
-          return false
-        },
       },
     ]
   },

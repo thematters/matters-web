@@ -103,16 +103,7 @@ export const Mention = Node.create<MentionOptions>({
   parseHTML() {
     return [
       {
-        tag: 'a',
-        attrs: { class: 'mention' },
-        getAttrs: (node) => {
-          console.log({ node })
-          // matches only `<a class="mention">`
-          if (node instanceof HTMLElement) {
-            return node.classList.contains('mention') && null
-          }
-          return false
-        },
+        tag: 'a[class="mention"]',
       },
     ]
   },

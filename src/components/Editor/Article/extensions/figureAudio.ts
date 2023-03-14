@@ -74,15 +74,8 @@ export const FigureAudio = Node.create({
   parseHTML() {
     return [
       {
-        tag: 'figure',
+        tag: 'figure[class="audio"]',
         contentElement: 'figcaption',
-        getAttrs: (node) => {
-          // matches only `<figure class="audio">`
-          if (node instanceof HTMLElement) {
-            return node.classList.contains('audio') && null
-          }
-          return false
-        },
       },
     ]
   },

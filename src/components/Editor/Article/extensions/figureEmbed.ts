@@ -260,15 +260,8 @@ export const FigureEmbed = Node.create({
   parseHTML() {
     return [
       {
-        tag: 'figure',
+        tag: 'figure[class="embed"]',
         contentElement: 'figcaption',
-        getAttrs: (node) => {
-          // matches only `<figure class="embed">`
-          if (node instanceof HTMLElement) {
-            return node.classList.contains('embed') && null
-          }
-          return false
-        },
       },
     ]
   },
