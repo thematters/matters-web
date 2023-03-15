@@ -719,10 +719,6 @@
     "defaultMessage": "You won't see announcements for 7 days",
     "description": "src/views/Home/Announcements/index.tsx"
   },
-  "pla6ZF": {
-    "defaultMessage": "Search articles, tags and authors",
-    "description": "src/components/Search/SearchBar/index.tsx"
-  },
   "3kbIhS": {
     "defaultMessage": "Untitled",
     "description": ""
@@ -1061,5 +1057,89 @@
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}",
     "description": ""
+  },
+  "ZAs170": {
+    "defaultMessage": "Profile",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
+  "DMlmcU": {
+    "defaultMessage": "Free Trial",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
+  "EQeKnO": {
+    "defaultMessage": "Manage Invitation",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
+  "KLQ1/z": {
+    "defaultMessage": "Circle successfully created",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "mjMpv4": {
+    "defaultMessage": "Circle Edited",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "ei+kyp": {
+    "defaultMessage": "Name of the Circle",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "tW3hM/": {
+    "defaultMessage": "Description of the Circle",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "CwWLOr": {
+    "defaultMessage": "Enter the name of your Circle",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "QUqfbW": {
+    "defaultMessage": "Describe more about your Circle",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "JXdbo8": {
+    "defaultMessage": "Done",
+    "description": ""
+  },
+  "q9oMKE": {
+    "defaultMessage": "Circle Name",
+    "description": ""
+  },
+  "QZXKhG": {
+    "defaultMessage": "Set the Circle URL (cannot be modified after creation)",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6BXcdo": {
+    "defaultMessage": "Set threshold for circle (per month)",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "VwuiYK": {
+    "defaultMessage": "This URL name has already been used, try another one",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "gMZZ9I": {
+    "defaultMessage": "Must be between 2-20 characters long. Only letters, numbers and underscores are allowed.",
+    "description": ""
+  },
+  "+7SAix": {
+    "defaultMessage": "Must be between 2-12 characters long.",
+    "description": ""
+  },
+  "eov+J2": {
+    "defaultMessage": "Custom URL Name",
+    "description": ""
+  },
+  "fOFrqV": {
+    "defaultMessage": "Read Counts",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentDigest/index.tsx"
+  },
+  "LOefol": {
+    "defaultMessage": "Paywalled",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+  },
+  "/podGX": {
+    "defaultMessage": "Public",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+  },
+  "mCAIcg": {
+    "defaultMessage": "Hottest",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   }
 }

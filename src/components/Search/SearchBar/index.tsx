@@ -59,8 +59,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     description: '',
   })
   const textPlaceholder = intl.formatMessage({
-    defaultMessage: 'Search articles, tags and authors',
-    description: 'src/components/Search/SearchBar/index.tsx',
+    defaultMessage: 'Search',
+    description: '',
   })
 
   // dropdown

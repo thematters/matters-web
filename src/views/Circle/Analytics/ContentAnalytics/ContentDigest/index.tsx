@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
 import {
@@ -8,7 +9,6 @@ import {
   LinkWrapper,
   TextIcon,
   Tooltip,
-  Translate,
 } from '~/components'
 import { CircleContentAnalyticsArticleFragment } from '~/gql/graphql'
 
@@ -23,7 +23,15 @@ interface CircleAnalyticsContentProps {
 
 const Count = ({ count }: { count: number }) => {
   return (
-    <Tooltip content={<Translate id="readCount" />} trigger="click">
+    <Tooltip
+      content={
+        <FormattedMessage
+          defaultMessage="Read Counts"
+          description="src/views/Circle/Analytics/ContentAnalytics/ContentDigest/index.tsx"
+        />
+      }
+      trigger="click"
+    >
       <button type="button" className="count">
         <TextIcon icon={<IconRead16 />} size="xs" color="grey-dark">
           {count}

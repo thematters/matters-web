@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { toPath } from '~/common/utils'
-import { Form, Head, Layout, Spacer, Translate, useRoute } from '~/components'
+import { Form, Head, Layout, Spacer, useRoute } from '~/components'
 
 const Settings = () => {
   const { getQuery } = useRoute()
@@ -14,9 +16,18 @@ const Settings = () => {
 
       <Head title={{ id: 'manageCircle' }} />
 
-      <Form.List groupName={<Translate id="settings" />}>
+      <Form.List
+        groupName={
+          <FormattedMessage defaultMessage="Settings" description="" />
+        }
+      >
         <Form.List.Item
-          title={<Translate id="basicProfile" />}
+          title={
+            <FormattedMessage
+              defaultMessage="Profile"
+              description="src/views/Circle/Settings/index.tsx"
+            />
+          }
           {...toPath({ page: 'circleEditProfile', circle: { name } })}
           role="link"
         />
@@ -24,11 +35,19 @@ const Settings = () => {
 
       <Form.List
         groupName={
-          <Translate zh_hant="免費資格" zh_hans="免费资格" en="Free Trial" />
+          <FormattedMessage
+            defaultMessage="Free Trial"
+            description="src/views/Circle/Settings/index.tsx"
+          />
         }
       >
         <Form.List.Item
-          title={<Translate id="manageCircleInvitation" />}
+          title={
+            <FormattedMessage
+              defaultMessage="Manage Invitation"
+              description="src/views/Circle/Settings/index.tsx"
+            />
+          }
           {...toPath({ page: 'circleManageInvitation', circle: { name } })}
           role="link"
         />
