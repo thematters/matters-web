@@ -1,4 +1,8 @@
 {
+  "+7SAix": {
+    "defaultMessage": "2-12 个字符",
+    "description": ""
+  },
   "+a+2ug": {
     "defaultMessage": "成员",
     "description": ""
@@ -34,6 +38,10 @@
   "/nu5ho": {
     "defaultMessage": "回复了你在作品 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "/podGX": {
+    "defaultMessage": "公开",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
   "0Azlrb": {
     "defaultMessage": "管理",
@@ -131,6 +139,10 @@
     "defaultMessage": "开始创作",
     "description": ""
   },
+  "6BXcdo": {
+    "defaultMessage": "设定围炉门槛（每月）",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
   "6flWFg": {
     "defaultMessage": "用户协议",
     "description": ""
@@ -211,6 +223,10 @@
     "defaultMessage": " 在围炉 {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "Bc20la": {
+    "defaultMessage": "天",
+    "description": ""
+  },
   "BjzRe8": {
     "defaultMessage": "，快去查看自己的收入吧！",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
@@ -239,9 +255,17 @@
     "defaultMessage": "设定",
     "description": ""
   },
+  "DMlmcU": {
+    "defaultMessage": "免费资格",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
   "E8W3qa": {
     "defaultMessage": "2-20 个字符",
     "description": ""
+  },
+  "EQeKnO": {
+    "defaultMessage": "邀请管理",
+    "description": "src/views/Circle/Settings/index.tsx"
   },
   "EW5R4p": {
     "defaultMessage": "催更、提问、分享、讨论…",
@@ -273,6 +297,10 @@
   },
   "FhWC22": {
     "defaultMessage": "社区共建基地",
+    "description": ""
+  },
+  "FmWYRt": {
+    "defaultMessage": "免费资格时长",
     "description": ""
   },
   "GBm/sD": {
@@ -335,9 +363,17 @@
     "defaultMessage": "你的作品已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
+  "JXdbo8": {
+    "defaultMessage": "完成",
+    "description": ""
+  },
   "Jc+W6M": {
     "defaultMessage": " 辞去了标签主理人权限，你要不要试试看成为新的主理人？",
     "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+  },
+  "JpS59y": {
+    "defaultMessage": "已接受",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
   "Js/Fij": {
     "defaultMessage": "作品已取消精选",
@@ -354,6 +390,10 @@
   "KL502d": {
     "defaultMessage": "资料已保存",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+  },
+  "KLQ1/z": {
+    "defaultMessage": "围炉创建成功",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "KMcrz8": {
     "defaultMessage": "认领",
@@ -374,6 +414,10 @@
   "LGox1K": {
     "defaultMessage": "已追踪",
     "description": ""
+  },
+  "LOefol": {
+    "defaultMessage": "上锁",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
   "LW1aX1": {
     "defaultMessage": "恭喜你！",
@@ -419,6 +463,10 @@
     "defaultMessage": " 辞去了权限。你可以邀请新的协作者加入了",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
+  "O0QB1v": {
+    "defaultMessage": "用户将收到你的围炉免费资格邀请函，设置免费的时限，邀请他们一起加入吧！",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
   "OKhRC6": {
     "defaultMessage": "分享",
     "description": ""
@@ -447,13 +495,25 @@
     "defaultMessage": "选择 NFT 作为你的头像",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
   },
+  "QUqfbW": {
+    "defaultMessage": "说说围炉的有趣之处，吸引支持者加入",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
   "QV19cI": {
     "defaultMessage": "你的修订作品发布失败",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
+  "QZXKhG": {
+    "defaultMessage": "设置围炉网址（创建后不可修改）",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
   "RFzVUD": {
     "defaultMessage": "取消置顶",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "RxiHr/": {
+    "defaultMessage": "还没有任何用户回覆你的邀请喔！",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
   "Seanpx": {
     "defaultMessage": "Required",
@@ -515,6 +575,10 @@
     "defaultMessage": "Matters 不会透过任何渠道主动询问你的钱包私钥。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "VwuiYK": {
+    "defaultMessage": "Oops！此网址名称已被使用了，换一个试试",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
   "WBVVYd": {
     "defaultMessage": "回应",
     "description": ""
@@ -571,6 +635,10 @@
     "defaultMessage": "参与开发",
     "description": "src/views/Me/Settings/AnonymousSettings/Enhance/index.tsx"
   },
+  "ZAs170": {
+    "defaultMessage": "基本资料",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
   "ZUPQzl": {
     "defaultMessage": " 的评论",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
@@ -606,6 +674,10 @@
   "b3onWZ": {
     "defaultMessage": "最近 {days} 天",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "b8ogKp": {
+    "defaultMessage": "新增邀请",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
   },
   "bBYO6x": {
     "defaultMessage": "取消屏蔽",
@@ -667,8 +739,16 @@
     "defaultMessage": "主理人",
     "description": ""
   },
+  "ei+kyp": {
+    "defaultMessage": "围炉名称",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
   "enMIYK": {
     "defaultMessage": "我的",
+    "description": ""
+  },
+  "eov+J2": {
+    "defaultMessage": "自定义网址名称",
     "description": ""
   },
   "euNJsE": {
@@ -679,9 +759,17 @@
     "defaultMessage": "登出成功",
     "description": ""
   },
+  "fOFrqV": {
+    "defaultMessage": "阅读次数",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentDigest/index.tsx"
+  },
   "fOgusL": {
     "defaultMessage": "选择进入方式",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "fWDtpq": {
+    "defaultMessage": "邀请中",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
   "ftD7Hy": {
     "defaultMessage": " 众聊提及了你 ",
@@ -690,6 +778,10 @@
   "g/L3Fm": {
     "defaultMessage": " 众聊中发表与回复话题 ",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "gMZZ9I": {
+    "defaultMessage": "2-20 个字符，仅支持英文、数字或下划线",
+    "description": ""
   },
   "gMZfHO": {
     "defaultMessage": "RSS 订阅",
@@ -783,6 +875,10 @@
     "defaultMessage": "请输入邮箱",
     "description": ""
   },
+  "lNjDPr": {
+    "defaultMessage": "你还没有邀请任何用户喔！点击新增邀请，添加站内或站外朋友加入围炉赠与对方免费资格的固定时长",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
   "lhaIoi": {
     "defaultMessage": "请输入姓名",
     "description": ""
@@ -790,6 +886,10 @@
   "ll/ufR": {
     "defaultMessage": "热门",
     "description": ""
+  },
+  "mCAIcg": {
+    "defaultMessage": "站内阅读热门排行",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
   "mPe6DK": {
     "defaultMessage": " 订阅了你的围炉",
@@ -806,6 +906,10 @@
   "mikY/9": {
     "defaultMessage": "编辑",
     "description": "src/components/Comment/DropdownActions/EditButton.tsx"
+  },
+  "mjMpv4": {
+    "defaultMessage": "围炉已更新",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "mk+LCk": {
     "defaultMessage": "界面设定",
@@ -850,9 +954,9 @@
     "defaultMessage": "折叠",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   },
-  "pla6ZF": {
-    "defaultMessage": "搜索作品、标签、作者",
-    "description": "src/components/Search/SearchBar/index.tsx"
+  "ptqBN1": {
+    "defaultMessage": "暂时不要",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "pwlQEY": {
     "defaultMessage": "姓名",
@@ -865,6 +969,10 @@
   "q+N5Wd": {
     "defaultMessage": "管理围炉",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "q9oMKE": {
+    "defaultMessage": "围炉名称",
+    "description": ""
   },
   "qPPrzm": {
     "defaultMessage": " 支持了你的作品 ",
@@ -893,6 +1001,10 @@
   "rBjwQy": {
     "defaultMessage": "微博",
     "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "rXnmeE": {
+    "defaultMessage": "确认发送",
+    "description": ""
   },
   "reOeq5": {
     "defaultMessage": "你已拥有个人创作空间站，期待你的第一篇作品。",
@@ -938,6 +1050,14 @@
     "defaultMessage": " 众聊中回复话题，其中有提及你 ",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "tW3hM/": {
+    "defaultMessage": "围炉描述",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "tzq2+W": {
+    "defaultMessage": "寄出邀请",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
   "u5aHb4": {
     "defaultMessage": "复制链接",
     "description": ""
@@ -981,6 +1101,10 @@
   "wSEOxH": {
     "defaultMessage": "联系渠道",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "wXzTZ0": {
+    "defaultMessage": "Enter the name of your Circle",
+    "description": ""
   },
   "wbcwKd": {
     "defaultMessage": "查看全部",
