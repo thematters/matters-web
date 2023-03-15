@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Title, Translate } from '~/components'
+import { IconDisableComment24, TextIcon, Title, Translate } from '~/components'
 import {
   ArticleResponseQuery,
   ResponseCountArticleFragment,
@@ -10,6 +10,7 @@ import {
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import ResponseCount from './ResponseCount'
+import styles from './styles.css'
 
 const ARTICLE_RESPONSE = gql`
   query ArticleResponse(
@@ -18,6 +19,7 @@ const ARTICLE_RESPONSE = gql`
     article: node(input: { id: $id }) {
       ... on Article {
         id
+        canComment
         author {
           id
           isBlocking
@@ -39,6 +41,27 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
   }
 
   const { article } = data
+
+  const canComment = article.__typename === 'Article' && article.canComment
+  if (!canComment) {
+    return (
+      <section className="disable-response">
+        <TextIcon
+          icon={<IconDisableComment24 size="md" />}
+          color="grey"
+          size="sm-s"
+          allowUserSelect
+        >
+          <Translate
+            zh_hans="作者已关闭所有回应"
+            zh_hant="作者已關閉所有回應"
+            en="The author has turned off all responses"
+          />
+        </TextIcon>
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
 
   return (
     <section className="responses">

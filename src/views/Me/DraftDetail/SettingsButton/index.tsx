@@ -11,6 +11,7 @@ import {
 import {
   SetCollectionProps,
   SetCoverProps,
+  SetResponseProps,
   SetTagsProps,
   ToggleAccessProps,
 } from '~/components/Editor'
@@ -22,6 +23,7 @@ import {
 
 import {
   useEditDraftAccess,
+  useEditDraftCanComment,
   useEditDraftCollection,
   useEditDraftCover,
   useEditDraftPublishISCN,
@@ -82,6 +84,10 @@ const SettingsButton = ({
   const { edit: editSupport, saving: supportSaving } =
     useEditSupportSetting(draft)
 
+  const { edit: toggleComment, saving: canCommentSaving } =
+    useEditDraftCanComment(draft)
+  const canComment = draft.canComment
+
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
   const isPending = draft.publishState === 'pending'
@@ -123,11 +129,22 @@ const SettingsButton = ({
     iscnPublishSaving,
   }
 
+  const responseProps: SetResponseProps = {
+    canComment,
+    toggleComment,
+  }
+
   if (!viewer.shouldSetupLikerID) {
     return (
       <EditorSettingsDialog
         saving={false}
-        disabled={collectionSaving || coverSaving || tagsSaving || accessSaving}
+        disabled={
+          collectionSaving ||
+          coverSaving ||
+          tagsSaving ||
+          accessSaving ||
+          canCommentSaving
+        }
         confirmButtonText={<Translate id="publishNow" />}
         cancelButtonText={<Translate id="publishAbort" />}
         ConfirmStepContent={ConfirmPublishDialogContent}
@@ -135,6 +152,7 @@ const SettingsButton = ({
         {...tagsProps}
         {...collectionProps}
         {...accessProps}
+        {...responseProps}
       >
         {({ openDialog: openEditorSettingsDialog }) => (
           <ConfirmButton

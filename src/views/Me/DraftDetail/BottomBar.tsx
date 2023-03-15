@@ -3,6 +3,7 @@ import { toDigestTagPlaceholder } from '~/components'
 import {
   SetCollectionProps,
   SetCoverProps,
+  SetResponseProps,
   SetTagsProps,
   ToggleAccessProps,
 } from '~/components/Editor'
@@ -15,6 +16,7 @@ import {
 
 import {
   useEditDraftAccess,
+  useEditDraftCanComment,
   useEditDraftCollection,
   useEditDraftCover,
   useEditDraftPublishISCN,
@@ -38,6 +40,11 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
   const { edit: editTags, saving: tagsSaving } = useEditDraftTags(draft)
   const { edit: togglePublishISCN, saving: iscnPublishSaving } =
     useEditDraftPublishISCN(draft)
+
+  const { edit: toggleComment, saving: toggleCommentSaving } =
+    useEditDraftCanComment(draft)
+  const canComment = draft.canComment
+
   const { edit: editAccess, saving: accessSaving } = useEditDraftAccess(
     draft,
     ownCircles && ownCircles[0]
@@ -68,7 +75,7 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     editCollection,
     collectionSaving,
   }
-  const accessProps: ToggleAccessProps = {
+  const accessProps: ToggleAccessProps & SetResponseProps = {
     circle: draft?.access.circle,
     accessType: draft.access.type,
     license: draft.license,
@@ -82,6 +89,9 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     togglePublishISCN,
     iscnPublishSaving,
     onOpenSupportSetting: () => undefined,
+
+    canComment,
+    toggleComment,
   }
 
   return (
@@ -94,7 +104,11 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
         <BottomBar
           saving={false}
           disabled={
-            collectionSaving || coverSaving || tagsSaving || accessSaving
+            collectionSaving ||
+            coverSaving ||
+            tagsSaving ||
+            accessSaving ||
+            toggleCommentSaving
           }
           {...coverProps}
           {...tagsProps}

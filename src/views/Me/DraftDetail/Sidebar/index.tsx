@@ -9,6 +9,7 @@ import {
 
 import {
   useEditDraftAccess,
+  useEditDraftCanComment,
   useEditDraftCollection,
   useEditDraftCover,
   useEditDraftPublishISCN,
@@ -109,6 +110,15 @@ const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
   )
 }
 
+const EditDraftResponse = ({ draft }: SidebarProps) => {
+  const { edit: toggleComment } = useEditDraftCanComment(draft)
+  const canComment = draft.canComment
+
+  return (
+    <Sidebar.Response canComment={canComment} toggleComment={toggleComment} />
+  )
+}
+
 const EditDraftSidebar = (props: BaseSidebarProps) => {
   const isPending = props.draft.publishState === 'pending'
   const isPublished = props.draft.publishState === 'published'
@@ -119,6 +129,7 @@ const EditDraftSidebar = (props: BaseSidebarProps) => {
       <EditDraftTags {...props} disabled={disabled} />
       <EditDraftCover {...props} disabled={disabled} />
       <EditDraftCollection {...props} disabled={disabled} />
+      <EditDraftResponse {...props} disabled={disabled} />
       <EditDraftCircle {...props} disabled={disabled} />
 
       <style jsx>{styles}</style>
