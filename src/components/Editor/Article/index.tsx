@@ -12,7 +12,6 @@ import Heading from '@tiptap/extension-heading'
 import History from '@tiptap/extension-history'
 import HorizontalRule from '@tiptap/extension-horizontal-rule'
 import Italic from '@tiptap/extension-italic'
-import Link from '@tiptap/extension-link'
 import ListItem from '@tiptap/extension-list-item'
 import OrderedList from '@tiptap/extension-ordered-list'
 import Paragraph from '@tiptap/extension-paragraph'
@@ -33,6 +32,7 @@ import {
   FigureAudio,
   FigureEmbed,
   FigureImage,
+  Link,
   Mention,
   mentionSuggestion,
 } from './extensions'
@@ -86,7 +86,6 @@ const ArticleEditor: React.FC<Props> = ({
       Document,
       Paragraph,
       Text,
-      Link,
       Heading.configure({
         levels: [2, 3],
       }),
@@ -114,6 +113,7 @@ const ArticleEditor: React.FC<Props> = ({
         }),
       }),
       // Custom
+      Link,
       FigureImage,
       FigureAudio,
       FigureEmbed,
