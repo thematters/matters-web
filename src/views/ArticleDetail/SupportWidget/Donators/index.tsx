@@ -101,11 +101,7 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
 
               {donatorsCount === 1 && (
                 <span className="donator-name">
-                  <UserDigest.Plain
-                    user={donators[0]}
-                    hasUnderline
-                    displayNameLimit={7}
-                  />
+                  <UserDigest.Plain user={donators[0]} hasUnderline />
                 </span>
               )}
             </section>
