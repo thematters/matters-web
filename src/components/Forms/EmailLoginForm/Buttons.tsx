@@ -13,10 +13,8 @@ export const PasswordResetDialogButton = ({
     spacing={['xtight', 0]}
     aria-haspopup="dialog"
     onClick={gotoResetPassword}
-    tabIndex={-1}
   >
     <TextIcon color="green" weight="md">
-      {' '}
       <FormattedMessage
         defaultMessage="Forget Password"
         description="src/components/Forms/EmailLoginForm/Buttons.tsx"
