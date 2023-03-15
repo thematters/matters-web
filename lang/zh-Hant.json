@@ -719,10 +719,6 @@
     "defaultMessage": "暫時隱藏公告欄 7 天",
     "description": "src/views/Home/Announcements/index.tsx"
   },
-  "pla6ZF": {
-    "defaultMessage": "搜尋作品、標籤、作者",
-    "description": "src/components/Search/SearchBar/index.tsx"
-  },
   "3kbIhS": {
     "defaultMessage": "未命名",
     "description": ""
@@ -1061,5 +1057,134 @@
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {篇文章} other {篇文章}}",
     "description": ""
+  },
+  "ZAs170": {
+    "defaultMessage": "基本資料",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
+  "DMlmcU": {
+    "defaultMessage": "免費資格",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
+  "EQeKnO": {
+    "defaultMessage": "邀請管理",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
+  "KLQ1/z": {
+    "defaultMessage": "圍爐創建成功",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "mjMpv4": {
+    "defaultMessage": "圍爐已更新",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "ei+kyp": {
+    "defaultMessage": "圍爐名稱",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "tW3hM/": {
+    "defaultMessage": "圍爐描述",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "CwWLOr": {
+    "defaultMessage": "給圍爐取一個吸引人的名字吧",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "QUqfbW": {
+    "defaultMessage": "說說圍爐的有趣之處，吸引支持者加入",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "JXdbo8": {
+    "defaultMessage": "完成",
+    "description": ""
+  },
+  "q9oMKE": {
+    "defaultMessage": "圍爐名稱",
+    "description": ""
+  },
+  "QZXKhG": {
+    "defaultMessage": "設置圍爐網址（創建後不可修改）",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6BXcdo": {
+    "defaultMessage": "設定圍爐門檻（每月）",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "VwuiYK": {
+    "defaultMessage": "Oops！此網址已被使用了，換一個試試",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "gMZZ9I": {
+    "defaultMessage": "2-20 個字元，僅支持英文、數字或下劃線",
+    "description": ""
+  },
+  "+7SAix": {
+    "defaultMessage": "2-12 個字元",
+    "description": ""
+  },
+  "eov+J2": {
+    "defaultMessage": "自定義網址名稱",
+    "description": ""
+  },
+  "fOFrqV": {
+    "defaultMessage": "閱讀次數",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentDigest/index.tsx"
+  },
+  "LOefol": {
+    "defaultMessage": "上鎖",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+  },
+  "/podGX": {
+    "defaultMessage": "公開",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+  },
+  "mCAIcg": {
+    "defaultMessage": "站內閱讀熱門排行",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
+  },
+  "lNjDPr": {
+    "defaultMessage": "你還沒有邀請任何用戶喔！點擊新增邀請，添加站內或站外朋友加入圍爐贈與對方免費資格的固定時長",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
+  "RxiHr/": {
+    "defaultMessage": "還沒有任何用戶回覆你的邀請喔！",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
+  },
+  "b8ogKp": {
+    "defaultMessage": "新增邀請",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
+  },
+  "FmWYRt": {
+    "defaultMessage": "免費資格時長",
+    "description": ""
+  },
+  "Bc20la": {
+    "defaultMessage": "天",
+    "description": ""
+  },
+  "O0QB1v": {
+    "defaultMessage": "用戶將收到你的圍爐免費資格邀請函，設置免費的時限，邀請他們一起加入吧！",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "rXnmeE": {
+    "defaultMessage": "確認發送",
+    "description": ""
+  },
+  "ptqBN1": {
+    "defaultMessage": "暫時不要",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "tzq2+W": {
+    "defaultMessage": "寄出邀請",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },  
+  "fWDtpq": {
+    "defaultMessage": "邀請中",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "JpS59y": {
+    "defaultMessage": "已接受",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   }
+
 }
