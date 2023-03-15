@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Comment, DateTime, Expandable } from '~/components'
+import { Comment, DateTime } from '~/components'
 import {
   FollowingFeedCommentPrivateFragment,
   FollowingFeedCommentPublicFragment,
@@ -25,13 +25,7 @@ const FollowingFeedComment: React.FC<FollowingFeedCommentProps> & {
       {header}
 
       <section className="content">
-        <Expandable content={comment.content} limit={3} size="md-s">
-          <Comment.Content
-            comment={comment}
-            type="circleBroadcast"
-            size="md-s"
-          />
-        </Expandable>
+        <Comment.Content comment={comment} type="circleBroadcast" size="md-s" />
       </section>
 
       <footer>
