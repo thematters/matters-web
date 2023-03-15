@@ -1,10 +1,12 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST, COMMENT_TYPE_TEXT } from '~/common/enums'
 import {
   CommentFormType,
   Dialog,
-  Translate,
+  LanguageContext,
   useDialogSwitch,
   useMutation,
 } from '~/components'
@@ -36,6 +38,8 @@ const DeleteCommentDialog = ({
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const commentId = comment.id
 
+  const { lang } = useContext(LanguageContext)
+  
   const [deleteComment] = useMutation<DeleteCommentMutation>(DELETE_COMMENT, {
     variables: { id: commentId },
     optimisticResponse: {
@@ -55,10 +59,9 @@ const DeleteCommentDialog = ({
         detail: {
           color: 'green',
           content: (
-            <Translate
-              zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已刪除`}
-              zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已删除`}
-            />
+            <FormattedMessage defaultMessage="{commentType} has been deleted" description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx" values={{
+              commentType: COMMENT_TYPE_TEXT[lang][type]
+            }}/>
           ),
 
           buttonPlacement: 'center',
@@ -74,10 +77,9 @@ const DeleteCommentDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         <Dialog.Header
           title={
-            <Translate
-              zh_hant={`刪除${COMMENT_TYPE_TEXT.zh_hant[type]}`}
-              zh_hans={`删除${COMMENT_TYPE_TEXT.zh_hans[type]}`}
-            />
+            <FormattedMessage defaultMessage="Delete {commentType}" description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx" values={{
+              commentType: COMMENT_TYPE_TEXT[lang][type]
+            }}/>
           }
           closeDialog={closeDialog}
           mode="inner"
@@ -85,10 +87,9 @@ const DeleteCommentDialog = ({
 
         <Dialog.Message>
           <p>
-            <Translate
-              zh_hant={`確認刪除${COMMENT_TYPE_TEXT.zh_hant[type]}，${COMMENT_TYPE_TEXT.zh_hant[type]}會馬上消失。`}
-              zh_hans={`确认删除${COMMENT_TYPE_TEXT.zh_hans[type]}，${COMMENT_TYPE_TEXT.zh_hans[type]}会马上消失。`}
-            />
+            <FormattedMessage defaultMessage="After deletion, the {commentType} will be removed immediately" description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx" values={{
+              commentType: COMMENT_TYPE_TEXT[lang][type]
+            }}/>
           </p>
         </Dialog.Message>
 
@@ -100,7 +101,7 @@ const DeleteCommentDialog = ({
               closeDialog()
             }}
           >
-            <Translate id="confirm" />
+            <FormattedMessage defaultMessage="Confirm" description=""  />
           </Dialog.Footer.Button>
 
           <Dialog.Footer.Button
@@ -108,7 +109,7 @@ const DeleteCommentDialog = ({
             textColor="black"
             onClick={closeDialog}
           >
-            <Translate id="cancel" />
+            <FormattedMessage defaultMessage="Cancel" description="" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>

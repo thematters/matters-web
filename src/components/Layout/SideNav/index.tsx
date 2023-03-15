@@ -2,9 +2,10 @@ import VisuallyHidden from '@reach/visually-hidden'
 import Link from 'next/link'
 import { useContext } from 'react'
 import FocusLock from 'react-focus-lock'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { PATHS, Z_INDEX } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
+import { toPath } from '~/common/utils'
 import {
   Dropdown,
   hidePopperOnClick,
@@ -14,10 +15,8 @@ import {
   IconNavHomeActive24,
   IconNavSearch24,
   IconNavSettings24,
-  LanguageContext,
   Media,
   Menu,
-  Translate,
   useRoute,
   ViewerContext,
   WriteButton,
@@ -30,8 +29,6 @@ import NavListItem from './NavListItem'
 import styles from './styles.css'
 
 const SideNav = () => {
-  const { lang } = useContext(LanguageContext)
-
   const { router, isInPath, isPathStartWith, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
@@ -47,11 +44,17 @@ const SideNav = () => {
   const isInMe =
     (!isInNotification && isPathStartWith('/me')) || userName === viewerUserName
 
+  const intl = useIntl()
   return (
     <section className="side-nav">
       <section className="logo">
         <Link href={PATHS.HOME} legacyBehavior>
-          <a aria-label={translate({ id: 'discover', lang })}>
+          <a
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Discover',
+              description: '',
+            })}
+          >
             <Media at="md">
               <IconLogoGraph />
             </Media>
@@ -64,7 +67,7 @@ const SideNav = () => {
 
       <ul role="menu">
         <NavListItem
-          name={<Translate id="discover" />}
+          name={<FormattedMessage defaultMessage="Discover" description="" />}
           icon={<IconNavHome24 size="md" />}
           activeIcon={<IconNavHomeActive24 size="md" />}
           active={isInHome}
@@ -72,7 +75,12 @@ const SideNav = () => {
         />
 
         <NavListItem
-          name={<Translate zh_hant="追蹤" zh_hans="追踪" en="Following" />}
+          name={
+            <FormattedMessage
+              defaultMessage="Following"
+              description="src/components/Layout/SideNav/index.tsx"
+            />
+          }
           icon={<UnreadIcon.Follow />}
           activeIcon={<UnreadIcon.Follow active />}
           active={isInFollow}
@@ -81,7 +89,9 @@ const SideNav = () => {
 
         {viewer.isAuthed && (
           <NavListItem
-            name={<Translate id="notifications" />}
+            name={
+              <FormattedMessage defaultMessage="Notifications" description="" />
+            }
             icon={<UnreadIcon.Notification />}
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}
@@ -91,7 +101,7 @@ const SideNav = () => {
 
         <Media lessThan="xl">
           <NavListItem
-            name={<Translate id="search" />}
+            name={<FormattedMessage defaultMessage="Search" description="" />}
             icon={<IconNavSearch24 size="md" />}
             activeIcon={<IconNavSearch24 size="md" color="green" />}
             active={isInSearch}
@@ -111,7 +121,7 @@ const SideNav = () => {
 
         {!viewer.isAuthed && (
           <NavListItem
-            name={<Translate id="settings" />}
+            name={<FormattedMessage defaultMessage="Settings" description="" />}
             icon={<IconNavSettings24 size="md" />}
             activeIcon={<IconNavSettings24 size="md" color="green" />}
             active={isInSettings}
@@ -126,7 +136,10 @@ const SideNav = () => {
                 <section className="dropdown-menu">
                   <VisuallyHidden>
                     <button type="button">
-                      <Translate id="close" />
+                      <FormattedMessage
+                        defaultMessage="Cancel"
+                        description=""
+                      />
                     </button>
                   </VisuallyHidden>
                   <NavMenu.Top />
@@ -142,7 +155,9 @@ const SideNav = () => {
             onShown={hidePopperOnClick}
           >
             <NavListItem
-              name={<Translate id="myPage" />}
+              name={
+                <FormattedMessage defaultMessage="My Page" description="" />
+              }
               icon={<MeAvatar user={viewer} />}
               activeIcon={<MeAvatar user={viewer} active />}
               active={isInMe}

@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
 import {
@@ -6,7 +7,6 @@ import {
   IconAvatarEmpty24,
   TagAdoptionDialog,
   TextIcon,
-  Translate,
   UserDigest,
   ViewerContext,
 } from '~/components'
@@ -22,7 +22,12 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'red',
-          content: <Translate id="FORBIDDEN_BY_STATE" />,
+          content: (
+            <FormattedMessage
+              defaultMessage="You do not have permission to perform this operation"
+              description=""
+            />
+          ),
         },
       })
     )
@@ -42,10 +47,9 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
             size="md-s"
             spacing="xtight"
           >
-            <Translate
-              zh_hant="此標籤目前無人主理"
-              zh_hans="此标签目前無人主理"
-              en="This tag has no manager currently"
+            <FormattedMessage
+              defaultMessage="This tag has no manager currently"
+              description="src/views/TagDetail/Owner/index.tsx"
             />
           </TextIcon>
         </section>
@@ -62,7 +66,10 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
                 aria-haspopup="dialog"
               >
                 <TextIcon weight="md" size="xs">
-                  <Translate zh_hant="認領" zh_hans="认领" en="Maintain" />
+                  <FormattedMessage
+                    defaultMessage="Maintain Tag"
+                    description="src/views/TagDetail/Owner/index.tsx"
+                  />
                 </TextIcon>
               </Button>
             )}
@@ -84,7 +91,10 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
         />
 
         <TextIcon size="sm" color="grey-dark">
-          <Translate zh_hant="主理" zh_hans="主理" en="maintainer" />
+          <FormattedMessage
+            defaultMessage="Maintain"
+            description="src/views/TagDetail/Owner/index.tsx"
+          />
         </TextIcon>
       </section>
       <section className="right">{/* editos */}</section>

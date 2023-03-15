@@ -7,6 +7,7 @@ import {
   SetPublishISCNProps,
   SetTagsProps,
   ToggleAccessProps,
+  ToggleResponseProps,
 } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import {
@@ -42,6 +43,7 @@ export type EditorSettingsDialogProps = {
   SetCollectionProps &
   SetTagsProps &
   ToggleAccessProps &
+  ToggleResponseProps &
   SetPublishISCNProps &
   SettingsListDialogButtons
 
@@ -91,6 +93,9 @@ const BaseEditorSettingsDialog = ({
   iscnPublish,
   togglePublishISCN,
   iscnPublishSaving,
+
+  canComment,
+  toggleComment,
 
   saving,
   disabled,
@@ -150,6 +155,12 @@ const BaseEditorSettingsDialog = ({
     },
   }
 
+  const responseProps: ToggleResponseProps = {
+    canComment,
+    toggleComment,
+    disableChangeCanComment: article?.canComment,
+  }
+
   return (
     <>
       {children({ openDialog })}
@@ -168,6 +179,7 @@ const BaseEditorSettingsDialog = ({
             collectionCount={collection.length}
             tagsCount={tags.length}
             {...accessProps}
+            {...responseProps}
           />
         )}
 

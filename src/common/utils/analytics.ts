@@ -53,6 +53,7 @@ interface ClickButtonProp {
     | 'share_user'
     | 'signup'
     | 'login/signup'
+    | 'installMetaMask'
     | 'connectorMetaMask'
     | 'connectorWalletConnect'
     | 'top_up'

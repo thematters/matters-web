@@ -1,13 +1,20 @@
+import { FormattedMessage } from 'react-intl'
+
 import { toPath } from '~/common/utils'
-import { Tabs, Translate, useRoute } from '~/components'
+import { Tabs, usePublicQuery, useRoute } from '~/components'
+import { UserTabsPublicQuery } from '~/gql/graphql'
 
-type UserTabsProps = {
-  hasSubscriptions?: boolean
-}
+import { USER_TAGS_PUBLIC } from '../Tags/gql'
 
-const UserTabs: React.FC<UserTabsProps> = ({ hasSubscriptions }) => {
+const UserTabs = () => {
   const { isInPath, getQuery } = useRoute()
   const userName = getQuery('name')
+
+  const { data } = usePublicQuery<UserTabsPublicQuery>(USER_TAGS_PUBLIC, {
+    variables: { userName },
+  })
+
+  const hasSubscriptions = (data?.user?.subscribedCircles.totalCount || 0) > 0
 
   const userSubscriptonsPath = toPath({
     page: 'userSubscriptons',
@@ -33,20 +40,20 @@ const UserTabs: React.FC<UserTabsProps> = ({ hasSubscriptions }) => {
           {...userSubscriptonsPath}
           selected={isInPath('USER_SUBSCRIPTIONS')}
         >
-          <Translate id="subscriptions" />
+          <FormattedMessage defaultMessage="Subscriptions" description="" />
         </Tabs.Tab>
       )}
 
       <Tabs.Tab {...userArticlesPath} selected={isInPath('USER_ARTICLES')}>
-        <Translate id="articles" />
+        <FormattedMessage defaultMessage="Articles" description="" />
       </Tabs.Tab>
 
       <Tabs.Tab {...userCommentsPath} selected={isInPath('USER_COMMENTS')}>
-        <Translate id="responses" />
+        <FormattedMessage defaultMessage="Responses" description="" />
       </Tabs.Tab>
 
       <Tabs.Tab {...userTagsPath} selected={isInPath('USER_TAGS')}>
-        <Translate id="tags" />
+        <FormattedMessage defaultMessage="Tags" description="" />
       </Tabs.Tab>
     </Tabs>
   )

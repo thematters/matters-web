@@ -1,11 +1,8 @@
+import { FormattedMessage } from 'react-intl'
+
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import {
-  Form,
-  SubscribeCircleDialog,
-  Translate,
-  useFeatures,
-} from '~/components'
+import { Form, SubscribeCircleDialog, useFeatures } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 import {
   UserProfileUserPrivateQuery,
@@ -48,9 +45,9 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
             forceGreyStyle
             bold
             title={
-              <Translate
-                zh_hant="快來搭建圍爐，呼召你的支持者加入"
-                zh_hans="快来搭建围炉，呼召你的支持者加入"
+              <FormattedMessage
+                defaultMessage="Come build a Circle and call on your supporters to join you!"
+                description="src/components/UserProfile/CircleWidget/index.tsx"
               />
             }
             href={PATHS.CIRCLE_CREATION}

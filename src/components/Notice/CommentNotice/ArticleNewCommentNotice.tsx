@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { ArticleNewCommentNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -42,11 +42,9 @@ const ArticleNewCommentNotice = ({
       <section className="content-wrap">
         <NoticeHead>
           <NoticeHeadActors actors={notice.actors} />
-
-          <Translate
-            zh_hant="評論了作品 "
-            zh_hans="评论了作品 "
-            en=" commented on "
+          <FormattedMessage
+            defaultMessage="commented on"
+            description="src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
           />
           {commentArticle && <NoticeArticleTitle article={commentArticle} />}
         </NoticeHead>

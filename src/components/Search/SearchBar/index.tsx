@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useRef, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
 import { INPUT_DEBOUNCE, MAX_SEARCH_KEY_LENGTH, Z_INDEX } from '~/common/enums'
@@ -31,13 +32,15 @@ const DynamicFormik = dynamic(
 )
 
 const SearchButton = () => {
-  const { lang } = useContext(LanguageContext)
-
+  const intl = useIntl()
   return (
     <Button
       size={['2rem', '2rem']}
       type="submit"
-      aria-label={translate({ id: 'search', lang })}
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Search',
+        description: '',
+      })}
     >
       <IconSearch16 color="grey-dark" />
     </Button>
@@ -71,11 +74,18 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const isInSearch = isInPath('SEARCH')
   const q = getQuery('q')
   const type = getSearchType(getQuery('type'))
-  const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState(q)
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-  const textAriaLabel = translate({ id: 'search', lang })
-  const textPlaceholder = translate({ id: 'search', lang })
+  const intl = useIntl()
+
+  const textAriaLabel = intl.formatMessage({
+    defaultMessage: 'Search',
+    description: '',
+  })
+  const textPlaceholder = intl.formatMessage({
+    defaultMessage: 'Search articles, tags and authors',
+    description: 'src/components/Search/SearchBar/index.tsx',
+  })
 
   const searchTextInput = useRef<HTMLInputElement>(null)
 

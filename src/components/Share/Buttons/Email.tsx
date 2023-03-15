@@ -1,7 +1,9 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ReactComponent as IconShareEmail } from '@/public/static/icons/16px/share-email.svg'
 import { ReactComponent as IconShareEmailCircle } from '@/public/static/icons/40px/share-email-circle.svg'
 import { analytics, dom } from '~/common/utils'
-import { TextIcon, Translate, withIcon } from '~/components'
+import { TextIcon, withIcon } from '~/components'
 
 const Email = ({
   title,
@@ -32,7 +34,7 @@ const Email = ({
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareEmail)({})} spacing="base">
-        <Translate zh_hant="郵件" zh_hans="邮件" en="Email" />
+        <FormattedMessage defaultMessage="Email" description="" />
       </TextIcon>
     )}
   </button>

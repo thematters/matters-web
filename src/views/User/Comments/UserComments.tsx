@@ -51,12 +51,11 @@ const UserComments = () => {
     variables: { userName },
   })
   const user = data?.user
-  const hasSubscriptions = (user?.subscribedCircles?.totalCount || 0) > 0
 
   if (loading) {
     return (
       <>
-        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <UserTabs />
         <Spinner />
       </>
     )
@@ -65,7 +64,7 @@ const UserComments = () => {
   if (error) {
     return (
       <>
-        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <UserTabs />
         <QueryError error={error} />
       </>
     )
@@ -74,7 +73,7 @@ const UserComments = () => {
   if (!user || user?.status?.state === 'archived') {
     return (
       <>
-        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <UserTabs />
         <EmptyComment />
       </>
     )
@@ -92,7 +91,7 @@ const UserComments = () => {
         description={user.info.description}
         image={user.info.profileCover || IMAGE_LOGO_192.src}
       />
-      <UserTabs hasSubscriptions={hasSubscriptions} />
+      <UserTabs />
       <BaseUserComments user={user} />
     </>
   )

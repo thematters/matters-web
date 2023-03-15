@@ -1,9 +1,10 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { TEST_ID } from '~/common/enums'
-import { numAbbr, translate } from '~/common/utils'
+import { numAbbr } from '~/common/utils'
 import {
   Avatar,
   Button,
@@ -12,12 +13,11 @@ import {
   Expandable,
   FollowUserButton,
   IconRss32,
-  LanguageContext,
   Layout,
   RssFeedDialog,
   Spinner,
   Throw404,
-  Translate,
+  // Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -52,15 +52,17 @@ const DynamicWalletLabel = dynamic(() => import('./WalletLabel'), {
 })
 
 const RssFeedButton = ({ user }: FingerprintButtonProps) => {
-  const { lang } = useContext(LanguageContext)
-
+  const intl = useIntl()
   return (
     <RssFeedDialog user={user}>
       {({ openDialog }) => (
         <Button
           onClick={openDialog}
           spacing={['xxtight', 'xtight']}
-          aria-label={translate({ id: 'contentFeedEntrance', lang })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Content Feed',
+            description: 'src/components/UserProfile/index.tsx',
+          })}
           aria-haspopup="dialog"
         >
           <IconRss32 color="green" size="lg" />
@@ -149,10 +151,9 @@ export const UserProfile = () => {
         <Error
           statusCode={404}
           message={
-            <Translate
-              zh_hant="此帳戶因為違反社區約章而被註銷"
-              zh_hans="此帐户因为违反社区约章而被注销"
-              en="This account is archived due to violation of community guidelines"
+            <FormattedMessage
+              defaultMessage="This account is archived due to violation of community guidelines"
+              description="src/components/UserProfile/index.tsx"
             />
           }
         />
@@ -193,8 +194,18 @@ export const UserProfile = () => {
           <section className="info">
             <section className="display-name">
               <h1 className="name">
-                {isUserArchived && <Translate id="accountArchived" />}
-                {isUserBanned && <Translate id="accountBanned" />}
+                {isUserArchived && (
+                  <FormattedMessage
+                    defaultMessage="Account Archived"
+                    description="src/components/UserProfile/index.tsx"
+                  />
+                )}
+                {isUserBanned && (
+                  <FormattedMessage
+                    defaultMessage="Account Banned"
+                    description="src/components/UserProfile/index.tsx"
+                  />
+                )}
               </h1>
             </section>
           </section>
@@ -279,7 +290,7 @@ export const UserProfile = () => {
                 >
                   {numAbbr(user.followers.totalCount)}
                 </span>
-                <Translate id="follower" />
+                <FormattedMessage defaultMessage="Followers" description="" />
               </button>
             )}
           </FollowersDialog>
@@ -290,7 +301,10 @@ export const UserProfile = () => {
                 <span className="count">
                   {numAbbr(user.following.users.totalCount)}
                 </span>
-                <Translate id="following" />
+                <FormattedMessage
+                  defaultMessage="Following"
+                  description="src/components/UserProfile/index.tsx"
+                />
               </button>
             )}
           </FollowingDialog>

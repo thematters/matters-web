@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { TagLeaveNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -27,10 +27,9 @@ const TagLeaveNotice = ({ notice }: { notice: TagLeaveNoticeFragment }) => {
       <section className="content-wrap">
         <NoticeHead>
           <NoticeActorName user={actor} />
-          <Translate
-            zh_hant=" 辭去了標籤主理人權限，你要不要試試看成為新的主理人？"
-            zh_hans=" 辞去了标签主理人权限，你要不要试试看成为新的主理人？"
-            en=" resigned as tag maintainer. Would you like to be the new tag maintainer?"
+          <FormattedMessage
+            defaultMessage="resigned as tag maintainer. Would you like to be the new tag maintainer?"
+            description="src/components/Notice/TagNotice/TagLeaveNotice.tsx"
           />
         </NoticeHead>
 

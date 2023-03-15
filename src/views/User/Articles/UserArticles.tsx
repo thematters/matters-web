@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
@@ -13,7 +14,6 @@ import {
   List,
   QueryError,
   Spinner,
-  Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -40,16 +40,24 @@ const ArticleSummaryInfo = ({
 
   return (
     <div className="info">
-      <Translate zh_hant="創作了" zh_hans="创作了" en="Created" />
+      <FormattedMessage
+        defaultMessage="Created"
+        description="src/views/User/Articles/UserArticles.tsx"
+      />
       <span className="num">&nbsp;{articles}&nbsp;</span>
-      <Translate zh_hant="篇作品" zh_hans="篇作品" en="articles" />
+      <FormattedMessage defaultMessage="articles" description="" />
 
       <IconDotDivider />
 
-      <Translate zh_hant="累積創作" zh_hans="累积创作" en="In total" />
+      <FormattedMessage
+        defaultMessage="In total"
+        description="src/views/User/Articles/UserArticles.tsx"
+      />
       <span className="num">&nbsp;{words}&nbsp;</span>
-      <Translate zh_hant="字" zh_hans="字" en="words" />
-
+      <FormattedMessage
+        defaultMessage="words"
+        description="src/views/User/Articles/UserArticles.tsx"
+      />
       <style jsx>{styles}</style>
     </div>
   )
@@ -75,9 +83,7 @@ const UserArticles = () => {
   const { data, loading, error, fetchMore, client } =
     usePublicQuery<UserArticlesPublicQuery>(
       query,
-      {
-        variables: { userName },
-      },
+      { variables: { userName } },
       { publicQuery }
     )
 
@@ -85,7 +91,6 @@ const UserArticles = () => {
   const connectionPath = 'user.articles'
   const user = data?.user
   const { edges, pageInfo } = user?.articles || {}
-  const hasSubscriptions = (user?.subscribedCircles.totalCount || 0) > 0
 
   // private data
   const loadPrivate = (publicData?: UserArticlesPublicQuery) => {
@@ -134,7 +139,7 @@ const UserArticles = () => {
   if (loading) {
     return (
       <>
-        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <UserTabs />
         <Spinner />
       </>
     )
@@ -143,7 +148,7 @@ const UserArticles = () => {
   if (error) {
     return (
       <>
-        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <UserTabs />
         <QueryError error={error} />
       </>
     )
@@ -152,7 +157,7 @@ const UserArticles = () => {
   if (!user || user?.status?.state === 'archived') {
     return (
       <>
-        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <UserTabs />
         <EmptyArticle />
       </>
     )
@@ -203,7 +208,7 @@ const UserArticles = () => {
     return (
       <>
         <CustomHead />
-        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <UserTabs />
         <EmptyArticle />
       </>
     )
@@ -217,7 +222,7 @@ const UserArticles = () => {
     <>
       <CustomHead />
 
-      <UserTabs hasSubscriptions={hasSubscriptions} />
+      <UserTabs />
 
       <ArticleSummaryInfo user={user} />
 

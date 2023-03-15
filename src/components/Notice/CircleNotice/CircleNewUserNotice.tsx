@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { CircleNewUserNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -48,24 +48,21 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
           <NoticeHeadActors actors={notice.actors} />
 
           {isNewFollower && (
-            <Translate
-              zh_hant="追蹤了你的圍爐"
-              zh_hans="追踪了你的围炉"
-              en=" followed your cirlce"
+            <FormattedMessage
+              defaultMessage="followed your circle"
+              description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
             />
           )}
           {isNewSubscriber && (
-            <Translate
-              zh_hant="訂閱了你的圍爐"
-              zh_hans="订阅了你的围炉"
-              en=" subscribed your cirlce"
+            <FormattedMessage
+              defaultMessage="subscribed your circle"
+              description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
             />
           )}
           {isNewUnsubscriber && (
-            <Translate
-              zh_hant="退訂了你的圍爐"
-              zh_hans="退订了你的围炉"
-              en=" unsubscribed your cirlce"
+            <FormattedMessage
+              defaultMessage="unsubscribed your circle"
+              description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
             />
           )}
         </NoticeHead>

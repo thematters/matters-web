@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Button,
@@ -7,7 +8,6 @@ import {
   Spinner,
   TagEditorDialog,
   TextIcon,
-  Translate,
   UserDigest,
 } from '~/components'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
@@ -34,7 +34,7 @@ const ManageButton = ({ id }: Props) => {
           aria-haspopup="dialog"
         >
           <TextIcon icon={<IconSettings24 />} weight="md" size={'xs'}>
-            <Translate zh_hant="管理" zh_hans="管理" en="Manage" />
+            <FormattedMessage defaultMessage="Manage" description="" />
           </TextIcon>
         </Button>
       )}
@@ -74,7 +74,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
         <>
           <section className="category">
             <section>
-              <Translate zh_hant="主理人" zh_hans="主理人" en="Maintainer" />
+              <FormattedMessage defaultMessage="Maintainer" description="" />
             </section>
             {isOwner && (
               <section>
@@ -96,7 +96,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
         <>
           <section className="category">
             <section>
-              <Translate zh_hant="協作者" zh_hans="協作者" en="collaborators" />
+              <FormattedMessage defaultMessage="collaborators" description="" />
               <span className="count">({editors.length})</span>
             </section>
           </section>

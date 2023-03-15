@@ -1,7 +1,7 @@
 .box {
   @mixin border-grey;
 
-  padding: var(--spacing-base) 0;
+  padding: var(--spacing-base) 0 0;
   border-radius: var(--spacing-x-tight);
 
   & header {
@@ -9,6 +9,10 @@
 
     padding: 0 var(--spacing-base);
   }
+}
+
+.footerSpace {
+  padding-bottom: var(--spacing-base);
 }
 
 .subtitle {

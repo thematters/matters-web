@@ -1,10 +1,12 @@
+import { FormattedMessage } from 'react-intl'
+
 import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
 } from '~/common/enums'
 import { analytics, appendTarget } from '~/common/utils'
-import { Button, ButtonProps, Media, TextIcon, Translate } from '~/components'
+import { Button, ButtonProps, Media, TextIcon } from '~/components'
 
 type SignUpButtonProps = {
   isPlain?: boolean
@@ -53,7 +55,7 @@ export const SignUpButton: React.FC<
   }
   const ButtonText = () => (
     <TextIcon color="white" weight="md">
-      <Translate id="register" />
+      <FormattedMessage defaultMessage="Register" description="" />
     </TextIcon>
   )
 

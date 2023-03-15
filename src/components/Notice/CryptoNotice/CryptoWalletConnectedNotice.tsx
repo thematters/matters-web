@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { CryptoWalletConnectedNoticeFragment } from '~/gql/graphql'
 
 import NoticeDate from '../NoticeDate'
@@ -24,10 +24,9 @@ const CryptoWalletConnectedNotice = ({
 
       <section className="content-wrap">
         <p>
-          <Translate
-            zh_hant="你已完成以太坊錢包設定。你設定的地址："
-            zh_hans="你已完成以太坊钱包设定。你设定的地址："
-            en="You have successfully completed Ethereum wallet settings. Please confirm wallet address:"
+          <FormattedMessage
+            defaultMessage="You have successfully completed Ethereum wallet settings. Please confirm wallet address:"
+            description="src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
           />
           <p className="highlight">{notice.target.address}</p>
         </p>

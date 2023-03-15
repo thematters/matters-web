@@ -21,7 +21,7 @@ const ConnectWallet = () => {
   const initStep = 'wallet-select'
   const { currStep, forward } = useStep<Step>(initStep)
 
-  if (!viewerEthAddress) {
+  if (viewerEthAddress) {
     return (
       <Layout.Main smBgColor="grey-lighter">
         <Head title={{ id: 'loginWithWallet' }} />

@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import {
   IconPin24,
   IconUnPin24,
   Menu,
   TextIcon,
-  Translate,
   useMutation,
 } from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
@@ -64,11 +64,17 @@ const StickyButton = ({
     <Menu.Item onClick={toggleSticky}>
       {article.sticky ? (
         <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
-          <Translate id="unstickyArticle" />
+          <FormattedMessage
+            defaultMessage="Unpin"
+            description="src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+          />
         </TextIcon>
       ) : (
         <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
-          <Translate id="stickyArticle" />
+          <FormattedMessage
+            defaultMessage="Pin article"
+            description="src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+          />
         </TextIcon>
       )}
     </Menu.Item>
