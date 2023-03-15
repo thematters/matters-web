@@ -1141,5 +1141,49 @@
   "mCAIcg": {
     "defaultMessage": "站内阅读热门排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
+  },
+  "lNjDPr": {
+    "defaultMessage": "你还没有邀请任何用户喔！点击新增邀请，添加站内或站外朋友加入围炉赠与对方免费资格的固定时长",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
+  "RxiHr/": {
+    "defaultMessage": "还没有任何用户回覆你的邀请喔！",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
+  },
+  "b8ogKp": {
+    "defaultMessage": "新增邀请",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
+  },
+  "FmWYRt": {
+    "defaultMessage": "免费资格时长",
+    "description": ""
+  },
+  "Bc20la": {
+    "defaultMessage": "天",
+    "description": ""
+  },
+  "O0QB1v": {
+    "defaultMessage": "用户将收到你的围炉免费资格邀请函，设置免费的时限，邀请他们一起加入吧！",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "rXnmeE": {
+    "defaultMessage": "确认发送",
+    "description": ""
+  },
+  "ptqBN1": {
+    "defaultMessage": "暂时不要",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "tzq2+W": {
+    "defaultMessage": "寄出邀请",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "fWDtpq": {
+    "defaultMessage": "邀请中",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "JpS59y": {
+    "defaultMessage": "已接受",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   }
 }

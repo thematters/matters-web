@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { REFETCH_CIRCLE_PENDING_INVITES } from '~/common/enums'
 import {
@@ -9,7 +10,6 @@ import {
   QueryError,
   Spinner,
   Throw404,
-  Translate,
   useMutation,
   UserDigest,
   useRoute,
@@ -101,10 +101,9 @@ const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
     <>
       <Dialog.Message align="left">
         <p>
-          <Translate
-            zh_hant="用戶將收到你的圍爐免費資格邀請函，設置免費的時限，邀請他們一起加入吧！"
-            zh_hans="用户将收到你的围炉免费资格邀请函，设置免费的时限，邀请他们一起加入吧！"
-            en="Friends will receive free trial invitations to Circle. Set up your invitations now!"
+          <FormattedMessage
+            defaultMessage="Friends will receive free trial invitations to Circle. Set up your invitations now!"
+            description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
           />
         </p>
       </Dialog.Message>
@@ -135,11 +134,7 @@ const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
 
       <Dialog.Footer>
         <Dialog.Footer.Button onClick={() => send()} loading={inviteLoading}>
-          <Translate
-            zh_hant="確認發送"
-            zh_hans="确认发送"
-            en="Confirm and Send"
-          />
+          <FormattedMessage defaultMessage="Confirm and Send" description="" />
         </Dialog.Footer.Button>
 
         <Dialog.Footer.Button
@@ -147,7 +142,10 @@ const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
           textColor="black"
           onClick={closeDialog}
         >
-          <Translate zh_hant="暫時不要" zh_hans="暂时不要" en="Not Now" />
+          <FormattedMessage
+            defaultMessage="Not Now"
+            description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+          />
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>
@@ -166,7 +164,12 @@ const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
 const InviteePreSend = (props: Props) => (
   <>
     <Dialog.Header
-      title={<Translate zh_hant="寄出邀請" zh_hans="寄出邀请" en="Send" />}
+      title={
+        <FormattedMessage
+          defaultMessage="Send"
+          description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+        />
+      }
       closeDialog={props.closeDialog}
       closeTextId="cancel"
     />

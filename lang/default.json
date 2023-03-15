@@ -223,6 +223,10 @@
     "defaultMessage": "commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "Bc20la": {
+    "defaultMessage": "days",
+    "description": ""
+  },
   "BjzRe8": {
     "defaultMessage": ". Take a look at your income",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
@@ -295,6 +299,10 @@
     "defaultMessage": "Matters Community",
     "description": ""
   },
+  "FmWYRt": {
+    "defaultMessage": "Free trial period",
+    "description": ""
+  },
   "GBm/sD": {
     "defaultMessage": "posted a new topic and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
@@ -362,6 +370,10 @@
   "Jc+W6M": {
     "defaultMessage": "resigned as tag maintainer. Would you like to be the new tag maintainer?",
     "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+  },
+  "JpS59y": {
+    "defaultMessage": "Accepted",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
   "Js/Fij": {
     "defaultMessage": "This article has been removed from Trending",
@@ -451,6 +463,10 @@
     "defaultMessage": "resigned as tag collaborator. You can invite new collaborators to join",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
+  "O0QB1v": {
+    "defaultMessage": "Friends will receive free trial invitations to Circle. Set up your invitations now!",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
   "OKhRC6": {
     "defaultMessage": "Share",
     "description": ""
@@ -494,6 +510,10 @@
   "RFzVUD": {
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "RxiHr/": {
+    "defaultMessage": "friends have not accepted your invitations.",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
   "Seanpx": {
     "defaultMessage": "Required",
@@ -655,6 +675,10 @@
     "defaultMessage": "Last {days} days",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "b8ogKp": {
+    "defaultMessage": "Add Invitation",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
+  },
   "bBYO6x": {
     "defaultMessage": "Unblock",
     "description": "src/components/BlockUser/Button/index.tsx"
@@ -742,6 +766,10 @@
   "fOgusL": {
     "defaultMessage": "Choose a method to enter",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "fWDtpq": {
+    "defaultMessage": "Pending",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
   "ftD7Hy": {
     "defaultMessage": "mentioned you",
@@ -847,6 +875,10 @@
     "defaultMessage": "Enter Email",
     "description": ""
   },
+  "lNjDPr": {
+    "defaultMessage": "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'.",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
   "lhaIoi": {
     "defaultMessage": "Enter Display Name",
     "description": ""
@@ -922,6 +954,10 @@
     "defaultMessage": "Collapse",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   },
+  "ptqBN1": {
+    "defaultMessage": "Not Now",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
   "pwlQEY": {
     "defaultMessage": "Display Name",
     "description": ""
@@ -965,6 +1001,10 @@
   "rBjwQy": {
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "rXnmeE": {
+    "defaultMessage": "Confirm and Send",
+    "description": ""
   },
   "reOeq5": {
     "defaultMessage": "You have created your personal creative space. Publish your first work!",
@@ -1013,6 +1053,10 @@
   "tW3hM/": {
     "defaultMessage": "Description of the Circle",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "tzq2+W": {
+    "defaultMessage": "Send",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "u5aHb4": {
     "defaultMessage": "Copy Link",

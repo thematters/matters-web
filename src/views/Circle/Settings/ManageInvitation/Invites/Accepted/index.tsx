@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
 import {
@@ -10,7 +11,6 @@ import {
   QueryError,
   Spinner,
   Throw404,
-  Translate,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -79,10 +79,9 @@ const AcceptedInvites = () => {
     return (
       <EmptyWarning
         description={
-          <Translate
-            zh_hant="還沒有任何用戶回覆你的邀請喔！"
-            zh_hans="还没有任何用户回覆你的邀请喔！"
-            en="friends have not accepted your inivtations."
+          <FormattedMessage
+            defaultMessage="friends have not accepted your invitations."
+            description="src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
           />
         }
       />

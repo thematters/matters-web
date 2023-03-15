@@ -1141,5 +1141,49 @@
   "mCAIcg": {
     "defaultMessage": "Hottest",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
+  },
+  "lNjDPr": {
+    "defaultMessage": "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'.",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
+  "RxiHr/": {
+    "defaultMessage": "friends have not accepted your invitations.",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
+  },
+  "b8ogKp": {
+    "defaultMessage": "Add Invitation",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
+  },
+  "FmWYRt": {
+    "defaultMessage": "Free trial period",
+    "description": ""
+  },
+  "Bc20la": {
+    "defaultMessage": "days",
+    "description": ""
+  },
+  "O0QB1v": {
+    "defaultMessage": "Friends will receive free trial invitations to Circle. Set up your invitations now!",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "rXnmeE": {
+    "defaultMessage": "Confirm and Send",
+    "description": ""
+  },
+  "ptqBN1": {
+    "defaultMessage": "Not Now",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "tzq2+W": {
+    "defaultMessage": "Send",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+   "fWDtpq": {
+    "defaultMessage": "Pending",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "JpS59y": {
+    "defaultMessage": "Accepted",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   }
 }

@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { REFETCH_CIRCLE_PENDING_INVITES } from '~/common/enums'
 import { mergeConnections } from '~/common/utils'
@@ -11,7 +12,6 @@ import {
   QueryError,
   Spinner,
   Throw404,
-  Translate,
   useEventListener,
   useRoute,
   ViewerContext,
@@ -83,10 +83,9 @@ const PendingInvites = () => {
     return (
       <EmptyWarning
         description={
-          <Translate
-            zh_hant="你還沒有邀請任何用戶喔！點擊新增邀請，添加站內或站外朋友加入圍爐贈與對方免費資格的固定時長"
-            zh_hans="你还没有邀请任何用户喔！点击新增邀请，添加站内或站外朋友加入围炉赠与对方免费资格的固定时长"
-            en='You have not invited anyone yet! Invite friends to join your circle by clicking "invite friends".'
+          <FormattedMessage
+            defaultMessage="You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'."
+            description="src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
           />
         }
       />
