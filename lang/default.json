@@ -1,4 +1,8 @@
 {
+  "+7SAix": {
+    "defaultMessage": "Must be between 2-12 characters long.",
+    "description": ""
+  },
   "+a+2ug": {
     "defaultMessage": "Members",
     "description": ""
@@ -34,6 +38,10 @@
   "/nu5ho": {
     "defaultMessage": "replied to your comment on",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "/podGX": {
+    "defaultMessage": "Public",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
   "0Azlrb": {
     "defaultMessage": "Manage",
@@ -131,6 +139,10 @@
     "defaultMessage": "Start Creating",
     "description": ""
   },
+  "6BXcdo": {
+    "defaultMessage": "Set threshold for circle (per month)",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
   "6flWFg": {
     "defaultMessage": "Term of Services",
     "description": ""
@@ -211,6 +223,10 @@
     "defaultMessage": "commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "Bc20la": {
+    "defaultMessage": "days",
+    "description": ""
+  },
   "BjzRe8": {
     "defaultMessage": ". Take a look at your income",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
@@ -239,9 +255,17 @@
     "defaultMessage": "Settings",
     "description": ""
   },
+  "DMlmcU": {
+    "defaultMessage": "Free Trial",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.",
     "description": ""
+  },
+  "EQeKnO": {
+    "defaultMessage": "Manage Invitation",
+    "description": "src/views/Circle/Settings/index.tsx"
   },
   "EW5R4p": {
     "defaultMessage": "Request an update, ask, share and discuss",
@@ -273,6 +297,10 @@
   },
   "FhWC22": {
     "defaultMessage": "Matters Community",
+    "description": ""
+  },
+  "FmWYRt": {
+    "defaultMessage": "Free trial period",
     "description": ""
   },
   "GBm/sD": {
@@ -335,9 +363,17 @@
     "defaultMessage": "Your article has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
+  "JXdbo8": {
+    "defaultMessage": "Done",
+    "description": ""
+  },
   "Jc+W6M": {
     "defaultMessage": "resigned as tag maintainer. Would you like to be the new tag maintainer?",
     "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
+  },
+  "JpS59y": {
+    "defaultMessage": "Accepted",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
   "Js/Fij": {
     "defaultMessage": "This article has been removed from Trending",
@@ -354,6 +390,10 @@
   "KL502d": {
     "defaultMessage": "Profile updated",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+  },
+  "KLQ1/z": {
+    "defaultMessage": "Circle successfully created",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "KMcrz8": {
     "defaultMessage": "Maintain Tag",
@@ -374,6 +414,10 @@
   "LGox1K": {
     "defaultMessage": "Followed",
     "description": ""
+  },
+  "LOefol": {
+    "defaultMessage": "Paywalled",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
   "LW1aX1": {
     "defaultMessage": "Congrats!",
@@ -419,6 +463,10 @@
     "defaultMessage": "resigned as tag collaborator. You can invite new collaborators to join",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
+  "O0QB1v": {
+    "defaultMessage": "Friends will receive free trial invitations to Circle. Set up your invitations now!",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
   "OKhRC6": {
     "defaultMessage": "Share",
     "description": ""
@@ -447,13 +495,25 @@
     "defaultMessage": "Select NFT as your avatar",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
   },
+  "QUqfbW": {
+    "defaultMessage": "Describe more about your Circle",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
   "QV19cI": {
     "defaultMessage": "Failed to republish article",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
+  "QZXKhG": {
+    "defaultMessage": "Set the Circle URL (cannot be modified after creation)",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
   "RFzVUD": {
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "RxiHr/": {
+    "defaultMessage": "friends have not accepted your invitations.",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
   "Seanpx": {
     "defaultMessage": "Required",
@@ -515,6 +575,10 @@
     "defaultMessage": "Matters will never ask your wallet key through any channel.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "VwuiYK": {
+    "defaultMessage": "This URL name has already been used, try another one",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
   "WBVVYd": {
     "defaultMessage": "Responses",
     "description": ""
@@ -571,6 +635,10 @@
     "defaultMessage": "Build Together",
     "description": "src/views/Me/Settings/AnonymousSettings/Enhance/index.tsx"
   },
+  "ZAs170": {
+    "defaultMessage": "Profile",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
   "ZUPQzl": {
     "defaultMessage": "comment",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
@@ -606,6 +674,10 @@
   "b3onWZ": {
     "defaultMessage": "Last {days} days",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "b8ogKp": {
+    "defaultMessage": "Add Invitation",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
   },
   "bBYO6x": {
     "defaultMessage": "Unblock",
@@ -667,8 +739,16 @@
     "defaultMessage": "Maintainer",
     "description": ""
   },
+  "ei+kyp": {
+    "defaultMessage": "Name of the Circle",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
   "enMIYK": {
     "defaultMessage": "My Page",
+    "description": ""
+  },
+  "eov+J2": {
+    "defaultMessage": "Custom URL Name",
     "description": ""
   },
   "euNJsE": {
@@ -679,9 +759,17 @@
     "defaultMessage": "Logged out successfully",
     "description": ""
   },
+  "fOFrqV": {
+    "defaultMessage": "Read Counts",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentDigest/index.tsx"
+  },
   "fOgusL": {
     "defaultMessage": "Choose a method to enter",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "fWDtpq": {
+    "defaultMessage": "Pending",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
   "ftD7Hy": {
     "defaultMessage": "mentioned you",
@@ -690,6 +778,10 @@
   "g/L3Fm": {
     "defaultMessage": "posted and replied to topics",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "gMZZ9I": {
+    "defaultMessage": "Must be between 2-20 characters long. Only letters, numbers and underscores are allowed.",
+    "description": ""
   },
   "gMZfHO": {
     "defaultMessage": "RSS Subscription",
@@ -783,6 +875,10 @@
     "defaultMessage": "Enter Email",
     "description": ""
   },
+  "lNjDPr": {
+    "defaultMessage": "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'.",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
   "lhaIoi": {
     "defaultMessage": "Enter Display Name",
     "description": ""
@@ -790,6 +886,10 @@
   "ll/ufR": {
     "defaultMessage": "Trending",
     "description": ""
+  },
+  "mCAIcg": {
+    "defaultMessage": "Hottest",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
   "mPe6DK": {
     "defaultMessage": "subscribed your circle",
@@ -806,6 +906,10 @@
   "mikY/9": {
     "defaultMessage": "Edit",
     "description": "src/components/Comment/DropdownActions/EditButton.tsx"
+  },
+  "mjMpv4": {
+    "defaultMessage": "Circle Edited",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "mk+LCk": {
     "defaultMessage": "Display Preferences",
@@ -850,9 +954,9 @@
     "defaultMessage": "Collapse",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   },
-  "pla6ZF": {
-    "defaultMessage": "Search articles, tags and authors",
-    "description": "src/components/Search/SearchBar/index.tsx"
+  "ptqBN1": {
+    "defaultMessage": "Not Now",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "pwlQEY": {
     "defaultMessage": "Display Name",
@@ -865,6 +969,10 @@
   "q+N5Wd": {
     "defaultMessage": "Manage Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "q9oMKE": {
+    "defaultMessage": "Circle Name",
+    "description": ""
   },
   "qPPrzm": {
     "defaultMessage": "supported your article",
@@ -893,6 +1001,10 @@
   "rBjwQy": {
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "rXnmeE": {
+    "defaultMessage": "Confirm and Send",
+    "description": ""
   },
   "reOeq5": {
     "defaultMessage": "You have created your personal creative space. Publish your first work!",
@@ -938,6 +1050,14 @@
     "defaultMessage": "replied to topics and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "tW3hM/": {
+    "defaultMessage": "Description of the Circle",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "tzq2+W": {
+    "defaultMessage": "Send",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
   "u5aHb4": {
     "defaultMessage": "Copy Link",
     "description": ""
@@ -981,6 +1101,10 @@
   "wSEOxH": {
     "defaultMessage": "Contact Channel",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "wXzTZ0": {
+    "defaultMessage": "Enter the name of your Circle",
+    "description": ""
   },
   "wbcwKd": {
     "defaultMessage": "View All",

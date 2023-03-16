@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog } from '~/components'
 import SearchingArea, {
   SelectNode,
 } from '~/components/SearchSelect/SearchingArea'
@@ -54,7 +55,7 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
           <Dialog.Header.RightButton
             disabled={disabled}
             onClick={() => save({ nodes: selectedNodes })}
-            text={<Translate id="confirm" />}
+            text={<FormattedMessage defaultMessage="Confirm" description="" />}
           />
         }
       />

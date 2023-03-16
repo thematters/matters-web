@@ -39,7 +39,7 @@ const DeleteCommentDialog = ({
   const commentId = comment.id
 
   const { lang } = useContext(LanguageContext)
-  
+
   const [deleteComment] = useMutation<DeleteCommentMutation>(DELETE_COMMENT, {
     variables: { id: commentId },
     optimisticResponse: {
@@ -59,9 +59,13 @@ const DeleteCommentDialog = ({
         detail: {
           color: 'green',
           content: (
-            <FormattedMessage defaultMessage="{commentType} has been deleted" description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx" values={{
-              commentType: COMMENT_TYPE_TEXT[lang][type]
-            }}/>
+            <FormattedMessage
+              defaultMessage="{commentType} has been deleted"
+              description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+              values={{
+                commentType: COMMENT_TYPE_TEXT[lang][type],
+              }}
+            />
           ),
 
           buttonPlacement: 'center',
@@ -77,9 +81,13 @@ const DeleteCommentDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         <Dialog.Header
           title={
-            <FormattedMessage defaultMessage="Delete {commentType}" description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx" values={{
-              commentType: COMMENT_TYPE_TEXT[lang][type]
-            }}/>
+            <FormattedMessage
+              defaultMessage="Delete {commentType}"
+              description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+              values={{
+                commentType: COMMENT_TYPE_TEXT[lang][type],
+              }}
+            />
           }
           closeDialog={closeDialog}
           mode="inner"
@@ -87,9 +95,13 @@ const DeleteCommentDialog = ({
 
         <Dialog.Message>
           <p>
-            <FormattedMessage defaultMessage="After deletion, the {commentType} will be removed immediately" description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx" values={{
-              commentType: COMMENT_TYPE_TEXT[lang][type]
-            }}/>
+            <FormattedMessage
+              defaultMessage="After deletion, the {commentType} will be removed immediately"
+              description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+              values={{
+                commentType: COMMENT_TYPE_TEXT[lang][type],
+              }}
+            />
           </p>
         </Dialog.Message>
 
@@ -101,7 +113,7 @@ const DeleteCommentDialog = ({
               closeDialog()
             }}
           >
-            <FormattedMessage defaultMessage="Confirm" description=""  />
+            <FormattedMessage defaultMessage="Confirm" description="" />
           </Dialog.Footer.Button>
 
           <Dialog.Footer.Button
