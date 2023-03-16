@@ -9,7 +9,7 @@ import { Node } from '@tiptap/core'
  * <figure class="image">
  *   <img src="URL" />
  *   <figcaption>CAPTION</figcaption>
- * </figure
+ * </figure>
  * ```
  */
 
@@ -45,16 +45,8 @@ export const FigureImage = Node.create({
   parseHTML() {
     return [
       {
-        tag: 'figure',
-        attrs: { class: 'image' },
+        tag: 'figure[class="image"]',
         contentElement: 'figcaption',
-        getAttrs: (node) => {
-          // matches only `<figure class="image">`
-          if (node instanceof HTMLElement) {
-            return node.classList.contains('image') && null
-          }
-          return false
-        },
       },
     ]
   },

@@ -17,7 +17,7 @@ import { Node } from '@tiptap/core'
  *   </div>
  *
  *   <figcaption>CAPTION</figcaption>
- * </figure
+ * </figure>
  * ```
  */
 
@@ -260,16 +260,8 @@ export const FigureEmbed = Node.create({
   parseHTML() {
     return [
       {
-        tag: 'figure',
-        attrs: { class: 'embed' },
+        tag: 'figure[class="embed"]',
         contentElement: 'figcaption',
-        getAttrs: (node) => {
-          // matches only `<figure class="embed">`
-          if (node instanceof HTMLElement) {
-            return node.classList.contains('embed') && null
-          }
-          return false
-        },
       },
     ]
   },

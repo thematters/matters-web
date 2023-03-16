@@ -12,7 +12,6 @@ import Heading from '@tiptap/extension-heading'
 import History from '@tiptap/extension-history'
 import HorizontalRule from '@tiptap/extension-horizontal-rule'
 import Italic from '@tiptap/extension-italic'
-import Link from '@tiptap/extension-link'
 import ListItem from '@tiptap/extension-list-item'
 import OrderedList from '@tiptap/extension-ordered-list'
 import Paragraph from '@tiptap/extension-paragraph'
@@ -23,22 +22,21 @@ import Underline from '@tiptap/extension-underline'
 import { EditorContent, useEditor } from '@tiptap/react'
 import { useContext } from 'react'
 
-import {
-  // ADD_TOAST,
-  ASSET_TYPE,
-} from '~/common/enums'
+import { ASSET_TYPE } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
-// import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
-import {
-  EditorDraftFragment,
-  // SearchUsersQuery
-} from '~/gql/graphql'
+import { EditorDraftFragment } from '~/gql/graphql'
 
-import { FigureAudio, FigureEmbed, FigureImage } from './extensions'
+import {
+  FigureAudio,
+  FigureEmbed,
+  FigureImage,
+  Link,
+  Mention,
+  mentionSuggestion,
+} from './extensions'
 import MenuBar from './MenuBar'
-// import MentionUserList from '../MentionUserList'
 import styles from './styles.css'
 import EditorSummary from './Summary'
 import EditorTitle from './Title'
@@ -66,12 +64,6 @@ interface Props {
   }>
 }
 
-// type SearchUsersSearchEdgesNodeUser = NonNullable<
-//   NonNullable<SearchUsersQuery['search']['edges']>[0]['node'] & {
-//     __typename: 'User'
-//   }
-// >
-
 const ArticleEditor: React.FC<Props> = ({
   draft,
 
@@ -82,29 +74,18 @@ const ArticleEditor: React.FC<Props> = ({
   update,
   upload,
 }) => {
-  // const [search, searchResult] = useLazyQuery<SearchUsersQuery>(SEARCH_USERS)
   const { lang } = useContext(LanguageContext)
 
   const { content, publishState, summary, summaryCustomized, title } = draft
   const isPending = publishState === 'pending'
   const isPublished = publishState === 'published'
   const isReadOnly = (isPending || isPublished) && !isReviseMode
-  // const { data, loading } = searchResult
-
-  // const mentionUsers = (data?.search.edges || []).map(
-  //   ({ node }: any) => node
-  // ) as SearchUsersSearchEdgesNodeUser[]
-
-  // const mentionKeywordChange = (keyword: string) => {
-  //   search({ variables: { search: keyword, exclude: 'blocked' } })
-  // }
 
   const editor = useEditor({
     extensions: [
       Document,
       Paragraph,
       Text,
-      Link,
       Heading.configure({
         levels: [2, 3],
       }),
@@ -132,9 +113,13 @@ const ArticleEditor: React.FC<Props> = ({
         }),
       }),
       // Custom
+      Link,
       FigureImage,
       FigureAudio,
       FigureEmbed,
+      Mention.configure({
+        suggestion: mentionSuggestion,
+      }),
     ],
     content,
     editable: !isReadOnly,
