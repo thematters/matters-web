@@ -129,7 +129,7 @@ const Content = () => {
                 defaultMessage={`{subscriber, plural, =1 {subscriber} other {subscribers}}`}
                 description="src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
                 values={{
-                  subscribers:
+                  subscriber:
                     subscriber.currentSubscriber + subscriber.currentInvitee,
                 }}
               />
