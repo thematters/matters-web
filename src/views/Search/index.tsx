@@ -1,87 +1,114 @@
-import { useEffect, useState } from 'react'
+import _uniq from 'lodash/uniq'
+import _without from 'lodash/without'
+import { useContext, useEffect, useState } from 'react'
 
-import { toPath } from '~/common/utils'
+import {
+  SEARCH_HISTORY_DISPLAY_LENGTH,
+  SEARCH_HISTORY_LENGTH,
+  STORAGE_KEY_SEARCH_HISTORY,
+} from '~/common/enums'
+import { storage, toPath } from '~/common/utils'
 import {
   Head,
   Layout,
   Media,
-  SearchAutoComplete,
   SearchBar,
-  SearchOverview,
+  SearchHistory,
   useRoute,
+  ViewerContext,
 } from '~/components'
 
 import AggregateResults from './AggregateResults'
-import SearchArticles from './SearchArticles'
-import SearchTags from './SearchTags'
-import SearchUsers from './SearchUsers'
-
+// import EmptySearch from './EmptySearch'
+import styles from './styles.css'
 const Search = () => {
-  const { getQuery, router } = useRoute()
-  const type = getQuery('type')
-  const q = getQuery('q')
-  const [typingKey, setTypingKey] = useState('')
-  const resetAutoComplete = () => setTypingKey('')
-  const onCancel = () => {
-    const path = toPath({ page: 'search' })
-    router.push(path.href)
+  const viewer = useContext(ViewerContext)
+  const storageKey = STORAGE_KEY_SEARCH_HISTORY + '_' + viewer.id
+
+  const [searchHistory, setSearchHistory] = useState<string[]>([])
+
+  const updateSearchHistory = (value: string[]) => {
+    storage.set(storageKey, value)
+    setSearchHistory(value)
   }
 
-  const isOverview = !q && !typingKey
-  const isAutoComplete = typingKey
-  const isTagOnly = !isAutoComplete && type === 'tag'
-  const isUserOnly = !isAutoComplete && type === 'user'
-  const isArticleOnly = !isAutoComplete && type === 'article'
-  const isAggregate =
-    !isOverview &&
-    !isAutoComplete &&
-    !isTagOnly &&
-    !isUserOnly &&
-    !isArticleOnly
-  const showCancelButton = !isOverview
+  const addSearchHistory = (searchKey: string) => {
+    const nsh = _uniq([searchKey, ...(storage.get(storageKey) || [])]).slice(
+      0,
+      SEARCH_HISTORY_LENGTH
+    )
+    updateSearchHistory(nsh)
+  }
+
+  const removeSearchHistory = (searchKey: string) => {
+    const nsh = _without(searchHistory, searchKey)
+    updateSearchHistory(nsh)
+  }
+
+  const { getQuery, router } = useRoute()
+  const q = getQuery('q')
+  // TODO: Just test for product team, will be removed when release
+  const cancelable = getQuery('cancelable')
+
+  const onCancel = () => {
+    const path = toPath({ page: 'search' })
+    router.replace(path.href)
+  }
+
+  const isHistory = !q
+  const isAggregate = !isHistory
+
+  // const showBackButton = isSmallUp && isOverview
+  // const showMeButton = !isSmallUp && isOverview
+
+  const showCancelButton = !isHistory && cancelable
 
   useEffect(() => {
-    router.events.on('routeChangeStart', resetAutoComplete)
-    return () => router.events.off('routeChangeStart', resetAutoComplete)
-  }, [])
+    if (!isHistory) return
+
+    setSearchHistory(storage.get(storageKey))
+  }, [storageKey])
+
+  useEffect(() => {
+    if (!isAggregate) return
+
+    addSearchHistory(q)
+  }, [isAggregate, q, storageKey])
 
   return (
-    <Layout.Main smBgColor={isAggregate ? 'grey-lighter' : undefined}>
-      <Layout.Header
-        left={
-          isOverview ? (
-            <>
-              <Media at="sm">
-                <Layout.Header.MeButton />
-              </Media>
-              <Media greaterThan="sm">
-                <Layout.Header.BackButton />
-              </Media>
-            </>
-          ) : null
-        }
-        right={
-          <>
-            <SearchBar hasDropdown={false} onChange={setTypingKey} />
-
-            {showCancelButton && (
-              <span style={{ marginLeft: '1rem' }}>
-                <Layout.Header.CancelButton onClick={onCancel} />
-              </span>
-            )}
-          </>
-        }
-      />
+    <Layout.Main>
+      <Media greaterThanOrEqual="xl">
+        <Layout.Header
+          left={<Layout.Header.BackButton />}
+          right={<Layout.Header.Title id="search" />}
+        />
+      </Media>
+      <Media lessThan="xl">
+        <Layout.Header
+          right={
+            <section className="layoutHeaderRight">
+              <SearchBar hasDropdown={false} />
+              {showCancelButton && (
+                <span style={{ marginLeft: '1rem' }}>
+                  <Layout.Header.CancelButton onClick={onCancel} />
+                </span>
+              )}
+            </section>
+          }
+        />
+      </Media>
 
       <Head title={{ id: 'search' }} />
-
-      {isOverview && <SearchOverview inPage />}
-      {isAutoComplete && <SearchAutoComplete searchKey={typingKey} inPage />}
-
-      {isTagOnly && <SearchTags />}
-      {isUserOnly && <SearchUsers />}
-      {isArticleOnly && <SearchArticles />}
+      {isHistory && (
+        <Media lessThan="xl">
+          <SearchHistory
+            data={searchHistory?.slice(0, SEARCH_HISTORY_DISPLAY_LENGTH)}
+            removeSearchHistoryItem={removeSearchHistory}
+          />
+        </Media>
+      )}
       {isAggregate && <AggregateResults />}
+      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }
