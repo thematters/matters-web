@@ -55,9 +55,17 @@
     "defaultMessage": "漏洞賞金計畫",
     "description": ""
   },
+  "1qQzV0": {
+    "defaultMessage": "免費邀請",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
   "20bImY": {
     "defaultMessage": "眾聊",
     "description": ""
+  },
+  "2CqWQE": {
+    "defaultMessage": "總數",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "2atspc": {
     "defaultMessage": "我的草稿",
@@ -143,6 +151,10 @@
     "defaultMessage": "設定圍爐門檻（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "6OBAOi": {
+    "defaultMessage": "目前總訂閱人數",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
   "6flWFg": {
     "defaultMessage": "用戶協議",
     "description": ""
@@ -219,6 +231,10 @@
     "defaultMessage": "馬上開始你的創作吧！",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
+  "AYTnjk": {
+    "defaultMessage": "追蹤",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
   "BHFHeY": {
     "defaultMessage": " 在圍爐 {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -226,6 +242,10 @@
   "Bc20la": {
     "defaultMessage": "天",
     "description": ""
+  },
+  "Bjdw71": {
+    "defaultMessage": "目前總追蹤人數",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "BjzRe8": {
     "defaultMessage": "，快去查看自己的收入吧！",
@@ -295,6 +315,10 @@
     "defaultMessage": "安裝 MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "Fe682o": {
+    "defaultMessage": "下月預期營收",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
   "FhWC22": {
     "defaultMessage": "社區共建基地",
     "description": ""
@@ -314,6 +338,10 @@
   "GZJpDf": {
     "defaultMessage": "數據後台",
     "description": ""
+  },
+  "GugBCe": {
+    "defaultMessage": "本月新增追蹤人數",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "H0JBH6": {
     "defaultMessage": "登出",
@@ -407,6 +435,14 @@
     "defaultMessage": " 邀請你免費加入圍爐 ",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "L0J61B": {
+    "defaultMessage": "免費",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "L4NXXh": {
+    "defaultMessage": "目前總營收",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
   "L7Si5/": {
     "defaultMessage": "管理社群",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -434,6 +470,10 @@
   "LqxIEU": {
     "defaultMessage": "錢包地址將作為身份識別之一在個人頁公開顯示。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "MDNaxs": {
+    "defaultMessage": "人",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "MkwOFW": {
     "defaultMessage": "瀏覽紀錄",
@@ -466,6 +506,10 @@
   "O0QB1v": {
     "defaultMessage": "用戶將收到你的圍爐免費資格邀請函，設置免費的時限，邀請他們一起加入吧！",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "OIj8pQ": {
+    "defaultMessage": "成功發送邀請",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
   "OKhRC6": {
     "defaultMessage": "分享",
@@ -515,6 +559,14 @@
     "defaultMessage": "還沒有任何用戶回覆你的邀請喔！",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
+  "SNh1n0": {
+    "defaultMessage": "查看名單",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SdXoXI": {
+    "defaultMessage": "你已寄出邀請給朋友們，快去已邀請管理查看他們加入的進度吧！",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
+  },
   "Seanpx": {
     "defaultMessage": "Required",
     "description": ""
@@ -526,6 +578,10 @@
   "TQLBox": {
     "defaultMessage": "取消置頂",
     "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
+  "TSDiqB": {
+    "defaultMessage": "付費人數",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "TjWWxF": {
     "defaultMessage": "廣播已送出",
@@ -587,6 +643,10 @@
     "defaultMessage": "添加到精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
+  "WpvsPu": {
+    "defaultMessage": "訂閱",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
   "WuvE8X": {
     "defaultMessage": "{circleName} 的追蹤者",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
@@ -598,6 +658,10 @@
   "XH0Lb6": {
     "defaultMessage": "歡迎加入 Matters！",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
+  },
+  "XHMco9": {
+    "defaultMessage": "人",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "XVYrS/": {
     "defaultMessage": "還沒有追蹤者",
@@ -714,6 +778,10 @@
   "cmtHjM": {
     "defaultMessage": "由於你尚未發布任何作品，這裡還沒有任何數據能與你分享哦！發布第一篇作品來介紹你自己，以此開啟你的創作之旅吧！",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "d4waan": {
+    "defaultMessage": "營收",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "deEeEI": {
     "defaultMessage": "註冊",
@@ -875,6 +943,10 @@
     "defaultMessage": "請輸入電子信箱",
     "description": ""
   },
+  "lIir/P": {
+    "defaultMessage": "我知道了",
+    "description": ""
+  },
   "lNjDPr": {
     "defaultMessage": "你還沒有邀請任何用戶喔！點擊新增邀請，添加站內或站外朋友加入圍爐贈與對方免費資格的固定時長",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
@@ -1022,6 +1094,10 @@
     "defaultMessage": "已禁言用戶",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "sPgUkN": {
+    "defaultMessage": "本月營收",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
   "skbUBl": {
     "defaultMessage": "Log in",
     "description": "src/components/Buttons/Login/index.tsx"
@@ -1118,6 +1194,10 @@
     "defaultMessage": "提醒：信箱將不作為登入使用，僅作為聯繫渠道",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "xWZr13": {
+    "defaultMessage": "{follower, plural, =1 {人} other {人}}",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
   "xiKjd/": {
     "defaultMessage": "使用電子信箱",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
@@ -1129,6 +1209,10 @@
   "xwj01D": {
     "defaultMessage": " 邀請你成為標籤的協作者",
     "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
+  },
+  "y0b6Kp": {
+    "defaultMessage": "付費",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "y1Z3or": {
     "defaultMessage": "修改界面語言",
@@ -1146,6 +1230,10 @@
     "defaultMessage": "你的 ",
     "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
   },
+  "zKOr2x": {
+    "defaultMessage": "已追蹤用戶佔總觀看人數比例",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
   "zQvVDJ": {
     "defaultMessage": "全部",
     "description": ""
@@ -1156,6 +1244,10 @@
   "zxlwbc": {
     "defaultMessage": "等候寫入完成...",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "zxy15q": {
+    "defaultMessage": "{subscriber, plural, =1 {人} other {人}}",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
 
