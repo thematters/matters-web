@@ -55,9 +55,17 @@
     "defaultMessage": "Bug Bounty",
     "description": ""
   },
+  "1qQzV0": {
+    "defaultMessage": "Invitees",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
   "20bImY": {
     "defaultMessage": "Discussion",
     "description": ""
+  },
+  "2CqWQE": {
+    "defaultMessage": "Total",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "2atspc": {
     "defaultMessage": "Drafts",
@@ -143,6 +151,10 @@
     "defaultMessage": "Set threshold for circle (per month)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "6OBAOi": {
+    "defaultMessage": "subscribers_empty",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
   "6flWFg": {
     "defaultMessage": "Term of Services",
     "description": ""
@@ -219,6 +231,10 @@
     "defaultMessage": "Start creating now!",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
+  "AYTnjk": {
+    "defaultMessage": "Followers",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
   "BHFHeY": {
     "defaultMessage": " commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -226,6 +242,10 @@
   "Bc20la": {
     "defaultMessage": "days",
     "description": ""
+  },
+  "Bjdw71": {
+    "defaultMessage": "followers_empty",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "BjzRe8": {
     "defaultMessage": ". Take a look at your income",
@@ -295,6 +315,10 @@
     "defaultMessage": "Install MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "Fe682o": {
+    "defaultMessage": "Next Month (Estimation)",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
   "FhWC22": {
     "defaultMessage": "Matters Community",
     "description": ""
@@ -314,6 +338,10 @@
   "GZJpDf": {
     "defaultMessage": "Analytics",
     "description": ""
+  },
+  "GugBCe": {
+    "defaultMessage": "New Followers This Month",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "H0JBH6": {
     "defaultMessage": "Log Out",
@@ -407,6 +435,14 @@
     "defaultMessage": " invites you to join Circle for ",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "L0J61B": {
+    "defaultMessage": "Free",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "L4NXXh": {
+    "defaultMessage": "Total",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
   "L7Si5/": {
     "defaultMessage": "Manage Community",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -434,6 +470,10 @@
   "LqxIEU": {
     "defaultMessage": "Wallet address will be part of your digital identity and shown in your profile page.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "MDNaxs": {
+    "defaultMessage": "followers",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "MkwOFW": {
     "defaultMessage": "Read History",
@@ -466,6 +506,10 @@
   "O0QB1v": {
     "defaultMessage": "Friends will receive free trial invitations to Circle. Set up your invitations now!",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "OIj8pQ": {
+    "defaultMessage": "Invitation Sent",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
   "OKhRC6": {
     "defaultMessage": "Share",
@@ -515,6 +559,14 @@
     "defaultMessage": "friends have not accepted your invitations.",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
+  "SNh1n0": {
+    "defaultMessage": "View Members",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SdXoXI": {
+    "defaultMessage": "Invitations have been sent. You can check invitation status on the invitation management page.",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
+  },
   "Seanpx": {
     "defaultMessage": "Required",
     "description": ""
@@ -526,6 +578,10 @@
   "TQLBox": {
     "defaultMessage": "Unpin",
     "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
+  "TSDiqB": {
+    "defaultMessage": "Subscribers",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
@@ -587,6 +643,10 @@
     "defaultMessage": "Add to Featured",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
+  "WpvsPu": {
+    "defaultMessage": "Subscribe",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
   "WuvE8X": {
     "defaultMessage": "Followers of {circleName}",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
@@ -598,6 +658,10 @@
   "XH0Lb6": {
     "defaultMessage": "Welcome to Matters!",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
+  },
+  "XHMco9": {
+    "defaultMessage": "subscribers",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "XVYrS/": {
     "defaultMessage": "No followers yet",
@@ -714,6 +778,10 @@
   "cmtHjM": {
     "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "d4waan": {
+    "defaultMessage": "Income",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "deEeEI": {
     "defaultMessage": "Register",
@@ -875,6 +943,10 @@
     "defaultMessage": "Enter Email",
     "description": ""
   },
+  "lIir/P": {
+    "defaultMessage": "I see",
+    "description": ""
+  },
   "lNjDPr": {
     "defaultMessage": "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'.",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
@@ -1022,6 +1094,10 @@
     "defaultMessage": "Account Banned",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "sPgUkN": {
+    "defaultMessage": "This Month",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
   "skbUBl": {
     "defaultMessage": "Log in",
     "description": "src/components/Buttons/Login/index.tsx"
@@ -1118,6 +1194,10 @@
     "defaultMessage": "As a reminder, the email address will not be used as a login but only as a contact channel.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "xWZr13": {
+    "defaultMessage": "{follower, plural, =1 {follower} other {followers}}",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
   "xiKjd/": {
     "defaultMessage": "Continue with Email",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
@@ -1129,6 +1209,10 @@
   "xwj01D": {
     "defaultMessage": " invites you to become a collaborator",
     "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
+  },
+  "y0b6Kp": {
+    "defaultMessage": "Pay",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "y1Z3or": {
     "defaultMessage": "Language",
@@ -1146,6 +1230,10 @@
     "defaultMessage": "Your",
     "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
   },
+  "zKOr2x": {
+    "defaultMessage": "Conversion Rate of Followers",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
   "zQvVDJ": {
     "defaultMessage": "All",
     "description": ""
@@ -1156,6 +1244,10 @@
   "zxlwbc": {
     "defaultMessage": "Waiting ...",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "zxy15q": {
+    "defaultMessage": "{subscriber, plural, =1 {subscriber} other {subscribers}}",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
 
