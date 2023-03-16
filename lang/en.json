@@ -1178,12 +1178,104 @@
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
-   "fWDtpq": {
+  "fWDtpq": {
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
   "JpS59y": {
     "defaultMessage": "Accepted",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "Bjdw71": {
+    "defaultMessage": "",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "xWZr13": {
+    "defaultMessage": "{follower, plural, =1 {follower} other {followers}}",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "GugBCe": {
+    "defaultMessage": "New Followers This Month",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "MDNaxs": {
+    "defaultMessage": "",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "zKOr2x": {
+    "defaultMessage": "Conversion Rate of Followers",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "AYTnjk": {
+    "defaultMessage": "Followers",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "sPgUkN": {
+    "defaultMessage": "This Month",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "Fe682o": {
+    "defaultMessage": "Next Month (Estimation)",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "L4NXXh": {
+    "defaultMessage": "Total",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "d4waan": {
+    "defaultMessage": "Income",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "6OBAOi": {
+    "defaultMessage": "",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "zxy15q": {
+    "defaultMessage": "{subscriber, plural, =1 {subscriber} other {subscribers}}",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "TSDiqB": {
+    "defaultMessage": "Subscribers",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "XHMco9": {
+    "defaultMessage": "",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "1qQzV0": {
+    "defaultMessage": "Invitees",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "WpvsPu": {
+    "defaultMessage": "Subscribe",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SNh1n0": {
+    "defaultMessage": "View Members",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "2CqWQE": {
+    "defaultMessage": "Total",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "y0b6Kp": {
+    "defaultMessage": "Pay",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "L0J61B": {
+    "defaultMessage": "Free",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SdXoXI": {
+    "defaultMessage": "Invitations have been sent. You can check invitation status on the invitation management page.",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
+  },
+  "OIj8pQ": {
+    "defaultMessage": "Invitation Sent",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
+  },
+  "lIir/P": {
+    "defaultMessage": "I see",
+    "description": ""
   }
 }

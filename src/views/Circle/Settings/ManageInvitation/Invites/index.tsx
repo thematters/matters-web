@@ -20,11 +20,17 @@ const InvitesFeed: React.FC = () => {
 
       <Tabs sticky>
         <Tabs.Tab onClick={() => setType('pending')} selected={isPending}>
-          <FormattedMessage defaultMessage="Pending" description="src/views/Circle/Settings/ManageInvitation/Invites/index.tsx" />
+          <FormattedMessage
+            defaultMessage="Pending"
+            description="src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+          />
         </Tabs.Tab>
 
         <Tabs.Tab onClick={() => setType('accepted')} selected={isAccepted}>
-          <FormattedMessage defaultMessage="Accepted" description="src/views/Circle/Settings/ManageInvitation/Invites/index.tsx" />
+          <FormattedMessage
+            defaultMessage="Accepted"
+            description="src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+          />
         </Tabs.Tab>
       </Tabs>
 
