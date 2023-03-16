@@ -1177,7 +1177,7 @@
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
-  },  
+  },
   "fWDtpq": {
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1185,6 +1185,97 @@
   "JpS59y": {
     "defaultMessage": "已接受",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "Bjdw71": {
+    "defaultMessage": "目前總追蹤人數",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "xWZr13": {
+    "defaultMessage": "{follower, plural, =1 {人} other {人}}",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "GugBCe": {
+    "defaultMessage": "本月新增追蹤人數",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "MDNaxs": {
+    "defaultMessage": "人",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "zKOr2x": {
+    "defaultMessage": "已追蹤用戶佔總觀看人數比例",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "AYTnjk": {
+    "defaultMessage": "追蹤",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "sPgUkN": {
+    "defaultMessage": "本月營收",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "Fe682o": {
+    "defaultMessage": "下月預期營收",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "L4NXXh": {
+    "defaultMessage": "目前總營收",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "d4waan": {
+    "defaultMessage": "營收",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "6OBAOi": {
+    "defaultMessage": "目前總訂閱人數",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "zxy15q": {
+    "defaultMessage": "{subscriber, plural, =1 {人} other {人}}",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "TSDiqB": {
+    "defaultMessage": "付費人數",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "XHMco9": {
+    "defaultMessage": "人",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "1qQzV0": {
+    "defaultMessage": "免費邀請",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "WpvsPu": {
+    "defaultMessage": "訂閱",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SNh1n0": {
+    "defaultMessage": "查看名單",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "2CqWQE": {
+    "defaultMessage": "總數",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "y0b6Kp": {
+    "defaultMessage": "付費",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "L0J61B": {
+    "defaultMessage": "免費",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SdXoXI": {
+    "defaultMessage": "你已寄出邀請給朋友們，快去已邀請管理查看他們加入的進度吧！",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
+  },
+  "OIj8pQ": {
+    "defaultMessage": "成功發送邀請",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
+  },
+  "lIir/P": {
+    "defaultMessage": "我知道了",
+    "description": ""
   }
-
 }
