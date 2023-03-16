@@ -95,7 +95,6 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   children,
 }) => {
   const { isInPath, isPathStartWith } = useRoute()
-  const isInSearch = isInPath('SEARCH')
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInCircle = isPathStartWith('/~', true)
@@ -134,7 +133,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
       <aside className="l-col-three-right">
         <Media greaterThanOrEqual="xl">
           <section className="content">
-            {!isInSearch && !inEditor && <SearchBar />}
+            {!inEditor && <SearchBar />}
 
             {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
 

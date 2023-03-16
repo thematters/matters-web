@@ -1,0 +1,17 @@
+export const MIN_QUICK_SEARCH_KEY_LENGTH = 2
+
+export const MAX_QUICK_SEARCH_KEY_LENGTH = 10
+
+export const SEARCH_START_FLAG = '@#＠＃'
+
+export const MAX_SEARCH_KEY_LENGTH = 60
+
+export const MAX_SEARCH_RESULTS_LENGTH = 200
+
+export const FIRST_SEARCH_RESULTS_LENGTH = 30
+
+export const LATER_SEARCH_RESULTS_LENGTH = 20
+
+export const SEARCH_HISTORY_LENGTH = 20
+
+export const SEARCH_HISTORY_DISPLAY_LENGTH = 10

@@ -84,7 +84,9 @@ interface LoadMoreProp {
     | UserFeedType
     | TagFeedType
     | CircleFeedType
+    | 'quick_search'
   location: number
+  searchKey?: string
 }
 
 /**
@@ -137,6 +139,7 @@ interface ClickFeedProp {
   contentType: ContentType | ActivityType
   location: number | string
   id?: string
+  searchKey?: string
 }
 
 /**
@@ -158,7 +161,13 @@ interface TagExposureProp {
 }
 
 // content type
-export type ContentType = 'article' | 'comment' | 'circle' | 'user' | 'tag'
+export type ContentType =
+  | 'article'
+  | 'comment'
+  | 'circle'
+  | 'user'
+  | 'tag'
+  | 'key'
 export type ActivityType =
   | 'UserPublishArticleActivity'
   | 'UserBroadcastCircleActivity'
@@ -182,6 +191,7 @@ export type FeedType =
   | TagFeedType
   | CircleFeedType
   | 'following'
+  | 'search_history'
 
 type ArticleFeedType =
   | 'all_authors'
@@ -231,6 +241,7 @@ type UserFeedType =
   | 'newest'
   | 'search'
   | 'search_user'
+  | 'quick_search_user'
   | 'tag_detail_latest'
   | 'tag_detail_selected'
   | 'tag_detail_community'
@@ -244,6 +255,7 @@ type TagFeedType =
   // | 'follow-tag'
   | 'search'
   | 'search_tag'
+  | 'quick_search_tag'
   | 'tags' // tag feed on home page
   | 'user_tag'
 

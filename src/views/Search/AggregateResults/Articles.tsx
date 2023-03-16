@@ -1,31 +1,59 @@
-import { analytics, toPath } from '~/common/utils'
+import { useEffect } from 'react'
+
 import {
-  ArticleDigestTitle,
-  Card,
+  LATER_SEARCH_RESULTS_LENGTH,
+  MAX_SEARCH_RESULTS_LENGTH,
+} from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
+import {
+  ArticleDigestFeed,
+  EmptySearch,
+  InfiniteScroll,
   List,
   Spinner,
+  Translate,
   usePublicQuery,
   useRoute,
 } from '~/components'
 import { SearchAggregateArticlesPublicQuery } from '~/gql/graphql'
 
+import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
 import styles from './styles.css'
-import ViewMoreButton from './ViewMoreButton'
 
 const AggregateArticleResults = () => {
   const { getQuery } = useRoute()
   const q = getQuery('q')
+  // TODO: Just test for team, will be removed when release
+  const version = getQuery('version')
+  const coefficients = getQuery('coefficients')
 
   /**
    * Data Fetching
    */
   // public data
-  const { data, loading } = usePublicQuery<SearchAggregateArticlesPublicQuery>(
-    SEARCH_AGGREGATE_ARTICLES_PUBLIC,
-    { variables: { key: q } }
-  )
+  const { data, loading, fetchMore } =
+    usePublicQuery<SearchAggregateArticlesPublicQuery>(
+      SEARCH_AGGREGATE_ARTICLES_PUBLIC,
+      {
+        variables: {
+          key: q,
+          version: version === '' ? undefined : version,
+          coefficients: coefficients === '' ? undefined : coefficients,
+        },
+      }
+    )
 
+  useEffect(() => {
+    analytics.trackEvent('load_more', {
+      type: 'search_article',
+      location: 0,
+      searchKey: q,
+    })
+  }, [])
+
+  // pagination
+  const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
 
   /**
@@ -36,45 +64,90 @@ const AggregateArticleResults = () => {
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
+    return (
+      <EmptySearch
+        description={
+          <Translate
+            zh_hant="沒有找到相關文章，換個關鍵詞試試？"
+            zh_hans="没有找到相关文章，换个关键词试试？"
+            en="No articles found. Try a different keyword?"
+          />
+        }
+      />
+    )
+  }
+
+  // load next page
+  const loadMore = () => {
+    analytics.trackEvent('load_more', {
+      type: 'search_article',
+      location: edges?.length || 0,
+      searchKey: q,
+    })
+
+    return fetchMore({
+      variables: {
+        first:
+          edges.length === MAX_SEARCH_RESULTS_LENGTH - 10
+            ? 10
+            : LATER_SEARCH_RESULTS_LENGTH,
+        after: pageInfo?.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
   }
 
   return (
     <section className="aggregate-section">
-      <List>
-        {edges.map(
-          ({ node, cursor }, i) =>
-            node.__typename === 'Article' && (
-              <List.Item key={cursor}>
-                <Card
-                  spacing={['base', 'base']}
-                  {...toPath({
-                    page: 'articleDetail',
-                    article: node,
-                  })}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'search',
-                      contentType: 'article',
-                      location: i,
-                      id: node.id,
-                    })
-                  }
-                >
-                  <ArticleDigestTitle
+      <InfiniteScroll
+        hasNextPage={
+          pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
+        }
+        loadMore={loadMore}
+      >
+        <List>
+          {edges.map(
+            ({ node, cursor }, i) =>
+              node.__typename === 'Article' && (
+                <List.Item key={cursor + node.id}>
+                  <ArticleDigestFeed
                     article={node}
-                    is="h3"
-                    textWeight="normal"
-                    textSize="md"
+                    is="link"
+                    isConciseFooter={true}
+                    hasCircle={false}
+                    hasFollow={false}
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'search_article',
+                        contentType: 'article',
+                        location: i,
+                        id: node.id,
+                        searchKey: q,
+                      })
+                    }
+                    onClickAuthor={() => {
+                      analytics.trackEvent('click_feed', {
+                        type: 'search_article',
+                        contentType: 'user',
+                        location: i,
+                        id: node.author.id,
+                        searchKey: q,
+                      })
+                    }}
                   />
-                </Card>
-              </List.Item>
-            )
-        )}
-      </List>
-
-      <ViewMoreButton q={q} type="article" />
-
+                </List.Item>
+              )
+          )}
+        </List>
+      </InfiniteScroll>
+      {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
+        <EndOfResults />
+      )}
       <style jsx>{styles}</style>
     </section>
   )
