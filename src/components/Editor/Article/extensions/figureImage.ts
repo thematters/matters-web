@@ -1,4 +1,5 @@
 import { Node } from '@tiptap/core'
+import { Plugin, PluginKey } from '@tiptap/pm/state'
 
 /**
  * FigureImage extension:
@@ -90,5 +91,23 @@ export const FigureImage = Node.create({
           )
         },
     }
+  },
+
+  addProseMirrorPlugins() {
+    return [
+      new Plugin({
+        key: new PluginKey('removePastedFigureImage'),
+        props: {
+          transformPastedHTML(html) {
+            // remove
+            html = html.replace(
+              /<figure.*class=.image.*[\n]*.*?<\/figure>/g,
+              ''
+            )
+            return html
+          },
+        },
+      }),
+    ]
   },
 })

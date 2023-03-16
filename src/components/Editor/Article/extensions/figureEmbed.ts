@@ -1,4 +1,5 @@
 import { Node } from '@tiptap/core'
+import { Plugin, PluginKey } from '@tiptap/pm/state'
 
 /**
  * FigureEmbed extension:
@@ -319,5 +320,23 @@ export const FigureEmbed = Node.create({
           )
         },
     }
+  },
+
+  addProseMirrorPlugins() {
+    return [
+      new Plugin({
+        key: new PluginKey('removePastedFigureEmbed'),
+        props: {
+          transformPastedHTML(html) {
+            // remove
+            html = html.replace(
+              /<figure.*class=.embed.*[\n]*.*?<\/figure>/g,
+              ''
+            )
+            return html
+          },
+        },
+      }),
+    ]
   },
 })
