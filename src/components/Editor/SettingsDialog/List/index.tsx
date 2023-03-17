@@ -4,6 +4,7 @@ import { SetPublishISCNProps } from '~/components/Editor'
 import ListItem from '../../ListItem'
 import { Step } from '../../SettingsDialog'
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
+import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
 import styles from './styles.css'
 
 export type SettingsListDialogButtons = {
@@ -23,6 +24,7 @@ export type SettingsListDialogProps = {
   collectionCount: number
   tagsCount: number
 } & SettingsListDialogButtons &
+  ToggleResponseProps &
   ToggleAccessProps &
   SetPublishISCNProps
 
@@ -41,8 +43,18 @@ const SettingsList = ({
   collectionCount,
   tagsCount,
 
+  canComment,
+  toggleComment,
+  disableChangeCanComment,
+
   ...restProps
 }: SettingsListDialogProps) => {
+  const responseProps: ToggleResponseProps = {
+    canComment,
+    toggleComment,
+    disableChangeCanComment,
+  }
+
   return (
     <>
       <Dialog.Header
@@ -82,6 +94,10 @@ const SettingsList = ({
           >
             <ListItem.NumberIndicator num={collectionCount} />
           </ListItem>
+
+          <section className="response">
+            <ToggleResponse {...responseProps} />
+          </section>
 
           <section className="access">
             <ToggleAccess {...restProps} />

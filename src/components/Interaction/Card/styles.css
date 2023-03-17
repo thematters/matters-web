@@ -11,6 +11,14 @@
   }
 }
 
+.active-outline-auto {
+  &:not(.disabled) {
+    &:focus {
+      outline: auto;
+    }
+  }
+}
+
 /* Background */
 .bg-white {
   background: var(--color-white);

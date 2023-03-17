@@ -18,9 +18,13 @@ const ArticlesCount = ({ tag }: ArticlesCountProps) => {
       <b>{numAbbr(totalCount)}</b>
       <span>
         &nbsp;
-        <FormattedMessage defaultMessage={`{totalCount, plural, =1 {article} other {articles}}`} description="" values={{
-          totalCount: numAbbr(totalCount)
-        }}/>
+        <FormattedMessage
+          defaultMessage={`{totalCount, plural, =1 {article} other {articles}}`}
+          description=""
+          values={{
+            totalCount: numAbbr(totalCount),
+          }}
+        />
       </span>
 
       <style jsx>{styles}</style>

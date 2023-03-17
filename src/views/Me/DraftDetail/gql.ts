@@ -35,6 +35,7 @@ export const editMetaFragment = gql`
     requestForDonation
     replyToDonator
     iscnPublish
+    canComment
   }
   ${ArticleDigestDropdown.fragments.article}
   ${assetFragment}
@@ -168,6 +169,16 @@ export const SET_SUPPORT_REQUEST_REPLY = gql`
 export const SET_PUBLISH_ISCN = gql`
   mutation SetDraftPublishISCN($id: ID!, $iscnPublish: Boolean) {
     putDraft(input: { id: $id, iscnPublish: $iscnPublish }) {
+      id
+      ...EditMetaDraft
+    }
+  }
+  ${editMetaFragment}
+`
+
+export const SET_CAN_COMMENT = gql`
+  mutation SetDraftCanComment($id: ID!, $canComment: Boolean) {
+    putDraft(input: { id: $id, canComment: $canComment }) {
       id
       ...EditMetaDraft
     }

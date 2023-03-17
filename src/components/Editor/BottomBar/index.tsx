@@ -16,8 +16,10 @@ import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import {
   SetCollectionProps,
   SetCoverProps,
+  SetResponseProps,
   SetTagsProps,
   ToggleAccessProps,
+  ToggleResponseProps,
 } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import {
@@ -37,6 +39,7 @@ export type BottomBarProps = {
 } & SetCoverProps &
   SetCollectionProps &
   SetTagsProps &
+  SetResponseProps &
   ToggleAccessProps
 
 /**
@@ -77,6 +80,9 @@ const BottomBar: React.FC<BottomBarProps> = ({
   togglePublishISCN,
   iscnPublishSaving,
 
+  canComment,
+  toggleComment,
+
   saving,
   disabled,
 }) => {
@@ -96,7 +102,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
     entityType,
     coverSaving,
   }
-  const accessProps: ToggleAccessProps = {
+  const accessProps: ToggleAccessProps & ToggleResponseProps = {
     circle,
     accessType,
     license,
@@ -113,6 +119,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
     iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,
+
+    canComment,
+    toggleComment,
+    disableChangeCanComment: article?.canComment,
   }
 
   return (
@@ -201,7 +211,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               )}
             </SearchSelectDialog>
 
-            {/* Circle & License & Support Feedback & ISCN */}
+            {/* Circle & License & Support Feedback & ISCN & canComment */}
             <AccessDialog {...accessProps}>
               {({ openDialog }) => (
                 <button

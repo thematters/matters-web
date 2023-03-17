@@ -719,10 +719,6 @@
     "defaultMessage": "You won't see announcements for 7 days",
     "description": "src/views/Home/Announcements/index.tsx"
   },
-  "pla6ZF": {
-    "defaultMessage": "Search articles, tags and authors",
-    "description": "src/components/Search/SearchBar/index.tsx"
-  },
   "3kbIhS": {
     "defaultMessage": "Untitled",
     "description": ""
@@ -1061,5 +1057,237 @@
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}",
     "description": ""
+  },
+  "ZAs170": {
+    "defaultMessage": "Profile",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
+  "DMlmcU": {
+    "defaultMessage": "Free Trial",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
+  "EQeKnO": {
+    "defaultMessage": "Manage Invitation",
+    "description": "src/views/Circle/Settings/index.tsx"
+  },
+  "KLQ1/z": {
+    "defaultMessage": "Circle successfully created",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "mjMpv4": {
+    "defaultMessage": "Circle Edited",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "ei+kyp": {
+    "defaultMessage": "Name of the Circle",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "tW3hM/": {
+    "defaultMessage": "Description of the Circle",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "CwWLOr": {
+    "defaultMessage": "Enter the name of your Circle",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "QUqfbW": {
+    "defaultMessage": "Describe more about your Circle",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "JXdbo8": {
+    "defaultMessage": "Done",
+    "description": ""
+  },
+  "q9oMKE": {
+    "defaultMessage": "Circle Name",
+    "description": ""
+  },
+  "QZXKhG": {
+    "defaultMessage": "Set the Circle URL (cannot be modified after creation)",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6BXcdo": {
+    "defaultMessage": "Set threshold for circle (per month)",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "VwuiYK": {
+    "defaultMessage": "This URL name has already been used, try another one",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "gMZZ9I": {
+    "defaultMessage": "Must be between 2-20 characters long. Only letters, numbers and underscores are allowed.",
+    "description": ""
+  },
+  "+7SAix": {
+    "defaultMessage": "Must be between 2-12 characters long.",
+    "description": ""
+  },
+  "eov+J2": {
+    "defaultMessage": "Custom URL Name",
+    "description": ""
+  },
+  "8KFsZN": {
+    "defaultMessage": "Read Counts",
+    "description": ""
+  },
+  "LOefol": {
+    "defaultMessage": "Paywalled",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+  },
+  "/podGX": {
+    "defaultMessage": "Public",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+  },
+  "mCAIcg": {
+    "defaultMessage": "Hottest",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
+  },
+  "lNjDPr": {
+    "defaultMessage": "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'.",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
+  "RxiHr/": {
+    "defaultMessage": "friends have not accepted your invitations.",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
+  },
+  "b8ogKp": {
+    "defaultMessage": "Add Invitation",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
+  },
+  "FmWYRt": {
+    "defaultMessage": "Free trial period",
+    "description": ""
+  },
+  "Bc20la": {
+    "defaultMessage": "days",
+    "description": ""
+  },
+  "O0QB1v": {
+    "defaultMessage": "Friends will receive free trial invitations to Circle. Set up your invitations now!",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "rXnmeE": {
+    "defaultMessage": "Confirm and Send",
+    "description": ""
+  },
+  "ptqBN1": {
+    "defaultMessage": "Not Now",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "tzq2+W": {
+    "defaultMessage": "Send",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "fWDtpq": {
+    "defaultMessage": "Pending",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "JpS59y": {
+    "defaultMessage": "Accepted",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "Bjdw71": {
+    "defaultMessage": "",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "xWZr13": {
+    "defaultMessage": "{follower, plural, =1 {follower} other {followers}}",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "GugBCe": {
+    "defaultMessage": "New Followers This Month",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "MDNaxs": {
+    "defaultMessage": "",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "zKOr2x": {
+    "defaultMessage": "Conversion Rate of Followers",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "AYTnjk": {
+    "defaultMessage": "Followers",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "sPgUkN": {
+    "defaultMessage": "This Month",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "Fe682o": {
+    "defaultMessage": "Next Month (Estimation)",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "L4NXXh": {
+    "defaultMessage": "Total",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "d4waan": {
+    "defaultMessage": "Income",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "6OBAOi": {
+    "defaultMessage": "",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "zxy15q": {
+    "defaultMessage": "{subscriber, plural, =1 {subscriber} other {subscribers}}",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "TSDiqB": {
+    "defaultMessage": "Subscribers",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "XHMco9": {
+    "defaultMessage": "",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "1qQzV0": {
+    "defaultMessage": "Invitees",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "WpvsPu": {
+    "defaultMessage": "Subscribe",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SNh1n0": {
+    "defaultMessage": "View Members",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "2CqWQE": {
+    "defaultMessage": "Total",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "y0b6Kp": {
+    "defaultMessage": "Pay",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "L0J61B": {
+    "defaultMessage": "Free",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SdXoXI": {
+    "defaultMessage": "Invitations have been sent. You can check invitation status on the invitation management page.",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
+  },
+  "OIj8pQ": {
+    "defaultMessage": "Invitation Sent",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
+  },
+  "lIir/P": {
+    "defaultMessage": "I see",
+    "description": ""
+  },
+  "2uwwz+": {
+    "defaultMessage": "Accumulated read time indicates the total time length that registered users read.",
+    "description": "src/components/Dialogs/HelpDialog/index.tsx"
+  },
+  "Z6cII7": {
+    "defaultMessage": "Accumulated Read Time",
+    "description": "src/components/Dialogs/HelpDialog/index.tsx"
+  },
+  "DXJ8ys": {
+    "defaultMessage": "Read counts indicates how many registered users read.",
+    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   }
 }

@@ -5,6 +5,7 @@ import FocusLock from 'react-focus-lock'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { PATHS, Z_INDEX } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import {
   Dropdown,
   hidePopperOnClick,
@@ -28,7 +29,7 @@ import NavListItem from './NavListItem'
 import styles from './styles.css'
 
 const SideNav = () => {
-  const { isInPath, isPathStartWith, getQuery } = useRoute()
+  const { router, isInPath, isPathStartWith, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
   const userName = getQuery('name')
@@ -104,7 +105,17 @@ const SideNav = () => {
             icon={<IconNavSearch24 size="md" />}
             activeIcon={<IconNavSearch24 size="md" color="green" />}
             active={isInSearch}
-            href={PATHS.SEARCH}
+            onClick={() => {
+              const path = toPath({
+                page: 'search',
+              })
+
+              if (isInSearch) {
+                router.replace(path.href)
+              } else {
+                router.push(path.href)
+              }
+            }}
           />
         </Media>
 

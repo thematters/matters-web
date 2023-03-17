@@ -25,6 +25,7 @@ export const EDIT_ARTICLE = gql`
     $first: first_Int_min_0 = null
     $requestForDonation: requestForDonation_String_maxLength_140
     $replyToDonator: replyToDonator_String_maxLength_140
+    $canComment: Boolean
   ) {
     editArticle(
       input: {
@@ -39,6 +40,7 @@ export const EDIT_ARTICLE = gql`
         iscnPublish: $iscnPublish
         requestForDonation: $requestForDonation
         replyToDonator: $replyToDonator
+        canComment: $canComment
       }
     ) {
       id
@@ -49,6 +51,7 @@ export const EDIT_ARTICLE = gql`
       access {
         type
       }
+      canComment
       license
       requestForDonation
       replyToDonator

@@ -41,6 +41,7 @@ const articlePublicFragment = gql`
         ...CircleWallCirclePrivate
       }
     }
+    canComment
     license
     requestForDonation
     replyToDonator

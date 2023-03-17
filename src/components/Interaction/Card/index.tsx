@@ -1,7 +1,14 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { AriaAttributes, AriaRole, forwardRef, useContext, useRef } from 'react'
+import {
+  AriaAttributes,
+  AriaRole,
+  forwardRef,
+  useContext,
+  useEffect,
+  useRef,
+} from 'react'
 
 import { KEYCODES, TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
@@ -23,6 +30,9 @@ export interface CardProps {
 
   borderColor?: CardBorderColor
   borderRadius?: CardBorderRadius
+
+  isActive?: boolean
+  activeOutline?: 'auto'
 
   href?: string
 
@@ -50,6 +60,9 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
       borderColor,
       borderRadius,
+
+      isActive,
+      activeOutline,
 
       href,
 
@@ -83,6 +96,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       [`bg-active-${bgActiveColor}`]: !!bgActiveColor,
       [`border-${borderColor}`]: !!borderColor,
       [`border-radius-${borderRadius}`]: !!borderRadius,
+      ['active-outline-auto']: !!activeOutline,
 
       hasBorder: !!borderColor || !!borderRadius,
       disabled,
@@ -156,6 +170,12 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         cardRef.current.blur()
       }
     }
+
+    useEffect(() => {
+      if (cardRef && isActive) {
+        cardRef.current.focus()
+      }
+    }, [cardRef, isActive])
 
     if (is === 'link' && href) {
       return (

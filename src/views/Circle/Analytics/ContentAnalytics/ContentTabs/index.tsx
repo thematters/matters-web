@@ -1,4 +1,6 @@
-import { Help, Tabs, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Help, Tabs } from '~/components'
 
 export type CircleContentAnalyticsType = 'public' | 'paywall'
 
@@ -14,11 +16,17 @@ const ContentTabs: React.FC<Props> = ({ type, setType }) => {
   return (
     <Tabs side={<Help hasCount />}>
       <Tabs.Tab onClick={() => setType('paywall')} selected={isPaywall}>
-        <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
+        <FormattedMessage
+          defaultMessage="Paywalled"
+          description="src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+        />
       </Tabs.Tab>
 
       <Tabs.Tab onClick={() => setType('public')} selected={isPublic}>
-        <Translate zh_hant="公開" zh_hans="公开" en="Public" />
+        <FormattedMessage
+          defaultMessage="Public"
+          description="src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+        />
       </Tabs.Tab>
     </Tabs>
   )
