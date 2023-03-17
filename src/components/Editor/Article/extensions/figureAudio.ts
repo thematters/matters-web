@@ -1,4 +1,5 @@
 import { Node } from '@tiptap/core'
+import { Plugin, PluginKey } from '@tiptap/pm/state'
 
 /**
  * FigureAudio extension:
@@ -150,5 +151,23 @@ export const FigureAudio = Node.create({
           )
         },
     }
+  },
+
+  addProseMirrorPlugins() {
+    return [
+      new Plugin({
+        key: new PluginKey('removePastedFigureAudio'),
+        props: {
+          transformPastedHTML(html) {
+            // remove
+            html = html.replace(
+              /<figure.*class=.audio.*[\n]*.*?<\/figure>/g,
+              ''
+            )
+            return html
+          },
+        },
+      }),
+    ]
   },
 })

@@ -18,7 +18,6 @@ import Paragraph from '@tiptap/extension-paragraph'
 import Placeholder from '@tiptap/extension-placeholder'
 import Strike from '@tiptap/extension-strike'
 import Text from '@tiptap/extension-text'
-import Underline from '@tiptap/extension-underline'
 import { EditorContent, useEditor } from '@tiptap/react'
 import { useContext } from 'react'
 
@@ -95,11 +94,9 @@ const ArticleEditor: React.FC<Props> = ({
       Strike,
       Italic,
       Bold,
-      Underline,
       Code,
       CodeBlock,
       Blockquote,
-      HorizontalRule,
       HardBreak,
       HorizontalRule,
       History,
