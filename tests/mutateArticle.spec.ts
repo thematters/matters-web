@@ -16,25 +16,12 @@ import {
   waitForAPIResponse,
 } from './helpers'
 
-test.describe.only('Mutate article', () => {
+test.describe('Mutate article', () => {
   authedTest(
     "Alice' article is appreciation by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile, request }) => {
       // [Alice] create and publish new article
       await publishDraft({ page: alicePage, isMobile })
-
-      // const mediaHashState = await request.post(
-      //   'https://server-develop.matters.news/graphql',
-      //   {
-      //     data: {
-      //       variables: {},
-      //       query:
-      //         '{\n  node(input: {id: "QXJ0aWNsZTo5MDI2"}) {\n    ... on Article {\n      id\n      mediaHash\n    }\n  }\n}\n',
-      //     },
-      //   }
-      // )
-      // console.log({ mediaHashState })
-      // console.log(await mediaHashState.json())
 
       // [Alice] Get new article link
       const aliceArticleLink = alicePage.url()
@@ -190,7 +177,7 @@ test.describe.only('Mutate article', () => {
 
     await secondArticle.getByRole('button', { name: 'More Actions' }).click()
     const pinButton = await alicePage
-      .getByRole('menuitem', { name: 'Article pinned' })
+      .getByRole('menuitem', { name: 'Pin article' })
       .locator('section')
     await Promise.all([
       waitForAPIResponse({
@@ -232,5 +219,26 @@ test.describe.only('Mutate article', () => {
       stripSpaces(firstArticleTitle) !==
         stripSpaces(firstArticleTitleAfterUnpin)
     ).toBeTruthy()
+  })
+
+  authedTest('revise article', async ({ alicePage, isMobile }) => {
+    // [Alice] create and publish new article
+    const article = await publishDraft({ page: alicePage, isMobile })
+
+    const aliceArticleDetail = new ArticleDetailPage(alicePage, isMobile)
+    // revise article
+    aliceArticleDetail.editArticle()
+
+    const draftDetail = new DraftDetailPage(alicePage, isMobile)
+    await draftDetail.dialogEditButton.click()
+    const newContent = 'revise article ' + article.content
+    await draftDetail.contentInput.fill(newContent)
+    await draftDetail.rePublish()
+
+    // Goto republished article page
+    await draftDetail.dialogViewRepublishedArticle.click()
+    await alicePage.waitForLoadState('networkidle')
+    const articleContent = await aliceArticleDetail.content.innerText()
+    expect(stripSpaces(articleContent)).toBe(stripSpaces(newContent))
   })
 })

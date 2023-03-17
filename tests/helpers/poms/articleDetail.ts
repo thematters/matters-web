@@ -41,6 +41,7 @@ export class ArticleDetailPage {
   readonly toolbarViewSupportersButton: Locator
   readonly toolbarIPFSButton: Locator
   readonly toolbarCollectButton: Locator
+  readonly toolbarEditButton: Locator
 
   // dialog
   readonly dialog: Locator
@@ -98,6 +99,9 @@ export class ArticleDetailPage {
     this.toolbarIPFSButton = this.page.getByRole('menuitem', { name: 'IPFS' })
     this.toolbarCollectButton = this.page.getByRole('menuitem', {
       name: 'Collect Article',
+    })
+    this.toolbarEditButton = this.page.getByRole('menuitem', {
+      name: 'Edit',
     })
 
     // dialog
@@ -184,6 +188,11 @@ export class ArticleDetailPage {
   async forkArticle() {
     await this.toolbarMoreButton.click()
     await this.toolbarCollectButton.click()
+  }
+
+  async editArticle() {
+    await this.toolbarMoreButton.click()
+    await this.toolbarEditButton.click()
   }
 
   async supportHKD(password: string, amount: number) {
