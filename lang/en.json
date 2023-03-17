@@ -1126,9 +1126,9 @@
     "defaultMessage": "Custom URL Name",
     "description": ""
   },
-  "fOFrqV": {
+  "8KFsZN": {
     "defaultMessage": "Read Counts",
-    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentDigest/index.tsx"
+    "description": ""
   },
   "LOefol": {
     "defaultMessage": "Paywalled",
@@ -1277,5 +1277,17 @@
   "lIir/P": {
     "defaultMessage": "I see",
     "description": ""
+  },
+  "2uwwz+": {
+    "defaultMessage": "Accumulated read time indicates the total time length that registered users read.",
+    "description": "src/components/Dialogs/HelpDialog/index.tsx"
+  },
+  "Z6cII7": {
+    "defaultMessage": "Accumulated Read Time",
+    "description": "src/components/Dialogs/HelpDialog/index.tsx"
+  },
+  "DXJ8ys": {
+    "defaultMessage": "Read counts indicates how many registered users read.",
+    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   }
 }
