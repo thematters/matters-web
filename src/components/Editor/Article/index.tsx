@@ -97,7 +97,6 @@ const ArticleEditor: React.FC<Props> = ({
       Code,
       CodeBlock,
       Blockquote,
-      HorizontalRule,
       HardBreak,
       HorizontalRule,
       History,

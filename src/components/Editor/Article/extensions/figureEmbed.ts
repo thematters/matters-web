@@ -261,7 +261,8 @@ export const FigureEmbed = Node.create({
   parseHTML() {
     return [
       {
-        tag: 'figure[class="embed"]',
+        // match "embed", "embed-video", "embed-code" for backward compatibility
+        tag: 'figure[class^="embed"]',
         contentElement: 'figcaption',
       },
     ]
