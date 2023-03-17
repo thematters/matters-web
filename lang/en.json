@@ -79,6 +79,10 @@
     "defaultMessage": "Likes",
     "description": ""
   },
+  "2uwwz+": {
+    "defaultMessage": "Accumulated read time indicates the total time length that registered users read.",
+    "description": "src/components/Dialogs/HelpDialog/index.tsx"
+  },
   "32bml8": {
     "defaultMessage": "Following",
     "description": "src/components/Layout/SideNav/index.tsx"
@@ -174,6 +178,10 @@
   "7xnrxG": {
     "defaultMessage": "The article has been added to the Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "8KFsZN": {
+    "defaultMessage": "Read Counts",
+    "description": ""
   },
   "8cv9D4": {
     "defaultMessage": "Next Step",
@@ -278,6 +286,10 @@
   "DMlmcU": {
     "defaultMessage": "Free Trial",
     "description": "src/views/Circle/Settings/index.tsx"
+  },
+  "DXJ8ys": {
+    "defaultMessage": "Read counts indicates how many registered users read.",
+    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.",
@@ -559,6 +571,10 @@
     "defaultMessage": "friends have not accepted your invitations.",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
+  "SENRqu": {
+    "defaultMessage": "Help",
+    "description": ""
+  },
   "SNh1n0": {
     "defaultMessage": "View Members",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -695,6 +711,10 @@
     "defaultMessage": " Broadcast and mentioned you ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "Z6cII7": {
+    "defaultMessage": "Accumulated Read Time",
+    "description": "src/components/Dialogs/HelpDialog/index.tsx"
+  },
   "Z6ewE3": {
     "defaultMessage": "Build Together",
     "description": "src/views/Me/Settings/AnonymousSettings/Enhance/index.tsx"
@@ -826,10 +846,6 @@
   "fG41Ux": {
     "defaultMessage": "Logged out successfully",
     "description": ""
-  },
-  "fOFrqV": {
-    "defaultMessage": "Read Counts",
-    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentDigest/index.tsx"
   },
   "fOgusL": {
     "defaultMessage": "Choose a method to enter",
