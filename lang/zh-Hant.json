@@ -79,6 +79,10 @@
     "defaultMessage": "我的讚賞",
     "description": ""
   },
+  "2uwwz+": {
+    "defaultMessage": "累計閱讀時數代表了你的作品被登入用戶閱讀的總時數，每次閱讀過程超過一定時間後才會計入。此外，同一個用戶的多次閱讀也會進行累計。",
+    "description": "src/components/Dialogs/HelpDialog/index.tsx"
+  },
   "32bml8": {
     "defaultMessage": "追蹤",
     "description": "src/components/Layout/SideNav/index.tsx"
@@ -174,6 +178,10 @@
   "7xnrxG": {
     "defaultMessage": "作品已添加至精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "8KFsZN": {
+    "defaultMessage": "閱讀次數",
+    "description": ""
   },
   "8cv9D4": {
     "defaultMessage": "Next Step",
@@ -278,6 +286,10 @@
   "DMlmcU": {
     "defaultMessage": "免費資格",
     "description": "src/views/Circle/Settings/index.tsx"
+  },
+  "DXJ8ys": {
+    "defaultMessage": "閱讀次數代表了你的作品被登入用戶閱讀的總次數，每次閱讀過程超過一定時間後才會計入。此外，同一個用戶的多次閱讀也會進行累計。",
+    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "E8W3qa": {
     "defaultMessage": "2-20 個字元",
@@ -559,6 +571,10 @@
     "defaultMessage": "還沒有任何用戶回覆你的邀請喔！",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
+  "SENRqu": {
+    "defaultMessage": "Help",
+    "description": ""
+  },
   "SNh1n0": {
     "defaultMessage": "查看名單",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -695,6 +711,10 @@
     "defaultMessage": " 廣播中留言，其中有提及你 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "Z6cII7": {
+    "defaultMessage": "累計閱讀時數",
+    "description": "src/components/Dialogs/HelpDialog/index.tsx"
+  },
   "Z6ewE3": {
     "defaultMessage": "參與開發",
     "description": "src/views/Me/Settings/AnonymousSettings/Enhance/index.tsx"
@@ -826,10 +846,6 @@
   "fG41Ux": {
     "defaultMessage": "登出成功",
     "description": ""
-  },
-  "fOFrqV": {
-    "defaultMessage": "閱讀次數",
-    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentDigest/index.tsx"
   },
   "fOgusL": {
     "defaultMessage": "選擇進入方式",
