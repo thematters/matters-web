@@ -8,6 +8,8 @@ export enum TEST_ID {
   DIGEST_ARTICLE_SIDEBAR = 'digest/article/sidebar',
   DIGEST_ARTICLE_TITLE = 'digest/article/title',
   DIGEST_USER_MINI = 'digest/user/mini',
+  DIGEST_USER_MINI_DISPLAY_NAME = 'digest/user/mini/display-name',
+  DIGEST_USER_MINI_USER_NAME = 'digest/user/mini/user-name',
   DIGEST_USER_PLAIN = 'digest/user/plain',
   DIGEST_USER_RICH = 'digest/user/rich',
   DIGEST_USER_RICH_DISPLAY_NAME = 'digest/user/rich/display-name',
@@ -32,6 +34,7 @@ export enum TEST_ID {
   ARTICLE_APPRECIATION_TOTAL = 'article/appreciation/total',
   ARTICLE_TOOLBAR = 'article/toolbar',
   ARTICLE_BOOKMARK = 'article/bookmark',
+  ARTICLE_COMMENT_FEED = 'article/comment/feed',
   // payto
   PAY_TO_CURRENCY_CHOICE = 'payto/currency-choice',
   // comment
@@ -77,6 +80,7 @@ export enum TEST_ID {
   // user profile
   USER_PROFILE = 'user-profile',
   USER_PROFILE_DISPLAY_NAME = 'user-profile/display-name',
+  USER_PROFILE_USER_NAME = 'user-profile/user-name',
   USER_PROFILE_FOLLOWERS_COUNT = 'user-profile/followers/count',
   USER_PROFILE_BIO = 'user-profile/bio',
 

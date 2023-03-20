@@ -16,6 +16,7 @@ export class UserProfilePage {
 
   // profile
   displayName: Locator
+  userName: Locator
   bio: Locator
   // followButton: Locator
   // rssButton: Locator
@@ -48,6 +49,7 @@ export class UserProfilePage {
 
     // profile
     this.displayName = page.getByTestId(TEST_ID.USER_PROFILE_DISPLAY_NAME)
+    this.userName = page.getByTestId(TEST_ID.USER_PROFILE_USER_NAME)
     this.bio = page.getByTestId(TEST_ID.USER_PROFILE_BIO)
 
     // feeds
