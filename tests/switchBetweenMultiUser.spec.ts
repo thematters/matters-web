@@ -14,6 +14,7 @@ import {
 
 test.describe('Switch between multiple users', () => {
   authedTest('Same context', async ({ alicePage: page, isMobile }) => {
+    test.skip(!!isMobile, 'Desktop only!')
     await pageGoto(page, '/')
     const firstArticleLink = (await page
       .getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
@@ -64,6 +65,7 @@ test.describe('Switch between multiple users', () => {
   })
 
   test('Different Context', async ({ browser, isMobile }) => {
+    test.skip(!!isMobile, 'Desktop only!')
     const aliceContext = await browser.newContext()
     const bobContext = await browser.newContext()
 
