@@ -1,5 +1,6 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ADD_TOAST } from '~/common/enums'
-import { Translate } from '~/components'
 
 import AppreciateButton from './AppreciateButton'
 
@@ -18,7 +19,12 @@ const ForbiddenButton = ({
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id="FORBIDDEN_BY_STATE" />,
+            content: (
+              <FormattedMessage
+                defaultMessage="You do not have permission to perform this operation"
+                description=""
+              />
+            ),
           },
         })
       )

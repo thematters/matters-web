@@ -1,8 +1,9 @@
 import _get from 'lodash/get'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useMutation } from '~/components'
+import { Dialog, useMutation } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 import SearchingArea, {
@@ -90,10 +91,9 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
         detail: {
           color: 'green',
           content: (
-            <Translate
-              zh_hant="添加協作者成功"
-              zh_hans="添加协作者成功"
-              en="successfully added collaborator"
+            <FormattedMessage
+              defaultMessage="successfully added collaborator"
+              description="src/components/Dialogs/TagEditorDialog/SearchSelect/index.tsx"
             />
           ),
           duration: 2000,
@@ -113,7 +113,7 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
         rightButton={
           <Dialog.Header.RightButton
             onClick={onClickSave}
-            text={<Translate id="save" />}
+            text={<FormattedMessage defaultMessage="Save" description="" />}
             loading={loading}
           />
         }

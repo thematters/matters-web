@@ -1,15 +1,10 @@
 import classNames from 'classnames'
-import { useContext, useRef } from 'react'
+import { useRef } from 'react'
+import { useIntl } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { numAbbr, translate } from '~/common/utils'
-import {
-  Button,
-  IconClap16,
-  IconSuperLike,
-  LanguageContext,
-  TextIcon,
-} from '~/components'
+import { numAbbr } from '~/common/utils'
+import { Button, IconClap16, IconSuperLike, TextIcon } from '~/components'
 
 import * as clap from './clap'
 import clapStyles from './styles.clap.css'
@@ -32,8 +27,6 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   isSuperLike,
   superLiked,
 }) => {
-  const { lang } = useContext(LanguageContext)
-
   const iconRef = useRef<HTMLButtonElement>(null)
   const buttonClasses = classNames({
     'appreciate-button': true,
@@ -41,17 +34,22 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
     superLiked,
   })
 
+  const intl = useIntl()
   return (
     <span className={buttonClasses}>
       <Button
         spacing={['xtight', 'xtight']}
         bgActiveColor="grey-lighter"
-        aria-label={translate({
-          zh_hant: `讚賞作品（當前 ${total} 次讚賞）`,
-          zh_hans: `赞赏作品（当前 ${total} 次赞赏）`,
-          en: `like article (current ${total} likes)`,
-          lang,
-        })}
+        aria-label={intl.formatMessage(
+          {
+            defaultMessage: 'like article (current {total} likes)',
+            description:
+              'src/views/ArticleDetail/AppreciationButton/AppreciateButton.tsx',
+          },
+          {
+            total: total,
+          }
+        )}
         disabled={disabled}
         onClick={() => {
           if (iconRef.current) {

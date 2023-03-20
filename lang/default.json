@@ -3,6 +3,14 @@
     "defaultMessage": "Must be between 2-12 characters long.",
     "description": ""
   },
+  "+Iij5/": {
+    "defaultMessage": "Tags added",
+    "description": "src/views/TagDetail/Buttons/AddButton/index.tsx"
+  },
+  "+Wriay": {
+    "defaultMessage": "Learn more about",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
   "+a+2ug": {
     "defaultMessage": "Members",
     "description": ""
@@ -27,6 +35,10 @@
     "defaultMessage": "Top Supporters",
     "description": ""
   },
+  "/QyzAs": {
+    "defaultMessage": "This work is archived due to violation of community guidelines.",
+    "description": "src/views/ArticleDetail/index.tsx"
+  },
   "/asuIY": {
     "defaultMessage": "Enter Community",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
@@ -46,6 +58,14 @@
   "0Azlrb": {
     "defaultMessage": "Manage",
     "description": ""
+  },
+  "0H2P0/": {
+    "defaultMessage": "are you sure",
+    "description": ""
+  },
+  "0uqmQG": {
+    "defaultMessage": "Register now",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
   },
   "1EYCdR": {
     "defaultMessage": "Tags",
@@ -99,6 +119,10 @@
     "defaultMessage": "Untitled",
     "description": ""
   },
+  "3od/Z7": {
+    "defaultMessage": "You can't send Likes yet",
+    "description": "src/views/ArticleDetail/AppreciationButton/index.tsx"
+  },
   "3uQKhx": {
     "defaultMessage": "Please email",
     "description": "src/views/Help/index.tsx"
@@ -110,6 +134,10 @@
   "3ynsJ3": {
     "defaultMessage": "Want to know more? Check the",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
+  "43hX19": {
+    "defaultMessage": "resign as tag maintainer",
+    "description": "src/components/Dialogs/TagLeaveDialog/index.tsx"
   },
   "47FYwb": {
     "defaultMessage": "Cancel",
@@ -147,6 +175,10 @@
     "defaultMessage": "This tag has no manager currently",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
+  "67Ksb8": {
+    "defaultMessage": "Tag name does not allow punctuations, only one space is allowed between words, and the maximum length is 50 characters",
+    "description": ""
+  },
   "69+D96": {
     "defaultMessage": "Start Creating",
     "description": ""
@@ -179,6 +211,10 @@
     "defaultMessage": "The article has been added to the Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
+  "85Q9pg": {
+    "defaultMessage": "Unlock",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
   "8KFsZN": {
     "defaultMessage": "Read Counts",
     "description": ""
@@ -197,6 +233,10 @@
   },
   "9+Ddtu": {
     "defaultMessage": "Next",
+    "description": ""
+  },
+  "9a9+ww": {
+    "defaultMessage": "Title",
     "description": ""
   },
   "9nNpKP": {
@@ -258,6 +298,18 @@
   "BjzRe8": {
     "defaultMessage": ". Take a look at your income",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
+  "Bp4lAF": {
+    "defaultMessage": "You sent a Super Like to this article!",
+    "description": "src/views/ArticleDetail/AppreciationButton/index.tsx"
+  },
+  "C+AHnI": {
+    "defaultMessage": "After adopting the tag, you become the maintainer of it. You can set the cover and description of the tag, and add works to selected feed. You can use it for writing collection, curation, or subcommunity and group discussions, be creative and discover new usages!",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
+  "CCUcLm": {
+    "defaultMessage": "Every tag can have maximum",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
   },
   "Cdkhl8": {
     "defaultMessage": "Delete {commentType}",
@@ -367,6 +419,14 @@
     "defaultMessage": "Related Tags",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
+  "HOsSgX": {
+    "defaultMessage": "More info",
+    "description": ""
+  },
+  "HnZtoN": {
+    "defaultMessage": "like article (current {total} likes)",
+    "description": "src/views/ArticleDetail/AppreciationButton/AppreciateButton.tsx"
+  },
   "HtSDyc": {
     "defaultMessage": "Help Center",
     "description": ""
@@ -394,6 +454,10 @@
   "J+dIsA": {
     "defaultMessage": "Subscriptions",
     "description": ""
+  },
+  "J0U9fp": {
+    "defaultMessage": "Title",
+    "description": "src/components/Dialogs/TagDialog/Content.tsx"
   },
   "J3yk6u": {
     "defaultMessage": "in circle",
@@ -467,13 +531,25 @@
     "defaultMessage": "Paywalled",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
+  "LV1tSz": {
+    "defaultMessage": "remove",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
   "LW1aX1": {
     "defaultMessage": "Congrats!",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "LZO6p7": {
+    "defaultMessage": "more collaborators.",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "LfJeg6": {
+    "defaultMessage": "You can add",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
   },
   "LphWYP": {
     "defaultMessage": "Terms and Privacy Policy",
@@ -503,9 +579,17 @@
     "defaultMessage": "Notifications",
     "description": ""
   },
+  "NArUKy": {
+    "defaultMessage": "Sorry, the author has disabled likes for this article.",
+    "description": "src/views/ArticleDetail/AppreciationButton/BlockedButton.tsx"
+  },
   "NONfAh": {
     "defaultMessage": "Douban",
     "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "NbgEil": {
+    "defaultMessage": "Tag Updated",
+    "description": "src/components/Dialogs/TagDialog/Content.tsx"
   },
   "NzfL1d": {
     "defaultMessage": "Enter password again",
@@ -535,6 +619,10 @@
     "defaultMessage": "liked your article",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
+  "Pmz7Da": {
+    "defaultMessage": "Collaborator can manage selected feed with you.",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
   "Po+kJe": {
     "defaultMessage": "Last {month} month",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -542,6 +630,10 @@
   "Pp/0po": {
     "defaultMessage": "Shuffle",
     "description": ""
+  },
+  "Pp/0px": {
+    "defaultMessage": "After resignation, you will not be able to manage tags.",
+    "description": "src/components/Dialogs/TagLeaveDialog/index.tsx"
   },
   "Q8Qw5B": {
     "defaultMessage": "Description",
@@ -562,6 +654,10 @@
   "QZXKhG": {
     "defaultMessage": "Set the Circle URL (cannot be modified after creation)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "QsxVW6": {
+    "defaultMessage": "Confirm Removal",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
   },
   "RFzVUD": {
     "defaultMessage": "Unpin Broadcast",
@@ -587,6 +683,10 @@
     "defaultMessage": "Required",
     "description": ""
   },
+  "SpB7QT": {
+    "defaultMessage": "Search Tags...",
+    "description": ""
+  },
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again.",
     "description": ""
@@ -598,6 +698,10 @@
   "TSDiqB": {
     "defaultMessage": "Subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "TV9qFl": {
+    "defaultMessage": "Your claps weighs more on the distribution from Creators Fund",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
   },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
@@ -611,6 +715,10 @@
     "defaultMessage": "commented on your bookmarked article",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
+  "U3B1sn": {
+    "defaultMessage": "Resignation Success",
+    "description": "src/components/Dialogs/TagLeaveDialog/index.tsx"
+  },
   "U9IXic": {
     "defaultMessage": "Add Articles",
     "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
@@ -622,6 +730,10 @@
   "UOdEqi": {
     "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "UUXMXL": {
+    "defaultMessage": "Adopt successfully",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
   },
   "UgvfcU": {
     "defaultMessage": "You have successfully completed Ethereum wallet settings. Please confirm wallet address:",
@@ -655,6 +767,10 @@
     "defaultMessage": "Responses",
     "description": ""
   },
+  "WDqM38": {
+    "defaultMessage": "successfully removed collaborator",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
+  },
   "WSUAwk": {
     "defaultMessage": "Add to Featured",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
@@ -667,6 +783,10 @@
     "defaultMessage": "Followers of {circleName}",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
   },
+  "WxcJPW": {
+    "defaultMessage": "Hmm... It seems the author has hidden this work. Go see something else",
+    "description": "src/views/ArticleDetail/index.tsx"
+  },
   "X+Xvgq": {
     "defaultMessage": "Unpin Comment",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -678,6 +798,10 @@
   "XHMco9": {
     "defaultMessage": "subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "XPdD+7": {
+    "defaultMessage": "Submit",
+    "description": "src/views/TagDetail/Buttons/AddButton/index.tsx"
   },
   "XVYrS/": {
     "defaultMessage": "No followers yet",
@@ -734,6 +858,10 @@
   "ZjDH42": {
     "defaultMessage": "About Us",
     "description": ""
+  },
+  "Zr5ruG": {
+    "defaultMessage": "You can send another Super Like after 12:00 or 00:00",
+    "description": "src/views/ArticleDetail/AppreciationButton/index.tsx"
   },
   "aa0nss": {
     "defaultMessage": "Unpin from Trending",
@@ -803,6 +931,14 @@
     "defaultMessage": "Income",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "d9T8xn": {
+    "defaultMessage": "Let me think about it",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
+  "dOFRsw": {
+    "defaultMessage": "Description",
+    "description": "src/components/Dialogs/TagDialog/Content.tsx"
+  },
   "deEeEI": {
     "defaultMessage": "Register",
     "description": ""
@@ -839,6 +975,10 @@
     "defaultMessage": "Custom URL Name",
     "description": ""
   },
+  "erb+1a": {
+    "defaultMessage": "Tag Created",
+    "description": "src/components/Dialogs/TagDialog/Content.tsx"
+  },
   "euNJsE": {
     "defaultMessage": "A new article has been added to the circle, read it now!",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
@@ -855,6 +995,10 @@
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fginnA": {
+    "defaultMessage": "Civic Liker benefits",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
   "ftD7Hy": {
     "defaultMessage": "mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
@@ -870,6 +1014,10 @@
   "gMZfHO": {
     "defaultMessage": "RSS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "gs1IkZ": {
+    "defaultMessage": "After removal,",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
   },
   "h9CG9E": {
     "defaultMessage": "{commentType} has been deleted",
@@ -898,6 +1046,10 @@
   "i/4KO2": {
     "defaultMessage": "This account is archived due to violation of community guidelines",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "i222B+": {
+    "defaultMessage": "Add collaborator",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
   },
   "iCFXtS": {
     "defaultMessage": "For unregistered or users enabled wallet login",
@@ -935,6 +1087,10 @@
     "defaultMessage": "Code will expire after 20 minutes",
     "description": ""
   },
+  "jeY76+": {
+    "defaultMessage": "Adopt Tag",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
   "jgLiba": {
     "defaultMessage": "Enter verification code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -946,6 +1102,10 @@
   "k5NnNF": {
     "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
+  },
+  "kEItwS": {
+    "defaultMessage": "enter Description...",
+    "description": ""
   },
   "kc79d3": {
     "defaultMessage": "Topics",
@@ -974,6 +1134,10 @@
   "ll/ufR": {
     "defaultMessage": "Trending",
     "description": ""
+  },
+  "lmm86y": {
+    "defaultMessage": "user will not be able to manage selected feed.",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
   },
   "mCAIcg": {
     "defaultMessage": "Hottest",
@@ -1026,6 +1190,10 @@
     "defaultMessage": "Back to All",
     "description": ""
   },
+  "oCzg72": {
+    "defaultMessage": "Confirm Resignation",
+    "description": "src/components/Dialogs/TagLeaveDialog/index.tsx"
+  },
   "oIkacT": {
     "defaultMessage": "Article is hidden",
     "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
@@ -1038,6 +1206,10 @@
     "defaultMessage": "Following",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "p6Jp9Z": {
+    "defaultMessage": "confirm collaborator removal",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
+  },
   "pRV+UD": {
     "defaultMessage": "Collapse",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
@@ -1045,6 +1217,10 @@
   "ptqBN1": {
     "defaultMessage": "Not Now",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "pwZW9s": {
+    "defaultMessage": "Civic Liker is a movement to reward good content and encourage openness. Be a Civil Liker to enjoy the following privileges:",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
   },
   "pwlQEY": {
     "defaultMessage": "Display Name",
@@ -1057,6 +1233,10 @@
   "q+N5Wd": {
     "defaultMessage": "Manage Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "q/VoOr": {
+    "defaultMessage": "Translating by Google...",
+    "description": "src/views/ArticleDetail/index.tsx"
   },
   "q9oMKE": {
     "defaultMessage": "Circle Name",
@@ -1081,6 +1261,10 @@
   "qswU4E": {
     "defaultMessage": "Email will not be used as a login but only as a contact channel.",
     "description": ""
+  },
+  "qyFrf3": {
+    "defaultMessage": "twice a day at noon and midnight during promotion period.",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
   },
   "qyzJxi": {
     "defaultMessage": "Logbook 1.0",
@@ -1186,9 +1370,17 @@
     "defaultMessage": "Circle",
     "description": ""
   },
+  "vtRFQF": {
+    "defaultMessage": "collaborators.",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
   "wEQDC6": {
     "defaultMessage": "Edit",
     "description": ""
+  },
+  "wS475G": {
+    "defaultMessage": "send Likes to others",
+    "description": "src/views/ArticleDetail/AppreciationButton/index.tsx"
   },
   "wSEOxH": {
     "defaultMessage": "Contact Channel",
@@ -1205,6 +1397,10 @@
   "wqaNK4": {
     "defaultMessage": "in your circle",
     "description": ""
+  },
+  "wzidgK": {
+    "defaultMessage": "A light ring appears around your profile to show your splendor",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
   },
   "xGh9O7": {
     "defaultMessage": "As a reminder, the email address will not be used as a login but only as a contact channel.",
@@ -1234,6 +1430,10 @@
     "defaultMessage": "Language",
     "description": ""
   },
+  "yF+yXj": {
+    "defaultMessage": "successfully added collaborator",
+    "description": "src/components/Dialogs/TagEditorDialog/SearchSelect/index.tsx"
+  },
   "ySGgTo": {
     "defaultMessage": "Add Articles into Featured",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -1241,6 +1441,10 @@
   "yZfKI4": {
     "defaultMessage": "discussion and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "yq7eqf": {
+    "defaultMessage": "Maintain immediately",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
   },
   "z4NaU2": {
     "defaultMessage": "Your",

@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Button,
@@ -6,7 +7,6 @@ import {
   QueryError,
   Spinner,
   TextIcon,
-  Translate,
   UserDigest,
 } from '~/components'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
@@ -50,7 +50,10 @@ const RemoveButton = ({ remove }: { remove: () => void }) => (
       onClick={() => remove()}
     >
       <TextIcon size="xs" color="grey-dark" weight="md">
-        <Translate zh_hant="移除" zh_hans="移除" en="remove" />
+        <FormattedMessage
+          defaultMessage="remove"
+          description="src/components/Dialogs/TagEditorDialog/List/index.tsx"
+        />
       </TextIcon>
     </Button>
     <style jsx>{styles}</style>
@@ -102,7 +105,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
               user={tag.owner}
               hasDescriptionReplacement
               descriptionReplacement={
-                <Translate zh_hant="主理人" zh_hans="主理人" en="maintainer" />
+                <FormattedMessage defaultMessage="Maintainer" description="" />
               }
               spacing={['tight', 'base']}
             />
@@ -120,10 +123,9 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                     hasDescriptionReplacement
                     hasFollow={false}
                     descriptionReplacement={
-                      <Translate
-                        zh_hant="協作者"
-                        zh_hans="协作者"
-                        en="collaborator"
+                      <FormattedMessage
+                        defaultMessage="collaborators"
+                        description=""
                       />
                     }
                     extraButton={
@@ -141,39 +143,34 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
 
         <Dialog.Message>
           <p className="hint">
-            <Translate
-              zh_hant="協作者可以與你共同管理精選"
-              zh_hans="协作者可以与你共同管理精选"
-              en="Collaborator can manage selected feed with you."
+            <FormattedMessage
+              defaultMessage="Collaborator can manage selected feed with you."
+              description="src/components/Dialogs/TagEditorDialog/List/index.tsx"
             />
             <br />
             {(isHavingNoneEditors || isReachingLimit) && (
               <>
-                <Translate
-                  zh_hant="每個標籤最多添加"
-                  zh_hans="每个标签最多添加"
-                  en="Every tag can have maximum"
+                <FormattedMessage
+                  defaultMessage="Every tag can have maximum"
+                  description="src/components/Dialogs/TagEditorDialog/List/index.tsx"
                 />
                 <span className="count"> 4 </span>
-                <Translate
-                  zh_hant="名協作者"
-                  zh_hans="名协作者"
-                  en="collaborators."
+                <FormattedMessage
+                  defaultMessage="collaborators."
+                  description="src/components/Dialogs/TagEditorDialog/List/index.tsx"
                 />
               </>
             )}
             {isAllowAdd && isHavingEditors && (
               <>
-                <Translate
-                  zh_hant="你還可以添加"
-                  zh_hans="你还可以添加"
-                  en="You can add"
+                <FormattedMessage
+                  defaultMessage="You can add"
+                  description="src/components/Dialogs/TagEditorDialog/List/index.tsx"
                 />
                 <span className="count"> {4 - count} </span>
-                <Translate
-                  zh_hant="名協作者"
-                  zh_hans="名协作者"
-                  en="more collaborators."
+                <FormattedMessage
+                  defaultMessage="more collaborators."
+                  description="src/components/Dialogs/TagEditorDialog/List/index.tsx"
                 />
               </>
             )}
@@ -188,10 +185,9 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
             bgColor="green"
             onClick={toAddStep}
           >
-            <Translate
-              zh_hant="新增協作者"
-              zh_hans="新增协作者"
-              en="Add collaborator"
+            <FormattedMessage
+              defaultMessage="Add collaborator"
+              description="src/components/Dialogs/TagEditorDialog/List/index.tsx"
             />
           </Dialog.Footer.Button>
         </Dialog.Footer>

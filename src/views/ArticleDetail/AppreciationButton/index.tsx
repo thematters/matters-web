@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { ADD_TOAST, APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
 import {
   ReCaptchaContext,
   Tooltip,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -106,10 +106,9 @@ const AppreciationButton = ({
           detail: {
             color: 'green',
             content: (
-              <Translate
-                zh_hant="你對作品送出了一個 Super Like！"
-                zh_hans="你对作品送出了一个 Super Like！"
-                en="You sent a Super Like to this article!"
+              <FormattedMessage
+                defaultMessage="You sent a Super Like to this article!"
+                description="src/views/ArticleDetail/AppreciationButton/index.tsx"
               />
             ),
             customButton: <ViewSuperLikeButton />,
@@ -187,10 +186,9 @@ const AppreciationButton = ({
     return (
       <Tooltip
         content={
-          <Translate
-            zh_hant="去讚賞其他用戶吧"
-            zh_hans="去赞赏其他用户吧"
-            en="send Likes to others"
+          <FormattedMessage
+            defaultMessage="send Likes to others"
+            description="src/views/ArticleDetail/AppreciationButton/index.tsx"
           />
         }
         zIndex={Z_INDEX.OVER_BOTTOM_BAR}
@@ -254,10 +252,9 @@ const AppreciationButton = ({
               detail: {
                 color: 'green',
                 content: (
-                  <Translate
-                    zh_hant="12:00 或 00:00 就可以再次送出 Super Like 啦！"
-                    zh_hans="12:00 或 00:00 就可以再次送出 Super Like 啦！"
-                    en="You can send another Super Like after 12:00 or 00:00"
+                  <FormattedMessage
+                    defaultMessage="You can send another Super Like after 12:00 or 00:00"
+                    description="src/views/ArticleDetail/AppreciationButton/index.tsx"
                   />
                 ),
                 customButton: <ViewSuperLikeButton />,
@@ -281,10 +278,9 @@ const AppreciationButton = ({
   return (
     <Tooltip
       content={
-        <Translate
-          zh_hant="你還沒有讚賞權限"
-          zh_hans="你还没有赞赏权限"
-          en="You can't send Likes yet"
+        <FormattedMessage
+          defaultMessage="You can't send Likes yet"
+          description="src/views/ArticleDetail/AppreciationButton/index.tsx"
         />
       }
       zIndex={Z_INDEX.OVER_BOTTOM_BAR}

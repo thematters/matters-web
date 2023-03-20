@@ -1289,5 +1289,193 @@
   "DXJ8ys": {
     "defaultMessage": "Read counts indicates how many registered users read.",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
+  },
+  "NbgEil": {
+    "defaultMessage": "Tag Updated",
+    "description": "src/components/Dialogs/TagDialog/Content.tsx"
+  },
+  "erb+1a": {
+    "defaultMessage": "Tag Created",
+    "description": "src/components/Dialogs/TagDialog/Content.tsx"
+  },
+  "J0U9fp": {
+    "defaultMessage": "Title",
+    "description": "src/components/Dialogs/TagDialog/Content.tsx"
+  },
+  "SpB7QT": {
+    "defaultMessage": "Search Tags...",
+    "description": ""
+  },
+  "67Ksb8": {
+    "defaultMessage": "Tag name does not allow punctuations, only one space is allowed between words, and the maximum length is 50 characters",
+    "description": ""
+  },
+  "dOFRsw": {
+    "defaultMessage": "Description",
+    "description": "src/components/Dialogs/TagDialog/Content.tsx"
+  },
+  "kEItwS": {
+    "defaultMessage": "enter Description...",
+    "description": ""
+  },
+  "XPdD+7": {
+    "defaultMessage": "Submit",
+    "description": "src/views/TagDetail/Buttons/AddButton/index.tsx"
+  },
+  "+Iij5/": {
+    "defaultMessage": "Tags added",
+    "description": "src/views/TagDetail/Buttons/AddButton/index.tsx"
+  },
+  "yF+yXj": {
+    "defaultMessage": "successfully added collaborator",
+    "description": "src/components/Dialogs/TagEditorDialog/SearchSelect/index.tsx"
+  },
+  "p6Jp9Z": {
+    "defaultMessage": "confirm collaborator removal",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
+  },
+  "gs1IkZ": {
+    "defaultMessage": "After removal, ",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
+  },
+  "lmm86y": {
+    "defaultMessage": "user will not be able to manage selected feed.",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
+  },
+  "WDqM38": {
+    "defaultMessage": "successfully removed collaborator",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
+  },
+  "QsxVW6": {
+    "defaultMessage": "Confirm Removal",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
+  },
+  "LV1tSz": {
+    "defaultMessage": "remove",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "Pmz7Da": {
+    "defaultMessage": "Collaborator can manage selected feed with you.",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "CCUcLm": {
+    "defaultMessage": "Every tag can have maximum",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "vtRFQF": {
+    "defaultMessage": "collaborators.",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "LfJeg6": {
+    "defaultMessage": "You can add",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "LZO6p7": {
+    "defaultMessage": "more collaborators.",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "i222B+": {
+    "defaultMessage": "Add collaborator",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "43hX19": {
+    "defaultMessage": "resign as tag maintainer",
+    "description": "src/components/Dialogs/TagLeaveDialog/index.tsx"
+  },
+  "0H2P0/": {
+    "defaultMessage": "are you sure",
+    "description": ""
+  },
+  "Pp/0px": {
+    "defaultMessage": "After resignation, you will not be able to manage tags.",
+    "description": "src/components/Dialogs/TagLeaveDialog/index.tsx"
+  },
+  "U3B1sn": {
+    "defaultMessage": "Resignation Success",
+    "description": "src/components/Dialogs/TagLeaveDialog/index.tsx"
+  },
+  "oCzg72": {
+    "defaultMessage": "Confirm Resignation",
+    "description": "src/components/Dialogs/TagLeaveDialog/index.tsx"
+  },
+  "jeY76+": {
+    "defaultMessage": "Adopt Tag",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
+  "C+AHnI": {
+    "defaultMessage": "After adopting the tag, you become the maintainer of it. You can set the cover and description of the tag, and add works to selected feed. You can use it for writing collection, curation, or subcommunity and group discussions, be creative and discover new usages!",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
+  "UUXMXL": {
+    "defaultMessage": "Adopt successfully",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
+  "yq7eqf": {
+    "defaultMessage": "Maintain immediately",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
+  "d9T8xn": {
+    "defaultMessage": "Let me think about it",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
+  "HnZtoN": {
+    "defaultMessage": "like article (current {total} likes)",
+    "description": "src/views/ArticleDetail/AppreciationButton/AppreciateButton.tsx"
+  },
+  "NArUKy": {
+    "defaultMessage": "Sorry, the author has disabled likes for this article.",
+    "description": "src/views/ArticleDetail/AppreciationButton/BlockedButton.tsx"
+  },
+  "pwZW9s": {
+    "defaultMessage": "Civic Liker is a movement to reward good content and encourage openness. Be a Civil Liker to enjoy the following privileges:",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "85Q9pg": {
+    "defaultMessage": "Unlock ",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "qyFrf3": {
+    "defaultMessage": "twice a day at noon and midnight during promotion period.",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "TV9qFl": {
+    "defaultMessage": "Your claps weighs more on the distribution from Creators Fund",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "wzidgK": {
+    "defaultMessage": "A light ring appears around your profile to show your splendor",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "+Wriay": {
+    "defaultMessage": "Learn more about",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "fginnA": {
+    "defaultMessage": "Civic Liker benefits",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "0uqmQG": {
+    "defaultMessage": "Register now",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "Bp4lAF": {
+    "defaultMessage": "You sent a Super Like to this article!",
+    "description": "src/views/ArticleDetail/AppreciationButton/index.tsx"
+  },
+  "wS475G": {
+    "defaultMessage": "send Likes to others",
+    "description": "src/views/ArticleDetail/AppreciationButton/index.tsx"
+  },
+  "Zr5ruG": {
+    "defaultMessage": "You can send another Super Like after 12:00 or 00:00",
+    "description": "src/views/ArticleDetail/AppreciationButton/index.tsx"
+  },
+  "3od/Z7": {
+    "defaultMessage": "You can't send Likes yet",
+    "description": "src/views/ArticleDetail/AppreciationButton/index.tsx"
+  },
+  "HOsSgX": {
+    "defaultMessage": "More info",
+    "description": ""
   }
 }

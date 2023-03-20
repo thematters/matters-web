@@ -1289,5 +1289,193 @@
   "DXJ8ys": {
     "defaultMessage": "阅读次数代表了你的作品被登入用户阅读的总次数，每次阅读过程超过一定时间后才会计入。此外，同一个用户的多次阅读也会进行累计。",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
+  },
+  "NbgEil": {
+    "defaultMessage": "标签已更新",
+    "description": "src/components/Dialogs/TagDialog/Content.tsx"
+  },
+  "erb+1a": {
+    "defaultMessage": "标签已创建",
+    "description": "src/components/Dialogs/TagDialog/Content.tsx"
+  },
+  "J0U9fp": {
+    "defaultMessage": "标签名称",
+    "description": "src/components/Dialogs/TagDialog/Content.tsx"
+  },
+  "SpB7QT": {
+    "defaultMessage": "搜索你想创建的标签…",
+    "description": ""
+  },
+  "67Ksb8": {
+    "defaultMessage": "标签名称不允许标点符号，字间仅允许一个不连续空白，最大长度50字元",
+    "description": ""
+  },
+  "dOFRsw": {
+    "defaultMessage": "标签描述",
+    "description": "src/components/Dialogs/TagDialog/Content.tsx"
+  },
+  "kEItwS": {
+    "defaultMessage": "输入一段话题描述…",
+    "description": ""
+  },
+  "XPdD+7": {
+    "defaultMessage": "投稿",
+    "description": "src/views/TagDetail/Buttons/AddButton/index.tsx"
+  },
+  "+Iij5/": {
+    "defaultMessage": "作品已添加标签",
+    "description": "src/views/TagDetail/Buttons/AddButton/index.tsx"
+  },
+  "yF+yXj": {
+    "defaultMessage": "添加协作者成功",
+    "description": "src/components/Dialogs/TagEditorDialog/SearchSelect/index.tsx"
+  },
+  "p6Jp9Z": {
+    "defaultMessage": "确定移除协作者",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
+  },
+  "gs1IkZ": {
+    "defaultMessage": "移除后， ",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
+  },
+  "lmm86y": {
+    "defaultMessage": "将无法继续参与「精选」作品管理。",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
+  },
+  "WDqM38": {
+    "defaultMessage": "移除协作者成功",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
+  },
+  "QsxVW6": {
+    "defaultMessage": "确认移除",
+    "description": "src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
+  },
+  "LV1tSz": {
+    "defaultMessage": "移除",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "Pmz7Da": {
+    "defaultMessage": "协作者可以与你共同管理精选",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "CCUcLm": {
+    "defaultMessage": "每个标签最多添加",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "vtRFQF": {
+    "defaultMessage": "名协作者",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "LfJeg6": {
+    "defaultMessage": "你还可以添加",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "LZO6p7": {
+    "defaultMessage": "名协作者",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "i222B+": {
+    "defaultMessage": "新增协作者",
+    "description": "src/components/Dialogs/TagEditorDialog/List/index.tsx"
+  },
+  "43hX19": {
+    "defaultMessage": "辞去权限",
+    "description": "src/components/Dialogs/TagLeaveDialog/index.tsx"
+  },
+  "0H2P0/": {
+    "defaultMessage": "确定要这么做吗",
+    "description": ""
+  },
+  "Pp/0px": {
+    "defaultMessage": "如果辞去权限，你将无法继续管理标签。",
+    "description": "src/components/Dialogs/TagLeaveDialog/index.tsx"
+  },
+  "U3B1sn": {
+    "defaultMessage": "辞去权限成功",
+    "description": "src/components/Dialogs/TagLeaveDialog/index.tsx"
+  },
+  "oCzg72": {
+    "defaultMessage": "确认辞去",
+    "description": "src/components/Dialogs/TagLeaveDialog/index.tsx"
+  },
+  "jeY76+": {
+    "defaultMessage": "认领标签",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
+  "C+AHnI": {
+    "defaultMessage": "当你认领标签后，即刻成为该标签的主理人。你将可以为标签设置封面，编辑描述，并添加作品至精选列表。你主理的标签可以用作文集、策展，也可以变成圈子、小组、讨论区等，更多主理人玩法等你发掘！",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
+  "UUXMXL": {
+    "defaultMessage": "认领成功",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
+  "yq7eqf": {
+    "defaultMessage": "即刻主理",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
+  "d9T8xn": {
+    "defaultMessage": "考虑一下",
+    "description": "src/components/Dialogs/TagAdoptionDialog/index.tsx"
+  },
+  "HnZtoN": {
+    "defaultMessage": "赞赏作品（当前 {total} 次赞赏）",
+    "description": "src/views/ArticleDetail/AppreciationButton/AppreciateButton.tsx"
+  },
+  "NArUKy": {
+    "defaultMessage": "因为作者设置，你无法赞赏此文章。",
+    "description": "src/views/ArticleDetail/AppreciationButton/BlockedButton.tsx"
+  },
+  "pwZW9s": {
+    "defaultMessage": "赞赏公民是一群愿意持续回馈创作的网络公民。成为赞赏公民可享以下福利：",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "85Q9pg": {
+    "defaultMessage": "解锁 ",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "qyFrf3": {
+    "defaultMessage": "，推广时间内每天整点中午及凌晨获赠一次 Super Like 的权利",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "TV9qFl": {
+    "defaultMessage": "拍手赞赏作品对创作基金的分配有更大影响力",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "wzidgK": {
+    "defaultMessage": "头像显示独有的光环标记，突显尊贵的身份",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "+Wriay": {
+    "defaultMessage": "了解更多 ",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "fginnA": {
+    "defaultMessage": "赞赏公民福利",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "0uqmQG": {
+    "defaultMessage": "立即登记",
+    "description": "src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+  },
+  "Bp4lAF": {
+    "defaultMessage": "你对作品送出了一个 Super Like！",
+    "description": "src/views/ArticleDetail/AppreciationButton/index.tsx"
+  },
+  "wS475G": {
+    "defaultMessage": "去赞赏其他用户吧",
+    "description": "src/views/ArticleDetail/AppreciationButton/index.tsx"
+  },
+  "Zr5ruG": {
+    "defaultMessage": "12:00 或 00:00 就可以再次送出 Super Like 啦！",
+    "description": "src/views/ArticleDetail/AppreciationButton/index.tsx"
+  },
+  "3od/Z7": {
+    "defaultMessage": "你还没有赞赏权限",
+    "description": "src/views/ArticleDetail/AppreciationButton/index.tsx"
+  },
+  "HOsSgX": {
+    "defaultMessage": "详情",
+    "description": ""
   }
 }

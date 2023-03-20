@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useMutation } from '~/components'
+import { Dialog, useMutation } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 import { TagMaintainersQuery, UpdateTagSettingMutation } from '~/gql/graphql'
@@ -40,10 +42,9 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
     <>
       <Dialog.Header
         title={
-          <Translate
-            zh_hant="確定移除協作者"
-            zh_hans="确定移除协作者"
-            en="confirm collaborator removal"
+          <FormattedMessage
+            defaultMessage="confirm collaborator removal"
+            description="src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
           />
         }
         closeDialog={closeDialog}
@@ -52,16 +53,14 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
 
       <Dialog.Message>
         <p>
-          <Translate
-            zh_hant="移除後， "
-            zh_hans="移除后， "
-            en="After removal, "
+          <FormattedMessage
+            defaultMessage="After removal, "
+            description="src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
           />
           <span className="name">{editor.displayName}</span>{' '}
-          <Translate
-            zh_hant="將無法繼續參與「精選」作品管理。"
-            zh_hans="将无法继续参与「精选」作品管理。"
-            en="user will not be able to manage selected feed."
+          <FormattedMessage
+            defaultMessage="user will not be able to manage selected feed."
+            description="src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
           />
         </p>
       </Dialog.Message>
@@ -94,10 +93,9 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
                 detail: {
                   color: 'green',
                   content: (
-                    <Translate
-                      zh_hant="移除協作者成功"
-                      zh_hans="移除协作者成功"
-                      en="successfully removed collaborator"
+                    <FormattedMessage
+                      defaultMessage="successfully removed collaborator"
+                      description="src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
                     />
                   ),
                   duration: 2000,
@@ -108,10 +106,9 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
             closeDialog()
           }}
         >
-          <Translate
-            zh_hant="確認移除"
-            zh_hans="确认移除"
-            en="Confirm Removal"
+          <FormattedMessage
+            defaultMessage="Confirm Removal"
+            description="src/components/Dialogs/TagEditorDialog/Remove/index.tsx"
           />
         </Dialog.Footer.Button>
 
@@ -120,7 +117,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
           bgColor="grey-lighter"
           onClick={closeDialog}
         >
-          <Translate zh_hant="取消" zh_hans="取消" en="cancel" />
+          <FormattedMessage defaultMessage="Cancel" description="" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
       <style jsx>{styles}</style>

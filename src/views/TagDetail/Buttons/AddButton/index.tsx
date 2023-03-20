@@ -1,15 +1,13 @@
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   Button,
   DropdownDialog,
   IconPen16,
-  LanguageContext,
   Menu,
   TextIcon,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -67,7 +65,10 @@ const BaseDropdownActions = ({
           ref={ref}
         >
           <TextIcon icon={<IconPen16 />} weight="md" size="md-s">
-            <Translate zh_hant="投稿" zh_hans="投稿" en="Submit" />
+            <FormattedMessage
+              defaultMessage="Submit"
+              description="src/views/TagDetail/Buttons/AddButton/index.tsx"
+            />
           </TextIcon>
         </Button>
       )}
@@ -77,9 +78,10 @@ const BaseDropdownActions = ({
 
 const DropdownActions = (props: DropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
+
   const { tag } = props
 
+  const intl = useIntl()
   /**
    * Data
    */
@@ -109,7 +111,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            content: translate({ id: 'addedArticleTag', lang }),
+            content: intl.formatMessage({
+              defaultMessage: 'Tags added',
+              description: 'src/views/TagDetail/Buttons/AddButton/index.tsx',
+            }),
             duration: 2000,
           },
         })
@@ -130,7 +135,12 @@ const DropdownActions = (props: DropdownActionsProps) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'red',
-          content: <Translate id="FORBIDDEN_BY_STATE" />,
+          content: (
+            <FormattedMessage
+              defaultMessage="You do not have permission to perform this operation"
+              description=""
+            />
+          ),
         },
       })
     )

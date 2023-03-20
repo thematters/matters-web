@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { EXTERNAL_LINKS } from '~/common/enums'
-import { Button, IconExternalLink16, TextIcon, Translate } from '~/components'
+import { Button, IconExternalLink16, TextIcon } from '~/components'
 
 const ViewSuperLikeButton = () => {
   return (
@@ -14,7 +16,7 @@ const ViewSuperLikeButton = () => {
         weight="md"
         textPlacement="left"
       >
-        <Translate zh_hant="詳情" zh_hans="详情" en="More info" />
+        <FormattedMessage defaultMessage="More info" description="" />
       </TextIcon>
     </Button>
   )

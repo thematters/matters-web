@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
-import { Dialog, Translate, useDialogSwitch } from '~/components'
+import { Dialog, useDialogSwitch } from '~/components'
 import { CivicLikerAppreciateButtonUserFragment } from '~/gql/graphql'
 
 interface CivicLikerDialogProps {
@@ -50,16 +51,18 @@ const CivicLikerDialog = ({
 
         <Dialog.Message align="left" type="info">
           <p>
-            <Translate
-              zh_hant="讚賞公民是一群願意持續回饋創作的網絡公民。成為讚賞公民可享以下福利："
-              zh_hans="赞赏公民是一群愿意持续回馈创作的网络公民。成为赞赏公民可享以下福利："
-              en="Civic Liker is a movement to reward good content and encourage openness. Be a Civil Liker to enjoy the following privileges:"
+            <FormattedMessage
+              defaultMessage="Civic Liker is a movement to reward good content and encourage openness. Be a Civil Liker to enjoy the following privileges:"
+              description="src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
             />
           </p>
 
           <ul>
             <li>
-              <Translate zh_hant="解鎖 " zh_hans="解锁 " en="Unlock " />
+              <FormattedMessage
+                defaultMessage="Unlock "
+                description="src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
+              />
               <a
                 className="u-link-green"
                 href={EXTERNAL_LINKS.SUPER_LIKE}
@@ -68,33 +71,29 @@ const CivicLikerDialog = ({
               >
                 Super Like
               </a>
-              <Translate
-                zh_hant="，推廣時間內每天整點中午及凌晨獲贈一次 Super Like 的權利"
-                zh_hans="，推广时间内每天整点中午及凌晨获赠一次 Super Like 的权利"
-                en=" twice a day at noon and midnight during promotion period."
+              <FormattedMessage
+                defaultMessage="twice a day at noon and midnight during promotion period."
+                description="src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
               />
             </li>
             <li>
-              <Translate
-                zh_hant="拍手讚賞作品對創作基金的分配有更大影響力"
-                zh_hans="拍手赞赏作品对创作基金的分配有更大影响力"
-                en="Your claps weighs more on the distribution from Creators Fund"
+              <FormattedMessage
+                defaultMessage="Your claps weighs more on the distribution from Creators Fund"
+                description="src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
               />
             </li>
             <li>
-              <Translate
-                zh_hant="頭像顯示獨有的光環標記，突顯尊貴的身份"
-                zh_hans="头像显示独有的光环标记，突显尊贵的身份"
-                en="A light ring appears around your profile to show your splendor"
+              <FormattedMessage
+                defaultMessage="A light ring appears around your profile to show your splendor"
+                description="src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
               />
             </li>
           </ul>
 
           <p>
-            <Translate
-              zh_hant="瞭解更多 "
-              zh_hans="了解更多 "
-              en="Learn more about "
+            <FormattedMessage
+              defaultMessage="Learn more about "
+              description="src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
             />
             <a
               className="u-link-green"
@@ -102,10 +101,9 @@ const CivicLikerDialog = ({
               target="_blank"
               rel="noreferrer"
             >
-              <Translate
-                zh_hant="讚賞公民福利"
-                zh_hans="赞赏公民福利"
-                en="Civic Liker benefits"
+              <FormattedMessage
+                defaultMessage="Civic Liker benefits"
+                description="src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
               />
             </a>
           </p>
@@ -122,10 +120,9 @@ const CivicLikerDialog = ({
             rel="noopener"
             onClick={closeDialog}
           >
-            <Translate
-              zh_hant="立即登記"
-              zh_hans="立即登记"
-              en="Register now"
+            <FormattedMessage
+              defaultMessage="Register now"
+              description="src/views/ArticleDetail/AppreciationButton/CivicLikerDialog.tsx"
             />
           </Dialog.Footer.Button>
 
@@ -134,7 +131,7 @@ const CivicLikerDialog = ({
             textColor="black"
             onClick={closeDialog}
           >
-            <Translate id="understood" />
+            <FormattedMessage defaultMessage="I see" description="" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>

@@ -2,6 +2,7 @@ import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { Waypoint } from 'react-waypoint'
 
 import { ADD_TOAST, DEFAULT_LOCALE, URL_QS } from '~/common/enums'
@@ -23,7 +24,6 @@ import {
   Spinner,
   Throw404,
   Title,
-  Translate,
   useFeatures,
   usePublicQuery,
   useRoute,
@@ -163,10 +163,14 @@ const BaseArticleDetail = ({
         detail: {
           color: 'green',
           content: (
-            <Translate
-              zh_hant="正在透過 Google 翻譯..."
-              zh_hans="正在通过 Google 翻译..."
-              en="Translating by Google..."
+            // <Translate
+            //   zh_hant="正在透過 Google 翻譯..."
+            //   zh_hans="正在通过 Google 翻译..."
+            //   en="Translating by Google..."
+            // />
+            <FormattedMessage
+              defaultMessage="Translating by Google..."
+              description="src/views/ArticleDetail/index.tsx"
             />
           ),
         },
@@ -545,16 +549,24 @@ const ArticleDetail = ({
           statusCode={404}
           message={
             article.state === 'archived' ? (
-              <Translate
-                zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
-                zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
-                en="Hmm... It seems the author has hidden this work. Go see something else"
+              // <Translate
+              //   zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
+              //   zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
+              //   en="Hmm... It seems the author has hidden this work. Go see something else"
+              // />
+              <FormattedMessage
+                defaultMessage="Hmm... It seems the author has hidden this work. Go see something else"
+                description="src/views/ArticleDetail/index.tsx"
               />
             ) : article.state === 'banned' ? (
-              <Translate
-                zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
-                zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
-                en="This work is archived due to violation of community guidelines."
+              // <Translate
+              //   zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
+              //   zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
+              //   en="This work is archived due to violation of community guidelines."
+              // />
+              <FormattedMessage
+                defaultMessage="This work is archived due to violation of community guidelines."
+                description="src/views/ArticleDetail/index.tsx"
               />
             ) : null
           }

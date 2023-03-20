@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import {
@@ -16,7 +17,6 @@ import {
   normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
   parseFormSubmitErrors,
   toPath,
-  translate,
   validateTagName,
 } from '~/common/utils'
 import {
@@ -24,7 +24,6 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  Translate,
   useMutation,
 } from '~/components'
 import { PutTagMutation } from '~/gql/graphql'
@@ -88,6 +87,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
   const { lang } = useContext(LanguageContext)
   const isEditing = id && content
 
+  const intl = useIntl()
   const formId = 'put-tag-form'
 
   const {
@@ -131,7 +131,17 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: <Translate id={id ? 'tagEdited' : 'tagCreated'} />,
+              content: id ? (
+                <FormattedMessage
+                  defaultMessage="Tag Updated"
+                  description="src/components/Dialogs/TagDialog/Content.tsx"
+                />
+              ) : (
+                <FormattedMessage
+                  defaultMessage="Tag Created"
+                  description="src/components/Dialogs/TagDialog/Content.tsx"
+                />
+              ),
               duration: 2000,
             },
           })
@@ -181,10 +191,25 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       )}
 
       <Form.Input
-        label={<Translate id="tagName" />}
+        label={
+          <FormattedMessage
+            defaultMessage="Title"
+            description="src/components/Dialogs/TagDialog/Content.tsx"
+          />
+        }
         type="text"
         name="newContent"
-        placeholder={translate({ id: id ? 'tagName' : 'searchTag', lang })}
+        placeholder={
+          id
+            ? intl.formatMessage({
+                defaultMessage: 'Title',
+                description: '',
+              })
+            : intl.formatMessage({
+                defaultMessage: 'Search Tags...',
+                description: '',
+              })
+        }
         value={values.newContent}
         error={touched.newContent && errors.newContent}
         onBlur={handleBlur}
@@ -193,7 +218,12 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
           setFieldValue('newContent', newContent)
           return newContent
         }}
-        hint={<Translate id="hintAddTagNamingRestriction" />}
+        hint={
+          <FormattedMessage
+            defaultMessage="Tag name does not allow punctuations, only one space is allowed between words, and the maximum length is 50 characters"
+            description=""
+          />
+        }
         maxLength={MAX_TAG_CONTENT_LENGTH}
         extraButton={
           <HintLengthText
@@ -204,9 +234,17 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       />
 
       <Form.Textarea
-        label={<Translate id="tagDescription" />}
+        label={
+          <FormattedMessage
+            defaultMessage="Description"
+            description="src/components/Dialogs/TagDialog/Content.tsx"
+          />
+        }
         name="newDescription"
-        placeholder={translate({ id: 'tagDescriptionPlaceholder', lang })}
+        placeholder={intl.formatMessage({
+          defaultMessage: 'enter Description...',
+          description: '',
+        })}
         value={values.newDescription}
         error={touched.newDescription && errors.newDescription}
         onBlur={handleBlur}
@@ -225,7 +263,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
 
   const SubmitButton = (
     <Dialog.Header.RightButton
-      text={<Translate id="confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}

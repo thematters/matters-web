@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import { Dialog, useDialogSwitch, useMutation } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import { UpdateTagSettingMutation } from '~/gql/graphql'
 
@@ -22,10 +24,9 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
       <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
-            <Translate
-              zh_hant="辭去權限"
-              zh_hans="辞去权限"
-              en="resign as tag maintainer"
+            <FormattedMessage
+              defaultMessage="resign as tag maintainer"
+              description="src/components/Dialogs/TagLeaveDialog/index.tsx"
             />
           }
           closeDialog={closeDialog}
@@ -33,18 +34,12 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
         />
         <Dialog.Message>
           <h3>
-            <Translate
-              zh_hant="確定要這麼做嗎"
-              zh_hans="确定要这么做吗"
-              en="are you sure"
-            />{' '}
-            😭
+            <FormattedMessage defaultMessage="are you sure" description="" /> 😭
           </h3>
           <p>
-            <Translate
-              zh_hant="如果辭去權限，你將無法繼續管理標籤。"
-              zh_hans="如果辞去权限，你将无法继续管理标签。"
-              en="After resignation, you will not be able to manage tags."
+            <FormattedMessage
+              defaultMessage="After resignation, you will not be able to manage tags."
+              description="src/components/Dialogs/TagLeaveDialog/index.tsx"
             />
           </p>
         </Dialog.Message>
@@ -69,10 +64,9 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
                   detail: {
                     color: 'green',
                     content: (
-                      <Translate
-                        zh_hant="辭去權限成功"
-                        zh_hans="辞去权限成功"
-                        en="Resignation Success"
+                      <FormattedMessage
+                        defaultMessage="Resignation Success"
+                        description="src/components/Dialogs/TagLeaveDialog/index.tsx"
                       />
                     ),
                     duration: 2000,
@@ -83,10 +77,9 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
               closeDialog()
             }}
           >
-            <Translate
-              zh_hant="確認辭去"
-              zh_hans="确认辞去"
-              en="Confirm Resignation"
+            <FormattedMessage
+              defaultMessage="Confirm Resignation"
+              description="src/components/Dialogs/TagLeaveDialog/index.tsx"
             />
           </Dialog.Footer.Button>
 
@@ -95,7 +88,7 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
             bgColor="grey-lighter"
             onClick={closeDialog}
           >
-            <Translate zh_hant="取消" zh_hans="取消" en="cancel" />
+            <FormattedMessage defaultMessage="Cancel" description="" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>
