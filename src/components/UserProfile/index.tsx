@@ -260,7 +260,12 @@ export const UserProfile = () => {
           </section>
 
           <section className="username">
-            <span className="name">@{user.userName}</span>
+            <span
+              className="name"
+              data-test-id={TEST_ID.USER_PROFILE_USER_NAME}
+            >
+              @{user.userName}
+            </span>
             {!isMe && <FollowUserButton.State user={user} />}
           </section>
 

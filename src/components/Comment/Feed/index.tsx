@@ -1,6 +1,7 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import React from 'react'
 
+import { TEST_ID } from '@/src/common/enums'
 import { AvatarSize, CommentFormType, UserDigest } from '~/components'
 import {
   FeedCommentPrivateFragment,
@@ -52,7 +53,10 @@ export const BaseCommentFeed = ({
   }
 
   return (
-    <article id={actionControls.hasLink ? nodeId : ''}>
+    <article
+      id={actionControls.hasLink ? nodeId : ''}
+      data-test-id={TEST_ID.ARTICLE_COMMENT_FEED}
+    >
       <header>
         <UserDigest.Mini
           user={author}
