@@ -1,24 +1,4 @@
-// import { useLazyQuery } from '@apollo/react-hooks'
-// import { html2md } from '@matters/matters-editor'
-import Blockquote from '@tiptap/extension-blockquote'
-import Bold from '@tiptap/extension-bold'
-import BulletList from '@tiptap/extension-bullet-list'
-import Code from '@tiptap/extension-code'
-import CodeBlock from '@tiptap/extension-code-block'
-import Document from '@tiptap/extension-document'
-import Gapcursor from '@tiptap/extension-gapcursor'
-import HardBreak from '@tiptap/extension-hard-break'
-import Heading from '@tiptap/extension-heading'
-import History from '@tiptap/extension-history'
-import HorizontalRule from '@tiptap/extension-horizontal-rule'
-import Italic from '@tiptap/extension-italic'
-import ListItem from '@tiptap/extension-list-item'
-import OrderedList from '@tiptap/extension-ordered-list'
-import Paragraph from '@tiptap/extension-paragraph'
-import Placeholder from '@tiptap/extension-placeholder'
-import Strike from '@tiptap/extension-strike'
-import Text from '@tiptap/extension-text'
-import { EditorContent, useEditor } from '@tiptap/react'
+import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
 import { useContext } from 'react'
 
 import { ASSET_TYPE } from '~/common/enums'
@@ -27,14 +7,7 @@ import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 import { EditorDraftFragment } from '~/gql/graphql'
 
-import {
-  FigureAudio,
-  FigureEmbed,
-  FigureImage,
-  Link,
-  Mention,
-  mentionSuggestion,
-} from './extensions'
+import { mentionSuggestion } from './extensions'
 import MenuBar from './MenuBar'
 import styles from './styles.css'
 import EditorSummary from './Summary'
@@ -80,57 +53,27 @@ const ArticleEditor: React.FC<Props> = ({
   const isPublished = publishState === 'published'
   const isReadOnly = (isPending || isPublished) && !isReviseMode
 
-  const editor = useEditor({
-    extensions: [
-      Document,
-      Paragraph,
-      Text,
-      Heading.configure({
-        levels: [2, 3],
-      }),
-      OrderedList,
-      ListItem,
-      BulletList,
-      Strike,
-      Italic,
-      Bold,
-      Code,
-      CodeBlock,
-      Blockquote,
-      HardBreak,
-      HorizontalRule,
-      History,
-      Gapcursor,
-      Placeholder.configure({
-        placeholder: translate({
-          zh_hant: '請輸入正文…',
-          zh_hans: '请输入正文…',
-          en: 'Enter content ...',
-          lang,
-        }),
-      }),
-      // Custom
-      Link,
-      FigureImage,
-      FigureAudio,
-      FigureEmbed,
-      Mention.configure({
-        suggestion: mentionSuggestion,
-      }),
-    ],
-    content,
+  const editor = useArticleEdtor({
     editable: !isReadOnly,
+    placeholder: translate({
+      zh_hant: '請輸入正文…',
+      zh_hans: '请输入正文…',
+      en: 'Enter content ...',
+      lang,
+    }),
+    content: content || '',
     // onCreate: () => {
     // initAudioPlayers()
     // },
-    onUpdate: async ({ editor, transaction }) => {
-      // initAudioPlayers()
+    // onUpdate: async ({ editor, transaction }) => {
+    //   // initAudioPlayers()
 
-      const content = editor.getHTML()
-      // console.log(editor, transaction)
-      // console.log(await html2md(content))
-      update({ content })
-    },
+    //   const content = editor.getHTML()
+    //   // console.log(editor, transaction)
+    //   // console.log(await html2md(content))
+    //   update({ content })
+    // }
+    mentionSuggestion,
   })
 
   return (
