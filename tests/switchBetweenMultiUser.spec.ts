@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
 
+import { sleep } from '@/src/common/utils/time'
 import { TEST_ID } from '~/common/enums'
 
 import {
@@ -26,6 +27,7 @@ test.describe('Switch between multiple users', () => {
 
     await pageGoto(page, firstArticleLink)
 
+    await sleep(3 * 1000)
     // [Alice] Logout
     await logout({ page })
 
@@ -36,9 +38,11 @@ test.describe('Switch between multiple users', () => {
       page,
       target: firstArticleLink,
     })
+    await page.waitForLoadState('networkidle')
 
     const articleDetail = new ArticleDetailPage(page, isMobile)
     // [Bob] Send a comment
+    await sleep(3 * 1000)
     await articleDetail.sendComment()
 
     // [Bob] Get display name and user name in first comment
@@ -87,6 +91,7 @@ test.describe('Switch between multiple users', () => {
       target: firstArticleLink,
     })
 
+    await sleep(3 * 1000)
     // [Alice] Logout
     await logout({ page: alicePage })
 
@@ -97,9 +102,11 @@ test.describe('Switch between multiple users', () => {
       page: bobPage,
       target: firstArticleLink,
     })
+    await bobPage.waitForLoadState('networkidle')
 
     const articleDetail = new ArticleDetailPage(bobPage, isMobile)
     // [Bob] Send a comment
+    await sleep(3 * 1000)
     await articleDetail.sendComment()
 
     // [Bob] Get display name and user name in first comment
