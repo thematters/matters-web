@@ -5,6 +5,7 @@ import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useAccount } from 'wagmi'
+import {  polygon } from 'wagmi/chains'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -110,7 +111,7 @@ const SetAmount: React.FC<FormProps> = ({
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
 
   // TODO: support multiple networks
-  const targetNetork = featureSupportedChains.curation[0]
+  const targetNetork = polygon
   const { isUnsupportedNetwork, switchToTargetNetwork, isSwitchingNetwork } =
     useTargetNetwork(targetNetork)
 
