@@ -5,14 +5,13 @@ import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useAccount } from 'wagmi'
-import {  polygon } from 'wagmi/chains'
+import { polygon } from 'wagmi/chains'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
 } from '~/common/enums'
 import {
-  featureSupportedChains,
   formatAmount,
   numRound,
   validateCurrency,
