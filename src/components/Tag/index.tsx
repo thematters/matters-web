@@ -3,13 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { clampTagLength, toPath } from '~/common/utils'
-import {
-  IconClear16,
-  IconHashTag16,
-  IconProps,
-  TextIcon,
-  TextIconProps,
-} from '~/components'
+import { IconClose16, IconProps, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
@@ -113,9 +107,9 @@ export const Tag = ({
         color: active ? 'green' : 'grey',
       }
       textIconProps = {
-        size: 'sm',
-        weight: 'md',
-        spacing: 0,
+        size: 'sm-s',
+        weight: 'normal',
+        spacing: 'xxtight',
         color: active ? 'white' : 'grey-darker',
       }
       break
@@ -141,13 +135,8 @@ export const Tag = ({
 
   const Inner = () => (
     <>
-      <TextIcon
-        icon={<IconHashTag16 {...iconProps} />}
-        {...textIconProps}
-        size={textIconProps.size}
-        allowUserSelect
-      >
-        <span className="name">{tagName}</span>
+      <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
+        <span className="name">#&nbsp;{tagName}</span>
       </TextIcon>
 
       {hasClose && (
@@ -157,7 +146,7 @@ export const Tag = ({
             removeTag?.(tag)
           }}
         >
-          <IconClear16 color="grey" />
+          <IconClose16 color="grey" />
         </button>
       )}
 

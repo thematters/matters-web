@@ -42,11 +42,17 @@
 .inline {
   display: inline-flex;
   align-items: center;
-  height: 1.5rem;
-  padding: 0 var(--spacing-tight) 0 var(--spacing-x-tight);
-  line-height: 1.5rem;
+  height: 1.25rem;
+  padding: 0 var(--spacing-x-tight) 0 var(--spacing-x-tight);
+  line-height: 1.25rem;
   background: var(--color-grey-lighter);
-  border-radius: 2rem;
+  border-radius: 1.25rem;
+
+  &.disabled {
+    & .name {
+      color: var(--color-grey);
+    }
+  }
 
   & .name {
     color: var(--color-black);
@@ -56,13 +62,6 @@
     display: inline-flex;
     margin-right: -3px;
     margin-left: 3px;
-  }
-
-  &:not(.disabled) {
-    &:hover,
-    &:focus {
-      background: var(--color-green-lighter);
-    }
   }
 
   &.clickable {
