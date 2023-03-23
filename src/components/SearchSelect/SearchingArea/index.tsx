@@ -30,7 +30,10 @@ import styles from '../styles.css'
 import CreateTag from './CreateTag'
 import { LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
 import InviteEmail from './InviteEmail'
-import SearchInput, { SearchType as SearchInputType } from './SearchInput'
+import SearchInput, {
+  SearchInputProps,
+  SearchType as SearchInputType,
+} from './SearchInput'
 
 /**
  * This is a sub-component of search-and-select, and it will show
@@ -52,7 +55,7 @@ export type SelectUser = NonNullable<
   SelectSearchQuery['search']['edges']
 >[0]['node'] & { __typename: 'User' }
 
-interface SearchingAreaProps {
+type SearchingAreaProps = {
   searchType: SearchType
   searchFilter?: SearchFilter
   searchExclude?: SearchExclude
@@ -64,7 +67,7 @@ interface SearchingAreaProps {
 
   createTag?: boolean
   inviteEmail?: boolean
-}
+} & Pick<SearchInputProps, 'autoFocus'>
 
 type Mode = 'search' | 'list'
 
@@ -80,6 +83,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
 
   createTag,
   inviteEmail,
+  autoFocus,
 }) => {
   const viewer = useContext(ViewerContext)
 
@@ -267,6 +271,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
         onSubmit={search}
         onFocus={onSearchInputFocus}
         onBlur={onSearchInputBlur}
+        autoFocus
       />
 
       {inSearchingArea && (
@@ -274,7 +279,8 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
           {searching && <Spinner />}
 
           {/* Search */}
-          {isSearchMode &&
+          {searchKey.length > 0 &&
+            isSearchMode &&
             !searching &&
             !hasNodes &&
             !canCreateTag &&

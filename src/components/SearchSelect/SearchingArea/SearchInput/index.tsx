@@ -8,13 +8,14 @@ import styles from './styles.css'
 
 export type SearchType = 'Article' | 'Tag' | 'User' | 'Invitee'
 
-interface SearchInputProps {
+export interface SearchInputProps {
   type: SearchType
   value: string
   onChange: (value: string) => void
   onSubmit: (value: string) => void
   onFocus: () => void
   onBlur: () => void
+  autoFocus?: boolean
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
@@ -24,27 +25,28 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onSubmit,
   onFocus,
   onBlur,
+  autoFocus,
 }) => {
   const fieldId = `search-input-${type}`.toLocaleLowerCase()
   const { lang } = useContext(LanguageContext)
   const textAriaLabel = translate({ id: 'search', lang })
   const textPlaceholder = {
     Article: translate({
-      zh_hant: '搜尋作品標題…',
-      zh_hans: '搜索作品标题…',
-      en: 'Search articles...',
+      zh_hant: '搜尋作品標題',
+      zh_hans: '搜索作品标题',
+      en: 'Search articles',
       lang,
     }),
     Tag: translate({
-      zh_hant: '搜尋標籤…',
-      zh_hans: '搜索标签…',
-      en: 'Search tags...',
+      zh_hant: '搜尋標籤',
+      zh_hans: '搜索标签',
+      en: 'Search tags',
       lang,
     }),
     User: translate({
-      zh_hant: '搜尋作者…',
-      zh_hans: '搜索作者…',
-      en: 'Search authors...',
+      zh_hant: '搜尋作者',
+      zh_hans: '搜索作者',
+      en: 'Search authors',
       lang,
     }),
     Invitee: translate({
@@ -72,6 +74,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
           id={fieldId}
           type="search"
           name="q"
+          autoFocus={!!autoFocus}
           value={value}
           aria-label={textAriaLabel}
           placeholder={textPlaceholder[type]}
@@ -91,7 +94,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
           type="submit"
           aria-label={translate({ id: 'search', lang })}
         >
-          <IconSearch16 color="grey" />
+          <IconSearch16 color="green" />
         </button>
 
         {value && (
