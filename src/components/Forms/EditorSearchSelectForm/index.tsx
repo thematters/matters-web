@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { MAX_ARTICLE_TAG_LENGTH, TextId } from '~/common/enums'
+import {
+  MAX_ARTICLE_COLLECT_LENGTH,
+  MAX_ARTICLE_TAG_LENGTH,
+  TextId,
+} from '~/common/enums'
 import { Button, Dialog, IconAdd16, TextIcon, Translate } from '~/components'
 import SearchingArea, {
   SearchType,
@@ -104,7 +108,12 @@ const EditorSearchSelectForm = ({
     toStagingArea()
   }
 
-  const enableAdd = stagingNodes.length < MAX_ARTICLE_TAG_LENGTH
+  const maxNodesLength =
+    searchType === 'Article'
+      ? MAX_ARTICLE_COLLECT_LENGTH
+      : MAX_ARTICLE_TAG_LENGTH
+
+  const enableAdd = stagingNodes.length < maxNodesLength
 
   const onClickSave = async () => {
     await onSave(
@@ -137,10 +146,17 @@ const EditorSearchSelectForm = ({
               color={enableAdd ? 'green' : 'grey'}
               size="md"
             >
-              <Translate en="Add Tag" zh_hans="添加标签" zh_hant="添加標籤" />
+              {searchType === 'Tag' && (
+                <Translate en="Add Tag" zh_hans="添加标签" zh_hant="添加標籤" />
+              )}
+              {searchType === 'Article' && (
+                <Translate en="Add" zh_hans="关联作品" zh_hant="關聯作品" />
+              )}
             </TextIcon>
           </Button>
-          <span className="number">（{stagingNodes.length}/3）</span>
+          <span className="number">
+            （{stagingNodes.length}/{maxNodesLength}）
+          </span>
         </section>
       )}
 
