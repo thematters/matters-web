@@ -1,12 +1,18 @@
+const postcssGlobalData = require('@csstools/postcss-global-data')
+const postcssCalc = require('postcss-calc')
+const postcssColorFunction = require('postcss-color-function')
+const postcssCustomMedia = require('postcss-custom-media')
+const postcssCustomProperties = require('postcss-custom-properties')
+const poostcssMixins = require('postcss-mixins')
+const postcssPresetEnv = require('postcss-preset-env')
+
 module.exports = {
-  plugins: {
-    'postcss-mixins': {
+  plugins: [
+    poostcssMixins({
       mixinsFiles: './src/common/styles/mixins.css',
-    },
-    'postcss-preset-env': {
-      stage: 0,
-      preserve: false,
-      importFrom: [
+    }),
+    postcssGlobalData({
+      files: [
         './src/common/styles/variables/breakpoints.css',
         './src/common/styles/variables/layouts.css',
         './src/common/styles/variables/colors.css',
@@ -16,8 +22,11 @@ module.exports = {
         './src/common/styles/variables/typography.css',
         './src/common/styles/variables/shadows.css',
       ],
-    },
-    'postcss-calc': {},
-    'postcss-color-function': {},
-  },
+    }),
+    postcssCustomMedia({ preserve: false }),
+    postcssCustomProperties({ preserve: false }),
+    postcssPresetEnv({ stage: 0 }),
+    postcssCalc(),
+    postcssColorFunction(),
+  ],
 }
