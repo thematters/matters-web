@@ -4,11 +4,11 @@
 }
 
 .tagList {
-  margin-top: var(--spacing-base);
   line-height: 1;
 
   & li {
     display: inline-block;
+    margin-top: var(--spacing-base);
     margin-right: var(--spacing-tight);
   }
 }
