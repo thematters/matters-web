@@ -1,4 +1,4 @@
-import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
+import { EditorContent, useArticleEdtor } from '@matters/matters-editor/editors'
 import { useContext } from 'react'
 
 import { ASSET_TYPE } from '~/common/enums'
@@ -65,14 +65,15 @@ const ArticleEditor: React.FC<Props> = ({
     // onCreate: () => {
     // initAudioPlayers()
     // },
-    // onUpdate: async ({ editor, transaction }) => {
-    //   // initAudioPlayers()
+    onUpdate: async ({ editor, transaction }) => {
+      // initAudioPlayers()
 
-    //   const content = editor.getHTML()
-    //   // console.log(editor, transaction)
-    //   // console.log(await html2md(content))
-    //   update({ content })
-    // }
+      const content = editor.getHTML()
+
+      // console.log(editor, transaction)
+      // console.log(await html2md(content))
+      update({ content })
+    },
     mentionSuggestion,
   })
 
