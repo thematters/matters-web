@@ -69,6 +69,7 @@ const StagingArea: React.FC<StagingAreaProps> = ({
     return (
       <section className="area">
         <CustomStagingArea nodes={nodes} setNodes={setNodes} hint={hint} />
+        <style jsx>{areaStyles}</style>
       </section>
     )
   }
