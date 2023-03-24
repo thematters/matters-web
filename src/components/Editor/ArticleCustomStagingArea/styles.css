@@ -8,6 +8,10 @@
     color: var(--color-grey);
   }
 
+  & .emptyHint {
+    text-align: center;
+  }
+
   & .node {
     @mixin flex-start-space-between;
 
