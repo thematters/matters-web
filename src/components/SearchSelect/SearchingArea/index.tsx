@@ -182,13 +182,6 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
       toSearchingArea()
       return
     }
-
-    if (value) {
-      toSearchingArea()
-    } else {
-      toStagingArea()
-      setSearchingNodes([])
-    }
   }
   const onSearchInputFocus = () => {
     if (hasListMode) {
