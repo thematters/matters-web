@@ -32,7 +32,6 @@ const BaseSearchSelectDialog = ({
           {...props}
           onSave={async (nodes: SelectNode[]) => {
             await props.onSave(nodes)
-            closeDialog()
           }}
           closeDialog={closeDialog}
         />

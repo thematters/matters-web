@@ -99,13 +99,23 @@ const EditorSearchSelectForm = ({
   // data
   const [stagingNodes, setStagingNodes] =
     useState<StagingNode[]>(initStagingNodes)
-  const addNodeToStaging = (node: SelectNode) => {
+  const addNodeToStaging = async (node: SelectNode) => {
     setStagingNodes([
       ...stagingNodes.filter(({ node: n }) => n.id !== node.id),
       { node, selected: true },
     ])
-
+    await onSave([
+      ...stagingNodes
+        .filter(({ node: n }) => n.id !== node.id)
+        .map(({ node }) => node),
+      node,
+    ])
     toStagingArea()
+  }
+
+  const syncStagingNodes = async (nodes: StagingNode[]) => {
+    setStagingNodes(nodes)
+    await onSave(nodes.map(({ node }) => node))
   }
 
   const maxNodesLength =
@@ -115,24 +125,18 @@ const EditorSearchSelectForm = ({
 
   const enableAdd = stagingNodes.length < maxNodesLength
 
-  const onClickSave = async () => {
-    await onSave(
-      stagingNodes.filter(({ selected }) => !!selected).map(({ node }) => node)
-    )
-  }
-
   return (
     <>
       <Dialog.Header
         title={title}
         closeDialog={closeDialog}
         closeTextId="close"
-        leftButton={headerLeftButton}
+        leftButton={<></>}
         rightButton={
           <Dialog.Header.RightButton
-            onClick={onClickSave}
+            onClick={closeDialog}
             // disabled={stagingNodes.length <= 0}
-            text={headerRightButtonText || <Translate id="save" />}
+            text={headerRightButtonText || <Translate id="done" />}
             loading={saving}
           />
         }
@@ -180,7 +184,7 @@ const EditorSearchSelectForm = ({
       {inStagingArea && (
         <StagingArea
           nodes={stagingNodes}
-          setNodes={setStagingNodes}
+          setNodes={syncStagingNodes}
           hint={hint}
           inStagingArea={inStagingArea}
           draggable={draggable}
