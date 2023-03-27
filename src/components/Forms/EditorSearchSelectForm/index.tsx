@@ -5,7 +5,7 @@ import {
   MAX_ARTICLE_TAG_LENGTH,
   TextId,
 } from '~/common/enums'
-import { Button, Dialog, IconAdd16, TextIcon, Translate } from '~/components'
+import { Dialog, IconAdd16, TextIcon, Translate } from '~/components'
 import SearchingArea, {
   SearchType,
   SelectNode,
@@ -139,26 +139,28 @@ const EditorSearchSelectForm = ({
       />
 
       {inStagingArea && (
-        <section className="stagingHeadArea">
-          <Button onClick={toSearchingArea} disabled={!enableAdd}>
-            <TextIcon
-              icon={<IconAdd16 size="md-s" />}
-              color={enableAdd ? 'green' : 'grey'}
-              size="md-s"
-              spacing="xtight"
-            >
-              {searchType === 'Tag' && (
-                <Translate en="Add tag" zh_hans="添加标签" zh_hant="添加標籤" />
-              )}
-              {searchType === 'Article' && (
-                <Translate en="Add" zh_hans="关联作品" zh_hant="關聯作品" />
-              )}
-            </TextIcon>
-          </Button>
+        <button
+          className="stagingHeadArea"
+          onClick={toSearchingArea}
+          disabled={!enableAdd}
+        >
+          <TextIcon
+            icon={<IconAdd16 size="md-s" />}
+            color={enableAdd ? 'green' : 'grey'}
+            size="md-s"
+            spacing="xtight"
+          >
+            {searchType === 'Tag' && (
+              <Translate en="Add tag" zh_hans="添加标签" zh_hant="添加標籤" />
+            )}
+            {searchType === 'Article' && (
+              <Translate en="Add" zh_hans="关联作品" zh_hant="關聯作品" />
+            )}
+          </TextIcon>
           <span className="number">
             （{stagingNodes.length}/{maxNodesLength}）
           </span>
-        </section>
+        </button>
       )}
 
       {inSearchingArea && (
