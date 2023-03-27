@@ -157,7 +157,7 @@ export const TEXT = {
     helpCenter: '幫助中心',
     hintAddTag:
       '通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。',
-    hintAddRecommendedTag: '下方是你近期使用過標籤，點選添加：',
+    hintAddRecommendedTag: '近期使用',
     hintAddTagNoTag: '目前尚無標籤，立即添加提高作品曝光度！',
     hintAddTagShort: '添加合適標籤，讓站內外讀者找到你的作品',
     hintAddTagNamingRestriction:
@@ -567,7 +567,7 @@ export const TEXT = {
     helpCenter: '帮助中心',
     hintAddTag:
       '通过添加标签帮助读者更好地找到你的作品。如果没有合适的标签，你可以创建新的。',
-    hintAddRecommendedTag: '下方是你近期使用过标签，点选添加：',
+    hintAddRecommendedTag: '最近使用',
     hintAddTagNoTag: '目前尚无标签，立即添加提高作品曝光度！',
     hintAddTagShort: '添加适合标签，帮助读者找到你的作品',
     hintAddTagNamingRestriction:
@@ -988,7 +988,7 @@ export const TEXT = {
     helpCenter: 'Help Center',
     hintAddTag:
       'Adding tags helps readers find your articles. Add or create new tags.',
-    hintAddRecommendedTag: 'Click to add tags you recently used :',
+    hintAddRecommendedTag: 'Recently used',
     hintAddTagNoTag:
       'Not using tags yet, add tags now to improve discoverability!',
     hintAddTagShort: 'Adding tags helps readers find your articles.',

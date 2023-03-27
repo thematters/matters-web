@@ -1,10 +1,20 @@
-.tagList {
+.selectedTags {
   padding: 0 var(--spacing-base);
-  margin-top: var(--spacing-base);
+  margin: var(--spacing-base) 0;
+}
+
+.tagList {
+  line-height: 1;
 
   & li {
     display: inline-block;
+    margin-top: var(--spacing-base);
     margin-right: var(--spacing-tight);
-    margin-bottom: var(--spacing-base);
   }
+}
+
+.hint {
+  font-size: var(--font-size-sm-s);
+  line-height: 1.125rem;
+  color: var(--color-grey);
 }

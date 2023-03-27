@@ -1,6 +1,7 @@
 import _uniqBy from 'lodash/uniqBy'
 import { useContext } from 'react'
 
+import { MAX_ARTICLE_TAG_LENGTH } from '@/src/common/enums'
 import { Spinner, Translate, usePublicQuery, ViewerContext } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { CustomStagingAreaProps } from '~/components/SearchSelect/StagingArea'
@@ -88,11 +89,12 @@ const TagCustomStagingArea = ({
           onRemoveTag={removeTag}
         />
       )}
-      {hasRecommendedTags && <hr />}
+      {/* {hasRecommendedTags && <hr />} */}
       {hasRecommendedTags && (
         <RecommendedTags
           tags={recommendedTags as EditorRecommendedTagsUserTagsEdgesNode[]}
           onAddTag={addTag}
+          disabled={tags.length >= MAX_ARTICLE_TAG_LENGTH}
         />
       )}
     </section>
