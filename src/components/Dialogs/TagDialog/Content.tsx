@@ -106,6 +106,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       newCover: UNCHANGED_FIELD,
       newDescription: description || '',
     },
+    validateOnBlur: false,
     validate: ({ newContent }) =>
       _pickBy({
         newContent: validateTagName(newContent, lang),

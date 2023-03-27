@@ -70,6 +70,7 @@ const Init: React.FC<FormProps> = ({
       displayName: '',
       amount: PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD,
     },
+    validateOnBlur: false,
     validate: ({ name, displayName, amount }) =>
       _pickBy({
         name: validateCircleName(name, lang),

@@ -74,6 +74,7 @@ const Confirm: React.FC<FormProps> = ({
       email: '',
       code: '',
     },
+    validateOnBlur: false,
     validate: ({ email, code }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: false }),

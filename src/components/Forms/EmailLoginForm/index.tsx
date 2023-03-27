@@ -101,6 +101,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       email: '',
       password: '',
     },
+    validateOnBlur: false,
     validate: ({ email, password }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),

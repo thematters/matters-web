@@ -951,10 +951,6 @@
     "defaultMessage": "Topics",
     "description": ""
   },
-  "l5vWO8": {
-    "defaultMessage": "Your Matters display name, can be changed later",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
-  },
   "lD4FPZ": {
     "defaultMessage": "Enter Email",
     "description": ""
@@ -966,6 +962,10 @@
   "lNjDPr": {
     "defaultMessage": "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'.",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
+  "ldNgRA": {
+    "defaultMessage": "Display name, can be changed later",
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
   "lhaIoi": {
     "defaultMessage": "Enter Display Name",

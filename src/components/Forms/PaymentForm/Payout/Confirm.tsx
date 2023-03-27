@@ -76,6 +76,7 @@ const BaseConfirm: React.FC<FormProps> = ({
       amount: PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD,
       password: '',
     },
+    validateOnBlur: false,
     validate: ({ amount, password }) =>
       _pickBy({
         amount: validatePayoutAmount({

@@ -67,6 +67,7 @@ const Confirm: React.FC<FormProps> = ({
       userName: '',
       comparedUserName: '',
     },
+    validateOnBlur: false,
     validate: ({ userName, comparedUserName }) =>
       _pickBy({
         userName: validateUserName(userName, lang),

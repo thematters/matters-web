@@ -67,6 +67,7 @@ const Confirm: React.FC<FormProps> = ({
     initialValues: {
       password: '',
     },
+    validateOnBlur: false,
     validate: ({ password }) =>
       _pickBy({
         password: validatePaymentPassword(password, lang),

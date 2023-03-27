@@ -75,6 +75,7 @@ const Init: React.FC<FormProps> = ({
       email: '',
       tos: true,
     },
+    validateOnBlur: false,
     validate: ({ displayName, email, tos }) =>
       _pickBy({
         displayName: validateDisplayName(displayName, lang),
@@ -121,7 +122,7 @@ const Init: React.FC<FormProps> = ({
         name="displayName"
         required
         placeholder={intl.formatMessage({
-          defaultMessage: 'Your Matters display name, can be changed later',
+          defaultMessage: 'Display name, can be changed later',
           description: 'src/components/Forms/EmailSignUpForm/Init.tsx',
         })}
         value={values.displayName}

@@ -64,6 +64,7 @@ const Request: React.FC<FormProps> = ({
     initialValues: {
       email: defaultEmail,
     },
+    validateOnBlur: false,
     validate: ({ email }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),

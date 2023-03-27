@@ -78,6 +78,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       displayName: circle.displayName || '',
       description: circle.description || '',
     },
+    validateOnBlur: false,
     validate: ({ displayName, description }) =>
       _pickBy({
         displayName: !isCreate

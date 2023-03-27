@@ -116,6 +116,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       displayName: user.displayName || '',
       description: user.info.description || '',
     },
+    validateOnBlur: false,
     validate: ({ displayName, description }) =>
       _pickBy({
         displayName: validateDisplayName(displayName, lang, isAdmin),

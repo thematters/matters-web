@@ -68,6 +68,7 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
     initialValues: {
       paymentPointer: defaultPaymentPointer,
     },
+    validateOnBlur: false,
     validate: ({ paymentPointer }) =>
       _pickBy({
         paymentPointer: validatePaymentPointer(paymentPointer, lang),
