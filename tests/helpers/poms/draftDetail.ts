@@ -42,6 +42,7 @@ export class DraftDetailPage {
 
   // dialog
   readonly dialog: Locator
+  readonly dialogAddButton: Locator
   readonly dialogPublishNowButton: Locator
   readonly dialogPublishButton: Locator
   readonly dialogViewArticleButton: Locator
@@ -86,6 +87,9 @@ export class DraftDetailPage {
 
     // dialog
     this.dialog = this.page.getByRole('dialog')
+    this.dialogAddButton = this.page.getByTestId(
+      TEST_ID.EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON
+    )
     this.dialogPublishNowButton = this.dialog.getByRole('button', {
       name: 'Publish Now',
     })
@@ -147,11 +151,12 @@ export class DraftDetailPage {
 
     const tags = _uniq(generateTags({ count: 3 }))
     for (const tag of tags) {
-      await this.page.getByPlaceholder('Search tags...').fill(tag)
+      await this.dialogAddButton.click()
+      await this.page.getByPlaceholder('Search tags').fill(tag)
       await this.page.getByTestId(TEST_ID.SEARCH_RESULTS_ITEM).first().click()
     }
 
-    await this.dialogSaveButton.click()
+    await this.dialogDoneButton.click()
 
     return tags
   }
@@ -217,10 +222,11 @@ export class DraftDetailPage {
 
   async setCollection() {
     await this.barCollectArticle.click()
+    await this.dialogAddButton.click()
 
     // type and search
     const searchKey = 'test'
-    await this.page.getByPlaceholder('Search articles...').fill(searchKey)
+    await this.page.getByPlaceholder('Search articles').fill(searchKey)
 
     await waitForAPIResponse({
       page: this.page,
@@ -237,7 +243,7 @@ export class DraftDetailPage {
     }
 
     // save
-    await this.dialogSaveButton.click()
+    await this.dialogDoneButton.click()
 
     return articleTitle
   }

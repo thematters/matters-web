@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import {
   MAX_ARTICLE_COLLECT_LENGTH,
   MAX_ARTICLE_TAG_LENGTH,
+  TEST_ID,
   TextId,
 } from '~/common/enums'
 import { Dialog, IconAdd16, TextIcon, Translate } from '~/components'
@@ -147,6 +148,7 @@ const EditorSearchSelectForm = ({
           className="stagingHeadArea"
           onClick={toSearchingArea}
           disabled={!enableAdd}
+          data-test-id={TEST_ID.EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON}
         >
           <TextIcon
             icon={<IconAdd16 size="md-s" />}
