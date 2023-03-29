@@ -18,6 +18,7 @@ interface TagProps {
   hasCount?: boolean
   hasClose?: boolean
   canClamp?: boolean
+  plainSize?: 'xs' | 'sm-s'
   removeTag?: (tag: DigestTagFragment) => void
   onClick?: () => void
 }
@@ -56,6 +57,7 @@ export const Tag = ({
   hasCount = true,
   hasClose,
   canClamp = false,
+  plainSize = 'sm-s',
   removeTag,
   onClick,
 }: TagProps) => {
@@ -115,7 +117,7 @@ export const Tag = ({
       break
     case 'plain':
       textIconProps = {
-        size: 'sm-s',
+        size: plainSize,
         weight: 'normal',
         spacing: 'xxxtight',
         color: 'green',

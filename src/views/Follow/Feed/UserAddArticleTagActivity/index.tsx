@@ -15,7 +15,14 @@ const UserAddArticleTagActivity = ({
     <ArticleDigestConcise
       article={node}
       date={createdAt}
-      footerTag={<Tag tag={target} type="plain" iconProps={{ size: 'sm' }} />}
+      footerTag={
+        <Tag
+          tag={target}
+          type="plain"
+          iconProps={{ size: 'xs' }}
+          plainSize="xs"
+        />
+      }
       onClick={() => {
         analytics.trackEvent('click_feed', {
           type: 'following',

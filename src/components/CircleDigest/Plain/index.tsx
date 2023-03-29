@@ -11,9 +11,14 @@ export type CircleDigestPlainProps = {
   circle: DigestPlainCircleFragment
 
   onClick?: () => void
+  size?: 'xs' | 'sm-s'
 }
 
-const CircleDigestPlain = ({ circle, onClick }: CircleDigestPlainProps) => {
+const CircleDigestPlain = ({
+  circle,
+  onClick,
+  size = 'sm-s',
+}: CircleDigestPlainProps) => {
   const path = toPath({
     page: 'circleDetail',
     circle,
@@ -22,11 +27,11 @@ const CircleDigestPlain = ({ circle, onClick }: CircleDigestPlainProps) => {
   return (
     <LinkWrapper {...path} onClick={onClick}>
       <TextIcon
-        icon={<IconCircle16 size="sm-s" />}
+        icon={<IconCircle16 size={size} />}
         color="green"
         spacing="xxtight"
         weight="normal"
-        size="sm-s"
+        size={size}
       >
         <span className="name">{circle.displayName}</span>
       </TextIcon>
