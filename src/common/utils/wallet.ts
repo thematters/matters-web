@@ -1,5 +1,5 @@
 import { Chain, configureChains, createClient, createStorage } from 'wagmi'
-import { goerli, mainnet, polygon, polygonMumbai } from 'wagmi/chains'
+import { goerli, mainnet, polygon } from 'wagmi/chains'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
@@ -10,13 +10,16 @@ const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
 
 export const featureSupportedChains = {
-  curation: isProd ? [polygon] : [polygonMumbai],
+  curation: isProd ? [polygon] : [polygon],
   ens: isProd ? [mainnet] : [goerli],
 }
 
-const defaultChains: Chain[] = isProd
-  ? [mainnet, polygon]
-  : [goerli, polygonMumbai]
+const defaultChains: Chain[] = isProd ? [mainnet, polygon] : [goerli, polygon]
+
+// FIXME: make contract wallet (e.g. UniPass) default chain as
+// Polygon Mainnet for signing since most of the wallet providers help user
+// to deplopy contract on Polygon Mainnet free of charge.
+export const walletConnectConnectChain = polygon
 
 export const { provider: wagmiProvider, chains } = configureChains(
   defaultChains,
