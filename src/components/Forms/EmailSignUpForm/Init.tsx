@@ -75,7 +75,7 @@ const Init: React.FC<FormProps> = ({
       tos: true,
     },
     validateOnBlur: false,
-    validateOnChange: false,
+    validateOnChange: true, // enable for signup form
     validate: ({ displayName, email, tos }) =>
       _pickBy({
         displayName: validateDisplayName(displayName, lang),

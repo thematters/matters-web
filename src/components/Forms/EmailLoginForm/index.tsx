@@ -16,7 +16,7 @@ import {
   redirectToTarget,
   setCookies,
   validateEmail,
-  validatePassword,
+  // validatePassword,
 } from '~/common/utils'
 import {
   Dialog,
@@ -105,7 +105,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     validate: ({ email, password }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
-        password: validatePassword(password, lang),
+        // password: validatePassword(password, lang),
       }),
     onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
       try {
