@@ -18,6 +18,11 @@ const defaultChains: Chain[] = isProd
   ? [mainnet, polygon]
   : [goerli, polygonMumbai]
 
+// FIXME: make contract wallet (e.g. UniPass) default chain as
+// Polygon Mainnet for signing since most of the wallet providers help user
+// to deplopy contract on Polygon Mainnet free of charge.
+export const walletConnectConnectChain = polygon
+
 export const { provider: wagmiProvider, chains } = configureChains(
   defaultChains,
   [alchemyProvider({ apiKey: alchemyId })]

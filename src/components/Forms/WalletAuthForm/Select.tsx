@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 import { EXTERNAL_LINKS, GUIDE_LINKS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { analytics, walletConnectConnectChain } from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -236,7 +236,10 @@ const Select: React.FC<FormProps> = ({
             analytics.trackEvent('click_button', {
               type: 'connectorWalletConnect',
             })
-            connect({ connector: walletConnectConnector })
+            connect({
+              connector: walletConnectConnector,
+              chainId: walletConnectConnectChain.id,
+            })
           }}
           role="button"
           right={isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null}
