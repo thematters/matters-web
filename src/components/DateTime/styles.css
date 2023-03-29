@@ -1,7 +1,7 @@
 time {
   font-size: var(--font-size-timestamp);
   font-weight: var(--font-weight-timestamp);
-  line-height: var(--line-height-timestamp);
+  line-height: 1rem;
   color: var(--color-grey-dark);
   white-space: nowrap;
 }
