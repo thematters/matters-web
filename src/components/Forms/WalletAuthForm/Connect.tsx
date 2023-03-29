@@ -165,6 +165,7 @@ const Connect: React.FC<FormProps> = ({
       code: '',
     },
     validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ tos, email, code }) =>
       _pickBy({
         tos: isSignUp ? validateToS(tos, lang) : undefined,

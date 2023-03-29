@@ -107,7 +107,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
     setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
@@ -117,6 +116,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       description: user.info.description || '',
     },
     validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ displayName, description }) =>
       _pickBy({
         displayName: validateDisplayName(displayName, lang, isAdmin),
@@ -265,7 +265,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting}
       text={<FormattedMessage defaultMessage="Save" description="" />}
       loading={isSubmitting}
     />

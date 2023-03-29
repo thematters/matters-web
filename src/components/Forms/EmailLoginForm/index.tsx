@@ -94,7 +94,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     handleBlur,
     handleChange,
     handleSubmit,
-    isValid,
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
@@ -102,6 +101,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       password: '',
     },
     validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ email, password }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
@@ -213,7 +213,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting}
       text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={isSubmitting}
     />

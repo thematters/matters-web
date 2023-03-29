@@ -64,7 +64,6 @@ const BaseConfirm: React.FC<FormProps> = ({
     errors,
     handleBlur,
     handleSubmit,
-    isValid,
     isSubmitting,
     setFieldError,
     setFieldValue,
@@ -77,6 +76,7 @@ const BaseConfirm: React.FC<FormProps> = ({
       password: '',
     },
     validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ amount, password }) =>
       _pickBy({
         amount: validatePayoutAmount({
@@ -238,7 +238,7 @@ const BaseConfirm: React.FC<FormProps> = ({
         <Dialog.Footer.Button
           type="submit"
           form={formId}
-          disabled={!isValid || isSubmitting}
+          disabled={isSubmitting}
           loading={isSubmitting}
         >
           <Translate id="confirm" />

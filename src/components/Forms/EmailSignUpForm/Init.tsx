@@ -68,7 +68,6 @@ const Init: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       displayName: '',
@@ -76,6 +75,7 @@ const Init: React.FC<FormProps> = ({
       tos: true,
     },
     validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ displayName, email, tos }) =>
       _pickBy({
         displayName: validateDisplayName(displayName, lang),
@@ -179,7 +179,7 @@ const Init: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting}
       text={<FormattedMessage defaultMessage="Next" description="" />}
       loading={isSubmitting}
     />

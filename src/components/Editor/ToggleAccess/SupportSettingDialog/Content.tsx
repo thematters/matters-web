@@ -68,6 +68,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       replyToDonator: content?.replyToDonator ? content.replyToDonator : '',
     },
     validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ requestForDonation, replyToDonator }) =>
       _pickBy({
         requestForDonation: validateSupportWords(requestForDonation!, lang),

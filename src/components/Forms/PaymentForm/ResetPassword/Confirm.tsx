@@ -64,6 +64,7 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
       comparedPassword: '',
     },
     validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ password, comparedPassword }) => {
       const passwordError = validatePaymentPassword(password, lang)
       const comparedPasswordError = validateComparedPassword(

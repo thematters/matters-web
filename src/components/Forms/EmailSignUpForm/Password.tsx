@@ -96,13 +96,13 @@ const Password: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       password: '',
       comparedPassword: '',
     },
     validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ password, comparedPassword }) =>
       _pickBy({
         password: validatePassword(password, lang),
@@ -206,7 +206,7 @@ const Password: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting}
       text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={isSubmitting}
     />
