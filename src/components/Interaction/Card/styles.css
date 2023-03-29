@@ -32,8 +32,6 @@
   &:not(.disabled) {
     &:hover,
     &:focus {
-      background: var(--color-grey-lighter);
-
       & :global(.card.bg-grey-lighter) {
         @mixin border-grey;
       }
@@ -43,31 +41,6 @@
 
 .bg-grey-lighter {
   background: var(--color-grey-lighter);
-
-  &:not(.disabled) {
-    &:hover,
-    &:focus {
-      background: var(--color-grey-lighter-active);
-    }
-  }
-}
-
-.bg-active-grey-lighter {
-  &:not(.disabled) {
-    &:hover,
-    &:focus {
-      background: var(--color-grey-lighter);
-    }
-  }
-}
-
-.bg-active-none {
-  &:not(.disabled) {
-    &:hover,
-    &:focus {
-      background: var(--color-white);
-    }
-  }
 }
 
 /* Spacing */
