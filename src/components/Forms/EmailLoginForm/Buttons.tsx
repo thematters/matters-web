@@ -16,7 +16,6 @@ export const PasswordResetDialogButton = ({
     tabIndex={-1}
   >
     <TextIcon color="green" weight="md">
-      {' '}
       <FormattedMessage
         defaultMessage="Forget Password"
         description="src/components/Forms/EmailLoginForm/Buttons.tsx"
@@ -26,7 +25,7 @@ export const PasswordResetDialogButton = ({
 )
 
 export const PasswordResetRedirectButton = () => (
-  <Button spacing={['xtight', 0]} {...appendTarget(PATHS.FORGET)}>
+  <Button spacing={['xtight', 0]} {...appendTarget(PATHS.FORGET)} tabIndex={-1}>
     <TextIcon color="green" weight="md">
       <FormattedMessage
         defaultMessage="Forget Password"
