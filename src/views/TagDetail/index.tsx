@@ -112,8 +112,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const isEditor = (tag?.editors || []).some((t) => t.id === viewer.id)
   const isMatty = viewer.info.email === 'hi@matters.news'
   const isMaintainer = isOwner || isEditor || isMatty
-  const isOfficial = !!tag?.isOfficial
-  const canAdd = !isOfficial || (isOfficial && isMatty)
 
   const title =
     // (tag.description ? `${makeTitle(tag.description, 80)} ` : '') +
@@ -196,7 +194,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         )}
 
         <section className="buttons">
-          {canAdd && <TagDetailButtons.AddButton tag={tag} />}
           <TagDetailButtons.FollowButton tag={tag} />
         </section>
       </section>
