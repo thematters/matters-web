@@ -23,6 +23,7 @@
 .size-xs {
   & .text {
     font-size: var(--font-size-xs);
+    line-height: 1rem;
   }
 }
 
