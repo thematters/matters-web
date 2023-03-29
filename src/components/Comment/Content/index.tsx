@@ -18,7 +18,6 @@ interface ContentProps {
   type: CommentFormType
   size?: 'sm' | 'md-s'
   bgColor?: 'grey-lighter' | 'white'
-  bgActiveColor?: 'grey-lighter' | 'white'
   limit?: number
   textIndent?: boolean
   isRichShow?: boolean
@@ -50,7 +49,6 @@ const Content = ({
   type,
   size,
   bgColor,
-  bgActiveColor,
   limit = 8,
   textIndent = false,
   isRichShow = true,
@@ -90,7 +88,6 @@ const Content = ({
           limit={limit}
           isRichShow={isRichShow}
           bgColor={bgColor}
-          bgActiveColor={bgActiveColor}
           textIndent={textIndent}
         >
           <section

@@ -42,14 +42,6 @@
         var(--color-grey-lighter) 100%
       );
     }
-
-    &.grey-lighter-active::after {
-      background: linear-gradient(
-        180deg,
-        rgb(247 247 247 / 0%) 0%,
-        var(--color-grey-lighter-active) 100%
-      );
-    }
   }
 }
 
