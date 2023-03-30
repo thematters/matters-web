@@ -1,12 +1,6 @@
 import { distance } from 'fastest-levenshtein'
 
-import {
-  MAX_TAG_CONTENT_LENGTH,
-  TAG_CONTENT_CLAMP_LATIN_LETTERS_LENGTH,
-  TAG_CONTENT_CLAMP_LENGTH,
-} from '~/common/enums'
-
-import { toSizedImageURL } from './url'
+import { toSizedImageURL } from '../url'
 
 /**
  * Remove html tag and merge multiple spaces into one.
@@ -34,7 +28,7 @@ export const makeSummary = (html: string, length = 140) => {
 
     const addition =
       el.length + summary.length > length + buffer
-        ? `${el.substring(0, length - summary.length)}...`
+        ? `${el.substring(0, length - summary.length)}…`
         : el
 
     summary = summary.concat(addition)
@@ -55,20 +49,23 @@ export const trimLineBreaks = (html: string) => {
 /**
  * Simple words' length counting.
  */
-export const countWordsLength = (text: string) => {
-  return text
-    ? text.split('').reduce((count, char, index) => {
-        return count + (text.charCodeAt(index) < 256 ? 1 : 2)
-      }, 0)
-    : 0
+export const countChars = (text: string) => {
+  if (!text) {
+    return 0
+  }
+
+  return text.split('').reduce((count, char, index) => {
+    return count + (text.charCodeAt(index) < 256 ? 1 : 2)
+  }, 0)
 }
 
 /**
  * Simple substring title by words' length counting.
  */
-export const subString = (text: string, limit: number) => {
+export const normalizeArticleTitle = (text: string, limit: number) => {
   const buffer = 3
-  const length = countWordsLength(text)
+  const length = countChars(text)
+
   if (text && length > limit) {
     let sum = 0
     let lastIndex = 0
@@ -79,8 +76,10 @@ export const subString = (text: string, limit: number) => {
         break
       }
     }
-    return text.substring(0, lastIndex) + '...'
+
+    return text.substring(0, lastIndex) + '…'
   }
+
   return text
 }
 
@@ -134,59 +133,3 @@ export const optimizeEmbed = (content: string) => {
  */
 export const measureDiffs = (source: string, target: string) =>
   distance(source, target)
-
-// for Twitter and others which do not support non-English in URL
-export const stripNonEnglishUrl = (url: string) => {
-  // const frag = url.split('#', 2)?.[1] // anything after '#'
-  const hash = url.match(/(#[\x21-\x7e]+)$/)?.[1] ?? ''
-  // get the beginning portion of all printable ascii, and must ends with ASCII '\w'
-  const turl = url.match(/^[\x21-\x7e]+[A-Za-z0-9]/)?.[0]
-  return turl ? `${turl}${hash}` : url // fallback to full url
-}
-
-const nonAlphaNumUni = String.raw`[^\p{Letter}\p{Number}]+`
-const anyNonAlphaNum = new RegExp(nonAlphaNumUni, 'gu')
-
-// to simulate slugify at DB server side
-// https://github.com/thematters/matters-metabase/blob/master/sql/stale-tags-create-table-view.sql#L2-L13
-// might be able to use under more scenarios
-export const tagSlugify = (content: string) =>
-  `${content}`
-    // .toLowerCase()
-    .replace(anyNonAlphaNum, '-') // replace all non alpha-number to `-`, including spaces and punctuations
-    .replace(/(^-+|-+$)/g, '') // strip leading or trailing `-` if there's any
-
-export const stripAllPunct = (content: string) => {
-  const words = `${content}`.split(anyNonAlphaNum).filter(Boolean)
-  switch (words.length) {
-    case 0:
-      return ''
-    case 1:
-      return words[0]
-    default:
-      const [first, ...rest] = words
-      return `${first} ${rest.join('')}`
-  }
-}
-
-export const stripSpaces = (content: string | undefined | null) =>
-  content?.replaceAll(/\s+/g, ' ').trim()
-
-export const normalizeTagInput = (content: string) =>
-  stripAllPunct(content).substring(0, MAX_TAG_CONTENT_LENGTH)
-
-const allLatinLetters = new RegExp(String.raw`^[\s -~\p{Script=Latin}]+$`, 'u')
-
-export const clampTagLength = (tagContent: string) => {
-  if (allLatinLetters.test(tagContent)) {
-    if (tagContent.length > TAG_CONTENT_CLAMP_LATIN_LETTERS_LENGTH) {
-      // allow 20 chars for ASCII/latin letters only tag
-      return `${tagContent.slice(0, TAG_CONTENT_CLAMP_LATIN_LETTERS_LENGTH)}…`
-    }
-  } else {
-    if (tagContent.length > TAG_CONTENT_CLAMP_LENGTH) {
-      return `${tagContent.slice(0, TAG_CONTENT_CLAMP_LENGTH)}…`
-    }
-  }
-  return tagContent
-}

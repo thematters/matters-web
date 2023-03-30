@@ -13,7 +13,7 @@ import {
   MAX_TAG_DESCRIPTION_LENGTH,
 } from '~/common/enums'
 import {
-  normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
+  normalizeTag,
   parseFormSubmitErrors,
   toPath,
   translate,
@@ -189,7 +189,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         error={touched.newContent && errors.newContent}
         onBlur={handleBlur}
         onChange={(e) => {
-          const newContent = normalizeTagInput(e.target.value)
+          const newContent = normalizeTag(e.target.value)
           setFieldValue('newContent', newContent)
           return newContent
         }}
