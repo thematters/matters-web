@@ -10,7 +10,7 @@ import { Dialog, IconAdd16, TextIcon, Translate } from '~/components'
 import SearchingArea, {
   SearchType,
   SelectNode,
-} from '~/components/SearchSelect/SearchingArea'
+} from '~/components/SearchSelect/SearchingArea/EditorSearchingArea'
 import StagingArea, {
   CustomStagingAreaProps,
   StagingNode,
@@ -180,6 +180,16 @@ const EditorSearchSelectForm = ({
           addNodeToStaging={addNodeToStaging}
           createTag={createTag}
           inviteEmail={inviteEmail}
+          CustomStagingArea={
+            CustomStagingArea && (
+              <CustomStagingArea
+                nodes={stagingNodes}
+                setNodes={syncStagingNodes}
+                hint={hint}
+                toStagingArea={toStagingArea}
+              />
+            )
+          }
           autoFocus
         />
       )}
