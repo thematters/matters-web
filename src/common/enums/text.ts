@@ -955,7 +955,7 @@ export const TEXT = {
     enterUserNameAgain: 'Enter Matters ID again',
     enterVerificationCode: 'Enter verification code',
     ENTITY_NOT_FOUND: 'Entity not found',
-    expand: 'Expand',
+    expand: 'More',
     extend: 'Collect',
     collectArticle: 'Collect Article',
     failureChange: 'Failed to edit, please try again.',

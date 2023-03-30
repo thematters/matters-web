@@ -49,7 +49,7 @@ const Content = ({
   type,
   size,
   bgColor,
-  limit = 8,
+  limit = 10,
   textIndent = false,
   isRichShow = true,
 }: ContentProps) => {
