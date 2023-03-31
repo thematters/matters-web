@@ -3,7 +3,6 @@ import {
   BookmarkButton,
   DateTime,
   IconArchive24,
-  IconDotDivider,
   IconPaywall16,
   IconPin24,
 } from '~/components'
@@ -24,36 +23,24 @@ export type FooterActionsProps = {
 
 const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
   const hasDate = date !== false
-  const hasDonation = article.transactionsReceivedBy.totalCount > 0
 
   return (
     <footer>
       <section className="left">
-        <ReadTime article={article} hasDivider={hasDate || hasDonation} />
+        <ReadTime article={article} />
 
-        <DonationCount article={article} hasDivider={hasDate} />
+        <DonationCount article={article} />
 
         {hasDate && <DateTime date={date || article.createdAt} />}
 
-        {article.access.type === 'paywall' && (
-          <>
-            <IconDotDivider />
-            <IconPaywall16 />
-          </>
-        )}
+        {article.access.type === 'paywall' && <IconPaywall16 />}
 
         {controls.inUserArticles && article.sticky && (
-          <>
-            <IconDotDivider />
-            <IconPin24 data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_FOOTER_PIN} />
-          </>
+          <IconPin24 data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_FOOTER_PIN} />
         )}
 
         {controls.inUserArticles && article.articleState !== 'active' && (
-          <>
-            <IconDotDivider />
-            <IconArchive24 />
-          </>
+          <IconArchive24 />
         )}
       </section>
 
