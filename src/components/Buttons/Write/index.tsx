@@ -10,6 +10,7 @@ import {
 import { analytics, toPath, translate } from '~/common/utils'
 import {
   Button,
+  IconCreate16,
   IconNavCreate32,
   IconSpinner16,
   LanguageContext,
@@ -64,7 +65,7 @@ const BaseWriteButton = ({
           loading ? (
             <IconSpinner16 color="white" />
           ) : (
-            <IconNavCreate32 color="white" />
+            <IconCreate16 color="white" />
           )
         }
         spacing="xtight"
