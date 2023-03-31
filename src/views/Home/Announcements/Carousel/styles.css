@@ -1,6 +1,6 @@
 :root {
   --announcement-header-height: 2rem;
-  --announcement-height: 8rem;
+  --announcement-height: 7rem;
 }
 
 .carousel {
@@ -17,7 +17,7 @@ header {
   right: var(--spacing-base);
   left: var(--spacing-base);
   z-index: 1;
-  padding: var(--spacing-base) var(--spacing-base) 0;
+  padding: var(--spacing-x-tight) var(--spacing-base) 0;
 
   & .left {
     @mixin flex-center-start;
@@ -26,7 +26,7 @@ header {
   & .dots {
     @mixin flex-center-start;
 
-    padding-left: var(--spacing-loose);
+    padding-left: var(--spacing-x-tight);
   }
 }
 
@@ -50,7 +50,7 @@ header {
     z-index: 0;
     height: var(--announcement-height);
     padding: calc(
-        var(--announcement-header-height) + var(--spacing-base) +
+        var(--announcement-header-height) + var(--spacing-x-tight) +
           var(--spacing-x-tight)
       )
       var(--spacing-base) var(--spacing-base);

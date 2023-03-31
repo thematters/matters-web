@@ -1,7 +1,5 @@
 import { useApolloClient, useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
-import _some from 'lodash/some'
-import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST, STORAGE_KEY_ANNOUNCEMENT } from '~/common/enums'
@@ -20,44 +18,22 @@ const BaseAnnouncements = ({ hide }: BaseAnnouncementsProps) => {
     VISIBLE_ANNOUNCEMENTS,
     { variables: { input: { visible: true } } }
   )
-  const [type, setType] = useState('all')
 
   if (loading || error) {
     return null
   }
 
-  const allItems = _get(
+  const items = _get(
     data,
     'official.announcements',
     []
   ) as VisibleAnnouncementsQuery['official']['announcements']
 
-  if (!allItems || allItems.length === 0) {
+  if (!items || items.length === 0) {
     return null
   }
 
-  // check controls
-  const hasCommunity = _some(allItems, { type: 'community' })
-  const hasProduct = _some(allItems, { type: 'product' })
-  const hasSeminar = _some(allItems, { type: 'seminar' })
-
-  let items = allItems
-
-  if (type !== 'all') {
-    items = items.filter((item) => item.type === type)
-  }
-
-  return (
-    <Carousel
-      type={type}
-      setType={setType}
-      items={items}
-      hide={hide}
-      hasCommunity={hasCommunity}
-      hasProduct={hasProduct}
-      hasSeminar={hasSeminar}
-    />
-  )
+  return <Carousel items={items} hide={hide} />
 }
 
 const Announcements = () => {
