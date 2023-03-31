@@ -31,6 +31,7 @@ export interface CustomStagingAreaProps {
   nodes: StagingNode[]
   setNodes: (nodes: StagingNode[]) => void
   hint: TextId
+  toStagingArea?: () => void
 }
 
 type StagingAreaProps = BaseStagingAreaProps & {
