@@ -33,9 +33,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
   const textAriaLabel = translate({ id: 'search', lang })
   const textPlaceholder = {
     Article: translate({
-      zh_hant: '搜尋作品標題',
-      zh_hans: '搜索作品标题',
-      en: 'Search articles',
+      zh_hant: '輸入文章標題或粘貼文章鏈接',
+      zh_hans: '输入文章标题或粘贴文章链接',
+      en: 'Enter article title or paste article link',
       lang,
     }),
     Tag: translate({
