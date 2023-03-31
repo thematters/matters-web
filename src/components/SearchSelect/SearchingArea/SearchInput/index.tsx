@@ -1,4 +1,5 @@
 import VisuallyHidden from '@reach/visually-hidden'
+import { Formik } from 'formik'
 import { useContext } from 'react'
 
 import { translate } from '~/common/utils'
@@ -13,8 +14,8 @@ export interface SearchInputProps {
   value: string
   onChange: (value: string) => void
   onSubmit: (value: string) => void
-  onFocus: () => void
-  onBlur: () => void
+  onFocus?: () => void
+  onBlur?: () => void
   autoFocus?: boolean
 }
 
@@ -58,59 +59,72 @@ const SearchInput: React.FC<SearchInputProps> = ({
   }
 
   return (
-    <section>
-      <form
-        onSubmit={(e) => {
-          onSubmit(value)
-          e.preventDefault()
-        }}
-        autoComplete="off"
-      >
-        <VisuallyHidden>
-          <label htmlFor={fieldId}>{textAriaLabel}</label>
-        </VisuallyHidden>
-
-        <input
-          id={fieldId}
-          type="search"
-          name="q"
-          autoFocus={!!autoFocus}
-          value={value}
-          aria-label={textAriaLabel}
-          placeholder={textPlaceholder[type]}
-          onChange={(e) => {
-            onChange(e.target.value)
-          }}
-          onFocus={() => {
-            onFocus()
-          }}
-          onBlur={() => {
-            onBlur()
-          }}
-        />
-
-        <button
-          className="search"
-          type="submit"
-          aria-label={translate({ id: 'search', lang })}
-        >
-          <IconSearch16 color="green" />
-        </button>
-
-        {value && (
-          <button
-            className="clear"
-            type="button"
-            aria-label={translate({ id: 'clear', lang })}
-            onClick={() => onChange('')}
+    <Formik
+      initialValues={{ q: '' }}
+      enableReinitialize
+      onSubmit={(values) => {
+        onSubmit(values.q)
+      }}
+    >
+      {({ values, setValues, handleSubmit, handleChange }) => {
+        return (
+          <form
+            onSubmit={handleSubmit}
+            role="search"
+            autoComplete="off"
+            action=""
           >
-            <IconClear16 color="grey" />
-          </button>
-        )}
-      </form>
+            <VisuallyHidden>
+              <label htmlFor={fieldId}>{textAriaLabel}</label>
+            </VisuallyHidden>
 
-      <style jsx>{styles}</style>
-    </section>
+            <input
+              id={fieldId}
+              type="search"
+              name="q"
+              autoCorrect="off"
+              autoFocus={!!autoFocus}
+              value={values.q}
+              aria-label={textAriaLabel}
+              placeholder={textPlaceholder[type]}
+              onChange={(e) => {
+                handleChange(e)
+                onChange(e.target.value)
+              }}
+              onFocus={() => {
+                onFocus && onFocus()
+              }}
+              onBlur={() => {
+                onBlur && onBlur()
+              }}
+            />
+
+            <button
+              className="search"
+              type="submit"
+              aria-label={translate({ id: 'search', lang })}
+            >
+              <IconSearch16 color="green" />
+            </button>
+
+            {value && (
+              <button
+                className="clear"
+                type="button"
+                aria-label={translate({ id: 'clear', lang })}
+                onClick={() => {
+                  onChange('')
+                  setValues({ q: '' })
+                }}
+              >
+                <IconClear16 color="grey" />
+              </button>
+            )}
+            <style jsx>{styles}</style>
+          </form>
+        )
+      }}
+    </Formik>
   )
 }
 
