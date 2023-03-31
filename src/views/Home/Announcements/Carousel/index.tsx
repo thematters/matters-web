@@ -1,11 +1,8 @@
 import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 
-import { translate } from '~/common/utils'
 import {
-  Button,
   Card,
-  IconClose32,
   LanguageContext,
   ResponsiveImage,
   useCarousel,
@@ -17,10 +14,9 @@ import styles from './styles.css'
 
 type CarouselProps = {
   items: VisibleAnnouncementsQuery['official']['announcements']
-  hide: () => void
 }
 
-const Carousel = ({ items, hide }: CarouselProps) => {
+const Carousel = ({ items }: CarouselProps) => {
   const { lang } = useContext(LanguageContext)
   const [dot, setDot] = useState(0)
   const [, setSnaps] = useState<any[]>([])
@@ -112,14 +108,6 @@ const Carousel = ({ items, hide }: CarouselProps) => {
             ))}
           </section>
         </div>
-
-        <Button
-          spacing={[0, 0]}
-          aria-label={translate({ id: 'close', lang })}
-          onClick={hide}
-        >
-          <IconClose32 size="lg" color="white" />
-        </Button>
       </header>
 
       <section

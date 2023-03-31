@@ -17,6 +17,7 @@ header {
   right: var(--spacing-base);
   left: var(--spacing-base);
   z-index: 1;
+  height: var(--announcement-header-height);
   padding: var(--spacing-x-tight) var(--spacing-base) 0;
 
   & .left {
