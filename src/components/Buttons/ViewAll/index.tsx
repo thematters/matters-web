@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Button, ButtonProps, IconArrowRight8, TextIcon } from '~/components'
+import { Button, ButtonProps, TextIcon } from '~/components'
 
 type ViewAllButtonProps = ButtonProps
 
@@ -12,13 +12,7 @@ export const ViewAllButton: React.FC<ViewAllButtonProps> = ({ ...props }) => {
       borderColor="green"
       {...props}
     >
-      <TextIcon
-        icon={<IconArrowRight8 size="xs" />}
-        color="green"
-        size="xs"
-        weight="md"
-        textPlacement="left"
-      >
+      <TextIcon color="green" size="xs" weight="md" textPlacement="left">
         <FormattedMessage defaultMessage="View All" description="" />
       </TextIcon>
     </Button>
