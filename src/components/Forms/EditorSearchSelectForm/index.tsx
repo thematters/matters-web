@@ -56,7 +56,6 @@ export type EditorSearchSelectFormProps = {
   draggable?: boolean
 
   createTag?: boolean
-  inviteEmail?: boolean
 
   CustomStagingArea?: (props: CustomStagingAreaProps) => JSX.Element
 }
@@ -80,7 +79,6 @@ const EditorSearchSelectForm = ({
   draggable,
 
   createTag,
-  inviteEmail,
 }: EditorSearchSelectFormProps) => {
   const initStagingNodes =
     nodes?.map((node) => ({ node, selected: true })) || []
@@ -179,7 +177,6 @@ const EditorSearchSelectForm = ({
           toSearchingArea={toSearchingArea}
           addNodeToStaging={addNodeToStaging}
           createTag={createTag}
-          inviteEmail={inviteEmail}
           CustomStagingArea={
             CustomStagingArea && (
               <CustomStagingArea
