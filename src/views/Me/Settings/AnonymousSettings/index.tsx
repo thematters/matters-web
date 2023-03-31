@@ -12,8 +12,6 @@ const Settings = () => {
     <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'settings' }} />
 
-      <Layout.AuthHeader title="settings" />
-
       <DisplayPreferences />
       <Learn />
       <Enhance />
