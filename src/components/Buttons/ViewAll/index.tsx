@@ -10,6 +10,7 @@ export const ViewAllButton: React.FC<ViewAllButtonProps> = ({ ...props }) => {
       size={[null, '1.75rem']}
       spacing={[0, 'tight']}
       borderColor="green"
+      borderWidth="sm"
       {...props}
     >
       <TextIcon color="green" size="xs" weight="md" textPlacement="left">
