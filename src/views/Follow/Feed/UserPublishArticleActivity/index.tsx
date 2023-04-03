@@ -28,7 +28,9 @@ const UserPublishArticleActivity = ({
       article={node}
       date={createdAt}
       footerCircle={
-        node.access.circle && <CircleDigest.Plain circle={node.access.circle} />
+        node.access.circle && (
+          <CircleDigest.Plain circle={node.access.circle} size="xs" />
+        )
       }
     />
     <CardExposureTracker
