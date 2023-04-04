@@ -3,8 +3,6 @@ import { useEffect } from 'react'
 
 import { toPath } from '~/common/utils'
 import { Dialog, ShareDialog, Translate } from '~/components'
-import { EditModeArticleQuery } from '~/gql/graphql'
-
 interface Props {
   article: {
     id: string
@@ -14,11 +12,7 @@ interface Props {
       userName?: string | null
     }
   }
-  draft: NonNullable<
-    NonNullable<
-      EditModeArticleQuery['article'] & { __typename: 'Article' }
-    >['drafts']
-  >[0]
+  newestMediaHash: string
 
   cancel: () => void
 }
@@ -35,12 +29,12 @@ const BasePublishedState = ({
   return null
 }
 
-const PublishedState = ({ article, draft, cancel }: Props) => {
+const PublishedState = ({ article, cancel, newestMediaHash }: Props) => {
   const router = useRouter()
 
   const path = toPath({
     page: 'articleDetail',
-    article: { ...article, mediaHash: draft.mediaHash },
+    article: { ...article, mediaHash: newestMediaHash },
   })
 
   return (
