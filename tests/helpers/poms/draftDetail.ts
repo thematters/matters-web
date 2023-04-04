@@ -242,7 +242,9 @@ export class DraftDetailPage {
 
     // type and search
     const searchKey = 'test'
-    await this.page.getByPlaceholder('Search articles').fill(searchKey)
+    await this.page
+      .getByPlaceholder('Enter article title or paste article link')
+      .fill(searchKey)
 
     await waitForAPIResponse({
       page: this.page,
