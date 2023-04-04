@@ -28,7 +28,12 @@ const PendingState = ({
 
   useEffect(() => {
     startPolling(1000 * 2)
+
     refetch && refetch()
+
+    return () => {
+      stopPolling()
+    }
   }, [])
 
   if (
