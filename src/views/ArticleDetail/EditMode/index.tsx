@@ -80,6 +80,7 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
 
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const [editData, setEditData] = useState<Record<string, any>>({})
+  const [showPublishState, setShowPublishState] = useState(false)
   const { data, loading, error } = useQuery<EditModeArticleQuery>(
     EDIT_MODE_ARTICLE,
     {
@@ -303,17 +304,19 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                   isOverRevisionLimit={isOverRevisionLimit}
                   isSameHash={isSameHash}
                   isEditDisabled={isEditDisabled}
-                  onSaved={onSaved}
+                  onSaved={() => {
+                    onSaved()
+                  }}
+                  onPublish={() => {
+                    setShowPublishState(true)
+                  }}
                 />
               }
             />
 
-            <PublishState
-              article={article}
-              draft={draft}
-              isSameHash={isSameHash}
-              cancel={onCancel}
-            />
+            {showPublishState && (
+              <PublishState article={article} cancel={onCancel} />
+            )}
 
             <Layout.Spacing>
               <Editor
