@@ -75,8 +75,8 @@ export const LIST_VIEWER_ARTICLES = gql`
 `
 
 export const ARTICLE_URL_QUERY = gql`
-  query ArticleUrlQuery($mediaHash: String!) {
-    article(input: { mediaHash: $mediaHash }) {
+  query ArticleUrlQuery($id: ID!) {
+    node(input: { id: $id }) {
       ... on Article {
         ...ArticleDigestDropdownArticle
       }

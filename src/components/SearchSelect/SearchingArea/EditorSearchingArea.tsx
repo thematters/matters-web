@@ -9,6 +9,7 @@ import {
   mergeConnections,
   normalizeTagInput,
   parseURL,
+  toGlobalId,
 } from '~/common/utils'
 import {
   EmptySearch,
@@ -177,11 +178,12 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
     if (searchType === 'Article' && isUrl(key) && regex.test(key)) {
       const urlObj = parseURL(key)
       const paths = urlObj.pathname.split('-')
-      const mediaHash = paths?.[paths?.length - 1]
+      const subPaths = paths[0].split('/')
+      const articleId = subPaths?.[subPaths.length - 1]
       setMode('article_url')
       lazyArticleUrlQuery({
         variables: {
-          mediaHash,
+          id: toGlobalId({ type: 'Article', id: articleId }),
         },
       })
     } else {
@@ -247,7 +249,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
 
   const hasNodes = searchNodes.length > 0
   const haslistNode = listNode.length > 0
-  const hasArticle = !!articleUrlData?.article
+  const hasArticle = !!articleUrlData?.node
   const canCreateTag =
     isTag &&
     searchKey &&
@@ -335,9 +337,9 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
               {isArticleUrlMode &&
                 !searching &&
                 hasArticle &&
-                articleUrlData?.article?.__typename === 'Article' && (
+                articleUrlData?.node?.__typename === 'Article' && (
                   <SearchSelectNode
-                    node={articleUrlData.article}
+                    node={articleUrlData.node}
                     onClick={addNodeToStaging}
                   />
                 )}
