@@ -5,8 +5,10 @@ import { useDebouncedCallback } from 'use-debounce'
 import { INPUT_DEBOUNCE } from '~/common/enums'
 import {
   analytics,
+  isUrl,
   mergeConnections,
-  normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
+  normalizeTagInput,
+  parseURL,
 } from '~/common/utils'
 import {
   EmptySearch,
@@ -17,6 +19,7 @@ import {
   ViewerContext,
 } from '~/components'
 import {
+  ArticleUrlQueryQuery,
   ListViewerArticlesQuery,
   SearchExclude,
   SearchFilter,
@@ -26,7 +29,7 @@ import {
 import SearchSelectNode from '../SearchSelectNode'
 import styles from '../styles.css'
 import CreateTag from './CreateTag'
-import { LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
+import { ARTICLE_URL_QUERY, LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
 import SearchInput, {
   SearchInputProps,
   SearchType as SearchInputType,
@@ -67,7 +70,7 @@ type SearchingAreaProps = {
   CustomStagingArea?: React.ReactNode
 } & Pick<SearchInputProps, 'autoFocus'>
 
-type Mode = 'search' | 'list'
+type Mode = 'search' | 'list' | 'article_url'
 
 const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
   searchType,
@@ -90,6 +93,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
   const [mode, setMode] = useState<Mode>(hasListMode ? 'list' : 'search')
   const isSearchMode = mode === 'search'
   const isListMode = mode === 'list'
+  const isArticleUrlMode = mode === 'article_url'
 
   const [searching, setSearching] = useState(false)
   const [searchingNodes, setSearchingNodes] = useState<SelectNode[]>([])
@@ -113,6 +117,15 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
     loadList,
     { data: listData, loading: listLoading, fetchMore: fetchMoreList },
   ] = useLazyQuery<ListViewerArticlesQuery>(LIST_VIEWER_ARTICLES)
+
+  const [
+    lazyArticleUrlQuery,
+    { data: articleUrlData, loading: articleUrlLoding },
+  ] = usePublicLazyQuery<ArticleUrlQueryQuery>(
+    ARTICLE_URL_QUERY,
+    {},
+    { publicQuery: !viewer.isAuthed }
+  )
 
   // pagination
   const { edges: searchEdges, pageInfo: searchPageInfo } = data?.search || {}
@@ -156,25 +169,43 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
       .filter((node) => node.articleState === 'active') || []
   const listNodeIds = listNode.map((n) => n.id).join(',')
   const search = (key: string) => {
-    const type = searchType
-    lazySearch({
-      variables: {
-        key,
-        type,
-        filter: searchFilter,
-        exclude: searchExclude,
-        first: 10,
-      },
-    })
+    // Used to match links of the format like👇
+    // https://matters.news/@az/12-来自matters的第一封信-致好朋友-zdpuAnuMKxNv6SUj7kTRzgrWRdp9q4aMMKHJ6TGtn8tp4FwX2
+    const regex = new RegExp(
+      `^https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@\\w+/\\d+-.+-\\w+$`
+    )
+    if (searchType === 'Article' && isUrl(key) && regex.test(key)) {
+      const urlObj = parseURL(key)
+      const paths = urlObj.pathname.split('-')
+      const mediaHash = paths?.[paths?.length - 1]
+      setMode('article_url')
+      lazyArticleUrlQuery({
+        variables: {
+          mediaHash,
+        },
+      })
+    } else {
+      const type = searchType
+      lazySearch({
+        variables: {
+          key,
+          type,
+          filter: searchFilter,
+          exclude: searchExclude,
+          first: 10,
+        },
+      })
+    }
   }
 
   // handling changes from search input
   const onSearchInputChange = (value: string) => {
     setSearchKey(value)
     debouncedSetSearchKey(value)
+    setMode('search')
 
-    if (hasListMode) {
-      setMode(value ? 'search' : 'list')
+    if (hasListMode && !value) {
+      setMode('list')
       return
     }
   }
@@ -209,8 +240,14 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
     setSearchingNodes(listNode)
   }, [listLoading, listNodeIds])
 
+  // article url
+  useEffect(() => {
+    setSearching(articleUrlLoding)
+  }, [articleUrlLoding])
+
   const hasNodes = searchNodes.length > 0
   const haslistNode = listNode.length > 0
+  const hasArticle = !!articleUrlData?.article
   const canCreateTag =
     isTag &&
     searchKey &&
@@ -292,6 +329,18 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                   </ul>
                 </InfiniteScroll>
               )}
+
+              {isArticleUrlMode && !searching && !hasArticle && <EmptySearch />}
+
+              {isArticleUrlMode &&
+                !searching &&
+                hasArticle &&
+                articleUrlData?.article?.__typename === 'Article' && (
+                  <SearchSelectNode
+                    node={articleUrlData.article}
+                    onClick={addNodeToStaging}
+                  />
+                )}
             </>
           )}
 
