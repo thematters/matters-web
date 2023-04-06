@@ -227,10 +227,11 @@ test.describe('Mutate article', () => {
 
     const aliceArticleDetail = new ArticleDetailPage(alicePage, isMobile)
     // revise article
-    aliceArticleDetail.editArticle()
+    await aliceArticleDetail.editArticle()
 
     const draftDetail = new DraftDetailPage(alicePage, isMobile)
     await draftDetail.dialogEditButton.click()
+    await sleep(3 * 1000)
     const newContent = 'revise article ' + article.content
     await draftDetail.contentInput.fill(newContent)
     await draftDetail.rePublish()
