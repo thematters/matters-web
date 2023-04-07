@@ -173,7 +173,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
     // Used to match links of the format like👇
     // https://matters.news/@az/12-来自matters的第一封信-致好朋友-zdpuAnuMKxNv6SUj7kTRzgrWRdp9q4aMMKHJ6TGtn8tp4FwX2
     const regex = new RegExp(
-      `^https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@\\w+/\\d+-.+-\\w+$`
+      `^https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@\\w+/\\d+.?$`
     )
     if (searchType === 'Article' && isUrl(key) && regex.test(key)) {
       const urlObj = parseURL(key)
