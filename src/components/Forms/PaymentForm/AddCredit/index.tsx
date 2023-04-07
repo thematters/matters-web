@@ -122,6 +122,8 @@ const BaseAddCredit: React.FC<FormProps> = ({
     initialValues: {
       amount: defaultAmount || PAYMENT_DEFAULT_ADD_CREDIT_AMOUNT[currency],
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ amount }) =>
       _pickBy({
         amount: validateAmount(amount, lang),

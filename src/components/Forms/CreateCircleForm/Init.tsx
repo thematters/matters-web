@@ -10,6 +10,7 @@ import {
 } from '~/common/enums'
 import {
   analytics,
+  normalizeName,
   parseFormSubmitErrors,
   validateCircleAmount,
   validateCircleDisplayName,
@@ -63,13 +64,14 @@ const Init: React.FC<FormProps> = ({
     handleSubmit,
     setFieldValue,
     isSubmitting,
-    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       name: '',
       displayName: '',
       amount: PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD,
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ name, displayName, amount }) =>
       _pickBy({
         name: validateCircleName(name, lang),
@@ -112,7 +114,7 @@ const Init: React.FC<FormProps> = ({
               'name',
               intl.formatMessage({
                 defaultMessage:
-                  'Must be between 2-20 characters long. Only letters, numbers and underscores are allowed.',
+                  'Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.',
                 description: '',
               })
             )
@@ -167,7 +169,11 @@ const Init: React.FC<FormProps> = ({
           value={values.name}
           error={touched.name && errors.name}
           onBlur={handleBlur}
-          onChange={handleChange}
+          onChange={(e) => {
+            const name = normalizeName(e.target.value)
+            setFieldValue('name', name)
+            return name
+          }}
         />
 
         <style jsx>{styles}</style>
@@ -210,7 +216,7 @@ const Init: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting}
       text={<FormattedMessage defaultMessage="Next Step" description="" />}
       loading={isSubmitting}
     />

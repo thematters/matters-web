@@ -33,7 +33,6 @@ interface ExpandableProps {
   textIndent?: boolean
   isRichShow?: boolean
   bgColor?: 'grey-lighter' | 'white'
-  bgActiveColor?: 'grey-lighter' | 'white'
 }
 
 export const Expandable: React.FC<ExpandableProps> = ({
@@ -47,7 +46,6 @@ export const Expandable: React.FC<ExpandableProps> = ({
   textIndent = false,
   isRichShow = false,
   bgColor = 'white',
-  bgActiveColor,
 }) => {
   const [expandable, setExpandable] = useState(false)
   const [lineHeight, setLineHeight] = useState(24)
@@ -69,7 +67,11 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const richWrapperClasses = classNames({
     richWrapper: true,
     [`${bgColor}`]: !!bgColor,
-    [`${bgActiveColor}-active`]: !!bgActiveColor,
+  })
+
+  const richShowMoreButtonClasses = classNames({
+    richShowMoreButton: true,
+    [`${bgColor}`]: !!bgColor,
   })
 
   useEffect(() => {
@@ -101,7 +103,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
       <div ref={node}>
         {(!expandable || (expandable && expand)) && <div>{children}</div>}
       </div>
-      {expandable && expand && (
+      {expandable && expand && !isRichShow && (
         <section className="collapseWrapper">
           <Button
             spacing={['xxtight', 'xtight']}
@@ -111,14 +113,14 @@ export const Expandable: React.FC<ExpandableProps> = ({
               setExpand(!expand)
             }}
           >
-            <TextIcon icon={<IconArrowUp16 />}>
+            <TextIcon icon={<IconArrowUp16 />} textPlacement="left">
               <Translate zh_hans="收起" zh_hant="收合" en="collapse" />
             </TextIcon>
           </Button>
         </section>
       )}
       {expandable && !expand && (
-        <p>
+        <p className="unexpandWrapper">
           {!isRichShow && (
             <TextTruncate
               line={limit}
@@ -162,20 +164,16 @@ export const Expandable: React.FC<ExpandableProps> = ({
               >
                 {children}
               </div>
-              <section className="collapseWrapper">
-                <Button
-                  spacing={['xxtight', 'xtight']}
-                  bgColor="grey-lighter"
-                  textColor="grey"
-                  onClick={() => {
-                    setExpand(!expand)
-                  }}
-                >
-                  <TextIcon icon={<IconArrowDown16 />}>
-                    <Translate id="expand" />
-                  </TextIcon>
-                </Button>
-              </section>
+              <button
+                className={richShowMoreButtonClasses}
+                onClick={() => {
+                  setExpand(!expand)
+                }}
+              >
+                <TextIcon icon={<IconArrowDown16 />}>
+                  <Translate id="expand" />
+                </TextIcon>
+              </button>
             </>
           )}
         </p>

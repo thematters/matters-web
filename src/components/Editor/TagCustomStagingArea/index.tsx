@@ -22,6 +22,7 @@ const TagCustomStagingArea = ({
   nodes: tags,
   setNodes: setTags,
   hint,
+  toStagingArea,
 }: CustomStagingAreaProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -54,6 +55,7 @@ const TagCustomStagingArea = ({
   const addTag = (tag: SelectTag) => {
     const oldTags = tags.filter((t) => t.node.id !== tag.id)
     setTags([...oldTags, { node: tag, selected: true }])
+    toStagingArea && toStagingArea()
   }
 
   if (loading) {

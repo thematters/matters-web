@@ -68,13 +68,14 @@ const Init: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       displayName: '',
       email: '',
       tos: true,
     },
+    validateOnBlur: false,
+    validateOnChange: true, // enable for signup form
     validate: ({ displayName, email, tos }) =>
       _pickBy({
         displayName: validateDisplayName(displayName, lang),
@@ -121,7 +122,7 @@ const Init: React.FC<FormProps> = ({
         name="displayName"
         required
         placeholder={intl.formatMessage({
-          defaultMessage: 'Your Matters display name, can be changed later',
+          defaultMessage: 'Display name, can be changed later',
           description: 'src/components/Forms/EmailSignUpForm/Init.tsx',
         })}
         value={values.displayName}
@@ -178,7 +179,7 @@ const Init: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting}
       text={<FormattedMessage defaultMessage="Next" description="" />}
       loading={isSubmitting}
     />

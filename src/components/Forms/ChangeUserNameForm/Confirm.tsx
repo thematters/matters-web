@@ -4,6 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 
 import {
+  normalizeName,
   parseFormSubmitErrors,
   translate,
   validateComparedUserName,
@@ -58,15 +59,16 @@ const Confirm: React.FC<FormProps> = ({
     errors,
     touched,
     handleBlur,
-    handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
+    setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
       userName: '',
       comparedUserName: '',
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ userName, comparedUserName }) =>
       _pickBy({
         userName: validateUserName(userName, lang),
@@ -130,7 +132,11 @@ const Confirm: React.FC<FormProps> = ({
         value={values.userName}
         error={touched.userName && errors.userName}
         onBlur={handleBlur}
-        onChange={handleChange}
+        onChange={(e) => {
+          const userName = normalizeName(e.target.value)
+          setFieldValue('userName', userName)
+          return userName
+        }}
       />
 
       <Form.Input
@@ -141,8 +147,12 @@ const Confirm: React.FC<FormProps> = ({
         value={values.comparedUserName}
         error={touched.comparedUserName && errors.comparedUserName}
         onBlur={handleBlur}
-        onChange={handleChange}
         hint={<Translate id="hintUserName" />}
+        onChange={(e) => {
+          const userName = normalizeName(e.target.value)
+          setFieldValue('comparedUserName', userName)
+          return userName
+        }}
       />
     </Form>
   )
@@ -151,7 +161,7 @@ const Confirm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting}
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />

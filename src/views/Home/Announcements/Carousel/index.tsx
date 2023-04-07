@@ -2,6 +2,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 
 import {
+  BannerExposureTracker,
   Card,
   LanguageContext,
   ResponsiveImage,
@@ -116,7 +117,7 @@ const Carousel = ({ items }: CarouselProps) => {
         onClickCapture={onCaptureClick}
       >
         <div className="container">
-          {items?.map((item) => {
+          {items?.map((item, i) => {
             if (!item.cover) {
               return null
             }
@@ -124,26 +125,31 @@ const Carousel = ({ items }: CarouselProps) => {
             const translatedItem = item.translations?.find(
               (translated) => translated.language === lang
             )
-            const hasTranslaton = translatedItem != null
+
+            // const hasTranslaton = translatedItem != null
+            const title = (translatedItem?.title ?? item.title) || ''
+            const itemLink = (translatedItem?.link ?? item.link) || ''
+            const itemContent = translatedItem?.content ?? item.content
             return (
               <div key={item.id} className="slide">
-                <Card
-                  htmlHref={
-                    hasTranslaton ? translatedItem.link : item.link || ''
-                  }
-                  spacing={[0, 0]}
-                >
+                <Card htmlHref={itemLink} spacing={[0, 0]}>
                   <div className="content">
                     <ResponsiveImage
                       url={item.cover}
                       size="540w"
                       smUpSize="1080w"
                     />
-                    <h3>{hasTranslaton ? translatedItem.title : item.title}</h3>
-                    <p>
-                      {hasTranslaton ? translatedItem.content : item.content}
-                    </p>
+                    <h3>{title}</h3>
+                    <p>{itemContent}</p>
                   </div>
+                  <BannerExposureTracker
+                    id={item.id}
+                    location={i}
+                    title={title}
+                    link={itemLink}
+                    // content={itemContent}
+                    lang={lang}
+                  />
                 </Card>
               </div>
             )

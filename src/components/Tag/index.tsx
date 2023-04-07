@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { clampTagLength, toPath } from '~/common/utils'
+import { clampTag, toPath } from '~/common/utils'
 import { IconClose16, IconProps, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
@@ -67,7 +67,7 @@ export const Tag = ({
     disabled: !!disabled && !onClick,
   })
 
-  const tagName = canClamp ? clampTagLength(tag.content) : tag.content
+  const tagName = canClamp ? clampTag(tag.content) : tag.content
 
   const path = toPath({
     page: 'tagDetail',

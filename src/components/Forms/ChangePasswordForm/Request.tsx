@@ -59,11 +59,12 @@ const Request: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       email: defaultEmail,
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ email }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
@@ -113,7 +114,7 @@ const Request: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting}
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
