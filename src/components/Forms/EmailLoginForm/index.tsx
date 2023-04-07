@@ -16,7 +16,7 @@ import {
   redirectToTarget,
   setCookies,
   validateEmail,
-  validatePassword,
+  // validatePassword,
 } from '~/common/utils'
 import {
   Dialog,
@@ -94,17 +94,18 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     handleBlur,
     handleChange,
     handleSubmit,
-    isValid,
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
       email: '',
       password: '',
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ email, password }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
-        password: validatePassword(password, lang),
+        // password: validatePassword(password, lang),
       }),
     onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
       try {
@@ -212,7 +213,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting}
       text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={isSubmitting}
     />

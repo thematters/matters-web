@@ -64,13 +64,14 @@ const Init: React.FC<FormProps> = ({
     handleSubmit,
     setFieldValue,
     isSubmitting,
-    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       name: '',
       displayName: '',
       amount: PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD,
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ name, displayName, amount }) =>
       _pickBy({
         name: validateCircleName(name, lang),
@@ -215,7 +216,7 @@ const Init: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting}
       text={<FormattedMessage defaultMessage="Next Step" description="" />}
       loading={isSubmitting}
     />
