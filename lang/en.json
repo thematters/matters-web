@@ -259,6 +259,10 @@
     "defaultMessage": ". Take a look at your income",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
+  "CBDDR5": {
+    "defaultMessage": "Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.",
+    "description": ""
+  },
   "Cdkhl8": {
     "defaultMessage": "Delete {commentType}",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -862,10 +866,6 @@
   "g/L3Fm": {
     "defaultMessage": " posted and replied to topics ",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "gMZZ9I": {
-    "defaultMessage": "Must be between 2-20 characters long. Only letters, numbers and underscores are allowed.",
-    "description": ""
   },
   "gMZfHO": {
     "defaultMessage": "RSS Subscription",
