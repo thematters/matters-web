@@ -2,7 +2,7 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import React from 'react'
 
 import { TEST_ID } from '@/src/common/enums'
-import { AvatarSize, CommentFormType, UserDigest } from '~/components'
+import { AvatarSize, CommentFormType, Media, UserDigest } from '~/components'
 import {
   FeedCommentPrivateFragment,
   FeedCommentPublicFragment,
@@ -87,7 +87,13 @@ export const BaseCommentFeed = ({
       )}
 
       <section className="content-container">
-        <Content comment={comment} type={type} size="md-s" />
+        <Media at="sm">
+          <Content comment={comment} type={type} size="md-s" limit={17} />
+        </Media>
+        <Media greaterThan="sm">
+          <Content comment={comment} type={type} size="md-s" limit={13} />
+        </Media>
+
         <FooterActions
           comment={comment}
           type={type}
