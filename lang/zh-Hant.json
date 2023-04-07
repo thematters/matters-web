@@ -771,10 +771,6 @@
     "defaultMessage": "取消封鎖k",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
-  "bVZDVx": {
-    "defaultMessage": "提現流程已開始，到帳時間請關注銀行提醒。",
-    "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
-  },
   "beLe/F": {
     "defaultMessage": "廣播",
     "description": ""
@@ -1241,10 +1237,6 @@
   "yZfKI4": {
     "defaultMessage": "discussion and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-  },
-  "z4NaU2": {
-    "defaultMessage": "你的 ",
-    "description": "src/components/Notice/TransactionNotice/PaymentPayoutNotice.tsx"
   },
   "zKOr2x": {
     "defaultMessage": "已追蹤用戶佔總觀看人數比例",
