@@ -1115,7 +1115,7 @@
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
   "gMZZ9I": {
-    "defaultMessage": "2-20 個字元，僅支持英文、數字或下劃線",
+    "defaultMessage": "2-20 個字元，僅支持英文小寫字母、數字或下劃線",
     "description": ""
   },
   "+7SAix": {

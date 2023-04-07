@@ -84,6 +84,9 @@ export enum TEST_ID {
   USER_PROFILE_FOLLOWERS_COUNT = 'user-profile/followers/count',
   USER_PROFILE_BIO = 'user-profile/bio',
 
+  // Editor
+  EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON = 'editor/search-select-form/dialog/add-button',
+
   // misc
   SPINNER = 'spinner',
 }

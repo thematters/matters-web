@@ -74,7 +74,9 @@ export const publishDraft = async ({
 
   if (tags && tags.length > 0) {
     const articleTags = await articleDetail.getTags()
-    expect(articleTags.sort().join(',')).toBe(tags.sort().join(','))
+    expect(articleTags.sort().join(',')).toBe(
+      '#,'.repeat(tags.length) + tags.sort().join(',')
+    )
   }
 
   if (collectedArticleTitle) {

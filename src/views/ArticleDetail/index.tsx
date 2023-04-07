@@ -6,7 +6,7 @@ import { Waypoint } from 'react-waypoint'
 
 import { ADD_TOAST, DEFAULT_LOCALE, URL_QS } from '~/common/enums'
 import {
-  stripAllPunct,
+  normalizeTag,
   toGlobalId,
   toPath,
   toUserLanguage,
@@ -224,9 +224,7 @@ const BaseArticleDetail = ({
     translated && translatedSummary ? translatedSummary : article.summary
   const content =
     translated && translatedContent ? translatedContent : article.content
-  const keywords = (article.tags || []).map(({ content: c }) =>
-    stripAllPunct(c)
-  )
+  const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
 
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>

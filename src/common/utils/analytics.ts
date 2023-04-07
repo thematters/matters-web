@@ -32,6 +32,7 @@ type EventArgs =
   | ['view_add_credit_dialog', ViewDialogProp]
   | ['view_donation_dialog', ViewDialogProp]
   | ['view_subscribe_circle_dialog', ViewDialogProp]
+  | ['banner_exposure', BannerExposureProp]
   | ['card_exposure', CardExposureProp]
   | ['tag_exposure', TagExposureProp]
 
@@ -145,6 +146,17 @@ interface ClickFeedProp {
 /**
  * Event: Card Exposure
  */
+
+interface BannerExposureProp {
+  id: string
+  // feedType: FeedType
+  // contentType: ContentType | ActivityType
+  location: number | string
+  title: string
+  link: string
+  lang: Language
+  delay_msecs?: number
+}
 
 interface CardExposureProp {
   id: string

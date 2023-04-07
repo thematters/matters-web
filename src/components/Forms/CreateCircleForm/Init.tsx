@@ -10,6 +10,7 @@ import {
 } from '~/common/enums'
 import {
   analytics,
+  normalizeName,
   parseFormSubmitErrors,
   validateCircleAmount,
   validateCircleDisplayName,
@@ -113,7 +114,7 @@ const Init: React.FC<FormProps> = ({
               'name',
               intl.formatMessage({
                 defaultMessage:
-                  'Must be between 2-20 characters long. Only letters, numbers and underscores are allowed.',
+                  'Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.',
                 description: '',
               })
             )
@@ -168,7 +169,11 @@ const Init: React.FC<FormProps> = ({
           value={values.name}
           error={touched.name && errors.name}
           onBlur={handleBlur}
-          onChange={handleChange}
+          onChange={(e) => {
+            const name = normalizeName(e.target.value)
+            setFieldValue('name', name)
+            return name
+          }}
         />
 
         <style jsx>{styles}</style>

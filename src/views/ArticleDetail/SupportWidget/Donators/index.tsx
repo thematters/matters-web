@@ -126,6 +126,7 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                 <TextIcon
                   icon={<IconArrowRight16 size="xs" />}
                   textPlacement="left"
+                  size="xs"
                 >
                   <Translate
                     zh_hant="個人支持過本文・查看全部"

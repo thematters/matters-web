@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 
 import { TEST_ID } from '~/common/enums'
-import { subString, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 import { LinkWrapper } from '~/components'
 import { UserDigestPlainUserFragment } from '~/gql/graphql'
 
@@ -13,7 +13,6 @@ export type UserDigestPlainProps = {
 
   disabled?: boolean
   hasUnderline?: boolean
-  displayNameLimit?: number
   onClick?: () => void
 }
 
@@ -22,7 +21,6 @@ const Plain = ({
   disabled,
   onClick,
   hasUnderline,
-  displayNameLimit,
 }: UserDigestPlainProps) => {
   const path = toPath({
     page: 'userProfile',
@@ -47,10 +45,7 @@ const Plain = ({
       testId={TEST_ID.DIGEST_USER_MINI}
     >
       <section className={containerClasses}>
-        <span className={displayNameClasses}>
-          {displayNameLimit && subString(user.displayName!, displayNameLimit)}
-          {!displayNameLimit && user.displayName}
-        </span>
+        <span className={displayNameClasses}>{user.displayName}</span>
         <style jsx>{styles}</style>
       </section>
     </LinkWrapper>

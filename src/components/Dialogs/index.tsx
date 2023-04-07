@@ -13,6 +13,9 @@ export * from './ReviseArticleDialog'
 export * from './ShareDialog'
 export * from './SupportersDialog'
 
+// Editor
+export * from './EditorSearchSelectDialog'
+
 // Tag
 export * from './RecommendTagDialog'
 export * from './TagAdoptionDialog'

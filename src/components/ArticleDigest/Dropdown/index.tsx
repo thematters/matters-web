@@ -15,6 +15,7 @@ export type ArticleDigestDropdownProps = {
   titleTextSize?: ArticleDigestTitleTextSize
   disabled?: boolean
   extraButton?: React.ReactNode
+  lineClamp?: boolean
 } & Pick<
   CardProps,
   'spacing' | 'bgColor' | 'bgActiveColor' | 'borderRadius' | 'onClick'
@@ -47,6 +48,7 @@ export const ArticleDigestDropdown = ({
   titleTextSize,
   disabled,
   extraButton,
+  lineClamp,
 
   // Card Props
   ...cardProps
@@ -72,6 +74,7 @@ export const ArticleDigestDropdown = ({
             textSize={titleTextSize}
             disabled={cardDisabled}
             is="h3"
+            lineClamp={lineClamp}
           />
 
           <section className="extra-button">{!isBanned && extraButton}</section>
