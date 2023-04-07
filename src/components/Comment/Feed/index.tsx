@@ -84,10 +84,10 @@ export const BaseCommentFeed = ({
 
       <section className="content-container">
         <Media at="sm">
-          <Content comment={comment} type={type} size="md-s" limit={13} />
+          <Content comment={comment} type={type} size="md-s" limit={17} />
         </Media>
         <Media greaterThan="sm">
-          <Content comment={comment} type={type} size="md-s" limit={10} />
+          <Content comment={comment} type={type} size="md-s" limit={13} />
         </Media>
 
         <FooterActions
