@@ -1115,7 +1115,7 @@
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
   "gMZZ9I": {
-    "defaultMessage": "Must be between 2-20 characters long. Only letters, numbers and underscores are allowed.",
+    "defaultMessage": "Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.",
     "description": ""
   },
   "+7SAix": {

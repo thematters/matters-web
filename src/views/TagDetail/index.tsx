@@ -6,9 +6,7 @@ import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { ERROR_CODES } from '~/common/enums'
 import {
   fromGlobalId,
-  // makeTitle,
-  // stripPunctPrefixSuffix,
-  stripAllPunct,
+  normalizeTag,
   stripSpaces,
   toGlobalId,
   toPath,
@@ -115,11 +113,9 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const isOfficial = !!tag?.isOfficial
   const canAdd = !isOfficial || (isOfficial && isMatty)
 
-  const title =
-    // (tag.description ? `${makeTitle(tag.description, 80)} ` : '') +
-    '#' + stripAllPunct(tag.content)
-  const keywords = tag.content.split(/\s+/).filter(Boolean).map(stripAllPunct) // title.includes(tag.content) ??
-  const description = stripSpaces(tag.description) // || stripAllPunct(tag.content)
+  const title = '#' + normalizeTag(tag.content)
+  const keywords = tag.content.split(/\s+/).filter(Boolean).map(normalizeTag)
+  const description = stripSpaces(tag.description)
   const path = toPath({ page: 'tagDetail', tag })
 
   /**
@@ -150,7 +146,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
       />
 
       <Head
-        // title={`#${stripAllPunct(tag.content)}`}
+        // title={`#${normalizeTag(tag.content)}`}
         // description={tag.description}
         title={title}
         path={path.href}
@@ -163,7 +159,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'ItemList', // should follow with some recent articles under 'itemListElement'
-          name: title, // stripAllPunct(tag.content),
+          name: title,
           description,
           keywords,
           image:

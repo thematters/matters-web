@@ -82,6 +82,21 @@ export class UserProfilePage {
     await expect(this.feedArticles.first()).toBeVisible()
   }
 
+  async gotoSettings() {
+    // go to homepage
+    await pageGoto(this.page, '/')
+
+    // click "My Page" button
+    await this.page.getByRole('button', { name: 'My Page' }).click()
+
+    // click "Settings" link
+    await this.page.getByRole('link', { name: 'Settings' }).click()
+    await this.page
+      .getByTestId(TEST_ID.LAYOUT_HEADER)
+      .getByRole('heading', { level: 1, name: 'Settings', exact: true })
+      .isVisible()
+  }
+
   async goto(userName: string) {
     await pageGoto(this.page, `/@${userName}`)
   }

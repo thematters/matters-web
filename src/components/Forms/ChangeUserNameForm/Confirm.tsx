@@ -4,6 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 
 import {
+  normalizeName,
   parseFormSubmitErrors,
   translate,
   validateComparedUserName,
@@ -58,10 +59,10 @@ const Confirm: React.FC<FormProps> = ({
     errors,
     touched,
     handleBlur,
-    handleChange,
     handleSubmit,
     isSubmitting,
     isValid,
+    setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
       userName: '',
@@ -130,7 +131,11 @@ const Confirm: React.FC<FormProps> = ({
         value={values.userName}
         error={touched.userName && errors.userName}
         onBlur={handleBlur}
-        onChange={handleChange}
+        onChange={(e) => {
+          const userName = normalizeName(e.target.value)
+          setFieldValue('userName', userName)
+          return userName
+        }}
       />
 
       <Form.Input
@@ -141,8 +146,12 @@ const Confirm: React.FC<FormProps> = ({
         value={values.comparedUserName}
         error={touched.comparedUserName && errors.comparedUserName}
         onBlur={handleBlur}
-        onChange={handleChange}
         hint={<Translate id="hintUserName" />}
+        onChange={(e) => {
+          const userName = normalizeName(e.target.value)
+          setFieldValue('comparedUserName', userName)
+          return userName
+        }}
       />
     </Form>
   )
