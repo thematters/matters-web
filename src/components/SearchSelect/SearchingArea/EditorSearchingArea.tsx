@@ -7,7 +7,7 @@ import {
   analytics,
   isUrl,
   mergeConnections,
-  normalizeTagInput,
+  normalizeTag,
   parseURL,
   toGlobalId,
 } from '~/common/utils'
@@ -102,7 +102,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
   const [searchKey, setSearchKey] = useState('')
   const [debouncedSearchKey, setdebouncedSearchKey] = useState('')
   const debouncedSetSearchKey = useDebouncedCallback((sk0) => {
-    const sk = isTag ? normalizeTagInput(sk0) : sk0
+    const sk = isTag ? normalizeTag(sk0) : sk0
     setdebouncedSearchKey(sk)
     setSearchKey(sk)
   }, INPUT_DEBOUNCE)
@@ -291,9 +291,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                     {canCreateTag && (
                       <li>
                         <CreateTag
-                          tag={toDigestTagPlaceholder(
-                            normalizeTagInput(searchKey)
-                          )}
+                          tag={toDigestTagPlaceholder(normalizeTag(searchKey))}
                           onClick={addNodeToStaging}
                         />
                       </li>
