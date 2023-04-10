@@ -8,13 +8,11 @@ import {
 import { analytics, appendTarget } from '~/common/utils'
 import { Button, ButtonProps, Media, TextIcon, Translate } from '~/components'
 
-type UniversalAuthButtonProps = {
-  isPlain?: boolean
-} & Pick<ButtonProps, 'size'>
+type UniversalAuthButtonProps = Pick<ButtonProps, 'size'>
 
 export const UniversalAuthButton: React.FC<
   React.PropsWithChildren<UniversalAuthButtonProps>
-> = ({ children, isPlain, size }) => {
+> = ({ children, size }) => {
   const smUpProps = {
     onClick: () => {
       analytics.trackEvent('click_button', {
@@ -33,26 +31,6 @@ export const UniversalAuthButton: React.FC<
     },
   }
 
-  if (isPlain) {
-    return (
-      <>
-        <Media at="sm">
-          <Button {...smProps}>{children}</Button>
-        </Media>
-        <Media greaterThan="sm">
-          <Button aria-haspopup="dialog" {...smUpProps}>
-            {children}
-          </Button>
-        </Media>
-      </>
-    )
-  }
-
-  const buttonProps: ButtonProps = {
-    bgColor: 'green',
-    size: size || [null, '2rem'],
-    spacing: [0, 'loose'],
-  }
   const ButtonText = () => (
     <TextIcon color="white" weight="md">
       <Translate id="authEntries" />
@@ -61,13 +39,19 @@ export const UniversalAuthButton: React.FC<
 
   return (
     <>
-      <Media at="sm">
-        <Button {...buttonProps} {...smProps}>
+      <Media lessThan="lg">
+        <Button bgColor="green" spacing={['tight', 'base']} {...smProps}>
           <ButtonText />
         </Button>
       </Media>
-      <Media greaterThan="sm">
-        <Button aria-haspopup="dialog" {...buttonProps} {...smUpProps}>
+
+      <Media greaterThanOrEqual="lg">
+        <Button
+          aria-haspopup="dialog"
+          bgColor="green"
+          size={['7.5rem', '2.5rem']}
+          {...smUpProps}
+        >
           <ButtonText />
         </Button>
       </Media>

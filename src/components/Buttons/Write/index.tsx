@@ -10,10 +10,10 @@ import {
 import { analytics, toPath, translate } from '~/common/utils'
 import {
   Button,
-  IconPen16,
+  IconCreate16,
+  IconNavCreate32,
   IconSpinner16,
   LanguageContext,
-  Media,
   TextIcon,
   Translate,
   useMutation,
@@ -22,55 +22,63 @@ import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 import { CreateDraftMutation } from '~/gql/graphql'
 
 interface Props {
+  variant: 'navbar' | 'sidenav'
   allowed: boolean
   authed?: boolean
   forbidden?: boolean
 }
 
 const BaseWriteButton = ({
+  variant,
   onClick,
   loading,
 }: {
+  variant: 'navbar' | 'sidenav'
   onClick: () => any
   loading?: boolean
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const WriteIcon = loading ? (
-    <IconSpinner16 size="sm" color="white" />
-  ) : (
-    <IconPen16 size="sm" color="white" />
-  )
+  if (variant === 'navbar') {
+    return (
+      <Button
+        bgActiveColor="grey-lighter"
+        size={['2rem', '2rem']}
+        onClick={onClick}
+        aria-label={translate({ id: 'write', lang })}
+      >
+        <IconNavCreate32 size="lg" color="black" />
+      </Button>
+    )
+  }
 
   return (
-    <>
-      <Media greaterThanOrEqual="lg">
-        <Button
-          size={['5rem', '2.25rem']}
-          bgColor="gold"
-          onClick={onClick}
-          aria-label={translate({ id: 'write', lang })}
-        >
-          <TextIcon icon={WriteIcon} weight="md" color="white">
-            <Translate id="write" />
-          </TextIcon>
-        </Button>
-      </Media>
-      <Media lessThan="lg">
-        <Button
-          size={['2rem', '2rem']}
-          bgColor="gold"
-          onClick={onClick}
-          aria-label={translate({ id: 'write', lang })}
-        >
-          <TextIcon icon={WriteIcon} weight="md" color="white" />
-        </Button>
-      </Media>
-    </>
+    <Button
+      size={[null, '2.25rem']}
+      spacing={[0, 'base']}
+      bgColor="gold"
+      onClick={onClick}
+      aria-label={translate({ id: 'write', lang })}
+    >
+      <TextIcon
+        icon={
+          loading ? (
+            <IconSpinner16 color="white" />
+          ) : (
+            <IconCreate16 color="white" />
+          )
+        }
+        spacing="xtight"
+        weight="md"
+        color="white"
+      >
+        <Translate id="write" />
+      </TextIcon>
+    </Button>
   )
 }
 
-export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
+export const WriteButton = ({ variant, allowed, authed, forbidden }: Props) => {
   const router = useRouter()
   const { lang } = useContext(LanguageContext)
   const [putDraft, { loading }] = useMutation<CreateDraftMutation>(
@@ -83,6 +91,7 @@ export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
   if (!allowed) {
     return (
       <BaseWriteButton
+        variant={variant}
         onClick={() =>
           window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
         }
@@ -92,6 +101,7 @@ export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
 
   return (
     <BaseWriteButton
+      variant={variant}
       onClick={async () => {
         if (!authed) {
           window.dispatchEvent(
