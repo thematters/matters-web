@@ -12,6 +12,7 @@ export type ButtonWidth =
   | '5rem'
   | '6rem'
   | '7rem'
+  | '7.5rem'
   | '8rem'
   | '10.5rem'
   | '19.5rem'

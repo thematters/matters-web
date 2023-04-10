@@ -40,6 +40,7 @@ const NavListItem = ({
         onClick={onClick}
       >
         {active ? activeIcon : icon}
+
         <VisuallyHidden>
           <span>{name}</span>
         </VisuallyHidden>
