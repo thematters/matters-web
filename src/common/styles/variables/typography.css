@@ -47,10 +47,10 @@
   --line-height-feed-title: 1.3333; /* 24/18 */
   --font-weight-feed-title: var(--font-weight-medium);
 
-  /* Timestamp */
-  --font-size-timestamp: var(--font-size-xs);
-  --line-height-timestamp: 1.3333; /* 16/12 */
-  --font-weight-timestamp: var(--font-weight-normal);
+  /* Subtext: digest footer, datetime, etc. */
+  --font-size-subtext: var(--font-size-xs);
+  --line-height-subtext: 1.3333; /* 16/12 */
+  --font-weight-subtext: var(--font-weight-normal);
 
   /* Article Title */
   --font-size-article-title: var(--font-size-xl);

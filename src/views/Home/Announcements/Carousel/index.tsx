@@ -1,38 +1,26 @@
 import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 
-import { translate } from '~/common/utils'
 import {
   BannerExposureTracker,
-  Button,
   Card,
-  IconClose32,
   LanguageContext,
   ResponsiveImage,
   useCarousel,
 } from '~/components'
 import { VisibleAnnouncementsQuery } from '~/gql/graphql'
 
-import DropdownActions, { DropdownActionsProps } from '../DropdownActions'
 import Dot from './Dot'
 import styles from './styles.css'
 
 type CarouselProps = {
   items: VisibleAnnouncementsQuery['official']['announcements']
-  hide: () => void
-} & DropdownActionsProps
+}
 
-const Carousel = ({
-  type,
-  setType,
-  items,
-  hide,
-  ...controlsProps
-}: CarouselProps) => {
+const Carousel = ({ items }: CarouselProps) => {
   const { lang } = useContext(LanguageContext)
   const [dot, setDot] = useState(0)
-  // @ts-ignore
-  const [snaps, setSnaps] = useState<any[]>([])
+  const [, setSnaps] = useState<any[]>([])
   const [carousel, carouselApi] = useEmblaCarousel({
     loop: true,
     skipSnaps: false,
@@ -110,8 +98,6 @@ const Carousel = ({
     <section className="carousel">
       <header>
         <div className="left">
-          <DropdownActions type={type} setType={setType} {...controlsProps} />
-
           <section className="dots">
             {items?.map((_, index) => (
               <Dot
@@ -123,14 +109,6 @@ const Carousel = ({
             ))}
           </section>
         </div>
-
-        <Button
-          spacing={[0, 0]}
-          aria-label={translate({ id: 'close', lang })}
-          onClick={hide}
-        >
-          <IconClose32 size="lg" color="white" />
-        </Button>
       </header>
 
       <section

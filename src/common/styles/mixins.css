@@ -212,9 +212,9 @@
   @mixin flex-center-space-between;
 
   margin-top: var(--spacing-base);
-  font-size: var(--font-size-timestamp);
-  font-weight: var(--font-weight-timestamp);
-  line-height: var(--line-height-timestamp);
+  font-size: var(--font-size-subtext);
+  font-weight: var(--font-weight-subtext);
+  line-height: var(--line-height-subtext);
 
   & .left,
   & .right {
@@ -225,7 +225,7 @@
     color: var(--color-grey-dark);
 
     & :global(> * + *) {
-      padding-left: var(--spacing-xx-tight);
+      padding-left: var(--spacing-base);
     }
   }
 
@@ -233,7 +233,7 @@
     color: var(--color-black);
 
     & :global(> * + *) {
-      padding-left: var(--spacing-loose);
+      padding-left: var(--spacing-base);
     }
   }
 }
