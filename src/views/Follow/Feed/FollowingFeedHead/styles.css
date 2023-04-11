@@ -4,7 +4,7 @@
   & h4 {
     @mixin flex-center-start;
 
-    font-size: var(--font-size-sm-s);
+    font-size: var(--font-size-xs);
     font-weight: var(--font-weight-normal);
     line-height: 1rem;
     color: var(--color-grey);
