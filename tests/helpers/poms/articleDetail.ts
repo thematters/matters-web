@@ -232,7 +232,15 @@ export class ArticleDetailPage {
     // click next step
     await this.dialog.getByRole('button', { name: 'Next' }).click()
 
-    // fill payment password
+    // fill incorrect payment password
+    await this.dialog.locator('#field-password-1').fill(password[0])
+    await this.dialog.locator('#field-password-2').fill(password[0])
+    await this.dialog.locator('#field-password-3').fill(password[0])
+    await this.dialog.locator('#field-password-4').fill(password[0])
+    await this.dialog.locator('#field-password-5').fill(password[0])
+    await this.dialog.locator('#field-password-6').fill(password[0])
+
+    // fill correct payment password
     await this.dialog.locator('#field-password-1').fill(password[0])
     await this.dialog.locator('#field-password-2').fill(password[1])
     await this.dialog.locator('#field-password-3').fill(password[2])
