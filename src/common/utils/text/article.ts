@@ -100,9 +100,8 @@ export const optimizeEmbed = (content: string) => {
         return /* html */ `
       <picture>
         <source
-          type="image/webp"
           media="(min-width: 768px)"
-          srcSet=${toSizedImageURL({ url: src, size: '1080w', ext: 'webp' })}
+          srcSet=${toSizedImageURL({ url: src, size: '1080w' })}
           onerror="this.srcset='${src}'"
         />
 
@@ -113,8 +112,7 @@ export const optimizeEmbed = (content: string) => {
         />
 
         <source
-          type="image/webp"
-          srcSet=${toSizedImageURL({ url: src, size: '540w', ext: 'webp' })}
+          srcSet=${toSizedImageURL({ url: src, size: '540w' })}
         />
 
         <img

@@ -35,12 +35,10 @@ const BaseResponsiveImage = ({
       {smUpSize && (
         <>
           <source
-            type="image/webp"
             media="(min-width: 768px)"
             srcSet={toSizedImageURL({
               url,
               size: smUpSize,
-              ext: 'webp',
             })}
           />
           <source
@@ -51,11 +49,9 @@ const BaseResponsiveImage = ({
       )}
 
       <source
-        type="image/webp"
         srcSet={toSizedImageURL({
           url,
           size,
-          ext: 'webp',
         })}
       />
 
