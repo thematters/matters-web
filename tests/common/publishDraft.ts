@@ -98,4 +98,10 @@ export const publishDraft = async ({
     const articleLicense = await articleDetail.getLicense()
     expect(stripSpaces(articleLicense)).toBe(stripSpaces(license))
   }
+
+  return {
+    title,
+    summary,
+    content,
+  }
 }

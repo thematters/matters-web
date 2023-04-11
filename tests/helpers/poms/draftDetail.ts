@@ -49,6 +49,12 @@ export class DraftDetailPage {
   readonly dialogSaveButton: Locator
   readonly dialogDoneButton: Locator
 
+  // reediting
+  readonly dialogEditButton: Locator
+  readonly nextButton: Locator
+  readonly dialogSaveRevisions: Locator
+  readonly dialogViewRepublishedArticle: Locator
+
   constructor(page: Page, isMobile?: boolean) {
     this.page = page
     this.isMobile = isMobile
@@ -104,6 +110,16 @@ export class DraftDetailPage {
     })
     this.dialogDoneButton = this.dialog.getByRole('button', {
       name: 'Done',
+    })
+
+    // reediting
+    this.dialogEditButton = this.dialog.getByRole('button', { name: 'Edit' })
+    this.nextButton = this.page.getByRole('button', { name: 'Next' })
+    this.dialogSaveRevisions = this.dialog.getByRole('button', {
+      name: 'Save Revisions',
+    })
+    this.dialogViewRepublishedArticle = this.dialog.getByRole('button', {
+      name: 'View republished article',
     })
   }
 
@@ -226,7 +242,9 @@ export class DraftDetailPage {
 
     // type and search
     const searchKey = 'test'
-    await this.page.getByPlaceholder('Search articles').fill(searchKey)
+    await this.page
+      .getByPlaceholder('Enter article title or paste article link')
+      .fill(searchKey)
 
     await waitForAPIResponse({
       page: this.page,
@@ -323,5 +341,13 @@ export class DraftDetailPage {
     await this.dialogPublishNowButton.click()
     await this.dialogPublishButton.click()
     await expect(this.dialogViewArticleButton).toBeVisible()
+  }
+
+  async rePublish() {
+    await this.nextButton.click()
+    await this.dialogPublishButton.click()
+    await this.dialogPublishButton.click()
+    await this.page.waitForLoadState('networkidle')
+    await expect(this.dialogViewRepublishedArticle).toBeVisible()
   }
 }
