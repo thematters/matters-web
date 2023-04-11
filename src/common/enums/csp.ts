@@ -1,3 +1,8 @@
+const site_domain_tld =
+    process.env.NEXT_PUBLIC_SITE_DOMAIN_TLD || 'matters.town',
+  site_domain_tld_old =
+    process.env.NEXT_PUBLIC_SITE_DOMAIN_TLD_OLD || 'matters.news'
+
 const SCRIPT_SRC = [
   "'self'",
 
@@ -28,7 +33,7 @@ const SCRIPT_SRC = [
 
   // Stripe
   'js.stripe.com',
-] // .join(' ')
+]
 
 const STYLE_SRC = [
   "'self'",
@@ -38,11 +43,7 @@ const STYLE_SRC = [
 
   // Programmable Google Search
   'www.google.com/cse/',
-] // .join(' ')
-
-/* const { hostname: NEXT_PUBLIC_API_HOSTNAME } = new URL(
-  process.env.NEXT_PUBLIC_API_URL as string
-) */
+]
 
 const IMG_SRC = [
   "'self'",
@@ -50,11 +51,19 @@ const IMG_SRC = [
   // Asssets
   'data:',
   process.env.NEXT_PUBLIC_ASSET_DOMAIN,
+  process.env.NEXT_PUBLIC_ASSET_DOMAIN?.replace(
+    site_domain_tld,
+    site_domain_tld_old
+  ),
 
   // Next.js Assets
   process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN?.replace(
+    site_domain_tld,
+    site_domain_tld_old
+  ),
 
-  // 'server-develop.matters.news',
+  // get server hostname, for img-cache redirected url
   // NEXT_PUBLIC_API_HOSTNAME as string,
   process.env.NEXT_PUBLIC_API_URL
     ? new URL(process.env.NEXT_PUBLIC_API_URL).hostname
@@ -65,7 +74,7 @@ const IMG_SRC = [
 
   // GA
   'www.google-analytics.com',
-] // .join(' ')
+]
 
 const MEDIA_SRC = IMG_SRC
 
@@ -76,6 +85,11 @@ const CONNECT_SRC = [
 
   // API
   process.env.NEXT_PUBLIC_API_URL,
+
+  process.env.NEXT_PUBLIC_API_URL?.replace(
+    site_domain_tld,
+    site_domain_tld_old
+  ),
 
   // Sentry
   '*.ingest.sentry.io',
@@ -109,7 +123,7 @@ const CONNECT_SRC = [
   'gateway.pinata.cloud/ipfs/',
   'meson.network/ipfs/',
   'ipfs.filebase.io/ipfs/',
-] // .join(' ')
+]
 
 const FRAME_SRC = [
   "'self'",
@@ -128,14 +142,14 @@ const FRAME_SRC = [
   // Stripe
   'js.stripe.com',
   'hooks.stripe.com',
-] // .join(' ')
+]
 
 const PREFETCH_SRC = [
   "'self'",
 
   // Next.js Assets
   process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
-] // .join(' ')
+]
 
 export const CSP_POLICY = Object.entries({
   'script-src': SCRIPT_SRC,
