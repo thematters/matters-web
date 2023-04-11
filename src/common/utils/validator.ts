@@ -1,5 +1,7 @@
 import isEmail from 'validator/lib/isEmail'
 
+import { PAYMENT_PASSSWORD_LENGTH } from '../enums'
+
 /**
  * Validate email address.
  */
@@ -37,7 +39,7 @@ export const isValidPassword = (password: string): boolean => {
  * Validate payment pass word. It only accepts digital.
  */
 export const isValidPaymentPassword = (password: string): boolean => {
-  if (!password || password.length !== 6) {
+  if (!password || password.length !== PAYMENT_PASSSWORD_LENGTH) {
     return false
   }
 
