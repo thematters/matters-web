@@ -607,6 +607,10 @@
     "defaultMessage": "Likes",
     "description": ""
   },
+  "2uRduT": {
+    "defaultMessage": "",
+    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
   "MkwOFW": {
     "defaultMessage": "Read History",
     "description": ""
