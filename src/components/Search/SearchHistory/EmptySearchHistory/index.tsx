@@ -1,4 +1,4 @@
-import IMAGE_EMPTY_SEARCH_HISTORY from '@/public/static/images/illustration-empty-search-history.png'
+import IMAGE_EMPTY_SEARCH_HISTORY from '@/public/static/images/illustration-empty-search-history.svg'
 import { Translate } from '~/components'
 
 import styles from './styles.css'
@@ -6,7 +6,7 @@ import styles from './styles.css'
 const EmptySearchHistory = () => {
   return (
     <section className="container">
-      <img src={IMAGE_EMPTY_SEARCH_HISTORY.src} alt="empty search history" />
+      <img src={IMAGE_EMPTY_SEARCH_HISTORY} alt="empty search history" />
       <section className="hint">
         <Translate
           zh_hant="輸入關鍵詞餵食搜尋怪，幫你找到相關內容哦！"
