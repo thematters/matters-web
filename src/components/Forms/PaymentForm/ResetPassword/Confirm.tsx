@@ -57,12 +57,13 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
     setTouched,
     handleSubmit,
     isSubmitting,
-    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       password: '',
       comparedPassword: '',
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ password, comparedPassword }) => {
       const passwordError = validatePaymentPassword(password, lang)
       const comparedPasswordError = validateComparedPassword(
@@ -139,7 +140,6 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
   useEffect(() => {
     // submit on validate
     if (
-      isValid &&
       values.password.length === PAYMENT_PASSSWORD_LENGTH &&
       values.comparedPassword.length === PAYMENT_PASSSWORD_LENGTH
     ) {

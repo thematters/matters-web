@@ -2,9 +2,9 @@ import classNames from 'classnames'
 
 import { TEST_ID } from '~/common/enums'
 import {
-  countWordsLength,
+  countChars,
   makeSummary,
-  subString,
+  normalizeArticleTitle,
   toPath,
 } from '~/common/utils'
 import { Card } from '~/components'
@@ -30,10 +30,10 @@ export const ArticleDigestCard = ({
   const { summary, state } = article
   const isBanned = state === 'banned'
   const cover = !isBanned ? article.cover : null
-  const title = subString(article.title, 70)
+  const title = normalizeArticleTitle(article.title, 70)
   const cleanedSummary = isBanned
     ? ''
-    : makeSummary(summary, countWordsLength(article.title) > 40 ? 50 : 70)
+    : makeSummary(summary, countChars(article.title) > 40 ? 50 : 70)
   const containerClasses = classNames({
     container: true,
     'has-cover': !!cover,

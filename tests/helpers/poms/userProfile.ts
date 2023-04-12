@@ -16,6 +16,7 @@ export class UserProfilePage {
 
   // profile
   displayName: Locator
+  userName: Locator
   bio: Locator
   // followButton: Locator
   // rssButton: Locator
@@ -48,6 +49,7 @@ export class UserProfilePage {
 
     // profile
     this.displayName = page.getByTestId(TEST_ID.USER_PROFILE_DISPLAY_NAME)
+    this.userName = page.getByTestId(TEST_ID.USER_PROFILE_USER_NAME)
     this.bio = page.getByTestId(TEST_ID.USER_PROFILE_BIO)
 
     // feeds
@@ -78,6 +80,21 @@ export class UserProfilePage {
     // confirm User Profile Page
     await expect(this.page.getByTestId(TEST_ID.USER_PROFILE)).toBeVisible()
     await expect(this.feedArticles.first()).toBeVisible()
+  }
+
+  async gotoSettings() {
+    // go to homepage
+    await pageGoto(this.page, '/')
+
+    // click "My Page" button
+    await this.page.getByRole('button', { name: 'My Page' }).click()
+
+    // click "Settings" link
+    await this.page.getByRole('link', { name: 'Settings' }).click()
+    await this.page
+      .getByTestId(TEST_ID.LAYOUT_HEADER)
+      .getByRole('heading', { level: 1, name: 'Settings', exact: true })
+      .isVisible()
   }
 
   async goto(userName: string) {

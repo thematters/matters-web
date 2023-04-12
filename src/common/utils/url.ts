@@ -62,3 +62,11 @@ export const toSizedImageURL = ({ url, size, ext }: ToSizedImageURLProps) => {
 
   return assetDomain + prefix + extedUrl
 }
+
+export const isUrl = (key: string) => {
+  try {
+    return Boolean(new URL(key))
+  } catch (e) {
+    return false
+  }
+}

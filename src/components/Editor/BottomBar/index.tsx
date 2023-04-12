@@ -3,6 +3,7 @@ import { useContext } from 'react'
 
 import { translate } from '~/common/utils'
 import {
+  EditorSearchSelectDialog,
   IconCollection24,
   IconHashTag24,
   IconImage24,
@@ -12,7 +13,6 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import {
   SetCollectionProps,
   SetCoverProps,
@@ -28,6 +28,7 @@ import {
   SearchExclude,
 } from '~/gql/graphql'
 
+import ArticleCustomStagingArea from '../ArticleCustomStagingArea'
 import SetCover from '../SetCover'
 import TagCustomStagingArea from '../TagCustomStagingArea'
 import AccessDialog from './AccessDialog'
@@ -151,7 +152,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
             </SetCover.Dialog>
 
             {/* Tags */}
-            <SearchSelectDialog
+            <EditorSearchSelectDialog
               title="addTag"
               hint="hintAddTag"
               searchType="Tag"
@@ -179,10 +180,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   </TextIcon>
                 </button>
               )}
-            </SearchSelectDialog>
+            </EditorSearchSelectDialog>
 
             {/* Collection */}
-            <SearchSelectDialog
+            <EditorSearchSelectDialog
               title="collectArticle"
               hint="hintEditCollection"
               searchType="Article"
@@ -192,6 +193,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               }
               nodes={collection}
               saving={collectionSaving}
+              CustomStagingArea={ArticleCustomStagingArea}
             >
               {({ openDialog }) => (
                 <button
@@ -209,7 +211,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   </TextIcon>
                 </button>
               )}
-            </SearchSelectDialog>
+            </EditorSearchSelectDialog>
 
             {/* Circle & License & Support Feedback & ISCN & canComment */}
             <AccessDialog {...accessProps}>

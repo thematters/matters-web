@@ -643,6 +643,10 @@
     "defaultMessage": "我的讚賞",
     "description": ""
   },
+  "2uRduT": {
+    "defaultMessage": " 的評論",
+    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
   "MkwOFW": {
     "defaultMessage": "瀏覽紀錄",
     "description": ""
@@ -680,7 +684,7 @@
     "description": ""
   },
   "xmcVZ0": {
-    "defaultMessage": "搜索",
+    "defaultMessage": "搜尋",
     "description": ""
   },
   "47FYwb": {
@@ -1115,7 +1119,7 @@
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
   "gMZZ9I": {
-    "defaultMessage": "2-20 個字元，僅支持英文、數字或下劃線",
+    "defaultMessage": "2-20 個字元，僅支持英文小寫字母、數字或下劃線",
     "description": ""
   },
   "+7SAix": {

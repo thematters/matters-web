@@ -31,7 +31,7 @@ ul {
   }
 
   & li {
-    margin-top: var(--spacing-xx-loose);
+    margin-top: var(--spacing-x-loose);
     font-size: 0;
   }
 }

@@ -42,11 +42,18 @@ export class DraftDetailPage {
 
   // dialog
   readonly dialog: Locator
+  readonly dialogAddButton: Locator
   readonly dialogPublishNowButton: Locator
   readonly dialogPublishButton: Locator
   readonly dialogViewArticleButton: Locator
   readonly dialogSaveButton: Locator
   readonly dialogDoneButton: Locator
+
+  // reediting
+  readonly dialogEditButton: Locator
+  readonly nextButton: Locator
+  readonly dialogSaveRevisions: Locator
+  readonly dialogViewRepublishedArticle: Locator
 
   constructor(page: Page, isMobile?: boolean) {
     this.page = page
@@ -86,6 +93,9 @@ export class DraftDetailPage {
 
     // dialog
     this.dialog = this.page.getByRole('dialog')
+    this.dialogAddButton = this.page.getByTestId(
+      TEST_ID.EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON
+    )
     this.dialogPublishNowButton = this.dialog.getByRole('button', {
       name: 'Publish Now',
     })
@@ -100,6 +110,16 @@ export class DraftDetailPage {
     })
     this.dialogDoneButton = this.dialog.getByRole('button', {
       name: 'Done',
+    })
+
+    // reediting
+    this.dialogEditButton = this.dialog.getByRole('button', { name: 'Edit' })
+    this.nextButton = this.page.getByRole('button', { name: 'Next' })
+    this.dialogSaveRevisions = this.dialog.getByRole('button', {
+      name: 'Save Revisions',
+    })
+    this.dialogViewRepublishedArticle = this.dialog.getByRole('button', {
+      name: 'View republished article',
     })
   }
 
@@ -147,11 +167,12 @@ export class DraftDetailPage {
 
     const tags = _uniq(generateTags({ count: 3 }))
     for (const tag of tags) {
-      await this.page.getByPlaceholder('Search tags...').fill(tag)
+      await this.dialogAddButton.click()
+      await this.page.getByPlaceholder('Search tags').fill(tag)
       await this.page.getByTestId(TEST_ID.SEARCH_RESULTS_ITEM).first().click()
     }
 
-    await this.dialogSaveButton.click()
+    await this.dialogDoneButton.click()
 
     return tags
   }
@@ -217,10 +238,13 @@ export class DraftDetailPage {
 
   async setCollection() {
     await this.barCollectArticle.click()
+    await this.dialogAddButton.click()
 
     // type and search
     const searchKey = 'test'
-    await this.page.getByPlaceholder('Search articles...').fill(searchKey)
+    await this.page
+      .getByPlaceholder('Enter article title or paste article link')
+      .fill(searchKey)
 
     await waitForAPIResponse({
       page: this.page,
@@ -237,7 +261,7 @@ export class DraftDetailPage {
     }
 
     // save
-    await this.dialogSaveButton.click()
+    await this.dialogDoneButton.click()
 
     return articleTitle
   }
@@ -317,5 +341,13 @@ export class DraftDetailPage {
     await this.dialogPublishNowButton.click()
     await this.dialogPublishButton.click()
     await expect(this.dialogViewArticleButton).toBeVisible()
+  }
+
+  async rePublish() {
+    await this.nextButton.click()
+    await this.dialogPublishButton.click()
+    await this.dialogPublishButton.click()
+    await this.page.waitForLoadState('networkidle')
+    await expect(this.dialogViewRepublishedArticle).toBeVisible()
   }
 }

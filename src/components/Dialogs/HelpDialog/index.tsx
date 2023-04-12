@@ -23,11 +23,17 @@ const ReadTime = () => (
   <>
     <h2 className="title">
       <TextIcon icon={<IconReadTimeTotal16 size="md" />} weight="md">
-        <FormattedMessage defaultMessage="Accumulated Read Time" description="src/components/Dialogs/HelpDialog/index.tsx" />
+        <FormattedMessage
+          defaultMessage="Accumulated Read Time"
+          description="src/components/Dialogs/HelpDialog/index.tsx"
+        />
       </TextIcon>
     </h2>
     <p className="description">
-      <FormattedMessage defaultMessage="Accumulated read time indicates the total time length that registered users read." description="src/components/Dialogs/HelpDialog/index.tsx" />
+      <FormattedMessage
+        defaultMessage="Accumulated read time indicates the total time length that registered users read."
+        description="src/components/Dialogs/HelpDialog/index.tsx"
+      />
     </p>
     <style jsx>{styles}</style>
   </>
@@ -41,7 +47,10 @@ const ReadCount = () => (
       </TextIcon>
     </h2>
     <p className="description">
-      <FormattedMessage defaultMessage="Read counts indicates how many registered users read." description="src/components/Dialogs/HelpDialog/index.tsx" />
+      <FormattedMessage
+        defaultMessage="Read counts indicates how many registered users read."
+        description="src/components/Dialogs/HelpDialog/index.tsx"
+      />
     </p>
     <style jsx>{styles}</style>
   </>

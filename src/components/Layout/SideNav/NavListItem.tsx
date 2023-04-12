@@ -32,7 +32,7 @@ const NavListItemButton = forwardRef(
     return (
       <Button
         bgActiveColor="grey-lighter"
-        spacing={isMdUp ? ['xtight', 'base'] : undefined}
+        spacing={isMdUp ? ['xxtight', 'xtight'] : undefined}
         size={isMdUp ? undefined : ['2rem', '2rem']}
         ref={ref}
         {...props}
@@ -43,7 +43,7 @@ const NavListItemButton = forwardRef(
           size="lg"
           weight="semibold"
           spacing="tight"
-          color={active ? 'green' : 'black'}
+          color="black"
         >
           {isMdUp && name}
         </TextIcon>

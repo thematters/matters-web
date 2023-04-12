@@ -2,7 +2,7 @@ footer {
   @mixin feed-footer-actions;
 
   & .left {
-    padding-right: var(--spacing-base);
+    display: inline-flex;
 
     & :global(> * + *) {
       padding-left: var(--spacing-x-tight);

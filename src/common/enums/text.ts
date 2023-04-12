@@ -157,15 +157,15 @@ export const TEXT = {
     helpCenter: '幫助中心',
     hintAddTag:
       '通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。',
-    hintAddRecommendedTag: '下方是你近期使用過標籤，點選添加：',
+    hintAddRecommendedTag: '近期使用',
     hintAddTagNoTag: '目前尚無標籤，立即添加提高作品曝光度！',
     hintAddTagShort: '添加合適標籤，讓站內外讀者找到你的作品',
     hintAddTagNamingRestriction:
-      '標籤名稱不允許標點符號，字間僅允許一個不連續空白，最大長度50字元',
+      '標籤名稱不允許標點符號，字間僅允許一個不連續空白，最大長度 50 字元',
     hintAddCircleInvitee: '添加站內或站外朋友加入圍爐',
     hintCircleAddArticles: '將公開作品加入圍爐，成為永久收費作品。',
     hintCircleDisplayName: '2-12 個字元',
-    hintCircleName: '2-20 個字元，僅支持英文、數字或下劃線',
+    hintCircleName: '2-20 個字元，僅支持英文小写字母、數字或下劃線',
     hintDescription: '建議 50 字以內，最長 200 字',
     hintDisplayName: '2-20 個字元',
     hintEditCollection: '關聯自己或他人的作品，幫助讀者更好地發現內容。',
@@ -173,7 +173,7 @@ export const TEXT = {
     hintPaymentPassword: '輸入六位數字交易密碼',
     hintPaymentPointer: '錢包地址以“$”開頭',
     hintTerm: '我們的用戶協議和隱私政策發生了更改，請閱讀並同意後繼續使用。',
-    hintUserName: '4-15 個字元，僅支持英文、數字或下劃線',
+    hintUserName: '4-15 個字元，僅支持英文小写字母、數字或下劃線',
     hintVerificationCode: '驗證碼有效期 20 分鐘',
     history: '足跡',
     hkd: '港幣',
@@ -567,15 +567,15 @@ export const TEXT = {
     helpCenter: '帮助中心',
     hintAddTag:
       '通过添加标签帮助读者更好地找到你的作品。如果没有合适的标签，你可以创建新的。',
-    hintAddRecommendedTag: '下方是你近期使用过标签，点选添加：',
+    hintAddRecommendedTag: '最近使用',
     hintAddTagNoTag: '目前尚无标签，立即添加提高作品曝光度！',
     hintAddTagShort: '添加适合标签，帮助读者找到你的作品',
     hintAddTagNamingRestriction:
-      '标签名称不允许标点符号，字间仅允许一个不连续空白，最大长度50字元',
+      '标签名称不允许标点符号，字间仅允许一个不连续空白，最大长度 50 字元',
     hintAddCircleInvitee: '添加站内或站外朋友加入围炉',
     hintCircleAddArticles: '将公开作品加入围炉，成为永久收费作品。',
     hintCircleDisplayName: '2-12 个字符',
-    hintCircleName: '2-20 个字符，仅支持英文、数字或下划线',
+    hintCircleName: '2-20 个字符，仅支持英文小写字母、数字或下划线',
     hintDescription: '建议 50 字以内，最长 200 字',
     hintDisplayName: '2-20 个字符',
     hintEditCollection: '关联自己或他人的作品，帮助读者更好地发现内容。',
@@ -583,7 +583,7 @@ export const TEXT = {
     hintPaymentPassword: '输入六位数字交易密码',
     hintPaymentPointer: '钱包地址以“$”开头',
     hintTerm: '我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用。',
-    hintUserName: '4-15 个字符，仅支持英文、数字或下划线',
+    hintUserName: '4-15 个字符，仅支持英文小写字母、数字或下划线',
     hintVerificationCode: '验证码有效期 20 分钟',
     history: '足迹',
     hkd: '港币',
@@ -988,7 +988,7 @@ export const TEXT = {
     helpCenter: 'Help Center',
     hintAddTag:
       'Adding tags helps readers find your articles. Add or create new tags.',
-    hintAddRecommendedTag: 'Click to add tags you recently used :',
+    hintAddRecommendedTag: 'Recently used',
     hintAddTagNoTag:
       'Not using tags yet, add tags now to improve discoverability!',
     hintAddTagShort: 'Adding tags helps readers find your articles.',
@@ -999,10 +999,9 @@ export const TEXT = {
       'Add articles to Circle and keep them behind the paywall.',
     hintCircleDisplayName: 'Must be between 2-12 characters long.',
     hintCircleName:
-      'Must be between 2-20 characters long. Only letters, numbers and underscores are allowed.',
+      'Must be between 2-20 characters long. Only letters letters, numbers and underline are allowed.',
     hintDescription: 'Maximum 200 characters.',
-    hintDisplayName:
-      'Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.',
+    hintDisplayName: 'Must be between 2-20 characters long.',
     hintEditCollection:
       'Adding articles to a collection helps readers find your articles.',
     hintPassword:
@@ -1013,7 +1012,7 @@ export const TEXT = {
       'We have amended or modified our Terms and Privacy Policy. Agree and accept all Terms to continue using our Services.',
     hintUserDescription: 'Recommended within 50 words and 200 words maximum.',
     hintUserName:
-      'Must be between 4-15 characters long. Only English alphabets, numbers and underline are accepted.',
+      'Must be between 4-15 characters long. Only lowercase letters, numbers and underline are accepted.',
     hintVerificationCode: 'Code will expire after 20 minutes',
     history: 'History',
     hkd: 'HKD',

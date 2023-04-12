@@ -1,5 +1,6 @@
 .label {
-  display: inline-block;
+  @mixin inline-flex-center-all;
+
   padding: var(--spacing-xx-tight) var(--spacing-x-tight);
   font-size: var(--font-size-xs);
   line-height: 1;
