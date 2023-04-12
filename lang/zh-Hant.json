@@ -96,7 +96,7 @@
     "description": ""
   },
   "3WKlPP": {
-    "defaultMessage": "commented in",
+    "defaultMessage": "在圍爐 ",
     "description": ""
   },
   "3kbIhS": {
@@ -184,7 +184,7 @@
     "description": ""
   },
   "8cv9D4": {
-    "defaultMessage": "Next Step",
+    "defaultMessage": "下一步",
     "description": ""
   },
   "8xPi0N": {
@@ -212,7 +212,7 @@
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
   },
   "A41QIy": {
-    "defaultMessage": "Enter Password",
+    "defaultMessage": "輸入密碼",
     "description": ""
   },
   "A7ugfn": {
@@ -256,7 +256,7 @@
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
   "CBDDR5": {
-    "defaultMessage": "Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.",
+    "defaultMessage": "2-20 個字元，僅支持英文小写字母、數字或下劃線",
     "description": ""
   },
   "Cdkhl8": {
@@ -568,7 +568,7 @@
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
   "SENRqu": {
-    "defaultMessage": "Help",
+    "defaultMessage": "说明",
     "description": ""
   },
   "SNh1n0": {
@@ -580,7 +580,7 @@
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
   "Seanpx": {
-    "defaultMessage": "Required",
+    "defaultMessage": "必填栏位",
     "description": ""
   },
   "Szd1tH": {
@@ -692,7 +692,7 @@
     "description": ""
   },
   "Xz/AHp": {
-    "defaultMessage": "broadcast and mentioned you",
+    "defaultMessage": " 广播提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "YIes/F": {
@@ -952,7 +952,7 @@
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
   },
   "ldNgRA": {
-    "defaultMessage": "Display name, can be changed later",
+    "defaultMessage": "你的站内暱称，之后可以修改",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
   "lhaIoi": {
@@ -1100,7 +1100,7 @@
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "skbUBl": {
-    "defaultMessage": "Log in",
+    "defaultMessage": "登录",
     "description": "src/components/Buttons/Login/index.tsx"
   },
   "sncOwi": {
@@ -1180,7 +1180,7 @@
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "wXzTZ0": {
-    "defaultMessage": "Enter the name of your Circle",
+    "defaultMessage": "给围炉取一个吸引人的名字吧",
     "description": ""
   },
   "wbcwKd": {
@@ -1224,7 +1224,7 @@
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "yZfKI4": {
-    "defaultMessage": "discussion and mentioned you",
+    "defaultMessage": " 众聊提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "zKOr2x": {
