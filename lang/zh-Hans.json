@@ -79,6 +79,10 @@
     "defaultMessage": "我的赞赏",
     "description": ""
   },
+  "2uRduT": {
+    "defaultMessage": " 的评论",
+    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
   "2uwwz+": {
     "defaultMessage": "累计阅读时長代表了你的作品被登入用户阅读的总时数，每次阅读过程超过一定时间后才会计入。此外，同一个用户的多次阅读也会进行累计。",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
@@ -162,10 +166,6 @@
   "6flWFg": {
     "defaultMessage": "用户协议",
     "description": ""
-  },
-  "6gOpfl": {
-    "defaultMessage": "暂时隐藏公告栏 7 天",
-    "description": "src/views/Home/Announcements/index.tsx"
   },
   "77tYPg": {
     "defaultMessage": "确认删除后，{commentType}会立即消失。",
@@ -1006,9 +1006,6 @@
   "nsaJRn": {
     "defaultMessage": "上站成功",
     "description": ""
-  },
-  "ntjlWR": {
-    "defaultMessage": "comment"
   },
   "o2Na0B": {
     "defaultMessage": "返回全部",
