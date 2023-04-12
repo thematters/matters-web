@@ -106,12 +106,6 @@ export const optimizeEmbed = (content: string) => {
         />
 
         <source
-          media="(min-width: 768px)"
-          srcSet=${toSizedImageURL({ url: src, size: '1080w' })}
-          onerror="this.srcset='${src}'"
-        />
-
-        <source
           srcSet=${toSizedImageURL({ url: src, size: '540w' })}
         />
 

@@ -36,13 +36,6 @@ const BaseResponsiveImage = ({
         <>
           <source
             media="(min-width: 768px)"
-            srcSet={toSizedImageURL({
-              url,
-              size: smUpSize,
-            })}
-          />
-          <source
-            media="(min-width: 768px)"
             srcSet={toSizedImageURL({ url, size: smUpSize })}
           />
         </>
