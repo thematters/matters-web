@@ -79,6 +79,10 @@
     "defaultMessage": "我的讚賞",
     "description": ""
   },
+  "2uRduT": {
+    "defaultMessage": " 的評論",
+    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
   "2uwwz+": {
     "defaultMessage": "累計閱讀時數代表了你的作品被登入用戶閱讀的總時數，每次閱讀過程超過一定時間後才會計入。此外，同一個用戶的多次閱讀也會進行累計。",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
@@ -162,10 +166,6 @@
   "6flWFg": {
     "defaultMessage": "用戶協議",
     "description": ""
-  },
-  "6gOpfl": {
-    "defaultMessage": "暫時隱藏公告欄 7 天",
-    "description": "src/views/Home/Announcements/index.tsx"
   },
   "77tYPg": {
     "defaultMessage": "確認刪除後，{commentType}會立即消失。",
@@ -1006,9 +1006,6 @@
   "nsaJRn": {
     "defaultMessage": "登入成功",
     "description": ""
-  },
-  "ntjlWR": {
-    "defaultMessage": "comment"
   },
   "o2Na0B": {
     "defaultMessage": "返回全部",
