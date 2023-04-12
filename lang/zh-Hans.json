@@ -651,6 +651,10 @@
     "defaultMessage": "我的赞赏",
     "description": ""
   },
+  "2uRduT": {
+    "defaultMessage": " 的评论",
+    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
   "MkwOFW": {
     "defaultMessage": "浏览记录",
     "description": ""

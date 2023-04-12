@@ -8,6 +8,6 @@ section {
   @mixin line-clamp;
 
   /* FIXME: fix cropped descenders of letters  */
-  padding-bottom: 0.14em;
-  margin-bottom: -0.14rem;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12rem;
 }

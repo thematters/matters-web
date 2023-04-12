@@ -13,7 +13,7 @@
   padding-right: var(--spacing-tight);
   font-size: var(--font-size-xm);
   font-weight: var(--font-weight-semibold);
-  line-height: 1.3333;
+  line-height: 1.3333333;
   color: var(--color-analytics-red);
 }
 
