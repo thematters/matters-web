@@ -76,6 +76,36 @@ const SideNav = () => {
         <Logo />
 
         <ul role="menu">
+          <Media lessThan="xl">
+            <NavListItem
+              name={
+                <FormattedMessage defaultMessage="Discover" description="" />
+              }
+              icon={<IconNavHome32 size="lg" />}
+              activeIcon={<IconNavHomeActive32 size="lg" />}
+              active={isInHome}
+              href={PATHS.HOME}
+            />
+
+            <NavListItem
+              name={<FormattedMessage defaultMessage="Search" description="" />}
+              icon={<IconNavSearch32 size="lg" />}
+              activeIcon={<IconNavSearchActive32 size="lg" />}
+              active={isInSearch}
+              onClick={() => {
+                const path = toPath({
+                  page: 'search',
+                })
+
+                if (isInSearch) {
+                  router.replace(path.href)
+                } else {
+                  router.push(path.href)
+                }
+              }}
+            />
+          </Media>
+
           <li role="menuitem">
             <UniversalAuthButton />
           </li>
