@@ -55,8 +55,8 @@ const httpLink = ({ host, headers }: { host: string; headers: any }) => {
 
   let hostname = new URL(apiUrl as string).hostname
   if (
-    hostname.endsWith(site_domain_tld) &&
-    host.endsWith(site_domain_tld_old)
+    // hostname.endsWith(site_domain_tld) &&
+    host.endsWith(site_domain_tld_old) // configured new tld but running on old tld
   ) {
     console.log('serving on different hostname:', {
       apiUrl,
