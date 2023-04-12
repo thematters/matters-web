@@ -79,6 +79,10 @@
     "defaultMessage": "Likes",
     "description": ""
   },
+  "2uRduT": {
+    "defaultMessage": "comment",
+    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
   "2uwwz+": {
     "defaultMessage": "Accumulated read time indicates the total time length that registered users read.",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
@@ -162,10 +166,6 @@
   "6flWFg": {
     "defaultMessage": "Term of Services",
     "description": ""
-  },
-  "6gOpfl": {
-    "defaultMessage": "You won't see announcements for 7 days",
-    "description": "src/views/Home/Announcements/index.tsx"
   },
   "77tYPg": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
@@ -1006,9 +1006,6 @@
   "nsaJRn": {
     "defaultMessage": "Logged in successfully",
     "description": ""
-  },
-  "ntjlWR": {
-    "defaultMessage": "comment"
   },
   "o2Na0B": {
     "defaultMessage": "Back to All",
