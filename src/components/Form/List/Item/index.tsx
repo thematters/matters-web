@@ -5,8 +5,8 @@ import {
   Card,
   CardProps,
   IconArrowRight16,
-  Media,
   TextIcon,
+  useHover,
 } from '~/components'
 
 import styles from './styles.css'
@@ -50,8 +50,9 @@ const Item: React.FC<ItemProps> = forwardRef(
       top: leftAlign === 'top',
       bold: !!bold,
     })
+    const [hoverRef, isHovered] = useHover<HTMLDivElement>()
     const itemContent = (
-      <section className="container">
+      <section className="container" ref={hoverRef}>
         <section className={leftClasses}>
           <h5 className="title">{title}</h5>
           {subtitle && <p className="subtitle">{subtitle}</p>}
@@ -62,7 +63,7 @@ const Item: React.FC<ItemProps> = forwardRef(
             <TextIcon
               icon={
                 clickable && (
-                  <IconArrowRight16 color={bold ? 'black' : 'grey'} />
+                  <IconArrowRight16 color={isHovered ? 'black' : 'grey'} />
                 )
               }
               size="md"
@@ -82,28 +83,14 @@ const Item: React.FC<ItemProps> = forwardRef(
 
     return (
       <li role="listitem">
-        <>
-          <Media at="sm">
-            <Card
-              bgColor={forceGreyStyle ? 'grey-lighter' : 'white'}
-              {...cardProps}
-              spacing={cardProps.spacing || [0, 0]}
-              ref={ref}
-            >
-              {itemContent}
-            </Card>
-          </Media>
-          <Media greaterThan="sm">
-            <Card
-              bgColor="grey-lighter"
-              {...cardProps}
-              spacing={cardProps.spacing || [0, 0]}
-              ref={ref}
-            >
-              {itemContent}
-            </Card>
-          </Media>
-        </>
+        <Card
+          bgActiveColor="none"
+          {...cardProps}
+          spacing={cardProps.spacing || [0, 0]}
+          ref={ref}
+        >
+          {itemContent}
+        </Card>
 
         <style jsx>{styles}</style>
       </li>

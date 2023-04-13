@@ -11,17 +11,54 @@
 }
 
 ul {
+  margin-right: var(--spacing-base);
+  margin-left: var(--spacing-base);
   overflow: hidden;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 
   & :global(> li) {
-    @mixin border-top-grey;
-    @mixin border-bottom-grey;
+    border: none;
   }
 
   & :global(> li + li) {
-    border-top: none;
+    border-top: 1px dashed var(--color-grey-light);
+  }
+
+  /* Fix <DropdownDialog /> contain <Form.List.Item />, when click dropdown
+      eg: /me/settings/ Display Preference
+    */
+
+  & :global(> .fresnel-container + li) {
+    border-top: 1px dashed var(--color-grey-light);
+  }
+
+  /* media at sm */
+  & :global(> li + .fresnel-container-at-sm) {
+    border-top: 1px dashed var(--color-grey-light);
+  }
+
+  & :global(.fresnel-container-at-sm + .fresnel-container-at-sm) {
+    border-top: 1px dashed var(--color-grey-light);
+  }
+
+  & :global(.fresnel-container + .fresnel-container + .fresnel-container) {
+    border-top: 1px dashed var(--color-grey-light);
+  }
+
+  /* media greater than sm */
+  & :global(> li + .fresnel-container + .fresnel-container) {
+    border-top: 1px dashed var(--color-grey-light);
+  }
+
+  &
+    :global(
+      .fresnel-container
+        + .fresnel-container
+        + .fresnel-container
+        + .fresnel-container
+    ) {
+    border-top: 1px dashed var(--color-grey-light);
   }
 
   &.grey {
@@ -34,20 +71,7 @@ ul {
     }
 
     & :global(> li + li) {
-      border-top: 1px solid var(--color-white);
-    }
-  }
-  @media (--sm-up) {
-    margin-right: var(--spacing-base);
-    margin-left: var(--spacing-base);
-    border-radius: var(--spacing-x-tight);
-
-    & :global(> li) {
-      border: none;
-    }
-
-    & :global(> li + li) {
-      border-top: 1px solid var(--color-white);
+      border-top: 1px dashed var(--color-grey-light);
     }
   }
 }
