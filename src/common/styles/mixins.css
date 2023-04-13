@@ -159,33 +159,6 @@
   }
 }
 
-@define-mixin form-input-grey {
-  @mixin transition;
-
-  padding: var(--spacing-base);
-  font-size: var(--font-size-md);
-  background-color: var(--color-grey-lighter);
-  border-top: none;
-  border-bottom: 1px solid var(--color-grey-light);
-  border-radius: var(--spacing-xxx-tight);
-  transition-property: border-color, background-color;
-
-  &:focus,
-  &.focus {
-    background-color: var(--color-green-lighter);
-    border-bottom-color: var(--color-matters-green);
-  }
-
-  &::placeholder {
-    color: var(--color-grey);
-    opacity: 1; /* Firefox */
-  }
-
-  &:-webkit-autofill::first-line {
-    font-size: var(--font-size-md);
-  }
-}
-
 @define-mixin form-input-round {
   @mixin transition;
 
