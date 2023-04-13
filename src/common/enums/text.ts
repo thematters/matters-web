@@ -583,7 +583,7 @@ export const TEXT = {
     hintPaymentPassword: '输入六位数字交易密码',
     hintPaymentPointer: '钱包地址以“$”开头',
     hintTerm: '我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用。',
-    hintUserName: '4-15 个字符，仅支持英文小寫字母、数字或下划线',
+    hintUserName: '4-15 个字符，仅支持英文小写字母、数字或下划线',
     hintVerificationCode: '验证码有效期 20 分钟',
     history: '足迹',
     hkd: '港币',
