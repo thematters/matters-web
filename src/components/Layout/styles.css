@@ -11,9 +11,6 @@ article {
   }
 
   @media (--sm-up) {
-    @mixin border-left-grey;
-    @mixin border-right-grey;
-
     padding-bottom: 0;
   }
 
