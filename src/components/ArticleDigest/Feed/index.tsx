@@ -7,6 +7,7 @@ import {
   CardProps,
   CircleDigest,
   DateTime,
+  Media,
   ResponsiveImage,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
@@ -70,10 +71,10 @@ const BaseArticleDigestFeed = ({
     utm_medium,
   })
 
-  return (
+  const FeedCard = ({ space }: { space: 0 | 'base' }) => (
     <Card
       {...path}
-      spacing={['base', 'base']}
+      spacing={['base', space]}
       onClick={onClick}
       testId={TEST_ID.DIGEST_ARTICLE_FEED}
       is={is}
@@ -84,7 +85,6 @@ const BaseArticleDigestFeed = ({
             <CircleDigest.Plain circle={circle} />
           </header>
         ))}
-
       <section className="content">
         <section className="head">
           <section className="title">
@@ -113,7 +113,6 @@ const BaseArticleDigestFeed = ({
           </div>
         )}
       </section>
-
       {isConciseFooter && (
         <section>
           <DateTime date={article.createdAt} />
@@ -122,9 +121,19 @@ const BaseArticleDigestFeed = ({
       {!isConciseFooter && (
         <FooterActions article={article} inCard date={date} {...controls} />
       )}
-
       <style jsx>{styles}</style>
     </Card>
+  )
+
+  return (
+    <>
+      <Media at="sm">
+        <FeedCard space={'base'} />
+      </Media>
+      <Media greaterThan="sm">
+        <FeedCard space={0} />
+      </Media>
+    </>
   )
 }
 
