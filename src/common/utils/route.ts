@@ -5,7 +5,7 @@ import { PATHS, ROUTES } from '~/common/enums'
 
 import { UtmParams } from './analytics'
 import { fromGlobalId } from './globalId'
-import { tagSlugify } from './text'
+import { slugifyTag } from './text'
 import { parseURL } from './url'
 
 interface ArticleArgs {
@@ -201,7 +201,7 @@ export const toPath = (
     case 'tagDetail': {
       const { id, slug, content } = args.tag
       const { id: numberId } = fromGlobalId(id as string)
-      const pathname = `/tags/${numberId}-${slug || tagSlugify(content)}`
+      const pathname = `/tags/${numberId}-${slug || slugifyTag(content)}`
       const typeStr = args.feedType ? `?type=${args.feedType}` : ''
       return {
         href: `${pathname}${typeStr}`,

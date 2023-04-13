@@ -5,7 +5,7 @@ import {
   Button,
   Dialog,
   IconMore16,
-  IconNavSearch24,
+  IconNavSearch32,
   LoginButton,
   Translate,
   ViewMoreButton,
@@ -35,7 +35,7 @@ const Buttons = () => (
       </li>
 
       <li>
-        <WriteButton allowed />
+        <WriteButton variant="sidenav" allowed />
       </li>
 
       <li>
@@ -45,8 +45,8 @@ const Buttons = () => (
       <li>
         <NavListItem
           name={TEXT.zh_hant.search}
-          icon={<IconNavSearch24 size="md" />}
-          activeIcon={<IconNavSearch24 size="md" color="green" />}
+          icon={<IconNavSearch32 size="md" />}
+          activeIcon={<IconNavSearch32 size="md" color="green" />}
           active
         />
       </li>

@@ -31,6 +31,7 @@ export interface CustomStagingAreaProps {
   nodes: StagingNode[]
   setNodes: (nodes: StagingNode[]) => void
   hint: TextId
+  toStagingArea?: () => void
 }
 
 type StagingAreaProps = BaseStagingAreaProps & {
@@ -69,6 +70,7 @@ const StagingArea: React.FC<StagingAreaProps> = ({
     return (
       <section className="area">
         <CustomStagingArea nodes={nodes} setNodes={setNodes} hint={hint} />
+        <style jsx>{areaStyles}</style>
       </section>
     )
   }

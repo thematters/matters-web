@@ -1,20 +1,14 @@
 import { numAbbr, numRound } from '~/common/utils'
-import {
-  IconDotDivider,
-  IconReadTimeTotal16,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { IconReadTimeTotal16, TextIcon, Translate } from '~/components'
 import { ActionsReadTimeArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 
 interface ResponseCountProps {
   article: ActionsReadTimeArticleFragment
-  hasDivider: boolean
 }
 
-const ReadTime = ({ article, hasDivider }: ResponseCountProps) => {
+const ReadTime = ({ article }: ResponseCountProps) => {
   if (!article.readTime) {
     return null
   }
@@ -28,13 +22,15 @@ const ReadTime = ({ article, hasDivider }: ResponseCountProps) => {
   return (
     <>
       <button type="button">
-        <TextIcon icon={<IconReadTimeTotal16 />} size="xs" color="grey-dark">
+        <TextIcon
+          icon={<IconReadTimeTotal16 size="xs" />}
+          size="xs"
+          color="grey-dark"
+        >
           {numAbbr(readHour, 1)}{' '}
           <Translate zh_hant="小時" zh_hans="小时" en="hours" />
         </TextIcon>
       </button>
-
-      {hasDivider && <IconDotDivider />}
     </>
   )
 }

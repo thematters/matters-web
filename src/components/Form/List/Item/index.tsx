@@ -50,7 +50,7 @@ const Item: React.FC<ItemProps> = forwardRef(
       top: leftAlign === 'top',
       bold: !!bold,
     })
-    const ItemContent = () => (
+    const itemContent = (
       <section className="container">
         <section className={leftClasses}>
           <h5 className="title">{title}</h5>
@@ -90,7 +90,7 @@ const Item: React.FC<ItemProps> = forwardRef(
               spacing={cardProps.spacing || [0, 0]}
               ref={ref}
             >
-              <ItemContent />
+              {itemContent}
             </Card>
           </Media>
           <Media greaterThan="sm">
@@ -100,7 +100,7 @@ const Item: React.FC<ItemProps> = forwardRef(
               spacing={cardProps.spacing || [0, 0]}
               ref={ref}
             >
-              <ItemContent />
+              {itemContent}
             </Card>
           </Media>
         </>

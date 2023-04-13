@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 import { TEST_ID } from '@/src/common/enums'
-import { stripAllPunct, toLocale, toPath } from '~/common/utils'
+import { normalizeTag, toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,
   Media,
@@ -123,7 +123,7 @@ const Toolbar = ({
               ?.map(({ content }) => content)
               .join(' ')
               .split(/\s+/)
-              .map(stripAllPunct)}
+              .map(normalizeTag)}
           />
         </Media>
 

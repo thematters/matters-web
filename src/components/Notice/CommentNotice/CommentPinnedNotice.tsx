@@ -41,7 +41,10 @@ const CommentPinnedNotice = ({
             description="src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
           />
           {commentArticle && <NoticeArticleTitle article={commentArticle} />}
-          <FormattedMessage defaultMessage="comment" />
+          <FormattedMessage
+            defaultMessage="comment"
+            description="src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+          />
         </NoticeHead>
 
         <NoticeComment comment={notice.comment} />

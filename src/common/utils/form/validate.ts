@@ -38,6 +38,7 @@ export const validateTagName = (value: string, lang: Language) => {
     return translate({
       zh_hant: '不支持單獨使用標點符號',
       zh_hans: '不支持单独使用标点符号',
+      en: 'Not support using punctuation marks alone.',
       lang,
     })
   }
@@ -105,11 +106,15 @@ export const validateUserName = (value: string, lang: Language) => {
     return translate({ id: 'required', lang })
   }
 
+  const en =
+    'Must be between 4-15 characters long. Only lowercase letters, numbers and underline are accepted.'
+
   // 4-15 characters, only accept alphabet, number and _.
   if (value.length < 4) {
     return translate({
       zh_hant: '輸入字數過短，僅供輸入 4-15 個字元',
       zh_hans: '输入字数过短，仅供输入 4-15 个字符',
+      en,
       lang,
     })
   }
@@ -118,6 +123,7 @@ export const validateUserName = (value: string, lang: Language) => {
     return translate({
       zh_hant: '輸入字數過長，僅供輸入 4-15 個字元',
       zh_hans: '输入字数过长，仅供输入 4-15 个字符',
+      en,
       lang,
     })
   }
@@ -126,6 +132,7 @@ export const validateUserName = (value: string, lang: Language) => {
     return translate({
       zh_hant: '不支持單獨使用標點符號',
       zh_hans: '不支持单独使用标点符号',
+      en,
       lang,
     })
   }
@@ -163,6 +170,7 @@ export const validateDisplayName = (
     return translate({
       zh_hant: '輸入字數過短，僅供輸入 2-20 個字元',
       zh_hans: '输入字数过短，仅供输入 2-20 个字符',
+      en: 'Must be between 2-20 characters long.',
       lang,
     })
   }
@@ -171,6 +179,7 @@ export const validateDisplayName = (
     return translate({
       zh_hant: '輸入字數過長，僅供輸入 2-20 個字元',
       zh_hans: '输入字数过长，仅供输入 2-20 个字符',
+      en: 'Must be between 2-20 characters long.',
       lang,
     })
   }
@@ -180,6 +189,7 @@ export const validateDisplayName = (
     return translate({
       zh_hant: `不能使用「${RESERVED_NAMES[invalidNameIndex]}」`,
       zh_hans: `不能使用 “${RESERVED_NAMES[invalidNameIndex]}”`,
+      en: `Cannot use "${RESERVED_NAMES[invalidNameIndex]}"`,
       lang,
     })
   }
@@ -188,6 +198,7 @@ export const validateDisplayName = (
     return translate({
       zh_hant: '不支持單獨使用標點符號',
       zh_hans: '不支持单独使用标点符号',
+      en: 'Not support using punctuation marks alone.',
       lang,
     })
   }
@@ -200,6 +211,7 @@ export const validateDescription = (value: string, lang: Language) => {
     return translate({
       zh_hant: `已超過 200 字，目前 ${value.length} 字`,
       zh_hans: `已超过 200 字，目前 ${value.length} 字`,
+      en: 'Maximum 200 characters, current ${value.length} characters.',
       lang,
     })
   }
@@ -212,6 +224,7 @@ export const validateSupportWords = (value: string, lang: Language) => {
       return translate({
         zh_hant: `已超過 140 字，目前 ${value.length} 字`,
         zh_hans: `已超过 140 字，目前 ${value.length} 字`,
+        en: 'Maximum 140 characters, current ${value.length} characters.',
         lang,
       })
     }
@@ -220,7 +233,12 @@ export const validateSupportWords = (value: string, lang: Language) => {
 
 export const validateToS = (value: boolean, lang: Language) => {
   if (value === false) {
-    return translate({ zh_hant: '請勾選', zh_hans: '请勾选', lang })
+    return translate({
+      zh_hant: '請勾選',
+      zh_hans: '请勾选',
+      en: 'Please check',
+      lang,
+    })
   }
 }
 
@@ -243,6 +261,7 @@ export const validateCircleName = (value: string, lang: Language) => {
     return translate({
       zh_hant: '輸入字數過短，僅供輸入 2-20 個字元',
       zh_hans: '输入字数过短，仅供输入 2-20 个字符',
+      en: 'Must be between 2-20 characters long.',
       lang,
     })
   }
@@ -251,6 +270,7 @@ export const validateCircleName = (value: string, lang: Language) => {
     return translate({
       zh_hant: '輸入字數過長，僅供輸入 2-20 個字元',
       zh_hans: '输入字数过长，仅供输入 2-20 个字符',
+      en: 'Must be between 2-20 characters long.',
       lang,
     })
   }
@@ -260,6 +280,7 @@ export const validateCircleName = (value: string, lang: Language) => {
     return translate({
       zh_hant: `不能使用「${RESERVED_CIRCLE_NAMES[invalidNameIndex]}」`,
       zh_hans: `不能使用 “${RESERVED_CIRCLE_NAMES[invalidNameIndex]}”`,
+      en: `"${RESERVED_CIRCLE_NAMES[invalidNameIndex]}" is invalid.`,
       lang,
     })
   }
@@ -268,6 +289,7 @@ export const validateCircleName = (value: string, lang: Language) => {
     return translate({
       zh_hant: '不支持單獨使用標點符號',
       zh_hans: '不支持单独使用标点符号',
+      en: 'Not support using punctuation marks alone.',
       lang,
     })
   }
@@ -289,6 +311,7 @@ export const validateCircleDisplayName = (value: string, lang: Language) => {
     return translate({
       zh_hant: '輸入字數過短，僅供輸入 2-12 個字元',
       zh_hans: '输入字数过短，仅供输入 2-12 個字符',
+      en: 'Must be between 2-12 characters long.',
       lang,
     })
   }
@@ -297,6 +320,7 @@ export const validateCircleDisplayName = (value: string, lang: Language) => {
     return translate({
       zh_hant: '輸入字數過長，僅供輸入 2-12 個字元',
       zh_hans: '输入字数过长，仅供输入 2-12 個字符',
+      en: 'Must be between 2-12 characters long.',
       lang,
     })
   }
@@ -306,6 +330,7 @@ export const validateCircleDisplayName = (value: string, lang: Language) => {
     return translate({
       zh_hant: `不能使用「${RESERVED_NAMES[invalidNameIndex]}」`,
       zh_hans: `不能使用 “${RESERVED_NAMES[invalidNameIndex]}”`,
+      en: `"${RESERVED_NAMES[invalidNameIndex]}" is invalid.`,
       lang,
     })
   }
@@ -314,6 +339,7 @@ export const validateCircleDisplayName = (value: string, lang: Language) => {
     return translate({
       zh_hant: '不支持單獨使用標點符號',
       zh_hans: '不支持单独使用标点符号',
+      en: 'Not support using punctuation marks alone.',
       lang,
     })
   }
@@ -328,6 +354,7 @@ export const validateCircleAmount = (value: number, lang: Language) => {
     return translate({
       zh_hant: `最小金額爲 HKD ${PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}`,
       zh_hans: `最小金额为 HKD ${PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}`,
+      en: `Minimum amount is HKD ${PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}`,
       lang,
     })
   }
@@ -336,6 +363,7 @@ export const validateCircleAmount = (value: number, lang: Language) => {
     return translate({
       zh_hant: `最大金額爲 HKD ${PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}`,
       zh_hans: `最大金额为 HKD ${PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}`,
+      en: `Maximum amount is HKD ${PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}`,
       lang,
     })
   }
@@ -355,6 +383,7 @@ export const validateAmount = (value: number, lang: Language) => {
     return translate({
       zh_hant: `最小储值金額爲 HKD ${PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT.HKD}`,
       zh_hans: `最小储值金额为 HKD ${PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT.HKD}`,
+      en: `Minimum amount is HKD ${PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT.HKD}`,
       lang,
     })
   }
@@ -407,6 +436,7 @@ export const validatePayoutAmount = ({
     return translate({
       zh_hant: `最少提現金額爲 HKD ${min}`,
       zh_hans: `最少提现金額爲 HKD ${min}`,
+      en: `Minimum amount is HKD ${min}`,
       lang,
     })
   }
@@ -415,6 +445,7 @@ export const validatePayoutAmount = ({
     return translate({
       zh_hant: `最高提現金額爲 HKD ${max}`,
       zh_hans: `最高提现金額爲 HKD ${max}`,
+      en: `Maximum amount is HKD ${max}`,
       lang,
     })
   }
@@ -425,6 +456,7 @@ export const validateCurrency = (value: string, lang: Language) => {
     return translate({
       zh_hant: '請選擇一種幣別',
       zh_hans: '请选择一种币别',
+      en: 'Please select a currency',
       lang,
     })
   }

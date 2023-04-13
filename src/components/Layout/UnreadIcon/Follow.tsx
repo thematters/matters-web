@@ -3,8 +3,8 @@ import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
 import {
-  IconNavFollowing24,
-  IconNavFollowingActive24,
+  IconNavFollowing32,
+  IconNavFollowingActive32,
   ViewerContext,
 } from '~/components'
 import UNREAD_FOLLOWING from '~/components/GQL/queries/unreadFollowing'
@@ -40,9 +40,9 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   return (
     <span className={iconClasses}>
       {active ? (
-        <IconNavFollowingActive24 size="md" color="green" />
+        <IconNavFollowingActive32 size="lg" />
       ) : (
-        <IconNavFollowing24 size="md" />
+        <IconNavFollowing32 size="lg" />
       )}
 
       <style jsx>{styles}</style>

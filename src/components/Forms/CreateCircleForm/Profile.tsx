@@ -69,7 +69,6 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
     setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
@@ -78,6 +77,8 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       displayName: circle.displayName || '',
       description: circle.description || '',
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ displayName, description }) =>
       _pickBy({
         displayName: !isCreate
@@ -226,7 +227,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting}
       text={<FormattedMessage defaultMessage="Done" description="" />}
       loading={isSubmitting}
     />

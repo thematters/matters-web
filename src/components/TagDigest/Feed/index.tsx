@@ -78,7 +78,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
 
           <section className="nums">
             <TextIcon
-              icon={<IconUser16 color="grey-dark" />}
+              icon={<IconUser16 color="grey-dark" size="xs" />}
               size="xs"
               spacing="xxtight"
               color="grey-dark"
@@ -87,7 +87,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
             </TextIcon>
 
             <TextIcon
-              icon={<IconArticle16 color="grey-dark" />}
+              icon={<IconArticle16 color="grey-dark" size="xs" />}
               size="xs"
               spacing="xxtight"
               color="grey-dark"

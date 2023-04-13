@@ -122,10 +122,20 @@ const Mini = ({
 
         <span className={nameClasses}>
           {hasDisplayName && (
-            <span className="displayname">{user.displayName}</span>
+            <span
+              className="displayname"
+              data-test-id={TEST_ID.DIGEST_USER_MINI_DISPLAY_NAME}
+            >
+              {user.displayName}
+            </span>
           )}
           {hasUserName && user.userName && (
-            <span className="username">@{user.userName}</span>
+            <span
+              className="username"
+              data-test-id={TEST_ID.DIGEST_USER_MINI_USER_NAME}
+            >
+              @{user.userName}
+            </span>
           )}
         </span>
 
