@@ -119,20 +119,39 @@
 /* Form
    ========================================================================== */
 @define-mixin form-input {
-  @mixin border-top-grey;
-  @mixin border-bottom-grey;
+  @mixin border-grey;
 
   padding: var(--spacing-base);
   font-size: var(--font-size-md);
+  color: var(--color-grey-dark);
   background-color: var(--color-white);
+  border-radius: var(--spacing-x-tight);
+
+  &:focus,
+  &.focus {
+    color: var(--color-black);
+    border-color: var(--color-grey);
+  }
 
   &:disabled {
-    color: var(--color-grey-darker);
+    color: var(--color-grey-dark);
+    background-color: var(--color-grey-lighter);
+    border-color: transparent;
   }
 
   &::placeholder {
     color: var(--color-grey-light);
     opacity: 1; /* Firefox */
+  }
+
+  &.error {
+    border-color: var(--color-red);
+
+    &:focus,
+    &.focus {
+      background-color: transparent;
+      border-color: var(--color-red);
+    }
   }
 
   &:-webkit-autofill::first-line {
