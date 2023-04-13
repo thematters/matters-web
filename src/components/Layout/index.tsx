@@ -113,12 +113,12 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
     hasOnboardingTasks: showOnboardingTasks,
   })
 
-  usePullToRefresh.Register()
+  usePullToRefresh.Register('#ptr')
   usePullToRefresh.Handler(() => window.location.reload())
 
   return (
     <>
-      <article className={articleClasses}>
+      <article id="ptr" className={articleClasses}>
         <PullToRefresh>
           {children}
 
