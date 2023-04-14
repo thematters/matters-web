@@ -50,6 +50,7 @@ const IMG_SRC = [
 
   // Asssets
   'data:',
+  process.env.NEXT_PUBLIC_LEGACY_PRE_ASSET_DOMAIN,
   process.env.NEXT_PUBLIC_LEGACY_ASSET_DOMAIN,
   process.env.NEXT_PUBLIC_ASSET_DOMAIN
     ? new URL(process.env.NEXT_PUBLIC_ASSET_DOMAIN).hostname
