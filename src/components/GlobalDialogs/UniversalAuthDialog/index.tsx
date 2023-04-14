@@ -9,7 +9,7 @@ import {
 } from '~/common/enums'
 import {
   Dialog,
-  ReCaptchaProvider,
+  // ReCaptchaProvider,
   Spinner,
   useDialogSwitch,
   useEventListener,
@@ -130,18 +130,18 @@ const BaseUniversalAuthDialog = ({
           />
         )}
         {currStep === 'wallet-connect' && (
-          <ReCaptchaProvider>
-            <DynamicWalletAuthFormConnect
-              purpose="dialog"
-              submitCallback={(type?: AuthResultType) => {
-                if (type === AuthResultType.Signup) {
-                  forward('complete')
-                }
-              }}
-              closeDialog={closeDialog}
-              back={() => forward('wallet-select')}
-            />
-          </ReCaptchaProvider>
+          // <ReCaptchaProvider>
+          <DynamicWalletAuthFormConnect
+            purpose="dialog"
+            submitCallback={(type?: AuthResultType) => {
+              if (type === AuthResultType.Signup) {
+                forward('complete')
+              }
+            }}
+            closeDialog={closeDialog}
+            back={() => forward('wallet-select')}
+          />
+          // </ReCaptchaProvider>
         )}
       </DynamicWagmiProvider>
 
@@ -156,15 +156,15 @@ const BaseUniversalAuthDialog = ({
         />
       )}
       {currStep === 'email-sign-up-init' && (
-        <ReCaptchaProvider>
-          <DynamicEmailSignUpFormInit
-            purpose="dialog"
-            submitCallback={() => forward('email-verification-sent')}
-            gotoEmailLogin={() => forward('email-login')}
-            closeDialog={closeDialog}
-            back={() => forward('email-login')}
-          />
-        </ReCaptchaProvider>
+        // <ReCaptchaProvider>
+        <DynamicEmailSignUpFormInit
+          purpose="dialog"
+          submitCallback={() => forward('email-verification-sent')}
+          gotoEmailLogin={() => forward('email-login')}
+          closeDialog={closeDialog}
+          back={() => forward('email-login')}
+        />
+        // </ReCaptchaProvider>
       )}
       {currStep === 'email-verification-sent' && (
         <VerificationLinkSent type="changePassword" purpose="dialog" />
