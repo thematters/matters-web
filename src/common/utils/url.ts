@@ -54,7 +54,8 @@ export const toSizedImageURL = ({ url, size, ext }: ToSizedImageURLProps) => {
     return url
   }
 
-  const key = url.replace(assetDomain, ``)
+  const hostnameless = url.replace(assetDomain, ``)
+  const key = hostnameless.replace('/public', '')
   const extedUrl = changeExt({ key, ext })
   const postfix = size ? size : 'public'
 
