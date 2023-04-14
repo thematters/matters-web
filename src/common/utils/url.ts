@@ -48,13 +48,22 @@ export const toSizedImageURL = ({ url, size, ext }: ToSizedImageURLProps) => {
   const assetDomain = process.env.NEXT_PUBLIC_ASSET_DOMAIN
     ? `${process.env.NEXT_PUBLIC_ASSET_DOMAIN}`
     : ''
-  const isOutsideLink = url.indexOf(assetDomain) < 0
+  let urlDomain = assetDomain
+  let isOutsideLink = url.indexOf(assetDomain) < 0
+
+  if (isOutsideLink) {
+    urlDomain = process.env.NEXT_PUBLIC_LEGACY_PRE_ASSET_DOMAIN
+      ? `https://${process.env.NEXT_PUBLIC_LEGACY_PRE_ASSET_DOMAIN}`
+      : ''
+    isOutsideLink =
+      url.indexOf(`${process.env.NEXT_PUBLIC_LEGACY_PRE_ASSET_DOMAIN}`) < 0
+  }
 
   if (!assetDomain || isOutsideLink) {
     return url
   }
 
-  const hostnameless = url.replace(assetDomain, ``)
+  const hostnameless = url.replace(urlDomain, ``)
   const key = hostnameless.replace('/public', '')
   const extedUrl = changeExt({ key, ext })
   const postfix = size ? size : 'public'
