@@ -5,6 +5,7 @@ import { useContext, useEffect } from 'react'
 import {
   Layout,
   Media,
+  Spacer,
   Spinner,
   useMutation,
   ViewerContext,
@@ -70,19 +71,15 @@ const BaseFollow = () => {
 const Follow = () => {
   return (
     <Layout.Main>
-      <Layout.Header
-        left={
-          <>
-            <Media at="sm">
-              <Layout.Header.MeButton />
-            </Media>
-            <Media greaterThan="sm">
-              <Layout.Header.BackButton />
-            </Media>
-          </>
-        }
-        right={<Layout.Header.Title id="following" />}
-      />
+      <Media at="sm">
+        <Layout.Header
+          left={<Layout.Header.MeButton />}
+          right={<Layout.Header.Title id="following" />}
+        />
+      </Media>
+      <Media greaterThan="sm">
+        <Spacer size="base" />
+      </Media>
 
       <BaseFollow />
     </Layout.Main>

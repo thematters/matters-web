@@ -18,10 +18,7 @@ const RecommendCircleActivity = ({ circles, location }: Props) => {
   }
 
   return (
-    <Slides
-      bgColor="grey-lighter"
-      header={<FollowingRecommendHead type="circle" />}
-    >
+    <Slides header={<FollowingRecommendHead type="circle" />}>
       {circles.map((circle, index) => (
         <Slides.Item
           size="md"

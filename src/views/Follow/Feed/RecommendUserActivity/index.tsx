@@ -17,10 +17,7 @@ const RecommendUserActivity = ({ users }: Props) => {
   }
 
   return (
-    <Slides
-      bgColor="grey-lighter"
-      header={<FollowingRecommendHead type="user" />}
-    >
+    <Slides header={<FollowingRecommendHead type="user" />}>
       {users.map((user, index) => (
         <Slides.Item
           size="md"
