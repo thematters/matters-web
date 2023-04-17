@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { GUIDE_LINKS, PATHS } from '~/common/enums'
+import { EXTERNAL_LINKS, GUIDE_LINKS, PATHS } from '~/common/enums'
 import { Form, LanguageContext, Layout, Spacer } from '~/components'
 
 import styles from './styles.css'
@@ -60,7 +60,7 @@ const BaseHelp = () => {
             defaultMessage: 'Open Source',
             description: '',
           })}
-          htmlHref="https://github.com/thematters/developer-resource"
+          htmlHref={EXTERNAL_LINKS.DEVELOPER_RESOURCE}
           htmlTarget="_blank"
         />
         <Form.List.Item
@@ -81,11 +81,11 @@ const BaseHelp = () => {
           />
           <a
             className="u-link-green"
-            href="mailto:ask@matters.news"
+            href="mailto:ask@matters.town"
             target="_blank"
             rel="noreferrer"
           >
-            &nbsp; ask@matters.news
+            &nbsp; ask@matters.town
           </a>
           &nbsp;
           <FormattedMessage

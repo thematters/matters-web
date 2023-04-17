@@ -28,7 +28,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>3.1 MATTERS將接收、儲存和處理用戶在評估和使用服務時提供的個人信息，並且將採取適當的措施來保護其收集和/或持有的個人信息，以防止未經許可或意外的訪問、處理、刪除、丟失、使用或洩露信息。</p>
 
-<p>3.2 為了保護個人信息，MATTERS將要求所有用戶（或如適用法律所定義的其各自相關人員）在請求訪問和/或修改其個人信息時證明其身份。訪問和修改個人信息的請求應當以書面形式提交並發送至 ask@matters.news。MATTERS應當收取合理的費用以抵銷MATTERS在處理相關數據訪問請求時所產生的管理和實際成本費用。如果有合理的理由相信某個人信息不準確，則MATTERS應當採取可行的措施以確保此個人信息不被使用，除非並且直到這個理由不再適用於此類個人信息或者此個人信息被刪除。</p>
+<p>3.2 為了保護個人信息，MATTERS將要求所有用戶（或如適用法律所定義的其各自相關人員）在請求訪問和/或修改其個人信息時證明其身份。訪問和修改個人信息的請求應當以書面形式提交並發送至 &lt;ask@matters.town&gt;。MATTERS應當收取合理的費用以抵銷MATTERS在處理相關數據訪問請求時所產生的管理和實際成本費用。如果有合理的理由相信某個人信息不準確，則MATTERS應當採取可行的措施以確保此個人信息不被使用，除非並且直到這個理由不再適用於此類個人信息或者此個人信息被刪除。</p>
 
 <p>3.3 如果MATTERS持有的某個人信息不再被需要用於本隱私政策第4.2條中所規定的使用目的，MATTERS應當採取切實可行的措施，在合理可行的條件下盡快停止處理此類個人信息，但如果MATTERS被合理請求保留數據用於（i）存檔目的；（ii）任何實際或潛在的爭議；（iii）遵守相關的法律法規；（iv）執行MATTERS和其用戶之間的任何協議；以及（v）保護MATTERS和其員工的權利、財產和安全，則MATTERS有權保留此個人信息的副本。MATTERS將採取切實可行的措施來保證其保留此個人信息的時間不會超過出於上述目的（包括直接或間接目的）所需要的保留時間。</p>
 
@@ -70,9 +70,9 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>6.1 只有當用戶提供了適用法律要求的同意書時（內容表明他們特別明確地為了接收直接營銷信息，希望從MATTERS處接收廣告內容，並且向MATTERS提供他們的聯繫方式），MATTERS才可以使用此用戶的個人信息與此用戶聯繫，並提供此用戶可能感興趣的商品和服務信息（單獨，或者與MATTERS的附屬公司或合作夥伴提供的功能或服務和應用一起）。</p>
 
-<p>6.2 MATTERS給予其用戶取消所有推廣信息訂閱的權利。MATTERS應在每一封推廣營銷的電子郵件中，向用戶提供取消未來訂閱的選項。另外，用戶也可以在任何時候通過發送郵件給ask@matters.news.來取消訂閱推廣內容，不需要向MATTERS付費。</p>
+<p>6.2 MATTERS給予其用戶取消所有推廣信息訂閱的權利。MATTERS應在每一封推廣營銷的電子郵件中，向用戶提供取消未來訂閱的選項。另外，用戶也可以在任何時候通過發送郵件給 &lt;ask@matters.town&gt;.來取消訂閱推廣內容，不需要向MATTERS付費。</p>
 
-<p>6.3 MATTERS給予其用戶請求從其數據存儲中刪除他們個人信息的權利。用戶可以通過發送電子郵件至ask@matters.news的方式書面提出請求。為避免疑義，MATTERS有權無限期地、出於任何目的地保留、處理和使用任何非個人信息。</p>
+<p>6.3 MATTERS給予其用戶請求從其數據存儲中刪除他們個人信息的權利。用戶可以通過發送電子郵件至 &lt;ask@matters.town&gt; 的方式書面提出請求。為避免疑義，MATTERS有權無限期地、出於任何目的地保留、處理和使用任何非個人信息。</p>
 
 <p><b><u>7. 第三方社交媒體網站的隱私政策</u></b></p>
 
@@ -135,7 +135,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>3.1 MATTERS将接收、储存和处理用户在评估和使用服务时提供的个人信息，并且将采取适当的措施来保护其收集和/或持有的个人信息，以防止未经许可或意外的访问、处理、删除、丢失、使用或泄露信息。</p>
 
-<p>3.2 为了保护个人信息，MATTERS将要求所有用户（或如适用法律所定义的其各自相关人员）在请求访问和/或修改其个人信息时证明其身份。访问和修改个人信息的请求应当以书面形式提交并發送至ask@matters.news。MATTERS应当收取合理的费用以抵销MATTERS在处理相关数据访问请求时所产生的管理和实际成本费用。如果有合理的理由相信某个人信息不准确，则MATTERS应当采取可行的措施以确保此个人信息不被使用，除非并且直到这个理由不再适用于此类个人信息或者此个人信息被删除。</p>
+<p>3.2 为了保护个人信息，MATTERS将要求所有用户（或如适用法律所定义的其各自相关人员）在请求访问和/或修改其个人信息时证明其身份。访问和修改个人信息的请求应当以书面形式提交并發送至 &lt;ask@matters.town&gt; 。MATTERS应当收取合理的费用以抵销MATTERS在处理相关数据访问请求时所产生的管理和实际成本费用。如果有合理的理由相信某个人信息不准确，则MATTERS应当采取可行的措施以确保此个人信息不被使用，除非并且直到这个理由不再适用于此类个人信息或者此个人信息被删除。</p>
 
 <p>3.3 如果MATTERS持有的某个人信息不再被需要用于本隐私政策第4.2条中所规定的使用目的，MATTERS应当采取切实可行的措施，在合理可行的条件下尽快停止处理此类个人信息，但如果MATTERS被合理请求保留数据用于（i）存档目的；（ii）任何实际或潜在的争议；（iii）遵守相关的法律法规；（iv）执行MATTERS和其用户之间的任何协议；以及（v）保护MATTERS和其员工的权利、财产和安全，则MATTERS有权保留此个人信息的副本。MATTERS将采取切实可行的措施来保证其保留此个人信息的时间不会超过出于上述目的（包括直接或间接目的）所需要的保留时间。</p>
 
@@ -177,9 +177,9 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>6.1 只有当用户提供了适用法律要求的同意书时（内容表明他们特别明确地为了接收直接营销信息，希望从MATTERS处接收广告内容，并且向MATTERS提供他们的联系方式），MATTERS才可以使用此用户的个人信息与此用户联系，并提供此用户可能感兴趣的商品和服务信息（单独，或者与MATTERS的附属公司或合作伙伴提供的功能或服务和应用一起）。</p>
 
-<p>6.2 MATTERS给予其用户取消所有推广信息订阅的权利。MATTERS应在每一封推广营销的电子邮件中，向用户提供取消未来订阅的选项。另外，用户也可以在任何时候通过发送邮件给ask@matters.news.来取消订阅推广内容，不需要向MATTERS付费。</p>
+<p>6.2 MATTERS给予其用户取消所有推广信息订阅的权利。MATTERS应在每一封推广营销的电子邮件中，向用户提供取消未来订阅的选项。另外，用户也可以在任何时候通过发送邮件给 &lt;ask@matters.town&gt;.来取消订阅推广内容，不需要向MATTERS付费。</p>
 
-<p>6.3 MATTERS给予其用户请求从其数据存储中删除他们个人信息的权利。用户可以通过发送电子邮件至ask@matters.news的方式书面提出请求。为避免疑义，MATTERS有权无限期地、出于任何目的地保留、处理和使用任何非个人信息。</p>
+<p>6.3 MATTERS给予其用户请求从其数据存储中删除他们个人信息的权利。用户可以通过发送电子邮件至 &lt;ask@matters.town&gt; 的方式书面提出请求。为避免疑义，MATTERS有权无限期地、出于任何目的地保留、处理和使用任何非个人信息。</p>
 
 <p><b><u>7. 第三方社交媒体网站的隐私政策</u></b></p>
 
@@ -242,7 +242,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>3.1 The Data Controller will receive, store and process Personal Information that the Users make available when assessing or using the Services. It will take appropriate steps to protect Personal Information collected and/or held by it against unauthorized or accidental access, processing, erasure, loss, use or disclosure. </p>
 
-<p>3.2 In order to protect the Personal Information, the Data Controller will require all Users (or their respective relevant persons as defined under applicable laws) to prove their identities in relation to their requests to access and/or correct their Personal Information.  Requests for access and correction of Personal Information are to be addressed in writing and sent to ask@matters.news. A reasonable fee shall be charged to offset the Data Controller’s administrative and actual costs incurred in complying with the relevant data access requests. Where there are reasonable grounds for believing that any Personal Information is inaccurate, the Data Controller shall take practicable steps to ensure that the Personal Information shall not be used unless and until those grounds cease to be applicable to such Personal Information or the Personal Information shall be erased. </p>
+<p>3.2 In order to protect the Personal Information, the Data Controller will require all Users (or their respective relevant persons as defined under applicable laws) to prove their identities in relation to their requests to access and/or correct their Personal Information.  Requests for access and correction of Personal Information are to be addressed in writing and sent to &lt;ask@matters.town&gt;. A reasonable fee shall be charged to offset the Data Controller’s administrative and actual costs incurred in complying with the relevant data access requests. Where there are reasonable grounds for believing that any Personal Information is inaccurate, the Data Controller shall take practicable steps to ensure that the Personal Information shall not be used unless and until those grounds cease to be applicable to such Personal Information or the Personal Information shall be erased. </p>
 
 <p>3.3 Where any Personal Information held by the Data Controller is no longer required for the purposes as stated under clause 4.2 of this Privacy Policy, the Data Controller shall take practicable steps to cease processing such Personal Information as soon as reasonably practicable, provided that the Data Controller may keep copies of such Personal Information as is reasonably required (i) for archival purposes; (ii) for use in relation to any actual or potential dispute; (iii) for compliance with applicable laws and regulations; (iv) for enforcing any agreement the Data Controller has with such User; and (v) for protecting the Data Controller’s and its employees’ rights, property or safety. The Data Controller will take practicable steps to ensure such Personal Information will not be kept longer than is necessary for the fulfillment of the above purposes (including direct or indirect purposes). </p>
 
@@ -284,9 +284,9 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>6.1 Only when Users have provided the consents required under applicable laws (including indicating that they would like to receive promotional materials from the Data Controller and providing their contact details to the Data Controller specifically and expressly in order to receive direct marketing communications), the Data Controller may use the Personal Information of such Users to contact such Users and provide information about goods and services (either alone or in conjunction with products or services offered by the Data Controller’s Affiliates or business partners) that may be of interest to such Users.</p>
 
-<p>6.2 The Data Controller provides its Users with the ability to unsubscribe from all marketing communications. Every time a User receives a direct marketing email, he/she will be provided with the choice to opt-out of future direct marketing emails. Users may also opt-out of receiving promotional materials by sending an email to ask@matters.news or at any time, without charge by the Data Controller. </p>
+<p>6.2 The Data Controller provides its Users with the ability to unsubscribe from all marketing communications. Every time a User receives a direct marketing email, he/she will be provided with the choice to opt-out of future direct marketing emails. Users may also opt-out of receiving promotional materials by sending an email to &lt;ask@matters.town&gt; or at any time, without charge by the Data Controller. </p>
 
-<p>6.3 The Data Controller provides its Users with the ability to request removal of their Personal Information from its storage. Users may lodge such request in writing by sending an email to ask@matters.news. For the avoidance of doubt, the Data Controller is entitled to retain, process and use, for an indefinite term and any purpose, any Non-personal Information.</p>
+<p>6.3 The Data Controller provides its Users with the ability to request removal of their Personal Information from its storage. Users may lodge such request in writing by sending an email to &lt;ask@matters.town&gt;. For the avoidance of doubt, the Data Controller is entitled to retain, process and use, for an indefinite term and any purpose, any Non-personal Information.</p>
 
 <p><b><u>7. THIRD-PARTY SOCIAL MEDIA SITES’ PRIVACY POLICIES</u></b></p>
 
