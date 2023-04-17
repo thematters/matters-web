@@ -36,11 +36,16 @@ const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
         {article.access.type === 'paywall' && <IconPaywall16 />}
 
         {controls.inUserArticles && article.sticky && (
-          <IconPin24 data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_FOOTER_PIN} />
+          <IconPin24
+            size="xs"
+            data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_FOOTER_PIN}
+          />
         )}
 
         {controls.inUserArticles && article.articleState !== 'active' && (
-          <IconArchive24 />
+          <>
+            <IconArchive24 size="xs" />
+          </>
         )}
       </section>
 
