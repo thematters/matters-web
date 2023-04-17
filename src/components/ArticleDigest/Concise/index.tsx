@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
-import { Card, ResponsiveImage } from '~/components'
+import { Card, Media, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleDigestConciseArticlePrivateFragment,
@@ -58,8 +58,8 @@ const BaseArticleDigestFeed = ({
     utm_medium,
   })
 
-  return (
-    <Card {...path} spacing={['base', 'base']} onClick={onClick}>
+  const ConciseCard = ({ space }: { space: 0 | 'base' }) => (
+    <Card {...path} spacing={['base', space]} onClick={onClick}>
       <section className="content">
         <section className="head">
           <section className="title">
@@ -98,6 +98,17 @@ const BaseArticleDigestFeed = ({
 
       <style jsx>{styles}</style>
     </Card>
+  )
+
+  return (
+    <>
+      <Media at="sm">
+        <ConciseCard space={'base'} />
+      </Media>
+      <Media greaterThan="sm">
+        <ConciseCard space={0} />
+      </Media>
+    </>
   )
 }
 
