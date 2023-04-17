@@ -113,7 +113,7 @@ const CREW = [
     people: [
       {
         avatar: IMAGE_YS,
-        title: 'Matters.News Community',
+        title: 'Matters Community',
         name: <Translate zh_hant="李映昕" zh_hans="李映昕" en="Yingshin Lee" />,
       },
       {

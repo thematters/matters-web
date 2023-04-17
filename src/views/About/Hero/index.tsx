@@ -92,7 +92,7 @@ const Hero = () => {
                   <Translate
                     zh_hant="創作社群與內容生態"
                     zh_hans="创作社群与内容生态"
-                    en="at Matters.News"
+                    en="at Matters"
                   />
                 </h2>
 

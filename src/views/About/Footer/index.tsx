@@ -4,6 +4,7 @@ import { ReactComponent as IconFooterFacebook } from '@/public/static/icons/24px
 import { ReactComponent as IconFooterInstagram } from '@/public/static/icons/24px/footer-instagram.svg'
 import { ReactComponent as IconFooterLinkedin } from '@/public/static/icons/24px/footer-linkedin.svg'
 import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/24px/footer-twitter.svg'
+import { EXTERNAL_LINKS } from '~/common/enums'
 import {
   Button,
   LanguageSwitch,
@@ -47,11 +48,11 @@ const Footer = () => {
                   <br />
                   <a
                     className="u-link-green"
-                    href="mailto:hi@matters.news"
+                    href="mailto:hi@matters.town"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    hi@matters.news
+                    hi@matters.town
                   </a>
                 </p>
                 <p>
@@ -63,11 +64,11 @@ const Footer = () => {
                   <br />
                   <a
                     className="u-link-green"
-                    href="mailto:hi@matters.news"
+                    href="mailto:hi@matters.town"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    ask@matters.news
+                    ask@matters.town
                   </a>
                 </p>
                 <p>
@@ -79,7 +80,7 @@ const Footer = () => {
                   <br />
                   <a
                     className="u-link-green"
-                    href="https://matters-lab.io/"
+                    href={EXTERNAL_LINKS.MATTERS_LAB}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -158,7 +159,7 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
-                        href="https://www.facebook.com/MattersLab2018/"
+                        href={EXTERNAL_LINKS.FACEBOOK}
                         target="_blank"
                         rel="noreferrer"
                       >
@@ -255,7 +256,7 @@ const Footer = () => {
                     textColor="white"
                     textActiveColor="black"
                     borderWidth="sm"
-                    htmlHref="https://matters.news/signup"
+                    htmlHref={`https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/signup`}
                     htmlTarget="_blank"
                     rel="noreferrer"
                   >
