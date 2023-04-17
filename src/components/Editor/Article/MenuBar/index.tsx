@@ -1,4 +1,5 @@
-import { Editor } from '@tiptap/react'
+// @ts-nocheck
+import { Editor } from '@matters/matters-editor/editors'
 
 import styles from './styles.css'
 
@@ -19,13 +20,6 @@ const MenuBar: React.FC<MenuBarProps> = ({ editor }) => {
         className={editor.isActive('bold') ? 'is-active' : ''}
       >
         Bold
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleItalic().run()}
-        disabled={!editor.can().chain().focus().toggleItalic().run()}
-        className={editor.isActive('italic') ? 'is-active' : ''}
-      >
-        Italic
       </button>
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
