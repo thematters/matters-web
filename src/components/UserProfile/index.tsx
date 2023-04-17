@@ -105,7 +105,6 @@ export const UserProfile = () => {
    */
   const LayoutHeader = () => (
     <Layout.Header
-      left={<Layout.Header.BackButton mode="black-solid" />}
       right={
         <>
           <span />
