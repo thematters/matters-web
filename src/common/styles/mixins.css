@@ -225,7 +225,7 @@
     color: var(--color-grey-dark);
 
     & :global(> * + *) {
-      padding-left: var(--spacing-base);
+      margin-left: var(--spacing-base);
     }
   }
 
@@ -233,7 +233,7 @@
     color: var(--color-black);
 
     & :global(> * + *) {
-      padding-left: var(--spacing-base);
+      margin-left: var(--spacing-base);
     }
   }
 }
