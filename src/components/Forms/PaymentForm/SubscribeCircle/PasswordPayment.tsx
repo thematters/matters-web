@@ -57,7 +57,6 @@ const Confirm: React.FC<FormProps> = ({
   const {
     errors,
     handleSubmit,
-    isValid,
     isSubmitting,
     setFieldValue,
     setTouched,
@@ -67,6 +66,8 @@ const Confirm: React.FC<FormProps> = ({
     initialValues: {
       password: '',
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ password }) =>
       _pickBy({
         password: validatePaymentPassword(password, lang),
@@ -105,7 +106,7 @@ const Confirm: React.FC<FormProps> = ({
   )
 
   useEffect(() => {
-    if (isValid && values.password.length === PAYMENT_PASSSWORD_LENGTH) {
+    if (values.password.length === PAYMENT_PASSSWORD_LENGTH) {
       handleSubmit()
     }
   }, [values.password])

@@ -2,22 +2,17 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
-import {
-  parseFormSubmitErrors,
-  translate,
-  validateDisplayName,
-} from '~/common/utils'
+import { parseFormSubmitErrors, validateDisplayName } from '~/common/utils'
 import {
   AvatarUploader,
   CoverUploader,
   Dialog,
   Form,
   LanguageContext,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -87,7 +82,10 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   const intl = useIntl()
   const validateDescription = (value: string, lang: Language) => {
     if (!value) {
-      return translate({ id: 'required', lang })
+      return intl.formatMessage({
+        defaultMessage: 'Required',
+        description: '',
+      })
     } else if (value.length > 200) {
       return intl.formatMessage(
         {
@@ -109,7 +107,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
     setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
@@ -118,6 +115,8 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       displayName: user.displayName || '',
       description: user.info.description || '',
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ displayName, description }) =>
       _pickBy({
         displayName: validateDisplayName(displayName, lang, isAdmin),
@@ -143,7 +142,12 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: <Translate id="successEditUserProfile" />,
+              content: (
+                <FormattedMessage
+                  defaultMessage="Profile updated"
+                  description="src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+                />
+              ),
             },
           })
         )
@@ -158,7 +162,11 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           if (code === 'DISPLAYNAME_INVALID') {
             setFieldError(
               'displayName',
-              translate({ id: 'hintDisplayName', lang })
+              intl.formatMessage({
+                defaultMessage:
+                  'Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.',
+                description: '',
+              })
             )
           } else {
             setFieldError('description', messages[code])
@@ -184,7 +192,10 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         />
 
         <p className="hint">
-          <Translate id="recommendedCoverSize" />
+          <FormattedMessage
+            defaultMessage="Recommended size: 1600px x 900px"
+            description=""
+          />
         </p>
       </section>
 
@@ -204,15 +215,22 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       )}
 
       <Form.Input
-        label={<Translate id="displayName" />}
+        label={
+          <FormattedMessage defaultMessage="Display Name" description="" />
+        }
         type="text"
         name="displayName"
         required
-        placeholder={translate({
-          id: 'enterDisplayName',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter Display Name',
+          description: '',
         })}
-        hint={<Translate id="hintDisplayName" />}
+        hint={
+          <FormattedMessage
+            defaultMessage="Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed."
+            description=""
+          />
+        }
         value={values.displayName}
         error={touched.displayName && errors.displayName}
         onBlur={handleBlur}
@@ -220,14 +238,19 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       />
 
       <Form.Textarea
-        label={<Translate id="userDescription" />}
+        label={<FormattedMessage defaultMessage="Description" description="" />}
         name="description"
         required
-        placeholder={translate({
-          id: 'enterUserDescription',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter Bio',
+          description: '',
         })}
-        hint={<Translate id="hintDescription" />}
+        hint={
+          <FormattedMessage
+            defaultMessage="Maximum 200 characters."
+            description=""
+          />
+        }
         value={values.description}
         error={touched.description && errors.description}
         onBlur={handleBlur}
@@ -242,8 +265,8 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
-      text={<Translate id="save" />}
+      disabled={isSubmitting}
+      text={<FormattedMessage defaultMessage="Save" description="" />}
       loading={isSubmitting}
     />
   )

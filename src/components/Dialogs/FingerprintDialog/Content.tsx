@@ -241,7 +241,7 @@ const FingerprintDialogContent = ({
               ) : (
                 <Translate
                   zh_hant="ISCN 寫入未成功"
-                  zh_hans="ISCN 寫入未成功"
+                  zh_hans="ISCN 写入未成功"
                   en="ISCN is failed to register on LikeCoin chain"
                 />
               )

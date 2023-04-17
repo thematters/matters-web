@@ -3,6 +3,7 @@ import { useContext } from 'react'
 
 import { translate } from '~/common/utils'
 import {
+  EditorSearchSelectDialog,
   IconCollection24,
   IconHashTag24,
   IconImage24,
@@ -12,12 +13,13 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import {
   SetCollectionProps,
   SetCoverProps,
+  SetResponseProps,
   SetTagsProps,
   ToggleAccessProps,
+  ToggleResponseProps,
 } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import {
@@ -26,6 +28,7 @@ import {
   SearchExclude,
 } from '~/gql/graphql'
 
+import ArticleCustomStagingArea from '../ArticleCustomStagingArea'
 import SetCover from '../SetCover'
 import TagCustomStagingArea from '../TagCustomStagingArea'
 import AccessDialog from './AccessDialog'
@@ -37,6 +40,7 @@ export type BottomBarProps = {
 } & SetCoverProps &
   SetCollectionProps &
   SetTagsProps &
+  SetResponseProps &
   ToggleAccessProps
 
 /**
@@ -77,6 +81,9 @@ const BottomBar: React.FC<BottomBarProps> = ({
   togglePublishISCN,
   iscnPublishSaving,
 
+  canComment,
+  toggleComment,
+
   saving,
   disabled,
 }) => {
@@ -96,7 +103,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
     entityType,
     coverSaving,
   }
-  const accessProps: ToggleAccessProps = {
+  const accessProps: ToggleAccessProps & ToggleResponseProps = {
     circle,
     accessType,
     license,
@@ -113,6 +120,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
     iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,
+
+    canComment,
+    toggleComment,
+    disableChangeCanComment: article?.canComment,
   }
 
   return (
@@ -141,7 +152,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
             </SetCover.Dialog>
 
             {/* Tags */}
-            <SearchSelectDialog
+            <EditorSearchSelectDialog
               title="addTag"
               hint="hintAddTag"
               searchType="Tag"
@@ -169,10 +180,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   </TextIcon>
                 </button>
               )}
-            </SearchSelectDialog>
+            </EditorSearchSelectDialog>
 
             {/* Collection */}
-            <SearchSelectDialog
+            <EditorSearchSelectDialog
               title="collectArticle"
               hint="hintEditCollection"
               searchType="Article"
@@ -182,6 +193,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               }
               nodes={collection}
               saving={collectionSaving}
+              CustomStagingArea={ArticleCustomStagingArea}
             >
               {({ openDialog }) => (
                 <button
@@ -199,9 +211,9 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   </TextIcon>
                 </button>
               )}
-            </SearchSelectDialog>
+            </EditorSearchSelectDialog>
 
-            {/* Circle & License & Support Feedback & ISCN */}
+            {/* Circle & License & Support Feedback & ISCN & canComment */}
             <AccessDialog {...accessProps}>
               {({ openDialog }) => (
                 <button

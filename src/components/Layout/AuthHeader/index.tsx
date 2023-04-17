@@ -1,44 +1,10 @@
 import { useContext } from 'react'
 
 import { TextId } from '~/common/enums'
-import {
-  ConnectWalletButton,
-  IconLogo,
-  Layout,
-  Media,
-  UniversalAuthButton,
-  ViewerContext,
-} from '~/components'
-
-import styles from './styles.css'
+import { ConnectWalletButton, Layout, Media, ViewerContext } from '~/components'
 
 type HeaderProps = {
   title: TextId
-}
-
-const AnnonmousHeader: React.FC<HeaderProps> = ({ title }) => {
-  return (
-    <Layout.Header
-      right={
-        <>
-          <div>
-            <Media at="sm">
-              <section className="logo">
-                <IconLogo />
-              </section>
-            </Media>
-            <Media greaterThan="sm">
-              <Layout.Header.Title id={title} />
-            </Media>
-          </div>
-
-          <UniversalAuthButton />
-
-          <style jsx>{styles}</style>
-        </>
-      }
-    />
-  )
 }
 
 const AuthedHeader: React.FC<HeaderProps> = ({ title }) => {
@@ -52,6 +18,7 @@ const AuthedHeader: React.FC<HeaderProps> = ({ title }) => {
         right={
           <>
             <Layout.Header.Title id={title} />
+
             {showConnect && <ConnectWalletButton />}
           </>
         }
@@ -61,13 +28,7 @@ const AuthedHeader: React.FC<HeaderProps> = ({ title }) => {
 }
 
 const AuthHeader: React.FC<HeaderProps> = ({ title }) => {
-  const viewer = useContext(ViewerContext)
-
-  if (viewer.isAuthed) {
-    return <AuthedHeader title={title} />
-  }
-
-  return <AnnonmousHeader title={title} />
+  return <AuthedHeader title={title} />
 }
 
 export default AuthHeader

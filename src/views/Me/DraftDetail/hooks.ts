@@ -10,6 +10,7 @@ import {
   DraftAssetsQuery,
   EditMetaDraftFragment,
   SetDraftAccessMutation,
+  SetDraftCanCommentMutation,
   SetDraftCollectionMutation,
   SetDraftCoverMutation,
   SetDraftPublishIscnMutation,
@@ -20,6 +21,7 @@ import {
 import {
   DRAFT_ASSETS,
   SET_ACCESS,
+  SET_CAN_COMMENT,
   SET_COLLECTION,
   SET_COVER,
   SET_PUBLISH_ISCN,
@@ -135,6 +137,22 @@ export const useEditDraftPublishISCN = (draft: EditMetaDraftFragment) => {
       variables: {
         id: draftId,
         iscnPublish,
+      },
+    })
+
+  return { edit, saving }
+}
+
+export const useEditDraftCanComment = (draft: EditMetaDraftFragment) => {
+  const draftId = draft.id
+  const [update, { loading: saving }] =
+    useMutation<SetDraftCanCommentMutation>(SET_CAN_COMMENT)
+
+  const edit = (canComment: boolean) =>
+    update({
+      variables: {
+        id: draftId,
+        canComment,
       },
     })
 

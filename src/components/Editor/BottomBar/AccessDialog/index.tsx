@@ -1,15 +1,28 @@
 import _get from 'lodash/get'
 
-import { Dialog, Translate, useDialogSwitch } from '~/components'
+import { Dialog, Spacer, Translate, useDialogSwitch } from '~/components'
 
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
+import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
 
 type AccessDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-} & ToggleAccessProps
+} & ToggleAccessProps &
+  ToggleResponseProps
 
-const BaseAccessDialog = ({ children, ...props }: AccessDialogProps) => {
+const BaseAccessDialog = ({
+  children,
+  canComment,
+  toggleComment,
+  ...props
+}: AccessDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
+
+  const toggleResponseProps: ToggleResponseProps = {
+    canComment,
+    toggleComment,
+    disableChangeCanComment: props.article?.canComment,
+  }
 
   return (
     <>
@@ -29,6 +42,8 @@ const BaseAccessDialog = ({ children, ...props }: AccessDialogProps) => {
         />
 
         <Dialog.Content spacing={['base', 'base']}>
+          <ToggleResponse {...toggleResponseProps} />
+          <Spacer size="base" />
           <ToggleAccess {...props} />
         </Dialog.Content>
       </Dialog>

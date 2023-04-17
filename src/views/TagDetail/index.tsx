@@ -1,13 +1,12 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { ERROR_CODES } from '~/common/enums'
 import {
   fromGlobalId,
-  // makeTitle,
-  // stripPunctPrefixSuffix,
-  stripAllPunct,
+  normalizeTag,
   stripSpaces,
   toGlobalId,
   toPath,
@@ -21,7 +20,6 @@ import {
   Spinner,
   Tabs,
   Throw404,
-  Translate,
   useFeatures,
   usePublicQuery,
   useRoute,
@@ -112,14 +110,10 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const isEditor = (tag?.editors || []).some((t) => t.id === viewer.id)
   const isMatty = viewer.info.email === 'hi@matters.news'
   const isMaintainer = isOwner || isEditor || isMatty
-  const isOfficial = !!tag?.isOfficial
-  const canAdd = !isOfficial || (isOfficial && isMatty)
 
-  const title =
-    // (tag.description ? `${makeTitle(tag.description, 80)} ` : '') +
-    '#' + stripAllPunct(tag.content)
-  const keywords = tag.content.split(/\s+/).filter(Boolean).map(stripAllPunct) // title.includes(tag.content) ??
-  const description = stripSpaces(tag.description) // || stripAllPunct(tag.content)
+  const title = '#' + normalizeTag(tag.content)
+  const keywords = tag.content.split(/\s+/).filter(Boolean).map(normalizeTag)
+  const description = stripSpaces(tag.description)
   const path = toPath({ page: 'tagDetail', tag })
 
   /**
@@ -150,7 +144,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
       />
 
       <Head
-        // title={`#${stripAllPunct(tag.content)}`}
+        // title={`#${normalizeTag(tag.content)}`}
         // description={tag.description}
         title={title}
         path={path.href}
@@ -163,7 +157,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'ItemList', // should follow with some recent articles under 'itemListElement'
-          name: title, // stripAllPunct(tag.content),
+          name: title,
           description,
           keywords,
           image:
@@ -196,18 +190,17 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         )}
 
         <section className="buttons">
-          {canAdd && <TagDetailButtons.AddButton tag={tag} />}
           <TagDetailButtons.FollowButton tag={tag} />
         </section>
       </section>
 
       <Tabs sticky>
         <Tabs.Tab selected={isHottest} onClick={() => changeFeed('hottest')}>
-          <Translate id="hottest" />
+          <FormattedMessage defaultMessage="Trending" description="" />
         </Tabs.Tab>
 
         <Tabs.Tab selected={isLatest} onClick={() => changeFeed('latest')}>
-          <Translate id="latest" />
+          <FormattedMessage defaultMessage="Latest" description="" />
         </Tabs.Tab>
 
         {hasSelectedFeed && (
@@ -215,12 +208,12 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             selected={isSelected}
             onClick={() => changeFeed('selected')}
           >
-            <Translate zh_hant="精選" zh_hans="精选" en="Featured" />
+            <FormattedMessage defaultMessage="Featured" description="" />
           </Tabs.Tab>
         )}
 
         <Tabs.Tab selected={isCreators} onClick={() => changeFeed('creators')}>
-          <Translate zh_hant="創作者" zh_hans="创作者" en="Creators" />
+          <FormattedMessage defaultMessage="Creators" description="" />
         </Tabs.Tab>
       </Tabs>
 

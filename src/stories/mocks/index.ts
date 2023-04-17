@@ -167,6 +167,8 @@ export const MOCK_TAG = {
   editors: [MOCK_USER],
   owner: MOCK_USER,
   content: '香港',
+  description:
+    '香港（英語：Hong Kong；縮寫：HK／HKG），全稱香港特別行政區（英語：Hong Kong Special Administrative Region；縮寫：HKSAR），簡稱「港」，雅稱「香江」',
   articles: {
     __typename: 'ArticleConnection' as any,
     totalCount: 8,

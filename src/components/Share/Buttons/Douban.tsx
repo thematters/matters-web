@@ -1,7 +1,9 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ReactComponent as IconShareDouban } from '@/public/static/icons/16px/share-douban.svg'
 import { ReactComponent as IconShareDoubanCircle } from '@/public/static/icons/40px/share-douban-circle.svg'
 import { analytics, dom } from '~/common/utils'
-import { TextIcon, Translate, withIcon } from '~/components'
+import { TextIcon, withIcon } from '~/components'
 
 const Douban = ({
   title,
@@ -35,7 +37,10 @@ const Douban = ({
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareDouban)({})} spacing="base">
-        <Translate zh_hant="豆瓣" zh_hans="豆瓣" en="Douban" />
+        <FormattedMessage
+          defaultMessage="Douban"
+          description="src/components/Share/Buttons/Douban.tsx"
+        />
       </TextIcon>
     )}
   </button>

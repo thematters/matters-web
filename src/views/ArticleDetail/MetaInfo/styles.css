@@ -12,9 +12,9 @@
 
 .time {
   flex-shrink: 0;
-  font-size: var(--font-size-timestamp);
-  font-weight: var(--font-weight-timestamp);
-  line-height: var(--line-height-timestamp);
+  font-size: var(--font-size-subtext);
+  font-weight: var(--font-weight-subtext);
+  line-height: var(--line-height-subtext);
 
   & span {
     margin-right: var(--spacing-xx-tight);

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { TagAddEditorNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -31,10 +31,9 @@ const TagAddEditorNotice = ({
       <section className="content-wrap">
         <NoticeHead>
           <NoticeActorName user={actor} />
-          <Translate
-            zh_hant=" 邀請你成為標籤的協作者"
-            zh_hans=" 邀请你成为標籤的协作者"
-            en=" invites you to become a collaborator"
+          <FormattedMessage
+            defaultMessage="invites you to become a collaborator"
+            description="src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
           />
         </NoticeHead>
 

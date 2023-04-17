@@ -48,6 +48,13 @@ export const EDIT_MODE_ARTICLE = gql`
           publishState
           ...EditorDraft
         }
+        newestPublishedDraft {
+          id
+          mediaHash
+          tags
+          publishState
+          ...EditorDraft
+        }
         ...ArticleCollection
       }
     }

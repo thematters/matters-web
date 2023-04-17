@@ -1,7 +1,7 @@
 import { analytics } from '~/common/utils'
 import {
+  EditorSearchSelectDialog,
   IconHashTag24,
-  SearchSelectDialog,
   // SearchSelectNode,
   Tag,
 } from '~/components'
@@ -26,7 +26,7 @@ const SidebarTags = ({
   disabled,
 }: SidebarTagsProps) => {
   return (
-    <SearchSelectDialog
+    <EditorSearchSelectDialog
       size="sm"
       title="addTag"
       hint="hintAddTag"
@@ -72,7 +72,7 @@ const SidebarTags = ({
           )}
         </Box>
       )}
-    </SearchSelectDialog>
+    </EditorSearchSelectDialog>
   )
 }
 

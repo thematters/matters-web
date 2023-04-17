@@ -13,7 +13,7 @@ import {
   MAX_TAG_DESCRIPTION_LENGTH,
 } from '~/common/enums'
 import {
-  normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
+  normalizeTag,
   parseFormSubmitErrors,
   toPath,
   translate,
@@ -98,7 +98,6 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
     setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
@@ -106,6 +105,8 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       newCover: UNCHANGED_FIELD,
       newDescription: description || '',
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ newContent }) =>
       _pickBy({
         newContent: validateTagName(newContent, lang),
@@ -189,7 +190,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         error={touched.newContent && errors.newContent}
         onBlur={handleBlur}
         onChange={(e) => {
-          const newContent = normalizeTagInput(e.target.value)
+          const newContent = normalizeTag(e.target.value)
           setFieldValue('newContent', newContent)
           return newContent
         }}
@@ -228,7 +229,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       text={<Translate id="confirm" />}
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting}
       loading={isSubmitting}
     />
   )

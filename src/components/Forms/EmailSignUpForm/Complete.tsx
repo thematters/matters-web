@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { redirectToTarget } from '~/common/utils'
-import { Dialog, Layout, Translate } from '~/components'
+import { Dialog, Layout } from '~/components'
 
 const Complete = ({
   purpose,
@@ -27,34 +29,30 @@ const Complete = ({
 
       <Dialog.Message align="left" spacing="md">
         <h3>
-          <Translate
-            zh_hant="歡迎加入 Matters！"
-            zh_hans="欢迎加入 Matters！"
-            en="Welcome to Matters!"
+          <FormattedMessage
+            defaultMessage="Welcome to Matters!"
+            description="src/components/Forms/EmailSignUpForm/Complete.tsx"
           />
         </h3>
 
         <p>
-          <Translate
-            zh_hant="現在，去為你喜歡的作者打賞吧！你的每一次打賞都將為作者帶來收入。"
-            zh_hans="现在，去为你喜欢的作者打赏吧！你的每一次打赏都将为作者带来收入。"
-            en="Now, go like the authors you support! Your Likes will become their income"
+          <FormattedMessage
+            defaultMessage="Now, go like the authors you support! Your Likes will become their income"
+            description="src/components/Forms/EmailSignUpForm/Complete.tsx"
           />
         </p>
 
         <p>
-          <Translate
-            zh_hant="你已擁有個人創作空間站，期待你的第一篇作品。"
-            zh_hans="你已拥有个人创作空间站，期待你的第一篇作品。"
-            en="You have created your personal creative space. Publish your first work!"
+          <FormattedMessage
+            defaultMessage="You have created your personal creative space. Publish your first work!"
+            description="src/components/Forms/EmailSignUpForm/Complete.tsx"
           />
         </p>
 
         <p>
-          <Translate
-            zh_hant="馬上開始你的創作吧！"
-            zh_hans="马上开始你的创作吧！"
-            en="Start creating now!"
+          <FormattedMessage
+            defaultMessage="Start creating now!"
+            description="src/components/Forms/EmailSignUpForm/Complete.tsx"
           />
         </p>
       </Dialog.Message>
@@ -67,10 +65,9 @@ const Complete = ({
             })
           }}
         >
-          <Translate
-            zh_hant="進入社區"
-            zh_hans="进入社区"
-            en="Enter Community"
+          <FormattedMessage
+            defaultMessage="Enter Community"
+            description="src/components/Forms/EmailSignUpForm/Complete.tsx"
           />
         </Dialog.Footer.Button>
       </Dialog.Footer>

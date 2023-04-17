@@ -1,14 +1,15 @@
-import { Dialog, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Dialog } from '~/components'
 
 interface Props {
   closeDialog: () => void
 }
 
 const InvitationSentTitle = (
-  <Translate
-    zh_hant="成功發送邀請"
-    zh_hans="成功发送邀请"
-    en="Invitation Sent"
+  <FormattedMessage
+    defaultMessage="Invitation Sent"
+    description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   />
 )
 
@@ -33,10 +34,9 @@ const InvitationSent = ({ closeDialog }: Props) => (
     <Dialog.Message>
       <h3>{InvitationSentTitle}</h3>
       <p>
-        <Translate
-          zh_hant="你已寄出邀請給朋友們快去已邀請管理查看他們加入的進度吧！"
-          zh_hans="你已寄出邀请给朋友们快去已邀请管理查看他们加入的进度吧！"
-          en="Invitations have been sent. You can check invitation status on the invitation management page."
+        <FormattedMessage
+          defaultMessage="Invitations have been sent. You can check invitation status on the invitation management page."
+          description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
         />
       </p>
     </Dialog.Message>
@@ -47,7 +47,7 @@ const InvitationSent = ({ closeDialog }: Props) => (
         textColor="black"
         onClick={closeDialog}
       >
-        <Translate id="understood" />
+        <FormattedMessage defaultMessage="I see" description="" />
       </Dialog.Footer.Button>
     </Dialog.Footer>
   </>

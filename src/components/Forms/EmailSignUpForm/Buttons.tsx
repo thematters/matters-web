@@ -1,4 +1,6 @@
-import { Form, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Form } from '~/components'
 
 export const EmailLoginButton = ({
   gotoEmailLogin,
@@ -8,17 +10,15 @@ export const EmailLoginButton = ({
   <Form.List spacing="xloose">
     <Form.List.Item
       title={
-        <Translate
-          zh_hant="已有帳戶？"
-          zh_hans="已有帐户？"
-          en="Have an account?"
+        <FormattedMessage
+          defaultMessage="Have an account?"
+          description="src/components/Forms/EmailSignUpForm/Buttons.tsx"
         />
       }
       rightText={
-        <Translate
-          zh_hant="以郵箱登入"
-          zh_hans="以邮箱登入"
-          en="Login with Email"
+        <FormattedMessage
+          defaultMessage="Login with Email"
+          description="src/components/Forms/EmailSignUpForm/Buttons.tsx"
         />
       }
       rightTextColor="green"

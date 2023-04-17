@@ -45,6 +45,7 @@ const fragments = {
       fragment CommentBarArticlePublic on Article {
         id
         responseCount
+        canComment
       }
     `,
     private: gql`

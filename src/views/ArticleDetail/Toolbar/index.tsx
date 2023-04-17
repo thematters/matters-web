@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 import { TEST_ID } from '@/src/common/enums'
-import { stripAllPunct, toLocale, toPath } from '~/common/utils'
+import { normalizeTag, toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,
   Media,
@@ -105,7 +105,10 @@ const Toolbar = ({
         />
 
         <section className="comment-bar">
-          <CommentBar article={article} disabled={lock} />
+          <CommentBar
+            article={article}
+            disabled={lock || !article.canComment}
+          />
         </section>
 
         <BookmarkButton article={article} size="md-s" inCard={false} />
@@ -120,7 +123,7 @@ const Toolbar = ({
               ?.map(({ content }) => content)
               .join(' ')
               .split(/\s+/)
-              .map(stripAllPunct)}
+              .map(normalizeTag)}
           />
         </Media>
 

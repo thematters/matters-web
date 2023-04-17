@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { CircleInvitationNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorName from '../NoticeActorName'
@@ -31,18 +31,19 @@ const CircleInvitationNotice = ({
 
       <section className="content-wrap">
         <NoticeHead>
-          <Translate zh_hant="恭喜你！" zh_hans="恭喜你！" en="Congrats!" />
+          <FormattedMessage
+            defaultMessage="Congrats!"
+            description="src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+          />
           <NoticeActorName user={actor} />
-          <Translate
-            zh_hant=" 邀請你免費加入圍爐 "
-            zh_hans=" 邀请你免费加入围炉 "
-            en=" invites you to join Circle for "
+          <FormattedMessage
+            defaultMessage="invites you to join Circle for"
+            description="src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
           />
           {circle?.invitedBy?.freePeriod}
-          <Translate
-            zh_hant=" 天，前去免費體驗，與大家談天說地吧。"
-            zh_hans=" 天，前去免费体验，与大家谈天说地吧。"
-            en=" days for free. Try it and have fun!"
+          <FormattedMessage
+            defaultMessage="days for free. Try it and have fun!"
+            description="src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
           />
         </NoticeHead>
 

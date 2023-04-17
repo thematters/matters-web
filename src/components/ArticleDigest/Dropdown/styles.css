@@ -22,6 +22,10 @@
 
     min-width: 0;
     line-height: 1;
+
+    @mixin line-clamp;
+
+    white-space: normal;
   }
 
   & .extra-button {

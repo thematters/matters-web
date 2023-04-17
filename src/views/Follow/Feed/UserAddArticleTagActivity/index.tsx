@@ -1,15 +1,7 @@
 import { analytics } from '~/common/utils'
-import {
-  ArticleDigestFeed,
-  CardExposureTracker,
-  IconUnfollow24,
-  Tag,
-  Translate,
-} from '~/components'
+import { ArticleDigestConcise, CardExposureTracker, Tag } from '~/components'
 import { UserAddArticleTagActivityFragment } from '~/gql/graphql'
 
-import UnfollowTagActionButton from '../DropdownActions/UnfollowTag'
-import FeedHead from '../FollowingFeedHead'
 import { fragments } from './gql'
 
 const UserAddArticleTagActivity = ({
@@ -20,26 +12,10 @@ const UserAddArticleTagActivity = ({
   __typename,
 }: UserAddArticleTagActivityFragment & { location: number }) => (
   <>
-    <ArticleDigestFeed
-      header={
-        <FeedHead>
-          <span>
-            <Translate
-              zh_hant="追蹤標籤有新作品"
-              zh_hans="追踪标签有新作品"
-              en="selected by"
-            />
-          </span>
-          <Tag tag={target} type="plain" iconProps={{ size: 'sm' }} />
-        </FeedHead>
-      }
-      hasFollow
+    <ArticleDigestConcise
       article={node}
       date={createdAt}
-      morePublicActions={<UnfollowTagActionButton tag={target} />}
-      icon={
-        <IconUnfollow24 style={{ width: '1.125rem', height: '1.125rem' }} />
-      }
+      footerTag={<Tag tag={target} type="plain" iconProps={{ size: 'sm' }} />}
       onClick={() => {
         analytics.trackEvent('click_feed', {
           type: 'following',

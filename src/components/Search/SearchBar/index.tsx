@@ -1,18 +1,21 @@
 import dynamic from 'next/dynamic'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
-import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
+import { INPUT_DEBOUNCE, MAX_SEARCH_KEY_LENGTH, Z_INDEX } from '~/common/enums'
+import { getSearchType, toPath, translate } from '~/common/utils'
 import {
   Button,
   Dropdown,
+  IconClear16,
   IconSearch16,
   LanguageContext,
-  SearchAutoComplete,
-  SearchOverview,
+  SearchQuickResult,
+  useNativeEventListener,
   useRoute,
 } from '~/components'
+import { QuickResultQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
 
@@ -29,15 +32,36 @@ const DynamicFormik = dynamic(
 )
 
 const SearchButton = () => {
+  const intl = useIntl()
+  return (
+    <Button
+      size={['2rem', '2rem']}
+      type="submit"
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Search',
+        description: '',
+      })}
+    >
+      <IconSearch16 color="grey-dark" />
+    </Button>
+  )
+}
+
+interface ClearButtonProps {
+  onClick: () => void
+}
+
+const ClearButton = ({ onClick }: ClearButtonProps) => {
   const { lang } = useContext(LanguageContext)
 
   return (
     <Button
       size={['2rem', '2rem']}
-      type="submit"
-      aria-label={translate({ id: 'search', lang })}
+      type="button"
+      aria-label={translate({ id: 'clear', lang })}
+      onClick={onClick}
     >
-      <IconSearch16 color="grey-dark" />
+      <IconClear16 color="grey-dark" />
     </Button>
   )
 }
@@ -46,23 +70,97 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   hasDropdown = true,
 }) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, router, isInPath } = useRoute()
+  const isInSearch = isInPath('SEARCH')
   const q = getQuery('q')
-  const { lang } = useContext(LanguageContext)
-  const [search, setSearch] = useState('')
+  const type = getSearchType(getQuery('type'))
+  const [search, setSearch] = useState(q)
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-  const textAriaLabel = translate({ id: 'search', lang })
-  const textPlaceholder = translate({
-    zh_hant: '搜尋作品、標籤、作者',
-    zh_hans: '搜索作品、标签、作者',
-    en: 'Search articles, tags and authors',
-    lang,
+  const intl = useIntl()
+
+  const textAriaLabel = intl.formatMessage({
+    defaultMessage: 'Search',
+    description: '',
   })
+  const textPlaceholder = intl.formatMessage({
+    defaultMessage: 'Search',
+    description: '',
+  })
+
+  const searchTextInput = useRef<HTMLInputElement>(null)
 
   // dropdown
   const [showDropdown, setShowDropdown] = useState(false)
   const closeDropdown = () => setShowDropdown(false)
   const openDropdown = () => setShowDropdown(true)
+
+  // quick result hotkeys
+  const [data, setData] = useState<QuickResultQuery>()
+  const [activeItem, setActiveItem] = useState('input')
+  const resetActiveItem = () => setActiveItem('input')
+  const items = ['input']
+  const { edges: userEdges } = data?.user || {}
+  const { edges: tagEdges } = data?.tag || {}
+  const hasUsers = userEdges && userEdges.length > 0
+  const hasTags = tagEdges && tagEdges.length > 0
+
+  if (hasUsers) {
+    userEdges.map(({ cursor }, i) => {
+      items.push(`user${cursor}`)
+    })
+  }
+  if (hasTags) {
+    tagEdges.map(({ cursor }, i) => {
+      items.push(`tag${cursor}`)
+    })
+  }
+
+  useNativeEventListener(
+    'keydown',
+    (e: { code: string; preventDefault: () => void }) => {
+      if (e.code === 'ArrowUp') {
+        if (!showDropdown) return
+
+        e.preventDefault()
+        const activeIndex = items.indexOf(activeItem)
+        if (activeIndex === 0) return
+
+        setActiveItem(items[activeIndex - 1])
+      }
+
+      if (e.code === 'ArrowDown') {
+        if (!showDropdown) return
+
+        e.preventDefault()
+        const activeIndex = items.indexOf(activeItem)
+        if (activeIndex === items.length - 1) return
+
+        setActiveItem(items[activeIndex + 1])
+      }
+
+      if (e.code === 'Escape') {
+        if (!showDropdown) return
+
+        setShowDropdown(false)
+      }
+    },
+    true
+  )
+
+  useEffect(() => {
+    if (
+      hasDropdown &&
+      showDropdown &&
+      searchTextInput.current &&
+      activeItem === 'input'
+    ) {
+      searchTextInput.current.focus()
+    }
+  }, [activeItem])
+
+  useEffect(() => {
+    setSearch(q)
+  }, [q])
 
   useEffect(() => {
     if (onChange) {
@@ -77,13 +175,24 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       onSubmit={(values) => {
         const path = toPath({
           page: 'search',
-          q: values.q.slice(0, 100),
+          q: encodeURIComponent(values.q.slice(0, MAX_SEARCH_KEY_LENGTH)),
+          type,
         })
-        router.push(path.href)
+
+        if (values.q.length <= 0) return
+
+        searchTextInput.current?.blur()
+
+        if (isInSearch) {
+          router.replace(path.href)
+        } else {
+          router.push(path.href)
+        }
+
         closeDropdown()
       }}
     >
-      {({ values, handleSubmit, handleChange }) => {
+      {({ values, setValues, handleSubmit, handleChange }) => {
         if (!hasDropdown) {
           return (
             <form
@@ -91,10 +200,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               aria-label={textPlaceholder}
               role="search"
               autoComplete="off"
+              action=""
             >
               <input
                 type="search"
                 name="q"
+                ref={searchTextInput}
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
                 autoCorrect="off"
@@ -103,9 +214,18 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                   setSearch(e.target.value)
                 }}
                 value={values.q}
+                maxLength={MAX_SEARCH_KEY_LENGTH}
               />
 
               <SearchButton />
+              {search.length > 0 && (
+                <ClearButton
+                  onClick={() => {
+                    setValues({ q: '' })
+                    setSearch('')
+                  }}
+                />
+              )}
 
               <style jsx>{styles}</style>
             </form>
@@ -115,10 +235,22 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         return (
           <Dropdown
             content={
-              debouncedSearch ? (
-                <SearchAutoComplete searchKey={debouncedSearch} />
-              ) : (
-                <SearchOverview />
+              !isInSearch &&
+              debouncedSearch && (
+                <SearchQuickResult
+                  searchKey={debouncedSearch}
+                  onUpdateData={(newData: QuickResultQuery | undefined) => {
+                    setData(newData)
+                  }}
+                  closeDropdown={() => {
+                    closeDropdown()
+
+                    // clear input
+                    setValues({ q: '' })
+                    setSearch('')
+                  }}
+                  activeItem={activeItem}
+                />
               )
             }
             trigger={undefined}
@@ -128,20 +260,23 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             visible={showDropdown}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
-            <form onSubmit={handleSubmit} autoComplete="off">
+            <form onSubmit={handleSubmit} autoComplete="off" action="">
               <input
                 type="search"
                 name="q"
+                ref={searchTextInput}
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
                 value={values.q}
                 onChange={(e) => {
                   handleChange(e)
                   setSearch(e.target.value)
+                  resetActiveItem()
                   openDropdown()
                 }}
                 onFocus={openDropdown}
                 onClick={openDropdown}
+                maxLength={MAX_SEARCH_KEY_LENGTH}
               />
 
               <SearchButton />

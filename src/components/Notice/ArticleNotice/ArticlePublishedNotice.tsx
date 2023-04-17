@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { ArticlePublishedNoticeFragment } from '~/gql/graphql'
 
 import NoticeArticleCard from '../NoticeArticleCard'
@@ -26,10 +26,9 @@ const ArticlePublishedNotice = ({
 
       <section className="content-wrap">
         <NoticeHead>
-          <Translate
-            zh_hant="你的作品已發布到分佈式網絡"
-            zh_hans="你的作品已发布到分布式网络"
-            en="Your article has been published to decentralized network"
+          <FormattedMessage
+            defaultMessage="Your article has been published to decentralized network"
+            description="src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
           />
         </NoticeHead>
 

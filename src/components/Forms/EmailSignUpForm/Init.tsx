@@ -2,11 +2,11 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import {
   parseFormSubmitErrors,
-  translate,
   validateDisplayName,
   validateEmail,
   validateToS,
@@ -18,7 +18,6 @@ import {
   LanguageSwitch,
   Layout,
   ReCaptchaContext,
-  Translate,
   useMutation,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -60,7 +59,7 @@ const Init: React.FC<FormProps> = ({
       showToast: false,
     }
   )
-
+  const intl = useIntl()
   const {
     values,
     errors,
@@ -69,13 +68,14 @@ const Init: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       displayName: '',
       email: '',
       tos: true,
     },
+    validateOnBlur: false,
+    validateOnChange: true, // enable for signup form
     validate: ({ displayName, email, tos }) =>
       _pickBy({
         displayName: validateDisplayName(displayName, lang),
@@ -115,15 +115,15 @@ const Init: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<Translate id="displayName" />}
+        label={
+          <FormattedMessage defaultMessage="Display Name" description="" />
+        }
         type="text"
         name="displayName"
         required
-        placeholder={translate({
-          zh_hant: '你的站內暱稱，之後可以修改',
-          zh_hans: '你的站内暱称，之后可以修改',
-          en: 'Your Matters display name, can be changed later',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Display name, can be changed later',
+          description: 'src/components/Forms/EmailSignUpForm/Init.tsx',
         })}
         value={values.displayName}
         error={touched.displayName && errors.displayName}
@@ -132,13 +132,13 @@ const Init: React.FC<FormProps> = ({
       />
 
       <Form.Input
-        label={<Translate id="email" />}
+        label={<FormattedMessage defaultMessage="Email" description="" />}
         type="email"
         name="email"
         required
-        placeholder={translate({
-          id: 'enterEmail',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Email',
+          description: '',
         })}
         value={values.email}
         error={touched.email && errors.email}
@@ -153,19 +153,16 @@ const Init: React.FC<FormProps> = ({
         onChange={handleChange}
         hint={
           <>
-            <Translate
-              zh_hant="我已閱讀並同意"
-              zh_hans="我已阅读并同意"
-              en="I have read and agree to"
+            <FormattedMessage
+              defaultMessage="I have read and agree to"
+              description=""
             />
-
             <Link href={PATHS.TOS} legacyBehavior>
               <a className="u-link-green" target="_blank">
                 &nbsp;
-                <Translate
-                  zh_hant="Matters 用戶協議和隱私政策"
-                  zh_hans="Matters 用户协议和隐私政策"
-                  en="Terms and Privacy Policy"
+                <FormattedMessage
+                  defaultMessage="Terms and Privacy Policy"
+                  description=""
                 />
               </a>
             </Link>
@@ -182,8 +179,8 @@ const Init: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
-      text={<Translate id="nextStep" />}
+      disabled={isSubmitting}
+      text={<FormattedMessage defaultMessage="Next" description="" />}
       loading={isSubmitting}
     />
   )

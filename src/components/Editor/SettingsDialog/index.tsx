@@ -7,6 +7,7 @@ import {
   SetPublishISCNProps,
   SetTagsProps,
   ToggleAccessProps,
+  ToggleResponseProps,
 } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import {
@@ -15,6 +16,7 @@ import {
   SearchExclude,
 } from '~/gql/graphql'
 
+import ArticleCustomStagingArea from '../ArticleCustomStagingArea'
 import TagCustomStagingArea from '../TagCustomStagingArea'
 import SettingsList, { SettingsListDialogButtons } from './List'
 
@@ -42,11 +44,12 @@ export type EditorSettingsDialogProps = {
   SetCollectionProps &
   SetTagsProps &
   ToggleAccessProps &
+  ToggleResponseProps &
   SetPublishISCNProps &
   SettingsListDialogButtons
 
-const DynamicSearchSelectForm = dynamic(
-  () => import('~/components/Forms/SearchSelectForm'),
+const DynamicEditorSearchSelectForm = dynamic(
+  () => import('~/components/Forms/EditorSearchSelectForm'),
   { loading: Spinner }
 )
 
@@ -91,6 +94,9 @@ const BaseEditorSettingsDialog = ({
   iscnPublish,
   togglePublishISCN,
   iscnPublishSaving,
+
+  canComment,
+  toggleComment,
 
   saving,
   disabled,
@@ -150,6 +156,12 @@ const BaseEditorSettingsDialog = ({
     },
   }
 
+  const responseProps: ToggleResponseProps = {
+    canComment,
+    toggleComment,
+    disableChangeCanComment: article?.canComment,
+  }
+
   return (
     <>
       {children({ openDialog })}
@@ -168,6 +180,7 @@ const BaseEditorSettingsDialog = ({
             collectionCount={collection.length}
             tagsCount={tags.length}
             {...accessProps}
+            {...responseProps}
           />
         )}
 
@@ -176,7 +189,7 @@ const BaseEditorSettingsDialog = ({
         )}
 
         {isCollection && (
-          <DynamicSearchSelectForm
+          <DynamicEditorSearchSelectForm
             title="collectArticle"
             hint="hintEditCollection"
             headerLeftButton={
@@ -193,11 +206,12 @@ const BaseEditorSettingsDialog = ({
             nodes={collection}
             saving={collectionSaving}
             closeDialog={closeDialog}
+            CustomStagingArea={ArticleCustomStagingArea}
           />
         )}
 
         {isTag && (
-          <DynamicSearchSelectForm
+          <DynamicEditorSearchSelectForm
             title="addTag"
             hint="hintAddTag"
             headerLeftButton={

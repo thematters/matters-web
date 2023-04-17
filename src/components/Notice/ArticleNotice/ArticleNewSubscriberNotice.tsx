@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import { Fragment } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
-import { Translate } from '~/components'
 import { ArticleNewSubscriberNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -48,16 +48,17 @@ const ArticleNewSubscriberNotice = ({
             </Fragment>
           ))}{' '}
           {isMultiActors && (
-            <Translate
-              zh_hant={`等 ${numAbbr(actorsCount)} 人`}
-              zh_hans={`等 ${numAbbr(actorsCount)} 人`}
-              en={`etc. ${numAbbr(actorsCount)} users`}
+            <FormattedMessage
+              description="src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+              defaultMessage="etc. {actorsCount} users"
+              values={{
+                actorsCount: numAbbr(actorsCount),
+              }}
             />
           )}
-          <Translate
-            zh_hant="收藏了你的作品"
-            zh_hans="收藏了你的作品"
-            en="bookmarked your article"
+          <FormattedMessage
+            defaultMessage="bookmarked your article"
+            description="src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
           />
         </NoticeHead>
 

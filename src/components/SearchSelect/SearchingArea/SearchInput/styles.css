@@ -1,9 +1,12 @@
 :root {
-  --search-input-height: 3rem;
+  --search-input-height: 3.375rem;
   --search-input-button-width: 2rem;
 }
 
 form {
+  @mixin border-top-grey;
+  @mixin border-bottom-grey;
+
   position: relative;
   width: 100%;
   height: var(--search-input-height);
@@ -13,11 +16,12 @@ form {
   line-height: var(--search-input-height);
 
   & :global(input[type='search']) {
-    height: 100%;
+    height: calc(var(--search-input-height) - 2px);
     padding: 0 calc(var(--search-input-button-width) + var(--spacing-x-tight));
     font-size: var(--font-size-sm);
     color: var(--color-black);
-    background-color: var(--color-grey-lighter);
+    caret-color: var(--color-matters-green);
+    background: white;
 
     &::placeholder {
       color: var(--color-grey);

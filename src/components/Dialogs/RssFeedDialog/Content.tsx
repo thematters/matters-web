@@ -3,26 +3,20 @@ import contentHash from '@ensdomains/content-hash'
 import { namehash } from '@ethersproject/hash'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
-import {
-  featureSupportedChains,
-  PublicResolverABI,
-  translate,
-} from '~/common/utils'
+import { featureSupportedChains, PublicResolverABI } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
   Dialog,
   IconCopy16,
   IconInfo24,
-  LanguageContext,
   Spacer,
   Spinner,
   TextIcon,
-  Translate,
   WagmiProvider,
 } from '~/components'
 import { AuthorRssFeedFragment, RssGatewaysQuery } from '~/gql/graphql'
@@ -46,7 +40,6 @@ const RSS_GATEWAYS = gql`
 const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
   user,
 }) => {
-  const { lang } = useContext(LanguageContext)
   const { loading, data } = useQuery<RssGatewaysQuery>(RSS_GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
@@ -73,6 +66,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
     !!ipnsKey && '0x' + contentHash.encode('ipns-ns', ipnsKey) === readData
   const displayIPNS = hasLinkedIPNS ? ensName : user.info.ipnsKey
 
+  const intl = useIntl()
   return (
     <Dialog.Content hasGrow>
       <section className="container">
@@ -83,10 +77,9 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                 <IconInfo24 size="md" />
 
                 <p>
-                  <Translate
-                    zh_hans="尝试将内容写入 IPFS 网络中，需要一段时间，请耐心等候。若等候时间过久，可通过发布文章来加速。"
-                    zh_hant="嘗試將內容寫入 IPFS 網絡中，需要一段時間，請耐心等候。若等候時間過久，可透過發佈文章來加速。"
-                    en="Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article."
+                  <FormattedMessage
+                    defaultMessage="Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article."
+                    description="src/components/Dialogs/RssFeedDialog/Content.tsx"
                   />
                 </p>
               </section>
@@ -97,17 +90,15 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
           {/* hash */}
           <section className="hash">
             <h4 className="title">
-              <Translate
-                zh_hans="IPNS 订阅"
-                zh_hant="IPNS 訂閱"
-                en="IPNS Subscription"
+              <FormattedMessage
+                defaultMessage="IPNS Subscription"
+                description="src/components/Dialogs/RssFeedDialog/Content.tsx"
               />
             </h4>
             <p className="description">
-              <Translate
-                zh_hant="添加 IPFS 生成的 IPNS 指紋到閱讀器，如："
-                zh_hans="添加 IPFS 生成的 IPNS 指纹到阅读器，如："
-                en="Add hash from IPFS into compatible reader such as "
+              <FormattedMessage
+                defaultMessage="Add hash from IPFS into compatible reader such as "
+                description="src/components/Dialogs/RssFeedDialog/Content.tsx"
               />
               <a
                 className="u-link-green"
@@ -128,7 +119,12 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                   onClick={(event) => event.currentTarget.select()}
                 />
                 <CopyToClipboard text={displayIPNS!}>
-                  <Button aria-label={translate({ id: 'copy', lang })}>
+                  <Button
+                    aria-label={intl.formatMessage({
+                      defaultMessage: 'Copy Link',
+                      description: '',
+                    })}
+                  >
                     <IconCopy16 />
                   </Button>
                 </CopyToClipboard>
@@ -142,7 +138,10 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                     color="green"
                     size="md-s"
                   >
-                    <Translate id="waitingForHash" />
+                    <FormattedMessage
+                      defaultMessage="Waiting ..."
+                      description="src/components/Dialogs/RssFeedDialog/Content.tsx"
+                    />
                   </TextIcon>
                 </section>
               </>
@@ -156,17 +155,15 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
           {/* gateways */}
           <section className="gateways">
             <h4 className="title">
-              <Translate
-                zh_hans="RSS 订阅"
-                zh_hant="RSS 訂閱"
-                en="RSS Subscription"
+              <FormattedMessage
+                defaultMessage="RSS Subscription"
+                description="src/components/Dialogs/RssFeedDialog/Content.tsx"
               />
             </h4>
             <p className="description">
-              <Translate
-                zh_hans="添加以下任一网址到 RSS 阅读器"
-                zh_hant="添加以下任一網址到 RSS 閱讀器"
-                en="Add any URL in the following list into RSS reader"
+              <FormattedMessage
+                defaultMessage="Add any URL in the following list into RSS reader"
+                description="src/components/Dialogs/RssFeedDialog/Content.tsx"
               />
             </p>
 
@@ -197,7 +194,10 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                       <CopyToClipboard text={gatewayUrl}>
                         <Button
                           disabled={!ipnsKey}
-                          aria-label={translate({ id: 'copy', lang })}
+                          aria-label={intl.formatMessage({
+                            defaultMessage: 'Copy Link',
+                            description: '',
+                          })}
                         >
                           <IconCopy16 />
                         </Button>

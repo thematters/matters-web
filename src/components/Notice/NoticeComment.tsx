@@ -70,11 +70,17 @@ const NoticeComment = ({
       <Card
         {...path}
         bgColor="grey-lighter"
+        bgActiveColor="grey-lighter"
         spacing={['xtight', 'base']}
         borderRadius="xtight"
         testId={TEST_ID.DIGEST_COMMENT_NOTICE}
       >
-        <CommentContent comment={comment} type="article" size="sm" />
+        <CommentContent
+          comment={comment}
+          type="article"
+          size="sm"
+          bgColor="grey-lighter"
+        />
       </Card>
 
       <style jsx>{styles}</style>

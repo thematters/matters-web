@@ -13,6 +13,7 @@ export * from './oauth'
 export * from './payment'
 export * from './responsive'
 export * from './route'
+export * from './search'
 export * from './storage'
 export * from './test'
 export * from './text'
@@ -49,6 +50,8 @@ export const VERIFICATION_CODE_TYPES = {
 
 export const MAX_ARTICLE_REVISION_COUNT = 4
 export const MAX_ARTICLE_REVISION_DIFF = 50
+export const MAX_ARTICLE_TAG_LENGTH = 3
+export const MAX_ARTICLE_COLLECT_LENGTH = 10
 
 export const MAX_TAG_CONTENT_LENGTH = 50
 export const MAX_TAG_DESCRIPTION_LENGTH = 200

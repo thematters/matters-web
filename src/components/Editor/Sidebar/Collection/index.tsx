@@ -1,5 +1,8 @@
-import { ArticleDigestDropdown, IconCollection24 } from '~/components'
-import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import {
+  ArticleDigestDropdown,
+  EditorSearchSelectDialog,
+  IconCollection24,
+} from '~/components'
 import { SetCollectionProps } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import {
@@ -7,6 +10,7 @@ import {
   SearchExclude,
 } from '~/gql/graphql'
 
+import ArticleCustomStagingArea from '../../ArticleCustomStagingArea'
 import Box from '../Box'
 import styles from './styles.css'
 
@@ -21,7 +25,7 @@ const SidebarCollection = ({
   disabled,
 }: SidebarCollectionProps) => {
   return (
-    <SearchSelectDialog
+    <EditorSearchSelectDialog
       title="collectArticle"
       hint="hintEditCollection"
       searchType="Article"
@@ -31,6 +35,7 @@ const SidebarCollection = ({
       }
       nodes={collection}
       saving={collectionSaving}
+      CustomStagingArea={ArticleCustomStagingArea}
     >
       {({ openDialog }) => (
         <Box
@@ -58,7 +63,7 @@ const SidebarCollection = ({
           )}
         </Box>
       )}
-    </SearchSelectDialog>
+    </EditorSearchSelectDialog>
   )
 }
 

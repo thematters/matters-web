@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
 import {
   Dialog,
@@ -8,7 +10,6 @@ import {
   Layout,
   Spacer,
   TextIcon,
-  Translate,
 } from '~/components'
 
 import SourceHeader from './SourceHeader'
@@ -32,7 +33,16 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   const isInPage = purpose === 'page'
 
   const InnerForm = (
-    <Form.List groupName={isInPage ? <Translate id="authMethod" /> : null}>
+    <Form.List
+      groupName={
+        isInPage ? (
+          <FormattedMessage
+            defaultMessage="Choose a method to enter"
+            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
+          />
+        ) : null
+      }
+    >
       <Form.List.Item
         title={
           <TextIcon
@@ -41,14 +51,16 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
             size="md"
             spacing="xtight"
           >
-            <Translate id="useWallet" />
+            <FormattedMessage
+              defaultMessage="Continue with Wallet"
+              description="src/components/Forms/SelectAuthMethodForm/index.tsx"
+            />
           </TextIcon>
         }
         subtitle={
-          <Translate
-            zh_hans="欢迎未注册或已启用钱包登入的朋友使用"
-            zh_hant="歡迎未註冊或已啟用錢包登入的朋友使用"
-            en="For unregistered or users enabled wallet login"
+          <FormattedMessage
+            defaultMessage="For unregistered or users enabled wallet login"
+            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
           />
         }
         onClick={gotoWalletAuth}
@@ -62,14 +74,16 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
             size="md"
             spacing="xtight"
           >
-            <Translate id="useEmail" />
+            <FormattedMessage
+              defaultMessage="Continue with Email"
+              description="src/components/Forms/SelectAuthMethodForm/index.tsx"
+            />
           </TextIcon>
         }
         subtitle={
-          <Translate
-            zh_hans="持续支持邮箱進入，未來可随时启用钱包登入"
-            zh_hant="持續提供信箱進入，未來可隨時啟用錢包登入"
-            en="User registered by email can login and enable wallet login later"
+          <FormattedMessage
+            defaultMessage="User registered by email can login and enable wallet login later"
+            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
           />
         }
         onClick={gotoEmailLogin}

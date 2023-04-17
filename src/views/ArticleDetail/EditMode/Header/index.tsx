@@ -23,6 +23,7 @@ type EditModeHeaderProps = {
   isEditDisabled: boolean
 
   onSaved: () => any
+  onPublish: () => any
 } & Omit<
   EditorSettingsDialogProps,
   | 'saving'
@@ -45,6 +46,7 @@ const EditModeHeader = ({
   isEditDisabled,
 
   onSaved,
+  onPublish,
 
   ...restProps
 }: EditModeHeaderProps) => {
@@ -72,8 +74,12 @@ const EditModeHeader = ({
           ...(isContentRevised ? { content } : {}),
           first: null,
           iscnPublish: restProps.iscnPublish,
+          canComment: restProps.canComment,
         },
       })
+      if (isContentRevised) {
+        onPublish()
+      }
 
       if (!isContentRevised) {
         onSaved()

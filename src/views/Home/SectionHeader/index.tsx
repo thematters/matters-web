@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { PATHS } from '~/common/enums'
-import { PageHeader, Translate, ViewAllButton } from '~/components'
+import { PageHeader, ViewAllButton } from '~/components'
 
 import styles from './styles.css'
 
@@ -19,8 +21,8 @@ const FeedHeader = ({
     tags: PATHS.TAGS,
   }
   const titleMap = {
-    authors: <Translate zh_hant="值得關注" zh_hans="值得关注" en="Authors" />,
-    tags: <Translate zh_hant="找你想看的" zh_hans="找你想看的" en="Topics" />,
+    authors: <FormattedMessage defaultMessage="Authors" description="" />,
+    tags: <FormattedMessage defaultMessage="Topics" description="" />,
   }
   const path = pathMap[type]
 

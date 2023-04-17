@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
-import { CommentFormType, Expandable, Translate, useRoute } from '~/components'
+import { CommentFormType, Expandable, Translate } from '~/components'
 import {
   ContentCommentPrivateFragment,
   ContentCommentPublicFragment,
@@ -17,6 +17,10 @@ interface ContentProps {
   comment: ContentCommentPublicFragment & Partial<ContentCommentPrivateFragment>
   type: CommentFormType
   size?: 'sm' | 'md-s'
+  bgColor?: 'grey-lighter' | 'white'
+  limit?: number
+  textIndent?: boolean
+  isRichShow?: boolean
 }
 
 const fragments = {
@@ -40,13 +44,17 @@ const fragments = {
   },
 }
 
-const Content = ({ comment, type, size }: ContentProps) => {
+const Content = ({
+  comment,
+  type,
+  size,
+  bgColor,
+  limit = 10,
+  textIndent = false,
+  isRichShow = true,
+}: ContentProps) => {
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
-
-  // TODO: Will be removed, just for dev
-  const { getQuery } = useRoute()
-  const limit = parseInt(getQuery('limit')) || 8
 
   const contentClasses = classNames({
     content: true,
@@ -75,7 +83,13 @@ const Content = ({ comment, type, size }: ContentProps) => {
   if (state === 'active') {
     return (
       <>
-        <Expandable content={content} limit={limit} isRichShow>
+        <Expandable
+          content={content}
+          limit={limit}
+          isRichShow={isRichShow}
+          bgColor={bgColor}
+          textIndent={textIndent}
+        >
           <section
             className={`${contentClasses} u-content-comment`}
             dangerouslySetInnerHTML={{

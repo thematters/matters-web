@@ -212,6 +212,7 @@ const BaseUserComments = ({ user }: UserIdUserQuery) => {
                 <List.Item key={comment.id}>
                   <Card
                     spacing={['tight', 'base']}
+                    bgColor="none"
                     {...toPath({
                       page: 'commentDetail',
                       comment,

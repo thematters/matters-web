@@ -11,11 +11,13 @@ type EditorRecommendedTagsUserTagsEdgesNode = NonNullable<
 type RecommendedTagsProps = {
   tags: EditorRecommendedTagsUserTagsEdgesNode[]
   onAddTag: (tag: SelectTag) => void
+  disabled?: boolean
 }
 
 const RecommendedTags: React.FC<RecommendedTagsProps> = ({
   tags,
   onAddTag,
+  disabled,
 }) => {
   return (
     <section className="recommendedTags">
@@ -29,9 +31,8 @@ const RecommendedTags: React.FC<RecommendedTagsProps> = ({
             <Tag
               tag={tag}
               type="inline"
-              active
               disabled
-              onClick={() => onAddTag(tag)}
+              onClick={!disabled ? () => onAddTag(tag) : undefined}
             />
           </li>
         ))}

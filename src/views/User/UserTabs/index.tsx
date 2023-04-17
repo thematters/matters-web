@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { toPath } from '~/common/utils'
-import { Tabs, Translate, usePublicQuery, useRoute } from '~/components'
+import { Tabs, usePublicQuery, useRoute } from '~/components'
 import { UserTabsPublicQuery } from '~/gql/graphql'
 
 import { USER_TAGS_PUBLIC } from '../Tags/gql'
@@ -38,20 +40,20 @@ const UserTabs = () => {
           {...userSubscriptonsPath}
           selected={isInPath('USER_SUBSCRIPTIONS')}
         >
-          <Translate id="subscriptions" />
+          <FormattedMessage defaultMessage="Subscriptions" description="" />
         </Tabs.Tab>
       )}
 
       <Tabs.Tab {...userArticlesPath} selected={isInPath('USER_ARTICLES')}>
-        <Translate id="articles" />
+        <FormattedMessage defaultMessage="Articles" description="" />
       </Tabs.Tab>
 
       <Tabs.Tab {...userCommentsPath} selected={isInPath('USER_COMMENTS')}>
-        <Translate id="responses" />
+        <FormattedMessage defaultMessage="Responses" description="" />
       </Tabs.Tab>
 
       <Tabs.Tab {...userTagsPath} selected={isInPath('USER_TAGS')}>
-        <Translate id="tags" />
+        <FormattedMessage defaultMessage="Tags" description="" />
       </Tabs.Tab>
     </Tabs>
   )

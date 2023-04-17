@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { ArticleMentionedYouNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -34,10 +34,9 @@ const ArticleMentionedYouNotice = ({
       <section className="content-wrap">
         <NoticeHead>
           <NoticeActorName user={actor} />
-          <Translate
-            zh_hant=" 在作品中提及你"
-            zh_hans=" 在作品中提及你"
-            en=" mentioned you in an article"
+          <FormattedMessage
+            defaultMessage="mentioned you in an article"
+            description="src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
           />
         </NoticeHead>
 

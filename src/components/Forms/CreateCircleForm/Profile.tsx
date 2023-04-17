@@ -2,13 +2,13 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   toPath,
-  translate,
   validateCircleDisplayName,
   validateDescription,
 } from '~/common/utils'
@@ -19,7 +19,6 @@ import {
   Form,
   LanguageContext,
   Layout,
-  Translate,
   useMutation,
 } from '~/components'
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
@@ -61,6 +60,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
   const formId = 'edit-circle-profile-form'
   const titleId = isCreate ? 'circleCreation' : 'basicProfile'
 
+  const intl = useIntl()
   const {
     values,
     errors,
@@ -69,7 +69,6 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
     setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
@@ -78,6 +77,8 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       displayName: circle.displayName || '',
       description: circle.description || '',
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ displayName, description }) =>
       _pickBy({
         displayName: !isCreate
@@ -106,8 +107,16 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: (
-                <Translate id={isCreate ? 'circleCreated' : 'circleEdited'} />
+              content: isCreate ? (
+                <FormattedMessage
+                  defaultMessage="Circle successfully created"
+                  description="src/components/Forms/CreateCircleForm/Profile.tsx"
+                />
+              ) : (
+                <FormattedMessage
+                  description="src/components/Forms/CreateCircleForm/Profile.tsx"
+                  defaultMessage="Circle Edited"
+                />
               ),
             },
           })
@@ -147,7 +156,10 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
         />
 
         <p className="hint">
-          <Translate id="recommendedCoverSize" />
+          <FormattedMessage
+            defaultMessage="Recommended size: 1600px x 900px"
+            description=""
+          />
         </p>
       </section>
 
@@ -163,19 +175,17 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       {!isCreate && (
         <Form.Input
           label={
-            <Translate
-              zh_hant="圍爐名稱"
-              zh_hans="围炉名称"
-              en="Name of the Circle"
+            <FormattedMessage
+              defaultMessage="Name of the Circle"
+              description="src/components/Forms/CreateCircleForm/Profile.tsx"
             />
           }
           type="text"
           name="displayName"
           required
-          placeholder={translate({
-            zh_hant: '給圍爐取一個吸引人的名字吧',
-            zh_hans: '给围炉取一个吸引人的名字吧',
-            lang,
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Enter the name of your Circle',
+            description: '',
           })}
           value={values.displayName}
           error={touched.displayName && errors.displayName}
@@ -186,20 +196,23 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
 
       <Form.Textarea
         label={
-          <Translate
-            zh_hant="圍爐描述"
-            zh_hans="围炉描述"
-            en="Description of the Circle"
+          <FormattedMessage
+            defaultMessage="Description of the Circle"
+            description="src/components/Forms/CreateCircleForm/Profile.tsx"
           />
         }
         name="description"
         required
-        placeholder={translate({
-          zh_hant: '說說圍爐的有趣之處，吸引支持者加入',
-          zh_hans: '说说围炉的有趣之处，吸引支持者加入',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Describe more about your Circle',
+          description: 'src/components/Forms/CreateCircleForm/Profile.tsx',
         })}
-        hint={<Translate id="hintDescription" />}
+        hint={
+          <FormattedMessage
+            defaultMessage="Maximum 200 characters."
+            description=""
+          />
+        }
         value={values.description}
         error={touched.description && errors.description}
         onBlur={handleBlur}
@@ -214,8 +227,8 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
-      text={<Translate id="done" />}
+      disabled={isSubmitting}
+      text={<FormattedMessage defaultMessage="Done" description="" />}
       loading={isSubmitting}
     />
   )

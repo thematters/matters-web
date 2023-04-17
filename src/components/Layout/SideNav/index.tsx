@@ -2,37 +2,60 @@ import VisuallyHidden from '@reach/visually-hidden'
 import Link from 'next/link'
 import { useContext } from 'react'
 import FocusLock from 'react-focus-lock'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { PATHS, Z_INDEX } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { toPath } from '~/common/utils'
 import {
   Dropdown,
   hidePopperOnClick,
   IconLogo,
   IconLogoGraph,
-  IconNavHome24,
-  IconNavHomeActive24,
-  IconNavSearch24,
-  IconNavSettings24,
-  LanguageContext,
+  IconNavHome32,
+  IconNavHomeActive32,
+  IconNavMe32,
+  IconNavMeActive32,
+  IconNavSearch32,
+  IconNavSearchActive32,
   Media,
   Menu,
-  Translate,
+  UniversalAuthButton,
   useRoute,
   ViewerContext,
   WriteButton,
 } from '~/components'
 
-import MeAvatar from '../MeAvatar'
 import NavMenu from '../NavMenu'
 import UnreadIcon from '../UnreadIcon'
 import NavListItem from './NavListItem'
 import styles from './styles.css'
 
-const SideNav = () => {
-  const { lang } = useContext(LanguageContext)
+const Logo = () => {
+  const intl = useIntl()
 
-  const { isInPath, isPathStartWith, getQuery } = useRoute()
+  return (
+    <section className="logo">
+      <Link href={PATHS.HOME} legacyBehavior>
+        <a
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Discover',
+            description: '',
+          })}
+        >
+          <Media at="md">
+            <IconLogoGraph />
+          </Media>
+          <Media greaterThan="md">
+            <IconLogo />
+          </Media>
+        </a>
+      </Link>
+    </section>
+  )
+}
+
+const SideNav = () => {
+  const { router, isInPath, isPathStartWith, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
   const userName = getQuery('name')
@@ -42,113 +65,162 @@ const SideNav = () => {
   const isInFollow = isInPath('FOLLOW')
   const isInNotification = isInPath('ME_NOTIFICATIONS')
   const isInSearch = isInPath('SEARCH')
-  const isInSettings = isInPath('SETTINGS')
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInMe =
     (!isInNotification && isPathStartWith('/me')) || userName === viewerUserName
 
+  // only show auth button for anonymous
+  if (!viewer.isAuthed) {
+    return (
+      <section className="side-nav">
+        <Logo />
+
+        <ul role="menu">
+          <Media lessThan="xl">
+            <NavListItem
+              name={
+                <FormattedMessage defaultMessage="Discover" description="" />
+              }
+              icon={<IconNavHome32 size="lg" />}
+              activeIcon={<IconNavHomeActive32 size="lg" />}
+              active={isInHome}
+              href={PATHS.HOME}
+            />
+
+            <NavListItem
+              name={<FormattedMessage defaultMessage="Search" description="" />}
+              icon={<IconNavSearch32 size="lg" />}
+              activeIcon={<IconNavSearchActive32 size="lg" />}
+              active={isInSearch}
+              onClick={() => {
+                const path = toPath({
+                  page: 'search',
+                })
+
+                if (isInSearch) {
+                  router.replace(path.href)
+                } else {
+                  router.push(path.href)
+                }
+              }}
+            />
+          </Media>
+
+          <li role="menuitem">
+            <UniversalAuthButton />
+          </li>
+        </ul>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
   return (
     <section className="side-nav">
-      <section className="logo">
-        <Link href={PATHS.HOME} legacyBehavior>
-          <a aria-label={translate({ id: 'discover', lang })}>
-            <Media at="md">
-              <IconLogoGraph />
-            </Media>
-            <Media greaterThan="md">
-              <IconLogo />
-            </Media>
-          </a>
-        </Link>
-      </section>
+      <Logo />
 
       <ul role="menu">
         <NavListItem
-          name={<Translate id="discover" />}
-          icon={<IconNavHome24 size="md" />}
-          activeIcon={<IconNavHomeActive24 size="md" />}
+          name={<FormattedMessage defaultMessage="Discover" description="" />}
+          icon={<IconNavHome32 size="lg" />}
+          activeIcon={<IconNavHomeActive32 size="lg" />}
           active={isInHome}
           href={PATHS.HOME}
         />
 
         <NavListItem
-          name={<Translate zh_hant="追蹤" zh_hans="追踪" en="Following" />}
+          name={
+            <FormattedMessage
+              defaultMessage="Following"
+              description="src/components/Layout/SideNav/index.tsx"
+            />
+          }
           icon={<UnreadIcon.Follow />}
           activeIcon={<UnreadIcon.Follow active />}
           active={isInFollow}
           href={PATHS.FOLLOW}
         />
 
-        {viewer.isAuthed && (
-          <NavListItem
-            name={<Translate id="notifications" />}
-            icon={<UnreadIcon.Notification />}
-            activeIcon={<UnreadIcon.Notification active />}
-            active={isInNotification}
-            href={PATHS.ME_NOTIFICATIONS}
-          />
-        )}
+        <NavListItem
+          name={
+            <FormattedMessage defaultMessage="Notifications" description="" />
+          }
+          icon={<UnreadIcon.Notification />}
+          activeIcon={<UnreadIcon.Notification active />}
+          active={isInNotification}
+          href={PATHS.ME_NOTIFICATIONS}
+        />
 
         <Media lessThan="xl">
           <NavListItem
-            name={<Translate id="search" />}
-            icon={<IconNavSearch24 size="md" />}
-            activeIcon={<IconNavSearch24 size="md" color="green" />}
+            name={<FormattedMessage defaultMessage="Search" description="" />}
+            icon={<IconNavSearch32 size="lg" />}
+            activeIcon={<IconNavSearchActive32 size="lg" />}
             active={isInSearch}
-            href={PATHS.SEARCH}
+            onClick={() => {
+              const path = toPath({
+                page: 'search',
+              })
+
+              if (isInSearch) {
+                router.replace(path.href)
+              } else {
+                router.push(path.href)
+              }
+            }}
           />
         </Media>
 
-        {!viewer.isAuthed && (
+        <Dropdown
+          content={
+            <FocusLock>
+              <section className="dropdown-menu">
+                <VisuallyHidden>
+                  <button type="button">
+                    <FormattedMessage defaultMessage="Cancel" description="" />
+                  </button>
+                </VisuallyHidden>
+                <NavMenu.Top />
+                <Menu.Divider />
+                <NavMenu.Bottom />
+              </section>
+            </FocusLock>
+          }
+          placement="right-start"
+          appendTo={typeof window !== 'undefined' ? document.body : undefined}
+          offset={[-24, 24]}
+          zIndex={Z_INDEX.OVER_BOTTOM_BAR}
+          onShown={hidePopperOnClick}
+        >
           <NavListItem
-            name={<Translate id="settings" />}
-            icon={<IconNavSettings24 size="md" />}
-            activeIcon={<IconNavSettings24 size="md" color="green" />}
-            active={isInSettings}
-            href={PATHS.ME_SETTINGS}
+            name={<FormattedMessage defaultMessage="My Page" description="" />}
+            icon={<IconNavMe32 size="lg" />}
+            activeIcon={<IconNavMeActive32 size="lg" />}
+            active={isInMe}
+            canScrollTop={false}
+            aira-haspopup="menu"
           />
-        )}
-
-        {viewer.isAuthed && (
-          <Dropdown
-            content={
-              <FocusLock>
-                <section className="dropdown-menu">
-                  <VisuallyHidden>
-                    <button type="button">
-                      <Translate id="close" />
-                    </button>
-                  </VisuallyHidden>
-                  <NavMenu.Top />
-                  <Menu.Divider />
-                  <NavMenu.Bottom />
-                </section>
-              </FocusLock>
-            }
-            placement="right-start"
-            appendTo={typeof window !== 'undefined' ? document.body : undefined}
-            offset={[-24, 24]}
-            zIndex={Z_INDEX.OVER_BOTTOM_BAR}
-            onShown={hidePopperOnClick}
-          >
-            <NavListItem
-              name={<Translate id="myPage" />}
-              icon={<MeAvatar user={viewer} />}
-              activeIcon={<MeAvatar user={viewer} active />}
-              active={isInMe}
-              canScrollTop={false}
-              aira-haspopup="menu"
-            />
-          </Dropdown>
-        )}
+        </Dropdown>
 
         {!isInDraftDetail && (
           <li role="menuitem">
-            <WriteButton
-              allowed={!viewer.shouldSetupLikerID}
-              authed={viewer.isAuthed}
-              forbidden={viewer.isInactive}
-            />
+            <Media greaterThanOrEqual="lg">
+              <WriteButton
+                variant="sidenav"
+                allowed={!viewer.shouldSetupLikerID}
+                authed={viewer.isAuthed}
+                forbidden={viewer.isInactive}
+              />
+            </Media>
+            <Media lessThan="lg">
+              <WriteButton
+                variant="navbar"
+                allowed={!viewer.shouldSetupLikerID}
+                authed={viewer.isAuthed}
+                forbidden={viewer.isInactive}
+              />
+            </Media>
           </li>
         )}
       </ul>

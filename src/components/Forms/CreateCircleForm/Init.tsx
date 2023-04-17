@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   PAYMENT_CURRENCY,
@@ -9,8 +10,8 @@ import {
 } from '~/common/enums'
 import {
   analytics,
+  normalizeName,
   parseFormSubmitErrors,
-  translate,
   validateCircleAmount,
   validateCircleDisplayName,
   validateCircleName,
@@ -20,7 +21,6 @@ import {
   Form,
   LanguageContext,
   Layout,
-  Translate,
   useMutation,
 } from '~/components'
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
@@ -54,6 +54,7 @@ const Init: React.FC<FormProps> = ({
   const isInPage = purpose === 'page'
   const formId = 'create-circle-init-form'
 
+  const intl = useIntl()
   const {
     values,
     errors,
@@ -63,13 +64,14 @@ const Init: React.FC<FormProps> = ({
     handleSubmit,
     setFieldValue,
     isSubmitting,
-    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       name: '',
       displayName: '',
       amount: PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD,
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ name, displayName, amount }) =>
       _pickBy({
         name: validateCircleName(name, lang),
@@ -101,18 +103,28 @@ const Init: React.FC<FormProps> = ({
           if (c === 'NAME_EXISTS') {
             setFieldError(
               'name',
-              translate({
-                zh_hant: 'Oops！此網址已被使用了，換一個試試',
-                zh_hans: 'Oops！此网址名称已被使用了，换一个试试',
-                lang,
+              intl.formatMessage({
+                defaultMessage:
+                  'This URL name has already been used, try another one',
+                description: 'src/components/Forms/CreateCircleForm/Init.tsx',
               })
             )
           } else if (c === 'NAME_INVALID') {
-            setFieldError('name', translate({ id: 'hintCircleName', lang }))
+            setFieldError(
+              'name',
+              intl.formatMessage({
+                defaultMessage:
+                  'Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.',
+                description: '',
+              })
+            )
           } else if (c === 'DISPLAYNAME_INVALID') {
             setFieldError(
               'name',
-              translate({ id: 'hintCircleDisplayName', lang })
+              intl.formatMessage({
+                defaultMessage: 'Must be between 2-12 characters long.',
+                description: '',
+              })
             )
           } else {
             setFieldError('name', messages[c])
@@ -125,14 +137,13 @@ const Init: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<Translate zh_hant="圍爐名稱" zh_hans="围炉名称" />}
+        label={<FormattedMessage defaultMessage="Circle Name" description="" />}
         type="text"
         name="displayName"
         required
-        placeholder={translate({
-          zh_hant: '給圍爐取一個吸引人的名字吧',
-          zh_hans: '给围炉取一个吸引人的名字吧',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter the name of your Circle',
+          description: '',
         })}
         value={values.displayName}
         error={touched.displayName && errors.displayName}
@@ -143,23 +154,26 @@ const Init: React.FC<FormProps> = ({
       <section className="displayNameInput">
         <Form.Input
           label={
-            <Translate
-              zh_hant="設置圍爐網址（創建後不可修改）"
-              zh_hans="设置围炉网址（创建后不可修改）"
+            <FormattedMessage
+              defaultMessage="Set the Circle URL (cannot be modified after creation)"
+              description="src/components/Forms/CreateCircleForm/Init.tsx"
             />
           }
           type="text"
           name="name"
           required
-          placeholder={translate({
-            zh_hant: '自定義網址名稱',
-            zh_hans: '自定义网址名称',
-            lang,
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Custom URL Name',
+            description: '',
           })}
           value={values.name}
           error={touched.name && errors.name}
           onBlur={handleBlur}
-          onChange={handleChange}
+          onChange={(e) => {
+            const name = normalizeName(e.target.value)
+            setFieldValue('name', name)
+            return name
+          }}
         />
 
         <style jsx>{styles}</style>
@@ -171,9 +185,9 @@ const Init: React.FC<FormProps> = ({
         max={PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}
         currency={PAYMENT_CURRENCY.HKD}
         label={
-          <Translate
-            zh_hant="設定圍爐門檻（每月）"
-            zh_hans="设定围炉门槛（每月）"
+          <FormattedMessage
+            defaultMessage="Set threshold for circle (per month)"
+            description="src/components/Forms/CreateCircleForm/Init.tsx"
           />
         }
         name="amount"
@@ -202,8 +216,8 @@ const Init: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
-      text={<Translate id="nextStep" />}
+      disabled={isSubmitting}
+      text={<FormattedMessage defaultMessage="Next Step" description="" />}
       loading={isSubmitting}
     />
   )

@@ -1,14 +1,9 @@
 import gql from 'graphql-tag'
 import _isArray from 'lodash/isArray'
+import { FormattedMessage } from 'react-intl'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import {
-  IconRemove24,
-  Menu,
-  TextIcon,
-  Translate,
-  useMutation,
-} from '~/components'
+import { IconRemove24, Menu, TextIcon, useMutation } from '~/components'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 import {
   DeleteArticlesTagsMutation,
@@ -75,7 +70,10 @@ const RemoveTagButton = ({
       }}
     >
       <TextIcon icon={<IconRemove24 size="md" />} size="md" spacing="base">
-        <Translate zh_hant="移除作品" zh_hans="移除作品" />
+        <FormattedMessage
+          defaultMessage="Remove Article"
+          description="src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
+        />
       </TextIcon>
     </Menu.Item>
   )

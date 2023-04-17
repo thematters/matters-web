@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
 import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
 import {
   Button,
@@ -11,7 +10,6 @@ import {
   Menu,
   TextIcon,
   Translate,
-  withIcon,
 } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
 
@@ -65,17 +63,17 @@ export const LanguageSwitchContent = ({
 
 type LanguageSwitchProps = {
   size?: 'sm' | 'lg'
-  bgColor?: 'grey-lighter' | 'grey-darkest'
+  bgColor?: 'grey-darkest'
 }
 
 export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
   size = 'sm',
-  bgColor = 'grey-lighter',
+  bgColor,
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const iconColor = bgColor === 'grey-lighter' ? 'grey' : 'white'
-  const textSize = size === 'sm' ? 'xs' : 'md'
+  const iconColor = bgColor === 'grey-darkest' ? 'white' : 'grey'
+  const textSize = size === 'sm' ? 'sm-s' : 'md'
 
   return (
     <DropdownDialog
@@ -100,21 +98,15 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
           size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
           spacing={[0, 'xtight']}
           bgColor={bgColor}
+          bgActiveColor={
+            bgColor === 'grey-darkest' ? undefined : 'grey-lighter'
+          }
           onClick={openDialog}
           aria-haspopup={type}
           ref={ref}
         >
           <TextIcon icon={<IconWorld16 />} size={textSize} color={iconColor}>
-            <TextIcon
-              icon={withIcon(IconArrowDown)({ size: 'xxs' })}
-              size={textSize}
-              color={iconColor}
-              weight="md"
-              spacing="xxtight"
-              textPlacement="left"
-            >
-              {LANG_TEXT_MAP[lang]}
-            </TextIcon>
+            {LANG_TEXT_MAP[lang]}
           </TextIcon>
         </Button>
       )}

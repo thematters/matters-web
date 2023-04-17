@@ -50,6 +50,12 @@
     margin: var(--spacing-x-loose) calc(var(--spacing-base) * -1);
     text-align: center;
 
+    /* ad-hoc fix for nested figure */
+    & :global(> figure) {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
     & :global(figcaption) {
       padding: 0 var(--spacing-base);
       margin-top: var(--spacing-x-tight);

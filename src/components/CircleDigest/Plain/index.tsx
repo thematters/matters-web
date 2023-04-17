@@ -22,11 +22,11 @@ const CircleDigestPlain = ({ circle, onClick }: CircleDigestPlainProps) => {
   return (
     <LinkWrapper {...path} onClick={onClick}>
       <TextIcon
-        icon={<IconCircle16 size="sm" />}
+        icon={<IconCircle16 size="xs" />}
         color="green"
         spacing="xxtight"
         weight="normal"
-        size="sm-s"
+        size="xs"
       >
         <span className="name">{circle.displayName}</span>
       </TextIcon>
