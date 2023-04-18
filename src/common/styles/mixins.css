@@ -165,6 +165,7 @@
 
   height: var(--input-height);
   padding: var(--spacing-base);
+  color: var(--color-black);
   background-color: var(--color-white);
   border-radius: var(--spacing-x-tight);
   transition-property: border-color, background-color;
@@ -172,7 +173,6 @@
 
   &:focus,
   &.focus {
-    color: var(--color-black);
     border-color: var(--color-grey);
   }
 
