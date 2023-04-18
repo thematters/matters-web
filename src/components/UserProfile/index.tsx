@@ -121,6 +121,7 @@ export const UserProfile = () => {
           )}
         </>
       }
+      rightSpace
       mode="transparent-absolute"
     />
   )
