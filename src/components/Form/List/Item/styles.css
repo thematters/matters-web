@@ -3,6 +3,10 @@
 
   padding: var(--spacing-base);
   line-height: 1;
+
+  &:hover .right :global(.icon) {
+    color: var(--color-black);
+  }
 }
 
 .left {

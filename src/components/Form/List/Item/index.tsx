@@ -1,13 +1,7 @@
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
-import {
-  Card,
-  CardProps,
-  IconArrowRight16,
-  TextIcon,
-  useHover,
-} from '~/components'
+import { Card, CardProps, IconArrowRight16, TextIcon } from '~/components'
 
 import styles from './styles.css'
 
@@ -50,9 +44,8 @@ const Item: React.FC<ItemProps> = forwardRef(
       top: leftAlign === 'top',
       bold: !!bold,
     })
-    const [hoverRef, isHovered] = useHover<HTMLDivElement>()
     const itemContent = (
-      <section className="container" ref={hoverRef}>
+      <section className="container">
         <section className={leftClasses}>
           <h5 className="title">{title}</h5>
           {subtitle && <p className="subtitle">{subtitle}</p>}
@@ -61,11 +54,7 @@ const Item: React.FC<ItemProps> = forwardRef(
         <section className="right">
           {right || (
             <TextIcon
-              icon={
-                clickable && (
-                  <IconArrowRight16 color={isHovered ? 'black' : 'grey'} />
-                )
-              }
+              icon={clickable && <IconArrowRight16 color={'grey'} />}
               size="md"
               textPlacement="left"
               spacing="xtight"
