@@ -101,10 +101,7 @@ export const BaseMeDrafts = () => {
 
 const MeDrafts = () => (
   <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="myDrafts" />}
-    />
+    <Layout.Header right={<Layout.Header.Title id="myDrafts" />} />
 
     <Head title={{ id: 'myDrafts' }} />
 
