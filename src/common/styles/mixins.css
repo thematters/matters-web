@@ -124,13 +124,12 @@
 
   padding: var(--spacing-base);
   font-size: var(--font-size-md);
-  color: var(--color-grey-dark);
+  color: var(--color-black);
   background-color: var(--color-white);
   border-radius: var(--spacing-x-tight);
 
   &:focus,
   &.focus {
-    color: var(--color-black);
     border-color: var(--color-grey);
   }
 
@@ -141,7 +140,7 @@
   }
 
   &::placeholder {
-    color: var(--color-grey-light);
+    color: var(--color-grey-dark);
     opacity: 1; /* Firefox */
   }
 
