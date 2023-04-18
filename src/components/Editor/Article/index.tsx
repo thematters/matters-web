@@ -1,4 +1,4 @@
-import { EditorContent, useArticleEdtor } from '@matters/matters-editor/editors'
+import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
 import { useContext } from 'react'
 
 import { ASSET_TYPE } from '~/common/enums'
