@@ -119,6 +119,7 @@
 /* Form
    ========================================================================== */
 @define-mixin form-input {
+  @mixin transition;
   @mixin border-grey;
 
   padding: var(--spacing-base);
