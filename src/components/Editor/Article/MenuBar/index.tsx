@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Editor } from '@matters/matters-editor/editors'
+import { Editor } from '@matters/matters-editor'
 
 import styles from './styles.css'
 
