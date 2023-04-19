@@ -122,7 +122,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   return (
     <Layout.Main aside={<RelatedTags tagId={tag.id} inSidebar />}>
       <Layout.Header
-        left={<Layout.Header.BackButton mode="black-solid" />}
         right={
           <>
             <span />
@@ -140,6 +139,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             />
           </>
         }
+        rightSpace
         mode="transparent-absolute"
       />
 
