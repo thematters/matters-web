@@ -2,7 +2,14 @@ import gql from 'graphql-tag'
 import React from 'react'
 
 import { toPath } from '~/common/utils'
-import { Card, DateTime, LinkWrapper, Title, Translate } from '~/components'
+import {
+  Card,
+  DateTime,
+  LinkWrapper,
+  Media,
+  Title,
+  Translate,
+} from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
 import DeleteButton from './DeleteButton'
@@ -36,8 +43,8 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
     id,
   })
 
-  return (
-    <Card {...path} spacing={['base', 'base']}>
+  const FeedCard = ({ space }: { space: 0 | 'base' }) => (
+    <Card {...path} spacing={['base', space]}>
       <LinkWrapper {...path} textActiveColor="green">
         <Title type="feed" is="h2">
           {title || <Translate id="untitle" />}
@@ -57,6 +64,17 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
 
       <style jsx>{styles}</style>
     </Card>
+  )
+
+  return (
+    <>
+      <Media at="sm">
+        <FeedCard space={'base'} />
+      </Media>
+      <Media greaterThan="sm">
+        <FeedCard space={0} />
+      </Media>
+    </>
   )
 }
 

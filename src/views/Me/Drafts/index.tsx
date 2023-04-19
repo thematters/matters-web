@@ -87,7 +87,7 @@ export const BaseMeDrafts = () => {
   return (
     <DraftsContextProvider>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List>
+        <List hasBorder={false}>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
               <DraftDigest.Feed draft={node} />
