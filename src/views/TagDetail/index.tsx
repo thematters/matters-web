@@ -173,9 +173,15 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
       <section className="info">
         {features.tag_adoption && <Owner tag={tag} />}
 
-        <section className="statistics">
-          <Followers tag={tag} />
-          <ArticlesCount tag={tag} />
+        <section className="top">
+          <section className="statistics">
+            <Followers tag={tag} />
+            <ArticlesCount tag={tag} />
+          </section>
+
+          <section className="buttons">
+            <TagDetailButtons.FollowButton tag={tag} />
+          </section>
         </section>
 
         {tag.description && (
@@ -188,10 +194,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             <p>{tag.description}</p>
           </Expandable>
         )}
-
-        <section className="buttons">
-          <TagDetailButtons.FollowButton tag={tag} />
-        </section>
       </section>
 
       <Tabs sticky>

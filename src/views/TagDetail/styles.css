@@ -1,21 +1,20 @@
 .info {
-  @mixin border-bottom-grey;
-
-  padding: 0 var(--spacing-base) var(--spacing-loose);
+  padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-x-tight);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
+
+  & .top {
+    @mixin flex-center-space-between;
+
+    margin-top: var(--spacing-base);
+  }
 }
 
 .statistics {
-  @mixin flex-center-space-between;
+  @mixin flex-center-start;
 
-  margin-top: var(--spacing-base);
-}
-
-.buttons {
-  display: inline-flex;
-  margin-top: var(--spacing-loose);
-
-  & :global(> * + *) {
-    margin-left: var(--spacing-base);
-  }
+  gap: var(--spacing-x-tight);
 }
