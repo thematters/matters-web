@@ -89,14 +89,16 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
     : null
 
   return (
-    <Card {...path} spacing={['base', 'base']}>
+    <Card {...path} spacing={[0, 0]}>
       <section
         className="container"
         data-test-id={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM}
       >
-        <section className="tx-icon">
-          <Currency currency={currency} />
-        </section>
+        {(isAddCredit || isPayout) && (
+          <section className="tx-icon">
+            <Currency currency={currency} />
+          </section>
+        )}
 
         <section className="tx-info">
           <section className="left">
@@ -106,7 +108,12 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
 
             {isDonation && article && (
               <section className="title">
-                <ArticleDigestTitle article={article} is="h2" />
+                <ArticleDigestTitle
+                  article={article}
+                  is="h2"
+                  textWeight="normal"
+                  textSize="xs"
+                />
               </section>
             )}
 
@@ -133,7 +140,12 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
                   </p>
                 </section>
                 <section className="title">
-                  <CircleDigest.Title circle={circle} is="h2" />
+                  <CircleDigest.Title
+                    circle={circle}
+                    is="h2"
+                    textWeight="normal"
+                    textSize="xs"
+                  />
                 </section>
               </>
             )}
