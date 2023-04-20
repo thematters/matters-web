@@ -124,7 +124,7 @@ const Intro = () => {
                   bgColor="green"
                   textColor="white"
                   spacing={['tight', 'loose']}
-                  htmlHref="https://www.mattersonsite.com/"
+                  htmlHref="https://www.frontlinefellowship.io/"
                   htmlTarget="_blank"
                   rel="noopener"
                 >
