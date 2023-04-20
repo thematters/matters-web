@@ -130,3 +130,7 @@ tsconfig.tsbuildinfo
 
 # i18n
 compiled-lang
+
+# Relay build output
+
+*__generated__*
