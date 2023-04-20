@@ -2,6 +2,10 @@
   padding: 0 var(--spacing-base);
   margin: var(--spacing-loose) 0 0;
 
+  @media (--sm-up) {
+    padding: 0;
+  }
+
   @media (--md-up) {
     @mixin flex-center-start;
   }
