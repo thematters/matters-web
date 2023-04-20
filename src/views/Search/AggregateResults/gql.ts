@@ -30,14 +30,12 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
         node {
           ... on Article {
             ...ArticleDigestFeedArticlePublic
-            ...ArticleDigestFeedArticlePrivate
           }
         }
       }
     }
   }
   ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
 `
 
 export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
