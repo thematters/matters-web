@@ -52,6 +52,11 @@ const IMG_SRC = [
   'data:',
   process.env.NEXT_PUBLIC_LEGACY_PRE_ASSET_DOMAIN,
   process.env.NEXT_PUBLIC_LEGACY_ASSET_DOMAIN,
+  process.env.NEXT_PUBLIC_LEGACY_ASSET_DOMAIN?.replace(
+    site_domain_tld,
+    site_domain_tld_old
+  ),
+
   process.env.NEXT_PUBLIC_ASSET_DOMAIN
     ? new URL(process.env.NEXT_PUBLIC_ASSET_DOMAIN).hostname
     : undefined,
@@ -85,6 +90,10 @@ const CONNECT_SRC = [
 
   // API
   process.env.NEXT_PUBLIC_API_URL,
+  process.env.NEXT_PUBLIC_API_URL?.replace(
+    site_domain_tld,
+    site_domain_tld_old
+  ),
 
   process.env.NEXT_PUBLIC_API_URL?.replace(
     site_domain_tld,
@@ -164,7 +173,7 @@ export const CSP_POLICY = Object.entries({
   .map(
     ([k, v]) =>
       `${k} ${(Array.isArray(v)
-        ? v
+        ? Array.from(new Set(v))
             .map((s) => s?.trim())
             .filter(Boolean)
             .join(' ')

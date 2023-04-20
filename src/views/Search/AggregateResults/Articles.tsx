@@ -15,7 +15,11 @@ import {
   usePublicQuery,
   useRoute,
 } from '~/components'
-import { SearchAggregateArticlesPublicQuery } from '~/gql/graphql'
+import {
+  ArticleDigestFeedArticlePrivateFragment,
+  ArticleDigestFeedArticlePublicFragment,
+  SearchAggregateArticlesPublicQuery,
+} from '~/gql/graphql'
 
 import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
@@ -116,7 +120,10 @@ const AggregateArticleResults = () => {
               node.__typename === 'Article' && (
                 <List.Item key={cursor + node.id}>
                   <ArticleDigestFeed
-                    article={node}
+                    article={
+                      node as ArticleDigestFeedArticlePublicFragment &
+                        Partial<ArticleDigestFeedArticlePrivateFragment>
+                    }
                     is="link"
                     isConciseFooter={true}
                     hasCircle={false}

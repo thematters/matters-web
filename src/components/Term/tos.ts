@@ -200,7 +200,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>6.7    其他產品以及平台上明確身份的公司名稱可以是MATTERS、其許可方和/或其關聯公司或第三方的名稱、商標、商號、服務商標、商標、標誌、其他專有名稱或標記。在平台上使用任何第三方的或歸屬於第三方的名稱、商標、商標、服務商標、商標、標誌或其他專有名稱或商標，以及能夠通過平台從第三方獲得特定商品或服務，均不可被解釋為此第三方受到平台的認可，贊助平台，或此第三方通過平台參與提供商品、服務或信息。</p>
 
 <p><i>有關侵權的申訴</i></p>
-<p>6.8    如果您認為有任何用戶內容侵犯了您的版權，請發送電子郵件至ask@matters.news，我們將指示您，如何向我們發送侵犯版權的通知。MATTERS將審核並處理所有符合要求的通知。</p>
+<p>6.8    如果您認為有任何用戶內容侵犯了您的版權，請發送電子郵件至 &lt;ask@matters.town&gt;，我們將指示您，如何向我們發送侵犯版權的通知。MATTERS將審核並處理所有符合要求的通知。</p>
 <p>6.9    為避免疑義，MATTERS不對第三方提供的版權資料或第三方的知識產權侵權行為承擔任何責任。</p>
 
 <p><b><u>7. 帳戶終止</u></b></p>
@@ -247,7 +247,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>12.5    本條款受特拉華州法律管轄，並按照特拉華州法律解釋。本條款的各方不可撤回地同意，特拉華州法院對與本條款有關或由本條款引起的任何索賠或爭議擁有專屬管轄權。</p>
 <p>12.6    本條款和條件的原始英文版本可能被翻譯成其他語言。如果對本條款的內容或解釋存在爭議，亦或者本條款的英文版本與任何其他語言版本之間存在矛盾或不一致，則在法律允許的範圍內，英語版本適用、優先並具有決定性。</p>
 <p>12.7    本條款應被視為可分割的。如有任何條款被確定為不可執行的或無效的，則應依然在適用法律允許的最大範圍內執行此條款，並且任何條款被確定無效都不應影響任何其他條款的有效性和可執行性。被分割的條款應由盡可能接近原先措辭和意圖的新條款取代。</p>
-<p>12.8    與平台有關的所有投訴、反饋、評論、技術支持請求和其他聯絡信息請直接發送至 ask@matters.news。 </p>
+<p>12.8    與平台有關的所有投訴、反饋、評論、技術支持請求和其他聯絡信息請直接發送至 &lt;ask@matters.town&gt; 。 </p>
 
 </details>
   `,
@@ -449,7 +449,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>6.7    其他产品以及平台上明确身份的公司名称可以是MATTERS、其许可方和/或其关联公司或第三方的名称、商标、商号、服务商标、商标、标志、其他专有名称或标记。在平台上使用任何第三方的或归属于第三方的名称、商标、商标、服务商标、商标、标志或其他专有名称或商标，以及能够通过平台从第三方获得特定商品或服务，均不可被解释为此第三方受到平台的认可，赞助平台，或此第三方通过平台参与提供商品、服务或信息。</p>
 
 <p><i>有关侵权的申诉</i></p>
-<p>6.8    如果您认为有任何用户内容侵犯了您的版权，请发送电子邮件至ask@matters.news，我们将指示您，如何向我们发送侵犯版权的通知。MATTERS将审核并处理所有符合要求的通知。</p>
+<p>6.8    如果您认为有任何用户内容侵犯了您的版权，请发送电子邮件至 &lt;ask@matters.town&gt; ，我们将指示您，如何向我们发送侵犯版权的通知。MATTERS将审核并处理所有符合要求的通知。</p>
 <p>6.9    为避免疑义，MATTERS不对第三方提供的版权资料或第三方的知识产权侵权行为承担任何责任。</p>
 
 <p><b><u>7. 帳戶终止</u></b></p>
@@ -495,7 +495,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>12.5    本条款受特拉华州法律管辖，并按照特拉华州法律解释。本条款的各方不可撤回地同意，特拉华州法院对与本条款有关或由本条款引起的任何索赔或争议拥有专属管辖权。</p>
 <p>12.6    本条款和条件的原始英文版本可能被翻译成其他语言。如果对本条款的内容或解释存在争议，亦或者本条款的英文版本与任何其他语言版本之间存在矛盾或不一致，则在法律允许的范围内，英语版本适用、优先并具有决定性。</p>
 <p>12.7    本条款应被视为可分割的。如有任何条款被确定为不可执行的或无效的，则应依然在适用法律允许的最大范围内执行此条款，并且任何条款被确定无效都不应影响任何其他条款的有效性和可执行性。被分割的条款应由尽可能接近原先措辞和意图的新条款取代。</p>
-<p>12.8    与平台有关的所有投诉、反馈、评论、技术支持请求和其他联络信息请直接发送至 ask@matters.news。 </p>
+<p>12.8    与平台有关的所有投诉、反馈、评论、技术支持请求和其他联络信息请直接发送至 &lt;ask@matters.town&gt; 。 </p>
 
 </details>
 `,
@@ -702,7 +702,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>6.7    Other product and company names identified on the Platform may be the name, trade mark, trade name, service mark, logo, symbol or other proprietary designation of MATTERS, its licensors and/or Affiliates or a third party. The use on the Platform of any name, trade name, trade mark, service mark, logo, symbol or other proprietary designation or marking of or belonging to any third party, and the availability of specific goods or services from such third party through the Platform, should not be construed as an endorsement or sponsorship of the Platform by any such third party, or the participation by such third party in the offering of goods, services or information through the Platform. </p>
 
 <p><i>Complaint of alleged infringement</i></p>
-<p>6.8    If you believe that any User Contents violate your copyright, please contact us at ask@matters.news for instructions on sending us a notice of copyright infringement. MATTERS will review and address all notices that comply with the requirements.</p>
+<p>6.8    If you believe that any User Contents violate your copyright, please contact us at &lt;ask@matters.town&gt; for instructions on sending us a notice of copyright infringement. MATTERS will review and address all notices that comply with the requirements.</p>
 <p>6.9    For the avoidance of doubt, MATTERS does not assume any liability for copyrighted materials provided by third parties or any Intellectual Property Rights infringements by such third parties.</p>
 
 <p><b><u>7. ACCOUNT TERMINATION</u></b></p>
@@ -749,7 +749,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>12.5    These Terms shall be governed by and construed in accordance with the laws of the State of Delaware. The Parties hereunder irrevocably agrees that the courts of the State of Delaware shall have exclusive jurisdiction in relation to any claim or dispute concerning or arising from these Terms.</p>
 <p>12.6    The original English version of these terms and conditions may have been translated into other languages. In the event of a dispute about the contents or interpretation of these Terms or inconsistency or discrepancy between the English version and any other language version of these Terms, the English language version to the extent permitted by law shall apply, prevail and be conclusive. </p>
 <p>12.7    These Terms shall be deemed severable. In the event that any provision is determined to be unenforceable or invalid, such provision shall nonetheless be enforced to the fullest extent permitted by applicable law and such determination shall not affect the validity and enforceability of any other remaining provisions. The severed provisions shall be replaced by a provision approximating as much as possible the original wording and intent.</p>
-<p>12.8    All complaints, feedback, comments, requests for technical support and other communications in relation to the Platform shall be directed to ask@matters.news.</p>
+<p>12.8    All complaints, feedback, comments, requests for technical support and other communications in relation to the Platform shall be directed to &lt;ask@matters.town&gt;.</p>
 
 </details>
 `,
