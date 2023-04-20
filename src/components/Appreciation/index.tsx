@@ -57,7 +57,7 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
     : null
 
   return (
-    <Card {...path} spacing={['base', 'base']}>
+    <Card {...path} spacing={[0, 0]}>
       <section className="container">
         <section className="left">
           {showContent && content && (
