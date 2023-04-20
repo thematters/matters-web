@@ -25,6 +25,8 @@ import {
   ConfirmVerificationCodeMutation,
 } from '~/gql/graphql'
 
+import styles from './styles.css'
+
 interface FormProps {
   oldData: { email: string; codeId: string }
   purpose: 'dialog' | 'page'
@@ -120,39 +122,42 @@ const Confirm: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <Form id={formId} onSubmit={handleSubmit}>
-      <Form.Input
-        label={<Translate id="email" />}
-        type="email"
-        name="email"
-        required
-        placeholder={translate({ id: 'enterNewEmail', lang })}
-        value={values.email}
-        error={touched.email && errors.email}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+    <section className="container">
+      <Form id={formId} onSubmit={handleSubmit}>
+        <Form.Input
+          label={<Translate id="email" />}
+          type="email"
+          name="email"
+          required
+          placeholder={translate({ id: 'enterNewEmail', lang })}
+          value={values.email}
+          error={touched.email && errors.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
 
-      <Form.Input
-        label={<Translate id="verificationCode" />}
-        type="text"
-        name="code"
-        required
-        placeholder={translate({ id: 'enterVerificationCode', lang })}
-        hint={translate({ id: 'hintVerificationCode', lang })}
-        value={values.code}
-        error={touched.code && errors.code}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        extraButton={
-          <VerificationSendCodeButton
-            email={values.email}
-            type="email_reset_confirm"
-            disabled={!!errors.email}
-          />
-        }
-      />
-    </Form>
+        <Form.Input
+          label={<Translate id="verificationCode" />}
+          type="text"
+          name="code"
+          required
+          placeholder={translate({ id: 'enterVerificationCode', lang })}
+          hint={translate({ id: 'hintVerificationCode', lang })}
+          value={values.code}
+          error={touched.code && errors.code}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          extraButton={
+            <VerificationSendCodeButton
+              email={values.email}
+              type="email_reset_confirm"
+              disabled={!!errors.email}
+            />
+          }
+        />
+      </Form>
+      <style jsx>{styles}</style>
+    </section>
   )
 
   const SubmitButton = (
@@ -169,10 +174,10 @@ const Confirm: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton />}
+          left={<Layout.Header.Title id="changeEmail" />}
           right={
             <>
-              <Layout.Header.Title id="changeEmail" />
+              <span />
               {SubmitButton}
             </>
           }
