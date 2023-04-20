@@ -1,19 +1,19 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { EXTERNAL_LINKS, GUIDE_LINKS, PATHS } from '~/common/enums'
-import { Form, LanguageContext, Layout, Spacer } from '~/components'
+import { GUIDE_LINKS, PATHS } from '~/common/enums'
+import { Form, LanguageContext, Layout, Media } from '~/components'
 
 import styles from './styles.css'
 
-const BaseHelp = () => {
+const BaseHelp = ({ spaceX }: { spaceX: 0 | 'base' }) => {
   const { lang } = useContext(LanguageContext)
   const year = new Date().getFullYear()
 
   const intl = useIntl()
   return (
     <>
-      <Form.List>
+      <Form.List spacingX={spaceX}>
         <Form.List.Item
           role="link"
           title={intl.formatMessage({
@@ -107,17 +107,14 @@ const BaseHelp = () => {
 }
 
 const Help = () => (
-  <Layout.Main smBgColor="grey-lighter">
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="helpCenter" />}
-    />
-
-    <Spacer />
-
-    <BaseHelp />
-
-    <Spacer size="xxxloose" />
+  <Layout.Main>
+    <Layout.Header left={<Layout.Header.Title id="helpCenter" />} />
+    <Media at="sm">
+      <BaseHelp spaceX="base" />
+    </Media>
+    <Media greaterThan="sm">
+      <BaseHelp spaceX={0} />
+    </Media>
   </Layout.Main>
 )
 

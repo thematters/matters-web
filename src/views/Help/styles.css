@@ -3,6 +3,11 @@ footer {
   font-size: var(--font-size-sm);
   color: var(--color-grey-dark);
 
+  @media (--sm-up) {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
   & p {
     margin-bottom: var(--spacing-x-tight);
   }
