@@ -14,6 +14,8 @@ import {
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
+import styles from './styles.css'
+
 interface FormProps {
   defaultEmail?: string
   type: 'forget' | 'change'
@@ -91,23 +93,26 @@ const Request: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <Form id={formId} onSubmit={handleSubmit}>
-      <Form.Input
-        label={<Translate id="email" />}
-        type="email"
-        name="email"
-        required
-        placeholder={translate({
-          id: isForget ? 'enterRegisteredEmail' : 'enterEmail',
-          lang,
-        })}
-        value={values.email}
-        error={touched.email && errors.email}
-        disabled={!!defaultEmail}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
-    </Form>
+    <section className="container">
+      <Form id={formId} onSubmit={handleSubmit}>
+        <Form.Input
+          label={<Translate id="email" />}
+          type="email"
+          name="email"
+          required
+          placeholder={translate({
+            id: isForget ? 'enterRegisteredEmail' : 'enterEmail',
+            lang,
+          })}
+          value={values.email}
+          error={touched.email && errors.email}
+          disabled={!!defaultEmail}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+      </Form>
+      <style jsx>{styles}</style>
+    </section>
   )
 
   const SubmitButton = (
@@ -124,10 +129,10 @@ const Request: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton onClick={back} />}
+          left={<Layout.Header.Title id={titleId} />}
           right={
             <>
-              <Layout.Header.Title id={titleId} />
+              <span />
               {SubmitButton}
             </>
           }
