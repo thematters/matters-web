@@ -83,10 +83,7 @@ const BaseMeBookmarks = () => {
 
 const MeBookmarks = () => (
   <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="myBookmarks" />}
-    />
+    <Layout.Header left={<Layout.Header.Title id="myBookmarks" />} />
 
     <Head title={{ id: 'myBookmarks' }} />
 
