@@ -37,7 +37,11 @@ const SupporterDigestFeed = ({
           />
 
           <section className="count">
-            <TextIcon icon={<IconDonate24 />} size="xs" color="grey-dark">
+            <TextIcon
+              icon={<IconDonate24 size="xs" />}
+              size="xs"
+              color="grey-dark"
+            >
               {donationCount}
             </TextIcon>
           </section>
