@@ -1,25 +1,19 @@
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Form, Head, Layout, Spacer, useRoute } from '~/components'
+import { Form, Head, Layout, Media, Spacer, useRoute } from '~/components'
 
-const Settings = () => {
+const BaseSettings = ({ spacingX }: { spacingX: 0 | 'base' }) => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
-      <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="manageCircle" />}
-      />
-
-      <Head title={{ id: 'manageCircle' }} />
-
+    <>
       <Form.List
         groupName={
           <FormattedMessage defaultMessage="Settings" description="" />
         }
+        spacingX={spacingX}
       >
         <Form.List.Item
           title={
@@ -40,6 +34,7 @@ const Settings = () => {
             description="src/views/Circle/Settings/index.tsx"
           />
         }
+        spacingX={spacingX}
       >
         <Form.List.Item
           title={
@@ -54,6 +49,22 @@ const Settings = () => {
       </Form.List>
 
       <Spacer size="xxxloose" />
+    </>
+  )
+}
+
+const Settings = () => {
+  return (
+    <Layout.Main>
+      <Layout.Header left={<Layout.Header.Title id="manageCircle" />} />
+
+      <Head title={{ id: 'manageCircle' }} />
+      <Media at="sm">
+        <BaseSettings spacingX="base" />
+      </Media>
+      <Media greaterThan="sm">
+        <BaseSettings spacingX={0} />
+      </Media>
     </Layout.Main>
   )
 }
