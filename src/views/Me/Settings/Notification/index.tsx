@@ -6,7 +6,7 @@ import {
   Form,
   Head,
   Layout,
-  Spacer,
+  Media,
   Spinner,
   Translate,
   useMutation,
@@ -50,7 +50,11 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
   }
 `
 
-const BaseNotificationSettings = () => {
+const BaseNotificationSettings = ({
+  spaceX = 'base',
+}: {
+  spaceX?: 0 | 'base'
+}) => {
   const [update] = useMutation<UpdateViewerNotificationMutation>(
     UPDATE_VIEWER_NOTIFICATION
   )
@@ -95,6 +99,7 @@ const BaseNotificationSettings = () => {
         groupName={
           <Translate zh_hant="站內通知" zh_hans="站内通知" en="Site" />
         }
+        spacingX={spaceX}
       >
         <Form.List.Item
           role="link"
@@ -112,17 +117,17 @@ const BaseNotificationSettings = () => {
 }
 
 const NotificationSettings = () => (
-  <Layout.Main smBgColor="grey-lighter">
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="settingsNotification" />}
-    />
+  <Layout.Main>
+    <Layout.Header left={<Layout.Header.Title id="settingsNotification" />} />
 
     <Head title={{ id: 'settingsNotification' }} />
 
-    <BaseNotificationSettings />
-
-    <Spacer size="xxxloose" />
+    <Media at="sm">
+      <BaseNotificationSettings />
+    </Media>
+    <Media greaterThan="sm">
+      <BaseNotificationSettings spaceX={0} />
+    </Media>
   </Layout.Main>
 )
 

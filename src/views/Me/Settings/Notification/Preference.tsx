@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import { translate } from '~/common/utils'
-import { Form, LanguageContext, Switch, Translate } from '~/components'
+import { Form, LanguageContext, Media, Switch, Translate } from '~/components'
 import { ViewerNotificationSettingsQuery } from '~/gql/graphql'
 
 type NotificationType = NonNullable<
@@ -13,9 +13,14 @@ type NotificationType = NonNullable<
 interface PreferenceProps {
   settings: NotificationType
   toggle: (type: keyof NotificationType) => void
+  spaceX?: 0 | 'base'
 }
 
-const Preference = ({ settings, toggle }: PreferenceProps) => {
+const BasePreference = ({
+  settings,
+  toggle,
+  spaceX = 'base',
+}: PreferenceProps) => {
   const { lang } = useContext(LanguageContext)
   const label = translate({
     zh_hant: 'Matters 日報通知',
@@ -27,6 +32,7 @@ const Preference = ({ settings, toggle }: PreferenceProps) => {
   return (
     <Form.List
       groupName={<Translate zh_hant="郵件通知" zh_hans="邮件通知" en="Email" />}
+      spacingX={spaceX}
     >
       <Form.List.Item
         title={label}
@@ -47,6 +53,19 @@ const Preference = ({ settings, toggle }: PreferenceProps) => {
         }
       />
     </Form.List>
+  )
+}
+
+const Preference = ({ settings, toggle, spaceX = 'base' }: PreferenceProps) => {
+  return (
+    <>
+      <Media at="sm">
+        <BasePreference settings={settings} toggle={toggle} />
+      </Media>
+      <Media greaterThan="sm">
+        <BasePreference settings={settings} toggle={toggle} spaceX={0} />
+      </Media>
+    </>
   )
 }
 

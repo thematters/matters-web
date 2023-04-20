@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import { translate } from '~/common/utils'
-import { Form, LanguageContext, Switch, Translate } from '~/components'
+import { Form, LanguageContext, Media, Switch, Translate } from '~/components'
 import { ViewerNotificationGeneralSettingsQuery } from '~/gql/graphql'
 
 type NotificationType = NonNullable<
@@ -13,9 +13,10 @@ type NotificationType = NonNullable<
 interface ArticleProps {
   settings: NotificationType
   toggle: (type: keyof NotificationType) => void
+  spacingX?: 0 | 'base'
 }
 
-const Article = ({ settings, toggle }: ArticleProps) => {
+const BaseArticle = ({ settings, toggle, spacingX = 'base' }: ArticleProps) => {
   const { lang } = useContext(LanguageContext)
   const newAppreciationLabel = translate({
     zh_hant: '作品被贊賞',
@@ -39,6 +40,7 @@ const Article = ({ settings, toggle }: ArticleProps) => {
   return (
     <Form.List
       groupName={<Translate zh_hant="作品" zh_hans="作品" en="Article" />}
+      spacingX={spacingX}
     >
       <Form.List.Item
         title={newAppreciationLabel}
@@ -74,6 +76,19 @@ const Article = ({ settings, toggle }: ArticleProps) => {
         }
       />
     </Form.List>
+  )
+}
+
+const Article = ({ settings, toggle }: ArticleProps) => {
+  return (
+    <>
+      <Media at="sm">
+        <BaseArticle settings={settings} toggle={toggle} />
+      </Media>
+      <Media greaterThan="sm">
+        <BaseArticle settings={settings} toggle={toggle} spacingX={0} />
+      </Media>
+    </>
   )
 }
 
