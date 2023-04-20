@@ -30,4 +30,27 @@
 
 .avatar-field {
   margin: var(--spacing-loose) var(--spacing-base);
+
+  @media (--sm-up) {
+    margin: var(--spacing-loose) 0;
+  }
+}
+
+.container {
+  margin-right: var(--spacing-base);
+  margin-left: var(--spacing-base);
+
+  @media (--sm-up) {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  & :global(.field) {
+    margin-right: 0;
+    margin-left: 0;
+
+    & :global(.input-container) {
+      margin: 0;
+    }
+  }
 }

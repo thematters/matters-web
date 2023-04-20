@@ -173,52 +173,54 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       </section>
 
       {!isCreate && (
-        <Form.Input
+        <section className="container">
+          <Form.Input
+            label={
+              <FormattedMessage
+                defaultMessage="Name of the Circle"
+                description="src/components/Forms/CreateCircleForm/Profile.tsx"
+              />
+            }
+            type="text"
+            name="displayName"
+            required
+            placeholder={intl.formatMessage({
+              defaultMessage: 'Enter the name of your Circle',
+              description: '',
+            })}
+            value={values.displayName}
+            error={touched.displayName && errors.displayName}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+        </section>
+      )}
+      <section className="container">
+        <Form.Textarea
           label={
             <FormattedMessage
-              defaultMessage="Name of the Circle"
+              defaultMessage="Description of the Circle"
               description="src/components/Forms/CreateCircleForm/Profile.tsx"
             />
           }
-          type="text"
-          name="displayName"
+          name="description"
           required
           placeholder={intl.formatMessage({
-            defaultMessage: 'Enter the name of your Circle',
-            description: '',
+            defaultMessage: 'Describe more about your Circle',
+            description: 'src/components/Forms/CreateCircleForm/Profile.tsx',
           })}
-          value={values.displayName}
-          error={touched.displayName && errors.displayName}
+          hint={
+            <FormattedMessage
+              defaultMessage="Maximum 200 characters."
+              description=""
+            />
+          }
+          value={values.description}
+          error={touched.description && errors.description}
           onBlur={handleBlur}
           onChange={handleChange}
         />
-      )}
-
-      <Form.Textarea
-        label={
-          <FormattedMessage
-            defaultMessage="Description of the Circle"
-            description="src/components/Forms/CreateCircleForm/Profile.tsx"
-          />
-        }
-        name="description"
-        required
-        placeholder={intl.formatMessage({
-          defaultMessage: 'Describe more about your Circle',
-          description: 'src/components/Forms/CreateCircleForm/Profile.tsx',
-        })}
-        hint={
-          <FormattedMessage
-            defaultMessage="Maximum 200 characters."
-            description=""
-          />
-        }
-        value={values.description}
-        error={touched.description && errors.description}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
-
+      </section>
       <style jsx>{styles}</style>
     </Form>
   )
@@ -228,7 +230,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Done" description="" />}
+      text={<FormattedMessage defaultMessage="Save" description="" />}
       loading={isSubmitting}
     />
   )
@@ -237,10 +239,10 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton />}
+          left={<Layout.Header.Title id={titleId} />}
           right={
             <>
-              <Layout.Header.Title id={titleId} />
+              <span />
               {SubmitButton}
             </>
           }
