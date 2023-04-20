@@ -69,7 +69,7 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
       comparedPassword: '',
     },
     validateOnBlur: false,
-    validateOnChange: false,
+    validateOnChange: true,
     validate: ({ password, comparedPassword }) => {
       const passwordError = validatePaymentPassword(password, lang)
       const comparedPasswordError = validateComparedPassword(
