@@ -79,7 +79,7 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
   const isSucceeded = state === 'transfer_succeeded'
 
   return (
-    <Card spacing={['xtight', 'base']}>
+    <Card spacing={['xtight', 0]}>
       <section className="container">
         <CircleInvitationInvitee invitee={invitee} />
         <section className="info">
