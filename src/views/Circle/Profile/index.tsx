@@ -122,7 +122,6 @@ const CircleProfile = () => {
         />
       )}
       <Layout.Header
-        left={<Layout.Header.BackButton mode="black-solid" />}
         right={
           <>
             <span />
@@ -144,6 +143,7 @@ const CircleProfile = () => {
             )}
           </>
         }
+        rightSpace
         mode="transparent-absolute"
       />
     </>
