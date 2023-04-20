@@ -116,7 +116,7 @@ const AggregateTagResults = () => {
               node.__typename === 'Tag' && (
                 <Fragment key={cursor + node.id}>
                   <Menu.Item
-                    spacing={['base', 'base']}
+                    spacing={['base', 0]}
                     {...toPath({
                       page: 'tagDetail',
                       tag: node,

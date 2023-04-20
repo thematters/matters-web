@@ -77,12 +77,6 @@ const Search = () => {
 
   return (
     <Layout.Main>
-      <Media greaterThanOrEqual="xl">
-        <Layout.Header
-          left={<Layout.Header.BackButton />}
-          right={<Layout.Header.Title id="search" />}
-        />
-      </Media>
       <Media lessThan="xl">
         <Layout.Header
           right={

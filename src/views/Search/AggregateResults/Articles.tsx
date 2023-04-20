@@ -107,7 +107,7 @@ const AggregateArticleResults = () => {
   }
 
   return (
-    <section className="aggregate-section">
+    <section>
       <InfiniteScroll
         hasNextPage={
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
