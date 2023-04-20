@@ -56,7 +56,7 @@ const Forms = () => (
 
       {/* Form.List */}
       <li>
-        <Form.List spacing="xloose">
+        <Form.List spacingY="xloose">
           <Form.List.Item
             title={
               <Translate

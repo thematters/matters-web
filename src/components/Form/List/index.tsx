@@ -12,16 +12,24 @@ import styles from './styles.css'
 
 interface ListProps {
   groupName?: string | React.ReactNode
-  spacing?: 0 | 'xloose'
+  spacingY?: 0 | 'xloose'
+  spacingX?: 0 | 'base'
   forceGreyStyle?: boolean
 }
 
 const List: React.FC<React.PropsWithChildren<ListProps>> & {
   Item: typeof Item
-} = ({ groupName, spacing = 0, forceGreyStyle, children }) => {
+} = ({
+  groupName,
+  spacingY = 0,
+  spacingX = 'base',
+  forceGreyStyle,
+  children,
+}) => {
   const listClasses = classNames({
     grey: forceGreyStyle,
-    [`spacing-${spacing}`]: !!spacing,
+    [`spacing-x-${spacingX}`]: !!spacingX,
+    [`spacing-y-${spacingY}`]: !!spacingY,
   })
 
   return (

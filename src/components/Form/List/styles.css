@@ -11,8 +11,6 @@
 }
 
 ul {
-  margin-right: var(--spacing-base);
-  margin-left: var(--spacing-base);
   overflow: hidden;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -67,7 +65,12 @@ ul {
   }
 }
 
-.spacing-xloose {
+.spacing-x-base {
+  margin-right: var(--spacing-base);
+  margin-left: var(--spacing-base);
+}
+
+.spacing-y-xloose {
   margin-top: var(--spacing-x-loose);
   margin-bottom: var(--spacing-x-loose);
 }

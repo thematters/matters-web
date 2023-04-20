@@ -40,7 +40,7 @@ export const EmailSignUpDialogButton = ({
 }: {
   gotoEmailSignUp: () => void
 }) => (
-  <Form.List spacing="xloose">
+  <Form.List spacingY="xloose">
     <Form.List.Item
       title={
         <FormattedMessage
