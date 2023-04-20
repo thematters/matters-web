@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import { PATHS } from '~/common/enums'
-import { Form, Translate, ViewerContext } from '~/components'
+import { Form, Media, Translate, ViewerContext } from '~/components'
 import { ViewerTotalBlockCountQuery } from '~/gql/graphql'
 
 import ChangeUserNameAsk from './ChangeUserNameAsk'
@@ -19,7 +19,7 @@ const VIEWER_TOTAL_BLOCK_COUNT = gql`
   }
 `
 
-const AccountSettings = () => {
+const BaseAccountSettings = ({ spaceX = 'base' }: { spaceX?: 0 | 'base' }) => {
   const viewer = useContext(ViewerContext)
   const { data } = useQuery<ViewerTotalBlockCountQuery>(
     VIEWER_TOTAL_BLOCK_COUNT,
@@ -32,7 +32,7 @@ const AccountSettings = () => {
   const userPasswordEditable = !viewer.info.isWalletAuth
 
   return (
-    <Form.List groupName={<Translate id="settingsAccount" />}>
+    <Form.List groupName={<Translate id="settingsAccount" />} spacingX={spaceX}>
       <ChangeUserNameAsk>
         {({ openDialog }) => (
           <Form.List.Item
@@ -70,6 +70,19 @@ const AccountSettings = () => {
         rightText={totalBlockCount}
       />
     </Form.List>
+  )
+}
+
+const AccountSettings = () => {
+  return (
+    <>
+      <Media at="sm">
+        <BaseAccountSettings />
+      </Media>
+      <Media greaterThan="sm">
+        <BaseAccountSettings spaceX={0} />
+      </Media>
+    </>
   )
 }
 

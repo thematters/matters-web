@@ -1,12 +1,12 @@
-import { Form, IconInfo16, TextIcon, Translate } from '~/components'
+import { Form, IconInfo16, Media, TextIcon, Translate } from '~/components'
 
 import CurrencyConvertor from './CurrencyConvertor'
 import styles from './styles.css'
 import SwitchLanguage from './SwitchLanguage'
 
-const UISettings = () => {
+const BaseUISettings = ({ spaceX = 'base' }: { spaceX?: 0 | 'base' }) => {
   return (
-    <Form.List groupName={<Translate id="settingsUI" />}>
+    <Form.List groupName={<Translate id="settingsUI" />} spacingX={spaceX}>
       <SwitchLanguage />
       <CurrencyConvertor />
       <section className="rate-hint">
@@ -20,6 +20,19 @@ const UISettings = () => {
       </section>
       <style jsx>{styles}</style>
     </Form.List>
+  )
+}
+
+const UISettings = () => {
+  return (
+    <>
+      <Media at="sm">
+        <BaseUISettings />
+      </Media>
+      <Media greaterThan="sm">
+        <BaseUISettings spaceX={0} />
+      </Media>
+    </>
   )
 }
 

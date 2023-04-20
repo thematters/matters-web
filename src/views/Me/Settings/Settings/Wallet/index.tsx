@@ -11,6 +11,7 @@ import {
   Form,
   IconCopy16,
   LanguageContext,
+  Media,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -34,7 +35,7 @@ const VIEWER_LIKE_INFO = gql`
   }
 `
 
-const WalletSettings = () => {
+const BaseWalletSettings = ({ spaceX = 'base' }: { spaceX?: 0 | 'base' }) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
 
@@ -50,7 +51,7 @@ const WalletSettings = () => {
   const shortAddress = ethAddress ? maskAddress(ethAddress) : ''
 
   return (
-    <Form.List groupName={<Translate id="settingsWallet" />}>
+    <Form.List groupName={<Translate id="settingsWallet" />} spacingX={spaceX}>
       <Form.List.Item
         title="Liker ID"
         onClick={
@@ -100,6 +101,19 @@ const WalletSettings = () => {
 
       <style jsx>{styles}</style>
     </Form.List>
+  )
+}
+
+const WalletSettings = () => {
+  return (
+    <>
+      <Media at="sm">
+        <BaseWalletSettings />
+      </Media>
+      <Media greaterThan="sm">
+        <BaseWalletSettings spaceX={0} />
+      </Media>
+    </>
   )
 }
 

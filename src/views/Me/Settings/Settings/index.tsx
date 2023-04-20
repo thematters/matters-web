@@ -16,11 +16,8 @@ const Settings = () => {
   }
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
-      <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="settings" />}
-      />
+    <Layout.Main>
+      <Layout.Header left={<Layout.Header.Title id="settings" />} />
       <Head title={{ id: 'settings' }} />
 
       <UISettings />
