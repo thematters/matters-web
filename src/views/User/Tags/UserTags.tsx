@@ -160,7 +160,7 @@ const UserTags = () => {
             {edges.map(({ node: tag, cursor }, i) => (
               <List.Item key={cursor}>
                 <Card
-                  spacing={['base', 'base']}
+                  spacing={['base', 0]}
                   {...toPath({
                     page: 'tagDetail',
                     tag,
