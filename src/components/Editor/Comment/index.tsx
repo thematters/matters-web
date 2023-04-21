@@ -4,7 +4,6 @@
 
 // import { ADD_TOAST } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.comment.css'
-import themeStyles from '~/common/styles/vendors/quill.bubble.css'
 // import { LanguageContext } from '~/components'
 // import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 // import { SearchUsersQuery } from '~/gql/graphql'
@@ -50,7 +49,6 @@ const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
         texts={placeholder ? { COMMENT_PLACEHOLDER: placeholder } : {}}
       /> */}
 
-      <style jsx>{themeStyles}</style>
       <style jsx>{editorStyles}</style>
     </>
   )

@@ -8,8 +8,9 @@ import { LanguageContext } from '~/components'
 import { EditorDraftFragment } from '~/gql/graphql'
 
 import { mentionSuggestion } from './extensions'
-import MenuBar from './MenuBar'
+import { FloatingMenu } from './FloatingMenu'
 import styles from './styles.css'
+import globalStyles from './styles.global.css'
 import EditorSummary from './Summary'
 import EditorTitle from './Title'
 
@@ -93,13 +94,16 @@ const ArticleEditor: React.FC<Props> = ({
           enable
         />
 
-        {editor && <MenuBar editor={editor} />}
+        {editor && <FloatingMenu editor={editor} />}
 
         <EditorContent editor={editor} />
       </div>
 
-      <style jsx>{editorStyles}</style>
       <style jsx>{styles}</style>
+      <style jsx>{editorStyles}</style>
+      <style jsx global>
+        {globalStyles}
+      </style>
     </>
   )
 }
