@@ -47,7 +47,11 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
           className="expand-button"
           type="button"
           onClick={() => setExpand(!expand)}
-          // aria-label=
+          aria-label={translate({
+            zh_hant: expand ? '收起' : '展開',
+            zh_hans: expand ? '收起' : '展开',
+            en: expand ? 'Collapse' : 'Expand',
+          })}
         >
           {withIcon(IconEditorMenuAdd)({ size: 'lg' })}
         </button>

@@ -1,0 +1,17 @@
+.container {
+  @mixin border-grey;
+
+  position: relative;
+  padding: var(--spacing-x-tight) var(--spacing-base);
+  background: var(--color-white);
+  border-radius: var(--spacing-xx-tight);
+  box-shadow: var(--shadow-dark);
+
+  & :global(* + *) {
+    margin-left: var(--spacing-x-tight);
+  }
+
+  & .active {
+    color: var(--color-matters-green);
+  }
+}

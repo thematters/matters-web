@@ -6,6 +6,7 @@ import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 import { EditorDraftFragment } from '~/gql/graphql'
 
+import { BubbleMenu } from './BubbleMenu'
 import { mentionSuggestion } from './extensions'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.css'
@@ -67,11 +68,12 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
       update({ content })
     },
     mentionSuggestion,
+    extensions: [],
   })
 
   return (
     <>
-      <div className="container">
+      <div className="container" id="editor">
         <EditorTitle
           defaultValue={title || ''}
           readOnly={isTitleReadOnly}
@@ -85,6 +87,7 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
           enable
         />
 
+        {editor && <BubbleMenu editor={editor} />}
         {editor && <FloatingMenu editor={editor} upload={upload} />}
 
         <EditorContent editor={editor} />
