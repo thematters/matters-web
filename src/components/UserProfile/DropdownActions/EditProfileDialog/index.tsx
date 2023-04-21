@@ -23,7 +23,7 @@ const BaseEditProfileDialog = ({ user, children }: EditProfileDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} smBgColor="grey-lighter">
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent user={user} closeDialog={closeDialog} />
       </Dialog>
     </>
