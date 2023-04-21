@@ -125,21 +125,21 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         right={
           <>
             <span />
+            <section className="buttons">
+              <ShareButton
+                title={title}
+                tags={title.endsWith(tag.content) ? undefined : keywords}
+              />
 
-            <ShareButton
-              title={title}
-              tags={title.endsWith(tag.content) ? undefined : keywords}
-            />
-
-            <DropdownActions
-              isOwner={isOwner}
-              isEditor={isEditor}
-              isMaintainer={isMaintainer}
-              tag={tag}
-            />
+              <DropdownActions
+                isOwner={isOwner}
+                isEditor={isEditor}
+                isMaintainer={isMaintainer}
+                tag={tag}
+              />
+            </section>
           </>
         }
-        rightSpace
         mode="transparent-absolute"
       />
 
