@@ -1,20 +1,19 @@
 import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
 import { useContext } from 'react'
 
-import { ASSET_TYPE } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 import { EditorDraftFragment } from '~/gql/graphql'
 
 import { mentionSuggestion } from './extensions'
-import { FloatingMenu } from './FloatingMenu'
+import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.css'
 import globalStyles from './styles.global.css'
 import EditorSummary from './Summary'
 import EditorTitle from './Title'
 
-interface Props {
+type ArticleEditorProps = {
   draft: EditorDraftFragment
 
   isReviseMode?: boolean
@@ -27,17 +26,9 @@ interface Props {
     cover?: string | null
     summary?: string | null
   }) => Promise<void>
-  upload: (input: {
-    file?: any
-    url?: string
-    type?: ASSET_TYPE.embed | ASSET_TYPE.embedaudio
-  }) => Promise<{
-    id: string
-    path: string
-  }>
-}
+} & Pick<FloatingMenuProps, 'upload'>
 
-const ArticleEditor: React.FC<Props> = ({
+const ArticleEditor: React.FC<ArticleEditorProps> = ({
   draft,
 
   isReviseMode = false,
@@ -94,7 +85,7 @@ const ArticleEditor: React.FC<Props> = ({
           enable
         />
 
-        {editor && <FloatingMenu editor={editor} />}
+        {editor && <FloatingMenu editor={editor} upload={upload} />}
 
         <EditorContent editor={editor} />
       </div>

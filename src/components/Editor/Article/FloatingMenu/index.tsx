@@ -6,18 +6,25 @@ import classNames from 'classnames'
 import { useContext, useState } from 'react'
 
 import { ReactComponent as IconEditorMenuAdd } from '@/public/static/icons/32px/editor-menu-add.svg'
-import { ReactComponent as IconEditorMenuAudio } from '@/public/static/icons/32px/editor-menu-audio.svg'
 import { ReactComponent as IconEditorMenuCode } from '@/public/static/icons/32px/editor-menu-code.svg'
 import { ReactComponent as IconEditorMenuDivider } from '@/public/static/icons/32px/editor-menu-divider.svg'
-import { ReactComponent as IconEditorMenuImage } from '@/public/static/icons/32px/editor-menu-image.svg'
 import { ReactComponent as IconEditorMenuVideo } from '@/public/static/icons/32px/editor-menu-video.svg'
 import { translate } from '~/common/utils'
 import { LanguageContext, withIcon } from '~/components'
 
 import styles from './styles.css'
 import globalStyles from './styles.global.css'
+import UploadAudioButton from './UploadAudioButton'
+import UploadImageButton, { UploadImageButtonProps } from './UploadImageButton'
 
-export const FloatingMenu = ({ editor }: { editor: Editor }) => {
+export type FloatingMenuProps = {
+  editor: Editor
+} & Pick<UploadImageButtonProps, 'upload'>
+
+export const FloatingMenu: React.FC<FloatingMenuProps> = ({
+  editor,
+  upload,
+}) => {
   const { lang } = useContext(LanguageContext)
   const [expand, setExpand] = useState(false)
 
@@ -47,18 +54,8 @@ export const FloatingMenu = ({ editor }: { editor: Editor }) => {
 
         {expand && (
           <div className="menu-items">
-            <button
-              onClick={() => alert('image')}
-              type="button"
-              aria-label={translate({
-                zh_hant: '插入圖片',
-                zh_hans: '插入图片',
-                en: 'Insert image',
-                lang,
-              })}
-            >
-              {withIcon(IconEditorMenuImage)({ size: 'lg' })}
-            </button>
+            <UploadImageButton editor={editor} upload={upload} />
+
             <button
               onClick={() => alert('video')}
               type="button"
@@ -71,6 +68,7 @@ export const FloatingMenu = ({ editor }: { editor: Editor }) => {
             >
               {withIcon(IconEditorMenuVideo)({ size: 'lg' })}
             </button>
+
             <button
               onClick={() => alert('code')}
               type="button"
@@ -83,6 +81,7 @@ export const FloatingMenu = ({ editor }: { editor: Editor }) => {
             >
               {withIcon(IconEditorMenuCode)({ size: 'lg' })}
             </button>
+
             <button
               // @ts-ignore
               onClick={() => editor.chain().focus().setHorizontalRule().run()}
@@ -96,18 +95,8 @@ export const FloatingMenu = ({ editor }: { editor: Editor }) => {
             >
               {withIcon(IconEditorMenuDivider)({ size: 'lg' })}
             </button>
-            <button
-              onClick={() => alert('audio')}
-              type="button"
-              aria-label={translate({
-                zh_hant: '插入音訊',
-                zh_hans: '插入音频',
-                en: 'Insert audio',
-                lang,
-              })}
-            >
-              {withIcon(IconEditorMenuAudio)({ size: 'lg' })}
-            </button>
+
+            <UploadAudioButton editor={editor} upload={upload} />
           </div>
         )}
 
