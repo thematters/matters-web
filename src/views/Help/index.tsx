@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { GUIDE_LINKS, PATHS } from '~/common/enums'
+import { EXTERNAL_LINKS, GUIDE_LINKS, PATHS } from '~/common/enums'
 import { Form, LanguageContext, Layout, Media } from '~/components'
 
 import styles from './styles.css'
