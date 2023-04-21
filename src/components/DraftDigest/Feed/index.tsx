@@ -44,7 +44,7 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
   })
 
   const FeedCard = ({ space }: { space: 0 | 'base' }) => (
-    <Card {...path} spacing={['base', space]}>
+    <Card {...path} spacing={['base', space]} bgActiveColor="none">
       <LinkWrapper {...path} textActiveColor="green">
         <Title type="feed" is="h2">
           {title || <Translate id="untitle" />}

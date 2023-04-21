@@ -80,6 +80,7 @@ const Rich = ({
         spacing={['tight', 'tight']}
         {...cardProps}
         testId={TEST_ID.DIGEST_USER_RICH}
+        bgActiveColor="none"
       >
         <section className={containerClasses}>
           <span className="avatar">
@@ -110,6 +111,7 @@ const Rich = ({
       spacing={['tight', 'tight']}
       {...cardProps}
       testId={TEST_ID.DIGEST_USER_RICH}
+      bgActiveColor="none"
     >
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>

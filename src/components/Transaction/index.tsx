@@ -89,7 +89,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
     : null
 
   return (
-    <Card {...path} spacing={[0, 0]}>
+    <Card {...path} spacing={[0, 0]} bgActiveColor="none">
       <section
         className="container"
         data-test-id={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM}

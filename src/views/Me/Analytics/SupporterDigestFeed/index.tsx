@@ -23,7 +23,7 @@ const SupporterDigestFeed = ({
     userName,
   })
   return (
-    <Card {...path} spacing={[0, 0]}>
+    <Card {...path} spacing={[0, 0]} bgActiveColor="none">
       <section className="container">
         <span className="number">{index + 1}</span>
         <section className="supporter">

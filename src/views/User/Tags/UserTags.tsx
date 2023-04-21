@@ -165,6 +165,7 @@ const UserTags = () => {
                     page: 'tagDetail',
                     tag,
                   })}
+                  bgActiveColor="none"
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: 'user_tag',

@@ -79,6 +79,7 @@ const BaseArticleDigestFeed = ({
       spacing={['base', space]}
       onClick={onClick}
       testId={TEST_ID.DIGEST_ARTICLE_FEED}
+      bgActiveColor="none"
       is={is}
     >
       {header ||
