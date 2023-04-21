@@ -49,7 +49,3 @@ header {
     flex-grow: 1;
   }
 }
-
-.rightSpace {
-  margin-right: var(--spacing-base);
-}

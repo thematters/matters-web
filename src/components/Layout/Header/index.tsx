@@ -11,7 +11,6 @@ import Title from './Title'
 interface HeaderProps {
   left?: React.ReactNode
   right?: React.ReactNode
-  rightSpace?: boolean
 
   mode?: 'solid-fixed' | 'transparent-absolute'
   className?: string
@@ -22,7 +21,7 @@ const Header: React.FC<HeaderProps> & {
   CancelButton: typeof CancelButton
   MeButton: typeof MeButton
   Title: typeof Title
-} = ({ left, right, rightSpace, mode = 'solid-fixed', className }) => {
+} = ({ left, right, mode = 'solid-fixed', className }) => {
   const headerClasses = classNames({
     [mode]: true,
     [`${className}`]: !!className,
@@ -30,7 +29,6 @@ const Header: React.FC<HeaderProps> & {
 
   const rightClasses = classNames({
     right: true,
-    rightSpace: !!rightSpace,
   })
 
   return (
