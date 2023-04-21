@@ -122,7 +122,16 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
   })
 
   return (
-    <label className={labelClasses} htmlFor={fieldId}>
+    <label
+      className={labelClasses}
+      htmlFor={fieldId}
+      title={translate({
+        zh_hant: '插入音訊',
+        zh_hans: '插入音频',
+        en: 'Insert audio',
+        lang,
+      })}
+    >
       {!uploading && withIcon(IconEditorMenuAudio)({ size: 'lg' })}
       {uploading && <IconSpinner16 size="lg" color="grey-light" />}
 

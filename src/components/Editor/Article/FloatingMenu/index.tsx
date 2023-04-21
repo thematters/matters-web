@@ -57,8 +57,20 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
             <UploadImageButton editor={editor} upload={upload} />
 
             <button
-              onClick={() => alert('video')}
+              onClick={() => {
+                const url = prompt('Enter YouTube, Vimeo or Bilibili URL')
+
+                if (url) {
+                  editor.chain().focus().setFigureEmbed({ src: url }).run()
+                }
+              }}
               type="button"
+              title={translate({
+                zh_hant: '插入影片',
+                zh_hans: '插入视频',
+                en: 'Insert video',
+                lang,
+              })}
               aria-label={translate({
                 zh_hant: '插入影片',
                 zh_hans: '插入视频',
@@ -70,8 +82,20 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
             </button>
 
             <button
-              onClick={() => alert('code')}
+              onClick={() => {
+                const url = prompt('Enter JSFiddle or CodePen URL')
+
+                if (url) {
+                  editor.chain().focus().setFigureEmbed({ src: url }).run()
+                }
+              }}
               type="button"
+              title={translate({
+                zh_hant: '插入程式碼',
+                zh_hans: '插入代码',
+                en: 'Insert code',
+                lang,
+              })}
               aria-label={translate({
                 zh_hant: '插入程式碼',
                 zh_hans: '插入代码',
@@ -86,6 +110,12 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               // @ts-ignore
               onClick={() => editor.chain().focus().setHorizontalRule().run()}
               type="button"
+              title={translate({
+                zh_hant: '插入分隔線',
+                zh_hans: '插入分隔线',
+                en: 'Insert divider',
+                lang,
+              })}
               aria-label={translate({
                 zh_hant: '插入分隔線',
                 zh_hans: '插入分隔线',
