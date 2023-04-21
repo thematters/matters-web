@@ -14,7 +14,6 @@ import {
   FollowUserButton,
   IconRss32,
   Layout,
-  Media,
   RssFeedDialog,
   Spinner,
   Throw404,
@@ -104,34 +103,29 @@ export const UserProfile = () => {
   /**
    * Render
    */
-  const Right = () => (
-    <>
-      <span />
-      {user && (
-        <section className="buttons">
-          <ShareButton
-            tags={[user.displayName, user.userName].filter(Boolean) as string[]}
-          />
-          <DropdownActions user={user} isMe={isMe} />
-          <style jsx>{styles}</style>
-        </section>
-      )}
-    </>
-  )
   const LayoutHeader = () => (
     <>
-      <Media at="sm">
-        {' '}
-        <Layout.Header right={<Right />} mode="transparent-absolute" />
-      </Media>
-      <Media greaterThan="sm">
-        {' '}
-        <Layout.Header
-          right={<Right />}
-          rightSpace
-          mode="transparent-absolute"
-        />
-      </Media>
+      <Layout.Header
+        right={
+          <>
+            <span />
+            {user && (
+              <section className="buttons">
+                <ShareButton
+                  tags={
+                    [user.displayName, user.userName].filter(
+                      Boolean
+                    ) as string[]
+                  }
+                />
+                <DropdownActions user={user} isMe={isMe} />
+                <style jsx>{styles}</style>
+              </section>
+            )}
+          </>
+        }
+        mode="transparent-absolute"
+      />
     </>
   )
 
