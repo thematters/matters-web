@@ -29,6 +29,11 @@
     margin-right: 0;
     margin-left: 0;
 
+    @media (--sm-up) {
+      margin-right: 1rem;
+      margin-left: 1rem;
+    }
+
     & :global(.input-container) {
       margin: 0;
     }
