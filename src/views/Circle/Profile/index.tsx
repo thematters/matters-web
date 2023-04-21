@@ -11,6 +11,7 @@ import {
   Expandable,
   Head,
   Layout,
+  Media,
   Spinner,
   SubscribeCircleDialog,
   Throw404,
@@ -91,6 +92,28 @@ const CircleProfile = () => {
   /**
    * Render
    */
+
+  const Right = () => (
+    <>
+      <span />
+      {circle && (
+        <section className="buttons">
+          <ShareButton
+            tags={
+              [
+                circle.displayName,
+                circle.name,
+                circle.owner.displayName,
+                // circle.owner.userName,
+              ].filter(Boolean) as string[]
+            }
+          />
+          <DropdownActions circle={circle} />
+          <style jsx>{styles}</style>
+        </section>
+      )}
+    </>
+  )
   const LayoutHeader = () => (
     <>
       {circle && (
@@ -121,31 +144,16 @@ const CircleProfile = () => {
           }}
         />
       )}
-      <Layout.Header
-        right={
-          <>
-            <span />
-            {circle && (
-              <section className="buttons">
-                <ShareButton
-                  tags={
-                    [
-                      circle.displayName,
-                      circle.name,
-                      circle.owner.displayName,
-                      // circle.owner.userName,
-                    ].filter(Boolean) as string[]
-                  }
-                />
-                <DropdownActions circle={circle} />
-                <style jsx>{styles}</style>
-              </section>
-            )}
-          </>
-        }
-        rightSpace
-        mode="transparent-absolute"
-      />
+      <Media at="sm">
+        <Layout.Header right={<Right />} mode="transparent-absolute" />
+      </Media>
+      <Media greaterThan="sm">
+        <Layout.Header
+          right={<Right />}
+          rightSpace
+          mode="transparent-absolute"
+        />
+      </Media>
     </>
   )
 
