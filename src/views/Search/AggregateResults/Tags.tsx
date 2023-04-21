@@ -121,6 +121,7 @@ const AggregateTagResults = () => {
                       page: 'tagDetail',
                       tag: node,
                     })}
+                    bgActiveColor="none"
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'search_tag',

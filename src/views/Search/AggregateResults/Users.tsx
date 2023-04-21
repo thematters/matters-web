@@ -121,6 +121,7 @@ const AggregateUserResults = () => {
                     page: 'userProfile',
                     userName: node.userName || '',
                   })}
+                  bgActiveColor="none"
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: 'search_user',
