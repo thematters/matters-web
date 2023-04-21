@@ -1,6 +1,10 @@
 .buttons {
   display: inline-flex;
 
+  @media (--sm-up) {
+    padding-right: var(--spacing-base);
+  }
+
   & :global(> * + *) {
     margin-left: var(--spacing-base);
   }

@@ -11,7 +11,6 @@ import {
   Expandable,
   Head,
   Layout,
-  Media,
   Spinner,
   SubscribeCircleDialog,
   Throw404,
@@ -144,16 +143,7 @@ const CircleProfile = () => {
           }}
         />
       )}
-      <Media at="sm">
-        <Layout.Header right={<Right />} mode="transparent-absolute" />
-      </Media>
-      <Media greaterThan="sm">
-        <Layout.Header
-          right={<Right />}
-          rightSpace
-          mode="transparent-absolute"
-        />
-      </Media>
+      <Layout.Header right={<Right />} mode="transparent-absolute" />
     </>
   )
 
