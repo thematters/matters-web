@@ -233,7 +233,7 @@ const UserArticles = () => {
               <ArticleDigestFeed
                 article={node}
                 inUserArticles
-                showAuthor={false}
+                hasAuthor={false}
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: 'user_article',

@@ -28,7 +28,7 @@ export type ArticleDigestFeedControls = {
   isConciseFooter?: boolean
   hasFollow?: boolean
   hasCircle?: boolean
-  showAuthor?: boolean
+  hasAuthor?: boolean
 }
 
 export type ArticleDigestFeedProps = {
@@ -48,7 +48,7 @@ const BaseArticleDigestFeed = ({
   isConciseFooter = false,
   hasFollow,
   hasCircle = true,
-  showAuthor = true,
+  hasAuthor = true,
   onClick,
   onClickAuthor,
 
@@ -94,7 +94,7 @@ const BaseArticleDigestFeed = ({
             <ArticleDigestTitle article={article} textSize="xm" />
           </section>
 
-          {showAuthor && (
+          {hasAuthor && (
             <section className="author">
               <UserDigest.Mini
                 user={author}
