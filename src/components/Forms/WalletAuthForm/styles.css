@@ -1,3 +1,11 @@
+.container {
+  padding: 0 var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
+}
+
 /* Select.tsx */
 .msg {
   margin: var(--spacing-x-tight) 0 var(--spacing-base) var(--spacing-base);
