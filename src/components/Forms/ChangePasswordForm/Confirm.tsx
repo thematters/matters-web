@@ -23,7 +23,7 @@ import {
   ResetPasswordMutation,
 } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from '../styles.css'
 
 interface FormProps {
   email: string

@@ -14,7 +14,7 @@ import {
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from '../styles.css'
 
 interface FormProps {
   defaultEmail?: string
