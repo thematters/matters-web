@@ -1,19 +1,21 @@
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Form, Head, Layout, Media, Spacer, useRoute } from '~/components'
+import { Form, Head, Layout, Spacer, useRoute } from '~/components'
 
-const BaseSettings = ({ spacingX }: { spacingX: 0 | 'base' }) => {
+import styles from './styles.css'
+
+const BaseSettings = () => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
   return (
-    <>
+    <section className="container">
       <Form.List
         groupName={
           <FormattedMessage defaultMessage="Settings" description="" />
         }
-        spacingX={spacingX}
+        spacingX={0}
       >
         <Form.List.Item
           title={
@@ -26,7 +28,6 @@ const BaseSettings = ({ spacingX }: { spacingX: 0 | 'base' }) => {
           role="link"
         />
       </Form.List>
-
       <Form.List
         groupName={
           <FormattedMessage
@@ -34,7 +35,7 @@ const BaseSettings = ({ spacingX }: { spacingX: 0 | 'base' }) => {
             description="src/views/Circle/Settings/index.tsx"
           />
         }
-        spacingX={spacingX}
+        spacingX={0}
       >
         <Form.List.Item
           title={
@@ -47,9 +48,9 @@ const BaseSettings = ({ spacingX }: { spacingX: 0 | 'base' }) => {
           role="link"
         />
       </Form.List>
-
       <Spacer size="xxxloose" />
-    </>
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 
@@ -59,12 +60,7 @@ const Settings = () => {
       <Layout.Header left={<Layout.Header.Title id="manageCircle" />} />
 
       <Head title={{ id: 'manageCircle' }} />
-      <Media at="sm">
-        <BaseSettings spacingX="base" />
-      </Media>
-      <Media greaterThan="sm">
-        <BaseSettings spacingX={0} />
-      </Media>
+      <BaseSettings />
     </Layout.Main>
   )
 }
