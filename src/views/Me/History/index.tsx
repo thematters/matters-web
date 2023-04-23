@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
+  Button,
   EmptyHistory,
   Head,
   InfiniteScroll,
@@ -11,8 +12,11 @@ import {
   List,
   QueryError,
   Spinner,
+  TextIcon,
+  Translate,
+  useMutation,
 } from '~/components'
-import { MeHistoryFeedQuery } from '~/gql/graphql'
+import { ClearReadHistoryMutation, MeHistoryFeedQuery } from '~/gql/graphql'
 
 const ME_HISTORY_FEED = gql`
   query MeHistoryFeed($after: String) {
@@ -42,23 +46,56 @@ const ME_HISTORY_FEED = gql`
   ${ArticleDigestFeed.fragments.article.private}
 `
 
+const CLEAR_READ_HISTORY = gql`
+  mutation ClearReadHistory($id: ID!) {
+    clearReadHistory(input: { id: $id })
+  }
+`
+
 const BaseMeHistory = () => {
   const { data, loading, error, fetchMore } =
     useQuery<MeHistoryFeedQuery>(ME_HISTORY_FEED)
 
+  const [clear] = useMutation<ClearReadHistoryMutation>(
+    CLEAR_READ_HISTORY,
+    undefined,
+    {
+      showToast: false,
+    }
+  )
+
+  const handlerClear = async () => {
+    await clear({ variables: { input: { id: data?.viewer?.id } } })
+  }
+
   if (loading) {
-    return <Spinner />
+    return (
+      <>
+        <Layout.Header left={<Layout.Header.Title id="readHistory" />} />
+        <Spinner />
+      </>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <>
+        <Layout.Header left={<Layout.Header.Title id="readHistory" />} />
+        <QueryError error={error} />
+      </>
+    )
   }
 
   const connectionPath = 'viewer.activity.history'
   const { edges, pageInfo } = data?.viewer?.activity.history || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyHistory />
+    return (
+      <>
+        <Layout.Header left={<Layout.Header.Title id="readHistory" />} />
+        <EmptyHistory />
+      </>
+    )
   }
 
   const loadMore = () => {
@@ -78,40 +115,57 @@ const BaseMeHistory = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List>
-        {edges.map(({ node, cursor }, i) => (
-          <List.Item key={cursor}>
-            <ArticleDigestFeed
-              article={node.article}
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: 'read_history',
-                  contentType: 'article',
-                  location: i,
-                  id: node.article.id,
-                })
-              }
-              onClickAuthor={() => {
-                analytics.trackEvent('click_feed', {
-                  type: 'read_history',
-                  contentType: 'user',
-                  location: i,
-                  id: node.article.author.id,
-                })
-              }}
-            />
-          </List.Item>
-        ))}
-      </List>
-    </InfiniteScroll>
+    <>
+      <Layout.Header
+        right={
+          <>
+            <Layout.Header.Title id="readHistory" />
+            <Button
+              bgColor="green"
+              spacing={['xtight', 'base']}
+              onClick={handlerClear}
+            >
+              <TextIcon color="white" size="md-s" weight="md">
+                <Translate id="clear" />
+              </TextIcon>
+            </Button>
+          </>
+        }
+      />
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <List>
+          {edges.map(({ node, cursor }, i) => (
+            <List.Item key={cursor}>
+              <ArticleDigestFeed
+                article={node.article}
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'read_history',
+                    contentType: 'article',
+                    location: i,
+
+                    id: node.article.id,
+                  })
+                }
+                onClickAuthor={() => {
+                  analytics.trackEvent('click_feed', {
+                    type: 'read_history',
+                    contentType: 'user',
+                    location: i,
+                    id: node.article.author.id,
+                  })
+                }}
+              />
+            </List.Item>
+          ))}
+        </List>
+      </InfiniteScroll>
+    </>
   )
 }
 
 const MeHistory = () => (
   <Layout.Main>
-    <Layout.Header left={<Layout.Header.Title id="readHistory" />} />
-
     <Head title={{ id: 'readHistory' }} />
 
     <BaseMeHistory />
