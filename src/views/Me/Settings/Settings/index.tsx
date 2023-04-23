@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { Head, Layout, Spacer, ViewerContext } from '~/components'
+import { FormWrapper, Head, Layout, Spacer, ViewerContext } from '~/components'
 
 // import { redirectToLogin } from '~/common/utils'
 import AnonymousSettings from '../AnonymousSettings'
@@ -20,9 +20,11 @@ const Settings = () => {
       <Layout.Header left={<Layout.Header.Title id="settings" />} />
       <Head title={{ id: 'settings' }} />
 
-      <UISettings />
-      <AccountSettings />
-      <WalletSettings />
+      <FormWrapper>
+        <UISettings />
+        <AccountSettings />
+        <WalletSettings />
+      </FormWrapper>
 
       <Spacer size="xxxloose" />
     </Layout.Main>
