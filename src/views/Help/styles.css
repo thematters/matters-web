@@ -1,12 +1,7 @@
 footer {
-  margin: var(--spacing-loose) var(--spacing-base);
+  margin: var(--spacing-loose) 0;
   font-size: var(--font-size-sm);
   color: var(--color-grey-dark);
-
-  @media (--sm-up) {
-    margin-right: 0;
-    margin-left: 0;
-  }
 
   & p {
     margin-bottom: var(--spacing-x-tight);
