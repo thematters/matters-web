@@ -11,9 +11,9 @@ import {
 import {
   Button,
   Form,
+  FormWrapper,
   Head,
   Layout,
-  Media,
   Spinner,
   TextIcon,
   Translate,
@@ -121,23 +121,14 @@ const Wallet = () => {
         </WagmiProvider>
       </section>
 
-      <Media at="sm">
-        <Form.List>
-          {hasPaymentPassword && <PaymentPassword />}
-          <ViewStripeCustomerPortal />
-          {hasStripeAccount && <ViewStripeAccount />}
-          <PaymentPointer />
-        </Form.List>
-      </Media>
-
-      <Media greaterThan="sm">
+      <FormWrapper>
         <Form.List spacingX={0}>
           {hasPaymentPassword && <PaymentPassword />}
           <ViewStripeCustomerPortal />
           {hasStripeAccount && <ViewStripeAccount />}
           <PaymentPointer />
         </Form.List>
-      </Media>
+      </FormWrapper>
 
       <style jsx>{styles}</style>
     </Layout.Main>
