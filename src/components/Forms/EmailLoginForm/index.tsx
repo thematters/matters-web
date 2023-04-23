@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
@@ -161,52 +162,60 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     },
   })
 
+  const containerClasses = classNames({ container: !!isInPage })
+
   const InnerForm = (
-    <Form id={formId} onSubmit={handleSubmit}>
-      <Form.Input
-        label={<FormattedMessage defaultMessage="Email" description="" />}
-        type="email"
-        name="email"
-        required
-        placeholder={intl.formatMessage({
-          defaultMessage: 'Enter Email',
-          description: '',
-        })}
-        value={values.email}
-        error={touched.email && errors.email}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+    <section className={containerClasses}>
+      <Form id={formId} onSubmit={handleSubmit}>
+        <Form.Input
+          label={<FormattedMessage defaultMessage="Email" description="" />}
+          type="email"
+          name="email"
+          required
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Enter Email',
+            description: '',
+          })}
+          value={values.email}
+          error={touched.email && errors.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
 
-      <Form.Input
-        label={<FormattedMessage defaultMessage="Password" description="" />}
-        type="password"
-        name="password"
-        required
-        placeholder={intl.formatMessage({
-          defaultMessage: 'Enter Password',
-          description: 'src/components/Forms/EmailLoginForm/index.tsx',
-        })}
-        value={values.password}
-        error={touched.password && errors.password}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        extraButton={
-          <>
-            {isInDialog && gotoResetPassword && (
-              <PasswordResetDialogButton
-                gotoResetPassword={gotoResetPassword}
-              />
-            )}
-            {isInPage && <PasswordResetRedirectButton />}
-          </>
-        }
-      />
+        <Form.Input
+          label={<FormattedMessage defaultMessage="Password" description="" />}
+          type="password"
+          name="password"
+          required
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Enter Password',
+            description: 'src/components/Forms/EmailLoginForm/index.tsx',
+          })}
+          value={values.password}
+          error={touched.password && errors.password}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          extraButton={
+            <>
+              {isInDialog && gotoResetPassword && (
+                <PasswordResetDialogButton
+                  gotoResetPassword={gotoResetPassword}
+                />
+              )}
+              {isInPage && <PasswordResetRedirectButton />}
+            </>
+          }
+        />
 
-      {gotoEmailSignUp && (
-        <EmailSignUpDialogButton gotoEmailSignUp={gotoEmailSignUp} />
-      )}
-    </Form>
+        {gotoEmailSignUp && (
+          <EmailSignUpDialogButton
+            gotoEmailSignUp={gotoEmailSignUp}
+            isInPage={isInPage}
+          />
+        )}
+      </Form>
+      <style jsx>{styles}</style>
+    </section>
   )
 
   const SubmitButton = (
@@ -223,7 +232,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton onClick={back} />}
           right={
             <>
               <Layout.Header.Title id="login" />
