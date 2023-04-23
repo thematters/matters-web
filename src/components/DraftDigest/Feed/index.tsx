@@ -5,8 +5,8 @@ import { toPath } from '~/common/utils'
 import {
   Card,
   DateTime,
+  FormWrapper,
   LinkWrapper,
-  Media,
   Title,
   Translate,
 } from '~/components'
@@ -43,38 +43,29 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
     id,
   })
 
-  const FeedCard = ({ space }: { space: 0 | 'base' }) => (
-    <Card {...path} spacing={['base', space]} bgActiveColor="none">
-      <LinkWrapper {...path} textActiveColor="green">
-        <Title type="feed" is="h2">
-          {title || <Translate id="untitle" />}
-        </Title>
-      </LinkWrapper>
-
-      <footer>
-        <section className="left">
-          <EditButton draft={draft} />
-          <DeleteButton draft={draft} />
-        </section>
-
-        <section className="right">
-          <DateTime date={updatedAt} type="relative" />
-        </section>
-      </footer>
-
-      <style jsx>{styles}</style>
-    </Card>
-  )
-
   return (
-    <>
-      <Media at="sm">
-        <FeedCard space={'base'} />
-      </Media>
-      <Media greaterThan="sm">
-        <FeedCard space={0} />
-      </Media>
-    </>
+    <FormWrapper>
+      <Card {...path} spacing={['base', 0]} bgActiveColor="none">
+        <LinkWrapper {...path} textActiveColor="green">
+          <Title type="feed" is="h2">
+            {title || <Translate id="untitle" />}
+          </Title>
+        </LinkWrapper>
+
+        <footer>
+          <section className="left">
+            <EditButton draft={draft} />
+            <DeleteButton draft={draft} />
+          </section>
+
+          <section className="right">
+            <DateTime date={updatedAt} type="relative" />
+          </section>
+        </footer>
+
+        <style jsx>{styles}</style>
+      </Card>
+    </FormWrapper>
   )
 }
 
