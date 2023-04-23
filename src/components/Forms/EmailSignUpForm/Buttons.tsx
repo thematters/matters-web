@@ -4,10 +4,12 @@ import { Form } from '~/components'
 
 export const EmailLoginButton = ({
   gotoEmailLogin,
+  isInPage,
 }: {
   gotoEmailLogin: () => void
+  isInPage: boolean
 }) => (
-  <Form.List spacingY="xloose">
+  <Form.List spacingY="xloose" spacingX={isInPage ? 0 : 'base'}>
     <Form.List.Item
       title={
         <FormattedMessage
