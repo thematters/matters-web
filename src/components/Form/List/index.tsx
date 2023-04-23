@@ -26,14 +26,18 @@ const List: React.FC<React.PropsWithChildren<ListProps>> & {
   forceGreyStyle,
   children,
 }) => {
+  const groupClasses = classNames({
+    group: true,
+    [`spacing-x-${spacingX}`]: !!spacingX,
+  })
+
   const listClasses = classNames({
     grey: forceGreyStyle,
-    [`spacing-x-${spacingX}`]: !!spacingX,
     [`spacing-y-${spacingY}`]: !!spacingY,
   })
 
   return (
-    <section className="group">
+    <section className={groupClasses}>
       {groupName && <h4 className="name">{groupName}</h4>}
 
       <ul className={listClasses} role="list">
