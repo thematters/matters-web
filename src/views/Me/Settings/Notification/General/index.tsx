@@ -1,7 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Head, Layout, Spacer, Spinner, useMutation } from '~/components'
+import {
+  FormWrapper,
+  Head,
+  Layout,
+  Spacer,
+  Spinner,
+  useMutation,
+} from '~/components'
 import {
   UpdateViewerNotificationGeneralMutation,
   ViewerNotificationGeneralSettingsQuery,
@@ -93,11 +100,11 @@ const BaseNotificationSettings = () => {
     })
   }
   return (
-    <>
+    <FormWrapper>
       <MeSettings toggle={toggle} settings={settings} />
       <ArticleSettings toggle={toggle} settings={settings} />
       <CommentSettings toggle={toggle} settings={settings} />
-    </>
+    </FormWrapper>
   )
 }
 

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import { translate } from '~/common/utils'
-import { Form, LanguageContext, Media, Switch, Translate } from '~/components'
+import { Form, LanguageContext, Switch, Translate } from '~/components'
 import { ViewerNotificationGeneralSettingsQuery } from '~/gql/graphql'
 
 type NotificationType = NonNullable<
@@ -13,10 +13,9 @@ type NotificationType = NonNullable<
 interface CommentProps {
   settings: NotificationType
   toggle: (type: keyof NotificationType) => void
-  spacingX?: 0 | 'base'
 }
 
-const BaseComment = ({ settings, toggle, spacingX = 'base' }: CommentProps) => {
+const Comment = ({ settings, toggle }: CommentProps) => {
   const { lang } = useContext(LanguageContext)
   const newComment = translate({
     zh_hant: '評論和回覆',
@@ -34,7 +33,7 @@ const BaseComment = ({ settings, toggle, spacingX = 'base' }: CommentProps) => {
   return (
     <Form.List
       groupName={<Translate zh_hant="評論" zh_hans="评论" en="Comment" />}
-      spacingX={spacingX}
+      spacingX={0}
     >
       <Form.List.Item
         title={newComment}
@@ -59,19 +58,6 @@ const BaseComment = ({ settings, toggle, spacingX = 'base' }: CommentProps) => {
         }
       />
     </Form.List>
-  )
-}
-
-const Comment = ({ settings, toggle }: CommentProps) => {
-  return (
-    <>
-      <Media at="sm">
-        <BaseComment settings={settings} toggle={toggle} />
-      </Media>
-      <Media greaterThan="sm">
-        <BaseComment settings={settings} toggle={toggle} spacingX={0} />
-      </Media>
-    </>
   )
 }
 

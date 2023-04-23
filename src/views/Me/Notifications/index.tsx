@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { mergeConnections } from '~/common/utils'
 import {
   EmptyNotice,
+  FormWrapper,
   Head,
   InfiniteScroll,
   Layout,
@@ -49,7 +50,7 @@ const MARK_ALL_NOTICES_AS_READ = gql`
   }
 `
 
-const BaseNotifications = ({ space }: { space: 0 | 'base' }) => {
+const BaseNotifications = () => {
   const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsReadMutation>(
     MARK_ALL_NOTICES_AS_READ,
     {
@@ -91,13 +92,15 @@ const BaseNotifications = ({ space }: { space: 0 | 'base' }) => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List spacing={['xloose', space]}>
-        {edges.map(({ node, cursor }) => (
-          <List.Item key={cursor}>
-            <Notice notice={node} />
-          </List.Item>
-        ))}
-      </List>
+      <FormWrapper>
+        <List spacing={['xloose', 0]}>
+          {edges.map(({ node, cursor }) => (
+            <List.Item key={cursor}>
+              <Notice notice={node} />
+            </List.Item>
+          ))}
+        </List>
+      </FormWrapper>
     </InfiniteScroll>
   )
 }
@@ -116,13 +119,7 @@ const Notifications = () => {
       </Media>
 
       <Head title={{ id: 'notifications' }} />
-
-      <Media at="sm">
-        <BaseNotifications space={'base'} />
-      </Media>
-      <Media greaterThan="sm">
-        <BaseNotifications space={0} />
-      </Media>
+      <BaseNotifications />
     </Layout.Main>
   )
 }

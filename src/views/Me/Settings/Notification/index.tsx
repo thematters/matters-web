@@ -4,9 +4,9 @@ import gql from 'graphql-tag'
 import { PATHS } from '~/common/enums'
 import {
   Form,
+  FormWrapper,
   Head,
   Layout,
-  Media,
   Spinner,
   Translate,
   useMutation,
@@ -50,11 +50,7 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
   }
 `
 
-const BaseNotificationSettings = ({
-  spaceX = 'base',
-}: {
-  spaceX?: 0 | 'base'
-}) => {
+const BaseNotificationSettings = () => {
   const [update] = useMutation<UpdateViewerNotificationMutation>(
     UPDATE_VIEWER_NOTIFICATION
   )
@@ -93,13 +89,13 @@ const BaseNotificationSettings = ({
   }
 
   return (
-    <>
+    <FormWrapper>
       <PreferenceSettings toggle={toggle} settings={settings} />
       <Form.List
         groupName={
           <Translate zh_hant="站內通知" zh_hans="站内通知" en="Site" />
         }
-        spacingX={spaceX}
+        spacingX={0}
       >
         <Form.List.Item
           role="link"
@@ -112,7 +108,7 @@ const BaseNotificationSettings = ({
           href={PATHS.ME_SETTINGS_NOTIFICATION_CIRCLE}
         />
       </Form.List>
-    </>
+    </FormWrapper>
   )
 }
 
@@ -122,12 +118,7 @@ const NotificationSettings = () => (
 
     <Head title={{ id: 'settingsNotification' }} />
 
-    <Media at="sm">
-      <BaseNotificationSettings />
-    </Media>
-    <Media greaterThan="sm">
-      <BaseNotificationSettings spaceX={0} />
-    </Media>
+    <BaseNotificationSettings />
   </Layout.Main>
 )
 

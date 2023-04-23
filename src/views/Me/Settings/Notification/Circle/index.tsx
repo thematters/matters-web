@@ -2,9 +2,9 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
+  FormWrapper,
   Head,
   Layout,
-  Media,
   Spacer,
   Spinner,
   Translate,
@@ -118,7 +118,7 @@ const BaseNotificationSettings = ({
   }
 
   return (
-    <>
+    <FormWrapper>
       <div className="title">
         <h2>
           {' '}
@@ -177,7 +177,7 @@ const BaseNotificationSettings = ({
         spacingX={spacingX}
       />
       <style jsx>{styles}</style>
-    </>
+    </FormWrapper>
   )
 }
 
@@ -189,13 +189,7 @@ const NotificationCircleSettings = () => (
 
     <Head title={{ id: 'settingsNotificationCircle' }} />
 
-    <Media at="sm">
-      <BaseNotificationSettings />
-    </Media>
-
-    <Media greaterThan="sm">
-      <BaseNotificationSettings spacingX={0} />
-    </Media>
+    <BaseNotificationSettings spacingX={0} />
 
     <Spacer size="xxxloose" />
   </Layout.Main>
