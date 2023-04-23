@@ -7,8 +7,8 @@ import {
   CardProps,
   CircleDigest,
   DateTime,
-  FormWrapper,
   ResponsiveImage,
+  ResponsiveWrapper,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
@@ -74,7 +74,7 @@ const BaseArticleDigestFeed = ({
   })
 
   return (
-    <FormWrapper>
+    <ResponsiveWrapper>
       <Card
         {...path}
         spacing={['base', 0]}
@@ -129,7 +129,7 @@ const BaseArticleDigestFeed = ({
         )}
         <style jsx>{styles}</style>
       </Card>
-    </FormWrapper>
+    </ResponsiveWrapper>
   )
 }
 

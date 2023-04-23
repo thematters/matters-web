@@ -5,13 +5,13 @@ import { useEffect } from 'react'
 import { mergeConnections } from '~/common/utils'
 import {
   EmptyNotice,
-  FormWrapper,
   Head,
   InfiniteScroll,
   Layout,
   List,
   Media,
   Notice,
+  ResponsiveWrapper,
   Spacer,
   Spinner,
   useMutation,
@@ -92,7 +92,7 @@ const BaseNotifications = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <FormWrapper>
+      <ResponsiveWrapper>
         <List spacing={['xloose', 0]}>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
@@ -100,7 +100,7 @@ const BaseNotifications = () => {
             </List.Item>
           ))}
         </List>
-      </FormWrapper>
+      </ResponsiveWrapper>
     </InfiniteScroll>
   )
 }

@@ -4,9 +4,9 @@ import gql from 'graphql-tag'
 import { PATHS } from '~/common/enums'
 import {
   Form,
-  FormWrapper,
   Head,
   Layout,
+  ResponsiveWrapper,
   Spinner,
   Translate,
   useMutation,
@@ -89,7 +89,7 @@ const BaseNotificationSettings = () => {
   }
 
   return (
-    <FormWrapper>
+    <ResponsiveWrapper>
       <PreferenceSettings toggle={toggle} settings={settings} />
       <Form.List
         groupName={
@@ -108,7 +108,7 @@ const BaseNotificationSettings = () => {
           href={PATHS.ME_SETTINGS_NOTIFICATION_CIRCLE}
         />
       </Form.List>
-    </FormWrapper>
+    </ResponsiveWrapper>
   )
 }
 

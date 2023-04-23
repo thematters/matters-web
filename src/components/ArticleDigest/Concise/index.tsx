@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
-import { Card, FormWrapper, ResponsiveImage } from '~/components'
+import { Card, ResponsiveImage, ResponsiveWrapper } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleDigestConciseArticlePrivateFragment,
@@ -59,7 +59,7 @@ const BaseArticleDigestFeed = ({
   })
 
   return (
-    <FormWrapper>
+    <ResponsiveWrapper>
       <Card
         {...path}
         spacing={['base', 0]}
@@ -104,7 +104,7 @@ const BaseArticleDigestFeed = ({
 
         <style jsx>{styles}</style>
       </Card>
-    </FormWrapper>
+    </ResponsiveWrapper>
   )
 }
 

@@ -5,8 +5,8 @@ import { toPath } from '~/common/utils'
 import {
   Card,
   DateTime,
-  FormWrapper,
   LinkWrapper,
+  ResponsiveWrapper,
   Title,
   Translate,
 } from '~/components'
@@ -44,7 +44,7 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
   })
 
   return (
-    <FormWrapper>
+    <ResponsiveWrapper>
       <Card {...path} spacing={['base', 0]} bgActiveColor="none">
         <LinkWrapper {...path} textActiveColor="green">
           <Title type="feed" is="h2">
@@ -65,7 +65,7 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
 
         <style jsx>{styles}</style>
       </Card>
-    </FormWrapper>
+    </ResponsiveWrapper>
   )
 }
 

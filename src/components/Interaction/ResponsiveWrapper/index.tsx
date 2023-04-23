@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from './styles.css'
 
-export const FormWrapper: React.FC<React.PropsWithChildren<{}>> = ({
+export const ResponsiveWrapper: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
   return (

@@ -1,14 +1,21 @@
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Form, FormWrapper, Head, Layout, Spacer, useRoute } from '~/components'
+import {
+  Form,
+  Head,
+  Layout,
+  ResponsiveWrapper,
+  Spacer,
+  useRoute,
+} from '~/components'
 
 const BaseSettings = () => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
   return (
-    <FormWrapper>
+    <ResponsiveWrapper>
       <Form.List
         groupName={
           <FormattedMessage defaultMessage="Settings" description="" />
@@ -47,7 +54,7 @@ const BaseSettings = () => {
         />
       </Form.List>
       <Spacer size="xxxloose" />
-    </FormWrapper>
+    </ResponsiveWrapper>
   )
 }
 

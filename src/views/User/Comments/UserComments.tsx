@@ -14,11 +14,11 @@ import {
   Card,
   Comment,
   EmptyComment,
-  FormWrapper,
   Head,
   InfiniteScroll,
   List,
   QueryError,
+  ResponsiveWrapper,
   Spinner,
   usePublicQuery,
   useRoute,
@@ -93,9 +93,9 @@ const UserComments = () => {
         image={user.info.profileCover || IMAGE_LOGO_192.src}
       />
       <UserTabs />
-      <FormWrapper>
+      <ResponsiveWrapper>
         <BaseUserComments user={user} />
-      </FormWrapper>
+      </ResponsiveWrapper>
     </>
   )
 }

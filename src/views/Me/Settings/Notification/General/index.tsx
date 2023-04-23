@@ -2,9 +2,9 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
-  FormWrapper,
   Head,
   Layout,
+  ResponsiveWrapper,
   Spacer,
   Spinner,
   useMutation,
@@ -100,11 +100,11 @@ const BaseNotificationSettings = () => {
     })
   }
   return (
-    <FormWrapper>
+    <ResponsiveWrapper>
       <MeSettings toggle={toggle} settings={settings} />
       <ArticleSettings toggle={toggle} settings={settings} />
       <CommentSettings toggle={toggle} settings={settings} />
-    </FormWrapper>
+    </ResponsiveWrapper>
   )
 }
 

@@ -2,9 +2,9 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
-  FormWrapper,
   Head,
   Layout,
+  ResponsiveWrapper,
   Spacer,
   Spinner,
   Translate,
@@ -118,7 +118,7 @@ const BaseNotificationSettings = ({
   }
 
   return (
-    <FormWrapper>
+    <ResponsiveWrapper>
       <div className="title">
         <h2>
           {' '}
@@ -177,7 +177,7 @@ const BaseNotificationSettings = ({
         spacingX={spacingX}
       />
       <style jsx>{styles}</style>
-    </FormWrapper>
+    </ResponsiveWrapper>
   )
 }
 
