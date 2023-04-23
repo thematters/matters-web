@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
-import { Card, Media, ResponsiveImage } from '~/components'
+import { Card, FormWrapper, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleDigestConciseArticlePrivateFragment,
@@ -58,62 +58,53 @@ const BaseArticleDigestFeed = ({
     utm_medium,
   })
 
-  const ConciseCard = ({ space }: { space: 0 | 'base' }) => (
-    <Card
-      {...path}
-      spacing={['base', space]}
-      bgActiveColor="none"
-      onClick={onClick}
-    >
-      <section className="content">
-        <section className="head">
-          <section className="title">
-            <ArticleDigestTitle article={article} textSize="xm" />
+  return (
+    <FormWrapper>
+      <Card
+        {...path}
+        spacing={['base', 0]}
+        bgActiveColor="none"
+        onClick={onClick}
+      >
+        <section className="content">
+          <section className="head">
+            <section className="title">
+              <ArticleDigestTitle article={article} textSize="xm" />
+            </section>
+
+            <section className="author">
+              <UserDigest.Mini
+                user={author}
+                avatarSize="sm"
+                textSize="sm"
+                hasAvatar
+                hasDisplayName
+                onClick={onClickAuthor}
+              />
+            </section>
           </section>
 
-          <section className="author">
-            <UserDigest.Mini
-              user={author}
-              avatarSize="sm"
-              textSize="sm"
-              hasAvatar
-              hasDisplayName
-              onClick={onClickAuthor}
-            />
-          </section>
+          <p className="description">{cleanedSummary}</p>
+
+          {cover && (
+            <div className="cover">
+              <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
+            </div>
+          )}
         </section>
 
-        <p className="description">{cleanedSummary}</p>
+        <FooterActions
+          article={article}
+          inCard
+          date={date}
+          tag={footerTag}
+          circle={footerCircle}
+          {...controls}
+        />
 
-        {cover && (
-          <div className="cover">
-            <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
-          </div>
-        )}
-      </section>
-
-      <FooterActions
-        article={article}
-        inCard
-        date={date}
-        tag={footerTag}
-        circle={footerCircle}
-        {...controls}
-      />
-
-      <style jsx>{styles}</style>
-    </Card>
-  )
-
-  return (
-    <>
-      <Media at="sm">
-        <ConciseCard space={'base'} />
-      </Media>
-      <Media greaterThan="sm">
-        <ConciseCard space={0} />
-      </Media>
-    </>
+        <style jsx>{styles}</style>
+      </Card>
+    </FormWrapper>
   )
 }
 
