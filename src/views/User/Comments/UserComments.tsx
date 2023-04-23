@@ -14,10 +14,10 @@ import {
   Card,
   Comment,
   EmptyComment,
+  FormWrapper,
   Head,
   InfiniteScroll,
   List,
-  Media,
   QueryError,
   Spinner,
   usePublicQuery,
@@ -93,20 +93,14 @@ const UserComments = () => {
         image={user.info.profileCover || IMAGE_LOGO_192.src}
       />
       <UserTabs />
-      <Media at="sm">
-        <BaseUserComments user={user} spacingX="base" />
-      </Media>
-      <Media greaterThan="sm">
-        <BaseUserComments user={user} spacingX={0} />
-      </Media>
+      <FormWrapper>
+        <BaseUserComments user={user} />
+      </FormWrapper>
     </>
   )
 }
 
-const BaseUserComments = ({
-  user,
-  spacingX,
-}: { spacingX: 0 | 'base' } & UserIdUserQuery) => {
+const BaseUserComments = ({ user }: UserIdUserQuery) => {
   const viewer = useContext(ViewerContext)
 
   /**
@@ -206,7 +200,7 @@ const BaseUserComments = ({
         {articleEdges.map(({ cursor, node, comments }) => (
           <List.Item key={cursor}>
             <Card
-              spacing={['tight', spacingX]}
+              spacing={['tight', 0]}
               bgColor="none"
               {...toPath({
                 page: 'articleDetail',
@@ -220,7 +214,7 @@ const BaseUserComments = ({
               {comments.map((comment) => (
                 <List.Item key={comment.id}>
                   <Card
-                    spacing={['tight', spacingX]}
+                    spacing={['tight', 0]}
                     bgColor="none"
                     {...toPath({
                       page: 'commentDetail',
