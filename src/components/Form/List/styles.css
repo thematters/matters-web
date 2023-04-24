@@ -22,33 +22,6 @@ ul {
     border-top: 1px dashed var(--color-grey-light);
   }
 
-  /* Fix <DropdownDialog /> contain <Form.List.Item />, when click dropdown
-      eg: /me/settings/ Display Preference
-    */
-
-  & :global(> .fresnel-container + li) {
-    border-top: 1px dashed var(--color-grey-light);
-  }
-
-  /* media at sm */
-  & :global(> li + .fresnel-container-at-sm),
-  & :global(.fresnel-container-at-sm + .fresnel-container-at-sm),
-  & :global(.fresnel-container + .fresnel-container + .fresnel-container) {
-    border-top: 1px dashed var(--color-grey-light);
-  }
-
-  /* media greater than sm */
-  & :global(> li + .fresnel-container + .fresnel-container),
-  &
-    :global(
-      .fresnel-container
-        + .fresnel-container
-        + .fresnel-container
-        + .fresnel-container
-    ) {
-    border-top: 1px dashed var(--color-grey-light);
-  }
-
   &.grey {
     margin-right: var(--spacing-base);
     margin-left: var(--spacing-base);
