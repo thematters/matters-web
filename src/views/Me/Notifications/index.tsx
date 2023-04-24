@@ -92,15 +92,15 @@ const BaseNotifications = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ResponsiveWrapper>
-        <List spacing={['xloose', 0]}>
-          {edges.map(({ node, cursor }) => (
-            <List.Item key={cursor}>
+      <List spacing={['xloose', 0]}>
+        {edges.map(({ node, cursor }) => (
+          <List.Item key={cursor}>
+            <ResponsiveWrapper>
               <Notice notice={node} />
-            </List.Item>
-          ))}
-        </List>
-      </ResponsiveWrapper>
+            </ResponsiveWrapper>
+          </List.Item>
+        ))}
+      </List>
     </InfiniteScroll>
   )
 }
