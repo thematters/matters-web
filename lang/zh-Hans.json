@@ -403,10 +403,6 @@
     "defaultMessage": "你的作品已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
-  "JXdbo8": {
-    "defaultMessage": "完成",
-    "description": ""
-  },
   "Jc+W6M": {
     "defaultMessage": " 辞去了标签主理人权限，你要不要试试看成为新的主理人？",
     "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
