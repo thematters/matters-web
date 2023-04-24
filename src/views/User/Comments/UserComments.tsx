@@ -18,6 +18,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
+  ResponsiveWrapper,
   Spinner,
   usePublicQuery,
   useRoute,
@@ -92,7 +93,9 @@ const UserComments = () => {
         image={user.info.profileCover || IMAGE_LOGO_192.src}
       />
       <UserTabs />
-      <BaseUserComments user={user} />
+      <ResponsiveWrapper>
+        <BaseUserComments user={user} />
+      </ResponsiveWrapper>
     </>
   )
 }
@@ -197,7 +200,7 @@ const BaseUserComments = ({ user }: UserIdUserQuery) => {
         {articleEdges.map(({ cursor, node, comments }) => (
           <List.Item key={cursor}>
             <Card
-              spacing={['tight', 'base']}
+              spacing={['tight', 0]}
               bgColor="none"
               {...toPath({
                 page: 'articleDetail',
@@ -211,7 +214,7 @@ const BaseUserComments = ({ user }: UserIdUserQuery) => {
               {comments.map((comment) => (
                 <List.Item key={comment.id}>
                   <Card
-                    spacing={['tight', 'base']}
+                    spacing={['tight', 0]}
                     bgColor="none"
                     {...toPath({
                       page: 'commentDetail',

@@ -282,14 +282,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
             inEditor
           >
             <Layout.Header
-              left={
-                <Layout.Header.BackButton
-                  onClick={
-                    isOverRevisionLimit ? onCancel : openConfirmExitDialog
-                  }
-                  disabled={isEditDisabled}
-                />
-              }
               right={
                 <EditModeHeader
                   {...coverProps}

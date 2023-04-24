@@ -1,3 +1,7 @@
+.text-size-xs {
+  font-size: var(--font-size-xs);
+}
+
 .text-size-sm-s {
   font-size: var(--font-size-sm-s);
 }

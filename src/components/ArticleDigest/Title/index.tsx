@@ -9,6 +9,7 @@ import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 import styles from './styles.css'
 
 export type ArticleDigestTitleTextSize =
+  | 'xs'
   | 'sm-s'
   | 'sm'
   | 'md-s'

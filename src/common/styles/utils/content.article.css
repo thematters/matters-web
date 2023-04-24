@@ -46,7 +46,7 @@
   /* Figure
    ========================================================================== */
   & :global(figure) {
-    margin: var(--spacing-x-loose) calc(var(--spacing-base) * -1);
+    margin: var(--spacing-x-loose) 0;
     text-align: center;
 
     /* ad-hoc fix for nested figure */
@@ -196,7 +196,7 @@
    ========================================================================== */
   & :global(blockquote) {
     position: relative;
-    padding: 0 var(--spacing-base);
+    padding-left: var(--spacing-loose);
 
     &::before {
       position: absolute;
@@ -205,7 +205,7 @@
       width: 4px;
       height: 100%;
       content: '';
-      background: var(--color-matters-gold);
+      background: var(--color-grey-light);
     }
   }
 
@@ -318,18 +318,17 @@
 .u-summary,
 .editor-summary {
   position: relative;
+  padding-left: var(--spacing-loose);
   margin: var(--spacing-loose) 0;
 
   &::before {
     position: absolute;
-    top: calc(var(--spacing-x-tight) * -1);
-    left: calc(var(--spacing-base) * -1);
-    z-index: -1;
-    width: 58px;
-    height: 33px;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
     content: '';
-    background-image: url('data:image/svg+xml;base64,PHN2ZyBpZD0icXVvdGUiIHdpZHRoPSI1OCIgaGVpZ2h0PSIzMyIgdmlld0JveD0iMCAwIDU4IDMyIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMjYuNTkzNyAxLjE2NTExVjBDOC4yMzQzNSAzLjE1NzAzIDEuMzE0NjEgMTMuNzU0MSAwLjE3OTM2IDE5LjMxODRDLTAuMDYyMjEwMyAyMC41MDE4IDAuMDAxMTUyNTEgMjEuMzE1NSAwLjAyNzU1MzcgMjEuNzY2MkMwLjQxMzAxMSAyOC4xODIxIDUuMDkxMyAzMi41Njk2IDExLjM4MjcgMzIuNTY5NkMxNy42NzQxIDMyLjU2OTYgMjIuNzczNSAyNy41MjI1IDIyLjc3MzUgMjEuMjk4NkMyMi43NzM1IDE1LjQ0NjkgMTguMjY2OCAxMC42Mzc1IDEyLjQ5OTUgMTAuMDgxMUMxNy41Mzk0IDMuMzc3NzggMjYuNTkzNyAxLjE2NTExIDI2LjU5MzcgMS4xNjUxMVoiIGZpbGw9IiNGNEU5RDAiLz4KPHBhdGggZD0iTTU4IDEuMTY1MTFWMEMzOS42NDA2IDMuMTU1NzMgMzIuNzIwOSAxMy43NTQxIDMxLjU4NTYgMTkuMzE4NEMzMS4zNDQgMjAuNTAxOCAzMS40MDc0IDIxLjMxNTUgMzEuNDMzOCAyMS43NjYyQzMxLjgxOTMgMjguMTgyMSAzNi40OTc1IDMyLjU2OTYgNDIuNzg4OSAzMi41Njk2QzQ5LjA4MDMgMzIuNTY5NiA1NC4xNzk3IDI3LjUyMjUgNTQuMTc5NyAyMS4yOTg2QzU0LjE3OTcgMTUuNDQ2OSA0OS42NzMgMTAuNjM3NSA0My45MDU3IDEwLjA4MTFDNDguOTQ1NyAzLjM3Nzc4IDU4IDEuMTY1MTEgNTggMS4xNjUxMVoiIGZpbGw9IiNGNEU5RDAiLz4KPC9zdmc+');
-    background-repeat: no-repeat;
+    background: var(--color-line-grey-light);
   }
 
   & .counter {
@@ -348,7 +347,6 @@
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-article-base);
   color: var(--color-grey-darker);
-  text-indent: var(--spacing-x-loose);
   resize: none;
   background: transparent;
 

@@ -39,13 +39,12 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
     return (
       <Button
         spacing={['xxtight', 'tight']}
-        bgColor="grey-lighter"
         htmlHref={`${explorerUrl}/tx/${blockchainTx.txHash}`}
         htmlTarget="_blank"
         onClick={(event) => event?.stopPropagation()}
       >
         <TextIcon
-          icon={<IconExternalLink16 color="grey" size="sm" />}
+          icon={<IconExternalLink16 color="grey" size="xs" />}
           spacing="xxtight"
           size="xs"
           weight="md"
@@ -53,9 +52,9 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
           textPlacement="left"
         >
           <Translate
-            zh_hant="查看鏈上紀錄"
-            zh_hans="查看链上纪录"
-            en="View on-chain records"
+            zh_hant="鏈上紀錄"
+            zh_hans="链上纪录"
+            en="On-chain records"
           />
         </TextIcon>
       </Button>
@@ -67,7 +66,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
       return (
         <Tooltip content={message}>
           <span onClick={(event) => event.stopPropagation()}>
-            <IconInfo16 />
+            <IconInfo16 size="xs" />
           </span>
         </Tooltip>
       )
@@ -93,10 +92,10 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
     <section>
       <TextIcon
         icon={<StateIcon />}
-        spacing="xxxtight"
+        spacing="xxtight"
         size="xs"
-        weight="md"
-        color="grey"
+        weight="normal"
+        color={state === TransactionState.Failed ? 'red' : 'grey-dark'}
         textPlacement="left"
       >
         <StateText />

@@ -1,20 +1,28 @@
 .container {
   display: flex;
+  padding: var(--spacing-base);
+
+  @media (--sm-up) {
+    padding-right: 0;
+    padding-left: 0;
+  }
 
   & .tx-icon {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
+    margin-right: var(--spacing-x-tight);
   }
 
   & .tx-info {
     display: flex;
     flex-grow: 1;
-    margin-left: var(--spacing-xx-tight);
+
+    /* margin-left: var(--spacing-xx-tight);
 
     @media (--sm-up) {
       margin-left: var(--spacing-x-tight);
-    }
+    } */
 
     & .left {
       display: flex;
@@ -23,6 +31,8 @@
 
       & .title {
         @mixin line-clamp;
+
+        padding-left: var(--spacing-x-loose);
       }
 
       & .title,
@@ -38,7 +48,8 @@
         & p {
           display: flex;
           align-items: center;
-          font-size: var(--fon-size-md-s);
+          font-size: var(--font-size-md-s);
+          font-weight: var(--font-weight-medium);
           line-height: 1;
         }
       }

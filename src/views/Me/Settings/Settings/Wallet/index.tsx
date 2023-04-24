@@ -50,7 +50,7 @@ const WalletSettings = () => {
   const shortAddress = ethAddress ? maskAddress(ethAddress) : ''
 
   return (
-    <Form.List groupName={<Translate id="settingsWallet" />}>
+    <Form.List groupName={<Translate id="settingsWallet" />} spacingX={0}>
       <Form.List.Item
         title="Liker ID"
         onClick={

@@ -33,6 +33,7 @@ const Comment = ({ settings, toggle }: CommentProps) => {
   return (
     <Form.List
       groupName={<Translate zh_hant="評論" zh_hans="评论" en="Comment" />}
+      spacingX={0}
     >
       <Form.List.Item
         title={newComment}

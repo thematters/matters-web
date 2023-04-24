@@ -50,7 +50,12 @@ const Rich = ({
   })
 
   return (
-    <Card {...path} {...cardProps} testId={TEST_ID.DIGEST_TAG_RICH}>
+    <Card
+      {...path}
+      {...cardProps}
+      testId={TEST_ID.DIGEST_TAG_RICH}
+      bgActiveColor="none"
+    >
       <section className="content">
         <TextIcon
           icon={<IconHashTag16 color="grey" />}

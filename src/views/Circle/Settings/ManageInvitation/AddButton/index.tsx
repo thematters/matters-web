@@ -19,11 +19,11 @@ const CircleInvitationAddButton = () => {
       {({ openDialog }) => (
         <Button
           size={['6rem', '2rem']}
-          bgActiveColor="grey-lighter"
+          bgColor={'green'}
           onClick={openDialog}
           aria-haspopup="dialog"
         >
-          <TextIcon color="green" size="md" weight="md">
+          <TextIcon color="white" size="md-s" weight="md">
             <FormattedMessage
               defaultMessage="Add Invitation"
               description="src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"

@@ -46,7 +46,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
       {...path}
       spacing={['xtight', 'xtight']}
       bgColor="none"
-      bgActiveColor="grey-lighter"
+      bgActiveColor="none"
       borderRadius="xtight"
       {...cardProps}
       testId={TEST_ID.DIGEST_TAG_SIDEBAR}

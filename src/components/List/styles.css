@@ -2,6 +2,8 @@
   &.has-border {
     & :global(> .list-item) {
       @mixin border-bottom-grey;
+
+      border-bottom-style: dashed;
     }
   }
 

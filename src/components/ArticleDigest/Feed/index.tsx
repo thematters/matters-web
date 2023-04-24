@@ -8,6 +8,7 @@ import {
   CircleDigest,
   DateTime,
   ResponsiveImage,
+  ResponsiveWrapper,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
@@ -27,6 +28,7 @@ export type ArticleDigestFeedControls = {
   isConciseFooter?: boolean
   hasFollow?: boolean
   hasCircle?: boolean
+  hasAuthor?: boolean
 }
 
 export type ArticleDigestFeedProps = {
@@ -46,6 +48,7 @@ const BaseArticleDigestFeed = ({
   isConciseFooter = false,
   hasFollow,
   hasCircle = true,
+  hasAuthor = true,
   onClick,
   onClickAuthor,
 
@@ -71,60 +74,62 @@ const BaseArticleDigestFeed = ({
   })
 
   return (
-    <Card
-      {...path}
-      spacing={['base', 'base']}
-      onClick={onClick}
-      testId={TEST_ID.DIGEST_ARTICLE_FEED}
-      is={is}
-    >
-      {header ||
-        (hasCircle && circle && (
-          <header>
-            <CircleDigest.Plain circle={circle} />
-          </header>
-        ))}
+    <ResponsiveWrapper>
+      <Card
+        {...path}
+        spacing={['base', 0]}
+        onClick={onClick}
+        testId={TEST_ID.DIGEST_ARTICLE_FEED}
+        bgActiveColor="none"
+        is={is}
+      >
+        {header ||
+          (hasCircle && circle && (
+            <header>
+              <CircleDigest.Plain circle={circle} />
+            </header>
+          ))}
+        <section className="content">
+          <section className="head">
+            <section className="title">
+              <ArticleDigestTitle article={article} textSize="xm" />
+            </section>
 
-      <section className="content">
-        <section className="head">
-          <section className="title">
-            <ArticleDigestTitle article={article} textSize="xm" />
+            {hasAuthor && (
+              <section className="author">
+                <UserDigest.Mini
+                  user={author}
+                  avatarSize="sm"
+                  textSize="sm"
+                  hasAvatar
+                  hasDisplayName
+                  onClick={onClickAuthor}
+                />
+
+                {hasFollow && <FollowButton user={article.author} />}
+              </section>
+            )}
           </section>
 
-          <section className="author">
-            <UserDigest.Mini
-              user={author}
-              avatarSize="sm"
-              textSize="sm"
-              hasAvatar
-              hasDisplayName
-              onClick={onClickAuthor}
-            />
+          <p className="description">{cleanedSummary}</p>
 
-            {hasFollow && <FollowButton user={article.author} />}
-          </section>
+          {cover && (
+            <div className="cover">
+              <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
+            </div>
+          )}
         </section>
-
-        <p className="description">{cleanedSummary}</p>
-
-        {cover && (
-          <div className="cover">
-            <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
-          </div>
+        {isConciseFooter && (
+          <section>
+            <DateTime date={article.createdAt} />
+          </section>
         )}
-      </section>
-
-      {isConciseFooter && (
-        <section>
-          <DateTime date={article.createdAt} />
-        </section>
-      )}
-      {!isConciseFooter && (
-        <FooterActions article={article} inCard date={date} {...controls} />
-      )}
-
-      <style jsx>{styles}</style>
-    </Card>
+        {!isConciseFooter && (
+          <FooterActions article={article} inCard date={date} {...controls} />
+        )}
+        <style jsx>{styles}</style>
+      </Card>
+    </ResponsiveWrapper>
   )
 }
 

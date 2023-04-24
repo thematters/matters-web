@@ -59,7 +59,6 @@ const Tags = () => (
     <Head title={{ id: 'allTags' }} />
 
     <Layout.Header
-      left={<Layout.Header.BackButton />}
       right={
         <>
           <Layout.Header.Title id="allTags" />

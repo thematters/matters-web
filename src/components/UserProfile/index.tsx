@@ -104,26 +104,29 @@ export const UserProfile = () => {
    * Render
    */
   const LayoutHeader = () => (
-    <Layout.Header
-      left={<Layout.Header.BackButton mode="black-solid" />}
-      right={
-        <>
-          <span />
-          {user && (
-            <section className="buttons">
-              <ShareButton
-                tags={
-                  [user.displayName, user.userName].filter(Boolean) as string[]
-                }
-              />
-              <DropdownActions user={user} isMe={isMe} />
-              <style jsx>{styles}</style>
-            </section>
-          )}
-        </>
-      }
-      mode="transparent-absolute"
-    />
+    <>
+      <Layout.Header
+        right={
+          <>
+            <span />
+            {user && (
+              <section className="buttons">
+                <ShareButton
+                  tags={
+                    [user.displayName, user.userName].filter(
+                      Boolean
+                    ) as string[]
+                  }
+                />
+                <DropdownActions user={user} isMe={isMe} />
+                <style jsx>{styles}</style>
+              </section>
+            )}
+          </>
+        }
+        mode="transparent-absolute"
+      />
+    </>
   )
 
   if (loading) {

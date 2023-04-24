@@ -39,6 +39,7 @@ const Article = ({ settings, toggle }: ArticleProps) => {
   return (
     <Form.List
       groupName={<Translate zh_hant="作品" zh_hans="作品" en="Article" />}
+      spacingX={0}
     >
       <Form.List.Item
         title={newAppreciationLabel}

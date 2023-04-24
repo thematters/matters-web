@@ -22,7 +22,7 @@ const ChangePassword = () => {
   const { currStep, forward } = useStep<Step>(initStep)
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
+    <Layout.Main>
       <Head title={{ id: 'changePassword' }} />
 
       {currStep === 'request' && (

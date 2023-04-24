@@ -99,10 +99,7 @@ const BaseLikesSent = () => {
 
 const LikesSent = () => (
   <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="likesSent" />}
-    />
+    <Layout.Header left={<Layout.Header.Title id="likesSent" />} />
 
     <Head title={{ id: 'likesSent' }} />
 

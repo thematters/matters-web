@@ -229,7 +229,6 @@ const BaseArticleDetail = ({
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header
-        left={<Layout.Header.BackButton />}
         right={
           <UserDigest.Rich
             user={article.author}

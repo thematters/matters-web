@@ -15,3 +15,12 @@
   padding-left: var(--spacing-base);
   margin-top: calc(var(--spacing-xx-loose) * -1);
 }
+
+.container {
+  @mixin form-container;
+
+  @media (--sm-up) {
+    margin-right: var(--spacing-base);
+    margin-left: var(--spacing-base);
+  }
+}

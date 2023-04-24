@@ -9,7 +9,7 @@ const Settings = () => {
   const year = new Date().getFullYear()
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
+    <Layout.Main>
       <Head title={{ id: 'settings' }} />
 
       <DisplayPreferences />

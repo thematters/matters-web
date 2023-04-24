@@ -7,8 +7,8 @@ import { DigestTitleCircleFragment } from '~/gql/graphql'
 import { fragments } from './gql'
 import styles from './styles.css'
 
-export type CircleDigestTitleTextSize = 'md'
-export type CircleDigestTitleTextWeight = 'md'
+export type CircleDigestTitleTextSize = 'xs' | 'md'
+export type CircleDigestTitleTextWeight = 'normal' | 'md'
 export type CircleDigestTitleIs = 'h2'
 
 type CircleDigestTitleProps = {

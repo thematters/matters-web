@@ -1,7 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Head, Layout, Spacer, Spinner, useMutation } from '~/components'
+import {
+  Head,
+  Layout,
+  ResponsiveWrapper,
+  Spacer,
+  Spinner,
+  useMutation,
+} from '~/components'
 import {
   UpdateViewerNotificationGeneralMutation,
   ViewerNotificationGeneralSettingsQuery,
@@ -93,19 +100,18 @@ const BaseNotificationSettings = () => {
     })
   }
   return (
-    <>
+    <ResponsiveWrapper>
       <MeSettings toggle={toggle} settings={settings} />
       <ArticleSettings toggle={toggle} settings={settings} />
       <CommentSettings toggle={toggle} settings={settings} />
-    </>
+    </ResponsiveWrapper>
   )
 }
 
 const NotificationGeneralSettings = () => (
-  <Layout.Main smBgColor="grey-lighter">
+  <Layout.Main>
     <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="settingsNotificationGeneral" />}
+      left={<Layout.Header.Title id="settingsNotificationGeneral" />}
     />
 
     <Head title={{ id: 'settingsNotificationGeneral' }} />

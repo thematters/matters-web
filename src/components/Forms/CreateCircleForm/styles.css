@@ -30,4 +30,12 @@
 
 .avatar-field {
   margin: var(--spacing-loose) var(--spacing-base);
+
+  @media (--sm-up) {
+    margin: var(--spacing-loose) 0;
+  }
+}
+
+.container {
+  @mixin form-container;
 }

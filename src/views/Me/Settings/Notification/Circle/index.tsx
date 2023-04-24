@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import {
   Head,
   Layout,
+  ResponsiveWrapper,
   Spacer,
   Spinner,
   Translate,
@@ -74,7 +75,11 @@ const UPDATE_VIEWER_NOTIFICATION_CIRCLE = gql`
   }
 `
 
-const BaseNotificationSettings = () => {
+const BaseNotificationSettings = ({
+  spacingX = 'base',
+}: {
+  spacingX?: 0 | 'base'
+}) => {
   const [update] = useMutation<UpdateViewerNotificationCircleMutation>(
     UPDATE_VIEWER_NOTIFICATION_CIRCLE
   )
@@ -113,7 +118,7 @@ const BaseNotificationSettings = () => {
   }
 
   return (
-    <>
+    <ResponsiveWrapper>
       <div className="title">
         <h2>
           {' '}
@@ -123,17 +128,22 @@ const BaseNotificationSettings = () => {
             en="My Circle"
           />{' '}
         </h2>
-        <p>
-          <Translate
-            zh_hans="此处设定将套用至你所开设的围炉"
-            zh_hant="此處設定將套用至你所開設的圍爐"
-            en="The following settings apply to the Circle you owned"
-          />{' '}
-        </p>
       </div>
-      <MyManageSettings toggle={toggle} settings={settings} />
-      <MyBroadcastSettings toggle={toggle} settings={settings} />
-      <MyDiscussionSettings toggle={toggle} settings={settings} />
+      <MyManageSettings
+        toggle={toggle}
+        settings={settings}
+        spacingX={spacingX}
+      />
+      <MyBroadcastSettings
+        toggle={toggle}
+        settings={settings}
+        spacingX={spacingX}
+      />
+      <MyDiscussionSettings
+        toggle={toggle}
+        settings={settings}
+        spacingX={spacingX}
+      />
       <div className="title">
         <h2>
           <Translate
@@ -151,24 +161,35 @@ const BaseNotificationSettings = () => {
           />
         </p>
       </div>
-      <SubscribeArticleSettings toggle={toggle} settings={settings} />
-      <SubscribeBroadcastSettings toggle={toggle} settings={settings} />
-      <SubscribeDiscussionSettings toggle={toggle} settings={settings} />
+      <SubscribeArticleSettings
+        toggle={toggle}
+        settings={settings}
+        spacingX={spacingX}
+      />
+      <SubscribeBroadcastSettings
+        toggle={toggle}
+        settings={settings}
+        spacingX={spacingX}
+      />
+      <SubscribeDiscussionSettings
+        toggle={toggle}
+        settings={settings}
+        spacingX={spacingX}
+      />
       <style jsx>{styles}</style>
-    </>
+    </ResponsiveWrapper>
   )
 }
 
 const NotificationCircleSettings = () => (
-  <Layout.Main smBgColor="grey-lighter">
+  <Layout.Main>
     <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="settingsNotificationCircle" />}
+      left={<Layout.Header.Title id="settingsNotificationCircle" />}
     />
 
     <Head title={{ id: 'settingsNotificationCircle' }} />
 
-    <BaseNotificationSettings />
+    <BaseNotificationSettings spacingX={0} />
 
     <Spacer size="xxxloose" />
   </Layout.Main>

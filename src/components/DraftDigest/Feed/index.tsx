@@ -2,7 +2,14 @@ import gql from 'graphql-tag'
 import React from 'react'
 
 import { toPath } from '~/common/utils'
-import { Card, DateTime, LinkWrapper, Title, Translate } from '~/components'
+import {
+  Card,
+  DateTime,
+  LinkWrapper,
+  ResponsiveWrapper,
+  Title,
+  Translate,
+} from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
 import DeleteButton from './DeleteButton'
@@ -37,26 +44,28 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
   })
 
   return (
-    <Card {...path} spacing={['base', 'base']}>
-      <LinkWrapper {...path} textActiveColor="green">
-        <Title type="feed" is="h2">
-          {title || <Translate id="untitle" />}
-        </Title>
-      </LinkWrapper>
+    <ResponsiveWrapper>
+      <Card {...path} spacing={['base', 0]} bgActiveColor="none">
+        <LinkWrapper {...path} textActiveColor="green">
+          <Title type="feed" is="h2">
+            {title || <Translate id="untitle" />}
+          </Title>
+        </LinkWrapper>
 
-      <footer>
-        <section className="left">
-          <EditButton draft={draft} />
-          <DeleteButton draft={draft} />
-        </section>
+        <footer>
+          <section className="left">
+            <EditButton draft={draft} />
+            <DeleteButton draft={draft} />
+          </section>
 
-        <section className="right">
-          <DateTime date={updatedAt} type="relative" />
-        </section>
-      </footer>
+          <section className="right">
+            <DateTime date={updatedAt} type="relative" />
+          </section>
+        </footer>
 
-      <style jsx>{styles}</style>
-    </Card>
+        <style jsx>{styles}</style>
+      </Card>
+    </ResponsiveWrapper>
   )
 }
 

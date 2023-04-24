@@ -1,6 +1,10 @@
 .buttons {
   display: inline-flex;
 
+  @media (--sm-up) {
+    padding-right: var(--spacing-base);
+  }
+
   & :global(> * + *) {
     margin-left: var(--spacing-base);
   }
@@ -11,7 +15,6 @@
   padding-bottom: var(--spacing-loose);
   margin-bottom: var(--spacing-x-tight);
   background: var(--color-white);
-  border-radius: 0 0 1.25rem 1.25rem;
 
   @media (--sm-up) {
     padding-bottom: var(--spacing-base);
@@ -25,6 +28,10 @@ header {
 
   padding: 0 var(--spacing-base);
   margin-top: var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
 
   & .info {
     @mixin flex-start-start;
@@ -55,6 +62,10 @@ header {
 
 .description {
   padding: 0 var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
 }
 
 footer {
@@ -62,6 +73,10 @@ footer {
 
   padding: 0 var(--spacing-base);
   margin-top: var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
 
   & .counts {
     font-size: var(--font-size-sm);

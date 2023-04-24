@@ -6,7 +6,7 @@ import SwitchLanguage from './SwitchLanguage'
 
 const UISettings = () => {
   return (
-    <Form.List groupName={<Translate id="settingsUI" />}>
+    <Form.List groupName={<Translate id="settingsUI" />} spacingX={0}>
       <SwitchLanguage />
       <CurrencyConvertor />
       <section className="rate-hint">
