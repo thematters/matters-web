@@ -4,7 +4,15 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
-import { Head, Layout, List, QueryError, Spacer, Spinner } from '~/components'
+import {
+  Head,
+  Layout,
+  List,
+  QueryError,
+  ResponsiveWrapper,
+  Spacer,
+  Spinner,
+} from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { MeAnalyticsQuery } from '~/gql/graphql'
 
@@ -118,18 +126,19 @@ const MyAnalytics = () => {
             </p>
           </section>
         )}
-
-        <List>
-          {edges?.map(({ node, cursor, donationCount }, i) => (
-            <List.Item key={cursor}>
-              <SupporterDigestFeed
-                user={node}
-                index={i}
-                donationCount={donationCount}
-              />
-            </List.Item>
-          ))}
-        </List>
+        <ResponsiveWrapper>
+          <List>
+            {edges?.map(({ node, cursor, donationCount }, i) => (
+              <List.Item key={cursor}>
+                <SupporterDigestFeed
+                  user={node}
+                  index={i}
+                  donationCount={donationCount}
+                />
+              </List.Item>
+            ))}
+          </List>
+        </ResponsiveWrapper>
         <style jsx>{styles}</style>
       </section>
     </Layout.Main>

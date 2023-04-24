@@ -1,11 +1,6 @@
 .container {
   display: flex;
-  padding: var(--spacing-base);
-
-  @media (--sm-up) {
-    padding-right: 0;
-    padding-left: 0;
-  }
+  padding: var(--spacing-base) 0;
 }
 
 .supporter {
