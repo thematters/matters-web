@@ -116,11 +116,12 @@ const AggregateUserResults = () => {
               node.__typename === 'User' && (
                 <Menu.Item
                   key={cursor + node.id}
-                  spacing={['base', 'base']}
+                  spacing={['base', 0]}
                   {...toPath({
                     page: 'userProfile',
                     userName: node.userName || '',
                   })}
+                  bgActiveColor="none"
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: 'search_user',

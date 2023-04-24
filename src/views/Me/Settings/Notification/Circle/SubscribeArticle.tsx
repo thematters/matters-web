@@ -13,9 +13,14 @@ type NotificationType = NonNullable<
 interface SubscribeArticleProps {
   settings: NotificationType
   toggle: (type: keyof NotificationType) => void
+  spacingX: 0 | 'base'
 }
 
-const SubscribeArticle = ({ settings, toggle }: SubscribeArticleProps) => {
+const SubscribeArticle = ({
+  settings,
+  toggle,
+  spacingX,
+}: SubscribeArticleProps) => {
   const { lang } = useContext(LanguageContext)
   const label = translate({
     zh_hant: '圍爐有新作品',
@@ -27,6 +32,7 @@ const SubscribeArticle = ({ settings, toggle }: SubscribeArticleProps) => {
   return (
     <Form.List
       groupName={<Translate zh_hant="作品" zh_hans="作品" en="Article" />}
+      spacingX={spacingX}
     >
       <Form.List.Item
         title={label}

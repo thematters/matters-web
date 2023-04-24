@@ -2,6 +2,11 @@
   min-height: 100vh;
   padding: var(--spacing-base);
 
+  @media (--sm-up) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
   &.editing {
     cursor: not-allowed;
     opacity: 0.3;

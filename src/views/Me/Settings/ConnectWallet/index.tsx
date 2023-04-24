@@ -23,7 +23,7 @@ const ConnectWallet = () => {
 
   if (viewerEthAddress) {
     return (
-      <Layout.Main smBgColor="grey-lighter">
+      <Layout.Main>
         <Head title={{ id: 'loginWithWallet' }} />
 
         <Layout.Header
@@ -45,7 +45,7 @@ const ConnectWallet = () => {
   }
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
+    <Layout.Main>
       <Head title={{ id: 'loginWithWallet' }} />
 
       <WagmiProvider>

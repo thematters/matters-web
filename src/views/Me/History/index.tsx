@@ -110,10 +110,7 @@ const BaseMeHistory = () => {
 
 const MeHistory = () => (
   <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="readHistory" />}
-    />
+    <Layout.Header left={<Layout.Header.Title id="readHistory" />} />
 
     <Head title={{ id: 'readHistory' }} />
 

@@ -27,6 +27,7 @@ const Preference = ({ settings, toggle }: PreferenceProps) => {
   return (
     <Form.List
       groupName={<Translate zh_hant="郵件通知" zh_hans="邮件通知" en="Email" />}
+      spacingX={0}
     >
       <Form.List.Item
         title={label}
@@ -49,5 +50,4 @@ const Preference = ({ settings, toggle }: PreferenceProps) => {
     </Form.List>
   )
 }
-
 export default Preference

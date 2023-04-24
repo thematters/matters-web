@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
@@ -115,67 +116,72 @@ const Init: React.FC<FormProps> = ({
     },
   })
 
+  const containerClasses = classNames({ container: true, isInPage: !!isInPage })
+
   const InnerForm = (
-    <Form id={formId} onSubmit={handleSubmit}>
-      <Form.Input
-        label={
-          <FormattedMessage defaultMessage="Display Name" description="" />
-        }
-        type="text"
-        name="displayName"
-        required
-        placeholder={intl.formatMessage({
-          defaultMessage: 'Display name, can be changed later',
-          description: 'src/components/Forms/EmailSignUpForm/Init.tsx',
-        })}
-        value={values.displayName}
-        error={touched.displayName && errors.displayName}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+    <section className={containerClasses}>
+      <Form id={formId} onSubmit={handleSubmit}>
+        <Form.Input
+          label={
+            <FormattedMessage defaultMessage="Display Name" description="" />
+          }
+          type="text"
+          name="displayName"
+          required
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Display name, can be changed later',
+            description: 'src/components/Forms/EmailSignUpForm/Init.tsx',
+          })}
+          value={values.displayName}
+          error={touched.displayName && errors.displayName}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
 
-      <Form.Input
-        label={<FormattedMessage defaultMessage="Email" description="" />}
-        type="email"
-        name="email"
-        required
-        placeholder={intl.formatMessage({
-          defaultMessage: 'Email',
-          description: '',
-        })}
-        value={values.email}
-        error={touched.email && errors.email}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+        <Form.Input
+          label={<FormattedMessage defaultMessage="Email" description="" />}
+          type="email"
+          name="email"
+          required
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Email',
+            description: '',
+          })}
+          value={values.email}
+          error={touched.email && errors.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
 
-      <Form.CheckBox
-        name="tos"
-        checked={values.tos}
-        error={touched.tos && errors.tos}
-        onChange={handleChange}
-        hint={
-          <>
-            <FormattedMessage
-              defaultMessage="I have read and agree to"
-              description=""
-            />
-            <Link href={PATHS.TOS} legacyBehavior>
-              <a className="u-link-green" target="_blank">
-                &nbsp;
-                <FormattedMessage
-                  defaultMessage="Terms and Privacy Policy"
-                  description=""
-                />
-              </a>
-            </Link>
-          </>
-        }
-        required
-      />
+        <Form.CheckBox
+          name="tos"
+          checked={values.tos}
+          error={touched.tos && errors.tos}
+          onChange={handleChange}
+          hint={
+            <>
+              <FormattedMessage
+                defaultMessage="I have read and agree to"
+                description=""
+              />
+              <Link href={PATHS.TOS} legacyBehavior>
+                <a className="u-link-green" target="_blank">
+                  &nbsp;
+                  <FormattedMessage
+                    defaultMessage="Terms and Privacy Policy"
+                    description=""
+                  />
+                </a>
+              </Link>
+            </>
+          }
+          required
+        />
 
-      <EmailLoginButton gotoEmailLogin={gotoEmailLogin} />
-    </Form>
+        <EmailLoginButton gotoEmailLogin={gotoEmailLogin} isInPage={isInPage} />
+      </Form>
+      <style jsx>{styles}</style>
+    </section>
   )
 
   const SubmitButton = (
@@ -192,7 +198,6 @@ const Init: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton onClick={back} />}
           right={
             <>
               <Layout.Header.Title id="register" />

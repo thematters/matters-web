@@ -1,6 +1,12 @@
 import React, { useContext } from 'react'
 
-import { Head, Layout, Spacer, ViewerContext } from '~/components'
+import {
+  Head,
+  Layout,
+  ResponsiveWrapper,
+  Spacer,
+  ViewerContext,
+} from '~/components'
 
 // import { redirectToLogin } from '~/common/utils'
 import AnonymousSettings from '../AnonymousSettings'
@@ -16,16 +22,15 @@ const Settings = () => {
   }
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
-      <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="settings" />}
-      />
+    <Layout.Main>
+      <Layout.Header left={<Layout.Header.Title id="settings" />} />
       <Head title={{ id: 'settings' }} />
 
-      <UISettings />
-      <AccountSettings />
-      <WalletSettings />
+      <ResponsiveWrapper>
+        <UISettings />
+        <AccountSettings />
+        <WalletSettings />
+      </ResponsiveWrapper>
 
       <Spacer size="xxxloose" />
     </Layout.Main>

@@ -6,12 +6,12 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
 import {
   Head,
-  IconDonateBg24,
   Layout,
   List,
   QueryError,
+  ResponsiveWrapper,
+  Spacer,
   Spinner,
-  TextIcon,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { MeAnalyticsQuery } from '~/gql/graphql'
@@ -48,7 +48,7 @@ const ME_ANALYTICS = gql`
   }
   ${UserDigest.Mini.fragments.user}
 `
-const BaseAnalytics = () => {
+const MyAnalytics = () => {
   const [period, setPeriod] = useState<number>(7)
 
   const [now] = useState(Date.now())
@@ -69,11 +69,27 @@ const BaseAnalytics = () => {
   })
 
   if (loading) {
-    return <Spinner />
+    return (
+      <Layout.Main>
+        <Spacer />
+        <Layout.Header.Title id="myAnalytics">
+          <FormattedMessage defaultMessage="Top Supporters" description="" />
+        </Layout.Header.Title>
+        <Spinner />
+      </Layout.Main>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <Layout.Main>
+        <Spacer />
+        <Layout.Header.Title id="myAnalytics">
+          <FormattedMessage defaultMessage="Top Supporters" description="" />
+        </Layout.Header.Title>
+        <QueryError error={error} />
+      </Layout.Main>
+    )
   }
 
   const edges = data?.viewer?.analytics.topDonators.edges
@@ -84,57 +100,49 @@ const BaseAnalytics = () => {
   }
 
   return (
-    <section className="container">
-      <section className="title">
-        <TextIcon
-          icon={<IconDonateBg24 size="md" />}
-          weight="md"
-          color="black"
-          size="md"
-        >
-          <FormattedMessage defaultMessage="Top Supporters" description="" />
-        </TextIcon>
-        <section className="filter">
-          <SelectPeriod period={period} onChange={setPeriod} />
-        </section>
-      </section>
-
-      {edges?.length === 0 && (
-        <section className="no-supporter">
-          <section className="no-supporter-img">
-            <AnalyticsNoSupporter />
+    <Layout.Main>
+      <Layout.Header
+        left={
+          <Layout.Header.Title id="myAnalytics">
+            <FormattedMessage defaultMessage="Top Supporters" description="" />
+          </Layout.Header.Title>
+        }
+        right={
+          <>
+            <span />
+            <SelectPeriod period={period} onChange={setPeriod} />
+          </>
+        }
+      />
+      <Head title={{ id: 'myAnalytics' }} />
+      <section className="container">
+        {edges?.length === 0 && (
+          <section className="no-supporter">
+            <section className="no-supporter-img">
+              <AnalyticsNoSupporter />
+            </section>
+            <p>
+              <FormattedMessage defaultMessage="No data yet." description="" />
+            </p>
           </section>
-          <p>
-            <FormattedMessage defaultMessage="No data yet." description="" />
-          </p>
-        </section>
-      )}
-
-      <List>
-        {edges?.map(({ node, cursor, donationCount }, i) => (
-          <List.Item key={cursor}>
-            <SupporterDigestFeed
-              user={node}
-              index={i}
-              donationCount={donationCount}
-            />
-          </List.Item>
-        ))}
-      </List>
-      <style jsx>{styles}</style>
-    </section>
+        )}
+        <ResponsiveWrapper>
+          <List>
+            {edges?.map(({ node, cursor, donationCount }, i) => (
+              <List.Item key={cursor}>
+                <SupporterDigestFeed
+                  user={node}
+                  index={i}
+                  donationCount={donationCount}
+                />
+              </List.Item>
+            ))}
+          </List>
+        </ResponsiveWrapper>
+        <style jsx>{styles}</style>
+      </section>
+    </Layout.Main>
   )
 }
-
-const MyAnalytics = () => (
-  <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="myAnalytics" />}
-    />
-    <Head title={{ id: 'myAnalytics' }} />
-    <BaseAnalytics />
-  </Layout.Main>
-)
 
 export default MyAnalytics

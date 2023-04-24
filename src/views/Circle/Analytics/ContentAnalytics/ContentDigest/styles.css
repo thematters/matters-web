@@ -5,6 +5,10 @@
 .container {
   display: flex;
   padding: var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: var(--spacing-base) 0;
+  }
 }
 
 .number {

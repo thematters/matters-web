@@ -11,10 +11,7 @@ const Community = () => {
 
   return (
     <Layout.Main>
-      <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="community" />}
-      />
+      <Layout.Header left={<Layout.Header.Title id="community" />} />
 
       <Head title={{ id: 'community' }} />
 

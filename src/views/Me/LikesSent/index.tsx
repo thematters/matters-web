@@ -9,6 +9,7 @@ import {
   InfiniteScroll,
   Layout,
   List,
+  ResponsiveWrapper,
   Spinner,
 } from '~/components'
 import { MeLikesSentQuery } from '~/gql/graphql'
@@ -85,13 +86,15 @@ const BaseLikesSent = () => {
       <LikesTabs activity={data.viewer.activity} />
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List>
-          {edges.map(({ node, cursor }) => (
-            <List.Item key={cursor}>
-              <Appreciation appreciation={node} type="sent" />
-            </List.Item>
-          ))}
-        </List>
+        <ResponsiveWrapper>
+          <List>
+            {edges.map(({ node, cursor }) => (
+              <List.Item key={cursor}>
+                <Appreciation appreciation={node} type="sent" />
+              </List.Item>
+            ))}
+          </List>
+        </ResponsiveWrapper>
       </InfiniteScroll>
     </>
   )
@@ -99,10 +102,7 @@ const BaseLikesSent = () => {
 
 const LikesSent = () => (
   <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="likesSent" />}
-    />
+    <Layout.Header left={<Layout.Header.Title id="likesSent" />} />
 
     <Head title={{ id: 'likesSent' }} />
 

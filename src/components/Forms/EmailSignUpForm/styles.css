@@ -1,3 +1,9 @@
+.container {
+  &.isInPage {
+    @mixin form-container;
+  }
+}
+
 footer {
   @mixin flex-center-all;
 

@@ -1,13 +1,7 @@
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
-import {
-  Card,
-  CardProps,
-  IconArrowRight16,
-  Media,
-  TextIcon,
-} from '~/components'
+import { Card, CardProps, IconArrowRight16, TextIcon } from '~/components'
 
 import styles from './styles.css'
 
@@ -60,11 +54,7 @@ const Item: React.FC<ItemProps> = forwardRef(
         <section className="right">
           {right || (
             <TextIcon
-              icon={
-                clickable && (
-                  <IconArrowRight16 color={bold ? 'black' : 'grey'} />
-                )
-              }
+              icon={clickable && <IconArrowRight16 color={'grey'} />}
               size="md"
               textPlacement="left"
               spacing="xtight"
@@ -82,28 +72,14 @@ const Item: React.FC<ItemProps> = forwardRef(
 
     return (
       <li role="listitem">
-        <>
-          <Media at="sm">
-            <Card
-              bgColor={forceGreyStyle ? 'grey-lighter' : 'white'}
-              {...cardProps}
-              spacing={cardProps.spacing || [0, 0]}
-              ref={ref}
-            >
-              {itemContent}
-            </Card>
-          </Media>
-          <Media greaterThan="sm">
-            <Card
-              bgColor="grey-lighter"
-              {...cardProps}
-              spacing={cardProps.spacing || [0, 0]}
-              ref={ref}
-            >
-              {itemContent}
-            </Card>
-          </Media>
-        </>
+        <Card
+          bgActiveColor="none"
+          {...cardProps}
+          spacing={cardProps.spacing || [0, 0]}
+          ref={ref}
+        >
+          {itemContent}
+        </Card>
 
         <style jsx>{styles}</style>
       </li>

@@ -37,10 +37,12 @@ export const PasswordResetRedirectButton = () => (
 
 export const EmailSignUpDialogButton = ({
   gotoEmailSignUp,
+  isInPage,
 }: {
   gotoEmailSignUp: () => void
+  isInPage: boolean
 }) => (
-  <Form.List spacing="xloose">
+  <Form.List spacingY="xloose" spacingX={isInPage ? 0 : 'base'}>
     <Form.List.Item
       title={
         <FormattedMessage

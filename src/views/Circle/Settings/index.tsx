@@ -1,25 +1,26 @@
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Form, Head, Layout, Spacer, useRoute } from '~/components'
+import {
+  Form,
+  Head,
+  Layout,
+  ResponsiveWrapper,
+  Spacer,
+  useRoute,
+} from '~/components'
 
-const Settings = () => {
+const BaseSettings = () => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
-      <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="manageCircle" />}
-      />
-
-      <Head title={{ id: 'manageCircle' }} />
-
+    <ResponsiveWrapper>
       <Form.List
         groupName={
           <FormattedMessage defaultMessage="Settings" description="" />
         }
+        spacingX={0}
       >
         <Form.List.Item
           title={
@@ -32,7 +33,6 @@ const Settings = () => {
           role="link"
         />
       </Form.List>
-
       <Form.List
         groupName={
           <FormattedMessage
@@ -40,6 +40,7 @@ const Settings = () => {
             description="src/views/Circle/Settings/index.tsx"
           />
         }
+        spacingX={0}
       >
         <Form.List.Item
           title={
@@ -52,8 +53,18 @@ const Settings = () => {
           role="link"
         />
       </Form.List>
-
       <Spacer size="xxxloose" />
+    </ResponsiveWrapper>
+  )
+}
+
+const Settings = () => {
+  return (
+    <Layout.Main>
+      <Layout.Header left={<Layout.Header.Title id="manageCircle" />} />
+
+      <Head title={{ id: 'manageCircle' }} />
+      <BaseSettings />
     </Layout.Main>
   )
 }

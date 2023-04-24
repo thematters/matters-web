@@ -32,7 +32,7 @@ const AccountSettings = () => {
   const userPasswordEditable = !viewer.info.isWalletAuth
 
   return (
-    <Form.List groupName={<Translate id="settingsAccount" />}>
+    <Form.List groupName={<Translate id="settingsAccount" />} spacingX={0}>
       <ChangeUserNameAsk>
         {({ openDialog }) => (
           <Form.List.Item
