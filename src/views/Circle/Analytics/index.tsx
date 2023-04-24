@@ -7,7 +7,7 @@ import SubscriberAnalytics from './SubscriberAnalytics'
 
 const CircleAnalytics = () => {
   return (
-    <Layout.Main smBgColor="grey-lighter">
+    <Layout.Main>
       <Layout.Header left={<Layout.Header.Title id="circleAnalytics" />} />
 
       <Head title={{ id: 'circleAnalytics' }} />
