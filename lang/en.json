@@ -403,10 +403,6 @@
     "defaultMessage": "Your article has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
-  "JXdbo8": {
-    "defaultMessage": "Done",
-    "description": ""
-  },
   "Jc+W6M": {
     "defaultMessage": " resigned as tag maintainer. Would you like to be the new tag maintainer?",
     "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
