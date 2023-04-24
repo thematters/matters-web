@@ -19,10 +19,8 @@
 .container {
   @mixin form-container;
 
-  & :global(.field) {
-    @media (--sm-up) {
-      margin-right: 1rem;
-      margin-left: 1rem;
-    }
+  @media (--sm-up) {
+    margin-right: var(--spacing-base);
+    margin-left: var(--spacing-base);
   }
 }
