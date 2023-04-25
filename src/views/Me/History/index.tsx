@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useState } from 'react'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -47,8 +48,14 @@ const ME_HISTORY_FEED = gql`
 `
 
 const CLEAR_READ_HISTORY = gql`
-  mutation ClearReadHistory($id: ID!) {
-    clearReadHistory(input: { id: $id })
+  mutation ClearReadHistory {
+    clearReadHistory(input: {}) {
+      activity {
+        history(input: { first: 10 }) {
+          totalCount
+        }
+      }
+    }
   }
 `
 
@@ -56,16 +63,14 @@ const BaseMeHistory = () => {
   const { data, loading, error, fetchMore } =
     useQuery<MeHistoryFeedQuery>(ME_HISTORY_FEED)
 
-  const [clear] = useMutation<ClearReadHistoryMutation>(
-    CLEAR_READ_HISTORY,
-    undefined,
-    {
-      showToast: false,
-    }
-  )
+  const [emptyHistory, setEmptyHistory] = useState(false)
+
+  const [clear] = useMutation<ClearReadHistoryMutation>(CLEAR_READ_HISTORY, {
+    update: () => setEmptyHistory(true),
+  })
 
   const handlerClear = async () => {
-    await clear({ variables: { input: { id: data?.viewer?.id } } })
+    await clear()
   }
 
   if (loading) {
@@ -89,7 +94,7 @@ const BaseMeHistory = () => {
   const connectionPath = 'viewer.activity.history'
   const { edges, pageInfo } = data?.viewer?.activity.history || {}
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
+  if (!edges || edges.length <= 0 || !pageInfo || emptyHistory) {
     return (
       <>
         <Layout.Header left={<Layout.Header.Title id="readHistory" />} />
