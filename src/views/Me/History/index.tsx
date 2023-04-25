@@ -62,7 +62,6 @@ const CLEAR_READ_HISTORY = gql`
 const BaseMeHistory = () => {
   const { data, loading, error, fetchMore } =
     useQuery<MeHistoryFeedQuery>(ME_HISTORY_FEED)
-  console.log({ data })
 
   const [emptyHistory, setEmptyHistory] = useState(false)
 
