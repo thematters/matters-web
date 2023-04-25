@@ -15,7 +15,7 @@
 
 .buttons {
   display: inline-flex;
-  gap: var(--spacing-tight);
+  gap: var(--spacing-base);
 
   @media (--sm-up) {
     padding-right: var(--spacing-base);
