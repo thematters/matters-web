@@ -130,7 +130,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
                 title={title}
                 tags={title.endsWith(tag.content) ? undefined : keywords}
               />
-
               <DropdownActions
                 isOwner={isOwner}
                 isEditor={isEditor}
