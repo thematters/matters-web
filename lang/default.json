@@ -831,10 +831,6 @@
     "defaultMessage": "Logged out successfully",
     "description": ""
   },
-  "fOgusL": {
-    "defaultMessage": "Choose a method to enter",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
   "fWDtpq": {
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"

@@ -37,17 +37,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   const InnerForm = (
     <>
       <section className={containerClasses}>
-        <Form.List
-          groupName={
-            isInPage ? (
-              <FormattedMessage
-                defaultMessage="Choose a method to enter"
-                description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-              />
-            ) : null
-          }
-          spacingX={isInPage ? 0 : 'base'}
-        >
+        <Form.List spacingX={isInPage ? 0 : 'base'}>
           <Form.List.Item
             title={
               <TextIcon
