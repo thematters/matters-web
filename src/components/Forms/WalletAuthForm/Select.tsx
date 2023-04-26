@@ -270,8 +270,7 @@ const Select: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton onClick={onBack} />}
-          right={
+          left={
             <Layout.Header.Title
               id={isConnect ? 'loginWithWallet' : 'authEntries'}
             />
