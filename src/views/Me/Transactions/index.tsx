@@ -12,6 +12,7 @@ import {
   InfiniteScroll,
   Layout,
   List,
+  Spacer,
   Spinner,
   Tabs,
   Transaction,
@@ -155,7 +156,7 @@ const Transactions = () => {
       <Layout.Header right={<Layout.Header.Title id="paymentTransactions" />} />
 
       <Head title={{ id: 'paymentTransactions' }} />
-
+      <Spacer size="xtight" />
       <Tabs
         sticky
         side={

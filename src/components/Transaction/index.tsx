@@ -94,7 +94,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
         className="container"
         data-test-id={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM}
       >
-        {(isAddCredit || isPayout) && (
+        {(isAddCredit || isPayout || isSubscription) && (
           <section className="tx-icon">
             <Currency currency={currency} />
           </section>
