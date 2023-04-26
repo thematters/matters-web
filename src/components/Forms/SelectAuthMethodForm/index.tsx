@@ -9,7 +9,6 @@ import {
   IconWallet24,
   LanguageSwitch,
   Layout,
-  Spacer,
   TextIcon,
 } from '~/components'
 
@@ -126,8 +125,6 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
         <SourceHeader source={source} />
 
         {InnerForm}
-
-        <Spacer />
         <style jsx>{styles}</style>
       </Dialog.Content>
     </>
