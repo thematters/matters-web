@@ -106,6 +106,8 @@ const Authors = () => {
                     user={node}
                     spacing={['tight', 0]}
                     bgColor="none"
+                    hasFollow={false}
+                    hasState={false}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'authors',
