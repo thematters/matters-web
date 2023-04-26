@@ -227,7 +227,7 @@ const UserArticles = () => {
       <ArticleSummaryInfo user={user} />
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List>
+        <List responsiveWrapper>
           {articleEdges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               <ArticleDigestFeed

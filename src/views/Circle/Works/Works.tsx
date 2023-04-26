@@ -144,7 +144,7 @@ const CircleDetailWorks = () => {
 
       <section className="works">
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-          <List>
+          <List responsiveWrapper>
             {(edges || []).map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
                 <ArticleDigestFeed

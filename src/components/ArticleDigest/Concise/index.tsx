@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
-import { Card, ResponsiveImage, ResponsiveWrapper } from '~/components'
+import { Card, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleDigestConciseArticlePrivateFragment,
@@ -59,52 +59,50 @@ const BaseArticleDigestFeed = ({
   })
 
   return (
-    <ResponsiveWrapper>
-      <Card
-        {...path}
-        spacing={['base', 0]}
-        bgActiveColor="none"
-        onClick={onClick}
-      >
-        <section className="content">
-          <section className="head">
-            <section className="title">
-              <ArticleDigestTitle article={article} textSize="xm" />
-            </section>
-
-            <section className="author">
-              <UserDigest.Mini
-                user={author}
-                avatarSize="sm"
-                textSize="sm"
-                hasAvatar
-                hasDisplayName
-                onClick={onClickAuthor}
-              />
-            </section>
+    <Card
+      {...path}
+      spacing={['base', 0]}
+      bgActiveColor="none"
+      onClick={onClick}
+    >
+      <section className="content">
+        <section className="head">
+          <section className="title">
+            <ArticleDigestTitle article={article} textSize="xm" />
           </section>
 
-          <p className="description">{cleanedSummary}</p>
-
-          {cover && (
-            <div className="cover">
-              <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
-            </div>
-          )}
+          <section className="author">
+            <UserDigest.Mini
+              user={author}
+              avatarSize="sm"
+              textSize="sm"
+              hasAvatar
+              hasDisplayName
+              onClick={onClickAuthor}
+            />
+          </section>
         </section>
 
-        <FooterActions
-          article={article}
-          inCard
-          date={date}
-          tag={footerTag}
-          circle={footerCircle}
-          {...controls}
-        />
+        <p className="description">{cleanedSummary}</p>
 
-        <style jsx>{styles}</style>
-      </Card>
-    </ResponsiveWrapper>
+        {cover && (
+          <div className="cover">
+            <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
+          </div>
+        )}
+      </section>
+
+      <FooterActions
+        article={article}
+        inCard
+        date={date}
+        tag={footerTag}
+        circle={footerCircle}
+        {...controls}
+      />
+
+      <style jsx>{styles}</style>
+    </Card>
   )
 }
 

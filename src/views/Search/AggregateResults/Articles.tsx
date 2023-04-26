@@ -114,7 +114,7 @@ const AggregateArticleResults = () => {
         }
         loadMore={loadMore}
       >
-        <List>
+        <List responsiveWrapper>
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'Article' && (
