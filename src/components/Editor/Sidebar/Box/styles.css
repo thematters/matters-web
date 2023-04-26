@@ -2,6 +2,7 @@
   @mixin border-grey;
 
   padding: var(--spacing-base) 0 0;
+  margin-bottom: var(--spacing-loose);
   border-radius: var(--spacing-x-tight);
 
   & header {
@@ -11,7 +12,7 @@
   }
 }
 
-.footerSpace {
+.footerSpacing {
   padding-bottom: var(--spacing-base);
 }
 

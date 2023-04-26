@@ -98,6 +98,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInCircle = isPathStartWith('/~', true)
+  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
 
   const { data } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
@@ -109,7 +110,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   const articleClasses = classNames({
     'l-col-three-mid': true,
     [`bg-${smBgColor}`]: !!smBgColor,
-    hasNavBar: !isInArticleDetail,
+    hasNavBar: !isInArticleDetail && !isInDraftDetail,
     hasOnboardingTasks: showOnboardingTasks,
   })
 
