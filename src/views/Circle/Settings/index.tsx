@@ -16,12 +16,8 @@ const BaseSettings = () => {
 
   return (
     <ResponsiveWrapper>
-      <Form.List
-        groupName={
-          <FormattedMessage defaultMessage="Settings" description="" />
-        }
-        spacingX={0}
-      >
+      <Spacer size="loose" />
+      <Form.List spacingX={0}>
         <Form.List.Item
           title={
             <FormattedMessage
@@ -32,16 +28,7 @@ const BaseSettings = () => {
           {...toPath({ page: 'circleEditProfile', circle: { name } })}
           role="link"
         />
-      </Form.List>
-      <Form.List
-        groupName={
-          <FormattedMessage
-            defaultMessage="Free Trial"
-            description="src/views/Circle/Settings/index.tsx"
-          />
-        }
-        spacingX={0}
-      >
+
         <Form.List.Item
           title={
             <FormattedMessage

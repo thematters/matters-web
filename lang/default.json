@@ -283,10 +283,6 @@
     "defaultMessage": "Settings",
     "description": ""
   },
-  "DMlmcU": {
-    "defaultMessage": "Free Trial",
-    "description": "src/views/Circle/Settings/index.tsx"
-  },
   "DXJ8ys": {
     "defaultMessage": "Read counts indicates how many registered users read.",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
