@@ -1,7 +1,7 @@
 .category {
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-x-tight) var(--spacing-base);
+  padding: var(--spacing-x-tight) 0;
   font-size: var(--font-size-md-s);
   font-weight: var(--font-weight-medium);
 }

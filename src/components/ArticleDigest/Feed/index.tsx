@@ -8,7 +8,6 @@ import {
   CircleDigest,
   DateTime,
   ResponsiveImage,
-  ResponsiveWrapper,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
@@ -74,62 +73,60 @@ const BaseArticleDigestFeed = ({
   })
 
   return (
-    <ResponsiveWrapper>
-      <Card
-        {...path}
-        spacing={['base', 0]}
-        onClick={onClick}
-        testId={TEST_ID.DIGEST_ARTICLE_FEED}
-        bgActiveColor="none"
-        is={is}
-      >
-        {header ||
-          (hasCircle && circle && (
-            <header>
-              <CircleDigest.Plain circle={circle} />
-            </header>
-          ))}
-        <section className="content">
-          <section className="head">
-            <section className="title">
-              <ArticleDigestTitle article={article} textSize="xm" />
-            </section>
-
-            {hasAuthor && (
-              <section className="author">
-                <UserDigest.Mini
-                  user={author}
-                  avatarSize="sm"
-                  textSize="sm"
-                  hasAvatar
-                  hasDisplayName
-                  onClick={onClickAuthor}
-                />
-
-                {hasFollow && <FollowButton user={article.author} />}
-              </section>
-            )}
+    <Card
+      {...path}
+      spacing={['base', 0]}
+      onClick={onClick}
+      testId={TEST_ID.DIGEST_ARTICLE_FEED}
+      bgActiveColor="none"
+      is={is}
+    >
+      {header ||
+        (hasCircle && circle && (
+          <header>
+            <CircleDigest.Plain circle={circle} />
+          </header>
+        ))}
+      <section className="content">
+        <section className="head">
+          <section className="title">
+            <ArticleDigestTitle article={article} textSize="xm" />
           </section>
 
-          <p className="description">{cleanedSummary}</p>
+          {hasAuthor && (
+            <section className="author">
+              <UserDigest.Mini
+                user={author}
+                avatarSize="sm"
+                textSize="sm"
+                hasAvatar
+                hasDisplayName
+                onClick={onClickAuthor}
+              />
 
-          {cover && (
-            <div className="cover">
-              <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
-            </div>
+              {hasFollow && <FollowButton user={article.author} />}
+            </section>
           )}
         </section>
-        {isConciseFooter && (
-          <section>
-            <DateTime date={article.createdAt} />
-          </section>
+
+        <p className="description">{cleanedSummary}</p>
+
+        {cover && (
+          <div className="cover">
+            <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
+          </div>
         )}
-        {!isConciseFooter && (
-          <FooterActions article={article} inCard date={date} {...controls} />
-        )}
-        <style jsx>{styles}</style>
-      </Card>
-    </ResponsiveWrapper>
+      </section>
+      {isConciseFooter && (
+        <section>
+          <DateTime date={article.createdAt} />
+        </section>
+      )}
+      {!isConciseFooter && (
+        <FooterActions article={article} inCard date={date} {...controls} />
+      )}
+      <style jsx>{styles}</style>
+    </Card>
   )
 }
 

@@ -89,7 +89,7 @@ const Authors = () => {
 
   return (
     <section className="authors">
-      <Slides bgColor="yellow-lighter" header={SlidesHeader}>
+      <Slides header={SlidesHeader}>
         {loading && (
           <Slides.Item size="md">
             <Spinner />

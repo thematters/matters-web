@@ -11,6 +11,7 @@ import {
   List,
   Media,
   QueryError,
+  ResponsiveWrapper,
   Spinner,
   useEventListener,
   usePublicQuery,
@@ -175,49 +176,51 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List>
-        {(edges || []).map(({ node, cursor }, i) => (
-          <React.Fragment key={`${feedType}:${cursor}`}>
-            <List.Item>
-              <ArticleDigestFeed
-                article={node}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: trackingType,
-                    contentType: 'article',
-                    location: i,
-                    id: node.id,
-                  })
-                }
-                onClickAuthor={() => {
-                  analytics.trackEvent('click_feed', {
-                    type: trackingType,
-                    contentType: 'user',
-                    location: i,
-                    id: node.author.id,
-                  })
-                }}
-                tagDetailId={tag.id}
-                hasSetTagSelected={canEditTag && !isSelected}
-                hasSetTagUnselected={canEditTag && isSelected}
-                hasRemoveTag={canEditTag && !isHottest}
-              />
-            </List.Item>
+      <ResponsiveWrapper>
+        <List>
+          {(edges || []).map(({ node, cursor }, i) => (
+            <React.Fragment key={`${feedType}:${cursor}`}>
+              <List.Item>
+                <ArticleDigestFeed
+                  article={node}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: trackingType,
+                      contentType: 'article',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                  onClickAuthor={() => {
+                    analytics.trackEvent('click_feed', {
+                      type: trackingType,
+                      contentType: 'user',
+                      location: i,
+                      id: node.author.id,
+                    })
+                  }}
+                  tagDetailId={tag.id}
+                  hasSetTagSelected={canEditTag && !isSelected}
+                  hasSetTagUnselected={canEditTag && isSelected}
+                  hasRemoveTag={canEditTag && !isHottest}
+                />
+              </List.Item>
 
-            {edges.length >= 4 && i === 3 && (
-              <Media lessThan="xl">
-                <RelatedTags tagId={tag.id} />
-              </Media>
-            )}
-          </React.Fragment>
-        ))}
-      </List>
+              {edges.length >= 4 && i === 3 && (
+                <Media lessThan="xl">
+                  <RelatedTags tagId={tag.id} />
+                </Media>
+              )}
+            </React.Fragment>
+          ))}
+        </List>
 
-      {edges.length < 4 && (
-        <Media lessThan="xl">
-          <RelatedTags tagId={tag.id} />
-        </Media>
-      )}
+        {edges.length < 4 && (
+          <Media lessThan="xl">
+            <RelatedTags tagId={tag.id} />
+          </Media>
+        )}
+      </ResponsiveWrapper>
     </InfiniteScroll>
   )
 }
