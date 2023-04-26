@@ -18,8 +18,6 @@
 }
 
 .block {
-  @mixin border-top-grey;
-
   padding: var(--spacing-loose) 0 0;
   margin: var(--spacing-loose) 0 var(--spacing-base);
 }
