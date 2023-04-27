@@ -283,10 +283,6 @@
     "defaultMessage": "Settings",
     "description": ""
   },
-  "DMlmcU": {
-    "defaultMessage": "Free Trial",
-    "description": "src/views/Circle/Settings/index.tsx"
-  },
   "DXJ8ys": {
     "defaultMessage": "Read counts indicates how many registered users read.",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
@@ -604,7 +600,7 @@
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
   "U9IXic": {
-    "defaultMessage": "添加作品",
+    "defaultMessage": "Add Articles",
     "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
   },
   "UNUROl": {
@@ -834,10 +830,6 @@
   "fG41Ux": {
     "defaultMessage": "Logged out successfully",
     "description": ""
-  },
-  "fOgusL": {
-    "defaultMessage": "Choose a method to enter",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "fWDtpq": {
     "defaultMessage": "Pending",
@@ -1243,3 +1235,4 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
+

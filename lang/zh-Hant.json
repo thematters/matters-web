@@ -283,10 +283,6 @@
     "defaultMessage": "設定",
     "description": ""
   },
-  "DMlmcU": {
-    "defaultMessage": "免費資格",
-    "description": "src/views/Circle/Settings/index.tsx"
-  },
   "DXJ8ys": {
     "defaultMessage": "閱讀次數代表了你的作品被登入用戶閱讀的總次數，每次閱讀過程超過一定時間後才會計入。此外，同一個用戶的多次閱讀也會進行累計。",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
@@ -835,10 +831,6 @@
     "defaultMessage": "登出成功",
     "description": ""
   },
-  "fOgusL": {
-    "defaultMessage": "選擇進入方式",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
   "fWDtpq": {
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1243,3 +1235,4 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
+
