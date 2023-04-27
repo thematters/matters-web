@@ -1,0 +1,9 @@
+.email-title {
+  word-break: keep-all;
+}
+
+.email-text {
+  @mixin line-clamp;
+
+  padding-left: var(--spacing-base);
+}
