@@ -50,15 +50,11 @@ const IMG_SRC = [
 
   // Asssets
   'data:',
-  process.env.NEXT_PUBLIC_LEGACY_PRE_ASSET_DOMAIN,
+  process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN,
   process.env.NEXT_PUBLIC_LEGACY_ASSET_DOMAIN,
-  process.env.NEXT_PUBLIC_LEGACY_ASSET_DOMAIN?.replace(
-    site_domain_tld,
-    site_domain_tld_old
-  ),
 
-  process.env.NEXT_PUBLIC_ASSET_DOMAIN
-    ? new URL(process.env.NEXT_PUBLIC_ASSET_DOMAIN).hostname
+  process.env.NEXT_PUBLIC_CF_IMAGE_URL
+    ? new URL(process.env.NEXT_PUBLIC_CF_IMAGE_URL).hostname
     : undefined,
 
   // Next.js Assets
