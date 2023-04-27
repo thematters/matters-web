@@ -84,38 +84,54 @@ const FollowingFeed = () => {
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List responsiveWrapper>
-          {edges.map(({ node }, i) => (
-            <List.Item key={`${node.__typename}:${i}`}>
-              {node.__typename === 'UserPublishArticleActivity' && (
-                <UserPublishArticleActivity location={i} {...node} />
-              )}
-              {node.__typename === 'UserBroadcastCircleActivity' && (
-                <UserBroadcastCircleActivity {...node} />
-              )}
-              {node.__typename === 'UserCreateCircleActivity' && (
-                <UserCreateCircleActivity location={i} {...node} />
-              )}
-              {node.__typename === 'UserAddArticleTagActivity' && (
-                <UserAddArticleTagActivity location={i} {...node} />
-              )}
-              {node.__typename === 'ArticleRecommendationActivity' && (
-                <RecommendArticleActivity
-                  location={i}
-                  articles={node.recommendArticles}
-                  source={node.source}
-                />
-              )}
-              {node.__typename === 'CircleRecommendationActivity' && (
-                <RecommendCircleActivity
-                  location={i}
-                  circles={node.recommendCircles}
-                />
-              )}
-              {node.__typename === 'UserRecommendationActivity' && (
-                <RecommendUserActivity users={node.recommendUsers} />
-              )}
-            </List.Item>
-          ))}
+          {edges.map(({ node }, i) => {
+            if (node.__typename === 'ArticleRecommendationActivity') {
+              return (
+                <section key={`${node.__typename}:${i}`}>
+                  <RecommendArticleActivity
+                    location={i}
+                    articles={node.recommendArticles}
+                    source={node.source}
+                  />
+                </section>
+              )
+            }
+
+            if (node.__typename === 'CircleRecommendationActivity') {
+              return (
+                <section key={`${node.__typename}:${i}`}>
+                  <RecommendCircleActivity
+                    location={i}
+                    circles={node.recommendCircles}
+                  />
+                </section>
+              )
+            }
+
+            if (node.__typename === 'UserRecommendationActivity') {
+              return (
+                <section key={`${node.__typename}:${i}`}>
+                  <RecommendUserActivity users={node.recommendUsers} />
+                </section>
+              )
+            }
+            return (
+              <List.Item key={`${node.__typename}:${i}`}>
+                {node.__typename === 'UserPublishArticleActivity' && (
+                  <UserPublishArticleActivity location={i} {...node} />
+                )}
+                {node.__typename === 'UserBroadcastCircleActivity' && (
+                  <UserBroadcastCircleActivity {...node} />
+                )}
+                {node.__typename === 'UserCreateCircleActivity' && (
+                  <UserCreateCircleActivity location={i} {...node} />
+                )}
+                {node.__typename === 'UserAddArticleTagActivity' && (
+                  <UserAddArticleTagActivity location={i} {...node} />
+                )}
+              </List.Item>
+            )
+          })}
         </List>
       </InfiniteScroll>
 
