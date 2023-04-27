@@ -123,7 +123,7 @@
     "@storybook/addon-links": "^6.4.9",
     "@storybook/builder-webpack5": "^6.4.9",
     "@storybook/manager-webpack5": "^6.4.9",
-    "@storybook/react": "^6.1.21",
+    "@storybook/react": "^6.5.15",
     "@svgr/webpack": "^6.5.1",
     "@types/autosize": "^4.0.1",
     "@types/classnames": "^2.3.1",
