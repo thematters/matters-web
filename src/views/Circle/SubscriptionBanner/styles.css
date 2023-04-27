@@ -14,4 +14,9 @@
   &:focus {
     background: var(--color-matters-gold-active);
   }
+
+  @media (--sm-up) {
+    margin-right: 0;
+    margin-left: 0;
+  }
 }
