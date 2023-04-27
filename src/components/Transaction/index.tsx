@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
@@ -88,6 +89,11 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
     ? toPath({ page: 'circleDetail', circle })
     : null
 
+  const dateTimeClasses = classNames({
+    dateTime: true,
+    isDonation,
+  })
+
   return (
     <Card {...path} spacing={[0, 0]} bgActiveColor="none">
       <section
@@ -139,7 +145,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
                     )}
                   </p>
                 </section>
-                <section className="title">
+                <section className="title circleTitle">
                   <CircleDigest.Title
                     circle={circle}
                     is="h2"
@@ -150,7 +156,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
               </>
             )}
 
-            <section>
+            <section className={dateTimeClasses}>
               <DateTime date={createdAt} />
             </section>
           </section>

@@ -30,6 +30,10 @@
         padding-left: var(--spacing-x-loose);
       }
 
+      & .circleTitle {
+        padding-left: 0;
+      }
+
       & .title,
       & .wallet-action,
       & .subscription {
@@ -46,6 +50,12 @@
           font-size: var(--font-size-md-s);
           font-weight: var(--font-weight-medium);
           line-height: 1;
+        }
+      }
+
+      & .dateTime {
+        &.isDonation {
+          padding-left: var(--spacing-x-loose);
         }
       }
     }
