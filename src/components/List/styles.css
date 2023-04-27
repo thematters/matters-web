@@ -1,9 +1,9 @@
 .list {
   &.has-border {
-    & :global(> .list-item) {
-      @mixin border-bottom-grey;
+    & :global(> .list-item + .list-item) {
+      @mixin border-top-grey;
 
-      border-bottom-style: dashed;
+      border-top-style: dashed;
     }
   }
 
