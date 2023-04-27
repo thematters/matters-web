@@ -20,7 +20,7 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
     <section className="author-widget">
       <Card
         bgColor="grey-lighter"
-        bgActiveColor="none"
+        bgActiveColor="grey-lighter"
         spacing={['base', 'base']}
         borderColor="grey-lighter"
         borderRadius="base"
@@ -30,8 +30,8 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
           user={circle.owner}
           hasFollow={false}
           spacing={[0, 0]}
-          bgColor="none"
-          bgActiveColor="none"
+          bgColor="grey-lighter"
+          bgActiveColor="grey-lighter"
         />
 
         {pinnedBroadcast && (
