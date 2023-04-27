@@ -134,7 +134,8 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
   }
 
   return {
-    credentials: isPublicOperation ? 'omit' : 'include',
+    // credentials: isPublicOperation ? 'omit' : 'include',
+    credentials: 'include',
     headers: {
       ...headers,
     },
