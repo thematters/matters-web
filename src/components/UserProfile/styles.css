@@ -4,13 +4,10 @@
 
 .buttons {
   display: inline-flex;
+  gap: var(--spacing-base);
 
   @media (--sm-up) {
     padding-right: var(--spacing-base);
-  }
-
-  & :global(> * + *) {
-    margin-left: var(--spacing-base);
   }
 }
 

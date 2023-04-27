@@ -25,9 +25,6 @@ import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 import { AddArticlesTagsMutation, TagFragmentFragment } from '~/gql/graphql'
-
-import styles from './styles.css'
-
 interface DropdownActionsProps {
   // id: string
   isOwner: boolean
@@ -126,21 +123,18 @@ const BaseDropdownActions = ({
       }}
     >
       {({ openDialog, type, ref }) => (
-        <section className="container">
-          <Button
-            bgColor="half-black"
-            aria-label={intl.formatMessage({
-              defaultMessage: 'More Actions',
-              description: '',
-            })}
-            onClick={openDialog}
-            aria-haspopup={type}
-            ref={ref}
-          >
-            <IconSettings32 size="lg" color="white" />
-          </Button>
-          <style jsx>{styles}</style>
-        </section>
+        <Button
+          bgColor="half-black"
+          aria-label={intl.formatMessage({
+            defaultMessage: 'More Actions',
+            description: '',
+          })}
+          onClick={openDialog}
+          aria-haspopup={type}
+          ref={ref}
+        >
+          <IconSettings32 size="lg" color="white" />
+        </Button>
       )}
     </DropdownDialog>
   )

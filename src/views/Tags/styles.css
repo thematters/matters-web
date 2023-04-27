@@ -15,7 +15,7 @@ ul {
 
 li {
   position: relative;
-  padding: var(--spacing-x-tight) var(--spacing-x-tight);
+  padding: var(--spacing-x-tight) 0;
 
   @media (--lg-up) {
     padding: var(--spacing-base) 0;
@@ -25,7 +25,7 @@ li {
     }
 
     &:nth-child(2n + 1) {
-      margin-right: var(--spacing-xx-tight);
+      margin-right: var(--spacing-loose);
     }
   }
 }

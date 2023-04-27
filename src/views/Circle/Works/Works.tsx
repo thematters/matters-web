@@ -144,12 +144,13 @@ const CircleDetailWorks = () => {
 
       <section className="works">
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-          <List>
+          <List responsiveWrapper>
             {(edges || []).map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
                 <ArticleDigestFeed
                   article={node}
                   hasCircle={false}
+                  hasAuthor={false}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: 'circle_detail',
@@ -158,14 +159,6 @@ const CircleDetailWorks = () => {
                       id: node.id,
                     })
                   }
-                  onClickAuthor={() => {
-                    analytics.trackEvent('click_feed', {
-                      type: 'circle_detail',
-                      contentType: 'user',
-                      location: i,
-                      id: node.author.id,
-                    })
-                  }}
                 />
               </List.Item>
             ))}

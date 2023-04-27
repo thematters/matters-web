@@ -54,9 +54,9 @@ const ArticleTagAddedNotice = ({
           <NoticeArticleTitle article={notice.target} />
 
           <Translate
-            zh_hant=" ，並把它加入標籤"
-            zh_hans=" ，并把它加入标签"
-            en=" and added it to tag"
+            zh_hant=" ，並把它加入標籤精選"
+            zh_hans=" ，并把它加入标签精选"
+            en=" and added it to tag featured"
           />
         </NoticeHead>
 

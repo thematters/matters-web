@@ -19,8 +19,8 @@ import styles from './styles.css'
 export type CardBgColor = 'grey-lighter' | 'white' | 'none'
 export type CardBgHoverColor = 'grey-lighter' | 'none'
 export type CardSpacing = 0 | 'xtight' | 'tight' | 'base' | 'loose'
-export type CardBorderColor = 'grey-lighter' | 'line-grey-light'
-export type CardBorderRadius = 'xtight' | 'xxtight' | 'base'
+export type CardBorderColor = 'grey-lighter' | 'line-grey-light' | 'green'
+export type CardBorderRadius = 'xtight' | 'xxtight' | 'base' | 'loose'
 
 export interface CardProps {
   spacing?: [CardSpacing, CardSpacing]

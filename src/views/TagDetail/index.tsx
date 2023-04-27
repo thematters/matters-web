@@ -130,7 +130,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
                 title={title}
                 tags={title.endsWith(tag.content) ? undefined : keywords}
               />
-
               <DropdownActions
                 isOwner={isOwner}
                 isEditor={isEditor}
@@ -179,7 +178,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             <ArticlesCount tag={tag} />
           </section>
 
-          <section className="buttons">
+          <section>
             <TagDetailButtons.FollowButton tag={tag} />
           </section>
         </section>

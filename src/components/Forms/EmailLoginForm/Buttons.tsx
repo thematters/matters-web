@@ -42,7 +42,7 @@ export const EmailSignUpDialogButton = ({
   gotoEmailSignUp: () => void
   isInPage: boolean
 }) => (
-  <Form.List spacingY="xloose" spacingX={isInPage ? 0 : 'base'}>
+  <Form.List spacingY={0} spacingX={isInPage ? 0 : 'base'}>
     <Form.List.Item
       title={
         <FormattedMessage

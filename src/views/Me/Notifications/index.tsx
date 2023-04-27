@@ -11,7 +11,6 @@ import {
   List,
   Media,
   Notice,
-  ResponsiveWrapper,
   Spacer,
   Spinner,
   useMutation,
@@ -92,12 +91,10 @@ const BaseNotifications = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List spacing={['xloose', 0]}>
+      <List spacing={['xloose', 0]} responsiveWrapper>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
-            <ResponsiveWrapper>
-              <Notice notice={node} />
-            </ResponsiveWrapper>
+            <Notice notice={node} />
           </List.Item>
         ))}
       </List>
@@ -113,6 +110,7 @@ const Notifications = () => {
           left={<Layout.Header.MeButton />}
           right={<Layout.Header.Title id="notifications" />}
         />
+        <Spacer size="base" />
       </Media>
       <Media greaterThan="sm">
         <Spacer size="xloose" />

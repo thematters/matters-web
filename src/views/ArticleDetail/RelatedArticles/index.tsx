@@ -79,7 +79,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
   if (!inSidebar) {
     return (
       <section className={relatedArticlesClasses}>
-        <Slides header={Header} bgColor="green-lighter">
+        <Slides header={Header}>
           {edges.map(({ node, cursor }, i) => (
             <Slides.Item key={cursor}>
               <ArticleDigestCard

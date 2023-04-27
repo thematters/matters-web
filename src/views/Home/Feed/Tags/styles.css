@@ -1,4 +1,6 @@
 .tags {
+  margin-bottom: var(--spacing-x-loose);
+
   & :global(.list-item > .card) {
     margin: 0 calc(var(--spacing-x-tight) * -1);
   }

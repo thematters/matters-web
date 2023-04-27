@@ -89,7 +89,7 @@ const Authors = () => {
 
   return (
     <section className="authors">
-      <Slides bgColor="yellow-lighter" header={SlidesHeader}>
+      <Slides header={SlidesHeader}>
         {loading && (
           <Slides.Item size="md">
             <Spinner />
@@ -106,6 +106,8 @@ const Authors = () => {
                     user={node}
                     spacing={['tight', 0]}
                     bgColor="none"
+                    hasFollow={false}
+                    hasState={false}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'authors',

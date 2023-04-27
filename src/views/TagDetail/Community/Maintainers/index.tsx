@@ -86,7 +86,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
             <UserDigest.Rich
               user={tag.owner}
               hasFollow={false}
-              spacing={['tight', 'base']}
+              spacing={['tight', 0]}
             />
           </section>
         </>
@@ -106,7 +106,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
                 <UserDigest.Rich
                   user={editor}
                   hasFollow={false}
-                  spacing={['tight', 'base']}
+                  spacing={['tight', 0]}
                 />
               </li>
             ))}
