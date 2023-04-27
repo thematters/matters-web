@@ -123,7 +123,12 @@ const Wallet = () => {
 
       <ResponsiveWrapper>
         <Form.List spacingX={0}>
-          {hasPaymentPassword && <PaymentPassword />}
+          {hasPaymentPassword && (
+            <>
+              <PaymentPassword />
+              <hr className="dashed-line" />
+            </>
+          )}
           <ViewStripeCustomerPortal />
           {hasStripeAccount && <ViewStripeAccount />}
           <PaymentPointer />

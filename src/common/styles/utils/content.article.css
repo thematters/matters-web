@@ -318,18 +318,7 @@
 .u-summary,
 .editor-summary {
   position: relative;
-  padding-left: var(--spacing-loose);
   margin: var(--spacing-loose) 0;
-
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 100%;
-    content: '';
-    background: var(--color-line-grey-light);
-  }
 
   & .counter {
     font-size: var(--font-size-xs);
@@ -344,6 +333,9 @@
 
 .u-summary,
 .editor-summary :global(textarea) {
+  @mixin border-left-grey;
+
+  padding-left: var(--spacing-loose);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-article-base);
   color: var(--color-grey-darker);

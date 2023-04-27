@@ -1,4 +1,5 @@
 import autosize from 'autosize'
+import classNames from 'classnames'
 import { useEffect, useRef } from 'react'
 
 import Field, { FieldProps } from '../Field'
@@ -41,6 +42,9 @@ const Textarea: React.FC<TextareaProps> = ({
   const node: React.RefObject<any> | null = useRef(null)
   const fieldId = `field-${name}`
   const fieldMsgId = `field-msg-${name}`
+  const textareaClasses = classNames({
+    error,
+  })
 
   useEffect(() => {
     if (node && node.current) {
@@ -64,6 +68,7 @@ const Textarea: React.FC<TextareaProps> = ({
           id={fieldId}
           name={name}
           aria-describedby={fieldMsgId}
+          className={textareaClasses}
         />
       </Field.Content>
 

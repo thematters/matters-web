@@ -30,6 +30,7 @@ import {
   IconInfo16,
   LanguageContext,
   Layout,
+  ResponsiveWrapper,
   TextIcon,
   useMutation,
   VerificationSendCodeButton,
@@ -283,13 +284,16 @@ const Connect: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <Form.List
-        groupName={
-          <FormattedMessage defaultMessage="Connect Wallet" description="" />
-        }
-      >
-        <Form.List.Item title={maskAddress(values.address)} />
-      </Form.List>
+      <ResponsiveWrapper>
+        <Form.List
+          groupName={
+            <FormattedMessage defaultMessage="Connect Wallet" description="" />
+          }
+          spacingX={0}
+        >
+          <Form.List.Item title={maskAddress(values.address)} />
+        </Form.List>
+      </ResponsiveWrapper>
 
       <section className="msg">
         <Form.Field.Footer
@@ -438,7 +442,6 @@ const Connect: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton onClick={onBack} />}
           right={
             <>
               <Layout.Header.Title id="authEntries" />

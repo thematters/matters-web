@@ -178,7 +178,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             <ArticlesCount tag={tag} />
           </section>
 
-          <section className="buttons">
+          <section>
             <TagDetailButtons.FollowButton tag={tag} />
           </section>
         </section>

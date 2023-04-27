@@ -22,3 +22,7 @@
     }
   }
 }
+
+.dashed-line {
+  border-top: 1px dashed var(--color-grey-light);
+}

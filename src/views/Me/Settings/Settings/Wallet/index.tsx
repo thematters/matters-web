@@ -80,7 +80,6 @@ const WalletSettings = () => {
               <CopyToClipboard text={ethAddress}>
                 <Button
                   spacing={['xtight', 'xtight']}
-                  bgActiveColor="grey-lighter"
                   aria-label={translate({ id: 'copy', lang })}
                 >
                   <IconCopy16 color="grey" />

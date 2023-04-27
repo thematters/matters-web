@@ -1,3 +1,5 @@
+import classNames from 'classnames'
+
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
@@ -41,6 +43,9 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const fieldId = `field-${name}`
   const fieldMsgId = `field-msg-${name}`
+  const inputClasses = classNames({
+    error,
+  })
 
   return (
     <Field>
@@ -62,6 +67,7 @@ const Input: React.FC<InputProps> = ({
           autoCorrect="off"
           autoCapitalize="off"
           spellCheck="false"
+          className={inputClasses}
         />
       </Field.Content>
 

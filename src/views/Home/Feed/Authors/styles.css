@@ -1,4 +1,5 @@
 .authors {
+  margin-bottom: var(--spacing-x-loose);
   border-bottom: 1px dashed var(--color-grey-lighter);
 
   & :global(.list-item > .card) {
