@@ -4,9 +4,14 @@
   padding: 0 var(--spacing-base);
   margin: var(--spacing-x-tight) 0;
   color: var(--color-grey-dark);
+  white-space: pre-wrap;
 
   & .num {
     font-weight: var(--font-weight-semibold);
     color: var(--color-black);
   }
+}
+
+.header {
+  @mixin flex-center-space-between;
 }

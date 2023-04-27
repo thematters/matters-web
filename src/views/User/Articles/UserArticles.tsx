@@ -12,6 +12,7 @@ import {
   IconDotDivider,
   InfiniteScroll,
   List,
+  Media,
   QueryError,
   Spinner,
   usePublicQuery,
@@ -44,7 +45,7 @@ const ArticleSummaryInfo = ({
         defaultMessage="Created"
         description="src/views/User/Articles/UserArticles.tsx"
       />
-      <span className="num">&nbsp;{articles}&nbsp;</span>
+      <span className="num">{articles}&nbsp;</span>
       <FormattedMessage defaultMessage="articles" description="" />
 
       <IconDotDivider />
@@ -53,7 +54,7 @@ const ArticleSummaryInfo = ({
         defaultMessage="In total"
         description="src/views/User/Articles/UserArticles.tsx"
       />
-      <span className="num">&nbsp;{words}&nbsp;</span>
+      <span className="num">{words}&nbsp;</span>
       <FormattedMessage
         defaultMessage="words"
         description="src/views/User/Articles/UserArticles.tsx"
@@ -222,9 +223,18 @@ const UserArticles = () => {
     <>
       <CustomHead />
 
-      <UserTabs />
+      <Media at="sm">
+        <UserTabs />
 
-      <ArticleSummaryInfo user={user} />
+        <ArticleSummaryInfo user={user} />
+      </Media>
+      <Media greaterThan="sm">
+        <section className="header">
+          <UserTabs />
+
+          <ArticleSummaryInfo user={user} />
+        </section>
+      </Media>
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List responsiveWrapper>
@@ -247,6 +257,7 @@ const UserArticles = () => {
           ))}
         </List>
       </InfiniteScroll>
+      <style jsx>{styles}</style>
     </>
   )
 }
