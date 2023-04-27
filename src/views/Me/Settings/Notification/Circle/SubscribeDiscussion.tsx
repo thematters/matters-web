@@ -13,11 +13,13 @@ type NotificationType = NonNullable<
 interface SubscribeDiscussionProps {
   settings: NotificationType
   toggle: (type: keyof NotificationType) => void
+  spacingX: 0 | 'base'
 }
 
 const SubscribeDiscussion = ({
   settings,
   toggle,
+  spacingX,
 }: SubscribeDiscussionProps) => {
   const { lang } = useContext(LanguageContext)
   const newDiscussionLabel = translate({
@@ -36,6 +38,7 @@ const SubscribeDiscussion = ({
   return (
     <Form.List
       groupName={<Translate zh_hant="眾聊" zh_hans="众聊" en="Discussion" />}
+      spacingX={spacingX}
     >
       <Form.List.Item
         title={newDiscussionLabel}

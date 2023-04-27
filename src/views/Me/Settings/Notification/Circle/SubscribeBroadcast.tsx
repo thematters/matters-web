@@ -13,9 +13,14 @@ type NotificationType = NonNullable<
 interface SubscribeBroadcastProps {
   settings: NotificationType
   toggle: (type: keyof NotificationType) => void
+  spacingX: 0 | 'base'
 }
 
-const SubscribeBroadcast = ({ settings, toggle }: SubscribeBroadcastProps) => {
+const SubscribeBroadcast = ({
+  settings,
+  toggle,
+  spacingX,
+}: SubscribeBroadcastProps) => {
   const { lang } = useContext(LanguageContext)
   const newBroadcastLabel = translate({
     zh_hant: '圍爐有新廣播',
@@ -33,6 +38,7 @@ const SubscribeBroadcast = ({ settings, toggle }: SubscribeBroadcastProps) => {
   return (
     <Form.List
       groupName={<Translate zh_hant="廣播" zh_hans="广播" en="Broadcast" />}
+      spacingX={spacingX}
     >
       <Form.List.Item
         title={newBroadcastLabel}

@@ -142,15 +142,17 @@ const Subscriptions = () => {
         </Title>
       </section>
 
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List hasBorder={false}>
-          {edges.map(({ node }) => (
-            <List.Item key={node.id}>
-              <CircleDigest.Mini circle={node} spacing={['base', 'tight']} />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
+      <section className="list">
+        <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+          <List hasBorder={false}>
+            {edges.map(({ node }) => (
+              <List.Item key={node.id}>
+                <CircleDigest.Mini circle={node} spacing={['base', 0]} />
+              </List.Item>
+            ))}
+          </List>
+        </InfiniteScroll>
+      </section>
 
       <style jsx>{styles}</style>
     </>

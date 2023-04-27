@@ -25,6 +25,7 @@ header {
 
   @media (--sm-up) {
     height: var(--global-header-height);
+    padding: 0;
   }
 }
 

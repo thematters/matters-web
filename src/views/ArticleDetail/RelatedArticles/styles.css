@@ -1,4 +1,5 @@
 .relatedArticles {
+  padding: 0 var(--spacing-base);
   margin-right: calc(var(--spacing-base) * -1);
   margin-bottom: calc(var(--spacing-base) * -1);
   margin-left: calc(var(--spacing-base) * -1);
@@ -17,6 +18,8 @@
 }
 
 .inSidebar {
+  padding: 0;
+
   & :global(li > .card) {
     margin: var(--spacing-x-tight) calc(var(--spacing-x-tight) * -1);
   }

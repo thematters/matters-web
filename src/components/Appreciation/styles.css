@@ -1,6 +1,7 @@
 .container {
-  @mixin flex-start-space-between;
+  @mixin flex-center-space-between;
 
+  padding: var(--spacing-base) 0;
   font-size: var(--font-size-sm);
 }
 

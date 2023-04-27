@@ -12,10 +12,10 @@ import absolute from './absolute'
 const DIFFS = {
   zh_hant: {
     justNow: '剛剛',
-    minuteAgo: ' 分钟前',
-    minutesAgo: ' 分钟前',
-    hourAgo: ' 小时前',
-    hoursAgo: ' 小时前',
+    minuteAgo: ' 分鐘前',
+    minutesAgo: ' 分鐘前',
+    hourAgo: ' 小時前',
+    hoursAgo: ' 小時前',
     dayAgo: ' 天前',
     daysAgo: ' 天前',
   },

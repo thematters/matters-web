@@ -19,7 +19,7 @@ interface BoxProps {
   subtitle?: TextId
   onClick?: () => any
   disabled?: boolean
-  footerSpace?: boolean
+  footerSpacing?: boolean
 }
 
 const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
@@ -28,14 +28,14 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
   subtitle,
   onClick,
   disabled,
-  footerSpace = true,
+  footerSpacing = true,
   children,
 }) => {
   const { lang } = useContext(LanguageContext)
 
   const boxClasses = classNames({
     box: true,
-    footerSpace: !!footerSpace,
+    footerSpacing: !!footerSpacing,
     'u-area-disable': disabled,
   })
 

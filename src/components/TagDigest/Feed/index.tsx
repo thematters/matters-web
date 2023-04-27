@@ -62,7 +62,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
       {...path}
       spacing={['xtight', 'xtight']}
       bgColor="none"
-      bgActiveColor="grey-lighter"
+      bgActiveColor="none"
       borderRadius="xtight"
       testId={TEST_ID.DIGEST_TAG_FEED}
       {...cardProps}

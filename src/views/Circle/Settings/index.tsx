@@ -1,26 +1,23 @@
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Form, Head, Layout, Spacer, useRoute } from '~/components'
+import {
+  Form,
+  Head,
+  Layout,
+  ResponsiveWrapper,
+  Spacer,
+  useRoute,
+} from '~/components'
 
-const Settings = () => {
+const BaseSettings = () => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
-      <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="manageCircle" />}
-      />
-
-      <Head title={{ id: 'manageCircle' }} />
-
-      <Form.List
-        groupName={
-          <FormattedMessage defaultMessage="Settings" description="" />
-        }
-      >
+    <ResponsiveWrapper>
+      <Spacer size="loose" />
+      <Form.List spacingX={0}>
         <Form.List.Item
           title={
             <FormattedMessage
@@ -31,16 +28,7 @@ const Settings = () => {
           {...toPath({ page: 'circleEditProfile', circle: { name } })}
           role="link"
         />
-      </Form.List>
 
-      <Form.List
-        groupName={
-          <FormattedMessage
-            defaultMessage="Free Trial"
-            description="src/views/Circle/Settings/index.tsx"
-          />
-        }
-      >
         <Form.List.Item
           title={
             <FormattedMessage
@@ -52,8 +40,18 @@ const Settings = () => {
           role="link"
         />
       </Form.List>
-
       <Spacer size="xxxloose" />
+    </ResponsiveWrapper>
+  )
+}
+
+const Settings = () => {
+  return (
+    <Layout.Main>
+      <Layout.Header left={<Layout.Header.Title id="manageCircle" />} />
+
+      <Head title={{ id: 'manageCircle' }} />
+      <BaseSettings />
     </Layout.Main>
   )
 }

@@ -214,48 +214,54 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         />
       )}
 
-      <Form.Input
-        label={
-          <FormattedMessage defaultMessage="Display Name" description="" />
-        }
-        type="text"
-        name="displayName"
-        required
-        placeholder={intl.formatMessage({
-          defaultMessage: 'Enter Display Name',
-          description: '',
-        })}
-        hint={
-          <FormattedMessage
-            defaultMessage="Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed."
-            description=""
-          />
-        }
-        value={values.displayName}
-        error={touched.displayName && errors.displayName}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+      <section className="container">
+        <Form.Input
+          label={
+            <FormattedMessage defaultMessage="Display Name" description="" />
+          }
+          type="text"
+          name="displayName"
+          required
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Enter Display Name',
+            description: '',
+          })}
+          hint={
+            <FormattedMessage
+              defaultMessage="Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed."
+              description=""
+            />
+          }
+          value={values.displayName}
+          error={touched.displayName && errors.displayName}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+      </section>
 
-      <Form.Textarea
-        label={<FormattedMessage defaultMessage="Description" description="" />}
-        name="description"
-        required
-        placeholder={intl.formatMessage({
-          defaultMessage: 'Enter Bio',
-          description: '',
-        })}
-        hint={
-          <FormattedMessage
-            defaultMessage="Maximum 200 characters."
-            description=""
-          />
-        }
-        value={values.description}
-        error={touched.description && errors.description}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+      <section className="container">
+        <Form.Textarea
+          label={
+            <FormattedMessage defaultMessage="Description" description="" />
+          }
+          name="description"
+          required
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Enter Bio',
+            description: '',
+          })}
+          hint={
+            <FormattedMessage
+              defaultMessage="Maximum 200 characters."
+              description=""
+            />
+          }
+          value={values.description}
+          error={touched.description && errors.description}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+      </section>
 
       <style jsx>{styles}</style>
     </Form>

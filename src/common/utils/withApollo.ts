@@ -52,6 +52,7 @@ const site_domain_tld =
  */
 const httpLink = ({ host, headers }: { host: string; headers: any }) => {
   let apiUrl = process.env.NEXT_PUBLIC_API_URL as string
+
   let hostname = new URL(apiUrl).hostname
   if (
     // hostname.endsWith(site_domain_tld) &&

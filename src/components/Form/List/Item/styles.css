@@ -1,8 +1,12 @@
 .container {
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-base);
+  padding: var(--spacing-base) 0;
   line-height: 1;
+
+  &:hover .right :global(.icon) {
+    color: var(--color-black);
+  }
 }
 
 .left {
@@ -45,6 +49,8 @@
   }
 
   & :global(.text-icon svg) {
-    margin-right: calc(var(--spacing-x-tight) * -1);
+    /* TODO: confirm to delete */
+
+    /* margin-right: calc(var(--spacing-x-tight) * -1); */
   }
 }

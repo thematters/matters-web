@@ -1,12 +1,8 @@
 .authors {
-  border-top: var(--spacing-x-tight) solid var(--color-grey-lighter);
-  border-bottom: var(--spacing-x-tight) solid var(--color-grey-lighter);
+  margin-bottom: var(--spacing-x-loose);
+  border-bottom: 1px dashed var(--color-grey-lighter);
 
   & :global(.list-item > .card) {
     margin: 0 calc(var(--spacing-x-tight) * -1);
   }
-}
-
-.backToAll {
-  @mixin shadow-border-top-grey;
 }

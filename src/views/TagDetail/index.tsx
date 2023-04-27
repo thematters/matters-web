@@ -122,22 +122,21 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   return (
     <Layout.Main aside={<RelatedTags tagId={tag.id} inSidebar />}>
       <Layout.Header
-        left={<Layout.Header.BackButton mode="black-solid" />}
         right={
           <>
             <span />
-
-            <ShareButton
-              title={title}
-              tags={title.endsWith(tag.content) ? undefined : keywords}
-            />
-
-            <DropdownActions
-              isOwner={isOwner}
-              isEditor={isEditor}
-              isMaintainer={isMaintainer}
-              tag={tag}
-            />
+            <section className="buttons">
+              <ShareButton
+                title={title}
+                tags={title.endsWith(tag.content) ? undefined : keywords}
+              />
+              <DropdownActions
+                isOwner={isOwner}
+                isEditor={isEditor}
+                isMaintainer={isMaintainer}
+                tag={tag}
+              />
+            </section>
           </>
         }
         mode="transparent-absolute"
@@ -173,9 +172,15 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
       <section className="info">
         {features.tag_adoption && <Owner tag={tag} />}
 
-        <section className="statistics">
-          <Followers tag={tag} />
-          <ArticlesCount tag={tag} />
+        <section className="top">
+          <section className="statistics">
+            <Followers tag={tag} />
+            <ArticlesCount tag={tag} />
+          </section>
+
+          <section>
+            <TagDetailButtons.FollowButton tag={tag} />
+          </section>
         </section>
 
         {tag.description && (
@@ -188,10 +193,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             <p>{tag.description}</p>
           </Expandable>
         )}
-
-        <section className="buttons">
-          <TagDetailButtons.FollowButton tag={tag} />
-        </section>
       </section>
 
       <Tabs sticky>

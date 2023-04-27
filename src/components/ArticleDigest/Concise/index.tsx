@@ -59,7 +59,12 @@ const BaseArticleDigestFeed = ({
   })
 
   return (
-    <Card {...path} spacing={['base', 'base']} onClick={onClick}>
+    <Card
+      {...path}
+      spacing={['base', 0]}
+      bgActiveColor="none"
+      onClick={onClick}
+    >
       <section className="content">
         <section className="head">
           <section className="title">

@@ -283,10 +283,6 @@
     "defaultMessage": "设定",
     "description": ""
   },
-  "DMlmcU": {
-    "defaultMessage": "免费资格",
-    "description": "src/views/Circle/Settings/index.tsx"
-  },
   "DXJ8ys": {
     "defaultMessage": "阅读次数代表了你的作品被登入用户阅读的总次数，每次阅读过程超过一定时间后才会计入。此外，同一个用户的多次阅读也会进行累计。",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
@@ -308,7 +304,7 @@
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "EoNvLu": {
-    "defaultMessage": "创作了",
+    "defaultMessage": "创作了 ",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "EwVnoC": {
@@ -402,10 +398,6 @@
   "JIjMWL": {
     "defaultMessage": "你的作品已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
-  },
-  "JXdbo8": {
-    "defaultMessage": "完成",
-    "description": ""
   },
   "Jc+W6M": {
     "defaultMessage": " 辞去了标签主理人权限，你要不要试试看成为新的主理人？",
@@ -628,7 +620,7 @@
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "UxfPXa": {
-    "defaultMessage": "累积创作",
+    "defaultMessage": "累积创作 ",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "VO4Elt": {
@@ -838,10 +830,6 @@
   "fG41Ux": {
     "defaultMessage": "登出成功",
     "description": ""
-  },
-  "fOgusL": {
-    "defaultMessage": "选择进入方式",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "fWDtpq": {
     "defaultMessage": "邀请中",

@@ -7,6 +7,10 @@
   position: relative;
   width: 100%;
   padding: var(--spacing-base) var(--spacing-base) 0;
+
+  @media (--sm-up) {
+    padding: var(--spacing-base) 0 0;
+  }
 }
 
 header {

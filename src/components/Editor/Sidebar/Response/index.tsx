@@ -12,7 +12,7 @@ const SidebarArticleResponse: React.FC<SidebarManagementProps> = (props) => {
     <Box
       icon={<IconComment16 size="md" />}
       title="articleResponse"
-      footerSpace={false}
+      footerSpacing={false}
     >
       <section className="container">
         <ToggleResponse inSidebar {...props} />

@@ -18,7 +18,7 @@ const Forget = () => {
   const { currStep, forward } = useStep<Step>(initStep)
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
+    <Layout.Main>
       <Head title={{ id: 'forgetPassword' }} />
 
       {currStep === 'request' && (

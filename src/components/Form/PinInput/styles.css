@@ -7,6 +7,7 @@
 
   & .pin-input-item {
     @mixin transition;
+    @mixin border-grey;
 
     display: flex;
     width: 16.6%;
@@ -15,12 +16,16 @@
     line-height: 1.5rem;
     color: var(--color-black);
     text-align: center;
-    border: 1px solid var(--color-grey-light);
-    border-radius: 4px;
+    border-radius: var(--spacing-x-tight);
     transition-property: border-color;
 
     & + .pin-input-item {
       margin-left: var(--spacing-tight);
+    }
+
+    &:focus,
+    &.focus {
+      border-color: var(--color-grey);
     }
 
     &.error {

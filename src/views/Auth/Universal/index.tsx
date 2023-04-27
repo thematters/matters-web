@@ -83,7 +83,7 @@ const UniversalAuth = () => {
   }, [viewer.id])
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
+    <Layout.Main>
       <Head title={{ id: 'authEntries' }} />
 
       {currStep === 'select-login-method' && (

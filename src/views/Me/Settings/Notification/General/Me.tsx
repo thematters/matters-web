@@ -35,6 +35,7 @@ const Me = ({ settings, toggle }: MeProps) => {
       groupName={
         <Translate zh_hant="與我有關" zh_hans="与我有关" en="Related to me" />
       }
+      spacingX={0}
     >
       <Form.List.Item
         title={newMention}

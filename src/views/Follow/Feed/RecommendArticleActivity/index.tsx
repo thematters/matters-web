@@ -36,10 +36,7 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
 
   return (
     <>
-      <Slides
-        bgColor="grey-lighter"
-        header={<FollowingRecommendHead type={type} />}
-      >
+      <Slides header={<FollowingRecommendHead type={type} />}>
         {articles.map((article, index) => (
           <Slides.Item
             size="md"

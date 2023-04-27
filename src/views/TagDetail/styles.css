@@ -1,21 +1,29 @@
 .info {
-  @mixin border-bottom-grey;
-
-  padding: 0 var(--spacing-base) var(--spacing-loose);
+  padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-x-tight);
-}
 
-.statistics {
-  @mixin flex-center-space-between;
+  @media (--sm-up) {
+    padding: 0;
+  }
 
-  margin-top: var(--spacing-base);
+  & .top {
+    @mixin flex-center-space-between;
+
+    margin-top: var(--spacing-base);
+  }
 }
 
 .buttons {
   display: inline-flex;
-  margin-top: var(--spacing-loose);
+  gap: var(--spacing-base);
 
-  & :global(> * + *) {
-    margin-left: var(--spacing-base);
+  @media (--sm-up) {
+    padding-right: var(--spacing-base);
   }
+}
+
+.statistics {
+  @mixin flex-center-start;
+
+  gap: var(--spacing-x-tight);
 }

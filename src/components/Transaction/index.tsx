@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
@@ -88,15 +89,22 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
     ? toPath({ page: 'circleDetail', circle })
     : null
 
+  const dateTimeClasses = classNames({
+    dateTime: true,
+    isDonation,
+  })
+
   return (
-    <Card {...path} spacing={['base', 'base']}>
+    <Card {...path} spacing={[0, 0]} bgActiveColor="none">
       <section
         className="container"
         data-test-id={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM}
       >
-        <section className="tx-icon">
-          <Currency currency={currency} />
-        </section>
+        {(isAddCredit || isPayout || isSubscription) && (
+          <section className="tx-icon">
+            <Currency currency={currency} />
+          </section>
+        )}
 
         <section className="tx-info">
           <section className="left">
@@ -106,7 +114,12 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
 
             {isDonation && article && (
               <section className="title">
-                <ArticleDigestTitle article={article} is="h2" />
+                <ArticleDigestTitle
+                  article={article}
+                  is="h2"
+                  textWeight="normal"
+                  textSize="xs"
+                />
               </section>
             )}
 
@@ -132,13 +145,18 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
                     )}
                   </p>
                 </section>
-                <section className="title">
-                  <CircleDigest.Title circle={circle} is="h2" />
+                <section className="title circleTitle">
+                  <CircleDigest.Title
+                    circle={circle}
+                    is="h2"
+                    textWeight="normal"
+                    textSize="xs"
+                  />
                 </section>
               </>
             )}
 
-            <section>
+            <section className={dateTimeClasses}>
               <DateTime date={createdAt} />
             </section>
           </section>
