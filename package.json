@@ -28,7 +28,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepare": "husky install",
-    "vercel-build": "set -xe; npm run gen:type && if [[ \"$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" =~ release/* ]] ; then cat .env.prod | sed -e 's@matters.news@matters.town@' | tee .env.local ; else cat .env.dev | sed -e 's@matters.news@matters.town@' | tee .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-dev.matters.town' | tee -a .env.local ; fi && if [[ \"$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" =~ release/next ]] ; then echo 'NEXT_PUBLIC_SITE_DOMAIN=web-next.matters.town' | tee -a .env.local ; fi && echo -e 'NEXT_PUBLIC_SITE_DOMAIN_TLD_OLD=matters.news\nNEXT_PUBLIC_NEXT_ASSET_DOMAIN=' | tee -a .env.local && npm run build",
+    "vercel-build": "set -xe; npm run gen:type && if [[ \"$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" =~ release/* ]] ; then cp -va .env.prod .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-next.matters.town' | tee -a .env.local; else cp -va .env.dev .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-dev.matters.town' | tee -a .env.local ; fi && echo 'NEXT_PUBLIC_NEXT_ASSET_DOMAIN=' | tee -a .env.local && npm run build",
     "i18n:extract": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file lang/default.json",
     "i18n:compile": "formatjs compile-folder --ast lang compiled-lang",
     "i18n": "npm run i18n:extract && npm run i18n:compile"
