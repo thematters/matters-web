@@ -18,27 +18,29 @@ const RecommendCircleActivity = ({ circles, location }: Props) => {
   }
 
   return (
-    <Slides header={<FollowingRecommendHead type="circle" />}>
-      {circles.map((circle, index) => (
-        <Slides.Item
-          size="md"
-          key={index}
-          onClick={() => {
-            analytics.trackEvent('click_feed', {
-              type: 'following',
-              contentType: 'CircleRecommendationActivity',
-              location: `${location}.${index}`,
-              id: circle.id,
-            })
-          }}
-        >
-          <section className="item">
-            <FollowingRecommendCircle circle={circle} />
-          </section>
-        </Slides.Item>
-      ))}
+    <section className="container">
+      <Slides header={<FollowingRecommendHead type="circle" />}>
+        {circles.map((circle, index) => (
+          <Slides.Item
+            size="md"
+            key={index}
+            onClick={() => {
+              analytics.trackEvent('click_feed', {
+                type: 'following',
+                contentType: 'CircleRecommendationActivity',
+                location: `${location}.${index}`,
+                id: circle.id,
+              })
+            }}
+          >
+            <section className="item">
+              <FollowingRecommendCircle circle={circle} />
+            </section>
+          </Slides.Item>
+        ))}
+      </Slides>
       <style jsx>{styles}</style>
-    </Slides>
+    </section>
   )
 }
 

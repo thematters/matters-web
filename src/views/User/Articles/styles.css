@@ -1,7 +1,7 @@
 .info {
   display: flex;
   align-items: center;
-  padding: 0 var(--spacing-base);
+  padding-left: var(--spacing-base);
   margin: var(--spacing-x-tight) 0;
   color: var(--color-grey-dark);
   white-space: pre-wrap;

@@ -124,6 +124,7 @@ const UsersFeed = () => {
                   id: node.id,
                 })
               }
+              spacing={['tight', 0]}
             />
           </List.Item>
         ))}

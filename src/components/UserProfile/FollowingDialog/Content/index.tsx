@@ -11,7 +11,7 @@ const FollowingDialogContent = () => {
   const [feedType, setFeedType] = useState<FollowingFeedType>('user')
 
   return (
-    <Dialog.Content>
+    <Dialog.Content spacing={['base', 'base']}>
       <FeedType type={feedType} setFeedType={setFeedType} />
       {feedType === 'circle' && <CirclesFeed />}
       {feedType === 'tag' && <TagsFeed />}

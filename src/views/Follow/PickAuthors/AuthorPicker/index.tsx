@@ -8,6 +8,7 @@ import {
   List,
   PageHeader,
   QueryError,
+  ResponsiveWrapper,
   Spinner,
   TextIcon,
   Translate,
@@ -86,13 +87,15 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
       {error && <QueryError error={error} />}
 
       {!loading && (
-        <List hasBorder={false}>
-          {edges.map(({ node, cursor }) => (
-            <List.Item key={cursor}>
-              <UserDigest.Rich user={node} />
-            </List.Item>
-          ))}
-        </List>
+        <ResponsiveWrapper>
+          <List hasBorder={false}>
+            {edges.map(({ node, cursor }) => (
+              <List.Item key={cursor}>
+                <UserDigest.Rich user={node} spacing={['tight', 0]} />
+              </List.Item>
+            ))}
+          </List>
+        </ResponsiveWrapper>
       )}
 
       <style jsx>{styles}</style>
