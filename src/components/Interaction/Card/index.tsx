@@ -10,7 +10,7 @@ import {
   useRef,
 } from 'react'
 
-import { KEYCODES, TEST_ID } from '~/common/enums'
+import { KEYVALUE, TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
@@ -214,7 +214,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         ref={cardRef}
         data-clickable
         onKeyDown={(event) => {
-          if (event.keyCode !== KEYCODES.enter) {
+          if (event.key !== KEYVALUE.enter) {
             return
           }
           openLink({

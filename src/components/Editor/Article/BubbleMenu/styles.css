@@ -1,7 +1,13 @@
+:root {
+  --bubble-menu-width: 20rem;
+}
+
 .container {
+  @mixin flex-center-all;
   @mixin border-grey;
 
   position: relative;
+  width: var(--bubble-menu-width);
   padding: var(--spacing-x-tight) var(--spacing-base);
   background: var(--color-white);
   border-radius: var(--spacing-xx-tight);
@@ -13,5 +19,15 @@
 
   & .active {
     color: var(--color-matters-green);
+  }
+
+  & input {
+    width: 100%;
+    height: 1.5rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-black);
+    background: transparent;
+    border: none;
+    outline: none;
   }
 }

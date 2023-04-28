@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
-import { KEYCODES } from '~/common/enums'
+import { KEYVALUE } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -29,7 +29,7 @@ const Item = forwardRef(
     }
 
     const handleKeydown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (event.keyCode !== KEYCODES.backSpace) {
+      if (event.key !== KEYVALUE.backSpace) {
         return
       }
 

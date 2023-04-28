@@ -38,7 +38,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
       editor={editor}
       tippyOptions={{
         theme: 'floating-menu',
-        duration: 100,
+        duration: 200,
         offset: [0, 0],
       }}
     >

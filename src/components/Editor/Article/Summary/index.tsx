@@ -2,7 +2,7 @@ import autosize from 'autosize'
 import classNames from 'classnames'
 import React, { useContext } from 'react'
 
-import { KEYCODES } from '~/common/enums'
+import { KEYVALUE } from '~/common/enums'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
@@ -48,7 +48,7 @@ const EditorSummary: React.FC<Props> = ({
     update({ summary: value })
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.charCode === KEYCODES.enter || event.key === 'Enter') {
+    if (event.key === KEYVALUE.enter || event.key === 'Enter') {
       event.preventDefault()
     }
   }
