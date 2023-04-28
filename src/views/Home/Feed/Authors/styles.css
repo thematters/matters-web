@@ -1,6 +1,8 @@
 .authors {
-  margin-bottom: var(--spacing-x-loose);
-  border-bottom: 1px dashed var(--color-grey-lighter);
+  @mixin border-bottom-grey;
+
+  padding-bottom: var(--spacing-x-loose);
+  border-bottom-style: dashed;
 
   & :global(.list-item > .card) {
     margin: 0 calc(var(--spacing-x-tight) * -1);

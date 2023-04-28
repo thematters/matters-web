@@ -1,5 +1,8 @@
 .tags {
-  margin-bottom: var(--spacing-x-loose);
+  @mixin border-bottom-grey;
+
+  padding-bottom: var(--spacing-x-loose);
+  border-bottom-style: dashed;
 
   & :global(.list-item > .card) {
     margin: 0 calc(var(--spacing-x-tight) * -1);
