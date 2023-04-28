@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl'
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
+  Media,
   QueryError,
   ShuffleButton,
   Slides,
@@ -80,11 +81,22 @@ const Authors = () => {
   }
 
   const SlidesHeader = (
-    <SectionHeader
-      type="authors"
-      rightButton={<ShuffleButton onClick={shuffle} />}
-      viewAll={false}
-    />
+    <>
+      <Media between={['md', 'xl']}>
+        <SectionHeader
+          type="authors"
+          rightButton={<ShuffleButton onClick={shuffle} />}
+          viewAll={true}
+        />
+      </Media>
+      <Media greaterThanOrEqual="xl">
+        <SectionHeader
+          type="authors"
+          rightButton={<ShuffleButton onClick={shuffle} />}
+          viewAll={false}
+        />
+      </Media>
+    </>
   )
 
   return (
@@ -123,17 +135,19 @@ const Authors = () => {
           ))}
       </Slides>
 
-      <section className="backToAll">
-        <ViewMoreCard
-          spacing={['tight', 'tight']}
-          href={PATHS.AUTHORS}
-          iconProps={{ size: 'sm' }}
-          textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
-          textAlign="center"
-        >
-          <FormattedMessage defaultMessage="View All" description="" />
-        </ViewMoreCard>
-      </section>
+      <Media lessThan="md">
+        <section className="backToAll">
+          <ViewMoreCard
+            spacing={['tight', 'tight']}
+            href={PATHS.AUTHORS}
+            iconProps={{ size: 'sm' }}
+            textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
+            textAlign="center"
+          >
+            <FormattedMessage defaultMessage="View All" description="" />
+          </ViewMoreCard>
+        </section>
+      </Media>
 
       <style jsx>{styles}</style>
     </section>
