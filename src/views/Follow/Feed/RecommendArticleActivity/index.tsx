@@ -35,7 +35,7 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
       : 'ArticleRecommendationActivity'
 
   return (
-    <>
+    <section className="container">
       <Slides header={<FollowingRecommendHead type={type} />}>
         {articles.map((article, index) => (
           <Slides.Item
@@ -64,10 +64,10 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
             </section>
           </Slides.Item>
         ))}
-        <style jsx>{styles}</style>
       </Slides>
       <Waypoint onEnter={() => setMountTracker(true)} />
-    </>
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 

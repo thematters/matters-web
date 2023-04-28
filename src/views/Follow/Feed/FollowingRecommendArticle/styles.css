@@ -20,12 +20,15 @@
   margin-right: var(--spacing-base);
 
   & .title {
-    @mixin line-clamp;
-
     margin-bottom: var(--spacing-x-tight);
     font-size: var(--font-size-xm);
     font-weight: var(--font-weight-medium);
-    -webkit-line-clamp: 2;
+
+    & :global(> a) {
+      @mixin line-clamp;
+
+      -webkit-line-clamp: 2;
+    }
   }
 
   & .author {
