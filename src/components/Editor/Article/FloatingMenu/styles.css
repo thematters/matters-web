@@ -13,13 +13,9 @@
   & :global(button),
   & .expand-button,
   & .upload-button {
+    cursor: pointer;
     background: var(--color-white);
-
-    & :global(svg) {
-      cursor: pointer;
-      border-radius: 50%;
-      stroke: var(--color-black);
-    }
+    border-radius: 50%;
   }
 
   @media (--md-up) {

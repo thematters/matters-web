@@ -146,6 +146,7 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
             en: 'Insert audio',
             lang,
           })}
+          disabled={uploading}
           accept={acceptTypes}
           multiple={false}
           onChange={handleChange}

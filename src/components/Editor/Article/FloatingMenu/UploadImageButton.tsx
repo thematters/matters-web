@@ -130,6 +130,7 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
             en: 'Insert image',
             lang,
           })}
+          disabled={uploading}
           accept={acceptTypes}
           multiple={false}
           onChange={handleChange}
