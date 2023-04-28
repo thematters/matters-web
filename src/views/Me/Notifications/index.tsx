@@ -110,11 +110,8 @@ const Notifications = () => {
           left={<Layout.Header.MeButton />}
           right={<Layout.Header.Title id="notifications" />}
         />
-        <Spacer size="base" />
       </Media>
-      <Media greaterThan="sm">
-        <Spacer size="xloose" />
-      </Media>
+      <Spacer size="base" />
 
       <Head title={{ id: 'notifications' }} />
       <BaseNotifications />
