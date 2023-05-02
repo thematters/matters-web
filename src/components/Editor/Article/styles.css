@@ -40,6 +40,13 @@
     content: attr(data-placeholder);
   }
 
+  & :global(figcaption:has(.ProseMirror-trailingBreak)::before) {
+    position: absolute;
+    z-index: -1;
+    color: var(--color-grey);
+    content: 'Caption...';
+  }
+
   /* disable interactive */
   & :global(.ProseMirror a) {
     pointer-events: none;

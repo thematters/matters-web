@@ -41,6 +41,32 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
         duration: 200,
         offset: [0, 0],
       }}
+      shouldShow={({ view, state }) => {
+        // https://github.com/ueberdosis/tiptap/blob/f387ad3dd4c2b30e/packages/extension-floating-menu/src/floating-menu-plugin.ts#L38-L55
+        const { selection } = state
+        const { $anchor, empty } = selection
+        const isRootDepth = $anchor.depth === 1
+        const isEmptyTextBlock =
+          $anchor.parent.isTextblock &&
+          !$anchor.parent.type.spec.code &&
+          !$anchor.parent.textContent
+
+        // figureImage, figureAudio, figureEmbed contain `<figcaption>`
+        const isFigure = $anchor.parent.type.name.includes('figure')
+
+        if (
+          !view.hasFocus() ||
+          !empty ||
+          !isRootDepth ||
+          !isEmptyTextBlock ||
+          !editor.isEditable ||
+          isFigure
+        ) {
+          return false
+        }
+
+        return true
+      }}
     >
       <section className={containerClasses}>
         <button

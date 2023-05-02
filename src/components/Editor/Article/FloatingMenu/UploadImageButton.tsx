@@ -74,7 +74,6 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
       setUploading(true)
 
       const { path } = await upload({ file, type: ASSET_TYPE.embed })
-      console.log({ path })
       editor.chain().focus().setFigureImage({ src: path }).run()
 
       window.dispatchEvent(
@@ -86,7 +85,6 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
         })
       )
     } catch (e) {
-      console.log(e)
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {

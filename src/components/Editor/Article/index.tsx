@@ -1,3 +1,4 @@
+import { useApolloClient } from '@apollo/react-hooks'
 import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
 import { useContext } from 'react'
 
@@ -7,7 +8,7 @@ import { LanguageContext } from '~/components'
 import { EditorDraftFragment } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
-import { mentionSuggestion } from './extensions'
+import { makeMentionSuggestion } from './extensions'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.css'
 import globalStyles from './styles.global.css'
@@ -40,6 +41,7 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
   upload,
 }) => {
   const { lang } = useContext(LanguageContext)
+  const client = useApolloClient()
 
   const { content, publishState, summary, summaryCustomized, title } = draft
   const isPending = publishState === 'pending'
@@ -67,7 +69,7 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
       // console.log(await html2md(content))
       update({ content })
     },
-    mentionSuggestion,
+    mentionSuggestion: makeMentionSuggestion({ client }),
     extensions: [],
   })
 
