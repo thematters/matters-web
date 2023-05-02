@@ -1,4 +1,8 @@
-import { BubbleMenu as TipTapBubbleMenu, Editor } from '@matters/matters-editor'
+import {
+  BubbleMenu as TipTapBubbleMenu,
+  Editor,
+  isTextSelection,
+} from '@matters/matters-editor'
 import { useContext, useState } from 'react'
 
 import { ReactComponent as IconEditorMenuBold } from '@/public/static/icons/24px/editor-menu-bold.svg'
@@ -48,6 +52,40 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({ editor }) => {
         duration: 200,
         placement: 'top',
         onHidden: () => setShowLinkInput(false),
+      }}
+      shouldShow={({ view, state, from, to }) => {
+        // https://github.com/ueberdosis/tiptap/blob/f387ad3dd4c2b30e/packages/extension-bubble-menu/src/bubble-menu-plugin.ts#L47
+        const { doc, selection } = state
+        const { empty, $anchor } = selection
+
+        // Sometime check for `empty` is not enough.
+        // Doubleclick an empty paragraph returns a node size of 2.
+        // So we check also for an empty text size.
+        const isEmptyTextBlock =
+          !doc.textBetween(from, to).length && isTextSelection(state.selection)
+
+        // When clicking on a element inside the bubble menu the editor "blur" event
+        // is called and the bubble menu item is focussed. In this case we should
+        // consider the menu as part of the editor and keep showing the menu
+        // const isChildOfMenu = this.element.contains(document.activeElement)
+
+        const hasEditorFocus = view.hasFocus()
+        //  || isChildOfMenu
+
+        // figureImage, figureAudio, figureEmbed contain `<figcaption>`
+        const isFigure = $anchor.parent.type.name.includes('figure')
+
+        if (
+          !hasEditorFocus ||
+          empty ||
+          isEmptyTextBlock ||
+          !editor.isEditable ||
+          isFigure
+        ) {
+          return false
+        }
+
+        return true
       }}
     >
       <section className="container">

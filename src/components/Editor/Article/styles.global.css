@@ -25,8 +25,35 @@
     content: attr(data-placeholder);
   }
 
+  & figcaption:has(.ProseMirror-trailingBreak) {
+    position: relative;
+  }
+
+  & figcaption:has(.ProseMirror-trailingBreak)::before {
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    color: var(--color-grey);
+    content: '添加說明文字…';
+  }
+
   /* disable interactive */
   & a {
     pointer-events: none;
+  }
+}
+
+html[lang='zh-Hans'],
+html[data-lang='zh-Hans'] {
+  & figcaption:has(.ProseMirror-trailingBreak)::before {
+    content: '添加说明文字…';
+  }
+}
+
+html[lang='en'],
+html[data-lang='en'] {
+  & figcaption:has(.ProseMirror-trailingBreak)::before {
+    content: 'Add caption…';
   }
 }

@@ -10,7 +10,6 @@ import { EditorDraftFragment } from '~/gql/graphql'
 import { BubbleMenu } from './BubbleMenu'
 import { makeMentionSuggestion } from './extensions'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
-import styles from './styles.css'
 import globalStyles from './styles.global.css'
 import EditorSummary from './Summary'
 import EditorTitle from './Title'
@@ -95,7 +94,6 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
         <EditorContent editor={editor} />
       </div>
 
-      <style jsx>{styles}</style>
       <style jsx>{editorStyles}</style>
       <style jsx global>
         {globalStyles}

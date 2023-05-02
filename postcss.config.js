@@ -1,11 +1,19 @@
+const postcssCalc = require('postcss-calc')
+const postcssColorFunction = require('postcss-color-function')
+const poostcssMixins = require('postcss-mixins')
+const postcssPresetEnv = require('postcss-preset-env')
+
 module.exports = {
-  plugins: {
-    'postcss-mixins': {
+  plugins: [
+    poostcssMixins({
       mixinsFiles: './src/common/styles/mixins.css',
-    },
-    'postcss-preset-env': {
+    }),
+    postcssPresetEnv({
       stage: 0,
       preserve: false,
+      features: {
+        'has-pseudo-class': { preserve: true },
+      },
       importFrom: [
         './src/common/styles/variables/breakpoints.css',
         './src/common/styles/variables/layouts.css',
@@ -16,8 +24,8 @@ module.exports = {
         './src/common/styles/variables/typography.css',
         './src/common/styles/variables/shadows.css',
       ],
-    },
-    'postcss-calc': {},
-    'postcss-color-function': {},
-  },
+    }),
+    postcssCalc(),
+    postcssColorFunction(),
+  ],
 }
