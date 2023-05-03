@@ -171,8 +171,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
     (editor) => editor.id === viewer.id
   )
   const isCreator = tag?.creator?.id === viewer.id
-  const canEditTag =
-    isEditor || isCreator || viewer.info.email === 'hi@matters.news'
+  const canEditTag = isEditor || isCreator || viewer.status?.role === 'admin'
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>

@@ -444,6 +444,6 @@ export const MOCK_NOTICE_LIST = [
     createdAt: '2020-12-24T07:29:17.682Z',
     message:
       '恭喜！你的作品在社区内大获好评，现在你畅行无阻啦。快去赞赏他人并参与讨论吧。',
-    link: 'https://matters.news',
+    link: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`,
   },
 ]
