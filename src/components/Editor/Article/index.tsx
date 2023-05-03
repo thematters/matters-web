@@ -1,6 +1,6 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import editorStyles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'
@@ -8,7 +8,7 @@ import { LanguageContext } from '~/components'
 import { EditorDraftFragment } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
-import { makeMentionSuggestion } from './extensions'
+import { FigureEmbedLinkInput, makeMentionSuggestion } from './extensions'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import globalStyles from './styles.global.css'
 import EditorSummary from './Summary'
@@ -69,8 +69,13 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
       update({ content })
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
-    extensions: [],
+    extensions: [FigureEmbedLinkInput],
   })
+
+  useEffect(() => {
+    // @ts-ignore
+    window.editor = editor
+  }, [editor])
 
   return (
     <>

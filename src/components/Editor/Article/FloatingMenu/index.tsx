@@ -88,11 +88,20 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
 
             <button
               onClick={() => {
-                const url = prompt('Enter YouTube, Vimeo or Bilibili URL')
-
-                if (url) {
-                  editor.chain().focus().setFigureEmbed({ src: url }).run()
-                }
+                editor
+                  .chain()
+                  .focus()
+                  .addFigureEmbedLinkInput({
+                    placeholder: translate({
+                      zh_hant:
+                        '貼上 YouTube、Vimeo 或 bilibili 連結後，Enter 進行新增',
+                      zh_hans:
+                        '贴上 YouTube、Vimeo 或 bilibili 链接后，Enter 进行新增',
+                      en: 'Paste YouTube, Vimeo or bilibili link, and press enter',
+                      lang,
+                    }),
+                  })
+                  .run()
               }}
               type="button"
               title={translate({
@@ -113,11 +122,20 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
 
             <button
               onClick={() => {
-                const url = prompt('Enter JSFiddle or CodePen URL')
-
-                if (url) {
-                  editor.chain().focus().setFigureEmbed({ src: url }).run()
-                }
+                editor
+                  .chain()
+                  .focus()
+                  .addFigureEmbedLinkInput({
+                    placeholder: translate({
+                      zh_hant:
+                        '貼上 JSFiddle 或 CodePen 連結後，Enter 進行新增',
+                      zh_hans:
+                        '贴上 JSFiddle 或 CodePen 链接后，Enter 进行新增',
+                      en: 'Paste JSFiddle or CodePen link, and press enter',
+                      lang,
+                    }),
+                  })
+                  .run()
               }}
               type="button"
               title={translate({

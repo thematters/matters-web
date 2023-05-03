@@ -42,6 +42,20 @@
   & a {
     pointer-events: none;
   }
+
+  & .figure-embed-link-input {
+    & input {
+      display: block;
+      height: 1.875rem;
+      line-height: var(--line-height-article-base);
+      color: var(--color-grey);
+
+      &::placeholder {
+        color: var(--color-grey);
+        opacity: 1; /* Firefox */
+      }
+    }
+  }
 }
 
 html[lang='zh-Hans'],
