@@ -18,7 +18,7 @@
  * Ring
  */
 .hasRing {
-  margin: 2px 0;
+  margin: 2px 0 0 2px;
 
   & .ring {
     position: absolute;
@@ -116,7 +116,7 @@
   height: 2.5rem;
 
   &.hasRing {
-    margin: 4px 0;
+    margin: 4px 0 0 4px;
 
     & .ring {
       top: -4px;
