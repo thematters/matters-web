@@ -23,20 +23,35 @@ const Input: React.FC<NodeViewProps> = (props) => {
         ref={inputRef}
         type="text"
         placeholder={placeholder}
+        onBlur={() => {
+          props.deleteNode()
+        }}
         onKeyDown={(event) => {
-          // press enter to insert figureEmbed
-          if (event.key !== KEYVALUE.enter) {
+          const url = (event.target as HTMLInputElement).value
+
+          // presss escape to delete input node
+          if (event.key === KEYVALUE.escape) {
+            props.deleteNode()
             return
           }
 
-          const url = (event.target as HTMLInputElement).value
+          // press backSpace to delete input node if it is empty
+          if (event.key === KEYVALUE.backSpace && !url) {
+            props.deleteNode()
+            return
+          }
 
-          // delete input node
-          props.deleteNode()
+          // press enter to insert figureEmbed
+          if (event.key === KEYVALUE.enter) {
+            // delete input node
+            props.deleteNode()
 
-          // try to insert figureEmbed if url is not empty
-          if (url && isUrl(url)) {
-            props.editor.commands.setFigureEmbed({ src: url })
+            // try to insert figureEmbed if url is not empty
+            if (url && isUrl(url)) {
+              props.editor.commands.setFigureEmbed({ src: url })
+            }
+
+            return
           }
         }}
       />
