@@ -91,7 +91,7 @@ const CirclesFeed = () => {
           <List.Item key={cursor}>
             <CircleDigest.Mini
               circle={node}
-              spacing={['base', 'tight']}
+              spacing={['tight', 0]}
               onClick={() =>
                 analytics.trackEvent('click_feed', {
                   type: 'user_circle',
@@ -100,6 +100,7 @@ const CirclesFeed = () => {
                   id: node.id,
                 })
               }
+              bgActiveColor="none"
             />
           </List.Item>
         ))}

@@ -113,7 +113,7 @@ const TagsFeed = () => {
           <List.Item key={cursor}>
             <TagDigest.Rich
               tag={node}
-              spacing={['base', 'tight']}
+              spacing={['tight', 0]}
               bgColor="none"
               bgActiveColor="grey-lighter"
               hasDesc
