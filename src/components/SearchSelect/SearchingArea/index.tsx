@@ -176,10 +176,14 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const onSearchInputChange = (value: string) => {
     setSearchKey(value)
     debouncedSetSearchKey(value)
+    if (value === '') {
+      toStagingArea()
+    } else {
+      toSearchingArea()
+    }
 
     if (hasListMode) {
       setMode(value ? 'search' : 'list')
-      toSearchingArea()
       return
     }
   }
@@ -191,8 +195,6 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
     } else if (searchingNodes.length <= 0) {
       return
     }
-
-    toSearchingArea()
   }
   const onSearchInputBlur = () => {
     if (isSearchMode) {
