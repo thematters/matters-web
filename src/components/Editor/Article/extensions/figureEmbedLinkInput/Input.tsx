@@ -9,6 +9,14 @@ const Input: React.FC<NodeViewProps> = (props) => {
 
   const { placeholder } = props.node.attrs
 
+  const deleteInput = () => {
+    try {
+      props.deleteNode()
+    } catch (e) {}
+
+    props.editor.commands.focus()
+  }
+
   useEffect(() => {
     if (inputRef) {
       setTimeout(() => {
@@ -24,27 +32,27 @@ const Input: React.FC<NodeViewProps> = (props) => {
         type="text"
         placeholder={placeholder}
         onBlur={() => {
-          props.deleteNode()
+          deleteInput()
         }}
         onKeyDown={(event) => {
           const url = (event.target as HTMLInputElement).value
 
           // presss escape to delete input node
           if (event.key === KEYVALUE.escape) {
-            props.deleteNode()
+            deleteInput()
             return
           }
 
           // press backSpace to delete input node if it is empty
           if (event.key === KEYVALUE.backSpace && !url) {
-            props.deleteNode()
+            deleteInput()
             return
           }
 
           // press enter to insert figureEmbed
           if (event.key === KEYVALUE.enter) {
             // delete input node
-            props.deleteNode()
+            deleteInput()
 
             // try to insert figureEmbed if url is not empty
             if (url && isUrl(url)) {
