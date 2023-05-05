@@ -132,7 +132,7 @@ const Carousel = ({ items }: CarouselProps) => {
             const itemContent = translatedItem?.content ?? item.content
             return (
               <div key={item.id} className="slide">
-                <Card htmlHref={itemLink} spacing={[0, 0]}>
+                <Card htmlHref={itemLink} spacing={[0, 0]} bgActiveColor="none">
                   <div className="content">
                     <ResponsiveImage url={item.cover} size="1280w" />
                     <h3>{title}</h3>
