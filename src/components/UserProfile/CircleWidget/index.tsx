@@ -40,9 +40,8 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
 
     return (
       <section className="circle-widget">
-        <Form.List forceGreyStyle>
+        <Form.List spacingX={0}>
           <Form.List.Item
-            forceGreyStyle
             bold
             title={
               <FormattedMessage
@@ -55,6 +54,10 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
               analytics.trackEvent('click_button', { type: 'create_circle' })
             }}
             role="button"
+            bgColor="grey-lighter"
+            bgActiveColor="grey-lighter"
+            spacing={[0, 'base']}
+            borderRadius="xtight"
           />
         </Form.List>
 
