@@ -304,7 +304,7 @@
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "EoNvLu": {
-    "defaultMessage": "",
+    "defaultMessage": "Created",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "EwVnoC": {
@@ -620,7 +620,7 @@
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "UxfPXa": {
-    "defaultMessage": "",
+    "defaultMessage": "In total",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "VO4Elt": {
