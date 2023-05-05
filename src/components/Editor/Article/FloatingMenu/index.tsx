@@ -40,6 +40,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
         theme: 'floating-menu',
         duration: 200,
         offset: [0, 0],
+        // appendTo: () => document.body,
       }}
       shouldShow={({ view, state }) => {
         // https://github.com/ueberdosis/tiptap/blob/f387ad3dd4c2b30e/packages/extension-floating-menu/src/floating-menu-plugin.ts#L38-L55

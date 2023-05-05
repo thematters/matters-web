@@ -1,5 +1,6 @@
 :root {
-  --bubble-menu-width: 20rem;
+  --bubble-menu-width: 21.5rem;
+  --bubble-menu-width-comment: 12.5rem;
 }
 
 .container {
@@ -13,8 +14,12 @@
   border-radius: var(--spacing-xx-tight);
   box-shadow: var(--shadow-dark);
 
+  &.comment {
+    width: var(--bubble-menu-width-comment);
+  }
+
   & :global(* + *) {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--spacing-tight);
   }
 
   & .active {

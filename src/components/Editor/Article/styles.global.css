@@ -1,6 +1,6 @@
 /* @styled-jsx=global */
 
-.ProseMirror {
+.articleEditor .ProseMirror {
   height: calc(
     100vh - var(--global-header-height-mobile) -
       var(--editor-content-spacing-mobile)
@@ -60,14 +60,20 @@
 
 html[lang='zh-Hans'],
 html[data-lang='zh-Hans'] {
-  & figcaption:has(.ProseMirror-trailingBreak)::before {
+  &
+    .articleEditor
+    .ProseMirror
+    figcaption:has(.ProseMirror-trailingBreak)::before {
     content: '添加说明文字…';
   }
 }
 
 html[lang='en'],
 html[data-lang='en'] {
-  & figcaption:has(.ProseMirror-trailingBreak)::before {
+  &
+    .articleEditor
+    .ProseMirror
+    figcaption:has(.ProseMirror-trailingBreak)::before {
     content: 'Add caption…';
   }
 }

@@ -1,6 +1,6 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 
 import editorStyles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'
@@ -56,54 +56,39 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
       lang,
     }),
     content: content || '',
-    // onCreate: () => {
-    // initAudioPlayers()
-    // },
     onUpdate: async ({ editor, transaction }) => {
-      // initAudioPlayers()
-
       const content = editor.getHTML()
-
-      // console.log(editor, transaction)
-      // console.log(await html2md(content))
       update({ content })
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
     extensions: [FigureEmbedLinkInput],
   })
 
-  useEffect(() => {
-    // @ts-ignore
-    window.editor = editor
-  }, [editor])
-
   return (
-    <>
-      <div className="container" id="editor">
-        <EditorTitle
-          defaultValue={title || ''}
-          readOnly={isTitleReadOnly}
-          update={update}
-        />
+    <div className="articleEditor">
+      <EditorTitle
+        defaultValue={title || ''}
+        readOnly={isTitleReadOnly}
+        update={update}
+      />
 
-        <EditorSummary
-          defaultValue={summaryCustomized && summary ? summary : ''}
-          readOnly={isSummaryReadOnly}
-          update={update}
-          enable
-        />
+      <EditorSummary
+        defaultValue={summaryCustomized && summary ? summary : ''}
+        readOnly={isSummaryReadOnly}
+        update={update}
+        enable
+      />
 
-        {editor && <BubbleMenu editor={editor} />}
-        {editor && <FloatingMenu editor={editor} upload={upload} />}
+      {editor && <BubbleMenu editor={editor} />}
+      {editor && <FloatingMenu editor={editor} upload={upload} />}
 
-        <EditorContent editor={editor} />
-      </div>
+      <EditorContent editor={editor} />
 
       <style jsx>{editorStyles}</style>
       <style jsx global>
         {globalStyles}
       </style>
-    </>
+    </div>
   )
 }
 

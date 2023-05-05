@@ -3,6 +3,7 @@ import {
   Editor,
   isTextSelection,
 } from '@matters/matters-editor'
+import classNames from 'classnames'
 import { useContext, useState } from 'react'
 
 import { ReactComponent as IconEditorMenuBold } from '@/public/static/icons/24px/editor-menu-bold.svg'
@@ -19,12 +20,17 @@ import { translate } from '~/common/utils'
 import { LanguageContext, withIcon } from '~/components'
 
 import styles from './styles.css'
+import globalStyles from './styles.global.css'
 
 export type BubbleMenuProps = {
   editor: Editor
+  isCommentEditor?: boolean
 }
 
-export const BubbleMenu: React.FC<BubbleMenuProps> = ({ editor }) => {
+export const BubbleMenu: React.FC<BubbleMenuProps> = ({
+  editor,
+  isCommentEditor,
+}) => {
   const { lang } = useContext(LanguageContext)
 
   const [showLinkInput, setShowLinkInput] = useState(false)
@@ -51,6 +57,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({ editor }) => {
         theme: 'bubble-menu',
         duration: 200,
         placement: 'top',
+        // appendTo: () => document.body,
         onHidden: () => setShowLinkInput(false),
       }}
       shouldShow={({ view, state, from, to }) => {
@@ -88,45 +95,56 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({ editor }) => {
         return true
       }}
     >
-      <section className="container">
+      <section
+        className={classNames({
+          container: true,
+          comment: isCommentEditor,
+        })}
+      >
         {!showLinkInput && (
           <>
             {/* Heading 2 */}
-            <button
-              onClick={() =>
-                // @ts-ignore
-                editor.chain().focus().toggleHeading({ level: 2 }).run()
-              }
-              className={
-                editor.isActive('heading', { level: 2 }) ? 'active' : ''
-              }
-              aria-label={translate({
-                zh_hant: '標題 2',
-                zh_hans: '标题 2',
-                en: 'Heading 2',
-                lang,
-              })}
-            >
-              {withIcon(IconEditorMenuH2)({ size: 'md' })}
-            </button>
+            {!isCommentEditor && (
+              <button
+                onClick={() =>
+                  // @ts-ignore
+                  editor.chain().focus().toggleHeading({ level: 2 }).run()
+                }
+                className={
+                  editor.isActive('heading', { level: 2 }) ? 'active' : ''
+                }
+                aria-label={translate({
+                  zh_hant: '標題 2',
+                  zh_hans: '标题 2',
+                  en: 'Heading 2',
+                  lang,
+                })}
+              >
+                {withIcon(IconEditorMenuH2)({ size: 'md' })}
+              </button>
+            )}
+
             {/* Heading 3 */}
-            <button
-              onClick={() =>
-                // @ts-ignore
-                editor.chain().focus().toggleHeading({ level: 3 }).run()
-              }
-              className={
-                editor.isActive('heading', { level: 3 }) ? 'active' : ''
-              }
-              aria-label={translate({
-                zh_hant: '標題 3',
-                zh_hans: '标题 3',
-                en: 'Heading 3',
-                lang,
-              })}
-            >
-              {withIcon(IconEditorMenuH3)({ size: 'md' })}
-            </button>
+            {!isCommentEditor && (
+              <button
+                onClick={() =>
+                  // @ts-ignore
+                  editor.chain().focus().toggleHeading({ level: 3 }).run()
+                }
+                className={
+                  editor.isActive('heading', { level: 3 }) ? 'active' : ''
+                }
+                aria-label={translate({
+                  zh_hant: '標題 3',
+                  zh_hans: '标题 3',
+                  en: 'Heading 3',
+                  lang,
+                })}
+              >
+                {withIcon(IconEditorMenuH3)({ size: 'md' })}
+              </button>
+            )}
+
             {/* Bold */}
             <button
               onClick={() => editor.chain().focus().toggleBold().run()}
@@ -141,6 +159,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({ editor }) => {
             >
               {withIcon(IconEditorMenuBold)({ size: 'md' })}
             </button>
+
             {/* Strikethrough */}
             <button
               // @ts-ignore
@@ -157,6 +176,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({ editor }) => {
             >
               {withIcon(IconEditorMenuStrike)({ size: 'md' })}
             </button>
+
             {/* Code */}
             <button
               // @ts-ignore
@@ -173,6 +193,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({ editor }) => {
             >
               {withIcon(IconEditorMenuCode)({ size: 'md' })}
             </button>
+
             {/* Quote */}
             <button
               // @ts-ignore
@@ -187,34 +208,41 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({ editor }) => {
             >
               {withIcon(IconEditorMenuQuote)({ size: 'md' })}
             </button>
+
             {/* Unordered list */}
-            <button
-              // @ts-ignore
-              onClick={() => editor.chain().focus().toggleBulletList().run()}
-              className={editor.isActive('bulletList') ? 'active' : ''}
-              aria-label={translate({
-                zh_hant: '無序清單',
-                zh_hans: '无序列表',
-                en: 'Unordered list',
-                lang,
-              })}
-            >
-              {withIcon(IconEditorMenuUl)({ size: 'md' })}
-            </button>
+            {!isCommentEditor && (
+              <button
+                // @ts-ignore
+                onClick={() => editor.chain().focus().toggleBulletList().run()}
+                className={editor.isActive('bulletList') ? 'active' : ''}
+                aria-label={translate({
+                  zh_hant: '無序清單',
+                  zh_hans: '无序列表',
+                  en: 'Unordered list',
+                  lang,
+                })}
+              >
+                {withIcon(IconEditorMenuUl)({ size: 'md' })}
+              </button>
+            )}
+
             {/* Ordered list */}
-            <button
-              // @ts-ignore
-              onClick={() => editor.chain().focus().toggleOrderedList().run()}
-              className={editor.isActive('orderedList') ? 'active' : ''}
-              aria-label={translate({
-                zh_hant: '有序清單',
-                zh_hans: '有序列表',
-                en: 'Ordered list',
-                lang,
-              })}
-            >
-              {withIcon(IconEditorMenuOl)({ size: 'md' })}
-            </button>
+            {!isCommentEditor && (
+              <button
+                // @ts-ignore
+                onClick={() => editor.chain().focus().toggleOrderedList().run()}
+                className={editor.isActive('orderedList') ? 'active' : ''}
+                aria-label={translate({
+                  zh_hant: '有序清單',
+                  zh_hans: '有序列表',
+                  en: 'Ordered list',
+                  lang,
+                })}
+              >
+                {withIcon(IconEditorMenuOl)({ size: 'md' })}
+              </button>
+            )}
+
             {/* Link */}
             <button
               onClick={() => {
@@ -257,6 +285,9 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({ editor }) => {
         )}
 
         <style jsx>{styles}</style>
+        <style jsx global>
+          {globalStyles}
+        </style>
       </section>
     </TipTapBubbleMenu>
   )
