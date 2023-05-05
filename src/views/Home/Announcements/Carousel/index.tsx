@@ -134,11 +134,7 @@ const Carousel = ({ items }: CarouselProps) => {
               <div key={item.id} className="slide">
                 <Card htmlHref={itemLink} spacing={[0, 0]}>
                   <div className="content">
-                    <ResponsiveImage
-                      url={item.cover}
-                      size="540w"
-                      smUpSize="1080w"
-                    />
+                    <ResponsiveImage url={item.cover} size="1280w" />
                     <h3>{title}</h3>
                     <p>{itemContent}</p>
                   </div>
