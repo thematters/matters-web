@@ -90,6 +90,13 @@ const TagsFeed = () => {
 
   const SlideHeader = (
     <>
+      <Media lessThan="md">
+        <SectionHeader
+          type="tags"
+          rightButton={<ShuffleButton onClick={shuffle} />}
+          viewAll={false}
+        />
+      </Media>
       <Media between={['md', 'xl']}>
         <SectionHeader
           type="tags"
@@ -124,6 +131,7 @@ const TagsFeed = () => {
                   <TagDigest.Sidebar
                     key={cursor}
                     tag={node}
+                    spacing={['tight', 0]}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'tags',
@@ -143,8 +151,11 @@ const TagsFeed = () => {
           <ViewMoreCard
             spacing={['tight', 'tight']}
             href={PATHS.TAGS}
-            iconProps={{ size: 'sm' }}
-            textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
+            textIconProps={{
+              size: 'md',
+              weight: 'semibold',
+              spacing: 'xxtight',
+            }}
             textAlign="center"
           >
             <FormattedMessage defaultMessage="View All" description="" />

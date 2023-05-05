@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
+import IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING from '@/public/static/icons/civic-liker-architect-ring.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 import LOGBOOK from '@/public/static/images/logbook.gif'
 import { IconLogbookBadge16, ResponsiveImage } from '~/components'
@@ -73,8 +74,15 @@ export const Avatar = (props: AvatarProps) => {
         disabled={isFallback || inEditor}
       />
 
-      {isCivicLiker && <span className="civic-liker ring" />}
-      {hasArchitectBadge && <span className="architect ring" />}
+      {isCivicLiker && !hasArchitectBadge && (
+        <span className="civic-liker ring" />
+      )}
+      {hasArchitectBadge && !isCivicLiker && (
+        <span className="architect ring" />
+      )}
+      {hasArchitectBadge && isCivicLiker && (
+        <span className="civic-architect ring" />
+      )}
       {hasLogbook && (
         <section className="badge">
           {inProfile ? (
@@ -93,6 +101,9 @@ export const Avatar = (props: AvatarProps) => {
         }
         .architect.ring {
           background-image: url(${IMAGE_MATTERS_ARCHITECT_RING});
+        }
+        .civic-architect.ring {
+          background-image: url(${IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING});
         }
       `}</style>
     </div>

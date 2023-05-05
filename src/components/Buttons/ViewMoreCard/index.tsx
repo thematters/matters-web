@@ -41,7 +41,7 @@ export const ViewMoreCard: React.FC<
         {...cardProps}
       >
         <TextIcon
-          icon={<IconArrowRight16 size="xs" {...iconProps} />}
+          icon={<IconArrowRight16 {...iconProps} />}
           textPlacement="left"
           color="green"
           {...textIconProps}

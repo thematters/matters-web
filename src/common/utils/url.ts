@@ -24,7 +24,7 @@ export const parseURL = (url: string) => {
 /**
  * Responsive Image
  */
-export type ToSizedImageURLSize = '144w' | '360w' | '540w' | '1080w'
+export type ToSizedImageURLSize = '144w' | '360w' | '540w' | '1080w' | '1280w'
 
 interface ToSizedImageURLProps {
   url: string

@@ -21,8 +21,7 @@ export const Cover: React.FC<React.PropsWithChildren<CoverProps>> = ({
     <div className="cover">
       <ResponsiveImage
         url={url}
-        size="540w"
-        smUpSize="1080w"
+        size="1280w"
         disabled={isFallback || inEditor}
       />
 

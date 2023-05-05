@@ -18,14 +18,12 @@
  * Ring
  */
 .hasRing {
-  margin: 2px 0;
-
   & .ring {
     position: absolute;
-    top: -2px;
-    right: -2px;
-    bottom: -2px;
-    left: -2px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 }
 
@@ -115,17 +113,6 @@
   width: 2.5rem;
   height: 2.5rem;
 
-  &.hasRing {
-    margin: 4px 0;
-
-    & .ring {
-      top: -4px;
-      right: -4px;
-      bottom: -4px;
-      left: -4px;
-    }
-  }
-
   &.hasBadge {
     & .badge {
       & :global(svg) {
@@ -139,15 +126,6 @@
 .xl {
   width: 3rem;
   height: 3rem;
-
-  &.hasRing {
-    & .ring {
-      top: -5px;
-      right: -5px;
-      bottom: -5px;
-      left: -5px;
-    }
-  }
 
   &.hasBadge {
     & .badge {
@@ -164,15 +142,6 @@
   width: 3.5rem;
   height: 3.5rem;
 
-  &.hasRing {
-    & .ring {
-      top: -6px;
-      right: -6px;
-      bottom: -6px;
-      left: -6px;
-    }
-  }
-
   &.hasBadge {
     & .badge {
       & :global(svg) {
@@ -186,15 +155,6 @@
 .xxxl {
   width: 4.5rem;
   height: 4.5rem;
-
-  &.hasRing {
-    & .ring {
-      top: -8px;
-      right: -8px;
-      bottom: -8px;
-      left: -8px;
-    }
-  }
 
   &.hasBadge {
     & .badge {
