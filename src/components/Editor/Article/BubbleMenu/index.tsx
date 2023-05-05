@@ -106,6 +106,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {/* Heading 2 */}
             {!isCommentEditor && (
               <button
+                type="button"
                 onClick={() =>
                   // @ts-ignore
                   editor.chain().focus().toggleHeading({ level: 2 }).run()
@@ -127,6 +128,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {/* Heading 3 */}
             {!isCommentEditor && (
               <button
+                type="button"
                 onClick={() =>
                   // @ts-ignore
                   editor.chain().focus().toggleHeading({ level: 3 }).run()
@@ -147,6 +149,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
 
             {/* Bold */}
             <button
+              type="button"
               onClick={() => editor.chain().focus().toggleBold().run()}
               disabled={!editor.can().chain().focus().toggleBold().run()}
               className={editor.isActive('bold') ? 'active' : ''}
@@ -162,6 +165,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
 
             {/* Strikethrough */}
             <button
+              type="button"
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleStrike().run()}
               // @ts-ignore
@@ -179,6 +183,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
 
             {/* Code */}
             <button
+              type="button"
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleCode().run()}
               // @ts-ignore
@@ -196,6 +201,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
 
             {/* Quote */}
             <button
+              type="button"
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
               className={editor.isActive('blockquote') ? 'active' : ''}
@@ -212,6 +218,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {/* Unordered list */}
             {!isCommentEditor && (
               <button
+                type="button"
                 // @ts-ignore
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={editor.isActive('bulletList') ? 'active' : ''}
@@ -229,6 +236,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {/* Ordered list */}
             {!isCommentEditor && (
               <button
+                type="button"
                 // @ts-ignore
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
                 className={editor.isActive('orderedList') ? 'active' : ''}
@@ -245,6 +253,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
 
             {/* Link */}
             <button
+              type="button"
               onClick={() => {
                 // unset
                 if (editor.isActive('link')) {
