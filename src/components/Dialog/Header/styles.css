@@ -1,6 +1,6 @@
 header {
   @mixin flex-center-space-between;
-  @mixin shadow-border-bottom-grey;
+  @mixin border-bottom-grey;
 
   position: relative;
   flex-shrink: 0;
@@ -47,7 +47,7 @@ header {
 }
 
 .inner {
-  box-shadow: none;
+  border-bottom: none;
 
   & :global(> :not(h1)) {
     visibility: hidden;
