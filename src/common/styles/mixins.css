@@ -319,3 +319,16 @@
     height: 0 !important;
   }
 }
+
+@define-mixin slides-container-sm-down {
+  @media (--sm-down) {
+    & :global(.slides > .wrap) {
+      margin-right: calc(var(--spacing-base) * -1);
+      margin-left: calc(var(--spacing-base) * -1);
+
+      & :global(ul li:first-child) {
+        padding-left: var(--spacing-base);
+      }
+    }
+  }
+}
