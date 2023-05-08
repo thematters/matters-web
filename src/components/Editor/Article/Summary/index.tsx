@@ -47,7 +47,7 @@ const EditorSummary: React.FC<Props> = ({
   const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) =>
     update({ summary: value })
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === KEYVALUE.enter || event.key === 'Enter') {
       event.preventDefault()
     }
@@ -78,21 +78,21 @@ const EditorSummary: React.FC<Props> = ({
         ref={instance}
         rows={1}
         aria-label={translate({
-          en: 'Untitle',
-          zh_hans: '未命名',
-          zh_hant: '未命名',
+          en: 'Enter summary…',
+          zh_hans: '自定义摘要…',
+          zh_hant: '自定義摘要…',
           lang,
         })}
         placeholder={translate({
-          en: 'Untitle',
-          zh_hans: '未命名',
-          zh_hant: '未命名',
+          en: 'Enter summary…',
+          zh_hans: '自定义摘要…',
+          zh_hant: '自定義摘要…',
           lang,
         })}
         value={value}
         onBlur={handleBlur}
         onChange={handleChange}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyDown}
       />
       {!readOnly && (
         <section className={counterClasses}>({length}/200)</section>
