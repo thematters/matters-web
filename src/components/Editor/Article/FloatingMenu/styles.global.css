@@ -1,5 +1,5 @@
 /* @styled-jsx=global */
 
-.tippy-box[data-theme='bubble-menu'] .tippy-arrow {
+.tippy-box[data-theme='floating-menu'] .tippy-arrow {
   display: none;
 }
