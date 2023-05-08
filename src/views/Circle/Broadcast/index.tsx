@@ -5,7 +5,7 @@ import Broadcast from './Broadcast'
 import styles from './styles.css'
 
 const CircleBroadcast = () => (
-  <Layout.Main smBgColor="grey-lighter">
+  <Layout.Main>
     <Profile />
 
     <section className="container">

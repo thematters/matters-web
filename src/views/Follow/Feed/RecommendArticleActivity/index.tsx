@@ -35,11 +35,8 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
       : 'ArticleRecommendationActivity'
 
   return (
-    <>
-      <Slides
-        bgColor="grey-lighter"
-        header={<FollowingRecommendHead type={type} />}
-      >
+    <section className="container">
+      <Slides header={<FollowingRecommendHead type={type} />}>
         {articles.map((article, index) => (
           <Slides.Item
             size="md"
@@ -67,10 +64,10 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
             </section>
           </Slides.Item>
         ))}
-        <style jsx>{styles}</style>
       </Slides>
       <Waypoint onEnter={() => setMountTracker(true)} />
-    </>
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 

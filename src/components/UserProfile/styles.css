@@ -4,9 +4,10 @@
 
 .buttons {
   display: inline-flex;
+  gap: var(--spacing-base);
 
-  & :global(> * + *) {
-    margin-left: var(--spacing-base);
+  @media (--sm-up) {
+    padding-right: var(--spacing-base);
   }
 }
 
@@ -40,6 +41,10 @@ header {
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-base);
 
+  @media (--sm-up) {
+    padding: 0;
+  }
+
   & .avatar {
     display: inline-flex;
     margin-top: calc(var(--spacing-loose) * -1);
@@ -51,6 +56,10 @@ header {
 .info {
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
 
   & .display-name,
   & .username {
@@ -82,6 +91,10 @@ footer {
   padding: 0 var(--spacing-base);
   font-size: var(--font-size-sm);
   color: var(--color-grey);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
 
   & :global(> *) {
     display: inline-flex;

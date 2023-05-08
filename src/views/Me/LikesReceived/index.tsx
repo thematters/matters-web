@@ -89,7 +89,7 @@ const BaseLikesReceived = () => {
       <LikesTabs activity={data.viewer.activity} />
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List>
+        <List responsiveWrapper>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
               <Appreciation appreciation={node} type="received" />
@@ -103,10 +103,7 @@ const BaseLikesReceived = () => {
 
 const LikesReceived = () => (
   <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="likesReceived" />}
-    />
+    <Layout.Header left={<Layout.Header.Title id="likesReceived" />} />
 
     <Head title={{ id: 'likesReceived' }} />
 

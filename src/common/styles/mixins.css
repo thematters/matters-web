@@ -121,47 +121,39 @@
 /* Form
    ========================================================================== */
 @define-mixin form-input {
-  @mixin border-top-grey;
-  @mixin border-bottom-grey;
-
-  padding: var(--spacing-base);
-  font-size: var(--font-size-md);
-  background-color: var(--color-white);
-
-  &:disabled {
-    color: var(--color-grey-darker);
-  }
-
-  &::placeholder {
-    color: var(--color-grey-light);
-    opacity: 1; /* Firefox */
-  }
-
-  &:-webkit-autofill::first-line {
-    font-size: var(--font-size-md);
-  }
-}
-
-@define-mixin form-input-grey {
   @mixin transition;
+  @mixin border-grey;
 
   padding: var(--spacing-base);
   font-size: var(--font-size-md);
-  background-color: var(--color-grey-lighter);
-  border-top: none;
-  border-bottom: 1px solid var(--color-grey-light);
-  border-radius: var(--spacing-xxx-tight);
-  transition-property: border-color, background-color;
+  color: var(--color-black);
+  background-color: var(--color-white);
+  border-radius: var(--spacing-x-tight);
 
   &:focus,
   &.focus {
-    background-color: var(--color-green-lighter);
-    border-bottom-color: var(--color-matters-green);
+    border-color: var(--color-grey);
+  }
+
+  &:disabled {
+    color: var(--color-grey-dark);
+    background-color: var(--color-grey-lighter);
+    border-color: transparent;
   }
 
   &::placeholder {
-    color: var(--color-grey);
+    color: var(--color-grey-dark);
     opacity: 1; /* Firefox */
+  }
+
+  &.error {
+    border-color: var(--color-red);
+
+    &:focus,
+    &.focus {
+      background-color: transparent;
+      border-color: var(--color-red);
+    }
   }
 
   &:-webkit-autofill::first-line {
@@ -171,18 +163,25 @@
 
 @define-mixin form-input-round {
   @mixin transition;
+  @mixin border-grey;
 
   height: var(--input-height);
   padding: var(--spacing-base);
-  border: 1px solid var(--color-line-grey-light);
+  color: var(--color-black);
+  background-color: var(--color-white);
   border-radius: var(--spacing-x-tight);
-  caret-color: var(--color-matters-green);
   transition-property: border-color, background-color;
+  caret-color: var(--color-matters-green);
 
   &:focus,
   &.focus {
-    background-color: var(--color-green-lighter);
-    border-color: var(--color-matters-green);
+    border-color: var(--color-grey);
+  }
+
+  &:disabled {
+    color: var(--color-grey-dark);
+    background-color: var(--color-grey-lighter);
+    border-color: transparent;
   }
 
   &.error {
@@ -205,6 +204,25 @@
   /* Firefox */
   &[type='number'] {
     appearance: textfield;
+  }
+}
+
+@define-mixin form-container {
+  margin-right: var(--spacing-base);
+  margin-left: var(--spacing-base);
+
+  @media (--sm-up) {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  & :global(.field) {
+    margin-right: 0;
+    margin-left: 0;
+
+    & :global(.input-container) {
+      margin: 0;
+    }
   }
 }
 

@@ -39,7 +39,9 @@ const JoinUs = () => {
                 </a>
               </li>
               <li>
-                <a href="https://matters.news/@hi176/matters-%E5%85%A8%E9%9D%A2%E9%96%8B%E6%BA%90-%E9%82%80%E8%AB%8B%E4%BD%A0%E4%B8%80%E8%B5%B7%E4%BE%86%E5%BB%BA%E8%A8%AD%E9%A6%AC%E7%89%B9%E5%B8%82-bafyreibge4gigd2bi34kdb742ch5dfiiu76sveqvj7hf7yuyy3gjiyarfy">
+                <a
+                  href={`https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@hi176/69962-matters-全面開源-邀請你一起來建設馬特市-bafyreibge4gigd2bi34kdb742ch5dfiiu76sveqvj7hf7yuyy3gjiyarfy`}
+                >
                   <Translate
                     zh_hant="加入開源社區 "
                     zh_hans="加入开源社区"

@@ -33,9 +33,15 @@ export const ViewMoreCard: React.FC<
 
   return (
     <section className={viewMoreCardClasses}>
-      <Card spacing={['base', 'base']} {...cardProps}>
+      <Card
+        spacing={['base', 'base']}
+        borderColor="green"
+        borderRadius="loose"
+        bgActiveColor="none"
+        {...cardProps}
+      >
         <TextIcon
-          icon={<IconArrowRight16 size="xs" {...iconProps} />}
+          icon={<IconArrowRight16 {...iconProps} />}
           textPlacement="left"
           color="green"
           {...textIconProps}

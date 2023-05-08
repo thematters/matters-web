@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { GUIDE_LINKS, PATHS } from '~/common/enums'
-import { Form, LanguageContext, Layout, Spacer } from '~/components'
+import { EXTERNAL_LINKS, GUIDE_LINKS, PATHS } from '~/common/enums'
+import { Form, LanguageContext, Layout, ResponsiveWrapper } from '~/components'
 
 import styles from './styles.css'
 
@@ -12,8 +12,8 @@ const BaseHelp = () => {
 
   const intl = useIntl()
   return (
-    <>
-      <Form.List>
+    <ResponsiveWrapper>
+      <Form.List spacingX={0}>
         <Form.List.Item
           role="link"
           title={intl.formatMessage({
@@ -60,7 +60,7 @@ const BaseHelp = () => {
             defaultMessage: 'Open Source',
             description: '',
           })}
-          htmlHref="https://github.com/thematters/developer-resource"
+          htmlHref={EXTERNAL_LINKS.DEVELOPER_RESOURCE}
           htmlTarget="_blank"
         />
         <Form.List.Item
@@ -81,11 +81,11 @@ const BaseHelp = () => {
           />
           <a
             className="u-link-green"
-            href="mailto:ask@matters.news"
+            href="mailto:ask@matters.town"
             target="_blank"
             rel="noreferrer"
           >
-            &nbsp; ask@matters.news
+            &nbsp; ask@matters.town
           </a>
           &nbsp;
           <FormattedMessage
@@ -102,22 +102,14 @@ const BaseHelp = () => {
       </footer>
 
       <style jsx>{styles}</style>
-    </>
+    </ResponsiveWrapper>
   )
 }
 
 const Help = () => (
-  <Layout.Main smBgColor="grey-lighter">
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="helpCenter" />}
-    />
-
-    <Spacer />
-
+  <Layout.Main>
+    <Layout.Header left={<Layout.Header.Title id="helpCenter" />} />
     <BaseHelp />
-
-    <Spacer size="xxxloose" />
   </Layout.Main>
 )
 

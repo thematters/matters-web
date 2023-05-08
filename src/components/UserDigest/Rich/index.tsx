@@ -78,6 +78,7 @@ const Rich = ({
     return (
       <Card
         spacing={['tight', 'tight']}
+        bgActiveColor="none"
         {...cardProps}
         testId={TEST_ID.DIGEST_USER_RICH}
       >
@@ -108,6 +109,7 @@ const Rich = ({
     <Card
       {...path}
       spacing={['tight', 'tight']}
+      bgActiveColor="none"
       {...cardProps}
       testId={TEST_ID.DIGEST_USER_RICH}
     >

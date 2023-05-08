@@ -5,6 +5,7 @@ import {
   EmptyTag,
   InfiniteScroll,
   QueryError,
+  ResponsiveWrapper,
   Spinner,
   TagDigest,
   usePublicQuery,
@@ -64,30 +65,32 @@ const Feed = ({ type }: Props) => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul>
-        {edges.map(({ node: tag }, i) => (
-          <li key={tag.id}>
-            <TagDigest.Feed
-              tag={tag}
-              spacing={['xtight', 'xtight']}
-              href={
-                toPath({
-                  page: 'tagDetail',
-                  tag, // : node,
-                }).href
-              }
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: trackingType,
-                  contentType: 'tag',
-                  location: i,
-                  id: tag.id,
-                })
-              }
-            />
-          </li>
-        ))}
-      </ul>
+      <ResponsiveWrapper>
+        <ul>
+          {edges.map(({ node: tag }, i) => (
+            <li key={tag.id}>
+              <TagDigest.Feed
+                tag={tag}
+                spacing={['xtight', 0]}
+                href={
+                  toPath({
+                    page: 'tagDetail',
+                    tag, // : node,
+                  }).href
+                }
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: trackingType,
+                    contentType: 'tag',
+                    location: i,
+                    id: tag.id,
+                  })
+                }
+              />
+            </li>
+          ))}
+        </ul>
+      </ResponsiveWrapper>
 
       <style jsx>{styles}</style>
     </InfiniteScroll>

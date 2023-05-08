@@ -17,30 +17,29 @@ const RecommendUserActivity = ({ users }: Props) => {
   }
 
   return (
-    <Slides
-      bgColor="grey-lighter"
-      header={<FollowingRecommendHead type="user" />}
-    >
-      {users.map((user, index) => (
-        <Slides.Item
-          size="md"
-          key={index}
-          onClick={() => {
-            analytics.trackEvent('click_feed', {
-              type: 'following',
-              contentType: 'UserRecommendationActivity',
-              location: `${location}.${index}`,
-              id: user.id,
-            })
-          }}
-        >
-          <section className="item">
-            <FollowingRecommendUser user={user} />
-          </section>
-        </Slides.Item>
-      ))}
+    <section className="container">
+      <Slides header={<FollowingRecommendHead type="user" />}>
+        {users.map((user, index) => (
+          <Slides.Item
+            size="md"
+            key={index}
+            onClick={() => {
+              analytics.trackEvent('click_feed', {
+                type: 'following',
+                contentType: 'UserRecommendationActivity',
+                location: `${location}.${index}`,
+                id: user.id,
+              })
+            }}
+          >
+            <section className="item">
+              <FollowingRecommendUser user={user} />
+            </section>
+          </Slides.Item>
+        ))}
+      </Slides>
       <style jsx>{styles}</style>
-    </Slides>
+    </section>
   )
 }
 

@@ -12,6 +12,7 @@ import {
   InfiniteScroll,
   Layout,
   List,
+  Spacer,
   Spinner,
   Tabs,
   Transaction,
@@ -130,7 +131,7 @@ const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List>
+      <List responsiveWrapper>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
             <Transaction tx={node} />
@@ -152,13 +153,10 @@ const Transactions = () => {
 
   return (
     <Layout.Main>
-      <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="paymentTransactions" />}
-      />
+      <Layout.Header right={<Layout.Header.Title id="paymentTransactions" />} />
 
       <Head title={{ id: 'paymentTransactions' }} />
-
+      <Spacer size="xtight" />
       <Tabs
         sticky
         side={

@@ -4,14 +4,19 @@ import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
 
 import {
+  PATHS,
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MINIMAL_PAYOUT_AMOUNT,
 } from '~/common/enums'
 import {
+  Button,
   Form,
   Head,
   Layout,
+  ResponsiveWrapper,
   Spinner,
+  TextIcon,
+  Translate,
   ViewerContext,
   WagmiProvider,
 } from '~/components'
@@ -23,7 +28,6 @@ import { FiatCurrencyBalance, LikeCoinBalance, USDTBalance } from './Balance'
 import PaymentPassword from './PaymentPassword'
 import PaymentPointer from './PaymentPointer'
 import styles from './styles.css'
-import TotalAssets from './TotalAssets'
 import ViewStripeAccount from './ViewStripeAccount'
 import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 
@@ -67,25 +71,35 @@ const Wallet = () => {
   if (exchangeRateLoading || loading) {
     return (
       <Layout.Main>
-        <Layout.Header
-          left={<Layout.Header.BackButton />}
-          right={<Layout.Header.Title id="myWallet" />}
-        />
+        <Layout.Header left={<Layout.Header.Title id="myWallet" />} />
         <Spinner />
       </Layout.Main>
     )
   }
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
+    <Layout.Main>
       <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="myWallet" />}
+        left={<Layout.Header.Title id="myWallet" />}
+        right={
+          <>
+            <span />
+            <Button
+              spacing={[0, 'tight']}
+              size={[null, '2rem']}
+              bgColor="green"
+              textColor="white"
+              href={PATHS.ME_WALLET_TRANSACTIONS}
+            >
+              <TextIcon weight="md">
+                <Translate id="paymentTransactions" />
+              </TextIcon>
+            </Button>
+          </>
+        }
       />
 
       <Head title={{ id: 'myWallet' }} />
-
-      <TotalAssets />
 
       <section className="assetsContainer">
         <FiatCurrencyBalance
@@ -107,12 +121,20 @@ const Wallet = () => {
         </WagmiProvider>
       </section>
 
-      <Form.List>
-        {hasPaymentPassword && <PaymentPassword />}
-        <ViewStripeCustomerPortal />
-        {hasStripeAccount && <ViewStripeAccount />}
-        <PaymentPointer />
-      </Form.List>
+      <ResponsiveWrapper>
+        <Form.List spacingX={0}>
+          {hasPaymentPassword && (
+            <>
+              <PaymentPassword />
+              <hr className="dashed-line" />
+            </>
+          )}
+          <ViewStripeCustomerPortal />
+          {hasStripeAccount && <ViewStripeAccount />}
+          <PaymentPointer />
+        </Form.List>
+      </ResponsiveWrapper>
+
       <style jsx>{styles}</style>
     </Layout.Main>
   )

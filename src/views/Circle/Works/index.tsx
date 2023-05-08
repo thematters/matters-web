@@ -5,7 +5,7 @@ import styles from './styles.css'
 import Works from './Works'
 
 const CircleWorks = () => (
-  <Layout.Main smBgColor="grey-lighter">
+  <Layout.Main>
     <Profile />
 
     <section className="container">

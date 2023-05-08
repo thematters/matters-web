@@ -15,7 +15,11 @@ import {
   usePublicQuery,
   useRoute,
 } from '~/components'
-import { SearchAggregateArticlesPublicQuery } from '~/gql/graphql'
+import {
+  ArticleDigestFeedArticlePrivateFragment,
+  ArticleDigestFeedArticlePublicFragment,
+  SearchAggregateArticlesPublicQuery,
+} from '~/gql/graphql'
 
 import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
@@ -103,20 +107,23 @@ const AggregateArticleResults = () => {
   }
 
   return (
-    <section className="aggregate-section">
+    <section>
       <InfiniteScroll
         hasNextPage={
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
       >
-        <List>
+        <List responsiveWrapper>
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'Article' && (
                 <List.Item key={cursor + node.id}>
                   <ArticleDigestFeed
-                    article={node}
+                    article={
+                      node as ArticleDigestFeedArticlePublicFragment &
+                        Partial<ArticleDigestFeedArticlePrivateFragment>
+                    }
                     is="link"
                     isConciseFooter={true}
                     hasCircle={false}

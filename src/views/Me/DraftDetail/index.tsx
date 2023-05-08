@@ -155,7 +155,6 @@ const DraftDetail = () => {
       inEditor
     >
       <Layout.Header
-        left={<Layout.Header.BackButton />}
         right={
           <>
             <SaveStatus status={saveStatus} />

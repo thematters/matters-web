@@ -27,11 +27,15 @@ const Header: React.FC<HeaderProps> & {
     [`${className}`]: !!className,
   })
 
+  const rightClasses = classNames({
+    right: true,
+  })
+
   return (
     <header className={headerClasses} data-test-id={TEST_ID.LAYOUT_HEADER}>
       <section className="content">
         {left && <section className="left">{left}</section>}
-        {right && <section className="right">{right}</section>}
+        {right && <section className={rightClasses}>{right}</section>}
       </section>
 
       <style jsx>{styles}</style>

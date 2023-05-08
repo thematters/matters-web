@@ -104,7 +104,7 @@
     "description": ""
   },
   "3uQKhx": {
-    "defaultMessage": "若你希望向 Matters 提出建議，或遭遇操作異常，请發送郵件至",
+    "defaultMessage": "若你希望向 Matters 提出建議，或遭遇操作異常，請發送郵件至",
     "description": "src/views/Help/index.tsx"
   },
   "3yk8fB": {
@@ -283,10 +283,6 @@
     "defaultMessage": "設定",
     "description": ""
   },
-  "DMlmcU": {
-    "defaultMessage": "免費資格",
-    "description": "src/views/Circle/Settings/index.tsx"
-  },
   "DXJ8ys": {
     "defaultMessage": "閱讀次數代表了你的作品被登入用戶閱讀的總次數，每次閱讀過程超過一定時間後才會計入。此外，同一個用戶的多次閱讀也會進行累計。",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
@@ -308,7 +304,7 @@
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "EoNvLu": {
-    "defaultMessage": "創作了",
+    "defaultMessage": "創作了 ",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "EwVnoC": {
@@ -402,10 +398,6 @@
   "JIjMWL": {
     "defaultMessage": "你的作品已發布到分佈式網絡",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
-  },
-  "JXdbo8": {
-    "defaultMessage": "完成",
-    "description": ""
   },
   "Jc+W6M": {
     "defaultMessage": " 辭去了標籤主理人權限，你要不要試試看成為新的主理人？",
@@ -628,7 +620,7 @@
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "UxfPXa": {
-    "defaultMessage": "累積創作",
+    "defaultMessage": "累積創作 ",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "VO4Elt": {
@@ -838,10 +830,6 @@
   "fG41Ux": {
     "defaultMessage": "登出成功",
     "description": ""
-  },
-  "fOgusL": {
-    "defaultMessage": "選擇進入方式",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "fWDtpq": {
     "defaultMessage": "邀請中",

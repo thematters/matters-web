@@ -23,6 +23,8 @@ import {
   ResetPasswordMutation,
 } from '~/gql/graphql'
 
+import styles from '../styles.css'
+
 interface FormProps {
   email: string
   code: string
@@ -124,32 +126,35 @@ const Confirm: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <Form id={formId} onSubmit={handleSubmit}>
-      <Form.Input
-        label={<Translate id="newPassword" />}
-        type="password"
-        name="password"
-        required
-        placeholder={translate({ id: 'enterNewPassword', lang })}
-        value={values.password}
-        error={touched.password && errors.password}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+    <section className="container">
+      <Form id={formId} onSubmit={handleSubmit}>
+        <Form.Input
+          label={<Translate id="newPassword" />}
+          type="password"
+          name="password"
+          required
+          placeholder={translate({ id: 'enterNewPassword', lang })}
+          value={values.password}
+          error={touched.password && errors.password}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
 
-      <Form.Input
-        label={<Translate id="newPassword" />}
-        type="password"
-        name="comparedPassword"
-        required
-        placeholder={translate({ id: 'enterNewPasswordAgain', lang })}
-        value={values.comparedPassword}
-        error={touched.comparedPassword && errors.comparedPassword}
-        hint={<Translate id="hintPassword" />}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
-    </Form>
+        <Form.Input
+          label={<Translate id="newPassword" />}
+          type="password"
+          name="comparedPassword"
+          required
+          placeholder={translate({ id: 'enterNewPasswordAgain', lang })}
+          value={values.comparedPassword}
+          error={touched.comparedPassword && errors.comparedPassword}
+          hint={<Translate id="hintPassword" />}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+      </Form>
+      <style jsx>{styles}</style>
+    </section>
   )
 
   const SubmitButton = (
@@ -166,10 +171,10 @@ const Confirm: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton />}
+          left={<Layout.Header.Title id={titleId} />}
           right={
             <>
-              <Layout.Header.Title id={titleId} />
+              <span />
               {SubmitButton}
             </>
           }

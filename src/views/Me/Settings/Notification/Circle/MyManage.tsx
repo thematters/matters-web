@@ -13,9 +13,10 @@ type NotificationType = NonNullable<
 interface MyManageProps {
   settings: NotificationType
   toggle: (type: keyof NotificationType) => void
+  spacingX: 0 | 'base'
 }
 
-const MyManage = ({ settings, toggle }: MyManageProps) => {
+const MyManage = ({ settings, toggle, spacingX }: MyManageProps) => {
   const { lang } = useContext(LanguageContext)
   const newSubscriberLabel = translate({
     zh_hant: '有新訂閱者',
@@ -39,6 +40,7 @@ const MyManage = ({ settings, toggle }: MyManageProps) => {
   return (
     <Form.List
       groupName={<Translate zh_hant="管理" zh_hans="管理" en="Management" />}
+      spacingX={spacingX}
     >
       <Form.List.Item
         title={newSubscriberLabel}

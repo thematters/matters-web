@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React, { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
@@ -156,6 +157,10 @@ const Select: React.FC<FormProps> = ({
     )
   }
 
+  const containerClasses = classNames({
+    container: !!isInPage,
+  })
+
   const InnerForm = (
     <Form id={formId} onSubmit={submitCallback}>
       {isConnect && (
@@ -166,82 +171,89 @@ const Select: React.FC<FormProps> = ({
               description="src/components/Forms/WalletAuthForm/Select.tsx"
             />
           }
+          spacingX={isInPage ? 0 : 'base'}
         >
           <Form.List.Item title="Matters ID" rightText={viewer.userName} />
         </Form.List>
       )}
 
-      <Form.List
-        groupName={
-          <FormattedMessage defaultMessage="Connect Wallet" description="" />
-        }
-      >
-        {injectedConnector?.ready ? (
-          <Form.List.Item
-            title={
-              <TextIcon
-                color="black"
-                icon={<IconMetaMask24 size="md" />}
-                size="md"
-                spacing="xtight"
-              >
-                MetaMask
-              </TextIcon>
-            }
-            onClick={() => {
-              analytics.trackEvent('click_button', {
-                type: 'connectorMetaMask',
-              })
-              connect({ connector: injectedConnector })
-            }}
-            role="button"
-            right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
-          />
-        ) : (
-          <Form.List.Item
-            title={
-              <TextIcon
-                color="black"
-                icon={<IconMetaMask24 size="md" />}
-                size="md"
-                spacing="xtight"
-              >
-                <FormattedMessage
-                  defaultMessage="Install MetaMask"
-                  description="src/components/Forms/WalletAuthForm/Select.tsx"
-                />
-              </TextIcon>
-            }
-            htmlHref={EXTERNAL_LINKS.METAMASK}
-            onClick={() => {
-              analytics.trackEvent('click_button', {
-                type: 'installMetaMask',
-              })
-            }}
-            role="button"
-          />
-        )}
-        <Form.List.Item
-          title={
-            <TextIcon
-              color="black"
-              icon={<IconWalletConnect24 size="md" />}
-              size="md"
-              spacing="xtight"
-            >
-              WalletConnect
-            </TextIcon>
+      <section className={containerClasses}>
+        <Form.List
+          groupName={
+            <FormattedMessage defaultMessage="Connect Wallet" description="" />
           }
-          onClick={() => {
-            analytics.trackEvent('click_button', {
-              type: 'connectorWalletConnect',
-            })
-            connect({ connector: walletConnectConnector })
-          }}
-          role="button"
-          right={isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null}
-        />
-      </Form.List>
+          spacingX={isInPage ? 0 : 'base'}
+        >
+          {injectedConnector?.ready ? (
+            <Form.List.Item
+              title={
+                <TextIcon
+                  color="black"
+                  icon={<IconMetaMask24 size="md" />}
+                  size="md"
+                  spacing="xtight"
+                >
+                  MetaMask
+                </TextIcon>
+              }
+              onClick={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'connectorMetaMask',
+                })
+                connect({ connector: injectedConnector })
+              }}
+              role="button"
+              right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
+            />
+          ) : (
+            <Form.List.Item
+              title={
+                <TextIcon
+                  color="black"
+                  icon={<IconMetaMask24 size="md" />}
+                  size="md"
+                  spacing="xtight"
+                >
+                  <FormattedMessage
+                    defaultMessage="Install MetaMask"
+                    description="src/components/Forms/WalletAuthForm/Select.tsx"
+                  />
+                </TextIcon>
+              }
+              htmlHref={EXTERNAL_LINKS.METAMASK}
+              onClick={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'installMetaMask',
+                })
+              }}
+              role="button"
+            />
+          )}
+          <Form.List.Item
+            title={
+              <TextIcon
+                color="black"
+                icon={<IconWalletConnect24 size="md" />}
+                size="md"
+                spacing="xtight"
+              >
+                WalletConnect
+              </TextIcon>
+            }
+            onClick={() => {
+              analytics.trackEvent('click_button', {
+                type: 'connectorWalletConnect',
+              })
+              connect({ connector: walletConnectConnector })
+            }}
+            role="button"
+            right={
+              isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null
+            }
+          />
+        </Form.List>
+        <style jsx>{styles}</style>
+      </section>
 
       <section className="msg">
         <Form.Field.Footer
@@ -249,7 +261,6 @@ const Select: React.FC<FormProps> = ({
           hint={errorMessage ? undefined : <Hint />}
           error={errorMessage}
         />
-
         <style jsx>{styles}</style>
       </section>
     </Form>
@@ -259,8 +270,7 @@ const Select: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton onClick={onBack} />}
-          right={
+          left={
             <Layout.Header.Title
               id={isConnect ? 'loginWithWallet' : 'authEntries'}
             />

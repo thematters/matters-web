@@ -6,7 +6,7 @@ import {
   Form,
   Head,
   Layout,
-  Spacer,
+  ResponsiveWrapper,
   Spinner,
   Translate,
   useMutation,
@@ -89,12 +89,13 @@ const BaseNotificationSettings = () => {
   }
 
   return (
-    <>
+    <ResponsiveWrapper>
       <PreferenceSettings toggle={toggle} settings={settings} />
       <Form.List
         groupName={
           <Translate zh_hant="站內通知" zh_hans="站内通知" en="Site" />
         }
+        spacingX={0}
       >
         <Form.List.Item
           role="link"
@@ -107,22 +108,17 @@ const BaseNotificationSettings = () => {
           href={PATHS.ME_SETTINGS_NOTIFICATION_CIRCLE}
         />
       </Form.List>
-    </>
+    </ResponsiveWrapper>
   )
 }
 
 const NotificationSettings = () => (
-  <Layout.Main smBgColor="grey-lighter">
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="settingsNotification" />}
-    />
+  <Layout.Main>
+    <Layout.Header left={<Layout.Header.Title id="settingsNotification" />} />
 
     <Head title={{ id: 'settingsNotification' }} />
 
     <BaseNotificationSettings />
-
-    <Spacer size="xxxloose" />
   </Layout.Main>
 )
 

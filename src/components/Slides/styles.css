@@ -1,5 +1,5 @@
 .slides {
-  padding: var(--spacing-base);
+  padding: var(--spacing-base) 0;
 
   & ul {
     @mixin hide-scrollbar;
@@ -23,6 +23,17 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
+
+  @media (--sm-down) {
+    margin-right: calc(var(--spacing-base) * -1);
+    margin-left: calc(var(--spacing-base) * -1);
+
+    & ul {
+      & li:first-child {
+        padding-left: var(--spacing-base);
+      }
+    }
+  }
 }
 
 .bg-yellow-lighter {

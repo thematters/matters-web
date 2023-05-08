@@ -27,6 +27,7 @@ export type ArticleDigestFeedControls = {
   isConciseFooter?: boolean
   hasFollow?: boolean
   hasCircle?: boolean
+  hasAuthor?: boolean
 }
 
 export type ArticleDigestFeedProps = {
@@ -46,6 +47,7 @@ const BaseArticleDigestFeed = ({
   isConciseFooter = false,
   hasFollow,
   hasCircle = true,
+  hasAuthor = true,
   onClick,
   onClickAuthor,
 
@@ -73,9 +75,10 @@ const BaseArticleDigestFeed = ({
   return (
     <Card
       {...path}
-      spacing={['base', 'base']}
+      spacing={['base', 0]}
       onClick={onClick}
       testId={TEST_ID.DIGEST_ARTICLE_FEED}
+      bgActiveColor="none"
       is={is}
     >
       {header ||
@@ -84,25 +87,26 @@ const BaseArticleDigestFeed = ({
             <CircleDigest.Plain circle={circle} />
           </header>
         ))}
-
       <section className="content">
         <section className="head">
           <section className="title">
             <ArticleDigestTitle article={article} textSize="xm" />
           </section>
 
-          <section className="author">
-            <UserDigest.Mini
-              user={author}
-              avatarSize="sm"
-              textSize="sm"
-              hasAvatar
-              hasDisplayName
-              onClick={onClickAuthor}
-            />
+          {hasAuthor && (
+            <section className="author">
+              <UserDigest.Mini
+                user={author}
+                avatarSize="sm"
+                textSize="sm"
+                hasAvatar
+                hasDisplayName
+                onClick={onClickAuthor}
+              />
 
-            {hasFollow && <FollowButton user={article.author} />}
-          </section>
+              {hasFollow && <FollowButton user={article.author} />}
+            </section>
+          )}
         </section>
 
         <p className="description">{cleanedSummary}</p>
@@ -113,7 +117,6 @@ const BaseArticleDigestFeed = ({
           </div>
         )}
       </section>
-
       {isConciseFooter && (
         <section>
           <DateTime date={article.createdAt} />
@@ -122,7 +125,6 @@ const BaseArticleDigestFeed = ({
       {!isConciseFooter && (
         <FooterActions article={article} inCard date={date} {...controls} />
       )}
-
       <style jsx>{styles}</style>
     </Card>
   )

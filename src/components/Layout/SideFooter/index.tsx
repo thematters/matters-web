@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { GUIDE_LINKS, PATHS } from '~/common/enums'
+import { EXTERNAL_LINKS, GUIDE_LINKS, PATHS } from '~/common/enums'
 import { LanguageContext, LanguageSwitch } from '~/components'
 
 import styles from './styles.css'
@@ -58,18 +58,14 @@ const SideFooter = () => {
         </Link>
 
         <a
-          href="https://github.com/thematters/developer-resource"
+          href={EXTERNAL_LINKS.DEVELOPER_RESOURCE}
           target="_blank"
           rel="noreferrer"
         >
           <FormattedMessage defaultMessage="Open Source" description="" />
         </a>
 
-        <a
-          href="https://github.com/thematters/developer-resource/blob/master/SECURITY.md"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href={EXTERNAL_LINKS.SECURITY_LINK} target="_blank" rel="noreferrer">
           <FormattedMessage defaultMessage="Bug Bounty" description="" />
         </a>
 

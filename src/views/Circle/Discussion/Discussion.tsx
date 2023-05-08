@@ -191,12 +191,17 @@ const CricleDiscussion = () => {
         offset: fragment === URL_FRAGMENT.COMMENTS ? -10 : -64,
       })
     }
-    const element = dom.$(`#${fragment}`)
 
-    if (!element) {
-      loadMore({ before: parentId }).then(jumpToFragment)
-    } else {
-      jumpToFragment()
+    try {
+      const element = dom.$(`#${fragment}`)
+
+      if (!element) {
+        loadMore({ before: parentId }).then(jumpToFragment)
+      } else {
+        jumpToFragment()
+      }
+    } catch (e) {
+      return
     }
   }, [error, privateFetched, discussionLoading, hasPermission, circle?.id])
 

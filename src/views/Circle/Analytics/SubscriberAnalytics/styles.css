@@ -1,6 +1,4 @@
 .container {
-  @mixin border-bottom-grey;
-
   padding-bottom: var(--spacing-x-loose);
   background: var(--color-white);
 }
@@ -8,4 +6,8 @@
 .chart {
   padding: 0 var(--spacing-x-tight) 0 var(--spacing-base);
   margin-top: var(--spacing-xx-loose);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
 }

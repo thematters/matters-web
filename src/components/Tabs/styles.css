@@ -4,8 +4,7 @@ nav {
   white-space: nowrap;
 
   @media (--sm-up) {
-    padding-top: var(--spacing-base);
-    padding-bottom: var(--spacing-base);
+    padding: var(--spacing-base) 0;
   }
 
   &.sticky {

@@ -283,10 +283,6 @@
     "defaultMessage": "Settings",
     "description": ""
   },
-  "DMlmcU": {
-    "defaultMessage": "Free Trial",
-    "description": "src/views/Circle/Settings/index.tsx"
-  },
   "DXJ8ys": {
     "defaultMessage": "Read counts indicates how many registered users read.",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
@@ -402,10 +398,6 @@
   "JIjMWL": {
     "defaultMessage": "Your article has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
-  },
-  "JXdbo8": {
-    "defaultMessage": "Done",
-    "description": ""
   },
   "Jc+W6M": {
     "defaultMessage": "resigned as tag maintainer. Would you like to be the new tag maintainer?",
@@ -838,10 +830,6 @@
   "fG41Ux": {
     "defaultMessage": "Logged out successfully",
     "description": ""
-  },
-  "fOgusL": {
-    "defaultMessage": "Choose a method to enter",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "fWDtpq": {
     "defaultMessage": "Pending",

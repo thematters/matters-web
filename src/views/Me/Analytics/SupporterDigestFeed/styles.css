@@ -1,10 +1,10 @@
 .container {
   display: flex;
-  padding: var(--spacing-base);
+  padding: var(--spacing-base) 0;
 }
 
 .supporter {
-  @mixin flex-start-space-between;
+  @mixin flex-center-space-between;
 
   width: 100%;
 }

@@ -35,6 +35,8 @@
   }
 
   @media (--sm-up) {
+    padding: var(--spacing-base) 0;
+
     & .comment-bar {
       display: block;
       flex-grow: 1;

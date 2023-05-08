@@ -21,10 +21,7 @@ const Guide = () => {
 
   return (
     <Layout.Main>
-      <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="guide" />}
-      />
+      <Layout.Header left={<Layout.Header.Title id="guide" />} />
 
       <Head title={{ id: 'guide' }} />
 

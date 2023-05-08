@@ -1,5 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
+import { EXTERNAL_LINKS } from '~/common/enums'
 import { Form } from '~/components'
 
 const Enhance = () => {
@@ -15,12 +16,12 @@ const Enhance = () => {
       <Form.List.Item
         role="link"
         title={<FormattedMessage defaultMessage="Open Source" description="" />}
-        href="https://github.com/thematters/developer-resource"
+        href={EXTERNAL_LINKS.DEVELOPER_RESOURCE}
       />
       <Form.List.Item
         role="link"
         title={<FormattedMessage defaultMessage="Bug Bounty" description="" />}
-        href="https://github.com/thematters/developer-resource/blob/master/SECURITY.md"
+        href={EXTERNAL_LINKS.SECURITY_LINK}
       />
     </Form.List>
   )

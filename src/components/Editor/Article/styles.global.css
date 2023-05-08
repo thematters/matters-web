@@ -1,58 +1,56 @@
 /* @styled-jsx=global */
+:root {
+  --eidtor-bottom-bar-height: var(--global-nav-height);
+}
 
-.articleEditor .ProseMirror {
-  height: calc(
-    100vh - var(--global-header-height-mobile) -
-      var(--editor-content-spacing-mobile)
-  );
-  height: calc(
-    var(--vh) * 100 - var(--global-header-height-mobile) -
-      var(--editor-content-spacing-mobile)
-  );
+.articleEditor {
+  position: relative;
 
-  @media (--lg-up) {
-    height: calc(
-      100vh - var(--global-header-height) - var(--editor-content-spacing)
-    );
-  }
+  & .ProseMirror {
+    margin-bottom: var(--eidtor-bottom-bar-height);
 
-  /* placeholder */
-  & p.is-editor-empty:first-child::before {
-    float: left;
-    height: 0;
-    color: var(--color-grey);
-    pointer-events: none;
-    content: attr(data-placeholder);
-  }
+    @media (--sm-up) {
+      margin-bottom: 0;
+    }
 
-  & figcaption:has(.ProseMirror-trailingBreak) {
-    position: relative;
-  }
-
-  & figcaption:has(.ProseMirror-trailingBreak)::before {
-    position: absolute;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    color: var(--color-grey);
-    content: '添加說明文字…';
-  }
-
-  /* disable interactive */
-  & a {
-    pointer-events: none;
-  }
-
-  & .figure-embed-link-input {
-    & input {
-      display: block;
-      height: 1.875rem;
-      line-height: var(--line-height-article-base);
+    /* placeholder */
+    & p.is-editor-empty:first-child::before {
+      float: left;
+      height: 0;
       color: var(--color-grey);
+      pointer-events: none;
+      content: attr(data-placeholder);
+    }
 
-      &::placeholder {
+    & figcaption:has(.ProseMirror-trailingBreak) {
+      position: relative;
+    }
+
+    & figcaption:has(.ProseMirror-trailingBreak)::before {
+      position: absolute;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      color: var(--color-grey);
+      content: '添加說明文字…';
+    }
+
+    /* disable interactive */
+    & a {
+      pointer-events: none;
+    }
+
+    & .figure-embed-link-input {
+      & input {
+        display: block;
+        height: 1.875rem;
+        line-height: var(--line-height-article-base);
         color: var(--color-grey);
-        opacity: 1; /* Firefox */
+
+        &::placeholder {
+          color: var(--color-grey);
+          opacity: 1; /* Firefox */
+        }
       }
     }
   }
