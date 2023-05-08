@@ -1,0 +1,5 @@
+/* @styled-jsx=global */
+
+.tippy-box[data-theme='floating-menu'] .tippy-arrow {
+  display: none;
+}

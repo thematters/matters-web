@@ -4,17 +4,7 @@ import React, { useContext } from 'react'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
-/**
- * This is an optional component belonged to the edoitor.
- *
- * Usage:
- *   <MattersEditorTitle
- *     devaultValue="Default title"
- *     readOnly={false}
- *     texts={{}}
- *     update={() => func({ title: '' })}
- *   />
- */
+import styles from './styles.css'
 
 interface Props {
   defaultValue?: string
@@ -72,6 +62,8 @@ const EditorTitle: React.FC<Props> = ({
           })
         )}
       />
+
+      <style jsx>{styles}</style>
     </header>
   )
 }

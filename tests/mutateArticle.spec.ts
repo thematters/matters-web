@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import _random from 'lodash/random'
 
-import { sleep } from '@/src/common/utils/time'
+import { sleep } from '~/common/utils/time'
 import { TEST_ID } from '~/common/enums'
 import { stripSpaces } from '~/common/utils/text'
 

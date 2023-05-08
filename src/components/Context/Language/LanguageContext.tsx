@@ -1,12 +1,13 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 import { ADD_TOAST, COOKIE_LANGUAGE, DEFAULT_LOCALE } from '~/common/enums'
 import {
   getCookie,
   getIsomorphicCookie,
   setCookies,
+  toLocale,
   toUserLanguage,
 } from '~/common/utils'
 import { Translate, useMutation, ViewerContext } from '~/components'
@@ -118,6 +119,12 @@ export const LanguageProvider = ({
       )
     }
   }
+
+  // FIXME: set <html data-lang> attribute
+  // since we use `__defaultLocale` as the default locale to <html lang>
+  useEffect(() => {
+    document.documentElement.setAttribute('data-lang', toLocale(localLang))
+  }, [localLang])
 
   return (
     <LanguageContext.Provider

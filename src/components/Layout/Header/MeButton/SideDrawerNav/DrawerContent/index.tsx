@@ -1,7 +1,7 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import { useContext, useRef } from 'react'
 
-import { KEYCODES } from '~/common/enums'
+import { KEYVALUE } from '~/common/enums'
 import { translate } from '~/common/utils'
 import { Button, LanguageContext, Menu, useOutsideClick } from '~/components'
 
@@ -36,7 +36,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
       ref={node}
       {...props}
       onKeyDown={(event) => {
-        if (event.keyCode !== KEYCODES.enter) {
+        if (event.key !== KEYVALUE.enter) {
           return
         }
         closeOnClick(event)
