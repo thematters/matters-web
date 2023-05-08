@@ -7,10 +7,16 @@
   position: relative;
 
   & .ProseMirror {
+    min-height: 50vh;
     margin-bottom: var(--eidtor-bottom-bar-height);
 
     @media (--sm-up) {
       margin-bottom: 0;
+    }
+
+    /* outline */
+    &:focus {
+      outline: none;
     }
 
     /* placeholder */

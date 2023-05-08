@@ -1,6 +1,13 @@
 /* @styled-jsx=global */
 
 .commentEditor .ProseMirror {
+  min-height: 7rem;
+
+  /* outline */
+  &:focus {
+    outline: none;
+  }
+
   /* placeholder */
   & p.is-editor-empty:first-child::before {
     float: left;
