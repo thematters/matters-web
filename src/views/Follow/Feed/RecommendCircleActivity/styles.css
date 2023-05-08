@@ -1,6 +1,4 @@
 .container {
-  @mixin slides-container-sm-down;
-
   padding-bottom: var(--spacing-x-tight);
 }
 

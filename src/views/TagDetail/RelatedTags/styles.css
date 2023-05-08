@@ -1,6 +1,4 @@
 .relatedTags {
-  @mixin slides-container-sm-down;
-
   border-top: 1px dashed var(--color-grey-lighter);
   border-bottom: 1px dashed var(--color-grey-lighter);
 

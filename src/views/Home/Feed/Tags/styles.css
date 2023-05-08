@@ -1,6 +1,5 @@
 .tags {
   @mixin border-bottom-grey;
-  @mixin slides-container-sm-down;
 
   padding-bottom: var(--spacing-x-loose);
   border-bottom-style: dashed;
