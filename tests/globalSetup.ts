@@ -29,7 +29,7 @@ const setupEnglish = async (baseURL: string, user: User) => {
     storageState: `test-results/storageState-${user.email}.json`,
   })
   const request = context.request
-  await request.post(process.env.NEXT_PUBLIC_API_URL as string, {
+  await request.post('https://server-develop.matters.town/graphql', {
     data: {
       variables: { input: { language: 'en' } },
       query: `mutation UpdateLanguage($input: UpdateUserInfoInput!) {
