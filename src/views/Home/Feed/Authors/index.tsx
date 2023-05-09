@@ -82,6 +82,13 @@ const Authors = () => {
 
   const SlidesHeader = (
     <>
+      <Media lessThan="md">
+        <SectionHeader
+          type="authors"
+          rightButton={<ShuffleButton onClick={shuffle} />}
+          viewAll={false}
+        />
+      </Media>
       <Media between={['md', 'xl']}>
         <SectionHeader
           type="authors"
@@ -140,8 +147,11 @@ const Authors = () => {
           <ViewMoreCard
             spacing={['tight', 'tight']}
             href={PATHS.AUTHORS}
-            iconProps={{ size: 'sm' }}
-            textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
+            textIconProps={{
+              size: 'md',
+              weight: 'semibold',
+              spacing: 'xxtight',
+            }}
             textAlign="center"
           >
             <FormattedMessage defaultMessage="View All" description="" />

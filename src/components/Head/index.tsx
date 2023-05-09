@@ -10,13 +10,15 @@ import { toLocale, translate, TranslateArgs } from '~/common/utils'
 import { LanguageContext, useRoute } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
 
+const siteDomainCanonical =
+  process.env.NEXT_PUBLIC_SITE_DOMAIN_CANONICAL || 'matters.town'
 const siteDomain =
-  process.env.NEXT_PUBLIC_SITE_DOMAIN_CANONICAL || // for web-next, set this different as serving domain; suggested canonical domain ('matters.news') to robots
+  siteDomainCanonical || // for web-next, set this different as serving domain; suggested canonical domain ('matters.') to robots
   process.env.NEXT_PUBLIC_SITE_DOMAIN ||
-  'matters.news'
+  'matters.town'
 const isProdServingCanonical =
   process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production' &&
-  process.env.NEXT_PUBLIC_SITE_DOMAIN === 'matters.news' // is serving domain same as canonical domain?
+  process.env.NEXT_PUBLIC_SITE_DOMAIN === siteDomainCanonical // is serving domain same as canonical domain?
 
 interface HeadProps {
   title?: string | TranslateArgs
@@ -44,8 +46,10 @@ export const Head: React.FC<HeadProps> = (props) => {
       props.description ||
       'Matters 致力搭建去中心化的寫作社群與內容生態。基於 IPFS 技術，令創作不受制於任何平台，獨立性得到保障；引入加密貨幣，以收入的形式回饋給作者；代碼開源，建立創作者自治社區。',
     keywords: props.keywords
-      ? `${props.keywords.join(',')},matters,matters.news,創作有價`
-      : 'matters,matters.news,創作有價',
+      ? `${props.keywords.join(',')},matters,${
+          process.env.NEXT_PUBLIC_SITE_DOMAIN
+        },創作有價`
+      : 'matters,${process.env.NEXT_PUBLIC_SITE_DOMAIN},創作有價',
     url: props.path
       ? `https://${siteDomain}${props.path}`
       : `https://${siteDomain}${router.asPath || '/'}`,

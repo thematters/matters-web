@@ -7,7 +7,6 @@
     left: var(--spacing-base);
     line-height: var(--input-height);
     color: var(--color-black);
-    content: 'matters.news/~';
   }
 
   & :global(input) {
