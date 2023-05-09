@@ -20,7 +20,6 @@ import { translate } from '~/common/utils'
 import { LanguageContext, withIcon } from '~/components'
 
 import styles from './styles.css'
-import globalStyles from './styles.global.css'
 
 export type BubbleMenuProps = {
   editor: Editor
@@ -57,6 +56,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         theme: 'bubble-menu',
         duration: 200,
         placement: 'top',
+        arrow: false,
         // appendTo: () => document.body,
         onHidden: () => setShowLinkInput(false),
       }}
@@ -294,9 +294,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         )}
 
         <style jsx>{styles}</style>
-        <style jsx global>
-          {globalStyles}
-        </style>
       </section>
     </TipTapBubbleMenu>
   )

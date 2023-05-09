@@ -13,7 +13,6 @@ import { translate } from '~/common/utils'
 import { LanguageContext, withIcon } from '~/components'
 
 import styles from './styles.css'
-import globalStyles from './styles.global.css'
 import UploadAudioButton from './UploadAudioButton'
 import UploadImageButton, { UploadImageButtonProps } from './UploadImageButton'
 
@@ -40,6 +39,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
         theme: 'floating-menu',
         duration: 200,
         offset: [0, 0],
+        arrow: false,
         // appendTo: () => document.body,
         onHidden: () => setExpand(false),
       }}
@@ -181,9 +181,6 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
         )}
 
         <style jsx>{styles}</style>
-        <style jsx global>
-          {globalStyles}
-        </style>
       </section>
     </TipTapFloatingMenu>
   )
