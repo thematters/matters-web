@@ -214,7 +214,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         ref={cardRef}
         data-clickable
         onKeyDown={(event) => {
-          if (event.key !== KEYVALUE.enter) {
+          if (event.key.toLowerCase() !== KEYVALUE.enter) {
             return
           }
           openLink({

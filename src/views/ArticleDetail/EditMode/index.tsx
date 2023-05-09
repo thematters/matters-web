@@ -79,7 +79,7 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
 })
 
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
-  const [editData, setEditData] = useState<Record<string, any>>({})
+  const [editContent, setEditContent] = useState('')
   const [showPublishState, setShowPublishState] = useState(false)
   const { data, loading, error } = useQuery<EditModeArticleQuery>(
     EDIT_MODE_ARTICLE,
@@ -290,7 +290,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                   {...accessProps}
                   {...setCommentProps}
                   article={article}
-                  editData={editData}
+                  draft={draft as any}
+                  editContent={editContent}
                   coverId={cover?.id}
                   revisionCountLeft={revisionCountLeft}
                   isOverRevisionLimit={isOverRevisionLimit}
@@ -316,7 +317,9 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                 isReviseMode={!isReviseDisabled}
                 isSummaryReadOnly
                 isTitleReadOnly
-                update={async (update) => setEditData(update)}
+                update={async (update) => {
+                  setEditContent(update.content || '')
+                }}
                 upload={async () => ({ id: '', path: '' })}
               />
             </Layout.Spacing>

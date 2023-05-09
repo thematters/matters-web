@@ -99,7 +99,7 @@ const BaseDropdownDialog = ({
     return (
       <section
         onKeyDown={(event) => {
-          if (event.key !== KEYVALUE.enter) {
+          if (event.key.toLowerCase() !== KEYVALUE.enter) {
             return
           }
           closeOnClick(event)

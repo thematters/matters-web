@@ -1,5 +1,6 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
+import classNames from 'classnames'
 import { useContext } from 'react'
 
 import editorStyles from '~/common/styles/utils/content.article.css'
@@ -52,7 +53,7 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
     placeholder: translate({
       zh_hant: '請輸入正文…',
       zh_hans: '请输入正文…',
-      en: 'Enter content ...',
+      en: 'Enter content…',
       lang,
     }),
     content: content || '',
@@ -65,7 +66,12 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
   })
 
   return (
-    <div className="articleEditor">
+    <div
+      className={classNames({
+        articleEditor: true,
+        revisedMode: isReviseMode,
+      })}
+    >
       <EditorTitle
         defaultValue={title || ''}
         readOnly={isTitleReadOnly}

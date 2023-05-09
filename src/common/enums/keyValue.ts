@@ -1,6 +1,6 @@
 export const KEYVALUE = {
-  enter: 'Enter',
-  escape: 'Escape',
-  tab: 'Tab',
-  backSpace: 'Backspace',
+  enter: 'enter',
+  escape: 'escape',
+  tab: 'tab',
+  backSpace: 'backspace',
 }

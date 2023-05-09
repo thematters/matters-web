@@ -29,7 +29,7 @@ const Item = forwardRef(
     }
 
     const handleKeydown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (event.key !== KEYVALUE.backSpace) {
+      if (event.key.toLowerCase() !== KEYVALUE.backSpace) {
         return
       }
 

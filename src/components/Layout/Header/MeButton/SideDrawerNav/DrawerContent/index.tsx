@@ -36,7 +36,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
       ref={node}
       {...props}
       onKeyDown={(event) => {
-        if (event.key !== KEYVALUE.enter) {
+        if (event.key.toLowerCase() !== KEYVALUE.enter) {
           return
         }
         closeOnClick(event)

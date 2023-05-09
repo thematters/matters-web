@@ -94,7 +94,7 @@ const Container: React.FC<
         className={containerClasses}
         style={style}
         onKeyDown={(event) => {
-          if (event.key === KEYVALUE.escape) {
+          if (event.key.toLowerCase() === KEYVALUE.escape) {
             closeTopDialog()
           }
         }}

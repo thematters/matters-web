@@ -48,7 +48,7 @@ const EditorSummary: React.FC<Props> = ({
     update({ summary: value })
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === KEYVALUE.enter || event.key === 'Enter') {
+    if (event.key.toLowerCase() === KEYVALUE.enter) {
       event.preventDefault()
     }
   }

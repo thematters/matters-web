@@ -36,7 +36,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   const [showLinkInput, setShowLinkInput] = useState(false)
 
   const onLinkInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key !== KEYVALUE.enter) {
+    if (event.key.toLowerCase() !== KEYVALUE.enter) {
       return
     }
 

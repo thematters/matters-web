@@ -2,6 +2,7 @@ import { ReactRenderer } from '@tiptap/react'
 import ApolloClient from 'apollo-client'
 import tippy from 'tippy.js'
 
+import { KEYVALUE } from '@/src/common/enums'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { SearchUsersQuery, UserDigestMiniUserFragment } from '~/gql/graphql'
 
@@ -36,6 +37,16 @@ export const makeMentionSuggestion = ({
     let component: ReactRenderer
     let popup: any
 
+    const destroy = () => {
+      if (popup) {
+        popup[0].destroy()
+      }
+
+      if (component) {
+        component.destroy()
+      }
+    }
+
     return {
       onStart: (props: any) => {
         component = new ReactRenderer(MentionList, {
@@ -64,6 +75,9 @@ export const makeMentionSuggestion = ({
           trigger: 'manual',
           placement: 'bottom-start',
           arrow: false,
+          onHidden: () => {
+            destroy()
+          },
         })
       },
 
@@ -80,7 +94,7 @@ export const makeMentionSuggestion = ({
       },
 
       onKeyDown(props: any) {
-        if (props.event.key === 'Escape' && popup) {
+        if (props.event.key.toLowerCase() === KEYVALUE.escape && popup) {
           popup[0].hide()
           return true
         }
@@ -90,13 +104,7 @@ export const makeMentionSuggestion = ({
       },
 
       onExit() {
-        if (popup) {
-          popup[0].destroy()
-        }
-
-        if (component) {
-          component.destroy()
-        }
+        destroy()
       },
     }
   },

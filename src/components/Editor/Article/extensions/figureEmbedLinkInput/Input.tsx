@@ -38,19 +38,19 @@ const Input: React.FC<NodeViewProps> = (props) => {
           const url = (event.target as HTMLInputElement).value
 
           // presss escape to delete input node
-          if (event.key === KEYVALUE.escape) {
+          if (event.key.toLowerCase() === KEYVALUE.escape) {
             deleteInput()
             return
           }
 
           // press backSpace to delete input node if it is empty
-          if (event.key === KEYVALUE.backSpace && !url) {
+          if (event.key.toLowerCase() === KEYVALUE.backSpace && !url) {
             deleteInput()
             return
           }
 
           // press enter to insert figureEmbed
-          if (event.key === KEYVALUE.enter) {
+          if (event.key.toLowerCase() === KEYVALUE.enter) {
             // delete input node
             deleteInput()
 
