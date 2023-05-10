@@ -52,7 +52,3 @@
     color: var(--color-grey-darker);
   }
 }
-
-.dialog-hint {
-  padding: 0 var(--spacing-base);
-}
