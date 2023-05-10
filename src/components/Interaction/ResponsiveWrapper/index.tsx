@@ -1,17 +1,12 @@
-import classNames from 'classnames'
 import React from 'react'
 
 import styles from './styles.css'
 
-export const ResponsiveWrapper: React.FC<
-  React.PropsWithChildren<{ isInDialog?: boolean }>
-> = ({ isInDialog, children }) => {
-  const containerClasses = classNames({
-    container: true,
-    isInDialog: !!isInDialog,
-  })
+export const ResponsiveWrapper: React.FC<React.PropsWithChildren<{}>> = ({
+  children,
+}) => {
   return (
-    <section className={containerClasses}>
+    <section className="container">
       {children}
       <style jsx>{styles}</style>
     </section>
