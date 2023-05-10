@@ -108,8 +108,8 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   // define permission
   const isOwner = tag?.owner?.id === viewer.id
   const isEditor = (tag?.editors || []).some((t) => t.id === viewer.id)
-  const isMatty = viewer.info.email === 'hi@matters.news'
-  const isMaintainer = isOwner || isEditor || isMatty
+  const isAdmin = viewer.status?.role === 'admin' // viewer.info.email === 'hi@matters.town'
+  const isMaintainer = isOwner || isEditor || isAdmin // Matty
 
   const title = '#' + normalizeTag(tag.content)
   const keywords = tag.content.split(/\s+/).filter(Boolean).map(normalizeTag)

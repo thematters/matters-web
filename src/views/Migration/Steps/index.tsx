@@ -183,7 +183,7 @@ const Steps = () => {
             <Button
               aria-haspopup="false"
               borderColor="green"
-              htmlHref="https://medium.com/me/export"
+              htmlHref="https://medium.com/me/settings/security"
               htmlTarget="_blank"
               rel="noopener"
               {...buttonProps}

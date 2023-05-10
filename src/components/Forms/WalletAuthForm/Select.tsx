@@ -81,6 +81,7 @@ const Select: React.FC<FormProps> = ({
   const formId = 'wallet-auth-select-form'
   const fieldMsgId = 'wall-auth-select-msg'
   const isInPage = purpose === 'page'
+  const isInDialog = purpose === 'dialog'
   const isConnect = type === 'connect'
 
   const { disconnect } = useDisconnect()
@@ -159,6 +160,11 @@ const Select: React.FC<FormProps> = ({
 
   const containerClasses = classNames({
     container: !!isInPage,
+  })
+
+  const msgClasses = classNames({
+    msg: true,
+    isInDialog,
   })
 
   const InnerForm = (
@@ -255,7 +261,7 @@ const Select: React.FC<FormProps> = ({
         <style jsx>{styles}</style>
       </section>
 
-      <section className="msg">
+      <section className={msgClasses}>
         <Form.Field.Footer
           fieldMsgId={fieldMsgId}
           hint={errorMessage ? undefined : <Hint />}

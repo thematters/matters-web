@@ -97,6 +97,7 @@ const Rich = ({
 
           <section className="extra-button">
             {hasUnblock && <UnblockUserButton user={user} />}
+            {hasFollow && <FollowUserButton user={user} />}
           </section>
 
           <style jsx>{styles}</style>
