@@ -1,6 +1,7 @@
 // global-setup.ts
 import { chromium, FullConfig } from '@playwright/test'
 
+import { PLAYWRIGHT_TEST_API_URL } from './common'
 import { login, User, users } from './helpers'
 
 const prepareUserStorageState = async (baseURL: string, user: User) => {
@@ -29,7 +30,7 @@ const setupEnglish = async (baseURL: string, user: User) => {
     storageState: `test-results/storageState-${user.email}.json`,
   })
   const request = context.request
-  await request.post('https://server-develop.matters.town/graphql', {
+  await request.post(PLAYWRIGHT_TEST_API_URL, {
     data: {
       variables: { input: { language: 'en' } },
       query: `mutation UpdateLanguage($input: UpdateUserInfoInput!) {
