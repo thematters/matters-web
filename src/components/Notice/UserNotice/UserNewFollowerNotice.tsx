@@ -6,9 +6,9 @@ import { UserNewFollowerNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
+import NoticeFooterActors from '../NoticeFooterActors'
 import NoticeHeadActors from '../NoticeHeadActors'
-import NoticeTypeIcon from '../NoticeTypeIcon'
+import NoticeMultiActors from '../NoticeMultiActors'
 import NoticeUserCard from '../NoticeUserCard'
 import styles from '../styles.css'
 
@@ -21,37 +21,34 @@ const UserNewFollowerNotice = ({
     return null
   }
 
-  const actorsCount = notice.actors.length
-  const isMultiActors = actorsCount > 1
+  // FIXME: Just for Dev
+  let actors = notice.actors
+  // actors = [...actors, ...actors, ...actors, ...actors]
+  // actors = [...actors, ...actors, ...actors, ...actors, ...actors]
 
   return (
     <section
       className="container"
       data-test-id={TEST_ID.NOTICE_USER_NEW_FOLLOWER}
     >
-      <section className="avatar-wrap">
-        <NoticeTypeIcon type="user" />
+      <section className="multi-actor-avatars">
+        {/* FIXME: Use actors, Just for Dev */}
+        <NoticeMultiActors actors={actors} size="lg" />
       </section>
 
-      <section className="content-wrap">
-        <NoticeHead>
-          <NoticeHeadActors actors={notice.actors} />
-          <FormattedMessage
-            defaultMessage="followed you"
-            description="src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
-          />
-        </NoticeHead>
+      <section>
+        <NoticeFooterActors
+          actors={actors}
+          action={
+            <FormattedMessage
+              defaultMessage="followed you"
+              description="src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
+            />
+          }
+        />
+      </section>
 
-        {isMultiActors ? (
-          <section className="multi-actor-avatars">
-            {notice.actors.map((actor, index) => (
-              <NoticeActorAvatar key={index} user={actor} size="md" />
-            ))}
-          </section>
-        ) : (
-          <NoticeUserCard user={notice.actors[0]} />
-        )}
-
+      <section className="footer">
         <NoticeDate notice={notice} />
       </section>
 

@@ -1,8 +1,12 @@
 .container {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-normal);
+
+  & .footer {
+    @mixin flex-center-end;
+  }
 }
 
 .avatar-wrap {
@@ -67,9 +71,8 @@
 }
 
 .multi-actor-avatars {
-  display: flex;
-  flex-flow: row wrap;
-  margin-top: var(--spacing-tight);
+  height: 2rem;
+  margin-bottom: var(--spacing-tight);
 
   & :global(a) {
     margin-right: var(--spacing-x-tight);
@@ -80,10 +83,25 @@
   margin-top: var(--spacing-tight);
 }
 
-.date {
-  margin-top: var(--spacing-xx-tight);
-}
-
 .highlight {
   color: var(--color-matters-green);
+}
+
+/* NoticeMultiActors */
+.more-actors {
+  & :global(button) {
+    cursor: auto;
+  }
+}
+
+/* NoticeFooterActors */
+.footer-actors-info {
+  font-size: var(--font-size-base);
+  color: var(--color-grey);
+}
+
+/* NoticeActorName */
+.display-name {
+  font-size: var(--font-size-base);
+  color: var(--color-black);
 }
