@@ -4,7 +4,6 @@
 }
 
 form {
-  @mixin border-top-grey;
   @mixin border-bottom-grey;
 
   position: relative;
