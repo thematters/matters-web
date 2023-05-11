@@ -24,7 +24,7 @@ type ArticleDigestTitleProps = {
 
   textSize?: ArticleDigestTitleTextSize
   textWeight?: ArticleDigestTitleTextWeight
-  lineClamp?: boolean
+  lineClamp?: boolean | 1 | 2 | 3
   is?: ArticleDigestTitleIs
 
   disabled?: boolean
@@ -77,7 +77,8 @@ export const ArticleDigestTitle = ({
     title: true,
     [`text-size-${textSize}`]: !!textSize,
     [`text-weight-${textWeight}`]: !!textWeight,
-    'line-clamp': lineClamp,
+    'line-clamp': !!lineClamp,
+    [`line-clamp-line-${lineClamp}`]: lineClamp === 1 || lineClamp === 3,
   })
   const isClickable = !disabled && !isBanned
 
