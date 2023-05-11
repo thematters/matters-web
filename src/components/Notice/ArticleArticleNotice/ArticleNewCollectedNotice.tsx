@@ -8,9 +8,11 @@ import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeArticleTitle from '../NoticeArticleTitle'
+import NoticeContentActors from '../NoticeContentActors'
 import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
-import styles from '../styles.css'
+import NoticeMultiActors from '../NoticeMultiActors'
+import noticeStyles from '../styles.css'
+import styles from './styles.css'
 
 const ArticleNewCollectedNotice = ({
   notice,
@@ -21,33 +23,37 @@ const ArticleNewCollectedNotice = ({
     return null
   }
 
-  const actor = notice.actors[0]
+  const actors = notice.actors
 
   return (
     <section
       className="container"
       data-test-id={TEST_ID.NOTICE_ARTICLE_NEW_COLLECTED}
     >
-      <section className="avatar-wrap">
-        <NoticeActorAvatar user={actor} />
+      <section className="header">
+        <NoticeMultiActors actors={actors} size="lg" />
+        <section className="single-actor-info">
+          <NoticeContentActors
+            actors={actors}
+            action={
+              <FormattedMessage
+                defaultMessage="connected"
+                description="src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
+              />
+            }
+            content={<NoticeArticleTitle article={notice.article} />}
+          />
+        </section>
       </section>
 
-      <section className="content-wrap">
-        <NoticeHead>
-          <NoticeActorName user={actor} />
-          <FormattedMessage
-            defaultMessage=" replied to "
-            description="src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
-          />
-
-          <NoticeArticleTitle article={notice.article} />
-        </NoticeHead>
-
+      <section className="content">
         <NoticeArticleCard article={notice.collection} />
-
+      </section>
+      <section className="footer">
         <NoticeDate notice={notice} />
       </section>
 
+      <style jsx>{noticeStyles}</style>
       <style jsx>{styles}</style>
     </section>
   )
