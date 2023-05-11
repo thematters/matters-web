@@ -242,4 +242,71 @@ test.describe('Mutate article', () => {
     const articleContent = await aliceArticleDetail.content.innerText()
     expect(stripSpaces(articleContent)).toBe(stripSpaces(newContent))
   })
+
+  authedTest(
+    'Disable response and allow response article',
+    async ({ alicePage, bobPage, isMobile, request }) => {
+      // [Alice] create and publish new article with disable response
+      const article = await publishDraft({
+        page: alicePage,
+        isMobile,
+        allowResponse: false,
+      })
+
+      // [Alice] Get new article link
+      const aliceArticleLink = alicePage.url()
+
+      // [Bob] Go to Alice's article page
+      await pageGoto(bobPage, aliceArticleLink)
+
+      const bobArticleDetail = new ArticleDetailPage(bobPage, isMobile)
+
+      // Confirm that the comment area is not clickable
+      await expect(bobArticleDetail.toolbarCommentButton).toBeDisabled()
+
+      // [Alice] Allow respsonses on just published articles
+      await pageGoto(alicePage, aliceArticleLink)
+      const aliceArticleDetail = new ArticleDetailPage(alicePage, isMobile)
+      // revise article
+      await aliceArticleDetail.editArticle()
+      const draftDetail = new DraftDetailPage(alicePage, isMobile)
+      await draftDetail.dialogEditButton.click()
+      await sleep(3 * 1000)
+      const newContent = 'revise article ' + article.content
+      await draftDetail.contentInput.fill(newContent)
+      await draftDetail.checkResponse({ allow: true })
+      await draftDetail.rePublish()
+
+      // [Alice] Get new article link
+      const allowResponseArticleLink = alicePage.url()
+      // [Bob] Go to Alice's article page
+      await pageGoto(bobPage, allowResponseArticleLink)
+      const allowResponseArticleDetail = new ArticleDetailPage(
+        bobPage,
+        isMobile
+      )
+
+      // [Bob] Send a comment
+      const commentContent = await allowResponseArticleDetail.sendComment()
+
+      // [Bob] Expect article detail shows this comment
+      await expect(bobPage.getByText(commentContent).first()).toBeVisible()
+
+      // [Alice] Confirm that response setting area is unclickable
+      await pageGoto(alicePage, aliceArticleLink)
+      const aliceAlloResponseArticleDetail = new ArticleDetailPage(
+        alicePage,
+        isMobile
+      )
+      await aliceAlloResponseArticleDetail.editArticle()
+      const allowResponseDraftDetail = new DraftDetailPage(alicePage, isMobile)
+      await allowResponseDraftDetail.dialogEditButton.click()
+      await sleep(3 * 1000)
+      if (isMobile) {
+        await allowResponseDraftDetail.bottombarManage.click()
+      }
+      await expect(allowResponseDraftDetail.barResponsesAllow).toBeDisabled()
+      await expect(allowResponseDraftDetail.barResponsesDisallow).toBeDisabled()
+    }
+  )
 })
