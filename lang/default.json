@@ -431,10 +431,6 @@
     "defaultMessage": "Maintain Tag",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "KZlRde": {
-    "defaultMessage": "replied to",
-    "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
-  },
   "KyWDUu": {
     "defaultMessage": "invites you to join Circle for",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
@@ -518,10 +514,6 @@
   "OKhRC6": {
     "defaultMessage": "Share",
     "description": ""
-  },
-  "PjT72J": {
-    "defaultMessage": "liked your article",
-    "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
   "Po+kJe": {
     "defaultMessage": "Last {month} month",
@@ -694,6 +686,10 @@
   "YjNkcK": {
     "defaultMessage": "To change, switch it directly on your wallet",
     "description": ""
+  },
+  "YlPCRU": {
+    "defaultMessage": "connected",
+    "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
   "YlxpJl": {
     "defaultMessage": "Broadcast and mentioned you in comment",
@@ -1010,6 +1006,10 @@
   "ohgTH4": {
     "defaultMessage": "Following",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "p5qZnJ": {
+    "defaultMessage": "liked",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
   "pRV+UD": {
     "defaultMessage": "Collapse",

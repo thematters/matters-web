@@ -431,8 +431,8 @@
     "defaultMessage": "認領",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "KZlRde": {
-    "defaultMessage": " 關聯了你的作品 ",
+  "YlPCRU": {
+    "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
   "KyWDUu": {
@@ -519,8 +519,8 @@
     "defaultMessage": "分享",
     "description": ""
   },
-  "PjT72J": {
-    "defaultMessage": "喜歡並讚賞了你的作品",
+  "p5qZnJ": {
+    "defaultMessage": "讚賞了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
   "Po+kJe": {
