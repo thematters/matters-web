@@ -4,7 +4,7 @@
     "description": "src/views/Help/index.tsx"
   },
   "k5NnNF": {
-    "defaultMessage": " followed you",
+    "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
   "/ns2st": {
@@ -255,8 +255,8 @@
     "defaultMessage": "Next",
     "description": ""
   },
-  "KZlRde": {
-    "defaultMessage": " replied to ",
+  "YlPCRU": {
+    "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
   "/nu5ho": {
@@ -440,7 +440,7 @@
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
   "PjT72J": {
-    "defaultMessage": " liked your article",
+    "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
   "4vkwo0": {
