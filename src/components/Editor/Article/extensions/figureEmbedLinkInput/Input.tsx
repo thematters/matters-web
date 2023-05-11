@@ -14,6 +14,13 @@ const Input: React.FC<NodeViewProps> = (props) => {
       props.deleteNode()
     } catch (e) {}
 
+    // restore paragraph node
+    props.editor.commands.insertContentAt(props.editor.state.selection.to, [
+      {
+        type: 'paragraph',
+      },
+    ])
+
     props.editor.commands.focus()
   }
 
