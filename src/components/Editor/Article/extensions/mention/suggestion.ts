@@ -51,6 +51,7 @@ export const makeMentionSuggestion = ({
       onStart: (props: any) => {
         component = new ReactRenderer(MentionList, {
           props: {
+            ...props,
             users: props.items,
             onClick: (user: UserDigestMiniUserFragment) =>
               props.command({
@@ -83,19 +84,21 @@ export const makeMentionSuggestion = ({
       },
 
       onUpdate(props: any) {
-        component.updateProps({ users: props.items })
+        component.updateProps({ ...props, users: props.items })
 
         if (!props.clientRect) {
           return
         }
 
-        popup[0].setProps({
-          getReferenceClientRect: props.clientRect,
-        })
+        if (popup) {
+          popup[0].setProps({
+            getReferenceClientRect: props.clientRect,
+          })
+        }
       },
 
       onKeyDown(props: any) {
-        if (props.event.key.toLowerCase() === KEYVALUE.escape && popup) {
+        if (popup && props.event.key.toLowerCase() === KEYVALUE.escape) {
           popup[0].hide()
           return true
         }
