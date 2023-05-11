@@ -24,12 +24,12 @@ const NoticeArticleTitle = ({
   if (!isBlock) {
     return (
       <Link {...path}>
-        <a>{article.title}</a>
+        <a className="notice-article-title">{article.title}</a>
       </Link>
     )
   }
 
-  return <ArticleDigestTitle article={article} textSize="md-s" />
+  return <ArticleDigestTitle article={article} textSize="md" lineClamp={3} />
 }
 
 NoticeArticleTitle.fragments = {
