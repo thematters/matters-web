@@ -5,8 +5,8 @@ import { TEST_ID } from '~/common/enums'
 import { UserNewFollowerNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeContentActors from '../NoticeContentActors'
 import NoticeDate from '../NoticeDate'
-import NoticeFooterActors from '../NoticeFooterActors'
 import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeMultiActors from '../NoticeMultiActors'
 import NoticeUserCard from '../NoticeUserCard'
@@ -21,6 +21,9 @@ const UserNewFollowerNotice = ({
     return null
   }
 
+  const actorsCount = notice.actors.length
+  const isMultiActors = actorsCount > 1
+
   // FIXME: Just for Dev
   let actors = notice.actors
   // actors = [...actors, ...actors, ...actors, ...actors]
@@ -31,22 +34,36 @@ const UserNewFollowerNotice = ({
       className="container"
       data-test-id={TEST_ID.NOTICE_USER_NEW_FOLLOWER}
     >
-      <section className="multi-actor-avatars">
-        {/* FIXME: Use actors, Just for Dev */}
+      <section className="header">
         <NoticeMultiActors actors={actors} size="lg" />
+        {!isMultiActors && (
+          <section className="single-actor-info">
+            <NoticeContentActors
+              actors={actors}
+              action={
+                <FormattedMessage
+                  defaultMessage="followed you"
+                  description="src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
+                />
+              }
+            />
+          </section>
+        )}
       </section>
 
-      <section>
-        <NoticeFooterActors
-          actors={actors}
-          action={
-            <FormattedMessage
-              defaultMessage="followed you"
-              description="src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
-            />
-          }
-        />
-      </section>
+      {isMultiActors && (
+        <section className="content">
+          <NoticeContentActors
+            actors={actors}
+            action={
+              <FormattedMessage
+                defaultMessage="followed you"
+                description="src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
+              />
+            }
+          />
+        </section>
+      )}
 
       <section className="footer">
         <NoticeDate notice={notice} />
