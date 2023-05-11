@@ -75,6 +75,7 @@ export const makeMentionSuggestion = ({
           trigger: 'manual',
           placement: 'bottom-start',
           arrow: false,
+          hideOnClick: false,
           onHidden: () => {
             destroy()
           },
