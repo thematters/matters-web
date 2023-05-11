@@ -18,6 +18,15 @@ export const FigureEmbedLinkInput = Node.create({
   group: 'block',
   atom: true,
 
+  addStorage() {
+    return {
+      prevSelection: {
+        from: 0,
+        to: 0,
+      },
+    }
+  },
+
   addAttributes() {
     return {
       placeholder: {
@@ -47,7 +56,13 @@ export const FigureEmbedLinkInput = Node.create({
     return {
       addFigureEmbedLinkInput:
         (attrs) =>
-        ({ chain }) => {
+        ({ chain, editor }) => {
+          // store current selection before insert figureEmbedLinkInput
+          editor.storage.figureEmbedLinkInput.prevSelection = {
+            from: editor.state.selection.from,
+            to: editor.state.selection.to,
+          }
+
           return chain()
             .insertContent([
               {
