@@ -5,13 +5,11 @@ import { TEST_ID } from '~/common/enums'
 import { ArticleNewCommentNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
-import NoticeActorsNameAndTitle from '../NoticeActorsNameAndTitle'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
+import NoticeDigest from '../NoticeDigest'
 import NoticeHeadActors from '../NoticeHeadActors'
-import NoticeMultiActors from '../NoticeMultiActors'
-import styles from '../styles.css'
 
 const ArticleNewCommentNotice = ({
   notice,
@@ -22,42 +20,27 @@ const ArticleNewCommentNotice = ({
     return null
   }
 
-  const actors = notice.actors
   const commentArticle =
     notice.comment?.node.__typename === 'Article'
       ? notice.comment.node
       : undefined
-
   return (
-    <section className="container" data-test-id={TEST_ID.ARTICLE_NEW_COMMENT}>
-      <section className="header">
-        <NoticeMultiActors actors={actors} size="lg" />
-        <section className="single-actor-info">
-          <NoticeActorsNameAndTitle
-            actors={actors}
-            action={
-              <FormattedMessage
-                defaultMessage="commented on"
-                description="src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
-              />
-            }
-            title={
-              commentArticle?.__typename === 'Article' ? (
-                <NoticeArticleTitle article={commentArticle} />
-              ) : undefined
-            }
-          />
-        </section>
-      </section>
-      <section className="content">
-        <NoticeComment comment={notice.comment} />
-      </section>
-      <section className="footer">
-        <NoticeDate notice={notice} />
-      </section>
-
-      <style jsx>{styles}</style>
-    </section>
+    <NoticeDigest
+      notice={notice}
+      action={
+        <FormattedMessage
+          defaultMessage="commented on"
+          description="src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
+        />
+      }
+      title={
+        commentArticle?.__typename === 'Article' ? (
+          <NoticeArticleTitle article={commentArticle} />
+        ) : undefined
+      }
+      content={<NoticeComment comment={notice.comment} />}
+      testId={TEST_ID.ARTICLE_NEW_COMMENT}
+    />
   )
 }
 
