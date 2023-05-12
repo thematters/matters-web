@@ -112,10 +112,19 @@
   height: 2rem;
 }
 
+/* NoticeArticleTitle */
+.notice-article-title {
+  color: var(--color-black);
+}
+
 /* NoticeContentActors */
-.content-actors-info {
+.notice-actors-name-and-title-info {
   font-size: var(--font-size-base);
   color: var(--color-grey);
+}
+
+.notice-actors-name-and-title-title {
+  /* @mixin line-clamp-3; */
 }
 
 /* NoticeActorName */

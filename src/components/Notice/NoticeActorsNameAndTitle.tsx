@@ -10,18 +10,21 @@ import styles from './styles.css'
 type NoticeActorsNameAndTitleProps = {
   actors: any[]
   action: string | ReactElement
+  secondAction?: string | ReactElement
   title?: string | ReactElement
 }
 
 const NoticeActorsNameAndTitle = ({
   actors,
   action,
+  secondAction,
   title,
 }: NoticeActorsNameAndTitleProps) => {
   const actorsCount = actors.length
   const isSingleActors = actorsCount === 1
   const isDoubleActors = actorsCount === 2
   const isMoreActors = actorsCount > 3
+  console.log({ secondAction })
 
   return (
     <>
@@ -31,7 +34,7 @@ const NoticeActorsNameAndTitle = ({
           <Fragment key={index}>
             <NoticeActorName user={actor} />
             {index === 0 && (
-              <span className="content-actors-info">
+              <span className="notice-actors-name-and-title-info">
                 &nbsp;
                 <Translate zh_hant="和" zh_hans="和" en="and" />
                 &nbsp;
@@ -40,7 +43,7 @@ const NoticeActorsNameAndTitle = ({
           </Fragment>
         ))}
 
-      <span className="content-actors-info">
+      <span className="notice-actors-name-and-title-info">
         {isMoreActors && (
           <>
             <NoticeActorName user={actors[0]} />
@@ -57,7 +60,16 @@ const NoticeActorsNameAndTitle = ({
         &nbsp;
         {action}
       </span>
-      {!!title && <span>&nbsp;{title}</span>}
+      {!!title && (
+        <span className="notice-actors-name-and-title-title">
+          &nbsp;{title}
+        </span>
+      )}
+      {!!secondAction && (
+        <span className="notice-actors-name-and-title-info">
+          &nbsp;{secondAction}
+        </span>
+      )}
       <style jsx>{styles}</style>
     </>
   )
