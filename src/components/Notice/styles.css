@@ -1,3 +1,10 @@
+@define-mixin line-clamp-3 {
+  @mixin line-clamp;
+
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -11,16 +18,15 @@
     }
 
     & .single-actor-info {
+      @mixin line-clamp-3;
+
       align-self: center;
-
-      @mixin line-clamp;
-
-      text-overflow: ellipsis;
-      -webkit-line-clamp: 3;
     }
   }
 
   & .content {
+    @mixin line-clamp-3;
+
     margin-top: var(--spacing-tight);
   }
 
