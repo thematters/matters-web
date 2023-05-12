@@ -35,8 +35,8 @@
     "defaultMessage": "下载应用",
     "description": ""
   },
-  "/nu5ho": {
-    "defaultMessage": "回复了你在作品 ",
+  "nNB7KU": {
+    "defaultMessage": "在 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "/podGX": {
@@ -624,7 +624,7 @@
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "VO4Elt": {
-    "defaultMessage": " 在作品 {commentArticle} 的评论中提及你",
+    "defaultMessage": "在 {commentArticle} 的评论中提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "VjxGd7": {
@@ -712,7 +712,7 @@
     "description": "src/views/Circle/Settings/index.tsx"
   },
   "ZUPQzl": {
-    "defaultMessage": " 的评论",
+    "defaultMessage": "回复了你",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
@@ -1135,8 +1135,8 @@
     "defaultMessage": "玩转 Matters 实用指南",
     "description": ""
   },
-  "uqmi/b": {
-    "defaultMessage": " 置顶了你在作品 ",
+  "cAP9g5": {
+    "defaultMessage": "将你的评论在 {commentArticle} 中置顶",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
   "uuEGON": {

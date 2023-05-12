@@ -259,8 +259,8 @@
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
-  "/nu5ho": {
-    "defaultMessage": "replied to your comment on ",
+  "nNB7KU": {
+    "defaultMessage": "replied your comment in",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZUPQzl": {
@@ -295,8 +295,8 @@
     "defaultMessage": " broadcast and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
-  "uqmi/b": {
-    "defaultMessage": " pinned your comment on ",
+  "cAP9g5": {
+    "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
   "VjxGd7": {
@@ -380,7 +380,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "VO4Elt": {
-    "defaultMessage": " mentioned you in a comment on  {commentArticle}",
+    "defaultMessage": "mentioned you in a comment on {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "BHFHeY": {
