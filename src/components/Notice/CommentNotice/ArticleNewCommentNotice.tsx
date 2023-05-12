@@ -5,9 +5,9 @@ import { TEST_ID } from '~/common/enums'
 import { ArticleNewCommentNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorsNameAndTitle from '../NoticeActorsNameAndTitle'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeComment from '../NoticeComment'
-import NoticeContentActors from '../NoticeContentActors'
 import NoticeDate from '../NoticeDate'
 import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeMultiActors from '../NoticeMultiActors'
@@ -33,7 +33,7 @@ const ArticleNewCommentNotice = ({
       <section className="header">
         <NoticeMultiActors actors={actors} size="lg" />
         <section className="single-actor-info">
-          <NoticeContentActors
+          <NoticeActorsNameAndTitle
             actors={actors}
             action={
               <FormattedMessage
@@ -41,7 +41,7 @@ const ArticleNewCommentNotice = ({
                 description="src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
               />
             }
-            content={
+            title={
               commentArticle?.__typename === 'Article' ? (
                 <NoticeArticleTitle article={commentArticle} />
               ) : undefined
