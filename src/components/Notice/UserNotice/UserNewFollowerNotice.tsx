@@ -5,7 +5,7 @@ import { TEST_ID } from '~/common/enums'
 import { UserNewFollowerNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
-import NoticeContentActors from '../NoticeContentActors'
+import NoticeActorsNameAndTitle from '../NoticeActorsNameAndTitle'
 import NoticeDate from '../NoticeDate'
 import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeMultiActors from '../NoticeMultiActors'
@@ -38,7 +38,7 @@ const UserNewFollowerNotice = ({
         <NoticeMultiActors actors={actors} size="lg" />
         {!isMultiActors && (
           <section className="single-actor-info">
-            <NoticeContentActors
+            <NoticeActorsNameAndTitle
               actors={actors}
               action={
                 <FormattedMessage
@@ -53,7 +53,7 @@ const UserNewFollowerNotice = ({
 
       {isMultiActors && (
         <section className="content">
-          <NoticeContentActors
+          <NoticeActorsNameAndTitle
             actors={actors}
             action={
               <FormattedMessage

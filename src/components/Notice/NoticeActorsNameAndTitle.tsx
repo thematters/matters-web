@@ -7,17 +7,17 @@ import { Translate } from '~/components'
 import NoticeActorName from './NoticeActorName'
 import styles from './styles.css'
 
-type NoticeContentActorsProps = {
+type NoticeActorsNameAndTitleProps = {
   actors: any[]
   action: string | ReactElement
-  content?: string | ReactElement
+  title?: string | ReactElement
 }
 
-const NoticeContentActors = ({
+const NoticeActorsNameAndTitle = ({
   actors,
   action,
-  content,
-}: NoticeContentActorsProps) => {
+  title,
+}: NoticeActorsNameAndTitleProps) => {
   const actorsCount = actors.length
   const isSingleActors = actorsCount === 1
   const isDoubleActors = actorsCount === 2
@@ -57,13 +57,13 @@ const NoticeContentActors = ({
         &nbsp;
         {action}
       </span>
-      {!!content && <span>&nbsp;{content}</span>}
+      {!!title && <span>&nbsp;{title}</span>}
       <style jsx>{styles}</style>
     </>
   )
 }
 
-NoticeContentActors.fragments = {
+NoticeActorsNameAndTitle.fragments = {
   user: gql`
     fragment NoticeHeadActorsUser on User {
       id
@@ -73,4 +73,4 @@ NoticeContentActors.fragments = {
   `,
 }
 
-export default NoticeContentActors
+export default NoticeActorsNameAndTitle

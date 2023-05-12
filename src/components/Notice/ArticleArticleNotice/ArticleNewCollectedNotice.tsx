@@ -6,9 +6,9 @@ import { ArticleNewCollectedNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
+import NoticeActorsNameAndTitle from '../NoticeActorsNameAndTitle'
 import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeArticleTitle from '../NoticeArticleTitle'
-import NoticeContentActors from '../NoticeContentActors'
 import NoticeDate from '../NoticeDate'
 import NoticeMultiActors from '../NoticeMultiActors'
 import noticeStyles from '../styles.css'
@@ -33,7 +33,7 @@ const ArticleNewCollectedNotice = ({
       <section className="header">
         <NoticeMultiActors actors={actors} size="lg" />
         <section className="single-actor-info">
-          <NoticeContentActors
+          <NoticeActorsNameAndTitle
             actors={actors}
             action={
               <FormattedMessage
@@ -41,7 +41,7 @@ const ArticleNewCollectedNotice = ({
                 description="src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
               />
             }
-            content={<NoticeArticleTitle article={notice.article} />}
+            title={<NoticeArticleTitle article={notice.article} />}
           />
         </section>
       </section>
