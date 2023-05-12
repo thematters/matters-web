@@ -124,6 +124,11 @@
   color: var(--color-black);
 }
 
+/* NoticeArticleCard */
+.notice-article-card {
+  margin-left: var(--spacing-xx-loose);
+}
+
 /* NoticeContentDigest */
 .notice-content-digest {
   @mixin border-left-grey;

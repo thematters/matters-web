@@ -6,13 +6,10 @@ import { ArticleNewCollectedNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeActorsNameAndTitle from '../NoticeActorsNameAndTitle'
 import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
-import NoticeMultiActors from '../NoticeMultiActors'
-import noticeStyles from '../styles.css'
-import styles from './styles.css'
+import NoticeDigest from '../NoticeDigest'
 
 const ArticleNewCollectedNotice = ({
   notice,
@@ -23,39 +20,19 @@ const ArticleNewCollectedNotice = ({
     return null
   }
 
-  const actors = notice.actors
-
   return (
-    <section
-      className="container"
-      data-test-id={TEST_ID.NOTICE_ARTICLE_NEW_COLLECTED}
-    >
-      <section className="header">
-        <NoticeMultiActors actors={actors} size="lg" />
-        <section className="single-actor-info">
-          <NoticeActorsNameAndTitle
-            actors={actors}
-            action={
-              <FormattedMessage
-                defaultMessage="connected"
-                description="src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
-              />
-            }
-            title={<NoticeArticleTitle article={notice.article} />}
-          />
-        </section>
-      </section>
-
-      <section className="content">
-        <NoticeArticleCard article={notice.collection} />
-      </section>
-      <section className="footer">
-        <NoticeDate notice={notice} />
-      </section>
-
-      <style jsx>{noticeStyles}</style>
-      <style jsx>{styles}</style>
-    </section>
+    <NoticeDigest
+      notice={notice}
+      action={
+        <FormattedMessage
+          defaultMessage="connected"
+          description="src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
+        />
+      }
+      title={<NoticeArticleTitle article={notice.article} />}
+      content={<NoticeArticleCard article={notice.collection} />}
+      testId={TEST_ID.NOTICE_ARTICLE_NEW_COLLECTED}
+    />
   )
 }
 
