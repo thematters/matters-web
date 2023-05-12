@@ -117,3 +117,15 @@
   font-size: var(--font-size-base);
   color: var(--color-black);
 }
+
+/* NoticeContentDigest */
+.notice-content-digest {
+  @mixin border-left-grey;
+  @mixin line-clamp;
+
+  padding-left: var(--spacing-tight);
+  margin-left: var(--spacing-xx-loose);
+  text-overflow: ellipsis;
+  border-left-style: dashed;
+  -webkit-line-clamp: 3;
+}
