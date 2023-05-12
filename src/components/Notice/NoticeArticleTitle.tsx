@@ -5,6 +5,8 @@ import { toPath } from '~/common/utils'
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { NoticeArticleTitleFragment } from '~/gql/graphql'
 
+import styles from './styles.css'
+
 const NoticeArticleTitle = ({
   article,
   isBlock = false,
@@ -24,7 +26,10 @@ const NoticeArticleTitle = ({
   if (!isBlock) {
     return (
       <Link {...path}>
-        <a className="notice-article-title">{article.title}</a>
+        <a className="notice-article-title">
+          {article.title}
+          <style jsx>{styles}</style>
+        </a>
       </Link>
     )
   }
