@@ -41,8 +41,6 @@ export const ArticleDigestNotice = ({
   const { summary, content } = article
   const hasSummary = summary !== ''
 
-  console.log({ summary, content })
-
   const containerClasses = classNames({
     container: true,
   })

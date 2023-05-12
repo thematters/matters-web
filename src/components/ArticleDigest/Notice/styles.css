@@ -1,12 +1,18 @@
-.content {
-  @mixin border-left-grey;
+.container {
+  & header {
+    margin-bottom: var(--spacing-x-tight);
+  }
 
-  padding-left: var(--spacing-tight);
-  font-size: var(--font-size-sm);
-  color: var(--color-grey);
+  & .content {
+    @mixin border-left-grey;
 
-  @mixin line-clamp;
+    padding-left: var(--spacing-tight);
+    font-size: var(--font-size-sm);
+    color: var(--color-grey);
 
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 3;
+    @mixin line-clamp;
+
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+  }
 }
