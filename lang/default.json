@@ -35,10 +35,6 @@
     "defaultMessage": "Download App",
     "description": ""
   },
-  "/nu5ho": {
-    "defaultMessage": "replied to your comment on",
-    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  },
   "/podGX": {
     "defaultMessage": "Public",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
@@ -74,10 +70,6 @@
   "2slIPX": {
     "defaultMessage": "Likes",
     "description": ""
-  },
-  "2uRduT": {
-    "defaultMessage": "comment",
-    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
   "2uwwz+": {
     "defaultMessage": "Accumulated read time indicates the total time length that registered users read.",
@@ -751,6 +743,10 @@
     "defaultMessage": "Broadcast",
     "description": ""
   },
+  "cAP9g5": {
+    "defaultMessage": "pinned your comment in {commentArticle}",
+    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
   "cE4Hfw": {
     "defaultMessage": "Discover",
     "description": ""
@@ -979,6 +975,10 @@
     "defaultMessage": "Bookmarks",
     "description": ""
   },
+  "nNB7KU": {
+    "defaultMessage": "replied your comment in",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
   "nYeDrI": {
     "defaultMessage": "Not Registered?",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
@@ -1130,10 +1130,6 @@
   "uVCg1l": {
     "defaultMessage": "Explore Matters",
     "description": ""
-  },
-  "uqmi/b": {
-    "defaultMessage": "pinned your comment on",
-    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
   "uuEGON": {
     "defaultMessage": "posted and replied to topics and mentioned you",

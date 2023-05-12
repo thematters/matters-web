@@ -6,6 +6,8 @@ import {
   ArticleNewCollectedNoticeFragment,
   ArticleNewCommentNoticeFragment,
   ArticleNewSubscriberNoticeFragment,
+  CommentMentionedYouNoticeFragment,
+  CommentNewReplyNoticeFragment,
   UserNewFollowerNoticeFragment,
 } from '@/src/gql/graphql'
 import { TEST_ID } from '~/common/enums'
@@ -23,9 +25,12 @@ type NoticeDigestProps = {
     | ArticleNewSubscriberNoticeFragment
     | ArticleNewAppreciationNoticeFragment
     | ArticleNewCollectedNoticeFragment
-    | UserNewFollowerNoticeFragment
     | ArticleNewCommentNoticeFragment
+    | CommentMentionedYouNoticeFragment
+    | CommentNewReplyNoticeFragment
+    | UserNewFollowerNoticeFragment
   action: string | ReactElement
+  secondAction?: string | ReactElement
   title?: string | ReactElement
   content?: string | ReactElement
   testId?: TEST_ID
@@ -34,6 +39,7 @@ type NoticeDigestProps = {
 const NoticeDigest = ({
   notice,
   action,
+  secondAction,
   title,
   content,
   testId,
@@ -62,6 +68,7 @@ const NoticeDigest = ({
             <NoticeActorsNameAndTitle
               actors={actors}
               action={action}
+              secondAction={secondAction}
               title={title}
             />
           </section>
@@ -73,6 +80,7 @@ const NoticeDigest = ({
           <NoticeActorsNameAndTitle
             actors={actors}
             action={action}
+            secondAction={secondAction}
             title={title}
           />
         </section>
