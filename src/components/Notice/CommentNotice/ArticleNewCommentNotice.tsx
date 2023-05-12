@@ -32,14 +32,6 @@ const ArticleNewCommentNotice = ({
     <section className="container" data-test-id={TEST_ID.ARTICLE_NEW_COMMENT}>
       <section className="header">
         <NoticeMultiActors actors={actors} size="lg" />
-        {/* <NoticeHead>
-          <NoticeHeadActors actors={notice.actors} />
-          <FormattedMessage
-            defaultMessage="commented on"
-            description="src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
-          />
-          {commentArticle && <NoticeArticleTitle article={commentArticle} />}
-        </NoticeHead> */}
         <section className="single-actor-info">
           <NoticeContentActors
             actors={actors}

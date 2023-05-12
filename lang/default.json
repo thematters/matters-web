@@ -71,10 +71,6 @@
     "defaultMessage": "Drafts",
     "description": ""
   },
-  "2eebTb": {
-    "defaultMessage": "bookmarked your article",
-    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
-  },
   "2slIPX": {
     "defaultMessage": "Likes",
     "description": ""
@@ -258,6 +254,10 @@
   "CBDDR5": {
     "defaultMessage": "Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.",
     "description": ""
+  },
+  "CD688y": {
+    "defaultMessage": "bookmarked",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
   "Cdkhl8": {
     "defaultMessage": "Delete {commentType}",
@@ -678,10 +678,6 @@
   "Xz/AHp": {
     "defaultMessage": "broadcast and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-  },
-  "YIes/F": {
-    "defaultMessage": "etc. {actorsCount} users",
-    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
   "YjNkcK": {
     "defaultMessage": "To change, switch it directly on your wallet",
