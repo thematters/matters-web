@@ -22,8 +22,6 @@ const NoticeTag = ({ tag }: { tag: NoticeTagFragment | null }) => {
   return (
     <LinkWrapper {...path}>
       <span className="tag-content">
-        {/* <Tag tag={tag} type="notice" active hasCount={false} hasSpace={false} />
-         */}
         <span>#{tagName}</span>
 
         <style jsx>{styles}</style>

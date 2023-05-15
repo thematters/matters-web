@@ -24,7 +24,6 @@ const NoticeActorsNameAndTitle = ({
   const isSingleActors = actorsCount === 1
   const isDoubleActors = actorsCount === 2
   const isMoreActors = actorsCount > 3
-  console.log({ secondAction })
 
   return (
     <>

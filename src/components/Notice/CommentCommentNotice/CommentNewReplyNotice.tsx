@@ -81,67 +81,6 @@ const CommentNewReplyNotice = ({
       )}
     </>
   )
-
-  // return (
-  //   <section className="container" data-test-id={TEST_ID.COMMENT_NEW_REPLY}>
-  //     <section className="avatar-wrap">
-  //       {isMultiActors ? (
-  //         <NoticeTypeIcon type="comment" />
-  //       ) : (
-  //         <NoticeActorAvatar user={notice.actors[0]} />
-  //       )}
-  //     </section>
-
-  //     <section className="content-wrap">
-  //       <NoticeHead>
-  //         <NoticeHeadActors actors={notice.actors} />
-
-  //         {replyCommentArticle && (
-  //           <>
-  //             <FormattedMessage
-  //               defaultMessage=" replied to your comment on "
-  //               description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  //             />
-  //             <NoticeArticleTitle article={replyCommentArticle} />
-  //             <FormattedMessage
-  //               defaultMessage="comment"
-  //               description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  //             />
-  //           </>
-  //         )}
-  //         {replyCommentCircle && (
-  //           <>
-  //             <FormattedMessage
-  //               defaultMessage=" replied to your discussion on"
-  //               description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  //             />
-  //             <NoticeCircleName circle={replyCommentCircle} />
-  //             <FormattedMessage
-  //               defaultMessage="comment_circle"
-  //               description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  //             />
-  //           </>
-  //         )}
-  //       </NoticeHead>
-
-  // <NoticeComment
-  //   comment={isMultiActors ? notice.comment : notice.reply}
-  // />
-
-  //       {isMultiActors && (
-  //         <section className="multi-actor-avatars">
-  //           {notice.actors.map((actor, index) => (
-  //             <NoticeActorAvatar key={index} user={actor} size="md" />
-  //           ))}
-  //         </section>
-  //       )}
-
-  //       <NoticeDate notice={notice} />
-  //     </section>
-
-  //     <style jsx>{styles}</style>
-  //   </section>
-  // )
 }
 CommentNewReplyNotice.fragments = {
   notice: gql`
