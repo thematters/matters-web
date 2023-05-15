@@ -102,6 +102,11 @@
   color: var(--color-matters-green);
 }
 
+/* NoticeTag */
+.tag-content {
+  color: var(--color-black);
+}
+
 /* NoticeMultiActors */
 .more-actors {
   & :global(button) {

@@ -463,8 +463,8 @@
     "defaultMessage": " in your circle ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "xwj01D": {
-    "defaultMessage": " invites you to become a collaborator",
+  "8PWD05": {
+    "defaultMessage": "invites you to {tag} collaborator",
     "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
   },
   "t7ah39": {
@@ -475,8 +475,16 @@
     "defaultMessage": " resigned as tag collaborator. You can invite new collaborators to join",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
-  "dsBCfK": {
-    "defaultMessage": "uh-oh,",
+  "YUtHE9": {
+    "defaultMessage": "selected your work {articleTitle} to {tag} featured",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagAddedNotice.tsx"
+  },
+  "pCcbaC": {
+    "defaultMessage": "remove your work {articleTitle} from {tag}",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagRemovedNotice.tsx"
+  },
+  "DFieKt": {
+    "defaultMessage": "resigned from {tag} collaborator",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
   "Jc+W6M": {

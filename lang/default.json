@@ -171,6 +171,10 @@
     "defaultMessage": "Read Counts",
     "description": ""
   },
+  "8PWD05": {
+    "defaultMessage": "invites you to {tag} collaborator",
+    "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
+  },
   "8cv9D4": {
     "defaultMessage": "Next Step",
     "description": ""
@@ -274,6 +278,10 @@
   "D3idYv": {
     "defaultMessage": "Settings",
     "description": ""
+  },
+  "DFieKt": {
+    "defaultMessage": "resigned from {tag} collaborator",
+    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
   "DXJ8ys": {
     "defaultMessage": "Read counts indicates how many registered users read.",
@@ -491,10 +499,6 @@
     "defaultMessage": "Enter password again",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
   },
-  "O03Rkc": {
-    "defaultMessage": "resigned as tag collaborator. You can invite new collaborators to join",
-    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
-  },
   "O0QB1v": {
     "defaultMessage": "Friends will receive free trial invitations to Circle. Set up your invitations now!",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -671,6 +675,10 @@
     "defaultMessage": "broadcast and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "YUtHE9": {
+    "defaultMessage": "selected your work {articleTitle} to {tag} featured",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagAddedNotice.tsx"
+  },
   "YjNkcK": {
     "defaultMessage": "To change, switch it directly on your wallet",
     "description": ""
@@ -786,10 +794,6 @@
   "dnsfmR": {
     "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
     "description": "src/views/Help/index.tsx"
-  },
-  "dsBCfK": {
-    "defaultMessage": "uh-oh,",
-    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
   "eTpiYa": {
     "defaultMessage": "No data yet.",
@@ -1007,6 +1011,10 @@
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
+  "pCcbaC": {
+    "defaultMessage": "remove your work {articleTitle} from {tag}",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagRemovedNotice.tsx"
+  },
   "pRV+UD": {
     "defaultMessage": "Collapse",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
@@ -1186,10 +1194,6 @@
   "xmcVZ0": {
     "defaultMessage": "Search",
     "description": ""
-  },
-  "xwj01D": {
-    "defaultMessage": "invites you to become a collaborator",
-    "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
   },
   "y0b6Kp": {
     "defaultMessage": "Pay",

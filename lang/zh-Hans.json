@@ -799,9 +799,17 @@
     "defaultMessage": "，我们会尽快回复!",
     "description": "src/views/Help/index.tsx"
   },
-  "dsBCfK": {
-    "defaultMessage": "哎呀，标签协作者",
+  "DFieKt": {
+    "defaultMessage": "辞去了 {tag} 的协作者",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "YUtHE9": {
+    "defaultMessage": "将你的作品 {articleTitle} 在 {tag} 中选为精华",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagAddedNotice.tsx"
+  },
+  "pCcbaC": {
+    "defaultMessage": "将你的作品 {articleTitle} 从 {tag} 中移除",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagRemovedNotice.tsx"
   },
   "eTpiYa": {
     "defaultMessage": "尚无支持数据",
@@ -1195,8 +1203,8 @@
     "defaultMessage": "搜索",
     "description": ""
   },
-  "xwj01D": {
-    "defaultMessage": " 邀请你成为标签的协作者",
+  "8PWD05": {
+    "defaultMessage": "邀请你成为 {tag} 的协作者",
     "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
   },
   "y0b6Kp": {

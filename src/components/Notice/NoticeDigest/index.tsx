@@ -6,8 +6,10 @@ import {
   ArticleNewCollectedNoticeFragment,
   ArticleNewCommentNoticeFragment,
   ArticleNewSubscriberNoticeFragment,
+  ArticleTagAddedNoticeFragment,
   CommentMentionedYouNoticeFragment,
   CommentNewReplyNoticeFragment,
+  TagAddEditorNoticeFragment,
   UserNewFollowerNoticeFragment,
 } from '@/src/gql/graphql'
 import { TEST_ID } from '~/common/enums'
@@ -22,6 +24,7 @@ import styles from '../styles.css'
 
 type NoticeDigestProps = {
   notice:
+    | ArticleTagAddedNoticeFragment
     | ArticleNewSubscriberNoticeFragment
     | ArticleNewAppreciationNoticeFragment
     | ArticleNewCollectedNoticeFragment
@@ -29,6 +32,7 @@ type NoticeDigestProps = {
     | CommentMentionedYouNoticeFragment
     | CommentNewReplyNoticeFragment
     | UserNewFollowerNoticeFragment
+    | TagAddEditorNoticeFragment
   action: string | ReactElement
   secondAction?: string | ReactElement
   title?: string | ReactElement

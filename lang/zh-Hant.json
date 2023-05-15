@@ -799,9 +799,17 @@
     "defaultMessage": "，我們會儘快回覆!",
     "description": "src/views/Help/index.tsx"
   },
-  "dsBCfK": {
-    "defaultMessage": "哎呀，標籤協作者",
+  "DFieKt": {
+    "defaultMessage": "辭去了 {tag} 的協作者",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "YUtHE9": {
+    "defaultMessage": "將你的作品 {articleTitle} 在 {tag} 中選為精华",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagAddedNotice.tsx"
+  },
+  "pCcbaC": {
+    "defaultMessage": "將你的作品 {articleTitle} 從 {tag} 中移除",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagRemovedNotice.tsx"
   },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據",
@@ -1195,8 +1203,8 @@
     "defaultMessage": "搜尋",
     "description": ""
   },
-  "xwj01D": {
-    "defaultMessage": " 邀請你成為標籤的協作者",
+  "8PWD05": {
+    "defaultMessage": "邀請你成為 {tag} 的協作者",
     "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
   },
   "y0b6Kp": {
