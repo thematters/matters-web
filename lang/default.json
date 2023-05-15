@@ -243,10 +243,6 @@
     "defaultMessage": "followers_empty",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "BjzRe8": {
-    "defaultMessage": ". Take a look at your income",
-    "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
-  },
   "CBDDR5": {
     "defaultMessage": "Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.",
     "description": ""
@@ -1039,10 +1035,6 @@
     "defaultMessage": "Circle Name",
     "description": ""
   },
-  "qPPrzm": {
-    "defaultMessage": "supported your article",
-    "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
-  },
   "qQmSxu": {
     "defaultMessage": "Airdrop registration completed. Your NFT will be revealed on November 12. Confirm your ETH wallet address:",
     "description": "src/components/Notice/CryptoNotice/CryptoWalletAirdropNotice.tsx"
@@ -1158,6 +1150,10 @@
   "vH8sCb": {
     "defaultMessage": "Circle",
     "description": ""
+  },
+  "vLEnrs": {
+    "defaultMessage": "supported",
+    "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
   "wEQDC6": {
     "defaultMessage": "Edit",

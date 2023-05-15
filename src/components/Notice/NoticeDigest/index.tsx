@@ -9,6 +9,7 @@ import {
   ArticleTagAddedNoticeFragment,
   CommentMentionedYouNoticeFragment,
   CommentNewReplyNoticeFragment,
+  PaymentReceivedDonationNoticeFragment,
   TagAddEditorNoticeFragment,
   UserNewFollowerNoticeFragment,
 } from '@/src/gql/graphql'
@@ -31,6 +32,7 @@ type NoticeDigestProps = {
     | ArticleNewCommentNoticeFragment
     | CommentMentionedYouNoticeFragment
     | CommentNewReplyNoticeFragment
+    | PaymentReceivedDonationNoticeFragment
     | UserNewFollowerNoticeFragment
     | TagAddEditorNoticeFragment
   action: string | ReactElement
