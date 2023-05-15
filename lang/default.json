@@ -115,10 +115,6 @@
     "defaultMessage": "Have wallet questions on mobile device ? Click the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "4vkwo0": {
-    "defaultMessage": "Your article has been republished to decentralized network",
-    "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
-  },
   "50cquj": {
     "defaultMessage": "No discussion yet",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
@@ -390,10 +386,6 @@
   "J3yk6u": {
     "defaultMessage": "in circle",
     "description": ""
-  },
-  "JIjMWL": {
-    "defaultMessage": "Your article has been published to decentralized network",
-    "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
   "Jc+W6M": {
     "defaultMessage": "resigned as tag maintainer. Would you like to be the new tag maintainer?",
@@ -835,6 +827,10 @@
     "defaultMessage": "RSS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "gN4jLB": {
+    "defaultMessage": "Your work {articleTitle} has been republished to decentralized network",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
+  },
   "h9CG9E": {
     "defaultMessage": "{commentType} has been deleted",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1106,6 +1102,10 @@
   "t8/r8X": {
     "defaultMessage": "Continue with Wallet",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "tEeEJT": {
+    "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
+    "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
   "tQsujN": {
     "defaultMessage": "replied to topics and mentioned you",

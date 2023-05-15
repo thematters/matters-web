@@ -423,8 +423,8 @@
     "defaultMessage": " subscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
-  "JIjMWL": {
-    "defaultMessage": "Your article has been published to decentralized network",
+  "tEeEJT": {
+    "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
   "sncOwi": {
@@ -443,8 +443,8 @@
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
-  "4vkwo0": {
-    "defaultMessage": "Your article has been republished to decentralized network",
+  "gN4jLB": {
+    "defaultMessage": "Your work {articleTitle} has been republished to decentralized network",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "QV19cI": {

@@ -127,8 +127,8 @@
     "defaultMessage": "在行动装置上使用问题，参考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "4vkwo0": {
-    "defaultMessage": "你的修订作品已发布到分布式网络",
+  "gN4jLB": {
+    "defaultMessage": "你的修订作品 {articleTitle} 已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "50cquj": {
@@ -395,8 +395,8 @@
     "defaultMessage": "在围炉 ",
     "description": ""
   },
-  "JIjMWL": {
-    "defaultMessage": "你的作品已发布到分布式网络",
+  "tEeEJT": {
+    "defaultMessage": "你的作品 {articleTitle} 已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
   "Jc+W6M": {
