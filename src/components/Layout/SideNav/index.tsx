@@ -58,16 +58,19 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
   const { router, isInPath, isPathStartWith, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
-  const userName = getQuery('name')
+  const name = getQuery('name')
   const viewerUserName = viewer.userName || ''
+  const viewerCircle = viewer.ownCircles && viewer.ownCircles[0]
 
   const isInHome = isInPath('HOME')
   const isInFollow = isInPath('FOLLOW')
   const isInNotification = isInPath('ME_NOTIFICATIONS')
   const isInSearch = isInPath('SEARCH')
-  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+
+  const isMyProfile = isPathStartWith('/@', true) && name === viewerUserName
+  const isMyCircle = isPathStartWith('/~', true) && name === viewerCircle?.name
   const isInMe =
-    (!isInNotification && isPathStartWith('/me')) || userName === viewerUserName
+    (!isInNotification && isPathStartWith('/me')) || isMyProfile || isMyCircle
 
   return (
     <ul role="menu">
@@ -158,25 +161,23 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
         />
       </Dropdown>
 
-      {!isInDraftDetail && (
-        <li role="menuitem">
-          {isMdUp ? (
-            <WriteButton
-              variant="sidenav"
-              allowed={!viewer.shouldSetupLikerID}
-              authed={viewer.isAuthed}
-              forbidden={viewer.isInactive}
-            />
-          ) : (
-            <WriteButton
-              variant="navbar"
-              allowed={!viewer.shouldSetupLikerID}
-              authed={viewer.isAuthed}
-              forbidden={viewer.isInactive}
-            />
-          )}
-        </li>
-      )}
+      <li role="menuitem">
+        {isMdUp ? (
+          <WriteButton
+            variant="sidenav"
+            allowed={!viewer.shouldSetupLikerID}
+            authed={viewer.isAuthed}
+            forbidden={viewer.isInactive}
+          />
+        ) : (
+          <WriteButton
+            variant="navbar"
+            allowed={!viewer.shouldSetupLikerID}
+            authed={viewer.isAuthed}
+            forbidden={viewer.isInactive}
+          />
+        )}
+      </li>
 
       <style jsx>{styles}</style>
     </ul>
