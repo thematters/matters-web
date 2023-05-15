@@ -54,7 +54,7 @@ const Logo = () => {
   )
 }
 
-const SideNav = () => {
+const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
   const { router, isInPath, isPathStartWith, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
@@ -68,6 +68,127 @@ const SideNav = () => {
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInMe =
     (!isInNotification && isPathStartWith('/me')) || userName === viewerUserName
+
+  return (
+    <ul role="menu">
+      <NavListItem
+        name={<FormattedMessage defaultMessage="Discover" description="" />}
+        icon={<IconNavHome32 size="lg" />}
+        activeIcon={<IconNavHomeActive32 size="lg" />}
+        active={isInHome}
+        href={PATHS.HOME}
+        isMdUp={isMdUp}
+      />
+
+      <NavListItem
+        name={
+          <FormattedMessage
+            defaultMessage="Following"
+            description="src/components/Layout/SideNav/index.tsx"
+          />
+        }
+        icon={<UnreadIcon.Follow />}
+        activeIcon={<UnreadIcon.Follow active />}
+        active={isInFollow}
+        href={PATHS.FOLLOW}
+        isMdUp={isMdUp}
+      />
+
+      <NavListItem
+        name={
+          <FormattedMessage defaultMessage="Notifications" description="" />
+        }
+        icon={<UnreadIcon.Notification />}
+        activeIcon={<UnreadIcon.Notification active />}
+        active={isInNotification}
+        href={PATHS.ME_NOTIFICATIONS}
+        isMdUp={isMdUp}
+      />
+
+      <Media lessThan="xl">
+        <NavListItem
+          name={<FormattedMessage defaultMessage="Search" description="" />}
+          icon={<IconNavSearch32 size="lg" />}
+          activeIcon={<IconNavSearchActive32 size="lg" />}
+          active={isInSearch}
+          onClick={() => {
+            const path = toPath({
+              page: 'search',
+            })
+
+            if (isInSearch) {
+              router.replace(path.href)
+            } else {
+              router.push(path.href)
+            }
+          }}
+          isMdUp={isMdUp}
+        />
+      </Media>
+
+      <Dropdown
+        content={
+          <FocusLock>
+            <section className="dropdown-menu">
+              <VisuallyHidden>
+                <button type="button">
+                  <FormattedMessage defaultMessage="Cancel" description="" />
+                </button>
+              </VisuallyHidden>
+              <NavMenu.Top />
+              <Menu.Divider />
+              <NavMenu.Bottom />
+            </section>
+          </FocusLock>
+        }
+        placement="right-start"
+        appendTo={typeof window !== 'undefined' ? document.body : undefined}
+        offset={[-24, 24]}
+        zIndex={Z_INDEX.OVER_BOTTOM_BAR}
+        onShown={hidePopperOnClick}
+      >
+        <NavListItem
+          name={<FormattedMessage defaultMessage="My Page" description="" />}
+          icon={<IconNavMe32 size="lg" />}
+          activeIcon={<IconNavMeActive32 size="lg" />}
+          active={isInMe}
+          canScrollTop={false}
+          aira-haspopup="menu"
+          isMdUp={isMdUp}
+        />
+      </Dropdown>
+
+      {!isInDraftDetail && (
+        <li role="menuitem">
+          {isMdUp ? (
+            <WriteButton
+              variant="sidenav"
+              allowed={!viewer.shouldSetupLikerID}
+              authed={viewer.isAuthed}
+              forbidden={viewer.isInactive}
+            />
+          ) : (
+            <WriteButton
+              variant="navbar"
+              allowed={!viewer.shouldSetupLikerID}
+              authed={viewer.isAuthed}
+              forbidden={viewer.isInactive}
+            />
+          )}
+        </li>
+      )}
+
+      <style jsx>{styles}</style>
+    </ul>
+  )
+}
+
+const SideNav = () => {
+  const { router, isInPath } = useRoute()
+  const viewer = useContext(ViewerContext)
+
+  const isInHome = isInPath('HOME')
+  const isInSearch = isInPath('SEARCH')
 
   // only show auth button for anonymous
   if (!viewer.isAuthed) {
@@ -120,110 +241,12 @@ const SideNav = () => {
     <section className="side-nav">
       <Logo />
 
-      <ul role="menu">
-        <NavListItem
-          name={<FormattedMessage defaultMessage="Discover" description="" />}
-          icon={<IconNavHome32 size="lg" />}
-          activeIcon={<IconNavHomeActive32 size="lg" />}
-          active={isInHome}
-          href={PATHS.HOME}
-        />
-
-        <NavListItem
-          name={
-            <FormattedMessage
-              defaultMessage="Following"
-              description="src/components/Layout/SideNav/index.tsx"
-            />
-          }
-          icon={<UnreadIcon.Follow />}
-          activeIcon={<UnreadIcon.Follow active />}
-          active={isInFollow}
-          href={PATHS.FOLLOW}
-        />
-
-        <NavListItem
-          name={
-            <FormattedMessage defaultMessage="Notifications" description="" />
-          }
-          icon={<UnreadIcon.Notification />}
-          activeIcon={<UnreadIcon.Notification active />}
-          active={isInNotification}
-          href={PATHS.ME_NOTIFICATIONS}
-        />
-
-        <Media lessThan="xl">
-          <NavListItem
-            name={<FormattedMessage defaultMessage="Search" description="" />}
-            icon={<IconNavSearch32 size="lg" />}
-            activeIcon={<IconNavSearchActive32 size="lg" />}
-            active={isInSearch}
-            onClick={() => {
-              const path = toPath({
-                page: 'search',
-              })
-
-              if (isInSearch) {
-                router.replace(path.href)
-              } else {
-                router.push(path.href)
-              }
-            }}
-          />
-        </Media>
-
-        <Dropdown
-          content={
-            <FocusLock>
-              <section className="dropdown-menu">
-                <VisuallyHidden>
-                  <button type="button">
-                    <FormattedMessage defaultMessage="Cancel" description="" />
-                  </button>
-                </VisuallyHidden>
-                <NavMenu.Top />
-                <Menu.Divider />
-                <NavMenu.Bottom />
-              </section>
-            </FocusLock>
-          }
-          placement="right-start"
-          appendTo={typeof window !== 'undefined' ? document.body : undefined}
-          offset={[-24, 24]}
-          zIndex={Z_INDEX.OVER_BOTTOM_BAR}
-          onShown={hidePopperOnClick}
-        >
-          <NavListItem
-            name={<FormattedMessage defaultMessage="My Page" description="" />}
-            icon={<IconNavMe32 size="lg" />}
-            activeIcon={<IconNavMeActive32 size="lg" />}
-            active={isInMe}
-            canScrollTop={false}
-            aira-haspopup="menu"
-          />
-        </Dropdown>
-
-        {!isInDraftDetail && (
-          <li role="menuitem">
-            <Media greaterThanOrEqual="lg">
-              <WriteButton
-                variant="sidenav"
-                allowed={!viewer.shouldSetupLikerID}
-                authed={viewer.isAuthed}
-                forbidden={viewer.isInactive}
-              />
-            </Media>
-            <Media lessThan="lg">
-              <WriteButton
-                variant="navbar"
-                allowed={!viewer.shouldSetupLikerID}
-                authed={viewer.isAuthed}
-                forbidden={viewer.isInactive}
-              />
-            </Media>
-          </li>
-        )}
-      </ul>
+      <Media greaterThanOrEqual="lg">
+        <SideNavMenu isMdUp />
+      </Media>
+      <Media lessThan="lg">
+        <SideNavMenu isMdUp={false} />
+      </Media>
 
       <style jsx>{styles}</style>
     </section>
