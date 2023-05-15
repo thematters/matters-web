@@ -91,6 +91,7 @@ const withPWA = require('next-pwa')({
   disable: isLocal,
   register: true,
   sw: 'service-worker.js',
+  runtimeCaching: [], // disable runtime caching
   publicExcludes: ['!static/**/*'],
   buildExcludes: [/.*\.svg/],
   cacheStartUrl: false,
