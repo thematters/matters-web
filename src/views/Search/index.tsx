@@ -47,8 +47,6 @@ const Search = () => {
 
   const { getQuery, router } = useRoute()
   const q = getQuery('q')
-  // TODO: Just test for product team, will be removed when release
-  const cancelable = getQuery('cancelable')
 
   const onCancel = () => {
     const path = toPath({ page: 'search' })
@@ -61,7 +59,7 @@ const Search = () => {
   // const showBackButton = isSmallUp && isOverview
   // const showMeButton = !isSmallUp && isOverview
 
-  const showCancelButton = !isHistory && cancelable
+  const showCancelButton = !isHistory
 
   useEffect(() => {
     if (!isHistory) return

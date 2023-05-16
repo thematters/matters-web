@@ -7,19 +7,8 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
     $key: String!
     $first: first_Int_min_0 = 30
     $after: String
-    $version: SearchAPIVersion = v20230301
-    $coefficients: String
   ) {
-    search(
-      input: {
-        type: Article
-        first: $first
-        version: $version
-        key: $key
-        after: $after
-        coefficients: $coefficients
-      }
-    ) {
+    search(input: { type: Article, first: $first, key: $key, after: $after }) {
       pageInfo {
         startCursor
         endCursor
@@ -43,19 +32,8 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
     $key: String!
     $first: first_Int_min_0 = 30
     $after: String
-    $version: SearchAPIVersion = v20230301
-    $coefficients: String
   ) {
-    search(
-      input: {
-        type: Tag
-        version: $version
-        first: $first
-        key: $key
-        after: $after
-        coefficients: $coefficients
-      }
-    ) {
+    search(input: { type: Tag, first: $first, key: $key, after: $after }) {
       pageInfo {
         startCursor
         endCursor
@@ -79,19 +57,8 @@ export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
     $key: String!
     $first: first_Int_min_0 = 30
     $after: String
-    $version: SearchAPIVersion = v20230301
-    $coefficients: String
   ) {
-    search(
-      input: {
-        type: User
-        version: $version
-        first: $first
-        key: $key
-        after: $after
-        coefficients: $coefficients
-      }
-    ) {
+    search(input: { type: User, first: $first, key: $key, after: $after }) {
       pageInfo {
         startCursor
         endCursor
