@@ -31,6 +31,8 @@ export class DraftDetailPage {
   readonly barToggleISCN: Locator
   readonly barSetLicense: Locator
   readonly barSupportSetting: Locator
+  readonly barResponsesAllow: Locator
+  readonly barResponsesDisallow: Locator
 
   // bottombar
   readonly bottombarManage: Locator
@@ -80,6 +82,12 @@ export class DraftDetailPage {
     this.barSupportSetting = this.page.getByRole('button', {
       name: 'Support Setting',
     })
+    this.barResponsesAllow = this.page.getByTestId(
+      TEST_ID.DRAFTS_RESPONSE_ALLOW
+    )
+    this.barResponsesDisallow = this.page.getByTestId(
+      TEST_ID.DRAFTS_RESPONSE_DISALLOW
+    )
 
     // bottombar
     this.bottombarManage = this.page.getByRole('button', {
@@ -264,6 +272,22 @@ export class DraftDetailPage {
     await this.dialogDoneButton.click()
 
     return articleTitle
+  }
+
+  async checkResponse({ allow }: { allow?: Boolean }) {
+    if (this.isMobile) {
+      await this.bottombarManage.click()
+    }
+
+    if (allow) {
+      await this.barResponsesAllow.click()
+    } else {
+      await this.barResponsesDisallow.click()
+    }
+
+    if (this.isMobile) {
+      await this.dialogDoneButton.click()
+    }
   }
 
   async checkAddToCicle() {

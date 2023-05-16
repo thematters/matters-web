@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 
+import { TEST_ID } from '@/src/common/enums'
 import {
   IconChecked,
   IconUnChecked,
@@ -40,7 +41,15 @@ const ToggleResponse = ({
   if (inSidebar) {
     return (
       <section className={wrapperClasses}>
-        <section className="item" onClick={allowResponse}>
+        <section
+          className="item"
+          onClick={allowResponse}
+          data-test-id={TEST_ID.DRAFTS_RESPONSE_ALLOW}
+          role="button"
+          {...(disableChangeCanComment
+            ? { ['aria-disabled']: disableChangeCanComment }
+            : {})}
+        >
           <section className="left">
             <h3>
               <Translate id="allowResponses" />
@@ -60,7 +69,15 @@ const ToggleResponse = ({
             )}
           </section>
         </section>
-        <section className="item" onClick={disableResponse}>
+        <section
+          className="item"
+          onClick={disableResponse}
+          data-test-id={TEST_ID.DRAFTS_RESPONSE_DISALLOW}
+          role="button"
+          {...(disableChangeCanComment
+            ? { ['aria-disabled']: disableChangeCanComment }
+            : {})}
+        >
           <section className="left">
             <h3>
               <Translate id="disableResponses" />
@@ -92,7 +109,15 @@ const ToggleResponse = ({
         <Translate id="articleResponse" />
       </h3>
       <section className={wrapperClasses}>
-        <section className="item" onClick={allowResponse}>
+        <section
+          className="item"
+          onClick={allowResponse}
+          data-test-id={TEST_ID.DRAFTS_RESPONSE_ALLOW}
+          role="button"
+          {...(disableChangeCanComment
+            ? { ['aria-disabled']: disableChangeCanComment }
+            : {})}
+        >
           <section className="left">
             <h3>
               <Translate id="allowResponses" />
@@ -112,7 +137,15 @@ const ToggleResponse = ({
             )}
           </section>
         </section>
-        <section className="item" onClick={disableResponse}>
+        <section
+          className="item"
+          onClick={disableResponse}
+          data-test-id={TEST_ID.DRAFTS_RESPONSE_DISALLOW}
+          role="button"
+          {...(disableChangeCanComment
+            ? { ['aria-disabled']: disableChangeCanComment }
+            : {})}
+        >
           <section className="left">
             <h3>
               <Translate id="disableResponses" />

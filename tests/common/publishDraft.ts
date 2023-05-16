@@ -8,9 +8,11 @@ import { ArticleDetailPage, DraftDetailPage, fuzzingRun } from '../helpers'
 export const publishDraft = async ({
   page,
   isMobile,
+  allowResponse = true,
 }: {
   page: Page
   isMobile?: boolean | undefined
+  allowResponse?: boolean
 }) => {
   const draftDetail = new DraftDetailPage(page, isMobile)
   await draftDetail.createDraft()
@@ -47,6 +49,8 @@ export const publishDraft = async ({
       boolean | undefined,
       boolean | undefined
     ]
+
+  await draftDetail.checkResponse({ allow: allowResponse })
 
   // Publish
   await draftDetail.publish()

@@ -228,6 +228,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         {...(ariaLabel ? { ['aria-label']: ariaLabel } : {})}
         {...(role ? { ['role']: role } : {})}
         {...(ariaHasPopup ? { ['aria-haspopup']: ariaHasPopup } : {})}
+        {...(disabled ? { ['aria-disabled']: disabled } : {})}
         {...(testId ? { ['data-test-id']: testId } : {})}
       >
         {children}

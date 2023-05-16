@@ -22,6 +22,9 @@ export enum TEST_ID {
   DIALOG_AUTH = 'dialog/auth',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
+  // drafts
+  DRAFTS_RESPONSE_ALLOW = 'drafts/response/allow',
+  DRAFTS_RESPONSE_DISALLOW = 'drafts/response/disallow',
   // article
   ARTICLE_SUMMARY = 'article/summary',
   ARTICLE_CONTENT = 'article/content',
