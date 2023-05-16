@@ -1,7 +1,7 @@
 import jump from 'jump.js'
 import { forwardRef } from 'react'
 
-import { Button, ButtonProps, Media, TextIcon } from '~/components'
+import { Button, ButtonProps, TextIcon } from '~/components'
 
 import styles from './styles.css'
 
@@ -11,9 +11,8 @@ type NavListItemProps = {
   activeIcon: React.ReactNode
   active: boolean
   canScrollTop?: boolean
+  isMdUp?: boolean
 } & ButtonProps
-
-type NavListItemButtonProps = NavListItemProps & { isMdUp?: boolean }
 
 const NavListItemButton = forwardRef(
   (
@@ -26,7 +25,7 @@ const NavListItemButton = forwardRef(
       isMdUp,
       canScrollTop,
       ...props
-    }: NavListItemButtonProps,
+    }: NavListItemProps,
     ref
   ) => {
     return (
@@ -69,12 +68,7 @@ const NavListItem = forwardRef((props: NavListItemProps, ref) => {
 
   return (
     <li role="menuitem">
-      <Media greaterThanOrEqual="lg">
-        <NavListItemButton {...props} onClick={onClick} ref={ref} isMdUp />
-      </Media>
-      <Media lessThan="lg">
-        <NavListItemButton {...props} onClick={onClick} ref={ref} />
-      </Media>
+      <NavListItemButton {...props} onClick={onClick} ref={ref} />
 
       <style jsx>{styles}</style>
     </li>
