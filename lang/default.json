@@ -671,10 +671,6 @@
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
-  "YlxpJl": {
-    "defaultMessage": "Broadcast and mentioned you in comment",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
   "Z6cII7": {
     "defaultMessage": "Accumulated Read Time",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
