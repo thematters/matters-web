@@ -6,6 +6,14 @@ import layoutStyles from '~/common/styles/layouts.css'
 import interactionStyles from '~/common/styles/utils/interaction.css'
 import linkStyles from '~/common/styles/utils/link.css'
 import motionStyles from '~/common/styles/utils/motion.css'
+// import breakpointsStyles from '~/common/styles/variables/breakpoints.css'
+import colorsStyles from '~/common/styles/variables/colors.css'
+// import layoutsStyles from '~/common/styles/variables/layouts.css'
+import shadowsStyles from '~/common/styles/variables/shadows.css'
+import sizingStyles from '~/common/styles/variables/sizing.css'
+import spacingStyles from '~/common/styles/variables/spacing.css'
+import typographyStyles from '~/common/styles/variables/typography.css'
+import zIndexStyles from '~/common/styles/variables/z-index.css'
 import fresnelStyles from '~/common/styles/vendors/fresnel.css'
 import ptrStyles from '~/common/styles/vendors/ptr.css'
 import tippyStyles from '~/common/styles/vendors/tippy.css'
@@ -30,6 +38,25 @@ export const GlobalStyles = () => {
 
   return (
     <>
+      <style jsx global>
+        {colorsStyles}
+      </style>
+      <style jsx global>
+        {sizingStyles}
+      </style>
+      <style jsx global>
+        {zIndexStyles}
+      </style>
+      <style jsx global>
+        {spacingStyles}
+      </style>
+      <style jsx global>
+        {typographyStyles}
+      </style>
+      <style jsx global>
+        {shadowsStyles}
+      </style>
+
       <style jsx global>
         {resetStyles}
       </style>
