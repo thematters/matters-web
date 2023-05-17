@@ -336,7 +336,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "qYzBk8": {
-    "defaultMessage": " unsubscribed your circle",
+    "defaultMessage": "unsubscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "LW1aX1": {
@@ -355,12 +355,20 @@
     "defaultMessage": "in circle",
     "description": ""
   },
-  "FALWef": {
-    "defaultMessage": " commented in Broadcast",
+  "EZMrtJ": {
+    "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "YlxpJl": {
-    "defaultMessage": " Broadcast and mentioned you ",
+  "Y+spJC": {
+    "defaultMessage": "commented in your circle broadcast",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "XQTBu6": {
+    "defaultMessage": "mentioned you in your circle broadcast comment",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "r66dXx": {
+    "defaultMessage": "mentioned you in broadcast comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "qQmSxu": {
@@ -371,8 +379,8 @@
     "defaultMessage": "You have successfully completed Ethereum wallet settings. Please confirm wallet address:",
     "description": "src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
   },
-  "+hfUcV": {
-    "defaultMessage": "sent a new broadcast on {circlename}",
+  "jy3tx0": {
+    "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
   "An0rpe": {
@@ -387,8 +395,8 @@
     "defaultMessage": " commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
-  "5sAbzJ": {
-    "defaultMessage": " started a new topic ",
+  "lgdIdr": {
+    "defaultMessage": "started a new conversation",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "A3LOng": {
@@ -416,11 +424,11 @@
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "hk2aiz": {
-    "defaultMessage": " followed your circle",
+    "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "mPe6DK": {
-    "defaultMessage": " subscribed your circle",
+    "defaultMessage": "subscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "tEeEJT": {
@@ -451,8 +459,8 @@
     "defaultMessage": "Failed to republish article",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
-  "euNJsE": {
-    "defaultMessage": "A new article has been added to the circle, read it now!",
+  "GVes61": {
+    "defaultMessage": "published in {circleName}",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
   "/3G89K": {
@@ -460,7 +468,7 @@
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
   "wqaNK4": {
-    "defaultMessage": " in your circle ",
+    "defaultMessage": "in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "8PWD05": {

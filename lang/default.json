@@ -7,17 +7,9 @@
     "defaultMessage": "Members",
     "description": ""
   },
-  "+hfUcV": {
-    "defaultMessage": "sent a new broadcast on {circlename}",
-    "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
-  },
   "/+XWDi": {
     "defaultMessage": "Logbook 2.0",
     "description": "src/components/UserProfile/DropdownActions/index.tsx"
-  },
-  "/3G89K": {
-    "defaultMessage": "is growing",
-    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
   "/3kw6k": {
     "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
@@ -83,10 +75,6 @@
     "defaultMessage": "Articles",
     "description": ""
   },
-  "3WKlPP": {
-    "defaultMessage": "commented in",
-    "description": ""
-  },
   "3kbIhS": {
     "defaultMessage": "Untitled",
     "description": ""
@@ -122,10 +110,6 @@
   "5FO4vn": {
     "defaultMessage": "You do not have permission to perform this operation",
     "description": ""
-  },
-  "5sAbzJ": {
-    "defaultMessage": "started a new topic",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "5sg7KC": {
     "defaultMessage": "Password",
@@ -291,6 +275,10 @@
     "defaultMessage": "Request an update, ask, share and discuss",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
+  "EZMrtJ": {
+    "defaultMessage": "commented broadcast in {circleName}",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
   "EfJYPI": {
     "defaultMessage": "Verification Code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -302,10 +290,6 @@
   "EwVnoC": {
     "defaultMessage": "I have read and agree to",
     "description": ""
-  },
-  "FALWef": {
-    "defaultMessage": "commented in Broadcast",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "FOOymB": {
     "defaultMessage": "No members yet",
@@ -334,6 +318,10 @@
   "GRtGnZ": {
     "defaultMessage": "Resign From Maintainer",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "GVes61": {
+    "defaultMessage": "published in {circleName}",
+    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
   "GZJpDf": {
     "defaultMessage": "Analytics",
@@ -643,6 +631,10 @@
     "defaultMessage": "subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "XQTBu6": {
+    "defaultMessage": "mentioned you in your circle broadcast comment",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
   "XVYrS/": {
     "defaultMessage": "No followers yet",
     "description": ""
@@ -662,6 +654,10 @@
   "Xz/AHp": {
     "defaultMessage": "broadcast and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "Y+spJC": {
+    "defaultMessage": "commented in your circle broadcast",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "YUtHE9": {
     "defaultMessage": "selected your work {articleTitle} to {tag} featured",
@@ -803,10 +799,6 @@
     "defaultMessage": "Custom URL Name",
     "description": ""
   },
-  "euNJsE": {
-    "defaultMessage": "A new article has been added to the circle, read it now!",
-    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
-  },
   "fG41Ux": {
     "defaultMessage": "Logged out successfully",
     "description": ""
@@ -903,6 +895,10 @@
     "defaultMessage": "Save",
     "description": ""
   },
+  "jy3tx0": {
+    "defaultMessage": "broadcast in {circlename}",
+    "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
+  },
   "k5NnNF": {
     "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
@@ -926,6 +922,10 @@
   "ldNgRA": {
     "defaultMessage": "Display name, can be changed later",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+  },
+  "lgdIdr": {
+    "defaultMessage": "started a new conversation",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "lhaIoi": {
     "defaultMessage": "Enter Display Name",
@@ -1050,6 +1050,10 @@
   "qyzJxi": {
     "defaultMessage": "Logbook 1.0",
     "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "r66dXx": {
+    "defaultMessage": "mentioned you in broadcast comment in {circleName}",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "rBjwQy": {
     "defaultMessage": "Weibo",

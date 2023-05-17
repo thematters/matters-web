@@ -102,6 +102,11 @@
   color: var(--color-matters-green);
 }
 
+/* NoticeCircleName */
+.circle-display-name {
+  color: var(--color-black);
+}
+
 /* NoticeTag */
 .tag-content {
   color: var(--color-black);

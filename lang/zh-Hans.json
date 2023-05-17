@@ -7,8 +7,8 @@
     "defaultMessage": "成员",
     "description": ""
   },
-  "+hfUcV": {
-    "defaultMessage": "在围炉 {circlename} 发布了新广播",
+  "jy3tx0": {
+    "defaultMessage": "在 {circlename} 发布广播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
   "/+XWDi": {
@@ -139,8 +139,8 @@
     "defaultMessage": "你尚无权限进行该操作",
     "description": ""
   },
-  "5sAbzJ": {
-    "defaultMessage": " 众聊中发表话题 ",
+  "lgdIdr": {
+    "defaultMessage": "众聊中发表话题",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "5sg7KC": {
@@ -311,8 +311,8 @@
     "defaultMessage": "我已阅读并同意",
     "description": ""
   },
-  "FALWef": {
-    "defaultMessage": " 广播中留言 ",
+  "EZMrtJ": {
+    "defaultMessage": "在 {circleName} 的广播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "FOOymB": {
@@ -695,8 +695,16 @@
     "defaultMessage": "若要变更地址，请直接操作钱包切換",
     "description": ""
   },
-  "YlxpJl": {
-    "defaultMessage": " 广播中留言，其中有提及你 ",
+  "r66dXx": {
+    "defaultMessage": "在 {circleName} 的广播留言中提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Y+spJC": {
+    "defaultMessage": "在你的围炉中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "XQTBu6": {
+    "defaultMessage": "在你的围炉广播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "Z6cII7": {
@@ -831,8 +839,8 @@
     "defaultMessage": "自定义网址名称",
     "description": ""
   },
-  "euNJsE": {
-    "defaultMessage": "新作品已经加入围炉，马上前往阅读吧!",
+  "GVes61": {
+    "defaultMessage": "在 {circleName} 发布新作品",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
   "fG41Ux": {
@@ -868,7 +876,7 @@
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
   "hk2aiz": {
-    "defaultMessage": " 追踪了你的围炉",
+    "defaultMessage": "追踪了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hrfF+i": {
@@ -964,7 +972,7 @@
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
   "mPe6DK": {
-    "defaultMessage": " 订阅了你的围炉",
+    "defaultMessage": "订阅了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "mSAY3/": {
@@ -1184,7 +1192,7 @@
     "description": ""
   },
   "wqaNK4": {
-    "defaultMessage": "在你的围炉 ",
+    "defaultMessage": "在你的围炉",
     "description": ""
   },
   "xGh9O7": {
