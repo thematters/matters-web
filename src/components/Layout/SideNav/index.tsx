@@ -1,4 +1,4 @@
-import VisuallyHidden from '@reach/visually-hidden'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import Link from 'next/link'
 import { useContext } from 'react'
 import FocusLock from 'react-focus-lock'
