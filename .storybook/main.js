@@ -1,18 +1,17 @@
 const tsconfig = require('../tsconfig.json')
 const path = require('path')
 const { mergeWithCustomize } = require('webpack-merge')
-
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
-    'storybook-addon-next',
+    '@storybook/addon-mdx-gfm',
   ],
-  framework: '@storybook/react',
-  core: {
-    builder: 'webpack5',
+  framework: {
+    name: '@storybook/nextjs',
+    options: {},
   },
   /*
     Next.js automatically supports the tsconfig.json "paths" and "baseUrl"
@@ -23,11 +22,11 @@ module.exports = {
     config.module.rules = config.module.rules.filter(
       (it) => it.test && it.test.toString() !== '/\\.css$/'
     )
-
     config.module.rules.push({
-      resolve: { fullySpecified: false },
+      resolve: {
+        fullySpecified: false,
+      },
     })
-
     const newConfig = mergeWithCustomize({
       customizeArray(a, b, key) {
         if (key === 'module.rules') {
@@ -67,9 +66,8 @@ module.exports = {
         resolve: {
           alias: Object.entries(tsconfig.compilerOptions.paths)
             /*
-              @see https://webpack.js.org/configuration/resolve/#resolvealias
-             */
-            .map((pair) => [
+          @see https://webpack.js.org/configuration/resolve/#resolvealias
+         */ .map((pair) => [
               pair[0].replace('/*', ''),
               path.join(
                 path.dirname(require.resolve('../tsconfig.json')),
@@ -78,13 +76,15 @@ module.exports = {
               ),
             ])
             .reduce(
-              (acc, [key, value]) => Object.assign(acc, { [key]: value }),
+              (acc, [key, value]) =>
+                Object.assign(acc, {
+                  [key]: value,
+                }),
               {}
             ),
         },
       }
     )
-
     return newConfig
   },
   /*
@@ -100,5 +100,8 @@ module.exports = {
     //   propFilter: (prop) =>
     //     prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     // },
+  },
+  docs: {
+    autodocs: true,
   },
 }
