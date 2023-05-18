@@ -9,7 +9,6 @@ import ArticleTagNotice from './ArticleTagNotice'
 import CircleNotice from './CircleNotice'
 import CommentCommentNotice from './CommentCommentNotice'
 import CommentNotice from './CommentNotice'
-import CryptoNotice from './CryptoNotice'
 import OfficialAnnouncementNotice from './OfficialAnnouncementNotice'
 import TagNotice from './TagNotice'
 import TransactionNotice from './TransactionNotice'
@@ -65,7 +64,6 @@ const fragments = {
     ${TagNotice.fragments.notice}
     ${TransactionNotice.fragments.notice}
     ${CircleNotice.fragments.notice}
-    ${CryptoNotice.fragments.notice}
     ${OfficialAnnouncementNotice.fragments.notice}
   `,
 }
@@ -92,8 +90,6 @@ export const Notice: React.FC<NoticeProps> & {
       return <TransactionNotice notice={notice} />
     case 'CircleNotice':
       return <CircleNotice notice={notice} />
-    case 'CryptoNotice':
-      return <CryptoNotice notice={notice} />
     case 'OfficialAnnouncementNotice':
       return <OfficialAnnouncementNotice notice={notice} />
     default:
