@@ -1,4 +1,4 @@
-import { ResponsiveWrapper } from '@/src/components'
+import { ResponsiveWrapper } from '~/components'
 
 import Maintainers from './Maintainers'
 import Participants from './Participants'

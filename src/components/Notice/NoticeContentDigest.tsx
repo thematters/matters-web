@@ -1,3 +1,4 @@
+import { TEST_ID } from '~/common/enums'
 import { stripHtml } from '~/common/utils'
 
 import styles from './styles.css'
@@ -9,7 +10,10 @@ const NoticeContentDigest = ({ content }: { content: string }) => {
   )
 
   return (
-    <section className="notice-content-digest">
+    <section
+      className="notice-content-digest"
+      data-test-id={TEST_ID.NOTICE_COMMENT_CONTENT}
+    >
       {collapseContent}
       <style jsx>{styles}</style>
     </section>

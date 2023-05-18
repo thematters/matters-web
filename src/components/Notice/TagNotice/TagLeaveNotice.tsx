@@ -19,7 +19,7 @@ const TagLeaveNotice = ({ notice }: { notice: TagLeaveNoticeFragment }) => {
   const actor = notice.actors[0]
 
   return (
-    <section className="container" data-test-id={TEST_ID.TAG_LEAVE}>
+    <section className="container" data-test-id={TEST_ID.NOTICE_TAG_LEAVE}>
       <section className="avatar-wrap">
         <NoticeActorAvatar user={actor} />
       </section>

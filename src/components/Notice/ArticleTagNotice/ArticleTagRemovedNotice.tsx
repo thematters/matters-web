@@ -29,7 +29,7 @@ const ArticleTagRemovedNotice = ({
           }}
         />
       }
-      testId={TEST_ID.ARTICLE_TAG_REMOVED}
+      testId={TEST_ID.NOTICE_ARTICLE_TAG_REMOVED}
     />
   )
 }

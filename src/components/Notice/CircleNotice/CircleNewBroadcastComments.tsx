@@ -78,7 +78,7 @@ const CircleNewBroadcastComments = ({
             </LinkWrapper>
           ) : undefined
         }
-        testId={TEST_ID.CIRCLE_NEW_BROADCAST_COMMENTS}
+        testId={TEST_ID.NOTICE_CIRCLE_NEW_BROADCAST_COMMENTS}
       />
     )
   }
@@ -125,7 +125,7 @@ const CircleNewBroadcastComments = ({
           </LinkWrapper>
         ) : undefined
       }
-      testId={TEST_ID.CIRCLE_NEW_BROADCAST_COMMENTS}
+      testId={TEST_ID.NOTICE_CIRCLE_NEW_BROADCAST_COMMENTS}
     />
   )
 }

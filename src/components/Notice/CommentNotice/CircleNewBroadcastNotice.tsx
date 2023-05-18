@@ -51,7 +51,7 @@ const CircleNewBroadcastNotice = ({
           description="src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
         />
       }
-      testId={TEST_ID.CIRCLE_NEW_BROADCAST}
+      testId={TEST_ID.NOTICE_CIRCLE_NEW_BROADCAST}
       content={<NoticeComment comment={notice.comment} />}
     />
   )

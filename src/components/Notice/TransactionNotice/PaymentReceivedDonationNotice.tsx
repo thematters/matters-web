@@ -39,7 +39,7 @@ const PaymentReceivedDonationNotice = ({
             &nbsp;
             <span
               className="highlight"
-              data-test-id={TEST_ID.PAYMENT_RECEIVE_DONATION_AMOUNT}
+              data-test-id={TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION_AMOUNT}
             >
               {tx.amount} {tx.currency}
             </span>
@@ -48,7 +48,7 @@ const PaymentReceivedDonationNotice = ({
         )) ||
         ''
       }
-      testId={TEST_ID.PAYMENT_RECEIVE_DONATION}
+      testId={TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION}
     />
   )
 }

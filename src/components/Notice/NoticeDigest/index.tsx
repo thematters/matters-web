@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { ReactElement } from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import {
   ArticleNewAppreciationNoticeFragment,
   ArticleNewCollectedNoticeFragment,
@@ -15,8 +16,7 @@ import {
   PaymentReceivedDonationNoticeFragment,
   TagAddEditorNoticeFragment,
   UserNewFollowerNoticeFragment,
-} from '@/src/gql/graphql'
-import { TEST_ID } from '~/common/enums'
+} from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorsNameAndTitle from '../NoticeActorsNameAndTitle'
