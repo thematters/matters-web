@@ -122,6 +122,7 @@ tsconfig.tsbuildinfo
 
 # playwright test result
 /test-results/
+/test-storage-state/
 /playwright-report/
 /playwright/.cache/
 
