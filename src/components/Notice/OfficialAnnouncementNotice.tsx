@@ -4,7 +4,6 @@ import { TEST_ID } from '~/common/enums'
 import { OfficialAnnouncementNoticeFragment } from '~/gql/graphql'
 
 import NoticeDate from './NoticeDate'
-import NoticeTypeIcon from './NoticeTypeIcon'
 import styles from './styles.css'
 
 const OfficialAnnouncementNotice = ({
@@ -16,10 +15,6 @@ const OfficialAnnouncementNotice = ({
 
   return (
     <section className="container" data-test-id={TEST_ID.OFFICIAL_ANNOUNCEMENT}>
-      <section className="avatar-wrap">
-        <NoticeTypeIcon type="volume" />
-      </section>
-
       <section className="content-wrap">
         {notice.link ? (
           <a href={notice.link}>
@@ -28,7 +23,8 @@ const OfficialAnnouncementNotice = ({
         ) : (
           <Message />
         )}
-
+      </section>
+      <section className="footer">
         <NoticeDate notice={notice} />
       </section>
 
