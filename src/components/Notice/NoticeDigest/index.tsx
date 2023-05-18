@@ -62,10 +62,7 @@ const NoticeDigest = ({
     return null
   }
 
-  // FIXME: Just for Dev
   let actors = extendActors || notice.actors
-  // actors = [...actors, ...actors, ...actors, ...actors]
-  // actors = [...actors, ...actors, ...actors, ...actors, ...actors]
 
   const actorsCount = actors.length
   const isMultiActors = actorsCount > 1
