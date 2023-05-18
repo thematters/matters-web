@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { toPath } from '~/common/utils'
 import { NoticeActorNameUserFragment } from '~/gql/graphql'
 
+import styles from './styles.css'
+
 const NoticeActorName = ({
   user,
 }: {
@@ -20,7 +22,10 @@ const NoticeActorName = ({
 
   return (
     <Link {...path}>
-      <a>{user.displayName}</a>
+      <a className="display-name">
+        {user.displayName}
+        <style jsx>{styles}</style>
+      </a>
     </Link>
   )
 }

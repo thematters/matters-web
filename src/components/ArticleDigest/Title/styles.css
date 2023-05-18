@@ -44,3 +44,11 @@
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
 }
+
+.line-clamp-line-1 {
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-line-3 {
+  -webkit-line-clamp: 3;
+}

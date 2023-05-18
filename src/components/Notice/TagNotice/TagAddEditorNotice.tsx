@@ -6,44 +6,28 @@ import { TagAddEditorNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
+import NoticeDigest from '../NoticeDigest'
 import NoticeTag from '../NoticeTag'
-import styles from '../styles.css'
 
 const TagAddEditorNotice = ({
   notice,
 }: {
   notice: TagAddEditorNoticeFragment
 }) => {
-  if (!notice.actors) {
-    return null
-  }
-
-  const actor = notice.actors[0]
-
   return (
-    <section className="container" data-test-id={TEST_ID.TAG_ADD_EDITOR}>
-      <section className="avatar-wrap">
-        <NoticeActorAvatar user={actor} />
-      </section>
-
-      <section className="content-wrap">
-        <NoticeHead>
-          <NoticeActorName user={actor} />
-          <FormattedMessage
-            defaultMessage="invites you to become a collaborator"
-            description="src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
-          />
-        </NoticeHead>
-
-        <NoticeTag tag={notice.tag} />
-
-        <NoticeDate notice={notice} />
-      </section>
-
-      <style jsx>{styles}</style>
-    </section>
+    <NoticeDigest
+      notice={notice}
+      action={
+        <FormattedMessage
+          defaultMessage="invites you to {tag} collaborator"
+          description="src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
+          values={{
+            tag: <NoticeTag tag={notice.tag} />,
+          }}
+        />
+      }
+      testId={TEST_ID.TAG_ADD_EDITOR}
+    />
   )
 }
 
