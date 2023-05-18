@@ -5,6 +5,7 @@ export enum TEST_ID {
   DIGEST_ARTICLE_CARD = 'digest/article/card',
   DIGEST_ARTICLE_FEED = 'digest/article/feed',
   DIGEST_ARTICLE_FEED_FOOTER_PIN = 'digest/article/feed/footer/pin',
+  DIGEST_ARTICLE_NOTICE = 'digest/article/notice',
   DIGEST_ARTICLE_SIDEBAR = 'digest/article/sidebar',
   DIGEST_ARTICLE_TITLE = 'digest/article/title',
   DIGEST_USER_MINI = 'digest/user/mini',

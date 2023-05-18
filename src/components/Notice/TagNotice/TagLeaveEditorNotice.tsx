@@ -6,48 +6,28 @@ import { TagLeaveEditorNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
+import NoticeDigest from '../NoticeDigest'
 import NoticeTag from '../NoticeTag'
-import styles from '../styles.css'
 
 const TagLeaveEditorNotice = ({
   notice,
 }: {
   notice: TagLeaveEditorNoticeFragment
 }) => {
-  if (!notice.actors) {
-    return null
-  }
-
-  const actor = notice.actors[0]
-
   return (
-    <section className="container" data-test-id={TEST_ID.TAG_LEAVE_EDITOR}>
-      <section className="avatar-wrap">
-        <NoticeActorAvatar user={actor} />
-      </section>
-
-      <section className="content-wrap">
-        <NoticeHead>
-          <FormattedMessage
-            defaultMessage="uh-oh,"
-            description="src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
-          />
-          <NoticeActorName user={actor} />
-          <FormattedMessage
-            defaultMessage="resigned as tag collaborator. You can invite new collaborators to join"
-            description="src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
-          />
-        </NoticeHead>
-
-        <NoticeTag tag={notice.tag} />
-
-        <NoticeDate notice={notice} />
-      </section>
-
-      <style jsx>{styles}</style>
-    </section>
+    <NoticeDigest
+      notice={notice}
+      action={
+        <FormattedMessage
+          defaultMessage="resigned from {tag} collaborator"
+          description="src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+          values={{
+            tag: <NoticeTag tag={notice.tag} />,
+          }}
+        />
+      }
+      testId={TEST_ID.TAG_LEAVE_EDITOR}
+    />
   )
 }
 
