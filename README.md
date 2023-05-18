@@ -6,6 +6,7 @@
 
 ### Start local dev
 
+- Install [commitizen](https://github.com/commitizen/cz-cli) globally: `npm install commitizen -g`
 - Install dependencies: `npm i`
 - Environment variables: `cp .env.local.example .env.local`
 - Run `npm run gen:type`
