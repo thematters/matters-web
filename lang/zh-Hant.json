@@ -139,10 +139,6 @@
     "defaultMessage": "你尚無權限進行該操作",
     "description": ""
   },
-  "lgdIdr": {
-    "defaultMessage": "眾聊中發表話題",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "5sg7KC": {
     "defaultMessage": "密碼",
     "description": ""
@@ -198,10 +194,6 @@
   "9nNpKP": {
     "defaultMessage": "討論已送出",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
-  },
-  "A3LOng": {
-    "defaultMessage": " 眾聊中回覆話題 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "A3rLZt": {
     "defaultMessage": "最近 {months} 個月",
@@ -307,9 +299,25 @@
     "defaultMessage": "創作了 ",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
+  "FVXRzf": {
+    "defaultMessage": "在你的圍爐中留言提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "UOsB5W": {
+    "defaultMessage": "在 {circleName} 中留言提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "DomTeU": {
+    "defaultMessage": "在 {circleName} 中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
   "EwVnoC": {
     "defaultMessage": "我已閱讀並同意",
     "description": ""
+  },
+  "EKsPGS": {
+    "defaultMessage": "在你的圍爐中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "EZMrtJ": {
     "defaultMessage": "在 {circleName} 的廣播中留言 ",
@@ -389,10 +397,6 @@
   },
   "J+dIsA": {
     "defaultMessage": "訂閱",
-    "description": ""
-  },
-  "J3yk6u": {
-    "defaultMessage": "在圍爐 ",
     "description": ""
   },
   "tEeEJT": {
@@ -1127,10 +1131,6 @@
     "defaultMessage": "連接加密錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
-  "tQsujN": {
-    "defaultMessage": " 眾聊中回覆話題，其中有提及你 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "tW3hM/": {
     "defaultMessage": "圍爐描述",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
@@ -1154,10 +1154,6 @@
   "cAP9g5": {
     "defaultMessage": "將你的評論在 {commentArticle} 中置頂",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
-  },
-  "uuEGON": {
-    "defaultMessage": " 眾聊中發表與回覆話題，其中有提及你 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "uw32VR": {
     "defaultMessage": "教學指南",
@@ -1189,10 +1185,6 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部",
-    "description": ""
-  },
-  "wqaNK4": {
-    "defaultMessage": "在你的圍爐",
     "description": ""
   },
   "xGh9O7": {

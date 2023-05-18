@@ -351,10 +351,6 @@
     "defaultMessage": " days for free. Try it and have fun!",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
-  "J3yk6u": {
-    "defaultMessage": "in circle",
-    "description": ""
-  },
   "EZMrtJ": {
     "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -366,6 +362,22 @@
   "XQTBu6": {
     "defaultMessage": "mentioned you in your circle broadcast comment",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "FVXRzf": {
+    "defaultMessage": "mentioned you in your circle conversation comment",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "DomTeU": {
+    "defaultMessage": "commented in {circleName} conversation",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "UOsB5W": {
+    "defaultMessage": "mentioned you in {circleName} conversation comment",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "EKsPGS": {
+    "defaultMessage": "commented in your circle conversation",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "r66dXx": {
     "defaultMessage": "mentioned you in broadcast comment in {circleName}",
@@ -395,32 +407,8 @@
     "defaultMessage": " commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
-  "lgdIdr": {
-    "defaultMessage": "started a new conversation",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "A3LOng": {
-    "defaultMessage": " replied to topics ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "ftD7Hy": {
     "defaultMessage": " mentioned you ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "g/L3Fm": {
-    "defaultMessage": " posted and replied to topics ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "GBm/sD": {
-    "defaultMessage": " posted a new topic and mentioned you ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "tQsujN": {
-    "defaultMessage": " replied to topics and mentioned you ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "uuEGON": {
-    "defaultMessage": " posted and replied to topics and mentioned you ",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "hk2aiz": {
@@ -466,10 +454,6 @@
   "/3G89K": {
     "defaultMessage": " is growing",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
-  },
-  "wqaNK4": {
-    "defaultMessage": "in your circle",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "8PWD05": {
     "defaultMessage": "invites you to {tag} collaborator",

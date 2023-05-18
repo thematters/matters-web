@@ -139,10 +139,6 @@
     "defaultMessage": "你尚无权限进行该操作",
     "description": ""
   },
-  "lgdIdr": {
-    "defaultMessage": "众聊中发表话题",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "5sg7KC": {
     "defaultMessage": "密码",
     "description": ""
@@ -198,10 +194,6 @@
   "9nNpKP": {
     "defaultMessage": "讨论已送出",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
-  },
-  "A3LOng": {
-    "defaultMessage": " 众聊中回复话题 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "A3rLZt": {
     "defaultMessage": "最近 {months} 个月",
@@ -335,10 +327,6 @@
     "defaultMessage": "免费资格时长",
     "description": ""
   },
-  "GBm/sD": {
-    "defaultMessage": " 众聊中发表话题，其中有提及你 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "GRtGnZ": {
     "defaultMessage": "辞去权限",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -389,10 +377,6 @@
   },
   "J+dIsA": {
     "defaultMessage": "订阅",
-    "description": ""
-  },
-  "J3yk6u": {
-    "defaultMessage": "在围炉 ",
     "description": ""
   },
   "tEeEJT": {
@@ -699,9 +683,25 @@
     "defaultMessage": "在 {circleName} 的广播留言中提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "FVXRzf": {
+    "defaultMessage": "在你的围炉中留言提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "UOsB5W": {
+    "defaultMessage": "在 {circleName} 中留言提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "DomTeU": {
+    "defaultMessage": "在 {circleName} 中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
   "Y+spJC": {
     "defaultMessage": "在你的围炉中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "EKsPGS": {
+    "defaultMessage": "在你的围炉中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "XQTBu6": {
     "defaultMessage": "在你的围炉广播中留言提及你",
@@ -1127,10 +1127,6 @@
     "defaultMessage": "连接加密钱包",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
-  "tQsujN": {
-    "defaultMessage": " 众聊中回复话题，其中有提及你 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "tW3hM/": {
     "defaultMessage": "围炉描述",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
@@ -1154,10 +1150,6 @@
   "cAP9g5": {
     "defaultMessage": "将你的评论在 {commentArticle} 中置顶",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
-  },
-  "uuEGON": {
-    "defaultMessage": " 众聊中发表与回复话题，其中有提及你 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "uw32VR": {
     "defaultMessage": "教学指南",
@@ -1189,10 +1181,6 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部",
-    "description": ""
-  },
-  "wqaNK4": {
-    "defaultMessage": "在你的围炉",
     "description": ""
   },
   "xGh9O7": {

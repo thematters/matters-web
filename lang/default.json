@@ -171,10 +171,6 @@
     "defaultMessage": "Discussion sent",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
-  "A3LOng": {
-    "defaultMessage": "replied to topics",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "A3rLZt": {
     "defaultMessage": "Last {months} months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -263,9 +259,17 @@
     "defaultMessage": "Read counts indicates how many registered users read.",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
+  "DomTeU": {
+    "defaultMessage": "commented in {circleName} conversation",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.",
     "description": ""
+  },
+  "EKsPGS": {
+    "defaultMessage": "commented in your circle conversation",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "EQeKnO": {
     "defaultMessage": "Manage Invitation",
@@ -295,6 +299,10 @@
     "defaultMessage": "No members yet",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
   },
+  "FVXRzf": {
+    "defaultMessage": "mentioned you in your circle conversation comment",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -310,10 +318,6 @@
   "FmWYRt": {
     "defaultMessage": "Free trial period",
     "description": ""
-  },
-  "GBm/sD": {
-    "defaultMessage": "posted a new topic and mentioned you",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "GRtGnZ": {
     "defaultMessage": "Resign From Maintainer",
@@ -369,10 +373,6 @@
   },
   "J+dIsA": {
     "defaultMessage": "Subscriptions",
-    "description": ""
-  },
-  "J3yk6u": {
-    "defaultMessage": "in circle",
     "description": ""
   },
   "Jc+W6M": {
@@ -574,6 +574,10 @@
   "UOdEqi": {
     "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "UOsB5W": {
+    "defaultMessage": "mentioned you in {circleName} conversation comment",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "UgvfcU": {
     "defaultMessage": "You have successfully completed Ethereum wallet settings. Please confirm wallet address:",
@@ -803,14 +807,6 @@
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "ftD7Hy": {
-    "defaultMessage": "mentioned you",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "g/L3Fm": {
-    "defaultMessage": "posted and replied to topics",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "gMZfHO": {
     "defaultMessage": "RSS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -918,10 +914,6 @@
   "ldNgRA": {
     "defaultMessage": "Display name, can be changed later",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
-  },
-  "lgdIdr": {
-    "defaultMessage": "started a new conversation",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "lhaIoi": {
     "defaultMessage": "Enter Display Name",
@@ -1107,10 +1099,6 @@
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
-  "tQsujN": {
-    "defaultMessage": "replied to topics and mentioned you",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "tW3hM/": {
     "defaultMessage": "Description of the Circle",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
@@ -1130,10 +1118,6 @@
   "uVCg1l": {
     "defaultMessage": "Explore Matters",
     "description": ""
-  },
-  "uuEGON": {
-    "defaultMessage": "posted and replied to topics and mentioned you",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "uw32VR": {
     "defaultMessage": "tutorial",
@@ -1169,10 +1153,6 @@
   },
   "wbcwKd": {
     "defaultMessage": "View All",
-    "description": ""
-  },
-  "wqaNK4": {
-    "defaultMessage": "in your circle",
     "description": ""
   },
   "xGh9O7": {
