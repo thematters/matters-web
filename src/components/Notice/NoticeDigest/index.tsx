@@ -6,8 +6,14 @@ import {
   ArticleNewCollectedNoticeFragment,
   ArticleNewCommentNoticeFragment,
   ArticleNewSubscriberNoticeFragment,
+  ArticleTagAddedNoticeFragment,
+  CircleNewBroadcastNoticeFragment,
+  CircleNewDiscussionCommentsFragment,
+  CircleNewUserNoticeFragment,
   CommentMentionedYouNoticeFragment,
   CommentNewReplyNoticeFragment,
+  PaymentReceivedDonationNoticeFragment,
+  TagAddEditorNoticeFragment,
   UserNewFollowerNoticeFragment,
 } from '@/src/gql/graphql'
 import { TEST_ID } from '~/common/enums'
@@ -22,13 +28,20 @@ import styles from '../styles.css'
 
 type NoticeDigestProps = {
   notice:
+    | ArticleTagAddedNoticeFragment
     | ArticleNewSubscriberNoticeFragment
     | ArticleNewAppreciationNoticeFragment
     | ArticleNewCollectedNoticeFragment
     | ArticleNewCommentNoticeFragment
+    | CircleNewBroadcastNoticeFragment
+    | CircleNewDiscussionCommentsFragment
+    | CircleNewUserNoticeFragment
     | CommentMentionedYouNoticeFragment
     | CommentNewReplyNoticeFragment
+    | PaymentReceivedDonationNoticeFragment
     | UserNewFollowerNoticeFragment
+    | TagAddEditorNoticeFragment
+  actors?: any[]
   action: string | ReactElement
   secondAction?: string | ReactElement
   title?: string | ReactElement
@@ -38,6 +51,7 @@ type NoticeDigestProps = {
 
 const NoticeDigest = ({
   notice,
+  actors: extendActors,
   action,
   secondAction,
   title,
@@ -48,13 +62,13 @@ const NoticeDigest = ({
     return null
   }
 
-  const actorsCount = notice.actors.length
-  const isMultiActors = actorsCount > 1
-
   // FIXME: Just for Dev
-  let actors = notice.actors
+  let actors = extendActors || notice.actors
   // actors = [...actors, ...actors, ...actors, ...actors]
   // actors = [...actors, ...actors, ...actors, ...actors, ...actors]
+
+  const actorsCount = actors.length
+  const isMultiActors = actorsCount > 1
 
   return (
     <section

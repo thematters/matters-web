@@ -32,6 +32,8 @@
 
   & .footer {
     @mixin flex-center-end;
+
+    margin-top: var(--spacing-x-tight);
   }
 }
 
@@ -98,6 +100,16 @@
 
 .highlight {
   color: var(--color-matters-green);
+}
+
+/* NoticeCircleName */
+.circle-display-name {
+  color: var(--color-black);
+}
+
+/* NoticeTag */
+.tag-content {
+  color: var(--color-black);
 }
 
 /* NoticeMultiActors */

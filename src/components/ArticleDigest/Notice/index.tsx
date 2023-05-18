@@ -19,11 +19,7 @@ const fragments = {
   article: gql`
     fragment ArticleDigestNoticeArticle on Article {
       id
-      title
-      slug
-      mediaHash
       summary
-      content
       ...ArticleDigestTitleArticle
     }
     ${ArticleDigestTitle.fragments.article}
@@ -38,8 +34,7 @@ export const ArticleDigestNotice = ({
 
   ...cardProps
 }: ArticleDigestNoticeProps) => {
-  const { summary, content } = article
-  const hasSummary = summary !== ''
+  const { summary } = article
 
   const containerClasses = classNames({
     container: true,
@@ -63,10 +58,7 @@ export const ArticleDigestNotice = ({
             lineClamp={1}
           />
         </header>
-        <section className="content">
-          {hasSummary && summary}
-          {!hasSummary && content}
-        </section>
+        <section className="content">{summary}</section>
 
         <style jsx>{styles}</style>
       </section>

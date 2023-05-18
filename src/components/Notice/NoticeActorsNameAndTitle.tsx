@@ -21,14 +21,13 @@ const NoticeActorsNameAndTitle = ({
   title,
 }: NoticeActorsNameAndTitleProps) => {
   const actorsCount = actors.length
-  const isSingleActors = actorsCount === 1
+  const isSingleActor = actorsCount === 1
   const isDoubleActors = actorsCount === 2
   const isMoreActors = actorsCount > 3
-  console.log({ secondAction })
 
   return (
     <>
-      {isSingleActors && <NoticeActorName user={actors[0]} />}
+      {isSingleActor && <NoticeActorName user={actors[0]} />}
       {isDoubleActors &&
         actors.map((actor, index) => (
           <Fragment key={index}>
