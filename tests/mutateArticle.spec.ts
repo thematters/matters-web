@@ -69,7 +69,7 @@ test.describe('Mutate article', () => {
       await alicePage
         .getByTestId(TEST_ID.NOTICE_ARTICLE_NEW_APPRECIATION)
         .first()
-        .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
+        .getByTestId(TEST_ID.NOTICE_ARTICLE_TITLE)
         .first()
         .click()
       const aliceAppreciationAmount = await alicePage
