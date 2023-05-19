@@ -6,12 +6,16 @@ import { toPath } from '~/common/utils'
 import { Avatar } from '~/components/Avatar'
 import { NoticeActorAvatarUserFragment } from '~/gql/graphql'
 
-const NoticeActorAvatar = ({
+import styles from './styles.css'
+
+export type size = 'md' | 'lg'
+
+export const NoticeActorAvatar = ({
   user,
   size = 'lg',
 }: {
   user: NoticeActorAvatarUserFragment | null
-  size?: 'md' | 'lg'
+  size?: size
 }) => {
   if (!user) {
     return null
@@ -24,11 +28,12 @@ const NoticeActorAvatar = ({
 
   return (
     <Link {...path}>
-      <a>
+      <a title={user.displayName || ''} className="notice-actor-avatar">
         <VisuallyHidden>
           <span>{user.displayName}</span>
         </VisuallyHidden>
         <Avatar user={user} size={size} />
+        <style jsx>{styles}</style>
       </a>
     </Link>
   )

@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { toPath } from '~/common/utils'
 import { NoticeCircleNameFragment } from '~/gql/graphql'
 
+import styles from './styles.css'
+
 const NoticeCircleName = ({
   circle,
   path,
@@ -22,7 +24,10 @@ const NoticeCircleName = ({
 
   return (
     <Link {...(path || circlePath)}>
-      <a>{circle.displayName}</a>
+      <a className="circle-display-name">
+        {circle.displayName}
+        <style jsx>{styles}</style>
+      </a>
     </Link>
   )
 }

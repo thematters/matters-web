@@ -92,10 +92,9 @@ export const Notice: React.FC<NoticeProps> & {
       return <TransactionNotice notice={notice} />
     case 'CircleNotice':
       return <CircleNotice notice={notice} />
-    case 'CryptoNotice':
-      return <CryptoNotice notice={notice} />
     case 'OfficialAnnouncementNotice':
       return <OfficialAnnouncementNotice notice={notice} />
+    case 'CryptoNotice':
     default:
       return null
   }

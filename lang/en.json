@@ -4,7 +4,7 @@
     "description": "src/views/Help/index.tsx"
   },
   "k5NnNF": {
-    "defaultMessage": " followed you",
+    "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
   "/ns2st": {
@@ -255,12 +255,12 @@
     "defaultMessage": "Next",
     "description": ""
   },
-  "KZlRde": {
-    "defaultMessage": " replied to ",
+  "YlPCRU": {
+    "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
-  "/nu5ho": {
-    "defaultMessage": "replied to your comment on ",
+  "nNB7KU": {
+    "defaultMessage": "replied your comment in",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZUPQzl": {
@@ -295,12 +295,12 @@
     "defaultMessage": " broadcast and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
-  "uqmi/b": {
-    "defaultMessage": " pinned your comment on ",
+  "cAP9g5": {
+    "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
   "VjxGd7": {
-    "defaultMessage": " commented on ",
+    "defaultMessage": "commented on",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
   "U/Tqmx": {
@@ -315,8 +315,8 @@
     "defaultMessage": "",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
-  "qPPrzm": {
-    "defaultMessage": " supported your article ",
+  "vLEnrs": {
+    "defaultMessage": "supported",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
   "BjzRe8": {
@@ -336,7 +336,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "qYzBk8": {
-    "defaultMessage": " unsubscribed your circle",
+    "defaultMessage": "unsubscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "LW1aX1": {
@@ -351,16 +351,36 @@
     "defaultMessage": " days for free. Try it and have fun!",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
-  "J3yk6u": {
-    "defaultMessage": "in circle",
-    "description": ""
-  },
-  "FALWef": {
-    "defaultMessage": " commented in Broadcast",
+  "EZMrtJ": {
+    "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "YlxpJl": {
-    "defaultMessage": " Broadcast and mentioned you ",
+  "Y+spJC": {
+    "defaultMessage": "commented in your circle broadcast",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "XQTBu6": {
+    "defaultMessage": "mentioned you in your circle broadcast comment",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "FVXRzf": {
+    "defaultMessage": "mentioned you in your circle conversation comment",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "DomTeU": {
+    "defaultMessage": "commented in {circleName} conversation",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "UOsB5W": {
+    "defaultMessage": "mentioned you in {circleName} conversation comment",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "EKsPGS": {
+    "defaultMessage": "commented in your circle conversation",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "r66dXx": {
+    "defaultMessage": "mentioned you in broadcast comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "qQmSxu": {
@@ -371,8 +391,8 @@
     "defaultMessage": "You have successfully completed Ethereum wallet settings. Please confirm wallet address:",
     "description": "src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
   },
-  "+hfUcV": {
-    "defaultMessage": "sent a new broadcast on {circlename}",
+  "jy3tx0": {
+    "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
   "An0rpe": {
@@ -380,59 +400,35 @@
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "VO4Elt": {
-    "defaultMessage": " mentioned you in a comment on  {commentArticle}",
+    "defaultMessage": "mentioned you in a comment on {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "BHFHeY": {
     "defaultMessage": " commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
-  "5sAbzJ": {
-    "defaultMessage": " started a new topic ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "A3LOng": {
-    "defaultMessage": " replied to topics ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "ftD7Hy": {
     "defaultMessage": " mentioned you ",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
-  "g/L3Fm": {
-    "defaultMessage": " posted and replied to topics ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "GBm/sD": {
-    "defaultMessage": " posted a new topic and mentioned you ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "tQsujN": {
-    "defaultMessage": " replied to topics and mentioned you ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "uuEGON": {
-    "defaultMessage": " posted and replied to topics and mentioned you ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "hk2aiz": {
-    "defaultMessage": " followed your circle",
+    "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "mPe6DK": {
-    "defaultMessage": " subscribed your circle",
+    "defaultMessage": "subscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
-  "JIjMWL": {
-    "defaultMessage": "Your article has been published to decentralized network",
+  "tEeEJT": {
+    "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
   "sncOwi": {
     "defaultMessage": " mentioned you in an article",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
   },
-  "2eebTb": {
-    "defaultMessage": " bookmarked your article",
+  "CD688y": {
+    "defaultMessage": "bookmarked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
   "YIes/F": {
@@ -440,43 +436,51 @@
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
   "PjT72J": {
-    "defaultMessage": " liked your article",
+    "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
-  "4vkwo0": {
-    "defaultMessage": "Your article has been republished to decentralized network",
+  "gN4jLB": {
+    "defaultMessage": "Your work {articleTitle} has been republished to decentralized network",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "QV19cI": {
     "defaultMessage": "Failed to republish article",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
-  "euNJsE": {
-    "defaultMessage": "A new article has been added to the circle, read it now!",
+  "GVes61": {
+    "defaultMessage": "published in {circleName}",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
   "/3G89K": {
     "defaultMessage": " is growing",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
-  "wqaNK4": {
-    "defaultMessage": " in your circle ",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
-  "xwj01D": {
-    "defaultMessage": " invites you to become a collaborator",
+  "8PWD05": {
+    "defaultMessage": "invites you to {tag} collaborator",
     "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
   },
-  "t7ah39": {
-    "defaultMessage": " just became the maintainer of a tag your article is in. Check out more articles under this tag",
+  "CNbggD": {
+    "defaultMessage": "became the maintainer of {tag}",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+  },
+  "eJ131z": {
+    "defaultMessage": "resigned as the maintainer of {tag}",
     "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
   },
   "O03Rkc": {
     "defaultMessage": " resigned as tag collaborator. You can invite new collaborators to join",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
-  "dsBCfK": {
-    "defaultMessage": "uh-oh,",
+  "YUtHE9": {
+    "defaultMessage": "selected your work {articleTitle} to {tag} featured",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagAddedNotice.tsx"
+  },
+  "pCcbaC": {
+    "defaultMessage": "remove your work {articleTitle} from {tag}",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagRemovedNotice.tsx"
+  },
+  "DFieKt": {
+    "defaultMessage": "resigned from {tag} collaborator",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
   "Jc+W6M": {

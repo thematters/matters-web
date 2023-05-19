@@ -18,7 +18,7 @@ const RevisedArticleNotPublishedNotice = ({
   return (
     <section
       className="container"
-      data-test-id={TEST_ID.REVISED_ARTICLE_NOT_PUBLISHED}
+      data-test-id={TEST_ID.NOTICE_REVISED_ARTICLE_NOT_PUBLISHED}
     >
       <section className="avatar-wrap">
         <NoticeTypeIcon type="logo" />

@@ -103,7 +103,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       <link
         rel="search"
         title="Matters"
-        href="/static/opensearch.xml"
+        href="/opensearch.xml"
         type="application/opensearchdescription+xml"
         key="opensearch"
       />
@@ -207,7 +207,13 @@ export const Head: React.FC<HeadProps> = (props) => {
         content="yes"
       />
 
-      <link rel="manifest" key="manifest" href="/static/manifest.json" />
+      <link rel="manifest" key="manifest" href="/manifest.json" />
+
+      <meta
+        name="format-detection"
+        key="format-detection"
+        content="telephone=no"
+      />
 
       {/* DNS */}
       <link rel="dns-prefetch" href="https://www.gstatic.com" />

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestSidebar } from '~/components/ArticleDigest'
+import { ArticleDigestNotice } from '~/components/ArticleDigest'
 import { NoticeArticleCardFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
@@ -15,8 +15,8 @@ const NoticeArticleCard = ({
   }
 
   return (
-    <section className="sub-content">
-      <ArticleDigestSidebar article={article} hasCover={false} hasBackground />
+    <section className="notice-article-card">
+      <ArticleDigestNotice article={article} />
       <style jsx>{styles}</style>
     </section>
   )
@@ -26,9 +26,9 @@ NoticeArticleCard.fragments = {
   article: gql`
     fragment NoticeArticleCard on Article {
       id
-      ...ArticleDigestSidebarArticle
+      ...ArticleDigestNoticeArticle
     }
-    ${ArticleDigestSidebar.fragments.article}
+    ${ArticleDigestNotice.fragments.article}
   `,
 }
 

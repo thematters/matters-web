@@ -1,4 +1,4 @@
-import VisuallyHidden from '@reach/visually-hidden'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import React, { AriaAttributes, forwardRef, useContext } from 'react'
 import FocusLock from 'react-focus-lock'
 
