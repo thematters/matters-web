@@ -16,7 +16,7 @@ const CryptoWalletConnectedNotice = ({
   return (
     <section
       className="container"
-      data-test-id={TEST_ID.CRYPTO_WALLET_CONNECTED}
+      data-test-id={TEST_ID.NOTICE_CRYPTO_WALLET_CONNECTED}
     >
       <section className="avatar-wrap">
         <NoticeTypeIcon type="volume" />

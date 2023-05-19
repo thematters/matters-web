@@ -36,7 +36,7 @@ const CommentPinnedNotice = ({
         />
       }
       content={<NoticeComment comment={notice.comment} />}
-      testId={TEST_ID.COMMENT_PINNED}
+      testId={TEST_ID.NOTICE_COMMENT_PINNED}
     />
   )
 }

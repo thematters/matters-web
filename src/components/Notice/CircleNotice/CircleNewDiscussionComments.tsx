@@ -74,7 +74,7 @@ const CircleNewDiscussionComments = ({
             )}
           </>
         }
-        testId={TEST_ID.CIRCLE_NEW_DISCUSSION_COMMENTS}
+        testId={TEST_ID.NOTICE_CIRCLE_NEW_DISCUSSION_COMMENTS}
       />
     )
   }
@@ -114,7 +114,7 @@ const CircleNewDiscussionComments = ({
           )}
         </>
       }
-      testId={TEST_ID.CIRCLE_NEW_DISCUSSION_COMMENTS}
+      testId={TEST_ID.NOTICE_CIRCLE_NEW_DISCUSSION_COMMENTS}
     />
   )
 }

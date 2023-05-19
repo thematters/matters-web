@@ -26,7 +26,7 @@ const TagLeaveEditorNotice = ({
           }}
         />
       }
-      testId={TEST_ID.TAG_LEAVE_EDITOR}
+      testId={TEST_ID.NOTICE_TAG_LEAVE_EDITOR}
     />
   )
 }

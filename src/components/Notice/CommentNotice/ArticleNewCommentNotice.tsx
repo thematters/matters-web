@@ -39,7 +39,7 @@ const ArticleNewCommentNotice = ({
         ) : undefined
       }
       content={<NoticeComment comment={notice.comment} />}
-      testId={TEST_ID.ARTICLE_NEW_COMMENT}
+      testId={TEST_ID.NOTICE_ARTICLE_NEW_COMMENT}
     />
   )
 }

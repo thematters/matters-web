@@ -26,7 +26,7 @@ const TagAddEditorNotice = ({
           }}
         />
       }
-      testId={TEST_ID.TAG_ADD_EDITOR}
+      testId={TEST_ID.NOTICE_TAG_ADD_EDITOR}
     />
   )
 }

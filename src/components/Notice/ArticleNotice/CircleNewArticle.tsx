@@ -36,7 +36,7 @@ const CircleNewArticle = ({
         />
       }
       content={<NoticeArticleCard article={notice.article} />}
-      testId={TEST_ID.CIRCLE_NEW_ARTICLE}
+      testId={TEST_ID.NOTICE_CIRCLE_NEW_ARTICLE}
     />
   )
 }

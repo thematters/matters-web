@@ -79,7 +79,7 @@ test.describe('User Mutation', () => {
       const noticeUserNewFollowerDisplayName = await alicePage
         .getByTestId(TEST_ID.NOTICE_USER_NEW_FOLLOWER)
         .first()
-        .getByTestId(TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME)
+        .getByTestId(TEST_ID.NOTICE_USER_DISPLAY_NAME)
         .first()
         .innerText({
           // FIXME: notifications page is slow to fetch data since it's no-cache

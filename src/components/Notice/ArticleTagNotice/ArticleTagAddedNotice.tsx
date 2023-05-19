@@ -29,7 +29,7 @@ const ArticleTagAddedNotice = ({
           }}
         />
       }
-      testId={TEST_ID.ARTICLE_TAG_ADDED}
+      testId={TEST_ID.NOTICE_ARTICLE_TAG_ADDED}
     />
   )
 }

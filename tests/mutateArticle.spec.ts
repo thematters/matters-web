@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test'
 import _random from 'lodash/random'
 
-import { sleep } from '@/src/common/utils/time'
 import { TEST_ID } from '~/common/enums'
 import { stripSpaces } from '~/common/utils/text'
+import { sleep } from '~/common/utils/time'
 
 import { publishDraft } from './common'
 import {
@@ -55,9 +55,9 @@ test.describe('Mutate article', () => {
 
       // [Alice] Expect it has "liked your article" notice
       const noticeReceiveArtileTitle = await alicePage
-        .getByTestId(TEST_ID.ARTICLE_NEW_APPRECIATION)
+        .getByTestId(TEST_ID.NOTICE_ARTICLE_NEW_APPRECIATION)
         .first()
-        .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
+        .getByTestId(TEST_ID.NOTICE_ARTICLE_TITLE)
         .first()
         .innerText({
           // FIXME: notifications page is slow to fetch data since it's no-cache
@@ -67,7 +67,7 @@ test.describe('Mutate article', () => {
 
       // [Alice] Check Appreciation count
       await alicePage
-        .getByTestId(TEST_ID.ARTICLE_NEW_APPRECIATION)
+        .getByTestId(TEST_ID.NOTICE_ARTICLE_NEW_APPRECIATION)
         .first()
         .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
         .first()

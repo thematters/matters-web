@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { sleep } from '@/src/common/utils/time'
+import { sleep } from '~/common/utils/time'
 import { TEST_ID } from '~/common/enums'
 
 import {

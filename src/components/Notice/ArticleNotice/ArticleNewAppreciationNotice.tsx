@@ -26,7 +26,7 @@ const ArticleNewAppreciationNotice = ({
         />
       }
       title={<NoticeArticleTitle article={notice.article} />}
-      testId={TEST_ID.ARTICLE_NEW_APPRECIATION}
+      testId={TEST_ID.NOTICE_ARTICLE_NEW_APPRECIATION}
     />
   )
 }
