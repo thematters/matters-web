@@ -24,7 +24,10 @@ const CircleInvitationNotice = ({
   const actor = notice.actors[0]
 
   return (
-    <section className="container" data-test-id={TEST_ID.CIRCLE_INVITATION}>
+    <section
+      className="container"
+      data-test-id={TEST_ID.NOTICE_CIRCLE_INVITATION}
+    >
       <section className="avatar-wrap">
         <NoticeTypeIcon type="circle" />
       </section>

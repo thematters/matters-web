@@ -42,9 +42,9 @@ test.describe('Comment to article', () => {
 
       // [Alice] Expect it has "article new comment" notice
       const noticeArticleNewCommentContent = await alicePage
-        .getByTestId(TEST_ID.ARTICLE_NEW_COMMENT)
+        .getByTestId(TEST_ID.NOTICE_ARTICLE_NEW_COMMENT)
         .first()
-        .getByTestId(TEST_ID.COMMENT_CONETNT)
+        .getByTestId(TEST_ID.NOTICE_COMMENT_CONTENT)
         .first()
         .innerText({
           // FIXME: notifications page is slow to fetch data since it's no-cache

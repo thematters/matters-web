@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 
-import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { LinkWrapper } from '~/components'
 import CommentContent from '~/components/Comment/Content'
@@ -67,7 +66,7 @@ const NoticeComment = ({
 
   return (
     <LinkWrapper {...path}>
-      <section data-test-id={TEST_ID.DIGEST_COMMENT_NOTICE}>
+      <section>
         <NoticeContentDigest content={comment.content || ''} />
       </section>
     </LinkWrapper>

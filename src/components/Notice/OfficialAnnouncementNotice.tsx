@@ -14,7 +14,10 @@ const OfficialAnnouncementNotice = ({
   const Message = () => <p>{notice.message}</p>
 
   return (
-    <section className="container" data-test-id={TEST_ID.OFFICIAL_ANNOUNCEMENT}>
+    <section
+      className="container"
+      data-test-id={TEST_ID.NOTICE_OFFICIAL_ANNOUNCEMENT}
+    >
       <section className="content-wrap">
         {notice.link ? (
           <a href={notice.link}>

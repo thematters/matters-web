@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { TEST_ID } from '@/src/common/enums'
+import { TEST_ID } from '~/common/enums'
 import { normalizeTag, toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,

@@ -60,9 +60,9 @@ test.describe('Support article', () => {
 
       // [Alice] Expect it has "article new donation" notice
       const noticeReceiveDonationAmount = await alicePage
-        .getByTestId(TEST_ID.PAYMENT_RECEIVE_DONATION)
+        .getByTestId(TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION)
         .first()
-        .getByTestId(TEST_ID.PAYMENT_RECEIVE_DONATION_AMOUNT)
+        .getByTestId(TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION_AMOUNT)
         .first()
         .innerText({
           // FIXME: notifications page is slow to fetch data since it's no-cache

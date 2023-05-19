@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { NoticeActorNameUserFragment } from '~/gql/graphql'
 
@@ -22,7 +23,10 @@ const NoticeActorName = ({
 
   return (
     <Link {...path}>
-      <a className="display-name">
+      <a
+        className="display-name"
+        data-test-id={TEST_ID.NOTICE_USER_DISPLAY_NAME}
+      >
         {user.displayName}
         <style jsx>{styles}</style>
       </a>

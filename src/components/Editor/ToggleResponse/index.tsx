@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { TEST_ID } from '@/src/common/enums'
+import { TEST_ID } from '~/common/enums'
 import {
   IconChecked,
   IconUnChecked,

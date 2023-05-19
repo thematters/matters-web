@@ -1,7 +1,7 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import React from 'react'
 
-import { TEST_ID } from '@/src/common/enums'
+import { TEST_ID } from '~/common/enums'
 import { AvatarSize, CommentFormType, Media, UserDigest } from '~/components'
 import {
   FeedCommentPrivateFragment,

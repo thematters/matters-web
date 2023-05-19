@@ -170,7 +170,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
       <TagCover tag={tag} />
 
       <section className="info">
-        {features.tag_adoption && <Owner tag={tag} />}
+        {features.NOTICE_TAG_ADOPTION && <Owner tag={tag} />}
 
         <section className="top">
           <section className="statistics">
