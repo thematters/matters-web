@@ -647,16 +647,8 @@
     "defaultMessage": "Account Banned",
     "description": "src/components/UserProfile/index.tsx"
   },
-  "EoNvLu": {
-    "defaultMessage": "",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "NG8uih": {
     "defaultMessage": "articles",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
-  "UxfPXa": {
-    "defaultMessage": "",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "Ic4hqD": {

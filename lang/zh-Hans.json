@@ -295,10 +295,6 @@
     "defaultMessage": "验证码",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "EoNvLu": {
-    "defaultMessage": "创作了 ",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "EwVnoC": {
     "defaultMessage": "我已阅读并同意",
     "description": ""
@@ -602,10 +598,6 @@
   "UjKkhq": {
     "defaultMessage": "作品已添加标签",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
-  },
-  "UxfPXa": {
-    "defaultMessage": "累积创作 ",
-    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "VO4Elt": {
     "defaultMessage": "在 {commentArticle} 的评论中提及你",
