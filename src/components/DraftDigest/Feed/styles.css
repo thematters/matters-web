@@ -1,7 +1,5 @@
-footer {
+.container {
   @mixin flex-center-space-between;
-
-  margin-top: var(--spacing-x-tight);
 
   & .left,
   & .right {
@@ -9,6 +7,24 @@ footer {
 
     & :global(> * + *) {
       padding-left: var(--spacing-loose);
+    }
+  }
+
+  & .left {
+    & :global(.title) {
+      @mixin line-clamp;
+
+      -webkit-line-clamp: 2;
+    }
+  }
+}
+
+.delete-button {
+  & :global(svg) {
+    @mixin transition;
+
+    &:hover {
+      color: var(--color-red);
     }
   }
 }

@@ -3,10 +3,8 @@ import { useContext } from 'react'
 
 import { ADD_TOAST } from '~/common/enums'
 import {
-  Button,
   Dialog,
-  IconDraftDelete12,
-  TextIcon,
+  IconTrash24,
   Translate,
   useDialogSwitch,
   useMutation,
@@ -14,6 +12,7 @@ import {
 import { DeleteButtonDraftFragment, DeleteDraftMutation } from '~/gql/graphql'
 
 import { DraftsContext } from '../../../views/Me/Drafts/context'
+import styles from './styles.css'
 
 interface DeleteButtonProps {
   draft: DeleteButtonDraftFragment
@@ -68,21 +67,10 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
 
   return (
     <>
-      <Button
-        spacing={[0, 'xtight']}
-        size={[null, '1.25rem']}
-        bgColor="grey-lighter"
-        onClick={openDialog}
-      >
-        <TextIcon
-          icon={<IconDraftDelete12 size="xs" />}
-          size="xs"
-          color="grey-dark"
-          weight="md"
-        >
-          <Translate id="delete" />
-        </TextIcon>
-      </Button>
+      <button onClick={openDialog} className="delete-button">
+        <IconTrash24 size="md" color="grey" />
+        <style jsx>{styles}</style>
+      </button>
 
       <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         <Dialog.Header
