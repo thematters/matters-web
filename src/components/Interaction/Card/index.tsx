@@ -16,8 +16,8 @@ import { LanguageContext } from '~/components'
 
 import styles from './styles.css'
 
-export type CardBgColor = 'grey-lighter' | 'white' | 'none'
-export type CardBgHoverColor = 'grey-lighter' | 'none'
+export type CardBgColor = 'grey-lighter' | 'white' | 'transparent' | 'none'
+export type CardBgHoverColor = 'grey-lighter' | 'transparent' | 'none'
 export type CardSpacing = 0 | 'xtight' | 'tight' | 'base' | 'loose'
 export type CardBorderColor = 'grey-lighter' | 'line-grey-light' | 'green'
 export type CardBorderRadius = 'xtight' | 'xxtight' | 'base' | 'loose'
