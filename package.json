@@ -3,7 +3,7 @@
   "version": "4.21.0",
   "description": "codebase of Matters' website",
   "sideEffects": false,
-  "author": "Matters <hi@matters.news>",
+  "author": "Matters <hi@matters.town>",
   "engines": {
     "node": ">=16.14 <17.0"
   },
@@ -22,8 +22,8 @@
     "lint:ts:fix": "next lint --fix",
     "lint:css": "stylelint 'src/**/*.css'",
     "analyze": "ANALYZE=true next build",
-    "gen:type": "GRAPHQL_SCHEMA_URL=https://server-develop.matters.news/graphql graphql-codegen --config codegen.ts",
-    "gen:type:prod": "GRAPHQL_SCHEMA_URL=https://server.matters.news/graphql graphql-codegen --config codegen.ts",
+    "gen:type": "GRAPHQL_SCHEMA_URL=https://server-develop.matters.town/graphql graphql-codegen --config codegen.ts",
+    "gen:type:prod": "GRAPHQL_SCHEMA_URL=https://server.matters.town/graphql graphql-codegen --config codegen.ts",
     "gen:fragmentTypes": "node bin/buildFragmentTypes.js",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
