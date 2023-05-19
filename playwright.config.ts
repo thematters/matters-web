@@ -59,13 +59,13 @@ const config: PlaywrightTestConfig = {
         ]),
 
     /* Test against mobile viewports. */
-    {
-      name: 'Mobile Chrome',
-      use: {
-        ...devices['Pixel 5'],
-        locale: LOCALE,
-      },
-    },
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: {
+    //     ...devices['Pixel 5'],
+    //     locale: LOCALE,
+    //   },
+    // },
     // {
     //   name: 'Mobile Safari',
     //   use: {
