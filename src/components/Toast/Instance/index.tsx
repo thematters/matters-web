@@ -1,4 +1,4 @@
-import Alert from '@reach/alert'
+import { Alert } from '@reach/alert'
 import classNames from 'classnames'
 import { useEffect } from 'react'
 

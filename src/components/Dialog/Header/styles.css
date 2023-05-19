@@ -12,10 +12,7 @@ header {
     @mixin flex-center-all;
 
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     padding: var(--spacing-x-loose) 0 var(--spacing-tight);
     font-size: var(--font-size-xm);
     font-weight: var(--font-weight-medium);
