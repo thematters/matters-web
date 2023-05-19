@@ -227,6 +227,10 @@
     "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
+  "CNbggD": {
+    "defaultMessage": "成為了 {tag} 的主理人",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+  },
   "Cdkhl8": {
     "defaultMessage": "刪除{commentType}",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -374,10 +378,6 @@
   "J+dIsA": {
     "defaultMessage": "訂閱",
     "description": ""
-  },
-  "Jc+W6M": {
-    "defaultMessage": " 辭去了標籤主理人權限，你要不要試試看成為新的主理人？",
-    "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
   },
   "JpS59y": {
     "defaultMessage": "已接受",
@@ -779,6 +779,10 @@
     "defaultMessage": "，我們會儘快回覆!",
     "description": "src/views/Help/index.tsx"
   },
+  "eJ131z": {
+    "defaultMessage": "辭去了 {tag} 的主理人",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+  },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據",
     "description": ""
@@ -1086,10 +1090,6 @@
   "sy+pv5": {
     "defaultMessage": "電子郵箱",
     "description": ""
-  },
-  "t7ah39": {
-    "defaultMessage": " 成為了標籤的主理人，你的作品也在其中。快來看看其他作者的精彩創作吧",
-    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
   },
   "t8/r8X": {
     "defaultMessage": "連接加密錢包",
