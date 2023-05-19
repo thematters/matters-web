@@ -227,6 +227,10 @@
     "defaultMessage": "bookmarked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
+  "CNbggD": {
+    "defaultMessage": "became the maintainer of {tag}",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+  },
   "Cdkhl8": {
     "defaultMessage": "Delete {commentType}",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -374,10 +378,6 @@
   "J+dIsA": {
     "defaultMessage": "Subscriptions",
     "description": ""
-  },
-  "Jc+W6M": {
-    "defaultMessage": " resigned as tag maintainer. Would you like to be the new tag maintainer?",
-    "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
   },
   "JpS59y": {
     "defaultMessage": "Accepted",
@@ -779,6 +779,10 @@
     "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
     "description": "src/views/Help/index.tsx"
   },
+  "eJ131z": {
+    "defaultMessage": "resigned as the maintainer of {tag}",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+  },
   "eTpiYa": {
     "defaultMessage": "No data yet.",
     "description": ""
@@ -1086,10 +1090,6 @@
   "sy+pv5": {
     "defaultMessage": "Email",
     "description": ""
-  },
-  "t7ah39": {
-    "defaultMessage": " just became the maintainer of a tag your article is in. Check out more articles under this tag",
-    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
   },
   "t8/r8X": {
     "defaultMessage": "Continue with Wallet",
