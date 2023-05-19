@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { toPath } from '@/src/common/utils'
+import { toPath } from '~/common/utils'
 import { LinkWrapper } from '~/components'
 import { Tag } from '~/components/Tag'
 import { NoticeTagFragment } from '~/gql/graphql'

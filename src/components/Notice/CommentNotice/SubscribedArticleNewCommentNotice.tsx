@@ -32,7 +32,7 @@ const SubscribedArticleNewCommentNotice = ({
   return (
     <section
       className="container"
-      data-test-id={TEST_ID.SUBSCRIBED_ARTICLE_NEW_COMMENT}
+      data-test-id={TEST_ID.NOTICE_SUBSCRIBED_ARTICLE_NEW_COMMENT}
     >
       <section className="avatar-wrap">
         {isMultiActors ? (

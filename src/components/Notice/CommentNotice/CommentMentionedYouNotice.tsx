@@ -60,7 +60,7 @@ const CommentMentionedYouNotice = ({
             />
           }
           content={<NoticeComment comment={notice.comment} />}
-          testId={TEST_ID.COMMENT_MENTIONED_YOU}
+          testId={TEST_ID.NOTICE_COMMENT_MENTIONED_YOU}
         />
       )}
       {commentCircle && (
@@ -94,7 +94,7 @@ const CommentMentionedYouNotice = ({
             ) : undefined
           }
           content={<NoticeComment comment={notice.comment} />}
-          testId={TEST_ID.COMMENT_MENTIONED_YOU}
+          testId={TEST_ID.NOTICE_COMMENT_MENTIONED_YOU}
         />
       )}
     </>

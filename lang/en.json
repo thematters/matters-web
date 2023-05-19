@@ -459,8 +459,12 @@
     "defaultMessage": "invites you to {tag} collaborator",
     "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
   },
-  "t7ah39": {
-    "defaultMessage": " just became the maintainer of a tag your article is in. Check out more articles under this tag",
+  "CNbggD": {
+    "defaultMessage": "became the maintainer of {tag}",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+  },
+  "eJ131z": {
+    "defaultMessage": "resigned as the maintainer of {tag}",
     "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
   },
   "O03Rkc": {

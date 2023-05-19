@@ -1119,8 +1119,12 @@
     "defaultMessage": "邮箱",
     "description": ""
   },
-  "t7ah39": {
-    "defaultMessage": " 成为了标签的主理人，你的作品也在其中。快来看看其他作者的精彩创作吧",
+  "CNbggD": {
+    "defaultMessage": "成为了 {tag} 的主理人",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+  },
+  "eJ131z": {
+    "defaultMessage": "辞去了 {tag} 的主理人",
     "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
   },
   "t8/r8X": {

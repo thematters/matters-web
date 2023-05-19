@@ -14,7 +14,10 @@ const CryptoWalletAirdropNotice = ({
   notice: CryptoWalletAirdropNoticeFragment
 }) => {
   return (
-    <section className="container" data-test-id={TEST_ID.CRYPTO_WALLET_AIRDROP}>
+    <section
+      className="container"
+      data-test-id={TEST_ID.NOTICE_CRYPTO_WALLET_AIRDROP}
+    >
       <section className="avatar-wrap">
         <NoticeTypeIcon type="volume" />
       </section>

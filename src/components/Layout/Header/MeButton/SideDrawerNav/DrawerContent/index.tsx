@@ -1,4 +1,4 @@
-import VisuallyHidden from '@reach/visually-hidden'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import { useContext, useRef } from 'react'
 
 import { KEYCODES } from '~/common/enums'

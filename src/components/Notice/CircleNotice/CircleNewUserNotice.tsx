@@ -33,7 +33,7 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
             description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
           />
         }
-        testId={TEST_ID.CIRCLE_NEW_FOLLOWER}
+        testId={TEST_ID.NOTICE_CIRCLE_NEW_FOLLOWER}
       />
     )
   }
@@ -48,7 +48,7 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
             description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
           />
         }
-        testId={TEST_ID.CIRCLE_NEW_SUBSCRIBER}
+        testId={TEST_ID.NOTICE_CIRCLE_NEW_SUBSCRIBER}
       />
     )
   }
@@ -62,7 +62,7 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
           description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
         />
       }
-      testId={TEST_ID.CIRCLE_NEW_UNSUBSCRIBER}
+      testId={TEST_ID.NOTICE_CIRCLE_NEW_UNSUBSCRIBER}
     />
   )
 }

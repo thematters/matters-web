@@ -17,7 +17,7 @@ const RevisedArticlePublishedNotice = ({
   return (
     <section
       className="container"
-      data-test-id={TEST_ID.REVISED_ARTICLE_PUBLISHED}
+      data-test-id={TEST_ID.NOTICE_REVISED_ARTICLE_PUBLISHED}
     >
       <section className="notice-actors-name-and-title-info">
         <FormattedMessage

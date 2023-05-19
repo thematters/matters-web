@@ -52,7 +52,7 @@ const CommentNewReplyNotice = ({
               comment={isMultiActors ? notice.comment : notice.reply}
             />
           }
-          testId={TEST_ID.COMMENT_NEW_REPLY}
+          testId={TEST_ID.NOTICE_COMMENT_NEW_REPLY}
         />
       )}
       {replyCommentCircle && (
@@ -76,7 +76,7 @@ const CommentNewReplyNotice = ({
               comment={isMultiActors ? notice.comment : notice.reply}
             />
           }
-          testId={TEST_ID.COMMENT_NEW_REPLY}
+          testId={TEST_ID.NOTICE_COMMENT_NEW_REPLY}
         />
       )}
     </>

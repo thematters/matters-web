@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { NoticeArticleTitleFragment } from '~/gql/graphql'
@@ -26,7 +27,10 @@ const NoticeArticleTitle = ({
   if (!isBlock) {
     return (
       <Link {...path}>
-        <a className="notice-article-title">
+        <a
+          className="notice-article-title"
+          data-test-id={TEST_ID.NOTICE_ARTICLE_TITLE}
+        >
           {article.title}
           <style jsx>{styles}</style>
         </a>

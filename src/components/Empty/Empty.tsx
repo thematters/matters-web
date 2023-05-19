@@ -1,4 +1,4 @@
-import Alert from '@reach/alert'
+import { Alert } from '@reach/alert'
 
 import styles from './styles.css'
 
