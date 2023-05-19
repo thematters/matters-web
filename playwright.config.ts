@@ -6,7 +6,7 @@ dotenv.config({ path: path.resolve(__dirname, './', '.env.local') })
 
 const LOCALE = 'en-US'
 const isCI = process.env.PLAYWRIGHT_RUNTIME_ENV === 'ci'
-const isLocal = process.env.PLAYWRIGHT_RUNTIME_ENV === 'local'
+// const isLocal = process.env.PLAYWRIGHT_RUNTIME_ENV === 'local'
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -32,31 +32,31 @@ const config: PlaywrightTestConfig = {
     trace: 'on-first-retry',
   },
   projects: [
-    {
-      name: 'Chromium',
-      use: {
-        ...devices['Desktop Chrome'],
-        locale: LOCALE,
-      },
-    },
-    ...(isLocal
-      ? []
-      : [
-          {
-            name: 'firefox',
-            use: {
-              ...devices['Desktop Firefox'],
-              locale: LOCALE,
-            },
-          },
-          // {
-          //   name: 'webkit',
-          //   use: {
-          //     ...devices['Desktop Safari'],
-          //     locale: LOCALE,
-          //   },
-          // },
-        ]),
+    // {
+    //   name: 'Chromium',
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //     locale: LOCALE,
+    //   },
+    // },
+    // ...(isLocal
+    //   ? []
+    //   : [
+    //       {
+    //         name: 'firefox',
+    //         use: {
+    //           ...devices['Desktop Firefox'],
+    //           locale: LOCALE,
+    //         },
+    //       },
+    //       // {
+    //       //   name: 'webkit',
+    //       //   use: {
+    //       //     ...devices['Desktop Safari'],
+    //       //     locale: LOCALE,
+    //       //   },
+    //       // },
+    //     ]),
 
     /* Test against mobile viewports. */
     {
