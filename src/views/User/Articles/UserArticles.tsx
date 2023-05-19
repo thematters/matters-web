@@ -41,19 +41,11 @@ const ArticleSummaryInfo = ({
 
   return (
     <div className="info">
-      <FormattedMessage
-        defaultMessage="Created"
-        description="src/views/User/Articles/UserArticles.tsx"
-      />
       <span className="num">{articles}&nbsp;</span>
       <FormattedMessage defaultMessage="articles" description="" />
 
       <IconDotDivider />
 
-      <FormattedMessage
-        defaultMessage="In total"
-        description="src/views/User/Articles/UserArticles.tsx"
-      />
       <span className="num">{words}&nbsp;</span>
       <FormattedMessage
         defaultMessage="words"

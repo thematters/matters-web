@@ -295,10 +295,6 @@
     "defaultMessage": "Verification Code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "EoNvLu": {
-    "defaultMessage": "Created",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "EwVnoC": {
     "defaultMessage": "I have read and agree to",
     "description": ""
@@ -575,13 +571,13 @@
     "defaultMessage": "Tags added",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
-  "UxfPXa": {
-    "defaultMessage": "In total",
-    "description": "src/views/User/Articles/UserArticles.tsx"
+  "VO4Elt": {
+    "defaultMessage": "mentioned you in a comment on {commentArticle}",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
-  "V8msLJ": {
-    "defaultMessage": "left comments and mentioned you in your circle",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  "VjxGd7": {
+    "defaultMessage": "commented on",
+    "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
   "VrOoVf": {
     "defaultMessage": "Matters will never ask your wallet key through any channel.",
