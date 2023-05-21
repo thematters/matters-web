@@ -171,7 +171,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
               {(!data || loading) && <Spinner />}
 
               {/* FIXME: remove filebase.io and meson.network */}
-              {gateways.slice(2, 6).map((url) => {
+              {gateways.slice(0, 4).map((url) => {
                 const gatewayUrl = url
                   .replace(':hash', displayIPNS!)
                   .replace('/ipfs/', '/ipns/')
