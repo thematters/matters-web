@@ -19,8 +19,8 @@
   --color-analytics-red: #c25050;
 
   /* hover */
-  --color-matters-gold-active: color(var(--color-matters-gold) shade(5%));
-  --color-matters-green-active: color(var(--color-matters-green) shade(5%));
+  --color-matters-gold-active: #b69c66;
+  --color-matters-green-active: #0c625e;
   --color-grey-lighter-active: #ededed;
 
   /* line */
