@@ -1,5 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { analytics } from '~/common/utils'
 import { CopyToClipboard, IconLink16, TextIcon } from '~/components'
 
 import styles from './styles.css'
@@ -14,6 +15,11 @@ const Copy = ({ link }: { link: string }) => {
             defaultMessage: 'Copy Link',
             description: '',
           })}
+          onClick={() => {
+            analytics.trackEvent('share', {
+              type: 'copy-url',
+            })
+          }}
         >
           <TextIcon icon={<IconLink16 color="grey" />} spacing="base">
             <div className="text">
