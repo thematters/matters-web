@@ -47,6 +47,10 @@
     "defaultMessage": "Invitees",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "1zVIWy": {
+    "defaultMessage": "mentioned you in a comment at {commentArticle}",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
   "20bImY": {
     "defaultMessage": "Discussion",
     "description": ""
@@ -130,6 +134,10 @@
   "6OBAOi": {
     "defaultMessage": "subscribers_empty",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "6Vznnt": {
+    "defaultMessage": "left a comment in your circle",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "6flWFg": {
     "defaultMessage": "Term of Services",
@@ -263,17 +271,9 @@
     "defaultMessage": "Read counts indicates how many registered users read.",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
-  "DomTeU": {
-    "defaultMessage": "commented in {circleName} conversation",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.",
     "description": ""
-  },
-  "EKsPGS": {
-    "defaultMessage": "commented in your circle conversation",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "EQeKnO": {
     "defaultMessage": "Manage Invitation",
@@ -302,10 +302,6 @@
   "FOOymB": {
     "defaultMessage": "No members yet",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
-  },
-  "FVXRzf": {
-    "defaultMessage": "mentioned you in your circle conversation comment",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
@@ -371,6 +367,10 @@
     "defaultMessage": "words",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
+  "ItUuuX": {
+    "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
   "J+LXrH": {
     "defaultMessage": "User registered by email can login and enable wallet login later",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
@@ -407,10 +407,6 @@
     "defaultMessage": "Maintain Tag",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "KyWDUu": {
-    "defaultMessage": "invites you to join Circle for",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-  },
   "L0J61B": {
     "defaultMessage": "Free",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -430,10 +426,6 @@
   "LOefol": {
     "defaultMessage": "Paywalled",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
-  },
-  "LW1aX1": {
-    "defaultMessage": "Congrats!",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",
@@ -575,10 +567,6 @@
     "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "UOsB5W": {
-    "defaultMessage": "mentioned you in {circleName} conversation comment",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "UgvfcU": {
     "defaultMessage": "You have successfully completed Ethereum wallet settings. Please confirm wallet address:",
     "description": "src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
@@ -591,13 +579,9 @@
     "defaultMessage": "In total",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
-  "VO4Elt": {
-    "defaultMessage": "mentioned you in a comment on {commentArticle}",
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-  },
-  "VjxGd7": {
-    "defaultMessage": "commented on",
-    "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
+  "V8msLJ": {
+    "defaultMessage": "left comments and mentioned you in your circle",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "VrOoVf": {
     "defaultMessage": "Matters will never ask your wallet key through any channel.",
@@ -871,10 +855,6 @@
     "defaultMessage": "Unfollow",
     "description": ""
   },
-  "jF+Mle": {
-    "defaultMessage": "days for free. Try it and have fun!",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-  },
   "jJ1Brc": {
     "defaultMessage": "Pin Comment",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -914,6 +894,10 @@
   "lNjDPr": {
     "defaultMessage": "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'.",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
+  "lZukEr": {
+    "defaultMessage": "commented",
+    "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
   "ldNgRA": {
     "defaultMessage": "Display name, can be changed later",
@@ -1143,6 +1127,10 @@
     "defaultMessage": "Edit",
     "description": ""
   },
+  "wER32z": {
+    "defaultMessage": "left a comment in {circleName} and mentioned you",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
   "wSEOxH": {
     "defaultMessage": "Contact Channel",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -1197,6 +1185,10 @@
   },
   "zb8Kx1": {
     "defaultMessage": "Announcement, reminder, chattering..."
+  },
+  "zllCbU": {
+    "defaultMessage": "left a comment in {circleName}",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "zxlwbc": {
     "defaultMessage": "Waiting ...",
