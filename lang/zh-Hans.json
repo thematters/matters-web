@@ -419,8 +419,8 @@
     "defaultMessage": "关联了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
-  "KyWDUu": {
-    "defaultMessage": " 邀请你免费加入围炉 ",
+  "ItUuuX": {
+    "defaultMessage": "邀你加入围炉 {circleName} ，你可以免费体验 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "L0J61B": {

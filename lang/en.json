@@ -343,8 +343,8 @@
     "defaultMessage": "Congrats!",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
-  "KyWDUu": {
-    "defaultMessage": " invites you to join Circle for ",
+  "ItUuuX": {
+    "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "jF+Mle": {

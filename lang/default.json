@@ -367,6 +367,10 @@
     "defaultMessage": "words",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
+  "ItUuuX": {
+    "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
   "J+LXrH": {
     "defaultMessage": "User registered by email can login and enable wallet login later",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
@@ -403,10 +407,6 @@
     "defaultMessage": "Maintain Tag",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "KyWDUu": {
-    "defaultMessage": "invites you to join Circle for",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-  },
   "L0J61B": {
     "defaultMessage": "Free",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -426,10 +426,6 @@
   "LOefol": {
     "defaultMessage": "Paywalled",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
-  },
-  "LW1aX1": {
-    "defaultMessage": "Congrats!",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",
@@ -858,10 +854,6 @@
   "izWS4J": {
     "defaultMessage": "Unfollow",
     "description": ""
-  },
-  "jF+Mle": {
-    "defaultMessage": "days for free. Try it and have fun!",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "jJ1Brc": {
     "defaultMessage": "Pin Comment",
