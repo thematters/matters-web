@@ -29,7 +29,7 @@ const ArticleNewCommentNotice = ({
       notice={notice}
       action={
         <FormattedMessage
-          defaultMessage="commented on"
+          defaultMessage="commented"
           description="src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
         />
       }
