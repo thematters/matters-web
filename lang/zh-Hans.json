@@ -47,6 +47,10 @@
     "defaultMessage": "免费邀请",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "1zVIWy": {
+    "defaultMessage": "在 {commentArticle} 的评论提到了你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
   "20bImY": {
     "defaultMessage": "众聊",
     "description": ""
@@ -130,6 +134,10 @@
   "6OBAOi": {
     "defaultMessage": "目前总订阅人数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "6Vznnt": {
+    "defaultMessage": "在你的围炉中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "6flWFg": {
     "defaultMessage": "用户协议",
@@ -263,17 +271,9 @@
     "defaultMessage": "阅读次数代表了你的作品被登入用户阅读的总次数，每次阅读过程超过一定时间后才会计入。此外，同一个用户的多次阅读也会进行累计。",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
-  "DomTeU": {
-    "defaultMessage": "在 {circleName} 中留言",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "E8W3qa": {
     "defaultMessage": "2-20 个字符",
     "description": ""
-  },
-  "EKsPGS": {
-    "defaultMessage": "在你的围炉中留言",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "EQeKnO": {
     "defaultMessage": "邀请管理",
@@ -302,10 +302,6 @@
   "FOOymB": {
     "defaultMessage": "还没有成员",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
-  },
-  "FVXRzf": {
-    "defaultMessage": "在你的围炉中留言提及你",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "FaTb0A": {
     "defaultMessage": "安装 MetaMask",
@@ -371,6 +367,10 @@
     "defaultMessage": "字",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
+  "ItUuuX": {
+    "defaultMessage": "邀你加入围炉 {circleName} ，你可以免费体验 {freePeriod} 天",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
   "J+LXrH": {
     "defaultMessage": "持续支持邮箱進入，未來可随时启用钱包登入",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
@@ -407,10 +407,6 @@
     "defaultMessage": "认领",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "KyWDUu": {
-    "defaultMessage": " 邀请你免费加入围炉 ",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-  },
   "L0J61B": {
     "defaultMessage": "免费",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -430,10 +426,6 @@
   "LOefol": {
     "defaultMessage": "上锁",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
-  },
-  "LW1aX1": {
-    "defaultMessage": "恭喜你！",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "Lc/azT": {
     "defaultMessage": "IPNS 订阅",
@@ -575,10 +567,6 @@
     "defaultMessage": "原有透过电子信箱登入方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "UOsB5W": {
-    "defaultMessage": "在 {circleName} 中留言提及你",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "UgvfcU": {
     "defaultMessage": "你已完成以太坊钱包设定。你设定的地址：",
     "description": "src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
@@ -591,13 +579,9 @@
     "defaultMessage": "累积创作 ",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
-  "VO4Elt": {
-    "defaultMessage": " 在作品 {commentArticle} 的评论中提及你",
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-  },
-  "VjxGd7": {
-    "defaultMessage": "评论了作品 ",
-    "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
+  "V8msLJ": {
+    "defaultMessage": "在你的围炉中留言提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "VrOoVf": {
     "defaultMessage": "Matters 不会透过任何渠道主动询问你的钱包私钥。",
@@ -871,10 +855,6 @@
     "defaultMessage": "取消追踪",
     "description": ""
   },
-  "jF+Mle": {
-    "defaultMessage": " 天，前去免费体验，与大家谈天说地吧。",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-  },
   "jJ1Brc": {
     "defaultMessage": "喜欢回应",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -914,6 +894,10 @@
   "lNjDPr": {
     "defaultMessage": "你还没有邀请任何用户喔！点击新增邀请，添加站内或站外朋友加入围炉赠与对方免费资格的固定时长",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
+  "lZukEr": {
+    "defaultMessage": "评论了",
+    "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
   "ldNgRA": {
     "defaultMessage": "你的站內暱稱，之後可以修改",
@@ -1143,6 +1127,10 @@
     "defaultMessage": "编辑资料",
     "description": ""
   },
+  "wER32z": {
+    "defaultMessage": "在 {circleName} 中留言提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
   "wSEOxH": {
     "defaultMessage": "联系渠道",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -1197,6 +1185,10 @@
   },
   "zb8Kx1": {
     "defaultMessage": "公告、提醒、碎碎念…"
+  },
+  "zllCbU": {
+    "defaultMessage": "在 {circleName} 中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "zxlwbc": {
     "defaultMessage": "等待写入完成...",
