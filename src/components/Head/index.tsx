@@ -49,7 +49,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       ? `${props.keywords.join(',')},matters,${
           process.env.NEXT_PUBLIC_SITE_DOMAIN
         },創作有價`
-      : 'matters,${process.env.NEXT_PUBLIC_SITE_DOMAIN},創作有價',
+      : `matters,${process.env.NEXT_PUBLIC_SITE_DOMAIN},創作有價`,
     url: props.path
       ? `https://${siteDomain}${props.path}`
       : `https://${siteDomain}${router.asPath || '/'}`,
@@ -66,7 +66,7 @@ export const Head: React.FC<HeadProps> = (props) => {
     props.jsonLdData.description = head.description
   }
 
-  const canonicalUrl = head.url?.split('?')[0]
+  const canonicalUrl = head.url?.split('#')[0].split('?')[0]
 
   return (
     <NextHead>
@@ -107,7 +107,9 @@ export const Head: React.FC<HeadProps> = (props) => {
         type="application/opensearchdescription+xml"
         key="opensearch"
       />
-      <link rel="canonical" href={canonicalUrl} key="canonical" />
+      {props.path && (
+        <link rel="canonical" href={canonicalUrl} key="canonical" />
+      )}
       {props.paymentPointer && (
         <meta name="monetization" content={props.paymentPointer} />
       )}
