@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
@@ -92,8 +93,10 @@ const Request: React.FC<FormProps> = ({
     },
   })
 
+  const containerClasses = classNames({ container: !!isInPage })
+
   const InnerForm = (
-    <section className="container">
+    <section className={containerClasses}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<Translate id="email" />}
