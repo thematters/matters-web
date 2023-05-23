@@ -299,8 +299,8 @@
     "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
-  "VjxGd7": {
-    "defaultMessage": "commented on",
+  "lZukEr": {
+    "defaultMessage": "commented",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
   "U/Tqmx": {
@@ -363,20 +363,20 @@
     "defaultMessage": "mentioned you in your circle broadcast comment",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "FVXRzf": {
-    "defaultMessage": "mentioned you in your circle conversation comment",
+  "V8msLJ": {
+    "defaultMessage": "left comments and mentioned you in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
-  "DomTeU": {
-    "defaultMessage": "commented in {circleName} conversation",
+  "zllCbU": {
+    "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
-  "UOsB5W": {
-    "defaultMessage": "mentioned you in {circleName} conversation comment",
+  "wER32z": {
+    "defaultMessage": "left a comment in {circleName} and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
-  "EKsPGS": {
-    "defaultMessage": "commented in your circle conversation",
+  "6Vznnt": {
+    "defaultMessage": "left a comment in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "r66dXx": {
@@ -399,8 +399,8 @@
     "defaultMessage": "{circlename} Broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "VO4Elt": {
-    "defaultMessage": "mentioned you in a comment on {commentArticle}",
+  "1zVIWy": {
+    "defaultMessage": "mentioned you in a comment at {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "BHFHeY": {

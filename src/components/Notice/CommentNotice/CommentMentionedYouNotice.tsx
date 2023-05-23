@@ -52,7 +52,7 @@ const CommentMentionedYouNotice = ({
           notice={notice}
           action={
             <FormattedMessage
-              defaultMessage="mentioned you in a comment on {commentArticle}"
+              defaultMessage="mentioned you in a comment at {commentArticle}"
               description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
               values={{
                 commentArticle: <NoticeArticleTitle article={commentArticle} />,
