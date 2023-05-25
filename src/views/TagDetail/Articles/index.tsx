@@ -201,7 +201,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
                   tagDetailId={tag.id}
                   hasSetTagSelected={canEditTag && !isSelected}
                   hasSetTagUnselected={canEditTag && isSelected}
-                  hasRemoveTag={canEditTag && !isHottest}
+                  hasRemoveTag={canEditTag}
                 />
               </List.Item>
 
