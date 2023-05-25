@@ -30,6 +30,7 @@ export type DialogProps = {
   smBgColor?: 'grey-lighter'
   smUpBgColor?: 'grey-lighter'
   fixedHeight?: boolean
+  hidePaddingBottom?: boolean
 
   testId?: string
 } & DialogOverlayProps
@@ -46,6 +47,7 @@ const Container: React.FC<
   smBgColor,
   smUpBgColor,
   fixedHeight,
+  hidePaddingBottom,
   testId,
   onDismiss,
   children,
@@ -60,6 +62,7 @@ const Container: React.FC<
     [size]: true,
     [`bg-${smBgColor}`]: !!smBgColor,
     [`bg-${smUpBgColor}-sm-up`]: !!smUpBgColor,
+    ['hide-padding-bottom']: !!hidePaddingBottom,
   })
 
   const closeTopDialog = () => {
