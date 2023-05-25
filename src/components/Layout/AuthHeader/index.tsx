@@ -11,6 +11,14 @@ const AuthedHeader: React.FC<HeaderProps> = ({ title }) => {
   const viewer = useContext(ViewerContext)
   const showConnect = viewer.isAuthed && !viewer.info.ethAddress
 
+  if (!viewer.isAuthed) {
+    return (
+      <Media at="sm">
+        <Layout.Header left={<Layout.Header.Title id={title} />} />
+      </Media>
+    )
+  }
+
   return (
     <Media at="sm">
       <Layout.Header
