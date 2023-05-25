@@ -28,7 +28,7 @@ const BaseAccessDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog} hidePaddingBottom>
         <Dialog.Header
           title="articleManagement"
           closeDialog={closeDialog}
