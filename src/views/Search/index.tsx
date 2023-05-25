@@ -7,7 +7,7 @@ import {
   SEARCH_HISTORY_LENGTH,
   STORAGE_KEY_SEARCH_HISTORY,
 } from '~/common/enums'
-import { storage, toPath } from '~/common/utils'
+import { storage } from '~/common/utils'
 import {
   Head,
   Layout,
@@ -45,23 +45,11 @@ const Search = () => {
     updateSearchHistory(nsh)
   }
 
-  const { getQuery, router } = useRoute()
+  const { getQuery } = useRoute()
   const q = getQuery('q')
-  // TODO: Just test for product team, will be removed when release
-  const cancelable = getQuery('cancelable')
-
-  const onCancel = () => {
-    const path = toPath({ page: 'search' })
-    router.replace(path.href)
-  }
 
   const isHistory = !q
   const isAggregate = !isHistory
-
-  // const showBackButton = isSmallUp && isOverview
-  // const showMeButton = !isSmallUp && isOverview
-
-  const showCancelButton = !isHistory && cancelable
 
   useEffect(() => {
     if (!isHistory) return
@@ -82,11 +70,6 @@ const Search = () => {
           right={
             <section className="layoutHeaderRight">
               <SearchBar hasDropdown={false} />
-              {showCancelButton && (
-                <span style={{ marginLeft: '1rem' }}>
-                  <Layout.Header.CancelButton onClick={onCancel} />
-                </span>
-              )}
             </section>
           }
         />

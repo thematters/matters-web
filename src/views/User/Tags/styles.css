@@ -1,6 +1,4 @@
 .container {
-  @mixin border-top-grey;
-
   padding: 0 var(--spacing-base);
 
   @media (--sm-up) {

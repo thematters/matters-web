@@ -7,8 +7,8 @@
     "defaultMessage": "成員",
     "description": ""
   },
-  "+hfUcV": {
-    "defaultMessage": "在圍爐 {circlename} 發布了新廣播",
+  "jy3tx0": {
+    "defaultMessage": "在 {circlename} 發布廣播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
   "/+XWDi": {
@@ -35,8 +35,8 @@
     "defaultMessage": "下載應用",
     "description": ""
   },
-  "/nu5ho": {
-    "defaultMessage": "回覆了你在作品 ",
+  "nNB7KU": {
+    "defaultMessage": "在",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "/podGX": {
@@ -71,8 +71,8 @@
     "defaultMessage": "我的草稿",
     "description": ""
   },
-  "2eebTb": {
-    "defaultMessage": " 收藏了你的作品",
+  "CD688y": {
+    "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
   "2slIPX": {
@@ -127,8 +127,8 @@
     "defaultMessage": "在行動裝置上使用問題，參考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "4vkwo0": {
-    "defaultMessage": "你的修訂作品已發布到分佈式網絡",
+  "gN4jLB": {
+    "defaultMessage": "你的修訂作品 {articleTitle} 已發布到分佈式網絡",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "50cquj": {
@@ -138,10 +138,6 @@
   "5FO4vn": {
     "defaultMessage": "你尚無權限進行該操作",
     "description": ""
-  },
-  "5sAbzJ": {
-    "defaultMessage": " 眾聊中發表話題 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "5sg7KC": {
     "defaultMessage": "密碼",
@@ -198,10 +194,6 @@
   "9nNpKP": {
     "defaultMessage": "討論已送出",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
-  },
-  "A3LOng": {
-    "defaultMessage": " 眾聊中回覆話題 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "A3rLZt": {
     "defaultMessage": "最近 {months} 個月",
@@ -307,12 +299,28 @@
     "defaultMessage": "創作了 ",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
+  "V8msLJ": {
+    "defaultMessage": "在你的圍爐中留言提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "wER32z": {
+    "defaultMessage": "在 {circleName} 中留言提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zllCbU": {
+    "defaultMessage": "在 {circleName} 中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
   "EwVnoC": {
     "defaultMessage": "我已閱讀並同意",
     "description": ""
   },
-  "FALWef": {
-    "defaultMessage": " 廣播中留言 ",
+  "6Vznnt": {
+    "defaultMessage": "在你的圍爐中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "EZMrtJ": {
+    "defaultMessage": "在 {circleName} 的廣播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "FOOymB": {
@@ -391,12 +399,8 @@
     "defaultMessage": "訂閱",
     "description": ""
   },
-  "J3yk6u": {
-    "defaultMessage": "在圍爐 ",
-    "description": ""
-  },
-  "JIjMWL": {
-    "defaultMessage": "你的作品已發布到分佈式網絡",
+  "tEeEJT": {
+    "defaultMessage": "你的作品 {articleTitle} 已發布到分佈式網絡",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
   "Jc+W6M": {
@@ -431,12 +435,12 @@
     "defaultMessage": "認領",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "KZlRde": {
-    "defaultMessage": " 關聯了你的作品 ",
+  "YlPCRU": {
+    "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
-  "KyWDUu": {
-    "defaultMessage": " 邀請你免費加入圍爐 ",
+  "ItUuuX": {
+    "defaultMessage": "邀你加入圍爐 {circleName} ，你可以免費體驗 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "L0J61B": {
@@ -519,8 +523,8 @@
     "defaultMessage": "分享",
     "description": ""
   },
-  "PjT72J": {
-    "defaultMessage": "喜歡並讚賞了你的作品",
+  "p5qZnJ": {
+    "defaultMessage": "讚賞了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
   "Po+kJe": {
@@ -623,12 +627,12 @@
     "defaultMessage": "累積創作 ",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
-  "VO4Elt": {
-    "defaultMessage": " 在作品 {commentArticle} 的評論中提及你",
+  "1zVIWy": {
+    "defaultMessage": "在 {commentArticle} 的評論提到了你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
-  "VjxGd7": {
-    "defaultMessage": "評論了作品 ",
+  "lZukEr": {
+    "defaultMessage": "評論了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
   "VrOoVf": {
@@ -695,8 +699,16 @@
     "defaultMessage": "若要變更地址，請直接操作錢包切換",
     "description": ""
   },
-  "YlxpJl": {
-    "defaultMessage": " 廣播中留言，其中有提及你 ",
+  "Y+spJC": {
+    "defaultMessage": "在你的圍爐中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "r66dXx": {
+    "defaultMessage": "在 {circleName} 的廣播留言中提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "XQTBu6": {
+    "defaultMessage": "在你的圍爐廣播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "Z6cII7": {
@@ -712,7 +724,7 @@
     "description": "src/views/Circle/Settings/index.tsx"
   },
   "ZUPQzl": {
-    "defaultMessage": " 的評論",
+    "defaultMessage": "回覆了你",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
@@ -799,9 +811,17 @@
     "defaultMessage": "，我們會儘快回覆!",
     "description": "src/views/Help/index.tsx"
   },
-  "dsBCfK": {
-    "defaultMessage": "哎呀，標籤協作者",
+  "DFieKt": {
+    "defaultMessage": "辭去了 {tag} 的協作者",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
+  "YUtHE9": {
+    "defaultMessage": "將你的作品 {articleTitle} 在 {tag} 中選為精华",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagAddedNotice.tsx"
+  },
+  "pCcbaC": {
+    "defaultMessage": "將你的作品 {articleTitle} 從 {tag} 中移除",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagRemovedNotice.tsx"
   },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據",
@@ -823,8 +843,8 @@
     "defaultMessage": "自定義網址名稱",
     "description": ""
   },
-  "euNJsE": {
-    "defaultMessage": "新作品已經加入圍爐，馬上前往閱讀吧！",
+  "GVes61": {
+    "defaultMessage": "在 {circleName} 發布新作品",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
   "fG41Ux": {
@@ -860,7 +880,7 @@
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
   "hk2aiz": {
-    "defaultMessage": " 追蹤了你的圍爐",
+    "defaultMessage": "追蹤了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hrfF+i": {
@@ -956,7 +976,7 @@
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
   "mPe6DK": {
-    "defaultMessage": " 訂閱了你的圍爐",
+    "defaultMessage": "訂閱了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "mSAY3/": {
@@ -1035,8 +1055,8 @@
     "defaultMessage": "圍爐名稱",
     "description": ""
   },
-  "qPPrzm": {
-    "defaultMessage": " 支持了你的作品 ",
+  "vLEnrs": {
+    "defaultMessage": "支持了",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
   "qQmSxu": {
@@ -1103,17 +1123,17 @@
     "defaultMessage": "電子郵箱",
     "description": ""
   },
-  "t7ah39": {
-    "defaultMessage": " 成為了標籤的主理人，你的作品也在其中。快來看看其他作者的精彩創作吧",
+  "CNbggD": {
+    "defaultMessage": "成為了 {tag} 的主理人",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
+  },
+  "eJ131z": {
+    "defaultMessage": "辭去了 {tag} 的主理人",
     "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
   },
   "t8/r8X": {
     "defaultMessage": "連接加密錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
-  "tQsujN": {
-    "defaultMessage": " 眾聊中回覆話題，其中有提及你 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "tW3hM/": {
     "defaultMessage": "圍爐描述",
@@ -1135,13 +1155,9 @@
     "defaultMessage": "玩轉 Matters 實用指南",
     "description": ""
   },
-  "uqmi/b": {
-    "defaultMessage": " 置頂了你在作品 ",
+  "cAP9g5": {
+    "defaultMessage": "將你的評論在 {commentArticle} 中置頂",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
-  },
-  "uuEGON": {
-    "defaultMessage": " 眾聊中發表與回覆話題，其中有提及你 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "uw32VR": {
     "defaultMessage": "教學指南",
@@ -1175,10 +1191,6 @@
     "defaultMessage": "查看全部",
     "description": ""
   },
-  "wqaNK4": {
-    "defaultMessage": "在你的圍爐 ",
-    "description": ""
-  },
   "xGh9O7": {
     "defaultMessage": "提醒：信箱將不作為登入使用，僅作為聯繫渠道",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -1195,8 +1207,8 @@
     "defaultMessage": "搜尋",
     "description": ""
   },
-  "xwj01D": {
-    "defaultMessage": " 邀請你成為標籤的協作者",
+  "8PWD05": {
+    "defaultMessage": "邀請你成為 {tag} 的協作者",
     "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
   },
   "y0b6Kp": {

@@ -2,20 +2,24 @@ import { distance } from 'fastest-levenshtein'
 
 import { toSizedImageURL } from '../url'
 
+// via https://github.com/thematters/ipns-site-generator/blob/main/src/utils/index.ts
+
 /**
- * Remove html tag and merge multiple spaces into one.
+ * Strip html tags from html string to get text.
+ * @param html - html string
+ * @param replacement - string to replace tags
  */
-export const stripHtml = (html: string | null | undefined, replacement = ' ') =>
-  (html || '')
+export const stripHtml = (html: string, replacement = ' ') =>
+  (String(html) || '')
     .replace(/(<\/p><p>|&nbsp;)/g, ' ') // replace line break and space first
     .replace(/(<([^>]+)>)/gi, replacement)
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-
-export const makeSummary = (html: string, length = 140) => {
-  // buffer for search
-  const buffer = 20
-
+/**
+ * Return beginning of text in html as summary, split on sentence break within buffer range.
+ * @param html - html string to extract summary
+ * @param length - target length of summary
+ * @param buffer - buffer range to search for sentence break
+ */
+export const makeSummary = (html: string, length = 140, buffer = 20) => {
   // split on sentence breaks
   const sections = stripHtml(html, '')
     .replace(/([?!。？！]|(\.\s))\s*/g, '$1|')

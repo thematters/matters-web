@@ -1,12 +1,18 @@
+import { useEffect, useRef } from 'react'
+
 import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
-import { measureDiffs } from '~/common/utils'
+import { measureDiffs, stripHtml } from '~/common/utils'
 import { Button, TextIcon, Translate, useMutation } from '~/components'
 import {
   ConfirmStepContentProps,
   EditorSettingsDialog,
   EditorSettingsDialogProps,
 } from '~/components/Editor/SettingsDialog'
-import { ArticleDetailPublicQuery, EditArticleMutation } from '~/gql/graphql'
+import {
+  ArticleDetailPublicQuery,
+  EditArticleMutation,
+  EditorDraftFragment,
+} from '~/gql/graphql'
 
 import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE } from './gql'
@@ -14,7 +20,8 @@ import styles from './styles.css'
 
 type EditModeHeaderProps = {
   article: NonNullable<ArticleDetailPublicQuery['article']>
-  editData: Record<string, any>
+  draft?: EditorDraftFragment
+  editContent?: string
   coverId?: string
 
   revisionCountLeft: number
@@ -37,7 +44,8 @@ type EditModeHeaderProps = {
 
 const EditModeHeader = ({
   article,
-  editData,
+  draft,
+  editContent,
   coverId,
 
   revisionCountLeft,
@@ -50,8 +58,17 @@ const EditModeHeader = ({
 
   ...restProps
 }: EditModeHeaderProps) => {
-  const { content, currText, initText } = editData
-  const diff = measureDiffs(initText || '', currText || '') || 0
+  const initContent = useRef<string>()
+  useEffect(() => {
+    initContent.current = draft?.content || ''
+  }, [])
+
+  const currContent = editContent || ''
+  const diff =
+    measureDiffs(
+      stripHtml(initContent.current || ''),
+      stripHtml(currContent || '')
+    ) || 0
   const diffCount = `${diff}`.padStart(2, '0')
   const isOverDiffLimit = diff > MAX_ARTICLE_REVISION_DIFF
   const isContentRevised = diff > 0
@@ -71,7 +88,7 @@ const EditModeHeader = ({
           circle: circle ? circle.id : null,
           accessType,
           license,
-          ...(isContentRevised ? { content } : {}),
+          ...(isContentRevised ? { content: editContent } : {}),
           first: null,
           iscnPublish: restProps.iscnPublish,
           canComment: restProps.canComment,

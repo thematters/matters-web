@@ -5,9 +5,8 @@ import { TEST_ID } from '~/common/enums'
 import { RevisedArticlePublishedNoticeFragment } from '~/gql/graphql'
 
 import NoticeArticleCard from '../NoticeArticleCard'
+import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
-import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
 const RevisedArticlePublishedNotice = ({
@@ -18,22 +17,19 @@ const RevisedArticlePublishedNotice = ({
   return (
     <section
       className="container"
-      data-test-id={TEST_ID.REVISED_ARTICLE_PUBLISHED}
+      data-test-id={TEST_ID.NOTICE_REVISED_ARTICLE_PUBLISHED}
     >
-      <section className="avatar-wrap">
-        <NoticeTypeIcon type="logo" />
+      <section className="notice-actors-name-and-title-info">
+        <FormattedMessage
+          defaultMessage="Your work {articleTitle} has been republished to decentralized network"
+          description="src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
+          values={{
+            articleTitle: <NoticeArticleTitle article={notice.article} />,
+          }}
+        />
       </section>
 
-      <section className="content-wrap">
-        <NoticeHead>
-          <FormattedMessage
-            defaultMessage="Your article has been republished to decentralized network"
-            description="src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
-          />
-        </NoticeHead>
-
-        <NoticeArticleCard article={notice.article} />
-
+      <section className="footer">
         <NoticeDate notice={notice} />
       </section>
 

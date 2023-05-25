@@ -1,4 +1,4 @@
-import VisuallyHidden from '@reach/visually-hidden'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 
 import { TextId } from '~/common/enums'

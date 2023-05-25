@@ -1,8 +1,40 @@
+@define-mixin line-clamp-3 {
+  @mixin line-clamp;
+
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
+
 .container {
   display: flex;
-  align-items: flex-start;
-  font-size: var(--font-size-sm);
+  flex-direction: column;
   font-weight: var(--font-weight-normal);
+
+  & .header {
+    display: flex;
+
+    & :global(> a) {
+      margin-right: var(--spacing-x-tight);
+    }
+
+    & .single-actor-info {
+      @mixin line-clamp-3;
+
+      align-self: center;
+    }
+  }
+
+  & .content {
+    @mixin line-clamp-3;
+
+    margin-top: var(--spacing-tight);
+  }
+
+  & .footer {
+    @mixin flex-center-end;
+
+    margin-top: var(--spacing-x-tight);
+  }
 }
 
 .avatar-wrap {
@@ -66,24 +98,66 @@
   padding: var(--spacing-x-tight);
 }
 
-.multi-actor-avatars {
-  display: flex;
-  flex-flow: row wrap;
-  margin-top: var(--spacing-tight);
+.highlight {
+  color: var(--color-matters-green);
+}
 
-  & :global(a) {
-    margin-right: var(--spacing-x-tight);
+/* NoticeCircleName */
+.circle-display-name {
+  color: var(--color-black);
+}
+
+/* NoticeTag */
+.tag-content {
+  color: var(--color-black);
+}
+
+/* NoticeMultiActors */
+.more-actors {
+  & :global(button) {
+    cursor: auto;
   }
 }
 
-.sub-content {
-  margin-top: var(--spacing-tight);
+/* NoticeActorAvatar */
+.notice-actor-avatar {
+  height: 2rem;
 }
 
-.date {
-  margin-top: var(--spacing-xx-tight);
+/* NoticeArticleTitle */
+.notice-article-title {
+  color: var(--color-black);
 }
 
-.highlight {
-  color: var(--color-matters-green);
+/* NoticeContentActors */
+.notice-actors-name-and-title-info {
+  font-size: var(--font-size-base);
+  color: var(--color-grey);
+}
+
+.notice-actors-name-and-title-title {
+  /* @mixin line-clamp-3; */
+}
+
+/* NoticeActorName */
+.display-name {
+  font-size: var(--font-size-base);
+  color: var(--color-black);
+}
+
+/* NoticeArticleCard */
+.notice-article-card {
+  margin-left: var(--spacing-xx-loose);
+}
+
+/* NoticeContentDigest */
+.notice-content-digest {
+  @mixin border-left-grey;
+  @mixin line-clamp;
+
+  padding-left: var(--spacing-tight);
+  margin-left: var(--spacing-xx-loose);
+  text-overflow: ellipsis;
+  border-left-style: dashed;
+  -webkit-line-clamp: 3;
 }

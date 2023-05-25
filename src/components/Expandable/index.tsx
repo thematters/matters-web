@@ -1,4 +1,4 @@
-import VisuallyHidden from '@reach/visually-hidden'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import TextTruncate from 'react-text-truncate'
@@ -53,7 +53,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const [truncated, setTruncated] = useState(false)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
   const collapseContent = stripHtml(
-    content && content.replace(/\r?\n|\r|\s\s/g, ''),
+    content ? content.replace(/\r?\n|\r|\s\s/g, '') : '',
     ''
   )
   const contentClasses = classNames({

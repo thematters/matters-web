@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
 
+import { toPath } from '~/common/utils'
+import { LinkWrapper } from '~/components'
 import { Tag } from '~/components/Tag'
 import { NoticeTagFragment } from '~/gql/graphql'
 
@@ -10,12 +12,21 @@ const NoticeTag = ({ tag }: { tag: NoticeTagFragment | null }) => {
     return null
   }
 
-  return (
-    <section className="sub-content tag-content">
-      <Tag tag={tag} type="inline" active />
+  const tagName = tag.content
 
-      <style jsx>{styles}</style>
-    </section>
+  const path = toPath({
+    page: 'tagDetail',
+    tag,
+  })
+
+  return (
+    <LinkWrapper {...path}>
+      <span className="tag-content">
+        <span>#{tagName}</span>
+
+        <style jsx>{styles}</style>
+      </span>
+    </LinkWrapper>
   )
 }
 

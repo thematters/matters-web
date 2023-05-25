@@ -32,7 +32,7 @@ const ArticleTagUnselectedNotice = ({
   return (
     <section
       className="container"
-      data-test-id={TEST_ID.ARTICLE_TAG_UNSELECTED}
+      data-test-id={TEST_ID.NOTICE_ARTICLE_TAG_UNSELECTED}
     >
       <section className="avatar-wrap">
         <NoticeActorAvatar user={actor} />
