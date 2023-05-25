@@ -291,7 +291,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                   {...setCommentProps}
                   article={article}
                   draft={draft as any}
-                  editContent={editContent}
+                  editContent={editContent || draft.content || ''}
                   coverId={cover?.id}
                   revisionCountLeft={revisionCountLeft}
                   isOverRevisionLimit={isOverRevisionLimit}

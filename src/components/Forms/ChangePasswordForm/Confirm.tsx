@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
@@ -125,8 +126,10 @@ const Confirm: React.FC<FormProps> = ({
     },
   })
 
+  const containerClasses = classNames({ container: !!isInPage })
+
   const InnerForm = (
-    <section className="container">
+    <section className={containerClasses}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<Translate id="newPassword" />}

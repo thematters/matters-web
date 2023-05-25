@@ -8,6 +8,7 @@ import {
   ArticleNewCommentNoticeFragment,
   ArticleNewSubscriberNoticeFragment,
   ArticleTagAddedNoticeFragment,
+  CircleInvitationNoticeFragment,
   CircleNewBroadcastNoticeFragment,
   CircleNewDiscussionCommentsFragment,
   CircleNewUserNoticeFragment,
@@ -33,6 +34,7 @@ type NoticeDigestProps = {
     | ArticleNewAppreciationNoticeFragment
     | ArticleNewCollectedNoticeFragment
     | ArticleNewCommentNoticeFragment
+    | CircleInvitationNoticeFragment
     | CircleNewBroadcastNoticeFragment
     | CircleNewDiscussionCommentsFragment
     | CircleNewUserNoticeFragment

@@ -419,8 +419,8 @@
     "defaultMessage": "关联了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
-  "KyWDUu": {
-    "defaultMessage": " 邀请你免费加入围炉 ",
+  "ItUuuX": {
+    "defaultMessage": "邀你加入围炉 {circleName} ，你可以免费体验 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "L0J61B": {
@@ -607,11 +607,11 @@
     "defaultMessage": "累积创作 ",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
-  "VO4Elt": {
-    "defaultMessage": "在 {commentArticle} 的评论中提及你",
+  "1zVIWy": {
+    "defaultMessage": "在 {commentArticle} 的评论提到了你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
-  "VjxGd7": {
+  "lZukEr": {
     "defaultMessage": "评论了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
@@ -683,15 +683,15 @@
     "defaultMessage": "在 {circleName} 的广播留言中提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "FVXRzf": {
+  "V8msLJ": {
     "defaultMessage": "在你的围炉中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
-  "UOsB5W": {
+  "wER32z": {
     "defaultMessage": "在 {circleName} 中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
-  "DomTeU": {
+  "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
@@ -699,7 +699,7 @@
     "defaultMessage": "在你的围炉中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "EKsPGS": {
+  "6Vznnt": {
     "defaultMessage": "在你的围炉中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },

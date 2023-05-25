@@ -48,6 +48,10 @@ export const VERIFICATION_CODE_TYPES = {
   payment_password_reset: 'payment_password_reset',
 }
 
+export const MAX_ARTICE_TITLE_LENGTH = 100
+export const MAX_ARTICE_SUMMARY_LENGTH = 200
+export const MAX_ARTICLE_CONTENT_LENGTH = 50e3
+
 export const MAX_ARTICLE_REVISION_COUNT = 4
 export const MAX_ARTICLE_REVISION_DIFF = 50
 export const MAX_ARTICLE_TAG_LENGTH = 3
