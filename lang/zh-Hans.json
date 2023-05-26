@@ -167,6 +167,10 @@
     "defaultMessage": "下一步",
     "description": ""
   },
+  "8w3GEA": {
+    "defaultMessage": "在作品 {article} 中提及你",
+    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
   "8xPi0N": {
     "defaultMessage": "离开围炉",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
@@ -1062,10 +1066,6 @@
   "skbUBl": {
     "defaultMessage": "登入",
     "description": "src/components/Buttons/Login/index.tsx"
-  },
-  "sncOwi": {
-    "defaultMessage": " 在作品中提及你",
-    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
   },
   "stjoBH": {
     "defaultMessage": "现在，去为你喜欢的作者打赏吧！你的每一次打赏都将为作者带来收入。",
