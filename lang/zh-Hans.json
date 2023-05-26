@@ -571,10 +571,6 @@
     "defaultMessage": "原有透过电子信箱登入方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "UgvfcU": {
-    "defaultMessage": "你已完成以太坊钱包设定。你设定的地址：",
-    "description": "src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
-  },
   "UjKkhq": {
     "defaultMessage": "作品已添加标签",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -1010,10 +1006,6 @@
   "q9oMKE": {
     "defaultMessage": "围炉名称",
     "description": ""
-  },
-  "qQmSxu": {
-    "defaultMessage": "你已成功登记参加空投且完成以太坊钱包设定，空投活动将在 2021/11/12 进行。你设定的空投地址：",
-    "description": "src/components/Notice/CryptoNotice/CryptoWalletAirdropNotice.tsx"
   },
   "qYzBk8": {
     "defaultMessage": "退订了你的围炉",
