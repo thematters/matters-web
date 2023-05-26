@@ -167,6 +167,10 @@
     "defaultMessage": "Next Step",
     "description": ""
   },
+  "8w3GEA": {
+    "defaultMessage": "mentioned you in {article}",
+    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
+  },
   "8xPi0N": {
     "defaultMessage": "Unsubscribe Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
@@ -1062,10 +1066,6 @@
   "skbUBl": {
     "defaultMessage": "Log in",
     "description": "src/components/Buttons/Login/index.tsx"
-  },
-  "sncOwi": {
-    "defaultMessage": " mentioned you in an article",
-    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
   },
   "stjoBH": {
     "defaultMessage": "Now, go like the authors you support! Your Likes will become their income",
