@@ -571,10 +571,6 @@
     "defaultMessage": "原有透過電子信箱登入方式將為你保留。為維護你的帳戶安全，加密錢包連接後無法重設。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "UgvfcU": {
-    "defaultMessage": "你已完成以太坊錢包設定。你設定的地址：",
-    "description": "src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
-  },
   "UjKkhq": {
     "defaultMessage": "作品已添加標籤",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -1010,10 +1006,6 @@
   "q9oMKE": {
     "defaultMessage": "圍爐名稱",
     "description": ""
-  },
-  "qQmSxu": {
-    "defaultMessage": "你已成功登記參加空投且完成以太坊錢包設定，空投活動將在 2021/11/12 進行。你設定的空投地址：",
-    "description": "src/components/Notice/CryptoNotice/CryptoWalletAirdropNotice.tsx"
   },
   "qYzBk8": {
     "defaultMessage": "退訂了你的圍爐",
