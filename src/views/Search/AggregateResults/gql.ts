@@ -8,7 +8,15 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
     $first: first_Int_min_0 = 30
     $after: String
   ) {
-    search(input: { type: Article, first: $first, key: $key, after: $after }) {
+    search(
+      input: {
+        type: Article
+        record: true
+        first: $first
+        key: $key
+        after: $after
+      }
+    ) {
       pageInfo {
         startCursor
         endCursor
@@ -33,7 +41,15 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
     $first: first_Int_min_0 = 30
     $after: String
   ) {
-    search(input: { type: Tag, first: $first, key: $key, after: $after }) {
+    search(
+      input: {
+        type: Tag
+        record: true
+        first: $first
+        key: $key
+        after: $after
+      }
+    ) {
       pageInfo {
         startCursor
         endCursor
@@ -58,7 +74,15 @@ export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
     $first: first_Int_min_0 = 30
     $after: String
   ) {
-    search(input: { type: User, first: $first, key: $key, after: $after }) {
+    search(
+      input: {
+        type: User
+        record: true
+        first: $first
+        key: $key
+        after: $after
+      }
+    ) {
       pageInfo {
         startCursor
         endCursor

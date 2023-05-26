@@ -203,6 +203,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               action=""
             >
               <input
+                // FIMXME: FOUC on re-render
+                style={{ borderColor: 'var(--color-line-grey-light)' }}
                 type="search"
                 name="q"
                 ref={searchTextInput}
@@ -218,6 +220,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               />
 
               <SearchButton />
+
               {search.length > 0 && (
                 <ClearButton
                   onClick={() => {
@@ -262,6 +265,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           >
             <form onSubmit={handleSubmit} autoComplete="off" action="">
               <input
+                // FIMXME: FOUC on re-render
+                style={{ borderColor: 'var(--color-line-grey-light)' }}
                 type="search"
                 name="q"
                 ref={searchTextInput}
