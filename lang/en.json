@@ -571,10 +571,6 @@
     "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "UgvfcU": {
-    "defaultMessage": "You have successfully completed Ethereum wallet settings. Please confirm wallet address:",
-    "description": "src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
-  },
   "UjKkhq": {
     "defaultMessage": "Tags added",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -1010,10 +1006,6 @@
   "q9oMKE": {
     "defaultMessage": "Circle Name",
     "description": ""
-  },
-  "qQmSxu": {
-    "defaultMessage": "Airdrop registration completed. Your NFT will be revealed on November 12. Confirm your ETH wallet address:",
-    "description": "src/components/Notice/CryptoNotice/CryptoWalletAirdropNotice.tsx"
   },
   "qYzBk8": {
     "defaultMessage": " unsubscribed your circle",
