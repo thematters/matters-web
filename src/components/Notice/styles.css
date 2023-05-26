@@ -157,6 +157,7 @@
 
   padding-left: var(--spacing-tight);
   margin-left: var(--spacing-xx-loose);
+  color: var(--color-black);
   text-overflow: ellipsis;
   border-left-style: dashed;
   -webkit-line-clamp: 3;
