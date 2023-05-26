@@ -54,10 +54,10 @@ const NoticeActorsNameAndTitle = ({
               &nbsp;
               <Translate zh_hant="人" zh_hans="人" en="users" />
             </span>
+            {action}
           </>
         )}
-        &nbsp;
-        {action}
+        {!isMoreActors && <>&nbsp;{action}</>}
       </span>
       {!!title && (
         <span className="notice-actors-name-and-title-title">
