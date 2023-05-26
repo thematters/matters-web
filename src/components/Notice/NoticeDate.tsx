@@ -7,7 +7,7 @@ import styles from './styles.css'
 
 const NoticeDate = ({ notice }: { notice: NoticeDateFragment }) => (
   <section className="date">
-    <DateTime date={notice.createdAt} type="relative" />
+    <DateTime date={notice.createdAt} type="relative" color="grey" />
 
     <style jsx>{styles}</style>
   </section>

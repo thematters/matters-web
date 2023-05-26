@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React, { useContext } from 'react'
 
 import { datetimeFormat } from '~/common/utils'
@@ -7,6 +8,7 @@ import styles from './styles.css'
 
 interface DateTimeProps {
   date: Date | string | number
+  color?: 'grey' | 'grey-dark'
   type?: 'absolute' | 'relative' | 'standard'
 }
 
@@ -26,11 +28,18 @@ interface DateTimeProps {
  * ```
  */
 
-const BaseDateTime = ({ date, type = 'absolute' }: DateTimeProps) => {
+const BaseDateTime = ({
+  date,
+  type = 'absolute',
+  color = 'grey-dark',
+}: DateTimeProps) => {
   const { lang } = useContext(LanguageContext)
+  const timeclasses = classNames({
+    [color || '']: !!color,
+  })
 
   return (
-    <time dateTime={new Date(date).toISOString()}>
+    <time dateTime={new Date(date).toISOString()} className={timeclasses}>
       {datetimeFormat[type](date, lang)}
 
       <style jsx>{styles}</style>
