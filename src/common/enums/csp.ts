@@ -64,11 +64,8 @@ const IMG_SRC = [
     site_domain_tld_old
   ),
 
-  // get server hostname, for img-cache redirected url
-  // NEXT_PUBLIC_API_HOSTNAME as string,
-  process.env.NEXT_PUBLIC_API_URL
-    ? new URL(process.env.NEXT_PUBLIC_API_URL).hostname
-    : undefined,
+  // Alchemy NFT CDN
+  'nft-cdn.alchemy.com',
 
   // for some old articles were using this s3 urls directly
   'matters-server-production.s3-ap-southeast-1.amazonaws.com',
