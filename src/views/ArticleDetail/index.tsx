@@ -223,9 +223,11 @@ const BaseArticleDetail = ({
   const title = translated && translatedTitle ? translatedTitle : article.title
   const summary =
     translated && translatedSummary ? translatedSummary : article.summary
-  const originalContent = article.contents.markdown
-    ? md2html(article.contents.markdown)
-    : article.contents.html
+  const isEnableMd = !!getQuery('md')
+  const originalContent =
+    isEnableMd && article.contents.markdown
+      ? md2html(article.contents.markdown)
+      : article.contents.html
   const content =
     translated && translatedContent ? translatedContent : originalContent
   const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
