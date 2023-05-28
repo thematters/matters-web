@@ -423,8 +423,8 @@
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
-  "sncOwi": {
-    "defaultMessage": " mentioned you in an article",
+  "8w3GEA": {
+    "defaultMessage": "mentioned you in {article}",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
   },
   "CD688y": {
@@ -435,7 +435,7 @@
     "defaultMessage": "etc. {actorsCount} users",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
-  "PjT72J": {
+  "p5qZnJ": {
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },

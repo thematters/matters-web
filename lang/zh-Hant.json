@@ -1111,8 +1111,8 @@
     "defaultMessage": "登录",
     "description": "src/components/Buttons/Login/index.tsx"
   },
-  "sncOwi": {
-    "defaultMessage": " 在作品中提及你",
+  "8w3GEA": {
+    "defaultMessage": "在作品 {article} 中提及你",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
   },
   "stjoBH": {
