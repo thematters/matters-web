@@ -1,5 +1,5 @@
 import contentHash from '@ensdomains/content-hash'
-import { namehash } from '@ethersproject/hash'
+import { namehash } from 'viem/ens'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
 import {

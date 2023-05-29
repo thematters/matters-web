@@ -1,6 +1,6 @@
 import contentHash from '@ensdomains/content-hash'
-import { namehash } from '@ethersproject/hash'
 import { Fragment, useContext, useEffect, useState } from 'react'
+import { namehash } from 'viem/ens'
 import {
   useAccount,
   useContractWrite,
