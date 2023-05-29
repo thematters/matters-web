@@ -9,6 +9,7 @@ import {
   useEnsResolver,
   usePrepareContractWrite,
 } from 'wagmi'
+import { waitForTransaction } from 'wagmi/actions'
 
 import {
   analytics,
@@ -61,7 +62,7 @@ const LinkENS = ({
     address: viewer.info.ethAddress as `0x${string}`,
     chainId: targetNetwork.id,
   })
-  const { data: resolverData } = useEnsResolver({
+  const { data: resolverAddress } = useEnsResolver({
     name: ensName as string,
     chainId: targetNetwork.id,
   })
@@ -69,7 +70,7 @@ const LinkENS = ({
   const [txConfirming, setTxConfirming] = useState<boolean>(false)
   const ipnsHash = user?.info.ipnsKey
   const { config, error } = usePrepareContractWrite({
-    address: resolverData?.address as `0x${string}` | undefined,
+    account: resolverAddress,
     abi: PublicResolverABI,
     functionName: 'setContenthash',
     args: [
@@ -87,7 +88,7 @@ const LinkENS = ({
     if (setContenthash) {
       const tx = await setContenthash()
       setTxConfirming(true)
-      await tx.wait()
+      await waitForTransaction({ hash: tx.hash })
       setTxConfirming(false)
       switchToComplete(tx.hash)
       analytics.trackEvent('click_button', {

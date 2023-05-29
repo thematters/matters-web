@@ -1,4 +1,3 @@
-import { MaxUint256 } from '@ethersproject/constants'
 import { useContext } from 'react'
 import {
   erc20ABI,
@@ -9,7 +8,7 @@ import {
   usePrepareContractWrite,
 } from 'wagmi'
 
-import { featureSupportedChains } from '~/common/utils'
+import { featureSupportedChains, MaxUint256 } from '~/common/utils'
 import { ViewerContext } from '~/components'
 
 export const useAllowanceUSDT = () => {

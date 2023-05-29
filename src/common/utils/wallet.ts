@@ -1,4 +1,4 @@
-import { Chain, configureChains, createClient, createStorage } from 'wagmi'
+import { Chain, configureChains, createConfig, createStorage } from 'wagmi'
 import { goerli, mainnet, polygon, polygonMumbai } from 'wagmi/chains'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
@@ -18,12 +18,11 @@ const defaultChains: Chain[] = isProd
   ? [mainnet, polygon]
   : [goerli, polygonMumbai]
 
-export const { provider: wagmiProvider, chains } = configureChains(
-  defaultChains,
-  [alchemyProvider({ apiKey: alchemyId })]
-)
+export const { publicClient, chains } = configureChains(defaultChains, [
+  alchemyProvider({ apiKey: alchemyId }),
+])
 
-export const wagmiClient = createClient({
+export const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: [
     new MetaMaskConnector({
@@ -37,11 +36,12 @@ export const wagmiClient = createClient({
     new WalletConnectConnector({
       chains,
       options: {
-        qrcode: true,
+        projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_ID!,
+        showQrModal: true,
       },
     }),
   ],
-  provider: wagmiProvider,
+  publicClient,
   /*
   FIXME: need to find a way of clearing ens name cache instead of clearing the global cache
   */
@@ -93,3 +93,7 @@ export const WALLET_ERROR_MESSAGES = {
     [WalletErrorType.userRejectedSignMessage]: '请签署以完成操作',
   },
 }
+
+export const MaxUint256 = BigInt(
+  '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+)
