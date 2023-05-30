@@ -2,9 +2,11 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import { ADD_TOAST } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Dialog,
   IconTrash24,
+  LanguageContext,
   Translate,
   useDialogSwitch,
   useMutation,
@@ -34,6 +36,8 @@ const fragments = {
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
   const [edges, setEdges] = useContext(DraftsContext)
+
+  const { lang } = useContext(LanguageContext)
 
   const [deleteDraft] = useMutation<DeleteDraftMutation>(DELETE_DRAFT, {
     variables: { id: draft.id },
@@ -67,7 +71,12 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
 
   return (
     <>
-      <button onClick={openDialog} className="delete-button">
+      <button
+        onClick={openDialog}
+        className="delete-button"
+        type="button"
+        aria-label={translate({ id: 'delete', lang })}
+      >
         <IconTrash24 size="md" color="grey" />
         <style jsx>{styles}</style>
       </button>
