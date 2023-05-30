@@ -571,13 +571,9 @@
     "defaultMessage": "Tags added",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
-  "VO4Elt": {
-    "defaultMessage": "mentioned you in a comment on {commentArticle}",
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-  },
-  "VjxGd7": {
-    "defaultMessage": "commented on",
-    "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
+  "V8msLJ": {
+    "defaultMessage": "left comments and mentioned you in your circle",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "VrOoVf": {
     "defaultMessage": "Matters will never ask your wallet key through any channel.",
