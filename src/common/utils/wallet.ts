@@ -1,7 +1,8 @@
 import { Chain, configureChains, createConfig, createStorage } from 'wagmi'
 import { goerli, mainnet, polygon, polygonMumbai } from 'wagmi/chains'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+// import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+import { WalletConnectLegacyConnector } from 'wagmi/connectors/walletConnectLegacy'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 
 import { WalletErrorType } from '~/common/enums'
@@ -33,11 +34,17 @@ export const wagmiConfig = createConfig({
         UNSTABLE_shimOnConnectSelectAccount: true,
       },
     }),
-    new WalletConnectConnector({
+    // new WalletConnectConnector({
+    //   chains,
+    //   options: {
+    //     projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_ID!,
+    //     showQrModal: true,
+    //   },
+    // }),
+    new WalletConnectLegacyConnector({
       chains,
       options: {
-        projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_ID!,
-        showQrModal: true,
+        qrcode: true,
       },
     }),
   ],
