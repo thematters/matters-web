@@ -17,6 +17,7 @@ import zIndexStyles from '~/common/styles/variables/z-index.css'
 import fresnelStyles from '~/common/styles/vendors/fresnel.css'
 import ptrStyles from '~/common/styles/vendors/ptr.css'
 import tippyStyles from '~/common/styles/vendors/tippy.css'
+import walletconnectStyles from '~/common/styles/vendors/walletconnect.css'
 import { useWindowResize } from '~/components'
 
 export const GlobalStyles = () => {
@@ -89,6 +90,9 @@ export const GlobalStyles = () => {
       </style>
       <style jsx global>
         {fresnelStyles}
+      </style>
+      <style jsx global>
+        {walletconnectStyles}
       </style>
     </>
   )

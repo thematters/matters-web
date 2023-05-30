@@ -18,7 +18,6 @@ import {
   TextIcon,
   Translate,
   ViewerContext,
-  WagmiProvider,
 } from '~/components'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -113,12 +112,10 @@ const Wallet = () => {
           currency={currency}
           exchangeRate={exchangeRateLIKE?.rate || 0}
         />
-        <WagmiProvider>
-          <USDTBalance
-            currency={currency}
-            exchangeRate={exchangeRateUSDT?.rate || 0}
-          />
-        </WagmiProvider>
+        <USDTBalance
+          currency={currency}
+          exchangeRate={exchangeRateUSDT?.rate || 0}
+        />
       </section>
 
       <ResponsiveWrapper>

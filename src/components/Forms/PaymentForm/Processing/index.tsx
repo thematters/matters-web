@@ -1,9 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
-import { parseUnits } from '@ethersproject/units'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
+import { parseUnits } from 'viem'
 import { useAccount, useContractWrite, useNetwork } from 'wagmi'
+import { waitForTransaction } from 'wagmi/actions'
 
 import {
   CHAIN,
@@ -210,14 +211,13 @@ const USDTProcessingForm: React.FC<Props> = ({
     isError,
     write: curate,
   } = useContractWrite({
-    mode: 'recklesslyUnprepared',
     address: process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS as `0x${string}`,
     abi: CurationABI,
     functionName: 'curate',
     args: [
       recipient.info.ethAddress as `0x${string}`,
       process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
-      parseUnits(amount.toString(), balanceUSDTData?.decimals),
+      parseUnits(amount.toString() as `${number}`, balanceUSDTData?.decimals!),
       `ipfs://${article?.dataHash}`,
     ],
   })
@@ -246,7 +246,7 @@ const USDTProcessingForm: React.FC<Props> = ({
       },
     })
 
-    await data.wait()
+    await waitForTransaction({ hash: data.hash })
 
     window.dispatchEvent(
       new CustomEvent(SUPPORT_SUCCESS_ANIMATION, {

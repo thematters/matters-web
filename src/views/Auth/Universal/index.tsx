@@ -11,7 +11,6 @@ import {
   useStep,
   VerificationLinkSent,
   ViewerContext,
-  WagmiProvider,
 } from '~/components'
 import { AuthResultType } from '~/gql/graphql'
 
@@ -95,30 +94,28 @@ const UniversalAuth = () => {
       )}
 
       {/* Wallet */}
-      <WagmiProvider>
-        {currStep === 'wallet-select' && (
-          <DynamicWalletAuthFormSelect
-            purpose="page"
-            submitCallback={() => {
-              forward('wallet-connect')
-            }}
-            back={() => forward('select-login-method')}
-          />
-        )}
-        {currStep === 'wallet-connect' && (
-          // <ReCaptchaProvider>
-          <DynamicWalletAuthFormConnect
-            purpose="page"
-            submitCallback={(type?: AuthResultType) => {
-              if (type === AuthResultType.Signup) {
-                forward('complete')
-              }
-            }}
-            back={() => forward('wallet-select')}
-          />
-          // </ReCaptchaProvider>
-        )}
-      </WagmiProvider>
+      {currStep === 'wallet-select' && (
+        <DynamicWalletAuthFormSelect
+          purpose="page"
+          submitCallback={() => {
+            forward('wallet-connect')
+          }}
+          back={() => forward('select-login-method')}
+        />
+      )}
+      {currStep === 'wallet-connect' && (
+        // <ReCaptchaProvider>
+        <DynamicWalletAuthFormConnect
+          purpose="page"
+          submitCallback={(type?: AuthResultType) => {
+            if (type === AuthResultType.Signup) {
+              forward('complete')
+            }
+          }}
+          back={() => forward('wallet-select')}
+        />
+        // </ReCaptchaProvider>
+      )}
 
       {/* Email */}
       {currStep === 'email-login' && (
