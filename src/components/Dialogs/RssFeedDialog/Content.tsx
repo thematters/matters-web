@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import contentHash from '@ensdomains/content-hash'
-import { namehash } from '@ethersproject/hash'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { namehash } from 'viem/ens'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
@@ -17,7 +17,6 @@ import {
   Spacer,
   Spinner,
   TextIcon,
-  WagmiProvider,
 } from '~/components'
 import { AuthorRssFeedFragment, RssGatewaysQuery } from '~/gql/graphql'
 
@@ -51,12 +50,12 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
     address: address as `0x${string}`,
     chainId: targetNetork.id,
   })
-  const { data: resolverData } = useEnsResolver({
+  const { data: resolverAddress } = useEnsResolver({
     name: ensName as string,
     chainId: targetNetork.id,
   })
   const { data: readData } = useContractRead({
-    address: resolverData?.address as `0x${string}` | undefined,
+    address: resolverAddress,
     abi: PublicResolverABI,
     functionName: 'contenthash',
     args: ensName ? [namehash(ensName) as `0x${string}`] : undefined,
@@ -217,9 +216,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
 }
 
 const RssFeedDialogContent: React.FC<RssFeedDialogContentProps> = (props) => (
-  <WagmiProvider>
-    <BaseRssFeedDialogContent {...props} />
-  </WagmiProvider>
+  <BaseRssFeedDialogContent {...props} />
 )
 
 export default RssFeedDialogContent

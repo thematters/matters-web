@@ -73,7 +73,6 @@
     "d3-transition": "^3.0.1",
     "date-fns": "^2.30.0",
     "embla-carousel-react": "^7.1.0",
-    "ethers": "^5.7.2",
     "express": "^4.17.1",
     "fastest-levenshtein": "^1.0.16",
     "fingerprintjs2": "^2.1.4",
@@ -109,7 +108,8 @@
     "url-loader": "^4.1.1",
     "use-debounce": "^9.0.4",
     "validator": "^13.9.0",
-    "wagmi": "^0.11.2"
+    "viem": "^0.3.37",
+    "wagmi": "^1.0.8"
   },
   "devDependencies": {
     "@apollo/react-testing": "^3.1.3",

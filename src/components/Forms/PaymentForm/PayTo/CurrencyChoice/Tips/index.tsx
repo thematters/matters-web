@@ -17,7 +17,7 @@ const Tips = () => {
   const { address } = useAccount()
   const { data: balanceUSDTData } = useBalanceUSDT({})
 
-  const isZeroBalance = balanceUSDTData?.value.lte(0)
+  const isZeroBalance = balanceUSDTData?.value && balanceUSDTData?.value < 0n
   const hasEthAddress = !!viewer.info.ethAddress
 
   if (!hasEthAddress) {
