@@ -7,7 +7,7 @@ type AuthFixtures = {
   bobPage: Page
 }
 
-export const loadUserStorageState = async (user: User, browser: Browser) => {
+const loadUserStorageState = async (user: User, browser: Browser) => {
   const context = await browser.newContext({
     storageState: `test-storage-state/storageState-${user.email}.json`,
   })

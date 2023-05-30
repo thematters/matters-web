@@ -127,7 +127,6 @@
     "@storybook/nextjs": "^7.0.12",
     "@storybook/react": "^7.0.12",
     "@svgr/webpack": "^8.0.1",
-    "@synthetixio/synpress": "^3.7.0",
     "@types/autosize": "^4.0.1",
     "@types/classnames": "^2.3.1",
     "@types/d3": "^7.0.0",

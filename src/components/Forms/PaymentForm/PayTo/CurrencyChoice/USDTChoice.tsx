@@ -104,7 +104,6 @@ const USDTChoice: React.FC<FormProps> = ({
         role="button"
         className="item clickable"
         onClick={switchToSetAmount}
-        aria-label="Tether"
       >
         <TextIcon
           icon={<IconUSDTActive40 size="xl-m" />}
@@ -130,7 +129,7 @@ const USDTChoice: React.FC<FormProps> = ({
   }
 
   return (
-    <section className="item" aria-label="Tether">
+    <section className="item">
       <TextIcon
         icon={<IconUSDT40 size="xl-m" color="grey" />}
         size="md"
