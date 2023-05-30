@@ -31,11 +31,6 @@ aside {
   @mixin border-left-grey;
   @mixin border-right-grey;
 
-  & .aside-sticky {
-    position: sticky;
-    top: var(--spacing-x-loose);
-  }
-
   & .content :global(> * + *) {
     margin-top: var(--spacing-xx-loose);
   }

@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
+import Sticky from 'react-stickynode'
 
 import {
   Head,
@@ -116,10 +117,6 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
     hasOnboardingTasks: showOnboardingTasks,
   })
 
-  const asideContainerClasses = classNames({
-    'aside-sticky': !!asideSticky,
-  })
-
   usePullToRefresh.Register('#ptr')
   usePullToRefresh.Handler(() => window.location.reload())
 
@@ -138,8 +135,8 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
       </article>
 
       <aside className="l-col-three-right">
-        <section className={asideContainerClasses}>
-          <Media greaterThanOrEqual="xl">
+        <Media greaterThanOrEqual="xl">
+          <Sticky enabled={true} top={32}>
             <section className="content">
               {!inEditor && <SearchBar />}
 
@@ -149,8 +146,8 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
 
               {!inEditor && !isInSettings && <SideFooter />}
             </section>
-          </Media>
-        </section>
+          </Sticky>
+        </Media>
       </aside>
 
       <style jsx>{styles}</style>
