@@ -84,12 +84,14 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
 interface MainProps {
   aside?: React.ReactNode
+  asideSticky?: boolean
   smBgColor?: 'grey-lighter'
   inEditor?: boolean
 }
 
 const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   aside,
+  asideSticky = true,
   smBgColor,
   inEditor,
   children,
@@ -114,6 +116,10 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
     hasOnboardingTasks: showOnboardingTasks,
   })
 
+  const asideContainerClasses = classNames({
+    'aside-sticky': !!asideSticky,
+  })
+
   usePullToRefresh.Register('#ptr')
   usePullToRefresh.Handler(() => window.location.reload())
 
@@ -132,17 +138,19 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
       </article>
 
       <aside className="l-col-three-right">
-        <Media greaterThanOrEqual="xl">
-          <section className="content">
-            {!inEditor && <SearchBar />}
+        <section className={asideContainerClasses}>
+          <Media greaterThanOrEqual="xl">
+            <section className="content">
+              {!inEditor && <SearchBar />}
 
-            {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
+              {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
 
-            {aside}
+              {aside}
 
-            {!inEditor && !isInSettings && <SideFooter />}
-          </section>
-        </Media>
+              {!inEditor && !isInSettings && <SideFooter />}
+            </section>
+          </Media>
+        </section>
       </aside>
 
       <style jsx>{styles}</style>
