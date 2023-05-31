@@ -295,10 +295,6 @@
     "defaultMessage": "驗證碼",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "EoNvLu": {
-    "defaultMessage": "創作了 ",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "EwVnoC": {
     "defaultMessage": "我已閱讀並同意",
     "description": ""
@@ -574,10 +570,6 @@
   "UjKkhq": {
     "defaultMessage": "作品已添加標籤",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
-  },
-  "UxfPXa": {
-    "defaultMessage": "累積創作 ",
-    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "V8msLJ": {
     "defaultMessage": "在你的圍爐中留言提及你",
