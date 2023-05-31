@@ -20,11 +20,14 @@
 }
 
 .delete-button {
+  color: var(--color-grey);
+
+  &:hover,
+  &:focus {
+    color: var(--color-red);
+  }
+
   & :global(svg) {
     @mixin transition;
-
-    &:hover {
-      color: var(--color-red);
-    }
   }
 }

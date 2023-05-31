@@ -77,7 +77,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         type="button"
         aria-label={translate({ id: 'delete', lang })}
       >
-        <IconTrash24 size="md" color="grey" />
+        <IconTrash24 size="md" />
         <style jsx>{styles}</style>
       </button>
 
