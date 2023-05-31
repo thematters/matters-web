@@ -295,10 +295,6 @@
     "defaultMessage": "Verification Code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "EoNvLu": {
-    "defaultMessage": "Created",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "EwVnoC": {
     "defaultMessage": "I have read and agree to",
     "description": ""
@@ -574,10 +570,6 @@
   "UjKkhq": {
     "defaultMessage": "Tags added",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
-  },
-  "UxfPXa": {
-    "defaultMessage": "In total",
-    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "V8msLJ": {
     "defaultMessage": "left comments and mentioned you in your circle",
