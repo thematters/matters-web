@@ -85,14 +85,12 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
 interface MainProps {
   aside?: React.ReactNode
-  asideSticky?: boolean
   smBgColor?: 'grey-lighter'
   inEditor?: boolean
 }
 
 const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   aside,
-  asideSticky = true,
   smBgColor,
   inEditor,
   children,
