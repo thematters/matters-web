@@ -1,16 +1,16 @@
 const content = {
   zh_hant: /* html */ `
-<p>社區的事情社區作主，是 Matters 社區的主旨。Matters 社區由 Matters 用戶共同創建，只要你是 Matters 註冊用戶，就能夠透過以下方式參與社區建設。</p>
-<p>隨著用戶提出更多不同的社區建設方法，此頁面也會不斷更新。</p>
+<p>社區的事情社區作主，是馬特市的主旨。馬特市由 Matters 用戶（馬特市民）共同創建，只要你是 Matters 註冊用戶，就能夠透過以下方式參與社區。</p>
 
-<h3 id="events">1. 熱門活動</h3>
-<p>由用戶發起活動，是 Matters 社區的特色。</p>
-<p>透過參與這些活動，你能夠親身體會 Matters 社區的多元與包容，並認識到來自不同地區的作者與非常樂於讚賞與交流的讀者們。</p>
-<p><a class="u-link-green" href="https://matters.town/tags/10716-Matties正在玩-社區活動區">點擊這裡</a> 馬上參與吧！</p>
+<h3 id="events">1. 參與站上各類活動</h3>
+<p>馬特市的特色之一，就是各式各樣豐富、主題多元的創作活動。你可以<a class="u-link-green" href="https://docs.google.com/spreadsheets/d/1Mpvjf-e4gzCLEdddyi_YWTZNxHdgyiEhEG63BEuba2E/edit#gid=1254308553">點擊這裡</a> 看到所有正在進行中的活動。
+</p>
+<p>如果你是新作者，非常推薦你參與這些活動，能夠親身體會馬特市的多元與包容，並認識來自不同地區的作者與樂於讚賞交流的讀者們。</p>
 
 
-<h3 id="developers">2. <a class="u-link-green" href="https://matters.town/tags/11354-Matties自製工具箱-把掌聲送給開發者">Matties 自製工具箱</a></h3>
-
+<h3 id="developers">2. Matters Discord</h3>
+<p>馬特市的另外一個基地是 Matters Discord（<a class="u-link-green" href="https://discord.gg/matterslab">點此進入</a>），你可以在這裡與馬特市民即時互動、參與線上講座、分享日常生活。
+</p>
 
 <h3 id="governance">3. 社區治理</h3>
 
@@ -38,17 +38,16 @@ const content = {
 <p id="sup-2"><sup>[2]</sup> <small>公共標籤是指創建日期在主理標籤功能上線之前（即 2020 年 7 月 27 日），使用這個標籤的作者數達到 40 人或以上的標籤。</small></p>
   `,
   zh_hans: /* html */ `
-<p>社区的事情社区作主，是 Matters 社区的主旨。Matters 社区由 Matters 用户共同创建，只要你是 Matters 注册用户，就能够透过以下方式参与社区建设。</p>
-<p>随著用户提出更多不同的社区建设方法，此页面也会不断更新。</p>
+  <p>社区的事情社区作主，是马特市的主旨。马特市由 Matters 用户（马特市民）共同创建，只要你是 Matters 注册用户，就能够透过以下方式参与社区。 </p>
 
-<h3 id="events">1. 热门活动</h3>
-<p>由用户发起活动，是 Matters 社区的特色。</p>
-<p>通过参与这些活动，你能够亲身体会 Matters 社区的多元与包容，并认识到来自不同地区的作者与非常乐于赞赏与交流的读者们。</p>
-<p><a class="u-link-green" href="https://matters.town/tags/10716-Matties正在玩-社區活動區">点击这里</a> 马上参与吧！</p>
+  <h3 id="events">1. 参与站上各类活动</h3>
+  <p>马特市的特色之一，就是各式各样丰富、主题多元的创作活动。你可以<a class="u-link-green" href="https://docs.google.com/spreadsheets/d/1Mpvjf-e4gzCLEdddyi_YWTZNxHdgyiEhEG63BEuba2E/edit#gid=1254308553">点击这里</a> 看到所有正在进行中的活动。
+  </p>
+  <p>如果你是新作者，非常推荐你参与这些活动，能够亲身体会马特市的多元与包容，并认识来自不同地区的作者与乐于赞赏交流的读者们。 </p>
 
-
-<h3 id="developers">2. <a class="u-link-green" href="https://matters.town/tags/11354-Matties自製工具箱-把掌聲送給開發者">Matties 自制工具箱</a></h3>
-
+  <h3 id="developers">2. Matters Discord</h3>
+  <p>马特市的另外一个基地是 Matters Discord（<a class="u-link-green" href="https://discord.gg/matterslab">点此进入</a>），你可以在这里与马特市民即时互动、参与线上讲座、分享日常生活。
+  </p>
 
 <h3 id="governance">3. 社区治理</h3>
 
@@ -75,6 +74,47 @@ const content = {
 <p id="sup-1"><sup>[1]</sup> <small>歧视行为定义：针对人们受保护的特征向对方发起的言论攻击，这些特征包括民族、种族、国籍、宗教信仰、性取向、种姓、性别、性别认同，以及严重疾病或残疾。</small></p>
 <p id="sup-2"><sup>[2]</sup> <small>公共标签是指创建日期在主理标签功能上线之前（即 2020 年 7 月 27 日），使用这个标签的作者数达到 40 人或以上的标签。</small></p>
   `,
+  en: /* html */ `
+  <p>Matters is a self-governed community, and we let the community in charge. Matters.Town is built up and owned by the vibrant faces of creators. Any registered Matters user can participate in the community in the following ways:</p>
+
+  <h3 id="events">1. Participate in various activities in Matters.Town</h3>
+  <p>One of the characteristics of Matters is the rich and diverse range of creative activities available. Need some inspiration for creating the next masterpiece? Click <a class="u-link-green" href="https://docs.google.com/spreadsheets/d/1Mpvjf-e4gzCLEdddyi_YWTZNxHdgyiEhEG63BEuba2E/edit?usp=sharing">here</a> to see all ongoing activities.</p>
+  <p>If you have just landed in Matters.Town, it’s highly recommended that you participate in these activities as it will allow you to experience the openness and embrace of Matters Community, and get to know authors, readers worldwide who are enthusiastic about exchanging ideas.</p>
+
+
+  <h3 id="developers">2. Matters Discord</h3>
+  <p>Another co-learning hub is Matters Discord (Join <a class="u-link-green" href="https://discord.gg/matterslab">here</a>), where you can interact with fellow Matters citizens in real-time, attend various AMA topics, learn about the latest trends in Web3 and the creator economy, and share daily life experiences.
+  </p>
+
+
+  <h3 id="governance">3. Community Governance</h3>
+
+  <h4>Autonomous Community</h4>
+  <p>Matters community is a self-regulated space and it practices community autonomy. If users believe there are behaviors that violate community consensus, they have the rights to initiate lawsuits and instigate community trials. Once a consensus in favor of "disciplinary measures" is established, the prescribed sanctions is implemented. Furthermore, these cases serve as precedents for community governance and are incorporated into the community regulations.
+  </p>
+  <p>How to initiate a lawsuit? For specific methods, please click <a class="u-link-green" href="https://matters.town/@hi176/116528-馬特市訴訟制度3-0-由建築師陪審團取代-全民投票制-bafyreidutbv2hq4bwtj5qhznamfhhxz7kjkgtdkkrsxev5oknx4vvva3ve">here</a>.</p>
+
+  <h4>Community Regulations</h4>
+  <p>Based on applicable laws and community autonomy precedents, you agree that Matters, in its sole discretion, reserves the right to take necessary actions, include but are not limited to removing and discarding posts, imposing restrictions on posting, suspending or terminatibng accounts if you violate the following regulations:</p>
+  <ol>
+    <li>Publishing extreme discrimination <sup>[1]</sup>,highly insulting language, and hateful racially, ethnically or otherwise objectionable speech, including threats and provocations that incite violence.
+    </li>
+    <li>Any content that involves the sexual exploitation or any violent exploitation and sexual depictions of minors, including the dissemination of child pornography.</li>
+    <li>Intentional plagiarism without indicating the source or original author, including unauthorized copying, use of copyrighted images, trademark infringement, and any other harmful, abusive, harassing, tortious, defamatory, vulgar, obscene, pornographic, libelous, invasive of another’s privacy content that may incur civil or criminal liability under applicable laws and regulations on Matters.</li>
+    <li>Infringing on the legitimate rights of others, including but not limited to spreading deceptive information by impersonating others, infringing on any patents, trademarks, trade secrets, copyrights, or other intellectual property rights, or violating the rights of any other individuals.</li>
+    <li>Attempting to unauthorizedly access, interfere with, disrupt, or damage the servers of the platform, services, any related websites, or storage platforms; or engaging in any behavior that may render webpages invalid, overloaded, damaged, or impaired, or that may disrupt the normal operation of the platform and/or services.</li>
+    <li>Maliciously registering bulk accounts, engaging in excessive liking or flooding of posts, repeatedly posting highly similar content that causes an overwhelming volume of posts or user harassment, or partaking in any other behaviors that adversely affect the interests of the community and its members.</li>
+    <li>Posting commercial advertisements with profit-oriented external links, including but not limited to gambling, pornography, drug-related advertisements, or other commercial activities that have been determined through community lawsuits as inappropriate for the Matters community.</li>
+    <li>Becoming a manager of public Tags <sup>[2]</sup>，but failing to uphold the Tags in a fair and objective manner and refusing to transfer tag ownership. (For community discussions on public Tags, please click<a class="u-link-green" href="https://matters.town/@hi176/80251-馬特市標籤管理方法即將上線-歡迎市民提供建議-bafyreicuoekc36s3ddhrf5rie3ds53td2bfq4kn4tfcqxkj6ylfbboxqja">here</a>.)</li>
+  </ol>
+  <p>In order to ensure the sustainable and positive operation of the community, Matters fosters and safeguards rational, friendly, and sincere conduct that shape a rational. Matters retains the authority to address content and conduct that detrimentally affect the community.</p>
+  <p>If users come across any suspected violations of the community guidelines and wish to report them to the platform, they can leave a comment directly below <a class="u-link-green" href="https://matters.town/@hi176/24744-看到社區異常狀況-歡迎來此帖回報-bafyreiaeziginnm4e4vdzq5y5tdtnqurzgxrngp4ajp2rbdghv6inuv5ie">this post</a>. Thank you for your collaboration in creating a safe and inclusive space in Matters.
+  </p>
+
+  <br/>
+  <p id="sup-1"><sup>[1]</sup> <small>Definition of discriminatory behavior: Verbal attacks targeting protected characteristics of individuals, including ethnicity, race, nationality, religious beliefs, sexual orientation, caste, gender, gender identity, and severe diseases or disabilities.</small></p>
+  <p id="sup-2"><sup>[2]</sup> <small>Public Tags refer to Tags that were created before the launch of the Tag management feature (i.e., before July 27, 2020) and have been used by 40 or more authors.</small></p>
+    `,
 }
 
 export default content
