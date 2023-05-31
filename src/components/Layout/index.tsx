@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
+import Sticky from 'react-stickynode'
 
 import {
   Head,
@@ -133,15 +134,17 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
 
       <aside className="l-col-three-right">
         <Media greaterThanOrEqual="xl">
-          <section className="content">
-            {!inEditor && <SearchBar />}
+          <Sticky enabled={true} top={32}>
+            <section className="content">
+              {!inEditor && <SearchBar />}
 
-            {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
+              {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
 
-            {aside}
+              {aside}
 
-            {!inEditor && !isInSettings && <SideFooter />}
-          </section>
+              {!inEditor && !isInSettings && <SideFooter />}
+            </section>
+          </Sticky>
         </Media>
       </aside>
 

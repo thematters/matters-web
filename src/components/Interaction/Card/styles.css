@@ -20,6 +20,17 @@
 }
 
 /* Background */
+.bg-transparent {
+  background: transparent;
+
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: transparent;
+    }
+  }
+}
+
 .bg-white {
   background: var(--color-white);
 
@@ -66,6 +77,15 @@
     &:hover,
     &:focus {
       background: var(--color-white);
+    }
+  }
+}
+
+.bg-active-transparent {
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: transparent;
     }
   }
 }
