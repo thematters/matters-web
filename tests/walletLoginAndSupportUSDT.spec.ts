@@ -100,9 +100,26 @@ test.describe('web3 test', async () => {
         .click()
       await metamask.confirmTransaction()
 
+      // [Alice] Expect support detail shows View transaction history
+      await expect(
+        alicePage.getByRole('link', { name: 'Transaction History' })
+      ).toBeVisible()
+
+      // [Alice] Check Transactions History
+      await alicePage.getByRole('link', { name: 'Transaction History' }).click()
+      const aliceTransactionItemAmount = await alicePage
+        .getByTestId(TEST_ID.ME_WALLET_TRANSACTIONS_ITEM)
+        .first()
+        .getByTestId(TEST_ID.ME_WALLET_TRANSACTIONS_ITEM_AMOUNT)
+        .first()
+        .innerText()
+      expect(stripSpaces(aliceTransactionItemAmount)).toBe(
+        stripSpaces(`- USDT ${amount}`)
+      )
+
       // [Bob] Go to notifications page
+      await sleep(10 * 1000)
       const bobNotifications = new NotificationsPage(bobPage)
-      await sleep(5 * 1000)
       await bobNotifications.goto()
 
       // [Bob] Expect it has "article new donation" notice
