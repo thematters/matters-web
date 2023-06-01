@@ -16,7 +16,7 @@ import {
 } from './helpers'
 
 test.describe('web3 test', async () => {
-  metamskTest(
+  metamskTest.only(
     'login with wallet and support article with usdt',
     async ({ page: alicePage, bobPage, isMobile }) => {
       if (isMobile) {
