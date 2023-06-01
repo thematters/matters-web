@@ -25,9 +25,11 @@ export const metamskTest = baseTest.extend<{
     // @ts-ignore
     global.expect = expect
     // download metamask
+    console.log('start download metamask')
     const metamaskPath = await prepareMetamask(
       process.env.PLAYWRIGHT_METAMASK_VERSION || '10.25.0'
     )
+    console.log('finish download metamask')
     // prepare browser args
     const browserArgs = [
       `--disable-extensions-except=${metamaskPath}`,
@@ -41,6 +43,7 @@ export const metamskTest = baseTest.extend<{
       browserArgs.push('--headless=new')
     }
     // launch browser
+    console.log('launch browser')
     const context = await chromium.launchPersistentContext('', {
       headless: false,
       args: browserArgs,
@@ -48,6 +51,7 @@ export const metamskTest = baseTest.extend<{
     // wait for metamask
     await context.pages()[0].waitForTimeout(3000)
     // setup metamask
+    console.log('setup metamask')
     await initialSetup(chromium, {
       secretWordsOrPrivateKey: process.env.PLAYWRIGHT_METAMASK_SECRET_WORD,
       network: {
