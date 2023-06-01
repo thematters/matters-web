@@ -36,6 +36,7 @@ export type UserDigestMiniProps = {
   hasUserName?: boolean
 
   disabled?: boolean
+  selected?: boolean
   onClick?: () => void
 } & AvatarProps
 
@@ -67,6 +68,7 @@ const Mini = ({
   hasDisplayName,
   hasUserName,
   disabled,
+  selected,
 
   onClick,
 }: UserDigestMiniProps) => {
@@ -87,6 +89,7 @@ const Mini = ({
   const nameClasses = classNames({
     name: true,
     [`direction-${direction}`]: !!direction,
+    'name-color-grey': !!selected,
   })
 
   if (isArchived) {
@@ -118,7 +121,9 @@ const Mini = ({
       testId={TEST_ID.DIGEST_USER_MINI}
     >
       <section className={containerClasses}>
-        {hasAvatar && <Avatar size={avatarSize} user={user} />}
+        {hasAvatar && (
+          <Avatar size={avatarSize} user={user} selected={selected} />
+        )}
 
         <span className={nameClasses}>
           {hasDisplayName && (
