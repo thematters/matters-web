@@ -48,6 +48,7 @@ export const metamskTest = baseTest.extend<{
       headless: false,
       args: browserArgs,
     })
+    console.log('wait for metamask')
     // wait for metamask
     await context.pages()[0].waitForTimeout(3000)
     // setup metamask
