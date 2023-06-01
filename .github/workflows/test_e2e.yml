@@ -22,6 +22,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@c3b53f6a16e57305370b4ae5a540c2077a1d50dd # pin@v2.2.4
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -30,6 +33,15 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Install linux deps
+        run: |
+          sudo apt-get install --no-install-recommends -y \
+          fluxbox \
+          xvfb
 
       - name: Get installed Playwright version
         id: playwright-version
@@ -56,7 +68,9 @@ jobs:
         run: npm run gen:type:prod
 
       - name: Run Playwright tests
-        run: cp .env.dev .env.local && npm run test
+        run: cp .env.dev .env.local &&
+          Xvfb :0 -screen 0 1024x768x24 -listen tcp -ac &
+          fluxbox & npm run test
 
       - name: Output Playwright tests
         uses: actions/upload-artifact@v3
