@@ -4,7 +4,8 @@ import {
   isTextSelection,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconEditorMenuBold } from '@/public/static/icons/24px/editor-menu-bold.svg'
 import { ReactComponent as IconEditorMenuCode } from '@/public/static/icons/24px/editor-menu-code.svg'
@@ -12,7 +13,7 @@ import { ReactComponent as IconEditorMenuH2 } from '@/public/static/icons/24px/e
 import { ReactComponent as IconEditorMenuH3 } from '@/public/static/icons/24px/editor-menu-h3.svg'
 import { ReactComponent as IconEditorMenuLink } from '@/public/static/icons/24px/editor-menu-link.svg'
 import { ReactComponent as IconEditorMenuOl } from '@/public/static/icons/24px/editor-menu-ol.svg'
-import { ReactComponent as IconEditorMenuQuote } from '@/public/static/icons/24px/editor-menu-quote.svg'
+// import { ReactComponent as IconEditorMenuQuote } from '@/public/static/icons/24px/editor-menu-quote.svg'
 import { ReactComponent as IconEditorMenuStrike } from '@/public/static/icons/24px/editor-menu-strike.svg'
 import { ReactComponent as IconEditorMenuUl } from '@/public/static/icons/24px/editor-menu-ul.svg'
 import { KEYVALUE } from '~/common/enums'
@@ -31,15 +32,12 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   isCommentEditor,
 }) => {
   const { lang } = useContext(LanguageContext)
+  const urlInput = useRef<HTMLInputElement>(null)
 
   const [showLinkInput, setShowLinkInput] = useState(false)
 
-  const onLinkInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key.toLowerCase() !== KEYVALUE.enter) {
-      return
-    }
-
-    const url = event.currentTarget.value
+  const onUrlInputSubmit = () => {
+    const url = urlInput?.current?.value
 
     // TODO: check isURL
     if (url) {
@@ -47,6 +45,14 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
     }
 
     setShowLinkInput(false)
+  }
+
+  const onLinkInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key.toLowerCase() !== KEYVALUE.enter) {
+      return
+    }
+
+    onUrlInputSubmit()
   }
 
   return (
@@ -114,6 +120,12 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 className={
                   editor.isActive('heading', { level: 2 }) ? 'active' : ''
                 }
+                title={translate({
+                  zh_hant: '標題 2',
+                  zh_hans: '标题 2',
+                  en: 'Heading 2',
+                  lang,
+                })}
                 aria-label={translate({
                   zh_hant: '標題 2',
                   zh_hans: '标题 2',
@@ -136,6 +148,12 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 className={
                   editor.isActive('heading', { level: 3 }) ? 'active' : ''
                 }
+                title={translate({
+                  zh_hant: '標題 3',
+                  zh_hans: '标题 3',
+                  en: 'Heading 3',
+                  lang,
+                })}
                 aria-label={translate({
                   zh_hant: '標題 3',
                   zh_hans: '标题 3',
@@ -153,6 +171,12 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               onClick={() => editor.chain().focus().toggleBold().run()}
               disabled={!editor.can().chain().focus().toggleBold().run()}
               className={editor.isActive('bold') ? 'active' : ''}
+              title={translate({
+                zh_hant: '粗體',
+                zh_hans: '粗体',
+                en: 'Bold',
+                lang,
+              })}
               aria-label={translate({
                 zh_hant: '粗體',
                 zh_hans: '粗体',
@@ -171,6 +195,12 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               // @ts-ignore
               disabled={!editor.can().chain().focus().toggleStrike().run()}
               className={editor.isActive('strike') ? 'active' : ''}
+              title={translate({
+                zh_hant: '刪除線',
+                zh_hans: '删除线',
+                en: 'Strikethrough',
+                lang,
+              })}
               aria-label={translate({
                 zh_hant: '刪除線',
                 zh_hans: '删除线',
@@ -189,6 +219,12 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               // @ts-ignore
               disabled={!editor.can().chain().focus().toggleCodeBlock().run()}
               className={editor.isActive('codeBlock') ? 'active' : ''}
+              title={translate({
+                zh_hant: '程式碼',
+                zh_hans: '代码',
+                en: 'Code Block',
+                lang,
+              })}
               aria-label={translate({
                 zh_hant: '程式碼',
                 zh_hans: '代码',
@@ -200,7 +236,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             </button>
 
             {/* Quote */}
-            <button
+            {/* <button
               type="button"
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
@@ -213,7 +249,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               })}
             >
               {withIcon(IconEditorMenuQuote)({ size: 'md' })}
-            </button>
+            </button> */}
 
             {/* Unordered list */}
             <button
@@ -221,6 +257,12 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleBulletList().run()}
               className={editor.isActive('bulletList') ? 'active' : ''}
+              title={translate({
+                zh_hant: '無序清單',
+                zh_hans: '无序列表',
+                en: 'Unordered list',
+                lang,
+              })}
               aria-label={translate({
                 zh_hant: '無序清單',
                 zh_hans: '无序列表',
@@ -237,6 +279,12 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleOrderedList().run()}
               className={editor.isActive('orderedList') ? 'active' : ''}
+              title={translate({
+                zh_hant: '有序清單',
+                zh_hans: '有序列表',
+                en: 'Ordered list',
+                lang,
+              })}
               aria-label={translate({
                 zh_hant: '有序清單',
                 zh_hans: '有序列表',
@@ -263,6 +311,12 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               // @ts-ignore
               disabled={!editor.can().chain().focus().toggleLink().run()}
               className={editor.isActive('link') ? 'active' : ''}
+              title={translate({
+                zh_hant: '連結',
+                zh_hans: '链接',
+                en: 'Link',
+                lang,
+              })}
               aria-label={translate({
                 zh_hant: '連結',
                 zh_hans: '链接',
@@ -276,17 +330,34 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         )}
 
         {showLinkInput && (
-          <input
-            type="text"
-            placeholder={translate({
-              zh_hant: '輸入連結地址',
-              zh_hans: '输入链接地址',
-              en: 'Enter URL',
-              lang,
-            })}
-            autoFocus
-            onKeyDown={onLinkInputKeyDown}
-          />
+          <>
+            <input
+              className="urlInput"
+              ref={urlInput}
+              type="text"
+              title={translate({
+                zh_hant: '輸入連結地址',
+                zh_hans: '输入链接地址',
+                en: 'Enter URL',
+                lang,
+              })}
+              placeholder={translate({
+                zh_hant: '輸入連結地址',
+                zh_hans: '输入链接地址',
+                en: 'Enter URL',
+                lang,
+              })}
+              autoFocus
+              onKeyDown={onLinkInputKeyDown}
+            />
+            <button
+              className="urlSubmitButton"
+              type="button"
+              onClick={onUrlInputSubmit}
+            >
+              <FormattedMessage defaultMessage="Confirm" description="" />
+            </button>
+          </>
         )}
 
         <style jsx>{styles}</style>

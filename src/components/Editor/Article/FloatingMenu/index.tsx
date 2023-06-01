@@ -8,6 +8,7 @@ import { useContext, useState } from 'react'
 import { ReactComponent as IconEditorMenuAdd } from '@/public/static/icons/32px/editor-menu-add.svg'
 import { ReactComponent as IconEditorMenuCode } from '@/public/static/icons/32px/editor-menu-code.svg'
 import { ReactComponent as IconEditorMenuDivider } from '@/public/static/icons/32px/editor-menu-divider.svg'
+import { ReactComponent as IconEditorMenuQuote } from '@/public/static/icons/32px/editor-menu-quote.svg'
 import { ReactComponent as IconEditorMenuVideo } from '@/public/static/icons/32px/editor-menu-video.svg'
 import { translate } from '~/common/utils'
 import { LanguageContext, withIcon } from '~/components'
@@ -122,6 +123,8 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               {withIcon(IconEditorMenuVideo)({ size: 'lg' })}
             </button>
 
+            <UploadAudioButton editor={editor} upload={upload} />
+
             <button
               onClick={() => {
                 editor
@@ -158,6 +161,26 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
 
             <button
               // @ts-ignore
+              onClick={() => editor.chain().focus().setBlockquote().run()}
+              type="button"
+              title={translate({
+                zh_hant: '插入引用',
+                zh_hans: '插入引用',
+                en: 'Insert Blockquote',
+                lang,
+              })}
+              aria-label={translate({
+                zh_hant: '插入引用',
+                zh_hans: '插入引用',
+                en: 'Insert Blockquote',
+                lang,
+              })}
+            >
+              {withIcon(IconEditorMenuQuote)({ size: 'lg' })}
+            </button>
+
+            <button
+              // @ts-ignore
               onClick={() => editor.chain().focus().setHorizontalRule().run()}
               type="button"
               title={translate({
@@ -175,8 +198,6 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
             >
               {withIcon(IconEditorMenuDivider)({ size: 'lg' })}
             </button>
-
-            <UploadAudioButton editor={editor} upload={upload} />
           </div>
         )}
 
