@@ -114,7 +114,10 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
           icon={<IconNavSearch32 size="lg" />}
           activeIcon={<IconNavSearchActive32 size="lg" />}
           active={isInSearch}
-          onClick={() => {
+          href={PATHS.SEARCH}
+          onClick={(e) => {
+            e?.preventDefault()
+
             const path = toPath({
               page: 'search',
             })
@@ -124,6 +127,8 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
             } else {
               router.push(path.href)
             }
+
+            return false
           }}
           isMdUp={isMdUp}
         />
