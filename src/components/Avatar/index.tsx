@@ -21,6 +21,7 @@ export interface AvatarProps {
   src?: string | null
   inEditor?: boolean
   inProfile?: boolean
+  selected?: boolean
 }
 
 const fragments = {
@@ -51,7 +52,7 @@ const fragments = {
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const { user, size = 'default', src, inEditor, inProfile } = props
+  const { user, size = 'default', src, inEditor, inProfile, selected } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
   const isFallback =
     (!src && !user?.avatar) || source.indexOf('data:image') >= 0
@@ -64,6 +65,7 @@ export const Avatar = (props: AvatarProps) => {
     [size]: true,
     hasRing: isCivicLiker || hasArchitectBadge,
     hasBadge: hasLogbook,
+    selected,
   })
 
   return (

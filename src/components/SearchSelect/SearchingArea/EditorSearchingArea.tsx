@@ -28,6 +28,7 @@ import {
 } from '~/gql/graphql'
 
 import SearchSelectNode from '../SearchSelectNode'
+import { StagingNode } from '../StagingArea'
 import styles from '../styles.css'
 import CreateTag from './CreateTag'
 import { ARTICLE_URL_QUERY, LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
@@ -60,6 +61,7 @@ type SearchingAreaProps = {
   searchType: SearchType
   searchFilter?: SearchFilter
   searchExclude?: SearchExclude
+  stagingNodes: StagingNode[]
 
   inSearchingArea: boolean
   toStagingArea: () => void
@@ -77,6 +79,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
   searchType,
   searchFilter,
   searchExclude,
+  stagingNodes,
 
   inSearchingArea,
   toStagingArea,
@@ -257,7 +260,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
     !searchNodes.some(
       (node) => node.__typename === 'Tag' && node.content === searchKey
     )
-
+  // console.log({ stagingNodes })
   /**
    * Render
    */
@@ -302,6 +305,12 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                         <SearchSelectNode
                           node={node}
                           onClick={addNodeToStaging}
+                          selected={
+                            stagingNodes.findIndex((SN) => {
+                              return SN.node.id === node.id
+                            }) !== -1
+                          }
+                          inSearchingArea
                         />
                       </li>
                     ))}
@@ -339,6 +348,15 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                   <SearchSelectNode
                     node={articleUrlData.node}
                     onClick={addNodeToStaging}
+                    selected={
+                      stagingNodes.findIndex(
+                        (SN) =>
+                          SN.node.id ===
+                          (articleUrlData.node?.__typename === 'Article' &&
+                            articleUrlData.node.id)
+                      ) !== -1
+                    }
+                    inSearchingArea
                   />
                 )}
             </>

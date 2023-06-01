@@ -173,6 +173,7 @@ const EditorSearchSelectForm = ({
           searchType={searchType}
           searchFilter={searchFilter}
           searchExclude={searchExclude}
+          stagingNodes={stagingNodes}
           toStagingArea={toStagingArea}
           toSearchingArea={toSearchingArea}
           addNodeToStaging={addNodeToStaging}
