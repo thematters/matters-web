@@ -45,7 +45,7 @@ export const metamskTest = baseTest.extend<{
     // launch browser
     console.log('launch browser')
     const context = await chromium.launchPersistentContext('', {
-      headless: false,
+      headless: true,
       args: browserArgs,
     })
     console.log('wait for metamask')
