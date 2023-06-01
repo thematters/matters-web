@@ -145,6 +145,8 @@ const EditModeHeader = ({
       <span className={isOverDiffLimit ? 'red' : 'green'}>
         &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
       </span>
+
+      <style jsx>{styles}</style>
     </>
   )
 
