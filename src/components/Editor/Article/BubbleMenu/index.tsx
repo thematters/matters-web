@@ -88,12 +88,16 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         // figureImage, figureAudio, figureEmbed contain `<figcaption>`
         const isFigure = $anchor.parent.type.name.includes('figure')
 
+        // hr
+        const isHr = $anchor.nodeAfter?.type.name.includes('horizontalRule')
+
         if (
           !hasEditorFocus ||
           empty ||
           isEmptyTextBlock ||
           !editor.isEditable ||
-          isFigure
+          isFigure ||
+          isHr
         ) {
           return false
         }

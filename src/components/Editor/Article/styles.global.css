@@ -19,6 +19,25 @@
       outline: none;
     }
 
+    /* horizontal rule */
+    & hr.ProseMirror-selectednode {
+      &::before {
+        background-image: radial-gradient(
+          circle,
+          var(--color-black) 0.25rem,
+          transparent 0.25rem
+        );
+      }
+
+      &::after {
+        position: absolute;
+        inset: 0;
+        content: '';
+        border: 1px solid var(--color-line-grey-light);
+        border-radius: 0.5rem;
+      }
+    }
+
     /* placeholder */
     & p.is-editor-empty:first-child::before {
       float: left;
