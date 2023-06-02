@@ -13,7 +13,7 @@ import { ReactComponent as IconEditorMenuH2 } from '@/public/static/icons/24px/e
 import { ReactComponent as IconEditorMenuH3 } from '@/public/static/icons/24px/editor-menu-h3.svg'
 import { ReactComponent as IconEditorMenuLink } from '@/public/static/icons/24px/editor-menu-link.svg'
 import { ReactComponent as IconEditorMenuOl } from '@/public/static/icons/24px/editor-menu-ol.svg'
-// import { ReactComponent as IconEditorMenuQuote } from '@/public/static/icons/24px/editor-menu-quote.svg'
+import { ReactComponent as IconEditorMenuQuote } from '@/public/static/icons/24px/editor-menu-quote.svg'
 import { ReactComponent as IconEditorMenuStrike } from '@/public/static/icons/24px/editor-menu-strike.svg'
 import { ReactComponent as IconEditorMenuUl } from '@/public/static/icons/24px/editor-menu-ul.svg'
 import { KEYVALUE } from '~/common/enums'
@@ -240,7 +240,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             </button>
 
             {/* Quote */}
-            {/* <button
+            <button
               type="button"
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
@@ -253,7 +253,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               })}
             >
               {withIcon(IconEditorMenuQuote)({ size: 'md' })}
-            </button> */}
+            </button>
 
             {/* Unordered list */}
             <button
