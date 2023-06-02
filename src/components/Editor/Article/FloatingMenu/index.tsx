@@ -181,7 +181,10 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
 
             <button
               // @ts-ignore
-              onClick={() => editor.chain().focus().setHorizontalRule().run()}
+              onClick={(e) => {
+                editor.chain().focus().setHorizontalRule().run()
+                setExpand(false)
+              }}
               type="button"
               title={translate({
                 zh_hant: '插入分隔線',
