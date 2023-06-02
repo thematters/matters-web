@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
-import { BigNumber } from '@ethersproject/bignumber'
 import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useAccount } from 'wagmi'
+import { waitForTransaction } from 'wagmi/actions'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -149,7 +149,7 @@ const SetAmount: React.FC<FormProps> = ({
   } = useApproveUSDT()
   const { data: balanceUSDTData, error: balanceUSDTError } = useBalanceUSDT({})
 
-  const allowanceUSDT = allowanceData || BigNumber.from('0')
+  const allowanceUSDT = allowanceData || 0n
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
@@ -268,7 +268,7 @@ const SetAmount: React.FC<FormProps> = ({
     ;(async () => {
       if (approveData) {
         setApproveConfirming(true)
-        await approveData.wait()
+        await waitForTransaction({ hash: approveData.hash })
         refetchAllowanceData()
         setApproveConfirming(false)
       }
@@ -419,7 +419,7 @@ const SetAmount: React.FC<FormProps> = ({
 
             {isConnectedAddress &&
               !isUnsupportedNetwork &&
-              allowanceUSDT.lte(0) && (
+              allowanceUSDT <= 0n && (
                 <>
                   <Dialog.Footer.Button
                     bgColor="green"
@@ -442,7 +442,7 @@ const SetAmount: React.FC<FormProps> = ({
 
             {isConnectedAddress &&
               !isUnsupportedNetwork &&
-              allowanceUSDT.gt(0) && (
+              allowanceUSDT > 0n && (
                 <Dialog.Footer.Button
                   type="submit"
                   form={formId}

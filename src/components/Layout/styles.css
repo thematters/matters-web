@@ -36,7 +36,7 @@ aside {
   }
 
   @media (--lg-up) {
-    padding: var(--spacing-x-loose) 0 0;
+    padding: var(--spacing-x-loose) 0;
 
     /* Fix grid layout. Otherwise, we need wrap it with another `l-low` */
     margin-right: 0 !important;

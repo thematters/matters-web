@@ -1,5 +1,5 @@
-import { getAddress } from '@ethersproject/address'
 import { useContext } from 'react'
+import { getAddress } from 'viem'
 
 import { maskAddress, translate } from '~/common/utils'
 import {

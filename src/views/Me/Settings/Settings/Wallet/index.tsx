@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
-import { getAddress } from '@ethersproject/address'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { getAddress } from 'viem'
 
 import { OPEN_LIKE_COIN_DIALOG, PATHS } from '~/common/enums'
 import { maskAddress, translate } from '~/common/utils'

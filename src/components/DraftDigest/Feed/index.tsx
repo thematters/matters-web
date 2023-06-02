@@ -2,18 +2,10 @@ import gql from 'graphql-tag'
 import React from 'react'
 
 import { toPath } from '~/common/utils'
-import {
-  Card,
-  DateTime,
-  LinkWrapper,
-  ResponsiveWrapper,
-  Title,
-  Translate,
-} from '~/components'
+import { Card, LinkWrapper, ResponsiveWrapper, Translate } from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
 import DeleteButton from './DeleteButton'
-import EditButton from './EditButton'
 import styles from './styles.css'
 
 interface DraftDigestFeedProps {
@@ -27,16 +19,14 @@ const fragments = {
       title
       slug
       updatedAt
-      ...EditButtonDraft
       ...DeleteButtonDraft
     }
-    ${EditButton.fragments.draft}
     ${DeleteButton.fragments.draft}
   `,
 }
 
 const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
-  const { id, title, updatedAt, slug } = draft
+  const { id, title, slug } = draft
   const path = toPath({
     page: 'draftDetail',
     slug,
@@ -46,23 +36,19 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
   return (
     <ResponsiveWrapper>
       <Card {...path} spacing={['base', 0]} bgActiveColor="none">
-        <LinkWrapper {...path} textActiveColor="green">
-          <Title type="feed" is="h2">
-            {title || <Translate id="untitle" />}
-          </Title>
-        </LinkWrapper>
-
-        <footer>
+        <section className="container">
           <section className="left">
-            <EditButton draft={draft} />
-            <DeleteButton draft={draft} />
+            <LinkWrapper {...path} textActiveColor="green">
+              <section className="title">
+                {title || <Translate id="untitle" />}
+              </section>
+            </LinkWrapper>
           </section>
 
           <section className="right">
-            <DateTime date={updatedAt} type="relative" />
+            <DeleteButton draft={draft} />
           </section>
-        </footer>
-
+        </section>
         <style jsx>{styles}</style>
       </Card>
     </ResponsiveWrapper>
