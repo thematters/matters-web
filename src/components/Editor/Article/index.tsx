@@ -9,7 +9,11 @@ import { LanguageContext } from '~/components'
 import { EditorDraftFragment } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
-import { FigureEmbedLinkInput, makeMentionSuggestion } from './extensions'
+import {
+  FigureEmbedLinkInput,
+  FigurePlaceholder,
+  makeMentionSuggestion,
+} from './extensions'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import globalStyles from './styles.global.css'
 import EditorSummary from './Summary'
@@ -62,7 +66,17 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
       update({ content })
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
-    extensions: [FigureEmbedLinkInput],
+    extensions: [
+      FigureEmbedLinkInput,
+      FigurePlaceholder.configure({
+        placeholder: translate({
+          zh_hant: '添加說明文字…',
+          zh_hans: '添加说明文字…',
+          en: 'Add caption…',
+          lang,
+        }),
+      }),
+    ],
   })
 
   return (

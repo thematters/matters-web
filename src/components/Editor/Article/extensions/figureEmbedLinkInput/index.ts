@@ -3,6 +3,12 @@ import { Node } from '@tiptap/core'
 
 import Input from './Input'
 
+/**
+ * FigureEmbedLinkInput is a extension works with FigureEmbed extension,
+ * which allows users to input a link inside editor content.
+ *
+ */
+
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     figureEmbedLinkInput: {

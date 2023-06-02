@@ -47,17 +47,17 @@
       content: attr(data-placeholder);
     }
 
-    & figcaption:has(.ProseMirror-trailingBreak) {
-      position: relative;
-    }
-
-    & figcaption:has(.ProseMirror-trailingBreak)::before {
+    & figure.is-figure-empty::before {
       position: absolute;
+      right: 0;
+      bottom: 0;
       left: 0;
-      z-index: -1;
-      width: 100%;
+      font-size: var(--font-size-sm-s);
+      line-height: 1.5;
       color: var(--color-grey);
-      content: '添加說明文字…';
+      white-space: pre-wrap;
+      cursor: text;
+      content: attr(data-figure-placeholder);
     }
 
     /* disable interactive */
@@ -89,25 +89,5 @@
         pointer-events: none;
       }
     }
-  }
-}
-
-html[lang='zh-Hans'],
-html[data-lang='zh-Hans'] {
-  &
-    .articleEditor
-    .ProseMirror
-    figcaption:has(.ProseMirror-trailingBreak)::before {
-    content: '添加说明文字…';
-  }
-}
-
-html[lang='en'],
-html[data-lang='en'] {
-  &
-    .articleEditor
-    .ProseMirror
-    figcaption:has(.ProseMirror-trailingBreak)::before {
-    content: 'Add caption…';
   }
 }
