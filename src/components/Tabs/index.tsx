@@ -28,7 +28,7 @@ const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
         <TextIcon
           size="md"
           color={selected ? 'green' : 'greyDarker'}
-          weight="semibold"
+          weight="bold"
         >
           {children}
         </TextIcon>

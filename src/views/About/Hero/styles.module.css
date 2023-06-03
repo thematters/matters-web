@@ -137,7 +137,7 @@
             @mixin line-clamp;
 
             font-size: var(--font-size-md);
-            font-weight: var(--font-weight-semibold);
+            font-weight: var(--font-weight-bold);
             -webkit-line-clamp: 2;
           }
 

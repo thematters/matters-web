@@ -5,7 +5,7 @@
 
 .action {
   margin-bottom: var(--spacing-x-tight);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
   color: var(--color-black);
 }
 

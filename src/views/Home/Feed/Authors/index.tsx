@@ -149,7 +149,7 @@ const Authors = () => {
             href={PATHS.AUTHORS}
             textIconProps={{
               size: 'md',
-              weight: 'semibold',
+              weight: 'bold',
               spacing: 'xxtight',
             }}
             textAlign="center"

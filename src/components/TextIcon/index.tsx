@@ -23,7 +23,7 @@ export interface TextIconProps {
   color?: TextIconColor
   size?: 'xs' | 'sm' | 'smS' | 'mdS' | 'md' | 'xm' | 'lg' | 'xl'
   spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
-  weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
+  weight?: 'light' | 'normal' | 'md' | 'bold'
   allowUserSelect?: boolean
 
   textPlacement?: 'bottom' | 'left' | 'right'
