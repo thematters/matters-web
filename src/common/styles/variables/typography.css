@@ -3,15 +3,15 @@
 :root {
   /* Font Stack */
   --font-sans-tc: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
-    'Segoe UI', roboto, arial, 'PingFang TC', 'PingFang SC', 'Noto Sans TC',
-    'Noto Sans SC', 'Noto Sans CJK TC', 'Noto Sans CJK SC', 'Source Han Sans TW',
-    'Source Han Sans CN', 'Microsoft JhengHei', 'Microsoft YaHei',
-    'WenQuanYi Micro Hei', sans-serif;
+    'Segoe UI', roboto, arial, 'PingFang TC', 'PingFang SC',
+    var(--font-noto-sans-tc), var(--font-noto-sans-sc), 'Noto Sans CJK TC',
+    'Noto Sans CJK SC', 'Source Han Sans TW', 'Source Han Sans CN',
+    'Microsoft JhengHei', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
   --font-sans-sc: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
-    'Segoe UI', roboto, arial, 'PingFang SC', 'PingFang TC', 'Noto Sans SC',
-    'Noto Sans TC', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Source Han Sans CN',
-    'Source Han Sans TW', 'Microsoft YaHei', 'Microsoft JhengHei',
-    'WenQuanYi Micro Hei', sans-serif;
+    'Segoe UI', roboto, arial, 'PingFang SC', 'PingFang TC',
+    var(--font-noto-sans-sc), var(--font-noto-sans-tc), 'Noto Sans CJK SC',
+    'Noto Sans CJK TC', 'Source Han Sans CN', 'Source Han Sans TW',
+    'Microsoft YaHei', 'Microsoft JhengHei', 'WenQuanYi Micro Hei', sans-serif;
   --font-serif-tc: 'Noto Serif', 'Noto Serif TC', 'Noto Serif SC',
     'Noto Serif CJK TC', 'Noto Serif CJK SC', 'Source Han Serif TW',
     'Source Han Serif CN', 'Songti TC', 'Songti SC', serif;
@@ -34,9 +34,7 @@
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
-  --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  --font-weight-bolder: 900;
 
   /* Base */
   --font-size-base: var(--font-size-md);
@@ -46,7 +44,7 @@
   /* Nav Title */
   --font-size-nav-title: var(--font-size-lg);
   --line-height-nav-title: 2; /* 32/20 */
-  --font-weight-nav-title: var(--font-weight-semibold);
+  --font-weight-nav-title: var(--font-weight-bold);
 
   /* Feed Title */
   --font-size-feed-title: var(--font-size-xm);
@@ -61,7 +59,7 @@
   /* Article Title */
   --font-size-article-title: var(--font-size-xl);
   --line-height-article-title: 1.5; /* 36/24 */
-  --font-weight-article-title: var(--font-weight-semibold);
+  --font-weight-article-title: var(--font-weight-bold);
 
   /* Article Body */
   --font-size-article-base: 1rem; /* 16px; */

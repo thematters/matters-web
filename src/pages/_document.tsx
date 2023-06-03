@@ -1,4 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document'
+// import { Noto_Sans_SC, Noto_Sans_TC } from 'next/font/google'
 import Script from 'next/script'
 import React from 'react'
 
@@ -8,10 +9,27 @@ interface MattersDocumentProps {
   lang: HTMLLanguage
 }
 
+// const notoSansSC = Noto_Sans_SC({
+//   weight: ['300', '400', '500', '700'],
+//   style: ['normal'],
+//   variable: '--font-noto-sans-sc',
+//   subsets: ['latin'],
+//   display: 'swap',
+// })
+// const notoSansTC = Noto_Sans_SC({
+//   weight: ['300', '400', '500', '700'],
+//   style: ['normal'],
+//   variable: '--font-noto-sans-tc',
+//   subsets: ['latin'],
+//   display: 'swap',
+// })
+
 class MattersDocument extends Document<MattersDocumentProps> {
   public render() {
     return (
-      <Html>
+      <Html
+      // className={`${notoSansSC.variable} ${notoSansTC.variable}`}
+      >
         <Head>
           <meta httpEquiv="Content-Security-Policy" content={CSP_POLICY} />
         </Head>

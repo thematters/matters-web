@@ -33,7 +33,7 @@ li {
 
 .num {
   font-size: 2.25rem;
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
   color: var(--color-matters-green);
 
   @media (--sm-up) {

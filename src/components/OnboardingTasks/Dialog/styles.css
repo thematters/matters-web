@@ -6,7 +6,7 @@
   text-align: center;
 
   & .bold {
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-bold);
     color: var(--color-black);
   }
 }

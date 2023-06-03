@@ -34,10 +34,6 @@
   font-weight: var(--font-weight-medium);
 }
 
-.text-weight-semibold {
-  font-weight: var(--font-weight-semibold);
-}
-
 .line-clamp {
   @mixin line-clamp;
 
