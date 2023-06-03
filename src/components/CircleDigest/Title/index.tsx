@@ -5,7 +5,7 @@ import { LinkWrapper, LinkWrapperProps } from '~/components'
 import { DigestTitleCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CircleDigestTitleTextSize = 'xs' | 'md'
 export type CircleDigestTitleTextWeight = 'normal' | 'md'
@@ -50,10 +50,7 @@ const CircleDigestTitle = ({
       disabled={disabled}
       onClick={onClick}
     >
-      <>
-        {is === 'h2' && <h2 className={titleClasses}>{displayName}</h2>}
-        <style jsx>{styles}</style>
-      </>
+      <>{is === 'h2' && <h2 className={titleClasses}>{displayName}</h2>}</>
     </LinkWrapper>
   )
 }

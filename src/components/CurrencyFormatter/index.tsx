@@ -1,4 +1,4 @@
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   value: number | string
@@ -23,7 +23,6 @@ export const CurrencyFormatter: React.FC<Props> = ({
           ≈&nbsp;{subCurrency}&nbsp;{subValue}
         </span>
       )}
-      <style jsx>{styles}</style>
     </span>
   )
 }

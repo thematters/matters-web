@@ -20,7 +20,7 @@ import {
   UserDonationRecipientFragment,
 } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -68,8 +68,6 @@ const USDTChoice: React.FC<FormProps> = ({
             en="Not available temporarily"
           />
         </TextIcon>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -92,8 +90,6 @@ const USDTChoice: React.FC<FormProps> = ({
             en="The author has not opened"
           />
         </TextIcon>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -123,8 +119,6 @@ const USDTChoice: React.FC<FormProps> = ({
             subValue={formatAmount(balanceUSDT * exchangeRate, 2)}
           />
         )}
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -177,8 +171,6 @@ const USDTChoice: React.FC<FormProps> = ({
           </TextIcon>
         </Button>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

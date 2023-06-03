@@ -3,7 +3,7 @@ import { forwardRef } from 'react'
 
 import { KEYCODES } from '~/common/enums'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ItemProps = {
   error: boolean
@@ -62,8 +62,6 @@ const Item = forwardRef(
           {...inputProps}
           value={value}
         />
-
-        <style jsx>{styles}</style>
       </>
     )
   }

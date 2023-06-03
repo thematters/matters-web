@@ -11,7 +11,7 @@ import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeTypeIcon from '../NoticeTypeIcon'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const SubscribedArticleNewCommentNotice = ({
   notice,
@@ -64,8 +64,6 @@ const SubscribedArticleNewCommentNotice = ({
 
         <NoticeDate notice={notice} />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

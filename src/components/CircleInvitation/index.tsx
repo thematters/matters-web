@@ -14,7 +14,7 @@ import { CircleInvitationFragment } from '~/gql/graphql'
 import CircleInvitationInvitee from './Invitee'
 import CircleInvitationPeriod from './Period'
 import CircleInvitationResendButton from './Resend'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface CircleInvitationProps {
   invitation: CircleInvitationFragment
@@ -109,7 +109,6 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
             </span>
           )}
         </section>
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

@@ -10,7 +10,7 @@ import {
   SEARCH_AGGREGATE_TAGS_PUBLIC,
   SEARCH_AGGREGATE_USERS_PUBLIC,
 } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Tags from './Tags'
 import Users from './Users'
 
@@ -84,7 +84,6 @@ const AggregateResults = () => {
       {isArticle && <Articles />}
       {isTag && <Tags />}
       {isUser && <Users />}
-      <style jsx>{styles}</style>
     </>
   )
 }

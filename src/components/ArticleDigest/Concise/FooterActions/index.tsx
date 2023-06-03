@@ -2,7 +2,7 @@ import { BookmarkButton, DateTime } from '~/components'
 import { FooterActionsConciseArticlePublicFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FooterActionsProps = {
   article: FooterActionsConciseArticlePublicFragment
@@ -32,8 +32,6 @@ const FooterActions = ({
       <section className="right">
         <BookmarkButton article={article} inCard={inCard} />
       </section>
-
-      <style jsx>{styles}</style>
     </footer>
   )
 }

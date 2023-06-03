@@ -16,7 +16,7 @@ import {
 } from '~/components'
 import { ViewerLikeInfoQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const VIEWER_LIKE_INFO = gql`
   query ViewerLikeInfo {
@@ -96,8 +96,6 @@ const WalletSettings = () => {
         }
         rightTextColor={ethAddress ? 'grey-darker' : 'green'}
       />
-
-      <style jsx>{styles}</style>
     </Form.List>
   )
 }

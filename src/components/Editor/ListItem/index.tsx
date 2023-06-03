@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { Card, IconAdd16, IconExclaimHint } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ListItemProps = {
   title: string | React.ReactNode
@@ -14,7 +14,6 @@ type ListItemProps = {
 const CoverIndicator = ({ cover }: { cover?: string | null }) => (
   <span className="rect">
     {cover ? <img src={cover} alt="cover" /> : <IconAdd16 size="xs" />}
-    <style jsx>{styles}</style>
   </span>
 )
 
@@ -31,7 +30,6 @@ const NumberIndicator = ({
       style={{ position: 'absolute', bottom: 0, left: 0 }}
     >
       {num}
-      <style jsx>{styles}</style>
     </span>
     {withHintOverlay && num === 0 && (
       <IconExclaimHint style={{ position: 'absolute', top: 0, right: 0 }} />
@@ -60,8 +58,6 @@ const ListItem: React.FC<React.PropsWithChildren<ListItemProps>> & {
           {children}
         </section>
       </Card>
-
-      <style jsx>{styles}</style>
     </li>
   )
 }

@@ -9,7 +9,7 @@ import { ReactComponent as IconCheck5 } from '@/public/static/images/onboarding/
 import IMAGE_GALAXY from '@/public/static/images/onboarding/galaxy.png'
 import { ViewerContext } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   task: number
@@ -74,7 +74,6 @@ const Galaxy = ({ task, onClick }: Props) => {
       <section className={task5Classes} onClick={() => onClick(5)}>
         <IconCheck5 />
       </section>
-      <style jsx>{styles}</style>
     </section>
   )
 }

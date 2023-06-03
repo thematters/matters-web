@@ -26,7 +26,7 @@ import { ExchangeRatesQuery, WalletBalanceQuery } from '~/gql/graphql'
 import { FiatCurrencyBalance, LikeCoinBalance, USDTBalance } from './Balance'
 import PaymentPassword from './PaymentPassword'
 import PaymentPointer from './PaymentPointer'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import ViewStripeAccount from './ViewStripeAccount'
 import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 
@@ -131,8 +131,6 @@ const Wallet = () => {
           <PaymentPointer />
         </Form.List>
       </ResponsiveWrapper>
-
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

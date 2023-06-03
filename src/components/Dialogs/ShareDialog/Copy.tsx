@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { analytics } from '~/common/utils'
 import { CopyToClipboard, IconLink16, TextIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Copy = ({ link }: { link: string }) => {
   const intl = useIntl()
@@ -30,7 +30,6 @@ const Copy = ({ link }: { link: string }) => {
           </TextIcon>
         </button>
       </CopyToClipboard>
-      <style jsx>{styles}</style>
     </section>
   )
 }

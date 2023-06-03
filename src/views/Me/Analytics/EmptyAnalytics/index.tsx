@@ -15,7 +15,7 @@ import {
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 import { CreateDraftMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const EmptyAnalytics = () => {
   const router = useRouter()
@@ -88,8 +88,6 @@ const EmptyAnalytics = () => {
           </p>
         </section>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

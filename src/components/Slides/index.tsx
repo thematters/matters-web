@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useEffect, useState } from 'react'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SlidesProps {
   bgColor?: 'yellow-lighter' | 'green-lighter' | 'grey-lighter'
@@ -26,7 +26,6 @@ const SlideItem: React.FC<React.PropsWithChildren<SlideItemProps>> = ({
   return (
     <li className={slidesItemClasses} {...rest}>
       {children}
-      <style jsx>{styles}</style>
     </li>
   )
 }
@@ -79,8 +78,6 @@ export const Slides: React.FC<React.PropsWithChildren<SlidesProps>> & {
       <section className="wrap" ref={emblaRef} onClickCapture={onCaptureClick}>
         <ul>{children}</ul>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

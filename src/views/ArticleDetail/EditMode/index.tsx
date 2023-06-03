@@ -44,7 +44,7 @@ import {
 } from './gql'
 import EditModeHeader from './Header'
 import PublishState from './PublishState'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface EditModeProps {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -276,7 +276,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                     />
                   )}
                 </SupportSettingDialog>
-                <style jsx>{styles}</style>
               </section>
             }
             inEditor

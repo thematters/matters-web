@@ -1,6 +1,6 @@
 import { Dialog, useDialogSwitch, useStep } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Success from './Success'
 import Upload from './Upload'
 
@@ -33,7 +33,6 @@ const BaseMigrationDialog = ({
         {currStep === 'upload' && <Upload nextStep={nextStep} />}
         {currStep === 'success' && <Success />}
       </Dialog>
-      <style jsx>{styles}</style>
     </>
   )
 }

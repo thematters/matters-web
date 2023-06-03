@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { ArticleDigestNotice } from '~/components/ArticleDigest'
 import { NoticeArticleCardFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const NoticeArticleCard = ({
   article,
@@ -17,7 +17,6 @@ const NoticeArticleCard = ({
   return (
     <section className="notice-article-card">
       <ArticleDigestNotice article={article} />
-      <style jsx>{styles}</style>
     </section>
   )
 }

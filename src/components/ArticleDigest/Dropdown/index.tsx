@@ -7,7 +7,7 @@ import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ArticleDigestDropdownProps = {
   article: ArticleDigestDropdownArticleFragment
@@ -91,8 +91,6 @@ export const ArticleDigestDropdown = ({
             disabled={cardDisabled}
           />
         </footer>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

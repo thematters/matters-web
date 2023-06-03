@@ -9,7 +9,7 @@ import { useContext, useEffect, useRef } from 'react'
 import { LanguageContext } from '~/components'
 
 import { InnerChart } from './'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type AxisProps = InnerChart
 
@@ -72,8 +72,6 @@ const Axis: React.FC<AxisProps> = ({
         transform={`translate(0, ${height - bottom})`}
       />
       <g className="yAxis" ref={yAxisRef} transform={`translate(${left},0)`} />
-
-      <style jsx>{styles}</style>
     </>
   )
 }

@@ -28,7 +28,7 @@ import { ArticleDetailPublicQuery, HasDonatedQuery } from '~/gql/graphql'
 
 import Donators from './Donators'
 import { fragments, HAS_DONATED } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import SupportButton from './SupportButton'
 
 interface DonationProps {
@@ -250,8 +250,6 @@ const SupportWidget = ({ article }: DonationProps) => {
           />
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

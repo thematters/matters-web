@@ -23,7 +23,7 @@ import {
 } from '~/gql/graphql'
 
 import NFTCollection from './NFTCollection'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   user: EditProfileDialogUserPublicFragment &
@@ -262,8 +262,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           onChange={handleChange}
         />
       </section>
-
-      <style jsx>{styles}</style>
     </Form>
   )
 

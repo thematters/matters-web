@@ -9,7 +9,7 @@ import {
 } from '~/components'
 import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface SearchSelectArticleProps {
   article: ArticleDigestDropdownArticleFragment
@@ -52,8 +52,6 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
             <IconUnChecked color="grey-light" size="md-s" />
           )}
         </span>
-
-        <style jsx> {styles}</style>
       </section>
     </Card>
   )

@@ -3,7 +3,7 @@ import { forwardRef } from 'react'
 
 import { Card, CardProps, IconArrowRight16, TextIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ItemProps = {
   title: string | React.ReactNode
@@ -65,8 +65,6 @@ const Item: React.FC<ItemProps> = forwardRef(
             </TextIcon>
           )}
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     )
 
@@ -80,8 +78,6 @@ const Item: React.FC<ItemProps> = forwardRef(
         >
           {itemContent}
         </Card>
-
-        <style jsx>{styles}</style>
       </li>
     )
   }

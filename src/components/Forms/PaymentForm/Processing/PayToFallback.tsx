@@ -1,7 +1,7 @@
 import IMAGE_PAYMENT_FAILURE from '@/public/static/images/payment-failure.png'
 import { Dialog, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   closeDialog: () => void
@@ -47,7 +47,6 @@ const PayToFallback: React.FC<Props> = ({ closeDialog }) => {
           />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-      <style jsx>{styles}</style>
     </>
   )
 }

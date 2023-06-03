@@ -7,7 +7,7 @@ import { RevisedArticlePublishedNoticeFragment } from '~/gql/graphql'
 import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const RevisedArticlePublishedNotice = ({
   notice,
@@ -32,8 +32,6 @@ const RevisedArticlePublishedNotice = ({
       <section className="footer">
         <NoticeDate notice={notice} />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

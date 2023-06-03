@@ -10,7 +10,7 @@ import {
 } from '~/gql/graphql'
 
 import ConfirmTable from '../ConfirmTable'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type HeadProps = {
   circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
@@ -107,8 +107,6 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
           </>
         )}
       </ConfirmTable>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

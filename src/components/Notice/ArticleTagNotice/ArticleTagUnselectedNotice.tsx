@@ -12,7 +12,7 @@ import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const ArticleTagUnselectedNotice = ({
   notice,
@@ -73,8 +73,6 @@ const ArticleTagUnselectedNotice = ({
 
         <NoticeDate notice={notice} />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

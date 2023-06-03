@@ -32,7 +32,7 @@ import ArticleCustomStagingArea from '../ArticleCustomStagingArea'
 import SetCover from '../SetCover'
 import TagCustomStagingArea from '../TagCustomStagingArea'
 import AccessDialog from './AccessDialog'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type BottomBarProps = {
   saving: boolean
@@ -235,8 +235,6 @@ const BottomBar: React.FC<BottomBarProps> = ({
           </section>
         </section>
       </Layout.FixedMain>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

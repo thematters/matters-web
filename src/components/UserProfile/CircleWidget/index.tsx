@@ -9,7 +9,7 @@ import {
   UserProfileUserPublicQuery,
 } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CircleWidgetCircle = NonNullable<
   NonNullable<UserProfileUserPublicQuery['user']>['ownCircles']
@@ -60,8 +60,6 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
             borderRadius="xtight"
           />
         </Form.List>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -87,8 +85,6 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
       />
 
       {!isMe && <SubscribeCircleDialog circle={circle} />}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

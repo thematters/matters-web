@@ -34,7 +34,7 @@ import {
   PasswordResetDialogButton,
   PasswordResetRedirectButton,
 } from './Buttons'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -214,7 +214,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           />
         )}
       </Form>
-      <style jsx>{styles}</style>
     </section>
   )
 
@@ -244,7 +243,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
         <footer>
           <LanguageSwitch />
-          <style jsx>{styles}</style>
         </footer>
       </>
     )

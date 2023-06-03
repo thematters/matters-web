@@ -3,7 +3,7 @@ import { forwardRef } from 'react'
 
 import { Card, CardProps, IconArrowDown16, TextIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type OptionProps = {
   id?: string
@@ -70,8 +70,6 @@ const Option: React.FC<OptionProps> = forwardRef(
             )}
           </section>
         </Card>
-
-        <style jsx>{styles}</style>
       </li>
     )
   }

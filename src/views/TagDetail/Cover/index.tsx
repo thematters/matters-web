@@ -5,7 +5,7 @@ import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { Cover, Tag } from '~/components'
 import { CoverTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface TagCoverProps {
   tag: CoverTagFragment
@@ -23,8 +23,6 @@ const TagCover = ({ tag }: TagCoverProps) => {
         <div className="content">
           <Tag tag={tag} type="title" disabled />
         </div>
-
-        <style jsx>{styles}</style>
       </div>
     </Cover>
   )

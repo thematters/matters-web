@@ -6,7 +6,7 @@ import { FollowingFeedCircleFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CircleDigestFeedProps = {
   circle: FollowingFeedCircleFragment
@@ -64,8 +64,6 @@ const FeedCircle = ({
           <DropdownActions actions={actions} />
         </section>
       </footer>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

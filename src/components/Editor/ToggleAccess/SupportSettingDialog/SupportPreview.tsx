@@ -9,7 +9,7 @@ import {
 } from '~/components'
 import DonationButton from '~/components/Buttons/DonationButton'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const SupportPreview = ({
   content,
@@ -59,7 +59,6 @@ const SupportPreview = ({
         {tabType === 'request' && <DonationButton supported={false} />}
         {tabType === 'reply' && <DonationButton supported={true} />}
       </section>
-      <style jsx>{styles}</style>
     </section>
   )
 }

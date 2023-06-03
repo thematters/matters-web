@@ -27,7 +27,7 @@ import {
   USER_ARTICLES_PUBLIC,
   VIEWER_ARTICLES,
 } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const ArticleSummaryInfo = ({
   user,
@@ -51,7 +51,6 @@ const ArticleSummaryInfo = ({
         defaultMessage="words"
         description="src/views/User/Articles/UserArticles.tsx"
       />
-      <style jsx>{styles}</style>
     </div>
   )
 }
@@ -249,7 +248,6 @@ const UserArticles = () => {
           ))}
         </List>
       </InfiniteScroll>
-      <style jsx>{styles}</style>
     </>
   )
 }

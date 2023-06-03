@@ -1,6 +1,6 @@
 import { IconInfo16, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const SubscribeCircleHint = () => {
   return (
@@ -11,8 +11,6 @@ const SubscribeCircleHint = () => {
           zh_hans="订阅后，每月 1 日系统将扣除本期订阅费用"
         />
       </TextIcon>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -21,7 +21,7 @@ import {
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 import { CreateDraftMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 import TaskItem from './TaskItem'
 
 interface Props {
@@ -239,8 +239,6 @@ const Tasks = ({ task }: Props) => {
           </>
         )}
       </section>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

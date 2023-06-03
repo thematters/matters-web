@@ -16,7 +16,7 @@ import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
 import ReplyTo from '../ReplyTo'
 import { fragments, REFETCH_COMMENT } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CommentControls = {
   avatarSize?: Extract<AvatarSize, 'md' | 'lg'>
@@ -101,8 +101,6 @@ export const BaseCommentFeed = ({
           {...actionControls}
         />
       </section>
-
-      <style jsx>{styles}</style>
     </article>
   )
 }

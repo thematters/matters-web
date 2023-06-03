@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { datetimeFormat } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface DateTimeProps {
   date: Date | string | number
@@ -41,8 +41,6 @@ const BaseDateTime = ({
   return (
     <time dateTime={new Date(date).toISOString()} className={timeclasses}>
       {datetimeFormat[type](date, lang)}
-
-      <style jsx>{styles}</style>
     </time>
   )
 }

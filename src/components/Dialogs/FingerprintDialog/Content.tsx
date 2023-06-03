@@ -22,7 +22,7 @@ import { GatewaysQuery, RetryEditArticleMutation } from '~/gql/graphql'
 
 import ArticleSecret from './ArticleSecret'
 import SectionCard from './SectionCard'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const EDIT_ARTICLE = gql`
   mutation RetryEditArticle($id: ID!, $iscnPublish: Boolean) {
@@ -287,8 +287,6 @@ const FingerprintDialogContent = ({
             }
           />
         )}
-
-        <style jsx>{styles}</style>
       </section>
     </Dialog.Content>
   )

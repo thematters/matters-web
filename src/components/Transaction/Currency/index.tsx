@@ -5,7 +5,7 @@ import {
 } from '~/components/Icon'
 import { TransactionCurrency } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   currency: TransactionCurrency
@@ -22,7 +22,6 @@ const Currency = ({ currency }: Props) => {
         <IconFiatCurrency40 size={size} />
       )}
       {currency === TransactionCurrency.Like && <IconLikeCoin40 size={size} />}
-      <style jsx>{styles}</style>
     </section>
   )
 }

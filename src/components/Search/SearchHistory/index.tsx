@@ -6,7 +6,7 @@ interface SearchHistoryProps {
   removeSearchHistoryItem: (value: string) => void
 }
 import EmptySearchHistory from './EmptySearchHistory'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export const SearchHistory = ({
   data,
@@ -55,7 +55,6 @@ export const SearchHistory = ({
           </Menu.Item>
         ))}
       </Menu>
-      <style jsx>{styles}</style>
     </section>
   )
 }

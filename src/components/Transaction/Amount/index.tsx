@@ -3,7 +3,7 @@ import { formatAmount } from '~/common/utils'
 import { TextIcon } from '~/components'
 import { TransactionState } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /***
  * This is a sub component of Transaction that presents
@@ -44,7 +44,6 @@ const Amount = ({ amount, currency, state, testId }: AmountProps) => {
         &nbsp;
         {formatAmount(Math.abs(amount))}
       </TextIcon>
-      <style jsx>{styles}</style>
     </section>
   )
 }

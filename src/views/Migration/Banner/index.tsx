@@ -4,7 +4,7 @@ import IMAGE_BANNER from '@/public/static/images/migration-banner.svg'
 import { translate } from '~/common/utils'
 import { LanguageContext, ShareButton, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Banner = () => {
   const { lang } = useContext(LanguageContext)
@@ -51,7 +51,6 @@ const Banner = () => {
               </TextIcon>
             </ShareButton>
 
-            <style jsx>{styles}</style>
             <style jsx>{`
               .banner {
                 background-image: url(${IMAGE_BANNER});

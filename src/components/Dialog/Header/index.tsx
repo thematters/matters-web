@@ -5,7 +5,7 @@ import { TextId } from '~/common/enums'
 import { Media, Spacer, Translate } from '~/components'
 
 import { BackButton, CloseButton, RightButton } from './Button'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface HeaderProps {
   title: TextId | React.ReactNode
@@ -50,8 +50,6 @@ const BaseHeader = ({
       )}
 
       {rightButton && <section className="right">{rightButton}</section>}
-
-      <style jsx>{styles}</style>
     </header>
   )
 }
@@ -74,8 +72,6 @@ const Header: React.FC<HeaderProps> & {
       <VisuallyHidden>
         <BaseHeader {...props} />
       </VisuallyHidden>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

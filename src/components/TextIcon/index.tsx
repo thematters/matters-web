@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type TextIconColor =
   | 'black'
@@ -75,8 +75,6 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
         {children && <span className="text">{children}</span>}
 
         {icon}
-
-        <style jsx>{styles}</style>
       </span>
     )
   }
@@ -86,8 +84,6 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
       {icon}
 
       {children && <span className="text">{children}</span>}
-
-      <style jsx>{styles}</style>
     </span>
   )
 }

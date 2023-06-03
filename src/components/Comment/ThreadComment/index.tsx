@@ -10,7 +10,7 @@ import {
 import Feed from '../Feed'
 import ExpandButton from './ExpandButton'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const COLLAPSE_COUNT = 2
 
@@ -81,7 +81,6 @@ export const ThreadComment = ({
           )}
         </ul>
       )}
-      <style jsx>{styles}</style>
     </section>
   )
 }

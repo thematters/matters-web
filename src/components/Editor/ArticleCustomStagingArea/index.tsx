@@ -8,7 +8,7 @@ import { SelectArticle } from '~/components/SearchSelect/SearchingArea'
 import { CustomStagingAreaProps } from '~/components/SearchSelect/StagingArea'
 
 import ConfirmDialog from './ConfirmDialog'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const ArticleCustomStagingArea = ({
   nodes: articles,
@@ -28,8 +28,6 @@ const ArticleCustomStagingArea = ({
         <section className="hint emptyHint">
           <Translate id={hint} />
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -68,7 +66,6 @@ const ArticleCustomStagingArea = ({
             )
         )}
       </ul>
-      <style jsx> {styles}</style>
     </section>
   )
 }

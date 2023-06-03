@@ -14,7 +14,7 @@ import {
 } from '~/components'
 import { ArticleSecretQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ArticleSecretSectionProps = {
   id: string
@@ -75,8 +75,6 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
           </Button>
         </CopyToClipboard>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

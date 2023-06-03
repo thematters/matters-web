@@ -18,7 +18,7 @@ import {
 } from '~/gql/graphql'
 
 import SelectLicense from './SelectLicense'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ToggleAccessProps = {
   circle?: DigestRichCirclePublicFragment | null
@@ -189,8 +189,6 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           <Translate id="publishToISCNHint_2" />
         </p>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

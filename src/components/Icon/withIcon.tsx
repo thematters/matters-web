@@ -1,6 +1,6 @@
-import classNames from 'classnames'
+import './styles.module.css'
 
-import styles from './styles.css'
+import classNames from 'classnames'
 
 export type IconSize =
   | 'xxs'
@@ -53,10 +53,6 @@ export const withIcon = (
           aria-hidden="true"
           {...restProps}
         />
-
-        <style jsx global>
-          {styles}
-        </style>
       </>
     )
   }

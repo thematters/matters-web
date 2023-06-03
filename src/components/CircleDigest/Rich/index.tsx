@@ -17,7 +17,7 @@ import {
 
 import Footer, { FooterControls } from './Footer'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CircleDigestRichControls = {
   hasOwner?: boolean
@@ -111,8 +111,6 @@ const Rich = ({
             onClickPrice={onClickPrice}
           />
         )}
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

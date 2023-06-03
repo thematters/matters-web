@@ -18,7 +18,7 @@ import {
 import articleFragments from '~/components/GQL/fragments/article'
 import { ArticleDetailPublicQuery, CollectionListQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CollectionListArticle = NonNullable<
   CollectionListQuery['article'] & { __typename: 'Article' }
@@ -124,8 +124,6 @@ const Collection: React.FC<{
       </List>
 
       {pageInfo?.hasNextPage && <ViewMoreButton onClick={loadAll} />}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

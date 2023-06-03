@@ -5,7 +5,7 @@ import { translate } from '~/common/utils'
 import { IconChecked, LanguageContext, Translate } from '~/components'
 import { AssetFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SelectorProps {
   assets: AssetFragment[]
@@ -62,8 +62,6 @@ const Selector: React.FC<SelectorProps> = ({
           </li>
         ))}
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -6,7 +6,7 @@ import IMAGE_WAVE_2 from '@/public/static/images/about/wave-intro-2.svg'
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Intro = () => {
   return (
@@ -144,7 +144,6 @@ const Intro = () => {
         </li>
       </ul>
 
-      <style jsx>{styles}</style>
       <style jsx>{`
         .ecosystem {
           background-image: url(${IMAGE_WAVE_1});

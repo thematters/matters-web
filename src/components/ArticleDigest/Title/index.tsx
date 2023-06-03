@@ -6,7 +6,7 @@ import { toPath, UtmParams } from '~/common/utils'
 import { LinkWrapper, LinkWrapperProps, Translate } from '~/components'
 import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ArticleDigestTitleTextSize =
   | 'xs'
@@ -101,8 +101,6 @@ export const ArticleDigestTitle = ({
         ) : (
           <h5 className={titleClasses}>{title}</h5>
         )}
-
-        <style jsx>{styles}</style>
       </>
     </LinkWrapper>
   )

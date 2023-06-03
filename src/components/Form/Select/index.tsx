@@ -5,7 +5,7 @@ import { DropdownDialog } from '~/components'
 
 import Field, { FieldProps } from '../Field'
 import Option from './Option'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * Pure UI component for <select> & <option>
@@ -76,8 +76,6 @@ const Select: React.FC<SelectProps> = ({
             key={option.value}
           />
         ))}
-
-        <style jsx>{styles}</style>
       </ul>
     )
   }
@@ -107,8 +105,6 @@ const Select: React.FC<SelectProps> = ({
             onClick={openDialog}
             ref={ref}
           />
-
-          <style jsx>{styles}</style>
         </ul>
       )}
     </DropdownDialog>

@@ -32,7 +32,7 @@ import {
 } from '~/gql/graphql'
 
 import PaymentInfo from '../../PaymentInfo'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SetAmountOpenTabCallbackValues {
   window: Window
@@ -226,8 +226,6 @@ const Confirm: React.FC<FormProps> = ({
               {InnerForm}
             </>
           )}
-
-          <style jsx>{styles}</style>
         </section>
       </Dialog.Content>
 

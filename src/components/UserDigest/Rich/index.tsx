@@ -15,7 +15,7 @@ import {
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * UeserDigest.Rich is a component for presenting user's avatar, display
@@ -99,8 +99,6 @@ const Rich = ({
             {hasUnblock && <UnblockUserButton user={user} />}
             {hasFollow && <FollowUserButton user={user} />}
           </section>
-
-          <style jsx>{styles}</style>
         </section>
       </Card>
     )
@@ -151,8 +149,6 @@ const Rich = ({
           {hasFollow && <FollowUserButton user={user} />}
           {extraButton}
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

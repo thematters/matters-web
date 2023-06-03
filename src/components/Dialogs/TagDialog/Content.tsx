@@ -29,7 +29,7 @@ import {
 } from '~/components'
 import { PutTagMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const PUT_TAG = gql`
   mutation PutTag($input: PutTagInput!) {
@@ -51,7 +51,6 @@ const HintLengthText: React.FC<{
       <span className={curLength > 0 ? 'highlight' : ''}>{curLength ?? 0}</span>
       &nbsp;/&nbsp;{maxLength}
     </span>
-    <style jsx>{styles}</style>
   </>
 )
 
@@ -243,7 +242,6 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       />
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
-      <style jsx>{styles}</style>
     </>
   )
 }

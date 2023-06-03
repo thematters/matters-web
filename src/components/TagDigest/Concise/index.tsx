@@ -9,7 +9,7 @@ import {
 } from '~/components'
 import { TagDigestConciseTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type TagDigestConciseTagProps = {
   tag: TagDigestConciseTagFragment
@@ -59,7 +59,6 @@ const Concise = ({
             {numAbbr(tag.numArticles)}
           </TextIcon>
         )}
-        <style jsx>{styles}</style>
       </section>
     </LinkWrapper>
   )

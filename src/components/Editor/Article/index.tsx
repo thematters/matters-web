@@ -10,7 +10,7 @@ import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { EditorDraftFragment, SearchUsersQuery } from '~/gql/graphql'
 
 import MentionUserList from '../MentionUserList'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   draft: EditorDraftFragment
@@ -95,7 +95,6 @@ const ArticleEditor: FC<Props> = ({
       </div>
       <style jsx>{themeStyles}</style>
       <style jsx>{editorStyles}</style>
-      <style jsx>{styles}</style>
     </>
   )
 }

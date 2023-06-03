@@ -5,7 +5,7 @@ import { RecommendUserActivityFragment } from '~/gql/graphql'
 import FollowingRecommendHead from '../FollowingRecommendHead'
 import FollowingRecommendUser from '../FollowingRecommendUser'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   users: RecommendUserActivityFragment['recommendUsers'] | null
@@ -38,7 +38,6 @@ const RecommendUserActivity = ({ users }: Props) => {
           </Slides.Item>
         ))}
       </Slides>
-      <style jsx>{styles}</style>
     </section>
   )
 }

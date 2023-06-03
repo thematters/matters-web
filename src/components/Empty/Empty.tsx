@@ -1,6 +1,6 @@
 import { Alert } from '@reach/alert'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface EmptyProps {
   icon: React.ReactNode
@@ -15,8 +15,6 @@ export const Empty = ({ icon, description }: EmptyProps) => {
       <Alert type="polite">
         <section className="description">{description}</section>
       </Alert>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

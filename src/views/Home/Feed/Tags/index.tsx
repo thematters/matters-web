@@ -21,7 +21,7 @@ import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { FeedTagsPublicQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const FEED_TAGS = gql`
   query FeedTagsPublic(
@@ -162,8 +162,6 @@ const TagsFeed = () => {
           </ViewMoreCard>
         </section>
       </Media>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -30,7 +30,7 @@ import FollowButton from './FollowButton'
 import { FollowersDialog } from './FollowersDialog'
 import { CIRCLE_PROFILE_PRIVATE, CIRCLE_PROFILE_PUBLIC } from './gql'
 import { MembersDialog } from './MembersDialog'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const CircleProfile = () => {
   const viewer = useContext(ViewerContext)
@@ -108,7 +108,6 @@ const CircleProfile = () => {
             }
           />
           <DropdownActions circle={circle} />
-          <style jsx>{styles}</style>
         </section>
       )}
     </>
@@ -248,8 +247,6 @@ const CircleProfile = () => {
         <AuthorWidget circle={circle} />
 
         <SubscribeCircleDialog circle={circle} />
-
-        <style jsx>{styles}</style>
       </section>
     </>
   )

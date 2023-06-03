@@ -17,7 +17,7 @@ import {
 } from '~/components'
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 import WalletAddress from './WalletAddress'
 
 type WalletLabelProps = {
@@ -103,8 +103,6 @@ const WalletLabel: React.FC<WalletLabelProps> = ({ user, isMe }) => {
           </span>
         </Tooltip>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

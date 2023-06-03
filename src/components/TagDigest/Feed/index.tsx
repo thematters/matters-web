@@ -16,7 +16,7 @@ import {
 } from '~/components'
 import { TagDigestFeedTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type TagDigestFeedProps = {
   tag: TagDigestFeedTagFragment
@@ -127,8 +127,6 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
             </Link>
           </section>
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

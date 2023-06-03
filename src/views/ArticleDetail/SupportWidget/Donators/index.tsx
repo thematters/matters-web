@@ -15,7 +15,7 @@ import { Avatar, AvatarProps } from '~/components/Avatar'
 import { DonatorsArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type AvatarItemPros = Pick<AvatarProps, 'user'>
 
@@ -137,8 +137,6 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
               </button>
             )}
           </section>
-
-          <style jsx>{styles}</style>
         </section>
       )}
     </SupportersDialog>

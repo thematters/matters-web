@@ -1,4 +1,4 @@
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface FooterProps {
   fieldMsgId: string
@@ -14,8 +14,6 @@ const Footer: React.FC<FooterProps> = ({ fieldMsgId, hint, error }) => (
         {error}
       </div>
     )}
-
-    <style jsx>{styles}</style>
   </footer>
 )
 

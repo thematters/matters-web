@@ -11,7 +11,7 @@ import {
 import { VisibleAnnouncementsQuery } from '~/gql/graphql'
 
 import Dot from './Dot'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CarouselProps = {
   items: VisibleAnnouncementsQuery['official']['announcements']
@@ -152,8 +152,6 @@ const Carousel = ({ items }: CarouselProps) => {
           })}
         </div>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -19,7 +19,7 @@ import { UserSubscriptionsQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
 import { USER_SUBSCRIPTIONS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Subscriptions = () => {
   const { getQuery } = useRoute()
@@ -153,8 +153,6 @@ const Subscriptions = () => {
           </List>
         </InfiniteScroll>
       </section>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

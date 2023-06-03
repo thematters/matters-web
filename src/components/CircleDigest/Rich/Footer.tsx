@@ -7,7 +7,7 @@ import {
 
 import Counts from '../Counts'
 import Price from '../Price'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FooterControls = {
   hasPrice?: boolean
@@ -46,8 +46,6 @@ const Footer = ({ circle, hasPrice, onClickPrice }: FooterProps) => {
       <Counts circle={circle} />
 
       {hasPrice && <Price circle={circle} onClick={onClickPrice} />}
-
-      <style jsx>{styles}</style>
     </footer>
   )
 }

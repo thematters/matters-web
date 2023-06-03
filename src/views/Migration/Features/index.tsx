@@ -3,7 +3,7 @@ import IMAGE_FEATURE_2 from '@/public/static/images/migration-feature-2.svg'
 import IMAGE_FEATURE_3 from '@/public/static/images/migration-feature-3.svg'
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const texts: {
   zh_hant: Record<string, string>
@@ -188,8 +188,6 @@ const Features = () => {
           </div>
         </li>
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

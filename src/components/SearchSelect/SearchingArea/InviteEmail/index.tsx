@@ -1,7 +1,7 @@
 import { Card, IconAdd16, TextIcon, Translate } from '~/components'
 import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface InviteEmailProps {
   user: UserDigestMiniUserFragment
@@ -21,8 +21,6 @@ const InviteEmail: React.FC<InviteEmailProps> = ({ user, onClick }) => {
         </TextIcon>
 
         <span className="content">&nbsp;{user.displayName}</span>
-
-        <style jsx> {styles}</style>
       </section>
     </Card>
   )

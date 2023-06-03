@@ -1,7 +1,7 @@
 import { TextIcon } from '~/components/TextIcon'
 
 import { ShareButtons } from '../Buttons'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface EmbedShareProps {
   title?: string
@@ -51,8 +51,6 @@ export const EmbedShare = ({ title, path, headerTitle }: EmbedShareProps) => {
           <ShareButtons.Email title={shareTitle} link={shareLink} circle />
         </span>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

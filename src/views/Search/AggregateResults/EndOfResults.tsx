@@ -1,6 +1,6 @@
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const EndOfResults = () => {
   return (
@@ -10,7 +10,6 @@ const EndOfResults = () => {
         zh_hant="已顯示所有結果"
         en="End of the results"
       />
-      <style jsx>{styles}</style>
     </section>
   )
 }

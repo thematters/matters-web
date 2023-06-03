@@ -17,7 +17,7 @@ import StagingArea, {
 } from '~/components/SearchSelect/StagingArea'
 import { SearchExclude, SearchFilter } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * <EditorSearchSelectForm> is a dialog content for
@@ -200,7 +200,6 @@ const EditorSearchSelectForm = ({
           CustomStagingArea={CustomStagingArea}
         />
       )}
-      <style jsx>{styles}</style>
     </>
   )
 }

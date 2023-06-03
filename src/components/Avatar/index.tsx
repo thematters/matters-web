@@ -9,7 +9,7 @@ import LOGBOOK from '@/public/static/images/logbook.gif'
 import { IconLogbookBadge16, ResponsiveImage } from '~/components'
 import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
 
@@ -92,8 +92,6 @@ export const Avatar = (props: AvatarProps) => {
           )}
         </section>
       )}
-
-      <style jsx>{styles}</style>
 
       <style jsx>{`
         .civic-liker.ring {

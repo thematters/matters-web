@@ -1,6 +1,6 @@
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Intro = () => (
   <section className="intro">
@@ -27,8 +27,6 @@ const Intro = () => (
         help.like.co
       </a>
     </p>
-
-    <style jsx>{styles}</style>
   </section>
 )
 

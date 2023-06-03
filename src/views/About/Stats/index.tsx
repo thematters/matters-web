@@ -1,6 +1,6 @@
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Stats = () => {
   return (
@@ -49,8 +49,6 @@ const Stats = () => {
           </li>
         </ul>
       </div>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

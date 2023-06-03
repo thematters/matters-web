@@ -5,7 +5,7 @@ import { AssetFragment } from '~/gql/graphql'
 
 import SetCoverDialog from './Dialog'
 import Selector from './Selector'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Uploader, { UploadEntity } from './Uploader'
 
 export type SetCoverProps = {
@@ -83,8 +83,6 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
               setSelected={setSelected}
             />
           )}
-
-          <style jsx>{styles}</style>
         </section>
       </Dialog.Content>
     </>

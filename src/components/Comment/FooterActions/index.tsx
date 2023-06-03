@@ -17,7 +17,7 @@ import {
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
 import DownvoteButton from './DownvoteButton'
 import ReplyButton, { ReplyButtonProps } from './ReplyButton'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import UpvoteButton from './UpvoteButton'
 
 export type FooterActionsControls = {
@@ -167,7 +167,6 @@ const BaseFooterActions = ({
       </section>
 
       {hasCreatedAt && <CreatedAt comment={comment} hasLink={hasLink} />}
-      <style jsx>{styles}</style>
     </footer>
   )
 }

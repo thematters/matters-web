@@ -3,7 +3,7 @@ import { PATHS, PAYMENT_PROVIDER } from '~/common/enums'
 import { Layout, Translate, useRoute } from '~/components'
 
 import { Box } from '../../Box'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const PayCallbackSuccess = () => {
   const { getQuery, router } = useRoute()
@@ -39,8 +39,6 @@ const PayCallbackSuccess = () => {
               <Translate id="callbackClose" />
             </p>
           </section>
-
-          <style jsx>{styles}</style>
         </Box>
       </Layout.Spacing>
     </Layout.Main>

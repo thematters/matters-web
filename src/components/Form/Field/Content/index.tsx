@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ContentProps = {
   noMargin?: boolean
@@ -15,13 +15,7 @@ const Content: React.FC<React.PropsWithChildren<ContentProps>> = ({
     'no-margin': noMargin,
   })
 
-  return (
-    <section className={contentClass}>
-      {children}
-
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <section className={contentClass}>{children}</section>
 }
 
 export default Content

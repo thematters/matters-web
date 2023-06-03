@@ -22,7 +22,7 @@ import { FeedAuthorsQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import { FEED_AUTHORS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)
@@ -158,8 +158,6 @@ const Authors = () => {
           </ViewMoreCard>
         </section>
       </Media>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

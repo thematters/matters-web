@@ -10,7 +10,7 @@ import {
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import ResponseCount from './ResponseCount'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const ARTICLE_RESPONSE = gql`
   query ArticleResponse(
@@ -58,7 +58,6 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
             en="The author has turned off all responses"
           />
         </TextIcon>
-        <style jsx>{styles}</style>
       </section>
     )
   }

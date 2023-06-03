@@ -16,7 +16,7 @@ import {
 
 import UnreadIcon from '../UnreadIcon'
 import NavListItem from './NavListItem'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const NavBar = () => {
   const viewer = useContext(ViewerContext)
@@ -62,8 +62,6 @@ const NavBar = () => {
             }}
           />
         </ul>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -125,8 +123,6 @@ const NavBar = () => {
           aria-label={TEXT[lang].notifications}
         />
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

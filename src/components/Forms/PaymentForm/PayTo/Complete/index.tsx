@@ -24,7 +24,7 @@ import {
 } from '~/gql/graphql'
 
 import { RELATED_DONATIONS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   callback?: () => void
@@ -183,8 +183,6 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
             )}
           </section>
         )}
-
-        <style jsx>{styles}</style>
       </section>
     </Dialog.Content>
   )

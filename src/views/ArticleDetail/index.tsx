@@ -54,7 +54,7 @@ import License from './License'
 import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationToast from './TranslationToast'
@@ -336,8 +336,6 @@ const BaseArticleDetail = ({
       {article.access.circle && (
         <DynamicSubscribeCircleDialog circle={article.access.circle} />
       )}
-
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

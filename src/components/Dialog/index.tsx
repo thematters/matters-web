@@ -16,8 +16,7 @@ import Header from './Header'
 import Lazy from './Lazy'
 import Message from './Message'
 import Overlay from './Overlay'
-import styles from './styles.css'
-import globalStyles from './styles.global.css'
+import styles from './styles.module.css'
 
 export interface DialogOverlayProps {
   isOpen: boolean | undefined
@@ -107,8 +106,6 @@ const Container: React.FC<
         <Media at="sm">
           <Handle closeDialog={onDismiss} {...bind()} />
         </Media>
-
-        <style jsx>{styles}</style>
       </div>
     </div>
   )
@@ -182,10 +179,6 @@ export const Dialog: React.ComponentType<
           />
         </DialogContent>
       </AnimatedDialogOverlay>
-
-      <style jsx global>
-        {globalStyles}
-      </style>
     </>
   )
 }

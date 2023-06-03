@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 
 import Item from './Item'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * iOS-like UI component
@@ -43,8 +43,6 @@ const List: React.FC<React.PropsWithChildren<ListProps>> & {
       <ul className={listClasses} role="list">
         {children}
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

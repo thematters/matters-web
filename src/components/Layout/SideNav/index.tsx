@@ -28,7 +28,7 @@ import {
 import NavMenu from '../NavMenu'
 import UnreadIcon from '../UnreadIcon'
 import NavListItem from './NavListItem'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Logo = () => {
   const intl = useIntl()
@@ -183,8 +183,6 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
           />
         )}
       </li>
-
-      <style jsx>{styles}</style>
     </ul>
   )
 }
@@ -237,8 +235,6 @@ const SideNav = () => {
             <UniversalAuthButton />
           </li>
         </ul>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -253,8 +249,6 @@ const SideNav = () => {
       <Media lessThan="lg">
         <SideNavMenu isMdUp={false} />
       </Media>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

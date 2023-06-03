@@ -10,7 +10,7 @@ import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
 import NoticeDigest from '../NoticeDigest'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const PaymentReceivedDonationNotice = ({
   notice,
@@ -43,7 +43,6 @@ const PaymentReceivedDonationNotice = ({
             >
               {tx.amount} {tx.currency}
             </span>
-            <style jsx>{styles}</style>
           </>
         )) ||
         ''

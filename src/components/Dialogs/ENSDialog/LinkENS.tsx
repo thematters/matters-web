@@ -33,7 +33,7 @@ import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 import ENSDescription from './ENSDescription'
 import LinkENSIntro from './LinkENSIntro'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface LinkENSProps {
   user: UserProfileUserPublicQuery['user']
@@ -138,8 +138,6 @@ const LinkENS = ({
         </Dialog.Footer>
 
         <ENSDescription />
-
-        <style jsx>{styles}</style>
       </Fragment>
     )
   }
@@ -191,8 +189,6 @@ const LinkENS = ({
         </Dialog.Footer>
 
         <ENSDescription />
-
-        <style jsx>{styles}</style>
       </Fragment>
     )
   }
@@ -228,8 +224,6 @@ const LinkENS = ({
       </Dialog.Footer>
 
       <ENSDescription />
-
-      <style jsx>{styles}</style>
     </Fragment>
   )
 }

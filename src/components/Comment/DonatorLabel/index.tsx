@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 import { DonatorLabelCommentFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const fragments = {
   comment: gql`
@@ -26,8 +26,6 @@ const DonatorLabel = ({
   return (
     <span className="label">
       <Translate zh_hant="支持者" zh_hans="支持者" en="Supporter" />
-
-      <style jsx>{styles}</style>
     </span>
   )
 }

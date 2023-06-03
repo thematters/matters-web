@@ -14,7 +14,7 @@ import {
   withIcon,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Footer = () => {
   const year = new Date().getFullYear()
@@ -283,8 +283,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{styles}</style>
     </footer>
   )
 }

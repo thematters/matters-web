@@ -13,7 +13,7 @@ import {
 import { CircleContentAnalyticsArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface CircleAnalyticsContentProps {
   article: CircleContentAnalyticsArticleFragment
@@ -31,7 +31,6 @@ const Count = ({ count }: { count: number }) => {
         <TextIcon icon={<IconRead16 />} size="xs" color="grey-dark">
           {count}
         </TextIcon>
-        <style jsx>{styles}</style>
       </button>
     </Tooltip>
   )
@@ -66,7 +65,6 @@ const ContentDigest = ({
           <DateTime date={createdAt} />
         </section>
       </section>
-      <style jsx>{styles}</style>
     </Card>
   )
 }

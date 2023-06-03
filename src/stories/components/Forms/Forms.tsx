@@ -115,8 +115,10 @@ const Forms = () => (
       li {
         @mixin border-bottom-grey;
         padding: var(--spacing-base);
+      }
 
-        @media (--sm-down) {
+      @media (--sm-down) {
+        li {
           background: #f7f7f7;
         }
       }

@@ -26,7 +26,7 @@ import {
 } from '~/gql/graphql'
 
 import LikeCoinChoice from './LikeCoinChoice'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Tips from './Tips'
 import USDTChoice from './USDTChoice'
 
@@ -145,8 +145,6 @@ const CurrencyChoice: React.FC<FormProps> = ({
       />
 
       <Tips />
-
-      <style jsx>{styles}</style>
     </section>
   )
 

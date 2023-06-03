@@ -1,6 +1,6 @@
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Timeline = () => {
   return (
@@ -132,8 +132,6 @@ const Timeline = () => {
           </ul>
         </div>
       </div>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

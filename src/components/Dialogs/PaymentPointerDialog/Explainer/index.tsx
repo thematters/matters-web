@@ -1,6 +1,6 @@
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const PaymentPointerExplainer = () => (
   <>
@@ -71,7 +71,6 @@ const PaymentPointerExplainer = () => (
       />
     </p>
     <br />
-    <style jsx>{styles}</style>
   </>
 )
 

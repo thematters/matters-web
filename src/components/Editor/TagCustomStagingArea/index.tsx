@@ -10,7 +10,7 @@ import { EditorRecommendedTagsQuery } from '~/gql/graphql'
 import { EDITOR_RECOMMENDED_TAGS } from './gql'
 import RecommendedTags from './RecommendedTags'
 import SelectedTags from './SelectedTags'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type EditorRecommendedTagsUserTagsEdgesNode = Required<
   NonNullable<
@@ -75,8 +75,6 @@ const TagCustomStagingArea = ({
         <section className="hint">
           <Translate id={hint} />
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }

@@ -6,7 +6,7 @@ import { useEventListener } from '~/components/Hook'
 
 import Galaxy from '../Galaxy'
 import Tasks from '../Tasks'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface OnboardingTasksDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -60,8 +60,6 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
           <Tasks task={task} />
         </Dialog.Content>
       </Dialog>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

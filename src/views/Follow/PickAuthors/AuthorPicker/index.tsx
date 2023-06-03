@@ -16,7 +16,7 @@ import {
 } from '~/components'
 import { AuthorPickerQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const AUTHOR_PICKER = gql`
   query AuthorPicker($random: random_Int_min_0_max_49) {
@@ -97,8 +97,6 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
           </List>
         </ResponsiveWrapper>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

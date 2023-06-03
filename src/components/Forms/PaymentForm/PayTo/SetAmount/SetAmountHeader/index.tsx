@@ -4,7 +4,7 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { Button, IconInfo24, TextIcon, Translate } from '~/components'
 
 import CurrencyIndicator from './CurrencyIndicator'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import WhyPolygonDialog from './WhyPolygonDialog'
 
 type SetAmountHeaderProps = {
@@ -82,8 +82,6 @@ const SetAmountHeader: React.FC<SetAmountHeaderProps> = ({
           </>
         )}
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

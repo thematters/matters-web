@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { EXTERNAL_LINKS, GUIDE_LINKS, PATHS } from '~/common/enums'
 import { Form, LanguageContext, Layout, ResponsiveWrapper } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const BaseHelp = () => {
   const { lang } = useContext(LanguageContext)
@@ -100,8 +100,6 @@ const BaseHelp = () => {
           <span itemProp="copyrightHolder">Matters</span>
         </p>
       </footer>
-
-      <style jsx>{styles}</style>
     </ResponsiveWrapper>
   )
 }

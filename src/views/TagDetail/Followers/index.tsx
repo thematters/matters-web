@@ -4,7 +4,7 @@ import { numAbbr } from '~/common/utils'
 import tagFragments from '~/components/GQL/fragments/tag'
 import { FollowersTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FollowersProps {
   tag: FollowersTagFragment
@@ -28,8 +28,6 @@ const Followers = ({ tag }: FollowersProps) => {
           />
         </span>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

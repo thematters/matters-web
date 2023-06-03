@@ -1,7 +1,7 @@
 import { Layout } from '~/components'
 
 import Profile from '../Profile'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Works from './Works'
 
 const CircleWorks = () => (
@@ -10,7 +10,6 @@ const CircleWorks = () => (
 
     <section className="container">
       <Works />
-      <style jsx>{styles}</style>
     </section>
   </Layout.Main>
 )

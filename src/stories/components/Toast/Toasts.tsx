@@ -125,14 +125,12 @@ const Toasts = () => (
 
       .buttons {
         margin-top: var(--spacing-x-tight);
-
-        & :global(> *) {
-          margin-bottom: var(--spacing-base);
-        }
-
-        & :global(> * + *) {
-          margin-left: var(--spacing-x-tight);
-        }
+      }
+      .buttons :global(> *) {
+        margin-bottom: var(--spacing-base);
+      }
+      .buttons :global(> * + *) {
+        margin-left: var(--spacing-x-tight);
       }
 
       h3 {

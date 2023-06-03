@@ -1,5 +1,3 @@
-/* @styled-jsx=global */
-
 html {
   @mixin font-sans;
 

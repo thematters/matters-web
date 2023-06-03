@@ -2,7 +2,7 @@ import { toPath } from '~/common/utils'
 import { Card, IconDonate24, TextIcon, UserDigest } from '~/components'
 import { MeAnalyticsQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SupporterDigestFeedProps {
   user: NonNullable<
@@ -47,7 +47,6 @@ const SupporterDigestFeed = ({
           </section>
         </section>
       </section>
-      <style jsx>{styles}</style>
     </Card>
   )
 }

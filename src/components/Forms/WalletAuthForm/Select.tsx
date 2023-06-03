@@ -18,7 +18,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface FormProps {
   type?: 'connect' | 'auth'
@@ -259,7 +259,6 @@ const Select: React.FC<FormProps> = ({
             }
           />
         </Form.List>
-        <style jsx>{styles}</style>
       </section>
 
       <section className={msgClasses}>
@@ -268,7 +267,6 @@ const Select: React.FC<FormProps> = ({
           hint={errorMessage ? undefined : <Hint />}
           error={errorMessage}
         />
-        <style jsx>{styles}</style>
       </section>
     </Form>
   )

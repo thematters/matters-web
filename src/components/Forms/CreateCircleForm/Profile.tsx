@@ -24,7 +24,7 @@ import {
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
 import { PutCircleMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   circle: Pick<
@@ -223,7 +223,6 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           />
         </section>
       </Form>
-      <style jsx>{styles}</style>
     </section>
   )
 

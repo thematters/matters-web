@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { Title } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface PageHeaderProps {
   title: string | React.ReactNode
@@ -31,8 +31,6 @@ export const PageHeader: React.FC<React.PropsWithChildren<PageHeaderProps>> = ({
 
         {children}
       </section>
-
-      <style jsx>{styles}</style>
     </header>
   )
 }

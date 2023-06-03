@@ -7,7 +7,7 @@ import { LinkWrapper } from '~/components'
 import { ArticleDigestNoticeArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ArticleDigestNoticeProps = {
   article: ArticleDigestNoticeArticleFragment
@@ -59,8 +59,6 @@ export const ArticleDigestNotice = ({
           />
         </header>
         <section className="content">{summary}</section>
-
-        <style jsx>{styles}</style>
       </section>
     </LinkWrapper>
   )

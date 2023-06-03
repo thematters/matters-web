@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { Dialog } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface DialogMessageProps {
   align?: 'left'
@@ -42,8 +42,6 @@ const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
   return (
     <Dialog.Content spacing={['base', 'base']} hasFixed>
       <section className={contentClasses}>{children}</section>
-
-      <style jsx>{styles}</style>
     </Dialog.Content>
   )
 }

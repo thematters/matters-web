@@ -40,7 +40,7 @@ import DropdownActions from './DropdownActions'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import TraveloggersAvatar from './TraveloggersAvatar'
 
 interface FingerprintButtonProps {
@@ -119,7 +119,6 @@ export const UserProfile = () => {
                   }
                 />
                 <DropdownActions user={user} isMe={isMe} />
-                <style jsx>{styles}</style>
               </section>
             )}
           </>
@@ -212,8 +211,6 @@ export const UserProfile = () => {
               </h1>
             </section>
           </section>
-
-          <style jsx>{styles}</style>
         </section>
       </>
     )
@@ -319,8 +316,6 @@ export const UserProfile = () => {
         </footer>
 
         <CircleWidget circles={circles} isMe={isMe} />
-
-        <style jsx>{styles}</style>
       </section>
     </>
   )

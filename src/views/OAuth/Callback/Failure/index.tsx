@@ -4,7 +4,7 @@ import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
 import { Layout, Translate, useRoute } from '~/components'
 
 import { Box } from '../../Box'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const OAUTH_CALLBACK_ERROR_CODE = {
   userNotFound: 1,
@@ -101,8 +101,6 @@ const OAuthCallbackFailure = () => {
                 <Translate {...errorDetail} />
               </p>
             )}
-
-            <style jsx>{styles}</style>
           </section>
         </Box>
       </Layout.Spacing>

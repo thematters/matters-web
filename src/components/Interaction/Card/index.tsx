@@ -14,7 +14,7 @@ import { KEYCODES, TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CardBgColor = 'grey-lighter' | 'white' | 'transparent' | 'none'
 export type CardBgHoverColor = 'grey-lighter' | 'transparent' | 'none'
@@ -186,7 +186,6 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
             {...(testId ? { ['data-test-id']: testId } : {})}
           >
             {children}
-            <style jsx>{styles}</style>
           </a>
         </Link>
       )
@@ -202,7 +201,6 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
           {...(testId ? { ['data-test-id']: testId } : {})}
         >
           {children}
-          <style jsx>{styles}</style>
         </a>
       )
     }
@@ -232,8 +230,6 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         {...(testId ? { ['data-test-id']: testId } : {})}
       >
         {children}
-
-        <style jsx>{styles}</style>
       </section>
     )
   }

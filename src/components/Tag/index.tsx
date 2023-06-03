@@ -6,7 +6,7 @@ import { clampTag, toPath } from '~/common/utils'
 import { IconClose16, IconProps, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface TagProps {
   tag: DigestTagFragment
@@ -153,8 +153,6 @@ export const Tag = ({
       {hasCount && type === 'list' && tag?.numArticles ? (
         <span className="count">{tag.numArticles}</span>
       ) : null}
-
-      <style jsx>{styles}</style>
     </>
   )
 
@@ -162,7 +160,6 @@ export const Tag = ({
     return (
       <span className={tagClasses} onClick={onClick}>
         <Inner />
-        <style jsx>{styles}</style>
       </span>
     )
   }
@@ -171,7 +168,6 @@ export const Tag = ({
     <Link {...path} legacyBehavior>
       <a className={tagClasses} onClick={onClick}>
         <Inner />
-        <style jsx>{styles}</style>
       </a>
     </Link>
   )

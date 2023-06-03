@@ -26,7 +26,7 @@ import {
 } from '~/gql/graphql'
 
 import SearchSelectNode from '../SearchSelectNode'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import CreateTag from './CreateTag'
 import { LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
 import InviteEmail from './InviteEmail'
@@ -335,8 +335,6 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
               </ul>
             </InfiniteScroll>
           )}
-
-          <style jsx>{styles}</style>
         </section>
       )}
     </>

@@ -7,7 +7,7 @@ import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * UserDigest.Mini is a component for presenting user's:
@@ -104,8 +104,6 @@ const Mini = ({
             </span>
           )}
         </span>
-
-        <style jsx>{styles}</style>
       </span>
     )
   }
@@ -138,8 +136,6 @@ const Mini = ({
             </span>
           )}
         </span>
-
-        <style jsx>{styles}</style>
       </section>
     </LinkWrapper>
   )

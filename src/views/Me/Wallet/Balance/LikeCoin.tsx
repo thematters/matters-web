@@ -16,7 +16,7 @@ import {
 } from '~/components'
 import { QuoteCurrency, ViewerLikeBalanceQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface LikeCoinBalanceProps {
   currency: QuoteCurrency
@@ -42,8 +42,6 @@ const Wrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
     </TextIcon>
 
     {children}
-
-    <style jsx>{styles}</style>
   </section>
 )
 

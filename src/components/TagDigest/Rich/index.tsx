@@ -9,7 +9,7 @@ import {
 } from '~/gql/graphql'
 
 import { TagDigestButtons } from '../Buttons'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type Props = {
   tag: TagDigestRichTagPublicFragment & Partial<TagDigestRichTagPrivateFragment>
@@ -79,7 +79,6 @@ const Rich = ({
           <p>{tag.description}</p>
         </section>
       )}
-      <style jsx>{styles}</style>
     </Card>
   )
 }

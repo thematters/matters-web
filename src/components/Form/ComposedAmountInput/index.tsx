@@ -6,7 +6,7 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount, translate } from '~/common/utils'
 
 import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  *
@@ -111,8 +111,6 @@ const AmountOption: React.FC<AmountOptionProps> = ({
           />
         </VisuallyHidden>
       </label>
-
-      <style jsx>{styles}</style>
     </li>
   )
 }
@@ -179,8 +177,6 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
 
         <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
       </Field>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

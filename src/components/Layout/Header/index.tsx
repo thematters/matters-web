@@ -5,7 +5,7 @@ import { TEST_ID } from '~/common/enums'
 import BackButton from './BackButton'
 import CancelButton from './CancelButton'
 import MeButton from './MeButton'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Title from './Title'
 
 interface HeaderProps {
@@ -37,8 +37,6 @@ const Header: React.FC<HeaderProps> & {
         {left && <section className="left">{left}</section>}
         {right && <section className={rightClasses}>{right}</section>}
       </section>
-
-      <style jsx>{styles}</style>
     </header>
   )
 }

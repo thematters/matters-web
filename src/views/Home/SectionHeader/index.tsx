@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { PATHS } from '~/common/enums'
 import { PageHeader, ViewAllButton } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SidebarHeaderProps {
   type: 'authors' | 'tags'
@@ -32,8 +32,6 @@ const FeedHeader = ({
         {rightButton}
 
         {path && viewAll && <ViewAllButton href={path} />}
-
-        <style jsx>{styles}</style>
       </section>
     </PageHeader>
   )

@@ -8,7 +8,7 @@ import {
   Translate,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CurrencyIndicatorProps = {
   currency: CURRENCY
@@ -67,8 +67,6 @@ const CurrencyIndicator: React.FC<CurrencyIndicatorProps> = ({
           </TextIcon>
         </Button>
       </span>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

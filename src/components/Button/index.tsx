@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { forwardRef, RefObject, useRef } from 'react'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ButtonWidth =
   | '2rem'
@@ -248,7 +248,6 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
               <div className="hotarea" style={hotAreaStyle} />
               {children}
             </div>
-            <style jsx>{styles}</style>
           </span>
         )
       }
@@ -261,7 +260,6 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
               <div className="hotarea" style={hotAreaStyle} />
               {children}
             </div>
-            <style jsx>{styles}</style>
           </a>
         )
       }
@@ -275,7 +273,6 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
                 <div className="hotarea" style={hotAreaStyle} />
                 {children}
               </div>
-              <style jsx>{styles}</style>
             </a>
           </Link>
         )
@@ -288,7 +285,6 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
             <div className="hotarea" style={hotAreaStyle} />
             {children}
           </div>
-          <style jsx>{styles}</style>
         </button>
       )
     }

@@ -8,7 +8,7 @@ import {
   Translate,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ToggleResponseProps = {
   canComment: boolean | null
@@ -98,7 +98,6 @@ const ToggleResponse = ({
             )}
           </section>
         </section>
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -167,7 +166,6 @@ const ToggleResponse = ({
           </section>
         </section>
       </section>
-      <style jsx>{styles}</style>
     </section>
   )
 }

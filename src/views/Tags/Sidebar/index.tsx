@@ -14,7 +14,7 @@ import {
 import { AllTagsRecommendedSidebarQuery } from '~/gql/graphql'
 
 import { ALL_TAGS_RECOMMENDED_SIDEBAR } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface TagsSidebarProps {
   inSidebar?: boolean
@@ -79,8 +79,6 @@ const TagsSidebar: React.FC<TagsSidebarProps> = ({ inSidebar }) => {
             </Slides.Item>
           ))}
         </Slides>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -96,8 +94,6 @@ const TagsSidebar: React.FC<TagsSidebarProps> = ({ inSidebar }) => {
           </List.Item>
         ))}
       </List>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

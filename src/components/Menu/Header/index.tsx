@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface MenuHeaderProps {
   title: string | React.ReactNode
@@ -21,8 +21,6 @@ const MenuHeader: React.FC<React.PropsWithChildren<MenuHeaderProps>> = ({
     <header>
       <h3 className={titleClasses}>{title}</h3>
       {children}
-
-      <style jsx>{styles}</style>
     </header>
   )
 }

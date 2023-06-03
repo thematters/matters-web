@@ -1,7 +1,7 @@
 import { PATHS } from '~/common/enums'
 import { Dialog, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const texts: {
   zh_hant: Record<string, string>
@@ -57,7 +57,6 @@ const MigrationDialogSuccess = () => {
           />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-      <style jsx>{styles}</style>
     </>
   )
 }

@@ -16,7 +16,7 @@ import {
   useEditDraftTags,
   useEditSupportSetting,
 } from '../hooks'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface BaseSidebarProps {
   draft: EditMetaDraftFragment
@@ -131,8 +131,6 @@ const EditDraftSidebar = (props: BaseSidebarProps) => {
       <EditDraftCollection {...props} disabled={disabled} />
       <EditDraftResponse {...props} disabled={disabled} />
       <EditDraftCircle {...props} disabled={disabled} />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -2,7 +2,7 @@ import { analytics } from '~/common/utils'
 import { AddCreditDialog, Dialog, Translate, useFeatures } from '~/components'
 
 import PayoutButton from './PayoutButton'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface ButtonsProps {
   canPayout: boolean
@@ -35,8 +35,6 @@ const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
           />
         )}
       </section>
-
-      <style jsx>{styles}</style>
     </div>
   )
 }

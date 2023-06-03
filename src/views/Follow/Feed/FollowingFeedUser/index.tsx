@@ -8,7 +8,7 @@ import {
 } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FeedUserProps = {
   user: FollowingFeedUserPublicFragment &
@@ -37,8 +37,6 @@ const FeedUser = ({ user, header, date, actions }: FeedUserProps) => {
           <DropdownActions actions={actions} />
         </section>
       </footer>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

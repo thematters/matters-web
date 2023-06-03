@@ -4,7 +4,7 @@ import { GUIDE_LINKS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import { Button, LanguageContext, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type SetAmountBalanceProps = {
   currency: CURRENCY
@@ -69,8 +69,6 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
           </TextIcon>
         </a>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

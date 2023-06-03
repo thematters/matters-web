@@ -10,7 +10,7 @@ import { DigestTagFragment } from '~/gql/graphql'
 
 import TagCustomStagingArea from '../../TagCustomStagingArea'
 import Box from '../Box'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface SidebarTagsProps {
   tags: DigestTagFragment[]
@@ -66,8 +66,6 @@ const SidebarTags = ({
                   />
                 </li>
               ))}
-
-              <style jsx>{styles}</style>
             </ul>
           )}
         </Box>

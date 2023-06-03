@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 import { IconSpinner16 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type SwitchProps = {
   name: string
@@ -48,8 +48,6 @@ export const Switch: React.FC<SwitchProps> = ({
           <IconSpinner16 color="grey-light" />
         </span>
       )}
-
-      <style jsx>{styles}</style>
     </label>
   )
 }
