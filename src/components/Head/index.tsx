@@ -214,7 +214,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       <meta
         name="format-detection"
         key="format-detection"
-        content="telephone=no"
+        content="telephone=no, date=no, email=no, address=no"
       />
 
       {/* DNS */}

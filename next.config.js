@@ -80,6 +80,9 @@ const nextConfig = {
     defaultLocale: '__defaultLocale',
     localeDetection: false,
   },
+  experimental: {
+    scrollRestoration: true,
+  },
 }
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
