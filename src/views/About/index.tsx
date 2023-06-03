@@ -5,7 +5,6 @@ import Hero from './Hero'
 import Intro from './Intro'
 import JoinUs from './JoinUs'
 import Stats from './Stats'
-import styles from './styles.module.css'
 import Team from './Team'
 import Timeline from './Timeline'
 

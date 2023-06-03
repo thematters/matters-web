@@ -10,6 +10,7 @@ interface Props {
 
 const Dot = ({ index, scroll, selected }: Props) => {
   const dotClasses = classnames({ dot: true, selected })
+
   return (
     <>
       <div

@@ -1,4 +1,4 @@
-footer {
+.footer {
   @mixin flex-center-space-between;
   @mixin safe-area-botttom;
 
@@ -6,12 +6,12 @@ footer {
   flex-shrink: 0;
   margin: var(--spacing-base);
 
-  & :global(> *) {
+  & > * {
     flex: 1;
     width: 100%;
   }
 
-  & :global(> * + *) {
+  & > * + * {
     margin-top: var(--spacing-base);
   }
 }

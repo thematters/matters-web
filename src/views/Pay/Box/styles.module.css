@@ -4,10 +4,10 @@
   }
 }
 
-header {
+.header {
   padding: 0 var(--spacing-x-loose);
 
-  & :global(.avatar) {
+  & .avatar {
     display: block;
     margin: 0 auto;
   }
@@ -29,7 +29,7 @@ header {
   @media (--md-up) {
     padding: 0 var(--spacing-xxx-loose);
 
-    & :global(.avatar) {
+    & .avatar {
       width: 5.875rem;
       height: 5.875rem;
     }

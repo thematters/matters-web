@@ -42,7 +42,7 @@ const fragments = {
 
 const Footer = ({ circle, hasPrice, onClickPrice }: FooterProps) => {
   return (
-    <footer>
+    <footer className={styles.footer}>
       <Counts circle={circle} />
 
       {hasPrice && <Price circle={circle} onClick={onClickPrice} />}

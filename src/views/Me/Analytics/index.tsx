@@ -107,10 +107,10 @@ const MyAnalytics = () => {
         }
       />
       <Head title={{ id: 'myAnalytics' }} />
-      <section className="container">
+      <section className={styles['container']}>
         {edges?.length === 0 && (
-          <section className="no-supporter">
-            <section className="no-supporter-img">
+          <section className={styles['no-supporter']}>
+            <section className={styles['no-supporter-img']}>
               <AnalyticsNoSupporter />
             </section>
             <p>

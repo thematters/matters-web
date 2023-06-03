@@ -21,7 +21,7 @@ import {
 import { AuthorRssFeedFragment, RssGatewaysQuery } from '~/gql/graphql'
 
 import SectionCard from '../FingerprintDialog/SectionCard'
-import styles from '../FingerprintDialog/styles.css'
+import styles from '../FingerprintDialog/styles.module.css'
 
 type RssFeedDialogContentProps = {
   user: AuthorRssFeedFragment
@@ -68,11 +68,11 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
   const intl = useIntl()
   return (
     <Dialog.Content hasGrow>
-      <section className="container">
+      <section className={styles['container']}>
         <SectionCard>
           {!ipnsKey ? (
             <>
-              <section className="warning-card">
+              <section className={styles['warning-card']}>
                 <IconInfo24 size="md" />
 
                 <p>
@@ -87,14 +87,14 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
           ) : null}
 
           {/* hash */}
-          <section className="hash">
-            <h4 className="title">
+          <section className={styles['hash']}>
+            <h4 className={styles['title']}>
               <FormattedMessage
                 defaultMessage="IPNS Subscription"
                 description="src/components/Dialogs/RssFeedDialog/Content.tsx"
               />
             </h4>
-            <p className="description">
+            <p className={styles['description']}>
               <FormattedMessage
                 defaultMessage="Add hash from IPFS into compatible reader such as "
                 description="src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -110,7 +110,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
             </p>
 
             {ipnsKey ? (
-              <section className="copy">
+              <section className={styles['copy']}>
                 <input
                   type="text"
                   value={displayIPNS!}
@@ -131,7 +131,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
             ) : (
               <>
                 <Spacer size="base" />
-                <section className="warning-input">
+                <section className={styles['warning-input']}>
                   <TextIcon
                     icon={<IconInfo24 size="md" />}
                     color="green"
@@ -152,14 +152,14 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
           <Spacer size="base" />
 
           {/* gateways */}
-          <section className="gateways">
-            <h4 className="title">
+          <section className={styles['gateways']}>
+            <h4 className={styles['title']}>
               <FormattedMessage
                 defaultMessage="RSS Subscription"
                 description="src/components/Dialogs/RssFeedDialog/Content.tsx"
               />
             </h4>
-            <p className="description">
+            <p className={styles['description']}>
               <FormattedMessage
                 defaultMessage="Add any URL in the following list into RSS reader"
                 description="src/components/Dialogs/RssFeedDialog/Content.tsx"

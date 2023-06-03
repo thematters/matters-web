@@ -57,7 +57,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
             zh_hans="移除后， "
             en="After removal, "
           />
-          <span className="name">{editor.displayName}</span>{' '}
+          <span className={styles['name']}>{editor.displayName}</span>{' '}
           <Translate
             zh_hant="將無法繼續參與「精選」作品管理。"
             zh_hans="将无法继续参与「精选」作品管理。"

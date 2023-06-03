@@ -1,4 +1,4 @@
-header {
+.header {
   top: 0;
   z-index: var(--z-index-global-header);
   width: 100%;
@@ -45,7 +45,7 @@ header {
   flex-grow: 1;
   flex-shrink: 1;
 
-  & :global(> *:first-child) {
+  & > *:first-child {
     flex-grow: 1;
   }
 }

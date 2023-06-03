@@ -13,7 +13,7 @@
     }
   }
 
-  & :global(h3) {
+  & h3 {
     @mixin truncate;
 
     min-width: 0;
@@ -34,6 +34,6 @@
   }
 }
 
-footer {
+.footer {
   margin-top: var(--spacing-x-tight);
 }

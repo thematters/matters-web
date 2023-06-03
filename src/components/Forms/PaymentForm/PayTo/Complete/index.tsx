@@ -94,22 +94,22 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
 
   return (
     <Dialog.Content hasGrow>
-      <section className="container">
-        <section className="complete-avatar">
+      <section className={styles['container']}>
+        <section className={styles['complete-avatar']}>
           <IconSupport size="lg" color="gold" />
 
-          <div className="complete-avatar-outline">
+          <div className={styles['complete-avatar-outline']}>
             <Avatar size="lg" user={recipient} />
           </div>
         </section>
 
-        <section className="complete-message">
+        <section className={styles['complete-message']}>
           <Translate
             zh_hant="馬特市民愛發電。這是你支持的第 "
             zh_hans="马特市民爱发电。这是你支持的第 "
             en="This is the "
           />
-          <span className="times">{senderDonatedArticleCount}</span>
+          <span className={styles['times']}>{senderDonatedArticleCount}</span>
           <Translate
             zh_hant=" 篇作品，"
             zh_hans=" 篇作品，"
@@ -127,12 +127,14 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
             zh_hans=" 获得的第 "
             en=" received "
           />
-          <span className="times">{recipientReceivedDonationCount}</span>
+          <span className={styles['times']}>
+            {recipientReceivedDonationCount}
+          </span>
           <Translate zh_hant=" 次支持" zh_hans=" 次支持" en=" supports" />
         </section>
 
         {edges && edges.length > 0 && (
-          <section className="related-donations">
+          <section className={styles['related-donations']}>
             <header>
               <TextIcon size="sm" color="grey-darker">
                 <Translate

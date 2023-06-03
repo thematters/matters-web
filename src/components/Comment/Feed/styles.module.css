@@ -1,16 +1,16 @@
-article {
+.article {
   &:target {
     animation: comment-background-fade-out 2s ease 1s;
   }
 }
 
-header {
+.header {
   @mixin flex-start-space-between;
 
   & .right {
     display: inline-flex;
 
-    & :global(> * + *) {
+    & > * + * {
       margin-left: var(--spacing-tight);
     }
   }

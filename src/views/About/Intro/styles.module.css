@@ -74,7 +74,7 @@ img {
     margin-top: var(--spacing-x-loose);
     text-align: center;
 
-    & :global(> * + *) {
+    & > * + * {
       margin-left: var(--spacing-x-loose);
     }
   }
@@ -123,7 +123,7 @@ img {
     margin-top: var(--spacing-x-loose);
     text-align: center;
 
-    & :global(> * + *) {
+    & > * + * {
       margin-left: var(--spacing-x-loose);
     }
   }
@@ -164,7 +164,7 @@ img {
     margin-top: var(--spacing-x-loose);
     text-align: center;
 
-    & :global(> * + *) {
+    & > * + * {
       margin-left: var(--spacing-x-loose);
     }
   }

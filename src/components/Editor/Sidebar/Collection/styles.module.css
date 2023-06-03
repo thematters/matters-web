@@ -1,4 +1,4 @@
-ul {
+.ul {
   padding-top: var(--spacing-base);
 
   & li {

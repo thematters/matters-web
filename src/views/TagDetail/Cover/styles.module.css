@@ -1,7 +1,7 @@
 .cover {
   position: relative;
 
-  & :global(img) {
+  & img {
     @mixin object-fit-cover;
 
     background-color: var(--color-matters-green);

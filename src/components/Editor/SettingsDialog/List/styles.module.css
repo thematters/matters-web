@@ -1,4 +1,4 @@
-ul {
+.ul {
   margin-top: var(--spacing-base);
   overflow-y: auto;
 }

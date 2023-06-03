@@ -51,7 +51,7 @@ const Feed = ({ type }: Props) => {
 
   if (!edges || edges.length <= 0) {
     return (
-      <section className="feed">
+      <section className={styles['feed']}>
         <EmptyWarning
           description={
             <Translate
@@ -65,8 +65,8 @@ const Feed = ({ type }: Props) => {
   }
 
   return (
-    <section className="feed">
-      <section className="shuffle">
+    <section className={styles['feed']}>
+      <section className={styles['shuffle']}>
         <ShuffleButton onClick={shuffle} />
       </section>
 

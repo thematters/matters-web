@@ -2,7 +2,7 @@
   position: relative;
 }
 
-header {
+.header {
   @mixin flex-center-space-between;
 }
 
@@ -10,7 +10,7 @@ header {
   display: inline-flex;
   flex-shrink: 0;
 
-  & :global(> * + *) {
+  & > * + * {
     margin-left: var(--spacing-x-tight);
   }
 }
@@ -29,7 +29,7 @@ header {
   height: 4.5rem;
   margin-left: var(--spacing-x-tight);
 
-  & :global(img) {
+  & img {
     @mixin object-fit-cover;
 
     background-color: var(--color-grey-lighter);

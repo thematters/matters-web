@@ -1,4 +1,4 @@
-header {
+.header {
   @mixin border-bottom-grey;
 
   padding-bottom: var(--spacing-x-tight);

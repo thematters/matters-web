@@ -34,7 +34,7 @@ const OAuthCallbackSuccess = () => {
 
       <Layout.Spacing>
         <Box avatar={avatar[provider]} title={title[provider]}>
-          <section className="content">
+          <section className={styles['content']}>
             <h2>
               <Translate
                 zh_hant="綁定成功！"

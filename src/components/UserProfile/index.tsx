@@ -110,7 +110,7 @@ export const UserProfile = () => {
           <>
             <span />
             {user && (
-              <section className="buttons">
+              <section className={styles['buttons']}>
                 <ShareButton
                   tags={
                     [user.displayName, user.userName].filter(
@@ -184,18 +184,18 @@ export const UserProfile = () => {
     return (
       <>
         <LayoutHeader />
-        <section className="user-profile">
+        <section className={styles['user-profile']}>
           <Cover fallbackCover={IMAGE_COVER.src} />
 
           <header>
-            <section className="avatar">
+            <section className={styles['avatar']}>
               <Avatar size="xxxl" />
             </section>
           </header>
 
-          <section className="info">
-            <section className="display-name">
-              <h1 className="name">
+          <section className={styles['info']}>
+            <section className={styles['display-name']}>
+              <h1 className={styles['name']}>
                 {isUserArchived && (
                   <FormattedMessage
                     defaultMessage="Account Archived"
@@ -223,11 +223,14 @@ export const UserProfile = () => {
     <>
       <LayoutHeader />
 
-      <section className="user-profile" data-test-id={TEST_ID.USER_PROFILE}>
+      <section
+        className={styles['user-profile']}
+        data-test-id={TEST_ID.USER_PROFILE}
+      >
         <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
 
-        <header>
-          <section className="avatar">
+        <header className={styles.header}>
+          <section className={styles['avatar']}>
             {hasTraveloggersBadge ? (
               <TraveloggersAvatar user={user} isMe={isMe} />
             ) : (
@@ -235,7 +238,7 @@ export const UserProfile = () => {
             )}
           </section>
 
-          <section className="right">
+          <section className={styles['right']}>
             {!isMe && <FollowUserButton user={user} size="lg" />}
 
             {user?.articles.totalCount > 0 && user?.info.ipnsKey && (
@@ -244,10 +247,10 @@ export const UserProfile = () => {
           </section>
         </header>
 
-        <section className="info">
-          <section className="display-name">
+        <section className={styles['info']}>
+          <section className={styles['display-name']}>
             <h1
-              className="name"
+              className={styles['name']}
               data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
             >
               {user.displayName}
@@ -259,9 +262,9 @@ export const UserProfile = () => {
             {isCivicLiker && <CivicLikerBadge />}
           </section>
 
-          <section className="username">
+          <section className={styles['username']}>
             <span
-              className="name"
+              className={styles['name']}
               data-test-id={TEST_ID.USER_PROFILE_USER_NAME}
             >
               @{user.userName}
@@ -279,18 +282,21 @@ export const UserProfile = () => {
             size="md"
             spacingTop="base"
           >
-            <p className="description" data-test-id={TEST_ID.USER_PROFILE_BIO}>
+            <p
+              className={styles['description']}
+              data-test-id={TEST_ID.USER_PROFILE_BIO}
+            >
               {user.info.description}
             </p>
           </Expandable>
         </section>
 
-        <footer>
+        <footer className={styles.footer}>
           <FollowersDialog user={user}>
             {({ openDialog: openFollowersDialog }) => (
               <button type="button" onClick={openFollowersDialog}>
                 <span
-                  className="count"
+                  className={styles['count']}
                   data-test-id={TEST_ID.USER_PROFILE_FOLLOWERS_COUNT}
                 >
                   {numAbbr(user.followers.totalCount)}
@@ -303,7 +309,7 @@ export const UserProfile = () => {
           <FollowingDialog user={user}>
             {({ openDialog: openFollowingDialog }) => (
               <button type="button" onClick={openFollowingDialog}>
-                <span className="count">
+                <span className={styles['count']}>
                   {numAbbr(user.following.users.totalCount)}
                 </span>
                 <FormattedMessage

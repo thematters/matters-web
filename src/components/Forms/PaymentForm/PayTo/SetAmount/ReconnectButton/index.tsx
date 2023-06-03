@@ -22,7 +22,7 @@ const ReconnectButton = () => {
 
   return (
     <>
-      <p className="reconnect-hint">
+      <p className={styles['reconnect-hint']}>
         <Translate id="reconnectHint" />
         <CopyToClipboard text={viewer.info.ethAddress || ''}>
           <Button

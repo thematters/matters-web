@@ -8,7 +8,7 @@
   display: inline-block;
   width: 50%;
 
-  & :global(button) {
+  & button {
     display: block;
     width: 100%;
     height: 3rem;

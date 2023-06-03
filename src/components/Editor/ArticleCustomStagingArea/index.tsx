@@ -24,8 +24,8 @@ const ArticleCustomStagingArea = ({
 
   if (!hasArticles) {
     return (
-      <section className="customArticleArea">
-        <section className="hint emptyHint">
+      <section className={styles['customArticleArea']}>
+        <section className={styles['hint emptyHint']}>
           <Translate id={hint} />
         </section>
       </section>
@@ -33,16 +33,16 @@ const ArticleCustomStagingArea = ({
   }
 
   return (
-    <section className="customArticleArea">
-      <p className="hint">
+    <section className={styles['customArticleArea']}>
+      <p className={styles['hint']}>
         <Translate en="Collected" zh_hans="已关联" zh_hant="已關聯" />
       </p>
 
-      <ul className="nodes">
+      <ul className={styles['nodes']}>
         {articles.map(
           ({ node }) =>
             node.__typename === 'Article' && (
-              <li key={node.id} className="node">
+              <li key={node.id} className={styles['node']}>
                 <ArticleDigestDropdown
                   article={node}
                   titleTextSize="md"

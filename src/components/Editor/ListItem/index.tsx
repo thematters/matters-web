@@ -12,7 +12,7 @@ type ListItemProps = {
 }
 
 const CoverIndicator = ({ cover }: { cover?: string | null }) => (
-  <span className="rect">
+  <span className={styles['rect']}>
     {cover ? <img src={cover} alt="cover" /> : <IconAdd16 size="xs" />}
   </span>
 )
@@ -49,9 +49,9 @@ const ListItem: React.FC<React.PropsWithChildren<ListItemProps>> & {
   return (
     <li role="listitem">
       <Card bgColor="white" spacing={[0, 0]} onClick={onClick}>
-        <section className="item">
+        <section className={styles['item']}>
           <section>
-            <h3 className="title">{title}</h3>
+            <h3 className={styles['title']}>{title}</h3>
             <p className={subtitleClasses}>{subTitle}</p>
           </section>
 

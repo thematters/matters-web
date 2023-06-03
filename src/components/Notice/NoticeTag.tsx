@@ -21,7 +21,7 @@ const NoticeTag = ({ tag }: { tag: NoticeTagFragment | null }) => {
 
   return (
     <LinkWrapper {...path}>
-      <span className="tag-content">
+      <span className={styles['tag-content']}>
         <span>#{tagName}</span>
       </span>
     </LinkWrapper>

@@ -7,7 +7,7 @@ form {
   font-size: var(--font-size-sm);
   line-height: 2rem;
 
-  & :global(input[type='search']) {
+  & input[type='search'] {
     @mixin transition;
 
     height: 100%;
@@ -30,7 +30,7 @@ form {
     }
   }
 
-  & :global(button[type='submit']) {
+  & button[type='submit'] {
     position: absolute;
     top: 0;
     left: 0;
@@ -38,7 +38,7 @@ form {
     height: 100%;
   }
 
-  & :global(button[type='button']) {
+  & button[type='button'] {
     position: absolute;
     top: 0;
     right: 0;

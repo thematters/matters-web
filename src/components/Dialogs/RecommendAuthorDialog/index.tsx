@@ -36,7 +36,7 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
 
         <Dialog.Content hasGrow>
           <Dialog.Message align="left">
-            <p className="message">
+            <p className={styles['message']}>
               <Translate
                 zh_hant="追蹤至少"
                 zh_hans="追踪至少"

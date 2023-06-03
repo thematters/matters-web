@@ -18,8 +18,8 @@ interface CircleWallProps {
 
 const CircleWall = ({ circle }: CircleWallProps) => {
   return (
-    <section className="container">
-      <section className="message">
+    <section className={styles['container']}>
+      <section className={styles['message']}>
         \\&nbsp;
         <Translate zh_hans="订阅围炉看更多" zh_hant="訂閱圍爐看更多" />
         &nbsp;//
@@ -44,8 +44,10 @@ const CircleWall = ({ circle }: CircleWallProps) => {
           background-image: url(${IMAGE_WALL_BACKGROUND_SM.src});
           background-size: cover;
           background-position: center top;
+        }
 
-          @media (--sm-up) {
+        @media (--sm-up) {
+          .container {
             background-image: url(${IMAGE_WALL_BACKGROUND_MD.src});
           }
         }

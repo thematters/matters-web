@@ -1,4 +1,4 @@
-h2 {
+.h2 {
   @mixin font-serif;
 
   font-size: 1.7rem;

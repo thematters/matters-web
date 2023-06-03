@@ -8,7 +8,7 @@
   }
 }
 
-header {
+.header {
   @mixin flex-center-space-between;
 
   position: absolute;
@@ -61,12 +61,12 @@ header {
     background-position: bottom right;
     border-radius: var(--spacing-base);
 
-    & :global(img) {
+    & img {
       @mixin object-fit-cover;
     }
 
-    & :global(picture),
-    & :global(img) {
+    & picture,
+    & img {
       z-index: -1;
     }
 

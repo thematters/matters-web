@@ -88,8 +88,11 @@ const Toolbar = ({
   }
 
   return (
-    <section className="toolbar" data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
-      <section className="buttons">
+    <section
+      className={styles['toolbar']}
+      data-test-id={TEST_ID.ARTICLE_TOOLBAR}
+    >
+      <section className={styles['buttons']}>
         <ReCaptchaProvider action="appreciateArticle">
           <AppreciationButton
             article={article}
@@ -104,7 +107,7 @@ const Toolbar = ({
           articleDetail={articleDetails}
         />
 
-        <section className="comment-bar">
+        <section className={styles['comment-bar']}>
           <CommentBar
             article={article}
             disabled={lock || !article.canComment}

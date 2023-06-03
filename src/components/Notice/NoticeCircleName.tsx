@@ -24,7 +24,7 @@ const NoticeCircleName = ({
 
   return (
     <Link {...(path || circlePath)}>
-      <a className="circle-display-name">{circle.displayName}</a>
+      <a className={styles['circle-display-name']}>{circle.displayName}</a>
     </Link>
   )
 }

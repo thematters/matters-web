@@ -26,26 +26,26 @@
       height: 473px;
     }
   }
-}
 
-ul {
-  margin-top: var(--spacing-loose);
-}
-
-li {
-  & a {
-    @mixin flex-center-space-between;
-
-    padding: var(--spacing-base) var(--spacing-base) var(--spacing-base) 0;
-    font-size: var(--font-size-lg);
-
-    &:hover,
-    &:focus {
-      color: var(--color-matters-green);
-    }
+  & ul {
+    margin-top: var(--spacing-loose);
   }
 
-  & + li {
-    @mixin border-top-grey;
+  & li {
+    & a {
+      @mixin flex-center-space-between;
+
+      padding: var(--spacing-base) var(--spacing-base) var(--spacing-base) 0;
+      font-size: var(--font-size-lg);
+
+      &:hover,
+      &:focus {
+        color: var(--color-matters-green);
+      }
+    }
+
+    & + li {
+      @mixin border-top-grey;
+    }
   }
 }

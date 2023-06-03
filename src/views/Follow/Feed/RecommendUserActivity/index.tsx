@@ -17,7 +17,7 @@ const RecommendUserActivity = ({ users }: Props) => {
   }
 
   return (
-    <section className="container">
+    <section className={styles['container']}>
       <Slides header={<FollowingRecommendHead type="user" />}>
         {users.map((user, index) => (
           <Slides.Item
@@ -32,7 +32,7 @@ const RecommendUserActivity = ({ users }: Props) => {
               })
             }}
           >
-            <section className="item">
+            <section className={styles['item']}>
               <FollowingRecommendUser user={user} />
             </section>
           </Slides.Item>

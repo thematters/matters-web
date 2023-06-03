@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   padding-top: var(--spacing-x-tight);
 
-  & :global(> *) {
+  & > * {
     margin-right: var(--spacing-base);
     margin-bottom: var(--spacing-x-tight);
   }

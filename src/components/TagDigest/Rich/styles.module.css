@@ -1,5 +1,5 @@
 .content {
-  & :global(.text) {
+  & .text {
     @mixin line-clamp;
 
     line-height: inherit;

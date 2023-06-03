@@ -6,7 +6,7 @@
 .icons {
   display: inline-flex;
 
-  & :global(* + *) {
+  & * + * {
     margin-left: var(--spacing-x-tight);
   }
 }

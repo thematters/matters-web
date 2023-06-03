@@ -4,7 +4,7 @@
   margin-bottom: var(--spacing-base);
 }
 
-form {
+.form {
   @mixin hide-scrollbar;
 
   position: relative;
@@ -12,7 +12,7 @@ form {
   padding-bottom: var(--spacing-x-loose);
   overflow-y: auto;
 
-  & :global(.ql-editor) {
+  & .ql-editor {
     min-height: 30vh;
 
     @media (--sm-up) {

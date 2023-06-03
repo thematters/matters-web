@@ -1,4 +1,4 @@
-nav {
+.nav {
   position: relative;
   padding: var(--spacing-x-tight) var(--spacing-base);
   white-space: nowrap;
@@ -23,19 +23,19 @@ nav {
       align-items: center;
     }
   }
-}
 
-ul {
-  @mixin hide-scrollbar;
+  & ul {
+    @mixin hide-scrollbar;
 
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 
-li {
-  display: inline-block;
+    & li {
+      display: inline-block;
 
-  & + li {
-    margin-left: var(--spacing-x-tight);
+      & + li {
+        margin-left: var(--spacing-x-tight);
+      }
+    }
   }
 }

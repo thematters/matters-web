@@ -75,10 +75,10 @@ const Participants = ({ id }: Props) => {
 
   return (
     <>
-      <section className="category">
+      <section className={styles['category']}>
         <section>
           <FormattedMessage defaultMessage="Creators" description="" />
-          <span className="count">({count})</span>
+          <span className={styles['count']}>({count})</span>
         </section>
       </section>
 

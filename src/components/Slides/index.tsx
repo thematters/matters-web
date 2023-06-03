@@ -75,7 +75,11 @@ export const Slides: React.FC<React.PropsWithChildren<SlidesProps>> & {
     <section className={slidesClasses}>
       {header}
 
-      <section className="wrap" ref={emblaRef} onClickCapture={onCaptureClick}>
+      <section
+        className={styles['wrap']}
+        ref={emblaRef}
+        onClickCapture={onCaptureClick}
+      >
         <ul>{children}</ul>
       </section>
     </section>

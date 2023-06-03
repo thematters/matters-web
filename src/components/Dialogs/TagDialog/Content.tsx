@@ -47,7 +47,7 @@ const HintLengthText: React.FC<{
   maxLength: number
 }> = ({ curLength, maxLength }) => (
   <>
-    <span className="count">
+    <span className={styles['count']}>
       <span className={curLength > 0 ? 'highlight' : ''}>{curLength ?? 0}</span>
       &nbsp;/&nbsp;{maxLength}
     </span>
@@ -167,7 +167,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       {isEditing && (
-        <section className="cover-field">
+        <section className={styles['cover-field']}>
           <CoverUploader
             assetType={ASSET_TYPE.tagCover}
             cover={cover}

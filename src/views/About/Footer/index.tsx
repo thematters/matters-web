@@ -20,18 +20,18 @@ const Footer = () => {
   const year = new Date().getFullYear()
 
   return (
-    <footer>
+    <footer className={styles.footer}>
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">
-            <div className="container">
+            <div className={styles['container']}>
               <Media at="sm">
-                <section className="languageSwitch">
+                <section className={styles['languageSwitch']}>
                   <LanguageSwitch size="lg" bgColor="grey-darkest" />
                 </section>
               </Media>
 
-              <section className="contactUs">
+              <section className={styles['contactUs']}>
                 <h2>
                   <Translate
                     zh_hant="聯絡方式"
@@ -88,7 +88,7 @@ const Footer = () => {
                   </a>
                 </p>
               </section>
-              <section className="followUs">
+              <section className={styles['followUs']}>
                 <h2>
                   <Translate
                     zh_hant="追蹤我們"
@@ -97,7 +97,7 @@ const Footer = () => {
                   />
                 </h2>
 
-                <div className="socials">
+                <div className={styles['socials']}>
                   <ul>
                     <li>
                       <a
@@ -240,7 +240,7 @@ const Footer = () => {
                   </ul>
                 </div>
               </section>
-              <section className="subscribeUs">
+              <section className={styles['subscribeUs']}>
                 <h2>
                   <Translate
                     zh_hant="訂閱我們"
@@ -248,7 +248,7 @@ const Footer = () => {
                     en="Subscribe to Us"
                   />
                 </h2>
-                <div className="buttons">
+                <div className={styles['buttons']}>
                   <Button
                     size={['100%', '2.5rem']}
                     bgActiveColor="grey-lighter"
@@ -271,12 +271,12 @@ const Footer = () => {
                 </div>
 
                 <Media greaterThan="sm">
-                  <section className="languageSwitch">
+                  <section className={styles['languageSwitch']}>
                     <LanguageSwitch size="lg" bgColor="grey-darkest" />
                   </section>
                 </Media>
               </section>
-              <section className="copyright">
+              <section className={styles['copyright']}>
                 © {year} Matters, Inc. All rights reserved.
               </section>
             </div>

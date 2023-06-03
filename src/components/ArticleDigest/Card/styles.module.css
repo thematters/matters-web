@@ -7,8 +7,8 @@
   color: var(--color-black);
 }
 
-header {
-  & :global(h3) {
+.header {
+  & h3 {
     @mixin line-clamp;
 
     -webkit-line-clamp: 2;
@@ -16,7 +16,7 @@ header {
 }
 
 .summary,
-footer {
+.footer {
   margin-top: var(--spacing-tight);
 }
 

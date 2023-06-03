@@ -27,7 +27,7 @@ export const EmbedShare = ({ title, path, headerTitle }: EmbedShareProps) => {
     title || (typeof window !== 'undefined' ? window.document.title || '' : '')
 
   return (
-    <section className="share">
+    <section className={styles['share']}>
       <header>
         <h4>
           <TextIcon size="sm" weight="normal">
@@ -36,15 +36,15 @@ export const EmbedShare = ({ title, path, headerTitle }: EmbedShareProps) => {
         </h4>
       </header>
 
-      <section className="buttons">
-        <span className="left">
+      <section className={styles['buttons']}>
+        <span className={styles['left']}>
           <ShareButtons.LINE title={shareTitle} link={shareLink} circle />
           <ShareButtons.WhatsApp title={shareTitle} link={shareLink} circle />
           <ShareButtons.Telegram title={shareTitle} link={shareLink} circle />
           <ShareButtons.Douban title={shareTitle} link={shareLink} circle />
         </span>
 
-        <span className="right">
+        <span className={styles['right']}>
           <ShareButtons.Twitter title={shareTitle} link={shareLink} circle />
           <ShareButtons.Facebook title={shareTitle} link={shareLink} circle />
           <ShareButtons.Weibo title={shareTitle} link={shareLink} circle />

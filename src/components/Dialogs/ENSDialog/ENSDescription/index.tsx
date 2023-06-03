@@ -6,9 +6,9 @@ import styles from './styles.module.css'
 const ENSDescription = () => {
   return (
     <>
-      <hr />
+      <hr className={styles.hr} />
 
-      <section className="description">
+      <section className={styles['description']}>
         <p>
           <Translate id="linkEns" />
         </p>
@@ -22,7 +22,7 @@ const ENSDescription = () => {
           </li>
         </ul>
 
-        <p className="reference">
+        <p className={styles['reference']}>
           <Translate id="moreEnsInfo" />
           &nbsp;
           <a href={EXTERNAL_LINKS.ENS_DOCS} target="_blank" rel="noreferrer">

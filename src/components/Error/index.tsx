@@ -43,15 +43,17 @@ export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
     typeof statusCode === 'string' && statusCode.length > 3
 
   return (
-    <section className="error">
-      <section className="image">
+    <section className={styles['error']}>
+      <section className={styles['image']}>
         <img src={IMAGE_ILLUSTRATION_EMPTY} alt="illustration" />
       </section>
 
-      {shouldShowStatusCode && <h3 className="error-code">{statusCode}</h3>}
+      {shouldShowStatusCode && (
+        <h3 className={styles['error-code']}>{statusCode}</h3>
+      )}
 
       <Alert type="assertive">
-        <p className="error-message">
+        <p className={styles['error-message']}>
           {message ? (
             message
           ) : type === 'not_found' ? (
@@ -64,11 +66,13 @@ export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
         </p>
       </Alert>
 
-      {children && <section className="error-redirect">{children}</section>}
+      {children && (
+        <section className={styles['error-redirect']}>{children}</section>
+      )}
 
       {error && !isProd && (
         <pre
-          className="error-detail"
+          className={styles['error-detail']}
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(error, null, 4),
           }}

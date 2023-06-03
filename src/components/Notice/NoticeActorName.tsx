@@ -24,7 +24,7 @@ const NoticeActorName = ({
   return (
     <Link {...path}>
       <a
-        className="display-name"
+        className={styles['display-name']}
         data-test-id={TEST_ID.NOTICE_USER_DISPLAY_NAME}
       >
         {user.displayName}

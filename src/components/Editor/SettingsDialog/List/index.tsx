@@ -65,7 +65,7 @@ const SettingsList = ({
       />
 
       <Dialog.Content hasGrow>
-        <ul role="list">
+        <ul className={styles.ul} role="list">
           <ListItem
             title={<Translate id="addTags" />}
             subTitle={
@@ -95,11 +95,11 @@ const SettingsList = ({
             <ListItem.NumberIndicator num={collectionCount} />
           </ListItem>
 
-          <section className="response">
+          <section className={styles['response']}>
             <ToggleResponse {...responseProps} />
           </section>
 
-          <section className="access">
+          <section className={styles['access']}>
             <ToggleAccess {...restProps} />
           </section>
 

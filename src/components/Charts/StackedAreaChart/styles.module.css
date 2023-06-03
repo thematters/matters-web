@@ -1,28 +1,28 @@
-svg {
+.svg {
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 .xAxis,
 .yAxis {
-  & :global(text) {
+  & text {
     font-size: var(--font-size-xs);
     color: var(--color-grey);
   }
 }
 
 .xAxis {
-  & :global(.tick:first-of-type text) {
+  & .tick:first-of-type text {
     text-anchor: start;
   }
 
-  & :global(.tick:last-of-type text) {
+  & .tick:last-of-type text {
     text-anchor: end;
   }
 }
 
 .yAxis {
-  & :global(line) {
+  & line {
     stroke: rgb(13 103 99 / 8%);
   }
 }

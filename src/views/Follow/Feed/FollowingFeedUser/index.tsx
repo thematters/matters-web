@@ -19,7 +19,7 @@ export type FeedUserProps = {
 
 const FeedUser = ({ user, header, date, actions }: FeedUserProps) => {
   return (
-    <section className="container">
+    <section className={styles['container']}>
       {header}
 
       <UserDigest.Rich
@@ -28,12 +28,12 @@ const FeedUser = ({ user, header, date, actions }: FeedUserProps) => {
         borderRadius="xtight"
       />
 
-      <footer>
-        <section className="left">
+      <footer className={styles.footer}>
+        <section className={styles['left']}>
           <DateTime date={date} />
         </section>
 
-        <section className="right">
+        <section className={styles['right']}>
           <DropdownActions actions={actions} />
         </section>
       </footer>

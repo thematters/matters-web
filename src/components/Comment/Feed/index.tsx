@@ -54,10 +54,11 @@ export const BaseCommentFeed = ({
 
   return (
     <article
+      className={styles.article}
       id={actionControls.hasLink ? nodeId : ''}
       data-test-id={TEST_ID.ARTICLE_COMMENT_FEED}
     >
-      <header>
+      <header className={styles.header}>
         <UserDigest.Mini
           user={author}
           avatarSize={avatarSize}
@@ -68,7 +69,7 @@ export const BaseCommentFeed = ({
           hasUserName={hasUserName}
         />
 
-        <section className="right">
+        <section className={styles['right']}>
           <DonatorLabel comment={comment} />
           <PinnedLabel comment={comment} />
           <DropdownActions
@@ -81,12 +82,12 @@ export const BaseCommentFeed = ({
       </header>
 
       {replyTo && (!parentComment || replyTo.id !== parentComment.id) && (
-        <section className="reply-to-container">
+        <section className={styles['reply-to-container']}>
           <ReplyTo user={replyTo.author} />
         </section>
       )}
 
-      <section className="content-container">
+      <section className={styles['content-container']}>
         <Media at="sm">
           <Content comment={comment} type={type} size="md-s" limit={17} />
         </Media>

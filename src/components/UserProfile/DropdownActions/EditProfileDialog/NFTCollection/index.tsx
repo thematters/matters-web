@@ -31,14 +31,14 @@ const NFTCollectionItem = ({
   return (
     <button
       type="button"
-      className="nftCollectionItem"
+      className={styles['nftCollectionItem']}
       onClick={onClick}
       title={`${name}\n- ${description}`}
     >
       <Avatar size="xxxl" src={imagePreviewUrl} />
 
       {index === selectedIndex && (
-        <span className="checked">
+        <span className={styles['checked']}>
           <IconChecked size="md-s" color="green" />
         </span>
       )}
@@ -65,7 +65,7 @@ const NFTCollection: React.FC<NFTCollectionProps> = ({ nfts, setField }) => {
       />
 
       <Form.Field.Content>
-        <ul className="nftCollection" id={fieldId}>
+        <ul className={styles['nftCollection']} id={fieldId}>
           {nfts.map((nft, index) => (
             <li key={nft.id}>
               <NFTCollectionItem

@@ -13,7 +13,7 @@ const Banner = () => {
     <div className="l-container full">
       <div className="l-row">
         <div className="l-col-full">
-          <section className="banner">
+          <section className={styles['banner']}>
             <h4>
               <Translate
                 zh_hant="搬家來 Matters，討論超有梗，寫字更賺錢。"

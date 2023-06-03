@@ -12,7 +12,7 @@
   height: 2.625rem;
   margin-right: var(--spacing-x-tight);
 
-  & :global(img) {
+  & img {
     @mixin object-fit-cover;
 
     background-color: var(--color-grey-lighter);
@@ -35,11 +35,11 @@
 
   margin-top: var(--spacing-x-tight);
 
-  & :global(> *) {
+  & > * {
     width: 4rem;
   }
 
-  & :global(> * + *) {
+  & > * + * {
     margin-left: var(--spacing-tight);
   }
 }

@@ -96,7 +96,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
         {InnerForm}
 
-        <footer>
+        <footer className={styles.footer}>
           <LanguageSwitch />
         </footer>
       </>

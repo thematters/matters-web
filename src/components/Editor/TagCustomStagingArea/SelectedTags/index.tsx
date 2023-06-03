@@ -15,12 +15,12 @@ type SelectedTagsProps = {
 
 const SelectedTags: React.FC<SelectedTagsProps> = ({ tags, onRemoveTag }) => {
   return (
-    <section className="selectedTags">
-      <p className="hint">
+    <section className={styles['selectedTags']}>
+      <p className={styles['hint']}>
         <Translate en="Added" zh_hans="已添加" zh_hant="已添加" />
       </p>
 
-      <ul className="tagList">
+      <ul className={styles['tagList']}>
         {tags.map((tag) => (
           <li key={tag.id}>
             <Tag

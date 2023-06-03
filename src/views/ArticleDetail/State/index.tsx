@@ -37,7 +37,7 @@ const State = ({ article }: { article: StateArticleFragment }) => {
   }
 
   return (
-    <section className="container">
+    <section className={styles['container']}>
       {isBanned && <Toast.Instance color="grey" content={<BannedHeader />} />}
       {isArchived && (
         <Toast.Instance color="grey" content={<ArchivedHeader />} />

@@ -248,7 +248,7 @@ const CricleDiscussion = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="discussion">
+      <section className={styles['discussion']}>
         {!circle.owner.isBlocking && (
           <header>
             <CommentForm

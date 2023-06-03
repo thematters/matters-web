@@ -29,7 +29,7 @@ export const CustomAmount: React.FC<CustomAmountProps> = ({
   const { lang } = useContext(LanguageContext)
 
   return (
-    <section className="container">
+    <section className={styles['container']}>
       <Button {...buttonProps}>
         <TextIcon weight="md" size="md">
           {fixed

@@ -99,7 +99,7 @@ const Mini = ({
 
         <span className={nameClasses}>
           {hasDisplayName && (
-            <span className="displayname">
+            <span className={styles['displayname']}>
               <Translate id="accountArchived" />
             </span>
           )}
@@ -121,7 +121,7 @@ const Mini = ({
         <span className={nameClasses}>
           {hasDisplayName && (
             <span
-              className="displayname"
+              className={styles['displayname']}
               data-test-id={TEST_ID.DIGEST_USER_MINI_DISPLAY_NAME}
             >
               {user.displayName}
@@ -129,7 +129,7 @@ const Mini = ({
           )}
           {hasUserName && user.userName && (
             <span
-              className="username"
+              className={styles['username']}
               data-test-id={TEST_ID.DIGEST_USER_MINI_USER_NAME}
             >
               @{user.userName}

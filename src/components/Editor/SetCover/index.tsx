@@ -71,7 +71,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
       />
 
       <Dialog.Content hasGrow>
-        <section className="container">
+        <section className={styles['container']}>
           {/* Uploader */}
           <Uploader setSelected={setSelected} {...uploadEntity} />
 

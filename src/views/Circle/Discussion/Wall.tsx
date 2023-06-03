@@ -19,7 +19,7 @@ const Wall = ({ circle }: WallProps) => {
 
   return (
     <section
-      className="wall"
+      className={styles['wall']}
       aria-label={translate({
         zh_hant: '成為圍爐一員，一起談天說地',
         zh_hans: '成为围炉一员，一起谈天说地',
@@ -33,7 +33,7 @@ const Wall = ({ circle }: WallProps) => {
         <img src={CIRCLE_DISCUSSION_WALL_SM} alt="illustration" />
       </picture>
 
-      <section className="brief">
+      <section className={styles['brief']}>
         {discussionThreadCount > 0 && (
           <p>
             <Translate

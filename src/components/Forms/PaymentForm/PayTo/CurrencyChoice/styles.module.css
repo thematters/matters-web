@@ -10,7 +10,7 @@
     font-size: var(--font-size-md-s);
     line-height: 1.5rem;
 
-    & :global(> *) {
+    & > * {
       flex-shrink: 0;
     }
 
@@ -37,11 +37,11 @@
       background: var(--color-green-lighter);
       border-color: var(--color-matters-green);
 
-      & :global(.currency) {
+      & .currency {
         color: var(--color-matters-green);
       }
 
-      & :global(.subCurrency) {
+      & .subCurrency {
         color: var(--color-matters-green);
         opacity: 0.6;
       }

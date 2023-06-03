@@ -17,11 +17,11 @@ const SectionCard: React.FC<
   })
 
   return (
-    <section className="card">
+    <section className={styles['card']}>
       {title && (
         <header>
           <h3>{title}</h3>
-          {right || <section className="right">{right}</section>}
+          {right || <section className={styles['right']}>{right}</section>}
         </header>
       )}
 

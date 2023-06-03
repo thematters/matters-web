@@ -325,7 +325,7 @@ const Connect: React.FC<FormProps> = ({
         </section>
 
         {isSignUp && (
-          <div className="divider">
+          <div className={styles['divider']}>
             <hr />
           </div>
         )}

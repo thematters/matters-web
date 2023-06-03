@@ -34,7 +34,7 @@ const AccountSettings = () => {
 
   const EmailTitleWrapper = () => (
     <>
-      <span className="email-title">
+      <span className={styles['email-title']}>
         <Translate id="email" />
       </span>
     </>
@@ -42,7 +42,7 @@ const AccountSettings = () => {
 
   const EmailTextWrapper = () => (
     <>
-      <span className="email-text">{viewer.info.email}</span>
+      <span className={styles['email-text']}>{viewer.info.email}</span>
     </>
   )
 

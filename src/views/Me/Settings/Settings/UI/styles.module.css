@@ -1,6 +1,6 @@
 .container {
-  & :global(ul) {
-    & :global(li) {
+  & ul {
+    & li {
       border-top: 0 !important;
     }
   }

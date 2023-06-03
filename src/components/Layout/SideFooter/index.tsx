@@ -13,11 +13,11 @@ const SideFooter = () => {
 
   return (
     <footer>
-      <section className="buttons">
+      <section className={styles['buttons']}>
         <LanguageSwitch />
       </section>
 
-      <section className="links">
+      <section className={styles['links']}>
         <Link href={PATHS.ABOUT} legacyBehavior>
           <a>
             <FormattedMessage defaultMessage="About Us" description="" />
@@ -75,7 +75,7 @@ const SideFooter = () => {
           </a>
         </Link>
 
-        <span className="copyright">
+        <span className={styles['copyright']}>
           {'@ '}
           <span itemProp="copyrightYear">{year}</span>{' '}
           <span itemProp="copyrightHolder">Matters</span>

@@ -20,7 +20,7 @@ const TagCover = ({ tag }: TagCoverProps) => {
   return (
     <Cover cover={tag.cover} fallbackCover={IMAGE_TAG_COVER.src}>
       <div className={titleClasses}>
-        <div className="content">
+        <div className={styles['content']}>
           <Tag tag={tag} type="title" disabled />
         </div>
       </div>

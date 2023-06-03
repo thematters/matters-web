@@ -33,6 +33,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
 
   return (
     <nav
+      className={styles.nav}
       ref={node}
       {...props}
       onKeyDown={(event) => {
@@ -50,14 +51,14 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
         />
       </VisuallyHidden>
 
-      <header>
+      <header className={styles.header}>
         <MeDigest />
 
         <Menu.Divider spacing="loose" />
         <NavMenu.Top isInSideDrawerNav />
       </header>
 
-      <footer>
+      <footer className={styles.footer}>
         <Menu.Divider spacing="loose" />
         <NavMenu.Bottom isInSideDrawerNav />
       </footer>

@@ -9,7 +9,7 @@ type CivicLikerButtonProps = {
 
 const CivicLikerButton: React.FC<CivicLikerButtonProps> = ({ likerId }) => {
   return (
-    <section className="container">
+    <section className={styles['container']}>
       <Button
         bgColor="white"
         size={['100%', '2rem']}

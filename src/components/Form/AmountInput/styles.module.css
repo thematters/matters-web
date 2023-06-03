@@ -1,4 +1,4 @@
-input {
+.input {
   @mixin form-input-round;
 
   text-align: right;

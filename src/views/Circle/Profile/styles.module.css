@@ -5,7 +5,7 @@
     padding-right: var(--spacing-base);
   }
 
-  & :global(> * + *) {
+  & > * + * {
     margin-left: var(--spacing-base);
   }
 }
@@ -23,7 +23,7 @@
   }
 }
 
-header {
+.header {
   @mixin flex-start-space-between;
 
   padding: 0 var(--spacing-base);
@@ -68,7 +68,7 @@ header {
   }
 }
 
-footer {
+.footer {
   @mixin flex-center-space-between;
 
   padding: 0 var(--spacing-base);
@@ -82,7 +82,7 @@ footer {
     font-size: var(--font-size-sm);
     color: var(--color-grey);
 
-    & :global(> *) {
+    & > * {
       display: inline-flex;
       align-items: center;
       line-height: 1.5rem;

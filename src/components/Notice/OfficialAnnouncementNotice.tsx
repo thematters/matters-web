@@ -15,10 +15,10 @@ const OfficialAnnouncementNotice = ({
 
   return (
     <section
-      className="container"
+      className={styles['container']}
       data-test-id={TEST_ID.NOTICE_OFFICIAL_ANNOUNCEMENT}
     >
-      <section className="content-wrap">
+      <section className={styles['content-wrap']}>
         {notice.link ? (
           <a href={notice.link}>
             <Message />
@@ -27,7 +27,7 @@ const OfficialAnnouncementNotice = ({
           <Message />
         )}
       </section>
-      <section className="footer">
+      <section className={styles['footer']}>
         <NoticeDate notice={notice} />
       </section>
     </section>

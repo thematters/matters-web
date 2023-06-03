@@ -40,13 +40,13 @@ const ArticleSummaryInfo = ({
   }
 
   return (
-    <div className="info">
-      <span className="num">{articles}&nbsp;</span>
+    <div className={styles['info']}>
+      <span className={styles['num']}>{articles}&nbsp;</span>
       <FormattedMessage defaultMessage="articles" description="" />
 
       <IconDotDivider />
 
-      <span className="num">{words}&nbsp;</span>
+      <span className={styles['num']}>{words}&nbsp;</span>
       <FormattedMessage
         defaultMessage="words"
         description="src/views/User/Articles/UserArticles.tsx"
@@ -220,7 +220,7 @@ const UserArticles = () => {
         <ArticleSummaryInfo user={user} />
       </Media>
       <Media greaterThan="sm">
-        <section className="header">
+        <section className={styles['header']}>
           <UserTabs />
 
           <ArticleSummaryInfo user={user} />

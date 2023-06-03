@@ -1,17 +1,17 @@
 .tag-list {
   margin-right: calc(var(--spacing-base) * -1);
   margin-bottom: var(--spacing-base);
-}
 
-ul {
-  @mixin hide-scrollbar;
+  & ul {
+    @mixin hide-scrollbar;
 
-  display: flex;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 
-  & li {
-    flex-shrink: 0;
-    padding-right: var(--spacing-base);
+    & li {
+      flex-shrink: 0;
+      padding-right: var(--spacing-base);
+    }
   }
 }

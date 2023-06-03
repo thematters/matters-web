@@ -85,12 +85,12 @@ export const ArticleDigestSidebar = ({
         </header>
 
         {cover && (
-          <aside className="cover">
+          <aside className={styles['cover']}>
             <ResponsiveImage url={cover} size="144w" />
           </aside>
         )}
 
-        <footer>
+        <footer className={styles.footer}>
           <UserDigest.Mini
             user={article.author}
             avatarSize="xs"

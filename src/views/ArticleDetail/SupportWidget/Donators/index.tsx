@@ -62,7 +62,7 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
             aria-label={translate({ id: 'viewSupporters', lang })}
             aria-haspopup="dialog"
           >
-            <section className="avatar-list">
+            <section className={styles['avatar-list']}>
               {frontDonators.map((user, index) => (
                 <Fragment key={index}>
                   {showAvatarAnimation && (
@@ -94,19 +94,19 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
               )}
 
               {donatorsCount > maxAvatarNum && (
-                <span className="count">
+                <span className={styles['count']}>
                   {donatorsCount - (maxAvatarNum - 1)}
                 </span>
               )}
 
               {donatorsCount === 1 && (
-                <span className="donator-name">
+                <span className={styles['donator-name']}>
                   <UserDigest.Plain user={donators[0]} hasUnderline />
                 </span>
               )}
             </section>
           </button>
-          <section className="avatar-list-footer">
+          <section className={styles['avatar-list-footer']}>
             {donatorsCount === 1 && (
               <section>
                 <span>
@@ -122,7 +122,7 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                 aria-label={translate({ id: 'viewSupporters', lang })}
                 aria-haspopup="dialog"
               >
-                <span className="count">{donatorsCount}</span>
+                <span className={styles['count']}>{donatorsCount}</span>
                 <TextIcon
                   icon={<IconArrowRight16 size="xs" />}
                   textPlacement="left"

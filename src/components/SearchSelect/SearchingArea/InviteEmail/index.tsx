@@ -11,7 +11,7 @@ interface InviteEmailProps {
 const InviteEmail: React.FC<InviteEmailProps> = ({ user, onClick }) => {
   return (
     <Card spacing={['base', 'base']} onClick={() => onClick(user)}>
-      <section className="add-email">
+      <section className={styles['add-email']}>
         <TextIcon icon={<IconAdd16 />} color="green" size="md">
           <Translate
             zh_hant="傳送邀請到"
@@ -20,7 +20,7 @@ const InviteEmail: React.FC<InviteEmailProps> = ({ user, onClick }) => {
           />
         </TextIcon>
 
-        <span className="content">&nbsp;{user.displayName}</span>
+        <span className={styles['content']}>&nbsp;{user.displayName}</span>
       </section>
     </Card>
   )

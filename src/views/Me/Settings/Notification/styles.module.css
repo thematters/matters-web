@@ -8,7 +8,7 @@
     margin-top: var(--spacing-base);
     font-size: var(--font-size-sm);
 
-    & :global(> header) {
+    & > header {
       margin-bottom: 0;
     }
 

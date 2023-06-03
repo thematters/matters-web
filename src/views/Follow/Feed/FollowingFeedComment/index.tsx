@@ -21,19 +21,19 @@ const FollowingFeedComment: React.FC<FollowingFeedCommentProps> & {
   fragments: typeof fragments
 } = ({ comment, header, date, actions }) => {
   return (
-    <section className="container">
+    <section className={styles['container']}>
       {header}
 
-      <section className="content">
+      <section className={styles['content']}>
         <Comment.Content comment={comment} type="circleBroadcast" size="md-s" />
       </section>
 
-      <footer>
-        <section className="left">
+      <footer className={styles.footer}>
+        <section className={styles['left']}>
           <DateTime date={date} />
         </section>
 
-        <section className="right">
+        <section className={styles['right']}>
           <DropdownActions actions={actions} />
         </section>
       </footer>

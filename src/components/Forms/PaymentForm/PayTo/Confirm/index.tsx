@@ -216,7 +216,7 @@ const Confirm: React.FC<FormProps> = ({
 
           {currency === CURRENCY.HKD && !isWalletInsufficient && (
             <>
-              <p className="hint">
+              <p className={styles['hint']}>
                 <Translate
                   zh_hant="數入六位數字交易密碼即可完成："
                   zh_hans="数入六位数字交易密码即可完成："

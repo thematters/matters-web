@@ -68,17 +68,17 @@ const StagingArea: React.FC<StagingAreaProps> = ({
 
   if (CustomStagingArea) {
     return (
-      <section className="area">
+      <section className={styles['area']}>
         <CustomStagingArea nodes={nodes} setNodes={setNodes} hint={hint} />
       </section>
     )
   }
 
   return (
-    <section className="area">
+    <section className={styles['area']}>
       {/* empty hint */}
       {nodes.length <= 0 && hint && (
-        <section className="hint">
+        <section className={styles['hint']}>
           <Translate id={hint} />
         </section>
       )}
@@ -94,7 +94,7 @@ const StagingArea: React.FC<StagingAreaProps> = ({
 
       {/* undraggable */}
       {nodes.length > 0 && !draggable && (
-        <ul className="nodes">
+        <ul className={styles['nodes']}>
           {nodes.map(({ node, selected }) => (
             <li key={node.id}>
               <SearchSelectNode

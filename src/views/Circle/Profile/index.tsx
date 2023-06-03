@@ -96,7 +96,7 @@ const CircleProfile = () => {
     <>
       <span />
       {circle && (
-        <section className="buttons">
+        <section className={styles['buttons']}>
           <ShareButton
             tags={
               [
@@ -168,18 +168,18 @@ const CircleProfile = () => {
     <>
       <LayoutHeader />
 
-      <section className="profile">
+      <section className={styles['profile']}>
         <Cover cover={circle.cover} fallbackCover={CIRCLE_COVER} />
 
-        <header>
-          <section className="info">
+        <header className={styles.header}>
+          <section className={styles['info']}>
             <CircleAvatar size="xxxl" circle={circle} />
-            <h2 className="name">{circle.displayName}</h2>
+            <h2 className={styles['name']}>{circle.displayName}</h2>
           </section>
 
           {price && (
-            <section className="price">
-              <span className="amount">{price.amount}</span>
+            <section className={styles['price']}>
+              <span className={styles['amount']}>{price.amount}</span>
               <br />
               {price.currency} /{' '}
               <FormattedMessage defaultMessage="month" description="" />
@@ -188,7 +188,7 @@ const CircleProfile = () => {
         </header>
 
         {circle.description && (
-          <section className="description">
+          <section className={styles['description']}>
             <Expandable
               content={circle.description}
               color="grey-darker"
@@ -202,8 +202,8 @@ const CircleProfile = () => {
 
         {privateFetched && <SubscriptionBanner circle={circle} />}
 
-        <footer>
-          <section className="counts">
+        <footer className={styles.footer}>
+          <section className={styles['counts']}>
             <MembersDialog>
               {({ openDialog: openMembersDialog }) => (
                 <button
@@ -211,7 +211,7 @@ const CircleProfile = () => {
                   onClick={openMembersDialog}
                   aria-haspopup="dialog"
                 >
-                  <span className="count">
+                  <span className={styles['count']}>
                     {numAbbr(circle.members.totalCount)}
                   </span>
                   {/* <Translate id="members" /> */}
@@ -227,7 +227,7 @@ const CircleProfile = () => {
                   onClick={openFollowersDialog}
                   aria-haspopup="dialog"
                 >
-                  <span className="count">
+                  <span className={styles['count']}>
                     {numAbbr(circle.followers.totalCount)}
                   </span>
                   {/* <Translate id="follower" />  */}

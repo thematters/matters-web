@@ -13,6 +13,6 @@
   color: var(--color-grey-dark);
 }
 
-footer {
+.footer {
   @mixin feed-footer-actions;
 }

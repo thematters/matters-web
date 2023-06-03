@@ -125,7 +125,7 @@ const Input: React.FC<InputProps> = ({
       />
 
       <Field.Content>
-        <section className="pin-input">
+        <section className={styles['pin-input']}>
           {values.map((val, index) => (
             <Item
               key={index}

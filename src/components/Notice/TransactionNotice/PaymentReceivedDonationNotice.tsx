@@ -38,7 +38,7 @@ const PaymentReceivedDonationNotice = ({
             <NoticeArticleTitle article={tx.target} />
             &nbsp;
             <span
-              className="highlight"
+              className={styles['highlight']}
               data-test-id={TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION_AMOUNT}
             >
               {tx.amount} {tx.currency}

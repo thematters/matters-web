@@ -51,8 +51,8 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
       {...cardProps}
       testId={TEST_ID.DIGEST_TAG_SIDEBAR}
     >
-      <section className="container">
-        <section className="cover">
+      <section className={styles['container']}>
+        <section className={styles['cover']}>
           <Link {...path} legacyBehavior>
             <a>
               <VisuallyHidden>
@@ -66,7 +66,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
           </Link>
         </section>
 
-        <section className="content">
+        <section className={styles['content']}>
           <header>
             <Tag
               tag={tag}
@@ -76,7 +76,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
             />
           </header>
 
-          <section className="nums">
+          <section className={styles['nums']}>
             <TextIcon
               icon={<IconUser16 color="grey-dark" size="xs" />}
               size="xs"

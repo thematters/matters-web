@@ -37,7 +37,7 @@ const Counts = ({ circle }: CountsProps) => {
   const articleCount = circle.works.totalCount
 
   return (
-    <section className="counts">
+    <section className={styles['counts']}>
       <TextIcon
         icon={<IconUser16 size="xs" />}
         color="grey"

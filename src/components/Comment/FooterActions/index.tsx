@@ -144,6 +144,7 @@ const BaseFooterActions = ({
 
   return (
     <footer
+      className={styles.footer}
       aria-label={translate({
         zh_hant: `${comment.upvotes} 點讚`,
         zh_hans: `${comment.upvotes} 点赞`,
@@ -151,7 +152,7 @@ const BaseFooterActions = ({
         lang,
       })}
     >
-      <section className="left">
+      <section className={styles['left']}>
         {hasReply && (
           <ReplyButton
             type={type}

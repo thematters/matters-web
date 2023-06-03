@@ -115,7 +115,7 @@ const TagsFeed = () => {
   )
 
   return (
-    <section className="tags">
+    <section className={styles['tags']}>
       <Slides header={SlideHeader}>
         {loading && (
           <Slides.Item>
@@ -147,7 +147,7 @@ const TagsFeed = () => {
           ))}
       </Slides>
       <Media lessThan="md">
-        <section className="backToAll">
+        <section className={styles['backToAll']}>
           <ViewMoreCard
             spacing={['tight', 'tight']}
             href={PATHS.TAGS}

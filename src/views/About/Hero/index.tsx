@@ -59,8 +59,8 @@ const Hero = () => {
   }, [emblaApi, onSelect])
 
   return (
-    <section className="hero">
-      <header className="logo">
+    <section className={styles['hero']}>
+      <header className={styles['logo']}>
         <div className="l-container">
           <div className="l-row">
             <div className="l-col-full">
@@ -80,7 +80,7 @@ const Hero = () => {
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">
-            <section className="slogan">
+            <section className={styles['slogan']}>
               <section>
                 <h2>
                   <Translate
@@ -118,9 +118,9 @@ const Hero = () => {
         </div>
       </div>
 
-      <section className="reports">
-        <section className="container">
-          <section className="scrollButton scrollLeft">
+      <section className={styles['reports']}>
+        <section className={styles['container']}>
+          <section className={styles['scrollButton scrollLeft']}>
             <Button onClick={scrollPrev} disabled={!prevBtnEnabled}>
               <Media at="sm">{withIcon(IconButtonLeft)({ size: 'md' })}</Media>
               <Media greaterThan="sm">
@@ -128,8 +128,8 @@ const Hero = () => {
               </Media>
             </Button>
           </section>
-          <section className="emblaViewport" ref={emblaRef}>
-            <ul className="emblaContainer">
+          <section className={styles['emblaViewport']} ref={emblaRef}>
+            <ul className={styles['emblaContainer']}>
               <li>
                 <a
                   href="https://restofworld.org/2020/chinas-fugitive-writers-find-a-home-online/"
@@ -304,7 +304,7 @@ const Hero = () => {
               </li>
             </ul>
           </section>
-          <section className="scrollButton scrollRight">
+          <section className={styles['scrollButton scrollRight']}>
             <Button onClick={scrollNext} disabled={!nextBtnEnabled}>
               <Media at="sm">{withIcon(IconButtonRight)({ size: 'md' })}</Media>
               <Media greaterThan="sm">

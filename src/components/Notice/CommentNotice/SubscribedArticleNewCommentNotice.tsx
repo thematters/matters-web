@@ -31,10 +31,10 @@ const SubscribedArticleNewCommentNotice = ({
 
   return (
     <section
-      className="container"
+      className={styles['container']}
       data-test-id={TEST_ID.NOTICE_SUBSCRIBED_ARTICLE_NEW_COMMENT}
     >
-      <section className="avatar-wrap">
+      <section className={styles['avatar-wrap']}>
         {isMultiActors ? (
           <NoticeTypeIcon type="comment" />
         ) : (
@@ -42,7 +42,7 @@ const SubscribedArticleNewCommentNotice = ({
         )}
       </section>
 
-      <section className="content-wrap">
+      <section className={styles['content-wrap']}>
         <NoticeHead>
           <NoticeHeadActors actors={notice.actors} />
           <FormattedMessage
@@ -53,7 +53,7 @@ const SubscribedArticleNewCommentNotice = ({
         </NoticeHead>
 
         {isMultiActors ? (
-          <section className="multi-actor-avatars">
+          <section className={styles['multi-actor-avatars']}>
             {notice.actors.map((actor, index) => (
               <NoticeActorAvatar key={index} user={actor} size="md" />
             ))}

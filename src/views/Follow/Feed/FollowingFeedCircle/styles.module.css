@@ -35,6 +35,6 @@
   margin-left: var(--spacing-base);
 }
 
-footer {
+.footer {
   @mixin feed-footer-actions;
 }

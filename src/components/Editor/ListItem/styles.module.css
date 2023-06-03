@@ -46,7 +46,7 @@ li .item {
     color: var(--color-black);
   }
 
-  & :global(img) {
+  & img {
     @mixin object-fit-cover;
   }
 }

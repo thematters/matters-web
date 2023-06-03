@@ -45,7 +45,7 @@ export const ThreadComment = ({
   const [expand, setExpand] = useState(defaultExpand || restCount <= 0)
 
   return (
-    <section className="container">
+    <section className={styles['container']}>
       <Feed
         comment={comment}
         type={type}
@@ -56,7 +56,7 @@ export const ThreadComment = ({
       />
 
       {descendants.length > 0 && (
-        <ul className="descendants">
+        <ul className={styles['descendants']}>
           {descendants
             .slice(0, expand ? undefined : COLLAPSE_COUNT)
             .map((descendantComment) => (

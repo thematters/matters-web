@@ -8,7 +8,7 @@
     padding-bottom: var(--spacing-x-tight);
   }
 
-  & :global(.list-item > .card) {
+  & .list-item > .card {
     margin: 0 calc(var(--spacing-x-tight) * -1);
   }
 }

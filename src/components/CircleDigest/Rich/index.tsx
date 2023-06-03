@@ -72,10 +72,10 @@ const Rich = ({
       {...cardProps}
     >
       <section className={containerClasses}>
-        <section className="content">
+        <section className={styles['content']}>
           <CircleAvatar circle={circle} size={avatarSize} />
 
-          <header>
+          <header className={styles.header}>
             <h3 className={titleClasses}>
               <LinkWrapper
                 {...path}
@@ -101,7 +101,7 @@ const Rich = ({
         </section>
 
         {hasDescription && description && (
-          <p className="description">{description}</p>
+          <p className={styles['description']}>{description}</p>
         )}
 
         {hasFooter && (

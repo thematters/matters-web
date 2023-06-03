@@ -219,7 +219,7 @@ const CricleBroadcast = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="broadcast">
+      <section className={styles['broadcast']}>
         {isOwner && (
           <header>
             <CommentForm

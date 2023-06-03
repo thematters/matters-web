@@ -21,7 +21,7 @@ const Card = ({ tag }: CardProps) => {
   return (
     <Link {...path} legacyBehavior>
       <a>
-        <section className="card">
+        <section className={styles['card']}>
           <ResponsiveImage url={url} size="360w" />
 
           <div className={nameClasses}>

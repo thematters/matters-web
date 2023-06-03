@@ -15,8 +15,8 @@ const SectionHead: React.FC<React.PropsWithChildren<SectionHeadProps>> = ({
   children,
 }) => {
   return (
-    <section className="head">
-      <h2>
+    <section className={styles['head']}>
+      <h2 className={styles.h2}>
         <TextIcon
           icon={withIcon(icon)({ size: 'md' })}
           size="xm"

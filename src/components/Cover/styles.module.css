@@ -3,7 +3,7 @@
   overflow: hidden;
   border-radius: 0 0 1.25rem 1.25rem;
 
-  & :global(img) {
+  & img {
     @mixin object-fit-cover;
 
     background-color: var(--color-grey-lighter);

@@ -241,7 +241,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
         {InnerForm}
 
-        <footer>
+        <footer className={styles.footer}>
           <LanguageSwitch />
         </footer>
       </>

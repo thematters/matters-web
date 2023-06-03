@@ -60,7 +60,7 @@ const TagCustomStagingArea = ({
 
   if (loading) {
     return (
-      <section className="customTagArea">
+      <section className={styles['customTagArea']}>
         <Spinner />
       </section>
     )
@@ -71,8 +71,8 @@ const TagCustomStagingArea = ({
 
   if (!hasTag && !hasRecommendedTags) {
     return (
-      <section className="customTagArea">
-        <section className="hint">
+      <section className={styles['customTagArea']}>
+        <section className={styles['hint']}>
           <Translate id={hint} />
         </section>
       </section>
@@ -80,7 +80,7 @@ const TagCustomStagingArea = ({
   }
 
   return (
-    <section className="customTagArea">
+    <section className={styles['customTagArea']}>
       {hasTag && (
         <SelectedTags
           tags={tags.map(

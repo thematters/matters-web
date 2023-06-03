@@ -2,16 +2,16 @@
   position: relative;
   flex: 1;
 
-  & :global(> *:not(svg)) {
+  & > *:not(svg) {
     width: 100%;
   }
 
-  & :global(> svg) {
+  & > svg {
     position: absolute;
     top: var(--spacing-xx-tight);
     left: var(--spacing-xx-tight);
 
-    & :global(path) {
+    & path {
       fill: var(--color-likecoin-green);
     }
   }

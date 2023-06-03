@@ -17,14 +17,14 @@ const RevisedArticleNotPublishedNotice = ({
 }) => {
   return (
     <section
-      className="container"
+      className={styles['container']}
       data-test-id={TEST_ID.NOTICE_REVISED_ARTICLE_NOT_PUBLISHED}
     >
-      <section className="avatar-wrap">
+      <section className={styles['avatar-wrap']}>
         <NoticeTypeIcon type="logo" />
       </section>
 
-      <section className="content-wrap">
+      <section className={styles['content-wrap']}>
         <NoticeHead>
           <FormattedMessage
             defaultMessage="Failed to republish article"

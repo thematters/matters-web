@@ -103,7 +103,7 @@ const BaseOAuthAuthorize = () => {
         )}
         <input type="hidden" name="response_type" value="code" />
 
-        <section className="content">
+        <section className={styles['content']}>
           <ul>
             <li>
               <Translate
@@ -129,7 +129,7 @@ const BaseOAuthAuthorize = () => {
 
           <hr />
 
-          <section className="current-account">
+          <section className={styles['current-account']}>
             <UserDigest.Mini
               user={viewer}
               avatarSize="xs"
@@ -139,7 +139,7 @@ const BaseOAuthAuthorize = () => {
             />
           </section>
 
-          <p className="switch-account">
+          <p className={styles['switch-account']}>
             <span>
               <Translate zh_hant="不是你？" zh_hans="不是你？" en="Not you?" />
             </span>

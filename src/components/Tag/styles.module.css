@@ -32,7 +32,7 @@
   display: inline-flex;
   line-height: 1.5rem;
 
-  & :global(svg) {
+  & svg {
     margin-right: var(--spacing-xxx-tight);
     opacity: 0.35;
   }
@@ -81,7 +81,7 @@
       }
     }
 
-    & :global(svg) {
+    & svg {
       opacity: 0.5;
     }
   }
@@ -90,7 +90,7 @@
 .plain {
   display: inline-flex;
 
-  & :global(svg) {
+  & svg {
     opacity: 0.5;
   }
 }

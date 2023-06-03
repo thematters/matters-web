@@ -161,7 +161,7 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
 
   return (
     <Dialog.Content hasGrow>
-      <section className="reason">
+      <section className={styles['reason']}>
         {isInPassword && (
           <p>
             <Translate
@@ -184,7 +184,7 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
           </p>
         )}
 
-        <p className="hint">
+        <p className={styles['hint']}>
           <Translate id="hintPaymentPassword" />
         </p>
       </section>

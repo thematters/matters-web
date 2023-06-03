@@ -17,7 +17,7 @@
       width: 4.5rem;
       height: 4.5rem;
 
-      & :global(img) {
+      & img {
         @mixin object-fit-cover;
 
         border-radius: var(--spacing-xx-tight);
@@ -38,12 +38,12 @@
   }
 }
 
-footer {
+.footer {
   margin-top: var(--spacing-tight);
   line-height: 1;
 
   /* Make <UserDigest.Mini> as an inline element, otherwise users will easily touch it inadvertently */
-  & :global(> *) {
+  & > * {
     display: inline-flex;
   }
 }

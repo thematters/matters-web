@@ -252,13 +252,13 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
   }
 
   return (
-    <section className="latest-responses" id="latest-responses">
+    <section className={styles['latest-responses']} id="latest-responses">
       <header>
         <Title type="feed" is="h3">
           <Translate id="latestResponses" />
         </Title>
 
-        <div className="latest-responses-switch">
+        <div className={styles['latest-responses-switch']}>
           <Switch
             name="article-only"
             label={translate({ id: 'collectedOnly', lang })}

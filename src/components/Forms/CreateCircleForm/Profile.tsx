@@ -144,7 +144,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
   const InnerForm = (
     <section>
       <Form id={formId} onSubmit={handleSubmit}>
-        <section className="cover-field">
+        <section className={styles['cover-field']}>
           <CoverUploader
             type="circle"
             assetType={ASSET_TYPE.circleCover}
@@ -156,7 +156,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
             entityId={circle.id}
           />
 
-          <p className="hint">
+          <p className={styles['hint']}>
             <FormattedMessage
               defaultMessage="Recommended size: 1600px x 900px"
               description=""
@@ -164,7 +164,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           </p>
         </section>
 
-        <section className="avatar-field">
+        <section className={styles['avatar-field']}>
           <AvatarUploader
             type="circle"
             circle={circle}
@@ -174,7 +174,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
         </section>
 
         {!isCreate && (
-          <section className="container">
+          <section className={styles['container']}>
             <Form.Input
               label={
                 <FormattedMessage
@@ -196,7 +196,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
             />
           </section>
         )}
-        <section className="container">
+        <section className={styles['container']}>
           <Form.Textarea
             label={
               <FormattedMessage

@@ -75,7 +75,7 @@ span.container {
   background: transparent;
   transition-property: color, background;
 
-  & :global(+ *) {
+  & + * {
     z-index: 1;
   }
 }

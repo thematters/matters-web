@@ -2,7 +2,7 @@
   padding: var(--spacing-base);
   text-align: left;
 
-  & :global(> .card + .card) {
+  & > .card + .card {
     margin-top: var(--spacing-base);
   }
 }
@@ -21,7 +21,7 @@
       background-color: var(--color-grey-lighter);
       border-radius: 0.25rem;
 
-      & :global(:not(.gateway-url)) {
+      & :not(.gateway-url) {
         flex-shrink: 0;
       }
 
@@ -112,7 +112,7 @@
   font-size: var(--font-size-md-s);
   line-height: 1.5rem;
 
-  & :global(svg) {
+  & svg {
     margin-right: var(--spacing-xx-tight);
   }
 }

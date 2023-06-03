@@ -84,17 +84,17 @@ const Step = ({
   const contentId2 = `content_${step}_2`
 
   return (
-    <section className="step">
+    <section className={styles['step']}>
       <img src={src} alt="illustration" />
-      <p className="title">
-        <span className="number">{step}.</span>
+      <p className={styles['title']}>
+        <span className={styles['number']}>{step}.</span>
         <Translate
           zh_hant={zh_hant[titleId]}
           zh_hans={zh_hans[titleId]}
           en={en[titleId]}
         />
       </p>
-      <p className="content">
+      <p className={styles['content']}>
         <Translate
           zh_hant={zh_hant[contentId1]}
           zh_hans={zh_hans[contentId1]}
@@ -122,7 +122,7 @@ const Steps = () => {
   }
 
   return (
-    <section id="steps" className="steps">
+    <section id="steps" className={styles['steps']}>
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">
@@ -141,13 +141,15 @@ const Steps = () => {
         <div className="l-row">
           <Step src={IMAGE_STEP_1} step={1}>
             {viewer.isAuthed ? (
-              <section className="avatar">
+              <section className={styles['avatar']}>
                 <Avatar
                   size="lg"
                   user={viewer.isInactive ? undefined : viewer}
                 />
-                <section className="info">
-                  <span className="username">{viewer.displayName}</span>
+                <section className={styles['info']}>
+                  <span className={styles['username']}>
+                    {viewer.displayName}
+                  </span>
                 </section>
               </section>
             ) : (
@@ -158,14 +160,14 @@ const Steps = () => {
                   size={['7rem', '2.5rem']}
                   spacing={[0, 0]}
                 />
-                <p className="sub-content">
+                <p className={styles['sub-content']}>
                   <Translate
                     zh_hant={zh_hant.sub_content_1_1}
                     zh_hans={zh_hans.sub_content_1_1}
                     en={en.sub_content_1_1}
                   />
                 </p>
-                <section className="sub-content-link">
+                <section className={styles['sub-content-link']}>
                   <SignUpButton isPlain>
                     <Translate
                       zh_hant={zh_hant.sub_content_1_2}

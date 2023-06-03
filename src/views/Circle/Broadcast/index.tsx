@@ -8,7 +8,7 @@ const CircleBroadcast = () => (
   <Layout.Main>
     <Profile />
 
-    <section className="container">
+    <section className={styles['container']}>
       <Broadcast />
     </section>
   </Layout.Main>

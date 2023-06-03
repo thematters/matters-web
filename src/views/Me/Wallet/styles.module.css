@@ -6,8 +6,8 @@
     margin-bottom: var(--spacing-loose);
   }
 
-  & :global(.assetsItem + .assetsItem),
-  & :global(.fresnel-container + .assetsItem) {
+  & .assetsItem + .assetsItem,
+  & .fresnel-container + .assetsItem {
     position: relative;
 
     &::before {

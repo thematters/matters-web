@@ -40,8 +40,8 @@ const Wall = ({ show }: WallProps) => {
       <div className="l-container full">
         <div className="l-row">
           <div className="l-col-three-mid">
-            <section className="container" style={bgStyle}>
-              <h2 className="slogan">
+            <section className={styles['container']} style={bgStyle}>
+              <h2 className={styles['slogan']}>
                 <Translate
                   zh_hant="看不過癮？"
                   zh_hans="看不过瘾？"
@@ -49,7 +49,7 @@ const Wall = ({ show }: WallProps) => {
                 />
               </h2>
 
-              <p className="desc">
+              <p className={styles['desc']}>
                 <Translate
                   zh_hant="一鍵登入，即可加入全球最優質中文創作社區"
                   zh_hans="一键登入，即可加入全球最优质中文创作社区"
@@ -57,11 +57,11 @@ const Wall = ({ show }: WallProps) => {
                 />
               </p>
 
-              <div className="signup">
+              <div className={styles['signup']}>
                 <LoginButton bgColor="green" />
               </div>
 
-              <div className="close">
+              <div className={styles['close']}>
                 <Button
                   onClick={closeDialog}
                   aria-label={translate({ id: 'close', lang })}

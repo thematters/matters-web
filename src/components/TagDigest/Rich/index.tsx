@@ -56,7 +56,7 @@ const Rich = ({
       testId={TEST_ID.DIGEST_TAG_RICH}
       bgActiveColor="none"
     >
-      <section className="content">
+      <section className={styles['content']}>
         <TextIcon
           icon={<IconHashTag16 color="grey" />}
           color="black"
@@ -68,14 +68,14 @@ const Rich = ({
         </TextIcon>
 
         {hasFollow && (
-          <section className="button">
+          <section className={styles['button']}>
             <TagDigestButtons.FollowButton tag={tag} />
           </section>
         )}
       </section>
 
       {hasDesc && (
-        <section className="desc">
+        <section className={styles['desc']}>
           <p>{tag.description}</p>
         </section>
       )}

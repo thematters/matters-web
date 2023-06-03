@@ -5,13 +5,13 @@
   & .right {
     @mixin inline-flex-center-all;
 
-    & :global(> * + *) {
+    & > * + * {
       padding-left: var(--spacing-loose);
     }
   }
 
   & .left {
-    & :global(.title) {
+    & .title {
       @mixin line-clamp;
 
       -webkit-line-clamp: 2;
@@ -27,7 +27,7 @@
     color: var(--color-red);
   }
 
-  & :global(svg) {
+  & svg {
     @mixin transition;
   }
 }

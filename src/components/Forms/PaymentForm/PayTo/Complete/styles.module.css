@@ -22,7 +22,7 @@
   color: var(--color-black);
   text-align: center;
 
-  & :global(> *) {
+  & > * {
     display: inline-flex;
   }
 

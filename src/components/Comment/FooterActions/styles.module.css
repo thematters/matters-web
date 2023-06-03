@@ -1,4 +1,4 @@
-footer {
+.footer {
   @mixin flex-center-space-between;
 
   margin-top: var(--spacing-base);
@@ -8,11 +8,11 @@ footer {
   & .left {
     @mixin inline-flex-center-all;
 
-    & :global(> *) {
+    & > * {
       display: inline-flex;
     }
 
-    & :global(> * + *) {
+    & > * + * {
       padding-left: var(--spacing-loose);
     }
   }

@@ -45,7 +45,7 @@
   height: 4.5rem;
   margin-left: var(--spacing-base);
 
-  & :global(img) {
+  & img {
     @mixin object-fit-cover;
 
     background-color: var(--color-grey-lighter);
@@ -58,7 +58,7 @@
   }
 }
 
-header {
+/* .header {
   margin-bottom: var(--spacing-base);
   line-height: 1;
-}
+} */

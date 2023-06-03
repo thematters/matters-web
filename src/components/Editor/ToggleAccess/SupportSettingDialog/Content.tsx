@@ -165,9 +165,11 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
 
         <Tab tabType={tabType} setTabType={changeTabType} />
 
-        <section className="content-input">{InnerForm(tabType)}</section>
+        <section className={styles['content-input']}>
+          {InnerForm(tabType)}
+        </section>
 
-        <section className="preview">
+        <section className={styles['preview']}>
           <h3>
             <TextIcon size="md" weight="md">
               <Translate

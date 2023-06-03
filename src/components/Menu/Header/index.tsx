@@ -18,7 +18,7 @@ const MenuHeader: React.FC<React.PropsWithChildren<MenuHeaderProps>> = ({
   })
 
   return (
-    <header>
+    <header className={styles.header}>
       <h3 className={titleClasses}>{title}</h3>
       {children}
     </header>

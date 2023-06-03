@@ -114,7 +114,12 @@ export const StackedAreaChart: React.FC<StackedAreaChartProps> & {
 
   return (
     <div ref={containerRef}>
-      <svg ref={svgRef} width={svgWidth} height={svgHeight}>
+      <svg
+        className={styles.svg}
+        ref={svgRef}
+        width={svgWidth}
+        height={svgHeight}
+      >
         {svgWidth > 0 &&
           children({
             data,

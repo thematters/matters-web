@@ -9,20 +9,20 @@
     line-height: 1rem;
     color: var(--color-grey);
 
-    & :global(a) {
+    & a {
       color: var(--color-black);
     }
 
-    & :global(> *) {
+    & > * {
       flex-shrink: 0;
       line-height: 1;
     }
 
-    & :global(> :last-child) {
+    & > :last-child {
       flex-shrink: initial;
     }
 
-    & :global(> * + *) {
+    & > * + * {
       margin-left: var(--spacing-xx-tight);
     }
   }

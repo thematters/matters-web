@@ -1,4 +1,4 @@
-footer {
+.footer {
   margin: var(--spacing-loose) 0;
   font-size: var(--font-size-sm);
   color: var(--color-grey-dark);

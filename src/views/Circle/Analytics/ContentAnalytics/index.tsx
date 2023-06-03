@@ -91,7 +91,7 @@ const CircleContentAnalytics = () => {
   const [type, setType] = useState<CircleContentAnalyticsType>('paywall')
 
   return (
-    <section className="container">
+    <section className={styles['container']}>
       <SectionHead
         icon={IconAnalyticsContent24}
         title={

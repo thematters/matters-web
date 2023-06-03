@@ -52,7 +52,7 @@ const USDTChoice: React.FC<FormProps> = ({
 
   if (mediaHash === '') {
     return (
-      <section className="item">
+      <section className={styles['item']}>
         <TextIcon
           icon={<IconUSDT40 size="xl-m" />}
           size="md"
@@ -74,7 +74,7 @@ const USDTChoice: React.FC<FormProps> = ({
 
   if (!creatorAddress) {
     return (
-      <section className="item">
+      <section className={styles['item']}>
         <TextIcon
           icon={<IconUSDT40 size="xl-m" />}
           size="md"
@@ -98,7 +98,7 @@ const USDTChoice: React.FC<FormProps> = ({
     return (
       <section
         role="button"
-        className="item clickable"
+        className={styles['item clickable']}
         onClick={switchToSetAmount}
         aria-label="Tether"
       >
@@ -124,7 +124,7 @@ const USDTChoice: React.FC<FormProps> = ({
   }
 
   return (
-    <section className="item" aria-label="Tether">
+    <section className={styles['item']} aria-label="Tether">
       <TextIcon
         icon={<IconUSDT40 size="xl-m" color="grey" />}
         size="md"

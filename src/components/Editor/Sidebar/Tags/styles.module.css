@@ -1,4 +1,4 @@
-ul {
+.ul {
   padding: 0 0 0 var(--spacing-base);
 
   & li {
