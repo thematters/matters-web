@@ -10,10 +10,10 @@
   margin-right: var(--spacing-x-tight);
 }
 
-header {
+.header {
   @mixin flex-center-space-between;
 
-  & :global(> * + *) {
+  & > * + * {
     margin-left: var(--spacing-xx-tight);
   }
 }

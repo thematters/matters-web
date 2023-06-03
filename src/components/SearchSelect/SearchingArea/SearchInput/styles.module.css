@@ -1,4 +1,4 @@
-form {
+.form {
   @mixin border-bottom-grey;
 
   position: relative;
@@ -9,7 +9,7 @@ form {
   font-size: var(--font-size-md-s);
   line-height: 3.375rem;
 
-  & :global(input[type='search']) {
+  & input[type='search'] {
     height: calc(3.375rem - 2px);
     padding: 0 calc(2rem + var(--spacing-x-tight));
     font-size: var(--font-size-sm);

@@ -104,7 +104,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
         {(!expandable || (expandable && expand)) && <div>{children}</div>}
       </div>
       {expandable && expand && !isRichShow && (
-        <section className="collapseWrapper">
+        <section className={styles['collapseWrapper']}>
           <Button
             spacing={['xxtight', 'xtight']}
             bgColor="grey-lighter"
@@ -120,7 +120,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
         </section>
       )}
       {expandable && !expand && (
-        <p className="unexpandWrapper">
+        <p className={styles['unexpandWrapper']}>
           {!isRichShow && (
             <TextTruncate
               line={limit}
@@ -136,7 +136,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
                     setExpand(!expand)
                     e.stopPropagation()
                   }}
-                  className="expandButton"
+                  className={styles['expandButton']}
                 >
                   ...
                   <Translate id="expand" />
@@ -150,7 +150,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
                 setExpand(!expand)
                 e.stopPropagation()
               }}
-              className="expandButton"
+              className={styles['expandButton']}
             >
               ...
               <Translate id="expand" />

@@ -25,8 +25,8 @@ const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
   const hasDate = date !== false
 
   return (
-    <footer>
-      <section className="left">
+    <footer className={styles.footer}>
+      <section className={styles['left']}>
         <ReadTime article={article} />
 
         <DonationCount article={article} />
@@ -49,7 +49,7 @@ const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
         )}
       </section>
 
-      <section className="right">
+      <section className={styles['right']}>
         <BookmarkButton article={article} inCard={controls.inCard} />
         <DropdownActions article={article} {...controls} />
       </section>

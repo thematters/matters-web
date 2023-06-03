@@ -34,7 +34,7 @@ const Logo = () => {
   const intl = useIntl()
 
   return (
-    <section className="logo">
+    <section className={styles['logo']}>
       <Link href={PATHS.HOME} legacyBehavior>
         <a
           aria-label={intl.formatMessage({
@@ -73,7 +73,7 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
     (!isInNotification && isPathStartWith('/me')) || isMyProfile || isMyCircle
 
   return (
-    <ul role="menu">
+    <ul role="menu" className={styles.ul}>
       <NavListItem
         name={<FormattedMessage defaultMessage="Discover" description="" />}
         icon={<IconNavHome32 size="lg" />}
@@ -137,7 +137,7 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
       <Dropdown
         content={
           <FocusLock>
-            <section className="dropdown-menu">
+            <section className={styles['dropdown-menu']}>
               <VisuallyHidden>
                 <button type="button">
                   <FormattedMessage defaultMessage="Cancel" description="" />
@@ -197,10 +197,10 @@ const SideNav = () => {
   // only show auth button for anonymous
   if (!viewer.isAuthed) {
     return (
-      <section className="side-nav">
+      <section className={styles['side-nav']}>
         <Logo />
 
-        <ul role="menu">
+        <ul role="menu" className={styles.ul}>
           <Media lessThan="xl">
             <NavListItem
               name={
@@ -240,7 +240,7 @@ const SideNav = () => {
   }
 
   return (
-    <section className="side-nav">
+    <section className={styles['side-nav']}>
       <Logo />
 
       <Media greaterThanOrEqual="lg">

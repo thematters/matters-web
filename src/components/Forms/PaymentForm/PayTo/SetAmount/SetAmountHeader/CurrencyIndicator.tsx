@@ -56,7 +56,7 @@ const CurrencyIndicator: React.FC<CurrencyIndicatorProps> = ({
         </TextIcon>
       )}
 
-      <span className="change-button">
+      <span className={styles['change-button']}>
         <Button onClick={switchToCurrencyChoice}>
           <TextIcon size="xs" textDecoration="underline" color="grey-dark">
             <Translate

@@ -15,14 +15,14 @@ const MeDigest = () => {
   })
 
   return (
-    <section className="me-digest">
+    <section className={styles['me-digest']}>
       <Link {...viewerPath} legacyBehavior>
-        <a className="header">
+        <a className={styles['header']}>
           <Avatar user={viewer} size="xl" />
 
-          <section className="names">
-            <h1 className="display-name">{viewer.displayName}</h1>
-            <p className="username">@{viewer.userName}</p>
+          <section className={styles['names']}>
+            <h1 className={styles['display-name']}>{viewer.displayName}</h1>
+            <p className={styles['username']}>@{viewer.userName}</p>
           </section>
         </a>
       </Link>

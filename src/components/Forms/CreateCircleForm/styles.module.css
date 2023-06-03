@@ -9,7 +9,7 @@
     color: var(--color-black);
   }
 
-  & :global(input) {
+  & input {
     padding-left: 8.5rem;
   }
 }

@@ -15,7 +15,7 @@ const NoticeCircleCard = ({
   }
 
   return (
-    <section className="sub-content">
+    <section className={styles['sub-content']}>
       <CircleDigest.Rich
         bgColor="grey-lighter"
         borderRadius="xtight"

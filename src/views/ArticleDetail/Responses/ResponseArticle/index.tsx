@@ -27,8 +27,8 @@ const fragments = {
 
 const ResponseArticle = ({ article }: ResponseArticleProps) => {
   return (
-    <section className="container">
-      <header>
+    <section className={styles['container']}>
+      <header className={styles.header}>
         <UserDigest.Mini
           user={article.author}
           avatarSize="lg"
@@ -38,7 +38,7 @@ const ResponseArticle = ({ article }: ResponseArticleProps) => {
           hasDisplayName
         />
 
-        <span className="collected">
+        <span className={styles['collected']}>
           <Translate
             zh_hant="關聯了本作品"
             zh_hans="关联了本作品"
@@ -47,7 +47,7 @@ const ResponseArticle = ({ article }: ResponseArticleProps) => {
         </span>
       </header>
 
-      <section className="article-digest">
+      <section className={styles['article-digest']}>
         <ArticleDigestSidebar article={article} hasBackground />
       </section>
     </section>

@@ -10,7 +10,7 @@
     height: 1.25rem;
   }
 
-  & :global(.icon-like) {
+  & .icon-like {
     position: absolute;
     top: 0;
     left: 0;
@@ -19,7 +19,7 @@
     transform: scale(1);
   }
 
-  & :global(.icon-superlike) {
+  & .icon-superlike {
     position: absolute;
     top: -0.25rem;
     left: -0.25rem;
@@ -30,7 +30,7 @@
     transform: scale(0);
   }
 
-  & :global(.icon-superlike .superlike_svg__star) {
+  & .icon-superlike .superlike_svg__star {
     fill-opacity: 0;
     transition: fill-opacity 0.1s ease-in-out;
   }
@@ -39,18 +39,18 @@
 .isSuperLike {
   color: var(--color-matters-gold);
 
-  & :global(.icon-like) {
+  & .icon-like {
     opacity: 0;
     transform: scale(0);
   }
 
-  & :global(.icon-superlike) {
+  & .icon-superlike {
     opacity: 1;
     transform: scale(1);
   }
 
   &.superLiked {
-    & :global(.icon-superlike .superlike_svg__star) {
+    & .icon-superlike .superlike_svg__star {
       fill-opacity: 1;
     }
   }

@@ -83,19 +83,19 @@ const Rich = ({
         testId={TEST_ID.DIGEST_USER_RICH}
       >
         <section className={containerClasses}>
-          <span className="avatar">
+          <span className={styles['avatar']}>
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
           </span>
 
           <section className={contentClasses}>
-            <header className="header">
-              <span className="name">
+            <header className={styles['header']}>
+              <span className={styles['name']}>
                 <Translate id="accountArchived" />
               </span>
             </header>
           </section>
 
-          <section className="extra-button">
+          <section className={styles['extra-button']}>
             {hasUnblock && <UnblockUserButton user={user} />}
             {hasFollow && <FollowUserButton user={user} />}
           </section>
@@ -114,20 +114,22 @@ const Rich = ({
     >
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
-          <a className="avatar">
+          <a className={styles['avatar']}>
             <VisuallyHidden>
               <span>{user.displayName}</span>
             </VisuallyHidden>
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} user={user} />
-            {avatarBadge && <span className="badge">{avatarBadge}</span>}
+            {avatarBadge && (
+              <span className={styles['badge']}>{avatarBadge}</span>
+            )}
           </a>
         </Link>
 
         <section className={contentClasses}>
-          <header className="header">
+          <header className={styles['header']}>
             <Link {...path} legacyBehavior>
               <a
-                className="name"
+                className={styles['name']}
                 data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
               >
                 {user.displayName}
@@ -137,14 +139,14 @@ const Rich = ({
           </header>
 
           {!hasDescriptionReplacement && user.info.description && (
-            <p className="description">{user.info.description}</p>
+            <p className={styles['description']}>{user.info.description}</p>
           )}
           {descriptionReplacement && (
-            <p className="description">{descriptionReplacement}</p>
+            <p className={styles['description']}>{descriptionReplacement}</p>
           )}
         </section>
 
-        <section className="extra-button">
+        <section className={styles['extra-button']}>
           {hasUnblock && <UnblockUserButton user={user} />}
           {hasFollow && <FollowUserButton user={user} />}
           {extraButton}

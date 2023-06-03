@@ -119,6 +119,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   const isCircle = type === 'circle'
   const labelClasses = classNames({
+    [styles.label]: true,
     'has-border': hasBorder,
     circle: isCircle,
   })
@@ -128,7 +129,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
       {!isCircle && <Avatar size="xxxl" {...avatarProps} src={avatar} />}
       {isCircle && <CircleAvatar size="xxxl" {...avatarProps} src={avatar} />}
 
-      <div className="mask">
+      <div className={styles['mask']}>
         {loading ? <Spinner /> : <IconCamera24 color="white" size="lg" />}
       </div>
 

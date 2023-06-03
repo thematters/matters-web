@@ -51,7 +51,7 @@
 .preview-button {
   margin: var(--spacing-base) 0 0;
 
-  & :global(button) {
+  & button {
     width: 100%;
   }
 }

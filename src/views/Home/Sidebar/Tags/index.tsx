@@ -87,7 +87,7 @@ const Tags = () => {
   }
 
   return (
-    <section className="container">
+    <section className={styles['container']}>
       <SectionHeader
         type="tags"
         rightButton={<ShuffleButton onClick={shuffle} />}

@@ -63,7 +63,7 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
       <Droppable droppableId="droppable-staging-nodes">
         {(dropProvided) => (
           <ul
-            className="nodes"
+            className={areaStyles['nodes']}
             ref={dropProvided.innerRef}
             {...dropProvided.droppableProps}
           >
@@ -77,7 +77,7 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
                     {...dragProvided.dragHandleProps}
                   >
                     <span
-                      className="drag-handler"
+                      className={areaStyles['drag-handler']}
                       aria-label={translate({
                         zh_hant: '拖拽',
                         zh_hans: '拖拽',

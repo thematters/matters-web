@@ -93,7 +93,7 @@ const PendingInvites = () => {
   }
 
   return (
-    <section className="container">
+    <section className={styles['container']}>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
           {(edges || []).map(({ node, cursor }, i) => (

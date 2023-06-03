@@ -36,7 +36,7 @@ const Action = ({
 }: ActionProps) => {
   if (isSubscription) {
     return (
-      <section className="circle">
+      <section className={styles['circle']}>
         <IconCircle24 size="md" color="green" />
       </section>
     )
@@ -44,7 +44,7 @@ const Action = ({
 
   if (isWalletAction) {
     return (
-      <section className="wallet">
+      <section className={styles['wallet']}>
         <IconWallet24 size="md" color="green" />
       </section>
     )
@@ -53,19 +53,19 @@ const Action = ({
   return (
     <>
       {!isSender && sender && (
-        <section className="from">
+        <section className={styles['from']}>
           <Avatar size="sm" user={sender} />
-          <div className="outline">
+          <div className={styles['outline']}>
             <IconSupport size="md-s" color="gold" />
           </div>
         </section>
       )}
 
       {isSender && recipient && (
-        <section className="to">
+        <section className={styles['to']}>
           <IconSupport size="md-s" color="grey-light" />
 
-          <div className="outline">
+          <div className={styles['outline']}>
             <Avatar size="sm" user={recipient} />
           </div>
         </section>

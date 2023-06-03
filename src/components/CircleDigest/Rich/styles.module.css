@@ -2,7 +2,7 @@
   @mixin flex-start-start;
 }
 
-header {
+.header {
   margin-left: var(--spacing-base);
 }
 
@@ -30,7 +30,7 @@ header {
   color: var(--color-grey-darker);
 }
 
-footer {
+.footer {
   @mixin flex-center-space-between;
 
   margin-top: var(--spacing-base);

@@ -105,7 +105,7 @@ const Content = () => {
       </InfoTiles>
 
       {chartData && (
-        <section className="chart">
+        <section className={styles['chart']}>
           <StackedAreaChart data={chartData}>
             {(props) => (
               <>
@@ -137,7 +137,7 @@ const Content = () => {
 
 const FollowerAnalytics = () => {
   return (
-    <section className="container">
+    <section className={styles['container']}>
       <SectionHead
         icon={IconAnalyticsFollower24}
         title={

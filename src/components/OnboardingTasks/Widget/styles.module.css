@@ -1,4 +1,4 @@
-header {
+.header {
   padding: var(--spacing-loose) var(--spacing-base) var(--spacing-loose);
 
   & section {

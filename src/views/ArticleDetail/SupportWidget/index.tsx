@@ -100,7 +100,7 @@ const SupportWidget = ({ article }: DonationProps) => {
   return (
     <section className={supportWidgetClasses} id="animation">
       {showAnimation && (
-        <section className="donation">
+        <section className={styles['donation']}>
           <DynamicAnimation
             playShipWaiting={playShipWaiting}
             playEnd={() => {
@@ -112,7 +112,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       )}
 
       {!showAnimation && (
-        <section className="donation note">
+        <section className={styles['donation note']}>
           {loading && <IconSpinner16 color="grey-light" size="lg" />}
 
           {!loading && (
@@ -189,7 +189,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                 </>
               )}
 
-              <section className="donation-button">
+              <section className={styles['donation-button']}>
                 <SupportButton
                   recipient={article.author}
                   targetId={article.id}
@@ -199,7 +199,7 @@ const SupportWidget = ({ article }: DonationProps) => {
               </section>
 
               {article.donations.totalCount > 0 && (
-                <section className="donators">
+                <section className={styles['donators']}>
                   <Donators
                     article={article}
                     showAvatarAnimation={showAvatarAnimation}
@@ -208,12 +208,12 @@ const SupportWidget = ({ article }: DonationProps) => {
               )}
 
               {isViewerDonated && (
-                <section className="transaction">
-                  <span className="transaction-left">
+                <section className={styles['transaction']}>
+                  <span className={styles['transaction-left']}>
                     <Translate zh_hant="查看" zh_hans="查看" en="View" />
                   </span>
                   <Button href={PATHS.ME_WALLET_TRANSACTIONS}>
-                    <span className="transaction-button">
+                    <span className={styles['transaction-button']}>
                       <TextIcon
                         icon={<IconDollarCircle16 />}
                         color="gold"
@@ -235,7 +235,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       )}
 
       {article.access.circle && (
-        <section className="circle">
+        <section className={styles['circle']}>
           <CircleDigest.Rich
             circle={article.access.circle}
             bgColor="grey-lighter"

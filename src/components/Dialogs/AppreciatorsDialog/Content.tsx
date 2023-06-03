@@ -121,11 +121,13 @@ const AppreciatorsDialogContent = ({
         >
           {edges.map(({ node, cursor }, index) =>
             node.sender ? (
-              <div className="dialog-appreciators-list" key={cursor}>
+              <div className={styles['dialog-appreciators-list']} key={cursor}>
                 <UserDigest.Rich
                   user={node.sender}
                   avatarBadge={
-                    <span className="appreciation-amount">{node.amount}</span>
+                    <span className={styles['appreciation-amount']}>
+                      {node.amount}
+                    </span>
                   }
                   onClick={() => {
                     analytics.trackEvent('click_feed', {

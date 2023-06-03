@@ -10,7 +10,7 @@ export type SidebarManagementProps = ToggleAccessProps & SetPublishISCNProps
 const SidebarManagement: React.FC<SidebarManagementProps> = (props) => {
   return (
     <Box icon={<IconSettings24 size="md" />} title="articleManagement">
-      <section className="container">
+      <section className={styles['container']}>
         <ToggleAccess {...props} inSidebar />
       </section>
     </Box>

@@ -95,10 +95,10 @@ const Carousel = ({ items }: CarouselProps) => {
   }, [items, carouselApi])
 
   return (
-    <section className="carousel">
-      <header>
-        <div className="left">
-          <section className="dots">
+    <section className={styles['carousel']}>
+      <header className={styles.header}>
+        <div className={styles['left']}>
+          <section className={styles['dots']}>
             {items?.map((_, index) => (
               <Dot
                 key={index}
@@ -112,11 +112,11 @@ const Carousel = ({ items }: CarouselProps) => {
       </header>
 
       <section
-        className="viewport"
+        className={styles['viewport']}
         ref={carousel}
         onClickCapture={onCaptureClick}
       >
-        <div className="container">
+        <div className={styles['container']}>
           {items?.map((item, i) => {
             if (!item.cover) {
               return null
@@ -131,9 +131,9 @@ const Carousel = ({ items }: CarouselProps) => {
             const itemLink = (translatedItem?.link ?? item.link) || ''
             const itemContent = translatedItem?.content ?? item.content
             return (
-              <div key={item.id} className="slide">
+              <div key={item.id} className={styles['slide']}>
                 <Card htmlHref={itemLink} spacing={[0, 0]} bgActiveColor="none">
-                  <div className="content">
+                  <div className={styles['content']}>
                     <ResponsiveImage url={item.cover} size="1280w" />
                     <h3>{title}</h3>
                     <p>{itemContent}</p>

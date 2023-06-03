@@ -1,7 +1,7 @@
 .outer {
   margin: 0;
 
-  & :global(.fixed-main) {
+  & .fixed-main {
     @mixin transition;
 
     bottom: 0;
@@ -12,7 +12,7 @@
   }
 
   &.show {
-    & :global(.fixed-main) {
+    & .fixed-main {
       opacity: 1;
       transform: translateY(0%);
     }

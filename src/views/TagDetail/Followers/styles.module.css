@@ -17,7 +17,7 @@
 .avatar-list {
   @mixin flex-center-start;
 
-  & :global(> *) {
+  & > * {
     position: relative;
     box-shadow: 0 0 0 2px var(--color-white);
 

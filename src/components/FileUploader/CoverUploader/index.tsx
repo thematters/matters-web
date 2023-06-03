@@ -137,11 +137,11 @@ export const CoverUploader = ({
   }
 
   const Mask = () => (
-    <div className="mask">
+    <div className={styles['mask']}>
       {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
 
       {initCover && (
-        <section className="delete">
+        <section className={styles['delete']}>
           <Button
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
@@ -161,7 +161,7 @@ export const CoverUploader = ({
   const isCircle = type === 'circle'
 
   return (
-    <label htmlFor={fieldId}>
+    <label className={styles.label} htmlFor={fieldId}>
       {!isCircle && (
         <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
           <Mask />

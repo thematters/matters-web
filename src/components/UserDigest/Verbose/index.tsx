@@ -79,11 +79,11 @@ const Verbose = ({
         testId={TEST_ID.DIGEST_USER_VERBOSE}
       >
         <section className={containerClasses}>
-          <span className="avatar">
+          <span className={styles['avatar']}>
             <Avatar size={avatarSize} />
           </span>
 
-          <section className="content">
+          <section className={styles['content']}>
             <header>
               <span className={nameClasses}>
                 <Translate id="accountArchived" />
@@ -91,7 +91,7 @@ const Verbose = ({
             </header>
           </section>
 
-          <section className="extra-button">
+          <section className={styles['extra-button']}>
             {hasUnblock && <UnblockUserButton user={user} />}
           </section>
         </section>
@@ -108,7 +108,7 @@ const Verbose = ({
     >
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
-          <a className="avatar">
+          <a className={styles['avatar']}>
             <VisuallyHidden>
               <span>{user.displayName}</span>
             </VisuallyHidden>
@@ -116,7 +116,7 @@ const Verbose = ({
           </a>
         </Link>
 
-        <section className="content">
+        <section className={styles['content']}>
           <header>
             <Link {...path} legacyBehavior>
               <a className={nameClasses}>{user.displayName}</a>
@@ -124,7 +124,7 @@ const Verbose = ({
           </header>
         </section>
 
-        <section className="extra-button">
+        <section className={styles['extra-button']}>
           {hasUnblock && <UnblockUserButton user={user} />}
           {hasFollow && <FollowUserButton user={user} />}
         </section>

@@ -73,7 +73,7 @@ const BaseHelp = () => {
         />
       </Form.List>
 
-      <footer>
+      <footer className={styles.footer}>
         <p>
           <FormattedMessage
             defaultMessage="Please email"
@@ -94,7 +94,7 @@ const BaseHelp = () => {
           />
         </p>
 
-        <p className="copyright">
+        <p className={styles['copyright']}>
           {'@ '}
           <span itemProp="copyrightYear">{year}</span>{' '}
           <span itemProp="copyrightHolder">Matters</span>

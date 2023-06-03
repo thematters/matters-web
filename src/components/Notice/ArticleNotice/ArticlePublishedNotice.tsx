@@ -16,10 +16,10 @@ const ArticlePublishedNotice = ({
 }) => {
   return (
     <section
-      className="container"
+      className={styles['container']}
       data-test-id={TEST_ID.NOTICE_ARTICLE_PUBLISHED}
     >
-      <section className="notice-actors-name-and-title-info">
+      <section className={styles['notice-actors-name-and-title-info']}>
         <FormattedMessage
           defaultMessage="Your work {articleTitle} has been published to decentralized network"
           description="src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
@@ -29,7 +29,7 @@ const ArticlePublishedNotice = ({
         />
       </section>
 
-      <section className="footer">
+      <section className={styles['footer']}>
         <NoticeDate notice={notice} />
       </section>
     </section>

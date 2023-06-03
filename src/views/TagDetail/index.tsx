@@ -125,7 +125,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         right={
           <>
             <span />
-            <section className="buttons">
+            <section className={styles['buttons']}>
               <ShareButton
                 title={title}
                 tags={title.endsWith(tag.content) ? undefined : keywords}
@@ -169,11 +169,11 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
 
       <TagCover tag={tag} />
 
-      <section className="info">
+      <section className={styles['info']}>
         {features.NOTICE_TAG_ADOPTION && <Owner tag={tag} />}
 
-        <section className="top">
-          <section className="statistics">
+        <section className={styles['top']}>
+          <section className={styles['statistics']}>
             <Followers tag={tag} />
             <ArticlesCount tag={tag} />
           </section>

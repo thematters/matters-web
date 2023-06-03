@@ -68,7 +68,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
           size="sm"
           icon={
             <span
-              className="icon clap"
+              className={styles['icon clap']}
               ref={iconRef}
               onTransitionEnd={(e) => {
                 if (e.propertyName === 'transform' && iconRef.current) {
@@ -76,8 +76,8 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
                 }
               }}
             >
-              <IconClap16 className="icon-like" size="md-s" />
-              <IconSuperLike className="icon-superlike" size="md-s" />
+              <IconClap16 className={styles['icon-like']} size="md-s" />
+              <IconSuperLike className={styles['icon-superlike']} size="md-s" />
             </span>
           }
         >

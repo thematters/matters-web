@@ -1,4 +1,4 @@
-article {
+.article {
   position: relative;
   min-height: 100vh;
 
@@ -27,7 +27,7 @@ article {
   }
 }
 
-aside {
+.aside {
   @mixin border-left-grey;
   @mixin border-right-grey;
 

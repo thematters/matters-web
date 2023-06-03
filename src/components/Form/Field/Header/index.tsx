@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({
   }
 
   const Inner = () => (
-    <header>
+    <header className={styles.header}>
       <label htmlFor={htmlFor} {...(labelId ? { id: labelId } : {})}>
         {label}
       </label>

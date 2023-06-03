@@ -77,13 +77,16 @@ const Collection: React.FC<{
   }
 
   return (
-    <section className="collection" data-test-id={TEST_ID.ARTICLE_COLLECTION}>
+    <section
+      className={styles['collection']}
+      data-test-id={TEST_ID.ARTICLE_COLLECTION}
+    >
       <header>
         <Title type="nav" is="h2">
           <Translate id="collectArticle" />
 
           <span
-            className="count"
+            className={styles['count']}
             aria-label={translate({
               zh_hant: `${collectionCount} 篇關聯作品`,
               zh_hans: `${collectionCount} 篇关联作品`,

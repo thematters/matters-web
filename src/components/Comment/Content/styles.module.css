@@ -4,7 +4,7 @@
 
     color: var(--color-grey);
 
-    & :global(button) {
+    & button {
       margin: 0 0 0 var(--spacing-tight);
     }
   }

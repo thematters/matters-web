@@ -45,7 +45,7 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
   const canComment = article.__typename === 'Article' && article.canComment
   if (!canComment) {
     return (
-      <section className="disable-response">
+      <section className={styles['disable-response']}>
         <TextIcon
           icon={<IconDisableComment24 size="md" />}
           color="grey"
@@ -63,7 +63,7 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
   }
 
   return (
-    <section className="responses">
+    <section className={styles['responses']}>
       <header>
         <Title type="nav" is="h2">
           <Translate id="responses" />

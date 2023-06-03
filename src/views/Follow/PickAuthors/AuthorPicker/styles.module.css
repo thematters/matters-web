@@ -1,5 +1,5 @@
 .container {
-  & :global(> header) {
+  & > header {
     padding: var(--spacing-base);
 
     @media (--sm-up) {

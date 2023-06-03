@@ -129,11 +129,12 @@ export const CommentForm: React.FC<CommentFormProps> = ({
 
   return (
     <form
+      className={styles.form}
       id={formId}
       onSubmit={handleSubmit}
       aria-label={translate({ id: 'putComment', lang })}
     >
-      <section className="content">
+      <section className={styles['content']}>
         <CommentEditor
           content={content}
           update={onUpdate}
@@ -141,7 +142,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
         />
       </section>
 
-      <footer>
+      <footer className={styles.footer}>
         <Button
           type="submit"
           form={formId}

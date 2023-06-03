@@ -17,7 +17,7 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
     userName: circle.owner.userName || '',
   })
   return (
-    <section className="author-widget">
+    <section className={styles['author-widget']}>
       <Card
         bgColor="grey-lighter"
         spacing={['base', 'base']}
@@ -34,8 +34,8 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
         />
 
         {pinnedBroadcast && (
-          <section className="pinnedBroadcast">
-            <span className="icon">
+          <section className={styles['pinnedBroadcast']}>
+            <span className={styles['icon']}>
               <IconBroadcast24 size="md" />
             </span>
 

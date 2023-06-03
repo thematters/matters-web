@@ -20,13 +20,13 @@ const SupportPreview = ({
 }) => {
   const viewer = useContext(ViewerContext)
   return (
-    <section className="donation">
+    <section className={styles['donation']}>
       <span>
         {!content &&
           (tabType === 'request' ? (
             <Translate id="supportRequestDescription" />
           ) : (
-            <section className="preview-response">
+            <section className={styles['preview-response']}>
               <p>
                 <Translate
                   zh_hans="🎉感谢支持"
@@ -55,7 +55,7 @@ const SupportPreview = ({
         )}
         {<Translate zh_hant={content} zh_hans={content} en={content} />}
       </span>
-      <section className="preview-button">
+      <section className={styles['preview-button']}>
         {tabType === 'request' && <DonationButton supported={false} />}
         {tabType === 'reply' && <DonationButton supported={true} />}
       </section>

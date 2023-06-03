@@ -42,7 +42,7 @@ const ToggleResponse = ({
     return (
       <section className={wrapperClasses}>
         <section
-          className="item"
+          className={styles['item']}
           onClick={allowResponse}
           data-test-id={TEST_ID.DRAFTS_RESPONSE_ALLOW}
           role="button"
@@ -50,15 +50,15 @@ const ToggleResponse = ({
             ? { ['aria-disabled']: disableChangeCanComment }
             : {})}
         >
-          <section className="left">
+          <section className={styles['left']}>
             <h3>
               <Translate id="allowResponses" />
             </h3>
-            <p className="hint">
+            <p className={styles['hint']}>
               <Translate id="allowResponsesHint" />
             </p>
           </section>
-          <section className="right">
+          <section className={styles['right']}>
             {canComment ? (
               <IconChecked
                 size="md"
@@ -70,7 +70,7 @@ const ToggleResponse = ({
           </section>
         </section>
         <section
-          className="item"
+          className={styles['item']}
           onClick={disableResponse}
           data-test-id={TEST_ID.DRAFTS_RESPONSE_DISALLOW}
           role="button"
@@ -78,15 +78,15 @@ const ToggleResponse = ({
             ? { ['aria-disabled']: disableChangeCanComment }
             : {})}
         >
-          <section className="left">
+          <section className={styles['left']}>
             <h3>
               <Translate id="disableResponses" />
             </h3>
-            <p className="hint">
+            <p className={styles['hint']}>
               <Translate id="disableResponsesHint" />
             </p>
           </section>
-          <section className="right">
+          <section className={styles['right']}>
             {canComment ? (
               disableChangeCanComment ? (
                 <IconUnCheckedGrey color="grey-light" size="md" />
@@ -103,13 +103,13 @@ const ToggleResponse = ({
   }
 
   return (
-    <section className="container">
-      <h3 className="title">
+    <section className={styles['container']}>
+      <h3 className={styles['title']}>
         <Translate id="articleResponse" />
       </h3>
       <section className={wrapperClasses}>
         <section
-          className="item"
+          className={styles['item']}
           onClick={allowResponse}
           data-test-id={TEST_ID.DRAFTS_RESPONSE_ALLOW}
           role="button"
@@ -117,15 +117,15 @@ const ToggleResponse = ({
             ? { ['aria-disabled']: disableChangeCanComment }
             : {})}
         >
-          <section className="left">
+          <section className={styles['left']}>
             <h3>
               <Translate id="allowResponses" />
             </h3>
-            <p className="hint">
+            <p className={styles['hint']}>
               <Translate id="allowResponsesHint" />
             </p>
           </section>
-          <section className="right">
+          <section className={styles['right']}>
             {canComment ? (
               <IconChecked
                 color={disableChangeCanComment ? 'grey' : 'green'}
@@ -137,7 +137,7 @@ const ToggleResponse = ({
           </section>
         </section>
         <section
-          className="item"
+          className={styles['item']}
           onClick={disableResponse}
           data-test-id={TEST_ID.DRAFTS_RESPONSE_DISALLOW}
           role="button"
@@ -145,15 +145,15 @@ const ToggleResponse = ({
             ? { ['aria-disabled']: disableChangeCanComment }
             : {})}
         >
-          <section className="left">
+          <section className={styles['left']}>
             <h3>
               <Translate id="disableResponses" />
             </h3>
-            <p className="hint">
+            <p className={styles['hint']}>
               <Translate id="disableResponsesHint" />
             </p>
           </section>
-          <section className="right">
+          <section className={styles['right']}>
             {canComment ? (
               disableChangeCanComment ? (
                 <IconUnCheckedGrey color="grey-light" size="md-s" />

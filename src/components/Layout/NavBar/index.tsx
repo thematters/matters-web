@@ -30,7 +30,7 @@ const NavBar = () => {
 
   if (!viewer.isAuthed) {
     return (
-      <section className="nav-bar" role="navigation">
+      <section className={styles['nav-bar']} role="navigation">
         <ul>
           <NavListItem
             name={TEXT[lang].discover}
@@ -67,7 +67,7 @@ const NavBar = () => {
   }
 
   return (
-    <section className="nav-bar" role="navigation">
+    <section className={styles['nav-bar']} role="navigation">
       <ul>
         <NavListItem
           name={TEXT[lang].discover}

@@ -84,9 +84,13 @@ export const Avatar = (props: AvatarProps) => {
         <span className="civic-architect ring" />
       )}
       {hasLogbook && (
-        <section className="badge">
+        <section className={styles['badge']}>
           {inProfile ? (
-            <img className="logbook" src={LOGBOOK.src} alt="logbook icon" />
+            <img
+              className={styles['logbook']}
+              src={LOGBOOK.src}
+              alt="logbook icon"
+            />
           ) : (
             <IconLogbookBadge16 />
           )}

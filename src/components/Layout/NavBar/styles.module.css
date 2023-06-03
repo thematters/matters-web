@@ -14,12 +14,12 @@
   @media (--xs-down) {
     padding: var(--spacing-base);
   }
-}
 
-ul {
-  @mixin flex-center-space-between;
+  & ul {
+    @mixin flex-center-space-between;
 
-  & li {
-    display: inline-flex;
+    & li {
+      display: inline-flex;
+    }
   }
 }

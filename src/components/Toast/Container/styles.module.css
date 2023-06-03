@@ -1,6 +1,6 @@
 .toast-container {
   & .toast-top {
-    & :global(.fixed-main) {
+    & .fixed-main {
       top: calc(var(--global-header-height-mobile) + var(--spacing-base));
       z-index: var(--z-index-over-dialog);
 
@@ -11,7 +11,7 @@
   }
 
   & .toast-bottom {
-    & :global(.fixed-main) {
+    & .fixed-main {
       bottom: calc(var(--global-header-height-mobile) + var(--spacing-base));
       z-index: var(--z-index-over-dialog);
 

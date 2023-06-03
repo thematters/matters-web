@@ -22,7 +22,7 @@
 }
 
 .logo {
-  & :global(svg) {
+  & svg {
     width: 97px;
     height: 20px;
   }

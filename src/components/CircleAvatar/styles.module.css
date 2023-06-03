@@ -6,7 +6,7 @@
   flex-shrink: 0;
   border-radius: 50%;
 
-  & :global(img) {
+  & img {
     @mixin object-fit-cover;
 
     background-color: var(--color-grey-lighter);
@@ -18,7 +18,7 @@
   width: 3rem;
   height: 3rem;
 
-  & :global(img) {
+  & img {
     border-radius: 1rem;
   }
 }
@@ -28,7 +28,7 @@
   width: 3.5rem;
   height: 3.5rem;
 
-  & :global(img) {
+  & img {
     border-radius: 1rem;
   }
 }
@@ -38,7 +38,7 @@
   width: 4.5rem;
   height: 4.5rem;
 
-  & :global(img) {
+  & img {
     border-radius: 1.5rem;
   }
 }

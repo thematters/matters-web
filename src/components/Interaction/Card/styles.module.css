@@ -34,7 +34,7 @@
 .bg-white {
   background: var(--color-white);
 
-  & :global(.card.bg-grey-lighter) {
+  & .card.bg-grey-lighter {
     @mixin border-grey;
 
     border-color: transparent;
@@ -45,7 +45,7 @@
     &:focus {
       background: var(--color-grey-lighter);
 
-      & :global(.card.bg-grey-lighter) {
+      & .card.bg-grey-lighter {
         @mixin border-grey;
       }
     }

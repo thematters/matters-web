@@ -27,7 +27,7 @@ const NoticeMultiActors = ({ actors, size }: NoticeMultiActorsProps) => {
       {actors.slice(0, 7).map((actor, index) => (
         <NoticeActorAvatar key={index} user={actor} size={size} />
       ))}
-      <span className="more-actors">
+      <span className={styles['more-actors']}>
         <Button
           bgColor="grey-lighter"
           bgActiveColor="grey-lighter"

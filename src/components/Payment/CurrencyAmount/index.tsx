@@ -11,8 +11,8 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
   currency,
   amount,
 }) => (
-  <section>
-    <span className="currency">{currency}</span>
-    <span className="amount">{formatAmount(amount)}</span>
+  <section className={styles.container}>
+    <span className={styles['currency']}>{currency}</span>
+    <span className={styles['amount']}>{formatAmount(amount)}</span>
   </section>
 )

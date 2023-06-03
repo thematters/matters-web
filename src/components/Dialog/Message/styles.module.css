@@ -1,60 +1,62 @@
 .content {
   text-align: center;
 
-  & :global(h2) {
+  & h2 {
     font-size: var(--font-size-xm);
   }
 
-  & :global(h3) {
+  & h3 {
     font-size: var(--font-size-md);
     line-height: 2rem;
   }
 
-  & :global(p) {
+  & p {
     font-size: var(--font-size-md-s);
     line-height: 1.5rem;
     color: var(--color-grey-dark);
   }
 
-  & :global(h2 + p, h3 + p, p + p) {
+  & h2 + p,
+  h3 + p,
+  p + p {
     margin-top: var(--spacing-tight);
   }
 
-  & :global(ul),
-  & :global(ol) {
+  & ul,
+  & ol {
     padding-left: var(--spacing-loose);
     font-size: var(--font-size-md-s);
     line-height: 1.5rem;
     color: var(--color-grey-dark);
   }
 
-  & :global(li) {
+  & li {
     padding-left: var(--spacing-xx-tight);
     margin: var(--spacing-x-tight) 0;
   }
 
-  & :global(ul) {
+  & ul {
     margin: var(--spacing-base) 0;
     list-style-type: disc;
   }
 
-  & :global(ol) {
+  & ol {
     margin: var(--spacing-base) 0;
     list-style-type: decimal;
   }
 }
 
 .error {
-  & :global(h3) {
+  & h3 {
     color: var(--color-red);
   }
 }
 
 .info {
-  & :global(h3),
-  & :global(p),
-  & :global(ul),
-  & :global(ol) {
+  & h3,
+  & p,
+  & ul,
+  & ol {
     color: var(--color-black);
   }
 }

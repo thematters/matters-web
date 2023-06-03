@@ -125,7 +125,7 @@ const Confirm: React.FC<FormProps> = ({
         <section>
           <Head circle={circle} />
 
-          <section className="current-card">
+          <section className={styles['current-card']}>
             <TextIcon
               icon={withIcon(IconStripeCard)({ size: 'md' })}
               color="grey"

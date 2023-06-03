@@ -24,9 +24,9 @@ const SupporterDigestFeed = ({
   })
   return (
     <Card {...path} spacing={[0, 0]} bgActiveColor="none">
-      <section className="container">
-        <span className="number">{index + 1}</span>
-        <section className="supporter">
+      <section className={styles['container']}>
+        <span className={styles['number']}>{index + 1}</span>
+        <section className={styles['supporter']}>
           <UserDigest.Mini
             user={user}
             hasAvatar
@@ -36,7 +36,7 @@ const SupporterDigestFeed = ({
             textWeight="md"
           />
 
-          <section className="count">
+          <section className={styles['count']}>
             <TextIcon
               icon={<IconDonate24 size="xs" />}
               size="xs"

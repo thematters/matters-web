@@ -1,4 +1,4 @@
-section {
+.container {
   @mixin flex-start-center;
 
   font-weight: var(--font-weight-bold);

@@ -45,13 +45,13 @@ const Item: React.FC<ItemProps> = forwardRef(
       bold: !!bold,
     })
     const itemContent = (
-      <section className="container">
+      <section className={styles['container']}>
         <section className={leftClasses}>
-          <h5 className="title">{title}</h5>
-          {subtitle && <p className="subtitle">{subtitle}</p>}
+          <h5 className={styles['title']}>{title}</h5>
+          {subtitle && <p className={styles['subtitle']}>{subtitle}</p>}
         </section>
 
-        <section className="right">
+        <section className={styles['right']}>
           {right || (
             <TextIcon
               icon={clickable && <IconArrowRight16 color={'grey'} />}
@@ -61,7 +61,9 @@ const Item: React.FC<ItemProps> = forwardRef(
               color={rightTextColor}
             >
               {rightText}
-              {rightSubText && <span className="subtext">{rightSubText}</span>}
+              {rightSubText && (
+                <span className={styles['subtext']}>{rightSubText}</span>
+              )}
             </TextIcon>
           )}
         </section>
@@ -83,6 +85,6 @@ const Item: React.FC<ItemProps> = forwardRef(
   }
 )
 
-Item.displayName = 'List.Item'
+Item.displayName = 'Item'
 
 export default Item

@@ -181,7 +181,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <section className="cover-field">
+      <section className={styles['cover-field']}>
         <CoverUploader
           assetType={ASSET_TYPE.profileCover}
           cover={user.info.profileCover}
@@ -191,7 +191,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}
         />
 
-        <p className="hint">
+        <p className={styles['hint']}>
           <FormattedMessage
             defaultMessage="Recommended size: 1600px x 900px"
             description=""
@@ -199,7 +199,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         </p>
       </section>
 
-      <section className="avatar-field">
+      <section className={styles['avatar-field']}>
         <AvatarUploader
           user={user}
           onUpload={(assetId) => setFieldValue('avatar', assetId)}
@@ -214,7 +214,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         />
       )}
 
-      <section className="container">
+      <section className={styles['container']}>
         <Form.Input
           label={
             <FormattedMessage defaultMessage="Display Name" description="" />
@@ -239,7 +239,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         />
       </section>
 
-      <section className="container">
+      <section className={styles['container']}>
         <Form.Textarea
           label={
             <FormattedMessage defaultMessage="Description" description="" />

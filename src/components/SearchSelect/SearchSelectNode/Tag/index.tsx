@@ -33,7 +33,7 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
       <section className={nodeClass}>
         <Tag tag={tag} type="list" hasCount disabled />
 
-        <span className="icon-select">
+        <span className={styles['icon-select']}>
           {inStagingArea && selected && (
             <IconChecked color="green" size="md-s" />
           )}

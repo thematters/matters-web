@@ -16,7 +16,7 @@ const PublishState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   }
 
   return (
-    <section className="container">
+    <section className={styles['container']}>
       {isPending && <PendingState draft={draft} />}
       {isError && <ErrorState draft={draft} />}
       {isPublished && <PublishedState draft={draft} />}

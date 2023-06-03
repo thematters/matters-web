@@ -1,12 +1,12 @@
-main {
-  & :global(h2) {
+.main {
+  & h2 {
     @mixin font-serif;
 
     font-size: var(--font-size-xxl);
   }
 }
 
-header {
+.header {
   position: absolute;
   top: 0;
   right: 0;
@@ -15,7 +15,7 @@ header {
   padding: var(--spacing-xx-loose) 0;
 
   & .logo {
-    & :global(svg) {
+    & svg {
       width: 97px;
       height: 20px;
     }

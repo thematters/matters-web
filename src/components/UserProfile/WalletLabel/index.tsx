@@ -56,7 +56,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({ user, isMe }) => {
   }
 
   return (
-    <section className="wallet-label">
+    <section className={styles['wallet-label']}>
       <WalletAddress
         address={address}
         ensName={ensName}
@@ -98,7 +98,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({ user, isMe }) => {
             />
           }
         >
-          <span className="help-icon">
+          <span className={styles['help-icon']}>
             <IconHelp16 color="grey" />
           </span>
         </Tooltip>

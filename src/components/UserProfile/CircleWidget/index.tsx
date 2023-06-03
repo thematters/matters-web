@@ -39,7 +39,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
     }
 
     return (
-      <section className="circle-widget">
+      <section className={styles['circle-widget']}>
         <Form.List spacingX={0}>
           <Form.List.Item
             bold
@@ -67,7 +67,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
   const circle = circles[0]
 
   return (
-    <section className="circle-widget">
+    <section className={styles['circle-widget']}>
       <CircleDigest.Rich
         avatarSize="xl"
         borderRadius="xtight"

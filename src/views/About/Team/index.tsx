@@ -149,7 +149,7 @@ const CREW = [
 
 const Team = () => {
   return (
-    <section className="team">
+    <section className={styles['team']}>
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">
@@ -160,7 +160,7 @@ const Team = () => {
 
           {CREW.map(({ group, type, people }, gid) => (
             <section className={`group ${type}`} key={gid}>
-              <div className="container">
+              <div className={styles['container']}>
                 {group && (
                   <h3>
                     <span>{group}</span>

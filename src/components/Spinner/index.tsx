@@ -8,7 +8,7 @@ import styles from './styles.module.css'
 export const Spinner = () => {
   return (
     <div
-      className="spinner"
+      className={styles['spinner']}
       data-test-id={TEST_ID.SPINNER}
       aria-busy="true"
       aria-live="polite"

@@ -77,10 +77,12 @@ export const ArticleDigestDropdown = ({
             lineClamp={lineClamp}
           />
 
-          <section className="extra-button">{!isBanned && extraButton}</section>
+          <section className={styles['extra-button']}>
+            {!isBanned && extraButton}
+          </section>
         </header>
 
-        <footer>
+        <footer className={styles.footer}>
           <UserDigest.Mini
             user={article.author}
             avatarSize="xs"

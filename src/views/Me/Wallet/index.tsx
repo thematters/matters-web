@@ -100,7 +100,7 @@ const Wallet = () => {
 
       <Head title={{ id: 'myWallet' }} />
 
-      <section className="assetsContainer">
+      <section className={styles['assetsContainer']}>
         <FiatCurrencyBalance
           balanceHKD={balanceHKD}
           canPayout={canPayout}
@@ -123,7 +123,7 @@ const Wallet = () => {
           {hasPaymentPassword && (
             <>
               <PaymentPassword />
-              <hr className="dashed-line" />
+              <hr className={styles['dashed-line']} />
             </>
           )}
           <ViewStripeCustomerPortal />

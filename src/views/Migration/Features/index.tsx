@@ -75,7 +75,7 @@ const Features = () => {
   const { zh_hant, zh_hans, en } = texts
 
   return (
-    <section className="features">
+    <section className={styles['features']}>
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">
@@ -93,7 +93,7 @@ const Features = () => {
       <ul>
         <li className="l-container">
           <div className="l-row">
-            <section className="content">
+            <section className={styles['content']}>
               <h3>
                 <Translate
                   zh_hant={zh_hant.title_1}
@@ -116,7 +116,7 @@ const Features = () => {
 
         <li className="l-container">
           <div className="l-row">
-            <section className="content">
+            <section className={styles['content']}>
               <h3>
                 <Translate
                   zh_hant={zh_hant.title_2}
@@ -153,7 +153,7 @@ const Features = () => {
 
         <li className="l-container">
           <div className="l-row">
-            <section className="content">
+            <section className={styles['content']}>
               <h3>
                 <Translate
                   zh_hant={zh_hant.title_3}

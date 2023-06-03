@@ -7,32 +7,32 @@
     font-weight: var(--font-weight-normal);
     color: var(--color-grey-dark);
   }
-}
 
-ul {
-  overflow: hidden;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  & ul {
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 
-  & :global(> li) {
-    border: none;
-  }
-
-  & :global(> li + li) {
-    border-top: 1px dashed var(--color-grey-light);
-  }
-
-  &.grey {
-    margin-right: var(--spacing-base);
-    margin-left: var(--spacing-base);
-    border-radius: var(--spacing-x-tight);
-
-    & :global(> li) {
+    & > li {
       border: none;
     }
 
-    & :global(> li + li) {
+    & > li + li {
       border-top: 1px dashed var(--color-grey-light);
+    }
+
+    &.grey {
+      margin-right: var(--spacing-base);
+      margin-left: var(--spacing-base);
+      border-radius: var(--spacing-x-tight);
+
+      & > li {
+        border: none;
+      }
+
+      & > li + li {
+        border-top: 1px dashed var(--color-grey-light);
+      }
     }
   }
 }

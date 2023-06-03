@@ -72,7 +72,7 @@
       color: var(--color-matters-green);
       background-color: var(--color-green-lighter);
 
-      & :global(svg) {
+      & svg {
         transform: rotate(180deg);
       }
     }
@@ -86,7 +86,7 @@
   & .content {
     @mixin flex-center-space-between;
 
-    & :global(> *) {
+    & > * {
       margin-left: var(--spacing-x-tight);
     }
   }
@@ -100,11 +100,11 @@
     }
 
     & .content {
-      & :global(> *) {
+      & > * {
         margin-left: 0;
       }
 
-      & :global(> * + *) {
+      & > * + * {
         margin-left: var(--spacing-x-tight);
       }
     }

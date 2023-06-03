@@ -1,4 +1,4 @@
-header {
+.header {
   @mixin flex-center-start;
 
   @media (--sm-up) {

@@ -68,7 +68,7 @@ const Search = () => {
       <Media lessThan="xl">
         <Layout.Header
           right={
-            <section className="layoutHeaderRight">
+            <section className={styles['layoutHeaderRight']}>
               <SearchBar hasDropdown={false} />
             </section>
           }

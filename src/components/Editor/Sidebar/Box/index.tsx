@@ -60,7 +60,7 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
       </header>
 
       {subtitle && (
-        <p className="subtitle">
+        <p className={styles['subtitle']}>
           <Translate id={subtitle} />
         </p>
       )}

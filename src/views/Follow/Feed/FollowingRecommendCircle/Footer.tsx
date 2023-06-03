@@ -61,7 +61,7 @@ const Footer = ({ circle }: Props) => {
 
   return (
     <footer>
-      <section className="footer">
+      <section className={styles['footer']}>
         <TextIcon
           icon={<IconUser16 size="xs" />}
           color="grey"

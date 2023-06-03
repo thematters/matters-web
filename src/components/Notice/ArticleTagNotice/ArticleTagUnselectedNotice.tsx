@@ -31,14 +31,14 @@ const ArticleTagUnselectedNotice = ({
 
   return (
     <section
-      className="container"
+      className={styles['container']}
       data-test-id={TEST_ID.NOTICE_ARTICLE_TAG_UNSELECTED}
     >
-      <section className="avatar-wrap">
+      <section className={styles['avatar-wrap']}>
         <NoticeActorAvatar user={actor} />
       </section>
 
-      <section className="content-wrap overflow-hidden">
+      <section className={styles['content-wrap overflow-hidden']}>
         <NoticeHead>
           {isAuthor && (
             <Translate zh_hant="啊喔， " zh_hans="啊喔， " en="uh-oh, " />

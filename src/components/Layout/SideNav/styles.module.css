@@ -17,7 +17,7 @@
   }
 }
 
-ul {
+.ul {
   @mixin flex-center-all;
 
   flex-direction: column;

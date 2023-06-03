@@ -1,10 +1,10 @@
-footer {
+.footer {
   @mixin feed-footer-actions;
 
   & .left {
     display: inline-flex;
 
-    & :global(> * + *) {
+    & > * + * {
       padding-left: var(--spacing-x-tight);
     }
   }

@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 
 const SubscribeCircleHint = () => {
   return (
-    <section className="hint">
+    <section className={styles['hint']}>
       <TextIcon icon={<IconInfo16 />} size="sm-s" color="grey-darker">
         <Translate
           zh_hant="訂閱後，每月 1 日系統將扣除本期訂閱費用"

@@ -41,7 +41,7 @@
     max-height: 10rem;
   }
 
-  & :global(h3) {
+  & h3 {
     margin-top: var(--spacing-x-tight);
     margin-bottom: var(--spacing-x-tight);
     font-size: var(--font-size-md);

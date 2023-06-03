@@ -15,7 +15,7 @@ const NoticeArticleCard = ({
   }
 
   return (
-    <section className="notice-article-card">
+    <section className={styles['notice-article-card']}>
       <ArticleDigestNotice article={article} />
     </section>
   )

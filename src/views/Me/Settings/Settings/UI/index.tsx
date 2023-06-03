@@ -6,12 +6,12 @@ import SwitchLanguage from './SwitchLanguage'
 
 const UISettings = () => {
   return (
-    <section className="container">
+    <section className={styles['container']}>
       <Form.List groupName={<Translate id="settingsUI" />} spacingX={0}>
         <SwitchLanguage />
-        <hr className="dashed-line" />
+        <hr className={styles['dashed-line']} />
         <CurrencyConvertor />
-        <section className="rate-hint">
+        <section className={styles['rate-hint']}>
           <TextIcon icon={<IconInfo16 size="xs" />} color="grey" size="xs">
             <Translate
               zh_hans="加密货币汇率由 CoinGecko 提供"

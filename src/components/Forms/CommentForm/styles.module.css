@@ -1,4 +1,4 @@
-form {
+.form {
   position: relative;
 }
 
@@ -8,11 +8,11 @@ form {
   background: var(--color-grey-lighter);
   border-radius: var(--spacing-base);
 
-  & :global(.ql-editor) {
+  & .ql-editor {
     min-height: 7rem;
   }
 }
 
-footer {
+.footer {
   text-align: right;
 }

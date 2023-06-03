@@ -35,7 +35,7 @@
 .header {
   @mixin flex-center-start;
 
-  & :global(> * + *) {
+  & > * + * {
     margin-left: var(--spacing-xx-tight);
   }
 }

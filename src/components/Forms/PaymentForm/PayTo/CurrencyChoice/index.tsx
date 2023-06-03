@@ -79,12 +79,15 @@ const CurrencyChoice: React.FC<FormProps> = ({
   const balanceLike = data?.viewer?.liker.total || 0
 
   const InnerForm = (
-    <section className="wrapper" data-test-id={TEST_ID.PAY_TO_CURRENCY_CHOICE}>
-      <section className="header">
+    <section
+      className={styles['wrapper']}
+      data-test-id={TEST_ID.PAY_TO_CURRENCY_CHOICE}
+    >
+      <section className={styles['header']}>
         <span>
           <Translate zh_hant="選擇支持" zh_hans="选择支持" en="Support " />
         </span>
-        <span className="userInfo">
+        <span className={styles['userInfo']}>
           <UserDigest.Mini
             user={recipient}
             avatarSize="xs"
@@ -114,7 +117,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
       {/* HKD */}
       <section
         role="button"
-        className="item clickable"
+        className={styles['item clickable']}
         onClick={() => {
           switchToSetAmount(CURRENCY.HKD)
         }}

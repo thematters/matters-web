@@ -15,7 +15,7 @@
   & .node {
     @mixin flex-start-space-between;
 
-    & :global(section) {
+    & section {
       width: calc(100% - 1.5rem);
     }
   }

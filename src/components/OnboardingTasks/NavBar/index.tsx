@@ -23,7 +23,7 @@ const NavBar = () => {
   )
 
   return (
-    <section className="nav-bar">
+    <section className={styles['nav-bar']}>
       <Layout.FixedMain>
         <OnboardingTasksDialog>
           {({ openDialog: openOnboardingTasksDialog }) => (
@@ -34,9 +34,9 @@ const NavBar = () => {
               aria-haspopup="dialog"
               role="button"
             >
-              <section className="content">
-                <section className="inner">
-                  <section className="left">
+              <section className={styles['content']}>
+                <section className={styles['inner']}>
+                  <section className={styles['left']}>
                     {withIcon(IconOnboardLaunch)({
                       size: 'xl-m',
                       color: 'gold',
@@ -48,11 +48,14 @@ const NavBar = () => {
                         zh_hans="星际导航"
                         en="Galaxy Guide"
                       />
-                      <span className="highlight"> {doneCount}/5</span>
+                      <span className={styles['highlight']}>
+                        {' '}
+                        {doneCount}/5
+                      </span>
                     </p>
                   </section>
 
-                  <section className="right">
+                  <section className={styles['right']}>
                     <IconArrowRight16 color="grey" />
                   </section>
                 </section>

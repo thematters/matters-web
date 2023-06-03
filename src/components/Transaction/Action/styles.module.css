@@ -20,7 +20,7 @@
     margin-left: calc(var(--spacing-xx-tight) * -1);
   }
 
-  & :global(.avatar) {
+  & .avatar {
     z-index: 2;
     box-sizing: content-box;
     border: 2px solid var(--color-white);

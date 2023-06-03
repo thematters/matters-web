@@ -28,7 +28,7 @@ const NoticeArticleTitle = ({
     return (
       <Link {...path}>
         <a
-          className="notice-article-title"
+          className={styles['notice-article-title']}
           data-test-id={TEST_ID.NOTICE_ARTICLE_TITLE}
         >
           {article.title}

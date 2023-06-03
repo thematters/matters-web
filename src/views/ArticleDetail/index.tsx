@@ -271,9 +271,9 @@ const BaseArticleDetail = ({
 
       <State article={article} />
 
-      <section className="content">
+      <section className={styles['content']}>
         <TagList article={article} />
-        <section className="title">
+        <section className={styles['title']}>
           <Title type="article">{title}</Title>
 
           <Waypoint
@@ -305,14 +305,14 @@ const BaseArticleDetail = ({
           <DynamicSupportWidget article={article} />
         )}
         {collectionCount > 0 && (
-          <section className="block">
+          <section className={styles['block']}>
             <DynamicCollection
               article={article}
               collectionCount={collectionCount}
             />
           </section>
         )}
-        <section className="block">
+        <section className={styles['block']}>
           <DynamicResponse id={article.id} lock={!canReadFullContent} />
         </section>
         <Media lessThan="xl">

@@ -62,7 +62,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
         openSubscribeCircleDialog()
       }}
     >
-      <section className="subscription-banner">
+      <section className={styles['subscription-banner']}>
         <TextIcon
           icon={<IconCircle16 size="md-s" />}
           size="xm"

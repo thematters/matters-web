@@ -53,8 +53,8 @@ const Container = () => {
     }
   })
   return (
-    <section className="toast-container">
-      <section className="toast-top">
+    <section className={styles['toast-container']}>
+      <section className={styles['toast-top']}>
         <Layout.FixedMain>
           {topToasts.map((toast) => (
             <ToastWithEffect key={toast.id} {...toast} />
@@ -62,7 +62,7 @@ const Container = () => {
         </Layout.FixedMain>
       </section>
 
-      <section className="toast-bottom">
+      <section className={styles['toast-bottom']}>
         <Layout.FixedMain>
           {bottomToasts.map((toast) => (
             <ToastWithEffect key={toast.id} {...toast} />

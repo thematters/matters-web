@@ -1,7 +1,7 @@
 .container {
   position: relative;
 
-  & :global(.ql-editor) {
+  & .ql-editor {
     margin-bottom: var(--global-nav-height);
 
     @media (--sm-up) {

@@ -32,14 +32,14 @@ const MigrationDialogSuccess = () => {
   return (
     <>
       <Dialog.Content spacing={['base', 'base']}>
-        <p className="action">
+        <p className={`${styles.p} ${styles.action}`}>
           <Translate
             zh_hant={zh_hant.content_1}
             zh_hans={zh_hans.content_1}
             en={en.content_1}
           />
         </p>
-        <p className="description">
+        <p className={`${styles.p} ${styles.description}`}>
           <Translate
             zh_hant={zh_hant.content_2}
             zh_hans={zh_hans.content_2}

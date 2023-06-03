@@ -26,7 +26,7 @@ const ResponseCount = ({
 
   return (
     <span
-      className="count"
+      className={styles['count']}
       aria-label={translate({
         zh_hant: `${count} 條回應`,
         zh_hans: `${count} 条回应`,

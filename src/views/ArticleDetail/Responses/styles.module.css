@@ -14,7 +14,7 @@
   line-height: 1.25rem;
   color: var(--color-grey);
 
-  & :global(> *) {
+  & > * {
     vertical-align: middle;
   }
 

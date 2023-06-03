@@ -3,7 +3,7 @@ section {
   align-items: center;
   justify-content: flex-end;
 
-  & :global(span.text) {
+  & span.text {
     line-height: 2;
   }
 }

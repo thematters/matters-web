@@ -23,6 +23,7 @@ const Header: React.FC<HeaderProps> & {
   Title: typeof Title
 } = ({ left, right, mode = 'solid-fixed', className }) => {
   const headerClasses = classNames({
+    [styles['header']]: true,
     [mode]: true,
     [`${className}`]: !!className,
   })
@@ -33,8 +34,8 @@ const Header: React.FC<HeaderProps> & {
 
   return (
     <header className={headerClasses} data-test-id={TEST_ID.LAYOUT_HEADER}>
-      <section className="content">
-        {left && <section className="left">{left}</section>}
+      <section className={styles['content']}>
+        {left && <section className={styles['left']}>{left}</section>}
         {right && <section className={rightClasses}>{right}</section>}
       </section>
     </header>

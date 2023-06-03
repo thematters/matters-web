@@ -20,7 +20,7 @@
     font-size: var(--font-size-xm);
     font-weight: var(--font-weight-medium);
 
-    & :global(> a) {
+    & > a {
       @mixin line-clamp;
 
       -webkit-line-clamp: 2;
@@ -41,7 +41,7 @@
   width: 4.5rem;
   height: 4.5rem;
 
-  & :global(img) {
+  & img {
     @mixin object-fit-cover;
 
     border-radius: 0.25rem;

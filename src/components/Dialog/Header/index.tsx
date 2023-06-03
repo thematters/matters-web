@@ -25,6 +25,7 @@ const BaseHeader = ({
   rightButton,
 }: HeaderProps) => {
   const headerClasses = classNames({
+    [styles.header]: true,
     inner: mode === 'inner',
   })
 
@@ -41,7 +42,7 @@ const BaseHeader = ({
       </h1>
 
       {(leftButton || closeDialog) && (
-        <section className="left">
+        <section className={styles['left']}>
           {leftButton ||
             (closeDialog ? (
               <CloseButton closeDialog={closeDialog} textId={closeTextId} />
@@ -49,7 +50,9 @@ const BaseHeader = ({
         </section>
       )}
 
-      {rightButton && <section className="right">{rightButton}</section>}
+      {rightButton && (
+        <section className={styles['right']}>{rightButton}</section>
+      )}
     </header>
   )
 }

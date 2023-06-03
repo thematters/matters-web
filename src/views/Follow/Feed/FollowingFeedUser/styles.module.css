@@ -7,6 +7,6 @@
   }
 }
 
-footer {
+.footer {
   @mixin feed-footer-actions;
 }

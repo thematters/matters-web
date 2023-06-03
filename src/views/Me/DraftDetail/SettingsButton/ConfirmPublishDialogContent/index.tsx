@@ -48,9 +48,9 @@ const ConfirmPublishDialogContent: React.FC<
       />
 
       <Dialog.Message align="left" type="info">
-        <section className="image-container">
+        <section className={styles['image-container']}>
           <div
-            className="image"
+            className={styles['image']}
             style={{ backgroundImage: `url(${PUBLISH_IMAGE})` }}
           />
         </section>

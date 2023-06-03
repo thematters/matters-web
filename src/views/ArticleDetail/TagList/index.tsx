@@ -24,7 +24,7 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
   }
 
   return (
-    <section className="tag-list" data-test-id={TEST_ID.ARTICLE_TAGS}>
+    <section className={styles['tag-list']} data-test-id={TEST_ID.ARTICLE_TAGS}>
       <ul>
         {article.tags.map((tag, i) => (
           <li key={tag.id}>

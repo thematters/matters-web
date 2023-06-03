@@ -28,7 +28,7 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
 
   if (!address) {
     return (
-      <section className="assetsItem">
+      <section className={styles['assetsItem']}>
         <TextIcon
           icon={<IconUSDTActive40 size="xl-m" />}
           size="md"
@@ -52,7 +52,7 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   }
 
   return (
-    <section className="assetsItem">
+    <section className={styles['assetsItem']}>
       <TextIcon
         icon={<IconUSDTActive40 size="xl-m" />}
         size="md"

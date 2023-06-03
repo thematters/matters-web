@@ -83,18 +83,18 @@ const BaseArticleDigestFeed = ({
     >
       {header ||
         (hasCircle && circle && (
-          <header>
+          <header className={styles.header}>
             <CircleDigest.Plain circle={circle} />
           </header>
         ))}
-      <section className="content">
-        <section className="head">
-          <section className="title">
+      <section className={styles['content']}>
+        <section className={styles['head']}>
+          <section className={styles['title']}>
             <ArticleDigestTitle article={article} textSize="xm" />
           </section>
 
           {hasAuthor && (
-            <section className="author">
+            <section className={styles['author']}>
               <UserDigest.Mini
                 user={author}
                 avatarSize="sm"
@@ -109,10 +109,10 @@ const BaseArticleDigestFeed = ({
           )}
         </section>
 
-        <p className="description">{cleanedSummary}</p>
+        <p className={styles['description']}>{cleanedSummary}</p>
 
         {cover && (
-          <div className="cover">
+          <div className={styles['cover']}>
             <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
           </div>
         )}

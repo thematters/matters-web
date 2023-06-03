@@ -1,4 +1,4 @@
-nav {
+.nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -16,10 +16,10 @@ nav {
   }
 }
 
-header {
+.header {
   padding: var(--spacing-base) 0 var(--spacing-loose);
 }
 
-footer {
+.footer {
   padding: var(--spacing-loose) 0;
 }

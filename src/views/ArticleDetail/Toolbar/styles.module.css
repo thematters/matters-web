@@ -12,7 +12,7 @@
   & .buttons {
     @mixin flex-center-space-between;
 
-    & :global(> *) {
+    & > * {
       @mixin inline-flex-center-all;
 
       flex-shrink: 0;
@@ -20,11 +20,11 @@
     }
 
     @media (--sm-up) {
-      & :global(> *) {
+      & > * {
         height: auto;
       }
 
-      & :global(> * + *) {
+      & > * + * {
         margin-left: var(--spacing-loose);
       }
     }

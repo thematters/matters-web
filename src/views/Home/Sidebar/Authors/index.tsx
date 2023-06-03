@@ -69,7 +69,7 @@ const Authors = () => {
   }
 
   return (
-    <section className="container">
+    <section className={styles['container']}>
       <SectionHeader
         type="authors"
         rightButton={<ShuffleButton onClick={shuffle} />}

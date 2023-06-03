@@ -60,9 +60,9 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
   }
 
   return (
-    <section className="container">
+    <section className={styles['container']}>
       <PageHeader title={title}>
-        <section className="header-buttons">
+        <section className={styles['header-buttons']}>
           <Button
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
@@ -74,9 +74,9 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
             </TextIcon>
           </Button>
 
-          <span className="follow-info">
+          <span className={styles['follow-info']}>
             <Translate zh_hant="已追蹤 " zh_hans="已追踪 " en="followed " />
-            <span className="hightlight">{followeeCount}</span>
+            <span className={styles['hightlight']}>{followeeCount}</span>
             <Translate zh_hant=" 位" zh_hans=" 位" en=" authors" />
           </span>
         </section>

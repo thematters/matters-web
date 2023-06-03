@@ -1,4 +1,4 @@
-footer {
+.footer {
   padding: 4rem 0;
   color: var(--color-white);
   background: var(--color-black);
@@ -34,16 +34,16 @@ footer {
     & .socials {
       display: flex;
 
-      & :global(> *) {
+      & > * {
         display: inline-block;
       }
 
-      & :global(> * + *) {
+      & > * + * {
         margin-left: var(--spacing-xx-loose);
       }
 
       & ul {
-        & :global(> * + *) {
+        & > * + * {
           margin-top: var(--spacing-base);
         }
       }
@@ -52,7 +52,7 @@ footer {
 
   & .moreProducts {
     & .products {
-      & :global(> * + *) {
+      & > * + * {
         margin-left: var(--spacing-xx-loose);
       }
     }
@@ -60,7 +60,7 @@ footer {
 
   & .subscribeUs {
     & .buttons {
-      & :global(> a) {
+      & > a {
         width: 100%;
       }
     }

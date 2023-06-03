@@ -9,7 +9,7 @@ type FooterProps = {
 
 const Footer: React.FC<FooterProps> & {
   Button: typeof Button
-} = ({ children }) => <footer>{children}</footer>
+} = ({ children }) => <footer className={styles.footer}>{children}</footer>
 
 Footer.Button = Button
 

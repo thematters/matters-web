@@ -71,7 +71,7 @@ const Concise = ({
         <Avatar size={avatarSize} />
 
         <span className={nameClasses}>
-          <span className="displayname">
+          <span className={styles['displayname']}>
             <Translate id="accountArchived" />
           </span>
         </span>
@@ -85,8 +85,10 @@ const Concise = ({
         <Avatar size={avatarSize} user={user} />
 
         <span className={nameClasses}>
-          <span className="displayname">{user.displayName}</span>
-          {user.userName && <span className="username">@{user.userName}</span>}
+          <span className={styles['displayname']}>{user.displayName}</span>
+          {user.userName && (
+            <span className={styles['username']}>@{user.userName}</span>
+          )}
         </span>
       </section>
     </LinkWrapper>
