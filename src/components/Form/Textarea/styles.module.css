@@ -1,4 +1,4 @@
-textarea {
+.textarea {
   @mixin form-input;
 
   min-height: 8rem;

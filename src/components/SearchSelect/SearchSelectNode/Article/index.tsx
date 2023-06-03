@@ -25,8 +25,8 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
   inStagingArea,
 }) => {
   const nodeClass = classNames({
-    node: true,
-    selectable: inStagingArea,
+    [styles.node]: true,
+    [styles.selectable]: inStagingArea,
   })
 
   return (

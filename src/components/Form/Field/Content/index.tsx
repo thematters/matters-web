@@ -11,8 +11,9 @@ const Content: React.FC<React.PropsWithChildren<ContentProps>> = ({
   children,
 }) => {
   const contentClass = classNames({
-    'input-container': true,
-    'no-margin': noMargin,
+    [styles.content]: true,
+    [styles['input-container']]: true,
+    [styles['no-margin']]: noMargin,
   })
 
   return <section className={contentClass}>{children}</section>

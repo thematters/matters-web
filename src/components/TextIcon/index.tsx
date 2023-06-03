@@ -58,15 +58,15 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
   children,
 }) => {
   const textIconClasses = classNames({
-    'text-icon': true,
-    'none-select': !allowUserSelect,
-    [color || '']: !!color,
-    [`text-${textPlacement}`]: true,
-    [`text-${textDecoration}`]: true,
-    [`size-${size}`]: true,
-    [spacing ? `spacing-${spacing}` : '']: !!spacing,
-    [weight ? `weight-${weight}` : '']: !!weight,
-    hasIcon: !!icon,
+    [styles['text-icon']]: true,
+    [styles['none-select']]: !allowUserSelect,
+    [styles[color || '']]: !!color,
+    [styles[`text-${textPlacement}`]]: true,
+    [styles[`text-${textDecoration}`]]: true,
+    [styles[`size-${size}`]]: true,
+    [styles[spacing ? `spacing-${spacing}` : '']]: !!spacing,
+    [styles[weight ? `weight-${weight}` : '']]: !!weight,
+    [styles.hasIcon]: !!icon,
   })
 
   if (textPlacement === 'left') {

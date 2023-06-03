@@ -38,9 +38,9 @@ const CircleDigestTitle = ({
     circle,
   })
   const titleClasses = classNames({
-    title: true,
-    [`text-size-${textSize}`]: !!textSize,
-    [`text-weight-${textWeight}`]: !!textWeight,
+    [styles.title]: true,
+    [styles[`text-size-${textSize}`]]: !!textSize,
+    [styles[`text-weight-${textWeight}`]]: !!textWeight,
   })
 
   return (

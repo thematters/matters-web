@@ -35,7 +35,10 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
   }, [])
 
   const unread = (data?.viewer?.status?.unreadNoticeCount || 0) >= 1
-  const iconClasses = classNames({ 'unread-icon': true, unread })
+  const iconClasses = classNames({
+    [styles['unread-icon']]: true,
+    [styles.unread]: unread,
+  })
 
   return (
     <span className={iconClasses}>

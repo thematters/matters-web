@@ -42,8 +42,8 @@ const ListItem: React.FC<React.PropsWithChildren<ListItemProps>> & {
   NumberIndicator: typeof NumberIndicator
 } = ({ title, subTitle, hint, onClick, children }) => {
   const subtitleClasses = classNames({
-    subtitle: true,
-    hint: !!hint,
+    [styles.subtitle]: true,
+    [styles.hint]: !!hint,
   })
 
   return (

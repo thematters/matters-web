@@ -27,7 +27,7 @@ export const Form: React.FC<FormProps> & {
   ComposedAmountInput: typeof ComposedAmountInput
   CurrencyRadioInput: typeof CurrencyRadioInput
 } = ({ children, ...formProps }) => (
-  <form method="POST" autoComplete="off" {...formProps}>
+  <form className={styles.form} method="POST" autoComplete="off" {...formProps}>
     {children}
   </form>
 )

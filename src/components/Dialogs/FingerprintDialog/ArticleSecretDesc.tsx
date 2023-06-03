@@ -5,7 +5,6 @@ import { Translate } from '~/components'
 import { ArticleSecretQuery } from '~/gql/graphql'
 
 import { QUERY_SECRET } from './ArticleSecret'
-import styles from './styles.module.css'
 
 type ArticleSecretDescProps = {
   id: string

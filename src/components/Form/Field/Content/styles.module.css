@@ -1,4 +1,4 @@
-section {
+.content {
   position: relative;
   margin: 0 calc(var(--spacing-base) * -1);
 

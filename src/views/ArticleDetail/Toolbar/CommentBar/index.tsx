@@ -29,8 +29,6 @@ import {
   CommentBarArticlePublicFragment,
 } from '~/gql/graphql'
 
-import styles from './styles.module.css'
-
 type CommentBarArticle = CommentBarArticlePublicFragment &
   Partial<CommentBarArticlePrivateFragment>
 

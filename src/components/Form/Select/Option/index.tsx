@@ -39,8 +39,8 @@ const Option: React.FC<OptionProps> = forwardRef(
     ref
   ) => {
     const nameClasses = classNames({
-      name: true,
-      [`${size}`]: !!size,
+      [styles.name]: true,
+      [styles[`${size}`]]: !!size,
     })
 
     return (

@@ -120,8 +120,8 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   const isCircle = type === 'circle'
   const labelClasses = classNames({
     [styles.label]: true,
-    'has-border': hasBorder,
-    circle: isCircle,
+    [styles['has-border']]: hasBorder,
+    [styles.circle]: isCircle,
   })
 
   return (

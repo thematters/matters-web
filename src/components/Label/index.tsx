@@ -22,8 +22,8 @@ export const Label: React.FC<React.PropsWithChildren<LabelProps>> = ({
   children,
 }) => {
   const labelClasses = classNames({
-    label: true,
-    [size]: true,
+    [styles.label]: true,
+    [styles[size]]: true,
   })
 
   return <span className={labelClasses}>{children}</span>

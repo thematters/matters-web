@@ -76,17 +76,17 @@ const Mini = ({
     userName: user.userName || '',
   })
   const containerClasses = classNames({
-    container: true,
-    [`text-size-${textSize}`]: !!textSize,
-    [`text-weight-${textWeight}`]: !!textWeight,
-    [`name-color-${nameColor}`]: !!nameColor,
-    [`spacing-${spacing}`]: !!spacing,
-    hasAvatar,
-    disabled: disabled || isArchived,
+    [styles.container]: true,
+    [styles[`text-size-${textSize}`]]: !!textSize,
+    [styles[`text-weight-${textWeight}`]]: !!textWeight,
+    [styles[`name-color-${nameColor}`]]: !!nameColor,
+    [styles[`spacing-${spacing}`]]: !!spacing,
+    [styles.hasAvatar]: hasAvatar,
+    [styles.disabled]: disabled || isArchived,
   })
   const nameClasses = classNames({
-    name: true,
-    [`direction-${direction}`]: !!direction,
+    [styles.name]: true,
+    [styles[`direction-${direction}`]]: !!direction,
   })
 
   if (isArchived) {

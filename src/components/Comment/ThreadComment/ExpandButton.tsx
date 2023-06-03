@@ -1,7 +1,5 @@
 import { Button, IconArrowDown16, TextIcon, Translate } from '~/components'
 
-import styles from './styles.module.css'
-
 const ExpandButton = ({
   onClick,
   restCount,

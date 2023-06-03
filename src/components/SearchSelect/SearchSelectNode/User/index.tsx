@@ -20,8 +20,8 @@ const SearchSelectUser: React.FC<SearchSelectUserProps> = ({
   inStagingArea,
 }) => {
   const nodeClass = classNames({
-    node: true,
-    selectable: inStagingArea,
+    [styles.node]: true,
+    [styles.selectable]: inStagingArea,
   })
 
   return (

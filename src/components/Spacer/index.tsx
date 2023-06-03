@@ -5,5 +5,5 @@ interface SpacerProps {
 }
 
 export const Spacer: React.FC<SpacerProps> = ({ size = 'loose' }) => (
-  <div className={size} aria-hidden></div>
+  <div className={styles[size]} aria-hidden></div>
 )

@@ -1,4 +1,4 @@
-section {
+.content {
   display: flex;
   align-items: center;
   margin-bottom: var(--spacing-x-tight);

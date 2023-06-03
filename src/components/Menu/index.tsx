@@ -16,9 +16,9 @@ export const Menu: React.FC<React.PropsWithChildren<MenuProps>> & {
   Header: typeof Header
 } = ({ width, spacingY = 'xtight', children }) => {
   const menuClasses = classNames({
-    menu: true,
-    [`width-${width}`]: !!width,
-    [`spacing-y-${spacingY}`]: !!spacingY,
+    [styles.menu]: true,
+    [styles[`width-${width}`]]: !!width,
+    [styles[`spacing-y-${spacingY}`]]: !!spacingY,
   })
 
   return (

@@ -22,8 +22,8 @@ const InfoTilesGroup: React.FC<
   React.PropsWithChildren<InfoTilesGroupProps>
 > = ({ primary, children }) => {
   const groupClasses = classNames({
-    group: true,
-    primary: !!primary,
+    [styles.group]: true,
+    [styles.primary]: !!primary,
   })
 
   return <section className={groupClasses}>{children}</section>

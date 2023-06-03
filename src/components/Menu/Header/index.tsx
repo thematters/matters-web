@@ -14,7 +14,7 @@ const MenuHeader: React.FC<React.PropsWithChildren<MenuHeaderProps>> = ({
   children,
 }) => {
   const titleClasses = classNames({
-    [`size-${size}`]: !!size,
+    [styles[`size-${size}`]]: !!size,
   })
 
   return (

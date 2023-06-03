@@ -34,8 +34,8 @@ export const Title: React.FC<TitleProps> = ({
   ...props
 }) => {
   const titleClasses = classNames({
-    [type]: true,
-    clickable: !!props.onClick,
+    [styles[type]]: true,
+    [styles.clickable]: !!props.onClick,
   })
 
   return (

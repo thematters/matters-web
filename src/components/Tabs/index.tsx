@@ -47,8 +47,8 @@ export const Tabs: React.FC<React.PropsWithChildren<TabsProps>> & {
 } = ({ sticky, side, children }) => {
   const navClasses = classNames({
     [styles.nav]: true,
-    sticky,
-    hasSide: !!side,
+    [styles.sticky]: sticky,
+    [styles.hasSide]: !!side,
   })
 
   return (

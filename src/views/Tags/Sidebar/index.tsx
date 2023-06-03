@@ -55,8 +55,8 @@ const TagsSidebar: React.FC<TagsSidebarProps> = ({ inSidebar }) => {
   }
 
   const tagsSidebarClasses = classNames({
-    tagsSidebar: true,
-    inSidebar,
+    [styles.tagsSidebar]: true,
+    [styles.inSidebar]: inSidebar,
   })
 
   if (!inSidebar) {

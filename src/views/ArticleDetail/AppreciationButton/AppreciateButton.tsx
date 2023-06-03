@@ -35,9 +35,9 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
 
   const iconRef = useRef<HTMLButtonElement>(null)
   const buttonClasses = classNames({
-    'appreciate-button': true,
-    isSuperLike,
-    superLiked,
+    [styles['appreciate-button']]: true,
+    [styles.isSuperLike]: isSuperLike,
+    [styles.superLiked]: superLiked,
   })
 
   return (

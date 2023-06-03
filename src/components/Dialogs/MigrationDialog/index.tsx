@@ -1,6 +1,5 @@
 import { Dialog, useDialogSwitch, useStep } from '~/components'
 
-import styles from './styles.module.css'
 import Success from './Success'
 import Upload from './Upload'
 

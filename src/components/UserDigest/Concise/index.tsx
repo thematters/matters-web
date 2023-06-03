@@ -57,12 +57,12 @@ const Concise = ({
     userName: user.userName || '',
   })
   const containerClasses = classNames({
-    container: true,
-    disabled: disabled || isArchived,
+    [styles.container]: true,
+    [styles.disabled]: disabled || isArchived,
   })
   const nameClasses = classNames({
-    name: true,
-    [`name-style-${nameStyle}`]: !!nameStyle,
+    [styles.name]: true,
+    [styles[`name-style-${nameStyle}`]]: !!nameStyle,
   })
 
   if (isArchived) {

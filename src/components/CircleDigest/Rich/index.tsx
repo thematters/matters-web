@@ -58,11 +58,11 @@ const Rich = ({
   })
 
   const containerClasses = classNames({
-    container: true,
+    [styles.styles]: true,
   })
   const titleClasses = classNames({
-    title: true,
-    [`text-size-${textSize}`]: !!textSize,
+    [styles.title]: true,
+    [styles[`text-size-${textSize}`]]: !!textSize,
   })
 
   return (

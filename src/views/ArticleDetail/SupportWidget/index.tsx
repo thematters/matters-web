@@ -51,8 +51,8 @@ const SupportWidget = ({ article }: DonationProps) => {
   const [showAvatarAnimation, setShowAvatarAnimation] = useState(false)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const supportWidgetClasses = classNames({
-    'support-widget': true,
-    hasCircle: article?.access.circle,
+    [styles['support-widget']]: true,
+    [styles.hasCircle]: article?.access.circle,
   })
 
   const {

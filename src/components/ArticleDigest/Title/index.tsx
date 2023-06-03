@@ -74,11 +74,12 @@ export const ArticleDigestTitle = ({
   const isBanned = state === 'banned'
   const title = isBanned ? <Translate id="articleBanned" /> : article.title
   const titleClasses = classNames({
-    title: true,
-    [`text-size-${textSize}`]: !!textSize,
-    [`text-weight-${textWeight}`]: !!textWeight,
-    'line-clamp': !!lineClamp,
-    [`line-clamp-line-${lineClamp}`]: lineClamp === 1 || lineClamp === 3,
+    [styles.title]: true,
+    [styles[`text-size-${textSize}`]]: !!textSize,
+    [styles[`text-weight-${textWeight}`]]: !!textWeight,
+    [styles['line-clamp']]: !!lineClamp,
+    [styles[`line-clamp-line-${lineClamp}`]]:
+      lineClamp === 1 || lineClamp === 3,
   })
   const isClickable = !disabled && !isBanned
 

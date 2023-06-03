@@ -43,7 +43,8 @@ const Textarea: React.FC<TextareaProps> = ({
   const fieldId = `field-${name}`
   const fieldMsgId = `field-msg-${name}`
   const textareaClasses = classNames({
-    error,
+    [styles.textarea]: true,
+    [styles.error]: error,
   })
 
   useEffect(() => {

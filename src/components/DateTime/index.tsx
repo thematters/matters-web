@@ -35,7 +35,8 @@ const BaseDateTime = ({
 }: DateTimeProps) => {
   const { lang } = useContext(LanguageContext)
   const timeclasses = classNames({
-    [color || '']: !!color,
+    [styles.time]: true,
+    [styles[color]]: !!color,
   })
 
   return (

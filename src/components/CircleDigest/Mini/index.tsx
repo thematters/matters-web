@@ -23,7 +23,7 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
   })
 
   const containerClasses = classNames({
-    container: true,
+    [styles.container]: true,
   })
 
   return (

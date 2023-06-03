@@ -30,8 +30,8 @@ export const CircleAvatar = (props: CircleAvatarProps) => {
   const isFallback =
     (!src && !circle?.avatar) || source.indexOf('data:image') >= 0
   const avatarClasses = classNames({
-    avatar: true,
-    [size]: true,
+    [styles.avatar]: true,
+    [styles[size]]: true,
   })
 
   return (

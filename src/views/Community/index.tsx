@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 
-import contentStyles from '~/common/styles/utils/content.article.css'
 import { captureClicks, translate } from '~/common/utils'
 import { Head, LanguageContext, Layout } from '~/components'
 

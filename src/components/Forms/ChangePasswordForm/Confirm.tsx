@@ -126,7 +126,7 @@ const Confirm: React.FC<FormProps> = ({
     },
   })
 
-  const containerClasses = classNames({ container: !!isInPage })
+  const containerClasses = classNames({ [styles.container]: !!isInPage })
 
   const InnerForm = (
     <section className={containerClasses}>

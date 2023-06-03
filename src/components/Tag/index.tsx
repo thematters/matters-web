@@ -60,11 +60,11 @@ export const Tag = ({
   onClick,
 }: TagProps) => {
   const tagClasses = classNames({
-    tag: true,
-    [type]: type,
-    active,
-    clickable: !!onClick,
-    disabled: !!disabled && !onClick,
+    [styles.tag]: true,
+    [styles[type]]: type,
+    [styles.active]: active,
+    [styles.clickable]: !!onClick,
+    [styles.disabled]: !!disabled && !onClick,
   })
 
   const tagName = canClamp ? clampTag(tag.content) : tag.content

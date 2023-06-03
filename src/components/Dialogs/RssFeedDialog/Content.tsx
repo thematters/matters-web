@@ -184,8 +184,8 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                   <li key={url}>
                     <span
                       className={classNames({
-                        'gateway-url': true,
-                        disabled: !ipnsKey,
+                        [styles['gateway-url']]: true,
+                        [styles.disabled]: !ipnsKey,
                       })}
                     >
                       {hostname}

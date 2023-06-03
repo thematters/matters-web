@@ -32,7 +32,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 }) => {
   const isInPage = purpose === 'page'
 
-  const containerClasses = classNames({ container: !!isInPage })
+  const containerClasses = classNames({ [styles.container]: !!isInPage })
 
   const InnerForm = (
     <>

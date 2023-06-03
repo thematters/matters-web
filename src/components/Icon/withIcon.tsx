@@ -1,6 +1,6 @@
-import './styles.module.css'
-
 import classNames from 'classnames'
+
+import styles from './styles.module.css'
 
 export type IconSize =
   | 'xxs'
@@ -40,10 +40,10 @@ export const withIcon = (
   const InnerIcon = (props: IconProps) => {
     const { size = '', color = '', className, ...restProps } = props
     const iconClasses = classNames({
-      icon: true,
-      [size]: !!size,
-      [color]: !!color,
-      [className]: !!className,
+      [styles.icon]: true,
+      [styles[size]]: !!size,
+      [styles[color]]: !!color,
+      [styles[className]]: !!className,
     })
 
     return (

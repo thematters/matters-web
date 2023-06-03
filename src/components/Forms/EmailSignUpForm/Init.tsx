@@ -116,7 +116,10 @@ const Init: React.FC<FormProps> = ({
     },
   })
 
-  const containerClasses = classNames({ container: true, isInPage: !!isInPage })
+  const containerClasses = classNames({
+    [styles.container]: true,
+    [styles.isInPage]: !!isInPage,
+  })
 
   const InnerForm = (
     <section className={containerClasses}>

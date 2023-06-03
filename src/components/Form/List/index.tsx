@@ -27,13 +27,13 @@ const List: React.FC<React.PropsWithChildren<ListProps>> & {
   children,
 }) => {
   const groupClasses = classNames({
-    group: true,
-    [`spacing-x-${spacingX}`]: !!spacingX,
+    [styles.group]: true,
+    [styles[`spacing-x-${spacingX}`]]: !!spacingX,
   })
 
   const listClasses = classNames({
-    grey: forceGreyStyle,
-    [`spacing-y-${spacingY}`]: !!spacingY,
+    [styles.grey]: forceGreyStyle,
+    [styles[`spacing-y-${spacingY}`]]: !!spacingY,
   })
 
   return (

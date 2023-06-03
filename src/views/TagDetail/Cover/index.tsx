@@ -13,8 +13,8 @@ interface TagCoverProps {
 
 const TagCover = ({ tag }: TagCoverProps) => {
   const titleClasses = classNames({
-    title: true,
-    mask: !!tag.cover,
+    [styles.title]: true,
+    [styles.mask]: !!tag.cover,
   })
 
   return (

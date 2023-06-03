@@ -60,10 +60,10 @@ export const Avatar = (props: AvatarProps) => {
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasLogbook = !!user?.info?.cryptoWallet?.hasNFTs
   const avatarClasses = classNames({
-    avatar: true,
-    [size]: true,
-    hasRing: isCivicLiker || hasArchitectBadge,
-    hasBadge: hasLogbook,
+    [styles.avatar]: true,
+    [styles[size]]: true,
+    [styles.hasRing]: isCivicLiker || hasArchitectBadge,
+    [styles.hasBadge]: hasLogbook,
   })
 
   return (

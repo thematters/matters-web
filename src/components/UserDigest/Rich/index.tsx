@@ -64,14 +64,14 @@ const Rich = ({
   })
   const isArchived = user?.status?.state === 'archived'
   const containerClasses = classNames({
-    container: true,
-    [`size-${size}`]: !!size,
-    disabled: isArchived,
+    [styles.container]: true,
+    [styles[`size-${size}`]]: !!size,
+    [styles.disabled]: isArchived,
   })
 
   const contentClasses = classNames({
-    content: true,
-    'has-extra-button': hasUnblock || hasFollow || !!extraButton,
+    [styles.content]: true,
+    [styles['has-extra-button']]: hasUnblock || hasFollow || !!extraButton,
   })
 
   if (isArchived) {

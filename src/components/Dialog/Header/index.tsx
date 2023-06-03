@@ -26,7 +26,7 @@ const BaseHeader = ({
 }: HeaderProps) => {
   const headerClasses = classNames({
     [styles.header]: true,
-    inner: mode === 'inner',
+    [styles.inner]: mode === 'inner',
   })
 
   return (

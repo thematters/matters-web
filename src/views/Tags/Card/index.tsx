@@ -16,7 +16,10 @@ interface CardProps {
 const Card = ({ tag }: CardProps) => {
   const path = toPath({ page: 'tagDetail', tag })
   const url = tag.cover || IMAGE_TAG_COVER.src
-  const nameClasses = classNames({ name: true, mask: !!tag.cover })
+  const nameClasses = classNames({
+    [styles.name]: true,
+    [styles.mask]: !!tag.cover,
+  })
 
   return (
     <Link {...path} legacyBehavior>

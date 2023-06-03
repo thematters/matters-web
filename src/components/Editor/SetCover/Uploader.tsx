@@ -130,7 +130,7 @@ const Uploader: React.FC<UploaderProps> = ({
   }
 
   const labelClasses = classNames({
-    uploader: true,
+    [styles.uploader]: true,
     'u-area-disable': loading,
   })
 

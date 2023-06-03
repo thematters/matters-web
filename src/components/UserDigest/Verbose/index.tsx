@@ -58,17 +58,17 @@ const Verbose = ({
   })
   const isArchived = user?.status?.state === 'archived'
   const containerClasses = classNames({
-    container: true,
-    disabled: isArchived,
+    [styles.container]: true,
+    [styles.disabled]: isArchived,
   })
   const nameClasses = classNames({
-    name: true,
-    [`name-${nameTextSize}`]: true,
+    [styles.name]: true,
+    [styles[`name-${nameTextSize}`]]: true,
   })
   const descClasses = classNames({
-    desc: true,
-    [`desc-${descTextSize}`]: true,
-    [`desc-row-${descRowSize}`]: true,
+    [styles.desc]: true,
+    [styles[`desc-${descTextSize}`]]: true,
+    [styles[`desc-row-${descRowSize}`]]: true,
   })
 
   if (isArchived) {

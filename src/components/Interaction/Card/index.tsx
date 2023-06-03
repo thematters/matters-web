@@ -89,17 +89,17 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
     const cardRef = (ref || fallbackRef) as React.RefObject<any> | null
 
     const cardClasses = classNames({
-      card: true,
-      [`spacing-y-${spacing[0]}`]: !!spacing[0],
-      [`spacing-x-${spacing[1]}`]: !!spacing[1],
-      [`bg-${bgColor}`]: !!bgColor,
-      [`bg-active-${bgActiveColor}`]: !!bgActiveColor,
-      [`border-${borderColor}`]: !!borderColor,
-      [`border-radius-${borderRadius}`]: !!borderRadius,
-      ['active-outline-auto']: !!activeOutline,
+      [styles.card]: true,
+      [styles[`spacing-y-${spacing[0]}`]]: !!spacing[0],
+      [styles[`spacing-x-${spacing[1]}`]]: !!spacing[1],
+      [styles[`bg-${bgColor}`]]: !!bgColor,
+      [styles[`bg-active-${bgActiveColor}`]]: !!bgActiveColor,
+      [styles[`border-${borderColor}`]]: !!borderColor,
+      [styles[`border-radius-${borderRadius}`]]: !!borderRadius,
+      [styles['active-outline-auto']]: !!activeOutline,
 
-      hasBorder: !!borderColor || !!borderRadius,
-      disabled,
+      [styles.hasBorder]: !!borderColor || !!borderRadius,
+      [styles.disabled]: disabled,
     })
     const ariaLabel =
       htmlHref || href

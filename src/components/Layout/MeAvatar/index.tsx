@@ -16,8 +16,8 @@ const MeAvatar: React.FC<MeAvatarProps> = ({
   ...avatarProps
 }) => {
   const meAvatarClasses = classNames({
-    'me-avatar': true,
-    active: !user.isInactive && active,
+    [styles['me-avatar']]: true,
+    [styles.active]: !user.isInactive && active,
   })
 
   return (

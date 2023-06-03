@@ -15,8 +15,8 @@ const Row: React.FC<React.PropsWithChildren<RowProps>> = ({
   children,
 }) => {
   const rowClasses = classNames({
-    row: true,
-    [`${type}`]: !!type,
+    [styles.row]: true,
+    [styles[`${type}`]]: !!type,
   })
 
   return <section className={rowClasses}>{children}</section>
@@ -27,8 +27,8 @@ const Col: React.FC<React.PropsWithChildren<ColProps>> = ({
   children,
 }) => {
   const colClasses = classNames({
-    col: true,
-    [`${type}`]: !!type,
+    [styles.col]: true,
+    [styles[`${type}`]]: !!type,
   })
 
   return <section className={colClasses}>{children}</section>

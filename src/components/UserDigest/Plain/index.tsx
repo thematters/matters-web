@@ -28,13 +28,13 @@ const Plain = ({
   })
 
   const containerClasses = classNames({
-    container: true,
-    disabled,
+    [styles.container]: true,
+    [styles.disabled]: disabled,
   })
 
   const displayNameClasses = classNames({
-    name: true,
-    hasUnderline,
+    [styles.name]: true,
+    [styles.hasUnderline]: hasUnderline,
   })
 
   return (
