@@ -20,11 +20,11 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> = ({
   children,
 }) => {
   const contentClasses = classNames({
-    content: true,
-    'has-fixed': !!hasFixed,
-    'has-grow': !!hasGrow,
-    [`spacing-y-${spacing[0]}`]: true,
-    [`spacing-x-${spacing[1]}`]: true,
+    [styles.content]: true,
+    [styles['has-fixed']]: !!hasFixed,
+    [styles['has-grow']]: !!hasGrow,
+    [styles[`spacing-y-${spacing[0]}`]]: true,
+    [styles[`spacing-x-${spacing[1]}`]]: true,
   })
 
   return <section className={contentClasses}>{children}</section>

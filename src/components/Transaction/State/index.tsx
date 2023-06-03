@@ -89,7 +89,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
   }
 
   return (
-    <section>
+    <section className={styles.content}>
       <TextIcon
         icon={<StateIcon />}
         spacing="xxtight"

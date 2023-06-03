@@ -28,7 +28,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
   return (
     <Field>
-      <label htmlFor={fieldId}>
+      <label className={styles.label} htmlFor={fieldId}>
         <TextIcon
           icon={
             <IconChecked

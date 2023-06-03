@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 
 const PaymentPointerExplainer = () => (
   <>
-    <p>
+    <p className={styles.content}>
       <a href="https://interledger.org/" target="_blank" rel="noreferrer">
         <Translate
           zh_hant="跨賬本協議"

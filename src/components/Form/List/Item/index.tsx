@@ -40,9 +40,9 @@ const Item: React.FC<ItemProps> = forwardRef(
   ) => {
     const clickable = cardProps.href || cardProps.htmlHref || cardProps.onClick
     const leftClasses = classNames({
-      left: true,
-      top: leftAlign === 'top',
-      bold: !!bold,
+      [styles.left]: true,
+      [styles.top]: leftAlign === 'top',
+      [styles.bold]: !!bold,
     })
     const itemContent = (
       <section className={styles['container']}>

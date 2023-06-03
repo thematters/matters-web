@@ -90,8 +90,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
   const { lang } = useContext(LanguageContext)
 
   const bottomBarClasses = classNames({
-    'bottom-bar': true,
-    'u-area-disable': disabled,
+    [styles['bottom-bar']]: true,
+    [styles['u-area-disable']]: disabled,
   })
 
   const coverProps: SetCoverProps = {

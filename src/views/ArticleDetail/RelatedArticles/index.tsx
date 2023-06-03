@@ -45,8 +45,8 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
   }
 
   const relatedArticlesClasses = classNames({
-    relatedArticles: true,
-    inSidebar,
+    [styles.relatedArticles]: true,
+    [styles.inSidebar]: inSidebar,
   })
 
   const onClick = (i: number, id: string) => () =>

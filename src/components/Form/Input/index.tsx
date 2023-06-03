@@ -46,7 +46,8 @@ const Input: React.FC<InputProps> = ({
   const fieldMsgId = `${fieldId}-msg`
 
   const inputClasses = classNames({
-    error,
+    [styles.input]: true,
+    [styles.error]: error,
   })
 
   return (

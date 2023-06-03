@@ -196,6 +196,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         if (!hasDropdown) {
           return (
             <form
+              className={styles.form}
               onSubmit={handleSubmit}
               aria-label={textPlaceholder}
               role="search"
@@ -261,7 +262,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             visible={showDropdown}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
-            <form onSubmit={handleSubmit} autoComplete="off" action="">
+            <form
+              className={styles.form}
+              onSubmit={handleSubmit}
+              autoComplete="off"
+              action=""
+            >
               <input
                 // FIMXME: FOUC on re-render
                 style={{ borderColor: 'var(--color-line-grey-light)' }}

@@ -19,8 +19,8 @@ export const PageHeader: React.FC<React.PropsWithChildren<PageHeaderProps>> = ({
   children,
 }) => {
   const headerClasses = classNames({
-    [styles['header']]: true,
-    hasNoBorder: !!hasNoBorder,
+    [styles.header]: true,
+    [styles.hasNoBorder]: !!hasNoBorder,
   })
 
   return (

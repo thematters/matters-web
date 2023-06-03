@@ -90,8 +90,8 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
     : null
 
   const dateTimeClasses = classNames({
-    dateTime: true,
-    isDonation,
+    [styles.dateTime]: true,
+    [styles.isDonation]: isDonation,
   })
 
   return (

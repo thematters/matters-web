@@ -56,12 +56,12 @@ const Container: React.FC<
   const node: React.RefObject<any> | null = useRef(null)
 
   const containerClasses = classNames({
-    container: true,
-    'fixed-height': !!fixedHeight,
-    [size]: true,
-    [`bg-${smBgColor}`]: !!smBgColor,
-    [`bg-${smUpBgColor}-sm-up`]: !!smUpBgColor,
-    ['hide-padding-bottom']: !!hidePaddingBottom,
+    [styles.container]: true,
+    [styles['fixed-height']]: !!fixedHeight,
+    [styles[size]]: true,
+    [styles[`bg-${smBgColor}`]]: !!smBgColor,
+    [styles[`bg-${smUpBgColor}-sm-up`]]: !!smUpBgColor,
+    [styles['hide-padding-bottom']]: !!hidePaddingBottom,
   })
 
   const closeTopDialog = () => {

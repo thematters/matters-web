@@ -34,8 +34,8 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
   const { lang } = useContext(LanguageContext)
 
   const boxClasses = classNames({
-    box: true,
-    footerSpacing: !!footerSpacing,
+    [styles.box]: true,
+    [styles.footerSpacing]: !!footerSpacing,
     'u-area-disable': disabled,
   })
 

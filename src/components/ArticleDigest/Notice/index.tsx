@@ -37,7 +37,7 @@ export const ArticleDigestNotice = ({
   const { summary } = article
 
   const containerClasses = classNames({
-    container: true,
+    [styles.container]: true,
   })
   const path = toPath({
     page: 'articleDetail',

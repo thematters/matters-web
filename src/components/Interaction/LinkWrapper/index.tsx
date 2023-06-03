@@ -35,7 +35,8 @@ export const LinkWrapper: React.FC<
   }
 
   const linkClasses = classNames({
-    [`text-active-${textActiveColor}`]: !!textActiveColor,
+    [styles.link]: true,
+    [styles[`text-active-${textActiveColor}`]]: !!textActiveColor,
   })
 
   return (

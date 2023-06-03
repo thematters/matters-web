@@ -160,12 +160,12 @@ const Select: React.FC<FormProps> = ({
   }
 
   const containerClasses = classNames({
-    container: !!isInPage,
+    [styles.container]: !!isInPage,
   })
 
   const msgClasses = classNames({
-    msg: true,
-    isInDialog,
+    [styles.msg]: true,
+    [styles.isInDialog]: isInDialog,
   })
 
   const InnerForm = (

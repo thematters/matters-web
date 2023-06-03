@@ -1,3 +1,5 @@
-a {
-  text-decoration: underline;
+.content {
+  & a {
+    text-decoration: underline;
+  }
 }

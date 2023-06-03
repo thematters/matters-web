@@ -79,8 +79,8 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   const isActive = value === amount
 
   const amountClasses = classNames({
-    ['radio-input-item']: true,
-    active: isActive,
+    [styles['radio-input-item']]: true,
+    [styles.active]: isActive,
     'u-area-disable': disabled || isBalanceInsufficient,
   })
 

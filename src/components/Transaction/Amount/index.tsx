@@ -36,7 +36,10 @@ const Amount = ({ amount, currency, state, testId }: AmountProps) => {
       : 'black'
 
   return (
-    <section {...(testId ? { ['data-test-id']: testId } : {})}>
+    <section
+      className={styles.content}
+      {...(testId ? { ['data-test-id']: testId } : {})}
+    >
       <TextIcon spacing="xtight" size="md-s" weight="semibold" color={color}>
         {amount > 0 ? '+' : '-'}
         &nbsp;

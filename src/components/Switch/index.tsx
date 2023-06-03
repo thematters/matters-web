@@ -26,7 +26,7 @@ export const Switch: React.FC<SwitchProps> = ({
   const fieldId = useId()
 
   const switchClasses = classNames({
-    switch: true,
+    [styles.switch]: true,
     'u-area-disable': disabled,
   })
 

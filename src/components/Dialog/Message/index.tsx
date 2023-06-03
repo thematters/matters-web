@@ -33,10 +33,10 @@ const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
   children,
 }) => {
   const contentClasses = classNames({
-    content: true,
-    [`${type}`]: !!type,
-    [`align-${align}`]: !!align,
-    [`spacing-${spacing}`]: !!spacing,
+    [styles.content]: true,
+    [styles[`${type}`]]: !!type,
+    [styles[`align-${align}`]]: !!align,
+    [styles[`spacing-${spacing}`]]: !!spacing,
   })
 
   return (

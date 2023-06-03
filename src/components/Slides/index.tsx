@@ -20,7 +20,7 @@ const SlideItem: React.FC<React.PropsWithChildren<SlideItemProps>> = ({
   ...rest
 }) => {
   const slidesItemClasses = classNames({
-    [`size-${size}`]: !!size,
+    [styles[`size-${size}`]]: !!size,
   })
 
   return (
@@ -44,8 +44,8 @@ export const Slides: React.FC<React.PropsWithChildren<SlidesProps>> & {
   })
 
   const slidesClasses = classNames({
-    slides: true,
-    [`bg-${bgColor}`]: !!bgColor,
+    [styles.slides]: true,
+    [styles[`bg-${bgColor}`]]: !!bgColor,
   })
 
   const onCaptureClick = (event: any) => {

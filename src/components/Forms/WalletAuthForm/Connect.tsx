@@ -66,8 +66,8 @@ interface FormValues {
 
 const ImportantNotice = ({ isInDialog }: { isInDialog: boolean }) => {
   const containeClasses = classNames({
-    notice: true,
-    inDialog: !!isInDialog,
+    [styles.notice]: true,
+    [styles.inDialog]: !!isInDialog,
   })
   return (
     <section className={containeClasses}>
@@ -286,16 +286,16 @@ const Connect: React.FC<FormProps> = ({
   })
 
   const msgClasses = classNames({
-    'connect-msg': true,
-    isInDialog,
+    [styles['connect-msg']]: true,
+    [styles.isInDialog]: isInDialog,
   })
 
   const subtitleClasses = classNames({
-    subtitle: true,
-    isInDialog,
+    [styles.subtitle]: true,
+    [styles.isInDialog]: isInDialog,
   })
 
-  const containerClasses = classNames({ container: !!isInPage })
+  const containerClasses = classNames({ [styles.container]: !!isInPage })
 
   const InnerForm = (
     <section className={containerClasses}>

@@ -25,7 +25,7 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
   const { lang } = useContext(LanguageContext)
 
   const client = useApolloClient()
-  const outerClasses = classNames({ outer: true, show })
+  const outerClasses = classNames({ [styles.outer]: true, [styles.show]: show })
 
   const closeDialog = () => {
     client?.writeData({

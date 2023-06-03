@@ -33,9 +33,9 @@ const ToggleResponse = ({
   }
 
   const wrapperClasses = classNames({
-    wrapper: true,
-    inSidebar: !!inSidebar,
-    disableChange: !!disableChangeCanComment,
+    [styles.wrapper]: true,
+    [styles.inSidebar]: !!inSidebar,
+    [styles.disableChange]: !!disableChangeCanComment,
   })
 
   if (inSidebar) {

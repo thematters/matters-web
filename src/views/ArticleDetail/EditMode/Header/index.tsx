@@ -142,7 +142,7 @@ const EditModeHeader = ({
         zh_hans=" 次修订"
         en=" revisions remaining"
       />
-      <span className={isOverDiffLimit ? 'red' : 'green'}>
+      <span className={isOverDiffLimit ? styles.red : styles.green}>
         &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
       </span>
     </>
@@ -150,7 +150,7 @@ const EditModeHeader = ({
 
   return (
     <>
-      <p>
+      <p className={styles.hint}>
         {isSameHash && (
           <>
             {!isOverRevisionLimit ? (

@@ -57,21 +57,21 @@ export const Expandable: React.FC<ExpandableProps> = ({
     ''
   )
   const contentClasses = classNames({
-    expandable: true,
-    [`${color}`]: !!color,
-    [`size-${size}`]: !!size,
-    [`spacing-top-${spacingTop}`]: !!spacingTop,
-    [`textIndent`]: textIndent,
+    [styles.expandable]: true,
+    [styles[`${color}`]]: !!color,
+    [styles[`size-${size}`]]: !!size,
+    [styles[`spacing-top-${spacingTop}`]]: !!spacingTop,
+    [styles[`textIndent`]]: textIndent,
   })
 
   const richWrapperClasses = classNames({
-    richWrapper: true,
-    [`${bgColor}`]: !!bgColor,
+    [styles.richWrapper]: true,
+    [styles[`${bgColor}`]]: !!bgColor,
   })
 
   const richShowMoreButtonClasses = classNames({
-    richShowMoreButton: true,
-    [`${bgColor}`]: !!bgColor,
+    [styles.richShowMoreButton]: true,
+    [styles[`${bgColor}`]]: !!bgColor,
   })
 
   useEffect(() => {

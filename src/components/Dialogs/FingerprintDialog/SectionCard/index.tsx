@@ -12,8 +12,9 @@ const SectionCard: React.FC<
   }>
 > = ({ title, description, right, children, warning }) => {
   const descriptionClasses = classNames({
-    description: true,
-    error: warning,
+    [styles.description]: true,
+    [contentStyles.description]: true,
+    [styles.error]: warning,
   })
 
   return (

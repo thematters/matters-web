@@ -97,8 +97,8 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   }
 
   const relatedTagsClasses = classNames({
-    relatedTags: true,
-    inSidebar,
+    [styles.relatedTags]: true,
+    [styles.inSidebar]: inSidebar,
   })
 
   if (!inSidebar) {

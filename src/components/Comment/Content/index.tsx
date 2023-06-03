@@ -56,8 +56,8 @@ const Content = ({
   const isBlocked = comment.author?.isBlocked
 
   const contentClasses = classNames({
-    content: true,
-    [`size-${size}`]: !!size,
+    [styles.content]: true,
+    [styles[`size-${size}`]]: !!size,
   })
 
   if (state === 'collapsed' || isBlocked) {

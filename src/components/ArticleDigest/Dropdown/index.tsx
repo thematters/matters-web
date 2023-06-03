@@ -56,8 +56,8 @@ export const ArticleDigestDropdown = ({
   const { articleState: state } = article
   const isBanned = state === 'banned'
   const containerClasses = classNames({
-    container: true,
-    'has-extra-button': !!extraButton,
+    [styles.container]: true,
+    [styles['has-extra-button']]: !!extraButton,
   })
   const path = toPath({
     page: 'articleDetail',

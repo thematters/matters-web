@@ -57,9 +57,9 @@ const CurrencyOption: React.FC<CurrencyOptionProps> = ({
 }) => {
   const fieldId = useId()
   const classes = classNames({
-    currency: true,
-    [isLike ? 'like' : 'hkd']: true,
-    inactive,
+    [styles.currency]: true,
+    [styles[isLike ? 'like' : 'hkd']]: true,
+    [styles.inactive]: inactive,
     'u-area-disable': disabled,
   })
 

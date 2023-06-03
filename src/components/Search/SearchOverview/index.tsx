@@ -32,12 +32,12 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
   const showSearchHistory = recentSearches.length > 0
 
   const recentSearchesClasses = classNames({
-    'recent-searches': true,
-    inPage,
+    [styles['recent-searches']]: true,
+    [styles.inPage]: inPage,
   })
   const frequentSearchesClasses = classNames({
-    'frequent-searches': true,
-    inPage,
+    [styles['frequent-searches']]: true,
+    [styles.inPage]: inPage,
   })
 
   // private data

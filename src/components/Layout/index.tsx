@@ -109,9 +109,9 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   const articleClasses = classNames({
     [styles.article]: true,
     'l-col-three-mid': true,
-    [`bg-${smBgColor}`]: !!smBgColor,
-    hasNavBar: !isInArticleDetail && !isInDraftDetail,
-    hasOnboardingTasks: showOnboardingTasks,
+    [styles[`bg-${smBgColor}`]]: !!smBgColor,
+    [styles.hasNavBar]: !isInArticleDetail && !isInDraftDetail,
+    [styles.hasOnboardingTasks]: showOnboardingTasks,
   })
 
   usePullToRefresh.Register('#ptr')

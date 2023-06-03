@@ -194,18 +194,19 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
 
       // container
       const containerClasses = classNames({
-        container: true,
-        isTransparent,
-        'centering-x': width && isTransparent,
-        'centering-y': height && isTransparent,
-        [`spacing-y-${spacingY}`]: !!spacingY,
-        [`spacing-x-${spacingX}`]: !!spacingX,
-        [`bg-${bgColor}`]: !!bgColor,
-        [`bg-active-${bgActiveColor}`]: !!bgActiveColor && isClickable,
-        [`border-${borderColor}`]: !!borderColor,
-        [`border-${borderWidth}`]: borderWidth && borderColor,
-        [`text-${textColor}`]: !!textColor,
-        [`text-active-${textActiveColor}`]: !!textActiveColor && isClickable,
+        [styles.container]: true,
+        [styles.isTransparent]: isTransparent,
+        [styles['centering-x']]: width && isTransparent,
+        [styles['centering-y']]: height && isTransparent,
+        [styles[`spacing-y-${spacingY}`]]: !!spacingY,
+        [styles[`spacing-x-${spacingX}`]]: !!spacingX,
+        [styles[`bg-${bgColor}`]]: !!bgColor,
+        [styles[`bg-active-${bgActiveColor}`]]: !!bgActiveColor && isClickable,
+        [styles[`border-${borderColor}`]]: !!borderColor,
+        [styles[`border-${borderWidth}`]]: borderWidth && borderColor,
+        [styles[`text-${textColor}`]]: !!textColor,
+        [styles[`text-active-${textActiveColor}`]]:
+          !!textActiveColor && isClickable,
       })
 
       // handle click

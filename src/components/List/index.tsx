@@ -41,8 +41,8 @@ const ListItem: React.FC<ListItemProps> = ({
   ...restProps
 }) => {
   const listItemClasses = classNames({
-    'list-item': true,
-    [className]: !!className,
+    [styles['list-item']]: true,
+    [styles[className]]: !!className,
   })
 
   return (
@@ -65,11 +65,11 @@ export const List: React.FC<ListProps> & {
   ...restProps
 }) => {
   const listClasses = classNames({
-    list: true,
-    [`spacing-y-${spacing[0]}`]: !!spacing[0],
-    [`spacing-x-${spacing[1]}`]: !!spacing[1],
-    'has-border': !!hasBorder,
-    [className]: !!className,
+    [styles.list]: true,
+    [styles[`spacing-y-${spacing[0]}`]]: !!spacing[0],
+    [styles[`spacing-x-${spacing[1]}`]]: !!spacing[1],
+    [styles['has-border']]: !!hasBorder,
+    [styles[className]]: !!className,
   })
 
   if (responsiveWrapper) {

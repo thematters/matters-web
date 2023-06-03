@@ -29,7 +29,6 @@ import { SUBSCRIBE_CIRCLE } from './gql'
 import Head from './Head'
 import Hint from './Hint'
 import Processing from './Processing'
-import styles from './styles.module.css'
 
 interface CardPaymentProps {
   circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
