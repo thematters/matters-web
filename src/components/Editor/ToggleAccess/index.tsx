@@ -90,7 +90,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
                     !circle,
                     false,
                     circle && license === ArticleLicenseType.Arr
-                      ? ArticleLicenseType.CcByNcNd_2
+                      ? ArticleLicenseType.CcByNcNd_4
                       : license
                   )
                 }

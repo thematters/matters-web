@@ -11,6 +11,18 @@ interface Props {
 
 const LICENSE_TEXT = {
   1: {
+    [ArticleLicenseType.CcByNcNd_4]: {
+      title: {
+        zh_hant: '不上鎖，CC BY-NC-ND 4.0 聲明',
+        zh_hans: '不上锁，CC BY-NC-ND 4.0 声明',
+        en: 'Public, CC BY-NC-ND 4.0 License',
+      },
+      subtitle: {
+        zh_hant: '可分享，需姓名標示、非商業用途、禁止改作',
+        zh_hans: '可分享，需姓名标示、非商业用途、禁止改作',
+        en: 'Free to Share, Attribution, Non-Commercial, No Derivatives',
+      },
+    },
     [ArticleLicenseType.CcByNcNd_2]: {
       title: {
         zh_hant: '不上鎖，CC BY-NC-ND 2.0 聲明',
@@ -49,6 +61,18 @@ const LICENSE_TEXT = {
     },
   },
   0: {
+    [ArticleLicenseType.CcByNcNd_4]: {
+      title: {
+        zh_hant: 'CC BY-NC-ND 4.0 聲明',
+        zh_hans: 'CC BY-NC-ND 4.0 声明',
+        en: 'CC BY-NC-ND 4.0 License',
+      },
+      subtitle: {
+        zh_hant: '可分享，需姓名標示、非商業用途、禁止改作',
+        zh_hans: '可分享，需姓名标示、非商业用途、禁止改作',
+        en: 'Free to Share, Attribution, Non-Commercial, No Derivatives',
+      },
+    },
     [ArticleLicenseType.CcByNcNd_2]: {
       title: {
         zh_hant: 'CC BY-NC-ND 2.0 聲明',
@@ -88,7 +112,7 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
   const { lang } = useContext(LanguageContext)
 
   const options = [
-    ArticleLicenseType.CcByNcNd_2,
+    ArticleLicenseType.CcByNcNd_4,
     ArticleLicenseType.Cc_0,
     ArticleLicenseType.Arr,
   ]

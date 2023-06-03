@@ -17,7 +17,7 @@ const ConfirmContent: React.FC<ContentProps> = ({
   onBack,
 }) => {
   const [license, setLicense] = useState<ArticleLicenseType>(
-    ArticleLicenseType.CcByNcNd_2
+    ArticleLicenseType.CcByNcNd_4
   )
 
   return (
