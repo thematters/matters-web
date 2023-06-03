@@ -9,7 +9,7 @@ import { SearchOverviewPublicQuery } from '~/gql/graphql'
 
 import ClearHistoryButton from './ClearHistoryButton'
 import { SEARCH_AUTOCOMPLETE_PRIVATE, SEARCH_AUTOCOMPLETE_PUBLIC } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SearchOverviewProps {
   inPage?: boolean
@@ -97,8 +97,6 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
               </li>
             ))}
           </ul>
-
-          <style jsx>{styles}</style>
         </section>
       )}
 
@@ -123,8 +121,6 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
               </Menu.Item>
             </Fragment>
           ))}
-
-          <style jsx>{styles}</style>
         </section>
       )}
     </Menu>

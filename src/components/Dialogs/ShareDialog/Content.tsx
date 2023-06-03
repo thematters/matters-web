@@ -5,7 +5,7 @@ import { toLocale } from '~/common/utils'
 import { Dialog, ShareButtons, Translate } from '~/components'
 
 import Copy from './Copy'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface ShareDialogContentProps {
   closeDialog: () => void
@@ -69,11 +69,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
 
       <Dialog.Content>
         {description && (
-          <section className="description">
-            {description}
-
-            <style jsx>{styles}</style>
-          </section>
+          <section className="description">{description}</section>
         )}
 
         <section className={containerClasses}>
@@ -95,8 +91,6 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
             <ShareButtons.Weibo title={shareTitle} link={shareLink} />
             <ShareButtons.Email title={shareTitle} link={shareLink} />
           </section>
-
-          <style jsx>{styles}</style>
         </section>
       </Dialog.Content>
 

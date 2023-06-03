@@ -153,8 +153,6 @@ const Content = ({
         ref={contentContainer}
         data-test-id={TEST_ID.ARTICLE_CONTENT}
       />
-
-      <style jsx>{styles}</style>
     </>
   )
 }

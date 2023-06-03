@@ -12,7 +12,7 @@ import {
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type Props = {
   user: FollowingFeedRecommendUserPublicFragment &
@@ -64,8 +64,6 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
           )}
         </section>
       </section>
-
-      <style jsx>{styles}</style>
     </Card>
   )
 }

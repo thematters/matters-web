@@ -12,8 +12,7 @@ import {
 } from '~/components'
 
 import * as clap from './clap'
-import clapStyles from './styles.clap.css'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface AppreciateButtonProps {
   disabled?: boolean
@@ -87,11 +86,6 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
           </span>
         </TextIcon>
       </Button>
-
-      <style jsx>{styles}</style>
-      <style jsx global>
-        {clapStyles}
-      </style>
     </span>
   )
 }

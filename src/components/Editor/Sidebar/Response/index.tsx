@@ -3,7 +3,7 @@ import { IconComment16 } from '~/components'
 import { SetResponseProps } from '../..'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
 import Box from '../Box'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type SidebarManagementProps = ToggleResponseProps & SetResponseProps
 
@@ -16,7 +16,6 @@ const SidebarArticleResponse: React.FC<SidebarManagementProps> = (props) => {
     >
       <section className="container">
         <ToggleResponse inSidebar {...props} />
-        <style jsx>{styles}</style>
       </section>
     </Box>
   )

@@ -28,7 +28,7 @@ import {
   DISCUSSION_PRIVATE,
   DISCUSSION_PUBLIC,
 } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Wall from './Wall'
 
 type Comment = NonNullable<
@@ -295,8 +295,6 @@ const CricleDiscussion = () => {
             ))}
           </List>
         </InfiniteScroll>
-
-        <style jsx>{styles}</style>
       </section>
     </>
   )

@@ -23,7 +23,7 @@ import {
 
 import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const AggregateArticleResults = () => {
   const { getQuery } = useRoute()
@@ -148,7 +148,6 @@ const AggregateArticleResults = () => {
       {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
         <EndOfResults />
       )}
-      <style jsx>{styles}</style>
     </section>
   )
 }

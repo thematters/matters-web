@@ -25,7 +25,7 @@ import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeDate from '../NoticeDate'
 import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeMultiActors from '../NoticeMultiActors'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 type NoticeDigestProps = {
   notice:
@@ -104,8 +104,6 @@ const NoticeDigest = ({
       <section className="footer">
         <NoticeDate notice={notice} />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

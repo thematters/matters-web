@@ -9,7 +9,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Tips = () => {
   const viewer = useContext(ViewerContext)
@@ -39,8 +39,6 @@ const Tips = () => {
           </a>
           <Translate zh_hant="" zh_hans="" en="." />
         </p>
-
-        <style jsx>{styles}</style>
       </section>
     )
   } else if (address && isZeroBalance) {
@@ -62,8 +60,6 @@ const Tips = () => {
           </a>
           <Translate zh_hant="" zh_hans="" en="." />
         </p>
-
-        <style jsx>{styles}</style>
       </section>
     )
   } else {
@@ -85,8 +81,6 @@ const Tips = () => {
           </a>
           <Translate zh_hant="" zh_hans="" en="." />
         </p>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }

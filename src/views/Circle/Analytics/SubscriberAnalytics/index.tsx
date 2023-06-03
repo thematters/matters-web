@@ -19,8 +19,7 @@ import { MembersDialog } from '~/views/Circle/Profile/MembersDialog'
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
 import { CIRCLE_SUBSCRIBER_ANALYTICS } from './gql'
-import styles from './styles.css'
-import globalStyles from './styles.global.css'
+import styles from './styles.module.css'
 
 enum DatumKey {
   invitee = 'invitee',
@@ -188,8 +187,6 @@ const Content = () => {
           </StackedAreaChart>
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }
@@ -227,11 +224,6 @@ const SubscriberAnalytics = () => {
       </SectionHead>
 
       <Content />
-
-      <style jsx>{styles}</style>
-      <style jsx global>
-        {globalStyles}
-      </style>
     </section>
   )
 }

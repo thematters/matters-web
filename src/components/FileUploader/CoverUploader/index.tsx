@@ -23,7 +23,7 @@ import {
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { SingleFileUploadMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * This shared component is for uploading cover.
@@ -155,8 +155,6 @@ export const CoverUploader = ({
           </Button>
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </div>
   )
 
@@ -186,8 +184,6 @@ export const CoverUploader = ({
           onChange={handleChange}
         />
       </VisuallyHidden>
-
-      <style jsx>{styles}</style>
     </label>
   )
 }

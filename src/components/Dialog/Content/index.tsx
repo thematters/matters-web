@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type SpacingX = 0 | 'tight' | 'base' | 'xloose'
 type SpacingY = 0 | 'tight' | 'base' | 'xloose'
@@ -27,13 +27,7 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> = ({
     [`spacing-x-${spacing[1]}`]: true,
   })
 
-  return (
-    <section className={contentClasses}>
-      {children}
-
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <section className={contentClasses}>{children}</section>
 }
 
 export default DialogContent

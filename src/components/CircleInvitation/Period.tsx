@@ -5,7 +5,7 @@ import parseISO from 'date-fns/parseISO'
 import { Translate } from '~/components'
 import { CircleInvitationFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type PeriodProps = Pick<
   CircleInvitationFragment,
@@ -38,7 +38,6 @@ const Period = ({ freePeriod, acceptedAt, state }: PeriodProps) => {
     return (
       <span className={classes}>
         {freePeriod} <Translate id="days" />
-        <style jsx>{styles}</style>
       </span>
     )
   }
@@ -52,7 +51,6 @@ const Period = ({ freePeriod, acceptedAt, state }: PeriodProps) => {
       <span className={classes}>
         <Translate zh_hant="剩餘" zh_hans="剩余" en="Trial ends in" />{' '}
         {remainDays} <Translate id="days" />
-        <style jsx>{styles}</style>
       </span>
     )
   }

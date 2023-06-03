@@ -2,7 +2,7 @@ import { Layout } from '~/components'
 
 import Profile from '../Profile'
 import Broadcast from './Broadcast'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const CircleBroadcast = () => (
   <Layout.Main>
@@ -10,7 +10,6 @@ const CircleBroadcast = () => (
 
     <section className="container">
       <Broadcast />
-      <style jsx>{styles}</style>
     </section>
   </Layout.Main>
 )

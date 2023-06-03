@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import Divider from './Divider'
 import Header from './Header'
 import Item from './Item'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface MenuProps {
   width?: 'sm' | 'md'
@@ -24,7 +24,6 @@ export const Menu: React.FC<React.PropsWithChildren<MenuProps>> & {
   return (
     <ul className={menuClasses} role="menu">
       {children}
-      <style jsx>{styles}</style>
     </ul>
   )
 }

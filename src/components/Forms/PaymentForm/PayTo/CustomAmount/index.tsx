@@ -10,7 +10,7 @@ import {
   Translate,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CustomAmountProps = {
   balance: number
@@ -60,8 +60,6 @@ export const CustomAmount: React.FC<CustomAmountProps> = ({
           </TextIcon>
         </span>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -17,7 +17,7 @@ import { LastFetchRandomQuery, SidebarAuthorsQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import { SIDEBAR_AUTHORS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)
@@ -102,8 +102,6 @@ const Authors = () => {
           ))}
         </List>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

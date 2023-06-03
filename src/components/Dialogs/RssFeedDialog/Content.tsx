@@ -208,8 +208,6 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
             </ul>
           </section>
         </SectionCard>
-
-        <style jsx>{styles}</style>
       </section>
     </Dialog.Content>
   )

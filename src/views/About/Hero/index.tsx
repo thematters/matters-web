@@ -23,7 +23,7 @@ import {
   withIcon,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Hero = () => {
   const { lang } = useContext(LanguageContext)
@@ -315,7 +315,6 @@ const Hero = () => {
         </section>
       </section>
 
-      <style jsx>{styles}</style>
       <style jsx>{`
         .hero {
           background-image: url(${IMAGE_WAVE_1}),

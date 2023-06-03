@@ -20,7 +20,7 @@ import {
 } from '~/components'
 import { SetPaymentPasswordMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   submitCallback: () => void
@@ -187,8 +187,6 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
         <p className="hint">
           <Translate id="hintPaymentPassword" />
         </p>
-
-        <style jsx>{styles}</style>
       </section>
 
       {InnerForm}

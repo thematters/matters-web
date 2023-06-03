@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { useId } from 'react'
 
 import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * Pure UI component for <input> element
@@ -74,8 +74,6 @@ const Input: React.FC<InputProps> = ({
       </Field.Content>
 
       <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
-
-      <style jsx>{styles}</style>
     </Field>
   )
 }

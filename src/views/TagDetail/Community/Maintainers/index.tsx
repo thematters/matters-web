@@ -13,7 +13,7 @@ import {
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 import { TagMaintainersQuery } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface Props {
   id: string
@@ -113,7 +113,6 @@ const Maintainers = ({ id, isOwner }: Props) => {
           </ul>
         </>
       )}
-      <style jsx>{styles}</style>
     </>
   )
 }

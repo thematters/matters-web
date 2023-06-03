@@ -24,7 +24,7 @@ import {
 
 import Footer from './Footer'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type Props = {
   circle: FollowingFeedRecommendCirclePublicFragment &
@@ -97,8 +97,6 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
         </section>
 
         <SubscribeCircleDialog circle={circle} />
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

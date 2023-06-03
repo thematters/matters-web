@@ -6,7 +6,7 @@ import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 import { UserDigestConciseUserFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * UserDigest.Concise is a component for presenting user's:
@@ -75,8 +75,6 @@ const Concise = ({
             <Translate id="accountArchived" />
           </span>
         </span>
-
-        <style jsx>{styles}</style>
       </span>
     )
   }
@@ -90,8 +88,6 @@ const Concise = ({
           <span className="displayname">{user.displayName}</span>
           {user.userName && <span className="username">@{user.userName}</span>}
         </span>
-
-        <style jsx>{styles}</style>
       </section>
     </LinkWrapper>
   )

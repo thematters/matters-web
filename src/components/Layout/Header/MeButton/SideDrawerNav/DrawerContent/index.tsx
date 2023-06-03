@@ -7,7 +7,7 @@ import { Button, LanguageContext, Menu, useOutsideClick } from '~/components'
 
 import NavMenu from '../../../../NavMenu'
 import MeDigest from './MeDigest'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface DrawerContentProps {
   style: React.CSSProperties
@@ -61,7 +61,6 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
         <Menu.Divider spacing="loose" />
         <NavMenu.Bottom isInSideDrawerNav />
       </footer>
-      <style jsx>{styles}</style>
     </nav>
   )
 }

@@ -24,7 +24,7 @@ import {
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { SingleFileUploadMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type AvatarUploaderProps = {
   onUpload: (assetId: string) => void
@@ -148,8 +148,6 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
           onChange={handleChange}
         />
       </VisuallyHidden>
-
-      <style jsx>{styles}</style>
     </label>
   )
 }

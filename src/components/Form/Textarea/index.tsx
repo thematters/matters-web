@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { useEffect, useId, useRef } from 'react'
 
 import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * Pure UI component for <textarea> element
@@ -73,8 +73,6 @@ const Textarea: React.FC<TextareaProps> = ({
       </Field.Content>
 
       <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
-
-      <style jsx>{styles}</style>
     </Field>
   )
 }

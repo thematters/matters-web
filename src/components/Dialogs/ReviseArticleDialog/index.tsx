@@ -1,6 +1,6 @@
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -72,7 +72,6 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>
-      <style jsx>{styles}</style>
     </>
   )
 }

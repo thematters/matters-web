@@ -3,7 +3,7 @@ import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import TranslationButton from './TranslationButton'
 
 type MetaInfoProps = {
@@ -52,8 +52,6 @@ const MetaInfo = ({
       )}
 
       {article.access.type === 'paywall' && <IconPaywall16 color="grey" />}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

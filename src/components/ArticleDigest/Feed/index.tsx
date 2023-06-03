@@ -19,7 +19,7 @@ import { ArticleDigestTitle } from '../Title'
 import FollowButton from './FollowButton'
 import FooterActions, { FooterActionsProps } from './FooterActions'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ArticleDigestFeedControls = {
   onClick?: () => any
@@ -125,7 +125,6 @@ const BaseArticleDigestFeed = ({
       {!isConciseFooter && (
         <FooterActions article={article} inCard date={date} {...controls} />
       )}
-      <style jsx>{styles}</style>
     </Card>
   )
 }

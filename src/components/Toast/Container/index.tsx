@@ -4,7 +4,7 @@ import { ADD_TOAST, REMOVE_TOAST } from '~/common/enums'
 import { Layout, useEventListener } from '~/components'
 
 import { ToastWithEffect } from '../Instance'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * ToastContainer is a place for managing Toast components. Use event system to
@@ -69,8 +69,6 @@ const Container = () => {
           ))}
         </Layout.FixedMain>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

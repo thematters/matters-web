@@ -1,6 +1,6 @@
 import { useRoute } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * <Layout.FixedMain> is a container component that has the fixed position and
@@ -23,8 +23,6 @@ const FixedMain: React.FC<FixedMainProps> = ({ children }) => {
             <div className="content">{children}</div>
           </div>
         </div>
-
-        <style jsx>{styles}</style>
       </div>
     )
   }
@@ -36,8 +34,6 @@ const FixedMain: React.FC<FixedMainProps> = ({ children }) => {
           <div className="l-col-three-mid content">{children}</div>
         </div>
       </div>
-
-      <style jsx>{styles}</style>
     </div>
   )
 }

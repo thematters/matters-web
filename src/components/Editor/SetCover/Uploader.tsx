@@ -22,7 +22,7 @@ import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import updateDraftAssets from '~/components/GQL/updates/draftAssets'
 import { AssetFragment, SingleFileUploadMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface UploadEntity {
   entityId: string
@@ -169,8 +169,6 @@ const Uploader: React.FC<UploaderProps> = ({
           onChange={handleChange}
         />
       </VisuallyHidden>
-
-      <style jsx>{styles}</style>
     </label>
   )
 }

@@ -11,7 +11,7 @@ import {
 import { ArticleDigestTitle } from '../Title'
 import FooterActions, { FooterActionsProps } from './FooterActions'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ArticleDigestConciseControls = {
   onClick?: () => any
@@ -100,8 +100,6 @@ const BaseArticleDigestFeed = ({
         circle={footerCircle}
         {...controls}
       />
-
-      <style jsx>{styles}</style>
     </Card>
   )
 }

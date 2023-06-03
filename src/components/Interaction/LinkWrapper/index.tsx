@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { TEST_ID } from '~/common/enums'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface LinkWrapperProps {
   href: string
@@ -51,8 +51,6 @@ export const LinkWrapper: React.FC<
         {...(testId ? { ['data-test-id']: testId } : {})}
       >
         {children}
-
-        <style jsx>{styles}</style>
       </a>
     </Link>
   )

@@ -1,7 +1,7 @@
 import { ReactComponent as IconOnboardChecked } from '@/public/static/icons/40px/done.svg'
 import { Card, CardProps, IconArrowRight16, withIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type TaskItemProps = {
   order: React.ReactNode
@@ -47,8 +47,6 @@ const TaskItem: React.FC<TaskItemProps> = ({
           </section>
         </section>
       </Card>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

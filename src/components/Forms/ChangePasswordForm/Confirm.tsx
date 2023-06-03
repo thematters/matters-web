@@ -24,7 +24,7 @@ import {
   ResetPasswordMutation,
 } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface FormProps {
   email: string
@@ -156,7 +156,6 @@ const Confirm: React.FC<FormProps> = ({
           onChange={handleChange}
         />
       </Form>
-      <style jsx>{styles}</style>
     </section>
   )
 

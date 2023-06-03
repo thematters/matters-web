@@ -31,7 +31,7 @@ import {
 
 import PaymentInfo from '../PaymentInfo'
 import PayToFallback from './PayToFallback'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   amount: number
@@ -170,7 +170,6 @@ const OthersProcessingForm: React.FC<Props> = ({
                 </p>
               )}
               <Spinner />
-              <style jsx>{styles}</style>
             </section>
           </Dialog.Content>
         </>
@@ -319,7 +318,6 @@ const USDTProcessingForm: React.FC<Props> = ({
             </p>
           </section>
           <Spinner />
-          <style jsx>{styles}</style>
         </section>
       </Dialog.Content>
     </>

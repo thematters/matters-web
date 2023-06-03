@@ -1,6 +1,6 @@
 import { Button, IconArrowDown16, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const ExpandButton = ({
   onClick,
@@ -27,8 +27,6 @@ const ExpandButton = ({
         en={`load the rest ${restCount} replies`}
       />
     </TextIcon>
-
-    <style jsx>{styles}</style>
   </Button>
 )
 export default ExpandButton

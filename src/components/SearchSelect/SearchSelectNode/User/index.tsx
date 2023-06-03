@@ -4,7 +4,7 @@ import { TEST_ID } from '~/common/enums'
 import { Card, IconChecked, IconUnChecked, UserDigest } from '~/components'
 import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface SearchSelectUserProps {
   user: UserDigestMiniUserFragment
@@ -48,8 +48,6 @@ const SearchSelectUser: React.FC<SearchSelectUserProps> = ({
             <IconUnChecked color="grey-light" size="md-s" />
           )}
         </span>
-
-        <style jsx> {styles}</style>
       </section>
     </Card>
   )

@@ -13,7 +13,7 @@ import {
 } from '~/components'
 
 import OnboardingTasksDialog from '../Dialog'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const NavBar = () => {
   const viewer = useContext(ViewerContext)
@@ -64,8 +64,6 @@ const NavBar = () => {
 
       <RecommendAuthorDialog />
       <RecommendTagDialog />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

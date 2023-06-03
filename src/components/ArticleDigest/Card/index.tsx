@@ -13,7 +13,7 @@ import { ArticleDigestCardArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface ArticleDigestCardProps {
   article: ArticleDigestCardArticleFragment
@@ -83,8 +83,6 @@ export const ArticleDigestCard = ({
             onClick={onClickAuthor}
           />
         </footer>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

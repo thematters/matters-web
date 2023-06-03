@@ -1,7 +1,7 @@
 import { featureSupportedChains } from '~/common/utils'
 import { Dialog, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CompleteProps = {
   txHash: string
@@ -53,8 +53,6 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
           />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

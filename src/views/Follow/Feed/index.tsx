@@ -19,7 +19,7 @@ import { FOLLOWING_FEED } from './gql'
 import RecommendArticleActivity from './RecommendArticleActivity'
 import RecommendCircleActivity from './RecommendCircleActivity'
 import RecommendUserActivity from './RecommendUserActivity'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
 import UserCreateCircleActivity from './UserCreateCircleActivity'
@@ -118,8 +118,6 @@ const FollowingFeed = () => {
           ))}
         </List>
       </InfiniteScroll>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

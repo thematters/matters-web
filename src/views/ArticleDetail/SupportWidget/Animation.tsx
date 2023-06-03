@@ -8,7 +8,7 @@ import shipWaitingData from '@/public/static/json/ship-waiting.json'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { Translate, useStep } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type Step = 'coinShip' | 'shipWaiting' | 'shipSprinkleHeart' | 'openHeart'
 
@@ -135,7 +135,6 @@ const Animation: React.FC<Props> = ({
           {...LottieProps}
         />
       )}
-      <style jsx>{styles}</style>
     </section>
   )
 }

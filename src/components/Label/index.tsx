@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type LabelSize = 'sm' | 'default'
 
@@ -26,11 +26,5 @@ export const Label: React.FC<React.PropsWithChildren<LabelProps>> = ({
     [size]: true,
   })
 
-  return (
-    <span className={labelClasses}>
-      {children}
-
-      <style jsx>{styles}</style>
-    </span>
-  )
+  return <span className={labelClasses}>{children}</span>
 }

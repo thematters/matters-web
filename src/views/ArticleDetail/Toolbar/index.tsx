@@ -20,7 +20,7 @@ import {
 import AppreciationButton from '../AppreciationButton'
 import CommentBar from './CommentBar'
 import DonationButton from './DonationButton'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ToolbarProps = {
   article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
@@ -138,8 +138,6 @@ const Toolbar = ({
           <DropdownActions article={article} {...dropdonwActionsProps} />
         </Media>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

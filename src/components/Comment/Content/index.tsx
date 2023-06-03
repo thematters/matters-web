@@ -2,7 +2,6 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
-import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
 import { CommentFormType, Expandable, Translate } from '~/components'
 import {
@@ -11,7 +10,7 @@ import {
 } from '~/gql/graphql'
 
 import Collapsed from './Collapsed'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface ContentProps {
   comment: ContentCommentPublicFragment & Partial<ContentCommentPrivateFragment>
@@ -99,9 +98,6 @@ const Content = ({
             data-test-id={TEST_ID.COMMENT_CONETNT}
           />
         </Expandable>
-
-        <style jsx>{styles}</style>
-        <style jsx>{contentCommentStyles}</style>
       </>
     )
   }
@@ -116,8 +112,6 @@ const Content = ({
           zh_hant={`此${COMMENT_TYPE_TEXT.zh_hant[type]}因違反用戶協定而被隱藏`}
           zh_hans={`此${COMMENT_TYPE_TEXT.zh_hans[type]}因违反用户协定而被隐藏`}
         />
-
-        <style jsx>{styles}</style>
       </p>
     )
   }
@@ -129,8 +123,6 @@ const Content = ({
           zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}被原作者刪除`}
           zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}被原作者删除`}
         />
-
-        <style jsx>{styles}</style>
       </p>
     )
   }

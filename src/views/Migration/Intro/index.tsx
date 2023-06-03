@@ -7,7 +7,7 @@ import IMAGE_MIGRATION_XL from '@/public/static/images/migration-intro-xl.svg'
 import IMAGE_MIGRATION_XS from '@/public/static/images/migration-intro-xs.svg'
 import { Button, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Intro = () => {
   return (
@@ -54,24 +54,31 @@ const Intro = () => {
         </div>
       </div>
 
-      <style jsx>{styles}</style>
       <style jsx>{`
         .intro {
           background-image: url(${IMAGE_MIGRATION_XS});
+        }
 
-          @media (--sm-up) {
+        @media (--sm-up) {
+          .intro {
             background-image: url(${IMAGE_MIGRATION_SM});
           }
+        }
 
-          @media (--md-up) {
+        @media (--md-up) {
+          .intro {
             background-image: url(${IMAGE_MIGRATION_MD});
           }
+        }
 
-          @media (--lg-up) {
+        @media (--lg-up) {
+          .intro {
             background-image: url(${IMAGE_MIGRATION_LG});
           }
+        }
 
-          @media (--xl-up) {
+        @media (--xl-up) {
+          .intro {
             background-image: url(${IMAGE_MIGRATION_XL});
           }
         }

@@ -15,7 +15,7 @@ import {
   ViewerNotificationCircleSettingsQuery,
 } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import MyBroadcastSettings from './MyBroadcast'
 import MyDiscussionSettings from './MyDiscussion'
 import MyManageSettings from './MyManage'
@@ -176,7 +176,6 @@ const BaseNotificationSettings = ({
         settings={settings}
         spacingX={spacingX}
       />
-      <style jsx>{styles}</style>
     </ResponsiveWrapper>
   )
 }

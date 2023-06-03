@@ -8,7 +8,7 @@ import { TEST_ID } from '~/common/enums'
 import { TextIcon, Translate, withIcon } from '~/components'
 import { ArticleLicenseType } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type LicenseProps = {
   license: ArticleLicenseType
@@ -83,8 +83,6 @@ const License: React.FC<LicenseProps> = ({ license }) => {
           />
         </TextIcon>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

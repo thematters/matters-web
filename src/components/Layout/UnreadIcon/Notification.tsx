@@ -10,7 +10,7 @@ import {
 import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
 import { UnreadNoticeCountQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface UnreadIconProps {
   active?: boolean
@@ -44,8 +44,6 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
       ) : (
         <IconNavNotification32 size="lg" />
       )}
-
-      <style jsx>{styles}</style>
     </span>
   )
 }

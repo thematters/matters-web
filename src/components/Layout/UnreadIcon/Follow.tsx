@@ -10,7 +10,7 @@ import {
 import UNREAD_FOLLOWING from '~/components/GQL/queries/unreadFollowing'
 import { UnreadFollowingQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FollowUnreadIconProps {
   active?: boolean
@@ -44,8 +44,6 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
       ) : (
         <IconNavFollowing32 size="lg" />
       )}
-
-      <style jsx>{styles}</style>
     </span>
   )
 }

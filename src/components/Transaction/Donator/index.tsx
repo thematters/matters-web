@@ -1,7 +1,7 @@
 import { UserDigest } from '~/components'
 import { DigestTransactionFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /***
  * This is a sub component of Transaction which displays
@@ -35,7 +35,6 @@ const Donator = ({ user }: DonatorProps) => {
         hasAvatar
         avatarSize="md"
       />
-      <style jsx>{styles}</style>
     </section>
   )
 }

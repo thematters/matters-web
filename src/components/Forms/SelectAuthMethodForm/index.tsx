@@ -13,7 +13,7 @@ import {
 } from '~/components'
 
 import SourceHeader from './SourceHeader'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -86,7 +86,6 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
           />
         </Form.List>
       </section>
-      <style jsx>{styles}</style>
     </>
   )
 
@@ -99,7 +98,6 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
         <footer>
           <LanguageSwitch />
-          <style jsx>{styles}</style>
         </footer>
       </>
     )
@@ -115,7 +113,6 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
         <SourceHeader source={source} />
 
         {InnerForm}
-        <style jsx>{styles}</style>
       </Dialog.Content>
     </>
   )

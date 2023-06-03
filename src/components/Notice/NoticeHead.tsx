@@ -1,4 +1,4 @@
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type NoticeHeadProps = {
   subtitle?: React.ReactNode
@@ -12,7 +12,6 @@ const NoticeHead: React.FC<React.PropsWithChildren<NoticeHeadProps>> = ({
     <section className="head-wrap">
       <h4>{children}</h4>
       {subtitle && <p>{subtitle}</p>}
-      <style jsx>{styles}</style>
     </section>
   )
 }

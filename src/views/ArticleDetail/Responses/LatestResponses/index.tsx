@@ -32,7 +32,7 @@ import {
 } from '~/gql/graphql'
 
 import ResponseArticle from '../ResponseArticle'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
 
 const RESPONSES_COUNT = 15
@@ -299,8 +299,6 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
       {pageInfo?.hasNextPage && (
         <ViewMoreButton onClick={() => loadMore()} loading={loading} />
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

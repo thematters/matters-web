@@ -6,7 +6,7 @@ import { toPath } from '~/common/utils'
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { NoticeArticleTitleFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const NoticeArticleTitle = ({
   article,
@@ -32,7 +32,6 @@ const NoticeArticleTitle = ({
           data-test-id={TEST_ID.NOTICE_ARTICLE_TITLE}
         >
           {article.title}
-          <style jsx>{styles}</style>
         </a>
       </Link>
     )

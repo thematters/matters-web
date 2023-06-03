@@ -11,7 +11,7 @@ import Banner from './Banner'
 import Features from './Features'
 import Intro from './Intro'
 import Steps from './Steps'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Migration = () => {
   const { lang } = useContext(LanguageContext)
@@ -53,8 +53,6 @@ const Migration = () => {
       <Features />
       <Banner />
       <Footer />
-
-      <style jsx>{styles}</style>
     </main>
   )
 }

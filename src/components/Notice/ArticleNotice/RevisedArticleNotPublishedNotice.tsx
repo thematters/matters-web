@@ -8,7 +8,7 @@ import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const RevisedArticleNotPublishedNotice = ({
   notice,
@@ -36,8 +36,6 @@ const RevisedArticleNotPublishedNotice = ({
 
         <NoticeDate notice={notice} />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

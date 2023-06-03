@@ -5,7 +5,7 @@ import { analytics } from '~/common/utils'
 import { Tag, TagExposureTracker } from '~/components'
 import { TagListArticleFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const fragments = {
   article: gql`
@@ -44,8 +44,6 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
           </li>
         ))}
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

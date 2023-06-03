@@ -9,7 +9,7 @@ import { DigestMiniCircleFragment } from '~/gql/graphql'
 
 import Counts from '../Counts'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CircleDigestMiniProps = {
   circle: DigestMiniCircleFragment
@@ -51,8 +51,6 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
 
           {description && <p className="description">{description}</p>}
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

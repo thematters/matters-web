@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { Button, ButtonProps, TextIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type TabProps = {
   selected?: boolean
@@ -33,8 +33,6 @@ const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
           {children}
         </TextIcon>
       </Button>
-
-      <style jsx>{styles}</style>
     </li>
   )
 }
@@ -56,7 +54,6 @@ export const Tabs: React.FC<React.PropsWithChildren<TabsProps>> & {
     <nav className={navClasses}>
       <ul role="tablist">{children}</ul>
       {side}
-      <style jsx>{styles}</style>
     </nav>
   )
 }

@@ -7,7 +7,7 @@ import { Form, Translate, ViewerContext } from '~/components'
 import { ViewerTotalBlockCountQuery } from '~/gql/graphql'
 
 import ChangeUserNameAsk from './ChangeUserNameAsk'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const VIEWER_TOTAL_BLOCK_COUNT = gql`
   query ViewerTotalBlockCount {
@@ -37,14 +37,12 @@ const AccountSettings = () => {
       <span className="email-title">
         <Translate id="email" />
       </span>
-      <style jsx>{styles}</style>
     </>
   )
 
   const EmailTextWrapper = () => (
     <>
       <span className="email-text">{viewer.info.email}</span>
-      <style jsx>{styles}</style>
     </>
   )
 

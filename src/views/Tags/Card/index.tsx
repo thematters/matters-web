@@ -7,7 +7,7 @@ import { toPath } from '~/common/utils'
 import { ResponsiveImage } from '~/components'
 import { CardTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface CardProps {
   tag: CardTagFragment
@@ -28,8 +28,6 @@ const Card = ({ tag }: CardProps) => {
             <h4>{tag.content}</h4>
           </div>
         </section>
-
-        <style jsx>{styles}</style>
       </a>
     </Link>
   )

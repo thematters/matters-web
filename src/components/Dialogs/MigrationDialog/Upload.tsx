@@ -19,7 +19,7 @@ import {
 import MIGRATION from '~/components/GQL/mutations/migration'
 import { MigrationMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const texts: {
   zh_hant: Record<string, string>
@@ -170,7 +170,6 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </label>
-      <style jsx>{styles}</style>
     </>
   )
 }

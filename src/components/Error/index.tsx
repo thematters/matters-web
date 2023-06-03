@@ -3,7 +3,7 @@ import { Alert } from '@reach/alert'
 import IMAGE_ILLUSTRATION_EMPTY from '@/public/static/images/illustration-empty.svg'
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -74,8 +74,6 @@ export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
           }}
         />
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

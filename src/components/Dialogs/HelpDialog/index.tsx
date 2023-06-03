@@ -8,7 +8,7 @@ import {
   useDialogSwitch,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type HelpDetailProps = {
   hasCount?: boolean
@@ -35,7 +35,6 @@ const ReadTime = () => (
         description="src/components/Dialogs/HelpDialog/index.tsx"
       />
     </p>
-    <style jsx>{styles}</style>
   </>
 )
 
@@ -52,7 +51,6 @@ const ReadCount = () => (
         description="src/components/Dialogs/HelpDialog/index.tsx"
       />
     </p>
-    <style jsx>{styles}</style>
   </>
 )
 

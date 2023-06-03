@@ -20,7 +20,7 @@ import {
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type SubscriptionBannerProps = {
   circle: SubscriptionBannerCirclePublicFragment &
@@ -75,8 +75,6 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
             <Translate zh_hant="訂閱圍爐" zh_hans="订阅围炉" en="Subscribe" />
           )}
         </TextIcon>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

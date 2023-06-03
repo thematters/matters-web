@@ -1,6 +1,6 @@
 import { formatAmount } from '~/common/utils'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface CurrencyAmountProps {
   currency: string
@@ -14,7 +14,5 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
   <section>
     <span className="currency">{currency}</span>
     <span className="amount">{formatAmount(amount)}</span>
-
-    <style jsx>{styles}</style>
   </section>
 )

@@ -9,7 +9,7 @@ import {
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface CircleWallProps {
   circle: CircleWallCirclePublicFragment &
@@ -39,7 +39,6 @@ const CircleWall = ({ circle }: CircleWallProps) => {
         }}
       />
 
-      <style jsx>{styles}</style>
       <style jsx>{`
         .container {
           background-image: url(${IMAGE_WALL_BACKGROUND_SM.src});

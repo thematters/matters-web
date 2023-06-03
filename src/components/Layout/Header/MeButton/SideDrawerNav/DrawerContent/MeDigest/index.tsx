@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { toPath } from '~/common/utils'
 import { Avatar, ViewerContext } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const MeDigest = () => {
   const viewer = useContext(ViewerContext)
@@ -26,8 +26,6 @@ const MeDigest = () => {
           </section>
         </a>
       </Link>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

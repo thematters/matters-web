@@ -16,7 +16,7 @@ import {
   FeaturedCommentsPublicQuery,
 } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import { FEATURED_COMMENTS_PRIVATE, FEATURED_COMMENTS_PUBLIC } from './gql'
 
 type CommentPublic = NonNullable<
@@ -124,8 +124,6 @@ const FeaturedComments = ({ id, lock }: { id: string; lock: boolean }) => {
       {pageInfo.hasNextPage && (
         <ViewMoreButton onClick={loadMore} loading={loading} />
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

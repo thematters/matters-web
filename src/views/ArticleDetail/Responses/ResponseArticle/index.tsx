@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { ArticleDigestSidebar, Translate, UserDigest } from '~/components'
 import { ResponseArticleArticleFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ResponseArticleProps = {
   article: ResponseArticleArticleFragment
@@ -50,8 +50,6 @@ const ResponseArticle = ({ article }: ResponseArticleProps) => {
       <section className="article-digest">
         <ArticleDigestSidebar article={article} hasBackground />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

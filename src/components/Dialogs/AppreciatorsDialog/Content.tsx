@@ -12,7 +12,7 @@ import {
 import { UserDigest } from '~/components/UserDigest'
 import { ArticleAppreciatorsQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface AppreciatorsDialogContentProps {
   id: string
@@ -136,7 +136,6 @@ const AppreciatorsDialogContent = ({
                     })
                   }}
                 />
-                <style jsx>{styles}</style>
               </div>
             ) : null
           )}

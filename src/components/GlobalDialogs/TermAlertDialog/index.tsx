@@ -19,7 +19,7 @@ import {
   UserLogoutMutation,
 } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface TermContentProps {
   closeDialog: () => void
@@ -111,8 +111,6 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
           <Translate id="disagree" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </form>
   )
 }

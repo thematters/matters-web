@@ -1,7 +1,7 @@
 import { Avatar, IconCircle24, IconSupport, IconWallet24 } from '~/components'
 import { DigestTransactionFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * This a sub component of Transaction that depicts a donation
@@ -38,7 +38,6 @@ const Action = ({
     return (
       <section className="circle">
         <IconCircle24 size="md" color="green" />
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -47,7 +46,6 @@ const Action = ({
     return (
       <section className="wallet">
         <IconWallet24 size="md" color="green" />
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -72,8 +70,6 @@ const Action = ({
           </div>
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }

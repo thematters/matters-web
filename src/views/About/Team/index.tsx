@@ -15,7 +15,7 @@ import IMAGE_YX from '@/public/static/images/about/team-yx.svg'
 import IMAGE_ZECK from '@/public/static/images/about/team-zeck.svg'
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const CREW = [
   {
@@ -184,8 +184,6 @@ const Team = () => {
           ))}
         </div>
       </div>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

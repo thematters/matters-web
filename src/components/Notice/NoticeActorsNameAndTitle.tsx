@@ -5,7 +5,7 @@ import { numAbbr } from '~/common/utils'
 import { Translate } from '~/components'
 
 import NoticeActorName from './NoticeActorName'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type NoticeActorsNameAndTitleProps = {
   actors: any[]
@@ -69,7 +69,6 @@ const NoticeActorsNameAndTitle = ({
           &nbsp;{secondAction}
         </span>
       )}
-      <style jsx>{styles}</style>
     </>
   )
 }

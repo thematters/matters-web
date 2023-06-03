@@ -12,7 +12,7 @@ import {
 } from '~/components'
 import { TagParticipantsQuery } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import TAG_PARTICIPANTS from './gql'
 
 interface Props {
@@ -103,8 +103,6 @@ const Participants = ({ id }: Props) => {
           ))}
         </List>
       </InfiniteScroll>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

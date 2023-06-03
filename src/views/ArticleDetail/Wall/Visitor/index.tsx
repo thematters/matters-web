@@ -13,7 +13,7 @@ import {
   Translate,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const bgStyle = { backgroundImage: `url(${IMG_AD})` }
 
@@ -76,8 +76,6 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
           </div>
         </section>
       </Layout.FixedMain>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

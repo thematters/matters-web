@@ -4,8 +4,7 @@ import React, { useContext, useId } from 'react'
 
 import { Form, LanguageContext, Translate } from '~/components'
 
-import styles from './styles.css'
-import globalStyles from './styles.global.css'
+import styles from './styles.module.css'
 
 interface StripeCheckoutProps {
   error?: string | React.ReactNode
@@ -77,11 +76,6 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
           error={error}
         />
       </Form.Field>
-
-      <style jsx global>
-        {globalStyles}
-      </style>
-      <style jsx>{styles}</style>
     </>
   )
 }

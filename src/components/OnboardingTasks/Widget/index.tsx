@@ -9,7 +9,7 @@ import {
 
 import Galaxy from '../Galaxy'
 import Tasks from '../Tasks'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const OnboardingTasksWidget = () => {
   const [task, setTask] = useState(1)
@@ -50,8 +50,6 @@ const OnboardingTasksWidget = () => {
 
       <RecommendAuthorDialog />
       <RecommendTagDialog />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

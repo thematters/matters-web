@@ -5,7 +5,7 @@ import { Dialog, Tabs, Translate, useDialogSwitch } from '~/components'
 import { useEventListener } from '~/components/Hook'
 
 import Feed, { FeedType } from './Feed'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -69,8 +69,6 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
           <Feed type={feed} />
         </Dialog.Content>
       </Dialog>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

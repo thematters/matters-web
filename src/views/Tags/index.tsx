@@ -9,7 +9,7 @@ import {
 
 import Feed, { FeedType } from './Feed'
 // import SidebarTags from './Sidebar'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const BaseTags = () => {
   const {
@@ -46,8 +46,6 @@ const BaseTags = () => {
       </Tabs> */}
 
       <Feed type={feed} />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

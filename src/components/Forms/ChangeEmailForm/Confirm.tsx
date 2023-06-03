@@ -25,7 +25,7 @@ import {
   ConfirmVerificationCodeMutation,
 } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface FormProps {
   oldData: { email: string; codeId: string }
@@ -156,7 +156,6 @@ const Confirm: React.FC<FormProps> = ({
           }
         />
       </Form>
-      <style jsx>{styles}</style>
     </section>
   )
 

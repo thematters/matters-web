@@ -6,7 +6,7 @@ import { toPath } from '~/common/utils'
 import { Avatar } from '~/components/Avatar'
 import { NoticeActorAvatarUserFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type size = 'md' | 'lg'
 
@@ -33,7 +33,6 @@ export const NoticeActorAvatar = ({
           <span>{user.displayName}</span>
         </VisuallyHidden>
         <Avatar user={user} size={size} />
-        <style jsx>{styles}</style>
       </a>
     </Link>
   )

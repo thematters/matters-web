@@ -8,7 +8,7 @@ import {
 
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type FollowingFeedCommentProps = {
   comment: FollowingFeedCommentPublicFragment &
@@ -37,8 +37,6 @@ const FollowingFeedComment: React.FC<FollowingFeedCommentProps> & {
           <DropdownActions actions={actions} />
         </section>
       </footer>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

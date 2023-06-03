@@ -20,7 +20,7 @@ import {
 
 import AggregateResults from './AggregateResults'
 // import EmptySearch from './EmptySearch'
-import styles from './styles.css'
+import styles from './styles.module.css'
 const Search = () => {
   const viewer = useContext(ViewerContext)
   const storageKey = STORAGE_KEY_SEARCH_HISTORY + '_' + viewer.id
@@ -85,7 +85,6 @@ const Search = () => {
         </Media>
       )}
       {isAggregate && <AggregateResults />}
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

@@ -5,7 +5,7 @@ import { useContext, useId } from 'react'
 import { translate } from '~/common/utils'
 import { IconClear16, IconSearch16, LanguageContext } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type SearchType = 'Article' | 'Tag' | 'User' | 'Invitee'
 
@@ -120,7 +120,6 @@ const SearchInput: React.FC<SearchInputProps> = ({
                 <IconClear16 color="grey" />
               </button>
             )}
-            <style jsx>{styles}</style>
           </form>
         )
       }}

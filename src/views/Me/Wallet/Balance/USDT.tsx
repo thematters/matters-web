@@ -13,7 +13,7 @@ import {
 } from '~/components'
 import { QuoteCurrency } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface USDTBalanceProps {
   currency: QuoteCurrency
@@ -47,8 +47,6 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
             <Translate zh_hant="前往設置" zh_hans="前往设置" en="Setup" />
           </TextIcon>
         </Button>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -69,8 +67,6 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
         subCurrency={currency}
         subValue={formatAmount(balanceUSDT * exchangeRate, 2)}
       />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

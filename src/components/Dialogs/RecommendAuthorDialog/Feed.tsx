@@ -15,7 +15,7 @@ import {
 import { RecommendAuthorsQuery } from '~/gql/graphql'
 
 import { RECOMMEND_AUTHORS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FeedType = 'trendy' | 'appreciated' | 'active'
 
@@ -85,8 +85,6 @@ const Feed = ({ type }: Props) => {
           ))}
         </List>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

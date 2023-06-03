@@ -15,7 +15,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const texts: {
   zh_hant: Record<string, string>
@@ -108,7 +108,6 @@ const Step = ({
         />
       </p>
       {children}
-      <style jsx>{styles}</style>
     </section>
   )
 }
@@ -221,8 +220,6 @@ const Steps = () => {
           </Step>
         </div>
       </div>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

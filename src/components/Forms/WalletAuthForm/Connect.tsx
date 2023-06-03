@@ -46,7 +46,7 @@ import {
 } from '~/gql/graphql'
 
 import { ETH_ADDRESS_USER, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -90,8 +90,6 @@ const ImportantNotice = ({ isInDialog }: { isInDialog: boolean }) => {
           description="src/components/Forms/WalletAuthForm/Connect.tsx"
         />
       </p>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }
@@ -440,7 +438,6 @@ const Connect: React.FC<FormProps> = ({
 
         {isSignUp && <ImportantNotice isInDialog={isInDialog} />}
       </Form>
-      <style jsx>{styles}</style>
     </section>
   )
 

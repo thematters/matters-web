@@ -1,9 +1,3 @@
-/* @styled-jsx=global */
-
-:root {
-  --side-toolbar-button-size: 2rem;
-}
-
 /****
  * Article Detail & Editor
  */
@@ -420,7 +414,7 @@
 
   @media (--md-up) {
     right: auto;
-    left: calc((var(--side-toolbar-button-size) + var(--spacing-x-loose)) * -1);
+    left: calc((2rem + var(--spacing-x-loose)) * -1);
   }
 }
 

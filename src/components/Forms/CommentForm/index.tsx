@@ -16,7 +16,7 @@ import PUT_COMMENT from '~/components/GQL/mutations/putComment'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 import { CommentDraftQuery, PutCommentMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
@@ -162,8 +162,6 @@ export const CommentForm: React.FC<CommentFormProps> = ({
           </TextIcon>
         </Button>
       </footer>
-
-      <style jsx>{styles}</style>
     </form>
   )
 }

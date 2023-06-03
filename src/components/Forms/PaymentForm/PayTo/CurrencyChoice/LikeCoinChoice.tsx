@@ -12,7 +12,7 @@ import {
 } from '~/components'
 import { QuoteCurrency, UserDonationRecipientFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type LikeCoinChoiceProps = {
   balance: number
@@ -64,8 +64,6 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
             />
           </TextIcon>
         </Button>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -82,8 +80,6 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
             en="The author has not opened"
           />
         </TextIcon>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -108,8 +104,6 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
         subValue={formatAmount(balance * exchangeRate, 2)}
         subCurrency={currency}
       />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -4,7 +4,7 @@ import { TEST_ID } from '~/common/enums'
 import { OfficialAnnouncementNoticeFragment } from '~/gql/graphql'
 
 import NoticeDate from './NoticeDate'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const OfficialAnnouncementNotice = ({
   notice,
@@ -30,8 +30,6 @@ const OfficialAnnouncementNotice = ({
       <section className="footer">
         <NoticeDate notice={notice} />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

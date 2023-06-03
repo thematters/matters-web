@@ -11,7 +11,7 @@ import {
 } from '~/components'
 import { RelatedArticlesFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface RelatedArticlesProps {
   article: RelatedArticlesFragment
@@ -90,7 +90,6 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
             </Slides.Item>
           ))}
         </Slides>
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -112,8 +111,6 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
           </li>
         ))}
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { Toast, Translate } from '~/components'
 import { StateArticleFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const fragments = {
   article: gql`
@@ -42,7 +42,6 @@ const State = ({ article }: { article: StateArticleFragment }) => {
       {isArchived && (
         <Toast.Instance color="grey" content={<ArchivedHeader />} />
       )}
-      <style jsx>{styles}</style>
     </section>
   )
 }

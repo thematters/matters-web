@@ -11,7 +11,7 @@ import {
 import FollowingRecommendArticle from '../FollowingRecommendArticle'
 import FollowingRecommendHead from '../FollowingRecommendHead'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   articles: RecommendArticleActivityFragment['recommendArticles'] | null
@@ -66,7 +66,6 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
         ))}
       </Slides>
       <Waypoint onEnter={() => setMountTracker(true)} />
-      <style jsx>{styles}</style>
     </section>
   )
 }

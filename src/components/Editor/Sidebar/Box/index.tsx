@@ -11,7 +11,7 @@ import {
   Translate,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface BoxProps {
   icon: React.ReactNode
@@ -66,8 +66,6 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
       )}
 
       {children}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

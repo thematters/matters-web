@@ -2,7 +2,7 @@ import { Tabs, Translate } from '~/components'
 
 export type FollowingFeedType = 'user' | 'circle' | 'tag'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FeedTypeProps {
   type: FollowingFeedType
@@ -29,7 +29,6 @@ const FeedType = ({ type, setFeedType }: FeedTypeProps) => {
           <Translate id="tags" />
         </Tabs.Tab>
       </Tabs>
-      <style jsx>{styles}</style>
     </section>
   )
 }

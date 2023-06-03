@@ -13,20 +13,6 @@ const nextConfig = {
   pageExtensions: ['tsx'],
 
   webpack(config, { defaultLoaders, isServer }) {
-    /**
-     * Styles in regular CSS files
-     * @see {@url https://github.com/zeit/styled-jsx#styles-in-regular-css-files}
-     */
-    config.module.rules.push({
-      test: /\.css$/,
-      use: [
-        defaultLoaders.babel,
-        {
-          loader: require('styled-jsx/webpack').loader,
-        },
-      ],
-    })
-
     config.module.rules.push({
       test: /\.svg$/,
       use: [

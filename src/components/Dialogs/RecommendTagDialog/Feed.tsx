@@ -16,7 +16,7 @@ import {
 import { HottestTagsQuery, SelectedTagsQuery } from '~/gql/graphql'
 
 import { HOTTEST_TAGS, SELECTED_TAGS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FeedType = 'hottest' | 'selected'
 
@@ -106,8 +106,6 @@ const Feed = ({ type }: Props) => {
           ))}
         </List>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

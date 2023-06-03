@@ -4,7 +4,7 @@ import CommentContent from '~/components/Comment/Content'
 import { AuthorWidgetCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type AuthorWidgetProps = {
   circle: AuthorWidgetCircleFragment
@@ -49,7 +49,6 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
           </section>
         )}
       </Card>
-      <style jsx>{styles}</style>
     </section>
   )
 }

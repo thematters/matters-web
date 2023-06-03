@@ -1,7 +1,7 @@
 import IMAGE_EMPTY_SEARCH_HISTORY from '@/public/static/images/illustration-empty-search-history.svg'
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const EmptySearchHistory = () => {
   return (
@@ -14,8 +14,6 @@ const EmptySearchHistory = () => {
           en="Once upon a time there was a search monster who ate your keyword then gave you what you ask for."
         />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

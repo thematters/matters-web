@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { CircleDigest } from '~/components/CircleDigest'
 import { NoticeCircleCardFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const NoticeCircleCard = ({
   circle,
@@ -24,7 +24,6 @@ const NoticeCircleCard = ({
         hasOwner
         hasPrice
       />
-      <style jsx>{styles}</style>
     </section>
   )
 }

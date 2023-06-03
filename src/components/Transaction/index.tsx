@@ -14,7 +14,7 @@ import Amount from './Amount'
 import Currency from './Currency'
 import Donator from './Donator'
 import State from './State'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface TransactionProps {
   tx: DigestTransactionFragment
@@ -175,8 +175,6 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
             />
           </section>
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

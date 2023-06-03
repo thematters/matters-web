@@ -12,7 +12,7 @@ import {
 
 import ArticleCustomStagingArea from '../../ArticleCustomStagingArea'
 import Box from '../Box'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type SidebarCollectionProps = {
   disabled?: boolean
@@ -57,8 +57,6 @@ const SidebarCollection = ({
                   />
                 </li>
               ))}
-
-              <style jsx>{styles}</style>
             </ul>
           )}
         </Box>

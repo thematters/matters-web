@@ -11,7 +11,7 @@ import { CircleIncomeAnalyticsQuery } from '~/gql/graphql'
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
 import { CIRCLE_INCOME_ANALYTICS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Content = () => {
   const { getQuery } = useRoute()
@@ -120,8 +120,6 @@ const Content = () => {
           </StackedAreaChart>
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }
@@ -140,8 +138,6 @@ const IncomeAnalytics = () => {
       />
 
       <Content />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -1,7 +1,7 @@
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const ENSDescription = () => {
   return (
@@ -31,8 +31,6 @@ const ENSDescription = () => {
           <Translate en="." zh_hans="" zh_hant="" />
         </p>
       </section>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

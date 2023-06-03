@@ -9,7 +9,7 @@ import {
 } from '~/components'
 import { DigestTransactionFragment, TransactionState } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /***
  * This is a sub component of Transaction that presents canceled, failed
@@ -100,8 +100,6 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
       >
         <StateText />
       </TextIcon>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

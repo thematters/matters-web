@@ -23,7 +23,7 @@ import { BroadcastPrivateQuery, BroadcastPublicQuery } from '~/gql/graphql'
 
 import CircleDetailTabs from '../CircleDetailTabs'
 import { BROADCAST_PRIVATE, BROADCAST_PUBLIC } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CommentPublic = NonNullable<
   NonNullable<BroadcastPublicQuery['circle']>['broadcast']['edges']
@@ -262,8 +262,6 @@ const CricleBroadcast = () => {
             ))}
           </List>
         </InfiniteScroll>
-
-        <style jsx>{styles}</style>
       </section>
     </>
   )

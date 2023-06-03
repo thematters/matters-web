@@ -8,7 +8,7 @@ import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestSidebarArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ArticleDigestSidebarProps = {
   article: ArticleDigestSidebarArticleFragment
@@ -101,8 +101,6 @@ export const ArticleDigestSidebar = ({
             onClick={onClickAuthor}
           />
         </footer>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

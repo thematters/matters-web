@@ -21,7 +21,7 @@ import NavBar from './NavBar'
 import SideFooter from './SideFooter'
 import SideNav from './SideNav'
 import Spacing from './Spacing'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const DynamicOnboardingTasksNavBar = dynamic(
   () =>
@@ -77,8 +77,6 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
           </footer>
         </Media>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }
@@ -147,8 +145,6 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
           </Sticky>
         </Media>
       </aside>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

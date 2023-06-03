@@ -13,7 +13,7 @@ import {
 } from '~/components'
 import { UserDonationRecipientFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 interface PaymentInfoProps {
   amount: number
   currency: CURRENCY
@@ -82,8 +82,6 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
       </p>
 
       {children}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

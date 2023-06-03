@@ -5,7 +5,7 @@ import Hero from './Hero'
 import Intro from './Intro'
 import JoinUs from './JoinUs'
 import Stats from './Stats'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Team from './Team'
 import Timeline from './Timeline'
 
@@ -21,8 +21,6 @@ const About = () => {
       <Team />
       <JoinUs />
       <Footer />
-
-      <style jsx>{styles}</style>
     </main>
   )
 }

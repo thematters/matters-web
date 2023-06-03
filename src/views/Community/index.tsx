@@ -27,8 +27,6 @@ const Community = () => {
           onClick={captureClicks}
         />
       </Layout.Spacing>
-
-      <style jsx>{contentStyles}</style>
     </Layout.Main>
   )
 }

@@ -16,7 +16,7 @@ import {
 
 import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type EditModeHeaderProps = {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -201,8 +201,6 @@ const EditModeHeader = ({
           </Button>
         )}
       </EditorSettingsDialog>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

@@ -4,7 +4,7 @@ import { TEST_ID } from '~/common/enums'
 import { Card, IconChecked, IconUnChecked, Tag } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface SearchSelectTagProps {
   tag: DigestTagFragment
@@ -41,8 +41,6 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
             <IconUnChecked color="grey-light" size="md-s" />
           )}
         </span>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

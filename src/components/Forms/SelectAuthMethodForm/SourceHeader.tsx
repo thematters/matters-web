@@ -10,7 +10,7 @@ import IMAGE_AUTH_SOURCE_SUPPORT from '@/public/static/images/auth-source/suppor
 import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
 import { TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const AUTH_SOURCE_IMG = {
   [UNIVERSAL_AUTH_SOURCE.enter]: {
@@ -221,8 +221,6 @@ const SourceHeader = ({ source }: { source: UNIVERSAL_AUTH_SOURCE }) => {
       <p className="intro">
         <Intro />
       </p>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

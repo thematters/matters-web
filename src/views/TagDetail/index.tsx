@@ -46,7 +46,7 @@ import {
 } from './gql'
 import Owner from './Owner'
 import RelatedTags from './RelatedTags'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const DynamicCommunity = dynamic(() => import('./Community'), {
   ssr: false,
@@ -223,8 +223,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
       )}
 
       {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
-
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

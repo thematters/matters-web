@@ -11,7 +11,7 @@ import {
   IconVolume32,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type IconType =
   | 'appreciate'
@@ -51,12 +51,7 @@ const NoticeTypeIcon = ({ type }: { type: IconType }) => {
     'icon-wrap': ['logo', 'volume'].indexOf(type) < 0,
   })
 
-  return (
-    <section className={iconWrapClasses}>
-      {icon}
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <section className={iconWrapClasses}>{icon}</section>
 }
 
 export default NoticeTypeIcon

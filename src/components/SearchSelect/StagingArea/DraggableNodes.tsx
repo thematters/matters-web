@@ -11,7 +11,7 @@ import { IconSort16, LanguageContext } from '~/components'
 
 import { SelectNode } from '../SearchingArea'
 import SearchSelectNode from '../SearchSelectNode'
-import areaStyles from '../styles.css'
+import areaStyles from '../styles.module.css'
 
 interface StagingNode {
   node: SelectNode
@@ -98,8 +98,6 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
                 )}
               </Draggable>
             ))}
-
-            <style jsx>{areaStyles}</style>
           </ul>
         )}
       </Droppable>

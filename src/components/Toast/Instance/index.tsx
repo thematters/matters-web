@@ -6,7 +6,7 @@ import { REMOVE_TOAST, TOAST_DURATION } from '~/common/enums'
 import { sleep } from '~/common/utils'
 import { Button, IconClear16 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * Toast instance.
@@ -79,7 +79,6 @@ export const ToastInstance = ({
           <section className="custom-button">{customButton}</section>
         )}
       </section>
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -20,7 +20,7 @@ import {
 } from '~/components'
 import { UpdateUserInfoUserNameMutation } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -158,7 +158,6 @@ const Confirm: React.FC<FormProps> = ({
           }}
         />
       </Form>
-      <style jsx>{styles}</style>
     </section>
   )
 

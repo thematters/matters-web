@@ -14,7 +14,7 @@ import {
 import { DeleteButtonDraftFragment, DeleteDraftMutation } from '~/gql/graphql'
 
 import { DraftsContext } from '../../../views/Me/Drafts/context'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface DeleteButtonProps {
   draft: DeleteButtonDraftFragment
@@ -78,7 +78,6 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         aria-label={translate({ id: 'delete', lang })}
       >
         <IconTrash24 size="md" />
-        <style jsx>{styles}</style>
       </button>
 
       <Dialog isOpen={show} onDismiss={closeDialog} size="sm">

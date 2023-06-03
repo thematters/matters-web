@@ -19,7 +19,7 @@ import {
 import { OAuthClientInfoQuery } from '~/gql/graphql'
 
 import { Box } from '../Box'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const OAUTH_AUTHORIZE_ENDPOINT = `${process.env.NEXT_PUBLIC_OAUTH_URL}/authorize`
 
@@ -172,8 +172,6 @@ const BaseOAuthAuthorize = () => {
           )}
         </Dialog.Footer>
       </form>
-
-      <style jsx>{styles}</style>
     </Box>
   )
 }

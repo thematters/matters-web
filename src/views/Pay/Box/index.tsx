@@ -1,6 +1,6 @@
 import { Avatar } from '~/components/Avatar'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   avatar?: string
@@ -22,8 +22,6 @@ export const Box: React.FC<React.PropsWithChildren<Props>> = ({
       </header>
 
       {children}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

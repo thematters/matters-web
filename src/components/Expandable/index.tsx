@@ -12,7 +12,7 @@ import {
   Translate,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CollapseTextColor =
   | 'black'
@@ -178,7 +178,6 @@ export const Expandable: React.FC<ExpandableProps> = ({
           )}
         </p>
       )}
-      <style jsx>{styles}</style>
     </section>
   )
 }

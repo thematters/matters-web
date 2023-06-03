@@ -5,7 +5,7 @@ import ListItem from '../../ListItem'
 import { Step } from '../../SettingsDialog'
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type SettingsListDialogButtons = {
   confirmButtonText?: string | React.ReactNode
@@ -130,8 +130,6 @@ const SettingsList = ({
           )}
         </ul>
       </Dialog.Content>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

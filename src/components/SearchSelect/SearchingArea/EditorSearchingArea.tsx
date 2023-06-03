@@ -28,7 +28,7 @@ import {
 } from '~/gql/graphql'
 
 import SearchSelectNode from '../SearchSelectNode'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import CreateTag from './CreateTag'
 import { ARTICLE_URL_QUERY, LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
 import SearchInput, {
@@ -343,8 +343,6 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                 )}
             </>
           )}
-
-          <style jsx>{styles}</style>
         </section>
       )}
     </>

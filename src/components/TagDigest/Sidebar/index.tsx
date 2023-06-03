@@ -16,7 +16,7 @@ import {
 } from '~/components'
 import { TagDigestSidebarTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type TagDigestSidebarProps = {
   tag: TagDigestSidebarTagFragment
@@ -96,8 +96,6 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
             </TextIcon>
           </section>
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

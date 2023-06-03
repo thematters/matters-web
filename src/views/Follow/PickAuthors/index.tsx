@@ -2,7 +2,7 @@ import IMAGE_ILLUSTRATION_AVATAR from '@/public/static/images/illustration-avata
 import { Head, Layout, Translate } from '~/components'
 
 import { AuthorPicker } from './AuthorPicker'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const PickIntroHeader = () => {
   return (
@@ -36,8 +36,6 @@ const PickIntroHeader = () => {
           />
         </p>
       </section>
-
-      <style jsx>{styles}</style>
     </header>
   )
 }

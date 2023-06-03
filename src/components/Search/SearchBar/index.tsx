@@ -17,7 +17,7 @@ import {
 } from '~/components'
 import { QuickResultQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SearchBarProps {
   onChange?: (key: string) => void
@@ -229,8 +229,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                   }}
                 />
               )}
-
-              <style jsx>{styles}</style>
             </form>
           )
         }
@@ -285,8 +283,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               />
 
               <SearchButton />
-
-              <style jsx>{styles}</style>
             </form>
           </Dropdown>
         )

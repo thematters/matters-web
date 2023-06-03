@@ -14,7 +14,7 @@ import {
 } from '~/components'
 import { QuoteCurrency } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FiatCurrencyProps {
   balanceHKD: number
@@ -76,8 +76,6 @@ const PayoutItem = ({
             en="You can withdraw when your balance is over 500 HKD"
           />
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Menu.Item>
   )
@@ -162,7 +160,6 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                       subValue={formatAmount(balanceHKD * exchangeRate, 2)}
                     />
                   </TextIcon>
-                  <style jsx>{styles}</style>
                 </section>
               )}
             </DropdownDialog>

@@ -4,7 +4,7 @@ import { ReactComponent as IconAnalyticsChangeArrow12 } from '@/public/static/ic
 import { numRound } from '~/common/utils'
 import { TextIcon, withIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type InfoTilesGroupProps = {
   primary?: boolean
@@ -26,12 +26,7 @@ const InfoTilesGroup: React.FC<
     primary: !!primary,
   })
 
-  return (
-    <section className={groupClasses}>
-      {children}
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <section className={groupClasses}>{children}</section>
 }
 
 const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
@@ -75,8 +70,6 @@ const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
           </span>
         ) : null}
       </div>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }
@@ -85,12 +78,7 @@ const InfoTiles: React.FC<{ children?: React.ReactNode }> & {
   Group: typeof InfoTilesGroup
   Tile: typeof InfoTilesTile
 } = ({ children }) => {
-  return (
-    <section className="container">
-      {children}
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <section className="container">{children}</section>
 }
 
 InfoTiles.Group = InfoTilesGroup

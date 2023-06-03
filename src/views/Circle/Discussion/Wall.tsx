@@ -6,7 +6,7 @@ import { translate } from '~/common/utils'
 import { LanguageContext, Translate } from '~/components'
 import { DiscussionPublicQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type WallProps = {
   circle: NonNullable<DiscussionPublicQuery['circle']>
@@ -43,8 +43,6 @@ const Wall = ({ circle }: WallProps) => {
           </p>
         )}
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

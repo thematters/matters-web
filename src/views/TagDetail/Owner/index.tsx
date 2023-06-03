@@ -12,7 +12,7 @@ import {
 } from '~/components'
 import { TagFragmentFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
   const viewer = useContext(ViewerContext)
@@ -75,7 +75,6 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
             )}
           </TagAdoptionDialog>
         </section>
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -98,7 +97,6 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
         </TextIcon>
       </section>
       <section className="right">{/* editos */}</section>
-      <style jsx>{styles}</style>
     </section>
   )
 }

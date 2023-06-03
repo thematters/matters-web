@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { Avatar, Form, IconChecked } from '~/components'
 import { EditProfileDialogUserPrivateFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type EditProfileDialogUserPrivateInfoCryptoWalletNft = NonNullable<
   NonNullable<
@@ -42,8 +42,6 @@ const NFTCollectionItem = ({
           <IconChecked size="md-s" color="green" />
         </span>
       )}
-
-      <style jsx>{styles}</style>
     </button>
   )
 }
@@ -81,7 +79,6 @@ const NFTCollection: React.FC<NFTCollectionProps> = ({ nfts, setField }) => {
               />
             </li>
           ))}
-          <style jsx>{styles}</style>
         </ul>
       </Form.Field.Content>
 

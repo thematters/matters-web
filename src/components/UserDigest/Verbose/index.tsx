@@ -15,7 +15,7 @@ import {
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * UeserDigest.Verbose is a component for presenting user's avatar, display
@@ -94,8 +94,6 @@ const Verbose = ({
           <section className="extra-button">
             {hasUnblock && <UnblockUserButton user={user} />}
           </section>
-
-          <style jsx>{styles}</style>
         </section>
       </Card>
     )
@@ -137,8 +135,6 @@ const Verbose = ({
           <p>{user.info.description}</p>
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </Card>
   )
 }

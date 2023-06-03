@@ -2,7 +2,7 @@ import { CONTENT_LANG_TEXT_MAP } from '~/common/enums'
 import { toLocale } from '~/common/utils'
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Content = ({ language }: { language?: string | null }) => {
   if (language && toLocale(language) !== '') {
@@ -48,7 +48,6 @@ const SwitchContent = ({
       zh_hant="點擊這裡切換。"
       en="click here to switch."
     />
-    <style jsx>{styles}</style>
   </span>
 )
 

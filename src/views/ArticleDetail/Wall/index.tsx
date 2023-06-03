@@ -12,7 +12,7 @@ import {
   Translate,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const bgStyle = { backgroundImage: `url(${IMG_AD})` }
 
@@ -73,8 +73,6 @@ const Wall = ({ show }: WallProps) => {
           </div>
         </div>
       </div>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

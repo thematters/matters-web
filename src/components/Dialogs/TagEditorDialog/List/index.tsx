@@ -12,7 +12,7 @@ import {
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 import { TagMaintainersQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * This a sub-component of <TagEditorDialog>. It shows editors of a tag, and
@@ -53,7 +53,6 @@ const RemoveButton = ({ remove }: { remove: () => void }) => (
         <Translate zh_hant="移除" zh_hans="移除" en="remove" />
       </TextIcon>
     </Button>
-    <style jsx>{styles}</style>
   </section>
 )
 
@@ -196,8 +195,6 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
           </Dialog.Footer.Button>
         </Dialog.Footer>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }

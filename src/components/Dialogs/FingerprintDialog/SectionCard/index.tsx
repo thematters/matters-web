@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 
-import contentStyles from '../styles.css'
-import styles from './styles.css'
+import contentStyles from '../styles.module.css'
+import styles from './styles.module.css'
 
 const SectionCard: React.FC<
   React.PropsWithChildren<{
@@ -28,9 +28,6 @@ const SectionCard: React.FC<
       {description && <p className={descriptionClasses}>{description}</p>}
 
       {children}
-
-      <style jsx>{styles}</style>
-      <style jsx>{contentStyles}</style>
     </section>
   )
 }

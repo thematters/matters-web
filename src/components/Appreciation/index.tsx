@@ -15,7 +15,7 @@ import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { UserDigest } from '~/components/UserDigest'
 import { DigestAppreciationFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface AppreciationProps {
   type: 'received' | 'sent'
@@ -120,8 +120,6 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
             </TextIcon>
           </div>
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

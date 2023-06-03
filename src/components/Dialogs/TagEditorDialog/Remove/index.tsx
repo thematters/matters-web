@@ -4,7 +4,7 @@ import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 import { TagMaintainersQuery, UpdateTagSettingMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * This a sub-component of <TagEditorDialog>. It ask user to confirm
@@ -123,7 +123,6 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
           <Translate zh_hant="取消" zh_hans="取消" en="cancel" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-      <style jsx>{styles}</style>
     </>
   )
 }
