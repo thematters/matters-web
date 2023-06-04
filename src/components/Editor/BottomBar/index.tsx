@@ -141,7 +141,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 >
                   <TextIcon
                     icon={<IconImage24 size="md" />}
-                    size="md-s"
+                    size="mdS"
                     weight="md"
                     spacing="xtight"
                   >
@@ -172,7 +172,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 >
                   <TextIcon
                     icon={<IconHashTag24 size="md" />}
-                    size="md-s"
+                    size="mdS"
                     weight="md"
                     spacing="xtight"
                   >
@@ -203,7 +203,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 >
                   <TextIcon
                     icon={<IconCollection24 size="md" />}
-                    size="md-s"
+                    size="mdS"
                     weight="md"
                     spacing="xtight"
                   >
@@ -223,7 +223,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 >
                   <TextIcon
                     icon={<IconSettings24 size="md" />}
-                    size="md-s"
+                    size="mdS"
                     weight="md"
                     spacing="xtight"
                   >

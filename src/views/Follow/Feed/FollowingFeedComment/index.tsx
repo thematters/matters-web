@@ -25,7 +25,7 @@ const FollowingFeedComment: React.FC<FollowingFeedCommentProps> & {
       {header}
 
       <section className={styles.content}>
-        <Comment.Content comment={comment} type="circleBroadcast" size="md-s" />
+        <Comment.Content comment={comment} type="circleBroadcast" size="mdS" />
       </section>
 
       <footer className={styles.footer}>

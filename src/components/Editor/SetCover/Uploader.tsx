@@ -147,7 +147,7 @@ const Uploader: React.FC<UploaderProps> = ({
           <Translate id="uploadCover" />
         </TextIcon>
 
-        {loading && <IconSpinner16 color="grey-light" />}
+        {loading && <IconSpinner16 color="greyLight" />}
       </h3>
 
       <p>

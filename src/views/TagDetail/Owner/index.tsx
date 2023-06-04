@@ -43,8 +43,8 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
         <section className={styles.left}>
           <TextIcon
             icon={<IconAvatarEmpty24 size="md" />}
-            color="grey-dark"
-            size="md-s"
+            color="greyDark"
+            size="mdS"
             spacing="xtight"
           >
             <FormattedMessage
@@ -89,7 +89,7 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
           hasDisplayName
         />
 
-        <TextIcon size="sm" color="grey-dark">
+        <TextIcon size="sm" color="greyDark">
           <FormattedMessage
             defaultMessage="Maintain"
             description="src/views/TagDetail/Owner/index.tsx"

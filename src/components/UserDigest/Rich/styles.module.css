@@ -62,7 +62,7 @@
   align-items: center;
 }
 
-.size-sm {
+.sizeSm {
   & .content {
     height: 2rem;
   }
@@ -81,7 +81,7 @@
   }
 }
 
-.size-lg {
+.sizeLg {
   & .content {
     height: 3rem;
   }

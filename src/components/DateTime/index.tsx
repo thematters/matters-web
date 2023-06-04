@@ -8,7 +8,7 @@ import styles from './styles.module.css'
 
 interface DateTimeProps {
   date: Date | string | number
-  color?: 'grey' | 'grey-dark'
+  color?: 'grey' | 'greyDark'
   type?: 'absolute' | 'relative' | 'standard'
 }
 
@@ -31,7 +31,7 @@ interface DateTimeProps {
 const BaseDateTime = ({
   date,
   type = 'absolute',
-  color = 'grey-dark',
+  color = 'greyDark',
 }: DateTimeProps) => {
   const { lang } = useContext(LanguageContext)
   const timeclasses = classNames({

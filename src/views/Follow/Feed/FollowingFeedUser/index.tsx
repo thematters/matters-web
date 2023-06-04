@@ -24,7 +24,7 @@ const FeedUser = ({ user, header, date, actions }: FeedUserProps) => {
 
       <UserDigest.Rich
         user={user}
-        bgColor="grey-lighter"
+        bgColor="greyLighter"
         borderRadius="xtight"
       />
 

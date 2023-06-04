@@ -15,54 +15,54 @@
 }
 
 /* placement */
-.text-bottom {
+.textBottom {
   flex-direction: column;
 }
 
 /* size */
-.size-xs {
+.sizeXs {
   & .text {
     font-size: var(--font-size-xs);
   }
 }
 
-.size-sm {
+.sizeSm {
   & .text {
     font-size: var(--font-size-sm);
   }
 }
 
-.size-sm-s {
+.sizeSmS {
   & .text {
     font-size: var(--font-size-sm-s);
   }
 }
 
-.size-md {
+.sizeMd {
   & .text {
     font-size: var(--font-size-md);
   }
 }
 
-.size-md-s {
+.sizeMdS {
   & .text {
     font-size: var(--font-size-md-s);
   }
 }
 
-.size-xm {
+.sizeXm {
   & .text {
     font-size: var(--font-size-xm);
   }
 }
 
-.size-lg {
+.sizeLg {
   & .text {
     font-size: var(--font-size-lg);
   }
 }
 
-.size-xl {
+.sizeXl {
   & .text {
     font-size: var(--font-size-xl);
   }
@@ -85,15 +85,15 @@
   color: var(--color-grey);
 }
 
-.grey-light {
+.greyLight {
   color: var(--color-grey-light);
 }
 
-.grey-dark {
+.greyDark {
   color: var(--color-grey-dark);
 }
 
-.grey-darker {
+.greyDarker {
   color: var(--color-grey-darker);
 }
 
@@ -105,106 +105,106 @@
   color: var(--color-red);
 }
 
-.likecoin-green {
+.likecoinGreen {
   color: var(--color-likecoin-green);
 }
 
-.yellow-lighter {
+.yellowLighter {
   color: var(--color-yellow-lighter);
 }
 
 /* spacing */
-.spacing-xxxtight.hasIcon {
-  &.text-right > .text {
+.spacingXxxtight.hasIcon {
+  &.textRight > .text {
     padding-left: var(--spacing-xxx-tight);
   }
 
-  &.text-left > .text {
+  &.textLeft > .text {
     padding-right: var(--spacing-xxx-tight);
   }
 
-  &.text-bottom > .text {
+  &.textBottom > .text {
     padding-top: var(--spacing-xxx-tight);
   }
 }
 
-.spacing-xxtight.hasIcon {
-  &.text-right > .text {
+.spacingXxtight.hasIcon {
+  &.textRight > .text {
     padding-left: var(--spacing-xx-tight);
   }
 
-  &.text-left > .text {
+  &.textLeft > .text {
     padding-right: var(--spacing-xx-tight);
   }
 
-  &.text-bottom > .text {
+  &.textBottom > .text {
     padding-top: var(--spacing-xx-tight);
   }
 }
 
-.spacing-xtight.hasIcon {
-  &.text-right > .text {
+.spacingXtight.hasIcon {
+  &.textRight > .text {
     padding-left: var(--spacing-x-tight);
   }
 
-  &.text-left > .text {
+  &.textLeft > .text {
     padding-right: var(--spacing-x-tight);
   }
 
-  &.text-bottom > .text {
+  &.textBottom > .text {
     padding-top: var(--spacing-x-tight);
   }
 }
 
-.spacing-tight.hasIcon {
-  &.text-right > .text {
+.spacingTight.hasIcon {
+  &.textRight > .text {
     padding-left: var(--spacing-tight);
   }
 
-  &.text-left > .text {
+  &.textLeft > .text {
     padding-right: var(--spacing-tight);
   }
 
-  &.text-bottom > .text {
+  &.textBottom > .text {
     padding-top: var(--spacing-tight);
   }
 }
 
-.spacing-base.hasIcon {
-  &.text-right > .text {
+.spacingBase.hasIcon {
+  &.textRight > .text {
     padding-left: var(--spacing-base);
   }
 
-  &.text-left > .text {
+  &.textLeft > .text {
     padding-right: var(--spacing-base);
   }
 
-  &.text-bottom > .text {
+  &.textBottom > .text {
     padding-top: var(--spacing-base);
   }
 }
 
 /* weight */
-.weight-light {
+.weightLight {
   font-weight: var(--font-weight-light);
 }
 
-.weight-normal {
+.weightNormal {
   font-weight: var(--font-weight-normal);
 }
 
-.weight-md {
+.weightMd {
   font-weight: var(--font-weight-medium);
 }
 
-.weight-semibold {
+.weightSemibold {
   font-weight: var(--font-weight-semibold);
 }
 
-.weight-bold {
+.weightBold {
   font-weight: var(--font-weight-bold);
 }
 
-.text-underline {
+.textUnderline {
   text-decoration: underline;
 }

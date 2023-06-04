@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { Card, CardProps, Translate } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
@@ -65,7 +65,7 @@ const Rich = ({
   const isArchived = user?.status?.state === 'archived'
   const containerClasses = classNames({
     [styles.container]: true,
-    [styles[`size-${size}`]]: !!size,
+    [styles[`size${capitalizeFirstLetter(size)}`]]: !!size,
     [styles.disabled]: isArchived,
   })
 

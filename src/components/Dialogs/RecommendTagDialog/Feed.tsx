@@ -98,7 +98,7 @@ const Feed = ({ type }: Props) => {
                 tag={node}
                 spacing={['base', 'base']}
                 bgColor="none"
-                bgActiveColor="grey-lighter"
+                bgActiveColor="greyLighter"
                 hasDesc
                 hasFollow
               />

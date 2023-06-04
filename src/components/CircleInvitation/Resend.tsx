@@ -68,11 +68,11 @@ const CircleInvitationResendButton = ({
     <Button
       spacing={[0, 'base']}
       size={[null, '2rem']}
-      bgColor="grey-lighter"
+      bgColor="greyLighter"
       onClick={() => resend()}
       disabled={disabled}
     >
-      <TextIcon size="sm-s" color="black" weight="md">
+      <TextIcon size="smS" color="black" weight="md">
         <Translate id="resend" />
       </TextIcon>
     </Button>

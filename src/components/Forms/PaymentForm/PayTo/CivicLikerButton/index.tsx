@@ -17,7 +17,7 @@ const CivicLikerButton: React.FC<CivicLikerButtonProps> = ({ likerId }) => {
         htmlTarget="_blank"
       >
         <TextIcon
-          color="likecoin-green"
+          color="likecoinGreen"
           size="md"
           textPlacement="left"
           icon={<IconExternalLink16 />}

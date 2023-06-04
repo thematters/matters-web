@@ -58,7 +58,7 @@ const Unfollow = ({ circle }: UnfollowCircleProps) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <TextIcon weight="md" size="md-s">
+      <TextIcon weight="md" size="mdS">
         {hover ? (
           <FormattedMessage defaultMessage="Unfollow" description="" />
         ) : (

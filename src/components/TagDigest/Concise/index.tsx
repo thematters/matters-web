@@ -13,7 +13,7 @@ import styles from './styles.module.css'
 
 export type TagDigestConciseTagProps = {
   tag: TagDigestConciseTagFragment
-  textSize?: 'sm' | 'md-s'
+  textSize?: 'sm' | 'mdS'
   showArticlesNum?: boolean
 }
 
@@ -29,7 +29,7 @@ const fragments = {
 
 const Concise = ({
   tag,
-  textSize = 'md-s',
+  textSize = 'mdS',
   showArticlesNum,
 }: TagDigestConciseTagProps) => {
   const path = toPath({
@@ -51,10 +51,10 @@ const Concise = ({
 
         {showArticlesNum && (
           <TextIcon
-            icon={<IconArticle16 color="grey-dark" size="xs" />}
+            icon={<IconArticle16 color="greyDark" size="xs" />}
             size="xs"
             spacing="xxtight"
-            color="grey-dark"
+            color="greyDark"
           >
             {numAbbr(tag.numArticles)}
           </TextIcon>

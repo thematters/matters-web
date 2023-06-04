@@ -107,15 +107,15 @@ export const Tag = ({
         color: active ? 'green' : 'grey',
       }
       textIconProps = {
-        size: 'sm-s',
+        size: 'smS',
         weight: 'normal',
         spacing: 'xxtight',
-        color: active ? 'white' : 'grey-darker',
+        color: active ? 'white' : 'greyDarker',
       }
       break
     case 'plain':
       textIconProps = {
-        size: 'sm-s',
+        size: 'smS',
         weight: 'normal',
         spacing: 'xxxtight',
         color: 'green',

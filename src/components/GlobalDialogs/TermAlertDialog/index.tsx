@@ -104,7 +104,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
         </Dialog.Footer.Button>
 
         <Dialog.Footer.Button
-          bgColor="grey-lighter"
+          bgColor="greyLighter"
           textColor="black"
           onClick={onLogout}
         >

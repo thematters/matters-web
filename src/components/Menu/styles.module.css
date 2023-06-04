@@ -3,15 +3,15 @@
   text-align: left;
 }
 
-.width-sm {
+.widthSm {
   min-width: var(--sizing-menu-sm);
 }
 
-.width-md {
+.widthMd {
   width: var(--sizing-menu-md);
 }
 
-.spacing-y-xtight {
+.spacingYXtight {
   padding-top: var(--spacing-x-tight);
   padding-bottom: var(--spacing-x-tight);
 }

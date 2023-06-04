@@ -27,7 +27,7 @@ const CircleWall = ({ circle }: CircleWallProps) => {
 
       <CircleDigest.Rich
         borderRadius="xtight"
-        borderColor="line-grey-light"
+        borderColor="lineGreyLight"
         circle={circle}
         hasFooter
         hasPrice

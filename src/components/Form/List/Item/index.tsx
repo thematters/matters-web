@@ -12,7 +12,7 @@ type ItemProps = {
   leftAlign?: 'top'
   right?: React.ReactNode
   rightText?: string | React.ReactNode
-  rightTextColor?: 'green' | 'grey-darker' | 'black'
+  rightTextColor?: 'green' | 'greyDarker' | 'black'
   rightSubText?: string | React.ReactNode
   forceGreyStyle?: boolean
   bold?: boolean
@@ -28,7 +28,7 @@ const Item: React.FC<ItemProps> = forwardRef(
       leftAlign,
       right,
       rightText,
-      rightTextColor = 'grey-darker',
+      rightTextColor = 'greyDarker',
       rightSubText,
 
       forceGreyStyle,

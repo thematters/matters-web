@@ -44,7 +44,7 @@ const fragments = {
 export const ArticleDigestSidebar = ({
   article,
 
-  titleTextSize = 'md-s',
+  titleTextSize = 'mdS',
   hasBackground,
   hasCover = true,
   onClick,
@@ -70,7 +70,7 @@ export const ArticleDigestSidebar = ({
       {...path}
       spacing={['tight', 'tight']}
       borderRadius="xtight"
-      bgColor={hasBackground ? 'grey-lighter' : 'none'}
+      bgColor={hasBackground ? 'greyLighter' : 'none'}
       onClick={onClick}
       testId={TEST_ID.DIGEST_ARTICLE_SIDEBAR}
       {...cardProps}
@@ -94,8 +94,8 @@ export const ArticleDigestSidebar = ({
           <UserDigest.Mini
             user={article.author}
             avatarSize="xs"
-            textSize="sm-s"
-            nameColor="grey-darker"
+            textSize="smS"
+            nameColor="greyDarker"
             hasAvatar
             hasDisplayName
             onClick={onClickAuthor}

@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 
+import { capitalizeFirstLetter } from '~/common/utils'
+
 import { ResponsiveWrapper } from '../Interaction'
 import styles from './styles.module.css'
 
@@ -66,8 +68,8 @@ export const List: React.FC<ListProps> & {
 }) => {
   const listClasses = classNames({
     [styles.list]: true,
-    [styles[`spacing-y-${spacing[0]}`]]: !!spacing[0],
-    [styles[`spacing-x-${spacing[1]}`]]: !!spacing[1],
+    [styles[`spacingY${capitalizeFirstLetter(spacing[0] + '')}`]]: !!spacing[0],
+    [styles[`spacingX${capitalizeFirstLetter(spacing[1] + '')}`]]: !!spacing[1],
     [styles.hasBorder]: !!hasBorder,
     [styles[className]]: !!className,
   })

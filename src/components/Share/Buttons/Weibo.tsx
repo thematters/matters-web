@@ -30,7 +30,7 @@ const Weibo = ({
       return window.open(shareUrl, '分享到微博')
     }}
   >
-    {circle && withIcon(IconShareWeiboCircle)({ size: 'xl-m' })}
+    {circle && withIcon(IconShareWeiboCircle)({ size: 'xlM' })}
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareWeibo)({})} spacing="base">

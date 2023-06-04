@@ -1,7 +1,7 @@
-.spacing-xtight {
+.spacingXtight {
   margin: var(--spacing-x-tight) 0;
 }
 
-.spacing-loose {
+.spacingLoose {
   margin: var(--spacing-loose) 0;
 }

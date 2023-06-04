@@ -39,7 +39,7 @@ const NFTCollectionItem = ({
 
       {index === selectedIndex && (
         <span className={styles.checked}>
-          <IconChecked size="md-s" color="green" />
+          <IconChecked size="mdS" color="green" />
         </span>
       )}
     </button>

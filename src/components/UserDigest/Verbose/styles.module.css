@@ -42,15 +42,15 @@
   color: var(--color-grey-darker);
 }
 
-.name-md-s {
+.nameMdS {
   font-size: var(--font-size-md-s);
 }
 
-.desc-sm-s {
+.descSmS {
   font-size: var(--font-size-sm-s);
 }
 
-.desc-row-2 {
+.descRow2 {
   & p {
     @mixin line-clamp;
 

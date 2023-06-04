@@ -36,22 +36,22 @@
   }
 }
 
-.bg-yellow-lighter {
+.bgYellowLighter {
   background: var(--color-yellow-lighter);
 }
 
-.bg-green-lighter {
+.bgGreenLighter {
   background: var(--color-green-lighter);
 }
 
-.bg-grey-lighter {
+.bgGreyLighter {
   background: var(--color-grey-lighter);
 }
 
-.size-sm {
+.sizeSm {
   width: 18rem;
 }
 
-.size-md {
+.sizeMd {
   width: 20rem;
 }

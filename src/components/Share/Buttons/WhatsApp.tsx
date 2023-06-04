@@ -25,7 +25,7 @@ const Whatsapp = ({
       return window.open(shareUrl, 'Share to WhatsApp')
     }}
   >
-    {circle && withIcon(IconShareWhatsAppCircle)({ size: 'xl-m' })}
+    {circle && withIcon(IconShareWhatsAppCircle)({ size: 'xlM' })}
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareWhatsApp)({})} spacing="base">

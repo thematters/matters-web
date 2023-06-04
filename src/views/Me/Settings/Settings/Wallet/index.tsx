@@ -94,7 +94,7 @@ const WalletSettings = () => {
             />
           )
         }
-        rightTextColor={ethAddress ? 'grey-darker' : 'green'}
+        rightTextColor={ethAddress ? 'greyDarker' : 'green'}
       />
     </Form.List>
   )

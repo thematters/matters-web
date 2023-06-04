@@ -3,7 +3,7 @@
   align-items: center;
 }
 
-.text-active-green {
+.textActiveGreen {
   &:hover,
   &:focus {
     color: var(--color-matters-green);

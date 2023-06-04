@@ -65,7 +65,7 @@ const ToggleResponse = ({
                 color={disableChangeCanComment ? 'grey' : 'green'}
               />
             ) : (
-              <IconUnChecked color="grey-light" size="md" />
+              <IconUnChecked color="greyLight" size="md" />
             )}
           </section>
         </section>
@@ -89,9 +89,9 @@ const ToggleResponse = ({
           <section className={styles.right}>
             {canComment ? (
               disableChangeCanComment ? (
-                <IconUnCheckedGrey color="grey-light" size="md" />
+                <IconUnCheckedGrey color="greyLight" size="md" />
               ) : (
-                <IconUnChecked color="grey-light" size="md" />
+                <IconUnChecked color="greyLight" size="md" />
               )
             ) : (
               <IconChecked size="md" color="green" />
@@ -129,10 +129,10 @@ const ToggleResponse = ({
             {canComment ? (
               <IconChecked
                 color={disableChangeCanComment ? 'grey' : 'green'}
-                size="md-s"
+                size="mdS"
               />
             ) : (
-              <IconUnChecked color="grey-light" size="md-s" />
+              <IconUnChecked color="greyLight" size="mdS" />
             )}
           </section>
         </section>
@@ -156,12 +156,12 @@ const ToggleResponse = ({
           <section className={styles.right}>
             {canComment ? (
               disableChangeCanComment ? (
-                <IconUnCheckedGrey color="grey-light" size="md-s" />
+                <IconUnCheckedGrey color="greyLight" size="mdS" />
               ) : (
-                <IconUnChecked color="grey-light" size="md-s" />
+                <IconUnChecked color="greyLight" size="mdS" />
               )
             ) : (
-              <IconChecked color="green" size="md-s" />
+              <IconChecked color="green" size="mdS" />
             )}
           </section>
         </section>

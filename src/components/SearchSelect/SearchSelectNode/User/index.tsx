@@ -42,10 +42,10 @@ const SearchSelectUser: React.FC<SearchSelectUserProps> = ({
 
         <span className={styles.iconSelect}>
           {inStagingArea && selected && (
-            <IconChecked color="green" size="md-s" />
+            <IconChecked color="green" size="mdS" />
           )}
           {inStagingArea && !selected && (
-            <IconUnChecked color="grey-light" size="md-s" />
+            <IconUnChecked color="greyLight" size="mdS" />
           )}
         </span>
       </section>

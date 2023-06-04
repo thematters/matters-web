@@ -30,7 +30,7 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
     return (
       <section className={styles.assetsItem}>
         <TextIcon
-          icon={<IconUSDTActive40 size="xl-m" />}
+          icon={<IconUSDTActive40 size="xlM" />}
           size="md"
           spacing="xtight"
         >
@@ -54,7 +54,7 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   return (
     <section className={styles.assetsItem}>
       <TextIcon
-        icon={<IconUSDTActive40 size="xl-m" />}
+        icon={<IconUSDTActive40 size="xlM" />}
         size="md"
         spacing="xtight"
       >

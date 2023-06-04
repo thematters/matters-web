@@ -40,7 +40,7 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
 
       <Dialog.Footer>
         <Dialog.Footer.Button
-          bgColor="grey-lighter"
+          bgColor="greyLighter"
           textColor="black"
           onClick={() => {
             window.location.reload()

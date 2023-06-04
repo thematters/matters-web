@@ -27,7 +27,7 @@ const Footer = () => {
             <div className={styles.container}>
               <Media at="sm">
                 <section className={styles.languageSwitch}>
-                  <LanguageSwitch size="lg" bgColor="grey-darkest" />
+                  <LanguageSwitch size="lg" bgColor="greyDarkest" />
                 </section>
               </Media>
 
@@ -251,7 +251,7 @@ const Footer = () => {
                 <div className={styles.buttons}>
                   <Button
                     size={['100%', '2.5rem']}
-                    bgActiveColor="grey-lighter"
+                    bgActiveColor="greyLighter"
                     borderColor="white"
                     textColor="white"
                     textActiveColor="black"
@@ -272,7 +272,7 @@ const Footer = () => {
 
                 <Media greaterThan="sm">
                   <section className={styles.languageSwitch}>
-                    <LanguageSwitch size="lg" bgColor="grey-darkest" />
+                    <LanguageSwitch size="lg" bgColor="greyDarkest" />
                   </section>
                 </Media>
               </section>

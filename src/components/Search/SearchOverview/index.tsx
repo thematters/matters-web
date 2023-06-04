@@ -77,7 +77,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
         <section className={recentSearchesClasses}>
           <Menu.Header
             title={<Translate id="searchHistory" />}
-            size={inPage ? 'lg' : 'md-s'}
+            size={inPage ? 'lg' : 'mdS'}
           >
             <ClearHistoryButton />
           </Menu.Header>
@@ -104,7 +104,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
         <section className={frequentSearchesClasses}>
           <Menu.Header
             title={<Translate id="frequentSearch" />}
-            size={inPage ? 'lg' : 'md-s'}
+            size={inPage ? 'lg' : 'mdS'}
           />
 
           {frequentSearch.map((key, i) => (

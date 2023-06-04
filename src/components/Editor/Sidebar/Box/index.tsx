@@ -49,7 +49,7 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
         {onClick && (
           <Button
             onClick={onClick}
-            bgActiveColor="grey-lighter"
+            bgActiveColor="greyLighter"
             spacing={['xtight', 'xtight']}
             aria-haspopup="dialog"
             aria-label={translate({ id: title, lang })}

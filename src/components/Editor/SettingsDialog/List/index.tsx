@@ -118,7 +118,7 @@ const SettingsList = ({
 
               {cancelButtonText && (
                 <Dialog.Footer.Button
-                  bgColor="grey-lighter"
+                  bgColor="greyLighter"
                   textColor="black"
                   onClick={closeDialog}
                   disabled={disabled}

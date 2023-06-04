@@ -61,7 +61,7 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
           <Button
             aria-label={translate({ id: 'copy', lang })}
             spacing={['xtight', 'base']}
-            bgColor="yellow-lighter"
+            bgColor="yellowLighter"
           >
             <TextIcon icon={<IconLocked24 size="md" />} spacing="xxtight">
               <TextIcon

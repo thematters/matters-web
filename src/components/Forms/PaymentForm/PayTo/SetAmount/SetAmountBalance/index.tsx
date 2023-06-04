@@ -60,7 +60,7 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
       )}
       {isUSDT && balanceUSDT <= 0 && (
         <a href={GUIDE_LINKS.payment[lang]} target="_blank" rel="noreferrer">
-          <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+          <TextIcon size="xs" textDecoration="underline" color="greyDark">
             <Translate
               zh_hant="如何移轉資金到 Polygon？"
               zh_hans="如何移转资金到 Polygon？"

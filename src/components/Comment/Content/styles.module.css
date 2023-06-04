@@ -10,10 +10,10 @@
   }
 }
 
-.size-sm {
+.sizeSm {
   font-size: var(--font-size-sm);
 }
 
-.size-md-s {
+.sizeMdS {
   font-size: var(--font-size-md-s);
 }

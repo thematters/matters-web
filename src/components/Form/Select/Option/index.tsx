@@ -51,7 +51,7 @@ const Option: React.FC<OptionProps> = forwardRef(
           : {})}
       >
         <Card
-          bgColor={expanded ? undefined : 'grey-lighter'}
+          bgColor={expanded ? undefined : 'greyLighter'}
           {...(role === 'option' ? {} : { role: 'button' })}
           {...cardProps}
           spacing={cardProps.spacing || [0, 0]}

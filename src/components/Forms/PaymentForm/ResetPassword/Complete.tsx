@@ -22,7 +22,7 @@ const Complete: React.FC<CompleteProps> = ({
           callbackButtons
         ) : (
           <Dialog.Footer.Button
-            bgColor="grey-lighter"
+            bgColor="greyLighter"
             textColor="black"
             onClick={closeDialog}
           >

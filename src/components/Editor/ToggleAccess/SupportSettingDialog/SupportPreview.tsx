@@ -42,7 +42,7 @@ const SupportPreview = ({
             <Avatar src={viewer?.avatar} size="xl" />
             <p>
               <TextIcon weight="md">{viewer?.displayName}</TextIcon>
-              <TextIcon color="grey-darker">
+              <TextIcon color="greyDarker">
                 <Translate
                   zh_hant="&nbsp;想對你說："
                   zh_hans="&nbsp;想对你說："

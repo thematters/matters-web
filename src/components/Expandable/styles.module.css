@@ -70,7 +70,7 @@
       );
     }
 
-    &.grey-lighter::after {
+    &.greyLighter::after {
       background: linear-gradient(
         180deg,
         rgb(247 247 247 / 0%) 0%,
@@ -89,33 +89,33 @@
   color: var(--color-grey);
 }
 
-.grey-light {
+.greyLight {
   color: var(--color-grey-light);
 }
 
-.grey-dark {
+.greyDark {
   color: var(--color-grey-dark);
 }
 
-.grey-darker {
+.greyDarker {
   color: var(--color-grey-darker);
 }
 
 /* size */
-.size-sm {
+.sizeSm {
   font-size: var(--font-size-sm);
 }
 
-.size-md-s {
+.sizeMdS {
   font-size: var(--font-size-md-s);
 }
 
-.size-md {
+.sizeMd {
   font-size: var(--font-size-md);
 }
 
 /* space top */
-.spacing-top-base {
+.spacingTopBase {
   margin-top: var(--spacing-base);
 }
 

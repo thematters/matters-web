@@ -51,7 +51,7 @@ export const BackButton: React.FC<BackButtonProps> = ({
     return (
       <Button
         aria-label={translate({ id: 'back', lang })}
-        bgColor="half-black"
+        bgColor="halfBlack"
         onClick={onBack}
         {...props}
       >
@@ -74,7 +74,7 @@ export const BackButton: React.FC<BackButtonProps> = ({
       <Media greaterThan="sm">
         <Button
           aria-label={translate({ id: 'back', lang })}
-          bgColor="green-lighter"
+          bgColor="greenLighter"
           onClick={onBack}
           {...props}
         >

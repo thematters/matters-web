@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath, UtmParams } from '~/common/utils'
+import { capitalizeFirstLetter, toPath, UtmParams } from '~/common/utils'
 import { LinkWrapper, LinkWrapperProps, Translate } from '~/components'
 import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
@@ -10,9 +10,9 @@ import styles from './styles.module.css'
 
 export type ArticleDigestTitleTextSize =
   | 'xs'
-  | 'sm-s'
+  | 'smS'
   | 'sm'
-  | 'md-s'
+  | 'mdS'
   | 'md'
   | 'xm'
   | 'xl'
@@ -75,8 +75,8 @@ export const ArticleDigestTitle = ({
   const title = isBanned ? <Translate id="articleBanned" /> : article.title
   const titleClasses = classNames({
     [styles.title]: true,
-    [styles[`text-size-${textSize}`]]: !!textSize,
-    [styles[`text-weight-${textWeight}`]]: !!textWeight,
+    [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
+    [styles[`textWeight${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
     [styles.lineClamp]: !!lineClamp,
     [styles[`lineClampLine${lineClamp}`]]: lineClamp === 1 || lineClamp === 3,
   })

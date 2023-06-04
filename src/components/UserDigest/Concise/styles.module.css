@@ -21,7 +21,7 @@
   color: var(--color-grey);
 }
 
-.name-style-loose {
+.nameStyleLoose {
   & .displayname {
     font-size: var(--font-size-md-s);
     line-height: 1.5rem;
@@ -33,7 +33,7 @@
   }
 }
 
-.name-style-tight {
+.nameStyleTight {
   & .displayname {
     font-size: var(--font-size-sm);
     line-height: 1rem;

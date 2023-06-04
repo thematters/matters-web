@@ -206,13 +206,13 @@ const SubscriberAnalytics = () => {
         <MembersDialog>
           {({ openDialog: openMembersDialog }) => (
             <Button
-              borderColor="grey-light"
+              borderColor="greyLight"
               borderWidth="sm"
               spacing={['xxtight', 'xtight']}
               onClick={openMembersDialog}
               aria-haspopup="dialog"
             >
-              <TextIcon color="grey-darker" size="xs">
+              <TextIcon color="greyDarker" size="xs">
                 <FormattedMessage
                   defaultMessage="View Members"
                   description="src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"

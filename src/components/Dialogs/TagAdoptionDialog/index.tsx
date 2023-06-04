@@ -82,7 +82,7 @@ const BaseDialog = ({ id, children }: Props) => {
 
           <Dialog.Footer.Button
             textColor="black"
-            bgColor="grey-lighter"
+            bgColor="greyLighter"
             onClick={closeDialog}
           >
             <Translate

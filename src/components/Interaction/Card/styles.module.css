@@ -20,7 +20,7 @@
 }
 
 /* Background */
-.bg-transparent {
+.bgTransparent {
   background: transparent;
 
   &:not(.disabled) {
@@ -31,10 +31,10 @@
   }
 }
 
-.bg-white {
+.bgWhite {
   background: var(--color-white);
 
-  & .card.bg-grey-lighter {
+  & .card.bgGreyLighter {
     @mixin border-grey;
 
     border-color: transparent;
@@ -45,14 +45,14 @@
     &:focus {
       background: var(--color-grey-lighter);
 
-      & .card.bg-grey-lighter {
+      & .card.bgGreyLighter {
         @mixin border-grey;
       }
     }
   }
 }
 
-.bg-grey-lighter {
+.bgGreyLighter {
   background: var(--color-grey-lighter);
 
   &:not(.disabled) {
@@ -63,7 +63,7 @@
   }
 }
 
-.bg-active-grey-lighter {
+.bgActiveGreyLighter {
   &:not(.disabled) {
     &:hover,
     &:focus {
@@ -72,7 +72,7 @@
   }
 }
 
-.bg-active-none {
+.bgActiveNone {
   &:not(.disabled) {
     &:hover,
     &:focus {
@@ -81,7 +81,7 @@
   }
 }
 
-.bg-active-transparent {
+.bgActiveTransparent {
   &:not(.disabled) {
     &:hover,
     &:focus {
@@ -91,42 +91,42 @@
 }
 
 /* Spacing */
-.spacing-y-xtight {
+.spacingYXtight {
   padding-top: var(--spacing-x-tight);
   padding-bottom: var(--spacing-x-tight);
 }
 
-.spacing-y-tight {
+.spacingYTight {
   padding-top: var(--spacing-tight);
   padding-bottom: var(--spacing-tight);
 }
 
-.spacing-y-base {
+.spacingYBase {
   padding-top: var(--spacing-base);
   padding-bottom: var(--spacing-base);
 }
 
-.spacing-y-loose {
+.spacingYLoose {
   padding-top: var(--spacing-loose);
   padding-bottom: var(--spacing-loose);
 }
 
-.spacing-x-xtight {
+.spacingXXtight {
   padding-right: var(--spacing-x-tight);
   padding-left: var(--spacing-x-tight);
 }
 
-.spacing-x-tight {
+.spacingXTight {
   padding-right: var(--spacing-tight);
   padding-left: var(--spacing-tight);
 }
 
-.spacing-x-base {
+.spacingXBase {
   padding-right: var(--spacing-base);
   padding-left: var(--spacing-base);
 }
 
-.spacing-x-loose {
+.spacingXLoose {
   padding-right: var(--spacing-loose);
   padding-left: var(--spacing-loose);
 }
@@ -136,30 +136,30 @@
   overflow: hidden;
 }
 
-.border-grey-lighter {
+.borderGreyLighter {
   border: 1px solid var(--color-grey-lighter);
 }
 
-.border-line-grey-light {
+.borderLineGreyLight {
   border: 1px solid var(--color-line-grey-light);
 }
 
-.border-green {
+.borderGreen {
   border: 1px solid var(--color-matters-green);
 }
 
-.border-radius-loose {
+.borderRadiusLoose {
   border-radius: var(--spacing-loose);
 }
 
-.border-radius-base {
+.borderRadiusBase {
   border-radius: var(--spacing-base);
 }
 
-.border-radius-xtight {
+.borderRadiusXtight {
   border-radius: var(--spacing-x-tight);
 }
 
-.border-radius-xxtight {
+.borderRadiusXxtight {
   border-radius: var(--spacing-xx-tight);
 }

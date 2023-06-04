@@ -28,7 +28,7 @@ const Donator = ({ user }: DonatorProps) => {
   return (
     <section className={styles.content}>
       <UserDigest.Mini
-        textSize="md-s"
+        textSize="mdS"
         textWeight="md"
         user={user}
         hasDisplayName

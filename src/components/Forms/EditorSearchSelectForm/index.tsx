@@ -149,9 +149,9 @@ const EditorSearchSelectForm = ({
           data-test-id={TEST_ID.EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON}
         >
           <TextIcon
-            icon={<IconAdd16 size="md-s" />}
+            icon={<IconAdd16 size="mdS" />}
             color={enableAdd ? 'green' : 'grey'}
-            size="md-s"
+            size="mdS"
             spacing="xtight"
           >
             {searchType === 'Tag' && (

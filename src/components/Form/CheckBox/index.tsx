@@ -31,11 +31,11 @@ const CheckBox: React.FC<CheckBoxProps> = ({
         <TextIcon
           icon={
             <IconChecked
-              size="md-s"
+              size="mdS"
               color={inputProps.checked ? 'green' : 'grey'}
             />
           }
-          color="grey-dark"
+          color="greyDark"
           spacing="xtight"
         >
           <span>{hint}</span>

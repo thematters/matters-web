@@ -134,7 +134,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
         {edges && edges.length > 0 && (
           <section className={styles.relatedDonations}>
             <header>
-              <TextIcon size="sm" color="grey-darker">
+              <TextIcon size="sm" color="greyDarker">
                 <Translate
                   zh_hant="支持過這篇作品的人也支持了"
                   zh_hans="支持过这篇作品的人也支持了"
@@ -145,7 +145,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
               {totalCount > PAGE_COUNT && (
                 <ShuffleButton
                   onClick={shuffle}
-                  bgColor="green-lighter"
+                  bgColor="greenLighter"
                   color="green"
                 />
               )}

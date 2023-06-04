@@ -23,7 +23,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
   return (
     <section>
       <Card
-        bgColor="grey-lighter"
+        bgColor="greyLighter"
         borderRadius="base"
         spacing={['tight', 'base']}
         {...cardProps}

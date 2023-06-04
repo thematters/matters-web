@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 
+import { capitalizeFirstLetter } from '~/common/utils'
+
 import Divider from './Divider'
 import Header from './Header'
 import Item from './Item'
@@ -17,8 +19,8 @@ export const Menu: React.FC<React.PropsWithChildren<MenuProps>> & {
 } = ({ width, spacingY = 'xtight', children }) => {
   const menuClasses = classNames({
     [styles.menu]: true,
-    [styles[`width-${width}`]]: !!width,
-    [styles[`spacing-y-${spacingY}`]]: !!spacingY,
+    [width ? styles[`width${capitalizeFirstLetter(width)}`] : '']: !!width,
+    [styles[`spacingY${capitalizeFirstLetter(spacingY + '')}`]]: !!spacingY,
   })
 
   return (

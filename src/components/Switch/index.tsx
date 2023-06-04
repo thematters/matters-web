@@ -45,7 +45,7 @@ export const Switch: React.FC<SwitchProps> = ({
 
       {loading && (
         <span className={styles.loading}>
-          <IconSpinner16 color="grey-light" />
+          <IconSpinner16 color="greyLight" />
         </span>
       )}
     </label>

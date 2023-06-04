@@ -17,7 +17,7 @@ import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle
 
 interface UnsubscribeProps {
   articleId?: string
-  size?: Extract<IconSize, 'md-s'>
+  size?: Extract<IconSize, 'mdS'>
   disabled?: boolean
   inCard?: boolean
 }
@@ -50,7 +50,7 @@ const Unsubscribe = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
+      bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       aria-label={translate({
         zh_hant: '取消收藏',
         zh_hans: '取消收藏',

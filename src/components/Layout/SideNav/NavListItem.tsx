@@ -28,7 +28,7 @@ const NavListItemButton = forwardRef(
   ) => {
     return (
       <Button
-        bgActiveColor="grey-lighter"
+        bgActiveColor="greyLighter"
         spacing={isMdUp ? ['xxtight', 'xtight'] : undefined}
         size={isMdUp ? undefined : ['2rem', '2rem']}
         ref={ref}

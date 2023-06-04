@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 
+import { capitalizeFirstLetter } from '~/common/utils'
+
 import Item from './Item'
 import styles from './styles.module.css'
 
@@ -28,12 +30,14 @@ const List: React.FC<React.PropsWithChildren<ListProps>> & {
 }) => {
   const groupClasses = classNames({
     [styles.group]: true,
-    [styles[`spacing-x-${spacingX}`]]: !!spacingX,
+    [spacingX ? styles[`spacingX${capitalizeFirstLetter(spacingX)}`] : '']:
+      !!spacingX,
   })
 
   const listClasses = classNames({
     [styles.grey]: forceGreyStyle,
-    [styles[`spacing-y-${spacingY}`]]: !!spacingY,
+    [spacingY ? styles[`spacingY${capitalizeFirstLetter(spacingY)}`] : '']:
+      !!spacingY,
   })
 
   return (

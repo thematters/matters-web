@@ -28,7 +28,7 @@ const Count = ({ count }: { count: number }) => {
       trigger="click"
     >
       <button type="button" className={styles.count}>
-        <TextIcon icon={<IconRead16 />} size="xs" color="grey-dark">
+        <TextIcon icon={<IconRead16 />} size="xs" color="greyDark">
           {count}
         </TextIcon>
       </button>

@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import TextTruncate from 'react-text-truncate'
 
-import { stripHtml } from '~/common/utils/text'
+import { capitalizeFirstLetter, stripHtml } from '~/common/utils'
 import {
   Button,
   IconArrowDown16,
@@ -17,9 +17,9 @@ import styles from './styles.module.css'
 type CollapseTextColor =
   | 'black'
   | 'grey'
-  | 'grey-light'
-  | 'grey-darker'
-  | 'grey-dark'
+  | 'greyLight'
+  | 'greyDarker'
+  | 'greyDark'
   | 'white'
 
 interface ExpandableProps {
@@ -28,11 +28,11 @@ interface ExpandableProps {
   limit?: number
   buffer?: number
   color?: CollapseTextColor
-  size?: 'sm' | 'md-s' | 'md'
+  size?: 'sm' | 'mdS' | 'md'
   spacingTop?: 'base'
   textIndent?: boolean
   isRichShow?: boolean
-  bgColor?: 'grey-lighter' | 'white'
+  bgColor?: 'greyLighter' | 'white'
 }
 
 export const Expandable: React.FC<ExpandableProps> = ({
@@ -59,9 +59,11 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const contentClasses = classNames({
     [styles.expandable]: true,
     [styles[`${color}`]]: !!color,
-    [styles[`size-${size}`]]: !!size,
-    [styles[`spacing-top-${spacingTop}`]]: !!spacingTop,
-    [styles[`textIndent`]]: textIndent,
+    [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
+    [spacingTop
+      ? styles[`spacingTop${capitalizeFirstLetter(spacingTop)}`]
+      : '']: !!spacingTop,
+    [styles.textIndent]: textIndent,
   })
 
   const richWrapperClasses = classNames({
@@ -107,7 +109,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
         <section className={styles.collapseWrapper}>
           <Button
             spacing={['xxtight', 'xtight']}
-            bgColor="grey-lighter"
+            bgColor="greyLighter"
             textColor="grey"
             onClick={() => {
               setExpand(!expand)

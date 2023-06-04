@@ -53,7 +53,7 @@ const SidebarCollection = ({
                     titleTextSize="sm"
                     spacing={['base', 'base']}
                     bgColor="none"
-                    bgActiveColor="grey-lighter"
+                    bgActiveColor="greyLighter"
                   />
                 </li>
               ))}

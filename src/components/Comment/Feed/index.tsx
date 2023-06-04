@@ -62,7 +62,7 @@ export const BaseCommentFeed = ({
         <UserDigest.Mini
           user={author}
           avatarSize={avatarSize}
-          textSize="md-s"
+          textSize="mdS"
           textWeight="md"
           hasAvatar
           hasDisplayName
@@ -89,10 +89,10 @@ export const BaseCommentFeed = ({
 
       <section className={styles.contentContainer}>
         <Media at="sm">
-          <Content comment={comment} type={type} size="md-s" limit={17} />
+          <Content comment={comment} type={type} size="mdS" limit={17} />
         </Media>
         <Media greaterThan="sm">
-          <Content comment={comment} type={type} size="md-s" limit={13} />
+          <Content comment={comment} type={type} size="mdS" limit={13} />
         </Media>
 
         <FooterActions

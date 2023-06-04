@@ -12,11 +12,11 @@
   line-height: 1.5rem;
 }
 
-.text-size-md-s {
+.textSizeMdS {
   font-size: var(--font-size-md-s);
 }
 
-.text-size-xm {
+.textSizeXm {
   font-size: var(--font-size-xm);
 }
 

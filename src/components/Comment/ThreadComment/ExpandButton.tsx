@@ -10,7 +10,7 @@ const ExpandButton = ({
   <Button
     size={[null, '1.25rem']}
     spacing={[0, 'xtight']}
-    bgActiveColor="grey-lighter"
+    bgActiveColor="greyLighter"
     onClick={onClick}
   >
     <TextIcon

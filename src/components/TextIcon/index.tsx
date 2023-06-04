@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 
+import { capitalizeFirstLetter } from '~/common/utils'
+
 import styles from './styles.module.css'
 
 type TextIconColor =
@@ -7,19 +9,19 @@ type TextIconColor =
   | 'green'
   | 'gold'
   | 'grey'
-  | 'grey-light'
-  | 'grey-darker'
-  | 'grey-dark'
+  | 'greyLight'
+  | 'greyDarker'
+  | 'greyDark'
   | 'white'
   | 'red'
-  | 'likecoin-green'
-  | 'yellow-lighter'
+  | 'likecoinGreen'
+  | 'yellowLighter'
 
 export interface TextIconProps {
   icon?: React.ReactNode
 
   color?: TextIconColor
-  size?: 'xs' | 'sm' | 'sm-s' | 'md-s' | 'md' | 'xm' | 'lg' | 'xl'
+  size?: 'xs' | 'sm' | 'smS' | 'mdS' | 'md' | 'xm' | 'lg' | 'xl'
   spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
   weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
   allowUserSelect?: boolean
@@ -60,12 +62,15 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
   const textIconClasses = classNames({
     [styles.textIcon]: true,
     [styles.noneSelect]: !allowUserSelect,
-    [styles[color || '']]: !!color,
-    [styles[`text-${textPlacement}`]]: true,
-    [styles[`text-${textDecoration}`]]: true,
-    [styles[`size-${size}`]]: true,
-    [styles[spacing ? `spacing-${spacing}` : '']]: !!spacing,
-    [styles[weight ? `weight-${weight}` : '']]: !!weight,
+    [color ? styles[color] : '']: !!color,
+    [styles[`text${capitalizeFirstLetter(textPlacement)}`]]: true,
+    [textDecoration
+      ? styles[`text${capitalizeFirstLetter(textDecoration)}`]
+      : '']: true,
+    [styles[`size${capitalizeFirstLetter(size)}`]]: true,
+    [spacing ? styles[`spacing${capitalizeFirstLetter(spacing)}`] : '']:
+      !!spacing,
+    [weight ? styles[`weight${capitalizeFirstLetter(weight)}`] : '']: !!weight,
     [styles.hasIcon]: !!icon,
   })
 

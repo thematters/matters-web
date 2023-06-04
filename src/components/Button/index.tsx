@@ -2,6 +2,8 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { forwardRef, RefObject, useRef } from 'react'
 
+import { capitalizeFirstLetter } from '~/common/utils'
+
 import styles from './styles.module.css'
 
 export type ButtonWidth =
@@ -45,19 +47,19 @@ export type ButtonSpacingX =
 type ButtonColor =
   | 'white'
   | 'black'
-  | 'half-black'
-  | 'grey-darkest'
+  | 'halfBlack'
+  | 'greyDarkest'
   | 'grey'
-  | 'grey-light'
-  | 'grey-lighter'
-  | 'grey-lighter-active'
-  | 'green-lighter'
+  | 'greyLight'
+  | 'greyLighter'
+  | 'greyLighterActive'
+  | 'greenLighter'
   | 'green'
   | 'gold'
   | 'red'
-  | 'likecoin-green'
-  | 'yellow-lighter'
-  | 'gold-linear-gradient'
+  | 'likecoinGreen'
+  | 'yellowLighter'
+  | 'goldLinearGradient'
 
 type ButtonTextColor = Extract<
   ButtonColor,
@@ -66,25 +68,25 @@ type ButtonTextColor = Extract<
 
 export type ButtonBgColor = Extract<
   ButtonColor,
-  | 'grey-darkest'
+  | 'greyDarkest'
   | 'grey'
-  | 'grey-lighter'
-  | 'green-lighter'
+  | 'greyLighter'
+  | 'greenLighter'
   | 'green'
   | 'gold'
   | 'red'
   | 'white'
-  | 'half-black'
+  | 'halfBlack'
   | 'black'
-  | 'yellow-lighter'
-  | 'gold-linear-gradient'
+  | 'yellowLighter'
+  | 'goldLinearGradient'
 >
 
 type ButtonBgActiveColor = Extract<
   ButtonColor,
-  | 'grey-lighter'
-  | 'green-lighter'
-  | 'grey-lighter-active'
+  | 'greyLighter'
+  | 'greenLighter'
+  | 'greyLighterActive'
   | 'green'
   | 'gold'
   | 'red'
@@ -198,15 +200,23 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         [styles.isTransparent]: isTransparent,
         [styles.centeringX]: width && isTransparent,
         [styles.centeringY]: height && isTransparent,
-        [styles[`spacing-y-${spacingY}`]]: !!spacingY,
-        [styles[`spacing-x-${spacingX}`]]: !!spacingX,
-        [styles[`bg-${bgColor}`]]: !!bgColor,
-        [styles[`bg-active-${bgActiveColor}`]]: !!bgActiveColor && isClickable,
-        [styles[`border-${borderColor}`]]: !!borderColor,
-        [styles[`border-${borderWidth}`]]: borderWidth && borderColor,
-        [styles[`text-${textColor}`]]: !!textColor,
-        [styles[`text-active-${textActiveColor}`]]:
-          !!textActiveColor && isClickable,
+        [styles[`spacingY${capitalizeFirstLetter(spacingY + '')}`]]: !!spacingY,
+        [styles[`spacingX${capitalizeFirstLetter(spacingX + '')}`]]: !!spacingX,
+        [bgColor ? styles[`bg${capitalizeFirstLetter(bgColor)}`] : '']:
+          !!bgColor,
+        [bgActiveColor
+          ? styles[`bgActive${capitalizeFirstLetter(bgActiveColor)}`]
+          : '']: !!bgActiveColor && isClickable,
+        [borderColor
+          ? styles[`border${capitalizeFirstLetter(borderColor)}`]
+          : '']: !!borderColor,
+        [styles[`border${capitalizeFirstLetter(borderWidth)}`]]:
+          borderWidth && borderColor,
+        [textColor ? styles[`text${capitalizeFirstLetter(textColor)}`] : '']:
+          !!textColor,
+        [textActiveColor
+          ? styles[`textActive${capitalizeFirstLetter(textActiveColor)}`]
+          : '']: !!textActiveColor && isClickable,
       })
 
       // handle click

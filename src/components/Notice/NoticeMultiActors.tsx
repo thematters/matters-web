@@ -29,8 +29,8 @@ const NoticeMultiActors = ({ actors, size }: NoticeMultiActorsProps) => {
       ))}
       <span className={styles.moreActors}>
         <Button
-          bgColor="grey-lighter"
-          bgActiveColor="grey-lighter"
+          bgColor="greyLighter"
+          bgActiveColor="greyLighter"
           borderRadius="5rem"
         >
           <IconMore32 color="grey" size="lg" />

@@ -42,7 +42,7 @@ const SearchButton = () => {
         description: '',
       })}
     >
-      <IconSearch16 color="grey-dark" />
+      <IconSearch16 color="greyDark" />
     </Button>
   )
 }
@@ -61,7 +61,7 @@ const ClearButton = ({ onClick }: ClearButtonProps) => {
       aria-label={translate({ id: 'clear', lang })}
       onClick={onClick}
     >
-      <IconClear16 color="grey-dark" />
+      <IconClear16 color="greyDark" />
     </Button>
   )
 }

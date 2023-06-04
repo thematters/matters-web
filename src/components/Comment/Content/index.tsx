@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
-import { captureClicks } from '~/common/utils'
+import { capitalizeFirstLetter, captureClicks } from '~/common/utils'
 import { CommentFormType, Expandable, Translate } from '~/components'
 import {
   ContentCommentPrivateFragment,
@@ -15,8 +15,8 @@ import styles from './styles.module.css'
 interface ContentProps {
   comment: ContentCommentPublicFragment & Partial<ContentCommentPrivateFragment>
   type: CommentFormType
-  size?: 'sm' | 'md-s'
-  bgColor?: 'grey-lighter' | 'white'
+  size?: 'sm' | 'mdS'
+  bgColor?: 'greyLighter' | 'white'
   limit?: number
   textIndent?: boolean
   isRichShow?: boolean
@@ -57,7 +57,7 @@ const Content = ({
 
   const contentClasses = classNames({
     [styles.content]: true,
-    [styles[`size-${size}`]]: !!size,
+    [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
   })
 
   if (state === 'collapsed' || isBlocked) {

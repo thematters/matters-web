@@ -2,7 +2,7 @@
   position: relative;
   min-height: 100vh;
 
-  &.bg-grey-lighter {
+  &.bgGreyLighter {
     background: var(--color-grey-lighter);
 
     @media (--sm-up) {

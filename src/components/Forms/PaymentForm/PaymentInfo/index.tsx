@@ -49,7 +49,7 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
           <CopyToClipboard text={address}>
             <Button
               spacing={['xxtight', 'tight']}
-              bgColor="green-lighter"
+              bgColor="greenLighter"
               aria-label={translate({ id: 'copy', lang })}
             >
               <TextIcon
@@ -67,7 +67,7 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
       )}
       {showLikerID && (
         <div className={styles.address}>
-          <Button spacing={['xxtight', 'tight']} bgColor="green-lighter">
+          <Button spacing={['xxtight', 'tight']} bgColor="greenLighter">
             <TextIcon size="xs" weight="md" color="green">
               LikeID: {recipient.liker.likerId}
             </TextIcon>

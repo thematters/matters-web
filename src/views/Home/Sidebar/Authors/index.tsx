@@ -85,7 +85,7 @@ const Authors = () => {
                 user={node}
                 spacing={['xtight', 'xtight']}
                 bgColor="none"
-                bgActiveColor="grey-lighter"
+                bgActiveColor="greyLighter"
                 borderRadius="xtight"
                 onClick={() =>
                   analytics.trackEvent('click_feed', {

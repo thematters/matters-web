@@ -113,7 +113,7 @@ const SupportWidget = ({ article }: DonationProps) => {
 
       {!showAnimation && (
         <section className={`${styles.donation} ${styles.note}`}>
-          {loading && <IconSpinner16 color="grey-light" size="lg" />}
+          {loading && <IconSpinner16 color="greyLight" size="lg" />}
 
           {!loading && (
             <>
@@ -126,7 +126,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                         <TextIcon weight="md">
                           {article?.author.displayName}
                         </TextIcon>
-                        <TextIcon color="grey-darker">
+                        <TextIcon color="greyDarker">
                           <Translate
                             zh_hant="&nbsp;想對你說："
                             zh_hans="&nbsp;想對你說："
@@ -238,7 +238,7 @@ const SupportWidget = ({ article }: DonationProps) => {
         <section className={styles.circle}>
           <CircleDigest.Rich
             circle={article.access.circle}
-            bgColor="grey-lighter"
+            bgColor="greyLighter"
             hasFooter
             hasPrice
             onClickPrice={() => {

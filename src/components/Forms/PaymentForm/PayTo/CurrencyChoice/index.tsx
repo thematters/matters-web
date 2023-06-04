@@ -91,7 +91,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
           <UserDigest.Mini
             user={recipient}
             avatarSize="xs"
-            textSize="md-s"
+            textSize="mdS"
             textWeight="semibold"
             nameColor="black"
             spacing="xxtight"
@@ -124,7 +124,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
         aria-label={translate({ id: 'fiatCurrency', lang })}
       >
         <TextIcon
-          icon={<IconFiatCurrency40 size="xl-m" />}
+          icon={<IconFiatCurrency40 size="xlM" />}
           size="md"
           spacing="xtight"
         >

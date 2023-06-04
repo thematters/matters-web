@@ -86,7 +86,7 @@ export const ArticleDigestDropdown = ({
           <UserDigest.Mini
             user={article.author}
             avatarSize="xs"
-            textSize="sm-s"
+            textSize="smS"
             hasAvatar
             hasUserName
             hasDisplayName

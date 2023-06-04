@@ -27,7 +27,7 @@
     background: var(--color-white);
   }
 
-  &.bg-grey-lighter {
+  &.bgGreyLighter {
     background: var(--color-grey-lighter);
 
     @media (--sm-up) {
@@ -35,7 +35,7 @@
     }
   }
 
-  &.bg-grey-lighter-sm-up {
+  &.bgGreyLighterSmUp {
     @media (--sm-up) {
       background: var(--color-grey-lighter);
     }
@@ -60,7 +60,7 @@
       display: none;
     }
 
-    &.no-header {
+    &.noHeader {
       padding-top: 0;
     }
 

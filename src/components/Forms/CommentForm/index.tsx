@@ -153,7 +153,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
         >
           <TextIcon
             color="white"
-            size="md-s"
+            size="mdS"
             weight="md"
             icon={isSubmitting && <IconSpinner16 size="sm" />}
           >

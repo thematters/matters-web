@@ -2,10 +2,12 @@ import classNames from 'classnames'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useEffect, useState } from 'react'
 
+import { capitalizeFirstLetter } from '~/common/utils'
+
 import styles from './styles.module.css'
 
 interface SlidesProps {
-  bgColor?: 'yellow-lighter' | 'green-lighter' | 'grey-lighter'
+  bgColor?: 'yellow-lighter' | 'green-lighter' | 'greyLighter'
   header: React.ReactNode
 }
 
@@ -20,7 +22,7 @@ const SlideItem: React.FC<React.PropsWithChildren<SlideItemProps>> = ({
   ...rest
 }) => {
   const slidesItemClasses = classNames({
-    [styles[`size-${size}`]]: !!size,
+    [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
   })
 
   return (

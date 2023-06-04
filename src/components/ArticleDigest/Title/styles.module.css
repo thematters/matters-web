@@ -1,40 +1,40 @@
-.text-size-xs {
+.textSizeXs {
   font-size: var(--font-size-xs);
 }
 
-.text-size-sm-s {
+.textSizeSmS {
   font-size: var(--font-size-sm-s);
 }
 
-.text-size-sm {
+.textSizeSm {
   font-size: var(--font-size-sm);
 }
 
-.text-size-md-s {
+.textSizeMdS {
   font-size: var(--font-size-md-s);
 }
 
-.text-size-md {
+.textSizeMd {
   font-size: var(--font-size-md);
 }
 
-.text-size-xm {
+.textSizeXm {
   font-size: var(--font-size-xm);
 }
 
-.text-size-xl {
+.textSizeXl {
   font-size: var(--font-size-xl);
 }
 
-.text-weight-normal {
+.textWeightNormal {
   font-weight: var(--font-weight-normal);
 }
 
-.text-weight-md {
+.textWeightMd {
   font-weight: var(--font-weight-medium);
 }
 
-.text-weight-semibold {
+.textWeightSemibold {
   font-weight: var(--font-weight-semibold);
 }
 

@@ -250,7 +250,7 @@ const FingerprintDialogContent = ({
             right={
               iscnId ? (
                 <a href={iscnLinkUrl(iscnId)} target="_blank" rel="noreferrer">
-                  <IconExternalLink16 color="grey-darker" />
+                  <IconExternalLink16 color="greyDarker" />
                 </a>
               ) : isAuthor ? (
                 <Button
@@ -271,7 +271,7 @@ const FingerprintDialogContent = ({
                     pooling(Date.now())
                   }}
                 >
-                  <TextIcon size="sm-s">
+                  <TextIcon size="smS">
                     {timeCooling ? (
                       <Translate id="publishing2" />
                     ) : retryPublishing ? (

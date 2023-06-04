@@ -21,13 +21,13 @@ const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
     >
       <Button
         spacing={['xtight', 'base']}
-        bgColor={selected ? 'green-lighter' : 'white'}
-        bgActiveColor={selected ? 'green-lighter' : 'grey-lighter'}
+        bgColor={selected ? 'greenLighter' : 'white'}
+        bgActiveColor={selected ? 'greenLighter' : 'greyLighter'}
         {...buttonProps}
       >
         <TextIcon
           size="md"
-          color={selected ? 'green' : 'grey-darker'}
+          color={selected ? 'green' : 'greyDarker'}
           weight="semibold"
         >
           {children}

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { Card, CardProps, Translate } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
@@ -30,8 +30,8 @@ export type UserDigestVerboseProps = {
     Partial<UserDigestVerboseUserPrivateFragment>
 
   avatarSize?: 'md'
-  nameTextSize?: 'md-s'
-  descTextSize?: 'sm-s'
+  nameTextSize?: 'mdS'
+  descTextSize?: 'smS'
   descRowSize?: 2
 
   hasFollow?: boolean
@@ -43,8 +43,8 @@ const Verbose = ({
   user,
 
   avatarSize = 'md',
-  nameTextSize = 'md-s',
-  descTextSize = 'sm-s',
+  nameTextSize = 'mdS',
+  descTextSize = 'smS',
   descRowSize = 2,
 
   hasFollow = true,
@@ -63,12 +63,12 @@ const Verbose = ({
   })
   const nameClasses = classNames({
     [styles.name]: true,
-    [styles[`name-${nameTextSize}`]]: true,
+    [styles[`name${capitalizeFirstLetter(nameTextSize)}`]]: true,
   })
   const descClasses = classNames({
     [styles.desc]: true,
-    [styles[`desc-${descTextSize}`]]: true,
-    [styles[`desc-row-${descRowSize}`]]: true,
+    [styles[`desc${descTextSize}`]]: true,
+    [styles[`descRow${descRowSize}`]]: true,
   })
 
   if (isArchived) {

@@ -78,7 +78,7 @@ const DonationButton = ({
       {({ openDialog }) => (
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="grey-lighter"
+          bgActiveColor="greyLighter"
           aria-label={translate({
             zh_hant: `${TEXT.zh_hant.donation}（當前 ${donationCount} 次支持）`,
             zh_hans: `${TEXT.zh_hans.donation}（当前 ${donationCount} 次支持）`,
@@ -105,7 +105,7 @@ const DonationButton = ({
           }}
         >
           <TextIcon
-            icon={<IconDonate24 size="md-s" />}
+            icon={<IconDonate24 size="mdS" />}
             weight="md"
             spacing="xtight"
             size="sm"

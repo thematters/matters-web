@@ -63,7 +63,7 @@ export const LanguageSwitchContent = ({
 
 type LanguageSwitchProps = {
   size?: 'sm' | 'lg'
-  bgColor?: 'grey-darkest'
+  bgColor?: 'greyDarkest'
 }
 
 export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
@@ -72,8 +72,8 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const iconColor = bgColor === 'grey-darkest' ? 'white' : 'grey'
-  const textSize = size === 'sm' ? 'sm-s' : 'md'
+  const iconColor = bgColor === 'greyDarkest' ? 'white' : 'grey'
+  const textSize = size === 'sm' ? 'smS' : 'md'
 
   return (
     <DropdownDialog
@@ -98,9 +98,7 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
           size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
           spacing={[0, 'xtight']}
           bgColor={bgColor}
-          bgActiveColor={
-            bgColor === 'grey-darkest' ? undefined : 'grey-lighter'
-          }
+          bgActiveColor={bgColor === 'greyDarkest' ? undefined : 'greyLighter'}
           onClick={openDialog}
           aria-haspopup={type}
           ref={ref}

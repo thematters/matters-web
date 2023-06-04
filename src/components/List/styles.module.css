@@ -11,42 +11,42 @@
     }
   }
 
-  &.spacing-y-base {
+  &.spacingYBase {
     & > :global(.list-item) {
       padding-bottom: calc(var(--spacing-base) / 2);
       margin-bottom: calc(var(--spacing-base) / 2);
     }
   }
 
-  &.spacing-y-loose {
+  &.spacingYLoose {
     & > :global(.list-item) {
       padding-bottom: calc(var(--spacing-loose) / 2);
       margin-bottom: calc(var(--spacing-loose) / 2);
     }
   }
 
-  &.spacing-y-xloose {
+  &.spacingYXloose {
     & > :global(.list-item) {
       padding-bottom: calc(var(--spacing-x-loose) / 2);
       margin-bottom: calc(var(--spacing-x-loose) / 2);
     }
   }
 
-  &.spacing-x-base {
+  &.spacingXBase {
     & > :global(.list-item) {
       padding-right: var(--spacing-base);
       padding-left: var(--spacing-base);
     }
   }
 
-  &.spacing-x-loose {
+  &.spacingXLoose {
     & > :global(.list-item) {
       padding-right: var(--spacing-loose);
       padding-left: var(--spacing-loose);
     }
   }
 
-  &.spacing-x-xloose {
+  &.spacingXXloose {
     & > :global(.list-item) {
       padding-right: var(--spacing-x-loose);
       padding-left: var(--spacing-x-loose);

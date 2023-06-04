@@ -13,7 +13,7 @@ const PayoutButton: React.FC<PayoutButtonProps> = ({
       {({ openDialog: openPayoutDialog }) => (
         <Dialog.Footer.Button
           {...buttonProps}
-          bgColor="grey-lighter"
+          bgColor="greyLighter"
           textColor="black"
           aria-haspopup="dialog"
           onClick={openPayoutDialog}

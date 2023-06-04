@@ -103,10 +103,10 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           {circle && (
             <CircleDigest.Rich
               circle={circle}
-              bgColor="grey-lighter"
+              bgColor="greyLighter"
               borderRadius="xtight"
               avatarSize="xl"
-              textSize="md-s"
+              textSize="mdS"
               hasOwner={false}
               hasDescription={false}
               disabled

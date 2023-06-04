@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import { toPath } from '~/common/utils'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
@@ -31,7 +31,7 @@ export type CircleDigestRichProps = {
   circle: DigestRichCirclePublicFragment &
     Partial<DigestRichCirclePrivateFragment>
   avatarSize?: CircleAvatarSize
-  textSize?: 'md-s' | 'xm'
+  textSize?: 'mdS' | 'xm'
 } & CircleDigestRichControls &
   CardProps
 
@@ -62,7 +62,7 @@ const Rich = ({
   })
   const titleClasses = classNames({
     [styles.title]: true,
-    [styles[`text-size-${textSize}`]]: !!textSize,
+    [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
   })
 
   return (
@@ -91,7 +91,7 @@ const Rich = ({
                 user={owner}
                 avatarSize="sm"
                 textSize="sm"
-                nameColor="grey-darker"
+                nameColor="greyDarker"
                 hasAvatar
                 hasDisplayName
                 disabled={disabled}

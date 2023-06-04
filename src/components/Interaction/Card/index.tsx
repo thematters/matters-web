@@ -11,15 +11,15 @@ import {
 } from 'react'
 
 import { KEYCODES, TEST_ID } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { capitalizeFirstLetter, translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
 import styles from './styles.module.css'
 
-export type CardBgColor = 'grey-lighter' | 'white' | 'transparent' | 'none'
-export type CardBgHoverColor = 'grey-lighter' | 'transparent' | 'none'
+export type CardBgColor = 'greyLighter' | 'white' | 'transparent' | 'none'
+export type CardBgHoverColor = 'greyLighter' | 'transparent' | 'none'
 export type CardSpacing = 0 | 'xtight' | 'tight' | 'base' | 'loose'
-export type CardBorderColor = 'grey-lighter' | 'line-grey-light' | 'green'
+export type CardBorderColor = 'greyLighter' | 'lineGreyLight' | 'green'
 export type CardBorderRadius = 'xtight' | 'xxtight' | 'base' | 'loose'
 
 export interface CardProps {
@@ -90,12 +90,20 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
     const cardClasses = classNames({
       [styles.card]: true,
-      [styles[`spacing-y-${spacing[0]}`]]: !!spacing[0],
-      [styles[`spacing-x-${spacing[1]}`]]: !!spacing[1],
-      [styles[`bg-${bgColor}`]]: !!bgColor,
-      [styles[`bg-active-${bgActiveColor}`]]: !!bgActiveColor,
-      [styles[`border-${borderColor}`]]: !!borderColor,
-      [styles[`border-radius-${borderRadius}`]]: !!borderRadius,
+      [styles[`spacingY${capitalizeFirstLetter(spacing[0] + '')}`]]:
+        !!spacing[0],
+      [styles[`spacingX${capitalizeFirstLetter(spacing[1] + '')}`]]:
+        !!spacing[1],
+      [styles[`bg${capitalizeFirstLetter(bgColor)}`]]: !!bgColor,
+      [bgActiveColor
+        ? styles[`bgActive${capitalizeFirstLetter(bgActiveColor)}`]
+        : '']: !!bgActiveColor,
+      [borderColor
+        ? styles[`border${capitalizeFirstLetter(borderColor)}`]
+        : '']: !!borderColor,
+      [borderRadius
+        ? styles[`borderRadius${capitalizeFirstLetter(borderRadius)}`]
+        : '']: !!borderRadius,
       [styles.activeOutlineAuto]: !!activeOutline,
 
       [styles.hasBorder]: !!borderColor || !!borderRadius,

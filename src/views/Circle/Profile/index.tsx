@@ -191,7 +191,7 @@ const CircleProfile = () => {
           <section className={styles.description}>
             <Expandable
               content={circle.description}
-              color="grey-darker"
+              color="greyDarker"
               spacingTop="base"
               size="md"
             >

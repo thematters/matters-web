@@ -48,7 +48,7 @@ const AllTabs = () => {
           border: 2px dashed var(--color-grey-light);
           border-radius: var(--spacing-base);
           color: var(--color-grey);
-          background: var(--color-grey-lighter);
+          background: var(--color-greyLighter);
           text-align: center;
         }
       `}</style>

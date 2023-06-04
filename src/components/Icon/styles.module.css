@@ -14,7 +14,7 @@
     height: 0.75rem;
   }
 
-  &.sm-s {
+  &.smS {
     width: 0.8125rem;
     height: 0.8125rem;
   }
@@ -24,7 +24,7 @@
     height: 0.875rem;
   }
 
-  &.md-s {
+  &.mdS {
     width: 1.25rem;
     height: 1.25rem;
   }
@@ -39,7 +39,7 @@
     height: 2rem;
   }
 
-  &.xl-m {
+  &.xlM {
     width: 2.5rem;
     height: 2.5rem;
   }
@@ -63,11 +63,11 @@
     color: var(--color-black);
   }
 
-  &.grey-dark {
+  &.greyDark {
     color: var(--color-grey-dark);
   }
 
-  &.grey-darker {
+  &.greyDarker {
     color: var(--color-grey-darker);
   }
 
@@ -75,11 +75,11 @@
     color: var(--color-grey);
   }
 
-  &.grey-light {
+  &.greyLight {
     color: var(--color-grey-light);
   }
 
-  &.grey-lighter {
+  &.greyLighter {
     color: var(--color-grey-lighter);
   }
 

@@ -41,7 +41,7 @@ const Collapsed = ({
       {collapsed && (
         <Button
           spacing={['xxtight', 'xtight']}
-          bgActiveColor="grey-lighter"
+          bgActiveColor="greyLighter"
           onClick={() => {
             setCollapsed(false)
           }}

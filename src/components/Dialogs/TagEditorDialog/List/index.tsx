@@ -46,10 +46,10 @@ const RemoveButton = ({ remove }: { remove: () => void }) => (
     <Button
       spacing={[0, 'xtight']}
       size={[null, '1.25rem']}
-      bgColor="grey-lighter"
+      bgColor="greyLighter"
       onClick={() => remove()}
     >
-      <TextIcon size="xs" color="grey-dark" weight="md">
+      <TextIcon size="xs" color="greyDark" weight="md">
         <Translate zh_hant="移除" zh_hans="移除" en="remove" />
       </TextIcon>
     </Button>

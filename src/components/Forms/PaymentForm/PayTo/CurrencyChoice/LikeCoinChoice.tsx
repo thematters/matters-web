@@ -24,7 +24,7 @@ type LikeCoinChoiceProps = {
 
 const IconLikeDisabled = () => (
   <TextIcon
-    icon={<IconLikeCoin40 size="xl-m" color="grey" />}
+    icon={<IconLikeCoin40 size="xlM" color="grey" />}
     size="md"
     spacing="xtight"
     color="grey"
@@ -90,11 +90,7 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
       className={`${styles.item} ${styles.clickable}`}
       onClick={switchToSetAmount}
     >
-      <TextIcon
-        icon={<IconLikeCoin40 size="xl-m" />}
-        size="md"
-        spacing="xtight"
-      >
+      <TextIcon icon={<IconLikeCoin40 size="xlM" />} size="md" spacing="xtight">
         LikeCoin
       </TextIcon>
 

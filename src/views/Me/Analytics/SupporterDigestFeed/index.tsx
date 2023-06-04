@@ -32,7 +32,7 @@ const SupporterDigestFeed = ({
             hasAvatar
             avatarSize="md"
             hasDisplayName
-            textSize="md-s"
+            textSize="mdS"
             textWeight="md"
           />
 
@@ -40,7 +40,7 @@ const SupporterDigestFeed = ({
             <TextIcon
               icon={<IconDonate24 size="xs" />}
               size="xs"
-              color="grey-dark"
+              color="greyDark"
             >
               {donationCount}
             </TextIcon>

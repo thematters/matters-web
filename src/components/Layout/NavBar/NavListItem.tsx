@@ -32,7 +32,7 @@ const NavListItem = ({
   return (
     <li>
       <Button
-        bgActiveColor="grey-lighter"
+        bgActiveColor="greyLighter"
         size={['2rem', '2rem']}
         {...props}
         onClick={onClick}

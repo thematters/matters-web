@@ -38,7 +38,7 @@ const NavBar = () => {
                 <section className={styles.inner}>
                   <section className={styles.left}>
                     {withIcon(IconOnboardLaunch)({
-                      size: 'xl-m',
+                      size: 'xlM',
                       color: 'gold',
                     })}
 

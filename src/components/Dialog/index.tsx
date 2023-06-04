@@ -6,7 +6,7 @@ import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
 import { KEYCODES } from '~/common/enums'
-import { dom } from '~/common/utils'
+import { capitalizeFirstLetter, dom } from '~/common/utils'
 import { Media, useOutsideClick } from '~/components'
 
 import Content from './Content'
@@ -26,8 +26,8 @@ export interface DialogOverlayProps {
 
 export type DialogProps = {
   size?: 'sm' | 'lg'
-  smBgColor?: 'grey-lighter'
-  smUpBgColor?: 'grey-lighter'
+  smBgColor?: 'greyLighter'
+  smUpBgColor?: 'greyLighter'
   fixedHeight?: boolean
   hidePaddingBottom?: boolean
 
@@ -59,8 +59,10 @@ const Container: React.FC<
     [styles.container]: true,
     [styles.fixedHeight]: !!fixedHeight,
     [styles[size]]: true,
-    [styles[`bg-${smBgColor}`]]: !!smBgColor,
-    [styles[`bg-${smUpBgColor}-sm-up`]]: !!smUpBgColor,
+    [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
+      !!smBgColor,
+    [smUpBgColor ? styles[`bg${capitalizeFirstLetter(smUpBgColor)}SmUp`] : '']:
+      !!smUpBgColor,
     [styles.hidePaddingBottom]: !!hidePaddingBottom,
   })
 

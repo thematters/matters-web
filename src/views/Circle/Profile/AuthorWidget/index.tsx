@@ -19,9 +19,9 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
   return (
     <section className={styles.authorWidget}>
       <Card
-        bgColor="grey-lighter"
+        bgColor="greyLighter"
         spacing={['base', 'base']}
-        borderColor="grey-lighter"
+        borderColor="greyLighter"
         borderRadius="base"
         {...path}
       >

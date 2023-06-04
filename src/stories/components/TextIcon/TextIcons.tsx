@@ -20,7 +20,7 @@ const Toasts = () => (
 
       <li>
         <TextIcon
-          icon={<IconDonate24 size="md-s" />}
+          icon={<IconDonate24 size="mdS" />}
           weight="md"
           spacing="xtight"
           size="sm"
@@ -46,7 +46,7 @@ const Toasts = () => (
 
       <li>
         <TextIcon
-          color="grey-dark"
+          color="greyDark"
           size="sm"
           weight="normal"
           textPlacement="left"

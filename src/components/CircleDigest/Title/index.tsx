@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { toPath } from '~/common/utils'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { LinkWrapper, LinkWrapperProps } from '~/components'
 import { DigestTitleCircleFragment } from '~/gql/graphql'
 
@@ -39,8 +39,8 @@ const CircleDigestTitle = ({
   })
   const titleClasses = classNames({
     [styles.title]: true,
-    [styles[`text-size-${textSize}`]]: !!textSize,
-    [styles[`text-weight-${textWeight}`]]: !!textWeight,
+    [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
+    [styles[`textWeight${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
   })
 
   return (

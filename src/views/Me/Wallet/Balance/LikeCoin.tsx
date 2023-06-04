@@ -37,7 +37,7 @@ const VIEWER_LIKE_BALANCE = gql`
 
 const Wrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
   <section className={styles.assetsItem}>
-    <TextIcon icon={<IconLikeCoin40 size="xl-m" />} size="md" spacing="xtight">
+    <TextIcon icon={<IconLikeCoin40 size="xlM" />} size="md" spacing="xtight">
       <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
     </TextIcon>
 
@@ -69,7 +69,7 @@ export const LikeCoinBalance = ({
   if (loading) {
     return (
       <Wrapper>
-        <IconSpinner16 color="grey-light" size="sm" />
+        <IconSpinner16 color="greyLight" size="sm" />
       </Wrapper>
     )
   }

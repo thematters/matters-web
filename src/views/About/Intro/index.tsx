@@ -73,7 +73,7 @@ const Intro = () => {
               </p>
               <section className={styles.buttons}>
                 <Button
-                  bgActiveColor="grey-lighter"
+                  bgActiveColor="greyLighter"
                   borderColor="white"
                   textColor="white"
                   textActiveColor="black"

@@ -47,8 +47,8 @@ export const ArticleDigestCard = ({
     <Card
       {...path}
       spacing={[0, 0]}
-      borderColor={cover ? undefined : 'grey-lighter'}
-      bgActiveColor={cover ? undefined : 'grey-lighter'}
+      borderColor={cover ? undefined : 'greyLighter'}
+      bgActiveColor={cover ? undefined : 'greyLighter'}
       borderRadius="xtight"
       onClick={onClick}
       testId={TEST_ID.DIGEST_ARTICLE_CARD}
@@ -67,7 +67,7 @@ export const ArticleDigestCard = ({
           <ArticleDigestTitle
             article={{ ...article, title }}
             is="h3"
-            textSize="md-s"
+            textSize="mdS"
           />
 
           {!cover && <p className={styles.summary}>{cleanedSummary}</p>}

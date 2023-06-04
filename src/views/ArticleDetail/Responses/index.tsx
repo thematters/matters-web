@@ -49,7 +49,7 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
         <TextIcon
           icon={<IconDisableComment24 size="md" />}
           color="grey"
-          size="sm-s"
+          size="smS"
           allowUserSelect
         >
           <Translate

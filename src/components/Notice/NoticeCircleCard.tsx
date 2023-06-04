@@ -17,7 +17,7 @@ const NoticeCircleCard = ({
   return (
     <section className={styles.subContent}>
       <CircleDigest.Rich
-        bgColor="grey-lighter"
+        bgColor="greyLighter"
         borderRadius="xtight"
         circle={circle}
         hasFooter

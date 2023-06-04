@@ -64,7 +64,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
     >
       <section className={styles.subscriptionBanner}>
         <TextIcon
-          icon={<IconCircle16 size="md-s" />}
+          icon={<IconCircle16 size="mdS" />}
           size="xm"
           color="white"
           weight="md"

@@ -32,7 +32,7 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
         <CircleDigest.Rich
           circle={circle}
           borderRadius="xtight"
-          borderColor="line-grey-light"
+          borderColor="lineGreyLight"
           hasFooter={false}
           hasDescription
           hasOwner
@@ -43,27 +43,27 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
       <ul className={styles.features}>
         <li>
           <TextIcon
-            icon={withIcon(IconCircleFeatureReading)({ size: 'md-s' })}
+            icon={withIcon(IconCircleFeatureReading)({ size: 'mdS' })}
             color="gold"
-            size="md-s"
+            size="mdS"
           >
             <Translate zh_hant="無限閱讀" zh_hans="无限阅读" />
           </TextIcon>
         </li>
         <li>
           <TextIcon
-            icon={withIcon(IconCircleFeatureDiscussion)({ size: 'md-s' })}
+            icon={withIcon(IconCircleFeatureDiscussion)({ size: 'mdS' })}
             color="gold"
-            size="md-s"
+            size="mdS"
           >
             <Translate zh_hant="眾聊互動" zh_hans="众聊互动" />
           </TextIcon>
         </li>
         <li>
           <TextIcon
-            icon={withIcon(IconCircleFeatureConnection)({ size: 'md-s' })}
+            icon={withIcon(IconCircleFeatureConnection)({ size: 'mdS' })}
             color="gold"
-            size="md-s"
+            size="mdS"
           >
             <Translate zh_hant="解鎖社群" zh_hans="解锁社群" />
           </TextIcon>

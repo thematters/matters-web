@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { toPath } from '~/common/utils'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 import { UserDigestConciseUserFragment } from '~/gql/graphql'
@@ -62,7 +62,7 @@ const Concise = ({
   })
   const nameClasses = classNames({
     [styles.name]: true,
-    [styles[`name-style-${nameStyle}`]]: !!nameStyle,
+    [styles[`nameStyle${capitalizeFirstLetter(nameStyle)}`]]: !!nameStyle,
   })
 
   if (isArchived) {

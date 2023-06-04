@@ -54,7 +54,7 @@ const USDTChoice: React.FC<FormProps> = ({
     return (
       <section className={styles.item}>
         <TextIcon
-          icon={<IconUSDT40 size="xl-m" />}
+          icon={<IconUSDT40 size="xlM" />}
           size="md"
           spacing="xtight"
           color="grey"
@@ -76,7 +76,7 @@ const USDTChoice: React.FC<FormProps> = ({
     return (
       <section className={styles.item}>
         <TextIcon
-          icon={<IconUSDT40 size="xl-m" />}
+          icon={<IconUSDT40 size="xlM" />}
           size="md"
           spacing="xtight"
           color="grey"
@@ -103,7 +103,7 @@ const USDTChoice: React.FC<FormProps> = ({
         aria-label="Tether"
       >
         <TextIcon
-          icon={<IconUSDTActive40 size="xl-m" />}
+          icon={<IconUSDTActive40 size="xlM" />}
           size="md"
           spacing="xtight"
         >
@@ -126,7 +126,7 @@ const USDTChoice: React.FC<FormProps> = ({
   return (
     <section className={styles.item} aria-label="Tether">
       <TextIcon
-        icon={<IconUSDT40 size="xl-m" color="grey" />}
+        icon={<IconUSDT40 size="xlM" color="grey" />}
         size="md"
         spacing="xtight"
         color="grey"

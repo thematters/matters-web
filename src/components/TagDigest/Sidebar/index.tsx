@@ -71,26 +71,26 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
             <Tag
               tag={tag}
               type="plain"
-              iconProps={{ color: 'grey-darker' }}
+              iconProps={{ color: 'greyDarker' }}
               textIconProps={{ color: 'black', weight: 'md', size: 'sm' }}
             />
           </header>
 
           <section className={styles.nums}>
             <TextIcon
-              icon={<IconUser16 color="grey-dark" size="xs" />}
+              icon={<IconUser16 color="greyDark" size="xs" />}
               size="xs"
               spacing="xxtight"
-              color="grey-dark"
+              color="greyDark"
             >
               {numAbbr(tag.numAuthors)}
             </TextIcon>
 
             <TextIcon
-              icon={<IconArticle16 color="grey-dark" size="xs" />}
+              icon={<IconArticle16 color="greyDark" size="xs" />}
               size="xs"
               spacing="xxtight"
-              color="grey-dark"
+              color="greyDark"
             >
               {numAbbr(tag.numArticles)}
             </TextIcon>

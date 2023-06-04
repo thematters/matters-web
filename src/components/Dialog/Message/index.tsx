@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 
+import { capitalizeFirstLetter } from '~/common/utils'
 import { Dialog } from '~/components'
 
 import styles from './styles.module.css'
@@ -35,8 +36,8 @@ const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
   const contentClasses = classNames({
     [styles.content]: true,
     [styles[`${type}`]]: !!type,
-    [styles[`align-${align}`]]: !!align,
-    [styles[`spacing-${spacing}`]]: !!spacing,
+    [align ? styles[`align${capitalizeFirstLetter(align)}`] : '']: !!align,
+    [styles[`spacing${capitalizeFirstLetter(spacing)}`]]: !!spacing,
   })
 
   return (

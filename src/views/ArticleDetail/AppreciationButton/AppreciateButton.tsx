@@ -45,7 +45,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
     <span className={buttonClasses}>
       <Button
         spacing={['xtight', 'xtight']}
-        bgActiveColor="grey-lighter"
+        bgActiveColor="greyLighter"
         aria-label={translate({
           zh_hant: `讚賞作品（當前 ${total} 次讚賞）`,
           zh_hans: `赞赏作品（当前 ${total} 次赞赏）`,
@@ -79,14 +79,14 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
             >
               <IconClap16
                 className={[styles.iconLike, clapStyles.iconLike].join(' ')}
-                size="md-s"
+                size="mdS"
               />
               <IconSuperLike
                 className={[
                   styles.iconSuperlike,
                   clapStyles.iconSuperlike,
                 ].join(' ')}
-                size="md-s"
+                size="mdS"
               />
             </span>
           }

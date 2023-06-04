@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import Sticky from 'react-stickynode'
 
+import { capitalizeFirstLetter } from '~/common/utils'
 import {
   Head,
   Media,
@@ -83,7 +84,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
 interface MainProps {
   aside?: React.ReactNode
-  smBgColor?: 'grey-lighter'
+  smBgColor?: 'greyLighter'
   inEditor?: boolean
 }
 
@@ -109,7 +110,8 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   const articleClasses = classNames({
     [styles.article]: true,
     'l-col-three-mid': true,
-    [styles[`bg-${smBgColor}`]]: !!smBgColor,
+    [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
+      !!smBgColor,
     [styles.hasNavBar]: !isInArticleDetail && !isInDraftDetail,
     [styles.hasOnboardingTasks]: showOnboardingTasks,
   })

@@ -85,7 +85,7 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
                         lang,
                       })}
                     >
-                      <IconSort16 color="grey-light" />
+                      <IconSort16 color="greyLight" />
                     </span>
 
                     <SearchSelectNode

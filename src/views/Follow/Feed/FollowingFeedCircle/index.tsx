@@ -36,7 +36,7 @@ const FeedCircle = ({
       <Card
         href={path.href}
         spacing={['base', 'base']}
-        bgColor="grey-lighter"
+        bgColor="greyLighter"
         borderRadius="xtight"
         {...rest}
       >

@@ -1,6 +1,8 @@
 import classNames from 'classnames'
 import React from 'react'
 
+import { capitalizeFirstLetter } from '~/common/utils'
+
 import styles from './styles.module.css'
 
 interface MenuDividerProps {
@@ -9,7 +11,8 @@ interface MenuDividerProps {
 
 const MenuDivider: React.FC<MenuDividerProps> = ({ spacing = 0 }) => {
   const dividerClasses = classNames({
-    [styles[`spacing-${spacing}`]]: !!spacing,
+    [spacing ? styles[`spacing${capitalizeFirstLetter(spacing)}`] : '']:
+      !!spacing,
   })
 
   return (

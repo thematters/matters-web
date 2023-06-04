@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 import { UserDigestMiniUserFragment } from '~/gql/graphql'
@@ -25,9 +25,9 @@ export type UserDigestMiniProps = {
   user: UserDigestMiniUserFragment
 
   avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
-  textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s' | 'md'
+  textSize?: 'xs' | 'smS' | 'sm' | 'mdS' | 'md'
   textWeight?: 'md' | 'semibold'
-  nameColor?: 'black' | 'white' | 'grey-darker' | 'green'
+  nameColor?: 'black' | 'white' | 'greyDarker' | 'green'
   direction?: 'row' | 'column'
   spacing?: 'xxtight' | 'xtight'
 
@@ -77,16 +77,18 @@ const Mini = ({
   })
   const containerClasses = classNames({
     [styles.container]: true,
-    [styles[`text-size-${textSize}`]]: !!textSize,
-    [styles[`text-weight-${textWeight}`]]: !!textWeight,
-    [styles[`name-color-${nameColor}`]]: !!nameColor,
-    [styles[`spacing-${spacing}`]]: !!spacing,
+    [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
+    [textWeight
+      ? styles[`textWeight${capitalizeFirstLetter(textWeight)}`]
+      : '']: !!textWeight,
+    [styles[`nameColor${capitalizeFirstLetter(nameColor)}`]]: !!nameColor,
+    [styles[`spacing${capitalizeFirstLetter(spacing)}`]]: !!spacing,
     [styles.hasAvatar]: hasAvatar,
     [styles.disabled]: disabled || isArchived,
   })
   const nameClasses = classNames({
     [styles.name]: true,
-    [styles[`direction-${direction}`]]: !!direction,
+    [styles[`direction${capitalizeFirstLetter(direction)}`]]: !!direction,
   })
 
   if (isArchived) {

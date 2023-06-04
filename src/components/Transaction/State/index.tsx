@@ -95,7 +95,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
         spacing="xxtight"
         size="xs"
         weight="normal"
-        color={state === TransactionState.Failed ? 'red' : 'grey-dark'}
+        color={state === TransactionState.Failed ? 'red' : 'greyDark'}
         textPlacement="left"
       >
         <StateText />

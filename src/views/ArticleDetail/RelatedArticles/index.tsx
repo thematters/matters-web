@@ -106,7 +106,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
               titleTextSize="sm"
               onClick={onClick(i, node.id)}
               onClickAuthor={onClickAuthor(i, node.author.id)}
-              bgActiveColor="grey-lighter"
+              bgActiveColor="greyLighter"
             />
           </li>
         ))}

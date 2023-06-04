@@ -199,11 +199,7 @@ const Confirm: React.FC<FormProps> = ({
           >
             <p>
               <Button onClick={switchToSetAmount}>
-                <TextIcon
-                  size="xs"
-                  textDecoration="underline"
-                  color="grey-dark"
-                >
+                <TextIcon size="xs" textDecoration="underline" color="greyDark">
                   <Translate
                     zh_hant="修改金額"
                     zh_hans="修改金额"

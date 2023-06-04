@@ -58,7 +58,7 @@ const ArticleCustomStagingArea = ({
                 >
                   {({ openDialog }) => (
                     <Button onClick={openDialog}>
-                      <IconClose16 size="md-s" color="grey" />
+                      <IconClose16 size="mdS" color="grey" />
                     </Button>
                   )}
                 </ConfirmDialog>

@@ -19,7 +19,7 @@ const Buttons = () => (
       <li>
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="grey-lighter-active"
+          bgActiveColor="greyLighterActive"
           aria-haspopup="dialog"
         >
           <IconMore16 color="grey" />
@@ -57,7 +57,7 @@ const Buttons = () => (
             <Translate id="agreeAndContinue" />
           </Dialog.Footer.Button>
 
-          <Dialog.Footer.Button bgColor="grey-lighter" textColor="black">
+          <Dialog.Footer.Button bgColor="greyLighter" textColor="black">
             <Translate id="disagree" />
           </Dialog.Footer.Button>
         </Dialog.Footer>

@@ -18,7 +18,7 @@ export const Spinner = () => {
           <Translate zh_hant="載入中…" zh_hans="加载中…" en="Loading..." />
         </span>
       </VisuallyHidden>
-      <IconSpinner16 color="grey-light" size="lg" />
+      <IconSpinner16 color="greyLight" size="lg" />
     </div>
   )
 }

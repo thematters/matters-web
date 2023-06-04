@@ -61,14 +61,14 @@
   }
 }
 
-.align-left {
+.alignLeft {
   text-align: left;
 }
 
-.spacing-md {
+.spacingMd {
   padding: var(--spacing-base) 0;
 }
 
-.spacing-xxl {
+.spacingXxl {
   padding: var(--spacing-xx-loose) 0;
 }

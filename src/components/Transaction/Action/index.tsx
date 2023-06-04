@@ -56,14 +56,14 @@ const Action = ({
         <section className={styles.from}>
           <Avatar size="sm" user={sender} />
           <div className={styles.outline}>
-            <IconSupport size="md-s" color="gold" />
+            <IconSupport size="mdS" color="gold" />
           </div>
         </section>
       )}
 
       {isSender && recipient && (
         <section className={styles.to}>
-          <IconSupport size="md-s" color="grey-light" />
+          <IconSupport size="mdS" color="greyLight" />
 
           <div className={styles.outline}>
             <Avatar size="sm" user={recipient} />

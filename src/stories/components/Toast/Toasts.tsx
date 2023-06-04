@@ -38,7 +38,7 @@ const Toasts = () => (
 
       <Button
         spacing={['xtight', 'xtight']}
-        bgColor="green-lighter"
+        bgColor="greenLighter"
         onClick={() => {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
@@ -55,7 +55,7 @@ const Toasts = () => (
 
       <Button
         spacing={['xtight', 'xtight']}
-        bgColor="green-lighter"
+        bgColor="greenLighter"
         onClick={() => {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
@@ -119,7 +119,7 @@ const Toasts = () => (
         border: 2px dashed var(--color-grey-light);
         border-radius: var(--spacing-base);
         color: var(--color-grey);
-        background: var(--color-grey-lighter);
+        background: var(--color-greyLighter);
         text-align: center;
       }
 

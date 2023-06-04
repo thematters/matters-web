@@ -54,8 +54,8 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
               analytics.trackEvent('click_button', { type: 'create_circle' })
             }}
             role="button"
-            bgColor="grey-lighter"
-            bgActiveColor="grey-lighter"
+            bgColor="greyLighter"
+            bgActiveColor="greyLighter"
             spacing={[0, 'base']}
             borderRadius="xtight"
           />
@@ -71,7 +71,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
       <CircleDigest.Rich
         avatarSize="xl"
         borderRadius="xtight"
-        borderColor="line-grey-light"
+        borderColor="lineGreyLight"
         circle={circle}
         hasFooter
         hasOwner={false}

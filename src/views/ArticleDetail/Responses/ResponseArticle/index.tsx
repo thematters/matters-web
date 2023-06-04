@@ -32,7 +32,7 @@ const ResponseArticle = ({ article }: ResponseArticleProps) => {
         <UserDigest.Mini
           user={article.author}
           avatarSize="lg"
-          textSize="md-s"
+          textSize="mdS"
           textWeight="md"
           hasAvatar
           hasDisplayName

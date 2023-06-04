@@ -138,7 +138,7 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                   ref={ref}
                 >
                   <TextIcon
-                    icon={<IconFiatCurrency40 size="xl-m" />}
+                    icon={<IconFiatCurrency40 size="xlM" />}
                     size="md"
                     spacing="xtight"
                   >

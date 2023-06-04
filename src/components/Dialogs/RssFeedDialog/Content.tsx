@@ -135,7 +135,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                   <TextIcon
                     icon={<IconInfo24 size="md" />}
                     color="green"
-                    size="md-s"
+                    size="mdS"
                   >
                     <FormattedMessage
                       defaultMessage="Waiting ..."

@@ -278,7 +278,7 @@ export const UserProfile = () => {
 
           <Expandable
             content={user.info.description}
-            color="grey-darker"
+            color="greyDarker"
             size="md"
             spacingTop="base"
           >

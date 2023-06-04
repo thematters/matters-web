@@ -66,7 +66,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
           <Button
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
-            bgActiveColor="grey-lighter"
+            bgActiveColor="greyLighter"
             onClick={shuffle}
           >
             <TextIcon icon={<IconReload12 size="sm" />} color="grey">
