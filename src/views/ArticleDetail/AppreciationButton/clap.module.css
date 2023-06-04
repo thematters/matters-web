@@ -1,25 +1,25 @@
 .clap {
   &:hover {
-    & .icon-like,
-    & .icon-superlike {
+    & .iconLike,
+    & .iconSuperlike {
       will-change: transform;
       transition: transform 0.15s ease-in;
       transform: scale(1) !important;
     }
 
-    & .clap-explode svg {
+    & .clapExplode svg {
       will-change: transform, opacity;
     }
   }
 
-  &.clap-hand-zoom-in {
-    & .icon-like,
-    & .icon-superlike {
+  &.clapHandZoomIn {
+    & .iconLike,
+    & .iconSuperlike {
       transform: scale(1.15) !important;
     }
   }
 
-  & .clap-explode {
+  & .clapExplode {
     & svg {
       position: absolute;
       top: 50%;

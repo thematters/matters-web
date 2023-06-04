@@ -38,7 +38,9 @@ const ArticleTagUnselectedNotice = ({
         <NoticeActorAvatar user={actor} />
       </section>
 
-      <section className={styles['content-wrap overflow-hidden']}>
+      <section
+        className={`${styles['content-wrap']} ${styles['overflow-hidden']}`}
+      >
         <NoticeHead>
           {isAuthor && (
             <Translate zh_hant="啊喔， " zh_hans="啊喔， " en="uh-oh, " />

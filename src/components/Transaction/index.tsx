@@ -145,7 +145,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
                     )}
                   </p>
                 </section>
-                <section className={styles['title circleTitle']}>
+                <section className={`${styles.title} ${styles.circleTitle}`}>
                   <CircleDigest.Title
                     circle={circle}
                     is="h2"

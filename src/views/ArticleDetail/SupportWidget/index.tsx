@@ -112,7 +112,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       )}
 
       {!showAnimation && (
-        <section className={styles['donation note']}>
+        <section className={`${styles.donation} ${styles.note}`}>
           {loading && <IconSpinner16 color="grey-light" size="lg" />}
 
           {!loading && (

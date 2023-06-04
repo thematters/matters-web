@@ -12,6 +12,7 @@ import {
 } from '~/components'
 
 import * as clap from './clap'
+import clapStyles from './clap.module.css'
 import styles from './styles.module.css'
 
 interface AppreciateButtonProps {
@@ -35,7 +36,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
 
   const iconRef = useRef<HTMLButtonElement>(null)
   const buttonClasses = classNames({
-    [styles['appreciate-button']]: true,
+    [styles.appreciateButton]: true,
     [styles.isSuperLike]: isSuperLike,
     [styles.superLiked]: superLiked,
   })
@@ -68,7 +69,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
           size="sm"
           icon={
             <span
-              className={styles['icon clap']}
+              className={`${styles.icon} ${clapStyles.clap}`}
               ref={iconRef}
               onTransitionEnd={(e) => {
                 if (e.propertyName === 'transform' && iconRef.current) {
@@ -76,8 +77,17 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
                 }
               }}
             >
-              <IconClap16 className={styles['icon-like']} size="md-s" />
-              <IconSuperLike className={styles['icon-superlike']} size="md-s" />
+              <IconClap16
+                className={[styles.iconLike, clapStyles.iconLike].join(' ')}
+                size="md-s"
+              />
+              <IconSuperLike
+                className={[
+                  styles.iconSuperlike,
+                  clapStyles.iconSuperlike,
+                ].join(' ')}
+                size="md-s"
+              />
             </span>
           }
         >

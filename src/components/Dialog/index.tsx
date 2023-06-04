@@ -165,7 +165,7 @@ export const Dialog: React.ComponentType<
 
   return (
     <>
-      <AnimatedDialogOverlay className={styles['dialog']}>
+      <AnimatedDialogOverlay className="dialog">
         <AnimatedOverlay style={{ opacity: opacity as any }} />
 
         <DialogContent

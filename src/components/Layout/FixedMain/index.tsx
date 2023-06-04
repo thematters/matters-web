@@ -17,7 +17,7 @@ const FixedMain: React.FC<FixedMainProps> = ({ children }) => {
 
   if (isSingleColumnPage) {
     return (
-      <div className={styles['fixed-main single-col']}>
+      <div className={`${styles['fixed-main']} ${styles['single-col']}`}>
         <div className="l-container full">
           <div className="l-row">
             <div className={styles['content']}>{children}</div>
