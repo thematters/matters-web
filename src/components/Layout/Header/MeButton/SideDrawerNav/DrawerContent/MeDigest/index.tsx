@@ -17,12 +17,12 @@ const MeDigest = () => {
   return (
     <section className={styles['me-digest']}>
       <Link {...viewerPath} legacyBehavior>
-        <a className={styles['header']}>
+        <a className={styles.header}>
           <Avatar user={viewer} size="xl" />
 
-          <section className={styles['names']}>
+          <section className={styles.names}>
             <h1 className={styles['display-name']}>{viewer.displayName}</h1>
-            <p className={styles['username']}>@{viewer.userName}</p>
+            <p className={styles.username}>@{viewer.userName}</p>
           </section>
         </a>
       </Link>

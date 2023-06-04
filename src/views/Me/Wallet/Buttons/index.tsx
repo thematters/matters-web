@@ -12,8 +12,8 @@ interface ButtonsProps {
 const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
   const features = useFeatures()
   return (
-    <div className={styles['container']}>
-      <section className={styles['buttons']}>
+    <div className={styles.container}>
+      <section className={styles.buttons}>
         <AddCreditDialog>
           {({ openDialog }) => (
             <Dialog.Footer.Button

@@ -112,7 +112,7 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
 
   return (
     <Dialog.Content hasGrow>
-      <section className={styles['container']}>
+      <section className={styles.container}>
         <Form id={formId} onSubmit={handleSubmit}>
           <Form.Input
             label={<Explainer />}

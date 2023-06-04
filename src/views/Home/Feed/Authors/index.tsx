@@ -107,7 +107,7 @@ const Authors = () => {
   )
 
   return (
-    <section className={styles['authors']}>
+    <section className={styles.authors}>
       <Slides header={SlidesHeader}>
         {loading && (
           <Slides.Item size="md">
@@ -143,7 +143,7 @@ const Authors = () => {
       </Slides>
 
       <Media lessThan="md">
-        <section className={styles['backToAll']}>
+        <section className={styles.backToAll}>
           <ViewMoreCard
             spacing={['tight', 'tight']}
             href={PATHS.AUTHORS}

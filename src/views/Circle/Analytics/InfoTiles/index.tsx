@@ -45,21 +45,21 @@ const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
   const change = Math.abs(percentageChange || 0)
 
   return (
-    <section className={styles['tile']}>
-      <h3 className={styles['title']}>
+    <section className={styles.tile}>
+      <h3 className={styles.title}>
         {indicatorColor && (
           <span
-            className={styles['indicator']}
+            className={styles.indicator}
             style={{ color: indicatorColor }}
           />
         )}
         {title}
       </h3>
 
-      <div className={styles['content']}>
-        <span className={styles['value']}>{value}</span>
+      <div className={styles.content}>
+        <span className={styles.value}>{value}</span>
 
-        {unit && <span className={styles['unit']}>{unit}</span>}
+        {unit && <span className={styles.unit}>{unit}</span>}
 
         {change ? (
           <span className={changeClasses}>
@@ -81,7 +81,7 @@ const InfoTiles: React.FC<{ children?: React.ReactNode }> & {
   Group: typeof InfoTilesGroup
   Tile: typeof InfoTilesTile
 } = ({ children }) => {
-  return <section className={styles['container']}>{children}</section>
+  return <section className={styles.container}>{children}</section>
 }
 
 InfoTiles.Group = InfoTilesGroup

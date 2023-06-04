@@ -20,12 +20,12 @@ const RecommendedTags: React.FC<RecommendedTagsProps> = ({
   disabled,
 }) => {
   return (
-    <section className={styles['recommendedTags']}>
-      <p className={styles['hint']}>
+    <section className={styles.recommendedTags}>
+      <p className={styles.hint}>
         <Translate id="hintAddRecommendedTag" />
       </p>
 
-      <ul className={styles['tagList']}>
+      <ul className={styles.tagList}>
         {tags.map((tag) => (
           <li key={tag.id}>
             <Tag

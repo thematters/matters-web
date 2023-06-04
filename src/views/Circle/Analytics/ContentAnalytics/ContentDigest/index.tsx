@@ -27,7 +27,7 @@ const Count = ({ count }: { count: number }) => {
       content={<FormattedMessage defaultMessage="Read Counts" description="" />}
       trigger="click"
     >
-      <button type="button" className={styles['count']}>
+      <button type="button" className={styles.count}>
         <TextIcon icon={<IconRead16 />} size="xs" color="grey-dark">
           {count}
         </TextIcon>
@@ -48,14 +48,14 @@ const ContentDigest = ({
   })
   return (
     <Card {...path} spacing={[0, 0]}>
-      <section className={styles['container']}>
-        <section className={styles['number']}>{index + 1}</section>
+      <section className={styles.container}>
+        <section className={styles.number}>{index + 1}</section>
 
-        <section className={styles['article']}>
-          <section className={styles['content']}>
+        <section className={styles.article}>
+          <section className={styles.content}>
             <section className={styles['title-wrap']}>
               <LinkWrapper {...path} textActiveColor="green">
-                <h3 className={styles['title']}>{title}</h3>
+                <h3 className={styles.title}>{title}</h3>
               </LinkWrapper>
             </section>
 

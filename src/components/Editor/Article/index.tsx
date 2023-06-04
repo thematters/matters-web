@@ -68,7 +68,7 @@ const ArticleEditor: FC<Props> = ({
 
   return (
     <>
-      <div className={styles['container']}>
+      <div className={styles.container}>
         <MattersArticleEditor
           editorContent={content || ''}
           editorContentId={id}

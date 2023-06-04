@@ -172,7 +172,7 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
             />
 
             {customAmountHint && (
-              <div className={styles['hint']}>{customAmountHint}</div>
+              <div className={styles.hint}>{customAmountHint}</div>
             )}
           </section>
         )}

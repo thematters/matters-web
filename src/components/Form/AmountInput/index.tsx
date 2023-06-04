@@ -57,7 +57,7 @@ const AmountInput = forwardRef(
         />
 
         <Field.Content noMargin>
-          <span className={styles['currency']}>{currency}</span>
+          <span className={styles.currency}>{currency}</span>
 
           <input
             {...inputProps}

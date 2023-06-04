@@ -15,7 +15,7 @@ const IconArrow = () => (
 
 const JoinUs = () => {
   return (
-    <section className={styles['joinUs']} onClick={captureClicks}>
+    <section className={styles.joinUs} onClick={captureClicks}>
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">

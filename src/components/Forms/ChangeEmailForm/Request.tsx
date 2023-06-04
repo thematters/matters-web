@@ -94,7 +94,7 @@ const Request: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <section className={styles['container']}>
+    <section className={styles.container}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<Translate id="email" />}

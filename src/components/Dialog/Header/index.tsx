@@ -42,7 +42,7 @@ const BaseHeader = ({
       </h1>
 
       {(leftButton || closeDialog) && (
-        <section className={styles['left']}>
+        <section className={styles.left}>
           {leftButton ||
             (closeDialog ? (
               <CloseButton closeDialog={closeDialog} textId={closeTextId} />
@@ -50,9 +50,7 @@ const BaseHeader = ({
         </section>
       )}
 
-      {rightButton && (
-        <section className={styles['right']}>{rightButton}</section>
-      )}
+      {rightButton && <section className={styles.right}>{rightButton}</section>}
     </header>
   )
 }

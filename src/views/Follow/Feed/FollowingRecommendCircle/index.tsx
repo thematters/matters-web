@@ -51,18 +51,18 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
       {...path}
       {...cardProps}
     >
-      <section className={styles['container']}>
-        <section className={styles['head']}>
+      <section className={styles.container}>
+        <section className={styles.head}>
           <CircleAvatar circle={circle} size="xxl" />
 
-          <section className={styles['wrap']}>
-            <p className={styles['name']}>
+          <section className={styles.wrap}>
+            <p className={styles.name}>
               <LinkWrapper textActiveColor="green" {...path}>
                 {displayName}
               </LinkWrapper>
             </p>
 
-            <section className={styles['follow']}>
+            <section className={styles.follow}>
               <Button
                 spacing={['xtight', 'tight']}
                 textColor="green"
@@ -90,10 +90,8 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
           </section>
         </section>
 
-        <section className={styles['content']}>
-          {description && (
-            <p className={styles['description']}>{description}</p>
-          )}
+        <section className={styles.content}>
+          {description && <p className={styles.description}>{description}</p>}
 
           <Footer circle={circle} />
         </section>

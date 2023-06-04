@@ -58,7 +58,7 @@ export const ArticleDigestNotice = ({
             lineClamp={1}
           />
         </header>
-        <section className={styles['content']}>{summary}</section>
+        <section className={styles.content}>{summary}</section>
       </section>
     </LinkWrapper>
   )

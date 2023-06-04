@@ -15,12 +15,12 @@ const Handle: React.FC<HandleProps> = ({ closeDialog, ...props }) => {
   return (
     <button
       type="button"
-      className={styles['handle']}
+      className={styles.handle}
       aria-label={translate({ id: 'close', lang })}
       onClick={closeDialog}
       {...props}
     >
-      <span className={styles['icon']} />
+      <span className={styles.icon} />
     </button>
   )
 }

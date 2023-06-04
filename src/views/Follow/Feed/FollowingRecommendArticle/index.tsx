@@ -39,16 +39,16 @@ const RecommendArticle = ({ article, ...cardProps }: Props) => {
       {...path}
       {...cardProps}
     >
-      <section className={styles['container']}>
-        <section className={styles['head']}>
-          <section className={styles['wrap']}>
-            <p className={styles['title']}>
+      <section className={styles.container}>
+        <section className={styles.head}>
+          <section className={styles.wrap}>
+            <p className={styles.title}>
               <LinkWrapper textActiveColor="green" {...path}>
                 {title}
               </LinkWrapper>
             </p>
 
-            <section className={styles['author']}>
+            <section className={styles.author}>
               <UserDigest.Mini
                 user={author}
                 avatarSize="xs"
@@ -60,14 +60,14 @@ const RecommendArticle = ({ article, ...cardProps }: Props) => {
           </section>
 
           {cover && (
-            <section className={styles['cover']}>
+            <section className={styles.cover}>
               <ResponsiveImage url={cover} size="144w" />
             </section>
           )}
         </section>
 
-        <section className={styles['content']}>
-          <p className={styles['description']}>{cleanedSummary}</p>
+        <section className={styles.content}>
+          <p className={styles.description}>{cleanedSummary}</p>
         </section>
       </section>
     </Card>

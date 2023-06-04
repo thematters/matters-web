@@ -8,7 +8,7 @@ const ENSDescription = () => {
     <>
       <hr className={styles.hr} />
 
-      <section className={styles['description']}>
+      <section className={styles.description}>
         <p>
           <Translate id="linkEns" />
         </p>
@@ -22,7 +22,7 @@ const ENSDescription = () => {
           </li>
         </ul>
 
-        <p className={styles['reference']}>
+        <p className={styles.reference}>
           <Translate id="moreEnsInfo" />
           &nbsp;
           <a href={EXTERNAL_LINKS.ENS_DOCS} target="_blank" rel="noreferrer">

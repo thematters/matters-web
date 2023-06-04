@@ -20,7 +20,7 @@ const InviteEmail: React.FC<InviteEmailProps> = ({ user, onClick }) => {
           />
         </TextIcon>
 
-        <span className={styles['content']}>&nbsp;{user.displayName}</span>
+        <span className={styles.content}>&nbsp;{user.displayName}</span>
       </section>
     </Card>
   )

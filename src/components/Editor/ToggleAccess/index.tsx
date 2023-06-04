@@ -74,8 +74,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
   return (
     <section className={inSidebar ? 'inSidebar' : ''}>
       {canToggleCircle && (
-        <section className={styles['circle']}>
-          <section className={styles['switch']}>
+        <section className={styles.circle}>
+          <section className={styles.switch}>
             <header>
               <h3 className={styles.h3}>
                 <Translate id="addToCircle" />
@@ -115,12 +115,12 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         </section>
       )}
 
-      <section className={styles['widget']}>
+      <section className={styles.widget}>
         <h3>
           <Translate id="license" />
         </h3>
 
-        <section className={styles['license']}>
+        <section className={styles.license}>
           <SelectLicense
             isInCircle={!!circle}
             license={license}
@@ -137,8 +137,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
       <section className={styles['support-setting']}>
         <button type="button" onClick={onOpenSupportSetting}>
-          <section className={styles['support']}>
-            <section className={styles['left']}>
+          <section className={styles.support}>
+            <section className={styles.left}>
               <h3>
                 <Translate
                   zh_hans="设定支持"
@@ -153,7 +153,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
                 <IconArrowRight16 />
               )}
             </section>
-            <p className={styles['hint']}>
+            <p className={styles.hint}>
               <Translate
                 zh_hans="可自订号召支持的内容，以及收到支持后的感谢文字"
                 zh_hant="可自訂號召支持的內容，以及收到支持後的感謝文字"
@@ -164,9 +164,9 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         </button>
       </section>
 
-      <section className={styles['iscn']}>
+      <section className={styles.iscn}>
         <header>
-          <h3 className={styles['title']}>
+          <h3 className={styles.title}>
             <Translate id="publishToISCN" />
           </h3>
 
@@ -181,7 +181,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           />
         </header>
 
-        <p className={styles['hint']}>
+        <p className={styles.hint}>
           <Translate id="publishToISCNHint_1" />
           <a href="https://iscn.io/" target="_blank" rel="noreferrer">
             ISCN

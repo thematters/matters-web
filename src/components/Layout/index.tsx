@@ -59,7 +59,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
       <div className="l-container full">
         <main className="l-row">
           <nav role="navigation" className="l-col-three-left">
-            <section className={styles['sidenav']}>
+            <section className={styles.sidenav}>
               <Media greaterThan="sm">
                 <SideNav />
               </Media>
@@ -134,7 +134,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
       <aside className={`l-col-three-right ${styles.aside}`}>
         <Media greaterThanOrEqual="xl">
           <Sticky enabled={true} top={32}>
-            <section className={styles['content']}>
+            <section className={styles.content}>
               {!inEditor && <SearchBar />}
 
               {showOnboardingTasks && <DynamicOnboardingTasksWidget />}

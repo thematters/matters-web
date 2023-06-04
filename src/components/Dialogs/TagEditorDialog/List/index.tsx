@@ -95,7 +95,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
       />
 
       <Dialog.Content hasGrow>
-        <section className={styles['owner']}>
+        <section className={styles.owner}>
           {tag.owner && (
             <UserDigest.Rich
               user={tag.owner}
@@ -110,7 +110,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
 
         {isHavingEditors && (
           <>
-            <hr className={styles['divider']} />
+            <hr className={styles.divider} />
             <ul>
               {editors.map((editor) => (
                 <li key={editor.id}>
@@ -136,10 +136,10 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
           </>
         )}
 
-        <hr className={styles['divider']} />
+        <hr className={styles.divider} />
 
         <Dialog.Message>
-          <p className={styles['hint']}>
+          <p className={styles.hint}>
             <Translate
               zh_hant="協作者可以與你共同管理精選"
               zh_hans="协作者可以与你共同管理精选"
@@ -153,7 +153,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                   zh_hans="每个标签最多添加"
                   en="Every tag can have maximum"
                 />
-                <span className={styles['count']}> 4 </span>
+                <span className={styles.count}> 4 </span>
                 <Translate
                   zh_hant="名協作者"
                   zh_hans="名协作者"
@@ -168,7 +168,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                   zh_hans="你还可以添加"
                   en="You can add"
                 />
-                <span className={styles['count']}> {4 - count} </span>
+                <span className={styles.count}> {4 - count} </span>
                 <Translate
                   zh_hant="名協作者"
                   zh_hans="名协作者"

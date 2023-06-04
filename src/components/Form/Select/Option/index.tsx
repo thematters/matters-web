@@ -57,14 +57,14 @@ const Option: React.FC<OptionProps> = forwardRef(
           spacing={cardProps.spacing || [0, 0]}
           ref={ref}
         >
-          <section className={styles['container']}>
-            <section className={styles['left']}>
+          <section className={styles.container}>
+            <section className={styles.left}>
               <h5 className={nameClasses}>{name}</h5>
-              {subtitle && <p className={styles['subtitle']}>{subtitle}</p>}
+              {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
             </section>
 
             {!expanded && (
-              <section className={styles['right']}>
+              <section className={styles.right}>
                 <TextIcon icon={<IconArrowDown16 color="grey" />} />
               </section>
             )}

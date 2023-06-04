@@ -59,7 +59,7 @@ const PayoutItem = ({
 
   return (
     <Menu.Item>
-      <section className={styles['payoutItem']}>
+      <section className={styles.payoutItem}>
         <TextIcon
           icon={<IconPayout24 size="md" color="grey" />}
           size="xm"
@@ -69,7 +69,7 @@ const PayoutItem = ({
           <Translate id="paymentPayout" />
         </TextIcon>
 
-        <section className={styles['subtitle']}>
+        <section className={styles.subtitle}>
           <Translate
             zh_hant="餘額超過 500 HKD 即可提現"
             zh_hans="余额超过 500 HKD 即可提现"

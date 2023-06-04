@@ -20,14 +20,11 @@ const License: React.FC<LicenseProps> = ({ license }) => {
   const isCCBYNCND2 = license === ArticleLicenseType.CcByNcNd_2
 
   return (
-    <section
-      className={styles['license']}
-      data-test-id={TEST_ID.ARTICLE_LICENSE}
-    >
+    <section className={styles.license} data-test-id={TEST_ID.ARTICLE_LICENSE}>
       {isCC0 && (
         <TextIcon
           icon={
-            <span className={styles['icons']}>
+            <span className={styles.icons}>
               {withIcon(IconLicenseCC0)({ size: 'md' })}
             </span>
           }
@@ -47,7 +44,7 @@ const License: React.FC<LicenseProps> = ({ license }) => {
       {isARR && (
         <TextIcon
           icon={
-            <span className={styles['icons']}>
+            <span className={styles.icons}>
               {withIcon(IconLicenseARR)({ size: 'md' })}
             </span>
           }
@@ -67,7 +64,7 @@ const License: React.FC<LicenseProps> = ({ license }) => {
       {isCCBYNCND2 && (
         <TextIcon
           icon={
-            <span className={styles['icons']}>
+            <span className={styles.icons}>
               {withIcon(IconLicenseCC)({ size: 'md' })}
               {withIcon(IconLicenseBY)({ size: 'md' })}
               {withIcon(IconLicenseNC)({ size: 'md' })}

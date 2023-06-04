@@ -152,7 +152,7 @@ const BaseFooterActions = ({
         lang,
       })}
     >
-      <section className={styles['left']}>
+      <section className={styles.left}>
         {hasReply && (
           <ReplyButton
             type={type}

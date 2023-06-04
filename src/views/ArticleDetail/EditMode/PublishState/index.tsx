@@ -28,7 +28,7 @@ const PublishState = ({ article, cancel }: Props) => {
   }
 
   return (
-    <section className={styles['container']}>
+    <section className={styles.container}>
       {isPending && (
         <PendingState
           id={article.id}

@@ -17,8 +17,8 @@ const Followers = ({ tag }: FollowersProps) => {
   }
 
   return (
-    <section className={styles['container']}>
-      <section className={styles['count']}>
+    <section className={styles.container}>
+      <section className={styles.count}>
         <b>{numAbbr(totalCount)}</b>
         <span>
           &nbsp;

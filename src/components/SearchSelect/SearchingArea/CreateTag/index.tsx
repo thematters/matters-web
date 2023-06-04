@@ -49,7 +49,7 @@ const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
           <Translate id="create" />
         </TextIcon>
 
-        <span className={styles['content']}>&nbsp;{tag.content}</span>
+        <span className={styles.content}>&nbsp;{tag.content}</span>
       </section>
     </Card>
   )

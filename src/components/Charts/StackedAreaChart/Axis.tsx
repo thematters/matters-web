@@ -67,12 +67,12 @@ const Axis: React.FC<AxisProps> = ({
   return (
     <>
       <g
-        className={styles['xAxis']}
+        className={styles.xAxis}
         ref={xAxisRef}
         transform={`translate(0, ${height - bottom})`}
       />
       <g
-        className={styles['yAxis']}
+        className={styles.yAxis}
         ref={yAxisRef}
         transform={`translate(${left},0)`}
       />

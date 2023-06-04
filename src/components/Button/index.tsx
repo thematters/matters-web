@@ -245,8 +245,8 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       if (is === 'span') {
         return (
           <span {...containerProps}>
-            <div className={styles['content']} style={contentStyle}>
-              <div className={styles['hotarea']} style={hotAreaStyle} />
+            <div className={styles.content} style={contentStyle}>
+              <div className={styles.hotarea} style={hotAreaStyle} />
               {children}
             </div>
           </span>
@@ -257,8 +257,8 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       if (htmlHref) {
         return (
           <a href={htmlHref} target={htmlTarget} {...containerProps}>
-            <div className={styles['content']} style={contentStyle}>
-              <div className={styles['hotarea']} style={hotAreaStyle} />
+            <div className={styles.content} style={contentStyle}>
+              <div className={styles.hotarea} style={hotAreaStyle} />
               {children}
             </div>
           </a>
@@ -270,8 +270,8 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         return (
           <Link href={href} replace={replace} legacyBehavior>
             <a {...containerProps}>
-              <div className={styles['content']} style={contentStyle}>
-                <div className={styles['hotarea']} style={hotAreaStyle} />
+              <div className={styles.content} style={contentStyle}>
+                <div className={styles.hotarea} style={hotAreaStyle} />
                 {children}
               </div>
             </a>
@@ -282,8 +282,8 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       // button
       return (
         <button {...containerProps} type={type}>
-          <div className={styles['content']} style={contentStyle}>
-            <div className={styles['hotarea']} style={hotAreaStyle} />
+          <div className={styles.content} style={contentStyle}>
+            <div className={styles.hotarea} style={hotAreaStyle} />
             {children}
           </div>
         </button>

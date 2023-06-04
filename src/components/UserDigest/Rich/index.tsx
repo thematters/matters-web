@@ -83,13 +83,13 @@ const Rich = ({
         testId={TEST_ID.DIGEST_USER_RICH}
       >
         <section className={containerClasses}>
-          <span className={styles['avatar']}>
+          <span className={styles.avatar}>
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
           </span>
 
           <section className={contentClasses}>
-            <header className={styles['header']}>
-              <span className={styles['name']}>
+            <header className={styles.header}>
+              <span className={styles.name}>
                 <Translate id="accountArchived" />
               </span>
             </header>
@@ -114,22 +114,20 @@ const Rich = ({
     >
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
-          <a className={styles['avatar']}>
+          <a className={styles.avatar}>
             <VisuallyHidden>
               <span>{user.displayName}</span>
             </VisuallyHidden>
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} user={user} />
-            {avatarBadge && (
-              <span className={styles['badge']}>{avatarBadge}</span>
-            )}
+            {avatarBadge && <span className={styles.badge}>{avatarBadge}</span>}
           </a>
         </Link>
 
         <section className={contentClasses}>
-          <header className={styles['header']}>
+          <header className={styles.header}>
             <Link {...path} legacyBehavior>
               <a
-                className={styles['name']}
+                className={styles.name}
                 data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
               >
                 {user.displayName}
@@ -139,10 +137,10 @@ const Rich = ({
           </header>
 
           {!hasDescriptionReplacement && user.info.description && (
-            <p className={styles['description']}>{user.info.description}</p>
+            <p className={styles.description}>{user.info.description}</p>
           )}
           {descriptionReplacement && (
-            <p className={styles['description']}>{descriptionReplacement}</p>
+            <p className={styles.description}>{descriptionReplacement}</p>
           )}
         </section>
 

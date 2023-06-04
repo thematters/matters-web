@@ -154,7 +154,7 @@ const UserTags = () => {
 
       <UserTabs />
 
-      <section className={styles['container']}>
+      <section className={styles.container}>
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
           <List>
             {edges.map(({ node: tag, cursor }, i) => (

@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 
 const EndOfResults = () => {
   return (
-    <section className={styles['endOfResults']}>
+    <section className={styles.endOfResults}>
       <Translate
         zh_hans="已显示所有结果"
         zh_hant="已顯示所有結果"

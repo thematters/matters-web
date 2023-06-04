@@ -136,13 +136,13 @@ const Subscriptions = () => {
 
       <UserTabs />
 
-      <section className={styles['subtitle']}>
+      <section className={styles.subtitle}>
         <Title type="feed" is="h2">
           <Translate zh_hant="活躍在圍爐中" zh_hans="活跃在围炉中" />
         </Title>
       </section>
 
-      <section className={styles['list']}>
+      <section className={styles.list}>
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
           <List hasBorder={false}>
             {edges.map(({ node }) => (

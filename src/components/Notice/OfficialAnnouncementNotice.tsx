@@ -15,7 +15,7 @@ const OfficialAnnouncementNotice = ({
 
   return (
     <section
-      className={styles['container']}
+      className={styles.container}
       data-test-id={TEST_ID.NOTICE_OFFICIAL_ANNOUNCEMENT}
     >
       <section className={styles['content-wrap']}>
@@ -27,7 +27,7 @@ const OfficialAnnouncementNotice = ({
           <Message />
         )}
       </section>
-      <section className={styles['footer']}>
+      <section className={styles.footer}>
         <NoticeDate notice={notice} />
       </section>
     </section>

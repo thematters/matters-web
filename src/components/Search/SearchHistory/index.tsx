@@ -18,7 +18,7 @@ export const SearchHistory = ({
 
   return (
     <section>
-      <section className={styles['title']}>
+      <section className={styles.title}>
         <TextIcon size="xm" color="grey" weight="md">
           <Translate zh_hans="最近搜索" zh_hant="最近搜尋" en="History" />
         </TextIcon>
@@ -41,8 +41,8 @@ export const SearchHistory = ({
               })
             }}
           >
-            <section className={styles['item']}>
-              <span className={styles['key']}>{value}</span>
+            <section className={styles.item}>
+              <span className={styles.key}>{value}</span>
               <Button
                 onClick={(e) => {
                   e?.stopPropagation()

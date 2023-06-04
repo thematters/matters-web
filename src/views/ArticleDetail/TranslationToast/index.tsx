@@ -42,7 +42,7 @@ const SwitchContent = ({
 }: {
   onClick: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
 }) => (
-  <span onClick={onClick} className={styles['switchButton']}>
+  <span onClick={onClick} className={styles.switchButton}>
     <Translate
       zh_hans="点击这里切换。"
       zh_hant="點擊這裡切換。"

@@ -63,7 +63,7 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
   }
 
   return (
-    <section className={styles['responses']}>
+    <section className={styles.responses}>
       <header>
         <Title type="nav" is="h2">
           <Translate id="responses" />

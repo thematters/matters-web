@@ -63,7 +63,7 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
       <Droppable droppableId="droppable-staging-nodes">
         {(dropProvided) => (
           <ul
-            className={areaStyles['nodes']}
+            className={areaStyles.nodes}
             ref={dropProvided.innerRef}
             {...dropProvided.droppableProps}
           >

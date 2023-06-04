@@ -31,7 +31,7 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
 
   return (
     <section className={styles['set-amount-balance']}>
-      <span className={styles['left']}>
+      <span className={styles.left}>
         <Translate zh_hant="餘額 " zh_hans="余额 " en="Balance " />
         {isUSDT && <span>{formatAmount(balanceUSDT)} USDT</span>}
         {isHKD && <span>{formatAmount(balanceHKD)} HKD</span>}

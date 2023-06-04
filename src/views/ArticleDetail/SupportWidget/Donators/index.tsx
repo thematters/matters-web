@@ -94,7 +94,7 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
               )}
 
               {donatorsCount > maxAvatarNum && (
-                <span className={styles['count']}>
+                <span className={styles.count}>
                   {donatorsCount - (maxAvatarNum - 1)}
                 </span>
               )}
@@ -122,7 +122,7 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                 aria-label={translate({ id: 'viewSupporters', lang })}
                 aria-haspopup="dialog"
               >
-                <span className={styles['count']}>{donatorsCount}</span>
+                <span className={styles.count}>{donatorsCount}</span>
                 <TextIcon
                   icon={<IconArrowRight16 size="xs" />}
                   textPlacement="left"

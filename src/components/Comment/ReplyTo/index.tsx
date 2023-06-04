@@ -21,7 +21,7 @@ const fragments = {
   `,
 }
 const ReplyTo = ({ user }: ReplyToProps) => (
-  <section className={styles['container']}>
+  <section className={styles.container}>
     <span className={styles['reply-to']}>
       <Translate id="reply" />
     </span>

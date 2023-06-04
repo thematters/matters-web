@@ -24,14 +24,14 @@ const Footer = () => {
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">
-            <div className={styles['container']}>
+            <div className={styles.container}>
               <Media at="sm">
-                <section className={styles['languageSwitch']}>
+                <section className={styles.languageSwitch}>
                   <LanguageSwitch size="lg" bgColor="grey-darkest" />
                 </section>
               </Media>
 
-              <section className={styles['contactUs']}>
+              <section className={styles.contactUs}>
                 <h2>
                   <Translate
                     zh_hant="聯絡方式"
@@ -88,7 +88,7 @@ const Footer = () => {
                   </a>
                 </p>
               </section>
-              <section className={styles['followUs']}>
+              <section className={styles.followUs}>
                 <h2>
                   <Translate
                     zh_hant="追蹤我們"
@@ -97,7 +97,7 @@ const Footer = () => {
                   />
                 </h2>
 
-                <div className={styles['socials']}>
+                <div className={styles.socials}>
                   <ul>
                     <li>
                       <a
@@ -240,7 +240,7 @@ const Footer = () => {
                   </ul>
                 </div>
               </section>
-              <section className={styles['subscribeUs']}>
+              <section className={styles.subscribeUs}>
                 <h2>
                   <Translate
                     zh_hant="訂閱我們"
@@ -248,7 +248,7 @@ const Footer = () => {
                     en="Subscribe to Us"
                   />
                 </h2>
-                <div className={styles['buttons']}>
+                <div className={styles.buttons}>
                   <Button
                     size={['100%', '2.5rem']}
                     bgActiveColor="grey-lighter"
@@ -271,12 +271,12 @@ const Footer = () => {
                 </div>
 
                 <Media greaterThan="sm">
-                  <section className={styles['languageSwitch']}>
+                  <section className={styles.languageSwitch}>
                     <LanguageSwitch size="lg" bgColor="grey-darkest" />
                   </section>
                 </Media>
               </section>
-              <section className={styles['copyright']}>
+              <section className={styles.copyright}>
                 © {year} Matters, Inc. All rights reserved.
               </section>
             </div>

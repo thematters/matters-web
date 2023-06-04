@@ -100,7 +100,7 @@ const SupportWidget = ({ article }: DonationProps) => {
   return (
     <section className={supportWidgetClasses} id="animation">
       {showAnimation && (
-        <section className={styles['donation']}>
+        <section className={styles.donation}>
           <DynamicAnimation
             playShipWaiting={playShipWaiting}
             playEnd={() => {
@@ -199,7 +199,7 @@ const SupportWidget = ({ article }: DonationProps) => {
               </section>
 
               {article.donations.totalCount > 0 && (
-                <section className={styles['donators']}>
+                <section className={styles.donators}>
                   <Donators
                     article={article}
                     showAvatarAnimation={showAvatarAnimation}
@@ -208,7 +208,7 @@ const SupportWidget = ({ article }: DonationProps) => {
               )}
 
               {isViewerDonated && (
-                <section className={styles['transaction']}>
+                <section className={styles.transaction}>
                   <span className={styles['transaction-left']}>
                     <Translate zh_hant="查看" zh_hans="查看" en="View" />
                   </span>
@@ -235,7 +235,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       )}
 
       {article.access.circle && (
-        <section className={styles['circle']}>
+        <section className={styles.circle}>
           <CircleDigest.Rich
             circle={article.access.circle}
             bgColor="grey-lighter"

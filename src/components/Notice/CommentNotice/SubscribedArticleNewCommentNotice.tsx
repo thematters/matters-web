@@ -31,7 +31,7 @@ const SubscribedArticleNewCommentNotice = ({
 
   return (
     <section
-      className={styles['container']}
+      className={styles.container}
       data-test-id={TEST_ID.NOTICE_SUBSCRIBED_ARTICLE_NEW_COMMENT}
     >
       <section className={styles['avatar-wrap']}>

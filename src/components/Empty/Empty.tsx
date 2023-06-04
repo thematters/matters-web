@@ -9,11 +9,11 @@ interface EmptyProps {
 
 export const Empty = ({ icon, description }: EmptyProps) => {
   return (
-    <section className={styles['empty']}>
+    <section className={styles.empty}>
       <section>{icon}</section>
 
       <Alert type="polite">
-        <section className={styles['description']}>{description}</section>
+        <section className={styles.description}>{description}</section>
       </Alert>
     </section>
   )

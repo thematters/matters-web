@@ -94,7 +94,7 @@ const BaseHelp = () => {
           />
         </p>
 
-        <p className={styles['copyright']}>
+        <p className={styles.copyright}>
           {'@ '}
           <span itemProp="copyrightYear">{year}</span>{' '}
           <span itemProp="copyrightHolder">Matters</span>

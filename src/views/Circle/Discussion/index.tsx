@@ -8,7 +8,7 @@ const CircleDiscussion = () => (
   <Layout.Main>
     <Profile />
 
-    <section className={styles['container']}>
+    <section className={styles.container}>
       <Discussion />
     </section>
   </Layout.Main>

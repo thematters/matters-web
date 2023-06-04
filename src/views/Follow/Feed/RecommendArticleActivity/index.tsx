@@ -35,7 +35,7 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
       : 'ArticleRecommendationActivity'
 
   return (
-    <section className={styles['container']}>
+    <section className={styles.container}>
       <Slides header={<FollowingRecommendHead type={type} />}>
         {articles.map((article, index) => (
           <Slides.Item
@@ -50,7 +50,7 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
               })
             }}
           >
-            <section className={styles['item']}>
+            <section className={styles.item}>
               <FollowingRecommendArticle article={article} />
               {mountTracker && (
                 <CardExposureTracker

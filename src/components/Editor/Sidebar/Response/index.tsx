@@ -14,7 +14,7 @@ const SidebarArticleResponse: React.FC<SidebarManagementProps> = (props) => {
       title="articleResponse"
       footerSpacing={false}
     >
-      <section className={styles['container']}>
+      <section className={styles.container}>
         <ToggleResponse inSidebar {...props} />
       </section>
     </Box>

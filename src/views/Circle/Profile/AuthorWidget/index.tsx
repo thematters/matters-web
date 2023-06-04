@@ -34,8 +34,8 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
         />
 
         {pinnedBroadcast && (
-          <section className={styles['pinnedBroadcast']}>
-            <span className={styles['icon']}>
+          <section className={styles.pinnedBroadcast}>
+            <span className={styles.icon}>
               <IconBroadcast24 size="md" />
             </span>
 

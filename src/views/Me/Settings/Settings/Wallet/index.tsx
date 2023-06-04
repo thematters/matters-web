@@ -76,7 +76,7 @@ const WalletSettings = () => {
         rightText={
           ethAddress ? (
             <>
-              <span className={styles['address']}>{shortAddress}</span>
+              <span className={styles.address}>{shortAddress}</span>
               <CopyToClipboard text={ethAddress}>
                 <Button
                   spacing={['xtight', 'xtight']}

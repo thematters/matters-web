@@ -72,7 +72,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
     <>
       {tag.owner && (
         <>
-          <section className={styles['category']}>
+          <section className={styles.category}>
             <section>
               <FormattedMessage defaultMessage="Maintainer" description="" />
             </section>
@@ -94,10 +94,10 @@ const Maintainers = ({ id, isOwner }: Props) => {
 
       {isHavingEditors && (
         <>
-          <section className={styles['category']}>
+          <section className={styles.category}>
             <section>
               <FormattedMessage defaultMessage="collaborators" description="" />
-              <span className={styles['count']}>({editors.length})</span>
+              <span className={styles.count}>({editors.length})</span>
             </section>
           </section>
           <ul>

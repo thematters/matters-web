@@ -14,12 +14,12 @@ export const CurrencyFormatter: React.FC<Props> = ({
   subCurrency,
 }) => {
   return (
-    <span className={styles['currencyFormatter']}>
-      <span className={styles['currency']}>
+    <span className={styles.currencyFormatter}>
+      <span className={styles.currency}>
         {currency}&nbsp;{value}
       </span>
       {subCurrency && (
-        <span className={styles['subCurrency']}>
+        <span className={styles.subCurrency}>
           ≈&nbsp;{subCurrency}&nbsp;{subValue}
         </span>
       )}

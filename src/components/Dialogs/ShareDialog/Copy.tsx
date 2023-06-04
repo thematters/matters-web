@@ -8,7 +8,7 @@ import styles from './styles.module.css'
 const Copy = ({ link }: { link: string }) => {
   const intl = useIntl()
   return (
-    <section className={styles['copy']}>
+    <section className={styles.copy}>
       <CopyToClipboard text={link}>
         <button
           aria-label={intl.formatMessage({
@@ -22,7 +22,7 @@ const Copy = ({ link }: { link: string }) => {
           }}
         >
           <TextIcon icon={<IconLink16 color="grey" />} spacing="base">
-            <div className={styles['text']}>
+            <div className={styles.text}>
               <span>
                 <FormattedMessage defaultMessage="Copy Link" description="" />
               </span>

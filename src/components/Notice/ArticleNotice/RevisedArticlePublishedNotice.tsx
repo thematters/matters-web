@@ -16,7 +16,7 @@ const RevisedArticlePublishedNotice = ({
 }) => {
   return (
     <section
-      className={styles['container']}
+      className={styles.container}
       data-test-id={TEST_ID.NOTICE_REVISED_ARTICLE_PUBLISHED}
     >
       <section className={styles['notice-actors-name-and-title-info']}>
@@ -29,7 +29,7 @@ const RevisedArticlePublishedNotice = ({
         />
       </section>
 
-      <section className={styles['footer']}>
+      <section className={styles.footer}>
         <NoticeDate notice={notice} />
       </section>
     </section>

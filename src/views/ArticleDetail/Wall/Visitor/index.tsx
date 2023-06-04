@@ -37,8 +37,8 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
   return (
     <section className={outerClasses}>
       <Layout.FixedMain>
-        <section className={styles['container']} style={bgStyle}>
-          <h2 className={styles['slogan']}>
+        <section className={styles.container} style={bgStyle}>
+          <h2 className={styles.slogan}>
             <Translate
               zh_hant="看不過癮？"
               zh_hans="看不过瘾？"
@@ -46,7 +46,7 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
             />
           </h2>
 
-          <p className={styles['desc']}>
+          <p className={styles.desc}>
             <Translate
               zh_hant="一鍵登入，即可加入全球最優質中文創作社區"
               zh_hans="一键登入，即可加入全球最优质中文创作社区"
@@ -54,7 +54,7 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
             />
           </p>
 
-          <div className={styles['signup']}>
+          <div className={styles.signup}>
             <LoginButton
               bgColor="green"
               onClick={() => {
@@ -66,7 +66,7 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
             />
           </div>
 
-          <div className={styles['close']}>
+          <div className={styles.close}>
             <Button
               onClick={closeDialog}
               aria-label={translate({ id: 'close', lang })}

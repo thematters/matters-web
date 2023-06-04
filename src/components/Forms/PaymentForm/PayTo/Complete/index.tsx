@@ -94,7 +94,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
 
   return (
     <Dialog.Content hasGrow>
-      <section className={styles['container']}>
+      <section className={styles.container}>
         <section className={styles['complete-avatar']}>
           <IconSupport size="lg" color="gold" />
 
@@ -109,7 +109,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
             zh_hans="马特市民爱发电。这是你支持的第 "
             en="This is the "
           />
-          <span className={styles['times']}>{senderDonatedArticleCount}</span>
+          <span className={styles.times}>{senderDonatedArticleCount}</span>
           <Translate
             zh_hant=" 篇作品，"
             zh_hans=" 篇作品，"
@@ -127,9 +127,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
             zh_hans=" 获得的第 "
             en=" received "
           />
-          <span className={styles['times']}>
-            {recipientReceivedDonationCount}
-          </span>
+          <span className={styles.times}>{recipientReceivedDonationCount}</span>
           <Translate zh_hant=" 次支持" zh_hans=" 次支持" en=" supports" />
         </section>
 

@@ -134,7 +134,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
       onSubmit={handleSubmit}
       aria-label={translate({ id: 'putComment', lang })}
     >
-      <section className={styles['content']}>
+      <section className={styles.content}>
         <CommentEditor
           content={content}
           update={onUpdate}

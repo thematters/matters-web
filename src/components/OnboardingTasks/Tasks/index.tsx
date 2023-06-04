@@ -74,7 +74,7 @@ const Tasks = ({ task }: Props) => {
   return (
     <>
       {!viewer.onboardingTasks.finished && (
-        <section className={styles['task']}>
+        <section className={styles.task}>
           {task === 1 && (
             <TaskItem
               order={
@@ -223,7 +223,7 @@ const Tasks = ({ task }: Props) => {
           <>
             <hr />
 
-            <section className={styles['share']}>
+            <section className={styles.share}>
               <EmbedShare
                 title={`${viewer.displayName} 已完成新手導航`}
                 path={`${sharePath}?${URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key}=${URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.value}`}

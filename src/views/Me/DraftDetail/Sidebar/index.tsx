@@ -125,7 +125,7 @@ const EditDraftSidebar = (props: BaseSidebarProps) => {
   const disabled = isPending || isPublished
 
   return (
-    <section className={styles['sidebar']}>
+    <section className={styles.sidebar}>
       <EditDraftTags {...props} disabled={disabled} />
       <EditDraftCover {...props} disabled={disabled} />
       <EditDraftCollection {...props} disabled={disabled} />

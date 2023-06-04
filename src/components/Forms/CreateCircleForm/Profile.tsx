@@ -156,7 +156,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
             entityId={circle.id}
           />
 
-          <p className={styles['hint']}>
+          <p className={styles.hint}>
             <FormattedMessage
               defaultMessage="Recommended size: 1600px x 900px"
               description=""
@@ -174,7 +174,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
         </section>
 
         {!isCreate && (
-          <section className={styles['container']}>
+          <section className={styles.container}>
             <Form.Input
               label={
                 <FormattedMessage
@@ -196,7 +196,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
             />
           </section>
         )}
-        <section className={styles['container']}>
+        <section className={styles.container}>
           <Form.Textarea
             label={
               <FormattedMessage

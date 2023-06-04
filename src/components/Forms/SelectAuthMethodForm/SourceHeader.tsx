@@ -212,13 +212,13 @@ const SourceHeader = ({ source }: { source: UNIVERSAL_AUTH_SOURCE }) => {
     <section className={styles['source-header']}>
       <img src={AUTH_SOURCE_IMG[source].image} alt="banner image" />
 
-      <h3 className={styles['title']}>
+      <h3 className={styles.title}>
         <TextIcon size="xm" weight="md">
           <Titlte />
         </TextIcon>
       </h3>
 
-      <p className={styles['intro']}>
+      <p className={styles.intro}>
         <Intro />
       </p>
     </section>

@@ -16,7 +16,7 @@ const Settings = () => {
       <Learn />
       <Enhance />
 
-      <section className={styles['copyright']}>
+      <section className={styles.copyright}>
         <span>
           {'@ '}
           <span itemProp="copyrightYear">{year}</span>{' '}

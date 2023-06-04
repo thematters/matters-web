@@ -15,7 +15,7 @@ const OnboardingTasksWidget = () => {
   const [task, setTask] = useState(1)
 
   return (
-    <section className={styles['widget']}>
+    <section className={styles.widget}>
       <header className={styles.header}>
         <Title type="feed" is="h2">
           <Translate
@@ -34,7 +34,7 @@ const OnboardingTasksWidget = () => {
             />
           </span>
           <br />
-          <span className={styles['bold']}>
+          <span className={styles.bold}>
             <Translate
               zh_hant="點擊下面 5 顆星球查看任務提示！"
               zh_hans="点击下面 5 颗星球查看任务提示！"

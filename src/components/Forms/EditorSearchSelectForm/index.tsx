@@ -143,7 +143,7 @@ const EditorSearchSelectForm = ({
 
       {inStagingArea && (
         <button
-          className={styles['stagingHeadArea']}
+          className={styles.stagingHeadArea}
           onClick={toSearchingArea}
           disabled={!enableAdd}
           data-test-id={TEST_ID.EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON}
@@ -161,7 +161,7 @@ const EditorSearchSelectForm = ({
               <Translate en="Add" zh_hans="关联作品" zh_hant="關聯作品" />
             )}
           </TextIcon>
-          <span className={styles['number']}>
+          <span className={styles.number}>
             （{stagingNodes.length}/{maxNodesLength}）
           </span>
         </button>

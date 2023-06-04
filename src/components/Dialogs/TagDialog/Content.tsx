@@ -47,7 +47,7 @@ const HintLengthText: React.FC<{
   maxLength: number
 }> = ({ curLength, maxLength }) => (
   <>
-    <span className={styles['count']}>
+    <span className={styles.count}>
       <span className={curLength > 0 ? 'highlight' : ''}>{curLength ?? 0}</span>
       &nbsp;/&nbsp;{maxLength}
     </span>

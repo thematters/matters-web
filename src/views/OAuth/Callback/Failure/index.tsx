@@ -87,7 +87,7 @@ const OAuthCallbackFailure = () => {
 
       <Layout.Spacing>
         <Box avatar={avatar[provider]} title={title[provider]}>
-          <section className={styles['content']}>
+          <section className={styles.content}>
             <h2>
               <Translate
                 zh_hant="出錯了"

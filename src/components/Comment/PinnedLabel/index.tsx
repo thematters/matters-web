@@ -38,7 +38,7 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelCommentFragment }) => {
   }
 
   return (
-    <span className={styles['label']}>
+    <span className={styles.label}>
       <Translate zh_hant="作者精選" zh_hans="作者精选" en="Featured" />
     </span>
   )

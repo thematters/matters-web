@@ -89,7 +89,7 @@ const AcceptedInvites = () => {
   }
 
   return (
-    <section className={styles['container']}>
+    <section className={styles.container}>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
           {(edges || []).map(({ node, cursor }, i) => (

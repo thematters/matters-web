@@ -17,7 +17,7 @@ export const ViewMoreButton: React.FC<ViewMoreButtonProps> = ({
   loading,
   ...props
 }) => (
-  <div className={styles['container']}>
+  <div className={styles.container}>
     {loading ? (
       <Spinner />
     ) : (

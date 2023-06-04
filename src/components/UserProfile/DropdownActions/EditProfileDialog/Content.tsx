@@ -191,7 +191,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}
         />
 
-        <p className={styles['hint']}>
+        <p className={styles.hint}>
           <FormattedMessage
             defaultMessage="Recommended size: 1600px x 900px"
             description=""
@@ -214,7 +214,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         />
       )}
 
-      <section className={styles['container']}>
+      <section className={styles.container}>
         <Form.Input
           label={
             <FormattedMessage defaultMessage="Display Name" description="" />
@@ -239,7 +239,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         />
       </section>
 
-      <section className={styles['container']}>
+      <section className={styles.container}>
         <Form.Textarea
           label={
             <FormattedMessage defaultMessage="Description" description="" />

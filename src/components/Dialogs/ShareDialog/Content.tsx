@@ -69,11 +69,11 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
 
       <Dialog.Content>
         {description && (
-          <section className={styles['description']}>{description}</section>
+          <section className={styles.description}>{description}</section>
         )}
 
         <section className={containerClasses}>
-          <section className={styles['left']}>
+          <section className={styles.left}>
             <ShareButtons.LINE title={shareTitle} link={shareLink} />
             <ShareButtons.WhatsApp title={shareTitle} link={shareLink} />
             <ShareButtons.Telegram title={shareTitle} link={shareLink} />
@@ -81,7 +81,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
             <Copy link={shareLink} />
           </section>
 
-          <section className={styles['right']}>
+          <section className={styles.right}>
             <ShareButtons.Twitter
               title={shareTitle}
               link={shareLink}

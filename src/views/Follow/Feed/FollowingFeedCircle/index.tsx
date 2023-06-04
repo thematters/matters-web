@@ -30,7 +30,7 @@ const FeedCircle = ({
   })
 
   return (
-    <section className={styles['container']}>
+    <section className={styles.container}>
       {header}
 
       <Card
@@ -40,29 +40,27 @@ const FeedCircle = ({
         borderRadius="xtight"
         {...rest}
       >
-        <section className={styles['content']}>
-          <h3 className={styles['title']}>
+        <section className={styles.content}>
+          <h3 className={styles.title}>
             <LinkWrapper {...path} textActiveColor="green">
               {displayName}
             </LinkWrapper>
           </h3>
 
-          {description && (
-            <p className={styles['description']}>{description}</p>
-          )}
+          {description && <p className={styles.description}>{description}</p>}
 
-          <section className={styles['avatar']}>
+          <section className={styles.avatar}>
             <CircleAvatar circle={circle} size="xl" />
           </section>
         </section>
       </Card>
 
       <footer className={styles.footer}>
-        <section className={styles['left']}>
+        <section className={styles.left}>
           <DateTime date={date} />
         </section>
 
-        <section className={styles['right']}>
+        <section className={styles.right}>
           <DropdownActions actions={actions} />
         </section>
       </footer>

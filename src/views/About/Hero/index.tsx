@@ -59,8 +59,8 @@ const Hero = () => {
   }, [emblaApi, onSelect])
 
   return (
-    <section className={styles['hero']}>
-      <header className={styles['logo']}>
+    <section className={styles.hero}>
+      <header className={styles.logo}>
         <div className="l-container">
           <div className="l-row">
             <div className="l-col-full">
@@ -80,7 +80,7 @@ const Hero = () => {
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">
-            <section className={styles['slogan']}>
+            <section className={styles.slogan}>
               <section>
                 <h2>
                   <Translate
@@ -118,8 +118,8 @@ const Hero = () => {
         </div>
       </div>
 
-      <section className={styles['reports']}>
-        <section className={styles['container']}>
+      <section className={styles.reports}>
+        <section className={styles.container}>
           <section className={`${styles.scrollButton} ${styles.scrollLeft}`}>
             <Button onClick={scrollPrev} disabled={!prevBtnEnabled}>
               <Media at="sm">{withIcon(IconButtonLeft)({ size: 'md' })}</Media>
@@ -128,8 +128,8 @@ const Hero = () => {
               </Media>
             </Button>
           </section>
-          <section className={styles['emblaViewport']} ref={emblaRef}>
-            <ul className={styles['emblaContainer']}>
+          <section className={styles.emblaViewport} ref={emblaRef}>
+            <ul className={styles.emblaContainer}>
               <li>
                 <a
                   href="https://restofworld.org/2020/chinas-fugitive-writers-find-a-home-online/"

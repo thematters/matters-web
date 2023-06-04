@@ -14,7 +14,7 @@ const ArticlesCount = ({ tag }: ArticlesCountProps) => {
   const { totalCount } = tag.articles || { totalCount: 0 }
 
   return (
-    <section className={styles['container']}>
+    <section className={styles.container}>
       <b>{numAbbr(totalCount)}</b>
       <span>
         &nbsp;

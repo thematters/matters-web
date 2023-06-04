@@ -103,7 +103,7 @@ const BaseOAuthAuthorize = () => {
         )}
         <input type="hidden" name="response_type" value="code" />
 
-        <section className={styles['content']}>
+        <section className={styles.content}>
           <ul>
             <li>
               <Translate

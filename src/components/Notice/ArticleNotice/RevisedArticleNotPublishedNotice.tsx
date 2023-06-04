@@ -17,7 +17,7 @@ const RevisedArticleNotPublishedNotice = ({
 }) => {
   return (
     <section
-      className={styles['container']}
+      className={styles.container}
       data-test-id={TEST_ID.NOTICE_REVISED_ARTICLE_NOT_PUBLISHED}
     >
       <section className={styles['avatar-wrap']}>

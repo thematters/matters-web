@@ -26,7 +26,7 @@ const Selector: React.FC<SelectorProps> = ({
   )
 
   return (
-    <section className={styles['selector']}>
+    <section className={styles.selector}>
       <h3>
         <Translate
           zh_hant="你也可以選擇一張已有的圖片作為封面"

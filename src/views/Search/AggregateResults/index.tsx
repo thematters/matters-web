@@ -58,14 +58,14 @@ const AggregateResults = () => {
 
   return (
     <>
-      <section className={styles['title']}>
-        <span className={styles['titleLeft']}>
+      <section className={styles.title}>
+        <span className={styles.titleLeft}>
           <Translate zh_hans="有关" zh_hant="有關" en="All results for" />
         </span>
         <span>
-          <span className={styles['titleMiddle']}>&nbsp;{q}</span>
+          <span className={styles.titleMiddle}>&nbsp;{q}</span>
         </span>
-        <span className={styles['titleRight']}>
+        <span className={styles.titleRight}>
           &nbsp;
           <Translate zh_hans="的搜索結果" zh_hant="的檢索結果" en="" />
         </span>

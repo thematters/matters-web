@@ -71,10 +71,10 @@ const NoticeDigest = ({
 
   return (
     <section
-      className={styles['container']}
+      className={styles.container}
       {...(testId ? { ['data-test-id']: testId } : {})}
     >
-      <section className={styles['header']}>
+      <section className={styles.header}>
         <NoticeMultiActors actors={actors} size="lg" />
         {!isMultiActors && (
           <section className={styles['single-actor-info']}>
@@ -89,7 +89,7 @@ const NoticeDigest = ({
       </section>
 
       {isMultiActors && (
-        <section className={styles['content']}>
+        <section className={styles.content}>
           <NoticeActorsNameAndTitle
             actors={actors}
             action={action}
@@ -99,9 +99,9 @@ const NoticeDigest = ({
         </section>
       )}
 
-      {content && <section className={styles['content']}>{content}</section>}
+      {content && <section className={styles.content}>{content}</section>}
 
-      <section className={styles['footer']}>
+      <section className={styles.footer}>
         <NoticeDate notice={notice} />
       </section>
     </section>

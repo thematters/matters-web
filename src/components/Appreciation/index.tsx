@@ -58,16 +58,16 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
 
   return (
     <Card {...path} spacing={[0, 0]} bgActiveColor="none">
-      <section className={styles['container']}>
-        <section className={styles['left']}>
+      <section className={styles.container}>
+        <section className={styles.left}>
           {showContent && content && (
-            <section className={styles['content']}>
+            <section className={styles.content}>
               <p>{content}</p>
             </section>
           )}
 
           {!showContent && isReceived && sender && (
-            <header className={styles['sender']}>
+            <header className={styles.sender}>
               <UserDigest.Mini
                 user={sender}
                 avatarSize="xs"
@@ -100,9 +100,9 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
           )}
         </section>
 
-        <section className={styles['right']}>
+        <section className={styles.right}>
           <div
-            className={styles['num']}
+            className={styles.num}
             aria-label={translate({
               zh_hant: `${amount} 次讚賞`,
               zh_hans: `${amount} 次赞赏`,

@@ -137,11 +137,11 @@ export const CoverUploader = ({
   }
 
   const Mask = () => (
-    <div className={styles['mask']}>
+    <div className={styles.mask}>
       {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
 
       {initCover && (
-        <section className={styles['delete']}>
+        <section className={styles.delete}>
           <Button
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}

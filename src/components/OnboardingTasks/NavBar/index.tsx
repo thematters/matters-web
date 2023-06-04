@@ -34,9 +34,9 @@ const NavBar = () => {
               aria-haspopup="dialog"
               role="button"
             >
-              <section className={styles['content']}>
-                <section className={styles['inner']}>
-                  <section className={styles['left']}>
+              <section className={styles.content}>
+                <section className={styles.inner}>
+                  <section className={styles.left}>
                     {withIcon(IconOnboardLaunch)({
                       size: 'xl-m',
                       color: 'gold',
@@ -48,14 +48,11 @@ const NavBar = () => {
                         zh_hans="星际导航"
                         en="Galaxy Guide"
                       />
-                      <span className={styles['highlight']}>
-                        {' '}
-                        {doneCount}/5
-                      </span>
+                      <span className={styles.highlight}> {doneCount}/5</span>
                     </p>
                   </section>
 
-                  <section className={styles['right']}>
+                  <section className={styles.right}>
                     <IconArrowRight16 color="grey" />
                   </section>
                 </section>

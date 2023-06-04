@@ -270,7 +270,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
       />
 
       {inSearchingArea && (
-        <section className={styles['area']}>
+        <section className={styles.area}>
           {searching && <Spinner />}
 
           {/* Search */}
@@ -288,7 +288,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
                 hasNextPage={!!searchPageInfo?.hasNextPage}
                 loadMore={loadMore}
               >
-                <ul className={styles['nodes']}>
+                <ul className={styles.nodes}>
                   {canCreateTag && (
                     <li>
                       <CreateTag
@@ -326,7 +326,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
               hasNextPage={!!listPageInfo?.hasNextPage}
               loadMore={loadMoreList}
             >
-              <ul className={styles['nodes']}>
+              <ul className={styles.nodes}>
                 {searchingNodes.map((node) => (
                   <li key={node.id}>
                     <SearchSelectNode node={node} onClick={addNodeToStaging} />

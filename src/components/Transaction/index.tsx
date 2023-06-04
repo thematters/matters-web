@@ -97,7 +97,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
   return (
     <Card {...path} spacing={[0, 0]} bgActiveColor="none">
       <section
-        className={styles['container']}
+        className={styles.container}
         data-test-id={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM}
       >
         {(isAddCredit || isPayout || isSubscription) && (
@@ -107,13 +107,13 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
         )}
 
         <section className={styles['tx-info']}>
-          <section className={styles['left']}>
+          <section className={styles.left}>
             {isDonation && (
               <Donator user={isViewerSender ? recipient : sender} />
             )}
 
             {isDonation && article && (
-              <section className={styles['title']}>
+              <section className={styles.title}>
                 <ArticleDigestTitle
                   article={article}
                   is="h2"
@@ -135,7 +135,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
 
             {isSubscription && circle && (
               <>
-                <section className={styles['subscription']}>
+                <section className={styles.subscription}>
                   <p>
                     {isViewerRecipient && (
                       <Translate zh_hant="圍爐營收" zh_hans="围炉营收" />
@@ -161,7 +161,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
             </section>
           </section>
 
-          <section className={styles['right']}>
+          <section className={styles.right}>
             <Amount
               amount={amount}
               currency={currency}

@@ -169,7 +169,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
           {InnerForm(tabType)}
         </section>
 
-        <section className={styles['preview']}>
+        <section className={styles.preview}>
           <h3>
             <TextIcon size="md" weight="md">
               <Translate

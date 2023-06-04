@@ -3,7 +3,7 @@ import { Translate } from '~/components'
 import styles from './styles.module.css'
 
 const Intro = () => (
-  <section className={styles['intro']}>
+  <section className={styles.intro}>
     <h4>
       <Translate
         zh_hant="什麼是 Liker ID？"

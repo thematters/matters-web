@@ -45,13 +45,13 @@ const Item: React.FC<ItemProps> = forwardRef(
       [styles.bold]: !!bold,
     })
     const itemContent = (
-      <section className={styles['container']}>
+      <section className={styles.container}>
         <section className={leftClasses}>
-          <h5 className={styles['title']}>{title}</h5>
-          {subtitle && <p className={styles['subtitle']}>{subtitle}</p>}
+          <h5 className={styles.title}>{title}</h5>
+          {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         </section>
 
-        <section className={styles['right']}>
+        <section className={styles.right}>
           {right || (
             <TextIcon
               icon={clickable && <IconArrowRight16 color={'grey'} />}
@@ -62,7 +62,7 @@ const Item: React.FC<ItemProps> = forwardRef(
             >
               {rightText}
               {rightSubText && (
-                <span className={styles['subtext']}>{rightSubText}</span>
+                <span className={styles.subtext}>{rightSubText}</span>
               )}
             </TextIcon>
           )}

@@ -48,7 +48,7 @@ const RelatedTagsHeader = ({
       is="h2"
       hasNoBorder
     >
-      <section className={styles['right']}>
+      <section className={styles.right}>
         {hasShuffle && <ShuffleButton onClick={onShuffle} />}
         {hasViewAll && <ViewAllButton href={PATHS.TAGS} />}
       </section>
@@ -125,7 +125,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
           ))}
         </Slides>
 
-        <section className={styles['backToAll']}>
+        <section className={styles.backToAll}>
           <ViewMoreCard
             spacing={['tight', 'tight']}
             href={PATHS.TAGS}

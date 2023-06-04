@@ -31,7 +31,7 @@ const BaseTags = () => {
   // const isHottest = feed === 'hottest'
 
   return (
-    <section className={styles['tags']}>
+    <section className={styles.tags}>
       {/* <Tabs sticky>
         <Tabs.Tab
           selected={isRecommended}

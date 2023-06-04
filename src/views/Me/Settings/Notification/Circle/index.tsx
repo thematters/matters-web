@@ -119,7 +119,7 @@ const BaseNotificationSettings = ({
 
   return (
     <ResponsiveWrapper>
-      <div className={styles['title']}>
+      <div className={styles.title}>
         <h2>
           {' '}
           <Translate
@@ -144,7 +144,7 @@ const BaseNotificationSettings = ({
         settings={settings}
         spacingX={spacingX}
       />
-      <div className={styles['title']}>
+      <div className={styles.title}>
         <h2>
           <Translate
             zh_hans="订阅围炉"

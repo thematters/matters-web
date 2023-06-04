@@ -27,8 +27,8 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
   const isInvited = invitation && invitation.state === InvitationState.Pending
 
   return (
-    <section className={styles['head']}>
-      <section className={styles['product']}>
+    <section className={styles.head}>
+      <section className={styles.product}>
         <CircleDigest.Rich
           circle={circle}
           borderRadius="xtight"
@@ -40,7 +40,7 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
         />
       </section>
 
-      <ul className={styles['features']}>
+      <ul className={styles.features}>
         <li>
           <TextIcon
             icon={withIcon(IconCircleFeatureReading)({ size: 'md-s' })}

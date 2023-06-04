@@ -18,7 +18,7 @@ const RecommendCircleActivity = ({ circles, location }: Props) => {
   }
 
   return (
-    <section className={styles['container']}>
+    <section className={styles.container}>
       <Slides header={<FollowingRecommendHead type="circle" />}>
         {circles.map((circle, index) => (
           <Slides.Item
@@ -33,7 +33,7 @@ const RecommendCircleActivity = ({ circles, location }: Props) => {
               })
             }}
           >
-            <section className={styles['item']}>
+            <section className={styles.item}>
               <FollowingRecommendCircle circle={circle} />
             </section>
           </Slides.Item>

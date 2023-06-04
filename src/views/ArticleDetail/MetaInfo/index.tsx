@@ -24,8 +24,8 @@ const MetaInfo = ({
   const originalLanguage = article?.language ? article.language : ''
 
   return (
-    <section className={styles['info']}>
-      <section className={styles['time']}>
+    <section className={styles.info}>
+      <section className={styles.time}>
         <DateTime date={article.createdAt} />
         {article.revisedAt && (
           <span>

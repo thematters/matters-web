@@ -100,7 +100,7 @@ const Wallet = () => {
 
       <Head title={{ id: 'myWallet' }} />
 
-      <section className={styles['assetsContainer']}>
+      <section className={styles.assetsContainer}>
         <FiatCurrencyBalance
           balanceHKD={balanceHKD}
           canPayout={canPayout}

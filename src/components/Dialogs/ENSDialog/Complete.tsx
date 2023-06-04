@@ -15,7 +15,7 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
   return (
     <>
       <Dialog.Content>
-        <section className={styles['content']}>
+        <section className={styles.content}>
           <p>
             <Translate
               zh_hans="已成功关联，稍后完成。在&nbsp;"

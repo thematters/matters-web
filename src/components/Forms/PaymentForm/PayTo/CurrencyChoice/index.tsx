@@ -80,14 +80,14 @@ const CurrencyChoice: React.FC<FormProps> = ({
 
   const InnerForm = (
     <section
-      className={styles['wrapper']}
+      className={styles.wrapper}
       data-test-id={TEST_ID.PAY_TO_CURRENCY_CHOICE}
     >
-      <section className={styles['header']}>
+      <section className={styles.header}>
         <span>
           <Translate zh_hant="選擇支持" zh_hans="选择支持" en="Support " />
         </span>
-        <span className={styles['userInfo']}>
+        <span className={styles.userInfo}>
           <UserDigest.Mini
             user={recipient}
             avatarSize="xs"

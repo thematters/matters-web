@@ -22,7 +22,7 @@ const Tips = () => {
 
   if (!hasEthAddress) {
     return (
-      <section className={styles['tips']}>
+      <section className={styles.tips}>
         <p>
           <Translate
             zh_hant="剛接觸加密錢包？參考 "
@@ -43,7 +43,7 @@ const Tips = () => {
     )
   } else if (address && isZeroBalance) {
     return (
-      <section className={styles['tips']}>
+      <section className={styles.tips}>
         <p>
           <Translate
             zh_hant="USDT 餘額不正確？參考 "
@@ -64,7 +64,7 @@ const Tips = () => {
     )
   } else {
     return (
-      <section className={styles['tips']}>
+      <section className={styles.tips}>
         <p>
           <Translate
             zh_hant="如何讓支持更順利？參考 "

@@ -20,7 +20,7 @@ const FixedMain: React.FC<FixedMainProps> = ({ children }) => {
       <div className={`${styles['fixed-main']} ${styles['single-col']}`}>
         <div className="l-container full">
           <div className="l-row">
-            <div className={styles['content']}>{children}</div>
+            <div className={styles.content}>{children}</div>
           </div>
         </div>
       </div>

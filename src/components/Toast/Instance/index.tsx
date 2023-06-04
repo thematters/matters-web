@@ -52,7 +52,7 @@ export const ToastInstance = ({
   return (
     <section>
       {clearable && (
-        <div className={styles['clearButton']}>
+        <div className={styles.clearButton}>
           <Button size={['2rem', '2rem']} onClick={onClick}>
             <IconClear16 size="lg" />
           </Button>
@@ -62,7 +62,7 @@ export const ToastInstance = ({
         <section>
           <Alert type={alertType}>
             {content && (
-              <p className={styles['content']}>
+              <p className={styles.content}>
                 {content}
                 {switchContent && (
                   <span onClick={onClick}>{switchContent}</span>

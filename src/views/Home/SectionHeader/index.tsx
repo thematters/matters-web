@@ -28,7 +28,7 @@ const FeedHeader = ({
 
   return (
     <PageHeader title={titleMap[type]} is="h2" hasNoBorder>
-      <section className={styles['right']}>
+      <section className={styles.right}>
         {rightButton}
 
         {path && viewAll && <ViewAllButton href={path} />}

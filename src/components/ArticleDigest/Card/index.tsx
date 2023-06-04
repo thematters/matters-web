@@ -70,7 +70,7 @@ export const ArticleDigestCard = ({
             textSize="md-s"
           />
 
-          {!cover && <p className={styles['summary']}>{cleanedSummary}</p>}
+          {!cover && <p className={styles.summary}>{cleanedSummary}</p>}
         </header>
 
         <footer className={styles.footer}>

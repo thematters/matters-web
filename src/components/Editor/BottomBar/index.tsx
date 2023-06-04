@@ -129,8 +129,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
   return (
     <section className={bottomBarClasses}>
       <Layout.FixedMain>
-        <section className={styles['content']}>
-          <section className={styles['inner']}>
+        <section className={styles.content}>
+          <section className={styles.inner}>
             {/* Cover */}
             <SetCover.Dialog {...coverProps}>
               {({ openDialog: openSetCoverDialog }) => (

@@ -72,7 +72,7 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
   if (textPlacement === 'left') {
     return (
       <span className={textIconClasses}>
-        {children && <span className={styles['text']}>{children}</span>}
+        {children && <span className={styles.text}>{children}</span>}
 
         {icon}
       </span>
@@ -83,7 +83,7 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
     <span className={textIconClasses}>
       {icon}
 
-      {children && <span className={styles['text']}>{children}</span>}
+      {children && <span className={styles.text}>{children}</span>}
     </span>
   )
 }

@@ -38,7 +38,7 @@ const Concise = ({
   })
   return (
     <LinkWrapper {...path}>
-      <section className={styles['content']}>
+      <section className={styles.content}>
         <TextIcon
           icon={<IconHashTag16 color="grey" />}
           color="black"

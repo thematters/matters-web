@@ -47,8 +47,8 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
   }
 
   return (
-    <section className={styles['secret']}>
-      <p className={styles['description']}>
+    <section className={styles.secret}>
+      <p className={styles.description}>
         <Translate
           zh_hant="上鎖內容密鑰，請妥善保管"
           zh_hans="上鎖內容密鑰，請妥善保管"
@@ -56,7 +56,7 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
         />
       </p>
 
-      <section className={styles['key']}>
+      <section className={styles.key}>
         <CopyToClipboard text={secret}>
           <Button
             aria-label={translate({ id: 'copy', lang })}

@@ -43,8 +43,8 @@ export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
     typeof statusCode === 'string' && statusCode.length > 3
 
   return (
-    <section className={styles['error']}>
-      <section className={styles['image']}>
+    <section className={styles.error}>
+      <section className={styles.image}>
         <img src={IMAGE_ILLUSTRATION_EMPTY} alt="illustration" />
       </section>
 

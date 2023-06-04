@@ -20,7 +20,7 @@ const SupportPreview = ({
 }) => {
   const viewer = useContext(ViewerContext)
   return (
-    <section className={styles['donation']}>
+    <section className={styles.donation}>
       <span>
         {!content &&
           (tabType === 'request' ? (

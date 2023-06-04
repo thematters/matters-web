@@ -23,13 +23,13 @@ const FooterActions = ({
 
   return (
     <footer className={styles.footer}>
-      <section className={styles['left']}>
+      <section className={styles.left}>
         {tag}
         {circle}
         {hasDate && <DateTime date={date || article.createdAt} />}
       </section>
 
-      <section className={styles['right']}>
+      <section className={styles.right}>
         <BookmarkButton article={article} inCard={inCard} />
       </section>
     </footer>

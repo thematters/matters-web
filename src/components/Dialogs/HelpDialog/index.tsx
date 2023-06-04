@@ -21,7 +21,7 @@ type Props = {
 
 const ReadTime = () => (
   <>
-    <h2 className={styles['title']}>
+    <h2 className={styles.title}>
       <TextIcon icon={<IconReadTimeTotal16 size="md" />} weight="md">
         <FormattedMessage
           defaultMessage="Accumulated Read Time"
@@ -29,7 +29,7 @@ const ReadTime = () => (
         />
       </TextIcon>
     </h2>
-    <p className={styles['description']}>
+    <p className={styles.description}>
       <FormattedMessage
         defaultMessage="Accumulated read time indicates the total time length that registered users read."
         description="src/components/Dialogs/HelpDialog/index.tsx"
@@ -40,12 +40,12 @@ const ReadTime = () => (
 
 const ReadCount = () => (
   <>
-    <h2 className={styles['title']}>
+    <h2 className={styles.title}>
       <TextIcon icon={<IconRead16 size="md" />} weight="md">
         <FormattedMessage defaultMessage="Read Counts" description="" />
       </TextIcon>
     </h2>
-    <p className={styles['description']}>
+    <p className={styles.description}>
       <FormattedMessage
         defaultMessage="Read counts indicates how many registered users read."
         description="src/components/Dialogs/HelpDialog/index.tsx"

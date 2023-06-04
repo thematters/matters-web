@@ -39,7 +39,7 @@ const ConnectWallet = ({
   return (
     <>
       <Dialog.Content>
-        <section className={styles['content']}>
+        <section className={styles.content}>
           <LinkENSIntro ensName={ensName} />
         </section>
       </Dialog.Content>

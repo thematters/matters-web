@@ -37,7 +37,7 @@ const ConfirmRevisedPublishDialogContent = ({
       <Dialog.Message align="left" type="info">
         <section className={styles['image-container']}>
           <div
-            className={styles['image']}
+            className={styles.image}
             style={{ backgroundImage: `url(${PUBLISH_IMAGE})` }}
           />
         </section>

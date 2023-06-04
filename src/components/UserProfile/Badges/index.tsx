@@ -12,7 +12,7 @@ export const SeedBadge = () => (
   <Tooltip
     content={<Translate zh_hant="種子用戶" zh_hans="种子用户" en="Seed User" />}
   >
-    <span className={styles['badge']}>{withIcon(IconSeedBadge)({})}</span>
+    <span className={styles.badge}>{withIcon(IconSeedBadge)({})}</span>
   </Tooltip>
 )
 
@@ -26,9 +26,7 @@ export const GoldenMotorBadge = () => (
       />
     }
   >
-    <span className={styles['badge']}>
-      {withIcon(IconGoldenMotorBadge)({})}
-    </span>
+    <span className={styles.badge}>{withIcon(IconGoldenMotorBadge)({})}</span>
   </Tooltip>
 )
 
@@ -42,7 +40,7 @@ export const ArchitectBadge = () => (
       />
     }
   >
-    <span className={styles['badge']}>{withIcon(IconArchitectBadge)({})}</span>
+    <span className={styles.badge}>{withIcon(IconArchitectBadge)({})}</span>
   </Tooltip>
 )
 
@@ -64,8 +62,6 @@ export const TraveloggersBadge = () => (
       />
     }
   >
-    <span className={styles['badge']}>
-      {withIcon(IconTraveloggersBadge)({})}
-    </span>
+    <span className={styles.badge}>{withIcon(IconTraveloggersBadge)({})}</span>
   </Tooltip>
 )

@@ -67,7 +67,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
       testId={TEST_ID.DIGEST_TAG_FEED}
       {...cardProps}
     >
-      <section className={styles['container']}>
+      <section className={styles.container}>
         <header className={styles.header}>
           <Tag
             tag={tag}
@@ -76,7 +76,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
             textIconProps={{ color: 'black', weight: 'md', size: 'sm' }}
           />
 
-          <section className={styles['nums']}>
+          <section className={styles.nums}>
             <TextIcon
               icon={<IconUser16 color="grey-dark" size="xs" />}
               size="xs"
@@ -97,15 +97,15 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
           </section>
         </header>
 
-        <section className={styles['content']}>
-          <ul className={styles['articles']}>
+        <section className={styles.content}>
+          <ul className={styles.articles}>
             {articles?.map(({ node, cursor }) => (
               <li key={cursor}>
                 <Link
                   {...toPath({ page: 'articleDetail', article: node })}
                   legacyBehavior
                 >
-                  <a className={styles['title']} onClick={captureClicks}>
+                  <a className={styles.title} onClick={captureClicks}>
                     {node.title}
                   </a>
                 </Link>
@@ -113,7 +113,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
             ))}
           </ul>
 
-          <section className={styles['cover']}>
+          <section className={styles.cover}>
             <Link {...path} legacyBehavior>
               <a>
                 <VisuallyHidden>

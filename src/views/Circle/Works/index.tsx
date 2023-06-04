@@ -8,7 +8,7 @@ const CircleWorks = () => (
   <Layout.Main>
     <Profile />
 
-    <section className={styles['container']}>
+    <section className={styles.container}>
       <Works />
     </section>
   </Layout.Main>

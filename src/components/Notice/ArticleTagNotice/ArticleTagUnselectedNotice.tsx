@@ -31,7 +31,7 @@ const ArticleTagUnselectedNotice = ({
 
   return (
     <section
-      className={styles['container']}
+      className={styles.container}
       data-test-id={TEST_ID.NOTICE_ARTICLE_TAG_UNSELECTED}
     >
       <section className={styles['avatar-wrap']}>

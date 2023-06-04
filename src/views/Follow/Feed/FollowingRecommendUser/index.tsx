@@ -36,10 +36,10 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
       {...path}
       {...cardProps}
     >
-      <section className={styles['container']}>
-        <section className={styles['head']}>
+      <section className={styles.container}>
+        <section className={styles.head}>
           <Link {...path} legacyBehavior>
-            <a className={styles['avatar']}>
+            <a className={styles.avatar}>
               <VisuallyHidden>
                 <span>{user.displayName}</span>
               </VisuallyHidden>
@@ -47,20 +47,20 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
             </a>
           </Link>
 
-          <section className={styles['wrap']}>
+          <section className={styles.wrap}>
             <Link {...path} legacyBehavior>
-              <a className={styles['name']}>{displayName}</a>
+              <a className={styles.name}>{displayName}</a>
             </Link>
 
-            <section className={styles['follow']}>
+            <section className={styles.follow}>
               <FollowUserButton user={user} />
             </section>
           </section>
         </section>
 
-        <section className={styles['content']}>
+        <section className={styles.content}>
           {info.description && (
-            <p className={styles['description']}>{info.description}</p>
+            <p className={styles.description}>{info.description}</p>
           )}
         </section>
       </section>

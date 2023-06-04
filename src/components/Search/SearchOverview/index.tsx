@@ -92,7 +92,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                   })}
                   legacyBehavior
                 >
-                  <a className={styles['key']}>{key}</a>
+                  <a className={styles.key}>{key}</a>
                 </Link>
               </li>
             ))}
@@ -117,7 +117,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                 })}
                 key={key}
               >
-                <span className={styles['key']}>{key}</span>
+                <span className={styles.key}>{key}</span>
               </Menu.Item>
             </Fragment>
           ))}

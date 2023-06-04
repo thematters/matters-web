@@ -85,7 +85,7 @@ export const ArticleDigestSidebar = ({
         </header>
 
         {cover && (
-          <aside className={styles['cover']}>
+          <aside className={styles.cover}>
             <ResponsiveImage url={cover} size="144w" />
           </aside>
         )}

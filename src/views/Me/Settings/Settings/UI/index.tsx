@@ -6,7 +6,7 @@ import SwitchLanguage from './SwitchLanguage'
 
 const UISettings = () => {
   return (
-    <section className={styles['container']}>
+    <section className={styles.container}>
       <Form.List groupName={<Translate id="settingsUI" />} spacingX={0}>
         <SwitchLanguage />
         <hr className={styles['dashed-line']} />

@@ -69,7 +69,7 @@ export const BaseCommentFeed = ({
           hasUserName={hasUserName}
         />
 
-        <section className={styles['right']}>
+        <section className={styles.right}>
           <DonatorLabel comment={comment} />
           <PinnedLabel comment={comment} />
           <DropdownActions

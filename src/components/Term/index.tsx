@@ -11,7 +11,7 @@ export const Term = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
-    <section className={styles['term']}>
+    <section className={styles.term}>
       {lang?.startsWith('zh') && (
         <section
           dangerouslySetInnerHTML={{

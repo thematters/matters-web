@@ -37,7 +37,7 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
                 zh_hans="单次修订上限为"
                 en="with a maximum of"
               />
-              <span className={styles['count']}> 50 </span>
+              <span className={styles.count}> 50 </span>
               <Translate
                 zh_hant="個編輯距離。"
                 zh_hans="個編輯距離。"
@@ -56,7 +56,7 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
           <p>
             <b>
               <Translate zh_hant="你還可以修訂" zh_hans="你还可以修订" en="" />
-              <span className={styles['count']}> {revisionCountLeft} </span>
+              <span className={styles.count}> {revisionCountLeft} </span>
               <Translate
                 zh_hant="版"
                 zh_hans="版"

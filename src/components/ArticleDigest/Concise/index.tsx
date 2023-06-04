@@ -65,13 +65,13 @@ const BaseArticleDigestFeed = ({
       bgActiveColor="none"
       onClick={onClick}
     >
-      <section className={styles['content']}>
-        <section className={styles['head']}>
-          <section className={styles['title']}>
+      <section className={styles.content}>
+        <section className={styles.head}>
+          <section className={styles.title}>
             <ArticleDigestTitle article={article} textSize="xm" />
           </section>
 
-          <section className={styles['author']}>
+          <section className={styles.author}>
             <UserDigest.Mini
               user={author}
               avatarSize="sm"
@@ -83,10 +83,10 @@ const BaseArticleDigestFeed = ({
           </section>
         </section>
 
-        <p className={styles['description']}>{cleanedSummary}</p>
+        <p className={styles.description}>{cleanedSummary}</p>
 
         {cover && (
-          <div className={styles['cover']}>
+          <div className={styles.cover}>
             <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
           </div>
         )}

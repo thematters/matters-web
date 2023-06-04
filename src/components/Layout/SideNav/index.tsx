@@ -34,7 +34,7 @@ const Logo = () => {
   const intl = useIntl()
 
   return (
-    <section className={styles['logo']}>
+    <section className={styles.logo}>
       <Link href={PATHS.HOME} legacyBehavior>
         <a
           aria-label={intl.formatMessage({

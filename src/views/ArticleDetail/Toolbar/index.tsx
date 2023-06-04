@@ -88,11 +88,8 @@ const Toolbar = ({
   }
 
   return (
-    <section
-      className={styles['toolbar']}
-      data-test-id={TEST_ID.ARTICLE_TOOLBAR}
-    >
-      <section className={styles['buttons']}>
+    <section className={styles.toolbar} data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
+      <section className={styles.buttons}>
         <ReCaptchaProvider action="appreciateArticle">
           <AppreciationButton
             article={article}

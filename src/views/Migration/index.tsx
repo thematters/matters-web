@@ -37,7 +37,7 @@ const Migration = () => {
         <div className="l-row">
           <div className="l-col-full">
             <Link href={PATHS.HOME} legacyBehavior>
-              <a className={styles['logo']}>
+              <a className={styles.logo}>
                 <VisuallyHidden>
                   <span>{translate({ id: 'discover', lang })}</span>
                 </VisuallyHidden>

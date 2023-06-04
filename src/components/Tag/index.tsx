@@ -136,12 +136,12 @@ export const Tag = ({
   const Inner = () => (
     <>
       <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
-        <span className={styles['name']}>#&nbsp;{tagName}</span>
+        <span className={styles.name}>#&nbsp;{tagName}</span>
       </TextIcon>
 
       {hasClose && (
         <button
-          className={styles['close']}
+          className={styles.close}
           onClick={() => {
             removeTag?.(tag)
           }}
@@ -151,7 +151,7 @@ export const Tag = ({
       )}
 
       {hasCount && type === 'list' && tag?.numArticles ? (
-        <span className={styles['count']}>{tag.numArticles}</span>
+        <span className={styles.count}>{tag.numArticles}</span>
       ) : null}
     </>
   )

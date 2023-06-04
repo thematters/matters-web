@@ -15,7 +15,7 @@ const FeedType = ({ type, setFeedType }: FeedTypeProps) => {
   const isUser = type === 'user'
 
   return (
-    <section className={styles['container']}>
+    <section className={styles.container}>
       <Tabs sticky>
         <Tabs.Tab onClick={() => setFeedType('user')} selected={isUser}>
           <Translate zh_hant="作者" zh_hans="作者" en="Authors" />

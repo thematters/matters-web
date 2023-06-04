@@ -34,8 +34,8 @@ const Header: React.FC<HeaderProps> & {
 
   return (
     <header className={headerClasses} data-test-id={TEST_ID.LAYOUT_HEADER}>
-      <section className={styles['content']}>
-        {left && <section className={styles['left']}>{left}</section>}
+      <section className={styles.content}>
+        {left && <section className={styles.left}>{left}</section>}
         {right && <section className={rightClasses}>{right}</section>}
       </section>
     </header>

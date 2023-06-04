@@ -80,9 +80,9 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
 
   return (
     <Card spacing={['xtight', 0]}>
-      <section className={styles['container']}>
+      <section className={styles.container}>
         <CircleInvitationInvitee invitee={invitee} />
-        <section className={styles['info']}>
+        <section className={styles.info}>
           <CircleInvitationPeriod
             freePeriod={freePeriod}
             acceptedAt={acceptedAt}
@@ -100,7 +100,7 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
           {isFailed && <CircleInvitationFailedInfo />}
 
           {isSucceeded && (
-            <span className={styles['succeeded']}>
+            <span className={styles.succeeded}>
               <Translate
                 zh_hant="付費訂閱中"
                 zh_hans="付费订阅中"

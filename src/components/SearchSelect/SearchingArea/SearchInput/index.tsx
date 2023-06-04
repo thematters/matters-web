@@ -69,7 +69,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       {({ values, setValues, handleSubmit, handleChange }) => {
         return (
           <form
-            className={styles['form']}
+            className={styles.form}
             onSubmit={handleSubmit}
             role="search"
             autoComplete="off"
@@ -101,7 +101,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
             />
 
             <button
-              className={styles['search']}
+              className={styles.search}
               type="submit"
               aria-label={translate({ id: 'search', lang })}
             >
@@ -110,7 +110,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 
             {value && (
               <button
-                className={styles['clear']}
+                className={styles.clear}
                 type="button"
                 aria-label={translate({ id: 'clear', lang })}
                 onClick={() => {

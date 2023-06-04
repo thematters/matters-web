@@ -73,7 +73,7 @@ export const VerificationSendCodeButton: React.FC<
         )}
 
         {sent && countdown.timeLeft !== 0 && (
-          <span className={styles['timer']}>{formattedTimeLeft.ss}</span>
+          <span className={styles.timer}>{formattedTimeLeft.ss}</span>
         )}
       </TextIcon>
     </Button>

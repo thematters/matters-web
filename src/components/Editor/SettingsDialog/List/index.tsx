@@ -95,11 +95,11 @@ const SettingsList = ({
             <ListItem.NumberIndicator num={collectionCount} />
           </ListItem>
 
-          <section className={styles['response']}>
+          <section className={styles.response}>
             <ToggleResponse {...responseProps} />
           </section>
 
-          <section className={styles['access']}>
+          <section className={styles.access}>
             <ToggleAccess {...restProps} />
           </section>
 

@@ -25,7 +25,7 @@ export const PageHeader: React.FC<React.PropsWithChildren<PageHeaderProps>> = ({
 
   return (
     <header className={headerClasses}>
-      <section className={styles['title']}>
+      <section className={styles.title}>
         <Title type="nav" is={is}>
           {title}
         </Title>

@@ -39,8 +39,8 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
 
   if (!tag.owner) {
     return (
-      <section className={styles['container']}>
-        <section className={styles['left']}>
+      <section className={styles.container}>
+        <section className={styles.left}>
           <TextIcon
             icon={<IconAvatarEmpty24 size="md" />}
             color="grey-dark"
@@ -53,7 +53,7 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
             />
           </TextIcon>
         </section>
-        <section className={styles['right']}>
+        <section className={styles.right}>
           <TagAdoptionDialog id={tag.id}>
             {({ openDialog }) => (
               <Button
@@ -80,8 +80,8 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
   }
 
   return (
-    <section className={styles['container']}>
-      <section className={styles['left']}>
+    <section className={styles.container}>
+      <section className={styles.left}>
         <UserDigest.Mini
           user={tag.owner}
           avatarSize="md"
@@ -96,7 +96,7 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
           />
         </TextIcon>
       </section>
-      <section className={styles['right']}>{/* editos */}</section>
+      <section className={styles.right}>{/* editos */}</section>
     </section>
   )
 }

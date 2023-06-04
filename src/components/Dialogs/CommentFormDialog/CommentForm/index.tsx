@@ -155,7 +155,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
       />
 
       <Dialog.Content spacing={['base', 'base']} hasGrow>
-        {context && <section className={styles['context']}>{context}</section>}
+        {context && <section className={styles.context}>{context}</section>}
 
         <form className={styles.form} id={formId} onSubmit={handleSubmit}>
           <CommentEditor content={content} update={onUpdate} />

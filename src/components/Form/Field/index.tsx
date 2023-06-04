@@ -24,7 +24,7 @@ const Field: React.FC<{ children?: React.ReactNode }> & {
   Header: typeof Header
   Footer: typeof Footer
   Content: typeof Content
-} = ({ children }) => <section className={styles['field']}>{children}</section>
+} = ({ children }) => <section className={styles.field}>{children}</section>
 
 Field.Header = Header
 Field.Footer = Footer

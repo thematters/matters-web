@@ -8,12 +8,12 @@ const PickIntroHeader = () => {
   return (
     <header className={styles.header}>
       <img
-        className={styles['avatar']}
+        className={styles.avatar}
         src={IMAGE_ILLUSTRATION_AVATAR}
         aria-hidden="true"
         alt="illustration"
       />
-      <section className={styles['intro']}>
+      <section className={styles.intro}>
         <p>
           <Translate
             zh_hant="歡迎加入 Matters，一個自由、自主、永續的創作與公共討論空間。"
@@ -22,13 +22,13 @@ const PickIntroHeader = () => {
           />
         </p>
 
-        <p className={styles['sub']}>
+        <p className={styles.sub}>
           <Translate
             zh_hant="請追蹤至少 "
             zh_hans="请追踪至少 "
             en="Please follow at least "
           />
-          <span className={styles['hightlight']}>5</span>
+          <span className={styles.hightlight}>5</span>
           <Translate
             zh_hant=" 位創作者，以開啓你的個性化訂閱時間線。"
             zh_hans=" 位创作者，以开启你的个性化订阅时间线。"

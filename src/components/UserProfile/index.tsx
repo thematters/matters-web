@@ -110,7 +110,7 @@ export const UserProfile = () => {
           <>
             <span />
             {user && (
-              <section className={styles['buttons']}>
+              <section className={styles.buttons}>
                 <ShareButton
                   tags={
                     [user.displayName, user.userName].filter(
@@ -188,14 +188,14 @@ export const UserProfile = () => {
           <Cover fallbackCover={IMAGE_COVER.src} />
 
           <header>
-            <section className={styles['avatar']}>
+            <section className={styles.avatar}>
               <Avatar size="xxxl" />
             </section>
           </header>
 
-          <section className={styles['info']}>
+          <section className={styles.info}>
             <section className={styles['display-name']}>
-              <h1 className={styles['name']}>
+              <h1 className={styles.name}>
                 {isUserArchived && (
                   <FormattedMessage
                     defaultMessage="Account Archived"
@@ -230,7 +230,7 @@ export const UserProfile = () => {
         <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
 
         <header className={styles.header}>
-          <section className={styles['avatar']}>
+          <section className={styles.avatar}>
             {hasTraveloggersBadge ? (
               <TraveloggersAvatar user={user} isMe={isMe} />
             ) : (
@@ -238,7 +238,7 @@ export const UserProfile = () => {
             )}
           </section>
 
-          <section className={styles['right']}>
+          <section className={styles.right}>
             {!isMe && <FollowUserButton user={user} size="lg" />}
 
             {user?.articles.totalCount > 0 && user?.info.ipnsKey && (
@@ -247,10 +247,10 @@ export const UserProfile = () => {
           </section>
         </header>
 
-        <section className={styles['info']}>
+        <section className={styles.info}>
           <section className={styles['display-name']}>
             <h1
-              className={styles['name']}
+              className={styles.name}
               data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
             >
               {user.displayName}
@@ -262,9 +262,9 @@ export const UserProfile = () => {
             {isCivicLiker && <CivicLikerBadge />}
           </section>
 
-          <section className={styles['username']}>
+          <section className={styles.username}>
             <span
-              className={styles['name']}
+              className={styles.name}
               data-test-id={TEST_ID.USER_PROFILE_USER_NAME}
             >
               @{user.userName}
@@ -283,7 +283,7 @@ export const UserProfile = () => {
             spacingTop="base"
           >
             <p
-              className={styles['description']}
+              className={styles.description}
               data-test-id={TEST_ID.USER_PROFILE_BIO}
             >
               {user.info.description}
@@ -296,7 +296,7 @@ export const UserProfile = () => {
             {({ openDialog: openFollowersDialog }) => (
               <button type="button" onClick={openFollowersDialog}>
                 <span
-                  className={styles['count']}
+                  className={styles.count}
                   data-test-id={TEST_ID.USER_PROFILE_FOLLOWERS_COUNT}
                 >
                   {numAbbr(user.followers.totalCount)}
@@ -309,7 +309,7 @@ export const UserProfile = () => {
           <FollowingDialog user={user}>
             {({ openDialog: openFollowingDialog }) => (
               <button type="button" onClick={openFollowingDialog}>
-                <span className={styles['count']}>
+                <span className={styles.count}>
                   {numAbbr(user.following.users.totalCount)}
                 </span>
                 <FormattedMessage

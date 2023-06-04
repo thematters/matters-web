@@ -28,7 +28,7 @@ const CircleDigestPlain = ({ circle, onClick }: CircleDigestPlainProps) => {
         weight="normal"
         size="xs"
       >
-        <span className={styles['name']}>{circle.displayName}</span>
+        <span className={styles.name}>{circle.displayName}</span>
       </TextIcon>
     </LinkWrapper>
   )

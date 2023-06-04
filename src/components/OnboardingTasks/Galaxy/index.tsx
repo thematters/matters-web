@@ -56,7 +56,7 @@ const Galaxy = ({ task, onClick }: Props) => {
 
   return (
     <section
-      className={styles['galaxy']}
+      className={styles.galaxy}
       style={{ backgroundImage: `url(${IMAGE_GALAXY.src})` }}
     >
       <section className={task1Classes} onClick={() => onClick(1)}>

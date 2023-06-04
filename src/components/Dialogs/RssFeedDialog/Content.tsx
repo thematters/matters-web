@@ -68,7 +68,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
   const intl = useIntl()
   return (
     <Dialog.Content hasGrow>
-      <section className={styles['container']}>
+      <section className={styles.container}>
         <SectionCard>
           {!ipnsKey ? (
             <>
@@ -87,14 +87,14 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
           ) : null}
 
           {/* hash */}
-          <section className={styles['hash']}>
-            <h4 className={styles['title']}>
+          <section className={styles.hash}>
+            <h4 className={styles.title}>
               <FormattedMessage
                 defaultMessage="IPNS Subscription"
                 description="src/components/Dialogs/RssFeedDialog/Content.tsx"
               />
             </h4>
-            <p className={styles['description']}>
+            <p className={styles.description}>
               <FormattedMessage
                 defaultMessage="Add hash from IPFS into compatible reader such as "
                 description="src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -110,7 +110,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
             </p>
 
             {ipnsKey ? (
-              <section className={styles['copy']}>
+              <section className={styles.copy}>
                 <input
                   type="text"
                   value={displayIPNS!}
@@ -152,14 +152,14 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
           <Spacer size="base" />
 
           {/* gateways */}
-          <section className={styles['gateways']}>
-            <h4 className={styles['title']}>
+          <section className={styles.gateways}>
+            <h4 className={styles.title}>
               <FormattedMessage
                 defaultMessage="RSS Subscription"
                 description="src/components/Dialogs/RssFeedDialog/Content.tsx"
               />
             </h4>
-            <p className={styles['description']}>
+            <p className={styles.description}>
               <FormattedMessage
                 defaultMessage="Add any URL in the following list into RSS reader"
                 description="src/components/Dialogs/RssFeedDialog/Content.tsx"

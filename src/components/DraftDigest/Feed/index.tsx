@@ -36,16 +36,16 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
   return (
     <ResponsiveWrapper>
       <Card {...path} spacing={['base', 0]} bgActiveColor="none">
-        <section className={styles['container']}>
-          <section className={styles['left']}>
+        <section className={styles.container}>
+          <section className={styles.left}>
             <LinkWrapper {...path} textActiveColor="green">
-              <section className={styles['title']}>
+              <section className={styles.title}>
                 {title || <Translate id="untitle" />}
               </section>
             </LinkWrapper>
           </section>
 
-          <section className={styles['right']}>
+          <section className={styles.right}>
             <DeleteButton draft={draft} />
           </section>
         </section>
