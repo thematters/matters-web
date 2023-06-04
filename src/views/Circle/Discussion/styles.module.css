@@ -14,7 +14,7 @@
 .wall {
   margin-top: var(--spacing-base);
   margin-bottom: calc(
-    calc(var(--spacing-xxx-loose) + var(--global-nav-height)) ; * -1
+    calc(var(--spacing-xxx-loose) + var(--global-nav-height)) * -1
   );
 
   & img {
@@ -23,7 +23,7 @@
   }
 
   & .brief {
-    height: calc(calc(var(--spacing-xxx-loose) + var(--global-nav-height)) ;);
+    height: calc(var(--spacing-xxx-loose) + var(--global-nav-height));
     margin-top: calc(-1px);
     text-align: center;
     background: var(--color-matters-green);

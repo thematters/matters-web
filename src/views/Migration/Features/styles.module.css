@@ -58,15 +58,15 @@
 
 @media (--lg-up) {
   .features {
-    .content {
+    & .content {
       grid-column: col-start 1 / span 5;
     }
 
-    img {
+    & img {
       grid-column: col-start 7 / span 6;
     }
 
-    li:nth-child(2) {
+    & li:nth-child(2) {
       & .content {
         grid-column: col-start 8 / span 5;
       }
