@@ -131,7 +131,7 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
             >
               {({ openDialog, type, ref }) => (
                 <section
-                  className={styles['assetsItem clickable']}
+                  className={`${styles.clickable} ${styles.clickable}`}
                   onClick={openDialog}
                   aria-haspopup={type}
                   role="button"

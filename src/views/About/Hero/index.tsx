@@ -120,7 +120,7 @@ const Hero = () => {
 
       <section className={styles['reports']}>
         <section className={styles['container']}>
-          <section className={styles['scrollButton scrollLeft']}>
+          <section className={`${styles.scrollButton} ${styles.scrollLeft}`}>
             <Button onClick={scrollPrev} disabled={!prevBtnEnabled}>
               <Media at="sm">{withIcon(IconButtonLeft)({ size: 'md' })}</Media>
               <Media greaterThan="sm">
@@ -304,7 +304,7 @@ const Hero = () => {
               </li>
             </ul>
           </section>
-          <section className={styles['scrollButton scrollRight']}>
+          <section className={`${styles.scrollButton} ${styles.scrollRight}`}>
             <Button onClick={scrollNext} disabled={!nextBtnEnabled}>
               <Media at="sm">{withIcon(IconButtonRight)({ size: 'md' })}</Media>
               <Media greaterThan="sm">

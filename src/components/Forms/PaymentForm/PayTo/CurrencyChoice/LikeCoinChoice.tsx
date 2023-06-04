@@ -87,7 +87,7 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
   return (
     <section
       role="button"
-      className={styles['item clickable']}
+      className={`${styles.item} ${styles.clickable}`}
       onClick={switchToSetAmount}
     >
       <TextIcon

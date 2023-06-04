@@ -117,7 +117,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
       {/* HKD */}
       <section
         role="button"
-        className={styles['item clickable']}
+        className={`${styles.item} ${styles.clickable}`}
         onClick={() => {
           switchToSetAmount(CURRENCY.HKD)
         }}

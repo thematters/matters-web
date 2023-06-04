@@ -43,7 +43,7 @@ export const withIcon = (
       [styles.icon]: true,
       [styles[size]]: !!size,
       [styles[color]]: !!color,
-      [styles[className]]: !!className,
+      [className]: !!className,
     })
 
     return (

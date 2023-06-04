@@ -25,7 +25,7 @@ const ArticleCustomStagingArea = ({
   if (!hasArticles) {
     return (
       <section className={styles['customArticleArea']}>
-        <section className={styles['hint emptyHint']}>
+        <section className={`${styles.hint} ${styles.emptyHint}`}>
           <Translate id={hint} />
         </section>
       </section>

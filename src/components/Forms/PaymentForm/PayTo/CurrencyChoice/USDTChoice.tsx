@@ -98,7 +98,7 @@ const USDTChoice: React.FC<FormProps> = ({
     return (
       <section
         role="button"
-        className={styles['item clickable']}
+        className={`${styles.item} ${styles.clickable}`}
         onClick={switchToSetAmount}
         aria-label="Tether"
       >

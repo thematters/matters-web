@@ -1,4 +1,4 @@
-.appreciate-button {
+.appreciateButton {
   @mixin transition;
 
   position: relative;
@@ -10,7 +10,7 @@
     height: 1.25rem;
   }
 
-  & .icon-like {
+  & .iconLike {
     position: absolute;
     top: 0;
     left: 0;
@@ -19,7 +19,7 @@
     transform: scale(1);
   }
 
-  & .icon-superlike {
+  & .iconSuperlike {
     position: absolute;
     top: -0.25rem;
     left: -0.25rem;
@@ -30,7 +30,7 @@
     transform: scale(0);
   }
 
-  & .icon-superlike .superlike_svg__star {
+  & .iconSuperlike .superlike_svg__star {
     fill-opacity: 0;
     transition: fill-opacity 0.1s ease-in-out;
   }
@@ -44,7 +44,7 @@
     transform: scale(0);
   }
 
-  & .icon-superlike {
+  & .iconSuperlike {
     opacity: 1;
     transform: scale(1);
   }
