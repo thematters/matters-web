@@ -28,31 +28,33 @@
 }
 
 /* layout */
-img {
-  justify-self: center;
-}
+.intro {
+  & img {
+    justify-self: center;
+  }
 
-.content,
-img {
-  grid-column: 1 / -1;
-}
-
-@media (--md-up) {
+  .content,
   img {
-    grid-column: col-start 1 / span 5;
+    grid-column: 1 / -1;
   }
 
-  .content {
-    grid-column: col-start 7 / span 6;
-  }
-
-  .feature {
-    & .content {
+  @media (--md-up) {
+    & img {
       grid-column: col-start 1 / span 5;
     }
 
-    & img {
+    .content {
       grid-column: col-start 7 / span 6;
+    }
+
+    .feature {
+      & .content {
+        grid-column: col-start 1 / span 5;
+      }
+
+      & img {
+        grid-column: col-start 7 / span 6;
+      }
     }
   }
 }
