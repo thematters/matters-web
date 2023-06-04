@@ -3,6 +3,8 @@ import { useContext } from 'react'
 import { Form, LanguageContext, Translate } from '~/components'
 import { ArticleLicenseType } from '~/gql/graphql'
 
+import About from './About'
+
 interface Props {
   isInCircle: boolean
   license: ArticleLicenseType
@@ -132,6 +134,7 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
     ArticleLicenseType.Cc_0,
     ArticleLicenseType.Arr,
   ]
+  const cc4link = 'https://creativecommons.org/licenses/by-nc-nd/4.0/'
 
   return (
     <Form.Select
@@ -140,13 +143,20 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
       labelVisHidden
       title={<Translate id="license" />}
       onChange={(option) => onChange(option.value)}
-      options={options.map((value) => ({
-        name: LICENSE_TEXT[isInCircle ? 1 : 0][value].title[lang],
-        subtitle: LICENSE_TEXT[isInCircle ? 1 : 0][value].subtitle[lang],
-        extra: LICENSE_TEXT[isInCircle ? 1 : 0][value].extra[lang],
-        value,
-        selected: license === value,
-      }))}
+      options={options.map((value) => {
+        const extraDesc = LICENSE_TEXT[isInCircle ? 1 : 0][value].extra[lang]
+        let extra: string | React.ReactNode = ''
+        if (extraDesc) {
+          extra = <About desc={extraDesc} url={cc4link} />
+        }
+        return {
+          name: LICENSE_TEXT[isInCircle ? 1 : 0][value].title[lang],
+          subtitle: LICENSE_TEXT[isInCircle ? 1 : 0][value].subtitle[lang],
+          extra,
+          value,
+          selected: license === value,
+        }
+      })}
       size="sm"
     />
   )
