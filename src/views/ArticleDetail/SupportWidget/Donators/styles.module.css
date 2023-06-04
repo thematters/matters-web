@@ -1,4 +1,4 @@
-.avatar-list {
+.avatarList {
   @mixin flex-center-start;
 
   & > * {
@@ -55,7 +55,7 @@
     border-radius: 50%;
   }
 
-  & .donator-name {
+  & .donatorName {
     margin-left: var(--spacing-x-tight);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
@@ -64,7 +64,7 @@
   }
 }
 
-.avatar-list-footer {
+.avatarListFooter {
   margin-top: var(--spacing-x-tight);
   font-size: var(--font-size-xs);
   line-height: 1.25rem;

@@ -11,7 +11,7 @@ const NoticeContentDigest = ({ content }: { content: string }) => {
 
   return (
     <section
-      className={styles['notice-content-digest']}
+      className={styles.noticeContentDigest}
       data-test-id={TEST_ID.NOTICE_COMMENT_CONTENT}
     >
       {collapseContent}

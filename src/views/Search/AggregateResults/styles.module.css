@@ -34,7 +34,7 @@
   }
 }
 
-.aggregate-section {
+.aggregateSection {
   padding: 0 var(--spacing-base);
 
   @media (--lg-up) {

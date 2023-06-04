@@ -32,11 +32,11 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
   const showSearchHistory = recentSearches.length > 0
 
   const recentSearchesClasses = classNames({
-    [styles['recent-searches']]: true,
+    [styles.recentSearches]: true,
     [styles.inPage]: inPage,
   })
   const frequentSearchesClasses = classNames({
-    [styles['frequent-searches']]: true,
+    [styles.frequentSearches]: true,
     [styles.inPage]: inPage,
   })
 

@@ -1,4 +1,4 @@
-.circle-widget {
+.circleWidget {
   margin-top: var(--spacing-loose);
 
   &:not(.banner) {

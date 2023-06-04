@@ -62,7 +62,7 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
             aria-label={translate({ id: 'viewSupporters', lang })}
             aria-haspopup="dialog"
           >
-            <section className={styles['avatar-list']}>
+            <section className={styles.avatarList}>
               {frontDonators.map((user, index) => (
                 <Fragment key={index}>
                   {showAvatarAnimation && (
@@ -100,13 +100,13 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
               )}
 
               {donatorsCount === 1 && (
-                <span className={styles['donator-name']}>
+                <span className={styles.donatorName}>
                   <UserDigest.Plain user={donators[0]} hasUnderline />
                 </span>
               )}
             </section>
           </button>
-          <section className={styles['avatar-list-footer']}>
+          <section className={styles.avatarListFooter}>
             {donatorsCount === 1 && (
               <section>
                 <span>

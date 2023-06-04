@@ -36,7 +36,7 @@ export const ArticleDigestCard = ({
     : makeSummary(summary, countChars(article.title) > 40 ? 50 : 70)
   const containerClasses = classNames({
     [styles.container]: true,
-    [styles['has-cover']]: !!cover,
+    [styles.hasCover]: !!cover,
   })
   const path = toPath({
     page: 'articleDetail',

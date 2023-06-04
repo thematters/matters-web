@@ -21,8 +21,8 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> = ({
 }) => {
   const contentClasses = classNames({
     [styles.content]: true,
-    [styles['has-fixed']]: !!hasFixed,
-    [styles['has-grow']]: !!hasGrow,
+    [styles.hasFixed]: !!hasFixed,
+    [styles.hasGrow]: !!hasGrow,
     [styles[`spacing-y-${spacing[0]}`]]: true,
     [styles[`spacing-x-${spacing[1]}`]]: true,
   })

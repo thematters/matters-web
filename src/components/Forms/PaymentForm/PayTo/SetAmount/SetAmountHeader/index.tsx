@@ -29,7 +29,7 @@ const SetAmountHeader: React.FC<SetAmountHeaderProps> = ({
   const isUSDT = currency === CURRENCY.USDT
 
   return (
-    <section className={styles['set-amount-header']}>
+    <section className={styles.setAmountHeader}>
       <CurrencyIndicator
         currency={currency}
         switchToCurrencyChoice={switchToCurrencyChoice}

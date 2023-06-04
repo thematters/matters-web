@@ -57,8 +57,8 @@ export const ArticleDigestSidebar = ({
   const cover = !isBanned && hasCover ? article.cover : null
   const containerClasses = classNames({
     [styles.container]: true,
-    [styles['has-cover']]: !!cover,
-    [styles['has-background']]: !!hasBackground,
+    [styles.hasCover]: !!cover,
+    [styles.hasBackground]: !!hasBackground,
   })
   const path = toPath({
     page: 'articleDetail',

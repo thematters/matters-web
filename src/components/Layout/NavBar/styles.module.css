@@ -1,4 +1,4 @@
-.nav-bar {
+.navBar {
   @mixin shadow-border-top-grey;
   @mixin safe-area-botttom;
 

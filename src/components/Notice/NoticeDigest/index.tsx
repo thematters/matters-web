@@ -77,7 +77,7 @@ const NoticeDigest = ({
       <section className={styles.header}>
         <NoticeMultiActors actors={actors} size="lg" />
         {!isMultiActors && (
-          <section className={styles['single-actor-info']}>
+          <section className={styles.singleActorInfo}>
             <NoticeActorsNameAndTitle
               actors={actors}
               action={action}

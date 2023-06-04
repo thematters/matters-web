@@ -94,7 +94,7 @@ const AggregateUserResults = () => {
   }
 
   return (
-    <section className={styles['aggregate-section']}>
+    <section className={styles.aggregateSection}>
       <InfiniteScroll
         hasNextPage={
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH

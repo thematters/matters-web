@@ -21,35 +21,35 @@ const Galaxy = ({ task, onClick }: Props) => {
 
   const task1Classes = classNames({
     [styles.check]: true,
-    [styles['check-1']]: true,
+    [styles.check1]: true,
     [styles.checked]: !!viewer.onboardingTasks.tasks.likerId,
     [styles.selected]: task === 1,
   })
 
   const task2Classes = classNames({
     [styles.check]: true,
-    [styles['check-2']]: true,
+    [styles.check2]: true,
     [styles.checked]: !!viewer.onboardingTasks.tasks.followee,
     [styles.selected]: task === 2,
   })
 
   const task3Classes = classNames({
     [styles.check]: true,
-    [styles['check-3']]: true,
+    [styles.check3]: true,
     [styles.checked]: !!viewer.onboardingTasks.tasks.followingTag,
     [styles.selected]: task === 3,
   })
 
   const task4Classes = classNames({
     [styles.check]: true,
-    [styles['check-4']]: true,
+    [styles.check4]: true,
     [styles.checked]: !!viewer.onboardingTasks.tasks.article,
     [styles.selected]: task === 4,
   })
 
   const task5Classes = classNames({
     [styles.check]: true,
-    [styles['check-5']]: true,
+    [styles.check5]: true,
     [styles.checked]: !!viewer.onboardingTasks.tasks.commentPermission,
     [styles.selected]: task === 5,
   })

@@ -21,7 +21,7 @@
   margin: var(--spacing-base);
 }
 
-.current-card {
+.currentCard {
   @mixin flex-center-space-between;
 
   margin: var(--spacing-base);

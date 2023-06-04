@@ -1,4 +1,4 @@
-.add-email {
+.addEmail {
   @mixin line-clamp;
 
   font-size: var(--font-size-md);

@@ -2,12 +2,12 @@
   position: relative;
   text-align: left;
 
-  &.has-extra-button {
+  &.hasExtraButton {
     padding-right: calc(1rem + var(--spacing-xx-tight));
 
     &:hover,
     &:focus {
-      & .extra-button {
+      & .extraButton {
         display: block;
       }
     }
@@ -24,7 +24,7 @@
     white-space: normal;
   }
 
-  & .extra-button {
+  & .extraButton {
     position: absolute;
     top: 0;
     right: 0;

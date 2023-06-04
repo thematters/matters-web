@@ -144,7 +144,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
   const InnerForm = (
     <section>
       <Form id={formId} onSubmit={handleSubmit}>
-        <section className={styles['cover-field']}>
+        <section className={styles.coverField}>
           <CoverUploader
             type="circle"
             assetType={ASSET_TYPE.circleCover}
@@ -164,7 +164,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           </p>
         </section>
 
-        <section className={styles['avatar-field']}>
+        <section className={styles.avatarField}>
           <AvatarUploader
             type="circle"
             circle={circle}

@@ -29,13 +29,13 @@
   }
 }
 
-.current-account {
+.currentAccount {
   @mixin flex-center-all;
 
   margin-top: var(--spacing-x-loose);
 }
 
-.switch-account {
+.switchAccount {
   margin-top: var(--spacing-base);
   font-size: var(--font-size-sm);
   color: var(--color-grey-dark);

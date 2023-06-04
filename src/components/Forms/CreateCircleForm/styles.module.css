@@ -1,4 +1,4 @@
-.displayNameInput :global(.input-container) {
+.displayNameInput :global(.inputContainer) {
   position: relative;
 
   &::before {
@@ -14,7 +14,7 @@
   }
 }
 
-.cover-field {
+.coverField {
   position: relative;
 
   & .hint {
@@ -27,7 +27,7 @@
   }
 }
 
-.avatar-field {
+.avatarField {
   margin: var(--spacing-loose) var(--spacing-base);
 
   @media (--sm-up) {

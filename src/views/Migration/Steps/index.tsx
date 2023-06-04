@@ -158,14 +158,14 @@ const Steps = () => {
                   size={['7rem', '2.5rem']}
                   spacing={[0, 0]}
                 />
-                <p className={styles['sub-content']}>
+                <p className={styles.subContent}>
                   <Translate
                     zh_hant={zh_hant.sub_content_1_1}
                     zh_hans={zh_hans.sub_content_1_1}
                     en={en.sub_content_1_1}
                   />
                 </p>
-                <section className={styles['sub-content-link']}>
+                <section className={styles.subContentLink}>
                   <SignUpButton isPlain>
                     <Translate
                       zh_hant={zh_hant.sub_content_1_2}

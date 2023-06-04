@@ -58,8 +58,8 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
   children,
 }) => {
   const textIconClasses = classNames({
-    [styles['text-icon']]: true,
-    [styles['none-select']]: !allowUserSelect,
+    [styles.textIcon]: true,
+    [styles.noneSelect]: !allowUserSelect,
     [styles[color || '']]: !!color,
     [styles[`text-${textPlacement}`]]: true,
     [styles[`text-${textDecoration}`]]: true,

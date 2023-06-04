@@ -184,7 +184,7 @@ export const UserProfile = () => {
     return (
       <>
         <LayoutHeader />
-        <section className={styles['user-profile']}>
+        <section className={styles.userProfile}>
           <Cover fallbackCover={IMAGE_COVER.src} />
 
           <header>
@@ -194,7 +194,7 @@ export const UserProfile = () => {
           </header>
 
           <section className={styles.info}>
-            <section className={styles['display-name']}>
+            <section className={styles.displayName}>
               <h1 className={styles.name}>
                 {isUserArchived && (
                   <FormattedMessage
@@ -224,7 +224,7 @@ export const UserProfile = () => {
       <LayoutHeader />
 
       <section
-        className={styles['user-profile']}
+        className={styles.userProfile}
         data-test-id={TEST_ID.USER_PROFILE}
       >
         <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
@@ -248,7 +248,7 @@ export const UserProfile = () => {
         </header>
 
         <section className={styles.info}>
-          <section className={styles['display-name']}>
+          <section className={styles.displayName}>
             <h1
               className={styles.name}
               data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}

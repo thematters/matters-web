@@ -27,7 +27,7 @@
 .content {
   overflow: hidden;
 
-  &.has-extra-button {
+  &.hasExtraButton {
     padding-right: 5rem; /* width of extra button */
   }
 }
@@ -53,7 +53,7 @@
   color: var(--color-grey-dark);
 }
 
-.extra-button {
+.extraButton {
   position: absolute;
   top: 0;
   right: 0;
@@ -76,7 +76,7 @@
     font-size: var(--font-size-sm);
   }
 
-  & .extra-button {
+  & .extraButton {
     align-items: middle;
   }
 }

@@ -1,4 +1,4 @@
-.subscription-banner {
+.subscriptionBanner {
   @mixin flex-center-all;
   @mixin transition;
 

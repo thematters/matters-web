@@ -71,7 +71,7 @@ const Rich = ({
 
   const contentClasses = classNames({
     [styles.content]: true,
-    [styles['has-extra-button']]: hasUnblock || hasFollow || !!extraButton,
+    [styles.hasExtraButton]: hasUnblock || hasFollow || !!extraButton,
   })
 
   if (isArchived) {
@@ -95,7 +95,7 @@ const Rich = ({
             </header>
           </section>
 
-          <section className={styles['extra-button']}>
+          <section className={styles.extraButton}>
             {hasUnblock && <UnblockUserButton user={user} />}
             {hasFollow && <FollowUserButton user={user} />}
           </section>
@@ -144,7 +144,7 @@ const Rich = ({
           )}
         </section>
 
-        <section className={styles['extra-button']}>
+        <section className={styles.extraButton}>
           {hasUnblock && <UnblockUserButton user={user} />}
           {hasFollow && <FollowUserButton user={user} />}
           {extraButton}

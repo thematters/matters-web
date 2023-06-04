@@ -53,7 +53,7 @@ const ContentDigest = ({
 
         <section className={styles.article}>
           <section className={styles.content}>
-            <section className={styles['title-wrap']}>
+            <section className={styles.titleWrap}>
               <LinkWrapper {...path} textActiveColor="green">
                 <h3 className={styles.title}>{title}</h3>
               </LinkWrapper>

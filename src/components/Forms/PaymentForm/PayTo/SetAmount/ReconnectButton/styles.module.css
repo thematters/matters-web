@@ -1,4 +1,4 @@
-.reconnect-hint {
+.reconnectHint {
   margin-top: var(--spacing-base);
   font-size: var(--font-size-xs);
   color: var(--color-red);

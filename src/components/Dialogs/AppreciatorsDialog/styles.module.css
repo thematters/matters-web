@@ -1,5 +1,5 @@
-.dialog-appreciators-list {
-  & .appreciation-amount {
+.dialogAppreciatorsList {
+  & .appreciationAmount {
     @mixin inline-flex-center-all;
 
     box-sizing: content-box;

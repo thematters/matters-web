@@ -91,7 +91,7 @@ const Verbose = ({
             </header>
           </section>
 
-          <section className={styles['extra-button']}>
+          <section className={styles.extraButton}>
             {hasUnblock && <UnblockUserButton user={user} />}
           </section>
         </section>
@@ -124,7 +124,7 @@ const Verbose = ({
           </header>
         </section>
 
-        <section className={styles['extra-button']}>
+        <section className={styles.extraButton}>
           {hasUnblock && <UnblockUserButton user={user} />}
           {hasFollow && <FollowUserButton user={user} />}
         </section>

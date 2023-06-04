@@ -1,4 +1,4 @@
-.set-amount-balance {
+.setAmountBalance {
   @mixin flex-center-space-between;
 
   padding: var(--spacing-loose) var(--spacing-base) 0;

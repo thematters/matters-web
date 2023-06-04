@@ -104,7 +104,7 @@ const Toolbar = ({
           articleDetail={articleDetails}
         />
 
-        <section className={styles['comment-bar']}>
+        <section className={styles.commentBar}>
           <CommentBar
             article={article}
             disabled={lock || !article.canComment}

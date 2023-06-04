@@ -216,7 +216,7 @@
     margin-right: 0;
     margin-left: 0;
 
-    & .input-container {
+    & :global(.inputContainer) {
       margin: 0;
     }
   }

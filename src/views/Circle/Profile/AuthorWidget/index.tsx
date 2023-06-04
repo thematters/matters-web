@@ -17,7 +17,7 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
     userName: circle.owner.userName || '',
   })
   return (
-    <section className={styles['author-widget']}>
+    <section className={styles.authorWidget}>
       <Card
         bgColor="grey-lighter"
         spacing={['base', 'base']}

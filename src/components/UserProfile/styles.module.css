@@ -1,4 +1,4 @@
-.user-profile {
+.userProfile {
   margin-bottom: var(--spacing-base);
 }
 
@@ -61,7 +61,7 @@
     padding: 0;
   }
 
-  & .display-name,
+  & .displayName,
   & .username {
     @mixin flex-center-start;
 
@@ -70,7 +70,7 @@
     }
   }
 
-  & .display-name {
+  & .displayName {
     font-size: var(--font-size-xl);
     line-height: 1;
 

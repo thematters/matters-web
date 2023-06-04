@@ -14,7 +14,7 @@
   }
 }
 
-.avatar-list {
+.avatarList {
   @mixin flex-center-start;
 
   & > * {

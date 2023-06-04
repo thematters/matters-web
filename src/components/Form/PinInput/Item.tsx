@@ -42,7 +42,7 @@ const Item = forwardRef(
 
     const value = ((inputProps.value as string) || '').slice(-1)
     const pinItemClasses = classNames({
-      [styles['pin-input-item']]: true,
+      [styles.pinInputItem]: true,
       [styles.error]: !!error,
     })
 

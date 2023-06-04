@@ -48,7 +48,7 @@ const NoticeTypeIcon = ({ type }: { type: IconType }) => {
   const icon = getIcon(type)
 
   const iconWrapClasses = classNames({
-    [styles['icon-wrap']]: ['logo', 'volume'].indexOf(type) < 0,
+    [styles.iconWrap]: ['logo', 'volume'].indexOf(type) < 0,
   })
 
   return <section className={iconWrapClasses}>{icon}</section>

@@ -15,7 +15,7 @@
   & li {
     position: relative;
 
-    & .drag-handler {
+    & .dragHandler {
       @mixin flex-center-all;
 
       position: absolute;
@@ -26,7 +26,7 @@
     }
 
     &.Article {
-      & .drag-handler {
+      & .dragHandler {
         height: auto;
         padding-top: var(--spacing-tight);
       }

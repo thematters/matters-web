@@ -41,7 +41,7 @@ const ListItem: React.FC<ListItemProps> = ({
   ...restProps
 }) => {
   const listItemClasses = classNames({
-    [styles['list-item']]: true,
+    'list-item': true,
     [styles[className]]: !!className,
   })
 
@@ -68,7 +68,7 @@ export const List: React.FC<ListProps> & {
     [styles.list]: true,
     [styles[`spacing-y-${spacing[0]}`]]: !!spacing[0],
     [styles[`spacing-x-${spacing[1]}`]]: !!spacing[1],
-    [styles['has-border']]: !!hasBorder,
+    [styles.hasBorder]: !!hasBorder,
     [styles[className]]: !!className,
   })
 

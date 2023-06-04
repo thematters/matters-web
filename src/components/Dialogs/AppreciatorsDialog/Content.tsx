@@ -121,11 +121,11 @@ const AppreciatorsDialogContent = ({
         >
           {edges.map(({ node, cursor }, index) =>
             node.sender ? (
-              <div className={styles['dialog-appreciators-list']} key={cursor}>
+              <div className={styles.dialogAppreciatorsList} key={cursor}>
                 <UserDigest.Rich
                   user={node.sender}
                   avatarBadge={
-                    <span className={styles['appreciation-amount']}>
+                    <span className={styles.appreciationAmount}>
                       {node.amount}
                     </span>
                   }

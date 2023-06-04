@@ -135,7 +135,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         </section>
       </section>
 
-      <section className={styles['support-setting']}>
+      <section className={styles.supportSetting}>
         <button type="button" onClick={onOpenSupportSetting}>
           <section className={styles.support}>
             <section className={styles.left}>

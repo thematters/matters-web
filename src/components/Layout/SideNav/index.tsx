@@ -137,7 +137,7 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
       <Dropdown
         content={
           <FocusLock>
-            <section className={styles['dropdown-menu']}>
+            <section className={styles.dropdownMenu}>
               <VisuallyHidden>
                 <button type="button">
                   <FormattedMessage defaultMessage="Cancel" description="" />
@@ -197,7 +197,7 @@ const SideNav = () => {
   // only show auth button for anonymous
   if (!viewer.isAuthed) {
     return (
-      <section className={styles['side-nav']}>
+      <section className={styles.sideNav}>
         <Logo />
 
         <ul role="menu" className={styles.ul}>
@@ -240,7 +240,7 @@ const SideNav = () => {
   }
 
   return (
-    <section className={styles['side-nav']}>
+    <section className={styles.sideNav}>
       <Logo />
 
       <Media greaterThanOrEqual="lg">

@@ -72,7 +72,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
         <SectionCard>
           {!ipnsKey ? (
             <>
-              <section className={styles['warning-card']}>
+              <section className={styles.warningCard}>
                 <IconInfo24 size="md" />
 
                 <p>
@@ -131,7 +131,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
             ) : (
               <>
                 <Spacer size="base" />
-                <section className={styles['warning-input']}>
+                <section className={styles.warningInput}>
                   <TextIcon
                     icon={<IconInfo24 size="md" />}
                     color="green"
@@ -184,7 +184,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                   <li key={url}>
                     <span
                       className={classNames({
-                        [styles['gateway-url']]: true,
+                        [styles.gatewayUrl]: true,
                         [styles.disabled]: !ipnsKey,
                       })}
                     >

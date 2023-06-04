@@ -5,12 +5,12 @@
     }
   }
 
-  & .dashed-line {
+  & .dashedLine {
     border-top: 1px dashed var(--color-grey-light);
   }
 }
 
-.rate-hint {
+.rateHint {
   @mixin flex-center-end;
 
   padding: var(--spacing-x-tight) 0 0;

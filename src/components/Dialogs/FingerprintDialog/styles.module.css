@@ -21,11 +21,11 @@
       background-color: var(--color-grey-lighter);
       border-radius: 0.25rem;
 
-      & :not(.gateway-url) {
+      & :not(.gatewayUrl) {
         flex-shrink: 0;
       }
 
-      & .gateway-url {
+      & .gatewayUrl {
         @mixin flex-center-space-between;
         @mixin truncate;
 
@@ -92,20 +92,20 @@
   }
 }
 
-.warning-card {
+.warningCard {
   color: var(--color-matters-gold);
   background: var(--color-yellow-lighter);
   border-radius: 0.5rem;
 }
 
-.warning-input {
+.warningInput {
   color: var(--color-matters-green);
   background: var(--color-green-lighter);
   border-radius: 0.25rem;
 }
 
-.warning-card,
-.warning-input {
+.warningCard,
+.warningInput {
   @mixin flex-start-start;
 
   padding: var(--spacing-x-tight) var(--spacing-base);

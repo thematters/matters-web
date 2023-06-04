@@ -181,7 +181,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <section className={styles['cover-field']}>
+      <section className={styles.coverField}>
         <CoverUploader
           assetType={ASSET_TYPE.profileCover}
           cover={user.info.profileCover}
@@ -199,7 +199,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         </p>
       </section>
 
-      <section className={styles['avatar-field']}>
+      <section className={styles.avatarField}>
         <AvatarUploader
           user={user}
           onUpload={(assetId) => setFieldValue('avatar', assetId)}

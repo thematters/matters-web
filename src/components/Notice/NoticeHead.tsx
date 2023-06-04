@@ -9,7 +9,7 @@ const NoticeHead: React.FC<React.PropsWithChildren<NoticeHeadProps>> = ({
   children,
 }) => {
   return (
-    <section className={styles['head-wrap']}>
+    <section className={styles.headWrap}>
       <h4>{children}</h4>
       {subtitle && <p>{subtitle}</p>}
     </section>

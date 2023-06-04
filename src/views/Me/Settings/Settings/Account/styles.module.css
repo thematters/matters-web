@@ -1,8 +1,8 @@
-.email-title {
+.emailTitle {
   word-break: keep-all;
 }
 
-.email-text {
+.emailText {
   @mixin line-clamp;
 
   /* FIXME: fix cropped descenders of letters  */

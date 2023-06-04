@@ -4,7 +4,7 @@
   }
 }
 
-.icon-select {
+.iconSelect {
   @mixin inline-flex-center-all;
 
   position: absolute;

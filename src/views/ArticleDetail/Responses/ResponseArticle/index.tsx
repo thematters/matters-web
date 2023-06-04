@@ -47,7 +47,7 @@ const ResponseArticle = ({ article }: ResponseArticleProps) => {
         </span>
       </header>
 
-      <section className={styles['article-digest']}>
+      <section className={styles.articleDigest}>
         <ArticleDigestSidebar article={article} hasBackground />
       </section>
     </section>

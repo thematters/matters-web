@@ -1,4 +1,4 @@
-.me-avatar {
+.meAvatar {
   @mixin flex-center-all;
 
   &.active :global(.avatar img) {

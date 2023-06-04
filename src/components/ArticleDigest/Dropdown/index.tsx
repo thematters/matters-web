@@ -57,7 +57,7 @@ export const ArticleDigestDropdown = ({
   const isBanned = state === 'banned'
   const containerClasses = classNames({
     [styles.container]: true,
-    [styles['has-extra-button']]: !!extraButton,
+    [styles.hasExtraButton]: !!extraButton,
   })
   const path = toPath({
     page: 'articleDetail',
@@ -77,7 +77,7 @@ export const ArticleDigestDropdown = ({
             lineClamp={lineClamp}
           />
 
-          <section className={styles['extra-button']}>
+          <section className={styles.extraButton}>
             {!isBanned && extraButton}
           </section>
         </header>

@@ -1,4 +1,4 @@
-.cover-field {
+.coverField {
   position: relative;
 
   & .hint {
@@ -11,7 +11,7 @@
   }
 }
 
-.avatar-field {
+.avatarField {
   padding-left: var(--spacing-base);
   margin-top: calc(var(--spacing-xx-loose) * -1);
 }

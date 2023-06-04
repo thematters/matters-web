@@ -26,7 +26,7 @@ const SupportPreview = ({
           (tabType === 'request' ? (
             <Translate id="supportRequestDescription" />
           ) : (
-            <section className={styles['preview-response']}>
+            <section className={styles.previewResponse}>
               <p>
                 <Translate
                   zh_hans="🎉感谢支持"
@@ -55,7 +55,7 @@ const SupportPreview = ({
         )}
         {<Translate zh_hant={content} zh_hans={content} en={content} />}
       </span>
-      <section className={styles['preview-button']}>
+      <section className={styles.previewButton}>
         {tabType === 'request' && <DonationButton supported={false} />}
         {tabType === 'reply' && <DonationButton supported={true} />}
       </section>

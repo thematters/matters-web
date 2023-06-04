@@ -39,7 +39,7 @@
     }
 
     & .content,
-    & .sub-content {
+    & .subContent {
       margin-top: var(--spacing-base);
       margin-bottom: var(--spacing-x-tight);
       font-size: var(--font-size-sm);
@@ -50,7 +50,7 @@
       margin-bottom: var(--spacing-loose);
     }
 
-    & .sub-content-link {
+    & .subContentLink {
       font-size: var(--font-size-sm);
       color: var(--color-matters-green);
     }

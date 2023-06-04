@@ -123,7 +123,7 @@ const Wallet = () => {
           {hasPaymentPassword && (
             <>
               <PaymentPassword />
-              <hr className={styles['dashed-line']} />
+              <hr className={styles.dashedLine} />
             </>
           )}
           <ViewStripeCustomerPortal />

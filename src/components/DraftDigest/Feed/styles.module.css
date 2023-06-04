@@ -19,7 +19,7 @@
   }
 }
 
-.delete-button {
+.deleteButton {
   color: var(--color-grey);
 
   &:hover,

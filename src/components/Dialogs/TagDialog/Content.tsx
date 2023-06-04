@@ -167,7 +167,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       {isEditing && (
-        <section className={styles['cover-field']}>
+        <section className={styles.coverField}>
           <CoverUploader
             assetType={ASSET_TYPE.tagCover}
             cover={cover}

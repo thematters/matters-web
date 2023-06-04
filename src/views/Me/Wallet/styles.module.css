@@ -23,6 +23,6 @@
   }
 }
 
-.dashed-line {
+.dashedLine {
   border-top: 1px dashed var(--color-grey-light);
 }

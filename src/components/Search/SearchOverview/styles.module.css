@@ -1,4 +1,4 @@
-.recent-searches {
+.recentSearches {
   & ul {
     display: flex;
     flex-wrap: wrap;
@@ -36,7 +36,7 @@
   }
 }
 
-.frequent-searches {
+.frequentSearches {
   & .key {
     @mixin line-clamp;
 

@@ -1,5 +1,5 @@
-.latest-responses,
-.featured-comments {
+.latestResponses,
+.featuredComments {
   margin: var(--spacing-loose) 0;
 
   & header {
@@ -9,7 +9,7 @@
   }
 }
 
-.latest-responses-switch {
+.latestResponsesSwitch {
   font-size: var(--font-size-sm-s);
   line-height: 1.25rem;
   color: var(--color-grey);
@@ -24,7 +24,7 @@
   }
 }
 
-.disable-response {
+.disableResponse {
   @mixin flex-center-all;
 
   padding-top: var(--spacing-tight);

@@ -30,7 +30,7 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
   const isLike = currency === CURRENCY.LIKE
 
   return (
-    <section className={styles['set-amount-balance']}>
+    <section className={styles.setAmountBalance}>
       <span className={styles.left}>
         <Translate zh_hant="餘額 " zh_hans="余额 " en="Balance " />
         {isUSDT && <span>{formatAmount(balanceUSDT)} USDT</span>}

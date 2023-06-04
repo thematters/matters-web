@@ -19,7 +19,7 @@ const ArticlePublishedNotice = ({
       className={styles.container}
       data-test-id={TEST_ID.NOTICE_ARTICLE_PUBLISHED}
     >
-      <section className={styles['notice-actors-name-and-title-info']}>
+      <section className={styles.noticeActorsNameAndTitleInfo}>
         <FormattedMessage
           defaultMessage="Your work {articleTitle} has been published to decentralized network"
           description="src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"

@@ -171,7 +171,7 @@ const FingerprintDialogContent = ({
                       href={gatewayUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className={styles['gateway-url']}
+                      className={styles.gatewayUrl}
                     >
                       {hostname}
                       <IconExternalLink16 />

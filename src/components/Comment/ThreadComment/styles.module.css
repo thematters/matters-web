@@ -32,7 +32,7 @@
     }
   }
 
-  & .content-container {
+  & .contentContainer {
     padding-left: var(--spacing-x-loose);
     margin-top: var(--spacing-x-tight);
   }

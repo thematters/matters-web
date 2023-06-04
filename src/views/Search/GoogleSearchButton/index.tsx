@@ -7,7 +7,7 @@ const GoogleSearchButton = () => {
   return (
     <GoogleSearchDialog>
       {({ openDialog: openGoogleSearchDialog }) => (
-        <section className={styles['google-search-area']}>
+        <section className={styles.googleSearchArea}>
           <p>
             <TextIcon size="md">
               <Translate

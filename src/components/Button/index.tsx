@@ -196,8 +196,8 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       const containerClasses = classNames({
         [styles.container]: true,
         [styles.isTransparent]: isTransparent,
-        [styles['centering-x']]: width && isTransparent,
-        [styles['centering-y']]: height && isTransparent,
+        [styles.centeringX]: width && isTransparent,
+        [styles.centeringY]: height && isTransparent,
         [styles[`spacing-y-${spacingY}`]]: !!spacingY,
         [styles[`spacing-x-${spacingX}`]]: !!spacingX,
         [styles[`bg-${bgColor}`]]: !!bgColor,

@@ -101,12 +101,12 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
         data-test-id={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM}
       >
         {(isAddCredit || isPayout || isSubscription) && (
-          <section className={styles['tx-icon']}>
+          <section className={styles.txIcon}>
             <Currency currency={currency} />
           </section>
         )}
 
-        <section className={styles['tx-info']}>
+        <section className={styles.txInfo}>
           <section className={styles.left}>
             {isDonation && (
               <Donator user={isViewerSender ? recipient : sender} />
@@ -124,7 +124,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
             )}
 
             {isWalletAction && (
-              <section className={styles['wallet-action']}>
+              <section className={styles.walletAction}>
                 <p>
                   {isAddCredit && <Translate id="topUp" />}
                   {isRefund && <Translate id="refund" />}

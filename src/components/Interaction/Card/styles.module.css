@@ -11,7 +11,7 @@
   }
 }
 
-.active-outline-auto {
+.activeOutlineAuto {
   &:not(.disabled) {
     &:focus {
       outline: auto;

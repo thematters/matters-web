@@ -95,7 +95,7 @@ const Animation: React.FC<Props> = ({
 
   return (
     <section>
-      <p className={styles['animation-hint']}>
+      <p className={styles.animationHint}>
         {isShipWaiting && currency === CURRENCY.LIKE && (
           <Translate
             zh_hant="持續與 LikeCoin 網絡同步，稍後更新至 Matters"

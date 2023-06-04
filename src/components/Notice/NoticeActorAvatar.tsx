@@ -28,10 +28,7 @@ export const NoticeActorAvatar = ({
 
   return (
     <Link {...path}>
-      <a
-        title={user.displayName || ''}
-        className={styles['notice-actor-avatar']}
-      >
+      <a title={user.displayName || ''} className={styles.noticeActorAvatar}>
         <VisuallyHidden>
           <span>{user.displayName}</span>
         </VisuallyHidden>

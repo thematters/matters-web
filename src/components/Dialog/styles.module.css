@@ -41,13 +41,13 @@
     }
   }
 
-  &.fixed-height {
+  &.fixedHeight {
     height: 80vh;
     height: calc(var(--vh) * 90);
     padding-bottom: var(--spacing-x-tight);
   }
 
-  &.hide-padding-bottom {
+  &.hidePaddingBottom {
     padding-bottom: 0;
   }
 
@@ -64,7 +64,7 @@
       padding-top: 0;
     }
 
-    &.fixed-height {
+    &.fixedHeight {
       height: auto;
     }
   }

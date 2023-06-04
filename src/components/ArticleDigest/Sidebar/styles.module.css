@@ -1,4 +1,4 @@
-.container.has-cover {
+.container.hasCover {
   & .cover {
     display: none;
   }
@@ -24,7 +24,7 @@
       }
     }
 
-    &.has-background {
+    &.hasBackground {
       min-height: auto;
       padding-right: calc(10.5rem + var(--spacing-base));
 

@@ -286,7 +286,7 @@ const Connect: React.FC<FormProps> = ({
   })
 
   const msgClasses = classNames({
-    [styles['connect-msg']]: true,
+    [styles.connectMsg]: true,
     [styles.isInDialog]: isInDialog,
   })
 

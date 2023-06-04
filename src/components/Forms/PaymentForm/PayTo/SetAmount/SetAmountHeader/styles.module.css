@@ -1,4 +1,4 @@
-.set-amount-header {
+.setAmountHeader {
   @mixin flex-center-space-between;
 
   padding: var(--spacing-base) 0;
@@ -6,7 +6,7 @@
   border-bottom: 0.5px solid var(--color-line-grey);
 }
 
-.change-button {
+.changeButton {
   display: inline-block;
   margin-left: var(--spacing-x-tight);
 }

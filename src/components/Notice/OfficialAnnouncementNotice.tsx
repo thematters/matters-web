@@ -18,7 +18,7 @@ const OfficialAnnouncementNotice = ({
       className={styles.container}
       data-test-id={TEST_ID.NOTICE_OFFICIAL_ANNOUNCEMENT}
     >
-      <section className={styles['content-wrap']}>
+      <section className={styles.contentWrap}>
         {notice.link ? (
           <a href={notice.link}>
             <Message />

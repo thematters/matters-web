@@ -1,14 +1,14 @@
-.amount-input {
+.amountInput {
   margin-bottom: var(--spacing-loose);
 }
 
-.radio-input-options {
+.radioInputOptions {
   @mixin flex-start-space-between;
 
   flex-wrap: wrap;
 }
 
-.radio-input-item {
+.radioInputItem {
   @mixin transition;
 
   display: flex;
@@ -40,7 +40,7 @@
   }
 }
 
-.custom-input {
+.customInput {
   margin-top: var(--spacing-base);
 
   & input {

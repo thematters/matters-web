@@ -23,7 +23,7 @@ const NavBar = () => {
   )
 
   return (
-    <section className={styles['nav-bar']}>
+    <section className={styles.navBar}>
       <Layout.FixedMain>
         <OnboardingTasksDialog>
           {({ openDialog: openOnboardingTasksDialog }) => (

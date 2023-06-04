@@ -1,4 +1,4 @@
-.wallet-label {
+.walletLabel {
   @mixin flex-center-start;
 
   margin-top: var(--spacing-base);
@@ -8,6 +8,6 @@
   }
 }
 
-.help-icon {
+.helpIcon {
   font-size: 0;
 }

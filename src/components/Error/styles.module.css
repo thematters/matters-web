@@ -8,7 +8,7 @@
   margin: 0 auto;
 }
 
-.error-code {
+.errorCode {
   font-family: var(--font-mono);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-normal);
@@ -16,17 +16,17 @@
   color: var(--color-grey);
 }
 
-.error-message {
+.errorMessage {
   margin-top: var(--spacing-x-tight);
   font-size: var(--font-size-sm);
   color: var(--color-grey-dark);
 }
 
-.error-redirect {
+.errorRedirect {
   margin-top: var(--spacing-x-loose);
 }
 
-.error-detail {
+.errorDetail {
   padding: var(--spacing-loose);
   margin-top: var(--spacing-x-loose);
   overflow: auto;

@@ -48,7 +48,7 @@
     text-align: right;
   }
 
-  & .text-icon svg {
+  & .textIcon svg {
     /* TODO: confirm to delete */
 
     /* margin-right: calc(var(--spacing-x-tight) * -1); */

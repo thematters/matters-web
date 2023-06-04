@@ -79,7 +79,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   const isActive = value === amount
 
   const amountClasses = classNames({
-    [styles['radio-input-item']]: true,
+    [styles.radioInputItem]: true,
     [styles.active]: isActive,
     'u-area-disable': disabled || isBalanceInsufficient,
   })
@@ -148,16 +148,16 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
   } = customAmount
 
   return (
-    <section className={styles['amount-input']}>
+    <section className={styles.amountInput}>
       <Field>
-        <ul className={styles['radio-input-options']}>
+        <ul className={styles.radioInputOptions}>
           {options.map((option) => (
             <AmountOption {...baseInputProps} key={option} amount={option} />
           ))}
         </ul>
 
         {customAmount && (
-          <section className={styles['custom-input']}>
+          <section className={styles.customInput}>
             <input
               className={customAmountError ? 'error' : ''}
               type="number"

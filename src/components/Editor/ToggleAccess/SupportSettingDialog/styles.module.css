@@ -30,7 +30,7 @@
   }
 }
 
-.content-input {
+.contentInput {
   @mixin flex-center-start;
 
   flex-direction: column;
@@ -41,14 +41,14 @@
   padding: var(--spacing-base);
 }
 
-.preview-response {
+.previewResponse {
   & p {
     font-size: var(--font-size-md-s);
     font-weight: var(--font-weight-medium);
   }
 }
 
-.preview-button {
+.previewButton {
   margin: var(--spacing-base) 0 0;
 
   & button {

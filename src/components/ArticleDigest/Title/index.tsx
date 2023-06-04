@@ -77,9 +77,8 @@ export const ArticleDigestTitle = ({
     [styles.title]: true,
     [styles[`text-size-${textSize}`]]: !!textSize,
     [styles[`text-weight-${textWeight}`]]: !!textWeight,
-    [styles['line-clamp']]: !!lineClamp,
-    [styles[`line-clamp-line-${lineClamp}`]]:
-      lineClamp === 1 || lineClamp === 3,
+    [styles.lineClamp]: !!lineClamp,
+    [styles[`lineClampLine${lineClamp}`]]: lineClamp === 1 || lineClamp === 3,
   })
   const isClickable = !disabled && !isBanned
 

@@ -73,7 +73,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
     <>
       <button
         onClick={openDialog}
-        className={styles['delete-button']}
+        className={styles.deleteButton}
         type="button"
         aria-label={translate({ id: 'delete', lang })}
       >

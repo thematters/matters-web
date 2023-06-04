@@ -2,12 +2,12 @@
   padding: var(--spacing-x-loose) var(--spacing-base);
 }
 
-.complete-avatar {
+.completeAvatar {
   @mixin flex-center-all;
 
   padding: 0 var(--spacing-x-tight);
 
-  & .complete-avatar-outline {
+  & .completeAvatarOutline {
     @mixin flex-center-all;
 
     margin-left: calc(var(--spacing-x-tight) * -1);
@@ -16,7 +16,7 @@
   }
 }
 
-.complete-message {
+.completeMessage {
   padding: 0 var(--spacing-x-tight);
   margin-top: var(--spacing-base);
   color: var(--color-black);
@@ -31,7 +31,7 @@
   }
 }
 
-.related-donations {
+.relatedDonations {
   margin-top: var(--spacing-x-loose);
   margin-bottom: calc(var(--spacing-base) * -1);
 

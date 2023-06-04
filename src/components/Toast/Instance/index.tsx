@@ -45,7 +45,7 @@ export const ToastInstance = ({
     [styles.toast]: true,
     [styles[buttonPlacement]]: buttonPlacement,
     [styles[color]]: !!color,
-    [styles['center-x']]: !customButton,
+    [styles.centerX]: !customButton,
   })
   const alertType = color === 'red' ? 'assertive' : 'polite'
 
@@ -70,13 +70,13 @@ export const ToastInstance = ({
               </p>
             )}
             {subDescription && (
-              <p className={styles['sub-description']}>{subDescription}</p>
+              <p className={styles.subDescription}>{subDescription}</p>
             )}
           </Alert>
         </section>
 
         {customButton && (
-          <section className={styles['custom-button']}>{customButton}</section>
+          <section className={styles.customButton}>{customButton}</section>
         )}
       </section>
     </section>

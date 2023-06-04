@@ -38,7 +38,7 @@ const ConfirmTable: React.FC<{ children?: React.ReactNode }> & {
   Row: typeof Row
   Col: typeof Col
 } = ({ children }) => (
-  <section className={styles['confirm-table']}>{children}</section>
+  <section className={styles.confirmTable}>{children}</section>
 )
 
 ConfirmTable.Row = Row

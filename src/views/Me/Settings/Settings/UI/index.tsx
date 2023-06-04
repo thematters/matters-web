@@ -9,9 +9,9 @@ const UISettings = () => {
     <section className={styles.container}>
       <Form.List groupName={<Translate id="settingsUI" />} spacingX={0}>
         <SwitchLanguage />
-        <hr className={styles['dashed-line']} />
+        <hr className={styles.dashedLine} />
         <CurrencyConvertor />
-        <section className={styles['rate-hint']}>
+        <section className={styles.rateHint}>
           <TextIcon icon={<IconInfo16 size="xs" />} color="grey" size="xs">
             <Translate
               zh_hans="加密货币汇率由 CoinGecko 提供"

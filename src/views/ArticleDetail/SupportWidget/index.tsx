@@ -51,7 +51,7 @@ const SupportWidget = ({ article }: DonationProps) => {
   const [showAvatarAnimation, setShowAvatarAnimation] = useState(false)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const supportWidgetClasses = classNames({
-    [styles['support-widget']]: true,
+    [styles.supportWidget]: true,
     [styles.hasCircle]: article?.access.circle,
   })
 
@@ -189,7 +189,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                 </>
               )}
 
-              <section className={styles['donation-button']}>
+              <section className={styles.donationButton}>
                 <SupportButton
                   recipient={article.author}
                   targetId={article.id}
@@ -209,11 +209,11 @@ const SupportWidget = ({ article }: DonationProps) => {
 
               {isViewerDonated && (
                 <section className={styles.transaction}>
-                  <span className={styles['transaction-left']}>
+                  <span className={styles.transactionLeft}>
                     <Translate zh_hant="查看" zh_hans="查看" en="View" />
                   </span>
                   <Button href={PATHS.ME_WALLET_TRANSACTIONS}>
-                    <span className={styles['transaction-button']}>
+                    <span className={styles.transactionButton}>
                       <TextIcon
                         icon={<IconDollarCircle16 />}
                         color="gold"

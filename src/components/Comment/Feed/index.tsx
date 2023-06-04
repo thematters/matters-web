@@ -82,12 +82,12 @@ export const BaseCommentFeed = ({
       </header>
 
       {replyTo && (!parentComment || replyTo.id !== parentComment.id) && (
-        <section className={styles['reply-to-container']}>
+        <section className={styles.replyToContainer}>
           <ReplyTo user={replyTo.author} />
         </section>
       )}
 
-      <section className={styles['content-container']}>
+      <section className={styles.contentContainer}>
         <Media at="sm">
           <Content comment={comment} type={type} size="md-s" limit={17} />
         </Media>

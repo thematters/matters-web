@@ -19,7 +19,7 @@ const RevisedArticlePublishedNotice = ({
       className={styles.container}
       data-test-id={TEST_ID.NOTICE_REVISED_ARTICLE_PUBLISHED}
     >
-      <section className={styles['notice-actors-name-and-title-info']}>
+      <section className={styles.noticeActorsNameAndTitleInfo}>
         <FormattedMessage
           defaultMessage="Your work {articleTitle} has been republished to decentralized network"
           description="src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"

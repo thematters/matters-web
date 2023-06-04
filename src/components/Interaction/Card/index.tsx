@@ -96,7 +96,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       [styles[`bg-active-${bgActiveColor}`]]: !!bgActiveColor,
       [styles[`border-${borderColor}`]]: !!borderColor,
       [styles[`border-radius-${borderRadius}`]]: !!borderRadius,
-      [styles['active-outline-auto']]: !!activeOutline,
+      [styles.activeOutlineAuto]: !!activeOutline,
 
       [styles.hasBorder]: !!borderColor || !!borderRadius,
       [styles.disabled]: disabled,

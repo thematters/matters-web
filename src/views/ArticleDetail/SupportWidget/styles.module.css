@@ -1,4 +1,4 @@
-.support-widget {
+.supportWidget {
   margin: calc(var(--spacing-base) + 2.5rem / 2) 0
     calc(var(--spacing-loose) + 1.25rem / 2);
 }
@@ -22,7 +22,7 @@
     max-width: 25rem;
   }
 
-  & .donation-button {
+  & .donationButton {
     margin-top: var(--spacing-base);
   }
 
@@ -39,12 +39,12 @@
     font-size: var(--font-size-xs);
     line-height: 1;
 
-    & .transaction-left {
+    & .transactionLeft {
       display: inline-flex;
       line-height: 1.25rem;
     }
 
-    & .transaction-button {
+    & .transactionButton {
       display: inline-flex;
       padding-top: 2px;
       padding-bottom: 1px;
@@ -71,7 +71,7 @@
   border-radius: 0 0 var(--spacing-x-tight) var(--spacing-x-tight);
 }
 
-.animation-hint {
+.animationHint {
   height: 2.5rem;
   margin: 0 auto;
 

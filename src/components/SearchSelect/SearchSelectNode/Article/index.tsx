@@ -44,7 +44,7 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
           disabled
         />
 
-        <span className={styles['icon-select']}>
+        <span className={styles.iconSelect}>
           {inStagingArea && selected && (
             <IconChecked color="green" size="md-s" />
           )}

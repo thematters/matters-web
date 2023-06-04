@@ -1,11 +1,11 @@
-.fixed-main {
+.fixedMain {
   position: fixed;
   right: 0;
   left: 0;
   pointer-events: none;
 }
 
-.single-col {
+.singleCol {
   & .content {
     grid-column: 1 / -1;
 

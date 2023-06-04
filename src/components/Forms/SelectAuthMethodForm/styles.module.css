@@ -12,7 +12,7 @@
   margin: var(--spacing-x-loose) 0;
 }
 
-.source-header {
+.sourceHeader {
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-xx-loose);
   text-align: center;

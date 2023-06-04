@@ -43,7 +43,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
     )
   }
   const containerClasses = classNames({
-    [styles['socials-container']]: true,
+    [styles.socialsContainer]: true,
   })
   return (
     <>

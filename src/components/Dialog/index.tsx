@@ -57,11 +57,11 @@ const Container: React.FC<
 
   const containerClasses = classNames({
     [styles.container]: true,
-    [styles['fixed-height']]: !!fixedHeight,
+    [styles.fixedHeight]: !!fixedHeight,
     [styles[size]]: true,
     [styles[`bg-${smBgColor}`]]: !!smBgColor,
     [styles[`bg-${smUpBgColor}-sm-up`]]: !!smUpBgColor,
-    [styles['hide-padding-bottom']]: !!hidePaddingBottom,
+    [styles.hidePaddingBottom]: !!hidePaddingBottom,
   })
 
   const closeTopDialog = () => {

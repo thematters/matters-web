@@ -38,17 +38,17 @@
   font-weight: var(--font-weight-semibold);
 }
 
-.line-clamp {
+.lineClamp {
   @mixin line-clamp;
 
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
 }
 
-.line-clamp-line-1 {
+.lineClampLine1 {
   -webkit-line-clamp: 1;
 }
 
-.line-clamp-line-3 {
+.lineClampLine3 {
   -webkit-line-clamp: 3;
 }

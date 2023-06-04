@@ -1,4 +1,4 @@
-.add-tag {
+.addTag {
   @mixin line-clamp;
 
   font-size: var(--font-size-md);

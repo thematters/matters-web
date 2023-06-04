@@ -95,15 +95,15 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
   return (
     <Dialog.Content hasGrow>
       <section className={styles.container}>
-        <section className={styles['complete-avatar']}>
+        <section className={styles.completeAvatar}>
           <IconSupport size="lg" color="gold" />
 
-          <div className={styles['complete-avatar-outline']}>
+          <div className={styles.completeAvatarOutline}>
             <Avatar size="lg" user={recipient} />
           </div>
         </section>
 
-        <section className={styles['complete-message']}>
+        <section className={styles.completeMessage}>
           <Translate
             zh_hant="馬特市民愛發電。這是你支持的第 "
             zh_hans="马特市民爱发电。这是你支持的第 "
@@ -132,7 +132,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
         </section>
 
         {edges && edges.length > 0 && (
-          <section className={styles['related-donations']}>
+          <section className={styles.relatedDonations}>
             <header>
               <TextIcon size="sm" color="grey-darker">
                 <Translate

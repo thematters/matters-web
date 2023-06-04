@@ -30,7 +30,7 @@
   line-height: 1.75;
 }
 
-.title-wrap {
+.titleWrap {
   display: flex;
   flex-grow: 1;
 }

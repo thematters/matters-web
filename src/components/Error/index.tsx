@@ -49,11 +49,11 @@ export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
       </section>
 
       {shouldShowStatusCode && (
-        <h3 className={styles['error-code']}>{statusCode}</h3>
+        <h3 className={styles.errorCode}>{statusCode}</h3>
       )}
 
       <Alert type="assertive">
-        <p className={styles['error-message']}>
+        <p className={styles.errorMessage}>
           {message ? (
             message
           ) : type === 'not_found' ? (
@@ -67,12 +67,12 @@ export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
       </Alert>
 
       {children && (
-        <section className={styles['error-redirect']}>{children}</section>
+        <section className={styles.errorRedirect}>{children}</section>
       )}
 
       {error && !isProd && (
         <pre
-          className={styles['error-detail']}
+          className={styles.errorDetail}
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(error, null, 4),
           }}

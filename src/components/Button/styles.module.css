@@ -81,21 +81,21 @@ span.container {
 }
 
 /* Centering */
-.centering-x {
+.centeringX {
   & .hotarea {
     left: 50%;
     transform: translateX(-50%);
   }
 }
 
-.centering-y {
+.centeringY {
   & .hotarea {
     top: 50%;
     transform: translateY(-50%);
   }
 }
 
-.centering-x.centering-y {
+.centeringX.centeringY {
   & .hotarea {
     transform: translate(-50%, -50%);
   }

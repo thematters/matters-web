@@ -129,7 +129,7 @@ const BaseOAuthAuthorize = () => {
 
           <hr />
 
-          <section className={styles['current-account']}>
+          <section className={styles.currentAccount}>
             <UserDigest.Mini
               user={viewer}
               avatarSize="xs"
@@ -139,7 +139,7 @@ const BaseOAuthAuthorize = () => {
             />
           </section>
 
-          <p className={styles['switch-account']}>
+          <p className={styles.switchAccount}>
             <span>
               <Translate zh_hant="不是你？" zh_hans="不是你？" en="Not you?" />
             </span>

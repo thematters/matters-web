@@ -1,11 +1,11 @@
-.pin-input {
+.pinInput {
   @mixin flex-center-all;
 
   width: 100%;
   padding: 0 var(--spacing-base);
   margin: 0 auto;
 
-  & .pin-input-item {
+  & .pinInputItem {
     @mixin transition;
     @mixin border-grey;
 
@@ -19,7 +19,7 @@
     border-radius: var(--spacing-x-tight);
     transition-property: border-color;
 
-    & + .pin-input-item {
+    & + .pinInputItem {
       margin-left: var(--spacing-tight);
     }
 

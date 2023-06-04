@@ -8,11 +8,11 @@
   }
 }
 
-.header-buttons {
+.headerButtons {
   @mixin flex-center-all;
 }
 
-.follow-info {
+.followInfo {
   margin-left: var(--spacing-tight);
   font-size: var(--font-size-sm);
   line-height: 1;

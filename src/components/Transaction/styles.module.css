@@ -2,14 +2,14 @@
   display: flex;
   padding: var(--spacing-base) 0;
 
-  & .tx-icon {
+  & .txIcon {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
     margin-right: var(--spacing-x-tight);
   }
 
-  & .tx-info {
+  & .txInfo {
     display: flex;
     flex-grow: 1;
 
@@ -35,12 +35,12 @@
       }
 
       & .title,
-      & .wallet-action,
+      & .walletAction,
       & .subscription {
         margin-bottom: var(--spacing-xx-tight);
       }
 
-      & .wallet-action,
+      & .walletAction,
       & .subscription {
         @mixin flex-center-start;
 

@@ -1,4 +1,4 @@
-.me-digest {
+.meDigest {
   padding: 0 var(--spacing-base);
 }
 
@@ -9,7 +9,7 @@
 .names {
   margin-left: var(--spacing-x-tight);
 
-  & .display-name {
+  & .displayName {
     font-size: var(--font-size-lg);
     line-height: 1.5rem;
   }

@@ -1,4 +1,4 @@
-.author-widget {
+.authorWidget {
   margin: var(--spacing-base) var(--spacing-base) 0;
 
   @media (--sm-up) {

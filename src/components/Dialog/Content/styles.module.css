@@ -4,13 +4,13 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
-  &.has-grow {
+  &.hasGrow {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
   }
 
-  &.has-fixed {
+  &.hasFixed {
     flex-shrink: 0;
   }
 }

@@ -31,7 +31,7 @@ const Period = ({ freePeriod, acceptedAt, state }: PeriodProps) => {
 
   const classes = classNames({
     [styles.period]: true,
-    [styles['margin-right']]: isPending,
+    [styles.marginRight]: isPending,
   })
 
   if (isPending) {
