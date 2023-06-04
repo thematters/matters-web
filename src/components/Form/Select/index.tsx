@@ -22,6 +22,7 @@ import styles from './styles.css'
 type Option = {
   name: string | React.ReactNode
   subtitle?: string | React.ReactNode
+  extra?: string | React.ReactNode
   value: any
   selected?: boolean
 }
@@ -103,6 +104,7 @@ const Select: React.FC<SelectProps> = ({
             name={selectedOption.name}
             subtitle={selectedOption.subtitle}
             selected
+            extra={selectedOption?.extra}
             size={size}
             onClick={openDialog}
             ref={ref}

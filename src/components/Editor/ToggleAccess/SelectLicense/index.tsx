@@ -22,6 +22,11 @@ const LICENSE_TEXT = {
         zh_hans: '可分享，需姓名标示、非商业用途、禁止改作',
         en: 'Free to Share, Attribution, Non-Commercial, No Derivatives',
       },
+      extra: {
+        zh_hant: '關於 CC 4.0',
+        zh_hans: '关于 CC 4.0',
+        en: 'About CC 4.0',
+      },
     },
     [ArticleLicenseType.CcByNcNd_2]: {
       title: {
@@ -34,6 +39,7 @@ const LICENSE_TEXT = {
         zh_hans: '可分享，需姓名标示、非商业用途、禁止改作',
         en: 'Free to Share, Attribution, Non-Commercial, No Derivatives',
       },
+      extra: { zh_hant: '', zh_hans: '', en: '' },
     },
     [ArticleLicenseType.Cc_0]: {
       title: {
@@ -46,6 +52,7 @@ const LICENSE_TEXT = {
         zh_hans: '可分享，不需姓名标示、可商业用途及改作',
         en: 'No Copyright',
       },
+      extra: { zh_hant: '', zh_hans: '', en: '' },
     },
     [ArticleLicenseType.Arr]: {
       title: {
@@ -58,6 +65,7 @@ const LICENSE_TEXT = {
         zh_hans: '未订阅者无法阅读摘要外的正文',
         en: 'Only circle members can read the full article.',
       },
+      extra: { zh_hant: '', zh_hans: '', en: '' },
     },
   },
   0: {
@@ -72,6 +80,11 @@ const LICENSE_TEXT = {
         zh_hans: '可分享，需姓名标示、非商业用途、禁止改作',
         en: 'Free to Share, Attribution, Non-Commercial, No Derivatives',
       },
+      extra: {
+        zh_hant: '關於 CC 4.0',
+        zh_hans: '关于 CC 4.0',
+        en: 'About CC 4.0',
+      },
     },
     [ArticleLicenseType.CcByNcNd_2]: {
       title: {
@@ -84,6 +97,7 @@ const LICENSE_TEXT = {
         zh_hans: '可分享，需姓名标示、非商业用途、禁止改作',
         en: 'Free to Share, Attribution, Non-Commercial, No Derivatives',
       },
+      extra: { zh_hant: '', zh_hans: '', en: '' },
     },
     [ArticleLicenseType.Cc_0]: {
       title: {
@@ -96,6 +110,7 @@ const LICENSE_TEXT = {
         zh_hans: '可分享，不需姓名标示、可商业用途及改作',
         en: 'No Copyright',
       },
+      extra: { zh_hant: '', zh_hans: '', en: '' },
     },
     [ArticleLicenseType.Arr]: {
       title: {
@@ -104,6 +119,7 @@ const LICENSE_TEXT = {
         en: 'All Rights Reserved',
       },
       subtitle: { zh_hant: '', zh_hans: '', en: '' },
+      extra: { zh_hant: '', zh_hans: '', en: '' },
     },
   },
 }
@@ -127,6 +143,7 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
       options={options.map((value) => ({
         name: LICENSE_TEXT[isInCircle ? 1 : 0][value].title[lang],
         subtitle: LICENSE_TEXT[isInCircle ? 1 : 0][value].subtitle[lang],
+        extra: LICENSE_TEXT[isInCircle ? 1 : 0][value].extra[lang],
         value,
         selected: license === value,
       }))}
