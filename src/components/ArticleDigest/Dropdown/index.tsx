@@ -13,7 +13,6 @@ export type ArticleDigestDropdownProps = {
   article: ArticleDigestDropdownArticleFragment
 
   titleTextSize?: ArticleDigestTitleTextSize
-  selected?: boolean
   disabled?: boolean
   extraButton?: React.ReactNode
   lineClamp?: boolean
@@ -47,7 +46,6 @@ export const ArticleDigestDropdown = ({
   article,
 
   titleTextSize,
-  selected,
   disabled,
   extraButton,
   lineClamp,
@@ -60,7 +58,6 @@ export const ArticleDigestDropdown = ({
   const containerClasses = classNames({
     container: true,
     'has-extra-button': !!extraButton,
-    selected,
   })
   const path = toPath({
     page: 'articleDetail',
@@ -92,7 +89,6 @@ export const ArticleDigestDropdown = ({
             hasUserName
             hasDisplayName
             disabled={cardDisabled}
-            selected={selected}
           />
         </footer>
 

@@ -29,6 +29,7 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
   const nodeClass = classNames({
     node: true,
     selectable: inStagingArea,
+    'u-area-disable': !!selected,
   })
 
   if (inSearchingArea && selected) {
@@ -41,7 +42,6 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
             spacing={[0, 0]}
             bgColor="none"
             disabled
-            selected
           />
         </section>
       </Card>

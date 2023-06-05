@@ -90,12 +90,6 @@
   }
 }
 
-.name-color-grey {
-  & .displayname {
-    color: var(--color-grey);
-  }
-}
-
 .name-color-grey-darker {
   & .displayname {
     color: var(--color-grey-darker);
