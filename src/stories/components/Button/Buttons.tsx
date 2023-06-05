@@ -13,8 +13,10 @@ import {
 } from '~/components'
 import NavListItem from '~/components/Layout/NavBar/NavListItem'
 
+import styles from './styles.module.css'
+
 const Buttons = () => (
-  <section>
+  <section className={styles.container}>
     <ul>
       <li>
         <Button
@@ -63,13 +65,6 @@ const Buttons = () => (
         </Dialog.Footer>
       </li>
     </ul>
-
-    <style jsx>{`
-      li {
-        @mixin border-bottom-grey;
-        padding: var(--spacing-base);
-      }
-    `}</style>
   </section>
 )
 

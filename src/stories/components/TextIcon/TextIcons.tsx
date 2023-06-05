@@ -9,8 +9,10 @@ import {
   Translate,
 } from '~/components'
 
+import styles from './styles.module.css'
+
 const Toasts = () => (
-  <section>
+  <section className={styles.container}>
     <ul>
       <li>
         <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
@@ -59,13 +61,6 @@ const Toasts = () => (
         </TextIcon>
       </li>
     </ul>
-
-    <style jsx>{`
-      li {
-        @mixin border-bottom-grey;
-        padding: var(--spacing-base);
-      }
-    `}</style>
   </section>
 )
 

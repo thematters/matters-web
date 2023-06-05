@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 
 import { Tabs, Translate } from '~/components'
 
+import styles from './styles.module.css'
+
 const AllTabs = () => {
   const [curr, setCurr] = useState('article')
 
   return (
-    <section>
+    <section className={styles.container}>
       <Tabs sticky>
         <Tabs.Tab
           onClick={() => setCurr('article')}
@@ -37,21 +39,6 @@ const AllTabs = () => {
       <div className="area">
         <p>tabs are sticky, scroll to view .</p>
       </div>
-
-      <style jsx>{`
-        .area {
-          margin-top: var(--spacing-loose);
-          padding: var(--spacing-base);
-
-          height: 200rem;
-          width: 100%;
-          border: 2px dashed var(--color-grey-light);
-          border-radius: var(--spacing-base);
-          color: var(--color-grey);
-          background: var(--color-grey-lighter);
-          text-align: center;
-        }
-      `}</style>
     </section>
   )
 }

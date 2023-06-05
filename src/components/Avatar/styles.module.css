@@ -161,3 +161,17 @@
     }
   }
 }
+
+.ring {
+  &.civicLiker {
+    background-image: url('/static/icons/civic-liker-ring.svg');
+  }
+
+  &.architect {
+    background-image: url('/static/icons/architect-ring.svg');
+  }
+
+  &.civicArchitect {
+    background-image: url('/static/icons/civic-liker-architect-ring.svg');
+  }
+}

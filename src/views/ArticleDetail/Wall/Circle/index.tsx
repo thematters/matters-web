@@ -1,5 +1,3 @@
-import IMAGE_WALL_BACKGROUND_MD from '@/public/static/images/circle-wall-background-md.jpg'
-import IMAGE_WALL_BACKGROUND_SM from '@/public/static/images/circle-wall-background-sm.jpg'
 import { analytics } from '~/common/utils'
 import { Translate } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
@@ -38,20 +36,6 @@ const CircleWall = ({ circle }: CircleWallProps) => {
           })
         }}
       />
-
-      <style jsx>{`
-        .container {
-          background-image: url(${IMAGE_WALL_BACKGROUND_SM.src});
-          background-size: cover;
-          background-position: center top;
-        }
-
-        @media (--sm-up) {
-          .container {
-            background-image: url(${IMAGE_WALL_BACKGROUND_MD.src});
-          }
-        }
-      `}</style>
     </section>
   )
 }

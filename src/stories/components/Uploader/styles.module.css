@@ -1,0 +1,12 @@
+.avatarContainer {
+  & li {
+    margin-bottom: var(--spacing-base);
+  }
+}
+
+.coverContainer {
+  & li {
+    margin: 0 -1rem;
+    margin-bottom: var(--spacing-base);
+  }
+}

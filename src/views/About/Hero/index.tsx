@@ -3,14 +3,8 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
 import { useCallback, useContext, useEffect, useState } from 'react'
 
-import IMAGE_ARROW_DOWN from '@/public/static/images/about/arrow-down.svg'
 import { ReactComponent as IconButtonLeft } from '@/public/static/images/about/button-left.svg'
 import { ReactComponent as IconButtonRight } from '@/public/static/images/about/button-right.svg'
-import SLIDE_CURSOR from '@/public/static/images/about/cursor.svg'
-import IMAGE_ILLUSTRATION_1 from '@/public/static/images/about/hero-illustration-1.png'
-import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/hero-illustration-2.png'
-import IMAGE_WAVE_1 from '@/public/static/images/about/wave-hero-1.svg'
-import IMAGE_WAVE_2 from '@/public/static/images/about/wave-hero-2.svg'
 import { PATHS } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
@@ -314,22 +308,6 @@ const Hero = () => {
           </section>
         </section>
       </section>
-
-      <style jsx>{`
-        .hero {
-          background-image: url(${IMAGE_WAVE_1}),
-            url(${IMAGE_ILLUSTRATION_1.src}), url(${IMAGE_WAVE_2});
-        }
-        .ilusCity {
-          background-image: url(${IMAGE_ILLUSTRATION_2.src});
-        }
-        .scrollHint {
-          background-image: url(${IMAGE_ARROW_DOWN});
-        }
-        .emblaViewport {
-          cursor: url(${SLIDE_CURSOR}), auto;
-        }
-      `}</style>
     </section>
   )
 }

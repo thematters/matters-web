@@ -3,8 +3,10 @@ import React from 'react'
 import { translate } from '~/common/utils'
 import { Form, Translate } from '~/components'
 
+import styles from './styles.module.css'
+
 const Forms = () => (
-  <section>
+  <section className={styles.container}>
     <ul>
       {/* Form.Input */}
       <li>
@@ -110,19 +112,6 @@ const Forms = () => (
         />
       </li>
     </ul>
-
-    <style jsx>{`
-      li {
-        @mixin border-bottom-grey;
-        padding: var(--spacing-base);
-      }
-
-      @media (--sm-down) {
-        li {
-          background: #f7f7f7;
-        }
-      }
-    `}</style>
   </section>
 )
 

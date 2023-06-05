@@ -1,5 +1,4 @@
 import { ReactComponent as IconArrowRight } from '@/public/static/images/about/arrow-right.svg'
-import IMAGE_WAVE from '@/public/static/images/about/wave-join-us.svg'
 import { captureClicks } from '~/common/utils'
 import { Translate, withIcon } from '~/components'
 
@@ -54,12 +53,6 @@ const JoinUs = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .joinUs {
-          background-image: url(${IMAGE_WAVE});
-        }
-      `}</style>
     </section>
   )
 }

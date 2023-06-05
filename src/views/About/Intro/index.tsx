@@ -1,8 +1,6 @@
 import IMAGE_ILLUSTRATION_1 from '@/public/static/images/about/intro-illustration-1.png'
 import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/intro-illustration-2.png'
 import IMAGE_ILLUSTRATION_3 from '@/public/static/images/about/intro-illustration-3.png'
-import IMAGE_WAVE_1 from '@/public/static/images/about/wave-intro-1.svg'
-import IMAGE_WAVE_2 from '@/public/static/images/about/wave-intro-2.svg'
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, TextIcon, Translate } from '~/components'
 
@@ -12,7 +10,7 @@ const Intro = () => {
   return (
     <section className={styles.intro}>
       <ul>
-        <li className="l-container full ecosystem">
+        <li className={`l-container full ${styles.ecosystem}`}>
           <div className="l-row">
             <img src={IMAGE_ILLUSTRATION_1.src} alt="illustration 1" />
 
@@ -52,7 +50,7 @@ const Intro = () => {
             </section>
           </div>
         </li>
-        <li className={`l-container full community ${styles.community}`}>
+        <li className={`l-container full ${styles.community}`}>
           <div className="l-row">
             <img src={IMAGE_ILLUSTRATION_2.src} alt="illustration 2" />
 
@@ -143,15 +141,6 @@ const Intro = () => {
           </div>
         </li>
       </ul>
-
-      <style jsx>{`
-        .ecosystem {
-          background-image: url(${IMAGE_WAVE_1});
-        }
-        .feature {
-          background-image: url(${IMAGE_WAVE_2});
-        }
-      `}</style>
     </section>
   )
 }

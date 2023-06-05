@@ -211,12 +211,6 @@ const Init: React.FC<FormProps> = ({
           ref={inputRef}
         />
       </Form>
-
-      <style jsx>{`
-        .displayNameInput :global(.inputContainer::before) {
-          content: '${process.env.NEXT_PUBLIC_SITE_DOMAIN}/~';
-        }
-      `}</style>
     </section>
   )
 

@@ -47,7 +47,6 @@ const Footer = () => {
                   />
                   <br />
                   <a
-                    className="u-link-green"
                     href="mailto:hi@matters.town"
                     target="_blank"
                     rel="noreferrer"
@@ -63,7 +62,6 @@ const Footer = () => {
                   />
                   <br />
                   <a
-                    className="u-link-green"
                     href="mailto:hi@matters.town"
                     target="_blank"
                     rel="noreferrer"
@@ -79,7 +77,6 @@ const Footer = () => {
                   />
                   <br />
                   <a
-                    className="u-link-green"
                     href={EXTERNAL_LINKS.MATTERS_LAB}
                     target="_blank"
                     rel="noreferrer"
