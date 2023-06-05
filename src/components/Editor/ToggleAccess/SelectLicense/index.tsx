@@ -30,19 +30,6 @@ const LICENSE_TEXT = {
         en: 'About CC 4.0',
       },
     },
-    [ArticleLicenseType.CcByNcNd_2]: {
-      title: {
-        zh_hant: '不上鎖，CC BY-NC-ND 2.0 聲明',
-        zh_hans: '不上锁，CC BY-NC-ND 2.0 声明',
-        en: 'Public, CC BY-NC-ND 2.0 License',
-      },
-      subtitle: {
-        zh_hant: '可分享，需姓名標示、非商業用途、禁止改作',
-        zh_hans: '可分享，需姓名标示、非商业用途、禁止改作',
-        en: 'Free to Share, Attribution, Non-Commercial, No Derivatives',
-      },
-      extra: { zh_hant: '', zh_hans: '', en: '' },
-    },
     [ArticleLicenseType.Cc_0]: {
       title: {
         zh_hant: '不上鎖，CC0 公眾領域貢獻宣告',
@@ -88,19 +75,6 @@ const LICENSE_TEXT = {
         en: 'About CC 4.0',
       },
     },
-    [ArticleLicenseType.CcByNcNd_2]: {
-      title: {
-        zh_hant: 'CC BY-NC-ND 2.0 聲明',
-        zh_hans: 'CC BY-NC-ND 2.0 声明',
-        en: 'CC BY-NC-ND 2.0 License',
-      },
-      subtitle: {
-        zh_hant: '可分享，需姓名標示、非商業用途、禁止改作',
-        zh_hans: '可分享，需姓名标示、非商业用途、禁止改作',
-        en: 'Free to Share, Attribution, Non-Commercial, No Derivatives',
-      },
-      extra: { zh_hant: '', zh_hans: '', en: '' },
-    },
     [ArticleLicenseType.Cc_0]: {
       title: {
         zh_hant: 'CC0 公眾領域貢獻宣告',
@@ -133,7 +107,7 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
     ArticleLicenseType.CcByNcNd_4,
     ArticleLicenseType.Cc_0,
     ArticleLicenseType.Arr,
-  ]
+  ] as const
   const cc4link = 'https://creativecommons.org/licenses/by-nc-nd/4.0/'
 
   return (
