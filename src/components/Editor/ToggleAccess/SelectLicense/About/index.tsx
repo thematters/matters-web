@@ -1,16 +1,22 @@
-import { IconExternalLink16 } from '~/components'
+import { IconExternalLink16, TextIcon } from '~/components'
 
 import styles from './styles.css'
 
 const About = ({ desc, url }: { desc: string; url: string }) => {
   return (
-    <>
+    <TextIcon
+      size="xs"
+      spacing="xxxtight"
+      weight="normal"
+      color="grey-dark"
+      textPlacement="left"
+      icon={<IconExternalLink16 color="grey" size="xs" />}
+    >
       <a href={url} target="_blank">
         {desc}
       </a>
-      <IconExternalLink16 color="grey" size="xs" />
       <style jsx>{styles}</style>
-    </>
+    </TextIcon>
   )
 }
 

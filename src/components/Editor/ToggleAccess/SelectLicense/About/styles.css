@@ -1,10 +1,4 @@
 a {
-  margin-right: var(--spacing-xxx-tight);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-normal);
-  line-height: 1.063rem;
-  color: var(--color-grey-dark);
-
   &:hover,
   &:active,
   &:focus {
