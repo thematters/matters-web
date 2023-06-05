@@ -1,0 +1,7 @@
+a {
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--color-matters-green-active);
+  }
+}
