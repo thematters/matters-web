@@ -13,6 +13,7 @@ import {
   useEditDraftCollection,
   useEditDraftCover,
   useEditDraftPublishISCN,
+  useEditDraftSensitiveByAuthor,
   useEditDraftTags,
   useEditSupportSetting,
 } from '../hooks'
@@ -81,6 +82,10 @@ const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
 
   const { edit: togglePublishISCN, saving: iscnPublishSaving } =
     useEditDraftPublishISCN(draft)
+
+  const { edit: toggleContentSensitive, saving: contentSensitiveSaving } =
+    useEditDraftSensitiveByAuthor(draft)
+
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
 
   return (
@@ -97,6 +102,9 @@ const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
           editAccess={edit}
           accessSaving={saving}
           canToggleCircle={!!hasOwnCircle}
+          contentSensitive={draft?.sensitiveByAuthor}
+          toggleContentSensitive={toggleContentSensitive}
+          contentSensitiveSaving={contentSensitiveSaving}
           iscnPublish={draft?.iscnPublish}
           togglePublishISCN={togglePublishISCN}
           iscnPublishSaving={iscnPublishSaving}

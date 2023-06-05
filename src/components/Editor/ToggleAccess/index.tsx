@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { translate } from '~/common/utils'
 import {
@@ -43,6 +44,10 @@ export type ToggleAccessProps = {
   supportSettingSaving: boolean
   onOpenSupportSetting: () => void
 
+  contentSensitive?: boolean | null
+  toggleContentSensitive: (contentSensitive: boolean) => void
+  contentSensitiveSaving: boolean
+
   iscnPublish?: boolean | null
   togglePublishISCN: (iscnPublish: boolean) => void
   iscnPublishSaving: boolean
@@ -61,6 +66,10 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
   draft,
   article,
   onOpenSupportSetting,
+
+  contentSensitive,
+  toggleContentSensitive,
+  contentSensitiveSaving,
 
   iscnPublish,
   togglePublishISCN,
@@ -162,6 +171,31 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
             </p>
           </section>
         </button>
+      </section>
+
+      <section className="content-sensitive">
+        <header>
+          <h3 className="title">
+            <Translate id="restrictedContent" />
+          </h3>
+
+          <Switch
+            name="sensitive"
+            label={translate({ id: 'restrictedContent', lang })}
+            checked={!!contentSensitive}
+            onChange={() => {
+              toggleContentSensitive(!contentSensitive)
+            }}
+            loading={contentSensitiveSaving}
+          />
+        </header>
+
+        <p className="hint">
+          <FormattedMessage
+            defaultMessage="Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)"
+            description="src/components/Editor/ToggleAccess/index.tsx"
+          />
+        </p>
       </section>
 
       <section className="iscn">

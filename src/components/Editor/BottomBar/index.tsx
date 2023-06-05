@@ -77,6 +77,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
   supportSettingSaving,
   onOpenSupportSetting,
 
+  contentSensitive,
+  toggleContentSensitive,
+  contentSensitiveSaving,
+
   iscnPublish,
   togglePublishISCN,
   iscnPublishSaving,
@@ -116,6 +120,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
     editSupportSetting,
     supportSettingSaving,
     onOpenSupportSetting,
+
+    contentSensitive,
+    toggleContentSensitive,
+    contentSensitiveSaving,
 
     iscnPublish,
     togglePublishISCN,

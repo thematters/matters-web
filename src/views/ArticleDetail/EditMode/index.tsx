@@ -167,6 +167,10 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const { edit: editSupport, saving: supportSaving } =
     useEditArticleDetailSupportSetting(article)
 
+  const [contentSensitive, setContentSensitive] = useState<boolean>(
+    article.sensitiveByAuthor
+  )
+
   const [iscnPublish, setIscnPublish] = useState<boolean>(false) // always start false
 
   const [canComment, setCanComment] = useState<boolean>(article.canComment)
@@ -247,6 +251,12 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     editSupportSetting: editSupport,
     supportSettingSaving: false,
     onOpenSupportSetting: () => undefined,
+
+    contentSensitive,
+    toggleContentSensitive() {
+      setContentSensitive(!contentSensitive)
+    },
+    contentSensitiveSaving: false,
 
     togglePublishISCN() {
       setIscnPublish(!iscnPublish)
