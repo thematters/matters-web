@@ -8,7 +8,7 @@
   background: var(--color-grey-lighter);
   border-radius: var(--spacing-base);
 
-  & .ql-editor {
+  & :global(.ql-editor) {
     min-height: 7rem;
   }
 }

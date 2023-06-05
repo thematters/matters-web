@@ -43,8 +43,8 @@ const ListItem: React.FC<ListItemProps> = ({
   ...restProps
 }) => {
   const listItemClasses = classNames({
-    'list-item': true,
-    [styles[className]]: !!className,
+    'list-item': true, // global selector
+    [className]: !!className,
   })
 
   return (
@@ -71,7 +71,7 @@ export const List: React.FC<ListProps> & {
     [styles[`spacingY${capitalizeFirstLetter(spacing[0] + '')}`]]: !!spacing[0],
     [styles[`spacingX${capitalizeFirstLetter(spacing[1] + '')}`]]: !!spacing[1],
     [styles.hasBorder]: !!hasBorder,
-    [styles[className]]: !!className,
+    [className]: !!className,
   })
 
   if (responsiveWrapper) {

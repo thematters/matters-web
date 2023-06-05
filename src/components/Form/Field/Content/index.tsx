@@ -12,7 +12,7 @@ const Content: React.FC<React.PropsWithChildren<ContentProps>> = ({
 }) => {
   const contentClass = classNames({
     [styles.content]: true,
-    inputContainer: true,
+    inputContainer: true, // global selector for `@mixin form-container`
     [styles.noMargin]: noMargin,
   })
 

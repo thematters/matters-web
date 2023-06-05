@@ -315,7 +315,7 @@
 }
 
 .u-summary,
-.editor-summary :global(textarea) {
+.editor-summary textarea {
   @mixin border-left-grey;
 
   padding-left: var(--spacing-loose);

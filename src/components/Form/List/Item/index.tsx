@@ -85,6 +85,6 @@ const Item: React.FC<ItemProps> = forwardRef(
   }
 )
 
-Item.displayName = 'Item'
+Item.displayName = 'List.Item'
 
 export default Item

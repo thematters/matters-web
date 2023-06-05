@@ -1,4 +1,4 @@
-.article {
+.comment {
   &:target {
     animation: comment-background-fade-out 2s ease 1s;
   }

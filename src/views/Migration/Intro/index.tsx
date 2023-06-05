@@ -11,7 +11,7 @@ import styles from './styles.module.css'
 
 const Intro = () => {
   return (
-    <section className={styles.intro}>
+    <section className={[styles.intro, 'intro'].join(' ')}>
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">

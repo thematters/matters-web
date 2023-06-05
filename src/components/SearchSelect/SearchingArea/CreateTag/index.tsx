@@ -44,7 +44,7 @@ const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
       onClick={create}
       testId={TEST_ID.SEARCH_RESULTS_ITEM}
     >
-      <section className={styles['addTag']}>
+      <section className={styles.addTag}>
         <TextIcon icon={<IconAdd16 />} color="green" size="md">
           <Translate id="create" />
         </TextIcon>

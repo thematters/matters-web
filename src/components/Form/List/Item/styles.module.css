@@ -47,10 +47,4 @@
     color: var(--color-grey);
     text-align: right;
   }
-
-  & .textIcon svg {
-    /* TODO: confirm to delete */
-
-    /* margin-right: calc(var(--spacing-x-tight) * -1); */
-  }
 }

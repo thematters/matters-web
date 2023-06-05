@@ -61,6 +61,7 @@ export const Avatar = (props: AvatarProps) => {
   const hasLogbook = !!user?.info?.cryptoWallet?.hasNFTs
   const avatarClasses = classNames({
     [styles.avatar]: true,
+    avatar: true, // global selector for overwirting
     [styles[size]]: true,
     [styles.hasRing]: isCivicLiker || hasArchitectBadge,
     [styles.hasBadge]: hasLogbook,

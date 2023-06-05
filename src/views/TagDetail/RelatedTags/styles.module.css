@@ -2,7 +2,7 @@
   border-top: 1px dashed var(--color-grey-lighter);
   border-bottom: 1px dashed var(--color-grey-lighter);
 
-  & :global(.list-item) > .card {
+  & :global(.list-item > .card) {
     margin: 0 calc(var(--spacing-x-tight) * -1);
   }
 }

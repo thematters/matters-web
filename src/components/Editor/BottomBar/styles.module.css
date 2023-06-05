@@ -1,5 +1,5 @@
 .bottomBar {
-  & .fixedMain {
+  & :global(.fixedMain) {
     bottom: 0;
     z-index: var(--z-index-bottom-bar);
   }

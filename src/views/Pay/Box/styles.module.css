@@ -7,7 +7,7 @@
 .header {
   padding: 0 var(--spacing-x-loose);
 
-  & .avatar {
+  & :global(.avatar) {
     display: block;
     margin: 0 auto;
   }
@@ -29,7 +29,7 @@
   @media (--md-up) {
     padding: 0 var(--spacing-xxx-loose);
 
-    & .avatar {
+    & :global(.avatar) {
       width: 5.875rem;
       height: 5.875rem;
     }

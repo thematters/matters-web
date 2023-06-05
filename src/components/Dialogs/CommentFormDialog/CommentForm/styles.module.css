@@ -12,7 +12,7 @@
   padding-bottom: var(--spacing-x-loose);
   overflow-y: auto;
 
-  & .ql-editor {
+  & :global(.ql-editor) {
     min-height: 30vh;
 
     @media (--sm-up) {

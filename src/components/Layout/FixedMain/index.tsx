@@ -1,3 +1,5 @@
+import classNames from 'classnames'
+
 import { useRoute } from '~/components'
 
 import styles from './styles.module.css'
@@ -15,9 +17,15 @@ const FixedMain: React.FC<FixedMainProps> = ({ children }) => {
   const { isInPath } = useRoute()
   const isSingleColumnPage = isInPath('MIGRATION') || isInPath('ABOUT')
 
+  const classes = classNames({
+    [styles.fixedMain]: true,
+    fixedMain: true, // global selector
+    [styles.singleCol]: isSingleColumnPage,
+  })
+
   if (isSingleColumnPage) {
     return (
-      <div className={[styles.fixedMain, styles.singleCol].join(' ')}>
+      <div className={classes}>
         <div className="l-container full">
           <div className="l-row">
             <div className={styles.content}>{children}</div>
@@ -28,7 +36,7 @@ const FixedMain: React.FC<FixedMainProps> = ({ children }) => {
   }
 
   return (
-    <div className={styles.fixedMain}>
+    <div className={classes}>
       <div className="l-container full">
         <div className="l-row">
           <div className="l-col-three-mid content">{children}</div>

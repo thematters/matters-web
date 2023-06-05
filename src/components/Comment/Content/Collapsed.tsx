@@ -4,8 +4,6 @@ import { TEST_ID } from '~/common/enums'
 import { captureClicks } from '~/common/utils'
 import { Button, IconExpand16, TextIcon, Translate } from '~/components'
 
-import styles from './styles.module.css'
-
 interface CollapsedProps {
   content?: string | null
   collapsedContent: React.ReactNode | string
@@ -23,7 +21,7 @@ const Collapsed = ({
     return (
       <>
         <div
-          className={`${[styles[className]]} u-content-comment`}
+          className={`${className} u-content-comment`}
           dangerouslySetInnerHTML={{
             __html: content || '',
           }}
@@ -35,7 +33,7 @@ const Collapsed = ({
   }
 
   return (
-    <p className={`${[styles[className]]} u-content-comment inactive`}>
+    <p className={`${className} u-content-comment inactive`}>
       <span>{collapsedContent}</span>
 
       {collapsed && (

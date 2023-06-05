@@ -1,5 +1,5 @@
 .navBar {
-  & .fixedMain {
+  & :global(.fixedMain) {
     bottom: var(--global-nav-height);
     z-index: var(--z-index-bottom-bar);
 

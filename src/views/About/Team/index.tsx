@@ -159,7 +159,7 @@ const Team = () => {
           </div>
 
           {CREW.map(({ group, type, people }, gid) => (
-            <section className={`group ${type}`} key={gid}>
+            <section className={`${styles.group} ${styles[type]}`} key={gid}>
               <div className={styles.container}>
                 {group && (
                   <h3>

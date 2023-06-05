@@ -41,6 +41,7 @@ export const withIcon = (
     const { size = '', color = '', className, ...restProps } = props
     const iconClasses = classNames({
       [styles.icon]: true,
+      icon: true, // global selector
       [styles[size]]: !!size,
       [styles[color]]: !!color,
       [className]: !!className,

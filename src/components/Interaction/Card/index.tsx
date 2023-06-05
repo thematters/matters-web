@@ -90,6 +90,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
     const cardClasses = classNames({
       [styles.card]: true,
+      card: true, // global selector for overriding
       [styles[`spacingY${capitalizeFirstLetter(spacing[0] + '')}`]]:
         !!spacing[0],
       [styles[`spacingX${capitalizeFirstLetter(spacing[1] + '')}`]]:

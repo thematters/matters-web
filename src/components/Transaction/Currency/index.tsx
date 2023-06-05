@@ -14,7 +14,7 @@ interface Props {
 const Currency = ({ currency }: Props) => {
   const size = 'md'
   return (
-    <section className={styles.Currency}>
+    <section className={styles.currency}>
       {currency === TransactionCurrency.Usdt && (
         <IconUSDTActive40 size={size} />
       )}

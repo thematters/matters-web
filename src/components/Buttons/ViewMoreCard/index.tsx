@@ -28,7 +28,7 @@ export const ViewMoreCard: React.FC<
 }) => {
   const viewMoreCardClasses = classNames({
     [styles.viewMoreCard]: true,
-    [styles[`${textAlign}`]]: !!textAlign,
+    [styles[textAlign]]: !!textAlign,
   })
 
   return (

@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
@@ -35,15 +36,22 @@ const VIEWER_LIKE_BALANCE = gql`
   }
 `
 
-const Wrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
-  <section className={styles.assetsItem}>
-    <TextIcon icon={<IconLikeCoin40 size="xlM" />} size="md" spacing="xtight">
-      <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
-    </TextIcon>
+const Wrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+  const classes = classNames({
+    [styles.assetsItem]: true,
+    assetsItem: true, // global selector for overriding
+  })
 
-    {children}
-  </section>
-)
+  return (
+    <section className={classes}>
+      <TextIcon icon={<IconLikeCoin40 size="xlM" />} size="md" spacing="xtight">
+        <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
+      </TextIcon>
+
+      {children}
+    </section>
+  )
+}
 
 export const LikeCoinBalance = ({
   currency,

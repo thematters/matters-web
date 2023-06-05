@@ -37,11 +37,11 @@
       background: var(--color-green-lighter);
       border-color: var(--color-matters-green);
 
-      & .currency {
+      & :global(.currency) {
         color: var(--color-matters-green);
       }
 
-      & .subCurrency {
+      & :global(.subCurrency) {
         color: var(--color-matters-green);
         opacity: 0.6;
       }

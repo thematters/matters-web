@@ -212,13 +212,13 @@
     margin-left: 0;
   }
 
-  & .field {
+  & :global(.field) {
     margin-right: 0;
     margin-left: 0;
+  }
 
-    & :global(.inputContainer) {
-      margin: 0;
-    }
+  & :global(.inputContainer) {
+    margin: 0;
   }
 }
 

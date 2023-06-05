@@ -35,7 +35,7 @@
 .right {
   display: inline-flex;
 
-  & .textIcon svg {
+  & :global(.textIcon) svg {
     margin-right: calc(var(--spacing-x-tight) * -1);
   }
 }

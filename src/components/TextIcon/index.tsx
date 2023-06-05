@@ -61,6 +61,7 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
 }) => {
   const textIconClasses = classNames({
     [styles.textIcon]: true,
+    textIcon: true, // global selector
     [styles.noneSelect]: !allowUserSelect,
     [color ? styles[color] : '']: !!color,
     [styles[`text${capitalizeFirstLetter(textPlacement)}`]]: true,

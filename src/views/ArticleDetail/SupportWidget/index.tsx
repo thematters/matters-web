@@ -220,8 +220,8 @@ const SupportWidget = ({ article }: DonationProps) => {
                         size="xs"
                       >
                         <Translate
-                          zh_hant="交易紀錄"
-                          zh_hans="交易纪录"
+                          zh_hant="交易記錄"
+                          zh_hans="交易记录"
                           en="Transaction History"
                         />
                       </TextIcon>

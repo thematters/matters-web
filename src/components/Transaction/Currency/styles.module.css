@@ -1,4 +1,4 @@
-.Currency {
+.currency {
   @mixin flex-center-end;
 
   width: 100%;

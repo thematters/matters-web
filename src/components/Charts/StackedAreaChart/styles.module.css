@@ -12,11 +12,11 @@
 }
 
 .xAxis {
-  & .tick:first-of-type text {
+  & :global(.tick:first-of-type) text {
     text-anchor: start;
   }
 
-  & .tick:last-of-type text {
+  & :global(.tick:last-of-type) text {
     text-anchor: end;
   }
 }

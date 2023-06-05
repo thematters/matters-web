@@ -54,7 +54,7 @@ export const BaseCommentFeed = ({
 
   return (
     <article
-      className={styles.article}
+      className={styles.comment}
       id={actionControls.hasLink ? nodeId : ''}
       data-test-id={TEST_ID.ARTICLE_COMMENT_FEED}
     >

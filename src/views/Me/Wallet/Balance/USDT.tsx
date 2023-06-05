@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useContext } from 'react'
 
 import { PATHS } from '~/common/enums'
@@ -26,9 +27,14 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   const { data: balanceUSDTData } = useBalanceUSDT({})
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
 
+  const classes = classNames({
+    [styles.assetsItem]: true,
+    assetsItem: true, // global selector for overriding
+  })
+
   if (!address) {
     return (
-      <section className={styles.assetsItem}>
+      <section className={classes}>
         <TextIcon
           icon={<IconUSDTActive40 size="xlM" />}
           size="md"
@@ -52,7 +58,7 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   }
 
   return (
-    <section className={styles.assetsItem}>
+    <section className={classes}>
       <TextIcon
         icon={<IconUSDTActive40 size="xlM" />}
         size="md"

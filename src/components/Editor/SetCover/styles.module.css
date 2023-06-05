@@ -52,7 +52,7 @@
         background-color: var(--color-grey-lighter);
       }
 
-      & .icon {
+      & :global(.icon) {
         position: absolute;
         right: 0;
         bottom: 0;

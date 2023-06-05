@@ -159,7 +159,7 @@ const Transactions = () => {
       <Tabs
         sticky
         side={
-          <section className={styles.CurrencySwitch}>
+          <section className={styles.currencySwitch}>
             <CurrencySwitch
               currency={currency}
               setCurrency={(c) => setCurrency(c)}

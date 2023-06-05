@@ -52,7 +52,7 @@ const Intro = () => {
             </section>
           </div>
         </li>
-        <li className="l-container full community">
+        <li className={`l-container full community ${styles.community}`}>
           <div className="l-row">
             <img src={IMAGE_ILLUSTRATION_2.src} alt="illustration 2" />
 
@@ -95,7 +95,7 @@ const Intro = () => {
             </section>
           </div>
         </li>
-        <li className="l-container full feature">
+        <li className={`l-container full feature ${styles.feature}`}>
           <div className="l-row">
             <section className={styles.content}>
               {/* <span className={styles.flag}>

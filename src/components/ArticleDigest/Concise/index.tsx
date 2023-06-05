@@ -23,7 +23,6 @@ export type ArticleDigestConciseControls = {
 export type ArticleDigestConciseProps = {
   article: ArticleDigestConciseArticlePublicFragment &
     Partial<ArticleDigestConciseArticlePrivateFragment>
-  header?: React.ReactNode
   footerTag?: React.ReactNode
   footerCircle?: React.ReactNode
 } & ArticleDigestConciseControls &
@@ -32,7 +31,6 @@ export type ArticleDigestConciseProps = {
 
 const BaseArticleDigestFeed = ({
   article,
-  header,
   footerTag,
   footerCircle,
   date,
