@@ -1,0 +1,33 @@
+.container {
+  padding: var(--spacing-xxx-loose) 0 0;
+
+  & :global(section.card) {
+    box-shadow: 0 0 4px rgb(0 0 0 / 16%);
+  }
+}
+
+.message {
+  @mixin border-grey;
+
+  padding: var(--spacing-base);
+  background: var(--color-white);
+  border-radius: 0.5rem;
+
+  & .header {
+    font-size: var(--font-size-feed-title);
+    font-weight: var(--font-weight-feed-title);
+    color: var(--color-black);
+  }
+
+  & .content {
+    margin-top: var(--spacing-base);
+    font-size: var(--font-size-md-s);
+    color: var(--color-grey-darker);
+  }
+
+  & .footer {
+    display: flex;
+    justify-content: end;
+    margin-top: var(--spacing-base);
+  }
+}

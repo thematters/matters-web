@@ -86,6 +86,12 @@ const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
   loading: Spinner,
 })
+
+const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
+  ssr: true, // enable for first screen
+  loading: Spinner,
+})
+
 const DynamicSubscribeCircleDialog = dynamic(
   () =>
     import('~/components/Dialogs/SubscribeCircleDialog').then(
@@ -121,18 +127,22 @@ const BaseArticleDetail = ({
 
   const features = useFeatures()
   const [fixedWall, setFixedWall] = useState(false)
+  const [isSensitive, setIsSensitive] = useState<boolean>(
+    article.sensitiveByAuthor || article.sensitiveByAdmin
+  )
 
   const authorId = article.author?.id
   const paymentPointer = article.author?.paymentPointer
   const collectionCount = article.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
   const circle = article.access.circle
-  const canReadFullContent = !!(
-    isAuthor ||
-    !circle ||
-    circle.isMember ||
-    article.access.type === ArticleAccessType.Public
-  )
+  const canReadFullContent =
+    !!(
+      isAuthor ||
+      !circle ||
+      circle.isMember ||
+      article.access.type === ArticleAccessType.Public
+    ) && !isSensitive
 
   // wall
   const { data: clientPreferenceData } = useQuery<ClientPreferenceQuery>(
@@ -294,12 +304,23 @@ const BaseArticleDetail = ({
           />
         </section>
         {article?.summaryCustomized && <CustomizedSummary summary={summary} />}
-        <Content
-          article={article}
-          content={content}
-          translating={translating}
-        />
-        <License license={article.license} />
+        {isSensitive && (
+          <DynamicSensitiveWall
+            sensitiveByAuthor={article.sensitiveByAuthor}
+            sensitiveByAdmin={article.sensitiveByAdmin}
+            expandAll={() => setIsSensitive(false)}
+          />
+        )}
+        {!isSensitive && (
+          <>
+            <Content
+              article={article}
+              content={content}
+              translating={translating}
+            />
+            <License license={article.license} />
+          </>
+        )}
         {circle && !canReadFullContent && <DynamicCircleWall circle={circle} />}
         {features.payment && canReadFullContent && (
           <DynamicSupportWidget article={article} />
