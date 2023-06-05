@@ -35,6 +35,10 @@
     "defaultMessage": "管理",
     "description": ""
   },
+  "0JLcHr": {
+    "defaultMessage": "内容可能包含色情、暴力、血腥等限制级内容，部分用户可能不适合观看，或引起不适、心理负担，请谨慎判断是否阅读。",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+  },
   "1EYCdR": {
     "defaultMessage": "标签",
     "description": ""
@@ -575,6 +579,10 @@
     "defaultMessage": "在你的围炉中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "Vn5KLr": {
+    "defaultMessage": "开启后，正文将被暂时遮蔽，只显示标题与摘要，并由读者选择是否继续阅读（例如含有色情、暴力、血腥等内容）",
+    "description": "src/components/Editor/ToggleAccess/index.tsx"
+  },
   "VrOoVf": {
     "defaultMessage": "Matters 不会透过任何渠道主动询问你的钱包私钥。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -1042,6 +1050,10 @@
   "rs0YS2": {
     "defaultMessage": "已禁言用户",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "s5JCCO": {
+    "defaultMessage": "此文已被{actor}标示为限制级内容，是否确定展开全文？",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "sPgUkN": {
     "defaultMessage": "本月营收",
