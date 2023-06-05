@@ -260,7 +260,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
     !searchNodes.some(
       (node) => node.__typename === 'Tag' && node.content === searchKey
     )
-  // console.log({ stagingNodes })
+
   /**
    * Render
    */

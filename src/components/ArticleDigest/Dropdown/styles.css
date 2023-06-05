@@ -17,10 +17,6 @@
     }
   }
 
-  &.selected {
-    color: var(--color-grey);
-  }
-
   & :global(h3) {
     @mixin truncate;
 
