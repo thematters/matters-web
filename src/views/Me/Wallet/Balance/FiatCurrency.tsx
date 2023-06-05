@@ -1,3 +1,5 @@
+import classNames from 'classnames'
+
 import { analytics, formatAmount } from '~/common/utils'
 import {
   AddCreditDialog,
@@ -88,6 +90,12 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
   currency,
   exchangeRate,
 }) => {
+  const classes = classNames({
+    [styles.assetsItem]: true,
+    assetsItem: true, // global selector for overriding
+    [styles.clickable]: true,
+  })
+
   const Content = ({
     isInDropdown,
     openAddCreditDialog,
@@ -131,7 +139,7 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
             >
               {({ openDialog, type, ref }) => (
                 <section
-                  className={`${styles.clickable} ${styles.clickable}`}
+                  className={classes}
                   onClick={openDialog}
                   aria-haspopup={type}
                   role="button"

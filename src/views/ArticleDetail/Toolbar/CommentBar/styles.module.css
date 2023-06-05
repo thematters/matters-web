@@ -1,4 +1,4 @@
-p {
+.content {
   height: 2rem;
   padding: 0 var(--spacing-base);
   font-size: var(--font-size-sm);

@@ -37,9 +37,9 @@ const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
   percentageChange,
 }) => {
   const changeClasses = classNames({
-    change: true,
-    positive: percentageChange && percentageChange > 0,
-    negative: percentageChange && percentageChange < 0,
+    [styles.change]: true,
+    [styles.positive]: percentageChange && percentageChange > 0,
+    [styles.negative]: percentageChange && percentageChange < 0,
   })
 
   const change = Math.abs(percentageChange || 0)

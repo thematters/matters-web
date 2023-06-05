@@ -29,6 +29,8 @@ import {
   CommentBarArticlePublicFragment,
 } from '~/gql/graphql'
 
+import styles from './styles.module.css'
+
 type CommentBarArticle = CommentBarArticlePublicFragment &
   Partial<CommentBarArticlePrivateFragment>
 
@@ -97,7 +99,7 @@ const Content = ({
           ariaHasPopup="dialog"
           {...(props as CardProps)}
         >
-          <p>
+          <p className={styles.content}>
             <Translate id="putComment" />
             <Translate zh_hant="…" zh_hans="…" en="…" />
           </p>
