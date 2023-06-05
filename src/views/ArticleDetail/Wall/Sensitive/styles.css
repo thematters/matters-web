@@ -1,9 +1,15 @@
 .container {
-  padding: var(--spacing-xxx-loose) 0 0;
-
   & :global(section.card) {
     box-shadow: 0 0 4px rgb(0 0 0 / 16%);
   }
+}
+
+.bg-blur-content {
+  padding: 0 var(--spacing-base);
+  text-indent: calc(var(--font-size-md) * 2);
+  user-select: none;
+  filter: blur(5px);
+  opacity: 0.4;
 }
 
 .message {

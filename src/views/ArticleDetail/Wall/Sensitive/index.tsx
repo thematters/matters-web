@@ -1,7 +1,5 @@
 import { FormattedMessage } from 'react-intl'
 
-import IMAGE_WALL_BACKGROUND_MD from '@/public/static/images/circle-wall-background-md.jpg'
-import IMAGE_WALL_BACKGROUND_SM from '@/public/static/images/circle-wall-background-sm.jpg'
 import { Button, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
@@ -19,6 +17,12 @@ const SensitiveWall = ({
 }: SensitiveWallProps) => {
   return (
     <section className="container">
+      <p className="bg-blur-content">
+        <FormattedMessage
+          defaultMessage="Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress."
+          description="src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+        />
+      </p>
       <section className="message">
         <section className="header">
           <FormattedMessage
@@ -56,19 +60,6 @@ const SensitiveWall = ({
         </section>
       </section>
       <style jsx>{styles}</style>
-      <style jsx>{`
-        .container {
-          background-image: url(${IMAGE_WALL_BACKGROUND_SM.src});
-          background-size: cover;
-          background-position: center top;
-          border-bottom-left-radius: 0.5rem;
-          border-bottom-right-radius: 0.5rem;
-
-          @media (--sm-up) {
-            background-image: url(${IMAGE_WALL_BACKGROUND_MD.src});
-          }
-        }
-      `}</style>
     </section>
   )
 }
