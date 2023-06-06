@@ -6,7 +6,7 @@
   padding: 0 var(--spacing-base);
   margin-top: var(--spacing-x-tight);
 
-  & header {
+  & .header {
     margin-bottom: var(--spacing-loose);
   }
 }

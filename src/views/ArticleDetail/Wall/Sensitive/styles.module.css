@@ -4,7 +4,7 @@
   }
 }
 
-.bg-blur-content {
+.bgBlurContent {
   padding: 0 var(--spacing-base);
   text-indent: calc(var(--font-size-md) * 2);
   user-select: none;

@@ -28,7 +28,7 @@ export const EmbedShare = ({ title, path, headerTitle }: EmbedShareProps) => {
 
   return (
     <section className={styles.share}>
-      <header>
+      <header className={styles.header}>
         <h4>
           <TextIcon size="sm" weight="normal">
             {headerTitle}

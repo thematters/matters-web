@@ -1,4 +1,4 @@
-.h3 {
+.title {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
   line-height: 1rem;
@@ -6,7 +6,7 @@
 
 .circle {
   & .switch {
-    & header {
+    & .header {
       @mixin flex-center-space-between;
     }
 
@@ -17,7 +17,7 @@
     }
   }
 
-  & .switch + :global(*) {
+  & .switch + * {
     margin-top: var(--spacing-base);
   }
 }
@@ -35,7 +35,7 @@
 }
 
 .inSidebar {
-  & h3 {
+  & .title {
     font-size: var(--font-size-sm);
   }
 
@@ -44,11 +44,11 @@
   }
 }
 
-.contentSensitive,
+.sensitive,
 .iscn {
   margin-top: var(--spacing-loose);
 
-  & header {
+  & .header {
     @mixin flex-center-space-between;
   }
 
@@ -89,11 +89,5 @@
     @mixin flex-start-space-between;
 
     width: 100%;
-
-    & .left-btn {
-      @mixin flex-center-end;
-
-      width: 100%;
-    }
   }
 }

@@ -20,7 +20,7 @@ const SectionCard: React.FC<
   return (
     <section className={styles.card}>
       {title && (
-        <header>
+        <header className={styles.header}>
           <h3>{title}</h3>
           {right || <section className={styles.right}>{right}</section>}
         </header>

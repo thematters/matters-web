@@ -133,7 +133,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
 
         {edges && edges.length > 0 && (
           <section className={styles.relatedDonations}>
-            <header>
+            <header className={styles.header}>
               <TextIcon size="sm" color="greyDarker">
                 <Translate
                   zh_hant="支持過這篇作品的人也支持了"

@@ -5,7 +5,7 @@
   margin-bottom: var(--spacing-loose);
   border-radius: var(--spacing-x-tight);
 
-  & header {
+  & .header {
     @mixin flex-center-space-between;
 
     padding: 0 var(--spacing-base);

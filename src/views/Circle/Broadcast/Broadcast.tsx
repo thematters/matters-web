@@ -221,7 +221,7 @@ const CricleBroadcast = () => {
 
       <section className={styles.broadcast}>
         {isOwner && (
-          <header>
+          <header className={styles.header}>
             <CommentForm
               circleId={circle?.id}
               type="circleBroadcast"

@@ -64,7 +64,7 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
 
   return (
     <section className={styles.responses}>
-      <header>
+      <header className={styles.header}>
         <Title type="nav" is="h2">
           <Translate id="responses" />
           <ResponseCount article={article as ResponseCountArticleFragment} />

@@ -3,7 +3,7 @@
   background: var(--color-white);
   border-radius: 0.5rem;
 
-  & header {
+  & .header {
     @mixin flex-center-space-between;
   }
 

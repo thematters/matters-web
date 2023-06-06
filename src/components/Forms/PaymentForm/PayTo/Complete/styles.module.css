@@ -35,7 +35,7 @@
   margin-top: var(--spacing-x-loose);
   margin-bottom: calc(var(--spacing-base) * -1);
 
-  & header {
+  & .header {
     @mixin flex-center-space-between;
 
     padding-bottom: var(--spacing-base);

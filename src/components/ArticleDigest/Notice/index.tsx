@@ -50,7 +50,7 @@ export const ArticleDigestNotice = ({
         className={containerClasses}
         data-test-id={TEST_ID.DIGEST_ARTICLE_NOTICE}
       >
-        <header>
+        <header className={styles.header}>
           <ArticleDigestTitle
             article={article}
             textSize={titleTextSize}

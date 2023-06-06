@@ -253,7 +253,7 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
 
   return (
     <section className={styles.latestResponses} id="latest-responses">
-      <header>
+      <header className={styles.header}>
         <Title type="feed" is="h3">
           <Translate id="latestResponses" />
         </Title>

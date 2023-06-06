@@ -85,8 +85,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
       {canToggleCircle && (
         <section className={styles.circle}>
           <section className={styles.switch}>
-            <header>
-              <h3 className={styles.h3}>
+            <header className={styles.header}>
+              <h3 className={styles.title}>
                 <Translate id="addToCircle" />
               </h3>
 
@@ -125,7 +125,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
       )}
 
       <section className={styles.widget}>
-        <h3>
+        <h3 className={styles.title}>
           <Translate id="license" />
         </h3>
 
@@ -148,7 +148,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         <button type="button" onClick={onOpenSupportSetting}>
           <section className={styles.support}>
             <section className={styles.left}>
-              <h3>
+              <h3 className={styles.title}>
                 <Translate
                   zh_hans="设定支持"
                   zh_hant="設定支持"
@@ -173,8 +173,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         </button>
       </section>
 
-      <section className={styles.contentSensitive}>
-        <header>
+      <section className={styles.sensitive}>
+        <header className={styles.header}>
           <h3 className={styles.title}>
             <Translate id="restrictedContent" />
           </h3>
@@ -199,7 +199,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
       </section>
 
       <section className={styles.iscn}>
-        <header>
+        <header className={styles.header}>
           <h3 className={styles.title}>
             <Translate id="publishToISCN" />
           </h3>

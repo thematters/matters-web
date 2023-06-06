@@ -2,7 +2,7 @@
 .featuredComments {
   margin: var(--spacing-loose) 0;
 
-  & > header {
+  & .header {
     @mixin flex-center-space-between;
 
     margin-bottom: var(--spacing-base);

@@ -41,7 +41,7 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
 
   return (
     <section className={boxClasses}>
-      <header>
+      <header className={styles.header}>
         <TextIcon icon={icon} size="md" weight="md" spacing="xtight">
           <Translate id={title} />
         </TextIcon>

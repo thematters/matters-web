@@ -84,7 +84,7 @@ const Verbose = ({
           </span>
 
           <section className={styles.content}>
-            <header>
+            <header className={styles.header}>
               <span className={nameClasses}>
                 <Translate id="accountArchived" />
               </span>
@@ -117,7 +117,7 @@ const Verbose = ({
         </Link>
 
         <section className={styles.content}>
-          <header>
+          <header className={styles.header}>
             <Link {...path} legacyBehavior>
               <a className={nameClasses}>{user.displayName}</a>
             </Link>

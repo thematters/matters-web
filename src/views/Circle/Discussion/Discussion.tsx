@@ -250,7 +250,7 @@ const CricleDiscussion = () => {
 
       <section className={styles.discussion}>
         {!circle.owner.isBlocking && (
-          <header>
+          <header className={styles.header}>
             <CommentForm
               circleId={circle?.id}
               type="circleDiscussion"

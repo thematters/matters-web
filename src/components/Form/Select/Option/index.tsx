@@ -63,7 +63,7 @@ const Option: React.FC<OptionProps> = forwardRef(
             <section className={styles.left}>
               <h5 className={nameClasses}>{name}</h5>
               {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-              {extra && <p className={styles.extra}>{extra}</p>}
+              {extra && <div className={styles.extra}>{extra}</div>}
             </section>
 
             {!expanded && (

@@ -1,5 +1,5 @@
 .container {
-  & > header {
+  & header {
     padding: var(--spacing-base);
 
     @media (--sm-up) {

@@ -107,7 +107,7 @@ const FeaturedComments = ({ id, lock }: { id: string; lock: boolean }) => {
 
   return (
     <section className={styles.featuredComments} id="featured-comments">
-      <header>
+      <header className={styles.header}>
         <Title type="feed" is="h3">
           <Translate id="featuredComments" />
         </Title>

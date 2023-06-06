@@ -67,7 +67,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
         </section>
 
         <section className={styles.content}>
-          <header>
+          <header className={styles.header}>
             <Tag
               tag={tag}
               type="plain"

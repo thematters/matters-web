@@ -81,7 +81,7 @@ const Collection: React.FC<{
       className={styles.collection}
       data-test-id={TEST_ID.ARTICLE_COLLECTION}
     >
-      <header>
+      <header className={styles.header}>
         <Title type="nav" is="h2">
           <Translate id="collectArticle" />
 

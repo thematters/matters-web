@@ -22,7 +22,7 @@
   flex-grow: 1;
   overflow: hidden;
 
-  & header {
+  & .header {
     @mixin flex-center-start;
 
     & > * + * {
