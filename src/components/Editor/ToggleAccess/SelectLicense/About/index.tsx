@@ -14,7 +14,7 @@ const About = ({ desc, url }: { desc: string; url: string }) => {
           textPlacement="left"
           icon={<IconExternalLink16 color="grey" size="xs" />}
         >
-          {desc}
+          <span className={styles.text}>{desc}</span>
         </TextIcon>
       </Button>
     </section>
