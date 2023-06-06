@@ -146,7 +146,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         // title={`#${normalizeTag(tag.content)}`}
         // description={tag.description}
         title={title}
-        path={path.href}
+        path={qsType ? `${path.href}?type=${qsType}` : path.href}
         description={description}
         keywords={keywords} // add top10 most using author names?
         image={
