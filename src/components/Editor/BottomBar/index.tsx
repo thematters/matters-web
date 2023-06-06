@@ -32,7 +32,7 @@ import ArticleCustomStagingArea from '../ArticleCustomStagingArea'
 import SetCover from '../SetCover'
 import TagCustomStagingArea from '../TagCustomStagingArea'
 import AccessDialog from './AccessDialog'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type BottomBarProps = {
   saving: boolean
@@ -94,7 +94,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
   const { lang } = useContext(LanguageContext)
 
   const bottomBarClasses = classNames({
-    'bottom-bar': true,
+    [styles.bottomBar]: true,
     'u-area-disable': disabled,
   })
 
@@ -137,8 +137,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
   return (
     <section className={bottomBarClasses}>
       <Layout.FixedMain>
-        <section className="content">
-          <section className="inner">
+        <section className={styles.content}>
+          <section className={styles.inner}>
             {/* Cover */}
             <SetCover.Dialog {...coverProps}>
               {({ openDialog: openSetCoverDialog }) => (
@@ -149,7 +149,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 >
                   <TextIcon
                     icon={<IconImage24 size="md" />}
-                    size="md-s"
+                    size="mdS"
                     weight="md"
                     spacing="xtight"
                   >
@@ -180,7 +180,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 >
                   <TextIcon
                     icon={<IconHashTag24 size="md" />}
-                    size="md-s"
+                    size="mdS"
                     weight="md"
                     spacing="xtight"
                   >
@@ -211,7 +211,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 >
                   <TextIcon
                     icon={<IconCollection24 size="md" />}
-                    size="md-s"
+                    size="mdS"
                     weight="md"
                     spacing="xtight"
                   >
@@ -231,7 +231,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 >
                   <TextIcon
                     icon={<IconSettings24 size="md" />}
-                    size="md-s"
+                    size="mdS"
                     weight="md"
                     spacing="xtight"
                   >
@@ -243,8 +243,6 @@ const BottomBar: React.FC<BottomBarProps> = ({
           </section>
         </section>
       </Layout.FixedMain>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

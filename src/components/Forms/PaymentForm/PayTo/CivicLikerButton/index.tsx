@@ -1,7 +1,7 @@
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, IconExternalLink16, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CivicLikerButtonProps = {
   likerId: string
@@ -9,7 +9,7 @@ type CivicLikerButtonProps = {
 
 const CivicLikerButton: React.FC<CivicLikerButtonProps> = ({ likerId }) => {
   return (
-    <section className="container">
+    <section className={styles.container}>
       <Button
         bgColor="white"
         size={['100%', '2rem']}
@@ -17,7 +17,7 @@ const CivicLikerButton: React.FC<CivicLikerButtonProps> = ({ likerId }) => {
         htmlTarget="_blank"
       >
         <TextIcon
-          color="likecoin-green"
+          color="likecoinGreen"
           size="md"
           textPlacement="left"
           icon={<IconExternalLink16 />}
@@ -29,8 +29,6 @@ const CivicLikerButton: React.FC<CivicLikerButtonProps> = ({ likerId }) => {
           />
         </TextIcon>
       </Button>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -20,7 +20,7 @@ import { useMutation } from '~/components/GQL'
 import { UpdatePaymentPointerMutation } from '~/gql/graphql'
 
 import Explainer from './Explainer'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   setIsSubmitting: (submitting: boolean) => void
@@ -112,7 +112,7 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
 
   return (
     <Dialog.Content hasGrow>
-      <section className="container">
+      <section className={styles.container}>
         <Form id={formId} onSubmit={handleSubmit}>
           <Form.Input
             label={<Explainer />}
@@ -132,7 +132,6 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
             }}
           />
         </Form>
-        <style jsx>{styles}</style>
       </section>
     </Dialog.Content>
   )

@@ -72,7 +72,7 @@ const Request: React.FC<Props> = ({ nextStep, closeDialog }) => {
         </Dialog.Footer.Button>
 
         <Dialog.Footer.Button
-          bgColor="grey-lighter"
+          bgColor="greyLighter"
           textColor="black"
           onClick={closeDialog}
         >

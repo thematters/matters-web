@@ -9,7 +9,7 @@ import {
   UserProfileUserPublicQuery,
 } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CircleWidgetCircle = NonNullable<
   NonNullable<UserProfileUserPublicQuery['user']>['ownCircles']
@@ -39,7 +39,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
     }
 
     return (
-      <section className="circle-widget">
+      <section className={styles.circleWidget}>
         <Form.List spacingX={0}>
           <Form.List.Item
             bold
@@ -54,14 +54,12 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
               analytics.trackEvent('click_button', { type: 'create_circle' })
             }}
             role="button"
-            bgColor="grey-lighter"
-            bgActiveColor="grey-lighter"
+            bgColor="greyLighter"
+            bgActiveColor="greyLighter"
             spacing={[0, 'base']}
             borderRadius="xtight"
           />
         </Form.List>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -69,11 +67,11 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
   const circle = circles[0]
 
   return (
-    <section className="circle-widget">
+    <section className={styles.circleWidget}>
       <CircleDigest.Rich
         avatarSize="xl"
         borderRadius="xtight"
-        borderColor="line-grey-light"
+        borderColor="lineGreyLight"
         circle={circle}
         hasFooter
         hasOwner={false}
@@ -87,8 +85,6 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
       />
 
       {!isMe && <SubscribeCircleDialog circle={circle} />}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

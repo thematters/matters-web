@@ -17,7 +17,7 @@ import StagingArea, {
 } from '~/components/SearchSelect/StagingArea'
 import { SearchExclude, SearchFilter } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * <EditorSearchSelectForm> is a dialog content for
@@ -143,15 +143,15 @@ const EditorSearchSelectForm = ({
 
       {inStagingArea && (
         <button
-          className="stagingHeadArea"
+          className={styles.stagingHeadArea}
           onClick={toSearchingArea}
           disabled={!enableAdd}
           data-test-id={TEST_ID.EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON}
         >
           <TextIcon
-            icon={<IconAdd16 size="md-s" />}
+            icon={<IconAdd16 size="mdS" />}
             color={enableAdd ? 'green' : 'grey'}
-            size="md-s"
+            size="mdS"
             spacing="xtight"
           >
             {searchType === 'Tag' && (
@@ -161,7 +161,7 @@ const EditorSearchSelectForm = ({
               <Translate en="Add" zh_hans="关联作品" zh_hant="關聯作品" />
             )}
           </TextIcon>
-          <span className="number">
+          <span className={styles.number}>
             （{stagingNodes.length}/{maxNodesLength}）
           </span>
         </button>
@@ -201,7 +201,6 @@ const EditorSearchSelectForm = ({
           CustomStagingArea={CustomStagingArea}
         />
       )}
-      <style jsx>{styles}</style>
     </>
   )
 }

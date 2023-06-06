@@ -1,0 +1,9 @@
+.container {
+  @mixin form-container;
+}
+
+.footer {
+  @mixin flex-center-all;
+
+  margin: var(--spacing-x-loose) 0;
+}

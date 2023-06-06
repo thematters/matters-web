@@ -15,7 +15,7 @@ import {
   FollowingFeedRecommendCircleFooterPublicFragment,
 } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type Props = {
   circle: FollowingFeedRecommendCircleFooterPublicFragment &
@@ -61,7 +61,7 @@ const Footer = ({ circle }: Props) => {
 
   return (
     <footer>
-      <section className="footer">
+      <section className={styles.footer}>
         <TextIcon
           icon={<IconUser16 size="xs" />}
           color="grey"
@@ -103,8 +103,6 @@ const Footer = ({ circle }: Props) => {
           </TextIcon>
         )}
       </section>
-
-      <style jsx>{styles}</style>
     </footer>
   )
 }

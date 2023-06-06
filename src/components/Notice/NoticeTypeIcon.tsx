@@ -11,7 +11,7 @@ import {
   IconVolume32,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type IconType =
   | 'appreciate'
@@ -36,9 +36,9 @@ const getIcon = (type: IconType) => {
     case 'upvote':
       return <IconUpVote16 color="green" />
     case 'volume':
-      return <IconVolume32 color="grey-dark" size="lg" />
+      return <IconVolume32 color="greyDark" size="lg" />
     case 'circle':
-      return <IconCircle16 color="grey-dark" />
+      return <IconCircle16 color="greyDark" />
     case 'logo':
       return <IconAvatarLogo32 size="lg" />
   }
@@ -48,15 +48,10 @@ const NoticeTypeIcon = ({ type }: { type: IconType }) => {
   const icon = getIcon(type)
 
   const iconWrapClasses = classNames({
-    'icon-wrap': ['logo', 'volume'].indexOf(type) < 0,
+    [styles.iconWrap]: ['logo', 'volume'].indexOf(type) < 0,
   })
 
-  return (
-    <section className={iconWrapClasses}>
-      {icon}
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <section className={iconWrapClasses}>{icon}</section>
 }
 
 export default NoticeTypeIcon

@@ -16,7 +16,7 @@ import {
 
 import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type EditModeHeaderProps = {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -143,7 +143,7 @@ const EditModeHeader = ({
         zh_hans=" 次修订"
         en=" revisions remaining"
       />
-      <span className={isOverDiffLimit ? 'red' : 'green'}>
+      <span className={isOverDiffLimit ? styles.red : styles.green}>
         &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
       </span>
     </>
@@ -151,7 +151,7 @@ const EditModeHeader = ({
 
   return (
     <>
-      <p>
+      <p className={styles.hint}>
         {isSameHash && (
           <>
             {!isOverRevisionLimit ? (
@@ -202,8 +202,6 @@ const EditModeHeader = ({
           </Button>
         )}
       </EditorSettingsDialog>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

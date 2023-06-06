@@ -8,7 +8,7 @@ import {
   useDialogSwitch,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type HelpDetailProps = {
   hasCount?: boolean
@@ -21,7 +21,7 @@ type Props = {
 
 const ReadTime = () => (
   <>
-    <h2 className="title">
+    <h2 className={styles.title}>
       <TextIcon icon={<IconReadTimeTotal16 size="md" />} weight="md">
         <FormattedMessage
           defaultMessage="Accumulated Read Time"
@@ -29,30 +29,28 @@ const ReadTime = () => (
         />
       </TextIcon>
     </h2>
-    <p className="description">
+    <p className={styles.description}>
       <FormattedMessage
         defaultMessage="Accumulated read time indicates the total time length that registered users read."
         description="src/components/Dialogs/HelpDialog/index.tsx"
       />
     </p>
-    <style jsx>{styles}</style>
   </>
 )
 
 const ReadCount = () => (
   <>
-    <h2 className="title">
+    <h2 className={styles.title}>
       <TextIcon icon={<IconRead16 size="md" />} weight="md">
         <FormattedMessage defaultMessage="Read Counts" description="" />
       </TextIcon>
     </h2>
-    <p className="description">
+    <p className={styles.description}>
       <FormattedMessage
         defaultMessage="Read counts indicates how many registered users read."
         description="src/components/Dialogs/HelpDialog/index.tsx"
       />
     </p>
-    <style jsx>{styles}</style>
   </>
 )
 

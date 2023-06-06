@@ -8,7 +8,7 @@ import { TEST_ID } from '~/common/enums'
 import { TextIcon, Translate, withIcon } from '~/components'
 import { ArticleLicenseType } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type LicenseProps = {
   license: ArticleLicenseType
@@ -21,11 +21,11 @@ const License: React.FC<LicenseProps> = ({ license }) => {
   const isCCBYNCND4 = license === ArticleLicenseType.CcByNcNd_4
 
   return (
-    <section className="license" data-test-id={TEST_ID.ARTICLE_LICENSE}>
+    <section className={styles.license} data-test-id={TEST_ID.ARTICLE_LICENSE}>
       {isCC0 && (
         <TextIcon
           icon={
-            <span className="icons">
+            <span className={styles.icons}>
               {withIcon(IconLicenseCC0)({ size: 'md' })}
             </span>
           }
@@ -45,7 +45,7 @@ const License: React.FC<LicenseProps> = ({ license }) => {
       {isARR && (
         <TextIcon
           icon={
-            <span className="icons">
+            <span className={styles.icons}>
               {withIcon(IconLicenseARR)({ size: 'md' })}
             </span>
           }
@@ -65,7 +65,7 @@ const License: React.FC<LicenseProps> = ({ license }) => {
       {isCCBYNCND2 && (
         <TextIcon
           icon={
-            <span className="icons">
+            <span className={styles.icons}>
               {withIcon(IconLicenseCC)({ size: 'md' })}
               {withIcon(IconLicenseBY)({ size: 'md' })}
               {withIcon(IconLicenseNC)({ size: 'md' })}
@@ -88,7 +88,7 @@ const License: React.FC<LicenseProps> = ({ license }) => {
       {isCCBYNCND4 && (
         <TextIcon
           icon={
-            <span className="icons">
+            <span className={styles.icons}>
               {withIcon(IconLicenseCC)({ size: 'md' })}
               {withIcon(IconLicenseBY)({ size: 'md' })}
               {withIcon(IconLicenseNC)({ size: 'md' })}
@@ -107,8 +107,6 @@ const License: React.FC<LicenseProps> = ({ license }) => {
           />
         </TextIcon>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

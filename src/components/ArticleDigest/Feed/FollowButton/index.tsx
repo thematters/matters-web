@@ -83,7 +83,7 @@ const FollowButton = ({ user }: FollowButtonProps) => {
 
   return (
     <TextIcon
-      icon={<IconDotDivider color="grey-dark" />}
+      icon={<IconDotDivider color="greyDark" />}
       color="green"
       size="sm"
       spacing={0}

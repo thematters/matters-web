@@ -54,7 +54,7 @@ import License from './License'
 import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationToast from './TranslationToast'
@@ -281,9 +281,9 @@ const BaseArticleDetail = ({
 
       <State article={article} />
 
-      <section className="content">
+      <section className={styles.content}>
         <TagList article={article} />
-        <section className="title">
+        <section className={styles.title}>
           <Title type="article">{title}</Title>
 
           <Waypoint
@@ -326,14 +326,14 @@ const BaseArticleDetail = ({
           <DynamicSupportWidget article={article} />
         )}
         {collectionCount > 0 && (
-          <section className="block">
+          <section className={styles.block}>
             <DynamicCollection
               article={article}
               collectionCount={collectionCount}
             />
           </section>
         )}
-        <section className="block">
+        <section className={styles.block}>
           <DynamicResponse id={article.id} lock={!canReadFullContent} />
         </section>
         <Media lessThan="xl">
@@ -357,8 +357,6 @@ const BaseArticleDetail = ({
       {article.access.circle && (
         <DynamicSubscribeCircleDialog circle={article.access.circle} />
       )}
-
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

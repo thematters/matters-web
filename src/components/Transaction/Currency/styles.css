@@ -1,6 +1,0 @@
-.Currency {
-  @mixin flex-center-end;
-
-  width: 100%;
-  margin-top: calc(var(--spacing-xx-tight) * -1);
-}

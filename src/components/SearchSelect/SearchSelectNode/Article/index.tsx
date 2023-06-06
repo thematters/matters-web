@@ -9,7 +9,7 @@ import {
 } from '~/components'
 import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface SearchSelectArticleProps {
   article: ArticleDigestDropdownArticleFragment
@@ -27,8 +27,8 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
   inSearchingArea,
 }) => {
   const nodeClass = classNames({
-    node: true,
-    selectable: inStagingArea,
+    [styles.node]: true,
+    [styles.selectable]: inStagingArea,
     'u-area-disable': !!selected,
   })
 
@@ -63,16 +63,14 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
           disabled
         />
 
-        <span className="icon-select">
+        <span className={styles.iconSelect}>
           {inStagingArea && selected && (
-            <IconChecked color="green" size="md-s" />
+            <IconChecked color="green" size="mdS" />
           )}
           {inStagingArea && !selected && (
-            <IconUnChecked color="grey-light" size="md-s" />
+            <IconUnChecked color="greyLight" size="mdS" />
           )}
         </span>
-
-        <style jsx> {styles}</style>
       </section>
     </Card>
   )

@@ -44,7 +44,7 @@ import {
 } from './gql'
 import EditModeHeader from './Header'
 import PublishState from './PublishState'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface EditModeProps {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -270,7 +270,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
         {({ openDialog: openConfirmExitDialog }) => (
           <Layout.Main
             aside={
-              <section className="sidebar">
+              <section className={styles.sidebar}>
                 <Sidebar.Tags {...tagsProps} />
                 <Sidebar.Cover {...coverProps} />
                 <Sidebar.Collection {...collectionProps} />
@@ -292,7 +292,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                     />
                   )}
                 </SupportSettingDialog>
-                <style jsx>{styles}</style>
               </section>
             }
             inEditor

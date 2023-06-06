@@ -5,7 +5,7 @@ import { analytics } from '~/common/utils'
 import { Tag, TagExposureTracker } from '~/components'
 import { TagListArticleFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const fragments = {
   article: gql`
@@ -24,7 +24,7 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
   }
 
   return (
-    <section className="tag-list" data-test-id={TEST_ID.ARTICLE_TAGS}>
+    <section className={styles.tagList} data-test-id={TEST_ID.ARTICLE_TAGS}>
       <ul>
         {article.tags.map((tag, i) => (
           <li key={tag.id}>
@@ -44,8 +44,6 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
           </li>
         ))}
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

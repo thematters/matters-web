@@ -1,0 +1,51 @@
+.container {
+  @mixin flex-center-start;
+
+  position: relative;
+}
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  margin-right: var(--spacing-x-tight);
+}
+
+.header {
+  @mixin flex-center-space-between;
+
+  & > * + * {
+    margin-left: var(--spacing-xx-tight);
+  }
+}
+
+.content {
+  flex-grow: 1;
+  height: 3rem;
+  overflow: hidden;
+}
+
+.info {
+  @mixin flex-center-end;
+
+  flex-shrink: 0;
+  height: 100%;
+}
+
+.name,
+.description {
+  line-height: 1.5rem;
+}
+
+.name {
+  @mixin line-clamp;
+
+  font-size: var(--font-size-md-s);
+  font-weight: var(--font-weight-medium);
+}
+
+.description {
+  @mixin line-clamp;
+
+  font-size: var(--font-size-sm-s);
+  color: var(--color-grey-dark);
+}

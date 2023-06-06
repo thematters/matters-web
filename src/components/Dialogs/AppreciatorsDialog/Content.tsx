@@ -12,7 +12,7 @@ import {
 import { UserDigest } from '~/components/UserDigest'
 import { ArticleAppreciatorsQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface AppreciatorsDialogContentProps {
   id: string
@@ -121,11 +121,13 @@ const AppreciatorsDialogContent = ({
         >
           {edges.map(({ node, cursor }, index) =>
             node.sender ? (
-              <div className="dialog-appreciators-list" key={cursor}>
+              <div className={styles.dialogAppreciatorsList} key={cursor}>
                 <UserDigest.Rich
                   user={node.sender}
                   avatarBadge={
-                    <span className="appreciation-amount">{node.amount}</span>
+                    <span className={styles.appreciationAmount}>
+                      {node.amount}
+                    </span>
                   }
                   onClick={() => {
                     analytics.trackEvent('click_feed', {
@@ -136,7 +138,6 @@ const AppreciatorsDialogContent = ({
                     })
                   }}
                 />
-                <style jsx>{styles}</style>
               </div>
             ) : null
           )}

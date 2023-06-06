@@ -31,7 +31,7 @@ import {
 
 import PaymentInfo from '../PaymentInfo'
 import PayToFallback from './PayToFallback'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   amount: number
@@ -143,7 +143,7 @@ const OthersProcessingForm: React.FC<Props> = ({
                 showLikerID={currency === CURRENCY.LIKE}
               />
               {currency === CURRENCY.HKD && (
-                <p className="hint">
+                <p className={styles.hint}>
                   <Translate
                     zh_hant="交易進行中，請稍候..."
                     zh_hans="交易进行中，请稍候..."
@@ -152,7 +152,7 @@ const OthersProcessingForm: React.FC<Props> = ({
                 </p>
               )}
               {currency === CURRENCY.LIKE && (
-                <p className="hint">
+                <p className={styles.hint}>
                   <p>
                     <Translate
                       zh_hant="請在 Liker Pay 頁面繼續操作"
@@ -170,7 +170,6 @@ const OthersProcessingForm: React.FC<Props> = ({
                 </p>
               )}
               <Spinner />
-              <style jsx>{styles}</style>
             </section>
           </Dialog.Content>
         </>
@@ -302,7 +301,7 @@ const USDTProcessingForm: React.FC<Props> = ({
             recipient={recipient}
             showEthAddress={true}
           />
-          <section className="hint">
+          <section className={styles.hint}>
             <p>
               <Translate
                 zh_hant="請在加密錢包內繼續操作，"
@@ -319,7 +318,6 @@ const USDTProcessingForm: React.FC<Props> = ({
             </p>
           </section>
           <Spinner />
-          <style jsx>{styles}</style>
         </section>
       </Dialog.Content>
     </>

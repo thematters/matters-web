@@ -4,7 +4,7 @@ import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 import { TagMaintainersQuery, UpdateTagSettingMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * This a sub-component of <TagEditorDialog>. It ask user to confirm
@@ -57,7 +57,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
             zh_hans="移除后， "
             en="After removal, "
           />
-          <span className="name">{editor.displayName}</span>{' '}
+          <span className={styles.name}>{editor.displayName}</span>{' '}
           <Translate
             zh_hant="將無法繼續參與「精選」作品管理。"
             zh_hans="将无法继续参与「精选」作品管理。"
@@ -117,13 +117,12 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
 
         <Dialog.Footer.Button
           textColor="black"
-          bgColor="grey-lighter"
+          bgColor="greyLighter"
           onClick={closeDialog}
         >
           <Translate zh_hant="取消" zh_hans="取消" en="cancel" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-      <style jsx>{styles}</style>
     </>
   )
 }

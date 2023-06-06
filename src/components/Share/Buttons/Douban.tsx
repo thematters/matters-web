@@ -33,7 +33,7 @@ const Douban = ({
       return window.open(shareUrl)
     }}
   >
-    {circle && withIcon(IconShareDoubanCircle)({ size: 'xl-m' })}
+    {circle && withIcon(IconShareDoubanCircle)({ size: 'xlM' })}
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareDouban)({})} spacing="base">

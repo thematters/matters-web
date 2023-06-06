@@ -77,8 +77,8 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
       <Dialog
         isOpen={show}
         onDismiss={closeDialog}
-        smBgColor="grey-lighter"
-        smUpBgColor="grey-lighter"
+        smBgColor="greyLighter"
+        smUpBgColor="greyLighter"
       >
         <Dialog.Header
           title="contentFeedEntrance"

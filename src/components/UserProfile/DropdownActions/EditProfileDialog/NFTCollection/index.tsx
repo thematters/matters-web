@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { Avatar, Form, IconChecked } from '~/components'
 import { EditProfileDialogUserPrivateFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type EditProfileDialogUserPrivateInfoCryptoWalletNft = NonNullable<
   NonNullable<
@@ -31,19 +31,17 @@ const NFTCollectionItem = ({
   return (
     <button
       type="button"
-      className="nftCollectionItem"
+      className={styles.nftCollectionItem}
       onClick={onClick}
       title={`${name}\n- ${description}`}
     >
       <Avatar size="xxxl" src={imagePreviewUrl} />
 
       {index === selectedIndex && (
-        <span className="checked">
-          <IconChecked size="md-s" color="green" />
+        <span className={styles.checked}>
+          <IconChecked size="mdS" color="green" />
         </span>
       )}
-
-      <style jsx>{styles}</style>
     </button>
   )
 }
@@ -67,7 +65,7 @@ const NFTCollection: React.FC<NFTCollectionProps> = ({ nfts, setField }) => {
       />
 
       <Form.Field.Content>
-        <ul className="nftCollection" id={fieldId}>
+        <ul className={styles.nftCollection} id={fieldId}>
           {nfts.map((nft, index) => (
             <li key={nft.id}>
               <NFTCollectionItem
@@ -81,7 +79,6 @@ const NFTCollection: React.FC<NFTCollectionProps> = ({ nfts, setField }) => {
               />
             </li>
           ))}
-          <style jsx>{styles}</style>
         </ul>
       </Form.Field.Content>
 

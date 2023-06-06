@@ -13,7 +13,7 @@ import {
 } from '~/components'
 import { UserDonationRecipientFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 interface PaymentInfoProps {
   amount: number
   currency: CURRENCY
@@ -34,8 +34,8 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
   const { lang } = useContext(LanguageContext)
   const address = recipient.info.ethAddress || ''
   return (
-    <section className="info">
-      <p className="to">
+    <section className={styles.info}>
+      <p className={styles.to}>
         <Translate
           zh_hant="你將遞出支持資金給"
           zh_hans="你将递出支持资金给"
@@ -43,13 +43,13 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
         />
       </p>
       <Avatar user={recipient} size="xxxl" />
-      <p className="recipient">{recipient.displayName}</p>
+      <p className={styles.recipient}>{recipient.displayName}</p>
       {showEthAddress && (
-        <div className="address">
+        <div className={styles.address}>
           <CopyToClipboard text={address}>
             <Button
               spacing={['xxtight', 'tight']}
-              bgColor="green-lighter"
+              bgColor="greenLighter"
               aria-label={translate({ id: 'copy', lang })}
             >
               <TextIcon
@@ -66,8 +66,8 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
         </div>
       )}
       {showLikerID && (
-        <div className="address">
-          <Button spacing={['xxtight', 'tight']} bgColor="green-lighter">
+        <div className={styles.address}>
+          <Button spacing={['xxtight', 'tight']} bgColor="greenLighter">
             <TextIcon size="xs" weight="md" color="green">
               LikeID: {recipient.liker.likerId}
             </TextIcon>
@@ -75,15 +75,13 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
         </div>
       )}
 
-      <p className="amount">
+      <p className={styles.amount}>
         <b>
           {currency} {formatAmount(amount, currency === CURRENCY.USDT ? 2 : 0)}
         </b>
       </p>
 
       {children}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

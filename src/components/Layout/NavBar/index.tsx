@@ -16,7 +16,7 @@ import {
 
 import UnreadIcon from '../UnreadIcon'
 import NavListItem from './NavListItem'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const NavBar = () => {
   const viewer = useContext(ViewerContext)
@@ -30,7 +30,7 @@ const NavBar = () => {
 
   if (!viewer.isAuthed) {
     return (
-      <section className="nav-bar" role="navigation">
+      <section className={styles.navBar} role="navigation">
         <ul>
           <NavListItem
             name={TEXT[lang].discover}
@@ -62,14 +62,12 @@ const NavBar = () => {
             }}
           />
         </ul>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
 
   return (
-    <section className="nav-bar" role="navigation">
+    <section className={styles.navBar} role="navigation">
       <ul>
         <NavListItem
           name={TEXT[lang].discover}
@@ -125,8 +123,6 @@ const NavBar = () => {
           aria-label={TEXT[lang].notifications}
         />
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

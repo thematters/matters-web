@@ -7,7 +7,7 @@ import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ArticleDigestDropdownProps = {
   article: ArticleDigestDropdownArticleFragment
@@ -56,8 +56,8 @@ export const ArticleDigestDropdown = ({
   const { articleState: state } = article
   const isBanned = state === 'banned'
   const containerClasses = classNames({
-    container: true,
-    'has-extra-button': !!extraButton,
+    [styles.container]: true,
+    [styles.hasExtraButton]: !!extraButton,
   })
   const path = toPath({
     page: 'articleDetail',
@@ -77,22 +77,22 @@ export const ArticleDigestDropdown = ({
             lineClamp={lineClamp}
           />
 
-          <section className="extra-button">{!isBanned && extraButton}</section>
+          <section className={styles.extraButton}>
+            {!isBanned && extraButton}
+          </section>
         </header>
 
-        <footer>
+        <footer className={styles.footer}>
           <UserDigest.Mini
             user={article.author}
             avatarSize="xs"
-            textSize="sm-s"
+            textSize="smS"
             hasAvatar
             hasUserName
             hasDisplayName
             disabled={cardDisabled}
           />
         </footer>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

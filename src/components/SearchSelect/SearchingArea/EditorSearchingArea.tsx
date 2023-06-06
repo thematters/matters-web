@@ -29,7 +29,7 @@ import {
 
 import SearchSelectNode from '../SearchSelectNode'
 import { StagingNode } from '../StagingArea'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import CreateTag from './CreateTag'
 import { ARTICLE_URL_QUERY, LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
 import SearchInput, {
@@ -275,7 +275,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
       />
 
       {inSearchingArea && (
-        <section className="area">
+        <section className={styles.area}>
           {searching && <Spinner />}
           {searchKey.length === 0 && !!CustomStagingArea && CustomStagingArea}
           {/* Search */}
@@ -290,7 +290,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                   hasNextPage={!!searchPageInfo?.hasNextPage}
                   loadMore={loadMore}
                 >
-                  <ul className="nodes">
+                  <ul className={styles.nodes}>
                     {canCreateTag && (
                       <li>
                         <CreateTag
@@ -326,7 +326,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                   hasNextPage={!!listPageInfo?.hasNextPage}
                   loadMore={loadMoreList}
                 >
-                  <ul className="nodes">
+                  <ul className={styles.nodes}>
                     {searchingNodes.map((node) => (
                       <li key={node.id}>
                         <SearchSelectNode
@@ -361,8 +361,6 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                 )}
             </>
           )}
-
-          <style jsx>{styles}</style>
         </section>
       )}
     </>

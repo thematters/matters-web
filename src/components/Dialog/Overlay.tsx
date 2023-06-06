@@ -1,9 +1,7 @@
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Overlay = (props: { style: React.CSSProperties }) => (
-  <div aria-hidden className="overlay" {...props}>
-    <style jsx>{styles}</style>
-  </div>
+  <div aria-hidden className={styles.overlay} {...props}></div>
 )
 
 export default Overlay

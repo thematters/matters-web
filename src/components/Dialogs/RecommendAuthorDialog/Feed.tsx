@@ -15,7 +15,7 @@ import {
 import { RecommendAuthorsQuery } from '~/gql/graphql'
 
 import { RECOMMEND_AUTHORS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FeedType = 'trendy' | 'appreciated' | 'active'
 
@@ -51,7 +51,7 @@ const Feed = ({ type }: Props) => {
 
   if (!edges || edges.length <= 0) {
     return (
-      <section className="feed">
+      <section className={styles.feed}>
         <EmptyWarning
           description={
             <Translate
@@ -65,8 +65,8 @@ const Feed = ({ type }: Props) => {
   }
 
   return (
-    <section className="feed">
-      <section className="shuffle">
+    <section className={styles.feed}>
+      <section className={styles.shuffle}>
         <ShuffleButton onClick={shuffle} />
       </section>
 
@@ -85,8 +85,6 @@ const Feed = ({ type }: Props) => {
           ))}
         </List>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

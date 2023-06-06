@@ -15,7 +15,7 @@ import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { UserDigest } from '~/components/UserDigest'
 import { DigestAppreciationFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface AppreciationProps {
   type: 'received' | 'sent'
@@ -58,16 +58,16 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
 
   return (
     <Card {...path} spacing={[0, 0]} bgActiveColor="none">
-      <section className="container">
-        <section className="left">
+      <section className={styles.container}>
+        <section className={styles.left}>
           {showContent && content && (
-            <section className="content">
+            <section className={styles.content}>
               <p>{content}</p>
             </section>
           )}
 
           {!showContent && isReceived && sender && (
-            <header className="sender">
+            <header className={styles.sender}>
               <UserDigest.Mini
                 user={sender}
                 avatarSize="xs"
@@ -100,9 +100,9 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
           )}
         </section>
 
-        <section className="right">
+        <section className={styles.right}>
           <div
-            className="num"
+            className={styles.num}
             aria-label={translate({
               zh_hant: `${amount} 次讚賞`,
               zh_hans: `${amount} 次赞赏`,
@@ -120,8 +120,6 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
             </TextIcon>
           </div>
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

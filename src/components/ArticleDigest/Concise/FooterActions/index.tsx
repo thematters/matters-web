@@ -2,7 +2,7 @@ import { BookmarkButton, DateTime } from '~/components'
 import { FooterActionsConciseArticlePublicFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FooterActionsProps = {
   article: FooterActionsConciseArticlePublicFragment
@@ -22,18 +22,16 @@ const FooterActions = ({
   const hasDate = date !== false
 
   return (
-    <footer>
-      <section className="left">
+    <footer className={styles.footer}>
+      <section className={styles.left}>
         {tag}
         {circle}
         {hasDate && <DateTime date={date || article.createdAt} />}
       </section>
 
-      <section className="right">
+      <section className={styles.right}>
         <BookmarkButton article={article} inCard={inCard} />
       </section>
-
-      <style jsx>{styles}</style>
     </footer>
   )
 }

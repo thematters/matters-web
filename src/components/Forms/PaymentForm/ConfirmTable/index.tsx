@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface RowProps {
   type?: 'balance' | 'total' | 'insufficient' | 'breaker'
@@ -15,16 +15,11 @@ const Row: React.FC<React.PropsWithChildren<RowProps>> = ({
   children,
 }) => {
   const rowClasses = classNames({
-    row: true,
-    [`${type}`]: !!type,
+    [styles.row]: true,
+    [styles[`${type}`]]: !!type,
   })
 
-  return (
-    <section className={rowClasses}>
-      {children}
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <section className={rowClasses}>{children}</section>
 }
 
 const Col: React.FC<React.PropsWithChildren<ColProps>> = ({
@@ -32,26 +27,18 @@ const Col: React.FC<React.PropsWithChildren<ColProps>> = ({
   children,
 }) => {
   const colClasses = classNames({
-    col: true,
-    [`${type}`]: !!type,
+    [styles.col]: true,
+    [styles[`${type}`]]: !!type,
   })
 
-  return (
-    <section className={colClasses}>
-      {children}
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <section className={colClasses}>{children}</section>
 }
 
 const ConfirmTable: React.FC<{ children?: React.ReactNode }> & {
   Row: typeof Row
   Col: typeof Col
 } = ({ children }) => (
-  <section className="confirm-table">
-    {children}
-    <style jsx>{styles}</style>
-  </section>
+  <section className={styles.confirmTable}>{children}</section>
 )
 
 ConfirmTable.Row = Row

@@ -1,17 +1,12 @@
 import jump from 'jump.js'
 
-import IMAGE_MIGRATION_LG from '@/public/static/images/migration-intro-lg.svg'
-import IMAGE_MIGRATION_MD from '@/public/static/images/migration-intro-md.svg'
-import IMAGE_MIGRATION_SM from '@/public/static/images/migration-intro-sm.svg'
-import IMAGE_MIGRATION_XL from '@/public/static/images/migration-intro-xl.svg'
-import IMAGE_MIGRATION_XS from '@/public/static/images/migration-intro-xs.svg'
 import { Button, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Intro = () => {
   return (
-    <section className="intro">
+    <section className={styles.intro}>
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">
@@ -53,29 +48,6 @@ const Intro = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{styles}</style>
-      <style jsx>{`
-        .intro {
-          background-image: url(${IMAGE_MIGRATION_XS});
-
-          @media (--sm-up) {
-            background-image: url(${IMAGE_MIGRATION_SM});
-          }
-
-          @media (--md-up) {
-            background-image: url(${IMAGE_MIGRATION_MD});
-          }
-
-          @media (--lg-up) {
-            background-image: url(${IMAGE_MIGRATION_LG});
-          }
-
-          @media (--xl-up) {
-            background-image: url(${IMAGE_MIGRATION_XL});
-          }
-        }
-      `}</style>
     </section>
   )
 }

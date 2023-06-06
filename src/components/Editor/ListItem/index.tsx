@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { Card, IconAdd16, IconExclaimHint } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ListItemProps = {
   title: string | React.ReactNode
@@ -12,9 +12,8 @@ type ListItemProps = {
 }
 
 const CoverIndicator = ({ cover }: { cover?: string | null }) => (
-  <span className="rect">
+  <span className={styles.rect}>
     {cover ? <img src={cover} alt="cover" /> : <IconAdd16 size="xs" />}
-    <style jsx>{styles}</style>
   </span>
 )
 
@@ -31,7 +30,6 @@ const NumberIndicator = ({
       style={{ position: 'absolute', bottom: 0, left: 0 }}
     >
       {num}
-      <style jsx>{styles}</style>
     </span>
     {withHintOverlay && num === 0 && (
       <IconExclaimHint style={{ position: 'absolute', top: 0, right: 0 }} />
@@ -44,24 +42,22 @@ const ListItem: React.FC<React.PropsWithChildren<ListItemProps>> & {
   NumberIndicator: typeof NumberIndicator
 } = ({ title, subTitle, hint, onClick, children }) => {
   const subtitleClasses = classNames({
-    subtitle: true,
-    hint: !!hint,
+    [styles.subtitle]: true,
+    [styles.hint]: !!hint,
   })
 
   return (
     <li role="listitem">
       <Card bgColor="white" spacing={[0, 0]} onClick={onClick}>
-        <section className="item">
+        <section className={styles.item}>
           <section>
-            <h3 className="title">{title}</h3>
+            <h3 className={styles.title}>{title}</h3>
             <p className={subtitleClasses}>{subTitle}</p>
           </section>
 
           {children}
         </section>
       </Card>
-
-      <style jsx>{styles}</style>
     </li>
   )
 }

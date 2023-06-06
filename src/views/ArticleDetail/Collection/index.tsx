@@ -18,7 +18,7 @@ import {
 import articleFragments from '~/components/GQL/fragments/article'
 import { ArticleDetailPublicQuery, CollectionListQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CollectionListArticle = NonNullable<
   CollectionListQuery['article'] & { __typename: 'Article' }
@@ -77,13 +77,16 @@ const Collection: React.FC<{
   }
 
   return (
-    <section className="collection" data-test-id={TEST_ID.ARTICLE_COLLECTION}>
-      <header>
+    <section
+      className={styles.collection}
+      data-test-id={TEST_ID.ARTICLE_COLLECTION}
+    >
+      <header className={styles.header}>
         <Title type="nav" is="h2">
           <Translate id="collectArticle" />
 
           <span
-            className="count"
+            className={styles.count}
             aria-label={translate({
               zh_hant: `${collectionCount} 篇關聯作品`,
               zh_hans: `${collectionCount} 篇关联作品`,
@@ -124,8 +127,6 @@ const Collection: React.FC<{
       </List>
 
       {pageInfo?.hasNextPage && <ViewMoreButton onClick={loadAll} />}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

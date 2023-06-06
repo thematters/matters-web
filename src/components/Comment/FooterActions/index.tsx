@@ -17,7 +17,7 @@ import {
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
 import DownvoteButton from './DownvoteButton'
 import ReplyButton, { ReplyButtonProps } from './ReplyButton'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import UpvoteButton from './UpvoteButton'
 
 export type FooterActionsControls = {
@@ -144,6 +144,7 @@ const BaseFooterActions = ({
 
   return (
     <footer
+      className={styles.footer}
       aria-label={translate({
         zh_hant: `${comment.upvotes} 點讚`,
         zh_hans: `${comment.upvotes} 点赞`,
@@ -151,7 +152,7 @@ const BaseFooterActions = ({
         lang,
       })}
     >
-      <section className="left">
+      <section className={styles.left}>
         {hasReply && (
           <ReplyButton
             type={type}
@@ -167,7 +168,6 @@ const BaseFooterActions = ({
       </section>
 
       {hasCreatedAt && <CreatedAt comment={comment} hasLink={hasLink} />}
-      <style jsx>{styles}</style>
     </footer>
   )
 }

@@ -15,7 +15,7 @@ import {
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 import { CreateDraftMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const EmptyAnalytics = () => {
   const router = useRouter()
@@ -32,8 +32,8 @@ const EmptyAnalytics = () => {
   })
 
   return (
-    <section className="container">
-      <section className="title">
+    <section className={styles.container}>
+      <section className={styles.title}>
         <TextIcon
           icon={<IconDonateBg24 size="md" />}
           weight="md"
@@ -43,14 +43,14 @@ const EmptyAnalytics = () => {
           <FormattedMessage defaultMessage="Top Supporters" description="" />
         </TextIcon>
       </section>
-      <section className="content">
+      <section className={styles.content}>
         <p>
           <FormattedMessage
             defaultMessage="You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!"
             description="src/views/Me/Analytics/EmptyAnalytics/index.tsx"
           />
         </p>
-        <section className="rocket">
+        <section className={styles.rocket}>
           <SupporterListRocket />
         </section>
         <Button
@@ -71,7 +71,7 @@ const EmptyAnalytics = () => {
             <FormattedMessage defaultMessage="Start Creating" description="" />
           </TextIcon>
         </Button>
-        <section className="tips">
+        <section className={styles.tips}>
           <p>
             <FormattedMessage
               defaultMessage="Want to know more? Check the "
@@ -88,8 +88,6 @@ const EmptyAnalytics = () => {
           </p>
         </section>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

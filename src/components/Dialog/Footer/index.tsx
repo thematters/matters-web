@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Button from './Button'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type FooterProps = {
   children?: React.ReactNode
@@ -9,13 +9,7 @@ type FooterProps = {
 
 const Footer: React.FC<FooterProps> & {
   Button: typeof Button
-} = ({ children }) => (
-  <footer>
-    {children}
-
-    <style jsx>{styles}</style>
-  </footer>
-)
+} = ({ children }) => <footer className={styles.footer}>{children}</footer>
 
 Footer.Button = Button
 

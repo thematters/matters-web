@@ -11,7 +11,7 @@ import {
 } from '~/components'
 import { RelatedArticlesFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface RelatedArticlesProps {
   article: RelatedArticlesFragment
@@ -45,8 +45,8 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
   }
 
   const relatedArticlesClasses = classNames({
-    relatedArticles: true,
-    inSidebar,
+    [styles.relatedArticles]: true,
+    [styles.inSidebar]: inSidebar,
   })
 
   const onClick = (i: number, id: string) => () =>
@@ -90,7 +90,6 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
             </Slides.Item>
           ))}
         </Slides>
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -107,13 +106,11 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
               titleTextSize="sm"
               onClick={onClick(i, node.id)}
               onClickAuthor={onClickAuthor(i, node.author.id)}
-              bgActiveColor="grey-lighter"
+              bgActiveColor="greyLighter"
             />
           </li>
         ))}
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

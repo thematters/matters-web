@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import PendingState from './PendingState'
 import PublishedState from './PublishedState'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   article: {
@@ -28,7 +28,7 @@ const PublishState = ({ article, cancel }: Props) => {
   }
 
   return (
-    <section className="container">
+    <section className={styles.container}>
       {isPending && (
         <PendingState
           id={article.id}
@@ -46,8 +46,6 @@ const PublishState = ({ article, cancel }: Props) => {
           newestMediaHash={mediaHash}
         />
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

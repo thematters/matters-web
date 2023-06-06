@@ -1,7 +1,7 @@
 import { featureSupportedChains } from '~/common/utils'
 import { Dialog, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CompleteProps = {
   txHash: string
@@ -15,7 +15,7 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
   return (
     <>
       <Dialog.Content>
-        <section className="content">
+        <section className={styles.content}>
           <p>
             <Translate
               zh_hans="已成功关联，稍后完成。在&nbsp;"
@@ -40,7 +40,7 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
 
       <Dialog.Footer>
         <Dialog.Footer.Button
-          bgColor="grey-lighter"
+          bgColor="greyLighter"
           textColor="black"
           onClick={() => {
             window.location.reload()
@@ -53,8 +53,6 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
           />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

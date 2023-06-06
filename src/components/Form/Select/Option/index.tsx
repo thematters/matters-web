@@ -3,7 +3,7 @@ import { forwardRef } from 'react'
 
 import { Card, CardProps, IconArrowDown16, TextIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type OptionProps = {
   id?: string
@@ -41,8 +41,8 @@ const Option: React.FC<OptionProps> = forwardRef(
     ref
   ) => {
     const nameClasses = classNames({
-      name: true,
-      [`${size}`]: !!size,
+      [styles.name]: true,
+      [styles[`${size}`]]: !!size,
     })
 
     return (
@@ -53,28 +53,26 @@ const Option: React.FC<OptionProps> = forwardRef(
           : {})}
       >
         <Card
-          bgColor={expanded ? undefined : 'grey-lighter'}
+          bgColor={expanded ? undefined : 'greyLighter'}
           {...(role === 'option' ? {} : { role: 'button' })}
           {...cardProps}
           spacing={cardProps.spacing || [0, 0]}
           ref={ref}
         >
-          <section className="container">
-            <section className="left">
+          <section className={styles.container}>
+            <section className={styles.left}>
               <h5 className={nameClasses}>{name}</h5>
-              {subtitle && <p className="subtitle">{subtitle}</p>}
-              {extra && <p className="extra">{extra}</p>}
+              {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+              {extra && <div className={styles.extra}>{extra}</div>}
             </section>
 
             {!expanded && (
-              <section className="right">
+              <section className={styles.right}>
                 <TextIcon icon={<IconArrowDown16 color="grey" />} />
               </section>
             )}
           </section>
         </Card>
-
-        <style jsx>{styles}</style>
       </li>
     )
   }

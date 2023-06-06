@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { Button, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SensitiveWallProps {
   sensitiveByAuthor: boolean
@@ -16,15 +16,15 @@ const SensitiveWall = ({
   expandAll,
 }: SensitiveWallProps) => {
   return (
-    <section className="container">
-      <p className="bg-blur-content">
+    <section className={styles.container}>
+      <p className={styles.bgBlurContent}>
         <FormattedMessage
           defaultMessage="Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress."
           description="src/views/ArticleDetail/Wall/Sensitive/index.tsx"
         />
       </p>
-      <section className="message">
-        <section className="header">
+      <section className={styles.message}>
+        <section className={styles.header}>
           <FormattedMessage
             defaultMessage="This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?"
             description="src/views/ArticleDetail/Wall/Sensitive/index.tsx"
@@ -37,13 +37,13 @@ const SensitiveWall = ({
             }}
           />
         </section>
-        <section className="content">
+        <section className={styles.content}>
           <FormattedMessage
             defaultMessage="Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress."
             description="src/views/ArticleDetail/Wall/Sensitive/index.tsx"
           />
         </section>
-        <section className="footer">
+        <section className={styles.footer}>
           <Button
             spacing={['xtight', 'base']}
             bgColor="green"
@@ -59,7 +59,6 @@ const SensitiveWall = ({
           </Button>
         </section>
       </section>
-      <style jsx>{styles}</style>
     </section>
   )
 }

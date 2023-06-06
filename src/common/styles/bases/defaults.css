@@ -1,5 +1,3 @@
-/* @styled-jsx=global */
-
 html {
   @mixin font-sans;
 
@@ -41,16 +39,11 @@ button {
 }
 
 a {
+  text-decoration: none;
+
   &:link,
   &:visited {
     color: inherit;
-    text-decoration: none;
-  }
-
-  &:hover,
-  &:active,
-  &:focus {
-    text-decoration: none;
   }
 }
 

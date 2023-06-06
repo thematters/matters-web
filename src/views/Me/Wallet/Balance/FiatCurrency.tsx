@@ -1,3 +1,5 @@
+import classNames from 'classnames'
+
 import { analytics, formatAmount } from '~/common/utils'
 import {
   AddCreditDialog,
@@ -14,7 +16,7 @@ import {
 } from '~/components'
 import { QuoteCurrency } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FiatCurrencyProps {
   balanceHKD: number
@@ -59,7 +61,7 @@ const PayoutItem = ({
 
   return (
     <Menu.Item>
-      <section className="payoutItem">
+      <section className={styles.payoutItem}>
         <TextIcon
           icon={<IconPayout24 size="md" color="grey" />}
           size="xm"
@@ -69,15 +71,13 @@ const PayoutItem = ({
           <Translate id="paymentPayout" />
         </TextIcon>
 
-        <section className="subtitle">
+        <section className={styles.subtitle}>
           <Translate
             zh_hant="餘額超過 500 HKD 即可提現"
             zh_hans="余额超过 500 HKD 即可提现"
             en="You can withdraw when your balance is over 500 HKD"
           />
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Menu.Item>
   )
@@ -90,6 +90,12 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
   currency,
   exchangeRate,
 }) => {
+  const classes = classNames({
+    [styles.assetsItem]: true,
+    assetsItem: true, // global selector for overriding
+    [styles.clickable]: true,
+  })
+
   const Content = ({
     isInDropdown,
     openAddCreditDialog,
@@ -133,14 +139,14 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
             >
               {({ openDialog, type, ref }) => (
                 <section
-                  className="assetsItem clickable"
+                  className={classes}
                   onClick={openDialog}
                   aria-haspopup={type}
                   role="button"
                   ref={ref}
                 >
                   <TextIcon
-                    icon={<IconFiatCurrency40 size="xl-m" />}
+                    icon={<IconFiatCurrency40 size="xlM" />}
                     size="md"
                     spacing="xtight"
                   >
@@ -162,7 +168,6 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                       subValue={formatAmount(balanceHKD * exchangeRate, 2)}
                     />
                   </TextIcon>
-                  <style jsx>{styles}</style>
                 </section>
               )}
             </DropdownDialog>

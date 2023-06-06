@@ -2,8 +2,9 @@ import classNames from 'classnames'
 import Link from 'next/link'
 
 import { TEST_ID } from '~/common/enums'
+import { capitalizeFirstLetter } from '~/common/utils'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface LinkWrapperProps {
   href: string
@@ -35,7 +36,10 @@ export const LinkWrapper: React.FC<
   }
 
   const linkClasses = classNames({
-    [`text-active-${textActiveColor}`]: !!textActiveColor,
+    [styles.link]: true,
+    [textActiveColor
+      ? styles[`textActive${capitalizeFirstLetter(textActiveColor)}`]
+      : '']: !!textActiveColor,
   })
 
   return (
@@ -51,8 +55,6 @@ export const LinkWrapper: React.FC<
         {...(testId ? { ['data-test-id']: testId } : {})}
       >
         {children}
-
-        <style jsx>{styles}</style>
       </a>
     </Link>
   )

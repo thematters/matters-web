@@ -1,0 +1,54 @@
+.textSizeXs {
+  font-size: var(--font-size-xs);
+}
+
+.textSizeSmS {
+  font-size: var(--font-size-sm-s);
+}
+
+.textSizeSm {
+  font-size: var(--font-size-sm);
+}
+
+.textSizeMdS {
+  font-size: var(--font-size-md-s);
+}
+
+.textSizeMd {
+  font-size: var(--font-size-md);
+}
+
+.textSizeXm {
+  font-size: var(--font-size-xm);
+}
+
+.textSizeXl {
+  font-size: var(--font-size-xl);
+}
+
+.textWeightNormal {
+  font-weight: var(--font-weight-normal);
+}
+
+.textWeightMd {
+  font-weight: var(--font-weight-medium);
+}
+
+.textWeightSemibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.lineClamp {
+  @mixin line-clamp;
+
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+}
+
+.lineClampLine1 {
+  -webkit-line-clamp: 1;
+}
+
+.lineClampLine3 {
+  -webkit-line-clamp: 3;
+}

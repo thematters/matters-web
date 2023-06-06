@@ -15,7 +15,7 @@ import {
   ViewerNotificationCircleSettingsQuery,
 } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import MyBroadcastSettings from './MyBroadcast'
 import MyDiscussionSettings from './MyDiscussion'
 import MyManageSettings from './MyManage'
@@ -119,7 +119,7 @@ const BaseNotificationSettings = ({
 
   return (
     <ResponsiveWrapper>
-      <div className="title">
+      <div className={styles.title}>
         <h2>
           {' '}
           <Translate
@@ -144,7 +144,7 @@ const BaseNotificationSettings = ({
         settings={settings}
         spacingX={spacingX}
       />
-      <div className="title">
+      <div className={styles.title}>
         <h2>
           <Translate
             zh_hans="订阅围炉"
@@ -176,7 +176,6 @@ const BaseNotificationSettings = ({
         settings={settings}
         spacingX={spacingX}
       />
-      <style jsx>{styles}</style>
     </ResponsiveWrapper>
   )
 }

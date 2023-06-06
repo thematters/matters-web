@@ -1,13 +1,13 @@
 import { analytics } from '~/common/utils'
 import { Dialog, GoogleSearchDialog, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const GoogleSearchButton = () => {
   return (
     <GoogleSearchDialog>
       {({ openDialog: openGoogleSearchDialog }) => (
-        <section className="google-search-area">
+        <section className={styles.googleSearchArea}>
           <p>
             <TextIcon size="md">
               <Translate
@@ -32,8 +32,6 @@ const GoogleSearchButton = () => {
               en="Search Matters on Google"
             />
           </Dialog.Footer.Button>
-
-          <style jsx>{styles}</style>
         </section>
       )}
     </GoogleSearchDialog>

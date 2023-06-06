@@ -24,7 +24,7 @@ import { UserTagsPublicQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
 import { USER_TAGS_PUBLIC } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const UserTags = () => {
   const { getQuery } = useRoute()
@@ -154,7 +154,7 @@ const UserTags = () => {
 
       <UserTabs />
 
-      <section className="container">
+      <section className={styles.container}>
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
           <List>
             {edges.map(({ node: tag, cursor }, i) => (
@@ -181,8 +181,6 @@ const UserTags = () => {
             ))}
           </List>
         </InfiniteScroll>
-
-        <style jsx>{styles}</style>
       </section>
     </>
   )

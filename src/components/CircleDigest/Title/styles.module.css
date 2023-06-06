@@ -1,0 +1,19 @@
+.title {
+  line-height: 1.5rem;
+}
+
+.textSizeXs {
+  font-size: var(--font-size-xs);
+}
+
+.textSizeMd {
+  font-size: var(--font-size-md);
+}
+
+.textWeightNormal {
+  font-weight: var(--font-weight-normal);
+}
+
+.textWeightMd {
+  font-weight: var(--font-weight-medium);
+}

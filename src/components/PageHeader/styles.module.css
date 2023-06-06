@@ -1,0 +1,15 @@
+.header {
+  @mixin border-bottom-grey;
+
+  padding-bottom: var(--spacing-x-tight);
+
+  &.hasNoBorder {
+    border: none;
+  }
+}
+
+.title {
+  @mixin flex-center-space-between;
+
+  flex-wrap: wrap;
+}

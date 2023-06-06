@@ -1,7 +1,0 @@
-.counts {
-  @mixin inline-flex-center-all;
-
-  & :global(> * + *) {
-    padding-left: var(--spacing-base);
-  }
-}

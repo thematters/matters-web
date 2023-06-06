@@ -1,16 +1,15 @@
 import { Layout } from '~/components'
 
 import Profile from '../Profile'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Works from './Works'
 
 const CircleWorks = () => (
   <Layout.Main>
     <Profile />
 
-    <section className="container">
+    <section className={styles.container}>
       <Works />
-      <style jsx>{styles}</style>
     </section>
   </Layout.Main>
 )

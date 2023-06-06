@@ -3,8 +3,6 @@ import { forwardRef } from 'react'
 
 import { Button, ButtonProps, TextIcon } from '~/components'
 
-import styles from './styles.css'
-
 type NavListItemProps = {
   name: React.ReactNode
   icon: React.ReactNode
@@ -30,7 +28,7 @@ const NavListItemButton = forwardRef(
   ) => {
     return (
       <Button
-        bgActiveColor="grey-lighter"
+        bgActiveColor="greyLighter"
         spacing={isMdUp ? ['xxtight', 'xtight'] : undefined}
         size={isMdUp ? undefined : ['2rem', '2rem']}
         ref={ref}
@@ -69,8 +67,6 @@ const NavListItem = forwardRef((props: NavListItemProps, ref) => {
   return (
     <li role="menuitem">
       <NavListItemButton {...props} onClick={onClick} ref={ref} />
-
-      <style jsx>{styles}</style>
     </li>
   )
 })
