@@ -38,6 +38,9 @@ const SCRIPT_SRC = [
 const STYLE_SRC = [
   "'self'",
 
+  // Next.js Assets
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
+
   // style-jsx
   "'unsafe-inline'",
 
