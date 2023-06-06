@@ -32,7 +32,6 @@ const Intro = () => {
               <section className={styles.buttons}>
                 <Button
                   bgColor="green"
-                  textColor="white"
                   spacing={['tight', 'loose']}
                   htmlHref={EXTERNAL_LINKS.MATTERS_LAB}
                   htmlTarget="_blank"

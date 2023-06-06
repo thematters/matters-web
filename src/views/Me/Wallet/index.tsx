@@ -87,10 +87,9 @@ const Wallet = () => {
               spacing={[0, 'tight']}
               size={[null, '2rem']}
               bgColor="green"
-              textColor="white"
               href={PATHS.ME_WALLET_TRANSACTIONS}
             >
-              <TextIcon weight="md">
+              <TextIcon color="white" weight="md">
                 <Translate id="paymentTransactions" />
               </TextIcon>
             </Button>
