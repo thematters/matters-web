@@ -18,6 +18,7 @@ const License: React.FC<LicenseProps> = ({ license }) => {
   const isCC0 = license === ArticleLicenseType.Cc_0
   const isARR = license === ArticleLicenseType.Arr
   const isCCBYNCND2 = license === ArticleLicenseType.CcByNcNd_2
+  const isCCBYNCND4 = license === ArticleLicenseType.CcByNcNd_4
 
   return (
     <section className={styles.license} data-test-id={TEST_ID.ARTICLE_LICENSE}>
@@ -80,6 +81,29 @@ const License: React.FC<LicenseProps> = ({ license }) => {
             zh_hant="CC BY-NC-ND 2.0 版權聲明"
             zh_hans="CC BY-NC-ND 2.0 版权声明"
             en="CC BY-NC-ND 2.0"
+          />
+        </TextIcon>
+      )}
+
+      {isCCBYNCND4 && (
+        <TextIcon
+          icon={
+            <span className={styles.icons}>
+              {withIcon(IconLicenseCC)({ size: 'md' })}
+              {withIcon(IconLicenseBY)({ size: 'md' })}
+              {withIcon(IconLicenseNC)({ size: 'md' })}
+              {withIcon(IconLicenseND)({ size: 'md' })}
+            </span>
+          }
+          color="gold"
+          size="xs"
+          weight="md"
+          spacing="xtight"
+        >
+          <Translate
+            zh_hant="CC BY-NC-ND 4.0 版權聲明"
+            zh_hans="CC BY-NC-ND 4.0 版权声明"
+            en="CC BY-NC-ND 4.0"
           />
         </TextIcon>
       )}

@@ -9,6 +9,7 @@ type OptionProps = {
   id?: string
   name: string | React.ReactNode
   subtitle?: string | React.ReactNode
+  extra?: string | React.ReactNode
 
   selected?: boolean
   expanded?: boolean
@@ -26,6 +27,7 @@ const Option: React.FC<OptionProps> = forwardRef(
       id,
       name,
       subtitle,
+      extra,
 
       selected,
       expanded,
@@ -61,6 +63,7 @@ const Option: React.FC<OptionProps> = forwardRef(
             <section className={styles.left}>
               <h5 className={nameClasses}>{name}</h5>
               {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+              {extra && <p className={styles.extra}>{extra}</p>}
             </section>
 
             {!expanded && (

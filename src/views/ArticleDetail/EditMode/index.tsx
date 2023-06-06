@@ -118,7 +118,13 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const [accessType, editAccessType] = useState<ArticleAccessType>(
     article.access.type
   )
-  const [license, editLicense] = useState<ArticleLicenseType>(article.license)
+
+  // cc2.0 is replace by cc4.0 when editting article
+  const initialLicense =
+    article.license === ArticleLicenseType.CcByNcNd_2
+      ? ArticleLicenseType.CcByNcNd_4
+      : article.license
+  const [license, editLicense] = useState<ArticleLicenseType>(initialLicense)
 
   const ownCircles = editModeArticle?.author.ownCircles
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
@@ -160,6 +166,10 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
 
   const { edit: editSupport, saving: supportSaving } =
     useEditArticleDetailSupportSetting(article)
+
+  const [contentSensitive, setContentSensitive] = useState<boolean>(
+    article.sensitiveByAuthor
+  )
 
   const [iscnPublish, setIscnPublish] = useState<boolean>(false) // always start false
 
@@ -241,6 +251,12 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     editSupportSetting: editSupport,
     supportSettingSaving: false,
     onOpenSupportSetting: () => undefined,
+
+    contentSensitive,
+    toggleContentSensitive() {
+      setContentSensitive(!contentSensitive)
+    },
+    contentSensitiveSaving: false,
 
     togglePublishISCN() {
       setIscnPublish(!iscnPublish)

@@ -43,6 +43,8 @@ const articlePublicFragment = gql`
     }
     canComment
     license
+    sensitiveByAuthor
+    sensitiveByAdmin
     requestForDonation
     replyToDonator
     drafts {

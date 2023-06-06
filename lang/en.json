@@ -383,6 +383,18 @@
     "defaultMessage": "mentioned you in broadcast comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "Vn5KLr": {
+    "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)",
+    "description": "src/components/Editor/ToggleAccess/index.tsx"
+  },
+  "s5JCCO": {
+    "defaultMessage": "This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+  },
+  "0JLcHr": {
+    "defaultMessage": "Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress.",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+  },
   "qQmSxu": {
     "defaultMessage": "Airdrop registration completed. Your NFT will be revealed on November 12. Confirm your ETH wallet address:",
     "description": "src/components/Notice/CryptoNotice/CryptoWalletAirdropNotice.tsx"

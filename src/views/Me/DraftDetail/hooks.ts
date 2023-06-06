@@ -14,6 +14,7 @@ import {
   SetDraftCollectionMutation,
   SetDraftCoverMutation,
   SetDraftPublishIscnMutation,
+  SetDraftSensitiveByAuthorMutation,
   SetDraftTagsMutation,
   SetSupportRequestReplyMutation,
 } from '~/gql/graphql'
@@ -25,6 +26,7 @@ import {
   SET_COLLECTION,
   SET_COVER,
   SET_PUBLISH_ISCN,
+  SET_SENSITIVE_BY_AUTHOR,
   SET_SUPPORT_REQUEST_REPLY,
   SET_TAGS,
 } from './gql'
@@ -124,6 +126,22 @@ export const useEditSupportSetting = (draft?: EditMetaDraftFragment) => {
         replyToDonator,
       },
     })
+  return { edit, saving }
+}
+
+export const useEditDraftSensitiveByAuthor = (draft: EditMetaDraftFragment) => {
+  const draftId = draft.id
+  const [update, { loading: saving }] =
+    useMutation<SetDraftSensitiveByAuthorMutation>(SET_SENSITIVE_BY_AUTHOR)
+
+  const edit = (sensitiveByAuthor: boolean) =>
+    update({
+      variables: {
+        id: draftId,
+        sensitiveByAuthor,
+      },
+    })
+
   return { edit, saving }
 }
 
