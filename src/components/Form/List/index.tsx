@@ -35,6 +35,7 @@ const List: React.FC<React.PropsWithChildren<ListProps>> & {
   })
 
   const listClasses = classNames({
+    [styles.list]: true,
     [styles.grey]: forceGreyStyle,
     [spacingY ? styles[`spacingY${capitalizeFirstLetter(spacingY)}`] : '']:
       !!spacingY,

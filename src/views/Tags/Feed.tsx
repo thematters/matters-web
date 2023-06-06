@@ -66,9 +66,9 @@ const Feed = ({ type }: Props) => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <ResponsiveWrapper>
-        <ul className={styles.ul}>
+        <ul className={styles.list}>
           {edges.map(({ node: tag }, i) => (
-            <li key={tag.id}>
+            <li key={tag.id} className={styles.listItem}>
               <TagDigest.Feed
                 tag={tag}
                 spacing={['xtight', 0]}

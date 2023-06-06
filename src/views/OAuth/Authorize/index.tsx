@@ -104,8 +104,8 @@ const BaseOAuthAuthorize = () => {
         <input type="hidden" name="response_type" value="code" />
 
         <section className={styles.content}>
-          <ul>
-            <li>
+          <ul className={styles.list}>
+            <li className={styles.listItem}>
               <Translate
                 zh_hant="讀取你的公開資料"
                 zh_hans="读取你的公开资料"
@@ -123,7 +123,11 @@ const BaseOAuthAuthorize = () => {
                   return null
                 }
 
-                return <li key={s}>{readableScope}</li>
+                return (
+                  <li key={s} className={styles.listItem}>
+                    {readableScope}
+                  </li>
+                )
               })}
           </ul>
 

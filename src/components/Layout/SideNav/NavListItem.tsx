@@ -3,6 +3,8 @@ import { forwardRef } from 'react'
 
 import { Button, ButtonProps, TextIcon } from '~/components'
 
+import styles from './styles.module.css'
+
 type NavListItemProps = {
   name: React.ReactNode
   icon: React.ReactNode
@@ -65,7 +67,7 @@ const NavListItem = forwardRef((props: NavListItemProps, ref) => {
   }
 
   return (
-    <li role="menuitem">
+    <li role="menuitem" className={styles.listItem}>
       <NavListItemButton {...props} onClick={onClick} ref={ref} />
     </li>
   )

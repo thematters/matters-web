@@ -15,10 +15,10 @@
     padding: var(--spacing-base);
   }
 
-  & ul {
+  & .list {
     @mixin flex-center-space-between;
 
-    & li {
+    & .listItem {
       display: inline-flex;
     }
   }

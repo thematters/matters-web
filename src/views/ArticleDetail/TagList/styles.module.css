@@ -2,14 +2,14 @@
   margin-right: calc(var(--spacing-base) * -1);
   margin-bottom: var(--spacing-base);
 
-  & ul {
+  & .list {
     @mixin hide-scrollbar;
 
     display: flex;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 
-    & li {
+    & .listItem {
       flex-shrink: 0;
       padding-right: var(--spacing-base);
     }

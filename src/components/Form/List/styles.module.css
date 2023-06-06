@@ -8,7 +8,7 @@
     color: var(--color-grey-dark);
   }
 
-  & ul {
+  & .list {
     overflow: hidden;
     user-select: none;
     -webkit-tap-highlight-color: transparent;

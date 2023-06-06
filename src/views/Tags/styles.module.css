@@ -4,7 +4,7 @@
   /* margin-top: 1px; */
 }
 
-.ul {
+.list {
   @media (--lg-up) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -12,7 +12,7 @@
     /* margin-top: calc(var(--spacing-base) * -1); */
   }
 
-  & li {
+  & .listItem {
     position: relative;
     padding: var(--spacing-x-tight) 0;
 

@@ -25,9 +25,9 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
 
   return (
     <section className={styles.tagList} data-test-id={TEST_ID.ARTICLE_TAGS}>
-      <ul>
+      <ul className={styles.list}>
         {article.tags.map((tag, i) => (
-          <li key={tag.id}>
+          <li key={tag.id} className={styles.listItem}>
             <Tag
               tag={tag}
               type="inline"

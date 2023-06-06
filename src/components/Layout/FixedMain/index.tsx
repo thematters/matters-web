@@ -39,7 +39,7 @@ const FixedMain: React.FC<FixedMainProps> = ({ children }) => {
     <div className={classes}>
       <div className="l-container full">
         <div className="l-row">
-          <div className="l-col-three-mid content">{children}</div>
+          <div className={`l-col-three-mid ${styles.content}`}>{children}</div>
         </div>
       </div>
     </div>
