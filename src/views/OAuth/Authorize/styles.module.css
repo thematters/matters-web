@@ -6,12 +6,12 @@
     padding: var(--spacing-base) var(--spacing-xxx-loose) var(--spacing-x-loose);
   }
 
-  & ul {
+  & .list {
     padding: 0 var(--spacing-x-tight) var(--spacing-x-loose);
     font-size: var(--font-size-sm);
     color: var(--color-grey-darker);
 
-    & li {
+    & .listItem {
       position: relative;
       padding: var(--spacing-x-tight) var(--spacing-x-tight);
 

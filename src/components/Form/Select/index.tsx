@@ -53,7 +53,7 @@ const Select: React.FC<SelectProps> = ({
 
   const Options = ({ dropdown }: { dropdown?: boolean }) => {
     const optionsClasses = classNames({
-      [styles.ul]: true,
+      [styles.list]: true,
       [styles.options]: true,
       [styles.dropdown]: dropdown,
     })

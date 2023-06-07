@@ -2,7 +2,6 @@ import { useApolloClient } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useContext } from 'react'
 
-import IMG_AD from '@/public/static/images/ad.svg'
 import { analytics, translate } from '~/common/utils'
 import {
   Button,
@@ -14,8 +13,6 @@ import {
 } from '~/components'
 
 import styles from './styles.module.css'
-
-const bgStyle = { backgroundImage: `url(${IMG_AD})` }
 
 interface VisitorWallProps {
   show: boolean
@@ -37,7 +34,7 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
   return (
     <section className={outerClasses}>
       <Layout.FixedMain>
-        <section className={styles.container} style={bgStyle}>
+        <section className={styles.container}>
           <h2 className={styles.slogan}>
             <Translate
               zh_hant="看不過癮？"

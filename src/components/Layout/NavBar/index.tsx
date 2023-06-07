@@ -31,7 +31,7 @@ const NavBar = () => {
   if (!viewer.isAuthed) {
     return (
       <section className={styles.navBar} role="navigation">
-        <ul>
+        <ul className={styles.list}>
           <NavListItem
             name={TEXT[lang].discover}
             icon={<IconNavHome32 size="lg" />}
@@ -40,7 +40,7 @@ const NavBar = () => {
             href={PATHS.HOME}
           />
 
-          <li role="menuitem">
+          <li role="menuitem" className={styles.listItem}>
             <UniversalAuthButton />
           </li>
 
@@ -68,7 +68,7 @@ const NavBar = () => {
 
   return (
     <section className={styles.navBar} role="navigation">
-      <ul>
+      <ul className={styles.list}>
         <NavListItem
           name={TEXT[lang].discover}
           icon={<IconNavHome32 size="lg" />}
@@ -86,7 +86,7 @@ const NavBar = () => {
         />
 
         {!isInDraftDetail && (
-          <li>
+          <li className={styles.listItem}>
             <WriteButton
               variant="navbar"
               allowed={!viewer.shouldSetupLikerID}

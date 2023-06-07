@@ -45,7 +45,7 @@ const SidebarCollection = ({
           disabled={disabled}
         >
           {collection.length > 0 && (
-            <ul className={styles.ul}>
+            <ul className={styles.list}>
               {collection.map((article) => (
                 <li key={article.id}>
                   <ArticleDigestDropdown

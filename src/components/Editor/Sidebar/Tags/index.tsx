@@ -48,7 +48,7 @@ const SidebarTags = ({
           disabled={disabled}
         >
           {tags.length > 0 && (
-            <ul className={styles.ul}>
+            <ul className={styles.list}>
               {tags.map((tag) => (
                 <li key={tag.id}>
                   <Tag

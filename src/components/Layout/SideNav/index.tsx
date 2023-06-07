@@ -73,7 +73,7 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
     (!isInNotification && isPathStartWith('/me')) || isMyProfile || isMyCircle
 
   return (
-    <ul role="menu" className={styles.ul}>
+    <ul role="menu" className={styles.list}>
       <NavListItem
         name={<FormattedMessage defaultMessage="Discover" description="" />}
         icon={<IconNavHome32 size="lg" />}
@@ -166,7 +166,7 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
         />
       </Dropdown>
 
-      <li role="menuitem">
+      <li role="menuitem" className={styles.listItem}>
         {isMdUp ? (
           <WriteButton
             variant="sidenav"
@@ -200,7 +200,7 @@ const SideNav = () => {
       <section className={styles.sideNav}>
         <Logo />
 
-        <ul role="menu" className={styles.ul}>
+        <ul role="menu" className={styles.list}>
           <Media lessThan="xl">
             <NavListItem
               name={
@@ -231,7 +231,7 @@ const SideNav = () => {
             />
           </Media>
 
-          <li role="menuitem">
+          <li role="menuitem" className={styles.listItem}>
             <UniversalAuthButton />
           </li>
         </ul>
