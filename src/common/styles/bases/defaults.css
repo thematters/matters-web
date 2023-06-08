@@ -39,12 +39,8 @@ button {
 }
 
 a {
+  color: inherit;
   text-decoration: none;
-
-  &:link,
-  &:visited {
-    color: inherit;
-  }
 }
 
 svg {

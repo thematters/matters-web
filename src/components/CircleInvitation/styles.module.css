@@ -20,7 +20,7 @@
     padding-right: 0;
   }
 
-  & span {
+  & .subtext {
     font-size: var(--font-size-xs);
   }
 

@@ -1,11 +1,9 @@
 .container {
   margin-top: var(--spacing-xx-tight);
-}
+  font-size: var(--font-size-xs);
 
-.text {
-  &:hover,
-  &:active,
-  &:focus {
-    color: var(--color-matters-green-active);
+  & a {
+    color: var(--color-matters-green);
+    text-decoration: underline;
   }
 }

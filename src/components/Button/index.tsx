@@ -49,6 +49,7 @@ type ButtonColor =
   | 'black'
   | 'halfBlack'
   | 'greyDarkest'
+  | 'greyDark'
   | 'grey'
   | 'greyLight'
   | 'greyLighter'

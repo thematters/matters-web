@@ -42,7 +42,7 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
                 zh_hans="追踪至少"
                 en="Follow at least"
               />
-              <span> 5 </span>
+              <span className={styles.num}> 5 </span>
               <Translate
                 zh_hant="位感興趣的創作者，以開啟個性化的訂閱時間線，並收到創作者最新發佈的作品和動態。"
                 zh_hans="位感兴趣的创作者，以开启个性化的订阅时间线，并收到创作者最新发布的作品和动态。"

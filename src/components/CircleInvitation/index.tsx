@@ -31,7 +31,7 @@ const CircleInvitationFailedInfo = () => (
     }
     placement="left"
   >
-    <span>
+    <span className={styles.subtext}>
       <TextIcon
         icon={<IconInfo16 />}
         color="grey"
@@ -100,7 +100,7 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
           {isFailed && <CircleInvitationFailedInfo />}
 
           {isSucceeded && (
-            <span className={styles.succeeded}>
+            <span className={[styles.subtext, styles.succeeded].join(' ')}>
               <Translate
                 zh_hant="付費訂閱中"
                 zh_hans="付费订阅中"
