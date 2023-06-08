@@ -13,7 +13,11 @@ type ListItemProps = {
 
 const CoverIndicator = ({ cover }: { cover?: string | null }) => (
   <span className={styles.rect}>
-    {cover ? <img src={cover} alt="cover" /> : <IconAdd16 size="xs" />}
+    {cover ? (
+      <img className={styles.cover} src={cover} alt="cover" />
+    ) : (
+      <IconAdd16 size="xs" />
+    )}
   </span>
 )
 
@@ -26,7 +30,7 @@ const NumberIndicator = ({
 }) => (
   <span style={{ position: 'relative', width: '2.25rem', height: '2.25rem' }}>
     <span
-      className={`rect ${num > 0 ? 'num' : ''}`}
+      className={`${styles.rect} ${num > 0 ? styles.num : ''}`}
       style={{ position: 'absolute', bottom: 0, left: 0 }}
     >
       {num}
