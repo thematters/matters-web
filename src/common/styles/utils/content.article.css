@@ -42,6 +42,7 @@
   /* Figure
    ========================================================================== */
   & figure {
+    position: relative;
     margin: var(--spacing-x-loose) 0;
     text-align: center;
 
@@ -157,8 +158,6 @@
   /* Embed
    ========================================================================== */
   & figure[class*='embed'] {
-    position: relative;
-
     & > .iframe-container {
       position: relative;
       width: 100%;
