@@ -20,7 +20,7 @@ import { KEYVALUE } from '~/common/enums'
 import { translate } from '~/common/utils'
 import { LanguageContext, withIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type BubbleMenuProps = {
   editor: Editor
@@ -107,8 +107,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
     >
       <section
         className={classNames({
-          container: true,
-          comment: isCommentEditor,
+          [styles.container]: true,
+          [styles.comment]: isCommentEditor,
         })}
       >
         {!showLinkInput && (
@@ -122,7 +122,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   editor.chain().focus().toggleHeading({ level: 2 }).run()
                 }
                 className={
-                  editor.isActive('heading', { level: 2 }) ? 'active' : ''
+                  editor.isActive('heading', { level: 2 }) ? styles.active : ''
                 }
                 title={translate({
                   zh_hant: '標題 2',
@@ -363,8 +363,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             </button>
           </>
         )}
-
-        <style jsx>{styles}</style>
       </section>
     </TipTapBubbleMenu>
   )

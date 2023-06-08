@@ -21,7 +21,7 @@ import {
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 import { CreateDraftMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 import TaskItem from './TaskItem'
 
 interface Props {
@@ -74,7 +74,7 @@ const Tasks = ({ task }: Props) => {
   return (
     <>
       {!viewer.onboardingTasks.finished && (
-        <section className="task">
+        <section className={styles.task}>
           {task === 1 && (
             <TaskItem
               order={
@@ -223,7 +223,7 @@ const Tasks = ({ task }: Props) => {
           <>
             <hr />
 
-            <section className="share">
+            <section className={styles.share}>
               <EmbedShare
                 title={`${viewer.displayName} 已完成新手導航`}
                 path={`${sharePath}?${URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key}=${URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.value}`}
@@ -239,8 +239,6 @@ const Tasks = ({ task }: Props) => {
           </>
         )}
       </section>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

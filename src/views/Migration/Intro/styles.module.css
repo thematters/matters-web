@@ -1,0 +1,38 @@
+.intro {
+  @mixin flex-center-all;
+
+  height: 100vh;
+  padding-top: var(--global-header-height);
+  text-align: center;
+  background-color: var(--color-green-lighter);
+  background-image: url('/static/images/migration-intro-xs.svg');
+
+  & p {
+    padding: var(--spacing-x-loose) 0;
+    color: var(--color-grey-darker);
+  }
+}
+
+@media (--sm-up) {
+  .intro {
+    background-image: url('/static/images/migration-intro-sm.svg');
+  }
+}
+
+@media (--md-up) {
+  .intro {
+    background-image: url('/static/images/migration-intro-md.svg');
+  }
+}
+
+@media (--lg-up) {
+  .intro {
+    background-image: url('/static/images/migration-intro-lg.svg');
+  }
+}
+
+@media (--xl-up) {
+  .intro {
+    background-image: url('/static/images/migration-intro-xl.svg');
+  }
+}

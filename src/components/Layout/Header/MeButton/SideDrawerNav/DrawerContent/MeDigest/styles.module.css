@@ -1,0 +1,22 @@
+.meDigest {
+  padding: 0 var(--spacing-base);
+}
+
+.header {
+  @mixin flex-center-start;
+}
+
+.names {
+  margin-left: var(--spacing-x-tight);
+
+  & .displayName {
+    font-size: var(--font-size-lg);
+    line-height: 1.5rem;
+  }
+
+  & .username {
+    font-size: var(--font-size-md);
+    line-height: 1.5rem;
+    color: var(--color-grey-dark);
+  }
+}

@@ -22,7 +22,7 @@ import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle
 
 interface SubscribeProps {
   articleId?: string
-  size?: Extract<IconSize, 'md-s'>
+  size?: Extract<IconSize, 'mdS'>
   disabled?: boolean
   inCard?: boolean
 }
@@ -75,7 +75,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
+      bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       aria-label={translate({
         zh_hant: '收藏',
         zh_hans: '收藏',

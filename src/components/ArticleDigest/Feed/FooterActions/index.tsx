@@ -12,7 +12,7 @@ import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
 import DonationCount from './DonationCount'
 import { fragments } from './gql'
 import ReadTime from './ReadTime'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FooterActionsControls = DropdownActionsControls
 
@@ -25,8 +25,8 @@ const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
   const hasDate = date !== false
 
   return (
-    <footer>
-      <section className="left">
+    <footer className={styles.footer}>
+      <section className={styles.left}>
         <ReadTime article={article} />
 
         <DonationCount article={article} />
@@ -49,12 +49,10 @@ const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
         )}
       </section>
 
-      <section className="right">
+      <section className={styles.right}>
         <BookmarkButton article={article} inCard={controls.inCard} />
         <DropdownActions article={article} {...controls} />
       </section>
-
-      <style jsx>{styles}</style>
     </footer>
   )
 }

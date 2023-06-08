@@ -1,6 +1,6 @@
 import contentHash from '@ensdomains/content-hash'
-import { namehash } from '@ethersproject/hash'
 import { Fragment, useContext, useEffect, useState } from 'react'
+import { namehash } from 'viem/ens'
 import {
   useAccount,
   useContractWrite,
@@ -9,6 +9,7 @@ import {
   useEnsResolver,
   usePrepareContractWrite,
 } from 'wagmi'
+import { waitForTransaction } from 'wagmi/actions'
 
 import {
   analytics,
@@ -32,7 +33,7 @@ import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 import ENSDescription from './ENSDescription'
 import LinkENSIntro from './LinkENSIntro'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface LinkENSProps {
   user: UserProfileUserPublicQuery['user']
@@ -61,7 +62,7 @@ const LinkENS = ({
     address: viewer.info.ethAddress as `0x${string}`,
     chainId: targetNetwork.id,
   })
-  const { data: resolverData } = useEnsResolver({
+  const { data: resolverAddress } = useEnsResolver({
     name: ensName as string,
     chainId: targetNetwork.id,
   })
@@ -69,7 +70,7 @@ const LinkENS = ({
   const [txConfirming, setTxConfirming] = useState<boolean>(false)
   const ipnsHash = user?.info.ipnsKey
   const { config, error } = usePrepareContractWrite({
-    address: resolverData?.address as `0x${string}` | undefined,
+    account: resolverAddress,
     abi: PublicResolverABI,
     functionName: 'setContenthash',
     args: [
@@ -87,7 +88,7 @@ const LinkENS = ({
     if (setContenthash) {
       const tx = await setContenthash()
       setTxConfirming(true)
-      await tx.wait()
+      await waitForTransaction({ hash: tx.hash })
       setTxConfirming(false)
       switchToComplete(tx.hash)
       analytics.trackEvent('click_button', {
@@ -111,7 +112,7 @@ const LinkENS = ({
     return (
       <Fragment key="network">
         <Dialog.Content>
-          <section className="content">
+          <section className={styles.content}>
             {isSwitchingNetwork ? (
               <p>
                 <Translate
@@ -137,8 +138,6 @@ const LinkENS = ({
         </Dialog.Footer>
 
         <ENSDescription />
-
-        <style jsx>{styles}</style>
       </Fragment>
     )
   }
@@ -150,10 +149,10 @@ const LinkENS = ({
     return (
       <Fragment key="reconnect">
         <Dialog.Content>
-          <section className="content">
+          <section className={styles.content}>
             <LinkENSIntro ensName={ensName} />
 
-            <p className="error">
+            <p className={styles.error}>
               <Translate id="reconnectHint" />
               <CopyToClipboard text={viewer.info.ethAddress || ''}>
                 <Button
@@ -190,8 +189,6 @@ const LinkENS = ({
         </Dialog.Footer>
 
         <ENSDescription />
-
-        <style jsx>{styles}</style>
       </Fragment>
     )
   }
@@ -202,11 +199,11 @@ const LinkENS = ({
   return (
     <Fragment key="link">
       <Dialog.Content>
-        <section className="content">
+        <section className={styles.content}>
           <LinkENSIntro ensName={ensName} />
 
           {(isError || error) && (
-            <p className="error">
+            <p className={styles.error}>
               <Translate
                 zh_hans="未知错误，请确认你的钱包并重新尝试"
                 zh_hant="未知錯誤，請確認你的錢包並重新嘗試"
@@ -227,8 +224,6 @@ const LinkENS = ({
       </Dialog.Footer>
 
       <ENSDescription />
-
-      <style jsx>{styles}</style>
     </Fragment>
   )
 }

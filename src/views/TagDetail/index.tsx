@@ -46,7 +46,7 @@ import {
 } from './gql'
 import Owner from './Owner'
 import RelatedTags from './RelatedTags'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const DynamicCommunity = dynamic(() => import('./Community'), {
   ssr: false,
@@ -125,7 +125,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         right={
           <>
             <span />
-            <section className="buttons">
+            <section className={styles.buttons}>
               <ShareButton
                 title={title}
                 tags={title.endsWith(tag.content) ? undefined : keywords}
@@ -146,7 +146,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         // title={`#${normalizeTag(tag.content)}`}
         // description={tag.description}
         title={title}
-        path={path.href}
+        path={qsType ? `${path.href}?type=${qsType}` : path.href}
         description={description}
         keywords={keywords} // add top10 most using author names?
         image={
@@ -169,11 +169,11 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
 
       <TagCover tag={tag} />
 
-      <section className="info">
+      <section className={styles.info}>
         {features.NOTICE_TAG_ADOPTION && <Owner tag={tag} />}
 
-        <section className="top">
-          <section className="statistics">
+        <section className={styles.top}>
+          <section className={styles.statistics}>
             <Followers tag={tag} />
             <ArticlesCount tag={tag} />
           </section>
@@ -186,9 +186,9 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         {tag.description && (
           <Expandable
             content={tag.description}
-            color="grey-darker"
+            color="greyDarker"
             spacingTop="base"
-            size="md-s"
+            size="mdS"
           >
             <p>{tag.description}</p>
           </Expandable>
@@ -223,8 +223,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
       )}
 
       {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
-
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

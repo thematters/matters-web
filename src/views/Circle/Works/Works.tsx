@@ -142,7 +142,7 @@ const CircleDetailWorks = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="works">
+      <section>
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
           <List responsiveWrapper>
             {(edges || []).map(({ node, cursor }, i) => (

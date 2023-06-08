@@ -136,7 +136,7 @@ const BaseDropdownDialog = ({
 
           <Dialog.Footer>
             <Dialog.Footer.Button
-              bgColor="grey-lighter"
+              bgColor="greyLighter"
               textColor="black"
               onClick={closeDialog}
             >

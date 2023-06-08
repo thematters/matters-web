@@ -9,7 +9,7 @@ import {
   TextIconProps,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ViewMoreCardProps = {
   iconProps?: IconProps
@@ -27,8 +27,8 @@ export const ViewMoreCard: React.FC<
   ...cardProps
 }) => {
   const viewMoreCardClasses = classNames({
-    viewMoreCard: true,
-    [`${textAlign}`]: !!textAlign,
+    [styles.viewMoreCard]: true,
+    [styles[textAlign]]: !!textAlign,
   })
 
   return (
@@ -49,8 +49,6 @@ export const ViewMoreCard: React.FC<
           {children}
         </TextIcon>
       </Card>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

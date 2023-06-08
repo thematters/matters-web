@@ -9,7 +9,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Tips = () => {
   const viewer = useContext(ViewerContext)
@@ -17,12 +17,12 @@ const Tips = () => {
   const { address } = useAccount()
   const { data: balanceUSDTData } = useBalanceUSDT({})
 
-  const isZeroBalance = balanceUSDTData?.value.lte(0)
+  const isZeroBalance = balanceUSDTData?.value && balanceUSDTData?.value < 0n
   const hasEthAddress = !!viewer.info.ethAddress
 
   if (!hasEthAddress) {
     return (
-      <section className="tips">
+      <section className={styles.tips}>
         <p>
           <Translate
             zh_hant="剛接觸加密錢包？參考 "
@@ -39,13 +39,11 @@ const Tips = () => {
           </a>
           <Translate zh_hant="" zh_hans="" en="." />
         </p>
-
-        <style jsx>{styles}</style>
       </section>
     )
   } else if (address && isZeroBalance) {
     return (
-      <section className="tips">
+      <section className={styles.tips}>
         <p>
           <Translate
             zh_hant="USDT 餘額不正確？參考 "
@@ -62,13 +60,11 @@ const Tips = () => {
           </a>
           <Translate zh_hant="" zh_hans="" en="." />
         </p>
-
-        <style jsx>{styles}</style>
       </section>
     )
   } else {
     return (
-      <section className="tips">
+      <section className={styles.tips}>
         <p>
           <Translate
             zh_hant="如何讓支持更順利？參考 "
@@ -85,8 +81,6 @@ const Tips = () => {
           </a>
           <Translate zh_hant="" zh_hans="" en="." />
         </p>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }

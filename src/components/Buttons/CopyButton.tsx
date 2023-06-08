@@ -19,7 +19,7 @@ export const CopyButton: React.FC<
       <CopyToClipboard text={text}>
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="grey-lighter"
+          bgActiveColor="greyLighter"
           aria-label={translate({ id: 'copy', lang })}
         >
           <IconCopy16 color="grey" />

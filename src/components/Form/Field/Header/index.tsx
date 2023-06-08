@@ -1,6 +1,6 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface HeaderProps {
   label?: string | React.ReactNode
@@ -22,14 +22,12 @@ const Header: React.FC<HeaderProps> = ({
   }
 
   const Inner = () => (
-    <header>
+    <header className={styles.header}>
       <label htmlFor={htmlFor} {...(labelId ? { id: labelId } : {})}>
         {label}
       </label>
 
       {extraButton}
-
-      <style jsx>{styles}</style>
     </header>
   )
 

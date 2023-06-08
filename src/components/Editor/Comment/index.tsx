@@ -2,13 +2,12 @@ import { useApolloClient } from '@apollo/react-hooks'
 import { EditorContent, useCommentEditor } from '@matters/matters-editor'
 import { useContext } from 'react'
 
-import editorStyles from '~/common/styles/utils/content.comment.css'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
 import { BubbleMenu } from '../Article/BubbleMenu'
 import { makeMentionSuggestion } from '../Article/extensions'
-import globalStyles from './styles.global.css'
+import styles from './styles.module.css'
 
 interface Props {
   content: string
@@ -38,15 +37,10 @@ const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
   })
 
   return (
-    <div className="commentEditor">
+    <div className={styles.commentEditor}>
       {editor && <BubbleMenu editor={editor} isCommentEditor />}
 
       <EditorContent editor={editor} />
-
-      <style jsx>{editorStyles}</style>
-      <style jsx global>
-        {globalStyles}
-      </style>
     </div>
   )
 }

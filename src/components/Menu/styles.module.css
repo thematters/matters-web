@@ -1,0 +1,17 @@
+.menu {
+  width: 100%;
+  text-align: left;
+}
+
+.widthSm {
+  min-width: var(--sizing-menu-sm);
+}
+
+.widthMd {
+  width: var(--sizing-menu-md);
+}
+
+.spacingYXtight {
+  padding-top: var(--spacing-x-tight);
+  padding-bottom: var(--spacing-x-tight);
+}

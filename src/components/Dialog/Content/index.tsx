@@ -1,6 +1,8 @@
 import classNames from 'classnames'
 
-import styles from './styles.css'
+import { capitalizeFirstLetter } from '@/src/common/utils'
+
+import styles from './styles.module.css'
 
 type SpacingX = 0 | 'tight' | 'base' | 'xloose'
 type SpacingY = 0 | 'tight' | 'base' | 'xloose'
@@ -20,20 +22,14 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> = ({
   children,
 }) => {
   const contentClasses = classNames({
-    content: true,
-    'has-fixed': !!hasFixed,
-    'has-grow': !!hasGrow,
-    [`spacing-y-${spacing[0]}`]: true,
-    [`spacing-x-${spacing[1]}`]: true,
+    [styles.content]: true,
+    [styles.hasFixed]: !!hasFixed,
+    [styles.hasGrow]: !!hasGrow,
+    [styles[`spacingY${capitalizeFirstLetter(spacing[0] + '')}`]]: true,
+    [styles[`spacingX${capitalizeFirstLetter(spacing[1] + '')}`]]: true,
   })
 
-  return (
-    <section className={contentClasses}>
-      {children}
-
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <section className={contentClasses}>{children}</section>
 }
 
 export default DialogContent

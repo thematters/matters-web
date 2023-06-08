@@ -4,7 +4,7 @@ import { GUIDE_LINKS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import { Button, LanguageContext, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type SetAmountBalanceProps = {
   currency: CURRENCY
@@ -30,8 +30,8 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
   const isLike = currency === CURRENCY.LIKE
 
   return (
-    <section className="set-amount-balance">
-      <span className="left">
+    <section className={styles.setAmountBalance}>
+      <span className={styles.left}>
         <Translate zh_hant="餘額 " zh_hans="余额 " en="Balance " />
         {isUSDT && <span>{formatAmount(balanceUSDT)} USDT</span>}
         {isHKD && <span>{formatAmount(balanceHKD)} HKD</span>}
@@ -60,7 +60,7 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
       )}
       {isUSDT && balanceUSDT <= 0 && (
         <a href={GUIDE_LINKS.payment[lang]} target="_blank" rel="noreferrer">
-          <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+          <TextIcon size="xs" textDecoration="underline" color="greyDark">
             <Translate
               zh_hant="如何移轉資金到 Polygon？"
               zh_hans="如何移转资金到 Polygon？"
@@ -69,8 +69,6 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
           </TextIcon>
         </a>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

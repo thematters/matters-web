@@ -13,7 +13,7 @@ const NoticeUserCard = ({ user }: { user: NoticeUserCardFragment | null }) => {
       user={user}
       spacing={['base', 'base']}
       borderRadius="xtight"
-      bgColor="grey-lighter"
+      bgColor="greyLighter"
       hasState={false}
     />
   )

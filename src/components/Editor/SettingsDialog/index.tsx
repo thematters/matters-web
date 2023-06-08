@@ -91,6 +91,10 @@ const BaseEditorSettingsDialog = ({
   editSupportSetting,
   supportSettingSaving,
 
+  contentSensitive,
+  toggleContentSensitive,
+  contentSensitiveSaving,
+
   iscnPublish,
   togglePublishISCN,
   iscnPublishSaving,
@@ -144,6 +148,9 @@ const BaseEditorSettingsDialog = ({
     accessType,
     license,
     canToggleCircle,
+    contentSensitive,
+    toggleContentSensitive,
+    contentSensitiveSaving,
     iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,

@@ -6,7 +6,7 @@ import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
 import { KEYVALUE } from '~/common/enums'
-import { dom } from '~/common/utils'
+import { capitalizeFirstLetter, dom } from '~/common/utils'
 import { Media, useOutsideClick } from '~/components'
 
 import Content from './Content'
@@ -16,8 +16,7 @@ import Header from './Header'
 import Lazy from './Lazy'
 import Message from './Message'
 import Overlay from './Overlay'
-import styles from './styles.css'
-import globalStyles from './styles.global.css'
+import styles from './styles.module.css'
 
 export interface DialogOverlayProps {
   isOpen: boolean | undefined
@@ -27,8 +26,8 @@ export interface DialogOverlayProps {
 
 export type DialogProps = {
   size?: 'sm' | 'lg'
-  smBgColor?: 'grey-lighter'
-  smUpBgColor?: 'grey-lighter'
+  smBgColor?: 'greyLighter'
+  smUpBgColor?: 'greyLighter'
   fixedHeight?: boolean
   hidePaddingBottom?: boolean
 
@@ -57,12 +56,14 @@ const Container: React.FC<
   const node: React.RefObject<any> | null = useRef(null)
 
   const containerClasses = classNames({
-    container: true,
-    'fixed-height': !!fixedHeight,
-    [size]: true,
-    [`bg-${smBgColor}`]: !!smBgColor,
-    [`bg-${smUpBgColor}-sm-up`]: !!smUpBgColor,
-    ['hide-padding-bottom']: !!hidePaddingBottom,
+    [styles.container]: true,
+    [styles.fixedHeight]: !!fixedHeight,
+    [styles[size]]: true,
+    [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
+      !!smBgColor,
+    [smUpBgColor ? styles[`bg${capitalizeFirstLetter(smUpBgColor)}SmUp`] : '']:
+      !!smUpBgColor,
+    [styles.hidePaddingBottom]: !!hidePaddingBottom,
   })
 
   const closeTopDialog = () => {
@@ -107,8 +108,6 @@ const Container: React.FC<
         <Media at="sm">
           <Handle closeDialog={onDismiss} {...bind()} />
         </Media>
-
-        <style jsx>{styles}</style>
       </div>
     </div>
   )
@@ -182,10 +181,6 @@ export const Dialog: React.ComponentType<
           />
         </DialogContent>
       </AnimatedDialogOverlay>
-
-      <style jsx global>
-        {globalStyles}
-      </style>
     </>
   )
 }

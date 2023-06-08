@@ -1,5 +1,3 @@
-/* @styled-jsx=global */
-
 /* Layouts
    ========================================================================== */
 @define-mixin flex-center-all {
@@ -219,10 +217,10 @@
   & :global(.field) {
     margin-right: 0;
     margin-left: 0;
+  }
 
-    & :global(.input-container) {
-      margin: 0;
-    }
+  & :global(.inputContainer) {
+    margin: 0;
   }
 }
 
@@ -244,7 +242,7 @@
   & .left {
     color: var(--color-grey-dark);
 
-    & :global(> * + *) {
+    & > * + * {
       margin-left: var(--spacing-base);
     }
   }
@@ -252,7 +250,7 @@
   & .right {
     color: var(--color-black);
 
-    & :global(> * + *) {
+    & > * + * {
       margin-left: var(--spacing-base);
     }
   }

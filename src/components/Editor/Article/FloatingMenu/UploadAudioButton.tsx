@@ -18,7 +18,7 @@ import {
   withIcon,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type UploadAudioButtonProps = {
   editor: Editor
@@ -117,7 +117,7 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
   }
 
   const labelClasses = classNames({
-    'upload-button': true,
+    [styles.uploadButton]: true,
     'u-area-disable': uploading,
   })
 
@@ -133,7 +133,7 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
       })}
     >
       {!uploading && withIcon(IconEditorMenuAudio)({ size: 'lg' })}
-      {uploading && <IconSpinner16 size="lg" color="grey-light" />}
+      {uploading && <IconSpinner16 size="lg" color="greyLight" />}
 
       <VisuallyHidden>
         <input
@@ -152,8 +152,6 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
           onChange={handleChange}
         />
       </VisuallyHidden>
-
-      <style jsx>{styles}</style>
     </label>
   )
 }

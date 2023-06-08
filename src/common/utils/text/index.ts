@@ -20,3 +20,7 @@ export const normalizeName = (name: string) => {
   // remove non-English and numbers characters except '_'
   return lower.replace(/[^a-z0-9_]/g, '')
 }
+
+export const capitalizeFirstLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}

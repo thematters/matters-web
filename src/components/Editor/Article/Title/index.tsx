@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   defaultValue?: string
@@ -22,7 +22,10 @@ const EditorTitle: React.FC<Props> = ({
   update,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const classes = classNames('editor-title', readOnly ? 'u-area-disable' : '')
+  const classes = classNames(
+    [styles.editorTitle],
+    readOnly ? 'u-area-disable' : ''
+  )
 
   const [value, setValue] = React.useState(defaultValue)
 
@@ -62,8 +65,6 @@ const EditorTitle: React.FC<Props> = ({
           })
         )}
       />
-
-      <style jsx>{styles}</style>
     </header>
   )
 }

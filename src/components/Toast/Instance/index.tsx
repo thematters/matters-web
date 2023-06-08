@@ -6,7 +6,7 @@ import { REMOVE_TOAST, TOAST_DURATION } from '~/common/enums'
 import { sleep } from '~/common/utils'
 import { Button, IconClear16 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * Toast instance.
@@ -42,17 +42,17 @@ export const ToastInstance = ({
   ...restProps
 }: ToastInstanceProps) => {
   const mainClasses = classNames({
-    toast: true,
-    [buttonPlacement]: buttonPlacement,
-    [color]: !!color,
-    'center-x': !customButton,
+    [styles.toast]: true,
+    [styles[buttonPlacement]]: buttonPlacement,
+    [styles[color]]: !!color,
+    [styles.centerX]: !customButton,
   })
   const alertType = color === 'red' ? 'assertive' : 'polite'
 
   return (
     <section>
       {clearable && (
-        <div className="clearButton">
+        <div className={styles.clearButton}>
           <Button size={['2rem', '2rem']} onClick={onClick}>
             <IconClear16 size="lg" />
           </Button>
@@ -62,7 +62,7 @@ export const ToastInstance = ({
         <section>
           <Alert type={alertType}>
             {content && (
-              <p className="content">
+              <p className={styles.content}>
                 {content}
                 {switchContent && (
                   <span onClick={onClick}>{switchContent}</span>
@@ -70,16 +70,15 @@ export const ToastInstance = ({
               </p>
             )}
             {subDescription && (
-              <p className="sub-description">{subDescription}</p>
+              <p className={styles.subDescription}>{subDescription}</p>
             )}
           </Alert>
         </section>
 
         {customButton && (
-          <section className="custom-button">{customButton}</section>
+          <section className={styles.customButton}>{customButton}</section>
         )}
       </section>
-      <style jsx>{styles}</style>
     </section>
   )
 }

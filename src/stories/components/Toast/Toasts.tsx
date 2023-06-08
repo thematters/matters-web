@@ -4,16 +4,18 @@ import { ADD_TOAST } from '~/common/enums'
 import { Button, TextIcon, Toast, Translate } from '~/components'
 import ViewSuperLikeButton from '~/views/ArticleDetail/AppreciationButton/ViewSuperLikeButton'
 
+import styles from './styles.module.css'
+
 const Toasts = () => (
   <section>
     {/* Fixed */}
-    <h3>Fixed Toasts</h3>
-    <div className="area">
+    <h3 className={styles.h3}>Fixed Toasts</h3>
+    <div className={styles.area}>
       <p>triggered toast will be showing here</p>
     </div>
     <Toast.Container />
 
-    <section className="buttons">
+    <section className={styles.buttons}>
       <Button
         spacing={['xtight', 'xtight']}
         bgColor="red"
@@ -38,7 +40,7 @@ const Toasts = () => (
 
       <Button
         spacing={['xtight', 'xtight']}
-        bgColor="green-lighter"
+        bgColor="greenLighter"
         onClick={() => {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
@@ -55,7 +57,7 @@ const Toasts = () => (
 
       <Button
         spacing={['xtight', 'xtight']}
-        bgColor="green-lighter"
+        bgColor="greenLighter"
         onClick={() => {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
@@ -80,7 +82,7 @@ const Toasts = () => (
     </section>
 
     {/* Static */}
-    <h3>Static Toasts</h3>
+    <h3 className={styles.h3}>Static Toasts</h3>
     <Toast.Instance
       color="green"
       content={<Translate id="publishing" />}
@@ -109,36 +111,6 @@ const Toasts = () => (
         />
       }
     />
-
-    <style jsx>{`
-      .area {
-        @mixin flex-center-all;
-
-        height: 12rem;
-        width: 100%;
-        border: 2px dashed var(--color-grey-light);
-        border-radius: var(--spacing-base);
-        color: var(--color-grey);
-        background: var(--color-grey-lighter);
-        text-align: center;
-      }
-
-      .buttons {
-        margin-top: var(--spacing-x-tight);
-
-        & :global(> *) {
-          margin-bottom: var(--spacing-base);
-        }
-
-        & :global(> * + *) {
-          margin-left: var(--spacing-x-tight);
-        }
-      }
-
-      h3 {
-        margin-bottom: var(--spacing-x-tight);
-      }
-    `}</style>
   </section>
 )
 

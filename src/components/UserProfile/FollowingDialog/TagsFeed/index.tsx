@@ -115,7 +115,7 @@ const TagsFeed = () => {
               tag={node}
               spacing={['tight', 'base']}
               bgColor="none"
-              bgActiveColor="grey-lighter"
+              bgActiveColor="greyLighter"
               hasDesc
               hasFollow
             />

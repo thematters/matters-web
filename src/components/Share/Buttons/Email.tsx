@@ -30,7 +30,7 @@ const Email = ({
       return (window.location.href = shareUrl)
     }}
   >
-    {circle && withIcon(IconShareEmailCircle)({ size: 'xl-m' })}
+    {circle && withIcon(IconShareEmailCircle)({ size: 'xlM' })}
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareEmail)({})} spacing="base">

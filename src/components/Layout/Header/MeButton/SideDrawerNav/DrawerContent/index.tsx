@@ -7,7 +7,7 @@ import { Button, LanguageContext, Menu, useOutsideClick } from '~/components'
 
 import NavMenu from '../../../../NavMenu'
 import MeDigest from './MeDigest'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface DrawerContentProps {
   style: React.CSSProperties
@@ -33,6 +33,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
 
   return (
     <nav
+      className={styles.nav}
       ref={node}
       {...props}
       onKeyDown={(event) => {
@@ -50,18 +51,17 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
         />
       </VisuallyHidden>
 
-      <header>
+      <header className={styles.header}>
         <MeDigest />
 
         <Menu.Divider spacing="loose" />
         <NavMenu.Top isInSideDrawerNav />
       </header>
 
-      <footer>
+      <footer className={styles.footer}>
         <Menu.Divider spacing="loose" />
         <NavMenu.Bottom isInSideDrawerNav />
       </footer>
-      <style jsx>{styles}</style>
     </nav>
   )
 }

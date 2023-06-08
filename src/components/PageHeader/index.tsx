@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { Title } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface PageHeaderProps {
   title: string | React.ReactNode
@@ -19,20 +19,19 @@ export const PageHeader: React.FC<React.PropsWithChildren<PageHeaderProps>> = ({
   children,
 }) => {
   const headerClasses = classNames({
-    hasNoBorder: !!hasNoBorder,
+    [styles.header]: true,
+    [styles.hasNoBorder]: !!hasNoBorder,
   })
 
   return (
     <header className={headerClasses}>
-      <section className="title">
+      <section className={styles.title}>
         <Title type="nav" is={is}>
           {title}
         </Title>
 
         {children}
       </section>
-
-      <style jsx>{styles}</style>
     </header>
   )
 }

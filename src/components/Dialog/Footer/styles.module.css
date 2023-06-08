@@ -1,0 +1,17 @@
+.footer {
+  @mixin flex-center-space-between;
+  @mixin safe-area-botttom;
+
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: var(--spacing-base);
+
+  & > * {
+    flex: 1;
+    width: 100%;
+  }
+
+  & > * + * {
+    margin-top: var(--spacing-base);
+  }
+}

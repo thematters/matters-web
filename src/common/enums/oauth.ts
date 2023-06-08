@@ -69,8 +69,8 @@ export const OAUTH_SCOPE_TREE = {
       },
       wallet: {
         _t: {
-          zh_hant: '錢包餘額、交易紀錄等',
-          zh_hans: '钱包余额、交易纪录等',
+          zh_hant: '錢包餘額、交易記錄等',
+          zh_hans: '钱包余额、交易记录等',
         },
       },
       notices: {

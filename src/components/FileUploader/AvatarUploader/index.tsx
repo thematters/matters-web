@@ -24,7 +24,7 @@ import {
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { SingleFileUploadMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type AvatarUploaderProps = {
   onUpload: (assetId: string) => void
@@ -119,8 +119,9 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   const isCircle = type === 'circle'
   const labelClasses = classNames({
-    'has-border': hasBorder,
-    circle: isCircle,
+    [styles.label]: true,
+    [styles.hasBorder]: hasBorder,
+    [styles.circle]: isCircle,
   })
 
   return (
@@ -128,7 +129,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
       {!isCircle && <Avatar size="xxxl" {...avatarProps} src={avatar} />}
       {isCircle && <CircleAvatar size="xxxl" {...avatarProps} src={avatar} />}
 
-      <div className="mask">
+      <div className={styles.mask}>
         {loading ? <Spinner /> : <IconCamera24 color="white" size="lg" />}
       </div>
 
@@ -148,8 +149,6 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
           onChange={handleChange}
         />
       </VisuallyHidden>
-
-      <style jsx>{styles}</style>
     </label>
   )
 }

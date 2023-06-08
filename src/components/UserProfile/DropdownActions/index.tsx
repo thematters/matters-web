@@ -150,7 +150,7 @@ const BaseDropdownActions = ({
     >
       {({ openDialog, type, ref }) => (
         <Button
-          bgColor="half-black"
+          bgColor="halfBlack"
           aria-label={intl.formatMessage({
             defaultMessage: 'More Actions',
             description: '',

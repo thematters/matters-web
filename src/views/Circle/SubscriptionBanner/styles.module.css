@@ -1,0 +1,22 @@
+.subscriptionBanner {
+  @mixin flex-center-all;
+  @mixin transition;
+
+  height: 3rem;
+  margin: var(--spacing-base) var(--spacing-base) var(--spacing-loose);
+  font-size: var(--font-size-md);
+  color: var(--color-white);
+  background: var(--color-matters-gold);
+  border-radius: var(--spacing-x-tight);
+  transition-property: background-color;
+
+  &:hover,
+  &:focus {
+    background: var(--color-matters-gold-active);
+  }
+
+  @media (--sm-up) {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

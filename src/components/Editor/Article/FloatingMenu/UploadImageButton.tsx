@@ -18,7 +18,7 @@ import {
   withIcon,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type UploadImageButtonProps = {
   editor: Editor
@@ -99,7 +99,7 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
   }
 
   const labelClasses = classNames({
-    'upload-button': true,
+    [styles.uploadButton]: true,
     'u-area-disable': uploading,
   })
 
@@ -115,7 +115,7 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
       })}
     >
       {!uploading && withIcon(IconEditorMenuImage)({ size: 'lg' })}
-      {uploading && <IconSpinner16 size="lg" color="grey-light" />}
+      {uploading && <IconSpinner16 size="lg" color="greyLight" />}
 
       <VisuallyHidden>
         <input
@@ -134,8 +134,6 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
           onChange={handleChange}
         />
       </VisuallyHidden>
-
-      <style jsx>{styles}</style>
     </label>
   )
 }

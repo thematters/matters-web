@@ -1,0 +1,21 @@
+.relatedTags {
+  border-top: 1px dashed var(--color-grey-lighter);
+  border-bottom: 1px dashed var(--color-grey-lighter);
+
+  & :global(.list-item > .card) {
+    margin: 0 calc(var(--spacing-x-tight) * -1);
+  }
+}
+
+.inSidebar {
+  border-top-width: 0;
+  border-bottom-width: 0;
+}
+
+.right {
+  @mixin flex-center-all;
+
+  & > * + * {
+    margin-left: var(--spacing-base);
+  }
+}

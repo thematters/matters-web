@@ -22,7 +22,7 @@ const Complete: React.FC<CompleteProps> = ({ circle }) => {
       <Dialog.Footer>
         <Dialog.Footer.Button
           textColor="black"
-          bgColor="grey-lighter"
+          bgColor="greyLighter"
           htmlHref={toPath({ page: 'circleDetail', circle }).href}
         >
           <Translate zh_hant="馬上逛逛" zh_hans="马上逛逛" />

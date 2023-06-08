@@ -2,7 +2,7 @@ import { toPath } from '~/common/utils'
 import { Card, IconDonate24, TextIcon, UserDigest } from '~/components'
 import { MeAnalyticsQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SupporterDigestFeedProps {
   user: NonNullable<
@@ -24,30 +24,29 @@ const SupporterDigestFeed = ({
   })
   return (
     <Card {...path} spacing={[0, 0]} bgActiveColor="none">
-      <section className="container">
-        <span className="number">{index + 1}</span>
-        <section className="supporter">
+      <section className={styles.container}>
+        <span className={styles.number}>{index + 1}</span>
+        <section className={styles.supporter}>
           <UserDigest.Mini
             user={user}
             hasAvatar
             avatarSize="md"
             hasDisplayName
-            textSize="md-s"
+            textSize="mdS"
             textWeight="md"
           />
 
-          <section className="count">
+          <section className={styles.count}>
             <TextIcon
               icon={<IconDonate24 size="xs" />}
               size="xs"
-              color="grey-dark"
+              color="greyDark"
             >
               {donationCount}
             </TextIcon>
           </section>
         </section>
       </section>
-      <style jsx>{styles}</style>
     </Card>
   )
 }

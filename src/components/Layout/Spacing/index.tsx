@@ -1,11 +1,7 @@
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Spacing: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
-  <section>
-    {children}
-
-    <style jsx>{styles}</style>
-  </section>
+  <section className={styles.spacing}>{children}</section>
 )
 
 export default Spacing

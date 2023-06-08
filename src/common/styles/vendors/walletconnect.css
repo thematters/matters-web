@@ -1,0 +1,3 @@
+body {
+  --w3m-z-index: var(--z-index-wallet-connect-modal);
+}

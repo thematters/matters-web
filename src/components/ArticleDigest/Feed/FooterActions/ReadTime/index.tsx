@@ -25,7 +25,7 @@ const ReadTime = ({ article }: ResponseCountProps) => {
         <TextIcon
           icon={<IconReadTimeTotal16 size="xs" />}
           size="xs"
-          color="grey-dark"
+          color="greyDark"
         >
           {numAbbr(readHour, 1)}{' '}
           <Translate zh_hant="小時" zh_hans="小时" en="hours" />

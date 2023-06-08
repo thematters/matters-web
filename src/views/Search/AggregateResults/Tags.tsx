@@ -19,7 +19,7 @@ import { SearchAggregateTagsPublicQuery } from '~/gql/graphql'
 
 import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_TAGS_PUBLIC } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const AggregateTagResults = () => {
   const { getQuery } = useRoute()
@@ -94,7 +94,7 @@ const AggregateTagResults = () => {
   }
 
   return (
-    <section className="aggregate-section">
+    <section className={styles.aggregateSection}>
       <InfiniteScroll
         hasNextPage={
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
@@ -133,7 +133,6 @@ const AggregateTagResults = () => {
       {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
         <EndOfResults />
       )}
-      <style jsx>{styles}</style>
     </section>
   )
 }

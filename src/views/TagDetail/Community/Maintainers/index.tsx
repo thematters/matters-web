@@ -13,7 +13,7 @@ import {
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 import { TagMaintainersQuery } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface Props {
   id: string
@@ -72,7 +72,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
     <>
       {tag.owner && (
         <>
-          <section className="category">
+          <section className={styles.category}>
             <section>
               <FormattedMessage defaultMessage="Maintainer" description="" />
             </section>
@@ -94,10 +94,10 @@ const Maintainers = ({ id, isOwner }: Props) => {
 
       {isHavingEditors && (
         <>
-          <section className="category">
+          <section className={styles.category}>
             <section>
               <FormattedMessage defaultMessage="collaborators" description="" />
-              <span className="count">({editors.length})</span>
+              <span className={styles.count}>({editors.length})</span>
             </section>
           </section>
           <ul>
@@ -113,7 +113,6 @@ const Maintainers = ({ id, isOwner }: Props) => {
           </ul>
         </>
       )}
-      <style jsx>{styles}</style>
     </>
   )
 }

@@ -1,0 +1,12 @@
+.sideDrawerNav[data-reach-dialog-overlay] {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-index-over-bottom-bar);
+  overflow: hidden;
+}
+
+.sideDrawerNav [data-reach-dialog-content] {
+  position: absolute;
+  inset: 0;
+  outline: none;
+}

@@ -4,7 +4,7 @@ import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
 import { Dialog, Translate, useMutation, useRoute } from '~/components'
 import { PublishArticleMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface ConfirmPublishDialogContentProps {
   onBack: () => void
@@ -48,9 +48,9 @@ const ConfirmPublishDialogContent: React.FC<
       />
 
       <Dialog.Message align="left" type="info">
-        <section className="image-container">
+        <section className={styles.imageContainer}>
           <div
-            className="image"
+            className={styles.image}
             style={{ backgroundImage: `url(${PUBLISH_IMAGE})` }}
           />
         </section>
@@ -93,8 +93,6 @@ const ConfirmPublishDialogContent: React.FC<
           </li>
         </ul>
       </Dialog.Message>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

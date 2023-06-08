@@ -3,7 +3,6 @@ import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useContext } from 'react'
 
-import editorStyles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 import { EditorDraftFragment } from '~/gql/graphql'
@@ -15,7 +14,7 @@ import {
   makeMentionSuggestion,
 } from './extensions'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
-import globalStyles from './styles.global.css'
+import styles from './styles.module.css'
 import EditorSummary from './Summary'
 import EditorTitle from './Title'
 
@@ -82,8 +81,8 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
   return (
     <div
       className={classNames({
-        articleEditor: true,
-        revisedMode: isReviseMode,
+        [styles.articleEditor]: true,
+        [styles.revisedMode]: isReviseMode,
       })}
     >
       <EditorTitle
@@ -103,11 +102,6 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
       {editor && <FloatingMenu editor={editor} upload={upload} />}
 
       <EditorContent editor={editor} />
-
-      <style jsx>{editorStyles}</style>
-      <style jsx global>
-        {globalStyles}
-      </style>
     </div>
   )
 }

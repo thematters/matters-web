@@ -1,0 +1,33 @@
+.container {
+  @mixin flex-center-space-between;
+
+  & .left,
+  & .right {
+    @mixin inline-flex-center-all;
+
+    & > * + * {
+      padding-left: var(--spacing-loose);
+    }
+  }
+
+  & .left {
+    & .title {
+      @mixin line-clamp;
+
+      -webkit-line-clamp: 2;
+    }
+  }
+}
+
+.deleteButton {
+  color: var(--color-grey);
+
+  &:hover,
+  &:focus {
+    color: var(--color-red);
+  }
+
+  & svg {
+    @mixin transition;
+  }
+}

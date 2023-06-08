@@ -22,7 +22,7 @@ import { GatewaysQuery, RetryEditArticleMutation } from '~/gql/graphql'
 
 import ArticleSecret from './ArticleSecret'
 import SectionCard from './SectionCard'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const EDIT_ARTICLE = gql`
   mutation RetryEditArticle($id: ID!, $iscnPublish: Boolean) {
@@ -114,7 +114,7 @@ const FingerprintDialogContent = ({
 
   return (
     <Dialog.Content hasGrow>
-      <section className="container">
+      <section className={styles.container}>
         <SectionCard
           title={
             <TextIcon
@@ -138,8 +138,8 @@ const FingerprintDialogContent = ({
           <Spacer size="base" />
 
           {/* gateways */}
-          <section className="gateways">
-            <h4 className="title">
+          <section className={styles.gateways}>
+            <h4 className={styles.title}>
               <Translate
                 zh_hans="公共节点"
                 zh_hant="公共節點"
@@ -147,7 +147,7 @@ const FingerprintDialogContent = ({
               />
             </h4>
 
-            <p className="description">
+            <p className={styles.description}>
               <Translate
                 zh_hans="內容分佈節點，可以複製以下地址對作品進行傳播"
                 zh_hant="內容分佈節點，可以複製以下地址對作品進行傳播"
@@ -171,7 +171,7 @@ const FingerprintDialogContent = ({
                       href={gatewayUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="gateway-url"
+                      className={styles.gatewayUrl}
                     >
                       {hostname}
                       <IconExternalLink16 />
@@ -190,12 +190,12 @@ const FingerprintDialogContent = ({
           <Spacer size="base" />
 
           {/* hash */}
-          <section className="hash">
-            <h4 className="title">
+          <section className={styles.hash}>
+            <h4 className={styles.title}>
               <Translate id="articleFingerprint" />
             </h4>
 
-            <p className="description">
+            <p className={styles.description}>
               <Translate
                 zh_hant="使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
                 zh_hans="使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
@@ -203,7 +203,7 @@ const FingerprintDialogContent = ({
               />
             </p>
 
-            <section className="copy">
+            <section className={styles.copy}>
               <input
                 type="text"
                 value={dataHash || translate({ id: 'waitingForHash', lang })}
@@ -250,7 +250,7 @@ const FingerprintDialogContent = ({
             right={
               iscnId ? (
                 <a href={iscnLinkUrl(iscnId)} target="_blank" rel="noreferrer">
-                  <IconExternalLink16 color="grey-darker" />
+                  <IconExternalLink16 color="greyDarker" />
                 </a>
               ) : isAuthor ? (
                 <Button
@@ -271,7 +271,7 @@ const FingerprintDialogContent = ({
                     pooling(Date.now())
                   }}
                 >
-                  <TextIcon size="sm-s">
+                  <TextIcon size="smS">
                     {timeCooling ? (
                       <Translate id="publishing2" />
                     ) : retryPublishing ? (
@@ -287,8 +287,6 @@ const FingerprintDialogContent = ({
             }
           />
         )}
-
-        <style jsx>{styles}</style>
       </section>
     </Dialog.Content>
   )

@@ -130,7 +130,7 @@ const BaseMeHistory = () => {
               spacing={['xtight', 'base']}
               onClick={handlerClear}
             >
-              <TextIcon color="white" size="md-s" weight="md">
+              <TextIcon color="white" size="mdS" weight="md">
                 <Translate id="clear" />
               </TextIcon>
             </Button>

@@ -4,10 +4,11 @@ import throttle from 'lodash/throttle'
 import { useContext, useEffect, useRef, useState } from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import styles from '~/common/styles/utils/content.article.css'
 import { captureClicks, initAudioPlayers, optimizeEmbed } from '~/common/utils'
 import { useMutation, ViewerContext } from '~/components'
 import { ContentArticleFragment, ReadArticleMutation } from '~/gql/graphql'
+
+import styles from './styles.module.css'
 
 const READ_ARTICLE = gql`
   mutation ReadArticle($id: ID!) {
@@ -109,7 +110,10 @@ const Content = ({
   return (
     <>
       <div
-        className={classNames({ 'u-content': true, translating })}
+        className={classNames({
+          'u-content': true,
+          [styles.translating]: translating,
+        })}
         dangerouslySetInnerHTML={{
           __html: optimizeEmbed(content),
         }}
@@ -117,8 +121,6 @@ const Content = ({
         ref={contentContainer}
         data-test-id={TEST_ID.ARTICLE_CONTENT}
       />
-
-      <style jsx>{styles}</style>
     </>
   )
 }

@@ -15,7 +15,7 @@ const DonationCount = ({ article }: DonationCountProps) => {
 
   return (
     <>
-      <TextIcon icon={<IconDonate24 size="xs" />} size="xs" color="grey-dark">
+      <TextIcon icon={<IconDonate24 size="xs" />} size="xs" color="greyDark">
         {article.transactionsReceivedBy.totalCount > 0
           ? numAbbr(article.transactionsReceivedBy.totalCount)
           : undefined}

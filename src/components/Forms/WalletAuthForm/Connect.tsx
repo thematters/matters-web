@@ -46,7 +46,7 @@ import {
 } from '~/gql/graphql'
 
 import { ETH_ADDRESS_USER, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -66,8 +66,8 @@ interface FormValues {
 
 const ImportantNotice = ({ isInDialog }: { isInDialog: boolean }) => {
   const containeClasses = classNames({
-    notice: true,
-    inDialog: !!isInDialog,
+    [styles.notice]: true,
+    [styles.inDialog]: !!isInDialog,
   })
   return (
     <section className={containeClasses}>
@@ -90,8 +90,6 @@ const ImportantNotice = ({ isInDialog }: { isInDialog: boolean }) => {
           description="src/components/Forms/WalletAuthForm/Connect.tsx"
         />
       </p>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }
@@ -288,16 +286,16 @@ const Connect: React.FC<FormProps> = ({
   })
 
   const msgClasses = classNames({
-    'connect-msg': true,
-    isInDialog,
+    [styles.connectMsg]: true,
+    [styles.isInDialog]: isInDialog,
   })
 
   const subtitleClasses = classNames({
-    subtitle: true,
-    isInDialog,
+    [styles.subtitle]: true,
+    [styles.isInDialog]: isInDialog,
   })
 
-  const containerClasses = classNames({ container: !!isInPage })
+  const containerClasses = classNames({ [styles.container]: !!isInPage })
 
   const InnerForm = (
     <section className={containerClasses}>
@@ -327,7 +325,7 @@ const Connect: React.FC<FormProps> = ({
         </section>
 
         {isSignUp && (
-          <div className="divider">
+          <div className={styles.divider}>
             <hr />
           </div>
         )}
@@ -440,7 +438,6 @@ const Connect: React.FC<FormProps> = ({
 
         {isSignUp && <ImportantNotice isInDialog={isInDialog} />}
       </Form>
-      <style jsx>{styles}</style>
     </section>
   )
 

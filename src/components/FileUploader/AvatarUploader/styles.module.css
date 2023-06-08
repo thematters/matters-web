@@ -1,0 +1,24 @@
+.label {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
+
+  &.hasBorder {
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--color-white);
+  }
+}
+
+.mask {
+  @mixin expand-to-container;
+  @mixin flex-center-all;
+
+  background: rgb(0 0 0 / 50%);
+  border-radius: 50%;
+}
+
+.circle {
+  & .mask {
+    border-radius: 1.5rem;
+  }
+}

@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   index: number
@@ -9,7 +9,11 @@ interface Props {
 }
 
 const Dot = ({ index, scroll, selected }: Props) => {
-  const dotClasses = classnames({ dot: true, selected })
+  const dotClasses = classnames({
+    [styles.dot]: true,
+    [styles.selected]: selected,
+  })
+
   return (
     <>
       <div
@@ -18,7 +22,6 @@ const Dot = ({ index, scroll, selected }: Props) => {
         aria-label={`${index + 1}`}
         onClick={() => scroll(index)}
       />
-      <style jsx>{styles}</style>
     </>
   )
 }

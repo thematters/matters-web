@@ -89,7 +89,7 @@ const DownvoteButton = ({
     return (
       <Button
         spacing={['xtight', 'xtight']}
-        bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
+        bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
         onClick={() => {
           onClick ? onClick() : unvote()
         }}
@@ -111,7 +111,7 @@ const DownvoteButton = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
+      bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       onClick={() => {
         onClick ? onClick() : downvote()
       }}

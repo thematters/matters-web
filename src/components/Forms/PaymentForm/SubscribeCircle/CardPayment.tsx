@@ -29,7 +29,6 @@ import { SUBSCRIBE_CIRCLE } from './gql'
 import Head from './Head'
 import Hint from './Hint'
 import Processing from './Processing'
-import styles from './styles.css'
 
 interface CardPaymentProps {
   circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
@@ -171,8 +170,6 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
           <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

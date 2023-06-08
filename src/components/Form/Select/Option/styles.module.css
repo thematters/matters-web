@@ -1,0 +1,42 @@
+.container {
+  @mixin flex-start-space-between;
+
+  padding: var(--spacing-base);
+}
+
+.name {
+  font-weight: var(--font-weight-normal);
+  line-height: 1rem;
+
+  &.sm {
+    font-size: var(--font-size-sm);
+  }
+
+  &.md {
+    font-size: var(--font-size-md);
+  }
+}
+
+[aria-selected='true'] .name {
+  font-weight: var(--font-weight-medium);
+}
+
+[aria-selected='false'] .name {
+  font-weight: var(--font-weight-normal);
+}
+
+.subtitle {
+  margin-top: var(--spacing-xx-tight);
+  font-size: var(--font-size-xs);
+  line-height: 1.125rem;
+  color: var(--color-grey);
+}
+
+.left {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.right {
+  display: inline-flex;
+}

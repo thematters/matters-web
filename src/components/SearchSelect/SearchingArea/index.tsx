@@ -26,7 +26,7 @@ import {
 } from '~/gql/graphql'
 
 import SearchSelectNode from '../SearchSelectNode'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import CreateTag from './CreateTag'
 import { LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
 import InviteEmail from './InviteEmail'
@@ -270,7 +270,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
       />
 
       {inSearchingArea && (
-        <section className="area">
+        <section className={styles.area}>
           {searching && <Spinner />}
 
           {/* Search */}
@@ -288,7 +288,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
                 hasNextPage={!!searchPageInfo?.hasNextPage}
                 loadMore={loadMore}
               >
-                <ul className="nodes">
+                <ul className={styles.nodes}>
                   {canCreateTag && (
                     <li>
                       <CreateTag
@@ -326,7 +326,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
               hasNextPage={!!listPageInfo?.hasNextPage}
               loadMore={loadMoreList}
             >
-              <ul className="nodes">
+              <ul className={styles.nodes}>
                 {searchingNodes.map((node) => (
                   <li key={node.id}>
                     <SearchSelectNode node={node} onClick={addNodeToStaging} />
@@ -335,8 +335,6 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
               </ul>
             </InfiniteScroll>
           )}
-
-          <style jsx>{styles}</style>
         </section>
       )}
     </>

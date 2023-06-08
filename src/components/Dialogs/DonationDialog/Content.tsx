@@ -2,13 +2,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import {
-  Dialog,
-  Spinner,
-  Translate,
-  ViewerContext,
-  WagmiProvider,
-} from '~/components'
+import { Dialog, Spinner, Translate, ViewerContext } from '~/components'
 import { PayToMutation } from '~/gql/graphql'
 
 import { BaseDonationDialogProps, Step } from './types'
@@ -149,7 +143,7 @@ const DonationDialogContent = ({
   const isSetPaymentPassword = currStep === 'setPaymentPassword'
 
   return (
-    <WagmiProvider>
+    <>
       {!isProcessing && !isWalletSelect && (
         <Dialog.Header
           closeDialog={closeDialog}
@@ -280,7 +274,7 @@ const DonationDialogContent = ({
           closeDialog={closeDialog}
         />
       )}
-    </WagmiProvider>
+    </>
   )
 }
 

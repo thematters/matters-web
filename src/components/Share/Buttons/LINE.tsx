@@ -28,7 +28,7 @@ const LINE = ({
       return window.open(shareUrl, 'Share to Line')
     }}
   >
-    {circle && withIcon(IconShareLINECircle)({ size: 'xl-m' })}
+    {circle && withIcon(IconShareLINECircle)({ size: 'xlM' })}
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareLINE)({})} spacing="base">

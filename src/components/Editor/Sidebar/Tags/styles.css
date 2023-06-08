@@ -1,8 +1,0 @@
-ul {
-  padding: 0 0 0 var(--spacing-base);
-
-  & li {
-    display: inline-block;
-    padding: var(--spacing-base) var(--spacing-base) 0 0;
-  }
-}

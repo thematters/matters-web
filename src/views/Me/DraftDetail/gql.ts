@@ -34,6 +34,7 @@ export const editMetaFragment = gql`
     license
     requestForDonation
     replyToDonator
+    sensitiveByAuthor
     iscnPublish
     canComment
   }
@@ -164,6 +165,16 @@ export const SET_SUPPORT_REQUEST_REPLY = gql`
       replyToDonator
     }
   }
+`
+
+export const SET_SENSITIVE_BY_AUTHOR = gql`
+  mutation SetDraftSensitiveByAuthor($id: ID!, $sensitiveByAuthor: Boolean) {
+    putDraft(input: { id: $id, sensitive: $sensitiveByAuthor }) {
+      id
+      ...EditMetaDraft
+    }
+  }
+  ${editMetaFragment}
 `
 
 export const SET_PUBLISH_ISCN = gql`

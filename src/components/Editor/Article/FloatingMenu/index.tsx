@@ -13,7 +13,7 @@ import { ReactComponent as IconEditorMenuVideo } from '@/public/static/icons/32p
 import { translate } from '~/common/utils'
 import { LanguageContext, withIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 import UploadAudioButton from './UploadAudioButton'
 import UploadImageButton, { UploadImageButtonProps } from './UploadImageButton'
 
@@ -29,8 +29,8 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
   const [expand, setExpand] = useState(false)
 
   const containerClasses = classNames({
-    container: true,
-    expanded: expand,
+    [styles.container]: true,
+    [styles.expanded]: expand,
   })
 
   return (
@@ -73,7 +73,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
     >
       <section className={containerClasses}>
         <button
-          className="expand-button"
+          className={styles.expandButton}
           type="button"
           onClick={() => setExpand(!expand)}
           aria-label={translate({
@@ -86,7 +86,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
         </button>
 
         {expand && (
-          <div className="menu-items">
+          <div className={styles.menuItems}>
             <UploadImageButton editor={editor} upload={upload} />
 
             <button
@@ -203,8 +203,6 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
             </button>
           </div>
         )}
-
-        <style jsx>{styles}</style>
       </section>
     </TipTapFloatingMenu>
   )

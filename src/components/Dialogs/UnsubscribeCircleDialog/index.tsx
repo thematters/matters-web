@@ -68,7 +68,7 @@ const BaseUnsubscribeCircleDialog = ({
 
           {!isUnsubscribed && (
             <Dialog.Footer.Button
-              bgColor="grey-lighter"
+              bgColor="greyLighter"
               textColor="black"
               onClick={closeDialog}
             >
@@ -78,7 +78,7 @@ const BaseUnsubscribeCircleDialog = ({
 
           {isUnsubscribed && (
             <Dialog.Footer.Button
-              bgColor="grey-lighter"
+              bgColor="greyLighter"
               textColor="black"
               onClick={closeDialog}
             >

@@ -2,14 +2,11 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
-import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
-import IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING from '@/public/static/icons/civic-liker-architect-ring.svg'
-import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 import LOGBOOK from '@/public/static/images/logbook.gif'
 import { IconLogbookBadge16, ResponsiveImage } from '~/components'
 import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
 
@@ -60,10 +57,11 @@ export const Avatar = (props: AvatarProps) => {
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasLogbook = !!user?.info?.cryptoWallet?.hasNFTs
   const avatarClasses = classNames({
-    avatar: true,
-    [size]: true,
-    hasRing: isCivicLiker || hasArchitectBadge,
-    hasBadge: hasLogbook,
+    [styles.avatar]: true,
+    avatar: true, // global selector for overwirting
+    [styles[size]]: true,
+    [styles.hasRing]: isCivicLiker || hasArchitectBadge,
+    [styles.hasBadge]: hasLogbook,
   })
 
   return (
@@ -75,37 +73,27 @@ export const Avatar = (props: AvatarProps) => {
       />
 
       {isCivicLiker && !hasArchitectBadge && (
-        <span className="civic-liker ring" />
+        <span className={[styles.ring, styles.civicLiker].join(' ')} />
       )}
       {hasArchitectBadge && !isCivicLiker && (
-        <span className="architect ring" />
+        <span className={[styles.ring, styles.architect].join(' ')} />
       )}
       {hasArchitectBadge && isCivicLiker && (
-        <span className="civic-architect ring" />
+        <span className={[styles.ring, styles.civicRrchitect].join(' ')} />
       )}
       {hasLogbook && (
-        <section className="badge">
+        <section className={styles.badge}>
           {inProfile ? (
-            <img className="logbook" src={LOGBOOK.src} alt="logbook icon" />
+            <img
+              className={styles.logbook}
+              src={LOGBOOK.src}
+              alt="logbook icon"
+            />
           ) : (
             <IconLogbookBadge16 />
           )}
         </section>
       )}
-
-      <style jsx>{styles}</style>
-
-      <style jsx>{`
-        .civic-liker.ring {
-          background-image: url(${IMAGE_CIVIC_LIKER_RING});
-        }
-        .architect.ring {
-          background-image: url(${IMAGE_MATTERS_ARCHITECT_RING});
-        }
-        .civic-architect.ring {
-          background-image: url(${IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING});
-        }
-      `}</style>
     </div>
   )
 }

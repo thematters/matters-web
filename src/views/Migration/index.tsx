@@ -11,13 +11,13 @@ import Banner from './Banner'
 import Features from './Features'
 import Intro from './Intro'
 import Steps from './Steps'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Migration = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
-    <main>
+    <main className={styles.main}>
       <Head
         title={translate({
           zh_hant: '三個步驟，立即搬家到 Matters',
@@ -33,11 +33,11 @@ const Migration = () => {
         })}
       />
 
-      <header className="l-container">
+      <header className={`l-container ${styles.header}`}>
         <div className="l-row">
           <div className="l-col-full">
             <Link href={PATHS.HOME} legacyBehavior>
-              <a className="logo">
+              <a className={styles.logo}>
                 <VisuallyHidden>
                   <span>{translate({ id: 'discover', lang })}</span>
                 </VisuallyHidden>
@@ -53,8 +53,6 @@ const Migration = () => {
       <Features />
       <Banner />
       <Footer />
-
-      <style jsx>{styles}</style>
     </main>
   )
 }

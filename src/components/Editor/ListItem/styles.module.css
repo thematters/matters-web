@@ -1,0 +1,57 @@
+.item {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-base);
+  line-height: 1;
+
+  & .title {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    line-height: 1rem;
+  }
+
+  & .subtitle {
+    margin-top: var(--spacing-x-tight);
+    font-size: var(--font-size-xs);
+    line-height: 1rem;
+    color: var(--color-matters-gold);
+
+    &.hint {
+      color: var(--color-grey);
+    }
+  }
+
+  &:hover,
+  &:focus {
+    & .rect {
+      background: var(--color-grey-light);
+    }
+  }
+}
+
+.indicator {
+  @mixin inline-flex-center-all;
+
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-darker);
+  background: var(--color-grey-lighter);
+  border-radius: var(--spacing-x-tight);
+  transition: background 0.2s ease-in-out;
+
+  &.num {
+    color: var(--color-black);
+  }
+
+  & .cover {
+    @mixin object-fit-cover;
+  }
+}
+
+.hintOverlay {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+}
