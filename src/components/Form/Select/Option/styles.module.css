@@ -2,7 +2,6 @@
   @mixin flex-start-space-between;
 
   padding: var(--spacing-base);
-  line-height: 1;
 }
 
 .name {
@@ -29,7 +28,7 @@
 .subtitle {
   margin-top: var(--spacing-xx-tight);
   font-size: var(--font-size-xs);
-  line-height: 1rem;
+  line-height: 1.125rem;
   color: var(--color-grey);
 }
 

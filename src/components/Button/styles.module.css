@@ -33,10 +33,6 @@ span.container {
   color: var(--color-grey);
 }
 
-.textGreyDark {
-  color: var(--color-grey-dark);
-}
-
 .textActiveWhite {
   &:hover,
   &:focus {
