@@ -12,7 +12,7 @@ type ListItemProps = {
 }
 
 const CoverIndicator = ({ cover }: { cover?: string | null }) => (
-  <span className={styles.rect}>
+  <span className={styles.indicator}>
     {cover ? (
       <img className={styles.cover} src={cover} alt="cover" />
     ) : (
@@ -28,15 +28,12 @@ const NumberIndicator = ({
   num: number
   withHintOverlay?: boolean
 }) => (
-  <span style={{ position: 'relative', width: '2.25rem', height: '2.25rem' }}>
-    <span
-      className={`${styles.rect} ${num > 0 ? styles.num : ''}`}
-      style={{ position: 'absolute', bottom: 0, left: 0 }}
-    >
-      {num}
-    </span>
+  <span className={`${styles.indicator} ${num > 0 ? styles.num : ''}`}>
+    {num}
     {withHintOverlay && num === 0 && (
-      <IconExclaimHint style={{ position: 'absolute', top: 0, right: 0 }} />
+      <span className={styles.hintOverlay}>
+        <IconExclaimHint />
+      </span>
     )}
   </span>
 )
