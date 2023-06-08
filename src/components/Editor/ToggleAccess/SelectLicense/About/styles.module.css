@@ -1,11 +1,3 @@
 .container {
   margin-top: var(--spacing-xx-tight);
 }
-
-.text {
-  &:hover,
-  &:active,
-  &:focus {
-    color: var(--color-matters-green-active);
-  }
-}

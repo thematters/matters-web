@@ -5,16 +5,20 @@ import styles from './styles.module.css'
 const About = ({ desc, url }: { desc: string; url: string }) => {
   return (
     <section className={styles.container}>
-      <Button htmlHref={url} htmlTarget="_blank">
+      <Button
+        htmlHref={url}
+        htmlTarget="_blank"
+        textColor="greyDark"
+        textActiveColor="green"
+      >
         <TextIcon
           size="xs"
-          spacing="xxxtight"
+          spacing="xxtight"
           weight="normal"
-          color="greyDark"
           textPlacement="left"
-          icon={<IconExternalLink16 color="grey" size="xs" />}
+          icon={<IconExternalLink16 size="xs" />}
         >
-          <span className={styles.text}>{desc}</span>
+          {desc}
         </TextIcon>
       </Button>
     </section>
