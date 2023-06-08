@@ -16,7 +16,7 @@
   font-weight: var(--font-weight-subtext);
   line-height: var(--line-height-subtext);
 
-  & span {
+  & .edited {
     margin-right: var(--spacing-xx-tight);
     color: var(--color-grey);
   }

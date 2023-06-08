@@ -30,6 +30,7 @@ const Period = ({ freePeriod, acceptedAt, state }: PeriodProps) => {
   const isAccepted = state === 'accepted'
 
   const classes = classNames({
+    [styles.subtext]: true,
     [styles.period]: true,
     [styles.marginRight]: isPending,
   })

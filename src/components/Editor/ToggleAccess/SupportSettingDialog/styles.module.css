@@ -22,7 +22,7 @@
   background: var(--color-yellow-lighter);
   border-radius: 1.25rem;
 
-  & span {
+  & .content {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-normal);
     line-height: 1.5rem;

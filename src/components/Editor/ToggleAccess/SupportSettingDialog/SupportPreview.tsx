@@ -21,7 +21,7 @@ const SupportPreview = ({
   const viewer = useContext(ViewerContext)
   return (
     <section className={styles.donation}>
-      <span>
+      <span className={styles.content}>
         {!content &&
           (tabType === 'request' ? (
             <Translate id="supportRequestDescription" />

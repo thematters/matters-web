@@ -41,7 +41,7 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
                 zh_hans="挑选至少"
                 en="Follow at least"
               />
-              <span> 5 </span>
+              <span className={styles.num}> 5 </span>
               <Translate
                 zh_hant="個標籤，追蹤後可以收到標籤內新作品的動態，以及標籤相關的推薦內容。"
                 zh_hans="个标签，追踪后可以收到标签内新作品的动态，以及标签相关的推荐内容。"

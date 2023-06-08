@@ -28,7 +28,7 @@ const MetaInfo = ({
       <section className={styles.time}>
         <DateTime date={article.createdAt} />
         {article.revisedAt && (
-          <span>
+          <span className={styles.edited}>
             <Translate
               zh_hant="（編輯過）"
               zh_hans="（编辑过）"
