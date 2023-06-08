@@ -10,7 +10,7 @@ import { CircleFollowerAnalyticsQuery } from '~/gql/graphql'
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
 import { CIRCLE_FOLLOWER_ANALYTICS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Content = () => {
   const { getQuery } = useRoute()
@@ -105,7 +105,7 @@ const Content = () => {
       </InfoTiles>
 
       {chartData && (
-        <section className="chart">
+        <section className={styles.chart}>
           <StackedAreaChart data={chartData}>
             {(props) => (
               <>
@@ -131,15 +131,13 @@ const Content = () => {
           </StackedAreaChart>
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }
 
 const FollowerAnalytics = () => {
   return (
-    <section className="container">
+    <section className={styles.container}>
       <SectionHead
         icon={IconAnalyticsFollower24}
         title={
@@ -151,8 +149,6 @@ const FollowerAnalytics = () => {
       />
 
       <Content />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

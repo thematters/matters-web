@@ -16,7 +16,7 @@ import {
 } from '~/components'
 import { AuthorPickerQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const AUTHOR_PICKER = gql`
   query AuthorPicker($random: random_Int_min_0_max_49) {
@@ -60,13 +60,13 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
   }
 
   return (
-    <section className="container">
+    <section className={styles.container}>
       <PageHeader title={title}>
-        <section className="header-buttons">
+        <section className={styles.headerButtons}>
           <Button
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
-            bgActiveColor="grey-lighter"
+            bgActiveColor="greyLighter"
             onClick={shuffle}
           >
             <TextIcon icon={<IconReload12 size="sm" />} color="grey">
@@ -74,9 +74,9 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
             </TextIcon>
           </Button>
 
-          <span className="follow-info">
+          <span className={styles.followInfo}>
             <Translate zh_hant="已追蹤 " zh_hans="已追踪 " en="followed " />
-            <span className="hightlight">{followeeCount}</span>
+            <span className={styles.hightlight}>{followeeCount}</span>
             <Translate zh_hant=" 位" zh_hans=" 位" en=" authors" />
           </span>
         </section>
@@ -97,8 +97,6 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
           </List>
         </ResponsiveWrapper>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

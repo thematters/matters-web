@@ -31,7 +31,7 @@ const TranslationButton: FC<{
         analytics.trackEvent('click_button', { type: 'translation' })
       }}
       spacing={['xxtight', 'xtight']}
-      bgColor="green-lighter"
+      bgColor="greenLighter"
     >
       <TextIcon
         icon={<IconTranslate16 color="green" />}

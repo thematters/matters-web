@@ -17,7 +17,7 @@ import {
 } from '~/components'
 import { QuickResultQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SearchBarProps {
   onChange?: (key: string) => void
@@ -42,7 +42,7 @@ const SearchButton = () => {
         description: '',
       })}
     >
-      <IconSearch16 color="grey-dark" />
+      <IconSearch16 color="greyDark" />
     </Button>
   )
 }
@@ -61,7 +61,7 @@ const ClearButton = ({ onClick }: ClearButtonProps) => {
       aria-label={translate({ id: 'clear', lang })}
       onClick={onClick}
     >
-      <IconClear16 color="grey-dark" />
+      <IconClear16 color="greyDark" />
     </Button>
   )
 }
@@ -196,6 +196,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         if (!hasDropdown) {
           return (
             <form
+              className={styles.form}
               onSubmit={handleSubmit}
               aria-label={textPlaceholder}
               role="search"
@@ -229,8 +230,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                   }}
                 />
               )}
-
-              <style jsx>{styles}</style>
             </form>
           )
         }
@@ -263,7 +262,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             visible={showDropdown}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
-            <form onSubmit={handleSubmit} autoComplete="off" action="">
+            <form
+              className={styles.form}
+              onSubmit={handleSubmit}
+              autoComplete="off"
+              action=""
+            >
               <input
                 // FIMXME: FOUC on re-render
                 style={{ borderColor: 'var(--color-line-grey-light)' }}
@@ -285,8 +289,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               />
 
               <SearchButton />
-
-              <style jsx>{styles}</style>
             </form>
           </Dropdown>
         )

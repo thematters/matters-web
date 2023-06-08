@@ -6,16 +6,13 @@ import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/bad
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, Tooltip, Translate, withIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export const SeedBadge = () => (
   <Tooltip
     content={<Translate zh_hant="種子用戶" zh_hans="种子用户" en="Seed User" />}
   >
-    <span className="badge">
-      {withIcon(IconSeedBadge)({})}
-      <style jsx>{styles}</style>
-    </span>
+    <span className={styles.badge}>{withIcon(IconSeedBadge)({})}</span>
   </Tooltip>
 )
 
@@ -29,10 +26,7 @@ export const GoldenMotorBadge = () => (
       />
     }
   >
-    <span className="badge">
-      {withIcon(IconGoldenMotorBadge)({})}
-      <style jsx>{styles}</style>
-    </span>
+    <span className={styles.badge}>{withIcon(IconGoldenMotorBadge)({})}</span>
   </Tooltip>
 )
 
@@ -46,10 +40,7 @@ export const ArchitectBadge = () => (
       />
     }
   >
-    <span className="badge">
-      {withIcon(IconArchitectBadge)({})}
-      <style jsx>{styles}</style>
-    </span>
+    <span className={styles.badge}>{withIcon(IconArchitectBadge)({})}</span>
   </Tooltip>
 )
 
@@ -71,9 +62,6 @@ export const TraveloggersBadge = () => (
       />
     }
   >
-    <span className="badge">
-      {withIcon(IconTraveloggersBadge)({})}
-      <style jsx>{styles}</style>
-    </span>
+    <span className={styles.badge}>{withIcon(IconTraveloggersBadge)({})}</span>
   </Tooltip>
 )

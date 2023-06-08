@@ -4,7 +4,7 @@ import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
 
 import Field, { FieldProps } from '../Field'
 import Item from './Item'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * PIN Input Component
@@ -125,7 +125,7 @@ const Input: React.FC<InputProps> = ({
       />
 
       <Field.Content>
-        <section className="pin-input">
+        <section className={styles.pinInput}>
           {values.map((val, index) => (
             <Item
               key={index}
@@ -148,8 +148,6 @@ const Input: React.FC<InputProps> = ({
         hint={hint}
         error={error}
       />
-
-      <style jsx>{styles}</style>
     </Field>
   )
 }

@@ -25,7 +25,7 @@ const Telegram = ({
       return window.open(shareUrl, 'Share to Telegram')
     }}
   >
-    {circle && withIcon(IconShareTelegramCircle)({ size: 'xl-m' })}
+    {circle && withIcon(IconShareTelegramCircle)({ size: 'xlM' })}
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareTelegram)({})} spacing="base">

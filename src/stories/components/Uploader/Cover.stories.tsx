@@ -7,6 +7,8 @@ import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import { CoverUploader } from '~/components'
 
+import styles from './styles.module.css'
+
 export default {
   title: 'Components/Uploader',
   component: CoverUploader,
@@ -14,7 +16,7 @@ export default {
 
 const Template: ComponentStory<typeof CoverUploader> = () => (
   <MockedProvider>
-    <ul>
+    <ul className={styles.coverContainer}>
       {/* User & Tag */}
       <li>
         <CoverUploader
@@ -54,13 +56,6 @@ const Template: ComponentStory<typeof CoverUploader> = () => (
           cover="https://source.unsplash.com/512x512?circle-cover"
         />
       </li>
-
-      <style jsx>{`
-        li {
-          margin: 0 -1rem;
-          margin-bottom: var(--spacing-base);
-        }
-      `}</style>
     </ul>
   </MockedProvider>
 )

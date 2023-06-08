@@ -4,7 +4,7 @@ import { numAbbr } from '~/common/utils'
 import tagFragments from '~/components/GQL/fragments/tag'
 import { ArticleCountTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface ArticlesCountProps {
   tag: ArticleCountTagFragment
@@ -14,7 +14,7 @@ const ArticlesCount = ({ tag }: ArticlesCountProps) => {
   const { totalCount } = tag.articles || { totalCount: 0 }
 
   return (
-    <section className="container">
+    <section className={styles.container}>
       <b>{numAbbr(totalCount)}</b>
       <span>
         &nbsp;
@@ -26,8 +26,6 @@ const ArticlesCount = ({ tag }: ArticlesCountProps) => {
           }}
         />
       </span>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

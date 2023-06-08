@@ -1,7 +1,7 @@
 import { UserDigest } from '~/components'
 import { DigestTransactionFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /***
  * This is a sub component of Transaction which displays
@@ -26,16 +26,15 @@ const Donator = ({ user }: DonatorProps) => {
   }
 
   return (
-    <section>
+    <section className={styles.content}>
       <UserDigest.Mini
-        textSize="md-s"
+        textSize="mdS"
         textWeight="md"
         user={user}
         hasDisplayName
         hasAvatar
         avatarSize="md"
       />
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -2,11 +2,11 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import { ADD_TOAST } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
-  Button,
   Dialog,
-  IconDraftDelete12,
-  TextIcon,
+  IconTrash24,
+  LanguageContext,
   Translate,
   useDialogSwitch,
   useMutation,
@@ -14,6 +14,7 @@ import {
 import { DeleteButtonDraftFragment, DeleteDraftMutation } from '~/gql/graphql'
 
 import { DraftsContext } from '../../../views/Me/Drafts/context'
+import styles from './styles.module.css'
 
 interface DeleteButtonProps {
   draft: DeleteButtonDraftFragment
@@ -35,6 +36,8 @@ const fragments = {
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
   const [edges, setEdges] = useContext(DraftsContext)
+
+  const { lang } = useContext(LanguageContext)
 
   const [deleteDraft] = useMutation<DeleteDraftMutation>(DELETE_DRAFT, {
     variables: { id: draft.id },
@@ -68,21 +71,14 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
 
   return (
     <>
-      <Button
-        spacing={[0, 'xtight']}
-        size={[null, '1.25rem']}
-        bgColor="grey-lighter"
+      <button
         onClick={openDialog}
+        className={styles.deleteButton}
+        type="button"
+        aria-label={translate({ id: 'delete', lang })}
       >
-        <TextIcon
-          icon={<IconDraftDelete12 size="xs" />}
-          size="xs"
-          color="grey-dark"
-          weight="md"
-        >
-          <Translate id="delete" />
-        </TextIcon>
-      </Button>
+        <IconTrash24 size="md" />
+      </button>
 
       <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         <Dialog.Header
@@ -113,7 +109,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           </Dialog.Footer.Button>
 
           <Dialog.Footer.Button
-            bgColor="grey-lighter"
+            bgColor="greyLighter"
             textColor="black"
             onClick={closeDialog}
           >

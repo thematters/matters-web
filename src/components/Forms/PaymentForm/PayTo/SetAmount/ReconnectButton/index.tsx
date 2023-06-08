@@ -13,7 +13,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const ReconnectButton = () => {
   const viewer = useContext(ViewerContext)
@@ -22,7 +22,7 @@ const ReconnectButton = () => {
 
   return (
     <>
-      <p className="reconnect-hint">
+      <p className={styles.reconnectHint}>
         <Translate id="reconnectHint" />
         <CopyToClipboard text={viewer.info.ethAddress || ''}>
           <Button
@@ -53,8 +53,6 @@ const ReconnectButton = () => {
           en="Reconnect Wallet"
         />
       </Dialog.Footer.Button>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

@@ -14,7 +14,7 @@ import Amount from './Amount'
 import Currency from './Currency'
 import Donator from './Donator'
 import State from './State'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface TransactionProps {
   tx: DigestTransactionFragment
@@ -90,30 +90,30 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
     : null
 
   const dateTimeClasses = classNames({
-    dateTime: true,
-    isDonation,
+    [styles.dateTime]: true,
+    [styles.isDonation]: isDonation,
   })
 
   return (
     <Card {...path} spacing={[0, 0]} bgActiveColor="none">
       <section
-        className="container"
+        className={styles.container}
         data-test-id={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM}
       >
         {(isAddCredit || isPayout || isSubscription) && (
-          <section className="tx-icon">
+          <section className={styles.txIcon}>
             <Currency currency={currency} />
           </section>
         )}
 
-        <section className="tx-info">
-          <section className="left">
+        <section className={styles.txInfo}>
+          <section className={styles.left}>
             {isDonation && (
               <Donator user={isViewerSender ? recipient : sender} />
             )}
 
             {isDonation && article && (
-              <section className="title">
+              <section className={styles.title}>
                 <ArticleDigestTitle
                   article={article}
                   is="h2"
@@ -124,7 +124,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
             )}
 
             {isWalletAction && (
-              <section className="wallet-action">
+              <section className={styles.walletAction}>
                 <p>
                   {isAddCredit && <Translate id="topUp" />}
                   {isRefund && <Translate id="refund" />}
@@ -135,7 +135,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
 
             {isSubscription && circle && (
               <>
-                <section className="subscription">
+                <section className={styles.subscription}>
                   <p>
                     {isViewerRecipient && (
                       <Translate zh_hant="圍爐營收" zh_hans="围炉营收" />
@@ -145,7 +145,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
                     )}
                   </p>
                 </section>
-                <section className="title circleTitle">
+                <section className={`${styles.title} ${styles.circleTitle}`}>
                   <CircleDigest.Title
                     circle={circle}
                     is="h2"
@@ -161,7 +161,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
             </section>
           </section>
 
-          <section className="right">
+          <section className={styles.right}>
             <Amount
               amount={amount}
               currency={currency}
@@ -175,8 +175,6 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
             />
           </section>
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

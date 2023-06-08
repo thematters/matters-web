@@ -40,7 +40,7 @@ const ResponseCount = ({ article }: ResponseCountProps) => {
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor="grey-lighter-active"
+      bgActiveColor="greyLighterActive"
       {...path}
       disabled={isBanned}
       aria-label={translate({

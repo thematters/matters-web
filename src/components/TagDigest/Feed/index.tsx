@@ -16,7 +16,7 @@ import {
 } from '~/components'
 import { TagDigestFeedTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type TagDigestFeedProps = {
   tag: TagDigestFeedTagFragment
@@ -67,45 +67,45 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
       testId={TEST_ID.DIGEST_TAG_FEED}
       {...cardProps}
     >
-      <section className="container">
-        <header>
+      <section className={styles.container}>
+        <header className={styles.header}>
           <Tag
             tag={tag}
             type="plain"
-            iconProps={{ color: 'grey-darker' }}
+            iconProps={{ color: 'greyDarker' }}
             textIconProps={{ color: 'black', weight: 'md', size: 'sm' }}
           />
 
-          <section className="nums">
+          <section className={styles.nums}>
             <TextIcon
-              icon={<IconUser16 color="grey-dark" size="xs" />}
+              icon={<IconUser16 color="greyDark" size="xs" />}
               size="xs"
               spacing="xxtight"
-              color="grey-dark"
+              color="greyDark"
             >
               {numAbbr(tag.numAuthors)}
             </TextIcon>
 
             <TextIcon
-              icon={<IconArticle16 color="grey-dark" size="xs" />}
+              icon={<IconArticle16 color="greyDark" size="xs" />}
               size="xs"
               spacing="xxtight"
-              color="grey-dark"
+              color="greyDark"
             >
               {numAbbr(tag.numArticles)}
             </TextIcon>
           </section>
         </header>
 
-        <section className="content">
-          <ul className="articles">
+        <section className={styles.content}>
+          <ul className={styles.articles}>
             {articles?.map(({ node, cursor }) => (
               <li key={cursor}>
                 <Link
                   {...toPath({ page: 'articleDetail', article: node })}
                   legacyBehavior
                 >
-                  <a className="title" onClick={captureClicks}>
+                  <a className={styles.title} onClick={captureClicks}>
                     {node.title}
                   </a>
                 </Link>
@@ -113,7 +113,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
             ))}
           </ul>
 
-          <section className="cover">
+          <section className={styles.cover}>
             <Link {...path} legacyBehavior>
               <a>
                 <VisuallyHidden>
@@ -127,8 +127,6 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
             </Link>
           </section>
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

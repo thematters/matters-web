@@ -4,7 +4,7 @@ import { IconChecked } from '~/components'
 import { TextIcon } from '~/components/TextIcon'
 
 import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CheckBoxProps = {
   name: string
@@ -27,15 +27,15 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
   return (
     <Field>
-      <label htmlFor={fieldId}>
+      <label className={styles.label} htmlFor={fieldId}>
         <TextIcon
           icon={
             <IconChecked
-              size="md-s"
+              size="mdS"
               color={inputProps.checked ? 'green' : 'grey'}
             />
           }
-          color="grey-dark"
+          color="greyDark"
           spacing="xtight"
         >
           <span>{hint}</span>
@@ -53,8 +53,6 @@ const CheckBox: React.FC<CheckBoxProps> = ({
       </label>
 
       <Field.Footer fieldMsgId={fieldMsgId} error={error} />
-
-      <style jsx>{styles}</style>
     </Field>
   )
 }

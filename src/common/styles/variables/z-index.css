@@ -1,5 +1,3 @@
-/* @styled-jsx=global */
-
 :root {
   /* header */
   --z-index-global-header: 100;
@@ -19,4 +17,5 @@
 
   /* others */
   --z-index-progress-bar: 300;
+  --z-index-wallet-connect-modal: 400;
 }

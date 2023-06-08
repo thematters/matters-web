@@ -20,7 +20,7 @@ export const ShareButton: React.FC<Omit<ShareDialogProps, 'children'>> = (
             description: '',
           })}
           aria-haspopup="dialog"
-          bgColor="half-black"
+          bgColor="halfBlack"
           onClick={openShareDialog}
         >
           <IconShare32 size="lg" color="white" />

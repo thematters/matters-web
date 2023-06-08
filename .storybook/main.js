@@ -50,15 +50,6 @@ module.exports = {
                 },
               ],
             },
-            {
-              test: /\.css$/,
-              use: [
-                'babel-loader',
-                {
-                  loader: require('styled-jsx/webpack').loader,
-                },
-              ],
-            },
           ],
         },
       },

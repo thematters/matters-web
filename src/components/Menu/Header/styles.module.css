@@ -1,0 +1,17 @@
+.header {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-x-tight) var(--spacing-base);
+
+  & h3 {
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.sizeMdS {
+  font-size: var(--font-size-md-s);
+}
+
+.sizeLg {
+  font-size: var(--font-size-lg);
+}

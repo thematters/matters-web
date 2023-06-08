@@ -2,7 +2,7 @@ import { Tabs, Translate } from '~/components'
 
 export type FollowingFeedType = 'user' | 'circle' | 'tag'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FeedTypeProps {
   type: FollowingFeedType
@@ -15,7 +15,7 @@ const FeedType = ({ type, setFeedType }: FeedTypeProps) => {
   const isUser = type === 'user'
 
   return (
-    <section className="container">
+    <section className={styles.container}>
       <Tabs sticky>
         <Tabs.Tab onClick={() => setFeedType('user')} selected={isUser}>
           <Translate zh_hant="作者" zh_hans="作者" en="Authors" />
@@ -29,7 +29,6 @@ const FeedType = ({ type, setFeedType }: FeedTypeProps) => {
           <Translate id="tags" />
         </Tabs.Tab>
       </Tabs>
-      <style jsx>{styles}</style>
     </section>
   )
 }

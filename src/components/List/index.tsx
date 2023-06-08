@@ -1,7 +1,9 @@
 import classNames from 'classnames'
 
+import { capitalizeFirstLetter } from '~/common/utils'
+
 import { ResponsiveWrapper } from '../Interaction'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ListSpacing = 0 | 'base' | 'loose' | 'xloose'
 
@@ -41,14 +43,13 @@ const ListItem: React.FC<ListItemProps> = ({
   ...restProps
 }) => {
   const listItemClasses = classNames({
-    'list-item': true,
+    'list-item': true, // global selector
     [className]: !!className,
   })
 
   return (
     <section className={listItemClasses} role="listitem" {...restProps}>
       {children}
-      <style jsx>{styles}</style>
     </section>
   )
 }
@@ -66,10 +67,10 @@ export const List: React.FC<ListProps> & {
   ...restProps
 }) => {
   const listClasses = classNames({
-    list: true,
-    [`spacing-y-${spacing[0]}`]: !!spacing[0],
-    [`spacing-x-${spacing[1]}`]: !!spacing[1],
-    'has-border': !!hasBorder,
+    [styles.list]: true,
+    [styles[`spacingY${capitalizeFirstLetter(spacing[0] + '')}`]]: !!spacing[0],
+    [styles[`spacingX${capitalizeFirstLetter(spacing[1] + '')}`]]: !!spacing[1],
+    [styles.hasBorder]: !!hasBorder,
     [className]: !!className,
   })
 
@@ -78,7 +79,6 @@ export const List: React.FC<ListProps> & {
       <ResponsiveWrapper>
         <section className={listClasses} role="list" {...restProps}>
           {children}
-          <style jsx>{styles}</style>
         </section>
       </ResponsiveWrapper>
     )
@@ -87,7 +87,6 @@ export const List: React.FC<ListProps> & {
   return (
     <section className={listClasses} role="list" {...restProps}>
       {children}
-      <style jsx>{styles}</style>
     </section>
   )
 }

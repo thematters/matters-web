@@ -11,15 +11,15 @@ import {
 } from 'react'
 
 import { KEYCODES, TEST_ID } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { capitalizeFirstLetter, translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
-export type CardBgColor = 'grey-lighter' | 'white' | 'none'
-export type CardBgHoverColor = 'grey-lighter' | 'none'
+export type CardBgColor = 'greyLighter' | 'white' | 'transparent' | 'none'
+export type CardBgHoverColor = 'greyLighter' | 'transparent' | 'none'
 export type CardSpacing = 0 | 'xtight' | 'tight' | 'base' | 'loose'
-export type CardBorderColor = 'grey-lighter' | 'line-grey-light' | 'green'
+export type CardBorderColor = 'greyLighter' | 'lineGreyLight' | 'green'
 export type CardBorderRadius = 'xtight' | 'xxtight' | 'base' | 'loose'
 
 export interface CardProps {
@@ -89,17 +89,26 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
     const cardRef = (ref || fallbackRef) as React.RefObject<any> | null
 
     const cardClasses = classNames({
-      card: true,
-      [`spacing-y-${spacing[0]}`]: !!spacing[0],
-      [`spacing-x-${spacing[1]}`]: !!spacing[1],
-      [`bg-${bgColor}`]: !!bgColor,
-      [`bg-active-${bgActiveColor}`]: !!bgActiveColor,
-      [`border-${borderColor}`]: !!borderColor,
-      [`border-radius-${borderRadius}`]: !!borderRadius,
-      ['active-outline-auto']: !!activeOutline,
+      [styles.card]: true,
+      card: true, // global selector for overriding
+      [styles[`spacingY${capitalizeFirstLetter(spacing[0] + '')}`]]:
+        !!spacing[0],
+      [styles[`spacingX${capitalizeFirstLetter(spacing[1] + '')}`]]:
+        !!spacing[1],
+      [styles[`bg${capitalizeFirstLetter(bgColor)}`]]: !!bgColor,
+      [bgActiveColor
+        ? styles[`bgActive${capitalizeFirstLetter(bgActiveColor)}`]
+        : '']: !!bgActiveColor,
+      [borderColor
+        ? styles[`border${capitalizeFirstLetter(borderColor)}`]
+        : '']: !!borderColor,
+      [borderRadius
+        ? styles[`borderRadius${capitalizeFirstLetter(borderRadius)}`]
+        : '']: !!borderRadius,
+      [styles.activeOutlineAuto]: !!activeOutline,
 
-      hasBorder: !!borderColor || !!borderRadius,
-      disabled,
+      [styles.hasBorder]: !!borderColor || !!borderRadius,
+      [styles.disabled]: disabled,
     })
     const ariaLabel =
       htmlHref || href
@@ -186,7 +195,6 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
             {...(testId ? { ['data-test-id']: testId } : {})}
           >
             {children}
-            <style jsx>{styles}</style>
           </a>
         </Link>
       )
@@ -202,7 +210,6 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
           {...(testId ? { ['data-test-id']: testId } : {})}
         >
           {children}
-          <style jsx>{styles}</style>
         </a>
       )
     }
@@ -232,8 +239,6 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         {...(testId ? { ['data-test-id']: testId } : {})}
       >
         {children}
-
-        <style jsx>{styles}</style>
       </section>
     )
   }

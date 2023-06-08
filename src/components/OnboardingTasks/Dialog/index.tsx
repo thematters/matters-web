@@ -6,7 +6,7 @@ import { useEventListener } from '~/components/Hook'
 
 import Galaxy from '../Galaxy'
 import Tasks from '../Tasks'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface OnboardingTasksDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -37,7 +37,7 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
           closeTextId="close"
         />
         <Dialog.Content hasGrow spacing={[0, 'base']}>
-          <section className="description">
+          <section className={styles.description}>
             <span>
               <Translate
                 zh_hant="導航帶你發現更多寶藏作者和優質作品。"
@@ -46,7 +46,7 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
               />
             </span>
             <br />
-            <span className="bold">
+            <span className={styles.bold}>
               <Translate
                 zh_hant="點擊下面 5 顆星球查看任務提示！"
                 zh_hans="点击下面 5 颗星球查看任务提示！"
@@ -60,8 +60,6 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
           <Tasks task={task} />
         </Dialog.Content>
       </Dialog>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

@@ -21,7 +21,7 @@ import {
 import { MeTransactionsQuery } from '~/gql/graphql'
 
 import { Currency, CurrencySwitch } from './CurrencySwitch'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const ME_TRANSACTIONS = gql`
   query MeTransactions(
@@ -138,7 +138,6 @@ const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
           </List.Item>
         ))}
       </List>
-      <style jsx>{styles}</style>
     </InfiniteScroll>
   )
 }
@@ -160,7 +159,7 @@ const Transactions = () => {
       <Tabs
         sticky
         side={
-          <section className="CurrencySwitch">
+          <section className={styles.currencySwitch}>
             <CurrencySwitch
               currency={currency}
               setCurrency={(c) => setCurrency(c)}

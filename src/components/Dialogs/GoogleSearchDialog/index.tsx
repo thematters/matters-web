@@ -4,8 +4,6 @@ import { useEffect } from 'react'
 import { captureClicks, dom } from '~/common/utils'
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 
-import globalStyles from './styles.global.css'
-
 declare global {
   interface Window {
     google: any
@@ -112,10 +110,6 @@ const BaseGoogleSearchDialog = ({ children }: GoogleSearchDialogProps) => {
         <Dialog.Content spacing={['base', 'base']}>
           <div id="searchbox" />
           <div id="searchresults" onClick={captureClicks} />
-
-          <style jsx global>
-            {globalStyles}
-          </style>
         </Dialog.Content>
       </Dialog>
     </>

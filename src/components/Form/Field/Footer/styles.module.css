@@ -1,0 +1,13 @@
+.footer {
+  margin-top: var(--spacing-x-tight);
+}
+
+.hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-grey);
+}
+
+.error {
+  font-size: var(--font-size-xs);
+  color: var(--color-red);
+}

@@ -1,7 +1,9 @@
+import classNames from 'classnames'
+
 import Content from './Content'
 import Footer, { FooterProps } from './Footer'
 import Header, { HeaderProps } from './Header'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FieldProps = FooterProps & HeaderProps
 
@@ -24,13 +26,14 @@ const Field: React.FC<{ children?: React.ReactNode }> & {
   Header: typeof Header
   Footer: typeof Footer
   Content: typeof Content
-} = ({ children }) => (
-  <section className="field">
-    {children}
+} = ({ children }) => {
+  const classes = classNames({
+    [styles.field]: true,
+    field: true, // global selector for `@mixin form-container`
+  })
 
-    <style jsx>{styles}</style>
-  </section>
-)
+  return <section className={classes}>{children}</section>
+}
 
 Field.Header = Header
 Field.Footer = Footer

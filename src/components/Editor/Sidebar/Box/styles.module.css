@@ -1,0 +1,25 @@
+.box {
+  @mixin border-grey;
+
+  padding: var(--spacing-base) 0 0;
+  margin-bottom: var(--spacing-loose);
+  border-radius: var(--spacing-x-tight);
+
+  & .header {
+    @mixin flex-center-space-between;
+
+    padding: 0 var(--spacing-base);
+  }
+}
+
+.footerSpacing {
+  padding-bottom: var(--spacing-base);
+}
+
+.subtitle {
+  padding: 0 var(--spacing-base);
+  margin-top: var(--spacing-xx-tight);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-grey);
+}

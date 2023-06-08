@@ -5,8 +5,8 @@ import { Spinner, Translate } from '~/components'
 
 import { SelectNode } from '../SearchingArea'
 import SearchSelectNode from '../SearchSelectNode'
-import areaStyles from '../styles.css'
-import styles from './styles.css'
+import areaStyles from '../styles.module.css'
+import styles from './styles.module.css'
 
 /**
  * This is a sub-component of search-and-select. It's a container
@@ -68,18 +68,17 @@ const StagingArea: React.FC<StagingAreaProps> = ({
 
   if (CustomStagingArea) {
     return (
-      <section className="area">
+      <section className={areaStyles.area}>
         <CustomStagingArea nodes={nodes} setNodes={setNodes} hint={hint} />
-        <style jsx>{areaStyles}</style>
       </section>
     )
   }
 
   return (
-    <section className="area">
+    <section className={areaStyles.area}>
       {/* empty hint */}
       {nodes.length <= 0 && hint && (
-        <section className="hint">
+        <section className={styles.hint}>
           <Translate id={hint} />
         </section>
       )}
@@ -95,7 +94,7 @@ const StagingArea: React.FC<StagingAreaProps> = ({
 
       {/* undraggable */}
       {nodes.length > 0 && !draggable && (
-        <ul className="nodes">
+        <ul className={areaStyles.nodes}>
           {nodes.map(({ node, selected }) => (
             <li key={node.id}>
               <SearchSelectNode
@@ -108,9 +107,6 @@ const StagingArea: React.FC<StagingAreaProps> = ({
           ))}
         </ul>
       )}
-
-      <style jsx>{styles}</style>
-      <style jsx>{areaStyles}</style>
     </section>
   )
 }

@@ -4,7 +4,7 @@ import { Translate } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ReplyToUserFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface ReplyToProps {
   user: ReplyToUserFragment
@@ -21,8 +21,8 @@ const fragments = {
   `,
 }
 const ReplyTo = ({ user }: ReplyToProps) => (
-  <section className="container">
-    <span className="reply-to">
+  <section className={styles.container}>
+    <span className={styles.replyTo}>
       <Translate id="reply" />
     </span>
 
@@ -33,8 +33,6 @@ const ReplyTo = ({ user }: ReplyToProps) => (
       hasDisplayName
       hasUserName
     />
-
-    <style jsx>{styles}</style>
   </section>
 )
 

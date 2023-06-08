@@ -19,7 +19,7 @@ import {
 import { OAuthClientInfoQuery } from '~/gql/graphql'
 
 import { Box } from '../Box'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const OAUTH_AUTHORIZE_ENDPOINT = `${process.env.NEXT_PUBLIC_OAUTH_URL}/authorize`
 
@@ -103,9 +103,9 @@ const BaseOAuthAuthorize = () => {
         )}
         <input type="hidden" name="response_type" value="code" />
 
-        <section className="content">
-          <ul>
-            <li>
+        <section className={styles.content}>
+          <ul className={styles.list}>
+            <li className={styles.listItem}>
               <Translate
                 zh_hant="讀取你的公開資料"
                 zh_hans="读取你的公开资料"
@@ -123,13 +123,17 @@ const BaseOAuthAuthorize = () => {
                   return null
                 }
 
-                return <li key={s}>{readableScope}</li>
+                return (
+                  <li key={s} className={styles.listItem}>
+                    {readableScope}
+                  </li>
+                )
               })}
           </ul>
 
           <hr />
 
-          <section className="current-account">
+          <section className={styles.currentAccount}>
             <UserDigest.Mini
               user={viewer}
               avatarSize="xs"
@@ -139,7 +143,7 @@ const BaseOAuthAuthorize = () => {
             />
           </section>
 
-          <p className="switch-account">
+          <p className={styles.switchAccount}>
             <span>
               <Translate zh_hant="不是你？" zh_hans="不是你？" en="Not you?" />
             </span>
@@ -172,8 +176,6 @@ const BaseOAuthAuthorize = () => {
           )}
         </Dialog.Footer>
       </form>
-
-      <style jsx>{styles}</style>
     </Box>
   )
 }

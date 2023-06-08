@@ -1,0 +1,39 @@
+.descendants {
+  padding-left: 2.5rem;
+
+  & li {
+    margin: var(--spacing-base) 0;
+
+    & + li {
+      padding-top: var(--spacing-xx-tight);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:not(:last-child) :global(article) {
+      position: relative;
+      padding: 0;
+
+      &::before {
+        position: absolute;
+        top: calc(1.5rem + var(--spacing-x-tight));
+        left: calc(1.5rem / 2);
+        width: 1px;
+        height: 0;
+        height: calc(
+          100% - var(--spacing-base) - var(--spacing-x-tight) +
+            var(--spacing-xx-tight)
+        );
+        content: '';
+        background-color: var(--color-line-grey-light);
+      }
+    }
+  }
+
+  & .contentContainer {
+    padding-left: var(--spacing-x-loose);
+    margin-top: var(--spacing-x-tight);
+  }
+}

@@ -54,7 +54,7 @@ import License from './License'
 import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationToast from './TranslationToast'
@@ -86,6 +86,12 @@ const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
   loading: Spinner,
 })
+
+const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
+  ssr: true, // enable for first screen
+  loading: Spinner,
+})
+
 const DynamicSubscribeCircleDialog = dynamic(
   () =>
     import('~/components/Dialogs/SubscribeCircleDialog').then(
@@ -121,18 +127,22 @@ const BaseArticleDetail = ({
 
   const features = useFeatures()
   const [fixedWall, setFixedWall] = useState(false)
+  const [isSensitive, setIsSensitive] = useState<boolean>(
+    article.sensitiveByAuthor || article.sensitiveByAdmin
+  )
 
   const authorId = article.author?.id
   const paymentPointer = article.author?.paymentPointer
   const collectionCount = article.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
   const circle = article.access.circle
-  const canReadFullContent = !!(
-    isAuthor ||
-    !circle ||
-    circle.isMember ||
-    article.access.type === ArticleAccessType.Public
-  )
+  const canReadFullContent =
+    !!(
+      isAuthor ||
+      !circle ||
+      circle.isMember ||
+      article.access.type === ArticleAccessType.Public
+    ) && !isSensitive
 
   // wall
   const { data: clientPreferenceData } = useQuery<ClientPreferenceQuery>(
@@ -271,9 +281,9 @@ const BaseArticleDetail = ({
 
       <State article={article} />
 
-      <section className="content">
+      <section className={styles.content}>
         <TagList article={article} />
-        <section className="title">
+        <section className={styles.title}>
           <Title type="article">{title}</Title>
 
           <Waypoint
@@ -294,25 +304,36 @@ const BaseArticleDetail = ({
           />
         </section>
         {article?.summaryCustomized && <CustomizedSummary summary={summary} />}
-        <Content
-          article={article}
-          content={content}
-          translating={translating}
-        />
-        <License license={article.license} />
+        {isSensitive && (
+          <DynamicSensitiveWall
+            sensitiveByAuthor={article.sensitiveByAuthor}
+            sensitiveByAdmin={article.sensitiveByAdmin}
+            expandAll={() => setIsSensitive(false)}
+          />
+        )}
+        {!isSensitive && (
+          <>
+            <Content
+              article={article}
+              content={content}
+              translating={translating}
+            />
+            <License license={article.license} />
+          </>
+        )}
         {circle && !canReadFullContent && <DynamicCircleWall circle={circle} />}
         {features.payment && canReadFullContent && (
           <DynamicSupportWidget article={article} />
         )}
         {collectionCount > 0 && (
-          <section className="block">
+          <section className={styles.block}>
             <DynamicCollection
               article={article}
               collectionCount={collectionCount}
             />
           </section>
         )}
-        <section className="block">
+        <section className={styles.block}>
           <DynamicResponse id={article.id} lock={!canReadFullContent} />
         </section>
         <Media lessThan="xl">
@@ -336,8 +357,6 @@ const BaseArticleDetail = ({
       {article.access.circle && (
         <DynamicSubscribeCircleDialog circle={article.access.circle} />
       )}
-
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

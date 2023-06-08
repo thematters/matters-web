@@ -19,7 +19,7 @@ import {
   UserLogoutMutation,
 } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface TermContentProps {
   closeDialog: () => void
@@ -81,7 +81,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
       <Dialog.Header title="termAndPrivacy" closeDialog={closeDialog} />
 
       <Dialog.Content spacing={['base', 'base']}>
-        <p className="hint">
+        <p className={styles.hint}>
           <Translate
             zh_hant="我們的用戶協議和隱私政策發生了更改，請閱讀並同意後繼續使用。"
             zh_hans="我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用。"
@@ -89,7 +89,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
           />
         </p>
 
-        <div className="context">
+        <div className={styles.context}>
           <Term />
         </div>
       </Dialog.Content>
@@ -104,15 +104,13 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
         </Dialog.Footer.Button>
 
         <Dialog.Footer.Button
-          bgColor="grey-lighter"
+          bgColor="greyLighter"
           textColor="black"
           onClick={onLogout}
         >
           <Translate id="disagree" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </form>
   )
 }

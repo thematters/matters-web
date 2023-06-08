@@ -1,0 +1,3 @@
+.currencySwitch {
+  @mixin flex-center-end;
+}

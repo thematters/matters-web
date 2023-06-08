@@ -12,7 +12,7 @@ import {
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type Props = {
   user: FollowingFeedRecommendUserPublicFragment &
@@ -36,10 +36,10 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
       {...path}
       {...cardProps}
     >
-      <section className="container">
-        <section className="head">
+      <section className={styles.container}>
+        <section className={styles.head}>
           <Link {...path} legacyBehavior>
-            <a className="avatar">
+            <a className={styles.avatar}>
               <VisuallyHidden>
                 <span>{user.displayName}</span>
               </VisuallyHidden>
@@ -47,25 +47,23 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
             </a>
           </Link>
 
-          <section className="wrap">
+          <section className={styles.wrap}>
             <Link {...path} legacyBehavior>
-              <a className="name">{displayName}</a>
+              <a className={styles.name}>{displayName}</a>
             </Link>
 
-            <section className="follow">
+            <section className={styles.follow}>
               <FollowUserButton user={user} />
             </section>
           </section>
         </section>
 
-        <section className="content">
+        <section className={styles.content}>
           {info.description && (
-            <p className="description">{info.description}</p>
+            <p className={styles.description}>{info.description}</p>
           )}
         </section>
       </section>
-
-      <style jsx>{styles}</style>
     </Card>
   )
 }

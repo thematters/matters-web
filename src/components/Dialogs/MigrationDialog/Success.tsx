@@ -1,7 +1,7 @@
 import { PATHS } from '~/common/enums'
 import { Dialog, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const texts: {
   zh_hant: Record<string, string>
@@ -32,14 +32,14 @@ const MigrationDialogSuccess = () => {
   return (
     <>
       <Dialog.Content spacing={['base', 'base']}>
-        <p className="action">
+        <p className={`${styles.p} ${styles.action}`}>
           <Translate
             zh_hant={zh_hant.content_1}
             zh_hans={zh_hans.content_1}
             en={en.content_1}
           />
         </p>
-        <p className="description">
+        <p className={`${styles.p} ${styles.description}`}>
           <Translate
             zh_hant={zh_hant.content_2}
             zh_hans={zh_hans.content_2}
@@ -57,7 +57,6 @@ const MigrationDialogSuccess = () => {
           />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-      <style jsx>{styles}</style>
     </>
   )
 }

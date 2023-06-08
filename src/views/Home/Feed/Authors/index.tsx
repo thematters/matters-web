@@ -22,7 +22,7 @@ import { FeedAuthorsQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import { FEED_AUTHORS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)
@@ -107,7 +107,7 @@ const Authors = () => {
   )
 
   return (
-    <section className="authors">
+    <section className={styles.authors}>
       <Slides header={SlidesHeader}>
         {loading && (
           <Slides.Item size="md">
@@ -143,7 +143,7 @@ const Authors = () => {
       </Slides>
 
       <Media lessThan="md">
-        <section className="backToAll">
+        <section className={styles.backToAll}>
           <ViewMoreCard
             spacing={['tight', 'tight']}
             href={PATHS.AUTHORS}
@@ -158,8 +158,6 @@ const Authors = () => {
           </ViewMoreCard>
         </section>
       </Media>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

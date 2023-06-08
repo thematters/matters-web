@@ -28,7 +28,7 @@ import {
   DISCUSSION_PRIVATE,
   DISCUSSION_PUBLIC,
 } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Wall from './Wall'
 
 type Comment = NonNullable<
@@ -248,9 +248,9 @@ const CricleDiscussion = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="discussion">
+      <section className={styles.discussion}>
         {!circle.owner.isBlocking && (
-          <header>
+          <header className={styles.header}>
             <CommentForm
               circleId={circle?.id}
               type="circleDiscussion"
@@ -295,8 +295,6 @@ const CricleDiscussion = () => {
             ))}
           </List>
         </InfiniteScroll>
-
-        <style jsx>{styles}</style>
       </section>
     </>
   )

@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { EXTERNAL_LINKS, GUIDE_LINKS, PATHS } from '~/common/enums'
 import { Form, LanguageContext, Layout, ResponsiveWrapper } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const BaseHelp = () => {
   const { lang } = useContext(LanguageContext)
@@ -73,7 +73,7 @@ const BaseHelp = () => {
         />
       </Form.List>
 
-      <footer>
+      <footer className={styles.footer}>
         <p>
           <FormattedMessage
             defaultMessage="Please email"
@@ -94,14 +94,12 @@ const BaseHelp = () => {
           />
         </p>
 
-        <p className="copyright">
+        <p className={styles.copyright}>
           {'@ '}
           <span itemProp="copyrightYear">{year}</span>{' '}
           <span itemProp="copyrightHolder">Matters</span>
         </p>
       </footer>
-
-      <style jsx>{styles}</style>
     </ResponsiveWrapper>
   )
 }

@@ -37,7 +37,7 @@ const DialogFooterButton: React.FC<
     >
       <TextIcon
         icon={icon || (loading && <IconSpinner16 size="md" />)}
-        color={implicit ? 'grey-dark' : textColor}
+        color={implicit ? 'greyDark' : textColor}
         size={implicit ? 'sm' : 'md'}
         weight={implicit ? 'normal' : 'md'}
         textPlacement="left"

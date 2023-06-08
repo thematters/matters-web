@@ -7,7 +7,7 @@ import {
   Translate,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ViewMoreButtonProps = {
   loading?: boolean
@@ -17,7 +17,7 @@ export const ViewMoreButton: React.FC<ViewMoreButtonProps> = ({
   loading,
   ...props
 }) => (
-  <div className="container">
+  <div className={styles.container}>
     {loading ? (
       <Spinner />
     ) : (
@@ -38,7 +38,5 @@ export const ViewMoreButton: React.FC<ViewMoreButtonProps> = ({
         </TextIcon>
       </Button>
     )}
-
-    <style jsx>{styles}</style>
   </div>
 )

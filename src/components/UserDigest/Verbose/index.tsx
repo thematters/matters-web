@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { Card, CardProps, Translate } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
@@ -15,7 +15,7 @@ import {
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * UeserDigest.Verbose is a component for presenting user's avatar, display
@@ -30,8 +30,8 @@ export type UserDigestVerboseProps = {
     Partial<UserDigestVerboseUserPrivateFragment>
 
   avatarSize?: 'md'
-  nameTextSize?: 'md-s'
-  descTextSize?: 'sm-s'
+  nameTextSize?: 'mdS'
+  descTextSize?: 'smS'
   descRowSize?: 2
 
   hasFollow?: boolean
@@ -43,8 +43,8 @@ const Verbose = ({
   user,
 
   avatarSize = 'md',
-  nameTextSize = 'md-s',
-  descTextSize = 'sm-s',
+  nameTextSize = 'mdS',
+  descTextSize = 'smS',
   descRowSize = 2,
 
   hasFollow = true,
@@ -58,17 +58,17 @@ const Verbose = ({
   })
   const isArchived = user?.status?.state === 'archived'
   const containerClasses = classNames({
-    container: true,
-    disabled: isArchived,
+    [styles.container]: true,
+    [styles.disabled]: isArchived,
   })
   const nameClasses = classNames({
-    name: true,
-    [`name-${nameTextSize}`]: true,
+    [styles.name]: true,
+    [styles[`name${capitalizeFirstLetter(nameTextSize)}`]]: true,
   })
   const descClasses = classNames({
-    desc: true,
-    [`desc-${descTextSize}`]: true,
-    [`desc-row-${descRowSize}`]: true,
+    [styles.desc]: true,
+    [styles[`desc${descTextSize}`]]: true,
+    [styles[`descRow${descRowSize}`]]: true,
   })
 
   if (isArchived) {
@@ -79,23 +79,21 @@ const Verbose = ({
         testId={TEST_ID.DIGEST_USER_VERBOSE}
       >
         <section className={containerClasses}>
-          <span className="avatar">
+          <span className={styles.avatar}>
             <Avatar size={avatarSize} />
           </span>
 
-          <section className="content">
-            <header>
+          <section className={styles.content}>
+            <header className={styles.header}>
               <span className={nameClasses}>
                 <Translate id="accountArchived" />
               </span>
             </header>
           </section>
 
-          <section className="extra-button">
+          <section className={styles.extraButton}>
             {hasUnblock && <UnblockUserButton user={user} />}
           </section>
-
-          <style jsx>{styles}</style>
         </section>
       </Card>
     )
@@ -110,7 +108,7 @@ const Verbose = ({
     >
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
-          <a className="avatar">
+          <a className={styles.avatar}>
             <VisuallyHidden>
               <span>{user.displayName}</span>
             </VisuallyHidden>
@@ -118,15 +116,15 @@ const Verbose = ({
           </a>
         </Link>
 
-        <section className="content">
-          <header>
+        <section className={styles.content}>
+          <header className={styles.header}>
             <Link {...path} legacyBehavior>
               <a className={nameClasses}>{user.displayName}</a>
             </Link>
           </header>
         </section>
 
-        <section className="extra-button">
+        <section className={styles.extraButton}>
           {hasUnblock && <UnblockUserButton user={user} />}
           {hasFollow && <FollowUserButton user={user} />}
         </section>
@@ -137,8 +135,6 @@ const Verbose = ({
           <p>{user.info.description}</p>
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </Card>
   )
 }

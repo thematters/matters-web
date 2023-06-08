@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { ArticleDigestSidebar, Translate, UserDigest } from '~/components'
 import { ResponseArticleArticleFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ResponseArticleProps = {
   article: ResponseArticleArticleFragment
@@ -27,18 +27,18 @@ const fragments = {
 
 const ResponseArticle = ({ article }: ResponseArticleProps) => {
   return (
-    <section className="container">
-      <header>
+    <section className={styles.container}>
+      <header className={styles.header}>
         <UserDigest.Mini
           user={article.author}
           avatarSize="lg"
-          textSize="md-s"
+          textSize="mdS"
           textWeight="md"
           hasAvatar
           hasDisplayName
         />
 
-        <span className="collected">
+        <span className={styles.collected}>
           <Translate
             zh_hant="關聯了本作品"
             zh_hans="关联了本作品"
@@ -47,11 +47,9 @@ const ResponseArticle = ({ article }: ResponseArticleProps) => {
         </span>
       </header>
 
-      <section className="article-digest">
+      <section className={styles.articleDigest}>
         <ArticleDigestSidebar article={article} hasBackground />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

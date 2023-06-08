@@ -12,7 +12,7 @@ import {
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * This component is for sending verification code to user with built-in mutation.
@@ -73,11 +73,7 @@ export const VerificationSendCodeButton: React.FC<
         )}
 
         {sent && countdown.timeLeft !== 0 && (
-          <span className="timer">
-            {formattedTimeLeft.ss}
-
-            <style jsx>{styles}</style>
-          </span>
+          <span className={styles.timer}>{formattedTimeLeft.ss}</span>
         )}
       </TextIcon>
     </Button>

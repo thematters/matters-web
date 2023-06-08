@@ -1,0 +1,12 @@
+.container {
+  padding: var(--spacing-base);
+
+  @media (--sm-up) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.footer {
+  @mixin feed-footer-actions;
+}

@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 
 import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * Pure UI component for <input> element
@@ -44,7 +44,8 @@ const Input: React.FC<InputProps> = ({
   const fieldId = `field-${name}`
   const fieldMsgId = `field-msg-${name}`
   const inputClasses = classNames({
-    error,
+    [styles.input]: true,
+    [styles.error]: error,
   })
 
   return (
@@ -72,8 +73,6 @@ const Input: React.FC<InputProps> = ({
       </Field.Content>
 
       <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
-
-      <style jsx>{styles}</style>
     </Field>
   )
 }

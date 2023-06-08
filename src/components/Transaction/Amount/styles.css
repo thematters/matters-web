@@ -1,5 +1,0 @@
-section {
-  @mixin flex-center-start;
-
-  margin-bottom: var(--spacing-xx-tight);
-}

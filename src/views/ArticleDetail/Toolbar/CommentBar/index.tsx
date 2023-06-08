@@ -29,7 +29,7 @@ import {
   CommentBarArticlePublicFragment,
 } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CommentBarArticle = CommentBarArticlePublicFragment &
   Partial<CommentBarArticlePrivateFragment>
@@ -73,13 +73,13 @@ const Content = ({
       <Media at="sm">
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="grey-lighter"
+          bgActiveColor="greyLighter"
           aria-label={`${translate({ id: 'putComment', lang })}…`}
           aria-haspopup="dialog"
           {...(props as ButtonProps)}
         >
           <TextIcon
-            icon={<IconComment16 size="md-s" />}
+            icon={<IconComment16 size="mdS" />}
             weight="md"
             spacing="xtight"
             size="sm"
@@ -92,17 +92,16 @@ const Content = ({
       </Media>
       <Media greaterThan="sm">
         <Card
-          bgColor="grey-lighter"
+          bgColor="greyLighter"
           spacing={[0, 0]}
           borderRadius="base"
           role="button"
           ariaHasPopup="dialog"
           {...(props as CardProps)}
         >
-          <p>
+          <p className={styles.content}>
             <Translate id="putComment" />
             <Translate zh_hant="…" zh_hans="…" en="…" />
-            <style jsx>{styles}</style>
           </p>
         </Card>
       </Media>
