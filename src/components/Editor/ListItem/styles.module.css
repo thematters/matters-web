@@ -1,4 +1,4 @@
-li .item {
+.item {
   @mixin flex-center-space-between;
 
   padding: var(--spacing-base);
@@ -29,13 +29,12 @@ li .item {
   }
 }
 
-.rect {
+.indicator {
   @mixin inline-flex-center-all;
 
   position: relative;
   width: 2rem;
   height: 2rem;
-  overflow: hidden;
   font-size: var(--font-size-sm);
   color: var(--color-grey-darker);
   background: var(--color-grey-lighter);
@@ -49,4 +48,10 @@ li .item {
   & .cover {
     @mixin object-fit-cover;
   }
+}
+
+.hintOverlay {
+  position: absolute;
+  top: -3px;
+  right: -3px;
 }
