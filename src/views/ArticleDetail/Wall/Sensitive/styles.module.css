@@ -10,6 +10,11 @@
   user-select: none;
   filter: blur(5px);
   opacity: 0.4;
+
+  @media (--sm-down) {
+    height: 3rem;
+    overflow-y: clip;
+  }
 }
 
 .message {
