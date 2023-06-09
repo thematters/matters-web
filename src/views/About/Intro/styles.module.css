@@ -63,7 +63,7 @@
 .ecosystem {
   position: relative;
   padding: 3.25rem var(--spacing-base);
-  background-image: url('/static/images/about/wave-intro-1.svg');
+  background-image: var(--about-wave-bg-1);
   background-position: right bottom 2rem;
   background-size: 212px;
 
@@ -154,7 +154,7 @@
 .feature {
   padding: 3.25rem var(--spacing-base) 0;
   background-color: var(--color-green-lighter);
-  background-image: url('/static/images/about/wave-intro-2.svg');
+  background-image: var(--about-wave-bg-2);
   background-position: right bottom;
   background-size: 100%;
 

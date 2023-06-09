@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import IMAGE_BANNER from '@/public/static/images/migration-banner.svg'
 import { translate } from '~/common/utils'
 import { LanguageContext, ShareButton, TextIcon, Translate } from '~/components'
 
@@ -8,8 +9,12 @@ import styles from './styles.module.css'
 const Banner = () => {
   const { lang } = useContext(LanguageContext)
 
+  const style = {
+    '--migration-banner-bg': `url(${IMAGE_BANNER})`,
+  } as React.CSSProperties
+
   return (
-    <div className="l-container full">
+    <div className="l-container full" style={style}>
       <div className="l-row">
         <div className="l-col-full">
           <section className={styles.banner}>

@@ -1,7 +1,7 @@
 .joinUs {
   position: relative;
   padding-bottom: 3.5rem;
-  background-image: url('/static/images/about/wave-join-us.svg');
+  background-image: var(--about-join-us-bg);
   background-position: right bottom;
   background-size: 196px;
 

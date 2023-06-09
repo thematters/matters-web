@@ -1,4 +1,5 @@
 import { ReactComponent as IconArrowRight } from '@/public/static/images/about/arrow-right.svg'
+import IMAGE_WAVE from '@/public/static/images/about/wave-join-us.svg'
 import { captureClicks } from '~/common/utils'
 import { Translate, withIcon } from '~/components'
 
@@ -13,8 +14,12 @@ const IconArrow = () => (
 )
 
 const JoinUs = () => {
+  const style = {
+    '--about-join-us-bg': `url(${IMAGE_WAVE})`,
+  } as React.CSSProperties
+
   return (
-    <section className={styles.joinUs} onClick={captureClicks}>
+    <section className={styles.joinUs} onClick={captureClicks} style={style}>
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">
