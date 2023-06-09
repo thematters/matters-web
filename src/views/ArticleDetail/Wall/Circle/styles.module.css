@@ -1,7 +1,7 @@
 .container {
   padding: var(--spacing-x-loose) 1rem 1.5rem 1rem;
   margin: 1rem -1rem -1rem;
-  background-image: url('/static/images/circle-wall-background-sm.jpg');
+  background-image: var(--circle-wall-bg-sm);
   background-position: center top;
   background-size: cover;
 
@@ -11,7 +11,7 @@
 
   @media (--sm-up) {
     .container {
-      background-image: url('/static/images/circle-wall-background-md.jpg');
+      background-image: var(--circle-wall-bg-md);
     }
   }
 }

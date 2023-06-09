@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import IMAGE_BANNER from '@/public/static/images/migration-banner.svg'
 import { translate } from '~/common/utils'
 import { LanguageContext, ShareButton, TextIcon, Translate } from '~/components'
 
@@ -12,7 +13,13 @@ const Banner = () => {
     <div className="l-container full">
       <div className="l-row">
         <div className="l-col-full">
-          <section className={styles.banner}>
+          <section
+            className={styles.banner}
+            style={{
+              // @ts-ignore
+              '--migration-banner-bg': `url(${IMAGE_BANNER})`,
+            }}
+          >
             <h4>
               <Translate
                 zh_hant="搬家來 Matters，討論超有梗，寫字更賺錢。"

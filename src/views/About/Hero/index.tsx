@@ -5,6 +5,11 @@ import { useCallback, useContext, useEffect, useState } from 'react'
 
 import { ReactComponent as IconButtonLeft } from '@/public/static/images/about/button-left.svg'
 import { ReactComponent as IconButtonRight } from '@/public/static/images/about/button-right.svg'
+import SLIDE_CURSOR from '@/public/static/images/about/cursor.svg'
+import IMAGE_ILLUSTRATION_1 from '@/public/static/images/about/hero-illustration-1.png'
+import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/hero-illustration-2.png'
+import IMAGE_WAVE_1 from '@/public/static/images/about/wave-hero-1.svg'
+import IMAGE_WAVE_2 from '@/public/static/images/about/wave-hero-2.svg'
 import { PATHS } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
@@ -53,7 +58,14 @@ const Hero = () => {
   }, [emblaApi, onSelect])
 
   return (
-    <section className={styles.hero}>
+    <section
+      className={styles.hero}
+      style={{
+        // @ts-ignore
+        '--about-hero-bg': `url(${IMAGE_WAVE_1}),
+    url(${IMAGE_ILLUSTRATION_1.src}), url(${IMAGE_WAVE_2})`,
+      }}
+    >
       <header className={styles.logo}>
         <div className="l-container">
           <div className="l-row">
@@ -106,7 +118,13 @@ const Hero = () => {
                 </Button>
               </section>
 
-              <div className="ilusCity" />
+              <div
+                className={styles.ilusCity}
+                style={{
+                  // @ts-ignore
+                  '--about-city-bg': `url(${IMAGE_ILLUSTRATION_2.src})`,
+                }}
+              />
             </section>
           </div>
         </div>
@@ -122,7 +140,11 @@ const Hero = () => {
               </Media>
             </Button>
           </section>
-          <section className={styles.emblaViewport} ref={emblaRef}>
+          <section
+            className={styles.emblaViewport}
+            ref={emblaRef}
+            style={{ cursor: `url(${SLIDE_CURSOR}), auto` }}
+          >
             <ul className={styles.emblaContainer}>
               <li>
                 <a

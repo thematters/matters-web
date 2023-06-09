@@ -1,3 +1,5 @@
+import IMAGE_WALL_BACKGROUND_MD from '@/public/static/images/circle-wall-background-md.jpg'
+import IMAGE_WALL_BACKGROUND_SM from '@/public/static/images/circle-wall-background-sm.jpg'
 import { analytics } from '~/common/utils'
 import { Translate } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
@@ -16,7 +18,14 @@ interface CircleWallProps {
 
 const CircleWall = ({ circle }: CircleWallProps) => {
   return (
-    <section className={styles.container}>
+    <section
+      className={styles.container}
+      style={{
+        // @ts-ignore
+        '--circle-wall-bg-sm': `url(${IMAGE_WALL_BACKGROUND_SM})`,
+        '--circle-wall-bg-md': `url(${IMAGE_WALL_BACKGROUND_MD})`,
+      }}
+    >
       <section className={styles.message}>
         \\&nbsp;
         <Translate zh_hans="订阅围炉看更多" zh_hant="訂閱圍爐看更多" />

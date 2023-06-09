@@ -2,6 +2,9 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
+import IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING from '@/public/static/icons/civic-liker-architect-ring.svg'
+import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 import LOGBOOK from '@/public/static/images/logbook.gif'
 import { IconLogbookBadge16, ResponsiveImage } from '~/components'
 import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
@@ -73,13 +76,31 @@ export const Avatar = (props: AvatarProps) => {
       />
 
       {isCivicLiker && !hasArchitectBadge && (
-        <span className={[styles.ring, styles.civicLiker].join(' ')} />
+        <span
+          className={[styles.ring, styles.civicLiker].join(' ')}
+          style={{
+            // @ts-ignore
+            '--avatar-ring-civic-liker': `url(${IMAGE_CIVIC_LIKER_RING})`,
+          }}
+        />
       )}
       {hasArchitectBadge && !isCivicLiker && (
-        <span className={[styles.ring, styles.architect].join(' ')} />
+        <span
+          className={[styles.ring, styles.architect].join(' ')}
+          style={{
+            // @ts-ignore
+            '--avatar-ring-architect': `url(${IMAGE_MATTERS_ARCHITECT_RING})`,
+          }}
+        />
       )}
       {hasArchitectBadge && isCivicLiker && (
-        <span className={[styles.ring, styles.civicRrchitect].join(' ')} />
+        <span
+          className={[styles.ring, styles.civicRrchitect].join(' ')}
+          style={{
+            // @ts-ignore
+            '--avatar-ring-civic-architect': `url(${IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING})`,
+          }}
+        />
       )}
       {hasLogbook && (
         <section className={styles.badge}>
