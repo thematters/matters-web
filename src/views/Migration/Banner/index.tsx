@@ -9,17 +9,15 @@ import styles from './styles.module.css'
 const Banner = () => {
   const { lang } = useContext(LanguageContext)
 
+  const style = {
+    '--migration-banner-bg': `url(${IMAGE_BANNER})`,
+  } as React.CSSProperties
+
   return (
-    <div className="l-container full">
+    <div className="l-container full" style={style}>
       <div className="l-row">
         <div className="l-col-full">
-          <section
-            className={styles.banner}
-            style={{
-              // @ts-ignore
-              '--migration-banner-bg': `url(${IMAGE_BANNER})`,
-            }}
-          >
+          <section className={styles.banner}>
             <h4>
               <Translate
                 zh_hant="搬家來 Matters，討論超有梗，寫字更賺錢。"

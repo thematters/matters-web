@@ -17,15 +17,13 @@ interface CircleWallProps {
 }
 
 const CircleWall = ({ circle }: CircleWallProps) => {
+  const style = {
+    '--circle-wall-bg-sm': `url(${IMAGE_WALL_BACKGROUND_SM})`,
+    '--circle-wall-bg-md': `url(${IMAGE_WALL_BACKGROUND_MD})`,
+  } as React.CSSProperties
+
   return (
-    <section
-      className={styles.container}
-      style={{
-        // @ts-ignore
-        '--circle-wall-bg-sm': `url(${IMAGE_WALL_BACKGROUND_SM})`,
-        '--circle-wall-bg-md': `url(${IMAGE_WALL_BACKGROUND_MD})`,
-      }}
-    >
+    <section className={styles.container} style={style}>
       <section className={styles.message}>
         \\&nbsp;
         <Translate zh_hans="订阅围炉看更多" zh_hant="訂閱圍爐看更多" />

@@ -14,15 +14,12 @@ const IconArrow = () => (
 )
 
 const JoinUs = () => {
+  const style = {
+    '--about-join-us-bg': `url(${IMAGE_WAVE})`,
+  } as React.CSSProperties
+
   return (
-    <section
-      className={styles.joinUs}
-      onClick={captureClicks}
-      style={{
-        // @ts-ignore
-        '--about-join-us-bg': `url(${IMAGE_WAVE})`,
-      }}
-    >
+    <section className={styles.joinUs} onClick={captureClicks} style={style}>
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">

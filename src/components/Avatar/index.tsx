@@ -67,8 +67,14 @@ export const Avatar = (props: AvatarProps) => {
     [styles.hasBadge]: hasLogbook,
   })
 
+  const style = {
+    '--avatar-ring-civic-liker': `url(${IMAGE_CIVIC_LIKER_RING})`,
+    '--avatar-ring-architect': `url(${IMAGE_MATTERS_ARCHITECT_RING})`,
+    '--avatar-ring-civic-architect': `url(${IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING})`,
+  } as React.CSSProperties
+
   return (
-    <div className={avatarClasses}>
+    <div className={avatarClasses} style={style}>
       <ResponsiveImage
         url={source}
         size="144w"
@@ -76,31 +82,13 @@ export const Avatar = (props: AvatarProps) => {
       />
 
       {isCivicLiker && !hasArchitectBadge && (
-        <span
-          className={[styles.ring, styles.civicLiker].join(' ')}
-          style={{
-            // @ts-ignore
-            '--avatar-ring-civic-liker': `url(${IMAGE_CIVIC_LIKER_RING})`,
-          }}
-        />
+        <span className={[styles.ring, styles.civicLiker].join(' ')} />
       )}
       {hasArchitectBadge && !isCivicLiker && (
-        <span
-          className={[styles.ring, styles.architect].join(' ')}
-          style={{
-            // @ts-ignore
-            '--avatar-ring-architect': `url(${IMAGE_MATTERS_ARCHITECT_RING})`,
-          }}
-        />
+        <span className={[styles.ring, styles.architect].join(' ')} />
       )}
       {hasArchitectBadge && isCivicLiker && (
-        <span
-          className={[styles.ring, styles.civicRrchitect].join(' ')}
-          style={{
-            // @ts-ignore
-            '--avatar-ring-civic-architect': `url(${IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING})`,
-          }}
-        />
+        <span className={[styles.ring, styles.civicRrchitect].join(' ')} />
       )}
       {hasLogbook && (
         <section className={styles.badge}>

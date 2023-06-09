@@ -57,15 +57,14 @@ const Hero = () => {
     onSelect()
   }, [emblaApi, onSelect])
 
-  return (
-    <section
-      className={styles.hero}
-      style={{
-        // @ts-ignore
-        '--about-hero-bg': `url(${IMAGE_WAVE_1}),
+  const style = {
+    '--about-hero-bg': `url(${IMAGE_WAVE_1}),
     url(${IMAGE_ILLUSTRATION_1.src}), url(${IMAGE_WAVE_2})`,
-      }}
-    >
+    '--about-city-bg': `url(${IMAGE_ILLUSTRATION_2.src})`,
+  } as React.CSSProperties
+
+  return (
+    <section className={styles.hero} style={style}>
       <header className={styles.logo}>
         <div className="l-container">
           <div className="l-row">
@@ -118,13 +117,7 @@ const Hero = () => {
                 </Button>
               </section>
 
-              <div
-                className={styles.ilusCity}
-                style={{
-                  // @ts-ignore
-                  '--about-city-bg': `url(${IMAGE_ILLUSTRATION_2.src})`,
-                }}
-              />
+              <div className={styles.ilusCity} />
             </section>
           </div>
         </div>

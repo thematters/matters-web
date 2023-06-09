@@ -10,18 +10,16 @@ import { Button, TextIcon, Translate } from '~/components'
 import styles from './styles.module.css'
 
 const Intro = () => {
+  const style = {
+    '--migration-intro-bg-xs': `url(${IMAGE_MIGRATION_XS})`,
+    '--migration-intro-bg-sm': `url(${IMAGE_MIGRATION_SM})`,
+    '--migration-intro-bg-md': `url(${IMAGE_MIGRATION_MD})`,
+    '--migration-intro-bg-lg': `url(${IMAGE_MIGRATION_LG})`,
+    '--migration-intro-bg-xl': `url(${IMAGE_MIGRATION_XL})`,
+  } as React.CSSProperties
+
   return (
-    <section
-      className={styles.intro}
-      style={{
-        // @ts-ignore
-        '--migration-intro-bg-xs': `url(${IMAGE_MIGRATION_XS})`,
-        '--migration-intro-bg-sm': `url(${IMAGE_MIGRATION_SM})`,
-        '--migration-intro-bg-md': `url(${IMAGE_MIGRATION_MD})`,
-        '--migration-intro-bg-lg': `url(${IMAGE_MIGRATION_LG})`,
-        '--migration-intro-bg-xl': `url(${IMAGE_MIGRATION_XL})`,
-      }}
-    >
+    <section className={styles.intro} style={style}>
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">

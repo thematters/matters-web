@@ -32,16 +32,14 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
     })
   }
 
+  const style = {
+    '--wall-visitor-bg': `url(${IMG_AD})`,
+  } as React.CSSProperties
+
   return (
-    <section className={outerClasses}>
+    <section className={outerClasses} style={style}>
       <Layout.FixedMain>
-        <section
-          className={styles.container}
-          style={{
-            // @ts-ignore
-            '--wall-visitor-bg': `url(${IMG_AD})`,
-          }}
-        >
+        <section className={styles.container}>
           <h2 className={styles.slogan}>
             <Translate
               zh_hant="看不過癮？"

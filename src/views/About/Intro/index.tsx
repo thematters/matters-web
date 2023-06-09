@@ -9,16 +9,15 @@ import { Button, TextIcon, Translate } from '~/components'
 import styles from './styles.module.css'
 
 const Intro = () => {
+  const style = {
+    '--about-wave-bg-1': `url(${IMAGE_WAVE_1})`,
+    '--about-wave-bg-2': `url(${IMAGE_WAVE_2})`,
+  } as React.CSSProperties
+
   return (
-    <section className={styles.intro}>
+    <section className={styles.intro} style={style}>
       <ul>
-        <li
-          className={`l-container full ${styles.ecosystem}`}
-          style={{
-            // @ts-ignore
-            '--about-wave-bg-1': `url(${IMAGE_WAVE_1})`,
-          }}
-        >
+        <li className={`l-container full ${styles.ecosystem}`}>
           <div className="l-row">
             <img src={IMAGE_ILLUSTRATION_1.src} alt="illustration 1" />
 
@@ -100,13 +99,7 @@ const Intro = () => {
             </section>
           </div>
         </li>
-        <li
-          className={`l-container full feature ${styles.feature}`}
-          style={{
-            // @ts-ignore
-            '--about-wave-bg-2': `url(${IMAGE_WAVE_2})`,
-          }}
-        >
+        <li className={`l-container full feature ${styles.feature}`}>
           <div className="l-row">
             <section className={styles.content}>
               {/* <span className={styles.flag}>
