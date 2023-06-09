@@ -1,12 +1,25 @@
 import jump from 'jump.js'
 
+import IMAGE_MIGRATION_LG from '@/public/static/images/migration-intro-lg.svg'
+import IMAGE_MIGRATION_MD from '@/public/static/images/migration-intro-md.svg'
+import IMAGE_MIGRATION_SM from '@/public/static/images/migration-intro-sm.svg'
+import IMAGE_MIGRATION_XL from '@/public/static/images/migration-intro-xl.svg'
+import IMAGE_MIGRATION_XS from '@/public/static/images/migration-intro-xs.svg'
 import { Button, TextIcon, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
 const Intro = () => {
+  const style = {
+    '--migration-intro-bg-xs': `url(${IMAGE_MIGRATION_XS})`,
+    '--migration-intro-bg-sm': `url(${IMAGE_MIGRATION_SM})`,
+    '--migration-intro-bg-md': `url(${IMAGE_MIGRATION_MD})`,
+    '--migration-intro-bg-lg': `url(${IMAGE_MIGRATION_LG})`,
+    '--migration-intro-bg-xl': `url(${IMAGE_MIGRATION_XL})`,
+  } as React.CSSProperties
+
   return (
-    <section className={styles.intro}>
+    <section className={styles.intro} style={style}>
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">

@@ -2,6 +2,7 @@ import { useApolloClient } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useContext } from 'react'
 
+import IMG_AD from '@/public/static/images/ad.svg'
 import { analytics, translate } from '~/common/utils'
 import {
   Button,
@@ -31,8 +32,12 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
     })
   }
 
+  const style = {
+    '--wall-visitor-bg': `url(${IMG_AD})`,
+  } as React.CSSProperties
+
   return (
-    <section className={outerClasses}>
+    <section className={outerClasses} style={style}>
       <Layout.FixedMain>
         <section className={styles.container}>
           <h2 className={styles.slogan}>

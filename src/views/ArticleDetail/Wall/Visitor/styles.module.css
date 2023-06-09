@@ -28,7 +28,7 @@
   flex-direction: column;
   padding: var(--spacing-base);
   background-color: var(--color-white);
-  background-image: url('/static/images/ad.svg');
+  background-image: var(--wall-visitor-bg);
   border-top-left-radius: 1.25rem;
   border-top-right-radius: 1.25rem;
 

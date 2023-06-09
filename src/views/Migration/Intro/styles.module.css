@@ -5,7 +5,7 @@
   padding-top: var(--global-header-height);
   text-align: center;
   background-color: var(--color-green-lighter);
-  background-image: url('/static/images/migration-intro-xs.svg');
+  background-image: var(--migration-intro-bg-xs);
 
   & p {
     padding: var(--spacing-x-loose) 0;
@@ -15,24 +15,24 @@
 
 @media (--sm-up) {
   .intro {
-    background-image: url('/static/images/migration-intro-sm.svg');
+    background-image: var(--migration-intro-bg-sm);
   }
 }
 
 @media (--md-up) {
   .intro {
-    background-image: url('/static/images/migration-intro-md.svg');
+    background-image: var(--migration-intro-bg-md);
   }
 }
 
 @media (--lg-up) {
   .intro {
-    background-image: url('/static/images/migration-intro-lg.svg');
+    background-image: var(--migration-intro-bg-lg);
   }
 }
 
 @media (--xl-up) {
   .intro {
-    background-image: url('/static/images/migration-intro-xl.svg');
+    background-image: var(--migration-intro-bg-xl);
   }
 }
