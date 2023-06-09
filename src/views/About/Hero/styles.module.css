@@ -1,9 +1,7 @@
 .hero {
   position: relative;
   padding: var(--spacing-xx-loose) 0 var(--spacing-x-tight);
-  background-image: url('/static/images/about/wave-hero-1.svg'),
-    url('/static/images/about/hero-illustration-1.png'),
-    url('/static/images/about/wave-hero-2.svg');
+  background-image: var(--about-hero-bg);
   background-position: right top, top 128px right -70px, left bottom;
   background-size: 258px, 281px, 123px;
 
@@ -231,28 +229,6 @@
   }
 }
 
-.scrollHint {
-  background-image: url('/static/images/about/arrow-down.svg');
-  background-size: 0;
-
-  @media (--sm-up) {
-    position: absolute;
-    grid-column: 2 / 3;
-    width: 100%;
-    height: 100%;
-    background-position: right var(--spacing-base);
-    background-size: 9px 42px;
-  }
-
-  @media (--md-up) {
-    background-position: right 3.25rem;
-  }
-}
-
 .ilusCity {
-  background-image: url('/static/images/about/hero-illustration-2.png');
-}
-
-.emblaViewport {
-  cursor: url('/static/images/about/cursor.svg'), auto;
+  background-image: var(--about-city-bg);
 }

@@ -1,14 +1,21 @@
 import IMAGE_ILLUSTRATION_1 from '@/public/static/images/about/intro-illustration-1.png'
 import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/intro-illustration-2.png'
 import IMAGE_ILLUSTRATION_3 from '@/public/static/images/about/intro-illustration-3.png'
+import IMAGE_WAVE_1 from '@/public/static/images/about/wave-intro-1.svg'
+import IMAGE_WAVE_2 from '@/public/static/images/about/wave-intro-2.svg'
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, TextIcon, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
 const Intro = () => {
+  const style = {
+    '--about-wave-bg-1': `url(${IMAGE_WAVE_1})`,
+    '--about-wave-bg-2': `url(${IMAGE_WAVE_2})`,
+  } as React.CSSProperties
+
   return (
-    <section className={styles.intro}>
+    <section className={styles.intro} style={style}>
       <ul>
         <li className={`l-container full ${styles.ecosystem}`}>
           <div className="l-row">

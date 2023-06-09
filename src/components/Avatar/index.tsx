@@ -2,6 +2,9 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
+import IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING from '@/public/static/icons/civic-liker-architect-ring.svg'
+import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 import LOGBOOK from '@/public/static/images/logbook.gif'
 import { IconLogbookBadge16, ResponsiveImage } from '~/components'
 import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
@@ -64,8 +67,14 @@ export const Avatar = (props: AvatarProps) => {
     [styles.hasBadge]: hasLogbook,
   })
 
+  const style = {
+    '--avatar-ring-civic-liker': `url(${IMAGE_CIVIC_LIKER_RING})`,
+    '--avatar-ring-architect': `url(${IMAGE_MATTERS_ARCHITECT_RING})`,
+    '--avatar-ring-civic-architect': `url(${IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING})`,
+  } as React.CSSProperties
+
   return (
-    <div className={avatarClasses}>
+    <div className={avatarClasses} style={style}>
       <ResponsiveImage
         url={source}
         size="144w"

@@ -164,14 +164,14 @@
 
 .ring {
   &.civicLiker {
-    background-image: url('/static/icons/civic-liker-ring.svg');
+    background-image: var(--avatar-ring-civic-ciker);
   }
 
   &.architect {
-    background-image: url('/static/icons/architect-ring.svg');
+    background-image: var(--avatar-ring-architect);
   }
 
   &.civicArchitect {
-    background-image: url('/static/icons/civic-liker-architect-ring.svg');
+    background-image: var(--avatar-ring-civic-architect);
   }
 }
