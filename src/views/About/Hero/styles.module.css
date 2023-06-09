@@ -229,23 +229,6 @@
   }
 }
 
-.scrollHint {
-  background-size: 0;
-
-  @media (--sm-up) {
-    position: absolute;
-    grid-column: 2 / 3;
-    width: 100%;
-    height: 100%;
-    background-position: right var(--spacing-base);
-    background-size: 9px 42px;
-  }
-
-  @media (--md-up) {
-    background-position: right 3.25rem;
-  }
-}
-
 .ilusCity {
   background-image: var(--about-city-bg);
 }
