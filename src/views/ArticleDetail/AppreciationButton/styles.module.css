@@ -30,7 +30,7 @@
     transform: scale(0);
   }
 
-  & .iconSuperlike .superlike_svg__star {
+  & .iconSuperlike :global(.superlike_svg__star) {
     fill-opacity: 0;
     transition: fill-opacity 0.1s ease-in-out;
   }
@@ -39,7 +39,7 @@
 .isSuperLike {
   color: var(--color-matters-gold);
 
-  & .icon-like {
+  & .iconLike {
     opacity: 0;
     transform: scale(0);
   }
@@ -50,7 +50,7 @@
   }
 
   &.superLiked {
-    & .icon-superlike .superlike_svg__star {
+    & .iconSuperlike :global(.superlike_svg__star) {
       fill-opacity: 1;
     }
   }
