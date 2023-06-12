@@ -83,7 +83,7 @@ const httpLink = ({ host, headers }: { host: string; headers: any }) => {
     headers: {
       ...headers,
       host: hostname,
-      "Apollo-Require-Preflight": "true"
+      'Apollo-Require-Preflight': 'true',
     },
     fetchOptions: {
       agent,
