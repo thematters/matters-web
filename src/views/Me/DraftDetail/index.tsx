@@ -28,10 +28,13 @@ import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
 import Sidebar from './Sidebar'
 
-const Editor = dynamic(() => import('~/components/Editor/Article'), {
-  ssr: false,
-  loading: Spinner,
-})
+const Editor = dynamic(
+  () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
+  {
+    ssr: false,
+    loading: Spinner,
+  }
+)
 
 const DraftDetail = () => {
   const { getQuery } = useRoute()

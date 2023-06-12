@@ -22,7 +22,7 @@ import { LanguageContext } from '~/components'
 interface Props {
   defaultValue?: string
   enable?: boolean
-  readOnly: boolean
+  readOnly?: boolean
   update: (params: { summary: any }) => void
 }
 

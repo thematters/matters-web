@@ -8,7 +8,7 @@ import styles from './styles.module.css'
 
 interface Props {
   defaultValue?: string
-  readOnly: boolean
+  readOnly?: boolean
   update: (params: { title: any }) => void
 }
 

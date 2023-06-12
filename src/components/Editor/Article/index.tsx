@@ -1,5 +1,9 @@
 import { useApolloClient } from '@apollo/react-hooks'
-import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
+import {
+  EditorContent,
+  useArticleEdtor,
+  useEditArticleEdtor,
+} from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useContext } from 'react'
 
@@ -20,11 +24,6 @@ import EditorTitle from './Title'
 
 type ArticleEditorProps = {
   draft: EditorDraftFragment
-
-  isReviseMode?: boolean
-  isSummaryReadOnly?: boolean
-  isTitleReadOnly?: boolean
-
   update: (draft: {
     title?: string | null
     content?: string | null
@@ -33,13 +32,8 @@ type ArticleEditorProps = {
   }) => Promise<void>
 } & Pick<FloatingMenuProps, 'upload'>
 
-const ArticleEditor: React.FC<ArticleEditorProps> = ({
+export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   draft,
-
-  isReviseMode = false,
-  isSummaryReadOnly = false,
-  isTitleReadOnly = false,
-
   update,
   upload,
 }) => {
@@ -49,7 +43,7 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
   const { content, publishState, summary, summaryCustomized, title } = draft
   const isPending = publishState === 'pending'
   const isPublished = publishState === 'published'
-  const isReadOnly = (isPending || isPublished) && !isReviseMode
+  const isReadOnly = isPending || isPublished
 
   const editor = useArticleEdtor({
     editable: !isReadOnly,
@@ -82,18 +76,12 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
     <div
       className={classNames({
         [styles.articleEditor]: true,
-        [styles.revisedMode]: isReviseMode,
       })}
     >
-      <EditorTitle
-        defaultValue={title || ''}
-        readOnly={isTitleReadOnly}
-        update={update}
-      />
+      <EditorTitle defaultValue={title || ''} update={update} />
 
       <EditorSummary
         defaultValue={summaryCustomized && summary ? summary : ''}
-        readOnly={isSummaryReadOnly}
         update={update}
         enable
       />
@@ -106,4 +94,63 @@ const ArticleEditor: React.FC<ArticleEditorProps> = ({
   )
 }
 
-export default ArticleEditor
+export const EditArticleEditor: React.FC<ArticleEditorProps> = ({
+  draft,
+
+  update,
+  upload,
+}) => {
+  const { lang } = useContext(LanguageContext)
+  const client = useApolloClient()
+
+  const { content, publishState, summary, summaryCustomized, title } = draft
+  const isPending = publishState === 'pending'
+  const isReadOnly = isPending
+
+  const editor = useEditArticleEdtor({
+    editable: !isReadOnly,
+    placeholder: translate({
+      zh_hant: '請輸入正文…',
+      zh_hans: '请输入正文…',
+      en: 'Enter content…',
+      lang,
+    }),
+    content: content || '',
+    onUpdate: async ({ editor, transaction }) => {
+      const content = editor.getHTML()
+      update({ content })
+    },
+    mentionSuggestion: makeMentionSuggestion({ client }),
+    extensions: [
+      FigureEmbedLinkInput,
+      FigurePlaceholder.configure({
+        placeholder: translate({
+          zh_hant: '添加說明文字…',
+          zh_hans: '添加说明文字…',
+          en: 'Add caption…',
+          lang,
+        }),
+      }),
+    ],
+  })
+
+  return (
+    <div
+      className={classNames({
+        [styles.articleEditor]: true,
+        [styles.revisedMode]: true,
+      })}
+    >
+      <EditorTitle defaultValue={title || ''} readOnly update={update} />
+
+      <EditorSummary
+        defaultValue={summaryCustomized && summary ? summary : ''}
+        readOnly
+        update={update}
+        enable
+      />
+
+      <EditorContent editor={editor} />
+    </div>
+  )
+}

@@ -2,7 +2,7 @@ import { normalizeArticleHTML } from '@matters/matters-editor'
 import { useEffect, useRef } from 'react'
 
 import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
-import { measureDiffs } from '~/common/utils'
+import { measureDiffs, stripHtml } from '~/common/utils'
 import { Button, TextIcon, Translate, useMutation } from '~/components'
 import {
   ConfirmStepContentProps,
@@ -67,8 +67,8 @@ const EditModeHeader = ({
   const currContent = editContent || ''
   const diff =
     measureDiffs(
-      normalizeArticleHTML(initContent.current || ''),
-      normalizeArticleHTML(currContent || '')
+      stripHtml(normalizeArticleHTML(initContent.current || '')),
+      stripHtml(normalizeArticleHTML(currContent || ''))
     ) || 0
   const diffCount = `${diff}`.padStart(2, '0')
   const isOverDiffLimit = diff > MAX_ARTICLE_REVISION_DIFF
