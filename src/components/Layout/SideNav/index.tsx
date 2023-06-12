@@ -28,13 +28,13 @@ import {
 import NavMenu from '../NavMenu'
 import UnreadIcon from '../UnreadIcon'
 import NavListItem from './NavListItem'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Logo = () => {
   const intl = useIntl()
 
   return (
-    <section className="logo">
+    <section className={styles.logo}>
       <Link href={PATHS.HOME} legacyBehavior>
         <a
           aria-label={intl.formatMessage({
@@ -73,7 +73,7 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
     (!isInNotification && isPathStartWith('/me')) || isMyProfile || isMyCircle
 
   return (
-    <ul role="menu">
+    <ul role="menu" className={styles.list}>
       <NavListItem
         name={<FormattedMessage defaultMessage="Discover" description="" />}
         icon={<IconNavHome32 size="lg" />}
@@ -137,7 +137,7 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
       <Dropdown
         content={
           <FocusLock>
-            <section className="dropdown-menu">
+            <section className={styles.dropdownMenu}>
               <VisuallyHidden>
                 <button type="button">
                   <FormattedMessage defaultMessage="Cancel" description="" />
@@ -166,7 +166,7 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
         />
       </Dropdown>
 
-      <li role="menuitem">
+      <li role="menuitem" className={styles.listItem}>
         {isMdUp ? (
           <WriteButton
             variant="sidenav"
@@ -183,8 +183,6 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
           />
         )}
       </li>
-
-      <style jsx>{styles}</style>
     </ul>
   )
 }
@@ -199,10 +197,10 @@ const SideNav = () => {
   // only show auth button for anonymous
   if (!viewer.isAuthed) {
     return (
-      <section className="side-nav">
+      <section className={styles.sideNav}>
         <Logo />
 
-        <ul role="menu">
+        <ul role="menu" className={styles.list}>
           <Media lessThan="xl">
             <NavListItem
               name={
@@ -233,18 +231,16 @@ const SideNav = () => {
             />
           </Media>
 
-          <li role="menuitem">
+          <li role="menuitem" className={styles.listItem}>
             <UniversalAuthButton />
           </li>
         </ul>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
 
   return (
-    <section className="side-nav">
+    <section className={styles.sideNav}>
       <Logo />
 
       <Media greaterThanOrEqual="lg">
@@ -253,8 +249,6 @@ const SideNav = () => {
       <Media lessThan="lg">
         <SideNavMenu isMdUp={false} />
       </Media>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

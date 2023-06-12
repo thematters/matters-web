@@ -1,6 +1,6 @@
 {
   "name": "matters-web",
-  "version": "4.22.1",
+  "version": "4.23.1",
   "description": "codebase of Matters' website",
   "sideEffects": false,
   "author": "Matters <hi@matters.town>",
@@ -149,7 +149,6 @@
     "@types/react-stickynode": "^4.0.0",
     "@types/react-text-truncate": "^0.14.1",
     "@types/segment-analytics": "0.0.34",
-    "@types/styled-jsx": "^2.2.9",
     "@types/validator": "^13.7.17",
     "@types/webpack-env": "^1.18.0",
     "babel-loader": "^9.1.2",
@@ -169,7 +168,6 @@
     "postcss-preset-env": "^8.3.2",
     "prettier": "^2.8.8",
     "storybook": "^7.0.12",
-    "styled-jsx-plugin-postcss": "^4.0.1",
     "stylelint": "^15.6.2",
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-recess-order": "^4.0.0",

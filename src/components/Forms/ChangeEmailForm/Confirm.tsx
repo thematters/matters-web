@@ -25,7 +25,7 @@ import {
   ConfirmVerificationCodeMutation,
 } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface FormProps {
   oldData: { email: string; codeId: string }
@@ -122,7 +122,7 @@ const Confirm: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <section className="container">
+    <section className={styles.container}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<Translate id="email" />}
@@ -156,7 +156,6 @@ const Confirm: React.FC<FormProps> = ({
           }
         />
       </Form>
-      <style jsx>{styles}</style>
     </section>
   )
 

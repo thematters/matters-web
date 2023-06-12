@@ -1,0 +1,21 @@
+.bottomBar {
+  & :global(.fixedMain) {
+    bottom: 0;
+    z-index: var(--z-index-bottom-bar);
+  }
+}
+
+.content {
+  @mixin safe-area-botttom;
+  @mixin shadow-border-top-grey;
+
+  margin: 0 1px; /* borders of main grid */
+  background: var(--color-white);
+}
+
+.inner {
+  @mixin flex-center-space-between;
+
+  justify-content: space-around;
+  height: var(--global-nav-height);
+}

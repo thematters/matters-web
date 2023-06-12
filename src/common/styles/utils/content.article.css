@@ -1,9 +1,3 @@
-/* @styled-jsx=global */
-
-:root {
-  --side-toolbar-button-size: 2rem;
-}
-
 /****
  * Article Detail & Editor
  */
@@ -12,19 +6,19 @@
   line-height: var(--line-height-article-base);
   outline: none;
 
-  & :global(> * + *) {
+  & > * + * {
     margin: var(--spacing-loose) 0;
   }
 
-  & :global(> *:first-child) {
+  & > *:first-child {
     margin-top: 0;
   }
 
-  & :global(> *:last-child) {
+  & > *:last-child {
     margin-bottom: var(--spacing-loose);
   }
 
-  & :global(p) {
+  & p {
     /* FIXME: Firefox eats trailing spaces
      *
      * @see {@url https://github.com/quilljs/quill/issues/1760}
@@ -34,7 +28,9 @@
 
   /* Media
    ========================================================================== */
-  & :global(img, video, audio) {
+  & img,
+  video,
+  audio {
     display: block;
     margin: 0 auto;
 
@@ -45,17 +41,17 @@
 
   /* Figure
    ========================================================================== */
-  & :global(figure) {
+  & figure {
     margin: var(--spacing-x-loose) 0;
     text-align: center;
 
     /* ad-hoc fix for nested figure */
-    & :global(> figure) {
+    & > figure {
       margin-right: 0;
       margin-left: 0;
     }
 
-    & :global(figcaption) {
+    & figcaption {
       padding: 0 var(--spacing-base);
       margin-top: var(--spacing-x-tight);
       font-size: var(--font-size-sm-s);
@@ -66,7 +62,7 @@
 
   /* Audio
    ========================================================================== */
-  & :global(figure.audio) {
+  & figure.audio {
     margin-right: 0;
     margin-left: 0;
 
@@ -159,7 +155,7 @@
 
   /* Embed
    ========================================================================== */
-  & :global(figure[class*='embed']) {
+  & figure[class*='embed'] {
     position: relative;
 
     & > .iframe-container {
@@ -184,7 +180,7 @@
     }
   }
 
-  & :global(figure.embed-code.likebutton) {
+  & figure.embed-code.likebutton {
     & > .iframe-container {
       height: 200px;
       padding-top: 0;
@@ -194,7 +190,7 @@
 
   /* Blockquote
    ========================================================================== */
-  & :global(blockquote) {
+  & blockquote {
     position: relative;
     padding-left: var(--spacing-loose);
 
@@ -211,63 +207,63 @@
 
   /* List
    ========================================================================== */
-  & :global(ul),
-  & :global(ol) {
+  & ul,
+  & ol {
     padding-left: var(--spacing-x-loose);
   }
 
-  & :global(li) {
+  & li {
     padding-left: var(--spacing-x-tight);
     margin: var(--spacing-base) 0;
   }
 
-  & :global(ul) {
+  & ul {
     list-style-type: disc;
   }
 
-  & :global(ol) {
+  & ol {
     list-style-type: decimal;
   }
 
   /* Heading
    ========================================================================== */
-  & :global(h1) {
+  & h1 {
     font-size: var(--font-size-article-h1);
   }
 
-  & :global(h2) {
+  & h2 {
     font-size: var(--font-size-article-h2);
   }
 
-  & :global(h3) {
+  & h3 {
     font-size: var(--font-size-article-h3);
   }
 
-  & :global(h4) {
+  & h4 {
     font-size: var(--font-size-article-h4);
   }
 
-  & :global(h5) {
+  & h5 {
     font-size: var(--font-size-article-h5);
   }
 
-  & :global(h6) {
+  & h6 {
     font-size: var(--font-size-article-h6);
   }
 
-  & :global(h1),
-  & :global(h2),
-  & :global(h3),
-  & :global(h4),
-  & :global(h5),
-  & :global(h6) {
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
     margin-top: var(--spacing-x-loose);
     line-height: var(--line-height-article-heading);
   }
 
   /* Link
    ========================================================================== */
-  & :global(a) {
+  & a {
     padding-bottom: 2px;
     color: var(--color-matters-green);
     border-bottom: 1px solid currentcolor;
@@ -280,14 +276,15 @@
   }
 
   /* fix frequent misuse of links */
-  & :global(u > a, ins > a) {
+  & u > a,
+  ins > a {
     padding-bottom: 0;
     border-bottom: 0;
   }
 
   /* Misc
    ========================================================================== */
-  & :global(hr) {
+  & hr {
     display: block;
     width: 10rem;
     height: 0.25rem;
@@ -295,20 +292,6 @@
     border: 0;
     border-top: 1px solid var(--color-line-grey-dark);
     border-bottom: 1px solid var(--color-line-grey-dark);
-  }
-}
-
-.translating {
-  opacity: 0.5;
-}
-
-@keyframes play-spinning {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
   }
 }
 
@@ -332,7 +315,7 @@
 }
 
 .u-summary,
-.editor-summary :global(textarea) {
+.editor-summary textarea {
   @mixin border-left-grey;
 
   padding-left: var(--spacing-loose);
@@ -420,7 +403,7 @@
 
   @media (--md-up) {
     right: auto;
-    left: calc((var(--side-toolbar-button-size) + var(--spacing-x-loose)) * -1);
+    left: calc((2rem + var(--spacing-x-loose)) * -1);
   }
 }
 
@@ -432,16 +415,16 @@
   opacity: 0;
   transition-property: opacity, transform;
 
-  & :global(> * + *) {
+  & > * + * {
     margin-left: var(--spacing-base);
     cursor: pointer;
   }
 
-  & :global(button) {
+  & button {
     background: transparent;
   }
 
-  & :global(svg) {
+  & svg {
     cursor: pointer;
     background: var(--color-white);
     border-radius: 50%;

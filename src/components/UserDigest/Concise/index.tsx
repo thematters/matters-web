@@ -1,12 +1,12 @@
 import classNames from 'classnames'
 
-import { toPath } from '~/common/utils'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 import { UserDigestConciseUserFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * UserDigest.Concise is a component for presenting user's:
@@ -57,12 +57,12 @@ const Concise = ({
     userName: user.userName || '',
   })
   const containerClasses = classNames({
-    container: true,
-    disabled: disabled || isArchived,
+    [styles.container]: true,
+    [styles.disabled]: disabled || isArchived,
   })
   const nameClasses = classNames({
-    name: true,
-    [`name-style-${nameStyle}`]: !!nameStyle,
+    [styles.name]: true,
+    [styles[`nameStyle${capitalizeFirstLetter(nameStyle)}`]]: !!nameStyle,
   })
 
   if (isArchived) {
@@ -71,12 +71,10 @@ const Concise = ({
         <Avatar size={avatarSize} />
 
         <span className={nameClasses}>
-          <span className="displayname">
+          <span className={styles.displayname}>
             <Translate id="accountArchived" />
           </span>
         </span>
-
-        <style jsx>{styles}</style>
       </span>
     )
   }
@@ -87,11 +85,11 @@ const Concise = ({
         <Avatar size={avatarSize} user={user} />
 
         <span className={nameClasses}>
-          <span className="displayname">{user.displayName}</span>
-          {user.userName && <span className="username">@{user.userName}</span>}
+          <span className={styles.displayname}>{user.displayName}</span>
+          {user.userName && (
+            <span className={styles.username}>@{user.userName}</span>
+          )}
         </span>
-
-        <style jsx>{styles}</style>
       </section>
     </LinkWrapper>
   )

@@ -17,7 +17,7 @@ import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { LastFetchRandomQuery, SidebarTagsPublicQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const SIDEBAR_TAGS = gql`
   query SidebarTagsPublic(
@@ -87,7 +87,7 @@ const Tags = () => {
   }
 
   return (
-    <section className="container">
+    <section className={styles.container}>
       <SectionHeader
         type="tags"
         rightButton={<ShuffleButton onClick={shuffle} />}
@@ -114,8 +114,6 @@ const Tags = () => {
           ))}
         </List>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

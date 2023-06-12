@@ -9,7 +9,7 @@ import { SearchOverviewPublicQuery } from '~/gql/graphql'
 
 import ClearHistoryButton from './ClearHistoryButton'
 import { SEARCH_AUTOCOMPLETE_PRIVATE, SEARCH_AUTOCOMPLETE_PUBLIC } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SearchOverviewProps {
   inPage?: boolean
@@ -32,12 +32,12 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
   const showSearchHistory = recentSearches.length > 0
 
   const recentSearchesClasses = classNames({
-    'recent-searches': true,
-    inPage,
+    [styles.recentSearches]: true,
+    [styles.inPage]: inPage,
   })
   const frequentSearchesClasses = classNames({
-    'frequent-searches': true,
-    inPage,
+    [styles.frequentSearches]: true,
+    [styles.inPage]: inPage,
   })
 
   // private data
@@ -77,7 +77,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
         <section className={recentSearchesClasses}>
           <Menu.Header
             title={<Translate id="searchHistory" />}
-            size={inPage ? 'lg' : 'md-s'}
+            size={inPage ? 'lg' : 'mdS'}
           >
             <ClearHistoryButton />
           </Menu.Header>
@@ -92,13 +92,11 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                   })}
                   legacyBehavior
                 >
-                  <a className="key">{key}</a>
+                  <a className={styles.key}>{key}</a>
                 </Link>
               </li>
             ))}
           </ul>
-
-          <style jsx>{styles}</style>
         </section>
       )}
 
@@ -106,7 +104,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
         <section className={frequentSearchesClasses}>
           <Menu.Header
             title={<Translate id="frequentSearch" />}
-            size={inPage ? 'lg' : 'md-s'}
+            size={inPage ? 'lg' : 'mdS'}
           />
 
           {frequentSearch.map((key, i) => (
@@ -119,12 +117,10 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                 })}
                 key={key}
               >
-                <span className="key">{key}</span>
+                <span className={styles.key}>{key}</span>
               </Menu.Item>
             </Fragment>
           ))}
-
-          <style jsx>{styles}</style>
         </section>
       )}
     </Menu>

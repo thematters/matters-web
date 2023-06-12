@@ -2,15 +2,14 @@ import { Layout } from '~/components'
 
 import Profile from '../Profile'
 import Discussion from './Discussion'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const CircleDiscussion = () => (
   <Layout.Main>
     <Profile />
 
-    <section className="container">
+    <section className={styles.container}>
       <Discussion />
-      <style jsx>{styles}</style>
     </section>
   </Layout.Main>
 )

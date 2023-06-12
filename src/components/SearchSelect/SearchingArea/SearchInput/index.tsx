@@ -5,7 +5,7 @@ import { useContext, useId } from 'react'
 import { translate } from '~/common/utils'
 import { IconClear16, IconSearch16, LanguageContext } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type SearchType = 'Article' | 'Tag' | 'User' | 'Invitee'
 
@@ -69,6 +69,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       {({ values, setValues, handleSubmit, handleChange }) => {
         return (
           <form
+            className={styles.form}
             onSubmit={handleSubmit}
             role="search"
             autoComplete="off"
@@ -100,7 +101,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
             />
 
             <button
-              className="search"
+              className={styles.search}
               type="submit"
               aria-label={translate({ id: 'search', lang })}
             >
@@ -109,7 +110,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 
             {value && (
               <button
-                className="clear"
+                className={styles.clear}
                 type="button"
                 aria-label={translate({ id: 'clear', lang })}
                 onClick={() => {
@@ -120,7 +121,6 @@ const SearchInput: React.FC<SearchInputProps> = ({
                 <IconClear16 color="grey" />
               </button>
             )}
-            <style jsx>{styles}</style>
           </form>
         )
       }}

@@ -92,7 +92,7 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
 
           <Dialog.Footer.Button
             textColor="black"
-            bgColor="grey-lighter"
+            bgColor="greyLighter"
             onClick={closeDialog}
           >
             <Translate zh_hant="取消" zh_hans="取消" en="cancel" />

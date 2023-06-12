@@ -9,7 +9,7 @@ import {
 } from '~/gql/graphql'
 
 import { TagDigestButtons } from '../Buttons'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type Props = {
   tag: TagDigestRichTagPublicFragment & Partial<TagDigestRichTagPrivateFragment>
@@ -56,7 +56,7 @@ const Rich = ({
       testId={TEST_ID.DIGEST_TAG_RICH}
       bgActiveColor="none"
     >
-      <section className="content">
+      <section className={styles.content}>
         <TextIcon
           icon={<IconHashTag16 color="grey" />}
           color="black"
@@ -68,18 +68,17 @@ const Rich = ({
         </TextIcon>
 
         {hasFollow && (
-          <section className="button">
+          <section className={styles.button}>
             <TagDigestButtons.FollowButton tag={tag} />
           </section>
         )}
       </section>
 
       {hasDesc && (
-        <section className="desc">
+        <section className={styles.desc}>
           <p>{tag.description}</p>
         </section>
       )}
-      <style jsx>{styles}</style>
     </Card>
   )
 }

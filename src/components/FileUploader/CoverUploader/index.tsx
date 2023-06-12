@@ -23,7 +23,7 @@ import {
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { SingleFileUploadMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * This shared component is for uploading cover.
@@ -137,11 +137,11 @@ export const CoverUploader = ({
   }
 
   const Mask = () => (
-    <div className="mask">
+    <div className={styles.mask}>
       {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
 
       {initCover && (
-        <section className="delete">
+        <section className={styles.delete}>
           <Button
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
@@ -155,15 +155,13 @@ export const CoverUploader = ({
           </Button>
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </div>
   )
 
   const isCircle = type === 'circle'
 
   return (
-    <label htmlFor={fieldId}>
+    <label className={styles.label} htmlFor={fieldId}>
       {!isCircle && (
         <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
           <Mask />
@@ -186,8 +184,6 @@ export const CoverUploader = ({
           onChange={handleChange}
         />
       </VisuallyHidden>
-
-      <style jsx>{styles}</style>
     </label>
   )
 }

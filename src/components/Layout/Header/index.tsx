@@ -5,7 +5,7 @@ import { TEST_ID } from '~/common/enums'
 import BackButton from './BackButton'
 import CancelButton from './CancelButton'
 import MeButton from './MeButton'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Title from './Title'
 
 interface HeaderProps {
@@ -23,22 +23,21 @@ const Header: React.FC<HeaderProps> & {
   Title: typeof Title
 } = ({ left, right, mode = 'solid-fixed', className }) => {
   const headerClasses = classNames({
-    [mode]: true,
-    [`${className}`]: !!className,
+    [styles.header]: true,
+    [styles[mode]]: true,
+    [styles[`${className}`]]: !!className,
   })
 
   const rightClasses = classNames({
-    right: true,
+    [styles.right]: true,
   })
 
   return (
     <header className={headerClasses} data-test-id={TEST_ID.LAYOUT_HEADER}>
-      <section className="content">
-        {left && <section className="left">{left}</section>}
+      <section className={styles.content}>
+        {left && <section className={styles.left}>{left}</section>}
         {right && <section className={rightClasses}>{right}</section>}
       </section>
-
-      <style jsx>{styles}</style>
     </header>
   )
 }

@@ -19,7 +19,7 @@ import { UserSubscriptionsQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
 import { USER_SUBSCRIPTIONS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Subscriptions = () => {
   const { getQuery } = useRoute()
@@ -136,13 +136,13 @@ const Subscriptions = () => {
 
       <UserTabs />
 
-      <section className="subtitle">
+      <section className={styles.subtitle}>
         <Title type="feed" is="h2">
           <Translate zh_hant="活躍在圍爐中" zh_hans="活跃在围炉中" />
         </Title>
       </section>
 
-      <section className="list">
+      <section className={styles.list}>
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
           <List hasBorder={false}>
             {edges.map(({ node }) => (
@@ -153,8 +153,6 @@ const Subscriptions = () => {
           </List>
         </InfiniteScroll>
       </section>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

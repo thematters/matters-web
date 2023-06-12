@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 
-import contentStyles from '../styles.css'
-import styles from './styles.css'
+import contentStyles from '../styles.module.css'
+import styles from './styles.module.css'
 
 const SectionCard: React.FC<
   React.PropsWithChildren<{
@@ -12,25 +12,23 @@ const SectionCard: React.FC<
   }>
 > = ({ title, description, right, children, warning }) => {
   const descriptionClasses = classNames({
-    description: true,
-    error: warning,
+    [styles.description]: true,
+    [contentStyles.description]: true,
+    [styles.error]: warning,
   })
 
   return (
-    <section className="card">
+    <section className={styles.card}>
       {title && (
-        <header>
+        <header className={styles.header}>
           <h3>{title}</h3>
-          {right || <section className="right">{right}</section>}
+          {right || <section className={styles.right}>{right}</section>}
         </header>
       )}
 
       {description && <p className={descriptionClasses}>{description}</p>}
 
       {children}
-
-      <style jsx>{styles}</style>
-      <style jsx>{contentStyles}</style>
     </section>
   )
 }

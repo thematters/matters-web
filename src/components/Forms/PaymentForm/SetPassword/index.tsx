@@ -20,7 +20,7 @@ import {
 } from '~/components'
 import { SetPaymentPasswordMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   submitCallback: () => void
@@ -161,7 +161,7 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
 
   return (
     <Dialog.Content hasGrow>
-      <section className="reason">
+      <section className={styles.reason}>
         {isInPassword && (
           <p>
             <Translate
@@ -184,11 +184,9 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
           </p>
         )}
 
-        <p className="hint">
+        <p className={styles.hint}>
           <Translate id="hintPaymentPassword" />
         </p>
-
-        <style jsx>{styles}</style>
       </section>
 
       {InnerForm}

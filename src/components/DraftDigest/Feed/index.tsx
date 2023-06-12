@@ -6,7 +6,7 @@ import { Card, LinkWrapper, ResponsiveWrapper, Translate } from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
 import DeleteButton from './DeleteButton'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface DraftDigestFeedProps {
   draft: DraftDigestFeedDraftFragment
@@ -36,20 +36,19 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
   return (
     <ResponsiveWrapper>
       <Card {...path} spacing={['base', 0]} bgActiveColor="none">
-        <section className="container">
-          <section className="left">
+        <section className={styles.container}>
+          <section className={styles.left}>
             <LinkWrapper {...path} textActiveColor="green">
-              <section className="title">
+              <section className={styles.title}>
                 {title || <Translate id="untitle" />}
               </section>
             </LinkWrapper>
           </section>
 
-          <section className="right">
+          <section className={styles.right}>
             <DeleteButton draft={draft} />
           </section>
         </section>
-        <style jsx>{styles}</style>
       </Card>
     </ResponsiveWrapper>
   )

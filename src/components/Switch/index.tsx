@@ -4,7 +4,7 @@ import { useId } from 'react'
 
 import { IconSpinner16 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type SwitchProps = {
   name: string
@@ -26,7 +26,7 @@ export const Switch: React.FC<SwitchProps> = ({
   const fieldId = useId()
 
   const switchClasses = classNames({
-    switch: true,
+    [styles.switch]: true,
     'u-area-disable': disabled,
   })
 
@@ -45,12 +45,10 @@ export const Switch: React.FC<SwitchProps> = ({
       <span />
 
       {loading && (
-        <span className="loading">
-          <IconSpinner16 color="grey-light" />
+        <span className={styles.loading}>
+          <IconSpinner16 color="greyLight" />
         </span>
       )}
-
-      <style jsx>{styles}</style>
     </label>
   )
 }

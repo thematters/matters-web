@@ -42,7 +42,7 @@ const BaseWriteButton = ({
   if (variant === 'navbar') {
     return (
       <Button
-        bgActiveColor="grey-lighter"
+        bgActiveColor="greyLighter"
         size={['2rem', '2rem']}
         onClick={onClick}
         aria-label={translate({ id: 'write', lang })}

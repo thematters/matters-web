@@ -13,7 +13,7 @@ import {
 } from '~/components'
 
 import OnboardingTasksDialog from '../Dialog'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const NavBar = () => {
   const viewer = useContext(ViewerContext)
@@ -23,7 +23,7 @@ const NavBar = () => {
   )
 
   return (
-    <section className="nav-bar">
+    <section className={styles.navBar}>
       <Layout.FixedMain>
         <OnboardingTasksDialog>
           {({ openDialog: openOnboardingTasksDialog }) => (
@@ -34,11 +34,11 @@ const NavBar = () => {
               aria-haspopup="dialog"
               role="button"
             >
-              <section className="content">
-                <section className="inner">
-                  <section className="left">
+              <section className={styles.content}>
+                <section className={styles.inner}>
+                  <section className={styles.left}>
                     {withIcon(IconOnboardLaunch)({
-                      size: 'xl-m',
+                      size: 'xlM',
                       color: 'gold',
                     })}
 
@@ -48,11 +48,11 @@ const NavBar = () => {
                         zh_hans="星际导航"
                         en="Galaxy Guide"
                       />
-                      <span className="highlight"> {doneCount}/5</span>
+                      <span className={styles.highlight}> {doneCount}/5</span>
                     </p>
                   </section>
 
-                  <section className="right">
+                  <section className={styles.right}>
                     <IconArrowRight16 color="grey" />
                   </section>
                 </section>
@@ -64,8 +64,6 @@ const NavBar = () => {
 
       <RecommendAuthorDialog />
       <RecommendTagDialog />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

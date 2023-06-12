@@ -34,7 +34,7 @@ import {
   PasswordResetDialogButton,
   PasswordResetRedirectButton,
 } from './Buttons'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -162,7 +162,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     },
   })
 
-  const containerClasses = classNames({ container: !!isInPage })
+  const containerClasses = classNames({ [styles.container]: !!isInPage })
 
   const InnerForm = (
     <section className={containerClasses}>
@@ -214,7 +214,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           />
         )}
       </Form>
-      <style jsx>{styles}</style>
     </section>
   )
 
@@ -242,9 +241,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
         {InnerForm}
 
-        <footer>
+        <footer className={styles.footer}>
           <LanguageSwitch />
-          <style jsx>{styles}</style>
         </footer>
       </>
     )

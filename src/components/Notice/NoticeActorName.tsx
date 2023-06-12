@@ -5,7 +5,7 @@ import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { NoticeActorNameUserFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const NoticeActorName = ({
   user,
@@ -24,11 +24,10 @@ const NoticeActorName = ({
   return (
     <Link {...path}>
       <a
-        className="display-name"
+        className={styles.displayName}
         data-test-id={TEST_ID.NOTICE_USER_DISPLAY_NAME}
       >
         {user.displayName}
-        <style jsx>{styles}</style>
       </a>
     </Link>
   )

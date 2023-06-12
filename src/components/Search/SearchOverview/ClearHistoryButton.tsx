@@ -77,7 +77,7 @@ const ClearHistoryButton = () => {
     <Button
       size={[null, '1.25rem']}
       spacing={[0, 'xtight']}
-      borderColor="grey-light"
+      borderColor="greyLight"
       borderWidth="sm"
       onClick={async () => {
         await clear()

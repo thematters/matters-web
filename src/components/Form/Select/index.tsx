@@ -6,7 +6,7 @@ import { DropdownDialog } from '~/components'
 
 import Field, { FieldProps } from '../Field'
 import Option from './Option'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * Pure UI component for <select> & <option>
@@ -23,6 +23,7 @@ import styles from './styles.css'
 type Option = {
   name: string | React.ReactNode
   subtitle?: string | React.ReactNode
+  extra?: string | React.ReactNode
   value: any
   selected?: boolean
 }
@@ -53,8 +54,9 @@ const Select: React.FC<SelectProps> = ({
 
   const Options = ({ dropdown }: { dropdown?: boolean }) => {
     const optionsClasses = classNames({
-      options: true,
-      dropdown,
+      [styles.list]: true,
+      [styles.options]: true,
+      [styles.dropdown]: dropdown,
     })
 
     return (
@@ -77,8 +79,6 @@ const Select: React.FC<SelectProps> = ({
             key={option.value}
           />
         ))}
-
-        <style jsx>{styles}</style>
       </ul>
     )
   }
@@ -104,12 +104,11 @@ const Select: React.FC<SelectProps> = ({
             name={selectedOption.name}
             subtitle={selectedOption.subtitle}
             selected
+            extra={selectedOption?.extra}
             size={size}
             onClick={openDialog}
             ref={ref}
           />
-
-          <style jsx>{styles}</style>
         </ul>
       )}
     </DropdownDialog>

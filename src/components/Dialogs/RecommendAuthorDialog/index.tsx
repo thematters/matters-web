@@ -5,7 +5,7 @@ import { Dialog, Tabs, Translate, useDialogSwitch } from '~/components'
 import { useEventListener } from '~/components/Hook'
 
 import Feed, { FeedType } from './Feed'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -36,13 +36,13 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
 
         <Dialog.Content hasGrow>
           <Dialog.Message align="left">
-            <p className="message">
+            <p className={styles.message}>
               <Translate
                 zh_hant="追蹤至少"
                 zh_hans="追踪至少"
                 en="Follow at least"
               />
-              <span> 5 </span>
+              <span className={styles.num}> 5 </span>
               <Translate
                 zh_hant="位感興趣的創作者，以開啟個性化的訂閱時間線，並收到創作者最新發佈的作品和動態。"
                 zh_hans="位感兴趣的创作者，以开启个性化的订阅时间线，并收到创作者最新发布的作品和动态。"
@@ -69,8 +69,6 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
           <Feed type={feed} />
         </Dialog.Content>
       </Dialog>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

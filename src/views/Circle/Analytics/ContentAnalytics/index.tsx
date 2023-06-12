@@ -22,7 +22,7 @@ import CircleContentAnalyticsTabs, {
   CircleContentAnalyticsType,
 } from './ContentTabs'
 import { CIRCLE_CONTENT_ANALYTICS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type FeedType =
   | CircleContentAnalyticsPaywallQuery
@@ -91,7 +91,7 @@ const CircleContentAnalytics = () => {
   const [type, setType] = useState<CircleContentAnalyticsType>('paywall')
 
   return (
-    <section className="container">
+    <section className={styles.container}>
       <SectionHead
         icon={IconAnalyticsContent24}
         title={
@@ -105,8 +105,6 @@ const CircleContentAnalytics = () => {
       <CircleContentAnalyticsTabs type={type} setType={setType} />
 
       <Feed type={type} />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

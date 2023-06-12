@@ -26,7 +26,7 @@ import {
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
 import { PutCircleMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -135,7 +135,7 @@ const Init: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <section className="container">
+    <section className={styles.container}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={
@@ -211,15 +211,6 @@ const Init: React.FC<FormProps> = ({
           ref={inputRef}
         />
       </Form>
-
-      <style jsx>{styles}</style>
-      <style jsx>{`
-        .displayNameInput :global(.input-container) {
-          &::before {
-            content: '${process.env.NEXT_PUBLIC_SITE_DOMAIN}/~';
-          }
-        }
-      `}</style>
     </section>
   )
 

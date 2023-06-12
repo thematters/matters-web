@@ -26,7 +26,7 @@ const Facebook = ({
       return window.open(shareUrl, 'Share to Facebook')
     }}
   >
-    {circle && withIcon(IconShareFacebookCircle)({ size: 'xl-m' })}
+    {circle && withIcon(IconShareFacebookCircle)({ size: 'xlM' })}
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareFacebook)({})} spacing="base">

@@ -6,7 +6,7 @@ import { FollowingFeedCircleFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CircleDigestFeedProps = {
   circle: FollowingFeedCircleFragment
@@ -30,42 +30,40 @@ const FeedCircle = ({
   })
 
   return (
-    <section className="container">
+    <section className={styles.container}>
       {header}
 
       <Card
         href={path.href}
         spacing={['base', 'base']}
-        bgColor="grey-lighter"
+        bgColor="greyLighter"
         borderRadius="xtight"
         {...rest}
       >
-        <section className="content">
-          <h3 className="title">
+        <section className={styles.content}>
+          <h3 className={styles.title}>
             <LinkWrapper {...path} textActiveColor="green">
               {displayName}
             </LinkWrapper>
           </h3>
 
-          {description && <p className="description">{description}</p>}
+          {description && <p className={styles.description}>{description}</p>}
 
-          <section className="avatar">
+          <section className={styles.avatar}>
             <CircleAvatar circle={circle} size="xl" />
           </section>
         </section>
       </Card>
 
-      <footer>
-        <section className="left">
+      <footer className={styles.footer}>
+        <section className={styles.left}>
           <DateTime date={date} />
         </section>
 
-        <section className="right">
+        <section className={styles.right}>
           <DropdownActions actions={actions} />
         </section>
       </footer>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

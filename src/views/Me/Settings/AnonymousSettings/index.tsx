@@ -3,7 +3,7 @@ import { Head, Layout } from '~/components'
 import DisplayPreferences from './DisplayPreferences'
 import Enhance from './Enhance'
 import Learn from './Learn'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Settings = () => {
   const year = new Date().getFullYear()
@@ -16,14 +16,13 @@ const Settings = () => {
       <Learn />
       <Enhance />
 
-      <section className="copyright">
+      <section className={styles.copyright}>
         <span>
           {'@ '}
           <span itemProp="copyrightYear">{year}</span>{' '}
           <span itemProp="copyrightHolder">Matters</span>
         </span>
       </section>
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

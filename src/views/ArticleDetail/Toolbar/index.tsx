@@ -20,7 +20,7 @@ import {
 import AppreciationButton from '../AppreciationButton'
 import CommentBar from './CommentBar'
 import DonationButton from './DonationButton'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ToolbarProps = {
   article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
@@ -80,7 +80,7 @@ const Toolbar = ({
       : path.href
 
   const dropdonwActionsProps: DropdownActionsControls = {
-    size: 'md-s',
+    size: 'mdS',
     inCard: false,
     sharePath,
     hasExtend: !lock,
@@ -88,8 +88,8 @@ const Toolbar = ({
   }
 
   return (
-    <section className="toolbar" data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
-      <section className="buttons">
+    <section className={styles.toolbar} data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
+      <section className={styles.buttons}>
         <ReCaptchaProvider action="appreciateArticle">
           <AppreciationButton
             article={article}
@@ -104,18 +104,18 @@ const Toolbar = ({
           articleDetail={articleDetails}
         />
 
-        <section className="comment-bar">
+        <section className={styles.commentBar}>
           <CommentBar
             article={article}
             disabled={lock || !article.canComment}
           />
         </section>
 
-        <BookmarkButton article={article} size="md-s" inCard={false} />
+        <BookmarkButton article={article} size="mdS" inCard={false} />
 
         <Media greaterThan="sm">
           <ShareButton
-            iconSize="md-s"
+            iconSize="mdS"
             inCard={false}
             // title={makeTitle(article.title)}
             path={sharePath}
@@ -138,8 +138,6 @@ const Toolbar = ({
           <DropdownActions article={article} {...dropdonwActionsProps} />
         </Media>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

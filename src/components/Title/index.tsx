@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type TitleType = 'article' | 'feed' | 'sidebar' | 'nav' | 'tag'
 
@@ -34,8 +34,8 @@ export const Title: React.FC<TitleProps> = ({
   ...props
 }) => {
   const titleClasses = classNames({
-    [type]: true,
-    clickable: !!props.onClick,
+    [styles[type]]: true,
+    [styles.clickable]: !!props.onClick,
   })
 
   return (
@@ -53,8 +53,6 @@ export const Title: React.FC<TitleProps> = ({
           {children}
         </h3>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }

@@ -1,0 +1,11 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.textActiveGreen {
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green);
+  }
+}

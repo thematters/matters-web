@@ -3,7 +3,7 @@ import IMAGE_WAVE from '@/public/static/images/about/wave-join-us.svg'
 import { captureClicks } from '~/common/utils'
 import { Translate, withIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const IconArrow = () => (
   <>
@@ -14,8 +14,12 @@ const IconArrow = () => (
 )
 
 const JoinUs = () => {
+  const style = {
+    '--about-join-us-bg': `url(${IMAGE_WAVE})`,
+  } as React.CSSProperties
+
   return (
-    <section className="joinUs" onClick={captureClicks}>
+    <section className={styles.joinUs} onClick={captureClicks} style={style}>
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">
@@ -54,13 +58,6 @@ const JoinUs = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{styles}</style>
-      <style jsx>{`
-        .joinUs {
-          background-image: url(${IMAGE_WAVE});
-        }
-      `}</style>
     </section>
   )
 }

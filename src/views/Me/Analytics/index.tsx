@@ -10,7 +10,7 @@ import { MeAnalyticsQuery } from '~/gql/graphql'
 
 import EmptyAnalytics from './EmptyAnalytics'
 import SelectPeriod from './SelectPeriod'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import SupporterDigestFeed from './SupporterDigestFeed/index'
 
 const ME_ANALYTICS = gql`
@@ -107,10 +107,10 @@ const MyAnalytics = () => {
         }
       />
       <Head title={{ id: 'myAnalytics' }} />
-      <section className="container">
+      <section className={styles.container}>
         {edges?.length === 0 && (
-          <section className="no-supporter">
-            <section className="no-supporter-img">
+          <section className={styles.noSupporter}>
+            <section className={styles.noSupporterImg}>
               <AnalyticsNoSupporter />
             </section>
             <p>
@@ -130,7 +130,6 @@ const MyAnalytics = () => {
             </List.Item>
           ))}
         </List>
-        <style jsx>{styles}</style>
       </section>
     </Layout.Main>
   )

@@ -24,7 +24,7 @@ import {
 import { SUBSCRIBE_CIRCLE } from './gql'
 import Head from './Head'
 import Hint from './Hint'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
@@ -125,7 +125,7 @@ const Confirm: React.FC<FormProps> = ({
         <section>
           <Head circle={circle} />
 
-          <section className="current-card">
+          <section className={styles.currentCard}>
             <TextIcon
               icon={withIcon(IconStripeCard)({ size: 'md' })}
               color="grey"
@@ -157,8 +157,6 @@ const Confirm: React.FC<FormProps> = ({
           <Translate id="forgetPassword" />？
         </Dialog.Footer.Button>
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

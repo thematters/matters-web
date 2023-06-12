@@ -6,7 +6,7 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount, translate } from '~/common/utils'
 
 import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  *
@@ -79,8 +79,8 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   const isActive = value === amount
 
   const amountClasses = classNames({
-    ['radio-input-item']: true,
-    active: isActive,
+    [styles.radioInputItem]: true,
+    [styles.active]: isActive,
     'u-area-disable': disabled || isBalanceInsufficient,
   })
 
@@ -111,8 +111,6 @@ const AmountOption: React.FC<AmountOptionProps> = ({
           />
         </VisuallyHidden>
       </label>
-
-      <style jsx>{styles}</style>
     </li>
   )
 }
@@ -150,16 +148,16 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
   } = customAmount
 
   return (
-    <section className="amount-input">
+    <section className={styles.amountInput}>
       <Field>
-        <ul className="radio-input-options">
+        <ul className={styles.radioInputOptions}>
           {options.map((option) => (
             <AmountOption {...baseInputProps} key={option} amount={option} />
           ))}
         </ul>
 
         {customAmount && (
-          <section className="custom-input">
+          <section className={styles.customInput}>
             <input
               className={customAmountError ? 'error' : ''}
               type="number"
@@ -173,14 +171,14 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
               {...customAmountInputProps}
             />
 
-            {customAmountHint && <div className="hint">{customAmountHint}</div>}
+            {customAmountHint && (
+              <div className={styles.hint}>{customAmountHint}</div>
+            )}
           </section>
         )}
 
         <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
       </Field>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

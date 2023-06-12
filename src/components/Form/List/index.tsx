@@ -1,7 +1,9 @@
 import classNames from 'classnames'
 
+import { capitalizeFirstLetter } from '~/common/utils'
+
 import Item from './Item'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * iOS-like UI component
@@ -27,24 +29,25 @@ const List: React.FC<React.PropsWithChildren<ListProps>> & {
   children,
 }) => {
   const groupClasses = classNames({
-    group: true,
-    [`spacing-x-${spacingX}`]: !!spacingX,
+    [styles.group]: true,
+    [spacingX ? styles[`spacingX${capitalizeFirstLetter(spacingX)}`] : '']:
+      !!spacingX,
   })
 
   const listClasses = classNames({
-    grey: forceGreyStyle,
-    [`spacing-y-${spacingY}`]: !!spacingY,
+    [styles.list]: true,
+    [styles.grey]: forceGreyStyle,
+    [spacingY ? styles[`spacingY${capitalizeFirstLetter(spacingY)}`] : '']:
+      !!spacingY,
   })
 
   return (
     <section className={groupClasses}>
-      {groupName && <h4 className="name">{groupName}</h4>}
+      {groupName && <h4 className={styles.name}>{groupName}</h4>}
 
       <ul className={listClasses} role="list">
         {children}
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

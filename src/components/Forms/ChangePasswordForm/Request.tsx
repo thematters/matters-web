@@ -15,7 +15,7 @@ import {
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface FormProps {
   defaultEmail?: string
@@ -93,7 +93,7 @@ const Request: React.FC<FormProps> = ({
     },
   })
 
-  const containerClasses = classNames({ container: !!isInPage })
+  const containerClasses = classNames({ [styles.container]: !!isInPage })
 
   const InnerForm = (
     <section className={containerClasses}>
@@ -114,7 +114,6 @@ const Request: React.FC<FormProps> = ({
           onChange={handleChange}
         />
       </Form>
-      <style jsx>{styles}</style>
     </section>
   )
 

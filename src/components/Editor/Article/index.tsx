@@ -3,14 +3,12 @@ import { MattersArticleEditor } from '@matters/matters-editor'
 import { FC, useContext } from 'react'
 
 import { ADD_TOAST, ASSET_TYPE } from '~/common/enums'
-import editorStyles from '~/common/styles/utils/content.article.css'
-import themeStyles from '~/common/styles/vendors/quill.bubble.css'
 import { LanguageContext } from '~/components'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { EditorDraftFragment, SearchUsersQuery } from '~/gql/graphql'
 
 import MentionUserList from '../MentionUserList'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   draft: EditorDraftFragment
@@ -70,7 +68,7 @@ const ArticleEditor: FC<Props> = ({
 
   return (
     <>
-      <div className="container">
+      <div className={styles.container}>
         <MattersArticleEditor
           editorContent={content || ''}
           editorContentId={id}
@@ -93,9 +91,6 @@ const ArticleEditor: FC<Props> = ({
           titleReadOnly={isTitleReadOnly}
         />
       </div>
-      <style jsx>{themeStyles}</style>
-      <style jsx>{editorStyles}</style>
-      <style jsx>{styles}</style>
     </>
   )
 }

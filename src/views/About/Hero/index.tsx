@@ -3,7 +3,6 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
 import { useCallback, useContext, useEffect, useState } from 'react'
 
-import IMAGE_ARROW_DOWN from '@/public/static/images/about/arrow-down.svg'
 import { ReactComponent as IconButtonLeft } from '@/public/static/images/about/button-left.svg'
 import { ReactComponent as IconButtonRight } from '@/public/static/images/about/button-right.svg'
 import SLIDE_CURSOR from '@/public/static/images/about/cursor.svg'
@@ -23,7 +22,7 @@ import {
   withIcon,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Hero = () => {
   const { lang } = useContext(LanguageContext)
@@ -58,9 +57,15 @@ const Hero = () => {
     onSelect()
   }, [emblaApi, onSelect])
 
+  const style = {
+    '--about-hero-bg': `url(${IMAGE_WAVE_1}),
+    url(${IMAGE_ILLUSTRATION_1.src}), url(${IMAGE_WAVE_2})`,
+    '--about-city-bg': `url(${IMAGE_ILLUSTRATION_2.src})`,
+  } as React.CSSProperties
+
   return (
-    <section className="hero">
-      <header className="logo">
+    <section className={styles.hero} style={style}>
+      <header className={styles.logo}>
         <div className="l-container">
           <div className="l-row">
             <div className="l-col-full">
@@ -80,7 +85,7 @@ const Hero = () => {
       <div className="l-container">
         <div className="l-row">
           <div className="l-col-full">
-            <section className="slogan">
+            <section className={styles.slogan}>
               <section>
                 <h2>
                   <Translate
@@ -112,15 +117,15 @@ const Hero = () => {
                 </Button>
               </section>
 
-              <div className="ilusCity" />
+              <div className={styles.ilusCity} />
             </section>
           </div>
         </div>
       </div>
 
-      <section className="reports">
-        <section className="container">
-          <section className="scrollButton scrollLeft">
+      <section className={styles.reports}>
+        <section className={styles.container}>
+          <section className={`${styles.scrollButton} ${styles.scrollLeft}`}>
             <Button onClick={scrollPrev} disabled={!prevBtnEnabled}>
               <Media at="sm">{withIcon(IconButtonLeft)({ size: 'md' })}</Media>
               <Media greaterThan="sm">
@@ -128,8 +133,12 @@ const Hero = () => {
               </Media>
             </Button>
           </section>
-          <section className="emblaViewport" ref={emblaRef}>
-            <ul className="emblaContainer">
+          <section
+            className={styles.emblaViewport}
+            ref={emblaRef}
+            style={{ cursor: `url(${SLIDE_CURSOR}), auto` }}
+          >
+            <ul className={styles.emblaContainer}>
               <li>
                 <a
                   href="https://restofworld.org/2020/chinas-fugitive-writers-find-a-home-online/"
@@ -304,7 +313,7 @@ const Hero = () => {
               </li>
             </ul>
           </section>
-          <section className="scrollButton scrollRight">
+          <section className={`${styles.scrollButton} ${styles.scrollRight}`}>
             <Button onClick={scrollNext} disabled={!nextBtnEnabled}>
               <Media at="sm">{withIcon(IconButtonRight)({ size: 'md' })}</Media>
               <Media greaterThan="sm">
@@ -314,23 +323,6 @@ const Hero = () => {
           </section>
         </section>
       </section>
-
-      <style jsx>{styles}</style>
-      <style jsx>{`
-        .hero {
-          background-image: url(${IMAGE_WAVE_1}),
-            url(${IMAGE_ILLUSTRATION_1.src}), url(${IMAGE_WAVE_2});
-        }
-        .ilusCity {
-          background-image: url(${IMAGE_ILLUSTRATION_2.src});
-        }
-        .scrollHint {
-          background-image: url(${IMAGE_ARROW_DOWN});
-        }
-        .emblaViewport {
-          cursor: url(${SLIDE_CURSOR}), auto;
-        }
-      `}</style>
     </section>
   )
 }

@@ -32,7 +32,7 @@ import {
 } from '~/gql/graphql'
 
 import PaymentInfo from '../../PaymentInfo'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SetAmountOpenTabCallbackValues {
   window: Window
@@ -199,11 +199,7 @@ const Confirm: React.FC<FormProps> = ({
           >
             <p>
               <Button onClick={switchToSetAmount}>
-                <TextIcon
-                  size="xs"
-                  textDecoration="underline"
-                  color="grey-dark"
-                >
+                <TextIcon size="xs" textDecoration="underline" color="greyDark">
                   <Translate
                     zh_hant="修改金額"
                     zh_hans="修改金额"
@@ -216,7 +212,7 @@ const Confirm: React.FC<FormProps> = ({
 
           {currency === CURRENCY.HKD && !isWalletInsufficient && (
             <>
-              <p className="hint">
+              <p className={styles.hint}>
                 <Translate
                   zh_hant="數入六位數字交易密碼即可完成："
                   zh_hans="数入六位数字交易密码即可完成："
@@ -226,8 +222,6 @@ const Confirm: React.FC<FormProps> = ({
               {InnerForm}
             </>
           )}
-
-          <style jsx>{styles}</style>
         </section>
       </Dialog.Content>
 

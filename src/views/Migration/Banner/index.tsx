@@ -4,16 +4,20 @@ import IMAGE_BANNER from '@/public/static/images/migration-banner.svg'
 import { translate } from '~/common/utils'
 import { LanguageContext, ShareButton, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Banner = () => {
   const { lang } = useContext(LanguageContext)
 
+  const style = {
+    '--migration-banner-bg': `url(${IMAGE_BANNER})`,
+  } as React.CSSProperties
+
   return (
-    <div className="l-container full">
+    <div className="l-container full" style={style}>
       <div className="l-row">
         <div className="l-col-full">
-          <section className="banner">
+          <section className={styles.banner}>
             <h4>
               <Translate
                 zh_hant="搬家來 Matters，討論超有梗，寫字更賺錢。"
@@ -50,13 +54,6 @@ const Banner = () => {
                 />
               </TextIcon>
             </ShareButton>
-
-            <style jsx>{styles}</style>
-            <style jsx>{`
-              .banner {
-                background-image: url(${IMAGE_BANNER});
-              }
-            `}</style>
           </section>
         </div>
       </div>

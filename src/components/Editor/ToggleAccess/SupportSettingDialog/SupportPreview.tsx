@@ -9,7 +9,7 @@ import {
 } from '~/components'
 import DonationButton from '~/components/Buttons/DonationButton'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const SupportPreview = ({
   content,
@@ -20,13 +20,13 @@ const SupportPreview = ({
 }) => {
   const viewer = useContext(ViewerContext)
   return (
-    <section className="donation">
-      <span>
+    <section className={styles.donation}>
+      <span className={styles.content}>
         {!content &&
           (tabType === 'request' ? (
             <Translate id="supportRequestDescription" />
           ) : (
-            <section className="preview-response">
+            <section className={styles.previewResponse}>
               <p>
                 <Translate
                   zh_hans="🎉感谢支持"
@@ -42,7 +42,7 @@ const SupportPreview = ({
             <Avatar src={viewer?.avatar} size="xl" />
             <p>
               <TextIcon weight="md">{viewer?.displayName}</TextIcon>
-              <TextIcon color="grey-darker">
+              <TextIcon color="greyDarker">
                 <Translate
                   zh_hant="&nbsp;想對你說："
                   zh_hans="&nbsp;想对你說："
@@ -55,11 +55,10 @@ const SupportPreview = ({
         )}
         {<Translate zh_hant={content} zh_hans={content} en={content} />}
       </span>
-      <section className="preview-button">
+      <section className={styles.previewButton}>
         {tabType === 'request' && <DonationButton supported={false} />}
         {tabType === 'reply' && <DonationButton supported={true} />}
       </section>
-      <style jsx>{styles}</style>
     </section>
   )
 }

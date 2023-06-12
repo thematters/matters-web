@@ -1,9 +1,11 @@
 import classNames from 'classnames'
 
+import { capitalizeFirstLetter } from '~/common/utils'
+
 import Divider from './Divider'
 import Header from './Header'
 import Item from './Item'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface MenuProps {
   width?: 'sm' | 'md'
@@ -16,15 +18,14 @@ export const Menu: React.FC<React.PropsWithChildren<MenuProps>> & {
   Header: typeof Header
 } = ({ width, spacingY = 'xtight', children }) => {
   const menuClasses = classNames({
-    menu: true,
-    [`width-${width}`]: !!width,
-    [`spacing-y-${spacingY}`]: !!spacingY,
+    [styles.menu]: true,
+    [width ? styles[`width${capitalizeFirstLetter(width)}`] : '']: !!width,
+    [styles[`spacingY${capitalizeFirstLetter(spacingY + '')}`]]: !!spacingY,
   })
 
   return (
     <ul className={menuClasses} role="menu">
       {children}
-      <style jsx>{styles}</style>
     </ul>
   )
 }

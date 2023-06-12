@@ -1,8 +1,9 @@
 import classNames from 'classnames'
 
+import { capitalizeFirstLetter } from '~/common/utils'
 import { Dialog } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface DialogMessageProps {
   align?: 'left'
@@ -33,17 +34,15 @@ const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
   children,
 }) => {
   const contentClasses = classNames({
-    content: true,
-    [`${type}`]: !!type,
-    [`align-${align}`]: !!align,
-    [`spacing-${spacing}`]: !!spacing,
+    [styles.content]: true,
+    [styles[`${type}`]]: !!type,
+    [align ? styles[`align${capitalizeFirstLetter(align)}`] : '']: !!align,
+    [styles[`spacing${capitalizeFirstLetter(spacing)}`]]: !!spacing,
   })
 
   return (
     <Dialog.Content spacing={['base', 'base']} hasFixed>
       <section className={contentClasses}>{children}</section>
-
-      <style jsx>{styles}</style>
     </Dialog.Content>
   )
 }

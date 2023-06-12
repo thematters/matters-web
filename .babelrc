@@ -9,9 +9,6 @@
         "transform-runtime": {
           "useESModules": false
         },
-        "styled-jsx": {
-          "plugins": ["styled-jsx-plugin-postcss"]
-        }
       }
     ]
   ],

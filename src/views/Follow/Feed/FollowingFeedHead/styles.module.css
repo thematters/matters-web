@@ -1,0 +1,29 @@
+.head {
+  margin-bottom: var(--spacing-base);
+
+  & h4 {
+    @mixin flex-center-start;
+
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-normal);
+    line-height: 1rem;
+    color: var(--color-grey);
+
+    & a {
+      color: var(--color-black);
+    }
+
+    & > * {
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    & > :last-child {
+      flex-shrink: initial;
+    }
+
+    & > * + * {
+      margin-left: var(--spacing-xx-tight);
+    }
+  }
+}

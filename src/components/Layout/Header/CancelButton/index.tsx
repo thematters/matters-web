@@ -26,7 +26,7 @@ const CancelButton = (props: ButtonProps) => {
       <Media greaterThan="sm">
         <Button
           aria-label={translate({ id: 'cancel', lang })}
-          bgColor="green-lighter"
+          bgColor="greenLighter"
           size={['2rem', '2rem']}
           {...props}
         >

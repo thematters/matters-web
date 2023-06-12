@@ -22,5 +22,5 @@ Sidebar.args = {
   article: MOCK_ARTILCE,
   titleTextSize: 'sm',
   hasCover: true,
-  bgActiveColor: 'grey-lighter',
+  bgActiveColor: 'greyLighter',
 }
