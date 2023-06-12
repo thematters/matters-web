@@ -22,6 +22,7 @@ import {
   DigestRichCirclePrivateFragment,
   DigestRichCirclePublicFragment,
   SubscribeCircleMutation,
+  UserLanguage,
 } from '~/gql/graphql'
 
 import StripeCheckout from '../StripeCheckout'
@@ -180,7 +181,7 @@ const CardPayment: React.FC<CardPaymentProps> = (props) => {
   return (
     <Elements
       stripe={stripePromise}
-      options={{ locale: lang === 'zh_hans' ? 'zh' : 'en' }}
+      options={{ locale: lang === UserLanguage.ZhHans ? 'zh' : 'en' }}
     >
       <BaseCardPayment {...props} />
     </Elements>
