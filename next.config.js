@@ -1,4 +1,4 @@
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+// const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
 
@@ -11,6 +11,23 @@ const nextConfig = {
    */
   assetPrefix: nextAssetDomain ? `https://${nextAssetDomain}` : undefined,
   pageExtensions: ['tsx'],
+
+  compiler: {
+    removeConsole: true,
+  },
+
+  experimental: {
+    scrollRestoration: true,
+    swcPlugins: [
+      [
+        '@formatjs/swc-plugin-experimental',
+        {
+          idInterpolationPattern: '[sha512:contenthash:base64:6]',
+          ast: true,
+        },
+      ],
+    ],
+  },
 
   webpack(config, { defaultLoaders, isServer }) {
     config.module.rules.push({
@@ -65,9 +82,6 @@ const nextConfig = {
     // FIXME: Disable Next.js auto detection and prefixing since we have a fallback strategy based on user request and browser perference in `<LanguageContext>`
     defaultLocale: '__defaultLocale',
     localeDetection: false,
-  },
-  experimental: {
-    scrollRestoration: true,
   },
 }
 

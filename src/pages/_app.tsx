@@ -33,10 +33,26 @@ import { ApolloClient } from 'apollo-client'
 import { NextPageContext } from 'next'
 import { AppProps } from 'next/app'
 
+// import { Noto_Sans_SC, Noto_Sans_TC } from 'next/font/google'
 import withApollo from '~/common/utils/withApollo'
 import { ErrorBoundary } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
 import Root from '~/components/Root'
+
+// const notoSansSC = Noto_Sans_SC({
+//   weight: ['300', '400', '500', '700'],
+//   style: ['normal'],
+//   variable: '--font-noto-sans-sc',
+//   subsets: ['latin'],
+//   display: 'swap',
+// })
+// const notoSansTC = Noto_Sans_TC({
+//   weight: ['300', '400', '500', '700'],
+//   style: ['normal'],
+//   variable: '--font-noto-sans-tc',
+//   subsets: ['latin'],
+//   display: 'swap',
+// })
 
 const InnerApp = ({
   Component,
@@ -48,6 +64,7 @@ const InnerApp = ({
   headers?: any
 }) => {
   return (
+    // <div className={`${notoSansSC.variable} ${notoSansTC.variable}`}>
     <ErrorBoundary>
       <ApolloProvider client={apollo}>
         <Root client={apollo} headers={headers}>
@@ -56,6 +73,7 @@ const InnerApp = ({
         </Root>
       </ApolloProvider>
     </ErrorBoundary>
+    // </div>
   )
 }
 
