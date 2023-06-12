@@ -92,7 +92,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
             user={recipient}
             avatarSize="xs"
             textSize="mdS"
-            textWeight="semibold"
+            textWeight="bold"
             nameColor="black"
             spacing="xxtight"
             hasAvatar

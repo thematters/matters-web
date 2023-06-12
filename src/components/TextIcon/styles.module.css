@@ -197,10 +197,6 @@
   font-weight: var(--font-weight-medium);
 }
 
-.weightSemibold {
-  font-weight: var(--font-weight-semibold);
-}
-
 .weightBold {
   font-weight: var(--font-weight-bold);
 }

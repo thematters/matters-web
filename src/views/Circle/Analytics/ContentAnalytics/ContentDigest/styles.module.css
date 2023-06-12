@@ -12,7 +12,7 @@
   flex-shrink: 0;
   padding-right: var(--spacing-tight);
   font-size: var(--font-size-xm);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
   line-height: 1.3333333;
   color: var(--color-analytics-red);
 }

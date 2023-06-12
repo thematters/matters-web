@@ -74,10 +74,6 @@
   font-weight: var(--font-weight-medium);
 }
 
-.textWeightSemibold {
-  font-weight: var(--font-weight-semibold);
-}
-
 .nameColorBlack {
   & .displayname {
     color: var(--color-black);

@@ -40,7 +40,7 @@ const Amount = ({ amount, currency, state, testId }: AmountProps) => {
       className={styles.content}
       {...(testId ? { ['data-test-id']: testId } : {})}
     >
-      <TextIcon spacing="xtight" size="mdS" weight="semibold" color={color}>
+      <TextIcon spacing="xtight" size="mdS" weight="bold" color={color}>
         {amount > 0 ? '+' : '-'}
         &nbsp;
         {currency}

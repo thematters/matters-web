@@ -48,7 +48,7 @@
     width: 2rem;
     height: 2rem;
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-bold);
     line-height: 1.25rem;
     color: var(--color-white);
     background: var(--color-matters-gold);

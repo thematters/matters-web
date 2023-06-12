@@ -4,7 +4,7 @@
   padding: var(--spacing-x-tight) var(--spacing-base);
 
   & h3 {
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-bold);
   }
 }
 

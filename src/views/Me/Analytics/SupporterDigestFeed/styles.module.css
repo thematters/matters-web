@@ -24,7 +24,7 @@
   flex-shrink: 0;
   padding-right: var(--spacing-tight);
   font-size: var(--font-size-xm);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-base);
   color: var(--color-matters-gold);
 }
