@@ -136,13 +136,12 @@ const BaseArticleDetail = ({
   const collectionCount = article.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
   const circle = article.access.circle
-  const canReadFullContent =
-    !!(
-      isAuthor ||
-      !circle ||
-      circle.isMember ||
-      article.access.type === ArticleAccessType.Public
-    ) && !isSensitive
+  const canReadFullContent = !!(
+    isAuthor ||
+    !circle ||
+    circle.isMember ||
+    article.access.type === ArticleAccessType.Public
+  )
 
   // wall
   const { data: clientPreferenceData } = useQuery<ClientPreferenceQuery>(
@@ -303,7 +302,9 @@ const BaseArticleDetail = ({
             canReadFullContent={canReadFullContent}
           />
         </section>
+
         {article?.summaryCustomized && <CustomizedSummary summary={summary} />}
+
         {isSensitive && (
           <DynamicSensitiveWall
             sensitiveByAuthor={article.sensitiveByAuthor}
@@ -319,12 +320,17 @@ const BaseArticleDetail = ({
               translating={translating}
             />
             <License license={article.license} />
+
+            {circle && !canReadFullContent && (
+              <DynamicCircleWall circle={circle} />
+            )}
+
+            {features.payment && canReadFullContent && (
+              <DynamicSupportWidget article={article} />
+            )}
           </>
         )}
-        {circle && !canReadFullContent && <DynamicCircleWall circle={circle} />}
-        {features.payment && canReadFullContent && (
-          <DynamicSupportWidget article={article} />
-        )}
+
         {collectionCount > 0 && (
           <section className={styles.block}>
             <DynamicCollection
@@ -333,9 +339,11 @@ const BaseArticleDetail = ({
             />
           </section>
         )}
+
         <section className={styles.block}>
           <DynamicResponse id={article.id} lock={!canReadFullContent} />
         </section>
+
         <Media lessThan="xl">
           <RelatedArticles article={article} />
         </Media>
