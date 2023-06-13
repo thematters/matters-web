@@ -199,9 +199,11 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
                     })
                   }}
                   tagDetailId={tag.id}
+                  hasEdit={true}
                   hasSetTagSelected={canEditTag && !isSelected}
                   hasSetTagUnselected={canEditTag && isSelected}
                   hasRemoveTag={canEditTag}
+                  hasArchive={true}
                 />
               </List.Item>
 
