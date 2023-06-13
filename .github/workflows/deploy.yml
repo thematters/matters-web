@@ -80,7 +80,7 @@ jobs:
 
       - name: Upload Assets (develop - R2)
         if: github.base_ref == 'develop'
-        uses: wei/rclone@v1
+        uses: andreiio/rclone-action@v1
         env:
           RCLONE_CONFIG_R2_TYPE: s3
           RCLONE_CONFIG_R2_PROVIDER: Cloudflare
@@ -107,7 +107,7 @@ jobs:
 
       - name: Upload Assets (production - R2)
         if: github.base_ref == 'master'
-        uses: wei/rclone@v1
+        uses: andreiio/rclone-action@v1
         env:
           RCLONE_CONFIG_R2_TYPE: s3
           RCLONE_CONFIG_R2_PROVIDER: Cloudflare
