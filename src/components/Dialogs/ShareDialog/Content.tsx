@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 
 import { TextId } from '~/common/enums'
-import { toLocale } from '~/common/utils'
 import { Dialog, ShareButtons, Translate } from '~/components'
 
 import Copy from './Copy'
@@ -31,9 +30,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
   footerButtons,
 }) => {
   const url = new URL(shareLink)
-  const pathnames = url.pathname.split('/')
-  const showTranslation = toLocale(pathnames[1]) !== ''
-  if (showTranslation) {
+  if (url.searchParams.get('locale')) {
     description = (
       <Translate
         zh_hant="分享這篇文章的翻譯版本"
