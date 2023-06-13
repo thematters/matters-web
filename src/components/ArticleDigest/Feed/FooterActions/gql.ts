@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import { BookmarkButton } from '~/components/Buttons/Bookmark'
+import { CircleDigest } from '~/components/CircleDigest'
 
 import DropdownActions from '../../DropdownActions'
 import DonationCount from './DonationCount'
@@ -19,6 +20,14 @@ export const fragments = {
           id
           userName
         }
+        access {
+          type
+          circle {
+            id
+            name
+            ...DigestTitleCircle
+          }
+        }
         ...DropdownActionsArticle
         ...ActionsReadTimeArticle
         ...ActionsDonationCountArticle
@@ -26,6 +35,7 @@ export const fragments = {
       ${DropdownActions.fragments.article}
       ${ReadTime.fragments.article}
       ${DonationCount.fragments.article}
+      ${CircleDigest.Title.fragments.circle}
     `,
     private: gql`
       fragment FooterActionsArticlePrivate on Article {

@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import {
-  IconPin24,
-  IconUnPin24,
+  IconPin20,
+  IconUnPin20,
   Menu,
   TextIcon,
   useMutation,
@@ -63,16 +63,26 @@ const StickyButton = ({
   return (
     <Menu.Item onClick={toggleSticky}>
       {article.sticky ? (
-        <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
+        <TextIcon
+          icon={<IconUnPin20 size="mdS" />}
+          size="md"
+          spacing="base"
+          color="greyDark"
+        >
           <FormattedMessage
-            defaultMessage="Unpin"
+            defaultMessage="Unpin from profile"
             description="src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
           />
         </TextIcon>
       ) : (
-        <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
+        <TextIcon
+          icon={<IconPin20 size="mdS" />}
+          size="md"
+          spacing="base"
+          color="greyDarker"
+        >
           <FormattedMessage
-            defaultMessage="Pin article"
+            defaultMessage="Pin to profile"
             description="src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
           />
         </TextIcon>

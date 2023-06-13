@@ -103,10 +103,6 @@
     "defaultMessage": "Cancel",
     "description": ""
   },
-  "4Odb0J": {
-    "defaultMessage": "Pin article",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
-  },
   "4giHJT": {
     "defaultMessage": "Have wallet questions on mobile device ? Click the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -275,6 +271,10 @@
     "defaultMessage": "Read counts indicates how many registered users read.",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
+  "DedJGE": {
+    "defaultMessage": "Pin to profile",
+    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
+  },
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.",
     "description": ""
@@ -290,6 +290,10 @@
   "EZMrtJ": {
     "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Ef4heu": {
+    "defaultMessage": "Unpin from profile",
+    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "EfJYPI": {
     "defaultMessage": "Verification Code",
@@ -511,6 +515,10 @@
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "RNKSCj": {
+    "defaultMessage": "Archived",
+    "description": "src/components/ArticleDigest/Archive/index.tsx"
+  },
   "RxiHr/": {
     "defaultMessage": "friends have not accepted your invitations.",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
@@ -534,10 +542,6 @@
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again.",
     "description": ""
-  },
-  "TQLBox": {
-    "defaultMessage": "Unpin",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "TSDiqB": {
     "defaultMessage": "Subscribers",
@@ -834,6 +838,10 @@
   "ikVIu3": {
     "defaultMessage": "articles",
     "description": ""
+  },
+  "ioPWl8": {
+    "defaultMessage": "Undo bookmark",
+    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
   "ipQlDG": {
     "defaultMessage": "Login with Email",
