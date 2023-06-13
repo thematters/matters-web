@@ -6,6 +6,7 @@ import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { URL_QS } from '~/common/enums'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
+  ArticleDigestArchive,
   ArticleDigestFeed,
   EmptyArticle,
   Head,
@@ -231,19 +232,25 @@ const UserArticles = () => {
         <List responsiveWrapper>
           {articleEdges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
-              <ArticleDigestFeed
-                article={node}
-                inUserArticles
-                hasAuthor={false}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'user_article',
-                    contentType: 'article',
-                    location: i,
-                    id: node.id,
-                  })
-                }
-              />
+              {node.articleState !== 'active' ? (
+                <ArticleDigestArchive article={node} />
+              ) : (
+                <ArticleDigestFeed
+                  article={node}
+                  inUserArticles
+                  hasAuthor={false}
+                  hasEdit={true}
+                  hasArchive={true}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'user_article',
+                      contentType: 'article',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                />
+              )}
             </List.Item>
           ))}
         </List>
