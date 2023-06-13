@@ -1,11 +1,16 @@
 import { FormattedMessage } from 'react-intl'
 
-import { IconArchive24, Menu, TextIcon } from '~/components'
+import { IconArchive20, Menu, TextIcon } from '~/components'
 
 const ArchiveArticleButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
     <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconArchive24 size="md" />} size="md" spacing="base">
+      <TextIcon
+        icon={<IconArchive20 size="mdS" color="red" />}
+        size="md"
+        spacing="base"
+        color="red"
+      >
         <FormattedMessage defaultMessage="Archive" description="" />
       </TextIcon>
     </Menu.Item>
