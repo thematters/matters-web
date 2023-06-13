@@ -35,5 +35,3 @@ export const CONTENT_LANG_TEXT_MAP = {
     la: 'Latin',
   },
 }
-
-export const DEFAULT_LOCALE = '__defaultLocale'

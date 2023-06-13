@@ -5,13 +5,8 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { ADD_TOAST, DEFAULT_LOCALE, URL_QS } from '~/common/enums'
-import {
-  normalizeTag,
-  toGlobalId,
-  toPath,
-  toUserLanguage,
-} from '~/common/utils'
+import { ADD_TOAST, URL_QS } from '~/common/enums'
+import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
   EmptyLayout,
@@ -121,10 +116,9 @@ const BaseArticleDetail = ({
   article: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
 }) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   const features = useFeatures()
   const [fixedWall, setFixedWall] = useState(false)
@@ -154,7 +148,7 @@ const BaseArticleDetail = ({
 
   // translation
   const [autoTranslation] = useState(article.translation) // cache initial article data since it will be overwrote by newly's if URL is shadow replaced
-  const [translated, setTranslate] = useState(!!locale)
+  const [translated, setTranslate] = useState(!!routerLang)
   const originalLang = article.language
   const {
     lang: preferredLang,
@@ -216,11 +210,11 @@ const BaseArticleDetail = ({
 
   // set language cookie for anonymous if it doesn't exist
   useEffect(() => {
-    if (cookieLang || viewer.isAuthed || !locale) {
+    if (cookieLang || viewer.isAuthed || !routerLang) {
       return
     }
 
-    setLang(toUserLanguage(locale) as UserLanguage)
+    setLang(routerLang)
   }, [])
 
   const {
@@ -380,12 +374,11 @@ const ArticleDetail = ({
 }: {
   includeTranslation: boolean
 }) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   /**
    * fetch public data
@@ -401,7 +394,7 @@ const ArticleDetail = ({
     {
       variables: {
         mediaHash,
-        language: locale ? toUserLanguage(locale) : UserLanguage.ZhHant,
+        language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
       skip: !isQueryByHash,
@@ -412,7 +405,7 @@ const ArticleDetail = ({
     {
       variables: {
         id: toGlobalId({ type: 'Article', id: articleId }),
-        language: locale ? toUserLanguage(locale) : UserLanguage.ZhHant,
+        language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
       skip: isQueryByHash,
@@ -495,10 +488,7 @@ const ArticleDetail = ({
     const nsearch = rems.length > 0 ? `?${new URLSearchParams(rems)}` : ''
     const nhref = `${n.pathname}${nsearch}${n.hash || u.hash}`
 
-    if (
-      nhref !== router.asPath ||
-      (router.locale && router.locale !== DEFAULT_LOCALE)
-    ) {
+    if (nhref !== router.asPath || routerLang) {
       router.replace(nhref, undefined, { shallow: true, locale: false })
     }
   }, [latestHash])
@@ -615,11 +605,10 @@ const ArticleDetail = ({
 }
 
 const ArticleDetailOuter = () => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   const isQueryByHash = !!(mediaHash && isMediaHashPossiblyValid(mediaHash))
   const resultByHash = usePublicQuery<ArticleAvailableTranslationsQuery>(
@@ -636,10 +625,8 @@ const ArticleDetailOuter = () => {
   const { data } = resultByHash.data ? resultByHash : resultByNodeId
   const loading = resultByHash.loading || resultByNodeId.loading
   const includeTranslation =
-    !!locale &&
-    (data?.article?.availableTranslations || []).includes(
-      toUserLanguage(locale) as UserLanguage
-    )
+    !!routerLang &&
+    (data?.article?.availableTranslations || []).includes(routerLang)
 
   /**
    * Rendering

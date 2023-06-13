@@ -76,7 +76,7 @@ const Toolbar = ({
   const path = toPath({ page: 'articleDetail', article })
   const sharePath =
     translated && translatedLanguage
-      ? `/${toLocale(translatedLanguage)}${path.href}`
+      ? `${path.href}?locale=${toLocale(translatedLanguage)}`
       : path.href
 
   const dropdonwActionsProps: DropdownActionsControls = {
