@@ -1,4 +1,5 @@
-import React from 'react'
+import classNames from 'classnames'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
@@ -7,6 +8,7 @@ import {
   CardProps,
   DateTime,
   IconDotDivider,
+  Media,
   ResponsiveImage,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
@@ -58,16 +60,51 @@ const BaseArticleDigestFeed = ({
   hasDonationCount,
   ...controls
 }: ArticleDigestFeedProps) => {
+  const titleRef: React.RefObject<any> = useRef(null)
+
+  const [height, setHeight] = useState(0)
+  const [titleLine, setTitleLine] = useState(2)
+
+  useLayoutEffect(() => {
+    if (titleRef && titleRef.current) {
+      setHeight(titleRef.current.clientHeight)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (height === 24) {
+      setTitleLine(1)
+    }
+  }, [height])
+
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
+
+  const summaryClasses = classNames({
+    [styles.description]: true,
+    [styles.lineClamp2]: titleLine === 1,
+  })
+
   const path = toPath({
     page: 'articleDetail',
     article,
     utm_source,
     utm_medium,
   })
+
+  const footerActions = (
+    <FooterActions
+      article={article}
+      hasReadTime={hasReadTime}
+      hasDonationCount={hasDonationCount}
+      hasCircle={hasCircle}
+      inCard
+      date={date}
+      {...controls}
+    />
+  )
 
   return (
     <Card
@@ -96,30 +133,29 @@ const BaseArticleDigestFeed = ({
         )}
         <DateTime date={article.createdAt} color="grey" />
       </header>
-      <section className={styles.content}>
-        <section className={styles.head}>
-          <section className={styles.title}>
-            <ArticleDigestTitle article={article} textSize="xm" />
+      <section className={styles.container}>
+        <section className={styles.content}>
+          <section className={styles.head}>
+            <section className={styles.title} ref={titleRef}>
+              <ArticleDigestTitle
+                article={article}
+                textSize="md"
+                lineClamp={2}
+              />
+            </section>
           </section>
+
+          <p className={summaryClasses}>{cleanedSummary}</p>
+
+          <Media greaterThan="sm">{footerActions}</Media>
         </section>
-
-        <p className={styles.description}>{cleanedSummary}</p>
-
         {cover && (
           <div className={styles.cover}>
-            <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
+            <ResponsiveImage url={cover} size="144w" />
           </div>
         )}
       </section>
-      <FooterActions
-        article={article}
-        hasReadTime={hasReadTime}
-        hasDonationCount={hasDonationCount}
-        hasCircle={hasCircle}
-        inCard
-        date={date}
-        {...controls}
-      />
+      <Media at="sm">{footerActions}</Media>
     </Card>
   )
 }
