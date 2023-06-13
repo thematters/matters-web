@@ -1,5 +1,5 @@
 import { analytics } from '~/common/utils'
-import { ArticleDigestConcise, CardExposureTracker, Tag } from '~/components'
+import { ArticleDigestFeed, CardExposureTracker, Tag } from '~/components'
 import { UserAddArticleTagActivityFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -7,15 +7,13 @@ import { fragments } from './gql'
 const UserAddArticleTagActivity = ({
   nodeArticle: node,
   targetTag: target,
-  createdAt,
   location,
   __typename,
 }: UserAddArticleTagActivityFragment & { location: number }) => (
   <>
-    <ArticleDigestConcise
+    <ArticleDigestFeed
       article={node}
-      date={createdAt}
-      footerTag={<Tag tag={target} type="plain" iconProps={{ size: 'sm' }} />}
+      tag={<Tag tag={target} type="plain" iconProps={{ size: 'sm' }} />}
       onClick={() => {
         analytics.trackEvent('click_feed', {
           type: 'following',

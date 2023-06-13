@@ -15,6 +15,7 @@ export type FooterActionsProps = {
   hasReadTime?: boolean
   hasDonationCount?: boolean
   hasCircle?: boolean
+  tag?: React.ReactNode
 } & FooterActionsControls
 
 const FooterActions = ({
@@ -23,6 +24,7 @@ const FooterActions = ({
   hasReadTime,
   hasDonationCount,
   hasCircle,
+  tag,
   ...controls
 }: FooterActionsProps) => {
   const {
@@ -34,6 +36,8 @@ const FooterActions = ({
         {hasReadTime && <ReadTime article={article} />}
 
         {hasDonationCount && <DonationCount article={article} />}
+
+        {tag}
 
         {hasCircle && circle && (
           <CircleDigest.Title
