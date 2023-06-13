@@ -27,6 +27,14 @@
     "defaultMessage": "Open Source",
     "description": ""
   },
+  "RNKSCj": {
+    "defaultMessage": "Archived",
+    "description": "src/components/ArticleDigest/Archive/index.tsx"
+  },
+  "ioPWl8": {
+    "defaultMessage": "Remove bookmark",
+    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
+  },
   "cfL5uk": {
     "defaultMessage": "Over 200 words, current {numbers}",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
@@ -955,8 +963,8 @@
     "defaultMessage": "Article pinned",
     "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
-  "TQLBox": {
-    "defaultMessage": "Unpin",
+  "Ef4heu": {
+    "defaultMessage": "Unpin from profile",
     "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "ZVoJan": {

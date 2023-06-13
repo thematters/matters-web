@@ -18,7 +18,13 @@ import styles from './styles.module.css'
 
 export type CardBgColor = 'greyLighter' | 'white' | 'transparent' | 'none'
 export type CardBgHoverColor = 'greyLighter' | 'transparent' | 'none'
-export type CardSpacing = 0 | 'xtight' | 'tight' | 'base' | 'loose'
+export type CardSpacing =
+  | 0
+  | 'xtight'
+  | 'tight'
+  | 'base'
+  | 'baseLoose'
+  | 'loose'
 export type CardBorderColor = 'greyLighter' | 'lineGreyLight' | 'green'
 export type CardBorderRadius = 'xtight' | 'xxtight' | 'base' | 'loose'
 

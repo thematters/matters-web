@@ -5,8 +5,8 @@ import { stripHtml, toPath, UtmParams } from '~/common/utils'
 import {
   Card,
   CardProps,
-  CircleDigest,
   DateTime,
+  IconDotDivider,
   ResponsiveImage,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
@@ -16,7 +16,6 @@ import {
 } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
-import FollowButton from './FollowButton'
 import FooterActions, { FooterActionsProps } from './FooterActions'
 import { fragments } from './gql'
 import styles from './styles.module.css'
@@ -55,13 +54,11 @@ const BaseArticleDigestFeed = ({
   utm_medium,
   is,
 
+  hasReadTime,
+  hasDonationCount,
   ...controls
 }: ArticleDigestFeedProps) => {
-  const {
-    author,
-    summary,
-    access: { circle },
-  } = article
+  const { author, summary } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
@@ -75,38 +72,35 @@ const BaseArticleDigestFeed = ({
   return (
     <Card
       {...path}
-      spacing={['base', 0]}
+      spacing={['baseLoose', 0]}
       onClick={onClick}
       testId={TEST_ID.DIGEST_ARTICLE_FEED}
       bgActiveColor="none"
       is={is}
     >
-      {header ||
-        (hasCircle && circle && (
-          <header className={styles.header}>
-            <CircleDigest.Plain circle={circle} />
-          </header>
-        ))}
+      <header className={styles.header}>
+        {hasAuthor && (
+          <>
+            <section className={styles.author}>
+              <UserDigest.Mini
+                user={author}
+                avatarSize="sm"
+                textSize="xs"
+                hasAvatar
+                hasDisplayName
+                onClick={onClickAuthor}
+              />
+              <IconDotDivider color="greyLight" size="mdS" />
+            </section>
+          </>
+        )}
+        <DateTime date={article.createdAt} color="grey" />
+      </header>
       <section className={styles.content}>
         <section className={styles.head}>
           <section className={styles.title}>
             <ArticleDigestTitle article={article} textSize="xm" />
           </section>
-
-          {hasAuthor && (
-            <section className={styles.author}>
-              <UserDigest.Mini
-                user={author}
-                avatarSize="sm"
-                textSize="sm"
-                hasAvatar
-                hasDisplayName
-                onClick={onClickAuthor}
-              />
-
-              {hasFollow && <FollowButton user={article.author} />}
-            </section>
-          )}
         </section>
 
         <p className={styles.description}>{cleanedSummary}</p>
@@ -117,14 +111,15 @@ const BaseArticleDigestFeed = ({
           </div>
         )}
       </section>
-      {isConciseFooter && (
-        <section>
-          <DateTime date={article.createdAt} />
-        </section>
-      )}
-      {!isConciseFooter && (
-        <FooterActions article={article} inCard date={date} {...controls} />
-      )}
+      <FooterActions
+        article={article}
+        hasReadTime={hasReadTime}
+        hasDonationCount={hasDonationCount}
+        hasCircle={hasCircle}
+        inCard
+        date={date}
+        {...controls}
+      />
     </Card>
   )
 }

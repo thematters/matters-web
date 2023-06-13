@@ -17,8 +17,6 @@
 
 .author {
   @mixin flex-center-start;
-
-  margin-top: var(--spacing-tight);
 }
 
 .description {
@@ -59,6 +57,8 @@
 }
 
 .header {
-  margin-bottom: var(--spacing-base);
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-x-tight);
   line-height: 1;
 }
