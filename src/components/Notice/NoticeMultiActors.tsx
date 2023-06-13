@@ -1,7 +1,7 @@
 import { Button, IconMore32 } from '~/components'
 
 import NoticeActorAvatar, { size } from './NoticeActorAvatar'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type NoticeMultiActorsProps = {
   actors: any[]
@@ -27,15 +27,14 @@ const NoticeMultiActors = ({ actors, size }: NoticeMultiActorsProps) => {
       {actors.slice(0, 7).map((actor, index) => (
         <NoticeActorAvatar key={index} user={actor} size={size} />
       ))}
-      <span className="more-actors">
+      <span className={styles.moreActors}>
         <Button
-          bgColor="grey-lighter"
-          bgActiveColor="grey-lighter"
+          bgColor="greyLighter"
+          bgActiveColor="greyLighter"
           borderRadius="5rem"
         >
           <IconMore32 color="grey" size="lg" />
         </Button>
-        <style jsx>{styles}</style>
       </span>
     </>
   )

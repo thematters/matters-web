@@ -1,0 +1,8 @@
+:root {
+  --switch-width: 2.25rem;
+  --switch-height: 1.25rem;
+  --switch-border-radius: 0.75rem;
+  --switch-spacing: 0.125rem;
+  --switch-background: var(--color-grey-light);
+  --switch-thumb-width: calc(var(--switch-height) - var(--switch-spacing) * 2);
+}

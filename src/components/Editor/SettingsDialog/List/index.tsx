@@ -5,7 +5,7 @@ import ListItem from '../../ListItem'
 import { Step } from '../../SettingsDialog'
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type SettingsListDialogButtons = {
   confirmButtonText?: string | React.ReactNode
@@ -65,7 +65,7 @@ const SettingsList = ({
       />
 
       <Dialog.Content hasGrow>
-        <ul role="list">
+        <ul className={styles.list} role="list">
           <ListItem
             title={<Translate id="addTags" />}
             subTitle={
@@ -95,11 +95,11 @@ const SettingsList = ({
             <ListItem.NumberIndicator num={collectionCount} />
           </ListItem>
 
-          <section className="response">
+          <section className={styles.response}>
             <ToggleResponse {...responseProps} />
           </section>
 
-          <section className="access">
+          <section className={styles.access}>
             <ToggleAccess {...restProps} />
           </section>
 
@@ -118,7 +118,7 @@ const SettingsList = ({
 
               {cancelButtonText && (
                 <Dialog.Footer.Button
-                  bgColor="grey-lighter"
+                  bgColor="greyLighter"
                   textColor="black"
                   onClick={closeDialog}
                   disabled={disabled}
@@ -130,8 +130,6 @@ const SettingsList = ({
           )}
         </ul>
       </Dialog.Content>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

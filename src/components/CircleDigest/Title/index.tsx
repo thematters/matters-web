@@ -1,11 +1,11 @@
 import classNames from 'classnames'
 
-import { toPath } from '~/common/utils'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { LinkWrapper, LinkWrapperProps } from '~/components'
 import { DigestTitleCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CircleDigestTitleTextSize = 'xs' | 'md'
 export type CircleDigestTitleTextWeight = 'normal' | 'md'
@@ -38,9 +38,9 @@ const CircleDigestTitle = ({
     circle,
   })
   const titleClasses = classNames({
-    title: true,
-    [`text-size-${textSize}`]: !!textSize,
-    [`text-weight-${textWeight}`]: !!textWeight,
+    [styles.title]: true,
+    [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
+    [styles[`textWeight${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
   })
 
   return (
@@ -50,10 +50,7 @@ const CircleDigestTitle = ({
       disabled={disabled}
       onClick={onClick}
     >
-      <>
-        {is === 'h2' && <h2 className={titleClasses}>{displayName}</h2>}
-        <style jsx>{styles}</style>
-      </>
+      <>{is === 'h2' && <h2 className={titleClasses}>{displayName}</h2>}</>
     </LinkWrapper>
   )
 }

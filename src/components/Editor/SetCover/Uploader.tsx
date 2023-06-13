@@ -22,7 +22,7 @@ import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import updateDraftAssets from '~/components/GQL/updates/draftAssets'
 import { AssetFragment, SingleFileUploadMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface UploadEntity {
   entityId: string
@@ -130,7 +130,7 @@ const Uploader: React.FC<UploaderProps> = ({
   }
 
   const labelClasses = classNames({
-    uploader: true,
+    [styles.uploader]: true,
     'u-area-disable': loading,
   })
 
@@ -147,7 +147,7 @@ const Uploader: React.FC<UploaderProps> = ({
           <Translate id="uploadCover" />
         </TextIcon>
 
-        {loading && <IconSpinner16 color="grey-light" />}
+        {loading && <IconSpinner16 color="greyLight" />}
       </h3>
 
       <p>
@@ -169,8 +169,6 @@ const Uploader: React.FC<UploaderProps> = ({
           onChange={handleChange}
         />
       </VisuallyHidden>
-
-      <style jsx>{styles}</style>
     </label>
   )
 }

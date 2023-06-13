@@ -3,7 +3,7 @@ import { PATHS, PAYMENT_PROVIDER } from '~/common/enums'
 import { Layout, Translate, useRoute } from '~/components'
 
 import { Box } from '../../Box'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const OAuthCallbackFailure = () => {
   const { getQuery, router } = useRoute()
@@ -26,7 +26,7 @@ const OAuthCallbackFailure = () => {
 
       <Layout.Spacing>
         <Box avatar={avatar[provider]} title={title[provider]}>
-          <section className="content">
+          <section className={styles.content}>
             <h2>
               <Translate
                 zh_hant="支付失敗了！"
@@ -42,7 +42,6 @@ const OAuthCallbackFailure = () => {
                 en="Please return to previous page and retry"
               />
             </p>
-            <style jsx>{styles}</style>
           </section>
         </Box>
       </Layout.Spacing>

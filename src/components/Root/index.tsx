@@ -3,7 +3,9 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
 import React from 'react'
+import { WagmiConfig } from 'wagmi'
 
+import { wagmiConfig } from '~/common/utils'
 import {
   Error,
   FeaturesProvider,
@@ -87,23 +89,25 @@ const Root = ({
   }
 
   return (
-    <ViewerProvider viewer={viewer as ViewerUser}>
-      <LanguageProvider headers={headers}>
-        <FeaturesProvider official={official}>
-          <MediaContextProvider>
-            <TranslationsProvider>
-              {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+    <WagmiConfig config={wagmiConfig}>
+      <ViewerProvider viewer={viewer as ViewerUser}>
+        <LanguageProvider headers={headers}>
+          <FeaturesProvider official={official}>
+            <MediaContextProvider>
+              <TranslationsProvider>
+                {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-              <DynamicToastContainer />
-              <DynamicAnalyticsInitilizer user={viewer || {}} />
-              <DynamicGlobalDialogs />
-              <DynamicProgressBar />
-              <DynamicFingerprint />
-            </TranslationsProvider>
-          </MediaContextProvider>
-        </FeaturesProvider>
-      </LanguageProvider>
-    </ViewerProvider>
+                <DynamicToastContainer />
+                <DynamicAnalyticsInitilizer user={viewer || {}} />
+                <DynamicGlobalDialogs />
+                <DynamicProgressBar />
+                <DynamicFingerprint />
+              </TranslationsProvider>
+            </MediaContextProvider>
+          </FeaturesProvider>
+        </LanguageProvider>
+      </ViewerProvider>
+    </WagmiConfig>
   )
 }
 

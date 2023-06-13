@@ -1,0 +1,9 @@
+.container {
+  margin-top: var(--spacing-xx-tight);
+  font-size: var(--font-size-xs);
+
+  & a {
+    color: var(--color-matters-green);
+    text-decoration: underline;
+  }
+}

@@ -17,7 +17,7 @@ import { LastFetchRandomQuery, SidebarAuthorsQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import { SIDEBAR_AUTHORS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)
@@ -69,7 +69,7 @@ const Authors = () => {
   }
 
   return (
-    <section className="container">
+    <section className={styles.container}>
       <SectionHeader
         type="authors"
         rightButton={<ShuffleButton onClick={shuffle} />}
@@ -85,7 +85,7 @@ const Authors = () => {
                 user={node}
                 spacing={['xtight', 'xtight']}
                 bgColor="none"
-                bgActiveColor="grey-lighter"
+                bgActiveColor="greyLighter"
                 borderRadius="xtight"
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
@@ -102,8 +102,6 @@ const Authors = () => {
           ))}
         </List>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

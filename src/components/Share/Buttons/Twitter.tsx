@@ -48,7 +48,7 @@ const Twitter = ({
       return window.open(shareUrl, 'Share to Twitter')
     }}
   >
-    {circle && withIcon(IconShareTwitterCircle)({ size: 'xl-m' })}
+    {circle && withIcon(IconShareTwitterCircle)({ size: 'xlM' })}
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareTwitter)({})} spacing="base">

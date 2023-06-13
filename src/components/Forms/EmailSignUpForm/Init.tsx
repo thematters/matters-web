@@ -25,7 +25,7 @@ import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
 import { EmailLoginButton } from './Buttons'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -116,7 +116,10 @@ const Init: React.FC<FormProps> = ({
     },
   })
 
-  const containerClasses = classNames({ container: true, isInPage: !!isInPage })
+  const containerClasses = classNames({
+    [styles.container]: true,
+    [styles.isInPage]: !!isInPage,
+  })
 
   const InnerForm = (
     <section className={containerClasses}>
@@ -180,7 +183,6 @@ const Init: React.FC<FormProps> = ({
 
         <EmailLoginButton gotoEmailLogin={gotoEmailLogin} isInPage={isInPage} />
       </Form>
-      <style jsx>{styles}</style>
     </section>
   )
 
@@ -208,9 +210,8 @@ const Init: React.FC<FormProps> = ({
 
         {InnerForm}
 
-        <footer>
+        <footer className={styles.footer}>
           <LanguageSwitch />
-          <style jsx>{styles}</style>
         </footer>
       </>
     )

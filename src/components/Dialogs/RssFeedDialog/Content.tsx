@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import contentHash from '@ensdomains/content-hash'
-import { namehash } from '@ethersproject/hash'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { namehash } from 'viem/ens'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
@@ -17,12 +17,11 @@ import {
   Spacer,
   Spinner,
   TextIcon,
-  WagmiProvider,
 } from '~/components'
 import { AuthorRssFeedFragment, RssGatewaysQuery } from '~/gql/graphql'
 
 import SectionCard from '../FingerprintDialog/SectionCard'
-import styles from '../FingerprintDialog/styles.css'
+import styles from '../FingerprintDialog/styles.module.css'
 
 type RssFeedDialogContentProps = {
   user: AuthorRssFeedFragment
@@ -51,12 +50,12 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
     address: address as `0x${string}`,
     chainId: targetNetork.id,
   })
-  const { data: resolverData } = useEnsResolver({
+  const { data: resolverAddress } = useEnsResolver({
     name: ensName as string,
     chainId: targetNetork.id,
   })
   const { data: readData } = useContractRead({
-    address: resolverData?.address as `0x${string}` | undefined,
+    address: resolverAddress,
     abi: PublicResolverABI,
     functionName: 'contenthash',
     args: ensName ? [namehash(ensName) as `0x${string}`] : undefined,
@@ -69,11 +68,11 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
   const intl = useIntl()
   return (
     <Dialog.Content hasGrow>
-      <section className="container">
+      <section className={styles.container}>
         <SectionCard>
           {!ipnsKey ? (
             <>
-              <section className="warning-card">
+              <section className={styles.warningCard}>
                 <IconInfo24 size="md" />
 
                 <p>
@@ -88,14 +87,14 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
           ) : null}
 
           {/* hash */}
-          <section className="hash">
-            <h4 className="title">
+          <section className={styles.hash}>
+            <h4 className={styles.title}>
               <FormattedMessage
                 defaultMessage="IPNS Subscription"
                 description="src/components/Dialogs/RssFeedDialog/Content.tsx"
               />
             </h4>
-            <p className="description">
+            <p className={styles.description}>
               <FormattedMessage
                 defaultMessage="Add hash from IPFS into compatible reader such as "
                 description="src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -111,7 +110,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
             </p>
 
             {ipnsKey ? (
-              <section className="copy">
+              <section className={styles.copy}>
                 <input
                   type="text"
                   value={displayIPNS!}
@@ -132,11 +131,11 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
             ) : (
               <>
                 <Spacer size="base" />
-                <section className="warning-input">
+                <section className={styles.warningInput}>
                   <TextIcon
                     icon={<IconInfo24 size="md" />}
                     color="green"
-                    size="md-s"
+                    size="mdS"
                   >
                     <FormattedMessage
                       defaultMessage="Waiting ..."
@@ -153,14 +152,14 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
           <Spacer size="base" />
 
           {/* gateways */}
-          <section className="gateways">
-            <h4 className="title">
+          <section className={styles.gateways}>
+            <h4 className={styles.title}>
               <FormattedMessage
                 defaultMessage="RSS Subscription"
                 description="src/components/Dialogs/RssFeedDialog/Content.tsx"
               />
             </h4>
-            <p className="description">
+            <p className={styles.description}>
               <FormattedMessage
                 defaultMessage="Add any URL in the following list into RSS reader"
                 description="src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -185,8 +184,8 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                   <li key={url}>
                     <span
                       className={classNames({
-                        'gateway-url': true,
-                        disabled: !ipnsKey,
+                        [styles.gatewayUrl]: true,
+                        [styles.disabled]: !ipnsKey,
                       })}
                     >
                       {hostname}
@@ -209,17 +208,13 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
             </ul>
           </section>
         </SectionCard>
-
-        <style jsx>{styles}</style>
       </section>
     </Dialog.Content>
   )
 }
 
 const RssFeedDialogContent: React.FC<RssFeedDialogContentProps> = (props) => (
-  <WagmiProvider>
-    <BaseRssFeedDialogContent {...props} />
-  </WagmiProvider>
+  <BaseRssFeedDialogContent {...props} />
 )
 
 export default RssFeedDialogContent

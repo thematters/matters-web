@@ -1,5 +1,5 @@
-import { getAddress } from '@ethersproject/address'
 import { useContext } from 'react'
+import { getAddress } from 'viem'
 
 import { maskAddress, translate } from '~/common/utils'
 import {
@@ -27,8 +27,8 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
   const { lang } = useContext(LanguageContext)
   const buttonProps: ButtonProps = {
     spacing: ['xxtight', 'tight'],
-    bgColor: 'green-lighter',
-    bgActiveColor: 'grey-lighter',
+    bgColor: 'greenLighter',
+    bgActiveColor: 'greyLighter',
   }
   const textIconProps: TextIconProps = {
     spacing: 'xtight',

@@ -16,7 +16,7 @@ import {
 } from '~/components'
 import { ArticleDetailPublicQuery, EditMetaDraftFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 import SupportPreview from './SupportPreview'
 import Tab, { TabType } from './Tab'
 
@@ -165,9 +165,9 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
 
         <Tab tabType={tabType} setTabType={changeTabType} />
 
-        <section className="content-input">{InnerForm(tabType)}</section>
+        <section className={styles.contentInput}>{InnerForm(tabType)}</section>
 
-        <section className="preview">
+        <section className={styles.preview}>
           <h3>
             <TextIcon size="md" weight="md">
               <Translate
@@ -187,8 +187,6 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
             tabType={tabType}
           />
         </section>
-
-        <style jsx>{styles}</style>
       </Dialog.Content>
     </>
   )

@@ -27,7 +27,7 @@ import {
   USER_ARTICLES_PUBLIC,
   VIEWER_ARTICLES,
 } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const ArticleSummaryInfo = ({
   user,
@@ -40,26 +40,17 @@ const ArticleSummaryInfo = ({
   }
 
   return (
-    <div className="info">
-      <FormattedMessage
-        defaultMessage="Created"
-        description="src/views/User/Articles/UserArticles.tsx"
-      />
-      <span className="num">{articles}&nbsp;</span>
+    <div className={styles.info}>
+      <span className={styles.num}>{articles}&nbsp;</span>
       <FormattedMessage defaultMessage="articles" description="" />
 
       <IconDotDivider />
 
-      <FormattedMessage
-        defaultMessage="In total"
-        description="src/views/User/Articles/UserArticles.tsx"
-      />
-      <span className="num">{words}&nbsp;</span>
+      <span className={styles.num}>{words}&nbsp;</span>
       <FormattedMessage
         defaultMessage="words"
         description="src/views/User/Articles/UserArticles.tsx"
       />
-      <style jsx>{styles}</style>
     </div>
   )
 }
@@ -229,7 +220,7 @@ const UserArticles = () => {
         <ArticleSummaryInfo user={user} />
       </Media>
       <Media greaterThan="sm">
-        <section className="header">
+        <section className={styles.header}>
           <UserTabs />
 
           <ArticleSummaryInfo user={user} />
@@ -257,7 +248,6 @@ const UserArticles = () => {
           ))}
         </List>
       </InfiniteScroll>
-      <style jsx>{styles}</style>
     </>
   )
 }

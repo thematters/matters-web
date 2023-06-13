@@ -1,11 +1,10 @@
 import classNames from 'classnames'
 
 import { TextId } from '~/common/enums'
-import { toLocale } from '~/common/utils'
 import { Dialog, ShareButtons, Translate } from '~/components'
 
 import Copy from './Copy'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface ShareDialogContentProps {
   closeDialog: () => void
@@ -31,9 +30,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
   footerButtons,
 }) => {
   const url = new URL(shareLink)
-  const pathnames = url.pathname.split('/')
-  const showTranslation = toLocale(pathnames[1]) !== ''
-  if (showTranslation) {
+  if (url.searchParams.get('locale')) {
     description = (
       <Translate
         zh_hant="分享這篇文章的翻譯版本"
@@ -43,7 +40,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
     )
   }
   const containerClasses = classNames({
-    'socials-container': true,
+    [styles.socialsContainer]: true,
   })
   return (
     <>
@@ -69,15 +66,11 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
 
       <Dialog.Content>
         {description && (
-          <section className="description">
-            {description}
-
-            <style jsx>{styles}</style>
-          </section>
+          <section className={styles.description}>{description}</section>
         )}
 
         <section className={containerClasses}>
-          <section className="left">
+          <section className={styles.left}>
             <ShareButtons.LINE title={shareTitle} link={shareLink} />
             <ShareButtons.WhatsApp title={shareTitle} link={shareLink} />
             <ShareButtons.Telegram title={shareTitle} link={shareLink} />
@@ -85,7 +78,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
             <Copy link={shareLink} />
           </section>
 
-          <section className="right">
+          <section className={styles.right}>
             <ShareButtons.Twitter
               title={shareTitle}
               link={shareLink}
@@ -95,8 +88,6 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
             <ShareButtons.Weibo title={shareTitle} link={shareLink} />
             <ShareButtons.Email title={shareTitle} link={shareLink} />
           </section>
-
-          <style jsx>{styles}</style>
         </section>
       </Dialog.Content>
 

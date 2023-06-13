@@ -100,7 +100,3 @@ See `.vscode/extensions.json`
 #### Settings
 
 For vim users, you might want to see `.vim/.vimrc` (using vim-plug).
-
-## Troubleshooting
-
-1. If `styled-jsx` is installed in both `next` and our own `package.json`, the built-in `styled-jsx` SSR of Next.js will fail. See [#533](https://github.com/zeit/styled-jsx/issues/533).

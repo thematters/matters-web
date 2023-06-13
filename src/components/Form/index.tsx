@@ -7,7 +7,7 @@ import Input from './Input'
 import List from './List'
 import PinInput from './PinInput'
 import Select from './Select'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Textarea from './Textarea'
 
 type FormProps = React.DetailedHTMLProps<
@@ -27,10 +27,8 @@ export const Form: React.FC<FormProps> & {
   ComposedAmountInput: typeof ComposedAmountInput
   CurrencyRadioInput: typeof CurrencyRadioInput
 } = ({ children, ...formProps }) => (
-  <form method="POST" autoComplete="off" {...formProps}>
+  <form className={styles.form} method="POST" autoComplete="off" {...formProps}>
     {children}
-
-    <style jsx>{styles}</style>
   </form>
 )
 

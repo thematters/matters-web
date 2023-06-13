@@ -20,7 +20,7 @@ import {
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { ConfirmVerificationCodeMutation } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface FormProps {
   defaultEmail: string
@@ -94,7 +94,7 @@ const Request: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <section className="container">
+    <section className={styles.container}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<Translate id="email" />}
@@ -128,7 +128,6 @@ const Request: React.FC<FormProps> = ({
           }
         />
       </Form>
-      <style jsx>{styles}</style>
     </section>
   )
 

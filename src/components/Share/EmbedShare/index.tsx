@@ -1,7 +1,7 @@
 import { TextIcon } from '~/components/TextIcon'
 
 import { ShareButtons } from '../Buttons'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface EmbedShareProps {
   title?: string
@@ -27,8 +27,8 @@ export const EmbedShare = ({ title, path, headerTitle }: EmbedShareProps) => {
     title || (typeof window !== 'undefined' ? window.document.title || '' : '')
 
   return (
-    <section className="share">
-      <header>
+    <section className={styles.share}>
+      <header className={styles.header}>
         <h4>
           <TextIcon size="sm" weight="normal">
             {headerTitle}
@@ -36,23 +36,21 @@ export const EmbedShare = ({ title, path, headerTitle }: EmbedShareProps) => {
         </h4>
       </header>
 
-      <section className="buttons">
-        <span className="left">
+      <section className={styles.buttons}>
+        <span className={styles.left}>
           <ShareButtons.LINE title={shareTitle} link={shareLink} circle />
           <ShareButtons.WhatsApp title={shareTitle} link={shareLink} circle />
           <ShareButtons.Telegram title={shareTitle} link={shareLink} circle />
           <ShareButtons.Douban title={shareTitle} link={shareLink} circle />
         </span>
 
-        <span className="right">
+        <span className={styles.right}>
           <ShareButtons.Twitter title={shareTitle} link={shareLink} circle />
           <ShareButtons.Facebook title={shareTitle} link={shareLink} circle />
           <ShareButtons.Weibo title={shareTitle} link={shareLink} circle />
           <ShareButtons.Email title={shareTitle} link={shareLink} circle />
         </span>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

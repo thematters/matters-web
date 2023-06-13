@@ -1,0 +1,23 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  margin: 0 var(--spacing-base);
+}
+
+.buttons {
+  grid-column: 1 / -1;
+  margin-bottom: var(--spacing-loose);
+
+  & > button {
+    width: 100%;
+  }
+
+  & > button + button {
+    margin-top: var(--spacing-base);
+  }
+
+  @media (--sm-up) {
+    grid-column: 4 / span 6;
+    margin-bottom: var(--spacing-xx-loose);
+  }
+}

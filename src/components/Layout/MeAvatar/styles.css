@@ -1,7 +1,0 @@
-.me-avatar {
-  @mixin flex-center-all;
-
-  &.active :global(.avatar img) {
-    box-shadow: 0 0 0 2px var(--color-matters-green);
-  }
-}

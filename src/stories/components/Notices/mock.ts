@@ -4,7 +4,6 @@ import {
   MOCK_CIRCLE_ARTICLE,
   MOCK_CIRCLE_COMMENT,
   MOCK_COMMENT,
-  MOCK_CRYPTO_WALLET,
   MOCK_PARENT_COMMENT,
   MOCK_TAG,
   MOCK_TRANSACTION,
@@ -402,26 +401,6 @@ export const MOCK_NOTICE_LIST = [
     actors: [MOCK_USER],
     circleNoticeType: 'CircleInvitation' as any,
     circle: MOCK_CIRCLE,
-  },
-
-  // CryptoWalletAirdrop
-  {
-    __typename: 'CryptoNotice' as any,
-    id: 'CryptoWalletAirdrop',
-    unread: false,
-    createdAt: '2021-10-26T07:29:17.682Z',
-    type: 'CryptoWalletAirdrop' as any,
-    target: MOCK_CRYPTO_WALLET,
-  },
-
-  // CryptoWalletConnected
-  {
-    __typename: 'CryptoNotice' as any,
-    id: 'CryptoWalletConnected',
-    unread: false,
-    createdAt: '2021-10-26T07:29:17.682Z',
-    type: 'CryptoWalletConnected' as any,
-    target: MOCK_CRYPTO_WALLET,
   },
 
   /**

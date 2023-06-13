@@ -16,7 +16,7 @@ import {
 import { HottestTagsQuery, SelectedTagsQuery } from '~/gql/graphql'
 
 import { HOTTEST_TAGS, SELECTED_TAGS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FeedType = 'hottest' | 'selected'
 
@@ -72,7 +72,7 @@ const Feed = ({ type }: Props) => {
 
   if (!edges || edges.length <= 0) {
     return (
-      <section className="feed">
+      <section className={styles.feed}>
         <EmptyWarning
           description={
             <Translate zh_hant="還沒有可追蹤標籤" zh_hans="还没有可追踪标签" />
@@ -83,8 +83,8 @@ const Feed = ({ type }: Props) => {
   }
 
   return (
-    <section className="feed">
-      <section className="shuffle">
+    <section className={styles.feed}>
+      <section className={styles.shuffle}>
         <ShuffleButton onClick={shuffle} />
       </section>
 
@@ -98,7 +98,7 @@ const Feed = ({ type }: Props) => {
                 tag={node}
                 spacing={['base', 'base']}
                 bgColor="none"
-                bgActiveColor="grey-lighter"
+                bgActiveColor="greyLighter"
                 hasDesc
                 hasFollow
               />
@@ -106,8 +106,6 @@ const Feed = ({ type }: Props) => {
           ))}
         </List>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

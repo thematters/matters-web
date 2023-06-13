@@ -38,7 +38,7 @@ export const CloseButton = ({ closeDialog, textId }: CloseButtonProps) => {
         <Button
           onClick={closeDialog}
           aria-label={translate({ id: textId || 'cancel', lang })}
-          bgColor="green-lighter"
+          bgColor="greenLighter"
           size={['2rem', '2rem']}
         >
           <IconClose32 size="lg" color="green" />
@@ -66,7 +66,7 @@ export const BackButton: React.FC<BackButton> = (props) => {
       <Media greaterThan="sm">
         <Button
           aria-label={translate({ id: 'previousStep', lang })}
-          bgColor="green-lighter"
+          bgColor="greenLighter"
           size={['2rem', '2rem']}
           {...props}
         >
@@ -110,7 +110,7 @@ export const RightButton: React.FC<RightButtonProps> = ({
         >
           <TextIcon
             color="white"
-            size="md-s"
+            size="mdS"
             weight="md"
             icon={loading && <IconSpinner16 size="sm" />}
           >

@@ -28,7 +28,8 @@ import {
 } from '~/gql/graphql'
 
 import SearchSelectNode from '../SearchSelectNode'
-import styles from '../styles.css'
+import { StagingNode } from '../StagingArea'
+import styles from '../styles.module.css'
 import CreateTag from './CreateTag'
 import { ARTICLE_URL_QUERY, LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
 import SearchInput, {
@@ -60,6 +61,7 @@ type SearchingAreaProps = {
   searchType: SearchType
   searchFilter?: SearchFilter
   searchExclude?: SearchExclude
+  stagingNodes: StagingNode[]
 
   inSearchingArea: boolean
   toStagingArea: () => void
@@ -77,6 +79,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
   searchType,
   searchFilter,
   searchExclude,
+  stagingNodes,
 
   inSearchingArea,
   toStagingArea,
@@ -272,7 +275,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
       />
 
       {inSearchingArea && (
-        <section className="area">
+        <section className={styles.area}>
           {searching && <Spinner />}
           {searchKey.length === 0 && !!CustomStagingArea && CustomStagingArea}
           {/* Search */}
@@ -287,7 +290,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                   hasNextPage={!!searchPageInfo?.hasNextPage}
                   loadMore={loadMore}
                 >
-                  <ul className="nodes">
+                  <ul className={styles.nodes}>
                     {canCreateTag && (
                       <li>
                         <CreateTag
@@ -302,6 +305,12 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                         <SearchSelectNode
                           node={node}
                           onClick={addNodeToStaging}
+                          selected={
+                            stagingNodes.findIndex((SN) => {
+                              return SN.node.id === node.id
+                            }) !== -1
+                          }
+                          inSearchingArea
                         />
                       </li>
                     ))}
@@ -317,7 +326,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                   hasNextPage={!!listPageInfo?.hasNextPage}
                   loadMore={loadMoreList}
                 >
-                  <ul className="nodes">
+                  <ul className={styles.nodes}>
                     {searchingNodes.map((node) => (
                       <li key={node.id}>
                         <SearchSelectNode
@@ -339,12 +348,19 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                   <SearchSelectNode
                     node={articleUrlData.node}
                     onClick={addNodeToStaging}
+                    selected={
+                      stagingNodes.findIndex(
+                        (SN) =>
+                          SN.node.id ===
+                          (articleUrlData.node?.__typename === 'Article' &&
+                            articleUrlData.node.id)
+                      ) !== -1
+                    }
+                    inSearchingArea
                   />
                 )}
             </>
           )}
-
-          <style jsx>{styles}</style>
         </section>
       )}
     </>

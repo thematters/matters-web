@@ -8,7 +8,6 @@ import {
   Translate,
   useStep,
   ViewerContext,
-  WagmiProvider,
   WalletAuthForm,
 } from '~/components'
 
@@ -48,24 +47,22 @@ const ConnectWallet = () => {
     <Layout.Main>
       <Head title={{ id: 'loginWithWallet' }} />
 
-      <WagmiProvider>
-        {currStep === 'wallet-select' && (
-          <WalletAuthForm.Select
-            purpose="page"
-            type="connect"
-            submitCallback={() => {
-              forward('wallet-connect')
-            }}
-          />
-        )}
-        {currStep === 'wallet-connect' && (
-          <WalletAuthForm.Connect
-            purpose="page"
-            submitCallback={() => (window.location.href = PATHS.ME_SETTINGS)}
-            back={() => forward('wallet-select')}
-          />
-        )}
-      </WagmiProvider>
+      {currStep === 'wallet-select' && (
+        <WalletAuthForm.Select
+          purpose="page"
+          type="connect"
+          submitCallback={() => {
+            forward('wallet-connect')
+          }}
+        />
+      )}
+      {currStep === 'wallet-connect' && (
+        <WalletAuthForm.Connect
+          purpose="page"
+          submitCallback={() => (window.location.href = PATHS.ME_SETTINGS)}
+          back={() => forward('wallet-select')}
+        />
+      )}
     </Layout.Main>
   )
 }

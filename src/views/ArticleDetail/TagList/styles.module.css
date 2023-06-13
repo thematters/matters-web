@@ -1,0 +1,17 @@
+.tagList {
+  margin-right: calc(var(--spacing-base) * -1);
+  margin-bottom: var(--spacing-base);
+
+  & .list {
+    @mixin hide-scrollbar;
+
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    & .listItem {
+      flex-shrink: 0;
+      padding-right: var(--spacing-base);
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
-import { getAddress } from '@ethersproject/address'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { getAddress } from 'viem'
 
 import { OPEN_LIKE_COIN_DIALOG, PATHS } from '~/common/enums'
 import { maskAddress, translate } from '~/common/utils'
@@ -16,7 +16,7 @@ import {
 } from '~/components'
 import { ViewerLikeInfoQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const VIEWER_LIKE_INFO = gql`
   query ViewerLikeInfo {
@@ -76,7 +76,7 @@ const WalletSettings = () => {
         rightText={
           ethAddress ? (
             <>
-              <span className="address">{shortAddress}</span>
+              <span className={styles.address}>{shortAddress}</span>
               <CopyToClipboard text={ethAddress}>
                 <Button
                   spacing={['xtight', 'xtight']}
@@ -94,10 +94,8 @@ const WalletSettings = () => {
             />
           )
         }
-        rightTextColor={ethAddress ? 'grey-darker' : 'green'}
+        rightTextColor={ethAddress ? 'greyDarker' : 'green'}
       />
-
-      <style jsx>{styles}</style>
     </Form.List>
   )
 }

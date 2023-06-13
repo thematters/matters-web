@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { Avatar, AvatarProps, Viewer } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type MeAvatarProps = {
   active?: boolean
@@ -16,8 +16,8 @@ const MeAvatar: React.FC<MeAvatarProps> = ({
   ...avatarProps
 }) => {
   const meAvatarClasses = classNames({
-    'me-avatar': true,
-    active: !user.isInactive && active,
+    [styles.meAvatar]: true,
+    [styles.active]: !user.isInactive && active,
   })
 
   return (
@@ -27,7 +27,6 @@ const MeAvatar: React.FC<MeAvatarProps> = ({
         user={!user.isInactive ? user : undefined}
         {...avatarProps}
       />
-      <style jsx>{styles}</style>
     </div>
   )
 }

@@ -18,7 +18,6 @@ import {
   TextIcon,
   Translate,
   ViewerContext,
-  WagmiProvider,
 } from '~/components'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -27,7 +26,7 @@ import { ExchangeRatesQuery, WalletBalanceQuery } from '~/gql/graphql'
 import { FiatCurrencyBalance, LikeCoinBalance, USDTBalance } from './Balance'
 import PaymentPassword from './PaymentPassword'
 import PaymentPointer from './PaymentPointer'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import ViewStripeAccount from './ViewStripeAccount'
 import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 
@@ -88,10 +87,9 @@ const Wallet = () => {
               spacing={[0, 'tight']}
               size={[null, '2rem']}
               bgColor="green"
-              textColor="white"
               href={PATHS.ME_WALLET_TRANSACTIONS}
             >
-              <TextIcon weight="md">
+              <TextIcon color="white" weight="md">
                 <Translate id="paymentTransactions" />
               </TextIcon>
             </Button>
@@ -101,7 +99,7 @@ const Wallet = () => {
 
       <Head title={{ id: 'myWallet' }} />
 
-      <section className="assetsContainer">
+      <section className={styles.assetsContainer}>
         <FiatCurrencyBalance
           balanceHKD={balanceHKD}
           canPayout={canPayout}
@@ -113,12 +111,10 @@ const Wallet = () => {
           currency={currency}
           exchangeRate={exchangeRateLIKE?.rate || 0}
         />
-        <WagmiProvider>
-          <USDTBalance
-            currency={currency}
-            exchangeRate={exchangeRateUSDT?.rate || 0}
-          />
-        </WagmiProvider>
+        <USDTBalance
+          currency={currency}
+          exchangeRate={exchangeRateUSDT?.rate || 0}
+        />
       </section>
 
       <ResponsiveWrapper>
@@ -126,7 +122,7 @@ const Wallet = () => {
           {hasPaymentPassword && (
             <>
               <PaymentPassword />
-              <hr className="dashed-line" />
+              <hr className={styles.dashedLine} />
             </>
           )}
           <ViewStripeCustomerPortal />
@@ -134,8 +130,6 @@ const Wallet = () => {
           <PaymentPointer />
         </Form.List>
       </ResponsiveWrapper>
-
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

@@ -34,7 +34,11 @@ import {
   useMutation,
 } from '~/components'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-import { AddCreditMutation, WalletBalanceQuery } from '~/gql/graphql'
+import {
+  AddCreditMutation,
+  UserLanguage,
+  WalletBalanceQuery,
+} from '~/gql/graphql'
 
 import ConfirmTable from '../ConfirmTable'
 import StripeCheckout from '../StripeCheckout'
@@ -296,7 +300,7 @@ const AddCreditForm: React.FC<FormProps> = (props) => {
   return (
     <Elements
       stripe={stripePromise}
-      options={{ locale: lang === 'zh_hans' ? 'zh' : 'en' }}
+      options={{ locale: lang === UserLanguage.ZhHans ? 'zh' : 'en' }}
     >
       <BaseAddCredit {...props} />
     </Elements>

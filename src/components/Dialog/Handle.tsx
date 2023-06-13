@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface HandleProps {
   closeDialog: () => void
@@ -15,14 +15,12 @@ const Handle: React.FC<HandleProps> = ({ closeDialog, ...props }) => {
   return (
     <button
       type="button"
-      className="handle"
+      className={styles.handle}
       aria-label={translate({ id: 'close', lang })}
       onClick={closeDialog}
       {...props}
     >
-      <span className="icon" />
-
-      <style jsx>{styles}</style>
+      <span className={styles.icon} />
     </button>
   )
 }

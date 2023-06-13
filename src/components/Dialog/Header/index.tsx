@@ -5,7 +5,7 @@ import { TextId } from '~/common/enums'
 import { Media, Spacer, Translate } from '~/components'
 
 import { BackButton, CloseButton, RightButton } from './Button'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface HeaderProps {
   title: TextId | React.ReactNode
@@ -25,7 +25,8 @@ const BaseHeader = ({
   rightButton,
 }: HeaderProps) => {
   const headerClasses = classNames({
-    inner: mode === 'inner',
+    [styles.header]: true,
+    [styles.inner]: mode === 'inner',
   })
 
   return (
@@ -41,7 +42,7 @@ const BaseHeader = ({
       </h1>
 
       {(leftButton || closeDialog) && (
-        <section className="left">
+        <section className={styles.left}>
           {leftButton ||
             (closeDialog ? (
               <CloseButton closeDialog={closeDialog} textId={closeTextId} />
@@ -49,9 +50,7 @@ const BaseHeader = ({
         </section>
       )}
 
-      {rightButton && <section className="right">{rightButton}</section>}
-
-      <style jsx>{styles}</style>
+      {rightButton && <section className={styles.right}>{rightButton}</section>}
     </header>
   )
 }
@@ -74,8 +73,6 @@ const Header: React.FC<HeaderProps> & {
       <VisuallyHidden>
         <BaseHeader {...props} />
       </VisuallyHidden>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

@@ -47,7 +47,7 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
 
           {closeDialog && (
             <Dialog.Footer.Button
-              bgColor="grey-lighter"
+              bgColor="greyLighter"
               textColor="black"
               onClick={closeDialog}
             >

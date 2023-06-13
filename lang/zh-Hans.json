@@ -295,10 +295,6 @@
     "defaultMessage": "验证码",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "EoNvLu": {
-    "defaultMessage": "创作了 ",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "EwVnoC": {
     "defaultMessage": "我已阅读并同意",
     "description": ""
@@ -535,6 +531,18 @@
     "defaultMessage": "设置围炉网址（创建后不可修改）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "Vn5KLr": {
+    "defaultMessage": "开启后，正文将被暂时遮蔽，只显示标题与摘要，并由读者选择是否继续阅读（例如含有色情、暴力、血腥等内容）",
+    "description": "src/components/Editor/ToggleAccess/index.tsx"
+  },
+  "s5JCCO": {
+    "defaultMessage": "此文已被{actor}标示为限制级内容，是否确定展开全文？",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+  },
+  "0JLcHr": {
+    "defaultMessage": "内容可能包含色情、暴力、血腥等限制级内容，部分用户可能不适合观看，或引起不适、心理负担，请谨慎判断是否阅读。",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+  },
   "RFzVUD": {
     "defaultMessage": "取消置顶",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -603,12 +611,8 @@
     "defaultMessage": "作品已添加标签",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
-  "UxfPXa": {
-    "defaultMessage": "累积创作 ",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
-  "1zVIWy": {
-    "defaultMessage": "在 {commentArticle} 的评论提到了你",
+  "VO4Elt": {
+    "defaultMessage": "在 {commentArticle} 的评论中提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "lZukEr": {

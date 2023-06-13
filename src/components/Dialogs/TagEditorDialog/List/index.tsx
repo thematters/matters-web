@@ -12,7 +12,7 @@ import {
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 import { TagMaintainersQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * This a sub-component of <TagEditorDialog>. It shows editors of a tag, and
@@ -46,14 +46,13 @@ const RemoveButton = ({ remove }: { remove: () => void }) => (
     <Button
       spacing={[0, 'xtight']}
       size={[null, '1.25rem']}
-      bgColor="grey-lighter"
+      bgColor="greyLighter"
       onClick={() => remove()}
     >
-      <TextIcon size="xs" color="grey-dark" weight="md">
+      <TextIcon size="xs" color="greyDark" weight="md">
         <Translate zh_hant="移除" zh_hans="移除" en="remove" />
       </TextIcon>
     </Button>
-    <style jsx>{styles}</style>
   </section>
 )
 
@@ -96,7 +95,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
       />
 
       <Dialog.Content hasGrow>
-        <section className="owner">
+        <section className={styles.owner}>
           {tag.owner && (
             <UserDigest.Rich
               user={tag.owner}
@@ -111,7 +110,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
 
         {isHavingEditors && (
           <>
-            <hr className="divider" />
+            <hr className={styles.divider} />
             <ul>
               {editors.map((editor) => (
                 <li key={editor.id}>
@@ -137,10 +136,10 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
           </>
         )}
 
-        <hr className="divider" />
+        <hr className={styles.divider} />
 
         <Dialog.Message>
-          <p className="hint">
+          <p className={styles.hint}>
             <Translate
               zh_hant="協作者可以與你共同管理精選"
               zh_hans="协作者可以与你共同管理精选"
@@ -154,7 +153,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                   zh_hans="每个标签最多添加"
                   en="Every tag can have maximum"
                 />
-                <span className="count"> 4 </span>
+                <span className={styles.count}> 4 </span>
                 <Translate
                   zh_hant="名協作者"
                   zh_hans="名协作者"
@@ -169,7 +168,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                   zh_hans="你还可以添加"
                   en="You can add"
                 />
-                <span className="count"> {4 - count} </span>
+                <span className={styles.count}> {4 - count} </span>
                 <Translate
                   zh_hant="名協作者"
                   zh_hans="名协作者"
@@ -196,8 +195,6 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
           </Dialog.Footer.Button>
         </Dialog.Footer>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }

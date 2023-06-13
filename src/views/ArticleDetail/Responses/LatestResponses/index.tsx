@@ -32,7 +32,7 @@ import {
 } from '~/gql/graphql'
 
 import ResponseArticle from '../ResponseArticle'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
 
 const RESPONSES_COUNT = 15
@@ -252,13 +252,13 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
   }
 
   return (
-    <section className="latest-responses" id="latest-responses">
-      <header>
+    <section className={styles.latestResponses} id="latest-responses">
+      <header className={styles.header}>
         <Title type="feed" is="h3">
           <Translate id="latestResponses" />
         </Title>
 
-        <div className="latest-responses-switch">
+        <div className={styles.latestResponsesSwitch}>
           <Switch
             name="article-only"
             label={translate({ id: 'collectedOnly', lang })}
@@ -299,8 +299,6 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
       {pageInfo?.hasNextPage && (
         <ViewMoreButton onClick={() => loadMore()} loading={loading} />
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

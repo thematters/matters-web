@@ -22,6 +22,7 @@ import {
   DigestRichCirclePrivateFragment,
   DigestRichCirclePublicFragment,
   SubscribeCircleMutation,
+  UserLanguage,
 } from '~/gql/graphql'
 
 import StripeCheckout from '../StripeCheckout'
@@ -29,7 +30,6 @@ import { SUBSCRIBE_CIRCLE } from './gql'
 import Head from './Head'
 import Hint from './Hint'
 import Processing from './Processing'
-import styles from './styles.css'
 
 interface CardPaymentProps {
   circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
@@ -171,8 +171,6 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
           <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </>
   )
 }
@@ -183,7 +181,7 @@ const CardPayment: React.FC<CardPaymentProps> = (props) => {
   return (
     <Elements
       stripe={stripePromise}
-      options={{ locale: lang === 'zh_hans' ? 'zh' : 'en' }}
+      options={{ locale: lang === UserLanguage.ZhHans ? 'zh' : 'en' }}
     >
       <BaseCardPayment {...props} />
     </Elements>

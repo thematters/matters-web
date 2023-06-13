@@ -4,13 +4,8 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { ADD_TOAST, DEFAULT_LOCALE, URL_QS } from '~/common/enums'
-import {
-  normalizeTag,
-  toGlobalId,
-  toPath,
-  toUserLanguage,
-} from '~/common/utils'
+import { ADD_TOAST, URL_QS } from '~/common/enums'
+import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
   EmptyLayout,
@@ -54,7 +49,7 @@ import License from './License'
 import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationToast from './TranslationToast'
@@ -86,6 +81,12 @@ const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
   loading: Spinner,
 })
+
+const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
+  ssr: true, // enable for first screen
+  loading: Spinner,
+})
+
 const DynamicSubscribeCircleDialog = dynamic(
   () =>
     import('~/components/Dialogs/SubscribeCircleDialog').then(
@@ -114,13 +115,15 @@ const BaseArticleDetail = ({
   article: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
 }) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   const features = useFeatures()
   const [fixedWall, setFixedWall] = useState(false)
+  const [isSensitive, setIsSensitive] = useState<boolean>(
+    article.sensitiveByAuthor || article.sensitiveByAdmin
+  )
 
   const authorId = article.author?.id
   const paymentPointer = article.author?.paymentPointer
@@ -144,7 +147,7 @@ const BaseArticleDetail = ({
 
   // translation
   const [autoTranslation] = useState(article.translation) // cache initial article data since it will be overwrote by newly's if URL is shadow replaced
-  const [translated, setTranslate] = useState(!!locale)
+  const [translated, setTranslate] = useState(!!routerLang)
   const originalLang = article.language
   const {
     lang: preferredLang,
@@ -206,11 +209,11 @@ const BaseArticleDetail = ({
 
   // set language cookie for anonymous if it doesn't exist
   useEffect(() => {
-    if (cookieLang || viewer.isAuthed || !locale) {
+    if (cookieLang || viewer.isAuthed || !routerLang) {
       return
     }
 
-    setLang(toUserLanguage(locale) as UserLanguage)
+    setLang(routerLang)
   }, [])
 
   const {
@@ -271,9 +274,9 @@ const BaseArticleDetail = ({
 
       <State article={article} />
 
-      <section className="content">
+      <section className={styles.content}>
         <TagList article={article} />
-        <section className="title">
+        <section className={styles.title}>
           <Title type="article">{title}</Title>
 
           <Waypoint
@@ -293,28 +296,48 @@ const BaseArticleDetail = ({
             canReadFullContent={canReadFullContent}
           />
         </section>
+
         {article?.summaryCustomized && <CustomizedSummary summary={summary} />}
-        <Content
-          article={article}
-          content={content}
-          translating={translating}
-        />
-        <License license={article.license} />
-        {circle && !canReadFullContent && <DynamicCircleWall circle={circle} />}
-        {features.payment && canReadFullContent && (
-          <DynamicSupportWidget article={article} />
+
+        {isSensitive && (
+          <DynamicSensitiveWall
+            sensitiveByAuthor={article.sensitiveByAuthor}
+            sensitiveByAdmin={article.sensitiveByAdmin}
+            expandAll={() => setIsSensitive(false)}
+          />
         )}
+        {!isSensitive && (
+          <>
+            <Content
+              article={article}
+              content={content}
+              translating={translating}
+            />
+            <License license={article.license} />
+
+            {circle && !canReadFullContent && (
+              <DynamicCircleWall circle={circle} />
+            )}
+
+            {features.payment && canReadFullContent && (
+              <DynamicSupportWidget article={article} />
+            )}
+          </>
+        )}
+
         {collectionCount > 0 && (
-          <section className="block">
+          <section className={styles.block}>
             <DynamicCollection
               article={article}
               collectionCount={collectionCount}
             />
           </section>
         )}
-        <section className="block">
+
+        <section className={styles.block}>
           <DynamicResponse id={article.id} lock={!canReadFullContent} />
         </section>
+
         <Media lessThan="xl">
           <RelatedArticles article={article} />
         </Media>
@@ -336,8 +359,6 @@ const BaseArticleDetail = ({
       {article.access.circle && (
         <DynamicSubscribeCircleDialog circle={article.access.circle} />
       )}
-
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }
@@ -347,12 +368,11 @@ const ArticleDetail = ({
 }: {
   includeTranslation: boolean
 }) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   /**
    * fetch public data
@@ -368,7 +388,7 @@ const ArticleDetail = ({
     {
       variables: {
         mediaHash,
-        language: locale ? toUserLanguage(locale) : UserLanguage.ZhHant,
+        language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
       skip: !isQueryByHash,
@@ -379,7 +399,7 @@ const ArticleDetail = ({
     {
       variables: {
         id: toGlobalId({ type: 'Article', id: articleId }),
-        language: locale ? toUserLanguage(locale) : UserLanguage.ZhHant,
+        language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
       skip: isQueryByHash,
@@ -462,10 +482,7 @@ const ArticleDetail = ({
     const nsearch = rems.length > 0 ? `?${new URLSearchParams(rems)}` : ''
     const nhref = `${n.pathname}${nsearch}${n.hash || u.hash}`
 
-    if (
-      nhref !== router.asPath ||
-      (router.locale && router.locale !== DEFAULT_LOCALE)
-    ) {
+    if (nhref !== router.asPath || routerLang) {
       router.replace(nhref, undefined, { shallow: true, locale: false })
     }
   }, [latestHash])
@@ -582,11 +599,10 @@ const ArticleDetail = ({
 }
 
 const ArticleDetailOuter = () => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   const isQueryByHash = !!(mediaHash && isMediaHashPossiblyValid(mediaHash))
   const resultByHash = usePublicQuery<ArticleAvailableTranslationsQuery>(
@@ -603,10 +619,8 @@ const ArticleDetailOuter = () => {
   const { data } = resultByHash.data ? resultByHash : resultByNodeId
   const loading = resultByHash.loading || resultByNodeId.loading
   const includeTranslation =
-    !!locale &&
-    (data?.article?.availableTranslations || []).includes(
-      toUserLanguage(locale) as UserLanguage
-    )
+    !!routerLang &&
+    (data?.article?.availableTranslations || []).includes(routerLang)
 
   /**
    * Rendering

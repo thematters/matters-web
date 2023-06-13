@@ -14,7 +14,7 @@ import { CircleInvitationFragment } from '~/gql/graphql'
 import CircleInvitationInvitee from './Invitee'
 import CircleInvitationPeriod from './Period'
 import CircleInvitationResendButton from './Resend'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface CircleInvitationProps {
   invitation: CircleInvitationFragment
@@ -31,7 +31,7 @@ const CircleInvitationFailedInfo = () => (
     }
     placement="left"
   >
-    <span>
+    <span className={styles.subtext}>
       <TextIcon
         icon={<IconInfo16 />}
         color="grey"
@@ -80,9 +80,9 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
 
   return (
     <Card spacing={['xtight', 0]}>
-      <section className="container">
+      <section className={styles.container}>
         <CircleInvitationInvitee invitee={invitee} />
-        <section className="info">
+        <section className={styles.info}>
           <CircleInvitationPeriod
             freePeriod={freePeriod}
             acceptedAt={acceptedAt}
@@ -100,7 +100,7 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
           {isFailed && <CircleInvitationFailedInfo />}
 
           {isSucceeded && (
-            <span className="succeeded">
+            <span className={[styles.subtext, styles.succeeded].join(' ')}>
               <Translate
                 zh_hant="付費訂閱中"
                 zh_hans="付费订阅中"
@@ -109,7 +109,6 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
             </span>
           )}
         </section>
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

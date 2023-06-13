@@ -2,7 +2,7 @@ import { SVGProps } from 'react'
 
 import { TextIcon, withIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type SectionHeadProps = {
   icon: React.FC<SVGProps<HTMLOrSVGElement>>
@@ -15,8 +15,8 @@ const SectionHead: React.FC<React.PropsWithChildren<SectionHeadProps>> = ({
   children,
 }) => {
   return (
-    <section className="head">
-      <h2>
+    <section className={styles.head}>
+      <h2 className={styles.h2}>
         <TextIcon
           icon={withIcon(icon)({ size: 'md' })}
           size="xm"
@@ -28,8 +28,6 @@ const SectionHead: React.FC<React.PropsWithChildren<SectionHeadProps>> = ({
       </h2>
 
       {children}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

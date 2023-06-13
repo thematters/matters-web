@@ -7,7 +7,6 @@ import { LanguageContext } from '~/components'
 
 import DrawerContent from './DrawerContent'
 import Overlay from './Overlay'
-import globalStyles from './styles.global.css'
 
 export interface SideDrawerNavProps {
   isOpen: boolean | undefined
@@ -41,7 +40,7 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
       {transition(({ opacity, transform }) => (
         <AnimatedDrawerOverlay
           initialFocusRef={closeButtonRef}
-          className="side-drawer-nav"
+          className="sideDrawerNav"
         >
           <AnimatedOverlay style={{ opacity: opacity as any }} />
 
@@ -60,10 +59,6 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
           </DialogContent>
         </AnimatedDrawerOverlay>
       ))}
-
-      <style jsx global>
-        {globalStyles}
-      </style>
     </>
   )
 }

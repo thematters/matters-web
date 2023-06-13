@@ -5,6 +5,7 @@ import React from 'react'
 import { AvatarUploader } from '~/components'
 
 import { MOCK_CIRCLE, MOCK_USER } from '../../mocks'
+import styles from './styles.module.css'
 
 export default {
   title: 'Components/Uploader',
@@ -13,7 +14,7 @@ export default {
 
 const Template: ComponentStory<typeof AvatarUploader> = () => (
   <MockedProvider>
-    <ul>
+    <ul className={styles.avatarContainer}>
       {/* User */}
       <li>
         <AvatarUploader hasBorder onUpload={(assetId) => alert({ assetId })} />
@@ -42,12 +43,6 @@ const Template: ComponentStory<typeof AvatarUploader> = () => (
           entityId=""
         />
       </li>
-
-      <style jsx>{`
-        li {
-          margin-bottom: var(--spacing-base);
-        }
-      `}</style>
     </ul>
   </MockedProvider>
 )

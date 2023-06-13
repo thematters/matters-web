@@ -11,7 +11,7 @@ import {
 import { ArticleDigestTitle } from '../Title'
 import FooterActions, { FooterActionsProps } from './FooterActions'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ArticleDigestConciseControls = {
   onClick?: () => any
@@ -23,7 +23,6 @@ export type ArticleDigestConciseControls = {
 export type ArticleDigestConciseProps = {
   article: ArticleDigestConciseArticlePublicFragment &
     Partial<ArticleDigestConciseArticlePrivateFragment>
-  header?: React.ReactNode
   footerTag?: React.ReactNode
   footerCircle?: React.ReactNode
 } & ArticleDigestConciseControls &
@@ -32,7 +31,6 @@ export type ArticleDigestConciseProps = {
 
 const BaseArticleDigestFeed = ({
   article,
-  header,
   footerTag,
   footerCircle,
   date,
@@ -65,13 +63,13 @@ const BaseArticleDigestFeed = ({
       bgActiveColor="none"
       onClick={onClick}
     >
-      <section className="content">
-        <section className="head">
-          <section className="title">
+      <section className={styles.content}>
+        <section className={styles.head}>
+          <section className={styles.title}>
             <ArticleDigestTitle article={article} textSize="xm" />
           </section>
 
-          <section className="author">
+          <section className={styles.author}>
             <UserDigest.Mini
               user={author}
               avatarSize="sm"
@@ -83,10 +81,10 @@ const BaseArticleDigestFeed = ({
           </section>
         </section>
 
-        <p className="description">{cleanedSummary}</p>
+        <p className={styles.description}>{cleanedSummary}</p>
 
         {cover && (
-          <div className="cover">
+          <div className={styles.cover}>
             <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
           </div>
         )}
@@ -100,8 +98,6 @@ const BaseArticleDigestFeed = ({
         circle={footerCircle}
         {...controls}
       />
-
-      <style jsx>{styles}</style>
     </Card>
   )
 }

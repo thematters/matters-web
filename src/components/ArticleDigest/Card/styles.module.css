@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 170px;
+  padding: var(--spacing-tight) var(--spacing-base);
+  color: var(--color-black);
+}
+
+.header {
+  & h3 {
+    @mixin line-clamp;
+
+    -webkit-line-clamp: 2;
+  }
+}
+
+.summary,
+.footer {
+  margin-top: var(--spacing-tight);
+}
+
+.summary {
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-darker);
+  -webkit-line-clamp: 2;
+
+  @mixin line-clamp;
+}
+
+.container.hasCover {
+  justify-content: flex-end;
+  color: var(--color-white);
+}

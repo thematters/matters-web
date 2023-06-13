@@ -19,7 +19,6 @@
           { "name": "TagNotice" },
           { "name": "TransactionNotice" },
           { "name": "CircleNotice" },
-          { "name": "CryptoNotice" },
           { "name": "OfficialAnnouncementNotice" }
         ]
       },

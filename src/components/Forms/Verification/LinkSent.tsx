@@ -52,7 +52,7 @@ export const VerificationLinkSent = ({
         <Dialog.Footer>
           <Dialog.Footer.Button
             onClick={closeDialog}
-            bgColor="grey-lighter"
+            bgColor="greyLighter"
             textColor="black"
           >
             <Translate id="understood" />

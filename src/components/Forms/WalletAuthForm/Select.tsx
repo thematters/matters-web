@@ -18,7 +18,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface FormProps {
   type?: 'connect' | 'auth'
@@ -96,7 +96,8 @@ const Select: React.FC<FormProps> = ({
 
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
   const walletConnectConnector = connectors.find(
-    (c) => c.id === 'walletConnect'
+    // (c) => c.id === 'walletConnect'
+    (c) => c.id === 'walletConnectLegacy'
   )
   const isMetaMaskLoading =
     isConnecting && pendingConnector?.id === injectedConnector?.id
@@ -159,12 +160,12 @@ const Select: React.FC<FormProps> = ({
   }
 
   const containerClasses = classNames({
-    container: !!isInPage,
+    [styles.container]: !!isInPage,
   })
 
   const msgClasses = classNames({
-    msg: true,
-    isInDialog,
+    [styles.msg]: true,
+    [styles.isInDialog]: isInDialog,
   })
 
   const InnerForm = (
@@ -258,7 +259,6 @@ const Select: React.FC<FormProps> = ({
             }
           />
         </Form.List>
-        <style jsx>{styles}</style>
       </section>
 
       <section className={msgClasses}>
@@ -267,7 +267,6 @@ const Select: React.FC<FormProps> = ({
           hint={errorMessage ? undefined : <Hint />}
           error={errorMessage}
         />
-        <style jsx>{styles}</style>
       </section>
     </Form>
   )

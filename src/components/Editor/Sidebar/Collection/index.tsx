@@ -12,7 +12,7 @@ import {
 
 import ArticleCustomStagingArea from '../../ArticleCustomStagingArea'
 import Box from '../Box'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type SidebarCollectionProps = {
   disabled?: boolean
@@ -45,7 +45,7 @@ const SidebarCollection = ({
           disabled={disabled}
         >
           {collection.length > 0 && (
-            <ul>
+            <ul className={styles.list}>
               {collection.map((article) => (
                 <li key={article.id}>
                   <ArticleDigestDropdown
@@ -53,12 +53,10 @@ const SidebarCollection = ({
                     titleTextSize="sm"
                     spacing={['base', 'base']}
                     bgColor="none"
-                    bgActiveColor="grey-lighter"
+                    bgActiveColor="greyLighter"
                   />
                 </li>
               ))}
-
-              <style jsx>{styles}</style>
             </ul>
           )}
         </Box>

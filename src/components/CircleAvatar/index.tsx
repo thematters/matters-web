@@ -5,7 +5,7 @@ import ICON_CIRCLE_AVATAR_DEFAULT from '@/public/static/icons/72px/circle-avatar
 import { ResponsiveImage } from '~/components'
 import { AvatarCircleFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CircleAvatarSize = 'xl' | 'xxl' | 'xxxl'
 
@@ -30,8 +30,8 @@ export const CircleAvatar = (props: CircleAvatarProps) => {
   const isFallback =
     (!src && !circle?.avatar) || source.indexOf('data:image') >= 0
   const avatarClasses = classNames({
-    avatar: true,
-    [size]: true,
+    [styles.avatar]: true,
+    [styles[size]]: true,
   })
 
   return (
@@ -41,8 +41,6 @@ export const CircleAvatar = (props: CircleAvatarProps) => {
         size="144w"
         disabled={isFallback || inEditor}
       />
-
-      <style jsx>{styles}</style>
     </div>
   )
 }

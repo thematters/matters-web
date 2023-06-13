@@ -12,7 +12,7 @@ import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const ArticleTagUnselectedNotice = ({
   notice,
@@ -31,14 +31,16 @@ const ArticleTagUnselectedNotice = ({
 
   return (
     <section
-      className="container"
+      className={styles.container}
       data-test-id={TEST_ID.NOTICE_ARTICLE_TAG_UNSELECTED}
     >
-      <section className="avatar-wrap">
+      <section className={styles.avatarWrap}>
         <NoticeActorAvatar user={actor} />
       </section>
 
-      <section className="content-wrap overflow-hidden">
+      <section
+        className={[styles.contentWrap, styles.overflowHidden].join(' ')}
+      >
         <NoticeHead>
           {isAuthor && (
             <Translate zh_hant="啊喔， " zh_hans="啊喔， " en="uh-oh, " />
@@ -73,8 +75,6 @@ const ArticleTagUnselectedNotice = ({
 
         <NoticeDate notice={notice} />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

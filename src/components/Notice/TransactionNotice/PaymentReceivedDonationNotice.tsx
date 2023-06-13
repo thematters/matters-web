@@ -10,7 +10,7 @@ import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
 import NoticeDigest from '../NoticeDigest'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const PaymentReceivedDonationNotice = ({
   notice,
@@ -38,12 +38,11 @@ const PaymentReceivedDonationNotice = ({
             <NoticeArticleTitle article={tx.target} />
             &nbsp;
             <span
-              className="highlight"
+              className={styles.highlight}
               data-test-id={TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION_AMOUNT}
             >
               {tx.amount} {tx.currency}
             </span>
-            <style jsx>{styles}</style>
           </>
         )) ||
         ''

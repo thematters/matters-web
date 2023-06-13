@@ -4,7 +4,7 @@ import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
 import { Layout, Translate, useRoute } from '~/components'
 
 import { Box } from '../../Box'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const OAuthCallbackSuccess = () => {
   const { getQuery, router } = useRoute()
@@ -34,7 +34,7 @@ const OAuthCallbackSuccess = () => {
 
       <Layout.Spacing>
         <Box avatar={avatar[provider]} title={title[provider]}>
-          <section className="content">
+          <section className={styles.content}>
             <h2>
               <Translate
                 zh_hant="綁定成功！"
@@ -47,8 +47,6 @@ const OAuthCallbackSuccess = () => {
               <Translate id="callbackClose" />
             </p>
           </section>
-
-          <style jsx>{styles}</style>
         </Box>
       </Layout.Spacing>
     </Layout.Main>

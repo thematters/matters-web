@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import { EXTERNAL_LINKS, GUIDE_LINKS, PATHS } from '~/common/enums'
 import { LanguageContext, LanguageSwitch } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const SideFooter = () => {
   const { lang } = useContext(LanguageContext)
@@ -13,11 +13,11 @@ const SideFooter = () => {
 
   return (
     <footer>
-      <section className="buttons">
+      <section className={styles.buttons}>
         <LanguageSwitch />
       </section>
 
-      <section className="links">
+      <section className={styles.links}>
         <Link href={PATHS.ABOUT} legacyBehavior>
           <a>
             <FormattedMessage defaultMessage="About Us" description="" />
@@ -75,14 +75,12 @@ const SideFooter = () => {
           </a>
         </Link>
 
-        <span className="copyright">
+        <span className={styles.copyright}>
           {'@ '}
           <span itemProp="copyrightYear">{year}</span>{' '}
           <span itemProp="copyrightHolder">Matters</span>
         </span>
       </section>
-
-      <style jsx>{styles}</style>
     </footer>
   )
 }

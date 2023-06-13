@@ -6,7 +6,7 @@ import { LinkWrapper } from '~/components'
 import { UserDigestPlainUserFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type UserDigestPlainProps = {
   user: UserDigestPlainUserFragment
@@ -28,13 +28,13 @@ const Plain = ({
   })
 
   const containerClasses = classNames({
-    container: true,
-    disabled,
+    [styles.container]: true,
+    [styles.disabled]: disabled,
   })
 
   const displayNameClasses = classNames({
-    name: true,
-    hasUnderline,
+    [styles.name]: true,
+    [styles.hasUnderline]: hasUnderline,
   })
 
   return (
@@ -46,7 +46,6 @@ const Plain = ({
     >
       <section className={containerClasses}>
         <span className={displayNameClasses}>{user.displayName}</span>
-        <style jsx>{styles}</style>
       </section>
     </LinkWrapper>
   )

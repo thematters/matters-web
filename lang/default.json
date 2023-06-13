@@ -35,6 +35,10 @@
     "defaultMessage": "Manage",
     "description": ""
   },
+  "0JLcHr": {
+    "defaultMessage": "Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress.",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+  },
   "1EYCdR": {
     "defaultMessage": "Tags",
     "description": ""
@@ -294,10 +298,6 @@
   "EfJYPI": {
     "defaultMessage": "Verification Code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
-  "EoNvLu": {
-    "defaultMessage": "Created",
-    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "EwVnoC": {
     "defaultMessage": "I have read and agree to",
@@ -571,21 +571,17 @@
     "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "UgvfcU": {
-    "defaultMessage": "You have successfully completed Ethereum wallet settings. Please confirm wallet address:",
-    "description": "src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
-  },
   "UjKkhq": {
     "defaultMessage": "Tags added",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
-  "UxfPXa": {
-    "defaultMessage": "In total",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "V8msLJ": {
     "defaultMessage": "left comments and mentioned you in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "Vn5KLr": {
+    "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)",
+    "description": "src/components/Editor/ToggleAccess/index.tsx"
   },
   "VrOoVf": {
     "defaultMessage": "Matters will never ask your wallet key through any channel.",
@@ -1011,10 +1007,6 @@
     "defaultMessage": "Circle Name",
     "description": ""
   },
-  "qQmSxu": {
-    "defaultMessage": "Airdrop registration completed. Your NFT will be revealed on November 12. Confirm your ETH wallet address:",
-    "description": "src/components/Notice/CryptoNotice/CryptoWalletAirdropNotice.tsx"
-  },
   "qYzBk8": {
     "defaultMessage": "unsubscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -1058,6 +1050,10 @@
   "rs0YS2": {
     "defaultMessage": "Account Banned",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "s5JCCO": {
+    "defaultMessage": "This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "sPgUkN": {
     "defaultMessage": "This Month",

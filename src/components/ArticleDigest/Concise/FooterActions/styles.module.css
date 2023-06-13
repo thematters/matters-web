@@ -1,0 +1,11 @@
+.footer {
+  @mixin feed-footer-actions;
+
+  & .left {
+    display: inline-flex;
+
+    & > * + * {
+      padding-left: var(--spacing-x-tight);
+    }
+  }
+}

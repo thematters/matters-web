@@ -1,0 +1,31 @@
+.tags {
+  /* FIXME: top header overlay by sticky tabs */
+
+  /* margin-top: 1px; */
+}
+
+.list {
+  @media (--lg-up) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    /* margin-top: calc(var(--spacing-base) * -1); */
+  }
+
+  & .listItem {
+    position: relative;
+    padding: var(--spacing-x-tight) 0;
+
+    @media (--lg-up) {
+      padding: var(--spacing-base) 0;
+
+      &:nth-child(2n) {
+        margin-left: var(--spacing-xx-tight);
+      }
+
+      &:nth-child(2n + 1) {
+        margin-right: var(--spacing-loose);
+      }
+    }
+  }
+}

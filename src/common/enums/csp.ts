@@ -38,6 +38,9 @@ const SCRIPT_SRC = [
 const STYLE_SRC = [
   "'self'",
 
+  // Next.js Assets
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
+
   // style-jsx
   "'unsafe-inline'",
 
@@ -72,6 +75,9 @@ const IMG_SRC = [
 
   // GA
   'www.google-analytics.com',
+
+  // WalletConnect
+  '*.walletconnect.com',
 ]
 
 const MEDIA_SRC = IMG_SRC
@@ -80,6 +86,9 @@ const CONNECT_SRC = [
   "'self'",
   'ws:',
   'wss:',
+
+  // Next.js Assets
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
 
   // API
   process.env.NEXT_PUBLIC_API_URL,
@@ -144,13 +153,9 @@ const FRAME_SRC = [
   // Stripe
   'js.stripe.com',
   'hooks.stripe.com',
-]
 
-const PREFETCH_SRC = [
-  "'self'",
-
-  // Next.js Assets
-  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
+  // WalletConnect
+  '*.walletconnect.com',
 ]
 
 export const CSP_POLICY = Object.entries({
@@ -160,7 +165,6 @@ export const CSP_POLICY = Object.entries({
   'media-src': MEDIA_SRC,
   'connect-src': CONNECT_SRC,
   'frame-src': FRAME_SRC,
-  'prefetch-src': PREFETCH_SRC,
   'default-src': ["'self'"],
 })
   .map(

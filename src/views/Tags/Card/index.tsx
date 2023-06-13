@@ -7,7 +7,7 @@ import { toPath } from '~/common/utils'
 import { ResponsiveImage } from '~/components'
 import { CardTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface CardProps {
   tag: CardTagFragment
@@ -16,20 +16,21 @@ interface CardProps {
 const Card = ({ tag }: CardProps) => {
   const path = toPath({ page: 'tagDetail', tag })
   const url = tag.cover || IMAGE_TAG_COVER.src
-  const nameClasses = classNames({ name: true, mask: !!tag.cover })
+  const nameClasses = classNames({
+    [styles.name]: true,
+    [styles.mask]: !!tag.cover,
+  })
 
   return (
     <Link {...path} legacyBehavior>
       <a>
-        <section className="card">
+        <section className={styles.card}>
           <ResponsiveImage url={url} size="360w" />
 
           <div className={nameClasses}>
             <h4>{tag.content}</h4>
           </div>
         </section>
-
-        <style jsx>{styles}</style>
       </a>
     </Link>
   )

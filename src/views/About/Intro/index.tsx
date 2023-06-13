@@ -6,17 +6,22 @@ import IMAGE_WAVE_2 from '@/public/static/images/about/wave-intro-2.svg'
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Intro = () => {
+  const style = {
+    '--about-wave-bg-1': `url(${IMAGE_WAVE_1})`,
+    '--about-wave-bg-2': `url(${IMAGE_WAVE_2})`,
+  } as React.CSSProperties
+
   return (
-    <section className="intro">
+    <section className={styles.intro} style={style}>
       <ul>
-        <li className="l-container full ecosystem">
+        <li className={`l-container full ${styles.ecosystem}`}>
           <div className="l-row">
             <img src={IMAGE_ILLUSTRATION_1.src} alt="illustration 1" />
 
-            <section className="content">
+            <section className={styles.content}>
               <h3>
                 <Translate
                   zh_hant="生態：自主、自由"
@@ -31,10 +36,9 @@ const Intro = () => {
                   en="Matters.Town, powered by Matters Lab, is a self-regulated community of 100,000 creators, also the first entry point built by Matters Lab. The decentralized content publication ecosystem is built on top of InterPlanetary File System (IPFS), a protocol and peer-to-peer network for storing and sharing data in a distributed file system that is hard for authorities to censor, allowing creators to be truly independent. We also partner with LikeCoin Foundation and support Matters Pay to reward creativity in the form of multiple currencies and cryptocurrencies."
                 />
               </p>
-              <section className="buttons">
+              <section className={styles.buttons}>
                 <Button
                   bgColor="green"
-                  textColor="white"
                   spacing={['tight', 'loose']}
                   htmlHref={EXTERNAL_LINKS.MATTERS_LAB}
                   htmlTarget="_blank"
@@ -52,11 +56,11 @@ const Intro = () => {
             </section>
           </div>
         </li>
-        <li className="l-container full community">
+        <li className={`l-container full ${styles.community}`}>
           <div className="l-row">
             <img src={IMAGE_ILLUSTRATION_2.src} alt="illustration 2" />
 
-            <section className="content">
+            <section className={styles.content}>
               <h3>
                 <Translate
                   zh_hant="社區：開放、共治"
@@ -71,9 +75,9 @@ const Intro = () => {
                   en="Matters.Town is a writing community based on decentralized technologies, with open-sourced codebase and self-governance of creators. Creators can write, publish, read and discuss, as well as participate in building, co-living and deciding together for the Matters Community."
                 />
               </p>
-              <section className="buttons">
+              <section className={styles.buttons}>
                 <Button
-                  bgActiveColor="grey-lighter"
+                  bgActiveColor="greyLighter"
                   borderColor="white"
                   textColor="white"
                   textActiveColor="black"
@@ -95,10 +99,10 @@ const Intro = () => {
             </section>
           </div>
         </li>
-        <li className="l-container full feature">
+        <li className={`l-container full feature ${styles.feature}`}>
           <div className="l-row">
-            <section className="content">
-              {/* <span className="flag">
+            <section className={styles.content}>
+              {/* <span className={styles.flag}>
                 <Translate
                   zh_hant="\\\ 新功能上線 ///"
                   zh_hans="\\\ 新功能上线 ///"
@@ -119,7 +123,7 @@ const Intro = () => {
                   en="With subscription revenue model Circle that forms a closely connected backer community for creators, along with millions of community funds and Frontline Fellowship for Chinese Non-Fiction Writing, all niche content is rewarded and encouraged in Matters."
                 />
               </p>
-              <section className="buttons">
+              <section className={styles.buttons}>
                 <Button
                   bgColor="green"
                   textColor="white"
@@ -143,16 +147,6 @@ const Intro = () => {
           </div>
         </li>
       </ul>
-
-      <style jsx>{styles}</style>
-      <style jsx>{`
-        .ecosystem {
-          background-image: url(${IMAGE_WAVE_1});
-        }
-        .feature {
-          background-image: url(${IMAGE_WAVE_2});
-        }
-      `}</style>
     </section>
   )
 }

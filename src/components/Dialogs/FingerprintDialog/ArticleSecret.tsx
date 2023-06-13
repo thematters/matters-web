@@ -14,7 +14,7 @@ import {
 } from '~/components'
 import { ArticleSecretQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ArticleSecretSectionProps = {
   id: string
@@ -47,8 +47,8 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
   }
 
   return (
-    <section className="secret">
-      <p className="description">
+    <section className={styles.secret}>
+      <p className={styles.description}>
         <Translate
           zh_hant="上鎖內容密鑰，請妥善保管"
           zh_hans="上鎖內容密鑰，請妥善保管"
@@ -56,12 +56,12 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
         />
       </p>
 
-      <section className="key">
+      <section className={styles.key}>
         <CopyToClipboard text={secret}>
           <Button
             aria-label={translate({ id: 'copy', lang })}
             spacing={['xtight', 'base']}
-            bgColor="yellow-lighter"
+            bgColor="yellowLighter"
           >
             <TextIcon icon={<IconLocked24 size="md" />} spacing="xxtight">
               <TextIcon
@@ -75,8 +75,6 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
           </Button>
         </CopyToClipboard>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

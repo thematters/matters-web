@@ -1,5 +1,3 @@
-/* @styled-jsx=global */
-
 .l-container {
   display: grid;
   grid-template-areas: 'spacingLeft content spacingRight';

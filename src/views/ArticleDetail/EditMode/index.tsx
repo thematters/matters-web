@@ -44,7 +44,7 @@ import {
 } from './gql'
 import EditModeHeader from './Header'
 import PublishState from './PublishState'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface EditModeProps {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -118,7 +118,13 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const [accessType, editAccessType] = useState<ArticleAccessType>(
     article.access.type
   )
-  const [license, editLicense] = useState<ArticleLicenseType>(article.license)
+
+  // cc2.0 is replace by cc4.0 when editting article
+  const initialLicense =
+    article.license === ArticleLicenseType.CcByNcNd_2
+      ? ArticleLicenseType.CcByNcNd_4
+      : article.license
+  const [license, editLicense] = useState<ArticleLicenseType>(initialLicense)
 
   const ownCircles = editModeArticle?.author.ownCircles
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
@@ -160,6 +166,10 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
 
   const { edit: editSupport, saving: supportSaving } =
     useEditArticleDetailSupportSetting(article)
+
+  const [contentSensitive, setContentSensitive] = useState<boolean>(
+    article.sensitiveByAuthor
+  )
 
   const [iscnPublish, setIscnPublish] = useState<boolean>(false) // always start false
 
@@ -242,6 +252,12 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     supportSettingSaving: false,
     onOpenSupportSetting: () => undefined,
 
+    contentSensitive,
+    toggleContentSensitive() {
+      setContentSensitive(!contentSensitive)
+    },
+    contentSensitiveSaving: false,
+
     togglePublishISCN() {
       setIscnPublish(!iscnPublish)
     },
@@ -254,7 +270,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
         {({ openDialog: openConfirmExitDialog }) => (
           <Layout.Main
             aside={
-              <section className="sidebar">
+              <section className={styles.sidebar}>
                 <Sidebar.Tags {...tagsProps} />
                 <Sidebar.Cover {...coverProps} />
                 <Sidebar.Collection {...collectionProps} />
@@ -276,7 +292,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                     />
                   )}
                 </SupportSettingDialog>
-                <style jsx>{styles}</style>
               </section>
             }
             inEditor

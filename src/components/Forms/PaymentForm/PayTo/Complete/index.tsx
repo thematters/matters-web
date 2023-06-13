@@ -24,7 +24,7 @@ import {
 } from '~/gql/graphql'
 
 import { RELATED_DONATIONS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   callback?: () => void
@@ -94,22 +94,22 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
 
   return (
     <Dialog.Content hasGrow>
-      <section className="container">
-        <section className="complete-avatar">
+      <section className={styles.container}>
+        <section className={styles.completeAvatar}>
           <IconSupport size="lg" color="gold" />
 
-          <div className="complete-avatar-outline">
+          <div className={styles.completeAvatarOutline}>
             <Avatar size="lg" user={recipient} />
           </div>
         </section>
 
-        <section className="complete-message">
+        <section className={styles.completeMessage}>
           <Translate
             zh_hant="馬特市民愛發電。這是你支持的第 "
             zh_hans="马特市民爱发电。这是你支持的第 "
             en="This is the "
           />
-          <span className="times">{senderDonatedArticleCount}</span>
+          <span className={styles.times}>{senderDonatedArticleCount}</span>
           <Translate
             zh_hant=" 篇作品，"
             zh_hans=" 篇作品，"
@@ -127,14 +127,14 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
             zh_hans=" 获得的第 "
             en=" received "
           />
-          <span className="times">{recipientReceivedDonationCount}</span>
+          <span className={styles.times}>{recipientReceivedDonationCount}</span>
           <Translate zh_hant=" 次支持" zh_hans=" 次支持" en=" supports" />
         </section>
 
         {edges && edges.length > 0 && (
-          <section className="related-donations">
-            <header>
-              <TextIcon size="sm" color="grey-darker">
+          <section className={styles.relatedDonations}>
+            <header className={styles.header}>
+              <TextIcon size="sm" color="greyDarker">
                 <Translate
                   zh_hant="支持過這篇作品的人也支持了"
                   zh_hans="支持过这篇作品的人也支持了"
@@ -145,7 +145,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
               {totalCount > PAGE_COUNT && (
                 <ShuffleButton
                   onClick={shuffle}
-                  bgColor="green-lighter"
+                  bgColor="greenLighter"
                   color="green"
                 />
               )}
@@ -183,8 +183,6 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
             )}
           </section>
         )}
-
-        <style jsx>{styles}</style>
       </section>
     </Dialog.Content>
   )

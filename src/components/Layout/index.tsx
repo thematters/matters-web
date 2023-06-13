@@ -1,7 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
+import Sticky from 'react-stickynode'
 
+import { capitalizeFirstLetter } from '~/common/utils'
 import {
   Head,
   Media,
@@ -20,7 +22,7 @@ import NavBar from './NavBar'
 import SideFooter from './SideFooter'
 import SideNav from './SideNav'
 import Spacing from './Spacing'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const DynamicOnboardingTasksNavBar = dynamic(
   () =>
@@ -58,7 +60,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
       <div className="l-container full">
         <main className="l-row">
           <nav role="navigation" className="l-col-three-left">
-            <section className="sidenav">
+            <section className={styles.sidenav}>
               <Media greaterThan="sm">
                 <SideNav />
               </Media>
@@ -76,15 +78,13 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
           </footer>
         </Media>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }
 
 interface MainProps {
   aside?: React.ReactNode
-  smBgColor?: 'grey-lighter'
+  smBgColor?: 'greyLighter'
   inEditor?: boolean
 }
 
@@ -108,10 +108,12 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
     !inEditor && !isInArticleDetail && !isInCircle && onboardingTasks?.enabled
 
   const articleClasses = classNames({
+    [styles.article]: true,
     'l-col-three-mid': true,
-    [`bg-${smBgColor}`]: !!smBgColor,
-    hasNavBar: !isInArticleDetail && !isInDraftDetail,
-    hasOnboardingTasks: showOnboardingTasks,
+    [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
+      !!smBgColor,
+    [styles.hasNavBar]: !isInArticleDetail && !isInDraftDetail,
+    [styles.hasOnboardingTasks]: showOnboardingTasks,
   })
 
   usePullToRefresh.Register('#ptr')
@@ -131,21 +133,21 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
         </PullToRefresh>
       </article>
 
-      <aside className="l-col-three-right">
+      <aside className={`l-col-three-right ${styles.aside}`}>
         <Media greaterThanOrEqual="xl">
-          <section className="content">
-            {!inEditor && <SearchBar />}
+          <Sticky enabled={true} top={32}>
+            <section className={styles.content}>
+              {!inEditor && <SearchBar />}
 
-            {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
+              {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
 
-            {aside}
+              {aside}
 
-            {!inEditor && !isInSettings && <SideFooter />}
-          </section>
+              {!inEditor && !isInSettings && <SideFooter />}
+            </section>
+          </Sticky>
         </Media>
       </aside>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

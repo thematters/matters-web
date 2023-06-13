@@ -11,7 +11,7 @@ import {
 } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface CreateTagProps {
   tag: DigestTagFragment
@@ -44,14 +44,12 @@ const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
       onClick={create}
       testId={TEST_ID.SEARCH_RESULTS_ITEM}
     >
-      <section className="add-tag">
+      <section className={styles.addTag}>
         <TextIcon icon={<IconAdd16 />} color="green" size="md">
           <Translate id="create" />
         </TextIcon>
 
-        <span className="content">&nbsp;{tag.content}</span>
-
-        <style jsx> {styles}</style>
+        <span className={styles.content}>&nbsp;{tag.content}</span>
       </section>
     </Card>
   )
