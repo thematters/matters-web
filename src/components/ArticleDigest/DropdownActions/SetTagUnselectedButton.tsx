@@ -4,7 +4,7 @@ import _get from 'lodash/get'
 import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
-import { IconUnPin24, Menu, TextIcon, useMutation } from '~/components'
+import { IconUnSelected20, Menu, TextIcon, useMutation } from '~/components'
 import {
   SetTagUnselectedButtonArticleFragment,
   SetTagUnselectedMutation,
@@ -118,7 +118,12 @@ const SetTagUnselectedButton = ({
         await update()
       }}
     >
-      <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
+      <TextIcon
+        icon={<IconUnSelected20 size="mdS" />}
+        size="md"
+        spacing="base"
+        color="greyDarker"
+      >
         <FormattedMessage
           defaultMessage="Unpin from Trending"
           description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
