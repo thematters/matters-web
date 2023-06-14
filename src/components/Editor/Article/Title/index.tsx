@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import React, { useContext } from 'react'
 
+import { MAX_ARTICE_TITLE_LENGTH } from '~/common/enums'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
@@ -10,10 +11,6 @@ interface Props {
   defaultValue?: string
   readOnly?: boolean
   update: (params: { title: any }) => void
-}
-
-const getValidTitleValue = (value: any, fallback: any): string => {
-  return value && value !== fallback ? value : ''
 }
 
 const EditorTitle: React.FC<Props> = ({
@@ -37,6 +34,8 @@ const EditorTitle: React.FC<Props> = ({
 
   React.useEffect(() => setValue(defaultValue), [defaultValue])
 
+  const title = value.slice(0, MAX_ARTICE_TITLE_LENGTH)
+
   return (
     <header className={classes}>
       <input
@@ -55,15 +54,7 @@ const EditorTitle: React.FC<Props> = ({
         })}
         onChange={handleChange}
         onBlur={handleBlur}
-        value={getValidTitleValue(
-          value,
-          translate({
-            en: 'Untitle',
-            zh_hans: '未命名',
-            zh_hant: '未命名',
-            lang,
-          })
-        )}
+        value={title}
       />
     </header>
   )

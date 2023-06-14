@@ -2,7 +2,7 @@ import autosize from 'autosize'
 import classNames from 'classnames'
 import React, { useContext } from 'react'
 
-import { KEYVALUE } from '~/common/enums'
+import { KEYVALUE, MAX_ARTICE_SUMMARY_LENGTH } from '~/common/enums'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
@@ -69,7 +69,7 @@ const EditorSummary: React.FC<Props> = ({
   })
   const counterClasses = classNames({
     counter: true,
-    error: length > 200,
+    error: length > MAX_ARTICE_SUMMARY_LENGTH,
   })
 
   return (
@@ -95,7 +95,9 @@ const EditorSummary: React.FC<Props> = ({
         onKeyDown={handleKeyDown}
       />
       {!readOnly && (
-        <section className={counterClasses}>({length}/200)</section>
+        <section className={counterClasses}>
+          ({length}/{MAX_ARTICE_SUMMARY_LENGTH})
+        </section>
       )}
     </section>
   )
