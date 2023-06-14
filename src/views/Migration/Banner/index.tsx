@@ -4,7 +4,7 @@ import IMAGE_BANNER from '@/public/static/images/migration-banner.svg'
 import { translate } from '~/common/utils'
 import { LanguageContext, ShareButton, TextIcon, Translate } from '~/components'
 
-import layoutStyles from '../layout.module.css'
+import layoutStyles from '../../About/layout.module.css'
 import styles from './styles.module.css'
 
 const Banner = () => {
@@ -15,9 +15,12 @@ const Banner = () => {
   } as React.CSSProperties
 
   return (
-    <div className="l-container full" style={style}>
+    <div
+      className={[layoutStyles.container, layoutStyles.full].join(' ')}
+      style={style}
+    >
       <div className={layoutStyles.content}>
-        <section className={styles.banner}>
+        <section className={[layoutStyles.columnFull, styles.banner].join(' ')}>
           <h4>
             <Translate
               zh_hant="搬家來 Matters，討論超有梗，寫字更賺錢。"

@@ -21,7 +21,7 @@ const JoinUs = () => {
 
   return (
     <section className={styles.joinUs} onClick={captureClicks} style={style}>
-      <div className="l-container">
+      <div className={layoutStyles.container}>
         <div className={layoutStyles.content}>
           <h2 className={styles.title}>
             <Translate zh_hant="加入我們" zh_hans="加入我们" en="Join Us" />

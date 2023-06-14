@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 const Stats = () => {
   return (
     <section className={styles.stats}>
-      <div className="l-container">
+      <div className={layoutStyles.container}>
         <ul className={layoutStyles.content}>
           <li>
             <p className={styles.type}>

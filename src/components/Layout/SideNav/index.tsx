@@ -9,7 +9,6 @@ import { toPath } from '~/common/utils'
 import {
   Dropdown,
   hidePopperOnClick,
-  IconLogo,
   IconLogoGraph,
   IconNavHome32,
   IconNavHomeActive32,
@@ -42,19 +41,14 @@ const Logo = () => {
             description: '',
           })}
         >
-          <Media at="md">
-            <IconLogoGraph />
-          </Media>
-          <Media greaterThan="md">
-            <IconLogo />
-          </Media>
+          <IconLogoGraph />
         </a>
       </Link>
     </section>
   )
 }
 
-const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
+const SideNavMenu = () => {
   const { router, isInPath, isPathStartWith, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
@@ -80,7 +74,6 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
         activeIcon={<IconNavHomeActive32 size="lg" />}
         active={isInHome}
         href={PATHS.HOME}
-        isMdUp={isMdUp}
       />
 
       <NavListItem
@@ -94,7 +87,6 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
         activeIcon={<UnreadIcon.Follow active />}
         active={isInFollow}
         href={PATHS.FOLLOW}
-        isMdUp={isMdUp}
       />
 
       <NavListItem
@@ -105,7 +97,6 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
         activeIcon={<UnreadIcon.Notification active />}
         active={isInNotification}
         href={PATHS.ME_NOTIFICATIONS}
-        isMdUp={isMdUp}
       />
 
       <Media lessThan="xl">
@@ -130,7 +121,6 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
 
             return false
           }}
-          isMdUp={isMdUp}
         />
       </Media>
 
@@ -162,26 +152,16 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
           active={isInMe}
           canScrollTop={false}
           aira-haspopup="menu"
-          isMdUp={isMdUp}
         />
       </Dropdown>
 
       <li role="menuitem" className={styles.listItem}>
-        {isMdUp ? (
-          <WriteButton
-            variant="sidenav"
-            allowed={!viewer.shouldSetupLikerID}
-            authed={viewer.isAuthed}
-            forbidden={viewer.isInactive}
-          />
-        ) : (
-          <WriteButton
-            variant="navbar"
-            allowed={!viewer.shouldSetupLikerID}
-            authed={viewer.isAuthed}
-            forbidden={viewer.isInactive}
-          />
-        )}
+        <WriteButton
+          variant="navbar"
+          allowed={!viewer.shouldSetupLikerID}
+          authed={viewer.isAuthed}
+          forbidden={viewer.isInactive}
+        />
       </li>
     </ul>
   )
@@ -243,12 +223,7 @@ const SideNav = () => {
     <section className={styles.sideNav}>
       <Logo />
 
-      <Media greaterThanOrEqual="lg">
-        <SideNavMenu isMdUp />
-      </Media>
-      <Media lessThan="lg">
-        <SideNavMenu isMdUp={false} />
-      </Media>
+      <SideNavMenu />
     </section>
   )
 }

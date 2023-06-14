@@ -18,7 +18,9 @@ const Intro = () => {
   return (
     <section className={styles.intro} style={style}>
       <ul>
-        <li className={`l-container full ${styles.ecosystem}`}>
+        <li
+          className={`${layoutStyles.container} ${layoutStyles.full} ${styles.ecosystem}`}
+        >
           <div className={layoutStyles.content}>
             <img src={IMAGE_ILLUSTRATION_1.src} alt="illustration 1" />
 
@@ -57,7 +59,9 @@ const Intro = () => {
             </section>
           </div>
         </li>
-        <li className={`l-container full ${styles.community}`}>
+        <li
+          className={`${layoutStyles.container} ${layoutStyles.full} ${styles.community}`}
+        >
           <div className={layoutStyles.content}>
             <img src={IMAGE_ILLUSTRATION_2.src} alt="illustration 2" />
 
@@ -100,7 +104,9 @@ const Intro = () => {
             </section>
           </div>
         </li>
-        <li className={`l-container full feature ${styles.feature}`}>
+        <li
+          className={`${layoutStyles.container} ${layoutStyles.full} feature ${styles.feature}`}
+        >
           <div className={layoutStyles.content}>
             <section className={styles.content}>
               {/* <span className={styles.flag}>

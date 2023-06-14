@@ -151,7 +151,7 @@ const CREW = [
 const Team = () => {
   return (
     <section className={styles.team}>
-      <div className="l-container">
+      <div className={layoutStyles.container}>
         <div className={layoutStyles.content}>
           <h2 className={styles.title}>
             <Translate zh_hant="團隊成員" zh_hans="团队成员" en="Our Team" />

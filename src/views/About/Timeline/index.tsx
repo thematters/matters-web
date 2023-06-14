@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 const Timeline = () => {
   return (
     <section className={styles.timeline}>
-      <div className="l-container">
+      <div className={layoutStyles.container}>
         <div className={layoutStyles.content}>
           <ul>
             <li>

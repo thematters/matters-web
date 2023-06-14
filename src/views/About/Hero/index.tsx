@@ -67,7 +67,7 @@ const Hero = () => {
   return (
     <section className={styles.hero} style={style}>
       <header className={styles.logo}>
-        <div className="l-container">
+        <div className={layoutStyles.container}>
           <div className={layoutStyles.content}>
             <Link href={PATHS.HOME} legacyBehavior>
               <a>
@@ -81,9 +81,11 @@ const Hero = () => {
         </div>
       </header>
 
-      <div className="l-container">
+      <div className={layoutStyles.container}>
         <div className={layoutStyles.content}>
-          <section className={styles.slogan}>
+          <section
+            className={[layoutStyles.columnFull, styles.slogan].join(' ')}
+          >
             <section>
               <h2>
                 <Translate

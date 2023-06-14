@@ -11,7 +11,6 @@
 .container {
   display: grid;
   grid-template: auto / repeat(1, minmax(0, 1fr));
-  grid-column: 1/-1;
   grid-gap: var(--spacing-xx-loose);
 
   & h2 {

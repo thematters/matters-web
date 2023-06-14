@@ -11,7 +11,6 @@ type NavListItemProps = {
   activeIcon: React.ReactNode
   active: boolean
   canScrollTop?: boolean
-  isMdUp?: boolean
 } & ButtonProps
 
 const NavListItemButton = forwardRef(
@@ -22,7 +21,6 @@ const NavListItemButton = forwardRef(
       activeIcon,
       active,
       onClick,
-      isMdUp,
       canScrollTop,
       ...props
     }: NavListItemProps,
@@ -31,8 +29,7 @@ const NavListItemButton = forwardRef(
     return (
       <Button
         bgActiveColor="greyLighter"
-        spacing={isMdUp ? ['xxtight', 'xtight'] : undefined}
-        size={isMdUp ? undefined : ['2rem', '2rem']}
+        size={['2rem', '2rem']}
         ref={ref}
         {...props}
         onClick={onClick}
@@ -43,9 +40,7 @@ const NavListItemButton = forwardRef(
           weight="semibold"
           spacing="tight"
           color="black"
-        >
-          {isMdUp && name}
-        </TextIcon>
+        />
       </Button>
     )
   }

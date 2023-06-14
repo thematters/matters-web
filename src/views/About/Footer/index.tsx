@@ -22,9 +22,11 @@ const Footer = () => {
 
   return (
     <footer className={styles.footer}>
-      <div className="l-container">
+      <div className={layoutStyles.container}>
         <div className={layoutStyles.content}>
-          <div className={styles.container}>
+          <div
+            className={[styles.container, layoutStyles.columnFull].join(' ')}
+          >
             <Media at="md">
               <section className={styles.languageSwitch}>
                 <LanguageSwitch size="lg" bgColor="greyDarkest" />
