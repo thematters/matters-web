@@ -1,4 +1,5 @@
 .banner {
+  grid-column: 1/-1;
   padding: var(--spacing-base);
   margin-top: 5rem;
   margin-bottom: 8rem;

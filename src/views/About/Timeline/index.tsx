@@ -1,12 +1,13 @@
 import { Translate } from '~/components'
 
+import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Timeline = () => {
   return (
     <section className={styles.timeline}>
       <div className="l-container">
-        <div className="l-row">
+        <div className={layoutStyles.content}>
           <ul>
             <li>
               <time>May, 2018</time>

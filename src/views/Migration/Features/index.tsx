@@ -3,6 +3,7 @@ import IMAGE_FEATURE_2 from '@/public/static/images/migration-feature-2.svg'
 import IMAGE_FEATURE_3 from '@/public/static/images/migration-feature-3.svg'
 import { Translate } from '~/components'
 
+import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const texts: {
@@ -77,8 +78,8 @@ const Features = () => {
   return (
     <section className={styles.features}>
       <div className="l-container">
-        <div className="l-row">
-          <div className="l-col-full">
+        <div className={layoutStyles.content}>
+          <div className={styles.inner}>
             <h2>
               <Translate
                 zh_hant={zh_hant.header}
@@ -92,8 +93,8 @@ const Features = () => {
 
       <ul>
         <li className="l-container">
-          <div className="l-row">
-            <section className={styles.content}>
+          <div className={layoutStyles.content}>
+            <section className={[styles.content, styles.inner].join(' ')}>
               <h3>
                 <Translate
                   zh_hant={zh_hant.title_1}
@@ -115,7 +116,7 @@ const Features = () => {
         </li>
 
         <li className="l-container">
-          <div className="l-row">
+          <div className={layoutStyles.content}>
             <section className={styles.content}>
               <h3>
                 <Translate
@@ -152,7 +153,7 @@ const Features = () => {
         </li>
 
         <li className="l-container">
-          <div className="l-row">
+          <div className={layoutStyles.content}>
             <section className={styles.content}>
               <h3>
                 <Translate

@@ -1,0 +1,18 @@
+.content {
+  display: grid;
+  grid-template-columns: repeat(4, [col-start] minmax(0, 1fr));
+  grid-column: content;
+  grid-column-gap: var(--gutter-width);
+
+  @media (--sm-up) {
+    grid-template-columns: repeat(8, [col-start] minmax(0, 1fr));
+  }
+
+  @media (--md-up) {
+    grid-template-columns: repeat(9, [col-start] minmax(0, 1fr));
+  }
+
+  @media (--lg-up) {
+    grid-template-columns: repeat(12, [col-start] minmax(0, 1fr));
+  }
+}

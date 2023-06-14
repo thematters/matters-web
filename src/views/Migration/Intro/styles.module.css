@@ -36,3 +36,7 @@
     background-image: var(--migration-intro-bg-xl);
   }
 }
+
+.inner {
+  grid-column: 1/-1;
+}

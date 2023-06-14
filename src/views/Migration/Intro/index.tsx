@@ -7,6 +7,7 @@ import IMAGE_MIGRATION_XL from '@/public/static/images/migration-intro-xl.svg'
 import IMAGE_MIGRATION_XS from '@/public/static/images/migration-intro-xs.svg'
 import { Button, TextIcon, Translate } from '~/components'
 
+import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Intro = () => {
@@ -21,8 +22,8 @@ const Intro = () => {
   return (
     <section className={styles.intro} style={style}>
       <div className="l-container">
-        <div className="l-row">
-          <div className="l-col-full">
+        <div className={layoutStyles.content}>
+          <div className={styles.inner}>
             <h2>
               <Translate
                 zh_hant="搬家到 Matters"

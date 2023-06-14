@@ -31,6 +31,7 @@
 
 .slogan {
   position: relative;
+  grid-column: 1/-1;
   padding-top: 10rem;
   text-align: center;
 
@@ -80,8 +81,8 @@
 
   @media (--lg-up) {
     & .ilusCity {
-      width: 810px;
-      height: 503px;
+      width: 764px;
+      height: 474px;
     }
   }
 }
