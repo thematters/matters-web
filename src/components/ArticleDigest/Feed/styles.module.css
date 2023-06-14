@@ -1,6 +1,8 @@
 .container {
   @mixin flex-center-space-between;
 
+  gap: 2rem;
+
   @media (--sm-up) {
     gap: 3rem;
   }
