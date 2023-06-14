@@ -1,0 +1,10 @@
+.moreButton {
+  @mixin transition;
+
+  color: var(--color-grey-dark);
+
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green);
+  }
+}

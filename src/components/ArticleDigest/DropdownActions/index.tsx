@@ -7,7 +7,6 @@ import { translate } from '~/common/utils'
 import {
   AppreciatorsDialog,
   BookmarkButton,
-  Button,
   DropdownDialog,
   FingerprintDialog,
   IconMore16,
@@ -33,6 +32,7 @@ import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
 import ShareButton from './ShareButton'
 import StickyButton from './StickyButton'
+import styles from './styles.module.css'
 
 export interface DropdownActionsControls {
   icon?: React.ReactNode
@@ -186,14 +186,15 @@ const BaseDropdownActions = ({
       }}
     >
       {({ openDialog, type, ref }) => (
-        <Button
+        <button
           aria-label={translate({ id: 'moreActions', lang })}
           aria-haspopup={type}
           onClick={openDialog}
           ref={ref}
+          className={styles.moreButton}
         >
-          {icon ? icon : <IconMore16 size={size} color="greyDark" />}
-        </Button>
+          {icon ? icon : <IconMore16 size={size} />}
+        </button>
       )}
     </DropdownDialog>
   )
