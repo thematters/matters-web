@@ -17,7 +17,7 @@ import { ReactComponent as IconEditorMenuQuote } from '@/public/static/icons/24p
 import { ReactComponent as IconEditorMenuStrike } from '@/public/static/icons/24px/editor-menu-strike.svg'
 import { ReactComponent as IconEditorMenuUl } from '@/public/static/icons/24px/editor-menu-ul.svg'
 import { KEYVALUE } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { isUrl, translate } from '~/common/utils'
 import { LanguageContext, withIcon } from '~/components'
 
 import styles from './styles.module.css'
@@ -39,8 +39,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   const onUrlInputSubmit = () => {
     const url = urlInput?.current?.value
 
-    // TODO: check isURL
-    if (url) {
+    if (url && isUrl(url)) {
       editor.chain().focus().toggleLink({ href: url, target: '_blank' }).run()
     }
 
