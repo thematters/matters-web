@@ -150,7 +150,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   editor.chain().focus().toggleHeading({ level: 3 }).run()
                 }
                 className={
-                  editor.isActive('heading', { level: 3 }) ? 'active' : ''
+                  editor.isActive('heading', { level: 3 }) ? styles.active : ''
                 }
                 title={translate({
                   zh_hant: '標題 3',
@@ -174,7 +174,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               type="button"
               onClick={() => editor.chain().focus().toggleBold().run()}
               disabled={!editor.can().chain().focus().toggleBold().run()}
-              className={editor.isActive('bold') ? 'active' : ''}
+              className={editor.isActive('bold') ? styles.active : ''}
               title={translate({
                 zh_hant: '粗體',
                 zh_hans: '粗体',
@@ -198,7 +198,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               onClick={() => editor.chain().focus().toggleStrike().run()}
               // @ts-ignore
               disabled={!editor.can().chain().focus().toggleStrike().run()}
-              className={editor.isActive('strike') ? 'active' : ''}
+              className={editor.isActive('strike') ? styles.active : ''}
               title={translate({
                 zh_hant: '刪除線',
                 zh_hans: '删除线',
@@ -222,7 +222,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               onClick={() => editor.chain().focus().toggleCodeBlock().run()}
               // @ts-ignore
               disabled={!editor.can().chain().focus().toggleCodeBlock().run()}
-              className={editor.isActive('codeBlock') ? 'active' : ''}
+              className={editor.isActive('codeBlock') ? styles.active : ''}
               title={translate({
                 zh_hant: '程式碼',
                 zh_hans: '代码',
@@ -244,7 +244,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               type="button"
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
-              className={editor.isActive('blockquote') ? 'active' : ''}
+              className={editor.isActive('blockquote') ? styles.active : ''}
               aria-label={translate({
                 zh_hant: '引用',
                 zh_hans: '引用',
@@ -260,7 +260,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               type="button"
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleBulletList().run()}
-              className={editor.isActive('bulletList') ? 'active' : ''}
+              className={editor.isActive('bulletList') ? styles.active : ''}
               title={translate({
                 zh_hant: '無序清單',
                 zh_hans: '无序列表',
@@ -282,7 +282,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               type="button"
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleOrderedList().run()}
-              className={editor.isActive('orderedList') ? 'active' : ''}
+              className={editor.isActive('orderedList') ? styles.active : ''}
               title={translate({
                 zh_hant: '有序清單',
                 zh_hans: '有序列表',
@@ -314,7 +314,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               }}
               // @ts-ignore
               disabled={!editor.can().chain().focus().toggleLink().run()}
-              className={editor.isActive('link') ? 'active' : ''}
+              className={editor.isActive('link') ? styles.active : ''}
               title={translate({
                 zh_hant: '連結',
                 zh_hans: '链接',
