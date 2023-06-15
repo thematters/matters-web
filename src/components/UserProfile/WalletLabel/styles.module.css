@@ -8,6 +8,20 @@
   }
 }
 
+.wallet {
+  @mixin transition;
+
+  font-size: 0;
+  color: var(--color-grey-darker);
+  cursor: pointer;
+  transition-property: color;
+
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green);
+  }
+}
+
 .helpIcon {
   font-size: 0;
 }

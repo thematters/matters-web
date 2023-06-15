@@ -33,6 +33,10 @@ span.container {
   color: var(--color-grey);
 }
 
+.textGreyDarker {
+  color: var(--color-grey-darker);
+}
+
 .textActiveWhite {
   &:hover,
   &:focus {
@@ -50,7 +54,7 @@ span.container {
 .textActiveGreen {
   &:hover,
   &:focus {
-    color: var(--color-matters-green);
+    color: var(--color-matters-green-active);
   }
 }
 
@@ -73,7 +77,7 @@ span.container {
 
   z-index: 0;
   background: transparent;
-  transition-property: color, background;
+  transition-property: color, background, border-color;
 
   & + * {
     z-index: 1;
@@ -427,6 +431,24 @@ span.container {
 .borderLikecoinGreen {
   & .hotarea {
     border-color: var(--color-likecoin-green);
+  }
+}
+
+.borderActiveGreen {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-matters-green-active);
+    }
+  }
+}
+
+.borderActiveBlack {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-matters-black);
+    }
   }
 }
 

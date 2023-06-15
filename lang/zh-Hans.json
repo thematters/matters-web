@@ -11,6 +11,14 @@
     "defaultMessage": "在 {circlename} 发布广播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "AVpR3Q": {
+    "defaultMessage": "已绑定钱包",
+    "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "nD00sh": {
+    "defaultMessage": "编辑个人信息",
+    "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
+  },
   "/+XWDi": {
     "defaultMessage": "航行日志 2.0",
     "description": "src/components/UserProfile/DropdownActions/index.tsx"
