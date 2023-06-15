@@ -68,12 +68,13 @@ const RemoveTagButton = ({
           })
         )
       }}
+      textColor="greyDarker"
+      textActiveColor="black"
     >
       <TextIcon
         icon={<IconCircleMinus20 size="mdS" />}
         size="md"
         spacing="base"
-        color="greyDarker"
       >
         <FormattedMessage
           defaultMessage="Remove Article"

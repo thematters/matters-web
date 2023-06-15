@@ -81,12 +81,16 @@ const Unsubscribe = ({
 
   if (inCard) {
     return (
-      <Menu.Item onClick={onClick} testId={TEST_ID.ARTICLE_BOOKMARK}>
+      <Menu.Item
+        onClick={onClick}
+        testId={TEST_ID.ARTICLE_BOOKMARK}
+        textColor="greyDarker"
+        textActiveColor="black"
+      >
         <TextIcon
           icon={<IconBookmarked20 size={size} />}
           size="mdS"
           spacing="base"
-          color="greyDarker"
         >
           <FormattedMessage
             defaultMessage="Undo bookmark"

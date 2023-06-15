@@ -2,6 +2,7 @@
   @mixin transition;
 
   color: var(--color-grey-dark);
+  transition-property: color;
 
   &:hover,
   &:focus {
