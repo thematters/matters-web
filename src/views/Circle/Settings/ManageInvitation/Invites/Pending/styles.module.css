@@ -3,7 +3,7 @@
   padding-bottom: var(--spacing-xxx-loose);
   background: var(--color-white);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-bottom: var(--spacing-xx-loose);
   }
 }

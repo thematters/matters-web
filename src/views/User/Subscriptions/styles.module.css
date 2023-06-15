@@ -2,7 +2,7 @@
   padding: 0 var(--spacing-base);
   margin: var(--spacing-x-tight) 0;
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 0;
   }
 }
@@ -10,7 +10,7 @@
 .list {
   padding: 0 var(--spacing-tight);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 0;
   }
 }

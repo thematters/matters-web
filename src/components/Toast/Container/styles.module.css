@@ -4,7 +4,7 @@
       top: calc(var(--global-header-height-mobile) + var(--spacing-base));
       z-index: var(--z-index-over-dialog);
 
-      @media (--sm-up) {
+      @media (--md-up) {
         top: calc(var(--global-header-height) + var(--spacing-base));
       }
     }
@@ -15,7 +15,7 @@
       bottom: calc(var(--global-header-height-mobile) + var(--spacing-base));
       z-index: var(--z-index-over-dialog);
 
-      @media (--sm-up) {
+      @media (--md-up) {
         bottom: calc(var(--global-header-height) + var(--spacing-base));
       }
     }

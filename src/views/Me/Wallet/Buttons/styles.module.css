@@ -16,7 +16,7 @@
     margin-top: var(--spacing-base);
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     grid-column: 4 / span 6;
     margin-bottom: var(--spacing-xx-loose);
   }

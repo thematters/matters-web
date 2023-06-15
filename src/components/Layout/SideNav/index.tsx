@@ -99,7 +99,7 @@ const SideNavMenu = () => {
         href={PATHS.ME_NOTIFICATIONS}
       />
 
-      <Media lessThan="xl">
+      <Media lessThan="lg">
         <NavListItem
           name={<FormattedMessage defaultMessage="Search" description="" />}
           icon={<IconNavSearch32 size="lg" />}

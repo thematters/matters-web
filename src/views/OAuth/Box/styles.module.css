@@ -1,5 +1,5 @@
 .container {
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: var(--spacing-xxx-loose);
   }
 }
@@ -26,7 +26,7 @@
     }
   }
 
-  @media (--md-up) {
+  @media (--lg-up) {
     padding: 0 var(--spacing-xxx-loose);
 
     & :global(.avatar) {

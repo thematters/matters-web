@@ -7,7 +7,7 @@
   padding: 0 var(--spacing-x-tight) 0 var(--spacing-base);
   margin-top: var(--spacing-xx-loose);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 0;
   }
 }

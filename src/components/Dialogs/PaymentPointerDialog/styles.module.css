@@ -1,5 +1,5 @@
 .container {
-  @media (--sm-down) {
+  @media (--md-down) {
     @mixin form-container;
   }
 }

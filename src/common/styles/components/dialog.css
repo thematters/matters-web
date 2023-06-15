@@ -4,7 +4,7 @@
   z-index: var(--z-index-dialog);
   overflow: hidden;
 
-  @media (--sm-up) {
+  @media (--md-up) {
     @mixin flex-center-all;
   }
 }
@@ -16,7 +16,7 @@
   left: 0;
   outline: none;
 
-  @media (--sm-up) {
+  @media (--md-up) {
     position: relative;
     right: auto;
     bottom: auto;

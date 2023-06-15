@@ -5,7 +5,7 @@
     padding: var(--spacing-base);
   }
 
-  @media (--sm-down) {
+  @media (--md-down) {
     & li {
       background: #f7f7f7;
     }

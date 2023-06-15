@@ -1,7 +1,7 @@
 .authorWidget {
   margin: var(--spacing-base) var(--spacing-base) 0;
 
-  @media (--sm-up) {
+  @media (--md-up) {
     margin-right: 0;
     margin-left: 0;
   }

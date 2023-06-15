@@ -3,7 +3,7 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
-  @media (--sm-up) {
+  @media (--md-up) {
     height: 37vh;
     margin-bottom: var(--spacing-tight);
   }

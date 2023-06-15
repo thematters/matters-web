@@ -2,7 +2,7 @@
   padding-right: calc(4.25rem + 5.25rem);
   padding-left: var(--spacing-base);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-left: 0;
   }
 }
@@ -16,7 +16,7 @@
   height: 100%;
   padding-right: var(--spacing-base);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-right: 0;
   }
 

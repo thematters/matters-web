@@ -15,12 +15,12 @@
   & :global(.ql-editor) {
     min-height: 30vh;
 
-    @media (--sm-up) {
+    @media (--md-up) {
       min-height: auto;
     }
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     height: 40vh;
   }
 }

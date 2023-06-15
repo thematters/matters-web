@@ -11,7 +11,7 @@
     text-align: center;
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-bottom: 7.5rem;
 
     & h2 {
@@ -19,7 +19,7 @@
     }
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     background-size: 216px;
 
     & img {

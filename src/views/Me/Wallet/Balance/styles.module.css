@@ -13,7 +13,7 @@
 
   padding: var(--spacing-loose) var(--spacing-base);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: var(--spacing-loose) 0;
   }
 

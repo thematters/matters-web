@@ -21,14 +21,14 @@
 }
 
 .spacingXTight {
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-right: var(--spacing-tight);
     padding-left: var(--spacing-tight);
   }
 }
 
 .spacingXXloose {
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-right: var(--spacing-x-loose);
     padding-left: var(--spacing-x-loose);
   }
@@ -40,14 +40,14 @@
 }
 
 .spacingYTight {
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-top: var(--spacing-tight);
     padding-bottom: var(--spacing-tight);
   }
 }
 
 .spacingYXloose {
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-top: var(--spacing-x-loose);
     padding-bottom: var(--spacing-x-loose);
   }

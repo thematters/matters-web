@@ -2,7 +2,7 @@
   margin-bottom: var(--spacing-base);
   background: white;
 
-  @media (--sm-up) {
+  @media (--md-up) {
     margin-bottom: var(--spacing-loose);
   }
 
@@ -16,7 +16,7 @@
       width: calc(100% - var(--spacing-base) * 2);
       content: '';
       border-top: 1px dashed var(--color-grey-light);
-      @media (--sm-up) {
+      @media (--md-up) {
         width: 100%;
       }
     }

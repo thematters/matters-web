@@ -1,7 +1,7 @@
 .buttons {
   display: inline-flex;
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-right: var(--spacing-base);
   }
 
@@ -16,7 +16,7 @@
   margin-bottom: var(--spacing-x-tight);
   background: var(--color-white);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-bottom: var(--spacing-base);
     margin-bottom: 0;
     border-radius: 0;
@@ -29,7 +29,7 @@
   padding: 0 var(--spacing-base);
   margin-top: var(--spacing-base);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 0;
   }
 
@@ -63,7 +63,7 @@
 .description {
   padding: 0 var(--spacing-base);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 0;
   }
 }
@@ -74,7 +74,7 @@
   padding: 0 var(--spacing-base);
   margin-top: var(--spacing-base);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 0;
   }
 
