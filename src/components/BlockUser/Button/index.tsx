@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
 import {
-  IconMute24,
+  IconMute20,
   IconUnMute24,
   Menu,
   TextIcon,
@@ -54,8 +54,14 @@ const BlockUserButton = ({
 
   if (user.isBlocked) {
     return (
-      <Menu.Item onClick={onUnblock}>
-        <TextIcon icon={<IconUnMute24 size="md" />} size="md" spacing="base">
+      <Menu.Item
+        onClick={onUnblock}
+        ariaHasPopup="dialog"
+        textColor="greyDarker"
+        textActiveColor="black"
+        spacing={['xtight', 'base']}
+      >
+        <TextIcon icon={<IconUnMute24 size="mdS" />} size="md" spacing="tight">
           <FormattedMessage
             defaultMessage="Unblock"
             description="src/components/BlockUser/Button/index.tsx"
@@ -66,8 +72,14 @@ const BlockUserButton = ({
   }
 
   return (
-    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconMute24 size="md" />} size="md" spacing="base">
+    <Menu.Item
+      onClick={openDialog}
+      ariaHasPopup="dialog"
+      textColor="greyDarker"
+      textActiveColor="black"
+      spacing={['xtight', 'base']}
+    >
+      <TextIcon icon={<IconMute20 size="mdS" />} size="md" spacing="tight">
         <FormattedMessage defaultMessage="Block User" description="" />
       </TextIcon>
     </Menu.Item>

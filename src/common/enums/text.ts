@@ -1169,7 +1169,7 @@ export const TEXT = {
     shuffle: 'Shuffle',
     stickyArticle: 'Article pinned',
     subscribeCircle: 'Subscribe Circle',
-    subscriptions: 'Subscriptions',
+    subscriptions: 'Subscribe',
     successBlock:
       "User blocked. User now can't reply to your articles and user's comments have been hidden from you.",
     successChangeEmail: 'Email successfully changed.',

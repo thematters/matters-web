@@ -15,6 +15,14 @@
     "defaultMessage": "Install MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "AVpR3Q": {
+    "defaultMessage": "Wallet linked",
+    "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "nD00sh": {
+    "defaultMessage": "Edit profile",
+    "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
+  },
   "J+LXrH": {
     "defaultMessage": "User registered by email can login and enable wallet login later",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"

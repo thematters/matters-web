@@ -34,7 +34,7 @@ const TraveloggersAvatar: React.FC<TraveloggersAvatarProps> = ({
       >
         {({ openDialog }) => (
           <button type="button" onClick={openDialog} aria-haspopup="dialog">
-            <Avatar size="xxxl" user={user} inProfile />
+            <Avatar size="xxxxl" user={user} inProfile />
           </button>
         )}
       </LogbookDialog>

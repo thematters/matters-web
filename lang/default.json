@@ -7,10 +7,6 @@
     "defaultMessage": "Members",
     "description": ""
   },
-  "/+XWDi": {
-    "defaultMessage": "Logbook 2.0",
-    "description": "src/components/UserProfile/DropdownActions/index.tsx"
-  },
   "/3kw6k": {
     "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -210,6 +206,10 @@
   "ANhCde": {
     "defaultMessage": "Start creating now!",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
+  },
+  "AVpR3Q": {
+    "defaultMessage": "Wallet linked",
+    "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
   "AYTnjk": {
     "defaultMessage": "Followers",
@@ -939,6 +939,10 @@
     "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed",
     "description": ""
   },
+  "nD00sh": {
+    "defaultMessage": "Edit profile",
+    "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
+  },
   "nGBrvw": {
     "defaultMessage": "Bookmarks",
     "description": ""
@@ -1014,10 +1018,6 @@
   "qswU4E": {
     "defaultMessage": "Email will not be used as a login but only as a contact channel.",
     "description": ""
-  },
-  "qyzJxi": {
-    "defaultMessage": "Logbook 1.0",
-    "description": "src/components/UserProfile/DropdownActions/index.tsx"
   },
   "r66dXx": {
     "defaultMessage": "mentioned you in broadcast comment in {circleName}",

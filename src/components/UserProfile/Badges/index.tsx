@@ -2,7 +2,7 @@ import { ReactComponent as IconArchitectBadge } from '@/public/static/icons/16px
 import { ReactComponent as IconGoldenMotorBadge } from '@/public/static/icons/16px/badge-golden-motor.svg'
 import { ReactComponent as IconSeedBadge } from '@/public/static/icons/16px/badge-seed.svg'
 import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/16px/traveloggers.svg'
-import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/badge-civic-liker.svg'
+import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/20px/badge-civic-liker.svg'
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, Tooltip, Translate, withIcon } from '~/components'
 
@@ -12,7 +12,9 @@ export const SeedBadge = () => (
   <Tooltip
     content={<Translate zh_hant="種子用戶" zh_hans="种子用户" en="Seed User" />}
   >
-    <span className={styles.badge}>{withIcon(IconSeedBadge)({})}</span>
+    <span className={styles.badge}>
+      {withIcon(IconSeedBadge)({ size: 'mdS' })}
+    </span>
   </Tooltip>
 )
 
@@ -26,7 +28,9 @@ export const GoldenMotorBadge = () => (
       />
     }
   >
-    <span className={styles.badge}>{withIcon(IconGoldenMotorBadge)({})}</span>
+    <span className={styles.badge}>
+      {withIcon(IconGoldenMotorBadge)({ size: 'mdS' })}
+    </span>
   </Tooltip>
 )
 
@@ -40,15 +44,15 @@ export const ArchitectBadge = () => (
       />
     }
   >
-    <span className={styles.badge}>{withIcon(IconArchitectBadge)({})}</span>
+    <span className={styles.badge}>
+      {withIcon(IconArchitectBadge)({ size: 'mdS' })}
+    </span>
   </Tooltip>
 )
 
 export const CivicLikerBadge = () => (
   <Button htmlHref={EXTERNAL_LINKS.CIVIC_LIKER_SUPPORT} htmlTarget="_blank">
-    {withIcon((props) => (
-      <IconCivicLikerBadge style={{ width: 67, height: 16 }} {...props} />
-    ))({})}
+    {withIcon((props) => <IconCivicLikerBadge {...props} />)({ size: 'mdS' })}
   </Button>
 )
 
@@ -62,6 +66,8 @@ export const TraveloggersBadge = () => (
       />
     }
   >
-    <span className={styles.badge}>{withIcon(IconTraveloggersBadge)({})}</span>
+    <span className={styles.badge}>
+      {withIcon(IconTraveloggersBadge)({ size: 'mdS' })}
+    </span>
   </Tooltip>
 )

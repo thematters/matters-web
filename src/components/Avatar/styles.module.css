@@ -162,6 +162,20 @@
   }
 }
 
+/* 120px */
+.xxxxl {
+  width: 7.5rem;
+  height: 7.5rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        transform: translateX(25%);
+      }
+    }
+  }
+}
+
 .ring {
   &.civicLiker {
     background-image: var(--avatar-ring-civic-liker);
