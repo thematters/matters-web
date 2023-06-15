@@ -164,7 +164,7 @@
 
 .ring {
   &.civicLiker {
-    background-image: var(--avatar-ring-civic-ciker);
+    background-image: var(--avatar-ring-civic-liker);
   }
 
   &.architect {
