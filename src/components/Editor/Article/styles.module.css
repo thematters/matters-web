@@ -1,5 +1,10 @@
 .articleEditor {
   position: relative;
+  padding-bottom: 4rem; /* bottom bar height */
+
+  @media (--lg-up) {
+    padding-bottom: 0;
+  }
 
   & :global(.ProseMirror) {
     min-height: 50vh;
