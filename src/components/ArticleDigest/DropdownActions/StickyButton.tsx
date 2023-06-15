@@ -61,26 +61,20 @@ const StickyButton = ({
   })
 
   return (
-    <Menu.Item onClick={toggleSticky}>
+    <Menu.Item
+      onClick={toggleSticky}
+      textColor="greyDarker"
+      textActiveColor="black"
+    >
       {article.sticky ? (
-        <TextIcon
-          icon={<IconUnPin20 size="mdS" />}
-          size="md"
-          spacing="base"
-          color="greyDark"
-        >
+        <TextIcon icon={<IconUnPin20 size="mdS" />} size="md" spacing="base">
           <FormattedMessage
             defaultMessage="Unpin from profile"
             description="src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
           />
         </TextIcon>
       ) : (
-        <TextIcon
-          icon={<IconPin20 size="mdS" />}
-          size="md"
-          spacing="base"
-          color="greyDarker"
-        >
+        <TextIcon icon={<IconPin20 size="mdS" />} size="md" spacing="base">
           <FormattedMessage
             defaultMessage="Pin to profile"
             description="src/components/ArticleDigest/DropdownActions/StickyButton.tsx"

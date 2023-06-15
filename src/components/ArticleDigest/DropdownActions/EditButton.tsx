@@ -31,13 +31,10 @@ const EditArticleButton = ({
     <Menu.Item
       href={`${href}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`}
       is="link"
+      textColor="greyDarker"
+      textActiveColor="black"
     >
-      <TextIcon
-        icon={<IconEdit20 size="mdS" />}
-        size="md"
-        spacing="base"
-        color="greyDarker"
-      >
+      <TextIcon icon={<IconEdit20 size="mdS" />} size="md" spacing="base">
         <FormattedMessage
           defaultMessage="Edit"
           description="src/components/ArticleDigest/DropdownActions/EditButton.tsx"

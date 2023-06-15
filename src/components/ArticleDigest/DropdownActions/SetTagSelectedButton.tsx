@@ -69,13 +69,10 @@ const SetTagSelectedButton = ({
           })
         )
       }}
+      textColor="greyDarker"
+      textActiveColor="black"
     >
-      <TextIcon
-        icon={<IconCirclePlus20 size="mdS" />}
-        size="md"
-        spacing="base"
-        color="greyDarker"
-      >
+      <TextIcon icon={<IconCirclePlus20 size="mdS" />} size="md" spacing="base">
         <FormattedMessage
           defaultMessage="Add to Featured"
           description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"

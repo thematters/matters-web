@@ -4,13 +4,13 @@ import { IconArchive20, Menu, TextIcon } from '~/components'
 
 const ArchiveArticleButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
-    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon
-        icon={<IconArchive20 size="mdS" color="red" />}
-        size="md"
-        spacing="base"
-        color="red"
-      >
+    <Menu.Item
+      onClick={openDialog}
+      ariaHasPopup="dialog"
+      textColor="red"
+      textActiveColor="redDark"
+    >
+      <TextIcon icon={<IconArchive20 size="mdS" />} size="md" spacing="base">
         <FormattedMessage defaultMessage="Archive" description="" />
       </TextIcon>
     </Menu.Item>

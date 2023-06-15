@@ -117,13 +117,10 @@ const SetTagUnselectedButton = ({
       onClick={async () => {
         await update()
       }}
+      textColor="greyDarker"
+      textActiveColor="black"
     >
-      <TextIcon
-        icon={<IconUnSelected20 size="mdS" />}
-        size="md"
-        spacing="base"
-        color="greyDarker"
-      >
+      <TextIcon icon={<IconUnSelected20 size="mdS" />} size="md" spacing="base">
         <FormattedMessage
           defaultMessage="Unpin from Trending"
           description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"

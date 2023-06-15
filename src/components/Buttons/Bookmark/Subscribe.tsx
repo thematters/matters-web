@@ -88,13 +88,13 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
 
   if (inCard) {
     return (
-      <Menu.Item onClick={onClick} testId={TEST_ID.ARTICLE_BOOKMARK}>
-        <TextIcon
-          icon={<IconBookmark20 size="mdS" />}
-          size="md"
-          spacing="base"
-          color="greyDarker"
-        >
+      <Menu.Item
+        onClick={onClick}
+        testId={TEST_ID.ARTICLE_BOOKMARK}
+        textColor="greyDarker"
+        textActiveColor="black"
+      >
+        <TextIcon icon={<IconBookmark20 size="mdS" />} size="md" spacing="base">
           <Translate id="bookmark" />
         </TextIcon>
       </Menu.Item>

@@ -37,6 +37,9 @@ export interface CardProps {
   borderColor?: CardBorderColor
   borderRadius?: CardBorderRadius
 
+  textColor?: 'greyDarker' | 'red'
+  textActiveColor?: 'black' | 'redDark'
+
   isActive?: boolean
   activeOutline?: 'auto'
 
@@ -66,6 +69,9 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
       borderColor,
       borderRadius,
+
+      textColor,
+      textActiveColor,
 
       isActive,
       activeOutline,
@@ -115,6 +121,13 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
       [styles.hasBorder]: !!borderColor || !!borderRadius,
       [styles.disabled]: disabled,
+      [styles[textColor ? `text${capitalizeFirstLetter(textColor)}` : '']]:
+        !!textColor,
+      [styles[
+        textActiveColor
+          ? `textActive${capitalizeFirstLetter(textActiveColor)}`
+          : ''
+      ]]: !!textActiveColor,
     })
     const ariaLabel =
       htmlHref || href

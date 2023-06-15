@@ -5,6 +5,7 @@
   display: block;
   outline: none;
   transition-property: background-color;
+  transition-property: color;
 
   &:not(.disabled) {
     cursor: pointer;
@@ -87,6 +88,31 @@
     &:focus {
       background: transparent;
     }
+  }
+}
+
+/* Text color */
+.textGreyDarker {
+  color: var(--color-grey-darker);
+}
+
+.textRed {
+  color: var(--color-red);
+}
+
+/* Text active color */
+
+.textActiveBlack {
+  &:hover,
+  &:focus {
+    color: var(--color-black);
+  }
+}
+
+.textActiveRedDark {
+  &:hover,
+  &:focus {
+    color: var(--color-red-dark);
   }
 }
 
