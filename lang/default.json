@@ -151,10 +151,6 @@
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
-  "7DIW6+": {
-    "defaultMessage": "Learn More",
-    "description": ""
-  },
   "7xnrxG": {
     "defaultMessage": "The article has been added to the Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
@@ -663,10 +659,6 @@
     "defaultMessage": "Accumulated Read Time",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
-  "Z6ewE3": {
-    "defaultMessage": "Build Together",
-    "description": "src/views/Me/Settings/AnonymousSettings/Enhance/index.tsx"
-  },
   "ZAs170": {
     "defaultMessage": "Profile",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -935,10 +927,6 @@
     "defaultMessage": "Circle Edited",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
-  "mk+LCk": {
-    "defaultMessage": "Display Preferences",
-    "description": "src/views/Me/Settings/AnonymousSettings/DisplayPreferences/index.tsx"
-  },
   "ml3SZN": {
     "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed",
     "description": ""
@@ -1158,10 +1146,6 @@
   "y0b6Kp": {
     "defaultMessage": "Pay",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "y1Z3or": {
-    "defaultMessage": "Language",
-    "description": ""
   },
   "ySGgTo": {
     "defaultMessage": "Add Articles into Featured",

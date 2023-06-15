@@ -4,6 +4,10 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 100%) minmax(0, 1fr);
   margin: 0;
 
+  @media (--md-up) {
+    margin: 0 var(--spacing-base);
+  }
+
   @media (--lg-up) {
     margin: 0 var(--spacing-xx-loose);
   }

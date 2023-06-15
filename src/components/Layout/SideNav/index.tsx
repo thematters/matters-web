@@ -116,7 +116,7 @@ const SideNavMenu = () => {
 const VisitorSideNavMenu = () => {
   return (
     <ul role="menu" className={styles.list}>
-      <Media lessThan="xl">
+      <Media lessThan="lg">
         <NavListItemHome />
 
         <NavListItemSearch />
