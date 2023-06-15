@@ -102,9 +102,9 @@ const Charts = () => (
       <li>
         <StackedAreaChart
           data={MOCK_SUBSCRIBER_ANALYTICS.map((d) => {
-            const abc = d.paid + _random(1, 10)
-            const def = abc + _random(5, 20)
-            return { ...d, abc, def }
+            // const abc = d.paid + _random(1, 10)
+            // const def = abc + _random(5, 20)
+            return { ...d }
           })}
         >
           {(props) => (
