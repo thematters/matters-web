@@ -43,9 +43,7 @@ const JoinUs = () => {
               </a>
             </li>
             <li>
-              <a
-                href={`https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@hi176/69962-matters-全面開源-邀請你一起來建設馬特市-bafyreibge4gigd2bi34kdb742ch5dfiiu76sveqvj7hf7yuyy3gjiyarfy`}
-              >
+              <a href="https://matters.town/@hi176/69962">
                 <Translate
                   zh_hant="加入開源社區 "
                   zh_hans="加入开源社区"

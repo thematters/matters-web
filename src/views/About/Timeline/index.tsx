@@ -82,18 +82,7 @@ const Timeline = () => {
                 <Translate
                   zh_hant="支持以太坊錢包登入"
                   zh_hans="支持以太坊钱包登入"
-                  en="Support ETH Wallet Log In"
-                />
-              </p>
-            </li>
-
-            <li>
-              <time>Jul, 2022</time>
-              <p className={styles.event}>
-                <Translate
-                  zh_hant="開放內容註冊 ISCN"
-                  zh_hans="开放内容注册 ISCN"
-                  en="Matters on ISCN registry, ISCN Integration for all content"
+                  en="Support Sign-In with Ethereum"
                 />
               </p>
             </li>

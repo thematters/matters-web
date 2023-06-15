@@ -36,7 +36,7 @@ const Stats = () => {
                 en="Number of Articles Got Rewarded"
               />
             </p>
-            <span className={styles.num}>200K+</span>
+            <span className={styles.num}>350K+</span>
           </li>
           <li>
             <p className={styles.type}>
