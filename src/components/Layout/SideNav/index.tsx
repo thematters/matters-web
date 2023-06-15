@@ -67,7 +67,7 @@ const SideNavMenu = () => {
         href={PATHS.ME_NOTIFICATIONS}
       />
 
-      <Media lessThan="xl">
+      <Media lessThan="lg">
         <NavListItemSearch />
       </Media>
 
@@ -104,7 +104,6 @@ const SideNavMenu = () => {
 
       <li role="menuitem" className={styles.listItem}>
         <WriteButton
-          variant="navbar"
           allowed={!viewer.shouldSetupLikerID}
           authed={viewer.isAuthed}
           forbidden={viewer.isInactive}

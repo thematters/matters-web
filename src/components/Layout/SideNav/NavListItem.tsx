@@ -1,7 +1,7 @@
 import jump from 'jump.js'
 import { forwardRef } from 'react'
 
-import { Button, ButtonProps, TextIcon } from '~/components'
+import { Button, ButtonProps, TextIcon, Tooltip } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -27,21 +27,23 @@ const NavListItemButton = forwardRef(
     ref
   ) => {
     return (
-      <Button
-        bgActiveColor="greyLighter"
-        size={['2rem', '2rem']}
-        ref={ref}
-        {...props}
-        onClick={onClick}
-      >
-        <TextIcon
-          icon={active ? activeIcon : icon}
-          size="lg"
-          weight="semibold"
-          spacing="tight"
-          color="black"
-        />
-      </Button>
+      <Tooltip content={name} placement="left">
+        <Button
+          bgActiveColor="greyLighter"
+          size={['2rem', '2rem']}
+          ref={ref}
+          {...props}
+          onClick={onClick}
+        >
+          <TextIcon
+            icon={active ? activeIcon : icon}
+            size="lg"
+            weight="semibold"
+            spacing="tight"
+            color="black"
+          />
+        </Button>
+      </Tooltip>
     )
   }
 )
