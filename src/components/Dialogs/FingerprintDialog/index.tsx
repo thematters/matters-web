@@ -5,6 +5,7 @@ import { useContext, useEffect } from 'react'
 import {
   Dialog,
   Spinner,
+  Translate,
   useDialogSwitch,
   usePublicQuery,
   ViewerContext,
@@ -92,12 +93,17 @@ const BaseFingerprintDialog = ({
         isOpen={show}
         onDismiss={closeDialog}
         smBgColor="greyLighter"
-        smUpBgColor="greyLighter"
+        mdUpBgColor="greyLighter"
       >
         <Dialog.Header
           title="IPFSEntrance"
-          closeDialog={closeDialog}
-          closeTextId="close"
+          leftBtn={
+            <Dialog.TextButton
+              text={<Translate id="cancel" />}
+              color="green"
+              onClick={closeDialog}
+            />
+          }
         />
 
         <DynamicContent
@@ -114,6 +120,16 @@ const BaseFingerprintDialog = ({
           articleLastModified={article.revisedAt || article.createdAt}
           pending={loading}
           refetch={refetch}
+        />
+
+        <Dialog.Footer
+          mdUpBtns={
+            <Dialog.TextButton
+              text={<Translate id="close" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
         />
       </Dialog>
     </>

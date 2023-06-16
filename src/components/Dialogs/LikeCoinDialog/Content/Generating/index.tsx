@@ -64,11 +64,24 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
         )}
       </Dialog.Message>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button disabled={!error} onClick={prevStep}>
-          <Translate id={error ? 'retry' : 'continue'} />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate id={error ? 'retry' : 'continue'} />}
+            color="green"
+            disabled={!error}
+            onClick={prevStep}
+          />
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={<Translate id={error ? 'retry' : 'continue'} />}
+            color="green"
+            disabled={!error}
+            onClick={prevStep}
+          />
+        }
+      />
     </>
   )
 }

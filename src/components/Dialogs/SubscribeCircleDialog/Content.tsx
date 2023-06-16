@@ -26,16 +26,6 @@ const DynamicSubscribeCircleForm = dynamic(
   { loading: Spinner }
 )
 
-const ContinueSubscribeButton = ({
-  forward,
-}: {
-  forward: (step: Step) => void
-}) => (
-  <Dialog.Footer.Button onClick={() => forward('subscribeCircle')}>
-    <Translate zh_hant="回到訂閱" zh_hans="回到订阅" />
-  </Dialog.Footer.Button>
-)
-
 const SubscribeCircleDialogContent = ({
   forward,
   back,
@@ -52,11 +42,23 @@ const SubscribeCircleDialogContent = ({
   return (
     <>
       <Dialog.Header
-        leftButton={
-          prevStep ? <Dialog.Header.BackButton onClick={back} /> : <span />
+        leftBtn={
+          prevStep ? (
+            <Dialog.TextButton
+              color="green"
+              text={<Translate id="back" />}
+              onClick={back}
+            />
+          ) : (
+            <span />
+          )
         }
-        rightButton={
-          <Dialog.Header.CloseButton closeDialog={closeDialog} textId="close" />
+        rightBtn={
+          <Dialog.TextButton
+            color="green"
+            text={<Translate id="close" />}
+            onClick={closeDialog}
+          />
         }
         title={
           isSetPaymentPassword
@@ -68,8 +70,6 @@ const SubscribeCircleDialogContent = ({
             : 'subscribeCircle'
         }
         closeDialog={closeDialog}
-        closeTextId="close"
-        mode={isComplete ? 'inner' : undefined}
       />
 
       {isSetPaymentPassword && (
@@ -88,7 +88,8 @@ const SubscribeCircleDialogContent = ({
 
       {isResetPassword && (
         <DynamicPaymentResetPasswordForm
-          callbackButtons={<ContinueSubscribeButton forward={forward} />}
+          callback={() => forward('subscribeCircle')}
+          callbackText={<Translate zh_hant="回到訂閱" zh_hans="回到订阅" />}
           closeDialog={closeDialog}
         />
       )}

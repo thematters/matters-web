@@ -24,7 +24,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   spacing,
   onClick,
 }) => {
-  const smUpProps = {
+  const mdUpProps = {
     onClick: () => {
       window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
       window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
@@ -45,10 +45,10 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
           </Button>
         </Media>
         <Media greaterThan="sm">
-          <Button aria-haspopup="dialog" {...smUpProps}>
+          <Button aria-haspopup="dialog" {...mdUpProps}>
             <FormattedMessage
               defaultMessage="Log in"
-              description="src/components/Buttons/Login/index.tsx"
+              description="src/cpomponents/Buttons/Login/index.tsx"
             />
           </Button>
         </Media>
@@ -85,7 +85,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
         </Button>
       </Media>
       <Media greaterThan="sm">
-        <Button aria-haspopup="dialog" {...buttonProps} {...smUpProps}>
+        <Button aria-haspopup="dialog" {...buttonProps} {...mdUpProps}>
           <ButtonText />
         </Button>
       </Media>

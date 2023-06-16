@@ -78,7 +78,7 @@ const DeleteCommentDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <FormattedMessage
@@ -90,7 +90,6 @@ const DeleteCommentDialog = ({
             />
           }
           closeDialog={closeDialog}
-          mode="inner"
         />
 
         <Dialog.Message>
@@ -105,25 +104,33 @@ const DeleteCommentDialog = ({
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="red"
-            onClick={() => {
-              onDelete()
-              closeDialog()
-            }}
-          >
-            <FormattedMessage defaultMessage="Confirm" description="" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="greyLighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <FormattedMessage defaultMessage="Cancel" description="" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <FormattedMessage defaultMessage="Confirm" description="" />
+              }
+              color="red"
+              onClick={() => {
+                onDelete()
+                closeDialog()
+              }}
+            />
+          }
+          mdUpBtns={
+            <Dialog.TextButton
+              text={
+                <FormattedMessage defaultMessage="Confirm" description="" />
+              }
+              color="red"
+              onClick={() => {
+                onDelete()
+                closeDialog()
+              }}
+            />
+          }
+        />
       </Dialog>
     </>
   )

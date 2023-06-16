@@ -77,7 +77,6 @@ const SupportersDialogContent = ({
           </>
         }
         closeDialog={closeDialog}
-        closeTextId="close"
       />
 
       <Dialog.Content>

@@ -4,7 +4,7 @@
 
   flex-direction: column;
   flex-shrink: 0;
-  margin: var(--spacing-base);
+  padding: var(--spacing-s-loose) var(--spacing-base) var(--spacing-base);
 
   & > * {
     flex: 1;
@@ -13,5 +13,14 @@
 
   & > * + * {
     margin-top: var(--spacing-base);
+  }
+}
+
+.smUpFooter {
+  padding: var(--spacing-s-loose);
+  text-align: right;
+
+  & > * + * {
+    margin-left: var(--spacing-x-loose);
   }
 }

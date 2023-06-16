@@ -32,6 +32,7 @@ import {
   LanguageContext,
   Layout,
   TextIcon,
+  Translate,
   useMutation,
   VerificationSendCodeButton,
   ViewerContext,
@@ -442,7 +443,8 @@ const Connect: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
+      color="green"
       type="submit"
       form={formId}
       disabled={isSubmitting || loading || !account}
@@ -473,11 +475,17 @@ const Connect: React.FC<FormProps> = ({
       {closeDialog && (
         <Dialog.Header
           title="authEntries"
-          leftButton={
-            back ? <Dialog.Header.BackButton onClick={onBack} /> : null
+          leftBtn={
+            back ? (
+              <Dialog.TextButton
+                color="green"
+                text={<Translate id="back" />}
+                onClick={onBack}
+              />
+            ) : null
           }
           closeDialog={closeDialog}
-          rightButton={SubmitButton}
+          rightBtn={SubmitButton}
         />
       )}
 

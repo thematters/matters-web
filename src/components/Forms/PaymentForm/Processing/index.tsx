@@ -131,7 +131,7 @@ const OthersProcessingForm: React.FC<Props> = ({
         <>
           <Dialog.Header
             closeDialog={closeDialog}
-            leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
+            cancelText={<Translate id="close" />}
             title="donation"
           />
           <Dialog.Content>
@@ -290,7 +290,7 @@ const USDTProcessingForm: React.FC<Props> = ({
     <>
       <Dialog.Header
         closeDialog={closeDialog}
-        leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
+        cancelText={<Translate id="close" />}
         title="donation"
       />
       <Dialog.Content>

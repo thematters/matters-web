@@ -41,7 +41,6 @@ export type SearchSelectNode = SelectNode
 export type EditorSearchSelectFormProps = {
   title: TextId | React.ReactNode
   hint: TextId
-  headerLeftButton?: React.ReactNode
   headerRightButtonText?: string | React.ReactNode
   closeDialog: () => void
 
@@ -64,7 +63,6 @@ const EditorSearchSelectForm = ({
   title,
   hint,
   CustomStagingArea,
-  headerLeftButton,
   headerRightButtonText,
   closeDialog,
 
@@ -129,10 +127,10 @@ const EditorSearchSelectForm = ({
       <Dialog.Header
         title={title}
         closeDialog={closeDialog}
-        closeTextId="close"
-        leftButton={<></>}
-        rightButton={
-          <Dialog.Header.RightButton
+        leftBtn={<></>}
+        rightBtn={
+          <Dialog.TextButton
+            color="green"
             onClick={closeDialog}
             // disabled={stagingNodes.length <= 0}
             text={headerRightButtonText || <Translate id="done" />}

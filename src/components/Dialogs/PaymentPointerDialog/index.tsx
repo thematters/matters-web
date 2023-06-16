@@ -20,13 +20,13 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
     <>
       {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title="paymentPointer"
           closeDialog={closeDialog}
-          closeTextId="close"
-          rightButton={
-            <Dialog.Header.RightButton
+          rightBtn={
+            <Dialog.TextButton
+              color="green"
               type="submit"
               form={formId}
               disabled={isSubmitting || !isValid}

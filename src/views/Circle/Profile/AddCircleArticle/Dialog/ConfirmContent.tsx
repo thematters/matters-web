@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog } from '~/components'
+import { Dialog, Translate } from '~/components'
 import SelectLicense from '~/components/Editor/ToggleAccess/SelectLicense'
 import { ArticleLicenseType } from '~/gql/graphql'
 
@@ -24,9 +24,16 @@ const ConfirmContent: React.FC<ContentProps> = ({
     <>
       <Dialog.Header
         title="addArticles"
-        leftButton={<Dialog.Header.BackButton onClick={onBack} />}
-        rightButton={
-          <Dialog.Header.RightButton
+        leftBtn={
+          <Dialog.TextButton
+            color="green"
+            text={<Translate id="back" />}
+            onClick={onBack}
+          />
+        }
+        rightBtn={
+          <Dialog.TextButton
+            color="green"
             onClick={() =>
               onConfirm(license === ArticleLicenseType.Arr, license)
             }

@@ -15,6 +15,7 @@ import {
   Layout,
   Media,
   TextIcon,
+  Translate,
   ViewerContext,
 } from '~/components'
 
@@ -293,8 +294,14 @@ const Select: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          leftButton={
-            back ? <Dialog.Header.BackButton onClick={onBack} /> : null
+          leftBtn={
+            back ? (
+              <Dialog.TextButton
+                color="green"
+                text={<Translate id="back" />}
+                onClick={onBack}
+              />
+            ) : null
           }
           title={
             isConnect ? (

@@ -133,16 +133,28 @@ const Request: React.FC<FormProps> = ({
     <>
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          form={formId}
-          disabled={isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate id="nextStep" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate id="nextStep" />}
+            color="red"
+            type="submit"
+            form={formId}
+            disabled={isSubmitting}
+            loading={isSubmitting}
+          />
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={<Translate id="nextStep" />}
+            color="red"
+            type="submit"
+            form={formId}
+            disabled={isSubmitting}
+            loading={isSubmitting}
+          />
+        }
+      />
     </>
   )
 }

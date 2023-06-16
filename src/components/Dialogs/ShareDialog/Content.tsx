@@ -15,7 +15,8 @@ export interface ShareDialogContentProps {
 
   headerTitle?: TextId | React.ReactNode
   description?: React.ReactNode
-  footerButtons?: React.ReactNode
+  btns?: React.ReactNode
+  mdUpBtns?: React.ReactNode
 }
 
 const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
@@ -27,7 +28,8 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
 
   headerTitle,
   description,
-  footerButtons,
+  btns,
+  mdUpBtns,
 }) => {
   const url = new URL(shareLink)
   if (url.searchParams.get('locale')) {
@@ -45,20 +47,15 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
   return (
     <>
       {headerTitle ? (
-        <Dialog.Header
-          title={headerTitle}
-          closeDialog={closeDialog}
-          closeTextId="close"
-          mode="inner"
-        />
+        <Dialog.Header title={headerTitle} />
       ) : (
         <Dialog.Header
-          title={'share'}
-          closeDialog={closeDialog}
-          leftButton={
-            <Dialog.Header.CloseButton
-              closeDialog={closeDialog}
-              textId="close"
+          title="share"
+          leftBtn={
+            <Dialog.TextButton
+              color="green"
+              onClick={closeDialog}
+              text="close"
             />
           }
         />
@@ -91,7 +88,26 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
         </section>
       </Dialog.Content>
 
-      {footerButtons && <Dialog.Footer>{footerButtons}</Dialog.Footer>}
+      {btns || mdUpBtns ? (
+        <Dialog.Footer btns={btns} mdUpBtns={mdUpBtns} />
+      ) : (
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={<Translate id="close" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+          mdUpBtns={
+            <Dialog.TextButton
+              text={<Translate id="close" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+        />
+      )}
     </>
   )
 }

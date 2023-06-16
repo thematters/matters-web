@@ -15,7 +15,7 @@ type SignUpButtonProps = {
 export const SignUpButton: React.FC<
   React.PropsWithChildren<SignUpButtonProps>
 > = ({ children, isPlain, size }) => {
-  const smUpProps = {
+  const mdUpProps = {
     onClick: () => {
       analytics.trackEvent('click_button', {
         type: 'signup',
@@ -40,7 +40,7 @@ export const SignUpButton: React.FC<
           <Button {...smProps}>{children}</Button>
         </Media>
         <Media greaterThan="sm">
-          <Button aria-haspopup="dialog" {...smUpProps}>
+          <Button aria-haspopup="dialog" {...mdUpProps}>
             {children}
           </Button>
         </Media>
@@ -67,7 +67,7 @@ export const SignUpButton: React.FC<
         </Button>
       </Media>
       <Media greaterThan="sm">
-        <Button aria-haspopup="dialog" {...buttonProps} {...smUpProps}>
+        <Button aria-haspopup="dialog" {...buttonProps} {...mdUpProps}>
           <ButtonText />
         </Button>
       </Media>

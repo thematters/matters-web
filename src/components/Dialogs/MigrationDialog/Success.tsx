@@ -48,15 +48,22 @@ const MigrationDialogSuccess = () => {
         </p>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button href={PATHS.HOME}>
-          <Translate
-            zh_hant={zh_hant.back}
-            zh_hans={zh_hans.back}
-            en={en.back}
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate id="back" />}
+            color="green"
+            href={PATHS.HOME}
           />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={<Translate id="back" />}
+            color="green"
+            href={PATHS.HOME}
+          />
+        }
+      />
     </>
   )
 }

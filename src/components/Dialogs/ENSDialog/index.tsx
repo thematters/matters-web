@@ -33,7 +33,7 @@ const BaseENSDilaog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent
           closeDialog={closeDialog}
           currStep={currStep}

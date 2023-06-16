@@ -2,12 +2,14 @@ import { Dialog, Translate } from '~/components'
 
 interface CompleteProps {
   closeDialog: () => void
-  callbackButtons?: React.ReactNode
+  callback?: () => any
+  callbackText?: React.ReactNode
 }
 
 const Complete: React.FC<CompleteProps> = ({
   closeDialog,
-  callbackButtons,
+  callback,
+  callbackText,
 }) => {
   return (
     <>
@@ -17,19 +19,28 @@ const Complete: React.FC<CompleteProps> = ({
         </h3>
       </Dialog.Message>
 
-      <Dialog.Footer>
-        {callbackButtons ? (
-          callbackButtons
-        ) : (
-          <Dialog.Footer.Button
-            bgColor="greyLighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="close" />
-          </Dialog.Footer.Button>
-        )}
-      </Dialog.Footer>
+      <Dialog.Footer
+        closeDialog={callback ? closeDialog : undefined}
+        cancelText={callback ? <Translate id="close" /> : undefined}
+        btns={
+          callback ? (
+            <Dialog.RoundedButton
+              text={callbackText}
+              color="green"
+              onClick={callback}
+            />
+          ) : null
+        }
+        mdUpBtns={
+          callback ? (
+            <Dialog.TextButton
+              text={callbackText}
+              color="green"
+              onClick={callback}
+            />
+          ) : null
+        }
+      />
     </>
   )
 }

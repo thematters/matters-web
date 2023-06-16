@@ -12,13 +12,12 @@ const ConfirmExitDialog = ({ onExit, children }: ConfirmExitDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate zh_hant="修訂須知" zh_hans="修订须知" en="Notice" />
           }
           closeDialog={closeDialog}
-          mode="inner"
         />
 
         <Dialog.Message>
@@ -31,25 +30,29 @@ const ConfirmExitDialog = ({ onExit, children }: ConfirmExitDialogProps) => {
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="red"
-            onClick={() => {
-              onExit()
-              closeDialog()
-            }}
-          >
-            <Translate id="confirm" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="greyLighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="cancel" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={<Translate id="confirm" />}
+              color="green"
+              onClick={() => {
+                onExit()
+                closeDialog()
+              }}
+            />
+          }
+          mdUpBtns={
+            <Dialog.TextButton
+              text={<Translate id="confirm" />}
+              color="green"
+              onClick={() => {
+                onExit()
+                closeDialog()
+              }}
+            />
+          }
+        />
       </Dialog>
     </>
   )

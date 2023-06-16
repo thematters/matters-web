@@ -62,23 +62,27 @@ const Request: React.FC<Props> = ({ nextStep, closeDialog }) => {
         <Spacer size="xxloose" />
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={request}
-          disabled={loading}
-          loading={loading}
-        >
-          <Translate id="nextStep" />
-        </Dialog.Footer.Button>
-
-        <Dialog.Footer.Button
-          bgColor="greyLighter"
-          textColor="black"
-          onClick={closeDialog}
-        >
-          <Translate id="cancel" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        closeDialog={closeDialog}
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate id="nextStep" />}
+            color="green"
+            onClick={request}
+            disabled={loading}
+            loading={loading}
+          />
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={<Translate id="nextStep" />}
+            color="green"
+            onClick={request}
+            disabled={loading}
+            loading={loading}
+          />
+        }
+      />
     </>
   )
 }

@@ -40,19 +40,19 @@ const ReconnectButton = () => {
         </CopyToClipboard>
       </p>
 
-      <Dialog.Footer.Button
-        bgColor="green"
-        textColor="white"
+      <Dialog.RoundedButton
+        text={
+          <Translate
+            zh_hant="重新連接錢包"
+            zh_hans="重新连接钱包"
+            en="Reconnect Wallet"
+          />
+        }
+        color="green"
         onClick={() => {
           disconnect()
         }}
-      >
-        <Translate
-          zh_hant="重新連接錢包"
-          zh_hans="重新连接钱包"
-          en="Reconnect Wallet"
-        />
-      </Dialog.Footer.Button>
+      />
     </>
   )
 }

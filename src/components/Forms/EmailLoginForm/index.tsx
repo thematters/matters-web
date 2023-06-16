@@ -25,6 +25,7 @@ import {
   LanguageContext,
   LanguageSwitch,
   Layout,
+  Translate,
   useMutation,
 } from '~/components'
 import { UserLoginMutation } from '~/gql/graphql'
@@ -218,7 +219,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
+      color="green"
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -253,9 +255,17 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       {closeDialog && (
         <Dialog.Header
           title="login"
-          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
+          leftBtn={
+            back ? (
+              <Dialog.TextButton
+                color="green"
+                text={<Translate id="back" />}
+                onClick={back}
+              />
+            ) : null
+          }
           closeDialog={closeDialog}
-          rightButton={SubmitButton}
+          rightBtn={SubmitButton}
         />
       )}
 

@@ -132,7 +132,8 @@ const Request: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
+      color="green"
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -164,7 +165,7 @@ const Request: React.FC<FormProps> = ({
         <Dialog.Header
           title="changeEmail"
           closeDialog={closeDialog}
-          rightButton={SubmitButton}
+          rightBtn={SubmitButton}
         />
       )}
 

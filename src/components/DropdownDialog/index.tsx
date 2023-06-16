@@ -125,24 +125,14 @@ const BaseDropdownDialog = ({
         {children({ openDialog: toggle, type: 'dialog' })}
 
         <Dialog isOpen={show} onDismiss={closeDialog} {...dialog}>
-          <Dialog.Header
-            title={dialog.title}
-            closeDialog={closeDialog}
-            closeTextId="close"
-            mode="hidden"
-          />
+          <Dialog.Header title={dialog.title} closeDialog={closeDialog} />
 
           <Content>{dialog.content}</Content>
 
-          <Dialog.Footer>
-            <Dialog.Footer.Button
-              bgColor="greyLighter"
-              textColor="black"
-              onClick={closeDialog}
-            >
-              <Translate id="close" />
-            </Dialog.Footer.Button>
-          </Dialog.Footer>
+          <Dialog.Footer
+            closeDialog={closeDialog}
+            cancelText={<Translate id="close" />}
+          />
         </Dialog>
       </Media>
 

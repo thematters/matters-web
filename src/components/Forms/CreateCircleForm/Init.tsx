@@ -215,7 +215,8 @@ const Init: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
+      color="green"
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -246,7 +247,7 @@ const Init: React.FC<FormProps> = ({
         <Dialog.Header
           title="circleCreation"
           closeDialog={closeDialog}
-          rightButton={SubmitButton}
+          rightBtn={SubmitButton}
         />
       )}
 

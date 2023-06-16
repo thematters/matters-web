@@ -132,22 +132,35 @@ const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
 
       <SelectPeriod period={period} onChange={setPeriod} />
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button onClick={() => send()} loading={inviteLoading}>
-          <FormattedMessage defaultMessage="Confirm and Send" description="" />
-        </Dialog.Footer.Button>
-
-        <Dialog.Footer.Button
-          bgColor="greyLighter"
-          textColor="black"
-          onClick={closeDialog}
-        >
-          <FormattedMessage
-            defaultMessage="Not Now"
-            description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+      <Dialog.Footer
+        closeDialog={closeDialog}
+        btns={
+          <Dialog.RoundedButton
+            text={
+              <FormattedMessage
+                defaultMessage="Confirm and Send"
+                description=""
+              />
+            }
+            color="green"
+            onClick={send}
+            loading={inviteLoading}
           />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={
+              <FormattedMessage
+                defaultMessage="Confirm and Send"
+                description=""
+              />
+            }
+            color="green"
+            onClick={send}
+            loading={inviteLoading}
+          />
+        }
+      />
     </>
   )
 }
@@ -171,7 +184,6 @@ const InviteePreSend = (props: Props) => (
         />
       }
       closeDialog={props.closeDialog}
-      closeTextId="cancel"
     />
     <BaseInviteePreSend {...props} />
   </>

@@ -60,15 +60,6 @@ const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
   { loading: Spinner }
 )
-const ContinueDonationButton = ({
-  forward,
-}: {
-  forward: (step: Step) => void
-}) => (
-  <Dialog.Footer.Button onClick={() => forward('setAmount')}>
-    <Translate zh_hant="回到支持" zh_hans="回到支持" en="Back to support" />
-  </Dialog.Footer.Button>
-)
 
 const DonationDialogContent = ({
   closeDialog: baseCloseDialog,
@@ -147,11 +138,19 @@ const DonationDialogContent = ({
       {!isProcessing && !isWalletSelect && (
         <Dialog.Header
           closeDialog={closeDialog}
-          leftButton={
+          leftBtn={
             isAddCredit ? (
-              <Dialog.Header.BackButton onClick={back} />
+              <Dialog.TextButton
+                color="green"
+                text={<Translate id="back" />}
+                onClick={back}
+              />
             ) : (
-              <Dialog.Header.CloseButton closeDialog={closeDialog} />
+              <Dialog.TextButton
+                color="green"
+                text={<Translate id="close" />}
+                onClick={closeDialog}
+              />
             )
           }
           title={
@@ -264,13 +263,27 @@ const DonationDialogContent = ({
 
       {isAddCredit && (
         <DynamicAddCreditForm
-          callbackButtons={<ContinueDonationButton forward={forward} />}
+          callback={() => forward('setAmount')}
+          callbackText={
+            <Translate
+              zh_hant="回到支持"
+              zh_hans="回到支持"
+              en="Back to support"
+            />
+          }
         />
       )}
 
       {isResetPassword && (
         <DynamicPaymentResetPasswordForm
-          callbackButtons={<ContinueDonationButton forward={forward} />}
+          callback={() => forward('setAmount')}
+          callbackText={
+            <Translate
+              zh_hant="回到支持"
+              zh_hans="回到支持"
+              en="Back to support"
+            />
+          }
           closeDialog={closeDialog}
         />
       )}

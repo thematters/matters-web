@@ -173,7 +173,7 @@ const BaseEditorSettingsDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} hidePaddingBottom>
+      <Dialog isOpen={show} onDismiss={closeDialog} hidePaddingBottom>
         {isList && (
           <SettingsList
             saving={saving}
@@ -199,9 +199,6 @@ const BaseEditorSettingsDialog = ({
           <DynamicEditorSearchSelectForm
             title="collectArticle"
             hint="hintEditCollection"
-            headerLeftButton={
-              <Dialog.Header.BackButton onClick={() => forward('list')} />
-            }
             searchType="Article"
             searchExclude={SearchExclude.Blocked}
             onSave={async (nodes: SearchSelectNode[]) => {
@@ -221,9 +218,6 @@ const BaseEditorSettingsDialog = ({
           <DynamicEditorSearchSelectForm
             title="addTag"
             hint="hintAddTag"
-            headerLeftButton={
-              <Dialog.Header.BackButton onClick={() => forward('list')} />
-            }
             searchType="Tag"
             onSave={async (nodes: SearchSelectNode[]) => {
               await editTags(nodes as DigestTagFragment[])

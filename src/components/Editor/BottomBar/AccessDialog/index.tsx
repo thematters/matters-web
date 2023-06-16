@@ -32,9 +32,10 @@ const BaseAccessDialog = ({
         <Dialog.Header
           title="articleManagement"
           closeDialog={closeDialog}
-          leftButton={<span />}
-          rightButton={
-            <Dialog.Header.RightButton
+          leftBtn={<span />}
+          rightBtn={
+            <Dialog.TextButton
+              color="green"
               onClick={closeDialog}
               text={<Translate id="done" />}
             />

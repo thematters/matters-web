@@ -55,16 +55,10 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog
-        size="sm"
-        isOpen={show}
-        onDismiss={closeDialog}
-        smBgColor="greyLighter"
-      >
+      <Dialog isOpen={show} onDismiss={closeDialog} smBgColor="greyLighter">
         <Dialog.Header
           title={isSetPaymentPassword ? 'paymentPassword' : 'topUp'}
           closeDialog={closeDialog}
-          closeTextId="close"
         />
 
         {isSetPaymentPassword && (

@@ -31,16 +31,6 @@ const DynamicConnectStripeAccountForm = dynamic(
   { loading: Spinner }
 )
 
-const ContinuePayoutButton = ({
-  forward,
-}: {
-  forward: (step: Step) => void
-}) => (
-  <Dialog.Footer.Button type="button" onClick={() => forward('confirm')}>
-    <Translate zh_hant="繼續提現" zh_hans="继续提现" />
-  </Dialog.Footer.Button>
-)
-
 const PayoutDialogContent = ({
   hasStripeAccount,
   forward,
@@ -57,11 +47,23 @@ const PayoutDialogContent = ({
   return (
     <>
       <Dialog.Header
-        leftButton={
-          prevStep ? <Dialog.Header.BackButton onClick={back} /> : <span />
+        leftBtn={
+          prevStep ? (
+            <Dialog.TextButton
+              text={<Translate id="back" />}
+              color="green"
+              onClick={back}
+            />
+          ) : (
+            <span />
+          )
         }
-        rightButton={
-          <Dialog.Header.CloseButton closeDialog={closeDialog} textId="close" />
+        rightBtn={
+          <Dialog.TextButton
+            text={<Translate id="close" />}
+            color="green"
+            onClick={closeDialog}
+          />
         }
         title={
           isConnectStripeAccount
@@ -73,7 +75,6 @@ const PayoutDialogContent = ({
             : 'paymentPayout'
         }
         closeDialog={closeDialog}
-        closeTextId="close"
       />
 
       {isConnectStripeAccount && (
@@ -95,7 +96,8 @@ const PayoutDialogContent = ({
 
       {isResetPassword && (
         <DynamicPaymentResetPasswordForm
-          callbackButtons={<ContinuePayoutButton forward={forward} />}
+          callback={() => forward('confirm')}
+          callbackText={<Translate zh_hant="繼續提現" zh_hans="继续提现" />}
           closeDialog={closeDialog}
         />
       )}

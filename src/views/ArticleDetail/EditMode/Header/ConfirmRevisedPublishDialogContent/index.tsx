@@ -20,7 +20,8 @@ const ConfirmRevisedPublishDialogContent = ({
   }
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
+      color="green"
       text={<Translate id="publish" />}
       onClick={onPublish}
     />
@@ -30,8 +31,14 @@ const ConfirmRevisedPublishDialogContent = ({
     <>
       <Dialog.Header
         title={<Translate zh_hant="發布須知" zh_hans="發布须知" en="Notice" />}
-        leftButton={<Dialog.Header.BackButton onClick={onBack} />}
-        rightButton={SubmitButton}
+        leftBtn={
+          <Dialog.TextButton
+            color="green"
+            text={<Translate id="back" />}
+            onClick={onBack}
+          />
+        }
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Message align="left" type="info">

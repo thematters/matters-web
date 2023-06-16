@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, useStep } from '~/components'
+import { Dialog, Translate, useStep } from '~/components'
 
 import Binding from './Binding'
 import Complete from './Complete'
@@ -37,7 +37,13 @@ const LikeCoinDialogContent: React.FC<Props> = ({
       <Dialog.Header
         title="setupLikeCoin"
         closeDialog={closeDialog}
-        closeTextId={currStep === 'complete' ? 'close' : 'cancel'}
+        cancelText={
+          currStep === 'complete' ? (
+            <Translate id="close" />
+          ) : (
+            <Translate id="cancel" />
+          )
+        }
       />
 
       {currStep === 'select' && (

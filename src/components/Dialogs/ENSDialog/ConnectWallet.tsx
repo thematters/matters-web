@@ -44,19 +44,34 @@ const ConnectWallet = ({
         </section>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={() => {
-            switchToWalletSelect()
-          }}
-        >
-          <Translate
-            zh_hans="连接钱包"
-            zh_hant="連接錢包"
-            en="Connect Wallet"
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={
+              <Translate
+                zh_hans="连接钱包"
+                zh_hant="連接錢包"
+                en="Connect Wallet"
+              />
+            }
+            color="green"
+            onClick={switchToWalletSelect}
           />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={
+              <Translate
+                zh_hans="连接钱包"
+                zh_hant="連接錢包"
+                en="Connect Wallet"
+              />
+            }
+            color="green"
+            onClick={switchToWalletSelect}
+          />
+        }
+      />
 
       <ENSDescription />
     </>

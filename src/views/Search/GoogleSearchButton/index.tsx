@@ -18,20 +18,21 @@ const GoogleSearchButton = () => {
             </TextIcon>
           </p>
 
-          <Dialog.Footer.Button
+          <Dialog.RoundedButton
+            text={
+              <Translate
+                zh_hant="改使用 Google 搜尋關鍵字"
+                zh_hans="改使用 Google 搜索关键字"
+                en="Search Matters on Google"
+              />
+            }
+            color="greyDarker"
             type="button"
             onClick={() => {
               analytics.trackEvent('click_button', { type: 'google_search' })
               openGoogleSearchDialog()
             }}
-            implicit
-          >
-            <Translate
-              zh_hant="改使用 Google 搜尋關鍵字"
-              zh_hans="改使用 Google 搜索关键字"
-              en="Search Matters on Google"
-            />
-          </Dialog.Footer.Button>
+          />
         </section>
       )}
     </GoogleSearchDialog>

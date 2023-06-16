@@ -36,6 +36,43 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
   const [update, { loading }] =
     useMutation<UpdateTagSettingMutation>(UPDATE_TAG_SETTING)
 
+  const onClick = async () => {
+    const result = await update({
+      variables: {
+        input: { id, type: 'remove_editor', editors: [editor.id] },
+      },
+      update: (cache) =>
+        updateTagMaintainers({
+          cache,
+          id,
+          type: 'remove',
+          editors: [editor.id],
+        }),
+    })
+
+    if (!result) {
+      throw new Error('tag leave failed')
+    }
+
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate
+              zh_hant="移除協作者成功"
+              zh_hans="移除协作者成功"
+              en="successfully removed collaborator"
+            />
+          ),
+          duration: 2000,
+        },
+      })
+    )
+
+    closeDialog()
+  }
+
   return (
     <>
       <Dialog.Header
@@ -47,7 +84,6 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
           />
         }
         closeDialog={closeDialog}
-        closeTextId="cancel"
       />
 
       <Dialog.Message>
@@ -66,63 +102,37 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
         </p>
       </Dialog.Message>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          bgColor="red"
-          textColor="white"
-          loading={loading}
-          onClick={async () => {
-            const result = await update({
-              variables: {
-                input: { id, type: 'remove_editor', editors: [editor.id] },
-              },
-              update: (cache) =>
-                updateTagMaintainers({
-                  cache,
-                  id,
-                  type: 'remove',
-                  editors: [editor.id],
-                }),
-            })
-
-            if (!result) {
-              throw new Error('tag leave failed')
+      <Dialog.Footer
+        closeDialog={closeDialog}
+        btns={
+          <Dialog.RoundedButton
+            text={
+              <Translate
+                zh_hant="確認移除"
+                zh_hans="确认移除"
+                en="Confirm Removal"
+              />
             }
-
-            window.dispatchEvent(
-              new CustomEvent(ADD_TOAST, {
-                detail: {
-                  color: 'green',
-                  content: (
-                    <Translate
-                      zh_hant="移除協作者成功"
-                      zh_hans="移除协作者成功"
-                      en="successfully removed collaborator"
-                    />
-                  ),
-                  duration: 2000,
-                },
-              })
-            )
-
-            closeDialog()
-          }}
-        >
-          <Translate
-            zh_hant="確認移除"
-            zh_hans="确认移除"
-            en="Confirm Removal"
+            color="green"
+            onClick={onClick}
+            loading={loading}
           />
-        </Dialog.Footer.Button>
-
-        <Dialog.Footer.Button
-          textColor="black"
-          bgColor="greyLighter"
-          onClick={closeDialog}
-        >
-          <Translate zh_hant="取消" zh_hans="取消" en="cancel" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={
+              <Translate
+                zh_hant="確認移除"
+                zh_hans="确认移除"
+                en="Confirm Removal"
+              />
+            }
+            color="green"
+            onClick={onClick}
+            loading={loading}
+          />
+        }
+      />
     </>
   )
 }

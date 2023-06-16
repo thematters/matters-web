@@ -24,7 +24,7 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
     <>
       {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate
@@ -34,7 +34,6 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
             />
           }
           closeDialog={closeDialog}
-          closeTextId="close"
         />
         <Dialog.Content hasGrow spacing={[0, 'base']}>
           <section className={styles.description}>

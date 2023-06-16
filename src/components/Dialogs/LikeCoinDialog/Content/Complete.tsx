@@ -14,17 +14,30 @@ const Complete: React.FC = () => {
         </p>
       </Dialog.Message>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={() => {
-            redirectToTarget({
-              fallback: 'current',
-            })
-          }}
-        >
-          <Translate id="done" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate id="done" />}
+            color="green"
+            onClick={() => {
+              redirectToTarget({
+                fallback: 'current',
+              })
+            }}
+          />
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={<Translate id="done" />}
+            color="green"
+            onClick={() => {
+              redirectToTarget({
+                fallback: 'current',
+              })
+            }}
+          />
+        }
+      />
     </>
   )
 }

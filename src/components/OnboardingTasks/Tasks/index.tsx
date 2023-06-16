@@ -194,30 +194,50 @@ const Tasks = ({ task }: Props) => {
       )}
 
       <section className={viewer.onboardingTasks.finished ? 'allDone' : ''}>
-        <Dialog.Footer>
-          {viewer.onboardingTasks.finished ? (
-            <Dialog.Footer.Button
-              type="button"
-              bgColor="gold"
-              textColor="white"
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={
+                viewer.onboardingTasks.finished ? (
+                  <Translate
+                    zh_hant="繼續閱讀航程"
+                    zh_hans="继续阅读航程"
+                    en="Continue reading journey"
+                  />
+                ) : (
+                  <Translate
+                    zh_hant="不再顯示導航"
+                    zh_hans="不再显示导航"
+                    en="Skip the guide"
+                  />
+                )
+              }
+              color={viewer.onboardingTasks.finished ? 'green' : 'greyDarker'}
               onClick={hideTasks}
-            >
-              <Translate
-                zh_hant="繼續閱讀航程"
-                zh_hans="继续阅读航程"
-                en="Continue reading journey"
-              />
-            </Dialog.Footer.Button>
-          ) : (
-            <Dialog.Footer.Button type="button" onClick={hideTasks} implicit>
-              <Translate
-                zh_hant="不再顯示導航"
-                zh_hans="不再显示导航"
-                en="Skip the guide"
-              />
-            </Dialog.Footer.Button>
-          )}
-        </Dialog.Footer>
+            />
+          }
+          mdUpBtns={
+            <Dialog.TextButton
+              text={
+                viewer.onboardingTasks.finished ? (
+                  <Translate
+                    zh_hant="繼續閱讀航程"
+                    zh_hans="继续阅读航程"
+                    en="Continue reading journey"
+                  />
+                ) : (
+                  <Translate
+                    zh_hant="不再顯示導航"
+                    zh_hans="不再显示导航"
+                    en="Skip the guide"
+                  />
+                )
+              }
+              color={viewer.onboardingTasks.finished ? 'green' : 'greyDarker'}
+              onClick={hideTasks}
+            />
+          }
+        />
 
         {viewer.onboardingTasks.finished && (
           <>

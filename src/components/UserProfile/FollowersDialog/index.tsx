@@ -27,7 +27,6 @@ const BaseFollowersDialog = ({ user, children }: FollowersDialogProps) => {
             />
           }
           closeDialog={closeDialog}
-          closeTextId="close"
         />
 
         <DynamicContent />

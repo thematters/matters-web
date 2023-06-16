@@ -27,11 +27,10 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
     <>
       {children && children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={<Translate id="followAuthor" />}
           closeDialog={closeDialog}
-          closeTextId="cancel"
         />
 
         <Dialog.Content hasGrow>

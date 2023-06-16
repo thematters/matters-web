@@ -45,7 +45,8 @@ import StripeCheckout from '../StripeCheckout'
 
 interface FormProps {
   defaultAmount?: number
-  callbackButtons?: React.ReactNode
+  callback?: () => any
+  callbackText?: React.ReactNode
 }
 
 interface FormValues {
@@ -74,7 +75,8 @@ const stripePromise = loadStripe(
 
 const BaseAddCredit: React.FC<FormProps> = ({
   defaultAmount,
-  callbackButtons,
+  callback,
+  callbackText,
 }) => {
   const stripe = useStripe()
   const elements = useElements()
@@ -253,7 +255,24 @@ const BaseAddCredit: React.FC<FormProps> = ({
           <CurrencyAmount amount={values.amount} currency={currency} />
         </Dialog.Message>
 
-        {callbackButtons && <Dialog.Footer>{callbackButtons}</Dialog.Footer>}
+        {callback && (
+          <Dialog.Footer
+            btns={
+              <Dialog.RoundedButton
+                text={callbackText}
+                color="green"
+                onClick={callback}
+              />
+            }
+            mdUpBtns={
+              <Dialog.TextButton
+                text={callbackText}
+                color="green"
+                onClick={callback}
+              />
+            }
+          />
+        )}
       </>
     )
   }
@@ -280,16 +299,32 @@ const BaseAddCredit: React.FC<FormProps> = ({
         </section>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          form={formId}
-          disabled={disabled || !isValid || isSubmitting || !!checkoutError}
-          loading={isSubmitting}
-        >
-          <Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={
+              <Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />
+            }
+            color="green"
+            type="submit"
+            form={formId}
+            disabled={disabled || !isValid || isSubmitting || !!checkoutError}
+            loading={isSubmitting}
+          />
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={
+              <Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />
+            }
+            color="green"
+            type="submit"
+            form={formId}
+            disabled={disabled || !isValid || isSubmitting || !!checkoutError}
+            loading={isSubmitting}
+          />
+        }
+      />
     </>
   )
 }

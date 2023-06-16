@@ -34,12 +34,8 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
   return (
     <>
       {children({ openDialog })}
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
-        <Dialog.Header
-          title={title}
-          closeDialog={closeDialog}
-          closeTextId="close"
-        />
+      <Dialog isOpen={show} onDismiss={closeDialog}>
+        <Dialog.Header title={title} closeDialog={closeDialog} />
 
         <Dialog.Message>
           <p>

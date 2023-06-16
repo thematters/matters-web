@@ -19,7 +19,7 @@ const BaseSetCoverDialog = ({ children, ...props }: SetCoverDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicSetCover onClose={closeDialog} {...props} />
       </Dialog>
     </>

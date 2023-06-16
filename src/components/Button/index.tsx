@@ -48,8 +48,9 @@ type ButtonColor =
   | 'white'
   | 'black'
   | 'halfBlack'
-  | 'greyDarkest'
   | 'greyDark'
+  | 'greyDarker'
+  | 'greyDarkest'
   | 'grey'
   | 'greyLight'
   | 'greyLighter'
@@ -64,7 +65,7 @@ type ButtonColor =
 
 type ButtonTextColor = Extract<
   ButtonColor,
-  'white' | 'black' | 'green' | 'gold' | 'red' | 'grey'
+  'white' | 'black' | 'green' | 'gold' | 'red' | 'grey' | 'greyDarker'
 >
 
 export type ButtonBgColor = Extract<

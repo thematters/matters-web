@@ -127,15 +127,30 @@ const LinkENS = ({
           </section>
         </Dialog.Content>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            onClick={switchToTargetNetwork}
-            loading={isSwitchingNetwork}
-          >
-            <Translate zh_hant="切換到 " zh_hans="切换到 " en="Switch to " />
-            {targetNetwork.name}
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <>
+                  <Translate
+                    zh_hant="切換到 "
+                    zh_hans="切换到 "
+                    en="Switch to "
+                  />
+                </>
+              }
+              color="green"
+              onClick={switchToTargetNetwork}
+            />
+          }
+          mdUpBtns={
+            <Dialog.TextButton
+              text={<>{targetNetwork.name}</>}
+              color="green"
+              loading={isSwitchingNetwork}
+            />
+          }
+        />
 
         <ENSDescription />
       </Fragment>
@@ -172,21 +187,34 @@ const LinkENS = ({
           </section>
         </Dialog.Content>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="green"
-            textColor="white"
-            onClick={() => {
-              disconnect()
-            }}
-          >
-            <Translate
-              zh_hant="重新連接錢包"
-              zh_hans="重新连接钱包"
-              en="Reconnect Wallet"
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <Translate
+                  zh_hant="重新連接錢包"
+                  zh_hans="重新连接钱包"
+                  en="Reconnect Wallet"
+                />
+              }
+              color="red"
+              onClick={() => disconnect()}
             />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+          }
+          mdUpBtns={
+            <Dialog.TextButton
+              text={
+                <Translate
+                  zh_hant="重新連接錢包"
+                  zh_hans="重新连接钱包"
+                  en="Reconnect Wallet"
+                />
+              }
+              color="red"
+              onClick={() => disconnect()}
+            />
+          }
+        />
 
         <ENSDescription />
       </Fragment>
@@ -214,14 +242,22 @@ const LinkENS = ({
         </section>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={linkIPNStoENS}
-          loading={isLoading || txConfirming}
-        >
-          <Translate id="bindIPNStoENS" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate id="bindIPNStoENS" />}
+            color="green"
+            onClick={linkIPNStoENS}
+          />
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={<Translate id="bindIPNStoENS" />}
+            color="green"
+            loading={isLoading || txConfirming}
+          />
+        }
+      />
 
       <ENSDescription />
     </Fragment>

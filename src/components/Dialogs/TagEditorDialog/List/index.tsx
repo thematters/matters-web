@@ -88,11 +88,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
 
   return (
     <>
-      <Dialog.Header
-        title="tagManageEditor"
-        closeDialog={closeDialog}
-        closeTextId="cancel"
-      />
+      <Dialog.Header title="tagManageEditor" closeDialog={closeDialog} />
 
       <Dialog.Content hasGrow>
         <section className={styles.owner}>
@@ -181,19 +177,35 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
       </Dialog.Content>
 
       {isAllowAdd && (
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            textColor="white"
-            bgColor="green"
-            onClick={toAddStep}
-          >
-            <Translate
-              zh_hant="新增協作者"
-              zh_hans="新增协作者"
-              en="Add collaborator"
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <Translate
+                  zh_hant="新增協作者"
+                  zh_hans="新增协作者"
+                  en="Add collaborator"
+                />
+              }
+              color="green"
+              onClick={toAddStep}
             />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+          }
+          mdUpBtns={
+            <Dialog.TextButton
+              text={
+                <Translate
+                  zh_hant="新增協作者"
+                  zh_hans="新增协作者"
+                  en="Add collaborator"
+                />
+              }
+              color="green"
+              onClick={toAddStep}
+            />
+          }
+        />
       )}
     </>
   )

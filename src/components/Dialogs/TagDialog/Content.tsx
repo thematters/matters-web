@@ -224,7 +224,8 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
+      color="green"
       text={<Translate id="confirm" />}
       type="submit"
       form={formId}
@@ -238,7 +239,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       <Dialog.Header
         title={isEditing ? 'editTag' : 'createTag'}
         closeDialog={closeDialog}
-        rightButton={SubmitButton}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>

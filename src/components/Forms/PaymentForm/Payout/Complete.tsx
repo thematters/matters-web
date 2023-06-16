@@ -30,27 +30,42 @@ const Complete: React.FC<Props> = ({ closeDialog }) => {
         </p>
       </Dialog.Message>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button href={PATHS.ME_WALLET_TRANSACTIONS}>
-          <Translate
-            zh_hant="查看交易"
-            zh_hans="查看交易"
-            en="View Tansaction"
-          />
-        </Dialog.Footer.Button>
-
-        <Dialog.Footer.Button
-          bgColor="greyLighter"
-          textColor="black"
-          onClick={closeDialog}
-        >
+      <Dialog.Footer
+        closeDialog={closeDialog}
+        cancelText={
           <Translate
             zh_hant="完成交易"
             zh_hans="完成交易"
             en="Complete Transaction"
           />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+        }
+        btns={
+          <Dialog.RoundedButton
+            text={
+              <Translate
+                zh_hant="查看交易"
+                zh_hans="查看交易"
+                en="View Tansaction"
+              />
+            }
+            color="green"
+            href={PATHS.ME_WALLET_TRANSACTIONS}
+          />
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={
+              <Translate
+                zh_hant="查看交易"
+                zh_hans="查看交易"
+                en="View Tansaction"
+              />
+            }
+            color="green"
+            href={PATHS.ME_WALLET_TRANSACTIONS}
+          />
+        }
+      />
     </>
   )
 }

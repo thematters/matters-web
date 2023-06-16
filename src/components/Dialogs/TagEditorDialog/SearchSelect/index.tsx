@@ -109,9 +109,9 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
       <Dialog.Header
         title="tagAddEditor"
         closeDialog={closeDialog}
-        closeTextId="cancel"
-        rightButton={
-          <Dialog.Header.RightButton
+        rightBtn={
+          <Dialog.TextButton
+            color="green"
             onClick={onClickSave}
             text={<Translate id="save" />}
             loading={loading}

@@ -113,10 +113,10 @@ const SearchSelectForm = ({
       <Dialog.Header
         title={title}
         closeDialog={closeDialog}
-        closeTextId="close"
-        leftButton={headerLeftButton}
-        rightButton={
-          <Dialog.Header.RightButton
+        leftBtn={headerLeftButton}
+        rightBtn={
+          <Dialog.TextButton
+            color="green"
             onClick={onClickSave}
             // disabled={stagingNodes.length <= 0}
             text={headerRightButtonText || <Translate id="save" />}

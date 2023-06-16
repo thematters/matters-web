@@ -76,8 +76,8 @@ const ArchiveArticleDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
-        <Dialog.Header title="archive" closeDialog={closeDialog} mode="inner" />
+      <Dialog isOpen={show} onDismiss={closeDialog}>
+        <Dialog.Header title="archive" closeDialog={closeDialog} />
 
         <Dialog.Message>
           <p>
@@ -88,25 +88,32 @@ const ArchiveArticleDialog = ({
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="red"
-            onClick={() => {
-              onArchive()
-              closeDialog()
-            }}
-          >
-            <FormattedMessage defaultMessage="Archive" description="" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="greyLighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <FormattedMessage defaultMessage="Cancel" description="" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <FormattedMessage defaultMessage="Archive" description="" />
+              }
+              color="red"
+              onClick={() => {
+                onArchive()
+                closeDialog()
+              }}
+            />
+          }
+          mdUpBtns={
+            <Dialog.TextButton
+              text={
+                <FormattedMessage defaultMessage="Archive" description="" />
+              }
+              color="red"
+              onClick={() => {
+                onArchive()
+                closeDialog()
+              }}
+            />
+          }
+        />
       </Dialog>
     </>
   )

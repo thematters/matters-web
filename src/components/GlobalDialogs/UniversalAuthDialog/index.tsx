@@ -96,12 +96,7 @@ const BaseUniversalAuthDialog = ({
   )
 
   return (
-    <Dialog
-      size="sm"
-      isOpen={show}
-      onDismiss={closeDialog}
-      testId={TEST_ID.DIALOG_AUTH}
-    >
+    <Dialog isOpen={show} onDismiss={closeDialog} testId={TEST_ID.DIALOG_AUTH}>
       {currStep === 'select-login-method' && (
         <DynamicSelectAuthMethodForm
           purpose="dialog"

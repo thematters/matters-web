@@ -58,11 +58,18 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
       <Dialog.Header
         title="setCover"
         closeDialog={onClose}
-        leftButton={
-          onBack ? <Dialog.Header.BackButton onClick={onBack} /> : undefined
+        leftBtn={
+          onBack ? (
+            <Dialog.TextButton
+              color="green"
+              text={<Translate id="back" />}
+              onClick={onBack}
+            />
+          ) : undefined
         }
-        rightButton={
-          <Dialog.Header.RightButton
+        rightBtn={
+          <Dialog.TextButton
+            color="green"
             onClick={onSave}
             text={<Translate id="save" />}
             loading={coverSaving}

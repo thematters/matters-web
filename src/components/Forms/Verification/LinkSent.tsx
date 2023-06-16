@@ -49,15 +49,10 @@ export const VerificationLinkSent = ({
       </Dialog.Message>
 
       {closeDialog && (
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            onClick={closeDialog}
-            bgColor="greyLighter"
-            textColor="black"
-          >
-            <Translate id="understood" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          cancelText={<Translate id="understood" />}
+        />
       )}
     </>
   )

@@ -60,8 +60,6 @@ const SettingsList = ({
       <Dialog.Header
         title={<Translate id="settings" />}
         closeDialog={closeDialog}
-        closeTextId="close"
-        mode="hidden"
       />
 
       <Dialog.Content hasGrow>
@@ -104,29 +102,28 @@ const SettingsList = ({
           </section>
 
           {(confirmButtonText || cancelButtonText) && (
-            <Dialog.Footer>
-              {confirmButtonText && (
-                <Dialog.Footer.Button
-                  bgColor="green"
+            <Dialog.Footer
+              closeDialog={cancelButtonText ? closeDialog : undefined}
+              cancelText={cancelButtonText || undefined}
+              btns={
+                <Dialog.RoundedButton
+                  text={confirmButtonText}
+                  color="green"
                   onClick={onConfirm ? onConfirm : () => forward('confirm')}
                   loading={saving}
                   disabled={disabled}
-                >
-                  {confirmButtonText}
-                </Dialog.Footer.Button>
-              )}
-
-              {cancelButtonText && (
-                <Dialog.Footer.Button
-                  bgColor="greyLighter"
-                  textColor="black"
-                  onClick={closeDialog}
+                />
+              }
+              mdUpBtns={
+                <Dialog.TextButton
+                  text={confirmButtonText}
+                  color="green"
+                  onClick={onConfirm ? onConfirm : () => forward('confirm')}
+                  loading={saving}
                   disabled={disabled}
-                >
-                  {cancelButtonText}
-                </Dialog.Footer.Button>
-              )}
-            </Dialog.Footer>
+                />
+              }
+            />
           )}
         </ul>
       </Dialog.Content>

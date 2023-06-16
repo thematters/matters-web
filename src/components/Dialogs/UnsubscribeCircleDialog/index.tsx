@@ -25,11 +25,10 @@ const BaseUnsubscribeCircleDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={isUnsubscribed ? 'unsubscribed' : 'unsubscribeCircle'}
           closeDialog={closeDialog}
-          mode="inner"
         />
 
         <Dialog.Message>
@@ -55,37 +54,36 @@ const BaseUnsubscribeCircleDialog = ({
           )}
         </Dialog.Message>
 
-        <Dialog.Footer>
-          {!isUnsubscribed && (
-            <Dialog.Footer.Button
-              bgColor="red"
-              loading={loading}
-              onClick={() => unsubscribe()}
-            >
-              <Translate zh_hant="轉身離開" zh_hans="转身离开" />
-            </Dialog.Footer.Button>
-          )}
-
-          {!isUnsubscribed && (
-            <Dialog.Footer.Button
-              bgColor="greyLighter"
-              textColor="black"
-              onClick={closeDialog}
-            >
-              <Translate zh_hant="等等再說" zh_hans="等等再说" />
-            </Dialog.Footer.Button>
-          )}
-
-          {isUnsubscribed && (
-            <Dialog.Footer.Button
-              bgColor="greyLighter"
-              textColor="black"
-              onClick={closeDialog}
-            >
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          cancelText={
+            isUnsubscribed ? (
               <Translate id="close" />
-            </Dialog.Footer.Button>
-          )}
-        </Dialog.Footer>
+            ) : (
+              <Translate zh_hant="等等再說" zh_hans="等等再说" />
+            )
+          }
+          btns={
+            isUnsubscribed ? null : (
+              <Dialog.RoundedButton
+                text={<Translate zh_hant="轉身離開" zh_hans="转身离开" />}
+                color="red"
+                loading={loading}
+                onClick={() => unsubscribe()}
+              />
+            )
+          }
+          mdUpBtns={
+            isUnsubscribed ? null : (
+              <Dialog.TextButton
+                text={<Translate zh_hant="轉身離開" zh_hans="转身离开" />}
+                color="red"
+                loading={loading}
+                onClick={() => unsubscribe()}
+              />
+            )
+          }
+        />
       </Dialog>
     </>
   )

@@ -81,11 +81,24 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
         )}
       </Dialog.Message>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button disabled={!error} onClick={prevStep}>
-          <Translate id="retry" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate id="retry" />}
+            color="green"
+            disabled={!error}
+            onClick={prevStep}
+          />
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={<Translate id="retry" />}
+            color="green"
+            disabled={!error}
+            onClick={prevStep}
+          />
+        }
+      />
     </>
   )
 }

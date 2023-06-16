@@ -140,35 +140,55 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
       </Dialog.Content>
 
       <label>
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            loading={loading}
-            onClick={() => {
-              const element = document.getElementById(fieldId)
-              if (element) {
-                element.click()
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />
               }
-            }}
-          >
-            <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />
-            <VisuallyHidden>
-              <input
-                id={fieldId}
-                type="file"
-                name="file"
-                aria-label={translate({
-                  zh_hant: '上傳檔案',
-                  zh_hans: '上传档案',
-                  en: 'Upload file',
-                  lang,
-                })}
-                accept={acceptTypes}
-                multiple
-                onChange={handleChange}
-              />
-            </VisuallyHidden>
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+              color="green"
+              loading={loading}
+              onClick={() => {
+                const element = document.getElementById(fieldId)
+                if (element) {
+                  element.click()
+                }
+              }}
+            />
+          }
+          mdUpBtns={
+            <Dialog.TextButton
+              text={
+                <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />
+              }
+              color="green"
+              loading={loading}
+              onClick={() => {
+                const element = document.getElementById(fieldId)
+                if (element) {
+                  element.click()
+                }
+              }}
+            />
+          }
+        />
+
+        <VisuallyHidden>
+          <input
+            id={fieldId}
+            type="file"
+            name="file"
+            aria-label={translate({
+              zh_hant: '上傳檔案',
+              zh_hans: '上传档案',
+              en: 'Upload file',
+              lang,
+            })}
+            accept={acceptTypes}
+            multiple
+            onChange={handleChange}
+          />
+        </VisuallyHidden>
       </label>
     </>
   )

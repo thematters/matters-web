@@ -107,7 +107,7 @@ const AddCircleArticleDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         {isSelect && (
           <DynamicSearchSelectForm
             title="addArticles"

@@ -101,7 +101,7 @@ const ReplyButton = ({
   }
 
   if (!viewer.isAuthed) {
-    const smUpProps = {
+    const mdUpProps = {
       onClick: () => {
         window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
         window.dispatchEvent(
@@ -123,7 +123,7 @@ const ReplyButton = ({
             aria-haspopup="dialog"
             inCard={inCard}
             disabled={disabled}
-            {...smUpProps}
+            {...mdUpProps}
           />
         </Media>
       </>

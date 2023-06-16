@@ -59,10 +59,31 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
           en="Article published"
         />
       }
-      footerButtons={
-        <Dialog.Footer.Button onClick={() => router.replace(path.href)}>
-          <Translate zh_hant="查看作品" zh_hans="查看作品" en="View article" />
-        </Dialog.Footer.Button>
+      btns={
+        <Dialog.RoundedButton
+          text={
+            <Translate
+              zh_hant="查看作品"
+              zh_hans="查看作品"
+              en="View article"
+            />
+          }
+          color="green"
+          onClick={() => router.replace(path.href)}
+        />
+      }
+      mdUpBtns={
+        <Dialog.TextButton
+          text={
+            <Translate
+              zh_hant="查看作品"
+              zh_hans="查看作品"
+              en="View article"
+            />
+          }
+          color="green"
+          onClick={() => router.replace(path.href)}
+        />
       }
     >
       {({ openDialog }) => <BasePublishedState openShareDialog={openDialog} />}

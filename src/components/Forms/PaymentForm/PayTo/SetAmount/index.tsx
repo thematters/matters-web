@@ -44,7 +44,7 @@ import {
   WalletBalanceQuery,
 } from '~/gql/graphql'
 
-import CivicLikerButton from '../CivicLikerButton'
+// import CivicLikerButton from '../CivicLikerButton'
 import ReconnectButton from './ReconnectButton'
 import SetAmountBalance from './SetAmountBalance'
 import SetAmountHeader from './SetAmountHeader'
@@ -98,7 +98,7 @@ const SetAmount: React.FC<FormProps> = ({
   const customInputRef: React.RefObject<any> | null = useRef(null)
   const isUSDT = currency === CURRENCY.USDT
   const isHKD = currency === CURRENCY.HKD
-  const isLike = currency === CURRENCY.LIKE
+  // const isLike = currency === CURRENCY.LIKE
 
   // contexts
   const viewer = useContext(ViewerContext)
@@ -361,38 +361,32 @@ const SetAmount: React.FC<FormProps> = ({
     return <Spinner />
   }
 
-  return (
-    <>
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+  // {isLike && recipient.liker.likerId && (
+  //   <CivicLikerButton likerId={recipient.liker.likerId} />
+  // )}
 
-      <Dialog.Footer>
+  const Buttons = () => {
+    return (
+      <>
         {!isUSDT && (
           <>
-            {isLike && recipient.liker.likerId && (
-              <CivicLikerButton likerId={recipient.liker.likerId} />
-            )}
-
             {isBalanceInsufficient && isHKD ? (
-              <Dialog.Footer.Button
+              <Dialog.RoundedButton
+                text={<Translate id="topUp" />}
+                color="green"
                 type="button"
                 onClick={switchToAddCredit}
                 form={formId}
-                bgColor="green"
-                textColor="white"
-              >
-                <Translate id="topUp" />
-              </Dialog.Footer.Button>
+              />
             ) : (
-              <Dialog.Footer.Button
+              <Dialog.RoundedButton
+                text={<Translate id="nextStep" />}
                 type="submit"
+                color="green"
                 form={formId}
                 disabled={!isValid || isSubmitting || isBalanceInsufficient}
-                bgColor="green"
-                textColor="white"
                 loading={isSubmitting}
-              >
-                <Translate id="nextStep" />
-              </Dialog.Footer.Button>
+              />
             )}
           </>
         )}
@@ -402,61 +396,69 @@ const SetAmount: React.FC<FormProps> = ({
             {!isConnectedAddress && <ReconnectButton />}
 
             {isConnectedAddress && isUnsupportedNetwork && (
-              <Dialog.Footer.Button
-                bgColor="green"
-                textColor="white"
+              <Dialog.RoundedButton
+                text={
+                  <>
+                    <Translate
+                      zh_hant="切換到 "
+                      zh_hans="切换到 "
+                      en="Switch to "
+                    />
+                    {targetNetork.name}
+                  </>
+                }
+                color="green"
                 onClick={switchToTargetNetwork}
                 loading={isSwitchingNetwork}
-              >
-                <Translate
-                  zh_hant="切換到 "
-                  zh_hans="切换到 "
-                  en="Switch to "
-                />
-                {targetNetork.name}
-              </Dialog.Footer.Button>
+              />
             )}
 
             {isConnectedAddress &&
               !isUnsupportedNetwork &&
               allowanceUSDT <= 0n && (
                 <>
-                  <Dialog.Footer.Button
-                    bgColor="green"
-                    textColor="white"
+                  <Dialog.RoundedButton
+                    text={
+                      <Translate
+                        zh_hant="首次需確認授權後繼續"
+                        zh_hans="首次需确认授权后继续"
+                        en="Approve to continue"
+                      />
+                    }
+                    color="green"
                     loading={approving || approveConfirming || allowanceLoading}
                     onClick={() => {
                       if (approveWrite) {
                         approveWrite()
                       }
                     }}
-                  >
-                    <Translate
-                      zh_hant="首次需確認授權後繼續"
-                      zh_hans="首次需确认授权后继续"
-                      en="Approve to continue"
-                    />
-                  </Dialog.Footer.Button>
+                  />
                 </>
               )}
 
             {isConnectedAddress &&
               !isUnsupportedNetwork &&
               allowanceUSDT > 0n && (
-                <Dialog.Footer.Button
+                <Dialog.RoundedButton
+                  text={<Translate id="nextStep" />}
+                  color="green"
                   type="submit"
                   form={formId}
                   disabled={!isValid || isSubmitting || isBalanceInsufficient}
-                  bgColor="green"
-                  textColor="white"
                   loading={isSubmitting}
-                >
-                  <Translate id="nextStep" />
-                </Dialog.Footer.Button>
+                />
               )}
           </>
         )}
-      </Dialog.Footer>
+      </>
+    )
+  }
+
+  return (
+    <>
+      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer btns={<Buttons />} mdUpBtns={<Buttons />} />
     </>
   )
 }

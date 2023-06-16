@@ -12,7 +12,7 @@ const ConfirmDialog = ({ removeArticle, children }: ConfirmDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate
@@ -22,27 +22,25 @@ const ConfirmDialog = ({ removeArticle, children }: ConfirmDialogProps) => {
             />
           }
           closeDialog={closeDialog}
-          mode="inner"
         />
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="red"
-            onClick={() => {
-              removeArticle()
-            }}
-          >
-            <Translate id="delete" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="greyLighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="cancel" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={<Translate id="delete" />}
+              color="red"
+              onClick={removeArticle}
+            />
+          }
+          mdUpBtns={
+            <Dialog.TextButton
+              text={<Translate id="delete" />}
+              color="red"
+              onClick={removeArticle}
+            />
+          }
+        />
       </Dialog>
     </>
   )

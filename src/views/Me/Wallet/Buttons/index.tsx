@@ -16,15 +16,15 @@ const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
       <section className={styles.buttons}>
         <AddCreditDialog>
           {({ openDialog }) => (
-            <Dialog.Footer.Button
+            <Dialog.RoundedButton
+              text={<Translate id="topUp" />}
+              color="green"
               onClick={() => {
                 openDialog()
                 analytics.trackEvent('click_button', { type: 'top_up' })
               }}
               aria-haspopup="dialog"
-            >
-              <Translate id="topUp" />
-            </Dialog.Footer.Button>
+            />
           )}
         </AddCreditDialog>
 

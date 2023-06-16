@@ -142,9 +142,9 @@ const CommentForm: React.FC<CommentFormProps> = ({
       <Dialog.Header
         title={title}
         closeDialog={closeDialog}
-        closeTextId="close"
-        rightButton={
-          <Dialog.Header.RightButton
+        rightBtn={
+          <Dialog.TextButton
+            color="green"
             type="submit"
             form={formId}
             disabled={isSubmitting || !isValid}

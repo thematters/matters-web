@@ -162,15 +162,30 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
         </section>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={handleSubmit}
-          disabled={disabled || isSubmitting || !!checkoutError}
-          loading={isSubmitting}
-        >
-          <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={
+              <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
+            }
+            color="green"
+            disabled={disabled || isSubmitting || !!checkoutError}
+            loading={isSubmitting}
+            onClick={handleSubmit}
+          />
+        }
+        mdUpBtns={
+          <Dialog.TextButton
+            text={
+              <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
+            }
+            color="green"
+            disabled={disabled || isSubmitting || !!checkoutError}
+            loading={isSubmitting}
+            onClick={handleSubmit}
+          />
+        }
+      />
     </>
   )
 }

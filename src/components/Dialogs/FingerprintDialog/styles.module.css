@@ -5,6 +5,10 @@
   & > .card + .card {
     margin-top: var(--spacing-base);
   }
+
+  @media (--md-up) {
+    padding: 0 var(--spacing-base);
+  }
 }
 
 .gateways {

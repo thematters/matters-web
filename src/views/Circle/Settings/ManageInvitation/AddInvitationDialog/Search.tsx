@@ -50,9 +50,9 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
       <Dialog.Header
         title="addCircleInvitation"
         closeDialog={closeDialog}
-        closeTextId="cancel"
-        rightButton={
-          <Dialog.Header.RightButton
+        rightBtn={
+          <Dialog.TextButton
+            color="green"
             disabled={disabled}
             onClick={() => save({ nodes: selectedNodes })}
             text={<FormattedMessage defaultMessage="Confirm" description="" />}

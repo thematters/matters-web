@@ -26,11 +26,10 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
     <>
       {children && children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={<Translate zh_hant="追蹤標籤" zh_hans="追踪标签" />}
           closeDialog={closeDialog}
-          closeTextId="cancel"
         />
 
         <Dialog.Content hasGrow>
