@@ -59,6 +59,10 @@
     "defaultMessage": "公开",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
+  "JaLEXz": {
+    "defaultMessage": "进入围炉",
+    "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
   "0Azlrb": {
     "defaultMessage": "管理",
     "description": ""

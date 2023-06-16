@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { Form, SubscribeCircleDialog, useFeatures } from '~/components'
+import { Form, useFeatures } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 import {
   UserProfileUserPrivateQuery,
@@ -68,23 +68,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
 
   return (
     <section className={styles.circleWidget}>
-      <CircleDigest.Rich
-        avatarSize="xl"
-        borderRadius="xtight"
-        borderColor="lineGreyLight"
-        circle={circle}
-        hasFooter
-        hasOwner={false}
-        hasPrice={!isMe}
-        onClickPrice={() => {
-          analytics.trackEvent('click_button', {
-            type: 'subscribe_circle_price',
-            pageType: 'user_profile',
-          })
-        }}
-      />
-
-      {!isMe && <SubscribeCircleDialog circle={circle} />}
+      <CircleDigest.UserProfile circle={circle} />
     </section>
   )
 }

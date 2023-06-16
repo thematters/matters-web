@@ -323,6 +323,10 @@
     "defaultMessage": " commented on your bookmarked article ",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
+  "JaLEXz": {
+    "defaultMessage": "Enter Circle",
+    "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
   "VoOZni": {
     "defaultMessage": " sent a new broadcast on ",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"

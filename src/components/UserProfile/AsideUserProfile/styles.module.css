@@ -113,23 +113,3 @@
     margin-right: var(--spacing-base);
   }
 }
-
-.footer {
-  padding: 0 var(--spacing-base);
-  font-size: var(--font-size-sm);
-  color: var(--color-grey);
-
-  @media (--sm-up) {
-    padding: 0;
-  }
-
-  & > * {
-    display: inline-flex;
-    align-items: center;
-    line-height: 1.5rem;
-
-    & + * {
-      margin-left: var(--spacing-loose);
-    }
-  }
-}
