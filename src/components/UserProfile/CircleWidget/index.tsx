@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
@@ -23,11 +24,23 @@ type CircleWidgetCircle = NonNullable<
 type CircleWidgetProps = {
   circles: CircleWidgetCircle[]
   isMe: boolean
+  hasDescription?: boolean
+  hasFooter?: boolean
 }
 
-const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
+const CircleWidget: React.FC<CircleWidgetProps> = ({
+  circles,
+  isMe,
+  hasDescription = true,
+  hasFooter = true,
+}) => {
   const features = useFeatures()
   const hasCircle = circles && circles.length > 0
+
+  const circleWidgetClasses = classNames({
+    [styles.circleWidget]: true,
+    [styles.inAside]: hasDescription && hasFooter,
+  })
 
   if (!isMe && !hasCircle) {
     return null
@@ -39,7 +52,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
     }
 
     return (
-      <section className={styles.circleWidget}>
+      <section className={circleWidgetClasses}>
         <Form.List spacingX={0}>
           <Form.List.Item
             bold
@@ -68,7 +81,11 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
 
   return (
     <section className={styles.circleWidget}>
-      <CircleDigest.UserProfile circle={circle} />
+      <CircleDigest.UserProfile
+        circle={circle}
+        hasDescription={hasDescription}
+        hasFooter={hasFooter}
+      />
     </section>
   )
 }

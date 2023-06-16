@@ -29,6 +29,7 @@ interface DropdownActionsProps {
     AuthorRssFeedFragment &
     Partial<DropdownActionsUserPrivateFragment>
   isMe: boolean
+  isInAside?: boolean
 }
 
 interface DialogProps {
@@ -72,6 +73,7 @@ const fragments = {
 const BaseDropdownActions = ({
   user,
   isMe,
+  isInAside = false,
 
   hasEditProfile,
   hasBlockUser,
@@ -131,7 +133,7 @@ const BaseDropdownActions = ({
       {({ openDialog, type, ref }) => {
         return (
           <>
-            {isMe && (
+            {isInAside && isMe && (
               <Button
                 textColor="greyDarker"
                 textActiveColor="green"
@@ -146,7 +148,7 @@ const BaseDropdownActions = ({
                 <IconMore32 size="md" />
               </Button>
             )}
-            {!isMe && (
+            {isInAside && !isMe && (
               <Button
                 spacing={['xtight', 'xtight']}
                 textColor="greyDarker"
@@ -165,6 +167,25 @@ const BaseDropdownActions = ({
                 <IconMore32 size="md" />
               </Button>
             )}
+            {!isInAside && (
+              <Button
+                spacing={['xtight', 'xtight']}
+                textColor="greyDarker"
+                textActiveColor="black"
+                borderWidth="md"
+                borderColor="greyDarker"
+                borderActiveColor="black"
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'More Actions',
+                  description: '',
+                })}
+                aria-haspopup={type}
+                onClick={openDialog}
+                ref={ref}
+              >
+                <IconMore32 />
+              </Button>
+            )}
           </>
         )
       }}
@@ -172,7 +193,7 @@ const BaseDropdownActions = ({
   )
 }
 
-const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
+const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
   const controls = {
     hasEditProfile: isMe,
     hasBlockUser: !isMe,
@@ -197,6 +218,7 @@ const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
                     <BaseDropdownActions
                       user={user}
                       isMe={isMe}
+                      isInAside={isInAside}
                       {...controls}
                       openEditProfileDialog={openEditProfileDialog}
                       openBlockUserDialog={openBlockUserDialog}

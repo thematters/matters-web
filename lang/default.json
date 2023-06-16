@@ -699,10 +699,6 @@
     "defaultMessage": "replied to your discussion on",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
-  "b1FfGy": {
-    "defaultMessage": "Content Feed",
-    "description": "src/components/UserProfile/index.tsx"
-  },
   "b3onWZ": {
     "defaultMessage": "Last {days} days",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"

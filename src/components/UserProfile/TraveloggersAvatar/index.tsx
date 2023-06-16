@@ -6,11 +6,13 @@ import LogbookDialog from './LogbookDialog'
 type TraveloggersAvatarProps = {
   user: NonNullable<UserProfileUserPublicQuery['user']>
   isMe: boolean
+  size?: 'xxxlm' | 'xxxxl'
 }
 
 const TraveloggersAvatar: React.FC<TraveloggersAvatarProps> = ({
   user,
   isMe,
+  size = 'xxxxl',
 }) => {
   return (
     <Tooltip
@@ -34,7 +36,7 @@ const TraveloggersAvatar: React.FC<TraveloggersAvatarProps> = ({
       >
         {({ openDialog }) => (
           <button type="button" onClick={openDialog} aria-haspopup="dialog">
-            <Avatar size="xxxxl" user={user} inProfile />
+            <Avatar size={size} user={user} inProfile />
           </button>
         )}
       </LogbookDialog>
