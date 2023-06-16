@@ -11,10 +11,14 @@ import styles from './styles.module.css'
 
 export type CircleDigestUserProfileProps = {
   circle: DigestUserProfileCircleFragment
+  hasDescription?: boolean
+  hasFooter?: boolean
 }
 
 const UserProfile = ({
   circle,
+  hasDescription = true,
+  hasFooter = true,
   ...cardProps
 }: CircleDigestUserProfileProps) => {
   const { displayName, description } = circle
@@ -37,18 +41,22 @@ const UserProfile = ({
         </LinkWrapper>
       </header>
 
-      {description && <p className={styles.description}>{description}</p>}
+      {hasDescription && description && (
+        <p className={styles.description}>{description}</p>
+      )}
 
-      <section className={styles.footer}>
-        <LinkWrapper {...path}>
-          <Button textColor="greyDarker" textActiveColor="green">
-            <FormattedMessage
-              defaultMessage="Enter Circle"
-              description="src/components/CircleDigest/UserProfile/index.tsx"
-            />
-          </Button>
-        </LinkWrapper>
-      </section>
+      {hasFooter && (
+        <section className={styles.footer}>
+          <LinkWrapper {...path}>
+            <Button textColor="greyDarker" textActiveColor="green">
+              <FormattedMessage
+                defaultMessage="Enter Circle"
+                description="src/components/CircleDigest/UserProfile/index.tsx"
+              />
+            </Button>
+          </LinkWrapper>
+        </section>
+      )}
     </section>
   )
 }

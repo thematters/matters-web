@@ -19,6 +19,7 @@ export type AvatarSize =
   | 'xl'
   | 'xxl'
   | 'xxxl'
+  | 'xxxlm'
   | 'xxxxl'
 
 export type AvatarLogbook = PartialDeep<AvatarUserLogbookFragment>

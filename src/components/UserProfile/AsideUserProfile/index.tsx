@@ -289,7 +289,7 @@ export const AsideUserProfile = () => {
 
             {!isMe && <FollowUserButton user={user} size="xl" />}
 
-            <DropdownActions user={user} isMe={isMe} />
+            <DropdownActions user={user} isMe={isMe} isInAside />
           </section>
         </section>
 

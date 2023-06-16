@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { TEST_ID } from '~/common/enums'
@@ -12,22 +12,18 @@ import {
   Error,
   Expandable,
   FollowUserButton,
-  IconRss32,
   Layout,
   Media,
-  RssFeedDialog,
   Spinner,
   Throw404,
+  Translate,
   // Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
 } from '~/components'
 import ShareButton from '~/components/Layout/Header/ShareButton'
-import {
-  AuthorRssFeedFragment,
-  UserProfileUserPublicQuery,
-} from '~/gql/graphql'
+import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 import {
   ArchitectBadge,
@@ -38,40 +34,16 @@ import {
 } from './Badges'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
+import { EditProfileDialog } from './DropdownActions/EditProfileDialog'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import styles from './styles.module.css'
 import TraveloggersAvatar from './TraveloggersAvatar'
 
-interface FingerprintButtonProps {
-  user: AuthorRssFeedFragment
-}
-
 const DynamicWalletLabel = dynamic(() => import('./WalletLabel'), {
   ssr: false,
 })
-
-const RssFeedButton = ({ user }: FingerprintButtonProps) => {
-  const intl = useIntl()
-  return (
-    <RssFeedDialog user={user}>
-      {({ openDialog }) => (
-        <Button
-          onClick={openDialog}
-          spacing={['xxtight', 'xtight']}
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Content Feed',
-            description: 'src/components/UserProfile/index.tsx',
-          })}
-          aria-haspopup="dialog"
-        >
-          <IconRss32 color="green" size="lg" />
-        </Button>
-      )}
-    </RssFeedDialog>
-  )
-}
 
 export const UserProfile = () => {
   const { getQuery } = useRoute()
@@ -231,18 +203,34 @@ export const UserProfile = () => {
           <header className={styles.header}>
             <section className={styles.avatar}>
               {hasTraveloggersBadge ? (
-                <TraveloggersAvatar user={user} isMe={isMe} />
+                <TraveloggersAvatar user={user} isMe={isMe} size="xxxlm" />
               ) : (
-                <Avatar size="xxxl" user={user} inProfile />
+                <Avatar size="xxxlm" user={user} inProfile />
               )}
             </section>
 
             <section className={styles.right}>
+              {isMe && (
+                <EditProfileDialog user={user}>
+                  {({ openDialog: openEditProfileDialog }) => (
+                    <Button
+                      borderColor="greyDarker"
+                      borderActiveColor="green"
+                      borderWidth="md"
+                      textColor="greyDarker"
+                      textActiveColor="green"
+                      onClick={openEditProfileDialog}
+                      size={['5.3125rem', '2rem']}
+                    >
+                      <Translate id="edit" />
+                    </Button>
+                  )}
+                </EditProfileDialog>
+              )}
+
               {!isMe && <FollowUserButton user={user} size="lg" />}
 
-              {user?.articles.totalCount > 0 && user?.info.ipnsKey && (
-                <RssFeedButton user={user} />
-              )}
+              <DropdownActions user={user} isMe={isMe} />
             </section>
           </header>
 
@@ -254,11 +242,16 @@ export const UserProfile = () => {
               >
                 {user.displayName}
               </h1>
-              {hasTraveloggersBadge && <TraveloggersBadge />}
-              {hasSeedBadge && <SeedBadge />}
-              {hasGoldenMotorBadge && <GoldenMotorBadge />}
-              {hasArchitectBadge && <ArchitectBadge />}
-              {isCivicLiker && <CivicLikerBadge />}
+              <span className={styles.badges}>
+                {hasTraveloggersBadge && <TraveloggersBadge />}
+                {hasSeedBadge && <SeedBadge />}
+                {hasGoldenMotorBadge && <GoldenMotorBadge />}
+                {hasArchitectBadge && <ArchitectBadge />}
+                {isCivicLiker && <CivicLikerBadge />}
+              </span>
+              {user?.info.ethAddress && (
+                <DynamicWalletLabel user={user} isMe={isMe} />
+              )}
             </section>
 
             <section className={styles.username}>
@@ -268,29 +261,9 @@ export const UserProfile = () => {
               >
                 @{user.userName}
               </span>
-              {!isMe && <FollowUserButton.State user={user} />}
             </section>
-
-            {user?.info.ethAddress && (
-              <DynamicWalletLabel user={user} isMe={isMe} />
-            )}
-
-            <Expandable
-              content={user.info.description}
-              color="greyDarker"
-              size="md"
-              spacingTop="base"
-            >
-              <p
-                className={styles.description}
-                data-test-id={TEST_ID.USER_PROFILE_BIO}
-              >
-                {user.info.description}
-              </p>
-            </Expandable>
           </section>
-
-          <footer className={styles.footer}>
+          <section className={styles.follow}>
             <FollowersDialog user={user}>
               {({ openDialog: openFollowersDialog }) => (
                 <button type="button" onClick={openFollowersDialog}>
@@ -300,6 +273,7 @@ export const UserProfile = () => {
                   >
                     {numAbbr(user.followers.totalCount)}
                   </span>
+                  &nbsp;
                   <FormattedMessage defaultMessage="Followers" description="" />
                 </button>
               )}
@@ -311,6 +285,7 @@ export const UserProfile = () => {
                   <span className={styles.count}>
                     {numAbbr(user.following.users.totalCount)}
                   </span>
+                  &nbsp;
                   <FormattedMessage
                     defaultMessage="Following"
                     description="src/components/UserProfile/index.tsx"
@@ -318,9 +293,30 @@ export const UserProfile = () => {
                 </button>
               )}
             </FollowingDialog>
-          </footer>
+          </section>
 
-          <CircleWidget circles={circles} isMe={isMe} />
+          <section className={styles.footer}>
+            <Expandable
+              content={user.info.description}
+              color="greyDarker"
+              size="md"
+              spacingTop="tight"
+            >
+              <p
+                className={styles.description}
+                data-test-id={TEST_ID.USER_PROFILE_BIO}
+              >
+                {user.info.description}
+              </p>
+            </Expandable>
+
+            <CircleWidget
+              circles={circles}
+              isMe={isMe}
+              hasDescription={false}
+              hasFooter={false}
+            />
+          </section>
         </Media>
       </section>
     </>
