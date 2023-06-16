@@ -383,6 +383,10 @@
     "defaultMessage": "Subscriptions",
     "description": ""
   },
+  "JaLEXz": {
+    "defaultMessage": "Enter Circle",
+    "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
   "JpS59y": {
     "defaultMessage": "Accepted",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"

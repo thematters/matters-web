@@ -28,7 +28,7 @@ import {
   SeedBadge,
   TraveloggersBadge,
 } from '../Badges'
-// import CircleWidget from '../CircleWidget'
+import CircleWidget from '../CircleWidget'
 import DropdownActions from '../DropdownActions'
 import { EditProfileDialog } from '../DropdownActions/EditProfileDialog'
 import { FollowersDialog } from '../FollowersDialog'
@@ -105,7 +105,7 @@ export const AsideUserProfile = () => {
   }
 
   const badges = user.info.badges || []
-  // const circles = user.ownCircles || []
+  const circles = user.ownCircles || []
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
@@ -293,9 +293,9 @@ export const AsideUserProfile = () => {
           </section>
         </section>
 
-        <footer className={styles.footer}></footer>
-
-        {/* <CircleWidget circles={circles} isMe={isMe} /> */}
+        <footer className={styles.footer}>
+          <CircleWidget circles={circles} isMe={isMe} />
+        </footer>
       </section>
     </>
   )

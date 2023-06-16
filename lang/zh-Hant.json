@@ -15,6 +15,10 @@
     "defaultMessage": "已綁定錢包",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
+  "JaLEXz": {
+    "defaultMessage": "進入圍爐",
+    "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
   "nD00sh": {
     "defaultMessage": "編輯個人信息",
     "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
