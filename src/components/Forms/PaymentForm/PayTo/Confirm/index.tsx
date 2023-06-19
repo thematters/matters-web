@@ -210,6 +210,8 @@ const Confirm: React.FC<FormProps> = ({
 
   return (
     <>
+      <Dialog.Header title="donation" />
+
       <Dialog.Content hasGrow>
         <section>
           <PaymentInfo

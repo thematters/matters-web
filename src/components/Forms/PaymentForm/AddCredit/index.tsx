@@ -279,8 +279,25 @@ const BaseAddCredit: React.FC<FormProps> = ({
     )
   }
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      text={<Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />}
+      color="green"
+      type="submit"
+      form={formId}
+      disabled={disabled || !isValid || isSubmitting || !!checkoutError}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
+      <Dialog.Header
+        title="topUp"
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
+
       <Dialog.Content hasGrow>
         <section>
           <ConfirmTable>
@@ -302,30 +319,15 @@ const BaseAddCredit: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        closeDialog={closeDialog}
-        btns={
-          <Dialog.RoundedButton
-            text={
-              <Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />
-            }
-            color="green"
-            type="submit"
-            form={formId}
-            disabled={disabled || !isValid || isSubmitting || !!checkoutError}
-            loading={isSubmitting}
-          />
-        }
         mdUpBtns={
-          <Dialog.TextButton
-            text={
-              <Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />
-            }
-            color="green"
-            type="submit"
-            form={formId}
-            disabled={disabled || !isValid || isSubmitting || !!checkoutError}
-            loading={isSubmitting}
-          />
+          <>
+            <Dialog.TextButton
+              text="cancel"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
         }
       />
     </>

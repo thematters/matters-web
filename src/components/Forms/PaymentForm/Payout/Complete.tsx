@@ -8,6 +8,8 @@ interface Props {
 const Complete: React.FC<Props> = ({ closeDialog }) => {
   return (
     <>
+      <Dialog.Header title="paymentPayoutComplete" />
+
       <Dialog.Message spacing="md">
         <p>
           <Translate

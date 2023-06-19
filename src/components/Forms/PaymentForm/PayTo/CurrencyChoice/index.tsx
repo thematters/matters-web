@@ -35,6 +35,7 @@ interface FormProps {
   recipient: UserDonationRecipientFragment
   switchToSetAmount: (c: CURRENCY) => void
   switchToWalletSelect: () => void
+  closeDialog: () => any
 }
 
 const CurrencyChoice: React.FC<FormProps> = ({
@@ -42,6 +43,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
   recipient,
   switchToSetAmount,
   switchToWalletSelect,
+  closeDialog,
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -157,7 +159,19 @@ const CurrencyChoice: React.FC<FormProps> = ({
 
   return (
     <>
+      <Dialog.Header closeDialog={closeDialog} title="donation" />
+
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        mdUpBtns={
+          <Dialog.TextButton
+            text="cancel"
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
+      />
     </>
   )
 }

@@ -40,6 +40,7 @@ interface FormProps {
   submitCallback: () => void
   switchToResetPassword: () => void
   closeDialog: () => void
+  back?: () => void
 }
 
 interface FormValues {
@@ -53,6 +54,7 @@ const BaseConfirm: React.FC<FormProps> = ({
   submitCallback,
   switchToResetPassword,
   closeDialog,
+  back,
 }: FormProps) => {
   const formId = 'payout-confirm-form'
 
@@ -129,6 +131,15 @@ const BaseConfirm: React.FC<FormProps> = ({
       <Dialog.Header
         title="paymentPayout"
         closeDialog={closeDialog}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<Translate id="back" />}
+              color="green"
+              onClick={back}
+            />
+          ) : undefined
+        }
         rightBtn={<SubmitButton />}
       />
 
@@ -256,11 +267,7 @@ const BaseConfirm: React.FC<FormProps> = ({
       <Dialog.Footer
         btns={
           <Dialog.RoundedButton
-            text={
-              <>
-                <Translate id="forgetPassword" />？
-              </>
-            }
+            text={<Translate id="forgetPassword" />}
             color="greyDarker"
             onClick={switchToResetPassword}
           />
@@ -268,10 +275,17 @@ const BaseConfirm: React.FC<FormProps> = ({
         mdUpBtns={
           <>
             <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            <Dialog.TextButton
               text={<Translate id="forgetPassword" />}
               color="greyDarker"
               onClick={switchToResetPassword}
             />
+
             <SubmitButton />
           </>
         }

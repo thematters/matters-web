@@ -104,7 +104,6 @@ const UniversalAuth = () => {
         />
       )}
       {currStep === 'wallet-connect' && (
-        // <ReCaptchaProvider>
         <DynamicWalletAuthFormConnect
           purpose="page"
           submitCallback={(type?: AuthResultType) => {
@@ -114,7 +113,6 @@ const UniversalAuth = () => {
           }}
           back={() => forward('wallet-select')}
         />
-        // </ReCaptchaProvider>
       )}
 
       {/* Email */}

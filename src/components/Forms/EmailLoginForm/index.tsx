@@ -44,7 +44,7 @@ interface FormProps {
   submitCallback?: () => void
   gotoResetPassword?: () => void
   gotoEmailSignUp?: () => void
-  closeDialog?: () => void
+  closeDialog: () => void
   back?: () => void
 }
 
@@ -218,7 +218,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     </section>
   )
 
-  const SubmitButton = (
+  const SubmitButton = () => (
     <Dialog.TextButton
       color="green"
       type="submit"
@@ -236,7 +236,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="login" />
-              {SubmitButton}
+              <SubmitButton />
             </>
           }
         />
@@ -252,24 +252,36 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="login"
-          leftBtn={
-            back ? (
-              <Dialog.TextButton
-                color="green"
-                text={<Translate id="back" />}
-                onClick={back}
-              />
-            ) : null
-          }
-          closeDialog={closeDialog}
-          rightBtn={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="login"
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              color="green"
+              text={<Translate id="back" />}
+              onClick={back}
+            />
+          ) : null
+        }
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        mdUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

@@ -20,15 +20,17 @@ interface DonationDialogProps {
   callback?: () => any
   callbackText?: React.ReactNode
   closeDialog: () => void
+  back?: () => void
 }
 
 const PaymentResetPasswordForm = ({
   callback,
   callbackText,
   closeDialog,
+  back: backToPrevDialog,
 }: DonationDialogProps) => {
   const viewer = useContext(ViewerContext)
-  const { currStep, forward } = useStep<Step>('resetPasswordRequest')
+  const { currStep, forward, back } = useStep<Step>('resetPasswordRequest')
 
   const baseResetPasswordData = { email: viewer.info.email, codeId: '' }
   const [resetPasswordData, setResetPasswordData] = useState<ResetPasswordData>(
@@ -50,6 +52,8 @@ const PaymentResetPasswordForm = ({
         <Request
           defaultEmail={resetPasswordData.email}
           submitCallback={resetPasswordRequestCallback}
+          closeDialog={closeDialog}
+          back={backToPrevDialog}
         />
       )}
 
@@ -57,6 +61,8 @@ const PaymentResetPasswordForm = ({
         <Confirm
           codeId={resetPasswordData.codeId}
           submitCallback={() => forward('resetPasswordComplete')}
+          closeDialog={closeDialog}
+          back={back}
         />
       )}
 

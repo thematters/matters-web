@@ -4,6 +4,8 @@ import { Dialog, Translate } from '~/components'
 const Complete: React.FC = () => {
   return (
     <>
+      <Dialog.Header title="setupLikeCoin" />
+
       <Dialog.Message spacing="md">
         <p>
           <Translate

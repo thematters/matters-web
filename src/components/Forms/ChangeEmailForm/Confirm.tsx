@@ -190,13 +190,11 @@ const Confirm: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="changeEmail"
-          closeDialog={closeDialog}
-          rightBtn={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="changeEmail"
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
     </>

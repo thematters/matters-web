@@ -13,6 +13,8 @@ const Complete: React.FC<CompleteProps> = ({
 }) => {
   return (
     <>
+      <Dialog.Header title="resetPaymentPassword" />
+
       <Dialog.Message spacing="md">
         <h3>
           <Translate id="successResetPaymentPassword" />
@@ -20,8 +22,8 @@ const Complete: React.FC<CompleteProps> = ({
       </Dialog.Message>
 
       <Dialog.Footer
-        closeDialog={callback ? closeDialog : undefined}
-        cancelText={callback ? <Translate id="close" /> : undefined}
+        closeDialog={callback ? undefined : closeDialog}
+        cancelText={callback ? undefined : 'close'}
         btns={
           callback ? (
             <Dialog.RoundedButton

@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, Translate } from '~/components'
+import { Spinner, Translate } from '~/components'
 
 import Complete from './Complete'
 import { BaseSubscribeCircleDialogProps, Step } from './types'
@@ -41,37 +41,6 @@ const SubscribeCircleDialogContent = ({
 
   return (
     <>
-      <Dialog.Header
-        leftBtn={
-          prevStep ? (
-            <Dialog.TextButton
-              color="green"
-              text={<Translate id="back" />}
-              onClick={back}
-            />
-          ) : (
-            <span />
-          )
-        }
-        rightBtn={
-          <Dialog.TextButton
-            color="green"
-            text={<Translate id="close" />}
-            onClick={closeDialog}
-          />
-        }
-        title={
-          isSetPaymentPassword
-            ? 'paymentPassword'
-            : isComplete
-            ? 'successSubscribeCircle'
-            : isResetPassword
-            ? 'resetPaymentPassword'
-            : 'subscribeCircle'
-        }
-        closeDialog={closeDialog}
-      />
-
       {isSetPaymentPassword && (
         <DynamicPaymentSetPasswordForm
           submitCallback={() => forward('subscribeCircle')}
@@ -83,6 +52,7 @@ const SubscribeCircleDialogContent = ({
           circle={circle}
           submitCallback={() => forward('complete')}
           switchToResetPassword={() => forward('resetPassword')}
+          closeDialog={closeDialog}
         />
       )}
 
@@ -91,6 +61,7 @@ const SubscribeCircleDialogContent = ({
           callback={() => forward('subscribeCircle')}
           callbackText={<Translate zh_hant="回到訂閱" zh_hans="回到订阅" />}
           closeDialog={closeDialog}
+          back={() => forward('subscribeCircle')}
         />
       )}
 

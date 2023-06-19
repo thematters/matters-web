@@ -57,6 +57,8 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
 
   return (
     <>
+      <Dialog.Header title="setupLikeCoin" />
+
       <Dialog.Message type={error ? 'error' : undefined} spacing="md">
         {error ? (
           <h3>

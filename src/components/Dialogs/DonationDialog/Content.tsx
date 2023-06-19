@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Dialog, Spinner, Translate, ViewerContext } from '~/components'
+import { Spinner, Translate, ViewerContext } from '~/components'
 import { PayToMutation } from '~/gql/graphql'
 
 import { BaseDonationDialogProps, Step } from './types'
@@ -135,38 +135,6 @@ const DonationDialogContent = ({
 
   return (
     <>
-      {!isProcessing && !isWalletSelect && (
-        <Dialog.Header
-          closeDialog={closeDialog}
-          leftBtn={
-            isAddCredit ? (
-              <Dialog.TextButton
-                color="green"
-                text={<Translate id="back" />}
-                onClick={back}
-              />
-            ) : (
-              <Dialog.TextButton
-                color="green"
-                text={<Translate id="close" />}
-                onClick={closeDialog}
-              />
-            )
-          }
-          title={
-            isAddCredit
-              ? 'topUp'
-              : isSetPaymentPassword
-              ? 'paymentPassword'
-              : isResetPassword
-              ? 'resetPaymentPassword'
-              : isComplete
-              ? 'successDonation'
-              : 'donation'
-          }
-        />
-      )}
-
       {isCurrencyChoice && (
         <DynamicPayToFormCurrencyChoice
           recipient={recipient}
@@ -178,6 +146,7 @@ const DonationDialogContent = ({
           switchToWalletSelect={() => {
             forward('walletSelect')
           }}
+          closeDialog={closeDialog}
         />
       )}
 
@@ -205,6 +174,9 @@ const DonationDialogContent = ({
           }}
           switchToAddCredit={() => {
             forward('addCredit')
+          }}
+          back={() => {
+            forward('currencyChoice')
           }}
           setTabUrl={setTabUrl}
           setTx={setTx}
@@ -285,6 +257,7 @@ const DonationDialogContent = ({
             />
           }
           closeDialog={closeDialog}
+          back={() => forward('currencyChoice')}
         />
       )}
     </>

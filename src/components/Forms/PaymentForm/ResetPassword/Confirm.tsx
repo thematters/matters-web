@@ -23,6 +23,8 @@ import { ResetPaymentPasswordMutation } from '~/gql/graphql'
 interface FormProps {
   codeId: string
   submitCallback: () => void
+  closeDialog?: () => any
+  back?: () => void
 }
 
 interface FormValues {
@@ -36,7 +38,12 @@ export const RESET_PAYMENT_PASSWORD = gql`
   }
 `
 
-const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
+const Confirm: React.FC<FormProps> = ({
+  codeId,
+  submitCallback,
+  closeDialog,
+  back,
+}) => {
   const [reset] = useMutation<ResetPaymentPasswordMutation>(
     RESET_PAYMENT_PASSWORD,
     undefined,
@@ -155,7 +162,35 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
     )
   }
 
-  return <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+  return (
+    <>
+      <Dialog.Header
+        title="resetPaymentPassword"
+        closeDialog={closeDialog}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<Translate id="back" />}
+              color="green"
+              onClick={back}
+            />
+          ) : undefined
+        }
+      />
+
+      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        mdUpBtns={
+          <Dialog.TextButton
+            text="cancel"
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
+      />
+    </>
+  )
 }
 
 export default Confirm

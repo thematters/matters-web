@@ -11,11 +11,13 @@ import styles from './styles.module.css'
 interface ConnectWalletProps {
   switchToWalletSelect: () => void
   switchToLinkENS: () => void
+  closeDialog: () => void
 }
 
 const ConnectWallet = ({
   switchToWalletSelect,
   switchToLinkENS,
+  closeDialog,
 }: ConnectWalletProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -38,6 +40,8 @@ const ConnectWallet = ({
 
   return (
     <>
+      <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
+
       <Dialog.Content>
         <section className={styles.content}>
           <LinkENSIntro ensName={ensName} />

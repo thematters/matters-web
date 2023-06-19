@@ -32,6 +32,7 @@ interface FormProps {
   submitCallback: () => void
   switchToCardPayment: () => void
   switchToResetPassword: () => void
+  closeDialog: () => void
 }
 
 interface FormValues {
@@ -44,6 +45,7 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   switchToCardPayment,
   switchToResetPassword,
+  closeDialog,
 }) => {
   const formId = 'subscirbe-circle-form'
 
@@ -121,6 +123,8 @@ const Confirm: React.FC<FormProps> = ({
 
   return (
     <>
+      <Dialog.Header closeDialog={closeDialog} title="subscribeCircle" />
+
       <Dialog.Content hasGrow>
         <section>
           <Head circle={circle} />
@@ -157,11 +161,18 @@ const Confirm: React.FC<FormProps> = ({
           />
         }
         mdUpBtns={
-          <Dialog.TextButton
-            text={<Translate id="forgetPassword" />}
-            color="greyDarker"
-            onClick={switchToResetPassword}
-          />
+          <>
+            <Dialog.TextButton
+              color="greyDarker"
+              text="cancel"
+              onClick={closeDialog}
+            />
+            <Dialog.TextButton
+              text={<Translate id="forgetPassword" />}
+              color="greyDarker"
+              onClick={switchToResetPassword}
+            />
+          </>
         }
       />
     </>

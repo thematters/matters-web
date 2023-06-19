@@ -9,13 +9,13 @@ import {
   Translate,
 } from '~/components'
 
-type TextButtonProps = {
+export type DialogTextButtonProps = {
   text: string | React.ReactNode
   color: 'greyDarker' | 'green' | 'red'
   loading?: boolean
 } & ButtonProps
 
-export const TextButton: React.FC<TextButtonProps> = ({
+export const TextButton: React.FC<DialogTextButtonProps> = ({
   text,
   color,
   loading,
@@ -54,7 +54,7 @@ export const TextButton: React.FC<TextButtonProps> = ({
   )
 }
 
-type RoundedButtonProps = {
+export type DialogRoundedButtonProps = {
   text: string | React.ReactNode
   color: 'greyDarker' | 'green' | 'red'
   icon?: React.ReactNode
@@ -62,7 +62,7 @@ type RoundedButtonProps = {
 } & ButtonProps
 
 export const RoundedButton: React.FC<
-  React.PropsWithChildren<RoundedButtonProps>
+  React.PropsWithChildren<DialogRoundedButtonProps>
 > = forwardRef(
   ({ text, color, loading, icon, disabled, ...restProps }, ref) => {
     let buttonProps: ButtonProps = restProps

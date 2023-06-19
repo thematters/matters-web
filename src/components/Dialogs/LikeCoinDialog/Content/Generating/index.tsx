@@ -40,6 +40,8 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
 
   return (
     <>
+      <Dialog.Header title="setupLikeCoin" />
+
       <Dialog.Message type={error ? 'error' : undefined} spacing="md">
         {error ? (
           <h3>

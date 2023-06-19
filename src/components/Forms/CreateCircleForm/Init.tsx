@@ -243,13 +243,11 @@ const Init: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="circleCreation"
-          closeDialog={closeDialog}
-          rightBtn={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="circleCreation"
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
     </>

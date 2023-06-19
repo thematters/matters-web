@@ -292,36 +292,41 @@ const Select: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          leftBtn={
-            back ? (
-              <Dialog.TextButton
-                color="green"
-                text={<Translate id="back" />}
-                onClick={onBack}
-              />
-            ) : null
-          }
-          title={
-            isConnect ? (
-              <FormattedMessage
-                defaultMessage="Connect Wallet"
-                description=""
-              />
-            ) : (
-              <FormattedMessage defaultMessage="Enter" description="" />
-            )
-          }
-          closeDialog={closeDialog}
-        />
-      )}
+      <Dialog.Header
+        closeDialog={closeDialog}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              color="green"
+              text={<Translate id="back" />}
+              onClick={onBack}
+            />
+          ) : null
+        }
+        title={
+          isConnect ? (
+            <FormattedMessage defaultMessage="Connect Wallet" description="" />
+          ) : (
+            <FormattedMessage defaultMessage="Enter" description="" />
+          )
+        }
+      />
 
       <Dialog.Content hasGrow>
         <Intro />
 
         {InnerForm}
       </Dialog.Content>
+
+      <Dialog.Footer
+        mdUpBtns={
+          <Dialog.TextButton
+            text={back ? 'back' : 'cancel'}
+            color="greyDarker"
+            onClick={onBack || closeDialog}
+          />
+        }
+      />
     </>
   )
 }

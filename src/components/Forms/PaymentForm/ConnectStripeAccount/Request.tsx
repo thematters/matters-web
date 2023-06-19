@@ -15,6 +15,7 @@ import { ConnectStripeAccountMutation } from '~/gql/graphql'
 import SelectCountry from './SelectCountry'
 
 interface Props {
+  back?: () => void
   nextStep: () => void
   closeDialog: () => void
 }
@@ -27,7 +28,7 @@ const CONNECT_STRIPE_ACCOUNT = gql`
   }
 `
 
-const Request: React.FC<Props> = ({ nextStep, closeDialog }) => {
+const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
   const { lang } = useContext(LanguageContext)
   const [country, setCountry] = useState<PAYOUT_COUNTRY>(
     PAYOUT_COUNTRY.HongKong
@@ -57,30 +58,36 @@ const Request: React.FC<Props> = ({ nextStep, closeDialog }) => {
 
   return (
     <>
+      <Dialog.Header
+        title="connectStripeAccount"
+        closeDialog={closeDialog}
+        leftBtn={<Dialog.TextButton text="back" color="green" onClick={back} />}
+      />
+
       <Dialog.Content hasGrow>
         <SelectCountry country={country} onChange={setCountry} />
         <Spacer size="xxloose" />
       </Dialog.Content>
 
       <Dialog.Footer
-        closeDialog={closeDialog}
-        btns={
-          <Dialog.RoundedButton
-            text={<Translate id="nextStep" />}
-            color="green"
-            onClick={request}
-            disabled={loading}
-            loading={loading}
-          />
-        }
         mdUpBtns={
-          <Dialog.TextButton
-            text={<Translate id="nextStep" />}
-            color="green"
-            onClick={request}
-            disabled={loading}
-            loading={loading}
-          />
+          <>
+            {back && (
+              <Dialog.TextButton
+                text="back"
+                color="greyDarker"
+                onClick={back}
+              />
+            )}
+
+            <Dialog.TextButton
+              text={<Translate id="nextStep" />}
+              color="green"
+              onClick={request}
+              disabled={loading}
+              loading={loading}
+            />
+          </>
         }
       />
     </>

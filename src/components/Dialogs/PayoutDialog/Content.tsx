@@ -44,34 +44,13 @@ const PayoutDialogContent = ({
   const isConfirm = currStep === 'confirm'
   const isResetPassword = currStep === 'resetPassword'
 
+  console.log({ prevStep })
+
   return (
     <>
-      {/* <Dialog.Header
-        title={
-          isConnectStripeAccount
-            ? 'connectStripeAccount'
-            : isResetPassword
-            ? 'resetPaymentPassword'
-            : isComplete
-            ? 'paymentPayoutComplete'
-            : 'paymentPayout'
-        }
-        closeDialog={closeDialog}
-        leftBtn={
-          prevStep ? (
-            <Dialog.TextButton
-              text={<Translate id="back" />}
-              color="green"
-              onClick={back}
-            />
-          ) : (
-            <span />
-          )
-        }
-      /> */}
-
       {isConnectStripeAccount && (
         <DynamicConnectStripeAccountForm
+          back={prevStep ? back : undefined}
           nextStep={() => forward('confirm')}
           closeDialog={closeDialog}
         />
@@ -79,6 +58,7 @@ const PayoutDialogContent = ({
 
       {isConfirm && (
         <DynamicPayoutFormConfirm
+          back={prevStep ? back : undefined}
           currency={CURRENCY.HKD}
           submitCallback={() => forward('complete')}
           switchToResetPassword={() => forward('resetPassword')}
@@ -93,6 +73,7 @@ const PayoutDialogContent = ({
           callback={() => forward('confirm')}
           callbackText={<Translate zh_hant="繼續提現" zh_hans="继续提现" />}
           closeDialog={closeDialog}
+          back={back}
         />
       )}
     </>

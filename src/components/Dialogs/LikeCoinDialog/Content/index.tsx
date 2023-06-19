@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, Translate, useStep } from '~/components'
+import { useStep } from '~/components'
 
 import Binding from './Binding'
 import Complete from './Complete'
@@ -34,18 +34,6 @@ const LikeCoinDialogContent: React.FC<Props> = ({
 
   return (
     <>
-      <Dialog.Header
-        title="setupLikeCoin"
-        closeDialog={closeDialog}
-        cancelText={
-          currStep === 'complete' ? (
-            <Translate id="close" />
-          ) : (
-            <Translate id="cancel" />
-          )
-        }
-      />
-
       {currStep === 'select' && (
         <Select
           startGenerate={() => forward('generating')}
@@ -55,6 +43,7 @@ const LikeCoinDialogContent: React.FC<Props> = ({
               setBindingWindowRef(windowRef)
             }
           }}
+          closeDialog={closeDialog}
         />
       )}
 

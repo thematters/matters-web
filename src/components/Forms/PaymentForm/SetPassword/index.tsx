@@ -165,6 +165,8 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
 
   return (
     <>
+      <Dialog.Header title="paymentPassword" closeDialog={closeDialog} />
+
       <Dialog.Content hasGrow>
         <section className={styles.reason}>
           {isInPassword && (
@@ -197,7 +199,15 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
         {InnerForm}
       </Dialog.Content>
 
-      <Dialog.Footer closeDialog={closeDialog} />
+      <Dialog.Footer
+        mdUpBtns={
+          <Dialog.TextButton
+            text="cancel"
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
+      />
     </>
   )
 }

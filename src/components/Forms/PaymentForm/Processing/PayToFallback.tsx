@@ -10,11 +10,7 @@ interface Props {
 const PayToFallback: React.FC<Props> = ({ closeDialog }) => {
   return (
     <>
-      <Dialog.Header
-        leftBtn={<span />}
-        rightBtn={<span />}
-        title={'failureDonation'}
-      />
+      <Dialog.Header title={'failureDonation'} />
       <Dialog.Content hasGrow>
         <section className={styles.fallbackContent}>
           <p>

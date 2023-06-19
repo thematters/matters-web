@@ -9,6 +9,8 @@ interface CompleteProps {
 const Complete: React.FC<CompleteProps> = ({ circle }) => {
   return (
     <>
+      <Dialog.Header title="successSubscribeCircle" />
+
       <Dialog.Message align="left">
         <p>
           <Translate

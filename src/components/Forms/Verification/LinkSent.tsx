@@ -16,6 +16,14 @@ export const VerificationLinkSent = ({
     <>
       {isInPage && <Layout.Header left={<Layout.Header.Title id={type} />} />}
 
+      {closeDialog && (
+        <Dialog.Header
+          title="register"
+          closeDialog={closeDialog}
+          cancelText="understood"
+        />
+      )}
+
       <Dialog.Message spacing="md">
         <h3>
           <Translate
@@ -50,8 +58,13 @@ export const VerificationLinkSent = ({
 
       {closeDialog && (
         <Dialog.Footer
-          closeDialog={closeDialog}
-          cancelText={<Translate id="understood" />}
+          mdUpBtns={
+            <Dialog.TextButton
+              text="understood"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
         />
       )}
     </>

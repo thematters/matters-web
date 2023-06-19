@@ -129,11 +129,7 @@ const OthersProcessingForm: React.FC<Props> = ({
         <PayToFallback closeDialog={closeDialog} />
       ) : (
         <>
-          <Dialog.Header
-            closeDialog={closeDialog}
-            cancelText={<Translate id="close" />}
-            title="donation"
-          />
+          <Dialog.Header title="donation" />
           <Dialog.Content>
             <section>
               <PaymentInfo
@@ -293,6 +289,7 @@ const USDTProcessingForm: React.FC<Props> = ({
         cancelText={<Translate id="close" />}
         title="donation"
       />
+
       <Dialog.Content>
         <section>
           <PaymentInfo

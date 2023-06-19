@@ -117,7 +117,7 @@ const Request: React.FC<FormProps> = ({
     </section>
   )
 
-  const SubmitButton = (
+  const SubmitButton = () => (
     <Dialog.TextButton
       color="green"
       type="submit"
@@ -136,7 +136,7 @@ const Request: React.FC<FormProps> = ({
           right={
             <>
               <span />
-              {SubmitButton}
+              <SubmitButton />
             </>
           }
         />
@@ -148,24 +148,36 @@ const Request: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title={titleId}
-          leftBtn={
-            back ? (
-              <Dialog.TextButton
-                color="green"
-                text={<Translate id="back" />}
-                onClick={back}
-              />
-            ) : null
-          }
-          closeDialog={closeDialog}
-          rightBtn={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title={titleId}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              color="green"
+              text={<Translate id="back" />}
+              onClick={back}
+            />
+          ) : null
+        }
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        mdUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

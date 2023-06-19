@@ -18,6 +18,7 @@ interface FormProps {
   circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
   submitCallback: () => void
   switchToResetPassword: () => void
+  closeDialog: () => void
 }
 
 const SubscribeCircleForm: React.FC<FormProps> = (props) => {

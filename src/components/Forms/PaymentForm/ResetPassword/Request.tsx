@@ -22,6 +22,8 @@ import { ConfirmVerificationCodeMutation } from '~/gql/graphql'
 interface FormProps {
   defaultEmail: string
   submitCallback?: (params: any) => void
+  closeDialog?: () => any
+  back?: () => void
 }
 
 interface FormValues {
@@ -32,6 +34,8 @@ interface FormValues {
 const Request: React.FC<FormProps> = ({
   defaultEmail = '',
   submitCallback,
+  closeDialog,
+  back,
 }) => {
   const [confirmCode] = useMutation<ConfirmVerificationCodeMutation>(
     CONFIRM_CODE,
@@ -129,30 +133,47 @@ const Request: React.FC<FormProps> = ({
     </Form>
   )
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      text={<Translate id="nextStep" />}
+      color="green"
+      type="submit"
+      form={formId}
+      disabled={isSubmitting}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
+      <Dialog.Header
+        title="resetPaymentPassword"
+        closeDialog={closeDialog}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<Translate id="back" />}
+              color="green"
+              onClick={back}
+            />
+          ) : undefined
+        }
+        rightBtn={<SubmitButton />}
+      />
+
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
-        btns={
-          <Dialog.RoundedButton
-            text={<Translate id="nextStep" />}
-            color="green"
-            type="submit"
-            form={formId}
-            disabled={isSubmitting}
-            loading={isSubmitting}
-          />
-        }
         mdUpBtns={
-          <Dialog.TextButton
-            text={<Translate id="nextStep" />}
-            color="green"
-            type="submit"
-            form={formId}
-            disabled={isSubmitting}
-            loading={isSubmitting}
-          />
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            <SubmitButton />
+          </>
         }
       />
     </>
