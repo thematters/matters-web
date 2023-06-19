@@ -202,7 +202,7 @@ const Password: React.FC<FormProps> = ({
     </Form>
   )
 
-  const SubmitButton = (
+  const SubmitButton = () => (
     <Dialog.TextButton
       color="green"
       type="submit"
@@ -221,7 +221,15 @@ const Password: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="register" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={
+                  <FormattedMessage defaultMessage="Confirm" description="" />
+                }
+                loading={isSubmitting}
+              />
             </>
           }
         />
@@ -235,10 +243,23 @@ const Password: React.FC<FormProps> = ({
       <Dialog.Header
         title="register"
         closeDialog={closeDialog}
-        rightBtn={SubmitButton}
+        rightBtn={<SubmitButton />}
       />
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        mdUpBtns={
+          <>
+            <Dialog.TextButton
+              text="close"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

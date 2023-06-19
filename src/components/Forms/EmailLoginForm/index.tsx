@@ -236,7 +236,15 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="login" />
-              <SubmitButton />
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={
+                  <FormattedMessage defaultMessage="Confirm" description="" />
+                }
+                loading={isSubmitting}
+              />
             </>
           }
         />

@@ -460,7 +460,13 @@ const Connect: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="authEntries" />
-              <SubmitButton />
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting || loading || !account}
+                text={<FormattedMessage defaultMessage="Next" description="" />}
+                loading={isSubmitting || loading}
+              />
             </>
           }
         />

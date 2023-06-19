@@ -159,7 +159,7 @@ const Confirm: React.FC<FormProps> = ({
     </section>
   )
 
-  const SubmitButton = (
+  const SubmitButton = () => (
     <Dialog.TextButton
       color="green"
       type="submit"
@@ -178,7 +178,13 @@ const Confirm: React.FC<FormProps> = ({
           right={
             <>
               <span />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<Translate id="confirm" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
@@ -193,10 +199,24 @@ const Confirm: React.FC<FormProps> = ({
       <Dialog.Header
         title="changeEmail"
         closeDialog={closeDialog}
-        rightBtn={SubmitButton}
+        rightBtn={<SubmitButton />}
       />
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        mdUpBtns={
+          <>
+            <Dialog.TextButton
+              text="cancel"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

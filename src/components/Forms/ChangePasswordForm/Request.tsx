@@ -136,7 +136,13 @@ const Request: React.FC<FormProps> = ({
           right={
             <>
               <span />
-              <SubmitButton />
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<Translate id="nextStep" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />

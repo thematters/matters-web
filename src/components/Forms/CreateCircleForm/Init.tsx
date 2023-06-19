@@ -214,7 +214,7 @@ const Init: React.FC<FormProps> = ({
     </section>
   )
 
-  const SubmitButton = (
+  const SubmitButton = () => (
     <Dialog.TextButton
       color="green"
       type="submit"
@@ -232,7 +232,15 @@ const Init: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="circleCreation" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={
+                  <FormattedMessage defaultMessage="Next Step" description="" />
+                }
+                loading={isSubmitting}
+              />
             </>
           }
         />
@@ -246,10 +254,24 @@ const Init: React.FC<FormProps> = ({
       <Dialog.Header
         title="circleCreation"
         closeDialog={closeDialog}
-        rightBtn={SubmitButton}
+        rightBtn={<SubmitButton />}
       />
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        mdUpBtns={
+          <>
+            <Dialog.TextButton
+              text="cancel"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

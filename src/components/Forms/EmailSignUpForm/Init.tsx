@@ -205,7 +205,13 @@ const Init: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="register" />
-              <SubmitButton />
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<FormattedMessage defaultMessage="Next" description="" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
