@@ -9,10 +9,8 @@ import {
   Avatar,
   Button,
   Cover,
-  Error,
   Expandable,
   FollowUserButton,
-  Layout,
   Media,
   Spinner,
   Throw404,
@@ -22,7 +20,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import ShareButton from '~/components/Layout/Header/ShareButton'
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 import {
@@ -77,35 +74,10 @@ export const UserProfile = () => {
   /**
    * Render
    */
-  const LayoutHeader = () => (
-    <>
-      <Layout.Header
-        right={
-          <>
-            <span />
-            {user && (
-              <section className={styles.buttons}>
-                <ShareButton
-                  tags={
-                    [user.displayName, user.userName].filter(
-                      Boolean
-                    ) as string[]
-                  }
-                />
-                <DropdownActions user={user} isMe={isMe} />
-              </section>
-            )}
-          </>
-        }
-        mode="transparent-absolute"
-      />
-    </>
-  )
 
   if (loading) {
     return (
       <>
-        {/* <LayoutHeader /> */}
         <Spinner />
       </>
     )
@@ -114,25 +86,7 @@ export const UserProfile = () => {
   if (!user) {
     return (
       <>
-        {/* <LayoutHeader /> */}
         <Throw404 />
-      </>
-    )
-  }
-
-  if (user?.status?.state === 'archived') {
-    return (
-      <>
-        <LayoutHeader />
-        <Error
-          statusCode={404}
-          message={
-            <FormattedMessage
-              defaultMessage="This account is archived due to violation of community guidelines"
-              description="src/components/UserProfile/index.tsx"
-            />
-          }
-        />
       </>
     )
   }
@@ -148,8 +102,7 @@ export const UserProfile = () => {
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
   const isUserArchived = userState === 'archived'
-  const isUserBanned = userState === 'banned'
-  const isUserInactive = isUserArchived || isUserBanned
+  const isUserInactive = isUserArchived
 
   const Badges = ({ isInDialog }: { isInDialog?: boolean }) => (
     <span className={isInDialog ? styles.badgesInDialog : ''}>
@@ -167,34 +120,28 @@ export const UserProfile = () => {
   if (isUserInactive) {
     return (
       <>
-        <LayoutHeader />
         <section className={styles.userProfile}>
           <Cover fallbackCover={IMAGE_COVER.src} />
+          <Media at="sm">
+            <header className={styles.header}>
+              <section className={styles.avatar}>
+                <Avatar size="xxxlm" />
+              </section>
+            </header>
 
-          <header>
-            <section className={styles.avatar}>
-              <Avatar size="xxxlm" />
+            <section className={styles.info}>
+              <section className={styles.displayName}>
+                <h1 className={styles.name}>
+                  {isUserArchived && (
+                    <FormattedMessage
+                      defaultMessage="Account Archived"
+                      description="src/components/UserProfile/index.tsx"
+                    />
+                  )}
+                </h1>
+              </section>
             </section>
-          </header>
-
-          <section className={styles.info}>
-            <section className={styles.displayName}>
-              <h1 className={styles.name}>
-                {isUserArchived && (
-                  <FormattedMessage
-                    defaultMessage="Account Archived"
-                    description="src/components/UserProfile/index.tsx"
-                  />
-                )}
-                {isUserBanned && (
-                  <FormattedMessage
-                    defaultMessage="Account Banned"
-                    description="src/components/UserProfile/index.tsx"
-                  />
-                )}
-              </h1>
-            </section>
-          </section>
+          </Media>
         </section>
       </>
     )

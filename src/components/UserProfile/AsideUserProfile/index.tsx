@@ -2,14 +2,11 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import {
   Avatar,
   Button,
-  Cover,
-  Error,
   Expandable,
   FollowUserButton,
   Spinner,
@@ -88,22 +85,6 @@ export const AsideUserProfile = () => {
     )
   }
 
-  if (user?.status?.state === 'archived') {
-    return (
-      <>
-        <Error
-          statusCode={404}
-          message={
-            <FormattedMessage
-              defaultMessage="This account is archived due to violation of community guidelines"
-              description="src/components/UserProfile/index.tsx"
-            />
-          }
-        />
-      </>
-    )
-  }
-
   const badges = user.info.badges || []
   const circles = user.ownCircles || []
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
@@ -114,8 +95,7 @@ export const AsideUserProfile = () => {
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
   const isUserArchived = userState === 'archived'
-  const isUserBanned = userState === 'banned'
-  const isUserInactive = isUserArchived || isUserBanned
+  const isUserInactive = isUserArchived
 
   /**
    * Inactive User
@@ -124,11 +104,9 @@ export const AsideUserProfile = () => {
     return (
       <>
         <section className={styles.userProfile}>
-          <Cover fallbackCover={IMAGE_COVER.src} />
-
-          <header>
+          <header className={styles.header}>
             <section className={styles.avatar}>
-              <Avatar size="xxxl" />
+              <Avatar size="xxxxl" />
             </section>
           </header>
 
@@ -138,12 +116,6 @@ export const AsideUserProfile = () => {
                 {isUserArchived && (
                   <FormattedMessage
                     defaultMessage="Account Archived"
-                    description="src/components/UserProfile/index.tsx"
-                  />
-                )}
-                {isUserBanned && (
-                  <FormattedMessage
-                    defaultMessage="Account Banned"
                     description="src/components/UserProfile/index.tsx"
                   />
                 )}
