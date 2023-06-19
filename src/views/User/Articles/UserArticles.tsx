@@ -7,6 +7,7 @@ import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   ArticleDigestArchive,
   ArticleDigestFeed,
+  Empty,
   EmptyArticle,
   Head,
   InfiniteScroll,
@@ -14,6 +15,7 @@ import {
   Media,
   QueryError,
   Spinner,
+  Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -123,7 +125,16 @@ const UserArticles = () => {
     return (
       <>
         <UserTabs />
-        <EmptyArticle />
+        <Empty
+          spacingY="xxxloose"
+          description={
+            <Translate
+              en="Deleted user"
+              zh_hans="用户已注销"
+              zh_hant="用戶已註銷"
+            />
+          }
+        />
       </>
     )
   }

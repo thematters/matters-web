@@ -171,6 +171,10 @@
     "defaultMessage": "Next",
     "description": ""
   },
+  "9J0iCw": {
+    "defaultMessage": "Deleted user",
+    "description": ""
+  },
   "9mfw9c": {
     "defaultMessage": "Wallet address",
     "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
@@ -954,10 +958,6 @@
   "oIkacT": {
     "defaultMessage": "Article is hidden",
     "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
-  },
-  "oNYnCM": {
-    "defaultMessage": "Account Archived",
-    "description": "src/components/UserProfile/index.tsx"
   },
   "ohgTH4": {
     "defaultMessage": "Following",

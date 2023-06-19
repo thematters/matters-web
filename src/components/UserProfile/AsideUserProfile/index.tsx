@@ -115,8 +115,8 @@ export const AsideUserProfile = () => {
               <h1 className={styles.name}>
                 {isUserArchived && (
                   <FormattedMessage
-                    defaultMessage="Account Archived"
-                    description="src/components/UserProfile/index.tsx"
+                    defaultMessage="Deleted user"
+                    description=""
                   />
                 )}
               </h1>
