@@ -108,7 +108,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
         rightBtn={<AddEditorButton />}
       />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <section className={styles.owner}>
           {tag.owner && (
             <UserDigest.Rich

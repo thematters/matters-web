@@ -36,7 +36,7 @@ const SubscribeCircleForm: React.FC<FormProps> = (props) => {
 
   if (loading) {
     return (
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Spinner />
       </Dialog.Content>
     )

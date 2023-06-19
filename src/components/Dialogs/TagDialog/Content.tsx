@@ -242,7 +242,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         rightBtn={<SubmitButton />}
       />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         mdUpBtns={

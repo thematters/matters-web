@@ -399,7 +399,7 @@ const SetAmount: React.FC<FormProps> = ({
     <>
       <Dialog.Header title="donation" />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         {InnerForm}
 
         {isUSDT && !isConnectedAddress && (

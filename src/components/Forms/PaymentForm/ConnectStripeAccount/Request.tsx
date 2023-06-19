@@ -64,7 +64,7 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
         leftBtn={<Dialog.TextButton text="back" color="green" onClick={back} />}
       />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <SelectCountry country={country} onChange={setCountry} />
         <Spacer size="xxloose" />
       </Dialog.Content>

@@ -19,7 +19,7 @@ const Complete = ({
         <Dialog.Header title="changeEmail" closeDialog={closeDialog} />
       )}
 
-      <Dialog.Message spacing="md">
+      <Dialog.Message>
         <h3>
           <Translate id="successChangeEmail" />
         </h3>

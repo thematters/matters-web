@@ -43,7 +43,7 @@ const BaseAccessDialog = ({
           rightBtn={<CloseButton />}
         />
 
-        <Dialog.Content spacing={['base', 'base']}>
+        <Dialog.Content>
           <ToggleResponse {...toggleResponseProps} />
           <Spacer size="base" />
           <ToggleAccess {...props} />

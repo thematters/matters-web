@@ -32,7 +32,7 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
           closeDialog={closeDialog}
         />
 
-        <Dialog.Content hasGrow>
+        <Dialog.Content>
           <Dialog.Message align="left">
             <p className={styles.message}>
               <Translate

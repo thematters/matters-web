@@ -312,7 +312,7 @@ const Select: React.FC<FormProps> = ({
         }
       />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Intro />
 
         {InnerForm}

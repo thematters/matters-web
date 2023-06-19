@@ -111,7 +111,7 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
     setIsValid(isValid && values.paymentPointer !== defaultPaymentPointer)
 
   return (
-    <Dialog.Content hasGrow>
+    <Dialog.Content>
       <section className={styles.container}>
         <Form id={formId} onSubmit={handleSubmit}>
           <Form.Input

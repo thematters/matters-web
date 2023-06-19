@@ -156,7 +156,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
     <>
       <Dialog.Header closeDialog={closeDialog} title="subscribeCircle" />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <section>
           <Head circle={circle} />
 

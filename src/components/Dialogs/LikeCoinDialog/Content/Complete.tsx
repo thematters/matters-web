@@ -6,7 +6,7 @@ const Complete: React.FC = () => {
     <>
       <Dialog.Header title="setupLikeCoin" />
 
-      <Dialog.Message spacing="md">
+      <Dialog.Message>
         <p>
           <Translate
             zh_hant="你的專屬 Liker ID 已就位！"

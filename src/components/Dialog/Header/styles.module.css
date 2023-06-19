@@ -30,7 +30,7 @@
 }
 
 .mdUpheader {
-  padding: var(--spacing-s-loose) var(--spacing-s-loose) var(--spacing-base);
+  padding: var(--spacing-s-loose) var(--spacing-s-loose) 0;
 
   & .title {
     font-size: var(--font-size-lg);

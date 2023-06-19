@@ -21,8 +21,6 @@ const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header title="resetPaymentPassword" closeDialog={closeDialog} />
-
         <DynamicPaymentResetPasswordForm closeDialog={closeDialog} />
       </Dialog>
     </>

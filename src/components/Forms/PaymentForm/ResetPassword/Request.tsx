@@ -161,7 +161,7 @@ const Request: React.FC<FormProps> = ({
         rightBtn={<SubmitButton />}
       />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         mdUpBtns={

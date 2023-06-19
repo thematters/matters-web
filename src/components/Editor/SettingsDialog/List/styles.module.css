@@ -1,5 +1,5 @@
-.list {
-  margin-top: var(--spacing-base);
+.container {
+  margin: 0 calc(var(--spacing-base) * -1);
   overflow-y: auto;
 }
 

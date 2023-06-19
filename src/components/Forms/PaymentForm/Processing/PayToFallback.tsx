@@ -11,7 +11,7 @@ const PayToFallback: React.FC<Props> = ({ closeDialog }) => {
   return (
     <>
       <Dialog.Header title={'failureDonation'} />
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <section className={styles.fallbackContent}>
           <p>
             <Translate

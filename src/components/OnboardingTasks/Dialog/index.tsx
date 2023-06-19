@@ -36,7 +36,7 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
           closeDialog={closeDialog}
         />
 
-        <Dialog.Content hasGrow spacing={[0, 'base']}>
+        <Dialog.Content>
           <section className={styles.description}>
             <span>
               <Translate

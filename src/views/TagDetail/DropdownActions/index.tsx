@@ -225,7 +225,12 @@ const DropdownActions = (props: DropdownActionsProps) => {
     <TagDialog {...props.tag}>
       {({ openDialog: openTagDialog }) => (
         <SearchSelectDialog
-          title="tagAddSelectedArticle"
+          title={
+            <FormattedMessage
+              defaultMessage="Add Articles into Featured"
+              description="src/views/TagDetail/DropdownActions/index.tsx"
+            />
+          }
           hint="hintEditCollection"
           searchType="Article"
           onSave={addArticlesToTag(true)}

@@ -242,7 +242,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
   if (completed) {
     return (
       <>
-        <Dialog.Message spacing="xxl">
+        <Dialog.Message>
           <h3>
             <Translate id="successTopUp" />
           </h3>
@@ -298,7 +298,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         rightBtn={<SubmitButton />}
       />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <section>
           <ConfirmTable>
             <ConfirmTable.Row type="balance">

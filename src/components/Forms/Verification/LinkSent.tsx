@@ -24,7 +24,7 @@ export const VerificationLinkSent = ({
         />
       )}
 
-      <Dialog.Message spacing="md">
+      <Dialog.Message>
         <h3>
           <Translate
             zh_hant={isRegister ? '已發送快速註冊連結' : '已發送快速驗證連結'}

@@ -96,7 +96,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
     <>
       <Dialog.Header title="successDonation" />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <section className={styles.container}>
           <section className={styles.completeAvatar}>
             <IconSupport size="lg" color="gold" />

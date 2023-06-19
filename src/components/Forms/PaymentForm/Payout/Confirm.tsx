@@ -143,7 +143,7 @@ const BaseConfirm: React.FC<FormProps> = ({
         rightBtn={<SubmitButton />}
       />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Form id={formId} onSubmit={handleSubmit}>
           <ConfirmTable>
             <ConfirmTable.Row type="balance">

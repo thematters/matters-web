@@ -157,7 +157,7 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
 
   if (isSubmitting) {
     return (
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Spinner />
       </Dialog.Content>
     )
@@ -167,7 +167,7 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
     <>
       <Dialog.Header title="paymentPassword" closeDialog={closeDialog} />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <section className={styles.reason}>
           {isInPassword && (
             <p>

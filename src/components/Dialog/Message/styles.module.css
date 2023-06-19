@@ -64,11 +64,3 @@
 .alignLeft {
   text-align: left;
 }
-
-.spacingMd {
-  padding: var(--spacing-base) 0;
-}
-
-.spacingXxl {
-  padding: var(--spacing-xx-loose) 0;
-}

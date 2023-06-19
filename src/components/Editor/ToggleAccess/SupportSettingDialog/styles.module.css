@@ -31,21 +31,19 @@
 }
 
 .tabs {
+  margin: 0 calc(var(--spacing-base) * -1);
+
   @media (--md-up) {
-    padding: 0 var(--spacing-base);
+    margin: 0;
   }
 }
 
-.contentInput {
-  padding: 0 var(--spacing-base);
+.form {
+  margin: 0;
 
   @media (--md-up) {
-    padding: 0;
+    margin: 0 calc(var(--spacing-base) * -1);
   }
-}
-
-.preview {
-  padding: var(--spacing-base);
 }
 
 .previewResponse {

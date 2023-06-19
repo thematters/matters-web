@@ -113,7 +113,7 @@ const FingerprintDialogContent = ({
   })
 
   return (
-    <Dialog.Content hasGrow>
+    <Dialog.Content>
       <section className={styles.container}>
         <SectionCard
           title={

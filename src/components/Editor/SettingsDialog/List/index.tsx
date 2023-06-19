@@ -59,8 +59,8 @@ const SettingsList = ({
     <>
       <Dialog.Header title={<Translate id="settings" />} />
 
-      <Dialog.Content hasGrow>
-        <ul className={styles.list} role="list">
+      <Dialog.Content>
+        <ul className={styles.container} role="list">
           <ListItem
             title={<Translate id="addTags" />}
             subTitle={

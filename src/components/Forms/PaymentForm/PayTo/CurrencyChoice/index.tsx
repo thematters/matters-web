@@ -161,7 +161,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
     <>
       <Dialog.Header closeDialog={closeDialog} title="donation" />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         mdUpBtns={

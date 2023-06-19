@@ -182,7 +182,7 @@ const Confirm: React.FC<FormProps> = ({
 
   if (isSubmitting || loading) {
     return (
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Spinner />
       </Dialog.Content>
     )
@@ -212,7 +212,7 @@ const Confirm: React.FC<FormProps> = ({
     <>
       <Dialog.Header title="donation" />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <section>
           <PaymentInfo
             amount={amount}

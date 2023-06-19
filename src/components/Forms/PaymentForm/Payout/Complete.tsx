@@ -10,7 +10,7 @@ const Complete: React.FC<Props> = ({ closeDialog }) => {
     <>
       <Dialog.Header title="paymentPayoutComplete" />
 
-      <Dialog.Message spacing="md">
+      <Dialog.Message>
         <p>
           <Translate
             zh_hant="感謝你對 Matters 社區的信任與支持。"

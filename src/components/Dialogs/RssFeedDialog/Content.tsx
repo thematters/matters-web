@@ -71,7 +71,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
 
   return (
     <>
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <section className={styles.container}>
           <SectionCard>
             {!ipnsKey ? (

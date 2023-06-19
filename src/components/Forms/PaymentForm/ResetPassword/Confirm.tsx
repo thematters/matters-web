@@ -156,7 +156,7 @@ const Confirm: React.FC<FormProps> = ({
 
   if (isSubmitting) {
     return (
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Spinner />
       </Dialog.Content>
     )
@@ -178,7 +178,7 @@ const Confirm: React.FC<FormProps> = ({
         }
       />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         mdUpBtns={

@@ -168,7 +168,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
           <Tab tabType={tabType} setTabType={changeTabType} />
         </section>
 
-        <section className={styles.contentInput}>{InnerForm(tabType)}</section>
+        <section className={styles.form}>{InnerForm(tabType)}</section>
 
         <section className={styles.preview}>
           <h3>

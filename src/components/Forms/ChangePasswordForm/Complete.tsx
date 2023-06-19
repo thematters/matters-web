@@ -24,7 +24,7 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
         <Dialog.Header title={titleId} closeDialog={closeDialog} />
       )}
 
-      <Dialog.Message spacing="md">
+      <Dialog.Message>
         <h3>
           <Translate id={descriptionId} />
         </h3>

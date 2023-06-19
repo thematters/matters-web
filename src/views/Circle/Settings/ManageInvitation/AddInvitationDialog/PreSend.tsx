@@ -130,7 +130,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
         </p>
       </Dialog.Message>
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <List hasBorder={false}>
           {invitees.map(
             ({ node }, i) =>

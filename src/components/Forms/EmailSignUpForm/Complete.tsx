@@ -22,7 +22,7 @@ const Complete = ({
         <Dialog.Header title="successRegister" closeDialog={closeDialog} />
       )}
 
-      <Dialog.Message align="left" spacing="md">
+      <Dialog.Message align="left">
         <h3>
           <FormattedMessage
             defaultMessage="Welcome to Matters!"

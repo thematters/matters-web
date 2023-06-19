@@ -31,9 +31,10 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
         <Dialog.Header
           title={<Translate id="followAuthor" />}
           closeDialog={closeDialog}
+          cancelText="close"
         />
 
-        <Dialog.Content hasGrow>
+        <Dialog.Content>
           <Dialog.Message align="left">
             <p className={styles.message}>
               <Translate
@@ -70,7 +71,15 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
           <Feed type={feed} />
         </Dialog.Content>
 
-        <Dialog.Footer closeDialog={closeDialog} />
+        <Dialog.Footer
+          mdUpBtns={
+            <Dialog.TextButton
+              text="close"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+        />
       </Dialog>
     </>
   )

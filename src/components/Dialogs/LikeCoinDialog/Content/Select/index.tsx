@@ -18,7 +18,7 @@ const Select: React.FC<SelectProps> = ({
     <>
       <Dialog.Header title="setupLikeCoin" closeDialog={closeDialog} />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Hint />
 
         <Form.List>

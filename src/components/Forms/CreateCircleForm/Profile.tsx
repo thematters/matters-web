@@ -268,7 +268,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
         rightBtn={<SubmitButton />}
       />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         mdUpBtns={

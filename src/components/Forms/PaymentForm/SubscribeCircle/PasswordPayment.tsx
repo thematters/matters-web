@@ -115,7 +115,7 @@ const Confirm: React.FC<FormProps> = ({
 
   if (isSubmitting) {
     return (
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Spinner />
       </Dialog.Content>
     )
@@ -125,7 +125,7 @@ const Confirm: React.FC<FormProps> = ({
     <>
       <Dialog.Header closeDialog={closeDialog} title="subscribeCircle" />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <section>
           <Head circle={circle} />
 
