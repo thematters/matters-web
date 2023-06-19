@@ -5,19 +5,19 @@
   background-position: right top, top 128px right -70px, left bottom;
   background-size: 258px, 281px, 123px;
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-bottom: 5rem;
     background-position: right top, top 259px right var(--spacing-x-loose),
       left bottom;
     background-size: 521px, 258px, 270px;
   }
 
-  @media (--md-up) {
+  @media (--lg-up) {
     background-position: right top, top 98px right 5rem, left bottom;
     background-size: 521px, 308px, 270px;
   }
 
-  @media (--md-up) {
+  @media (--lg-up) {
     background-size: 521px, 308px, 357px;
   }
 }
@@ -46,7 +46,7 @@
     background-position: left top;
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-top: 3rem;
 
     & h2 {
@@ -65,7 +65,7 @@
     }
   }
 
-  @media (--md-up) {
+  @media (--lg-up) {
     @mixin flex-center-space-between;
 
     padding-top: 6rem;
@@ -78,10 +78,10 @@
     }
   }
 
-  @media (--lg-up) {
+  @media (--xl-up) {
     & .ilusCity {
-      width: 810px;
-      height: 503px;
+      width: 764px;
+      height: 474px;
     }
   }
 }
@@ -154,7 +154,7 @@
     }
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     display: grid;
     grid-template-areas: 'spacingLeft content spacingRight';
     grid-template-columns: minmax(0, 1fr) var(--layout-width-sm-up) minmax(
@@ -185,7 +185,7 @@
     }
   }
 
-  @media (--md-up) {
+  @media (--lg-up) {
     grid-template-columns: minmax(0, 1fr) var(--layout-width-md-up) minmax(
         0,
         1fr
@@ -211,7 +211,7 @@
     }
   }
 
-  @media (--lg-up) {
+  @media (--xl-up) {
     grid-template-columns: minmax(0, 1fr) var(--layout-width-lg-up) minmax(
         0,
         1fr
@@ -224,7 +224,7 @@
 
   padding: 5rem 0 0;
 
-  @media (--md-up) {
+  @media (--lg-up) {
     padding-top: 17rem;
   }
 }

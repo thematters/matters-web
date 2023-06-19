@@ -1,7 +1,0 @@
-.copyright {
-  @mixin flex-center-all;
-
-  margin: var(--spacing-loose) auto;
-  font-size: var(--font-size-sm-s);
-  color: var(--color-grey);
-}

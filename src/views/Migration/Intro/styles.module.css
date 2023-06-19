@@ -13,19 +13,19 @@
   }
 }
 
-@media (--sm-up) {
+@media (--md-up) {
   .intro {
     background-image: var(--migration-intro-bg-sm);
   }
 }
 
-@media (--md-up) {
+@media (--lg-up) {
   .intro {
     background-image: var(--migration-intro-bg-md);
   }
 }
 
-@media (--lg-up) {
+@media (--xl-up) {
   .intro {
     background-image: var(--migration-intro-bg-lg);
   }

@@ -15,6 +15,7 @@ import {
   ViewerContext,
 } from '~/components'
 
+import layoutStyles from '../../About/layout.module.css'
 import styles from './styles.module.css'
 
 const texts: {
@@ -123,22 +124,20 @@ const Steps = () => {
 
   return (
     <section id="steps" className={styles.steps}>
-      <div className="l-container">
-        <div className="l-row">
-          <div className="l-col-full">
-            <h2>
-              <Translate
-                zh_hant={zh_hant.header}
-                zh_hans={zh_hans.header}
-                en={en.header}
-              />
-            </h2>
-          </div>
+      <div className={layoutStyles.container}>
+        <div className={layoutStyles.content}>
+          <h2 className={layoutStyles.columnFull}>
+            <Translate
+              zh_hant={zh_hant.header}
+              zh_hans={zh_hans.header}
+              en={en.header}
+            />
+          </h2>
         </div>
       </div>
 
-      <div className="l-container">
-        <div className="l-row">
+      <div className={layoutStyles.container}>
+        <div className={layoutStyles.content}>
           <Step src={IMAGE_STEP_1} step={1}>
             {viewer.isAuthed ? (
               <section className={styles.avatar}>

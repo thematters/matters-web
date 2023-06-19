@@ -10,11 +10,9 @@ import {
 import { analytics, toPath, translate } from '~/common/utils'
 import {
   Button,
-  IconCreate16,
   IconNavCreate32,
-  IconSpinner16,
   LanguageContext,
-  TextIcon,
+  Tooltip,
   Translate,
   useMutation,
 } from '~/components'
@@ -22,25 +20,21 @@ import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 import { CreateDraftMutation } from '~/gql/graphql'
 
 interface Props {
-  variant: 'navbar' | 'sidenav'
   allowed: boolean
   authed?: boolean
   forbidden?: boolean
 }
 
 const BaseWriteButton = ({
-  variant,
   onClick,
-  loading,
 }: {
-  variant: 'navbar' | 'sidenav'
   onClick: () => any
   loading?: boolean
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  if (variant === 'navbar') {
-    return (
+  return (
+    <Tooltip content={translate({ id: 'write', lang })} placement="left">
       <Button
         bgActiveColor="greyLighter"
         size={['2rem', '2rem']}
@@ -49,36 +43,11 @@ const BaseWriteButton = ({
       >
         <IconNavCreate32 size="lg" color="black" />
       </Button>
-    )
-  }
-
-  return (
-    <Button
-      size={[null, '2.25rem']}
-      spacing={[0, 'base']}
-      bgColor="gold"
-      onClick={onClick}
-      aria-label={translate({ id: 'write', lang })}
-    >
-      <TextIcon
-        icon={
-          loading ? (
-            <IconSpinner16 color="white" />
-          ) : (
-            <IconCreate16 color="white" />
-          )
-        }
-        spacing="xtight"
-        weight="md"
-        color="white"
-      >
-        <Translate id="write" />
-      </TextIcon>
-    </Button>
+    </Tooltip>
   )
 }
 
-export const WriteButton = ({ variant, allowed, authed, forbidden }: Props) => {
+export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
   const router = useRouter()
   const { lang } = useContext(LanguageContext)
   const [putDraft, { loading }] = useMutation<CreateDraftMutation>(
@@ -91,7 +60,6 @@ export const WriteButton = ({ variant, allowed, authed, forbidden }: Props) => {
   if (!allowed) {
     return (
       <BaseWriteButton
-        variant={variant}
         onClick={() =>
           window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
         }
@@ -101,7 +69,6 @@ export const WriteButton = ({ variant, allowed, authed, forbidden }: Props) => {
 
   return (
     <BaseWriteButton
-      variant={variant}
       onClick={async () => {
         if (!authed) {
           window.dispatchEvent(

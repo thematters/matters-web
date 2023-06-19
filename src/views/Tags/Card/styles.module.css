@@ -35,7 +35,7 @@
     background: rgb(0 0 0 / 35%);
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     & h4 {
       font-size: var(--font-size-md);
     }

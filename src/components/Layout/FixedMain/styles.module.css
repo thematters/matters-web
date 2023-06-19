@@ -9,15 +9,15 @@
   & .content {
     grid-column: 1 / -1;
 
-    @media (--sm-up) {
+    @media (--md-up) {
       grid-column: col-start 2 / span 6;
     }
 
-    @media (--md-up) {
+    @media (--lg-up) {
       grid-column: col-start 3 / span 5;
     }
 
-    @media (--lg-up) {
+    @media (--xl-up) {
       grid-column: col-start 4 / span 6;
     }
   }

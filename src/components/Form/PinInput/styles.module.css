@@ -33,7 +33,7 @@
     }
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 0;
   }
 }

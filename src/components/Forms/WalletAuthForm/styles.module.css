@@ -6,7 +6,7 @@
 .msg {
   margin: var(--spacing-x-tight) 0 var(--spacing-base) var(--spacing-base);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     margin-left: 0;
   }
 }

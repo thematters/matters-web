@@ -6,7 +6,7 @@
   display: inline-flex;
   gap: var(--spacing-base);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding-right: var(--spacing-base);
   }
 }
@@ -41,7 +41,7 @@
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-base);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 0;
   }
 
@@ -57,7 +57,7 @@
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-base);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 0;
   }
 
@@ -92,7 +92,7 @@
   font-size: var(--font-size-sm);
   color: var(--color-grey);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 0;
   }
 

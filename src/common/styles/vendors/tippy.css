@@ -28,8 +28,8 @@
 
 .tippy-box[data-placement^='top'] > .tippy-arrow::before {
   bottom: -7px;
-  left: 0;
-  border-width: 8px 8px 0;
+  left: 2px;
+  border-width: 8px 6px 0;
   border-top-color: initial;
   transform-origin: center top;
 }
@@ -40,8 +40,8 @@
 
 .tippy-box[data-placement^='bottom'] > .tippy-arrow::before {
   top: -7px;
-  left: 0;
-  border-width: 0 8px 8px;
+  left: 2px;
+  border-width: 0 6px 8px;
   border-bottom-color: initial;
   transform-origin: center bottom;
 }
@@ -51,8 +51,9 @@
 }
 
 .tippy-box[data-placement^='left'] > .tippy-arrow::before {
+  top: 2px;
   right: -7px;
-  border-width: 8px 0 8px 8px;
+  border-width: 6px 0 6px 8px;
   border-left-color: initial;
   transform-origin: center left;
 }
@@ -62,8 +63,9 @@
 }
 
 .tippy-box[data-placement^='right'] > .tippy-arrow::before {
+  top: 2px;
   left: -7px;
-  border-width: 8px 8px 8px 0;
+  border-width: 6px 8px 6px 0;
   border-right-color: initial;
   transform-origin: center right;
 }
@@ -149,12 +151,12 @@
 
 /* theme:tooltip */
 .tippy-box[data-theme='tooltip'] {
-  padding: var(--spacing-xx-tight) var(--spacing-base);
+  padding: var(--spacing-xx-tight) var(--spacing-x-tight);
   font-size: var(--font-size-sm);
+  line-height: 1.375rem;
   color: var(--color-white);
   background: var(--color-black);
   border-radius: var(--spacing-xx-tight);
-  box-shadow: var(--shadow-dark);
 }
 
 /* theme:tooltip:chart */

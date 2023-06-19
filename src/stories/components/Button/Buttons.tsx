@@ -37,7 +37,7 @@ const Buttons = () => (
       </li>
 
       <li>
-        <WriteButton variant="sidenav" allowed />
+        <WriteButton allowed />
       </li>
 
       <li>

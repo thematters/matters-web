@@ -12,7 +12,7 @@ import {
 
 import NavListItem from './NavListItem'
 
-export const NavListItemHome = ({ isMdUp }: { isMdUp: boolean }) => {
+export const NavListItemHome = () => {
   const { isInPath } = useRoute()
   const isInHome = isInPath('HOME')
 
@@ -23,12 +23,11 @@ export const NavListItemHome = ({ isMdUp }: { isMdUp: boolean }) => {
       activeIcon={<IconNavHomeActive32 size="lg" />}
       active={isInHome}
       href={PATHS.HOME}
-      isMdUp={isMdUp}
     />
   )
 }
 
-export const NavListItemSearch = ({ isMdUp }: { isMdUp: boolean }) => {
+export const NavListItemSearch = () => {
   const { isInPath, router } = useRoute()
   const isInSearch = isInPath('SEARCH')
 
@@ -54,7 +53,6 @@ export const NavListItemSearch = ({ isMdUp }: { isMdUp: boolean }) => {
 
         return false
       }}
-      isMdUp={isMdUp}
     />
   )
 }

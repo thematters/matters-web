@@ -3,12 +3,6 @@
   flex-direction: column;
   align-items: center;
   padding-top: var(--spacing-x-loose);
-  margin-right: calc(40px * -1);
-
-  @media (--md-up) {
-    align-items: flex-start;
-    margin-right: 0;
-  }
 }
 
 .logo {
@@ -22,7 +16,7 @@
 
   flex-direction: column;
 
-  @media (--md-up) {
+  @media (--lg-up) {
     display: initial;
   }
 

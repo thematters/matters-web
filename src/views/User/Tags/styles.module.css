@@ -1,7 +1,7 @@
 .container {
   padding: 0 var(--spacing-base);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 0;
   }
 }

@@ -1,12 +1,13 @@
 import { Translate } from '~/components'
 
+import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Stats = () => {
   return (
     <section className={styles.stats}>
-      <div className="l-container">
-        <ul className="l-row">
+      <div className={layoutStyles.container}>
+        <ul className={layoutStyles.content}>
           <li>
             <p className={styles.type}>
               <Translate

@@ -3,7 +3,7 @@
     bottom: var(--global-nav-height);
     z-index: var(--z-index-bottom-bar);
 
-    @media (--sm-up) {
+    @media (--md-up) {
       bottom: 0;
     }
   }

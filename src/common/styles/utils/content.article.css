@@ -401,7 +401,7 @@
     }
   }
 
-  @media (--md-up) {
+  @media (--lg-up) {
     right: auto;
     left: calc((2rem + var(--spacing-x-loose)) * -1);
   }
@@ -431,7 +431,7 @@
     stroke: var(--color-black);
   }
 
-  @media (--md-up) {
+  @media (--lg-up) {
     margin-left: var(--spacing-x-loose);
   }
 }

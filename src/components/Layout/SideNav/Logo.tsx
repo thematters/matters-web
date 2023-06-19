@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useIntl } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { IconLogo, IconLogoGraph, Media } from '~/components'
+import { IconLogoGraph } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -18,12 +18,7 @@ const Logo = () => {
             description: '',
           })}
         >
-          <Media at="md">
-            <IconLogoGraph />
-          </Media>
-          <Media greaterThan="md">
-            <IconLogo />
-          </Media>
+          <IconLogoGraph />
         </a>
       </Link>
     </section>

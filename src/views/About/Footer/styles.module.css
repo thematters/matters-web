@@ -3,7 +3,7 @@
   color: var(--color-white);
   background: var(--color-black);
 
-  @media (--sm-up) {
+  @media (--lg-up) {
     padding: 7.5rem 0;
   }
 }
@@ -72,7 +72,7 @@
     text-align: center;
   }
 
-  @media (--sm-up) {
+  @media (--lg-up) {
     grid-template: auto / repeat(2, minmax(0, 1fr));
     grid-template-areas:
       'topLeft topRight'
@@ -107,7 +107,7 @@
     }
   }
 
-  @media (--lg-up) {
+  @media (--xl-up) {
     grid-template: auto / repeat(3, minmax(0, 1fr));
     grid-template-areas:
       'topLeft topMiddle topRight'

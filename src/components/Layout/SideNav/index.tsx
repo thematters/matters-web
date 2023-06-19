@@ -24,7 +24,7 @@ import Logo from './Logo'
 import NavListItem from './NavListItem'
 import styles from './styles.module.css'
 
-const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
+const SideNavMenu = () => {
   const { isInPath, isPathStartWith, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
@@ -42,7 +42,7 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
 
   return (
     <ul role="menu" className={styles.list}>
-      <NavListItemHome isMdUp={isMdUp} />
+      <NavListItemHome />
 
       <NavListItem
         name={
@@ -55,7 +55,6 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
         activeIcon={<UnreadIcon.Follow active />}
         active={isInFollow}
         href={PATHS.FOLLOW}
-        isMdUp={isMdUp}
       />
 
       <NavListItem
@@ -66,11 +65,10 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
         activeIcon={<UnreadIcon.Notification active />}
         active={isInNotification}
         href={PATHS.ME_NOTIFICATIONS}
-        isMdUp={isMdUp}
       />
 
-      <Media lessThan="xl">
-        <NavListItemSearch isMdUp={isMdUp} />
+      <Media lessThan="lg">
+        <NavListItemSearch />
       </Media>
 
       <Dropdown
@@ -101,38 +99,27 @@ const SideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
           active={isInMe}
           canScrollTop={false}
           aira-haspopup="menu"
-          isMdUp={isMdUp}
         />
       </Dropdown>
 
       <li role="menuitem" className={styles.listItem}>
-        {isMdUp ? (
-          <WriteButton
-            variant="sidenav"
-            allowed={!viewer.shouldSetupLikerID}
-            authed={viewer.isAuthed}
-            forbidden={viewer.isInactive}
-          />
-        ) : (
-          <WriteButton
-            variant="navbar"
-            allowed={!viewer.shouldSetupLikerID}
-            authed={viewer.isAuthed}
-            forbidden={viewer.isInactive}
-          />
-        )}
+        <WriteButton
+          allowed={!viewer.shouldSetupLikerID}
+          authed={viewer.isAuthed}
+          forbidden={viewer.isInactive}
+        />
       </li>
     </ul>
   )
 }
 
-const VisitorSideNavMenu = ({ isMdUp }: { isMdUp: boolean }) => {
+const VisitorSideNavMenu = () => {
   return (
     <ul role="menu" className={styles.list}>
-      <Media lessThan="xl">
-        <NavListItemHome isMdUp={isMdUp} />
+      <Media lessThan="lg">
+        <NavListItemHome />
 
-        <NavListItemSearch isMdUp={isMdUp} />
+        <NavListItemSearch />
       </Media>
 
       <li role="menuitem" className={styles.listItem}>
@@ -149,25 +136,7 @@ const SideNav = () => {
     <section className={styles.sideNav}>
       <Logo />
 
-      {viewer.isAuthed ? (
-        <>
-          <Media greaterThanOrEqual="lg">
-            <SideNavMenu isMdUp />
-          </Media>
-          <Media lessThan="lg">
-            <SideNavMenu isMdUp={false} />
-          </Media>
-        </>
-      ) : (
-        <>
-          <Media greaterThanOrEqual="lg">
-            <VisitorSideNavMenu isMdUp />
-          </Media>
-          <Media lessThan="lg">
-            <VisitorSideNavMenu isMdUp={false} />
-          </Media>
-        </>
-      )}
+      {viewer.isAuthed ? <SideNavMenu /> : <VisitorSideNavMenu />}
     </section>
   )
 }

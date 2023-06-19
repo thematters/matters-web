@@ -5,7 +5,7 @@
 }
 
 .list {
-  @media (--lg-up) {
+  @media (--xl-up) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 
@@ -16,7 +16,7 @@
     position: relative;
     padding: var(--spacing-x-tight) 0;
 
-    @media (--lg-up) {
+    @media (--xl-up) {
       padding: var(--spacing-base) 0;
 
       &:nth-child(2n) {

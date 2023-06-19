@@ -1,14 +1,12 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
-import Link from 'next/link'
 import { useContext } from 'react'
 
-import { PATHS } from '~/common/enums'
 import { translate } from '~/common/utils'
-import { Head, IconLogo, LanguageContext } from '~/components'
+import { Head, LanguageContext } from '~/components'
 
 import Footer from '../About/Footer'
 import Banner from './Banner'
 import Features from './Features'
+import Hero from './Hero'
 import Intro from './Intro'
 import Steps from './Steps'
 import styles from './styles.module.css'
@@ -33,21 +31,7 @@ const Migration = () => {
         })}
       />
 
-      <header className={`l-container ${styles.header}`}>
-        <div className="l-row">
-          <div className="l-col-full">
-            <Link href={PATHS.HOME} legacyBehavior>
-              <a className={styles.logo}>
-                <VisuallyHidden>
-                  <span>{translate({ id: 'discover', lang })}</span>
-                </VisuallyHidden>
-                <IconLogo />
-              </a>
-            </Link>
-          </div>
-        </div>
-      </header>
-
+      <Hero />
       <Intro />
       <Steps />
       <Features />

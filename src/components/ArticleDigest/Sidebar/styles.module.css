@@ -4,7 +4,7 @@
   }
 
   /* show cover only on md-up */
-  @media (--md-up) {
+  @media (--lg-up) {
     position: relative;
     min-height: 4.5rem;
     padding-right: calc(4.5rem + var(--spacing-x-tight));

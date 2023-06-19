@@ -31,7 +31,7 @@
 .avatarField {
   margin: var(--spacing-loose) var(--spacing-base);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     margin: var(--spacing-loose) 0;
   }
 }

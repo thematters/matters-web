@@ -2,7 +2,7 @@
   & header {
     padding: var(--spacing-base);
 
-    @media (--sm-up) {
+    @media (--md-up) {
       padding: var(--spacing-base) 0;
     }
   }

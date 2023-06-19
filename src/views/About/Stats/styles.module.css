@@ -1,7 +1,7 @@
 .stats {
   padding: 4.75rem 0;
 
-  @media (--md-up) {
+  @media (--lg-up) {
     padding: 10rem 0;
   }
 
@@ -12,11 +12,11 @@
       margin-top: var(--spacing-base);
     }
 
-    @media (--sm-up) {
+    @media (--md-up) {
       grid-column: span 4;
     }
 
-    @media (--lg-up) {
+    @media (--xl-up) {
       grid-column: span 3;
 
       & + li + li {
@@ -36,7 +36,7 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-matters-green);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     font-size: 4rem;
   }
 }

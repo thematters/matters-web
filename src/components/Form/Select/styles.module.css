@@ -14,7 +14,7 @@
   text-align: left;
   border-radius: var(--spacing-x-tight);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     max-height: 30vh;
   }
 
