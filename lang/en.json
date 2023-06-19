@@ -11,6 +11,10 @@
     "defaultMessage": "Download App",
     "description": ""
   },
+  "5iii3x": {
+    "defaultMessage": "Circle：",
+    "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"

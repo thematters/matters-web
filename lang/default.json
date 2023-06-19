@@ -111,6 +111,10 @@
     "defaultMessage": "You do not have permission to perform this operation",
     "description": ""
   },
+  "5iii3x": {
+    "defaultMessage": "Circle：",
+    "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
   "5sg7KC": {
     "defaultMessage": "Password",
     "description": ""

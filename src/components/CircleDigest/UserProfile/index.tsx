@@ -36,6 +36,12 @@ const UserProfile = ({
       <header className={styles.header}>
         <LinkWrapper {...path}>
           <Button textColor="green" textActiveColor="green">
+            {!hasDescription && !hasFooter && (
+              <FormattedMessage
+                defaultMessage="Circle："
+                description="src/components/CircleDigest/UserProfile/index.tsx"
+              />
+            )}
             <span className={styles.name}>{displayName}</span>
           </Button>
         </LinkWrapper>
