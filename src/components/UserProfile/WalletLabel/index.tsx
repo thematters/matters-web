@@ -35,7 +35,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
   const address = user?.info.ethAddress
   const ipnsHash = user?.info.ipnsKey
   const targetNetork = featureSupportedChains.ens[0]
-  const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(false)
 
   const { data: ensName } = useEnsName({
     address: address as `0x${string}`,
