@@ -11,6 +11,10 @@
     "defaultMessage": "在 {circlename} 发布广播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "9mfw9c": {
+    "defaultMessage": "钱包地址",
+    "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
+  },
   "5iii3x": {
     "defaultMessage": "围炉：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"

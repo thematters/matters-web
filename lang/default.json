@@ -175,6 +175,10 @@
     "defaultMessage": "Next",
     "description": ""
   },
+  "9mfw9c": {
+    "defaultMessage": "Wallet address",
+    "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
+  },
   "9nNpKP": {
     "defaultMessage": "Discussion sent",
     "description": "src/views/Circle/Discussion/Discussion.tsx"

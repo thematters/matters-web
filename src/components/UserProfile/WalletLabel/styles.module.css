@@ -25,3 +25,15 @@
 .helpIcon {
   font-size: 0;
 }
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-darker);
+
+  & .ensName {
+    color: var(--color-matters-green);
+  }
+}

@@ -11,6 +11,10 @@
     "defaultMessage": "Download App",
     "description": ""
   },
+  "9mfw9c": {
+    "defaultMessage": "Wallet address",
+    "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
+  },
   "5iii3x": {
     "defaultMessage": "Circle：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"

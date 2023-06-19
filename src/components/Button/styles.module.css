@@ -386,6 +386,12 @@ span.container {
   }
 }
 
+.borderGreyDarker {
+  & .hotarea {
+    border-color: var(--color-grey-darker);
+  }
+}
+
 .borderGrey {
   & .hotarea {
     border-color: var(--color-grey);
