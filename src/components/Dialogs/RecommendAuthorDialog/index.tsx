@@ -50,23 +50,27 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
             </p>
           </Dialog.Message>
 
-          <Tabs>
-            <Tabs.Tab onClick={() => setFeed('trendy')} selected={isTrendy}>
-              <Translate zh_hant="最受關注" zh_hans="最受关注" />
-            </Tabs.Tab>
-            <Tabs.Tab
-              onClick={() => setFeed('appreciated')}
-              selected={isAppreciated}
-            >
-              <Translate zh_hant="最受喜愛" zh_hans="最受喜爱" />
-            </Tabs.Tab>
-            <Tabs.Tab onClick={() => setFeed('active')} selected={isActive}>
-              <Translate zh_hant="熱愛交流" zh_hans="热爱交流" />
-            </Tabs.Tab>
-          </Tabs>
+          <section className={styles.tabs}>
+            <Tabs>
+              <Tabs.Tab onClick={() => setFeed('trendy')} selected={isTrendy}>
+                <Translate zh_hant="最受關注" zh_hans="最受关注" />
+              </Tabs.Tab>
+              <Tabs.Tab
+                onClick={() => setFeed('appreciated')}
+                selected={isAppreciated}
+              >
+                <Translate zh_hant="最受喜愛" zh_hans="最受喜爱" />
+              </Tabs.Tab>
+              <Tabs.Tab onClick={() => setFeed('active')} selected={isActive}>
+                <Translate zh_hant="熱愛交流" zh_hans="热爱交流" />
+              </Tabs.Tab>
+            </Tabs>
+          </section>
 
           <Feed type={feed} />
         </Dialog.Content>
+
+        <Dialog.Footer closeDialog={closeDialog} />
       </Dialog>
     </>
   )

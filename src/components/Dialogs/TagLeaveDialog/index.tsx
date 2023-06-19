@@ -58,8 +58,8 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
               en="resign as tag maintainer"
             />
           }
-          closeDialog={closeDialog}
         />
+
         <Dialog.Message>
           <h3>
             <Translate

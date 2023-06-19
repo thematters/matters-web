@@ -53,6 +53,15 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
     setSelected(assets.find(filter))
   }, [cover])
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      color="green"
+      onClick={onSave}
+      text={<Translate id="save" />}
+      loading={coverSaving}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
@@ -67,14 +76,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
             />
           ) : undefined
         }
-        rightBtn={
-          <Dialog.TextButton
-            color="green"
-            onClick={onSave}
-            text={<Translate id="save" />}
-            loading={coverSaving}
-          />
-        }
+        rightBtn={<SubmitButton />}
       />
 
       <Dialog.Content hasGrow>
@@ -92,6 +94,19 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
           )}
         </section>
       </Dialog.Content>
+
+      <Dialog.Footer
+        mdUpBtns={
+          <>
+            <Dialog.TextButton
+              text={onBack ? 'back' : 'close'}
+              color="greyDarker"
+              onClick={onBack || onClose}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

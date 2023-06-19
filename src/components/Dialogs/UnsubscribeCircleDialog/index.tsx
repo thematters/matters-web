@@ -28,7 +28,6 @@ const BaseUnsubscribeCircleDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={isUnsubscribed ? 'unsubscribed' : 'unsubscribeCircle'}
-          closeDialog={closeDialog}
         />
 
         <Dialog.Message>
@@ -66,7 +65,7 @@ const BaseUnsubscribeCircleDialog = ({
           btns={
             isUnsubscribed ? null : (
               <Dialog.RoundedButton
-                text={<Translate zh_hant="轉身離開" zh_hans="转身离开" />}
+                text="confirm"
                 color="red"
                 loading={loading}
                 onClick={() => unsubscribe()}
@@ -76,7 +75,7 @@ const BaseUnsubscribeCircleDialog = ({
           mdUpBtns={
             isUnsubscribed ? null : (
               <Dialog.TextButton
-                text={<Translate zh_hant="轉身離開" zh_hans="转身离开" />}
+                text="confirm"
                 color="red"
                 loading={loading}
                 onClick={() => unsubscribe()}

@@ -30,11 +30,18 @@
   }
 }
 
-.contentInput {
-  @mixin flex-center-start;
+.tabs {
+  @media (--md-up) {
+    padding: 0 var(--spacing-base);
+  }
+}
 
-  flex-direction: column;
-  margin-top: calc(var(--spacing-base) * -1);
+.contentInput {
+  padding: 0 var(--spacing-base);
+
+  @media (--md-up) {
+    padding: 0;
+  }
 }
 
 .preview {

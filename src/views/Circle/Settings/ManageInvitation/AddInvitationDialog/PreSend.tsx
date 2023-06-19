@@ -33,10 +33,10 @@ interface Props {
  * Usage:
  *
  * ```tsx
- *   <BaseInviteePreSend />
+ *   <InviteePreSend />
  * ```
  */
-const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
+const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
@@ -97,8 +97,30 @@ const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
     confirm()
   }
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      text={
+        <FormattedMessage defaultMessage="Confirm and Send" description="" />
+      }
+      color="green"
+      onClick={send}
+      loading={inviteLoading}
+    />
+  )
+
   return (
     <>
+      <Dialog.Header
+        title={
+          <FormattedMessage
+            defaultMessage="Send"
+            description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+          />
+        }
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
+
       <Dialog.Message align="left">
         <p>
           <FormattedMessage
@@ -133,60 +155,19 @@ const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
       <SelectPeriod period={period} onChange={setPeriod} />
 
       <Dialog.Footer
-        closeDialog={closeDialog}
-        btns={
-          <Dialog.RoundedButton
-            text={
-              <FormattedMessage
-                defaultMessage="Confirm and Send"
-                description=""
-              />
-            }
-            color="green"
-            onClick={send}
-            loading={inviteLoading}
-          />
-        }
         mdUpBtns={
-          <Dialog.TextButton
-            text={
-              <FormattedMessage
-                defaultMessage="Confirm and Send"
-                description=""
-              />
-            }
-            color="green"
-            onClick={send}
-            loading={inviteLoading}
-          />
+          <>
+            <Dialog.TextButton
+              text="cancel"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
         }
       />
     </>
   )
 }
-
-/**
- * This is a wrapper component of invitaiton pre-send list.
- *
- * Usage:
- *
- * ```tsx
- *   <InviteePreSend closeDialog={closeDialog} confirm={confirm} invitees={[]} />
- * ```
- */
-const InviteePreSend = (props: Props) => (
-  <>
-    <Dialog.Header
-      title={
-        <FormattedMessage
-          defaultMessage="Send"
-          description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
-        />
-      }
-      closeDialog={props.closeDialog}
-    />
-    <BaseInviteePreSend {...props} />
-  </>
-)
 
 export default InviteePreSend

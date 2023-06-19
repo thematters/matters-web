@@ -20,6 +20,15 @@ const ConfirmContent: React.FC<ContentProps> = ({
     ArticleLicenseType.CcByNcNd_4
   )
 
+  const ConfirmButton = () => (
+    <Dialog.TextButton
+      color="green"
+      onClick={() => onConfirm(license === ArticleLicenseType.Arr, license)}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      loading={loading}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
@@ -31,16 +40,7 @@ const ConfirmContent: React.FC<ContentProps> = ({
             onClick={onBack}
           />
         }
-        rightBtn={
-          <Dialog.TextButton
-            color="green"
-            onClick={() =>
-              onConfirm(license === ArticleLicenseType.Arr, license)
-            }
-            text={<FormattedMessage defaultMessage="Confirm" description="" />}
-            loading={loading}
-          />
-        }
+        rightBtn={<ConfirmButton />}
       />
 
       <Dialog.Content hasFixed>
@@ -50,6 +50,19 @@ const ConfirmContent: React.FC<ContentProps> = ({
           onChange={(newLicense) => setLicense(newLicense)}
         />
       </Dialog.Content>
+
+      <Dialog.Footer
+        mdUpBtns={
+          <>
+            <Dialog.TextButton
+              color="greyDarker"
+              text={<Translate id="back" />}
+              onClick={onBack}
+            />
+            <ConfirmButton />
+          </>
+        }
+      />
     </>
   )
 }

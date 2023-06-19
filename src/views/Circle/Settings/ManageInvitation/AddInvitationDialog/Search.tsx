@@ -45,20 +45,23 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
   const selectedNodes = stagingNodes.filter(({ selected }) => !!selected)
   const disabled = selectedNodes.length === 0
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      color="green"
+      disabled={disabled}
+      onClick={() => save({ nodes: selectedNodes })}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title="addCircleInvitation"
         closeDialog={closeDialog}
-        rightBtn={
-          <Dialog.TextButton
-            color="green"
-            disabled={disabled}
-            onClick={() => save({ nodes: selectedNodes })}
-            text={<FormattedMessage defaultMessage="Confirm" description="" />}
-          />
-        }
+        rightBtn={<SubmitButton />}
       />
+
       <SearchingArea
         inSearchingArea={inSearchingArea}
         searchType="Invitee"
@@ -74,6 +77,19 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
         hint="hintAddCircleInvitee"
         inStagingArea={inStagingArea}
         draggable={false}
+      />
+
+      <Dialog.Footer
+        mdUpBtns={
+          <>
+            <Dialog.TextButton
+              text="cancel"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
       />
     </>
   )

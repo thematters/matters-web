@@ -24,6 +24,14 @@ const BaseAccessDialog = ({
     disableChangeCanComment: props.article?.canComment,
   }
 
+  const CloseButton = () => (
+    <Dialog.TextButton
+      color="green"
+      onClick={closeDialog}
+      text={<Translate id="done" />}
+    />
+  )
+
   return (
     <>
       {children({ openDialog })}
@@ -31,15 +39,8 @@ const BaseAccessDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog} hidePaddingBottom>
         <Dialog.Header
           title="articleManagement"
-          closeDialog={closeDialog}
           leftBtn={<span />}
-          rightBtn={
-            <Dialog.TextButton
-              color="green"
-              onClick={closeDialog}
-              text={<Translate id="done" />}
-            />
-          }
+          rightBtn={<CloseButton />}
         />
 
         <Dialog.Content spacing={['base', 'base']}>
@@ -47,6 +48,8 @@ const BaseAccessDialog = ({
           <Spacer size="base" />
           <ToggleAccess {...props} />
         </Dialog.Content>
+
+        <Dialog.Footer mdUpBtns={<CloseButton />} />
       </Dialog>
     </>
   )

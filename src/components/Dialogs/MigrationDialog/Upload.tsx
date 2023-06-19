@@ -45,9 +45,13 @@ const texts: {
 
 interface MigrationDialogUploadProps {
   nextStep: () => void
+  closeDialog: () => void
 }
 
-const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
+const MigrationDialogUpload = ({
+  nextStep,
+  closeDialog,
+}: MigrationDialogUploadProps) => {
   const { lang } = useContext(LanguageContext)
 
   const { zh_hant, zh_hans } = texts
@@ -141,6 +145,7 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
 
       <label>
         <Dialog.Footer
+          closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
               text={

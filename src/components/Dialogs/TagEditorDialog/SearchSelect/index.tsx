@@ -104,19 +104,21 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
     closeDialog()
   }
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      color="green"
+      onClick={onClickSave}
+      text={<Translate id="save" />}
+      loading={loading}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title="tagAddEditor"
         closeDialog={closeDialog}
-        rightBtn={
-          <Dialog.TextButton
-            color="green"
-            onClick={onClickSave}
-            text={<Translate id="save" />}
-            loading={loading}
-          />
-        }
+        rightBtn={<SubmitButton />}
       />
 
       <SearchingArea
@@ -133,6 +135,19 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
         hint="tagAddEditor"
         inStagingArea={inStagingArea}
         draggable={false}
+      />
+
+      <Dialog.Footer
+        mdUpBtns={
+          <>
+            <Dialog.TextButton
+              text="cancel"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
       />
     </>
   )

@@ -26,7 +26,6 @@ const BaseMigrationDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title="migration"
-          closeDialog={closeDialog}
           cancelText={
             currStep === 'success' ? (
               <Translate id="close" />
@@ -35,7 +34,9 @@ const BaseMigrationDialog = ({
             )
           }
         />
-        {currStep === 'upload' && <Upload nextStep={nextStep} />}
+        {currStep === 'upload' && (
+          <Upload nextStep={nextStep} closeDialog={closeDialog} />
+        )}
         {currStep === 'success' && <Success />}
       </Dialog>
     </>

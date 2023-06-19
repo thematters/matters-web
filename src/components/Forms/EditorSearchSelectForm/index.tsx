@@ -122,21 +122,22 @@ const EditorSearchSelectForm = ({
 
   const enableAdd = stagingNodes.length < maxNodesLength
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      color="green"
+      onClick={closeDialog}
+      // disabled={stagingNodes.length <= 0}
+      text={headerRightButtonText || <Translate id="done" />}
+      loading={saving}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title={title}
         closeDialog={closeDialog}
-        leftBtn={<></>}
-        rightBtn={
-          <Dialog.TextButton
-            color="green"
-            onClick={closeDialog}
-            // disabled={stagingNodes.length <= 0}
-            text={headerRightButtonText || <Translate id="done" />}
-            loading={saving}
-          />
-        }
+        rightBtn={<SubmitButton />}
       />
 
       {inStagingArea && (
@@ -199,6 +200,19 @@ const EditorSearchSelectForm = ({
           CustomStagingArea={CustomStagingArea}
         />
       )}
+
+      <Dialog.Footer
+        mdUpBtns={
+          <>
+            <Dialog.TextButton
+              text="cancel"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

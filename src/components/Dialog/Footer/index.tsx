@@ -19,7 +19,7 @@ const Footer: React.FC<FooterProps> = ({
   cancelText,
   closeDialog,
 }) => {
-  if (!btns && !mdUpBtns) {
+  if (!btns && !mdUpBtns && !closeDialog) {
     return null
   }
 

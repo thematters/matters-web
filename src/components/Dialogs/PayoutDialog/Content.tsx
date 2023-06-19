@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Dialog, Spinner, Translate } from '~/components'
+import { Spinner, Translate } from '~/components'
 
 import { Step } from './types'
 
@@ -46,7 +46,17 @@ const PayoutDialogContent = ({
 
   return (
     <>
-      <Dialog.Header
+      {/* <Dialog.Header
+        title={
+          isConnectStripeAccount
+            ? 'connectStripeAccount'
+            : isResetPassword
+            ? 'resetPaymentPassword'
+            : isComplete
+            ? 'paymentPayoutComplete'
+            : 'paymentPayout'
+        }
+        closeDialog={closeDialog}
         leftBtn={
           prevStep ? (
             <Dialog.TextButton
@@ -58,24 +68,7 @@ const PayoutDialogContent = ({
             <span />
           )
         }
-        rightBtn={
-          <Dialog.TextButton
-            text={<Translate id="close" />}
-            color="green"
-            onClick={closeDialog}
-          />
-        }
-        title={
-          isConnectStripeAccount
-            ? 'connectStripeAccount'
-            : isResetPassword
-            ? 'resetPaymentPassword'
-            : isComplete
-            ? 'paymentPayoutComplete'
-            : 'paymentPayout'
-        }
-        closeDialog={closeDialog}
-      />
+      /> */}
 
       {isConnectStripeAccount && (
         <DynamicConnectStripeAccountForm
@@ -89,6 +82,7 @@ const PayoutDialogContent = ({
           currency={CURRENCY.HKD}
           submitCallback={() => forward('complete')}
           switchToResetPassword={() => forward('resetPassword')}
+          closeDialog={closeDialog}
         />
       )}
 

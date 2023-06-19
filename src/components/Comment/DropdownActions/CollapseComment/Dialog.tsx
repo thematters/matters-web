@@ -82,7 +82,6 @@ const CollapseCommentDialog = ({
               zh_hans={`折叠${COMMENT_TYPE_TEXT.zh_hans[type]}`}
             />
           }
-          closeDialog={closeDialog}
         />
 
         <Dialog.Message>
@@ -99,7 +98,7 @@ const CollapseCommentDialog = ({
           btns={
             <Dialog.RoundedButton
               text={<Translate id="confirm" />}
-              color="green"
+              color="red"
               onClick={() => {
                 onCollapse()
                 closeDialog()
@@ -109,7 +108,7 @@ const CollapseCommentDialog = ({
           mdUpBtns={
             <Dialog.TextButton
               text={<Translate id="confirm" />}
-              color="green"
+              color="red"
               onClick={() => {
                 onCollapse()
                 closeDialog()

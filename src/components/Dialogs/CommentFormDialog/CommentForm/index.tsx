@@ -161,6 +161,20 @@ const CommentForm: React.FC<CommentFormProps> = ({
           <CommentEditor content={content} update={onUpdate} />
         </form>
       </Dialog.Content>
+
+      <Dialog.Footer
+        closeDialog={closeDialog}
+        mdUpBtns={
+          <Dialog.TextButton
+            color="green"
+            type="submit"
+            form={formId}
+            disabled={isSubmitting || !isValid}
+            text={<Translate zh_hant="送出" zh_hans="送出" en="Send" />}
+            loading={isSubmitting}
+          />
+        }
+      />
     </>
   )
 }

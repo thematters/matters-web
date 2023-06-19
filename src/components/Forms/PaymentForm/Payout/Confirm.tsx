@@ -39,6 +39,7 @@ interface FormProps {
   currency: CURRENCY
   submitCallback: () => void
   switchToResetPassword: () => void
+  closeDialog: () => void
 }
 
 interface FormValues {
@@ -51,6 +52,7 @@ const BaseConfirm: React.FC<FormProps> = ({
   currency,
   submitCallback,
   switchToResetPassword,
+  closeDialog,
 }: FormProps) => {
   const formId = 'payout-confirm-form'
 
@@ -111,8 +113,25 @@ const BaseConfirm: React.FC<FormProps> = ({
   const fee = calcMattersFee(values.amount)
   const total = Math.max(numRound(values.amount - fee), 0)
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      text={<Translate id="confirm" />}
+      color="green"
+      type="submit"
+      form={formId}
+      disabled={isSubmitting}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
+      <Dialog.Header
+        title="paymentPayout"
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
+
       <Dialog.Content hasGrow>
         <Form id={formId} onSubmit={handleSubmit}>
           <ConfirmTable>
@@ -236,45 +255,24 @@ const BaseConfirm: React.FC<FormProps> = ({
 
       <Dialog.Footer
         btns={
-          <>
-            <Dialog.RoundedButton
-              text={<Translate id="confirm" />}
-              color="green"
-              type="submit"
-              form={formId}
-              disabled={isSubmitting}
-              loading={isSubmitting}
-            />
-            <Dialog.RoundedButton
-              text={
-                <>
-                  <Translate id="forgetPassword" />？
-                </>
-              }
-              color="greyDarker"
-              onClick={switchToResetPassword}
-            />
-          </>
+          <Dialog.RoundedButton
+            text={
+              <>
+                <Translate id="forgetPassword" />？
+              </>
+            }
+            color="greyDarker"
+            onClick={switchToResetPassword}
+          />
         }
         mdUpBtns={
           <>
             <Dialog.TextButton
-              text={<Translate id="confirm" />}
-              color="green"
-              type="submit"
-              form={formId}
-              disabled={isSubmitting}
-              loading={isSubmitting}
-            />
-            <Dialog.TextButton
-              text={
-                <>
-                  <Translate id="forgetPassword" />？
-                </>
-              }
+              text={<Translate id="forgetPassword" />}
               color="greyDarker"
               onClick={switchToResetPassword}
             />
+            <SubmitButton />
           </>
         }
       />

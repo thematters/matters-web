@@ -48,7 +48,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header title="blockUser" closeDialog={closeDialog} />
+        <Dialog.Header title="blockUser" />
 
         <Dialog.Message>
           <p>

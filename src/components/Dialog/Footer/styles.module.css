@@ -17,6 +17,8 @@
 }
 
 .smUpFooter {
+  @mixin flex-center-end;
+
   padding: var(--spacing-s-loose);
   text-align: right;
 

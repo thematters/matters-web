@@ -81,7 +81,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
       </button>
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header title="deleteDraft" closeDialog={closeDialog} />
+        <Dialog.Header title="deleteDraft" />
 
         <Dialog.Message>
           <p>

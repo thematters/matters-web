@@ -89,7 +89,6 @@ const DeleteCommentDialog = ({
               }}
             />
           }
-          closeDialog={closeDialog}
         />
 
         <Dialog.Message>

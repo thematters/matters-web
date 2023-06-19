@@ -8,8 +8,6 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  Media,
-  Spacer,
   TextIcon,
   Translate,
   useRoute,
@@ -137,7 +135,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     )
   }
 
-  const SubmitButton = (
+  const SubmitButton = () => (
     <Dialog.TextButton
       color="green"
       type="submit"
@@ -162,15 +160,13 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
             />
           ) : null
         }
-        rightBtn={SubmitButton}
+        rightBtn={<SubmitButton />}
       />
 
       <Dialog.Content>
-        <Media at="sm">
-          <Spacer size="base" />
-        </Media>
-
-        <Tab tabType={tabType} setTabType={changeTabType} />
+        <section className={styles.tabs}>
+          <Tab tabType={tabType} setTabType={changeTabType} />
+        </section>
 
         <section className={styles.contentInput}>{InnerForm(tabType)}</section>
 
@@ -195,6 +191,19 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
           />
         </section>
       </Dialog.Content>
+
+      <Dialog.Footer
+        mdUpBtns={
+          <>
+            <Dialog.TextButton
+              text={onBack ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={onBack || closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

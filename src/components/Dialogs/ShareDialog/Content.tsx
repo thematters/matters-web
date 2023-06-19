@@ -49,16 +49,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
       {headerTitle ? (
         <Dialog.Header title={headerTitle} />
       ) : (
-        <Dialog.Header
-          title="share"
-          leftBtn={
-            <Dialog.TextButton
-              color="green"
-              onClick={closeDialog}
-              text="close"
-            />
-          }
-        />
+        <Dialog.Header title="share" />
       )}
 
       <Dialog.Content>

@@ -83,7 +83,6 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
             en="confirm collaborator removal"
           />
         }
-        closeDialog={closeDialog}
       />
 
       <Dialog.Message>
@@ -113,7 +112,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
                 en="Confirm Removal"
               />
             }
-            color="green"
+            color="red"
             onClick={onClick}
             loading={loading}
           />
@@ -127,7 +126,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
                 en="Confirm Removal"
               />
             }
-            color="green"
+            color="red"
             onClick={onClick}
             loading={loading}
           />

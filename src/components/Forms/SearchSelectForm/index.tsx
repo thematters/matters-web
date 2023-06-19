@@ -108,21 +108,23 @@ const SearchSelectForm = ({
     )
   }
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      color="green"
+      onClick={onClickSave}
+      // disabled={stagingNodes.length <= 0}
+      text={headerRightButtonText || <Translate id="save" />}
+      loading={saving}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title={title}
         closeDialog={closeDialog}
         leftBtn={headerLeftButton}
-        rightBtn={
-          <Dialog.TextButton
-            color="green"
-            onClick={onClickSave}
-            // disabled={stagingNodes.length <= 0}
-            text={headerRightButtonText || <Translate id="save" />}
-            loading={saving}
-          />
-        }
+        rightBtn={<SubmitButton />}
       />
 
       <SearchingArea
@@ -144,6 +146,19 @@ const SearchSelectForm = ({
         inStagingArea={inStagingArea}
         draggable={draggable}
         CustomStagingArea={CustomStagingArea}
+      />
+
+      <Dialog.Footer
+        mdUpBtns={
+          <>
+            <Dialog.TextButton
+              text="cancel"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
       />
     </>
   )

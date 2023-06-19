@@ -72,19 +72,9 @@ const BaseHelpDialog = ({ children, hasCount, hasTime }: Props) => {
         </Dialog.Message>
 
         <Dialog.Footer
-          btns={
-            <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="I see" description="" />}
-              color="greyDarker"
-              onClick={closeDialog}
-            />
-          }
-          mdUpBtns={
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="I see" description="" />}
-              color="greyDarker"
-              onClick={closeDialog}
-            />
+          closeDialog={closeDialog}
+          cancelText={
+            <FormattedMessage defaultMessage="I see" description="" />
           }
         />
       </Dialog>

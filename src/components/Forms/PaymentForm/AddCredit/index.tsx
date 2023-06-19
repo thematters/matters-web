@@ -47,6 +47,7 @@ interface FormProps {
   defaultAmount?: number
   callback?: () => any
   callbackText?: React.ReactNode
+  closeDialog?: () => any
 }
 
 interface FormValues {
@@ -77,6 +78,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
   defaultAmount,
   callback,
   callbackText,
+  closeDialog,
 }) => {
   const stripe = useStripe()
   const elements = useElements()
@@ -300,6 +302,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
+        closeDialog={closeDialog}
         btns={
           <Dialog.RoundedButton
             text={

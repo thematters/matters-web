@@ -21,21 +21,20 @@ const ConfirmDialog = ({ removeArticle, children }: ConfirmDialogProps) => {
               zh_hant="確認刪除"
             />
           }
-          closeDialog={closeDialog}
         />
 
         <Dialog.Footer
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<Translate id="delete" />}
+              text="delete"
               color="red"
               onClick={removeArticle}
             />
           }
           mdUpBtns={
             <Dialog.TextButton
-              text={<Translate id="delete" />}
+              text="delete"
               color="red"
               onClick={removeArticle}
             />

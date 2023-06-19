@@ -57,10 +57,7 @@ const SettingsList = ({
 
   return (
     <>
-      <Dialog.Header
-        title={<Translate id="settings" />}
-        closeDialog={closeDialog}
-      />
+      <Dialog.Header title={<Translate id="settings" />} />
 
       <Dialog.Content hasGrow>
         <ul className={styles.list} role="list">
@@ -100,33 +97,33 @@ const SettingsList = ({
           <section className={styles.access}>
             <ToggleAccess {...restProps} />
           </section>
-
-          {(confirmButtonText || cancelButtonText) && (
-            <Dialog.Footer
-              closeDialog={cancelButtonText ? closeDialog : undefined}
-              cancelText={cancelButtonText || undefined}
-              btns={
-                <Dialog.RoundedButton
-                  text={confirmButtonText}
-                  color="green"
-                  onClick={onConfirm ? onConfirm : () => forward('confirm')}
-                  loading={saving}
-                  disabled={disabled}
-                />
-              }
-              mdUpBtns={
-                <Dialog.TextButton
-                  text={confirmButtonText}
-                  color="green"
-                  onClick={onConfirm ? onConfirm : () => forward('confirm')}
-                  loading={saving}
-                  disabled={disabled}
-                />
-              }
-            />
-          )}
         </ul>
       </Dialog.Content>
+
+      {(confirmButtonText || cancelButtonText) && (
+        <Dialog.Footer
+          closeDialog={cancelButtonText ? closeDialog : undefined}
+          cancelText={cancelButtonText || undefined}
+          btns={
+            <Dialog.RoundedButton
+              text={confirmButtonText}
+              color="green"
+              onClick={onConfirm ? onConfirm : () => forward('confirm')}
+              loading={saving}
+              disabled={disabled}
+            />
+          }
+          mdUpBtns={
+            <Dialog.TextButton
+              text={confirmButtonText}
+              color="green"
+              onClick={onConfirm ? onConfirm : () => forward('confirm')}
+              loading={saving}
+              disabled={disabled}
+            />
+          }
+        />
+      )}
     </>
   )
 }

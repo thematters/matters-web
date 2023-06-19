@@ -77,7 +77,7 @@ const ArchiveArticleDialog = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header title="archive" closeDialog={closeDialog} />
+        <Dialog.Header title="archive" />
 
         <Dialog.Message>
           <p>
@@ -89,6 +89,7 @@ const ArchiveArticleDialog = ({
         </Dialog.Message>
 
         <Dialog.Footer
+          closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
               text={

@@ -58,8 +58,8 @@ const BaseDialog = ({ id, children }: Props) => {
           title={
             <Translate zh_hant="認領標籤" zh_hans="认领标签" en="Adopt Tag" />
           }
-          closeDialog={closeDialog}
         />
+
         <Dialog.Message>
           <p>
             <Translate zh_hant={textZhHant} zh_hans={textZhHans} en={textEn} />

@@ -137,7 +137,7 @@ const Request: React.FC<FormProps> = ({
         btns={
           <Dialog.RoundedButton
             text={<Translate id="nextStep" />}
-            color="red"
+            color="green"
             type="submit"
             form={formId}
             disabled={isSubmitting}
@@ -147,7 +147,7 @@ const Request: React.FC<FormProps> = ({
         mdUpBtns={
           <Dialog.TextButton
             text={<Translate id="nextStep" />}
-            color="red"
+            color="green"
             type="submit"
             form={formId}
             disabled={isSubmitting}

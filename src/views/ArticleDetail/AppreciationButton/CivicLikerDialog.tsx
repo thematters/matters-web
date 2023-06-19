@@ -41,7 +41,7 @@ const CivicLikerDialog = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header title="joinCivicLiker" closeDialog={closeDialog} />
+        <Dialog.Header title="joinCivicLiker" />
 
         <Dialog.Message align="left" type="info">
           <p>

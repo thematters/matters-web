@@ -142,6 +142,8 @@ const AppreciatorsDialogContent = ({
           )}
         </InfiniteScroll>
       </Dialog.Content>
+
+      <Dialog.Footer closeDialog={closeDialog} cancelText="close" />
     </>
   )
 }
