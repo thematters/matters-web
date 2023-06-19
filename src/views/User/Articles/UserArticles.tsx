@@ -1,5 +1,4 @@
 import { useContext, useEffect } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
@@ -10,7 +9,6 @@ import {
   ArticleDigestFeed,
   EmptyArticle,
   Head,
-  IconDotDivider,
   InfiniteScroll,
   List,
   Media,
@@ -29,32 +27,6 @@ import {
   VIEWER_ARTICLES,
 } from './gql'
 import styles from './styles.module.css'
-
-const ArticleSummaryInfo = ({
-  user,
-}: {
-  user: NonNullable<UserArticlesPublicQuery['user']>
-}) => {
-  const { articleCount: articles, totalWordCount: words } = user.status || {
-    articleCount: 0,
-    totalWordCount: 0,
-  }
-
-  return (
-    <div className={styles.info}>
-      <span className={styles.num}>{articles}&nbsp;</span>
-      <FormattedMessage defaultMessage="articles" description="" />
-
-      <IconDotDivider />
-
-      <span className={styles.num}>{words}&nbsp;</span>
-      <FormattedMessage
-        defaultMessage="words"
-        description="src/views/User/Articles/UserArticles.tsx"
-      />
-    </div>
-  )
-}
 
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
@@ -217,14 +189,10 @@ const UserArticles = () => {
 
       <Media at="sm">
         <UserTabs />
-
-        <ArticleSummaryInfo user={user} />
       </Media>
       <Media greaterThan="sm">
         <section className={styles.header}>
           <UserTabs />
-
-          <ArticleSummaryInfo user={user} />
         </section>
       </Media>
 

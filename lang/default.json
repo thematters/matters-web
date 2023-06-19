@@ -35,10 +35,6 @@
     "defaultMessage": "Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress.",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
-  "1EYCdR": {
-    "defaultMessage": "Tags",
-    "description": ""
-  },
   "1pFLGZ": {
     "defaultMessage": "Bug Bounty",
     "description": ""
@@ -379,10 +375,6 @@
     "defaultMessage": "Enter Password",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
-  "Ic4hqD": {
-    "defaultMessage": "words",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "ItUuuX": {
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
@@ -390,10 +382,6 @@
   "J+LXrH": {
     "defaultMessage": "User registered by email can login and enable wallet login later",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
-  "J+dIsA": {
-    "defaultMessage": "Subscriptions",
-    "description": ""
   },
   "JaLEXz": {
     "defaultMessage": "Enter Circle",
@@ -606,10 +594,6 @@
   "VwuiYK": {
     "defaultMessage": "This URL name has already been used, try another one",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
-  },
-  "WBVVYd": {
-    "defaultMessage": "Responses",
-    "description": ""
   },
   "WSUAwk": {
     "defaultMessage": "Add to Featured",
@@ -841,10 +825,6 @@
   },
   "ieGrWo": {
     "defaultMessage": "Follow",
-    "description": ""
-  },
-  "ikVIu3": {
-    "defaultMessage": "articles",
     "description": ""
   },
   "ioPWl8": {
