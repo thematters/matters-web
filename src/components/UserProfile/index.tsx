@@ -173,7 +173,7 @@ export const UserProfile = () => {
 
           <header>
             <section className={styles.avatar}>
-              <Avatar size="xxxl" />
+              <Avatar size="xxxlm" />
             </section>
           </header>
 
@@ -203,6 +203,16 @@ export const UserProfile = () => {
   /**
    * Active or Onboarding User
    */
+
+  const avatar = (
+    <section className={styles.avatar}>
+      {hasTraveloggersBadge ? (
+        <TraveloggersAvatar user={user} isMe={isMe} size="xxxlm" />
+      ) : (
+        <Avatar size="xxxlm" user={user} inProfile />
+      )}
+    </section>
+  )
   return (
     <>
       <section
@@ -212,13 +222,15 @@ export const UserProfile = () => {
         <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
         <Media at="sm">
           <header className={styles.header}>
-            <section className={styles.avatar}>
-              {hasTraveloggersBadge ? (
-                <TraveloggersAvatar user={user} isMe={isMe} size="xxxlm" />
-              ) : (
-                <Avatar size="xxxlm" user={user} inProfile />
-              )}
-            </section>
+            {isMe && (
+              <EditProfileDialog user={user}>
+                {({ openDialog: openEditProfileDialog }) => (
+                  <section onClick={openEditProfileDialog}>{avatar}</section>
+                )}
+              </EditProfileDialog>
+            )}
+
+            {!isMe && avatar}
 
             <section className={styles.right}>
               {isMe && (

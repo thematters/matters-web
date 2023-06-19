@@ -12,7 +12,9 @@
 }
 
 .right {
-  @mixin flex-end-space-between;
+  @mixin flex-start-space-between;
+
+  margin-top: var(--spacing-base);
 
   & > * {
     &:nth-child(2) {
@@ -22,7 +24,7 @@
 }
 
 .header {
-  @mixin flex-end-space-between;
+  @mixin flex-start-space-between;
 
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-base);
