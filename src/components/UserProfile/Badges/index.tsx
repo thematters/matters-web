@@ -7,7 +7,12 @@ import { Tooltip, Translate, withIcon } from '~/components'
 
 import styles from './styles.module.css'
 
-export const SeedBadge = ({ isInDialog }: { isInDialog?: boolean }) => {
+type badgePros = {
+  isInDialog?: boolean
+  hasTooltip?: boolean
+}
+
+export const SeedBadge = ({ isInDialog, hasTooltip }: badgePros) => {
   const copy = (
     <Translate zh_hant="種子用戶" zh_hans="种子用户" en="Seed User" />
   )
@@ -20,16 +25,24 @@ export const SeedBadge = ({ isInDialog }: { isInDialog?: boolean }) => {
     )
   }
 
+  if (hasTooltip) {
+    return (
+      <Tooltip content={copy}>
+        <span className={styles.badge}>
+          {withIcon(IconSeedBadge)({ size: 'mdS' })}
+        </span>
+      </Tooltip>
+    )
+  }
+
   return (
-    <Tooltip content={copy}>
-      <span className={styles.badge}>
-        {withIcon(IconSeedBadge)({ size: 'mdS' })}
-      </span>
-    </Tooltip>
+    <span className={styles.badge}>
+      {withIcon(IconSeedBadge)({ size: 'mdS' })}
+    </span>
   )
 }
 
-export const GoldenMotorBadge = ({ isInDialog }: { isInDialog?: boolean }) => {
+export const GoldenMotorBadge = ({ isInDialog, hasTooltip }: badgePros) => {
   const copy = (
     <Translate
       zh_hant="支持超過 100 次"
@@ -46,16 +59,24 @@ export const GoldenMotorBadge = ({ isInDialog }: { isInDialog?: boolean }) => {
     )
   }
 
+  if (hasTooltip) {
+    return (
+      <Tooltip content={copy}>
+        <span className={styles.badge}>
+          {withIcon(IconGoldenMotorBadge)({ size: 'mdS' })}
+        </span>
+      </Tooltip>
+    )
+  }
+
   return (
-    <Tooltip content={copy}>
-      <span className={styles.badge}>
-        {withIcon(IconGoldenMotorBadge)({ size: 'mdS' })}
-      </span>
-    </Tooltip>
+    <span className={styles.badge}>
+      {withIcon(IconGoldenMotorBadge)({ size: 'mdS' })}
+    </span>
   )
 }
 
-export const ArchitectBadge = ({ isInDialog }: { isInDialog?: boolean }) => {
+export const ArchitectBadge = ({ isInDialog, hasTooltip }: badgePros) => {
   const copy = (
     <Translate
       zh_hant="馬特市建築師"
@@ -72,16 +93,24 @@ export const ArchitectBadge = ({ isInDialog }: { isInDialog?: boolean }) => {
     )
   }
 
+  if (hasTooltip) {
+    return (
+      <Tooltip content={copy}>
+        <span className={styles.badge}>
+          {withIcon(IconArchitectBadge)({ size: 'mdS' })}
+        </span>
+      </Tooltip>
+    )
+  }
+
   return (
-    <Tooltip content={copy}>
-      <span className={styles.badge}>
-        {withIcon(IconArchitectBadge)({ size: 'mdS' })}
-      </span>
-    </Tooltip>
+    <span className={styles.badge}>
+      {withIcon(IconArchitectBadge)({ size: 'mdS' })}
+    </span>
   )
 }
 
-export const CivicLikerBadge = ({ isInDialog }: { isInDialog?: boolean }) => {
+export const CivicLikerBadge = ({ isInDialog, hasTooltip }: badgePros) => {
   const copy = (
     <Translate zh_hant="讚賞公民" zh_hans="赞赏公民" en="CIVIC LIKER" />
   )
@@ -94,16 +123,24 @@ export const CivicLikerBadge = ({ isInDialog }: { isInDialog?: boolean }) => {
     )
   }
 
+  if (hasTooltip) {
+    return (
+      <Tooltip content={copy}>
+        <span className={styles.badge}>
+          {withIcon(IconCivicLikerBadge)({ size: 'mdS' })}
+        </span>
+      </Tooltip>
+    )
+  }
+
   return (
-    <Tooltip content={copy}>
-      <span className={styles.badge}>
-        {withIcon(IconCivicLikerBadge)({ size: 'mdS' })}
-      </span>
-    </Tooltip>
+    <span className={styles.badge}>
+      {withIcon(IconCivicLikerBadge)({ size: 'mdS' })}
+    </span>
   )
 }
 
-export const TraveloggersBadge = ({ isInDialog }: { isInDialog?: boolean }) => {
+export const TraveloggersBadge = ({ isInDialog, hasTooltip }: badgePros) => {
   const copy = (
     <Translate
       zh_hant="Traveloggers"
@@ -119,12 +156,19 @@ export const TraveloggersBadge = ({ isInDialog }: { isInDialog?: boolean }) => {
       </section>
     )
   }
+  if (hasTooltip) {
+    return (
+      <Tooltip content={copy}>
+        <span className={styles.badge}>
+          {withIcon(IconTraveloggersBadge)({ size: 'mdS' })}
+        </span>
+      </Tooltip>
+    )
+  }
 
   return (
-    <Tooltip content={copy}>
-      <span className={styles.badge}>
-        {withIcon(IconTraveloggersBadge)({ size: 'mdS' })}
-      </span>
-    </Tooltip>
+    <span className={styles.badge}>
+      {withIcon(IconTraveloggersBadge)({ size: 'mdS' })}
+    </span>
   )
 }

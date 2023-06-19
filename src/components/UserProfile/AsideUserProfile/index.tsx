@@ -212,11 +212,11 @@ export const AsideUserProfile = () => {
           </section>
 
           <section className={styles.badges}>
-            {hasTraveloggersBadge && <TraveloggersBadge />}
-            {hasSeedBadge && <SeedBadge />}
-            {hasGoldenMotorBadge && <GoldenMotorBadge />}
-            {hasArchitectBadge && <ArchitectBadge />}
-            {isCivicLiker && <CivicLikerBadge />}
+            {hasTraveloggersBadge && <TraveloggersBadge hasTooltip />}
+            {hasSeedBadge && <SeedBadge hasTooltip />}
+            {hasGoldenMotorBadge && <GoldenMotorBadge hasTooltip />}
+            {hasArchitectBadge && <ArchitectBadge hasTooltip />}
+            {isCivicLiker && <CivicLikerBadge hasTooltip />}
 
             {user?.info.ethAddress && (
               <DynamicWalletLabel user={user} isMe={isMe} hasTooltip />
