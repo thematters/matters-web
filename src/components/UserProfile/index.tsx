@@ -32,6 +32,7 @@ import {
   SeedBadge,
   TraveloggersBadge,
 } from './Badges'
+import { BadgesDialog } from './BadgesDialog'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
 import { EditProfileDialog } from './DropdownActions/EditProfileDialog'
@@ -150,6 +151,16 @@ export const UserProfile = () => {
   const isUserBanned = userState === 'banned'
   const isUserInactive = isUserArchived || isUserBanned
 
+  const Badges = ({ isInDialog }: { isInDialog?: boolean }) => (
+    <span className={isInDialog ? styles.badgesInDialog : ''}>
+      {hasTraveloggersBadge && <TraveloggersBadge isInDialog={isInDialog} />}
+      {hasSeedBadge && <SeedBadge isInDialog={isInDialog} />}
+      {hasGoldenMotorBadge && <GoldenMotorBadge isInDialog={isInDialog} />}
+      {hasArchitectBadge && <ArchitectBadge isInDialog={isInDialog} />}
+      {isCivicLiker && <CivicLikerBadge isInDialog={isInDialog} />}
+    </span>
+  )
+
   /**
    * Inactive User
    */
@@ -242,13 +253,15 @@ export const UserProfile = () => {
               >
                 {user.displayName}
               </h1>
-              <span className={styles.badges}>
-                {hasTraveloggersBadge && <TraveloggersBadge />}
-                {hasSeedBadge && <SeedBadge />}
-                {hasGoldenMotorBadge && <GoldenMotorBadge />}
-                {hasArchitectBadge && <ArchitectBadge />}
-                {isCivicLiker && <CivicLikerBadge />}
-              </span>
+              <BadgesDialog content={<Badges isInDialog />}>
+                {({ openDialog }) => {
+                  return (
+                    <span className={styles.badges} onClick={openDialog}>
+                      <Badges />
+                    </span>
+                  )
+                }}
+              </BadgesDialog>
               {user?.info.ethAddress && (
                 <DynamicWalletLabel user={user} isMe={isMe} />
               )}

@@ -275,6 +275,10 @@
     "defaultMessage": "Read counts indicates how many registered users read.",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
+  "DYrDcG": {
+    "defaultMessage": "Badges",
+    "description": "src/components/UserProfile/index.tsx"
+  },
   "DedJGE": {
     "defaultMessage": "Pin to profile",
     "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"

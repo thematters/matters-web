@@ -15,6 +15,10 @@
     "defaultMessage": "Circle：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
+  "DYrDcG": {
+    "defaultMessage": "Badges",
+    "description": "src/components/UserProfile/index.tsx"
+  },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"

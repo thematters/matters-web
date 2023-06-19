@@ -15,6 +15,10 @@
     "defaultMessage": "圍爐：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
+  "DYrDcG": {
+    "defaultMessage": "徽章",
+    "description": "src/components/UserProfile/index.tsx"
+  },
   "AVpR3Q": {
     "defaultMessage": "已綁定錢包",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"

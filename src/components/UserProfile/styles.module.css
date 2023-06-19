@@ -73,7 +73,7 @@
   }
 
   .badges {
-    & > * {
+    & > span > * {
       position: relative;
       display: inline-block;
       box-shadow: 0 0 0 1px var(--color-white);
@@ -99,6 +99,14 @@
       }
     }
   }
+}
+
+.badgesInDialog {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-row-gap: var(--spacing-loose);
+  padding: 0 var(--spacing-base);
+  padding-top: var(--spacing-base);
 }
 
 .follow {
