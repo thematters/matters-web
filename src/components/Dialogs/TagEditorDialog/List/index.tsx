@@ -95,7 +95,6 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
           en="Add collaborator"
         />
       }
-      color="green"
       onClick={toAddStep}
     />
   )

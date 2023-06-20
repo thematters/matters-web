@@ -124,7 +124,6 @@ const EditorSearchSelectForm = ({
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      color="green"
       onClick={closeDialog}
       // disabled={stagingNodes.length <= 0}
       text={headerRightButtonText || <Translate id="done" />}

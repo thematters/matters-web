@@ -20,7 +20,6 @@ const Complete: React.FC = () => {
         btns={
           <Dialog.RoundedButton
             text={<Translate id="done" />}
-            color="green"
             onClick={() => {
               redirectToTarget({
                 fallback: 'current',
@@ -31,7 +30,6 @@ const Complete: React.FC = () => {
         smUpBtns={
           <Dialog.TextButton
             text={<Translate id="done" />}
-            color="green"
             onClick={() => {
               redirectToTarget({
                 fallback: 'current',

@@ -40,7 +40,6 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
             isForget ? (
               <Dialog.RoundedButton
                 text={<Translate id="login" />}
-                color="green"
                 {...appendTarget(PATHS.LOGIN)}
               />
             ) : null
@@ -49,7 +48,6 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
             isForget ? (
               <Dialog.TextButton
                 text={<Translate id="login" />}
-                color="green"
                 {...appendTarget(PATHS.LOGIN)}
               />
             ) : null

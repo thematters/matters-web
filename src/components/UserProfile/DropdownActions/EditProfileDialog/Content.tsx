@@ -267,7 +267,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      color="green"
       type="submit"
       form={formId}
       disabled={isSubmitting}

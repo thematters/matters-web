@@ -26,20 +26,12 @@ const Complete: React.FC<CompleteProps> = ({
         cancelText={callback ? undefined : 'close'}
         btns={
           callback ? (
-            <Dialog.RoundedButton
-              text={callbackText}
-              color="green"
-              onClick={callback}
-            />
+            <Dialog.RoundedButton text={callbackText} onClick={callback} />
           ) : null
         }
         smUpBtns={
           callback ? (
-            <Dialog.TextButton
-              text={callbackText}
-              color="green"
-              onClick={callback}
-            />
+            <Dialog.TextButton text={callbackText} onClick={callback} />
           ) : null
         }
       />

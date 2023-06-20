@@ -61,7 +61,6 @@ const Complete = ({
                 description="src/components/Forms/EmailSignUpForm/Complete.tsx"
               />
             }
-            color="green"
             onClick={() => {
               redirectToTarget({
                 fallback: isInPage ? 'homepage' : 'current',
@@ -77,7 +76,6 @@ const Complete = ({
                 description="src/components/Forms/EmailSignUpForm/Complete.tsx"
               />
             }
-            color="green"
             onClick={() => {
               redirectToTarget({
                 fallback: isInPage ? 'homepage' : 'current',

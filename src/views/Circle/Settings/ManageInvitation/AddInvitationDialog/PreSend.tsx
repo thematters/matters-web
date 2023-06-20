@@ -102,7 +102,6 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
       text={
         <FormattedMessage defaultMessage="Confirm and Send" description="" />
       }
-      color="green"
       onClick={send}
       loading={inviteLoading}
     />

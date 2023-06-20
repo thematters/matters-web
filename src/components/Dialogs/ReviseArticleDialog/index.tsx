@@ -69,7 +69,6 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
               text={
                 <Translate zh_hant="開始修訂" zh_hans="开始修订" en="Edit" />
               }
-              color="green"
               onClick={closeDialog}
             />
           }
@@ -78,7 +77,6 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
               text={
                 <Translate zh_hant="開始修訂" zh_hans="开始修订" en="Edit" />
               }
-              color="green"
               onClick={closeDialog}
             />
           }

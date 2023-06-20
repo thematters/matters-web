@@ -70,7 +70,6 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
         btns={
           <Dialog.RoundedButton
             text={<Translate id={error ? 'retry' : 'continue'} />}
-            color="green"
             disabled={!error}
             onClick={prevStep}
           />
@@ -78,7 +77,6 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
         smUpBtns={
           <Dialog.TextButton
             text={<Translate id={error ? 'retry' : 'continue'} />}
-            color="green"
             disabled={!error}
             onClick={prevStep}
           />

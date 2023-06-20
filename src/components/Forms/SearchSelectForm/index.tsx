@@ -110,7 +110,6 @@ const SearchSelectForm = ({
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      color="green"
       onClick={onClickSave}
       // disabled={stagingNodes.length <= 0}
       text={headerRightButtonText || <Translate id="save" />}

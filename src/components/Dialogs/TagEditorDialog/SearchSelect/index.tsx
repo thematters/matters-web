@@ -106,7 +106,6 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      color="green"
       onClick={onClickSave}
       text={<Translate id="save" />}
       loading={loading}

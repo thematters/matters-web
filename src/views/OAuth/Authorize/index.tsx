@@ -176,7 +176,6 @@ const BaseOAuthAuthorize = () => {
                   <Translate id="agree" />
                 )
               }
-              color="green"
               href={isNoLiker ? PATHS.ME_SETTINGS : undefined}
               type={isNoLiker ? 'button' : 'submit'}
             />
@@ -194,7 +193,6 @@ const BaseOAuthAuthorize = () => {
                   <Translate id="agree" />
                 )
               }
-              color="green"
               href={isNoLiker ? PATHS.ME_SETTINGS : undefined}
               type={isNoLiker ? 'button' : 'submit'}
             />

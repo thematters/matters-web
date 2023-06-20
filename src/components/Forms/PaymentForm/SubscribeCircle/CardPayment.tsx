@@ -172,7 +172,6 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
             text={
               <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
             }
-            color="green"
             disabled={disabled || isSubmitting || !!checkoutError}
             loading={isSubmitting}
             onClick={handleSubmit}
@@ -189,7 +188,6 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
               text={
                 <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
               }
-              color="green"
               disabled={disabled || isSubmitting || !!checkoutError}
               loading={isSubmitting}
               onClick={handleSubmit}

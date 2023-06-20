@@ -44,7 +44,6 @@ const Header: React.FC<HeaderProps> = ({
                     <FormattedMessage defaultMessage="Cancel" description="" />
                   )
                 }
-                color="green"
                 onClick={closeDialog}
               />
             </section>

@@ -30,14 +30,12 @@ const Ask = ({ children }: AskProps) => {
           btns={
             <Dialog.RoundedButton
               text={<Translate id="confirm" />}
-              color="green"
               href={PATHS.ME_SETTINGS_CHANGE_USERNAME}
             />
           }
           smUpBtns={
             <Dialog.TextButton
               text={<Translate id="confirm" />}
-              color="green"
               href={PATHS.ME_SETTINGS_CHANGE_USERNAME}
             />
           }

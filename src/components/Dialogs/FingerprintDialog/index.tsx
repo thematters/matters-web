@@ -100,7 +100,6 @@ const BaseFingerprintDialog = ({
           leftBtn={
             <Dialog.TextButton
               text={<Translate id="cancel" />}
-              color="green"
               onClick={closeDialog}
             />
           }

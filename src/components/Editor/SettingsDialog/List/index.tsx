@@ -107,7 +107,6 @@ const SettingsList = ({
           btns={
             <Dialog.RoundedButton
               text={confirmButtonText}
-              color="green"
               onClick={onConfirm ? onConfirm : () => forward('confirm')}
               loading={saving}
               disabled={disabled}
@@ -116,7 +115,6 @@ const SettingsList = ({
           smUpBtns={
             <Dialog.TextButton
               text={confirmButtonText}
-              color="green"
               onClick={onConfirm ? onConfirm : () => forward('confirm')}
               loading={saving}
               disabled={disabled}

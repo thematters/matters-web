@@ -47,7 +47,6 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      color="green"
       disabled={disabled}
       onClick={() => save({ nodes: selectedNodes })}
       text={<FormattedMessage defaultMessage="Confirm" description="" />}

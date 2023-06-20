@@ -23,6 +23,10 @@ const Footer: React.FC<FooterProps> = ({
     return null
   }
 
+  const text = cancelText || (
+    <FormattedMessage defaultMessage="Cancel" description="" />
+  )
+
   return (
     <>
       {(btns || closeDialog) && (
@@ -31,11 +35,7 @@ const Footer: React.FC<FooterProps> = ({
             {btns}
             {closeDialog && (
               <RoundedButton
-                text={
-                  cancelText || (
-                    <FormattedMessage defaultMessage="Cancel" description="" />
-                  )
-                }
+                text={text}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -48,11 +48,7 @@ const Footer: React.FC<FooterProps> = ({
           <footer className={styles.smUpFooter}>
             {closeDialog && (
               <TextButton
-                text={
-                  cancelText || (
-                    <FormattedMessage defaultMessage="Cancel" description="" />
-                  )
-                }
+                text={text}
                 color="greyDarker"
                 onClick={closeDialog}
               />

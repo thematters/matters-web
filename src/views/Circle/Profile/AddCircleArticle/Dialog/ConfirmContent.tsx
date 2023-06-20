@@ -22,7 +22,6 @@ const ConfirmContent: React.FC<ContentProps> = ({
 
   const ConfirmButton = () => (
     <Dialog.TextButton
-      color="green"
       onClick={() => onConfirm(license === ArticleLicenseType.Arr, license)}
       text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={loading}
@@ -34,11 +33,7 @@ const ConfirmContent: React.FC<ContentProps> = ({
       <Dialog.Header
         title="addArticles"
         leftBtn={
-          <Dialog.TextButton
-            color="green"
-            text={<Translate id="back" />}
-            onClick={onBack}
-          />
+          <Dialog.TextButton text={<Translate id="back" />} onClick={onBack} />
         }
         rightBtn={<ConfirmButton />}
       />

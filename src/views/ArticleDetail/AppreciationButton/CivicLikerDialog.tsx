@@ -117,7 +117,6 @@ const CivicLikerDialog = ({
                   en="Register now"
                 />
               }
-              color="green"
               htmlHref={
                 user.liker.likerId
                   ? EXTERNAL_LINKS.CIVIC_LIKER(user.liker.likerId)
@@ -136,7 +135,6 @@ const CivicLikerDialog = ({
                   en="Register now"
                 />
               }
-              color="green"
               htmlHref={
                 user.liker.likerId
                   ? EXTERNAL_LINKS.CIVIC_LIKER(user.liker.likerId)

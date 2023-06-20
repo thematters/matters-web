@@ -87,7 +87,6 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
         btns={
           <Dialog.RoundedButton
             text={<Translate id="retry" />}
-            color="green"
             disabled={!error}
             onClick={prevStep}
           />
@@ -95,7 +94,6 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
         smUpBtns={
           <Dialog.TextButton
             text={<Translate id="retry" />}
-            color="green"
             disabled={!error}
             onClick={prevStep}
           />

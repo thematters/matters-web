@@ -42,16 +42,11 @@ const MigrationDialogSuccess = () => {
         btns={
           <Dialog.RoundedButton
             text={<Translate id="back" />}
-            color="green"
             href={PATHS.HOME}
           />
         }
         smUpBtns={
-          <Dialog.TextButton
-            text={<Translate id="back" />}
-            color="green"
-            href={PATHS.HOME}
-          />
+          <Dialog.TextButton text={<Translate id="back" />} href={PATHS.HOME} />
         }
       />
     </>

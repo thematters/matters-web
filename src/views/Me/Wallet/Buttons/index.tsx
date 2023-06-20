@@ -18,7 +18,6 @@ const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
           {({ openDialog }) => (
             <Dialog.RoundedButton
               text={<Translate id="topUp" />}
-              color="green"
               onClick={() => {
                 openDialog()
                 analytics.trackEvent('click_button', { type: 'top_up' })

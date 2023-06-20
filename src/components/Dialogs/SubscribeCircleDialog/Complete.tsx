@@ -25,14 +25,12 @@ const Complete: React.FC<CompleteProps> = ({ circle }) => {
         btns={
           <Dialog.RoundedButton
             text={<Translate zh_hant="馬上逛逛" zh_hans="马上逛逛" />}
-            color="green"
             htmlHref={toPath({ page: 'circleDetail', circle }).href}
           />
         }
         smUpBtns={
           <Dialog.TextButton
             text={<Translate zh_hant="馬上逛逛" zh_hans="马上逛逛" />}
-            color="green"
             htmlHref={toPath({ page: 'circleDetail', circle }).href}
           />
         }

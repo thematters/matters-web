@@ -150,7 +150,6 @@ const LinkENS = ({
                   {targetNetwork.name}
                 </>
               }
-              color="green"
               onClick={switchToTargetNetwork}
             />
           }
@@ -168,7 +167,6 @@ const LinkENS = ({
                     {targetNetwork.name}
                   </>
                 }
-                color="green"
                 loading={isSwitchingNetwork}
               />
             </>
@@ -222,7 +220,6 @@ const LinkENS = ({
                   en="Reconnect Wallet"
                 />
               }
-              color="green"
               onClick={() => disconnect()}
             />
           }
@@ -238,7 +235,6 @@ const LinkENS = ({
                     en="Reconnect Wallet"
                   />
                 }
-                color="green"
                 onClick={() => disconnect()}
               />
             </>
@@ -277,7 +273,6 @@ const LinkENS = ({
         btns={
           <Dialog.RoundedButton
             text={<Translate id="bindIPNStoENS" />}
-            color="green"
             onClick={linkIPNStoENS}
           />
         }
@@ -287,7 +282,6 @@ const LinkENS = ({
 
             <Dialog.TextButton
               text={<Translate id="bindIPNStoENS" />}
-              color="green"
               loading={isLoading || txConfirming}
             />
           </>

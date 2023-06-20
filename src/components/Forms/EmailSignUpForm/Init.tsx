@@ -189,7 +189,6 @@ const Init: React.FC<FormProps> = ({
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      color="green"
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -231,11 +230,7 @@ const Init: React.FC<FormProps> = ({
         title="register"
         leftBtn={
           back ? (
-            <Dialog.TextButton
-              color="green"
-              text={<Translate id="back" />}
-              onClick={back}
-            />
+            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
           ) : null
         }
         closeDialog={closeDialog}

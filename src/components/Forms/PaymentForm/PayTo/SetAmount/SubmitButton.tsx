@@ -34,9 +34,9 @@ const WrapperButton: React.FC<
   Omit<DialogTextButtonProps, 'color'> & Pick<SubmitButtonProps, 'mode'>
 > = ({ mode, ...restProps }) => {
   if (mode === 'text') {
-    return <Dialog.TextButton color="green" {...restProps} />
+    return <Dialog.TextButton {...restProps} />
   } else {
-    return <Dialog.RoundedButton color="green" {...restProps} />
+    return <Dialog.RoundedButton {...restProps} />
   }
 }
 

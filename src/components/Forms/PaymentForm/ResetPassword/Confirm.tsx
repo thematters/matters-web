@@ -169,11 +169,7 @@ const Confirm: React.FC<FormProps> = ({
         closeDialog={closeDialog}
         leftBtn={
           back ? (
-            <Dialog.TextButton
-              text={<Translate id="back" />}
-              color="green"
-              onClick={back}
-            />
+            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
           ) : undefined
         }
       />

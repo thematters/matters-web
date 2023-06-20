@@ -260,18 +260,10 @@ const BaseAddCredit: React.FC<FormProps> = ({
         {callback && (
           <Dialog.Footer
             btns={
-              <Dialog.RoundedButton
-                text={callbackText}
-                color="green"
-                onClick={callback}
-              />
+              <Dialog.RoundedButton text={callbackText} onClick={callback} />
             }
             smUpBtns={
-              <Dialog.TextButton
-                text={callbackText}
-                color="green"
-                onClick={callback}
-              />
+              <Dialog.TextButton text={callbackText} onClick={callback} />
             }
           />
         )}
@@ -282,7 +274,6 @@ const BaseAddCredit: React.FC<FormProps> = ({
   const SubmitButton = () => (
     <Dialog.TextButton
       text={<Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />}
-      color="green"
       type="submit"
       form={formId}
       disabled={disabled || !isValid || isSubmitting || !!checkoutError}

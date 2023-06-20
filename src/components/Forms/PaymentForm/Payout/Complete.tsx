@@ -50,7 +50,6 @@ const Complete: React.FC<Props> = ({ closeDialog }) => {
                 en="View Tansaction"
               />
             }
-            color="green"
             href={PATHS.ME_WALLET_TRANSACTIONS}
           />
         }
@@ -63,7 +62,6 @@ const Complete: React.FC<Props> = ({ closeDialog }) => {
                 en="View Tansaction"
               />
             }
-            color="green"
             href={PATHS.ME_WALLET_TRANSACTIONS}
           />
         }

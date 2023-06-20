@@ -297,7 +297,6 @@ const Select: React.FC<FormProps> = ({
         leftBtn={
           back ? (
             <Dialog.TextButton
-              color="green"
               text={<Translate id="back" />}
               onClick={onBack}
             />

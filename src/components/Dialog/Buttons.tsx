@@ -11,13 +11,13 @@ import {
 
 export type DialogTextButtonProps = {
   text: string | React.ReactNode
-  color: 'greyDarker' | 'green' | 'red'
+  color?: 'greyDarker' | 'green' | 'red'
   loading?: boolean
 } & ButtonProps
 
 export const TextButton: React.FC<DialogTextButtonProps> = ({
   text,
-  color,
+  color = 'green',
   loading,
   ...restProps
 }) => {
@@ -56,7 +56,7 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
 
 export type DialogRoundedButtonProps = {
   text: string | React.ReactNode
-  color: 'greyDarker' | 'green' | 'red'
+  color?: 'greyDarker' | 'green' | 'red'
   icon?: React.ReactNode
   loading?: boolean
 } & ButtonProps
@@ -64,7 +64,7 @@ export type DialogRoundedButtonProps = {
 export const RoundedButton: React.FC<
   React.PropsWithChildren<DialogRoundedButtonProps>
 > = forwardRef(
-  ({ text, color, loading, icon, disabled, ...restProps }, ref) => {
+  ({ text, color = 'green', loading, icon, disabled, ...restProps }, ref) => {
     let buttonProps: ButtonProps = restProps
 
     switch (color) {

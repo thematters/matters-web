@@ -444,7 +444,6 @@ const Connect: React.FC<FormProps> = ({
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      color="green"
       type="submit"
       form={formId}
       disabled={isSubmitting || loading || !account}
@@ -483,7 +482,6 @@ const Connect: React.FC<FormProps> = ({
         leftBtn={
           back ? (
             <Dialog.TextButton
-              color="green"
               text={<Translate id="back" />}
               onClick={onBack}
             />

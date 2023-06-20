@@ -20,11 +20,7 @@ const ConfirmRevisedPublishDialogContent = ({
   }
 
   const SubmitButton = () => (
-    <Dialog.TextButton
-      color="green"
-      text={<Translate id="publish" />}
-      onClick={onPublish}
-    />
+    <Dialog.TextButton text={<Translate id="publish" />} onClick={onPublish} />
   )
 
   return (
@@ -32,11 +28,7 @@ const ConfirmRevisedPublishDialogContent = ({
       <Dialog.Header
         title={<Translate zh_hant="發布須知" zh_hans="發布须知" en="Notice" />}
         leftBtn={
-          <Dialog.TextButton
-            color="green"
-            text={<Translate id="back" />}
-            onClick={onBack}
-          />
+          <Dialog.TextButton text={<Translate id="back" />} onClick={onBack} />
         }
         rightBtn={<SubmitButton />}
       />

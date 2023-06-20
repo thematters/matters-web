@@ -225,7 +225,6 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      color="green"
       text={<Translate id="confirm" />}
       type="submit"
       form={formId}

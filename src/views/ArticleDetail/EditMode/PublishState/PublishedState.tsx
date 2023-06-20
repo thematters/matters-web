@@ -76,7 +76,6 @@ const PublishedState = ({ article, cancel, newestMediaHash }: Props) => {
               en="View republished article"
             />
           }
-          color="green"
           onClick={() => {
             cancel()
             router.push(path.href)
@@ -92,7 +91,6 @@ const PublishedState = ({ article, cancel, newestMediaHash }: Props) => {
               en="View republished article"
             />
           }
-          color="green"
           onClick={() => {
             cancel()
             router.push(path.href)

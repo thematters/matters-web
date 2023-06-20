@@ -136,7 +136,6 @@ const Request: React.FC<FormProps> = ({
   const SubmitButton = () => (
     <Dialog.TextButton
       text={<Translate id="nextStep" />}
-      color="green"
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -151,11 +150,7 @@ const Request: React.FC<FormProps> = ({
         closeDialog={closeDialog}
         leftBtn={
           back ? (
-            <Dialog.TextButton
-              text={<Translate id="back" />}
-              color="green"
-              onClick={back}
-            />
+            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
           ) : undefined
         }
         rightBtn={<SubmitButton />}

@@ -84,7 +84,6 @@ const BaseDialog = ({ id, children }: Props) => {
                   en="Maintain immediately"
                 />
               }
-              color="green"
               loading={loading}
               onClick={onClick}
             />
@@ -98,7 +97,6 @@ const BaseDialog = ({ id, children }: Props) => {
                   en="Maintain immediately"
                 />
               }
-              color="green"
               loading={loading}
               onClick={onClick}
             />

@@ -25,11 +25,7 @@ const BaseAccessDialog = ({
   }
 
   const CloseButton = () => (
-    <Dialog.TextButton
-      color="green"
-      onClick={closeDialog}
-      text={<Translate id="done" />}
-    />
+    <Dialog.TextButton onClick={closeDialog} text={<Translate id="done" />} />
   )
 
   return (

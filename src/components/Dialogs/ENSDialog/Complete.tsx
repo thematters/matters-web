@@ -48,7 +48,6 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
                 en="Back to Profile"
               />
             }
-            color="green"
             onClick={() => {
               window.location.reload()
             }}
@@ -63,7 +62,6 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
                 en="Back to Profile"
               />
             }
-            color="green"
             onClick={() => {
               window.location.reload()
             }}

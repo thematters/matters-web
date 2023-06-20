@@ -137,7 +137,6 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      color="green"
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting || supportSettingSaving}
@@ -154,7 +153,6 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         leftBtn={
           onBack ? (
             <Dialog.TextButton
-              color="green"
               text={<Translate id="back" />}
               onClick={onBack}
             />

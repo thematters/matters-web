@@ -58,7 +58,6 @@ const ConnectWallet = ({
                 en="Connect Wallet"
               />
             }
-            color="green"
             onClick={switchToWalletSelect}
           />
         }
@@ -71,7 +70,6 @@ const ConnectWallet = ({
                 en="Connect Wallet"
               />
             }
-            color="green"
             onClick={switchToWalletSelect}
           />
         }

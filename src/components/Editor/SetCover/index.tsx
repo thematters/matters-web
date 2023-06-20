@@ -55,7 +55,6 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      color="green"
       onClick={onSave}
       text={<Translate id="save" />}
       loading={coverSaving}
@@ -70,7 +69,6 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
         leftBtn={
           onBack ? (
             <Dialog.TextButton
-              color="green"
               text={<Translate id="back" />}
               onClick={onBack}
             />

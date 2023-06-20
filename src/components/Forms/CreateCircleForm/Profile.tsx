@@ -228,7 +228,6 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      color="green"
       type="submit"
       form={formId}
       disabled={isSubmitting}

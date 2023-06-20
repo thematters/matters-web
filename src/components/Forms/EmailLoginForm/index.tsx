@@ -220,7 +220,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      color="green"
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -264,11 +263,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         title="login"
         leftBtn={
           back ? (
-            <Dialog.TextButton
-              color="green"
-              text={<Translate id="back" />}
-              onClick={back}
-            />
+            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
           ) : null
         }
         closeDialog={closeDialog}

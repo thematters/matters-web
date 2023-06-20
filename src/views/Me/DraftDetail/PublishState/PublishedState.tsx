@@ -68,7 +68,6 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
               en="View article"
             />
           }
-          color="green"
           onClick={() => router.replace(path.href)}
         />
       }
@@ -81,7 +80,6 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
               en="View article"
             />
           }
-          color="green"
           onClick={() => router.replace(path.href)}
         />
       }

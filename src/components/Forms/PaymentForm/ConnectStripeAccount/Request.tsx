@@ -61,7 +61,7 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
       <Dialog.Header
         title="connectStripeAccount"
         closeDialog={closeDialog}
-        leftBtn={<Dialog.TextButton text="back" color="green" onClick={back} />}
+        leftBtn={<Dialog.TextButton text="back" onClick={back} />}
       />
 
       <Dialog.Content>
@@ -82,7 +82,6 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
 
             <Dialog.TextButton
               text={<Translate id="nextStep" />}
-              color="green"
               onClick={request}
               disabled={loading}
               loading={loading}
