@@ -923,6 +923,14 @@
     "defaultMessage": "Enter Display Name",
     "description": ""
   },
+  "HAlOn1": {
+    "defaultMessage": "Name",
+    "description": ""
+  },
+  "2W0f9h": {
+    "defaultMessage": "Bio",
+    "description": ""
+  },
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.",
     "description": ""

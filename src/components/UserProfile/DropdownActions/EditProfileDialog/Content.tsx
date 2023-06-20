@@ -76,6 +76,8 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
   const isAdmin = viewer.status?.role === 'admin'
+  const maxDisplayName = 20
+  const maxDescription = 140
 
   const formId = 'edit-profile-form'
 
@@ -190,13 +192,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           inEditor
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}
         />
-
-        <p className={styles.hint}>
-          <FormattedMessage
-            defaultMessage="Recommended size: 1600px x 900px"
-            description=""
-          />
-        </p>
       </section>
 
       <section className={styles.avatarField}>
@@ -216,46 +211,32 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
 
       <section className={styles.container}>
         <Form.Input
-          label={
-            <FormattedMessage defaultMessage="Display Name" description="" />
-          }
           type="text"
           name="displayName"
           required
           placeholder={intl.formatMessage({
-            defaultMessage: 'Enter Display Name',
+            defaultMessage: 'Name',
             description: '',
           })}
-          hint={
-            <FormattedMessage
-              defaultMessage="Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed."
-              description=""
-            />
-          }
+          hint={`${values.displayName.length}/${maxDisplayName}`}
           value={values.displayName}
           error={touched.displayName && errors.displayName}
           onBlur={handleBlur}
           onChange={handleChange}
+          maxLength={maxDisplayName}
         />
       </section>
 
       <section className={styles.container}>
         <Form.Textarea
-          label={
-            <FormattedMessage defaultMessage="Description" description="" />
-          }
           name="description"
           required
           placeholder={intl.formatMessage({
-            defaultMessage: 'Enter Bio',
+            defaultMessage: 'Bio',
             description: '',
           })}
-          hint={
-            <FormattedMessage
-              defaultMessage="Maximum 200 characters."
-              description=""
-            />
-          }
+          hint={`${values.description.length}/${maxDescription}`}
+          maxLength={maxDescription}
           value={values.description}
           error={touched.description && errors.description}
           onBlur={handleBlur}

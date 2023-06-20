@@ -55,6 +55,10 @@
     "defaultMessage": "Total",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "2W0f9h": {
+    "defaultMessage": "Bio",
+    "description": ""
+  },
   "2atspc": {
     "defaultMessage": "Drafts",
     "description": ""
@@ -201,10 +205,6 @@
   },
   "A7ugfn": {
     "defaultMessage": "More Actions",
-    "description": ""
-  },
-  "A8MpFX": {
-    "defaultMessage": "Enter Bio",
     "description": ""
   },
   "AGcU5J": {
@@ -363,6 +363,10 @@
     "defaultMessage": "Enter",
     "description": ""
   },
+  "HAlOn1": {
+    "defaultMessage": "Name",
+    "description": ""
+  },
   "HFVDeB": {
     "defaultMessage": "Related Tags",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
@@ -501,10 +505,6 @@
   },
   "Pp/0po": {
     "defaultMessage": "Shuffle",
-    "description": ""
-  },
-  "Q8Qw5B": {
-    "defaultMessage": "Description",
     "description": ""
   },
   "QCo7Gc": {
@@ -899,10 +899,6 @@
     "defaultMessage": "Display name, can be changed later",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
-  "lhaIoi": {
-    "defaultMessage": "Enter Display Name",
-    "description": ""
-  },
   "ll/ufR": {
     "defaultMessage": "Trending",
     "description": ""
@@ -1142,6 +1138,10 @@
   "y0b6Kp": {
     "defaultMessage": "Pay",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "yIlC0R": {
+    "defaultMessage": "No published articles yet",
+    "description": "src/components/Empty/EmptyArticle.tsx"
   },
   "ySGgTo": {
     "defaultMessage": "Add Articles into Featured",

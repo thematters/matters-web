@@ -319,6 +319,14 @@
     "defaultMessage": "阅读次数代表了你的作品被登入用户阅读的总次数，每次阅读过程超过一定时间后才会计入。此外，同一个用户的多次阅读也会进行累计。",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
+  "HAlOn1": {
+    "defaultMessage": "用户名",
+    "description": ""
+  },
+  "2W0f9h": {
+    "defaultMessage": "个人简介",
+    "description": ""
+  },
   "E8W3qa": {
     "defaultMessage": "2-20 个字符",
     "description": ""
