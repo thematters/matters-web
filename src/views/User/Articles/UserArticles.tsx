@@ -197,8 +197,6 @@ const UserArticles = () => {
     />
   )
 
-  console.log({ isViewer })
-
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <>
