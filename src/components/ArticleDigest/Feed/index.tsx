@@ -25,7 +25,6 @@ import styles from './styles.module.css'
 export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
-  isConciseFooter?: boolean
   hasFollow?: boolean
   hasCircle?: boolean
   hasAuthor?: boolean
@@ -45,7 +44,6 @@ const BaseArticleDigestFeed = ({
   header,
   date,
 
-  isConciseFooter = false,
   hasFollow,
   hasCircle = true,
   hasAuthor = true,

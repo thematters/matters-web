@@ -189,7 +189,10 @@ const BaseDropdownActions = ({
         <button
           aria-label={translate({ id: 'moreActions', lang })}
           aria-haspopup={type}
-          onClick={openDialog}
+          onClick={(e) => {
+            e.stopPropagation()
+            openDialog()
+          }}
           ref={ref}
           className={styles.moreButton}
         >
