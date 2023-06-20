@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+    <defs>
+        <rect id="b" width="336" height="221" rx="2"/>
+        <filter id="a" width="112.5%" height="119%" x="-6.2%" y="-7.7%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="shadowSpreadOuter1"/>
+            <feOffset dy="4" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="6"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.0508944746 0"/>
+            <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="shadowSpreadOuter2"/>
+            <feOffset dy="1" in="shadowSpreadOuter2" result="shadowOffsetOuter2"/>
+            <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation="2"/>
+            <feComposite in="shadowBlurOuter2" in2="SourceAlpha" operator="out" result="shadowBlurOuter2"/>
+            <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.0815500453 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="shadowMatrixOuter2"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFF" d="M-370-1314h1440v2400H-370z"/>
+        <g transform="translate(-192 -56)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <rect width="337" height="222" x="-.5" y="-.5" fill="#FFF" stroke="#000" stroke-opacity=".08" rx="2"/>
+        </g>
+        <path fill="#4267B2" fill-rule="nonzero" d="M14.534 0H1.466C.666 0 0 .667 0 1.466v13.068C0 15.334.667 16 1.466 16H8V9.333H6v-2h2v-2c0-1.666.667-2.666 2.667-2.666h2v2h-.868c-.598 0-1.132.534-1.132 1.132v1.534h2.666l-.333 2h-2.333V16h3.867c.8 0 1.466-.667 1.466-1.466V1.466C16 .666 15.333 0 14.534 0z"/>
+    </g>
+</svg>
