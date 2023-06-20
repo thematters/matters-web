@@ -1,4 +1,4 @@
-import { Dialog, Translate, useDialogSwitch, useStep } from '~/components'
+import { Dialog, useDialogSwitch, useStep } from '~/components'
 
 import Success from './Success'
 import Upload from './Upload'
@@ -26,13 +26,7 @@ const BaseMigrationDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title="migration"
-          closeText={
-            currStep === 'success' ? (
-              <Translate id="close" />
-            ) : (
-              <Translate id="cancel" />
-            )
-          }
+          closeText={currStep === 'success' ? 'close' : 'cancel'}
         />
         {currStep === 'upload' && (
           <Upload nextStep={nextStep} closeDialog={closeDialog} />

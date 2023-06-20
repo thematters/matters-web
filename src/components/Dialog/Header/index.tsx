@@ -30,6 +30,10 @@ const Header: React.FC<HeaderProps> = ({
   closeText,
   closeDialog,
 }) => {
+  const text = closeText || (
+    <FormattedMessage defaultMessage="Cancel" description="" />
+  )
+
   return (
     <>
       <Media at="sm">
@@ -38,14 +42,7 @@ const Header: React.FC<HeaderProps> = ({
           {leftBtn && <section className={styles.left}>{leftBtn}</section>}
           {!leftBtn && closeDialog && (
             <section className={styles.left}>
-              <TextButton
-                text={
-                  closeText || (
-                    <FormattedMessage defaultMessage="Cancel" description="" />
-                  )
-                }
-                onClick={closeDialog}
-              />
+              <TextButton text={text} onClick={closeDialog} />
             </section>
           )}
           <section className={styles.right}>{rightBtn}</section>

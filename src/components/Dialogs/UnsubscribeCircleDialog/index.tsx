@@ -57,7 +57,7 @@ const BaseUnsubscribeCircleDialog = ({
           closeDialog={closeDialog}
           closeText={
             isUnsubscribed ? (
-              <Translate id="close" />
+              'close'
             ) : (
               <Translate zh_hant="等等再說" zh_hans="等等再说" />
             )

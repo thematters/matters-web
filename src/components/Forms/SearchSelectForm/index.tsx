@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TextId } from '~/common/enums'
-import { Dialog, Translate } from '~/components'
+import { Dialog } from '~/components'
 import SearchingArea, {
   SearchType,
   SelectNode,
@@ -112,7 +113,11 @@ const SearchSelectForm = ({
     <Dialog.TextButton
       onClick={onClickSave}
       // disabled={stagingNodes.length <= 0}
-      text={headerRightButtonText || <Translate id="save" />}
+      text={
+        headerRightButtonText || (
+          <FormattedMessage defaultMessage="Confirm" description="" />
+        )
+      }
       loading={saving}
     />
   )
@@ -151,7 +156,7 @@ const SearchSelectForm = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text="cancel"
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
               color="greyDarker"
               onClick={closeDialog}
             />

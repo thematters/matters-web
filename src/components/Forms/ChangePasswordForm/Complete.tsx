@@ -35,7 +35,7 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
       {!isInPage && (
         <Dialog.Footer
           closeDialog={closeDialog}
-          closeText={<Translate id="close" />}
+          closeText="close"
           btns={
             isForget ? (
               <Dialog.RoundedButton

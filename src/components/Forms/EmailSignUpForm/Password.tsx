@@ -251,7 +251,7 @@ const Password: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text="close"
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
               color="greyDarker"
               onClick={closeDialog}
             />

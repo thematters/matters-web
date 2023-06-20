@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
 import {
@@ -202,7 +203,7 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
       <Dialog.Footer
         smUpBtns={
           <Dialog.TextButton
-            text="cancel"
+            text={<FormattedMessage defaultMessage="Cancel" description="" />}
             color="greyDarker"
             onClick={closeDialog}
           />

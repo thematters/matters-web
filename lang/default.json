@@ -871,10 +871,6 @@
     "defaultMessage": "Enter verification code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "jvo0vs": {
-    "defaultMessage": "Save",
-    "description": ""
-  },
   "jy3tx0": {
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"

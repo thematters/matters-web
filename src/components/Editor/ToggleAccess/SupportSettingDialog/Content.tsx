@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
 import { translate, validateSupportWords } from '~/common/utils'
@@ -140,7 +141,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting || supportSettingSaving}
-      text={<Translate id="save" />}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={isSubmitting}
     />
   )

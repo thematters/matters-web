@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 
@@ -48,7 +49,9 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
           smUpBtns={
             <>
               <Dialog.TextButton
-                text="close"
+                text={
+                  <FormattedMessage defaultMessage="Cancel" description="" />
+                }
                 color="greyDarker"
                 onClick={closeDialog}
               />

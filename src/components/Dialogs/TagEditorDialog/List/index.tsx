@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Button,
@@ -199,7 +200,9 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
           smUpBtns={
             <>
               <Dialog.TextButton
-                text="cancel"
+                text={
+                  <FormattedMessage defaultMessage="Cancel" description="" />
+                }
                 color="greyDarker"
                 onClick={closeDialog}
               />

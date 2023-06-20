@@ -11,6 +11,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   PAYMENT_CURRENCY,
@@ -313,7 +314,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text="cancel"
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
               color="greyDarker"
               onClick={closeDialog}
             />

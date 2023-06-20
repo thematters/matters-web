@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
@@ -164,7 +165,7 @@ const Confirm: React.FC<FormProps> = ({
           <>
             <Dialog.TextButton
               color="greyDarker"
-              text="cancel"
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
               onClick={closeDialog}
             />
             <Dialog.TextButton

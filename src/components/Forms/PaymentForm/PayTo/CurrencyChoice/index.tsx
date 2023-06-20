@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import _find from 'lodash/find'
 import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY, TEST_ID } from '~/common/enums'
 import { formatAmount, translate } from '~/common/utils'
@@ -166,7 +167,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
       <Dialog.Footer
         smUpBtns={
           <Dialog.TextButton
-            text="cancel"
+            text={<FormattedMessage defaultMessage="Cancel" description="" />}
             color="greyDarker"
             onClick={closeDialog}
           />

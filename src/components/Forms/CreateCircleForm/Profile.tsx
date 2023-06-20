@@ -231,7 +231,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Save" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={isSubmitting}
     />
   )
@@ -248,7 +248,9 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={<FormattedMessage defaultMessage="Save" description="" />}
+                text={
+                  <FormattedMessage defaultMessage="Confirm" description="" />
+                }
                 loading={isSubmitting}
               />
             </>
@@ -273,7 +275,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
         smUpBtns={
           <>
             <Dialog.TextButton
-              text="cancel"
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
               color="greyDarker"
               onClick={closeDialog}
             />

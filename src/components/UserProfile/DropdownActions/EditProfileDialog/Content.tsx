@@ -270,7 +270,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Save" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={isSubmitting}
     />
   )
@@ -290,7 +290,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text="cancel"
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
               color="greyDarker"
               onClick={closeDialog}
             />

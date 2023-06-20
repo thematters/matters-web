@@ -23,6 +23,7 @@ const BaseMembersDialog = ({ children }: MembersDialogProps) => {
         <Dialog.Header
           title={<FormattedMessage defaultMessage="Members" description="" />}
           closeDialog={closeDialog}
+          closeText="close"
         />
 
         <DynamicContent />

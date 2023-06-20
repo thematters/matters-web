@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   MAX_ARTICLE_COLLECT_LENGTH,
@@ -204,7 +205,7 @@ const EditorSearchSelectForm = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text="cancel"
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
               color="greyDarker"
               onClick={closeDialog}
             />

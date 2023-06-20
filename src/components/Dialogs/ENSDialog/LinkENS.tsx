@@ -1,5 +1,6 @@
 import contentHash from '@ensdomains/content-hash'
 import { Fragment, useContext, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { namehash } from 'viem/ens'
 import {
   useAccount,
@@ -108,7 +109,11 @@ const LinkENS = ({
   }, [address])
 
   const CancelButton = () => (
-    <Dialog.TextButton text="cancel" color="greyDarker" onClick={closeDialog} />
+    <Dialog.TextButton
+      text={<FormattedMessage defaultMessage="Cancel" description="" />}
+      color="greyDarker"
+      onClick={closeDialog}
+    />
   )
 
   /**

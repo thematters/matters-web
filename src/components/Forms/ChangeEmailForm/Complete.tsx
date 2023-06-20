@@ -28,10 +28,7 @@ const Complete = ({
       </Dialog.Message>
 
       {!isInPage && closeDialog && (
-        <Dialog.Footer
-          closeDialog={closeDialog}
-          closeText={<Translate id="close" />}
-        />
+        <Dialog.Footer closeDialog={closeDialog} closeText="close" />
       )}
     </>
   )

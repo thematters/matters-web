@@ -125,7 +125,7 @@ const BaseFingerprintDialog = ({
           noSpacing={false}
           smUpBtns={
             <Dialog.TextButton
-              text={<Translate id="close" />}
+              text="close"
               color="greyDarker"
               onClick={closeDialog}
             />

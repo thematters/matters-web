@@ -8,6 +8,7 @@ import { loadStripe, StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { STRIPE_ERROR_MESSAGES } from '~/common/enums'
 import { analytics, parseFormSubmitErrors, translate } from '~/common/utils'
@@ -181,7 +182,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
           <>
             <Dialog.TextButton
               color="greyDarker"
-              text="cancel"
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
               onClick={closeDialog}
             />
             <Dialog.TextButton

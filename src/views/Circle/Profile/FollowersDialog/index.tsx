@@ -30,6 +30,7 @@ const BaseFollowersDialog = ({ circle, children }: FollowersDialogProps) => {
             />
           }
           closeDialog={closeDialog}
+          closeText="close"
         />
 
         <DynamicContent />

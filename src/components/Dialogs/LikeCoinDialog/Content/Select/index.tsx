@@ -16,7 +16,11 @@ const Select: React.FC<SelectProps> = ({
 }) => {
   return (
     <>
-      <Dialog.Header title="setupLikeCoin" closeDialog={closeDialog} />
+      <Dialog.Header
+        title="setupLikeCoin"
+        closeDialog={closeDialog}
+        closeText="close"
+      />
 
       <Dialog.Content>
         <Hint />

@@ -85,14 +85,14 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
         <Dialog.Footer
           btns={
             <Dialog.RoundedButton
-              text={<Translate id="close" />}
+              text="close"
               color="greyDarker"
               onClick={closeDialog}
             />
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<Translate id="close" />}
+              text="close"
               color="greyDarker"
               onClick={closeDialog}
             />

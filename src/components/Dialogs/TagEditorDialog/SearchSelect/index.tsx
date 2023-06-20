@@ -1,5 +1,6 @@
 import _get from 'lodash/get'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useMutation } from '~/components'
@@ -107,7 +108,7 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
   const SubmitButton = () => (
     <Dialog.TextButton
       onClick={onClickSave}
-      text={<Translate id="save" />}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={loading}
     />
   )
@@ -140,7 +141,7 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
         smUpBtns={
           <>
             <Dialog.TextButton
-              text="cancel"
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
               color="greyDarker"
               onClick={closeDialog}
             />

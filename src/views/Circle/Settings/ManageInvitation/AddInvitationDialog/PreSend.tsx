@@ -157,7 +157,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
         smUpBtns={
           <>
             <Dialog.TextButton
-              text="cancel"
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
               color="greyDarker"
               onClick={closeDialog}
             />

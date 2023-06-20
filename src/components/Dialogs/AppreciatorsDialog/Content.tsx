@@ -110,6 +110,7 @@ const AppreciatorsDialogContent = ({
           />
         }
         closeDialog={closeDialog}
+        closeText="close"
       />
 
       <Dialog.Content>

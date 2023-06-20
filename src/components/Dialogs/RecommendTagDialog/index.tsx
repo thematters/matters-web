@@ -30,6 +30,7 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
         <Dialog.Header
           title={<Translate zh_hant="追蹤標籤" zh_hans="追踪标签" />}
           closeDialog={closeDialog}
+          closeText="close"
         />
 
         <Dialog.Content>

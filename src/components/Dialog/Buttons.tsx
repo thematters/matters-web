@@ -10,7 +10,7 @@ import {
 } from '~/components'
 
 export type DialogTextButtonProps = {
-  text: string | React.ReactNode
+  text: TextId | React.ReactNode
   color?: 'greyDarker' | 'green' | 'red'
   loading?: boolean
 } & ButtonProps
@@ -55,7 +55,7 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
 }
 
 export type DialogRoundedButtonProps = {
-  text: string | React.ReactNode
+  text: TextId | React.ReactNode
   color?: 'greyDarker' | 'green' | 'red'
   icon?: React.ReactNode
   loading?: boolean

@@ -80,7 +80,11 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
         smBgColor="greyLighter"
         smUpBgColor="greyLighter"
       >
-        <Dialog.Header title="contentFeedEntrance" closeDialog={closeDialog} />
+        <Dialog.Header
+          title="contentFeedEntrance"
+          closeDialog={closeDialog}
+          closeText="close"
+        />
 
         <DynamicContent
           user={user}

@@ -13,7 +13,6 @@ import {
   LanguageContext,
   Media,
   PopperProps,
-  Translate,
   useDialogSwitch,
 } from '~/components'
 
@@ -129,10 +128,7 @@ const BaseDropdownDialog = ({
 
           <Content>{dialog.content}</Content>
 
-          <Dialog.Footer
-            closeDialog={closeDialog}
-            closeText={<Translate id="close" />}
-          />
+          <Dialog.Footer closeDialog={closeDialog} closeText="close" />
         </Dialog>
       </Media>
 

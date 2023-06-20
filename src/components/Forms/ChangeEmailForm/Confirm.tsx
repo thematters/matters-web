@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 // import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   parseFormSubmitErrors,
@@ -207,7 +208,7 @@ const Confirm: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text="cancel"
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
               color="greyDarker"
               onClick={closeDialog}
             />

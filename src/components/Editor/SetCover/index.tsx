@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { Dialog, Translate } from '~/components'
 import { AssetFragment } from '~/gql/graphql'
@@ -56,7 +57,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
   const SubmitButton = () => (
     <Dialog.TextButton
       onClick={onSave}
-      text={<Translate id="save" />}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={coverSaving}
     />
   )
@@ -97,7 +98,13 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={onBack ? 'back' : 'close'}
+              text={
+                onBack ? (
+                  'back'
+                ) : (
+                  <FormattedMessage defaultMessage="Cancel" description="" />
+                )
+              }
               color="greyDarker"
               onClick={onBack || onClose}
             />
