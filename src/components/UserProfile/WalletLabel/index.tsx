@@ -3,6 +3,13 @@ import { FormattedMessage } from 'react-intl'
 import { namehash } from 'viem/ens'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
+// import { namehash } from 'viem/ens'
+// import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
+// import {
+//   // analytics,
+//   featureSupportedChains,
+//   PublicResolverABI,
+// } from '~/common/utils'
 import {
   analytics,
   featureSupportedChains,
@@ -178,6 +185,58 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
       </Dialog>
     </>
   )
+
+  // TODO: update with newest dialog
+  // return (
+  //   <section className={styles.walletLabel}>
+  //     <WalletAddress
+  //       address={address}
+  //       ensName={ensName}
+  //       hasLinkedIPNS={hasLinkedIPNS}
+  //     />
+
+  //     {hasLinkEnsButton && (
+  //       <ENSDialog user={user}>
+  //         {({ openDialog }) => (
+  //           <Button
+  //             size={[null, '1.5rem']}
+  //             spacing={[0, 'tight']}
+  //             borderColor="green"
+  //             textColor="green"
+  //             onClick={() => {
+  //               openDialog()
+  //               analytics.trackEvent('click_button', {
+  //                 type: 'bind_ens',
+  //                 pageType: 'user_profile',
+  //               })
+  //             }}
+  //             aria-haspopup="dialog"
+  //           >
+  //             <TextIcon weight="md" size="xs">
+  //               <Translate id="bindIPNStoENS" />
+  //             </TextIcon>
+  //           </Button>
+  //         )}
+  //       </ENSDialog>
+  //     )}
+
+  //     {hasLinkedIPNS && !isMe && (
+  //       <Tooltip
+  //         content={
+  //           <Translate
+  //             zh_hans={`${user.displayName} 已将他的 ENS 指向到个人 IPNS 页面`}
+  //             zh_hant={`${user.displayName} 已將他的 ENS 指向到個人 IPNS 頁面`}
+  //             en={`${user.displayName} has linked primary ENS name to his IPNS page.`}
+  //           />
+  //         }
+  //       >
+  //         <span className={styles.helpIcon}>
+  //           <IconHelp16 color="grey" />
+  //         </span>
+  //       </Tooltip>
+  //     )}
+  //   </section>
+  // )
 }
 
 export default WalletLabel
