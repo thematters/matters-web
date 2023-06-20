@@ -33,6 +33,12 @@ jobs:
         if: github.base_ref == 'stage'
         run: npm run gen:type
 
+      - name: Lint
+        run: |
+          npm run i18n \
+          && npm run lint \
+          && npm run format:check
+
       - name: Build
         run: npm run build-storybook
 
