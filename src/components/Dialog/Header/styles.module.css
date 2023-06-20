@@ -29,7 +29,7 @@
     }
   }
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding: var(--spacing-tight) var(--spacing-base);
 
     & h1 {

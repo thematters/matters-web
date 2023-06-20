@@ -2,7 +2,7 @@
   min-height: 100vh;
   padding: var(--spacing-base);
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding-right: 0;
     padding-left: 0;
   }

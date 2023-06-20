@@ -2,7 +2,7 @@
   padding: var(--spacing-base) var(--spacing-loose);
   text-align: left;
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding: var(--spacing-base) var(--spacing-xxx-loose) var(--spacing-x-loose);
   }
 

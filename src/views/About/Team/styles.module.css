@@ -7,7 +7,7 @@
     text-align: center;
   }
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding: 7.5rem 0;
 
     & h2 {
@@ -15,7 +15,7 @@
     }
   }
 
-  @media (--lg-up) {
+  @media (--md-up) {
     padding: 10rem 0 7.5rem;
   }
 }
@@ -97,7 +97,7 @@
     justify-content: space-between;
   }
 
-  @media (--md-up) {
+  @media (--sm-up) {
     & .container,
     & ul {
       display: inline-flex;
@@ -130,7 +130,7 @@
     }
   }
 
-  @media (--xl-up) {
+  @media (--lg-up) {
     &.product {
       grid-column: 3 / span 4;
     }

@@ -3,7 +3,7 @@
   padding: var(--spacing-x-tight) var(--spacing-base);
   white-space: nowrap;
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding: var(--spacing-base) 0;
   }
 

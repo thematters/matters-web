@@ -19,7 +19,7 @@
 .container {
   @mixin form-container;
 
-  @media (--md-up) {
+  @media (--sm-up) {
     margin-right: var(--spacing-base);
     margin-left: var(--spacing-base);
   }

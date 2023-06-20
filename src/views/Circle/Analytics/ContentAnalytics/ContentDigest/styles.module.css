@@ -2,7 +2,7 @@
   display: flex;
   padding: var(--spacing-base);
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding: var(--spacing-base) 0;
   }
 }

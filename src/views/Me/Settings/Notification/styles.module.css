@@ -12,7 +12,7 @@
       margin-bottom: 0;
     }
 
-    @media (--md-up) {
+    @media (--sm-up) {
       width: 50%;
     }
   }

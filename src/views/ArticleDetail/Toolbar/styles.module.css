@@ -19,7 +19,7 @@
       height: 2rem;
     }
 
-    @media (--md-up) {
+    @media (--sm-up) {
       & > * {
         height: auto;
       }
@@ -34,7 +34,7 @@
     font-size: 0;
   }
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding: var(--spacing-base) 0;
 
     & .commentBar {

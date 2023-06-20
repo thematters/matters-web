@@ -33,7 +33,7 @@
     box-shadow: none;
   }
 
-  @media (--md-up) {
+  @media (--sm-up) {
     max-height: 27rem;
   }
 
