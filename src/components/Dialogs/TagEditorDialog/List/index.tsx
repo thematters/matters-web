@@ -158,9 +158,9 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
               zh_hans="协作者可以与你共同管理精选"
               en="Collaborator can manage selected feed with you."
             />
-            <br />
+
             {(isHavingNoneEditors || isReachingLimit) && (
-              <>
+              <p>
                 <Translate
                   zh_hant="每個標籤最多添加"
                   zh_hans="每个标签最多添加"
@@ -172,10 +172,11 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                   zh_hans="名协作者"
                   en="collaborators."
                 />
-              </>
+              </p>
             )}
+
             {isAllowAdd && isHavingEditors && (
-              <>
+              <p>
                 <Translate
                   zh_hant="你還可以添加"
                   zh_hans="你还可以添加"
@@ -187,7 +188,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                   zh_hans="名协作者"
                   en="more collaborators."
                 />
-              </>
+              </p>
             )}
           </p>
         </Dialog.Message>

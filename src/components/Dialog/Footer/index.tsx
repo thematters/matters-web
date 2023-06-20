@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -7,6 +8,8 @@ import { RoundedButton, TextButton } from '../Buttons'
 import styles from './styles.module.css'
 
 type FooterProps = {
+  noSpacing?: boolean
+
   btns?: React.ReactNode
   smUpBtns?: React.ReactNode
   closeText?: React.ReactNode
@@ -14,6 +17,8 @@ type FooterProps = {
 }
 
 const Footer: React.FC<FooterProps> = ({
+  noSpacing = true,
+
   btns,
   smUpBtns,
   closeText,
@@ -27,14 +32,18 @@ const Footer: React.FC<FooterProps> = ({
     <FormattedMessage defaultMessage="Cancel" description="" />
   )
 
+  const footerClasses = classNames({
+    [styles.footer]: true,
+    [styles.noSpacing]: !!noSpacing,
+  })
   const hasBtns = btns || closeDialog
   const hasSmUpBtns = smUpBtns || closeDialog
 
   return (
-    <>
+    <footer className={footerClasses}>
       <Media at="sm">
         {hasBtns && (
-          <footer className={styles.footer}>
+          <section className={styles.content}>
             {btns}
             {closeDialog && (
               <RoundedButton
@@ -43,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({
                 onClick={closeDialog}
               />
             )}
-          </footer>
+          </section>
         )}
 
         {/* show bottom spacing for dialog if there is no buttons,
@@ -54,7 +63,7 @@ const Footer: React.FC<FooterProps> = ({
 
       {hasSmUpBtns && (
         <Media greaterThan="sm">
-          <footer className={styles.smUpFooter}>
+          <section className={styles.smUpContent}>
             {closeDialog && (
               <TextButton
                 text={text}
@@ -63,10 +72,10 @@ const Footer: React.FC<FooterProps> = ({
               />
             )}
             {smUpBtns}
-          </footer>
+          </section>
         </Media>
       )}
-    </>
+    </footer>
   )
 }
 

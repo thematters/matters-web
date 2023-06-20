@@ -161,7 +161,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         rightBtn={<SubmitButton />}
       />
 
-      <Dialog.Content>
+      <Dialog.Content noSpacing={false}>
         <section className={styles.tabs}>
           <Tab tabType={tabType} setTabType={changeTabType} />
         </section>

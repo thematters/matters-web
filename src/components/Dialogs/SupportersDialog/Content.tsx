@@ -101,7 +101,9 @@ const SupportersDialogContent = ({
           ))}
         </InfiniteScroll>
       </Dialog.Content>
+
       <Dialog.Footer
+        noSpacing={false}
         smUpBtns={
           <Dialog.TextButton
             text="close"

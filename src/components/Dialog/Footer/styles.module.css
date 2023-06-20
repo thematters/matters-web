@@ -1,4 +1,13 @@
 .footer {
+  position: relative;
+  margin-top: var(--spacing-base);
+
+  &.noSpacing {
+    margin-top: 0;
+  }
+}
+
+.content {
   @mixin flex-center-space-between;
   @mixin safe-area-botttom;
 
@@ -16,7 +25,7 @@
   }
 }
 
-.smUpFooter {
+.smUpContent {
   @mixin flex-center-end;
 
   padding: 0 var(--spacing-base-loose) var(--spacing-base-loose);

@@ -28,6 +28,7 @@ const BaseMembersDialog = ({ children }: MembersDialogProps) => {
         <DynamicContent />
 
         <Dialog.Footer
+          noSpacing={false}
           smUpBtns={
             <Dialog.TextButton
               text="close"

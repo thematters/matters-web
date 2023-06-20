@@ -66,7 +66,16 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
           <Feed type={feed} />
         </Dialog.Content>
 
-        <Dialog.Footer closeDialog={closeDialog} />
+        <Dialog.Footer
+          noSpacing={false}
+          smUpBtns={
+            <Dialog.TextButton
+              text="close"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+        />
       </Dialog>
     </>
   )

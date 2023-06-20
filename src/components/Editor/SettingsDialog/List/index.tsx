@@ -102,6 +102,7 @@ const SettingsList = ({
 
       {(confirmButtonText || cancelButtonText) && (
         <Dialog.Footer
+          noSpacing={false}
           closeDialog={cancelButtonText ? closeDialog : undefined}
           closeText={cancelButtonText || undefined}
           btns={
