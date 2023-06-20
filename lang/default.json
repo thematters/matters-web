@@ -99,6 +99,10 @@
     "defaultMessage": "Have wallet questions on mobile device ? Click the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "4sl6yu": {
+    "defaultMessage": "Start writing",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "50cquj": {
     "defaultMessage": "No discussion yet",
     "description": "src/views/Circle/Discussion/Discussion.tsx"

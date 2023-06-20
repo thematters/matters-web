@@ -1,26 +1,38 @@
+import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { URL_QS } from '~/common/enums'
-import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
+import {
+  analytics,
+  mergeConnections,
+  stripSpaces,
+  toPath,
+  translate,
+} from '~/common/utils'
 import {
   ArticleDigestArchive,
   ArticleDigestFeed,
+  Button,
   Empty,
   EmptyArticle,
   Head,
   InfiniteScroll,
+  LanguageContext,
   List,
   Media,
   QueryError,
   Spinner,
   Translate,
+  useMutation,
   usePublicQuery,
   useRoute,
   ViewerContext,
 } from '~/components'
-import { UserArticlesPublicQuery } from '~/gql/graphql'
+import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
+import { CreateDraftMutation, UserArticlesPublicQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
 import {
@@ -33,8 +45,13 @@ import styles from './styles.module.css'
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
+  const router = useRouter()
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
+  const { lang } = useContext(LanguageContext)
+  const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
+    variables: { title: translate({ id: 'untitle', lang }) },
+  })
 
   let query = USER_ARTICLES_PUBLIC
   let publicQuery = true
@@ -180,12 +197,40 @@ const UserArticles = () => {
     />
   )
 
+  console.log({ isViewer })
+
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <>
         <CustomHead />
         <UserTabs />
         <EmptyArticle />
+        {isViewer && (
+          <section className={styles.startWriting}>
+            <Button
+              size={['5.5rem', '2rem']}
+              borderColor="green"
+              borderActiveColor="green"
+              borderWidth="md"
+              textColor="green"
+              textActiveColor="green"
+              onClick={async () => {
+                const result = await putDraft()
+                const { slug, id } = result?.data?.putDraft || {}
+
+                if (slug && id) {
+                  const path = toPath({ page: 'draftDetail', slug, id })
+                  router.push(path.href)
+                }
+              }}
+            >
+              <FormattedMessage
+                defaultMessage="Start writing"
+                description="src/views/User/Articles/UserArticles.tsx"
+              />
+            </Button>
+          </section>
+        )}
       </>
     )
   }

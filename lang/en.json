@@ -35,6 +35,14 @@
     "defaultMessage": "Edit profile",
     "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
   },
+  "yIlC0R": {
+    "defaultMessage": "No published articles yet",
+    "description": "src/components/Empty/EmptyArticle.tsx"
+  },
+  "4sl6yu": {
+    "defaultMessage": "Start writing",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "J+LXrH": {
     "defaultMessage": "User registered by email can login and enable wallet login later",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"

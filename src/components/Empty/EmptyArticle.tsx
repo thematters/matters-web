@@ -1,8 +1,9 @@
-import { Empty, IconEmptyWarning72, Translate } from '~/components'
+import { Empty, IconFile88, Translate } from '~/components'
 
 export const EmptyArticle = () => (
   <Empty
-    icon={<IconEmptyWarning72 size="xxl" />}
+    spacingY="xxloose"
+    icon={<IconFile88 size="xxxlM" />}
     description={<Translate id="noArticlesYet" />}
   />
 )

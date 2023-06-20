@@ -35,6 +35,14 @@
     "defaultMessage": "航行日志 2.0",
     "description": "src/components/UserProfile/DropdownActions/index.tsx"
   },
+  "yIlC0R": {
+    "defaultMessage": "尚未发布作品",
+    "description": "src/components/Empty/EmptyArticle.tsx"
+  },
+  "4sl6yu": {
+    "defaultMessage": "开始创作",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "/3G89K": {
     "defaultMessage": " 又成长了",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"

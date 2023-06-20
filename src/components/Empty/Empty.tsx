@@ -18,7 +18,7 @@ export const Empty = ({
 }: EmptyProps) => {
   const emptyClasses = classNames({
     [styles.empty]: true,
-    [`spacingY${capitalizeFirstLetter(spacingY)}`]: !!spacingY,
+    [styles[`spacingY${capitalizeFirstLetter(spacingY)}`]]: !!spacingY,
   })
 
   return (

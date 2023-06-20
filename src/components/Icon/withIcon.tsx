@@ -15,6 +15,8 @@ export type IconSize =
   | 'xlM'
   | 'xl'
   | 'xxl'
+  | 'xxxl'
+  | 'xxxlM'
 
 export type IconColor =
   | 'white'
