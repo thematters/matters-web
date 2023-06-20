@@ -1,5 +1,5 @@
 import { numAbbr, numRound } from '~/common/utils'
-import { IconReadTimeTotal16, TextIcon, Translate } from '~/components'
+import { IconReadTime18, TextIcon, Translate } from '~/components'
 import { ActionsReadTimeArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -22,11 +22,7 @@ const ReadTime = ({ article }: ResponseCountProps) => {
   return (
     <>
       <button type="button">
-        <TextIcon
-          icon={<IconReadTimeTotal16 size="xs" />}
-          size="xs"
-          color="greyDark"
-        >
+        <TextIcon icon={<IconReadTime18 size="mdXS" />} size="xs" color="grey">
           {numAbbr(readHour, 1)}{' '}
           <Translate zh_hant="小時" zh_hans="小时" en="hours" />
         </TextIcon>

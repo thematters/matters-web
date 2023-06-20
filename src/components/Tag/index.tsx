@@ -115,9 +115,9 @@ export const Tag = ({
       break
     case 'plain':
       textIconProps = {
-        size: 'smS',
+        size: 'xs',
         weight: 'normal',
-        spacing: 'xxxtight',
+        spacing: 0,
         color: 'green',
       }
       break

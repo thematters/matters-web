@@ -6,7 +6,7 @@ import { ADD_TOAST } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   AppreciatorsDialog,
-  Button,
+  BookmarkButton,
   DropdownDialog,
   FingerprintDialog,
   IconMore16,
@@ -32,6 +32,7 @@ import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
 import ShareButton from './ShareButton'
 import StickyButton from './StickyButton'
+import styles from './styles.module.css'
 
 export interface DropdownActionsControls {
   icon?: React.ReactNode
@@ -56,6 +57,10 @@ export interface DropdownActionsControls {
   hasSetTagUnselected?: boolean
   hasRemoveTag?: boolean
 
+  hasArchive?: boolean
+  hasEdit?: boolean
+  hasBookmark?: boolean
+
   morePublicActions?: React.ReactNode
 }
 
@@ -70,11 +75,9 @@ interface Controls {
   hasFingerprint: boolean
   hasExtend: boolean
   hasSticky: boolean
-  hasArchive: boolean
   hasSetTagSelected: boolean
   hasSetTagUnselected: boolean
   hasRemoveTag: boolean
-  hasEdit: boolean
 }
 
 interface DialogProps {
@@ -108,6 +111,7 @@ const BaseDropdownActions = ({
   hasSetTagUnselected,
   hasRemoveTag,
   hasEdit,
+  hasBookmark,
 
   openShareDialog,
   openFingerprintDialog,
@@ -147,9 +151,14 @@ const BaseDropdownActions = ({
 
       {/* private */}
       {hasPublic && hasPrivate && <Menu.Divider spacing="xtight" />}
+      {hasEdit && <EditButton article={article} />}
+
       {hasSticky && <StickyButton article={article} />}
 
-      {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
+      {hasBookmark && (
+        <BookmarkButton article={article} inCard={inCard} size="mdS" />
+      )}
+
       {hasSetTagSelected && tagDetailId && (
         <SetTagSelectedButton article={article} tagId={tagDetailId} />
       )}
@@ -159,7 +168,9 @@ const BaseDropdownActions = ({
       {hasRemoveTag && tagDetailId && (
         <RemoveTagButton article={article} tagId={tagDetailId} />
       )}
-      {hasEdit && <EditButton article={article} />}
+
+      {hasArchive && <Menu.Divider />}
+      {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
     </Menu>
   )
 
@@ -175,16 +186,18 @@ const BaseDropdownActions = ({
       }}
     >
       {({ openDialog, type, ref }) => (
-        <Button
-          spacing={['xtight', 'xtight']}
-          bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
+        <button
           aria-label={translate({ id: 'moreActions', lang })}
           aria-haspopup={type}
-          onClick={openDialog}
+          onClick={(e) => {
+            e.stopPropagation()
+            openDialog()
+          }}
           ref={ref}
+          className={styles.moreButton}
         >
           {icon ? icon : <IconMore16 size={size} />}
-        </Button>
+        </button>
       )}
     </DropdownDialog>
   )
@@ -205,6 +218,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasSetTagSelected,
     hasSetTagUnselected,
     hasRemoveTag,
+
+    hasEdit,
+    hasArchive,
+    hasBookmark = true,
   } = props
   const viewer = useContext(ViewerContext)
 
@@ -238,11 +255,13 @@ const DropdownActions = (props: DropdownActionsProps) => {
       isActive &&
       !viewer.isInactive
     ),
-    hasArchive: isArticleAuthor && isActive && !viewer.isArchived,
+    hasArchive:
+      !!hasArchive && isArticleAuthor && isActive && !viewer.isArchived,
     hasSetTagSelected: !!hasSetTagSelected,
     hasSetTagUnselected: !!hasSetTagUnselected,
     hasRemoveTag: !!hasRemoveTag,
-    hasEdit: isActive && isArticleAuthor,
+    hasEdit: !!hasEdit && isActive && isArticleAuthor,
+    hasBookmark: !!hasBookmark,
   }
 
   if (_isEmpty(_pickBy(controls))) {

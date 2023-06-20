@@ -5,6 +5,7 @@
   display: block;
   outline: none;
   transition-property: background-color;
+  transition-property: color;
 
   &:not(.disabled) {
     cursor: pointer;
@@ -90,6 +91,31 @@
   }
 }
 
+/* Text color */
+.textGreyDarker {
+  color: var(--color-grey-darker);
+}
+
+.textRed {
+  color: var(--color-red);
+}
+
+/* Text active color */
+
+.textActiveBlack {
+  &:hover,
+  &:focus {
+    color: var(--color-black);
+  }
+}
+
+.textActiveRedDark {
+  &:hover,
+  &:focus {
+    color: var(--color-red-dark);
+  }
+}
+
 /* Spacing */
 .spacingYXtight {
   padding-top: var(--spacing-x-tight);
@@ -104,6 +130,11 @@
 .spacingYBase {
   padding-top: var(--spacing-base);
   padding-bottom: var(--spacing-base);
+}
+
+.spacingYBaseLoose {
+  padding-top: var(--spacing-base-loose);
+  padding-bottom: var(--spacing-base-loose);
 }
 
 .spacingYLoose {
@@ -124,6 +155,11 @@
 .spacingXBase {
   padding-right: var(--spacing-base);
   padding-left: var(--spacing-base);
+}
+
+.spacingXBaseLoose {
+  padding-right: var(--spacing-base-loose);
+  padding-left: var(--spacing-base-loose);
 }
 
 .spacingXLoose {

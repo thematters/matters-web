@@ -27,11 +27,7 @@ jobs:
         run: npm ci
 
       - name: Generate Types
-        if: github.base_ref == 'develop'
-        run: npm run gen:type
-
-      - name: Generate Types
-        if: github.base_ref == 'stage'
+        if: github.base_ref == 'develop' || github.base_ref == 'feat/user-page'
         run: npm run gen:type
 
       - name: Lint
