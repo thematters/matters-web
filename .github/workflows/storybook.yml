@@ -5,6 +5,7 @@ on:
     branches:
       - develop
       - stage
+      - feat/user-page
     types:
       - labeled
 
