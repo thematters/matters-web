@@ -34,7 +34,7 @@ const Complete: React.FC<Props> = ({ closeDialog }) => {
 
       <Dialog.Footer
         closeDialog={closeDialog}
-        cancelText={
+        closeText={
           <Translate
             zh_hant="完成交易"
             zh_hans="完成交易"

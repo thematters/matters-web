@@ -20,7 +20,7 @@ export const VerificationLinkSent = ({
         <Dialog.Header
           title="register"
           closeDialog={closeDialog}
-          cancelText="understood"
+          closeText="understood"
         />
       )}
 

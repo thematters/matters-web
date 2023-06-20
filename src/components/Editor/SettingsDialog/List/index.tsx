@@ -103,7 +103,7 @@ const SettingsList = ({
       {(confirmButtonText || cancelButtonText) && (
         <Dialog.Footer
           closeDialog={cancelButtonText ? closeDialog : undefined}
-          cancelText={cancelButtonText || undefined}
+          closeText={cancelButtonText || undefined}
           btns={
             <Dialog.RoundedButton
               text={confirmButtonText}

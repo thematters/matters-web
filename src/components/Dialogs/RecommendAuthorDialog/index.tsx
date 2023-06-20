@@ -31,7 +31,7 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
         <Dialog.Header
           title={<Translate id="followAuthor" />}
           closeDialog={closeDialog}
-          cancelText="close"
+          closeText="close"
         />
 
         <Dialog.Content>

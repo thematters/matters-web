@@ -73,9 +73,7 @@ const BaseHelpDialog = ({ children, hasCount, hasTime }: Props) => {
 
         <Dialog.Footer
           closeDialog={closeDialog}
-          cancelText={
-            <FormattedMessage defaultMessage="I see" description="" />
-          }
+          closeText={<FormattedMessage defaultMessage="I see" description="" />}
         />
       </Dialog>
     </>

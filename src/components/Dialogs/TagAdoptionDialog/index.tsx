@@ -68,7 +68,7 @@ const BaseDialog = ({ id, children }: Props) => {
 
         <Dialog.Footer
           closeDialog={closeDialog}
-          cancelText={
+          closeText={
             <Translate
               zh_hant="考慮一下"
               zh_hans="考虑一下"

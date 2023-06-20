@@ -77,7 +77,7 @@ const SupportersDialogContent = ({
           </>
         }
         closeDialog={closeDialog}
-        cancelText="close"
+        closeText="close"
       />
       <Dialog.Content>
         <InfiniteScroll

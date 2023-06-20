@@ -81,7 +81,7 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
 
         <Dialog.Footer
           closeDialog={closeDialog}
-          cancelText={<Translate id="understood" />}
+          closeText={<Translate id="understood" />}
         />
       </Dialog>
     </>

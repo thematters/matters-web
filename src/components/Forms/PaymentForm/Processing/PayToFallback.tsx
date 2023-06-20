@@ -33,7 +33,7 @@ const PayToFallback: React.FC<Props> = ({ closeDialog }) => {
 
       <Dialog.Footer
         closeDialog={closeDialog}
-        cancelText={
+        closeText={
           <Translate
             zh_hant="回到作品頁，稍後再試"
             zh_hans="回到作品页，稍后再试"

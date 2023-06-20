@@ -38,7 +38,7 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
         <Dialog.Header
           title={title}
           closeDialog={closeDialog}
-          cancelText="close"
+          closeText="close"
         />
 
         <Dialog.Message>

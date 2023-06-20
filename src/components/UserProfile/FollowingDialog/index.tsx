@@ -23,7 +23,7 @@ const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
             <Translate zh_hant="追蹤內容" zh_hans="追踪内容" en={`Following`} />
           }
           closeDialog={closeDialog}
-          cancelText="close"
+          closeText="close"
         />
 
         <DynamicContent />

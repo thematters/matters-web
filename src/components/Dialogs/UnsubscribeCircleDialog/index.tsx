@@ -55,7 +55,7 @@ const BaseUnsubscribeCircleDialog = ({
 
         <Dialog.Footer
           closeDialog={closeDialog}
-          cancelText={
+          closeText={
             isUnsubscribed ? (
               <Translate id="close" />
             ) : (

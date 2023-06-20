@@ -23,7 +23,7 @@ const Complete: React.FC<CompleteProps> = ({
 
       <Dialog.Footer
         closeDialog={callback ? undefined : closeDialog}
-        cancelText={callback ? undefined : 'close'}
+        closeText={callback ? undefined : 'close'}
         btns={
           callback ? (
             <Dialog.RoundedButton text={callbackText} onClick={callback} />

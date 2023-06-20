@@ -12,7 +12,7 @@ export interface HeaderProps {
   hasSmUpTitle?: boolean
   leftBtn?: React.ReactNode
   rightBtn?: React.ReactNode | string
-  cancelText?: React.ReactNode
+  closeText?: React.ReactNode
   closeDialog?: () => any
 }
 
@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({
   hasSmUpTitle = true,
   leftBtn,
   rightBtn,
-  cancelText,
+  closeText,
   closeDialog,
 }) => {
   return (
@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({
             <section className={styles.left}>
               <TextButton
                 text={
-                  cancelText || (
+                  closeText || (
                     <FormattedMessage defaultMessage="Cancel" description="" />
                   )
                 }
