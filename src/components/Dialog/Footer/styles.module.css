@@ -4,7 +4,7 @@
 
   flex-direction: column;
   flex-shrink: 0;
-  padding: var(--spacing-s-loose) var(--spacing-base) var(--spacing-xx-loose);
+  padding: var(--spacing-base-loose) var(--spacing-base) var(--spacing-xx-loose);
 
   & > * {
     flex: 1;
@@ -19,7 +19,7 @@
 .smUpFooter {
   @mixin flex-center-end;
 
-  padding: 0 var(--spacing-s-loose) var(--spacing-s-loose);
+  padding: 0 var(--spacing-base-loose) var(--spacing-base-loose);
   text-align: right;
 
   & > * + * {

@@ -7,7 +7,7 @@
   }
 
   @media (--md-up) {
-    padding: var(--spacing-base) var(--spacing-s-loose);
+    padding: var(--spacing-base) var(--spacing-base-loose);
   }
 }
 

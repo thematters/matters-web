@@ -9,7 +9,7 @@ import styles from './styles.module.css'
 
 export type CircleDigestTitleTextSize = 'xs' | 'md'
 export type CircleDigestTitleTextWeight = 'normal' | 'md'
-export type CircleDigestTitleIs = 'h2'
+export type CircleDigestTitleIs = 'h2' | 'span'
 
 type CircleDigestTitleProps = {
   circle: DigestTitleCircleFragment
@@ -38,7 +38,7 @@ const CircleDigestTitle = ({
     circle,
   })
   const titleClasses = classNames({
-    [styles.title]: true,
+    [styles.title]: is === 'h2',
     [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
     [styles[`textWeight${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
   })
@@ -51,6 +51,9 @@ const CircleDigestTitle = ({
       onClick={onClick}
     >
       <>{is === 'h2' && <h2 className={titleClasses}>{displayName}</h2>}</>
+      <>
+        {is === 'span' && <span className={titleClasses}>{displayName}</span>}
+      </>
     </LinkWrapper>
   )
 }

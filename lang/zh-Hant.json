@@ -27,6 +27,14 @@
     "defaultMessage": "支持排行榜",
     "description": ""
   },
+  "RNKSCj": {
+    "defaultMessage": "已封存",
+    "description": "src/components/ArticleDigest/Archive/index.tsx"
+  },
+  "ioPWl8": {
+    "defaultMessage": "取消收藏",
+    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
+  },
   "/asuIY": {
     "defaultMessage": "進入社區",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
@@ -131,8 +139,8 @@
     "defaultMessage": "取消",
     "description": ""
   },
-  "4Odb0J": {
-    "defaultMessage": "置頂作品",
+  "DedJGE": {
+    "defaultMessage": "設為代表作",
     "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "4giHJT": {
@@ -591,8 +599,8 @@
     "defaultMessage": "登出失敗，請重試",
     "description": ""
   },
-  "TQLBox": {
-    "defaultMessage": "取消置頂",
+  "Ef4heu": {
+    "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "TSDiqB": {
@@ -732,7 +740,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
-    "defaultMessage": "修訂作品",
+    "defaultMessage": "修訂",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZjDH42": {
@@ -892,7 +900,7 @@
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "hrgo+E": {
-    "defaultMessage": "隱藏",
+    "defaultMessage": "封存",
     "description": ""
   },
   "i/4KO2": {

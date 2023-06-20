@@ -117,7 +117,6 @@ const AggregateArticleResults = () => {
                         Partial<ArticleDigestFeedArticlePrivateFragment>
                     }
                     is="link"
-                    isConciseFooter={true}
                     hasCircle={false}
                     hasFollow={false}
                     onClick={() =>
