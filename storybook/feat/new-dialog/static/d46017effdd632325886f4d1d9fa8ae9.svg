@@ -1,0 +1,12 @@
+<svg width="40" height="40" fill="none" viewBox="0 0 40 40"  xmlns="http://www.w3.org/2000/svg">
+<circle cx="20" cy="20" r="20" fill="currentColor"/>
+<path d="M10.9669 17.877L22.3551 28.8064C23.8226 30.2148 26.2744 29.9171 27.3303 28.1995C30.4145 23.1785 35.2406 13.7549 30.9454 9.63274C26.6502 5.5106 16.831 10.1423 11.5992 13.1022C9.80955 14.1156 9.49934 16.4686 10.9669 17.877Z" stroke="white" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.2947 9.4667C19.2947 9.4667 13.4247 9.23197 10.3405 10.6003C7.2563 11.9686 10.4598 14.2186 10.4598 14.2186" stroke="white" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M31.1242 20.8198C31.1242 20.8198 31.3688 26.4534 29.9431 29.4133C28.5173 32.3732 26.1729 29.2988 26.1729 29.2988" stroke="white" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.7985 19.6404L11.1699 21.2034L19.3666 29.0698L20.9952 27.5011" stroke="white" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M24.8904 19.1423C27.0187 19.1423 28.7441 17.4864 28.7441 15.4438C28.7441 13.4012 27.0187 11.7453 24.8904 11.7453C22.762 11.7453 21.0366 13.4012 21.0366 15.4438C21.0366 17.4864 22.762 19.1423 24.8904 19.1423Z" stroke="white" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M30.9455 9.63275L27.6167 12.8274" stroke="white" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.6233 23.5401C10.8142 23.2653 10.5398 22.9046 10.2117 23.0076C8.71432 23.4943 6 24.5134 6 25.5038C6 26.792 7.78966 27.5706 10.6233 23.5401Z" fill="currentColor"/>
+<path d="M16.899 29.563C17.1853 29.3798 17.5611 29.6431 17.4537 29.958C16.9467 31.395 15.8848 34 14.8528 34C13.5105 34 12.6992 32.2824 16.899 29.563Z" fill="currentColor"/>
+<path d="M11.12 28.0154C11.3706 27.9181 11.7464 28.3017 11.6748 28.5765C11.3408 29.8361 10.0284 31.4563 8.79945 31.3074C7.5109 31.1471 7.45124 29.4009 11.12 28.0154Z" fill="currentColor"/>
+</svg>
