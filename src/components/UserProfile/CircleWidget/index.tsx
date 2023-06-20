@@ -37,6 +37,8 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({
   const features = useFeatures()
   const hasCircle = circles && circles.length > 0
 
+  console.log({ hasDescription, hasFooter })
+
   const circleWidgetClasses = classNames({
     [styles.circleWidget]: true,
     [styles.inAside]: hasDescription && hasFooter,
@@ -80,7 +82,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({
   const circle = circles[0]
 
   return (
-    <section className={styles.circleWidget}>
+    <section className={circleWidgetClasses}>
       <CircleDigest.UserProfile
         circle={circle}
         hasDescription={hasDescription}
