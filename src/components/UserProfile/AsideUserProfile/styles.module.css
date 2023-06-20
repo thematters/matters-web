@@ -47,12 +47,8 @@
 }
 
 .info {
-  padding: 0 var(--spacing-base);
+  padding-left: var(--spacing-x-tight);
   margin-bottom: var(--spacing-base);
-
-  @media (--sm-up) {
-    padding: 0;
-  }
 
   & .displayName,
   & .username {
@@ -103,4 +99,8 @@
   & > *:first-child {
     margin-right: var(--spacing-base);
   }
+}
+
+.footer {
+  padding-left: var(--spacing-tight);
 }
