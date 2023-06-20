@@ -6,10 +6,10 @@
     grid-column: 1 / -1;
     margin-top: var(--spacing-xx-loose);
 
-    @media (--lg-up) {
+    @media (--md-up) {
       grid-column: span 3;
     }
-    @media (--xl-up) {
+    @media (--lg-up) {
       grid-column: span 4;
       margin-top: var(--spacing-loose);
     }

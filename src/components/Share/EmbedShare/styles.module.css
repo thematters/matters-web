@@ -17,7 +17,7 @@
   }
 
   &.wrap {
-    @media (--xl-up) {
+    @media (--lg-up) {
       overflow: inherit;
       white-space: inherit;
 

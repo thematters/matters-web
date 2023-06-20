@@ -1,7 +1,7 @@
 .header {
   @mixin flex-center-start;
 
-  @media (--md-up) {
+  @media (--sm-up) {
     align-items: center;
   }
 
@@ -11,7 +11,7 @@
     margin-right: var(--spacing-loose);
     border-radius: 50%;
 
-    @media (--md-up) {
+    @media (--sm-up) {
       width: 5rem;
       height: 5rem;
     }
@@ -29,7 +29,7 @@
       color: var(--color-matters-green);
     }
 
-    @media (--md-up) {
+    @media (--sm-up) {
       font-size: var(--font-size-md);
       line-height: 2;
 

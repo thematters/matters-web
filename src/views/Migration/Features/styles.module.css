@@ -11,7 +11,7 @@
       margin-top: var(--spacing-xx-loose);
     }
 
-    @media (--md-up) {
+    @media (--sm-up) {
       & li {
         margin-top: var(--spacing-xxx-loose);
       }
@@ -46,17 +46,17 @@
   & img {
     grid-column: 1 / -1;
 
-    @media (--md-up) {
+    @media (--sm-up) {
       grid-column: col-start 2 / span 6;
     }
 
-    @media (--lg-up) {
+    @media (--md-up) {
       grid-column: col-start 2 / span 7;
     }
   }
 }
 
-@media (--xl-up) {
+@media (--lg-up) {
   .features {
     & .content {
       grid-column: col-start 1 / span 5;

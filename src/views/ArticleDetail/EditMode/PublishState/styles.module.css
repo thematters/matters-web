@@ -3,7 +3,7 @@
   top: calc(var(--global-header-height-mobile) + var(--spacing-base));
   z-index: 10;
 
-  @media (--md-up) {
+  @media (--sm-up) {
     top: calc(var(--global-header-height) + var(--spacing-base));
   }
 }

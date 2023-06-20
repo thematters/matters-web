@@ -15,7 +15,7 @@
 .share {
   padding: 0 var(--spacing-base);
 
-  @media (--xl-up) {
+  @media (--lg-up) {
     padding: 0;
   }
 }

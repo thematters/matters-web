@@ -6,7 +6,7 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-grey);
 
-  @media (--xl-up) {
+  @media (--lg-up) {
     @mixin border-bottom-grey;
 
     padding-right: 0;
@@ -29,7 +29,7 @@
     white-space: nowrap;
   }
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding-bottom: var(--spacing-x-tight);
   }
 }
@@ -37,7 +37,7 @@
 .aggregateSection {
   padding: 0 var(--spacing-base);
 
-  @media (--xl-up) {
+  @media (--lg-up) {
     padding: 0;
   }
 }

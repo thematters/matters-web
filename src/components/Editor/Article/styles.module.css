@@ -4,7 +4,7 @@
   & :global(.ql-editor) {
     margin-bottom: var(--global-nav-height);
 
-    @media (--md-up) {
+    @media (--sm-up) {
       margin-bottom: 0;
     }
   }
