@@ -240,6 +240,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         title={isEditing ? 'editTag' : 'createTag'}
         closeDialog={closeDialog}
         rightBtn={<SubmitButton />}
+        hasSmUpTitle={false}
       />
 
       <Dialog.Content>{InnerForm}</Dialog.Content>

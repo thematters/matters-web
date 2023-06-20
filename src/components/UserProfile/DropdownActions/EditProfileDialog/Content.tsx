@@ -282,6 +282,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         title="editUserProfile"
         closeDialog={closeDialog}
         rightBtn={<SubmitButton />}
+        hasSmUpTitle={false}
       />
 
       <Dialog.Content>{InnerForm}</Dialog.Content>
