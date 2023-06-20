@@ -23,7 +23,7 @@
   height: var(--global-header-height-mobile);
   padding: 0 var(--spacing-base);
 
-  @media (--md-up) {
+  @media (--sm-up) {
     height: var(--global-header-height);
     padding: 0;
   }
@@ -34,7 +34,7 @@
   flex-shrink: 0;
   margin-right: var(--spacing-x-tight);
 
-  @media (--md-up) {
+  @media (--sm-up) {
     margin-right: var(--spacing-base);
   }
 }

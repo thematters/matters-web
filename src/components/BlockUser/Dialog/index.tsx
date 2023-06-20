@@ -72,7 +72,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
               }}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={<Translate id="block" />}
               color="red"

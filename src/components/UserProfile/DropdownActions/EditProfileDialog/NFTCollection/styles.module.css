@@ -3,7 +3,7 @@
   grid-template-columns: repeat(4, 1fr);
   border-radius: var(--spacing-xxx-tight);
 
-  @media (--md-up) {
+  @media (--sm-up) {
     grid-template-columns: repeat(6, 1fr);
   }
 

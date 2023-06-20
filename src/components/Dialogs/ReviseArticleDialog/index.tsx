@@ -73,7 +73,7 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
               onClick={closeDialog}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={
                 <Translate zh_hant="開始修訂" zh_hans="开始修订" en="Edit" />

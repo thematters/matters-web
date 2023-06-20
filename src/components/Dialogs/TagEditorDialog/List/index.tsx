@@ -196,7 +196,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
 
       {isAllowAdd && (
         <Dialog.Footer
-          mdUpBtns={
+          smUpBtns={
             <>
               <Dialog.TextButton
                 text="cancel"

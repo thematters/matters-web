@@ -29,7 +29,7 @@
   }
 }
 
-.mdUpheader {
+.smUpheader {
   padding: var(--spacing-s-loose) var(--spacing-s-loose) 0;
 
   & .title {

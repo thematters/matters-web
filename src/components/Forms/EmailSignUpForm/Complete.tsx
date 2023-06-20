@@ -69,7 +69,7 @@ const Complete = ({
             }}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text={
               <FormattedMessage

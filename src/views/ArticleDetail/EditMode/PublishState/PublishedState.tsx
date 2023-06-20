@@ -83,7 +83,7 @@ const PublishedState = ({ article, cancel, newestMediaHash }: Props) => {
           }}
         />
       }
-      mdUpBtns={
+      smUpBtns={
         <Dialog.TextButton
           text={
             <Translate

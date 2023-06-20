@@ -72,7 +72,7 @@ const BaseUnsubscribeCircleDialog = ({
               />
             )
           }
-          mdUpBtns={
+          smUpBtns={
             isUnsubscribed ? null : (
               <Dialog.TextButton
                 text="confirm"

@@ -15,7 +15,7 @@
     color: var(--color-grey-darker);
   }
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding: var(--spacing-x-loose) var(--spacing-xx-loose);
 
     & h4 {

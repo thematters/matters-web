@@ -193,7 +193,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               text={onBack ? 'back' : 'cancel'}

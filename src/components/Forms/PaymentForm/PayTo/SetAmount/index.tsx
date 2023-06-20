@@ -436,7 +436,7 @@ const SetAmount: React.FC<FormProps> = ({
             />
           </>
         }
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton text="back" color="greyDarker" onClick={back} />
             <SubmitBtn mode="text" />

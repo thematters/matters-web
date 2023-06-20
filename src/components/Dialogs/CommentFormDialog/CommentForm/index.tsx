@@ -164,7 +164,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
       <Dialog.Footer
         closeDialog={closeDialog}
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             color="green"
             type="submit"

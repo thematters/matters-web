@@ -58,7 +58,7 @@ export const VerificationLinkSent = ({
 
       {closeDialog && (
         <Dialog.Footer
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text="understood"
               color="greyDarker"

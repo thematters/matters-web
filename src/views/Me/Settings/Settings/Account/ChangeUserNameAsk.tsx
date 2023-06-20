@@ -34,7 +34,7 @@ const Ask = ({ children }: AskProps) => {
               href={PATHS.ME_SETTINGS_CHANGE_USERNAME}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={<Translate id="confirm" />}
               color="green"

@@ -102,7 +102,7 @@ const ArchiveArticleDialog = ({
               }}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={
                 <FormattedMessage defaultMessage="Archive" description="" />

@@ -93,7 +93,7 @@ const BaseFingerprintDialog = ({
         isOpen={show}
         onDismiss={closeDialog}
         smBgColor="greyLighter"
-        mdUpBgColor="greyLighter"
+        smUpBgColor="greyLighter"
       >
         <Dialog.Header
           title="IPFSEntrance"
@@ -123,7 +123,7 @@ const BaseFingerprintDialog = ({
         />
 
         <Dialog.Footer
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={<Translate id="close" />}
               color="greyDarker"

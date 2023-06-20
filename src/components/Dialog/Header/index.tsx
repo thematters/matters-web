@@ -9,7 +9,7 @@ import styles from './styles.module.css'
 
 export interface HeaderProps {
   title: TextId | React.ReactNode
-  hasMdUpTitle?: boolean
+  hasSmUpTitle?: boolean
   leftBtn?: React.ReactNode
   rightBtn?: React.ReactNode | string
   cancelText?: React.ReactNode
@@ -24,7 +24,7 @@ const Title = ({ title }: Pick<HeaderProps, 'title'>) => (
 
 const Header: React.FC<HeaderProps> = ({
   title,
-  hasMdUpTitle = true,
+  hasSmUpTitle = true,
   leftBtn,
   rightBtn,
   cancelText,
@@ -54,8 +54,8 @@ const Header: React.FC<HeaderProps> = ({
       </Media>
 
       <Media greaterThan="sm">
-        {hasMdUpTitle ? (
-          <header className={styles.mdUpheader}>
+        {hasSmUpTitle ? (
+          <header className={styles.smUpheader}>
             <Title title={title} />
           </header>
         ) : (

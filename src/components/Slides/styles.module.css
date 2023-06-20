@@ -24,7 +24,7 @@
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
 
-  @media (--md-down) {
+  @media (--sm-down) {
     margin-right: calc(var(--spacing-base) * -1);
     margin-left: calc(var(--spacing-base) * -1);
 

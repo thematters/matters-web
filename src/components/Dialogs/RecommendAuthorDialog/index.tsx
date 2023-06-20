@@ -72,7 +72,7 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
         </Dialog.Content>
 
         <Dialog.Footer
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text="close"
               color="greyDarker"

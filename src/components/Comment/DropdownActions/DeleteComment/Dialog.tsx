@@ -117,7 +117,7 @@ const DeleteCommentDialog = ({
               }}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={
                 <FormattedMessage defaultMessage="Confirm" description="" />

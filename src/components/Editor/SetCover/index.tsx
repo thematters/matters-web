@@ -96,7 +96,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               text={onBack ? 'back' : 'close'}

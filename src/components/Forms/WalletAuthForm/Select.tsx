@@ -319,7 +319,7 @@ const Select: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text={back ? 'back' : 'cancel'}
             color="greyDarker"

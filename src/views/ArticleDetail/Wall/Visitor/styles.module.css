@@ -32,7 +32,7 @@
   border-top-left-radius: 1.25rem;
   border-top-right-radius: 1.25rem;
 
-  @media (--md-up) {
+  @media (--sm-up) {
     @mixin border-left-grey;
     @mixin border-right-grey;
   }

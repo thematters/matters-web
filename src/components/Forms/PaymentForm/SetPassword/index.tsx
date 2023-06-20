@@ -200,7 +200,7 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text="cancel"
             color="greyDarker"

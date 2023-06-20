@@ -9,7 +9,7 @@ import { analytics, appendTarget } from '~/common/utils'
 import { Button, Media, TextIcon, Translate } from '~/components'
 
 export const UniversalAuthButton: React.FC = () => {
-  const mdUpProps = {
+  const smUpProps = {
     onClick: () => {
       analytics.trackEvent('click_button', {
         type: 'login/signup',
@@ -42,7 +42,7 @@ export const UniversalAuthButton: React.FC = () => {
       </Media>
 
       <Media greaterThanOrEqual="lg">
-        <Button bgColor="green" spacing={['tight', 'base']} {...mdUpProps}>
+        <Button bgColor="green" spacing={['tight', 'base']} {...smUpProps}>
           <ButtonText />
         </Button>
       </Media>

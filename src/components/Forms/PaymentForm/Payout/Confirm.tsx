@@ -272,7 +272,7 @@ const BaseConfirm: React.FC<FormProps> = ({
             onClick={switchToResetPassword}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               text={back ? 'back' : 'cancel'}

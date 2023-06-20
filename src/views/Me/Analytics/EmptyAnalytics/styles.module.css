@@ -25,7 +25,7 @@
   height: 89px;
   margin: var(--spacing-loose) 0;
 
-  @media (--md-up) {
+  @media (--sm-up) {
     margin: var(--spacing-xx-loose) 0;
   }
 }

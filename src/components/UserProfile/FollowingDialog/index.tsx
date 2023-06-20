@@ -29,7 +29,7 @@ const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
         <DynamicContent />
 
         <Dialog.Footer
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text="close"
               color="greyDarker"

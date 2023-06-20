@@ -154,7 +154,7 @@ const LinkENS = ({
               onClick={switchToTargetNetwork}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <>
               <CancelButton />
               <Dialog.TextButton
@@ -226,7 +226,7 @@ const LinkENS = ({
               onClick={() => disconnect()}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <>
               <CancelButton />
 
@@ -281,7 +281,7 @@ const LinkENS = ({
             onClick={linkIPNStoENS}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <>
             <CancelButton />
 

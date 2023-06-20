@@ -2,7 +2,7 @@
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-x-tight);
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding: 0;
   }
 
@@ -17,7 +17,7 @@
   display: inline-flex;
   gap: var(--spacing-base);
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding-right: var(--spacing-base);
   }
 }

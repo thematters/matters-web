@@ -4,11 +4,11 @@
   grid-template-columns: minmax(0, 1fr) 100% minmax(0, 1fr);
   margin: 0 var(--spacing-base);
 
-  @media (--lg-up) {
+  @media (--md-up) {
     margin: 0 var(--spacing-xx-loose);
   }
 
-  @media (--xl-up) {
+  @media (--lg-up) {
     grid-template-columns: minmax(0, 1fr) 1105px minmax(0, 1fr);
     margin: 0 auto;
   }
@@ -24,15 +24,15 @@
   grid-column: content;
   grid-column-gap: 2.5rem;
 
-  @media (--md-up) {
+  @media (--sm-up) {
     grid-template-columns: repeat(8, [col-start] minmax(0, 1fr));
   }
 
-  @media (--lg-up) {
+  @media (--md-up) {
     grid-template-columns: repeat(9, [col-start] minmax(0, 1fr));
   }
 
-  @media (--xl-up) {
+  @media (--lg-up) {
     grid-template-columns: repeat(12, [col-start] minmax(0, 1fr));
   }
 }

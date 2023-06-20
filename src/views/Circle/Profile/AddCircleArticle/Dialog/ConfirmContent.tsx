@@ -52,7 +52,7 @@ const ConfirmContent: React.FC<ContentProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               color="greyDarker"

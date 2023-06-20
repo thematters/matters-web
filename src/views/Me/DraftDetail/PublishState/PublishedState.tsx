@@ -72,7 +72,7 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
           onClick={() => router.replace(path.href)}
         />
       }
-      mdUpBtns={
+      smUpBtns={
         <Dialog.TextButton
           text={
             <Translate

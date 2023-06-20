@@ -105,7 +105,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
               }}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={<Translate id="confirm" />}
               color="red"

@@ -54,7 +54,7 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
             }}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text={
               <Translate

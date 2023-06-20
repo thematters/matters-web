@@ -75,7 +75,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
             onClick={prevStep}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text={<Translate id={error ? 'retry' : 'continue'} />}
             color="green"

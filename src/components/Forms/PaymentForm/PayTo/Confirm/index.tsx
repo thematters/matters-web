@@ -263,7 +263,7 @@ const Confirm: React.FC<FormProps> = ({
             }
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text={submitText}
             color={isHKD ? 'greyDarker' : 'green'}

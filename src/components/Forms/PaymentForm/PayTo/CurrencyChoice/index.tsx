@@ -164,7 +164,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
       <Dialog.Content>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text="cancel"
             color="greyDarker"

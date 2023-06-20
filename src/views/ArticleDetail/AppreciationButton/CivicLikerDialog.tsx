@@ -127,7 +127,7 @@ const CivicLikerDialog = ({
               rel="noopener"
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={
                 <Translate

@@ -16,7 +16,7 @@ export interface ShareDialogContentProps {
   headerTitle?: TextId | React.ReactNode
   description?: React.ReactNode
   btns?: React.ReactNode
-  mdUpBtns?: React.ReactNode
+  smUpBtns?: React.ReactNode
 }
 
 const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
@@ -29,7 +29,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
   headerTitle,
   description,
   btns,
-  mdUpBtns,
+  smUpBtns,
 }) => {
   const url = new URL(shareLink)
   if (url.searchParams.get('locale')) {
@@ -79,8 +79,8 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
         </section>
       </Dialog.Content>
 
-      {btns || mdUpBtns ? (
-        <Dialog.Footer btns={btns} mdUpBtns={mdUpBtns} />
+      {btns || smUpBtns ? (
+        <Dialog.Footer btns={btns} smUpBtns={smUpBtns} />
       ) : (
         <Dialog.Footer
           btns={
@@ -90,7 +90,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
               onClick={closeDialog}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={<Translate id="close" />}
               color="greyDarker"

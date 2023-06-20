@@ -28,7 +28,7 @@ const BaseMembersDialog = ({ children }: MembersDialogProps) => {
         <DynamicContent />
 
         <Dialog.Footer
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text="close"
               color="greyDarker"

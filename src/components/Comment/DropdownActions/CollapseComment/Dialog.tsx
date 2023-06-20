@@ -105,7 +105,7 @@ const CollapseCommentDialog = ({
               }}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={<Translate id="confirm" />}
               color="red"

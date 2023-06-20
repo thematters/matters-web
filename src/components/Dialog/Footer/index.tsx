@@ -8,18 +8,18 @@ import styles from './styles.module.css'
 
 type FooterProps = {
   btns?: React.ReactNode
-  mdUpBtns?: React.ReactNode
+  smUpBtns?: React.ReactNode
   cancelText?: React.ReactNode
   closeDialog?: () => any
 }
 
 const Footer: React.FC<FooterProps> = ({
   btns,
-  mdUpBtns,
+  smUpBtns,
   cancelText,
   closeDialog,
 }) => {
-  if (!btns && !mdUpBtns && !closeDialog) {
+  if (!btns && !smUpBtns && !closeDialog) {
     return null
   }
 
@@ -43,7 +43,7 @@ const Footer: React.FC<FooterProps> = ({
           </footer>
         </Media>
       )}
-      {(mdUpBtns || closeDialog) && (
+      {(smUpBtns || closeDialog) && (
         <Media greaterThan="sm">
           <footer className={styles.smUpFooter}>
             {closeDialog && (
@@ -57,7 +57,7 @@ const Footer: React.FC<FooterProps> = ({
                 onClick={closeDialog}
               />
             )}
-            {mdUpBtns}
+            {smUpBtns}
           </footer>
         </Media>
       )}

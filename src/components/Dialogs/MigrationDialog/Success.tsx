@@ -46,7 +46,7 @@ const MigrationDialogSuccess = () => {
             href={PATHS.HOME}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text={<Translate id="back" />}
             color="green"

@@ -44,7 +44,7 @@ const InvitationSent = ({ closeDialog }: Props) => (
           onClick={closeDialog}
         />
       }
-      mdUpBtns={
+      smUpBtns={
         <Dialog.TextButton
           text={<FormattedMessage defaultMessage="I see" description="" />}
           color="green"

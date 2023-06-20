@@ -181,7 +181,7 @@ const BaseOAuthAuthorize = () => {
               type={isNoLiker ? 'button' : 'submit'}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={
                 isNoLiker ? (

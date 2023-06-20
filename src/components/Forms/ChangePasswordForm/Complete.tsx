@@ -45,7 +45,7 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
               />
             ) : null
           }
-          mdUpBtns={
+          smUpBtns={
             isForget ? (
               <Dialog.TextButton
                 text={<Translate id="login" />}

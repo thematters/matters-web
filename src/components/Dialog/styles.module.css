@@ -28,18 +28,18 @@
   &.bgGreyLighter {
     background: var(--color-grey-lighter);
 
-    @media (--md-up) {
+    @media (--sm-up) {
       background: var(--color-white);
     }
   }
 
-  &.bgGreyLighterMdUp {
+  &.bgGreyLighterSmUp {
     @media (--md-up) {
       background: var(--color-grey-lighter);
     }
   }
 
-  @media (--md-up) {
+  @media (--sm-up) {
     border-radius: var(--spacing-x-tight);
     will-change: opacity;
 

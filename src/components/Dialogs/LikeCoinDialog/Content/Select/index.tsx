@@ -71,7 +71,7 @@ const Select: React.FC<SelectProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text="close"
             color="greyDarker"

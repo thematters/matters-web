@@ -4,7 +4,7 @@
   &:not(.banner) {
     padding: 0 var(--spacing-base);
 
-    @media (--md-up) {
+    @media (--sm-up) {
       padding: 0;
     }
   }

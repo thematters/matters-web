@@ -89,7 +89,7 @@ const BaseDialog = ({ id, children }: Props) => {
               onClick={onClick}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={
                 <Translate

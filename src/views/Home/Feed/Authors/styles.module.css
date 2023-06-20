@@ -4,7 +4,7 @@
   padding-bottom: var(--spacing-x-loose);
   border-bottom-style: dashed;
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding-bottom: var(--spacing-x-tight);
   }
 

@@ -54,7 +54,7 @@ const Complete: React.FC<Props> = ({ closeDialog }) => {
             href={PATHS.ME_WALLET_TRANSACTIONS}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text={
               <Translate

@@ -117,7 +117,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
             loading={loading}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text={
               <Translate

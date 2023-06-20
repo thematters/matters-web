@@ -85,7 +85,7 @@ const BaseArticleDigestFeed = ({
 
         {cover && (
           <div className={styles.cover}>
-            <ResponsiveImage url={cover} size="144w" mdUpSize="360w" />
+            <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
           </div>
         )}
       </section>

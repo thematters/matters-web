@@ -66,7 +66,7 @@ const ConfirmRevisedPublishDialogContent = ({
       </Dialog.Message>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               color="greyDarker"

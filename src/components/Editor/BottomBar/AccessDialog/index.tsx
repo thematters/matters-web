@@ -49,7 +49,7 @@ const BaseAccessDialog = ({
           <ToggleAccess {...props} />
         </Dialog.Content>
 
-        <Dialog.Footer mdUpBtns={<CloseButton />} />
+        <Dialog.Footer smUpBtns={<CloseButton />} />
       </Dialog>
     </>
   )

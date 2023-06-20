@@ -102,7 +102,7 @@ const ConfirmPublishDialogContent: React.FC<
       </Dialog.Message>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               color="greyDarker"

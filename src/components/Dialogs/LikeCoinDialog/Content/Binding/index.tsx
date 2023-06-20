@@ -92,7 +92,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
             onClick={prevStep}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text={<Translate id="retry" />}
             color="green"

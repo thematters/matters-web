@@ -32,7 +32,7 @@ const ConfirmDialog = ({ removeArticle, children }: ConfirmDialogProps) => {
               onClick={removeArticle}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text="delete"
               color="red"

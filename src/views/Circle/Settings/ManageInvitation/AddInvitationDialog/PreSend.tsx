@@ -155,7 +155,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
       <SelectPeriod period={period} onChange={setPeriod} />
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               text="cancel"

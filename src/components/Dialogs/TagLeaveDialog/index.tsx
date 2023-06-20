@@ -94,7 +94,7 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
               loading={loading}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={
                 <Translate

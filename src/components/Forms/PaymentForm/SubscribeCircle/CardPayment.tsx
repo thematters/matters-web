@@ -178,7 +178,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
             onClick={handleSubmit}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               color="greyDarker"

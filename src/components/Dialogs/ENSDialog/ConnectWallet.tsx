@@ -62,7 +62,7 @@ const ConnectWallet = ({
             onClick={switchToWalletSelect}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text={
               <Translate

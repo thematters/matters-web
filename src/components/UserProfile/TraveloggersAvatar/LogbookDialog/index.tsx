@@ -100,7 +100,7 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
         </Form.List>
 
         <Dialog.Footer
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text="close"
               color="greyDarker"

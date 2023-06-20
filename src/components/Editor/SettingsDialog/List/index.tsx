@@ -113,7 +113,7 @@ const SettingsList = ({
               disabled={disabled}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={confirmButtonText}
               color="green"

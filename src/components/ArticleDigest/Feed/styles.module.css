@@ -4,7 +4,7 @@
     'head cover' auto
     'description description' auto/ 1fr auto;
 
-  @media (--md-up) {
+  @media (--sm-up) {
     grid-template-areas:
       'head cover'
       'description cover';
@@ -32,7 +32,7 @@
   color: var(--color-grey-dark);
   -webkit-line-clamp: 3;
 
-  @media (--md-up) {
+  @media (--sm-up) {
     margin-top: var(--spacing-base);
   }
 }
@@ -52,7 +52,7 @@
     border-radius: var(--spacing-xx-tight);
   }
 
-  @media (--md-up) {
+  @media (--sm-up) {
     width: 10.625rem;
     height: 6rem;
   }

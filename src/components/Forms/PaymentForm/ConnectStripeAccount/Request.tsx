@@ -70,7 +70,7 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
       </Dialog.Content>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <>
             {back && (
               <Dialog.TextButton

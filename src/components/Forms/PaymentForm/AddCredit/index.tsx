@@ -266,7 +266,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
                 onClick={callback}
               />
             }
-            mdUpBtns={
+            smUpBtns={
               <Dialog.TextButton
                 text={callbackText}
                 color="green"
@@ -319,7 +319,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               text="cancel"

@@ -216,7 +216,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             color="greyDarker"
             text="close"

@@ -187,7 +187,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
   }
 
   if (!viewer.isAuthed) {
-    const mdUpProps = {
+    const smUpProps = {
       onClick: () => {
         window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
         window.dispatchEvent(
@@ -205,7 +205,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
           <Content article={article} {...smProps} />
         </Media>
         <Media greaterThan="sm">
-          <Content aria-haspopup="dialog" article={article} {...mdUpProps} />
+          <Content aria-haspopup="dialog" article={article} {...smUpProps} />
         </Media>
       </>
     )

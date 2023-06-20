@@ -216,7 +216,7 @@ const Tasks = ({ task }: Props) => {
               onClick={hideTasks}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={
                 viewer.onboardingTasks.finished ? (

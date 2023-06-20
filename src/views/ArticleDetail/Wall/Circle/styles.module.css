@@ -9,7 +9,7 @@
     box-shadow: 0 0 4px rgb(0 0 0 / 16%);
   }
 
-  @media (--md-up) {
+  @media (--sm-up) {
     .container {
       background-image: var(--circle-wall-bg-md);
     }

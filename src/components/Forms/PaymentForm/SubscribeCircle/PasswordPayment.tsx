@@ -160,7 +160,7 @@ const Confirm: React.FC<FormProps> = ({
             onClick={switchToResetPassword}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               color="greyDarker"

@@ -27,7 +27,7 @@ export interface DialogOverlayProps {
 
 export type DialogProps = {
   smBgColor?: 'greyLighter'
-  mdUpBgColor?: 'greyLighter'
+  smUpBgColor?: 'greyLighter'
   hidePaddingBottom?: boolean
 
   testId?: string
@@ -42,7 +42,7 @@ const Container: React.FC<
   >
 > = ({
   smBgColor,
-  mdUpBgColor,
+  smUpBgColor,
   hidePaddingBottom,
   testId,
   onDismiss,
@@ -56,8 +56,8 @@ const Container: React.FC<
     [styles.container]: true,
     [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
       !!smBgColor,
-    [mdUpBgColor ? styles[`bg${capitalizeFirstLetter(mdUpBgColor)}MdUp`] : '']:
-      !!mdUpBgColor,
+    [smUpBgColor ? styles[`bg${capitalizeFirstLetter(smUpBgColor)}SmUp`] : '']:
+      !!smUpBgColor,
     [styles.hidePaddingBottom]: !!hidePaddingBottom,
   })
 

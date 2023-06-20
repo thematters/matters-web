@@ -45,7 +45,7 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
           closeDialog={closeDialog}
         />
 
-        <Dialog.Footer closeDialog={closeDialog} mdUpBtns={<SubmitButton />} />
+        <Dialog.Footer closeDialog={closeDialog} smUpBtns={<SubmitButton />} />
       </Dialog>
     </>
   )

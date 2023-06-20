@@ -138,7 +138,7 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
       />
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               text="cancel"

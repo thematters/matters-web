@@ -28,7 +28,7 @@ const Complete: React.FC = () => {
             }}
           />
         }
-        mdUpBtns={
+        smUpBtns={
           <Dialog.TextButton
             text={<Translate id="done" />}
             color="green"

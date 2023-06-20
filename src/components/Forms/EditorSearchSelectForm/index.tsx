@@ -202,7 +202,7 @@ const EditorSearchSelectForm = ({
       )}
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               text="cancel"

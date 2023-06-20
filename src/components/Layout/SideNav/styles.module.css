@@ -16,7 +16,7 @@
 
   flex-direction: column;
 
-  @media (--lg-up) {
+  @media (--md-up) {
     display: initial;
   }
 

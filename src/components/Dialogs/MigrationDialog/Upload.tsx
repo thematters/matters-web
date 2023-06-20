@@ -154,7 +154,7 @@ const MigrationDialogUpload = ({
               }}
             />
           }
-          mdUpBtns={
+          smUpBtns={
             <Dialog.TextButton
               text={
                 <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />

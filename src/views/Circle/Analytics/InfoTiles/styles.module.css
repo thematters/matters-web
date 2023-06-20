@@ -2,17 +2,17 @@
   padding: 0 var(--spacing-base);
   margin: var(--spacing-loose) 0 0;
 
-  @media (--md-up) {
+  @media (--sm-up) {
     padding: 0;
   }
 
-  @media (--lg-up) {
+  @media (--md-up) {
     @mixin flex-center-start;
   }
 }
 
 .group {
-  @media (--lg-up) {
+  @media (--md-up) {
     @mixin flex-center-start;
 
     & + .group {
@@ -91,7 +91,7 @@
     }
   }
 
-  @media (--lg-up) {
+  @media (--md-up) {
     flex-direction: column;
     align-items: start;
 

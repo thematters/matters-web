@@ -33,7 +33,7 @@ const Complete: React.FC<CompleteProps> = ({
             />
           ) : null
         }
-        mdUpBtns={
+        smUpBtns={
           callback ? (
             <Dialog.TextButton
               text={callbackText}

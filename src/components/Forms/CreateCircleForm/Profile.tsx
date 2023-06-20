@@ -271,7 +271,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       <Dialog.Content>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
-        mdUpBtns={
+        smUpBtns={
           <>
             <Dialog.TextButton
               text="cancel"
