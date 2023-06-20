@@ -20,8 +20,10 @@ import SupportPreview from './SupportPreview'
 import Tab, { TabType } from './Tab'
 
 interface FormProps {
+  back?: () => any
   closeDialog: () => void
-  onBack?: () => any
+  submitCallback?: () => void
+
   draft?: EditMetaDraftFragment
   article?: ArticleDetailPublicQuery['article']
   editSupportSetting: (
@@ -37,8 +39,10 @@ interface FormValues {
 }
 
 const SupportSettingDialogContent: React.FC<FormProps> = ({
+  back,
   closeDialog,
-  onBack,
+  submitCallback,
+
   draft,
   article,
   editSupportSetting,
@@ -85,7 +89,12 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       )
 
       setSubmitting(false)
-      closeDialog()
+
+      if (submitCallback) {
+        submitCallback()
+      } else {
+        closeDialog()
+      }
     },
   })
 
@@ -152,11 +161,8 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         title="setSupportSetting"
         closeDialog={closeDialog}
         leftBtn={
-          onBack ? (
-            <Dialog.TextButton
-              text={<Translate id="back" />}
-              onClick={onBack}
-            />
+          back ? (
+            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
           ) : null
         }
         rightBtn={<SubmitButton />}
@@ -195,9 +201,9 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={onBack ? 'back' : 'cancel'}
+              text={back ? 'back' : 'cancel'}
               color="greyDarker"
-              onClick={onBack || closeDialog}
+              onClick={back || closeDialog}
             />
             <SubmitButton />
           </>

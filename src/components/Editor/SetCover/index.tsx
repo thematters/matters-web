@@ -10,8 +10,9 @@ import styles from './styles.module.css'
 import Uploader, { UploadEntity } from './Uploader'
 
 export type SetCoverProps = {
-  onBack?: () => any
-  onClose?: () => any
+  back?: () => any
+  submitCallback?: () => any
+  closeDialog?: () => any
 
   cover?: string | null
   assets: AssetFragment[]
@@ -22,8 +23,9 @@ export type SetCoverProps = {
 } & UploadEntity
 
 const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
-  onBack,
-  onClose,
+  back,
+  submitCallback,
+  closeDialog,
 
   cover,
   assets,
@@ -43,10 +45,10 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
       setSelected(assets.find(filter))
     }
 
-    if (onBack) {
-      onBack()
-    } else if (onClose) {
-      onClose()
+    if (submitCallback) {
+      submitCallback()
+    } else if (closeDialog) {
+      closeDialog()
     }
   }
 
@@ -66,13 +68,10 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
     <>
       <Dialog.Header
         title="setCover"
-        closeDialog={onClose}
+        closeDialog={closeDialog}
         leftBtn={
-          onBack ? (
-            <Dialog.TextButton
-              text={<Translate id="back" />}
-              onClick={onBack}
-            />
+          back ? (
+            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
           ) : undefined
         }
         rightBtn={<SubmitButton />}
@@ -99,14 +98,14 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
           <>
             <Dialog.TextButton
               text={
-                onBack ? (
+                back ? (
                   'back'
                 ) : (
                   <FormattedMessage defaultMessage="Cancel" description="" />
                 )
               }
               color="greyDarker"
-              onClick={onBack || onClose}
+              onClick={back || closeDialog}
             />
             <SubmitButton />
           </>

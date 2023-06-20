@@ -192,7 +192,12 @@ const BaseEditorSettingsDialog = ({
         )}
 
         {isCover && (
-          <DynamicSetCover onBack={() => forward('list')} {...coverProps} />
+          <DynamicSetCover
+            {...coverProps}
+            back={() => forward('list')}
+            closeDialog={closeDialog}
+            submitCallback={() => forward('list')}
+          />
         )}
 
         {isCollection && (
@@ -205,11 +210,12 @@ const BaseEditorSettingsDialog = ({
               await editCollection(
                 nodes as ArticleDigestDropdownArticleFragment[]
               )
-              forward('list')
             }}
             nodes={collection}
             saving={collectionSaving}
+            back={() => forward('list')}
             closeDialog={closeDialog}
+            submitCallback={() => forward('list')}
             CustomStagingArea={ArticleCustomStagingArea}
           />
         )}
@@ -226,19 +232,22 @@ const BaseEditorSettingsDialog = ({
             nodes={tags}
             saving={tagsSaving}
             createTag
+            back={() => forward('list')}
             closeDialog={closeDialog}
+            submitCallback={() => forward('list')}
             CustomStagingArea={TagCustomStagingArea}
           />
         )}
 
         {isSupportSetting && (
           <DynamicSetSupportFeedback
-            onBack={() => forward('list')}
+            back={() => forward('list')}
+            submitCallback={() => forward('list')}
+            closeDialog={closeDialog}
             article={article}
             draft={draft}
             editSupportSetting={editSupportSetting}
             supportSettingSaving={supportSettingSaving}
-            closeDialog={closeDialog}
           />
         )}
 

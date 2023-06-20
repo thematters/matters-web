@@ -43,7 +43,10 @@ export type EditorSearchSelectFormProps = {
   title: TextId | React.ReactNode
   hint: TextId
   headerRightButtonText?: string | React.ReactNode
+
+  back?: () => void
   closeDialog: () => void
+  submitCallback?: () => void
 
   nodes?: SelectNode[]
   onSave: (nodes: SelectNode[]) => Promise<any>
@@ -65,7 +68,10 @@ const EditorSearchSelectForm = ({
   hint,
   CustomStagingArea,
   headerRightButtonText,
+
+  back,
   closeDialog,
+  submitCallback,
 
   nodes,
   onSave,
@@ -125,9 +131,9 @@ const EditorSearchSelectForm = ({
 
   const SubmitButton = () => (
     <Dialog.TextButton
-      onClick={closeDialog}
+      onClick={submitCallback || closeDialog}
       // disabled={stagingNodes.length <= 0}
-      text={headerRightButtonText || <Translate id="done" />}
+      text={headerRightButtonText || 'done'}
       loading={saving}
     />
   )
@@ -205,9 +211,15 @@ const EditorSearchSelectForm = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              text={
+                back ? (
+                  'back'
+                ) : (
+                  <FormattedMessage defaultMessage="Cancel" description="" />
+                )
+              }
               color="greyDarker"
-              onClick={closeDialog}
+              onClick={back || closeDialog}
             />
             <SubmitButton />
           </>
