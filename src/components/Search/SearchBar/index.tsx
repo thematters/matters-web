@@ -256,40 +256,42 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               )
             }
             trigger={undefined}
-            appendTo={typeof window !== 'undefined' ? document.body : undefined}
             placement="bottom-start"
             onClickOutside={closeDropdown}
             visible={showDropdown}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
-            <form
-              className={styles.form}
-              onSubmit={handleSubmit}
-              autoComplete="off"
-              action=""
-            >
-              <input
-                // FIMXME: FOUC on re-render
-                style={{ borderColor: 'var(--color-line-grey-light)' }}
-                type="search"
-                name="q"
-                ref={searchTextInput}
-                aria-label={textAriaLabel}
-                placeholder={textPlaceholder}
-                value={values.q}
-                onChange={(e) => {
-                  handleChange(e)
-                  setSearch(e.target.value)
-                  resetActiveItem()
-                  openDropdown()
-                }}
-                onFocus={openDropdown}
-                onClick={openDropdown}
-                maxLength={MAX_SEARCH_KEY_LENGTH}
-              />
+            {({ ref }) => (
+              <form
+                className={styles.form}
+                onSubmit={handleSubmit}
+                autoComplete="off"
+                action=""
+                ref={ref}
+              >
+                <input
+                  // FIMXME: FOUC on re-render
+                  style={{ borderColor: 'var(--color-line-grey-light)' }}
+                  type="search"
+                  name="q"
+                  ref={searchTextInput}
+                  aria-label={textAriaLabel}
+                  placeholder={textPlaceholder}
+                  value={values.q}
+                  onChange={(e) => {
+                    handleChange(e)
+                    setSearch(e.target.value)
+                    resetActiveItem()
+                    openDropdown()
+                  }}
+                  onFocus={openDropdown}
+                  onClick={openDropdown}
+                  maxLength={MAX_SEARCH_KEY_LENGTH}
+                />
 
-              <SearchButton />
-            </form>
+                <SearchButton />
+              </form>
+            )}
           </Dropdown>
         )
       }}

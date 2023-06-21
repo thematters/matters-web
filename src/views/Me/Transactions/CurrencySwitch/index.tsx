@@ -1,7 +1,7 @@
 import { Z_INDEX } from '~/common/enums'
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
   IconArrowDown16,
   Menu,
   TextIcon,
@@ -20,17 +20,14 @@ interface CurrencySwitchProps {
   setCurrency: (currency: Currency) => void
 }
 
-type CurrencySwitchContentProps = CurrencySwitchProps & {
-  isInDropdown?: boolean
-}
+type CurrencySwitchContentProps = CurrencySwitchProps
 
 const CurrencySwitchContent: React.FC<CurrencySwitchContentProps> = ({
   currency,
   setCurrency,
-  isInDropdown,
 }) => {
   return (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+    <Menu width="sm">
       <Menu.Item onClick={() => setCurrency(Currency.ALL)}>
         <TextIcon
           spacing="base"
@@ -79,30 +76,14 @@ export const CurrencySwitch: React.FC<CurrencySwitchProps> = ({
   setCurrency,
 }) => {
   return (
-    <DropdownDialog
-      dropdown={{
-        content: (
-          <CurrencySwitchContent
-            isInDropdown
-            currency={currency}
-            setCurrency={setCurrency}
-          />
-        ),
-        placement: 'bottom-end',
-        zIndex: Z_INDEX.OVER_DIALOG,
-      }}
-      dialog={{
-        content: (
-          <CurrencySwitchContent
-            currency={currency}
-            setCurrency={setCurrency}
-          />
-        ),
-        title: <Translate zh_hant="幣種" zh_hans="币种" en="Currency" />,
-      }}
+    <Dropdown
+      content={
+        <CurrencySwitchContent currency={currency} setCurrency={setCurrency} />
+      }
+      zIndex={Z_INDEX.OVER_DIALOG}
     >
-      {({ openDialog, type, ref }) => (
-        <Button onClick={openDialog} aria-haspopup={type} ref={ref}>
+      {({ ref }) => (
+        <Button aria-haspopup="listbox" ref={ref}>
           <TextIcon
             icon={<IconArrowDown16 />}
             textPlacement="left"
@@ -116,6 +97,6 @@ export const CurrencySwitch: React.FC<CurrencySwitchProps> = ({
           </TextIcon>
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }

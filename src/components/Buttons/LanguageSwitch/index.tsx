@@ -3,21 +3,16 @@ import { useContext } from 'react'
 import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
   IconWorld16,
   LanguageConsumer,
   LanguageContext,
   Menu,
   TextIcon,
-  Translate,
 } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
 
-export const LanguageSwitchContent = ({
-  isInDropdown,
-}: {
-  isInDropdown?: boolean
-}) => (
+export const LanguageSwitchContent = () => (
   <LanguageConsumer>
     {({ lang, setLang }) => {
       const isEnActive = lang === 'en'
@@ -25,7 +20,7 @@ export const LanguageSwitchContent = ({
       const isZhHansActive = lang === 'zh_hans'
 
       return (
-        <Menu width={isInDropdown ? 'sm' : undefined}>
+        <Menu width="sm">
           <Menu.Item onClick={() => setLang(UserLanguage.ZhHant)}>
             <TextIcon
               spacing="base"
@@ -76,31 +71,14 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
   const textSize = size === 'sm' ? 'smS' : 'md'
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <LanguageSwitchContent isInDropdown />,
-        placement: 'bottom-end',
-        zIndex: Z_INDEX.OVER_DIALOG,
-      }}
-      dialog={{
-        content: <LanguageSwitchContent />,
-        title: (
-          <Translate
-            zh_hant="修改界面語言"
-            zh_hans="修改介面语言"
-            en="Language"
-          />
-        ),
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<LanguageSwitchContent />} zIndex={Z_INDEX.OVER_DIALOG}>
+      {({ ref }) => (
         <Button
           size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
           spacing={[0, 'xtight']}
           bgColor={bgColor}
           bgActiveColor={bgColor === 'greyDarkest' ? undefined : 'greyLighter'}
-          onClick={openDialog}
-          aria-haspopup={type}
+          aria-haspopup="listbox"
           ref={ref}
         >
           <TextIcon icon={<IconWorld16 />} size={textSize} color={iconColor}>
@@ -108,6 +86,6 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
           </TextIcon>
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }

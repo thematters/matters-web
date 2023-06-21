@@ -1,5 +1,5 @@
 import {
-  DropdownDialog,
+  Dropdown,
   Form,
   IconUnlock24,
   Menu,
@@ -15,8 +15,8 @@ interface PaymentPasswordProps {
 const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
   openResetPaymentPasswordDialog,
 }) => {
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu width="sm">
       <Menu.Item onClick={openResetPaymentPasswordDialog} ariaHasPopup="dialog">
         <TextIcon icon={<IconUnlock24 size="md" />} size="md" spacing="base">
           <Translate id="resetPaymentPassword" />
@@ -26,17 +26,8 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ ref }) => (
         <Form.List.Item
           title={
             <Translate
@@ -45,13 +36,12 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
               en="Payment Password"
             />
           }
-          onClick={openDialog}
           role="button"
-          ariaHasPopup={type}
+          ariaHasPopup="listbox"
           ref={ref}
         />
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

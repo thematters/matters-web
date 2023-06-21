@@ -7,7 +7,7 @@ import { translate } from '~/common/utils'
 import {
   AppreciatorsDialog,
   BookmarkButton,
-  DropdownDialog,
+  Dropdown,
   FingerprintDialog,
   IconMore16,
   IconSize,
@@ -135,8 +135,8 @@ const BaseDropdownActions = ({
     hasSetTagUnselected ||
     hasRemoveTag
 
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu width="sm">
       {/* public */}
       {hasShare && <ShareButton openDialog={openShareDialog} />}
       {hasAppreciators && (
@@ -175,31 +175,18 @@ const BaseDropdownActions = ({
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ ref }) => (
         <button
           aria-label={translate({ id: 'moreActions', lang })}
-          aria-haspopup={type}
-          onClick={(e) => {
-            e.stopPropagation()
-            openDialog()
-          }}
+          aria-haspopup="listbox"
           ref={ref}
           className={styles.moreButton}
         >
           {icon ? icon : <IconMore16 size={size} />}
         </button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

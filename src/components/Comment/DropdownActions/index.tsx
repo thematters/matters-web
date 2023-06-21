@@ -9,7 +9,7 @@ import {
   Button,
   CommentFormDialog,
   CommentFormType,
-  DropdownDialog,
+  Dropdown,
   IconMore16,
   LanguageContext,
   Menu,
@@ -146,8 +146,8 @@ const BaseDropdownActions = ({
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
 
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu width="sm">
       {hasPin && <PinButton comment={comment} type={type} />}
       {hasEdit && <EditButton openEditCommentDialog={openEditCommentDialog} />}
       {hasDelete && (
@@ -167,29 +167,19 @@ const BaseDropdownActions = ({
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type: popupType, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ ref }) => (
         <Button
           spacing={['xtight', 'xtight']}
           bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
           aria-label={translate({ id: 'moreActions', lang })}
-          aria-haspopup={popupType}
-          onClick={openDialog}
+          aria-haspopup="listbox"
           ref={ref}
         >
           <IconMore16 color="grey" />
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

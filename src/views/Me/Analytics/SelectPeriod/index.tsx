@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
 import { Z_INDEX } from '~/common/enums'
-import { Button, DropdownDialog, Menu, TextIcon, withIcon } from '~/components'
+import { Button, Dropdown, Menu, TextIcon, withIcon } from '~/components'
 
 type SelectProps = {
   period: number
@@ -110,25 +110,17 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     )
   }
   return (
-    <DropdownDialog
-      dropdown={{
-        appendTo: 'parent',
-        content: <AnalyticsSelectContent dropdown />,
-        placement: 'bottom-end',
-        zIndex: Z_INDEX.OVER_DIALOG,
-      }}
-      dialog={{
-        content: <AnalyticsSelectContent />,
-        title: '',
-      }}
+    <Dropdown
+      appendTo="parent"
+      content={<AnalyticsSelectContent dropdown />}
+      zIndex={Z_INDEX.OVER_DIALOG}
     >
-      {({ openDialog, type, ref }) => (
+      {({ ref }) => (
         <Button
           size={[null, '1.25rem']}
           spacing={[0, 'xtight']}
           bgColor={'white'}
-          onClick={openDialog}
-          aria-haspopup={type}
+          aria-haspopup="listbox"
           ref={ref}
         >
           <TextIcon
@@ -142,7 +134,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
           </TextIcon>
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

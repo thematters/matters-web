@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { toPath } from '~/common/utils'
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
   IconAnalytics24,
   IconEdit16,
   IconLogout24,
@@ -51,8 +51,8 @@ const BaseDropdownActions = ({
   openUnsubscribeCircleDialog,
 }: BaseDropdownActionsProps) => {
   const intl = useIntl()
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu width="sm">
       {isCircleOwner && (
         <Menu.Item {...toPath({ page: 'circleSettings', circle })} is="link">
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
@@ -90,25 +90,15 @@ const BaseDropdownActions = ({
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ ref }) => (
         <Button
           bgColor="halfBlack"
           aria-label={intl.formatMessage({
             defaultMessage: 'More Actions',
             description: '',
           })}
-          aria-haspopup={type}
-          onClick={openDialog}
+          aria-haspopup="listbox"
           ref={ref}
         >
           {isCircleOwner ? (
@@ -118,7 +108,7 @@ const BaseDropdownActions = ({
           )}
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

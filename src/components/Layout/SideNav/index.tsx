@@ -1,6 +1,5 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { useContext } from 'react'
-import FocusLock from 'react-focus-lock'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS, Z_INDEX } from '~/common/enums'
@@ -73,33 +72,33 @@ const SideNavMenu = () => {
 
       <Dropdown
         content={
-          <FocusLock>
-            <section className={styles.dropdownMenu}>
-              <VisuallyHidden>
-                <button type="button">
-                  <FormattedMessage defaultMessage="Cancel" description="" />
-                </button>
-              </VisuallyHidden>
-              <NavMenu.Top />
-              <Menu.Divider />
-              <NavMenu.Bottom />
-            </section>
-          </FocusLock>
+          <section className={styles.dropdownMenu}>
+            <VisuallyHidden>
+              <button type="button">
+                <FormattedMessage defaultMessage="Cancel" description="" />
+              </button>
+            </VisuallyHidden>
+            <NavMenu.Top />
+            <Menu.Divider />
+            <NavMenu.Bottom />
+          </section>
         }
         placement="right-start"
-        appendTo={typeof window !== 'undefined' ? document.body : undefined}
         offset={[-24, 24]}
         zIndex={Z_INDEX.OVER_BOTTOM_BAR}
         onShown={hidePopperOnClick}
       >
-        <NavListItem
-          name={<FormattedMessage defaultMessage="My Page" description="" />}
-          icon={<IconNavMe32 size="lg" />}
-          activeIcon={<IconNavMeActive32 size="lg" />}
-          active={isInMe}
-          canScrollTop={false}
-          aira-haspopup="menu"
-        />
+        {({ ref }) => (
+          <NavListItem
+            name={<FormattedMessage defaultMessage="My Page" description="" />}
+            icon={<IconNavMe32 size="lg" />}
+            activeIcon={<IconNavMeActive32 size="lg" />}
+            active={isInMe}
+            canScrollTop={false}
+            aira-haspopup="menu"
+            ref={ref}
+          />
+        )}
       </Dropdown>
 
       <li role="menuitem" className={styles.listItem}>

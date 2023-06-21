@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
   IconEdit16,
   IconLogbook1,
   IconLogbook2,
@@ -92,8 +92,8 @@ const BaseDropdownActions = ({
   const logbook2Url = `${process.env.NEXT_PUBLIC_LOGBOOKS_URL}/bookcase/?address=${address}`
 
   const intl = useIntl()
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu width="sm">
       {hasEditProfile && (
         <Menu.Item onClick={openEditProfileDialog} ariaHasPopup="dialog">
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
@@ -138,25 +138,15 @@ const BaseDropdownActions = ({
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ ref }) => (
         <Button
           bgColor="halfBlack"
           aria-label={intl.formatMessage({
             defaultMessage: 'More Actions',
             description: '',
           })}
-          aria-haspopup={type}
-          onClick={openDialog}
+          aria-haspopup="listbox"
           ref={ref}
         >
           {hasEditProfile ? (
@@ -166,7 +156,7 @@ const BaseDropdownActions = ({
           )}
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

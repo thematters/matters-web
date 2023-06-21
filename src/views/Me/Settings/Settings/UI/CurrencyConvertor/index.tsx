@@ -3,7 +3,7 @@ import { useContext } from 'react'
 
 import { ADD_TOAST } from '~/common/enums'
 import {
-  DropdownDialog,
+  Dropdown,
   Form,
   Menu,
   TextIcon,
@@ -64,8 +64,8 @@ const CurrencyConvertor = () => {
   const isHKDActive = currency === QuoteCurrency.Hkd
   const isTWDActive = currency === QuoteCurrency.Twd
 
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu width="sm">
       <Menu.Item onClick={() => updateCurrency(QuoteCurrency.Usd)}>
         <TextIcon
           spacing="base"
@@ -101,27 +101,17 @@ const CurrencyConvertor = () => {
   }
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: <Title />,
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ ref }) => (
         <Form.List.Item
           title={<Title />}
-          onClick={openDialog}
           rightText={currency}
-          ariaHasPopup={type}
+          ariaHasPopup="listbox"
           role="button"
           ref={ref}
         />
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

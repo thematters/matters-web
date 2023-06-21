@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
   IconAdd24,
   IconEdit16,
   IconProfile24,
@@ -61,8 +61,8 @@ const BaseDropdownActions = ({
   openTagLeaveDialog,
 }: BaseDropdownActionsProps) => {
   const intl = useIntl()
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu width="sm">
       {hasEditTag && (
         <Menu.Item onClick={openTagDialog} ariaHasPopup="dialog">
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
@@ -112,31 +112,21 @@ const BaseDropdownActions = ({
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ ref }) => (
         <Button
           bgColor="halfBlack"
           aria-label={intl.formatMessage({
             defaultMessage: 'More Actions',
             description: '',
           })}
-          onClick={openDialog}
-          aria-haspopup={type}
+          aria-haspopup="listbox"
           ref={ref}
         >
           <IconSettings32 size="lg" color="white" />
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

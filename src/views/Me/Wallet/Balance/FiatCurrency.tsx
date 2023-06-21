@@ -4,7 +4,7 @@ import { analytics, formatAmount } from '~/common/utils'
 import {
   AddCreditDialog,
   CurrencyFormatter,
-  DropdownDialog,
+  Dropdown,
   IconArrowRight16,
   IconFiatCurrency40,
   IconPayout24,
@@ -97,15 +97,13 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
   })
 
   const Content = ({
-    isInDropdown,
     openAddCreditDialog,
     openPayoutDialog,
   }: {
-    isInDropdown?: boolean
     openAddCreditDialog: () => void
     openPayoutDialog: () => void
   }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+    <Menu width="sm">
       <TopUpItem openDialog={openAddCreditDialog} />
       <PayoutItem openDialog={openPayoutDialog} canPayout={canPayout} />
     </Menu>
@@ -116,32 +114,18 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
       {({ openDialog: openPayoutDialog }) => (
         <AddCreditDialog>
           {({ openDialog: openAddCreditDialog }) => (
-            <DropdownDialog
-              dropdown={{
-                content: (
-                  <Content
-                    isInDropdown
-                    openAddCreditDialog={openAddCreditDialog}
-                    openPayoutDialog={openPayoutDialog}
-                  />
-                ),
-                placement: 'bottom-end',
-              }}
-              dialog={{
-                content: (
-                  <Content
-                    openAddCreditDialog={openAddCreditDialog}
-                    openPayoutDialog={openPayoutDialog}
-                  />
-                ),
-                title: 'moreActions',
-              }}
+            <Dropdown
+              content={
+                <Content
+                  openAddCreditDialog={openAddCreditDialog}
+                  openPayoutDialog={openPayoutDialog}
+                />
+              }
             >
-              {({ openDialog, type, ref }) => (
+              {({ ref }) => (
                 <section
                   className={classes}
-                  onClick={openDialog}
-                  aria-haspopup={type}
+                  aria-haspopup="listbox"
                   role="button"
                   ref={ref}
                 >
@@ -170,7 +154,7 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                   </TextIcon>
                 </section>
               )}
-            </DropdownDialog>
+            </Dropdown>
           )}
         </AddCreditDialog>
       )}
