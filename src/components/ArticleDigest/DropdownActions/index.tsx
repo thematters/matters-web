@@ -7,6 +7,7 @@ import { translate } from '~/common/utils'
 import {
   AppreciatorsDialog,
   BookmarkButton,
+  Button,
   Dropdown,
   FingerprintDialog,
   IconMore16,
@@ -176,16 +177,27 @@ const BaseDropdownActions = ({
 
   return (
     <Dropdown content={<Content />}>
-      {({ ref }) => (
-        <button
-          aria-label={translate({ id: 'moreActions', lang })}
-          aria-haspopup="listbox"
-          ref={ref}
-          className={styles.moreButton}
-        >
-          {icon ? icon : <IconMore16 size={size} />}
-        </button>
-      )}
+      {({ ref }) =>
+        inCard ? (
+          <button
+            aria-label={translate({ id: 'moreActions', lang })}
+            aria-haspopup="listbox"
+            ref={ref}
+            className={styles.moreButton}
+          >
+            {icon ? icon : <IconMore16 size={size} />}
+          </button>
+        ) : (
+          <Button
+            spacing={['xtight', 'xtight']}
+            bgActiveColor="greyLighter"
+            aria-label={translate({ id: 'moreActions', lang })}
+            ref={ref}
+          >
+            {icon ? icon : <IconMore16 size={size} />}
+          </Button>
+        )
+      }
     </Dropdown>
   )
 }
