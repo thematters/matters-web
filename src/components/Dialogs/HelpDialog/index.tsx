@@ -61,10 +61,9 @@ const BaseHelpDialog = ({ children, hasCount, hasTime }: Props) => {
     <>
       {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={<FormattedMessage defaultMessage="Help" description="" />}
-          closeDialog={closeDialog}
         />
 
         <Dialog.Message align="left">
@@ -72,15 +71,10 @@ const BaseHelpDialog = ({ children, hasCount, hasTime }: Props) => {
           {hasCount && <ReadCount />}
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            textColor="white"
-            bgColor="green"
-            onClick={closeDialog}
-          >
-            <FormattedMessage defaultMessage="I see" description="" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          closeText={<FormattedMessage defaultMessage="I see" description="" />}
+        />
       </Dialog>
     </>
   )

@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
 import { translate, validateSupportWords } from '~/common/utils'
@@ -8,8 +9,6 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  Media,
-  Spacer,
   TextIcon,
   Translate,
   useRoute,
@@ -21,8 +20,10 @@ import SupportPreview from './SupportPreview'
 import Tab, { TabType } from './Tab'
 
 interface FormProps {
+  back?: () => any
   closeDialog: () => void
-  onBack?: () => any
+  submitCallback?: () => void
+
   draft?: EditMetaDraftFragment
   article?: ArticleDetailPublicQuery['article']
   editSupportSetting: (
@@ -38,8 +39,10 @@ interface FormValues {
 }
 
 const SupportSettingDialogContent: React.FC<FormProps> = ({
+  back,
   closeDialog,
-  onBack,
+  submitCallback,
+
   draft,
   article,
   editSupportSetting,
@@ -86,7 +89,12 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       )
 
       setSubmitting(false)
-      closeDialog()
+
+      if (submitCallback) {
+        submitCallback()
+      } else {
+        closeDialog()
+      }
     },
   })
 
@@ -137,12 +145,12 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     )
   }
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
+  const SubmitButton = () => (
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting || supportSettingSaving}
-      text={<Translate id="save" />}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={isSubmitting}
     />
   )
@@ -152,20 +160,20 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       <Dialog.Header
         title="setSupportSetting"
         closeDialog={closeDialog}
-        leftButton={
-          onBack ? <Dialog.Header.BackButton onClick={onBack} /> : null
+        leftBtn={
+          back ? (
+            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+          ) : null
         }
-        rightButton={SubmitButton}
+        rightBtn={<SubmitButton />}
       />
 
-      <Dialog.Content>
-        <Media at="sm">
-          <Spacer size="base" />
-        </Media>
+      <Dialog.Content noSpacing={false}>
+        <section className={styles.tabs}>
+          <Tab tabType={tabType} setTabType={changeTabType} />
+        </section>
 
-        <Tab tabType={tabType} setTabType={changeTabType} />
-
-        <section className={styles.contentInput}>{InnerForm(tabType)}</section>
+        <section className={styles.form}>{InnerForm(tabType)}</section>
 
         <section className={styles.preview}>
           <h3>
@@ -188,6 +196,19 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
           />
         </section>
       </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

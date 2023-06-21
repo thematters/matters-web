@@ -48,7 +48,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
           <Button aria-haspopup="dialog" {...smUpProps}>
             <FormattedMessage
               defaultMessage="Log in"
-              description="src/components/Buttons/Login/index.tsx"
+              description="src/cpomponents/Buttons/Login/index.tsx"
             />
           </Button>
         </Media>

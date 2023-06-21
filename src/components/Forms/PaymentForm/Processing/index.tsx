@@ -129,11 +129,7 @@ const OthersProcessingForm: React.FC<Props> = ({
         <PayToFallback closeDialog={closeDialog} />
       ) : (
         <>
-          <Dialog.Header
-            closeDialog={closeDialog}
-            leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
-            title="donation"
-          />
+          <Dialog.Header title="donation" />
           <Dialog.Content>
             <section>
               <PaymentInfo
@@ -290,9 +286,10 @@ const USDTProcessingForm: React.FC<Props> = ({
     <>
       <Dialog.Header
         closeDialog={closeDialog}
-        leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
+        closeText="close"
         title="donation"
       />
+
       <Dialog.Content>
         <section>
           <PaymentInfo

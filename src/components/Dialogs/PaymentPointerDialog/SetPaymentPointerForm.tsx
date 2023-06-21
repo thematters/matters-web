@@ -111,11 +111,12 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
     setIsValid(isValid && values.paymentPointer !== defaultPaymentPointer)
 
   return (
-    <Dialog.Content hasGrow>
-      <section className={styles.container}>
+    <Dialog.Message align="left">
+      <Explainer />
+
+      <section className={styles.form}>
         <Form id={formId} onSubmit={handleSubmit}>
           <Form.Input
-            label={<Explainer />}
             type="text"
             name="paymentPointer"
             required
@@ -133,7 +134,7 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
           />
         </Form>
       </section>
-    </Dialog.Content>
+    </Dialog.Message>
   )
 }
 

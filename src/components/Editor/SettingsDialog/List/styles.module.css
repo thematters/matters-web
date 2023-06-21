@@ -1,5 +1,4 @@
-.list {
-  margin-top: var(--spacing-base);
+.container {
   overflow-y: auto;
 }
 

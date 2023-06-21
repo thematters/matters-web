@@ -15,6 +15,7 @@ import {
   Layout,
   Media,
   TextIcon,
+  Translate,
   ViewerContext,
 } from '~/components'
 
@@ -291,30 +292,40 @@ const Select: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          leftButton={
-            back ? <Dialog.Header.BackButton onClick={onBack} /> : null
-          }
-          title={
-            isConnect ? (
-              <FormattedMessage
-                defaultMessage="Connect Wallet"
-                description=""
-              />
-            ) : (
-              <FormattedMessage defaultMessage="Enter" description="" />
-            )
-          }
-          closeDialog={closeDialog}
-        />
-      )}
+      <Dialog.Header
+        closeDialog={closeDialog}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<Translate id="back" />}
+              onClick={onBack}
+            />
+          ) : null
+        }
+        title={
+          isConnect ? (
+            <FormattedMessage defaultMessage="Connect Wallet" description="" />
+          ) : (
+            <FormattedMessage defaultMessage="Enter" description="" />
+          )
+        }
+      />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Intro />
 
         {InnerForm}
       </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <Dialog.TextButton
+            text={back ? 'back' : 'cancel'}
+            color="greyDarker"
+            onClick={onBack || closeDialog}
+          />
+        }
+      />
     </>
   )
 }

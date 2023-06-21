@@ -5,7 +5,7 @@ import React from 'react'
 import { ShareButton, ShareDialog } from '~/components'
 
 export default {
-  title: 'Components/Share',
+  title: 'Components/Dialogs/Share',
   component: ShareDialog,
 } as ComponentMeta<typeof ShareDialog>
 

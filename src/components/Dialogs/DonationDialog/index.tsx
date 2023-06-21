@@ -35,9 +35,6 @@ const BaseDonationDialog = ({
     baseCloseDialog()
   }
 
-  // complete dialog for donation
-  const isComplete = currStep === 'complete'
-
   useEffect(() => {
     analytics.trackEvent('view_donation_dialog', { step: currStep })
   }, [currStep])
@@ -46,12 +43,7 @@ const BaseDonationDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog
-        size={isComplete ? 'lg' : 'sm'}
-        isOpen={show}
-        onDismiss={closeDialog}
-        fixedHeight
-      >
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent
           closeDialog={closeDialog}
           currStep={currStep}

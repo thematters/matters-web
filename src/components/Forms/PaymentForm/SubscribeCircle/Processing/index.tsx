@@ -38,7 +38,7 @@ const Processing: React.FC<Props> = ({ circleName, nextStep }) => {
   }, [isMember])
 
   return (
-    <Dialog.Message type={error ? 'error' : undefined} spacing="md">
+    <Dialog.Message type={error ? 'error' : undefined}>
       {error ? (
         <h3>
           <Translate id="NETWORK_ERROR" />

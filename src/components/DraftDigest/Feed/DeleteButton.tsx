@@ -80,12 +80,8 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         <IconTrash24 size="md" />
       </button>
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
-        <Dialog.Header
-          title="deleteDraft"
-          closeDialog={closeDialog}
-          mode="inner"
-        />
+      <Dialog isOpen={show} onDismiss={closeDialog}>
+        <Dialog.Header title="deleteDraft" />
 
         <Dialog.Message>
           <p>
@@ -97,25 +93,29 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="red"
-            onClick={() => {
-              onDelete()
-              closeDialog()
-            }}
-          >
-            <Translate id="confirm" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="greyLighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="cancel" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={<Translate id="confirm" />}
+              color="red"
+              onClick={() => {
+                onDelete()
+                closeDialog()
+              }}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={<Translate id="confirm" />}
+              color="red"
+              onClick={() => {
+                onDelete()
+                closeDialog()
+              }}
+            />
+          }
+        />
       </Dialog>
     </>
   )

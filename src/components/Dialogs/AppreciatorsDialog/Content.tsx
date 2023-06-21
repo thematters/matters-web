@@ -110,7 +110,7 @@ const AppreciatorsDialogContent = ({
           />
         }
         closeDialog={closeDialog}
-        closeTextId="close"
+        closeText="close"
       />
 
       <Dialog.Content>
@@ -143,6 +143,17 @@ const AppreciatorsDialogContent = ({
           )}
         </InfiniteScroll>
       </Dialog.Content>
+
+      <Dialog.Footer
+        noSpacing={false}
+        smUpBtns={
+          <Dialog.TextButton
+            text="close"
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
+      />
     </>
   )
 }

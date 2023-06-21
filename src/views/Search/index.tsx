@@ -21,6 +21,7 @@ import {
 import AggregateResults from './AggregateResults'
 // import EmptySearch from './EmptySearch'
 import styles from './styles.module.css'
+
 const Search = () => {
   const viewer = useContext(ViewerContext)
   const storageKey = STORAGE_KEY_SEARCH_HISTORY + '_' + viewer.id

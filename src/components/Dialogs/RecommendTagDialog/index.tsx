@@ -26,14 +26,14 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
     <>
       {children && children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={<Translate zh_hant="追蹤標籤" zh_hans="追踪标签" />}
           closeDialog={closeDialog}
-          closeTextId="cancel"
+          closeText="close"
         />
 
-        <Dialog.Content hasGrow>
+        <Dialog.Content>
           <Dialog.Message align="left">
             <p className={styles.message}>
               <Translate
@@ -50,17 +50,33 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
             </p>
           </Dialog.Message>
 
-          <Tabs>
-            <Tabs.Tab onClick={() => setFeed('hottest')} selected={isHottest}>
-              <Translate zh_hant="熱門標籤" zh_hans="热门标签" />
-            </Tabs.Tab>
-            <Tabs.Tab onClick={() => setFeed('selected')} selected={isSelected}>
-              <Translate zh_hant="編輯精選" zh_hans="编辑精选" />
-            </Tabs.Tab>
-          </Tabs>
+          <section className={styles.tabs}>
+            <Tabs>
+              <Tabs.Tab onClick={() => setFeed('hottest')} selected={isHottest}>
+                <Translate zh_hant="熱門標籤" zh_hans="热门标签" />
+              </Tabs.Tab>
+              <Tabs.Tab
+                onClick={() => setFeed('selected')}
+                selected={isSelected}
+              >
+                <Translate zh_hant="編輯精選" zh_hans="编辑精选" />
+              </Tabs.Tab>
+            </Tabs>
+          </section>
+
+          <Feed type={feed} />
         </Dialog.Content>
 
-        <Feed type={feed} />
+        <Dialog.Footer
+          noSpacing={false}
+          smUpBtns={
+            <Dialog.TextButton
+              text="close"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+        />
       </Dialog>
     </>
   )

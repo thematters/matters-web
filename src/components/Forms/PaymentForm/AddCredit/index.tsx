@@ -11,6 +11,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   PAYMENT_CURRENCY,
@@ -45,7 +46,9 @@ import StripeCheckout from '../StripeCheckout'
 
 interface FormProps {
   defaultAmount?: number
-  callbackButtons?: React.ReactNode
+  callback?: () => any
+  callbackText?: React.ReactNode
+  closeDialog?: () => any
 }
 
 interface FormValues {
@@ -74,7 +77,9 @@ const stripePromise = loadStripe(
 
 const BaseAddCredit: React.FC<FormProps> = ({
   defaultAmount,
-  callbackButtons,
+  callback,
+  callbackText,
+  closeDialog,
 }) => {
   const stripe = useStripe()
   const elements = useElements()
@@ -238,7 +243,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
   if (completed) {
     return (
       <>
-        <Dialog.Message spacing="xxl">
+        <Dialog.Message>
           <h3>
             <Translate id="successTopUp" />
           </h3>
@@ -253,14 +258,39 @@ const BaseAddCredit: React.FC<FormProps> = ({
           <CurrencyAmount amount={values.amount} currency={currency} />
         </Dialog.Message>
 
-        {callbackButtons && <Dialog.Footer>{callbackButtons}</Dialog.Footer>}
+        {callback && (
+          <Dialog.Footer
+            btns={
+              <Dialog.RoundedButton text={callbackText} onClick={callback} />
+            }
+            smUpBtns={
+              <Dialog.TextButton text={callbackText} onClick={callback} />
+            }
+          />
+        )}
       </>
     )
   }
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      text={<Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />}
+      type="submit"
+      form={formId}
+      disabled={disabled || !isValid || isSubmitting || !!checkoutError}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
-      <Dialog.Content hasGrow>
+      <Dialog.Header
+        title="topUp"
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
+
+      <Dialog.Content>
         <section>
           <ConfirmTable>
             <ConfirmTable.Row type="balance">
@@ -280,16 +310,18 @@ const BaseAddCredit: React.FC<FormProps> = ({
         </section>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          form={formId}
-          disabled={disabled || !isValid || isSubmitting || !!checkoutError}
-          loading={isSubmitting}
-        >
-          <Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

@@ -9,6 +9,7 @@ import { KEYCODES } from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
 import { Media, useOutsideClick } from '~/components'
 
+import { RoundedButton, TextButton } from './Buttons'
 import Content from './Content'
 import Footer from './Footer'
 import Handle from './Handle'
@@ -25,10 +26,8 @@ export interface DialogOverlayProps {
 }
 
 export type DialogProps = {
-  size?: 'sm' | 'lg'
   smBgColor?: 'greyLighter'
   smUpBgColor?: 'greyLighter'
-  fixedHeight?: boolean
   hidePaddingBottom?: boolean
 
   testId?: string
@@ -42,10 +41,8 @@ const Container: React.FC<
     } & DialogProps
   >
 > = ({
-  size = 'lg',
   smBgColor,
   smUpBgColor,
-  fixedHeight,
   hidePaddingBottom,
   testId,
   onDismiss,
@@ -57,8 +54,6 @@ const Container: React.FC<
 
   const containerClasses = classNames({
     [styles.container]: true,
-    [styles.fixedHeight]: !!fixedHeight,
-    [styles[size]]: true,
     [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
       !!smBgColor,
     [smUpBgColor ? styles[`bg${capitalizeFirstLetter(smUpBgColor)}SmUp`] : '']:
@@ -92,23 +87,22 @@ const Container: React.FC<
   useOutsideClick(node, closeTopDialog)
 
   return (
-    <div className="l-row" {...(testId ? { 'data-test-id': testId } : {})}>
-      <div
-        ref={node}
-        className={containerClasses}
-        style={style}
-        onKeyDown={(event) => {
-          if (event.keyCode === KEYCODES.escape) {
-            closeTopDialog()
-          }
-        }}
-      >
-        {children}
+    <div
+      {...(testId ? { 'data-test-id': testId } : {})}
+      ref={node}
+      className={containerClasses}
+      style={style}
+      onKeyDown={(event) => {
+        if (event.keyCode === KEYCODES.escape) {
+          closeTopDialog()
+        }
+      }}
+    >
+      {children}
 
-        <Media at="sm">
-          <Handle closeDialog={onDismiss} {...bind()} />
-        </Media>
-      </div>
+      <Media at="sm">
+        <Handle closeDialog={onDismiss} {...bind()} />
+      </Media>
     </div>
   )
 }
@@ -120,6 +114,8 @@ export const Dialog: React.ComponentType<
   Content: typeof Content
   Footer: typeof Footer
   Message: typeof Message
+  TextButton: typeof TextButton
+  RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
   const { isOpen, onRest } = props
@@ -170,10 +166,7 @@ export const Dialog: React.ComponentType<
       <AnimatedDialogOverlay className="dialog">
         <AnimatedOverlay style={{ opacity: opacity as any }} />
 
-        <DialogContent
-          className="l-container full"
-          aria-labelledby="dialog-title"
-        >
+        <DialogContent aria-labelledby="dialog-title">
           <AnimatedContainer
             style={{ opacity: opacity as any, top }}
             setDragGoal={setDragGoal}
@@ -189,4 +182,6 @@ Dialog.Header = Header
 Dialog.Content = Content
 Dialog.Footer = Footer
 Dialog.Message = Message
+Dialog.TextButton = TextButton
+Dialog.RoundedButton = RoundedButton
 Dialog.Lazy = Lazy

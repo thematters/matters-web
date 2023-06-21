@@ -105,11 +105,9 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header title="authEntries" closeDialog={closeDialog} />
-      )}
+      <Dialog.Header title="authEntries" closeDialog={closeDialog} />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <SourceHeader source={source} />
 
         {InnerForm}

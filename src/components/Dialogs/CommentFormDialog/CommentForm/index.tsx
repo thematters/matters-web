@@ -142,9 +142,8 @@ const CommentForm: React.FC<CommentFormProps> = ({
       <Dialog.Header
         title={title}
         closeDialog={closeDialog}
-        closeTextId="close"
-        rightButton={
-          <Dialog.Header.RightButton
+        rightBtn={
+          <Dialog.TextButton
             type="submit"
             form={formId}
             disabled={isSubmitting || !isValid}
@@ -154,13 +153,26 @@ const CommentForm: React.FC<CommentFormProps> = ({
         }
       />
 
-      <Dialog.Content spacing={['base', 'base']} hasGrow>
+      <Dialog.Content noSpacing={false}>
         {context && <section className={styles.context}>{context}</section>}
 
         <form className={styles.form} id={formId} onSubmit={handleSubmit}>
           <CommentEditor content={content} update={onUpdate} />
         </form>
       </Dialog.Content>
+
+      <Dialog.Footer
+        closeDialog={closeDialog}
+        smUpBtns={
+          <Dialog.TextButton
+            type="submit"
+            form={formId}
+            disabled={isSubmitting || !isValid}
+            text={<Translate zh_hant="送出" zh_hans="送出" en="Send" />}
+            loading={isSubmitting}
+          />
+        }
+      />
     </>
   )
 }
