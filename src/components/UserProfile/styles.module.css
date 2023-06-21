@@ -107,8 +107,7 @@
   display: grid;
   grid-template-columns: 50% 50%;
   grid-row-gap: var(--spacing-loose);
-  padding: 0 var(--spacing-base);
-  padding-top: var(--spacing-base);
+  margin-bottom: var(--spacing-loose);
 }
 
 .follow {
