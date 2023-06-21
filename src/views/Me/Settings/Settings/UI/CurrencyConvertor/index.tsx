@@ -6,7 +6,6 @@ import {
   Dropdown,
   Form,
   Menu,
-  TextIcon,
   Translate,
   useMutation,
   ViewerContext,
@@ -65,34 +64,24 @@ const CurrencyConvertor = () => {
   const isTWDActive = currency === QuoteCurrency.Twd
 
   const Content = () => (
-    <Menu width="sm">
-      <Menu.Item onClick={() => updateCurrency(QuoteCurrency.Usd)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={isUSDActive ? 'bold' : 'normal'}
-        >
-          {QuoteCurrency.Usd}
-        </TextIcon>
-      </Menu.Item>
-      <Menu.Item onClick={() => updateCurrency(QuoteCurrency.Hkd)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={isHKDActive ? 'bold' : 'normal'}
-        >
-          {QuoteCurrency.Hkd}
-        </TextIcon>
-      </Menu.Item>
-      <Menu.Item onClick={() => updateCurrency(QuoteCurrency.Twd)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={isTWDActive ? 'bold' : 'normal'}
-        >
-          {QuoteCurrency.Twd}
-        </TextIcon>
-      </Menu.Item>
+    <Menu>
+      <Menu.Item
+        text={QuoteCurrency.Usd}
+        onClick={() => updateCurrency(QuoteCurrency.Usd)}
+        weight={isUSDActive ? 'bold' : 'normal'}
+      />
+
+      <Menu.Item
+        text={QuoteCurrency.Hkd}
+        onClick={() => updateCurrency(QuoteCurrency.Hkd)}
+        weight={isHKDActive ? 'bold' : 'normal'}
+      />
+
+      <Menu.Item
+        text={QuoteCurrency.Twd}
+        onClick={() => updateCurrency(QuoteCurrency.Twd)}
+        weight={isTWDActive ? 'bold' : 'normal'}
+      />
     </Menu>
   )
 
@@ -105,6 +94,7 @@ const CurrencyConvertor = () => {
       {({ ref }) => (
         <Form.List.Item
           title={<Title />}
+          onClick={() => {}} // FIXME: show arrow
           rightText={currency}
           ariaHasPopup="listbox"
           role="button"

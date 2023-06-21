@@ -9,17 +9,16 @@ import {
   IconNavMe32,
   IconNavMeActive32,
   Media,
-  Menu,
   UniversalAuthButton,
   useRoute,
   ViewerContext,
   WriteButton,
 } from '~/components'
 
-import NavMenu from '../NavMenu'
 import UnreadIcon from '../UnreadIcon'
 import { NavListItemHome, NavListItemSearch } from './Items'
 import Logo from './Logo'
+import MeMenu from './MeMenu'
 import NavListItem from './NavListItem'
 import styles from './styles.module.css'
 
@@ -72,15 +71,13 @@ const SideNavMenu = () => {
 
       <Dropdown
         content={
-          <section className={styles.dropdownMenu}>
+          <section>
             <VisuallyHidden>
               <button type="button">
                 <FormattedMessage defaultMessage="Cancel" description="" />
               </button>
             </VisuallyHidden>
-            <NavMenu.Top />
-            <Menu.Divider />
-            <NavMenu.Bottom />
+            <MeMenu />
           </section>
         }
         placement="right-start"

@@ -1,4 +1,4 @@
-import { IconClap16, Menu, TextIcon, Translate } from '~/components'
+import { IconClap16, Menu, Translate } from '~/components'
 
 interface AppreciatorsButtonProps {
   openDialog: () => void
@@ -6,11 +6,12 @@ interface AppreciatorsButtonProps {
 
 const AppreciatorsButton = ({ openDialog }: AppreciatorsButtonProps) => {
   return (
-    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconClap16 size="md" />} size="md" spacing="base">
-        <Translate id="viewLikers" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      text={<Translate id="viewLikers" />}
+      icon={<IconClap16 size="mdS" />}
+      onClick={openDialog}
+      ariaHasPopup="dialog"
+    />
   )
 }
 

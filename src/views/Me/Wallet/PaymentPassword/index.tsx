@@ -4,7 +4,6 @@ import {
   IconUnlock24,
   Menu,
   ResetPaymentPasswordDialog,
-  TextIcon,
   Translate,
 } from '~/components'
 
@@ -16,12 +15,13 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
   openResetPaymentPasswordDialog,
 }) => {
   const Content = () => (
-    <Menu width="sm">
-      <Menu.Item onClick={openResetPaymentPasswordDialog} ariaHasPopup="dialog">
-        <TextIcon icon={<IconUnlock24 size="md" />} size="md" spacing="base">
-          <Translate id="resetPaymentPassword" />
-        </TextIcon>
-      </Menu.Item>
+    <Menu>
+      <Menu.Item
+        text={<Translate id="resetPaymentPassword" />}
+        icon={<IconUnlock24 size="mdS" />}
+        onClick={openResetPaymentPasswordDialog}
+        ariaHasPopup="dialog"
+      />
     </Menu>
   )
 

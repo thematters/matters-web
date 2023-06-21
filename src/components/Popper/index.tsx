@@ -45,11 +45,16 @@ ForwardChildren.displayName = 'ForwardChildren'
  *
  * @see {@url https://github.com/atomiks/tippy.js-react}
  */
+type DropdownProps = Omit<PopperProps, 'children'> &
+  ForwardChildrenProps & {
+    focusLock?: boolean
+  }
 
-export const Dropdown = ({
+export const Dropdown: React.FC<DropdownProps> = ({
   children,
+  focusLock = true,
   ...props
-}: Omit<PopperProps, 'children'> & ForwardChildrenProps) => (
+}) => (
   <DynamicLazyTippy
     arrow={false}
     trigger="click"
@@ -62,7 +67,11 @@ export const Dropdown = ({
     appendTo={typeof window !== 'undefined' ? document.body : undefined}
     aria={{ content: 'describedby', expanded: true }}
     {...props}
-    content={<FocusLock>{props.content}</FocusLock>}
+    content={
+      <FocusLock disabled={!focusLock} autoFocus={false}>
+        {props.content}
+      </FocusLock>
+    }
   >
     <ForwardChildren>{children}</ForwardChildren>
   </DynamicLazyTippy>

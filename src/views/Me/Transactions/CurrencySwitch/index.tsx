@@ -27,46 +27,30 @@ const CurrencySwitchContent: React.FC<CurrencySwitchContentProps> = ({
   setCurrency,
 }) => {
   return (
-    <Menu width="sm">
-      <Menu.Item onClick={() => setCurrency(Currency.ALL)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={currency === Currency.ALL ? 'bold' : 'normal'}
-        >
-          <Translate zh_hans="全部" zh_hant="全部" en="All" />
-        </TextIcon>
-      </Menu.Item>
+    <Menu>
+      <Menu.Item
+        text={<Translate zh_hans="全部" zh_hant="全部" en="All" />}
+        onClick={() => setCurrency(Currency.ALL)}
+        weight={currency === Currency.ALL ? 'bold' : 'normal'}
+      />
 
-      <Menu.Item onClick={() => setCurrency(Currency.USDT)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={currency === Currency.USDT ? 'bold' : 'normal'}
-        >
-          {Currency.USDT}
-        </TextIcon>
-      </Menu.Item>
+      <Menu.Item
+        text={Currency.USDT}
+        onClick={() => setCurrency(Currency.USDT)}
+        weight={currency === Currency.USDT ? 'bold' : 'normal'}
+      />
 
-      <Menu.Item onClick={() => setCurrency(Currency.HKD)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={currency === Currency.HKD ? 'bold' : 'normal'}
-        >
-          {Currency.HKD}
-        </TextIcon>
-      </Menu.Item>
+      <Menu.Item
+        text={Currency.HKD}
+        onClick={() => setCurrency(Currency.HKD)}
+        weight={currency === Currency.HKD ? 'bold' : 'normal'}
+      />
 
-      <Menu.Item onClick={() => setCurrency(Currency.LIKE)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={currency === Currency.LIKE ? 'bold' : 'normal'}
-        >
-          {Currency.LIKE}
-        </TextIcon>
-      </Menu.Item>
+      <Menu.Item
+        text={Currency.LIKE}
+        onClick={() => setCurrency(Currency.LIKE)}
+        weight={currency === Currency.LIKE ? 'bold' : 'normal'}
+      />
     </Menu>
   )
 }

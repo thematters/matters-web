@@ -68,44 +68,32 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     const isOneMonthActive = period === options[1].value
     const isThreeMonthsActive = period === options[2].value
     const isAllActive = period === options[3].value
+
     return (
-      <Menu width="sm">
-        <Menu.Item onClick={() => onChange(options[0].value)}>
-          <TextIcon
-            spacing="base"
-            size="sm"
-            weight={isSevenDaysActive ? 'bold' : 'normal'}
-          >
-            {options[0].label}
-          </TextIcon>
-        </Menu.Item>
-        <Menu.Item onClick={() => onChange(options[1].value)}>
-          <TextIcon
-            spacing="base"
-            size="sm"
-            weight={isOneMonthActive ? 'bold' : 'normal'}
-          >
-            {options[1].label}
-          </TextIcon>
-        </Menu.Item>
-        <Menu.Item onClick={() => onChange(options[2].value)}>
-          <TextIcon
-            spacing="base"
-            size="sm"
-            weight={isThreeMonthsActive ? 'bold' : 'normal'}
-          >
-            {options[2].label}
-          </TextIcon>
-        </Menu.Item>
-        <Menu.Item onClick={() => onChange(options[3].value)}>
-          <TextIcon
-            spacing="base"
-            size="sm"
-            weight={isAllActive ? 'bold' : 'normal'}
-          >
-            {options[3].label}
-          </TextIcon>
-        </Menu.Item>
+      <Menu>
+        <Menu.Item
+          text={options[0].label}
+          onClick={() => onChange(options[0].value)}
+          weight={isSevenDaysActive ? 'bold' : 'normal'}
+        />
+
+        <Menu.Item
+          text={options[1].label}
+          onClick={() => onChange(options[1].value)}
+          weight={isOneMonthActive ? 'bold' : 'normal'}
+        />
+
+        <Menu.Item
+          text={options[2].label}
+          onClick={() => onChange(options[2].value)}
+          weight={isThreeMonthsActive ? 'bold' : 'normal'}
+        />
+
+        <Menu.Item
+          text={options[3].label}
+          onClick={() => onChange(options[3].value)}
+          weight={isAllActive ? 'bold' : 'normal'}
+        />
       </Menu>
     )
   }

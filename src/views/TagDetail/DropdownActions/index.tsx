@@ -16,7 +16,6 @@ import {
   TagDialog,
   TagEditorDialog,
   TagLeaveDialog,
-  TextIcon,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -62,51 +61,53 @@ const BaseDropdownActions = ({
 }: BaseDropdownActionsProps) => {
   const intl = useIntl()
   const Content = () => (
-    <Menu width="sm">
+    <Menu>
       {hasEditTag && (
-        <Menu.Item onClick={openTagDialog} ariaHasPopup="dialog">
-          <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
-            <FormattedMessage defaultMessage="Edit" description="" />
-          </TextIcon>
-        </Menu.Item>
+        <Menu.Item
+          text={<FormattedMessage defaultMessage="Edit" description="" />}
+          icon={<IconEdit16 size="mdS" />}
+          onClick={openTagDialog}
+          ariaHasPopup="dialog"
+        />
       )}
       {hasAddSelectedArticle && (
         <Menu.Item
-          onClick={openTagAddSelectedArticlesDialog}
-          ariaHasPopup="dialog"
-        >
-          <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
+          text={
             <FormattedMessage
               defaultMessage="Add Articles into Featured"
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
-          </TextIcon>
-        </Menu.Item>
+          }
+          icon={<IconAdd24 size="mdS" />}
+          onClick={openTagAddSelectedArticlesDialog}
+          ariaHasPopup="dialog"
+        />
       )}
       {hasManageCommunity && (
-        <Menu.Item onClick={openTagEditorDialog} ariaHasPopup="dialog">
-          <TextIcon icon={<IconProfile24 size="md" />} size="md" spacing="base">
+        <Menu.Item
+          text={
             <FormattedMessage
               defaultMessage="Manage Community"
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
-          </TextIcon>
-        </Menu.Item>
+          }
+          icon={<IconProfile24 size="mdS" />}
+          onClick={openTagEditorDialog}
+          ariaHasPopup="dialog"
+        />
       )}
       {hasTagLeave && (
-        <Menu.Item onClick={openTagLeaveDialog} ariaHasPopup="dialog">
-          <TextIcon
-            icon={<IconRemove24 size="md" />}
-            color="red"
-            size="md"
-            spacing="base"
-          >
+        <Menu.Item
+          text={
             <FormattedMessage
               defaultMessage="Resign From Maintainer"
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
-          </TextIcon>
-        </Menu.Item>
+          }
+          icon={<IconRemove24 size="mdS" />}
+          onClick={openTagLeaveDialog}
+          ariaHasPopup="dialog"
+        />
       )}
     </Menu>
   )

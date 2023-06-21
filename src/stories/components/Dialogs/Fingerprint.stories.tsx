@@ -42,4 +42,4 @@ const Template: ComponentStory<typeof FingerprintDialog> = (args) => (
   </MockedProvider>
 )
 
-export const Dialog = Template.bind({})
+export const Default = Template.bind({})

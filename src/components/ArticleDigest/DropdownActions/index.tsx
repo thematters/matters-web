@@ -136,7 +136,7 @@ const BaseDropdownActions = ({
     hasRemoveTag
 
   const Content = () => (
-    <Menu width="sm">
+    <Menu>
       {/* public */}
       {hasShare && <ShareButton openDialog={openShareDialog} />}
       {hasAppreciators && (
@@ -150,7 +150,7 @@ const BaseDropdownActions = ({
       {morePublicActions}
 
       {/* private */}
-      {hasPublic && hasPrivate && <Menu.Divider spacing="xtight" />}
+      {hasPublic && hasPrivate && <Menu.Divider />}
       {hasEdit && <EditButton article={article} />}
 
       {hasSticky && <StickyButton article={article} />}

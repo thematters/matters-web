@@ -1,17 +1,20 @@
 import { FormattedMessage } from 'react-intl'
 
-import { IconCollapse16, Menu, TextIcon } from '~/components'
+import { IconCollapse16, Menu } from '~/components'
 
 const CollapseCommentButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
-    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconCollapse16 size="md" />} size="md" spacing="base">
+    <Menu.Item
+      text={
         <FormattedMessage
           defaultMessage="Collapse"
           description="src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
         />
-      </TextIcon>
-    </Menu.Item>
+      }
+      icon={<IconCollapse16 size="mdS" />}
+      onClick={openDialog}
+      ariaHasPopup="dialog"
+    />
   )
 }
 

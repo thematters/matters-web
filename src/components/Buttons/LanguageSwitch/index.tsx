@@ -20,36 +20,24 @@ export const LanguageSwitchContent = () => (
       const isZhHansActive = lang === 'zh_hans'
 
       return (
-        <Menu width="sm">
-          <Menu.Item onClick={() => setLang(UserLanguage.ZhHant)}>
-            <TextIcon
-              spacing="base"
-              size="md"
-              weight={isZhHantActive ? 'bold' : 'normal'}
-            >
-              {LANG_TEXT_MAP.zh_hant}
-            </TextIcon>
-          </Menu.Item>
+        <Menu>
+          <Menu.Item
+            text={LANG_TEXT_MAP.zh_hant}
+            onClick={() => setLang(UserLanguage.ZhHant)}
+            weight={isZhHantActive ? 'bold' : 'normal'}
+          />
 
-          <Menu.Item onClick={() => setLang(UserLanguage.ZhHans)}>
-            <TextIcon
-              spacing="base"
-              size="md"
-              weight={isZhHansActive ? 'bold' : 'normal'}
-            >
-              {LANG_TEXT_MAP.zh_hans}
-            </TextIcon>
-          </Menu.Item>
+          <Menu.Item
+            text={LANG_TEXT_MAP.zh_hans}
+            onClick={() => setLang(UserLanguage.ZhHans)}
+            weight={isZhHansActive ? 'bold' : 'normal'}
+          />
 
-          <Menu.Item onClick={() => setLang(UserLanguage.En)}>
-            <TextIcon
-              spacing="base"
-              size="md"
-              weight={isEnActive ? 'bold' : 'normal'}
-            >
-              {LANG_TEXT_MAP.en}
-            </TextIcon>
-          </Menu.Item>
+          <Menu.Item
+            text={LANG_TEXT_MAP.en}
+            onClick={() => setLang(UserLanguage.En)}
+            weight={isEnActive ? 'bold' : 'normal'}
+          />
         </Menu>
       )
     }}

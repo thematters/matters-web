@@ -17,6 +17,7 @@ const SwitchLanguage = () => {
       {({ ref }) => (
         <Form.List.Item
           title={<Translate id="settingsLanguage" />}
+          onClick={() => {}} // FIXME: show arrow
           rightText={LANG_TEXT_MAP[lang]}
           aria-haspopup="listbox"
           role="button"

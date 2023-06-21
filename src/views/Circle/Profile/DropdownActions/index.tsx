@@ -13,7 +13,6 @@ import {
   IconMore32,
   IconSettings32,
   Menu,
-  TextIcon,
   UnsubscribeCircleDialog,
   ViewerContext,
 } from '~/components'
@@ -52,39 +51,42 @@ const BaseDropdownActions = ({
 }: BaseDropdownActionsProps) => {
   const intl = useIntl()
   const Content = () => (
-    <Menu width="sm">
+    <Menu>
       {isCircleOwner && (
-        <Menu.Item {...toPath({ page: 'circleSettings', circle })} is="link">
-          <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
+        <Menu.Item
+          text={
             <FormattedMessage
               defaultMessage="Manage Circle"
               description="src/views/Circle/Profile/DropdownActions/index.tsx"
             />
-          </TextIcon>
-        </Menu.Item>
+          }
+          icon={<IconEdit16 size="mdS" />}
+          {...toPath({ page: 'circleSettings', circle })}
+          is="link"
+        />
       )}
 
       {isCircleOwner && (
-        <Menu.Item {...toPath({ page: 'circleAnalytics', circle })} is="link">
-          <TextIcon
-            icon={<IconAnalytics24 size="md" />}
-            size="md"
-            spacing="base"
-          >
-            <FormattedMessage defaultMessage="Analytics" description="" />
-          </TextIcon>
-        </Menu.Item>
+        <Menu.Item
+          text={<FormattedMessage defaultMessage="Analytics" description="" />}
+          icon={<IconAnalytics24 size="mdS" />}
+          {...toPath({ page: 'circleAnalytics', circle })}
+          is="link"
+        />
       )}
 
       {hasUnsubscribeCircle && (
-        <Menu.Item onClick={openUnsubscribeCircleDialog} aria-haspopup="dialog">
-          <TextIcon icon={<IconLogout24 size="md" />} size="md" spacing="base">
+        <Menu.Item
+          text={
             <FormattedMessage
               defaultMessage="Unsubscribe Circle"
               description="src/views/Circle/Profile/DropdownActions/index.tsx"
             />
-          </TextIcon>
-        </Menu.Item>
+          }
+          icon={<IconLogout24 size="mdS" />}
+          onClick={openUnsubscribeCircleDialog}
+          aria-haspopup="dialog"
+        />
       )}
     </Menu>
   )

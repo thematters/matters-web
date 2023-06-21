@@ -7,14 +7,7 @@ import {
   SEARCH_START_FLAG,
 } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
-import {
-  Media,
-  Menu,
-  Spacer,
-  Spinner,
-  TagDigest,
-  UserDigest,
-} from '~/components'
+import { Media, Menu, Spinner, TagDigest, UserDigest } from '~/components'
 import { QuickResultQuery } from '~/gql/graphql'
 
 import { QUICK_RESULT } from './gql'
@@ -101,6 +94,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
         <TriggerFullSearchItem searchKey={searchKey} />
         <Menu.Divider />
       </Media>
+
       {hasUsers &&
         userEdges.map(
           ({ node, cursor }, i) =>
@@ -134,9 +128,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
               </Fragment>
             )
         )}
-      {hasUsers && <Spacer size="xtight" />}
       {hasUsers && hasTags && <Menu.Divider />}
-      {hasUsers && <Spacer size="xtight" />}
       {hasTags &&
         tagEdges.map(
           ({ node, cursor }, i) =>

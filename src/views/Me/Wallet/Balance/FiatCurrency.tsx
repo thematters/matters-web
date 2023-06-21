@@ -33,15 +33,13 @@ interface ItemProps {
 const TopUpItem = ({ openDialog }: ItemProps) => {
   return (
     <Menu.Item
+      text={<Translate id="topUp" />}
+      icon={<IconWallet24 size="mdS" />}
       onClick={() => {
         openDialog()
         analytics.trackEvent('click_button', { type: 'top_up' })
       }}
-    >
-      <TextIcon icon={<IconWallet24 size="md" />} size="xm" spacing="base">
-        <Translate id="topUp" />
-      </TextIcon>
-    </Menu.Item>
+    />
   )
 }
 
@@ -51,11 +49,11 @@ const PayoutItem = ({
 }: ItemProps & { canPayout: boolean }) => {
   if (canPayout) {
     return (
-      <Menu.Item onClick={openDialog}>
-        <TextIcon icon={<IconPayout24 size="md" />} size="xm" spacing="base">
-          <Translate id="paymentPayout" />
-        </TextIcon>
-      </Menu.Item>
+      <Menu.Item
+        text={<Translate id="paymentPayout" />}
+        icon={<IconPayout24 size="mdS" />}
+        onClick={openDialog}
+      />
     )
   }
 
@@ -63,7 +61,7 @@ const PayoutItem = ({
     <Menu.Item>
       <section className={styles.payoutItem}>
         <TextIcon
-          icon={<IconPayout24 size="md" color="grey" />}
+          icon={<IconPayout24 size="mdS" color="grey" />}
           size="xm"
           spacing="base"
           color="grey"
@@ -103,7 +101,7 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
     openAddCreditDialog: () => void
     openPayoutDialog: () => void
   }) => (
-    <Menu width="sm">
+    <Menu>
       <TopUpItem openDialog={openAddCreditDialog} />
       <PayoutItem openDialog={openPayoutDialog} canPayout={canPayout} />
     </Menu>

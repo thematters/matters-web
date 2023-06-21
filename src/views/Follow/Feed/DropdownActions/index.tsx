@@ -22,7 +22,7 @@ type BaseDropdownActionsProps = DropdownActionsProps
 const BaseDropdownActions = ({ actions }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
 
-  const Content = () => <Menu width="sm">{actions}</Menu>
+  const Content = () => <Menu>{actions}</Menu>
 
   return (
     <Dropdown content={<Content />}>

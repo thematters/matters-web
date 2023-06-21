@@ -147,7 +147,7 @@ const BaseDropdownActions = ({
   const { lang } = useContext(LanguageContext)
 
   const Content = () => (
-    <Menu width="sm">
+    <Menu>
       {hasPin && <PinButton comment={comment} type={type} />}
       {hasEdit && <EditButton openEditCommentDialog={openEditCommentDialog} />}
       {hasDelete && (
