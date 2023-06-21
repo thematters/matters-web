@@ -719,6 +719,10 @@
     "defaultMessage": "Broadcast",
     "description": ""
   },
+  "bn8ZZH": {
+    "defaultMessage": "Log in",
+    "description": "src/cpomponents/Buttons/Login/index.tsx"
+  },
   "cAP9g5": {
     "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
@@ -863,10 +867,6 @@
     "defaultMessage": "Enter verification code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "jvo0vs": {
-    "defaultMessage": "Save",
-    "description": ""
-  },
   "jy3tx0": {
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -974,10 +974,6 @@
   "pRV+UD": {
     "defaultMessage": "Collapse",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
-  },
-  "ptqBN1": {
-    "defaultMessage": "Not Now",
-    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "pwlQEY": {
     "defaultMessage": "Display Name",

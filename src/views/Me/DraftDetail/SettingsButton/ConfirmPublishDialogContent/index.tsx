@@ -32,19 +32,18 @@ const ConfirmPublishDialogContent: React.FC<
     closeDialog()
   }
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
-      text={<Translate id="publish" />}
-      onClick={onPublish}
-    />
+  const SubmitButton = () => (
+    <Dialog.TextButton text={<Translate id="publish" />} onClick={onPublish} />
   )
 
   return (
     <>
       <Dialog.Header
         title={<Translate zh_hant="發布須知" zh_hans="發布须知" en="Notice" />}
-        leftButton={<Dialog.Header.BackButton onClick={onBack} />}
-        rightButton={SubmitButton}
+        leftBtn={
+          <Dialog.TextButton text={<Translate id="back" />} onClick={onBack} />
+        }
+        rightBtn={<SubmitButton />}
       />
 
       <Dialog.Message align="left" type="info">
@@ -93,6 +92,19 @@ const ConfirmPublishDialogContent: React.FC<
           </li>
         </ul>
       </Dialog.Message>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              color="greyDarker"
+              text={<Translate id="back" />}
+              onClick={onBack}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

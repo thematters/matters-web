@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, DialogProps, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
 import { EditorSearchSelectFormProps } from '~/components/Forms/EditorSearchSelectForm'
 import { SelectNode } from '~/components/SearchSelect/SearchingArea'
 
@@ -9,7 +9,7 @@ type EditorSearchSelectDialogProps = Omit<
   'closeDialog'
 > & {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-} & Pick<DialogProps, 'size'>
+}
 
 const DynamicEditorSearchSelectForm = dynamic(
   () => import('~/components/Forms/EditorSearchSelectForm'),
@@ -18,7 +18,6 @@ const DynamicEditorSearchSelectForm = dynamic(
 
 const BaseSearchSelectDialog = ({
   children,
-  size,
   ...props
 }: EditorSearchSelectDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
@@ -27,7 +26,7 @@ const BaseSearchSelectDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight size={size}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicEditorSearchSelectForm
           {...props}
           onSave={async (nodes: SelectNode[]) => {

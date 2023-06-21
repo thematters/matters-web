@@ -1,5 +1,6 @@
 import _get from 'lodash/get'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useMutation } from '~/components'
@@ -104,19 +105,20 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
     closeDialog()
   }
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      onClick={onClickSave}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      loading={loading}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title="tagAddEditor"
         closeDialog={closeDialog}
-        closeTextId="cancel"
-        rightButton={
-          <Dialog.Header.RightButton
-            onClick={onClickSave}
-            text={<Translate id="save" />}
-            loading={loading}
-          />
-        }
+        rightBtn={<SubmitButton />}
       />
 
       <SearchingArea
@@ -133,6 +135,19 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
         hint="tagAddEditor"
         inStagingArea={inStagingArea}
         draggable={false}
+      />
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
       />
     </>
   )

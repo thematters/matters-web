@@ -5,6 +5,7 @@ on:
     branches:
       - develop
       - stage
+      - feat/user-page
     types:
       - labeled
 
@@ -26,12 +27,14 @@ jobs:
         run: npm ci
 
       - name: Generate Types
-        if: github.base_ref == 'develop'
+        if: github.base_ref == 'develop' || github.base_ref == 'feat/user-page'
         run: npm run gen:type
 
-      - name: Generate Types
-        if: github.base_ref == 'stage'
-        run: npm run gen:type
+      - name: Lint
+        run: |
+          npm run i18n \
+          && npm run lint \
+          && npm run format:check
 
       - name: Build
         run: npm run build-storybook

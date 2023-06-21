@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog } from '~/components'
+import { Dialog, Translate } from '~/components'
 import SelectLicense from '~/components/Editor/ToggleAccess/SelectLicense'
 import { ArticleLicenseType } from '~/gql/graphql'
 
@@ -20,20 +20,22 @@ const ConfirmContent: React.FC<ContentProps> = ({
     ArticleLicenseType.CcByNcNd_4
   )
 
+  const ConfirmButton = () => (
+    <Dialog.TextButton
+      onClick={() => onConfirm(license === ArticleLicenseType.Arr, license)}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      loading={loading}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title="addArticles"
-        leftButton={<Dialog.Header.BackButton onClick={onBack} />}
-        rightButton={
-          <Dialog.Header.RightButton
-            onClick={() =>
-              onConfirm(license === ArticleLicenseType.Arr, license)
-            }
-            text={<FormattedMessage defaultMessage="Confirm" description="" />}
-            loading={loading}
-          />
+        leftBtn={
+          <Dialog.TextButton text={<Translate id="back" />} onClick={onBack} />
         }
+        rightBtn={<ConfirmButton />}
       />
 
       <Dialog.Content hasFixed>
@@ -43,6 +45,19 @@ const ConfirmContent: React.FC<ContentProps> = ({
           onChange={(newLicense) => setLicense(newLicense)}
         />
       </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              color="greyDarker"
+              text={<Translate id="back" />}
+              onClick={onBack}
+            />
+            <ConfirmButton />
+          </>
+        }
+      />
     </>
   )
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { Dialog, Translate } from '~/components'
 import { AssetFragment } from '~/gql/graphql'
@@ -9,8 +10,9 @@ import styles from './styles.module.css'
 import Uploader, { UploadEntity } from './Uploader'
 
 export type SetCoverProps = {
-  onBack?: () => any
-  onClose?: () => any
+  back?: () => any
+  submitCallback?: () => any
+  closeDialog?: () => any
 
   cover?: string | null
   assets: AssetFragment[]
@@ -21,8 +23,9 @@ export type SetCoverProps = {
 } & UploadEntity
 
 const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
-  onBack,
-  onClose,
+  back,
+  submitCallback,
+  closeDialog,
 
   cover,
   assets,
@@ -42,10 +45,10 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
       setSelected(assets.find(filter))
     }
 
-    if (onBack) {
-      onBack()
-    } else if (onClose) {
-      onClose()
+    if (submitCallback) {
+      submitCallback()
+    } else if (closeDialog) {
+      closeDialog()
     }
   }
 
@@ -53,24 +56,28 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
     setSelected(assets.find(filter))
   }, [cover])
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      onClick={onSave}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      loading={coverSaving}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title="setCover"
-        closeDialog={onClose}
-        leftButton={
-          onBack ? <Dialog.Header.BackButton onClick={onBack} /> : undefined
+        closeDialog={closeDialog}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+          ) : undefined
         }
-        rightButton={
-          <Dialog.Header.RightButton
-            onClick={onSave}
-            text={<Translate id="save" />}
-            loading={coverSaving}
-          />
-        }
+        rightBtn={<SubmitButton />}
       />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content noSpacing={false}>
         <section className={styles.container}>
           {/* Uploader */}
           <Uploader setSelected={setSelected} {...uploadEntity} />
@@ -85,6 +92,25 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
           )}
         </section>
       </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={
+                back ? (
+                  'back'
+                ) : (
+                  <FormattedMessage defaultMessage="Cancel" description="" />
+                )
+              }
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

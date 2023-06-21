@@ -32,6 +32,7 @@ import {
   LanguageContext,
   Layout,
   TextIcon,
+  Translate,
   useMutation,
   VerificationSendCodeButton,
   ViewerContext,
@@ -441,8 +442,8 @@ const Connect: React.FC<FormProps> = ({
     </section>
   )
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
+  const SubmitButton = () => (
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting || loading || !account}
@@ -458,7 +459,13 @@ const Connect: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="authEntries" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting || loading || !account}
+                text={<FormattedMessage defaultMessage="Next" description="" />}
+                loading={isSubmitting || loading}
+              />
             </>
           }
         />
@@ -470,18 +477,35 @@ const Connect: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="authEntries"
-          leftButton={
-            back ? <Dialog.Header.BackButton onClick={onBack} /> : null
-          }
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="authEntries"
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<Translate id="back" />}
+              onClick={onBack}
+            />
+          ) : null
+        }
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

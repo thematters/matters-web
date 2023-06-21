@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-import { Dialog, Spinner } from '~/components'
+import { Spinner } from '~/components'
 
 import { BaseENSDialogProps, Step } from './types'
 
@@ -43,10 +43,6 @@ const ENSDialogContent: React.FC<ENSDialogContentProps> = ({
 
   return (
     <>
-      {!isWalletSelect && (
-        <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
-      )}
-
       {isConfirmAddress && (
         <DynamicConnectWallet
           switchToWalletSelect={() => {
@@ -55,6 +51,7 @@ const ENSDialogContent: React.FC<ENSDialogContentProps> = ({
           switchToLinkENS={() => {
             forward('linkENS')
           }}
+          closeDialog={closeDialog}
         />
       )}
 
@@ -78,6 +75,7 @@ const ENSDialogContent: React.FC<ENSDialogContentProps> = ({
             setTxHash(hash)
             forward('complete')
           }}
+          closeDialog={closeDialog}
         />
       )}
 

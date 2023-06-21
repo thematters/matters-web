@@ -93,98 +93,104 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
   }
 
   return (
-    <Dialog.Content hasGrow>
-      <section className={styles.container}>
-        <section className={styles.completeAvatar}>
-          <IconSupport size="lg" color="gold" />
+    <>
+      <Dialog.Header title="successDonation" />
 
-          <div className={styles.completeAvatarOutline}>
-            <Avatar size="lg" user={recipient} />
-          </div>
-        </section>
+      <Dialog.Content>
+        <section className={styles.container}>
+          <section className={styles.completeAvatar}>
+            <IconSupport size="lg" color="gold" />
 
-        <section className={styles.completeMessage}>
-          <Translate
-            zh_hant="馬特市民愛發電。這是你支持的第 "
-            zh_hans="马特市民爱发电。这是你支持的第 "
-            en="This is the "
-          />
-          <span className={styles.times}>{senderDonatedArticleCount}</span>
-          <Translate
-            zh_hant=" 篇作品，"
-            zh_hans=" 篇作品，"
-            en=" works you have supported"
-          />
-          <br />
-          <UserDigest.Mini
-            user={recipient}
-            textSize="md"
-            nameColor="green"
-            hasDisplayName
-          />
-          <Translate
-            zh_hant=" 獲得的第 "
-            zh_hans=" 获得的第 "
-            en=" received "
-          />
-          <span className={styles.times}>{recipientReceivedDonationCount}</span>
-          <Translate zh_hant=" 次支持" zh_hans=" 次支持" en=" supports" />
-        </section>
-
-        {edges && edges.length > 0 && (
-          <section className={styles.relatedDonations}>
-            <header className={styles.header}>
-              <TextIcon size="sm" color="greyDarker">
-                <Translate
-                  zh_hant="支持過這篇作品的人也支持了"
-                  zh_hans="支持过这篇作品的人也支持了"
-                  en="Supporters of this work also supported:"
-                />
-              </TextIcon>
-
-              {totalCount > PAGE_COUNT && (
-                <ShuffleButton
-                  onClick={shuffle}
-                  bgColor="greenLighter"
-                  color="green"
-                />
-              )}
-            </header>
-
-            {isRefetching && <Spinner />}
-
-            {!isRefetching && (
-              <List spacing={['base', 0]} hasBorder={false}>
-                {edges.map(({ node, cursor }, i) => (
-                  <List.Item key={cursor}>
-                    <ArticleDigestSidebar
-                      article={node}
-                      hasBackground
-                      onClick={() =>
-                        analytics.trackEvent('click_feed', {
-                          type: 'related_donations',
-                          contentType: 'article',
-                          location: i,
-                          id: node.id,
-                        })
-                      }
-                      onClickAuthor={() => {
-                        analytics.trackEvent('click_feed', {
-                          type: 'related_donations',
-                          contentType: 'user',
-                          location: i,
-                          id: node.author.id,
-                        })
-                      }}
-                    />
-                  </List.Item>
-                ))}
-              </List>
-            )}
+            <div className={styles.completeAvatarOutline}>
+              <Avatar size="lg" user={recipient} />
+            </div>
           </section>
-        )}
-      </section>
-    </Dialog.Content>
+
+          <section className={styles.completeMessage}>
+            <Translate
+              zh_hant="馬特市民愛發電。這是你支持的第 "
+              zh_hans="马特市民爱发电。这是你支持的第 "
+              en="This is the "
+            />
+            <span className={styles.times}>{senderDonatedArticleCount}</span>
+            <Translate
+              zh_hant=" 篇作品，"
+              zh_hans=" 篇作品，"
+              en=" works you have supported"
+            />
+            <br />
+            <UserDigest.Mini
+              user={recipient}
+              textSize="md"
+              nameColor="green"
+              hasDisplayName
+            />
+            <Translate
+              zh_hant=" 獲得的第 "
+              zh_hans=" 获得的第 "
+              en=" received "
+            />
+            <span className={styles.times}>
+              {recipientReceivedDonationCount}
+            </span>
+            <Translate zh_hant=" 次支持" zh_hans=" 次支持" en=" supports" />
+          </section>
+
+          {edges && edges.length > 0 && (
+            <section className={styles.relatedDonations}>
+              <header className={styles.header}>
+                <TextIcon size="sm" color="greyDarker">
+                  <Translate
+                    zh_hant="支持過這篇作品的人也支持了"
+                    zh_hans="支持过这篇作品的人也支持了"
+                    en="Supporters of this work also supported:"
+                  />
+                </TextIcon>
+
+                {totalCount > PAGE_COUNT && (
+                  <ShuffleButton
+                    onClick={shuffle}
+                    bgColor="greenLighter"
+                    color="green"
+                  />
+                )}
+              </header>
+
+              {isRefetching && <Spinner />}
+
+              {!isRefetching && (
+                <List spacing={['base', 0]} hasBorder={false}>
+                  {edges.map(({ node, cursor }, i) => (
+                    <List.Item key={cursor}>
+                      <ArticleDigestSidebar
+                        article={node}
+                        hasBackground
+                        onClick={() =>
+                          analytics.trackEvent('click_feed', {
+                            type: 'related_donations',
+                            contentType: 'article',
+                            location: i,
+                            id: node.id,
+                          })
+                        }
+                        onClickAuthor={() => {
+                          analytics.trackEvent('click_feed', {
+                            type: 'related_donations',
+                            contentType: 'user',
+                            location: i,
+                            id: node.author.id,
+                          })
+                        }}
+                      />
+                    </List.Item>
+                  ))}
+                </List>
+              )}
+            </section>
+          )}
+        </section>
+      </Dialog.Content>
+    </>
   )
 }
 

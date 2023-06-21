@@ -53,7 +53,7 @@ const Onboarding: React.FC<Props> = ({ nextStep }) => {
   }
 
   return (
-    <Dialog.Message type={error ? 'error' : undefined} spacing="md">
+    <Dialog.Message type={error ? 'error' : undefined}>
       {error ? (
         <h3>
           <Translate

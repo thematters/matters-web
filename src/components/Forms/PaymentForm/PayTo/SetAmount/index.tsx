@@ -13,17 +13,23 @@ import {
 import {
   featureSupportedChains,
   formatAmount,
+  maskAddress,
   numRound,
+  translate,
   validateCurrency,
   validateDonationAmount,
   WALLET_ERROR_MESSAGES,
 } from '~/common/utils'
 import {
+  Button,
+  CopyToClipboard,
   Dialog,
   Form,
+  IconCopy16,
   LanguageContext,
   Spacer,
   Spinner,
+  TextIcon,
   Translate,
   useAllowanceUSDT,
   useApproveUSDT,
@@ -44,10 +50,11 @@ import {
   WalletBalanceQuery,
 } from '~/gql/graphql'
 
-import CivicLikerButton from '../CivicLikerButton'
-import ReconnectButton from './ReconnectButton'
+// import CivicLikerButton from '../CivicLikerButton'
 import SetAmountBalance from './SetAmountBalance'
 import SetAmountHeader from './SetAmountHeader'
+import styles from './styles.module.css'
+import SubmitButton from './SubmitButton'
 
 interface SetAmountCallbackValues {
   amount: number
@@ -61,6 +68,7 @@ interface FormProps {
   submitCallback: (values: SetAmountCallbackValues) => void
   switchToCurrencyChoice: () => void
   switchToAddCredit: () => void
+  back: () => void
   setTabUrl: (url: string) => void
   setTx: (tx: PayToMutation['payTo']['transaction']) => void
   targetId: string
@@ -90,6 +98,7 @@ const SetAmount: React.FC<FormProps> = ({
   submitCallback,
   switchToCurrencyChoice,
   switchToAddCredit,
+  back,
   setTabUrl,
   setTx,
   targetId,
@@ -98,7 +107,7 @@ const SetAmount: React.FC<FormProps> = ({
   const customInputRef: React.RefObject<any> | null = useRef(null)
   const isUSDT = currency === CURRENCY.USDT
   const isHKD = currency === CURRENCY.HKD
-  const isLike = currency === CURRENCY.LIKE
+  // const isLike = currency === CURRENCY.LIKE
 
   // contexts
   const viewer = useContext(ViewerContext)
@@ -361,102 +370,79 @@ const SetAmount: React.FC<FormProps> = ({
     return <Spinner />
   }
 
+  const SubmitBtn = ({ mode }: { mode: 'text' | 'rounded' }) => (
+    <SubmitButton
+      mode={mode}
+      currency={currency}
+      formId={formId}
+      recipient={recipient}
+      isValid={isValid}
+      isSubmitting={isSubmitting}
+      isBalanceInsufficient={isBalanceInsufficient}
+      isConnectedAddress={isConnectedAddress}
+      isUnsupportedNetwork={isUnsupportedNetwork}
+      isSwitchingNetwork={isSwitchingNetwork}
+      targetChainName={targetNetork.name}
+      allowanceUSDT={allowanceUSDT}
+      approving={approving}
+      approveConfirming={approveConfirming}
+      allowanceLoading={allowanceLoading}
+      approveWrite={approveWrite}
+      switchToTargetNetwork={switchToTargetNetwork}
+      switchToCurrencyChoice={switchToCurrencyChoice}
+      switchToAddCredit={switchToAddCredit}
+      back={back}
+    />
+  )
+
   return (
     <>
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Header title="donation" />
 
-      <Dialog.Footer>
-        {!isUSDT && (
+      <Dialog.Content>
+        {InnerForm}
+
+        {isUSDT && !isConnectedAddress && (
           <>
-            {isLike && recipient.liker.likerId && (
-              <CivicLikerButton likerId={recipient.liker.likerId} />
-            )}
-
-            {isBalanceInsufficient && isHKD ? (
-              <Dialog.Footer.Button
-                type="button"
-                onClick={switchToAddCredit}
-                form={formId}
-                bgColor="green"
-                textColor="white"
-              >
-                <Translate id="topUp" />
-              </Dialog.Footer.Button>
-            ) : (
-              <Dialog.Footer.Button
-                type="submit"
-                form={formId}
-                disabled={!isValid || isSubmitting || isBalanceInsufficient}
-                bgColor="green"
-                textColor="white"
-                loading={isSubmitting}
-              >
-                <Translate id="nextStep" />
-              </Dialog.Footer.Button>
-            )}
-          </>
-        )}
-
-        {isUSDT && (
-          <>
-            {!isConnectedAddress && <ReconnectButton />}
-
-            {isConnectedAddress && isUnsupportedNetwork && (
-              <Dialog.Footer.Button
-                bgColor="green"
-                textColor="white"
-                onClick={switchToTargetNetwork}
-                loading={isSwitchingNetwork}
-              >
-                <Translate
-                  zh_hant="切換到 "
-                  zh_hans="切换到 "
-                  en="Switch to "
-                />
-                {targetNetork.name}
-              </Dialog.Footer.Button>
-            )}
-
-            {isConnectedAddress &&
-              !isUnsupportedNetwork &&
-              allowanceUSDT <= 0n && (
-                <>
-                  <Dialog.Footer.Button
-                    bgColor="green"
-                    textColor="white"
-                    loading={approving || approveConfirming || allowanceLoading}
-                    onClick={() => {
-                      if (approveWrite) {
-                        approveWrite()
-                      }
-                    }}
-                  >
-                    <Translate
-                      zh_hant="首次需確認授權後繼續"
-                      zh_hans="首次需确认授权后继续"
-                      en="Approve to continue"
-                    />
-                  </Dialog.Footer.Button>
-                </>
-              )}
-
-            {isConnectedAddress &&
-              !isUnsupportedNetwork &&
-              allowanceUSDT > 0n && (
-                <Dialog.Footer.Button
-                  type="submit"
-                  form={formId}
-                  disabled={!isValid || isSubmitting || isBalanceInsufficient}
-                  bgColor="green"
-                  textColor="white"
-                  loading={isSubmitting}
+            <p className={styles.reconnectHint}>
+              <Translate id="reconnectHint" />
+              <CopyToClipboard text={viewer.info.ethAddress || ''}>
+                <Button
+                  spacing={['xtight', 'xtight']}
+                  aria-label={translate({ id: 'copy', lang })}
                 >
-                  <Translate id="nextStep" />
-                </Dialog.Footer.Button>
-              )}
+                  <TextIcon
+                    icon={<IconCopy16 color="black" size="xs" />}
+                    color="black"
+                    textPlacement="left"
+                  >
+                    {maskAddress(viewer.info.ethAddress || '')}
+                  </TextIcon>
+                </Button>
+              </CopyToClipboard>
+            </p>
           </>
         )}
-      </Dialog.Footer>
+      </Dialog.Content>
+
+      <Dialog.Footer
+        btns={
+          <>
+            <SubmitBtn mode="rounded" />
+            <Dialog.RoundedButton
+              text="back"
+              color="greyDarker"
+              onClick={back}
+            />
+          </>
+        }
+        smUpBtns={
+          <>
+            <Dialog.TextButton text="back" color="greyDarker" onClick={back} />
+            <SubmitBtn mode="text" />
+          </>
+        }
+      />
     </>
   )
 }

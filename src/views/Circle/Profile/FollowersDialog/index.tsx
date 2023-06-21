@@ -30,10 +30,21 @@ const BaseFollowersDialog = ({ circle, children }: FollowersDialogProps) => {
             />
           }
           closeDialog={closeDialog}
-          closeTextId="close"
+          closeText="close"
         />
 
         <DynamicContent />
+
+        <Dialog.Footer
+          noSpacing={false}
+          smUpBtns={
+            <Dialog.TextButton
+              text="close"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+        />
       </Dialog>
     </>
   )

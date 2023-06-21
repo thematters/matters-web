@@ -16,15 +16,10 @@ const Complete = ({
       )}
 
       {closeDialog && (
-        <Dialog.Header
-          title="changeUserName"
-          closeDialog={closeDialog}
-          closeTextId="close"
-          mode="inner"
-        />
+        <Dialog.Header title="changeUserName" closeDialog={closeDialog} />
       )}
 
-      <Dialog.Message spacing="md">
+      <Dialog.Message>
         <h3>
           <Translate id="successChangeUserName" />
         </h3>
@@ -33,15 +28,7 @@ const Complete = ({
       </Dialog.Message>
 
       {!isInPage && closeDialog && (
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="greyLighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="close" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer closeDialog={closeDialog} closeText="close" />
       )}
     </>
   )

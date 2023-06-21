@@ -246,12 +246,12 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     </Form>
   )
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
+  const SubmitButton = () => (
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Save" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" description="" />}
       loading={isSubmitting}
     />
   )
@@ -261,10 +261,24 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       <Dialog.Header
         title="editUserProfile"
         closeDialog={closeDialog}
-        rightButton={SubmitButton}
+        rightBtn={<SubmitButton />}
+        hasSmUpTitle={false}
       />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

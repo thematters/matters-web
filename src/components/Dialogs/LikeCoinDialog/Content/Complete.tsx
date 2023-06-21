@@ -4,7 +4,9 @@ import { Dialog, Translate } from '~/components'
 const Complete: React.FC = () => {
   return (
     <>
-      <Dialog.Message spacing="md">
+      <Dialog.Header title="setupLikeCoin" />
+
+      <Dialog.Message>
         <p>
           <Translate
             zh_hant="你的專屬 Liker ID 已就位！"
@@ -14,17 +16,28 @@ const Complete: React.FC = () => {
         </p>
       </Dialog.Message>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={() => {
-            redirectToTarget({
-              fallback: 'current',
-            })
-          }}
-        >
-          <Translate id="done" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate id="done" />}
+            onClick={() => {
+              redirectToTarget({
+                fallback: 'current',
+              })
+            }}
+          />
+        }
+        smUpBtns={
+          <Dialog.TextButton
+            text={<Translate id="done" />}
+            onClick={() => {
+              redirectToTarget({
+                fallback: 'current',
+              })
+            }}
+          />
+        }
+      />
     </>
   )
 }

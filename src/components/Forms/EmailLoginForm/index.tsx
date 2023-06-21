@@ -25,6 +25,7 @@ import {
   LanguageContext,
   LanguageSwitch,
   Layout,
+  Translate,
   useMutation,
 } from '~/components'
 import { UserLoginMutation } from '~/gql/graphql'
@@ -43,7 +44,7 @@ interface FormProps {
   submitCallback?: () => void
   gotoResetPassword?: () => void
   gotoEmailSignUp?: () => void
-  closeDialog?: () => void
+  closeDialog: () => void
   back?: () => void
 }
 
@@ -217,8 +218,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     </section>
   )
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
+  const SubmitButton = () => (
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -234,7 +235,15 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="login" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={
+                  <FormattedMessage defaultMessage="Confirm" description="" />
+                }
+                loading={isSubmitting}
+              />
             </>
           }
         />
@@ -250,16 +259,32 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="login"
-          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="login"
+        leftBtn={
+          back ? (
+            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+          ) : null
+        }
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }
