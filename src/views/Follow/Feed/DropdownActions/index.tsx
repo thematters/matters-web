@@ -26,8 +26,9 @@ const BaseDropdownActions = ({ actions }: BaseDropdownActionsProps) => {
 
   return (
     <Dropdown content={<Content />}>
-      {({ ref }) => (
+      {({ openDropdown, ref }) => (
         <Button
+          onClick={openDropdown}
           spacing={['xtight', 'xtight']}
           bgActiveColor="greyLighterActive"
           aria-label={translate({ id: 'moreActions', lang })}

@@ -88,9 +88,10 @@ const Select: React.FC<SelectProps> = ({
       content={<Options dropdown />}
       zIndex={Z_INDEX.OVER_DIALOG}
     >
-      {({ ref }) => (
+      {({ openDropdown, ref }) => (
         <ul aria-labelledby={fieldId}>
           <Option
+            onClick={openDropdown}
             role="button"
             ariaHasPopup="listbox"
             name={selectedOption.name}

@@ -168,8 +168,9 @@ const BaseDropdownActions = ({
 
   return (
     <Dropdown content={<Content />}>
-      {({ ref }) => (
+      {({ openDropdown, ref }) => (
         <Button
+          onClick={openDropdown}
           spacing={['xtight', 'xtight']}
           bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
           aria-label={translate({ id: 'moreActions', lang })}

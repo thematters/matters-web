@@ -140,8 +140,9 @@ const BaseDropdownActions = ({
 
   return (
     <Dropdown content={<Content />}>
-      {({ ref }) => (
+      {({ openDropdown, ref }) => (
         <Button
+          onClick={openDropdown}
           bgColor="halfBlack"
           aria-label={intl.formatMessage({
             defaultMessage: 'More Actions',

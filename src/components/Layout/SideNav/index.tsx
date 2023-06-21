@@ -81,12 +81,13 @@ const SideNavMenu = () => {
           </section>
         }
         placement="right-start"
-        offset={[-24, 24]}
+        offset={[-16, 16]}
         zIndex={Z_INDEX.OVER_BOTTOM_BAR}
         onShown={hidePopperOnClick}
       >
-        {({ ref }) => (
+        {({ openDropdown, ref }) => (
           <NavListItem
+            onClick={openDropdown}
             name={<FormattedMessage defaultMessage="My Page" description="" />}
             icon={<IconNavMe32 size="lg" />}
             activeIcon={<IconNavMeActive32 size="lg" />}

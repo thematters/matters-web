@@ -27,7 +27,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
 
   return (
     <Dropdown content={<Content />}>
-      {({ ref }) => (
+      {({ openDropdown, ref }) => (
         <Form.List.Item
           title={
             <Translate
@@ -36,6 +36,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
               en="Payment Password"
             />
           }
+          onClick={openDropdown}
           role="button"
           ariaHasPopup="listbox"
           ref={ref}

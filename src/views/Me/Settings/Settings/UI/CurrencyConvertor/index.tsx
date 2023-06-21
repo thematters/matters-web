@@ -91,10 +91,10 @@ const CurrencyConvertor = () => {
 
   return (
     <Dropdown content={<Content />}>
-      {({ ref }) => (
+      {({ openDropdown, ref }) => (
         <Form.List.Item
           title={<Title />}
-          onClick={() => {}} // FIXME: show arrow
+          onClick={openDropdown}
           rightText={currency}
           ariaHasPopup="listbox"
           role="button"

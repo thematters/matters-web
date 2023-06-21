@@ -177,9 +177,10 @@ const BaseDropdownActions = ({
 
   return (
     <Dropdown content={<Content />}>
-      {({ ref }) =>
+      {({ openDropdown, ref }) =>
         inCard ? (
           <button
+            onClick={openDropdown}
             aria-label={translate({ id: 'moreActions', lang })}
             aria-haspopup="listbox"
             ref={ref}
@@ -189,6 +190,7 @@ const BaseDropdownActions = ({
           </button>
         ) : (
           <Button
+            onClick={openDropdown}
             spacing={['xtight', 'xtight']}
             bgActiveColor="greyLighter"
             aria-label={translate({ id: 'moreActions', lang })}

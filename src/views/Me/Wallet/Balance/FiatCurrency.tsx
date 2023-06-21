@@ -120,11 +120,12 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                 />
               }
             >
-              {({ ref }) => (
+              {({ openDropdown, ref }) => (
                 <section
                   className={classes}
                   aria-haspopup="listbox"
                   role="button"
+                  onClick={openDropdown}
                   ref={ref}
                 >
                   <TextIcon

@@ -14,10 +14,10 @@ const SwitchLanguage = () => {
 
   return (
     <Dropdown content={<LanguageSwitchContent />}>
-      {({ ref }) => (
+      {({ openDropdown, ref }) => (
         <Form.List.Item
+          onClick={openDropdown}
           title={<Translate id="settingsLanguage" />}
-          onClick={() => {}} // FIXME: show arrow
           rightText={LANG_TEXT_MAP[lang]}
           aria-haspopup="listbox"
           role="button"

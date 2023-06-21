@@ -66,8 +66,8 @@ export const CurrencySwitch: React.FC<CurrencySwitchProps> = ({
       }
       zIndex={Z_INDEX.OVER_DIALOG}
     >
-      {({ ref }) => (
-        <Button aria-haspopup="listbox" ref={ref}>
+      {({ openDropdown, ref }) => (
+        <Button onClick={openDropdown} aria-haspopup="listbox" ref={ref}>
           <TextIcon
             icon={<IconArrowDown16 />}
             textPlacement="left"
