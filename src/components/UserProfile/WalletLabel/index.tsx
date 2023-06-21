@@ -117,126 +117,115 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
           </section>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <CopyToClipboard text={ensName || address}>
-            <Dialog.Footer.Button
-              bgColor="white"
-              borderColor="green"
-              borderWidth="md"
-              textColor="green"
-            >
-              <Translate
-                en="Copy address"
-                zh_hans="复制地址"
-                zh_hant="複製地址"
-              />
-            </Dialog.Footer.Button>
-          </CopyToClipboard>
-
-          {ensName && hasLinkedIPNS && (
-            <Dialog.Footer.Button
-              bgColor="white"
-              borderColor="green"
-              borderWidth="md"
-              textColor="green"
-              htmlHref={`https://${ensName}.limo`}
-              htmlTarget="_blank"
-            >
-              <Translate
-                en="Open IPNS page"
-                zh_hans="打开 IPNS 页面"
-                zh_hant="打開 IPNS 頁面"
-              />
-            </Dialog.Footer.Button>
-          )}
-
-          {hasLinkEnsButton && (
-            <ENSDialog user={user}>
-              {({ openDialog }) => (
-                <Dialog.Footer.Button
-                  bgColor="white"
-                  borderColor="green"
-                  borderWidth="md"
-                  textColor="green"
-                  onClick={() => {
-                    openDialog()
-                    analytics.trackEvent('click_button', {
-                      type: 'bind_ens',
-                      pageType: 'user_profile',
-                    })
-                  }}
-                  aria-haspopup="dialog"
-                >
-                  <Translate id="bindIPNStoENS" />
-                </Dialog.Footer.Button>
+        <Dialog.Footer
+          btns={
+            <>
+              <CopyToClipboard text={ensName || address}>
+                <Dialog.RoundedButton
+                  text={
+                    <FormattedMessage
+                      defaultMessage="Copy Address"
+                      description=""
+                    />
+                  }
+                  color="green"
+                />
+              </CopyToClipboard>
+              {ensName && hasLinkedIPNS && (
+                <Dialog.RoundedButton
+                  color="green"
+                  text={
+                    <FormattedMessage
+                      defaultMessage="Open IPNS page"
+                      description="src/components/UserProfile/WalletLabel/index.tsx"
+                    />
+                  }
+                  htmlHref={`https://${ensName}.limo`}
+                  htmlTarget="_blank"
+                />
               )}
-            </ENSDialog>
-          )}
+              {hasLinkEnsButton && (
+                <ENSDialog user={user}>
+                  {({ openDialog }) => (
+                    <Dialog.RoundedButton
+                      text={<Translate id="bindIPNStoENS" />}
+                      color="green"
+                      onClick={() => {
+                        openDialog()
+                        analytics.trackEvent('click_button', {
+                          type: 'bind_ens',
+                          pageType: 'user_profile',
+                        })
+                      }}
+                      aria-haspopup="dialog"
+                    />
+                  )}
+                </ENSDialog>
+              )}
 
-          <Dialog.Footer.Button
-            bgColor="white"
-            borderColor="greyDarker"
-            textColor="greyDarker"
-            onClick={closeDialog}
-          >
-            <Translate id="close" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+              <Dialog.RoundedButton
+                text="close"
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+            </>
+          }
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text="close"
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+              <CopyToClipboard text={ensName || address}>
+                <Dialog.TextButton
+                  color="green"
+                  text={
+                    <FormattedMessage
+                      defaultMessage="Copy Address"
+                      description=""
+                    />
+                  }
+                />
+              </CopyToClipboard>
+              {ensName && hasLinkedIPNS && (
+                <Dialog.TextButton
+                  color="green"
+                  text={
+                    <FormattedMessage
+                      defaultMessage="Open IPNS page"
+                      description="src/components/UserProfile/WalletLabel/index.tsx"
+                    />
+                  }
+                  htmlHref={`https://${ensName}.limo`}
+                  htmlTarget="_blank"
+                />
+              )}
+
+              {hasLinkEnsButton && (
+                <ENSDialog user={user}>
+                  {({ openDialog }) => (
+                    <Dialog.TextButton
+                      text={<Translate id="bindIPNStoENS" />}
+                      color="green"
+                      onClick={() => {
+                        openDialog()
+                        analytics.trackEvent('click_button', {
+                          type: 'bind_ens',
+                          pageType: 'user_profile',
+                        })
+                      }}
+                      aria-haspopup="dialog"
+                    />
+                  )}
+                </ENSDialog>
+              )}
+            </>
+          }
+        />
       </Dialog>
     </>
   )
-
-  // TODO: update with newest dialog
-  // return (
-  //   <section className={styles.walletLabel}>
-  //     <WalletAddress
-  //       address={address}
-  //       ensName={ensName}
-  //       hasLinkedIPNS={hasLinkedIPNS}
-  //     />
-
-  //     {hasLinkEnsButton && (
-  //       <ENSDialog user={user}>
-  //         {({ openDialog }) => (
-  //           <Button
-  //             size={[null, '1.5rem']}
-  //             spacing={[0, 'tight']}
-  //             borderColor="green"
-  //             textColor="green"
-  //             onClick={() => {
-  //               openDialog()
-  //               analytics.trackEvent('click_button', {
-  //                 type: 'bind_ens',
-  //                 pageType: 'user_profile',
-  //               })
-  //             }}
-  //             aria-haspopup="dialog"
-  //           >
-  //             <TextIcon weight="md" size="xs">
-  //               <Translate id="bindIPNStoENS" />
-  //             </TextIcon>
-  //           </Button>
-  //         )}
-  //       </ENSDialog>
-  //     )}
-
-  //     {hasLinkedIPNS && !isMe && (
-  //       <Tooltip
-  //         content={
-  //           <Translate
-  //             zh_hans={`${user.displayName} 已将他的 ENS 指向到个人 IPNS 页面`}
-  //             zh_hant={`${user.displayName} 已將他的 ENS 指向到個人 IPNS 頁面`}
-  //             en={`${user.displayName} has linked primary ENS name to his IPNS page.`}
-  //           />
-  //         }
-  //       >
-  //         <span className={styles.helpIcon}>
-  //           <IconHelp16 color="grey" />
-  //         </span>
-  //       </Tooltip>
-  //     )}
-  //   </section>
-  // )
 }
 
 export default WalletLabel

@@ -11,6 +11,14 @@
     "defaultMessage": "Download App",
     "description": ""
   },
+  "me1nR+": {
+    "defaultMessage": "Copy Address",
+    "description": ""
+  },
+  "jkrM1r": {
+    "defaultMessage": "Open IPNS page",
+    "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
   "9mfw9c": {
     "defaultMessage": "Wallet address",
     "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"

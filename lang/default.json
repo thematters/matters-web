@@ -867,6 +867,10 @@
     "defaultMessage": "Enter verification code",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "jkrM1r": {
+    "defaultMessage": "Open IPNS page",
+    "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
   "jy3tx0": {
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -918,6 +922,10 @@
   "mWjpk9": {
     "defaultMessage": "No broadcast yet.",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
+  },
+  "me1nR+": {
+    "defaultMessage": "Copy Address",
+    "description": ""
   },
   "mikY/9": {
     "defaultMessage": "Edit",

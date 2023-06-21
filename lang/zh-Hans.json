@@ -15,6 +15,14 @@
     "defaultMessage": "钱包地址",
     "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
   },
+  "me1nR+": {
+    "defaultMessage": "复制地址",
+    "description": ""
+  },
+  "jkrM1r": {
+    "defaultMessage": "打开 IPNS 页面",
+    "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
   "5iii3x": {
     "defaultMessage": "围炉：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
