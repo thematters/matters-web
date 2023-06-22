@@ -1099,6 +1099,10 @@
     "defaultMessage": "Explore Matters",
     "description": ""
   },
+  "uclzDH": {
+    "defaultMessage": "{q}: {totalCount, plural, =0 {} one {} other {# Results}} - Matters Search",
+    "description": "src/views/Search/AggregateResults/Articles.tsx"
+  },
   "uw32VR": {
     "defaultMessage": "tutorial",
     "description": ""
