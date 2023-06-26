@@ -84,7 +84,7 @@
 
 .aside {
   & .content :global(> * + *) {
-    margin-top: var(--spacing-xx-loose);
+    margin-top: var(--spacing-x-loose);
   }
 
   @media (--md-up) {

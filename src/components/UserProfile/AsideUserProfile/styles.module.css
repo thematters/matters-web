@@ -30,7 +30,6 @@
   @mixin flex-end-space-between;
 
   padding: 0 var(--spacing-base);
-  margin-top: calc(var(--spacing-x-tight) * -1);
   margin-bottom: var(--spacing-base);
 
   @media (--sm-up) {
@@ -62,7 +61,8 @@
     }
   }
 
-  & .username {
+  & .username,
+  & .description {
     margin-bottom: var(--spacing-base);
     font-size: var(--font-size-sm);
     line-height: 1.375rem;
@@ -71,8 +71,10 @@
 }
 
 .badges {
+  display: flex;
+
   & > * + * {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--spacing-tight);
   }
 }
 
@@ -88,6 +90,16 @@
 
   & .count {
     font-weight: var(--font-weight-medium);
+  }
+}
+
+.meButtons {
+  @mixin flex-center-start;
+
+  margin-top: var(--spacing-base);
+
+  & > *:first-child {
+    margin-right: var(--spacing-tight);
   }
 }
 

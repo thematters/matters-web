@@ -241,8 +241,8 @@ export const AsideUserProfile = () => {
             </p>
           </Expandable>
 
-          <section className={styles.buttons}>
-            {isMe && (
+          {isMe && (
+            <section className={styles.meButtons}>
               <EditProfileDialog user={user}>
                 {({ openDialog: openEditProfileDialog }) => (
                   <Button
@@ -257,12 +257,18 @@ export const AsideUserProfile = () => {
                   </Button>
                 )}
               </EditProfileDialog>
-            )}
 
-            {!isMe && <FollowUserButton user={user} size="xl" />}
+              <DropdownActions user={user} isMe={isMe} isInAside />
+            </section>
+          )}
 
-            <DropdownActions user={user} isMe={isMe} isInAside />
-          </section>
+          {!isMe && (
+            <section className={styles.buttons}>
+              <FollowUserButton user={user} size="xl" />
+
+              <DropdownActions user={user} isMe={isMe} isInAside />
+            </section>
+          )}
         </section>
 
         <footer className={styles.footer}>
