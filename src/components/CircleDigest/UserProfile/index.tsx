@@ -35,7 +35,7 @@ const UserProfile = ({
     <section className={containerClasses}>
       <header className={styles.header}>
         <LinkWrapper {...path}>
-          <Button textColor="green" textActiveColor="green">
+          <Button textColor="green" textActiveColor="greenDark">
             {!hasDescription && !hasFooter && (
               <FormattedMessage
                 defaultMessage="Circle："
