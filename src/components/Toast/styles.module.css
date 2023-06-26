@@ -3,7 +3,7 @@
 }
 
 .toast {
-  @mixin flex-center-space-between;
+  @mixin flex-start-space-between;
 
   padding: var(--spacing-tight);
   font-size: var(--font-size-sm);
