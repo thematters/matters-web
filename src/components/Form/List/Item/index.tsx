@@ -54,7 +54,7 @@ const Item: React.FC<ItemProps> = forwardRef(
         <section className={styles.right}>
           {right || (
             <TextIcon
-              icon={clickable && <IconArrowRight16 color={'grey'} />}
+              icon={clickable && <IconArrowRight16 color="grey" />}
               size="md"
               textPlacement="left"
               spacing="xtight"

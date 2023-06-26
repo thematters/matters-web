@@ -5,14 +5,14 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
+  IconEdit16,
   IconMore32,
   IconRss20,
   IconShare20,
   Menu,
   RssFeedDialog,
   ShareDialog,
-  TextIcon,
   Translate,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
@@ -85,20 +85,17 @@ const BaseDropdownActions = ({
   openShareDialog,
 }: BaseDropdownActionsProps) => {
   const intl = useIntl()
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu>
       <Menu.Item
         onClick={openShareDialog}
         ariaHasPopup="dialog"
         textColor="greyDarker"
         textActiveColor="black"
         spacing={['xtight', 'base']}
-      >
-        <TextIcon icon={<IconShare20 size="mdS" />} size="md" spacing="tight">
-          <FormattedMessage defaultMessage="Share" description="" />
-        </TextIcon>
-      </Menu.Item>
-
+        text={<FormattedMessage defaultMessage="Share" description="" />}
+        icon={<IconShare20 size="mdS" />}
+      />
       {hasRssFeed && (
         <Menu.Item
           onClick={openRssFeedDialog}
@@ -106,11 +103,9 @@ const BaseDropdownActions = ({
           textColor="greyDarker"
           textActiveColor="black"
           spacing={['xtight', 'base']}
-        >
-          <TextIcon icon={<IconRss20 size="mdS" />} size="md" spacing="tight">
-            <Translate id="subscriptions" />
-          </TextIcon>
-        </Menu.Item>
+          text={<Translate id="subscriptions" />}
+          icon={<IconRss20 size="mdS" />}
+        />
       )}
 
       {hasBlockUser && (
@@ -120,17 +115,8 @@ const BaseDropdownActions = ({
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => {
+    <Dropdown content={<Content />}>
+      {({ openDropdown, ref }) => {
         return (
           <>
             {isInAside && isMe && (
@@ -141,8 +127,7 @@ const BaseDropdownActions = ({
                   defaultMessage: 'More Actions',
                   description: '',
                 })}
-                aria-haspopup={type}
-                onClick={openDialog}
+                onClick={openDropdown}
                 ref={ref}
               >
                 <IconMore32 size="md" />
@@ -160,8 +145,7 @@ const BaseDropdownActions = ({
                   defaultMessage: 'More Actions',
                   description: '',
                 })}
-                aria-haspopup={type}
-                onClick={openDialog}
+                onClick={openDropdown}
                 ref={ref}
               >
                 <IconMore32 size="md" />
@@ -179,8 +163,7 @@ const BaseDropdownActions = ({
                   defaultMessage: 'More Actions',
                   description: '',
                 })}
-                aria-haspopup={type}
-                onClick={openDialog}
+                onClick={openDropdown}
                 ref={ref}
               >
                 <IconMore32 />
@@ -189,7 +172,7 @@ const BaseDropdownActions = ({
           </>
         )
       }}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

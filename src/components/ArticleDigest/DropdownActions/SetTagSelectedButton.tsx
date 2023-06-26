@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
-import { IconCirclePlus20, Menu, TextIcon, useMutation } from '~/components'
+import { IconCirclePlus20, Menu, useMutation } from '~/components'
 import {
   SetTagSelectedButtonArticleFragment,
   SetTagSelectedMutation,
@@ -51,6 +51,13 @@ const SetTagSelectedButton = ({
 
   return (
     <Menu.Item
+      text={
+        <FormattedMessage
+          defaultMessage="Add to Featured"
+          description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+        />
+      }
+      icon={<IconCirclePlus20 size="mdS" />}
       onClick={async () => {
         await update()
 
@@ -69,16 +76,7 @@ const SetTagSelectedButton = ({
           })
         )
       }}
-      textColor="greyDarker"
-      textActiveColor="black"
-    >
-      <TextIcon icon={<IconCirclePlus20 size="mdS" />} size="md" spacing="base">
-        <FormattedMessage
-          defaultMessage="Add to Featured"
-          description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
-        />
-      </TextIcon>
-    </Menu.Item>
+    />
   )
 }
 

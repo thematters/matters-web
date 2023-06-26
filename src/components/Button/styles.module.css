@@ -1,7 +1,10 @@
 /* Container
    ========================================================================== */
 .container {
+  @mixin transition;
+
   display: inline-flex;
+  transition-property: color;
 }
 
 span.container {
@@ -51,10 +54,17 @@ span.container {
   }
 }
 
-.textActiveGreen {
+.textActiveGreenDark {
   &:hover,
   &:focus {
     color: var(--color-matters-green-active);
+  }
+}
+
+.textActiveRedDark {
+  &:hover,
+  &:focus {
+    color: var(--color-red-dark);
   }
 }
 
@@ -248,7 +258,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-matters-green-active);
+      background: var(--color-matters-green-dark);
     }
   }
 }

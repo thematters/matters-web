@@ -1,0 +1,6 @@
+.menuItem {
+  & .content {
+    /* add extra right spacing since left icon has a inner spacing */
+    padding-right: var(--spacing-xx-tight);
+  }
+}

@@ -7,7 +7,8 @@ import { translate } from '~/common/utils'
 import {
   AppreciatorsDialog,
   BookmarkButton,
-  DropdownDialog,
+  Button,
+  Dropdown,
   FingerprintDialog,
   IconMore16,
   IconSize,
@@ -135,8 +136,8 @@ const BaseDropdownActions = ({
     hasSetTagUnselected ||
     hasRemoveTag
 
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu>
       {/* public */}
       {hasShare && <ShareButton openDialog={openShareDialog} />}
       {hasAppreciators && (
@@ -150,7 +151,7 @@ const BaseDropdownActions = ({
       {morePublicActions}
 
       {/* private */}
-      {hasPublic && hasPrivate && <Menu.Divider spacing="xtight" />}
+      {hasPublic && hasPrivate && <Menu.Divider />}
       {hasEdit && <EditButton article={article} />}
 
       {hasSticky && <StickyButton article={article} />}
@@ -175,31 +176,31 @@ const BaseDropdownActions = ({
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => (
-        <button
-          aria-label={translate({ id: 'moreActions', lang })}
-          aria-haspopup={type}
-          onClick={(e) => {
-            e.stopPropagation()
-            openDialog()
-          }}
-          ref={ref}
-          className={styles.moreButton}
-        >
-          {icon ? icon : <IconMore16 size={size} />}
-        </button>
-      )}
-    </DropdownDialog>
+    <Dropdown content={<Content />}>
+      {({ openDropdown, ref }) =>
+        inCard ? (
+          <button
+            onClick={openDropdown}
+            aria-label={translate({ id: 'moreActions', lang })}
+            aria-haspopup="listbox"
+            ref={ref}
+            className={styles.moreButton}
+          >
+            {icon ? icon : <IconMore16 size={size} />}
+          </button>
+        ) : (
+          <Button
+            onClick={openDropdown}
+            spacing={['xtight', 'xtight']}
+            bgActiveColor="greyLighter"
+            aria-label={translate({ id: 'moreActions', lang })}
+            ref={ref}
+          >
+            {icon ? icon : <IconMore16 size={size} />}
+          </Button>
+        )
+      }
+    </Dropdown>
   )
 }
 

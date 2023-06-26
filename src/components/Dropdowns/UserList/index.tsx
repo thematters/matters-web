@@ -20,6 +20,10 @@ export const DropdownUserList = ({
     )
   }
 
+  if (!users || users.length <= 0) {
+    return null
+  }
+
   return (
     <Menu width="md">
       {users.map((user) => (
