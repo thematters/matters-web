@@ -2,7 +2,7 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import { MattersArticleEditor } from '@matters/matters-editor'
 import { FC, useContext } from 'react'
 
-import { ADD_TOAST, ASSET_TYPE } from '~/common/enums'
+import { ASSET_TYPE } from '~/common/enums'
 import { LanguageContext } from '~/components'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { EditorDraftFragment, SearchUsersQuery } from '~/gql/graphql'
@@ -77,7 +77,7 @@ const ArticleEditor: FC<Props> = ({
           enableReviseMode={isReviseMode}
           enableSummary
           enableToolbar={!isReviseMode}
-          eventName={ADD_TOAST}
+          eventName={''} // FIXME: fix in new editor
           language={lang}
           mentionLoading={loading}
           mentionKeywordChange={mentionKeywordChange}

@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 
 /**
  * <Layout.FixedMain> is a container component that has the fixed position and
- * width same as the middle column, used by <BottomBar>, <NavBar> and <Toast>.
+ * width same as the middle column, used by <BottomBar>, <NavBar>.
  *
  */
 type FixedMainProps = {

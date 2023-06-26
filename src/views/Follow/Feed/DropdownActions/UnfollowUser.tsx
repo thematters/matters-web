@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ADD_TOAST } from '~/common/enums'
-import { IconRemove24, Menu, Translate, useMutation } from '~/components'
+import { IconRemove24, Menu, toast, Translate, useMutation } from '~/components'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
@@ -63,19 +62,14 @@ const UnfollowUserActionButton = ({ user }: UnfollowUserActionButtonProps) => {
       onClick={async () => {
         await unfollow()
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <Translate
-                  zh_hant={`已取消追蹤 ${user.displayName}`}
-                  zh_hans={`已取消追踪 ${user.displayName}`}
-                />
-              ),
-            },
-          })
-        )
+        toast.success({
+          message: (
+            <Translate
+              zh_hant={`已取消追蹤 ${user.displayName}`}
+              zh_hans={`已取消追踪 ${user.displayName}`}
+            />
+          ),
+        })
       }}
     />
   )

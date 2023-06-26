@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
-import { Button, TextIcon, Toast, Translate } from '~/components'
-import ViewSuperLikeButton from '~/views/ArticleDetail/AppreciationButton/ViewSuperLikeButton'
+import { EXTERNAL_LINKS } from '~/common/enums'
+import { Button, Layout, TextIcon, toast, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -13,26 +12,20 @@ const Toasts = () => (
     <div className={styles.area}>
       <p>triggered toast will be showing here</p>
     </div>
-    <Toast.Container />
 
     <section className={styles.buttons}>
       <Button
         spacing={['xtight', 'xtight']}
         bgColor="red"
         onClick={() => {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: (
-                  <Translate
-                    zh_hant="開啓失敗，請檢查網路連線"
-                    zh_hans="开启失败，请检查网路连线"
-                  />
-                ),
-              },
-            })
-          )
+          toast.error({
+            message: (
+              <Translate
+                zh_hant="開啓失敗，請檢查網路連線"
+                zh_hans="开启失败，请检查网路连线"
+              />
+            ),
+          })
         }}
       >
         <TextIcon color="white">Error</TextIcon>
@@ -42,14 +35,9 @@ const Toasts = () => (
         spacing={['xtight', 'xtight']}
         bgColor="greenLighter"
         onClick={() => {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'green',
-                content: <Translate id="successUploadImage" />,
-              },
-            })
-          )
+          toast.error({
+            message: <Translate id="successUploadImage" />,
+          })
         }}
       >
         <TextIcon color="green">Success</TextIcon>
@@ -59,22 +47,24 @@ const Toasts = () => (
         spacing={['xtight', 'xtight']}
         bgColor="greenLighter"
         onClick={() => {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'green',
+          toast.success({
+            message: (
+              <Translate
+                zh_hant="你對作品送出了一個 Super Like！"
+                zh_hans="你对作品送出了一个 Super Like！"
+                en="You sent a Super Like to this article!"
+              />
+            ),
+            actions: [
+              {
                 content: (
-                  <Translate
-                    zh_hant="你對作品送出了一個 Super Like！"
-                    zh_hans="你对作品送出了一个 Super Like！"
-                    en="You sent a Super Like to this article!"
-                  />
+                  <Translate zh_hant="詳情" zh_hans="详情" en="More info" />
                 ),
-                customButton: <ViewSuperLikeButton />,
-                buttonPlacement: 'center',
+                htmlHref: EXTERNAL_LINKS.SUPER_LIKE,
+                htmlTarget: '_blank',
               },
-            })
-          )
+            ],
+          })
         }}
       >
         <TextIcon color="green">Custom Button</TextIcon>
@@ -83,7 +73,7 @@ const Toasts = () => (
 
     {/* Static */}
     <h3 className={styles.h3}>Static Toasts</h3>
-    <Toast.Instance
+    <Layout.Notice
       color="green"
       content={<Translate id="publishing" />}
       subDescription={
@@ -94,7 +84,7 @@ const Toasts = () => (
       }
     />
 
-    <Toast.Instance
+    <Layout.Notice
       color="red"
       content={<Translate id="failurePublish" />}
       subDescription={
@@ -102,7 +92,7 @@ const Toasts = () => (
       }
     />
 
-    <Toast.Instance
+    <Layout.Notice
       color="grey"
       content={
         <Translate

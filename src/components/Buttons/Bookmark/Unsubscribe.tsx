@@ -1,13 +1,14 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST, TEST_ID } from '~/common/enums'
+import { TEST_ID } from '~/common/enums'
 import {
   Button,
   IconBookmarked16,
   IconBookmarked20,
   IconSize,
   Menu,
+  toast,
   Translate,
   useMutation,
   ViewerContext,
@@ -49,33 +50,23 @@ const Unsubscribe = ({
 
   const onClick = async () => {
     if (viewer.isFrozen) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="FORBIDDEN_BY_STATE" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="FORBIDDEN_BY_STATE" />,
+      })
       return
     }
 
     await unsubscribe()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              en="Bookmark removed"
-              zh_hans="收藏已取消"
-              zh_hant="收藏已取消"
-            />
-          ),
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <Translate
+          en="Bookmark removed"
+          zh_hans="收藏已取消"
+          zh_hant="收藏已取消"
+        />
+      ),
+    })
   }
 
   if (inCard) {

@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
-  ADD_TOAST,
   OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_SOURCE,
@@ -12,6 +11,7 @@ import {
   Button,
   IconNavCreate32,
   LanguageContext,
+  toast,
   Tooltip,
   Translate,
   useMutation,
@@ -80,14 +80,10 @@ export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
         }
 
         if (forbidden) {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: <Translate id="FORBIDDEN_BY_STATE" />,
-              },
-            })
-          )
+          toast.error({
+            message: <Translate id="FORBIDDEN_BY_STATE" />,
+          })
+
           return
         }
 

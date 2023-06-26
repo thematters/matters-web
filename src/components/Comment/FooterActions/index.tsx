@@ -1,11 +1,12 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG, TextId } from '~/common/enums'
+import { OPEN_LIKE_COIN_DIALOG, TextId } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   CommentFormType,
   LanguageContext,
+  toast,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -108,14 +109,9 @@ const BaseFooterActions = ({
   const isCollapsed = state === 'collapsed'
   const isDisabled = disabled || (!isActive && !isCollapsed)
   const addToast = (id: TextId) => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: <Translate id={id} />,
-        },
-      })
-    )
+    toast.error({
+      message: <Translate id={id} />,
+    })
   }
   const forbid = () => addToast('FORBIDDEN_BY_STATE')
 

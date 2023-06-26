@@ -1,7 +1,14 @@
 import { ApolloError } from 'apollo-client'
+import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST, ERROR_CODES, ErrorCodeKeys, TEXT } from '~/common/enums'
-import { Error, LoginButton, Translate } from '~/components'
+import {
+  CLOSE_ACTIVE_DIALOG,
+  ERROR_CODES,
+  ErrorCodeKeys,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  TEXT,
+} from '~/common/enums'
+import { Error, toast, Translate } from '~/components'
 
 export const getErrorCodes = (error?: ApolloError): ErrorCodeKeys[] => {
   const errorCodes: ErrorCodeKeys[] = []
@@ -76,29 +83,31 @@ export const mutationOnError = (
   const isTokenInvalid = errorMap[ERROR_CODES.TOKEN_INVALID]
 
   if (isUnauthenticated || isForbidden || isTokenInvalid) {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: errorContent,
-          customButton: <LoginButton isPlain />,
-          buttonPlacement: 'center',
+    toast.error({
+      message: errorContent,
+      actions: [
+        {
+          content: (
+            <FormattedMessage
+              defaultMessage="Log in"
+              description="src/components/Buttons/Login/index.tsx"
+            />
+          ),
+          onClick: () => {
+            window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+            window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+          },
         },
-      })
-    )
+      ],
+    })
 
     throw error
   }
 
   if (showToast) {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: errorContent,
-        },
-      })
-    )
+    toast.error({
+      message: errorContent,
+    })
   }
 
   throw error

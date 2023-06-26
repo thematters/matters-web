@@ -6,7 +6,6 @@ import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
-  ADD_TOAST,
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
@@ -25,6 +24,7 @@ import {
   LanguageContext,
   LanguageSwitch,
   Layout,
+  toast,
   Translate,
   useMutation,
 } from '~/components'
@@ -128,19 +128,15 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           submitCallback()
         }
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <FormattedMessage
-                  defaultMessage="Logged in successfully"
-                  description=""
-                />
-              ),
-            },
-          })
-        )
+        toast.success({
+          message: (
+            <FormattedMessage
+              defaultMessage="Logged in successfully"
+              description=""
+            />
+          ),
+        })
+
         analytics.identifyUser()
 
         setSubmitting(false)

@@ -2,10 +2,10 @@ import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
 import {
   IconRemove24,
   Menu,
+  toast,
   Translate,
   useMutation,
   ViewerContext,
@@ -73,19 +73,14 @@ const UnfollowCircleActionButton = ({
       onClick={async () => {
         await unfollow()
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <Translate
-                  zh_hant={`已取消追蹤 ${circle.displayName}`}
-                  zh_hans={`已取消追踪 ${circle.displayName}`}
-                />
-              ),
-            },
-          })
-        )
+        toast.success({
+          message: (
+            <Translate
+              zh_hant={`已取消追蹤 ${circle.displayName}`}
+              zh_hans={`已取消追踪 ${circle.displayName}`}
+            />
+          ),
+        })
       }}
     />
   )

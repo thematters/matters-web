@@ -2,7 +2,6 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
-  ADD_TOAST,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEXT,
   UNIVERSAL_AUTH_SOURCE,
@@ -14,6 +13,7 @@ import {
   IconDonate24,
   LanguageContext,
   TextIcon,
+  toast,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -54,14 +54,9 @@ const DonationButton = ({
   const { lang } = useContext(LanguageContext)
 
   const forbid = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: <Translate id="FORBIDDEN_BY_STATE" />,
-        },
-      })
-    )
+    toast.error({
+      message: <Translate id="FORBIDDEN_BY_STATE" />,
+    })
   }
 
   const donationCount =

@@ -1,12 +1,12 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Dialog,
   IconTrash24,
   LanguageContext,
+  toast,
   Translate,
   useDialogSwitch,
   useMutation,
@@ -52,21 +52,15 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
   const onDelete = async () => {
     await deleteDraft()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="草稿已刪除"
-              zh_hans="草稿已删除"
-              en="draft has been deleted"
-            />
-          ),
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <Translate
+          zh_hant="草稿已刪除"
+          zh_hans="草稿已删除"
+          en="draft has been deleted"
+        />
+      ),
+    })
   }
 
   return (

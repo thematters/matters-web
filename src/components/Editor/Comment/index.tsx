@@ -2,7 +2,6 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import { MattersCommentEditor } from '@matters/matters-editor'
 import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
 import { LanguageContext } from '~/components'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { SearchUsersQuery } from '~/gql/graphql'
@@ -37,7 +36,7 @@ const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
       <MattersCommentEditor
         editorContent={content}
         editorUpdate={update}
-        eventName={ADD_TOAST}
+        eventName={''} // FIXME: fix with new editor
         language={lang}
         mentionLoading={loading}
         mentionKeywordChange={mentionKeywordChange}

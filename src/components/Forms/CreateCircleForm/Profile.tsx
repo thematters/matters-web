@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
-import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   toPath,
@@ -19,6 +19,7 @@ import {
   Form,
   LanguageContext,
   Layout,
+  toast,
   useMutation,
 } from '~/components'
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
@@ -103,24 +104,19 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           },
         })
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: isCreate ? (
-                <FormattedMessage
-                  defaultMessage="Circle successfully created"
-                  description="src/components/Forms/CreateCircleForm/Profile.tsx"
-                />
-              ) : (
-                <FormattedMessage
-                  description="src/components/Forms/CreateCircleForm/Profile.tsx"
-                  defaultMessage="Circle Edited"
-                />
-              ),
-            },
-          })
-        )
+        toast.success({
+          message: isCreate ? (
+            <FormattedMessage
+              defaultMessage="Circle successfully created"
+              description="src/components/Forms/CreateCircleForm/Profile.tsx"
+            />
+          ) : (
+            <FormattedMessage
+              description="src/components/Forms/CreateCircleForm/Profile.tsx"
+              defaultMessage="Circle Edited"
+            />
+          ),
+        })
 
         if (data?.putCircle) {
           const path = toPath({ page: 'circleDetail', circle: data.putCircle })

@@ -1,5 +1,10 @@
-import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import {
+  Dialog,
+  toast,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+} from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import { UpdateTagSettingMutation } from '~/gql/graphql'
 
@@ -38,15 +43,9 @@ const BaseDialog = ({ id, children }: Props) => {
       throw new Error('tag adoption failed')
     }
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: <Translate zh_hant="認領成功" zh_hans="认领成功" />,
-          duration: 2000,
-        },
-      })
-    )
+    toast.success({
+      message: <Translate zh_hant="認領成功" zh_hans="认领成功" />,
+    })
   }
 
   return (

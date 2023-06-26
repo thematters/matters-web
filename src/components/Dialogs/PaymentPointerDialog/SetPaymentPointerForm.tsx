@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   translate,
@@ -13,6 +12,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  toast,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -82,16 +82,11 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
           variables: { input: { paymentPointer } },
         })
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <Translate zh_hant="收款地址已更新" zh_hans="收款地址已更新" />
-              ),
-            },
-          })
-        )
+        toast.success({
+          message: (
+            <Translate zh_hant="收款地址已更新" zh_hans="收款地址已更新" />
+          ),
+        })
 
         setDefaultPaymentPointer(paymentPointer)
         setIsSubmitting(false)

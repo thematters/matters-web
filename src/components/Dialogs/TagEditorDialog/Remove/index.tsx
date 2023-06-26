@@ -1,5 +1,4 @@
-import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useMutation } from '~/components'
+import { Dialog, toast, Translate, useMutation } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 import { TagMaintainersQuery, UpdateTagSettingMutation } from '~/gql/graphql'
@@ -54,21 +53,15 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
       throw new Error('tag leave failed')
     }
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="移除協作者成功"
-              zh_hans="移除协作者成功"
-              en="successfully removed collaborator"
-            />
-          ),
-          duration: 2000,
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <Translate
+          zh_hant="移除協作者成功"
+          zh_hans="移除协作者成功"
+          en="successfully removed collaborator"
+        />
+      ),
+    })
 
     closeDialog()
   }

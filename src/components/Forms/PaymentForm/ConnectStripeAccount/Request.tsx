@@ -1,12 +1,13 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
-import { ADD_TOAST, PAYOUT_COUNTRY } from '~/common/enums'
+import { PAYOUT_COUNTRY } from '~/common/enums'
 import { parseFormSubmitErrors, sleep } from '~/common/utils'
 import {
   Dialog,
   LanguageContext,
   Spacer,
+  toast,
   Translate,
   useMutation,
 } from '~/components'
@@ -45,14 +46,10 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
       nextStep()
     } catch (error) {
       const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: messages[codes[0]],
-          },
-        })
-      )
+
+      toast.error({
+        message: messages[codes[0]],
+      })
     }
   }
 

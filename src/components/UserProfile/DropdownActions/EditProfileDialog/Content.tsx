@@ -5,7 +5,7 @@ import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
-import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import { parseFormSubmitErrors, validateDisplayName } from '~/common/utils'
 import {
   AvatarUploader,
@@ -13,6 +13,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  toast,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -138,19 +139,14 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           },
         })
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <FormattedMessage
-                  defaultMessage="Profile updated"
-                  description="src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
-                />
-              ),
-            },
-          })
-        )
+        toast.success({
+          message: (
+            <FormattedMessage
+              defaultMessage="Profile updated"
+              description="src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+            />
+          ),
+        })
 
         setSubmitting(false)
         closeDialog()

@@ -1,10 +1,10 @@
-import { Toast, Translate } from '~/components'
+import { Layout, Translate } from '~/components'
 import { PublishStateDraftFragment } from '~/gql/graphql'
 
 import RetryButton from './RetryButton'
 
 const ErrorState = ({ draft }: { draft: PublishStateDraftFragment }) => (
-  <Toast.Instance
+  <Layout.Notice
     color="red"
     content={<Translate id="failurePublish" />}
     subDescription={

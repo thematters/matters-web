@@ -3,7 +3,6 @@ import { useContext, useState } from 'react'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ADD_TOAST,
   ASSET_TYPE,
   ENTITY_TYPE,
   UPLOAD_IMAGE_SIZE_LIMIT,
@@ -17,6 +16,7 @@ import {
   LanguageContext,
   Spinner,
   TextIcon,
+  toast,
   Translate,
   useMutation,
 } from '~/components'
@@ -87,20 +87,16 @@ export const CoverUploader = ({
     event.target.value = ''
 
     if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant="上傳檔案超過 5 MB"
-                zh_hans="上传文件超过 5 MB"
-                en="upload file exceed 5 MB"
-              />
-            ),
-          },
-        })
-      )
+      toast.error({
+        message: (
+          <Translate
+            zh_hant="上傳檔案超過 5 MB"
+            zh_hans="上传文件超过 5 MB"
+            en="upload file exceed 5 MB"
+          />
+        ),
+      })
+
       return
     }
 
@@ -120,14 +116,9 @@ export const CoverUploader = ({
         throw new Error()
       }
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureUploadImage" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="failureUploadImage" />,
+      })
     }
   }
 

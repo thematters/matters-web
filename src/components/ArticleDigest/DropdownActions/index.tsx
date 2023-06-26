@@ -2,7 +2,6 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   AppreciatorsDialog,
@@ -16,6 +15,7 @@ import {
   Menu,
   ShareDialog,
   SupportersDialog,
+  toast,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -230,14 +230,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const isActive = article.articleState === 'active'
 
   const forbid = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: <Translate id="FORBIDDEN_BY_STATE" />,
-        },
-      })
-    )
+    toast.error({
+      message: <Translate id="FORBIDDEN_BY_STATE" />,
+    })
   }
 
   const controls = {

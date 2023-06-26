@@ -2,12 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-import { ADD_TOAST, COMMENT_TYPE_TEXT, TextId } from '~/common/enums'
+import { COMMENT_TYPE_TEXT, TextId } from '~/common/enums'
 import { dom, stripHtml, trimLineBreaks } from '~/common/utils'
 import {
   CommentFormType,
   Dialog,
   Spinner,
+  toast,
   Translate,
   useMutation,
 } from '~/components'
@@ -99,21 +100,15 @@ const CommentForm: React.FC<CommentFormProps> = ({
         data: { content: '' },
       })
 
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: (
-              <Translate
-                zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已送出`}
-                zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已送出`}
-                en={`${COMMENT_TYPE_TEXT.en[type]} sent`}
-              />
-            ),
-            buttonPlacement: 'center',
-          },
-        })
-      )
+      toast.success({
+        message: (
+          <Translate
+            zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已送出`}
+            zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已送出`}
+            en={`${COMMENT_TYPE_TEXT.en[type]} sent`}
+          />
+        ),
+      })
 
       setSubmitting(false)
 

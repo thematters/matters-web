@@ -2,11 +2,12 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST, COMMENT_TYPE_TEXT } from '~/common/enums'
+import { COMMENT_TYPE_TEXT } from '~/common/enums'
 import {
   CommentFormType,
   Dialog,
   LanguageContext,
+  toast,
   useDialogSwitch,
   useMutation,
 } from '~/components'
@@ -54,24 +55,17 @@ const DeleteCommentDialog = ({
   const onDelete = async () => {
     await deleteComment()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <FormattedMessage
-              defaultMessage="{commentType} has been deleted"
-              description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
-              values={{
-                commentType: COMMENT_TYPE_TEXT[lang][type],
-              }}
-            />
-          ),
-
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="{commentType} has been deleted"
+          description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+          values={{
+            commentType: COMMENT_TYPE_TEXT[lang][type],
+          }}
+        />
+      ),
+    })
   }
 
   return (
