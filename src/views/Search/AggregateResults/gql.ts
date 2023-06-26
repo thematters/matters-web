@@ -17,6 +17,7 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
         after: $after
       }
     ) {
+      totalCount
       pageInfo {
         startCursor
         endCursor

@@ -55,6 +55,10 @@
     "defaultMessage": "Explore Matters",
     "description": ""
   },
+  "uclzDH": {
+    "defaultMessage": "{q}: {totalCount, plural, =0 {} one {} other {# Results}} - Matters Search",
+    "description": "src/views/Search/AggregateResults/Articles.tsx"
+  },
   "HzaRKA": {
     "defaultMessage": "Migrate to Matters",
     "description": ""

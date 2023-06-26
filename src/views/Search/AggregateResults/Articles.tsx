@@ -1,13 +1,15 @@
 import { useEffect } from 'react'
+import { useIntl } from 'react-intl'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
   MAX_SEARCH_RESULTS_LENGTH,
 } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptySearch,
+  Head,
   InfiniteScroll,
   List,
   Spinner,
@@ -50,7 +52,9 @@ const AggregateArticleResults = () => {
 
   // pagination
   const connectionPath = 'search'
-  const { edges, pageInfo } = data?.search || {}
+  const { edges, pageInfo, totalCount } = data?.search || {}
+
+  const intl = useIntl()
 
   /**
    * Render
@@ -100,6 +104,19 @@ const AggregateArticleResults = () => {
 
   return (
     <section>
+      <Head
+        title={intl.formatMessage(
+          {
+            defaultMessage:
+              '{q}: {totalCount, plural, =0 {} one {} other {# Results}} - Matters Search',
+            description: 'src/views/Search/AggregateResults/Articles.tsx',
+          },
+          { q: stripSpaces(q), totalCount: +(totalCount?.toPrecision(2) ?? 0) }
+        )}
+        path={`/search?q=${stripSpaces(q)}&type=article`}
+        noSuffix
+      />
+
       <InfiniteScroll
         hasNextPage={
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
