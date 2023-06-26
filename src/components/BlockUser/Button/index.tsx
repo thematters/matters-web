@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
-import { IconMute20, IconUnMute24, Menu, useMutation } from '~/components'
+import { IconMute20, Menu, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {
   BlockUserPrivateFragment,
@@ -55,7 +55,7 @@ const BlockUserButton = ({
             description="src/components/BlockUser/Button/index.tsx"
           />
         }
-        icon={<IconUnMute24 size="mdS" />}
+        icon={<IconMute20 size="mdS" />}
         onClick={onUnblock}
       />
     )
