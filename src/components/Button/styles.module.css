@@ -54,6 +54,13 @@ span.container {
   }
 }
 
+.textActiveGreen {
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green);
+  }
+}
+
 .textActiveGreenDark {
   &:hover,
   &:focus {

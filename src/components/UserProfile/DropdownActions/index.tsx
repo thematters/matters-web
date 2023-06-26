@@ -6,7 +6,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import {
   Button,
   Dropdown,
-  IconEdit16,
   IconMore32,
   IconRss20,
   IconShare20,
