@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
   IconEdit16,
   IconLogbook1,
   IconLogbook2,
@@ -15,7 +15,6 @@ import {
   IconSettings32,
   LanguageContext,
   Menu,
-  TextIcon,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 import {
@@ -92,42 +91,44 @@ const BaseDropdownActions = ({
   const logbook2Url = `${process.env.NEXT_PUBLIC_LOGBOOKS_URL}/bookcase/?address=${address}`
 
   const intl = useIntl()
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu>
       {hasEditProfile && (
-        <Menu.Item onClick={openEditProfileDialog} ariaHasPopup="dialog">
-          <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
-            <FormattedMessage defaultMessage="Edit" description="" />
-          </TextIcon>
-        </Menu.Item>
+        <Menu.Item
+          text={<FormattedMessage defaultMessage="Edit" description="" />}
+          icon={<IconEdit16 size="mdS" />}
+          onClick={openEditProfileDialog}
+          ariaHasPopup="dialog"
+        />
       )}
 
       {hasLogbook && (
         <>
-          <Menu.Item htmlHref={logbook2Url} htmlTarget="_blank" is="anchor">
-            <TextIcon
-              icon={<IconLogbook2 size="md" />}
-              size="md"
-              spacing="base"
-            >
+          <Menu.Item
+            text={
               <FormattedMessage
                 defaultMessage="Logbook 2.0"
                 description="src/components/UserProfile/DropdownActions/index.tsx"
               />
-            </TextIcon>
-          </Menu.Item>
-          <Menu.Item htmlHref={logbook1Url} htmlTarget="_blank" is="anchor">
-            <TextIcon
-              icon={<IconLogbook1 size="md" />}
-              size="md"
-              spacing="base"
-            >
+            }
+            icon={<IconLogbook2 size="mdS" />}
+            htmlHref={logbook2Url}
+            htmlTarget="_blank"
+            is="anchor"
+          />
+
+          <Menu.Item
+            text={
               <FormattedMessage
                 defaultMessage="Logbook 1.0"
                 description="src/components/UserProfile/DropdownActions/index.tsx"
               />
-            </TextIcon>
-          </Menu.Item>
+            }
+            icon={<IconLogbook1 size="mdS" />}
+            htmlHref={logbook1Url}
+            htmlTarget="_blank"
+            is="anchor"
+          />
         </>
       )}
 
@@ -138,25 +139,16 @@ const BaseDropdownActions = ({
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ openDropdown, ref }) => (
         <Button
+          onClick={openDropdown}
           bgColor="halfBlack"
           aria-label={intl.formatMessage({
             defaultMessage: 'More Actions',
             description: '',
           })}
-          aria-haspopup={type}
-          onClick={openDialog}
+          aria-haspopup="listbox"
           ref={ref}
         >
           {hasEditProfile ? (
@@ -166,7 +158,7 @@ const BaseDropdownActions = ({
           )}
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

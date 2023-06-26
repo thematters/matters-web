@@ -14,7 +14,6 @@ import {
   IconSize,
   LanguageContext,
   Menu,
-  TextIcon,
   Translate,
   useMutation,
   ViewerContext,
@@ -89,15 +88,11 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
   if (inCard) {
     return (
       <Menu.Item
+        text={<Translate id="bookmark" />}
+        icon={<IconBookmark20 size="mdS" />}
         onClick={onClick}
         testId={TEST_ID.ARTICLE_BOOKMARK}
-        textColor="greyDarker"
-        textActiveColor="black"
-      >
-        <TextIcon icon={<IconBookmark20 size="mdS" />} size="md" spacing="base">
-          <Translate id="bookmark" />
-        </TextIcon>
-      </Menu.Item>
+      />
     )
   }
 

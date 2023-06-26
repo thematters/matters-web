@@ -6,7 +6,6 @@ import { ADD_TOAST } from '~/common/enums'
 import {
   IconRemove24,
   Menu,
-  TextIcon,
   Translate,
   useMutation,
   ViewerContext,
@@ -58,6 +57,13 @@ const UnfollowTagActionButton = ({ tag }: UnfollowTagActionButtonProps) => {
 
   return (
     <Menu.Item
+      text={
+        <Translate
+          zh_hant={`取消追蹤 #${tag.content}`}
+          zh_hans={`取消追踪 #${tag.content}`}
+        />
+      }
+      icon={<IconRemove24 size="mdS" />}
       onClick={async () => {
         await unfollow()
 
@@ -75,14 +81,7 @@ const UnfollowTagActionButton = ({ tag }: UnfollowTagActionButtonProps) => {
           })
         )
       }}
-    >
-      <TextIcon icon={<IconRemove24 size="md" />} size="md" spacing="base">
-        <Translate
-          zh_hant={`取消追蹤 #${tag.content}`}
-          zh_hans={`取消追踪 #${tag.content}`}
-        />
-      </TextIcon>
-    </Menu.Item>
+    />
   )
 }
 

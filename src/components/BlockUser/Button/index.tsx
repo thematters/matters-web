@@ -1,13 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { ADD_TOAST } from '~/common/enums'
-import {
-  IconMute24,
-  IconUnMute24,
-  Menu,
-  TextIcon,
-  useMutation,
-} from '~/components'
+import { IconMute24, IconUnMute24, Menu, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {
   BlockUserPrivateFragment,
@@ -54,23 +48,26 @@ const BlockUserButton = ({
 
   if (user.isBlocked) {
     return (
-      <Menu.Item onClick={onUnblock}>
-        <TextIcon icon={<IconUnMute24 size="md" />} size="md" spacing="base">
+      <Menu.Item
+        text={
           <FormattedMessage
             defaultMessage="Unblock"
             description="src/components/BlockUser/Button/index.tsx"
           />
-        </TextIcon>
-      </Menu.Item>
+        }
+        icon={<IconUnMute24 size="mdS" />}
+        onClick={onUnblock}
+      />
     )
   }
 
   return (
-    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconMute24 size="md" />} size="md" spacing="base">
-        <FormattedMessage defaultMessage="Block User" description="" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      text={<FormattedMessage defaultMessage="Block User" description="" />}
+      icon={<IconMute24 size="mdS" />}
+      onClick={openDialog}
+      ariaHasPopup="dialog"
+    />
   )
 }
 

@@ -21,6 +21,7 @@ export type CardBgHoverColor = 'greyLighter' | 'transparent' | 'none'
 export type CardSpacing =
   | 0
   | 'xtight'
+  | 'baseTight'
   | 'tight'
   | 'base'
   | 'baseLoose'
@@ -37,7 +38,7 @@ export interface CardProps {
   borderColor?: CardBorderColor
   borderRadius?: CardBorderRadius
 
-  textColor?: 'greyDarker' | 'red'
+  textColor?: 'black' | 'greyDarker' | 'red'
   textActiveColor?: 'black' | 'redDark'
 
   isActive?: boolean

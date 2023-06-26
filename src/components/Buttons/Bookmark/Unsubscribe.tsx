@@ -8,7 +8,6 @@ import {
   IconBookmarked20,
   IconSize,
   Menu,
-  TextIcon,
   Translate,
   useMutation,
   ViewerContext,
@@ -82,22 +81,16 @@ const Unsubscribe = ({
   if (inCard) {
     return (
       <Menu.Item
-        onClick={onClick}
-        testId={TEST_ID.ARTICLE_BOOKMARK}
-        textColor="greyDarker"
-        textActiveColor="black"
-      >
-        <TextIcon
-          icon={<IconBookmarked20 size={size} />}
-          size="mdS"
-          spacing="base"
-        >
+        text={
           <FormattedMessage
             defaultMessage="Undo bookmark"
             description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
           />
-        </TextIcon>
-      </Menu.Item>
+        }
+        icon={<IconBookmarked20 size={size} />}
+        onClick={onClick}
+        testId={TEST_ID.ARTICLE_BOOKMARK}
+      />
     )
   }
 

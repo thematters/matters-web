@@ -92,6 +92,10 @@
 }
 
 /* Text color */
+.textBlack {
+  color: var(--color-black);
+}
+
 .textGreyDarker {
   color: var(--color-grey-darker);
 }
@@ -122,6 +126,11 @@
   padding-bottom: var(--spacing-x-tight);
 }
 
+.spacingYBaseTight {
+  padding-top: var(--spacing-base-tight);
+  padding-bottom: var(--spacing-base-tight);
+}
+
 .spacingYTight {
   padding-top: var(--spacing-tight);
   padding-bottom: var(--spacing-tight);
@@ -145,6 +154,11 @@
 .spacingXXtight {
   padding-right: var(--spacing-x-tight);
   padding-left: var(--spacing-x-tight);
+}
+
+.spacingXBaseTight {
+  padding-right: var(--spacing-base-tight);
+  padding-left: var(--spacing-base-tight);
 }
 
 .spacingXTight {

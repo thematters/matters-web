@@ -16,4 +16,4 @@ const Template: ComponentStory<typeof ShareDialog> = (args) => (
   </MockedProvider>
 )
 
-export const Dialog = Template.bind({})
+export const Default = Template.bind({})

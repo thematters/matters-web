@@ -12,7 +12,6 @@ import {
   IconCollection24,
   LanguageContext,
   Menu,
-  TextIcon,
   Translate,
   useMutation,
   ViewerContext,
@@ -87,11 +86,11 @@ const ExtendButton = ({
   }
 
   return (
-    <Menu.Item onClick={onClick}>
-      <TextIcon icon={<IconCollection24 size="md" />} size="md" spacing="base">
-        <Translate id="collectArticle" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      text={<Translate id="collectArticle" />}
+      icon={<IconCollection24 size="mdS" />}
+      onClick={onClick}
+    />
   )
 }
 

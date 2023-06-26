@@ -7,7 +7,6 @@ import {
   IconPin24,
   IconUnPin24,
   Menu,
-  TextIcon,
   useMutation,
 } from '~/components'
 import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
@@ -105,13 +104,8 @@ const PinButton = ({
   if (comment.pinned) {
     return (
       <Menu.Item
-        onClick={async () => {
-          await unpinComment()
-          window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
-        }}
-      >
-        <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
-          {circle ? (
+        text={
+          circle ? (
             <FormattedMessage
               defaultMessage="Unpin Broadcast"
               description="src/components/Comment/DropdownActions/PinButton.tsx"
@@ -121,25 +115,21 @@ const PinButton = ({
               defaultMessage="Unpin Comment"
               description="src/components/Comment/DropdownActions/PinButton.tsx"
             />
-          )}
-        </TextIcon>
-      </Menu.Item>
+          )
+        }
+        icon={<IconUnPin24 size="mdS" />}
+        onClick={async () => {
+          await unpinComment()
+          window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
+        }}
+      />
     )
   }
 
   return (
     <Menu.Item
-      onClick={
-        canPin
-          ? async () => {
-              await pinComment()
-              window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
-            }
-          : undefined
-      }
-    >
-      <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
-        {circle ? (
+      text={
+        circle ? (
           <FormattedMessage
             defaultMessage="Pin Broadcast"
             description="src/components/Comment/DropdownActions/PinButton.tsx"
@@ -149,9 +139,18 @@ const PinButton = ({
             defaultMessage="Pin Comment"
             description="src/components/Comment/DropdownActions/PinButton.tsx"
           />
-        )}
-      </TextIcon>
-    </Menu.Item>
+        )
+      }
+      icon={<IconPin24 size="mdS" />}
+      onClick={
+        canPin
+          ? async () => {
+              await pinComment()
+              window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
+            }
+          : undefined
+      }
+    />
   )
 }
 
