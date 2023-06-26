@@ -28,6 +28,7 @@ import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
 const AggregateArticleResults = () => {
   const { getQuery } = useRoute()
   const q = getQuery('q')
+  const version = getQuery('version')
 
   /**
    * Data Fetching
@@ -37,7 +38,7 @@ const AggregateArticleResults = () => {
     usePublicQuery<SearchAggregateArticlesPublicQuery>(
       SEARCH_AGGREGATE_ARTICLES_PUBLIC,
       {
-        variables: { key: q },
+        variables: { key: q, version: version === '' ? undefined : version },
       }
     )
 

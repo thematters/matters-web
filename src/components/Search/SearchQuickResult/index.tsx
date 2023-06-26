@@ -7,7 +7,15 @@ import {
   SEARCH_START_FLAG,
 } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
-import { Media, Menu, Spinner, TagDigest, UserDigest } from '~/components'
+import {
+  Media,
+  Menu,
+  // Spacer,
+  Spinner,
+  TagDigest,
+  UserDigest,
+  useRoute,
+} from '~/components'
 import { QuickResultQuery } from '~/gql/graphql'
 
 import { QUICK_RESULT } from './gql'
@@ -23,6 +31,9 @@ interface QuickSearchProps {
 }
 
 export const SearchQuickResult = (props: QuickSearchProps) => {
+  const { getQuery } = useRoute()
+  const version = getQuery('version')
+
   const { searchKey, inPage, activeItem, onUpdateData, closeDropdown } = props
   const client = useApolloClient()
   const [data, setData] = useState<QuickResultQuery>()
@@ -63,7 +74,10 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
       // https://github.com/apollographql/apollo-client/issues/5912
       const response = await client.query({
         query: QUICK_RESULT,
-        variables: { key: searchKey },
+        variables: {
+          key: searchKey,
+          version: version === '' ? undefined : version,
+        },
         fetchPolicy: 'no-cache',
       })
       analytics.trackEvent('load_more', {
