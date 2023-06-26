@@ -183,17 +183,24 @@ export const AsideUserProfile = () => {
             </span>
           </section>
 
-          <section className={styles.badges}>
-            {hasTraveloggersBadge && <TraveloggersBadge hasTooltip />}
-            {hasSeedBadge && <SeedBadge hasTooltip />}
-            {hasGoldenMotorBadge && <GoldenMotorBadge hasTooltip />}
-            {hasArchitectBadge && <ArchitectBadge hasTooltip />}
-            {isCivicLiker && <CivicLikerBadge hasTooltip />}
+          {(hasTraveloggersBadge ||
+            hasSeedBadge ||
+            hasGoldenMotorBadge ||
+            hasArchitectBadge ||
+            isCivicLiker ||
+            user?.info.ethAddress) && (
+            <section className={styles.badges}>
+              {hasTraveloggersBadge && <TraveloggersBadge hasTooltip />}
+              {hasSeedBadge && <SeedBadge hasTooltip />}
+              {hasGoldenMotorBadge && <GoldenMotorBadge hasTooltip />}
+              {hasArchitectBadge && <ArchitectBadge hasTooltip />}
+              {isCivicLiker && <CivicLikerBadge hasTooltip />}
 
-            {user?.info.ethAddress && (
-              <DynamicWalletLabel user={user} isMe={isMe} hasTooltip />
-            )}
-          </section>
+              {user?.info.ethAddress && (
+                <DynamicWalletLabel user={user} isMe={isMe} hasTooltip />
+              )}
+            </section>
+          )}
 
           <section className={styles.follow}>
             <FollowersDialog user={user}>
@@ -227,19 +234,21 @@ export const AsideUserProfile = () => {
             </FollowingDialog>
           </section>
 
-          <Expandable
-            content={user.info.description}
-            color="greyDarker"
-            size="md"
-            spacingTop="base"
-          >
-            <p
-              className={styles.description}
-              data-test-id={TEST_ID.USER_PROFILE_BIO}
+          {user.info.description !== '' && (
+            <Expandable
+              content={user.info.description}
+              color="greyDarker"
+              size="md"
+              spacingTop="base"
             >
-              {user.info.description}
-            </p>
-          </Expandable>
+              <p
+                className={styles.description}
+                data-test-id={TEST_ID.USER_PROFILE_BIO}
+              >
+                {user.info.description}
+              </p>
+            </Expandable>
+          )}
 
           {isMe && (
             <section className={styles.meButtons}>
