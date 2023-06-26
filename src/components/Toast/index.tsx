@@ -72,7 +72,7 @@ const Toast: React.FC<
 
   return (
     <section
-      className={[styles.toast, styles.success].join(' ')}
+      className={[styles.toast, styles[type]].join(' ')}
       style={{ ...animationStyle }}
     >
       {isSuccess && message}
@@ -102,7 +102,7 @@ export const toast = {
   },
   error: (props: ToastProps) => {
     return baseToast.custom(
-      (toast) => <Toast {...props} toast={toast} type="success" />,
+      (toast) => <Toast {...props} toast={toast} type="error" />,
       { duration: props.actions ? 5000 : 3000 }
     )
   },

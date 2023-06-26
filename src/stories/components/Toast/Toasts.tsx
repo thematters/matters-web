@@ -1,14 +1,12 @@
 import React from 'react'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
-import { Button, Layout, TextIcon, toast, Translate } from '~/components'
+import { Button, TextIcon, toast, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
 const Toasts = () => (
   <section>
-    {/* Fixed */}
-    <h3 className={styles.h3}>Fixed Toasts</h3>
     <div className={styles.area}>
       <p>triggered toast will be showing here</p>
     </div>
@@ -35,7 +33,7 @@ const Toasts = () => (
         spacing={['xtight', 'xtight']}
         bgColor="greenLighter"
         onClick={() => {
-          toast.error({
+          toast.success({
             message: <Translate id="successUploadImage" />,
           })
         }}
@@ -70,37 +68,6 @@ const Toasts = () => (
         <TextIcon color="green">Custom Button</TextIcon>
       </Button>
     </section>
-
-    {/* Static */}
-    <h3 className={styles.h3}>Static Toasts</h3>
-    <Layout.Notice
-      color="green"
-      content={<Translate id="publishing" />}
-      subDescription={
-        <Translate
-          zh_hant="上鏈後，作品不可刪除，去中心化保存"
-          zh_hans="上链后，作品不可删除，去中心化保存"
-        />
-      }
-    />
-
-    <Layout.Notice
-      color="red"
-      content={<Translate id="failurePublish" />}
-      subDescription={
-        <Translate zh_hant="請檢查網絡後重試" zh_hans="请检查网络后重试" />
-      }
-    />
-
-    <Layout.Notice
-      color="grey"
-      content={
-        <Translate
-          zh_hant="此作品因違反用戶協定而被強制隱藏。"
-          zh_hans="此作品因违反用户协定而被强制隐藏。"
-        />
-      }
-    />
   </section>
 )
 
