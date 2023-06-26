@@ -1,13 +1,14 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _get from 'lodash/get'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
-import { KEYCODES } from '~/common/enums'
-import { capitalizeFirstLetter, dom } from '~/common/utils'
-import { Media, useOutsideClick } from '~/components'
+import { KEYVALUE } from '@/src/common/enums'
+import { capitalizeFirstLetter, dom, translate } from '~/common/utils'
+import { LanguageContext, Media, useOutsideClick } from '~/components'
 
 import { RoundedButton, TextButton } from './Buttons'
 import Content from './Content'
@@ -93,9 +94,10 @@ const Container: React.FC<
       className={containerClasses}
       style={style}
       onKeyDown={(event) => {
-        if (event.keyCode === KEYCODES.escape) {
-          closeTopDialog()
+        if (event.code.toLowerCase() !== KEYVALUE.escape) {
+          return
         }
+        closeTopDialog()
       }}
     >
       {children}
@@ -118,8 +120,10 @@ export const Dialog: React.ComponentType<
   RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
+  const { lang } = useContext(LanguageContext)
   const { isOpen, onRest } = props
   const [mounted, setMounted] = useState(isOpen)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
 
   // Drag
   const [{ top }, setDragGoal] = useSpring(() => ({ top: 0 }))
@@ -163,8 +167,20 @@ export const Dialog: React.ComponentType<
 
   return (
     <>
-      <AnimatedDialogOverlay className="dialog">
+      <AnimatedDialogOverlay
+        className="dialog"
+        initialFocusRef={closeButtonRef}
+      >
         <AnimatedOverlay style={{ opacity: opacity as any }} />
+
+        <VisuallyHidden>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={props.onDismiss}
+            aria-label={translate({ id: 'close', lang })}
+          />
+        </VisuallyHidden>
 
         <DialogContent aria-labelledby="dialog-title">
           <AnimatedContainer

@@ -1,6 +1,7 @@
 :root {
   --color-matters-gold: #c0a46b;
   --color-matters-green: #0d6763;
+  --color-matters-green-dark: #0c625e;
   --color-black: #333;
   --color-grey-darkest: #505050;
   --color-grey-darker: #808080;
@@ -19,7 +20,6 @@
 
   /* hover */
   --color-matters-gold-active: #b69c66;
-  --color-matters-green-active: #0c625e;
   --color-grey-lighter-active: #ededed;
 
   /* line */

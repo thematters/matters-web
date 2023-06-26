@@ -56,9 +56,11 @@ type ButtonColor =
   | 'greyLighter'
   | 'greyLighterActive'
   | 'greenLighter'
+  | 'greenDark'
   | 'green'
   | 'gold'
   | 'red'
+  | 'redDark'
   | 'likecoinGreen'
   | 'yellowLighter'
   | 'goldLinearGradient'
@@ -66,6 +68,11 @@ type ButtonColor =
 type ButtonTextColor = Extract<
   ButtonColor,
   'white' | 'black' | 'green' | 'gold' | 'red' | 'grey' | 'greyDarker'
+>
+
+type ButtonTextActiveColor = Extract<
+  ButtonColor,
+  'white' | 'black' | 'greenDark' | 'redDark'
 >
 
 export type ButtonBgColor = Extract<
@@ -99,7 +106,7 @@ export type ButtonProps = {
   spacing?: [ButtonSpacingY, ButtonSpacingX]
 
   textColor?: ButtonTextColor
-  textActiveColor?: ButtonTextColor
+  textActiveColor?: ButtonTextActiveColor
 
   bgColor?: ButtonBgColor
   bgActiveColor?: ButtonBgActiveColor

@@ -2,9 +2,9 @@ import dynamic from 'next/dynamic'
 import { forwardRef } from 'react'
 import FocusLock from 'react-focus-lock'
 
-import { KEYCODES, Z_INDEX } from '~/common/enums'
+import { KEYCODES, KEYVALUE, Z_INDEX } from '~/common/enums'
 
-import { useDialogSwitch } from '../Hook'
+import { useDialogSwitch, useNativeEventListener } from '../Hook'
 
 export type PopperInstance = any
 export type PopperProps = import('@tippyjs/react').TippyProps
@@ -75,6 +75,13 @@ export const Dropdown: React.FC<DropdownProps> = ({
     }
     event.stopPropagation()
   }
+
+  useNativeEventListener('keydown', (event: KeyboardEvent) => {
+    if (event.code.toLowerCase() !== KEYVALUE.escape) {
+      return
+    }
+    closeDropdown()
+  })
 
   return (
     <DynamicLazyTippy

@@ -25,13 +25,25 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
 
   switch (color) {
     case 'greyDarker':
-      buttonProps = { ...buttonProps, textColor: 'greyDarker' }
+      buttonProps = {
+        ...buttonProps,
+        textColor: 'greyDarker',
+        textActiveColor: 'black',
+      }
       break
     case 'green':
-      buttonProps = { ...buttonProps, textColor: 'green' }
+      buttonProps = {
+        ...buttonProps,
+        textColor: 'green',
+        textActiveColor: 'greenDark',
+      }
       break
     case 'red':
-      buttonProps = { ...buttonProps, textColor: 'red' }
+      buttonProps = {
+        ...buttonProps,
+        textColor: 'red',
+        textActiveColor: 'redDark',
+      }
       break
   }
 

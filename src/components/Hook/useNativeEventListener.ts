@@ -16,7 +16,6 @@ import { useEffect } from 'react'
 export function useNativeEventListener(
   event: string,
   action: any,
-  toggle = true,
   element?: any
 ) {
   const eventAction = (eventInstance: Event) => action(eventInstance)
@@ -26,9 +25,9 @@ export function useNativeEventListener(
     if (!target) {
       return
     }
-    if (toggle) {
-      target.addEventListener(event, eventAction)
-    }
+
+    target.addEventListener(event, eventAction)
+
     return () => {
       target.removeEventListener(event, eventAction)
     }
