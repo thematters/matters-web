@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import ColorThief from 'colorthief'
 import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -41,18 +40,20 @@ export const Book: React.FC<BookProps> = ({ title, cover, articleCount }) => {
   })
 
   const [dominantColor, setDominantColor] = useState<string>()
-  const colorThief = new ColorThief()
   const bookRef = useRef<HTMLDivElement>(null)
 
   const getColor = () => {
-    const $img = bookRef.current?.querySelector('img') as HTMLImageElement
-    const colors = colorThief.getColor($img)
-    const hsl = rgbToHsl(...colors)
-    setDominantColor(
-      `hsl(${parseInt(hsl[0] + '')} ${parseFloat(hsl[1] * 100 + '').toFixed(
-        2
-      )}% 30%)`
-    )
+    import('colorthief').then(({ default: ColorThief }) => {
+      const colorThief = new ColorThief()
+      const $img = bookRef.current?.querySelector('img') as HTMLImageElement
+      const colors = colorThief.getColor($img)
+      const hsl = rgbToHsl(...colors)
+      setDominantColor(
+        `hsl(${parseInt(hsl[0] + '')} ${parseFloat(hsl[1] * 100 + '').toFixed(
+          2
+        )}% 30%)`
+      )
+    })
   }
 
   useEffect(() => {
