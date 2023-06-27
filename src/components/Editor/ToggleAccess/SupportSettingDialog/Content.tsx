@@ -3,13 +3,13 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
 import { translate, validateSupportWords } from '~/common/utils'
 import {
   Dialog,
   Form,
   LanguageContext,
   TextIcon,
+  toast,
   Translate,
   useRoute,
 } from '~/components'
@@ -79,14 +79,10 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       }),
     onSubmit: async ({}, { setSubmitting }) => {
       editSupportSetting(values.requestForDonation, values.replyToDonator)
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: <Translate id="successSetSupportSetting" />,
-          },
-        })
-      )
+
+      toast.success({
+        message: <Translate id="successSetSupportSetting" />,
+      })
 
       setSubmitting(false)
 

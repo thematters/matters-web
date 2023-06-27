@@ -1,12 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import {
-  ADD_TOAST,
-  COOKIE_TOKEN_NAME,
-  COOKIE_USER_GROUP,
-  PATHS,
-} from '~/common/enums'
+import { COOKIE_TOKEN_NAME, COOKIE_USER_GROUP, PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { redirectToTarget, removeCookies } from '~/common/utils'
 import {
@@ -22,6 +17,7 @@ import {
   IconSettings24,
   IconWallet24,
   Menu,
+  toast,
   useFeatures,
   useMutation,
   ViewerContext,
@@ -54,37 +50,27 @@ const MeMenu: React.FC = () => {
 
       removeCookies([COOKIE_TOKEN_NAME, COOKIE_USER_GROUP])
 
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: (
-              <FormattedMessage
-                defaultMessage="Logged out successfully"
-                description=""
-              />
-            ),
-          },
-        })
-      )
+      toast.success({
+        message: (
+          <FormattedMessage
+            defaultMessage="Logged out successfully"
+            description=""
+          />
+        ),
+      })
 
       // await clearPersistCache()
 
       redirectToTarget()
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <FormattedMessage
-                defaultMessage="Failed to log out, please try again."
-                description=""
-              />
-            ),
-          },
-        })
-      )
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="Failed to log out, please try again."
+            description=""
+          />
+        ),
+      })
     }
   }
 

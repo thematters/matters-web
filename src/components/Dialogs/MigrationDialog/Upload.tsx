@@ -3,7 +3,6 @@ import { useContext } from 'react'
 
 import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
-  ADD_TOAST,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UPLOAD_FILE_COUNT_LIMIT,
   UPLOAD_MIGRATION_SIZE_LIMIT,
@@ -12,6 +11,7 @@ import { translate } from '~/common/utils'
 import {
   Dialog,
   LanguageContext,
+  toast,
   Translate,
   useMutation,
   ViewerContext,
@@ -69,19 +69,14 @@ const MigrationDialogUpload = ({
     }
 
     if (event.target.files.length > UPLOAD_FILE_COUNT_LIMIT) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant={zh_hant.count_limit}
-                zh_hans={zh_hans.count_limit}
-              />
-            ),
-          },
-        })
-      )
+      toast.error({
+        message: (
+          <Translate
+            zh_hant={zh_hant.count_limit}
+            zh_hans={zh_hans.count_limit}
+          />
+        ),
+      })
       return
     }
 
@@ -95,14 +90,9 @@ const MigrationDialogUpload = ({
     const sizes = files.reduce((sum, file) => sum + file.size, 0)
 
     if (sizes > UPLOAD_MIGRATION_SIZE_LIMIT) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="MIGRATION_REACH_LIMIT" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="MIGRATION_REACH_LIMIT" />,
+      })
       return
     }
 
@@ -110,16 +100,13 @@ const MigrationDialogUpload = ({
       await migration({
         variables: { input: { type: 'medium', files } },
       })
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: (
-              <Translate zh_hant={zh_hant.success} zh_hans={zh_hans.success} />
-            ),
-          },
-        })
-      )
+
+      toast.success({
+        message: (
+          <Translate zh_hant={zh_hant.success} zh_hans={zh_hans.success} />
+        ),
+      })
+
       nextStep()
     } catch (error) {
       // TODO: handle other exception

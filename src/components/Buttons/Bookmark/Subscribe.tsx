@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 
 import {
-  ADD_TOAST,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEST_ID,
   UNIVERSAL_AUTH_SOURCE,
@@ -14,6 +13,7 @@ import {
   IconSize,
   LanguageContext,
   Menu,
+  toast,
   Translate,
   useMutation,
   ViewerContext,
@@ -60,29 +60,19 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
     }
 
     if (viewer.isFrozen) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="FORBIDDEN_BY_STATE" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="FORBIDDEN_BY_STATE" />,
+      })
       return
     }
 
     await subscribe()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate en="Bookmarked" zh_hans="收藏成功" zh_hant="收藏成功" />
-          ),
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <Translate en="Bookmarked" zh_hans="收藏成功" zh_hant="收藏成功" />
+      ),
+    })
   }
 
   if (inCard) {

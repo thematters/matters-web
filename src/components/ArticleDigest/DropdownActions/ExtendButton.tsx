@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
-  ADD_TOAST,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
@@ -12,6 +11,7 @@ import {
   IconCollection24,
   LanguageContext,
   Menu,
+  toast,
   Translate,
   useMutation,
   ViewerContext,
@@ -65,14 +65,10 @@ const ExtendButton = ({
     }
 
     if (viewer.isInactive) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="FORBIDDEN" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="FORBIDDEN" />,
+      })
+
       return
     }
 

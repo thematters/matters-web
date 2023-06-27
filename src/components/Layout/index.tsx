@@ -19,6 +19,7 @@ import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
 import Header from './Header'
 import NavBar from './NavBar'
+import Notice from './Notice'
 import SideFooter from './SideFooter'
 import SideNav from './SideNav'
 import Spacing from './Spacing'
@@ -49,6 +50,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Spacing: typeof Spacing
   FixedMain: typeof FixedMain
   AuthHeader: typeof AuthHeader
+  Notice: typeof Notice
 } = ({ children }) => {
   const { isInPath } = useRoute()
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
@@ -156,3 +158,4 @@ Layout.Header = Header
 Layout.Spacing = Spacing
 Layout.FixedMain = FixedMain
 Layout.AuthHeader = AuthHeader
+Layout.Notice = Notice

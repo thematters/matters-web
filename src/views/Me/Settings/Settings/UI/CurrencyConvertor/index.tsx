@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
 import {
   Dropdown,
   Form,
   Menu,
+  toast,
   Translate,
   useMutation,
   ViewerContext,
@@ -48,14 +48,9 @@ const CurrencyConvertor = () => {
         },
       })
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureChange" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="failureChange" />,
+      })
     }
   }
 

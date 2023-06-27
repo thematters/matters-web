@@ -127,6 +127,7 @@ export const Tooltip: React.FC<PopperProps> = (props) => (
     offset={[0, 12]}
     placement="right"
     animation="shift-away"
+    maxWidth="18.5rem"
     theme="tooltip"
     zIndex={Z_INDEX.UNDER_GLOBAL_HEADER}
     aria={{ content: 'describedby', expanded: true }}

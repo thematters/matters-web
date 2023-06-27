@@ -7,7 +7,6 @@ import { FormattedMessage } from 'react-intl'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import {
-  ADD_TOAST,
   ASSET_TYPE,
   ENTITY_TYPE,
   MAX_TAG_CONTENT_LENGTH,
@@ -25,6 +24,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  toast,
   Translate,
   useMutation,
 } from '~/components'
@@ -128,15 +128,9 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
           },
         })
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: <Translate id={id ? 'tagEdited' : 'tagCreated'} />,
-              duration: 2000,
-            },
-          })
-        )
+        toast.success({
+          message: <Translate id={id ? 'tagEdited' : 'tagCreated'} />,
+        })
 
         const returnedTagId = result?.data?.putTag?.id
         const returnedTagContent = result?.data?.putTag?.content as string

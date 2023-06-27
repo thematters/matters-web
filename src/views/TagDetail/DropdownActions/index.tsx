@@ -3,7 +3,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
+import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import {
   Button,
   Dropdown,
@@ -16,6 +16,7 @@ import {
   TagDialog,
   TagEditorDialog,
   TagLeaveDialog,
+  toast,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -162,18 +163,12 @@ const DropdownActions = (props: DropdownActionsProps) => {
         },
       })
 
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: intl.formatMessage({
-              defaultMessage: 'Tags added',
-              description: 'src/views/TagDetail/DropdownActions/index.tsx',
-            }),
-            duration: 2000,
-          },
-        })
-      )
+      toast.success({
+        message: intl.formatMessage({
+          defaultMessage: 'Tags added',
+          description: 'src/views/TagDetail/DropdownActions/index.tsx',
+        }),
+      })
 
       window.dispatchEvent(
         new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
@@ -186,19 +181,14 @@ const DropdownActions = (props: DropdownActionsProps) => {
     }
 
   const forbid = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: (
-            <FormattedMessage
-              defaultMessage="You do not have permission to perform this operation"
-              description=""
-            />
-          ),
-        },
-      })
-    )
+    toast.error({
+      message: (
+        <FormattedMessage
+          defaultMessage="You do not have permission to perform this operation"
+          description=""
+        />
+      ),
+    })
     return
   }
 

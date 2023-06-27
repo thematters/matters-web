@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
-import { IconCirclePlus20, Menu, useMutation } from '~/components'
+import { IconCirclePlus20, Menu, toast, useMutation } from '~/components'
 import {
   SetTagSelectedButtonArticleFragment,
   SetTagSelectedMutation,
@@ -61,20 +60,14 @@ const SetTagSelectedButton = ({
       onClick={async () => {
         await update()
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <FormattedMessage
-                  defaultMessage="The article has been added to the Trending"
-                  description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
-                />
-              ),
-              duration: 2000,
-            },
-          })
-        )
+        toast.success({
+          message: (
+            <FormattedMessage
+              defaultMessage="The article has been added to the Trending"
+              description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+            />
+          ),
+        })
       }}
     />
   )

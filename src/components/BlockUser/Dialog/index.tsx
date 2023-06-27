@@ -1,13 +1,17 @@
-import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import { PATHS } from '~/common/enums'
+import {
+  Dialog,
+  toast,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+} from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {
   BlockUserPrivateFragment,
   BlockUserPublicFragment,
   ToggleBlockUserMutation,
 } from '~/gql/graphql'
-
-import ViewBlocksButton from './ViewBlocksButton'
 
 interface BlockUserDialogProps {
   user: BlockUserPublicFragment & Partial<BlockUserPrivateFragment>
@@ -31,16 +35,15 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
   const onBlock = async () => {
     await blockUser()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: <Translate id="successBlock" />,
-          customButton: <ViewBlocksButton />,
-          buttonPlacement: 'center',
+    toast.success({
+      message: <Translate id="successBlock" />,
+      actions: [
+        {
+          content: <Translate zh_hant="查看" zh_hans="查看" />,
+          htmlHref: PATHS.ME_SETTINGS_BLOCKED,
         },
-      })
-    )
+      ],
+    })
   }
 
   return (

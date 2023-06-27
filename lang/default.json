@@ -719,10 +719,6 @@
     "defaultMessage": "Broadcast",
     "description": ""
   },
-  "bn8ZZH": {
-    "defaultMessage": "Log in",
-    "description": "src/cpomponents/Buttons/Login/index.tsx"
-  },
   "cAP9g5": {
     "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"

@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
-import { Dialog, useDialogSwitch, useMutation } from '~/components'
+import { Dialog, toast, useDialogSwitch, useMutation } from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 import {
   ArchiveArticleArticleFragment,
@@ -56,20 +55,14 @@ const ArchiveArticleDialog = ({
   const onArchive = async () => {
     await archiveArticle()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <FormattedMessage
-              defaultMessage="Article is hidden"
-              description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
-            />
-          ),
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="Article is hidden"
+          description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+        />
+      ),
+    })
   }
 
   return (

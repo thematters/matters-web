@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
-import { IconMute20, Menu, useMutation } from '~/components'
+import { IconMute20, Menu, toast, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {
   BlockUserPrivateFragment,
@@ -31,19 +30,15 @@ const BlockUserButton = ({
   )
   const onUnblock = async () => {
     await unblockUser()
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <FormattedMessage
-              defaultMessage="User unblocked. User can now comment on your articles."
-              description="src/components/BlockUser/Button/index.tsx"
-            />
-          ),
-        },
-      })
-    )
+
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="User unblocked. User can now comment on your articles."
+          description="src/components/BlockUser/Button/index.tsx"
+        />
+      ),
+    })
   }
 
   if (user.isBlocked) {

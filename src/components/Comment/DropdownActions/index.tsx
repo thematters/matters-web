@@ -3,7 +3,6 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Button,
@@ -13,6 +12,7 @@ import {
   IconMore16,
   LanguageContext,
   Menu,
+  toast,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -212,14 +212,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   const forbid = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: <Translate id="FORBIDDEN_BY_STATE" />,
-        },
-      })
-    )
+    toast.error({
+      message: <Translate id="FORBIDDEN_BY_STATE" />,
+    })
   }
 
   if (_isEmpty(_pickBy(controls)) || isArchived) {

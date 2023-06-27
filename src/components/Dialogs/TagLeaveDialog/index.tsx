@@ -1,5 +1,10 @@
-import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import {
+  Dialog,
+  toast,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+} from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import { UpdateTagSettingMutation } from '~/gql/graphql'
 
@@ -26,21 +31,15 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
       throw new Error('tag leave failed')
     }
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="辭去權限成功"
-              zh_hans="辞去权限成功"
-              en="Resignation Success"
-            />
-          ),
-          duration: 2000,
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <Translate
+          zh_hant="辭去權限成功"
+          zh_hans="辞去权限成功"
+          en="Resignation Success"
+        />
+      ),
+    })
 
     closeDialog()
   }

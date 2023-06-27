@@ -8,7 +8,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
 import {
-  ADD_TOAST,
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
@@ -32,6 +31,7 @@ import {
   LanguageContext,
   Layout,
   TextIcon,
+  toast,
   Translate,
   useMutation,
   VerificationSendCodeButton,
@@ -252,19 +252,15 @@ const Connect: React.FC<FormProps> = ({
         analytics.identifyUser()
 
         if (loginData?.walletLogin.type === AuthResultType.Login) {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'green',
-                content: (
-                  <FormattedMessage
-                    defaultMessage="Logged in successfully"
-                    description=""
-                  />
-                ),
-              },
-            })
-          )
+          toast.success({
+            message: (
+              <FormattedMessage
+                defaultMessage="Logged in successfully"
+                description=""
+              />
+            ),
+          })
+
           redirectToTarget({
             fallback: isInPage ? 'homepage' : 'current',
           })
