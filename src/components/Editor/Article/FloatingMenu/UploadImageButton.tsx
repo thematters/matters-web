@@ -49,10 +49,12 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
       return
     }
 
-    const file = event.target.files[0]
-    event.target.value = ''
+    const files = event.target.files
 
-    if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
+    const hasExceedLimit = Array.from(files).some(
+      (file) => file.size > UPLOAD_IMAGE_SIZE_LIMIT
+    )
+    if (hasExceedLimit) {
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
@@ -67,23 +69,26 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
           },
         })
       )
+
+      event.target.value = ''
       return
     }
 
     try {
       setUploading(true)
 
-      const { path } = await upload({ file, type: ASSET_TYPE.embed })
-      editor.chain().focus().setFigureImage({ src: path }).run()
-
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: <Translate id="successUploadImage" />,
-          },
-        })
-      )
+      for (const file of files) {
+        const { path } = await upload({ file, type: ASSET_TYPE.embed })
+        editor.chain().focus().setFigureImage({ src: path }).run()
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'green',
+              content: <Translate id="successUploadImage" />,
+            },
+          })
+        )
+      }
     } catch (e) {
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -95,6 +100,7 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
       )
     }
 
+    event.target.value = ''
     setUploading(false)
   }
 
@@ -130,7 +136,7 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
           })}
           disabled={uploading}
           accept={acceptTypes}
-          multiple={false}
+          multiple={true}
           onChange={handleChange}
         />
       </VisuallyHidden>
