@@ -16,7 +16,26 @@
     display: inline-flex;
 
     &.clickable {
+      position: relative;
       cursor: pointer;
+
+      & .mask {
+        @mixin expand-to-container;
+        @mixin flex-center-all;
+        @mixin transition;
+
+        background: rgb(0 0 0 / 50%);
+        border-radius: 50%;
+        opacity: 0;
+        transition-property: opacity;
+      }
+
+      &:hover,
+      &:focus {
+        & .mask {
+          opacity: 1;
+        }
+      }
     }
   }
 }

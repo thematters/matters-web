@@ -9,6 +9,7 @@ import {
   Button,
   Expandable,
   FollowUserButton,
+  IconCamera24,
   Spinner,
   Throw404,
   // Translate,
@@ -149,6 +150,9 @@ export const AsideUserProfile = () => {
                   ) : (
                     <Avatar size="xxxxl" user={user} inProfile />
                   )}
+                  <div className={styles.mask}>
+                    <IconCamera24 color="white" size="xlM" />
+                  </div>
                 </section>
               )}
             </EditProfileDialog>
