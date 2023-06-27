@@ -15,20 +15,23 @@ const DynamicLazyTippy = dynamic(() => import('./LazyTippy'), {
 
 type ForwardChildrenNode = ({
   openDropdown,
+  closeDropdown,
   ref,
 }: {
   openDropdown: () => void
+  closeDropdown?: () => void
   ref?: React.Ref<any>
 }) => React.ReactNode
 
 interface ForwardChildrenProps {
   openDropdown: () => void
+  closeDropdown?: () => void
   children: ForwardChildrenNode
 }
 
 const ForwardChildren = forwardRef(
-  ({ openDropdown, children }: ForwardChildrenProps, ref) => (
-    <>{children({ openDropdown, ref })}</>
+  ({ openDropdown, closeDropdown, children }: ForwardChildrenProps, ref) => (
+    <>{children({ openDropdown, closeDropdown, ref })}</>
   )
 )
 
@@ -115,7 +118,14 @@ export const Dropdown: React.FC<DropdownProps> = ({
         </FocusLock>
       }
     >
-      <ForwardChildren openDropdown={toggle}>{children}</ForwardChildren>
+      <ForwardChildren
+        openDropdown={toggle}
+        closeDropdown={() => {
+          setTimeout(closeDropdown, 1000 * 3)
+        }}
+      >
+        {children}
+      </ForwardChildren>
     </DynamicLazyTippy>
   )
 }

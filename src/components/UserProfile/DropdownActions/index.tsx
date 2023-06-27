@@ -115,7 +115,7 @@ const BaseDropdownActions = ({
 
   return (
     <Dropdown content={<Content />}>
-      {({ openDropdown, ref }) => {
+      {({ openDropdown, closeDropdown, ref }) => {
         return (
           <>
             {isInAside && isMe && (
@@ -126,8 +126,10 @@ const BaseDropdownActions = ({
                   defaultMessage: 'More Actions',
                   description: '',
                 })}
-                onClick={openDropdown}
+                // onClick={openDropdown}
                 ref={ref}
+                onMouseEnter={openDropdown}
+                onMouseLeave={closeDropdown}
               >
                 <IconMore32 size="md" />
               </Button>
@@ -144,8 +146,10 @@ const BaseDropdownActions = ({
                   defaultMessage: 'More Actions',
                   description: '',
                 })}
-                onClick={openDropdown}
+                // onClick={openDropdown}
                 ref={ref}
+                onMouseEnter={openDropdown}
+                onMouseLeave={closeDropdown}
               >
                 <IconMore32 size="md" />
               </Button>
@@ -162,8 +166,10 @@ const BaseDropdownActions = ({
                   defaultMessage: 'More Actions',
                   description: '',
                 })}
-                onClick={openDropdown}
+                // onClick={openDropdown}
                 ref={ref}
+                onMouseEnter={openDropdown}
+                onMouseLeave={closeDropdown}
               >
                 <IconMore32 />
               </Button>
