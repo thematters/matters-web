@@ -12,6 +12,7 @@ interface ResponsiveImageProps {
   smUpSize?: ToSizedImageURLSize
   disabled?: boolean
   loading?: 'eager' | 'lazy'
+  anonymous?: boolean
 }
 
 const BaseResponsiveImage = ({
@@ -20,6 +21,7 @@ const BaseResponsiveImage = ({
   smUpSize,
   disabled,
   loading,
+  anonymous,
 }: ResponsiveImageProps) => {
   const [error, setError] = useState(false)
 
@@ -53,6 +55,7 @@ const BaseResponsiveImage = ({
         srcSet={toSizedImageURL({ url, size })}
         loading={loading}
         alt=""
+        crossOrigin={anonymous ? 'anonymous' : undefined}
       />
     </picture>
   )

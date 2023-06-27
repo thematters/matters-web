@@ -979,6 +979,10 @@
     "defaultMessage": "Last {days} days",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "b6zdPs": {
+    "defaultMessage": "{count} Articles",
+    "description": "src/components/Book/index.tsx"
+  },
   "Po+kJe": {
     "defaultMessage": "Last {months} month",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"

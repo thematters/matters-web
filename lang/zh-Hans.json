@@ -815,6 +815,10 @@
     "defaultMessage": "最近 {days} 天",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "b6zdPs": {
+    "defaultMessage": "{count} 篇文章",
+    "description": "src/components/Book/index.tsx"
+  },
   "b8ogKp": {
     "defaultMessage": "新增邀请",
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
