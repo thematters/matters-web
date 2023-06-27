@@ -2,7 +2,8 @@
  * Article Detail & Editor
  */
 .u-content,
-.ProseMirror {
+.ProseMirror,
+.tiptap {
   line-height: var(--line-height-article-base);
   outline: none;
 

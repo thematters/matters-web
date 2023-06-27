@@ -1,4 +1,5 @@
-.commentEditor :global(.ProseMirror) {
+.commentEditor :global(.ProseMirror),
+.commentEditor :global(.tiptap) {
   min-height: 7rem;
 
   /* outline */

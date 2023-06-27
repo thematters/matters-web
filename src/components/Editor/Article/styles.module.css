@@ -6,7 +6,8 @@
     padding-bottom: 0;
   }
 
-  & :global(.ProseMirror) {
+  & :global(.ProseMirror),
+  & :global(.tiptap) {
     min-height: 50vh;
     margin-bottom: var(var(--global-nav-height));
 
