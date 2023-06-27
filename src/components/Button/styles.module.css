@@ -54,6 +54,13 @@ span.container {
   }
 }
 
+.textActiveGreen {
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green);
+  }
+}
+
 .textActiveGreenDark {
   &:hover,
   &:focus {
@@ -87,7 +94,7 @@ span.container {
 
   z-index: 0;
   background: transparent;
-  transition-property: color, background;
+  transition-property: color, background, border-color;
 
   & + * {
     z-index: 1;
@@ -396,6 +403,12 @@ span.container {
   }
 }
 
+.borderGreyDarker {
+  & .hotarea {
+    border-color: var(--color-grey-darker);
+  }
+}
+
 .borderGrey {
   & .hotarea {
     border-color: var(--color-grey);
@@ -441,6 +454,24 @@ span.container {
 .borderLikecoinGreen {
   & .hotarea {
     border-color: var(--color-likecoin-green);
+  }
+}
+
+.borderActiveGreen {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-matters-green-dark);
+    }
+  }
+}
+
+.borderActiveBlack {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-matters-black);
+    }
   }
 }
 

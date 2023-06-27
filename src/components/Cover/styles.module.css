@@ -1,7 +1,7 @@
 .cover {
   position: relative;
   overflow: hidden;
-  border-radius: 0 0 1.25rem 1.25rem;
+  border-radius: 0 0 0.5rem 0.5rem;
 
   & img {
     @mixin object-fit-cover;

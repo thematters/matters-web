@@ -11,9 +11,45 @@
     "defaultMessage": "Download App",
     "description": ""
   },
+  "me1nR+": {
+    "defaultMessage": "Copy Address",
+    "description": ""
+  },
+  "jkrM1r": {
+    "defaultMessage": "Open IPNS page",
+    "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "9mfw9c": {
+    "defaultMessage": "Wallet address",
+    "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
+  },
+  "5iii3x": {
+    "defaultMessage": "Circle：",
+    "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
+  "DYrDcG": {
+    "defaultMessage": "Badges",
+    "description": "src/components/UserProfile/index.tsx"
+  },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "AVpR3Q": {
+    "defaultMessage": "Wallet linked",
+    "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "nD00sh": {
+    "defaultMessage": "Edit profile",
+    "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
+  },
+  "yIlC0R": {
+    "defaultMessage": "No published articles yet",
+    "description": "src/components/Empty/EmptyArticle.tsx"
+  },
+  "4sl6yu": {
+    "defaultMessage": "Start writing",
+    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "J+LXrH": {
     "defaultMessage": "User registered by email can login and enable wallet login later",
@@ -314,6 +350,10 @@
   "U/Tqmx": {
     "defaultMessage": " commented on your bookmarked article ",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
+  },
+  "JaLEXz": {
+    "defaultMessage": "Enter Circle",
+    "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
   "VoOZni": {
     "defaultMessage": " sent a new broadcast on ",
@@ -663,8 +703,8 @@
     "defaultMessage": "This account is archived due to violation of community guidelines",
     "description": "src/components/UserProfile/index.tsx"
   },
-  "oNYnCM": {
-    "defaultMessage": "Account Archived",
+  "9J0iCw": {
+    "defaultMessage": "Deleted user",
     "description": "src/components/UserProfile/index.tsx"
   },
   "rs0YS2": {
@@ -889,6 +929,14 @@
   },
   "lhaIoi": {
     "defaultMessage": "Enter Display Name",
+    "description": ""
+  },
+  "HAlOn1": {
+    "defaultMessage": "Name",
+    "description": ""
+  },
+  "2W0f9h": {
+    "defaultMessage": "Bio",
     "description": ""
   },
   "E8W3qa": {

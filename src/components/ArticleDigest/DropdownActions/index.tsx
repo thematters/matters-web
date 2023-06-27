@@ -180,7 +180,10 @@ const BaseDropdownActions = ({
       {({ openDropdown, ref }) =>
         inCard ? (
           <button
-            onClick={openDropdown}
+            onClick={(e) => {
+              e.preventDefault()
+              openDropdown()
+            }}
             aria-label={translate({ id: 'moreActions', lang })}
             aria-haspopup="listbox"
             ref={ref}

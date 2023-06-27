@@ -50,7 +50,12 @@ const FooterActions = ({
       </section>
 
       <section className={styles.right}>
-        <DropdownActions article={article} {...controls} size="mdM" />
+        <DropdownActions
+          article={article}
+          {...controls}
+          size="mdM"
+          inCard={true}
+        />
       </section>
     </footer>
   )

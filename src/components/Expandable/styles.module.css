@@ -119,6 +119,10 @@
   margin-top: var(--spacing-base);
 }
 
+.spacingTopTight {
+  margin-top: var(--spacing-tight);
+}
+
 .textIndent {
   text-indent: 2rem;
 }

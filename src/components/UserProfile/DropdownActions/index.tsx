@@ -1,23 +1,22 @@
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   Button,
   Dropdown,
-  IconEdit16,
-  IconLogbook1,
-  IconLogbook2,
-  // IconLogbook24,
   IconMore32,
-  IconSettings32,
-  LanguageContext,
+  IconRss20,
+  IconShare20,
   Menu,
+  RssFeedDialog,
+  ShareDialog,
+  Translate,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 import {
+  AuthorRssFeedFragment,
   DropdownActionsUserPrivateFragment,
   DropdownActionsUserPublicFragment,
 } from '~/gql/graphql'
@@ -26,19 +25,23 @@ import { EditProfileDialog } from './EditProfileDialog'
 
 interface DropdownActionsProps {
   user: DropdownActionsUserPublicFragment &
+    AuthorRssFeedFragment &
     Partial<DropdownActionsUserPrivateFragment>
   isMe: boolean
+  isInAside?: boolean
 }
 
 interface DialogProps {
   openEditProfileDialog: () => void
   openBlockUserDialog: () => void
+  openRssFeedDialog: () => void
+  openShareDialog: () => void
 }
 
 interface Controls {
   hasEditProfile: boolean
   hasBlockUser: boolean
-  hasLogbook: boolean
+  hasRssFeed: boolean
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & DialogProps & Controls
@@ -48,13 +51,6 @@ const fragments = {
     public: gql`
       fragment DropdownActionsUserPublic on User {
         id
-        info {
-          cryptoWallet {
-            id
-            address
-            hasNFTs
-          }
-        }
         ...BlockUserPublic
         ...EditProfileDialogUserPublic
       }
@@ -75,61 +71,40 @@ const fragments = {
 
 const BaseDropdownActions = ({
   user,
+  isMe,
+  isInAside = false,
 
   hasEditProfile,
   hasBlockUser,
-  hasLogbook,
+  hasRssFeed,
 
   openEditProfileDialog,
   openBlockUserDialog,
+  openRssFeedDialog,
+  openShareDialog,
 }: BaseDropdownActionsProps) => {
-  const { lang } = useContext(LanguageContext)
-  const address = user.info.cryptoWallet?.address
-  const logbook1Url = `${process.env.NEXT_PUBLIC_TRAVELOGGERS_URL}${
-    lang === 'en' ? '/' : '/zh/'
-  }owner/${address}`
-  const logbook2Url = `${process.env.NEXT_PUBLIC_LOGBOOKS_URL}/bookcase/?address=${address}`
-
   const intl = useIntl()
   const Content = () => (
     <Menu>
-      {hasEditProfile && (
+      <Menu.Item
+        onClick={openShareDialog}
+        ariaHasPopup="dialog"
+        textColor="greyDarker"
+        textActiveColor="black"
+        spacing={['xtight', 'base']}
+        text={<FormattedMessage defaultMessage="Share" description="" />}
+        icon={<IconShare20 size="mdS" />}
+      />
+      {hasRssFeed && (
         <Menu.Item
-          text={<FormattedMessage defaultMessage="Edit" description="" />}
-          icon={<IconEdit16 size="mdS" />}
-          onClick={openEditProfileDialog}
+          onClick={openRssFeedDialog}
           ariaHasPopup="dialog"
+          textColor="greyDarker"
+          textActiveColor="black"
+          spacing={['xtight', 'base']}
+          text={<Translate id="subscriptions" />}
+          icon={<IconRss20 size="mdS" />}
         />
-      )}
-
-      {hasLogbook && (
-        <>
-          <Menu.Item
-            text={
-              <FormattedMessage
-                defaultMessage="Logbook 2.0"
-                description="src/components/UserProfile/DropdownActions/index.tsx"
-              />
-            }
-            icon={<IconLogbook2 size="mdS" />}
-            htmlHref={logbook2Url}
-            htmlTarget="_blank"
-            is="anchor"
-          />
-
-          <Menu.Item
-            text={
-              <FormattedMessage
-                defaultMessage="Logbook 1.0"
-                description="src/components/UserProfile/DropdownActions/index.tsx"
-              />
-            }
-            icon={<IconLogbook1 size="mdS" />}
-            htmlHref={logbook1Url}
-            htmlTarget="_blank"
-            is="anchor"
-          />
-        </>
       )}
 
       {hasBlockUser && (
@@ -140,33 +115,71 @@ const BaseDropdownActions = ({
 
   return (
     <Dropdown content={<Content />}>
-      {({ openDropdown, ref }) => (
-        <Button
-          onClick={openDropdown}
-          bgColor="halfBlack"
-          aria-label={intl.formatMessage({
-            defaultMessage: 'More Actions',
-            description: '',
-          })}
-          aria-haspopup="listbox"
-          ref={ref}
-        >
-          {hasEditProfile ? (
-            <IconSettings32 size="lg" color="white" />
-          ) : (
-            <IconMore32 size="lg" color="white" />
-          )}
-        </Button>
-      )}
+      {({ openDropdown, ref }) => {
+        return (
+          <>
+            {isInAside && isMe && (
+              <Button
+                textColor="greyDarker"
+                textActiveColor="green"
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'More Actions',
+                  description: '',
+                })}
+                onClick={openDropdown}
+                ref={ref}
+              >
+                <IconMore32 size="md" />
+              </Button>
+            )}
+            {isInAside && !isMe && (
+              <Button
+                spacing={['xtight', 'xtight']}
+                textColor="greyDarker"
+                textActiveColor="black"
+                borderWidth="md"
+                borderColor="greyDarker"
+                borderActiveColor="black"
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'More Actions',
+                  description: '',
+                })}
+                onClick={openDropdown}
+                ref={ref}
+              >
+                <IconMore32 size="md" />
+              </Button>
+            )}
+            {!isInAside && (
+              <Button
+                spacing={['xtight', 'xtight']}
+                textColor="greyDarker"
+                textActiveColor="black"
+                borderWidth="md"
+                borderColor="greyDarker"
+                borderActiveColor="black"
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'More Actions',
+                  description: '',
+                })}
+                onClick={openDropdown}
+                ref={ref}
+              >
+                <IconMore32 />
+              </Button>
+            )}
+          </>
+        )
+      }}
     </Dropdown>
   )
 }
 
-const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
+const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
   const controls = {
     hasEditProfile: isMe,
     hasBlockUser: !isMe,
-    hasLogbook: !!user.info.cryptoWallet?.hasNFTs,
+    hasRssFeed: user?.articles.totalCount > 0 && !!user?.info.ipnsKey,
   }
 
   if (_isEmpty(_pickBy(controls))) {
@@ -174,21 +187,34 @@ const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
   }
 
   return (
-    <EditProfileDialog user={user}>
-      {({ openDialog: openEditProfileDialog }) => (
-        <BlockUser.Dialog user={user}>
-          {({ openDialog: openBlockUserDialog }) => (
-            <BaseDropdownActions
-              user={user}
-              isMe={isMe}
-              {...controls}
-              openEditProfileDialog={openEditProfileDialog}
-              openBlockUserDialog={openBlockUserDialog}
-            />
+    <ShareDialog
+      tags={[user.displayName, user.userName].filter(Boolean) as string[]}
+    >
+      {({ openDialog: openShareDialog }) => (
+        <RssFeedDialog user={user}>
+          {({ openDialog: openRssFeedDialog }) => (
+            <EditProfileDialog user={user}>
+              {({ openDialog: openEditProfileDialog }) => (
+                <BlockUser.Dialog user={user}>
+                  {({ openDialog: openBlockUserDialog }) => (
+                    <BaseDropdownActions
+                      user={user}
+                      isMe={isMe}
+                      isInAside={isInAside}
+                      {...controls}
+                      openEditProfileDialog={openEditProfileDialog}
+                      openBlockUserDialog={openBlockUserDialog}
+                      openRssFeedDialog={openRssFeedDialog}
+                      openShareDialog={openShareDialog}
+                    />
+                  )}
+                </BlockUser.Dialog>
+              )}
+            </EditProfileDialog>
           )}
-        </BlockUser.Dialog>
+        </RssFeedDialog>
       )}
-    </EditProfileDialog>
+    </ShareDialog>
   )
 }
 

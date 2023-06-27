@@ -11,9 +11,45 @@
     "defaultMessage": "在 {circlename} 发布广播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "9mfw9c": {
+    "defaultMessage": "钱包地址",
+    "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
+  },
+  "me1nR+": {
+    "defaultMessage": "复制地址",
+    "description": ""
+  },
+  "jkrM1r": {
+    "defaultMessage": "打开 IPNS 页面",
+    "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "5iii3x": {
+    "defaultMessage": "围炉：",
+    "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
+  "DYrDcG": {
+    "defaultMessage": "徽章",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "AVpR3Q": {
+    "defaultMessage": "已绑定钱包",
+    "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "nD00sh": {
+    "defaultMessage": "编辑个人信息",
+    "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
+  },
   "/+XWDi": {
     "defaultMessage": "航行日志 2.0",
     "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "yIlC0R": {
+    "defaultMessage": "尚未发布作品",
+    "description": "src/components/Empty/EmptyArticle.tsx"
+  },
+  "4sl6yu": {
+    "defaultMessage": "开始创作",
+    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "/3G89K": {
     "defaultMessage": " 又成长了",
@@ -50,6 +86,10 @@
   "/podGX": {
     "defaultMessage": "公开",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+  },
+  "JaLEXz": {
+    "defaultMessage": "进入围炉",
+    "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
   "0Azlrb": {
     "defaultMessage": "管理",
@@ -286,6 +326,14 @@
   "DXJ8ys": {
     "defaultMessage": "阅读次数代表了你的作品被登入用户阅读的总次数，每次阅读过程超过一定时间后才会计入。此外，同一个用户的多次阅读也会进行累计。",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
+  },
+  "HAlOn1": {
+    "defaultMessage": "用户名",
+    "description": ""
+  },
+  "2W0f9h": {
+    "defaultMessage": "个人简介",
+    "description": ""
   },
   "E8W3qa": {
     "defaultMessage": "2-20 个字符",
@@ -1031,7 +1079,7 @@
     "defaultMessage": "作品已隐藏",
     "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
   },
-  "oNYnCM": {
+  "9J0iCw": {
     "defaultMessage": "已注销用户",
     "description": "src/components/UserProfile/index.tsx"
   },
