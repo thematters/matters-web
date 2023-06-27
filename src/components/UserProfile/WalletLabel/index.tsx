@@ -3,13 +3,6 @@ import { FormattedMessage } from 'react-intl'
 import { namehash } from 'viem/ens'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
-// import { namehash } from 'viem/ens'
-// import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
-// import {
-//   // analytics,
-//   featureSupportedChains,
-//   PublicResolverABI,
-// } from '~/common/utils'
 import {
   analytics,
   featureSupportedChains,
