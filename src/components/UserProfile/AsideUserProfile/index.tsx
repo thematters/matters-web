@@ -237,14 +237,11 @@ export const AsideUserProfile = () => {
           {user.info.description !== '' && (
             <Expandable
               content={user.info.description}
-              color="greyDarker"
-              size="md"
+              color="grey"
+              size="sm"
               spacingTop="base"
             >
-              <p
-                className={styles.description}
-                data-test-id={TEST_ID.USER_PROFILE_BIO}
-              >
+              <p data-test-id={TEST_ID.USER_PROFILE_BIO}>
                 {user.info.description}
               </p>
             </Expandable>
