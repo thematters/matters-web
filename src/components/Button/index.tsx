@@ -8,10 +8,13 @@ import styles from './styles.module.css'
 
 export type ButtonWidth =
   | '2rem'
+  | '2.5rem'
   | '3rem'
   | '3.25rem'
   | '4rem'
   | '5rem'
+  | '5.3125rem'
+  | '5.5rem'
   | '6rem'
   | '7rem'
   | '7.5rem'
@@ -72,7 +75,7 @@ type ButtonTextColor = Extract<
 
 type ButtonTextActiveColor = Extract<
   ButtonColor,
-  'white' | 'black' | 'greenDark' | 'redDark'
+  'white' | 'black' | 'green' | 'greenDark' | 'redDark'
 >
 
 export type ButtonBgColor = Extract<
@@ -101,6 +104,8 @@ type ButtonBgActiveColor = Extract<
   | 'red'
 >
 
+type ButtonBorderActiveColor = Extract<ButtonColor, 'green' | 'black'>
+
 export type ButtonProps = {
   size?: [ButtonWidth, ButtonHeight]
   spacing?: [ButtonSpacingY, ButtonSpacingX]
@@ -112,6 +117,7 @@ export type ButtonProps = {
   bgActiveColor?: ButtonBgActiveColor
 
   borderColor?: ButtonColor
+  borderActiveColor?: ButtonBorderActiveColor
   borderWidth?: 'sm' | 'md'
   borderRadius?: 0 | '5rem'
 
@@ -178,6 +184,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         bgActiveColor,
 
         borderColor,
+        borderActiveColor,
         borderWidth = 'md',
         borderRadius = '5rem',
 
@@ -219,6 +226,9 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         [borderColor
           ? styles[`border${capitalizeFirstLetter(borderColor)}`]
           : '']: !!borderColor,
+        [borderActiveColor
+          ? styles[`borderActive${capitalizeFirstLetter(borderActiveColor)}`]
+          : '']: !!borderActiveColor && isClickable,
         [styles[`border${capitalizeFirstLetter(borderWidth)}`]]:
           borderWidth && borderColor,
         [textColor ? styles[`text${capitalizeFirstLetter(textColor)}`] : '']:

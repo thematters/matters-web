@@ -1,11 +1,11 @@
 .circleWidget {
-  margin-top: var(--spacing-loose);
+  padding-top: var(--spacing-tight);
+}
 
-  &:not(.banner) {
-    padding: 0 var(--spacing-base);
+.inAside {
+  @mixin border-top-grey;
 
-    @media (--sm-up) {
-      padding: 0;
-    }
-  }
+  padding-top: var(--spacing-loose);
+  margin-top: 3rem;
+  border-top-style: dashed;
 }

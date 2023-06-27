@@ -1,12 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import {
-  IconMute24,
-  IconUnMute24,
-  Menu,
-  toast,
-  useMutation,
-} from '~/components'
+import { IconMute20, Menu, toast, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {
   BlockUserPrivateFragment,
@@ -56,7 +50,7 @@ const BlockUserButton = ({
             description="src/components/BlockUser/Button/index.tsx"
           />
         }
-        icon={<IconUnMute24 size="mdS" />}
+        icon={<IconMute20 size="mdS" />}
         onClick={onUnblock}
       />
     )
@@ -64,10 +58,12 @@ const BlockUserButton = ({
 
   return (
     <Menu.Item
-      text={<FormattedMessage defaultMessage="Block User" description="" />}
-      icon={<IconMute24 size="mdS" />}
       onClick={openDialog}
       ariaHasPopup="dialog"
+      textColor="greyDarker"
+      textActiveColor="black"
+      text={<FormattedMessage defaultMessage="Block User" description="" />}
+      icon={<IconMute20 size="mdS" />}
     />
   )
 }

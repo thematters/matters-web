@@ -11,6 +11,46 @@
     "defaultMessage": "在 {circlename} 發布廣播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "9mfw9c": {
+    "defaultMessage": "錢包地址",
+    "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
+  },
+  "me1nR+": {
+    "defaultMessage": "複製地址",
+    "description": ""
+  },
+  "jkrM1r": {
+    "defaultMessage": "打開 IPNS 頁面",
+    "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "5iii3x": {
+    "defaultMessage": "圍爐：",
+    "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
+  "DYrDcG": {
+    "defaultMessage": "徽章",
+    "description": "src/components/UserProfile/index.tsx"
+  },
+  "AVpR3Q": {
+    "defaultMessage": "已綁定錢包",
+    "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "JaLEXz": {
+    "defaultMessage": "進入圍爐",
+    "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
+  "nD00sh": {
+    "defaultMessage": "編輯個人信息",
+    "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
+  },
+  "yIlC0R": {
+    "defaultMessage": "尚未發布作品",
+    "description": "src/components/Empty/EmptyArticle.tsx"
+  },
+  "4sl6yu": {
+    "defaultMessage": "開始創作",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "/+XWDi": {
     "defaultMessage": "航行日誌 2.0",
     "description": "src/components/UserProfile/DropdownActions/index.tsx"
@@ -298,6 +338,14 @@
   "DXJ8ys": {
     "defaultMessage": "閱讀次數代表了你的作品被登入用戶閱讀的總次數，每次閱讀過程超過一定時間後才會計入。此外，同一個用戶的多次閱讀也會進行累計。",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
+  },
+  "HAlOn1": {
+    "defaultMessage": "用戶名",
+    "description": ""
+  },
+  "2W0f9h": {
+    "defaultMessage": "個人簡介",
+    "description": ""
   },
   "E8W3qa": {
     "defaultMessage": "2-20 個字元",
@@ -1035,7 +1083,7 @@
     "defaultMessage": "作品已隱藏",
     "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
   },
-  "oNYnCM": {
+  "9J0iCw": {
     "defaultMessage": "已註銷用戶",
     "description": "src/components/UserProfile/index.tsx"
   },

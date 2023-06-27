@@ -7,3 +7,13 @@
 .description {
   margin-top: var(--spacing-x-tight);
 }
+
+.spacingYXxloose {
+  padding-top: var(--spacing-xx-loose);
+  padding-bottom: var(--spacing-xx-loose);
+}
+
+.spacingYXxxloose {
+  padding-top: var(--spacing-xxx-loose);
+  padding-bottom: var(--spacing-xxx-loose);
+}

@@ -64,6 +64,16 @@
     height: 4rem;
   }
 
+  &.xxxl {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  &.xxxlM {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+
   /* Colors */
   &.white {
     color: var(--color-white);

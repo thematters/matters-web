@@ -1,8 +1,9 @@
+import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { Form, SubscribeCircleDialog, useFeatures } from '~/components'
+import { Form, useFeatures } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 import {
   UserProfileUserPrivateQuery,
@@ -23,11 +24,23 @@ type CircleWidgetCircle = NonNullable<
 type CircleWidgetProps = {
   circles: CircleWidgetCircle[]
   isMe: boolean
+  hasDescription?: boolean
+  hasFooter?: boolean
 }
 
-const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
+const CircleWidget: React.FC<CircleWidgetProps> = ({
+  circles,
+  isMe,
+  hasDescription = true,
+  hasFooter = true,
+}) => {
   const features = useFeatures()
   const hasCircle = circles && circles.length > 0
+
+  const circleWidgetClasses = classNames({
+    [styles.circleWidget]: true,
+    [styles.inAside]: hasDescription && hasFooter,
+  })
 
   if (!isMe && !hasCircle) {
     return null
@@ -39,7 +52,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
     }
 
     return (
-      <section className={styles.circleWidget}>
+      <section className={circleWidgetClasses}>
         <Form.List spacingX={0}>
           <Form.List.Item
             bold
@@ -67,24 +80,12 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
   const circle = circles[0]
 
   return (
-    <section className={styles.circleWidget}>
-      <CircleDigest.Rich
-        avatarSize="xl"
-        borderRadius="xtight"
-        borderColor="lineGreyLight"
+    <section className={circleWidgetClasses}>
+      <CircleDigest.UserProfile
         circle={circle}
-        hasFooter
-        hasOwner={false}
-        hasPrice={!isMe}
-        onClickPrice={() => {
-          analytics.trackEvent('click_button', {
-            type: 'subscribe_circle_price',
-            pageType: 'user_profile',
-          })
-        }}
+        hasDescription={hasDescription}
+        hasFooter={hasFooter}
       />
-
-      {!isMe && <SubscribeCircleDialog circle={circle} />}
     </section>
   )
 }

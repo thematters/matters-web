@@ -29,7 +29,7 @@ interface ExpandableProps {
   buffer?: number
   color?: CollapseTextColor
   size?: 'sm' | 'mdS' | 'md'
-  spacingTop?: 'base'
+  spacingTop?: 'tight' | 'base'
   textIndent?: boolean
   isRichShow?: boolean
   bgColor?: 'greyLighter' | 'white'

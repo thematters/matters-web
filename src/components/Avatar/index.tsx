@@ -11,7 +11,16 @@ import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
+export type AvatarSize =
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | 'xxl'
+  | 'xxxl'
+  | 'xxxlm'
+  | 'xxxxl'
 
 export type AvatarLogbook = PartialDeep<AvatarUserLogbookFragment>
 

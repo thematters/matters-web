@@ -9,13 +9,11 @@ import {
 } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
-  Button,
   Cover,
   CoverProps,
   IconCamera24,
   LanguageContext,
   Spinner,
-  TextIcon,
   toast,
   Translate,
   useMutation,
@@ -122,30 +120,9 @@ export const CoverUploader = ({
     }
   }
 
-  const removeCover = () => {
-    setCover(undefined)
-    onUpload(null)
-  }
-
   const Mask = () => (
     <div className={styles.mask}>
       {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
-
-      {initCover && (
-        <section className={styles.delete}>
-          <Button
-            size={[null, '1.25rem']}
-            spacing={[0, 'xtight']}
-            borderColor="white"
-            borderWidth="sm"
-            onClick={removeCover}
-          >
-            <TextIcon color="white" size="xs">
-              <Translate id="delete" />
-            </TextIcon>
-          </Button>
-        </section>
-      )}
     </div>
   )
 
