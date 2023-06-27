@@ -240,6 +240,7 @@ export const AsideUserProfile = () => {
               color="grey"
               size="sm"
               spacingTop="base"
+              collapseable={false}
             >
               <p data-test-id={TEST_ID.USER_PROFILE_BIO}>
                 {user.info.description}

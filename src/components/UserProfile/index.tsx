@@ -270,9 +270,10 @@ export const UserProfile = () => {
           <section className={styles.footer}>
             <Expandable
               content={user.info.description}
-              color="greyDarker"
-              size="md"
+              color="grey"
+              size="sm"
               spacingTop="tight"
+              collapseable={false}
             >
               <p
                 className={styles.description}

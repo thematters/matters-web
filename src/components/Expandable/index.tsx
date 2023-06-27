@@ -32,6 +32,7 @@ interface ExpandableProps {
   spacingTop?: 'tight' | 'base'
   textIndent?: boolean
   isRichShow?: boolean
+  collapseable?: boolean
   bgColor?: 'greyLighter' | 'white'
 }
 
@@ -45,6 +46,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   spacingTop,
   textIndent = false,
   isRichShow = false,
+  collapseable = true,
   bgColor = 'white',
 }) => {
   const [expandable, setExpandable] = useState(false)
@@ -105,7 +107,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
       <div ref={node}>
         {(!expandable || (expandable && expand)) && <div>{children}</div>}
       </div>
-      {expandable && expand && !isRichShow && (
+      {expandable && collapseable && expand && !isRichShow && (
         <section className={styles.collapseWrapper}>
           <Button
             spacing={['xxtight', 'xtight']}
