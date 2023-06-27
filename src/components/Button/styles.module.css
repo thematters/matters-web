@@ -64,7 +64,7 @@ span.container {
 .textActiveGreenDark {
   &:hover,
   &:focus {
-    color: var(--color-matters-green-active);
+    color: var(--color-matters-green-dark);
   }
 }
 
@@ -461,7 +461,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      border-color: var(--color-matters-green-active);
+      border-color: var(--color-matters-green-dark);
     }
   }
 }
