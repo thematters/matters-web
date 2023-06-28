@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
-import { KEYCODES } from '~/common/enums'
+import { KEYVALUE } from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
 import { Media, useOutsideClick } from '~/components'
 
@@ -98,7 +98,7 @@ const Container: React.FC<
         className={containerClasses}
         style={style}
         onKeyDown={(event) => {
-          if (event.keyCode === KEYCODES.escape) {
+          if (event.key.toLowerCase() === KEYVALUE.escape) {
             closeTopDialog()
           }
         }}

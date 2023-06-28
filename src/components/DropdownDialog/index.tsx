@@ -2,7 +2,7 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import React, { AriaAttributes, forwardRef, useContext } from 'react'
 import FocusLock from 'react-focus-lock'
 
-import { KEYCODES, TextId, Z_INDEX } from '~/common/enums'
+import { KEYVALUE, TextId, Z_INDEX } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Button,
@@ -99,7 +99,7 @@ const BaseDropdownDialog = ({
     return (
       <section
         onKeyDown={(event) => {
-          if (event.keyCode !== KEYCODES.enter) {
+          if (event.key.toLowerCase() !== KEYVALUE.enter) {
             return
           }
           closeOnClick(event)

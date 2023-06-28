@@ -1,3 +1,4 @@
+import { normalizeArticleHTML } from '@matters/matters-editor'
 import { useEffect, useRef } from 'react'
 
 import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
@@ -66,8 +67,8 @@ const EditModeHeader = ({
   const currContent = editContent || ''
   const diff =
     measureDiffs(
-      stripHtml(initContent.current || ''),
-      stripHtml(currContent || '')
+      stripHtml(normalizeArticleHTML(initContent.current || '')),
+      stripHtml(normalizeArticleHTML(currContent || ''))
     ) || 0
   const diffCount = `${diff}`.padStart(2, '0')
   const isOverDiffLimit = diff > MAX_ARTICLE_REVISION_DIFF

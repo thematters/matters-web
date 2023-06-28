@@ -140,11 +140,14 @@ const FRAME_SRC = [
   "'self'",
 
   // Embed
-  'jsfiddle.net',
   'button.like.co',
   'www.youtube.com',
   'player.vimeo.com',
-  'player.youku.com',
+  'player.bilibili.com',
+  'www.bilibili.com',
+  'www.instagram.com',
+  'jsfiddle.net',
+  'codepen.io',
 
   // ReCaptcha
   'www.google.com/recaptcha/',
