@@ -707,6 +707,10 @@
     "defaultMessage": "Last {days} days",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "b6zdPs": {
+    "defaultMessage": "{count} articles",
+    "description": "src/components/Book/index.tsx"
+  },
   "b8ogKp": {
     "defaultMessage": "Add Invitation",
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"

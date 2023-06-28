@@ -2,6 +2,7 @@
  * Atomics
  */
 export * from './Avatar'
+export * from './Book'
 export * from './Button'
 export * from './CircleAvatar'
 export * from './Context'
