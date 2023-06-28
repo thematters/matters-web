@@ -27,7 +27,7 @@ const NavListItemButton = forwardRef(
     ref
   ) => {
     return (
-      <Tooltip content={name} placement="left">
+      <Tooltip content={name} placement="left" delay={[1000, null]}>
         <Button
           bgActiveColor="greyLighter"
           size={['2rem', '2rem']}
