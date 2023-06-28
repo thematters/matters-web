@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import { forwardRef } from 'react'
 import FocusLock from 'react-focus-lock'
 
-import { KEYCODES, KEYVALUE, Z_INDEX } from '~/common/enums'
+import { KEYVALUE, Z_INDEX } from '~/common/enums'
 
 import { useDialogSwitch, useNativeEventListener } from '../Hook'
 
@@ -103,7 +103,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
         <FocusLock disabled={!focusLock} autoFocus={false}>
           <div
             onKeyDown={(event) => {
-              if (event.keyCode !== KEYCODES.enter) {
+              if (event.code.toLowerCase() !== KEYVALUE.enter) {
                 return
               }
               closeOnClick(event)

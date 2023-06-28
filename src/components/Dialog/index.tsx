@@ -6,7 +6,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
-import { KEYVALUE } from '@/src/common/enums'
+import { KEYVALUE } from '~/common/enums'
 import { capitalizeFirstLetter, dom, translate } from '~/common/utils'
 import { LanguageContext, Media, useOutsideClick } from '~/components'
 

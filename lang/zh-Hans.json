@@ -1215,6 +1215,10 @@
     "defaultMessage": "玩转 Matters 实用指南",
     "description": ""
   },
+  "uclzDH": {
+    "defaultMessage": "{q}: {totalCount, plural, =0 {} other {# 条结果}} - Matters 搜索",
+    "description": "src/views/Search/AggregateResults/Articles.tsx"
+  },
   "cAP9g5": {
     "defaultMessage": "将你的评论在 {commentArticle} 中置顶",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"

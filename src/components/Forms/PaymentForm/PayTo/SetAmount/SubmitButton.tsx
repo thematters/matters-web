@@ -1,9 +1,9 @@
 import { useDisconnect } from 'wagmi'
 
-import { UserDonationRecipientFragment } from '@/src/gql/graphql'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { Dialog, Translate } from '~/components'
 import type { DialogTextButtonProps } from '~/components/Dialog/Buttons'
+import { UserDonationRecipientFragment } from '~/gql/graphql'
 
 type SubmitButtonProps = {
   mode: 'text' | 'rounded'

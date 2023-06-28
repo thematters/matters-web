@@ -1,12 +1,13 @@
-import { useLazyQuery } from '@apollo/react-hooks'
-import { MattersCommentEditor } from '@matters/matters-editor'
+import { useApolloClient } from '@apollo/react-hooks'
+import { EditorContent, useCommentEditor } from '@matters/matters-editor'
 import { useContext } from 'react'
 
+import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
-import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
-import { SearchUsersQuery } from '~/gql/graphql'
 
-import MentionUserList from '../MentionUserList'
+import { BubbleMenu } from '../Article/BubbleMenu'
+import { makeMentionSuggestion } from '../Article/extensions'
+import styles from './styles.module.css'
 
 interface Props {
   content: string
@@ -14,39 +15,33 @@ interface Props {
   placeholder?: string
 }
 
-type SearchUsersSearchEdgesNodeUser = NonNullable<
-  NonNullable<SearchUsersQuery['search']['edges']>[0]
->['node']
-
 const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
-  const [search, { data, loading }] =
-    useLazyQuery<SearchUsersQuery>(SEARCH_USERS)
   const { lang } = useContext(LanguageContext)
+  const client = useApolloClient()
 
-  const mentionUsers = (data?.search.edges || []).map(
-    ({ node }) => node
-  ) as SearchUsersSearchEdgesNodeUser[]
-
-  const mentionKeywordChange = (keyword: string) => {
-    search({ variables: { search: keyword, exclude: 'blocked' } })
-  }
+  const editor = useCommentEditor({
+    placeholder:
+      placeholder ||
+      translate({
+        zh_hant: '發表你的評論…',
+        zh_hans: '发表你的评论…',
+        en: 'Enter comment…',
+        lang,
+      }),
+    content: content || '',
+    onUpdate: async ({ editor, transaction }) => {
+      const content = editor.getHTML()
+      update({ content })
+    },
+    mentionSuggestion: makeMentionSuggestion({ client }),
+  })
 
   return (
-    <>
-      <MattersCommentEditor
-        editorContent={content}
-        editorUpdate={update}
-        eventName={''} // FIXME: fix with new editor
-        language={lang}
-        mentionLoading={loading}
-        mentionKeywordChange={mentionKeywordChange}
-        mentionUsers={mentionUsers}
-        mentionListComponent={MentionUserList}
-        readOnly={false}
-        theme="bubble"
-        texts={placeholder ? { COMMENT_PLACEHOLDER: placeholder } : {}}
-      />
-    </>
+    <div className={styles.commentEditor}>
+      {editor && <BubbleMenu editor={editor} isCommentEditor />}
+
+      <EditorContent editor={editor} />
+    </div>
   )
 }
 

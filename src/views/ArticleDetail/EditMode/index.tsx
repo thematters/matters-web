@@ -72,10 +72,14 @@ export const useEditArticleDetailSupportSetting = (
   return { edit, saving }
 }
 
-const Editor = dynamic(() => import('~/components/Editor/Article'), {
-  ssr: false,
-  loading: Spinner,
-})
+const Editor = dynamic(
+  () =>
+    import('~/components/Editor/Article').then((mod) => mod.EditArticleEditor),
+  {
+    ssr: false,
+    loading: Spinner,
+  }
+)
 
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const [editContent, setEditContent] = useState('')
@@ -326,9 +330,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
         <Layout.Spacing>
           <Editor
             draft={draft}
-            isReviseMode={!isReviseDisabled}
-            isSummaryReadOnly
-            isTitleReadOnly
             update={async (update) => {
               setEditContent(update.content || '')
             }}

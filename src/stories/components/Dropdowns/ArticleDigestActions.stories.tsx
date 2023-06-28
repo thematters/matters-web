@@ -2,7 +2,7 @@ import { MockedProvider } from '@apollo/react-testing'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
-import FooterActions from '@/src/components/ArticleDigest/Feed/FooterActions'
+import FooterActions from '~/components/ArticleDigest/Feed/FooterActions'
 
 import { MOCK_ARTILCE } from '../../mocks'
 

@@ -2,7 +2,8 @@
  * Article Detail & Editor
  */
 .u-content,
-#editor-article-container .ql-editor {
+.ProseMirror,
+.tiptap {
   line-height: var(--line-height-article-base);
   outline: none;
 
@@ -42,6 +43,7 @@
   /* Figure
    ========================================================================== */
   & figure {
+    position: relative;
     margin: var(--spacing-x-loose) 0;
     text-align: center;
 
@@ -55,6 +57,7 @@
       padding: 0 var(--spacing-base);
       margin-top: var(--spacing-x-tight);
       font-size: var(--font-size-sm-s);
+      line-height: 1.5;
       color: var(--color-grey);
       white-space: pre-wrap;
     }
@@ -156,8 +159,6 @@
   /* Embed
    ========================================================================== */
   & figure[class*='embed'] {
-    position: relative;
-
     & > .iframe-container {
       position: relative;
       width: 100%;
@@ -265,7 +266,7 @@
    ========================================================================== */
   & a {
     padding-bottom: 2px;
-    color: var(--color-matters-green);
+    color: var(--color-black);
     border-bottom: 1px solid currentcolor;
 
     &:hover,
@@ -285,13 +286,28 @@
   /* Misc
    ========================================================================== */
   & hr {
+    position: relative;
     display: block;
-    width: 10rem;
-    height: 0.25rem;
-    margin: var(--spacing-x-loose) auto;
-    border: 0;
-    border-top: 1px solid var(--color-line-grey-dark);
-    border-bottom: 1px solid var(--color-line-grey-dark);
+    width: 100%;
+    height: 2rem;
+    border: none;
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 4.5rem;
+      height: 2rem;
+      margin: 0 auto;
+      content: '';
+      background-image: radial-gradient(
+        circle,
+        var(--color-line-grey-light) 0.25rem,
+        transparent 0.25rem
+      );
+      background-size: 33.33% 100%;
+      background-repeat-x: repeat;
+    }
   }
 }
 
@@ -346,137 +362,4 @@
       opacity: 1; /* Firefox */
     }
   }
-}
-
-#editor-article-container {
-  position: relative;
-
-  & .ql-editor {
-    & input.embed-clipboard {
-      line-height: 1.875;
-    }
-
-    & figure {
-      margin-right: 0;
-      margin-left: 0;
-
-      & figcaption {
-        font-size: 0;
-
-        & textarea {
-          overflow: hidden;
-          font-size: var(--font-size-sm-s);
-          text-align: center;
-          resize: none;
-        }
-      }
-    }
-  }
-
-  & .spinner {
-    stroke: var(--color-grey-light);
-  }
-}
-
-.toolbar-container {
-  @mixin transition;
-
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  opacity: 0;
-  transition-property: opacity, transform;
-  transform: translateY(calc(var(--spacing-x-tight) * -1));
-
-  &.toolbar-visible {
-    opacity: 1;
-  }
-
-  &.toolbar-expanded {
-    & .toolbar-items {
-      display: inline-flex;
-      opacity: 1;
-    }
-  }
-
-  @media (--md-up) {
-    right: auto;
-    left: calc((2rem + var(--spacing-x-loose)) * -1);
-  }
-}
-
-.toolbar-items {
-  @mixin transition;
-
-  display: none;
-  margin-left: var(--spacing-base);
-  opacity: 0;
-  transition-property: opacity, transform;
-
-  & > * + * {
-    margin-left: var(--spacing-base);
-    cursor: pointer;
-  }
-
-  & button {
-    background: transparent;
-  }
-
-  & svg {
-    cursor: pointer;
-    background: var(--color-white);
-    border-radius: 50%;
-    stroke: var(--color-black);
-  }
-
-  @media (--md-up) {
-    margin-left: var(--spacing-x-loose);
-  }
-}
-
-.toolbar-expanded {
-  & .toolbar-toggle-button {
-    transform: rotate(45deg);
-  }
-}
-
-.toolbar-toggle-button {
-  @mixin transition;
-
-  background: transparent;
-  stroke: var(--color-black);
-  transition-property: opacity, transform;
-}
-
-.toolbar-upload-container {
-  display: inline-flex;
-  vertical-align: middle;
-
-  & input {
-    position: absolute;
-    left: -99999px;
-    font-size: 0;
-  }
-}
-
-#editor-comment-container,
-.quill {
-  height: 100%;
-}
-
-.mention-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: var(--z-index-under-global-header);
-  width: var(--sizing-menu);
-  max-height: calc(4rem * 3);
-  overflow-y: auto;
-  color: var(--color-black);
-  background: var(--color-white);
-  border: 1px solid var(--color-grey-light);
-  border-radius: var(--spacing-x-tight);
-  box-shadow: var(--shadow-dark);
 }

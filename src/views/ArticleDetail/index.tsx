@@ -1,4 +1,5 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import { md2html } from '@matters/matters-editor'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
@@ -221,8 +222,13 @@ const BaseArticleDetail = ({
   const title = translated && translatedTitle ? translatedTitle : article.title
   const summary =
     translated && translatedSummary ? translatedSummary : article.summary
+  const isEnableMd = !!getQuery('md')
+  const originalContent =
+    isEnableMd && article.contents.markdown
+      ? md2html(article.contents.markdown)
+      : article.contents.html
   const content =
-    translated && translatedContent ? translatedContent : article.content
+    translated && translatedContent ? translatedContent : originalContent
   const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
 
   return (

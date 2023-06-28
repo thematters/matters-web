@@ -19,7 +19,6 @@ import {
 } from '~/components'
 
 import AggregateResults from './AggregateResults'
-// import EmptySearch from './EmptySearch'
 import styles from './styles.module.css'
 
 const Search = () => {
@@ -77,6 +76,7 @@ const Search = () => {
       </Media>
 
       <Head title={{ id: 'search' }} />
+
       {isHistory && (
         <Media lessThan="xl">
           <SearchHistory
