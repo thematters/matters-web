@@ -119,6 +119,10 @@
     "defaultMessage": "我的草稿",
     "description": ""
   },
+  "C8GQaD": {
+    "defaultMessage": "{date}更新",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
+  },
   "CD688y": {
     "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
@@ -178,6 +182,10 @@
   "gN4jLB": {
     "defaultMessage": "你的修订作品 {articleTitle} 已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
+  },
+  "gSPnTx": {
+    "defaultMessage": "（不会删除选集内文章）",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "50cquj": {
     "defaultMessage": "还没有众聊",
@@ -335,6 +343,10 @@
     "defaultMessage": "个人简介",
     "description": ""
   },
+  "DyuHBH": {
+    "defaultMessage": "取消代表作",
+    "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
+  },
   "E8W3qa": {
     "defaultMessage": "2-20 个字符",
     "description": ""
@@ -378,6 +390,10 @@
   "FmWYRt": {
     "defaultMessage": "免费资格时长",
     "description": ""
+  },
+  "Ft76YC": {
+    "defaultMessage": "选集已刪除",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "GRtGnZ": {
     "defaultMessage": "辞去权限",
@@ -1007,6 +1023,10 @@
     "defaultMessage": "找你想看的",
     "description": ""
   },
+  "lCNyOp": {
+    "defaultMessage": "确认要删除该选集“{collection}”吗？",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  },
   "lD4FPZ": {
     "defaultMessage": "请输入邮箱",
     "description": ""
@@ -1078,6 +1098,10 @@
   "o2Na0B": {
     "defaultMessage": "返回全部",
     "description": ""
+  },
+  "oHQmBt": {
+    "defaultMessage": "{articleCount} 篇文章",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "oIkacT": {
     "defaultMessage": "作品已隐藏",
@@ -1258,6 +1282,10 @@
   "xGh9O7": {
     "defaultMessage": "提醒：信箱将不作为登入使用，仅作为联系渠道",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "xOUZu2": {
+    "defaultMessage": "设为代表作",
+    "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
   "xWZr13": {
     "defaultMessage": "{follower, plural, =1 {人} other {人}}",

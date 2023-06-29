@@ -239,6 +239,10 @@
     "defaultMessage": "followers_empty",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "C8GQaD": {
+    "defaultMessage": "upadted {date}",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
+  },
   "CBDDR5": {
     "defaultMessage": "Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.",
     "description": ""
@@ -291,6 +295,10 @@
     "defaultMessage": "Pin to profile",
     "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
+  "DyuHBH": {
+    "defaultMessage": "Unpin from profile",
+    "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
+  },
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.",
     "description": ""
@@ -338,6 +346,10 @@
   "FmWYRt": {
     "defaultMessage": "Free trial period",
     "description": ""
+  },
+  "Ft76YC": {
+    "defaultMessage": "Collection is deleted",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "GRtGnZ": {
     "defaultMessage": "Resign From Maintainer",
@@ -807,6 +819,10 @@
     "defaultMessage": "Your work {articleTitle} has been republished to decentralized network",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
+  "gSPnTx": {
+    "defaultMessage": "(Articles in this collection will not be deleted)",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  },
   "h9CG9E": {
     "defaultMessage": "{commentType} has been deleted",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -882,6 +898,10 @@
   "kc79d3": {
     "defaultMessage": "Topics",
     "description": ""
+  },
+  "lCNyOp": {
+    "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "lD4FPZ": {
     "defaultMessage": "Enter Email",
@@ -962,6 +982,10 @@
   "o2Na0B": {
     "defaultMessage": "Back to All",
     "description": ""
+  },
+  "oHQmBt": {
+    "defaultMessage": "{articleCount} articles",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "oIkacT": {
     "defaultMessage": "Article is hidden",
@@ -1130,6 +1154,10 @@
   "xGh9O7": {
     "defaultMessage": "As a reminder, the email address will not be used as a login but only as a contact channel.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "xOUZu2": {
+    "defaultMessage": "Pin to profile",
+    "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
   "xWZr13": {
     "defaultMessage": "{follower, plural, =1 {follower} other {followers}}",
