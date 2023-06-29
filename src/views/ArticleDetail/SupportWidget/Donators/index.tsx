@@ -17,7 +17,9 @@ import { DonatorsArticleFragment } from '~/gql/graphql'
 import { fragments } from './gql'
 import styles from './styles.module.css'
 
-type AvatarItemPros = Pick<AvatarProps, 'user'>
+type AvatarItemPros = Pick<AvatarProps, 'user'> & {
+  user: { displayName?: string | null }
+}
 
 const AvatarItem = ({ user }: AvatarItemPros) => {
   return (
@@ -25,6 +27,7 @@ const AvatarItem = ({ user }: AvatarItemPros) => {
       user={user || undefined}
       src={user ? undefined : IMAGE_PIXEL}
       size="lg"
+      title={user?.displayName || ''}
     />
   )
 }
