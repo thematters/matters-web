@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath } from '~/common/utils'
 import { Book, Card, DateTime, IconDotDivider, Media } from '~/components'
-import { CollectionDigestFeedCollectionPublicFragment } from '~/gql/graphql'
+import { CollectionDigestFeedCollectionFragment } from '~/gql/graphql'
 
 import DropdownActions from '../DropdownActions'
 import { fragments } from './gql'
@@ -15,7 +15,7 @@ export type CollectionDigestFeedControls = {
 }
 
 export type CollectionDigestFeedProps = {
-  collection: CollectionDigestFeedCollectionPublicFragment
+  collection: CollectionDigestFeedCollectionFragment
 } & CollectionDigestFeedControls
 
 const BaseCollectionDigestFeed = ({
@@ -23,11 +23,11 @@ const BaseCollectionDigestFeed = ({
   onClick,
 }: CollectionDigestFeedProps) => {
   const { title, description, cover, author, updatedAt, articles } = collection
-  const cleanedDescription = stripHtml(description)
+  const cleanedDescription = stripHtml(description || '')
 
   const path = toPath({
     page: 'collectionDetail',
-    userName: author.userName,
+    userName: author.userName!,
     collection,
   })
   const articleCount = articles.totalCount

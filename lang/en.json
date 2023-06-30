@@ -103,6 +103,10 @@
     "defaultMessage": "{q}: {totalCount, plural, =0 {} one {} other {# Results}} - Matters Search",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
+  "ulh3kf": {
+    "defaultMessage": "Collections",
+    "description": ""
+  },
   "HzaRKA": {
     "defaultMessage": "Migrate to Matters",
     "description": ""
@@ -1042,14 +1046,6 @@
   "ANA7sk": {
     "defaultMessage": "Maintain",
     "description": "src/views/TagDetail/Owner/index.tsx"
-  },
-  "4HVCON": {
-    "defaultMessage": "Article pinned",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
-  },
-  "Ef4heu": {
-    "defaultMessage": "Unpin from profile",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "ZVoJan": {
     "defaultMessage": "Edit",

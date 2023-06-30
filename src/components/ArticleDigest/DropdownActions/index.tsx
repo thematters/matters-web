@@ -28,11 +28,11 @@ import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
 import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
+import PinButton from './PinButton'
 import RemoveTagButton from './RemoveTagButton'
 import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
 import ShareButton from './ShareButton'
-import StickyButton from './StickyButton'
 import styles from './styles.module.css'
 
 export interface DropdownActionsControls {
@@ -154,7 +154,7 @@ const BaseDropdownActions = ({
       {hasPublic && hasPrivate && <Menu.Divider />}
       {hasEdit && <EditButton article={article} />}
 
-      {hasSticky && <StickyButton article={article} />}
+      {hasSticky && <PinButton article={article} />}
 
       {hasBookmark && (
         <BookmarkButton article={article} inCard={inCard} size="mdS" />

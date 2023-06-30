@@ -183,10 +183,6 @@
     "defaultMessage": "取消",
     "description": ""
   },
-  "DedJGE": {
-    "defaultMessage": "設為代表作",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
-  },
   "4giHJT": {
     "defaultMessage": "在行動裝置上使用問題，參考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -643,6 +639,10 @@
     "defaultMessage": "還沒有任何用戶回覆你的邀請喔！",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
+  "S8PcQf": {
+    "defaultMessage": "取消代表作",
+    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
   "SENRqu": {
     "defaultMessage": "说明",
     "description": ""
@@ -662,10 +662,6 @@
   "Szd1tH": {
     "defaultMessage": "登出失敗，請重試",
     "description": ""
-  },
-  "Ef4heu": {
-    "defaultMessage": "取消代表作",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "TSDiqB": {
     "defaultMessage": "付費人數",
@@ -1155,6 +1151,10 @@
     "defaultMessage": "退訂了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
+  "qgPR68": {
+    "defaultMessage": "設為代表作",
+    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
   "qlki7w": {
     "defaultMessage": "移除作品",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
@@ -1246,6 +1246,10 @@
   "uclzDH": {
     "defaultMessage": "{q}: {totalCount, plural, =0 {} other {# 條結果}} - Matters 搜尋",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
+  },
+  "ulh3kf": {
+    "defaultMessage": "選集",
+    "description": ""
   },
   "cAP9g5": {
     "defaultMessage": "將你的評論在 {commentArticle} 中置頂",

@@ -24,6 +24,8 @@ type ROUTE_KEY =
   | 'USER_SUBSCRIPTIONS'
   | 'USER_COMMENTS'
   | 'USER_TAGS'
+  | 'USER_COLLECTIONS'
+  | 'USER_COLLECTION_DETAIL'
   // Circle
   | 'CIRCLE_DETAIL'
   | 'CIRCLE_DISCUSSION'
@@ -95,6 +97,11 @@ export const ROUTES: {
   { key: 'USER_SUBSCRIPTIONS', pathname: '/[name]/subscriptions' },
   { key: 'USER_COMMENTS', pathname: '/[name]/comments' },
   { key: 'USER_TAGS', pathname: '/[name]/tags' },
+  { key: 'USER_COLLECTIONS', pathname: '/[name]/collections' },
+  {
+    key: 'USER_COLLECTION_DETAIL',
+    pathname: '/[name]/collections/[collectionId]',
+  },
 
   // Article
   { key: 'ARTICLE_DETAIL', pathname: '/[name]/[mediaHash]' },

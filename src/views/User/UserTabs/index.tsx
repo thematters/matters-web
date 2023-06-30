@@ -12,10 +12,21 @@ const UserTabs = () => {
     userName,
   })
 
+  const userCollectionsPath = toPath({
+    page: 'userCollections',
+    userName,
+  })
+
   return (
     <Tabs sticky>
       <Tabs.Tab {...userArticlesPath} selected={isInPath('USER_ARTICLES')}>
         <FormattedMessage defaultMessage="Articles" description="" />
+      </Tabs.Tab>
+      <Tabs.Tab
+        {...userCollectionsPath}
+        selected={isInPath('USER_COLLECTIONS')}
+      >
+        <FormattedMessage defaultMessage="Collections" description="" />
       </Tabs.Tab>
     </Tabs>
   )

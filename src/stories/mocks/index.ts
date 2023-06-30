@@ -99,7 +99,7 @@ export const MOCK_ARTILCE = {
     totalCount: 0,
   },
   iscnId: '',
-  sticky: false,
+  pinned: false,
   readTime: 1234.5,
   tags: [],
   likesReceivedTotal: 1,
@@ -185,6 +185,7 @@ export const MOCK_COLLECTION = {
   title: '香港',
   author: MOCK_USER,
   updatedAt: '2020-12-24T07:29:17.682Z',
+  pinned: false,
   cover: 'https://source.unsplash.com/256x256?collection',
   description:
     'Nostrud eu est proident sit fugiat aliqua pariatur tempor proident sint. Lorem deserunt labore incididunt quis voluptate sint sit aute proident adipisicing. Labore nostrud cupidatat deserunt. Culpa anim laboris deserunt proident.',

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-// import FooterActions from './FooterActions'
+import DropdownActions from '../DropdownActions'
 
 export const fragments = {
   collection: gql`
@@ -18,6 +18,8 @@ export const fragments = {
       articles(input: { first: 0 }) {
         totalCount
       }
+      ...DropdownActionsCollection
     }
+    ${DropdownActions.fragments.collection}
   `,
 }

@@ -171,10 +171,6 @@
     "defaultMessage": "取消",
     "description": ""
   },
-  "DedJGE": {
-    "defaultMessage": "设为代表作",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
-  },
   "4giHJT": {
     "defaultMessage": "在行动装置上使用问题，参考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -623,6 +619,10 @@
     "defaultMessage": "还没有任何用户回覆你的邀请喔！",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
+  "S8PcQf": {
+    "defaultMessage": "取消代表作",
+    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
   "SENRqu": {
     "defaultMessage": "說明",
     "description": ""
@@ -642,10 +642,6 @@
   "Szd1tH": {
     "defaultMessage": "登出失败，再来一次",
     "description": ""
-  },
-  "Ef4heu": {
-    "defaultMessage": "取消代表作",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "TSDiqB": {
     "defaultMessage": "付费人数",
@@ -1151,6 +1147,10 @@
     "defaultMessage": "退订了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
+  "qgPR68": {
+    "defaultMessage": "设为代表作",
+    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
   "qlki7w": {
     "defaultMessage": "移除作品",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
@@ -1242,6 +1242,10 @@
   "uclzDH": {
     "defaultMessage": "{q}: {totalCount, plural, =0 {} other {# 条结果}} - Matters 搜索",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
+  },
+  "ulh3kf": {
+    "defaultMessage": "选集",
+    "description": ""
   },
   "cAP9g5": {
     "defaultMessage": "将你的评论在 {commentArticle} 中置顶",

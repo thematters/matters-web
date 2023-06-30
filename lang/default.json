@@ -291,10 +291,6 @@
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
   },
-  "DedJGE": {
-    "defaultMessage": "Pin to profile",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
-  },
   "DyuHBH": {
     "defaultMessage": "Unpin from profile",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
@@ -314,10 +310,6 @@
   "EZMrtJ": {
     "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
-  "Ef4heu": {
-    "defaultMessage": "Unpin from profile",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "EfJYPI": {
     "defaultMessage": "Verification Code",
@@ -546,6 +538,10 @@
   "RxiHr/": {
     "defaultMessage": "friends have not accepted your invitations.",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
+  },
+  "S8PcQf": {
+    "defaultMessage": "Unpin from profile",
+    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
   "SENRqu": {
     "defaultMessage": "Help",
@@ -1027,6 +1023,10 @@
     "defaultMessage": "unsubscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
+  "qgPR68": {
+    "defaultMessage": "Pin to profile",
+    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
   "qlki7w": {
     "defaultMessage": "Remove Article",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
@@ -1110,6 +1110,10 @@
   "uclzDH": {
     "defaultMessage": "{q}: {totalCount, plural, =0 {} one {} other {# Results}} - Matters Search",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
+  },
+  "ulh3kf": {
+    "defaultMessage": "Collections",
+    "description": ""
   },
   "uw32VR": {
     "defaultMessage": "tutorial",

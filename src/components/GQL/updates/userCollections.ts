@@ -1,6 +1,6 @@
 import { DataProxy } from 'apollo-cache'
 
-// import { CollectionArticlesPublicQuery } from '~/gql/graphql'
+import { UserCollectionsQuery } from '~/gql/graphql'
 
 const update = ({
   cache,
@@ -14,23 +14,23 @@ const update = ({
   type: 'delete'
 }) => {
   // FIXME: circular dependencies
-  // const { COLLECTION_ARTICLES_PUBLIC } = require('~/views/Collection/Articles/gql')
+  const { USER_COLLECTIONS } = require('~/views/User/Collections/gql')
 
   if (!userName) {
     return
   }
 
   try {
-    // const data = cache.readQuery<CollectionArticlesPublicQuery>({
-    //   query: COLLECTION_ARTICLES_PUBLIC,
-    //   variables: { userName },
-    // })
+    const data = cache.readQuery<UserCollectionsQuery>({
+      query: USER_COLLECTIONS,
+      variables: { userName },
+    })
 
-    if (!data.collection.articles.edges) {
+    if (!data?.user?.collections.edges) {
       return
     }
 
-    let edges = data.collection.articles.edges
+    let edges = data.user.collections.edges
 
     switch (type) {
       case 'delete':
@@ -39,13 +39,14 @@ const update = ({
     }
 
     cache.writeQuery({
-      query: COLLECTION_ARTICLES_PUBLIC,
+      query: USER_COLLECTIONS,
       variables: { userName },
       data: {
-        collection: {
-          ...data.collection,
-          articles: {
-            ...data.collection.articles,
+        ...data,
+        user: {
+          ...data.user,
+          collections: {
+            ...data.user.collections,
             edges,
           },
         },

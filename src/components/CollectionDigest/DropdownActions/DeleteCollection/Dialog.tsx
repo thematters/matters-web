@@ -73,7 +73,7 @@ const DeleteCollectionDialog = ({
               description="src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
               values={{
                 collection: (
-                  <TextIcon color="green">{collection.name}</TextIcon>
+                  <TextIcon color="green">{collection.title}</TextIcon>
                 ),
               }}
             />

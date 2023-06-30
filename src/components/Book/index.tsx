@@ -9,7 +9,7 @@ import styles from './styles.module.css'
 
 type BookProps = {
   title: string
-  cover?: string
+  cover?: string | null
   articleCount?: number
 }
 
