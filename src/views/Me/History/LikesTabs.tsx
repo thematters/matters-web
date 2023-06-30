@@ -28,15 +28,15 @@ const LikesTabs: React.FC<LikesTabsProps> & {
 
       <Tabs sticky>
         <Tabs.Tab
-          href={PATHS.ME_LIKES_SENT}
-          selected={isInPath('ME_LIKES_SENT')}
+          href={PATHS.ME_HISTORY_LIKES_SENT}
+          selected={isInPath('ME_HISTORY_LIKES_SENT')}
         >
           <Translate id="likesSent" />
         </Tabs.Tab>
 
         <Tabs.Tab
-          href={PATHS.ME_LIKES_RECEIVED}
-          selected={isInPath('ME_LIKES_RECEIVED')}
+          href={PATHS.ME_HISTORY_LIKES_RECEIVED}
+          selected={isInPath('ME_HISTORY_LIKES_RECEIVED')}
         >
           <Translate id="likesReceived" />
         </Tabs.Tab>

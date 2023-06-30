@@ -199,6 +199,10 @@
     "defaultMessage": "As a reminder, the email address will not be used as a login but only as a contact channel.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "xMaFCO": {
+    "defaultMessage": "Articles",
+    "description": "src/views/Me/History/HistoryTabs.tsx"
+  },
   "N3K1H9": {
     "defaultMessage": "Matters will never ask for your wallet mnemonic through any channel.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -354,6 +358,10 @@
   "U/Tqmx": {
     "defaultMessage": " commented on your bookmarked article ",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
+  },
+  "U86B6w": {
+    "defaultMessage": "Stats",
+    "description": ""
   },
   "JaLEXz": {
     "defaultMessage": "Enter Circle",
@@ -659,6 +667,10 @@
     "defaultMessage": "Drafts",
     "description": ""
   },
+  "2slIPX": {
+    "defaultMessage": "Likes",
+    "description": ""
+  },
   "3yk8fB": {
     "defaultMessage": "Wallet",
     "description": ""
@@ -671,10 +683,6 @@
     "defaultMessage": "Bookmarks",
     "description": ""
   },
-  "2slIPX": {
-    "defaultMessage": "Likes",
-    "description": ""
-  },
   "MkwOFW": {
     "defaultMessage": "Read History",
     "description": ""
@@ -685,10 +693,6 @@
   },
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again.",
-    "description": ""
-  },
-  "HtSDyc": {
-    "defaultMessage": "Help Center",
     "description": ""
   },
   "D3idYv": {
@@ -819,6 +823,10 @@
     "defaultMessage": "collaborators",
     "description": ""
   },
+  "djJp6c": {
+    "defaultMessage": "History",
+    "description": ""
+  },
   "TzhzIH": {
     "defaultMessage": "Creators",
     "description": ""
@@ -886,6 +894,10 @@
   "aUPhEs": {
     "defaultMessage": "Add Articles into Trending",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "wCgTu5": {
+    "defaultMessage": "Comments",
+    "description": ""
   },
   "wEQDC6": {
     "defaultMessage": "Edit",

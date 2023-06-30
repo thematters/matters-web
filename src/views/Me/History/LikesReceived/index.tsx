@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -11,17 +12,19 @@ import {
   List,
   Spinner,
 } from '~/components'
-import { MeLikesSentQuery } from '~/gql/graphql'
+import { MeLikesReceivedQuery } from '~/gql/graphql'
 
 import LikesTabs from '../LikesTabs'
 
-const ME_LIKES_SENT = gql`
-  query MeLikesSent($after: String) {
+const ME_APPRECIATED_RECEIVED = gql`
+  query MeLikesReceived($after: String) {
     viewer {
       id
       activity {
         ...LikesTabsUserActivity
-        likesSent: appreciationsSent(input: { first: 20, after: $after }) {
+        likesReceived: appreciationsReceived(
+          input: { first: 20, after: $after }
+        ) {
           pageInfo {
             startCursor
             endCursor
@@ -41,8 +44,10 @@ const ME_LIKES_SENT = gql`
   ${LikesTabs.fragments.userActivity}
 `
 
-const BaseLikesSent = () => {
-  const { data, loading, fetchMore } = useQuery<MeLikesSentQuery>(ME_LIKES_SENT)
+const BaseLikesReceived = () => {
+  const { data, loading, fetchMore } = useQuery<MeLikesReceivedQuery>(
+    ME_APPRECIATED_RECEIVED
+  )
 
   if (loading) {
     return <Spinner />
@@ -52,8 +57,8 @@ const BaseLikesSent = () => {
     return null
   }
 
-  const connectionPath = 'viewer.activity.likesSent'
-  const { edges, pageInfo } = data.viewer.activity.likesSent
+  const connectionPath = 'viewer.activity.likesReceived'
+  const { edges, pageInfo } = data.viewer.activity.likesReceived
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
@@ -66,7 +71,7 @@ const BaseLikesSent = () => {
 
   const loadMore = () => {
     analytics.trackEvent('load_more', {
-      type: 'appreciations_sent',
+      type: 'appreciations_received',
       location: edges.length,
     })
     return fetchMore({
@@ -88,7 +93,7 @@ const BaseLikesSent = () => {
         <List responsiveWrapper>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
-              <Appreciation appreciation={node} type="sent" />
+              <Appreciation appreciation={node} type="received" />
             </List.Item>
           ))}
         </List>
@@ -97,14 +102,24 @@ const BaseLikesSent = () => {
   )
 }
 
-const LikesSent = () => (
-  <Layout.Main>
-    <Layout.Header left={<Layout.Header.Title id="likesSent" />} />
+const LikesReceived = () => {
+  const intl = useIntl()
+  const title = intl.formatMessage({
+    defaultMessage: 'History',
+    description: '',
+  })
 
-    <Head title={{ id: 'likesSent' }} />
+  return (
+    <Layout.Main>
+      <Layout.Header
+        left={<Layout.Header.Title>{title}</Layout.Header.Title>}
+      />
 
-    <BaseLikesSent />
-  </Layout.Main>
-)
+      <Head title={title} />
 
-export default LikesSent
+      <BaseLikesReceived />
+    </Layout.Main>
+  )
+}
+
+export default LikesReceived

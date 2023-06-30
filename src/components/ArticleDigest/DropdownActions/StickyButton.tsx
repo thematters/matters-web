@@ -10,7 +10,7 @@ import {
 
 const TOGGLE_STICKY = gql`
   mutation ToggleSticky($id: ID!, $sticky: Boolean!) {
-    editArticle(input: { id: $id, sticky: $sticky }) {
+    editArticle(input: { id: $id, pinned: $sticky }) {
       id
       sticky
     }

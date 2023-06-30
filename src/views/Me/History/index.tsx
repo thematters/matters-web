@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -18,6 +19,8 @@ import {
   useMutation,
 } from '~/components'
 import { ClearReadHistoryMutation, MeHistoryFeedQuery } from '~/gql/graphql'
+
+import HistoryTabs from './HistoryTabs'
 
 const ME_HISTORY_FEED = gql`
   query MeHistoryFeed($after: String) {
@@ -76,7 +79,6 @@ const BaseMeHistory = () => {
   if (loading) {
     return (
       <>
-        <Layout.Header left={<Layout.Header.Title id="readHistory" />} />
         <Spinner />
       </>
     )
@@ -85,7 +87,6 @@ const BaseMeHistory = () => {
   if (error) {
     return (
       <>
-        <Layout.Header left={<Layout.Header.Title id="readHistory" />} />
         <QueryError error={error} />
       </>
     )
@@ -97,7 +98,6 @@ const BaseMeHistory = () => {
   if (!edges || edges.length <= 0 || !pageInfo || emptyHistory) {
     return (
       <>
-        <Layout.Header left={<Layout.Header.Title id="readHistory" />} />
         <EmptyHistory />
       </>
     )
@@ -121,22 +121,16 @@ const BaseMeHistory = () => {
 
   return (
     <>
-      <Layout.Header
-        right={
-          <>
-            <Layout.Header.Title id="readHistory" />
-            <Button
-              bgColor="green"
-              spacing={['xtight', 'base']}
-              onClick={handlerClear}
-            >
-              <TextIcon color="white" size="mdS" weight="md">
-                <Translate id="clear" />
-              </TextIcon>
-            </Button>
-          </>
-        }
-      />
+      <Button
+        bgColor="green"
+        spacing={['xtight', 'base']}
+        onClick={handlerClear}
+      >
+        <TextIcon color="white" size="mdS" weight="md">
+          <Translate id="clear" />
+        </TextIcon>
+      </Button>
+
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List responsiveWrapper>
           {edges.map(({ node, cursor }, i) => (
@@ -169,12 +163,26 @@ const BaseMeHistory = () => {
   )
 }
 
-const MeHistory = () => (
-  <Layout.Main>
-    <Head title={{ id: 'readHistory' }} />
+const MeHistory = () => {
+  const intl = useIntl()
+  const title = intl.formatMessage({
+    defaultMessage: 'History',
+    description: '',
+  })
 
-    <BaseMeHistory />
-  </Layout.Main>
-)
+  return (
+    <Layout.Main>
+      <Layout.Header
+        left={<Layout.Header.Title>{title}</Layout.Header.Title>}
+      />
+
+      <Head title={title} />
+
+      <HistoryTabs />
+
+      <BaseMeHistory />
+    </Layout.Main>
+  )
+}
 
 export default MeHistory

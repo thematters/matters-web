@@ -1,8 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
 import _flatten from 'lodash/flatten'
 import { useContext, useEffect } from 'react'
 
-import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
 import {
   analytics,
   filterComments,
@@ -14,20 +12,16 @@ import {
   Card,
   Comment,
   EmptyComment,
-  Head,
   InfiniteScroll,
   List,
   QueryError,
-  ResponsiveWrapper,
   Spinner,
   usePublicQuery,
-  useRoute,
   ViewerContext,
 } from '~/components'
-import { UserCommentsPublicQuery, UserIdUserQuery } from '~/gql/graphql'
+import { UserCommentsPublicQuery } from '~/gql/graphql'
 
-import UserTabs from '../UserTabs'
-import { USER_COMMENTS_PRIVATE, USER_COMMENTS_PUBLIC, USER_ID } from './gql'
+import { USER_COMMENTS_PRIVATE, USER_COMMENTS_PUBLIC } from './gql'
 
 type CommentedArticleComment = NonNullable<
   NonNullable<
@@ -45,62 +39,6 @@ type CommentArticle = NonNullable<
 >[0]['node'] & { __typename: 'Article' }
 
 const UserComments = () => {
-  const { getQuery } = useRoute()
-  const userName = getQuery('name')
-
-  const { data, loading, error } = useQuery<UserIdUserQuery>(USER_ID, {
-    variables: { userName },
-  })
-  const user = data?.user
-
-  if (loading) {
-    return (
-      <>
-        <UserTabs />
-        <Spinner />
-      </>
-    )
-  }
-
-  if (error) {
-    return (
-      <>
-        <UserTabs />
-        <QueryError error={error} />
-      </>
-    )
-  }
-
-  if (!user || user?.status?.state === 'archived') {
-    return (
-      <>
-        <UserTabs />
-        <EmptyComment />
-      </>
-    )
-  }
-
-  return (
-    <>
-      <Head
-        title={{
-          zh_hant: `${user.displayName} 發布的評論`,
-          zh_hans: `${user.displayName} 发布的评论`,
-          en: `${user.displayName}'s comments`,
-        }}
-        // keywords={...} // show user's top10 most used tags?
-        description={user.info.description}
-        image={user.info.profileCover || IMAGE_LOGO_192.src}
-      />
-      <UserTabs />
-      <ResponsiveWrapper>
-        <BaseUserComments user={user} />
-      </ResponsiveWrapper>
-    </>
-  )
-}
-
-const BaseUserComments = ({ user }: UserIdUserQuery) => {
   const viewer = useContext(ViewerContext)
 
   /**
@@ -109,7 +47,7 @@ const BaseUserComments = ({ user }: UserIdUserQuery) => {
   // public data
   const { data, loading, error, fetchMore, client } =
     usePublicQuery<UserCommentsPublicQuery>(USER_COMMENTS_PUBLIC, {
-      variables: { id: user?.id },
+      variables: { id: viewer?.id },
     })
 
   // pagination
@@ -122,7 +60,7 @@ const BaseUserComments = ({ user }: UserIdUserQuery) => {
 
   // private data
   const loadPrivate = (publicData?: UserCommentsPublicQuery) => {
-    if (!viewer.isAuthed || !publicData || !user) {
+    if (!viewer.isAuthed || !publicData) {
       return
     }
 
@@ -147,7 +85,7 @@ const BaseUserComments = ({ user }: UserIdUserQuery) => {
   // fetch private data for first page
   useEffect(() => {
     loadPrivate(data)
-  }, [user?.id, viewer.id])
+  }, [viewer.id])
 
   // load next page
   const loadMore = async () => {

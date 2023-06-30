@@ -119,13 +119,13 @@
     "defaultMessage": "我的草稿",
     "description": ""
   },
+  "2slIPX": {
+    "defaultMessage": "讚賞",
+    "description": ""
+  },
   "CD688y": {
     "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
-  },
-  "2slIPX": {
-    "defaultMessage": "我的讚賞",
-    "description": ""
   },
   "2uRduT": {
     "defaultMessage": " 的評論",
@@ -435,10 +435,6 @@
     "defaultMessage": "相關標籤",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
-  "HtSDyc": {
-    "defaultMessage": "幫助中心",
-    "description": ""
-  },
   "HxcjQl": {
     "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -667,6 +663,10 @@
     "defaultMessage": "評論了你收藏的作品 ",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
+  "U86B6w": {
+    "defaultMessage": "數據",
+    "description": ""
+  },
   "U9IXic": {
     "defaultMessage": "添加作品",
     "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
@@ -869,6 +869,10 @@
   },
   "dg3JCQ": {
     "defaultMessage": "協作者",
+    "description": ""
+  },
+  "djJp6c": {
+    "defaultMessage": "我的足跡",
     "description": ""
   },
   "dnsfmR": {
@@ -1243,6 +1247,10 @@
     "defaultMessage": "我的圍爐",
     "description": ""
   },
+  "wCgTu5": {
+    "defaultMessage": "評論",
+    "description": ""
+  },
   "wEQDC6": {
     "defaultMessage": "編輯資料",
     "description": ""
@@ -1262,6 +1270,10 @@
   "xGh9O7": {
     "defaultMessage": "提醒：信箱將不作為登入使用，僅作為聯繫渠道",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "xMaFCO": {
+    "defaultMessage": "閱讀",
+    "description": "src/views/Me/History/HistoryTabs.tsx"
   },
   "xWZr13": {
     "defaultMessage": "{follower, plural, =1 {人} other {人}}",

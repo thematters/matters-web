@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -11,19 +12,18 @@ import {
   List,
   Spinner,
 } from '~/components'
-import { MeLikesReceivedQuery } from '~/gql/graphql'
+import { MeLikesSentQuery } from '~/gql/graphql'
 
+import HistoryTabs from '../HistoryTabs'
 import LikesTabs from '../LikesTabs'
 
-const ME_APPRECIATED_RECEIVED = gql`
-  query MeLikesReceived($after: String) {
+const ME_LIKES_SENT = gql`
+  query MeLikesSent($after: String) {
     viewer {
       id
       activity {
         ...LikesTabsUserActivity
-        likesReceived: appreciationsReceived(
-          input: { first: 20, after: $after }
-        ) {
+        likesSent: appreciationsSent(input: { first: 20, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -43,10 +43,8 @@ const ME_APPRECIATED_RECEIVED = gql`
   ${LikesTabs.fragments.userActivity}
 `
 
-const BaseLikesReceived = () => {
-  const { data, loading, fetchMore } = useQuery<MeLikesReceivedQuery>(
-    ME_APPRECIATED_RECEIVED
-  )
+const BaseLikesSent = () => {
+  const { data, loading, fetchMore } = useQuery<MeLikesSentQuery>(ME_LIKES_SENT)
 
   if (loading) {
     return <Spinner />
@@ -56,8 +54,8 @@ const BaseLikesReceived = () => {
     return null
   }
 
-  const connectionPath = 'viewer.activity.likesReceived'
-  const { edges, pageInfo } = data.viewer.activity.likesReceived
+  const connectionPath = 'viewer.activity.likesSent'
+  const { edges, pageInfo } = data.viewer.activity.likesSent
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
@@ -70,7 +68,7 @@ const BaseLikesReceived = () => {
 
   const loadMore = () => {
     analytics.trackEvent('load_more', {
-      type: 'appreciations_received',
+      type: 'appreciations_sent',
       location: edges.length,
     })
     return fetchMore({
@@ -92,7 +90,7 @@ const BaseLikesReceived = () => {
         <List responsiveWrapper>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
-              <Appreciation appreciation={node} type="received" />
+              <Appreciation appreciation={node} type="sent" />
             </List.Item>
           ))}
         </List>
@@ -101,14 +99,26 @@ const BaseLikesReceived = () => {
   )
 }
 
-const LikesReceived = () => (
-  <Layout.Main>
-    <Layout.Header left={<Layout.Header.Title id="likesReceived" />} />
+const LikesSent = () => {
+  const intl = useIntl()
+  const title = intl.formatMessage({
+    defaultMessage: 'History',
+    description: '',
+  })
 
-    <Head title={{ id: 'likesReceived' }} />
+  return (
+    <Layout.Main>
+      <Layout.Header
+        left={<Layout.Header.Title>{title}</Layout.Header.Title>}
+      />
 
-    <BaseLikesReceived />
-  </Layout.Main>
-)
+      <Head title={title} />
 
-export default LikesReceived
+      <HistoryTabs />
+
+      <BaseLikesSent />
+    </Layout.Main>
+  )
+}
+
+export default LikesSent

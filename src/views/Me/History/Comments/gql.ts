@@ -2,22 +2,6 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestTitle, Comment } from '~/components'
 
-export const USER_ID = gql`
-  query UserIdUser($userName: String!) {
-    user(input: { userName: $userName }) {
-      id
-      displayName
-      info {
-        description
-        profileCover
-      }
-      status {
-        state
-      }
-    }
-  }
-`
-
 export const USER_COMMENTS_PUBLIC = gql`
   query UserCommentsPublic($id: ID!, $after: String) {
     node(input: { id: $id }) {

@@ -119,13 +119,13 @@
     "defaultMessage": "我的草稿",
     "description": ""
   },
+  "2slIPX": {
+    "defaultMessage": "赞赏",
+    "description": ""
+  },
   "CD688y": {
     "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
-  },
-  "2slIPX": {
-    "defaultMessage": "我的赞赏",
-    "description": ""
   },
   "2uRduT": {
     "defaultMessage": " 的评论",
@@ -403,10 +403,6 @@
     "defaultMessage": "相关标签",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
-  "HtSDyc": {
-    "defaultMessage": "帮助中心",
-    "description": ""
-  },
   "HxcjQl": {
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -647,6 +643,10 @@
     "defaultMessage": "评论了你收藏的作品 ",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
+  "U86B6w": {
+    "defaultMessage": "数据",
+    "description": ""
+  },
   "U9IXic": {
     "defaultMessage": "添加作品",
     "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
@@ -865,6 +865,10 @@
   },
   "dg3JCQ": {
     "defaultMessage": "协作者",
+    "description": ""
+  },
+  "djJp6c": {
+    "defaultMessage": "我的足跡",
     "description": ""
   },
   "dnsfmR": {
@@ -1239,6 +1243,10 @@
     "defaultMessage": "我的围炉",
     "description": ""
   },
+  "wCgTu5": {
+    "defaultMessage": "评论",
+    "description": ""
+  },
   "wEQDC6": {
     "defaultMessage": "编辑资料",
     "description": ""
@@ -1258,6 +1266,10 @@
   "xGh9O7": {
     "defaultMessage": "提醒：信箱将不作为登入使用，仅作为联系渠道",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "xMaFCO": {
+    "defaultMessage": "阅读",
+    "description": "src/views/Me/History/HistoryTabs.tsx"
   },
   "xWZr13": {
     "defaultMessage": "{follower, plural, =1 {人} other {人}}",
