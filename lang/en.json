@@ -103,6 +103,10 @@
     "defaultMessage": "{q}: {totalCount, plural, =0 {} one {} other {# Results}} - Matters Search",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
+  "ulh3kf": {
+    "defaultMessage": "Collections",
+    "description": ""
+  },
   "HzaRKA": {
     "defaultMessage": "Migrate to Matters",
     "description": ""
@@ -198,6 +202,10 @@
   "xGh9O7": {
     "defaultMessage": "As a reminder, the email address will not be used as a login but only as a contact channel.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "xOUZu2": {
+    "defaultMessage": "Pin to profile",
+    "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
   "N3K1H9": {
     "defaultMessage": "Matters will never ask for your wallet mnemonic through any channel.",
@@ -491,6 +499,10 @@
     "defaultMessage": "mentioned you in {article}",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
   },
+  "C8GQaD": {
+    "defaultMessage": "Upadted {date}",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
+  },
   "CD688y": {
     "defaultMessage": "bookmarked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
@@ -506,6 +518,10 @@
   "gN4jLB": {
     "defaultMessage": "Your work {articleTitle} has been republished to decentralized network",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
+  },
+  "gSPnTx": {
+    "defaultMessage": "(Articles in this collection will not be deleted)",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "QV19cI": {
     "defaultMessage": "Failed to republish article",
@@ -775,6 +791,10 @@
     "defaultMessage": "Topics",
     "description": ""
   },
+  "lCNyOp": {
+    "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  },
   "Pp/0po": {
     "defaultMessage": "Shuffle",
     "description": ""
@@ -859,6 +879,10 @@
     "defaultMessage": "Back to All",
     "description": ""
   },
+  "oHQmBt": {
+    "defaultMessage": "{articleCount} Articles",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
+  },
   "KMcrz8": {
     "defaultMessage": "Maintain Tag",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -874,6 +898,10 @@
   "UjKkhq": {
     "defaultMessage": "Tags added",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "Ft76YC": {
+    "defaultMessage": "Collection is deleted",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "GRtGnZ": {
     "defaultMessage": "Resign From Maintainer",
@@ -942,6 +970,10 @@
   "2W0f9h": {
     "defaultMessage": "Bio",
     "description": ""
+  },
+  "DyuHBH": {
+    "defaultMessage": "Unpin from profile",
+    "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.",
@@ -1014,14 +1046,6 @@
   "ANA7sk": {
     "defaultMessage": "Maintain",
     "description": "src/views/TagDetail/Owner/index.tsx"
-  },
-  "4HVCON": {
-    "defaultMessage": "Article pinned",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
-  },
-  "Ef4heu": {
-    "defaultMessage": "Unpin from profile",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "ZVoJan": {
     "defaultMessage": "Edit",

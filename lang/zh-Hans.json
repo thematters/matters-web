@@ -119,6 +119,10 @@
     "defaultMessage": "我的草稿",
     "description": ""
   },
+  "C8GQaD": {
+    "defaultMessage": "{date}更新",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
+  },
   "CD688y": {
     "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
@@ -167,10 +171,6 @@
     "defaultMessage": "取消",
     "description": ""
   },
-  "DedJGE": {
-    "defaultMessage": "设为代表作",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
-  },
   "4giHJT": {
     "defaultMessage": "在行动装置上使用问题，参考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -178,6 +178,10 @@
   "gN4jLB": {
     "defaultMessage": "你的修订作品 {articleTitle} 已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
+  },
+  "gSPnTx": {
+    "defaultMessage": "（不会删除选集内文章）",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "50cquj": {
     "defaultMessage": "还没有众聊",
@@ -335,6 +339,10 @@
     "defaultMessage": "个人简介",
     "description": ""
   },
+  "DyuHBH": {
+    "defaultMessage": "取消代表作",
+    "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
+  },
   "E8W3qa": {
     "defaultMessage": "2-20 个字符",
     "description": ""
@@ -378,6 +386,10 @@
   "FmWYRt": {
     "defaultMessage": "免费资格时长",
     "description": ""
+  },
+  "Ft76YC": {
+    "defaultMessage": "选集已刪除",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "GRtGnZ": {
     "defaultMessage": "辞去权限",
@@ -607,6 +619,10 @@
     "defaultMessage": "还没有任何用户回覆你的邀请喔！",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
+  "S8PcQf": {
+    "defaultMessage": "取消代表作",
+    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
   "SENRqu": {
     "defaultMessage": "說明",
     "description": ""
@@ -626,10 +642,6 @@
   "Szd1tH": {
     "defaultMessage": "登出失败，再来一次",
     "description": ""
-  },
-  "Ef4heu": {
-    "defaultMessage": "取消代表作",
-    "description": "src/components/ArticleDigest/DropdownActions/StickyButton.tsx"
   },
   "TSDiqB": {
     "defaultMessage": "付费人数",
@@ -1007,6 +1019,10 @@
     "defaultMessage": "找你想看的",
     "description": ""
   },
+  "lCNyOp": {
+    "defaultMessage": "确认要删除该选集“{collection}”吗？",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  },
   "lD4FPZ": {
     "defaultMessage": "请输入邮箱",
     "description": ""
@@ -1079,6 +1095,10 @@
     "defaultMessage": "返回全部",
     "description": ""
   },
+  "oHQmBt": {
+    "defaultMessage": "{articleCount} 篇文章",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
+  },
   "oIkacT": {
     "defaultMessage": "作品已隐藏",
     "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
@@ -1126,6 +1146,10 @@
   "qYzBk8": {
     "defaultMessage": "退订了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "qgPR68": {
+    "defaultMessage": "设为代表作",
+    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
   "qlki7w": {
     "defaultMessage": "移除作品",
@@ -1219,6 +1243,10 @@
     "defaultMessage": "{q}: {totalCount, plural, =0 {} other {# 条结果}} - Matters 搜索",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
+  "ulh3kf": {
+    "defaultMessage": "选集",
+    "description": ""
+  },
   "cAP9g5": {
     "defaultMessage": "将你的评论在 {commentArticle} 中置顶",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
@@ -1258,6 +1286,10 @@
   "xGh9O7": {
     "defaultMessage": "提醒：信箱将不作为登入使用，仅作为联系渠道",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "xOUZu2": {
+    "defaultMessage": "设为代表作",
+    "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
   "xWZr13": {
     "defaultMessage": "{follower, plural, =1 {人} other {人}}",

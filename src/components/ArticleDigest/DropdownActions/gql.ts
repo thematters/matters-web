@@ -10,10 +10,10 @@ import { SupportersDialog } from '~/components/Dialogs/SupportersDialog'
 import ArchiveArticle from './ArchiveArticle'
 import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
+import PinButton from './PinButton'
 import RemoveTagButton from './RemoveTagButton'
 import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
-import StickyButton from './StickyButton'
 
 export const fragments = {
   article: gql`
@@ -23,7 +23,7 @@ export const fragments = {
       ...SupportsDialogArticle
       ...FingerprintArticle
       ...ArchiveArticleArticle
-      ...StickyButtonArticle
+      ...PinButtonArticle
       ...ExtendButtonArticle
       ...RemoveTagButtonArticle
       ...EditArticleButtonArticle
@@ -33,7 +33,7 @@ export const fragments = {
     ${AppreciatorsDialog.fragments.article}
     ${SupportersDialog.fragments.article}
     ${FingerprintDialog.fragments.article}
-    ${StickyButton.fragments.article}
+    ${PinButton.fragments.article}
     ${ArchiveArticle.fragments.article}
     ${ExtendButton.fragments.article}
     ${RemoveTagButton.fragments.article}
