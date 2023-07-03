@@ -29,7 +29,7 @@ type FeedEdges = NonNullable<
 >[0]['node']['recommended']['edges']
 
 const TagsSidebarHeader = () => (
-  <PageHeader title={<Translate id="hottest" />} is="h2" hasNoBorder />
+  <PageHeader title={<Translate id="hottest" />} is="h2" hasBorder={false} />
 )
 
 const TagsSidebar: React.FC<TagsSidebarProps> = ({ inSidebar }) => {

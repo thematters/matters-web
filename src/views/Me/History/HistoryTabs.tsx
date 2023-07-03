@@ -1,41 +1,34 @@
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { SegmentedTabs, Spacer, useRoute } from '~/components'
+import { Tabs, useRoute } from '~/components'
 
 const HistoryTabs: React.FC = () => {
   const { isInPath } = useRoute()
 
   return (
-    <>
-      <Spacer size="xtight" />
+    <Tabs>
+      <Tabs.Tab href={PATHS.ME_HISTORY} selected={isInPath('ME_HISTORY')}>
+        <FormattedMessage
+          defaultMessage="Articles"
+          description="src/views/Me/History/HistoryTabs.tsx"
+        />
+      </Tabs.Tab>
 
-      <SegmentedTabs sticky>
-        <SegmentedTabs.Tab
-          href={PATHS.ME_HISTORY}
-          selected={isInPath('ME_HISTORY')}
-        >
-          <FormattedMessage
-            defaultMessage="Articles"
-            description="src/views/Me/History/HistoryTabs.tsx"
-          />
-        </SegmentedTabs.Tab>
+      <Tabs.Tab
+        href={PATHS.ME_HISTORY_LIKES_SENT}
+        selected={isInPath('ME_HISTORY_LIKES_SENT')}
+      >
+        <FormattedMessage defaultMessage="Likes" description="" />
+      </Tabs.Tab>
 
-        <SegmentedTabs.Tab
-          href={PATHS.ME_HISTORY_LIKES_SENT}
-          selected={isInPath('ME_HISTORY_LIKES_SENT')}
-        >
-          <FormattedMessage defaultMessage="Likes" description="" />
-        </SegmentedTabs.Tab>
-
-        <SegmentedTabs.Tab
-          href={PATHS.ME_HISTORY_COMMENTS}
-          selected={isInPath('ME_HISTORY_COMMENTS')}
-        >
-          <FormattedMessage defaultMessage="Comments" description="" />
-        </SegmentedTabs.Tab>
-      </SegmentedTabs>
-    </>
+      <Tabs.Tab
+        href={PATHS.ME_HISTORY_COMMENTS}
+        selected={isInPath('ME_HISTORY_COMMENTS')}
+      >
+        <FormattedMessage defaultMessage="Comments" description="" />
+      </Tabs.Tab>
+    </Tabs>
   )
 }
 

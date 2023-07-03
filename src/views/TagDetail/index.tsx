@@ -139,7 +139,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             </section>
           </>
         }
-        mode="transparent-absolute"
+        mode="transparent"
       />
 
       <Head

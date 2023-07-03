@@ -147,6 +147,7 @@ const DraftDetail = () => {
       inEditor
     >
       <Layout.Header
+        mode="compact"
         right={
           <>
             <SaveStatus status={saveStatus} />

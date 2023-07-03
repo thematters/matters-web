@@ -142,7 +142,7 @@ const CircleProfile = () => {
           }}
         />
       )}
-      <Layout.Header right={<Right />} mode="transparent-absolute" />
+      <Layout.Header right={<Right />} mode="transparent" />
     </>
   )
 
