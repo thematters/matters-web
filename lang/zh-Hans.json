@@ -7,17 +7,9 @@
     "message": "成员",
     "description": ""
   },
-  "jy3tx0": {
-    "message": "在 {circlename} 发布广播",
-    "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
-  },
   "/+XWDi": {
     "message": "航行日志 2.0",
     "description": "src/components/UserProfile/DropdownActions/index.tsx"
-  },
-  "/3G89K": {
-    "message": " 又成长了",
-    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
   "/3kw6k": {
     "message": "尝试将内容写入 IPFS 网络中，需要一段时间，请耐心等候。若等候时间过久，可通过发布文章来加速。",
@@ -35,10 +27,6 @@
     "message": "下载应用",
     "description": ""
   },
-  "nNB7KU": {
-    "message": "在 ",
-    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  },
   "/podGX": {
     "message": "公开",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
@@ -46,6 +34,10 @@
   "0Azlrb": {
     "message": "管理",
     "description": ""
+  },
+  "0JLcHr": {
+    "message": "内容可能包含色情、暴力、血腥等限制级内容，部分用户可能不适合观看，或引起不适、心理负担，请谨慎判断是否阅读。",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "1EYCdR": {
     "message": "标签",
@@ -59,6 +51,10 @@
     "message": "免费邀请",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "1zVIWy": {
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx",
+    "message": "在 {commentArticle} 评论提到了你"
+  },
   "20bImY": {
     "message": "众聊",
     "description": ""
@@ -71,17 +67,9 @@
     "message": "我的草稿",
     "description": ""
   },
-  "CD688y": {
-    "message": "收藏了",
-    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
-  },
   "2slIPX": {
     "message": "我的赞赏",
     "description": ""
-  },
-  "2uRduT": {
-    "message": " 的评论",
-    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
   "2uwwz+": {
     "message": "累计阅读时長代表了你的作品被登入用户阅读的总时数，每次阅读过程超过一定时间后才会计入。此外，同一个用户的多次阅读也会进行累计。",
@@ -93,10 +81,6 @@
   },
   "3KNMbJ": {
     "message": "作品",
-    "description": ""
-  },
-  "3WKlPP": {
-    "message": "在围炉 ",
     "description": ""
   },
   "3kbIhS": {
@@ -127,10 +111,6 @@
     "message": "在行动装置上使用问题，参考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "gN4jLB": {
-    "message": "你的修订作品 {articleTitle} 已发布到分布式网络",
-    "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
-  },
   "50cquj": {
     "message": "还没有众聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
@@ -159,6 +139,10 @@
     "message": "目前总订阅人数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "6Vznnt": {
+    "message": "在你的围炉中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
   "6flWFg": {
     "message": "用户协议",
     "description": ""
@@ -179,9 +163,17 @@
     "message": "阅读次数",
     "description": ""
   },
+  "8PWD05": {
+    "message": "邀请你成为 {tag} 的协作者",
+    "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
+  },
   "8cv9D4": {
     "message": "下一步",
     "description": ""
+  },
+  "8w3GEA": {
+    "message": "在作品 {article} 中提及你",
+    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
   },
   "8xPi0N": {
     "message": "离开围炉",
@@ -243,13 +235,17 @@
     "message": "目前总追踪人数",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "BjzRe8": {
-    "message": "，快去查看自己的收入吧！",
-    "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
-  },
   "CBDDR5": {
     "message": "2-20 个字符，仅支持英文小写字母、数字或下划线",
     "description": ""
+  },
+  "CD688y": {
+    "message": "收藏了",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "CNbggD": {
+    "message": "成为了 {tag} 的主理人",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
   },
   "Cdkhl8": {
     "message": "刪除{commentType}",
@@ -275,6 +271,10 @@
     "message": "设定",
     "description": ""
   },
+  "DFieKt": {
+    "message": "辞去了 {tag} 的协作者",
+    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
+  },
   "DXJ8ys": {
     "message": "阅读次数代表了你的作品被登入用户阅读的总次数，每次阅读过程超过一定时间后才会计入。此外，同一个用户的多次阅读也会进行累计。",
     "description": "src/components/Dialogs/HelpDialog/index.tsx"
@@ -291,6 +291,10 @@
     "message": "催更、提问、分享、讨论…",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
+  "EZMrtJ": {
+    "message": "在 {circleName} 的广播中留言 ",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
   "EfJYPI": {
     "message": "验证码",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -298,10 +302,6 @@
   "EwVnoC": {
     "message": "我已阅读并同意",
     "description": ""
-  },
-  "EZMrtJ": {
-    "message": "在 {circleName} 的广播中留言 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "FOOymB": {
     "message": "还没有成员",
@@ -326,6 +326,10 @@
   "GRtGnZ": {
     "message": "辞去权限",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "GVes61": {
+    "message": "在 {circleName} 发布新作品",
+    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
   "GZJpDf": {
     "message": "数据后台",
@@ -367,6 +371,10 @@
     "message": "字",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
+  "ItUuuX": {
+    "message": "邀你加入围炉 {circleName} ，你可以免费体验 {freePeriod} 天",
+    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+  },
   "J+LXrH": {
     "message": "持续支持邮箱進入，未來可随时启用钱包登入",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
@@ -374,14 +382,6 @@
   "J+dIsA": {
     "message": "订阅",
     "description": ""
-  },
-  "tEeEJT": {
-    "message": "你的作品 {articleTitle} 已发布到分布式网络",
-    "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
-  },
-  "Jc+W6M": {
-    "message": " 辞去了标签主理人权限，你要不要试试看成为新的主理人？",
-    "description": "src/components/Notice/TagNotice/TagLeaveNotice.tsx"
   },
   "JpS59y": {
     "message": "已接受",
@@ -411,14 +411,6 @@
     "message": "认领",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "YlPCRU": {
-    "message": "关联了",
-    "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
-  },
-  "ItUuuX": {
-    "message": "邀你加入围炉 {circleName} ，你可以免费体验 {freePeriod} 天",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-  },
   "L0J61B": {
     "message": "免费",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -438,10 +430,6 @@
   "LOefol": {
     "message": "上锁",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
-  },
-  "LW1aX1": {
-    "message": "恭喜你！",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "Lc/azT": {
     "message": "IPNS 订阅",
@@ -483,10 +471,6 @@
     "message": "再次输入密码",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
   },
-  "O03Rkc": {
-    "message": " 辞去了权限。你可以邀请新的协作者加入了",
-    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
-  },
   "O0QB1v": {
     "message": "用户将收到你的围炉免费资格邀请函，设置免费的时限，邀请他们一起加入吧！",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -498,10 +482,6 @@
   "OKhRC6": {
     "message": "分享",
     "description": ""
-  },
-  "p5qZnJ": {
-    "message": "赞赏了",
-    "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
   "Po+kJe": {
     "message": "最近 {month} 个月",
@@ -530,18 +510,6 @@
   "QZXKhG": {
     "message": "设置围炉网址（创建后不可修改）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
-  },
-  "Vn5KLr": {
-    "message": "开启后，正文将被暂时遮蔽，只显示标题与摘要，并由读者选择是否继续阅读（例如含有色情、暴力、血腥等内容）",
-    "description": "src/components/Editor/ToggleAccess/index.tsx"
-  },
-  "s5JCCO": {
-    "message": "此文已被{actor}标示为限制级内容，是否确定展开全文？",
-    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
-  },
-  "0JLcHr": {
-    "message": "内容可能包含色情、暴力、血腥等限制级内容，部分用户可能不适合观看，或引起不适、心理负担，请谨慎判断是否阅读。",
-    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "RFzVUD": {
     "message": "取消置顶",
@@ -603,21 +571,17 @@
     "message": "原有透过电子信箱登入方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
-  "UgvfcU": {
-    "message": "你已完成以太坊钱包设定。你设定的地址：",
-    "description": "src/components/Notice/CryptoNotice/CryptoWalletConnectedNotice.tsx"
-  },
   "UjKkhq": {
     "message": "作品已添加标签",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
-  "VO4Elt": {
-    "message": "在 {commentArticle} 的评论中提及你",
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  "V8msLJ": {
+    "message": "在你的围炉中留言提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
-  "lZukEr": {
-    "message": "评论了",
-    "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
+  "Vn5KLr": {
+    "message": "开启后，正文将被暂时遮蔽，只显示标题与摘要，并由读者选择是否继续阅读（例如含有色情、暴力、血腥等内容）",
+    "description": "src/components/Editor/ToggleAccess/index.tsx"
   },
   "VrOoVf": {
     "message": "Matters 不会透过任何渠道主动询问你的钱包私钥。",
@@ -655,6 +619,10 @@
     "message": "人",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "XQTBu6": {
+    "message": "在你的围炉广播中留言提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
   "XVYrS/": {
     "message": "还没有追踪者",
     "description": ""
@@ -675,41 +643,21 @@
     "message": " 廣播提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
-  "YIes/F": {
-    "message": "等 {actorsCount} 人",
-    "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  "Y+spJC": {
+    "message": "在你的围炉中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "YUtHE9": {
+    "message": "将你的作品 {articleTitle} 在 {tag} 中选为精华",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagAddedNotice.tsx"
   },
   "YjNkcK": {
     "message": "若要变更地址，请直接操作钱包切換",
     "description": ""
   },
-  "r66dXx": {
-    "message": "在 {circleName} 的广播留言中提及你",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
-  "V8msLJ": {
-    "message": "在你的围炉中留言提及你",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "wER32z": {
-    "message": "在 {circleName} 中留言提及你",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "zllCbU": {
-    "message": "在 {circleName} 中留言",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "Y+spJC": {
-    "message": "在你的围炉中留言",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
-  "6Vznnt": {
-    "message": "在你的围炉中留言",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "XQTBu6": {
-    "message": "在你的围炉广播中留言提及你",
-    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  "YlPCRU": {
+    "message": "关联了",
+    "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
   "Z6cII7": {
     "message": "累计阅读时数",
@@ -771,6 +719,10 @@
     "message": "广播",
     "description": ""
   },
+  "cAP9g5": {
+    "message": "将你的评论在 {commentArticle} 中置顶",
+    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
   "cE4Hfw": {
     "message": "发现",
     "description": ""
@@ -811,17 +763,9 @@
     "message": "，我们会尽快回复!",
     "description": "src/views/Help/index.tsx"
   },
-  "DFieKt": {
-    "message": "辞去了 {tag} 的协作者",
-    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
-  },
-  "YUtHE9": {
-    "message": "将你的作品 {articleTitle} 在 {tag} 中选为精华",
-    "description": "src/components/Notice/ArticleTagNotice/ArticleTagAddedNotice.tsx"
-  },
-  "pCcbaC": {
-    "message": "将你的作品 {articleTitle} 从 {tag} 中移除",
-    "description": "src/components/Notice/ArticleTagNotice/ArticleTagRemovedNotice.tsx"
+  "eJ131z": {
+    "message": "辞去了 {tag} 的主理人",
+    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
   },
   "eTpiYa": {
     "message": "尚无支持数据",
@@ -843,10 +787,6 @@
     "message": "自定义网址名称",
     "description": ""
   },
-  "GVes61": {
-    "message": "在 {circleName} 发布新作品",
-    "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
-  },
   "fG41Ux": {
     "message": "登出成功",
     "description": ""
@@ -855,17 +795,13 @@
     "message": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "ftD7Hy": {
-    "message": " 众聊提及了你 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "g/L3Fm": {
-    "message": " 众聊中发表与回复话题 ",
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
   "gMZfHO": {
     "message": "RSS 订阅",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "gN4jLB": {
+    "message": "你的修订作品 {articleTitle} 已发布到分布式网络",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "h9CG9E": {
     "message": "{commentType}已刪除",
@@ -919,10 +855,6 @@
     "message": "取消追踪",
     "description": ""
   },
-  "jF+Mle": {
-    "message": " 天，前去免费体验，与大家谈天说地吧。",
-    "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-  },
   "jJ1Brc": {
     "message": "喜欢回应",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -938,6 +870,10 @@
   "jvo0vs": {
     "message": "保存",
     "description": ""
+  },
+  "jy3tx0": {
+    "message": "在 {circlename} 发布广播",
+    "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
   "k5NnNF": {
     "message": "追踪了你",
@@ -958,6 +894,10 @@
   "lNjDPr": {
     "message": "你还没有邀请任何用户喔！点击新增邀请，添加站内或站外朋友加入围炉赠与对方免费资格的固定时长",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
+  "lZukEr": {
+    "message": "评论了",
+    "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
   "ldNgRA": {
     "message": "你的站內暱稱，之後可以修改",
@@ -1007,6 +947,10 @@
     "message": "我的收藏",
     "description": ""
   },
+  "nNB7KU": {
+    "message": "在 ",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
   "nYeDrI": {
     "message": "沒有帐户？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
@@ -1030,6 +974,14 @@
   "ohgTH4": {
     "message": "追踪中",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "p5qZnJ": {
+    "message": "赞赏了",
+    "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
+  },
+  "pCcbaC": {
+    "message": "将你的作品 {articleTitle} 从 {tag} 中移除",
+    "description": "src/components/Notice/ArticleTagNotice/ArticleTagRemovedNotice.tsx"
   },
   "pRV+UD": {
     "message": "折叠",
@@ -1055,14 +1007,6 @@
     "message": "围炉名称",
     "description": ""
   },
-  "vLEnrs": {
-    "message": "支持了",
-    "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
-  },
-  "qQmSxu": {
-    "message": "你已成功登记参加空投且完成以太坊钱包设定，空投活动将在 2021/11/12 进行。你设定的空投地址：",
-    "description": "src/components/Notice/CryptoNotice/CryptoWalletAirdropNotice.tsx"
-  },
   "qYzBk8": {
     "message": "退订了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -1078,6 +1022,10 @@
   "qyzJxi": {
     "message": "航行日志 1.0",
     "description": "src/components/UserProfile/DropdownActions/index.tsx"
+  },
+  "r66dXx": {
+    "message": "在 {circleName} 的广播留言中提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "rBjwQy": {
     "message": "微博",
@@ -1103,6 +1051,10 @@
     "message": "已禁言用户",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "s5JCCO": {
+    "message": "此文已被{actor}标示为限制级内容，是否确定展开全文？",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+  },
   "sPgUkN": {
     "message": "本月营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
@@ -1110,10 +1062,6 @@
   "skbUBl": {
     "message": "登入",
     "description": "src/components/Buttons/Login/index.tsx"
-  },
-  "8w3GEA": {
-    "message": "在作品 {article} 中提及你",
-    "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
   },
   "stjoBH": {
     "message": "现在，去为你喜欢的作者打赏吧！你的每一次打赏都将为作者带来收入。",
@@ -1123,17 +1071,13 @@
     "message": "邮箱",
     "description": ""
   },
-  "CNbggD": {
-    "message": "成为了 {tag} 的主理人",
-    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
-  },
-  "eJ131z": {
-    "message": "辞去了 {tag} 的主理人",
-    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
-  },
   "t8/r8X": {
     "message": "连接加密钱包",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "tEeEJT": {
+    "message": "你的作品 {articleTitle} 已发布到分布式网络",
+    "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
   "tW3hM/": {
     "message": "围炉描述",
@@ -1159,10 +1103,6 @@
     "message": "{q}: {totalCount, plural, =0 {} other {# 条结果}} - Matters 搜索",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
-  "cAP9g5": {
-    "message": "将你的评论在 {commentArticle} 中置顶",
-    "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
-  },
   "uw32VR": {
     "message": "教学指南",
     "description": ""
@@ -1179,9 +1119,17 @@
     "message": "我的围炉",
     "description": ""
   },
+  "vLEnrs": {
+    "message": "支持了",
+    "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
   "wEQDC6": {
     "message": "编辑资料",
     "description": ""
+  },
+  "wER32z": {
+    "message": "在 {circleName} 中留言提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "wSEOxH": {
     "message": "联系渠道",
@@ -1211,10 +1159,6 @@
     "message": "搜索",
     "description": ""
   },
-  "8PWD05": {
-    "message": "邀请你成为 {tag} 的协作者",
-    "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
-  },
   "y0b6Kp": {
     "message": "付费",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1241,6 +1185,10 @@
   },
   "zb8Kx1": {
     "message": "公告、提醒、碎碎念…"
+  },
+  "zllCbU": {
+    "message": "在 {circleName} 中留言",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "zxlwbc": {
     "message": "等待写入完成...",
