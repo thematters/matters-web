@@ -1,0 +1,4 @@
+.clear {
+  padding: var(--spacing-base) 0;
+  text-align: right;
+}

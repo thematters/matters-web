@@ -21,6 +21,7 @@ import {
 import { ClearReadHistoryMutation, MeHistoryFeedQuery } from '~/gql/graphql'
 
 import HistoryTabs from './HistoryTabs'
+import styles from './styles.module.css'
 
 const ME_HISTORY_FEED = gql`
   query MeHistoryFeed($after: String) {
@@ -121,15 +122,17 @@ const BaseMeHistory = () => {
 
   return (
     <>
-      <Button
-        bgColor="green"
-        spacing={['xtight', 'base']}
-        onClick={handlerClear}
-      >
-        <TextIcon color="white" size="mdS" weight="md">
-          <Translate id="clear" />
-        </TextIcon>
-      </Button>
+      <section className={styles.clear}>
+        <Button
+          textColor="greyDarker"
+          textActiveColor="black"
+          onClick={handlerClear}
+        >
+          <TextIcon size="sm">
+            <Translate id="clear" />
+          </TextIcon>
+        </Button>
+      </section>
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List responsiveWrapper>
