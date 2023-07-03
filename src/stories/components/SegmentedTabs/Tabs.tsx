@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Tabs, Translate } from '~/components'
+import { SegmentedTabs, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -9,32 +9,35 @@ const AllTabs = () => {
 
   return (
     <section className={styles.container}>
-      <Tabs sticky>
-        <Tabs.Tab
+      <SegmentedTabs sticky>
+        <SegmentedTabs.Tab
           onClick={() => setCurr('article')}
           selected={curr === 'article'}
         >
           <Translate id="articles" />
-        </Tabs.Tab>
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab
+        <SegmentedTabs.Tab
           onClick={() => setCurr('comment')}
           selected={curr === 'comment'}
         >
           <Translate id="responses" />
-        </Tabs.Tab>
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab onClick={() => setCurr('tag')} selected={curr === 'tag'}>
+        <SegmentedTabs.Tab
+          onClick={() => setCurr('tag')}
+          selected={curr === 'tag'}
+        >
           <Translate id="tag" />
-        </Tabs.Tab>
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab
+        <SegmentedTabs.Tab
           onClick={() => setCurr('support')}
           selected={curr === 'support'}
         >
           <Translate zh_hant="支持" zh_hans="支持" />
-        </Tabs.Tab>
-      </Tabs>
+        </SegmentedTabs.Tab>
+      </SegmentedTabs>
 
       <div className="area">
         <p>tabs are sticky, scroll to view .</p>

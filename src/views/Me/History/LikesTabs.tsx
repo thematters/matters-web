@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 import { PATHS } from '~/common/enums'
-import { Spacer, Tabs, Translate, useRoute } from '~/components'
+import { SegmentedTabs, Spacer, Translate, useRoute } from '~/components'
 import { LikesTabsUserActivityFragment } from '~/gql/graphql'
 
 interface LikesTabsProps {
@@ -26,21 +26,21 @@ const LikesTabs: React.FC<LikesTabsProps> & {
     <>
       <Spacer size="xtight" />
 
-      <Tabs sticky>
-        <Tabs.Tab
+      <SegmentedTabs sticky>
+        <SegmentedTabs.Tab
           href={PATHS.ME_HISTORY_LIKES_SENT}
           selected={isInPath('ME_HISTORY_LIKES_SENT')}
         >
           <Translate id="likesSent" />
-        </Tabs.Tab>
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab
+        <SegmentedTabs.Tab
           href={PATHS.ME_HISTORY_LIKES_RECEIVED}
           selected={isInPath('ME_HISTORY_LIKES_RECEIVED')}
         >
           <Translate id="likesReceived" />
-        </Tabs.Tab>
-      </Tabs>
+        </SegmentedTabs.Tab>
+      </SegmentedTabs>
     </>
   )
 }

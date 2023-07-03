@@ -17,8 +17,8 @@ import {
   Expandable,
   Head,
   Layout,
+  SegmentedTabs,
   Spinner,
-  Tabs,
   Throw404,
   useFeatures,
   usePublicQuery,
@@ -195,28 +195,37 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         )}
       </section>
 
-      <Tabs sticky>
-        <Tabs.Tab selected={isHottest} onClick={() => changeFeed('hottest')}>
+      <SegmentedTabs sticky>
+        <SegmentedTabs.Tab
+          selected={isHottest}
+          onClick={() => changeFeed('hottest')}
+        >
           <FormattedMessage defaultMessage="Trending" description="" />
-        </Tabs.Tab>
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab selected={isLatest} onClick={() => changeFeed('latest')}>
+        <SegmentedTabs.Tab
+          selected={isLatest}
+          onClick={() => changeFeed('latest')}
+        >
           <FormattedMessage defaultMessage="Latest" description="" />
-        </Tabs.Tab>
+        </SegmentedTabs.Tab>
 
         {hasSelectedFeed && (
-          <Tabs.Tab
+          <SegmentedTabs.Tab
             selected={isSelected}
             onClick={() => changeFeed('selected')}
           >
             <FormattedMessage defaultMessage="Featured" description="" />
-          </Tabs.Tab>
+          </SegmentedTabs.Tab>
         )}
 
-        <Tabs.Tab selected={isCreators} onClick={() => changeFeed('creators')}>
+        <SegmentedTabs.Tab
+          selected={isCreators}
+          onClick={() => changeFeed('creators')}
+        >
           <FormattedMessage defaultMessage="Creators" description="" />
-        </Tabs.Tab>
-      </Tabs>
+        </SegmentedTabs.Tab>
+      </SegmentedTabs>
 
       {(isHottest || isLatest || isSelected) && (
         <TagDetailArticles tag={tag} feedType={feedType} />

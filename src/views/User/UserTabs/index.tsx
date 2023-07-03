@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Tabs, useRoute } from '~/components'
+import { SegmentedTabs, useRoute } from '~/components'
 
 const UserTabs = () => {
   const { isInPath, getQuery } = useRoute()
@@ -13,11 +13,14 @@ const UserTabs = () => {
   })
 
   return (
-    <Tabs sticky>
-      <Tabs.Tab {...userArticlesPath} selected={isInPath('USER_ARTICLES')}>
+    <SegmentedTabs sticky>
+      <SegmentedTabs.Tab
+        {...userArticlesPath}
+        selected={isInPath('USER_ARTICLES')}
+      >
         <FormattedMessage defaultMessage="Articles" description="" />
-      </Tabs.Tab>
-    </Tabs>
+      </SegmentedTabs.Tab>
+    </SegmentedTabs>
   )
 }
 

@@ -37,12 +37,14 @@ const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
   )
 }
 
-interface TabsProps {
+interface SegmentedTabsProps {
   sticky?: boolean
   side?: React.ReactNode
 }
 
-export const Tabs: React.FC<React.PropsWithChildren<TabsProps>> & {
+export const SegmentedTabs: React.FC<
+  React.PropsWithChildren<SegmentedTabsProps>
+> & {
   Tab: typeof Tab
 } = ({ sticky, side, children }) => {
   const navClasses = classNames({
@@ -59,4 +61,4 @@ export const Tabs: React.FC<React.PropsWithChildren<TabsProps>> & {
   )
 }
 
-Tabs.Tab = Tab
+SegmentedTabs.Tab = Tab
