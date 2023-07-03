@@ -1,0 +1,38 @@
+.tabs {
+  @mixin border-bottom-grey;
+
+  position: relative;
+  padding: var(--spacing-tight) var(--spacing-base) var(--spacing-x-tight);
+  white-space: nowrap;
+}
+
+.list {
+  @mixin hide-scrollbar;
+
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.item {
+  @mixin inline-flex-center-all;
+  @mixin transition;
+
+  font-weight: var(--font-weight-medium);
+  line-height: 1.375rem;
+  color: var(--color-grey-dark);
+  transition-property: color;
+
+  &.selected,
+  &:hover,
+  &:focus {
+    color: var(--color-black);
+  }
+
+  & + .item {
+    margin-left: var(--spacing-x-loose);
+  }
+
+  & .count {
+    color: var(--color-grey-dark);
+  }
+}

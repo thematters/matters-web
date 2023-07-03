@@ -39,7 +39,7 @@ const AllTabs = () => {
         </SegmentedTabs.Tab>
       </SegmentedTabs>
 
-      <div className="area">
+      <div className={styles.area}>
         <p>tabs are sticky, scroll to view .</p>
       </div>
     </section>

@@ -1,4 +1,6 @@
 .container {
+  position: relative;
+
   & .area {
     width: 100%;
     height: 200rem;

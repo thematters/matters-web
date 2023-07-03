@@ -5,7 +5,7 @@ import React from 'react'
 import SegmentedTabs from './Tabs'
 
 export default {
-  title: 'Components/Tabs',
+  title: 'Components/SegmentedTabs',
   component: SegmentedTabs,
 } as ComponentMeta<typeof SegmentedTabs>
 
