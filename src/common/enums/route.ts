@@ -21,6 +21,8 @@ type ROUTE_KEY =
   | 'ARTICLE_DETAIL'
   // User
   | 'USER_ARTICLES'
+  | 'USER_COLLECTIONS'
+  | 'USER_COLLECTION_DETAIL'
   // Circle
   | 'CIRCLE_DETAIL'
   | 'CIRCLE_DISCUSSION'
@@ -90,6 +92,11 @@ export const ROUTES: {
 
   // User
   { key: 'USER_ARTICLES', pathname: '/[name]' },
+  { key: 'USER_COLLECTIONS', pathname: '/[name]/collections' },
+  {
+    key: 'USER_COLLECTION_DETAIL',
+    pathname: '/[name]/collections/[collectionId]',
+  },
 
   // Article
   { key: 'ARTICLE_DETAIL', pathname: '/[name]/[mediaHash]' },

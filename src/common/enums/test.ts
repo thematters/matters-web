@@ -19,6 +19,7 @@ export enum TEST_ID {
   DIGEST_TAG_FEED = 'digest/tag/feed',
   DIGEST_TAG_RICH = 'digest/tag/rich',
   DIGEST_TAG_SIDEBAR = 'digest/tag/sidebar',
+  DIGEST_COLLECTION_FEED = 'digest/collection/feed',
   // dialogs
   DIALOG_AUTH = 'dialog/auth',
   // search

@@ -21,6 +21,10 @@ interface CircleArgs {
   name: string
 }
 
+interface CollectionArgs {
+  id: string
+}
+
 interface TagArgs {
   id: string
   slug?: string
@@ -68,14 +72,23 @@ type ToPathArgs =
       feedType?: string
     }
   | {
-      page: 'userProfile' | 'userSubscriptons' | 'userComments' | 'userTags'
-
+      page:
+        | 'userProfile'
+        | 'userSubscriptons'
+        | 'userComments'
+        | 'userTags'
+        | 'userCollections'
       userName: string
     }
   | {
       page: 'search'
       q?: string
       type?: 'article' | 'tag' | 'user'
+    }
+  | {
+      page: 'collectionDetail'
+      userName: string
+      collection: CollectionArgs
     }
 
 /**
@@ -226,6 +239,17 @@ export const toPath = (
     case 'userTags': {
       return {
         href: `/@${args.userName}/tags`,
+      }
+    }
+
+    case 'userCollections': {
+      return {
+        href: `/@${args.userName}/collections`,
+      }
+    }
+    case 'collectionDetail': {
+      return {
+        href: `/@${args.userName}/collections/${args.collection.id}`,
       }
     }
 
