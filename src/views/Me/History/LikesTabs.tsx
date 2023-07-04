@@ -11,7 +11,7 @@ const LikesTabs: React.FC = () => {
 
   return (
     <>
-      <SegmentedTabs sticky>
+      <SegmentedTabs>
         <SegmentedTabs.Tab
           href={PATHS.ME_HISTORY_LIKES_SENT}
           selected={isInPath('ME_HISTORY_LIKES_SENT')}
