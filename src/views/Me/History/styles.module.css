@@ -1,4 +1,8 @@
 .clear {
-  padding: var(--spacing-base) 0;
+  padding: var(--spacing-base);
   text-align: right;
+
+  @media (--sm-up) {
+    padding: var(--spacing-base) 0;
+  }
 }

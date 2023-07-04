@@ -4,7 +4,6 @@ import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
-  Appreciation,
   EmptyAppreciation,
   Head,
   InfiniteScroll,
@@ -14,6 +13,8 @@ import {
 } from '~/components'
 import { MeLikesReceivedQuery } from '~/gql/graphql'
 
+import { Appreciation } from '../Appreciation'
+import HistoryTabs from '../HistoryTabs'
 import LikesTabs from '../LikesTabs'
 
 const ME_APPRECIATED_RECEIVED = gql`
@@ -21,7 +22,6 @@ const ME_APPRECIATED_RECEIVED = gql`
     viewer {
       id
       activity {
-        ...LikesTabsUserActivity
         likesReceived: appreciationsReceived(
           input: { first: 20, after: $after }
         ) {
@@ -41,7 +41,6 @@ const ME_APPRECIATED_RECEIVED = gql`
     }
   }
   ${Appreciation.fragments.appreciation}
-  ${LikesTabs.fragments.userActivity}
 `
 
 const BaseLikesReceived = () => {
@@ -63,7 +62,8 @@ const BaseLikesReceived = () => {
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <>
-        <LikesTabs activity={data.viewer.activity} />
+        <LikesTabs />
+
         <EmptyAppreciation />
       </>
     )
@@ -87,7 +87,7 @@ const BaseLikesReceived = () => {
 
   return (
     <>
-      <LikesTabs activity={data.viewer.activity} />
+      <LikesTabs />
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List responsiveWrapper>
@@ -116,6 +116,8 @@ const LikesReceived = () => {
       />
 
       <Head title={title} />
+
+      <HistoryTabs />
 
       <BaseLikesReceived />
     </Layout.Main>

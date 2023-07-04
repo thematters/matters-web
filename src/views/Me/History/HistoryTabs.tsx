@@ -6,6 +6,9 @@ import { Tabs, useRoute } from '~/components'
 const HistoryTabs: React.FC = () => {
   const { isInPath } = useRoute()
 
+  const isLike =
+    isInPath('ME_HISTORY_LIKES_SENT') || isInPath('ME_HISTORY_LIKES_RECEIVED')
+
   return (
     <Tabs>
       <Tabs.Tab href={PATHS.ME_HISTORY} selected={isInPath('ME_HISTORY')}>
@@ -15,10 +18,7 @@ const HistoryTabs: React.FC = () => {
         />
       </Tabs.Tab>
 
-      <Tabs.Tab
-        href={PATHS.ME_HISTORY_LIKES_SENT}
-        selected={isInPath('ME_HISTORY_LIKES_SENT')}
-      >
+      <Tabs.Tab href={PATHS.ME_HISTORY_LIKES_SENT} selected={isLike}>
         <FormattedMessage defaultMessage="Likes" description="" />
       </Tabs.Tab>
 

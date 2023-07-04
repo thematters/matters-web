@@ -5,10 +5,11 @@ import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
-  ArticleDigestFeed,
+  ArticleDigestList,
   Button,
   EmptyHistory,
   Head,
+  HorizontalRule,
   InfiniteScroll,
   Layout,
   List,
@@ -38,8 +39,7 @@ const ME_HISTORY_FEED = gql`
             cursor
             node {
               article {
-                ...ArticleDigestFeedArticlePublic
-                ...ArticleDigestFeedArticlePrivate
+                ...ArticleDigestListArticle
               }
             }
           }
@@ -47,8 +47,7 @@ const ME_HISTORY_FEED = gql`
       }
     }
   }
-  ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
+  ${ArticleDigestList.fragments.article}
 `
 
 const CLEAR_READ_HISTORY = gql`
@@ -134,11 +133,13 @@ const BaseMeHistory = () => {
         </Button>
       </section>
 
+      <HorizontalRule />
+
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List responsiveWrapper>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
-              <ArticleDigestFeed
+              <ArticleDigestList
                 article={node.article}
                 onClick={() =>
                   analytics.trackEvent('click_feed', {

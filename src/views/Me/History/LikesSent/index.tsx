@@ -4,7 +4,6 @@ import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
-  Appreciation,
   EmptyAppreciation,
   Head,
   InfiniteScroll,
@@ -14,6 +13,7 @@ import {
 } from '~/components'
 import { MeLikesSentQuery } from '~/gql/graphql'
 
+import { Appreciation } from '../Appreciation'
 import HistoryTabs from '../HistoryTabs'
 import LikesTabs from '../LikesTabs'
 
@@ -22,7 +22,6 @@ const ME_LIKES_SENT = gql`
     viewer {
       id
       activity {
-        ...LikesTabsUserActivity
         likesSent: appreciationsSent(input: { first: 20, after: $after }) {
           pageInfo {
             startCursor
@@ -40,7 +39,6 @@ const ME_LIKES_SENT = gql`
     }
   }
   ${Appreciation.fragments.appreciation}
-  ${LikesTabs.fragments.userActivity}
 `
 
 const BaseLikesSent = () => {
@@ -60,7 +58,7 @@ const BaseLikesSent = () => {
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <>
-        <LikesTabs activity={data.viewer.activity} />
+        <LikesTabs />
         <EmptyAppreciation />
       </>
     )
@@ -84,7 +82,7 @@ const BaseLikesSent = () => {
 
   return (
     <>
-      <LikesTabs activity={data.viewer.activity} />
+      <LikesTabs />
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List responsiveWrapper>

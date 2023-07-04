@@ -1,31 +1,16 @@
-import gql from 'graphql-tag'
-
 import { PATHS } from '~/common/enums'
-import { SegmentedTabs, Spacer, Translate, useRoute } from '~/components'
-import { LikesTabsUserActivityFragment } from '~/gql/graphql'
+import {
+  HorizontalRule,
+  SegmentedTabs,
+  Translate,
+  useRoute,
+} from '~/components'
 
-interface LikesTabsProps {
-  activity: LikesTabsUserActivityFragment
-}
-
-const fragments = {
-  userActivity: gql`
-    fragment LikesTabsUserActivity on UserActivity {
-      likesSentTotal: appreciationsSentTotal
-      likesReceivedTotal: appreciationsReceivedTotal
-    }
-  `,
-}
-
-const LikesTabs: React.FC<LikesTabsProps> & {
-  fragments: typeof fragments
-} = ({ activity }) => {
+const LikesTabs: React.FC = () => {
   const { isInPath } = useRoute()
 
   return (
     <>
-      <Spacer size="xtight" />
-
       <SegmentedTabs sticky>
         <SegmentedTabs.Tab
           href={PATHS.ME_HISTORY_LIKES_SENT}
@@ -41,10 +26,10 @@ const LikesTabs: React.FC<LikesTabsProps> & {
           <Translate id="likesReceived" />
         </SegmentedTabs.Tab>
       </SegmentedTabs>
+
+      <HorizontalRule />
     </>
   )
 }
-
-LikesTabs.fragments = fragments
 
 export default LikesTabs
