@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestTitle, Comment } from '~/components'
+import { ArticleDigestTitle, UserDigest } from '~/components'
 
-export const USER_COMMENTS_PUBLIC = gql`
-  query UserCommentsPublic($id: ID!, $after: String) {
+export const ME_COMMENTS = gql`
+  query MeComments($id: ID!, $after: String) {
     node(input: { id: $id }) {
       ... on User {
         id
@@ -17,13 +17,21 @@ export const USER_COMMENTS_PUBLIC = gql`
             cursor
             node {
               id
+              author {
+                ...UserDigestMiniUser
+              }
               ...ArticleDigestTitleArticle
               comments(input: { filter: { author: $id }, first: null }) {
                 edges {
                   cursor
                   node {
-                    ...FeedCommentPublic
-                    ...FeedCommentPrivate
+                    id
+                    content
+                    state
+                    type
+                    parentComment {
+                      id
+                    }
                   }
                 }
               }
@@ -34,18 +42,5 @@ export const USER_COMMENTS_PUBLIC = gql`
     }
   }
   ${ArticleDigestTitle.fragments.article}
-  ${Comment.Feed.fragments.comment.public}
-  ${Comment.Feed.fragments.comment.private}
-`
-
-export const USER_COMMENTS_PRIVATE = gql`
-  query UserCommentsPrivate($ids: [ID!]!) {
-    nodes(input: { ids: $ids }) {
-      id
-      ... on Comment {
-        ...FeedCommentPrivate
-      }
-    }
-  }
-  ${Comment.Feed.fragments.comment.private}
+  ${UserDigest.Mini.fragments.user}
 `
