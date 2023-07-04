@@ -59,6 +59,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       update({ content })
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
+    maxCaptionLength: 100,
     extensions: [
       FigureEmbedLinkInput,
       FigurePlaceholder.configure({
