@@ -7,6 +7,7 @@ import {
   AppreciatorsDialog,
   BookmarkButton,
   Button,
+  CollectionSelectDialog,
   Dropdown,
   FingerprintDialog,
   IconMore16,
@@ -21,6 +22,7 @@ import {
 } from '~/components'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
+import AddCollectionButton from './AddCollectionButton'
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
 import DonatorsButton from './DonatorsButton'
@@ -61,6 +63,7 @@ export interface DropdownActionsControls {
   hasArchive?: boolean
   hasEdit?: boolean
   hasBookmark?: boolean
+  hasAddCollection?: boolean
 
   morePublicActions?: React.ReactNode
 }
@@ -87,6 +90,7 @@ interface DialogProps {
   openAppreciatorsDialog: () => void
   openSupportersDialog: () => void
   openArchiveDialog: () => void
+  openCollectionSelectDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
@@ -113,12 +117,14 @@ const BaseDropdownActions = ({
   hasRemoveTag,
   hasEdit,
   hasBookmark,
+  hasAddCollection,
 
   openShareDialog,
   openFingerprintDialog,
   openAppreciatorsDialog,
   openSupportersDialog,
   openArchiveDialog,
+  openCollectionSelectDialog,
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
 
@@ -153,6 +159,9 @@ const BaseDropdownActions = ({
       {/* private */}
       {hasPublic && hasPrivate && <Menu.Divider />}
       {hasEdit && <EditButton article={article} />}
+      {hasAddCollection && (
+        <AddCollectionButton openDialog={openCollectionSelectDialog} />
+      )}
 
       {hasSticky && <PinButton article={article} />}
 
@@ -226,6 +235,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasEdit,
     hasArchive,
     hasBookmark = true,
+    hasAddCollection,
   } = props
   const viewer = useContext(ViewerContext)
 
@@ -261,6 +271,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasRemoveTag: !!hasRemoveTag,
     hasEdit: !!hasEdit && isActive && isArticleAuthor,
     hasBookmark: !!hasBookmark,
+    hasAddCollection: hasAddCollection && isActive && isArticleAuthor,
   }
 
   if (_isEmpty(_pickBy(controls))) {
@@ -278,17 +289,24 @@ const DropdownActions = (props: DropdownActionsProps) => {
                   {({ openDialog: openSupportersDialog }) => (
                     <ArchiveArticle.Dialog article={article}>
                       {({ openDialog: openArchiveDialog }) => (
-                        <BaseDropdownActions
-                          {...props}
-                          {...controls}
-                          openShareDialog={openShareDialog}
-                          openFingerprintDialog={openFingerprintDialog}
-                          openAppreciatorsDialog={openAppreciatorsDialog}
-                          openSupportersDialog={openSupportersDialog}
-                          openArchiveDialog={
-                            viewer.isFrozen ? forbid : openArchiveDialog
-                          }
-                        />
+                        <CollectionSelectDialog articleId={article.id}>
+                          {({ openDialog: openCollectionSelectDialog }) => (
+                            <BaseDropdownActions
+                              {...props}
+                              {...controls}
+                              openShareDialog={openShareDialog}
+                              openFingerprintDialog={openFingerprintDialog}
+                              openAppreciatorsDialog={openAppreciatorsDialog}
+                              openSupportersDialog={openSupportersDialog}
+                              openArchiveDialog={
+                                viewer.isFrozen ? forbid : openArchiveDialog
+                              }
+                              openCollectionSelectDialog={
+                                openCollectionSelectDialog
+                              }
+                            />
+                          )}
+                        </CollectionSelectDialog>
                       )}
                     </ArchiveArticle.Dialog>
                   )}

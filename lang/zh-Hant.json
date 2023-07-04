@@ -19,6 +19,22 @@
     "defaultMessage": "複製地址",
     "description": ""
   },
+  "VzzYJk": {
+    "defaultMessage": "新建",
+    "description": ""
+  },
+  "VZsE96": {
+    "defaultMessage": "選集名稱",
+    "description": ""
+  },
+  "L4Fcr8": {
+    "defaultMessage": "新建選集",
+    "description": ""
+  },
+  "ub1kHa": {
+    "defaultMessage": "加入選集",
+    "description": ""
+  },
   "jkrM1r": {
     "defaultMessage": "打開 IPNS 頁面",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"

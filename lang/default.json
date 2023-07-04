@@ -435,6 +435,10 @@
     "defaultMessage": "Free",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "L4Fcr8": {
+    "defaultMessage": "New Collection",
+    "description": ""
+  },
   "L4NXXh": {
     "defaultMessage": "Total",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
@@ -599,6 +603,10 @@
     "defaultMessage": "left comments and mentioned you in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "VZsE96": {
+    "defaultMessage": "Collection Name",
+    "description": ""
+  },
   "Vn5KLr": {
     "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)",
     "description": "src/components/Editor/ToggleAccess/index.tsx"
@@ -610,6 +618,10 @@
   "VwuiYK": {
     "defaultMessage": "This URL name has already been used, try another one",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "VzzYJk": {
+    "defaultMessage": "Create",
+    "description": ""
   },
   "WSUAwk": {
     "defaultMessage": "Add to Featured",
@@ -1105,6 +1117,10 @@
   },
   "uVCg1l": {
     "defaultMessage": "Explore Matters",
+    "description": ""
+  },
+  "ub1kHa": {
+    "defaultMessage": "Add to collection",
     "description": ""
   },
   "uclzDH": {

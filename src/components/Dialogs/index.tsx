@@ -13,6 +13,10 @@ export * from './ReviseArticleDialog'
 export * from './ShareDialog'
 export * from './SupportersDialog'
 
+// Collection
+export * from './AddCollectionDialog'
+export * from './CollectionSelectDialog'
+
 // Editor
 export * from './EditorSearchSelectDialog'
 

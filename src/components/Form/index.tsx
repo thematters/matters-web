@@ -7,6 +7,7 @@ import Input from './Input'
 import List from './List'
 import PinInput from './PinInput'
 import Select from './Select'
+import SquireCheckBox from './SquireCheckBox'
 import styles from './styles.module.css'
 import Textarea from './Textarea'
 
@@ -19,6 +20,7 @@ export const Form: React.FC<FormProps> & {
   Input: typeof Input
   Textarea: typeof Textarea
   CheckBox: typeof CheckBox
+  SquireCheckBox: typeof SquireCheckBox
   PinInput: typeof PinInput
   AmountInput: typeof AmountInput
   List: typeof List
@@ -35,6 +37,7 @@ export const Form: React.FC<FormProps> & {
 Form.Input = Input
 Form.Textarea = Textarea
 Form.CheckBox = CheckBox
+Form.SquireCheckBox = SquireCheckBox
 Form.PinInput = PinInput
 Form.AmountInput = AmountInput
 Form.List = List

@@ -419,6 +419,22 @@
     "defaultMessage": "commented in your circle broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "VzzYJk": {
+    "defaultMessage": "Create",
+    "description": ""
+  },
+  "VZsE96": {
+    "defaultMessage": "Collection Name",
+    "description": ""
+  },
+  "L4Fcr8": {
+    "defaultMessage": "New Collection",
+    "description": ""
+  },
+  "ub1kHa": {
+    "defaultMessage": "Add to collection",
+    "description": ""
+  },
   "XQTBu6": {
     "defaultMessage": "mentioned you in your circle broadcast comment",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"

@@ -15,6 +15,22 @@
     "defaultMessage": "钱包地址",
     "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
   },
+  "VzzYJk": {
+    "defaultMessage": "新建",
+    "description": ""
+  },
+  "VZsE96": {
+    "defaultMessage": "选集名称",
+    "description": ""
+  },
+  "L4Fcr8": {
+    "defaultMessage": "新建选集",
+    "description": ""
+  },
+  "ub1kHa": {
+    "defaultMessage": "加入选集",
+    "description": ""
+  },
   "me1nR+": {
     "defaultMessage": "复制地址",
     "description": ""

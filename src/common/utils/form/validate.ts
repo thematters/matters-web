@@ -157,6 +157,31 @@ export const validateComparedUserName = (
   }
 }
 
+export const validateCollectionTitle = (value: string, lang: Language) => {
+  console.log({ value })
+  if (!value) {
+    return translate({ id: 'required', lang })
+  }
+
+  if (value.length < 1) {
+    return translate({
+      zh_hant: '輸入字數過短，僅供輸入 1-40 個字元',
+      zh_hans: '输入字数过短，仅供输入 1-40 个字符',
+      en: 'Must be between 1-20 characters long.',
+      lang,
+    })
+  }
+
+  if (value.length > 40) {
+    return translate({
+      zh_hant: '輸入字數過長，僅供輸入 1-40 個字元',
+      zh_hans: '输入字数过长，仅供输入 1-40 个字符',
+      en: 'Must be between 1-40 characters long.',
+      lang,
+    })
+  }
+}
+
 export const validateDisplayName = (
   value: string,
   lang: Language,
