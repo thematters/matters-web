@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
-  EmptyAppreciation,
+  EmptyLike,
   Head,
   InfiniteScroll,
   Layout,
@@ -59,7 +59,7 @@ const BaseLikesSent = () => {
     return (
       <>
         <LikesTabs />
-        <EmptyAppreciation />
+        <EmptyLike />
       </>
     )
   }

@@ -7,7 +7,7 @@ import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestList,
   Button,
-  EmptyHistory,
+  EmptyArticle,
   Head,
   HorizontalRule,
   InfiniteScroll,
@@ -63,6 +63,7 @@ const CLEAR_READ_HISTORY = gql`
 `
 
 const BaseMeHistory = () => {
+  const intl = useIntl()
   const { data, loading, error, fetchMore } =
     useQuery<MeHistoryFeedQuery>(ME_HISTORY_FEED)
 
@@ -97,9 +98,12 @@ const BaseMeHistory = () => {
 
   if (!edges || edges.length <= 0 || !pageInfo || emptyHistory) {
     return (
-      <>
-        <EmptyHistory />
-      </>
+      <EmptyArticle
+        description={intl.formatMessage({
+          defaultMessage: 'No data yet',
+          description: 'src/views/Me/History/index.tsx',
+        })}
+      />
     )
   }
 
