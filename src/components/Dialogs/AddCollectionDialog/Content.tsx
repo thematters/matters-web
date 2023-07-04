@@ -1,11 +1,18 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
+import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { validateCollectionTitle } from '~/common/utils'
-import { Dialog, Form, LanguageContext, useMutation } from '~/components'
+import { toPath, validateCollectionTitle } from '~/common/utils'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  useMutation,
+  useRoute,
+} from '~/components'
 import { CreateCollectionMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -13,6 +20,7 @@ import styles from './styles.module.css'
 interface FormProps {
   closeDialog: () => void
   updateChecked?: (value: string) => void
+  gotoDetailPage?: boolean
 }
 
 interface FormValues {
@@ -31,6 +39,7 @@ const CREATE_COLLECTION = gql`
 const AddCollectionDialogContent: React.FC<FormProps> = ({
   closeDialog,
   updateChecked,
+  gotoDetailPage,
 }) => {
   const [create] = useMutation<CreateCollectionMutation>(
     CREATE_COLLECTION,
@@ -38,6 +47,9 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
     { showToast: false }
   )
   const { lang } = useContext(LanguageContext)
+  const { getQuery } = useRoute()
+  const router = useRouter()
+
   const maxCollectionTitle = 40
 
   const formId = 'edit-new-collection-form'
@@ -63,18 +75,29 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ title }, { setSubmitting, setFieldError }) => {
       try {
-        const response = await create({
+        const { data } = await create({
           variables: {
             input: {
               title,
             },
           },
         })
-        console.log({ response })
+        console.log({ data })
         if (updateChecked) {
-          updateChecked(response.data?.putCollection.id || '')
+          updateChecked(data?.putCollection.id || '')
         }
         setSubmitting(false)
+
+        if (gotoDetailPage && data) {
+          const userName = getQuery('name')
+          const path = toPath({
+            page: 'collectionDetail',
+            userName,
+            collection: data.putCollection,
+          })
+          router.push(path.href)
+        }
+
         closeDialog()
       } catch (error) {
         setSubmitting(false)

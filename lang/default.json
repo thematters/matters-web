@@ -35,6 +35,10 @@
     "defaultMessage": "Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress.",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
+  "0ThOw1": {
+    "defaultMessage": "Create collection",
+    "description": "src/views/User/Collections/UserCollections.tsx"
+  },
   "1pFLGZ": {
     "defaultMessage": "Bug Bounty",
     "description": ""
@@ -346,6 +350,10 @@
   "GRtGnZ": {
     "defaultMessage": "Resign From Maintainer",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "GU6vV0": {
+    "defaultMessage": "No collection created yet",
+    "description": "src/components/Empty/EmptyCollection.tsx"
   },
   "GVes61": {
     "defaultMessage": "published in {circleName}",

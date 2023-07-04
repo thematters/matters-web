@@ -4,12 +4,14 @@ import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
 interface AddCollectionDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
+  gotoDetailPage?: boolean
 }
 
 const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
 const BaseAddCollectionDialog = ({
   children,
+  gotoDetailPage,
   ...props
 }: AddCollectionDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
@@ -19,7 +21,10 @@ const BaseAddCollectionDialog = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <DynamicContent closeDialog={closeDialog} />
+        <DynamicContent
+          closeDialog={closeDialog}
+          gotoDetailPage={gotoDetailPage}
+        />
       </Dialog>
     </>
   )

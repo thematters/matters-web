@@ -11,6 +11,14 @@
     "defaultMessage": "在 {circlename} 發布廣播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "GU6vV0": {
+    "defaultMessage": "尚未創建選集",
+    "description": "src/components/Empty/EmptyCollection.tsx"
+  },
+  "0ThOw1": {
+    "defaultMessage": "開始創作",
+    "description": "src/views/User/Collections/UserCollections.tsx"
+  },
   "9mfw9c": {
     "defaultMessage": "錢包地址",
     "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"

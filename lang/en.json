@@ -403,6 +403,14 @@
     "defaultMessage": "Congrats!",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "GU6vV0": {
+    "defaultMessage": "No collection created yet",
+    "description": "src/components/Empty/EmptyCollection.tsx"
+  },
+  "0ThOw1": {
+    "defaultMessage": "Create collection",
+    "description": "src/views/User/Collections/UserCollections.tsx"
+  },
   "ItUuuX": {
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
