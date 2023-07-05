@@ -1,6 +1,6 @@
 {
   "name": "matters-web",
-  "version": "4.24.0",
+  "version": "4.25.0",
   "description": "codebase of Matters' website",
   "sideEffects": false,
   "author": "Matters <hi@matters.town>",
@@ -30,8 +30,9 @@
     "prepare": "husky install",
     "vercel-build": "set -xe; npm run gen:type && if [[ \"$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" =~ release/* ]] ; then cp -va .env.prod .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-next.matters.town' | tee -a .env.local; else cp -va .env.dev .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-dev.matters.town' | tee -a .env.local ; fi && echo 'NEXT_PUBLIC_NEXT_ASSET_DOMAIN=' | tee -a .env.local && npm run build",
     "i18n:extract": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file lang/default.json",
+    "i18n:generate": "node bin/i18nGenerate.js",
     "i18n:compile": "formatjs compile-folder --ast lang compiled-lang",
-    "i18n": "npm run i18n:extract && npm run i18n:compile"
+    "i18n": "npm run i18n:extract && npm run i18n:generate && npm run i18n:compile"
   },
   "dependencies": {
     "@apollo/react-common": "^3.1.3",
@@ -40,7 +41,7 @@
     "@artsy/fresnel": "^6.1.0",
     "@ensdomains/content-hash": "^2.5.7",
     "@matters/apollo-upload-client": "^11.1.0",
-    "@matters/matters-editor": "^0.1.29-alpha.0",
+    "@matters/matters-editor": "^0.2.0",
     "@next/bundle-analyzer": "^13.4.2",
     "@reach/alert": "^0.18.0",
     "@reach/dialog": "^0.18.0",
@@ -49,6 +50,9 @@
     "@stripe/react-stripe-js": "^2.1.0",
     "@stripe/stripe-js": "^1.53.0",
     "@tippyjs/react": "^4.2.6",
+    "@tiptap/extension-bubble-menu": "^2.0.3",
+    "@tiptap/extension-floating-menu": "^2.0.3",
+    "@tiptap/extension-placeholder": "^2.0.3",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-cache-persist": "^0.1.1",
     "apollo-client": "^2.6.10",
@@ -154,6 +158,7 @@
     "babel-loader": "^9.1.2",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-polyfill": "^6.26.0",
+    "css-has-pseudo": "^5.0.2",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.40.0",
     "eslint-config-next": "^13.4.2",

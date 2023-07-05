@@ -96,8 +96,7 @@ const Select: React.FC<FormProps> = ({
 
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
   const walletConnectConnector = connectors.find(
-    // (c) => c.id === 'walletConnect'
-    (c) => c.id === 'walletConnectLegacy'
+    (c) => c.id === 'walletConnect'
   )
   const isMetaMaskLoading =
     isConnecting && pendingConnector?.id === injectedConnector?.id

@@ -1,0 +1,23 @@
+.commentEditor :global(.ProseMirror),
+.commentEditor :global(.tiptap) {
+  min-height: 7rem;
+
+  /* outline */
+  &:focus {
+    outline: none;
+  }
+
+  /* placeholder */
+  & :global(p.is-editor-empty:first-child::before) {
+    float: left;
+    height: 0;
+    color: var(--color-grey);
+    pointer-events: none;
+    content: attr(data-placeholder);
+  }
+
+  /* disable interactive */
+  & a {
+    pointer-events: none;
+  }
+}
