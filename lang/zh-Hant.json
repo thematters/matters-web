@@ -108,7 +108,7 @@
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "4sl6yu": {
-    "defaultMessage": "Start writing",
+    "defaultMessage": "開始創作",
     "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "50cquj": {
@@ -120,7 +120,7 @@
     "description": ""
   },
   "5iii3x": {
-    "defaultMessage": "Circle：",
+    "defaultMessage": "圍爐：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
   "5sg7KC": {
@@ -400,7 +400,7 @@
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "JaLEXz": {
-    "defaultMessage": "Enter Circle",
+    "defaultMessage": "進入圍爐",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
   "JpS59y": {
@@ -948,7 +948,7 @@
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
   "me1nR+": {
-    "defaultMessage": "Copy Address",
+    "defaultMessage": "複製地址",
     "description": ""
   },
   "mikY/9": {
@@ -964,7 +964,7 @@
     "description": ""
   },
   "nD00sh": {
-    "defaultMessage": "Edit profile",
+    "defaultMessage": "編輯個人信息",
     "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
   },
   "nGBrvw": {
@@ -1196,7 +1196,7 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "yIlC0R": {
-    "defaultMessage": "No published articles yet",
+    "defaultMessage": "尚未發布作品",
     "description": "src/components/Empty/EmptyArticle.tsx"
   },
   "ySGgTo": {
