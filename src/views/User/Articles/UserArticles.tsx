@@ -22,7 +22,6 @@ import {
   InfiniteScroll,
   LanguageContext,
   List,
-  Media,
   QueryError,
   Spinner,
   Translate,
@@ -40,6 +39,7 @@ import {
   USER_ARTICLES_PUBLIC,
   VIEWER_ARTICLES,
 } from './gql'
+import PinBoard from './PinBoard'
 import styles from './styles.module.css'
 
 const UserArticles = () => {
@@ -241,14 +241,9 @@ const UserArticles = () => {
     <>
       <CustomHead />
 
-      <Media at="sm">
-        <UserTabs />
-      </Media>
-      <Media greaterThan="sm">
-        <section className={styles.header}>
-          <UserTabs />
-        </section>
-      </Media>
+      <UserTabs />
+
+      <PinBoard user={user} />
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List responsiveWrapper>

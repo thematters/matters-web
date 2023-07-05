@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { CollectionDigest } from '~/components'
 
-const fragment = gql`
+const fragments = gql`
   fragment CollectionsUser on User {
     id
     collections(input: { first: null }) {
@@ -31,5 +31,5 @@ export const USER_COLLECTIONS = gql`
       ...CollectionsUser
     }
   }
-  ${fragment}
+  ${fragments}
 `

@@ -58,3 +58,10 @@ Cover.args = {
   cover: MOCK_ARTILCE.cover,
   articleCount: 0,
 }
+
+export const Flat = Template.bind({})
+Flat.args = {
+  title: MOCK_ARTILCE.title,
+  articleCount: 0,
+  variant: 'flat',
+}
