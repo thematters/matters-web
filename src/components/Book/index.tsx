@@ -3,14 +3,15 @@ import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import BOOK_COVER from '@/public/static/images/book-cover.png'
-import { ResponsiveImage } from '~/components'
+import { IconCamera24, ResponsiveImage } from '~/components'
 
 import styles from './styles.module.css'
 
-type BookProps = {
+export type BookProps = {
   title: string
   cover?: string | null
   articleCount?: number
+  hasMask?: boolean
 }
 
 const rgbToHsl = (r: number, g: number, b: number) => {
@@ -30,7 +31,12 @@ const rgbToHsl = (r: number, g: number, b: number) => {
   return [h * 60, s, l]
 }
 
-export const Book: React.FC<BookProps> = ({ title, cover, articleCount }) => {
+export const Book: React.FC<BookProps> = ({
+  title,
+  cover,
+  articleCount,
+  hasMask,
+}) => {
   const hasCount = typeof articleCount === 'number'
   const jacketClasses = classNames({
     [styles.jacket]: true,
@@ -73,6 +79,11 @@ export const Book: React.FC<BookProps> = ({ title, cover, articleCount }) => {
     <section className={styles.book} ref={bookRef}>
       <div className={styles.cover}>
         <ResponsiveImage url={cover || BOOK_COVER.src} size="360w" anonymous />
+        {hasMask && (
+          <div className={styles.mask}>
+            <IconCamera24 color="white" size="xl" />
+          </div>
+        )}
       </div>
 
       <section

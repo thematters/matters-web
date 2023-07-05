@@ -15,6 +15,18 @@
     "defaultMessage": "尚未創建選集",
     "description": "src/components/Empty/EmptyCollection.tsx"
   },
+  "A6ozr9": {
+    "defaultMessage": "選集名稱",
+    "description": ""
+  },
+  "Q8Qw5B": {
+    "defaultMessage": "描述",
+    "description": ""
+  },
+  "WQT8ZA": {
+    "defaultMessage": "编辑選集",
+    "description": ""
+  },
   "0ThOw1": {
     "defaultMessage": "開始創作",
     "description": "src/views/User/Collections/UserCollections.tsx"
@@ -635,9 +647,13 @@
     "defaultMessage": "換一批",
     "description": ""
   },
-  "Q8Qw5B": {
-    "defaultMessage": "個人簡介",
-    "description": ""
+  "JTWayV": {
+    "defaultMessage": "添加描述",
+    "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "h+punE": {
+    "defaultMessage": "{date}更新",
+    "description": "src/views/User/CollectionDetail/Content.tsx"
   },
   "QCo7Gc": {
     "defaultMessage": "選擇 NFT 作為你的頭像",

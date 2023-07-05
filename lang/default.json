@@ -207,6 +207,10 @@
     "defaultMessage": "Enter Password",
     "description": ""
   },
+  "A6ozr9": {
+    "defaultMessage": "Collection name",
+    "description": ""
+  },
   "A7ugfn": {
     "defaultMessage": "More Actions",
     "description": ""
@@ -407,6 +411,10 @@
     "defaultMessage": "User registered by email can login and enable wallet login later",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
+  "JTWayV": {
+    "defaultMessage": "Add description",
+    "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
   "JaLEXz": {
     "defaultMessage": "Enter Circle",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
@@ -523,6 +531,10 @@
     "defaultMessage": "Shuffle",
     "description": ""
   },
+  "Q8Qw5B": {
+    "defaultMessage": "Description",
+    "description": ""
+  },
   "QCo7Gc": {
     "defaultMessage": "Select NFT as your avatar",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
@@ -629,6 +641,10 @@
   },
   "VzzYJk": {
     "defaultMessage": "Create",
+    "description": ""
+  },
+  "WQT8ZA": {
+    "defaultMessage": "Edit collection",
     "description": ""
   },
   "WSUAwk": {
@@ -838,6 +854,10 @@
   "gSPnTx": {
     "defaultMessage": "(Articles in this collection will not be deleted)",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  },
+  "h+punE": {
+    "defaultMessage": "Updated {date}",
+    "description": "src/views/User/CollectionDetail/Content.tsx"
   },
   "h9CG9E": {
     "defaultMessage": "{commentType} has been deleted",

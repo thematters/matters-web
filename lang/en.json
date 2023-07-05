@@ -379,6 +379,26 @@
     "defaultMessage": "supported",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
+  "A6ozr9": {
+    "defaultMessage": "Collection name",
+    "description": ""
+  },
+  "Q8Qw5B": {
+    "defaultMessage": "Description",
+    "description": ""
+  },
+  "WQT8ZA": {
+    "defaultMessage": "Edit collection",
+    "description": ""
+  },
+  "JTWayV": {
+    "defaultMessage": "Add description",
+    "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "h+punE": {
+    "defaultMessage": "Updated {date}",
+    "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
   "BjzRe8": {
     "defaultMessage": ". Take a look at your income",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
@@ -1001,10 +1021,6 @@
   },
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.",
-    "description": ""
-  },
-  "Q8Qw5B": {
-    "defaultMessage": "Description",
     "description": ""
   },
   "A8MpFX": {

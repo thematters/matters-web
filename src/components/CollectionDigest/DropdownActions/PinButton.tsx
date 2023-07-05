@@ -9,7 +9,7 @@ import {
 
 const TOGGLE_PIN = gql`
   mutation TogglePinWork($id: ID!, $pinned: Boolean!) {
-    togglePinWork(input: { id: $id, enabled: $pinned }) {
+    putCollection(input: { id: $id, pinned: $pinned }) {
       id
       pinned
     }
@@ -33,7 +33,7 @@ const PinButton = ({
   const [togglePin] = useMutation<TogglePinWorkMutation>(TOGGLE_PIN, {
     variables: { id: collection.id, pinned: !collection.pinned },
     optimisticResponse: {
-      togglePinWork: {
+      putCollection: {
         id: collection.id,
         pinned: !collection.pinned,
         __typename: 'Collection',

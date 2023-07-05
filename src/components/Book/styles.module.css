@@ -40,6 +40,13 @@
 
     background-color: var(--color-grey-lighter);
   }
+
+  & .mask {
+    @mixin expand-to-container;
+    @mixin flex-center-all;
+
+    background: rgb(0 0 0 / 50%);
+  }
 }
 
 .jacket {

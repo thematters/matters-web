@@ -16,3 +16,16 @@
   right: var(--spacing-base);
   bottom: var(--spacing-base);
 }
+
+.collection {
+  display: flex;
+  justify-content: center;
+
+  @media (--sm-up) {
+    justify-content: start;
+  }
+
+  & .collectionContent {
+    position: relative;
+  }
+}
