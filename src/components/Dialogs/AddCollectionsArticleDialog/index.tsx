@@ -137,6 +137,8 @@ const BaseAddCollectionsArticleDialog = ({
         })
       }
       setSubmitting(false)
+      // clear data
+      formik.setFieldValue('checked', [])
       closeDialog()
     },
   })
