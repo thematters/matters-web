@@ -61,8 +61,6 @@ export interface DropdownActionsControls {
   hasArchive?: boolean
   hasEdit?: boolean
   hasBookmark?: boolean
-
-  morePublicActions?: React.ReactNode
 }
 
 type DropdownActionsProps = {
@@ -99,8 +97,6 @@ const BaseDropdownActions = ({
   size,
   inCard,
 
-  morePublicActions,
-
   hasShare,
   hasAppreciators,
   hasDonators,
@@ -123,12 +119,7 @@ const BaseDropdownActions = ({
   const { lang } = useContext(LanguageContext)
 
   const hasPublic =
-    hasShare ||
-    hasAppreciators ||
-    hasDonators ||
-    hasFingerprint ||
-    hasExtend ||
-    morePublicActions
+    hasShare || hasAppreciators || hasDonators || hasFingerprint || hasExtend
   const hasPrivate =
     hasSticky ||
     hasArchive ||
@@ -148,7 +139,6 @@ const BaseDropdownActions = ({
         <FingerprintButton openDialog={openFingerprintDialog} />
       )}
       {hasExtend && <ExtendButton article={article} />}
-      {morePublicActions}
 
       {/* private */}
       {hasPublic && hasPrivate && <Menu.Divider />}
@@ -210,7 +200,6 @@ const BaseDropdownActions = ({
 const DropdownActions = (props: DropdownActionsProps) => {
   const {
     article,
-    morePublicActions,
 
     hasShare,
     hasFingerprint = true,
@@ -245,7 +234,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasDonators: article.donationsDialog.totalCount > 0 && !inCard,
     hasFingerprint: hasFingerprint && (isActive || isArticleAuthor) && !inCard,
     hasExtend: hasExtend && !!isActive && !inCard,
-    morePublicActions,
 
     // privates
     hasSticky: !!(

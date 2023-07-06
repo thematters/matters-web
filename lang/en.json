@@ -279,6 +279,10 @@
     "defaultMessage": "Not for login",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "D0HpFJ": {
+    "defaultMessage": "Up to 3 articles/collections can be pinned",
+    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
   "D2Sw/t": {
     "defaultMessage": "Add any URL in the following list into RSS reader",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"

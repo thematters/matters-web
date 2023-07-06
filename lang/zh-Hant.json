@@ -279,6 +279,10 @@
     "defaultMessage": "非登入用途",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "D0HpFJ": {
+    "defaultMessage": "最多可設置 3 個代表作",
+    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一網址到 RSS 閱讀器",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
