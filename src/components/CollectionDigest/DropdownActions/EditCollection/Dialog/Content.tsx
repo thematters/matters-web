@@ -13,7 +13,6 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  toast,
   useMutation,
 } from '~/components'
 import {
@@ -114,16 +113,6 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
             },
           },
         })
-
-        toast.success({
-          message: (
-            <FormattedMessage
-              defaultMessage="Profile updated"
-              description="src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
-            />
-          ),
-        })
-
         setSubmitting(false)
         closeDialog()
       } catch (error) {
