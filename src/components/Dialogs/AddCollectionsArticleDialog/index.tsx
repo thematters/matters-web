@@ -16,6 +16,7 @@ import {
   usePublicQuery,
   useRoute,
 } from '~/components'
+import updateUserCollectionsArticles from '~/components/GQL/updates/userCollectionsArticles'
 import {
   AddCollectionsArticlesMutation,
   AddCollectionsArticleUserPublicQuery,
@@ -50,12 +51,11 @@ const BaseAddCollectionsArticleDialog = ({
 
   // public user data
   const userName = getQuery('name')
-  const { data, loading, refetch } =
+  const { data, loading } =
     usePublicQuery<AddCollectionsArticleUserPublicQuery>(
       ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
       {
         variables: { userName },
-        fetchPolicy: 'network-only',
       }
     )
   const [update] = useMutation<AddCollectionsArticlesMutation>(
@@ -98,7 +98,15 @@ const BaseAddCollectionsArticleDialog = ({
             articles: [articleId],
           },
         },
-        update: (cache) => {},
+        update: (cache) => {
+          updateUserCollectionsArticles({
+            cache,
+            userName,
+            collectionIds: checked,
+            articleIds: [articleId],
+            type: 'addArticles',
+          })
+        },
       })
 
       if (checked.length === 1) {
@@ -229,12 +237,17 @@ const BaseAddCollectionsArticleDialog = ({
           <>
             <DynamicContent
               closeDialog={() => {
-                refetch()
                 setArea('selecting')
               }}
-              updateChecked={(value) => {
+              onUpdated={(cache, collection) => {
+                updateUserCollectionsArticles({
+                  userName,
+                  cache,
+                  type: 'addConnection',
+                  collection,
+                })
                 formik.setFieldValue('checked', [
-                  value,
+                  collection.id,
                   ...formik.values.checked,
                 ])
               }}

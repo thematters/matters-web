@@ -17,9 +17,10 @@ import { CreateCollectionMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
+type Collection = CreateCollectionMutation['putCollection']
 interface FormProps {
   closeDialog: () => void
-  updateChecked?: (value: string) => void
+  onUpdated?: (cache: any, collection: Collection) => void
   gotoDetailPage?: boolean
 }
 
@@ -38,7 +39,7 @@ const CREATE_COLLECTION = gql`
 
 const AddCollectionDialogContent: React.FC<FormProps> = ({
   closeDialog,
-  updateChecked,
+  onUpdated,
   gotoDetailPage,
 }) => {
   const [create] = useMutation<CreateCollectionMutation>(
@@ -81,10 +82,12 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
               title,
             },
           },
+          update(cache, result) {
+            if (onUpdated) {
+              onUpdated(cache, result.data?.putCollection || ({} as Collection))
+            }
+          },
         })
-        if (updateChecked) {
-          updateChecked(data?.putCollection.id || '')
-        }
         setSubmitting(false)
 
         if (gotoDetailPage && data) {

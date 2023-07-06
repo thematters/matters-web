@@ -16,7 +16,6 @@ export const fragments = {
                 edges {
                   node {
                     id
-                    title
                   }
                 }
               }
