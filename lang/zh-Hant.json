@@ -27,6 +27,14 @@
     "defaultMessage": "编辑選集",
     "description": ""
   },
+  "qsSujx": {
+    "defaultMessage": "操作無法撤銷，確認刪除選集嗎？",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  },
+  "W8OZ3G": {
+    "defaultMessage": "確認刪除",
+    "description": ""
+  },
   "6q0G5e": {
     "defaultMessage": "加入成功",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"

@@ -26,11 +26,8 @@ const Content = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const userName = getQuery('name')
-  console.log({ userName })
   const isViewer = viewer.userName === userName
-  console.log({ 'viewer.userName': viewer.userName, isViewer })
   const collectionId = getQuery('collectionId')
-  console.log({ collectionId })
 
   /**
    * Data Fetching
@@ -43,7 +40,6 @@ const Content = () => {
     }
   )
 
-  console.log({ data })
   /**
    * Render
    */
@@ -84,7 +80,6 @@ const Content = () => {
   }
   const collection = data.node
   const { title, cover, description, updatedAt, articles } = collection
-  console.log({ collection })
 
   return (
     <EditCollection.Dialog collection={collection}>

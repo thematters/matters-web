@@ -651,6 +651,10 @@
     "defaultMessage": "Create",
     "description": ""
   },
+  "W8OZ3G": {
+    "defaultMessage": "Confirm Deletion",
+    "description": ""
+  },
   "WQT8ZA": {
     "defaultMessage": "Edit collection",
     "description": ""
@@ -1078,6 +1082,10 @@
   "qlki7w": {
     "defaultMessage": "Remove Article",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
+  },
+  "qsSujx": {
+    "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "qswU4E": {
     "defaultMessage": "Email will not be used as a login but only as a contact channel.",

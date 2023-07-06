@@ -387,6 +387,14 @@
     "defaultMessage": "Description",
     "description": ""
   },
+  "qsSujx": {
+    "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?",
+    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  },
+  "W8OZ3G": {
+    "defaultMessage": "Confirm Deletion",
+    "description": ""
+  },
   "6q0G5e": {
     "defaultMessage": "Successfully added",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
