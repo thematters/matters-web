@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { KEYVALUE } from '@/src/common/enums'
 import { toPath, validateCollectionTitle } from '~/common/utils'
 import {
   Dialog,
@@ -124,6 +125,11 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
           onBlur={handleBlur}
           onChange={handleChange}
           maxLength={maxCollectionTitle}
+          onKeyDown={(e) => {
+            if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
+              e.stopPropagation()
+            }
+          }}
         />
       </section>
     </Form>
