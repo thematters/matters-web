@@ -3,12 +3,14 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { toPath } from '~/common/utils'
 import {
   Dialog,
   Form,
   IconAdd20,
   Spinner,
   TextIcon,
+  toast,
   useDialogSwitch,
   useMutation,
   usePublicQuery,
@@ -16,10 +18,13 @@ import {
 } from '~/components'
 import {
   AddCollectionsArticlesMutation,
-  CollectionSelectUserPublicQuery,
+  AddCollectionsArticleUserPublicQuery,
 } from '~/gql/graphql'
 
-import { ADD_COLLECTIONS_ARTICLES, COLLECTION_SELECT_USER_PUBLIC } from './gql'
+import {
+  ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
+  ADD_COLLECTIONS_ARTICLES,
+} from './gql'
 import styles from './styles.module.css'
 
 type Area = 'selecting' | 'creating'
@@ -28,7 +33,7 @@ interface FormValues {
   checked: string[]
 }
 
-interface CollectionSelectDialogProps {
+interface AddCollectionsArticleDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   articleId: string
 }
@@ -37,17 +42,17 @@ const DynamicContent = dynamic(() => import('../AddCollectionDialog/Content'), {
   loading: Spinner,
 })
 
-const BaseCollectionSelectDialog = ({
+const BaseAddCollectionsArticleDialog = ({
   children,
   articleId,
-}: CollectionSelectDialogProps) => {
+}: AddCollectionsArticleDialogProps) => {
   const { getQuery } = useRoute()
 
   // public user data
   const userName = getQuery('name')
   const { data, loading, refetch } =
-    usePublicQuery<CollectionSelectUserPublicQuery>(
-      COLLECTION_SELECT_USER_PUBLIC,
+    usePublicQuery<AddCollectionsArticleUserPublicQuery>(
+      ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
       {
         variables: { userName },
         fetchPolicy: 'network-only',
@@ -68,14 +73,14 @@ const BaseCollectionSelectDialog = ({
   const collections = user?.collections
 
   const formId = 'add-collection-article-form'
-  const checked: string[] = []
+  const hasChecked: string[] = []
   collections?.edges?.forEach(({ node }) => {
     if (
       node.articles.edges?.findIndex(
         ({ node: articleNode }) => articleNode.id === articleId
       ) !== -1
     ) {
-      checked.push(node.id)
+      hasChecked.push(node.id)
     }
   })
 
@@ -93,10 +98,35 @@ const BaseCollectionSelectDialog = ({
             articles: [articleId],
           },
         },
+        update: (cache) => {},
       })
 
       if (checked.length === 1) {
-        // TODO: toast
+        const path = toPath({
+          page: 'collectionDetail',
+          userName,
+          collection: { id: checked[0] },
+        })
+        toast.success({
+          message: (
+            <FormattedMessage
+              defaultMessage="Successfully added"
+              description="src/components/Dialogs/CollectionSelectDialog/index.tsx"
+            />
+          ),
+          actions: [
+            {
+              content: (
+                <FormattedMessage
+                  defaultMessage="View"
+                  description="src/components/Dialogs/CollectionSelectDialog/index.tsx"
+                />
+              ),
+              htmlHref: path.href,
+              htmlTarget: '_blank',
+            },
+          ],
+        })
       }
       setSubmitting(false)
       closeDialog()
@@ -145,11 +175,11 @@ const BaseCollectionSelectDialog = ({
                     <Form.SquireCheckBox
                       key={node.id}
                       checked={
-                        checked.includes(node.id) ||
+                        hasChecked.includes(node.id) ||
                         formik.values.checked.includes(node.id)
                       }
                       hint={node.title}
-                      disabled={checked.includes(node.id)}
+                      disabled={hasChecked.includes(node.id)}
                       {...formik.getFieldProps('checked')}
                       value={node.id}
                     />
@@ -189,117 +219,11 @@ const BaseCollectionSelectDialog = ({
     </>
   )
 
-  // const CollectionList = (
-  //   // Why don't use useFormik 👇🔗
-  //   // https://formik.org/docs/api/useFormik
-  //   // “Be aware that <Field>, <FastField>, <ErrorMessage>, connect(), and <FieldArray> will NOT work with useFormik() as they all require React Context. ”
-
-  //   <Formik
-  //     initialValues={{ checked: [] as string[] }}
-  //     enableReinitialize
-  //     onSubmit={async (values) => {
-  //       // console.log({ values })
-  //       update({
-  //         variables: {
-  //           input: {
-  //             collections: values.checked,
-  //             articles: [articleId],
-  //           },
-  //         },
-  //       })
-  //     }}
-  //   >
-  //     {({ values, handleSubmit, isSubmitting, setFieldValue }) => {
-  //       const SubmitButton = () => (
-  //         <Dialog.TextButton
-  //           type="submit"
-  //           form={formId}
-  //           disabled={isSubmitting}
-  //           text={<FormattedMessage defaultMessage="Confirm" description="" />}
-  //           loading={isSubmitting}
-  //         />
-  //       )
-  //       return (
-  //         <>
-  //           <Dialog.Header
-  //             title={
-  //               <FormattedMessage
-  //                 defaultMessage="Add to collection"
-  //                 description=""
-  //               />
-  //             }
-  //             rightBtn={<SubmitButton />}
-  //           />
-  //           <section className={styles.formContainer}>
-  //             <Form
-  //               id={formId}
-  //               onSubmit={handleSubmit}
-  //               className={styles.listForm}
-  //             >
-  //               {collections?.edges?.map(
-  //                 ({ node }) =>
-  //                   node.articles.totalCount < 100 && (
-  //                     <Form.SquireCheckBox
-  //                       key={node.id}
-  //                       name="checked"
-  //                       value={node.id}
-  //                       checked={
-  //                         checked.includes(node.id) ||
-  //                         values.checked.includes(node.id)
-  //                       }
-  //                       hint={node.title}
-  //                       disabled={checked.includes(node.id)}
-  //                     />
-  //                   )
-  //               )}
-  //             </Form>
-  //           </section>
-
-  // <section
-  //   className={styles.newCollection}
-  //   onClick={() => {
-  //     setArea('creating')
-  //   }}
-  // >
-  //   <TextIcon icon={<IconAdd20 size="mdS" />}>
-  //     <FormattedMessage
-  //       defaultMessage="New Collection"
-  //       description=""
-  //     />
-  //   </TextIcon>
-  // </section>
-
-  // {/* </Dialog.Message> */}
-
-  // <Dialog.Footer
-  //   smUpBtns={
-  //     <>
-  //       <Dialog.TextButton
-  //         text={
-  //           <FormattedMessage
-  //             defaultMessage="Cancel"
-  //             description=""
-  //           />
-  //         }
-  //         color="greyDarker"
-  //         onClick={closeDialog}
-  //       />
-  //       <SubmitButton />
-  //     </>
-  //   }
-  // />
-  //         </>
-  //       )
-  //     }}
-  //   </Formik>
-  // )
-
   return (
     <>
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        {/* {inSelectingArea && <>{CollectionList}</>} */}
         {inSelectingArea && <>{InnerForm}</>}
         {inCreatingArea && (
           <>
@@ -322,8 +246,10 @@ const BaseCollectionSelectDialog = ({
   )
 }
 
-export const CollectionSelectDialog = (props: CollectionSelectDialogProps) => (
-  <Dialog.Lazy mounted={<BaseCollectionSelectDialog {...props} />}>
+export const AddCollectionsArticleDialog = (
+  props: AddCollectionsArticleDialogProps
+) => (
+  <Dialog.Lazy mounted={<BaseAddCollectionsArticleDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

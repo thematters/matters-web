@@ -387,6 +387,14 @@
     "defaultMessage": "Description",
     "description": ""
   },
+  "6q0G5e": {
+    "defaultMessage": "Successfully added",
+    "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
+  "IKPYe9": {
+    "defaultMessage": "View",
+    "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
   "WQT8ZA": {
     "defaultMessage": "Edit collection",
     "description": ""

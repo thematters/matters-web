@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 export const fragments = {
   user: {
     public: gql`
-      fragment CollectionSelectUserPublic on User {
+      fragment AddCollectionsArticleUserPublic on User {
         id
         collections(input: { first: 200 }) {
           totalCount
@@ -28,10 +28,10 @@ export const fragments = {
   },
 }
 
-export const COLLECTION_SELECT_USER_PUBLIC = gql`
-  query CollectionSelectUserPublic($userName: String!) {
+export const ADD_COLLECTIONS_ARTICLE_USER_PUBLIC = gql`
+  query AddCollectionsArticleUserPublic($userName: String!) {
     user(input: { userName: $userName }) {
-      ...CollectionSelectUserPublic
+      ...AddCollectionsArticleUserPublic
     }
   }
   ${fragments.user.public}

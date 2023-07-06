@@ -82,7 +82,6 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
             },
           },
         })
-        console.log({ data })
         if (updateChecked) {
           updateChecked(data?.putCollection.id || '')
         }

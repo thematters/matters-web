@@ -1323,6 +1323,14 @@
     "defaultMessage": "查看全部",
     "description": ""
   },
+  "6q0G5e": {
+    "defaultMessage": "加入成功",
+    "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
+  "IKPYe9": {
+    "defaultMessage": "查看",
+    "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
   "xGh9O7": {
     "defaultMessage": "提醒：信箱将不作为登入使用，仅作为联系渠道",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"

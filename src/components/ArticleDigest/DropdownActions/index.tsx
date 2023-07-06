@@ -4,10 +4,10 @@ import { useContext } from 'react'
 
 import { translate } from '~/common/utils'
 import {
+  AddCollectionsArticleDialog,
   AppreciatorsDialog,
   BookmarkButton,
   Button,
-  CollectionSelectDialog,
   Dropdown,
   FingerprintDialog,
   IconMore16,
@@ -90,7 +90,7 @@ interface DialogProps {
   openAppreciatorsDialog: () => void
   openSupportersDialog: () => void
   openArchiveDialog: () => void
-  openCollectionSelectDialog: () => void
+  openAddCollectionsArticleDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
@@ -124,7 +124,7 @@ const BaseDropdownActions = ({
   openAppreciatorsDialog,
   openSupportersDialog,
   openArchiveDialog,
-  openCollectionSelectDialog,
+  openAddCollectionsArticleDialog,
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
 
@@ -160,7 +160,7 @@ const BaseDropdownActions = ({
       {hasPublic && hasPrivate && <Menu.Divider />}
       {hasEdit && <EditButton article={article} />}
       {hasAddCollection && (
-        <AddCollectionButton openDialog={openCollectionSelectDialog} />
+        <AddCollectionButton openDialog={openAddCollectionsArticleDialog} />
       )}
 
       {hasSticky && <PinButton article={article} />}
@@ -289,8 +289,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
                   {({ openDialog: openSupportersDialog }) => (
                     <ArchiveArticle.Dialog article={article}>
                       {({ openDialog: openArchiveDialog }) => (
-                        <CollectionSelectDialog articleId={article.id}>
-                          {({ openDialog: openCollectionSelectDialog }) => (
+                        <AddCollectionsArticleDialog articleId={article.id}>
+                          {({
+                            openDialog: openAddCollectionsArticleDialog,
+                          }) => (
                             <BaseDropdownActions
                               {...props}
                               {...controls}
@@ -301,12 +303,12 @@ const DropdownActions = (props: DropdownActionsProps) => {
                               openArchiveDialog={
                                 viewer.isFrozen ? forbid : openArchiveDialog
                               }
-                              openCollectionSelectDialog={
-                                openCollectionSelectDialog
+                              openAddCollectionsArticleDialog={
+                                openAddCollectionsArticleDialog
                               }
                             />
                           )}
-                        </CollectionSelectDialog>
+                        </AddCollectionsArticleDialog>
                       )}
                     </ArchiveArticle.Dialog>
                   )}

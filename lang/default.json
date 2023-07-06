@@ -151,6 +151,10 @@
     "defaultMessage": "Term of Services",
     "description": ""
   },
+  "6q0G5e": {
+    "defaultMessage": "Successfully added",
+    "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
   "77tYPg": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -402,6 +406,10 @@
   "IFY8r4": {
     "defaultMessage": "Enter Password",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
+  "IKPYe9": {
+    "defaultMessage": "View",
+    "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
   },
   "ItUuuX": {
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",

@@ -27,6 +27,14 @@
     "defaultMessage": "编辑選集",
     "description": ""
   },
+  "6q0G5e": {
+    "defaultMessage": "加入成功",
+    "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
+  "IKPYe9": {
+    "defaultMessage": "查看",
+    "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
   "0ThOw1": {
     "defaultMessage": "開始創作",
     "description": "src/views/User/Collections/UserCollections.tsx"
