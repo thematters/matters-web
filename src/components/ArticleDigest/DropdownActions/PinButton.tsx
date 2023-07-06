@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { IconPin20, IconUnPin20, Menu, useMutation } from '~/components'
+import updateUserArticles from '~/components/GQL/updates/userArticles'
 import { PinButtonArticleFragment, TogglePinMutation } from '~/gql/graphql'
 
 const TOGGLE_PIN = gql`
@@ -35,6 +36,14 @@ const PinButton = ({ article }: { article: PinButtonArticleFragment }) => {
         pinned: !article.pinned,
         __typename: 'Article',
       },
+    },
+    update: (cache) => {
+      updateUserArticles({
+        cache,
+        targetId: article.id,
+        userName: article.author.userName,
+        type: article.pinned ? 'unpin' : 'pin',
+      })
     },
   })
 

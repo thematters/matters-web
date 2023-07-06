@@ -4,14 +4,14 @@ import { UserArticlesPublicQuery } from '~/gql/graphql'
 
 const update = ({
   cache,
-  articleId,
+  targetId,
   userName,
   type,
 }: {
   cache: DataProxy
-  articleId: string
+  targetId: string
   userName?: string | null
-  type: 'archive'
+  type: 'pin' | 'unpin' | 'archive'
 }) => {
   // FIXME: circular dependencies
   const { USER_ARTICLES_PUBLIC } = require('~/views/User/Articles/gql')
@@ -30,14 +30,20 @@ const update = ({
       return
     }
 
-    let edges = data.user.articles.edges
-    let { articleCount, totalWordCount } = data.user.status
-    const targetEdge = edges.filter(({ node }) => node.id === articleId)[0]
+    const articles = data.user.articles.edges.map((e) => e.node)
+    const target = articles.find((a) => a.id === targetId)!
+    let pinnedWorks = data.user.pinnedWorks || []
 
     switch (type) {
+      case 'pin':
+        pinnedWorks = [...pinnedWorks, target]
+        break
+      case 'unpin':
+        pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
+        break
       case 'archive':
-        articleCount = articleCount - 1
-        totalWordCount = totalWordCount - (targetEdge.node.wordCount || 0)
+        // remove pinned article if it's archived
+        pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
         break
     }
 
@@ -47,15 +53,7 @@ const update = ({
       data: {
         user: {
           ...data.user,
-          articles: {
-            ...data.user.articles,
-            edges,
-          },
-          status: {
-            ...data.user.status,
-            articleCount,
-            totalWordCount,
-          },
+          pinnedWorks,
         },
       },
     })

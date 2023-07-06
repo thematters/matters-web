@@ -6,6 +6,7 @@ import { PinnedWorksUserFragment } from '@/src/gql/graphql'
 import { Book, Media } from '~/components'
 
 import styles from './styles.module.css'
+import UnPinButton from './UnPinButton'
 
 type PinBoardProps = {
   user: PinnedWorksUserFragment
@@ -88,6 +89,14 @@ const PinBoard = ({ user }: PinBoardProps) => {
                 </Media>
               </a>
             </Link>
+
+            <section className={styles.unpinButton}>
+              <UnPinButton
+                id={work.id}
+                userName={user.userName!}
+                type={work.__typename === 'Article' ? 'article' : 'collection'}
+              />
+            </section>
           </li>
         ))}
       </ul>

@@ -159,6 +159,10 @@
     "defaultMessage": "作品已添加至精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
+  "84VOdX": {
+    "defaultMessage": "取消代表作",
+    "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
+  },
   "8KFsZN": {
     "defaultMessage": "阅读次数",
     "description": ""

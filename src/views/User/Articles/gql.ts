@@ -33,8 +33,6 @@ const fragments = gql`
     }
     status {
       state
-      articleCount
-      totalWordCount
     }
     ...PinnedWorksUser
   }

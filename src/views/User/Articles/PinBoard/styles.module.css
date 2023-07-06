@@ -53,3 +53,24 @@
     }
   }
 }
+
+.unpinButton {
+  @mixin transition;
+
+  position: absolute;
+  top: var(--spacing-base);
+  right: var(--spacing-base);
+  opacity: 0;
+  transition-property: opacity;
+}
+
+.listItem {
+  position: relative;
+
+  &:hover,
+  &:focus {
+    & .unpinButton {
+      opacity: 1;
+    }
+  }
+}
