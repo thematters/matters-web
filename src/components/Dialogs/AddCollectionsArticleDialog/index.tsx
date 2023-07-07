@@ -109,32 +109,33 @@ const BaseAddCollectionsArticleDialog = ({
         },
       })
 
-      if (checked.length === 1) {
-        const path = toPath({
-          page: 'collectionDetail',
-          userName,
-          collection: { id: checked[0] },
-        })
-        toast.success({
-          message: (
-            <FormattedMessage
-              defaultMessage="Successfully added"
-              description="src/components/Dialogs/CollectionSelectDialog/index.tsx"
-            />
-          ),
-          actions: [
-            {
-              content: (
-                <FormattedMessage
-                  defaultMessage="View"
-                  description="src/components/Dialogs/CollectionSelectDialog/index.tsx"
-                />
-              ),
-              htmlHref: path.href,
-            },
-          ],
-        })
-      }
+      const path = toPath({
+        page: 'collectionDetail',
+        userName,
+        collection: { id: checked[0] },
+      })
+      toast.success({
+        message: (
+          <FormattedMessage
+            defaultMessage="Successfully added"
+            description="src/components/Dialogs/CollectionSelectDialog/index.tsx"
+          />
+        ),
+        actions:
+          checked.length === 1
+            ? [
+                {
+                  content: (
+                    <FormattedMessage
+                      defaultMessage="View"
+                      description="src/components/Dialogs/CollectionSelectDialog/index.tsx"
+                    />
+                  ),
+                  htmlHref: path.href,
+                },
+              ]
+            : undefined,
+      })
       setSubmitting(false)
       // clear data
       formik.setFieldValue('checked', [])
