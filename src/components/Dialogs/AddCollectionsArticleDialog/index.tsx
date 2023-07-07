@@ -184,6 +184,7 @@ const BaseAddCollectionsArticleDialog = ({
                   node.articles.totalCount < 100 && (
                     <Form.SquareCheckBox
                       key={node.id}
+                      hasTooltip={true}
                       checked={
                         hasChecked.includes(node.id) ||
                         formik.values.checked.includes(node.id)

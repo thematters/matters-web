@@ -10,6 +10,7 @@ import styles from './styles.module.css'
 type SquareCheckBoxBoxProps = {
   name: string
   value: string
+  hasTooltip?: boolean
 } & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -19,49 +20,57 @@ type SquareCheckBoxBoxProps = {
 const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   hint,
   error,
+  hasTooltip = false,
 
   ...inputProps
 }) => {
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const fieldId = `field-${inputProps.name}`
+  const fieldMsgId = `field-msg-${inputProps.name}`
   const disabled = inputProps.disabled
 
   const [field] = useField({ ...inputProps, type: 'checkbox' })
 
+  const Content = () => (
+    <label className={styles.label} title={`${hint}`}>
+      <TextIcon
+        icon={
+          inputProps.checked ? (
+            <IconSquireChecked20
+              size="mdS"
+              color={disabled ? 'grey' : 'green'}
+            />
+          ) : (
+            <IconSquireCheck20 size="mdS" color="greyDark" />
+          )
+        }
+        color={disabled ? 'grey' : 'black'}
+        spacing="xtight"
+        size="sm"
+      >
+        <span className={styles.hint}>{hint}</span>
+      </TextIcon>
+
+      <VisuallyHidden>
+        <input
+          id={fieldId}
+          type="checkbox"
+          aria-describedby={fieldMsgId}
+          {...field}
+          {...inputProps}
+        />
+      </VisuallyHidden>
+    </label>
+  )
+
   return (
     <>
       {/* FIXME: tooltip in dialog */}
-      <Tooltip content={hint}>
-        <label className={styles.label} title={`${hint}`}>
-          <TextIcon
-            icon={
-              inputProps.checked ? (
-                <IconSquireChecked20
-                  size="mdS"
-                  color={disabled ? 'grey' : 'green'}
-                />
-              ) : (
-                <IconSquireCheck20 size="mdS" color="greyDark" />
-              )
-            }
-            color={disabled ? 'grey' : 'black'}
-            spacing="xtight"
-            size="sm"
-          >
-            <span className={styles.hint}>{hint}</span>
-          </TextIcon>
-
-          <VisuallyHidden>
-            <input
-              id={fieldId}
-              type="checkbox"
-              aria-describedby={fieldMsgId}
-              {...field}
-              {...inputProps}
-            />
-          </VisuallyHidden>
-        </label>
-      </Tooltip>
+      {hasTooltip && (
+        <Tooltip content={hint}>
+          <Content />
+        </Tooltip>
+      )}
+      {!hasTooltip && <Content />}
     </>
   )
 }
