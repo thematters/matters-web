@@ -7,7 +7,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
-import { parseFormSubmitErrors } from '~/common/utils'
 import {
   CoverUploader,
   Dialog,
@@ -117,22 +116,6 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
         closeDialog()
       } catch (error) {
         setSubmitting(false)
-
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        codes.forEach((code) => {
-          if (code === 'DISPLAYNAME_INVALID') {
-            setFieldError(
-              'displayName',
-              intl.formatMessage({
-                defaultMessage:
-                  'Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.',
-                description: '',
-              })
-            )
-          } else {
-            setFieldError('description', messages[code])
-          }
-        })
       }
     },
   })
