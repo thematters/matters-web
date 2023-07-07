@@ -6,7 +6,6 @@ export const fragment = gql`
   fragment CollectionDetail on Collection {
     id
     title
-    title
     description
     cover
     updatedAt
