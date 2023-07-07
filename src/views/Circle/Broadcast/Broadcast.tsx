@@ -240,7 +240,11 @@ const CricleBroadcast = () => {
             />
           ))}
 
-        <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          eof
+        >
           <List spacing={['xloose', 0]}>
             {comments.map((comment) => (
               <List.Item key={comment.id}>

@@ -207,6 +207,7 @@ const UserArticles = () => {
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
         loader={<Placeholder />}
+        eof
       >
         <List responsiveWrapper>
           {articleEdges.map(({ node, cursor }, i) => (

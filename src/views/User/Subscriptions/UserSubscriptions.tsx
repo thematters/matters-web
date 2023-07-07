@@ -143,7 +143,11 @@ const Subscriptions = () => {
       </section>
 
       <section className={styles.list}>
-        <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          eof
+        >
           <List hasBorder={false}>
             {edges.map(({ node }) => (
               <List.Item key={node.id}>

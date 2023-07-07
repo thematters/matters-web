@@ -108,7 +108,7 @@ const Comments = () => {
     .filter(({ comments }) => comments.length > 0)
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List responsiveWrapper>
         {articleEdges.map(({ cursor, node, comments }) => (
           <List.Item key={cursor}>

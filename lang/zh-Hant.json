@@ -235,6 +235,10 @@
     "defaultMessage": "追蹤",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "B2As08": {
+    "defaultMessage": "没有更多",
+    "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
+  },
   "BHFHeY": {
     "defaultMessage": " 在圍爐 {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -1126,6 +1130,9 @@
   "uclzDH": {
     "defaultMessage": "{q}: {totalCount, plural, =0 {} other {# 條結果}} - Matters 搜尋",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
+  },
+  "ui1+QC": {
+    "defaultMessage": "已顯示所有結果"
   },
   "ulh3kf": {
     "defaultMessage": "選集",

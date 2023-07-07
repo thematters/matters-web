@@ -139,7 +139,11 @@ const BaseMeHistory = () => {
 
       <HorizontalRule />
 
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
         <List responsiveWrapper>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
