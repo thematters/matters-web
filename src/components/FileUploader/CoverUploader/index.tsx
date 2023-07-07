@@ -161,6 +161,7 @@ export const CoverUploader = ({
                 cover={cover}
                 articleCount={bookArticleCount}
                 hasMask
+                loading={loading}
               />
             }
           </section>

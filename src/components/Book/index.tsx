@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import BOOK_COVER from '@/public/static/images/book-cover.png'
-import { IconCamera24, ResponsiveImage } from '~/components'
+import { IconCamera24, ResponsiveImage, Spinner } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -12,6 +12,7 @@ export type BookProps = {
   cover?: string | null
   articleCount?: number
   hasMask?: boolean
+  loading?: boolean
 }
 
 const rgbToHsl = (r: number, g: number, b: number) => {
@@ -36,6 +37,7 @@ export const Book: React.FC<BookProps> = ({
   cover,
   articleCount,
   hasMask,
+  loading,
 }) => {
   const hasCount = typeof articleCount === 'number'
   const jacketClasses = classNames({
@@ -81,7 +83,7 @@ export const Book: React.FC<BookProps> = ({
         <ResponsiveImage url={cover || BOOK_COVER.src} size="360w" anonymous />
         {hasMask && (
           <div className={styles.mask}>
-            <IconCamera24 color="white" size="xl" />
+            {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
           </div>
         )}
       </div>
