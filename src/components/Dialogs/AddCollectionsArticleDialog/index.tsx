@@ -131,7 +131,6 @@ const BaseAddCollectionsArticleDialog = ({
                 />
               ),
               htmlHref: path.href,
-              htmlTarget: '_blank',
             },
           ],
         })
