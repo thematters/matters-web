@@ -20,6 +20,7 @@ import {
 import { ArticleDigestTitle } from '../Title'
 import FooterActions, { FooterActionsProps } from './FooterActions'
 import { fragments } from './gql'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 export type ArticleDigestFeedControls = {
@@ -164,6 +165,7 @@ const BaseArticleDigestFeed = ({
 type MemoizedArticleDigestFeed = React.MemoExoticComponent<
   React.FC<ArticleDigestFeedProps>
 > & {
+  Placeholder: typeof Placeholder
   fragments: typeof fragments
 }
 
@@ -182,4 +184,5 @@ export const ArticleDigestFeed = React.memo(
   }
 ) as MemoizedArticleDigestFeed
 
+ArticleDigestFeed.Placeholder = Placeholder
 ArticleDigestFeed.fragments = fragments

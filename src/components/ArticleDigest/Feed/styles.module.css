@@ -9,6 +9,8 @@
 }
 
 .content {
+  flex-grow: 1;
+
   @media (--sm-up) {
     flex: 1;
   }
