@@ -181,7 +181,7 @@ const BaseAddCollectionsArticleDialog = ({
               {collections?.edges?.map(
                 ({ node }) =>
                   node.articles.totalCount < 100 && (
-                    <Form.SquireCheckBox
+                    <Form.SquareCheckBox
                       key={node.id}
                       checked={
                         hasChecked.includes(node.id) ||

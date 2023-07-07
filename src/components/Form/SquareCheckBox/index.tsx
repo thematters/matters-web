@@ -7,7 +7,7 @@ import { TextIcon } from '~/components/TextIcon'
 import { FieldProps } from '../Field'
 import styles from './styles.module.css'
 
-type SquireCheckBoxProps = {
+type SquareCheckBoxBoxProps = {
   name: string
   value: string
 } & Omit<FieldProps, 'fieldMsgId'> &
@@ -16,10 +16,7 @@ type SquireCheckBoxProps = {
     HTMLInputElement
   >
 
-const SquireCheckBox: React.FC<SquireCheckBoxProps> = ({
-  // name,
-  // value,
-
+const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   hint,
   error,
 
@@ -55,14 +52,6 @@ const SquireCheckBox: React.FC<SquireCheckBoxProps> = ({
           </TextIcon>
 
           <VisuallyHidden>
-            {/* <FieldFormik
-              id={fieldId}
-              type="checkbox"
-              aria-describedby={fieldMsgId}
-              name={name}
-              value={value}
-              {...inputProps}
-            /> */}
             <input
               id={fieldId}
               type="checkbox"
@@ -77,4 +66,4 @@ const SquireCheckBox: React.FC<SquireCheckBoxProps> = ({
   )
 }
 
-export default SquireCheckBox
+export default SquareCheckBox
