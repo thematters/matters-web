@@ -412,7 +412,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
   "JxlxVc": {
-    "defaultMessage": "忘記密碼？",
+    "defaultMessage": "忘記密碼",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
   "K3r6DQ": {
@@ -456,7 +456,7 @@
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "LphWYP": {
-    "defaultMessage": "Matters 用戶協議和隱私政策",
+    "defaultMessage": "用戶協議和隱私政策",
     "description": ""
   },
   "LqxIEU": {
@@ -646,10 +646,6 @@
   "XVYrS/": {
     "defaultMessage": "還沒有追蹤者",
     "description": ""
-  },
-  "XcTMMM": {
-    "defaultMessage": "已有帳戶？",
-    "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
   },
   "Xd0J7Y": {
     "defaultMessage": "開放社區",
@@ -862,10 +858,6 @@
   "ioPWl8": {
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
-  },
-  "ipQlDG": {
-    "defaultMessage": "以郵箱登入",
-    "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
   },
   "itPgxd": {
     "defaultMessage": "個人主頁",

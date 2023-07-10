@@ -647,10 +647,6 @@
     "defaultMessage": "No followers yet",
     "description": ""
   },
-  "XcTMMM": {
-    "defaultMessage": "Have an account?",
-    "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
-  },
   "Xd0J7Y": {
     "defaultMessage": "Open Source",
     "description": ""
@@ -862,10 +858,6 @@
   "ioPWl8": {
     "defaultMessage": "Undo bookmark",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
-  },
-  "ipQlDG": {
-    "defaultMessage": "Login with Email",
-    "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
   },
   "itPgxd": {
     "defaultMessage": "Profile",

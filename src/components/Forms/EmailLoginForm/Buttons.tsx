@@ -2,7 +2,9 @@ import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
-import { Button, Form, TextIcon } from '~/components'
+import { Button, TextIcon } from '~/components'
+
+import styles from './styles.module.css'
 
 export const PasswordResetDialogButton = ({
   gotoResetPassword,
@@ -15,7 +17,7 @@ export const PasswordResetDialogButton = ({
     onClick={gotoResetPassword}
     tabIndex={-1}
   >
-    <TextIcon color="green" weight="md">
+    <TextIcon color="green">
       <FormattedMessage
         defaultMessage="Forget Password"
         description="src/components/Forms/EmailLoginForm/Buttons.tsx"
@@ -26,7 +28,7 @@ export const PasswordResetDialogButton = ({
 
 export const PasswordResetRedirectButton = () => (
   <Button spacing={['xtight', 0]} {...appendTarget(PATHS.FORGET)} tabIndex={-1}>
-    <TextIcon color="green" weight="md">
+    <TextIcon color="green">
       <FormattedMessage
         defaultMessage="Forget Password"
         description="src/components/Forms/EmailLoginForm/Buttons.tsx"
@@ -42,18 +44,16 @@ export const EmailSignUpDialogButton = ({
   gotoEmailSignUp: () => void
   isInPage: boolean
 }) => (
-  <Form.List spacingY={0} spacingX={isInPage ? 0 : 'base'}>
-    <Form.List.Item
-      title={
-        <FormattedMessage
-          defaultMessage="Not Registered?"
-          description="src/components/Forms/EmailLoginForm/Buttons.tsx"
-        />
-      }
-      rightText={<FormattedMessage defaultMessage="Register" description="" />}
-      rightTextColor="green"
-      onClick={gotoEmailSignUp}
-      role="button"
+  <section
+    className={[styles.altButtons, isInPage ? styles.isInPage : ''].join(' ')}
+  >
+    <FormattedMessage
+      defaultMessage="Not Registered?"
+      description="src/components/Forms/EmailLoginForm/Buttons.tsx"
     />
-  </Form.List>
+
+    <button type="button" onClick={gotoEmailSignUp}>
+      <FormattedMessage defaultMessage="Register" description="" />
+    </button>
+  </section>
 )
