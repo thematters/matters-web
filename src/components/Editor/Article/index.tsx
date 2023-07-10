@@ -13,6 +13,7 @@ import { EditorDraftFragment } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
 import {
+  CaptionLimit,
   FigureEmbedLinkInput,
   FigurePlaceholder,
   makeMentionSuggestion,
@@ -59,7 +60,6 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       update({ content })
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
-    maxCaptionLength: 100,
     extensions: [
       FigureEmbedLinkInput,
       FigurePlaceholder.configure({
@@ -69,6 +69,9 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
           en: 'Add caption…',
           lang,
         }),
+      }),
+      CaptionLimit.configure({
+        maxCaptionLength: 100,
       }),
     ],
   })
