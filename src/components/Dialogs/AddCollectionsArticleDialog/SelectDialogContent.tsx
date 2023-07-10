@@ -76,7 +76,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
         }
         rightBtn={<SubmitButton />}
       />
-      <Dialog.Content>
+      <Dialog.Content noSpacing={false}>
         <section className={styles.formContainer}>
           <FormikProvider value={formik}>
             <Form
