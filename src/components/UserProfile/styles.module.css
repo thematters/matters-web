@@ -30,7 +30,9 @@
     &:focus {
       color: var(--color-white);
       background-color: var(--color-matters-green);
-      transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      transition:
+        color 0.3s ease-in-out,
+        background-color 0.3s ease-in-out;
     }
   }
 }

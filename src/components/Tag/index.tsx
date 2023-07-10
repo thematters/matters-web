@@ -44,7 +44,7 @@ export const toDigestTagPlaceholder = (content: string) =>
     },
     numArticles: 0,
     numAuthors: 0,
-  } as DigestTagFragment)
+  }) as DigestTagFragment
 
 export const Tag = ({
   tag,
