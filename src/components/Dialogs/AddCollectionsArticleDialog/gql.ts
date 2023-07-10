@@ -11,7 +11,7 @@ export const fragments = {
             node {
               id
               title
-              articles(input: { first: 200 }) {
+              articles(input: { first: 10 }) {
                 totalCount
                 edges {
                   node {
@@ -19,6 +19,7 @@ export const fragments = {
                   }
                 }
               }
+              contains(input: {id: $id})
             }
           }
         }
@@ -28,8 +29,8 @@ export const fragments = {
 }
 
 export const ADD_COLLECTIONS_ARTICLE_USER_PUBLIC = gql`
-  query AddCollectionsArticleUserPublic($userName: String!) {
-    user(input: { userName: $userName }) {
+  query AddCollectionsArticleUserPublic($userName: String!, $id: ID!) {
+    user(input: { userName: $userName}) {
       ...AddCollectionsArticleUserPublic
     }
   }

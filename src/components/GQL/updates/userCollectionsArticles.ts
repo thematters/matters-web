@@ -8,14 +8,14 @@ import {
 const update = ({
   cache,
   collectionIds,
-  articleIds,
+  articleId,
   collection,
   userName,
   type,
 }: {
   cache: DataProxy
   collectionIds?: string[]
-  articleIds?: string[]
+  articleId: string
   collection?: CreateCollectionMutation['putCollection']
   userName?: string | null
   type: 'addConnection' | 'addArticles'
@@ -25,14 +25,14 @@ const update = ({
     ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
   } = require('~/components/Dialogs/AddCollectionsArticleDialog/gql')
 
-  if (!userName) {
+  if (!userName || !articleId) {
     return
   }
 
   try {
     const data = cache.readQuery<AddCollectionsArticleUserPublicQuery>({
       query: ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
-      variables: { userName },
+      variables: { userName, id: articleId },
     })
 
     if (!data?.user?.collections.edges) {
@@ -55,19 +55,19 @@ const update = ({
               totalCount: 0,
               edges: [],
             },
+            contains: false,
           },
         })
         break
 
       case 'addArticles':
-        if (!collectionIds || !articleIds) {
+        if (!collectionIds || !articleId) {
           return
         }
         const newEdges: typeof edges = []
         edges.map((edge) => {
           const node = edge.node
           if (collectionIds.includes(node.id)) {
-            articleIds.map((articleId) => {
               node.articles.edges?.push({
                 __typename: 'ArticleEdge',
                 node: {
@@ -75,7 +75,7 @@ const update = ({
                   id: articleId,
                 },
               })
-            })
+            node.contains = true
             newEdges.unshift(edge)
           } else {
             newEdges.push(edge)
@@ -87,7 +87,7 @@ const update = ({
 
     cache.writeQuery({
       query: ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
-      variables: { userName },
+      variables: { userName, id: articleId },
       data: {
         ...data,
         user: {

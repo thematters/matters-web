@@ -26,6 +26,7 @@ import {
   ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
   ADD_COLLECTIONS_ARTICLES,
 } from './gql'
+// import SelectDialogContent from './SelectDialogContent'
 import styles from './styles.module.css'
 
 type Area = 'selecting' | 'creating'
@@ -55,7 +56,7 @@ const BaseAddCollectionsArticleDialog = ({
     usePublicQuery<AddCollectionsArticleUserPublicQuery>(
       ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
       {
-        variables: { userName },
+        variables: { userName, id: articleId },
       }
     )
   const [update] = useMutation<AddCollectionsArticlesMutation>(
@@ -73,16 +74,10 @@ const BaseAddCollectionsArticleDialog = ({
   const collections = user?.collections
 
   const formId = 'add-collection-article-form'
-  const hasChecked: string[] = []
-  collections?.edges?.forEach(({ node }) => {
-    if (
-      node.articles.edges?.findIndex(
-        ({ node: articleNode }) => articleNode.id === articleId
-      ) !== -1
-    ) {
-      hasChecked.push(node.id)
-    }
-  })
+  const hasCheckedEdges = collections?.edges?.filter(
+    ({ node }) => !!node.contains
+  )
+  const hasChecked = hasCheckedEdges?.map(({ node }) => node.id) || []
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -103,7 +98,7 @@ const BaseAddCollectionsArticleDialog = ({
             cache,
             userName,
             collectionIds: checked,
-            articleIds: [articleId],
+            articleId: articleId,
             type: 'addArticles',
           })
         },
@@ -235,6 +230,17 @@ const BaseAddCollectionsArticleDialog = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
+        {/* {inSelectingArea && (
+          <SelectDialogContent
+            formik={formik}
+            articleId={articleId}
+            checkingIds={formik.values.checked}
+            closeDialog={closeDialog}
+            switchToCreating={() => {
+              setArea('creating')
+            }}
+          />
+        )} */}
         {inSelectingArea && <>{InnerForm}</>}
         {inCreatingArea && (
           <>
@@ -245,6 +251,7 @@ const BaseAddCollectionsArticleDialog = ({
               onUpdated={(cache, collection) => {
                 updateUserCollectionsArticles({
                   userName,
+                  articleId: articleId,
                   cache,
                   type: 'addConnection',
                   collection,

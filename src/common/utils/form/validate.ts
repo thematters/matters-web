@@ -158,7 +158,6 @@ export const validateComparedUserName = (
 }
 
 export const validateCollectionTitle = (value: string, lang: Language) => {
-  console.log({ value })
   if (!value) {
     return translate({ id: 'required', lang })
   }
