@@ -1,4 +1,4 @@
-import { FormikProvider, useFormik } from 'formik'
+import { useFormik } from 'formik'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
@@ -6,28 +6,17 @@ import { FormattedMessage } from 'react-intl'
 import { toPath } from '~/common/utils'
 import {
   Dialog,
-  Form,
-  IconAdd20,
   Spinner,
-  TextIcon,
   toast,
   useDialogSwitch,
   useMutation,
-  usePublicQuery,
   useRoute,
 } from '~/components'
 import updateUserCollectionsArticles from '~/components/GQL/updates/userCollectionsArticles'
-import {
-  AddCollectionsArticlesMutation,
-  AddCollectionsArticleUserPublicQuery,
-} from '~/gql/graphql'
+import { AddCollectionsArticlesMutation } from '~/gql/graphql'
 
-import {
-  ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
-  ADD_COLLECTIONS_ARTICLES,
-} from './gql'
-// import SelectDialogContent from './SelectDialogContent'
-import styles from './styles.module.css'
+import { ADD_COLLECTIONS_ARTICLES } from './gql'
+import SelectDialogContent from './SelectDialogContent'
 
 type Area = 'selecting' | 'creating'
 
@@ -50,15 +39,7 @@ const BaseAddCollectionsArticleDialog = ({
 }: AddCollectionsArticleDialogProps) => {
   const { getQuery } = useRoute()
 
-  // public user data
   const userName = getQuery('name')
-  const { data, loading } =
-    usePublicQuery<AddCollectionsArticleUserPublicQuery>(
-      ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
-      {
-        variables: { userName, id: articleId },
-      }
-    )
   const [update] = useMutation<AddCollectionsArticlesMutation>(
     ADD_COLLECTIONS_ARTICLES,
     undefined,
@@ -70,15 +51,6 @@ const BaseAddCollectionsArticleDialog = ({
   const inSelectingArea = area === 'selecting'
   const inCreatingArea = area === 'creating'
 
-  const user = data?.user
-  const collections = user?.collections
-
-  const formId = 'add-collection-article-form'
-  const hasCheckedEdges = collections?.edges?.filter(
-    ({ node }) => !!node.contains
-  )
-  const hasChecked = hasCheckedEdges?.map(({ node }) => node.id) || []
-
   const formik = useFormik<FormValues>({
     initialValues: {
       checked: [],
@@ -86,6 +58,10 @@ const BaseAddCollectionsArticleDialog = ({
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async ({ checked }, { setSubmitting }) => {
+      if (!checked || checked.length === 0) {
+        return
+      }
+
       await update({
         variables: {
           input: {
@@ -138,99 +114,12 @@ const BaseAddCollectionsArticleDialog = ({
     },
   })
 
-  if (loading) {
-    return (
-      <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Content>
-          <Spinner />
-        </Dialog.Content>
-      </Dialog>
-    )
-  }
-
-  const SubmitButton = () => (
-    <Dialog.TextButton
-      type="submit"
-      form={formId}
-      disabled={formik.isSubmitting}
-      text={<FormattedMessage defaultMessage="Confirm" description="" />}
-      loading={formik.isSubmitting}
-    />
-  )
-
-  const InnerForm = (
-    <>
-      <Dialog.Header
-        title={
-          <FormattedMessage defaultMessage="Add to collection" description="" />
-        }
-        rightBtn={<SubmitButton />}
-      />
-      <Dialog.Content>
-        <section className={styles.formContainer}>
-          <FormikProvider value={formik}>
-            <Form
-              id={formId}
-              onSubmit={formik.handleSubmit}
-              className={styles.listForm}
-            >
-              {collections?.edges?.map(
-                ({ node }) =>
-                  node.articles.totalCount < 100 && (
-                    <Form.SquareCheckBox
-                      key={node.id}
-                      hasTooltip={true}
-                      checked={
-                        hasChecked.includes(node.id) ||
-                        formik.values.checked.includes(node.id)
-                      }
-                      hint={node.title}
-                      disabled={hasChecked.includes(node.id)}
-                      {...formik.getFieldProps('checked')}
-                      value={node.id}
-                    />
-                  )
-              )}
-            </Form>
-          </FormikProvider>
-
-          <section
-            className={styles.newCollection}
-            onClick={() => {
-              setArea('creating')
-            }}
-          >
-            <TextIcon icon={<IconAdd20 size="mdS" />}>
-              <FormattedMessage
-                defaultMessage="New Collection"
-                description=""
-              />
-            </TextIcon>
-          </section>
-        </section>
-      </Dialog.Content>
-
-      <Dialog.Footer
-        smUpBtns={
-          <>
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" description="" />}
-              color="greyDarker"
-              onClick={closeDialog}
-            />
-            <SubmitButton />
-          </>
-        }
-      />
-    </>
-  )
-
   return (
     <>
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        {/* {inSelectingArea && (
+        {inSelectingArea && (
           <SelectDialogContent
             formik={formik}
             articleId={articleId}
@@ -240,8 +129,7 @@ const BaseAddCollectionsArticleDialog = ({
               setArea('creating')
             }}
           />
-        )} */}
-        {inSelectingArea && <>{InnerForm}</>}
+        )}
         {inCreatingArea && (
           <>
             <DynamicContent

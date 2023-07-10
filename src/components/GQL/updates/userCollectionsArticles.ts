@@ -68,13 +68,13 @@ const update = ({
         edges.map((edge) => {
           const node = edge.node
           if (collectionIds.includes(node.id)) {
-              node.articles.edges?.push({
-                __typename: 'ArticleEdge',
-                node: {
-                  __typename: 'Article',
-                  id: articleId,
-                },
-              })
+            node.articles.edges?.push({
+              __typename: 'ArticleEdge',
+              node: {
+                __typename: 'Article',
+                id: articleId,
+              },
+            })
             node.contains = true
             newEdges.unshift(edge)
           } else {

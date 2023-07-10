@@ -19,7 +19,7 @@ export const fragments = {
                   }
                 }
               }
-              contains(input: {id: $id})
+              contains(input: { id: $id })
             }
           }
         }
@@ -30,7 +30,7 @@ export const fragments = {
 
 export const ADD_COLLECTIONS_ARTICLE_USER_PUBLIC = gql`
   query AddCollectionsArticleUserPublic($userName: String!, $id: ID!) {
-    user(input: { userName: $userName}) {
+    user(input: { userName: $userName }) {
       ...AddCollectionsArticleUserPublic
     }
   }
