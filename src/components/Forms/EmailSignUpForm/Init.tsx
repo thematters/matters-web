@@ -18,6 +18,7 @@ import {
   LanguageContext,
   LanguageSwitch,
   Layout,
+  Spacer,
   Translate,
   //  ReCaptchaContext,
   useMutation,
@@ -25,7 +26,6 @@ import {
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
-import { EmailLoginButton } from './Buttons'
 import styles from './styles.module.css'
 
 interface FormProps {
@@ -181,9 +181,9 @@ const Init: React.FC<FormProps> = ({
           }
           required
         />
-
-        <EmailLoginButton gotoEmailLogin={gotoEmailLogin} isInPage={isInPage} />
       </Form>
+
+      <Spacer size="base" />
     </section>
   )
 

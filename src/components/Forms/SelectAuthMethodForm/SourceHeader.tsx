@@ -8,14 +8,14 @@ import IMAGE_AUTH_SOURCE_ENTER from '@/public/static/images/auth-source/enter.pn
 import IMAGE_AUTH_SOURCE_FOLLOW from '@/public/static/images/auth-source/follow.png'
 import IMAGE_AUTH_SOURCE_SUPPORT from '@/public/static/images/auth-source/support.png'
 import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
-import { TextIcon, Translate } from '~/components'
+import { Translate } from '~/components'
 
 import styles from './styles.module.css'
 
 const AUTH_SOURCE_IMG = {
   [UNIVERSAL_AUTH_SOURCE.enter]: {
     image: IMAGE_AUTH_SOURCE_ENTER.src,
-    title: () => <Translate zh_hant="進入" zh_hans="进入" en="Enter" />,
+    // title: () => <Translate zh_hant="進入" zh_hans="进入" en="Enter" />,
     intro: () => (
       <Translate
         zh_hant="現在就加入馬特市並開始創作"
@@ -26,9 +26,9 @@ const AUTH_SOURCE_IMG = {
   },
   [UNIVERSAL_AUTH_SOURCE.appreciation]: {
     image: IMAGE_AUTH_SOURCE_APPRECIATION.src,
-    title: () => (
-      <Translate zh_hant="讚賞作品" zh_hans="赞赏作品" en="Like the Work" />
-    ),
+    // title: () => (
+    //   <Translate zh_hant="讚賞作品" zh_hans="赞赏作品" en="Like the Work" />
+    // ),
     intro: () => (
       <>
         <Translate
@@ -47,13 +47,13 @@ const AUTH_SOURCE_IMG = {
   },
   [UNIVERSAL_AUTH_SOURCE.bookmark]: {
     image: IMAGE_AUTH_SOURCE_BOOKMARK.src,
-    title: () => (
-      <Translate
-        zh_hant="收藏精彩作品"
-        zh_hans="收藏精彩作品"
-        en="Add to Bookmark"
-      />
-    ),
+    // title: () => (
+    //   <Translate
+    //     zh_hant="收藏精彩作品"
+    //     zh_hans="收藏精彩作品"
+    //     en="Add to Bookmark"
+    //   />
+    // ),
     intro: () => (
       <>
         <Translate
@@ -72,13 +72,13 @@ const AUTH_SOURCE_IMG = {
   },
   [UNIVERSAL_AUTH_SOURCE.circle]: {
     image: IMAGE_AUTH_SOURCE_CIRCLE.src,
-    title: () => (
-      <Translate
-        zh_hant="訂閱圍爐"
-        zh_hans="订阅围炉"
-        en="Subscribe to the Circle"
-      />
-    ),
+    // title: () => (
+    //   <Translate
+    //     zh_hant="訂閱圍爐"
+    //     zh_hans="订阅围炉"
+    //     en="Subscribe to the Circle"
+    //   />
+    // ),
     intro: () => (
       <Translate
         zh_hant="每月自動支持創作者，讀者可享有專屬內容"
@@ -89,9 +89,9 @@ const AUTH_SOURCE_IMG = {
   },
   [UNIVERSAL_AUTH_SOURCE.collectArticle]: {
     image: IMAGE_AUTH_SOURCE_COLLECT.src,
-    title: () => (
-      <Translate zh_hant="關聯作品" zh_hans="关联作品" en="Collect this Work" />
-    ),
+    // title: () => (
+    //   <Translate zh_hant="關聯作品" zh_hans="关联作品" en="Collect this Work" />
+    // ),
     intro: () => (
       <>
         <Translate
@@ -110,9 +110,9 @@ const AUTH_SOURCE_IMG = {
   },
   [UNIVERSAL_AUTH_SOURCE.comment]: {
     image: IMAGE_AUTH_SOURCE_COMMENT.src,
-    title: () => (
-      <Translate zh_hant="撰寫評論" zh_hans="撰写评论" en="Leave a Comment" />
-    ),
+    // title: () => (
+    //   <Translate zh_hant="撰寫評論" zh_hans="撰写评论" en="Leave a Comment" />
+    // ),
     intro: () => (
       <Translate
         zh_hant="分享你的觀點，與創作者開啟討論"
@@ -123,9 +123,9 @@ const AUTH_SOURCE_IMG = {
   },
   [UNIVERSAL_AUTH_SOURCE.create]: {
     image: IMAGE_AUTH_SOURCE_CREATE.src,
-    title: () => (
-      <Translate zh_hant="開始創作" zh_hans="开始创作" en="Start Creating" />
-    ),
+    // title: () => (
+    //   <Translate zh_hant="開始創作" zh_hans="开始创作" en="Start Creating" />
+    // ),
     intro: () => (
       <Translate
         zh_hant="發表你的第一篇作品，開始你的 Web3 探險"
@@ -136,13 +136,13 @@ const AUTH_SOURCE_IMG = {
   },
   [UNIVERSAL_AUTH_SOURCE.followUser]: {
     image: IMAGE_AUTH_SOURCE_FOLLOW.src,
-    title: () => (
-      <Translate
-        zh_hant="追蹤作者"
-        zh_hans="追踪作者"
-        en="Follow this Author?"
-      />
-    ),
+    // title: () => (
+    //   <Translate
+    //     zh_hant="追蹤作者"
+    //     zh_hans="追踪作者"
+    //     en="Follow this Author?"
+    //   />
+    // ),
     intro: () => (
       <Translate
         zh_hant="及時發現你喜愛的作者動態與創作"
@@ -153,13 +153,13 @@ const AUTH_SOURCE_IMG = {
   },
   [UNIVERSAL_AUTH_SOURCE.followTag]: {
     image: IMAGE_AUTH_SOURCE_FOLLOW.src,
-    title: () => (
-      <Translate
-        zh_hant="追蹤標籤"
-        zh_hans="追踪标签"
-        en="Follow this Author or Circle?"
-      />
-    ),
+    // title: () => (
+    //   <Translate
+    //     zh_hant="追蹤標籤"
+    //     zh_hans="追踪标签"
+    //     en="Follow this Author or Circle?"
+    //   />
+    // ),
     intro: () => (
       <Translate
         zh_hant="及時發現你喜愛的標籤動態"
@@ -170,13 +170,13 @@ const AUTH_SOURCE_IMG = {
   },
   [UNIVERSAL_AUTH_SOURCE.followCircle]: {
     image: IMAGE_AUTH_SOURCE_FOLLOW.src,
-    title: () => (
-      <Translate
-        zh_hant="追蹤圍爐"
-        zh_hans="追踪围炉"
-        en="Follow this Circle?"
-      />
-    ),
+    // title: () => (
+    //   <Translate
+    //     zh_hant="追蹤圍爐"
+    //     zh_hans="追踪围炉"
+    //     en="Follow this Circle?"
+    //   />
+    // ),
     intro: () => (
       <Translate
         zh_hant="及時發現你喜愛的圍爐動態"
@@ -187,13 +187,13 @@ const AUTH_SOURCE_IMG = {
   },
   [UNIVERSAL_AUTH_SOURCE.support]: {
     image: IMAGE_AUTH_SOURCE_SUPPORT.src,
-    title: () => (
-      <Translate
-        zh_hant="支持作品"
-        zh_hans="支持作品"
-        en="Want to Support this work?"
-      />
-    ),
+    // title: () => (
+    //   <Translate
+    //     zh_hant="支持作品"
+    //     zh_hans="支持作品"
+    //     en="Want to Support this work?"
+    //   />
+    // ),
     intro: () => (
       <Translate
         zh_hant="透過加密貨幣或法幣支付，給予創作者珍貴回饋"
@@ -205,18 +205,18 @@ const AUTH_SOURCE_IMG = {
 }
 
 const SourceHeader = ({ source }: { source: UNIVERSAL_AUTH_SOURCE }) => {
-  const Titlte = AUTH_SOURCE_IMG[source].title
+  // const Titlte = AUTH_SOURCE_IMG[source].title
   const Intro = AUTH_SOURCE_IMG[source].intro
 
   return (
     <section className={styles.sourceHeader}>
       <img src={AUTH_SOURCE_IMG[source].image} alt="banner image" />
 
-      <h3 className={styles.title}>
+      {/* <h3 className={styles.title}>
         <TextIcon size="xm" weight="md">
           <Titlte />
         </TextIcon>
-      </h3>
+      </h3> */}
 
       <p className={styles.intro}>
         <Intro />
