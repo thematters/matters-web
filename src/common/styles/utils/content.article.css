@@ -346,20 +346,3 @@
     opacity: 1; /* Firefox */
   }
 }
-
-/****
- * Editor Only
- */
-.editor-title {
-  & input {
-    margin-bottom: var(--spacing-base);
-    font-size: var(--font-size-article-title);
-    font-weight: var(--font-weight-article-title);
-    line-height: var(--line-height-article-title);
-
-    &::placeholder {
-      color: var(--color-grey);
-      opacity: 1; /* Firefox */
-    }
-  }
-}
