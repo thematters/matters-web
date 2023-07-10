@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { OPEN_RECOMMEND_TAG_DIALOG } from '~/common/enums'
-import { Dialog, Tabs, Translate, useDialogSwitch } from '~/components'
+import { Dialog, SegmentedTabs, Translate, useDialogSwitch } from '~/components'
 import { useEventListener } from '~/components/Hook'
 
 import Feed, { FeedType } from './Feed'
@@ -51,17 +51,20 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
           </Dialog.Message>
 
           <section className={styles.tabs}>
-            <Tabs>
-              <Tabs.Tab onClick={() => setFeed('hottest')} selected={isHottest}>
+            <SegmentedTabs>
+              <SegmentedTabs.Tab
+                onClick={() => setFeed('hottest')}
+                selected={isHottest}
+              >
                 <Translate zh_hant="熱門標籤" zh_hans="热门标签" />
-              </Tabs.Tab>
-              <Tabs.Tab
+              </SegmentedTabs.Tab>
+              <SegmentedTabs.Tab
                 onClick={() => setFeed('selected')}
                 selected={isSelected}
               >
                 <Translate zh_hant="編輯精選" zh_hans="编辑精选" />
-              </Tabs.Tab>
-            </Tabs>
+              </SegmentedTabs.Tab>
+            </SegmentedTabs>
           </section>
 
           <Feed type={feed} />

@@ -46,7 +46,7 @@ const RelatedTagsHeader = ({
         />
       }
       is="h2"
-      hasNoBorder
+      hasBorder={false}
     >
       <section className={styles.right}>
         {hasShuffle && <ShuffleButton onClick={onShuffle} />}

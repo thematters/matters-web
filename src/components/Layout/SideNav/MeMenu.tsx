@@ -8,9 +8,7 @@ import {
   IconAnalytics24,
   IconBookmark24,
   IconCircle24,
-  IconClap24,
   IconDraft24,
-  IconHelp24,
   IconHistory24,
   IconLogout24,
   IconProfile24,
@@ -18,7 +16,6 @@ import {
   IconWallet24,
   Menu,
   toast,
-  useFeatures,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -27,7 +24,6 @@ import { UserLogoutMutation } from '~/gql/graphql'
 
 const MeMenu: React.FC = () => {
   const viewer = useContext(ViewerContext)
-  const features = useFeatures()
   const viewerPath = toPath({
     page: 'userProfile',
     userName: viewer.userName || '',
@@ -83,34 +79,10 @@ const MeMenu: React.FC = () => {
         is="link"
       />
 
-      {circlePath && (
-        <Menu.Item
-          text={<FormattedMessage defaultMessage="Circle" description="" />}
-          icon={<IconCircle24 size="mdS" />}
-          href={circlePath.href}
-          is="link"
-        />
-      )}
-
       <Menu.Item
-        text={<FormattedMessage defaultMessage="Drafts" description="" />}
-        icon={<IconDraft24 size="mdS" />}
-        href={PATHS.ME_DRAFTS}
-        is="link"
-      />
-
-      {(features.add_credit || features.payout) && (
-        <Menu.Item
-          text={<FormattedMessage defaultMessage="Wallet" description="" />}
-          icon={<IconWallet24 size="mdS" />}
-          href={PATHS.ME_WALLET}
-          is="link"
-        />
-      )}
-      <Menu.Item
-        text={<FormattedMessage defaultMessage="Analytics" description="" />}
-        icon={<IconAnalytics24 size="mdS" />}
-        href={PATHS.ME_ANALYTICS}
+        text={<FormattedMessage defaultMessage="History" description="" />}
+        icon={<IconHistory24 size="mdS" />}
+        href={PATHS.ME_HISTORY}
         is="link"
       />
 
@@ -122,27 +94,36 @@ const MeMenu: React.FC = () => {
       />
 
       <Menu.Item
-        text={<FormattedMessage defaultMessage="Likes" description="" />}
-        icon={<IconClap24 size="mdS" />}
-        href={PATHS.ME_LIKES_SENT}
+        text={<FormattedMessage defaultMessage="Drafts" description="" />}
+        icon={<IconDraft24 size="mdS" />}
+        href={PATHS.ME_DRAFTS}
+        is="link"
+      />
+
+      {circlePath && (
+        <Menu.Item
+          text={<FormattedMessage defaultMessage="Circle" description="" />}
+          icon={<IconCircle24 size="mdS" />}
+          href={circlePath.href}
+          is="link"
+        />
+      )}
+
+      <Menu.Item
+        text={<FormattedMessage defaultMessage="Wallet" description="" />}
+        icon={<IconWallet24 size="mdS" />}
+        href={PATHS.ME_WALLET}
         is="link"
       />
 
       <Menu.Item
-        text={<FormattedMessage defaultMessage="Read History" description="" />}
-        icon={<IconHistory24 size="mdS" />}
-        href={PATHS.ME_HISTORY}
+        text={<FormattedMessage defaultMessage="Stats" description="" />}
+        icon={<IconAnalytics24 size="mdS" />}
+        href={PATHS.ME_ANALYTICS}
         is="link"
       />
 
       <Menu.Divider />
-
-      <Menu.Item
-        text={<FormattedMessage defaultMessage="Help Center" description="" />}
-        icon={<IconHelp24 size="mdS" />}
-        href={PATHS.HELP}
-        is="link"
-      />
 
       <Menu.Item
         text={<FormattedMessage defaultMessage="Settings" description="" />}

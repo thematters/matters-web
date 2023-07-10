@@ -35,6 +35,10 @@
     "defaultMessage": "Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress.",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
+  "1Z1M77": {
+    "defaultMessage": "No data yet",
+    "description": "src/views/Me/History/index.tsx"
+  },
   "1pFLGZ": {
     "defaultMessage": "Bug Bounty",
     "description": ""
@@ -375,10 +379,6 @@
     "defaultMessage": "Related Tags",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
-  "HtSDyc": {
-    "defaultMessage": "Help Center",
-    "description": ""
-  },
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -579,6 +579,10 @@
     "defaultMessage": " commented on your bookmarked article ",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
+  "U86B6w": {
+    "defaultMessage": "Stats",
+    "description": ""
+  },
   "U9IXic": {
     "defaultMessage": "添加作品",
     "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
@@ -769,6 +773,10 @@
   },
   "dg3JCQ": {
     "defaultMessage": "collaborators",
+    "description": ""
+  },
+  "djJp6c": {
+    "defaultMessage": "History",
     "description": ""
   },
   "dnsfmR": {
@@ -1135,6 +1143,10 @@
     "defaultMessage": "supported",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
+  "wCgTu5": {
+    "defaultMessage": "Comments",
+    "description": ""
+  },
   "wEQDC6": {
     "defaultMessage": "Edit",
     "description": ""
@@ -1158,6 +1170,10 @@
   "xGh9O7": {
     "defaultMessage": "As a reminder, the email address will not be used as a login but only as a contact channel.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "xMaFCO": {
+    "defaultMessage": "Articles",
+    "description": "src/views/Me/History/HistoryTabs.tsx"
   },
   "xOUZu2": {
     "defaultMessage": "Pin to profile",

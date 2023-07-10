@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import TextTruncate from 'react-text-truncate'
 
-import { capitalizeFirstLetter, stripHtml } from '~/common/utils'
+import { capitalizeFirstLetter, collapseContent } from '~/common/utils'
 import {
   Button,
   IconArrowDown16,
@@ -54,10 +54,8 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const [expand, setExpand] = useState(true)
   const [truncated, setTruncated] = useState(false)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
-  const collapseContent = stripHtml(
-    content ? content.replace(/\r?\n|\r|\s\s/g, '') : '',
-    ''
-  )
+  const collapsedContent = collapseContent(content)
+
   const contentClasses = classNames({
     [styles.expandable]: true,
     [styles[`${color}`]]: !!color,
@@ -130,7 +128,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
               line={limit}
               element="span"
               truncateText=""
-              text={collapseContent}
+              text={collapsedContent}
               onTruncated={() => {
                 setTruncated(true)
               }}

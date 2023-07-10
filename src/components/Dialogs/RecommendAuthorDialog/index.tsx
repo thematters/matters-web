@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { OPEN_RECOMMEND_AUTHOR_DIALOG } from '~/common/enums'
-import { Dialog, Tabs, Translate, useDialogSwitch } from '~/components'
+import { Dialog, SegmentedTabs, Translate, useDialogSwitch } from '~/components'
 import { useEventListener } from '~/components/Hook'
 
 import Feed, { FeedType } from './Feed'
@@ -52,20 +52,26 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
           </Dialog.Message>
 
           <section className={styles.tabs}>
-            <Tabs>
-              <Tabs.Tab onClick={() => setFeed('trendy')} selected={isTrendy}>
+            <SegmentedTabs>
+              <SegmentedTabs.Tab
+                onClick={() => setFeed('trendy')}
+                selected={isTrendy}
+              >
                 <Translate zh_hant="最受關注" zh_hans="最受关注" />
-              </Tabs.Tab>
-              <Tabs.Tab
+              </SegmentedTabs.Tab>
+              <SegmentedTabs.Tab
                 onClick={() => setFeed('appreciated')}
                 selected={isAppreciated}
               >
                 <Translate zh_hant="最受喜愛" zh_hans="最受喜爱" />
-              </Tabs.Tab>
-              <Tabs.Tab onClick={() => setFeed('active')} selected={isActive}>
+              </SegmentedTabs.Tab>
+              <SegmentedTabs.Tab
+                onClick={() => setFeed('active')}
+                selected={isActive}
+              >
                 <Translate zh_hant="熱愛交流" zh_hans="热爱交流" />
-              </Tabs.Tab>
-            </Tabs>
+              </SegmentedTabs.Tab>
+            </SegmentedTabs>
           </section>
 
           <Feed type={feed} />

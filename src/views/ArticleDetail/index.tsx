@@ -234,6 +234,7 @@ const BaseArticleDetail = ({
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header
+        mode="compact"
         right={
           <UserDigest.Rich
             user={article.author}

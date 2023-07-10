@@ -35,6 +35,10 @@
     "defaultMessage": "内容可能包含色情、暴力、血腥等限制级内容，部分用户可能不适合观看，或引起不适、心理负担，请谨慎判断是否阅读。",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
+  "1Z1M77": {
+    "defaultMessage": "尚无阅读记录",
+    "description": "src/views/Me/History/index.tsx"
+  },
   "1pFLGZ": {
     "defaultMessage": "漏洞赏金计划",
     "description": ""
@@ -375,10 +379,6 @@
     "defaultMessage": "相关标签",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
-  "HtSDyc": {
-    "defaultMessage": "帮助中心",
-    "description": ""
-  },
   "HxcjQl": {
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -579,6 +579,10 @@
     "defaultMessage": "评论了你收藏的作品 ",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
+  "U86B6w": {
+    "defaultMessage": "数据",
+    "description": ""
+  },
   "U9IXic": {
     "defaultMessage": "添加作品",
     "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
@@ -769,6 +773,10 @@
   },
   "dg3JCQ": {
     "defaultMessage": "协作者",
+    "description": ""
+  },
+  "djJp6c": {
+    "defaultMessage": "我的足跡",
     "description": ""
   },
   "dnsfmR": {
@@ -1135,6 +1143,10 @@
     "defaultMessage": "支持了",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
+  "wCgTu5": {
+    "defaultMessage": "评论",
+    "description": ""
+  },
   "wEQDC6": {
     "defaultMessage": "编辑资料",
     "description": ""
@@ -1158,6 +1170,10 @@
   "xGh9O7": {
     "defaultMessage": "提醒：信箱将不作为登入使用，仅作为联系渠道",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "xMaFCO": {
+    "defaultMessage": "阅读",
+    "description": "src/views/Me/History/HistoryTabs.tsx"
   },
   "xOUZu2": {
     "defaultMessage": "设为代表作",
