@@ -298,6 +298,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
         inEditor
       >
         <Layout.Header
+          mode="compact"
           right={
             <EditModeHeader
               {...coverProps}

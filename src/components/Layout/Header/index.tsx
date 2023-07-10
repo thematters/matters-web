@@ -13,8 +13,7 @@ interface HeaderProps {
   left?: React.ReactNode
   right?: React.ReactNode
 
-  mode?: 'solid-fixed' | 'transparent-absolute'
-  className?: string
+  mode?: 'solid' | 'transparent' | 'compact'
 }
 
 const Header: React.FC<HeaderProps> & {
@@ -23,22 +22,17 @@ const Header: React.FC<HeaderProps> & {
   RightButton: typeof RightButton
   MeButton: typeof MeButton
   Title: typeof Title
-} = ({ left, right, mode = 'solid-fixed', className }) => {
+} = ({ left, right, mode = 'solid' }) => {
   const headerClasses = classNames({
     [styles.header]: true,
     [styles[mode]]: true,
-    [styles[`${className}`]]: !!className,
-  })
-
-  const rightClasses = classNames({
-    [styles.right]: true,
   })
 
   return (
     <header className={headerClasses} data-test-id={TEST_ID.LAYOUT_HEADER}>
       <section className={styles.content}>
         {left && <section className={styles.left}>{left}</section>}
-        {right && <section className={rightClasses}>{right}</section>}
+        {right && <section className={styles.right}>{right}</section>}
       </section>
     </header>
   )
