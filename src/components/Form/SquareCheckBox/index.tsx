@@ -30,7 +30,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
 
   const [field] = useField({ ...inputProps, type: 'checkbox' })
 
-  const Content = () => (
+  const Content = (
     <label className={styles.label} title={`${hint}`}>
       <TextIcon
         icon={
@@ -64,13 +64,17 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
 
   return (
     <>
-      {/* FIXME: tooltip in dialog */}
       {hasTooltip && (
-        <Tooltip content={hint}>
-          <Content />
+        <Tooltip
+          content={hint}
+          appendTo="parent"
+          zIndex={100}
+          placement="auto-start"
+        >
+          {Content}
         </Tooltip>
       )}
-      {!hasTooltip && <Content />}
+      {!hasTooltip && <>{Content}</>}
     </>
   )
 }
