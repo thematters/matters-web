@@ -166,10 +166,10 @@
   height: var(--input-height);
   padding: var(--spacing-base);
   color: var(--color-black);
+  caret-color: var(--color-matters-green);
   background-color: var(--color-white);
   border-radius: var(--spacing-x-tight);
   transition-property: border-color, background-color;
-  caret-color: var(--color-matters-green);
 
   &:focus,
   &.focus {

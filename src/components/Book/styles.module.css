@@ -6,8 +6,11 @@
   height: 10rem;
   overflow: hidden;
   border-radius: 0.5rem;
-  box-shadow: 0 8px 16px 0 rgb(55 55 55 / 3%), 0 4px 8px 0 rgb(55 55 55 / 3%),
-    0 2px 4px 0 rgb(55 35 35 / 5%), 0 1px 2px 0 rgb(37 19 10 / 11%),
+  box-shadow:
+    0 8px 16px 0 rgb(55 55 55 / 3%),
+    0 4px 8px 0 rgb(55 55 55 / 3%),
+    0 2px 4px 0 rgb(55 35 35 / 5%),
+    0 1px 2px 0 rgb(37 19 10 / 11%),
     0 -2px 4px 0 rgb(0 0 0 / 18%) inset,
     0 2px 2px 0 rgb(255 255 255 / 50%) inset;
 
