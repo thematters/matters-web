@@ -4,6 +4,7 @@
   margin-bottom: var(--spacing-base-loose);
 
   & .info {
+    flex-grow: 1;
     padding: var(--spacing-x-tight) 0;
     margin-left: var(--spacing-x-loose);
 

@@ -10,6 +10,7 @@ import {
   useColorThief,
 } from '~/components'
 
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 export type BookProps = {
@@ -22,14 +23,9 @@ export type BookProps = {
   loading?: boolean
 }
 
-export const Book: React.FC<BookProps> = ({
-  title,
-  cover,
-  articleCount,
-  variant = 'classic',
-  hasMask,
-  loading,
-}) => {
+export const Book: React.FC<BookProps> & {
+  Placeholder: typeof Placeholder
+} = ({ title, cover, articleCount, variant = 'classic', hasMask, loading }) => {
   const hasCount = typeof articleCount === 'number'
 
   const { getColor, dominantColor, nodeRef: bookRef } = useColorThief()
@@ -85,3 +81,5 @@ export const Book: React.FC<BookProps> = ({
     </section>
   )
 }
+
+Book.Placeholder = Placeholder

@@ -1,11 +1,4 @@
-.buttons {
-  width: 7.5rem;
-  height: 2.5rem;
-  background: var(--color-grey-lighter);
-  border-radius: 2.5rem;
-}
-
-.followers {
+.title {
   width: 50%;
   height: 1.5rem;
   background: var(--color-grey-lighter);
@@ -13,7 +6,7 @@
 
 .description {
   width: 100%;
-  height: 1.25rem;
+  height: 1rem;
   margin-top: var(--spacing-x-tight);
   background: var(--color-grey-lighter);
 }

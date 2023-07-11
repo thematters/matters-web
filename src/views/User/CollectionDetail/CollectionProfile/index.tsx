@@ -1,15 +1,11 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ERROR_CODES } from '~/common/enums'
 import {
   Book,
   Button,
   DateTime,
-  EmptyLayout,
-  getErrorCodes,
   QueryError,
-  Spinner,
   Throw404,
   usePublicQuery,
   useRoute,
@@ -20,9 +16,10 @@ import EditCollection from '~/components/CollectionDigest/DropdownActions/EditCo
 import { CollectionDetailQuery } from '~/gql/graphql'
 
 import { COLLECTION_DETAIL } from './gql'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
-const Content = () => {
+const CollectionProfile = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const userName = getQuery('name')
@@ -39,46 +36,25 @@ const Content = () => {
       fetchPolicy: 'network-only',
     }
   )
+  const collection = data?.node!
+
+  console.log(error, collection)
 
   /**
    * Render
    */
-
   if (loading) {
-    return (
-      <EmptyLayout>
-        <Spinner />
-      </EmptyLayout>
-    )
+    return <Placeholder />
   }
 
   if (error) {
-    const err = error
-    const errorCodes = getErrorCodes(err)
-
-    if (errorCodes[0] === ERROR_CODES.ENTITY_NOT_FOUND) {
-      return (
-        <EmptyLayout>
-          <Throw404 />
-        </EmptyLayout>
-      )
-    }
-
-    return (
-      <EmptyLayout>
-        <QueryError error={err} />
-      </EmptyLayout>
-    )
+    return <QueryError error={error} />
   }
 
-  if (data?.node?.__typename !== 'Collection') {
-    return (
-      <EmptyLayout>
-        <Throw404 />
-      </EmptyLayout>
-    )
+  if (!collection || collection.__typename !== 'Collection') {
+    return <Throw404 />
   }
-  const collection = data.node
+
   const { title, cover, description, updatedAt, articles } = collection
 
   return (
@@ -123,6 +99,7 @@ const Content = () => {
               )}
             </section>
           </section>
+
           <section className={styles.midMenu}>
             <section className={styles.updatedDate}>
               <FormattedMessage
@@ -144,4 +121,4 @@ const Content = () => {
   )
 }
 
-export default Content
+export default CollectionProfile

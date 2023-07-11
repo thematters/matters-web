@@ -1,11 +1,11 @@
 import { Layout } from '~/components'
 import AsideUserProfile from '~/components/UserProfile/AsideUserProfile'
 
-import BaseCollectionDetail from './Content'
+import CollectionProfile from './CollectionProfile'
 
 const CollectionDetail = () => (
   <Layout.Main aside={<AsideUserProfile />}>
-    <BaseCollectionDetail />
+    <CollectionProfile />
   </Layout.Main>
 )
 

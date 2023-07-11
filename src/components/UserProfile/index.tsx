@@ -75,7 +75,6 @@ export const UserProfile = () => {
   /**
    * Render
    */
-
   if (loading) {
     return <Placeholder />
   }

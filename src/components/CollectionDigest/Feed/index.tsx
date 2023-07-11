@@ -8,6 +8,7 @@ import { CollectionDigestFeedCollectionFragment } from '~/gql/graphql'
 
 import DropdownActions from '../DropdownActions'
 import { fragments } from './gql'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 export type CollectionDigestFeedControls = {
@@ -21,7 +22,7 @@ export type CollectionDigestFeedProps = {
 const BaseCollectionDigestFeed = ({
   collection,
   onClick,
-}: CollectionDigestFeedProps) => {
+}: CollectionDigestFeedProps & { Placeholder: typeof Placeholder }) => {
   const { title, description, cover, author, updatedAt, articles } = collection
   const cleanedDescription = stripHtml(description || '')
 
@@ -105,17 +106,23 @@ const BaseCollectionDigestFeed = ({
 type MemoizedCollectionDigestFeed = React.MemoExoticComponent<
   React.FC<CollectionDigestFeedProps>
 > & {
+  Placeholder: typeof Placeholder
   fragments: typeof fragments
 }
 
 const CollectionDigestFeed = React.memo(
   BaseCollectionDigestFeed,
   ({ collection: prevCollection }, { collection }) => {
-    // TODO
-    return false
+    return (
+      prevCollection.pinned === collection.pinned &&
+      prevCollection.description === collection.description &&
+      prevCollection.cover === collection.cover &&
+      prevCollection.title === collection.title
+    )
   }
 ) as MemoizedCollectionDigestFeed
 
+CollectionDigestFeed.Placeholder = Placeholder
 CollectionDigestFeed.fragments = fragments
 
 export default CollectionDigestFeed

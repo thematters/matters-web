@@ -17,9 +17,7 @@ const Placeholder = () => {
       </header>
 
       <section className={styles.info}>
-        <section className={styles.displayName}>
-          <div className={placeholderStyles.displayName} />
-        </section>
+        <section className={styles.displayName}></section>
 
         <section className={styles.username}>
           <span className={styles.name}>@{userName}</span>
