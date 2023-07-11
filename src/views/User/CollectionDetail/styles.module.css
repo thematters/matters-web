@@ -11,6 +11,10 @@
       margin-bottom: var(--spacing-base);
       font-size: var(--font-size-article-h2);
     }
+
+    & .description {
+      color: var(--color-grey-dark);
+    }
   }
 }
 

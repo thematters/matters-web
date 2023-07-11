@@ -1,5 +1,5 @@
 .newCollection {
-  padding: var(--spacing-x-tight) var(--spacing-base-loose);
+  padding: var(--spacing-x-tight) 0;
   font-size: var(--font-size-sm);
   line-height: var(--line-height-base-loose);
   color: var(--color-matters-green);
@@ -12,20 +12,18 @@
 }
 
 .formContainer {
-  /* padding: 0 var(--spacing-base-loose); */
+  margin: 0 var(--spacing-base-loose);
+
+  & :global(form) {
+    position: relative;
+  }
 
   & .listForm {
     @mixin border-bottom-grey;
 
     max-height: 22.5rem;
-
-    /* padding: 0 var(--spacing-base-loose); */
     padding-bottom: var(--spacing-tight);
     margin-bottom: var(--spacing-tight);
     overflow-y: auto;
-
-    /* & label {
-      padding: 0 var(--spacing-base-loose);
-    } */
   }
 }

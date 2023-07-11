@@ -166,7 +166,7 @@ export const validateCollectionTitle = (value: string, lang: Language) => {
     return translate({
       zh_hant: '輸入字數過短，僅供輸入 1-40 個字元',
       zh_hans: '输入字数过短，仅供输入 1-40 个字符',
-      en: 'Must be between 1-20 characters long.',
+      en: 'Must be between 1-40 characters long.',
       lang,
     })
   }
