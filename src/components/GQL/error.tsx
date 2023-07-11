@@ -48,12 +48,14 @@ export const getErrorContent = (code: ErrorCodeKeys, error: ApolloError) => {
  */
 export type MutationOnErrorOptions = {
   showToast?: boolean
+  customErrors?: { [key: string]: string | React.ReactNode }
 }
 export const mutationOnError = (
   error: ApolloError,
   options?: MutationOnErrorOptions
 ) => {
-  const { showToast } = options || { showToast: true }
+  let { showToast, customErrors } = options || {}
+  showToast = typeof showToast === 'undefined' ? true : showToast
 
   // Add info to Sentry
   import('@sentry/browser').then((Sentry) => {
@@ -73,7 +75,9 @@ export const mutationOnError = (
   // Get error code and check corresponding content, if it's invalid
   // then expose error code
   const errorCode = errorCodes[0] || ''
-  const errorContent = getErrorContent(errorCode, error)
+  const errorContent =
+    (customErrors ? customErrors[errorCode] : '') ||
+    getErrorContent(errorCode, error)
 
   /**
    * Catch auth errors

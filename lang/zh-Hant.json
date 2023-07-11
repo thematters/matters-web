@@ -71,6 +71,9 @@
     "defaultMessage": "我的草稿",
     "description": ""
   },
+  "2oxLHg": {
+    "defaultMessage": "最多可設置 3 個代表作"
+  },
   "2slIPX": {
     "defaultMessage": "讚賞",
     "description": ""
@@ -166,6 +169,10 @@
   "7xnrxG": {
     "defaultMessage": "作品已添加至精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "84VOdX": {
+    "defaultMessage": "取消代表作",
+    "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
   },
   "8KFsZN": {
     "defaultMessage": "閱讀次數",
@@ -350,6 +357,9 @@
     "defaultMessage": "下月預期營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "FgydNe": {
+    "defaultMessage": "查看"
+  },
   "FhWC22": {
     "defaultMessage": "社區共建基地",
     "description": ""
@@ -416,6 +426,9 @@
   "IKPYe9": {
     "defaultMessage": "查看",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
+  "Ihwz5K": {
+    "defaultMessage": "代表作已取消"
   },
   "ItUuuX": {
     "defaultMessage": "邀你加入圍爐 {circleName} ，你可以免費體驗 {freePeriod} 天",
@@ -717,6 +730,9 @@
   },
   "Xi40U9": {
     "defaultMessage": "操作無法撤銷，確認刪除選集嗎？"
+  },
+  "XuYhBC": {
+    "defaultMessage": "代表作已設置"
   },
   "Xz/AHp": {
     "defaultMessage": " 广播提及你",

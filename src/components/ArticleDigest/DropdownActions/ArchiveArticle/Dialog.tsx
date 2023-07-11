@@ -56,7 +56,7 @@ const ArchiveArticleDialog = ({
       update: (cache) => {
         updateUserArticles({
           cache,
-          articleId: article.id,
+          targetId: article.id,
           userName: article.author.userName,
           type: 'archive',
         })

@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { CollectionDigest } from '~/components'
 
-const fragment = gql`
+const fragments = gql`
   fragment CollectionsUser on User {
     id
     userName
@@ -31,12 +31,11 @@ const fragment = gql`
   ${CollectionDigest.Feed.fragments.collection}
 `
 
-// with `Public` suffix, query as an anonymous user
 export const USER_COLLECTIONS = gql`
   query UserCollections($userName: String!, $after: String) {
     user(input: { userName: $userName }) {
       ...CollectionsUser
     }
   }
-  ${fragment}
+  ${fragments}
 `

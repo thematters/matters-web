@@ -44,8 +44,6 @@ const PayoutDialogContent = ({
   const isConfirm = currStep === 'confirm'
   const isResetPassword = currStep === 'resetPassword'
 
-  console.log({ prevStep })
-
   return (
     <>
       {isConnectStripeAccount && (

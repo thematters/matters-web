@@ -17,7 +17,3 @@
   justify-content: center;
   font-weight: var(--font-weight-medium);
 }
-
-.header {
-  @mixin flex-center-space-between;
-}

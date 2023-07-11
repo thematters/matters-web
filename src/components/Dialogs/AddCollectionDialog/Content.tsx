@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { KEYVALUE } from '@/src/common/enums'
+import { KEYVALUE } from '~/common/enums'
 import { toPath, validateCollectionTitle } from '~/common/utils'
 import {
   Dialog,

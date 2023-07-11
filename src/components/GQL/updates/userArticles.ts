@@ -1,67 +1,80 @@
 import { DataProxy } from 'apollo-cache'
 
 import { UserArticlesPublicQuery } from '~/gql/graphql'
+import { UserCollectionsQuery } from '~/gql/graphql'
 
 const update = ({
   cache,
-  articleId,
+  targetId,
   userName,
   type,
 }: {
   cache: DataProxy
-  articleId: string
+  targetId: string
   userName?: string | null
-  type: 'archive'
+  type: 'pin' | 'unpin' | 'archive'
 }) => {
   // FIXME: circular dependencies
   const { USER_ARTICLES_PUBLIC } = require('~/views/User/Articles/gql')
+  const { USER_COLLECTIONS } = require('~/views/User/Collections/gql')
 
   if (!userName) {
     return
   }
 
+  let articlesData: UserArticlesPublicQuery | null = null
   try {
-    const data = cache.readQuery<UserArticlesPublicQuery>({
+    articlesData = cache.readQuery<UserArticlesPublicQuery>({
       query: USER_ARTICLES_PUBLIC,
       variables: { userName },
-    })
-
-    if (!data?.user?.status || !data.user.articles.edges) {
-      return
-    }
-
-    let edges = data.user.articles.edges
-    let { articleCount, totalWordCount } = data.user.status
-    const targetEdge = edges.filter(({ node }) => node.id === articleId)[0]
-
-    switch (type) {
-      case 'archive':
-        articleCount = articleCount - 1
-        totalWordCount = totalWordCount - (targetEdge.node.wordCount || 0)
-        break
-    }
-
-    cache.writeQuery({
-      query: USER_ARTICLES_PUBLIC,
-      variables: { userName },
-      data: {
-        user: {
-          ...data.user,
-          articles: {
-            ...data.user.articles,
-            edges,
-          },
-          status: {
-            ...data.user.status,
-            articleCount,
-            totalWordCount,
-          },
-        },
-      },
     })
   } catch (e) {
-    console.error(e)
+    //
   }
+
+  let collectionsData: UserCollectionsQuery | null = null
+  try {
+    collectionsData = cache.readQuery<UserCollectionsQuery>({
+      query: USER_COLLECTIONS,
+      variables: { userName },
+    })
+  } catch (e) {
+    //
+  }
+
+  const articleEdges = articlesData?.user?.articles?.edges || []
+  const collectionEdges = collectionsData?.user?.collections?.edges || []
+  const articles = articleEdges.map((e) => e.node)
+  const collecetions = collectionEdges.map((e) => e.node)
+
+  const target = (articles.find((a) => a.id === targetId) ||
+    collecetions.find((a) => a.id === targetId))!
+
+  let pinnedWorks = articlesData?.user?.pinnedWorks || []
+
+  switch (type) {
+    case 'pin':
+      pinnedWorks = [...pinnedWorks, target]
+      break
+    case 'unpin':
+      pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
+      break
+    case 'archive':
+      // remove pinned article if it's archived
+      pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
+      break
+  }
+
+  cache.writeQuery({
+    query: USER_ARTICLES_PUBLIC,
+    variables: { userName },
+    data: {
+      user: {
+        ...articlesData?.user,
+        pinnedWorks,
+      },
+    },
+  })
 }
 
 export default update
