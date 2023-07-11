@@ -3,15 +3,23 @@ import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import BOOK_COVER from '@/public/static/images/book-cover.png'
-import { ResponsiveImage, useColorThief } from '~/components'
+import {
+  IconCamera24,
+  ResponsiveImage,
+  Spinner,
+  useColorThief,
+} from '~/components'
 
 import styles from './styles.module.css'
 
-type BookProps = {
+export type BookProps = {
   title: string
   cover?: string | null
   articleCount?: number
   variant?: 'flat' | 'classic'
+
+  hasMask?: boolean
+  loading?: boolean
 }
 
 export const Book: React.FC<BookProps> = ({
@@ -19,6 +27,8 @@ export const Book: React.FC<BookProps> = ({
   cover,
   articleCount,
   variant = 'classic',
+  hasMask,
+  loading,
 }) => {
   const hasCount = typeof articleCount === 'number'
 
@@ -52,6 +62,11 @@ export const Book: React.FC<BookProps> = ({
     >
       <div className={styles.cover}>
         <ResponsiveImage url={cover || BOOK_COVER.src} size="360w" anonymous />
+        {hasMask && (
+          <div className={styles.mask}>
+            {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
+          </div>
+        )}
       </div>
 
       <section className={jacketClasses}>

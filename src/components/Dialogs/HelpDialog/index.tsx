@@ -42,7 +42,7 @@ const ReadCount = () => (
   <>
     <h2 className={styles.title}>
       <TextIcon icon={<IconRead16 size="md" />} weight="md">
-        <FormattedMessage defaultMessage="Read Counts" description="" />
+        <FormattedMessage defaultMessage="Read Counts" />
       </TextIcon>
     </h2>
     <p className={styles.description}>
@@ -62,9 +62,7 @@ const BaseHelpDialog = ({ children, hasCount, hasTime }: Props) => {
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header
-          title={<FormattedMessage defaultMessage="Help" description="" />}
-        />
+        <Dialog.Header title={<FormattedMessage defaultMessage="Help" />} />
 
         <Dialog.Message align="left">
           {hasTime && <ReadTime />}
@@ -73,7 +71,7 @@ const BaseHelpDialog = ({ children, hasCount, hasTime }: Props) => {
 
         <Dialog.Footer
           closeDialog={closeDialog}
-          closeText={<FormattedMessage defaultMessage="I see" description="" />}
+          closeText={<FormattedMessage defaultMessage="I see" />}
         />
       </Dialog>
     </>

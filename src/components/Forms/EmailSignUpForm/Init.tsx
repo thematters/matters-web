@@ -18,6 +18,7 @@ import {
   LanguageContext,
   LanguageSwitch,
   Layout,
+  Spacer,
   Translate,
   //  ReCaptchaContext,
   useMutation,
@@ -25,7 +26,6 @@ import {
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
-import { EmailLoginButton } from './Buttons'
 import styles from './styles.module.css'
 
 interface FormProps {
@@ -126,9 +126,7 @@ const Init: React.FC<FormProps> = ({
     <section className={containerClasses}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
-          label={
-            <FormattedMessage defaultMessage="Display Name" description="" />
-          }
+          label={<FormattedMessage defaultMessage="Display Name" />}
           type="text"
           name="displayName"
           required
@@ -143,7 +141,7 @@ const Init: React.FC<FormProps> = ({
         />
 
         <Form.Input
-          label={<FormattedMessage defaultMessage="Email" description="" />}
+          label={<FormattedMessage defaultMessage="Email" />}
           type="email"
           name="email"
           required
@@ -164,26 +162,20 @@ const Init: React.FC<FormProps> = ({
           onChange={handleChange}
           hint={
             <>
-              <FormattedMessage
-                defaultMessage="I have read and agree to"
-                description=""
-              />
+              <FormattedMessage defaultMessage="I have read and agree to" />
               <Link href={PATHS.TOS} legacyBehavior>
                 <a className="u-link-green" target="_blank">
                   &nbsp;
-                  <FormattedMessage
-                    defaultMessage="Terms and Privacy Policy"
-                    description=""
-                  />
+                  <FormattedMessage defaultMessage="Terms and Privacy Policy" />
                 </a>
               </Link>
             </>
           }
           required
         />
-
-        <EmailLoginButton gotoEmailLogin={gotoEmailLogin} isInPage={isInPage} />
       </Form>
+
+      <Spacer size="base" />
     </section>
   )
 
@@ -192,7 +184,7 @@ const Init: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Next" description="" />}
+      text={<FormattedMessage defaultMessage="Next" />}
       loading={isSubmitting}
     />
   )
@@ -208,7 +200,7 @@ const Init: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={<FormattedMessage defaultMessage="Next" description="" />}
+                text={<FormattedMessage defaultMessage="Next" />}
                 loading={isSubmitting}
               />
             </>

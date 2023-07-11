@@ -26,21 +26,21 @@ const CircleDetailTabs = () => {
         {...circleDetailPath}
         selected={isInPath('CIRCLE_DETAIL')}
       >
-        <FormattedMessage defaultMessage="Articles" description="" />
+        <FormattedMessage defaultMessage="Articles" />
       </SegmentedTabs.Tab>
 
       <SegmentedTabs.Tab
         {...circleDiscussionPath}
         selected={isInPath('CIRCLE_DISCUSSION')}
       >
-        <FormattedMessage defaultMessage="Discussion" description="" />
+        <FormattedMessage defaultMessage="Discussion" />
       </SegmentedTabs.Tab>
 
       <SegmentedTabs.Tab
         {...circleBroadcastPath}
         selected={isInPath('CIRCLE_BROADCAST')}
       >
-        <FormattedMessage defaultMessage="Broadcast" description="" />
+        <FormattedMessage defaultMessage="Broadcast" />
       </SegmentedTabs.Tab>
     </SegmentedTabs>
   )

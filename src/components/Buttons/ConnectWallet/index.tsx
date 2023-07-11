@@ -13,7 +13,7 @@ export const ConnectWalletButton = () => {
       href={PATHS.ME_SETTINGS_CONNECT_WALLET}
     >
       <TextIcon color="white" weight="md">
-        <FormattedMessage defaultMessage="Connect Wallet" description="" />
+        <FormattedMessage defaultMessage="Connect Wallet" />
       </TextIcon>
     </Button>
   )

@@ -68,7 +68,7 @@ const BaseDropdownActions = ({
 
       {isCircleOwner && (
         <Menu.Item
-          text={<FormattedMessage defaultMessage="Analytics" description="" />}
+          text={<FormattedMessage defaultMessage="Analytics" />}
           icon={<IconAnalytics24 size="mdS" />}
           {...toPath({ page: 'circleAnalytics', circle })}
           is="link"

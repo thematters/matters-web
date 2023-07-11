@@ -114,9 +114,7 @@ const SearchSelectForm = ({
       onClick={onClickSave}
       // disabled={stagingNodes.length <= 0}
       text={
-        headerRightButtonText || (
-          <FormattedMessage defaultMessage="Confirm" description="" />
-        )
+        headerRightButtonText || <FormattedMessage defaultMessage="Confirm" />
       }
       loading={saving}
     />
@@ -156,7 +154,7 @@ const SearchSelectForm = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              text={<FormattedMessage defaultMessage="Cancel" />}
               color="greyDarker"
               onClick={closeDialog}
             />

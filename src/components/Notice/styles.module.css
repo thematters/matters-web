@@ -98,10 +98,6 @@
   padding: var(--spacing-x-tight);
 }
 
-.highlight {
-  color: var(--color-matters-green);
-}
-
 /* NoticeCircleName */
 .circleDisplayName {
   color: var(--color-black);

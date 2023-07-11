@@ -17,8 +17,4 @@
 .count {
   margin-left: var(--spacing-xx-tight);
   color: var(--color-grey);
-
-  & .highlight {
-    color: var(--color-matters-green);
-  }
 }

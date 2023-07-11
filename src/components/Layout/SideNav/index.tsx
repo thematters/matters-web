@@ -56,9 +56,7 @@ const SideNavMenu = () => {
       />
 
       <NavListItem
-        name={
-          <FormattedMessage defaultMessage="Notifications" description="" />
-        }
+        name={<FormattedMessage defaultMessage="Notifications" />}
         icon={<UnreadIcon.Notification />}
         activeIcon={<UnreadIcon.Notification active />}
         active={isInNotification}
@@ -74,7 +72,7 @@ const SideNavMenu = () => {
           <section>
             <VisuallyHidden>
               <button type="button">
-                <FormattedMessage defaultMessage="Cancel" description="" />
+                <FormattedMessage defaultMessage="Cancel" />
               </button>
             </VisuallyHidden>
             <MeMenu />
@@ -88,7 +86,7 @@ const SideNavMenu = () => {
         {({ openDropdown, ref }) => (
           <NavListItem
             onClick={openDropdown}
-            name={<FormattedMessage defaultMessage="My Page" description="" />}
+            name={<FormattedMessage defaultMessage="My Page" />}
             icon={<IconNavMe32 size="lg" />}
             activeIcon={<IconNavMeActive32 size="lg" />}
             active={isInMe}

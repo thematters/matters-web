@@ -101,7 +101,7 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
   const SubmitButton = () => (
     <Dialog.TextButton
       onClick={onClickSave}
-      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={loading}
     />
   )
@@ -134,7 +134,7 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              text={<FormattedMessage defaultMessage="Cancel" />}
               color="greyDarker"
               onClick={closeDialog}
             />

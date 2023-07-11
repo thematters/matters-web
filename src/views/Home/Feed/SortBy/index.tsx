@@ -47,21 +47,21 @@ const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
         onClick={() => setFeedType('hottest')}
         selected={isHottest}
       >
-        <FormattedMessage defaultMessage="Trending" description="" />
+        <FormattedMessage defaultMessage="Trending" />
       </SegmentedTabs.Tab>
 
       <SegmentedTabs.Tab
         onClick={() => setFeedType('newest')}
         selected={isNewset}
       >
-        <FormattedMessage defaultMessage="Latest" description="" />
+        <FormattedMessage defaultMessage="Latest" />
       </SegmentedTabs.Tab>
 
       <SegmentedTabs.Tab
         onClick={() => setFeedType('icymi')}
         selected={isICYMI}
       >
-        <FormattedMessage defaultMessage="Featured" description="" />
+        <FormattedMessage defaultMessage="Featured" />
       </SegmentedTabs.Tab>
     </SegmentedTabs>
   )

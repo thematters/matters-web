@@ -254,10 +254,7 @@ const Connect: React.FC<FormProps> = ({
         if (loginData?.walletLogin.type === AuthResultType.Login) {
           toast.success({
             message: (
-              <FormattedMessage
-                defaultMessage="Logged in successfully"
-                description=""
-              />
+              <FormattedMessage defaultMessage="Logged in successfully" />
             ),
           })
 
@@ -298,9 +295,7 @@ const Connect: React.FC<FormProps> = ({
     <section className={containerClasses}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.List
-          groupName={
-            <FormattedMessage defaultMessage="Connect Wallet" description="" />
-          }
+          groupName={<FormattedMessage defaultMessage="Connect Wallet" />}
           spacingX={isInPage ? 0 : 'base'}
         >
           <Form.List.Item title={maskAddress(values.address)} />
@@ -311,10 +306,7 @@ const Connect: React.FC<FormProps> = ({
             fieldMsgId={fieldMsgId}
             hint={
               !errors.address ? (
-                <FormattedMessage
-                  defaultMessage="To change, switch it directly on your wallet"
-                  description=""
-                />
+                <FormattedMessage defaultMessage="To change, switch it directly on your wallet" />
               ) : undefined
             }
             error={errors.address}
@@ -338,7 +330,7 @@ const Connect: React.FC<FormProps> = ({
 
         {isSignUp && (
           <Form.Input
-            label={<FormattedMessage defaultMessage="Email" description="" />}
+            label={<FormattedMessage defaultMessage="Email" />}
             type="email"
             name="email"
             required
@@ -365,10 +357,7 @@ const Connect: React.FC<FormProps> = ({
             onBlur={handleBlur}
             onChange={handleChange}
             hint={
-              <FormattedMessage
-                defaultMessage="Email will not be used as a login but only as a contact channel."
-                description=""
-              />
+              <FormattedMessage defaultMessage="Email will not be used as a login but only as a contact channel." />
             }
           />
         )}
@@ -414,17 +403,11 @@ const Connect: React.FC<FormProps> = ({
             onChange={handleChange}
             hint={
               <>
-                <FormattedMessage
-                  defaultMessage="I have read and agree to"
-                  description=""
-                />
+                <FormattedMessage defaultMessage="I have read and agree to" />
                 <Link href={PATHS.TOS} legacyBehavior>
                   <a className="u-link-green" target="_blank">
                     &nbsp;
-                    <FormattedMessage
-                      defaultMessage="Terms and Privacy Policy"
-                      description=""
-                    />
+                    <FormattedMessage defaultMessage="Terms and Privacy Policy" />
                   </a>
                 </Link>
               </>
@@ -443,7 +426,7 @@ const Connect: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting || loading || !account}
-      text={<FormattedMessage defaultMessage="Next" description="" />}
+      text={<FormattedMessage defaultMessage="Next" />}
       loading={isSubmitting || loading}
     />
   )
@@ -459,7 +442,7 @@ const Connect: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting || loading || !account}
-                text={<FormattedMessage defaultMessage="Next" description="" />}
+                text={<FormattedMessage defaultMessage="Next" />}
                 loading={isSubmitting || loading}
               />
             </>

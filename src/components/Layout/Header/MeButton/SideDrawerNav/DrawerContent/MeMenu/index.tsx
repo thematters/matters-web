@@ -48,7 +48,7 @@ const Top: React.FC = () => {
     <Menu>
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Profile" description="" />}
+        text={<FormattedMessage defaultMessage="Profile" />}
         icon={<IconProfile24 size="md" />}
         {...viewerPath}
         is="link"
@@ -56,7 +56,7 @@ const Top: React.FC = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Read History" description="" />}
+        text={<FormattedMessage defaultMessage="Read History" />}
         icon={<IconHistory24 size="md" />}
         href={PATHS.ME_HISTORY}
         is="link"
@@ -64,7 +64,7 @@ const Top: React.FC = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Bookmarks" description="" />}
+        text={<FormattedMessage defaultMessage="Bookmarks" />}
         icon={<IconBookmark24 size="md" />}
         href={PATHS.ME_BOOKMARKS}
         is="link"
@@ -72,7 +72,7 @@ const Top: React.FC = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Drafts" description="" />}
+        text={<FormattedMessage defaultMessage="Drafts" />}
         icon={<IconDraft24 size="md" />}
         href={PATHS.ME_DRAFTS}
         is="link"
@@ -81,7 +81,7 @@ const Top: React.FC = () => {
       {circlePath && (
         <Menu.Item
           {...menuItemProps}
-          text={<FormattedMessage defaultMessage="Circle" description="" />}
+          text={<FormattedMessage defaultMessage="Circle" />}
           icon={<IconCircle24 size="md" />}
           href={circlePath.href}
           is="link"
@@ -90,7 +90,7 @@ const Top: React.FC = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Wallet" description="" />}
+        text={<FormattedMessage defaultMessage="Wallet" />}
         icon={<IconWallet24 size="md" />}
         href={PATHS.ME_WALLET}
         is="link"
@@ -98,7 +98,7 @@ const Top: React.FC = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Stats" description="" />}
+        text={<FormattedMessage defaultMessage="Stats" />}
         icon={<IconAnalytics24 size="md" />}
         href={PATHS.ME_ANALYTICS}
         is="link"
@@ -118,12 +118,7 @@ const Bottom = () => {
       removeCookies([COOKIE_TOKEN_NAME, COOKIE_USER_GROUP])
 
       toast.success({
-        message: (
-          <FormattedMessage
-            defaultMessage="Logged out successfully"
-            description=""
-          />
-        ),
+        message: <FormattedMessage defaultMessage="Logged out successfully" />,
       })
 
       // await clearPersistCache()
@@ -132,10 +127,7 @@ const Bottom = () => {
     } catch (e) {
       toast.error({
         message: (
-          <FormattedMessage
-            defaultMessage="Failed to log out, please try again."
-            description=""
-          />
+          <FormattedMessage defaultMessage="Failed to log out, please try again." />
         ),
       })
     }
@@ -145,7 +137,7 @@ const Bottom = () => {
     <Menu>
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Settings" description="" />}
+        text={<FormattedMessage defaultMessage="Settings" />}
         icon={<IconSettings24 size="md" />}
         href={PATHS.ME_SETTINGS}
         is="link"
@@ -153,7 +145,7 @@ const Bottom = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Log Out" description="" />}
+        text={<FormattedMessage defaultMessage="Log Out" />}
         icon={<IconLogout24 size="md" />}
         onClick={onClickLogout}
       />

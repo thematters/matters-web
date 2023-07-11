@@ -60,6 +60,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
             }
             onClick={gotoWalletAuth}
             role="button"
+            rightIcon={null}
           />
           <Form.List.Item
             title={
@@ -83,6 +84,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
             }
             onClick={gotoEmailLogin}
             role="button"
+            rightIcon={null}
           />
         </Form.List>
       </section>
@@ -105,7 +107,11 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header title="authEntries" closeDialog={closeDialog} />
+      <Dialog.Header
+        title="authEntries"
+        closeDialog={closeDialog}
+        hasSmUpCloseBtn
+      />
 
       <Dialog.Content>
         <SourceHeader source={source} />

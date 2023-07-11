@@ -2,7 +2,7 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import { FormattedMessage } from 'react-intl'
 
 import { TextId } from '~/common/enums'
-import { Media, Translate } from '~/components'
+import { Button, IconClose22, Media, Translate } from '~/components'
 
 import { TextButton } from '../Buttons'
 import styles from './styles.module.css'
@@ -10,10 +10,13 @@ import styles from './styles.module.css'
 export interface HeaderProps {
   title: TextId | React.ReactNode
   hasSmUpTitle?: boolean
+
   leftBtn?: React.ReactNode
   rightBtn?: React.ReactNode | string
+
   closeText?: React.ReactNode
   closeDialog?: () => any
+  hasSmUpCloseBtn?: boolean
 }
 
 const Title = ({ title }: Pick<HeaderProps, 'title'>) => (
@@ -29,10 +32,9 @@ const Header: React.FC<HeaderProps> = ({
   rightBtn,
   closeText,
   closeDialog,
+  hasSmUpCloseBtn,
 }) => {
-  const text = closeText || (
-    <FormattedMessage defaultMessage="Cancel" description="" />
-  )
+  const text = closeText || <FormattedMessage defaultMessage="Cancel" />
 
   return (
     <>
@@ -53,6 +55,16 @@ const Header: React.FC<HeaderProps> = ({
         {hasSmUpTitle ? (
           <header className={styles.smUpheader}>
             <Title title={title} />
+
+            {hasSmUpCloseBtn && closeDialog && (
+              <Button
+                onClick={closeDialog}
+                textColor="greyDarker"
+                textActiveColor="black"
+              >
+                <IconClose22 size="md" />
+              </Button>
+            )}
           </header>
         ) : (
           <VisuallyHidden>

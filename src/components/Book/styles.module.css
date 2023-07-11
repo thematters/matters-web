@@ -1,7 +1,9 @@
 .book.classic {
   position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   width: 7.5rem;
   height: 10rem;
   overflow: hidden;
@@ -99,6 +101,13 @@
         bottom: var(--spacing-x-tight);
       }
     }
+  }
+
+  & .mask {
+    @mixin expand-to-container;
+    @mixin flex-center-all;
+
+    background: rgb(0 0 0 / 50%);
   }
 }
 

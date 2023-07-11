@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  margin-top: var(--spacing-x-loose);
+  margin-bottom: var(--spacing-base-loose);
+
+  & .info {
+    padding: var(--spacing-x-tight) 0;
+    margin-left: var(--spacing-x-loose);
+
+    & .title {
+      margin-bottom: var(--spacing-base);
+      font-size: var(--font-size-article-h2);
+    }
+
+    & .description {
+      color: var(--color-grey-dark);
+    }
+  }
+}
+
+.midMenu {
+  @mixin border-top-grey;
+  @mixin border-bottom-grey;
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-base) 0;
+
+  & .updatedDate {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-base-loose);
+    color: var(--color-grey);
+  }
+}

@@ -20,14 +20,14 @@ const UserTabs = () => {
   return (
     <Tabs>
       <Tabs.Tab {...userArticlesPath} selected={isInPath('USER_ARTICLES')}>
-        <FormattedMessage defaultMessage="Articles" description="" />
+        <FormattedMessage defaultMessage="Articles" />
       </Tabs.Tab>
 
       <Tabs.Tab
         {...userCollectionsPath}
         selected={isInPath('USER_COLLECTIONS')}
       >
-        <FormattedMessage defaultMessage="Collections" description="" />
+        <FormattedMessage defaultMessage="Collections" />
       </Tabs.Tab>
     </Tabs>
   )

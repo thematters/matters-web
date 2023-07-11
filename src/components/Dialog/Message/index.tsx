@@ -6,8 +6,9 @@ import { Dialog } from '~/components'
 import styles from './styles.module.css'
 
 interface DialogMessageProps {
-  align?: 'left'
-  type?: 'error' | 'info'
+  align?: 'left' | 'center'
+  smUpAlign?: 'left' | 'center'
+  type?: 'error'
 }
 
 /**
@@ -26,7 +27,8 @@ interface DialogMessageProps {
  *
  */
 const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
-  align,
+  align = 'center',
+  smUpAlign = align,
   type,
 
   children,
@@ -35,6 +37,8 @@ const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
     [styles.content]: true,
     [styles[`${type}`]]: !!type,
     [align ? styles[`align${capitalizeFirstLetter(align)}`] : '']: !!align,
+    [smUpAlign ? styles[`alignSmUp${capitalizeFirstLetter(smUpAlign)}`] : '']:
+      !!smUpAlign,
   })
 
   return (

@@ -101,9 +101,7 @@ const DeleteCommentDialog = ({
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={
-                <FormattedMessage defaultMessage="Confirm" description="" />
-              }
+              text={<FormattedMessage defaultMessage="Confirm" />}
               color="red"
               onClick={() => {
                 onDelete()
@@ -113,9 +111,7 @@ const DeleteCommentDialog = ({
           }
           smUpBtns={
             <Dialog.TextButton
-              text={
-                <FormattedMessage defaultMessage="Confirm" description="" />
-              }
+              text={<FormattedMessage defaultMessage="Confirm" />}
               color="red"
               onClick={() => {
                 onDelete()
