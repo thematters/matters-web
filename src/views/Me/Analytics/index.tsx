@@ -65,7 +65,7 @@ const MyAnalytics = () => {
       <Layout.Header
         left={
           <Layout.Header.Title id="myAnalytics">
-            <FormattedMessage defaultMessage="Top Supporters" description="" />
+            <FormattedMessage defaultMessage="Top Supporters" />
           </Layout.Header.Title>
         }
         right={
@@ -118,7 +118,7 @@ const MyAnalytics = () => {
               <AnalyticsNoSupporter />
             </section>
             <p>
-              <FormattedMessage defaultMessage="No data yet." description="" />
+              <FormattedMessage defaultMessage="No data yet." />
             </p>
           </section>
         )}

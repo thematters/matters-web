@@ -19,14 +19,14 @@ const HistoryTabs: React.FC = () => {
       </Tabs.Tab>
 
       <Tabs.Tab href={PATHS.ME_HISTORY_LIKES_SENT} selected={isLike}>
-        <FormattedMessage defaultMessage="Likes" description="" />
+        <FormattedMessage defaultMessage="Likes" />
       </Tabs.Tab>
 
       <Tabs.Tab
         href={PATHS.ME_HISTORY_COMMENTS}
         selected={isInPath('ME_HISTORY_COMMENTS')}
       >
-        <FormattedMessage defaultMessage="Comments" description="" />
+        <FormattedMessage defaultMessage="Comments" />
       </Tabs.Tab>
     </Tabs>
   )

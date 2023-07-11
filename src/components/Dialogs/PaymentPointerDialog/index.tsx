@@ -49,9 +49,7 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
           smUpBtns={
             <>
               <Dialog.TextButton
-                text={
-                  <FormattedMessage defaultMessage="Cancel" description="" />
-                }
+                text={<FormattedMessage defaultMessage="Cancel" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />

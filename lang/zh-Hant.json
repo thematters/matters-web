@@ -195,6 +195,9 @@
     "defaultMessage": "討論已送出",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
+  "A3g33H": {
+    "defaultMessage": "封存的作品仅自己可见，且操作无法撤销。如文章已加入选集，将从选集中移除。（已发布到 IPFS 的版本不受影响）"
+  },
   "A3rLZt": {
     "defaultMessage": "最近 {months} 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -379,6 +382,9 @@
     "defaultMessage": "相關標籤",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
+  "HJ0iZJ": {
+    "defaultMessage": "确认归档"
+  },
   "HxcjQl": {
     "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -430,6 +436,9 @@
   "KMcrz8": {
     "defaultMessage": "認領",
     "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "KQi/UZ": {
+    "defaultMessage": "归档作品"
   },
   "L0J61B": {
     "defaultMessage": "免費",
@@ -935,6 +944,9 @@
     "defaultMessage": "已取消封鎖。該用戶現在可以評論你的作品和圍爐。",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
+  "mWcca9": {
+    "defaultMessage": "确认要将「{article}」归档吗？"
+  },
   "mWjpk9": {
     "defaultMessage": "還沒有廣播",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
@@ -1099,10 +1111,6 @@
     "defaultMessage": "複製鏈接",
     "description": ""
   },
-  "uIdMon": {
-    "defaultMessage": "確認隱藏，其他用戶將無法從站內訪問該作品。隱藏後無法回退，如需再次呈現作品，你需要重新發布。",
-    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
-  },
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南",
     "description": ""
@@ -1186,6 +1194,9 @@
   "y0b6Kp": {
     "defaultMessage": "付費",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "yBUiiy": {
+    "defaultMessage": "操作无法撤销，确认归档吗？"
   },
   "yIlC0R": {
     "defaultMessage": "尚未發布作品",

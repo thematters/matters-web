@@ -21,7 +21,7 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
           }
         />
 
-        <Dialog.Message align="left" type="info">
+        <Dialog.Message align="left">
           <p>
             <Translate
               zh_hant="修訂作品正文目前支持增加、刪除或替換中英文字符，"

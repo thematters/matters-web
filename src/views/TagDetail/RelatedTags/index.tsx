@@ -133,7 +133,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
             textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
             textAlign="center"
           >
-            <FormattedMessage defaultMessage="Back to All" description="" />
+            <FormattedMessage defaultMessage="Back to All" />
           </ViewMoreCard>
         </section>
       </section>

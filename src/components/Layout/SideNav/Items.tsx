@@ -18,7 +18,7 @@ export const NavListItemHome = () => {
 
   return (
     <NavListItem
-      name={<FormattedMessage defaultMessage="Discover" description="" />}
+      name={<FormattedMessage defaultMessage="Discover" />}
       icon={<IconNavHome32 size="lg" />}
       activeIcon={<IconNavHomeActive32 size="lg" />}
       active={isInHome}
@@ -33,7 +33,7 @@ export const NavListItemSearch = () => {
 
   return (
     <NavListItem
-      name={<FormattedMessage defaultMessage="Search" description="" />}
+      name={<FormattedMessage defaultMessage="Search" />}
       icon={<IconNavSearch32 size="lg" />}
       activeIcon={<IconNavSearchActive32 size="lg" />}
       active={isInSearch}

@@ -92,7 +92,7 @@ const BaseDropdownActions = ({
         textColor="greyDarker"
         textActiveColor="black"
         spacing={['xtight', 'base']}
-        text={<FormattedMessage defaultMessage="Share" description="" />}
+        text={<FormattedMessage defaultMessage="Share" />}
         icon={<IconShare20 size="mdS" />}
       />
       {hasRssFeed && (

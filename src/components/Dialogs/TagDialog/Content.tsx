@@ -243,7 +243,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              text={<FormattedMessage defaultMessage="Cancel" />}
               color="greyDarker"
               onClick={closeDialog}
             />

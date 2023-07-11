@@ -115,12 +115,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
             <>
               <CopyToClipboard text={ensName || address}>
                 <Dialog.RoundedButton
-                  text={
-                    <FormattedMessage
-                      defaultMessage="Copy Address"
-                      description=""
-                    />
-                  }
+                  text={<FormattedMessage defaultMessage="Copy Address" />}
                   color="green"
                 />
               </CopyToClipboard>
@@ -173,12 +168,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
               <CopyToClipboard text={ensName || address}>
                 <Dialog.TextButton
                   color="green"
-                  text={
-                    <FormattedMessage
-                      defaultMessage="Copy Address"
-                      description=""
-                    />
-                  }
+                  text={<FormattedMessage defaultMessage="Copy Address" />}
                 />
               </CopyToClipboard>
               {ensName && hasLinkedIPNS && (

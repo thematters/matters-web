@@ -1,12 +1,20 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, toast, useDialogSwitch, useMutation } from '~/components'
+import {
+  Dialog,
+  toast,
+  useDialogSwitch,
+  useMutation,
+  useStep,
+} from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 import {
   ArchiveArticleArticleFragment,
   ArchiveArticleMutation,
 } from '~/gql/graphql'
+
+import styles from './styles.module.css'
 
 const ARCHIVE_ARTICLE = gql`
   mutation ArchiveArticle($id: ID!) {
@@ -23,11 +31,17 @@ interface ArchiveArticleDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
+type Step = 'preConfirm' | 'confirm'
+
 const ArchiveArticleDialog = ({
   article,
   children,
 }: ArchiveArticleDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
+
+  const { currStep, forward } = useStep<Step>('preConfirm')
+  const nextStep = () => forward('confirm')
+  const isPreConfirm = currStep === 'preConfirm'
 
   const [archiveArticle] = useMutation<ArchiveArticleMutation>(
     ARCHIVE_ARTICLE,
@@ -65,20 +79,43 @@ const ArchiveArticleDialog = ({
     })
   }
 
+  const onClickArchive = () => {
+    if (isPreConfirm) {
+      nextStep()
+    } else {
+      onArchive()
+      closeDialog()
+    }
+  }
+
   return (
     <>
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header title="archive" />
+        <Dialog.Header
+          title={<FormattedMessage defaultMessage="Archive works" />}
+        />
 
-        <Dialog.Message>
-          <p>
-            <FormattedMessage
-              defaultMessage="Are you sure you want to archive the article?"
-              description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
-            />
-          </p>
+        <Dialog.Message align="center" smUpAlign="left">
+          {isPreConfirm ? (
+            <p>
+              <FormattedMessage
+                defaultMessage="Are you sure you want to archive ‘{article}’?"
+                values={{
+                  article: (
+                    <span className={styles.highlight}>{article.title}</span>
+                  ),
+                }}
+              />
+              <br />
+              <FormattedMessage defaultMessage="Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)" />
+            </p>
+          ) : (
+            <p>
+              <FormattedMessage defaultMessage="This operation cannot be undone, confirm archiving?" />
+            </p>
+          )}
         </Dialog.Message>
 
         <Dialog.Footer
@@ -86,25 +123,27 @@ const ArchiveArticleDialog = ({
           btns={
             <Dialog.RoundedButton
               text={
-                <FormattedMessage defaultMessage="Archive" description="" />
+                isPreConfirm ? (
+                  <FormattedMessage defaultMessage="Archive" />
+                ) : (
+                  <FormattedMessage defaultMessage="Confirm Archiving" />
+                )
               }
               color="red"
-              onClick={() => {
-                onArchive()
-                closeDialog()
-              }}
+              onClick={onClickArchive}
             />
           }
           smUpBtns={
             <Dialog.TextButton
               text={
-                <FormattedMessage defaultMessage="Archive" description="" />
+                isPreConfirm ? (
+                  <FormattedMessage defaultMessage="Archive" />
+                ) : (
+                  <FormattedMessage defaultMessage="Confirm Archiving" />
+                )
               }
               color="red"
-              onClick={() => {
-                onArchive()
-                closeDialog()
-              }}
+              onClick={onClickArchive}
             />
           }
         />

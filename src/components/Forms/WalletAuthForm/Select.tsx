@@ -46,7 +46,7 @@ const Hint = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <FormattedMessage defaultMessage="tutorial" description="" />
+            <FormattedMessage defaultMessage="tutorial" />
           </a>
         </p>
       </Media>
@@ -62,7 +62,7 @@ const Hint = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <FormattedMessage defaultMessage="tutorial" description="" />
+            <FormattedMessage defaultMessage="tutorial" />
           </a>
         </p>
       </Media>
@@ -186,9 +186,7 @@ const Select: React.FC<FormProps> = ({
 
       <section className={containerClasses}>
         <Form.List
-          groupName={
-            <FormattedMessage defaultMessage="Connect Wallet" description="" />
-          }
+          groupName={<FormattedMessage defaultMessage="Connect Wallet" />}
           spacingX={isInPage ? 0 : 'base'}
         >
           {injectedConnector?.ready ? (
@@ -303,9 +301,9 @@ const Select: React.FC<FormProps> = ({
         }
         title={
           isConnect ? (
-            <FormattedMessage defaultMessage="Connect Wallet" description="" />
+            <FormattedMessage defaultMessage="Connect Wallet" />
           ) : (
-            <FormattedMessage defaultMessage="Enter" description="" />
+            <FormattedMessage defaultMessage="Enter" />
           )
         }
       />

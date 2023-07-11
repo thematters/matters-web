@@ -59,7 +59,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
   const SubmitButton = () => (
     <Dialog.TextButton
       onClick={onSave}
-      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={coverSaving}
     />
   )
@@ -98,11 +98,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
           <>
             <Dialog.TextButton
               text={
-                back ? (
-                  'back'
-                ) : (
-                  <FormattedMessage defaultMessage="Cancel" description="" />
-                )
+                back ? 'back' : <FormattedMessage defaultMessage="Cancel" />
               }
               color="greyDarker"
               onClick={back || closeDialog}

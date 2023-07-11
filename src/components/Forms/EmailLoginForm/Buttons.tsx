@@ -53,7 +53,7 @@ export const EmailSignUpDialogButton = ({
     />
 
     <button type="button" onClick={gotoEmailSignUp}>
-      <FormattedMessage defaultMessage="Register" description="" />
+      <FormattedMessage defaultMessage="Register" />
     </button>
   </section>
 )

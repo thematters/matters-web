@@ -65,7 +65,7 @@ const BaseDropdownActions = ({
     <Menu>
       {hasEditTag && (
         <Menu.Item
-          text={<FormattedMessage defaultMessage="Edit" description="" />}
+          text={<FormattedMessage defaultMessage="Edit" />}
           icon={<IconEdit16 size="mdS" />}
           onClick={openTagDialog}
           ariaHasPopup="dialog"
@@ -183,10 +183,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const forbid = () => {
     toast.error({
       message: (
-        <FormattedMessage
-          defaultMessage="You do not have permission to perform this operation"
-          description=""
-        />
+        <FormattedMessage defaultMessage="You do not have permission to perform this operation" />
       ),
     })
     return

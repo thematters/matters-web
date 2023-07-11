@@ -195,6 +195,9 @@
     "defaultMessage": "Discussion sent",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
+  "A3g33H": {
+    "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
+  },
   "A3rLZt": {
     "defaultMessage": "Last {months} months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -379,6 +382,9 @@
     "defaultMessage": "Related Tags",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
+  "HJ0iZJ": {
+    "defaultMessage": "Confirm Archiving"
+  },
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -430,6 +436,9 @@
   "KMcrz8": {
     "defaultMessage": "Maintain Tag",
     "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "KQi/UZ": {
+    "defaultMessage": "Archive works"
   },
   "L0J61B": {
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
@@ -935,6 +944,9 @@
     "defaultMessage": "User unblocked. User can now comment on your articles.",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
+  "mWcca9": {
+    "defaultMessage": "Are you sure you want to archive ‘{article}’?"
+  },
   "mWjpk9": {
     "defaultMessage": "No broadcast yet.",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
@@ -1099,10 +1111,6 @@
     "defaultMessage": "Copy Link",
     "description": ""
   },
-  "uIdMon": {
-    "defaultMessage": "Are you sure you want to archive the article?",
-    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
-  },
   "uVCg1l": {
     "defaultMessage": "Explore Matters",
     "description": ""
@@ -1186,6 +1194,9 @@
   "y0b6Kp": {
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
     "defaultMessage": "Pay"
+  },
+  "yBUiiy": {
+    "defaultMessage": "This operation cannot be undone, confirm archiving?"
   },
   "yIlC0R": {
     "defaultMessage": "No published articles yet",

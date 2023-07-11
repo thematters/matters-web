@@ -89,7 +89,7 @@ const DeleteCollectionDialog = ({
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Delete" description="" />}
+              text={<FormattedMessage defaultMessage="Delete" />}
               color="red"
               onClick={() => {
                 onDelete()
@@ -99,7 +99,7 @@ const DeleteCollectionDialog = ({
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Delete" description="" />}
+              text={<FormattedMessage defaultMessage="Delete" />}
               color="red"
               onClick={() => {
                 onDelete()

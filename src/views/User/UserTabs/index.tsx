@@ -23,14 +23,14 @@ const UserTabs = () => {
         {...userArticlesPath}
         selected={isInPath('USER_ARTICLES')}
       >
-        <FormattedMessage defaultMessage="Articles" description="" />
+        <FormattedMessage defaultMessage="Articles" />
       </SegmentedTabs.Tab>
 
       <SegmentedTabs.Tab
         {...userCollectionsPath}
         selected={isInPath('USER_COLLECTIONS')}
       >
-        <FormattedMessage defaultMessage="Collections" description="" />
+        <FormattedMessage defaultMessage="Collections" />
       </SegmentedTabs.Tab>
     </SegmentedTabs>
   )
