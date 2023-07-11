@@ -34,7 +34,7 @@ const Email = ({
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareEmail)({})} spacing="base">
-        <FormattedMessage defaultMessage="Email" description="" />
+        <FormattedMessage defaultMessage="Email" />
       </TextIcon>
     )}
   </button>

@@ -211,7 +211,7 @@ export const UserProfile = () => {
                   {numAbbr(user.followers.totalCount)}
                 </span>
                 &nbsp;
-                <FormattedMessage defaultMessage="Followers" description="" />
+                <FormattedMessage defaultMessage="Followers" />
               </button>
             )}
           </FollowersDialog>

@@ -1,6 +1,4 @@
 .content {
-  text-align: center;
-
   & h2 {
     font-size: var(--font-size-xm);
   }
@@ -52,15 +50,22 @@
   }
 }
 
-.info {
-  & h3,
-  & p,
-  & ul,
-  & ol {
-    color: var(--color-black);
-  }
+.alignCenter {
+  text-align: center;
 }
 
 .alignLeft {
   text-align: left;
+}
+
+.alignSmUpCenter {
+  @media (--sm-up) {
+    text-align: center;
+  }
+}
+
+.alignSmUpLeft {
+  @media (--sm-up) {
+    text-align: left;
+  }
 }

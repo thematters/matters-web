@@ -104,10 +104,7 @@ export const AsideUserProfile = () => {
           <section className={styles.displayName}>
             <h1 className={styles.name}>
               {isUserArchived && (
-                <FormattedMessage
-                  defaultMessage="Deleted user"
-                  description=""
-                />
+                <FormattedMessage defaultMessage="Deleted user" />
               )}
             </h1>
           </section>
@@ -201,7 +198,7 @@ export const AsideUserProfile = () => {
                   {numAbbr(user.followers.totalCount)}
                 </span>
                 &nbsp;
-                <FormattedMessage defaultMessage="Followers" description="" />
+                <FormattedMessage defaultMessage="Followers" />
               </button>
             )}
           </FollowersDialog>

@@ -24,7 +24,7 @@ interface CircleAnalyticsContentProps {
 const Count = ({ count }: { count: number }) => {
   return (
     <Tooltip
-      content={<FormattedMessage defaultMessage="Read Counts" description="" />}
+      content={<FormattedMessage defaultMessage="Read Counts" />}
       trigger="click"
     >
       <button type="button" className={styles.count}>

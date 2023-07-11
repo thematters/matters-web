@@ -181,8 +181,7 @@ const CircleProfile = () => {
             <section className={styles.price}>
               <span className={styles.amount}>{price.amount}</span>
               <br />
-              {price.currency} /{' '}
-              <FormattedMessage defaultMessage="month" description="" />
+              {price.currency} / <FormattedMessage defaultMessage="month" />
             </section>
           )}
         </header>
@@ -215,7 +214,7 @@ const CircleProfile = () => {
                     {numAbbr(circle.members.totalCount)}
                   </span>
                   {/* <Translate id="members" /> */}
-                  <FormattedMessage defaultMessage="Members" description="" />
+                  <FormattedMessage defaultMessage="Members" />
                 </button>
               )}
             </MembersDialog>
@@ -232,7 +231,7 @@ const CircleProfile = () => {
                   </span>
                   {/* <Translate id="follower" />  */}
 
-                  <FormattedMessage defaultMessage="Followers" description="" />
+                  <FormattedMessage defaultMessage="Followers" />
                 </button>
               )}
             </FollowersDialog>

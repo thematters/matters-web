@@ -30,6 +30,8 @@
 }
 
 .smUpheader {
+  @mixin flex-center-space-between;
+
   padding: var(--spacing-base-loose) var(--spacing-base-loose) 0;
 
   & .title {

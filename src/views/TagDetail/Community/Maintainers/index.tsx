@@ -34,7 +34,7 @@ const ManageButton = ({ id }: Props) => {
           aria-haspopup="dialog"
         >
           <TextIcon icon={<IconSettings24 />} weight="md" size={'xs'}>
-            <FormattedMessage defaultMessage="Manage" description="" />
+            <FormattedMessage defaultMessage="Manage" />
           </TextIcon>
         </Button>
       )}
@@ -74,7 +74,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
         <>
           <section className={styles.category}>
             <section>
-              <FormattedMessage defaultMessage="Maintainer" description="" />
+              <FormattedMessage defaultMessage="Maintainer" />
             </section>
             {isOwner && (
               <section>
@@ -96,7 +96,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
         <>
           <section className={styles.category}>
             <section>
-              <FormattedMessage defaultMessage="collaborators" description="" />
+              <FormattedMessage defaultMessage="collaborators" />
               <span className={styles.count}>({editors.length})</span>
             </section>
           </section>

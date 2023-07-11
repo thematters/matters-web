@@ -212,11 +212,7 @@ const EditorSearchSelectForm = ({
           <>
             <Dialog.TextButton
               text={
-                back ? (
-                  'back'
-                ) : (
-                  <FormattedMessage defaultMessage="Cancel" description="" />
-                )
+                back ? 'back' : <FormattedMessage defaultMessage="Cancel" />
               }
               color="greyDarker"
               onClick={back || closeDialog}

@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { toPath } from '@/src/common/utils'
-import { PinnedWorksUserFragment } from '@/src/gql/graphql'
+import { toPath } from '~/common/utils'
 import { Book, Media } from '~/components'
+import { PinnedWorksUserFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 import UnPinButton from './UnPinButton'

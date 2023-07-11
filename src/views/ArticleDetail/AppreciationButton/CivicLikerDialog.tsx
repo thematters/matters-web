@@ -43,7 +43,7 @@ const CivicLikerDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header title="joinCivicLiker" />
 
-        <Dialog.Message align="left" type="info">
+        <Dialog.Message align="left">
           <p>
             <Translate
               zh_hant="讚賞公民是一群願意持續回饋創作的網絡公民。成為讚賞公民可享以下福利："

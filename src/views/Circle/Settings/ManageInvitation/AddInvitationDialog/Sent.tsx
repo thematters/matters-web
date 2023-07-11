@@ -39,13 +39,13 @@ const InvitationSent = ({ closeDialog }: Props) => (
     <Dialog.Footer
       btns={
         <Dialog.RoundedButton
-          text={<FormattedMessage defaultMessage="I see" description="" />}
+          text={<FormattedMessage defaultMessage="I see" />}
           onClick={closeDialog}
         />
       }
       smUpBtns={
         <Dialog.TextButton
-          text={<FormattedMessage defaultMessage="I see" description="" />}
+          text={<FormattedMessage defaultMessage="I see" />}
           onClick={closeDialog}
         />
       }

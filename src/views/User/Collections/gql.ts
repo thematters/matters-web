@@ -5,7 +5,14 @@ import { CollectionDigest } from '~/components'
 const fragments = gql`
   fragment CollectionsUser on User {
     id
-    collections(input: { first: null }) {
+    userName
+    displayName
+    avatar
+    info {
+      description
+      profileCover
+    }
+    collections(input: { first: 20, after: $after }) {
       totalCount
       pageInfo {
         startCursor
@@ -24,9 +31,8 @@ const fragments = gql`
   ${CollectionDigest.Feed.fragments.collection}
 `
 
-// with `Public` suffix, query as an anonymous user
 export const USER_COLLECTIONS = gql`
-  query UserCollections($userName: String!) {
+  query UserCollections($userName: String!, $after: String) {
     user(input: { userName: $userName }) {
       ...CollectionsUser
     }

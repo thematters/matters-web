@@ -4,44 +4,43 @@
     "description": ""
   },
   "+a+2ug": {
-    "defaultMessage": "Members",
-    "description": ""
+    "defaultMessage": "Members"
   },
   "/3kw6k": {
     "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "/IMR+8": {
-    "defaultMessage": "Top Supporters",
-    "description": ""
+    "defaultMessage": "Top Supporters"
   },
   "/asuIY": {
     "defaultMessage": "Enter Community",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "/ns2st": {
-    "defaultMessage": "Download App",
-    "description": ""
+    "defaultMessage": "Download App"
   },
   "/podGX": {
     "defaultMessage": "Public",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
   "0Azlrb": {
-    "defaultMessage": "Manage",
-    "description": ""
+    "defaultMessage": "Manage"
   },
   "0JLcHr": {
     "defaultMessage": "Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress.",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+  },
+  "0ThOw1": {
+    "defaultMessage": "Create collection",
+    "description": "src/views/User/Collections/UserCollections.tsx"
   },
   "1Z1M77": {
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
   },
   "1pFLGZ": {
-    "defaultMessage": "Bug Bounty",
-    "description": ""
+    "defaultMessage": "Bug Bounty"
   },
   "1qQzV0": {
     "defaultMessage": "Invitees",
@@ -52,8 +51,7 @@
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "20bImY": {
-    "defaultMessage": "Discussion",
-    "description": ""
+    "defaultMessage": "Discussion"
   },
   "2CqWQE": {
     "defaultMessage": "Total",
@@ -64,12 +62,13 @@
     "description": ""
   },
   "2atspc": {
-    "defaultMessage": "Drafts",
-    "description": ""
+    "defaultMessage": "Drafts"
+  },
+  "2oxLHg": {
+    "defaultMessage": "Up to 3 articles/collections can be pinned"
   },
   "2slIPX": {
-    "defaultMessage": "Likes",
-    "description": ""
+    "defaultMessage": "Likes"
   },
   "2uwwz+": {
     "defaultMessage": "Accumulated read time indicates the total time length that registered users read.",
@@ -80,8 +79,7 @@
     "description": "src/components/Layout/SideNav/index.tsx"
   },
   "3KNMbJ": {
-    "defaultMessage": "Articles",
-    "description": ""
+    "defaultMessage": "Articles"
   },
   "3kbIhS": {
     "defaultMessage": "Untitled",
@@ -92,16 +90,14 @@
     "description": "src/views/Help/index.tsx"
   },
   "3yk8fB": {
-    "defaultMessage": "Wallet",
-    "description": ""
+    "defaultMessage": "Wallet"
   },
   "3ynsJ3": {
     "defaultMessage": "Want to know more? Check the",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "47FYwb": {
-    "defaultMessage": "Cancel",
-    "description": ""
+    "defaultMessage": "Cancel"
   },
   "4giHJT": {
     "defaultMessage": "Have wallet questions on mobile device ? Click the",
@@ -116,24 +112,21 @@
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "5FO4vn": {
-    "defaultMessage": "You do not have permission to perform this operation",
-    "description": ""
+    "defaultMessage": "You do not have permission to perform this operation"
   },
   "5iii3x": {
     "defaultMessage": "Circle：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
   "5sg7KC": {
-    "defaultMessage": "Password",
-    "description": ""
+    "defaultMessage": "Password"
   },
   "63HuBz": {
     "defaultMessage": "This tag has no manager currently",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
   "69+D96": {
-    "defaultMessage": "Start Creating",
-    "description": ""
+    "defaultMessage": "Start Creating"
   },
   "6BXcdo": {
     "defaultMessage": "Set threshold for circle (per month)",
@@ -148,8 +141,11 @@
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "6flWFg": {
-    "defaultMessage": "Term of Services",
-    "description": ""
+    "defaultMessage": "Term of Services"
+  },
+  "6q0G5e": {
+    "defaultMessage": "Successfully added",
+    "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
   },
   "77tYPg": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
@@ -164,16 +160,14 @@
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
   },
   "8KFsZN": {
-    "defaultMessage": "Read Counts",
-    "description": ""
+    "defaultMessage": "Read Counts"
   },
   "8PWD05": {
     "defaultMessage": "invites you to {tag} collaborator",
     "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
   },
   "8cv9D4": {
-    "defaultMessage": "Next Step",
-    "description": ""
+    "defaultMessage": "Next Step"
   },
   "8w3GEA": {
     "defaultMessage": "mentioned you in {article}",
@@ -184,12 +178,10 @@
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
   "9+Ddtu": {
-    "defaultMessage": "Next",
-    "description": ""
+    "defaultMessage": "Next"
   },
   "9J0iCw": {
-    "defaultMessage": "Deleted user",
-    "description": ""
+    "defaultMessage": "Deleted user"
   },
   "9mfw9c": {
     "defaultMessage": "Wallet address",
@@ -198,6 +190,9 @@
   "9nNpKP": {
     "defaultMessage": "Discussion sent",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "A3g33H": {
+    "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
   },
   "A3rLZt": {
     "defaultMessage": "Last {months} months",
@@ -209,6 +204,10 @@
   },
   "A41QIy": {
     "defaultMessage": "Enter Password",
+    "description": ""
+  },
+  "A6ozr9": {
+    "defaultMessage": "Collection name",
     "description": ""
   },
   "A7ugfn": {
@@ -244,8 +243,7 @@
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "Bc20la": {
-    "defaultMessage": "days",
-    "description": ""
+    "defaultMessage": "days"
   },
   "Bjdw71": {
     "defaultMessage": "followers_empty",
@@ -272,28 +270,21 @@
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "CnPG8j": {
-    "defaultMessage": "Featured",
-    "description": ""
+    "defaultMessage": "Featured"
   },
   "Cu3Cty": {
-    "defaultMessage": "month",
-    "description": ""
+    "defaultMessage": "month"
   },
   "CwSpld": {
     "defaultMessage": "Not for login",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
-  "D0HpFJ": {
-    "defaultMessage": "Up to 3 articles/collections can be pinned",
-    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
   "D2Sw/t": {
     "defaultMessage": "Add any URL in the following list into RSS reader",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "D3idYv": {
-    "defaultMessage": "Settings",
-    "description": ""
+    "defaultMessage": "Settings"
   },
   "DFieKt": {
     "defaultMessage": "resigned from {tag} collaborator",
@@ -332,8 +323,7 @@
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "EwVnoC": {
-    "defaultMessage": "I have read and agree to",
-    "description": ""
+    "defaultMessage": "I have read and agree to"
   },
   "FOOymB": {
     "defaultMessage": "No members yet",
@@ -347,13 +337,14 @@
     "defaultMessage": "Next Month (Estimation)",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "FgydNe": {
+    "defaultMessage": "View"
+  },
   "FhWC22": {
-    "defaultMessage": "Matters Community",
-    "description": ""
+    "defaultMessage": "Matters Community"
   },
   "FmWYRt": {
-    "defaultMessage": "Free trial period",
-    "description": ""
+    "defaultMessage": "Free trial period"
   },
   "Ft76YC": {
     "defaultMessage": "Collection is deleted",
@@ -363,25 +354,26 @@
     "defaultMessage": "Resign From Maintainer",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
+  "GU6vV0": {
+    "defaultMessage": "No collection created yet",
+    "description": "src/components/Empty/EmptyCollection.tsx"
+  },
   "GVes61": {
     "defaultMessage": "published in {circleName}",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
   "GZJpDf": {
-    "defaultMessage": "Analytics",
-    "description": ""
+    "defaultMessage": "Analytics"
   },
   "GugBCe": {
     "defaultMessage": "New Followers This Month",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "H0JBH6": {
-    "defaultMessage": "Log Out",
-    "description": ""
+    "defaultMessage": "Log Out"
   },
   "H8KGyc": {
-    "defaultMessage": "Enter",
-    "description": ""
+    "defaultMessage": "Enter"
   },
   "HAlOn1": {
     "defaultMessage": "Name",
@@ -391,17 +383,26 @@
     "defaultMessage": "Related Tags",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
+  "HJ0iZJ": {
+    "defaultMessage": "Confirm Archiving"
+  },
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "HzaRKA": {
-    "defaultMessage": "Migrate to Matters",
-    "description": ""
+    "defaultMessage": "Migrate to Matters"
   },
   "IFY8r4": {
     "defaultMessage": "Enter Password",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
+  "IKPYe9": {
+    "defaultMessage": "View",
+    "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
+  "Ihwz5K": {
+    "defaultMessage": "Unpinned from profile"
   },
   "ItUuuX": {
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
@@ -410,6 +411,10 @@
   "J+LXrH": {
     "defaultMessage": "User registered by email can login and enable wallet login later",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "JTWayV": {
+    "defaultMessage": "Add description",
+    "description": "src/views/User/CollectionDetail/Content.tsx"
   },
   "JaLEXz": {
     "defaultMessage": "Enter Circle",
@@ -428,8 +433,7 @@
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
   "K3r6DQ": {
-    "defaultMessage": "Delete",
-    "description": ""
+    "defaultMessage": "Delete"
   },
   "KL502d": {
     "defaultMessage": "Profile updated",
@@ -443,9 +447,15 @@
     "defaultMessage": "Maintain Tag",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
+  "KQi/UZ": {
+    "defaultMessage": "Archive works"
+  },
   "L0J61B": {
     "defaultMessage": "Free",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "L4Fcr8": {
+    "defaultMessage": "New Collection"
   },
   "L4NXXh": {
     "defaultMessage": "Total",
@@ -456,8 +466,7 @@
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "LGox1K": {
-    "defaultMessage": "Followed",
-    "description": ""
+    "defaultMessage": "Followed"
   },
   "LOefol": {
     "defaultMessage": "Paywalled",
@@ -468,8 +477,7 @@
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "LphWYP": {
-    "defaultMessage": "Terms and Privacy Policy",
-    "description": ""
+    "defaultMessage": "Terms and Privacy Policy"
   },
   "LqxIEU": {
     "defaultMessage": "Wallet address will be part of your digital identity and shown in your profile page.",
@@ -480,20 +488,17 @@
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "MkwOFW": {
-    "defaultMessage": "Read History",
-    "description": ""
+    "defaultMessage": "Read History"
   },
   "N2IrpM": {
-    "defaultMessage": "Confirm",
-    "description": ""
+    "defaultMessage": "Confirm"
   },
   "N3K1H9": {
     "defaultMessage": "Matters will never ask for your wallet mnemonic through any channel.",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "NAidKb": {
-    "defaultMessage": "Notifications",
-    "description": ""
+    "defaultMessage": "Notifications"
   },
   "NONfAh": {
     "defaultMessage": "Douban",
@@ -520,7 +525,10 @@
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "Pp/0po": {
-    "defaultMessage": "Shuffle",
+    "defaultMessage": "Shuffle"
+  },
+  "Q8Qw5B": {
+    "defaultMessage": "Description",
     "description": ""
   },
   "QCo7Gc": {
@@ -556,8 +564,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
   "SENRqu": {
-    "defaultMessage": "Help",
-    "description": ""
+    "defaultMessage": "Help"
   },
   "SNh1n0": {
     "defaultMessage": "View Members",
@@ -572,8 +579,10 @@
     "description": ""
   },
   "Szd1tH": {
-    "defaultMessage": "Failed to log out, please try again.",
-    "description": ""
+    "defaultMessage": "Failed to log out, please try again."
+  },
+  "T9oZC8": {
+    "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?"
   },
   "TSDiqB": {
     "defaultMessage": "Subscribers",
@@ -584,24 +593,21 @@
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
   "TzhzIH": {
-    "defaultMessage": "Creators",
-    "description": ""
+    "defaultMessage": "Creators"
   },
   "U/Tqmx": {
     "defaultMessage": "commented on your bookmarked article",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
   "U86B6w": {
-    "defaultMessage": "Stats",
-    "description": ""
+    "defaultMessage": "Stats"
   },
   "U9IXic": {
     "defaultMessage": "Add Articles",
     "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
   },
   "UNUROl": {
-    "defaultMessage": "Maximum 200 characters.",
-    "description": ""
+    "defaultMessage": "Maximum 200 characters."
   },
   "UOdEqi": {
     "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
@@ -615,6 +621,10 @@
     "defaultMessage": "left comments and mentioned you in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "VZsE96": {
+    "defaultMessage": "Collection Name",
+    "description": ""
+  },
   "Vn5KLr": {
     "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)",
     "description": "src/components/Editor/ToggleAccess/index.tsx"
@@ -626,6 +636,15 @@
   "VwuiYK": {
     "defaultMessage": "This URL name has already been used, try another one",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "VzzYJk": {
+    "defaultMessage": "Create"
+  },
+  "W8OZ3G": {
+    "defaultMessage": "Confirm Deletion"
+  },
+  "WQT8ZA": {
+    "defaultMessage": "Edit collection"
   },
   "WSUAwk": {
     "defaultMessage": "Add to Featured",
@@ -656,20 +675,19 @@
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "XVYrS/": {
-    "defaultMessage": "No followers yet",
-    "description": ""
-  },
-  "XcTMMM": {
-    "defaultMessage": "Have an account?",
-    "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
+    "defaultMessage": "No followers yet"
   },
   "Xd0J7Y": {
-    "defaultMessage": "Open Source",
-    "description": ""
+    "defaultMessage": "Open Source"
   },
   "XgdZSb": {
-    "defaultMessage": "Authors",
-    "description": ""
+    "defaultMessage": "Authors"
+  },
+  "Xi40U9": {
+    "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
+  },
+  "XuYhBC": {
+    "defaultMessage": "Pinned to profile"
   },
   "Xz/AHp": {
     "defaultMessage": "broadcast and mentioned you",
@@ -684,8 +702,7 @@
     "description": "src/components/Notice/ArticleTagNotice/ArticleTagAddedNotice.tsx"
   },
   "YjNkcK": {
-    "defaultMessage": "To change, switch it directly on your wallet",
-    "description": ""
+    "defaultMessage": "To change, switch it directly on your wallet"
   },
   "YlPCRU": {
     "defaultMessage": "connected",
@@ -708,8 +725,10 @@
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZjDH42": {
-    "defaultMessage": "About Us",
-    "description": ""
+    "defaultMessage": "About Us"
+  },
+  "a/xacb": {
+    "defaultMessage": "(Articles in this collection will not be deleted)"
   },
   "aa0nss": {
     "defaultMessage": "Unpin from Trending",
@@ -720,8 +739,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "adThp5": {
-    "defaultMessage": "Latest",
-    "description": ""
+    "defaultMessage": "Latest"
   },
   "b+LSgI": {
     "defaultMessage": "replied to your discussion on",
@@ -744,8 +762,7 @@
     "description": "src/components/BlockUser/Button/index.tsx"
   },
   "beLe/F": {
-    "defaultMessage": "Broadcast",
-    "description": ""
+    "defaultMessage": "Broadcast"
   },
   "cAP9g5": {
     "defaultMessage": "pinned your comment in {commentArticle}",
@@ -756,8 +773,7 @@
     "description": ""
   },
   "cd/II9": {
-    "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}",
-    "description": ""
+    "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
   },
   "cf37Zy": {
     "defaultMessage": "Add hash from IPFS into compatible reader such as",
@@ -768,8 +784,7 @@
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
   },
   "cg1VJ2": {
-    "defaultMessage": "Connect Wallet",
-    "description": ""
+    "defaultMessage": "Connect Wallet"
   },
   "cmtHjM": {
     "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
@@ -780,12 +795,10 @@
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "deEeEI": {
-    "defaultMessage": "Register",
-    "description": ""
+    "defaultMessage": "Register"
   },
   "dg3JCQ": {
-    "defaultMessage": "collaborators",
-    "description": ""
+    "defaultMessage": "collaborators"
   },
   "djJp6c": {
     "defaultMessage": "History",
@@ -800,28 +813,24 @@
     "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
   },
   "eTpiYa": {
-    "defaultMessage": "No data yet.",
-    "description": ""
+    "defaultMessage": "No data yet."
   },
   "eXDZGQ": {
-    "defaultMessage": "Maintainer",
-    "description": ""
+    "defaultMessage": "Maintainer"
   },
   "ei+kyp": {
     "defaultMessage": "Name of the Circle",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "enMIYK": {
-    "defaultMessage": "My Page",
-    "description": ""
+    "defaultMessage": "My Page"
   },
   "eov+J2": {
     "defaultMessage": "Custom URL Name",
     "description": ""
   },
   "fG41Ux": {
-    "defaultMessage": "Logged out successfully",
-    "description": ""
+    "defaultMessage": "Logged out successfully"
   },
   "fWDtpq": {
     "defaultMessage": "Pending",
@@ -835,9 +844,9 @@
     "defaultMessage": "Your work {articleTitle} has been republished to decentralized network",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
-  "gSPnTx": {
-    "defaultMessage": "(Articles in this collection will not be deleted)",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  "h+punE": {
+    "defaultMessage": "Updated {date}",
+    "description": "src/views/User/CollectionDetail/Content.tsx"
   },
   "h9CG9E": {
     "defaultMessage": "{commentType} has been deleted",
@@ -860,32 +869,24 @@
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "hrgo+E": {
-    "defaultMessage": "Archive",
-    "description": ""
+    "defaultMessage": "Archive"
   },
   "iCFXtS": {
     "defaultMessage": "For unregistered or users enabled wallet login",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "ieGrWo": {
-    "defaultMessage": "Follow",
-    "description": ""
+    "defaultMessage": "Follow"
   },
   "ioPWl8": {
     "defaultMessage": "Undo bookmark",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
-  "ipQlDG": {
-    "defaultMessage": "Login with Email",
-    "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
-  },
   "itPgxd": {
-    "defaultMessage": "Profile",
-    "description": ""
+    "defaultMessage": "Profile"
   },
   "izWS4J": {
-    "defaultMessage": "Unfollow",
-    "description": ""
+    "defaultMessage": "Unfollow"
   },
   "jJ1Brc": {
     "defaultMessage": "Pin Comment",
@@ -912,20 +913,14 @@
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
   "kc79d3": {
-    "defaultMessage": "Topics",
-    "description": ""
-  },
-  "lCNyOp": {
-    "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+    "defaultMessage": "Topics"
   },
   "lD4FPZ": {
     "defaultMessage": "Enter Email",
     "description": ""
   },
   "lIir/P": {
-    "defaultMessage": "I see",
-    "description": ""
+    "defaultMessage": "I see"
   },
   "lNjDPr": {
     "defaultMessage": "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'.",
@@ -940,8 +935,7 @@
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
   "ll/ufR": {
-    "defaultMessage": "Trending",
-    "description": ""
+    "defaultMessage": "Trending"
   },
   "mCAIcg": {
     "defaultMessage": "Hottest",
@@ -955,13 +949,15 @@
     "defaultMessage": "User unblocked. User can now comment on your articles.",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
+  "mWcca9": {
+    "defaultMessage": "Are you sure you want to archive ‘{article}’?"
+  },
   "mWjpk9": {
     "defaultMessage": "No broadcast yet.",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
   "me1nR+": {
-    "defaultMessage": "Copy Address",
-    "description": ""
+    "defaultMessage": "Copy Address"
   },
   "mikY/9": {
     "defaultMessage": "Edit",
@@ -972,16 +968,14 @@
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "ml3SZN": {
-    "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed",
-    "description": ""
+    "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
   },
   "nD00sh": {
     "defaultMessage": "Edit profile",
     "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
   },
   "nGBrvw": {
-    "defaultMessage": "Bookmarks",
-    "description": ""
+    "defaultMessage": "Bookmarks"
   },
   "nNB7KU": {
     "defaultMessage": "replied your comment in",
@@ -992,12 +986,10 @@
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
   "nsaJRn": {
-    "defaultMessage": "Logged in successfully",
-    "description": ""
+    "defaultMessage": "Logged in successfully"
   },
   "o2Na0B": {
-    "defaultMessage": "Back to All",
-    "description": ""
+    "defaultMessage": "Back to All"
   },
   "oHQmBt": {
     "defaultMessage": "{articleCount} articles",
@@ -1024,20 +1016,17 @@
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   },
   "pwlQEY": {
-    "defaultMessage": "Display Name",
-    "description": ""
+    "defaultMessage": "Display Name"
   },
   "pzTOmv": {
-    "defaultMessage": "Followers",
-    "description": ""
+    "defaultMessage": "Followers"
   },
   "q+N5Wd": {
     "defaultMessage": "Manage Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
   "q9oMKE": {
-    "defaultMessage": "Circle Name",
-    "description": ""
+    "defaultMessage": "Circle Name"
   },
   "qYzBk8": {
     "defaultMessage": "unsubscribed your circle",
@@ -1052,8 +1041,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
   },
   "qswU4E": {
-    "defaultMessage": "Email will not be used as a login but only as a contact channel.",
-    "description": ""
+    "defaultMessage": "Email will not be used as a login but only as a contact channel."
   },
   "r66dXx": {
     "defaultMessage": "mentioned you in broadcast comment in {circleName}",
@@ -1064,8 +1052,7 @@
     "description": "src/components/Share/Buttons/Weibo.tsx"
   },
   "rXnmeE": {
-    "defaultMessage": "Confirm and Send",
-    "description": ""
+    "defaultMessage": "Confirm and Send"
   },
   "reOeq5": {
     "defaultMessage": "You have created your personal creative space. Publish your first work!",
@@ -1076,8 +1063,7 @@
     "description": "src/components/UserProfile/CircleWidget/index.tsx"
   },
   "rfz/fN": {
-    "defaultMessage": "Recommended size: 1600px x 900px",
-    "description": ""
+    "defaultMessage": "Recommended size: 1600px x 900px"
   },
   "s5JCCO": {
     "defaultMessage": "This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?",
@@ -1096,8 +1082,7 @@
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "sy+pv5": {
-    "defaultMessage": "Email",
-    "description": ""
+    "defaultMessage": "Email"
   },
   "t8/r8X": {
     "defaultMessage": "Continue with Wallet",
@@ -1116,16 +1101,13 @@
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "u5aHb4": {
-    "defaultMessage": "Copy Link",
-    "description": ""
-  },
-  "uIdMon": {
-    "defaultMessage": "Are you sure you want to archive the article?",
-    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+    "defaultMessage": "Copy Link"
   },
   "uVCg1l": {
-    "defaultMessage": "Explore Matters",
-    "description": ""
+    "defaultMessage": "Explore Matters"
+  },
+  "ub1kHa": {
+    "defaultMessage": "Add to collection"
   },
   "uclzDH": {
     "defaultMessage": "{q}: {totalCount, plural, =0 {} one {} other {# Results}} - Matters Search",
@@ -1135,36 +1117,30 @@
     "defaultMessage": "End of the results"
   },
   "ulh3kf": {
-    "defaultMessage": "Collections",
-    "description": ""
+    "defaultMessage": "Collections"
   },
   "uw32VR": {
-    "defaultMessage": "tutorial",
-    "description": ""
+    "defaultMessage": "tutorial"
   },
   "v6YjIn": {
     "defaultMessage": "Account",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "vAc1Bw": {
-    "defaultMessage": "Block User",
-    "description": ""
+    "defaultMessage": "Block User"
   },
   "vH8sCb": {
-    "defaultMessage": "Circle",
-    "description": ""
+    "defaultMessage": "Circle"
   },
   "vLEnrs": {
     "defaultMessage": "supported",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
   "wCgTu5": {
-    "defaultMessage": "Comments",
-    "description": ""
+    "defaultMessage": "Comments"
   },
   "wEQDC6": {
-    "defaultMessage": "Edit",
-    "description": ""
+    "defaultMessage": "Edit"
   },
   "wER32z": {
     "defaultMessage": "left a comment in {circleName} and mentioned you",
@@ -1179,8 +1155,7 @@
     "description": ""
   },
   "wbcwKd": {
-    "defaultMessage": "View All",
-    "description": ""
+    "defaultMessage": "View All"
   },
   "xGh9O7": {
     "defaultMessage": "As a reminder, the email address will not be used as a login but only as a contact channel.",
@@ -1210,6 +1185,9 @@
     "defaultMessage": "Pay",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "yBUiiy": {
+    "defaultMessage": "This operation cannot be undone, confirm archiving?"
+  },
   "yIlC0R": {
     "defaultMessage": "No published articles yet",
     "description": "src/components/Empty/EmptyArticle.tsx"
@@ -1227,8 +1205,7 @@
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "zQvVDJ": {
-    "defaultMessage": "All",
-    "description": ""
+    "defaultMessage": "All"
   },
   "zb8Kx1": {
     "defaultMessage": "Announcement, reminder, chattering..."

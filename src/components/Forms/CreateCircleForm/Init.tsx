@@ -138,9 +138,7 @@ const Init: React.FC<FormProps> = ({
     <section className={styles.container}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
-          label={
-            <FormattedMessage defaultMessage="Circle Name" description="" />
-          }
+          label={<FormattedMessage defaultMessage="Circle Name" />}
           type="text"
           name="displayName"
           required
@@ -219,7 +217,7 @@ const Init: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Next Step" description="" />}
+      text={<FormattedMessage defaultMessage="Next Step" />}
       loading={isSubmitting}
     />
   )
@@ -235,9 +233,7 @@ const Init: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={
-                  <FormattedMessage defaultMessage="Next Step" description="" />
-                }
+                text={<FormattedMessage defaultMessage="Next Step" />}
                 loading={isSubmitting}
               />
             </>
@@ -262,7 +258,7 @@ const Init: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              text={<FormattedMessage defaultMessage="Cancel" />}
               color="greyDarker"
               onClick={closeDialog}
             />

@@ -154,7 +154,7 @@ const Password: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<FormattedMessage defaultMessage="Password" description="" />}
+        label={<FormattedMessage defaultMessage="Password" />}
         type="password"
         name="password"
         required
@@ -167,10 +167,7 @@ const Password: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
         hint={
-          <FormattedMessage
-            defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
-            description=""
-          />
+          <FormattedMessage defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed" />
         }
       />
 
@@ -191,10 +188,7 @@ const Password: React.FC<FormProps> = ({
         value={values.comparedPassword}
         error={touched.comparedPassword && errors.comparedPassword}
         hint={
-          <FormattedMessage
-            defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
-            description=""
-          />
+          <FormattedMessage defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed" />
         }
         onBlur={handleBlur}
         onChange={handleChange}
@@ -207,7 +201,7 @@ const Password: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
@@ -224,9 +218,7 @@ const Password: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={
-                  <FormattedMessage defaultMessage="Confirm" description="" />
-                }
+                text={<FormattedMessage defaultMessage="Confirm" />}
                 loading={isSubmitting}
               />
             </>
@@ -251,7 +243,7 @@ const Password: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              text={<FormattedMessage defaultMessage="Cancel" />}
               color="greyDarker"
               onClick={closeDialog}
             />

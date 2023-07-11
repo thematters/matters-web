@@ -154,7 +154,7 @@ const Authors = () => {
             }}
             textAlign="center"
           >
-            <FormattedMessage defaultMessage="View All" description="" />
+            <FormattedMessage defaultMessage="View All" />
           </ViewMoreCard>
         </section>
       </Media>

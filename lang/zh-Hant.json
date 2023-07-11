@@ -35,6 +35,10 @@
     "defaultMessage": "內容可能包含色情、暴力、血腥等限制級內容，部分用戶可能不適合觀看，或引起不適、心理負擔，請謹慎判斷是否閱讀。",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
+  "0ThOw1": {
+    "defaultMessage": "開始創作",
+    "description": "src/views/User/Collections/UserCollections.tsx"
+  },
   "1Z1M77": {
     "defaultMessage": "尚無閱讀紀錄",
     "description": "src/views/Me/History/index.tsx"
@@ -66,6 +70,9 @@
   "2atspc": {
     "defaultMessage": "我的草稿",
     "description": ""
+  },
+  "2oxLHg": {
+    "defaultMessage": "最多可設置 3 個代表作"
   },
   "2slIPX": {
     "defaultMessage": "讚賞",
@@ -151,6 +158,10 @@
     "defaultMessage": "用戶協議",
     "description": ""
   },
+  "6q0G5e": {
+    "defaultMessage": "加入成功",
+    "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
   "77tYPg": {
     "defaultMessage": "確認刪除後，{commentType}會立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -199,6 +210,9 @@
     "defaultMessage": "討論已送出",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
+  "A3g33H": {
+    "defaultMessage": "封存的作品仅自己可见，且操作无法撤销。如文章已加入选集，将从选集中移除。（已发布到 IPFS 的版本不受影响）"
+  },
   "A3rLZt": {
     "defaultMessage": "最近 {months} 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -209,6 +223,10 @@
   },
   "A41QIy": {
     "defaultMessage": "輸入密碼",
+    "description": ""
+  },
+  "A6ozr9": {
+    "defaultMessage": "選集名稱",
     "description": ""
   },
   "A7ugfn": {
@@ -283,10 +301,6 @@
     "defaultMessage": "非登入用途",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "D0HpFJ": {
-    "defaultMessage": "最多可設置 3 個代表作",
-    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
-  },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一網址到 RSS 閱讀器",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -347,6 +361,9 @@
     "defaultMessage": "下月預期營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "FgydNe": {
+    "defaultMessage": "查看"
+  },
   "FhWC22": {
     "defaultMessage": "社區共建基地",
     "description": ""
@@ -362,6 +379,10 @@
   "GRtGnZ": {
     "defaultMessage": "辭去權限",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "GU6vV0": {
+    "defaultMessage": "尚未創建選集",
+    "description": "src/components/Empty/EmptyCollection.tsx"
   },
   "GVes61": {
     "defaultMessage": "在 {circleName} 發布新作品",
@@ -391,6 +412,9 @@
     "defaultMessage": "相關標籤",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
+  "HJ0iZJ": {
+    "defaultMessage": "确认归档"
+  },
   "HxcjQl": {
     "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -403,6 +427,13 @@
     "defaultMessage": "請輸入密碼",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
+  "IKPYe9": {
+    "defaultMessage": "查看",
+    "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
+  "Ihwz5K": {
+    "defaultMessage": "代表作已取消"
+  },
   "ItUuuX": {
     "defaultMessage": "邀你加入圍爐 {circleName} ，你可以免費體驗 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
@@ -410,6 +441,10 @@
   "J+LXrH": {
     "defaultMessage": "持續提供信箱進入，未來可隨時啟用錢包登入",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "JTWayV": {
+    "defaultMessage": "添加描述",
+    "description": "src/views/User/CollectionDetail/Content.tsx"
   },
   "JaLEXz": {
     "defaultMessage": "進入圍爐",
@@ -424,7 +459,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
   "JxlxVc": {
-    "defaultMessage": "忘記密碼？",
+    "defaultMessage": "忘記密碼",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
   "K3r6DQ": {
@@ -443,9 +478,16 @@
     "defaultMessage": "認領",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
+  "KQi/UZ": {
+    "defaultMessage": "归档作品"
+  },
   "L0J61B": {
     "defaultMessage": "免費",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "L4Fcr8": {
+    "defaultMessage": "新建選集",
+    "description": ""
   },
   "L4NXXh": {
     "defaultMessage": "目前總營收",
@@ -468,7 +510,7 @@
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "LphWYP": {
-    "defaultMessage": "Matters 用戶協議和隱私政策",
+    "defaultMessage": "用戶協議和隱私政策",
     "description": ""
   },
   "LqxIEU": {
@@ -523,6 +565,10 @@
     "defaultMessage": "換一批",
     "description": ""
   },
+  "Q8Qw5B": {
+    "defaultMessage": "描述",
+    "description": ""
+  },
   "QCo7Gc": {
     "defaultMessage": "選擇 NFT 作為你的頭像",
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
@@ -575,6 +621,9 @@
     "defaultMessage": "登出失敗，請重試",
     "description": ""
   },
+  "T9oZC8": {
+    "defaultMessage": "確認要刪除該選集「{collection}」嗎？"
+  },
   "TSDiqB": {
     "defaultMessage": "付費人數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -615,6 +664,10 @@
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx",
     "defaultMessage": "在你的圍爐中留言並提及你"
   },
+  "VZsE96": {
+    "defaultMessage": "選集名稱",
+    "description": ""
+  },
   "Vn5KLr": {
     "defaultMessage": "開啟後，正文將被暫時遮蔽，只顯示標題與摘要，並由讀者選擇是否繼續閱讀（例如含有色情、暴力、血腥等內容）",
     "description": "src/components/Editor/ToggleAccess/index.tsx"
@@ -626,6 +679,18 @@
   "VwuiYK": {
     "defaultMessage": "Oops！此網址已被使用了，換一個試試",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "VzzYJk": {
+    "defaultMessage": "新建",
+    "description": ""
+  },
+  "W8OZ3G": {
+    "defaultMessage": "確認刪除",
+    "description": ""
+  },
+  "WQT8ZA": {
+    "defaultMessage": "编辑選集",
+    "description": ""
   },
   "WSUAwk": {
     "defaultMessage": "添加到精選",
@@ -659,10 +724,6 @@
     "defaultMessage": "還沒有追蹤者",
     "description": ""
   },
-  "XcTMMM": {
-    "defaultMessage": "已有帳戶？",
-    "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
-  },
   "Xd0J7Y": {
     "defaultMessage": "開放社區",
     "description": ""
@@ -670,6 +731,12 @@
   "XgdZSb": {
     "defaultMessage": "值得關注",
     "description": ""
+  },
+  "Xi40U9": {
+    "defaultMessage": "操作無法撤銷，確認刪除選集嗎？"
+  },
+  "XuYhBC": {
+    "defaultMessage": "代表作已設置"
   },
   "Xz/AHp": {
     "defaultMessage": " 广播提及你",
@@ -710,6 +777,9 @@
   "ZjDH42": {
     "defaultMessage": "關於我們",
     "description": ""
+  },
+  "a/xacb": {
+    "defaultMessage": "（不會刪除選集內文章）"
   },
   "aa0nss": {
     "defaultMessage": "取消精選",
@@ -835,9 +905,9 @@
     "defaultMessage": "你的修訂作品 {articleTitle} 已發布到分佈式網絡",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
-  "gSPnTx": {
-    "defaultMessage": "（不會刪除選集內文章）",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  "h+punE": {
+    "defaultMessage": "{date}更新",
+    "description": "src/views/User/CollectionDetail/Content.tsx"
   },
   "h9CG9E": {
     "defaultMessage": "{commentType}已刪除",
@@ -875,10 +945,6 @@
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
-  "ipQlDG": {
-    "defaultMessage": "以郵箱登入",
-    "description": "src/components/Forms/EmailSignUpForm/Buttons.tsx"
-  },
   "itPgxd": {
     "defaultMessage": "個人主頁",
     "description": ""
@@ -915,10 +981,6 @@
     "defaultMessage": "找你想看的",
     "description": ""
   },
-  "lCNyOp": {
-    "defaultMessage": "確認要刪除該選集“{collection}”嗎？",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-  },
   "lD4FPZ": {
     "defaultMessage": "請輸入電子信箱",
     "description": ""
@@ -954,6 +1016,9 @@
   "mSAY3/": {
     "defaultMessage": "已取消封鎖。該用戶現在可以評論你的作品和圍爐。",
     "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "mWcca9": {
+    "defaultMessage": "确认要将「{article}」归档吗？"
   },
   "mWjpk9": {
     "defaultMessage": "還沒有廣播",
@@ -1119,12 +1184,12 @@
     "defaultMessage": "複製鏈接",
     "description": ""
   },
-  "uIdMon": {
-    "defaultMessage": "確認隱藏，其他用戶將無法從站內訪問該作品。隱藏後無法回退，如需再次呈現作品，你需要重新發布。",
-    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
-  },
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南",
+    "description": ""
+  },
+  "ub1kHa": {
+    "defaultMessage": "加入選集",
     "description": ""
   },
   "uclzDH": {
@@ -1209,6 +1274,9 @@
   "y0b6Kp": {
     "defaultMessage": "付費",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "yBUiiy": {
+    "defaultMessage": "操作无法撤销，确认归档吗？"
   },
   "yIlC0R": {
     "defaultMessage": "尚未發布作品",

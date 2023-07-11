@@ -110,7 +110,7 @@ const LinkENS = ({
 
   const CancelButton = () => (
     <Dialog.TextButton
-      text={<FormattedMessage defaultMessage="Cancel" description="" />}
+      text={<FormattedMessage defaultMessage="Cancel" />}
       color="greyDarker"
       onClick={closeDialog}
     />

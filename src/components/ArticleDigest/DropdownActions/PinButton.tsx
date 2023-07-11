@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { ERROR_CODES } from '~/common/enums'
-import { IconPin20, IconUnPin20, Menu, useMutation } from '~/components'
+import { IconPin20, IconUnPin20, Menu, toast, useMutation } from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 import { PinButtonArticleFragment, TogglePinMutation } from '~/gql/graphql'
 
@@ -50,14 +50,20 @@ const PinButton = ({ article }: PinButtonProps) => {
           type: article.pinned ? 'unpin' : 'pin',
         })
       },
+      onCompleted: () => {
+        toast.success({
+          message: article.pinned ? (
+            <FormattedMessage defaultMessage="Unpinned from profile" />
+          ) : (
+            <FormattedMessage defaultMessage="Pinned to profile" />
+          ),
+        })
+      },
     },
     {
       customErrors: {
         [ERROR_CODES.ACTION_LIMIT_EXCEEDED]: (
-          <FormattedMessage
-            defaultMessage="Up to 3 articles/collections can be pinned"
-            description="src/components/ArticleDigest/DropdownActions/PinButton.tsx"
-          />
+          <FormattedMessage defaultMessage="Up to 3 articles/collections can be pinned" />
         ),
       },
     }

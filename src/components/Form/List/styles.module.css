@@ -20,20 +20,6 @@
     & > li + li {
       border-top: 1px dashed var(--color-grey-light);
     }
-
-    &.grey {
-      margin-right: var(--spacing-base);
-      margin-left: var(--spacing-base);
-      border-radius: var(--spacing-x-tight);
-
-      & > li {
-        border: none;
-      }
-
-      & > li + li {
-        border-top: 1px dashed var(--color-grey-light);
-      }
-    }
   }
 }
 
