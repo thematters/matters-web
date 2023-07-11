@@ -173,6 +173,7 @@ export const ArticleDigestFeed = React.memo(
     return (
       prevArticle.subscribed === article.subscribed &&
       prevArticle.articleState === article.articleState &&
+      prevArticle.pinned === article.pinned &&
       prevArticle.author.isFollowee === article.author.isFollowee &&
       prevProps.hasSetTagSelected === props.hasSetTagSelected &&
       prevProps.hasSetTagUnselected === props.hasSetTagUnselected &&

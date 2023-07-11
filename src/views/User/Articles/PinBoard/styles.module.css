@@ -60,6 +60,7 @@
   position: absolute;
   top: var(--spacing-base);
   right: var(--spacing-base);
+  z-index: 1;
   opacity: 0;
   transition-property: opacity;
 }

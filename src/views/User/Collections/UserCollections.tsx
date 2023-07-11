@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
-import { EmptyCollection } from '@/src/components/Empty/EmptyCollection'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   AddCollectionDialog,
@@ -19,6 +18,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { EmptyCollection } from '~/components/Empty/EmptyCollection'
 import { UserCollectionsQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'

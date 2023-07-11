@@ -26,8 +26,11 @@
     "target": "esnext",
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "./*"
+      "@/public/*": [
+        "./public/*"
+      ],
+      "@/compiled-lang/*": [
+        "./compiled-lang/*"
       ],
       "~/*": [
         "./src/*"

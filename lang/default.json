@@ -64,6 +64,9 @@
   "2atspc": {
     "defaultMessage": "Drafts"
   },
+  "2oxLHg": {
+    "defaultMessage": "Up to 3 articles/collections can be pinned"
+  },
   "2slIPX": {
     "defaultMessage": "Likes"
   },
@@ -272,10 +275,6 @@
     "defaultMessage": "Not for login",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "D0HpFJ": {
-    "defaultMessage": "Up to 3 articles/collections can be pinned",
-    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
-  },
   "D2Sw/t": {
     "defaultMessage": "Add any URL in the following list into RSS reader",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -333,6 +332,9 @@
   "Fe682o": {
     "defaultMessage": "Next Month (Estimation)",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "FgydNe": {
+    "defaultMessage": "View"
   },
   "FhWC22": {
     "defaultMessage": "Matters Community"
@@ -394,6 +396,9 @@
   "IKPYe9": {
     "defaultMessage": "View",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
+  "Ihwz5K": {
+    "defaultMessage": "Unpinned from profile"
   },
   "ItUuuX": {
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
@@ -676,6 +681,9 @@
   },
   "Xi40U9": {
     "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
+  },
+  "XuYhBC": {
+    "defaultMessage": "Pinned to profile"
   },
   "Xz/AHp": {
     "defaultMessage": "broadcast and mentioned you",

@@ -71,6 +71,9 @@
     "defaultMessage": "我的草稿",
     "description": ""
   },
+  "2oxLHg": {
+    "defaultMessage": "最多可设置 3 个代表作"
+  },
   "2slIPX": {
     "defaultMessage": "我的赞赏",
     "description": ""
@@ -294,10 +297,6 @@
     "defaultMessage": "非登入用途",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "D0HpFJ": {
-    "defaultMessage": "最多可设置 3 个代表作",
-    "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
-  },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一网址到 RSS 阅读器",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -357,6 +356,9 @@
   "Fe682o": {
     "defaultMessage": "下月预期营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "FgydNe": {
+    "defaultMessage": "查看"
   },
   "FhWC22": {
     "defaultMessage": "社区共建基地",
@@ -424,6 +426,9 @@
   "IKPYe9": {
     "defaultMessage": "查看",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
+  "Ihwz5K": {
+    "defaultMessage": "代表作已取消"
   },
   "ItUuuX": {
     "defaultMessage": "邀你加入围炉 {circleName} ，你可以免费体验 {freePeriod} 天",
@@ -725,6 +730,9 @@
   },
   "Xi40U9": {
     "defaultMessage": "操作无法撤销，确认删除选集吗？"
+  },
+  "XuYhBC": {
+    "defaultMessage": "代表作已设置"
   },
   "Xz/AHp": {
     "defaultMessage": " 廣播提及你",
