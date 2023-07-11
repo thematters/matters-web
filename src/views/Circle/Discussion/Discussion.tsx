@@ -274,6 +274,7 @@ const CricleDiscussion = () => {
         <InfiniteScroll
           hasNextPage={!!pageInfo?.hasNextPage}
           loadMore={loadMore}
+          eof
         >
           <List spacing={['xloose', 0]}>
             {comments.map((comment) => (

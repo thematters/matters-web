@@ -193,7 +193,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List responsiveWrapper>
         {mixFeed.map((edge, i) => {
           if (edge?.__typename === 'HorizontalFeed') {

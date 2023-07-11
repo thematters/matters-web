@@ -2,6 +2,8 @@ import { Waypoint } from 'react-waypoint'
 
 import { Spinner } from '~/components'
 
+import EndOfResults from './EndOfResults'
+
 /**
  *  Usage:
  * ```jsx
@@ -38,12 +40,15 @@ interface Props {
    * A React component to act as loader
    */
   loader?: React.ReactNode
+
+  eof?: React.ReactNode
 }
 
 export const InfiniteScroll: React.FC<React.PropsWithChildren<Props>> = ({
   hasNextPage,
   loader = <Spinner />,
   loadMore,
+  eof,
   children,
 }) => {
   return (
@@ -51,6 +56,7 @@ export const InfiniteScroll: React.FC<React.PropsWithChildren<Props>> = ({
       {children}
       {hasNextPage && <Waypoint onEnter={loadMore} />}
       {hasNextPage && loader}
+      {!hasNextPage && eof && <EndOfResults message={eof} />}
     </>
   )
 }

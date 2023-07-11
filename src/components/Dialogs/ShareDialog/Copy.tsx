@@ -13,7 +13,6 @@ const Copy = ({ link }: { link: string }) => {
         <button
           aria-label={intl.formatMessage({
             defaultMessage: 'Copy Link',
-            description: '',
           })}
           onClick={() => {
             analytics.trackEvent('share', {

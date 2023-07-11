@@ -12,7 +12,6 @@ import {
   Expandable,
   FollowUserButton,
   Media,
-  Spinner,
   Throw404,
   Translate,
   // Translate,
@@ -36,6 +35,8 @@ import { EditProfileDialog } from './DropdownActions/EditProfileDialog'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
+import Inactive from './Inactive'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 import TraveloggersAvatar from './TraveloggersAvatar'
 
@@ -74,21 +75,12 @@ export const UserProfile = () => {
   /**
    * Render
    */
-
   if (loading) {
-    return (
-      <>
-        <Spinner />
-      </>
-    )
+    return <Placeholder />
   }
 
   if (!user) {
-    return (
-      <>
-        <Throw404 />
-      </>
-    )
+    return <Throw404 />
   }
 
   const badges = user.info.badges || []
@@ -101,8 +93,6 @@ export const UserProfile = () => {
   const profileCover = user.info.profileCover || ''
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
-  const isUserArchived = userState === 'archived'
-  const isUserInactive = isUserArchived
 
   const Badges = ({ isInDialog }: { isInDialog?: boolean }) => (
     <span className={isInDialog ? styles.badgesInDialog : ''}>
@@ -117,37 +107,14 @@ export const UserProfile = () => {
   /**
    * Inactive User
    */
-  if (isUserInactive) {
-    return (
-      <>
-        <section className={styles.userProfile}>
-          <Cover fallbackCover={IMAGE_COVER.src} />
-          <Media at="sm">
-            <header className={styles.header}>
-              <section className={styles.avatar}>
-                <Avatar size="xxxlm" />
-              </section>
-            </header>
-
-            <section className={styles.info}>
-              <section className={styles.displayName}>
-                <h1 className={styles.name}>
-                  {isUserArchived && (
-                    <FormattedMessage defaultMessage="Deleted user" />
-                  )}
-                </h1>
-              </section>
-            </section>
-          </Media>
-        </section>
-      </>
-    )
+  const isUserArchived = userState === 'archived'
+  if (isUserArchived) {
+    return <Inactive />
   }
 
   /**
    * Active or Onboarding User
    */
-
   const avatar = (
     <section className={styles.avatar}>
       {hasTraveloggersBadge ? (
@@ -157,139 +124,138 @@ export const UserProfile = () => {
       )}
     </section>
   )
+
   return (
-    <>
-      <section
-        className={styles.userProfile}
-        data-test-id={TEST_ID.USER_PROFILE}
-      >
-        <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
-        <Media at="sm">
-          <header className={styles.header}>
+    <section className={styles.userProfile} data-test-id={TEST_ID.USER_PROFILE}>
+      <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
+
+      <Media at="sm">
+        <header className={styles.header}>
+          {isMe && (
+            <EditProfileDialog user={user}>
+              {({ openDialog: openEditProfileDialog }) => (
+                <section onClick={openEditProfileDialog}>{avatar}</section>
+              )}
+            </EditProfileDialog>
+          )}
+
+          {!isMe && avatar}
+
+          <section className={styles.right}>
             {isMe && (
               <EditProfileDialog user={user}>
                 {({ openDialog: openEditProfileDialog }) => (
-                  <section onClick={openEditProfileDialog}>{avatar}</section>
+                  <Button
+                    borderColor="greyDarker"
+                    borderActiveColor="green"
+                    borderWidth="md"
+                    textColor="greyDarker"
+                    textActiveColor="green"
+                    onClick={openEditProfileDialog}
+                    size={['5.3125rem', '2rem']}
+                  >
+                    <Translate id="edit" />
+                  </Button>
                 )}
               </EditProfileDialog>
             )}
 
-            {!isMe && avatar}
+            {!isMe && <FollowUserButton user={user} size="lg" />}
 
-            <section className={styles.right}>
-              {isMe && (
-                <EditProfileDialog user={user}>
-                  {({ openDialog: openEditProfileDialog }) => (
-                    <Button
-                      borderColor="greyDarker"
-                      borderActiveColor="green"
-                      borderWidth="md"
-                      textColor="greyDarker"
-                      textActiveColor="green"
-                      onClick={openEditProfileDialog}
-                      size={['5.3125rem', '2rem']}
-                    >
-                      <Translate id="edit" />
-                    </Button>
-                  )}
-                </EditProfileDialog>
-              )}
-
-              {!isMe && <FollowUserButton user={user} size="lg" />}
-
-              <DropdownActions user={user} isMe={isMe} />
-            </section>
-          </header>
-
-          <section className={styles.info}>
-            <section className={styles.displayName}>
-              <h1
-                className={styles.name}
-                data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
-              >
-                {user.displayName}
-              </h1>
-              <BadgesDialog content={<Badges isInDialog />}>
-                {({ openDialog }) => {
-                  return (
-                    <span className={styles.badges} onClick={openDialog}>
-                      <Badges />
-                    </span>
-                  )
-                }}
-              </BadgesDialog>
-              {user?.info.ethAddress && (
-                <DynamicWalletLabel user={user} isMe={isMe} />
-              )}
-            </section>
-
-            <section className={styles.username}>
-              <span
-                className={styles.name}
-                data-test-id={TEST_ID.USER_PROFILE_USER_NAME}
-              >
-                @{user.userName}
-              </span>
-            </section>
+            <DropdownActions user={user} isMe={isMe} />
           </section>
-          <section className={styles.follow}>
-            <FollowersDialog user={user}>
-              {({ openDialog: openFollowersDialog }) => (
-                <button type="button" onClick={openFollowersDialog}>
-                  <span
-                    className={styles.count}
-                    data-test-id={TEST_ID.USER_PROFILE_FOLLOWERS_COUNT}
-                  >
-                    {numAbbr(user.followers.totalCount)}
-                  </span>
-                  &nbsp;
-                  <FormattedMessage defaultMessage="Followers" />
-                </button>
-              )}
-            </FollowersDialog>
+        </header>
 
-            <FollowingDialog user={user}>
-              {({ openDialog: openFollowingDialog }) => (
-                <button type="button" onClick={openFollowingDialog}>
-                  <span className={styles.count}>
-                    {numAbbr(user.following.users.totalCount)}
-                  </span>
-                  &nbsp;
-                  <FormattedMessage
-                    defaultMessage="Following"
-                    description="src/components/UserProfile/index.tsx"
-                  />
-                </button>
-              )}
-            </FollowingDialog>
-          </section>
-
-          <section className={styles.footer}>
-            <Expandable
-              content={user.info.description}
-              color="grey"
-              size="sm"
-              spacingTop="tight"
-              collapseable={false}
+        <section className={styles.info}>
+          <section className={styles.displayName}>
+            <h1
+              className={styles.name}
+              data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
             >
-              <p
-                className={styles.description}
-                data-test-id={TEST_ID.USER_PROFILE_BIO}
-              >
-                {user.info.description}
-              </p>
-            </Expandable>
+              {user.displayName}
+            </h1>
+            <BadgesDialog content={<Badges isInDialog />}>
+              {({ openDialog }) => {
+                return (
+                  <span className={styles.badges} onClick={openDialog}>
+                    <Badges />
+                  </span>
+                )
+              }}
+            </BadgesDialog>
 
-            <CircleWidget
-              circles={circles}
-              isMe={isMe}
-              hasDescription={false}
-              hasFooter={false}
-            />
+            {user?.info.ethAddress && (
+              <DynamicWalletLabel user={user} isMe={isMe} />
+            )}
           </section>
-        </Media>
-      </section>
-    </>
+
+          <section className={styles.username}>
+            <span
+              className={styles.name}
+              data-test-id={TEST_ID.USER_PROFILE_USER_NAME}
+            >
+              @{user.userName}
+            </span>
+          </section>
+        </section>
+
+        <section className={styles.follow}>
+          <FollowersDialog user={user}>
+            {({ openDialog: openFollowersDialog }) => (
+              <button type="button" onClick={openFollowersDialog}>
+                <span
+                  className={styles.count}
+                  data-test-id={TEST_ID.USER_PROFILE_FOLLOWERS_COUNT}
+                >
+                  {numAbbr(user.followers.totalCount)}
+                </span>
+                &nbsp;
+                <FormattedMessage defaultMessage="Followers" />
+              </button>
+            )}
+          </FollowersDialog>
+
+          <FollowingDialog user={user}>
+            {({ openDialog: openFollowingDialog }) => (
+              <button type="button" onClick={openFollowingDialog}>
+                <span className={styles.count}>
+                  {numAbbr(user.following.users.totalCount)}
+                </span>
+                &nbsp;
+                <FormattedMessage
+                  defaultMessage="Following"
+                  description="src/components/UserProfile/index.tsx"
+                />
+              </button>
+            )}
+          </FollowingDialog>
+        </section>
+
+        <section className={styles.footer}>
+          <Expandable
+            content={user.info.description}
+            color="grey"
+            size="sm"
+            spacingTop="tight"
+            collapseable={false}
+          >
+            <p
+              className={styles.description}
+              data-test-id={TEST_ID.USER_PROFILE_BIO}
+            >
+              {user.info.description}
+            </p>
+          </Expandable>
+
+          <CircleWidget
+            circles={circles}
+            isMe={isMe}
+            hasDescription={false}
+            hasFooter={false}
+          />
+        </section>
+      </Media>
+    </section>
   )
 }
 

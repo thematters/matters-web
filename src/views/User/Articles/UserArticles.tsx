@@ -13,7 +13,6 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
   Translate,
   usePublicQuery,
   useRoute,
@@ -28,6 +27,7 @@ import {
   VIEWER_ARTICLES,
 } from './gql'
 import PinBoard from './PinBoard'
+import Placeholder from './Placeholder'
 import StartWriting from './StartWirting'
 
 const UserArticles = () => {
@@ -107,7 +107,7 @@ const UserArticles = () => {
     return (
       <>
         <UserTabs />
-        <Spinner />
+        <Placeholder />
       </>
     )
   }
@@ -203,7 +203,12 @@ const UserArticles = () => {
 
       <PinBoard user={user} />
 
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        loader={<Placeholder />}
+        eof
+      >
         <List responsiveWrapper>
           {articleEdges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>

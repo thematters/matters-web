@@ -166,7 +166,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Enter Email',
-            description: '',
           })}
           value={values.email}
           error={touched.email && errors.email}

@@ -147,7 +147,6 @@ const Init: React.FC<FormProps> = ({
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Email',
-            description: '',
           })}
           value={values.email}
           error={touched.email && errors.email}

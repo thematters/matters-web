@@ -11,9 +11,7 @@ import {
   Head,
   InfiniteScroll,
   List,
-  Media,
   QueryError,
-  Spinner,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -23,6 +21,7 @@ import { UserCollectionsQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
 import { USER_COLLECTIONS } from './gql'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 const UserCollections = () => {
@@ -76,7 +75,7 @@ const UserCollections = () => {
     return (
       <>
         <UserTabs />
-        <Spinner />
+        <Placeholder />
       </>
     )
   }
@@ -157,16 +156,13 @@ const UserCollections = () => {
     <>
       <CustomHead />
 
-      <Media at="sm">
-        <UserTabs />
-      </Media>
-      <Media greaterThan="sm">
-        <section className={styles.header}>
-          <UserTabs />
-        </section>
-      </Media>
+      <UserTabs />
 
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        loader={<Placeholder />}
+      >
         <List responsiveWrapper>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>

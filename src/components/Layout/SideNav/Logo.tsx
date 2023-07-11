@@ -15,7 +15,6 @@ const Logo = () => {
         <a
           aria-label={intl.formatMessage({
             defaultMessage: 'Discover',
-            description: '',
           })}
         >
           <IconLogoGraph />

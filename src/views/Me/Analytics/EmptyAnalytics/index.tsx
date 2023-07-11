@@ -26,7 +26,6 @@ const EmptyAnalytics = () => {
     variables: {
       title: intl.formatMessage({
         defaultMessage: 'Untitled',
-        description: '',
       }),
     },
   })

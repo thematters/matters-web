@@ -115,7 +115,6 @@ const Init: React.FC<FormProps> = ({
               intl.formatMessage({
                 defaultMessage:
                   'Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.',
-                description: '',
               })
             )
           } else if (c === 'DISPLAYNAME_INVALID') {
@@ -123,7 +122,6 @@ const Init: React.FC<FormProps> = ({
               'name',
               intl.formatMessage({
                 defaultMessage: 'Must be between 2-12 characters long.',
-                description: '',
               })
             )
           } else {
@@ -144,7 +142,6 @@ const Init: React.FC<FormProps> = ({
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Enter the name of your Circle',
-            description: '',
           })}
           value={values.displayName}
           error={touched.displayName && errors.displayName}
@@ -165,7 +162,6 @@ const Init: React.FC<FormProps> = ({
             required
             placeholder={intl.formatMessage({
               defaultMessage: 'Custom URL Name',
-              description: '',
             })}
             value={values.name}
             error={touched.name && errors.name}

@@ -89,7 +89,11 @@ const BaseLikesReceived = () => {
     <>
       <LikesTabs />
 
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
         <List responsiveWrapper>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
@@ -106,7 +110,6 @@ const LikesReceived = () => {
   const intl = useIntl()
   const title = intl.formatMessage({
     defaultMessage: 'History',
-    description: '',
   })
 
   return (

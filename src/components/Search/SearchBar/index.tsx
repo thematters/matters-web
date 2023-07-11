@@ -44,7 +44,6 @@ const SearchButton = () => {
       type="submit"
       aria-label={intl.formatMessage({
         defaultMessage: 'Search',
-        description: '',
       })}
     >
       <IconSearch16 color="greyDark" />
@@ -85,11 +84,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   const textAriaLabel = intl.formatMessage({
     defaultMessage: 'Search',
-    description: '',
   })
   const textPlaceholder = intl.formatMessage({
     defaultMessage: 'Search',
-    description: '',
   })
 
   const searchTextInput = useRef<HTMLInputElement>(null)

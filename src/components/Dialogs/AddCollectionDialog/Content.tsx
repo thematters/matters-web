@@ -117,7 +117,6 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Collection Name',
-            description: '',
           })}
           hint={`${values.title.length}/${maxCollectionTitle}`}
           value={values.title}

@@ -69,7 +69,6 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
     if (!value) {
       return intl.formatMessage({
         defaultMessage: 'Required',
-        description: '',
       })
     }
   }
@@ -149,7 +148,6 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Collection name',
-            description: '',
           })}
           hint={`${values.title.length}/${maxTitle}`}
           value={values.title}
@@ -166,7 +164,6 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Description',
-            description: '',
           })}
           hint={`${values.description.length}/${maxDescription}`}
           maxLength={maxDescription}

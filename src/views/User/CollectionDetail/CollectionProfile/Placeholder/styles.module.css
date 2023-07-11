@@ -1,0 +1,12 @@
+.title {
+  width: 50%;
+  height: 1.5rem;
+  background: var(--color-grey-lighter);
+}
+
+.description {
+  width: 100%;
+  height: 1rem;
+  margin-top: var(--spacing-x-tight);
+  background: var(--color-grey-lighter);
+}
