@@ -24,8 +24,8 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
 
   ...inputProps
 }) => {
-  const fieldId = `field-${inputProps.name}`
-  const fieldMsgId = `field-msg-${inputProps.name}`
+  const fieldId = `field-${inputProps.value}`
+  const fieldMsgId = `field-msg-${inputProps.value}`
   const disabled = inputProps.disabled
 
   const [field] = useField({ ...inputProps, type: 'checkbox' })
