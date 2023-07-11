@@ -23,6 +23,7 @@ export enum ENTITY_TYPE {
   tag = 'tag',
   user = 'user',
   circle = 'circle',
+  collection = 'collection',
 }
 
 export enum ASSET_TYPE {
@@ -34,4 +35,5 @@ export enum ASSET_TYPE {
   tagCover = 'tagCover',
   circleAvatar = 'circleAvatar',
   circleCover = 'circleCover',
+  collectionCover = 'collectionCover',
 }

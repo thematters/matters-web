@@ -45,7 +45,7 @@ const BaseCollectionDigestFeed = ({
           <Book cover={cover} title={title} articleCount={articleCount} />
         </section>
 
-        <section>
+        <section className={styles.content}>
           <header className={styles.header}>
             <h2 className={styles.title}>{title}</h2>
           </header>

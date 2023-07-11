@@ -6,6 +6,10 @@
   @media (--sm-up) {
     gap: 3rem;
   }
+
+  & .content {
+    flex-grow: 1;
+  }
 }
 
 .book {

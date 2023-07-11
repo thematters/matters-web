@@ -1,0 +1,9 @@
+.label {
+  display: flex;
+  margin: var(--spacing-base) 0;
+  font-size: 0;
+
+  & .hint {
+    @mixin line-clamp;
+  }
+}
