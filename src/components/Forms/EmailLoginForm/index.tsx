@@ -129,12 +129,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         }
 
         toast.success({
-          message: (
-            <FormattedMessage
-              defaultMessage="Logged in successfully"
-              description=""
-            />
-          ),
+          message: <FormattedMessage defaultMessage="Logged in successfully" />,
         })
 
         analytics.identifyUser()
@@ -165,7 +160,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     <section className={containerClasses}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
-          label={<FormattedMessage defaultMessage="Email" description="" />}
+          label={<FormattedMessage defaultMessage="Email" />}
           type="email"
           name="email"
           required
@@ -180,7 +175,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         />
 
         <Form.Input
-          label={<FormattedMessage defaultMessage="Password" description="" />}
+          label={<FormattedMessage defaultMessage="Password" />}
           type="password"
           name="password"
           required
@@ -219,7 +214,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
@@ -235,9 +230,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={
-                  <FormattedMessage defaultMessage="Confirm" description="" />
-                }
+                text={<FormattedMessage defaultMessage="Confirm" />}
                 loading={isSubmitting}
               />
             </>

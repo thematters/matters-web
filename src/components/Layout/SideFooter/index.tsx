@@ -20,40 +20,31 @@ const SideFooter = () => {
       <section className={styles.links}>
         <Link href={PATHS.ABOUT} legacyBehavior>
           <a>
-            <FormattedMessage defaultMessage="About Us" description="" />
+            <FormattedMessage defaultMessage="About Us" />
           </a>
         </Link>
 
         <Link href={PATHS.GUIDE} legacyBehavior>
           <a>
-            <FormattedMessage defaultMessage="Explore Matters" description="" />
+            <FormattedMessage defaultMessage="Explore Matters" />
           </a>
         </Link>
 
         <Link href={PATHS.COMMUNITY} legacyBehavior>
           <a>
-            <FormattedMessage
-              defaultMessage="Matters Community"
-              description=""
-            />
+            <FormattedMessage defaultMessage="Matters Community" />
           </a>
         </Link>
 
         <Link href={PATHS.MIGRATION} legacyBehavior>
           <a>
-            <FormattedMessage
-              defaultMessage="Migrate to Matters"
-              description=""
-            />
+            <FormattedMessage defaultMessage="Migrate to Matters" />
           </a>
         </Link>
 
         <Link href={PATHS.TOS} legacyBehavior>
           <a>
-            <FormattedMessage
-              defaultMessage="Term of Services"
-              description=""
-            />
+            <FormattedMessage defaultMessage="Term of Services" />
           </a>
         </Link>
 
@@ -62,16 +53,16 @@ const SideFooter = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <FormattedMessage defaultMessage="Open Source" description="" />
+          <FormattedMessage defaultMessage="Open Source" />
         </a>
 
         <a href={EXTERNAL_LINKS.SECURITY_LINK} target="_blank" rel="noreferrer">
-          <FormattedMessage defaultMessage="Bug Bounty" description="" />
+          <FormattedMessage defaultMessage="Bug Bounty" />
         </a>
 
         <Link href={GUIDE_LINKS.PWA[lang]} legacyBehavior>
           <a>
-            <FormattedMessage defaultMessage="Download App" description="" />
+            <FormattedMessage defaultMessage="Download App" />
           </a>
         </Link>
 

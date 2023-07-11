@@ -5,7 +5,7 @@ import { IconTrash20, Menu } from '~/components'
 const DeleteCollectionButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
     <Menu.Item
-      text={<FormattedMessage defaultMessage="Delete" description="" />}
+      text={<FormattedMessage defaultMessage="Delete" />}
       icon={<IconTrash20 size="mdS" />}
       onClick={openDialog}
       ariaHasPopup="dialog"

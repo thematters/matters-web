@@ -203,6 +203,9 @@
     "defaultMessage": "討論已送出",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
+  "A3g33H": {
+    "defaultMessage": "封存的作品仅自己可见，且操作无法撤销。如文章已加入选集，将从选集中移除。（已发布到 IPFS 的版本不受影响）"
+  },
   "A3rLZt": {
     "defaultMessage": "最近 {months} 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -395,6 +398,9 @@
     "defaultMessage": "相關標籤",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
+  "HJ0iZJ": {
+    "defaultMessage": "确认归档"
+  },
   "HxcjQl": {
     "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -454,6 +460,9 @@
   "KMcrz8": {
     "defaultMessage": "認領",
     "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "KQi/UZ": {
+    "defaultMessage": "归档作品"
   },
   "L0J61B": {
     "defaultMessage": "免費",
@@ -595,6 +604,9 @@
     "defaultMessage": "登出失敗，請重試",
     "description": ""
   },
+  "T9oZC8": {
+    "defaultMessage": "確認要刪除該選集「{collection}」嗎？"
+  },
   "TSDiqB": {
     "defaultMessage": "付費人數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -703,6 +715,9 @@
     "defaultMessage": "值得關注",
     "description": ""
   },
+  "Xi40U9": {
+    "defaultMessage": "操作無法撤銷，確認刪除選集嗎？"
+  },
   "Xz/AHp": {
     "defaultMessage": " 广播提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -742,6 +757,9 @@
   "ZjDH42": {
     "defaultMessage": "關於我們",
     "description": ""
+  },
+  "a/xacb": {
+    "defaultMessage": "（不會刪除選集內文章）"
   },
   "aa0nss": {
     "defaultMessage": "取消精選",
@@ -867,10 +885,6 @@
     "defaultMessage": "你的修訂作品 {articleTitle} 已發布到分佈式網絡",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
-  "gSPnTx": {
-    "defaultMessage": "（不會刪除選集內文章）",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-  },
   "h+punE": {
     "defaultMessage": "{date}更新",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -947,10 +961,6 @@
     "defaultMessage": "找你想看的",
     "description": ""
   },
-  "lCNyOp": {
-    "defaultMessage": "確認要刪除該選集“{collection}”嗎？",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-  },
   "lD4FPZ": {
     "defaultMessage": "請輸入電子信箱",
     "description": ""
@@ -986,6 +996,9 @@
   "mSAY3/": {
     "defaultMessage": "已取消封鎖。該用戶現在可以評論你的作品和圍爐。",
     "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "mWcca9": {
+    "defaultMessage": "确认要将「{article}」归档吗？"
   },
   "mWjpk9": {
     "defaultMessage": "還沒有廣播",
@@ -1083,10 +1096,6 @@
     "defaultMessage": "移除作品",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
   },
-  "qsSujx": {
-    "defaultMessage": "操作無法撤銷，確認刪除選集嗎？",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-  },
   "qswU4E": {
     "defaultMessage": "信箱將不作為登入使用，僅作為聯繫渠道",
     "description": ""
@@ -1154,10 +1163,6 @@
   "u5aHb4": {
     "defaultMessage": "複製鏈接",
     "description": ""
-  },
-  "uIdMon": {
-    "defaultMessage": "確認隱藏，其他用戶將無法從站內訪問該作品。隱藏後無法回退，如需再次呈現作品，你需要重新發布。",
-    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
   },
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南",
@@ -1246,6 +1251,9 @@
   "y0b6Kp": {
     "defaultMessage": "付費",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "yBUiiy": {
+    "defaultMessage": "操作无法撤销，确认归档吗？"
   },
   "yIlC0R": {
     "defaultMessage": "尚未發布作品",

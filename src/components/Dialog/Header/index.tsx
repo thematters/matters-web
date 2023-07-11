@@ -34,9 +34,7 @@ const Header: React.FC<HeaderProps> = ({
   closeDialog,
   hasSmUpCloseBtn,
 }) => {
-  const text = closeText || (
-    <FormattedMessage defaultMessage="Cancel" description="" />
-  )
+  const text = closeText || <FormattedMessage defaultMessage="Cancel" />
 
   return (
     <>

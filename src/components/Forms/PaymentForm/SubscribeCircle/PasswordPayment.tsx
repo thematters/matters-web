@@ -165,7 +165,7 @@ const Confirm: React.FC<FormProps> = ({
           <>
             <Dialog.TextButton
               color="greyDarker"
-              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              text={<FormattedMessage defaultMessage="Cancel" />}
               onClick={closeDialog}
             />
             <Dialog.TextButton

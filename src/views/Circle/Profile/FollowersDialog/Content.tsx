@@ -90,9 +90,7 @@ const FollowersDialogContent = () => {
   if (!data || !circle || !edges || edges.length <= 0 || !pageInfo) {
     return (
       <EmptyWarning
-        description={
-          <FormattedMessage defaultMessage="No followers yet" description="" />
-        }
+        description={<FormattedMessage defaultMessage="No followers yet" />}
       />
     )
   }

@@ -167,7 +167,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
       <Dialog.Footer
         smUpBtns={
           <Dialog.TextButton
-            text={<FormattedMessage defaultMessage="Cancel" description="" />}
+            text={<FormattedMessage defaultMessage="Cancel" />}
             color="greyDarker"
             onClick={closeDialog}
           />

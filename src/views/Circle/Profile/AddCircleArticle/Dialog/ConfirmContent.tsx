@@ -23,7 +23,7 @@ const ConfirmContent: React.FC<ContentProps> = ({
   const ConfirmButton = () => (
     <Dialog.TextButton
       onClick={() => onConfirm(license === ArticleLicenseType.Arr, license)}
-      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={loading}
     />
   )

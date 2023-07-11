@@ -62,7 +62,7 @@ const BlockUserButton = ({
       ariaHasPopup="dialog"
       textColor="greyDarker"
       textActiveColor="black"
-      text={<FormattedMessage defaultMessage="Block User" description="" />}
+      text={<FormattedMessage defaultMessage="Block User" />}
       icon={<IconMute20 size="mdS" />}
     />
   )

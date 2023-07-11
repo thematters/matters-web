@@ -203,6 +203,9 @@
     "defaultMessage": "Discussion sent",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
+  "A3g33H": {
+    "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
+  },
   "A3rLZt": {
     "defaultMessage": "Last {months} months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -395,6 +398,9 @@
     "defaultMessage": "Related Tags",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
+  "HJ0iZJ": {
+    "defaultMessage": "Confirm Archiving"
+  },
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -454,6 +460,9 @@
   "KMcrz8": {
     "defaultMessage": "Maintain Tag",
     "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "KQi/UZ": {
+    "defaultMessage": "Archive works"
   },
   "L0J61B": {
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
@@ -595,6 +604,9 @@
     "defaultMessage": "Failed to log out, please try again.",
     "description": ""
   },
+  "T9oZC8": {
+    "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?"
+  },
   "TSDiqB": {
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
     "defaultMessage": "Subscribers"
@@ -703,6 +715,9 @@
     "defaultMessage": "Authors",
     "description": ""
   },
+  "Xi40U9": {
+    "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
+  },
   "Xz/AHp": {
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx",
     "defaultMessage": "broadcast and mentioned you"
@@ -742,6 +757,9 @@
   "ZjDH42": {
     "defaultMessage": "About Us",
     "description": ""
+  },
+  "a/xacb": {
+    "defaultMessage": "(Articles in this collection will not be deleted)"
   },
   "aa0nss": {
     "defaultMessage": "Unpin from Trending",
@@ -867,10 +885,6 @@
     "defaultMessage": "Your work {articleTitle} has been republished to decentralized network",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
-  "gSPnTx": {
-    "defaultMessage": "(Articles in this collection will not be deleted)",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-  },
   "h+punE": {
     "defaultMessage": "Updated {date}",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -947,10 +961,6 @@
     "defaultMessage": "Topics",
     "description": ""
   },
-  "lCNyOp": {
-    "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-  },
   "lD4FPZ": {
     "defaultMessage": "Enter Email",
     "description": ""
@@ -986,6 +996,9 @@
   "mSAY3/": {
     "defaultMessage": "User unblocked. User can now comment on your articles.",
     "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "mWcca9": {
+    "defaultMessage": "Are you sure you want to archive ‘{article}’?"
   },
   "mWjpk9": {
     "defaultMessage": "No broadcast yet.",
@@ -1083,10 +1096,6 @@
     "defaultMessage": "Remove Article",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
   },
-  "qsSujx": {
-    "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-  },
   "qswU4E": {
     "defaultMessage": "Email will not be used as a login but only as a contact channel.",
     "description": ""
@@ -1154,10 +1163,6 @@
   "u5aHb4": {
     "defaultMessage": "Copy Link",
     "description": ""
-  },
-  "uIdMon": {
-    "defaultMessage": "Are you sure you want to archive the article?",
-    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
   },
   "uVCg1l": {
     "defaultMessage": "Explore Matters",
@@ -1246,6 +1251,9 @@
   "y0b6Kp": {
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
     "defaultMessage": "Pay"
+  },
+  "yBUiiy": {
+    "defaultMessage": "This operation cannot be undone, confirm archiving?"
   },
   "yIlC0R": {
     "defaultMessage": "No published articles yet",

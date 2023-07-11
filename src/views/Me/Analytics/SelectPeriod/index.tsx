@@ -56,7 +56,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <FormattedMessage defaultMessage="All" description="" />
+          <FormattedMessage defaultMessage="All" />
         </>
       ),
       value: 0,

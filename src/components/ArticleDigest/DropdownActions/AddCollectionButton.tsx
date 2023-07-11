@@ -9,9 +9,7 @@ interface AddCollectionButtonProps {
 const AddCollectionButton = ({ openDialog }: AddCollectionButtonProps) => {
   return (
     <Menu.Item
-      text={
-        <FormattedMessage defaultMessage="Add to collection" description="" />
-      }
+      text={<FormattedMessage defaultMessage="Add to collection" />}
       icon={<IconBook20 size="mdS" />}
       onClick={openDialog}
       ariaHasPopup="dialog"

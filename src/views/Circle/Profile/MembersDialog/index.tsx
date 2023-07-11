@@ -21,7 +21,7 @@ const BaseMembersDialog = ({ children }: MembersDialogProps) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={<FormattedMessage defaultMessage="Members" description="" />}
+          title={<FormattedMessage defaultMessage="Members" />}
           closeDialog={closeDialog}
           closeText="close"
         />

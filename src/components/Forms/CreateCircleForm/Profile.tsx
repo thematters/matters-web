@@ -153,10 +153,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           />
 
           <p className={styles.hint}>
-            <FormattedMessage
-              defaultMessage="Recommended size: 1600px x 900px"
-              description=""
-            />
+            <FormattedMessage defaultMessage="Recommended size: 1600px x 900px" />
           </p>
         </section>
 
@@ -206,12 +203,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
               defaultMessage: 'Describe more about your Circle',
               description: 'src/components/Forms/CreateCircleForm/Profile.tsx',
             })}
-            hint={
-              <FormattedMessage
-                defaultMessage="Maximum 200 characters."
-                description=""
-              />
-            }
+            hint={<FormattedMessage defaultMessage="Maximum 200 characters." />}
             value={values.description}
             error={touched.description && errors.description}
             onBlur={handleBlur}
@@ -227,7 +219,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
@@ -244,9 +236,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={
-                  <FormattedMessage defaultMessage="Confirm" description="" />
-                }
+                text={<FormattedMessage defaultMessage="Confirm" />}
                 loading={isSubmitting}
               />
             </>
@@ -271,7 +261,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              text={<FormattedMessage defaultMessage="Cancel" />}
               color="greyDarker"
               onClick={closeDialog}
             />

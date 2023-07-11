@@ -46,7 +46,7 @@ const ConfirmPublishDialogContent: React.FC<
         rightBtn={<SubmitButton />}
       />
 
-      <Dialog.Message align="left" type="info">
+      <Dialog.Message align="left">
         <section className={styles.imageContainer}>
           <div
             className={styles.image}

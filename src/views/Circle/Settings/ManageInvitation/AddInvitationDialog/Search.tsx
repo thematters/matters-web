@@ -49,7 +49,7 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
     <Dialog.TextButton
       disabled={disabled}
       onClick={() => save({ nodes: selectedNodes })}
-      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
     />
   )
 
@@ -82,7 +82,7 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              text={<FormattedMessage defaultMessage="Cancel" />}
               color="greyDarker"
               onClick={closeDialog}
             />

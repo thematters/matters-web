@@ -140,7 +140,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Create" description="" />}
+      text={<FormattedMessage defaultMessage="Create" />}
       loading={isSubmitting}
     />
   )
@@ -148,9 +148,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title={
-          <FormattedMessage defaultMessage="New Collection" description="" />
-        }
+        title={<FormattedMessage defaultMessage="New Collection" />}
         closeDialog={closeDialog}
         rightBtn={<SubmitButton />}
       />
@@ -161,7 +159,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" description="" />}
+              text={<FormattedMessage defaultMessage="Cancel" />}
               color="greyDarker"
               onClick={closeDialog}
             />
