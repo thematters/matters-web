@@ -1,7 +1,9 @@
 .book {
   position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   width: 7.5rem;
   height: 10rem;
   overflow: hidden;
@@ -42,6 +44,13 @@
     @mixin object-fit-cover;
 
     background-color: var(--color-grey-lighter);
+  }
+
+  & .mask {
+    @mixin expand-to-container;
+    @mixin flex-center-all;
+
+    background: rgb(0 0 0 / 50%);
   }
 }
 

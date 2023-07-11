@@ -9,6 +9,7 @@ import {
 } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
+  Book,
   Cover,
   CoverProps,
   IconCamera24,
@@ -46,10 +47,18 @@ export type CoverUploaderProps = {
     | ASSET_TYPE.profileCover
     | ASSET_TYPE.tagCover
     | ASSET_TYPE.circleCover
+    | ASSET_TYPE.collectionCover
   entityId?: string
-  entityType: ENTITY_TYPE.user | ENTITY_TYPE.tag | ENTITY_TYPE.circle
+  entityType:
+    | ENTITY_TYPE.user
+    | ENTITY_TYPE.tag
+    | ENTITY_TYPE.circle
+    | ENTITY_TYPE.collection
   onUpload: (assetId: string | null) => void
-  type?: 'circle'
+  type?: 'circle' | 'collection'
+
+  bookTitle?: string
+  bookArticleCount?: number
 } & CoverProps
 
 export const CoverUploader = ({
@@ -61,6 +70,8 @@ export const CoverUploader = ({
   inEditor,
   onUpload,
   type,
+  bookTitle,
+  bookArticleCount,
 }: CoverUploaderProps) => {
   const { lang } = useContext(LanguageContext)
 
@@ -127,10 +138,11 @@ export const CoverUploader = ({
   )
 
   const isCircle = type === 'circle'
+  const isCollection = type === 'collection'
 
   return (
     <label className={styles.label} htmlFor={fieldId}>
-      {!isCircle && (
+      {!isCircle && !isCollection && (
         <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
           <Mask />
         </Cover>
@@ -139,6 +151,21 @@ export const CoverUploader = ({
         <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
           <Mask />
         </Cover>
+      )}
+      {isCollection && (
+        <section className={styles.collection}>
+          <section className={styles.collectionContent}>
+            {
+              <Book
+                title={bookTitle || ''}
+                cover={cover}
+                articleCount={bookArticleCount}
+                hasMask
+                loading={loading}
+              />
+            }
+          </section>
+        </section>
       )}
 
       <VisuallyHidden>

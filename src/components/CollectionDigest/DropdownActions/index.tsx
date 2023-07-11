@@ -13,6 +13,7 @@ import {
 import { DropdownActionsCollectionFragment } from '~/gql/graphql'
 
 import DeleteCollection from './DeleteCollection'
+import EditCollection from './EditCollection'
 import { fragments } from './gql'
 import PinButton from './PinButton'
 import styles from './styles.module.css'
@@ -22,6 +23,7 @@ type DropdownActionsProps = {
 }
 
 interface DialogProps {
+  openEditDialog: () => void
   openDeleteDialog: () => void
 }
 
@@ -29,12 +31,14 @@ type BaseDropdownActionsProps = DropdownActionsProps & DialogProps
 
 const BaseDropdownActions = ({
   collection,
+  openEditDialog,
   openDeleteDialog,
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
 
   const Content = () => (
     <Menu>
+      <EditCollection.Button openDialog={openEditDialog} />
       <PinButton collection={collection} />
       <Menu.Divider />
       <DeleteCollection.Button openDialog={openDeleteDialog} />
@@ -72,14 +76,19 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   return (
-    <DeleteCollection.Dialog collection={collection}>
-      {({ openDialog: openDeleteDialog }) => (
-        <BaseDropdownActions
-          {...props}
-          openDeleteDialog={viewer.isFrozen ? forbid : openDeleteDialog}
-        />
+    <EditCollection.Dialog collection={collection}>
+      {({ openDialog: openEditDialog }) => (
+        <DeleteCollection.Dialog collection={collection}>
+          {({ openDialog: openDeleteDialog }) => (
+            <BaseDropdownActions
+              {...props}
+              openEditDialog={viewer.isFrozen ? forbid : openEditDialog}
+              openDeleteDialog={viewer.isFrozen ? forbid : openDeleteDialog}
+            />
+          )}
+        </DeleteCollection.Dialog>
       )}
-    </DeleteCollection.Dialog>
+    </EditCollection.Dialog>
   )
 }
 

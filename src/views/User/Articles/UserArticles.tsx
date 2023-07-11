@@ -262,6 +262,7 @@ const UserArticles = () => {
                   inUserArticles
                   hasAuthor={false}
                   hasEdit={true}
+                  hasAddCollection={true}
                   hasArchive={true}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
