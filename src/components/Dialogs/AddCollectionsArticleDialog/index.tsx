@@ -45,7 +45,7 @@ const BaseAddCollectionsArticleDialog = ({
     undefined,
     { showToast: false }
   )
-  const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog: cd } = useDialogSwitch(true)
 
   const [area, setArea] = useState<Area>('selecting')
   const inSelectingArea = area === 'selecting'
@@ -110,9 +110,14 @@ const BaseAddCollectionsArticleDialog = ({
       setSubmitting(false)
       // clear data
       formik.setFieldValue('checked', [])
-      closeDialog()
+      cd()
     },
   })
+
+  const closeDialog = () => {
+    formik.setFieldValue('checked', [])
+    cd()
+  }
 
   return (
     <>
