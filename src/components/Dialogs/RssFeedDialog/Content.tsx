@@ -125,7 +125,6 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                     <Button
                       aria-label={intl.formatMessage({
                         defaultMessage: 'Copy Link',
-                        description: '',
                       })}
                     >
                       <IconCopy16 />
@@ -199,7 +198,6 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                             disabled={!ipnsKey}
                             aria-label={intl.formatMessage({
                               defaultMessage: 'Copy Link',
-                              description: '',
                             })}
                           >
                             <IconCopy16 />

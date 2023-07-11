@@ -20,7 +20,7 @@ const Inactive = () => {
         <section className={styles.info}>
           <section className={styles.displayName}>
             <h1 className={styles.name}>
-              <FormattedMessage defaultMessage="Deleted user" description="" />
+              <FormattedMessage defaultMessage="Deleted user" />
             </h1>
           </section>
         </section>

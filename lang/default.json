@@ -1,7 +1,6 @@
 {
   "+7SAix": {
-    "defaultMessage": "Must be between 2-12 characters long.",
-    "description": ""
+    "defaultMessage": "Must be between 2-12 characters long."
   },
   "+a+2ug": {
     "defaultMessage": "Members"
@@ -58,8 +57,7 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "2W0f9h": {
-    "defaultMessage": "Bio",
-    "description": ""
+    "defaultMessage": "Bio"
   },
   "2atspc": {
     "defaultMessage": "Drafts"
@@ -82,8 +80,7 @@
     "defaultMessage": "Articles"
   },
   "3kbIhS": {
-    "defaultMessage": "Untitled",
-    "description": ""
+    "defaultMessage": "Untitled"
   },
   "3uQKhx": {
     "defaultMessage": "Please email",
@@ -203,16 +200,13 @@
     "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
   },
   "A41QIy": {
-    "defaultMessage": "Enter Password",
-    "description": ""
+    "defaultMessage": "Enter Password"
   },
   "A6ozr9": {
-    "defaultMessage": "Collection name",
-    "description": ""
+    "defaultMessage": "Collection name"
   },
   "A7ugfn": {
-    "defaultMessage": "More Actions",
-    "description": ""
+    "defaultMessage": "More Actions"
   },
   "AGcU5J": {
     "defaultMessage": "Pin Broadcast",
@@ -254,8 +248,7 @@
     "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "CBDDR5": {
-    "defaultMessage": "Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.",
-    "description": ""
+    "defaultMessage": "Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed."
   },
   "CD688y": {
     "defaultMessage": "bookmarked",
@@ -303,8 +296,7 @@
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
   "E8W3qa": {
-    "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.",
-    "description": ""
+    "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed."
   },
   "EQeKnO": {
     "defaultMessage": "Manage Invitation",
@@ -376,8 +368,7 @@
     "defaultMessage": "Enter"
   },
   "HAlOn1": {
-    "defaultMessage": "Name",
-    "description": ""
+    "defaultMessage": "Name"
   },
   "HFVDeB": {
     "defaultMessage": "Related Tags",
@@ -517,8 +508,7 @@
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
   "OKhRC6": {
-    "defaultMessage": "Share",
-    "description": ""
+    "defaultMessage": "Share"
   },
   "Po+kJe": {
     "defaultMessage": "Last {month} month",
@@ -528,8 +518,7 @@
     "defaultMessage": "Shuffle"
   },
   "Q8Qw5B": {
-    "defaultMessage": "Description",
-    "description": ""
+    "defaultMessage": "Description"
   },
   "QCo7Gc": {
     "defaultMessage": "Select NFT as your avatar",
@@ -575,8 +564,7 @@
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
   "Seanpx": {
-    "defaultMessage": "Required",
-    "description": ""
+    "defaultMessage": "Required"
   },
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again."
@@ -622,8 +610,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "VZsE96": {
-    "defaultMessage": "Collection Name",
-    "description": ""
+    "defaultMessage": "Collection Name"
   },
   "Vn5KLr": {
     "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)",
@@ -769,8 +756,7 @@
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
   "cE4Hfw": {
-    "defaultMessage": "Discover",
-    "description": ""
+    "defaultMessage": "Discover"
   },
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
@@ -801,8 +787,7 @@
     "defaultMessage": "collaborators"
   },
   "djJp6c": {
-    "defaultMessage": "History",
-    "description": ""
+    "defaultMessage": "History"
   },
   "dnsfmR": {
     "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
@@ -826,8 +811,7 @@
     "defaultMessage": "My Page"
   },
   "eov+J2": {
-    "defaultMessage": "Custom URL Name",
-    "description": ""
+    "defaultMessage": "Custom URL Name"
   },
   "fG41Ux": {
     "defaultMessage": "Logged out successfully"
@@ -893,8 +877,7 @@
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "jL2ZHb": {
-    "defaultMessage": "Code will expire after 20 minutes",
-    "description": ""
+    "defaultMessage": "Code will expire after 20 minutes"
   },
   "jgLiba": {
     "defaultMessage": "Enter verification code",
@@ -916,8 +899,7 @@
     "defaultMessage": "Topics"
   },
   "lD4FPZ": {
-    "defaultMessage": "Enter Email",
-    "description": ""
+    "defaultMessage": "Enter Email"
   },
   "lIir/P": {
     "defaultMessage": "I see"
@@ -1151,8 +1133,7 @@
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "wXzTZ0": {
-    "defaultMessage": "Enter the name of your Circle",
-    "description": ""
+    "defaultMessage": "Enter the name of your Circle"
   },
   "wbcwKd": {
     "defaultMessage": "View All"
@@ -1178,8 +1159,7 @@
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "xmcVZ0": {
-    "defaultMessage": "Search",
-    "description": ""
+    "defaultMessage": "Search"
   },
   "y0b6Kp": {
     "defaultMessage": "Pay",

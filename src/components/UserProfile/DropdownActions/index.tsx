@@ -124,7 +124,6 @@ const BaseDropdownActions = ({
                 textActiveColor="green"
                 aria-label={intl.formatMessage({
                   defaultMessage: 'More Actions',
-                  description: '',
                 })}
                 onClick={openDropdown}
                 ref={ref}
@@ -142,7 +141,6 @@ const BaseDropdownActions = ({
                 borderActiveColor="black"
                 aria-label={intl.formatMessage({
                   defaultMessage: 'More Actions',
-                  description: '',
                 })}
                 onClick={openDropdown}
                 ref={ref}
@@ -160,7 +158,6 @@ const BaseDropdownActions = ({
                 borderActiveColor="black"
                 aria-label={intl.formatMessage({
                   defaultMessage: 'More Actions',
-                  description: '',
                 })}
                 onClick={openDropdown}
                 ref={ref}

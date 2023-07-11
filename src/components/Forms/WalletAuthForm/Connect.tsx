@@ -336,7 +336,6 @@ const Connect: React.FC<FormProps> = ({
             required
             placeholder={intl.formatMessage({
               defaultMessage: 'Enter Email',
-              description: '',
             })}
             extraButton={
               <TextIcon
@@ -379,7 +378,6 @@ const Connect: React.FC<FormProps> = ({
             })}
             hint={intl.formatMessage({
               defaultMessage: 'Code will expire after 20 minutes',
-              description: '',
             })}
             value={values.code}
             error={touched.code && errors.code}

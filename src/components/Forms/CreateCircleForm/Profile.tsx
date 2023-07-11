@@ -180,7 +180,6 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
               required
               placeholder={intl.formatMessage({
                 defaultMessage: 'Enter the name of your Circle',
-                description: '',
               })}
               value={values.displayName}
               error={touched.displayName && errors.displayName}

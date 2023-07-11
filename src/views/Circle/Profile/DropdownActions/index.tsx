@@ -99,7 +99,6 @@ const BaseDropdownActions = ({
           bgColor="halfBlack"
           aria-label={intl.formatMessage({
             defaultMessage: 'More Actions',
-            description: '',
           })}
           aria-haspopup="listbox"
           ref={ref}

@@ -87,7 +87,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     if (!value) {
       return intl.formatMessage({
         defaultMessage: 'Required',
-        description: '',
       })
     } else if (value.length > 200) {
       return intl.formatMessage(
@@ -163,7 +162,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
               intl.formatMessage({
                 defaultMessage:
                   'Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.',
-                description: '',
               })
             )
           } else {
@@ -212,7 +210,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Name',
-            description: '',
           })}
           hint={`${values.displayName.length}/${maxDisplayName}`}
           value={values.displayName}
@@ -229,7 +226,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Bio',
-            description: '',
           })}
           hint={`${values.description.length}/${maxDescription}`}
           maxLength={maxDescription}

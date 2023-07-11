@@ -160,7 +160,6 @@ const Password: React.FC<FormProps> = ({
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Enter Password',
-          description: '',
         })}
         value={values.password}
         error={touched.password && errors.password}

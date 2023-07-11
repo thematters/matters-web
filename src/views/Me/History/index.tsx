@@ -179,7 +179,6 @@ const MeHistory = () => {
   const intl = useIntl()
   const title = intl.formatMessage({
     defaultMessage: 'History',
-    description: '',
   })
 
   return (
