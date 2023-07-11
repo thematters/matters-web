@@ -14,8 +14,6 @@ import {
   ArchiveArticleMutation,
 } from '~/gql/graphql'
 
-import styles from './styles.module.css'
-
 const ARCHIVE_ARTICLE = gql`
   mutation ArchiveArticle($id: ID!) {
     editArticle(input: { id: $id, state: archived }) {
@@ -103,9 +101,7 @@ const ArchiveArticleDialog = ({
               <FormattedMessage
                 defaultMessage="Are you sure you want to archive ‘{article}’?"
                 values={{
-                  article: (
-                    <span className={styles.highlight}>{article.title}</span>
-                  ),
+                  article: <span className="u-highlight">{article.title}</span>,
                 }}
               />
               <br />

@@ -564,6 +564,9 @@
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again."
   },
+  "T9oZC8": {
+    "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?"
+  },
   "TSDiqB": {
     "defaultMessage": "Subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -663,6 +666,9 @@
   "XgdZSb": {
     "defaultMessage": "Authors"
   },
+  "Xi40U9": {
+    "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
+  },
   "Xz/AHp": {
     "defaultMessage": "broadcast and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -700,6 +706,9 @@
   },
   "ZjDH42": {
     "defaultMessage": "About Us"
+  },
+  "a/xacb": {
+    "defaultMessage": "(Articles in this collection will not be deleted)"
   },
   "aa0nss": {
     "defaultMessage": "Unpin from Trending",
@@ -815,10 +824,6 @@
     "defaultMessage": "Your work {articleTitle} has been republished to decentralized network",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
-  "gSPnTx": {
-    "defaultMessage": "(Articles in this collection will not be deleted)",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-  },
   "h+punE": {
     "defaultMessage": "Updated {date}",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -889,10 +894,6 @@
   },
   "kc79d3": {
     "defaultMessage": "Topics"
-  },
-  "lCNyOp": {
-    "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "lD4FPZ": {
     "defaultMessage": "Enter Email",
@@ -1018,10 +1019,6 @@
   "qlki7w": {
     "defaultMessage": "Remove Article",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
-  },
-  "qsSujx": {
-    "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "qswU4E": {
     "defaultMessage": "Email will not be used as a login but only as a contact channel."

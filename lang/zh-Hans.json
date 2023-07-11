@@ -604,6 +604,9 @@
     "defaultMessage": "登出失败，再来一次",
     "description": ""
   },
+  "T9oZC8": {
+    "defaultMessage": "确认要删除该选集“{collection}”吗？"
+  },
   "TSDiqB": {
     "defaultMessage": "付费人数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -712,6 +715,9 @@
     "defaultMessage": "值得关注",
     "description": ""
   },
+  "Xi40U9": {
+    "defaultMessage": "操作无法撤销，确认删除选集吗？"
+  },
   "Xz/AHp": {
     "defaultMessage": " 廣播提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -751,6 +757,9 @@
   "ZjDH42": {
     "defaultMessage": "关于我们",
     "description": ""
+  },
+  "a/xacb": {
+    "defaultMessage": "（不会删除选集内文章）"
   },
   "aa0nss": {
     "defaultMessage": "取消精选",
@@ -876,10 +885,6 @@
     "defaultMessage": "你的修订作品 {articleTitle} 已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
-  "gSPnTx": {
-    "defaultMessage": "（不会删除选集内文章）",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-  },
   "h+punE": {
     "defaultMessage": "{date}更新",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -955,10 +960,6 @@
   "kc79d3": {
     "defaultMessage": "找你想看的",
     "description": ""
-  },
-  "lCNyOp": {
-    "defaultMessage": "确认要删除该选集“{collection}”吗？",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "lD4FPZ": {
     "defaultMessage": "请输入邮箱",
@@ -1094,10 +1095,6 @@
   "qlki7w": {
     "defaultMessage": "移除作品",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
-  },
-  "qsSujx": {
-    "defaultMessage": "操作无法撤销，确认删除选集吗？",
-    "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
   "qswU4E": {
     "defaultMessage": "邮箱将不作为登入使用，仅作为联系渠道",

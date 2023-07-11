@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl'
 import { toPath } from '~/common/utils'
 import {
   Dialog,
-  TextIcon,
   toast,
   useDialogSwitch,
   useMutation,
@@ -90,36 +89,27 @@ const DeleteCollectionDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header title="archive" />
 
-        {isInDelete && (
-          <Dialog.Message>
+        <Dialog.Message align="center" smUpAlign="left">
+          {isInDelete && (
             <p>
               <FormattedMessage
                 defaultMessage="Are you sure you want to delete this collection ‘{collection}’?"
-                description="src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
                 values={{
                   collection: (
-                    <TextIcon color="green">{collection.title}</TextIcon>
+                    <span className="u-highlight">{collection.title}</span>
                   ),
                 }}
               />
               <br />
-              <FormattedMessage
-                defaultMessage="(Articles in this collection will not be deleted)"
-                description="src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-              />
+              <FormattedMessage defaultMessage="(Articles in this collection will not be deleted)" />
             </p>
-          </Dialog.Message>
-        )}
-        {isInConfirmDelete && (
-          <Dialog.Message>
+          )}
+          {isInConfirmDelete && (
             <p>
-              <FormattedMessage
-                defaultMessage="This action cannot be undone. Are you sure you want to delete this collection?"
-                description="src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-              />
+              <FormattedMessage defaultMessage="This action cannot be undone. Are you sure you want to delete this collection?" />
             </p>
-          </Dialog.Message>
-        )}
+          )}
+        </Dialog.Message>
 
         {isInDelete && (
           <Dialog.Footer
