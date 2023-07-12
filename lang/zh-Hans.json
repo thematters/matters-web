@@ -2,8 +2,16 @@
   "+7SAix": {
     "defaultMessage": "2-12 个字符"
   },
+  "+S8mxW": {
+    "defaultMessage": "移至顶部",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
+  },
   "+a+2ug": {
     "defaultMessage": "成员"
+  },
+  "+cS08C": {
+    "defaultMessage": "确认要将“{article}”从选集中移出吗？",
+    "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
   "/3kw6k": {
     "defaultMessage": "尝试将内容写入 IPFS 网络中，需要一段时间，请耐心等候。若等候时间过久，可通过发布文章来加速。",
@@ -29,6 +37,9 @@
   "0JLcHr": {
     "defaultMessage": "内容可能包含色情、暴力、血腥等限制级内容，部分用户可能不适合观看，或引起不适、心理负担，请谨慎判断是否阅读。",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+  },
+  "0Om2Kl": {
+    "defaultMessage": "移出选集"
   },
   "0ThOw1": {
     "defaultMessage": "开始创作",
@@ -591,16 +602,20 @@
   "U86B6w": {
     "defaultMessage": "数据"
   },
-  "U9IXic": {
-    "defaultMessage": "添加作品",
-    "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
-  },
   "UNUROl": {
     "defaultMessage": "建议 50 字以内，最长 200 字"
   },
   "UOdEqi": {
     "defaultMessage": "原有透过电子信箱登入方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "URljhZ": {
+    "defaultMessage": "作品已移出",
+    "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "Udp4Bm": {
+    "defaultMessage": "移至底部",
+    "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
   "UjKkhq": {
     "defaultMessage": "作品已添加标签",
@@ -896,8 +911,15 @@
     "defaultMessage": "追踪了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
+  "k97/u7": {
+    "defaultMessage": "添加作品"
+  },
   "kc79d3": {
     "defaultMessage": "找你想看的"
+  },
+  "kkZioy": {
+    "defaultMessage": "确认移出",
+    "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
   "lD4FPZ": {
     "defaultMessage": "请输入邮箱"

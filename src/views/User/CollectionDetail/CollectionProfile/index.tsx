@@ -1,75 +1,37 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import {
-  Book,
-  Button,
-  DateTime,
-  QueryError,
-  Throw404,
-  usePublicQuery,
-  useRoute,
-  ViewerContext,
-} from '~/components'
-import DropdownActions from '~/components/CollectionDigest/DropdownActions'
+import { Book, Button, useRoute, ViewerContext } from '~/components'
 import EditCollection from '~/components/CollectionDigest/DropdownActions/EditCollection'
-import { CollectionDetailQuery } from '~/gql/graphql'
+import { CollectionDetailFragment } from '~/gql/graphql'
 
-import { COLLECTION_DETAIL } from './gql'
-import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
-const CollectionProfile = () => {
+interface CollectionProfileProps {
+  collection: CollectionDetailFragment
+}
+
+const CollectionProfile = ({ collection }: CollectionProfileProps) => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
-  const collectionId = getQuery('collectionId')
 
-  /**
-   * Data Fetching
-   */
-  const { data, loading, error } = usePublicQuery<CollectionDetailQuery>(
-    COLLECTION_DETAIL,
-    {
-      variables: { id: collectionId },
-      fetchPolicy: 'network-only',
-    }
-  )
-  const collection = data?.node!
-
-  console.log(error, collection)
-
-  /**
-   * Render
-   */
-  if (loading) {
-    return <Placeholder />
-  }
-
-  if (error) {
-    return <QueryError error={error} />
-  }
-
-  if (!collection || collection.__typename !== 'Collection') {
-    return <Throw404 />
-  }
-
-  const { title, cover, description, updatedAt, articles } = collection
+  const { title, cover, description, articles } = collection
 
   return (
     <EditCollection.Dialog collection={collection}>
       {({ openDialog: openEditeCollection }) => (
         <section>
           <section className={styles.header}>
-            {!!cover && (
+            {(!!cover || !isViewer) && (
               <Book
                 title={title}
                 cover={cover}
                 articleCount={articles.totalCount}
               />
             )}
-            {!cover && (
+            {!cover && isViewer && (
               <button onClick={openEditeCollection}>
                 <Book
                   title={title}
@@ -83,7 +45,7 @@ const CollectionProfile = () => {
               {!!description && (
                 <p className={styles.description}>{description}</p>
               )}
-              {!description && (
+              {!description && isViewer && (
                 <p>
                   <Button
                     textColor="greyDarker"
@@ -97,22 +59,6 @@ const CollectionProfile = () => {
                   </Button>
                 </p>
               )}
-            </section>
-          </section>
-
-          <section className={styles.midMenu}>
-            <section className={styles.updatedDate}>
-              <FormattedMessage
-                defaultMessage="Updated {date}"
-                description="src/views/User/CollectionDetail/Content.tsx"
-                values={{
-                  date: <DateTime date={updatedAt} color="grey" size="sm" />,
-                }}
-              />
-            </section>
-
-            <section>
-              {isViewer && <DropdownActions collection={collection} />}
             </section>
           </section>
         </section>

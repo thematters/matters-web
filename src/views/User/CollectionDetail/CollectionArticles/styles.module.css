@@ -1,24 +1,3 @@
-.header {
-  display: flex;
-  margin-top: var(--spacing-x-loose);
-  margin-bottom: var(--spacing-base-loose);
-
-  & .info {
-    flex-grow: 1;
-    padding: var(--spacing-x-tight) 0;
-    margin-left: var(--spacing-x-loose);
-
-    & .title {
-      margin-bottom: var(--spacing-base);
-      font-size: var(--font-size-article-h2);
-    }
-
-    & .description {
-      color: var(--color-grey-dark);
-    }
-  }
-}
-
 .midMenu {
   @mixin border-top-grey;
   @mixin border-bottom-grey;
