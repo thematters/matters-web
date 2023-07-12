@@ -4,6 +4,7 @@ import AsideUserProfile from '~/components/UserProfile/AsideUserProfile'
 import { CollectionDetailQuery } from '~/gql/graphql'
 
 import CollectionArticles from './CollectionArticles'
+import CollectinoArticlesPlaceholder from './CollectionArticles/Placeholder'
 import CollectionProfile from './CollectionProfile'
 import CollectionProfilePlaceholder from './CollectionProfile/Placeholder'
 import { COLLECTION_DETAIL } from './gql'
@@ -27,7 +28,12 @@ const BaseCollectionDetail = () => {
    * Render
    */
   if (loading) {
-    return <CollectionProfilePlaceholder />
+    return (
+      <>
+        <CollectionProfilePlaceholder />
+        <CollectinoArticlesPlaceholder />
+      </>
+    )
   }
 
   if (error) {
