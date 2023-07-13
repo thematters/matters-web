@@ -74,6 +74,8 @@ export interface DropdownActionsControls {
   hasRemoveCollection?: boolean
   hasSetTopCollection?: boolean
   hasSetBottomCollection?: boolean
+  onSetTopCollection?: () => void
+  onSetBottomCollection?: () => void
 
   morePublicActions?: React.ReactNode
 }
@@ -108,6 +110,7 @@ type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 
 const BaseDropdownActions = ({
   article,
+
   tagDetailId,
   collectionId,
   collectionArticleCount,
@@ -140,6 +143,8 @@ const BaseDropdownActions = ({
   openArchiveDialog,
   openAddCollectionsArticleDialog,
   openRemoveArticleCollectionDialog,
+  onSetBottomCollection,
+  onSetTopCollection,
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
 
@@ -196,17 +201,19 @@ const BaseDropdownActions = ({
         collectionArticleCount && (
           <>
             <Menu.Divider />
-            {hasSetTopCollection && (
+            {hasSetTopCollection && onSetTopCollection && (
               <SetTopCollectionButton
                 articleId={article.id}
                 collectionId={collectionId}
+                onClick={onSetTopCollection}
               />
             )}
-            {hasSetBottomCollection && (
+            {hasSetBottomCollection && onSetBottomCollection && (
               <SetBottomCollectionButton
                 articleId={article.id}
                 collectionId={collectionId}
                 collectionArticleCount={collectionArticleCount}
+                onClick={onSetBottomCollection}
               />
             )}
           </>

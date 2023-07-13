@@ -6,12 +6,16 @@ const update = ({
   cache,
   collectionId,
   articleId,
+  oldPosition,
+  newPosition,
   type,
 }: {
   cache: DataProxy
   collectionId: string
   articleId?: string
-  type: 'delete' | 'setTop' | 'setBottom'
+  oldPosition?: number
+  newPosition?: number
+  type: 'delete' | 'setTop' | 'setBottom' | 'reorder'
 }) => {
   // FIXME: circular dependencies
   const {
@@ -63,6 +67,13 @@ const update = ({
         if (type === 'setBottom') {
           edges.push(targetEdge)
         }
+        break
+      case 'reorder':
+        if (oldPosition === undefined || newPosition === undefined) {
+          return
+        }
+        const [item] = edges.splice(oldPosition, 1)
+        edges.splice(newPosition, 0, item)
         break
     }
 

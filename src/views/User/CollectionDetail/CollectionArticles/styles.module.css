@@ -35,6 +35,10 @@
 
     gap: var(--spacing-base);
 
+    & .handle {
+      cursor: pointer;
+    }
+
     & > section:last-child {
       flex-grow: 1;
     }
