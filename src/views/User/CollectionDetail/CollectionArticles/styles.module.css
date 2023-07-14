@@ -14,33 +14,16 @@
 
 .addArticles {
   @mixin flex-center-all;
-  @mixin border-bottom-grey;
   @mixin transition;
 
   padding: var(--spacing-base) 0;
   color: var(--color-matters-green);
   cursor: pointer;
-  border-bottom-style: dashed;
+  border-bottom: 1px dashed var(--color-line-grey-light);
   transition-property: color;
 
   &:hover,
   &:focus {
     color: var(--color-matters-green-dark);
-  }
-}
-
-.feed {
-  & .sortable {
-    @mixin flex-center-space-between;
-
-    gap: var(--spacing-base);
-
-    & .handle {
-      cursor: pointer;
-    }
-
-    & > section:last-child {
-      flex-grow: 1;
-    }
   }
 }

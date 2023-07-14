@@ -76,9 +76,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
     if (type !== 'reorder') {
       setItems(articleEdges)
     }
-    console.log('articleEdges change')
   }, [articleEdges])
-  console.log({ items, articleEdges })
 
   if (isViewer) {
     return (
@@ -95,27 +93,23 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
           </section>
 
           <section>
-            {isViewer && <DropdownActions collection={collection} />}
+            <DropdownActions collection={collection} />
           </section>
         </section>
-        {isViewer && (
-          <section className={styles.addArticles}>
-            <TextIcon icon={<IconAdd20 size="mdS" />}>
-              <FormattedMessage defaultMessage="Add Articles" />
-            </TextIcon>
-          </section>
-        )}
+        <section className={styles.addArticles}>
+          <TextIcon icon={<IconAdd20 size="mdS" />}>
+            <FormattedMessage defaultMessage="Add Articles" />
+          </TextIcon>
+        </section>
         <section className={styles.feed}>
           {items && (
             <DnDList
               values={items}
               lockVertically
               onChange={async ({ oldIndex, newIndex }) => {
-                console.log('onChange')
                 const collectionId = collection.id
                 const articleId = items[oldIndex].node.id
                 setType('reorder')
-                // console.log({ items })
                 setItems(arrayMove(items, oldIndex, newIndex))
                 await update({
                   variables: {
@@ -140,6 +134,9 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
                 //   {children}
                 // </List>
                 <section {...props}>{children}</section>
+                // <List responsiveWrapper {...props}>
+                //   <section {...props}>{children}</section>
+                // </List>
               )}
               renderItem={({
                 value: { node, cursor },
@@ -147,35 +144,47 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
                 props,
                 // isDragged,
               }) => (
-                <section className={styles.sortable} {...props} key={cursor}>
-                  <button data-movable-handle className={styles.handle}>
-                    <IconHandle24 />
-                  </button>
-                  <ArticleDigestFeed
-                    article={node}
-                    hasHeader={false}
-                    hasEdit={true}
-                    hasCircle={false}
-                    hasRemoveCollection={true}
-                    hasSetTopCollection={true}
-                    hasSetBottomCollection={true}
-                    collectionId={id}
-                    collectionArticleCount={articles.totalCount}
-                    onSetTopCollection={async () => {
-                      setType('setTop')
+                <section {...props} key={cursor} style={{ ...props.style }}>
+                  <section
+                    // The style module doesn't work when dragging.
+                    style={{
+                      display: 'flex',
+                      gap: '1rem',
+                      alignItems: 'center',
+                      borderBottom: '1px dashed var(--color-line-grey-light)',
                     }}
-                    onSetBottomCollection={async () => {
-                      setType('setBottom')
-                    }}
-                    onClick={() =>
-                      analytics.trackEvent('click_feed', {
-                        type: 'collection_article',
-                        contentType: 'article',
-                        location: index as number,
-                        id: node.id,
-                      })
-                    }
-                  />
+                  >
+                    <button data-movable-handle className={styles.handle}>
+                      <IconHandle24 />
+                    </button>
+                    <section style={{ flexGrow: 1 }}>
+                      <ArticleDigestFeed
+                        article={node}
+                        hasHeader={false}
+                        hasEdit={true}
+                        hasCircle={false}
+                        hasRemoveCollection={true}
+                        hasSetTopCollection={true}
+                        hasSetBottomCollection={true}
+                        collectionId={id}
+                        collectionArticleCount={articles.totalCount}
+                        onSetTopCollection={async () => {
+                          setType('setTop')
+                        }}
+                        onSetBottomCollection={async () => {
+                          setType('setBottom')
+                        }}
+                        onClick={() =>
+                          analytics.trackEvent('click_feed', {
+                            type: 'collection_article',
+                            contentType: 'article',
+                            location: index as number,
+                            id: node.id,
+                          })
+                        }
+                      />
+                    </section>
+                  </section>
                 </section>
               )}
             ></DnDList>
@@ -198,66 +207,29 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
           />
         </section>
 
-        <section>
-          {isViewer && <DropdownActions collection={collection} />}
-        </section>
+        <section>{/* TODO: sort button */}</section>
       </section>
-      {isViewer && (
-        <section className={styles.addArticles}>
-          <TextIcon icon={<IconAdd20 size="mdS" />}>
-            <FormattedMessage defaultMessage="Add Articles" />
-          </TextIcon>
-        </section>
-      )}
       <section className={styles.feed}>
         <List responsiveWrapper>
           {articleEdges &&
             articleEdges.map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
-                {isViewer && (
-                  <section className={styles.sortable}>
-                    <div>
-                      <IconHandle24 />
-                    </div>
-                    <ArticleDigestFeed
-                      article={node}
-                      hasHeader={false}
-                      hasEdit={true}
-                      hasCircle={false}
-                      hasRemoveCollection={true}
-                      hasSetTopCollection={true}
-                      hasSetBottomCollection={true}
-                      collectionId={id}
-                      collectionArticleCount={articles.totalCount}
-                      onClick={() =>
-                        analytics.trackEvent('click_feed', {
-                          type: 'collection_article',
-                          contentType: 'article',
-                          location: i,
-                          id: node.id,
-                        })
-                      }
-                    />
-                  </section>
-                )}
-                {!isViewer && (
-                  <ArticleDigestFeed
-                    article={node}
-                    hasHeader={false}
-                    hasEdit={true}
-                    hasCircle={false}
-                    hasSetTopCollection={true}
-                    hasSetBottomCollection={true}
-                    onClick={() =>
-                      analytics.trackEvent('click_feed', {
-                        type: 'collection_article',
-                        contentType: 'article',
-                        location: i,
-                        id: node.id,
-                      })
-                    }
-                  />
-                )}
+                <ArticleDigestFeed
+                  article={node}
+                  hasHeader={false}
+                  hasEdit={true}
+                  hasCircle={false}
+                  hasSetTopCollection={true}
+                  hasSetBottomCollection={true}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'collection_article',
+                      contentType: 'article',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                />
               </List.Item>
             ))}
         </List>
