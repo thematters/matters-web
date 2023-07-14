@@ -60,6 +60,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                     limit={4}
                     size="sm"
                     color="greyDark"
+                    collapseable={false}
                   >
                     <p>{description}</p>
                   </Expandable>
