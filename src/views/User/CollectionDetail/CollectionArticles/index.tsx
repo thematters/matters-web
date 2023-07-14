@@ -142,23 +142,11 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
               )}
               renderItem={({ value: { node, cursor }, index, props }) => (
                 <section {...props} key={cursor} style={{ ...props.style }}>
-                  <section
-                    // The style module doesn't work when dragging.
-                    style={{
-                      display: 'flex',
-                      gap: '1rem',
-                      alignItems: 'center',
-                    }}
-                  >
+                  <section className={styles.dragContainer}>
                     <button data-movable-handle className={styles.handle}>
                       <IconHandle24 size="md" />
                     </button>
-                    <section
-                      style={{
-                        flexGrow: 1,
-                        borderBottom: '1px dashed var(--color-line-grey-light)',
-                      }}
-                    >
+                    <section className={styles.digestFeed}>
                       <ArticleDigestFeed
                         article={node}
                         hasHeader={false}
