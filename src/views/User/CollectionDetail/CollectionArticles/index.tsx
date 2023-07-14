@@ -19,6 +19,7 @@ import {
 } from '~/components'
 import DropdownActions from '~/components/CollectionDigest/DropdownActions'
 import updateUserCollectionDetail from '~/components/GQL/updates/userCollectionDetail'
+import EndOfResults from '~/components/Interaction/InfiniteScroll/EndOfResults'
 import {
   CollectionDetailFragment,
   ReorderCollectionArticlesMutation,
@@ -137,20 +138,9 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
                 })
               }}
               renderList={({ children, props }) => (
-                // <List responsiveWrapper {...props}>
-                //   {children}
-                // </List>
                 <section {...props}>{children}</section>
-                // <List responsiveWrapper {...props}>
-                //   <section {...props}>{children}</section>
-                // </List>
               )}
-              renderItem={({
-                value: { node, cursor },
-                index,
-                props,
-                // isDragged,
-              }) => (
+              renderItem={({ value: { node, cursor }, index, props }) => (
                 <section {...props} key={cursor} style={{ ...props.style }}>
                   <section
                     // The style module doesn't work when dragging.
@@ -158,13 +148,17 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
                       display: 'flex',
                       gap: '1rem',
                       alignItems: 'center',
-                      borderBottom: '1px dashed var(--color-line-grey-light)',
                     }}
                   >
                     <button data-movable-handle className={styles.handle}>
-                      <IconHandle24 />
+                      <IconHandle24 size="md" />
                     </button>
-                    <section style={{ flexGrow: 1 }}>
+                    <section
+                      style={{
+                        flexGrow: 1,
+                        borderBottom: '1px dashed var(--color-line-grey-light)',
+                      }}
+                    >
                       <ArticleDigestFeed
                         article={node}
                         hasHeader={false}
@@ -196,6 +190,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
               )}
             ></DnDList>
           )}
+          <EndOfResults message={true} />
         </section>
       </>
     )
@@ -260,6 +255,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
                 />
               </List.Item>
             ))}
+          <EndOfResults message={true} />
         </List>
       </section>
     </>

@@ -477,6 +477,10 @@
     "defaultMessage": "Paywalled",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
+  "LQxY1o": {
+    "defaultMessage": "{articleCount} Articles",
+    "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
+  },
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"

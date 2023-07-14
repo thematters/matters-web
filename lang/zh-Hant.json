@@ -478,6 +478,10 @@
     "defaultMessage": "上鎖",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
+  "LQxY1o": {
+    "defaultMessage": "{articleCount} 篇文章",
+    "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
+  },
   "Lc/azT": {
     "defaultMessage": "IPNS 訂閱",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"

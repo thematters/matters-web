@@ -3,10 +3,14 @@
   @mixin border-bottom-grey;
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-base) 0;
+  padding: var(--spacing-base);
   font-size: var(--font-size-sm);
   line-height: var(--line-height-base-loose);
   color: var(--color-grey);
+
+  @media (--sm-up) {
+    padding: var(--spacing-base) 0;
+  }
 
   & .sortButton {
     @mixin transition;
@@ -32,5 +36,13 @@
   &:hover,
   &:focus {
     color: var(--color-matters-green-dark);
+  }
+}
+
+.feed {
+  padding: 0 var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: 0;
   }
 }
