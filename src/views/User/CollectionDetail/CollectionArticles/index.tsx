@@ -232,7 +232,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
           )}
         </button>
       </section>
-      <section className={styles.feed}>
+      <section>
         <List responsiveWrapper>
           {articleEdges &&
             articleEdges.map(({ node, cursor }, i) => (
