@@ -8,6 +8,8 @@ import {
   ArticleDigestFeed,
   DateTime,
   IconAdd20,
+  IconArrowDown20,
+  IconArrowUp20,
   IconHandle24,
   List,
   TextIcon,
@@ -56,6 +58,8 @@ interface CollectionArticlesProps {
 
 type Type = 'setTop' | 'setBottom' | 'reorder'
 
+type DirectionType = 'up' | 'down'
+
 const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
@@ -67,9 +71,12 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
   )
 
   const [type, setType] = useState<Type>('reorder')
+  const [direction, setDirection] = useState<DirectionType>('down')
+  const isDirectionDown = direction === 'down'
+  const isDirectionUp = direction === 'up'
 
   const { id, articles, updatedAt } = collection
-  const articleEdges = articles.edges
+  let articleEdges = articles.edges
   const [items, setItems] = useState(articleEdges)
 
   useEffect(() => {
@@ -207,7 +214,28 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
           />
         </section>
 
-        <section>{/* TODO: sort button */}</section>
+        <button
+          onClick={() => {
+            if (isDirectionDown) {
+              setDirection('up')
+            } else if (isDirectionUp) {
+              setDirection('down')
+            }
+            articleEdges = articleEdges?.reverse()
+          }}
+          className={styles.sortButton}
+        >
+          {isDirectionDown && (
+            <TextIcon icon={<IconArrowDown20 size="mdS" />}>
+              <FormattedMessage defaultMessage="Sort" />
+            </TextIcon>
+          )}
+          {isDirectionUp && (
+            <TextIcon icon={<IconArrowUp20 size="mdS" />}>
+              <FormattedMessage defaultMessage="Sort" />
+            </TextIcon>
+          )}
+        </button>
       </section>
       <section className={styles.feed}>
         <List responsiveWrapper>

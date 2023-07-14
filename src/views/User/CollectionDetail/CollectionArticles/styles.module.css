@@ -4,11 +4,18 @@
   @mixin flex-center-space-between;
 
   padding: var(--spacing-base) 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base-loose);
+  color: var(--color-grey);
 
-  & .updatedDate {
-    font-size: var(--font-size-sm);
-    line-height: var(--line-height-base-loose);
-    color: var(--color-grey);
+  & .sortButton {
+    @mixin transition;
+
+    &:hover,
+    &:focus {
+      color: var(--color-matters-green);
+      transition-property: color;
+    }
   }
 }
 
