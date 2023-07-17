@@ -4,16 +4,21 @@ import { IconTrash20, Menu } from '~/components'
 
 interface RemoveArticleCollectionButtonProps {
   openDialog: () => void
+  onClick: () => void
 }
 
 const RemoveArticleCollectionButton = ({
   openDialog,
+  onClick,
 }: RemoveArticleCollectionButtonProps) => {
   return (
     <Menu.Item
       text={<FormattedMessage defaultMessage="Remove from collection" />}
       icon={<IconTrash20 size="mdS" />}
-      onClick={openDialog}
+      onClick={() => {
+        onClick()
+        openDialog()
+      }}
       ariaHasPopup="dialog"
     />
   )

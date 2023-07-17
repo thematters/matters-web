@@ -76,6 +76,7 @@ export interface DropdownActionsControls {
   hasSetBottomCollection?: boolean
   onSetTopCollection?: () => void
   onSetBottomCollection?: () => void
+  onRemoveCollection?: () => void
 
   morePublicActions?: React.ReactNode
 }
@@ -145,6 +146,7 @@ const BaseDropdownActions = ({
   openRemoveArticleCollectionDialog,
   onSetBottomCollection,
   onSetTopCollection,
+  onRemoveCollection,
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
 
@@ -219,10 +221,11 @@ const BaseDropdownActions = ({
           </>
         )}
 
-      {hasRemoveCollection && (
+      {hasRemoveCollection && onRemoveCollection && (
         <>
           <Menu.Divider />
           <RemoveArticleCollectionButton
+            onClick={onRemoveCollection}
             openDialog={openRemoveArticleCollectionDialog}
           />
         </>

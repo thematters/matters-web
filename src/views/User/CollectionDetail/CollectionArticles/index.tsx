@@ -57,8 +57,6 @@ interface CollectionArticlesProps {
   collection: CollectionDetailFragment
 }
 
-type Type = 'setTop' | 'setBottom' | 'reorder'
-
 type DirectionType = 'up' | 'down'
 
 const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
@@ -71,7 +69,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
     REORDER_COLLECTION_ARTICLES
   )
 
-  const [type, setType] = useState<Type>('reorder')
+  const [hasReset, setHasReset] = useState(false)
   const [direction, setDirection] = useState<DirectionType>('down')
   const isDirectionDown = direction === 'down'
   const isDirectionUp = direction === 'up'
@@ -81,7 +79,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
   const [items, setItems] = useState(articleEdges)
 
   useEffect(() => {
-    if (type !== 'reorder') {
+    if (hasReset) {
       setItems(articleEdges)
     }
   }, [articleEdges])
@@ -117,7 +115,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
               onChange={async ({ oldIndex, newIndex }) => {
                 const collectionId = collection.id
                 const articleId = items[oldIndex].node.id
-                setType('reorder')
+                setHasReset(false)
                 setItems(arrayMove(items, oldIndex, newIndex))
                 await update({
                   variables: {
@@ -157,12 +155,9 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
                         hasSetBottomCollection={true}
                         collectionId={id}
                         collectionArticleCount={articles.totalCount}
-                        onSetTopCollection={async () => {
-                          setType('setTop')
-                        }}
-                        onSetBottomCollection={async () => {
-                          setType('setBottom')
-                        }}
+                        onSetTopCollection={() => setHasReset(true)}
+                        onSetBottomCollection={() => setHasReset(true)}
+                        onRemoveCollection={() => setHasReset(true)}
                         onClick={() =>
                           analytics.trackEvent('click_feed', {
                             type: 'collection_article',
