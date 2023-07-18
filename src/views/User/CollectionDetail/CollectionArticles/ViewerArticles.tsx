@@ -5,6 +5,7 @@ import { arrayMove, List as DnDList } from 'react-movable'
 
 import { analytics } from '~/common/utils'
 import {
+  AddArticlesCollectionDialog,
   ArticleDigestFeed,
   DateTime,
   IconAdd20,
@@ -86,11 +87,21 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
           <DropdownActions collection={collection} />
         </section>
       </section>
-      <section className={styles.addArticles}>
-        <TextIcon icon={<IconAdd20 size="mdS" />}>
-          <FormattedMessage defaultMessage="Add Articles" />
-        </TextIcon>
-      </section>
+      <AddArticlesCollectionDialog
+        collection={collection}
+        onUpdate={() => setHasReset(true)}
+      >
+        {({ openDialog: openAddArticlesCollection }) => (
+          <section
+            className={styles.addArticles}
+            onClick={openAddArticlesCollection}
+          >
+            <TextIcon icon={<IconAdd20 size="mdS" />}>
+              <FormattedMessage defaultMessage="Add Articles" />
+            </TextIcon>
+          </section>
+        )}
+      </AddArticlesCollectionDialog>
       <section className={styles.feed}>
         {items && (
           <DnDList
@@ -123,7 +134,11 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
               <section {...props}>{children}</section>
             )}
             renderItem={({ value: { node, cursor }, index, props }) => (
-              <section {...props} key={cursor} style={{ ...props.style }}>
+              <section
+                {...props}
+                key={cursor + node.id}
+                style={{ ...props.style }}
+              >
                 <section className={styles.dragContainer}>
                   <button data-movable-handle className={styles.handle}>
                     <IconHandle24 size="md" />
