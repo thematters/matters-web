@@ -204,12 +204,9 @@ const FingerprintDialogContent = ({
             </p>
 
             <section className={styles.copy}>
-              <input
-                type="text"
-                value={dataHash || translate({ id: 'waitingForHash', lang })}
-                readOnly
-                onClick={(event) => event.currentTarget.select()}
-              />
+              <div className={styles.hash}>
+                {dataHash || translate({ id: 'waitingForHash', lang })}
+              </div>
               <CopyToClipboard text={dataHash}>
                 <Button aria-label={translate({ id: 'copy', lang })}>
                   <IconCopy16 />
