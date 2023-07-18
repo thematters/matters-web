@@ -117,6 +117,7 @@ const MembersDialogContent = () => {
                     id: node.user.id,
                   })
                 }
+                hasFollow={false}
               />
             </List.Item>
           ))}

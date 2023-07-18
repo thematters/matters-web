@@ -118,6 +118,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                 <Translate zh_hant="主理人" zh_hans="主理人" en="maintainer" />
               }
               spacing={['tight', 'base']}
+              hasFollow={false}
             />
           )}
         </section>

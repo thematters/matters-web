@@ -137,6 +137,7 @@ const AppreciatorsDialogContent = ({
                       id: node.sender?.id,
                     })
                   }}
+                  hasFollow={false}
                 />
               </div>
             ) : null

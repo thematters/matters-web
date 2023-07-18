@@ -97,6 +97,7 @@ const SupportersDialogContent = ({
                   id: node.id,
                 })
               }}
+              hasFollow={false}
             />
           ))}
         </InfiniteScroll>

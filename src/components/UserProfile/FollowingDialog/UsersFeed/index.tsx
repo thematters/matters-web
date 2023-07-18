@@ -125,6 +125,7 @@ const UsersFeed = () => {
                 })
               }
               spacing={['tight', 'base']}
+              hasFollow={false}
             />
           </List.Item>
         ))}

@@ -111,6 +111,7 @@ const FollowersDialogContent = () => {
                     id: node.id,
                   })
                 }
+                hasFollow={false}
               />
             </List.Item>
           ))}

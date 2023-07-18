@@ -125,6 +125,7 @@ const FollowersDialogContent = () => {
                   })
                 }
                 spacing={['tight', 'base']}
+                hasFollow={false}
               />
             </List.Item>
           ))}
