@@ -77,7 +77,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header title="deleteDraft" />
 
-        <Dialog.Message>
+        <Dialog.Message align="left">
           <p>
             <Translate
               zh_hant="確認刪除草稿，草稿會馬上消失。"

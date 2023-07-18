@@ -1,13 +1,6 @@
-import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import {
-  ConnectWalletButton,
-  Help,
-  Media,
-  SegmentedTabs,
-  ViewerContext,
-} from '~/components'
+import { SegmentedTabs } from '~/components'
 
 export type HomeFeedType = 'hottest' | 'newest' | 'icymi'
 
@@ -16,33 +9,13 @@ interface SortByProps {
   setFeedType: (sortBy: HomeFeedType) => void
 }
 
-const TabSide = () => {
-  const viewer = useContext(ViewerContext)
-  const isConnectedWallet = !!viewer.info.ethAddress
-
-  if (viewer.isAuthed && !isConnectedWallet) {
-    return (
-      <>
-        <Media at="sm">
-          <Help hasTime />
-        </Media>
-        <Media greaterThan="sm">
-          <ConnectWalletButton />
-        </Media>
-      </>
-    )
-  }
-
-  return <Help hasTime />
-}
-
 const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
   const isHottest = feedType === 'hottest'
   const isNewset = feedType === 'newest'
   const isICYMI = feedType === 'icymi'
 
   return (
-    <SegmentedTabs sticky side={<TabSide />}>
+    <SegmentedTabs sticky>
       <SegmentedTabs.Tab
         onClick={() => setFeedType('hottest')}
         selected={isHottest}

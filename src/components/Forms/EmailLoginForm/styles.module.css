@@ -9,6 +9,7 @@
   font-size: var(--font-size-md);
   line-height: 1.5rem;
   color: var(--color-grey-dark);
+  white-space: pre-wrap;
 
   & a,
   & button {
@@ -16,9 +17,7 @@
   }
 
   &:not(.isInPage) {
-    @media (--sm-up) {
-      padding: 0 var(--spacing-base);
-    }
+    padding: 0 var(--spacing-base);
   }
 }
 

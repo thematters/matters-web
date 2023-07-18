@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Help, SegmentedTabs } from '~/components'
+import { SegmentedTabs } from '~/components'
 
 export type CircleContentAnalyticsType = 'public' | 'paywall'
 
@@ -14,7 +14,7 @@ const ContentTabs: React.FC<Props> = ({ type, setType }) => {
   const isPaywall = type === 'paywall'
 
   return (
-    <SegmentedTabs side={<Help hasCount />}>
+    <SegmentedTabs>
       <SegmentedTabs.Tab
         onClick={() => setType('paywall')}
         selected={isPaywall}
