@@ -59,7 +59,7 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
           }
         />
 
-        <Dialog.Message>
+        <Dialog.Message align="center" smUpAlign="left">
           <h3>
             <Translate
               zh_hant="確定要這麼做嗎"
