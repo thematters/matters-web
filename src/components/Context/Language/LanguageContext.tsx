@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { createContext, useContext, useEffect, useState } from 'react'
 
-import { ADD_TOAST, COOKIE_LANGUAGE } from '~/common/enums'
+import { COOKIE_LANGUAGE } from '~/common/enums'
 import {
   getCookie,
   getIsomorphicCookie,
@@ -9,7 +9,13 @@ import {
   toLocale,
   toUserLanguage,
 } from '~/common/utils'
-import { Translate, useMutation, useRoute, ViewerContext } from '~/components'
+import {
+  toast,
+  Translate,
+  useMutation,
+  useRoute,
+  ViewerContext,
+} from '~/components'
 import { UpdateLanguageMutation, UserLanguage } from '~/gql/graphql'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
@@ -112,14 +118,9 @@ export const LanguageProvider = ({
         },
       })
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureChange" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="failureChange" />,
+      })
     }
   }
 

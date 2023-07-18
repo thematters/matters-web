@@ -10,7 +10,6 @@ import { Button, ButtonProps, IconSize, Media, TextIcon } from '~/components'
 
 interface LoginButtonBaseProps {
   iconSize?: Extract<IconSize, 'md'>
-  isPlain?: boolean
 }
 
 type LoginButtonProps = LoginButtonBaseProps &
@@ -19,7 +18,6 @@ type LoginButtonProps = LoginButtonBaseProps &
 export const LoginButton: React.FC<LoginButtonProps> = ({
   bgColor,
   iconSize,
-  isPlain,
   size,
   spacing,
   onClick,
@@ -32,29 +30,6 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
     },
   }
   const smProps = appendTarget(PATHS.LOGIN, true)
-
-  if (isPlain) {
-    return (
-      <>
-        <Media at="sm">
-          <Button {...smProps}>
-            <FormattedMessage
-              defaultMessage="Log in"
-              description="src/components/Buttons/Login/index.tsx"
-            />
-          </Button>
-        </Media>
-        <Media greaterThan="sm">
-          <Button aria-haspopup="dialog" {...smUpProps}>
-            <FormattedMessage
-              defaultMessage="Log in"
-              description="src/components/Buttons/Login/index.tsx"
-            />
-          </Button>
-        </Media>
-      </>
-    )
-  }
 
   const isGreen = bgColor === 'green'
   const buttonBgActiveColor = isGreen ? undefined : 'greyLighter'

@@ -16,7 +16,15 @@ export const VerificationLinkSent = ({
     <>
       {isInPage && <Layout.Header left={<Layout.Header.Title id={type} />} />}
 
-      <Dialog.Message spacing="md">
+      {closeDialog && (
+        <Dialog.Header
+          title="register"
+          closeDialog={closeDialog}
+          closeText="understood"
+        />
+      )}
+
+      <Dialog.Message>
         <h3>
           <Translate
             zh_hant={isRegister ? '已發送快速註冊連結' : '已發送快速驗證連結'}
@@ -49,15 +57,15 @@ export const VerificationLinkSent = ({
       </Dialog.Message>
 
       {closeDialog && (
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            onClick={closeDialog}
-            bgColor="greyLighter"
-            textColor="black"
-          >
-            <Translate id="understood" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          smUpBtns={
+            <Dialog.TextButton
+              text="understood"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+        />
       )}
     </>
   )

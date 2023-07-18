@@ -11,6 +11,8 @@ export function useStep<Step>(defaultStep: Step) {
   const currStep = steps[steps.length - 1]
 
   const forward = (nextStep: Step) => {
+    if (nextStep === currStep) return
+
     setSteps([...steps, nextStep])
   }
 

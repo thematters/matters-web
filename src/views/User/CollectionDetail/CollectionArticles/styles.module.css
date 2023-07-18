@@ -1,0 +1,63 @@
+.midMenu {
+  @mixin border-top-grey;
+  @mixin border-bottom-grey;
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-base);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base-loose);
+  color: var(--color-grey);
+
+  @media (--sm-up) {
+    padding: var(--spacing-base) 0;
+  }
+
+  & .sortButton {
+    @mixin transition;
+
+    &:hover,
+    &:focus {
+      color: var(--color-matters-green);
+      transition-property: color;
+    }
+  }
+}
+
+.addArticles {
+  @mixin flex-center-all;
+  @mixin transition;
+
+  padding: var(--spacing-base) 0;
+  color: var(--color-matters-green);
+  cursor: pointer;
+  border-bottom: 1px dashed var(--color-line-grey-light);
+  transition-property: color;
+
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green-dark);
+  }
+}
+
+.feed {
+  padding: 0 var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
+}
+
+.dragContainer {
+  display: flex;
+  gap: var(--spacing-base);
+  align-items: center;
+}
+
+.handle {
+  height: 9.25rem;
+}
+
+.digestFeed {
+  flex-grow: 1;
+  border-bottom: 1px dashed var(--color-grey-light);
+}

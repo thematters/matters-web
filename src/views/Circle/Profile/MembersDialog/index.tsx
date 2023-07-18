@@ -21,12 +21,23 @@ const BaseMembersDialog = ({ children }: MembersDialogProps) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={<FormattedMessage defaultMessage="Members" description="" />}
+          title={<FormattedMessage defaultMessage="Members" />}
           closeDialog={closeDialog}
-          closeTextId="close"
+          closeText="close"
         />
 
         <DynamicContent />
+
+        <Dialog.Footer
+          noSpacing={false}
+          smUpBtns={
+            <Dialog.TextButton
+              text="close"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+        />
       </Dialog>
     </>
   )

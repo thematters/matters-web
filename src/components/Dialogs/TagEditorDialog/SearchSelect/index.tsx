@@ -1,8 +1,8 @@
 import _get from 'lodash/get'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useMutation } from '~/components'
+import { Dialog, toast, Translate, useMutation } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 import SearchingArea, {
@@ -85,38 +85,33 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
       return
     }
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="添加協作者成功"
-              zh_hans="添加协作者成功"
-              en="successfully added collaborator"
-            />
-          ),
-          duration: 2000,
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <Translate
+          zh_hant="添加協作者成功"
+          zh_hans="添加协作者成功"
+          en="successfully added collaborator"
+        />
+      ),
+    })
 
     closeDialog()
   }
+
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      onClick={onClickSave}
+      text={<FormattedMessage defaultMessage="Confirm" />}
+      loading={loading}
+    />
+  )
 
   return (
     <>
       <Dialog.Header
         title="tagAddEditor"
         closeDialog={closeDialog}
-        closeTextId="cancel"
-        rightButton={
-          <Dialog.Header.RightButton
-            onClick={onClickSave}
-            text={<Translate id="save" />}
-            loading={loading}
-          />
-        }
+        rightBtn={<SubmitButton />}
       />
 
       <SearchingArea
@@ -133,6 +128,19 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
         hint="tagAddEditor"
         inStagingArea={inStagingArea}
         draggable={false}
+      />
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
       />
     </>
   )

@@ -115,7 +115,6 @@ const Init: React.FC<FormProps> = ({
               intl.formatMessage({
                 defaultMessage:
                   'Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.',
-                description: '',
               })
             )
           } else if (c === 'DISPLAYNAME_INVALID') {
@@ -123,7 +122,6 @@ const Init: React.FC<FormProps> = ({
               'name',
               intl.formatMessage({
                 defaultMessage: 'Must be between 2-12 characters long.',
-                description: '',
               })
             )
           } else {
@@ -138,15 +136,12 @@ const Init: React.FC<FormProps> = ({
     <section className={styles.container}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
-          label={
-            <FormattedMessage defaultMessage="Circle Name" description="" />
-          }
+          label={<FormattedMessage defaultMessage="Circle Name" />}
           type="text"
           name="displayName"
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Enter the name of your Circle',
-            description: '',
           })}
           value={values.displayName}
           error={touched.displayName && errors.displayName}
@@ -167,7 +162,6 @@ const Init: React.FC<FormProps> = ({
             required
             placeholder={intl.formatMessage({
               defaultMessage: 'Custom URL Name',
-              description: '',
             })}
             value={values.name}
             error={touched.name && errors.name}
@@ -214,12 +208,12 @@ const Init: React.FC<FormProps> = ({
     </section>
   )
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
+  const SubmitButton = () => (
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Next Step" description="" />}
+      text={<FormattedMessage defaultMessage="Next Step" />}
       loading={isSubmitting}
     />
   )
@@ -231,7 +225,13 @@ const Init: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="circleCreation" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<FormattedMessage defaultMessage="Next Step" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
@@ -242,15 +242,27 @@ const Init: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="circleCreation"
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="circleCreation"
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

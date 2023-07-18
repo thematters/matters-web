@@ -1,0 +1,5 @@
+.hr {
+  @mixin border-bottom-grey;
+
+  border-bottom-style: dashed;
+}

@@ -7,12 +7,12 @@
     @mixin border-left-grey;
 
     padding-left: var(--spacing-tight);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-md);
     color: var(--color-grey);
+    text-overflow: ellipsis;
+    border-left-width: 3px;
+    -webkit-line-clamp: 3;
 
     @mixin line-clamp;
-
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 3;
   }
 }

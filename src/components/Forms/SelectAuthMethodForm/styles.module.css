@@ -13,8 +13,7 @@
 }
 
 .sourceHeader {
-  padding: 0 var(--spacing-base);
-  margin-bottom: var(--spacing-xx-loose);
+  margin-top: var(--spacing-base);
   text-align: center;
 
   & img {
@@ -26,9 +25,9 @@
   }
 
   & .intro {
-    margin-top: var(--spacing-xx-tight);
-    font-size: var(--font-size-md-s);
+    margin: var(--spacing-base) 0;
+    font-size: var(--font-size-md);
     line-height: 1.5rem;
-    color: var(--color-grey-darker);
+    color: var(--color-grey-dark);
   }
 }

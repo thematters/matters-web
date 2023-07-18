@@ -5,7 +5,7 @@ import {
   ConnectWalletButton,
   Help,
   Media,
-  Tabs,
+  SegmentedTabs,
   ViewerContext,
 } from '~/components'
 
@@ -42,19 +42,28 @@ const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
   const isICYMI = feedType === 'icymi'
 
   return (
-    <Tabs sticky side={<TabSide />}>
-      <Tabs.Tab onClick={() => setFeedType('hottest')} selected={isHottest}>
-        <FormattedMessage defaultMessage="Trending" description="" />
-      </Tabs.Tab>
+    <SegmentedTabs sticky side={<TabSide />}>
+      <SegmentedTabs.Tab
+        onClick={() => setFeedType('hottest')}
+        selected={isHottest}
+      >
+        <FormattedMessage defaultMessage="Trending" />
+      </SegmentedTabs.Tab>
 
-      <Tabs.Tab onClick={() => setFeedType('newest')} selected={isNewset}>
-        <FormattedMessage defaultMessage="Latest" description="" />
-      </Tabs.Tab>
+      <SegmentedTabs.Tab
+        onClick={() => setFeedType('newest')}
+        selected={isNewset}
+      >
+        <FormattedMessage defaultMessage="Latest" />
+      </SegmentedTabs.Tab>
 
-      <Tabs.Tab onClick={() => setFeedType('icymi')} selected={isICYMI}>
-        <FormattedMessage defaultMessage="Featured" description="" />
-      </Tabs.Tab>
-    </Tabs>
+      <SegmentedTabs.Tab
+        onClick={() => setFeedType('icymi')}
+        selected={isICYMI}
+      >
+        <FormattedMessage defaultMessage="Featured" />
+      </SegmentedTabs.Tab>
+    </SegmentedTabs>
   )
 }
 

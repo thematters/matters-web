@@ -3,4 +3,6 @@ export const KEYVALUE = {
   escape: 'escape',
   tab: 'tab',
   backSpace: 'backspace',
+  arrowUp: 'arrowup',
+  arrowDown: 'arrowdown',
 }

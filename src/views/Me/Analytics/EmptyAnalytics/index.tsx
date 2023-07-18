@@ -26,7 +26,6 @@ const EmptyAnalytics = () => {
     variables: {
       title: intl.formatMessage({
         defaultMessage: 'Untitled',
-        description: '',
       }),
     },
   })
@@ -40,7 +39,7 @@ const EmptyAnalytics = () => {
           color="black"
           size="md"
         >
-          <FormattedMessage defaultMessage="Top Supporters" description="" />
+          <FormattedMessage defaultMessage="Top Supporters" />
         </TextIcon>
       </section>
       <section className={styles.content}>
@@ -68,7 +67,7 @@ const EmptyAnalytics = () => {
           }}
         >
           <TextIcon color="white" weight="md">
-            <FormattedMessage defaultMessage="Start Creating" description="" />
+            <FormattedMessage defaultMessage="Start Creating" />
           </TextIcon>
         </Button>
         <section className={styles.tips}>
@@ -83,7 +82,7 @@ const EmptyAnalytics = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <FormattedMessage defaultMessage="tutorial" description="" />
+              <FormattedMessage defaultMessage="tutorial" />
             </a>
           </p>
         </section>

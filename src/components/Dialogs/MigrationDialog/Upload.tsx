@@ -3,7 +3,6 @@ import { useContext } from 'react'
 
 import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
-  ADD_TOAST,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UPLOAD_FILE_COUNT_LIMIT,
   UPLOAD_MIGRATION_SIZE_LIMIT,
@@ -12,6 +11,7 @@ import { translate } from '~/common/utils'
 import {
   Dialog,
   LanguageContext,
+  toast,
   Translate,
   useMutation,
   ViewerContext,
@@ -19,23 +19,19 @@ import {
 import MIGRATION from '~/components/GQL/mutations/migration'
 import { MigrationMutation } from '~/gql/graphql'
 
-import styles from './styles.module.css'
-
 const texts: {
   zh_hant: Record<string, string>
   zh_hans: Record<string, string>
 } = {
   zh_hant: {
-    content_1: '選擇並上傳檔案',
-    content_2:
+    content:
       '選中想要搬家的作品檔案並上傳，目前一次最多支持上传 50 篇 HTML 档案。请特别注意区分作品档案和评论档案。搬家成功的作品會匯入你的草稿箱。',
     upload: '上傳檔案',
     count_limit: '上傳檔案數量已達上限，最多 50 個檔案',
     success: '作品上傳完成',
   },
   zh_hans: {
-    content_1: '选择并上传文件',
-    content_2:
+    content:
       '选中想要搬家的作品档案并上传，目前一次最多支持上传 50 篇 HTML 档案。请特别注意区分作品档案和评论档案。搬家成功的作品会导入你的草稿箱。',
     upload: '上传文件',
     count_limit: '上传档案数量已达上限，最多 50 个档案',
@@ -45,9 +41,13 @@ const texts: {
 
 interface MigrationDialogUploadProps {
   nextStep: () => void
+  closeDialog: () => void
 }
 
-const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
+const MigrationDialogUpload = ({
+  nextStep,
+  closeDialog,
+}: MigrationDialogUploadProps) => {
   const { lang } = useContext(LanguageContext)
 
   const { zh_hant, zh_hans } = texts
@@ -69,19 +69,14 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
     }
 
     if (event.target.files.length > UPLOAD_FILE_COUNT_LIMIT) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant={zh_hant.count_limit}
-                zh_hans={zh_hans.count_limit}
-              />
-            ),
-          },
-        })
-      )
+      toast.error({
+        message: (
+          <Translate
+            zh_hant={zh_hant.count_limit}
+            zh_hans={zh_hans.count_limit}
+          />
+        ),
+      })
       return
     }
 
@@ -95,14 +90,9 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
     const sizes = files.reduce((sum, file) => sum + file.size, 0)
 
     if (sizes > UPLOAD_MIGRATION_SIZE_LIMIT) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="MIGRATION_REACH_LIMIT" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="MIGRATION_REACH_LIMIT" />,
+      })
       return
     }
 
@@ -110,16 +100,13 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
       await migration({
         variables: { input: { type: 'medium', files } },
       })
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: (
-              <Translate zh_hant={zh_hant.success} zh_hans={zh_hans.success} />
-            ),
-          },
-        })
-      )
+
+      toast.success({
+        message: (
+          <Translate zh_hant={zh_hant.success} zh_hans={zh_hans.success} />
+        ),
+      })
+
       nextStep()
     } catch (error) {
       // TODO: handle other exception
@@ -130,45 +117,61 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
 
   return (
     <>
-      <Dialog.Content spacing={['base', 'base']}>
-        <p className={`${styles.p} ${styles.action}`}>
-          <Translate zh_hant={zh_hant.content_1} zh_hans={zh_hans.content_1} />
+      <Dialog.Message>
+        <p>
+          <Translate zh_hant={zh_hant.content} zh_hans={zh_hans.content} />
         </p>
-        <p className={`${styles.p} ${styles.description}`}>
-          <Translate zh_hant={zh_hant.content_2} zh_hans={zh_hans.content_2} />
-        </p>
-      </Dialog.Content>
+      </Dialog.Message>
 
       <label>
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            loading={loading}
-            onClick={() => {
-              const element = document.getElementById(fieldId)
-              if (element) {
-                element.click()
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />
               }
-            }}
-          >
-            <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />
-            <VisuallyHidden>
-              <input
-                id={fieldId}
-                type="file"
-                name="file"
-                aria-label={translate({
-                  zh_hant: '上傳檔案',
-                  zh_hans: '上传档案',
-                  en: 'Upload file',
-                  lang,
-                })}
-                accept={acceptTypes}
-                multiple
-                onChange={handleChange}
-              />
-            </VisuallyHidden>
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+              loading={loading}
+              onClick={() => {
+                const element = document.getElementById(fieldId)
+                if (element) {
+                  element.click()
+                }
+              }}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={
+                <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />
+              }
+              loading={loading}
+              onClick={() => {
+                const element = document.getElementById(fieldId)
+                if (element) {
+                  element.click()
+                }
+              }}
+            />
+          }
+        />
+
+        <VisuallyHidden>
+          <input
+            id={fieldId}
+            type="file"
+            name="file"
+            aria-label={translate({
+              zh_hant: '上傳檔案',
+              zh_hans: '上传档案',
+              en: 'Upload file',
+              lang,
+            })}
+            accept={acceptTypes}
+            multiple
+            onChange={handleChange}
+          />
+        </VisuallyHidden>
       </label>
     </>
   )

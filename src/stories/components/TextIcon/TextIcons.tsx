@@ -16,7 +16,7 @@ const Toasts = () => (
     <ul>
       <li>
         <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
-          <Translate id="stickyArticle" />
+          <Translate id="pinArticle" />
         </TextIcon>
       </li>
 

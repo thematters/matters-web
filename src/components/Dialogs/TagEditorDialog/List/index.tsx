@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Button,
@@ -86,15 +87,28 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
   const isHavingNoneEditors = count === 0
   const isReachingLimit = count === 4
 
+  const AddEditorButton = () => (
+    <Dialog.TextButton
+      text={
+        <Translate
+          zh_hant="新增協作者"
+          zh_hans="新增协作者"
+          en="Add collaborator"
+        />
+      }
+      onClick={toAddStep}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title="tagManageEditor"
         closeDialog={closeDialog}
-        closeTextId="cancel"
+        rightBtn={<AddEditorButton />}
       />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <section className={styles.owner}>
           {tag.owner && (
             <UserDigest.Rich
@@ -145,9 +159,9 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
               zh_hans="协作者可以与你共同管理精选"
               en="Collaborator can manage selected feed with you."
             />
-            <br />
+
             {(isHavingNoneEditors || isReachingLimit) && (
-              <>
+              <p>
                 <Translate
                   zh_hant="每個標籤最多添加"
                   zh_hans="每个标签最多添加"
@@ -159,10 +173,11 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                   zh_hans="名协作者"
                   en="collaborators."
                 />
-              </>
+              </p>
             )}
+
             {isAllowAdd && isHavingEditors && (
-              <>
+              <p>
                 <Translate
                   zh_hant="你還可以添加"
                   zh_hans="你还可以添加"
@@ -174,26 +189,25 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                   zh_hans="名协作者"
                   en="more collaborators."
                 />
-              </>
+              </p>
             )}
           </p>
         </Dialog.Message>
       </Dialog.Content>
 
       {isAllowAdd && (
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            textColor="white"
-            bgColor="green"
-            onClick={toAddStep}
-          >
-            <Translate
-              zh_hant="新增協作者"
-              zh_hans="新增协作者"
-              en="Add collaborator"
-            />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text={<FormattedMessage defaultMessage="Cancel" />}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+              <AddEditorButton />
+            </>
+          }
+        />
       )}
     </>
   )

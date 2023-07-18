@@ -15,7 +15,7 @@ export type ShareDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & Pick<
   ShareDialogContentProps,
-  'description' | 'footerButtons' | 'headerTitle'
+  'description' | 'btns' | 'smUpBtns' | 'headerTitle'
 >
 
 type BaseShareDialogProps = {
@@ -25,7 +25,7 @@ type BaseShareDialogProps = {
   shareTags?: string[]
 } & Pick<
   ShareDialogProps,
-  'children' | 'headerTitle' | 'description' | 'footerButtons'
+  'children' | 'headerTitle' | 'description' | 'btns' | 'smUpBtns'
 >
 
 const DynamicContent = dynamic(() => import('./Content'), {
@@ -46,7 +46,7 @@ const BaseShareDialog = ({
     <>
       {children({ openDialog: () => onShare(openDialog) })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent {...props} closeDialog={closeDialog} />
       </Dialog>
     </>

@@ -38,21 +38,36 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
         </section>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          bgColor="greyLighter"
-          textColor="black"
-          onClick={() => {
-            window.location.reload()
-          }}
-        >
-          <Translate
-            zh_hans="回到个人页"
-            zh_hant="回到個人頁"
-            en="Back to Profile"
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={
+              <Translate
+                zh_hans="回到个人页"
+                zh_hant="回到個人頁"
+                en="Back to Profile"
+              />
+            }
+            onClick={() => {
+              window.location.reload()
+            }}
           />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+        }
+        smUpBtns={
+          <Dialog.TextButton
+            text={
+              <Translate
+                zh_hans="回到个人页"
+                zh_hant="回到個人頁"
+                en="Back to Profile"
+              />
+            }
+            onClick={() => {
+              window.location.reload()
+            }}
+          />
+        }
+      />
     </>
   )
 }

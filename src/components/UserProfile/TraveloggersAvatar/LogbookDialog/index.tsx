@@ -6,7 +6,6 @@ import {
   IconLogbook1,
   IconLogbook2,
   LanguageContext,
-  Spacer,
   TextIcon,
   Translate,
   useDialogSwitch,
@@ -34,11 +33,12 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
   return (
     <>
       {children({ openDialog })}
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={title}
           closeDialog={closeDialog}
-          closeTextId="close"
+          closeText="close"
         />
 
         <Dialog.Message>
@@ -99,7 +99,15 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
           />
         </Form.List>
 
-        <Spacer />
+        <Dialog.Footer
+          smUpBtns={
+            <Dialog.TextButton
+              text="close"
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+        />
       </Dialog>
     </>
   )

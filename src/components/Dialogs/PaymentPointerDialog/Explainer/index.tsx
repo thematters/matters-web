@@ -70,7 +70,6 @@ const PaymentPointerExplainer = () => (
         en=", applicable on both Matters website and IPFS."
       />
     </p>
-    <br />
   </>
 )
 

@@ -2,8 +2,6 @@ import { CONTENT_LANG_TEXT_MAP } from '~/common/enums'
 import { toLocale } from '~/common/utils'
 import { Translate } from '~/components'
 
-import styles from './styles.module.css'
-
 const Content = ({ language }: { language?: string | null }) => {
   if (language && toLocale(language) !== '') {
     const targetLang = {
@@ -22,38 +20,23 @@ const Content = ({ language }: { language?: string | null }) => {
     })
     return (
       <Translate
-        zh_hans={`你正在浏览由 Google 翻译的${targetLang.zh_hans}版本，若要阅读原文版本，`}
-        zh_hant={`你正在瀏覽由 Google 翻譯的${targetLang.zh_hant}版本，若要閱讀原文版本，`}
-        en={`You’re viewing content translated into ${targetLang.en} by Google. To read original content, `}
+        zh_hans={`你正在浏览由 Google 翻译的${targetLang.zh_hans}版本`}
+        zh_hant={`你正在瀏覽由 Google 翻譯的${targetLang.zh_hant}版本`}
+        en={`You’re viewing content translated into ${targetLang.en} by Google.`}
       />
     )
   }
   return (
     <Translate
-      zh_hans="你正在浏览由 Google 翻译的版本，若要阅读原文版本，"
-      zh_hant="你正在瀏覽由 Google 翻譯的版本，若要閱讀原文版本，"
-      en="You’re viewing content translated by Google. To read original content,&nbsp;"
+      zh_hans="你正在浏览由 Google 翻译的版本"
+      zh_hant="你正在瀏覽由 Google 翻譯的版本"
+      en="You’re viewing content translated by Google."
     />
   )
 }
 
-const SwitchContent = ({
-  onClick,
-}: {
-  onClick: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
-}) => (
-  <span onClick={onClick} className={styles.switchButton}>
-    <Translate
-      zh_hans="点击这里切换。"
-      zh_hant="點擊這裡切換。"
-      en="click here to switch."
-    />
-  </span>
-)
-
 const TranslationToast = {
   Content,
-  SwitchContent,
 }
 
 export default TranslationToast

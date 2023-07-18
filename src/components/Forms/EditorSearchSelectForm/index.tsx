@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   MAX_ARTICLE_COLLECT_LENGTH,
@@ -41,9 +42,11 @@ export type SearchSelectNode = SelectNode
 export type EditorSearchSelectFormProps = {
   title: TextId | React.ReactNode
   hint: TextId
-  headerLeftButton?: React.ReactNode
   headerRightButtonText?: string | React.ReactNode
+
+  back?: () => void
   closeDialog: () => void
+  submitCallback?: () => void
 
   nodes?: SelectNode[]
   onSave: (nodes: SelectNode[]) => Promise<any>
@@ -64,9 +67,11 @@ const EditorSearchSelectForm = ({
   title,
   hint,
   CustomStagingArea,
-  headerLeftButton,
   headerRightButtonText,
+
+  back,
   closeDialog,
+  submitCallback,
 
   nodes,
   onSave,
@@ -124,21 +129,21 @@ const EditorSearchSelectForm = ({
 
   const enableAdd = stagingNodes.length < maxNodesLength
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      onClick={submitCallback || closeDialog}
+      // disabled={stagingNodes.length <= 0}
+      text={headerRightButtonText || 'done'}
+      loading={saving}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title={title}
         closeDialog={closeDialog}
-        closeTextId="close"
-        leftButton={<></>}
-        rightButton={
-          <Dialog.Header.RightButton
-            onClick={closeDialog}
-            // disabled={stagingNodes.length <= 0}
-            text={headerRightButtonText || <Translate id="done" />}
-            loading={saving}
-          />
-        }
+        rightBtn={<SubmitButton />}
       />
 
       {inStagingArea && (
@@ -201,6 +206,21 @@ const EditorSearchSelectForm = ({
           CustomStagingArea={CustomStagingArea}
         />
       )}
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={
+                back ? 'back' : <FormattedMessage defaultMessage="Cancel" />
+              }
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

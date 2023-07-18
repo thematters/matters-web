@@ -8,7 +8,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
 import {
-  ADD_TOAST,
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
@@ -32,6 +31,8 @@ import {
   LanguageContext,
   Layout,
   TextIcon,
+  toast,
+  Translate,
   useMutation,
   VerificationSendCodeButton,
   ViewerContext,
@@ -251,19 +252,12 @@ const Connect: React.FC<FormProps> = ({
         analytics.identifyUser()
 
         if (loginData?.walletLogin.type === AuthResultType.Login) {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'green',
-                content: (
-                  <FormattedMessage
-                    defaultMessage="Logged in successfully"
-                    description=""
-                  />
-                ),
-              },
-            })
-          )
+          toast.success({
+            message: (
+              <FormattedMessage defaultMessage="Logged in successfully" />
+            ),
+          })
+
           redirectToTarget({
             fallback: isInPage ? 'homepage' : 'current',
           })
@@ -301,9 +295,7 @@ const Connect: React.FC<FormProps> = ({
     <section className={containerClasses}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.List
-          groupName={
-            <FormattedMessage defaultMessage="Connect Wallet" description="" />
-          }
+          groupName={<FormattedMessage defaultMessage="Connect Wallet" />}
           spacingX={isInPage ? 0 : 'base'}
         >
           <Form.List.Item title={maskAddress(values.address)} />
@@ -314,10 +306,7 @@ const Connect: React.FC<FormProps> = ({
             fieldMsgId={fieldMsgId}
             hint={
               !errors.address ? (
-                <FormattedMessage
-                  defaultMessage="To change, switch it directly on your wallet"
-                  description=""
-                />
+                <FormattedMessage defaultMessage="To change, switch it directly on your wallet" />
               ) : undefined
             }
             error={errors.address}
@@ -341,13 +330,12 @@ const Connect: React.FC<FormProps> = ({
 
         {isSignUp && (
           <Form.Input
-            label={<FormattedMessage defaultMessage="Email" description="" />}
+            label={<FormattedMessage defaultMessage="Email" />}
             type="email"
             name="email"
             required
             placeholder={intl.formatMessage({
               defaultMessage: 'Enter Email',
-              description: '',
             })}
             extraButton={
               <TextIcon
@@ -368,10 +356,7 @@ const Connect: React.FC<FormProps> = ({
             onBlur={handleBlur}
             onChange={handleChange}
             hint={
-              <FormattedMessage
-                defaultMessage="Email will not be used as a login but only as a contact channel."
-                description=""
-              />
+              <FormattedMessage defaultMessage="Email will not be used as a login but only as a contact channel." />
             }
           />
         )}
@@ -393,7 +378,6 @@ const Connect: React.FC<FormProps> = ({
             })}
             hint={intl.formatMessage({
               defaultMessage: 'Code will expire after 20 minutes',
-              description: '',
             })}
             value={values.code}
             error={touched.code && errors.code}
@@ -417,17 +401,11 @@ const Connect: React.FC<FormProps> = ({
             onChange={handleChange}
             hint={
               <>
-                <FormattedMessage
-                  defaultMessage="I have read and agree to"
-                  description=""
-                />
+                <FormattedMessage defaultMessage="I have read and agree to" />
                 <Link href={PATHS.TOS} legacyBehavior>
                   <a className="u-link-green" target="_blank">
                     &nbsp;
-                    <FormattedMessage
-                      defaultMessage="Terms and Privacy Policy"
-                      description=""
-                    />
+                    <FormattedMessage defaultMessage="Terms and Privacy Policy" />
                   </a>
                 </Link>
               </>
@@ -441,12 +419,12 @@ const Connect: React.FC<FormProps> = ({
     </section>
   )
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
+  const SubmitButton = () => (
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting || loading || !account}
-      text={<FormattedMessage defaultMessage="Next" description="" />}
+      text={<FormattedMessage defaultMessage="Next" />}
       loading={isSubmitting || loading}
     />
   )
@@ -458,7 +436,13 @@ const Connect: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="authEntries" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting || loading || !account}
+                text={<FormattedMessage defaultMessage="Next" />}
+                loading={isSubmitting || loading}
+              />
             </>
           }
         />
@@ -470,18 +454,35 @@ const Connect: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="authEntries"
-          leftButton={
-            back ? <Dialog.Header.BackButton onClick={onBack} /> : null
-          }
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="authEntries"
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<Translate id="back" />}
+              onClick={onBack}
+            />
+          ) : null
+        }
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

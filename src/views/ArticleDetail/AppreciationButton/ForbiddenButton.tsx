@@ -1,5 +1,4 @@
-import { ADD_TOAST } from '~/common/enums'
-import { Translate } from '~/components'
+import { toast, Translate } from '~/components'
 
 import AppreciateButton from './AppreciateButton'
 
@@ -14,14 +13,9 @@ const ForbiddenButton = ({
     count={count}
     total={total}
     onClick={() => {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="FORBIDDEN_BY_STATE" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="FORBIDDEN_BY_STATE" />,
+      })
     }}
   />
 )

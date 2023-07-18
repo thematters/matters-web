@@ -6,7 +6,6 @@ import { useContext, useState } from 'react'
 import { ReactComponent as IconEditorMenuImage } from '@/public/static/icons/32px/editor-menu-image.svg'
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ADD_TOAST,
   ASSET_TYPE,
   UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
@@ -14,6 +13,7 @@ import { translate } from '~/common/utils'
 import {
   IconSpinner16,
   LanguageContext,
+  toast,
   Translate,
   withIcon,
 } from '~/components'
@@ -55,20 +55,15 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
       (file) => file.size > UPLOAD_IMAGE_SIZE_LIMIT
     )
     if (hasExceedLimit) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant="上傳檔案超過 5 MB"
-                zh_hans="上传文件超过 5 MB"
-                en="upload file size exceeds 5 MB"
-              />
-            ),
-          },
-        })
-      )
+      toast.error({
+        message: (
+          <Translate
+            zh_hant="上傳檔案超過 5 MB"
+            zh_hans="上传文件超过 5 MB"
+            en="upload file size exceeds 5 MB"
+          />
+        ),
+      })
 
       event.target.value = ''
       return
@@ -80,24 +75,14 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
       for (const file of files) {
         const { path } = await upload({ file, type: ASSET_TYPE.embed })
         editor.chain().focus().setFigureImage({ src: path }).run()
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: <Translate id="successUploadImage" />,
-            },
-          })
-        )
+        toast.success({
+          message: <Translate id="successUploadImage" />,
+        })
       }
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureUploadImage" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="failureUploadImage" />,
+      })
     }
 
     event.target.value = ''

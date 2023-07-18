@@ -64,7 +64,7 @@ const Feed = ({ type }: Props) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <ResponsiveWrapper>
         <ul className={styles.list}>
           {edges.map(({ node: tag }, i) => (

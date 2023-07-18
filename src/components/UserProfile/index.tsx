@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { TEST_ID } from '~/common/enums'
@@ -9,24 +9,17 @@ import {
   Avatar,
   Button,
   Cover,
-  Error,
   Expandable,
   FollowUserButton,
-  IconRss32,
-  Layout,
-  RssFeedDialog,
-  Spinner,
+  Media,
   Throw404,
+  Translate,
   // Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
 } from '~/components'
-import ShareButton from '~/components/Layout/Header/ShareButton'
-import {
-  AuthorRssFeedFragment,
-  UserProfileUserPublicQuery,
-} from '~/gql/graphql'
+import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 import {
   ArchitectBadge,
@@ -35,42 +28,21 @@ import {
   SeedBadge,
   TraveloggersBadge,
 } from './Badges'
+import { BadgesDialog } from './BadgesDialog'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
+import { EditProfileDialog } from './DropdownActions/EditProfileDialog'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
+import Inactive from './Inactive'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 import TraveloggersAvatar from './TraveloggersAvatar'
-
-interface FingerprintButtonProps {
-  user: AuthorRssFeedFragment
-}
 
 const DynamicWalletLabel = dynamic(() => import('./WalletLabel'), {
   ssr: false,
 })
-
-const RssFeedButton = ({ user }: FingerprintButtonProps) => {
-  const intl = useIntl()
-  return (
-    <RssFeedDialog user={user}>
-      {({ openDialog }) => (
-        <Button
-          onClick={openDialog}
-          spacing={['xxtight', 'xtight']}
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Content Feed',
-            description: 'src/components/UserProfile/index.tsx',
-          })}
-          aria-haspopup="dialog"
-        >
-          <IconRss32 color="green" size="lg" />
-        </Button>
-      )}
-    </RssFeedDialog>
-  )
-}
 
 export const UserProfile = () => {
   const { getQuery } = useRoute()
@@ -103,64 +75,12 @@ export const UserProfile = () => {
   /**
    * Render
    */
-  const LayoutHeader = () => (
-    <>
-      <Layout.Header
-        right={
-          <>
-            <span />
-            {user && (
-              <section className={styles.buttons}>
-                <ShareButton
-                  tags={
-                    [user.displayName, user.userName].filter(
-                      Boolean
-                    ) as string[]
-                  }
-                />
-                <DropdownActions user={user} isMe={isMe} />
-              </section>
-            )}
-          </>
-        }
-        mode="transparent-absolute"
-      />
-    </>
-  )
-
   if (loading) {
-    return (
-      <>
-        <LayoutHeader />
-        <Spinner />
-      </>
-    )
+    return <Placeholder />
   }
 
   if (!user) {
-    return (
-      <>
-        <LayoutHeader />
-        <Throw404 />
-      </>
-    )
-  }
-
-  if (user?.status?.state === 'archived') {
-    return (
-      <>
-        <LayoutHeader />
-        <Error
-          statusCode={404}
-          message={
-            <FormattedMessage
-              defaultMessage="This account is archived due to violation of community guidelines"
-              description="src/components/UserProfile/index.tsx"
-            />
-          }
-        />
-      </>
-    )
+    return <Throw404 />
   }
 
   const badges = user.info.badges || []
@@ -173,77 +93,76 @@ export const UserProfile = () => {
   const profileCover = user.info.profileCover || ''
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
-  const isUserArchived = userState === 'archived'
-  const isUserBanned = userState === 'banned'
-  const isUserInactive = isUserArchived || isUserBanned
+
+  const Badges = ({ isInDialog }: { isInDialog?: boolean }) => (
+    <span className={isInDialog ? styles.badgesInDialog : ''}>
+      {hasTraveloggersBadge && <TraveloggersBadge isInDialog={isInDialog} />}
+      {hasSeedBadge && <SeedBadge isInDialog={isInDialog} />}
+      {hasGoldenMotorBadge && <GoldenMotorBadge isInDialog={isInDialog} />}
+      {hasArchitectBadge && <ArchitectBadge isInDialog={isInDialog} />}
+      {isCivicLiker && <CivicLikerBadge isInDialog={isInDialog} />}
+    </span>
+  )
 
   /**
    * Inactive User
    */
-  if (isUserInactive) {
-    return (
-      <>
-        <LayoutHeader />
-        <section className={styles.userProfile}>
-          <Cover fallbackCover={IMAGE_COVER.src} />
-
-          <header>
-            <section className={styles.avatar}>
-              <Avatar size="xxxl" />
-            </section>
-          </header>
-
-          <section className={styles.info}>
-            <section className={styles.displayName}>
-              <h1 className={styles.name}>
-                {isUserArchived && (
-                  <FormattedMessage
-                    defaultMessage="Account Archived"
-                    description="src/components/UserProfile/index.tsx"
-                  />
-                )}
-                {isUserBanned && (
-                  <FormattedMessage
-                    defaultMessage="Account Banned"
-                    description="src/components/UserProfile/index.tsx"
-                  />
-                )}
-              </h1>
-            </section>
-          </section>
-        </section>
-      </>
-    )
+  const isUserArchived = userState === 'archived'
+  if (isUserArchived) {
+    return <Inactive />
   }
 
   /**
    * Active or Onboarding User
    */
+  const avatar = (
+    <section className={styles.avatar}>
+      {hasTraveloggersBadge ? (
+        <TraveloggersAvatar user={user} isMe={isMe} size="xxxlm" />
+      ) : (
+        <Avatar size="xxxlm" user={user} inProfile />
+      )}
+    </section>
+  )
+
   return (
-    <>
-      <LayoutHeader />
+    <section className={styles.userProfile} data-test-id={TEST_ID.USER_PROFILE}>
+      <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
 
-      <section
-        className={styles.userProfile}
-        data-test-id={TEST_ID.USER_PROFILE}
-      >
-        <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
-
+      <Media at="sm">
         <header className={styles.header}>
-          <section className={styles.avatar}>
-            {hasTraveloggersBadge ? (
-              <TraveloggersAvatar user={user} isMe={isMe} />
-            ) : (
-              <Avatar size="xxxl" user={user} inProfile />
-            )}
-          </section>
+          {isMe && (
+            <EditProfileDialog user={user}>
+              {({ openDialog: openEditProfileDialog }) => (
+                <section onClick={openEditProfileDialog}>{avatar}</section>
+              )}
+            </EditProfileDialog>
+          )}
+
+          {!isMe && avatar}
 
           <section className={styles.right}>
+            {isMe && (
+              <EditProfileDialog user={user}>
+                {({ openDialog: openEditProfileDialog }) => (
+                  <Button
+                    borderColor="greyDarker"
+                    borderActiveColor="green"
+                    borderWidth="md"
+                    textColor="greyDarker"
+                    textActiveColor="green"
+                    onClick={openEditProfileDialog}
+                    size={['5.3125rem', '2rem']}
+                  >
+                    <Translate id="edit" />
+                  </Button>
+                )}
+              </EditProfileDialog>
+            )}
+
             {!isMe && <FollowUserButton user={user} size="lg" />}
 
-            {user?.articles.totalCount > 0 && user?.info.ipnsKey && (
-              <RssFeedButton user={user} />
-            )}
+            <DropdownActions user={user} isMe={isMe} />
           </section>
         </header>
 
@@ -255,11 +174,19 @@ export const UserProfile = () => {
             >
               {user.displayName}
             </h1>
-            {hasTraveloggersBadge && <TraveloggersBadge />}
-            {hasSeedBadge && <SeedBadge />}
-            {hasGoldenMotorBadge && <GoldenMotorBadge />}
-            {hasArchitectBadge && <ArchitectBadge />}
-            {isCivicLiker && <CivicLikerBadge />}
+            <BadgesDialog content={<Badges isInDialog />}>
+              {({ openDialog }) => {
+                return (
+                  <span className={styles.badges} onClick={openDialog}>
+                    <Badges />
+                  </span>
+                )
+              }}
+            </BadgesDialog>
+
+            {user?.info.ethAddress && (
+              <DynamicWalletLabel user={user} isMe={isMe} />
+            )}
           </section>
 
           <section className={styles.username}>
@@ -269,29 +196,10 @@ export const UserProfile = () => {
             >
               @{user.userName}
             </span>
-            {!isMe && <FollowUserButton.State user={user} />}
           </section>
-
-          {user?.info.ethAddress && (
-            <DynamicWalletLabel user={user} isMe={isMe} />
-          )}
-
-          <Expandable
-            content={user.info.description}
-            color="greyDarker"
-            size="md"
-            spacingTop="base"
-          >
-            <p
-              className={styles.description}
-              data-test-id={TEST_ID.USER_PROFILE_BIO}
-            >
-              {user.info.description}
-            </p>
-          </Expandable>
         </section>
 
-        <footer className={styles.footer}>
+        <section className={styles.follow}>
           <FollowersDialog user={user}>
             {({ openDialog: openFollowersDialog }) => (
               <button type="button" onClick={openFollowersDialog}>
@@ -301,7 +209,8 @@ export const UserProfile = () => {
                 >
                   {numAbbr(user.followers.totalCount)}
                 </span>
-                <FormattedMessage defaultMessage="Followers" description="" />
+                &nbsp;
+                <FormattedMessage defaultMessage="Followers" />
               </button>
             )}
           </FollowersDialog>
@@ -312,6 +221,7 @@ export const UserProfile = () => {
                 <span className={styles.count}>
                   {numAbbr(user.following.users.totalCount)}
                 </span>
+                &nbsp;
                 <FormattedMessage
                   defaultMessage="Following"
                   description="src/components/UserProfile/index.tsx"
@@ -319,11 +229,33 @@ export const UserProfile = () => {
               </button>
             )}
           </FollowingDialog>
-        </footer>
+        </section>
 
-        <CircleWidget circles={circles} isMe={isMe} />
-      </section>
-    </>
+        <section className={styles.footer}>
+          <Expandable
+            content={user.info.description}
+            color="grey"
+            size="sm"
+            spacingTop="tight"
+            collapseable={false}
+          >
+            <p
+              className={styles.description}
+              data-test-id={TEST_ID.USER_PROFILE_BIO}
+            >
+              {user.info.description}
+            </p>
+          </Expandable>
+
+          <CircleWidget
+            circles={circles}
+            isMe={isMe}
+            hasDescription={false}
+            hasFooter={false}
+          />
+        </section>
+      </Media>
+    </section>
   )
 }
 

@@ -19,6 +19,6 @@
   }
 
   &.dropdown {
-    width: var(--sizing-menu-md);
+    width: var(--sizing-menu);
   }
 }

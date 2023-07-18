@@ -19,6 +19,7 @@ import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
 import Header from './Header'
 import NavBar from './NavBar'
+import Notice from './Notice'
 import SideFooter from './SideFooter'
 import SideNav from './SideNav'
 import Spacing from './Spacing'
@@ -49,6 +50,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Spacing: typeof Spacing
   FixedMain: typeof FixedMain
   AuthHeader: typeof AuthHeader
+  Notice: typeof Notice
 } = ({ children }) => {
   const { isInPath } = useRoute()
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
@@ -57,10 +59,10 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
     <>
       <Head />
 
-      <div className="l-container full">
-        <main className="l-row">
-          <nav role="navigation" className="l-col-three-left">
-            <section className={styles.sidenav}>
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <nav role="navigation" className={styles.sidenav}>
+            <section className={styles.sideNavContent}>
               <Media greaterThan="sm">
                 <SideNav />
               </Media>
@@ -109,7 +111,6 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
 
   const articleClasses = classNames({
     [styles.article]: true,
-    'l-col-three-mid': true,
     [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
       !!smBgColor,
     [styles.hasNavBar]: !isInArticleDetail && !isInDraftDetail,
@@ -126,15 +127,15 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
           {children}
 
           {showOnboardingTasks && (
-            <Media lessThan="xl">
+            <Media lessThan="lg">
               <DynamicOnboardingTasksNavBar />
             </Media>
           )}
         </PullToRefresh>
       </article>
 
-      <aside className={`l-col-three-right ${styles.aside}`}>
-        <Media greaterThanOrEqual="xl">
+      <aside className={styles.aside}>
+        <Media greaterThanOrEqual="lg">
           <Sticky enabled={true} top={32}>
             <section className={styles.content}>
               {!inEditor && <SearchBar />}
@@ -157,3 +158,4 @@ Layout.Header = Header
 Layout.Spacing = Spacing
 Layout.FixedMain = FixedMain
 Layout.AuthHeader = AuthHeader
+Layout.Notice = Notice

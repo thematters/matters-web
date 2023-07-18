@@ -14,7 +14,7 @@ export const ViewAllButton: React.FC<ViewAllButtonProps> = ({ ...props }) => {
       {...props}
     >
       <TextIcon color="green" size="xs" weight="md" textPlacement="left">
-        <FormattedMessage defaultMessage="View All" description="" />
+        <FormattedMessage defaultMessage="View All" />
       </TextIcon>
     </Button>
   )

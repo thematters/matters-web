@@ -12,10 +12,6 @@
     color: var(--color-matters-green);
     text-decoration: underline;
   }
-
-  & .highlight {
-    color: var(--color-matters-green);
-  }
 }
 
 .error {

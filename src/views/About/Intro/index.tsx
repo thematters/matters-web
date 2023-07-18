@@ -6,6 +6,7 @@ import IMAGE_WAVE_2 from '@/public/static/images/about/wave-intro-2.svg'
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, TextIcon, Translate } from '~/components'
 
+import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Intro = () => {
@@ -17,8 +18,10 @@ const Intro = () => {
   return (
     <section className={styles.intro} style={style}>
       <ul>
-        <li className={`l-container full ${styles.ecosystem}`}>
-          <div className="l-row">
+        <li
+          className={`${layoutStyles.container} ${layoutStyles.full} ${styles.ecosystem}`}
+        >
+          <div className={layoutStyles.content}>
             <img src={IMAGE_ILLUSTRATION_1.src} alt="illustration 1" />
 
             <section className={styles.content}>
@@ -56,8 +59,10 @@ const Intro = () => {
             </section>
           </div>
         </li>
-        <li className={`l-container full ${styles.community}`}>
-          <div className="l-row">
+        <li
+          className={`${layoutStyles.container} ${layoutStyles.full} ${styles.community}`}
+        >
+          <div className={layoutStyles.content}>
             <img src={IMAGE_ILLUSTRATION_2.src} alt="illustration 2" />
 
             <section className={styles.content}>
@@ -99,8 +104,10 @@ const Intro = () => {
             </section>
           </div>
         </li>
-        <li className={`l-container full feature ${styles.feature}`}>
-          <div className="l-row">
+        <li
+          className={`${layoutStyles.container} ${layoutStyles.full} feature ${styles.feature}`}
+        >
+          <div className={layoutStyles.content}>
             <section className={styles.content}>
               {/* <span className={styles.flag}>
                 <Translate

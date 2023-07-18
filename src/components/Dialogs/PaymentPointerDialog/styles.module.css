@@ -1,5 +1,7 @@
-.container {
-  @media (--sm-down) {
-    @mixin form-container;
+.form {
+  margin: 0;
+
+  @media (--md-up) {
+    margin: 0 calc(var(--spacing-base) * -1);
   }
 }

@@ -1,3 +1,14 @@
 .badge {
   font-size: 0;
 }
+
+.item {
+  @mixin flex-center-all;
+
+  flex-direction: column;
+  color: var(--color-grey-dark);
+
+  & > * + * {
+    margin-top: var(--spacing-tight);
+  }
+}

@@ -21,9 +21,8 @@ type ROUTE_KEY =
   | 'ARTICLE_DETAIL'
   // User
   | 'USER_ARTICLES'
-  | 'USER_SUBSCRIPTIONS'
-  | 'USER_COMMENTS'
-  | 'USER_TAGS'
+  | 'USER_COLLECTIONS'
+  | 'USER_COLLECTION_DETAIL'
   // Circle
   | 'CIRCLE_DETAIL'
   | 'CIRCLE_DISCUSSION'
@@ -36,8 +35,9 @@ type ROUTE_KEY =
   | 'ME_DRAFTS'
   | 'ME_BOOKMARKS'
   | 'ME_HISTORY'
-  | 'ME_LIKES_SENT'
-  | 'ME_LIKES_RECEIVED'
+  | 'ME_HISTORY_COMMENTS'
+  | 'ME_HISTORY_LIKES_SENT'
+  | 'ME_HISTORY_LIKES_RECEIVED'
   | 'ME_NOTIFICATIONS'
   | 'ME_ANALYTICS'
   | 'ME_WALLET'
@@ -92,9 +92,11 @@ export const ROUTES: {
 
   // User
   { key: 'USER_ARTICLES', pathname: '/[name]' },
-  { key: 'USER_SUBSCRIPTIONS', pathname: '/[name]/subscriptions' },
-  { key: 'USER_COMMENTS', pathname: '/[name]/comments' },
-  { key: 'USER_TAGS', pathname: '/[name]/tags' },
+  { key: 'USER_COLLECTIONS', pathname: '/[name]/collections' },
+  {
+    key: 'USER_COLLECTION_DETAIL',
+    pathname: '/[name]/collections/[collectionId]',
+  },
 
   // Article
   { key: 'ARTICLE_DETAIL', pathname: '/[name]/[mediaHash]' },
@@ -134,8 +136,9 @@ export const ROUTES: {
   { key: 'ME_DRAFTS', pathname: '/me/drafts' },
   { key: 'ME_BOOKMARKS', pathname: '/me/bookmarks' },
   { key: 'ME_HISTORY', pathname: '/me/history' },
-  { key: 'ME_LIKES_SENT', pathname: '/me/likes/sent' },
-  { key: 'ME_LIKES_RECEIVED', pathname: '/me/likes/received' },
+  { key: 'ME_HISTORY_COMMENTS', pathname: '/me/history/comments' },
+  { key: 'ME_HISTORY_LIKES_SENT', pathname: '/me/history/likes/sent' },
+  { key: 'ME_HISTORY_LIKES_RECEIVED', pathname: '/me/history/likes/received' },
   { key: 'ME_NOTIFICATIONS', pathname: '/me/notifications' },
   { key: 'ME_WALLET', pathname: '/me/wallet' },
   { key: 'ME_WALLET_TRANSACTIONS', pathname: '/me/wallet/transactions' },

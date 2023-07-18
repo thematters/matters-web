@@ -77,9 +77,8 @@ const SupportersDialogContent = ({
           </>
         }
         closeDialog={closeDialog}
-        closeTextId="close"
+        closeText="close"
       />
-
       <Dialog.Content>
         <InfiniteScroll
           loader={<Spinner />}
@@ -102,6 +101,17 @@ const SupportersDialogContent = ({
           ))}
         </InfiniteScroll>
       </Dialog.Content>
+
+      <Dialog.Footer
+        noSpacing={false}
+        smUpBtns={
+          <Dialog.TextButton
+            text="close"
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
+      />
     </>
   )
 }

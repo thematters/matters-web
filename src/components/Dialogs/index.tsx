@@ -13,6 +13,11 @@ export * from './ReviseArticleDialog'
 export * from './ShareDialog'
 export * from './SupportersDialog'
 
+// Collection
+export * from './AddCollectionDialog'
+export * from './AddCollectionsArticleDialog'
+export * from './RemoveArticleCollectionDialog'
+
 // Editor
 export * from './EditorSearchSelectDialog'
 
@@ -35,7 +40,6 @@ export * from './SubscribeCircleDialog'
 export * from './UnsubscribeCircleDialog'
 
 // Misc
-export * from './GoogleSearchDialog'
 export * from './PaymentPointerDialog'
 
 // Help

@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import TextTruncate from 'react-text-truncate'
 
-import { capitalizeFirstLetter, stripHtml } from '~/common/utils'
+import { capitalizeFirstLetter, collapseContent } from '~/common/utils'
 import {
   Button,
   IconArrowDown16,
@@ -29,9 +29,10 @@ interface ExpandableProps {
   buffer?: number
   color?: CollapseTextColor
   size?: 'sm' | 'mdS' | 'md'
-  spacingTop?: 'base'
+  spacingTop?: 'tight' | 'base'
   textIndent?: boolean
   isRichShow?: boolean
+  collapseable?: boolean
   bgColor?: 'greyLighter' | 'white'
 }
 
@@ -45,6 +46,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   spacingTop,
   textIndent = false,
   isRichShow = false,
+  collapseable = true,
   bgColor = 'white',
 }) => {
   const [expandable, setExpandable] = useState(false)
@@ -52,10 +54,8 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const [expand, setExpand] = useState(true)
   const [truncated, setTruncated] = useState(false)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
-  const collapseContent = stripHtml(
-    content ? content.replace(/\r?\n|\r|\s\s/g, '') : '',
-    ''
-  )
+  const collapsedContent = collapseContent(content)
+
   const contentClasses = classNames({
     [styles.expandable]: true,
     [styles[`${color}`]]: !!color,
@@ -105,7 +105,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
       <div ref={node}>
         {(!expandable || (expandable && expand)) && <div>{children}</div>}
       </div>
-      {expandable && expand && !isRichShow && (
+      {expandable && collapseable && expand && !isRichShow && (
         <section className={styles.collapseWrapper}>
           <Button
             spacing={['xxtight', 'xtight']}
@@ -128,7 +128,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
               line={limit}
               element="span"
               truncateText=""
-              text={collapseContent}
+              text={collapsedContent}
               onTruncated={() => {
                 setTruncated(true)
               }}

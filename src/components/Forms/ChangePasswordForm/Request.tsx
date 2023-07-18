@@ -117,8 +117,8 @@ const Request: React.FC<FormProps> = ({
     </section>
   )
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
+  const SubmitButton = () => (
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -135,7 +135,13 @@ const Request: React.FC<FormProps> = ({
           right={
             <>
               <span />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<Translate id="nextStep" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
@@ -147,16 +153,32 @@ const Request: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title={titleId}
-          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title={titleId}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+          ) : null
+        }
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

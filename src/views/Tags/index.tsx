@@ -32,18 +32,18 @@ const BaseTags = () => {
 
   return (
     <section className={styles.tags}>
-      {/* <Tabs sticky>
-        <Tabs.Tab
+      {/* <SegmentedTabs sticky>
+        <SegmentedTabs.Tab
           selected={isRecommended}
           onClick={() => setFeedType('recommended')}
         >
           <Translate zh_hant="推薦" zh_hans="推荐" en="Recommended" />
-        </Tabs.Tab>
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab selected={isHottest} onClick={() => setFeedType('hottest')}>
+        <SegmentedTabs.Tab selected={isHottest} onClick={() => setFeedType('hottest')}>
           <Translate id="hottest" />
-        </Tabs.Tab>
-      </Tabs> */}
+        </SegmentedTabs.Tab>
+      </SegmentedTabs> */}
 
       <Feed type={feed} />
     </section>

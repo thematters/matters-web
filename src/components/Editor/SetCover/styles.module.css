@@ -1,7 +1,3 @@
-.container {
-  padding: var(--spacing-base);
-}
-
 .uploader {
   display: block;
   padding: var(--spacing-x-tight) var(--spacing-base);

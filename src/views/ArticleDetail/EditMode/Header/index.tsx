@@ -1,9 +1,9 @@
 import { normalizeArticleHTML } from '@matters/matters-editor'
 import { useEffect, useRef } from 'react'
 
-import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
+import { MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
 import { measureDiffs, stripHtml } from '~/common/utils'
-import { Button, TextIcon, Translate, useMutation } from '~/components'
+import { Button, TextIcon, toast, Translate, useMutation } from '~/components'
 import {
   ConfirmStepContentProps,
   EditorSettingsDialog,
@@ -104,26 +104,21 @@ const EditModeHeader = ({
         onSaved()
       }
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: isContentRevised ? (
-              <Translate
-                zh_hant="發布失敗"
-                zh_hans="發布失敗"
-                en="failed to republish"
-              />
-            ) : (
-              <Translate
-                zh_hant="保存失敗"
-                zh_hans="保存失敗"
-                en="failed to save"
-              />
-            ),
-          },
-        })
-      )
+      toast.error({
+        message: isContentRevised ? (
+          <Translate
+            zh_hant="發布失敗"
+            zh_hans="發布失敗"
+            en="failed to republish"
+          />
+        ) : (
+          <Translate
+            zh_hant="保存失敗"
+            zh_hans="保存失敗"
+            en="failed to save"
+          />
+        ),
+      })
     }
   }
 

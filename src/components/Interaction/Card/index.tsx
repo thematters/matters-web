@@ -18,7 +18,14 @@ import styles from './styles.module.css'
 
 export type CardBgColor = 'greyLighter' | 'white' | 'transparent' | 'none'
 export type CardBgHoverColor = 'greyLighter' | 'transparent' | 'none'
-export type CardSpacing = 0 | 'xtight' | 'tight' | 'base' | 'loose'
+export type CardSpacing =
+  | 0
+  | 'xtight'
+  | 'baseTight'
+  | 'tight'
+  | 'base'
+  | 'baseLoose'
+  | 'loose'
 export type CardBorderColor = 'greyLighter' | 'lineGreyLight' | 'green'
 export type CardBorderRadius = 'xtight' | 'xxtight' | 'base' | 'loose'
 
@@ -30,6 +37,9 @@ export interface CardProps {
 
   borderColor?: CardBorderColor
   borderRadius?: CardBorderRadius
+
+  textColor?: 'black' | 'greyDarker' | 'red'
+  textActiveColor?: 'black' | 'redDark'
 
   isActive?: boolean
   activeOutline?: 'auto'
@@ -60,6 +70,9 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
       borderColor,
       borderRadius,
+
+      textColor,
+      textActiveColor,
 
       isActive,
       activeOutline,
@@ -109,6 +122,13 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
       [styles.hasBorder]: !!borderColor || !!borderRadius,
       [styles.disabled]: disabled,
+      [styles[textColor ? `text${capitalizeFirstLetter(textColor)}` : '']]:
+        !!textColor,
+      [styles[
+        textActiveColor
+          ? `textActive${capitalizeFirstLetter(textActiveColor)}`
+          : ''
+      ]]: !!textActiveColor,
     })
     const ariaLabel =
       htmlHref || href

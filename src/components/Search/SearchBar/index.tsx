@@ -3,7 +3,12 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
-import { INPUT_DEBOUNCE, MAX_SEARCH_KEY_LENGTH, Z_INDEX } from '~/common/enums'
+import {
+  INPUT_DEBOUNCE,
+  KEYVALUE,
+  MAX_SEARCH_KEY_LENGTH,
+  Z_INDEX,
+} from '~/common/enums'
 import { getSearchType, toPath, translate } from '~/common/utils'
 import {
   Button,
@@ -39,7 +44,6 @@ const SearchButton = () => {
       type="submit"
       aria-label={intl.formatMessage({
         defaultMessage: 'Search',
-        description: '',
       })}
     >
       <IconSearch16 color="greyDark" />
@@ -80,11 +84,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   const textAriaLabel = intl.formatMessage({
     defaultMessage: 'Search',
-    description: '',
   })
   const textPlaceholder = intl.formatMessage({
     defaultMessage: 'Search',
-    description: '',
   })
 
   const searchTextInput = useRef<HTMLInputElement>(null)
@@ -115,37 +117,33 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     })
   }
 
-  useNativeEventListener(
-    'keydown',
-    (e: { code: string; preventDefault: () => void }) => {
-      if (e.code === 'ArrowUp') {
-        if (!showDropdown) return
+  useNativeEventListener('keydown', (event: KeyboardEvent) => {
+    if (event.code.toLowerCase() === KEYVALUE.arrowUp) {
+      if (!showDropdown) return
 
-        e.preventDefault()
-        const activeIndex = items.indexOf(activeItem)
-        if (activeIndex === 0) return
+      event.preventDefault()
+      const activeIndex = items.indexOf(activeItem)
+      if (activeIndex === 0) return
 
-        setActiveItem(items[activeIndex - 1])
-      }
+      setActiveItem(items[activeIndex - 1])
+    }
 
-      if (e.code === 'ArrowDown') {
-        if (!showDropdown) return
+    if (event.code.toLowerCase() === KEYVALUE.arrowDown) {
+      if (!showDropdown) return
 
-        e.preventDefault()
-        const activeIndex = items.indexOf(activeItem)
-        if (activeIndex === items.length - 1) return
+      event.preventDefault()
+      const activeIndex = items.indexOf(activeItem)
+      if (activeIndex === items.length - 1) return
 
-        setActiveItem(items[activeIndex + 1])
-      }
+      setActiveItem(items[activeIndex + 1])
+    }
 
-      if (e.code === 'Escape') {
-        if (!showDropdown) return
+    if (event.code.toLowerCase() === KEYVALUE.escape) {
+      if (!showDropdown) return
 
-        setShowDropdown(false)
-      }
-    },
-    true
-  )
+      setShowDropdown(false)
+    }
+  })
 
   useEffect(() => {
     if (
@@ -236,6 +234,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
         return (
           <Dropdown
+            focusLock={false}
             content={
               !isInSearch &&
               debouncedSearch && (
@@ -256,40 +255,42 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               )
             }
             trigger={undefined}
-            appendTo={typeof window !== 'undefined' ? document.body : undefined}
             placement="bottom-start"
             onClickOutside={closeDropdown}
             visible={showDropdown}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
-            <form
-              className={styles.form}
-              onSubmit={handleSubmit}
-              autoComplete="off"
-              action=""
-            >
-              <input
-                // FIMXME: FOUC on re-render
-                style={{ borderColor: 'var(--color-line-grey-light)' }}
-                type="search"
-                name="q"
-                ref={searchTextInput}
-                aria-label={textAriaLabel}
-                placeholder={textPlaceholder}
-                value={values.q}
-                onChange={(e) => {
-                  handleChange(e)
-                  setSearch(e.target.value)
-                  resetActiveItem()
-                  openDropdown()
-                }}
-                onFocus={openDropdown}
-                onClick={openDropdown}
-                maxLength={MAX_SEARCH_KEY_LENGTH}
-              />
+            {({ ref }) => (
+              <form
+                className={styles.form}
+                onSubmit={handleSubmit}
+                autoComplete="off"
+                action=""
+                ref={ref}
+              >
+                <input
+                  // FIMXME: FOUC on re-render
+                  style={{ borderColor: 'var(--color-line-grey-light)' }}
+                  type="search"
+                  name="q"
+                  ref={searchTextInput}
+                  aria-label={textAriaLabel}
+                  placeholder={textPlaceholder}
+                  value={values.q}
+                  onChange={(e) => {
+                    handleChange(e)
+                    setSearch(e.target.value)
+                    resetActiveItem()
+                    openDropdown()
+                  }}
+                  onFocus={openDropdown}
+                  onClick={openDropdown}
+                  maxLength={MAX_SEARCH_KEY_LENGTH}
+                />
 
-              <SearchButton />
-            </form>
+                <SearchButton />
+              </form>
+            )}
           </Dropdown>
         )
       }}

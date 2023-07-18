@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useEffect } from 'react'
 
-import { Toast, Translate } from '~/components'
+import { Layout, Translate } from '~/components'
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
 import {
   DraftPublishStateQuery,
@@ -28,7 +28,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   }, [])
 
   return (
-    <Toast.Instance
+    <Layout.Notice
       color="green"
       content={<Translate id="publishing" />}
       subDescription={

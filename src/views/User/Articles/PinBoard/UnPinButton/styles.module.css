@@ -1,0 +1,14 @@
+.unpin {
+  @mixin transition;
+
+  width: 1.75rem;
+  height: 1.75rem;
+  background-color: rgb(0 0 0 / 40%);
+  border-radius: 50%;
+  transition-property: background-color;
+
+  &:hover,
+  &:focus {
+    background-color: rgb(0 0 0 / 100%);
+  }
+}

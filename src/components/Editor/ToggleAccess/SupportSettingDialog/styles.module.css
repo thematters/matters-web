@@ -30,15 +30,20 @@
   }
 }
 
-.contentInput {
-  @mixin flex-center-start;
+.tabs {
+  margin: 0 calc(var(--spacing-base) * -1);
 
-  flex-direction: column;
-  margin-top: calc(var(--spacing-base) * -1);
+  @media (--md-up) {
+    margin: 0;
+  }
 }
 
-.preview {
-  padding: var(--spacing-base);
+.form {
+  margin: 0;
+
+  @media (--md-up) {
+    margin: 0 calc(var(--spacing-base) * -1);
+  }
 }
 
 .previewResponse {

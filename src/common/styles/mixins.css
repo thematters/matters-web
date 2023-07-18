@@ -240,7 +240,7 @@
   }
 
   & .left {
-    color: var(--color-grey-dark);
+    color: var(--color-grey);
 
     & > * + * {
       margin-left: var(--spacing-base);

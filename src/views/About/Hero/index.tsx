@@ -22,6 +22,7 @@ import {
   withIcon,
 } from '~/components'
 
+import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Hero = () => {
@@ -66,60 +67,58 @@ const Hero = () => {
   return (
     <section className={styles.hero} style={style}>
       <header className={styles.logo}>
-        <div className="l-container">
-          <div className="l-row">
-            <div className="l-col-full">
-              <Link href={PATHS.HOME} legacyBehavior>
-                <a>
-                  <VisuallyHidden>
-                    <span>{translate({ id: 'discover', lang })}</span>
-                  </VisuallyHidden>
-                  <IconLogo />
-                </a>
-              </Link>
-            </div>
+        <div className={layoutStyles.container}>
+          <div className={layoutStyles.content}>
+            <Link href={PATHS.HOME} legacyBehavior>
+              <a>
+                <VisuallyHidden>
+                  <span>{translate({ id: 'discover', lang })}</span>
+                </VisuallyHidden>
+                <IconLogo />
+              </a>
+            </Link>
           </div>
         </div>
       </header>
 
-      <div className="l-container">
-        <div className="l-row">
-          <div className="l-col-full">
-            <section className={styles.slogan}>
-              <section>
-                <h2>
-                  <Translate
-                    zh_hant="去中心化的"
-                    zh_hans="去中心化的"
-                    en="The Future of Web3 is&nbsp;"
-                  />
-                  <br />
-                  <Translate
-                    zh_hant="創作社群與內容生態"
-                    zh_hans="创作社群与内容生态"
-                    en="at Matters"
-                  />
-                </h2>
+      <div className={layoutStyles.container}>
+        <div className={layoutStyles.content}>
+          <section
+            className={[layoutStyles.columnFull, styles.slogan].join(' ')}
+          >
+            <section>
+              <h2>
+                <Translate
+                  zh_hant="去中心化的"
+                  zh_hans="去中心化的"
+                  en="The Future of Web3 is&nbsp;"
+                />
+                <br />
+                <Translate
+                  zh_hant="創作社群與內容生態"
+                  zh_hans="创作社群与内容生态"
+                  en="at Matters"
+                />
+              </h2>
 
-                <Button
-                  size={[null, '2.25rem']}
-                  spacing={[0, 'base']}
-                  bgColor="green"
-                  href={PATHS.HOME}
-                >
-                  <TextIcon color="white" weight="md">
-                    <Translate
-                      zh_hant="開始創作"
-                      zh_hans="开始创作"
-                      en="Start Creating"
-                    />
-                  </TextIcon>
-                </Button>
-              </section>
-
-              <div className={styles.ilusCity} />
+              <Button
+                size={[null, '2.25rem']}
+                spacing={[0, 'base']}
+                bgColor="green"
+                href={PATHS.HOME}
+              >
+                <TextIcon color="white" weight="md">
+                  <Translate
+                    zh_hant="開始創作"
+                    zh_hans="开始创作"
+                    en="Start Creating"
+                  />
+                </TextIcon>
+              </Button>
             </section>
-          </div>
+
+            <div className={styles.ilusCity} />
+          </section>
         </div>
       </div>
 

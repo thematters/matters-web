@@ -8,19 +8,17 @@ import Item from './Item'
 import styles from './styles.module.css'
 
 interface MenuProps {
-  width?: 'sm' | 'md'
-  spacingY?: 'xtight' | 0
+  width?: 'md'
 }
 
 export const Menu: React.FC<React.PropsWithChildren<MenuProps>> & {
   Item: typeof Item
   Divider: typeof Divider
   Header: typeof Header
-} = ({ width, spacingY = 'xtight', children }) => {
+} = ({ width, children }) => {
   const menuClasses = classNames({
     [styles.menu]: true,
     [width ? styles[`width${capitalizeFirstLetter(width)}`] : '']: !!width,
-    [styles[`spacingY${capitalizeFirstLetter(spacingY + '')}`]]: !!spacingY,
   })
 
   return (

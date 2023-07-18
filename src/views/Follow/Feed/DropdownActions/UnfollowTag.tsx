@@ -2,11 +2,10 @@ import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
 import {
   IconRemove24,
   Menu,
-  TextIcon,
+  toast,
   Translate,
   useMutation,
   ViewerContext,
@@ -58,31 +57,26 @@ const UnfollowTagActionButton = ({ tag }: UnfollowTagActionButtonProps) => {
 
   return (
     <Menu.Item
-      onClick={async () => {
-        await unfollow()
-
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <Translate
-                  zh_hant={`已取消追蹤 #${tag.content}`}
-                  zh_hans={`已取消追踪 #${tag.content}`}
-                />
-              ),
-            },
-          })
-        )
-      }}
-    >
-      <TextIcon icon={<IconRemove24 size="md" />} size="md" spacing="base">
+      text={
         <Translate
           zh_hant={`取消追蹤 #${tag.content}`}
           zh_hans={`取消追踪 #${tag.content}`}
         />
-      </TextIcon>
-    </Menu.Item>
+      }
+      icon={<IconRemove24 size="mdS" />}
+      onClick={async () => {
+        await unfollow()
+
+        toast.success({
+          message: (
+            <Translate
+              zh_hant={`已取消追蹤 #${tag.content}`}
+              zh_hans={`已取消追踪 #${tag.content}`}
+            />
+          ),
+        })
+      }}
+    />
   )
 }
 

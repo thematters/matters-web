@@ -1,12 +1,12 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
 import {
   Button,
   IconAvatarEmpty24,
   TagAdoptionDialog,
   TextIcon,
+  toast,
   UserDigest,
   ViewerContext,
 } from '~/components'
@@ -18,19 +18,11 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
   const viewer = useContext(ViewerContext)
 
   const forbid = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: (
-            <FormattedMessage
-              defaultMessage="You do not have permission to perform this operation"
-              description=""
-            />
-          ),
-        },
-      })
-    )
+    toast.error({
+      message: (
+        <FormattedMessage defaultMessage="You do not have permission to perform this operation" />
+      ),
+    })
   }
 
   if (!tag) {

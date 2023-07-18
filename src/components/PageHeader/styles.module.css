@@ -1,10 +1,8 @@
 .header {
-  @mixin border-bottom-grey;
-
   padding-bottom: var(--spacing-x-tight);
 
-  &.hasNoBorder {
-    border: none;
+  &.hasBorder {
+    @mixin border-bottom-grey;
   }
 }
 

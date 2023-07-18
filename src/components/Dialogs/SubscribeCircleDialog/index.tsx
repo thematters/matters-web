@@ -52,7 +52,7 @@ const BaseSubscribeCircleDialog = ({
     <>
       {children && children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent
           closeDialog={closeDialog}
           forward={forward}

@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
-import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   toPath,
@@ -19,6 +19,7 @@ import {
   Form,
   LanguageContext,
   Layout,
+  toast,
   useMutation,
 } from '~/components'
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
@@ -103,24 +104,19 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           },
         })
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: isCreate ? (
-                <FormattedMessage
-                  defaultMessage="Circle successfully created"
-                  description="src/components/Forms/CreateCircleForm/Profile.tsx"
-                />
-              ) : (
-                <FormattedMessage
-                  description="src/components/Forms/CreateCircleForm/Profile.tsx"
-                  defaultMessage="Circle Edited"
-                />
-              ),
-            },
-          })
-        )
+        toast.success({
+          message: isCreate ? (
+            <FormattedMessage
+              defaultMessage="Circle successfully created"
+              description="src/components/Forms/CreateCircleForm/Profile.tsx"
+            />
+          ) : (
+            <FormattedMessage
+              description="src/components/Forms/CreateCircleForm/Profile.tsx"
+              defaultMessage="Circle Edited"
+            />
+          ),
+        })
 
         if (data?.putCircle) {
           const path = toPath({ page: 'circleDetail', circle: data.putCircle })
@@ -157,10 +153,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           />
 
           <p className={styles.hint}>
-            <FormattedMessage
-              defaultMessage="Recommended size: 1600px x 900px"
-              description=""
-            />
+            <FormattedMessage defaultMessage="Recommended size: 1600px x 900px" />
           </p>
         </section>
 
@@ -187,7 +180,6 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
               required
               placeholder={intl.formatMessage({
                 defaultMessage: 'Enter the name of your Circle',
-                description: '',
               })}
               value={values.displayName}
               error={touched.displayName && errors.displayName}
@@ -210,12 +202,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
               defaultMessage: 'Describe more about your Circle',
               description: 'src/components/Forms/CreateCircleForm/Profile.tsx',
             })}
-            hint={
-              <FormattedMessage
-                defaultMessage="Maximum 200 characters."
-                description=""
-              />
-            }
+            hint={<FormattedMessage defaultMessage="Maximum 200 characters." />}
             value={values.description}
             error={touched.description && errors.description}
             onBlur={handleBlur}
@@ -226,12 +213,12 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
     </section>
   )
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
+  const SubmitButton = () => (
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Save" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
@@ -244,7 +231,13 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           right={
             <>
               <span />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<FormattedMessage defaultMessage="Confirm" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
@@ -255,15 +248,27 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title={titleId}
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title={titleId}
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

@@ -5,7 +5,7 @@ import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
-import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import { parseFormSubmitErrors, validateDisplayName } from '~/common/utils'
 import {
   AvatarUploader,
@@ -13,6 +13,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  toast,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -76,6 +77,8 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
   const isAdmin = viewer.status?.role === 'admin'
+  const maxDisplayName = 20
+  const maxDescription = 140
 
   const formId = 'edit-profile-form'
 
@@ -84,7 +87,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     if (!value) {
       return intl.formatMessage({
         defaultMessage: 'Required',
-        description: '',
       })
     } else if (value.length > 200) {
       return intl.formatMessage(
@@ -138,19 +140,14 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           },
         })
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <FormattedMessage
-                  defaultMessage="Profile updated"
-                  description="src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
-                />
-              ),
-            },
-          })
-        )
+        toast.success({
+          message: (
+            <FormattedMessage
+              defaultMessage="Profile updated"
+              description="src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
+            />
+          ),
+        })
 
         setSubmitting(false)
         closeDialog()
@@ -165,7 +162,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
               intl.formatMessage({
                 defaultMessage:
                   'Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.',
-                description: '',
               })
             )
           } else {
@@ -190,13 +186,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           inEditor
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}
         />
-
-        <p className={styles.hint}>
-          <FormattedMessage
-            defaultMessage="Recommended size: 1600px x 900px"
-            description=""
-          />
-        </p>
       </section>
 
       <section className={styles.avatarField}>
@@ -216,46 +205,30 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
 
       <section className={styles.container}>
         <Form.Input
-          label={
-            <FormattedMessage defaultMessage="Display Name" description="" />
-          }
           type="text"
           name="displayName"
           required
           placeholder={intl.formatMessage({
-            defaultMessage: 'Enter Display Name',
-            description: '',
+            defaultMessage: 'Name',
           })}
-          hint={
-            <FormattedMessage
-              defaultMessage="Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed."
-              description=""
-            />
-          }
+          hint={`${values.displayName.length}/${maxDisplayName}`}
           value={values.displayName}
           error={touched.displayName && errors.displayName}
           onBlur={handleBlur}
           onChange={handleChange}
+          maxLength={maxDisplayName}
         />
       </section>
 
       <section className={styles.container}>
         <Form.Textarea
-          label={
-            <FormattedMessage defaultMessage="Description" description="" />
-          }
           name="description"
           required
           placeholder={intl.formatMessage({
-            defaultMessage: 'Enter Bio',
-            description: '',
+            defaultMessage: 'Bio',
           })}
-          hint={
-            <FormattedMessage
-              defaultMessage="Maximum 200 characters."
-              description=""
-            />
-          }
+          hint={`${values.description.length}/${maxDescription}`}
+          maxLength={maxDescription}
           value={values.description}
           error={touched.description && errors.description}
           onBlur={handleBlur}
@@ -265,12 +238,12 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     </Form>
   )
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
+  const SubmitButton = () => (
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Save" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
@@ -280,10 +253,24 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       <Dialog.Header
         title="editUserProfile"
         closeDialog={closeDialog}
-        rightButton={SubmitButton}
+        rightBtn={<SubmitButton />}
+        hasSmUpTitle={false}
       />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

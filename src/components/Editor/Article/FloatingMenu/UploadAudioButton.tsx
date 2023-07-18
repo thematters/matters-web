@@ -6,7 +6,6 @@ import { useContext, useState } from 'react'
 import { ReactComponent as IconEditorMenuAudio } from '@/public/static/icons/32px/editor-menu-audio.svg'
 import {
   ACCEPTED_UPLOAD_AUDIO_TYPES,
-  ADD_TOAST,
   ASSET_TYPE,
   UPLOAD_AUDIO_SIZE_LIMIT,
 } from '~/common/enums'
@@ -14,6 +13,7 @@ import { translate } from '~/common/utils'
 import {
   IconSpinner16,
   LanguageContext,
+  toast,
   Translate,
   withIcon,
 } from '~/components'
@@ -54,20 +54,16 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
     event.target.value = ''
 
     if (file?.size > UPLOAD_AUDIO_SIZE_LIMIT) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant="上傳檔案超過 100 MB"
-                zh_hans="上传文件超过 100 MB"
-                en="upload file size exceeds 100 MB"
-              />
-            ),
-          },
-        })
-      )
+      toast.error({
+        message: (
+          <Translate
+            zh_hant="上傳檔案超過 100 MB"
+            zh_hans="上传文件超过 100 MB"
+            en="upload file size exceeds 100 MB"
+          />
+        ),
+      })
+
       return
     }
 
@@ -82,35 +78,25 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
         .setFigureAudio({ src: path, title: fileName })
         .run()
 
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: (
-              <Translate
-                zh_hant="音訊上傳成功"
-                zh_hans="音频上传成功"
-                en="Audio upload successfully"
-              />
-            ),
-          },
-        })
-      )
+      toast.success({
+        message: (
+          <Translate
+            zh_hant="音訊上傳成功"
+            zh_hans="音频上传成功"
+            en="Audio upload successfully"
+          />
+        ),
+      })
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant="音訊上傳失敗"
-                zh_hans="音频上传失败"
-                en="Failed to upload, please try again."
-              />
-            ),
-          },
-        })
-      )
+      toast.error({
+        message: (
+          <Translate
+            zh_hant="音訊上傳失敗"
+            zh_hans="音频上传失败"
+            en="Failed to upload, please try again."
+          />
+        ),
+      })
     }
 
     setUploading(false)
