@@ -26,6 +26,7 @@ import styles from './styles.module.css'
 export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
+  hasHeader?: boolean
   hasFollow?: boolean
   hasCircle?: boolean
   hasAuthor?: boolean
@@ -46,6 +47,7 @@ const BaseArticleDigestFeed = ({
   date,
 
   hasFollow,
+  hasHeader = true,
   hasCircle = true,
   hasAuthor = true,
   onClick,
@@ -114,24 +116,26 @@ const BaseArticleDigestFeed = ({
       bgActiveColor="none"
       is={is}
     >
-      <header className={styles.header}>
-        {hasAuthor && (
-          <>
-            <section className={styles.author}>
-              <UserDigest.Mini
-                user={author}
-                avatarSize="sm"
-                textSize="xs"
-                hasAvatar
-                hasDisplayName
-                onClick={onClickAuthor}
-              />
-              <IconDotDivider color="greyLight" size="mdS" />
-            </section>
-          </>
-        )}
-        <DateTime date={article.createdAt} color="grey" />
-      </header>
+      {hasHeader && (
+        <header className={styles.header}>
+          {hasAuthor && (
+            <>
+              <section className={styles.author}>
+                <UserDigest.Mini
+                  user={author}
+                  avatarSize="sm"
+                  textSize="xs"
+                  hasAvatar
+                  hasDisplayName
+                  onClick={onClickAuthor}
+                />
+                <IconDotDivider color="greyLight" size="mdS" />
+              </section>
+            </>
+          )}
+          <DateTime date={article.createdAt} color="grey" />
+        </header>
+      )}
       <section className={styles.container}>
         <section className={styles.content}>
           <section className={styles.head}>

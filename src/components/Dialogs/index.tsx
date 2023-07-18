@@ -16,6 +16,7 @@ export * from './SupportersDialog'
 // Collection
 export * from './AddCollectionDialog'
 export * from './AddCollectionsArticleDialog'
+export * from './RemoveArticleCollectionDialog'
 
 // Editor
 export * from './EditorSearchSelectDialog'

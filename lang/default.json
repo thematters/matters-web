@@ -2,8 +2,16 @@
   "+7SAix": {
     "defaultMessage": "Must be between 2-12 characters long."
   },
+  "+S8mxW": {
+    "defaultMessage": "Move to top",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
+  },
   "+a+2ug": {
     "defaultMessage": "Members"
+  },
+  "+cS08C": {
+    "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
+    "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
   "/3kw6k": {
     "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
@@ -30,6 +38,9 @@
     "defaultMessage": "Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress.",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
+  "0Om2Kl": {
+    "defaultMessage": "Remove from collection"
+  },
   "0ThOw1": {
     "defaultMessage": "Create collection",
     "description": "src/views/User/Collections/UserCollections.tsx"
@@ -51,6 +62,9 @@
   },
   "20bImY": {
     "defaultMessage": "Discussion"
+  },
+  "25oM9Q": {
+    "defaultMessage": "Sort"
   },
   "2CqWQE": {
     "defaultMessage": "Total",
@@ -463,6 +477,10 @@
     "defaultMessage": "Paywalled",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
+  "LQxY1o": {
+    "defaultMessage": "{articleCount} Articles",
+    "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
+  },
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -590,16 +608,20 @@
   "U86B6w": {
     "defaultMessage": "Stats"
   },
-  "U9IXic": {
-    "defaultMessage": "Add Articles",
-    "description": "src/views/Circle/Profile/AddCircleArticle/Button.tsx"
-  },
   "UNUROl": {
     "defaultMessage": "Maximum 200 characters."
   },
   "UOdEqi": {
     "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "URljhZ": {
+    "defaultMessage": "Successfully removed",
+    "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "Udp4Bm": {
+    "defaultMessage": "Move to bottom",
+    "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
   "UjKkhq": {
     "defaultMessage": "Tags added",
@@ -895,8 +917,15 @@
     "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
+  "k97/u7": {
+    "defaultMessage": "Add Articles"
+  },
   "kc79d3": {
     "defaultMessage": "Topics"
+  },
+  "kkZioy": {
+    "defaultMessage": "Remove",
+    "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
   "lD4FPZ": {
     "defaultMessage": "Enter Email"

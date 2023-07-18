@@ -234,7 +234,7 @@ type ArticleFeedType =
   | 'related_donations'
   | 'circle_detail'
 
-type CollectionFeedType = 'user_collection'
+type CollectionFeedType = 'user_collection' | 'collection_article'
 
 type CommentFeedType =
   //  'follow-comment' |

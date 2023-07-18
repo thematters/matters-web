@@ -24,10 +24,7 @@ const AddArticlesButton = ({ circle }: AddArticlesButtonProps) => {
           aria-haspopup="dialog"
         >
           <TextIcon icon={<IconPen16 />} weight="md" size="mdS">
-            <FormattedMessage
-              defaultMessage="Add Articles"
-              description="src/views/Circle/Profile/AddCircleArticle/Button.tsx"
-            />
+            <FormattedMessage defaultMessage="Add Articles" />
           </TextIcon>
         </Button>
       )}

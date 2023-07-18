@@ -14,6 +14,7 @@ import {
   IconSize,
   LanguageContext,
   Menu,
+  RemoveArticleCollectionDialog,
   ShareDialog,
   SupportersDialog,
   toast,
@@ -31,9 +32,12 @@ import ExtendButton from './ExtendButton'
 import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
 import PinButton from './PinButton'
+import RemoveArticleCollectionButton from './RemoveArticleCollectionButton'
 import RemoveTagButton from './RemoveTagButton'
+import SetBottomCollectionButton from './SetBottomCollectionButton'
 import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
+import SetTopCollectionButton from './SetTopCollectionButton'
 import ShareButton from './ShareButton'
 import styles from './styles.module.css'
 
@@ -63,7 +67,18 @@ export interface DropdownActionsControls {
   hasArchive?: boolean
   hasEdit?: boolean
   hasBookmark?: boolean
+
+  collectionId?: string
+  collectionArticleCount?: number
   hasAddCollection?: boolean
+  hasRemoveCollection?: boolean
+  hasSetTopCollection?: boolean
+  hasSetBottomCollection?: boolean
+  onSetTopCollection?: () => void
+  onSetBottomCollection?: () => void
+  onRemoveCollection?: () => void
+
+  morePublicActions?: React.ReactNode
 }
 
 type DropdownActionsProps = {
@@ -89,13 +104,17 @@ interface DialogProps {
   openSupportersDialog: () => void
   openArchiveDialog: () => void
   openAddCollectionsArticleDialog: () => void
+  openRemoveArticleCollectionDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 
 const BaseDropdownActions = ({
   article,
+
   tagDetailId,
+  collectionId,
+  collectionArticleCount,
 
   icon,
   size,
@@ -114,6 +133,9 @@ const BaseDropdownActions = ({
   hasEdit,
   hasBookmark,
   hasAddCollection,
+  hasRemoveCollection,
+  hasSetTopCollection,
+  hasSetBottomCollection,
 
   openShareDialog,
   openFingerprintDialog,
@@ -121,6 +143,10 @@ const BaseDropdownActions = ({
   openSupportersDialog,
   openArchiveDialog,
   openAddCollectionsArticleDialog,
+  openRemoveArticleCollectionDialog,
+  onSetBottomCollection,
+  onSetTopCollection,
+  onRemoveCollection,
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
 
@@ -171,6 +197,39 @@ const BaseDropdownActions = ({
 
       {hasArchive && <Menu.Divider />}
       {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
+
+      {(hasSetTopCollection || hasSetBottomCollection) &&
+        collectionId &&
+        collectionArticleCount && (
+          <>
+            <Menu.Divider />
+            {hasSetTopCollection && onSetTopCollection && (
+              <SetTopCollectionButton
+                articleId={article.id}
+                collectionId={collectionId}
+                onClick={onSetTopCollection}
+              />
+            )}
+            {hasSetBottomCollection && onSetBottomCollection && (
+              <SetBottomCollectionButton
+                articleId={article.id}
+                collectionId={collectionId}
+                collectionArticleCount={collectionArticleCount}
+                onClick={onSetBottomCollection}
+              />
+            )}
+          </>
+        )}
+
+      {hasRemoveCollection && onRemoveCollection && (
+        <>
+          <Menu.Divider />
+          <RemoveArticleCollectionButton
+            onClick={onRemoveCollection}
+            openDialog={openRemoveArticleCollectionDialog}
+          />
+        </>
+      )}
     </Menu>
   )
 
@@ -209,6 +268,7 @@ const BaseDropdownActions = ({
 const DropdownActions = (props: DropdownActionsProps) => {
   const {
     article,
+    collectionId,
 
     hasShare,
     hasFingerprint = true,
@@ -225,6 +285,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasArchive,
     hasBookmark = true,
     hasAddCollection,
+    hasRemoveCollection,
+    hasSetTopCollection,
+    hasSetBottomCollection,
   } = props
   const viewer = useContext(ViewerContext)
 
@@ -260,6 +323,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasEdit: !!hasEdit && isActive && isArticleAuthor,
     hasBookmark: !!hasBookmark,
     hasAddCollection: hasAddCollection && isActive && isArticleAuthor,
+    hasRemoveCollection: hasRemoveCollection && isActive && isArticleAuthor,
+    hasSetTopCollection: hasSetTopCollection && isActive && isArticleAuthor,
+    hasSetBottomCollection:
+      hasSetBottomCollection && isActive && isArticleAuthor,
   }
 
   if (_isEmpty(_pickBy(controls))) {
@@ -281,20 +348,35 @@ const DropdownActions = (props: DropdownActionsProps) => {
                           {({
                             openDialog: openAddCollectionsArticleDialog,
                           }) => (
-                            <BaseDropdownActions
-                              {...props}
-                              {...controls}
-                              openShareDialog={openShareDialog}
-                              openFingerprintDialog={openFingerprintDialog}
-                              openAppreciatorsDialog={openAppreciatorsDialog}
-                              openSupportersDialog={openSupportersDialog}
-                              openArchiveDialog={
-                                viewer.isFrozen ? forbid : openArchiveDialog
-                              }
-                              openAddCollectionsArticleDialog={
-                                openAddCollectionsArticleDialog
-                              }
-                            />
+                            <RemoveArticleCollectionDialog
+                              articleId={article.id}
+                              articleTitle={article.title}
+                              collectionId={collectionId || ''}
+                            >
+                              {({
+                                openDialog: openRemoveArticleCollectionDialog,
+                              }) => (
+                                <BaseDropdownActions
+                                  {...props}
+                                  {...controls}
+                                  openShareDialog={openShareDialog}
+                                  openFingerprintDialog={openFingerprintDialog}
+                                  openAppreciatorsDialog={
+                                    openAppreciatorsDialog
+                                  }
+                                  openSupportersDialog={openSupportersDialog}
+                                  openArchiveDialog={
+                                    viewer.isFrozen ? forbid : openArchiveDialog
+                                  }
+                                  openAddCollectionsArticleDialog={
+                                    openAddCollectionsArticleDialog
+                                  }
+                                  openRemoveArticleCollectionDialog={
+                                    openRemoveArticleCollectionDialog
+                                  }
+                                />
+                              )}
+                            </RemoveArticleCollectionDialog>
                           )}
                         </AddCollectionsArticleDialog>
                       )}

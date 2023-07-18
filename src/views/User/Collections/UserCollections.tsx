@@ -162,6 +162,7 @@ const UserCollections = () => {
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
         loader={<Placeholder />}
+        eof
       >
         <List responsiveWrapper>
           {edges.map(({ node, cursor }, i) => (
