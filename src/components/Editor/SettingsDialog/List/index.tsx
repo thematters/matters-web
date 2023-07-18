@@ -57,7 +57,19 @@ const SettingsList = ({
 
   return (
     <>
-      <Dialog.Header title={<Translate id="settings" />} />
+      <Dialog.Header
+        title={<Translate id="settings" />}
+        closeDialog={cancelButtonText ? closeDialog : undefined}
+        closeText={cancelButtonText || undefined}
+        rightBtn={
+          <Dialog.TextButton
+            text={confirmButtonText}
+            onClick={onConfirm ? onConfirm : () => forward('confirm')}
+            loading={saving}
+            disabled={disabled}
+          />
+        }
+      />
 
       <Dialog.Content>
         <ul className={styles.container} role="list">
@@ -103,23 +115,20 @@ const SettingsList = ({
       {(confirmButtonText || cancelButtonText) && (
         <Dialog.Footer
           noSpacing={false}
-          closeDialog={cancelButtonText ? closeDialog : undefined}
-          closeText={cancelButtonText || undefined}
-          btns={
-            <Dialog.RoundedButton
-              text={confirmButtonText}
-              onClick={onConfirm ? onConfirm : () => forward('confirm')}
-              loading={saving}
-              disabled={disabled}
-            />
-          }
           smUpBtns={
-            <Dialog.TextButton
-              text={confirmButtonText}
-              onClick={onConfirm ? onConfirm : () => forward('confirm')}
-              loading={saving}
-              disabled={disabled}
-            />
+            <>
+              <Dialog.TextButton
+                text={cancelButtonText}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+              <Dialog.TextButton
+                text={confirmButtonText}
+                onClick={onConfirm ? onConfirm : () => forward('confirm')}
+                loading={saving}
+                disabled={disabled}
+              />
+            </>
           }
         />
       )}
