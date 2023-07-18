@@ -129,7 +129,7 @@ export const UserProfile = () => {
     <section className={styles.userProfile} data-test-id={TEST_ID.USER_PROFILE}>
       <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
 
-      <Media at="sm">
+      <Media lessThan="lg">
         <header className={styles.header}>
           {isMe && (
             <EditProfileDialog user={user}>

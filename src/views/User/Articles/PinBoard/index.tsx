@@ -66,7 +66,7 @@ const PinBoard = ({ user }: PinBoardProps) => {
               )}
             >
               <a>
-                <Media at="sm">
+                <Media lessThan="lg">
                   <Book
                     {...work}
                     articleCount={
@@ -77,7 +77,7 @@ const PinBoard = ({ user }: PinBoardProps) => {
                     variant="flat"
                   />
                 </Media>
-                <Media greaterThan="sm">
+                <Media greaterThanOrEqual="lg">
                   <Book
                     {...work}
                     articleCount={
