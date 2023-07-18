@@ -57,19 +57,23 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
                 onClick={() => setFeed('trendy')}
                 selected={isTrendy}
               >
-                <Translate zh_hant="最受關注" zh_hans="最受关注" />
+                <Translate zh_hant="最受關注" zh_hans="最受关注" en="Trendy" />
               </SegmentedTabs.Tab>
               <SegmentedTabs.Tab
                 onClick={() => setFeed('appreciated')}
                 selected={isAppreciated}
               >
-                <Translate zh_hant="最受喜愛" zh_hans="最受喜爱" />
+                <Translate
+                  zh_hant="最受喜愛"
+                  zh_hans="最受喜爱"
+                  en="Appreciated"
+                />
               </SegmentedTabs.Tab>
               <SegmentedTabs.Tab
                 onClick={() => setFeed('active')}
                 selected={isActive}
               >
-                <Translate zh_hant="熱愛交流" zh_hans="热爱交流" />
+                <Translate zh_hant="熱愛交流" zh_hans="热爱交流" en="Active" />
               </SegmentedTabs.Tab>
             </SegmentedTabs>
           </section>

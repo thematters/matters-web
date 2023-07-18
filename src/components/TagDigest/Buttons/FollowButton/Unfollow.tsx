@@ -34,7 +34,8 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
 
   return (
     <Button
-      size={['3rem', '1.5rem']}
+      size={[null, '1.5rem']}
+      spacing={[0, 'tight']}
       textColor="white"
       bgColor="green"
       bgActiveColor="red"

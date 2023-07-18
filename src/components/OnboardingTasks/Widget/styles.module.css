@@ -1,10 +1,7 @@
 .header {
-  padding: var(--spacing-loose) var(--spacing-base) var(--spacing-loose);
-
   & section {
     margin-top: var(--spacing-tight);
     font-size: var(--font-size-sm-s);
-    line-height: var(--spacing-loose);
     color: var(--color-grey-darker);
 
     & .bold {

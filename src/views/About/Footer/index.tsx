@@ -247,27 +247,27 @@ const Footer = () => {
                   en="Subscribe to Us"
                 />
               </h2>
-              <div className={styles.buttons}>
-                <Button
-                  size={['100%', '2.5rem']}
-                  bgActiveColor="greyLighter"
-                  borderColor="white"
-                  textColor="white"
-                  textActiveColor="black"
-                  borderWidth="sm"
-                  htmlHref={`https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/signup`}
-                  htmlTarget="_blank"
-                  rel="noreferrer"
-                >
-                  <TextIcon size="md">
-                    <Translate
-                      zh_hant="註冊並訂閱每週 Newsletter"
-                      zh_hans="注册并订阅每周 Newsletter"
-                      en="Sign up for our weekly newsletter"
-                    />
-                  </TextIcon>
-                </Button>
-              </div>
+
+              <Button
+                size={['100%', '2.5rem']}
+                bgActiveColor="greyLighter"
+                borderColor="white"
+                textColor="white"
+                textActiveColor="black"
+                borderWidth="sm"
+                htmlHref={`https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/signup`}
+                htmlTarget="_blank"
+                rel="noreferrer"
+                className={styles.buttons}
+              >
+                <TextIcon size="md">
+                  <Translate
+                    zh_hant="註冊並訂閱每週 Newsletter"
+                    zh_hans="注册并订阅每周 Newsletter"
+                    en="Sign up for our weekly newsletter"
+                  />
+                </TextIcon>
+              </Button>
 
               <Media greaterThan="md">
                 <section className={styles.languageSwitch}>

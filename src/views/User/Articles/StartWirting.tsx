@@ -19,7 +19,8 @@ const StartWriting = () => {
   return (
     <section className={styles.startWriting}>
       <Button
-        size={['5.5rem', '2rem']}
+        size={[null, '2rem']}
+        spacing={[0, 'tight']}
         borderColor="green"
         borderActiveColor="green"
         borderWidth="md"
