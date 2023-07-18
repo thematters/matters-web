@@ -1,12 +1,11 @@
 .buttons {
   display: inline-flex;
+  gap: var(--spacing-base);
+  margin-top: var(--spacing-x-tight);
 
   @media (--sm-up) {
     padding-right: var(--spacing-base);
-  }
-
-  & > * + * {
-    margin-left: var(--spacing-base);
+    margin-top: var(--spacing-base);
   }
 }
 

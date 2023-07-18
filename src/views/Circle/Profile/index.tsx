@@ -92,26 +92,6 @@ const CircleProfile = () => {
    * Render
    */
 
-  const Right = () => (
-    <>
-      <span />
-      {circle && (
-        <section className={styles.buttons}>
-          <ShareButton
-            tags={
-              [
-                circle.displayName,
-                circle.name,
-                circle.owner.displayName,
-                // circle.owner.userName,
-              ].filter(Boolean) as string[]
-            }
-          />
-          <DropdownActions circle={circle} />
-        </section>
-      )}
-    </>
-  )
   const LayoutHeader = () => (
     <>
       {circle && (
@@ -142,7 +122,30 @@ const CircleProfile = () => {
           }}
         />
       )}
-      <Layout.Header right={<Right />} mode="transparent" />
+
+      <Layout.Header
+        right={
+          <>
+            <span />
+            {circle && (
+              <section className={styles.buttons}>
+                <ShareButton
+                  tags={
+                    [
+                      circle.displayName,
+                      circle.name,
+                      circle.owner.displayName,
+                      // circle.owner.userName,
+                    ].filter(Boolean) as string[]
+                  }
+                />
+                <DropdownActions circle={circle} />
+              </section>
+            )}
+          </>
+        }
+        mode="transparent"
+      />
     </>
   )
 

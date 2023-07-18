@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Media, Spacer } from '~/components'
+import { Media } from '~/components'
 
 import { RoundedButton, TextButton } from '../Buttons'
 import styles from './styles.module.css'
@@ -56,7 +56,7 @@ const Footer: React.FC<FooterProps> = ({
         {/* show bottom spacing for dialog if there is no buttons,
          * otherwise, the footer will be too close to the content
          */}
-        {!hasBtns && <Spacer size="xxloose" />}
+        {/* {!hasBtns && <Spacer size="xxloose" />} */}
       </Media>
 
       {hasSmUpBtns && (
