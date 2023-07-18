@@ -1,4 +1,5 @@
 import { FormikProvider } from 'formik'
+import { FormattedMessage } from 'react-intl'
 
 import { Form } from '~/components'
 import {
@@ -8,30 +9,48 @@ import {
 
 import styles from './styles.module.css'
 
-interface SelectDialogContentProps {
+interface SearchingDialogContentProps {
   formik: any
   user: UserArticlesUserFragment
   collection: CollectionDetailFragment
   checkingIds: string[]
+  searchValue: string
   formId: string
 }
 
-const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
+const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
   formik,
   user,
   collection,
   checkingIds,
+  searchValue,
   formId,
 }) => {
-  const articles = user.articles
+  const articles = user?.articles
+  const activeArticles =
+    articles?.edges?.filter(({ node }) => node.state === 'active') || []
 
   const hasAddedArticlesId =
     collection.articles.edges?.map(({ node }) => node.id) || []
-
   const hasCheckedEdges = articles?.edges?.filter(
     ({ node }) => hasAddedArticlesId.indexOf(node.id) !== -1
   )
   const hasChecked = hasCheckedEdges?.map(({ node }) => node.id) || []
+
+  const searchingEdges = activeArticles.filter(({ node }) =>
+    node.title.includes(searchValue)
+  )
+
+  if (searchingEdges.length === 0) {
+    return (
+      <section className={styles.emptyResult}>
+        <FormattedMessage
+          defaultMessage="No results"
+          description="src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
+        />
+      </section>
+    )
+  }
 
   return (
     <section className={styles.formContainer}>
@@ -41,7 +60,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
           onSubmit={formik.handleSubmit}
           className={styles.listForm}
         >
-          {articles?.edges?.map(
+          {searchingEdges.map(
             ({ node }) =>
               node.state === 'active' && (
                 <section key={node.id} className={styles.item}>
@@ -56,6 +75,17 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
                     disabled={hasChecked.includes(node.id)}
                     {...formik.getFieldProps('checked')}
                     value={node.id}
+                    content={(() => {
+                      const index = node.title.indexOf(searchValue)
+                      const content = (
+                        <>
+                          {node.title.slice(0, index)}
+                          <span className="u-highlight">{searchValue}</span>
+                          {node.title.slice(index + searchValue.length)}
+                        </>
+                      )
+                      return content
+                    })()}
                   />
                   {checkingIds.includes(node.id) && (
                     <div className={styles.index}>
@@ -71,4 +101,4 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   )
 }
 
-export default SelectDialogContent
+export default SearchingDialogContent

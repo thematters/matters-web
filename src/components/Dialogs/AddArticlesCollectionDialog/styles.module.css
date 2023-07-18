@@ -12,6 +12,7 @@
 }
 
 .formContainer {
+  height: 23.375rem;
   margin: 0 var(--spacing-base-loose);
 
   & :global(form) {
@@ -19,18 +20,10 @@
   }
 
   & .listForm {
-    @mixin border-bottom-grey;
-
-    max-height: 22.5rem;
-    padding-bottom: var(--spacing-tight);
-    margin-bottom: var(--spacing-tight);
-    overflow-y: auto;
-
     & .item {
       @mixin flex-center-space-between;
 
       gap: var(--spacing-x-tight);
-      margin: var(--spacing-base) 0;
 
       & .index {
         @mixin flex-center-all;
@@ -43,5 +36,18 @@
         border-radius: 1.25rem;
       }
     }
+
+    & .item + .item {
+      margin-top: var(--spacing-base);
+    }
   }
+}
+
+.emptyResult {
+  @mixin flex-start-center;
+
+  height: 23.375rem;
+  padding: var(--spacing-x-tight) var(--spacing-base-loose);
+  font-size: var(--font-size-sm);
+  color: var(--color-grey);
 }

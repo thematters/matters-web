@@ -162,6 +162,10 @@
     "defaultMessage": "确认删除后，{commentType}会立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
+  "7jjWxF": {
+    "defaultMessage": "无结果",
+    "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
+  },
   "7xnrxG": {
     "defaultMessage": "作品已添加至精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"

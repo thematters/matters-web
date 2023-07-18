@@ -1,20 +1,29 @@
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Dialog,
-  // Spinner,
-  // toast,
+  QueryError,
+  Spinner,
   useDialogSwitch,
   useMutation,
+  usePublicQuery,
+  useRoute,
 } from '~/components'
 import updateUserCollectionDetail from '~/components/GQL/updates/userCollectionDetail'
 import {
   AddArticlesCollectionMutation,
+  AddArticlesCollectionUserPublicQuery,
   CollectionDetailFragment,
 } from '~/gql/graphql'
 
-import { ADD_ARTICLES_COLLECTION } from './gql'
+import {
+  ADD_ARTICLES_COLLECTION,
+  ADD_ARTICLES_COLLECTION_USER_PUBLIC,
+} from './gql'
+import SearchingDialogContent from './SearchingDialogContent'
+import SearchInput from './SearchInput'
 import SelectDialogContent from './SelectDialogContent'
 
 type Area = 'selecting' | 'searching'
@@ -34,6 +43,8 @@ const BaseAddArticlesCollectionDialog = ({
   collection,
   onUpdate,
 }: AddArticlesCollectionDialogProps) => {
+  const formId = 'add-collection-article-form'
+
   const [update] = useMutation<AddArticlesCollectionMutation>(
     ADD_ARTICLES_COLLECTION,
     undefined,
@@ -43,10 +54,21 @@ const BaseAddArticlesCollectionDialog = ({
   )
   const { show, openDialog, closeDialog: cd } = useDialogSwitch(true)
 
-  // const [area, setArea] = useState<Area>('selecting')
-  const [area] = useState<Area>('selecting')
+  const [area, setArea] = useState<Area>('selecting')
   const inSelectingArea = area === 'selecting'
   const inSearchingArea = area === 'searching'
+  const [searchValue, setSearchValue] = useState('')
+
+  const { getQuery } = useRoute()
+
+  const userName = getQuery('name')
+  const { data, loading, error } =
+    usePublicQuery<AddArticlesCollectionUserPublicQuery>(
+      ADD_ARTICLES_COLLECTION_USER_PUBLIC,
+      {
+        variables: { userName },
+      }
+    )
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -86,7 +108,53 @@ const BaseAddArticlesCollectionDialog = ({
 
   const closeDialog = () => {
     formik.setFieldValue('checked', [])
+    setArea('selecting')
     cd()
+  }
+
+  useEffect(() => {
+    if (searchValue === '') {
+      setArea('selecting')
+    } else {
+      setArea('searching')
+    }
+  }, [searchValue])
+
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      type="submit"
+      form={formId}
+      disabled={formik.isSubmitting}
+      text={<FormattedMessage defaultMessage="Confirm" />}
+      loading={formik.isSubmitting}
+    />
+  )
+
+  if (loading) {
+    return (
+      <>
+        {children({ openDialog })}
+        <Dialog isOpen={show} onDismiss={closeDialog}>
+          <Dialog.Content>
+            <Spinner />
+          </Dialog.Content>
+        </Dialog>
+      </>
+    )
+  }
+
+  const user = data?.user
+
+  if (error) {
+    return (
+      <>
+        <QueryError error={error} />
+      </>
+    )
+  }
+
+  if (!user) {
+    return <>{children({ openDialog })}</>
   }
 
   return (
@@ -94,15 +162,51 @@ const BaseAddArticlesCollectionDialog = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        {inSelectingArea && (
-          <SelectDialogContent
-            formik={formik}
-            collection={collection}
-            checkingIds={formik.values.checked}
-            closeDialog={closeDialog}
+        <Dialog.Header
+          title={<FormattedMessage defaultMessage="Add to collection" />}
+          rightBtn={<SubmitButton />}
+        />
+
+        <Dialog.Content hasFixed>
+          <SearchInput
+            value={searchValue}
+            onChange={(value) => setSearchValue(value)}
           />
-        )}
-        {inSearchingArea && <>search area</>}
+
+          {inSelectingArea && (
+            <SelectDialogContent
+              formik={formik}
+              user={user}
+              collection={collection}
+              checkingIds={formik.values.checked}
+              formId={formId}
+            />
+          )}
+          {inSearchingArea && (
+            <SearchingDialogContent
+              formik={formik}
+              user={user}
+              collection={collection}
+              checkingIds={formik.values.checked}
+              searchValue={searchValue}
+              formId={formId}
+            />
+          )}
+        </Dialog.Content>
+
+        <Dialog.Footer
+          noSpacing={false}
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text={<FormattedMessage defaultMessage="Cancel" />}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+              <SubmitButton />
+            </>
+          }
+        />
       </Dialog>
     </>
   )
