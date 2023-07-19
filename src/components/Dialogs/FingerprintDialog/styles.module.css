@@ -1,5 +1,5 @@
 .container {
-  padding: var(--spacing-base);
+  padding: 0 var(--spacing-base);
   text-align: left;
 
   & > .card + .card {
@@ -7,7 +7,7 @@
   }
 
   @media (--md-up) {
-    padding: var(--spacing-base) var(--spacing-base-loose);
+    padding: 0 var(--spacing-base-loose);
   }
 }
 

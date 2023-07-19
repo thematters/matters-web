@@ -114,7 +114,6 @@ const SettingsList = ({
 
       {(confirmButtonText || cancelButtonText) && (
         <Dialog.Footer
-          noSpacing={false}
           smUpBtns={
             <>
               <Dialog.TextButton

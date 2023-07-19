@@ -1,10 +1,5 @@
 .footer {
   position: relative;
-  margin-top: var(--spacing-base);
-
-  &.noSpacing {
-    margin-top: 0;
-  }
 }
 
 .content {
@@ -28,7 +23,8 @@
 .smUpContent {
   @mixin flex-center-end;
 
-  padding: 0 var(--spacing-base-loose) var(--spacing-base-loose);
+  padding: 0 var(--spacing-base-loose) 0;
+  margin: var(--spacing-base) 0 var(--spacing-base-loose);
   text-align: right;
 
   & > * + * {

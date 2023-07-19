@@ -1,6 +1,5 @@
 .socialsContainer {
   display: flex;
-  padding-top: var(--spacing-x-tight);
 }
 
 .left,

@@ -31,19 +31,15 @@
 }
 
 .tabs {
-  margin: 0 calc(var(--spacing-base) * -1);
+  margin: calc(var(--spacing-x-tight) * -1) calc(var(--spacing-base) * -1) 0;
 
-  @media (--md-up) {
-    margin: 0;
+  @media (--sm-up) {
+    margin: calc(var(--spacing-base) * -1) 0;
   }
 }
 
 .form {
-  margin: 0;
-
-  @media (--md-up) {
-    margin: 0 calc(var(--spacing-base) * -1);
-  }
+  margin: 0 calc(var(--spacing-base) * -1);
 }
 
 .previewResponse {

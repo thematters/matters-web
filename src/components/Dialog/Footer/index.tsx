@@ -8,8 +8,6 @@ import { RoundedButton, TextButton } from '../Buttons'
 import styles from './styles.module.css'
 
 type FooterProps = {
-  noSpacing?: boolean
-
   btns?: React.ReactNode
   smUpBtns?: React.ReactNode
   closeText?: React.ReactNode
@@ -17,8 +15,6 @@ type FooterProps = {
 }
 
 const Footer: React.FC<FooterProps> = ({
-  noSpacing = true,
-
   btns,
   smUpBtns,
   closeText,
@@ -32,7 +28,6 @@ const Footer: React.FC<FooterProps> = ({
 
   const footerClasses = classNames({
     [styles.footer]: true,
-    [styles.noSpacing]: !!noSpacing,
   })
   const hasBtns = btns || closeDialog
   const hasSmUpBtns = smUpBtns || closeDialog

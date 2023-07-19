@@ -104,7 +104,6 @@ const SupportersDialogContent = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        noSpacing={false}
         smUpBtns={
           <Dialog.TextButton
             text="close"

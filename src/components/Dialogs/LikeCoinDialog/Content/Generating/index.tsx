@@ -42,7 +42,11 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
     <>
       <Dialog.Header title="setupLikeCoin" />
 
-      <Dialog.Message type={error ? 'error' : undefined}>
+      <Dialog.Message
+        align="center"
+        smUpAlign="center"
+        type={error ? 'error' : undefined}
+      >
         {error ? (
           <h3>
             <Translate

@@ -3,5 +3,11 @@
   top: 0;
   z-index: var(--z-index-sticky-tabs);
   padding: 0 var(--spacing-base);
+  margin: 0 calc(var(--spacing-base) * -1) 0;
   background: var(--color-white);
+
+  @media (--sm-up) {
+    top: calc(var(--spacing-base) * -1);
+    margin: calc(var(--spacing-base) * -1) 0 0;
+  }
 }

@@ -82,7 +82,6 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
         </Dialog.Content>
 
         <Dialog.Footer
-          noSpacing={false}
           smUpBtns={
             <Dialog.TextButton
               text="close"

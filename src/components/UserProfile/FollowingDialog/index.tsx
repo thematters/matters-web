@@ -29,7 +29,6 @@ const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
         <DynamicContent />
 
         <Dialog.Footer
-          noSpacing={false}
           smUpBtns={
             <Dialog.TextButton
               text="close"

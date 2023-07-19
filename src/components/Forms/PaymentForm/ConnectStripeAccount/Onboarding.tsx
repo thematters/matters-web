@@ -55,7 +55,7 @@ const Onboarding: React.FC<Props> = ({ nextStep }) => {
   return (
     <Dialog.Message
       align="center"
-      smUpAlign="left"
+      smUpAlign="center"
       type={error ? 'error' : undefined}
     >
       {error ? (
