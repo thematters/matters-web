@@ -41,10 +41,10 @@ export const TranslationsProvider = ({
   }, [lang])
 
   // [SSR] dynamic load compiled translations based on current language
-  const TranslationsProvider = translationsProvider[ssrLang]
+  const Provider = translationsProvider[ssrLang]
 
   return (
-    <TranslationsProvider>
+    <Provider>
       {({ messages: ssrMessages }) => (
         <IntlProvider
           locale={toLocale(ssrLang)}
@@ -53,6 +53,6 @@ export const TranslationsProvider = ({
           {children}
         </IntlProvider>
       )}
-    </TranslationsProvider>
+    </Provider>
   )
 }

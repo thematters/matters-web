@@ -1,5 +1,6 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
+import { useId } from 'react'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { Translate } from '~/components'
@@ -54,7 +55,7 @@ const CurrencyOption: React.FC<CurrencyOptionProps> = ({
   disabled,
   ...inputProps
 }) => {
-  const fieldId = `field-${name}-${currency}`
+  const fieldId = useId()
   const classes = classNames({
     [styles.currency]: true,
     [styles[isLike ? 'like' : 'hkd']]: true,
@@ -90,7 +91,7 @@ const CurrencyRadioInput: React.FC<CurrencyRadioInputProps> = ({
 
   ...inputProps
 }) => {
-  const fieldMsgId = `field-msg-${name}`
+  const fieldMsgId = useId()
   const baseInputProps = {
     ...inputProps,
     fieldMsgId,

@@ -60,6 +60,9 @@ const nextConfig = {
   reactStrictMode: true,
   compress: false,
   poweredByHeader: false,
+  experimental: {
+    scrollRestoration: true,
+  },
 }
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useState } from 'react'
+import { useContext, useId, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { translate, validateSupportWords } from '~/common/utils'
@@ -49,7 +49,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
   supportSettingSaving,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const formId = 'support-setting-form'
+  const formId = useId()
 
   const { getQuery } = useRoute()
   const qsType = getQuery('type') as TabType

@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import React, { useContext, useId } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -55,7 +55,7 @@ const Confirm: React.FC<FormProps> = ({
   )
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
-  const formId = 'username-confirm-form'
+  const formId = useId()
 
   const {
     values,

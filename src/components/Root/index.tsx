@@ -93,7 +93,7 @@ const Root = ({
       <ViewerProvider viewer={viewer as ViewerUser}>
         <LanguageProvider headers={headers}>
           <FeaturesProvider official={official}>
-            <MediaContextProvider>
+            <MediaContextProvider disableDynamicMediaQueries>
               <TranslationsProvider>
                 {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 

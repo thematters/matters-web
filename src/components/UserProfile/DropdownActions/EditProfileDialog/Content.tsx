@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import React, { useContext, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
@@ -80,7 +80,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   const maxDisplayName = 20
   const maxDescription = 140
 
-  const formId = 'edit-profile-form'
+  const formId = useId()
 
   const intl = useIntl()
   const validateDescription = (value: string, lang: Language) => {

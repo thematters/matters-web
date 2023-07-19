@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useId } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
@@ -48,7 +48,7 @@ const Confirm: React.FC<FormProps> = ({
   switchToResetPassword,
   closeDialog,
 }) => {
-  const formId = 'subscirbe-circle-form'
+  const formId = useId()
 
   const { lang } = useContext(LanguageContext)
   const [subscribeCircle] = useMutation<SubscribeCircleMutation>(

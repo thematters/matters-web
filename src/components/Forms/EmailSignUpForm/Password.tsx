@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -85,7 +85,7 @@ const Password: React.FC<FormProps> = ({
   )
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
-  const formId = 'email-sign-up-password-form'
+  const formId = useId()
 
   const intl = useIntl()
   const {
