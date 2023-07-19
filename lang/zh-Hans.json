@@ -9,6 +9,9 @@
   "+a+2ug": {
     "defaultMessage": "成员"
   },
+  "+aMAeT": {
+    "defaultMessage": "地址已复制"
+  },
   "+cS08C": {
     "defaultMessage": "确认要将“{article}”从选集中移出吗？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -42,7 +45,7 @@
     "defaultMessage": "移出选集"
   },
   "0ThOw1": {
-    "defaultMessage": "开始创作",
+    "defaultMessage": "新建选集",
     "description": "src/views/User/Collections/UserCollections.tsx"
   },
   "1Z1M77": {
@@ -81,10 +84,6 @@
   },
   "2slIPX": {
     "defaultMessage": "赞赏"
-  },
-  "2uwwz+": {
-    "defaultMessage": "累计阅读时長代表了你的作品被登入用户阅读的总时数，每次阅读过程超过一定时间后才会计入。此外，同一个用户的多次阅读也会进行累计。",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "32bml8": {
     "defaultMessage": "追踪",
@@ -161,6 +160,10 @@
   "77tYPg": {
     "defaultMessage": "确认删除后，{commentType}会立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "7jjWxF": {
+    "defaultMessage": "无结果",
+    "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
   "7xnrxG": {
     "defaultMessage": "作品已添加至精选",
@@ -296,10 +299,6 @@
   "DFieKt": {
     "defaultMessage": "辞去了 {tag} 的协作者",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
-  },
-  "DXJ8ys": {
-    "defaultMessage": "阅读次数代表了你的作品被登入用户阅读的总次数，每次阅读过程超过一定时间后才会计入。此外，同一个用户的多次阅读也会进行累计。",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "DYrDcG": {
     "defaultMessage": "徽章",
@@ -496,9 +495,6 @@
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "MkwOFW": {
-    "defaultMessage": "浏览记录"
-  },
   "N2IrpM": {
     "defaultMessage": "确认"
   },
@@ -569,9 +565,6 @@
   "S8PcQf": {
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
-  },
-  "SENRqu": {
-    "defaultMessage": "說明"
   },
   "SNh1n0": {
     "defaultMessage": "查看名单",
@@ -716,10 +709,6 @@
   "YlPCRU": {
     "defaultMessage": "关联了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
-  },
-  "Z6cII7": {
-    "defaultMessage": "累计阅读时数",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "ZAs170": {
     "defaultMessage": "基本资料",
@@ -1200,6 +1189,10 @@
   "yIlC0R": {
     "defaultMessage": "尚未发布作品",
     "description": "src/components/Empty/EmptyArticle.tsx"
+  },
+  "yJsERg": {
+    "defaultMessage": "选集暂时不允许超过 100 篇",
+    "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
   },
   "ySGgTo": {
     "defaultMessage": "添加精选",
