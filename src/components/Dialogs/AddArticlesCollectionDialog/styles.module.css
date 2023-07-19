@@ -24,6 +24,7 @@
       @mixin flex-center-space-between;
 
       gap: var(--spacing-x-tight);
+      padding-bottom: var(--spacing-base);
 
       & .index {
         @mixin flex-center-all;
@@ -35,10 +36,6 @@
         border: 1.5px solid var(--color-matters-green);
         border-radius: 1.25rem;
       }
-    }
-
-    & .item + .item {
-      margin-top: var(--spacing-base);
     }
   }
 }
