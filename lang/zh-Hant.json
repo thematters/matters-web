@@ -937,6 +937,9 @@
   "ll/ufR": {
     "defaultMessage": "熱門"
   },
+  "m4GG4b": {
+    "defaultMessage": "刪除選集"
+  },
   "mCAIcg": {
     "defaultMessage": "站內閱讀熱門排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
