@@ -258,16 +258,25 @@ const BaseAddCredit: React.FC<FormProps> = ({
           <CurrencyAmount amount={values.amount} currency={currency} />
         </Dialog.Message>
 
-        {callback && (
-          <Dialog.Footer
-            btns={
-              <Dialog.RoundedButton text={callbackText} onClick={callback} />
-            }
-            smUpBtns={
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={callbackText || <Translate id="done" />}
+              onClick={callback || closeDialog}
+            />
+          }
+          smUpBtns={
+            callback ? (
               <Dialog.TextButton text={callbackText} onClick={callback} />
-            }
-          />
-        )}
+            ) : (
+              <Dialog.TextButton
+                text={<Translate id="done" />}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+            )
+          }
+        />
       </>
     )
   }

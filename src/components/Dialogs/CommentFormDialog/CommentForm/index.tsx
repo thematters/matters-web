@@ -102,7 +102,13 @@ const CommentForm: React.FC<CommentFormProps> = ({
       })
 
       toast.success({
-        message: (
+        message: commentId ? (
+          <Translate
+            zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已編輯`}
+            zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已编辑`}
+            en={`${COMMENT_TYPE_TEXT.en[type]} edited`}
+          />
+        ) : (
           <Translate
             zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已送出`}
             zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已送出`}

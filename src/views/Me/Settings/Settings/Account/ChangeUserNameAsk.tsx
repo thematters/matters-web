@@ -13,9 +13,9 @@ const Ask = ({ children }: AskProps) => {
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header title="changeUserName" closeDialog={closeDialog} />
+        <Dialog.Header title="changeUserName" />
 
-        <Dialog.Message>
+        <Dialog.Message align="center" smUpAlign="left">
           <p>
             <Translate
               zh_hant="您的 Matters ID 僅能永久修改一次，確定要繼續嗎？"
