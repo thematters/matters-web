@@ -119,7 +119,7 @@ const UserCollections = () => {
     return (
       <>
         <CustomHead />
-        <UserTabs />
+        <UserTabs user={user!} />
         <EmptyCollection />
         {isViewer && <CreateCollection />}
       </>
@@ -130,7 +130,7 @@ const UserCollections = () => {
     <>
       <CustomHead />
 
-      <UserTabs />
+      <UserTabs user={user!} />
 
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}

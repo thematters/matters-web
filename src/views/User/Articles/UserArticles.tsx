@@ -184,7 +184,7 @@ const UserArticles = () => {
     return (
       <>
         <CustomHead />
-        <UserTabs />
+        <UserTabs user={user!} />
         <EmptyArticle />
         {isViewer && <StartWriting />}
       </>
@@ -199,7 +199,7 @@ const UserArticles = () => {
     <>
       <CustomHead />
 
-      <UserTabs />
+      <UserTabs user={user!} />
 
       <PinBoard user={user} />
 
