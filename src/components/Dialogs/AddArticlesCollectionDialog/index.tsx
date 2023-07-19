@@ -195,7 +195,6 @@ const BaseAddArticlesCollectionDialog = ({
         </Dialog.Content>
 
         <Dialog.Footer
-          noSpacing={false}
           smUpBtns={
             <>
               <Dialog.TextButton
