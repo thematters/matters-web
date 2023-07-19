@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl'
 
 import { analytics } from '~/common/utils'
 import {
-  AddArticlesCollectionDialog,
   ArticleDigestFeed,
   DateTime,
   IconArrowDown20,
