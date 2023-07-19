@@ -60,41 +60,37 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
           onSubmit={formik.handleSubmit}
           className={styles.listForm}
         >
-          {searchingEdges.map(
-            ({ node }) =>
-              node.state === 'active' && (
-                <section key={node.id} className={styles.item}>
-                  <Form.SquareCheckBox
-                    key={node.id}
-                    hasTooltip={true}
-                    checked={
-                      hasChecked.includes(node.id) ||
-                      checkingIds.includes(node.id)
-                    }
-                    hint={node.title}
-                    disabled={hasChecked.includes(node.id)}
-                    {...formik.getFieldProps('checked')}
-                    value={node.id}
-                    content={(() => {
-                      const index = node.title.indexOf(searchValue)
-                      const content = (
-                        <>
-                          {node.title.slice(0, index)}
-                          <span className="u-highlight">{searchValue}</span>
-                          {node.title.slice(index + searchValue.length)}
-                        </>
-                      )
-                      return content
-                    })()}
-                  />
-                  {checkingIds.includes(node.id) && (
-                    <div className={styles.index}>
-                      {checkingIds.indexOf(node.id) + 1}
-                    </div>
-                  )}
-                </section>
-              )
-          )}
+          {searchingEdges.map(({ node }) => (
+            <section key={node.id} className={styles.item}>
+              <Form.SquareCheckBox
+                key={node.id}
+                hasTooltip={true}
+                checked={
+                  hasChecked.includes(node.id) || checkingIds.includes(node.id)
+                }
+                hint={node.title}
+                disabled={hasChecked.includes(node.id)}
+                {...formik.getFieldProps('checked')}
+                value={node.id}
+                content={(() => {
+                  const index = node.title.indexOf(searchValue)
+                  const content = (
+                    <>
+                      {node.title.slice(0, index)}
+                      <span className="u-highlight">{searchValue}</span>
+                      {node.title.slice(index + searchValue.length)}
+                    </>
+                  )
+                  return content
+                })()}
+              />
+              {checkingIds.includes(node.id) && (
+                <div className={styles.index}>
+                  {checkingIds.indexOf(node.id) + 1}
+                </div>
+              )}
+            </section>
+          ))}
         </Form>
       </FormikProvider>
     </section>
