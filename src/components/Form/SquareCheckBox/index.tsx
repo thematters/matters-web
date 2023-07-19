@@ -10,6 +10,7 @@ import styles from './styles.module.css'
 type SquareCheckBoxBoxProps = {
   name: string
   value: string
+  content?: React.ReactNode
   hasTooltip?: boolean
 } & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
@@ -21,6 +22,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   hint,
   error,
   hasTooltip = false,
+  content,
 
   ...inputProps
 }) => {
@@ -47,7 +49,10 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
         spacing="xtight"
         size="sm"
       >
-        <span className={styles.hint}>{hint}</span>
+        <span className={styles.hint}>
+          {!!content && content}
+          {!content && hint}
+        </span>
       </TextIcon>
 
       <VisuallyHidden>

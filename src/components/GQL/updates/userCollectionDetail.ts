@@ -1,10 +1,15 @@
 import { DataProxy } from 'apollo-cache'
+import { FetchResult } from 'apollo-link'
 
-import { CollectionDetailQuery } from '~/gql/graphql'
+import {
+  AddArticlesCollectionMutation,
+  CollectionDetailQuery,
+} from '~/gql/graphql'
 
 const update = ({
   cache,
   collectionId,
+  result,
   articleId,
   oldPosition,
   newPosition,
@@ -12,10 +17,11 @@ const update = ({
 }: {
   cache: DataProxy
   collectionId: string
+  result?: FetchResult<AddArticlesCollectionMutation>
   articleId?: string
   oldPosition?: number
   newPosition?: number
-  type: 'delete' | 'setTop' | 'setBottom' | 'reorder'
+  type: 'add' | 'delete' | 'setTop' | 'setBottom' | 'reorder'
 }) => {
   // FIXME: circular dependencies
   const {
@@ -43,6 +49,12 @@ const update = ({
     let edges = data.node.articles.edges
 
     switch (type) {
+      case 'add':
+        const addEdges =
+          result?.data?.addCollectionsArticles[0].articles.edges || []
+        edges = [...addEdges, ...edges]
+        data.node.articles.totalCount += addEdges.length
+        break
       case 'delete':
         edges = edges.filter(({ node }) => node.id !== articleId)
         data.node.articles.totalCount -= 1

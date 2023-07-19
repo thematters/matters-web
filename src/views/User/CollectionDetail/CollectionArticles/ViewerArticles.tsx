@@ -5,11 +5,13 @@ import { arrayMove, List as DnDList } from 'react-movable'
 
 import { analytics } from '~/common/utils'
 import {
+  AddArticlesCollectionDialog,
   ArticleDigestFeed,
   DateTime,
   IconAdd20,
   IconHandle24,
   TextIcon,
+  Tooltip,
   useMutation,
 } from '~/components'
 import DropdownActions from '~/components/CollectionDigest/DropdownActions'
@@ -86,11 +88,40 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
           <DropdownActions collection={collection} />
         </section>
       </section>
-      <section className={styles.addArticles}>
-        <TextIcon icon={<IconAdd20 size="mdS" />}>
-          <FormattedMessage defaultMessage="Add Articles" />
-        </TextIcon>
-      </section>
+      {collection.articles.totalCount >= 100 && (
+        <Tooltip
+          content={
+            <FormattedMessage
+              defaultMessage="Collections allow up to 100 articles currently"
+              description="src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
+            />
+          }
+          placement="top"
+        >
+          <section className={styles.disableAddArticles}>
+            <TextIcon icon={<IconAdd20 size="mdS" />}>
+              <FormattedMessage defaultMessage="Add Articles" />
+            </TextIcon>
+          </section>
+        </Tooltip>
+      )}
+      {collection.articles.totalCount < 100 && (
+        <AddArticlesCollectionDialog
+          collection={collection}
+          onUpdate={() => setHasReset(true)}
+        >
+          {({ openDialog: openAddArticlesCollection }) => (
+            <section
+              className={styles.addArticles}
+              onClick={openAddArticlesCollection}
+            >
+              <TextIcon icon={<IconAdd20 size="mdS" />}>
+                <FormattedMessage defaultMessage="Add Articles" />
+              </TextIcon>
+            </section>
+          )}
+        </AddArticlesCollectionDialog>
+      )}
       <section className={styles.feed}>
         {items && (
           <DnDList
@@ -123,7 +154,11 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
               <section {...props}>{children}</section>
             )}
             renderItem={({ value: { node, cursor }, index, props }) => (
-              <section {...props} key={cursor} style={{ ...props.style }}>
+              <section
+                {...props}
+                key={cursor + node.id}
+                style={{ ...props.style }}
+              >
                 <section className={styles.dragContainer}>
                   <button data-movable-handle className={styles.handle}>
                     <IconHandle24 size="md" />

@@ -25,5 +25,9 @@
     padding-bottom: var(--spacing-tight);
     margin-bottom: var(--spacing-tight);
     overflow-y: auto;
+
+    & label {
+      margin: var(--spacing-base) 0;
+    }
   }
 }

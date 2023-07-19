@@ -162,6 +162,10 @@
     "defaultMessage": "確認刪除後，{commentType}會立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
+  "7jjWxF": {
+    "defaultMessage": "無結果",
+    "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
+  },
   "7xnrxG": {
     "defaultMessage": "作品已添加至精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
@@ -1201,6 +1205,10 @@
   "yIlC0R": {
     "defaultMessage": "尚未發布作品",
     "description": "src/components/Empty/EmptyArticle.tsx"
+  },
+  "yJsERg": {
+    "defaultMessage": "選集暫時不允許超過 100 篇",
+    "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
   },
   "ySGgTo": {
     "defaultMessage": "添加精選",
