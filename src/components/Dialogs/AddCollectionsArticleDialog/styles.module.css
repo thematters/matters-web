@@ -2,12 +2,15 @@
   padding: var(--spacing-x-tight) 0;
   font-size: var(--font-size-sm);
   line-height: var(--line-height-base-loose);
-  color: var(--color-matters-green);
-  cursor: pointer;
 
-  &:hover,
-  &:focus {
-    color: var(--color-matters-green-dark);
+  & .button {
+    color: var(--color-matters-green);
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: var(--color-matters-green-dark);
+    }
   }
 }
 
