@@ -18,7 +18,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'About Us',
-            description: '',
           })}
           href={PATHS.ABOUT}
         />
@@ -26,7 +25,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Explore Matters',
-            description: '',
           })}
           href={PATHS.GUIDE}
         />
@@ -34,7 +32,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Matters Community',
-            description: '',
           })}
           href={PATHS.COMMUNITY}
         />
@@ -42,7 +39,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Migrate to Matters',
-            description: '',
           })}
           href={PATHS.MIGRATION}
         />
@@ -50,7 +46,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Term of Services',
-            description: '',
           })}
           href={PATHS.TOS}
         />
@@ -58,7 +53,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Open Source',
-            description: '',
           })}
           htmlHref={EXTERNAL_LINKS.DEVELOPER_RESOURCE}
           htmlTarget="_blank"
@@ -67,7 +61,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Download App',
-            description: '',
           })}
           href={GUIDE_LINKS.PWA[lang]}
         />

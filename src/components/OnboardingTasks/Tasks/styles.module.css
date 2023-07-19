@@ -1,5 +1,13 @@
 .task {
-  margin-top: var(--spacing-loose);
+  margin: var(--spacing-loose) var(--spacing-base) 0;
+
+  @media (--md-up) {
+    margin: var(--spacing-loose) 0 0;
+  }
+}
+
+.finishButton {
+  width: 100%;
 }
 
 .allDone {

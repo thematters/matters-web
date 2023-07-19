@@ -4,7 +4,7 @@
   padding: var(--spacing-base) var(--spacing-base) 0;
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0 0;
+    padding: var(--spacing-x-loose) 0 0;
   }
 }
 
@@ -21,6 +21,7 @@
   padding-left: var(--spacing-x-tight);
 
   @media (--sm-up) {
+    padding-top: var(--spacing-x-loose);
     padding-left: 0;
     margin-left: calc(0 - var(--spacing-x-tight));
   }

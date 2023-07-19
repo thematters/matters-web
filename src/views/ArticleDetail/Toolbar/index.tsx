@@ -76,7 +76,7 @@ const Toolbar = ({
   const path = toPath({ page: 'articleDetail', article })
   const sharePath =
     translated && translatedLanguage
-      ? `/${toLocale(translatedLanguage)}${path.href}`
+      ? `${path.href}?locale=${toLocale(translatedLanguage)}`
       : path.href
 
   const dropdonwActionsProps: DropdownActionsControls = {
@@ -132,10 +132,15 @@ const Toolbar = ({
             article={article}
             {...dropdonwActionsProps}
             hasShare
+            hasBookmark={false}
           />
         </Media>
         <Media greaterThan="sm">
-          <DropdownActions article={article} {...dropdonwActionsProps} />
+          <DropdownActions
+            article={article}
+            {...dropdonwActionsProps}
+            hasBookmark={false}
+          />
         </Media>
       </section>
     </section>

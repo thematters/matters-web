@@ -11,6 +11,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useId, useRef, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   PAYMENT_CURRENCY,
@@ -34,14 +35,20 @@ import {
   useMutation,
 } from '~/components'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-import { AddCreditMutation, WalletBalanceQuery } from '~/gql/graphql'
+import {
+  AddCreditMutation,
+  UserLanguage,
+  WalletBalanceQuery,
+} from '~/gql/graphql'
 
 import ConfirmTable from '../ConfirmTable'
 import StripeCheckout from '../StripeCheckout'
 
 interface FormProps {
   defaultAmount?: number
-  callbackButtons?: React.ReactNode
+  callback?: () => any
+  callbackText?: React.ReactNode
+  closeDialog?: () => any
 }
 
 interface FormValues {
@@ -70,7 +77,9 @@ const stripePromise = loadStripe(
 
 const BaseAddCredit: React.FC<FormProps> = ({
   defaultAmount,
-  callbackButtons,
+  callback,
+  callbackText,
+  closeDialog,
 }) => {
   const stripe = useStripe()
   const elements = useElements()
@@ -234,10 +243,9 @@ const BaseAddCredit: React.FC<FormProps> = ({
   if (completed) {
     return (
       <>
-        <Dialog.Message spacing="xxl">
-          <h3>
-            <Translate id="successTopUp" />
-          </h3>
+        <Dialog.Header title={<Translate id="successTopUp" />} />
+
+        <Dialog.Message align="center" smUpAlign="center">
           <p>
             <Translate
               zh_hant="創作者們望眼欲穿，快去送上支持吧"
@@ -249,14 +257,48 @@ const BaseAddCredit: React.FC<FormProps> = ({
           <CurrencyAmount amount={values.amount} currency={currency} />
         </Dialog.Message>
 
-        {callbackButtons && <Dialog.Footer>{callbackButtons}</Dialog.Footer>}
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={callbackText || <Translate id="done" />}
+              onClick={callback || closeDialog}
+            />
+          }
+          smUpBtns={
+            callback ? (
+              <Dialog.TextButton text={callbackText} onClick={callback} />
+            ) : (
+              <Dialog.TextButton
+                text={<Translate id="done" />}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+            )
+          }
+        />
       </>
     )
   }
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      text={<Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />}
+      type="submit"
+      form={formId}
+      disabled={disabled || !isValid || isSubmitting || !!checkoutError}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
-      <Dialog.Content hasGrow>
+      <Dialog.Header
+        title="topUp"
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
+
+      <Dialog.Content>
         <section>
           <ConfirmTable>
             <ConfirmTable.Row type="balance">
@@ -276,16 +318,18 @@ const BaseAddCredit: React.FC<FormProps> = ({
         </section>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          form={formId}
-          disabled={disabled || !isValid || isSubmitting || !!checkoutError}
-          loading={isSubmitting}
-        >
-          <Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }
@@ -296,7 +340,7 @@ const AddCreditForm: React.FC<FormProps> = (props) => {
   return (
     <Elements
       stripe={stripePromise}
-      options={{ locale: lang === 'zh_hans' ? 'zh' : 'en' }}
+      options={{ locale: lang === UserLanguage.ZhHans ? 'zh' : 'en' }}
     >
       <BaseAddCredit {...props} />
     </Elements>

@@ -1,5 +1,6 @@
 .joinUs {
   position: relative;
+  padding-top: 5rem;
   padding-bottom: 3.5rem;
   background-image: var(--about-join-us-bg);
   background-position: right bottom;
@@ -49,4 +50,9 @@
       @mixin border-top-grey;
     }
   }
+}
+
+.title,
+.list {
+  grid-column: 1 / -1;
 }

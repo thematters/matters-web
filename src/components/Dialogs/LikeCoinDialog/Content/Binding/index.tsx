@@ -57,7 +57,13 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
 
   return (
     <>
-      <Dialog.Message type={error ? 'error' : undefined} spacing="md">
+      <Dialog.Header title="setupLikeCoin" />
+
+      <Dialog.Message
+        align="center"
+        smUpAlign="center"
+        type={error ? 'error' : undefined}
+      >
         {error ? (
           <h3>
             <Translate
@@ -81,11 +87,22 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
         )}
       </Dialog.Message>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button disabled={!error} onClick={prevStep}>
-          <Translate id="retry" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate id="retry" />}
+            disabled={!error}
+            onClick={prevStep}
+          />
+        }
+        smUpBtns={
+          <Dialog.TextButton
+            text={<Translate id="retry" />}
+            disabled={!error}
+            onClick={prevStep}
+          />
+        }
+      />
     </>
   )
 }

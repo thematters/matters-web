@@ -4,12 +4,7 @@ import throttle from 'lodash/throttle'
 import { useContext, useEffect, useRef, useState } from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import {
-  captureClicks,
-  dom,
-  initAudioPlayers,
-  optimizeEmbed,
-} from '~/common/utils'
+import { captureClicks, initAudioPlayers, optimizeEmbed } from '~/common/utils'
 import { useMutation, ViewerContext } from '~/components'
 import { ContentArticleFragment, ReadArticleMutation } from '~/gql/graphql'
 
@@ -41,8 +36,6 @@ const Content = ({
 
   // idle timer
   const [lastScroll, setScrollTime] = useState(0)
-
-  const { id } = article
 
   // called only once
   useEffect(() => {
@@ -95,12 +88,12 @@ const Content = ({
 
         // if user is logged in, ReadArticle mutation will be invoked multiple times
         if (viewer.isAuthed && isReading()) {
-          read({ variables: { id } })
+          read({ variables: { id: article.id } })
         }
 
         // if visitor, invoke ReadArticle mutation only once
         if (!viewer.isAuthed && !visitorReadRef.current) {
-          read({ variables: { id } })
+          read({ variables: { id: article.id } })
           visitorReadRef.current = true
         }
         return heartbeat
@@ -113,35 +106,6 @@ const Content = ({
       clearInterval(timerId)
     }
   }, [lastScroll])
-
-  // fallback image
-  useEffect(() => {
-    const $imgs = Array.from(
-      dom.$$('.u-content picture img')
-    ) as HTMLImageElement[]
-
-    const onError = (event: ErrorEvent) => {
-      const $img = event.target as HTMLImageElement
-      const $figure = $img.parentElement?.parentElement
-      const $fig = $figure?.querySelector('figcaption')
-
-      if (!$figure) {
-        return
-      }
-
-      $figure.innerHTML = `
-        <img src=${$img.src} />
-        ${$fig?.outerHTML}
-      `
-    }
-
-    $imgs.forEach(($img) =>
-      $img.addEventListener('error', onError, { once: true })
-    )
-
-    return () =>
-      $imgs.forEach(($img) => $img.removeEventListener('error', onError))
-  }, [article.id])
 
   return (
     <>
@@ -165,7 +129,10 @@ Content.fragments = {
   article: gql`
     fragment ContentArticle on Article {
       id
-      content
+      contents {
+        html
+        markdown
+      }
     }
   `,
 }

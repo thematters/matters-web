@@ -1,0 +1,51 @@
+.toastContainer {
+  inset: var(--spacing-x-loose) !important;
+}
+
+.toast {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-tight);
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+  color: var(--color-white);
+  border-radius: 0.5rem;
+
+  & .actions {
+    @mixin flex-center-space-between;
+
+    & :global(> *) {
+      margin-left: var(--spacing-x-loose);
+    }
+
+    & :global(> * + *) {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        left: calc(var(--spacing-base) * -1);
+        width: 1px;
+        height: 100%;
+        content: '';
+        background: var(--color-grey-darker);
+      }
+    }
+  }
+}
+
+.success {
+  background: var(--color-black);
+}
+
+.error {
+  background: var(--color-red);
+
+  & .actions {
+    & :global(> * + *) {
+      &::before {
+        background: var(--color-white);
+      }
+    }
+  }
+}

@@ -2,6 +2,14 @@
   @mixin form-container;
 }
 
+.intro {
+  margin: calc(var(--spacing-base) * -1) 0;
+
+  @media (--sm-up) {
+    margin: calc(var(--spacing-base) * -1);
+  }
+}
+
 /* Select.tsx */
 .msg {
   margin: var(--spacing-x-tight) 0 var(--spacing-base) var(--spacing-base);

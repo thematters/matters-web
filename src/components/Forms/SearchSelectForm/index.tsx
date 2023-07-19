@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TextId } from '~/common/enums'
-import { Dialog, Translate } from '~/components'
+import { Dialog } from '~/components'
 import SearchingArea, {
   SearchType,
   SelectNode,
@@ -108,21 +109,24 @@ const SearchSelectForm = ({
     )
   }
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      onClick={onClickSave}
+      // disabled={stagingNodes.length <= 0}
+      text={
+        headerRightButtonText || <FormattedMessage defaultMessage="Confirm" />
+      }
+      loading={saving}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title={title}
         closeDialog={closeDialog}
-        closeTextId="close"
-        leftButton={headerLeftButton}
-        rightButton={
-          <Dialog.Header.RightButton
-            onClick={onClickSave}
-            // disabled={stagingNodes.length <= 0}
-            text={headerRightButtonText || <Translate id="save" />}
-            loading={saving}
-          />
-        }
+        leftBtn={headerLeftButton}
+        rightBtn={<SubmitButton />}
       />
 
       <SearchingArea
@@ -144,6 +148,19 @@ const SearchSelectForm = ({
         inStagingArea={inStagingArea}
         draggable={draggable}
         CustomStagingArea={CustomStagingArea}
+      />
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
       />
     </>
   )

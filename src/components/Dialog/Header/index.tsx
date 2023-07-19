@@ -1,84 +1,79 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
-import classNames from 'classnames'
+import { FormattedMessage } from 'react-intl'
 
 import { TextId } from '~/common/enums'
-import { Media, Spacer, Translate } from '~/components'
+import { Button, IconClose22, Media, Translate } from '~/components'
 
-import { BackButton, CloseButton, RightButton } from './Button'
+import { TextButton } from '../Buttons'
 import styles from './styles.module.css'
 
 export interface HeaderProps {
   title: TextId | React.ReactNode
-  closeDialog?: () => void
-  closeTextId?: TextId
-  mode?: 'hidden' | 'inner'
-  leftButton?: React.ReactNode
-  rightButton?: React.ReactNode | string
+  hasSmUpTitle?: boolean
+
+  leftBtn?: React.ReactNode
+  rightBtn?: React.ReactNode | string
+
+  closeText?: React.ReactNode
+  closeDialog?: () => any
+  hasSmUpCloseBtn?: boolean
 }
 
-const BaseHeader = ({
+const Title = ({ title }: Pick<HeaderProps, 'title'>) => (
+  <h1 id="dialog-title" className={styles.title}>
+    {typeof title === 'string' ? <Translate id={title as TextId} /> : title}
+  </h1>
+)
+
+const Header: React.FC<HeaderProps> = ({
   title,
+  hasSmUpTitle = true,
+  leftBtn,
+  rightBtn,
+  closeText,
   closeDialog,
-  closeTextId,
-  mode,
-  leftButton,
-  rightButton,
-}: HeaderProps) => {
-  const headerClasses = classNames({
-    [styles.header]: true,
-    [styles.inner]: mode === 'inner',
-  })
-
-  return (
-    <header className={headerClasses}>
-      <h1>
-        <span id="dialog-title">
-          {typeof title === 'string' ? (
-            <Translate id={title as TextId} />
-          ) : (
-            title
-          )}
-        </span>
-      </h1>
-
-      {(leftButton || closeDialog) && (
-        <section className={styles.left}>
-          {leftButton ||
-            (closeDialog ? (
-              <CloseButton closeDialog={closeDialog} textId={closeTextId} />
-            ) : null)}
-        </section>
-      )}
-
-      {rightButton && <section className={styles.right}>{rightButton}</section>}
-    </header>
-  )
-}
-
-const Header: React.FC<HeaderProps> & {
-  RightButton: typeof RightButton
-  BackButton: typeof BackButton
-  CloseButton: typeof CloseButton
-} = (props) => {
-  if (props.mode !== 'hidden') {
-    return <BaseHeader {...props} />
-  }
+  hasSmUpCloseBtn,
+}) => {
+  const text = closeText || <FormattedMessage defaultMessage="Cancel" />
 
   return (
     <>
       <Media at="sm">
-        <Spacer size="xloose" />
+        <header className={styles.header}>
+          <Title title={title} />
+          {leftBtn && <section className={styles.left}>{leftBtn}</section>}
+          {!leftBtn && closeDialog && (
+            <section className={styles.left}>
+              <TextButton text={text} onClick={closeDialog} />
+            </section>
+          )}
+          <section className={styles.right}>{rightBtn}</section>
+        </header>
       </Media>
 
-      <VisuallyHidden>
-        <BaseHeader {...props} />
-      </VisuallyHidden>
+      <Media greaterThan="sm">
+        {hasSmUpTitle ? (
+          <header className={styles.smUpheader}>
+            <Title title={title} />
+
+            {hasSmUpCloseBtn && closeDialog && (
+              <Button
+                onClick={closeDialog}
+                textColor="greyDarker"
+                textActiveColor="black"
+              >
+                <IconClose22 size="md" />
+              </Button>
+            )}
+          </header>
+        ) : (
+          <VisuallyHidden>
+            <Title title={title} />
+          </VisuallyHidden>
+        )}
+      </Media>
     </>
   )
 }
-
-Header.RightButton = RightButton
-Header.BackButton = BackButton
-Header.CloseButton = CloseButton
 
 export default Header

@@ -1,0 +1,22 @@
+.container {
+  position: relative;
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+
+  & > * + * {
+    margin-top: var(--spacing-x-tight);
+  }
+}
+
+.name {
+  @mixin line-clamp;
+
+  white-space: break-spaces;
+}
+
+.description {
+  @mixin line-clamp;
+
+  -webkit-line-clamp: 3;
+  color: var(--color-grey);
+}

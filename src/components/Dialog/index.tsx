@@ -1,14 +1,16 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _get from 'lodash/get'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
-import { KEYCODES } from '~/common/enums'
-import { capitalizeFirstLetter, dom } from '~/common/utils'
-import { Media, useOutsideClick } from '~/components'
+import { KEYVALUE } from '~/common/enums'
+import { capitalizeFirstLetter, dom, translate } from '~/common/utils'
+import { LanguageContext, Media, useOutsideClick } from '~/components'
 
+import { RoundedButton, TextButton } from './Buttons'
 import Content from './Content'
 import Footer from './Footer'
 import Handle from './Handle'
@@ -25,10 +27,8 @@ export interface DialogOverlayProps {
 }
 
 export type DialogProps = {
-  size?: 'sm' | 'lg'
   smBgColor?: 'greyLighter'
   smUpBgColor?: 'greyLighter'
-  fixedHeight?: boolean
   hidePaddingBottom?: boolean
 
   testId?: string
@@ -42,10 +42,8 @@ const Container: React.FC<
     } & DialogProps
   >
 > = ({
-  size = 'lg',
   smBgColor,
   smUpBgColor,
-  fixedHeight,
   hidePaddingBottom,
   testId,
   onDismiss,
@@ -57,8 +55,6 @@ const Container: React.FC<
 
   const containerClasses = classNames({
     [styles.container]: true,
-    [styles.fixedHeight]: !!fixedHeight,
-    [styles[size]]: true,
     [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
       !!smBgColor,
     [smUpBgColor ? styles[`bg${capitalizeFirstLetter(smUpBgColor)}SmUp`] : '']:
@@ -92,23 +88,23 @@ const Container: React.FC<
   useOutsideClick(node, closeTopDialog)
 
   return (
-    <div className="l-row" {...(testId ? { 'data-test-id': testId } : {})}>
-      <div
-        ref={node}
-        className={containerClasses}
-        style={style}
-        onKeyDown={(event) => {
-          if (event.keyCode === KEYCODES.escape) {
-            closeTopDialog()
-          }
-        }}
-      >
-        {children}
+    <div
+      {...(testId ? { 'data-test-id': testId } : {})}
+      ref={node}
+      className={containerClasses}
+      style={style}
+      onKeyDown={(event) => {
+        if (event.code.toLowerCase() !== KEYVALUE.escape) {
+          return
+        }
+        closeTopDialog()
+      }}
+    >
+      {children}
 
-        <Media at="sm">
-          <Handle closeDialog={onDismiss} {...bind()} />
-        </Media>
-      </div>
+      <Media at="sm">
+        <Handle closeDialog={onDismiss} {...bind()} />
+      </Media>
     </div>
   )
 }
@@ -120,10 +116,14 @@ export const Dialog: React.ComponentType<
   Content: typeof Content
   Footer: typeof Footer
   Message: typeof Message
+  TextButton: typeof TextButton
+  RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
+  const { lang } = useContext(LanguageContext)
   const { isOpen, onRest } = props
   const [mounted, setMounted] = useState(isOpen)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
 
   // Drag
   const [{ top }, setDragGoal] = useSpring(() => ({ top: 0 }))
@@ -167,13 +167,22 @@ export const Dialog: React.ComponentType<
 
   return (
     <>
-      <AnimatedDialogOverlay className="dialog">
+      <AnimatedDialogOverlay
+        className="dialog"
+        initialFocusRef={closeButtonRef}
+      >
         <AnimatedOverlay style={{ opacity: opacity as any }} />
 
-        <DialogContent
-          className="l-container full"
-          aria-labelledby="dialog-title"
-        >
+        <VisuallyHidden>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={props.onDismiss}
+            aria-label={translate({ id: 'close', lang })}
+          />
+        </VisuallyHidden>
+
+        <DialogContent aria-labelledby="dialog-title">
           <AnimatedContainer
             style={{ opacity: opacity as any, top }}
             setDragGoal={setDragGoal}
@@ -189,4 +198,6 @@ Dialog.Header = Header
 Dialog.Content = Content
 Dialog.Footer = Footer
 Dialog.Message = Message
+Dialog.TextButton = TextButton
+Dialog.RoundedButton = RoundedButton
 Dialog.Lazy = Lazy

@@ -10,7 +10,7 @@ import {
   useRef,
 } from 'react'
 
-import { KEYCODES, TEST_ID } from '~/common/enums'
+import { KEYVALUE, TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
@@ -18,7 +18,14 @@ import styles from './styles.module.css'
 
 export type CardBgColor = 'greyLighter' | 'white' | 'transparent' | 'none'
 export type CardBgHoverColor = 'greyLighter' | 'transparent' | 'none'
-export type CardSpacing = 0 | 'xtight' | 'tight' | 'base' | 'loose'
+export type CardSpacing =
+  | 0
+  | 'xtight'
+  | 'baseTight'
+  | 'tight'
+  | 'base'
+  | 'baseLoose'
+  | 'loose'
 export type CardBorderColor = 'greyLighter' | 'lineGreyLight' | 'green'
 export type CardBorderRadius = 'xtight' | 'xxtight' | 'base' | 'loose'
 
@@ -30,6 +37,9 @@ export interface CardProps {
 
   borderColor?: CardBorderColor
   borderRadius?: CardBorderRadius
+
+  textColor?: 'black' | 'greyDarker' | 'red'
+  textActiveColor?: 'black' | 'redDark'
 
   isActive?: boolean
   activeOutline?: 'auto'
@@ -60,6 +70,9 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
       borderColor,
       borderRadius,
+
+      textColor,
+      textActiveColor,
 
       isActive,
       activeOutline,
@@ -109,6 +122,13 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
       [styles.hasBorder]: !!borderColor || !!borderRadius,
       [styles.disabled]: disabled,
+      [styles[textColor ? `text${capitalizeFirstLetter(textColor)}` : '']]:
+        !!textColor,
+      [styles[
+        textActiveColor
+          ? `textActive${capitalizeFirstLetter(textActiveColor)}`
+          : ''
+      ]]: !!textActiveColor,
     })
     const ariaLabel =
       htmlHref || href
@@ -221,7 +241,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         ref={cardRef}
         data-clickable
         onKeyDown={(event) => {
-          if (event.keyCode !== KEYCODES.enter) {
+          if (event.key.toLowerCase() !== KEYVALUE.enter) {
             return
           }
           openLink({

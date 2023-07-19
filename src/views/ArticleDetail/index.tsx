@@ -1,16 +1,12 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import { md2html } from '@matters/matters-editor'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { ADD_TOAST, DEFAULT_LOCALE, URL_QS } from '~/common/enums'
-import {
-  normalizeTag,
-  toGlobalId,
-  toPath,
-  toUserLanguage,
-} from '~/common/utils'
+import { URL_QS } from '~/common/enums'
+import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
   EmptyLayout,
@@ -23,6 +19,7 @@ import {
   Spinner,
   Throw404,
   Title,
+  toast,
   Translate,
   useFeatures,
   usePublicQuery,
@@ -120,10 +117,9 @@ const BaseArticleDetail = ({
   article: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
 }) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   const features = useFeatures()
   const [fixedWall, setFixedWall] = useState(false)
@@ -153,7 +149,7 @@ const BaseArticleDetail = ({
 
   // translation
   const [autoTranslation] = useState(article.translation) // cache initial article data since it will be overwrote by newly's if URL is shadow replaced
-  const [translated, setTranslate] = useState(!!locale)
+  const [translated, setTranslate] = useState(!!routerLang)
   const originalLang = article.language
   const {
     lang: preferredLang,
@@ -167,20 +163,15 @@ const BaseArticleDetail = ({
   const translate = () => {
     getTranslation({ variables: { mediaHash, language: preferredLang } })
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="正在透過 Google 翻譯..."
-              zh_hans="正在通过 Google 翻译..."
-              en="Translating by Google..."
-            />
-          ),
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <Translate
+          zh_hant="正在透過 Google 翻譯..."
+          zh_hans="正在通过 Google 翻译..."
+          en="Translating by Google..."
+        />
+      ),
+    })
   }
 
   const toggleTranslate = () => {
@@ -190,36 +181,36 @@ const BaseArticleDetail = ({
       translate()
     }
   }
+
   useEffect(() => {
     if (!!autoTranslation) {
-      setTimeout(() => {
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'black',
-              placement: 'bottom',
-              duration: 8 * 1000,
-              clearable: true,
-              content: (
-                <TranslationToast.Content language={autoTranslation.language} />
-              ),
-              switchContent: (
-                <TranslationToast.SwitchContent onClick={toggleTranslate} />
-              ),
-            },
-          })
-        )
+      toast.success({
+        message: (
+          <TranslationToast.Content language={autoTranslation.language} />
+        ),
+        actions: [
+          {
+            content: (
+              <Translate
+                zh_hans="阅读原文"
+                zh_hant="閱讀原文"
+                en="View original content"
+              />
+            ),
+            onClick: toggleTranslate,
+          },
+        ],
       })
     }
   }, [])
 
   // set language cookie for anonymous if it doesn't exist
   useEffect(() => {
-    if (cookieLang || viewer.isAuthed || !locale) {
+    if (cookieLang || viewer.isAuthed || !routerLang) {
       return
     }
 
-    setLang(toUserLanguage(locale) as UserLanguage)
+    setLang(routerLang)
   }, [])
 
   const {
@@ -231,13 +222,19 @@ const BaseArticleDetail = ({
   const title = translated && translatedTitle ? translatedTitle : article.title
   const summary =
     translated && translatedSummary ? translatedSummary : article.summary
+  const isEnableMd = !!getQuery('md')
+  const originalContent =
+    isEnableMd && article.contents.markdown
+      ? md2html(article.contents.markdown)
+      : article.contents.html
   const content =
-    translated && translatedContent ? translatedContent : article.content
+    translated && translatedContent ? translatedContent : originalContent
   const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
 
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header
+        mode="compact"
         right={
           <UserDigest.Rich
             user={article.author}
@@ -374,12 +371,11 @@ const ArticleDetail = ({
 }: {
   includeTranslation: boolean
 }) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   /**
    * fetch public data
@@ -395,7 +391,7 @@ const ArticleDetail = ({
     {
       variables: {
         mediaHash,
-        language: locale ? toUserLanguage(locale) : UserLanguage.ZhHant,
+        language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
       skip: !isQueryByHash,
@@ -406,7 +402,7 @@ const ArticleDetail = ({
     {
       variables: {
         id: toGlobalId({ type: 'Article', id: articleId }),
-        language: locale ? toUserLanguage(locale) : UserLanguage.ZhHant,
+        language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
       skip: isQueryByHash,
@@ -489,10 +485,7 @@ const ArticleDetail = ({
     const nsearch = rems.length > 0 ? `?${new URLSearchParams(rems)}` : ''
     const nhref = `${n.pathname}${nsearch}${n.hash || u.hash}`
 
-    if (
-      nhref !== router.asPath ||
-      (router.locale && router.locale !== DEFAULT_LOCALE)
-    ) {
+    if (nhref !== router.asPath || routerLang) {
       router.replace(nhref, undefined, { shallow: true, locale: false })
     }
   }, [latestHash])
@@ -609,11 +602,10 @@ const ArticleDetail = ({
 }
 
 const ArticleDetailOuter = () => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   const isQueryByHash = !!(mediaHash && isMediaHashPossiblyValid(mediaHash))
   const resultByHash = usePublicQuery<ArticleAvailableTranslationsQuery>(
@@ -630,10 +622,8 @@ const ArticleDetailOuter = () => {
   const { data } = resultByHash.data ? resultByHash : resultByNodeId
   const loading = resultByHash.loading || resultByNodeId.loading
   const includeTranslation =
-    !!locale &&
-    (data?.article?.availableTranslations || []).includes(
-      toUserLanguage(locale) as UserLanguage
-    )
+    !!routerLang &&
+    (data?.article?.availableTranslations || []).includes(routerLang)
 
   /**
    * Rendering

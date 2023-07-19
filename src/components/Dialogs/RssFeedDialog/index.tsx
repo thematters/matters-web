@@ -83,10 +83,14 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
         <Dialog.Header
           title="contentFeedEntrance"
           closeDialog={closeDialog}
-          closeTextId="close"
+          closeText="close"
         />
 
-        <DynamicContent user={user} refetch={refetch} />
+        <DynamicContent
+          user={user}
+          refetch={refetch}
+          closeDialog={closeDialog}
+        />
       </Dialog>
     </>
   )

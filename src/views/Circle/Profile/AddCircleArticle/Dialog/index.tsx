@@ -2,12 +2,13 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST, REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
+import { REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Dialog,
   LanguageContext,
   Spinner,
+  toast,
   useDialogSwitch,
   useMutation,
   useStep,
@@ -80,14 +81,9 @@ const AddCircleArticleDialog = ({
       },
     })
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: translate({ id: 'addedArticleCircle', lang }),
-        },
-      })
-    )
+    toast.success({
+      message: translate({ id: 'addedArticleCircle', lang }),
+    })
 
     window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL_ARTICLES))
 
@@ -107,7 +103,7 @@ const AddCircleArticleDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         {isSelect && (
           <DynamicSearchSelectForm
             title="addArticles"
@@ -118,7 +114,7 @@ const AddCircleArticleDialog = ({
             nodes={articles}
             saving={loading}
             headerRightButtonText={
-              <FormattedMessage defaultMessage="Next Step" description="" />
+              <FormattedMessage defaultMessage="Next Step" />
             }
             closeDialog={closeDialog}
           />

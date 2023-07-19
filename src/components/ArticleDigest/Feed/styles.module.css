@@ -1,13 +1,18 @@
-.content {
-  display: grid;
-  grid-template:
-    'head cover' auto
-    'description description' auto/ 1fr auto;
+.container {
+  @mixin flex-center-space-between;
+
+  gap: 2rem;
 
   @media (--sm-up) {
-    grid-template-areas:
-      'head cover'
-      'description cover';
+    gap: 3rem;
+  }
+}
+
+.content {
+  flex-grow: 1;
+
+  @media (--sm-up) {
+    flex: 1;
   }
 }
 
@@ -17,8 +22,6 @@
 
 .author {
   @mixin flex-center-start;
-
-  margin-top: var(--spacing-tight);
 }
 
 .description {
@@ -26,14 +29,14 @@
 
   flex-grow: 1;
   grid-area: description;
-  margin-top: var(--spacing-tight);
-  font-size: var(--font-size-md-s);
-  line-height: 1.5rem;
+  margin-top: var(--spacing-x-tight);
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
   color: var(--color-grey-dark);
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 1;
 
-  @media (--sm-up) {
-    margin-top: var(--spacing-base);
+  &.lineClamp2 {
+    -webkit-line-clamp: 2;
   }
 }
 
@@ -41,9 +44,8 @@
   position: relative;
   flex-shrink: 0;
   grid-area: cover;
-  width: 4.5rem;
-  height: 4.5rem;
-  margin-left: var(--spacing-base);
+  width: 4.75rem;
+  height: 4.75rem;
 
   & img {
     @mixin object-fit-cover;
@@ -53,12 +55,14 @@
   }
 
   @media (--sm-up) {
-    width: 10.625rem;
-    height: 6rem;
+    width: 6.625rem;
+    height: 6.625rem;
   }
 }
 
 .header {
-  margin-bottom: var(--spacing-base);
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-x-tight);
   line-height: 1;
 }

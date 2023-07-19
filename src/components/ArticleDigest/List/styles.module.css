@@ -1,0 +1,21 @@
+.container {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-base) 0;
+}
+
+.left {
+  & > * + * {
+    margin-top: var(--spacing-x-tight);
+  }
+}
+
+.right {
+  flex-shrink: 0;
+  margin-left: var(--spacing-base);
+  text-align: right;
+}
+
+.user {
+  @mixin flex-center-start;
+}

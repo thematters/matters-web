@@ -11,9 +11,11 @@ import {
 } from '~/common/enums'
 import { analytics, toPath, translate } from '~/common/utils'
 import {
+  Button,
   Dialog,
   EmbedShare,
   LanguageContext,
+  TextIcon,
   Translate,
   useMutation,
   ViewerContext,
@@ -194,30 +196,59 @@ const Tasks = ({ task }: Props) => {
       )}
 
       <section className={viewer.onboardingTasks.finished ? 'allDone' : ''}>
-        <Dialog.Footer>
-          {viewer.onboardingTasks.finished ? (
-            <Dialog.Footer.Button
-              type="button"
-              bgColor="gold"
-              textColor="white"
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={
+                viewer.onboardingTasks.finished ? (
+                  <Translate
+                    zh_hant="繼續閱讀航程"
+                    zh_hans="继续阅读航程"
+                    en="Continue reading journey"
+                  />
+                ) : (
+                  <Translate
+                    zh_hant="不再顯示導航"
+                    zh_hans="不再显示导航"
+                    en="Skip the guide"
+                  />
+                )
+              }
+              color={viewer.onboardingTasks.finished ? 'green' : 'greyDarker'}
               onClick={hideTasks}
+            />
+          }
+          smUpBtns={
+            <Button
+              bgColor="white"
+              size={['100%', '3rem']}
+              onClick={hideTasks}
+              className={styles.finishButton}
             >
-              <Translate
-                zh_hant="繼續閱讀航程"
-                zh_hans="继续阅读航程"
-                en="Continue reading journey"
-              />
-            </Dialog.Footer.Button>
-          ) : (
-            <Dialog.Footer.Button type="button" onClick={hideTasks} implicit>
-              <Translate
-                zh_hant="不再顯示導航"
-                zh_hans="不再显示导航"
-                en="Skip the guide"
-              />
-            </Dialog.Footer.Button>
-          )}
-        </Dialog.Footer>
+              <TextIcon
+                color="greyDark"
+                size="sm"
+                weight="normal"
+                textPlacement="left"
+                textDecoration="underline"
+              >
+                {viewer.onboardingTasks.finished ? (
+                  <Translate
+                    zh_hant="繼續閱讀航程"
+                    zh_hans="继续阅读航程"
+                    en="Continue reading journey"
+                  />
+                ) : (
+                  <Translate
+                    zh_hant="不再顯示導航"
+                    zh_hans="不再显示导航"
+                    en="Skip the guide"
+                  />
+                )}
+              </TextIcon>
+            </Button>
+          }
+        />
 
         {viewer.onboardingTasks.finished && (
           <>

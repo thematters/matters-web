@@ -6,7 +6,12 @@ import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png'
 import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
 import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
-import { toLocale, translate, TranslateArgs } from '~/common/utils'
+import {
+  toLocale,
+  toOGLanguage,
+  translate,
+  TranslateArgs,
+} from '~/common/utils'
 import { LanguageContext, useRoute } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
 
@@ -58,8 +63,8 @@ export const Head: React.FC<HeadProps> = (props) => {
 
   const i18nUrl = (language: string) => {
     return props.path
-      ? `https://${siteDomain}/${language}${props.path}`
-      : `https://${siteDomain}/${language}${router.asPath || '/'}`
+      ? `https://${siteDomain}/${props.path}?locale=${language}`
+      : `https://${siteDomain}/${router.asPath || '/'}?locale=${language}`
   }
 
   if (props.jsonLdData && !props.jsonLdData.description) {
@@ -134,6 +139,7 @@ export const Head: React.FC<HeadProps> = (props) => {
         key="og:description"
         content={head.description}
       />
+      <meta property="og:locale" key="og:locale" content={toOGLanguage(lang)} />
       <meta name="twitter:url" key="twitter:url" content={head.url} />
       <meta
         name="twitter:card"

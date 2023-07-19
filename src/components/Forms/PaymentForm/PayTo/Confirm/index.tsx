@@ -13,7 +13,7 @@ import {
   Button,
   Dialog,
   Form,
-  IconExternalLink16,
+  // IconExternalLink16,
   LanguageContext,
   Spinner,
   TextIcon,
@@ -90,7 +90,9 @@ const Confirm: React.FC<FormProps> = ({
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
 
+  const isHKD = currency === CURRENCY.HKD
   const isUSDT = currency === CURRENCY.USDT
+  // const isLIKE = currency === CURRENCY.LIKE
 
   useEffect(() => {
     if (isUSDT && (!address || isUnsupportedNetwork || !isConnectedAddress)) {
@@ -180,15 +182,37 @@ const Confirm: React.FC<FormProps> = ({
 
   if (isSubmitting || loading) {
     return (
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Spinner />
       </Dialog.Content>
     )
   }
 
+  const submitText = isHKD ? (
+    <>
+      <Translate id="forgetPaymentPassword" />？
+    </>
+  ) : isUSDT ? (
+    <Translate zh_hant="確認送出" zh_hans="确认送出" en="Confirm" />
+  ) : (
+    <Translate
+      zh_hant="前往 Liker Land 支付"
+      zh_hans="前往 Liker Land 支付"
+      en="Go to Liker Land for payment"
+    />
+  )
+  const onSubmitLikeCoin = () => {
+    const payWindow = window.open(tabUrl, '_blank')
+    if (payWindow && tx) {
+      openTabCallback({ window: payWindow, transaction: tx })
+    }
+  }
+
   return (
     <>
-      <Dialog.Content hasGrow>
+      <Dialog.Header title="donation" />
+
+      <Dialog.Content>
         <section>
           <PaymentInfo
             amount={amount}
@@ -225,43 +249,34 @@ const Confirm: React.FC<FormProps> = ({
         </section>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        {currency === CURRENCY.HKD && (
-          <Dialog.Footer.Button
-            bgColor="white"
-            textColor="grey"
-            onClick={switchToResetPassword}
-          >
-            <Translate id="forgetPaymentPassword" />？
-          </Dialog.Footer.Button>
-        )}
-        {currency === CURRENCY.USDT && (
-          <Dialog.Footer.Button
-            bgColor="green"
-            textColor="white"
-            onClick={submitCallback}
-          >
-            <Translate zh_hant="確認送出" zh_hans="确认送出" en="Confirm" />
-          </Dialog.Footer.Button>
-        )}
-        {currency === CURRENCY.LIKE && (
-          <Dialog.Footer.Button
-            onClick={() => {
-              const payWindow = window.open(tabUrl, '_blank')
-              if (payWindow && tx) {
-                openTabCallback({ window: payWindow, transaction: tx })
-              }
-            }}
-            icon={<IconExternalLink16 size="xs" />}
-          >
-            <Translate
-              zh_hant="前往 Liker Land 支付"
-              zh_hans="前往 Liker Land 支付"
-              en="Go to Liker Land for payment"
-            />
-          </Dialog.Footer.Button>
-        )}
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={submitText}
+            color={isHKD ? 'greyDarker' : 'green'}
+            onClick={
+              isHKD
+                ? switchToResetPassword
+                : isUSDT
+                ? submitCallback
+                : onSubmitLikeCoin
+            }
+          />
+        }
+        smUpBtns={
+          <Dialog.TextButton
+            text={submitText}
+            color={isHKD ? 'greyDarker' : 'green'}
+            onClick={
+              isHKD
+                ? switchToResetPassword
+                : isUSDT
+                ? submitCallback
+                : onSubmitLikeCoin
+            }
+          />
+        }
+      />
     </>
   )
 }

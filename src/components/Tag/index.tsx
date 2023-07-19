@@ -44,7 +44,7 @@ export const toDigestTagPlaceholder = (content: string) =>
     },
     numArticles: 0,
     numAuthors: 0,
-  } as DigestTagFragment)
+  }) as DigestTagFragment
 
 export const Tag = ({
   tag,
@@ -115,9 +115,9 @@ export const Tag = ({
       break
     case 'plain':
       textIconProps = {
-        size: 'smS',
+        size: 'xs',
         weight: 'normal',
-        spacing: 'xxxtight',
+        spacing: 0,
         color: 'green',
       }
       break

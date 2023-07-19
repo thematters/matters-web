@@ -12,9 +12,8 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  Spacer,
+  SegmentedTabs,
   Spinner,
-  Tabs,
   Transaction,
   Translate,
 } from '~/components'
@@ -130,7 +129,7 @@ const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List responsiveWrapper>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
@@ -155,8 +154,8 @@ const Transactions = () => {
       <Layout.Header right={<Layout.Header.Title id="paymentTransactions" />} />
 
       <Head title={{ id: 'paymentTransactions' }} />
-      <Spacer size="xtight" />
-      <Tabs
+
+      <SegmentedTabs
         sticky
         side={
           <section className={styles.currencySwitch}>
@@ -167,24 +166,28 @@ const Transactions = () => {
           </section>
         }
       >
-        <Tabs.Tab selected={isALL} onClick={() => setPurpose(Purpose.ALL)}>
+        <SegmentedTabs.Tab
+          selected={isALL}
+          onClick={() => setPurpose(Purpose.ALL)}
+        >
           <Translate zh_hans="全部" zh_hant="全部" en="All" />
-        </Tabs.Tab>
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab
+        <SegmentedTabs.Tab
           selected={isDonaion}
           onClick={() => setPurpose(Purpose.DONATION)}
         >
           <Translate zh_hans="支持" zh_hant="支持" en="Supports" />
-        </Tabs.Tab>
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab
+        <SegmentedTabs.Tab
           selected={isSubscription}
           onClick={() => setPurpose(Purpose.SUBSCRIPTION)}
         >
           <Translate id="subscriptions" />
-        </Tabs.Tab>
-      </Tabs>
+        </SegmentedTabs.Tab>
+      </SegmentedTabs>
+
       <BaseTransactions currency={currency} purpose={purpose} />
     </Layout.Main>
   )

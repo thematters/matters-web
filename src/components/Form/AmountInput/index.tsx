@@ -56,7 +56,7 @@ const AmountInput = forwardRef(
           labelVisHidden={labelVisHidden}
         />
 
-        <Field.Content noMargin>
+        <Field.Content>
           <span className={styles.currency}>{currency}</span>
 
           <input

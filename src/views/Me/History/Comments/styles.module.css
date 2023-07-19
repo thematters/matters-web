@@ -1,0 +1,20 @@
+.item {
+  padding: var(--spacing-base-loose) 0;
+}
+
+.title {
+  margin-top: var(--spacing-x-tight);
+}
+
+.content {
+  @mixin border-left-grey;
+  @mixin line-clamp;
+
+  padding-left: var(--spacing-base);
+  margin-top: var(--spacing-tight);
+  color: var(--color-black);
+  text-overflow: ellipsis;
+  border-left-style: dashed;
+  border-left-width: 3px;
+  -webkit-line-clamp: 3;
+}

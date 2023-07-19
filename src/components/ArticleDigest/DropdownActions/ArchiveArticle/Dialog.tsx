@@ -1,8 +1,13 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
-import { Dialog, useDialogSwitch, useMutation } from '~/components'
+import {
+  Dialog,
+  toast,
+  useDialogSwitch,
+  useMutation,
+  useStep,
+} from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 import {
   ArchiveArticleArticleFragment,
@@ -24,11 +29,17 @@ interface ArchiveArticleDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
+type Step = 'preConfirm' | 'confirm'
+
 const ArchiveArticleDialog = ({
   article,
   children,
 }: ArchiveArticleDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
+
+  const { currStep, forward } = useStep<Step>('preConfirm')
+  const nextStep = () => forward('confirm')
+  const isPreConfirm = currStep === 'preConfirm'
 
   const [archiveArticle] = useMutation<ArchiveArticleMutation>(
     ARCHIVE_ARTICLE,
@@ -45,7 +56,7 @@ const ArchiveArticleDialog = ({
       update: (cache) => {
         updateUserArticles({
           cache,
-          articleId: article.id,
+          targetId: article.id,
           userName: article.author.userName,
           type: 'archive',
         })
@@ -56,57 +67,82 @@ const ArchiveArticleDialog = ({
   const onArchive = async () => {
     await archiveArticle()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <FormattedMessage
-              defaultMessage="Article is hidden"
-              description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
-            />
-          ),
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="Article is hidden"
+          description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+        />
+      ),
+    })
+  }
+
+  const onClickArchive = () => {
+    if (isPreConfirm) {
+      nextStep()
+    } else {
+      onArchive()
+      closeDialog()
+    }
   }
 
   return (
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
-        <Dialog.Header title="archive" closeDialog={closeDialog} mode="inner" />
+      <Dialog isOpen={show} onDismiss={closeDialog}>
+        <Dialog.Header
+          title={<FormattedMessage defaultMessage="Archive works" />}
+        />
 
         <Dialog.Message>
-          <p>
-            <FormattedMessage
-              defaultMessage="Are you sure you want to archive the article?"
-              description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
-            />
-          </p>
+          {isPreConfirm ? (
+            <p>
+              <FormattedMessage
+                defaultMessage="Are you sure you want to archive ‘{article}’?"
+                values={{
+                  article: <span className="u-highlight">{article.title}</span>,
+                }}
+              />
+              <br />
+              <FormattedMessage defaultMessage="Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)" />
+            </p>
+          ) : (
+            <p>
+              <FormattedMessage defaultMessage="This operation cannot be undone, confirm archiving?" />
+            </p>
+          )}
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="red"
-            onClick={() => {
-              onArchive()
-              closeDialog()
-            }}
-          >
-            <FormattedMessage defaultMessage="Archive" description="" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="greyLighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <FormattedMessage defaultMessage="Cancel" description="" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={
+                isPreConfirm ? (
+                  <FormattedMessage defaultMessage="Archive" />
+                ) : (
+                  <FormattedMessage defaultMessage="Confirm Archiving" />
+                )
+              }
+              color="red"
+              onClick={onClickArchive}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={
+                isPreConfirm ? (
+                  <FormattedMessage defaultMessage="Archive" />
+                ) : (
+                  <FormattedMessage defaultMessage="Confirm Archiving" />
+                )
+              }
+              color="red"
+              onClick={onClickArchive}
+            />
+          }
+        />
       </Dialog>
     </>
   )

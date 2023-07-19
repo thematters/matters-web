@@ -19,21 +19,16 @@ const Complete = ({
       )}
 
       {closeDialog && (
-        <Dialog.Header
-          title="successRegister"
-          closeDialog={closeDialog}
-          closeTextId="close"
-          mode="inner"
-        />
+        <Dialog.Header title="successRegister" closeDialog={closeDialog} />
       )}
 
-      <Dialog.Message align="left" spacing="md">
-        <h3>
+      <Dialog.Message>
+        <p>
           <FormattedMessage
             defaultMessage="Welcome to Matters!"
             description="src/components/Forms/EmailSignUpForm/Complete.tsx"
           />
-        </h3>
+        </p>
 
         <p>
           <FormattedMessage
@@ -57,20 +52,38 @@ const Complete = ({
         </p>
       </Dialog.Message>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={() => {
-            redirectToTarget({
-              fallback: isInPage ? 'homepage' : 'current',
-            })
-          }}
-        >
-          <FormattedMessage
-            defaultMessage="Enter Community"
-            description="src/components/Forms/EmailSignUpForm/Complete.tsx"
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={
+              <FormattedMessage
+                defaultMessage="Enter Community"
+                description="src/components/Forms/EmailSignUpForm/Complete.tsx"
+              />
+            }
+            onClick={() => {
+              redirectToTarget({
+                fallback: isInPage ? 'homepage' : 'current',
+              })
+            }}
           />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+        }
+        smUpBtns={
+          <Dialog.TextButton
+            text={
+              <FormattedMessage
+                defaultMessage="Enter Community"
+                description="src/components/Forms/EmailSignUpForm/Complete.tsx"
+              />
+            }
+            onClick={() => {
+              redirectToTarget({
+                fallback: isInPage ? 'homepage' : 'current',
+              })
+            }}
+          />
+        }
+      />
     </>
   )
 }

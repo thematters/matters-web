@@ -1,32 +1,21 @@
 import classNames from 'classnames'
 
-import { capitalizeFirstLetter } from '@/src/common/utils'
-
 import styles from './styles.module.css'
 
-type SpacingX = 0 | 'tight' | 'base' | 'xloose'
-type SpacingY = 0 | 'tight' | 'base' | 'xloose'
-
 interface DialogContentProps {
-  // Note: only apply in "sm-up" if the spacing is large than "base"
-  spacing?: [SpacingY, SpacingX]
+  noSpacing?: boolean
   hasFixed?: boolean
-  hasGrow?: boolean
 }
 
 const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> = ({
-  spacing = [0, 0],
+  noSpacing = true,
   hasFixed,
-  hasGrow,
-
   children,
 }) => {
   const contentClasses = classNames({
     [styles.content]: true,
     [styles.hasFixed]: !!hasFixed,
-    [styles.hasGrow]: !!hasGrow,
-    [styles[`spacingY${capitalizeFirstLetter(spacing[0] + '')}`]]: true,
-    [styles[`spacingX${capitalizeFirstLetter(spacing[1] + '')}`]]: true,
+    [styles.noSpacing]: !!noSpacing,
   })
 
   return <section className={contentClasses}>{children}</section>

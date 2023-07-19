@@ -2,6 +2,25 @@
   @mixin form-container;
 }
 
+.altButtons {
+  @mixin flex-center-start;
+
+  margin-bottom: var(--spacing-x-loose);
+  font-size: var(--font-size-md);
+  line-height: 1.5rem;
+  color: var(--color-grey-dark);
+  white-space: pre-wrap;
+
+  & a,
+  & button {
+    color: var(--color-matters-green);
+  }
+
+  &:not(.isInPage) {
+    padding: 0 var(--spacing-base);
+  }
+}
+
 .footer {
   @mixin flex-center-all;
 

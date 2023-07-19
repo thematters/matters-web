@@ -6,6 +6,7 @@ import IMAGE_WAVE_2 from '@/public/static/images/about/wave-intro-2.svg'
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, TextIcon, Translate } from '~/components'
 
+import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Intro = () => {
@@ -17,8 +18,10 @@ const Intro = () => {
   return (
     <section className={styles.intro} style={style}>
       <ul>
-        <li className={`l-container full ${styles.ecosystem}`}>
-          <div className="l-row">
+        <li
+          className={`${layoutStyles.container} ${layoutStyles.full} ${styles.ecosystem}`}
+        >
+          <div className={layoutStyles.content}>
             <img src={IMAGE_ILLUSTRATION_1.src} alt="illustration 1" />
 
             <section className={styles.content}>
@@ -31,9 +34,9 @@ const Intro = () => {
               </h3>
               <p>
                 <Translate
-                  zh_hant="Matters.Town 為 Matters Lab 生態系的第一個入口，致力搭建去中心化的內容存儲及分發系統，令創作不受制於任何平台，獨立性得到保障。同時，與 LikeCoin 基金會聯手，並支援多種法幣和加密貨幣打賞功能，作者得以將創造力兌現，永續創作。"
-                  zh_hans="Matters.Town 为 Matters Lab 生态系的第一个入口，致力搭建去中心化的内容存储及分发系统，令创作不受制于任何平台，独立性得到保障。同时，与 LikeCoin 基金会联手，并支援多种法币和加密货币打赏功能，作者得以将创造力兑现，永续创作。"
-                  en="Matters.Town, powered by Matters Lab, is a self-regulated community of 100,000 creators, also the first entry point built by Matters Lab. The decentralized content publication ecosystem is built on top of InterPlanetary File System (IPFS), a protocol and peer-to-peer network for storing and sharing data in a distributed file system that is hard for authorities to censor, allowing creators to be truly independent. We also partner with LikeCoin Foundation and support Matters Pay to reward creativity in the form of multiple currencies and cryptocurrencies."
+                  zh_hant="Matters.Town 為 Matters Lab 生態系的第一個入口，致力搭建去中心化的內容存儲及分發系統，令創作不受制於任何平台，獨立性得到保障。支援多種法幣和加密貨幣打賞功能，作者得以將創造力兌現，永續創作。"
+                  zh_hans="Matters.Town 为 Matters Lab 生态系的第一个入口，致力搭建去中心化的内容存储及分发系统，令创作不受制于任何平台，独立性得到保障。支援多种法币和加密货币打赏功能，作者得以将创造力兑现，永续创作。"
+                  en="Matters.Town, powered by Matters Lab, is a self-regulated community of 100,000 creators, also the first entry point built by Matters Lab. The decentralized content publication ecosystem is built on top of InterPlanetary File System (IPFS), a protocol and peer-to-peer network for storing and sharing data in a distributed file system that is hard for authorities to censor, allowing creators to be truly independent. We also support Matters Pay to reward creativity in the form of multiple currencies and cryptocurrencies."
                 />
               </p>
               <section className={styles.buttons}>
@@ -56,8 +59,10 @@ const Intro = () => {
             </section>
           </div>
         </li>
-        <li className={`l-container full ${styles.community}`}>
-          <div className="l-row">
+        <li
+          className={`${layoutStyles.container} ${layoutStyles.full} ${styles.community}`}
+        >
+          <div className={layoutStyles.content}>
             <img src={IMAGE_ILLUSTRATION_2.src} alt="illustration 2" />
 
             <section className={styles.content}>
@@ -99,8 +104,10 @@ const Intro = () => {
             </section>
           </div>
         </li>
-        <li className={`l-container full feature ${styles.feature}`}>
-          <div className="l-row">
+        <li
+          className={`${layoutStyles.container} ${layoutStyles.full} feature ${styles.feature}`}
+        >
+          <div className={layoutStyles.content}>
             <section className={styles.content}>
               {/* <span className={styles.flag}>
                 <Translate
@@ -118,9 +125,9 @@ const Intro = () => {
               </h3>
               <p>
                 <Translate
-                  zh_hant="Matters 鼓勵優質內容，圍爐功能幫助創作者建立、維繫更緊密的支持者社群，並基於訂閱機制，形成從交流到金流的正向反饋。同時，挹注百萬社區基金，設置在場獎學金，串接起華文非虛構寫作者、編輯與出版媒體，以書寫作為行動。"
-                  zh_hans="Matters 鼓励优质内容，围炉功能帮助创作者建立、维系更紧密的支持者社群，并基于订阅机制，形成从交流到金流的正向反馈。同时，挹注百万社区基金，设置在场奖学金，串接起华文非虚构写作者、编辑与出版媒体，以书写作为行动。"
-                  en="With subscription revenue model Circle that forms a closely connected backer community for creators, along with millions of community funds and Frontline Fellowship for Chinese Non-Fiction Writing, all niche content is rewarded and encouraged in Matters."
+                  zh_hant="Matters.Town 鼓勵優質內容，挹注百萬社區基金，透過支持策展機制、圍爐訂閱功能，幫助創作者建立並維繫更緊密的支持者社群，形成從交流到金流的正向反饋。並且，設置在場獎學金，串接起華文非虛構寫作者、編輯與出版媒體，以書寫作為行動。"
+                  zh_hans="Matters.Town 鼓励优质内容，注入百万社区基金，通过支持策展机制、围炉订阅功能，帮助创作者建立并维系更紧密的支持者社群，形成从交流到金流的正向反馈。并且，设置在场奖学金，串接起华文非虚构写作者、编辑与出版媒体，以书写作为行动。"
+                  en="Matters.Town rewards and encourages niche content, while supporting creators with a curation mechanism and subscription model Circle tha tforms a closely connected backer community. Backed by millions in community funds and Frontline Fellowship for Chinese Non-Fiction Writing, empower your writing with Matters.Town's ecosystem connecting writers, editors, and publishers."
                 />
               </p>
               <section className={styles.buttons}>

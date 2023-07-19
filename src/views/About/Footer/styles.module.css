@@ -3,7 +3,7 @@
   color: var(--color-white);
   background: var(--color-black);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 7.5rem 0;
   }
 }
@@ -60,9 +60,7 @@
 
   & .subscribeUs {
     & .buttons {
-      & > a {
-        width: 100%;
-      }
+      width: 100%;
     }
   }
 
@@ -72,7 +70,7 @@
     text-align: center;
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     grid-template: auto / repeat(2, minmax(0, 1fr));
     grid-template-areas:
       'topLeft topRight'

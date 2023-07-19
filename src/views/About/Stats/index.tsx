@@ -1,12 +1,13 @@
 import { Translate } from '~/components'
 
+import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Stats = () => {
   return (
     <section className={styles.stats}>
-      <div className="l-container">
-        <ul className="l-row">
+      <div className={layoutStyles.container}>
+        <ul className={layoutStyles.content}>
           <li>
             <p className={styles.type}>
               <Translate
@@ -35,7 +36,7 @@ const Stats = () => {
                 en="Number of Articles Got Rewarded"
               />
             </p>
-            <span className={styles.num}>200K+</span>
+            <span className={styles.num}>350K+</span>
           </li>
           <li>
             <p className={styles.type}>

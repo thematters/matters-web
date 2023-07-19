@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import { LANG_TEXT_MAP } from '~/common/enums'
 import {
-  DropdownDialog,
+  Dropdown,
   Form,
   LanguageContext,
   LanguageSwitchContent,
@@ -13,33 +13,18 @@ const SwitchLanguage = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <LanguageSwitchContent isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <LanguageSwitchContent />,
-        title: (
-          <Translate
-            zh_hant="修改界面語言"
-            zh_hans="修改介面语言"
-            en="Language"
-          />
-        ),
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<LanguageSwitchContent />}>
+      {({ openDropdown, ref }) => (
         <Form.List.Item
+          onClick={openDropdown}
           title={<Translate id="settingsLanguage" />}
-          onClick={openDialog}
           rightText={LANG_TEXT_MAP[lang]}
-          aria-haspopup={type}
+          aria-haspopup="listbox"
           role="button"
           ref={ref}
         />
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

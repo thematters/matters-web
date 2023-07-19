@@ -1,14 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import {
-  Form,
-  Head,
-  Layout,
-  ResponsiveWrapper,
-  Spacer,
-  useRoute,
-} from '~/components'
+import { Form, Head, Layout, ResponsiveWrapper, useRoute } from '~/components'
 
 const BaseSettings = () => {
   const { getQuery } = useRoute()
@@ -16,7 +9,6 @@ const BaseSettings = () => {
 
   return (
     <ResponsiveWrapper>
-      <Spacer size="loose" />
       <Form.List spacingX={0}>
         <Form.List.Item
           title={
@@ -40,7 +32,6 @@ const BaseSettings = () => {
           role="link"
         />
       </Form.List>
-      <Spacer size="xxxloose" />
     </ResponsiveWrapper>
   )
 }
@@ -51,6 +42,7 @@ const Settings = () => {
       <Layout.Header left={<Layout.Header.Title id="manageCircle" />} />
 
       <Head title={{ id: 'manageCircle' }} />
+
       <BaseSettings />
     </Layout.Main>
   )

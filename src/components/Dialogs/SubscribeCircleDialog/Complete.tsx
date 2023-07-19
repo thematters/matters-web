@@ -9,7 +9,9 @@ interface CompleteProps {
 const Complete: React.FC<CompleteProps> = ({ circle }) => {
   return (
     <>
-      <Dialog.Message align="left">
+      <Dialog.Header title="successSubscribeCircle" />
+
+      <Dialog.Message align="left" smUpAlign="left">
         <p>
           <Translate
             zh_hant="恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
@@ -19,15 +21,20 @@ const Complete: React.FC<CompleteProps> = ({ circle }) => {
         <br />
       </Dialog.Message>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          textColor="black"
-          bgColor="greyLighter"
-          htmlHref={toPath({ page: 'circleDetail', circle }).href}
-        >
-          <Translate zh_hant="馬上逛逛" zh_hans="马上逛逛" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate zh_hant="馬上逛逛" zh_hans="马上逛逛" />}
+            htmlHref={toPath({ page: 'circleDetail', circle }).href}
+          />
+        }
+        smUpBtns={
+          <Dialog.TextButton
+            text={<Translate zh_hant="馬上逛逛" zh_hans="马上逛逛" />}
+            htmlHref={toPath({ page: 'circleDetail', circle }).href}
+          />
+        }
+      />
     </>
   )
 }

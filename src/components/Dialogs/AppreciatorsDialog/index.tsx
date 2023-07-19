@@ -13,7 +13,6 @@ const fragments = {
   article: gql`
     fragment AppreciatorsDialogArticle on Article {
       id
-      id
       likesReceived: appreciationsReceived(input: { first: 0 }) {
         totalCount
       }

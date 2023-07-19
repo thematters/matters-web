@@ -14,7 +14,7 @@
   padding: var(--spacing-loose) var(--spacing-base);
 
   @media (--sm-up) {
-    padding: var(--spacing-loose) 0;
+    padding: var(--spacing-base) 0;
   }
 
   &.clickable {

@@ -30,15 +30,16 @@
   }
 }
 
-.contentInput {
-  @mixin flex-center-start;
+.tabs {
+  margin: calc(var(--spacing-x-tight) * -1) calc(var(--spacing-base) * -1) 0;
 
-  flex-direction: column;
-  margin-top: calc(var(--spacing-base) * -1);
+  @media (--sm-up) {
+    margin: calc(var(--spacing-base) * -1) 0;
+  }
 }
 
-.preview {
-  padding: var(--spacing-base);
+.form {
+  margin: 0 calc(var(--spacing-base) * -1);
 }
 
 .previewResponse {

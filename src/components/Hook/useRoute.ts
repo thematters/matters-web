@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 
 import { PATHS } from '~/common/enums'
+import { toUserLanguage } from '~/common/utils'
+import { UserLanguage } from '~/gql/graphql'
 
 /**
  * Utilities for route
@@ -16,9 +18,11 @@ type QueryKey =
   | 'mediaHash'
   | 'draftId'
   | 'tagId'
+  | 'collectionId'
   | 'q'
   | 'type'
   | 'provider'
+  | 'locale'
   | string
 
 export const useRoute = () => {
@@ -59,5 +63,17 @@ export const useRoute = () => {
     router.replace({ query })
   }
 
-  return { isInPath, isPathStartWith, getQuery, setQuery, replaceQuery, router }
+  // i18n
+  const locale = getQuery('locale')
+  const routerLang = toUserLanguage(locale) as UserLanguage
+
+  return {
+    isInPath,
+    isPathStartWith,
+    getQuery,
+    setQuery,
+    replaceQuery,
+    router,
+    routerLang,
+  }
 }

@@ -48,7 +48,7 @@ const NavBar = () => {
                         zh_hans="星际导航"
                         en="Galaxy Guide"
                       />
-                      <span className={styles.highlight}> {doneCount}/5</span>
+                      <span className="u-highlight"> {doneCount}/5</span>
                     </p>
                   </section>
 

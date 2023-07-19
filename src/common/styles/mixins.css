@@ -71,7 +71,8 @@
 @define-mixin font-serif {
   font-family: var(--font-serif-tc);
 
-  &[lang='zh-Hans'] {
+  &[lang='zh-Hans'],
+  &[data-lang='zh-Hans'] {
     font-family: var(--font-serif-sc);
   }
 }
@@ -79,7 +80,8 @@
 @define-mixin font-sans {
   font-family: var(--font-sans-tc);
 
-  &[lang='zh-Hans'] {
+  &[lang='zh-Hans'],
+  &[data-lang='zh-Hans'] {
     font-family: var(--font-sans-sc);
   }
 }
@@ -164,10 +166,10 @@
   height: var(--input-height);
   padding: var(--spacing-base);
   color: var(--color-black);
+  caret-color: var(--color-matters-green);
   background-color: var(--color-white);
   border-radius: var(--spacing-x-tight);
   transition-property: border-color, background-color;
-  caret-color: var(--color-matters-green);
 
   &:focus,
   &.focus {
@@ -238,7 +240,7 @@
   }
 
   & .left {
-    color: var(--color-grey-dark);
+    color: var(--color-grey);
 
     & > * + * {
       margin-left: var(--spacing-base);

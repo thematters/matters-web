@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Spacer, Tabs } from '~/components'
+import { SegmentedTabs } from '~/components'
 
 import AcceptedInvites from './Accepted'
 import PendingInvites from './Pending'
@@ -16,23 +16,27 @@ const InvitesFeed: React.FC = () => {
 
   return (
     <>
-      <Spacer size="xtight" />
-
-      <Tabs sticky>
-        <Tabs.Tab onClick={() => setType('pending')} selected={isPending}>
+      <SegmentedTabs sticky>
+        <SegmentedTabs.Tab
+          onClick={() => setType('pending')}
+          selected={isPending}
+        >
           <FormattedMessage
             defaultMessage="Pending"
             description="src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
           />
-        </Tabs.Tab>
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab onClick={() => setType('accepted')} selected={isAccepted}>
+        <SegmentedTabs.Tab
+          onClick={() => setType('accepted')}
+          selected={isAccepted}
+        >
           <FormattedMessage
             defaultMessage="Accepted"
             description="src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
           />
-        </Tabs.Tab>
-      </Tabs>
+        </SegmentedTabs.Tab>
+      </SegmentedTabs>
 
       {isPending && <PendingInvites />}
       {isAccepted && <AcceptedInvites />}

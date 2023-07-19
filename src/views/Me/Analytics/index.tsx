@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
-import { Head, Layout, List, QueryError, Spacer, Spinner } from '~/components'
+import { Head, Layout, List, QueryError, Spinner } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { MeAnalyticsQuery } from '~/gql/graphql'
 
@@ -60,13 +60,31 @@ const MyAnalytics = () => {
     },
   })
 
+  const Header = () => (
+    <>
+      <Layout.Header
+        left={
+          <Layout.Header.Title id="myAnalytics">
+            <FormattedMessage defaultMessage="Top Supporters" />
+          </Layout.Header.Title>
+        }
+        right={
+          <>
+            <span />
+            <SelectPeriod period={period} onChange={setPeriod} />
+          </>
+        }
+      />
+
+      <Head title={{ id: 'myAnalytics' }} />
+    </>
+  )
+
   if (loading) {
     return (
       <Layout.Main>
-        <Spacer />
-        <Layout.Header.Title id="myAnalytics">
-          <FormattedMessage defaultMessage="Top Supporters" description="" />
-        </Layout.Header.Title>
+        <Header />
+
         <Spinner />
       </Layout.Main>
     )
@@ -75,10 +93,8 @@ const MyAnalytics = () => {
   if (error) {
     return (
       <Layout.Main>
-        <Spacer />
-        <Layout.Header.Title id="myAnalytics">
-          <FormattedMessage defaultMessage="Top Supporters" description="" />
-        </Layout.Header.Title>
+        <Header />
+
         <QueryError error={error} />
       </Layout.Main>
     )
@@ -93,20 +109,8 @@ const MyAnalytics = () => {
 
   return (
     <Layout.Main>
-      <Layout.Header
-        left={
-          <Layout.Header.Title id="myAnalytics">
-            <FormattedMessage defaultMessage="Top Supporters" description="" />
-          </Layout.Header.Title>
-        }
-        right={
-          <>
-            <span />
-            <SelectPeriod period={period} onChange={setPeriod} />
-          </>
-        }
-      />
-      <Head title={{ id: 'myAnalytics' }} />
+      <Header />
+
       <section className={styles.container}>
         {edges?.length === 0 && (
           <section className={styles.noSupporter}>
@@ -114,7 +118,7 @@ const MyAnalytics = () => {
               <AnalyticsNoSupporter />
             </section>
             <p>
-              <FormattedMessage defaultMessage="No data yet." description="" />
+              <FormattedMessage defaultMessage="No data yet." />
             </p>
           </section>
         )}

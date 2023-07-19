@@ -6,7 +6,6 @@ import { useContext, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
-  ADD_TOAST,
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
@@ -25,6 +24,8 @@ import {
   LanguageContext,
   LanguageSwitch,
   Layout,
+  toast,
+  Translate,
   useMutation,
 } from '~/components'
 import { UserLoginMutation } from '~/gql/graphql'
@@ -43,7 +44,7 @@ interface FormProps {
   submitCallback?: () => void
   gotoResetPassword?: () => void
   gotoEmailSignUp?: () => void
-  closeDialog?: () => void
+  closeDialog: () => void
   back?: () => void
 }
 
@@ -127,19 +128,10 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           submitCallback()
         }
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <FormattedMessage
-                  defaultMessage="Logged in successfully"
-                  description=""
-                />
-              ),
-            },
-          })
-        )
+        toast.success({
+          message: <FormattedMessage defaultMessage="Logged in successfully" />,
+        })
+
         analytics.identifyUser()
 
         setSubmitting(false)
@@ -168,13 +160,12 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     <section className={containerClasses}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
-          label={<FormattedMessage defaultMessage="Email" description="" />}
+          label={<FormattedMessage defaultMessage="Email" />}
           type="email"
           name="email"
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Enter Email',
-            description: '',
           })}
           value={values.email}
           error={touched.email && errors.email}
@@ -183,7 +174,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         />
 
         <Form.Input
-          label={<FormattedMessage defaultMessage="Password" description="" />}
+          label={<FormattedMessage defaultMessage="Password" />}
           type="password"
           name="password"
           required
@@ -217,12 +208,12 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     </section>
   )
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
+  const SubmitButton = () => (
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
@@ -234,7 +225,13 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="login" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<FormattedMessage defaultMessage="Confirm" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
@@ -250,16 +247,32 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="login"
-          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="login"
+        leftBtn={
+          back ? (
+            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+          ) : null
+        }
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

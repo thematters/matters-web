@@ -45,12 +45,3 @@
 .result-item {
   padding: var(--spacing-base);
 }
-
-.endOfResults {
-  @mixin flex-center-all;
-
-  padding-top: var(--spacing-base);
-  padding-bottom: var(--spacing-base);
-  font-size: var(--font-size-sm);
-  color: var(--color-grey);
-}

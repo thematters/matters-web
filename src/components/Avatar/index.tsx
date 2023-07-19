@@ -11,7 +11,16 @@ import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
+export type AvatarSize =
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | 'xxl'
+  | 'xxxl'
+  | 'xxxlm'
+  | 'xxxxl'
 
 export type AvatarLogbook = PartialDeep<AvatarUserLogbookFragment>
 
@@ -21,6 +30,7 @@ export interface AvatarProps {
   src?: string | null
   inEditor?: boolean
   inProfile?: boolean
+  title?: string
 }
 
 const fragments = {
@@ -51,7 +61,7 @@ const fragments = {
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const { user, size = 'default', src, inEditor, inProfile } = props
+  const { user, size = 'default', src, title, inEditor, inProfile } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
   const isFallback =
     (!src && !user?.avatar) || source.indexOf('data:image') >= 0
@@ -74,7 +84,7 @@ export const Avatar = (props: AvatarProps) => {
   } as React.CSSProperties
 
   return (
-    <div className={avatarClasses} style={style}>
+    <div className={avatarClasses} style={style} title={title}>
       <ResponsiveImage
         url={source}
         size="144w"

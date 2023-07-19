@@ -9,12 +9,12 @@ type ItemProps = {
   title: string | React.ReactNode
   subtitle?: string | React.ReactNode
 
-  leftAlign?: 'top'
   right?: React.ReactNode
   rightText?: string | React.ReactNode
   rightTextColor?: 'green' | 'greyDarker' | 'black'
   rightSubText?: string | React.ReactNode
-  forceGreyStyle?: boolean
+  rightIcon?: React.ReactNode
+
   bold?: boolean
 
   ref?: any
@@ -25,13 +25,12 @@ const Item: React.FC<ItemProps> = forwardRef(
     {
       title,
       subtitle,
-      leftAlign,
       right,
       rightText,
       rightTextColor = 'greyDarker',
       rightSubText,
+      rightIcon = <IconArrowRight16 color="grey" />,
 
-      forceGreyStyle,
       bold,
 
       ...cardProps
@@ -41,9 +40,9 @@ const Item: React.FC<ItemProps> = forwardRef(
     const clickable = cardProps.href || cardProps.htmlHref || cardProps.onClick
     const leftClasses = classNames({
       [styles.left]: true,
-      [styles.top]: leftAlign === 'top',
       [styles.bold]: !!bold,
     })
+
     const itemContent = (
       <section className={styles.container}>
         <section className={leftClasses}>
@@ -54,7 +53,7 @@ const Item: React.FC<ItemProps> = forwardRef(
         <section className={styles.right}>
           {right || (
             <TextIcon
-              icon={clickable && <IconArrowRight16 color={'grey'} />}
+              icon={clickable && rightIcon}
               size="md"
               textPlacement="left"
               spacing="xtight"

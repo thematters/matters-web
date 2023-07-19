@@ -22,8 +22,8 @@ import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
 
-const DynamicToastContainer = dynamic(
-  () => import('~/components/Toast').then((mod) => mod.Toast.Container),
+const DynamicToaster = dynamic(
+  () => import('~/components/Toast').then((mod) => mod.Toaster),
   { ssr: false }
 )
 const DynamicAnalyticsInitilizer = dynamic(
@@ -97,7 +97,7 @@ const Root = ({
               <TranslationsProvider>
                 {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-                <DynamicToastContainer />
+                <DynamicToaster />
                 <DynamicAnalyticsInitilizer user={viewer || {}} />
                 <DynamicGlobalDialogs />
                 <DynamicProgressBar />

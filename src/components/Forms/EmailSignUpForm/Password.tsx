@@ -154,23 +154,19 @@ const Password: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<FormattedMessage defaultMessage="Password" description="" />}
+        label={<FormattedMessage defaultMessage="Password" />}
         type="password"
         name="password"
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Enter Password',
-          description: '',
         })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
         onChange={handleChange}
         hint={
-          <FormattedMessage
-            defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
-            description=""
-          />
+          <FormattedMessage defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed" />
         }
       />
 
@@ -191,10 +187,7 @@ const Password: React.FC<FormProps> = ({
         value={values.comparedPassword}
         error={touched.comparedPassword && errors.comparedPassword}
         hint={
-          <FormattedMessage
-            defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
-            description=""
-          />
+          <FormattedMessage defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed" />
         }
         onBlur={handleBlur}
         onChange={handleChange}
@@ -202,12 +195,12 @@ const Password: React.FC<FormProps> = ({
     </Form>
   )
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
+  const SubmitButton = () => (
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
@@ -220,7 +213,13 @@ const Password: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="register" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<FormattedMessage defaultMessage="Confirm" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
@@ -231,15 +230,26 @@ const Password: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="register"
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="register"
+        closeDialog={closeDialog}
+        rightBtn={<SubmitButton />}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

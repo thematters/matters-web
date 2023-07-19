@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
-import { IconAdd24, Menu, TextIcon, useMutation } from '~/components'
+import { IconCirclePlus20, Menu, toast, useMutation } from '~/components'
 import {
   SetTagSelectedButtonArticleFragment,
   SetTagSelectedMutation,
@@ -51,32 +50,26 @@ const SetTagSelectedButton = ({
 
   return (
     <Menu.Item
-      onClick={async () => {
-        await update()
-
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <FormattedMessage
-                  defaultMessage="The article has been added to the Trending"
-                  description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
-                />
-              ),
-              duration: 2000,
-            },
-          })
-        )
-      }}
-    >
-      <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
+      text={
         <FormattedMessage
           defaultMessage="Add to Featured"
           description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
         />
-      </TextIcon>
-    </Menu.Item>
+      }
+      icon={<IconCirclePlus20 size="mdS" />}
+      onClick={async () => {
+        await update()
+
+        toast.success({
+          message: (
+            <FormattedMessage
+              defaultMessage="The article has been added to the Trending"
+              description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+            />
+          ),
+        })
+      }}
+    />
   )
 }
 

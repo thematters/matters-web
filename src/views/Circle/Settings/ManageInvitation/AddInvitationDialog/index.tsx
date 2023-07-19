@@ -69,7 +69,7 @@ const AddCircleInvitationDialog = ({ children }: Props) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm" fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         {isSearch && (
           <DynamicInviteeSearch closeDialog={closeDialog} save={save} />
         )}

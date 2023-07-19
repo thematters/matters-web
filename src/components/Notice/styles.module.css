@@ -98,10 +98,6 @@
   padding: var(--spacing-x-tight);
 }
 
-.highlight {
-  color: var(--color-matters-green);
-}
-
 /* NoticeCircleName */
 .circleDisplayName {
   color: var(--color-black);
@@ -155,10 +151,11 @@
   @mixin border-left-grey;
   @mixin line-clamp;
 
-  padding-left: var(--spacing-tight);
+  padding-left: var(--spacing-base);
   margin-left: var(--spacing-xx-loose);
   color: var(--color-black);
   text-overflow: ellipsis;
   border-left-style: dashed;
+  border-left-width: 3px;
   -webkit-line-clamp: 3;
 }

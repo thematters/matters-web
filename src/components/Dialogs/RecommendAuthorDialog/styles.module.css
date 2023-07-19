@@ -4,6 +4,12 @@
   }
 }
 
+.tabs {
+  @media (--sm-up) {
+    padding: 0 var(--spacing-base);
+  }
+}
+
 .feed {
   padding-bottom: var(--spacing-x-tight);
 }

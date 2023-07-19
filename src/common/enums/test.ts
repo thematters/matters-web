@@ -4,6 +4,7 @@ export enum TEST_ID {
   // digests
   DIGEST_ARTICLE_CARD = 'digest/article/card',
   DIGEST_ARTICLE_FEED = 'digest/article/feed',
+  DIGEST_ARTICLE_LIST = 'digest/article/list',
   DIGEST_ARTICLE_FEED_FOOTER_PIN = 'digest/article/feed/footer/pin',
   DIGEST_ARTICLE_NOTICE = 'digest/article/notice',
   DIGEST_ARTICLE_SIDEBAR = 'digest/article/sidebar',
@@ -18,6 +19,7 @@ export enum TEST_ID {
   DIGEST_TAG_FEED = 'digest/tag/feed',
   DIGEST_TAG_RICH = 'digest/tag/rich',
   DIGEST_TAG_SIDEBAR = 'digest/tag/sidebar',
+  DIGEST_COLLECTION_FEED = 'digest/collection/feed',
   // dialogs
   DIALOG_AUTH = 'dialog/auth',
   // search

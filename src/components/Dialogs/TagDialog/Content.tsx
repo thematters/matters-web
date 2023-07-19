@@ -3,10 +3,10 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
 import { useContext, useId } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import {
-  ADD_TOAST,
   ASSET_TYPE,
   ENTITY_TYPE,
   MAX_TAG_CONTENT_LENGTH,
@@ -24,6 +24,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  toast,
   Translate,
   useMutation,
 } from '~/components'
@@ -48,7 +49,9 @@ const HintLengthText: React.FC<{
 }> = ({ curLength, maxLength }) => (
   <>
     <span className={styles.count}>
-      <span className={curLength > 0 ? 'highlight' : ''}>{curLength ?? 0}</span>
+      <span className={curLength > 0 ? 'u-highlight' : ''}>
+        {curLength ?? 0}
+      </span>
       &nbsp;/&nbsp;{maxLength}
     </span>
   </>
@@ -127,15 +130,9 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
           },
         })
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: <Translate id={id ? 'tagEdited' : 'tagCreated'} />,
-              duration: 2000,
-            },
-          })
-        )
+        toast.success({
+          message: <Translate id={id ? 'tagEdited' : 'tagCreated'} />,
+        })
 
         const returnedTagId = result?.data?.putTag?.id
         const returnedTagContent = result?.data?.putTag?.content as string
@@ -223,8 +220,8 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
     </Form>
   )
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
+  const SubmitButton = () => (
+    <Dialog.TextButton
       text={<Translate id="confirm" />}
       type="submit"
       form={formId}
@@ -238,10 +235,24 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       <Dialog.Header
         title={isEditing ? 'editTag' : 'createTag'}
         closeDialog={closeDialog}
-        rightButton={SubmitButton}
+        rightBtn={<SubmitButton />}
+        hasSmUpTitle={false}
       />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

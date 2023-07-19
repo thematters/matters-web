@@ -22,6 +22,8 @@ import { ConfirmVerificationCodeMutation } from '~/gql/graphql'
 interface FormProps {
   defaultEmail: string
   submitCallback?: (params: any) => void
+  closeDialog?: () => any
+  back?: () => void
 }
 
 interface FormValues {
@@ -32,6 +34,8 @@ interface FormValues {
 const Request: React.FC<FormProps> = ({
   defaultEmail = '',
   submitCallback,
+  closeDialog,
+  back,
 }) => {
   const [confirmCode] = useMutation<ConfirmVerificationCodeMutation>(
     CONFIRM_CODE,
@@ -129,20 +133,44 @@ const Request: React.FC<FormProps> = ({
     </Form>
   )
 
+  const SubmitButton = () => (
+    <Dialog.TextButton
+      text={<Translate id="nextStep" />}
+      type="submit"
+      form={formId}
+      disabled={isSubmitting}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Header
+        title="resetPaymentPassword"
+        closeDialog={closeDialog}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+          ) : undefined
+        }
+        rightBtn={<SubmitButton />}
+      />
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          form={formId}
-          disabled={isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate id="nextStep" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            <SubmitButton />
+          </>
+        }
+      />
     </>
   )
 }

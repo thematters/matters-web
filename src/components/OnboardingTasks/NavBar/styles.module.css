@@ -28,10 +28,6 @@
     font-weight: var(--font-weight-medium);
   }
 
-  & .highlight {
-    color: var(--color-matters-gold);
-  }
-
   & .left {
     @mixin flex-center-start;
   }

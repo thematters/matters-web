@@ -67,11 +67,8 @@ const IMG_SRC = [
     site_domain_tld_old
   ),
 
-  // get server hostname, for img-cache redirected url
-  // NEXT_PUBLIC_API_HOSTNAME as string,
-  process.env.NEXT_PUBLIC_API_URL
-    ? new URL(process.env.NEXT_PUBLIC_API_URL).hostname
-    : undefined,
+  // Alchemy NFT CDN
+  'nft-cdn.alchemy.com',
 
   // for some old articles were using this s3 urls directly
   'matters-server-production.s3-ap-southeast-1.amazonaws.com',
@@ -128,26 +125,34 @@ const CONNECT_SRC = [
   '*.alchemy.com',
 
   // IPFS Gateways
-  'ipfs.io/ipfs/',
-  'ipfs.infura.io/ipfs/',
-  'dweb.link/ipfs/',
-  'crustwebsites.net/ipfs/',
+  'gateway.ipfs.io/ipfs/',
   'cloudflare-ipfs.com/ipfs/',
-  'ipfs.fleek.co/ipfs/',
   'gateway.pinata.cloud/ipfs/',
-  'meson.network/ipfs/',
-  'ipfs.filebase.io/ipfs/',
+  'ipfs.io/ipfs/',
+  '*.cf-ipfs.com',
+  'cf-ipfs.com/ipfs/',
+  '4everland.io/ipfs/',
+  '*.4everland.io',
+  'storry.tv/ipfs/',
+  '*.storry.tv',
+  'ipfs.runfission.com/ipfs/',
+  'konubinix.eu/ipfs/',
+  'starbase.gw3.io/ipfs/',
+  '*.gw3.io',
 ]
 
 const FRAME_SRC = [
   "'self'",
 
   // Embed
-  'jsfiddle.net',
   'button.like.co',
   'www.youtube.com',
   'player.vimeo.com',
-  'player.youku.com',
+  'player.bilibili.com',
+  'www.bilibili.com',
+  'www.instagram.com',
+  'jsfiddle.net',
+  'codepen.io',
 
   // ReCaptcha
   'www.google.com/recaptcha/',

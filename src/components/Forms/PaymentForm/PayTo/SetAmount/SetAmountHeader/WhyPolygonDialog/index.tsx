@@ -28,7 +28,7 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate
@@ -38,11 +38,9 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
             />
           }
           closeDialog={closeDialog}
-          closeTextId="close"
-          mode="inner"
         />
 
-        <Dialog.Message align="left">
+        <Dialog.Message align="left" smUpAlign="left">
           <ol>
             <li>
               <Translate
@@ -81,15 +79,10 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
           </ol>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="greyLighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="understood" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          closeText={<Translate id="understood" />}
+        />
       </Dialog>
     </>
   )

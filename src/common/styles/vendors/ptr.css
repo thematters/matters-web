@@ -10,7 +10,9 @@
   overflow: hidden;
   text-align: center;
   pointer-events: none;
-  transition: height 0.3s, min-height 0.3s;
+  transition:
+    height 0.3s,
+    min-height 0.3s;
 }
 
 .ptr--box {

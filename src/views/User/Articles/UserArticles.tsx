@@ -1,20 +1,19 @@
 import { useContext, useEffect } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { URL_QS } from '~/common/enums'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
+  ArticleDigestArchive,
   ArticleDigestFeed,
+  Empty,
   EmptyArticle,
   Head,
-  IconDotDivider,
   InfiniteScroll,
   List,
-  Media,
   QueryError,
-  Spinner,
+  Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -27,33 +26,9 @@ import {
   USER_ARTICLES_PUBLIC,
   VIEWER_ARTICLES,
 } from './gql'
-import styles from './styles.module.css'
-
-const ArticleSummaryInfo = ({
-  user,
-}: {
-  user: NonNullable<UserArticlesPublicQuery['user']>
-}) => {
-  const { articleCount: articles, totalWordCount: words } = user.status || {
-    articleCount: 0,
-    totalWordCount: 0,
-  }
-
-  return (
-    <div className={styles.info}>
-      <span className={styles.num}>{articles}&nbsp;</span>
-      <FormattedMessage defaultMessage="articles" description="" />
-
-      <IconDotDivider />
-
-      <span className={styles.num}>{words}&nbsp;</span>
-      <FormattedMessage
-        defaultMessage="words"
-        description="src/views/User/Articles/UserArticles.tsx"
-      />
-    </div>
-  )
-}
+import PinBoard from './PinBoard'
+import Placeholder from './Placeholder'
+import StartWriting from './StartWirting'
 
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
@@ -132,7 +107,7 @@ const UserArticles = () => {
     return (
       <>
         <UserTabs />
-        <Spinner />
+        <Placeholder />
       </>
     )
   }
@@ -150,7 +125,16 @@ const UserArticles = () => {
     return (
       <>
         <UserTabs />
-        <EmptyArticle />
+        <Empty
+          spacingY="xxxloose"
+          description={
+            <Translate
+              en="Deleted user"
+              zh_hans="用户已注销"
+              zh_hant="用戶已註銷"
+            />
+          }
+        />
       </>
     )
   }
@@ -200,8 +184,9 @@ const UserArticles = () => {
     return (
       <>
         <CustomHead />
-        <UserTabs />
+        <UserTabs user={user!} />
         <EmptyArticle />
+        {isViewer && <StartWriting />}
       </>
     )
   }
@@ -214,36 +199,39 @@ const UserArticles = () => {
     <>
       <CustomHead />
 
-      <Media at="sm">
-        <UserTabs />
+      <UserTabs user={user!} />
 
-        <ArticleSummaryInfo user={user} />
-      </Media>
-      <Media greaterThan="sm">
-        <section className={styles.header}>
-          <UserTabs />
+      <PinBoard user={user} />
 
-          <ArticleSummaryInfo user={user} />
-        </section>
-      </Media>
-
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        loader={<Placeholder />}
+        eof
+      >
         <List responsiveWrapper>
           {articleEdges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
-              <ArticleDigestFeed
-                article={node}
-                inUserArticles
-                hasAuthor={false}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'user_article',
-                    contentType: 'article',
-                    location: i,
-                    id: node.id,
-                  })
-                }
-              />
+              {node.articleState !== 'active' ? (
+                <ArticleDigestArchive article={node} />
+              ) : (
+                <ArticleDigestFeed
+                  article={node}
+                  inUserArticles
+                  hasAuthor={false}
+                  hasEdit={true}
+                  hasAddCollection={true}
+                  hasArchive={true}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'user_article',
+                      contentType: 'article',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                />
+              )}
             </List.Item>
           ))}
         </List>
