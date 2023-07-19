@@ -1,32 +1,14 @@
-import dynamic from 'next/dynamic'
-
-import { EmptyLayout, Spinner, Throw404, useRoute } from '~/components'
-
-const DynamicUserArticles = dynamic(() => import('~/views/User/Articles'), {
-  ssr: true,
-  loading: () => (
-    <EmptyLayout>
-      <Spinner />
-    </EmptyLayout>
-  ),
-})
-
-const DynamicCircleWorks = dynamic(() => import('~/views/Circle/Works'), {
-  ssr: true,
-  loading: () => (
-    <EmptyLayout>
-      <Spinner />
-    </EmptyLayout>
-  ),
-})
+import { EmptyLayout, Throw404, useRoute } from '~/components'
+import CircleWorks from '~/views/Circle/Works'
+import UserArticles from '~/views/User/Articles'
 
 const NameIndex = () => {
   const { isPathStartWith } = useRoute()
 
   if (isPathStartWith('/@', true)) {
-    return <DynamicUserArticles />
+    return <UserArticles />
   } else if (isPathStartWith('/~', true)) {
-    return <DynamicCircleWorks />
+    return <CircleWorks />
   }
 
   return (
