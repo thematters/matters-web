@@ -944,6 +944,9 @@
   "ll/ufR": {
     "defaultMessage": "Trending"
   },
+  "m4GG4b": {
+    "defaultMessage": "Delete collection"
+  },
   "mCAIcg": {
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx",
     "defaultMessage": "Hottest"
