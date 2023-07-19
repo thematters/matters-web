@@ -127,7 +127,7 @@ const Select: React.FC<FormProps> = ({
   const Intro = () => {
     return (
       <section className={[containerClasses, styles.intro].join(' ')}>
-        <Dialog.Message align="left">
+        <Dialog.Message align="left" smUpAlign="left">
           <ul>
             <li>
               <FormattedMessage

@@ -57,7 +57,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
           title={<FormattedMessage defaultMessage="Block User" />}
         />
 
-        <Dialog.Message align="center" smUpAlign="left">
+        <Dialog.Message>
           <p>
             <Translate
               zh_hant={`封鎖之後，${user.displayName} 將無法評論、關聯你的作品，不能 @ 你，並且不能加入你的圍爐。你可以在設置裏管理你的封鎖用戶列表。`}

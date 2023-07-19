@@ -36,7 +36,7 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
         />
 
         <Dialog.Content>
-          <Dialog.Message align="left">
+          <Dialog.Message align="left" smUpAlign="left">
             <p className={styles.message}>
               <Translate
                 zh_hant="挑選至少"

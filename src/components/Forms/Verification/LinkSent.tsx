@@ -25,14 +25,6 @@ export const VerificationLinkSent = ({
       )}
 
       <Dialog.Message>
-        <h3>
-          <Translate
-            zh_hant={isRegister ? '已發送快速註冊連結' : '已發送快速驗證連結'}
-            zh_hans={isRegister ? '已发送快速注册链接' : '已发送快速验证链接'}
-            en={isRegister ? 'Register link sent' : 'Verification link sent'}
-          />
-        </h3>
-
         <p>
           <Translate
             zh_hant={

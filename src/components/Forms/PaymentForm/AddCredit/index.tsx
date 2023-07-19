@@ -243,10 +243,9 @@ const BaseAddCredit: React.FC<FormProps> = ({
   if (completed) {
     return (
       <>
-        <Dialog.Message>
-          <h3>
-            <Translate id="successTopUp" />
-          </h3>
+        <Dialog.Header title={<Translate id="successTopUp" />} />
+
+        <Dialog.Message align="center" smUpAlign="center">
           <p>
             <Translate
               zh_hant="創作者們望眼欲穿，快去送上支持吧"

@@ -95,7 +95,7 @@ const ArchiveArticleDialog = ({
           title={<FormattedMessage defaultMessage="Archive works" />}
         />
 
-        <Dialog.Message align="center" smUpAlign="left">
+        <Dialog.Message>
           {isPreConfirm ? (
             <p>
               <FormattedMessage

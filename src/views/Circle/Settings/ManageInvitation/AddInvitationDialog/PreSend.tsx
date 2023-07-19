@@ -118,7 +118,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
         rightBtn={<SubmitButton />}
       />
 
-      <Dialog.Message align="left">
+      <Dialog.Message>
         <p>
           <FormattedMessage
             defaultMessage="Friends will receive free trial invitations to Circle. Set up your invitations now!"

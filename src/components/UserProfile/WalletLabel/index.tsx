@@ -92,6 +92,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
             />
           }
         />
+
         <Dialog.Message>
           <section className={styles.dialogContent}>
             {ensName && <section className={styles.ensName}>{ensName}</section>}

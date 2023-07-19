@@ -16,9 +16,9 @@ const Complete: React.FC<CompleteProps> = ({
       <Dialog.Header title="resetPaymentPassword" />
 
       <Dialog.Message>
-        <h3>
+        <p>
           <Translate id="successResetPaymentPassword" />
-        </h3>
+        </p>
       </Dialog.Message>
 
       <Dialog.Footer

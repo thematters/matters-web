@@ -85,10 +85,6 @@
   "2slIPX": {
     "defaultMessage": "我的赞赏"
   },
-  "2uwwz+": {
-    "defaultMessage": "累计阅读时長代表了你的作品被登入用户阅读的总时数，每次阅读过程超过一定时间后才会计入。此外，同一个用户的多次阅读也会进行累计。",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
-  },
   "32bml8": {
     "defaultMessage": "追踪",
     "description": "src/components/Layout/SideNav/index.tsx"
@@ -300,10 +296,6 @@
   "DFieKt": {
     "defaultMessage": "辞去了 {tag} 的协作者",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
-  },
-  "DXJ8ys": {
-    "defaultMessage": "阅读次数代表了你的作品被登入用户阅读的总次数，每次阅读过程超过一定时间后才会计入。此外，同一个用户的多次阅读也会进行累计。",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "DYrDcG": {
     "defaultMessage": "徽章",
@@ -571,9 +563,6 @@
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
-  "SENRqu": {
-    "defaultMessage": "說明"
-  },
   "SNh1n0": {
     "defaultMessage": "查看名单",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -717,10 +706,6 @@
   "YlPCRU": {
     "defaultMessage": "关联了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
-  },
-  "Z6cII7": {
-    "defaultMessage": "累计阅读时数",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "ZAs170": {
     "defaultMessage": "基本资料",

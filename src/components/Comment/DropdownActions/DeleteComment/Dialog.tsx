@@ -85,7 +85,7 @@ const DeleteCommentDialog = ({
           }
         />
 
-        <Dialog.Message align="center" smUpAlign="left">
+        <Dialog.Message>
           <p>
             <FormattedMessage
               defaultMessage="After deletion, the {commentType} will be removed immediately"

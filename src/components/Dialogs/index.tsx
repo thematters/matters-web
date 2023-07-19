@@ -41,6 +41,3 @@ export * from './UnsubscribeCircleDialog'
 
 // Misc
 export * from './PaymentPointerDialog'
-
-// Help
-export * from './HelpDialog'

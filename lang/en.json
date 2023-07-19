@@ -86,10 +86,6 @@
   "2slIPX": {
     "defaultMessage": "Likes"
   },
-  "2uwwz+": {
-    "defaultMessage": "Accumulated read time indicates the total time length that registered users read.",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
-  },
   "32bml8": {
     "defaultMessage": "Following",
     "description": "src/components/Layout/SideNav/index.tsx"
@@ -301,10 +297,6 @@
   "DFieKt": {
     "defaultMessage": "resigned from {tag} collaborator",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
-  },
-  "DXJ8ys": {
-    "defaultMessage": "Read counts indicates how many registered users read.",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "DYrDcG": {
     "defaultMessage": "Badges",
@@ -573,10 +565,6 @@
     "defaultMessage": "Unpin from profile",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
-  "SENRqu": {
-    "description": "",
-    "defaultMessage": "Help"
-  },
   "SNh1n0": {
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
     "defaultMessage": "View Members"
@@ -721,10 +709,6 @@
   "YlPCRU": {
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
-  },
-  "Z6cII7": {
-    "description": "src/components/Dialogs/HelpDialog/index.tsx",
-    "defaultMessage": "Accumulated Read Time"
   },
   "ZAs170": {
     "description": "src/views/Circle/Settings/index.tsx",
