@@ -1,12 +1,9 @@
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
-  AddCollectionDialog,
-  Button,
   CollectionDigest,
   Head,
   InfiniteScroll,
@@ -20,9 +17,9 @@ import { EmptyCollection } from '~/components/Empty/EmptyCollection'
 import { UserCollectionsQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
+import CreateCollection from './CreateCollection'
 import { USER_COLLECTIONS } from './gql'
 import Placeholder from './Placeholder'
-import styles from './styles.module.css'
 
 const UserCollections = () => {
   const viewer = useContext(ViewerContext)
@@ -122,32 +119,9 @@ const UserCollections = () => {
     return (
       <>
         <CustomHead />
-        <UserTabs />
+        <UserTabs user={user!} />
         <EmptyCollection />
-        {isViewer && (
-          <AddCollectionDialog gotoDetailPage>
-            {({ openDialog }) => {
-              return (
-                <section className={styles.createCollection}>
-                  <Button
-                    size={['5.5rem', '2rem']}
-                    borderColor="green"
-                    borderActiveColor="green"
-                    borderWidth="md"
-                    textColor="green"
-                    textActiveColor="green"
-                    onClick={openDialog}
-                  >
-                    <FormattedMessage
-                      defaultMessage="Create collection"
-                      description="src/views/User/Collections/UserCollections.tsx"
-                    />
-                  </Button>
-                </section>
-              )
-            }}
-          </AddCollectionDialog>
-        )}
+        {isViewer && <CreateCollection />}
       </>
     )
   }
@@ -156,7 +130,7 @@ const UserCollections = () => {
     <>
       <CustomHead />
 
-      <UserTabs />
+      <UserTabs user={user!} />
 
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}

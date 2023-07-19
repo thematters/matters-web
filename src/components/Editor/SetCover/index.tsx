@@ -6,7 +6,6 @@ import { AssetFragment } from '~/gql/graphql'
 
 import SetCoverDialog from './Dialog'
 import Selector from './Selector'
-import styles from './styles.module.css'
 import Uploader, { UploadEntity } from './Uploader'
 
 export type SetCoverProps = {
@@ -78,19 +77,17 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
       />
 
       <Dialog.Content noSpacing={false}>
-        <section className={styles.container}>
-          {/* Uploader */}
-          <Uploader setSelected={setSelected} {...uploadEntity} />
+        {/* Uploader */}
+        <Uploader setSelected={setSelected} {...uploadEntity} />
 
-          {/* Selector */}
-          {assets.length > 0 && (
-            <Selector
-              assets={assets}
-              selected={selected}
-              setSelected={setSelected}
-            />
-          )}
-        </section>
+        {/* Selector */}
+        {assets.length > 0 && (
+          <Selector
+            assets={assets}
+            selected={selected}
+            setSelected={setSelected}
+          />
+        )}
       </Dialog.Content>
 
       <Dialog.Footer

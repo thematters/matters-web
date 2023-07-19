@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import {
   Button,
   Dialog,
+  List,
   QueryError,
   Spinner,
   TextIcon,
@@ -51,7 +52,7 @@ const RemoveButton = ({ remove }: { remove: () => void }) => (
       onClick={() => remove()}
     >
       <TextIcon size="xs" color="greyDark" weight="md">
-        <Translate zh_hant="移除" zh_hans="移除" en="remove" />
+        <Translate zh_hant="移除" zh_hans="移除" en="Remove" />
       </TextIcon>
     </Button>
   </section>
@@ -109,48 +110,46 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
       />
 
       <Dialog.Content>
-        <section className={styles.owner}>
+        <List>
           {tag.owner && (
-            <UserDigest.Rich
-              user={tag.owner}
-              hasDescriptionReplacement
-              descriptionReplacement={
-                <Translate zh_hant="主理人" zh_hans="主理人" en="maintainer" />
-              }
-              spacing={['tight', 'base']}
-            />
-          )}
-        </section>
-
-        {isHavingEditors && (
-          <>
-            <hr className={styles.divider} />
-            <ul>
-              {editors.map((editor) => (
-                <li key={editor.id}>
-                  <UserDigest.Rich
-                    user={editor}
-                    hasDescriptionReplacement
-                    hasFollow={false}
-                    descriptionReplacement={
-                      <Translate
-                        zh_hant="協作者"
-                        zh_hans="协作者"
-                        en="collaborator"
-                      />
-                    }
-                    extraButton={
-                      <RemoveButton remove={() => toRemoveStep(editor)} />
-                    }
-                    spacing={['tight', 'base']}
+            <List.Item>
+              <UserDigest.Rich
+                user={tag.owner}
+                hasDescriptionReplacement
+                descriptionReplacement={
+                  <Translate
+                    zh_hant="主理人"
+                    zh_hans="主理人"
+                    en="Maintainer"
                   />
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
+                }
+                spacing={['tight', 'base']}
+                hasFollow={false}
+              />
+            </List.Item>
+          )}
 
-        <hr className={styles.divider} />
+          {editors.map((editor) => (
+            <List.Item key={editor.id}>
+              <UserDigest.Rich
+                user={editor}
+                hasDescriptionReplacement
+                hasFollow={false}
+                descriptionReplacement={
+                  <Translate
+                    zh_hant="協作者"
+                    zh_hans="协作者"
+                    en="Collaborator"
+                  />
+                }
+                extraButton={
+                  <RemoveButton remove={() => toRemoveStep(editor)} />
+                }
+                spacing={['tight', 'base']}
+              />
+            </List.Item>
+          ))}
+        </List>
 
         <Dialog.Message>
           <p className={styles.hint}>

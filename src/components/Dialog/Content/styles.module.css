@@ -5,7 +5,7 @@
   -webkit-overflow-scrolling: touch;
 
   @media (--md-up) {
-    padding: var(--spacing-base) var(--spacing-base-loose);
+    padding: 0 var(--spacing-base-loose);
   }
 
   &.noSpacing {

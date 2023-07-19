@@ -137,9 +137,9 @@ const Uploader: React.FC<UploaderProps> = ({
 
       <p>
         <Translate
-          zh_hant="上傳一張圖片用作封面，建議尺寸：1600 x 900 像素"
-          zh_hans="上传一张图片用作封面，建议尺寸：1600 x 900 像素"
-          en="Upload an image as cover. Suggested image size: 1600 x 900 pixels"
+          zh_hant="上傳一張照片，建議尺寸 1600 x 900 像素"
+          zh_hans="上传一张照片，建议尺寸 1600 x 900 像素"
+          en="Recommended size 1600 x 900 pixels"
         />
       </p>
 

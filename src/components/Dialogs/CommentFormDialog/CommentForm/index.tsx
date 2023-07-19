@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT, TextId } from '~/common/enums'
 import { dom, stripHtml, trimLineBreaks } from '~/common/utils'
@@ -101,7 +102,13 @@ const CommentForm: React.FC<CommentFormProps> = ({
       })
 
       toast.success({
-        message: (
+        message: commentId ? (
+          <Translate
+            zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已編輯`}
+            zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已编辑`}
+            en={`${COMMENT_TYPE_TEXT.en[type]} edited`}
+          />
+        ) : (
           <Translate
             zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已送出`}
             zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已送出`}
@@ -157,15 +164,21 @@ const CommentForm: React.FC<CommentFormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        closeDialog={closeDialog}
         smUpBtns={
-          <Dialog.TextButton
-            type="submit"
-            form={formId}
-            disabled={isSubmitting || !isValid}
-            text={<Translate zh_hant="送出" zh_hans="送出" en="Send" />}
-            loading={isSubmitting}
-          />
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            <Dialog.TextButton
+              type="submit"
+              form={formId}
+              disabled={isSubmitting || !isValid}
+              text={<Translate zh_hant="送出" zh_hans="送出" en="Send" />}
+              loading={isSubmitting}
+            />
+          </>
         }
       />
     </>

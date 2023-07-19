@@ -20,9 +20,10 @@ const Complete = ({
       )}
 
       <Dialog.Message>
-        <h3>
+        <p>
           <Translate id="successChangeUserName" />
-        </h3>
+        </p>
+
         <br />
         {isInPage && <BackToHomeButton />}
       </Dialog.Message>

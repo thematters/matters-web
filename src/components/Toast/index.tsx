@@ -14,6 +14,7 @@ import {
 import styles from './styles.module.css'
 
 type ToastActionsProps = {
+  type: 'success' | 'error'
   actions: Array<{ content: string | React.ReactNode } & ButtonProps>
   onDismiss?: () => void
 }
@@ -22,17 +23,28 @@ type ToastProps = {
   message: string | React.ReactNode
 } & Partial<Pick<ToastActionsProps, 'actions'>>
 
-const ToastActions: React.FC<ToastActionsProps> = ({ actions, onDismiss }) => {
+const ToastActions: React.FC<ToastActionsProps> = ({
+  type,
+  actions,
+  onDismiss,
+}) => {
   return (
     <section className={styles.actions}>
       {actions.map(({ content, ...props }, index) => (
-        <Button textColor="greyDarker" {...props} key={index}>
+        <Button
+          textColor={type === 'error' ? 'white' : 'greyDarker'}
+          {...props}
+          key={index}
+        >
           {content}
         </Button>
       ))}
 
       <button type="button" onClick={onDismiss}>
-        <IconClose22 color="greyDarker" size="mdM" />
+        <IconClose22
+          color={type === 'error' ? 'white' : 'greyDarker'}
+          size="mdM"
+        />
       </button>
     </section>
   )
@@ -84,6 +96,7 @@ const Toast: React.FC<
 
       {actions && (
         <ToastActions
+          type={type}
           actions={actions}
           onDismiss={() => baseToast.dismiss(toast.id)}
         />

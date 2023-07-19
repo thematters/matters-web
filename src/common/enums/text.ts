@@ -163,12 +163,12 @@ export const TEXT = {
     hintAddTagNamingRestriction:
       '標籤名稱不允許標點符號，字間僅允許一個不連續空白，最大長度 50 字元',
     hintAddCircleInvitee: '添加站內或站外朋友加入圍爐',
-    hintCircleAddArticles: '將公開作品加入圍爐，成為永久收費作品。',
+    hintCircleAddArticles: '將作品加入圍爐，讓更多人一起參與討論',
     hintCircleDisplayName: '2-12 個字元',
     hintCircleName: '2-20 個字元，僅支持英文小寫字母、數字或下劃線',
     hintDescription: '建議 50 字以內，最長 200 字',
     hintDisplayName: '2-20 個字元',
-    hintEditCollection: '關聯自己或他人的作品，幫助讀者更好地發現內容。',
+    hintEditCollection: '精挑細選作品，幫助讀者更容易發現優質內容',
     hintPassword: '至少 8 個字元，支持英文大小寫字母、數字和特殊符號',
     hintPaymentPassword: '輸入六位數字交易密碼',
     hintPaymentPointer: '錢包地址以“$”開頭',
@@ -574,12 +574,12 @@ export const TEXT = {
     hintAddTagNamingRestriction:
       '标签名称不允许标点符号，字间仅允许一个不连续空白，最大长度 50 字元',
     hintAddCircleInvitee: '添加站内或站外朋友加入围炉',
-    hintCircleAddArticles: '将公开作品加入围炉，成为永久收费作品。',
+    hintCircleAddArticles: '将作品加入围炉，让更多人一起参与讨论',
     hintCircleDisplayName: '2-12 个字符',
     hintCircleName: '2-20 个字符，仅支持英文小写字母、数字或下划线',
     hintDescription: '建议 50 字以内，最长 200 字',
     hintDisplayName: '2-20 个字符',
-    hintEditCollection: '关联自己或他人的作品，帮助读者更好地发现内容。',
+    hintEditCollection: '精挑细选作品，帮助读者更容易发现优质内容',
     hintPassword: '至少 8 个字符，支持英文大小写字母、数字和特殊符号',
     hintPaymentPassword: '输入六位数字交易密码',
     hintPaymentPointer: '钱包地址以“$”开头',
@@ -997,8 +997,7 @@ export const TEXT = {
     hintAddTagNamingRestriction:
       'Tag name does not allow punctuations, only one space is allowed between words, and the maximum length is 50 characters',
     hintAddCircleInvitee: 'Invite friends to join your circle',
-    hintCircleAddArticles:
-      'Add articles to Circle and keep them behind the paywall.',
+    hintCircleAddArticles: 'Add articles to your circle',
     hintCircleDisplayName: 'Must be between 2-12 characters long.',
     hintCircleName:
       'Must be between 2-20 characters long. Only letters letters, numbers and underline are allowed.',

@@ -97,13 +97,13 @@ const SupportersDialogContent = ({
                   id: node.id,
                 })
               }}
+              hasFollow={false}
             />
           ))}
         </InfiniteScroll>
       </Dialog.Content>
 
       <Dialog.Footer
-        noSpacing={false}
         smUpBtns={
           <Dialog.TextButton
             text="close"

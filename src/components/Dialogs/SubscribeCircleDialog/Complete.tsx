@@ -11,7 +11,7 @@ const Complete: React.FC<CompleteProps> = ({ circle }) => {
     <>
       <Dialog.Header title="successSubscribeCircle" />
 
-      <Dialog.Message align="left">
+      <Dialog.Message align="left" smUpAlign="left">
         <p>
           <Translate
             zh_hant="恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"

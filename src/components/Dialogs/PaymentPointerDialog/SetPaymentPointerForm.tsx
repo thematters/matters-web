@@ -106,7 +106,7 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
     setIsValid(isValid && values.paymentPointer !== defaultPaymentPointer)
 
   return (
-    <Dialog.Message align="left">
+    <Dialog.Message align="left" smUpAlign="left">
       <Explainer />
 
       <section className={styles.form}>

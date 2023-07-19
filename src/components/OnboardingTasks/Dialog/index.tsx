@@ -33,7 +33,6 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
               en="Welcome to the Matters galaxy"
             />
           }
-          closeDialog={closeDialog}
         />
 
         <Dialog.Content>

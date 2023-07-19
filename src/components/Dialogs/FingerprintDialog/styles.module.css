@@ -1,5 +1,5 @@
 .container {
-  padding: var(--spacing-base);
+  padding: 0 var(--spacing-base);
   text-align: left;
 
   & > .card + .card {
@@ -7,7 +7,7 @@
   }
 
   @media (--md-up) {
-    padding: var(--spacing-base) var(--spacing-base-loose);
+    padding: 0 var(--spacing-base-loose);
   }
 }
 
@@ -88,7 +88,10 @@
     background: var(--color-green-lighter);
     border-radius: 0.25rem;
 
-    & input {
+    & .hash {
+      @mixin line-clamp;
+
+      padding-right: var(--spacing-x-tight);
       font-family: var(--font-mono);
       font-size: var(--font-size-sm);
       background: transparent;

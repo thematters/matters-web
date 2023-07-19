@@ -28,7 +28,7 @@ interface DialogMessageProps {
  */
 const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
   align = 'center',
-  smUpAlign = align,
+  smUpAlign = 'left',
   type,
 
   children,

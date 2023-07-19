@@ -1,9 +1,10 @@
 import _get from 'lodash/get'
 
-import { Dialog, Spacer, Translate, useDialogSwitch } from '~/components'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
+import styles from './styles.module.css'
 
 type AccessDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -40,9 +41,13 @@ const BaseAccessDialog = ({
         />
 
         <Dialog.Content>
-          <ToggleResponse {...toggleResponseProps} />
-          <Spacer size="base" />
-          <ToggleAccess {...props} />
+          <section className={styles.response}>
+            <ToggleResponse {...toggleResponseProps} />
+          </section>
+
+          <section className={styles.access}>
+            <ToggleAccess {...props} />
+          </section>
         </Dialog.Content>
 
         <Dialog.Footer smUpBtns={<CloseButton />} />

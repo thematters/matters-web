@@ -9,6 +9,9 @@
   "+a+2ug": {
     "defaultMessage": "成員"
   },
+  "+aMAeT": {
+    "defaultMessage": "地址已複製"
+  },
   "+cS08C": {
     "defaultMessage": "確認要将“{article}”從選集中移出嗎？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -42,7 +45,7 @@
     "defaultMessage": "移出選集"
   },
   "0ThOw1": {
-    "defaultMessage": "開始創作",
+    "defaultMessage": "新建選集",
     "description": "src/views/User/Collections/UserCollections.tsx"
   },
   "1Z1M77": {
@@ -81,10 +84,6 @@
   },
   "2slIPX": {
     "defaultMessage": "讚賞"
-  },
-  "2uwwz+": {
-    "defaultMessage": "累計閱讀時數代表了你的作品被登入用戶閱讀的總時數，每次閱讀過程超過一定時間後才會計入。此外，同一個用戶的多次閱讀也會進行累計。",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "32bml8": {
     "defaultMessage": "追蹤",
@@ -200,7 +199,7 @@
     "description": "src/components/UserProfile/index.tsx"
   },
   "9mfw9c": {
-    "defaultMessage": "Wallet address",
+    "defaultMessage": "錢包地址",
     "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
   },
   "9nNpKP": {
@@ -248,7 +247,7 @@
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "B2As08": {
-    "defaultMessage": "没有更多",
+    "defaultMessage": "沒有更多",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
   },
   "BHFHeY": {
@@ -301,10 +300,6 @@
   "DFieKt": {
     "defaultMessage": "辭去了 {tag} 的協作者",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
-  },
-  "DXJ8ys": {
-    "defaultMessage": "閱讀次數代表了你的作品被登入用戶閱讀的總次數，每次閱讀過程超過一定時間後才會計入。此外，同一個用戶的多次閱讀也會進行累計。",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "DYrDcG": {
     "defaultMessage": "Badges",
@@ -501,9 +496,6 @@
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "MkwOFW": {
-    "defaultMessage": "瀏覽紀錄"
-  },
   "N2IrpM": {
     "defaultMessage": "確認"
   },
@@ -574,9 +566,6 @@
   "S8PcQf": {
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
-  },
-  "SENRqu": {
-    "defaultMessage": "说明"
   },
   "SNh1n0": {
     "defaultMessage": "查看名單",
@@ -721,10 +710,6 @@
   "YlPCRU": {
     "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
-  },
-  "Z6cII7": {
-    "defaultMessage": "累計閱讀時數",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "ZAs170": {
     "defaultMessage": "基本資料",
@@ -987,7 +972,7 @@
     "defaultMessage": "至少 8 個字元，支持英文大小寫字母、數字和特殊符號"
   },
   "nD00sh": {
-    "defaultMessage": "編輯個人信息",
+    "defaultMessage": "編輯個人資訊",
     "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
   },
   "nGBrvw": {

@@ -72,12 +72,7 @@ type ToPathArgs =
       feedType?: string
     }
   | {
-      page:
-        | 'userProfile'
-        | 'userSubscriptons'
-        | 'userComments'
-        | 'userTags'
-        | 'userCollections'
+      page: 'userProfile' | 'userCollections'
       userName: string
     }
   | {
@@ -226,22 +221,6 @@ export const toPath = (
         href: `/@${args.userName}`,
       }
     }
-    case 'userSubscriptons': {
-      return {
-        href: `/@${args.userName}/subscriptions`,
-      }
-    }
-    case 'userComments': {
-      return {
-        href: `/@${args.userName}/comments`,
-      }
-    }
-    case 'userTags': {
-      return {
-        href: `/@${args.userName}/tags`,
-      }
-    }
-
     case 'userCollections': {
       return {
         href: `/@${args.userName}/collections`,

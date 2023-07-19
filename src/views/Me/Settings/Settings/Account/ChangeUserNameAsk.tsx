@@ -13,7 +13,7 @@ const Ask = ({ children }: AskProps) => {
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header title="changeUserName" closeDialog={closeDialog} />
+        <Dialog.Header title="changeUserName" />
 
         <Dialog.Message>
           <p>

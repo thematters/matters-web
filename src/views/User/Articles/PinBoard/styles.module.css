@@ -8,7 +8,7 @@
   background-position: -2px -1px;
   background-size: 3px 3px;
 
-  @media (--sm-up) {
+  @media (--md-up) {
     position: relative;
     display: grid;
     width: 100%;
@@ -37,7 +37,7 @@
     margin-right: var(--spacing-base);
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     @mixin flex-center-all;
 
     & .listItem + .listItem {

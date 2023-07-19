@@ -243,10 +243,9 @@ const BaseAddCredit: React.FC<FormProps> = ({
   if (completed) {
     return (
       <>
-        <Dialog.Message>
-          <h3>
-            <Translate id="successTopUp" />
-          </h3>
+        <Dialog.Header title={<Translate id="successTopUp" />} />
+
+        <Dialog.Message align="center" smUpAlign="center">
           <p>
             <Translate
               zh_hant="創作者們望眼欲穿，快去送上支持吧"
@@ -258,16 +257,25 @@ const BaseAddCredit: React.FC<FormProps> = ({
           <CurrencyAmount amount={values.amount} currency={currency} />
         </Dialog.Message>
 
-        {callback && (
-          <Dialog.Footer
-            btns={
-              <Dialog.RoundedButton text={callbackText} onClick={callback} />
-            }
-            smUpBtns={
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={callbackText || <Translate id="done" />}
+              onClick={callback || closeDialog}
+            />
+          }
+          smUpBtns={
+            callback ? (
               <Dialog.TextButton text={callbackText} onClick={callback} />
-            }
-          />
-        )}
+            ) : (
+              <Dialog.TextButton
+                text={<Translate id="done" />}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+            )
+          }
+        />
       </>
     )
   }

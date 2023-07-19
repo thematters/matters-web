@@ -28,13 +28,15 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={<Translate zh_hant="追蹤標籤" zh_hans="追踪标签" />}
+          title={
+            <Translate zh_hant="追蹤標籤" zh_hans="追踪标签" en="Follow Tags" />
+          }
           closeDialog={closeDialog}
           closeText="close"
         />
 
         <Dialog.Content>
-          <Dialog.Message align="left">
+          <Dialog.Message align="left" smUpAlign="left">
             <p className={styles.message}>
               <Translate
                 zh_hant="挑選至少"
@@ -56,13 +58,17 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
                 onClick={() => setFeed('hottest')}
                 selected={isHottest}
               >
-                <Translate zh_hant="熱門標籤" zh_hans="热门标签" />
+                <Translate zh_hant="熱門標籤" zh_hans="热门标签" en="Hottest" />
               </SegmentedTabs.Tab>
               <SegmentedTabs.Tab
                 onClick={() => setFeed('selected')}
                 selected={isSelected}
               >
-                <Translate zh_hant="編輯精選" zh_hans="编辑精选" />
+                <Translate
+                  zh_hant="編輯精選"
+                  zh_hans="编辑精选"
+                  en="Featured"
+                />
               </SegmentedTabs.Tab>
             </SegmentedTabs>
           </section>
@@ -71,7 +77,6 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
         </Dialog.Content>
 
         <Dialog.Footer
-          noSpacing={false}
           smUpBtns={
             <Dialog.TextButton
               text="close"

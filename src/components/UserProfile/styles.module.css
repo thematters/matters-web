@@ -2,15 +2,6 @@
   margin-bottom: var(--spacing-base-loose);
 }
 
-.buttons {
-  display: inline-flex;
-  gap: var(--spacing-base);
-
-  @media (--sm-up) {
-    padding-right: var(--spacing-base);
-  }
-}
-
 .right {
   @mixin flex-start-space-between;
 

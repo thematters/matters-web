@@ -3,7 +3,7 @@
 }
 
 .toast {
-  @mixin flex-start-space-between;
+  @mixin flex-center-space-between;
 
   padding: var(--spacing-tight);
   font-size: var(--font-size-sm);
@@ -40,4 +40,12 @@
 
 .error {
   background: var(--color-red);
+
+  & .actions {
+    & :global(> * + *) {
+      &::before {
+        background: var(--color-white);
+      }
+    }
+  }
 }

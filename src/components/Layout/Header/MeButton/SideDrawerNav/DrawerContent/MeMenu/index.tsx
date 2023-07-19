@@ -56,7 +56,7 @@ const Top: React.FC = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Read History" />}
+        text={<FormattedMessage defaultMessage="History" />}
         icon={<IconHistory24 size="md" />}
         href={PATHS.ME_HISTORY}
         is="link"

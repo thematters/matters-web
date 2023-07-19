@@ -96,18 +96,17 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   inEditor,
   children,
 }) => {
-  const { isInPath, isPathStartWith } = useRoute()
+  const { isInPath } = useRoute()
+  const isInHome = isInPath('HOME')
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
-  const isInCircle = isPathStartWith('/~', true)
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
 
   const { data } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
   const onboardingTasks = data?.clientPreference.onboardingTasks
-  const showOnboardingTasks =
-    !inEditor && !isInArticleDetail && !isInCircle && onboardingTasks?.enabled
+  const showOnboardingTasks = isInHome && onboardingTasks?.enabled
 
   const articleClasses = classNames({
     [styles.article]: true,

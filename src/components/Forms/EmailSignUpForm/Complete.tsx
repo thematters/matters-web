@@ -22,13 +22,13 @@ const Complete = ({
         <Dialog.Header title="successRegister" closeDialog={closeDialog} />
       )}
 
-      <Dialog.Message align="left">
-        <h3>
+      <Dialog.Message>
+        <p>
           <FormattedMessage
             defaultMessage="Welcome to Matters!"
             description="src/components/Forms/EmailSignUpForm/Complete.tsx"
           />
-        </h3>
+        </p>
 
         <p>
           <FormattedMessage

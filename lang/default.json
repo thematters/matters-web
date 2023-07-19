@@ -9,6 +9,9 @@
   "+a+2ug": {
     "defaultMessage": "Members"
   },
+  "+aMAeT": {
+    "defaultMessage": "Address copied"
+  },
   "+cS08C": {
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -81,10 +84,6 @@
   },
   "2slIPX": {
     "defaultMessage": "Likes"
-  },
-  "2uwwz+": {
-    "defaultMessage": "Accumulated read time indicates the total time length that registered users read.",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "32bml8": {
     "defaultMessage": "Following",
@@ -301,10 +300,6 @@
     "defaultMessage": "resigned from {tag} collaborator",
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
-  "DXJ8ys": {
-    "defaultMessage": "Read counts indicates how many registered users read.",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
-  },
   "DYrDcG": {
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
@@ -500,9 +495,6 @@
     "defaultMessage": "followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "MkwOFW": {
-    "defaultMessage": "Read History"
-  },
   "N2IrpM": {
     "defaultMessage": "Confirm"
   },
@@ -573,9 +565,6 @@
   "S8PcQf": {
     "defaultMessage": "Unpin from profile",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
-  },
-  "SENRqu": {
-    "defaultMessage": "Help"
   },
   "SNh1n0": {
     "defaultMessage": "View Members",
@@ -720,10 +709,6 @@
   "YlPCRU": {
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
-  },
-  "Z6cII7": {
-    "defaultMessage": "Accumulated Read Time",
-    "description": "src/components/Dialogs/HelpDialog/index.tsx"
   },
   "ZAs170": {
     "defaultMessage": "Profile",

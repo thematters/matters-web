@@ -40,7 +40,7 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
           closeDialog={closeDialog}
         />
 
-        <Dialog.Message align="left">
+        <Dialog.Message align="left" smUpAlign="left">
           <ol>
             <li>
               <Translate

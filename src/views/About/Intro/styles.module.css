@@ -175,9 +175,15 @@
   background-size: 100%;
 
   & img {
-    width: 328px;
-    height: 506px;
+    width: 258px;
+    height: 312px;
     margin-top: var(--spacing-x-loose);
+    margin-bottom: var(--spacing-x-loose);
+
+    @media (--sm-up) {
+      width: 328px;
+      height: 398px;
+    }
   }
 
   & .buttons {

@@ -122,7 +122,6 @@ const BaseFingerprintDialog = ({
         />
 
         <Dialog.Footer
-          noSpacing={false}
           smUpBtns={
             <Dialog.TextButton
               text="close"

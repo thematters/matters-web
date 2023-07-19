@@ -89,7 +89,7 @@ const DeleteCollectionDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header title="archive" />
 
-        <Dialog.Message align="center" smUpAlign="left">
+        <Dialog.Message>
           {isInDelete && (
             <p>
               <FormattedMessage

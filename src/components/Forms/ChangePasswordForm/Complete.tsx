@@ -25,9 +25,9 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
       )}
 
       <Dialog.Message>
-        <h3>
+        <p>
           <Translate id={descriptionId} />
-        </h3>
+        </p>
         <br />
         {isInPage && <BackToHomeButton />}
       </Dialog.Message>

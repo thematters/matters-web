@@ -73,7 +73,7 @@ const BaseRemoveArticleCollectionDialog = ({
           title={<FormattedMessage defaultMessage="Remove from collection" />}
         />
 
-        <Dialog.Message align="center" smUpAlign="left">
+        <Dialog.Message>
           <p>
             <FormattedMessage
               defaultMessage="Are you sure you want to remove ‘{article}’ from this collection?"

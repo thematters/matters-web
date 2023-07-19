@@ -125,7 +125,7 @@ export type ButtonProps = {
   replace?: boolean
 
   is?: 'span'
-
+  className?: string
   ref?: RefObject<any> | ((instance: any) => void) | null | undefined
 
   // navtive props
@@ -192,7 +192,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         replace,
 
         is,
-
+        className,
         htmlHref,
         htmlTarget,
         type = 'button',
@@ -236,6 +236,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         [textActiveColor
           ? styles[`textActive${capitalizeFirstLetter(textActiveColor)}`]
           : '']: !!textActiveColor && isClickable,
+        [`${className}`]: !!className,
       })
 
       // handle click

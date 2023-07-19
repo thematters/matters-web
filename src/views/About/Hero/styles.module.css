@@ -165,10 +165,7 @@
   @media (--sm-up) {
     display: grid;
     grid-template-areas: 'spacingLeft content spacingRight';
-    grid-template-columns: minmax(0, 1fr) var(--layout-width-sm-up) minmax(
-        0,
-        1fr
-      );
+    grid-template-columns: minmax(0, 1fr) 100% minmax(0, 1fr);
 
     & .container {
       grid-column: content;
@@ -194,11 +191,6 @@
   }
 
   @media (--md-up) {
-    grid-template-columns: minmax(0, 1fr) var(--layout-width-md-up) minmax(
-        0,
-        1fr
-      );
-
     & .container {
       grid-column: content;
 
@@ -220,10 +212,7 @@
   }
 
   @media (--lg-up) {
-    grid-template-columns: minmax(0, 1fr) var(--layout-width-lg-up) minmax(
-        0,
-        1fr
-      );
+    grid-template-columns: minmax(0, 1fr) 1105px minmax(0, 1fr);
   }
 }
 

@@ -115,12 +115,8 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
 
               {ipnsKey ? (
                 <section className={styles.copy}>
-                  <input
-                    type="text"
-                    value={displayIPNS!}
-                    readOnly
-                    onClick={(event) => event.currentTarget.select()}
-                  />
+                  <div className={styles.hash}>{displayIPNS}</div>
+
                   <CopyToClipboard text={displayIPNS!}>
                     <Button
                       aria-label={intl.formatMessage({

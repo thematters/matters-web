@@ -11,9 +11,11 @@ import {
 } from '~/common/enums'
 import { analytics, toPath, translate } from '~/common/utils'
 import {
+  Button,
   Dialog,
   EmbedShare,
   LanguageContext,
+  TextIcon,
   Translate,
   useMutation,
   ViewerContext,
@@ -217,9 +219,20 @@ const Tasks = ({ task }: Props) => {
             />
           }
           smUpBtns={
-            <Dialog.TextButton
-              text={
-                viewer.onboardingTasks.finished ? (
+            <Button
+              bgColor="white"
+              size={['100%', '3rem']}
+              onClick={hideTasks}
+              className={styles.finishButton}
+            >
+              <TextIcon
+                color="greyDark"
+                size="sm"
+                weight="normal"
+                textPlacement="left"
+                textDecoration="underline"
+              >
+                {viewer.onboardingTasks.finished ? (
                   <Translate
                     zh_hant="繼續閱讀航程"
                     zh_hans="继续阅读航程"
@@ -231,11 +244,9 @@ const Tasks = ({ task }: Props) => {
                     zh_hans="不再显示导航"
                     en="Skip the guide"
                   />
-                )
-              }
-              color={viewer.onboardingTasks.finished ? 'green' : 'greyDarker'}
-              onClick={hideTasks}
-            />
+                )}
+              </TextIcon>
+            </Button>
           }
         />
 

@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { CollectionDigest } from '~/components'
 
+import UserTabs from '../UserTabs'
+
 const fragments = gql`
   fragment CollectionsUser on User {
     id
@@ -27,8 +29,10 @@ const fragments = gql`
         }
       }
     }
+    ...TabsUser
   }
   ${CollectionDigest.Feed.fragments.collection}
+  ${UserTabs.fragments.user}
 `
 
 export const USER_COLLECTIONS = gql`

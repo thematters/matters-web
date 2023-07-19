@@ -137,6 +137,7 @@ const AppreciatorsDialogContent = ({
                       id: node.sender?.id,
                     })
                   }}
+                  hasFollow={false}
                 />
               </div>
             ) : null
@@ -145,7 +146,6 @@ const AppreciatorsDialogContent = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        noSpacing={false}
         smUpBtns={
           <Dialog.TextButton
             text="close"

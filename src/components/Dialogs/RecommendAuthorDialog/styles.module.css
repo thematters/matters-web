@@ -5,7 +5,9 @@
 }
 
 .tabs {
-  padding: 0 var(--spacing-base);
+  @media (--sm-up) {
+    padding: 0 var(--spacing-base);
+  }
 }
 
 .feed {
