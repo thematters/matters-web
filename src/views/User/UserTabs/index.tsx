@@ -20,23 +20,28 @@ const UserTabs = ({ user }: { user?: TabsUserFragment }) => {
     userName,
   })
 
+  const articleCount = user?.tabsArticles.totalCount || 0
+  const collectionCount = user?.tabsCollections.totalCount || 0
+
   return (
     <Tabs>
       <Tabs.Tab
         {...userArticlesPath}
         selected={isInPath('USER_ARTICLES')}
-        count={user?.tabsArticles.totalCount}
+        count={articleCount > 0 ? articleCount : undefined}
       >
         <FormattedMessage defaultMessage="Articles" />
       </Tabs.Tab>
 
-      <Tabs.Tab
-        {...userCollectionsPath}
-        selected={isInPath('USER_COLLECTIONS')}
-        count={user?.tabsCollections.totalCount}
-      >
-        <FormattedMessage defaultMessage="Collections" />
-      </Tabs.Tab>
+      {articleCount > 0 && (
+        <Tabs.Tab
+          {...userCollectionsPath}
+          selected={isInPath('USER_COLLECTIONS')}
+          count={collectionCount > 0 ? collectionCount : undefined}
+        >
+          <FormattedMessage defaultMessage="Collections" />
+        </Tabs.Tab>
+      )}
     </Tabs>
   )
 }
