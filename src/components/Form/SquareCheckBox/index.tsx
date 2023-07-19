@@ -33,7 +33,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   const [field] = useField({ ...inputProps, type: 'checkbox' })
 
   const Content = (
-    <label className={styles.label} title={`${hint}`}>
+    <label className={styles.label}>
       <TextIcon
         icon={
           inputProps.checked ? (
