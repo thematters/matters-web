@@ -911,7 +911,7 @@
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "jkrM1r": {
-    "defaultMessage": "Open IPNS page",
+    "defaultMessage": "打開 IPNS 頁面",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
   "jy3tx0": {
@@ -952,6 +952,9 @@
   },
   "ll/ufR": {
     "defaultMessage": "熱門"
+  },
+  "m4GG4b": {
+    "defaultMessage": "刪除選集"
   },
   "mCAIcg": {
     "defaultMessage": "站內閱讀熱門排行",
