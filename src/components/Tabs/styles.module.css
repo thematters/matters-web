@@ -2,7 +2,7 @@
   @mixin border-bottom-grey;
 
   position: relative;
-  padding: var(--spacing-tight) var(--spacing-base) var(--spacing-x-tight);
+  padding: 0 var(--spacing-base);
   white-space: nowrap;
 }
 
@@ -17,6 +17,7 @@
   @mixin inline-flex-center-all;
   @mixin transition;
 
+  padding: var(--spacing-tight) 0 var(--spacing-x-tight);
   font-weight: var(--font-weight-medium);
   line-height: 1.375rem;
   color: var(--color-grey-dark);
@@ -26,6 +27,10 @@
   &:hover,
   &:focus {
     color: var(--color-black);
+  }
+
+  &.selected {
+    border-bottom: 2px solid var(--color-matters-green);
   }
 
   & + .item {
