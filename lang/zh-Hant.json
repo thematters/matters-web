@@ -1206,6 +1206,10 @@
     "defaultMessage": "尚未發布作品",
     "description": "src/components/Empty/EmptyArticle.tsx"
   },
+  "yJsERg": {
+    "defaultMessage": "選集暫時不允許超過 100 篇",
+    "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
+  },
   "ySGgTo": {
     "defaultMessage": "添加精選",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"

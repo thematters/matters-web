@@ -39,6 +39,14 @@
   }
 }
 
+.disableAddArticles {
+  @mixin flex-center-all;
+
+  padding: var(--spacing-base) 0;
+  color: var(--color-grey);
+  border-bottom: 1px dashed var(--color-line-grey-light);
+}
+
 .feed {
   padding: 0 var(--spacing-base);
 

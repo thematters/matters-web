@@ -11,6 +11,7 @@ import {
   IconAdd20,
   IconHandle24,
   TextIcon,
+  Tooltip,
   useMutation,
 } from '~/components'
 import DropdownActions from '~/components/CollectionDigest/DropdownActions'
@@ -87,21 +88,40 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
           <DropdownActions collection={collection} />
         </section>
       </section>
-      <AddArticlesCollectionDialog
-        collection={collection}
-        onUpdate={() => setHasReset(true)}
-      >
-        {({ openDialog: openAddArticlesCollection }) => (
-          <section
-            className={styles.addArticles}
-            onClick={openAddArticlesCollection}
-          >
+      {collection.articles.totalCount >= 100 && (
+        <Tooltip
+          content={
+            <FormattedMessage
+              defaultMessage="Collections allow up to 100 articles currently"
+              description="src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
+            />
+          }
+          placement="top"
+        >
+          <section className={styles.disableAddArticles}>
             <TextIcon icon={<IconAdd20 size="mdS" />}>
               <FormattedMessage defaultMessage="Add Articles" />
             </TextIcon>
           </section>
-        )}
-      </AddArticlesCollectionDialog>
+        </Tooltip>
+      )}
+      {collection.articles.totalCount < 100 && (
+        <AddArticlesCollectionDialog
+          collection={collection}
+          onUpdate={() => setHasReset(true)}
+        >
+          {({ openDialog: openAddArticlesCollection }) => (
+            <section
+              className={styles.addArticles}
+              onClick={openAddArticlesCollection}
+            >
+              <TextIcon icon={<IconAdd20 size="mdS" />}>
+                <FormattedMessage defaultMessage="Add Articles" />
+              </TextIcon>
+            </section>
+          )}
+        </AddArticlesCollectionDialog>
+      )}
       <section className={styles.feed}>
         {items && (
           <DnDList
