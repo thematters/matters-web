@@ -2,8 +2,13 @@
   @mixin border-bottom-grey;
 
   position: relative;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky-tabs);
   padding: 0 var(--spacing-base);
+  margin-top: var(--spacing-base-loose);
   white-space: nowrap;
+  background: var(--color-white);
 }
 
 .list {
