@@ -247,7 +247,7 @@
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "B2As08": {
-    "defaultMessage": "没有更多",
+    "defaultMessage": "沒有更多",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
   },
   "BHFHeY": {
@@ -499,9 +499,6 @@
   "MDNaxs": {
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
-  },
-  "MkwOFW": {
-    "defaultMessage": "瀏覽紀錄"
   },
   "N2IrpM": {
     "defaultMessage": "確認"

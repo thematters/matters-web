@@ -138,7 +138,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
   })
 
   const InnerForm = (
-    <section>
+    <section className={styles.profile}>
       <Form id={formId} onSubmit={handleSubmit}>
         <section className={styles.coverField}>
           <CoverUploader

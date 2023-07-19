@@ -1,4 +1,5 @@
 .assetsContainer {
+  margin-top: var(--spacing-base);
   margin-bottom: var(--spacing-base);
   background: white;
 

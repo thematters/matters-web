@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { PATHS } from '~/common/enums'
 import {
   Dialog,
@@ -51,9 +53,11 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header title="blockUser" />
+        <Dialog.Header
+          title={<FormattedMessage defaultMessage="Block User" />}
+        />
 
-        <Dialog.Message>
+        <Dialog.Message align="center" smUpAlign="left">
           <p>
             <Translate
               zh_hant={`封鎖之後，${user.displayName} 將無法評論、關聯你的作品，不能 @ 你，並且不能加入你的圍爐。你可以在設置裏管理你的封鎖用戶列表。`}

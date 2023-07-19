@@ -10,7 +10,7 @@
   display: inline-flex;
   flex-shrink: 0;
 
-  & > * + * {
+  & > * {
     margin-left: var(--spacing-x-tight);
   }
 }

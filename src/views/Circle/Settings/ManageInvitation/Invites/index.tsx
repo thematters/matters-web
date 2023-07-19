@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { SegmentedTabs, Spacer } from '~/components'
+import { SegmentedTabs } from '~/components'
 
 import AcceptedInvites from './Accepted'
 import PendingInvites from './Pending'
@@ -16,8 +16,6 @@ const InvitesFeed: React.FC = () => {
 
   return (
     <>
-      <Spacer size="xtight" />
-
       <SegmentedTabs sticky>
         <SegmentedTabs.Tab
           onClick={() => setType('pending')}

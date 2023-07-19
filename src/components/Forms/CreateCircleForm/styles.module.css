@@ -1,3 +1,9 @@
+.profile {
+  @media (--sm-up) {
+    margin-top: var(--spacing-base);
+  }
+}
+
 .displayNameInput :global(.inputContainer) {
   position: relative;
 

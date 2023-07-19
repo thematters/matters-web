@@ -13,7 +13,6 @@ import {
   Layout,
   List,
   SegmentedTabs,
-  Spacer,
   Spinner,
   Transaction,
   Translate,
@@ -155,7 +154,7 @@ const Transactions = () => {
       <Layout.Header right={<Layout.Header.Title id="paymentTransactions" />} />
 
       <Head title={{ id: 'paymentTransactions' }} />
-      <Spacer size="xtight" />
+
       <SegmentedTabs
         sticky
         side={
@@ -188,6 +187,7 @@ const Transactions = () => {
           <Translate id="subscriptions" />
         </SegmentedTabs.Tab>
       </SegmentedTabs>
+
       <BaseTransactions currency={currency} purpose={purpose} />
     </Layout.Main>
   )
