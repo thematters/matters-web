@@ -80,14 +80,16 @@ const BaseAddArticlesCollectionDialog = ({
       if (!checked || checked.length === 0) {
         return
       }
+      const addChecked = checked.splice(0, 100 - collection.articles.totalCount)
+
       onUpdate()
       await update({
         variables: {
           input: {
             collections: [collection.id],
-            articles: checked,
+            articles: addChecked,
           },
-          first: checked.length,
+          first: addChecked.length,
         },
         update: (cache, result) => {
           updateUserCollectionDetail({
