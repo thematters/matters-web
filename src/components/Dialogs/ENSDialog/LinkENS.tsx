@@ -195,7 +195,12 @@ const LinkENS = ({
 
             <p className={styles.error}>
               <Translate id="reconnectHint" />
-              <CopyToClipboard text={viewer.info.ethAddress || ''}>
+              <CopyToClipboard
+                text={viewer.info.ethAddress || ''}
+                successMessage={
+                  <FormattedMessage defaultMessage="Address copied" />
+                }
+              >
                 <Button
                   spacing={['xtight', 'xtight']}
                   aria-label={translate({ id: 'copy', lang })}

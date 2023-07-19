@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { useAccount } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
 
@@ -406,7 +407,12 @@ const SetAmount: React.FC<FormProps> = ({
           <>
             <p className={styles.reconnectHint}>
               <Translate id="reconnectHint" />
-              <CopyToClipboard text={viewer.info.ethAddress || ''}>
+              <CopyToClipboard
+                text={viewer.info.ethAddress || ''}
+                successMessage={
+                  <FormattedMessage defaultMessage="Address copied" />
+                }
+              >
                 <Button
                   spacing={['xtight', 'xtight']}
                   aria-label={translate({ id: 'copy', lang })}

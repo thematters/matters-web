@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount, maskAddress, translate } from '~/common/utils'
@@ -46,7 +47,12 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
       <p className={styles.recipient}>{recipient.displayName}</p>
       {showEthAddress && (
         <div className={styles.address}>
-          <CopyToClipboard text={address}>
+          <CopyToClipboard
+            text={address}
+            successMessage={
+              <FormattedMessage defaultMessage="Address copied" />
+            }
+          >
             <Button
               spacing={['xxtight', 'tight']}
               bgColor="greenLighter"

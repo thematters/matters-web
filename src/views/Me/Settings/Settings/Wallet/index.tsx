@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { getAddress } from 'viem'
 
 import { OPEN_LIKE_COIN_DIALOG, PATHS } from '~/common/enums'
@@ -77,7 +78,12 @@ const WalletSettings = () => {
           ethAddress ? (
             <>
               <span className={styles.address}>{shortAddress}</span>
-              <CopyToClipboard text={ethAddress}>
+              <CopyToClipboard
+                text={ethAddress}
+                successMessage={
+                  <FormattedMessage defaultMessage="Address copied" />
+                }
+              >
                 <Button
                   spacing={['xtight', 'xtight']}
                   aria-label={translate({ id: 'copy', lang })}

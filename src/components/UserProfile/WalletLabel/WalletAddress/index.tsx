@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { getAddress } from 'viem'
 
 import { maskAddress, translate } from '~/common/utils'
@@ -52,7 +53,10 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
   }
 
   return (
-    <CopyToClipboard text={ensName || address}>
+    <CopyToClipboard
+      text={ensName || address}
+      successMessage={<FormattedMessage defaultMessage="Address copied" />}
+    >
       <Button {...buttonProps} aria-label={translate({ id: 'copy', lang })}>
         <TextIcon {...textIconProps} icon={<IconCopy16 size="sm" />}>
           {ensName || maskAddress(getAddress(address))}

@@ -4,11 +4,12 @@ import { toast, Translate } from '~/components'
 
 interface CopyToClipboardProps {
   text: string
+  successMessage?: React.ReactNode
 }
 
 export const CopyToClipboard: React.FC<
   React.PropsWithChildren<CopyToClipboardProps>
-> = ({ text, children }) => {
+> = ({ text, successMessage, children }) => {
   return (
     <C2C
       text={text}
@@ -22,7 +23,7 @@ export const CopyToClipboard: React.FC<
         }
 
         toast.success({
-          message: <Translate id="successCopy" />,
+          message: successMessage || <Translate id="successCopy" />,
         })
       }}
     >

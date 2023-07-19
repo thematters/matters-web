@@ -9,6 +9,9 @@
   "+a+2ug": {
     "defaultMessage": "成員"
   },
+  "+aMAeT": {
+    "defaultMessage": "地址已複製"
+  },
   "+cS08C": {
     "defaultMessage": "確認要将“{article}”從選集中移出嗎？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -196,7 +199,7 @@
     "description": "src/components/UserProfile/index.tsx"
   },
   "9mfw9c": {
-    "defaultMessage": "Wallet address",
+    "defaultMessage": "錢包地址",
     "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
   },
   "9nNpKP": {

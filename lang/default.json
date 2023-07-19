@@ -9,6 +9,9 @@
   "+a+2ug": {
     "defaultMessage": "Members"
   },
+  "+aMAeT": {
+    "defaultMessage": "Address copied"
+  },
   "+cS08C": {
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"

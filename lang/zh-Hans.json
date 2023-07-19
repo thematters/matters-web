@@ -9,6 +9,9 @@
   "+a+2ug": {
     "defaultMessage": "成员"
   },
+  "+aMAeT": {
+    "defaultMessage": "地址已复制"
+  },
   "+cS08C": {
     "defaultMessage": "确认要将“{article}”从选集中移出吗？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"

@@ -113,7 +113,12 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
         <Dialog.Footer
           btns={
             <>
-              <CopyToClipboard text={ensName || address}>
+              <CopyToClipboard
+                text={ensName || address}
+                successMessage={
+                  <FormattedMessage defaultMessage="Address copied" />
+                }
+              >
                 <Dialog.RoundedButton
                   text={<FormattedMessage defaultMessage="Copy Address" />}
                   color="green"
@@ -165,7 +170,12 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
                 color="greyDarker"
                 onClick={closeDialog}
               />
-              <CopyToClipboard text={ensName || address}>
+              <CopyToClipboard
+                text={ensName || address}
+                successMessage={
+                  <FormattedMessage defaultMessage="Address copied" />
+                }
+              >
                 <Dialog.TextButton
                   color="green"
                   text={<FormattedMessage defaultMessage="Copy Address" />}
