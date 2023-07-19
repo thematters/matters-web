@@ -102,6 +102,7 @@ const BaseAddArticlesCollectionDialog = ({
       setSubmitting(false)
       // clear data
       formik.setFieldValue('checked', [])
+      setArea('selecting')
       cd()
     },
   })
