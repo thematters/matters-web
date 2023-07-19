@@ -102,10 +102,12 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
             </Form>
           </FormikProvider>
 
-          <section className={styles.newCollection} onClick={switchToCreating}>
-            <TextIcon icon={<IconAdd20 size="mdS" />}>
-              <FormattedMessage defaultMessage="New Collection" />
-            </TextIcon>
+          <section className={styles.newCollection}>
+            <span className={styles.button} onClick={switchToCreating}>
+              <TextIcon icon={<IconAdd20 size="mdS" />}>
+                <FormattedMessage defaultMessage="New Collection" />
+              </TextIcon>
+            </span>
           </section>
         </section>
       </Dialog.Content>
