@@ -81,6 +81,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       className={classNames({
         [styles.articleEditor]: true,
       })}
+      id="editor" // anchor for mention plugin
     >
       <EditorTitle defaultValue={title || ''} update={update} />
 
