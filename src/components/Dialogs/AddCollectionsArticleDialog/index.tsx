@@ -12,6 +12,7 @@ import {
   useMutation,
   useRoute,
 } from '~/components'
+import updateUserCollections from '~/components/GQL/updates/userCollections'
 import updateUserCollectionsArticles from '~/components/GQL/updates/userCollectionsArticles'
 import { AddCollectionsArticlesMutation } from '~/gql/graphql'
 
@@ -76,6 +77,12 @@ const BaseAddCollectionsArticleDialog = ({
             collectionIds: checked,
             articleId: articleId,
             type: 'addArticles',
+          })
+          updateUserCollections({
+            cache,
+            userName,
+            collectionIds: checked,
+            type: 'increaseArticleCount',
           })
         },
       })

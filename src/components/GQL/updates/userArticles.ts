@@ -10,9 +10,9 @@ const update = ({
   type,
 }: {
   cache: DataProxy
-  targetId: string
+  targetId?: string
   userName?: string | null
-  type: 'pin' | 'unpin' | 'archive'
+  type: 'pin' | 'unpin' | 'archive' | 'addCollection' | 'deleteCollection'
 }) => {
   // FIXME: circular dependencies
   const { USER_ARTICLES_PUBLIC } = require('~/views/User/Articles/gql')
@@ -40,6 +40,53 @@ const update = ({
     })
   } catch (e) {
     //
+  }
+
+  if (type === 'addCollection' || type === 'deleteCollection') {
+    switch (type) {
+      case 'addCollection':
+        if (articlesData && articlesData.user) {
+          articlesData.user.tabsCollections.totalCount += 1
+        }
+
+        if (collectionsData && collectionsData.user) {
+          collectionsData.user.tabsCollections.totalCount += 1
+        }
+        break
+      case 'deleteCollection':
+        if (articlesData && articlesData.user) {
+          articlesData.user.tabsCollections.totalCount -= 1
+        }
+        if (collectionsData && collectionsData.user) {
+          collectionsData.user.tabsCollections.totalCount -= 1
+        }
+        break
+    }
+
+    cache.writeQuery({
+      query: USER_ARTICLES_PUBLIC,
+      variables: { userName },
+      data: {
+        user: {
+          ...articlesData?.user,
+        },
+      },
+    })
+
+    cache.writeQuery({
+      query: USER_COLLECTIONS,
+      variables: { userName },
+      data: {
+        user: {
+          ...collectionsData?.user,
+        },
+      },
+    })
+    return
+  }
+
+  if (!targetId) {
+    return
   }
 
   const articleEdges = articlesData?.user?.articles?.edges || []

@@ -8,12 +8,15 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { KEYVALUE } from '~/common/enums'
 import { toPath, validateCollectionTitle } from '~/common/utils'
 import {
+  CollectionDigest,
   Dialog,
   Form,
   LanguageContext,
   useMutation,
   useRoute,
 } from '~/components'
+import updateUserArticles from '~/components/GQL/updates/userArticles'
+import updateUserCollections from '~/components/GQL/updates/userCollections'
 import { CreateCollectionMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -33,9 +36,10 @@ const CREATE_COLLECTION = gql`
   mutation CreateCollection($input: PutCollectionInput!) {
     putCollection(input: $input) {
       id
-      title
+      ...CollectionDigestFeedCollection
     }
   }
+  ${CollectionDigest.Feed.fragments.collection}
 `
 
 const AddCollectionDialogContent: React.FC<FormProps> = ({
@@ -50,6 +54,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
   )
   const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
+  const userName = getQuery('name')
   const router = useRouter()
 
   const maxCollectionTitle = 40
@@ -84,6 +89,17 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
             },
           },
           update(cache, result) {
+            updateUserArticles({
+              cache,
+              userName,
+              type: 'addCollection',
+            })
+            updateUserCollections({
+              cache,
+              userName,
+              collection: result.data?.putCollection || ({} as Collection),
+              type: 'add',
+            })
             if (onUpdated) {
               onUpdated(cache, result.data?.putCollection || ({} as Collection))
             }
@@ -92,7 +108,6 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
         setSubmitting(false)
 
         if (gotoDetailPage && data) {
-          const userName = getQuery('name')
           const path = toPath({
             page: 'collectionDetail',
             userName,
