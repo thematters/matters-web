@@ -69,7 +69,7 @@ export const makeMentionSuggestion = ({
 
         popup = tippy('body', {
           getReferenceClientRect: props.clientRect,
-          appendTo: () => document.body,
+          appendTo: () => document.querySelector('#editor') || document.body,
           content: component.element,
           showOnCreate: true,
           interactive: true,

@@ -37,7 +37,10 @@ const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
   })
 
   return (
-    <div className={styles.commentEditor}>
+    <div
+      className={styles.commentEditor}
+      id="editor" // anchor for mention plugin
+    >
       {editor && <BubbleMenu editor={editor} isCommentEditor />}
 
       <EditorContent editor={editor} />
