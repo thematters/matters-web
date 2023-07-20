@@ -6,7 +6,13 @@ import { TabsUserFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 
-const UserTabs = ({ user }: { user?: TabsUserFragment }) => {
+const UserTabs = ({
+  user,
+  loading,
+}: {
+  user?: TabsUserFragment
+  loading?: boolean
+}) => {
   const { isInPath, getQuery } = useRoute()
   const userName = getQuery('name')
 
@@ -33,7 +39,7 @@ const UserTabs = ({ user }: { user?: TabsUserFragment }) => {
         <FormattedMessage defaultMessage="Articles" />
       </Tabs.Tab>
 
-      {articleCount > 0 && (
+      {(loading || articleCount > 0) && (
         <Tabs.Tab
           {...userCollectionsPath}
           selected={isInPath('USER_COLLECTIONS')}

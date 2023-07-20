@@ -106,7 +106,7 @@ const UserArticles = () => {
   if (loading) {
     return (
       <>
-        <UserTabs />
+        <UserTabs loading />
         <Placeholder />
       </>
     )

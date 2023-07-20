@@ -71,7 +71,7 @@ const UserCollections = () => {
   if (loading) {
     return (
       <>
-        <UserTabs />
+        <UserTabs loading />
         <Placeholder />
       </>
     )

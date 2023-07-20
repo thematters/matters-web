@@ -98,6 +98,7 @@ const update = ({
     collecetions.find((a) => a.id === targetId))!
 
   let pinnedWorks = articlesData?.user?.pinnedWorks || []
+  let totalCount = articlesData?.user?.tabsArticles.totalCount
 
   switch (type) {
     case 'pin':
@@ -109,6 +110,10 @@ const update = ({
     case 'archive':
       // remove pinned article if it's archived
       pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
+
+      if (totalCount) {
+        totalCount -= 1
+      }
       break
   }
 
@@ -119,6 +124,10 @@ const update = ({
       user: {
         ...articlesData?.user,
         pinnedWorks,
+        tabsArticles: {
+          ...articlesData?.user?.tabsArticles,
+          totalCount,
+        },
       },
     },
   })
