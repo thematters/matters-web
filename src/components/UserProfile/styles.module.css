@@ -102,6 +102,11 @@
   margin-bottom: var(--spacing-loose);
 }
 
+.badgesInPage {
+  display: flex;
+  align-items: center;
+}
+
 .follow {
   padding: 0 var(--spacing-base);
   margin-top: var(--spacing-base);

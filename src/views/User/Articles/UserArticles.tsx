@@ -121,7 +121,11 @@ const UserArticles = () => {
     )
   }
 
-  if (!user || user?.status?.state === 'archived') {
+  if (!user) {
+    return <></>
+  }
+
+  if (user?.status?.state === 'archived') {
     return (
       <>
         <UserTabs />

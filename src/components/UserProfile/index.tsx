@@ -95,7 +95,7 @@ export const UserProfile = () => {
   const isCivicLiker = user.liker.civicLiker
 
   const Badges = ({ isInDialog }: { isInDialog?: boolean }) => (
-    <span className={isInDialog ? styles.badgesInDialog : ''}>
+    <span className={isInDialog ? styles.badgesInDialog : styles.badgesInPage}>
       {hasTraveloggersBadge && <TraveloggersBadge isInDialog={isInDialog} />}
       {hasSeedBadge && <SeedBadge isInDialog={isInDialog} />}
       {hasGoldenMotorBadge && <GoldenMotorBadge isInDialog={isInDialog} />}

@@ -140,7 +140,7 @@ const UserCollections = () => {
       >
         <List responsiveWrapper>
           {edges.map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
+            <List.Item key={node.id}>
               <CollectionDigest.Feed
                 collection={node}
                 onClick={() =>

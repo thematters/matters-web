@@ -53,7 +53,7 @@ const DeleteCollectionDialog = ({
       update: (cache) => {
         updateUserCollections({
           cache,
-          collectionId: collection.id,
+          collectionIds: [collection.id],
           userName: collection.author.userName,
           type: 'delete',
         })

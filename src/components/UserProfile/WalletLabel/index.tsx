@@ -93,7 +93,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
           }
         />
 
-        <Dialog.Message>
+        <Dialog.Message smUpAlign="left">
           <section className={styles.dialogContent}>
             {ensName && <section className={styles.ensName}>{ensName}</section>}
             {!ensName && (

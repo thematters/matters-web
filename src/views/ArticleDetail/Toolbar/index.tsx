@@ -84,6 +84,8 @@ const Toolbar = ({
     inCard: false,
     sharePath,
     hasExtend: !lock,
+    hasEdit: true,
+    hasArchive: true,
     ...props,
   }
 
