@@ -13,7 +13,7 @@
     "defaultMessage": "地址已複製"
   },
   "+cS08C": {
-    "defaultMessage": "確認要将“{article}”從選集中移出嗎？",
+    "defaultMessage": "確認要將「{article}」從選集中移出嗎？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
   "/3kw6k": {
@@ -51,9 +51,6 @@
   "1Z1M77": {
     "defaultMessage": "尚無閱讀紀錄",
     "description": "src/views/Me/History/index.tsx"
-  },
-  "1pFLGZ": {
-    "defaultMessage": "漏洞賞金計畫"
   },
   "1qQzV0": {
     "defaultMessage": "免費邀請",
@@ -109,6 +106,9 @@
   "47FYwb": {
     "defaultMessage": "取消"
   },
+  "4CrCbD": {
+    "defaultMessage": "自治"
+  },
   "4giHJT": {
     "defaultMessage": "在行動裝置上使用問題，參考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -161,6 +161,9 @@
     "defaultMessage": "確認刪除後，{commentType}會立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
+  "7JlauX": {
+    "defaultMessage": "指南"
+  },
   "7jjWxF": {
     "defaultMessage": "無結果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
@@ -194,6 +197,9 @@
   "9+Ddtu": {
     "defaultMessage": "下一步"
   },
+  "9Fpc9S": {
+    "defaultMessage": "漏洞提報"
+  },
   "9J0iCw": {
     "defaultMessage": "已註銷用戶"
   },
@@ -206,7 +212,7 @@
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "A3g33H": {
-    "defaultMessage": "封存的作品仅自己可见，且操作无法撤销。如文章已加入选集，将从选集中移除。（已发布到 IPFS 的版本不受影响）"
+    "defaultMessage": "封存作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
   },
   "A3rLZt": {
     "defaultMessage": "最近 {months} 個月",
@@ -346,7 +352,7 @@
     "defaultMessage": "查看"
   },
   "FhWC22": {
-    "defaultMessage": "社區共建基地"
+    "defaultMessage": "共建協作"
   },
   "FmWYRt": {
     "defaultMessage": "免費資格時長"
@@ -438,10 +444,6 @@
   },
   "K3r6DQ": {
     "defaultMessage": "刪除"
-  },
-  "KL502d": {
-    "defaultMessage": "資料已保存",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
   },
   "KLQ1/z": {
     "defaultMessage": "圍爐創建成功",
@@ -598,6 +600,9 @@
     "defaultMessage": "評論了你收藏的作品 ",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
+  "U7o9Ba": {
+    "defaultMessage": "累計閱讀時數"
+  },
   "U86B6w": {
     "defaultMessage": "數據"
   },
@@ -646,7 +651,7 @@
     "defaultMessage": "確認刪除"
   },
   "WQT8ZA": {
-    "defaultMessage": "编辑選集"
+    "defaultMessage": "編輯選集"
   },
   "WSUAwk": {
     "defaultMessage": "添加到精選",
@@ -835,6 +840,12 @@
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fsB/4p": {
+    "defaultMessage": "儲存成功"
+  },
+  "g5pX+a": {
+    "defaultMessage": "關於"
+  },
   "gMZfHO": {
     "defaultMessage": "RSS 訂閱",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -957,7 +968,7 @@
     "description": "src/components/BlockUser/Button/index.tsx"
   },
   "mWcca9": {
-    "defaultMessage": "确认要将「{article}」封存吗？"
+    "defaultMessage": "確認要將「{article}」封存吗？"
   },
   "mWjpk9": {
     "defaultMessage": "還沒有廣播",
@@ -970,16 +981,8 @@
     "defaultMessage": "編輯",
     "description": "src/components/Comment/DropdownActions/EditButton.tsx"
   },
-  "mjMpv4": {
-    "defaultMessage": "圍爐已更新",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "ml3SZN": {
     "defaultMessage": "至少 8 個字元，支持英文大小寫字母、數字和特殊符號"
-  },
-  "nD00sh": {
-    "defaultMessage": "編輯個人資訊",
-    "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
   },
   "nGBrvw": {
     "defaultMessage": "我的收藏"
@@ -991,6 +994,9 @@
   "nYeDrI": {
     "defaultMessage": "沒有帳戶？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "nYrKWp": {
+    "defaultMessage": "編輯個人資料"
   },
   "nsaJRn": {
     "defaultMessage": "登入成功"
@@ -1178,6 +1184,9 @@
   "xiKjd/": {
     "defaultMessage": "使用電子信箱",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "xkr+zo": {
+    "defaultMessage": "協議"
   },
   "xmcVZ0": {
     "defaultMessage": "搜尋"
