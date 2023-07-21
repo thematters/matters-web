@@ -98,7 +98,7 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
     closeDialog()
   }
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       onClick={onClickSave}
       text={<FormattedMessage defaultMessage="Confirm" />}
@@ -111,7 +111,7 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
       <Dialog.Header
         title="tagAddEditor"
         closeDialog={closeDialog}
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <SearchingArea
@@ -138,7 +138,7 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
               color="greyDarker"
               onClick={closeDialog}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

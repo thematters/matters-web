@@ -17,7 +17,7 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
   const [isValid, setIsValid] = useState(false)
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       type="submit"
       form={formId}
@@ -35,7 +35,7 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
         <Dialog.Header
           title="paymentPointer"
           closeDialog={closeDialog}
-          rightBtn={<SubmitButton />}
+          rightBtn={SubmitButton}
         />
 
         <SetPaymentPointerForm
@@ -53,7 +53,7 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
                 color="greyDarker"
                 onClick={closeDialog}
               />
-              <SubmitButton />
+              {SubmitButton}
             </>
           }
         />

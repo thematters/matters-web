@@ -195,7 +195,7 @@ const Password: React.FC<FormProps> = ({
     </Form>
   )
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       type="submit"
       form={formId}
@@ -233,7 +233,7 @@ const Password: React.FC<FormProps> = ({
       <Dialog.Header
         title="register"
         closeDialog={closeDialog}
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Content>{InnerForm}</Dialog.Content>
@@ -246,7 +246,7 @@ const Password: React.FC<FormProps> = ({
               color="greyDarker"
               onClick={closeDialog}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

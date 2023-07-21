@@ -115,7 +115,7 @@ const BaseConfirm: React.FC<FormProps> = ({
   const fee = calcMattersFee(values.amount)
   const total = Math.max(numRound(values.amount - fee), 0)
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       text={<Translate id="confirm" />}
       type="submit"
@@ -135,7 +135,7 @@ const BaseConfirm: React.FC<FormProps> = ({
             <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
           ) : undefined
         }
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Content>
@@ -281,7 +281,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               onClick={switchToResetPassword}
             />
 
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

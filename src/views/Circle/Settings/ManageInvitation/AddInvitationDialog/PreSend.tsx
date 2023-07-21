@@ -97,7 +97,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
     confirm()
   }
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       text={<FormattedMessage defaultMessage="Confirm and Send" />}
       onClick={send}
@@ -115,7 +115,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
           />
         }
         closeDialog={closeDialog}
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Message>
@@ -159,7 +159,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
               color="greyDarker"
               onClick={closeDialog}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

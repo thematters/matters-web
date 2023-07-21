@@ -133,7 +133,7 @@ const Request: React.FC<FormProps> = ({
     </Form>
   )
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       text={<Translate id="nextStep" />}
       type="submit"
@@ -153,7 +153,7 @@ const Request: React.FC<FormProps> = ({
             <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
           ) : undefined
         }
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Content>{InnerForm}</Dialog.Content>
@@ -167,7 +167,7 @@ const Request: React.FC<FormProps> = ({
               onClick={back || closeDialog}
             />
 
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

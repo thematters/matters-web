@@ -213,7 +213,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
     </section>
   )
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       type="submit"
       form={formId}
@@ -251,7 +251,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       <Dialog.Header
         title={titleId}
         closeDialog={closeDialog}
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Content>{InnerForm}</Dialog.Content>
@@ -265,7 +265,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
               onClick={closeDialog}
             />
 
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

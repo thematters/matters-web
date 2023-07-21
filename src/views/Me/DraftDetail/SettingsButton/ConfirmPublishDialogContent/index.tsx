@@ -32,7 +32,7 @@ const ConfirmPublishDialogContent: React.FC<
     closeDialog()
   }
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton text={<Translate id="publish" />} onClick={onPublish} />
   )
 
@@ -43,7 +43,7 @@ const ConfirmPublishDialogContent: React.FC<
         leftBtn={
           <Dialog.TextButton text={<Translate id="back" />} onClick={onBack} />
         }
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Message align="left" smUpAlign="left">
@@ -101,7 +101,7 @@ const ConfirmPublishDialogContent: React.FC<
               text={<Translate id="back" />}
               onClick={onBack}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

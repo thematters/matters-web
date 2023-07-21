@@ -176,7 +176,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
     </Form>
   )
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       type="submit"
       form={formId}
@@ -191,7 +191,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
       <Dialog.Header
         title={<FormattedMessage defaultMessage="Edit collection" />}
         closeDialog={closeDialog}
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Content>{InnerForm}</Dialog.Content>
@@ -204,7 +204,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
               color="greyDarker"
               onClick={closeDialog}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

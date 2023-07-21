@@ -238,7 +238,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     </Form>
   )
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       type="submit"
       form={formId}
@@ -253,7 +253,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       <Dialog.Header
         title="editUserProfile"
         closeDialog={closeDialog}
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
         hasSmUpTitle={false}
       />
 
@@ -267,7 +267,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
               color="greyDarker"
               onClick={closeDialog}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

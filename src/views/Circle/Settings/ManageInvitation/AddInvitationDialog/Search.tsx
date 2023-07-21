@@ -45,7 +45,7 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
   const selectedNodes = stagingNodes.filter(({ selected }) => !!selected)
   const disabled = selectedNodes.length === 0
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       disabled={disabled}
       onClick={() => save({ nodes: selectedNodes })}
@@ -58,7 +58,7 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
       <Dialog.Header
         title="addCircleInvitation"
         closeDialog={closeDialog}
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <SearchingArea
@@ -86,7 +86,7 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
               color="greyDarker"
               onClick={closeDialog}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

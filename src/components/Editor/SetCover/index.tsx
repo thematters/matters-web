@@ -55,7 +55,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
     setSelected(assets.find(filter))
   }, [cover])
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       onClick={onSave}
       text={<FormattedMessage defaultMessage="Confirm" />}
@@ -73,7 +73,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
             <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
           ) : undefined
         }
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Content noSpacing={false}>
@@ -100,7 +100,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
               color="greyDarker"
               onClick={back || closeDialog}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />
