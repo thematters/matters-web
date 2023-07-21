@@ -52,9 +52,6 @@
     "defaultMessage": "尚無閱讀紀錄",
     "description": "src/views/Me/History/index.tsx"
   },
-  "1pFLGZ": {
-    "defaultMessage": "漏洞賞金計畫"
-  },
   "1qQzV0": {
     "defaultMessage": "免費邀請",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -109,6 +106,9 @@
   "47FYwb": {
     "defaultMessage": "取消"
   },
+  "4CrCbD": {
+    "defaultMessage": "自治"
+  },
   "4giHJT": {
     "defaultMessage": "在行動裝置上使用問題，參考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -161,6 +161,9 @@
     "defaultMessage": "確認刪除後，{commentType}會立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
+  "7JlauX": {
+    "defaultMessage": "指南"
+  },
   "7jjWxF": {
     "defaultMessage": "無結果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
@@ -193,6 +196,9 @@
   },
   "9+Ddtu": {
     "defaultMessage": "下一步"
+  },
+  "9Fpc9S": {
+    "defaultMessage": "漏洞提報"
   },
   "9J0iCw": {
     "defaultMessage": "已註銷用戶",
@@ -347,7 +353,7 @@
     "defaultMessage": "查看"
   },
   "FhWC22": {
-    "defaultMessage": "社區共建基地"
+    "defaultMessage": "共建協作"
   },
   "FmWYRt": {
     "defaultMessage": "免費資格時長"
@@ -838,6 +844,9 @@
   "fsB/4p": {
     "defaultMessage": "儲存成功"
   },
+  "g5pX+a": {
+    "defaultMessage": "關於"
+  },
   "gMZfHO": {
     "defaultMessage": "RSS 訂閱",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -1176,6 +1185,9 @@
   "xiKjd/": {
     "defaultMessage": "使用電子信箱",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "xkr+zo": {
+    "defaultMessage": "協議"
   },
   "xmcVZ0": {
     "defaultMessage": "搜尋"

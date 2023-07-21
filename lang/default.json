@@ -52,9 +52,6 @@
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
   },
-  "1pFLGZ": {
-    "defaultMessage": "Bug Bounty"
-  },
   "1qQzV0": {
     "defaultMessage": "Invitees",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -109,6 +106,9 @@
   "47FYwb": {
     "defaultMessage": "Cancel"
   },
+  "4CrCbD": {
+    "defaultMessage": "Community"
+  },
   "4giHJT": {
     "defaultMessage": "Have wallet questions on mobile device ? Click the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -161,6 +161,9 @@
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
+  "7JlauX": {
+    "defaultMessage": "Explore"
+  },
   "7jjWxF": {
     "defaultMessage": "No results",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
@@ -193,6 +196,9 @@
   },
   "9+Ddtu": {
     "defaultMessage": "Next"
+  },
+  "9Fpc9S": {
+    "defaultMessage": "Bug Report"
   },
   "9J0iCw": {
     "defaultMessage": "Deleted user"
@@ -837,6 +843,9 @@
   "fsB/4p": {
     "defaultMessage": "Saved"
   },
+  "g5pX+a": {
+    "defaultMessage": "About"
+  },
   "gMZfHO": {
     "defaultMessage": "RSS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -1175,6 +1184,9 @@
   "xiKjd/": {
     "defaultMessage": "Continue with Email",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "xkr+zo": {
+    "defaultMessage": "Terms"
   },
   "xmcVZ0": {
     "defaultMessage": "Search"

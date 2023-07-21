@@ -338,7 +338,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           />
         </Layout.Spacing>
 
-        <Media lessThan="xl">
+        <Media lessThan="lg">
           <SupportSettingDialog
             article={article}
             editSupportSetting={editSupport}
