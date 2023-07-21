@@ -127,7 +127,7 @@ const BaseAddArticlesCollectionDialog = ({
     <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={formik.isSubmitting}
+      disabled={formik.isSubmitting || formik.values.checked.length === 0}
       text={<FormattedMessage defaultMessage="Confirm" />}
       loading={formik.isSubmitting}
     />

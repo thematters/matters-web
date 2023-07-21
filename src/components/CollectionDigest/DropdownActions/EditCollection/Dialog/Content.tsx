@@ -2,18 +2,12 @@ import classNames from 'classnames'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import React from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
-import {
-  CoverUploader,
-  Dialog,
-  Form,
-  LanguageContext,
-  useMutation,
-} from '~/components'
+import { CoverUploader, Dialog, Form, useMutation } from '~/components'
 import {
   EditCollectionCollectionFragment,
   PutCollectionMutation,
@@ -58,14 +52,13 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
     undefined,
     { showToast: false }
   )
-  const { lang } = useContext(LanguageContext)
   const maxTitle = 40
   const maxDescription = 200
 
   const formId = 'edit-collection-form'
 
   const intl = useIntl()
-  const validateDescription = (value: string, lang: Language) => {
+  const validateTitle = (value: string) => {
     if (!value) {
       return intl.formatMessage({
         defaultMessage: 'Required',
@@ -73,7 +66,6 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
     }
   }
 
-  const validateTitle = validateDescription
   const {
     values,
     errors,
@@ -91,10 +83,9 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
     },
     validateOnBlur: false,
     validateOnChange: false,
-    validate: ({ title, description }) =>
+    validate: ({ title }) =>
       _pickBy({
-        displayName: validateTitle(title, lang),
-        description: validateDescription(description, lang),
+        displayName: validateTitle(title),
       }),
     onSubmit: async (
       { cover, title, description },
@@ -161,7 +152,6 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
       <section className={styles.container}>
         <Form.Textarea
           name="description"
-          required
           placeholder={intl.formatMessage({
             defaultMessage: 'Description',
           })}

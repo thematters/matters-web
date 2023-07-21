@@ -62,15 +62,18 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
     )
   }
 
-  const SubmitButton = (
-    <Dialog.TextButton
-      type="submit"
-      form={formId}
-      disabled={formik.isSubmitting}
-      text={<FormattedMessage defaultMessage="Confirm" />}
-      loading={formik.isSubmitting}
-    />
-  )
+  const SubmitButton =
+    enableCollections.length > 0 ? (
+      <>
+        <Dialog.TextButton
+          type="submit"
+          form={formId}
+          disabled={formik.isSubmitting || checkingIds.length === 0}
+          text={<FormattedMessage defaultMessage="Confirm" />}
+          loading={formik.isSubmitting}
+        />
+      </>
+    ) : null
 
   return (
     <>

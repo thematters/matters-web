@@ -24,7 +24,6 @@
       @mixin flex-center-space-between;
 
       gap: var(--spacing-x-tight);
-      padding-bottom: var(--spacing-base);
 
       & .index {
         @mixin flex-center-all;

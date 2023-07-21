@@ -4,11 +4,16 @@
   font-size: 0;
 
   & .hint {
-    @mixin line-clamp;
-
-    /* FIXME: fix cropped descenders of letters  */
-    padding-bottom: 0.12em;
-    margin-bottom: -0.12rem;
     line-height: 1.375rem;
   }
+
+  & .lineClamp {
+    @mixin line-clamp;
+  }
+}
+
+.wrapper {
+  padding: var(--spacing-x-tight) 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
 }

@@ -1,5 +1,7 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
+import classNames from 'classnames'
 import { useField } from 'formik'
+import { useEffect, useRef, useState } from 'react'
 
 import { IconSquireCheck20, IconSquireChecked20, Tooltip } from '~/components'
 import { TextIcon } from '~/components/TextIcon'
@@ -32,6 +34,31 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
 
   const [field] = useField({ ...inputProps, type: 'checkbox' })
 
+  const [lineClampable, setLineClampable] = useState(false)
+  const node: React.RefObject<any> | null = useRef(null)
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (node?.current) {
+        let height = node.current.firstElementChild?.clientHeight || 0
+        const computedStyle = window.getComputedStyle(node.current, null)
+        height -=
+          parseInt(computedStyle.paddingTop, 10) +
+          parseInt(computedStyle.paddingBottom, 10)
+        const lineHeight = computedStyle.getPropertyValue('line-height')
+        const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
+        if (lines > 1) {
+          setLineClampable(true)
+        }
+      }
+    })
+  }, [])
+
+  const hintClasses = classNames({
+    [styles.hint]: true,
+    [styles.lineClamp]: lineClampable,
+  })
+
   const Content = (
     <label className={styles.label}>
       <TextIcon
@@ -49,7 +76,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
         spacing="xtight"
         size="sm"
       >
-        <span className={styles.hint}>
+        <span className={hintClasses}>
           {!!content && content}
           {!content && hint}
         </span>
@@ -69,7 +96,12 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
 
   return (
     <>
-      {hasTooltip && (
+      {(!lineClampable || !hasTooltip) && (
+        <p ref={node} className={styles.wrapper}>
+          {Content}
+        </p>
+      )}
+      {hasTooltip && lineClampable && (
         <Tooltip
           content={hint}
           appendTo="parent"
@@ -77,10 +109,9 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
           placement="auto-start"
           delay={[1000, null]}
         >
-          {Content}
+          <p className={styles.wrapper}>{Content}</p>
         </Tooltip>
       )}
-      {!hasTooltip && <>{Content}</>}
     </>
   )
 }

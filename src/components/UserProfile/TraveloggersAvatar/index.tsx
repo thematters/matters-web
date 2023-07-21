@@ -6,7 +6,7 @@ import LogbookDialog from './LogbookDialog'
 type TraveloggersAvatarProps = {
   user: NonNullable<UserProfileUserPublicQuery['user']>
   isMe: boolean
-  size?: 'xxxlm' | 'xxxxl'
+  size?: 'xxxlm' | 'xxxll' | 'xxxxl'
 }
 
 const TraveloggersAvatar: React.FC<TraveloggersAvatarProps> = ({
