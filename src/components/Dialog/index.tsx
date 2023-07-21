@@ -8,7 +8,11 @@ import { useDrag } from 'react-use-gesture'
 
 import { KEYVALUE } from '~/common/enums'
 import { capitalizeFirstLetter, dom, translate } from '~/common/utils'
-import { LanguageContext, Media, useOutsideClick } from '~/components'
+import {
+  LanguageContext,
+  Media,
+  // useOutsideClick
+} from '~/components'
 
 import { RoundedButton, TextButton } from './Buttons'
 import Content from './Content'
@@ -85,7 +89,7 @@ const Container: React.FC<
     }
   })
 
-  useOutsideClick(node, closeTopDialog)
+  // useOutsideClick(node, closeTopDialog)
 
   return (
     <div

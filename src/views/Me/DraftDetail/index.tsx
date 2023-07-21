@@ -140,7 +140,7 @@ const DraftDetail = () => {
   return (
     <Layout.Main
       aside={
-        <Media greaterThanOrEqual="xl">
+        <Media greaterThanOrEqual="lg">
           <Sidebar draft={draft} ownCircles={ownCircles} />
         </Media>
       }
@@ -176,7 +176,7 @@ const DraftDetail = () => {
         <Editor draft={draft} update={update} upload={upload} />
       </Layout.Spacing>
 
-      <Media lessThan="xl">
+      <Media lessThan="lg">
         <BottomBar draft={draft} ownCircles={ownCircles} />
       </Media>
     </Layout.Main>

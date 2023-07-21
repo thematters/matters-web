@@ -83,13 +83,27 @@
 }
 
 .aside {
-  & .content :global(> * + *) {
-    margin-top: var(--spacing-x-loose);
+  & .content {
+    display: flex;
+    flex-direction: column;
+
+    & .top {
+      & :global(> *) {
+        margin-top: var(--spacing-x-loose);
+      }
+    }
   }
 
   @media (--md-up) {
+    & .content {
+      min-height: 100vh;
+
+      & .top {
+        flex-grow: 1;
+      }
+    }
+
     grid-column: right;
-    padding: var(--spacing-x-loose) 0 var(--spacing-x-loose)
-      var(--spacing-x-tight);
+    padding-left: var(--spacing-x-tight);
   }
 }

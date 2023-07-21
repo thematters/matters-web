@@ -52,9 +52,6 @@
     "defaultMessage": "尚无阅读记录",
     "description": "src/views/Me/History/index.tsx"
   },
-  "1pFLGZ": {
-    "defaultMessage": "漏洞赏金计划"
-  },
   "1qQzV0": {
     "defaultMessage": "免费邀请",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -109,6 +106,9 @@
   "47FYwb": {
     "defaultMessage": "取消"
   },
+  "4CrCbD": {
+    "defaultMessage": "自治"
+  },
   "4giHJT": {
     "defaultMessage": "在行动装置上使用问题，参考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -161,6 +161,9 @@
     "defaultMessage": "确认删除后，{commentType}会立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
+  "7JlauX": {
+    "defaultMessage": "指南"
+  },
   "7jjWxF": {
     "defaultMessage": "无结果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
@@ -194,6 +197,9 @@
   "9+Ddtu": {
     "defaultMessage": "下一步"
   },
+  "9Fpc9S": {
+    "defaultMessage": "漏洞报告"
+  },
   "9J0iCw": {
     "defaultMessage": "已注销用户",
     "description": "src/components/UserProfile/index.tsx"
@@ -207,7 +213,7 @@
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "A3g33H": {
-    "defaultMessage": "归档作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
+    "defaultMessage": "归档的作品仅自己可见，且操作无法撤销。如文章已加入选集，将从选集中移除。（已发布到 IPFS 的版本不受影响）"
   },
   "A3rLZt": {
     "defaultMessage": "最近 {months} 个月",
@@ -347,7 +353,7 @@
     "defaultMessage": "查看"
   },
   "FhWC22": {
-    "defaultMessage": "社区共建基地"
+    "defaultMessage": "共建协作"
   },
   "FmWYRt": {
     "defaultMessage": "免费资格时长"
@@ -439,10 +445,6 @@
   },
   "K3r6DQ": {
     "defaultMessage": "刪除"
-  },
-  "KL502d": {
-    "defaultMessage": "资料已保存",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
   },
   "KLQ1/z": {
     "defaultMessage": "围炉创建成功",
@@ -598,6 +600,9 @@
   "U/Tqmx": {
     "defaultMessage": "评论了你收藏的作品 ",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
+  },
+  "U7o9Ba": {
+    "defaultMessage": "累计阅读时長"
   },
   "U86B6w": {
     "defaultMessage": "数据"
@@ -836,6 +841,12 @@
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fsB/4p": {
+    "defaultMessage": "保存成功"
+  },
+  "g5pX+a": {
+    "defaultMessage": "关于"
+  },
   "gMZfHO": {
     "defaultMessage": "RSS 订阅",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -958,7 +969,7 @@
     "description": "src/components/BlockUser/Button/index.tsx"
   },
   "mWcca9": {
-    "defaultMessage": "確認要将“{article}”归档嗎？"
+    "defaultMessage": "确认要将“{article}”归档嗎？"
   },
   "mWjpk9": {
     "defaultMessage": "还没有广播",
@@ -971,16 +982,8 @@
     "defaultMessage": "编辑",
     "description": "src/components/Comment/DropdownActions/EditButton.tsx"
   },
-  "mjMpv4": {
-    "defaultMessage": "围炉已更新",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "ml3SZN": {
     "defaultMessage": "至少 8 个字符，支持英文大小写字母、数字和特殊符号"
-  },
-  "nD00sh": {
-    "defaultMessage": "编辑个人信息",
-    "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
   },
   "nGBrvw": {
     "defaultMessage": "我的收藏"
@@ -992,6 +995,9 @@
   "nYeDrI": {
     "defaultMessage": "沒有帐户？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "nYrKWp": {
+    "defaultMessage": "编辑个人信息"
   },
   "nsaJRn": {
     "defaultMessage": "上站成功"
@@ -1179,6 +1185,9 @@
   "xiKjd/": {
     "defaultMessage": "使用电子邮箱",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
+  },
+  "xkr+zo": {
+    "defaultMessage": "协议"
   },
   "xmcVZ0": {
     "defaultMessage": "搜索"

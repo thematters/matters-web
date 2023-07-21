@@ -64,7 +64,8 @@ const PinButton = ({
             <FormattedMessage defaultMessage="Pinned to profile" />
           ),
           actions: collection.pinned
-            ? [
+            ? undefined
+            : [
                 {
                   content: <FormattedMessage defaultMessage="View" />,
                   href: toPath({
@@ -72,12 +73,12 @@ const PinButton = ({
                     userName: collection.author.userName!,
                   }).href,
                 },
-              ]
-            : undefined,
+              ],
         })
       },
     },
     {
+      toastType: 'success',
       customErrors: {
         [ERROR_CODES.ACTION_LIMIT_EXCEEDED]: (
           <FormattedMessage defaultMessage="Up to 3 articles/collections can be pinned" />

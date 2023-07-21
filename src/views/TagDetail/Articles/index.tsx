@@ -208,7 +208,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
               </List.Item>
 
               {edges.length >= 4 && i === 3 && (
-                <Media lessThan="xl">
+                <Media lessThan="lg">
                   <RelatedTags tagId={tag.id} />
                 </Media>
               )}
@@ -217,7 +217,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
         </List>
 
         {edges.length < 4 && (
-          <Media lessThan="xl">
+          <Media lessThan="lg">
             <RelatedTags tagId={tag.id} />
           </Media>
         )}

@@ -135,13 +135,15 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
 
       <aside className={styles.aside}>
         <Media greaterThanOrEqual="lg">
-          <Sticky enabled={true} top={32}>
+          <Sticky enabled top={0}>
             <section className={styles.content}>
-              {!inEditor && <SearchBar />}
+              <section className={styles.top}>
+                {!inEditor && <SearchBar />}
 
-              {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
+                {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
 
-              {aside}
+                {aside}
+              </section>
 
               {!inEditor && !isInSettings && <SideFooter />}
             </section>

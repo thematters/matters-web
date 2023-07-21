@@ -111,10 +111,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
               description="src/components/Forms/CreateCircleForm/Profile.tsx"
             />
           ) : (
-            <FormattedMessage
-              description="src/components/Forms/CreateCircleForm/Profile.tsx"
-              defaultMessage="Circle Edited"
-            />
+            <FormattedMessage defaultMessage="Saved" />
           ),
         })
 

@@ -35,13 +35,13 @@ const PinButton = ({ article }: PinButtonProps) => {
     TOGGLE_PIN,
     {
       variables: { id: article.id, pinned: !article.pinned },
-      optimisticResponse: {
-        editArticle: {
-          id: article.id,
-          pinned: !article.pinned,
-          __typename: 'Article',
-        },
-      },
+      // optimisticResponse: {
+      //   editArticle: {
+      //     id: article.id,
+      //     pinned: !article.pinned,
+      //     __typename: 'Article',
+      //   },
+      // },
       update: (cache) => {
         updateUserArticles({
           cache,
@@ -61,6 +61,7 @@ const PinButton = ({ article }: PinButtonProps) => {
       },
     },
     {
+      toastType: 'success',
       customErrors: {
         [ERROR_CODES.ACTION_LIMIT_EXCEEDED]: (
           <FormattedMessage defaultMessage="Up to 3 articles/collections can be pinned" />

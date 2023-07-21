@@ -341,7 +341,7 @@ const BaseArticleDetail = ({
           <DynamicResponse id={article.id} lock={!canReadFullContent} />
         </section>
 
-        <Media lessThan="xl">
+        <Media lessThan="lg">
           <RelatedArticles article={article} />
         </Media>
       </section>
