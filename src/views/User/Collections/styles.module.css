@@ -17,3 +17,19 @@
   justify-content: center;
   font-weight: var(--font-weight-medium);
 }
+
+.addCollection {
+  @mixin flex-center-all;
+  @mixin transition;
+
+  padding: var(--spacing-base) 0;
+  color: var(--color-matters-green);
+  cursor: pointer;
+  border-bottom: 1px dashed var(--color-line-grey-light);
+  transition-property: color;
+
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green-dark);
+  }
+}

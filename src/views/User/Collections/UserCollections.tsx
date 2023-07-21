@@ -1,14 +1,18 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
+  AddCollectionDialog,
   CollectionDigest,
   Head,
+  IconAdd20,
   InfiniteScroll,
   List,
   QueryError,
+  TextIcon,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -20,6 +24,7 @@ import UserTabs from '../UserTabs'
 import CreateCollection from './CreateCollection'
 import { USER_COLLECTIONS } from './gql'
 import Placeholder from './Placeholder'
+import styles from './styles.module.css'
 
 const UserCollections = () => {
   const viewer = useContext(ViewerContext)
@@ -132,6 +137,19 @@ const UserCollections = () => {
 
       <UserTabs user={user!} />
 
+      {isViewer && (
+        <AddCollectionDialog gotoDetailPage>
+          {({ openDialog }) => {
+            return (
+              <section className={styles.addCollection} onClick={openDialog}>
+                <TextIcon icon={<IconAdd20 size="mdS" />}>
+                  <FormattedMessage defaultMessage="New Collection" />
+                </TextIcon>
+              </section>
+            )
+          }}
+        </AddCollectionDialog>
+      )}
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
