@@ -1,3 +1,5 @@
+import { useIntl } from 'react-intl'
+
 import { numAbbr, numRound } from '~/common/utils'
 import { IconReadTime18, TextIcon, Translate } from '~/components'
 import { ActionsReadTimeArticleFragment } from '~/gql/graphql'
@@ -9,6 +11,8 @@ interface ResponseCountProps {
 }
 
 const ReadTime = ({ article }: ResponseCountProps) => {
+  const intl = useIntl()
+
   if (!article.readTime) {
     return null
   }
@@ -20,14 +24,17 @@ const ReadTime = ({ article }: ResponseCountProps) => {
   }
 
   return (
-    <>
-      <button type="button">
-        <TextIcon icon={<IconReadTime18 size="mdXS" />} size="xs" color="grey">
-          {numAbbr(readHour, 1)}{' '}
-          <Translate zh_hant="小時" zh_hans="小时" en="hours" />
-        </TextIcon>
-      </button>
-    </>
+    <button
+      type="button"
+      title={intl.formatMessage({
+        defaultMessage: 'Accumulated read time',
+      })}
+    >
+      <TextIcon icon={<IconReadTime18 size="mdXS" />} size="xs" color="grey">
+        {numAbbr(readHour, 1)}{' '}
+        <Translate zh_hant="小時" zh_hans="小时" en="hours" />
+      </TextIcon>
+    </button>
   )
 }
 

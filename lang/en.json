@@ -598,6 +598,9 @@
     "defaultMessage": " commented on your bookmarked article ",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
+  "U7o9Ba": {
+    "defaultMessage": "Accumulated read time"
+  },
   "U86B6w": {
     "defaultMessage": "Stats"
   },

@@ -595,6 +595,9 @@
     "defaultMessage": "评论了你收藏的作品 ",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
+  "U7o9Ba": {
+    "defaultMessage": "累计阅读时長"
+  },
   "U86B6w": {
     "defaultMessage": "数据"
   },
