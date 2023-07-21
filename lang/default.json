@@ -439,10 +439,6 @@
   "K3r6DQ": {
     "defaultMessage": "Delete"
   },
-  "KL502d": {
-    "defaultMessage": "Profile updated",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
-  },
   "KLQ1/z": {
     "defaultMessage": "Circle successfully created",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
@@ -835,6 +831,9 @@
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fsB/4p": {
+    "defaultMessage": "Saved"
+  },
   "gMZfHO": {
     "defaultMessage": "RSS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -970,16 +969,8 @@
     "defaultMessage": "Edit",
     "description": "src/components/Comment/DropdownActions/EditButton.tsx"
   },
-  "mjMpv4": {
-    "defaultMessage": "Circle Edited",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "ml3SZN": {
     "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
-  },
-  "nD00sh": {
-    "defaultMessage": "Edit profile",
-    "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
   },
   "nGBrvw": {
     "defaultMessage": "Bookmarks"
@@ -991,6 +982,9 @@
   "nYeDrI": {
     "defaultMessage": "Not Registered?",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "nYrKWp": {
+    "defaultMessage": "Edit profile"
   },
   "nsaJRn": {
     "defaultMessage": "Logged in successfully"

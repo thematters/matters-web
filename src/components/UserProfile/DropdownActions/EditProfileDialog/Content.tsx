@@ -141,12 +141,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         })
 
         toast.success({
-          message: (
-            <FormattedMessage
-              defaultMessage="Profile updated"
-              description="src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
-            />
-          ),
+          message: <FormattedMessage defaultMessage="Saved" />,
         })
 
         setSubmitting(false)
@@ -251,7 +246,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title="editUserProfile"
+        title={<FormattedMessage defaultMessage="Edit profile" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
         hasSmUpTitle={false}

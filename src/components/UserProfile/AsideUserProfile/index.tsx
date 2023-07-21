@@ -242,10 +242,7 @@ export const AsideUserProfile = () => {
                   textActiveColor="green"
                   onClick={openEditProfileDialog}
                 >
-                  <FormattedMessage
-                    defaultMessage="Edit profile"
-                    description="src/components/UserProfile/AsideUserProfile/index.tsx"
-                  />
+                  <FormattedMessage defaultMessage="Edit profile" />
                 </Button>
               )}
             </EditProfileDialog>

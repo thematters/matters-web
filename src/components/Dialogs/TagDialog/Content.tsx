@@ -131,7 +131,11 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         })
 
         toast.success({
-          message: <Translate id={id ? 'tagEdited' : 'tagCreated'} />,
+          message: id ? (
+            <FormattedMessage defaultMessage="Saved" />
+          ) : (
+            <Translate id="tagCreated" />
+          ),
         })
 
         const returnedTagId = result?.data?.putTag?.id

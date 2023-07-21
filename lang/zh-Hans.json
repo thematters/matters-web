@@ -207,7 +207,7 @@
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "A3g33H": {
-    "defaultMessage": "归档作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
+    "defaultMessage": "归档的作品仅自己可见，且操作无法撤销。如文章已加入选集，将从选集中移除。（已发布到 IPFS 的版本不受影响）"
   },
   "A3rLZt": {
     "defaultMessage": "最近 {months} 个月",
@@ -439,10 +439,6 @@
   },
   "K3r6DQ": {
     "defaultMessage": "刪除"
-  },
-  "KL502d": {
-    "defaultMessage": "资料已保存",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
   },
   "KLQ1/z": {
     "defaultMessage": "围炉创建成功",
@@ -836,6 +832,9 @@
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fsB/4p": {
+    "defaultMessage": "保存成功"
+  },
   "gMZfHO": {
     "defaultMessage": "RSS 订阅",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -958,7 +957,7 @@
     "description": "src/components/BlockUser/Button/index.tsx"
   },
   "mWcca9": {
-    "defaultMessage": "確認要将“{article}”归档嗎？"
+    "defaultMessage": "确认要将“{article}”归档嗎？"
   },
   "mWjpk9": {
     "defaultMessage": "还没有广播",
@@ -971,16 +970,8 @@
     "defaultMessage": "编辑",
     "description": "src/components/Comment/DropdownActions/EditButton.tsx"
   },
-  "mjMpv4": {
-    "defaultMessage": "围炉已更新",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "ml3SZN": {
     "defaultMessage": "至少 8 个字符，支持英文大小写字母、数字和特殊符号"
-  },
-  "nD00sh": {
-    "defaultMessage": "编辑个人信息",
-    "description": "src/components/UserProfile/AsideUserProfile/index.tsx"
   },
   "nGBrvw": {
     "defaultMessage": "我的收藏"
@@ -992,6 +983,9 @@
   "nYeDrI": {
     "defaultMessage": "沒有帐户？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "nYrKWp": {
+    "defaultMessage": "编辑个人信息"
   },
   "nsaJRn": {
     "defaultMessage": "上站成功"
