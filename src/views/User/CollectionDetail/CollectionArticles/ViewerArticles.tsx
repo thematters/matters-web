@@ -123,7 +123,29 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
         </AddArticlesCollectionDialog>
       )}
       <section className={styles.feed}>
-        {items && (
+        {items && items.length === 1 && (
+          <section className={styles.digestFeed}>
+            <ArticleDigestFeed
+              article={items[0].node}
+              hasHeader={false}
+              hasEdit={true}
+              hasCircle={false}
+              hasRemoveCollection={true}
+              collectionId={id}
+              collectionArticleCount={articles.totalCount}
+              onRemoveCollection={() => setHasReset(true)}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'collection_article',
+                  contentType: 'article',
+                  location: 0,
+                  id: items[0].node.id,
+                })
+              }
+            />
+          </section>
+        )}
+        {items && items.length > 1 && (
           <DnDList
             values={items}
             lockVertically
@@ -161,7 +183,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
               >
                 <section className={styles.dragContainer}>
                   <button data-movable-handle className={styles.handle}>
-                    <IconHandle24 size="md" />
+                    <IconHandle24 size="md" color="greyDark" />
                   </button>
                   <section className={styles.digestFeed}>
                     <ArticleDigestFeed
