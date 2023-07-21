@@ -3,7 +3,7 @@ import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { numAbbr } from '~/common/utils'
+import { numAbbr, toPath } from '~/common/utils'
 import {
   Avatar,
   Button,
@@ -38,13 +38,18 @@ const DynamicWalletLabel = dynamic(() => import('../WalletLabel'), {
 })
 
 export const AsideUserProfile = () => {
-  const { isInPath, getQuery } = useRoute()
+  const { isInPath, getQuery, router } = useRoute()
   const viewer = useContext(ViewerContext)
 
   // public user data
   const userName = getQuery('name')
   const isInUserPage = isInPath('USER_ARTICLES') || isInPath('USER_COLLECTIONS')
   const isMe = !userName || viewer.userName === userName
+
+  const userProfilePath = toPath({
+    page: 'userProfile',
+    userName,
+  })
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
     {
@@ -149,7 +154,12 @@ export const AsideUserProfile = () => {
           </section>
         )}
         {!isInUserPage && (
-          <section className={styles.avatar}>
+          <section
+            className={styles.avatar}
+            onClick={() => {
+              router.push(userProfilePath.href)
+            }}
+          >
             {hasTraveloggersBadge ? (
               <TraveloggersAvatar user={user} isMe={isMe} size="xxxll" />
             ) : (
@@ -173,6 +183,9 @@ export const AsideUserProfile = () => {
             <h1
               className={styles.name}
               data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
+              onClick={() => {
+                router.push(userProfilePath.href)
+              }}
             >
               {user.displayName}
             </h1>

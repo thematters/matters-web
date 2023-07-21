@@ -14,10 +14,10 @@
 
   & .avatar {
     display: inline-flex;
+    cursor: pointer;
 
     &.clickable {
       position: relative;
-      cursor: pointer;
 
       & .mask {
         @mixin expand-to-container;
@@ -59,6 +59,7 @@
       font-size: var(--font-size-lg);
       font-weight: var(--font-weight-medium);
       line-height: 1.5;
+      cursor: pointer;
     }
   }
 
