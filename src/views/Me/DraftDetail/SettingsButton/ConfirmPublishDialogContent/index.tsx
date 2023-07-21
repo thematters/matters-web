@@ -1,8 +1,16 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
-import { Dialog, Translate, useMutation, useRoute } from '~/components'
+import {
+  Dialog,
+  Translate,
+  useMutation,
+  useRoute,
+  ViewerContext,
+} from '~/components'
 import { PublishArticleMutation } from '~/gql/graphql'
+import { VIEWER_ARTICLES } from '~/views/User/Articles/gql'
 
 import styles from './styles.module.css'
 
@@ -23,9 +31,17 @@ const PUBLISH_ARTICLE = gql`
 const ConfirmPublishDialogContent: React.FC<
   ConfirmPublishDialogContentProps
 > = ({ onBack, closeDialog }) => {
+  const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const id = getQuery('draftId')
-  const [publish] = useMutation<PublishArticleMutation>(PUBLISH_ARTICLE)
+  const [publish] = useMutation<PublishArticleMutation>(PUBLISH_ARTICLE, {
+    refetchQueries: [
+      {
+        query: VIEWER_ARTICLES,
+        variables: { userName: viewer.userName },
+      },
+    ],
+  })
 
   const onPublish = async () => {
     publish({ variables: { id } })
