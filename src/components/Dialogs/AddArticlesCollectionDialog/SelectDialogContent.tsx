@@ -58,7 +58,6 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
         hasNextPage={loadedArticles.length < (articles.edges?.length as number)}
         loadMore={loadMore}
         loader={<Spinner />}
-        eof
       >
         <FormikProvider value={formik}>
           <Form
