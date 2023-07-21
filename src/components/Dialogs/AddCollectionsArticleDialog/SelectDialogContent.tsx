@@ -58,7 +58,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
     )
   }
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       type="submit"
       form={formId}
@@ -73,7 +73,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
       <Dialog.Header
         title={<FormattedMessage defaultMessage="Add to collection" />}
         leftBtn={<span />}
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
       <Dialog.Content>
         <section className={styles.formContainer}>
@@ -121,7 +121,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
               color="greyDarker"
               onClick={closeDialog}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

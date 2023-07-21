@@ -19,7 +19,7 @@ const ConfirmRevisedPublishDialogContent = ({
     closeDialog()
   }
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton text={<Translate id="publish" />} onClick={onPublish} />
   )
 
@@ -30,7 +30,7 @@ const ConfirmRevisedPublishDialogContent = ({
         leftBtn={
           <Dialog.TextButton text={<Translate id="back" />} onClick={onBack} />
         }
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Message align="left" smUpAlign="left">
@@ -65,7 +65,7 @@ const ConfirmRevisedPublishDialogContent = ({
               text={<Translate id="back" />}
               onClick={onBack}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

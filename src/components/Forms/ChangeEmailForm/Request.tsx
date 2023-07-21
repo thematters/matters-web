@@ -132,7 +132,7 @@ const Request: React.FC<FormProps> = ({
     </section>
   )
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       type="submit"
       form={formId}
@@ -170,7 +170,7 @@ const Request: React.FC<FormProps> = ({
       <Dialog.Header
         title="changeEmail"
         closeDialog={closeDialog}
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Content>{InnerForm}</Dialog.Content>
@@ -184,7 +184,7 @@ const Request: React.FC<FormProps> = ({
               onClick={closeDialog}
             />
 
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

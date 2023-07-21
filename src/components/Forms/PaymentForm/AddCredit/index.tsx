@@ -280,7 +280,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
     )
   }
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       text={<Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />}
       type="submit"
@@ -295,7 +295,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
       <Dialog.Header
         title="topUp"
         closeDialog={closeDialog}
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Content>
@@ -326,7 +326,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
               color="greyDarker"
               onClick={closeDialog}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

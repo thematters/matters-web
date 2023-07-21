@@ -141,7 +141,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     )
   }
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       type="submit"
       form={formId}
@@ -161,7 +161,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
             <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
           ) : null
         }
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <Dialog.Content noSpacing={false}>
@@ -201,7 +201,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
               color="greyDarker"
               onClick={back || closeDialog}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

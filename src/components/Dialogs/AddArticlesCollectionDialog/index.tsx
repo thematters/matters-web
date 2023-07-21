@@ -123,7 +123,7 @@ const BaseAddArticlesCollectionDialog = ({
     }
   }, [searchValue])
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       type="submit"
       form={formId}
@@ -167,7 +167,7 @@ const BaseAddArticlesCollectionDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={<FormattedMessage defaultMessage="Add to collection" />}
-          rightBtn={<SubmitButton />}
+          rightBtn={SubmitButton}
         />
 
         <Dialog.Content hasFixed>
@@ -205,7 +205,7 @@ const BaseAddArticlesCollectionDialog = ({
                 color="greyDarker"
                 onClick={closeDialog}
               />
-              <SubmitButton />
+              {SubmitButton}
             </>
           }
         />

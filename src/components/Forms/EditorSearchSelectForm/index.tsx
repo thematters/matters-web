@@ -129,7 +129,7 @@ const EditorSearchSelectForm = ({
 
   const enableAdd = stagingNodes.length < maxNodesLength
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       onClick={submitCallback || closeDialog}
       // disabled={stagingNodes.length <= 0}
@@ -143,7 +143,7 @@ const EditorSearchSelectForm = ({
       <Dialog.Header
         title={title}
         closeDialog={closeDialog}
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       {inStagingArea && (
@@ -217,7 +217,7 @@ const EditorSearchSelectForm = ({
               color="greyDarker"
               onClick={back || closeDialog}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />

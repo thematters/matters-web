@@ -109,7 +109,7 @@ const SearchSelectForm = ({
     )
   }
 
-  const SubmitButton = () => (
+  const SubmitButton = (
     <Dialog.TextButton
       onClick={onClickSave}
       // disabled={stagingNodes.length <= 0}
@@ -126,7 +126,7 @@ const SearchSelectForm = ({
         title={title}
         closeDialog={closeDialog}
         leftBtn={headerLeftButton}
-        rightBtn={<SubmitButton />}
+        rightBtn={SubmitButton}
       />
 
       <SearchingArea
@@ -158,7 +158,7 @@ const SearchSelectForm = ({
               color="greyDarker"
               onClick={closeDialog}
             />
-            <SubmitButton />
+            {SubmitButton}
           </>
         }
       />
