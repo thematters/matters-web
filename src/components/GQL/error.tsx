@@ -48,13 +48,14 @@ export const getErrorContent = (code: ErrorCodeKeys, error: ApolloError) => {
  */
 export type MutationOnErrorOptions = {
   showToast?: boolean
+  toastType?: 'error' | 'success'
   customErrors?: { [key: string]: string | React.ReactNode }
 }
 export const mutationOnError = (
   error: ApolloError,
   options?: MutationOnErrorOptions
 ) => {
-  let { showToast, customErrors } = options || {}
+  let { showToast, toastType = 'error', customErrors } = options || {}
   showToast = typeof showToast === 'undefined' ? true : showToast
 
   // Add info to Sentry
@@ -87,7 +88,7 @@ export const mutationOnError = (
   const isTokenInvalid = errorMap[ERROR_CODES.TOKEN_INVALID]
 
   if (isUnauthenticated || isForbidden || isTokenInvalid) {
-    toast.error({
+    toast[toastType]({
       message: errorContent,
       actions: [
         {
@@ -109,7 +110,7 @@ export const mutationOnError = (
   }
 
   if (showToast) {
-    toast.error({
+    toast[toastType]({
       message: errorContent,
     })
   }

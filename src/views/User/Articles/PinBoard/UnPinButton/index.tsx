@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
+import { Z_INDEX } from '~/common/enums'
 import { IconUnPin20, Tooltip, useMutation } from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 import { UnpinArticleMutation, UnpinCollectionMutation } from '~/gql/graphql'
@@ -74,6 +75,7 @@ const UnPinButton = ({
           description="src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
         />
       }
+      zIndex={Z_INDEX.OVER_STICKY_TABS}
     >
       <button type="button" onClick={() => unpin()} className={styles.unpin}>
         <IconUnPin20 size="mdS" color="white" />
