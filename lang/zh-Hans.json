@@ -206,7 +206,7 @@
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "A3g33H": {
-    "defaultMessage": "封存作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
+    "defaultMessage": "归档作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
   },
   "A3rLZt": {
     "defaultMessage": "最近 {months} 个月",
@@ -388,7 +388,7 @@
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
   "HJ0iZJ": {
-    "defaultMessage": "確認封存"
+    "defaultMessage": "確認归档"
   },
   "HxcjQl": {
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
@@ -452,7 +452,7 @@
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
   "KQi/UZ": {
-    "defaultMessage": "封存作品"
+    "defaultMessage": "归档作品"
   },
   "L0J61B": {
     "defaultMessage": "免费",
@@ -555,7 +555,7 @@
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "RNKSCj": {
-    "defaultMessage": "已封存",
+    "defaultMessage": "已归档",
     "description": "src/components/ArticleDigest/Archive/index.tsx"
   },
   "RxiHr/": {
@@ -724,6 +724,10 @@
   },
   "ZjDH42": {
     "defaultMessage": "关于我们"
+  },
+  "a/YQ1Z": {
+    "defaultMessage": "作品已归档",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
   },
   "a/xacb": {
     "defaultMessage": "（不会删除选集内文章）"
@@ -953,7 +957,7 @@
     "description": "src/components/BlockUser/Button/index.tsx"
   },
   "mWcca9": {
-    "defaultMessage": "確認要将“{article}”封存嗎？"
+    "defaultMessage": "確認要将“{article}”归档嗎？"
   },
   "mWjpk9": {
     "defaultMessage": "还没有广播",
@@ -997,10 +1001,6 @@
   "oHQmBt": {
     "defaultMessage": "{articleCount} 篇文章",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
-  },
-  "oIkacT": {
-    "defaultMessage": "作品已隐藏",
-    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
   },
   "ohgTH4": {
     "defaultMessage": "追踪中",
@@ -1187,7 +1187,7 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "yBUiiy": {
-    "defaultMessage": "操作無法撤銷，確認封存嗎？"
+    "defaultMessage": "操作無法撤銷，確認归档嗎？"
   },
   "yIlC0R": {
     "defaultMessage": "尚未发布作品",
