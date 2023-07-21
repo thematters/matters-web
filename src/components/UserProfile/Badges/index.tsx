@@ -27,7 +27,7 @@ export const SeedBadge = ({ isInDialog, hasTooltip }: badgePros) => {
 
   if (hasTooltip) {
     return (
-      <Tooltip content={copy}>
+      <Tooltip content={copy} placement="top">
         <span className={styles.badge}>
           {withIcon(IconSeedBadge)({ size: 'mdS' })}
         </span>
@@ -61,7 +61,7 @@ export const GoldenMotorBadge = ({ isInDialog, hasTooltip }: badgePros) => {
 
   if (hasTooltip) {
     return (
-      <Tooltip content={copy}>
+      <Tooltip content={copy} placement="top">
         <span className={styles.badge}>
           {withIcon(IconGoldenMotorBadge)({ size: 'mdS' })}
         </span>
@@ -95,7 +95,7 @@ export const ArchitectBadge = ({ isInDialog, hasTooltip }: badgePros) => {
 
   if (hasTooltip) {
     return (
-      <Tooltip content={copy}>
+      <Tooltip content={copy} placement="top">
         <span className={styles.badge}>
           {withIcon(IconArchitectBadge)({ size: 'mdS' })}
         </span>
@@ -125,7 +125,7 @@ export const CivicLikerBadge = ({ isInDialog, hasTooltip }: badgePros) => {
 
   if (hasTooltip) {
     return (
-      <Tooltip content={copy}>
+      <Tooltip content={copy} placement="top">
         <span className={styles.badge}>
           {withIcon(IconCivicLikerBadge)({ size: 'mdS' })}
         </span>
@@ -158,7 +158,7 @@ export const TraveloggersBadge = ({ isInDialog, hasTooltip }: badgePros) => {
   }
   if (hasTooltip) {
     return (
-      <Tooltip content={copy}>
+      <Tooltip content={copy} placement="top">
         <span className={styles.badge}>
           {withIcon(IconTraveloggersBadge)({ size: 'mdS' })}
         </span>

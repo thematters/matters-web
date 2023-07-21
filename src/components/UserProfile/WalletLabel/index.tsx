@@ -78,6 +78,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
               description="src/components/UserProfile/WalletLabel/index.tsx"
             />
           }
+          placement="top"
         >
           {Content}
         </Tooltip>
