@@ -5,9 +5,4 @@
     margin-right: var(--spacing-base);
     margin-left: var(--spacing-base);
   }
-
-  & :global(.field) {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
 }
