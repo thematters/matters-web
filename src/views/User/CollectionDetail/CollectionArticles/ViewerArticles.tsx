@@ -214,7 +214,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
             )}
           ></DnDList>
         )}
-        <EndOfResults message={true} />
+        {items && items.length > 0 && <EndOfResults message={true} />}
       </section>
     </>
   )
