@@ -35,9 +35,5 @@
 
   & .listForm {
     /* overflow-y: auto; */
-
-    & label {
-      padding: var(--spacing-x-tight) 0;
-    }
   }
 }
