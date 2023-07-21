@@ -50,8 +50,14 @@
   }
 
   & .displayName {
-    & .name {
+    & .isInUserPageName {
       font-size: var(--font-size-xl);
+      line-height: 1.5;
+    }
+
+    & .name {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
       line-height: 1.5;
     }
   }

@@ -38,11 +38,12 @@ const DynamicWalletLabel = dynamic(() => import('../WalletLabel'), {
 })
 
 export const AsideUserProfile = () => {
-  const { getQuery } = useRoute()
+  const { isInPath, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
   // public user data
   const userName = getQuery('name')
+  const isInUserPage = isInPath('USER_ARTICLES') || isInPath('USER_COLLECTIONS')
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
@@ -119,7 +120,7 @@ export const AsideUserProfile = () => {
   return (
     <section className={styles.userProfile} data-test-id={TEST_ID.USER_PROFILE}>
       <header className={styles.header}>
-        {isMe && (
+        {isInUserPage && isMe && (
           <EditProfileDialog user={user}>
             {({ openDialog: openEditProfileDialog }) => (
               <section
@@ -138,7 +139,7 @@ export const AsideUserProfile = () => {
             )}
           </EditProfileDialog>
         )}
-        {!isMe && (
+        {isInUserPage && !isMe && (
           <section className={styles.avatar}>
             {hasTraveloggersBadge ? (
               <TraveloggersAvatar user={user} isMe={isMe} />
@@ -147,16 +148,35 @@ export const AsideUserProfile = () => {
             )}
           </section>
         )}
+        {!isInUserPage && (
+          <section className={styles.avatar}>
+            {hasTraveloggersBadge ? (
+              <TraveloggersAvatar user={user} isMe={isMe} size="xxxll" />
+            ) : (
+              <Avatar size="xxxll" user={user} inProfile />
+            )}
+          </section>
+        )}
       </header>
 
       <section className={styles.info}>
         <section className={styles.displayName}>
-          <h1
-            className={styles.name}
-            data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
-          >
-            {user.displayName}
-          </h1>
+          {isInUserPage && (
+            <h1
+              className={styles.isInUserPageName}
+              data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
+            >
+              {user.displayName}
+            </h1>
+          )}
+          {!isInUserPage && (
+            <h1
+              className={styles.name}
+              data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
+            >
+              {user.displayName}
+            </h1>
+          )}
         </section>
 
         <section className={styles.username}>
@@ -233,7 +253,7 @@ export const AsideUserProfile = () => {
           </Expandable>
         )}
 
-        {isMe && (
+        {isInUserPage && isMe && (
           <section className={styles.meButtons}>
             <EditProfileDialog user={user}>
               {({ openDialog: openEditProfileDialog }) => (
@@ -251,7 +271,7 @@ export const AsideUserProfile = () => {
           </section>
         )}
 
-        {!isMe && (
+        {isInUserPage && !isMe && (
           <section className={styles.buttons}>
             <FollowUserButton user={user} size="xl" />
 
@@ -260,9 +280,11 @@ export const AsideUserProfile = () => {
         )}
       </section>
 
-      <footer className={styles.footer}>
-        <CircleWidget circles={circles} isMe={isMe} />
-      </footer>
+      {isInUserPage && (
+        <footer className={styles.footer}>
+          <CircleWidget circles={circles} isMe={isMe} />
+        </footer>
+      )}
     </section>
   )
 }
