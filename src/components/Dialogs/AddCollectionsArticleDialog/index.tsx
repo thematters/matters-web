@@ -153,7 +153,7 @@ const BaseAddCollectionsArticleDialog = ({
                   userName,
                   articleId: articleId,
                   cache,
-                  type: 'addConnection',
+                  type: 'addCollection',
                   collection,
                 })
                 formik.setFieldValue('checked', [
