@@ -68,7 +68,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
         <Dialog.TextButton
           type="submit"
           form={formId}
-          disabled={formik.isSubmitting}
+          disabled={formik.isSubmitting || checkingIds.length === 0}
           text={<FormattedMessage defaultMessage="Confirm" />}
           loading={formik.isSubmitting}
         />
