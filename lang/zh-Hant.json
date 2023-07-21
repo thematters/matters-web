@@ -389,7 +389,7 @@
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
   "HJ0iZJ": {
-    "defaultMessage": "确认归档"
+    "defaultMessage": "确认封存"
   },
   "HxcjQl": {
     "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
@@ -453,7 +453,7 @@
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
   "KQi/UZ": {
-    "defaultMessage": "归档作品"
+    "defaultMessage": "封存作品"
   },
   "L0J61B": {
     "defaultMessage": "免費",
@@ -726,6 +726,10 @@
   "ZjDH42": {
     "defaultMessage": "關於我們"
   },
+  "a/YQ1Z": {
+    "defaultMessage": "作品已封存",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+  },
   "a/xacb": {
     "defaultMessage": "（不會刪除選集內文章）"
   },
@@ -954,7 +958,7 @@
     "description": "src/components/BlockUser/Button/index.tsx"
   },
   "mWcca9": {
-    "defaultMessage": "确认要将「{article}」归档吗？"
+    "defaultMessage": "确认要将「{article}」封存吗？"
   },
   "mWjpk9": {
     "defaultMessage": "還沒有廣播",
@@ -998,10 +1002,6 @@
   "oHQmBt": {
     "defaultMessage": "{articleCount} 篇文章",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
-  },
-  "oIkacT": {
-    "defaultMessage": "作品已隱藏",
-    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
   },
   "ohgTH4": {
     "defaultMessage": "追蹤中",
@@ -1188,7 +1188,7 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "yBUiiy": {
-    "defaultMessage": "操作无法撤销，确认归档吗？"
+    "defaultMessage": "操作无法撤销，确认封存吗？"
   },
   "yIlC0R": {
     "defaultMessage": "尚未發布作品",

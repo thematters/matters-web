@@ -87,7 +87,9 @@ const DeleteCollectionDialog = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header title="archive" />
+        <Dialog.Header
+          title={<FormattedMessage defaultMessage="Delete collection" />}
+        />
 
         <Dialog.Message>
           {isInDelete && (

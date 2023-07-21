@@ -36,6 +36,10 @@
 
   &.selected {
     border-bottom: 2px solid var(--color-matters-green);
+
+    & .count {
+      color: var(--color-grey-darker);
+    }
   }
 
   & + .item {
@@ -43,6 +47,6 @@
   }
 
   & .count {
-    color: var(--color-grey-darker);
+    color: var(--color-grey-dark);
   }
 }

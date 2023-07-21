@@ -70,7 +70,7 @@ const ArchiveArticleDialog = ({
     toast.success({
       message: (
         <FormattedMessage
-          defaultMessage="Article is hidden"
+          defaultMessage="Archived"
           description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
         />
       ),

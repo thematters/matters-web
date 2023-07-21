@@ -63,15 +63,17 @@ const PinButton = ({
           ) : (
             <FormattedMessage defaultMessage="Pinned to profile" />
           ),
-          actions: [
-            {
-              content: <FormattedMessage defaultMessage="View" />,
-              href: toPath({
-                page: 'userProfile',
-                userName: collection.author.userName!,
-              }).href,
-            },
-          ],
+          actions: collection.pinned
+            ? [
+                {
+                  content: <FormattedMessage defaultMessage="View" />,
+                  href: toPath({
+                    page: 'userProfile',
+                    userName: collection.author.userName!,
+                  }).href,
+                },
+              ]
+            : undefined,
         })
       },
     },

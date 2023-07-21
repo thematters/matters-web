@@ -725,6 +725,10 @@
   "ZjDH42": {
     "defaultMessage": "About Us"
   },
+  "a/YQ1Z": {
+    "defaultMessage": "Archived",
+    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+  },
   "a/xacb": {
     "defaultMessage": "(Articles in this collection will not be deleted)"
   },
@@ -997,10 +1001,6 @@
   "oHQmBt": {
     "defaultMessage": "{articleCount} articles",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
-  },
-  "oIkacT": {
-    "defaultMessage": "Article is hidden",
-    "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
   },
   "ohgTH4": {
     "defaultMessage": "Following",
