@@ -14,7 +14,7 @@ const MenuItem: React.FC<React.PropsWithChildren<MenuItemProps>> = ({
   text,
   icon,
   children,
-  spacing = ['baseTight', 'base'],
+  spacing = ['xtight', 'base'],
   weight,
   size = 'md',
   ...restProps
