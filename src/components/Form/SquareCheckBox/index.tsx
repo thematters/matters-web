@@ -52,7 +52,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
         }
       }
     })
-  })
+  }, [])
 
   const hintClasses = classNames({
     [styles.hint]: true,
