@@ -62,24 +62,18 @@ const update = ({
         }
         break
     }
-
     cache.writeQuery({
       query: USER_ARTICLES_PUBLIC,
       variables: { userName },
       data: {
-        user: {
-          ...articlesData?.user,
-        },
+        ...articlesData,
       },
     })
-
     cache.writeQuery({
       query: USER_COLLECTIONS,
       variables: { userName },
       data: {
-        user: {
-          ...collectionsData?.user,
-        },
+        ...collectionsData,
       },
     })
     return

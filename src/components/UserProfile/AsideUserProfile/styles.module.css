@@ -92,6 +92,7 @@
   @mixin flex-center-start;
 
   margin-top: var(--spacing-base);
+  font-size: var(--font-size-sm);
 
   & > *:first-child {
     margin-right: var(--spacing-tight);
@@ -109,5 +110,5 @@
 }
 
 .footer {
-  padding-left: var(--spacing-tight);
+  padding-left: var(--spacing-x-tight);
 }

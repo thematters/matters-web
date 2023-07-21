@@ -50,6 +50,10 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   )
   const hasChecked = hasCheckedEdges?.map(({ node }) => node.id) || []
 
+  const enableCollections =
+    collections?.edges?.filter(({ node }) => node.articles.totalCount < 100) ||
+    []
+
   if (loading) {
     return (
       <Dialog.Content>
@@ -76,33 +80,39 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
         rightBtn={SubmitButton}
       />
       <Dialog.Content>
-        <section className={styles.formContainer}>
-          <FormikProvider value={formik}>
-            <Form
-              id={formId}
-              onSubmit={formik.handleSubmit}
-              className={styles.listForm}
-            >
-              {collections?.edges?.map(
-                ({ node }) =>
-                  node.articles.totalCount < 100 && (
-                    <Form.SquareCheckBox
-                      key={node.id}
-                      hasTooltip={true}
-                      checked={
-                        hasChecked.includes(node.id) ||
-                        checkingIds.includes(node.id)
-                      }
-                      hint={node.title}
-                      disabled={hasChecked.includes(node.id)}
-                      {...formik.getFieldProps('checked')}
-                      value={node.id}
-                    />
-                  )
-              )}
-            </Form>
-          </FormikProvider>
+        {enableCollections.length > 0 && (
+          <section className={styles.formContainer}>
+            <FormikProvider value={formik}>
+              <Form
+                id={formId}
+                onSubmit={formik.handleSubmit}
+                className={styles.listForm}
+              >
+                {enableCollections.map(({ node }) => (
+                  <Form.SquareCheckBox
+                    key={node.id}
+                    hasTooltip={true}
+                    checked={
+                      hasChecked.includes(node.id) ||
+                      checkingIds.includes(node.id)
+                    }
+                    hint={node.title}
+                    disabled={hasChecked.includes(node.id)}
+                    {...formik.getFieldProps('checked')}
+                    value={node.id}
+                  />
+                ))}
+              </Form>
+            </FormikProvider>
+          </section>
+        )}
+      </Dialog.Content>
 
+      <Dialog.Content>
+        <section className={styles.wrapper}>
+          {enableCollections.length > 0 && (
+            <section className={styles.splitLine}></section>
+          )}
           <section className={styles.newCollection}>
             <span className={styles.button} onClick={switchToCreating}>
               <TextIcon icon={<IconAdd20 size="mdS" />}>

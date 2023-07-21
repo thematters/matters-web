@@ -18,7 +18,7 @@ const update = ({
   articleId: string
   collection?: CreateCollectionMutation['putCollection']
   userName?: string | null
-  type: 'addConnection' | 'addArticles'
+  type: 'addCollection' | 'addArticles'
 }) => {
   // FIXME: circular dependencies
   const {
@@ -42,7 +42,7 @@ const update = ({
     let edges = data.user.collections.edges
 
     switch (type) {
-      case 'addConnection':
+      case 'addCollection':
         if (!collection) {
           return
         }

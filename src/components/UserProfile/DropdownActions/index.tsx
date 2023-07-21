@@ -128,7 +128,7 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <IconMore32 size="md" />
+                <IconMore32 size="mdM" />
               </Button>
             )}
             {isInAside && !isMe && (
@@ -145,7 +145,7 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <IconMore32 size="md" />
+                <IconMore32 size="mdM" />
               </Button>
             )}
             {!isInAside && (

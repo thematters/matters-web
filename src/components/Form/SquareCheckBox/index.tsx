@@ -75,6 +75,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
           appendTo="parent"
           zIndex={100}
           placement="auto-start"
+          delay={[1000, null]}
         >
           {Content}
         </Tooltip>
