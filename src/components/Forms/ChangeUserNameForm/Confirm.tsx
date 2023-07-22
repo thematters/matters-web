@@ -21,8 +21,6 @@ import {
 } from '~/components'
 import { UpdateUserInfoUserNameMutation } from '~/gql/graphql'
 
-import styles from '../styles.module.css'
-
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback: () => void
@@ -121,45 +119,44 @@ const Confirm: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <section className={styles.container}>
-      <Form id={formId} onSubmit={handleSubmit}>
-        <Form.Input
-          label="Matters ID"
-          type="text"
-          name="userName"
-          required
-          placeholder={translate({
-            id: 'enterUserName',
-            lang,
-          })}
-          hint={<Translate id="hintUserName" />}
-          value={values.userName}
-          error={touched.userName && errors.userName}
-          onBlur={handleBlur}
-          onChange={(e) => {
-            const userName = normalizeName(e.target.value)
-            setFieldValue('userName', userName)
-            return userName
-          }}
-        />
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label="Matters ID"
+        type="text"
+        name="userName"
+        required
+        placeholder={translate({
+          id: 'enterUserName',
+          lang,
+        })}
+        hint={<Translate id="hintUserName" />}
+        value={values.userName}
+        error={touched.userName && errors.userName}
+        onBlur={handleBlur}
+        onChange={(e) => {
+          const userName = normalizeName(e.target.value)
+          setFieldValue('userName', userName)
+          return userName
+        }}
+        spacingBottom="base"
+      />
 
-        <Form.Input
-          type="text"
-          name="comparedUserName"
-          required
-          placeholder={translate({ id: 'enterUserNameAgain', lang })}
-          value={values.comparedUserName}
-          error={touched.comparedUserName && errors.comparedUserName}
-          onBlur={handleBlur}
-          hint={<Translate id="hintUserName" />}
-          onChange={(e) => {
-            const userName = normalizeName(e.target.value)
-            setFieldValue('comparedUserName', userName)
-            return userName
-          }}
-        />
-      </Form>
-    </section>
+      <Form.Input
+        type="text"
+        name="comparedUserName"
+        required
+        placeholder={translate({ id: 'enterUserNameAgain', lang })}
+        value={values.comparedUserName}
+        error={touched.comparedUserName && errors.comparedUserName}
+        onBlur={handleBlur}
+        hint={<Translate id="hintUserName" />}
+        onChange={(e) => {
+          const userName = normalizeName(e.target.value)
+          setFieldValue('comparedUserName', userName)
+          return userName
+        }}
+      />
+    </Form>
   )
 
   const SubmitButton = (
@@ -190,7 +187,7 @@ const Confirm: React.FC<FormProps> = ({
           }
         />
 
-        {InnerForm}
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }

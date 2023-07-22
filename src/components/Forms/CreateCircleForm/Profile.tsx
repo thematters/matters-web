@@ -5,7 +5,12 @@ import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
-import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import {
+  ASSET_TYPE,
+  ENTITY_TYPE,
+  MAX_CIRCLE_DISPLAY_NAME_LENGTH,
+  MAX_DESCRIPTION_LENGTH,
+} from '~/common/enums'
 import {
   parseFormSubmitErrors,
   toPath,
@@ -135,79 +140,79 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
   })
 
   const InnerForm = (
-    <section className={styles.profile}>
-      <Form id={formId} onSubmit={handleSubmit}>
-        <section className={styles.coverField}>
-          <CoverUploader
-            type="circle"
-            assetType={ASSET_TYPE.circleCover}
-            cover={circle.cover}
-            fallbackCover={CIRCLE_COVER}
-            inEditor
-            onUpload={(assetId) => setFieldValue('cover', assetId)}
-            entityType={ENTITY_TYPE.user}
-            entityId={circle.id}
-          />
+    <Form id={formId} onSubmit={handleSubmit}>
+      <section className={styles.coverField}>
+        <CoverUploader
+          type="circle"
+          assetType={ASSET_TYPE.circleCover}
+          cover={circle.cover}
+          fallbackCover={CIRCLE_COVER}
+          inEditor
+          onUpload={(assetId) => setFieldValue('cover', assetId)}
+          entityType={ENTITY_TYPE.user}
+          entityId={circle.id}
+        />
 
-          <p className={styles.hint}>
-            <FormattedMessage defaultMessage="Recommended size: 1600px x 900px" />
-          </p>
-        </section>
+        <p className={styles.hint}>
+          <FormattedMessage defaultMessage="Recommended size: 1600px x 900px" />
+        </p>
+      </section>
 
-        <section className={styles.avatarField}>
-          <AvatarUploader
-            type="circle"
-            circle={circle}
-            onUpload={(assetId) => setFieldValue('avatar', assetId)}
-            entityId={circle.id}
-          />
-        </section>
+      <section className={styles.avatarField}>
+        <AvatarUploader
+          type="circle"
+          circle={circle}
+          onUpload={(assetId) => setFieldValue('avatar', assetId)}
+          entityId={circle.id}
+        />
+      </section>
 
-        {!isCreate && (
-          <section className={styles.container}>
-            <Form.Input
-              label={
-                <FormattedMessage
-                  defaultMessage="Name of the Circle"
-                  description="src/components/Forms/CreateCircleForm/Profile.tsx"
-                />
-              }
-              type="text"
-              name="displayName"
-              required
-              placeholder={intl.formatMessage({
-                defaultMessage: 'Enter the name of your Circle',
-              })}
-              value={values.displayName}
-              error={touched.displayName && errors.displayName}
-              onBlur={handleBlur}
-              onChange={handleChange}
-            />
-          </section>
-        )}
-        <section className={styles.container}>
-          <Form.Textarea
-            label={
-              <FormattedMessage
-                defaultMessage="Description of the Circle"
-                description="src/components/Forms/CreateCircleForm/Profile.tsx"
-              />
-            }
-            name="description"
-            required
-            placeholder={intl.formatMessage({
-              defaultMessage: 'Describe more about your Circle',
-              description: 'src/components/Forms/CreateCircleForm/Profile.tsx',
-            })}
-            hint={<FormattedMessage defaultMessage="Maximum 200 characters." />}
-            value={values.description}
-            error={touched.description && errors.description}
-            onBlur={handleBlur}
-            onChange={handleChange}
+      {!isCreate && (
+        <Form.Input
+          label={<FormattedMessage defaultMessage="Circle Name" />}
+          hasLabel
+          type="text"
+          name="displayName"
+          required
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Enter the name of your Circle',
+          })}
+          value={values.displayName}
+          hint={`${values.displayName.length}/${MAX_CIRCLE_DISPLAY_NAME_LENGTH}`}
+          error={touched.displayName && errors.displayName}
+          hintAlign={
+            touched.displayName && errors.displayName ? 'left' : 'right'
+          }
+          maxLength={MAX_CIRCLE_DISPLAY_NAME_LENGTH}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          spacingBottom="base"
+        />
+      )}
+
+      <Form.Textarea
+        label={
+          <FormattedMessage
+            defaultMessage="Circle Description"
+            description="src/components/Forms/CreateCircleForm/Profile.tsx"
           />
-        </section>
-      </Form>
-    </section>
+        }
+        hasLabel
+        name="description"
+        required
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Describe more about your Circle',
+          description: 'src/components/Forms/CreateCircleForm/Profile.tsx',
+        })}
+        value={values.description}
+        hint={`${values.description.length}/${MAX_DESCRIPTION_LENGTH}`}
+        error={touched.description && errors.description}
+        hintAlign={touched.description && errors.description ? 'left' : 'right'}
+        maxLength={MAX_DESCRIPTION_LENGTH}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+    </Form>
   )
 
   const SubmitButton = (
@@ -238,7 +243,8 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
             </>
           }
         />
-        {InnerForm}
+
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }

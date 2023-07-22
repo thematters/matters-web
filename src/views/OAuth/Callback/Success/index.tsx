@@ -32,7 +32,7 @@ const OAuthCallbackSuccess = () => {
     <Layout.Main>
       <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
 
-      <Layout.Spacing>
+      <Layout.Main.Spacing>
         <Box avatar={avatar[provider]} title={title[provider]}>
           <section className={styles.content}>
             <h2>
@@ -48,7 +48,7 @@ const OAuthCallbackSuccess = () => {
             </p>
           </section>
         </Box>
-      </Layout.Spacing>
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

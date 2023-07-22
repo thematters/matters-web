@@ -14,7 +14,7 @@ const Community = () => {
 
       <Head title={{ id: 'community' }} />
 
-      <Layout.Spacing>
+      <Layout.Main.Spacing>
         <section
           dangerouslySetInnerHTML={{
             __html: translate({
@@ -25,7 +25,7 @@ const Community = () => {
           className="u-content"
           onClick={captureClicks}
         />
-      </Layout.Spacing>
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

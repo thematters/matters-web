@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
@@ -14,8 +13,6 @@ import {
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
-
-import styles from '../styles.module.css'
 
 interface FormProps {
   defaultEmail?: string
@@ -93,28 +90,24 @@ const Request: React.FC<FormProps> = ({
     },
   })
 
-  const containerClasses = classNames({ [styles.container]: !!isInPage })
-
   const InnerForm = (
-    <section className={containerClasses}>
-      <Form id={formId} onSubmit={handleSubmit}>
-        <Form.Input
-          label={<Translate id="email" />}
-          type="email"
-          name="email"
-          required
-          placeholder={translate({
-            id: isForget ? 'enterRegisteredEmail' : 'enterEmail',
-            lang,
-          })}
-          value={values.email}
-          error={touched.email && errors.email}
-          disabled={!!defaultEmail}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-      </Form>
-    </section>
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<Translate id="email" />}
+        type="email"
+        name="email"
+        required
+        placeholder={translate({
+          id: isForget ? 'enterRegisteredEmail' : 'enterEmail',
+          lang,
+        })}
+        value={values.email}
+        error={touched.email && errors.email}
+        disabled={!!defaultEmail}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+    </Form>
   )
 
   const SubmitButton = (
@@ -146,7 +139,7 @@ const Request: React.FC<FormProps> = ({
           }
         />
 
-        {InnerForm}
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }

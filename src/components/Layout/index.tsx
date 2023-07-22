@@ -47,7 +47,6 @@ const DynamicOnboardingTasksWidget = dynamic(
 export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Main: typeof Main
   Header: typeof Header
-  Spacing: typeof Spacing
   FixedMain: typeof FixedMain
   AuthHeader: typeof AuthHeader
   Notice: typeof Notice
@@ -90,12 +89,9 @@ interface MainProps {
   inEditor?: boolean
 }
 
-const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
-  aside,
-  smBgColor,
-  inEditor,
-  children,
-}) => {
+const Main: React.FC<React.PropsWithChildren<MainProps>> & {
+  Spacing: typeof Spacing
+} = ({ aside, smBgColor, inEditor, children }) => {
   const { isInPath } = useRoute()
   const isInHome = isInPath('HOME')
   const isInSettings = isInPath('SETTINGS')
@@ -154,9 +150,10 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   )
 }
 
+Main.Spacing = Spacing
+
 Layout.Main = Main
 Layout.Header = Header
-Layout.Spacing = Spacing
 Layout.FixedMain = FixedMain
 Layout.AuthHeader = AuthHeader
 Layout.Notice = Notice

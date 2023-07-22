@@ -24,7 +24,7 @@ const PayCallbackSuccess = () => {
     <Layout.Main>
       <Layout.Header left={<Layout.Header.Title id="donation" />} />
 
-      <Layout.Spacing>
+      <Layout.Main.Spacing>
         <Box avatar={avatar[provider]} title={title[provider]}>
           <section className={styles.content}>
             <h2>
@@ -40,7 +40,7 @@ const PayCallbackSuccess = () => {
             </p>
           </section>
         </Box>
-      </Layout.Spacing>
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }
