@@ -1,6 +1,6 @@
 .textarea {
   @mixin form-input;
 
+  height: initial;
   min-height: 8rem;
-  line-height: 1.5rem;
 }

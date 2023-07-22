@@ -114,7 +114,6 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
     <Form.Select
       name="select-license"
       label={<Translate id="license" />}
-      labelVisHidden
       title={<Translate id="license" />}
       onChange={(option) => onChange(option.value)}
       options={options.map((value) => {

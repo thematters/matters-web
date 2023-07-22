@@ -39,12 +39,15 @@ const Select: React.FC<SelectProps> = ({
   name,
   title,
   label,
-  labelVisHidden,
+  hasLabel,
 
   options,
   onChange,
 
   size,
+
+  spacingTop,
+  spacingBottom,
 }) => {
   const fieldId = `field-${name}`
   const selectedOptionId = `${fieldId}-selected`
@@ -89,7 +92,7 @@ const Select: React.FC<SelectProps> = ({
       zIndex={Z_INDEX.OVER_DIALOG}
     >
       {({ openDropdown, ref }) => (
-        <ul aria-labelledby={fieldId}>
+        <ul aria-labelledby={fieldId} className={styles.list}>
           <Option
             onClick={openDropdown}
             role="button"
@@ -107,12 +110,8 @@ const Select: React.FC<SelectProps> = ({
   )
 
   return (
-    <Field>
-      <Field.Header
-        label={label}
-        labelId={fieldId}
-        labelVisHidden={labelVisHidden}
-      />
+    <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
+      <Field.Header label={label} labelId={fieldId} hasLabel={hasLabel} />
 
       {Content}
     </Field>

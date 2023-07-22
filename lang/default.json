@@ -157,6 +157,9 @@
     "defaultMessage": "Successfully added",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
   },
+  "7+b2mD": {
+    "defaultMessage": "tagDescription"
+  },
   "77tYPg": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -657,6 +660,9 @@
     "defaultMessage": "Add to Featured",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
+  "WiuX1v": {
+    "defaultMessage": "tagName"
+  },
   "WpvsPu": {
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1111,6 +1117,9 @@
   },
   "u5aHb4": {
     "defaultMessage": "Copy Link"
+  },
+  "uJkv2X": {
+    "defaultMessage": "Edit Tag"
   },
   "uVCg1l": {
     "defaultMessage": "Explore Matters"

@@ -32,10 +32,14 @@ const Textarea: React.FC<TextareaProps> = ({
   name,
   label,
   extraButton,
-  labelVisHidden,
+  hasLabel,
 
   hint,
   error,
+  hintAlign,
+
+  spacingTop,
+  spacingBottom,
 
   ...textareaProps
 }) => {
@@ -54,12 +58,12 @@ const Textarea: React.FC<TextareaProps> = ({
   }, [])
 
   return (
-    <Field>
+    <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
       <Field.Header
         label={label}
         htmlFor={fieldId}
         extraButton={extraButton}
-        labelVisHidden={labelVisHidden}
+        hasLabel={hasLabel}
       />
 
       <Field.Content>
@@ -73,7 +77,12 @@ const Textarea: React.FC<TextareaProps> = ({
         />
       </Field.Content>
 
-      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+      <Field.Footer
+        fieldMsgId={fieldMsgId}
+        hint={hint}
+        error={error}
+        hintAlign={hintAlign}
+      />
     </Field>
   )
 }

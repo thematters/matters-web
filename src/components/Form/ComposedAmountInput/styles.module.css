@@ -43,8 +43,9 @@
 .customInput {
   margin-top: var(--spacing-base);
 
-  & input {
-    @mixin form-input-round;
+  & .input {
+    @mixin form-input;
+    @mixin form-input-number;
 
     text-align: center;
   }

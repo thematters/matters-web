@@ -87,6 +87,10 @@ const CurrencyRadioInput: React.FC<CurrencyRadioInputProps> = ({
 
   hint,
   error,
+  hintAlign,
+
+  spacingTop,
+  spacingBottom,
 
   ...inputProps
 }) => {
@@ -98,7 +102,7 @@ const CurrencyRadioInput: React.FC<CurrencyRadioInputProps> = ({
   }
 
   return (
-    <Field>
+    <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
       <ul>
         <CurrencyOption
           {...baseInputProps}
@@ -114,7 +118,12 @@ const CurrencyRadioInput: React.FC<CurrencyRadioInputProps> = ({
         />
       </ul>
 
-      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+      <Field.Footer
+        fieldMsgId={fieldMsgId}
+        hint={hint}
+        error={error}
+        hintAlign={hintAlign}
+      />
     </Field>
   )
 }

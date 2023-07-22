@@ -1,9 +1,8 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import {
@@ -15,8 +14,6 @@ import {
 import {
   normalizeTag,
   parseFormSubmitErrors,
-  toPath,
-  translate,
   validateTagName,
 } from '~/common/utils'
 import {
@@ -25,7 +22,6 @@ import {
   Form,
   LanguageContext,
   toast,
-  Translate,
   useMutation,
 } from '~/components'
 import { PutTagMutation } from '~/gql/graphql'
@@ -43,30 +39,16 @@ const PUT_TAG = gql`
   }
 `
 
-const HintLengthText: React.FC<{
-  curLength: number
-  maxLength: number
-}> = ({ curLength, maxLength }) => (
-  <>
-    <span className={styles.count}>
-      <span className={curLength > 0 ? 'u-highlight' : ''}>
-        {curLength ?? 0}
-      </span>
-      &nbsp;/&nbsp;{maxLength}
-    </span>
-  </>
-)
-
-export interface TagDialogContentProps {
-  id?: string
+export interface EditTagDialogContentProps {
+  id: string
   content?: string
   cover?: string | null
   description?: string | null
 }
 
-type BaseTagDialogContentProps = {
+type BaseEditTagDialogContentProps = {
   closeDialog: () => void
-} & TagDialogContentProps
+} & EditTagDialogContentProps
 
 interface FormValues {
   newContent: string
@@ -76,19 +58,18 @@ interface FormValues {
 
 const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
-const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
+const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
   id,
   content,
   cover,
   description,
   closeDialog,
 }) => {
-  const router = useRouter()
+  const intl = useIntl()
   const [update] = useMutation<PutTagMutation>(PUT_TAG, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)
-  const isEditing = id && content
 
   const formId = 'put-tag-form'
 
@@ -119,7 +100,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       { setFieldError, setSubmitting }
     ) => {
       try {
-        const result = await update({
+        await update({
           variables: {
             input: {
               id,
@@ -131,31 +112,12 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         })
 
         toast.success({
-          message: id ? (
-            <FormattedMessage defaultMessage="Saved" />
-          ) : (
-            <Translate id="tagCreated" />
-          ),
+          message: <FormattedMessage defaultMessage="Saved" />,
         })
-
-        const returnedTagId = result?.data?.putTag?.id
-        const returnedTagContent = result?.data?.putTag?.content as string
 
         setSubmitting(false)
 
-        if (!id) {
-          // if created, then redirect to tag detail page
-          const path = toPath({
-            page: 'tagDetail',
-            tag: {
-              id: returnedTagId || '',
-              content: returnedTagContent,
-            },
-          })
-          router.push(path.href)
-        } else {
-          closeDialog()
-        }
+        closeDialog()
       } catch (error) {
         setSubmitting(false)
 
@@ -167,58 +129,51 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      {isEditing && (
-        <section className={styles.coverField}>
-          <CoverUploader
-            assetType={ASSET_TYPE.tagCover}
-            cover={cover}
-            fallbackCover={IMAGE_TAG_COVER.src}
-            entityId={id}
-            entityType={ENTITY_TYPE.tag}
-            inEditor
-            onUpload={(assetId) => setFieldValue('newCover', assetId)}
-          />
-        </section>
-      )}
+      <section className={styles.coverField}>
+        <CoverUploader
+          assetType={ASSET_TYPE.tagCover}
+          cover={cover}
+          fallbackCover={IMAGE_TAG_COVER.src}
+          entityId={id}
+          entityType={ENTITY_TYPE.tag}
+          inEditor
+          onUpload={(assetId) => setFieldValue('newCover', assetId)}
+        />
+      </section>
 
       <Form.Input
-        label={<Translate id="tagName" />}
+        label={intl.formatMessage({ defaultMessage: 'tagName' })}
         type="text"
         name="newContent"
-        placeholder={translate({ id: id ? 'tagName' : 'searchTag', lang })}
+        placeholder={intl.formatMessage({ defaultMessage: 'tagName' })}
         value={values.newContent}
-        error={touched.newContent && errors.newContent}
         onBlur={handleBlur}
         onChange={(e) => {
           const newContent = normalizeTag(e.target.value)
           setFieldValue('newContent', newContent)
           return newContent
         }}
-        hint={<Translate id="hintAddTagNamingRestriction" />}
         maxLength={MAX_TAG_CONTENT_LENGTH}
-        extraButton={
-          <HintLengthText
-            curLength={values.newContent?.length ?? 0}
-            maxLength={MAX_TAG_CONTENT_LENGTH}
-          />
-        }
+        hint={`${values.newContent.length}/${MAX_TAG_CONTENT_LENGTH}`}
+        error={touched.newContent && errors.newContent}
+        hintAlign={touched.newContent && errors.newContent ? 'left' : 'right'}
+        spacingTop="loose"
+        spacingBottom="base"
       />
 
       <Form.Textarea
-        label={<Translate id="tagDescription" />}
+        label={intl.formatMessage({ defaultMessage: 'tagDescription' })}
         name="newDescription"
-        placeholder={translate({ id: 'tagDescriptionPlaceholder', lang })}
+        placeholder={intl.formatMessage({ defaultMessage: 'tagDescription' })}
         value={values.newDescription}
-        error={touched.newDescription && errors.newDescription}
         onBlur={handleBlur}
         onChange={handleChange}
         required
         maxLength={MAX_TAG_DESCRIPTION_LENGTH}
-        extraButton={
-          <HintLengthText
-            curLength={values.newDescription?.length ?? 0}
-            maxLength={MAX_TAG_DESCRIPTION_LENGTH}
-          />
+        hint={`${values.newDescription.length}/${MAX_TAG_DESCRIPTION_LENGTH}`}
+        error={touched.newDescription && errors.newDescription}
+        hintAlign={
+          touched.newDescription && errors.newDescription ? 'left' : 'right'
         }
       />
     </Form>
@@ -226,7 +181,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
 
   const SubmitButton = (
     <Dialog.TextButton
-      text={<Translate id="confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -237,7 +192,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title={isEditing ? 'editTag' : 'createTag'}
+        title={<FormattedMessage defaultMessage="Edit Tag" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
         hasSmUpTitle={false}
@@ -261,4 +216,4 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
   )
 }
 
-export default TagDialogContent
+export default EditTagDialogContent

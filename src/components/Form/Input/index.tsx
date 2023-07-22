@@ -34,10 +34,14 @@ const Input: React.FC<InputProps> = ({
   name,
   label,
   extraButton,
-  labelVisHidden,
+  hasLabel,
 
   hint,
   error,
+  hintAlign,
+
+  spacingTop,
+  spacingBottom,
 
   ...inputProps
 }) => {
@@ -49,12 +53,12 @@ const Input: React.FC<InputProps> = ({
   })
 
   return (
-    <Field>
+    <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
       <Field.Header
         htmlFor={fieldId}
         label={label}
         extraButton={extraButton}
-        labelVisHidden={labelVisHidden}
+        hasLabel={hasLabel}
       />
 
       <Field.Content>
@@ -72,7 +76,12 @@ const Input: React.FC<InputProps> = ({
         />
       </Field.Content>
 
-      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+      <Field.Footer
+        fieldMsgId={fieldMsgId}
+        hint={hint}
+        error={error}
+        hintAlign={hintAlign}
+      />
     </Field>
   )
 }

@@ -25,7 +25,7 @@ const Select: React.FC<SelectProps> = ({
       <Dialog.Content>
         <Hint />
 
-        <Form.List>
+        <Form.List spacingX={0}>
           <Form.List.Item
             title={
               <Translate

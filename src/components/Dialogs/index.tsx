@@ -23,9 +23,9 @@ export * from './RemoveArticleCollectionDialog'
 export * from './EditorSearchSelectDialog'
 
 // Tag
+export * from './EditTagDialog'
 export * from './RecommendTagDialog'
 export * from './TagAdoptionDialog'
-export * from './TagDialog'
 export * from './TagEditorDialog'
 export * from './TagLeaveDialog'
 

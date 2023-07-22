@@ -143,26 +143,24 @@ const BaseAddCollectionsArticleDialog = ({
           />
         )}
         {inCreatingArea && (
-          <>
-            <DynamicContent
-              closeDialog={() => {
-                setArea('selecting')
-              }}
-              onUpdated={(cache, collection) => {
-                updateUserCollectionsArticles({
-                  userName,
-                  articleId: articleId,
-                  cache,
-                  type: 'addCollection',
-                  collection,
-                })
-                formik.setFieldValue('checked', [
-                  collection.id,
-                  ...formik.values.checked,
-                ])
-              }}
-            />
-          </>
+          <DynamicContent
+            closeDialog={() => {
+              setArea('selecting')
+            }}
+            onUpdated={(cache, collection) => {
+              updateUserCollectionsArticles({
+                userName,
+                articleId: articleId,
+                cache,
+                type: 'addCollection',
+                collection,
+              })
+              formik.setFieldValue('checked', [
+                collection.id,
+                ...formik.values.checked,
+              ])
+            }}
+          />
         )}
       </Dialog>
     </>

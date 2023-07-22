@@ -42,7 +42,7 @@ const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
   })
 
   return (
-    <Dialog.Content hasFixed noSpacing={false}>
+    <Dialog.Content>
       <section className={contentClasses}>{children}</section>
     </Dialog.Content>
   )

@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
@@ -6,14 +5,17 @@ import React from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
-import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import {
+  ASSET_TYPE,
+  ENTITY_TYPE,
+  MAX_COLLECTION_DESCRIPTION_LENGTH,
+  MAX_COLLECTION_TITLE_LENGTH,
+} from '~/common/enums'
 import { CoverUploader, Dialog, Form, useMutation } from '~/components'
 import {
   EditCollectionCollectionFragment,
   PutCollectionMutation,
 } from '~/gql/graphql'
-
-import styles from './styles.module.css'
 
 interface FormProps {
   collection: EditCollectionCollectionFragment
@@ -52,8 +54,6 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
     undefined,
     { showToast: false }
   )
-  const maxTitle = 40
-  const maxDescription = 200
 
   const formId = 'edit-collection-form'
 
@@ -110,59 +110,52 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
     },
   })
 
-  const coverClasses = classNames({
-    [styles.container]: true,
-    [styles.coverField]: true,
-  })
-
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <section className={coverClasses}>
-        <CoverUploader
-          assetType={ASSET_TYPE.collectionCover}
-          entityId={collection.id}
-          cover={collection.cover}
-          fallbackCover={IMAGE_COVER.src}
-          entityType={ENTITY_TYPE.collection}
-          inEditor
-          onUpload={(assetId) => setFieldValue('cover', assetId)}
-          type="collection"
-          bookTitle={values.title}
-          bookArticleCount={collection.articles.totalCount}
-        />
-      </section>
+      <CoverUploader
+        assetType={ASSET_TYPE.collectionCover}
+        entityId={collection.id}
+        cover={collection.cover}
+        fallbackCover={IMAGE_COVER.src}
+        entityType={ENTITY_TYPE.collection}
+        inEditor
+        onUpload={(assetId) => setFieldValue('cover', assetId)}
+        type="collection"
+        bookTitle={values.title}
+        bookArticleCount={collection.articles.totalCount}
+      />
 
-      <section className={styles.container}>
-        <Form.Input
-          type="text"
-          name="title"
-          required
-          placeholder={intl.formatMessage({
-            defaultMessage: 'Collection name',
-          })}
-          hint={`${values.title.length}/${maxTitle}`}
-          value={values.title}
-          error={touched.title && errors.title}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          maxLength={maxTitle}
-        />
-      </section>
+      <Form.Input
+        type="text"
+        name="title"
+        required
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Collection name',
+        })}
+        value={values.title}
+        hint={`${values.title.length}/${MAX_COLLECTION_TITLE_LENGTH}`}
+        error={touched.title && errors.title}
+        hintAlign={touched.title && errors.title ? 'left' : 'right'}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        maxLength={MAX_COLLECTION_TITLE_LENGTH}
+        spacingTop="loose"
+        spacingBottom="base"
+      />
 
-      <section className={styles.container}>
-        <Form.Textarea
-          name="description"
-          placeholder={intl.formatMessage({
-            defaultMessage: 'Description',
-          })}
-          hint={`${values.description.length}/${maxDescription}`}
-          maxLength={maxDescription}
-          value={values.description}
-          error={touched.description && errors.description}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-      </section>
+      <Form.Textarea
+        name="description"
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Description',
+        })}
+        maxLength={MAX_COLLECTION_DESCRIPTION_LENGTH}
+        value={values.description}
+        hint={`${values.description.length}/${MAX_COLLECTION_DESCRIPTION_LENGTH}`}
+        error={touched.description && errors.description}
+        hintAlign={touched.description && errors.description ? 'left' : 'right'}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
     </Form>
   )
 

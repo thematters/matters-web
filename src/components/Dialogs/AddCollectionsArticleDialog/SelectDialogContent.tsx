@@ -82,7 +82,8 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
         leftBtn={<span />}
         rightBtn={SubmitButton}
       />
-      <Dialog.Content>
+
+      <Dialog.Content fixedHeight>
         {enableCollections.length > 0 && (
           <section className={styles.formContainer}>
             <FormikProvider value={formik}>
@@ -109,20 +110,15 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
             </FormikProvider>
           </section>
         )}
-      </Dialog.Content>
 
-      <Dialog.Content>
-        <section className={styles.wrapper}>
-          {enableCollections.length > 0 && (
-            <section className={styles.splitLine}></section>
-          )}
-          <section className={styles.newCollection}>
-            <span className={styles.button} onClick={switchToCreating}>
-              <TextIcon icon={<IconAdd20 size="mdS" />}>
-                <FormattedMessage defaultMessage="New Collection" />
-              </TextIcon>
-            </span>
-          </section>
+        <section className={styles.createCollection}>
+          {enableCollections.length > 0 && <hr className={styles.hr}></hr>}
+
+          <button className={styles.button} onClick={switchToCreating}>
+            <TextIcon icon={<IconAdd20 size="mdS" />}>
+              <FormattedMessage defaultMessage="New Collection" />
+            </TextIcon>
+          </button>
         </section>
       </Dialog.Content>
 

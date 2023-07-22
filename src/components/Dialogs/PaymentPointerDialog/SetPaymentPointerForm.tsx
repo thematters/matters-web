@@ -20,7 +20,6 @@ import { useMutation } from '~/components/GQL'
 import { UpdatePaymentPointerMutation } from '~/gql/graphql'
 
 import Explainer from './Explainer'
-import styles from './styles.module.css'
 
 interface FormProps {
   setIsSubmitting: (submitting: boolean) => void
@@ -109,26 +108,25 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
     <Dialog.Message align="left" smUpAlign="left">
       <Explainer />
 
-      <section className={styles.form}>
-        <Form id={formId} onSubmit={handleSubmit}>
-          <Form.Input
-            type="text"
-            name="paymentPointer"
-            required
-            placeholder={translate({
-              id: 'enterPaymentPointer',
-              lang,
-            })}
-            value={values.paymentPointer}
-            error={touched.paymentPointer && errors.paymentPointer}
-            onBlur={handleBlur}
-            onChange={(e) => {
-              handleChange(e)
-              updateValidity()
-            }}
-          />
-        </Form>
-      </section>
+      <Form id={formId} onSubmit={handleSubmit}>
+        <Form.Input
+          type="text"
+          name="paymentPointer"
+          required
+          placeholder={translate({
+            id: 'enterPaymentPointer',
+            lang,
+          })}
+          value={values.paymentPointer}
+          error={touched.paymentPointer && errors.paymentPointer}
+          onBlur={handleBlur}
+          onChange={(e) => {
+            handleChange(e)
+            updateValidity()
+          }}
+          spacingTop="base"
+        />
+      </Form>
     </Dialog.Message>
   )
 }

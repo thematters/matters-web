@@ -124,12 +124,12 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         </section>
       )}
 
-      <section className={styles.widget}>
+      <section className={styles.license}>
         <h3 className={styles.title}>
           <Translate id="license" />
         </h3>
 
-        <section className={styles.license}>
+        <section className={styles.select}>
           <SelectLicense
             isInCircle={!!circle}
             license={license}
@@ -155,6 +155,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
                   en="Support Setting"
                 />
               </h3>
+
               {content &&
               (content.replyToDonator || content.requestForDonation) ? (
                 <IconChecked32 size="md" />
@@ -162,6 +163,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
                 <IconArrowRight16 />
               )}
             </section>
+
             <p className={styles.hint}>
               <Translate
                 zh_hans="可自订号召支持的内容，以及收到支持后的感谢文字"

@@ -157,6 +157,9 @@
     "defaultMessage": "加入成功",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
   },
+  "7+b2mD": {
+    "defaultMessage": "tagDescription"
+  },
   "77tYPg": {
     "defaultMessage": "确认删除后，{commentType}会立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -658,6 +661,9 @@
     "defaultMessage": "添加到精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
+  "WiuX1v": {
+    "defaultMessage": "tagName"
+  },
   "WpvsPu": {
     "defaultMessage": "订阅",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1112,6 +1118,9 @@
   },
   "u5aHb4": {
     "defaultMessage": "复制链接"
+  },
+  "uJkv2X": {
+    "defaultMessage": "Edit Tag"
   },
   "uVCg1l": {
     "defaultMessage": "玩转 Matters 实用指南"

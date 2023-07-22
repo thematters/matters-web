@@ -24,7 +24,7 @@ const BaseBadgesDialog = ({ content, children }: BadgesDialogProps) => {
           }
         />
 
-        <Dialog.Content noSpacing={false}>{content}</Dialog.Content>
+        <Dialog.Content>{content}</Dialog.Content>
       </Dialog>
     </>
   )

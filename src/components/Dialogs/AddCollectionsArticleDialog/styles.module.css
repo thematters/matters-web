@@ -1,9 +1,26 @@
-.newCollection {
-  padding: var(--spacing-x-tight) 0;
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-base-loose);
+.formContainer {
+  flex-grow: 1;
+
+  /* FIXME: rendering issue when checkbox is checked */
+  & :global(form) {
+    position: relative;
+  }
+}
+
+.createCollection {
+  position: sticky;
+  bottom: 0;
+  background: white;
+
+  & .hr {
+    padding-top: var(--spacing-tight);
+    margin-top: var(--spacing-tight);
+  }
 
   & .button {
+    padding: var(--spacing-x-tight) 0;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-base-loose);
     color: var(--color-matters-green);
     cursor: pointer;
 
@@ -11,29 +28,5 @@
     &:focus {
       color: var(--color-matters-green-dark);
     }
-  }
-}
-
-.wrapper {
-  margin: 0 var(--spacing-base-loose);
-
-  & .splitLine {
-    @mixin border-top-grey;
-
-    padding-top: var(--spacing-tight);
-    margin-top: var(--spacing-tight);
-  }
-}
-
-.formContainer {
-  max-height: 22.5rem;
-  margin: 0 var(--spacing-base-loose);
-
-  & :global(form) {
-    position: relative;
-  }
-
-  & .listForm {
-    /* overflow-y: auto; */
   }
 }

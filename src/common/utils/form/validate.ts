@@ -1,4 +1,5 @@
 import {
+  MAX_ARTICLE_SUPPORT_LENGTH,
   PAYMENT_CURRENCY,
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
   PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT,
@@ -243,12 +244,12 @@ export const validateDescription = (value: string, lang: Language) => {
 
 export const validateSupportWords = (value: string, lang: Language) => {
   if (!value) return
-  if (value.length > 140) {
+  if (value.length > MAX_ARTICLE_SUPPORT_LENGTH) {
     {
       return translate({
-        zh_hant: `已超過 140 字，目前 ${value.length} 字`,
-        zh_hans: `已超过 140 字，目前 ${value.length} 字`,
-        en: 'Maximum 140 characters, current ${value.length} characters.',
+        zh_hant: `已超過 ${MAX_ARTICLE_SUPPORT_LENGTH} 字，目前 ${value.length} 字`,
+        zh_hans: `已超过 ${MAX_ARTICLE_SUPPORT_LENGTH} 字，目前 ${value.length} 字`,
+        en: `Maximum ${MAX_ARTICLE_SUPPORT_LENGTH} characters, current ${value.length} characters.`,
         lang,
       })
     }

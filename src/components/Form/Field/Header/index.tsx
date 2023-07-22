@@ -5,17 +5,17 @@ import styles from './styles.module.css'
 export interface HeaderProps {
   label?: string | React.ReactNode
   htmlFor?: string
-  extraButton?: React.ReactNode
   labelId?: string
-  labelVisHidden?: boolean
+  hasLabel?: boolean
+  extraButton?: React.ReactNode
 }
 
 const Header: React.FC<HeaderProps> = ({
   label,
   htmlFor,
-  extraButton,
   labelId,
-  labelVisHidden,
+  hasLabel,
+  extraButton,
 }) => {
   if (!label && !extraButton) {
     return null
@@ -31,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({
     </header>
   )
 
-  if (labelVisHidden) {
+  if (!hasLabel) {
     return (
       <VisuallyHidden>
         <Inner />

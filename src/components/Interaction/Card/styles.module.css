@@ -4,8 +4,7 @@
   position: relative;
   display: block;
   outline: none;
-  transition-property: background-color;
-  transition-property: color;
+  transition-property: color, background-color;
 
   &:not(.disabled) {
     cursor: pointer;

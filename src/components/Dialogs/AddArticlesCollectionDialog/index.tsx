@@ -149,11 +149,7 @@ const BaseAddArticlesCollectionDialog = ({
   const user = data?.user
 
   if (error) {
-    return (
-      <>
-        <QueryError error={error} />
-      </>
-    )
+    return <QueryError error={error} />
   }
 
   if (!user) {
@@ -170,7 +166,7 @@ const BaseAddArticlesCollectionDialog = ({
           rightBtn={SubmitButton}
         />
 
-        <Dialog.Content hasFixed>
+        <Dialog.Content fixedHeight>
           <SearchInput
             value={searchValue}
             onChange={(value) => setSearchValue(value)}

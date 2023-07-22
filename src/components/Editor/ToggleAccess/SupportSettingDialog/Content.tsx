@@ -3,6 +3,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { MAX_ARTICLE_SUPPORT_LENGTH } from '@/src/common/enums'
 import { translate, validateSupportWords } from '~/common/utils'
 import {
   Dialog,
@@ -104,15 +105,17 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         {tab === 'request' && (
           <Form.Textarea
             label={<Translate id="requestForDonation" />}
-            labelVisHidden
             name="requestForDonation"
             placeholder={translate({
               id: 'supportRequestDescription',
               lang,
             })}
-            hint={<Translate id="supportSettingHint" />}
             value={values.requestForDonation! || ''}
+            hint={`${
+              values.requestForDonation?.length || 0
+            }/${MAX_ARTICLE_SUPPORT_LENGTH}`}
             error={errors.requestForDonation}
+            hintAlign={errors.requestForDonation ? 'left' : 'right'}
             onBlur={handleBlur}
             onChange={(e) => {
               setFieldValue('requestForDonation', e.currentTarget.value)
@@ -122,15 +125,16 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         {tab === 'reply' && (
           <Form.Textarea
             label={<Translate id="replyToDonator" />}
-            labelVisHidden
             name="replyToDonator"
             placeholder={translate({
               id: 'supportResponseDescription',
               lang,
             })}
-            hint={<Translate id="supportSettingHint" />}
-            value={values.replyToDonator! || ''}
+            hint={`${
+              values.replyToDonator?.length || 0
+            }/${MAX_ARTICLE_SUPPORT_LENGTH}`}
             error={errors.replyToDonator}
+            hintAlign={errors.replyToDonator ? 'left' : 'right'}
             onBlur={handleBlur}
             onChange={(e) =>
               setFieldValue('replyToDonator', e.currentTarget.value)
@@ -164,33 +168,31 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content noSpacing={false}>
+      <Dialog.Content fixedHeight>
         <section className={styles.tabs}>
           <Tab tabType={tabType} setTabType={changeTabType} />
         </section>
 
-        <section className={styles.form}>{InnerForm(tabType)}</section>
+        {InnerForm(tabType)}
 
-        <section className={styles.preview}>
-          <h3>
-            <TextIcon size="md" weight="md">
-              <Translate
-                zh_hans="效果预览"
-                zh_hant="效果預覽"
-                en="Support Setting Preview"
-              />
-            </TextIcon>
-          </h3>
+        <h3>
+          <TextIcon size="md" weight="md">
+            <Translate
+              zh_hans="效果预览"
+              zh_hant="效果預覽"
+              en="Support Setting Preview"
+            />
+          </TextIcon>
+        </h3>
 
-          <SupportPreview
-            content={
-              tabType === 'request'
-                ? values.requestForDonation!
-                : values.replyToDonator!
-            }
-            tabType={tabType}
-          />
-        </section>
+        <SupportPreview
+          content={
+            tabType === 'request'
+              ? values.requestForDonation!
+              : values.replyToDonator!
+          }
+          tabType={tabType}
+        />
       </Dialog.Content>
 
       <Dialog.Footer

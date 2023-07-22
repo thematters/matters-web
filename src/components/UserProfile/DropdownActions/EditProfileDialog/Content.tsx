@@ -222,10 +222,13 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           placeholder={intl.formatMessage({
             defaultMessage: 'Bio',
           })}
-          hint={`${values.description.length}/${maxDescription}`}
           maxLength={maxDescription}
           value={values.description}
+          hint={`${values.description.length}/${maxDescription}`}
           error={touched.description && errors.description}
+          hintAlign={
+            touched.description && errors.description ? 'left' : 'right'
+          }
           onBlur={handleBlur}
           onChange={handleChange}
         />
