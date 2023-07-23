@@ -61,8 +61,13 @@
   top: var(--spacing-base);
   right: var(--spacing-base);
   z-index: 1;
+  display: none;
   opacity: 0;
   transition-property: opacity;
+
+  @media (--sm-up) {
+    display: inline-block;
+  }
 }
 
 .listItem {

@@ -76,6 +76,7 @@ const UnPinButton = ({
         />
       }
       zIndex={Z_INDEX.OVER_STICKY_TABS}
+      delay={[1000, null]}
     >
       <button type="button" onClick={() => unpin()} className={styles.unpin}>
         <IconUnPin20 size="mdS" color="white" />
