@@ -31,7 +31,7 @@ import {
   LanguageContext,
   Layout,
   TextIcon,
-  toast,
+  // toast,
   useMutation,
   VerificationSendCodeButton,
   ViewerContext,
@@ -247,11 +247,11 @@ const Connect: React.FC<FormProps> = ({
         analytics.identifyUser()
 
         if (loginData?.walletLogin.type === AuthResultType.Login) {
-          toast.success({
-            message: (
-              <FormattedMessage defaultMessage="Logged in successfully" />
-            ),
-          })
+          // toast.success({
+          //   message: (
+          //     <FormattedMessage defaultMessage="Logged in successfully" />
+          //   ),
+          // })
 
           redirectToTarget({
             fallback: isInPage ? 'homepage' : 'current',

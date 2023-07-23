@@ -22,7 +22,7 @@ import {
   Form,
   LanguageContext,
   Layout,
-  toast,
+  // toast,
   useMutation,
 } from '~/components'
 import { UserLoginMutation } from '~/gql/graphql'
@@ -119,9 +119,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           submitCallback()
         }
 
-        toast.success({
-          message: <FormattedMessage defaultMessage="Logged in successfully" />,
-        })
+        // toast.success({
+        //   message: <FormattedMessage defaultMessage="Logged in successfully" />,
+        // })
 
         analytics.identifyUser()
 
