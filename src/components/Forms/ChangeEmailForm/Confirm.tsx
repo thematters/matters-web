@@ -164,7 +164,7 @@ const Confirm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<Translate id="confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
@@ -181,7 +181,7 @@ const Confirm: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={<Translate id="confirm" />}
+                text={<FormattedMessage defaultMessage="Confirm" />}
                 loading={isSubmitting}
               />
             </>

@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { translate } from '~/common/utils'
 import {
@@ -91,7 +92,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<Translate id="confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" />}
               color="red"
               onClick={() => {
                 onDelete()
@@ -101,7 +102,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<Translate id="confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" />}
               color="red"
               onClick={() => {
                 onDelete()

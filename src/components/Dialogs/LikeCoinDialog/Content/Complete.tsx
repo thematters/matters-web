@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { redirectToTarget } from '~/common/utils'
 import { Dialog, Translate } from '~/components'
 
@@ -19,7 +21,7 @@ const Complete: React.FC = () => {
       <Dialog.Footer
         btns={
           <Dialog.RoundedButton
-            text={<Translate id="done" />}
+            text={<FormattedMessage defaultMessage="Done" />}
             onClick={() => {
               redirectToTarget({
                 fallback: 'current',
@@ -29,7 +31,7 @@ const Complete: React.FC = () => {
         }
         smUpBtns={
           <Dialog.TextButton
-            text={<Translate id="done" />}
+            text={<FormattedMessage defaultMessage="Done" />}
             onClick={() => {
               redirectToTarget({
                 fallback: 'current',

@@ -118,7 +118,7 @@ const BaseConfirm: React.FC<FormProps> = ({
 
   const SubmitButton = (
     <Dialog.TextButton
-      text={<Translate id="confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       type="submit"
       form={formId}
       disabled={isSubmitting}

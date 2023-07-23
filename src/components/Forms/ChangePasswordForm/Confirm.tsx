@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   parseFormSubmitErrors,
@@ -158,7 +159,7 @@ const Confirm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<Translate id="confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
@@ -175,7 +176,7 @@ const Confirm: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={<Translate id="confirm" />}
+                text={<FormattedMessage defaultMessage="Confirm" />}
                 loading={isSubmitting}
               />
             </>

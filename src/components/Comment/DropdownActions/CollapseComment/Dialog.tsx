@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT } from '~/common/enums'
 import {
@@ -93,7 +94,7 @@ const CollapseCommentDialog = ({
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<Translate id="confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" />}
               color="red"
               onClick={() => {
                 onCollapse()
@@ -103,7 +104,7 @@ const CollapseCommentDialog = ({
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<Translate id="confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" />}
               color="red"
               onClick={() => {
                 onCollapse()

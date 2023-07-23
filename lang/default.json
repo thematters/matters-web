@@ -428,6 +428,9 @@
     "defaultMessage": "Add description",
     "description": "src/views/User/CollectionDetail/Content.tsx"
   },
+  "JXdbo8": {
+    "defaultMessage": "Done"
+  },
   "JaLEXz": {
     "defaultMessage": "Enter Circle",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"

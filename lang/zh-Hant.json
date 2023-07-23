@@ -429,6 +429,9 @@
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
   },
+  "JXdbo8": {
+    "defaultMessage": "完成"
+  },
   "JaLEXz": {
     "defaultMessage": "進入圍爐",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
