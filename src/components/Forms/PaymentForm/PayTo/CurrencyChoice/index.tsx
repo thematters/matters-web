@@ -86,7 +86,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
       className={styles.wrapper}
       data-test-id={TEST_ID.PAY_TO_CURRENCY_CHOICE}
     >
-      <section className={styles.header}>
+      <header className={styles.header}>
         <span>
           <Translate zh_hant="選擇支持" zh_hans="选择支持" en="Support " />
         </span>
@@ -105,7 +105,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
         <span>
           <Translate zh_hant="的方式：" zh_hans="的方式：" en="with: " />
         </span>
-      </section>
+      </header>
 
       {/* USDT */}
       <USDTChoice

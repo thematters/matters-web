@@ -1,8 +1,7 @@
 .setAmountHeader {
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-base) 0;
-  margin: 0 var(--spacing-base);
+  padding-bottom: var(--spacing-base);
   border-bottom: 0.5px solid var(--color-line-grey);
 }
 

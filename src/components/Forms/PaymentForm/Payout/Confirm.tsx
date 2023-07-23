@@ -157,10 +157,6 @@ const BaseConfirm: React.FC<FormProps> = ({
           </ConfirmTable>
 
           <Form.AmountInput
-            required
-            min={PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD}
-            max={balance}
-            currency={currency}
             label={
               <Translate
                 zh_hant="提現金額"
@@ -168,9 +164,14 @@ const BaseConfirm: React.FC<FormProps> = ({
                 en="Withdraw amoumt"
               />
             }
+            hasLabel
             name="amount"
             value={values.amount}
             error={touched.amount && errors.amount}
+            required
+            min={PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD}
+            max={balance}
+            currency={currency}
             onBlur={handleBlur}
             onChange={(e) => {
               const amount = e.target.valueAsNumber || 0
@@ -182,6 +183,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               setFieldValue('amount', amount)
             }}
             ref={inputRef}
+            spacingBottom="base"
           />
 
           <ConfirmTable>

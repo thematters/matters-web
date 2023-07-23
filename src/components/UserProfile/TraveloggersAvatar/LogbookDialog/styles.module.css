@@ -1,0 +1,9 @@
+.options {
+  margin-top: calc(var(--spacing-x-loose) * -1);
+  margin-bottom: var(--spacing-x-loose); /* offset for <Dialog.Content> */
+
+  @media (--sm-up) {
+    margin-top: var(--spacing-base);
+    margin-bottom: 0;
+  }
+}

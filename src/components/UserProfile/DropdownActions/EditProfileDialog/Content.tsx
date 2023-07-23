@@ -5,7 +5,12 @@ import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
-import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import {
+  ASSET_TYPE,
+  ENTITY_TYPE,
+  MAX_USER_DESCRIPTION_LENGTH,
+  MAX_USER_DISPLAY_NAME_LENGTH,
+} from '~/common/enums'
 import { parseFormSubmitErrors, validateDisplayName } from '~/common/utils'
 import {
   AvatarUploader,
@@ -77,18 +82,17 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
   const isAdmin = viewer.status?.role === 'admin'
-  const maxDisplayName = 20
-  const maxDescription = 140
 
   const formId = 'edit-profile-form'
 
   const intl = useIntl()
+
   const validateDescription = (value: string, lang: Language) => {
     if (!value) {
       return intl.formatMessage({
         defaultMessage: 'Required',
       })
-    } else if (value.length > 200) {
+    } else if (value.length > MAX_USER_DESCRIPTION_LENGTH) {
       return intl.formatMessage(
         {
           defaultMessage: 'Over 200 words, current {numbers}',
@@ -101,6 +105,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       )
     }
   }
+
   const {
     values,
     errors,
@@ -198,41 +203,38 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         />
       )}
 
-      <section className={styles.container}>
-        <Form.Input
-          type="text"
-          name="displayName"
-          required
-          placeholder={intl.formatMessage({
-            defaultMessage: 'Name',
-          })}
-          hint={`${values.displayName.length}/${maxDisplayName}`}
-          value={values.displayName}
-          error={touched.displayName && errors.displayName}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          maxLength={maxDisplayName}
-        />
-      </section>
+      <Form.Input
+        type="text"
+        name="displayName"
+        required
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Name',
+        })}
+        value={values.displayName}
+        hint={`${values.displayName.length}/${MAX_USER_DISPLAY_NAME_LENGTH}`}
+        error={touched.displayName && errors.displayName}
+        hintAlign={touched.displayName && errors.displayName ? 'left' : 'right'}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        maxLength={MAX_USER_DISPLAY_NAME_LENGTH}
+        spacingTop="base"
+        spacingBottom="base"
+      />
 
-      <section className={styles.container}>
-        <Form.Textarea
-          name="description"
-          required
-          placeholder={intl.formatMessage({
-            defaultMessage: 'Bio',
-          })}
-          maxLength={maxDescription}
-          value={values.description}
-          hint={`${values.description.length}/${maxDescription}`}
-          error={touched.description && errors.description}
-          hintAlign={
-            touched.description && errors.description ? 'left' : 'right'
-          }
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-      </section>
+      <Form.Textarea
+        name="description"
+        required
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Bio',
+        })}
+        maxLength={MAX_USER_DESCRIPTION_LENGTH}
+        value={values.description}
+        hint={`${values.description.length}/${MAX_USER_DESCRIPTION_LENGTH}`}
+        error={touched.description && errors.description}
+        hintAlign={touched.description && errors.description ? 'left' : 'right'}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
     </Form>
   )
 

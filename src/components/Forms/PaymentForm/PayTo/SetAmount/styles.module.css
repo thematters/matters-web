@@ -1,5 +1,5 @@
 .reconnectHint {
-  padding: 0 var(--spacing-base) var(--spacing-base);
+  padding: var(--spacing-base) var(--spacing-base) 0;
   font-size: var(--font-size-xs);
   color: var(--color-red);
   text-align: center;

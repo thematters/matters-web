@@ -12,6 +12,8 @@ import {
   useDialogSwitch,
 } from '~/components'
 
+import styles from './styles.module.css'
+
 interface LogbookDialogProps {
   title: string | React.ReactNode
   address: string
@@ -58,47 +60,49 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
           </p>
         </Dialog.Message>
 
-        <Form.List>
-          <Form.List.Item
-            role="link"
-            htmlHref={logbook2Url}
-            htmlTarget="_blank"
-            title={
-              <TextIcon
-                color="black"
-                icon={<IconLogbook2 size="md" />}
-                size="md"
-                spacing="xtight"
-              >
-                <Translate
-                  zh_hant="Logbook 2.0 Bookcase"
-                  zh_hans="Logbook 2.0 Bookcase"
-                  en="Logbook 2.0 Bookcase"
-                />
-              </TextIcon>
-            }
-          />
+        <section className={styles.options}>
+          <Form.List>
+            <Form.List.Item
+              role="link"
+              htmlHref={logbook2Url}
+              htmlTarget="_blank"
+              title={
+                <TextIcon
+                  color="black"
+                  icon={<IconLogbook2 size="md" />}
+                  size="md"
+                  spacing="xtight"
+                >
+                  <Translate
+                    zh_hant="Logbook 2.0 Bookcase"
+                    zh_hans="Logbook 2.0 Bookcase"
+                    en="Logbook 2.0 Bookcase"
+                  />
+                </TextIcon>
+              }
+            />
 
-          <Form.List.Item
-            role="link"
-            htmlHref={logbook1Url}
-            htmlTarget="_blank"
-            title={
-              <TextIcon
-                color="black"
-                icon={<IconLogbook1 size="md" />}
-                size="md"
-                spacing="xtight"
-              >
-                <Translate
-                  zh_hant="Logbook 1.0 Bookcase"
-                  zh_hans="Logbook 1.0 Bookcase"
-                  en="Logbook 1.0 Bookcase"
-                />
-              </TextIcon>
-            }
-          />
-        </Form.List>
+            <Form.List.Item
+              role="link"
+              htmlHref={logbook1Url}
+              htmlTarget="_blank"
+              title={
+                <TextIcon
+                  color="black"
+                  icon={<IconLogbook1 size="md" />}
+                  size="md"
+                  spacing="xtight"
+                >
+                  <Translate
+                    zh_hant="Logbook 1.0 Bookcase"
+                    zh_hans="Logbook 1.0 Bookcase"
+                    en="Logbook 1.0 Bookcase"
+                  />
+                </TextIcon>
+              }
+            />
+          </Form.List>
+        </section>
 
         <Dialog.Footer
           smUpBtns={

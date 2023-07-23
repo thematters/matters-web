@@ -98,6 +98,7 @@ const Request: React.FC<FormProps> = ({
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
         label={<Translate id="email" />}
+        hasLabel
         type="email"
         name="email"
         required
@@ -110,10 +111,12 @@ const Request: React.FC<FormProps> = ({
         disabled={!!defaultEmail}
         onBlur={handleBlur}
         onChange={handleChange}
+        spacingBottom="base"
       />
 
       <Form.Input
         label={<Translate id="verificationCode" />}
+        hasLabel
         type="text"
         name="code"
         required

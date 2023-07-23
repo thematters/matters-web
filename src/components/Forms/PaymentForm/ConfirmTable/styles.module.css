@@ -1,7 +1,6 @@
 .confirmTable {
   width: 100%;
-  padding: 0 var(--spacing-base);
-  margin-bottom: var(--spacing-loose);
+  margin-bottom: var(--spacing-base);
   font-size: var(--font-size-sm);
   line-height: 1.5rem;
   color: var(--color-grey);
@@ -10,7 +9,9 @@
 .row {
   @mixin flex-center-space-between;
 
-  margin: var(--spacing-base) 0;
+  & + .row {
+    margin-top: var(--spacing-base);
+  }
 
   & .col:last-child {
     text-align: right;

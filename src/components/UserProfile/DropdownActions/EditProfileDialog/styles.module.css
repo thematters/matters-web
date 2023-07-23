@@ -1,5 +1,10 @@
 .coverField {
   position: relative;
+  margin: calc(var(--spacing-base) * -1) calc(var(--spacing-base) * -1);
+
+  @media (--sm-up) {
+    margin: 0 calc(var(--spacing-base-loose) * -1);
+  }
 
   & .hint {
     position: absolute;
@@ -12,15 +17,5 @@
 }
 
 .avatarField {
-  padding-left: var(--spacing-base);
   margin-top: calc(var(--spacing-xx-loose) * -1);
-}
-
-.container {
-  @mixin form-container;
-
-  @media (--sm-up) {
-    margin-right: var(--spacing-base);
-    margin-left: var(--spacing-base);
-  }
 }
