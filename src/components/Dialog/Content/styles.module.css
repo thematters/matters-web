@@ -11,7 +11,7 @@
     height: 70vh;
 
     @media (--sm-up) {
-      height: 412px;
+      height: 26rem;
     }
   }
 

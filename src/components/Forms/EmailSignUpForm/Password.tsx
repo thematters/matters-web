@@ -223,7 +223,8 @@ const Password: React.FC<FormProps> = ({
             </>
           }
         />
-        {InnerForm}
+
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }

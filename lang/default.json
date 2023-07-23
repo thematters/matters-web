@@ -406,10 +406,6 @@
   "HzaRKA": {
     "defaultMessage": "Migrate to Matters"
   },
-  "IFY8r4": {
-    "defaultMessage": "Enter Password",
-    "description": "src/components/Forms/EmailLoginForm/index.tsx"
-  },
   "IKPYe9": {
     "defaultMessage": "View",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -608,9 +604,6 @@
   },
   "U86B6w": {
     "defaultMessage": "Stats"
-  },
-  "UNUROl": {
-    "defaultMessage": "Maximum 200 characters."
   },
   "UOdEqi": {
     "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
@@ -829,10 +822,6 @@
   "eXDZGQ": {
     "defaultMessage": "Maintainer"
   },
-  "ei+kyp": {
-    "defaultMessage": "Name of the Circle",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "enMIYK": {
     "defaultMessage": "My Page"
   },
@@ -957,6 +946,10 @@
   },
   "ll/ufR": {
     "defaultMessage": "Trending"
+  },
+  "m/Wg7b": {
+    "defaultMessage": "Circle Description",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "m4GG4b": {
     "defaultMessage": "Delete collection"
@@ -1106,10 +1099,6 @@
   "tEeEJT": {
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
-  },
-  "tW3hM/": {
-    "defaultMessage": "Description of the Circle",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "tzq2+W": {
     "defaultMessage": "Send",

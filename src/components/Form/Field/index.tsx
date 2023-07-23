@@ -37,7 +37,6 @@ const Field: React.FC<React.PropsWithChildren<FieldFieledProps>> & {
   Content: typeof Content
 } = ({ spacingTop, spacingBottom, children }) => {
   const classes = classNames({
-    [styles.field]: true,
     [styles[`spacingTop${capitalizeFirstLetter(spacingTop || '')}`]]:
       spacingTop,
     [styles[`spacingBottom${capitalizeFirstLetter(spacingBottom || '')}`]]:

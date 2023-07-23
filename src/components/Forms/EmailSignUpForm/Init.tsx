@@ -206,7 +206,7 @@ const Init: React.FC<FormProps> = ({
           }
         />
 
-        {InnerForm}
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
 
         <footer className={styles.footer}>
           <LanguageSwitch />

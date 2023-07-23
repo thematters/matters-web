@@ -165,12 +165,13 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           name="email"
           required
           placeholder={intl.formatMessage({
-            defaultMessage: 'Enter Email',
+            defaultMessage: 'Email',
           })}
           value={values.email}
           error={touched.email && errors.email}
           onBlur={handleBlur}
           onChange={handleChange}
+          spacingBottom="base"
         />
 
         <Form.Input
@@ -179,8 +180,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           name="password"
           required
           placeholder={intl.formatMessage({
-            defaultMessage: 'Enter Password',
-            description: 'src/components/Forms/EmailLoginForm/index.tsx',
+            defaultMessage: 'Password',
           })}
           value={values.password}
           error={touched.password && errors.password}
@@ -196,6 +196,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
               {isInPage && <PasswordResetRedirectButton />}
             </>
           }
+          spacingBottom="base"
         />
 
         {gotoEmailSignUp && (
@@ -236,7 +237,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           }
         />
 
-        {InnerForm}
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
 
         <footer className={styles.footer}>
           <LanguageSwitch />

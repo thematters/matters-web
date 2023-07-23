@@ -31,7 +31,7 @@ const Footer: React.FC<FooterProps> = ({
 
       {error && (
         <div role="alert" aria-live="polite" className={hintClasses}>
-          {hint}
+          {error}
         </div>
       )}
     </footer>

@@ -407,10 +407,6 @@
   "HzaRKA": {
     "defaultMessage": "一键搬家"
   },
-  "IFY8r4": {
-    "defaultMessage": "请输入密码",
-    "description": "src/components/Forms/EmailLoginForm/index.tsx"
-  },
   "IKPYe9": {
     "defaultMessage": "查看",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -423,7 +419,7 @@
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "J+LXrH": {
-    "defaultMessage": "持续支持邮箱進入，未來可随时启用钱包登入",
+    "defaultMessage": "使用邮箱进入，未来可随时启用钱包登入",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "JTWayV": {
@@ -609,9 +605,6 @@
   },
   "U86B6w": {
     "defaultMessage": "数据"
-  },
-  "UNUROl": {
-    "defaultMessage": "建议 50 字以内，最长 200 字"
   },
   "UOdEqi": {
     "defaultMessage": "原有透过电子信箱登入方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",
@@ -830,10 +823,6 @@
   "eXDZGQ": {
     "defaultMessage": "主理人"
   },
-  "ei+kyp": {
-    "defaultMessage": "围炉名称",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "enMIYK": {
     "defaultMessage": "我的"
   },
@@ -958,6 +947,10 @@
   },
   "ll/ufR": {
     "defaultMessage": "热门"
+  },
+  "m/Wg7b": {
+    "defaultMessage": "Circle Description",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "m4GG4b": {
     "defaultMessage": "删除选集"
@@ -1107,10 +1100,6 @@
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
-  },
-  "tW3hM/": {
-    "defaultMessage": "围炉描述",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀请",

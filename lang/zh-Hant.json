@@ -407,10 +407,6 @@
   "HzaRKA": {
     "defaultMessage": "一鍵搬家"
   },
-  "IFY8r4": {
-    "defaultMessage": "請輸入密碼",
-    "description": "src/components/Forms/EmailLoginForm/index.tsx"
-  },
   "IKPYe9": {
     "defaultMessage": "查看",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -423,7 +419,7 @@
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "J+LXrH": {
-    "defaultMessage": "持續提供信箱進入，未來可隨時啟用錢包登入",
+    "defaultMessage": "使用信箱進入，未來可隨時啟用錢包登入",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "JTWayV": {
@@ -609,9 +605,6 @@
   },
   "U86B6w": {
     "defaultMessage": "數據"
-  },
-  "UNUROl": {
-    "defaultMessage": "建議 50 字以內，最長 200 字"
   },
   "UOdEqi": {
     "defaultMessage": "原有透過電子信箱登入方式將為你保留。為維護你的帳戶安全，加密錢包連接後無法重設。",
@@ -830,10 +823,6 @@
   "eXDZGQ": {
     "defaultMessage": "主理人"
   },
-  "ei+kyp": {
-    "defaultMessage": "圍爐名稱",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "enMIYK": {
     "defaultMessage": "我的"
   },
@@ -958,6 +947,10 @@
   },
   "ll/ufR": {
     "defaultMessage": "熱門"
+  },
+  "m/Wg7b": {
+    "defaultMessage": "Circle Description",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "m4GG4b": {
     "defaultMessage": "刪除選集"
@@ -1107,10 +1100,6 @@
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已發布到分佈式網絡",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
-  },
-  "tW3hM/": {
-    "defaultMessage": "圍爐描述",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
