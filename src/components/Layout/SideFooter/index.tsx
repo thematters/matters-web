@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
 import { EXTERNAL_LINKS, PATHS, Z_INDEX } from '~/common/enums'
-import { Dropdown, IconDotDivider, LanguageSwitch, Menu } from '~/components'
+import { Dropdown, LanguageSwitch, Menu } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -29,6 +29,10 @@ const CommunityMenu = () => {
   )
 }
 
+const Dot = () => {
+  return <span className={styles.dot}>&nbsp;·&nbsp;</span>
+}
+
 const SideFooter = () => {
   return (
     <footer className={styles.footer}>
@@ -38,26 +42,23 @@ const SideFooter = () => {
         <Link href={PATHS.ABOUT} legacyBehavior>
           <a>
             <FormattedMessage defaultMessage="About" />
+            <Dot />
           </a>
         </Link>
-
-        <IconDotDivider style={{ width: 16, height: 16 }} />
 
         <Link href={PATHS.GUIDE} legacyBehavior>
           <a>
             <FormattedMessage defaultMessage="Explore" />
+            <Dot />
           </a>
         </Link>
-
-        <IconDotDivider style={{ width: 16, height: 16 }} />
 
         <Link href={PATHS.TOS} legacyBehavior>
           <a>
             <FormattedMessage defaultMessage="Terms" />
+            <Dot />
           </a>
         </Link>
-
-        <IconDotDivider style={{ width: 16, height: 16 }} />
 
         <Dropdown content={<CommunityMenu />} zIndex={Z_INDEX.OVER_DIALOG}>
           {({ openDropdown, ref }) => (

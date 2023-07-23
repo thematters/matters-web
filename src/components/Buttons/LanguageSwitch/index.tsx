@@ -56,7 +56,7 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
   const { lang } = useContext(LanguageContext)
 
   const iconColor = bgColor === 'greyDarkest' ? 'white' : 'grey'
-  const textSize = size === 'sm' ? 'smS' : 'md'
+  const textSize = size === 'sm' ? 'xs' : 'md'
 
   return (
     <Dropdown content={<LanguageSwitchContent />} zIndex={Z_INDEX.OVER_DIALOG}>
@@ -64,9 +64,8 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
         <Button
           onClick={openDropdown}
           size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
-          spacing={[0, 'xtight']}
+          spacing={[0, 0]}
           bgColor={bgColor}
-          bgActiveColor={bgColor === 'greyDarkest' ? undefined : 'greyLighter'}
           aria-haspopup="listbox"
           ref={ref}
         >

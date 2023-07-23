@@ -1,7 +1,7 @@
 export const LANG_TEXT_MAP = {
   zh_hant: '繁中',
   zh_hans: '简中',
-  en: 'En',
+  en: 'EN',
 }
 
 // This dict contains the language representations in the viewer's language
