@@ -61,22 +61,23 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
         rightBtn={SubmitButton}
       />
 
-      <SearchingArea
-        inSearchingArea={inSearchingArea}
-        searchType="Invitee"
-        toStagingArea={toStagingArea}
-        toSearchingArea={toSearchingArea}
-        addNodeToStaging={addNodeToStaging}
-        inviteEmail
-      />
-
-      <StagingArea
-        nodes={stagingNodes}
-        setNodes={setStagingNodes}
-        hint="hintAddCircleInvitee"
-        inStagingArea={inStagingArea}
-        draggable={false}
-      />
+      <Dialog.Content noSpacing fixedHeight>
+        <SearchingArea
+          inSearchingArea={inSearchingArea}
+          searchType="Invitee"
+          toStagingArea={toStagingArea}
+          toSearchingArea={toSearchingArea}
+          addNodeToStaging={addNodeToStaging}
+          inviteEmail
+        />
+        <StagingArea
+          nodes={stagingNodes}
+          setNodes={setStagingNodes}
+          hint="hintAddCircleInvitee"
+          inStagingArea={inStagingArea}
+          draggable={false}
+        />
+      </Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

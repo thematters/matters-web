@@ -41,7 +41,7 @@ const ConfirmContent: React.FC<ContentProps> = ({
         rightBtn={<ConfirmButton />}
       />
 
-      <Dialog.Content>
+      <Dialog.Content fixedHeight>
         <SelectLicense
           isInCircle
           license={license}

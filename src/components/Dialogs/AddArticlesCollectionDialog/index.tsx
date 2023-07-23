@@ -181,6 +181,7 @@ const BaseAddArticlesCollectionDialog = ({
               formId={formId}
             />
           )}
+
           {inSearchingArea && (
             <SearchingDialogContent
               formik={formik}

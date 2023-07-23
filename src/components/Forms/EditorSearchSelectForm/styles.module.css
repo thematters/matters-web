@@ -4,6 +4,10 @@
 
   padding: var(--spacing-base);
 
+  @media (--sm-up) {
+    padding-top: 0;
+  }
+
   & .number {
     font-size: var(--font-size-md-s);
     line-height: 1.4;

@@ -1,7 +1,7 @@
 import { FormikProvider } from 'formik'
 import { useState } from 'react'
 
-import { Form, InfiniteScroll, Spinner } from '~/components'
+import { Form, InfiniteScroll } from '~/components'
 import {
   CollectionDetailFragment,
   UserArticlesUserFragment,
@@ -56,7 +56,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
     <InfiniteScroll
       hasNextPage={loadedArticles.length < (articles.edges?.length as number)}
       loadMore={loadMore}
-      loader={<Spinner />}
+      loader={null}
     >
       <FormikProvider value={formik}>
         <Form

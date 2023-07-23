@@ -114,21 +114,22 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
         rightBtn={SubmitButton}
       />
 
-      <SearchingArea
-        inSearchingArea={inSearchingArea}
-        searchType="User"
-        toStagingArea={toStagingArea}
-        toSearchingArea={toSearchingArea}
-        addNodeToStaging={addNodeToStaging}
-      />
-
-      <StagingArea
-        nodes={stagingNodes}
-        setNodes={setStagingNodes}
-        hint="tagAddEditor"
-        inStagingArea={inStagingArea}
-        draggable={false}
-      />
+      <Dialog.Content noSpacing fixedHeight>
+        <SearchingArea
+          inSearchingArea={inSearchingArea}
+          searchType="User"
+          toStagingArea={toStagingArea}
+          toSearchingArea={toSearchingArea}
+          addNodeToStaging={addNodeToStaging}
+        />
+        <StagingArea
+          nodes={stagingNodes}
+          setNodes={setStagingNodes}
+          hint="tagAddEditor"
+          inStagingArea={inStagingArea}
+          draggable={false}
+        />
+      </Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

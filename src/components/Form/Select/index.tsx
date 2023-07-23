@@ -86,11 +86,7 @@ const Select: React.FC<SelectProps> = ({
   }
 
   const Content = (
-    <Dropdown
-      appendTo="parent"
-      content={<Options dropdown />}
-      zIndex={Z_INDEX.OVER_DIALOG}
-    >
+    <Dropdown content={<Options dropdown />} zIndex={Z_INDEX.OVER_DIALOG}>
       {({ openDropdown, ref }) => (
         <ul aria-labelledby={fieldId} className={styles.list}>
           <Option

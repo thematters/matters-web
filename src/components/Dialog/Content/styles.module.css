@@ -16,7 +16,7 @@
   }
 
   @media (--sm-up) {
-    max-height: 412px;
+    max-height: 26rem;
     margin-bottom: 0;
   }
 }
