@@ -163,6 +163,7 @@ const BaseAddArticlesCollectionDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={<FormattedMessage defaultMessage="Add to collection" />}
+          closeDialog={closeDialog}
           rightBtn={SubmitButton}
         />
 

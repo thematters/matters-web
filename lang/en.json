@@ -840,9 +840,6 @@
     "description": "",
     "defaultMessage": "Custom URL Name"
   },
-  "fG41Ux": {
-    "defaultMessage": "Logged out successfully"
-  },
   "fWDtpq": {
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx",
     "defaultMessage": "Pending"
@@ -1008,9 +1005,6 @@
   },
   "nYrKWp": {
     "defaultMessage": "Edit profile"
-  },
-  "nsaJRn": {
-    "defaultMessage": "Logged in successfully"
   },
   "o2Na0B": {
     "defaultMessage": "Back to All"

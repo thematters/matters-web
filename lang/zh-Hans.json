@@ -835,9 +835,6 @@
   "eov+J2": {
     "defaultMessage": "自定义网址名称"
   },
-  "fG41Ux": {
-    "defaultMessage": "登出成功"
-  },
   "fWDtpq": {
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1002,9 +999,6 @@
   },
   "nYrKWp": {
     "defaultMessage": "编辑个人信息"
-  },
-  "nsaJRn": {
-    "defaultMessage": "上站成功"
   },
   "o2Na0B": {
     "defaultMessage": "返回全部"

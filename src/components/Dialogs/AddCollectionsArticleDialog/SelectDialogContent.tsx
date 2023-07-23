@@ -79,7 +79,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
     <>
       <Dialog.Header
         title={<FormattedMessage defaultMessage="Add to collection" />}
-        leftBtn={<span />}
+        closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />
 

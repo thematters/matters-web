@@ -834,9 +834,6 @@
   "eov+J2": {
     "defaultMessage": "Custom URL Name"
   },
-  "fG41Ux": {
-    "defaultMessage": "Logged out successfully"
-  },
   "fWDtpq": {
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1001,9 +998,6 @@
   },
   "nYrKWp": {
     "defaultMessage": "Edit profile"
-  },
-  "nsaJRn": {
-    "defaultMessage": "Logged in successfully"
   },
   "o2Na0B": {
     "defaultMessage": "Back to All"
