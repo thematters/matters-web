@@ -26,7 +26,7 @@ const BaseEditTagDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} smBgColor="greyLighter">
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent
           closeDialog={closeDialog}
           content={content}
