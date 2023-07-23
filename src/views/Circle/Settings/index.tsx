@@ -41,7 +41,7 @@ const Settings = () => {
 
       <Head title={{ id: 'manageCircle' }} />
 
-      <Layout.Main.Spacing>
+      <Layout.Main.Spacing hasVertical={false}>
         <BaseSettings />
       </Layout.Main.Spacing>
     </Layout.Main>

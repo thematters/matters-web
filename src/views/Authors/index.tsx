@@ -129,7 +129,7 @@ const Authors = () => (
 
     <Head title={{ id: 'allAuthors' }} />
 
-    <Layout.Main.Spacing>
+    <Layout.Main.Spacing hasVertical={false}>
       <BaseAuthors />
     </Layout.Main.Spacing>
   </Layout.Main>

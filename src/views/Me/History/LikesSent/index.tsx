@@ -84,7 +84,7 @@ const BaseLikesSent = () => {
     <>
       <LikesTabs />
 
-      <Layout.Main.Spacing>
+      <Layout.Main.Spacing hasVertical={false}>
         <InfiniteScroll
           hasNextPage={pageInfo.hasNextPage}
           loadMore={loadMore}

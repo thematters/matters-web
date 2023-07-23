@@ -78,7 +78,7 @@ const UserCollections = () => {
     return (
       <>
         <UserTabs loading />
-        <Layout.Main.Spacing>
+        <Layout.Main.Spacing hasVertical={false}>
           <Placeholder />
         </Layout.Main.Spacing>
       </>
@@ -154,7 +154,7 @@ const UserCollections = () => {
         </AddCollectionDialog>
       )}
 
-      <Layout.Main.Spacing>
+      <Layout.Main.Spacing hasVertical={false}>
         <InfiniteScroll
           hasNextPage={pageInfo.hasNextPage}
           loadMore={loadMore}

@@ -108,7 +108,7 @@ const Comments = () => {
     .filter(({ comments }) => comments.length > 0)
 
   return (
-    <Layout.Main.Spacing>
+    <Layout.Main.Spacing hasVertical={false}>
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}

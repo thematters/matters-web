@@ -109,7 +109,7 @@ const MeDrafts = () => (
 
     <Head title={{ id: 'myDrafts' }} />
 
-    <Layout.Main.Spacing>
+    <Layout.Main.Spacing hasVertical={false}>
       <BaseMeDrafts />
     </Layout.Main.Spacing>
   </Layout.Main>

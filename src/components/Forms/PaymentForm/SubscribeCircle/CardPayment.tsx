@@ -157,14 +157,12 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
     <>
       <Dialog.Header closeDialog={closeDialog} title="subscribeCircle" />
 
-      <Dialog.Content>
-        <section>
-          <Head circle={circle} />
+      <Dialog.Content fixedHeight>
+        <Head circle={circle} />
 
-          <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
+        <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
 
-          <Hint />
-        </section>
+        <Hint />
       </Dialog.Content>
 
       <Dialog.Footer

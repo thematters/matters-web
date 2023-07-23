@@ -20,7 +20,7 @@ const HomeFeed = () => {
     <>
       <SortBy feedType={feedType} setFeedType={changeFeed} />
 
-      <Layout.Main.Spacing>
+      <Layout.Main.Spacing hasVertical={false}>
         <MainFeed feedSortType={feedType} />
       </Layout.Main.Spacing>
     </>

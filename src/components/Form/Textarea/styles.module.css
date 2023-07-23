@@ -2,5 +2,5 @@
   @mixin form-input;
 
   height: initial;
-  min-height: 8rem;
+  min-height: 6.25rem;
 }

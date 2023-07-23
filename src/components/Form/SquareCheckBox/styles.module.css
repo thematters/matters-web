@@ -10,6 +10,10 @@
   & .lineClamp {
     @mixin line-clamp;
   }
+
+  &.disabled {
+    cursor: not-allowed;
+  }
 }
 
 .wrapper {

@@ -92,7 +92,7 @@ const AggregateResults = () => {
         </SegmentedTabs.Tab>
       </SegmentedTabs>
 
-      <Layout.Main.Spacing>
+      <Layout.Main.Spacing hasVertical={false}>
         {isArticle && <Articles />}
         {isTag && <Tags />}
         {isUser && <Users />}

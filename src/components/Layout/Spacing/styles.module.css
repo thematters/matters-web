@@ -4,4 +4,12 @@
   @media (--sm-up) {
     padding: 0;
   }
+
+  &.hasVertical {
+    padding: var(--spacing-base);
+
+    @media (--sm-up) {
+      padding: 0;
+    }
+  }
 }

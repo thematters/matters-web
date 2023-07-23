@@ -174,8 +174,12 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
   const canEditTag = isEditor || isCreator || viewer.status?.role === 'admin'
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
-      <Layout.Main.Spacing>
+    <Layout.Main.Spacing hasVertical={false}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
         <List>
           {(edges || []).map(({ node, cursor }, i) => (
             <React.Fragment key={`${feedType}:${cursor}`}>
@@ -221,8 +225,8 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
             <RelatedTags tagId={tag.id} />
           </Media>
         )}
-      </Layout.Main.Spacing>
-    </InfiniteScroll>
+      </InfiniteScroll>
+    </Layout.Main.Spacing>
   )
 }
 

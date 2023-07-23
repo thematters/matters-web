@@ -35,7 +35,7 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
           closeText={<FormattedMessage defaultMessage="Close" />}
         />
 
-        <Dialog.Content>
+        <Dialog.Content noSpacing>
           <Dialog.Message align="left" smUpAlign="left">
             <p className={styles.message}>
               <Translate

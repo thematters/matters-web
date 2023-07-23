@@ -87,7 +87,7 @@ const MeBookmarks = () => (
 
     <Head title={{ id: 'myBookmarks' }} />
 
-    <Layout.Main.Spacing>
+    <Layout.Main.Spacing hasVertical={false}>
       <BaseMeBookmarks />
     </Layout.Main.Spacing>
   </Layout.Main>

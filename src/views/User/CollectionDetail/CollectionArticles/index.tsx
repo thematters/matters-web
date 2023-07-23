@@ -84,7 +84,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
         </button>
       </section>
 
-      <Layout.Main.Spacing>
+      <Layout.Main.Spacing hasVertical={false}>
         <List>
           {articleEdges &&
             articleEdges.map(({ node, cursor }, i) => (

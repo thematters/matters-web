@@ -6,6 +6,7 @@ import {
   Dialog,
   List,
   QueryError,
+  Spacer,
   Spinner,
   TextIcon,
   Translate,
@@ -109,7 +110,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
         rightBtn={<AddEditorButton />}
       />
 
-      <Dialog.Content>
+      <Dialog.Content noSpacing>
         <List>
           {tag.owner && (
             <List.Item>
@@ -151,7 +152,9 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
           ))}
         </List>
 
-        <Dialog.Message>
+        <Spacer size="base" />
+
+        <Dialog.Message smUpAlign="center">
           <p className={styles.hint}>
             <Translate
               zh_hant="協作者可以與你共同管理精選"
@@ -192,6 +195,8 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
             )}
           </p>
         </Dialog.Message>
+
+        <Spacer size="base" />
       </Dialog.Content>
 
       {isAllowAdd && (

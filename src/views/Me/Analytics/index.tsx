@@ -111,31 +111,29 @@ const MyAnalytics = () => {
     <Layout.Main>
       <Header />
 
-      <Layout.Main.Spacing>
-        <section className={styles.container}>
-          {edges?.length === 0 && (
-            <section className={styles.noSupporter}>
-              <section className={styles.noSupporterImg}>
-                <AnalyticsNoSupporter />
-              </section>
-              <p>
-                <FormattedMessage defaultMessage="No data yet." />
-              </p>
+      <Layout.Main.Spacing hasVertical={false}>
+        {edges?.length === 0 && (
+          <section className={styles.noSupporter}>
+            <section className={styles.noSupporterImg}>
+              <AnalyticsNoSupporter />
             </section>
-          )}
+            <p>
+              <FormattedMessage defaultMessage="No data yet." />
+            </p>
+          </section>
+        )}
 
-          <List>
-            {edges?.map(({ node, cursor, donationCount }, i) => (
-              <List.Item key={cursor}>
-                <SupporterDigestFeed
-                  user={node}
-                  index={i}
-                  donationCount={donationCount}
-                />
-              </List.Item>
-            ))}
-          </List>
-        </section>
+        <List>
+          {edges?.map(({ node, cursor, donationCount }, i) => (
+            <List.Item key={cursor}>
+              <SupporterDigestFeed
+                user={node}
+                index={i}
+                donationCount={donationCount}
+              />
+            </List.Item>
+          ))}
+        </List>
       </Layout.Main.Spacing>
     </Layout.Main>
   )

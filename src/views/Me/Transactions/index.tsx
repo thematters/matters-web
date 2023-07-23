@@ -188,7 +188,7 @@ const Transactions = () => {
         </SegmentedTabs.Tab>
       </SegmentedTabs>
 
-      <Layout.Main.Spacing>
+      <Layout.Main.Spacing hasVertical={false}>
         <BaseTransactions currency={currency} purpose={purpose} />
       </Layout.Main.Spacing>
     </Layout.Main>

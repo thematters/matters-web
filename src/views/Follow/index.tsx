@@ -81,7 +81,7 @@ const Follow = () => {
         <Spacer size="base" />
       </Media>
 
-      <Layout.Main.Spacing>
+      <Layout.Main.Spacing hasVertical={false}>
         <BaseFollow />
       </Layout.Main.Spacing>
     </Layout.Main>

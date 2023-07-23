@@ -118,7 +118,7 @@ const Notifications = () => {
 
       <Head title={{ id: 'notifications' }} />
 
-      <Layout.Main.Spacing>
+      <Layout.Main.Spacing hasVertical={false}>
         <BaseNotifications />
       </Layout.Main.Spacing>
     </Layout.Main>

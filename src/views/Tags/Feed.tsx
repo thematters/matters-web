@@ -64,8 +64,12 @@ const Feed = ({ type }: Props) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
-      <Layout.Main.Spacing>
+    <Layout.Main.Spacing hasVertical={false}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
         <ul className={styles.list}>
           {edges.map(({ node: tag }, i) => (
             <li key={tag.id} className={styles.listItem}>
@@ -90,8 +94,8 @@ const Feed = ({ type }: Props) => {
             </li>
           ))}
         </ul>
-      </Layout.Main.Spacing>
-    </InfiniteScroll>
+      </InfiniteScroll>
+    </Layout.Main.Spacing>
   )
 }
 
