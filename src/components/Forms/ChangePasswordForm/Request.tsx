@@ -91,6 +91,8 @@ const Request: React.FC<FormProps> = ({
     },
   })
 
+  // id: isForget ? 'enterRegisteredEmail' : 'enterEmail',
+
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
@@ -98,7 +100,15 @@ const Request: React.FC<FormProps> = ({
         type="email"
         name="email"
         required
-        placeholder={intl.formatMessage({ defaultMessage: 'Email' })}
+        placeholder={
+          isForget
+            ? intl.formatMessage({
+                defaultMessage: 'Enter your email',
+              })
+            : intl.formatMessage({
+                defaultMessage: 'Email',
+              })
+        }
         value={values.email}
         error={touched.email && errors.email}
         disabled={!!defaultEmail}

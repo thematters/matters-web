@@ -124,6 +124,9 @@
   "5FO4vn": {
     "defaultMessage": "你尚无权限进行该操作"
   },
+  "5MDGuM": {
+    "defaultMessage": "请输入你的注册邮箱"
+  },
   "5iii3x": {
     "defaultMessage": "围炉：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"

@@ -124,6 +124,9 @@
   "5FO4vn": {
     "defaultMessage": "你尚無權限進行該操作"
   },
+  "5MDGuM": {
+    "defaultMessage": "請輸入你的註冊電子信箱"
+  },
   "5iii3x": {
     "defaultMessage": "圍爐：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"

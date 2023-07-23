@@ -22,6 +22,8 @@ import {
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
+import styles from './styles.module.css'
+
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback: () => void
@@ -143,24 +145,26 @@ const Init: React.FC<FormProps> = ({
         spacingBottom="base"
       />
 
-      <Form.CheckBox
-        name="tos"
-        checked={values.tos}
-        error={touched.tos && errors.tos}
-        onChange={handleChange}
-        hint={
-          <>
-            <FormattedMessage defaultMessage="I have read and agree to" />
-            <Link href={PATHS.TOS} legacyBehavior>
-              <a className="u-link-green" target="_blank">
-                &nbsp;
-                <FormattedMessage defaultMessage="Terms and Privacy Policy" />
-              </a>
-            </Link>
-          </>
-        }
-        required
-      />
+      <section className={styles.tos}>
+        <Form.CheckBox
+          name="tos"
+          checked={values.tos}
+          error={touched.tos && errors.tos}
+          onChange={handleChange}
+          hint={
+            <>
+              <FormattedMessage defaultMessage="I have read and agree to" />
+              <Link href={PATHS.TOS} legacyBehavior>
+                <a className="u-link-green" target="_blank">
+                  &nbsp;
+                  <FormattedMessage defaultMessage="Terms and Privacy Policy" />
+                </a>
+              </Link>
+            </>
+          }
+          required
+        />
+      </section>
     </Form>
   )
 
