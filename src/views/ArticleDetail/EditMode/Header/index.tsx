@@ -1,5 +1,6 @@
 import { normalizeArticleHTML } from '@matters/matters-editor'
 import { useEffect, useRef } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
 import { measureDiffs, stripHtml } from '~/common/utils'
@@ -193,7 +194,7 @@ const EditModeHeader = ({
             disabled={isEditDisabled || isOverDiffLimit}
           >
             <TextIcon color="white" size="md" weight="md">
-              <Translate id="nextStep" />
+              <FormattedMessage defaultMessage="Next Step" />
             </TextIcon>
           </Button>
         )}

@@ -142,10 +142,10 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
       </section>
 
       <Form.Input
-        label={intl.formatMessage({ defaultMessage: 'tagName' })}
+        label={intl.formatMessage({ defaultMessage: 'Tag Name' })}
         type="text"
         name="newContent"
-        placeholder={intl.formatMessage({ defaultMessage: 'tagName' })}
+        placeholder={intl.formatMessage({ defaultMessage: 'Tag Name' })}
         value={values.newContent}
         onBlur={handleBlur}
         onChange={(e) => {
@@ -162,9 +162,9 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
       />
 
       <Form.Textarea
-        label={intl.formatMessage({ defaultMessage: 'tagDescription' })}
+        label={intl.formatMessage({ defaultMessage: 'Tag Description' })}
         name="newDescription"
-        placeholder={intl.formatMessage({ defaultMessage: 'tagDescription' })}
+        placeholder={intl.formatMessage({ defaultMessage: 'Tag Description' })}
         value={values.newDescription}
         onBlur={handleBlur}
         onChange={handleChange}

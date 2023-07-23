@@ -136,7 +136,7 @@ const Request: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<Translate id="nextStep" />}
+      text={<FormattedMessage defaultMessage="Next Step" />}
       loading={isSubmitting}
     />
   )
@@ -153,7 +153,7 @@ const Request: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={<Translate id="nextStep" />}
+                text={<FormattedMessage defaultMessage="Next Step" />}
                 loading={isSubmitting}
               />
             </>

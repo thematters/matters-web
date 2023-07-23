@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { parseUnits } from 'viem'
 import { useAccount, useContractWrite, useNetwork } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
@@ -286,7 +287,7 @@ const USDTProcessingForm: React.FC<Props> = ({
     <>
       <Dialog.Header
         closeDialog={closeDialog}
-        closeText="close"
+        closeText={<FormattedMessage defaultMessage="Close" />}
         title="donation"
       />
 

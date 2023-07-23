@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { OPEN_RECOMMEND_TAG_DIALOG } from '~/common/enums'
 import { Dialog, SegmentedTabs, Translate, useDialogSwitch } from '~/components'
@@ -32,7 +33,7 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
             <Translate zh_hant="追蹤標籤" zh_hans="追踪标签" en="Follow Tags" />
           }
           closeDialog={closeDialog}
-          closeText="close"
+          closeText={<FormattedMessage defaultMessage="Close" />}
         />
 
         <Dialog.Content>
@@ -79,7 +80,7 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text="close"
+              text={<FormattedMessage defaultMessage="Close" />}
               color="greyDarker"
               onClick={closeDialog}
             />

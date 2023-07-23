@@ -15,7 +15,6 @@ import {
   Layout,
   Media,
   TextIcon,
-  Translate,
   ViewerContext,
 } from '~/components'
 
@@ -290,7 +289,7 @@ const Select: React.FC<FormProps> = ({
         leftBtn={
           back ? (
             <Dialog.TextButton
-              text={<Translate id="back" />}
+              text={<FormattedMessage defaultMessage="Back" />}
               onClick={onBack}
             />
           ) : null

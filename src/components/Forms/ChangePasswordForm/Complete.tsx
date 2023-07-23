@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { PATHS } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
 import { BackToHomeButton, Dialog, Layout, Translate } from '~/components'
@@ -35,7 +37,7 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
       {!isInPage && (
         <Dialog.Footer
           closeDialog={closeDialog}
-          closeText="close"
+          closeText={<FormattedMessage defaultMessage="Close" />}
           btns={
             isForget ? (
               <Dialog.RoundedButton

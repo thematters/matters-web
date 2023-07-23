@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   parseFormSubmitErrors,
@@ -135,7 +136,7 @@ const Request: React.FC<FormProps> = ({
 
   const SubmitButton = (
     <Dialog.TextButton
-      text={<Translate id="nextStep" />}
+      text={<FormattedMessage defaultMessage="Next Step" />}
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -150,7 +151,10 @@ const Request: React.FC<FormProps> = ({
         closeDialog={closeDialog}
         leftBtn={
           back ? (
-            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
           ) : undefined
         }
         rightBtn={SubmitButton}

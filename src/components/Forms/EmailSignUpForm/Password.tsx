@@ -168,6 +168,7 @@ const Password: React.FC<FormProps> = ({
         hint={
           <FormattedMessage defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed" />
         }
+        spacingBottom="base"
       />
 
       <Form.Input

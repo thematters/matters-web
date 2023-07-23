@@ -32,7 +32,6 @@ import {
   Layout,
   TextIcon,
   toast,
-  Translate,
   useMutation,
   VerificationSendCodeButton,
   ViewerContext,
@@ -453,7 +452,7 @@ const Connect: React.FC<FormProps> = ({
         leftBtn={
           back ? (
             <Dialog.TextButton
-              text={<Translate id="back" />}
+              text={<FormattedMessage defaultMessage="Back" />}
               onClick={onBack}
             />
           ) : null

@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -132,7 +133,10 @@ const BaseConfirm: React.FC<FormProps> = ({
         closeDialog={closeDialog}
         leftBtn={
           back ? (
-            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
           ) : undefined
         }
         rightBtn={SubmitButton}

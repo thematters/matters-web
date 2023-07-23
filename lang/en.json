@@ -158,9 +158,6 @@
     "defaultMessage": "Successfully added",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
   },
-  "7+b2mD": {
-    "defaultMessage": "tagDescription"
-  },
   "77tYPg": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -381,6 +378,9 @@
   },
   "GZJpDf": {
     "defaultMessage": "Analytics"
+  },
+  "GcvLBC": {
+    "defaultMessage": "Understood"
   },
   "GugBCe": {
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx",
@@ -657,9 +657,6 @@
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx",
     "defaultMessage": "Add to Featured"
   },
-  "WiuX1v": {
-    "defaultMessage": "tagName"
-  },
   "WpvsPu": {
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
     "defaultMessage": "Subscribe"
@@ -800,6 +797,9 @@
     "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
+  "cyR7Kh": {
+    "defaultMessage": "Back"
+  },
   "d4waan": {
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx",
     "defaultMessage": "Income"
@@ -918,6 +918,9 @@
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "k0ooDW": {
+    "defaultMessage": "Tag Description"
+  },
   "k5NnNF": {
     "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
@@ -946,10 +949,6 @@
   "lZukEr": {
     "defaultMessage": "commented",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
-  },
-  "ldNgRA": {
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx",
-    "defaultMessage": "Display name, can be changed later"
   },
   "ll/ufR": {
     "defaultMessage": "Trending"
@@ -1067,9 +1066,15 @@
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
   },
+  "rLlTQ9": {
+    "defaultMessage": "Tag Name"
+  },
   "rXnmeE": {
     "description": "",
     "defaultMessage": "Confirm and Send"
+  },
+  "rbrahO": {
+    "defaultMessage": "Close"
   },
   "reOeq5": {
     "defaultMessage": "You have created your personal creative space. Publish your first work!",

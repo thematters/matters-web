@@ -436,7 +436,7 @@ const SetAmount: React.FC<FormProps> = ({
           <>
             <SubmitBtn mode="rounded" />
             <Dialog.RoundedButton
-              text="back"
+              text={<FormattedMessage defaultMessage="Back" />}
               color="greyDarker"
               onClick={back}
             />
@@ -444,7 +444,11 @@ const SetAmount: React.FC<FormProps> = ({
         }
         smUpBtns={
           <>
-            <Dialog.TextButton text="back" color="greyDarker" onClick={back} />
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              color="greyDarker"
+              onClick={back}
+            />
             <SubmitBtn mode="text" />
           </>
         }

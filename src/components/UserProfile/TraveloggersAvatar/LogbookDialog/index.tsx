@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Dialog,
@@ -38,7 +39,7 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
         <Dialog.Header
           title={title}
           closeDialog={closeDialog}
-          closeText="close"
+          closeText={<FormattedMessage defaultMessage="Close" />}
         />
 
         <Dialog.Message>
@@ -102,7 +103,7 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text="close"
+              text={<FormattedMessage defaultMessage="Close" />}
               color="greyDarker"
               onClick={closeDialog}
             />

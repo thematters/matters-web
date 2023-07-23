@@ -157,9 +157,6 @@
     "defaultMessage": "加入成功",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
   },
-  "7+b2mD": {
-    "defaultMessage": "tagDescription"
-  },
   "77tYPg": {
     "defaultMessage": "確認刪除後，{commentType}會立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -379,6 +376,9 @@
   },
   "GZJpDf": {
     "defaultMessage": "數據後台"
+  },
+  "GcvLBC": {
+    "defaultMessage": "我知道了"
   },
   "GugBCe": {
     "defaultMessage": "本月新增追蹤人數",
@@ -654,9 +654,6 @@
     "defaultMessage": "添加到精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
-  "WiuX1v": {
-    "defaultMessage": "tagName"
-  },
   "WpvsPu": {
     "defaultMessage": "訂閱",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -796,6 +793,9 @@
     "defaultMessage": "由於你尚未發布任何作品，這裡還沒有任何數據能與你分享哦！發布第一篇作品來介紹你自己，以此開啟你的創作之旅吧！",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
+  "cyR7Kh": {
+    "defaultMessage": "返回"
+  },
   "d4waan": {
     "defaultMessage": "營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
@@ -913,6 +913,9 @@
     "defaultMessage": "在 {circlename} 發布廣播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "k0ooDW": {
+    "defaultMessage": "標籤描述"
+  },
   "k5NnNF": {
     "defaultMessage": "追蹤了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
@@ -940,10 +943,6 @@
   "lZukEr": {
     "defaultMessage": "評論了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
-  },
-  "ldNgRA": {
-    "defaultMessage": "你的站內暱稱，之後可以修改",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
   "ll/ufR": {
     "defaultMessage": "熱門"
@@ -1060,8 +1059,14 @@
     "defaultMessage": "微博",
     "description": "src/components/Share/Buttons/Weibo.tsx"
   },
+  "rLlTQ9": {
+    "defaultMessage": "標籤名稱"
+  },
   "rXnmeE": {
     "defaultMessage": "確認發送"
+  },
+  "rbrahO": {
+    "defaultMessage": "關閉"
   },
   "reOeq5": {
     "defaultMessage": "你已擁有個人創作空間站，期待你的第一篇作品。",
@@ -1109,7 +1114,7 @@
     "defaultMessage": "複製鏈接"
   },
   "uJkv2X": {
-    "defaultMessage": "Edit Tag"
+    "defaultMessage": "編輯標籤"
   },
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南"

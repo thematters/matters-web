@@ -106,7 +106,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
         smUpBtns={
           <Dialog.TextButton
             color="greyDarker"
-            text="close"
+            text={<FormattedMessage defaultMessage="Close" />}
             onClick={closeDialog}
           />
         }

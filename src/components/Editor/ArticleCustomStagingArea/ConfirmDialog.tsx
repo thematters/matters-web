@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 interface ConfirmDialogProps {
@@ -27,14 +29,14 @@ const ConfirmDialog = ({ removeArticle, children }: ConfirmDialogProps) => {
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text="delete"
+              text={<FormattedMessage defaultMessage="Delete" />}
               color="red"
               onClick={removeArticle}
             />
           }
           smUpBtns={
             <Dialog.TextButton
-              text="delete"
+              text={<FormattedMessage defaultMessage="Delete" />}
               color="red"
               onClick={removeArticle}
             />

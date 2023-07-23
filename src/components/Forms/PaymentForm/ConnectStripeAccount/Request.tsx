@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PAYOUT_COUNTRY } from '~/common/enums'
 import { parseFormSubmitErrors, sleep } from '~/common/utils'
@@ -8,7 +9,6 @@ import {
   LanguageContext,
   Spacer,
   toast,
-  Translate,
   useMutation,
 } from '~/components'
 import { ConnectStripeAccountMutation } from '~/gql/graphql'
@@ -58,7 +58,12 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
       <Dialog.Header
         title="connectStripeAccount"
         closeDialog={closeDialog}
-        leftBtn={<Dialog.TextButton text="back" onClick={back} />}
+        leftBtn={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            onClick={back}
+          />
+        }
       />
 
       <Dialog.Content>
@@ -71,14 +76,14 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
           <>
             {back && (
               <Dialog.TextButton
-                text="back"
+                text={<FormattedMessage defaultMessage="Back" />}
                 color="greyDarker"
                 onClick={back}
               />
             )}
 
             <Dialog.TextButton
-              text={<Translate id="nextStep" />}
+              text={<FormattedMessage defaultMessage="Next Step" />}
               onClick={request}
               disabled={loading}
               loading={loading}

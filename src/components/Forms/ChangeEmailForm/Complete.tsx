@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { BackToHomeButton, Dialog, Layout, Translate } from '~/components'
 
 const Complete = ({
@@ -30,7 +32,10 @@ const Complete = ({
       </Dialog.Message>
 
       {!isInPage && closeDialog && (
-        <Dialog.Footer closeDialog={closeDialog} closeText="close" />
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          closeText={<FormattedMessage defaultMessage="Close" />}
+        />
       )}
     </>
   )

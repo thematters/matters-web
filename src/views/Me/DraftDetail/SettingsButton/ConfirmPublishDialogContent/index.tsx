@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
 import {
@@ -57,7 +58,10 @@ const ConfirmPublishDialogContent: React.FC<
       <Dialog.Header
         title={<Translate zh_hant="發布須知" zh_hans="發布须知" en="Notice" />}
         leftBtn={
-          <Dialog.TextButton text={<Translate id="back" />} onClick={onBack} />
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            onClick={onBack}
+          />
         }
         rightBtn={SubmitButton}
       />
@@ -114,7 +118,7 @@ const ConfirmPublishDialogContent: React.FC<
           <>
             <Dialog.TextButton
               color="greyDarker"
-              text={<Translate id="back" />}
+              text={<FormattedMessage defaultMessage="Back" />}
               onClick={onBack}
             />
             {SubmitButton}

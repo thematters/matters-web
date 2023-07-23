@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { Dialog, Form, Translate } from '~/components'
 
 import Hint from './Hint'
@@ -19,7 +21,7 @@ const Select: React.FC<SelectProps> = ({
       <Dialog.Header
         title="setupLikeCoin"
         closeDialog={closeDialog}
-        closeText="close"
+        closeText={<FormattedMessage defaultMessage="Close" />}
       />
 
       <Dialog.Content>
@@ -77,7 +79,7 @@ const Select: React.FC<SelectProps> = ({
       <Dialog.Footer
         smUpBtns={
           <Dialog.TextButton
-            text="close"
+            text={<FormattedMessage defaultMessage="Close" />}
             color="greyDarker"
             onClick={closeDialog}
           />

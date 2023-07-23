@@ -1,14 +1,14 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { parseFormSubmitErrors, translate, validateEmail } from '~/common/utils'
+import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
 import {
   Dialog,
   Form,
   LanguageContext,
   Layout,
-  Translate,
   useMutation,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -36,6 +36,7 @@ const Request: React.FC<FormProps> = ({
   back,
 }) => {
   const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const isForget = type === 'forget'
   const isInPage = purpose === 'page'
@@ -93,14 +94,11 @@ const Request: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<Translate id="email" />}
+        label={<FormattedMessage defaultMessage="Email" />}
         type="email"
         name="email"
         required
-        placeholder={translate({
-          id: isForget ? 'enterRegisteredEmail' : 'enterEmail',
-          lang,
-        })}
+        placeholder={intl.formatMessage({ defaultMessage: 'Email' })}
         value={values.email}
         error={touched.email && errors.email}
         disabled={!!defaultEmail}
@@ -115,7 +113,7 @@ const Request: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<Translate id="nextStep" />}
+      text={<FormattedMessage defaultMessage="Next Step" />}
       loading={isSubmitting}
     />
   )
@@ -132,7 +130,7 @@ const Request: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={<Translate id="nextStep" />}
+                text={<FormattedMessage defaultMessage="Next Step" />}
                 loading={isSubmitting}
               />
             </>
@@ -150,7 +148,10 @@ const Request: React.FC<FormProps> = ({
         title={titleId}
         leftBtn={
           back ? (
-            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
           ) : null
         }
         closeDialog={closeDialog}

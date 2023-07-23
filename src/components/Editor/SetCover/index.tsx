@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog } from '~/components'
 import { AssetFragment } from '~/gql/graphql'
 
 import SetCoverDialog from './Dialog'
@@ -70,7 +70,10 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
         closeDialog={closeDialog}
         leftBtn={
           back ? (
-            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
           ) : undefined
         }
         rightBtn={SubmitButton}

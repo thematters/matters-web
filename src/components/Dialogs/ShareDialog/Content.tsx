@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { FormattedMessage } from 'react-intl'
 
 import { TextId } from '~/common/enums'
 import { Dialog, ShareButtons, Translate } from '~/components'
@@ -85,14 +86,14 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
         <Dialog.Footer
           btns={
             <Dialog.RoundedButton
-              text="close"
+              text={<FormattedMessage defaultMessage="Close" />}
               color="greyDarker"
               onClick={closeDialog}
             />
           }
           smUpBtns={
             <Dialog.TextButton
-              text="close"
+              text={<FormattedMessage defaultMessage="Close" />}
               color="greyDarker"
               onClick={closeDialog}
             />

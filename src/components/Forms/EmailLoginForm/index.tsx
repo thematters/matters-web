@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
@@ -22,20 +21,13 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  LanguageSwitch,
   Layout,
   toast,
-  Translate,
   useMutation,
 } from '~/components'
 import { UserLoginMutation } from '~/gql/graphql'
 
-import {
-  EmailSignUpDialogButton,
-  PasswordResetDialogButton,
-  PasswordResetRedirectButton,
-} from './Buttons'
-import styles from './styles.module.css'
+import OtherOptions from './OtherOptions'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -84,7 +76,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   })
   const { lang } = useContext(LanguageContext)
 
-  const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
   const formId = 'email-login-form'
 
@@ -154,10 +145,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     },
   })
 
-  const containerClasses = classNames({ [styles.container]: !!isInPage })
-
   const InnerForm = (
-    <section className={containerClasses}>
+    <>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<FormattedMessage defaultMessage="Email" />}
@@ -186,27 +175,16 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           error={touched.password && errors.password}
           onBlur={handleBlur}
           onChange={handleChange}
-          extraButton={
-            <>
-              {isInDialog && gotoResetPassword && (
-                <PasswordResetDialogButton
-                  gotoResetPassword={gotoResetPassword}
-                />
-              )}
-              {isInPage && <PasswordResetRedirectButton />}
-            </>
-          }
           spacingBottom="base"
         />
-
-        {gotoEmailSignUp && (
-          <EmailSignUpDialogButton
-            gotoEmailSignUp={gotoEmailSignUp}
-            isInPage={isInPage}
-          />
-        )}
       </Form>
-    </section>
+
+      <OtherOptions
+        isInPage={isInPage}
+        gotoResetPassword={gotoResetPassword}
+        gotoEmailSignUp={gotoEmailSignUp}
+      />
+    </>
   )
 
   const SubmitButton = (
@@ -238,10 +216,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         />
 
         <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
-
-        <footer className={styles.footer}>
-          <LanguageSwitch />
-        </footer>
       </>
     )
   }
@@ -252,7 +226,10 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         title="login"
         leftBtn={
           back ? (
-            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
           ) : null
         }
         closeDialog={closeDialog}

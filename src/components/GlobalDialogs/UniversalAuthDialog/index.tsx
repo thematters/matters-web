@@ -168,7 +168,10 @@ const BaseUniversalAuthDialog = ({
 
       {/* Misc */}
       {currStep === 'complete' && (
-        <DynamicEmailSignUpFormComplete purpose="dialog" />
+        <DynamicEmailSignUpFormComplete
+          purpose="dialog"
+          closeDialog={closeDialog}
+        />
       )}
     </Dialog>
   )

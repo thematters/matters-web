@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
 import { UnsubscribeCircleMutation } from '~/gql/graphql'
 
@@ -65,7 +67,7 @@ const BaseUnsubscribeCircleDialog = ({
           btns={
             isUnsubscribed ? null : (
               <Dialog.RoundedButton
-                text="confirm"
+                text={<FormattedMessage defaultMessage="Confirm" />}
                 color="red"
                 loading={loading}
                 onClick={() => unsubscribe()}
@@ -75,7 +77,7 @@ const BaseUnsubscribeCircleDialog = ({
           smUpBtns={
             isUnsubscribed ? null : (
               <Dialog.TextButton
-                text="confirm"
+                text={<FormattedMessage defaultMessage="Confirm" />}
                 color="red"
                 loading={loading}
                 onClick={() => unsubscribe()}
