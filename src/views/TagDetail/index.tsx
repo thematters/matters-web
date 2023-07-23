@@ -26,7 +26,6 @@ import {
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
-import ShareButton from '~/components/Layout/Header/ShareButton'
 import {
   TagDetailPublicBySearchQuery,
   TagDetailPublicQuery,
@@ -126,7 +125,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
           <>
             <span />
             <section className={styles.buttons}>
-              <ShareButton
+              <Layout.Header.ShareButton
                 title={title}
                 tags={title.endsWith(tag.content) ? undefined : keywords}
               />

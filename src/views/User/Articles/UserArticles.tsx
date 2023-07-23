@@ -11,6 +11,7 @@ import {
   EmptyArticle,
   Head,
   InfiniteScroll,
+  Layout,
   List,
   QueryError,
   Translate,
@@ -107,7 +108,10 @@ const UserArticles = () => {
     return (
       <>
         <UserTabs loading />
-        <Placeholder />
+
+        <Layout.Main.Spacing>
+          <Placeholder />
+        </Layout.Main.Spacing>
       </>
     )
   }
@@ -207,39 +211,41 @@ const UserArticles = () => {
 
       <PinBoard user={user} />
 
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        loader={<Placeholder />}
-        eof
-      >
-        <List responsiveWrapper>
-          {articleEdges.map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              {node.articleState !== 'active' ? (
-                <ArticleDigestArchive article={node} />
-              ) : (
-                <ArticleDigestFeed
-                  article={node}
-                  inUserArticles
-                  hasAuthor={false}
-                  hasEdit={true}
-                  hasAddCollection={true}
-                  hasArchive={true}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'user_article',
-                      contentType: 'article',
-                      location: i,
-                      id: node.id,
-                    })
-                  }
-                />
-              )}
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
+      <Layout.Main.Spacing>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          loader={<Placeholder />}
+          eof
+        >
+          <List>
+            {articleEdges.map(({ node, cursor }, i) => (
+              <List.Item key={cursor}>
+                {node.articleState !== 'active' ? (
+                  <ArticleDigestArchive article={node} />
+                ) : (
+                  <ArticleDigestFeed
+                    article={node}
+                    inUserArticles
+                    hasAuthor={false}
+                    hasEdit={true}
+                    hasAddCollection={true}
+                    hasArchive={true}
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'user_article',
+                        contentType: 'article',
+                        location: i,
+                        id: node.id,
+                      })
+                    }
+                  />
+                )}
+              </List.Item>
+            ))}
+          </List>
+        </InfiniteScroll>
+      </Layout.Main.Spacing>
     </>
   )
 }

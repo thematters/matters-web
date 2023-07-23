@@ -10,8 +10,6 @@ interface ErrorProps {
 const ErrorPage: NextPage<ErrorProps> = ({ statusCode }) => {
   return (
     <Layout.Main>
-      <Layout.Header left={<Layout.Header.BackButton />} />
-
       <Error
         statusCode={statusCode}
         type={statusCode === 404 ? 'not_found' : 'server'}

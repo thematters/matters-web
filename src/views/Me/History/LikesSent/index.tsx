@@ -84,19 +84,21 @@ const BaseLikesSent = () => {
     <>
       <LikesTabs />
 
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        eof
-      >
-        <List responsiveWrapper>
-          {edges.map(({ node, cursor }) => (
-            <List.Item key={cursor}>
-              <Appreciation appreciation={node} type="sent" />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
+      <Layout.Main.Spacing>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          eof
+        >
+          <List>
+            {edges.map(({ node, cursor }) => (
+              <List.Item key={cursor}>
+                <Appreciation appreciation={node} type="sent" />
+              </List.Item>
+            ))}
+          </List>
+        </InfiniteScroll>
+      </Layout.Main.Spacing>
     </>
   )
 }

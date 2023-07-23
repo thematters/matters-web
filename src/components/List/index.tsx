@@ -2,7 +2,6 @@ import classNames from 'classnames'
 
 import { capitalizeFirstLetter } from '~/common/utils'
 
-import { ResponsiveWrapper } from '../Interaction'
 import styles from './styles.module.css'
 
 type ListSpacing = 0 | 'base' | 'loose' | 'xloose'
@@ -12,7 +11,6 @@ interface ListItemProps {
 }
 
 interface ListProps {
-  responsiveWrapper?: boolean
   spacing?: [ListSpacing, ListSpacing]
   hasBorder?: boolean
   [key: string]: any
@@ -59,7 +57,6 @@ export const List: React.FC<ListProps> & {
 } = ({
   spacing = [0, 0],
   hasBorder = true,
-  responsiveWrapper,
 
   children,
 
@@ -73,16 +70,6 @@ export const List: React.FC<ListProps> & {
     [styles.hasBorder]: !!hasBorder,
     [className]: !!className,
   })
-
-  if (responsiveWrapper) {
-    return (
-      <ResponsiveWrapper>
-        <section className={listClasses} role="list" {...restProps}>
-          {children}
-        </section>
-      </ResponsiveWrapper>
-    )
-  }
 
   return (
     <section className={listClasses} role="list" {...restProps}>

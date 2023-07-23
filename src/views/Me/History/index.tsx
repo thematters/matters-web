@@ -139,38 +139,40 @@ const BaseMeHistory = () => {
 
       <HorizontalRule />
 
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        eof
-      >
-        <List responsiveWrapper>
-          {edges.map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <ArticleDigestList
-                article={node.article}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'read_history',
-                    contentType: 'article',
-                    location: i,
+      <Layout.Main.Spacing>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          eof
+        >
+          <List>
+            {edges.map(({ node, cursor }, i) => (
+              <List.Item key={cursor}>
+                <ArticleDigestList
+                  article={node.article}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'read_history',
+                      contentType: 'article',
+                      location: i,
 
-                    id: node.article.id,
-                  })
-                }
-                onClickAuthor={() => {
-                  analytics.trackEvent('click_feed', {
-                    type: 'read_history',
-                    contentType: 'user',
-                    location: i,
-                    id: node.article.author.id,
-                  })
-                }}
-              />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
+                      id: node.article.id,
+                    })
+                  }
+                  onClickAuthor={() => {
+                    analytics.trackEvent('click_feed', {
+                      type: 'read_history',
+                      contentType: 'user',
+                      location: i,
+                      id: node.article.author.id,
+                    })
+                  }}
+                />
+              </List.Item>
+            ))}
+          </List>
+        </InfiniteScroll>
+      </Layout.Main.Spacing>
     </>
   )
 }

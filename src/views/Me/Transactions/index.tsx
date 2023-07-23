@@ -130,7 +130,7 @@ const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
-      <List responsiveWrapper>
+      <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
             <Transaction tx={node} />
@@ -188,7 +188,9 @@ const Transactions = () => {
         </SegmentedTabs.Tab>
       </SegmentedTabs>
 
-      <BaseTransactions currency={currency} purpose={purpose} />
+      <Layout.Main.Spacing>
+        <BaseTransactions currency={currency} purpose={purpose} />
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

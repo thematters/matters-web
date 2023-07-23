@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { EXTERNAL_LINKS, GUIDE_LINKS, PATHS } from '~/common/enums'
-import { Form, LanguageContext, Layout, ResponsiveWrapper } from '~/components'
+import { Form, LanguageContext, Layout } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -12,7 +12,7 @@ const BaseHelp = () => {
 
   const intl = useIntl()
   return (
-    <ResponsiveWrapper>
+    <>
       <Form.List spacingX={0}>
         <Form.List.Item
           role="link"
@@ -93,14 +93,16 @@ const BaseHelp = () => {
           <span itemProp="copyrightHolder">Matters</span>
         </p>
       </footer>
-    </ResponsiveWrapper>
+    </>
   )
 }
 
 const Help = () => (
   <Layout.Main>
     <Layout.Header left={<Layout.Header.Title id="helpCenter" />} />
-    <BaseHelp />
+    <Layout.Main.Spacing>
+      <BaseHelp />
+    </Layout.Main.Spacing>
   </Layout.Main>
 )
 

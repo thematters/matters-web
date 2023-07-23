@@ -41,7 +41,6 @@ const Field: React.FC<React.PropsWithChildren<FieldFieledProps>> & {
       spacingTop,
     [styles[`spacingBottom${capitalizeFirstLetter(spacingBottom || '')}`]]:
       spacingBottom,
-    field: true, // global selector for `@mixin form-container`
   })
 
   return <section className={classes}>{children}</section>

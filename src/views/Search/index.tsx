@@ -85,6 +85,7 @@ const Search = () => {
           />
         </Media>
       )}
+
       {isAggregate && <AggregateResults />}
     </Layout.Main>
   )

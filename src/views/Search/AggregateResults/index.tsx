@@ -2,7 +2,7 @@ import { useApolloClient } from '@apollo/react-hooks'
 import { useEffect, useState } from 'react'
 
 import { getSearchType } from '~/common/utils'
-import { SegmentedTabs, Translate, useRoute } from '~/components'
+import { Layout, SegmentedTabs, Translate, useRoute } from '~/components'
 
 import Articles from './Articles'
 import {
@@ -70,6 +70,7 @@ const AggregateResults = () => {
           <Translate zh_hans="的搜索結果" zh_hant="的檢索結果" en="" />
         </span>
       </section>
+
       <SegmentedTabs>
         <SegmentedTabs.Tab
           selected={isArticle}
@@ -90,9 +91,12 @@ const AggregateResults = () => {
           <Translate zh_hans="标签" zh_hant="標籤" en="Tags" />
         </SegmentedTabs.Tab>
       </SegmentedTabs>
-      {isArticle && <Articles />}
-      {isTag && <Tags />}
-      {isUser && <Users />}
+
+      <Layout.Main.Spacing>
+        {isArticle && <Articles />}
+        {isTag && <Tags />}
+        {isUser && <Users />}
+      </Layout.Main.Spacing>
     </>
   )
 }

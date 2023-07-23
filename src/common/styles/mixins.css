@@ -178,25 +178,6 @@
   }
 }
 
-@define-mixin form-container {
-  /* margin-right: var(--spacing-base);
-  margin-left: var(--spacing-base);
-
-  @media (--sm-up) {
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  & :global(.field) {
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  & :global(.inputContainer) {
-    margin: 0;
-  } */
-}
-
 /* Components
    ========================================================================== */
 @define-mixin feed-footer-actions {

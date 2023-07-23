@@ -8,10 +8,10 @@ import {
   ArticleDigestFeed,
   EmptyTagArticles,
   InfiniteScroll,
+  Layout,
   List,
   Media,
   QueryError,
-  ResponsiveWrapper,
   Spinner,
   useEventListener,
   usePublicQuery,
@@ -175,7 +175,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
-      <ResponsiveWrapper>
+      <Layout.Main.Spacing>
         <List>
           {(edges || []).map(({ node, cursor }, i) => (
             <React.Fragment key={`${feedType}:${cursor}`}>
@@ -221,7 +221,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
             <RelatedTags tagId={tag.id} />
           </Media>
         )}
-      </ResponsiveWrapper>
+      </Layout.Main.Spacing>
     </InfiniteScroll>
   )
 }

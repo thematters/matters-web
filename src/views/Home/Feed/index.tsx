@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useRoute } from '~/components'
+import { Layout, useRoute } from '~/components'
 
 import MainFeed from './MainFeed'
 import SortBy, { HomeFeedType } from './SortBy'
@@ -19,7 +19,10 @@ const HomeFeed = () => {
   return (
     <>
       <SortBy feedType={feedType} setFeedType={changeFeed} />
-      <MainFeed feedSortType={feedType} />
+
+      <Layout.Main.Spacing>
+        <MainFeed feedSortType={feedType} />
+      </Layout.Main.Spacing>
     </>
   )
 }

@@ -19,7 +19,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import ShareButton from '~/components/Layout/Header/ShareButton'
 import { CircleProfileCirclePublicQuery } from '~/gql/graphql'
 
 import SubscriptionBanner from '../SubscriptionBanner'
@@ -129,7 +128,7 @@ const CircleProfile = () => {
             <span />
             {circle && (
               <section className={styles.buttons}>
-                <ShareButton
+                <Layout.Header.ShareButton
                   tags={
                     [
                       circle.displayName,

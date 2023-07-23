@@ -91,7 +91,7 @@ const BaseNotifications = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
-      <List spacing={['xloose', 0]} responsiveWrapper>
+      <List spacing={['xloose', 0]}>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
             <Notice notice={node} />
@@ -117,7 +117,10 @@ const Notifications = () => {
       </Media>
 
       <Head title={{ id: 'notifications' }} />
-      <BaseNotifications />
+
+      <Layout.Main.Spacing>
+        <BaseNotifications />
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

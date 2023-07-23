@@ -70,7 +70,7 @@ const BaseMeBookmarks = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
-      <List responsiveWrapper>
+      <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
             <ArticleDigestFeed article={node} />
@@ -87,7 +87,9 @@ const MeBookmarks = () => (
 
     <Head title={{ id: 'myBookmarks' }} />
 
-    <BaseMeBookmarks />
+    <Layout.Main.Spacing>
+      <BaseMeBookmarks />
+    </Layout.Main.Spacing>
   </Layout.Main>
 )
 

@@ -114,6 +114,7 @@ const BaseAuthors = () => {
                   id: node.id,
                 })
               }
+              spacing={['tight', 0]}
             />
           </List.Item>
         ))}
@@ -124,14 +125,13 @@ const BaseAuthors = () => {
 
 const Authors = () => (
   <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="allAuthors" />}
-    />
+    <Layout.Header left={<Layout.Header.Title id="allAuthors" />} />
 
     <Head title={{ id: 'allAuthors' }} />
 
-    <BaseAuthors />
+    <Layout.Main.Spacing>
+      <BaseAuthors />
+    </Layout.Main.Spacing>
   </Layout.Main>
 )
 
