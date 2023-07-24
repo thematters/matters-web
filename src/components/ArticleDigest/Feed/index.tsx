@@ -132,26 +132,25 @@ const BaseArticleDigestFeed = ({
       <section className={styles.container}>
         <section className={styles.content}>
           <section className={styles.head}>
-            <section className={styles.title} ref={titleRef} onClick={onClick}>
+            <section className={styles.title} ref={titleRef}>
               <ArticleDigestTitle
                 article={article}
                 textSize="md"
                 lineClamp={2}
+                onClick={onClick}
               />
             </section>
           </section>
 
-          <LinkWrapper {...path}>
-            <p className={summaryClasses} onClick={onClick}>
-              {cleanedSummary}
-            </p>
+          <LinkWrapper {...path} onClick={onClick}>
+            <p className={summaryClasses}>{cleanedSummary}</p>
           </LinkWrapper>
 
           <Media greaterThan="sm">{footerActions}</Media>
         </section>
         {cover && (
-          <LinkWrapper {...path}>
-            <div className={styles.cover} onClick={onClick}>
+          <LinkWrapper {...path} onClick={onClick}>
+            <div className={styles.cover}>
               <ResponsiveImage url={cover} size="144w" />
             </div>
           </LinkWrapper>
