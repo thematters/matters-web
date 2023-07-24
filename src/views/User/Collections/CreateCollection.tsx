@@ -11,7 +11,7 @@ const CreateCollection = () => {
         return (
           <section className={styles.createCollection}>
             <Button
-              spacing={['xxtight', 'tight']}
+              spacing={['xtight', 'tight']}
               borderColor="green"
               borderActiveColor="green"
               borderWidth="md"
