@@ -25,6 +25,7 @@ const MenuItem: React.FC<React.PropsWithChildren<MenuItemProps>> = ({
         spacing={spacing}
         textColor="greyDarker"
         textActiveColor="black"
+        bgColor="transparent"
         {...restProps}
       >
         <div className={styles.content}>
