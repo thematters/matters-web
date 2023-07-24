@@ -222,10 +222,6 @@
     "defaultMessage": "最近 {months} 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
-  "A3wDZ8": {
-    "defaultMessage": "我的 NFT 收藏",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
-  },
   "A41QIy": {
     "defaultMessage": "輸入密碼"
   },
@@ -541,10 +537,6 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "描述"
-  },
-  "QCo7Gc": {
-    "defaultMessage": "選擇 NFT 作為你的頭像",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
   },
   "QUqfbW": {
     "defaultMessage": "說說圍爐的有趣之處，吸引支持者加入",

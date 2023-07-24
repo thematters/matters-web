@@ -55,16 +55,14 @@ const fragments = {
         ...EditProfileDialogUserPublic
       }
       ${BlockUser.fragments.user.public}
-      ${EditProfileDialog.fragments.user.public}
+      ${EditProfileDialog.fragments.user}
     `,
     private: gql`
       fragment DropdownActionsUserPrivate on User {
         id
         ...BlockUserPrivate
-        ...EditProfileDialogUserPrivate
       }
       ${BlockUser.fragments.user.private}
-      ${EditProfileDialog.fragments.user.private}
     `,
   },
 }
