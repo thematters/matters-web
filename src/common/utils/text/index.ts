@@ -24,3 +24,27 @@ export const normalizeName = (name: string) => {
 export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
+
+// https://gist.github.com/demouth/3217440
+// full-width char -> 2
+// half-width char -> 1
+export const countStrWidth = (str: string) => {
+  var l = str.length
+  var c = 0
+  var length = 0
+  for (var i = 0; i < l; i++) {
+    c = str.charCodeAt(i)
+    if (0x0000 <= c && c <= 0x0019) {
+      length += 0
+    } else if (0x0020 <= c && c <= 0x1fff) {
+      length += 1
+    } else if (0x2000 <= c && c <= 0xff60) {
+      length += 2
+    } else if (0xff61 <= c && c <= 0xff9f) {
+      length += 1
+    } else if (0xffa0 <= c) {
+      length += 2
+    }
+  }
+  return length
+}
