@@ -40,7 +40,6 @@ const BaseAddCollectionsArticleDialog = ({
   articleId,
 }: AddCollectionsArticleDialogProps) => {
   const viewer = useContext(ViewerContext)
-
   const { getQuery } = useRoute()
 
   const userName = getQuery('name')
@@ -141,7 +140,7 @@ const BaseAddCollectionsArticleDialog = ({
             closeDialog={() => {
               setArea('selecting')
             }}
-            onUpdated={(cache, collection) => {
+            onUpdate={(cache, collection) => {
               updateUserCollectionsArticles({
                 userName,
                 articleId: articleId,

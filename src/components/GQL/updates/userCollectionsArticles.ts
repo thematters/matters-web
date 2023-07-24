@@ -7,18 +7,16 @@ import {
 
 const update = ({
   cache,
-  collectionIds,
   articleId,
   collection,
   userName,
   type,
 }: {
   cache: DataProxy
-  collectionIds?: string[]
   articleId: string
   collection?: CreateCollectionMutation['putCollection']
   userName?: string | null
-  type: 'addCollection' | 'addArticles'
+  type: 'addCollection'
 }) => {
   // FIXME: circular dependencies
   const {
@@ -58,30 +56,6 @@ const update = ({
             contains: false,
           },
         })
-        break
-
-      case 'addArticles':
-        if (!collectionIds || !articleId) {
-          return
-        }
-        const newEdges: typeof edges = []
-        edges.map((edge) => {
-          const node = edge.node
-          if (collectionIds.includes(node.id)) {
-            node.articles.edges?.push({
-              __typename: 'ArticleEdge',
-              node: {
-                __typename: 'Article',
-                id: articleId,
-              },
-            })
-            node.contains = true
-            newEdges.unshift(edge)
-          } else {
-            newEdges.push(edge)
-          }
-        })
-        edges = newEdges
         break
     }
 

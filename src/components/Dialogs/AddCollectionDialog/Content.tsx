@@ -23,7 +23,7 @@ import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 type Collection = CreateCollectionMutation['putCollection']
 interface FormProps {
   closeDialog: () => void
-  onUpdated?: (cache: any, collection: Collection) => void
+  onUpdate?: (cache: any, collection: Collection) => void
   gotoDetailPage?: boolean
 }
 
@@ -43,7 +43,7 @@ const CREATE_COLLECTION = gql`
 
 const AddCollectionDialogContent: React.FC<FormProps> = ({
   closeDialog,
-  onUpdated,
+  onUpdate,
   gotoDetailPage,
 }) => {
   const viewer = useContext(ViewerContext)
@@ -95,8 +95,8 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
               userName,
               type: 'addCollection',
             })
-            if (onUpdated) {
-              onUpdated(cache, result.data?.putCollection || ({} as Collection))
+            if (onUpdate) {
+              onUpdate(cache, result.data?.putCollection || ({} as Collection))
             }
           },
           refetchQueries: [

@@ -12,7 +12,6 @@ const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 const BaseAddCollectionDialog = ({
   children,
   gotoDetailPage,
-  ...props
 }: AddCollectionDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
