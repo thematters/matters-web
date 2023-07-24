@@ -35,6 +35,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   const [field] = useField({ ...inputProps, type: 'checkbox' })
 
   const [lineClampable, setLineClampable] = useState(false)
+  const [firstRender, setFirstRender] = useState(true)
   const node: React.RefObject<any> | null = useRef(null)
 
   useEffect(() => {
@@ -51,6 +52,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
           setLineClampable(true)
         }
       }
+      setFirstRender(false)
     })
   }, [])
 
@@ -61,7 +63,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
 
   const hintClasses = classNames({
     [styles.hint]: true,
-    [styles.lineClamp]: lineClampable,
+    [styles.lineClamp]: !firstRender,
   })
 
   const Content = (
