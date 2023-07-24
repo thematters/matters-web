@@ -1,9 +1,6 @@
 import classNames from 'classnames'
-import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
-import { Form, useFeatures } from '~/components'
+import { useFeatures } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 import {
   UserProfileUserPrivateQuery,
@@ -51,30 +48,32 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({
       return null
     }
 
-    return (
-      <section className={circleWidgetClasses}>
-        <Form.List spacingX={0}>
-          <Form.List.Item
-            bold
-            title={
-              <FormattedMessage
-                defaultMessage="Come build a Circle and call on your supporters to join you!"
-                description="src/components/UserProfile/CircleWidget/index.tsx"
-              />
-            }
-            href={PATHS.CIRCLE_CREATION}
-            onClick={() => {
-              analytics.trackEvent('click_button', { type: 'create_circle' })
-            }}
-            role="button"
-            bgColor="greyLighter"
-            bgActiveColor="greyLighter"
-            spacing={[0, 'base']}
-            borderRadius="xtight"
-          />
-        </Form.List>
-      </section>
-    )
+    return null
+
+    // return (
+    //   <section className={circleWidgetClasses}>
+    //     <Form.List spacingX={0}>
+    //       <Form.List.Item
+    //         bold
+    //         title={
+    //           <FormattedMessage
+    //             defaultMessage="Come build a Circle and call on your supporters to join you!"
+    //             description="src/components/UserProfile/CircleWidget/index.tsx"
+    //           />
+    //         }
+    //         href={PATHS.CIRCLE_CREATION}
+    //         onClick={() => {
+    //           analytics.trackEvent('click_button', { type: 'create_circle' })
+    //         }}
+    //         role="button"
+    //         bgColor="greyLighter"
+    //         bgActiveColor="greyLighter"
+    //         spacing={[0, 'base']}
+    //         borderRadius="xtight"
+    //       />
+    //     </Form.List>
+    //   </section>
+    // )
   }
 
   const circle = circles[0]

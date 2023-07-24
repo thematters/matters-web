@@ -1071,10 +1071,6 @@
     "defaultMessage": "You have created your personal creative space. Publish your first work!",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
-  "rf0ew3": {
-    "defaultMessage": "Come build a Circle and call on your supporters to join you!",
-    "description": "src/components/UserProfile/CircleWidget/index.tsx"
-  },
   "rfz/fN": {
     "defaultMessage": "Recommended size: 1600px x 900px"
   },
