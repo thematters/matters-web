@@ -36,15 +36,6 @@ const Unsubscribe = ({
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
       variables: { id: articleId, enabled: false },
-      optimisticResponse: articleId
-        ? {
-            toggleSubscribeArticle: {
-              id: articleId,
-              subscribed: false,
-              __typename: 'Article',
-            },
-          }
-        : undefined,
     }
   )
 

@@ -113,6 +113,9 @@
     "defaultMessage": "在行動裝置上使用問題，參考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "4l6vz1": {
+    "defaultMessage": "複製"
+  },
   "4sl6yu": {
     "defaultMessage": "開始創作",
     "description": "src/views/User/Articles/UserArticles.tsx"

@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
 
@@ -16,7 +16,6 @@ import {
   formatAmount,
   maskAddress,
   numRound,
-  translate,
   validateCurrency,
   validateDonationAmount,
   WALLET_ERROR_MESSAGES,
@@ -111,6 +110,7 @@ const SetAmount: React.FC<FormProps> = ({
   // const isLike = currency === CURRENCY.LIKE
 
   // contexts
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const quoteCurrency = viewer.settings.currency
   const { lang } = useContext(LanguageContext)
@@ -412,7 +412,7 @@ const SetAmount: React.FC<FormProps> = ({
               >
                 <Button
                   spacing={['xtight', 'xtight']}
-                  aria-label={translate({ id: 'copy', lang })}
+                  aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
                 >
                   <TextIcon
                     icon={<IconCopy16 color="black" size="xs" />}

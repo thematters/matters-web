@@ -1,9 +1,9 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
-import { useContext, useRef } from 'react'
+import { useRef } from 'react'
+import { useIntl } from 'react-intl'
 
 import { KEYVALUE } from '~/common/enums'
-import { translate } from '~/common/utils'
-import { Button, LanguageContext, Menu, useOutsideClick } from '~/components'
+import { Button, Menu, useOutsideClick } from '~/components'
 
 import MeDigest from './MeDigest'
 import MeMenu from './MeMenu'
@@ -18,8 +18,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
   onDismiss,
   ...props
 }) => {
-  const { lang } = useContext(LanguageContext)
-
+  const intl = useIntl()
   const node: React.RefObject<any> | null = useRef(null)
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
@@ -47,7 +46,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
       <VisuallyHidden>
         <Button
           onClick={onDismiss}
-          aria-label={translate({ id: 'close', lang })}
+          aria-label={intl.formatMessage({ defaultMessage: 'Close' })}
         />
       </VisuallyHidden>
 

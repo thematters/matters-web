@@ -114,6 +114,9 @@
     "defaultMessage": "Have wallet questions on mobile device ? Click the ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "4l6vz1": {
+    "defaultMessage": "Copy"
+  },
   "4sl6yu": {
     "defaultMessage": "Start writing",
     "description": "src/views/User/Articles/UserArticles.tsx"

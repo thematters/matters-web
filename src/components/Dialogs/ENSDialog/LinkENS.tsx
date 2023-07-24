@@ -1,6 +1,6 @@
 import contentHash from '@ensdomains/content-hash'
 import { Fragment, useContext, useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { namehash } from 'viem/ens'
 import {
   useAccount,
@@ -17,14 +17,12 @@ import {
   featureSupportedChains,
   maskAddress,
   PublicResolverABI,
-  translate,
 } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
   Dialog,
   IconCopy16,
-  LanguageContext,
   TextIcon,
   Translate,
   useTargetNetwork,
@@ -50,7 +48,7 @@ const LinkENS = ({
   closeDialog,
 }: LinkENSProps) => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const { address } = useAccount()
   const isConnectedAddress =
@@ -203,7 +201,7 @@ const LinkENS = ({
               >
                 <Button
                   spacing={['xtight', 'xtight']}
-                  aria-label={translate({ id: 'copy', lang })}
+                  aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
                 >
                   <TextIcon
                     icon={<IconCopy16 color="black" size="xs" />}
