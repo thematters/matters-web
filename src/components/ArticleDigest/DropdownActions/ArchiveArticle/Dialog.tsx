@@ -41,7 +41,7 @@ const ArchiveArticleDialog = ({
   const nextStep = () => forward('confirm')
   const isPreConfirm = currStep === 'preConfirm'
 
-  const [archiveArticle] = useMutation<ArchiveArticleMutation>(
+  const [archiveArticle, { loading }] = useMutation<ArchiveArticleMutation>(
     ARCHIVE_ARTICLE,
     {
       variables: { id: article.id },
@@ -127,6 +127,7 @@ const ArchiveArticleDialog = ({
               }
               color="red"
               onClick={onClickArchive}
+              loading={loading}
             />
           }
           smUpBtns={
@@ -140,6 +141,7 @@ const ArchiveArticleDialog = ({
               }
               color="red"
               onClick={onClickArchive}
+              loading={loading}
             />
           }
         />

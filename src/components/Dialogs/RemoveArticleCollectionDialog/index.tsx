@@ -30,7 +30,7 @@ const BaseRemoveArticleCollectionDialog = ({
 }: RemoveArticleCollectionDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  const [remove] = useMutation<RemoveArticleCollectionMutation>(
+  const [remove, { loading }] = useMutation<RemoveArticleCollectionMutation>(
     REMOVE_ARTICLE_COLLECTION,
     {
       variables: { collection: collectionId, article: articleId },
@@ -97,6 +97,7 @@ const BaseRemoveArticleCollectionDialog = ({
               }
               color="green"
               onClick={onRemove}
+              loading={loading}
             />
           }
           smUpBtns={
@@ -109,6 +110,7 @@ const BaseRemoveArticleCollectionDialog = ({
               }
               color="green"
               onClick={onRemove}
+              loading={loading}
             />
           }
         />
