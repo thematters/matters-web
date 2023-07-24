@@ -45,8 +45,8 @@ const BaseCollectionDigestFeed = ({
       data-test-id={TEST_ID.DIGEST_COLLECTION_FEED}
     >
       <section className={styles.container}>
-        <LinkWrapper {...path}>
-          <section className={styles.book} onClick={onClick}>
+        <LinkWrapper {...path} onClick={onClick}>
+          <section className={styles.book}>
             <Book cover={cover} title={title} articleCount={articleCount} />
           </section>
         </LinkWrapper>
@@ -69,10 +69,8 @@ const BaseCollectionDigestFeed = ({
           </Media>
 
           {cleanedDescription && (
-            <LinkWrapper {...path}>
-              <p className={styles.description} onClick={onClick}>
-                {cleanedDescription}
-              </p>
+            <LinkWrapper {...path} onClick={onClick}>
+              <p className={styles.description}>{cleanedDescription}</p>
             </LinkWrapper>
           )}
 
