@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { CollectionDigest } from '~/components'
+import CollectionDigestFeed from '~/components/CollectionDigest/Feed'
 
 import UserTabs from '../UserTabs'
 
@@ -31,7 +31,7 @@ const fragments = gql`
     }
     ...TabsUser
   }
-  ${CollectionDigest.Feed.fragments.collection}
+  ${CollectionDigestFeed.fragments.collection}
   ${UserTabs.fragments.user}
 `
 

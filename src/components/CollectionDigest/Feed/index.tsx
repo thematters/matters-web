@@ -126,7 +126,8 @@ const CollectionDigestFeed = React.memo(
       prevCollection.pinned === collection.pinned &&
       prevCollection.description === collection.description &&
       prevCollection.cover === collection.cover &&
-      prevCollection.title === collection.title
+      prevCollection.title === collection.title &&
+      prevCollection.articles.totalCount === collection.articles.totalCount
     )
   }
 ) as MemoizedCollectionDigestFeed

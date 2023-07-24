@@ -4,8 +4,8 @@ export const fragments = {
   user: gql`
     fragment TabsUser on User {
       id
-      tabsArticles: articles(input: { first: 0 }) {
-        totalCount
+      status {
+        articleCount
       }
       tabsCollections: collections(input: { first: 0 }) {
         totalCount

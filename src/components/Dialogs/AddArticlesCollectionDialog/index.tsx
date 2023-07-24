@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -10,6 +10,7 @@ import {
   useMutation,
   usePublicQuery,
   useRoute,
+  ViewerContext,
 } from '~/components'
 import updateUserCollectionDetail from '~/components/GQL/updates/userCollectionDetail'
 import {
@@ -17,6 +18,7 @@ import {
   AddArticlesCollectionUserPublicQuery,
   CollectionDetailFragment,
 } from '~/gql/graphql'
+import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 
 import {
   ADD_ARTICLES_COLLECTION,
@@ -43,6 +45,8 @@ const BaseAddArticlesCollectionDialog = ({
   collection,
   onUpdate,
 }: AddArticlesCollectionDialogProps) => {
+  const viewer = useContext(ViewerContext)
+
   const formId = 'add-collection-article-form'
 
   const [update] = useMutation<AddArticlesCollectionMutation>(
@@ -99,6 +103,12 @@ const BaseAddArticlesCollectionDialog = ({
             result,
           })
         },
+        refetchQueries: [
+          {
+            query: USER_COLLECTIONS,
+            variables: { userName: viewer.userName },
+          },
+        ],
       })
 
       setSubmitting(false)

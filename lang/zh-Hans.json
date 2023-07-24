@@ -401,7 +401,7 @@
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
   "HJ0iZJ": {
-    "defaultMessage": "確認归档"
+    "defaultMessage": "确认归档"
   },
   "HxcjQl": {
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
@@ -970,7 +970,7 @@
     "description": "src/components/BlockUser/Button/index.tsx"
   },
   "mWcca9": {
-    "defaultMessage": "确认要将“{article}”归档嗎？"
+    "defaultMessage": "确认要将“{article}”归档吗？"
   },
   "mWjpk9": {
     "defaultMessage": "还没有广播",
@@ -1200,7 +1200,7 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "yBUiiy": {
-    "defaultMessage": "操作無法撤銷，確認归档嗎？"
+    "defaultMessage": "操作无法撤销，确认归档吗？"
   },
   "yIlC0R": {
     "defaultMessage": "尚未发布作品",

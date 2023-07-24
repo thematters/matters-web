@@ -15,7 +15,6 @@ import {
   useMutation,
 } from '~/components'
 import DropdownActions from '~/components/CollectionDigest/DropdownActions'
-import updateUserCollectionDetail from '~/components/GQL/updates/userCollectionDetail'
 import EndOfResults from '~/components/Interaction/InfiniteScroll/EndOfResults'
 import {
   CollectionDetailFragment,
@@ -159,16 +158,6 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
                   collectionId,
                   articleId,
                   newPosition: newIndex,
-                },
-                update(cache) {
-                  updateUserCollectionDetail({
-                    cache,
-                    collectionId,
-                    articleId,
-                    oldPosition: oldIndex,
-                    newPosition: newIndex,
-                    type: 'reorder',
-                  })
                 },
               })
             }}

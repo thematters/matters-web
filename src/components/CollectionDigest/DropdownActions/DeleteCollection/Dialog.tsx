@@ -46,7 +46,7 @@ const DeleteCollectionDialog = ({
     }, 1000)
   }
 
-  const [deleteCollection] = useMutation<DeleteCollectionMutation>(
+  const [deleteCollection, { loading }] = useMutation<DeleteCollectionMutation>(
     DELETE_COLLECTION,
     {
       variables: { id: collection.id },
@@ -123,6 +123,7 @@ const DeleteCollectionDialog = ({
                 onClick={() => {
                   setStep('confirmDelete')
                 }}
+                loading={loading}
               />
             }
             smUpBtns={
@@ -132,6 +133,7 @@ const DeleteCollectionDialog = ({
                 onClick={() => {
                   setStep('confirmDelete')
                 }}
+                loading={loading}
               />
             }
           />
