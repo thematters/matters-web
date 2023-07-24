@@ -1,6 +1,4 @@
-import autosize from 'autosize'
 import classNames from 'classnames'
-import { useEffect, useRef } from 'react'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.module.css'
@@ -43,19 +41,12 @@ const Textarea: React.FC<TextareaProps> = ({
 
   ...textareaProps
 }) => {
-  const node: React.RefObject<any> | null = useRef(null)
   const fieldId = `field-${name}`
   const fieldMsgId = `field-msg-${name}`
   const textareaClasses = classNames({
     [styles.textarea]: true,
     [styles.error]: error,
   })
-
-  useEffect(() => {
-    if (node && node.current) {
-      autosize(node.current)
-    }
-  }, [])
 
   return (
     <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
@@ -68,7 +59,6 @@ const Textarea: React.FC<TextareaProps> = ({
 
       <Field.Content>
         <textarea
-          ref={node}
           {...textareaProps}
           id={fieldId}
           name={name}

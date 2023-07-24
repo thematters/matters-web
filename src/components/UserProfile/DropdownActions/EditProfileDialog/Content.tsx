@@ -23,17 +23,14 @@ import {
   ViewerContext,
 } from '~/components'
 import {
-  EditProfileDialogUserPrivateFragment,
   EditProfileDialogUserPublicFragment,
   UpdateUserInfoProfileMutation,
 } from '~/gql/graphql'
 
-import NFTCollection from './NFTCollection'
 import styles from './styles.module.css'
 
 interface FormProps {
-  user: EditProfileDialogUserPublicFragment &
-    Partial<EditProfileDialogUserPrivateFragment>
+  user: EditProfileDialogUserPublicFragment
   // user: DropdownActionsUserPublic & Partial<DropdownActionsUserPrivate>
   closeDialog: () => void
 }
@@ -44,12 +41,6 @@ interface FormValues {
   displayName: string
   description: string
 }
-
-type EditProfileDialogUserPrivateInfoCryptoWalletNft = NonNullable<
-  NonNullable<
-    EditProfileDialogUserPrivateFragment['info']['cryptoWallet']
-  >['nfts']
->[0]
 
 const UPDATE_USER_INFO = gql`
   mutation UpdateUserInfoProfile($input: UpdateUserInfoInput!) {
@@ -172,9 +163,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     },
   })
 
-  const nfts = user.info.cryptoWallet
-    ?.nfts as EditProfileDialogUserPrivateInfoCryptoWalletNft[]
-
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <section className={styles.coverField}>
@@ -195,13 +183,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           hasBorder
         />
       </section>
-
-      {nfts && nfts.length > 0 && (
-        <NFTCollection
-          nfts={nfts}
-          setField={(url: string) => setFieldValue('avatar', url)}
-        />
-      )}
 
       <Form.Input
         type="text"

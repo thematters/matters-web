@@ -221,10 +221,6 @@
     "defaultMessage": "Last {months} months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
-  "A3wDZ8": {
-    "defaultMessage": "My NFT Collections",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
-  },
   "A41QIy": {
     "defaultMessage": "Enter Password"
   },
@@ -540,10 +536,6 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "Description"
-  },
-  "QCo7Gc": {
-    "defaultMessage": "Select NFT as your avatar",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/NFTCollection/index.tsx"
   },
   "QUqfbW": {
     "defaultMessage": "Describe more about your Circle",
