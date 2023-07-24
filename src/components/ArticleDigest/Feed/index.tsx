@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { TEST_ID } from '~/common/enums'
@@ -65,6 +66,7 @@ const BaseArticleDigestFeed = ({
 
   const [height, setHeight] = useState(0)
   const [titleLine, setTitleLine] = useState(2)
+  const router = useRouter()
 
   useLayoutEffect(() => {
     if (titleRef && titleRef.current) {
@@ -107,11 +109,16 @@ const BaseArticleDigestFeed = ({
     />
   )
 
+  const gotoDetail = () => {
+    if (onClick) {
+      onClick()
+    }
+    router.push(path.href)
+  }
+
   return (
     <Card
-      {...path}
       spacing={['baseLoose', 0]}
-      onClick={onClick}
       testId={TEST_ID.DIGEST_ARTICLE_FEED}
       bgActiveColor="none"
       is={is}
@@ -139,7 +146,7 @@ const BaseArticleDigestFeed = ({
       <section className={styles.container}>
         <section className={styles.content}>
           <section className={styles.head}>
-            <section className={styles.title} ref={titleRef}>
+            <section className={styles.title} ref={titleRef} onClick={onClick}>
               <ArticleDigestTitle
                 article={article}
                 textSize="md"
@@ -148,12 +155,14 @@ const BaseArticleDigestFeed = ({
             </section>
           </section>
 
-          <p className={summaryClasses}>{cleanedSummary}</p>
+          <p className={summaryClasses} onClick={gotoDetail}>
+            {cleanedSummary}
+          </p>
 
           <Media greaterThan="sm">{footerActions}</Media>
         </section>
         {cover && (
-          <div className={styles.cover}>
+          <div className={styles.cover} onClick={gotoDetail}>
             <ResponsiveImage url={cover} size="144w" />
           </div>
         )}
