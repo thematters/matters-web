@@ -1,6 +1,6 @@
 .midMenu {
-  @mixin border-top-grey;
-  @mixin border-bottom-grey;
+  @mixin border-top-grey-light;
+  @mixin border-bottom-grey-light;
   @mixin flex-center-space-between;
 
   padding: var(--spacing-base);
@@ -44,7 +44,7 @@
 
   padding: var(--spacing-base) 0;
   color: var(--color-grey);
-  border-bottom: 1px dashed var(--color-line-grey-light);
+  border-bottom: 1px dashed var(--color-grey-light);
 }
 
 .feed {
