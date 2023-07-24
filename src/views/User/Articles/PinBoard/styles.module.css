@@ -58,8 +58,8 @@
   @mixin transition;
 
   position: absolute;
-  top: var(--spacing-base);
-  right: var(--spacing-base);
+  top: var(--spacing-tight);
+  right: var(--spacing-tight);
   z-index: 1;
   display: none;
   opacity: 0;
