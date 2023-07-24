@@ -1,3 +1,7 @@
+.wrapper {
+  padding: var(--spacing-base-loose) 0;
+}
+
 .container {
   @mixin flex-center-space-between;
 
@@ -34,7 +38,6 @@
   line-height: 1.375rem;
   color: var(--color-grey-dark);
   -webkit-line-clamp: 1;
-  cursor: pointer;
 
   &.lineClamp2 {
     -webkit-line-clamp: 2;
@@ -47,7 +50,6 @@
   grid-area: cover;
   width: 4.75rem;
   height: 4.75rem;
-  cursor: pointer;
 
   & img {
     @mixin object-fit-cover;

@@ -133,7 +133,6 @@ const AggregateArticleResults = () => {
                       node as ArticleDigestFeedArticlePublicFragment &
                         Partial<ArticleDigestFeedArticlePrivateFragment>
                     }
-                    is="link"
                     hasCircle={false}
                     hasFollow={false}
                     onClick={() =>

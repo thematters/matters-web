@@ -1,14 +1,12 @@
 import classNames from 'classnames'
-import { useRouter } from 'next/router'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
 import {
-  Card,
-  CardProps,
   DateTime,
   IconDotDivider,
+  LinkWrapper,
   Media,
   ResponsiveImage,
 } from '~/components'
@@ -39,8 +37,7 @@ export type ArticleDigestFeedProps = {
   header?: React.ReactNode
 } & ArticleDigestFeedControls &
   FooterActionsProps &
-  UtmParams &
-  Pick<CardProps, 'is'>
+  UtmParams
 
 const BaseArticleDigestFeed = ({
   article,
@@ -56,7 +53,6 @@ const BaseArticleDigestFeed = ({
 
   utm_source,
   utm_medium,
-  is,
 
   hasReadTime,
   hasDonationCount,
@@ -66,7 +62,6 @@ const BaseArticleDigestFeed = ({
 
   const [height, setHeight] = useState(0)
   const [titleLine, setTitleLine] = useState(2)
-  const router = useRouter()
 
   useLayoutEffect(() => {
     if (titleRef && titleRef.current) {
@@ -109,19 +104,10 @@ const BaseArticleDigestFeed = ({
     />
   )
 
-  const gotoDetail = () => {
-    if (onClick) {
-      onClick()
-    }
-    router.push(path.href)
-  }
-
   return (
-    <Card
-      spacing={['baseLoose', 0]}
-      testId={TEST_ID.DIGEST_ARTICLE_FEED}
-      bgActiveColor="none"
-      is={is}
+    <section
+      className={styles.wrapper}
+      data-test-id={TEST_ID.DIGEST_ARTICLE_FEED}
     >
       {hasHeader && (
         <header className={styles.header}>
@@ -155,20 +141,24 @@ const BaseArticleDigestFeed = ({
             </section>
           </section>
 
-          <p className={summaryClasses} onClick={gotoDetail}>
-            {cleanedSummary}
-          </p>
+          <LinkWrapper {...path}>
+            <p className={summaryClasses} onClick={onClick}>
+              {cleanedSummary}
+            </p>
+          </LinkWrapper>
 
           <Media greaterThan="sm">{footerActions}</Media>
         </section>
         {cover && (
-          <div className={styles.cover} onClick={gotoDetail}>
-            <ResponsiveImage url={cover} size="144w" />
-          </div>
+          <LinkWrapper {...path}>
+            <div className={styles.cover} onClick={onClick}>
+              <ResponsiveImage url={cover} size="144w" />
+            </div>
+          </LinkWrapper>
         )}
       </section>
       <Media at="sm">{footerActions}</Media>
-    </Card>
+    </section>
   )
 }
 
