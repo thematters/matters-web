@@ -14,6 +14,7 @@
 
 .book {
   align-self: flex-start;
+  cursor: pointer;
 }
 
 .header {
@@ -44,6 +45,7 @@ p.articleCount,
   line-height: 1.375rem;
   color: var(--color-grey-dark);
   -webkit-line-clamp: 3;
+  cursor: pointer;
 }
 
 p.articleCount {

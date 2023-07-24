@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -32,6 +33,7 @@ const BaseCollectionDigestFeed = ({
 }: CollectionDigestFeedProps & { Placeholder: typeof Placeholder }) => {
   const { title, description, cover, author, updatedAt, articles } = collection
   const cleanedDescription = stripHtml(description || '')
+  const router = useRouter()
 
   const path = toPath({
     page: 'collectionDetail',
@@ -40,16 +42,21 @@ const BaseCollectionDigestFeed = ({
   })
   const articleCount = articles.totalCount
 
+  const gotoDetail = () => {
+    if (onClick) {
+      onClick()
+    }
+    router.push(path.href)
+  }
+
   return (
     <Card
-      {...path}
       spacing={['baseLoose', 0]}
-      onClick={onClick}
       testId={TEST_ID.DIGEST_COLLECTION_FEED}
       bgActiveColor="none"
     >
       <section className={styles.container}>
-        <section className={styles.book}>
+        <section className={styles.book} onClick={gotoDetail}>
           <Book cover={cover} title={title} articleCount={articleCount} />
         </section>
 
@@ -71,7 +78,9 @@ const BaseCollectionDigestFeed = ({
           </Media>
 
           {cleanedDescription && (
-            <p className={styles.description}>{cleanedDescription}</p>
+            <p className={styles.description} onClick={gotoDetail}>
+              {cleanedDescription}
+            </p>
           )}
 
           <footer className={styles.footer}>
