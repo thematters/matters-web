@@ -207,6 +207,7 @@ export type FeedType =
   | CircleFeedType
   | 'following'
   | 'search_history'
+  | 'user_pinned_work'
 
 type ArticleFeedType =
   | 'all_authors'

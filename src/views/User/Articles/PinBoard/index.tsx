@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { toPath } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 import { Book, Media } from '~/components'
 import { PinnedWorksUserFragment } from '~/gql/graphql'
 
@@ -48,7 +48,7 @@ const PinBoard = ({ user }: PinBoardProps) => {
   return (
     <section className={styles.pinBoard}>
       <ul className={styles.list}>
-        {user.pinnedWorks.map((work) => (
+        {user.pinnedWorks.map((work, index) => (
           <li key={work.id} className={styles.listItem}>
             <Link
               legacyBehavior
@@ -64,6 +64,15 @@ const PinBoard = ({ user }: PinBoardProps) => {
                       collection: work,
                     }
               )}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'user_pinned_work',
+                  contentType:
+                    work.__typename === 'Article' ? 'article' : 'collection',
+                  location: index,
+                  id: work.id,
+                })
+              }
             >
               <a>
                 <Media lessThan="lg">
