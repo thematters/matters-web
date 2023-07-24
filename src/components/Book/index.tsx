@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import BOOK_COVER from '@/public/static/images/book-cover.png'
+import { countStrWidth } from '~/common/utils'
 import {
   IconCamera24,
   ResponsiveImage,
@@ -36,6 +37,8 @@ export const Book: React.FC<BookProps> & {
     getColor()
   }, [cover])
 
+  const titleWidth = countStrWidth(title)
+
   const bookClasses = classNames({
     [styles.book]: true,
     [styles.flat]: variant === 'flat',
@@ -44,8 +47,8 @@ export const Book: React.FC<BookProps> & {
   const jacketClasses = classNames({
     [styles.jacket]: true,
     [styles.hasCount]: hasCount,
-    [styles.titleLg]: title.length <= 6,
-    [styles.titleMd]: title.length > 6 && title.length <= 18 && !hasCount,
+    [styles.titleLg]: titleWidth <= 12,
+    [styles.titleMd]: titleWidth > 12 && titleWidth <= 36 && !hasCount,
   })
 
   return (
