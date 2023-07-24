@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -6,7 +5,6 @@ import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath } from '~/common/utils'
 import {
   Book,
-  Card,
   DateTime,
   IconDotDivider,
   LinkWrapper,
@@ -33,7 +31,6 @@ const BaseCollectionDigestFeed = ({
 }: CollectionDigestFeedProps & { Placeholder: typeof Placeholder }) => {
   const { title, description, cover, author, updatedAt, articles } = collection
   const cleanedDescription = stripHtml(description || '')
-  const router = useRouter()
 
   const path = toPath({
     page: 'collectionDetail',
@@ -42,23 +39,17 @@ const BaseCollectionDigestFeed = ({
   })
   const articleCount = articles.totalCount
 
-  const gotoDetail = () => {
-    if (onClick) {
-      onClick()
-    }
-    router.push(path.href)
-  }
-
   return (
-    <Card
-      spacing={['baseLoose', 0]}
-      testId={TEST_ID.DIGEST_COLLECTION_FEED}
-      bgActiveColor="none"
+    <section
+      className={styles.wrapper}
+      data-test-id={TEST_ID.DIGEST_COLLECTION_FEED}
     >
       <section className={styles.container}>
-        <section className={styles.book} onClick={gotoDetail}>
-          <Book cover={cover} title={title} articleCount={articleCount} />
-        </section>
+        <LinkWrapper {...path}>
+          <section className={styles.book} onClick={onClick}>
+            <Book cover={cover} title={title} articleCount={articleCount} />
+          </section>
+        </LinkWrapper>
 
         <section className={styles.content}>
           <header className={styles.header}>
@@ -78,9 +69,11 @@ const BaseCollectionDigestFeed = ({
           </Media>
 
           {cleanedDescription && (
-            <p className={styles.description} onClick={gotoDetail}>
-              {cleanedDescription}
-            </p>
+            <LinkWrapper {...path}>
+              <p className={styles.description} onClick={onClick}>
+                {cleanedDescription}
+              </p>
+            </LinkWrapper>
           )}
 
           <footer className={styles.footer}>
@@ -114,7 +107,7 @@ const BaseCollectionDigestFeed = ({
           </footer>
         </section>
       </section>
-    </Card>
+    </section>
   )
 }
 
