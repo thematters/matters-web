@@ -126,31 +126,29 @@ const Confirm: React.FC<FormProps> = ({
     <>
       <Dialog.Header closeDialog={closeDialog} title="subscribeCircle" />
 
-      <Dialog.Content>
-        <section>
-          <Head circle={circle} />
+      <Dialog.Content fixedHeight>
+        <Head circle={circle} />
 
-          <section className={styles.currentCard}>
-            <TextIcon
-              icon={withIcon(IconStripeCard)({ size: 'md' })}
-              color="grey"
-              size="xs"
-              spacing="tight"
-            >
-              •••• •••• •••• {cardLast4}
+        <section className={styles.currentCard}>
+          <TextIcon
+            icon={withIcon(IconStripeCard)({ size: 'md' })}
+            color="grey"
+            size="xs"
+            spacing="tight"
+          >
+            •••• •••• •••• {cardLast4}
+          </TextIcon>
+
+          <button type="button" onClick={switchToCardPayment}>
+            <TextIcon color="green" size="xs">
+              <Translate zh_hant="更改" zh_hans="更改" />
             </TextIcon>
-
-            <button type="button" onClick={switchToCardPayment}>
-              <TextIcon color="green" size="xs">
-                <Translate zh_hant="更改" zh_hans="更改" />
-              </TextIcon>
-            </button>
-          </section>
-
-          <Hint />
-
-          {InnerForm}
+          </button>
         </section>
+
+        <Hint />
+
+        {InnerForm}
       </Dialog.Content>
 
       <Dialog.Footer

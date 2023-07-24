@@ -30,7 +30,7 @@ const BaseFollowersDialog = ({ circle, children }: FollowersDialogProps) => {
             />
           }
           closeDialog={closeDialog}
-          closeText="close"
+          closeText={<FormattedMessage defaultMessage="Close" />}
         />
 
         <DynamicContent />
@@ -38,7 +38,7 @@ const BaseFollowersDialog = ({ circle, children }: FollowersDialogProps) => {
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text="close"
+              text={<FormattedMessage defaultMessage="Close" />}
               color="greyDarker"
               onClick={closeDialog}
             />

@@ -116,11 +116,12 @@ const Confirm: React.FC<FormProps> = ({
     <Form onSubmit={handleSubmit}>
       {isInPassword && (
         <Form.PinInput
-          length={PAYMENT_PASSSWORD_LENGTH}
           label={<Translate id="hintPaymentPassword" />}
+          hasLabel
           name="password"
           value={values.password}
           error={touched.password && errors.password}
+          length={PAYMENT_PASSSWORD_LENGTH}
           onChange={(value) => {
             const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
             setTouched({ password: true }, shouldValidate)
@@ -130,11 +131,12 @@ const Confirm: React.FC<FormProps> = ({
       )}
       {isInComparedPassword && (
         <Form.PinInput
-          length={PAYMENT_PASSSWORD_LENGTH}
           label={<Translate id="enterPaymentPasswordAgain" />}
+          hasLabel
           name="compared-password"
           value={values.comparedPassword}
           error={touched.comparedPassword && errors.comparedPassword}
+          length={PAYMENT_PASSSWORD_LENGTH}
           onChange={(value) => {
             const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
             setTouched({ comparedPassword: true }, shouldValidate)
@@ -170,7 +172,10 @@ const Confirm: React.FC<FormProps> = ({
         closeDialog={closeDialog}
         leftBtn={
           back ? (
-            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
           ) : undefined
         }
       />

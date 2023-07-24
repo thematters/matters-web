@@ -54,13 +54,18 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
     })
   }, [])
 
+  const labelClasses = classNames({
+    [styles.label]: true,
+    [styles.disabled]: disabled,
+  })
+
   const hintClasses = classNames({
     [styles.hint]: true,
     [styles.lineClamp]: lineClampable,
   })
 
   const Content = (
-    <label className={styles.label}>
+    <label className={labelClasses}>
       <TextIcon
         icon={
           inputProps.checked ? (

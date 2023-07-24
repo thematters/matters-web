@@ -7,13 +7,13 @@ import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import {
   Button,
   Dropdown,
+  EditTagDialog,
   IconAdd24,
   IconEdit16,
   IconProfile24,
   IconRemove24,
   IconSettings32,
   Menu,
-  TagDialog,
   TagEditorDialog,
   TagLeaveDialog,
   toast,
@@ -35,7 +35,7 @@ interface DropdownActionsProps {
 
 interface DialogProps {
   openTagAddSelectedArticlesDialog: () => void
-  openTagDialog: () => void
+  openEditTagDialog: () => void
   openTagEditorDialog: () => void
   openTagLeaveDialog: () => void
 }
@@ -56,7 +56,7 @@ const BaseDropdownActions = ({
   hasTagLeave,
 
   openTagAddSelectedArticlesDialog,
-  openTagDialog,
+  openEditTagDialog,
   openTagEditorDialog,
   openTagLeaveDialog,
 }: BaseDropdownActionsProps) => {
@@ -67,7 +67,7 @@ const BaseDropdownActions = ({
         <Menu.Item
           text={<FormattedMessage defaultMessage="Edit" />}
           icon={<IconEdit16 size="mdS" />}
-          onClick={openTagDialog}
+          onClick={openEditTagDialog}
           ariaHasPopup="dialog"
         />
       )}
@@ -200,8 +200,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   return (
-    <TagDialog {...props.tag}>
-      {({ openDialog: openTagDialog }) => (
+    <EditTagDialog {...props.tag}>
+      {({ openDialog: openEditTagDialog }) => (
         <SearchSelectDialog
           title={
             <FormattedMessage
@@ -227,7 +227,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
                           ? forbid
                           : openTagAddSelectedArticlesDialog
                       }
-                      openTagDialog={viewer.isFrozen ? forbid : openTagDialog}
+                      openEditTagDialog={
+                        viewer.isFrozen ? forbid : openEditTagDialog
+                      }
                       openTagLeaveDialog={
                         viewer.isFrozen ? forbid : openTagLeaveDialog
                       }
@@ -242,7 +244,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
           )}
         </SearchSelectDialog>
       )}
-    </TagDialog>
+    </EditTagDialog>
   )
 }
 

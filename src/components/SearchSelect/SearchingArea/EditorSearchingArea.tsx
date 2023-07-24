@@ -265,7 +265,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
    * Render
    */
   return (
-    <>
+    <section className={styles.searchingArea}>
       <SearchInput
         type={searchType}
         value={searchKey}
@@ -363,7 +363,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
           )}
         </section>
       )}
-    </>
+    </section>
   )
 }
 

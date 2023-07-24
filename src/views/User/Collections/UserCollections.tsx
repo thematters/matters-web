@@ -10,6 +10,7 @@ import {
   Head,
   IconAdd20,
   InfiniteScroll,
+  Layout,
   List,
   QueryError,
   TextIcon,
@@ -77,7 +78,9 @@ const UserCollections = () => {
     return (
       <>
         <UserTabs loading />
-        <Placeholder />
+        <Layout.Main.Spacing hasVertical={false}>
+          <Placeholder />
+        </Layout.Main.Spacing>
       </>
     )
   }
@@ -150,30 +153,33 @@ const UserCollections = () => {
           }}
         </AddCollectionDialog>
       )}
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        loader={<Placeholder />}
-        eof
-      >
-        <List responsiveWrapper>
-          {edges.map(({ node, cursor }, i) => (
-            <List.Item key={node.id}>
-              <CollectionDigest.Feed
-                collection={node}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'user_collection',
-                    contentType: 'collection',
-                    location: i,
-                    id: node.id,
-                  })
-                }
-              />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
+
+      <Layout.Main.Spacing hasVertical={false}>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          loader={<Placeholder />}
+          eof
+        >
+          <List>
+            {edges.map(({ node, cursor }, i) => (
+              <List.Item key={node.id}>
+                <CollectionDigest.Feed
+                  collection={node}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'user_collection',
+                      contentType: 'collection',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                />
+              </List.Item>
+            ))}
+          </List>
+        </InfiniteScroll>
+      </Layout.Main.Spacing>
     </>
   )
 }

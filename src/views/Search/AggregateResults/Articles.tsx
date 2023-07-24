@@ -102,7 +102,7 @@ const AggregateArticleResults = () => {
   }
 
   return (
-    <section>
+    <>
       <Head
         title={intl.formatMessage(
           {
@@ -123,7 +123,7 @@ const AggregateArticleResults = () => {
         loadMore={loadMore}
         eof={<FormattedMessage defaultMessage="End of the results" />}
       >
-        <List responsiveWrapper>
+        <List>
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'Article' && (
@@ -160,7 +160,7 @@ const AggregateArticleResults = () => {
           )}
         </List>
       </InfiniteScroll>
-    </section>
+    </>
   )
 }
 

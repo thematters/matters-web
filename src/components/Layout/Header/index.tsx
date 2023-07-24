@@ -2,10 +2,9 @@ import classNames from 'classnames'
 
 import { TEST_ID } from '~/common/enums'
 
-import BackButton from './BackButton'
-import CancelButton from './CancelButton'
 import MeButton from './MeButton'
 import { RightButton } from './RightButton'
+import { ShareButton } from './ShareButton'
 import styles from './styles.module.css'
 import Title from './Title'
 
@@ -17,10 +16,9 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> & {
-  BackButton: typeof BackButton
-  CancelButton: typeof CancelButton
   RightButton: typeof RightButton
   MeButton: typeof MeButton
+  ShareButton: typeof ShareButton
   Title: typeof Title
 } = ({ left, right, mode = 'solid' }) => {
   const headerClasses = classNames({
@@ -38,10 +36,9 @@ const Header: React.FC<HeaderProps> & {
   )
 }
 
-Header.BackButton = BackButton
-Header.CancelButton = CancelButton
 Header.RightButton = RightButton
 Header.MeButton = MeButton
+Header.ShareButton = ShareButton
 Header.Title = Title
 
 export default Header

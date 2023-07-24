@@ -1,12 +1,13 @@
+.searchingArea {
+  @media (--sm-up) {
+    margin-top: calc(var(--spacing-base) * -1);
+  }
+}
+
 .area {
-  height: 100%;
+  flex-grow: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-
-  @media (--sm-up) {
-    height: 37vh;
-    margin-bottom: var(--spacing-tight);
-  }
 }
 
 .nodes {

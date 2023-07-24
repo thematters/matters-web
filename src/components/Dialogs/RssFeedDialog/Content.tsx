@@ -213,7 +213,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
         smUpBtns={
           <Dialog.TextButton
             color="greyDarker"
-            text="close"
+            text={<FormattedMessage defaultMessage="Close" />}
             onClick={closeDialog}
           />
         }

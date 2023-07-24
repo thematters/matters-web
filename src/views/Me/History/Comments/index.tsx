@@ -108,61 +108,67 @@ const Comments = () => {
     .filter(({ comments }) => comments.length > 0)
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
-      <List responsiveWrapper>
-        {articleEdges.map(({ cursor, node, comments }) => (
-          <List.Item key={cursor}>
-            <section className={styles.item}>
-              <section className={styles.user}>
-                <UserDigest.Mini
-                  user={node.author}
-                  avatarSize="sm"
-                  textSize="xs"
-                  hasAvatar
-                  hasDisplayName
-                />
-              </section>
-
-              <section className={styles.title}>
-                <LinkWrapper
-                  {...toPath({
-                    page: 'articleDetail',
-                    article: node,
-                  })}
-                >
-                  <ArticleDigestTitle
-                    article={node}
-                    is="h2"
-                    textSize="md"
-                    lineClamp={1}
+    <Layout.Main.Spacing hasVertical={false}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
+        <List>
+          {articleEdges.map(({ cursor, node, comments }) => (
+            <List.Item key={cursor}>
+              <section className={styles.item}>
+                <section className={styles.user}>
+                  <UserDigest.Mini
+                    user={node.author}
+                    avatarSize="sm"
+                    textSize="xs"
+                    hasAvatar
+                    hasDisplayName
                   />
-                </LinkWrapper>
-              </section>
+                </section>
 
-              <List hasBorder={false}>
-                {comments.map((comment) => (
-                  <List.Item key={comment.id}>
-                    <section className={styles.comment}>
-                      <LinkWrapper
-                        {...toPath({
-                          page: 'commentDetail',
-                          comment,
-                          article: node as CommentArticle,
-                        })}
-                      >
-                        <section className={styles.content}>
-                          {collapseContent(comment.content)}
-                        </section>
-                      </LinkWrapper>
-                    </section>
-                  </List.Item>
-                ))}
-              </List>
-            </section>
-          </List.Item>
-        ))}
-      </List>
-    </InfiniteScroll>
+                <section className={styles.title}>
+                  <LinkWrapper
+                    {...toPath({
+                      page: 'articleDetail',
+                      article: node,
+                    })}
+                  >
+                    <ArticleDigestTitle
+                      article={node}
+                      is="h2"
+                      textSize="md"
+                      lineClamp={1}
+                    />
+                  </LinkWrapper>
+                </section>
+
+                <List hasBorder={false}>
+                  {comments.map((comment) => (
+                    <List.Item key={comment.id}>
+                      <section className={styles.comment}>
+                        <LinkWrapper
+                          {...toPath({
+                            page: 'commentDetail',
+                            comment,
+                            article: node as CommentArticle,
+                          })}
+                        >
+                          <section className={styles.content}>
+                            {collapseContent(comment.content)}
+                          </section>
+                        </LinkWrapper>
+                      </section>
+                    </List.Item>
+                  ))}
+                </List>
+              </section>
+            </List.Item>
+          ))}
+        </List>
+      </InfiniteScroll>
+    </Layout.Main.Spacing>
   )
 }
 

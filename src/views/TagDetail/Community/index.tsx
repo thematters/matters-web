@@ -1,4 +1,4 @@
-import { ResponsiveWrapper } from '~/components'
+import { Layout } from '~/components'
 
 import Maintainers from './Maintainers'
 import Participants from './Participants'
@@ -11,10 +11,10 @@ interface Props {
 
 const Community = ({ id, isOwner }: Props) => {
   return (
-    <ResponsiveWrapper>
+    <Layout.Main.Spacing>
       <Maintainers id={id} isOwner={isOwner} />
       <Participants id={id} />
-    </ResponsiveWrapper>
+    </Layout.Main.Spacing>
   )
 }
 

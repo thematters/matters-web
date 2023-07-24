@@ -1,7 +1,7 @@
 .form {
   position: relative;
   width: initial;
-  margin: var(--spacing-base) var(--spacing-base-loose);
+  margin-bottom: var(--spacing-base);
 
   & input[type='search'] {
     @mixin border-grey;

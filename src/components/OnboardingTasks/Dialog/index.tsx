@@ -35,7 +35,7 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
           }
         />
 
-        <Dialog.Content>
+        <Dialog.Content noSpacing>
           <section className={styles.description}>
             <span>
               <Translate

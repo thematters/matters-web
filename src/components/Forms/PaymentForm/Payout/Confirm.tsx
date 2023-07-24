@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -117,7 +118,7 @@ const BaseConfirm: React.FC<FormProps> = ({
 
   const SubmitButton = (
     <Dialog.TextButton
-      text={<Translate id="confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -132,7 +133,10 @@ const BaseConfirm: React.FC<FormProps> = ({
         closeDialog={closeDialog}
         leftBtn={
           back ? (
-            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
           ) : undefined
         }
         rightBtn={SubmitButton}
@@ -153,10 +157,6 @@ const BaseConfirm: React.FC<FormProps> = ({
           </ConfirmTable>
 
           <Form.AmountInput
-            required
-            min={PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD}
-            max={balance}
-            currency={currency}
             label={
               <Translate
                 zh_hant="提現金額"
@@ -164,9 +164,14 @@ const BaseConfirm: React.FC<FormProps> = ({
                 en="Withdraw amoumt"
               />
             }
+            hasLabel
             name="amount"
             value={values.amount}
             error={touched.amount && errors.amount}
+            required
+            min={PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD}
+            max={balance}
+            currency={currency}
             onBlur={handleBlur}
             onChange={(e) => {
               const amount = e.target.valueAsNumber || 0
@@ -178,6 +183,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               setFieldValue('amount', amount)
             }}
             ref={inputRef}
+            spacingBottom="base"
           />
 
           <ConfirmTable>

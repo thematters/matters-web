@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -110,10 +111,10 @@ const AppreciatorsDialogContent = ({
           />
         }
         closeDialog={closeDialog}
-        closeText="close"
+        closeText={<FormattedMessage defaultMessage="Close" />}
       />
 
-      <Dialog.Content>
+      <Dialog.Content noSpacing>
         <InfiniteScroll
           loader={<Spinner />}
           loadMore={loadMore}
@@ -148,7 +149,7 @@ const AppreciatorsDialogContent = ({
       <Dialog.Footer
         smUpBtns={
           <Dialog.TextButton
-            text="close"
+            text={<FormattedMessage defaultMessage="Close" />}
             color="greyDarker"
             onClick={closeDialog}
           />

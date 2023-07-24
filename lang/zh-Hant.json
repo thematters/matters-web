@@ -124,6 +124,9 @@
   "5FO4vn": {
     "defaultMessage": "你尚無權限進行該操作"
   },
+  "5MDGuM": {
+    "defaultMessage": "請輸入你的註冊電子信箱"
+  },
   "5iii3x": {
     "defaultMessage": "圍爐：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
@@ -377,6 +380,9 @@
   "GZJpDf": {
     "defaultMessage": "數據後台"
   },
+  "GcvLBC": {
+    "defaultMessage": "我知道了"
+  },
   "GugBCe": {
     "defaultMessage": "本月新增追蹤人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -404,10 +410,6 @@
   "HzaRKA": {
     "defaultMessage": "一鍵搬家"
   },
-  "IFY8r4": {
-    "defaultMessage": "請輸入密碼",
-    "description": "src/components/Forms/EmailLoginForm/index.tsx"
-  },
   "IKPYe9": {
     "defaultMessage": "查看",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -420,12 +422,15 @@
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "J+LXrH": {
-    "defaultMessage": "持續提供信箱進入，未來可隨時啟用錢包登入",
+    "defaultMessage": "使用信箱進入，未來可隨時啟用錢包登入",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "JTWayV": {
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "JXdbo8": {
+    "defaultMessage": "完成"
   },
   "JaLEXz": {
     "defaultMessage": "進入圍爐",
@@ -606,9 +611,6 @@
   },
   "U86B6w": {
     "defaultMessage": "數據"
-  },
-  "UNUROl": {
-    "defaultMessage": "建議 50 字以內，最長 200 字"
   },
   "UOdEqi": {
     "defaultMessage": "原有透過電子信箱登入方式將為你保留。為維護你的帳戶安全，加密錢包連接後無法重設。",
@@ -797,6 +799,9 @@
     "defaultMessage": "由於你尚未發布任何作品，這裡還沒有任何數據能與你分享哦！發布第一篇作品來介紹你自己，以此開啟你的創作之旅吧！",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
+  "cyR7Kh": {
+    "defaultMessage": "返回"
+  },
   "d4waan": {
     "defaultMessage": "營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
@@ -824,18 +829,11 @@
   "eXDZGQ": {
     "defaultMessage": "主理人"
   },
-  "ei+kyp": {
-    "defaultMessage": "圍爐名稱",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "enMIYK": {
     "defaultMessage": "我的"
   },
   "eov+J2": {
     "defaultMessage": "自定義網址名稱"
-  },
-  "fG41Ux": {
-    "defaultMessage": "登出成功"
   },
   "fWDtpq": {
     "defaultMessage": "邀請中",
@@ -918,6 +916,9 @@
     "defaultMessage": "在 {circlename} 發布廣播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "k0ooDW": {
+    "defaultMessage": "標籤描述"
+  },
   "k5NnNF": {
     "defaultMessage": "追蹤了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
@@ -946,12 +947,12 @@
     "defaultMessage": "評論了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
-  "ldNgRA": {
-    "defaultMessage": "你的站內暱稱，之後可以修改",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
-  },
   "ll/ufR": {
     "defaultMessage": "熱門"
+  },
+  "m/Wg7b": {
+    "defaultMessage": "Circle Description",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "m4GG4b": {
     "defaultMessage": "刪除選集"
@@ -998,9 +999,6 @@
   },
   "nYrKWp": {
     "defaultMessage": "編輯個人資料"
-  },
-  "nsaJRn": {
-    "defaultMessage": "登入成功"
   },
   "o2Na0B": {
     "defaultMessage": "返回全部"
@@ -1061,8 +1059,14 @@
     "defaultMessage": "微博",
     "description": "src/components/Share/Buttons/Weibo.tsx"
   },
+  "rLlTQ9": {
+    "defaultMessage": "標籤名稱"
+  },
   "rXnmeE": {
     "defaultMessage": "確認發送"
+  },
+  "rbrahO": {
+    "defaultMessage": "關閉"
   },
   "reOeq5": {
     "defaultMessage": "你已擁有個人創作空間站，期待你的第一篇作品。",
@@ -1102,16 +1106,15 @@
     "defaultMessage": "你的作品 {articleTitle} 已發布到分佈式網絡",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
-  "tW3hM/": {
-    "defaultMessage": "圍爐描述",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "u5aHb4": {
     "defaultMessage": "複製鏈接"
+  },
+  "uJkv2X": {
+    "defaultMessage": "編輯標籤"
   },
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南"

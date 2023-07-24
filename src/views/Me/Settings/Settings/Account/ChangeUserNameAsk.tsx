@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { PATHS } from '~/common/enums'
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 
@@ -29,13 +31,13 @@ const Ask = ({ children }: AskProps) => {
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<Translate id="confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" />}
               href={PATHS.ME_SETTINGS_CHANGE_USERNAME}
             />
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<Translate id="confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" />}
               href={PATHS.ME_SETTINGS_CHANGE_USERNAME}
             />
           }

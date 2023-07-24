@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { OPEN_RECOMMEND_AUTHOR_DIALOG } from '~/common/enums'
 import { Dialog, SegmentedTabs, Translate, useDialogSwitch } from '~/components'
@@ -31,10 +32,10 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
         <Dialog.Header
           title={<Translate id="followAuthor" />}
           closeDialog={closeDialog}
-          closeText="close"
+          closeText={<FormattedMessage defaultMessage="Close" />}
         />
 
-        <Dialog.Content>
+        <Dialog.Content noSpacing>
           <Dialog.Message align="left" smUpAlign="left">
             <p className={styles.message}>
               <Translate
@@ -84,7 +85,7 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text="close"
+              text={<FormattedMessage defaultMessage="Close" />}
               color="greyDarker"
               onClick={closeDialog}
             />

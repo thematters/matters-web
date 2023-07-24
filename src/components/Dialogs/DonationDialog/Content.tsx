@@ -235,6 +235,7 @@ const DonationDialogContent = ({
 
       {isAddCredit && (
         <DynamicAddCreditForm
+          closeDialog={closeDialog}
           callback={() => forward('setAmount')}
           callbackText={
             <Translate

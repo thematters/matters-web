@@ -209,6 +209,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         label={
           <Translate zh_hant="輸入金額" zh_hans="输入金额" en="Enter amount" />
         }
+        hasLabel
         name="amount"
         min={0}
         max={PAYMENT_MAXIMUM_ADD_CREDIT_AMOUNT[currency]}
@@ -232,6 +233,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
           setFieldValue('amount', sanitizedAmount)
         }}
         autoFocus
+        spacingBottom="base"
       />
     </Form>
   )
@@ -260,7 +262,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         <Dialog.Footer
           btns={
             <Dialog.RoundedButton
-              text={callbackText || <Translate id="done" />}
+              text={callbackText || <FormattedMessage defaultMessage="Done" />}
               onClick={callback || closeDialog}
             />
           }
@@ -269,7 +271,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
               <Dialog.TextButton text={callbackText} onClick={callback} />
             ) : (
               <Dialog.TextButton
-                text={<Translate id="done" />}
+                text={<FormattedMessage defaultMessage="Done" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -299,23 +301,21 @@ const BaseAddCredit: React.FC<FormProps> = ({
       />
 
       <Dialog.Content>
-        <section>
-          <ConfirmTable>
-            <ConfirmTable.Row type="balance">
-              <ConfirmTable.Col>
-                <Translate id="walletBalance" />
-              </ConfirmTable.Col>
+        <ConfirmTable>
+          <ConfirmTable.Row type="balance">
+            <ConfirmTable.Col>
+              <Translate id="walletBalance" />
+            </ConfirmTable.Col>
 
-              <ConfirmTable.Col>
-                {currency} {formatAmount(balance)}
-              </ConfirmTable.Col>
-            </ConfirmTable.Row>
-          </ConfirmTable>
+            <ConfirmTable.Col>
+              {currency} {formatAmount(balance)}
+            </ConfirmTable.Col>
+          </ConfirmTable.Row>
+        </ConfirmTable>
 
-          {InnerForm}
+        {InnerForm}
 
-          <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
-        </section>
+        <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
       </Dialog.Content>
 
       <Dialog.Footer

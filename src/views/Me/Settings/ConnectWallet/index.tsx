@@ -25,10 +25,7 @@ const ConnectWallet = () => {
       <Layout.Main>
         <Head title={{ id: 'loginWithWallet' }} />
 
-        <Layout.Header
-          left={<Layout.Header.BackButton />}
-          right={<Layout.Header.Title id="loginWithWallet" />}
-        />
+        <Layout.Header left={<Layout.Header.Title id="loginWithWallet" />} />
 
         <EmptyWarning
           description={

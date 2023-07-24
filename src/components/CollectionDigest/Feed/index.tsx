@@ -3,7 +3,14 @@ import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath } from '~/common/utils'
-import { Book, Card, DateTime, IconDotDivider, Media } from '~/components'
+import {
+  Book,
+  Card,
+  DateTime,
+  IconDotDivider,
+  LinkWrapper,
+  Media,
+} from '~/components'
 import { CollectionDigestFeedCollectionFragment } from '~/gql/graphql'
 
 import DropdownActions from '../DropdownActions'
@@ -48,7 +55,9 @@ const BaseCollectionDigestFeed = ({
 
         <section className={styles.content}>
           <header className={styles.header}>
-            <h2 className={styles.title}>{title}</h2>
+            <LinkWrapper {...path}>
+              <h2 className={styles.title}>{title}</h2>
+            </LinkWrapper>
           </header>
 
           <Media at="sm">

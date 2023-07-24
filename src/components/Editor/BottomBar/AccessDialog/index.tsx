@@ -1,6 +1,7 @@
 import _get from 'lodash/get'
+import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Translate, useDialogSwitch } from '~/components'
+import { Dialog, useDialogSwitch } from '~/components'
 
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
@@ -26,7 +27,10 @@ const BaseAccessDialog = ({
   }
 
   const CloseButton = () => (
-    <Dialog.TextButton onClick={closeDialog} text={<Translate id="done" />} />
+    <Dialog.TextButton
+      onClick={closeDialog}
+      text={<FormattedMessage defaultMessage="Done" />}
+    />
   )
 
   return (

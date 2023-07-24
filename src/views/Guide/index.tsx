@@ -23,11 +23,11 @@ const Guide = () => {
 
       <Head title={{ id: 'guide' }} />
 
-      <Layout.Spacing>
+      <Layout.Main.Spacing>
         <section className="u-content" onClick={captureClicks}>
           <ReactMarkdown>{content[toLocale(lang) || 'en']}</ReactMarkdown>
         </section>
-      </Layout.Spacing>
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

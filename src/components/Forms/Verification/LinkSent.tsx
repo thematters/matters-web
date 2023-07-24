@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { Dialog, Layout, Translate } from '~/components'
 
 export const VerificationLinkSent = ({
@@ -20,7 +22,7 @@ export const VerificationLinkSent = ({
         <Dialog.Header
           title="register"
           closeDialog={closeDialog}
-          closeText="understood"
+          closeText={<FormattedMessage defaultMessage="Understood" />}
         />
       )}
 
@@ -52,7 +54,7 @@ export const VerificationLinkSent = ({
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text="understood"
+              text={<FormattedMessage defaultMessage="Understood" />}
               color="greyDarker"
               onClick={closeDialog}
             />

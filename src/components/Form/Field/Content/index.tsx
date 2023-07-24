@@ -9,7 +9,7 @@ const Content: React.FC<React.PropsWithChildren<ContentProps>> = ({
 }) => {
   const contentClass = classNames({
     [styles.content]: true,
-    inputContainer: true, // global selector for `@mixin form-container`
+    inputContainer: true, // global selector for `src/components/Forms/CreateCircleForm/styles.module.css`
   })
 
   return <section className={contentClass}>{children}</section>

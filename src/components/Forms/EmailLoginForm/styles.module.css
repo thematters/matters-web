@@ -1,28 +1,20 @@
-.container {
-  @mixin form-container;
-}
+.otherOptions {
+  padding: var(--spacing-tight);
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+  color: var(--color-grey);
+  text-align: center;
 
-.altButtons {
-  @mixin flex-center-start;
+  & .option {
+    @mixin flex-center-all;
 
-  margin-bottom: var(--spacing-x-loose);
-  font-size: var(--font-size-md);
-  line-height: 1.5rem;
-  color: var(--color-grey-dark);
-  white-space: pre-wrap;
+    & + .option {
+      margin-top: var(--spacing-tight);
+    }
 
-  & a,
-  & button {
-    color: var(--color-matters-green);
+    & a,
+    & button {
+      color: var(--color-matters-green);
+    }
   }
-
-  &:not(.isInPage) {
-    padding: 0 var(--spacing-base);
-  }
-}
-
-.footer {
-  @mixin flex-center-all;
-
-  margin: var(--spacing-x-loose) 0;
 }

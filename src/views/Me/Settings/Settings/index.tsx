@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Head, Layout, ResponsiveWrapper, Spacer } from '~/components'
+import { Head, Layout, Spacer } from '~/components'
 
 import AccountSettings from './Account'
 import UISettings from './UI'
@@ -12,11 +12,11 @@ const Settings = () => {
       <Layout.Header left={<Layout.Header.Title id="settings" />} />
       <Head title={{ id: 'settings' }} />
 
-      <ResponsiveWrapper>
+      <Layout.Main.Spacing>
         <UISettings />
         <AccountSettings />
         <WalletSettings />
-      </ResponsiveWrapper>
+      </Layout.Main.Spacing>
 
       <Spacer size="xxxloose" />
     </Layout.Main>

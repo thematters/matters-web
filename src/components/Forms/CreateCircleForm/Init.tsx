@@ -4,6 +4,8 @@ import { useContext, useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
+  MAX_CIRCLE_DISPLAY_NAME_LENGTH,
+  MAX_CIRCLE_NAME_LENGTH,
   PAYMENT_CURRENCY,
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
   PAYMENT_MINIMAL_CIRCLE_AMOUNT,
@@ -45,6 +47,7 @@ const Init: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
+  const intl = useIntl()
   const [create] = useMutation<PutCircleMutation>(PUT_CIRCLE, undefined, {
     showToast: false,
   })
@@ -54,7 +57,6 @@ const Init: React.FC<FormProps> = ({
   const isInPage = purpose === 'page'
   const formId = 'create-circle-init-form'
 
-  const intl = useIntl()
   const {
     values,
     errors,
@@ -133,79 +135,88 @@ const Init: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <section className={styles.container}>
-      <Form id={formId} onSubmit={handleSubmit}>
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<FormattedMessage defaultMessage="Circle Name" />}
+        hasLabel
+        type="text"
+        name="displayName"
+        required
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter the name of your Circle',
+        })}
+        value={values.displayName}
+        hint={`${values.displayName.length}/${MAX_CIRCLE_DISPLAY_NAME_LENGTH}`}
+        error={touched.displayName && errors.displayName}
+        hintAlign={touched.displayName && errors.displayName ? 'left' : 'right'}
+        maxLength={MAX_CIRCLE_DISPLAY_NAME_LENGTH}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        spacingBottom="base"
+      />
+
+      <section className={styles.nameInput}>
         <Form.Input
-          label={<FormattedMessage defaultMessage="Circle Name" />}
-          type="text"
-          name="displayName"
-          required
-          placeholder={intl.formatMessage({
-            defaultMessage: 'Enter the name of your Circle',
-          })}
-          value={values.displayName}
-          error={touched.displayName && errors.displayName}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-
-        <section className="displayNameInput">
-          <Form.Input
-            label={
-              <FormattedMessage
-                defaultMessage="Set the Circle URL (cannot be modified after creation)"
-                description="src/components/Forms/CreateCircleForm/Init.tsx"
-              />
-            }
-            type="text"
-            name="name"
-            required
-            placeholder={intl.formatMessage({
-              defaultMessage: 'Custom URL Name',
-            })}
-            value={values.name}
-            error={touched.name && errors.name}
-            onBlur={handleBlur}
-            onChange={(e) => {
-              const name = normalizeName(e.target.value)
-              setFieldValue('name', name)
-              return name
-            }}
-          />
-        </section>
-
-        <Form.AmountInput
-          required
-          min={PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}
-          max={PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}
-          currency={PAYMENT_CURRENCY.HKD}
           label={
             <FormattedMessage
-              defaultMessage="Set threshold for circle (per month)"
+              defaultMessage="Set the Circle URL (cannot be modified after creation)"
               description="src/components/Forms/CreateCircleForm/Init.tsx"
             />
           }
-          name="amount"
-          value={values.amount}
-          error={touched.amount && errors.amount}
+          hasLabel
+          type="text"
+          name="name"
+          required
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Custom URL Name',
+          })}
+          value={values.name}
+          hint={`${values.name.length}/${MAX_CIRCLE_NAME_LENGTH}`}
+          error={touched.name && errors.name}
+          hintAlign={touched.name && errors.name ? 'left' : 'right'}
+          maxLength={MAX_CIRCLE_NAME_LENGTH}
           onBlur={handleBlur}
           onChange={(e) => {
-            const amount = e.target.valueAsNumber || 0
-            const sanitizedAmount = Math.min(
-              Math.floor(amount),
-              PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD
-            )
-
-            // remove extra left pad 0
-            if (inputRef.current) {
-              inputRef.current.value = sanitizedAmount
-            }
-            setFieldValue('amount', sanitizedAmount)
+            const name = normalizeName(e.target.value)
+            setFieldValue('name', name)
+            return name
           }}
-          ref={inputRef}
+          spacingBottom="base"
         />
-      </Form>
-    </section>
+      </section>
+
+      <Form.AmountInput
+        label={
+          <FormattedMessage
+            defaultMessage="Set threshold for circle (per month)"
+            description="src/components/Forms/CreateCircleForm/Init.tsx"
+          />
+        }
+        hasLabel
+        required
+        min={PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}
+        max={PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}
+        currency={PAYMENT_CURRENCY.HKD}
+        name="amount"
+        value={values.amount}
+        error={touched.amount && errors.amount}
+        onBlur={handleBlur}
+        onChange={(e) => {
+          const amount = e.target.valueAsNumber || 0
+          const sanitizedAmount = Math.min(
+            Math.floor(amount),
+            PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD
+          )
+
+          // remove extra left pad 0
+          if (inputRef.current) {
+            inputRef.current.value = sanitizedAmount
+          }
+          setFieldValue('amount', sanitizedAmount)
+        }}
+        ref={inputRef}
+      />
+    </Form>
   )
 
   const SubmitButton = (
@@ -235,7 +246,8 @@ const Init: React.FC<FormProps> = ({
             </>
           }
         />
-        {InnerForm}
+
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }

@@ -1,3 +1,4 @@
+import { FormattedMessage } from 'react-intl'
 import { useDisconnect } from 'wagmi'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
@@ -63,7 +64,7 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
   return (
     <WrapperButton
       mode={mode}
-      text="nextStep"
+      text={<FormattedMessage defaultMessage="Next Step" />}
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting || isBalanceInsufficient}
@@ -88,7 +89,7 @@ const LIKESubmitButton: React.FC<SubmitButtonProps> = ({
 
       <WrapperButton
         mode={mode}
-        text="nextStep"
+        text={<FormattedMessage defaultMessage="Next Step" />}
         type="submit"
         form={formId}
         disabled={!isValid || isSubmitting || isBalanceInsufficient}
@@ -176,7 +177,7 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
     return (
       <WrapperButton
         mode={mode}
-        text={<Translate id="nextStep" />}
+        text={<FormattedMessage defaultMessage="Next Step" />}
         type="submit"
         form={formId}
         disabled={!isValid || isSubmitting || isBalanceInsufficient}

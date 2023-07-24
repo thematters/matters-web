@@ -8,6 +8,7 @@ import {
   DateTime,
   IconArrowDown20,
   IconArrowUp20,
+  Layout,
   List,
   Spinner,
   TextIcon,
@@ -82,8 +83,9 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
           )}
         </button>
       </section>
-      <section>
-        <List responsiveWrapper>
+
+      <Layout.Main.Spacing hasVertical={false}>
+        <List>
           {articleEdges &&
             articleEdges.map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
@@ -107,7 +109,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
             ))}
           <EndOfResults message={true} />
         </List>
-      </section>
+      </Layout.Main.Spacing>
     </>
   )
 }

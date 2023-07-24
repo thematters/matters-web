@@ -111,7 +111,7 @@ const MyAnalytics = () => {
     <Layout.Main>
       <Header />
 
-      <section className={styles.container}>
+      <Layout.Main.Spacing hasVertical={false}>
         {edges?.length === 0 && (
           <section className={styles.noSupporter}>
             <section className={styles.noSupporterImg}>
@@ -123,7 +123,7 @@ const MyAnalytics = () => {
           </section>
         )}
 
-        <List responsiveWrapper>
+        <List>
           {edges?.map(({ node, cursor, donationCount }, i) => (
             <List.Item key={cursor}>
               <SupporterDigestFeed
@@ -134,7 +134,7 @@ const MyAnalytics = () => {
             </List.Item>
           ))}
         </List>
-      </section>
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

@@ -61,14 +61,6 @@
     padding-bottom: 0;
   }
 
-  &.bgGreyLighter {
-    background: var(--color-grey-lighter);
-
-    @media (--sm-up) {
-      background: none;
-    }
-  }
-
   &.hasNavBar {
     padding-bottom: var(--global-nav-height);
 

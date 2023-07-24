@@ -75,6 +75,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
     })
   }
 
+  if (collection.author.id !== viewer.id) {
+    return null
+  }
+
   return (
     <EditCollection.Dialog collection={collection}>
       {({ openDialog: openEditDialog }) => (

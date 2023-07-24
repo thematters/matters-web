@@ -1,18 +1,30 @@
 .content {
+  display: flex;
+  flex-direction: column;
   flex-shrink: 1;
-  padding: var(--spacing-base);
+  max-height: 70vh;
+  margin-bottom: var(--spacing-xx-loose);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
+  &.fixedHeight {
+    height: 70vh;
+
+    @media (--sm-up) {
+      height: 26rem;
+    }
+  }
+
+  @media (--sm-up) {
+    max-height: 26rem;
+    margin-bottom: 0;
+  }
+}
+
+.spacing {
+  padding: var(--spacing-base) var(--spacing-base) 0 var(--spacing-base);
+
   @media (--md-up) {
     padding: 0 var(--spacing-base-loose);
-  }
-
-  &.noSpacing {
-    padding: 0;
-  }
-
-  &.hasFixed {
-    flex-shrink: 0;
   }
 }

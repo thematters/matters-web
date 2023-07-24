@@ -13,7 +13,15 @@
   }
 }
 
-.donation {
+.tabs {
+  margin: calc(var(--spacing-x-tight) * -1) calc(var(--spacing-base) * -1) 0;
+
+  @media (--sm-up) {
+    margin: calc(var(--spacing-base) * -1) 0 0;
+  }
+}
+
+.preview {
   position: relative;
   padding: var(--spacing-base);
   margin: var(--spacing-base) 0;
@@ -27,32 +35,18 @@
     font-weight: var(--font-weight-normal);
     line-height: 1.5rem;
     color: var(--color-black);
+
+    & .tagline {
+      font-size: var(--font-size-md-s);
+      font-weight: var(--font-weight-medium);
+    }
   }
-}
 
-.tabs {
-  margin: calc(var(--spacing-x-tight) * -1) calc(var(--spacing-base) * -1) 0;
+  & .button {
+    margin: var(--spacing-base) 0 0;
 
-  @media (--sm-up) {
-    margin: calc(var(--spacing-base) * -1) 0;
-  }
-}
-
-.form {
-  margin: 0 calc(var(--spacing-base) * -1);
-}
-
-.previewResponse {
-  & p {
-    font-size: var(--font-size-md-s);
-    font-weight: var(--font-weight-medium);
-  }
-}
-
-.previewButton {
-  margin: var(--spacing-base) 0 0;
-
-  & button {
-    width: 100%;
+    & button {
+      width: 100%;
+    }
   }
 }

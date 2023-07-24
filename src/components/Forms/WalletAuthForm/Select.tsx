@@ -15,7 +15,6 @@ import {
   Layout,
   Media,
   TextIcon,
-  Translate,
   ViewerContext,
 } from '~/components'
 
@@ -120,13 +119,9 @@ const Select: React.FC<FormProps> = ({
     }
   }
 
-  const containerClasses = classNames({
-    [styles.container]: !!isInPage,
-  })
-
   const Intro = () => {
     return (
-      <section className={[containerClasses, styles.intro].join(' ')}>
+      <section className={styles.intro}>
         <Dialog.Message align="left" smUpAlign="left">
           <ul>
             <li>
@@ -163,14 +158,14 @@ const Select: React.FC<FormProps> = ({
     )
   }
 
-  const msgClasses = classNames({
-    [styles.msg]: true,
-    [styles.isInDialog]: isInDialog,
+  const formClasses = classNames({
+    [styles.form]: true,
+    [styles.inDialog]: isInDialog,
   })
 
   const InnerForm = (
-    <Form id={formId} onSubmit={submitCallback}>
-      <section className={containerClasses}>
+    <section className={formClasses}>
+      <Form id={formId} onSubmit={submitCallback}>
         {isConnect && (
           <Form.List
             groupName={
@@ -257,16 +252,16 @@ const Select: React.FC<FormProps> = ({
             }
           />
         </Form.List>
-      </section>
 
-      <section className={msgClasses}>
-        <Form.Field.Footer
-          fieldMsgId={fieldMsgId}
-          hint={errorMessage ? undefined : <Hint />}
-          error={errorMessage}
-        />
-      </section>
-    </Form>
+        <section className={styles.container}>
+          <Form.Field.Footer
+            fieldMsgId={fieldMsgId}
+            hint={errorMessage ? undefined : <Hint />}
+            error={errorMessage}
+          />
+        </section>
+      </Form>
+    </section>
   )
 
   if (isInPage) {
@@ -282,7 +277,7 @@ const Select: React.FC<FormProps> = ({
 
         {isConnect && <Intro />}
 
-        {InnerForm}
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
@@ -294,7 +289,7 @@ const Select: React.FC<FormProps> = ({
         leftBtn={
           back ? (
             <Dialog.TextButton
-              text={<Translate id="back" />}
+              text={<FormattedMessage defaultMessage="Back" />}
               onClick={onBack}
             />
           ) : null

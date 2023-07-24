@@ -1,7 +1,7 @@
 import { FormikProvider } from 'formik'
 import { useState } from 'react'
 
-import { Form, InfiniteScroll, Spinner } from '~/components'
+import { Form, InfiniteScroll } from '~/components'
 import {
   CollectionDetailFragment,
   UserArticlesUserFragment,
@@ -53,46 +53,44 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   }
 
   return (
-    <section className={styles.formContainer}>
-      <InfiniteScroll
-        hasNextPage={loadedArticles.length < (articles.edges?.length as number)}
-        loadMore={loadMore}
-        loader={<Spinner />}
-      >
-        <FormikProvider value={formik}>
-          <Form
-            id={formId}
-            onSubmit={formik.handleSubmit}
-            className={styles.listForm}
-          >
-            {loadedArticles.map(
-              ({ node }) =>
-                node.state === 'active' && (
-                  <section key={node.id} className={styles.item}>
-                    <Form.SquareCheckBox
-                      key={node.id}
-                      hasTooltip={true}
-                      checked={
-                        hasChecked.includes(node.id) ||
-                        checkingIds.includes(node.id)
-                      }
-                      hint={node.title}
-                      disabled={hasChecked.includes(node.id)}
-                      {...formik.getFieldProps('checked')}
-                      value={node.id}
-                    />
-                    {checkingIds.includes(node.id) && (
-                      <div className={styles.index}>
-                        {checkingIds.indexOf(node.id) + 1}
-                      </div>
-                    )}
-                  </section>
-                )
-            )}
-          </Form>
-        </FormikProvider>
-      </InfiniteScroll>
-    </section>
+    <InfiniteScroll
+      hasNextPage={loadedArticles.length < (articles.edges?.length as number)}
+      loadMore={loadMore}
+      loader={null}
+    >
+      <FormikProvider value={formik}>
+        <Form
+          id={formId}
+          onSubmit={formik.handleSubmit}
+          className={styles.form}
+        >
+          {loadedArticles.map(
+            ({ node }) =>
+              node.state === 'active' && (
+                <section key={node.id} className={styles.item}>
+                  <Form.SquareCheckBox
+                    key={node.id}
+                    hasTooltip={true}
+                    checked={
+                      hasChecked.includes(node.id) ||
+                      checkingIds.includes(node.id)
+                    }
+                    hint={node.title}
+                    disabled={hasChecked.includes(node.id)}
+                    {...formik.getFieldProps('checked')}
+                    value={node.id}
+                  />
+                  {checkingIds.includes(node.id) && (
+                    <span className={styles.index}>
+                      {checkingIds.indexOf(node.id) + 1}
+                    </span>
+                  )}
+                </section>
+              )
+          )}
+        </Form>
+      </FormikProvider>
+    </InfiniteScroll>
   )
 }
 

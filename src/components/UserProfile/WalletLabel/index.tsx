@@ -159,7 +159,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
               )}
 
               <Dialog.RoundedButton
-                text="close"
+                text={<FormattedMessage defaultMessage="Close" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -168,7 +168,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
           smUpBtns={
             <>
               <Dialog.TextButton
-                text="close"
+                text={<FormattedMessage defaultMessage="Close" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />

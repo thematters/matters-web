@@ -34,7 +34,11 @@ const BaseWriteButton = ({
   const { lang } = useContext(LanguageContext)
 
   return (
-    <Tooltip content={translate({ id: 'write', lang })} placement="left">
+    <Tooltip
+      content={translate({ id: 'write', lang })}
+      placement="left"
+      delay={[1000, null]}
+    >
       <Button
         bgActiveColor="greyLighter"
         size={['2rem', '2rem']}

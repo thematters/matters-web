@@ -328,7 +328,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           <PublishState article={article} cancel={onCancel} />
         )}
 
-        <Layout.Spacing>
+        <Layout.Main.Spacing>
           <Editor
             draft={draft}
             update={async (update) => {
@@ -336,7 +336,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
             }}
             upload={async () => ({ id: '', path: '' })}
           />
-        </Layout.Spacing>
+        </Layout.Main.Spacing>
 
         <Media lessThan="lg">
           <SupportSettingDialog

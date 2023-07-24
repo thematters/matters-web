@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { PATHS } from '~/common/enums'
 import { Dialog, Translate } from '~/components'
 
@@ -41,12 +43,15 @@ const MigrationDialogSuccess = () => {
       <Dialog.Footer
         btns={
           <Dialog.RoundedButton
-            text={<Translate id="back" />}
+            text={<FormattedMessage defaultMessage="Back" />}
             href={PATHS.HOME}
           />
         }
         smUpBtns={
-          <Dialog.TextButton text={<Translate id="back" />} href={PATHS.HOME} />
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            href={PATHS.HOME}
+          />
         }
       />
     </>

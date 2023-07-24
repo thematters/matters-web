@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
@@ -22,20 +21,13 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  LanguageSwitch,
   Layout,
-  toast,
-  Translate,
+  // toast,
   useMutation,
 } from '~/components'
 import { UserLoginMutation } from '~/gql/graphql'
 
-import {
-  EmailSignUpDialogButton,
-  PasswordResetDialogButton,
-  PasswordResetRedirectButton,
-} from './Buttons'
-import styles from './styles.module.css'
+import OtherOptions from './OtherOptions'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -84,7 +76,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   })
   const { lang } = useContext(LanguageContext)
 
-  const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
   const formId = 'email-login-form'
 
@@ -128,9 +119,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           submitCallback()
         }
 
-        toast.success({
-          message: <FormattedMessage defaultMessage="Logged in successfully" />,
-        })
+        // toast.success({
+        //   message: <FormattedMessage defaultMessage="Logged in successfully" />,
+        // })
 
         analytics.identifyUser()
 
@@ -154,10 +145,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     },
   })
 
-  const containerClasses = classNames({ [styles.container]: !!isInPage })
-
   const InnerForm = (
-    <section className={containerClasses}>
+    <>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<FormattedMessage defaultMessage="Email" />}
@@ -165,12 +154,13 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           name="email"
           required
           placeholder={intl.formatMessage({
-            defaultMessage: 'Enter Email',
+            defaultMessage: 'Email',
           })}
           value={values.email}
           error={touched.email && errors.email}
           onBlur={handleBlur}
           onChange={handleChange}
+          spacingBottom="base"
         />
 
         <Form.Input
@@ -179,33 +169,22 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           name="password"
           required
           placeholder={intl.formatMessage({
-            defaultMessage: 'Enter Password',
-            description: 'src/components/Forms/EmailLoginForm/index.tsx',
+            defaultMessage: 'Password',
           })}
           value={values.password}
           error={touched.password && errors.password}
           onBlur={handleBlur}
           onChange={handleChange}
-          extraButton={
-            <>
-              {isInDialog && gotoResetPassword && (
-                <PasswordResetDialogButton
-                  gotoResetPassword={gotoResetPassword}
-                />
-              )}
-              {isInPage && <PasswordResetRedirectButton />}
-            </>
-          }
+          spacingBottom="base"
         />
-
-        {gotoEmailSignUp && (
-          <EmailSignUpDialogButton
-            gotoEmailSignUp={gotoEmailSignUp}
-            isInPage={isInPage}
-          />
-        )}
       </Form>
-    </section>
+
+      <OtherOptions
+        isInPage={isInPage}
+        gotoResetPassword={gotoResetPassword}
+        gotoEmailSignUp={gotoEmailSignUp}
+      />
+    </>
   )
 
   const SubmitButton = (
@@ -236,11 +215,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           }
         />
 
-        {InnerForm}
-
-        <footer className={styles.footer}>
-          <LanguageSwitch />
-        </footer>
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
@@ -251,7 +226,10 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         title="login"
         leftBtn={
           back ? (
-            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
           ) : null
         }
         closeDialog={closeDialog}

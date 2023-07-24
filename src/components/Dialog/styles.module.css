@@ -10,7 +10,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  max-height: 80vh;
   overflow: hidden;
   background: var(--color-white);
   border-radius: var(--spacing-x-tight) var(--spacing-x-tight) 0 0;

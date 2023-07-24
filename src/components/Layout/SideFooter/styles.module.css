@@ -8,7 +8,11 @@
 .links {
   @mixin flex-center-space-between;
 
-  font-size: var(--font-size-sm-s);
-  line-height: 1rem;
+  font-size: var(--font-size-xs);
+  line-height: 1.125rem;
   color: var(--color-grey);
+}
+
+.dot {
+  color: var(--color-grey-light);
 }

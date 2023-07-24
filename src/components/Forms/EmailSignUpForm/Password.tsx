@@ -168,6 +168,7 @@ const Password: React.FC<FormProps> = ({
         hint={
           <FormattedMessage defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed" />
         }
+        spacingBottom="base"
       />
 
       <Form.Input
@@ -209,21 +210,19 @@ const Password: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton />}
+          left={<Layout.Header.Title id="register" />}
           right={
-            <>
-              <Layout.Header.Title id="register" />
-              <Layout.Header.RightButton
-                type="submit"
-                form={formId}
-                disabled={isSubmitting}
-                text={<FormattedMessage defaultMessage="Confirm" />}
-                loading={isSubmitting}
-              />
-            </>
+            <Layout.Header.RightButton
+              type="submit"
+              form={formId}
+              disabled={isSubmitting}
+              text={<FormattedMessage defaultMessage="Confirm" />}
+              loading={isSubmitting}
+            />
           }
         />
-        {InnerForm}
+
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }

@@ -86,7 +86,7 @@ const FollowingFeed = () => {
         loadMore={loadMore}
         eof
       >
-        <List responsiveWrapper>
+        <List>
           {edges.map(({ node }, i) => (
             <List.Item key={`${node.__typename}:${i}`}>
               {node.__typename === 'UserPublishArticleActivity' && (

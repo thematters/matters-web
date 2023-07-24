@@ -53,7 +53,7 @@ const NFTCollection: React.FC<NFTCollectionProps> = ({ nfts, setField }) => {
 
   const intl = useIntl()
   return (
-    <Form.Field>
+    <Form.Field spacingTop="base" spacingBottom="base">
       <Form.Field.Header
         label={
           <FormattedMessage

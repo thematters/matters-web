@@ -6,6 +6,7 @@ import {
   ArticleDigestFeed,
   EmptyArticle,
   InfiniteScroll,
+  Layout,
   List,
   QueryError,
   Spinner,
@@ -142,13 +143,13 @@ const CircleDetailWorks = () => {
     <>
       <CircleDetailTabs />
 
-      <section>
+      <Layout.Main.Spacing hasVertical={false}>
         <InfiniteScroll
           hasNextPage={pageInfo.hasNextPage}
           loadMore={loadMore}
           eof
         >
-          <List responsiveWrapper>
+          <List>
             {(edges || []).map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
                 <ArticleDigestFeed
@@ -168,7 +169,7 @@ const CircleDetailWorks = () => {
             ))}
           </List>
         </InfiniteScroll>
-      </section>
+      </Layout.Main.Spacing>
     </>
   )
 }

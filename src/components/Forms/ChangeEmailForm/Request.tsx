@@ -21,8 +21,6 @@ import {
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { ConfirmVerificationCodeMutation } from '~/gql/graphql'
 
-import styles from '../styles.module.css'
-
 interface FormProps {
   defaultEmail: string
   purpose: 'dialog' | 'page'
@@ -95,41 +93,42 @@ const Request: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <section className={styles.container}>
-      <Form id={formId} onSubmit={handleSubmit}>
-        <Form.Input
-          label={<Translate id="email" />}
-          type="email"
-          name="email"
-          disabled
-          required
-          value={values.email}
-          error={touched.email && errors.email}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<Translate id="email" />}
+        hasLabel
+        type="email"
+        name="email"
+        disabled
+        required
+        value={values.email}
+        error={touched.email && errors.email}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        spacingBottom="base"
+      />
 
-        <Form.Input
-          label={<Translate id="verificationCode" />}
-          type="text"
-          name="code"
-          required
-          placeholder={translate({ id: 'enterVerificationCode', lang })}
-          hint={translate({ id: 'hintVerificationCode', lang })}
-          value={values.code}
-          error={touched.code && errors.code}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          extraButton={
-            <VerificationSendCodeButton
-              email={values.email}
-              type="email_reset"
-              disabled={!!errors.email}
-            />
-          }
-        />
-      </Form>
-    </section>
+      <Form.Input
+        label={<Translate id="verificationCode" />}
+        hasLabel
+        type="text"
+        name="code"
+        required
+        placeholder={translate({ id: 'enterVerificationCode', lang })}
+        hint={translate({ id: 'hintVerificationCode', lang })}
+        value={values.code}
+        error={touched.code && errors.code}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        extraButton={
+          <VerificationSendCodeButton
+            email={values.email}
+            type="email_reset"
+            disabled={!!errors.email}
+          />
+        }
+      />
+    </Form>
   )
 
   const SubmitButton = (
@@ -137,7 +136,7 @@ const Request: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<Translate id="nextStep" />}
+      text={<FormattedMessage defaultMessage="Next Step" />}
       loading={isSubmitting}
     />
   )
@@ -154,13 +153,14 @@ const Request: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={<Translate id="nextStep" />}
+                text={<FormattedMessage defaultMessage="Next Step" />}
                 loading={isSubmitting}
               />
             </>
           }
         />
-        {InnerForm}
+
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }

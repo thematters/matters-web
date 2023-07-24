@@ -172,9 +172,9 @@ const DraftDetail = () => {
 
       <PublishState draft={draft} />
 
-      <Layout.Spacing>
+      <Layout.Main.Spacing>
         <Editor draft={draft} update={update} upload={upload} />
-      </Layout.Spacing>
+      </Layout.Main.Spacing>
 
       <Media lessThan="lg">
         <BottomBar draft={draft} ownCircles={ownCircles} />

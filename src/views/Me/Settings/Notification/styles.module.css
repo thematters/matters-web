@@ -35,11 +35,11 @@
 }
 
 .title {
-  margin: 2rem 0 1rem;
+  margin: var(--spacing-loose) 0 var(--spacing-base);
 
   & h2 {
-    margin: 0 0 8px;
-    font-size: 18px;
+    margin: 0 0 var(--spacing-x-tight);
+    font-size: 1.125rem;
     color: var(--color-black);
   }
 

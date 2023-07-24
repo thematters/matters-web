@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog } from '~/components'
 import SelectLicense from '~/components/Editor/ToggleAccess/SelectLicense'
 import { ArticleLicenseType } from '~/gql/graphql'
 
@@ -33,12 +33,15 @@ const ConfirmContent: React.FC<ContentProps> = ({
       <Dialog.Header
         title="addArticles"
         leftBtn={
-          <Dialog.TextButton text={<Translate id="back" />} onClick={onBack} />
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            onClick={onBack}
+          />
         }
         rightBtn={<ConfirmButton />}
       />
 
-      <Dialog.Content hasFixed>
+      <Dialog.Content fixedHeight>
         <SelectLicense
           isInCircle
           license={license}
@@ -51,7 +54,7 @@ const ConfirmContent: React.FC<ContentProps> = ({
           <>
             <Dialog.TextButton
               color="greyDarker"
-              text={<Translate id="back" />}
+              text={<FormattedMessage defaultMessage="Back" />}
               onClick={onBack}
             />
             <ConfirmButton />

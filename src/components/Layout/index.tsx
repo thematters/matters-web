@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import Sticky from 'react-stickynode'
 
-import { capitalizeFirstLetter } from '~/common/utils'
 import {
   Head,
   Media,
@@ -47,7 +46,6 @@ const DynamicOnboardingTasksWidget = dynamic(
 export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Main: typeof Main
   Header: typeof Header
-  Spacing: typeof Spacing
   FixedMain: typeof FixedMain
   AuthHeader: typeof AuthHeader
   Notice: typeof Notice
@@ -86,16 +84,12 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
 interface MainProps {
   aside?: React.ReactNode
-  smBgColor?: 'greyLighter'
   inEditor?: boolean
 }
 
-const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
-  aside,
-  smBgColor,
-  inEditor,
-  children,
-}) => {
+const Main: React.FC<React.PropsWithChildren<MainProps>> & {
+  Spacing: typeof Spacing
+} = ({ aside, inEditor, children }) => {
   const { isInPath } = useRoute()
   const isInHome = isInPath('HOME')
   const isInSettings = isInPath('SETTINGS')
@@ -110,8 +104,6 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
 
   const articleClasses = classNames({
     [styles.article]: true,
-    [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
-      !!smBgColor,
     [styles.hasNavBar]: !isInArticleDetail && !isInDraftDetail,
     [styles.hasOnboardingTasks]: showOnboardingTasks,
   })
@@ -154,9 +146,10 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   )
 }
 
+Main.Spacing = Spacing
+
 Layout.Main = Main
 Layout.Header = Header
-Layout.Spacing = Spacing
 Layout.FixedMain = FixedMain
 Layout.AuthHeader = AuthHeader
 Layout.Notice = Notice

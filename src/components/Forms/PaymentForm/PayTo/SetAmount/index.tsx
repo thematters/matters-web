@@ -235,7 +235,7 @@ const SetAmount: React.FC<FormProps> = ({
   const ComposedAmountInputHint = () => {
     const hkdHint = isHKD ? (
       <section>
-        <Spacer />
+        <Spacer size="base" />
         <Translate
           zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
           zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
@@ -245,10 +245,6 @@ const SetAmount: React.FC<FormProps> = ({
     ) : null
 
     const value = values.customAmount || values.amount
-
-    if (value === 0) {
-      return hkdHint
-    }
 
     const rate = _get(exchangeRateDate, 'exchangeRates.0.rate', 0)
     const convertedTotal = formatAmount(value * rate, 2)
@@ -363,6 +359,7 @@ const SetAmount: React.FC<FormProps> = ({
           hint: <ComposedAmountInputHint />,
           ref: customInputRef,
         }}
+        spacingTop="base"
       />
     </Form>
   )
@@ -436,7 +433,7 @@ const SetAmount: React.FC<FormProps> = ({
           <>
             <SubmitBtn mode="rounded" />
             <Dialog.RoundedButton
-              text="back"
+              text={<FormattedMessage defaultMessage="Back" />}
               color="greyDarker"
               onClick={back}
             />
@@ -444,7 +441,11 @@ const SetAmount: React.FC<FormProps> = ({
         }
         smUpBtns={
           <>
-            <Dialog.TextButton text="back" color="greyDarker" onClick={back} />
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              color="greyDarker"
+              onClick={back}
+            />
             <SubmitBtn mode="text" />
           </>
         }

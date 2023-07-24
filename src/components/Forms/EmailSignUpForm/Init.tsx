@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
@@ -16,10 +15,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  LanguageSwitch,
   Layout,
-  Spacer,
-  Translate,
   //  ReCaptchaContext,
   useMutation,
 } from '~/components'
@@ -117,43 +113,39 @@ const Init: React.FC<FormProps> = ({
     },
   })
 
-  const containerClasses = classNames({
-    [styles.container]: true,
-    [styles.isInPage]: !!isInPage,
-  })
-
   const InnerForm = (
-    <section className={containerClasses}>
-      <Form id={formId} onSubmit={handleSubmit}>
-        <Form.Input
-          label={<FormattedMessage defaultMessage="Display Name" />}
-          type="text"
-          name="displayName"
-          required
-          placeholder={intl.formatMessage({
-            defaultMessage: 'Display name, can be changed later',
-            description: 'src/components/Forms/EmailSignUpForm/Init.tsx',
-          })}
-          value={values.displayName}
-          error={touched.displayName && errors.displayName}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<FormattedMessage defaultMessage="Display Name" />}
+        type="text"
+        name="displayName"
+        required
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Display Name',
+        })}
+        value={values.displayName}
+        error={touched.displayName && errors.displayName}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        spacingBottom="base"
+      />
 
-        <Form.Input
-          label={<FormattedMessage defaultMessage="Email" />}
-          type="email"
-          name="email"
-          required
-          placeholder={intl.formatMessage({
-            defaultMessage: 'Email',
-          })}
-          value={values.email}
-          error={touched.email && errors.email}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+      <Form.Input
+        label={<FormattedMessage defaultMessage="Email" />}
+        type="email"
+        name="email"
+        required
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Email',
+        })}
+        value={values.email}
+        error={touched.email && errors.email}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        spacingBottom="base"
+      />
 
+      <section className={styles.tos}>
         <Form.CheckBox
           name="tos"
           checked={values.tos}
@@ -172,10 +164,8 @@ const Init: React.FC<FormProps> = ({
           }
           required
         />
-      </Form>
-
-      <Spacer size="base" />
-    </section>
+      </section>
+    </Form>
   )
 
   const SubmitButton = (
@@ -206,11 +196,7 @@ const Init: React.FC<FormProps> = ({
           }
         />
 
-        {InnerForm}
-
-        <footer className={styles.footer}>
-          <LanguageSwitch />
-        </footer>
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
@@ -221,7 +207,10 @@ const Init: React.FC<FormProps> = ({
         title="register"
         leftBtn={
           back ? (
-            <Dialog.TextButton text={<Translate id="back" />} onClick={back} />
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
           ) : null
         }
         closeDialog={closeDialog}

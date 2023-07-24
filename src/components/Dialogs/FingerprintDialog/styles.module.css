@@ -1,13 +1,8 @@
 .container {
-  padding: 0 var(--spacing-base);
   text-align: left;
 
   & > .card + .card {
     margin-top: var(--spacing-base);
-  }
-
-  @media (--md-up) {
-    padding: 0 var(--spacing-base-loose);
   }
 }
 

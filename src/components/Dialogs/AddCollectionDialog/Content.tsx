@@ -19,8 +19,6 @@ import updateUserArticles from '~/components/GQL/updates/userArticles'
 import updateUserCollections from '~/components/GQL/updates/userCollections'
 import { CreateCollectionMutation } from '~/gql/graphql'
 
-import styles from './styles.module.css'
-
 type Collection = CreateCollectionMutation['putCollection']
 interface FormProps {
   closeDialog: () => void
@@ -125,27 +123,26 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <section className={styles.container}>
-        <Form.Input
-          type="text"
-          name="title"
-          required
-          placeholder={intl.formatMessage({
-            defaultMessage: 'Collection Name',
-          })}
-          hint={`${values.title.length}/${maxCollectionTitle}`}
-          value={values.title}
-          error={touched.title && errors.title}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          maxLength={maxCollectionTitle}
-          onKeyDown={(e) => {
-            if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
-              e.stopPropagation()
-            }
-          }}
-        />
-      </section>
+      <Form.Input
+        type="text"
+        name="title"
+        required
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Collection Name',
+        })}
+        value={values.title}
+        hint={`${values.title.length}/${maxCollectionTitle}`}
+        error={touched.title && errors.title}
+        hintAlign={touched.title && errors.title ? 'left' : 'right'}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        maxLength={maxCollectionTitle}
+        onKeyDown={(e) => {
+          if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
+            e.stopPropagation()
+          }
+        }}
+      />
     </Form>
   )
 

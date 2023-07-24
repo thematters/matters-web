@@ -207,9 +207,9 @@ const OAuthAuthorize = () => (
   <Layout.Main>
     <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
 
-    <Layout.Spacing>
+    <Layout.Main.Spacing>
       <BaseOAuthAuthorize />
-    </Layout.Spacing>
+    </Layout.Main.Spacing>
   </Layout.Main>
 )
 

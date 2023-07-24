@@ -213,40 +213,38 @@ const Confirm: React.FC<FormProps> = ({
       <Dialog.Header title="donation" />
 
       <Dialog.Content>
-        <section>
-          <PaymentInfo
-            amount={amount}
-            currency={currency}
-            recipient={recipient}
-            showLikerID={currency === CURRENCY.LIKE}
-            showEthAddress={currency === CURRENCY.USDT}
-          >
-            <p>
-              <Button onClick={switchToSetAmount}>
-                <TextIcon size="xs" textDecoration="underline" color="greyDark">
-                  <Translate
-                    zh_hant="修改金額"
-                    zh_hans="修改金额"
-                    en="Amend amount"
-                  />
-                </TextIcon>
-              </Button>
-            </p>
-          </PaymentInfo>
-
-          {currency === CURRENCY.HKD && !isWalletInsufficient && (
-            <>
-              <p className={styles.hint}>
+        <PaymentInfo
+          amount={amount}
+          currency={currency}
+          recipient={recipient}
+          showLikerID={currency === CURRENCY.LIKE}
+          showEthAddress={currency === CURRENCY.USDT}
+        >
+          <p>
+            <Button onClick={switchToSetAmount}>
+              <TextIcon size="xs" textDecoration="underline" color="greyDark">
                 <Translate
-                  zh_hant="數入六位數字交易密碼即可完成："
-                  zh_hans="数入六位数字交易密码即可完成："
-                  en="Please Enter a 6-digit payment password"
+                  zh_hant="修改金額"
+                  zh_hans="修改金额"
+                  en="Amend amount"
                 />
-              </p>
-              {InnerForm}
-            </>
-          )}
-        </section>
+              </TextIcon>
+            </Button>
+          </p>
+        </PaymentInfo>
+
+        {currency === CURRENCY.HKD && !isWalletInsufficient && (
+          <>
+            <p className={styles.hint}>
+              <Translate
+                zh_hant="數入六位數字交易密碼即可完成："
+                zh_hans="数入六位数字交易密码即可完成："
+                en="Please Enter a 6-digit payment password"
+              />
+            </p>
+            {InnerForm}
+          </>
+        )}
       </Dialog.Content>
 
       <Dialog.Footer

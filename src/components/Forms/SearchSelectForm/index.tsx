@@ -129,26 +129,27 @@ const SearchSelectForm = ({
         rightBtn={SubmitButton}
       />
 
-      <SearchingArea
-        inSearchingArea={inSearchingArea}
-        searchType={searchType}
-        searchFilter={searchFilter}
-        searchExclude={searchExclude}
-        toStagingArea={toStagingArea}
-        toSearchingArea={toSearchingArea}
-        addNodeToStaging={addNodeToStaging}
-        createTag={createTag}
-        inviteEmail={inviteEmail}
-      />
-
-      <StagingArea
-        nodes={stagingNodes}
-        setNodes={setStagingNodes}
-        hint={hint}
-        inStagingArea={inStagingArea}
-        draggable={draggable}
-        CustomStagingArea={CustomStagingArea}
-      />
+      <Dialog.Content noSpacing fixedHeight>
+        <SearchingArea
+          inSearchingArea={inSearchingArea}
+          searchType={searchType}
+          searchFilter={searchFilter}
+          searchExclude={searchExclude}
+          toStagingArea={toStagingArea}
+          toSearchingArea={toSearchingArea}
+          addNodeToStaging={addNodeToStaging}
+          createTag={createTag}
+          inviteEmail={inviteEmail}
+        />
+        <StagingArea
+          nodes={stagingNodes}
+          setNodes={setStagingNodes}
+          hint={hint}
+          inStagingArea={inStagingArea}
+          draggable={draggable}
+          CustomStagingArea={CustomStagingArea}
+        />
+      </Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

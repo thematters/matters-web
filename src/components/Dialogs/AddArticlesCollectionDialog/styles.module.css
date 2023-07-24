@@ -11,30 +11,27 @@
   }
 }
 
-.formContainer {
-  height: 23.375rem;
-  margin: 0 var(--spacing-base-loose);
+.form {
+  /* FIXME: rendering issue when checkbox is checked */
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 
-  & :global(form) {
-    position: relative;
-  }
+  & .item {
+    @mixin flex-center-space-between;
 
-  & .listForm {
-    & .item {
-      @mixin flex-center-space-between;
+    gap: var(--spacing-x-tight);
 
-      gap: var(--spacing-x-tight);
+    & .index {
+      @mixin flex-center-all;
 
-      & .index {
-        @mixin flex-center-all;
-
-        min-width: 1.25rem;
-        height: 1.25rem;
-        font-size: var(--font-size-xs);
-        color: var(--color-matters-green);
-        border: 1.5px solid var(--color-matters-green);
-        border-radius: 1.25rem;
-      }
+      min-width: 1.25rem;
+      height: 1.25rem;
+      font-size: var(--font-size-xs);
+      color: var(--color-matters-green);
+      border: 1.5px solid var(--color-matters-green);
+      border-radius: 1.25rem;
     }
   }
 }

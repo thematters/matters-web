@@ -149,11 +149,7 @@ const BaseAddArticlesCollectionDialog = ({
   const user = data?.user
 
   if (error) {
-    return (
-      <>
-        <QueryError error={error} />
-      </>
-    )
+    return <QueryError error={error} />
   }
 
   if (!user) {
@@ -167,10 +163,11 @@ const BaseAddArticlesCollectionDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={<FormattedMessage defaultMessage="Add to collection" />}
+          closeDialog={closeDialog}
           rightBtn={SubmitButton}
         />
 
-        <Dialog.Content hasFixed>
+        <Dialog.Content fixedHeight>
           <SearchInput
             value={searchValue}
             onChange={(value) => setSearchValue(value)}
@@ -185,6 +182,7 @@ const BaseAddArticlesCollectionDialog = ({
               formId={formId}
             />
           )}
+
           {inSearchingArea && (
             <SearchingDialogContent
               formik={formik}

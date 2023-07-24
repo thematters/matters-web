@@ -1,8 +1,0 @@
-.container {
-  @mixin form-container;
-
-  @media (--sm-up) {
-    margin-right: var(--spacing-base);
-    margin-left: var(--spacing-base);
-  }
-}

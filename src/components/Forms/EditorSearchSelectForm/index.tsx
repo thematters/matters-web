@@ -146,66 +146,68 @@ const EditorSearchSelectForm = ({
         rightBtn={SubmitButton}
       />
 
-      {inStagingArea && (
-        <button
-          className={styles.stagingHeadArea}
-          onClick={toSearchingArea}
-          disabled={!enableAdd}
-          data-test-id={TEST_ID.EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON}
-        >
-          <TextIcon
-            icon={<IconAdd16 size="mdS" />}
-            color={enableAdd ? 'green' : 'grey'}
-            size="mdS"
-            spacing="xtight"
+      <Dialog.Content noSpacing fixedHeight>
+        {inStagingArea && (
+          <button
+            className={styles.stagingHeadArea}
+            onClick={toSearchingArea}
+            disabled={!enableAdd}
+            data-test-id={TEST_ID.EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON}
           >
-            {searchType === 'Tag' && (
-              <Translate en="Add tag" zh_hans="添加标签" zh_hant="添加標籤" />
-            )}
-            {searchType === 'Article' && (
-              <Translate en="Add" zh_hans="关联作品" zh_hant="關聯作品" />
-            )}
-          </TextIcon>
-          <span className={styles.number}>
-            （{stagingNodes.length}/{maxNodesLength}）
-          </span>
-        </button>
-      )}
+            <TextIcon
+              icon={<IconAdd16 size="mdS" />}
+              color={enableAdd ? 'green' : 'grey'}
+              size="mdS"
+              spacing="xtight"
+            >
+              {searchType === 'Tag' && (
+                <Translate en="Add tag" zh_hans="添加标签" zh_hant="添加標籤" />
+              )}
+              {searchType === 'Article' && (
+                <Translate en="Add" zh_hans="关联作品" zh_hant="關聯作品" />
+              )}
+            </TextIcon>
+            <span className={styles.number}>
+              （{stagingNodes.length}/{maxNodesLength}）
+            </span>
+          </button>
+        )}
 
-      {inSearchingArea && (
-        <SearchingArea
-          inSearchingArea={inSearchingArea}
-          searchType={searchType}
-          searchFilter={searchFilter}
-          searchExclude={searchExclude}
-          stagingNodes={stagingNodes}
-          toStagingArea={toStagingArea}
-          toSearchingArea={toSearchingArea}
-          addNodeToStaging={addNodeToStaging}
-          createTag={createTag}
-          CustomStagingArea={
-            CustomStagingArea && (
-              <CustomStagingArea
-                nodes={stagingNodes}
-                setNodes={syncStagingNodes}
-                hint={hint}
-                toStagingArea={toStagingArea}
-              />
-            )
-          }
-          autoFocus
-        />
-      )}
-      {inStagingArea && (
-        <StagingArea
-          nodes={stagingNodes}
-          setNodes={syncStagingNodes}
-          hint={hint}
-          inStagingArea={inStagingArea}
-          draggable={draggable}
-          CustomStagingArea={CustomStagingArea}
-        />
-      )}
+        {inSearchingArea && (
+          <SearchingArea
+            inSearchingArea={inSearchingArea}
+            searchType={searchType}
+            searchFilter={searchFilter}
+            searchExclude={searchExclude}
+            stagingNodes={stagingNodes}
+            toStagingArea={toStagingArea}
+            toSearchingArea={toSearchingArea}
+            addNodeToStaging={addNodeToStaging}
+            createTag={createTag}
+            CustomStagingArea={
+              CustomStagingArea && (
+                <CustomStagingArea
+                  nodes={stagingNodes}
+                  setNodes={syncStagingNodes}
+                  hint={hint}
+                  toStagingArea={toStagingArea}
+                />
+              )
+            }
+            autoFocus
+          />
+        )}
+        {inStagingArea && (
+          <StagingArea
+            nodes={stagingNodes}
+            setNodes={syncStagingNodes}
+            hint={hint}
+            inStagingArea={inStagingArea}
+            draggable={draggable}
+            CustomStagingArea={CustomStagingArea}
+          />
+        )}
+      </Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

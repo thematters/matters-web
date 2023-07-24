@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -77,9 +78,10 @@ const SupportersDialogContent = ({
           </>
         }
         closeDialog={closeDialog}
-        closeText="close"
+        closeText={<FormattedMessage defaultMessage="Close" />}
       />
-      <Dialog.Content>
+
+      <Dialog.Content noSpacing>
         <InfiniteScroll
           loader={<Spinner />}
           loadMore={loadMore}
@@ -106,7 +108,7 @@ const SupportersDialogContent = ({
       <Dialog.Footer
         smUpBtns={
           <Dialog.TextButton
-            text="close"
+            text={<FormattedMessage defaultMessage="Close" />}
             color="greyDarker"
             onClick={closeDialog}
           />

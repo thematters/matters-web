@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Dialog,
@@ -124,7 +125,7 @@ const BaseFingerprintDialog = ({
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text="close"
+              text={<FormattedMessage defaultMessage="Close" />}
               color="greyDarker"
               onClick={closeDialog}
             />

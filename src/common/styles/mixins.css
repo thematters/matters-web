@@ -122,11 +122,14 @@
   @mixin transition;
   @mixin border-grey;
 
+  height: var(--input-height);
   padding: var(--spacing-base);
   font-size: var(--font-size-md);
+  line-height: 1.375rem;
   color: var(--color-black);
   background-color: var(--color-white);
   border-radius: var(--spacing-x-tight);
+  transition-property: border-color, background-color;
 
   &:focus,
   &.focus {
@@ -159,38 +162,8 @@
   }
 }
 
-@define-mixin form-input-round {
-  @mixin transition;
-  @mixin border-grey;
-
-  height: var(--input-height);
-  padding: var(--spacing-base);
-  color: var(--color-black);
+@define-mixin form-input-number {
   caret-color: var(--color-matters-green);
-  background-color: var(--color-white);
-  border-radius: var(--spacing-x-tight);
-  transition-property: border-color, background-color;
-
-  &:focus,
-  &.focus {
-    border-color: var(--color-grey);
-  }
-
-  &:disabled {
-    color: var(--color-grey-dark);
-    background-color: var(--color-grey-lighter);
-    border-color: transparent;
-  }
-
-  &.error {
-    border-color: var(--color-red);
-
-    &:focus,
-    &.focus {
-      background-color: transparent;
-      border-color: var(--color-red);
-    }
-  }
 
   /* Chrome, Safari, Edge, Opera */
   &::-webkit-outer-spin-button,
@@ -202,25 +175,6 @@
   /* Firefox */
   &[type='number'] {
     appearance: textfield;
-  }
-}
-
-@define-mixin form-container {
-  margin-right: var(--spacing-base);
-  margin-left: var(--spacing-base);
-
-  @media (--sm-up) {
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  & :global(.field) {
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  & :global(.inputContainer) {
-    margin: 0;
   }
 }
 

@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import { FormattedMessage } from 'react-intl'
 
 import { Dialog, Spinner, Translate, useDialogSwitch } from '~/components'
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
@@ -27,7 +28,7 @@ const BaseFollowersDialog = ({ user, children }: FollowersDialogProps) => {
             />
           }
           closeDialog={closeDialog}
-          closeText="close"
+          closeText={<FormattedMessage defaultMessage="Close" />}
         />
 
         <DynamicContent />
@@ -35,7 +36,7 @@ const BaseFollowersDialog = ({ user, children }: FollowersDialogProps) => {
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text="close"
+              text={<FormattedMessage defaultMessage="Close" />}
               color="greyDarker"
               onClick={closeDialog}
             />
