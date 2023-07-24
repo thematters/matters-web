@@ -400,7 +400,7 @@
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
   "HJ0iZJ": {
-    "defaultMessage": "確認归档"
+    "defaultMessage": "确认归档"
   },
   "HxcjQl": {
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
@@ -969,7 +969,7 @@
     "description": "src/components/BlockUser/Button/index.tsx"
   },
   "mWcca9": {
-    "defaultMessage": "确认要将“{article}”归档嗎？"
+    "defaultMessage": "确认要将“{article}”归档吗？"
   },
   "mWjpk9": {
     "defaultMessage": "还没有广播",
@@ -1070,10 +1070,6 @@
   "reOeq5": {
     "defaultMessage": "你已拥有个人创作空间站，期待你的第一篇作品。",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  },
-  "rf0ew3": {
-    "defaultMessage": "快来搭建围炉，呼召你的支持者加入!",
-    "description": "src/components/UserProfile/CircleWidget/index.tsx"
   },
   "rfz/fN": {
     "defaultMessage": "建议封面尺寸 1600 x 900 像素"
@@ -1199,7 +1195,7 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "yBUiiy": {
-    "defaultMessage": "操作無法撤銷，確認归档嗎？"
+    "defaultMessage": "操作无法撤销，确认归档吗？"
   },
   "yIlC0R": {
     "defaultMessage": "尚未发布作品",
