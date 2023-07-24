@@ -5,7 +5,6 @@ import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath } from '~/common/utils'
 import {
   Book,
-  Card,
   DateTime,
   IconDotDivider,
   LinkWrapper,
@@ -41,17 +40,16 @@ const BaseCollectionDigestFeed = ({
   const articleCount = articles.totalCount
 
   return (
-    <Card
-      {...path}
-      spacing={['baseLoose', 0]}
-      onClick={onClick}
-      testId={TEST_ID.DIGEST_COLLECTION_FEED}
-      bgActiveColor="none"
+    <section
+      className={styles.wrapper}
+      data-test-id={TEST_ID.DIGEST_COLLECTION_FEED}
     >
       <section className={styles.container}>
-        <section className={styles.book}>
-          <Book cover={cover} title={title} articleCount={articleCount} />
-        </section>
+        <LinkWrapper {...path} onClick={onClick}>
+          <section className={styles.book}>
+            <Book cover={cover} title={title} articleCount={articleCount} />
+          </section>
+        </LinkWrapper>
 
         <section className={styles.content}>
           <header className={styles.header}>
@@ -71,7 +69,9 @@ const BaseCollectionDigestFeed = ({
           </Media>
 
           {cleanedDescription && (
-            <p className={styles.description}>{cleanedDescription}</p>
+            <LinkWrapper {...path} onClick={onClick}>
+              <p className={styles.description}>{cleanedDescription}</p>
+            </LinkWrapper>
           )}
 
           <footer className={styles.footer}>
@@ -105,7 +105,7 @@ const BaseCollectionDigestFeed = ({
           </footer>
         </section>
       </section>
-    </Card>
+    </section>
   )
 }
 

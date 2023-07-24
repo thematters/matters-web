@@ -1072,10 +1072,6 @@
     "defaultMessage": "你已擁有個人創作空間站，期待你的第一篇作品。",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
-  "rf0ew3": {
-    "defaultMessage": "快來搭建圍爐，呼召你的支持者加入",
-    "description": "src/components/UserProfile/CircleWidget/index.tsx"
-  },
   "rfz/fN": {
     "defaultMessage": "建議封面尺寸 1600 x 900 像素"
   },

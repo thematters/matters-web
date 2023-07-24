@@ -1,3 +1,7 @@
+.wrapper {
+  padding: var(--spacing-base-loose) 0;
+}
+
 .container {
   @mixin flex-center-space-between;
 

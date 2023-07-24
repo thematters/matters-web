@@ -84,7 +84,8 @@ const BaseAddArticlesCollectionDialog = ({
       if (!checked || checked.length === 0) {
         return
       }
-      const addChecked = checked.splice(0, 100 - collection.articles.totalCount)
+
+      const addChecked = checked.slice(0, 100 - collection.articles.totalCount)
 
       onUpdate()
       await update({
@@ -112,10 +113,10 @@ const BaseAddArticlesCollectionDialog = ({
       })
 
       setSubmitting(false)
+      cd()
+      setArea('selecting')
       // clear data
       formik.setFieldValue('checked', [])
-      setArea('selecting')
-      cd()
     },
   })
 
