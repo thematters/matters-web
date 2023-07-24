@@ -39,7 +39,7 @@ const UserTabs = ({
         <FormattedMessage defaultMessage="Articles" />
       </Tabs.Tab>
 
-      {(loading || articleCount > 0) && (
+      {(loading || articleCount > 0 || collectionCount > 0) && (
         <Tabs.Tab
           {...userCollectionsPath}
           selected={isInPath('USER_COLLECTIONS')}
