@@ -1,10 +1,17 @@
 import { normalizeArticleHTML } from '@matters/matters-editor'
-import { useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
 import { measureDiffs, stripHtml } from '~/common/utils'
-import { Button, TextIcon, toast, Translate, useMutation } from '~/components'
+import {
+  Button,
+  TextIcon,
+  toast,
+  Translate,
+  useMutation,
+  ViewerContext,
+} from '~/components'
 import {
   ConfirmStepContentProps,
   EditorSettingsDialog,
@@ -15,6 +22,7 @@ import {
   EditArticleMutation,
   EditorDraftFragment,
 } from '~/gql/graphql'
+import { VIEWER_ARTICLES } from '~/views/User/Articles/gql'
 
 import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE } from './gql'
@@ -60,6 +68,8 @@ const EditModeHeader = ({
 
   ...restProps
 }: EditModeHeaderProps) => {
+  const viewer = useContext(ViewerContext)
+
   const initContent = useRef<string>()
   useEffect(() => {
     initContent.current = draft?.content || ''
@@ -96,6 +106,12 @@ const EditModeHeader = ({
           canComment: restProps.canComment,
           sensitive: restProps.contentSensitive,
         },
+        refetchQueries: [
+          {
+            query: VIEWER_ARTICLES,
+            variables: { userName: viewer.userName },
+          },
+        ],
       })
       if (isContentRevised) {
         onPublish()

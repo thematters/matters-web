@@ -42,8 +42,8 @@ export const EmailSignUpDialogButton = ({
       defaultMessage="Not Registered?"
       description="src/components/Forms/EmailLoginForm/Buttons.tsx"
     />
-
     <Button onClick={gotoEmailSignUp}>
+      &nbsp;
       <FormattedMessage defaultMessage="Register" />
     </Button>
   </section>

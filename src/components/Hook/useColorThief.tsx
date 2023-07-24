@@ -23,15 +23,19 @@ export const useColorThief = () => {
 
   const _getColor = () => {
     import('colorthief').then(({ default: ColorThief }) => {
-      const colorThief = new ColorThief()
-      const $img = nodeRef.current?.querySelector('img') as HTMLImageElement
-      const colors = colorThief.getColor($img)
-      const hsl = rgbToHsl(...colors)
-      setDominantColor(
-        `hsl(${parseInt(hsl[0] + '')} ${parseFloat(hsl[1] * 100 + '').toFixed(
-          2
-        )}% 30%)`
-      )
+      try {
+        const colorThief = new ColorThief()
+        const $img = nodeRef.current?.querySelector('img') as HTMLImageElement
+        const colors = colorThief.getColor($img)
+        const hsl = rgbToHsl(...colors)
+        setDominantColor(
+          `hsl(${parseInt(hsl[0] + '')} ${parseFloat(hsl[1] * 100 + '').toFixed(
+            2
+          )}% 30%)`
+        )
+      } catch (error) {
+        //
+      }
     })
   }
 
