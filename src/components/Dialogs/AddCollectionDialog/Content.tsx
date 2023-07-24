@@ -14,10 +14,11 @@ import {
   LanguageContext,
   useMutation,
   useRoute,
+  ViewerContext,
 } from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
-import updateUserCollections from '~/components/GQL/updates/userCollections'
 import { CreateCollectionMutation } from '~/gql/graphql'
+import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 
 type Collection = CreateCollectionMutation['putCollection']
 interface FormProps {
@@ -45,6 +46,8 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
   onUpdated,
   gotoDetailPage,
 }) => {
+  const viewer = useContext(ViewerContext)
+
   const [create] = useMutation<CreateCollectionMutation>(
     CREATE_COLLECTION,
     undefined,
@@ -92,16 +95,16 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
               userName,
               type: 'addCollection',
             })
-            updateUserCollections({
-              cache,
-              userName,
-              collection: result.data?.putCollection || ({} as Collection),
-              type: 'add',
-            })
             if (onUpdated) {
               onUpdated(cache, result.data?.putCollection || ({} as Collection))
             }
           },
+          refetchQueries: [
+            {
+              query: USER_COLLECTIONS,
+              variables: { userName: viewer.userName },
+            },
+          ],
         })
         setSubmitting(false)
 

@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
@@ -11,10 +11,11 @@ import {
   useDialogSwitch,
   useMutation,
   useRoute,
+  ViewerContext,
 } from '~/components'
-import updateUserCollections from '~/components/GQL/updates/userCollections'
 import updateUserCollectionsArticles from '~/components/GQL/updates/userCollectionsArticles'
 import { AddCollectionsArticlesMutation } from '~/gql/graphql'
+import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 
 import { ADD_COLLECTIONS_ARTICLES } from './gql'
 import SelectDialogContent from './SelectDialogContent'
@@ -38,6 +39,8 @@ const BaseAddCollectionsArticleDialog = ({
   children,
   articleId,
 }: AddCollectionsArticleDialogProps) => {
+  const viewer = useContext(ViewerContext)
+
   const { getQuery } = useRoute()
 
   const userName = getQuery('name')
@@ -70,21 +73,12 @@ const BaseAddCollectionsArticleDialog = ({
             articles: [articleId],
           },
         },
-        update: (cache) => {
-          updateUserCollectionsArticles({
-            cache,
-            userName,
-            collectionIds: checked,
-            articleId: articleId,
-            type: 'addArticles',
-          })
-          updateUserCollections({
-            cache,
-            userName,
-            collectionIds: checked,
-            type: 'increaseArticleCount',
-          })
-        },
+        refetchQueries: [
+          {
+            query: USER_COLLECTIONS,
+            variables: { userName: viewer.userName },
+          },
+        ],
       })
 
       const path = toPath({
