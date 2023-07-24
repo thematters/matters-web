@@ -1,5 +1,5 @@
 .tabs {
-  @mixin border-bottom-grey;
+  @mixin border-bottom-grey-light;
 
   position: relative;
   position: sticky;
