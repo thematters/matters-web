@@ -400,7 +400,7 @@
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
   },
   "HJ0iZJ": {
-    "defaultMessage": "确认封存"
+    "defaultMessage": "確認封存"
   },
   "HxcjQl": {
     "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
@@ -1071,10 +1071,6 @@
     "defaultMessage": "你已擁有個人創作空間站，期待你的第一篇作品。",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
-  "rf0ew3": {
-    "defaultMessage": "快來搭建圍爐，呼召你的支持者加入",
-    "description": "src/components/UserProfile/CircleWidget/index.tsx"
-  },
   "rfz/fN": {
     "defaultMessage": "建議封面尺寸 1600 x 900 像素"
   },
@@ -1110,7 +1106,7 @@
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "u5aHb4": {
-    "defaultMessage": "複製鏈接"
+    "defaultMessage": "複製連結"
   },
   "uJkv2X": {
     "defaultMessage": "編輯標籤"
@@ -1199,7 +1195,7 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "yBUiiy": {
-    "defaultMessage": "操作无法撤销，确认封存吗？"
+    "defaultMessage": "操作無法撤銷，確認封存嗎？"
   },
   "yIlC0R": {
     "defaultMessage": "尚未發布作品",
