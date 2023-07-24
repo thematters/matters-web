@@ -124,6 +124,9 @@
   "5FO4vn": {
     "defaultMessage": "你尚无权限进行该操作"
   },
+  "5MDGuM": {
+    "defaultMessage": "请输入你的注册邮箱"
+  },
   "5iii3x": {
     "defaultMessage": "围炉：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
@@ -376,6 +379,9 @@
   "GZJpDf": {
     "defaultMessage": "数据后台"
   },
+  "GcvLBC": {
+    "defaultMessage": "我知道了"
+  },
   "GugBCe": {
     "defaultMessage": "本月新增追踪人数",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -403,10 +409,6 @@
   "HzaRKA": {
     "defaultMessage": "一键搬家"
   },
-  "IFY8r4": {
-    "defaultMessage": "请输入密码",
-    "description": "src/components/Forms/EmailLoginForm/index.tsx"
-  },
   "IKPYe9": {
     "defaultMessage": "查看",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -419,12 +421,15 @@
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
   "J+LXrH": {
-    "defaultMessage": "持续支持邮箱進入，未來可随时启用钱包登入",
+    "defaultMessage": "使用邮箱进入，未来可随时启用钱包登入",
     "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "JTWayV": {
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "JXdbo8": {
+    "defaultMessage": "完成"
   },
   "JaLEXz": {
     "defaultMessage": "进入围炉",
@@ -605,9 +610,6 @@
   },
   "U86B6w": {
     "defaultMessage": "数据"
-  },
-  "UNUROl": {
-    "defaultMessage": "建议 50 字以内，最长 200 字"
   },
   "UOdEqi": {
     "defaultMessage": "原有透过电子信箱登入方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",
@@ -796,6 +798,9 @@
     "defaultMessage": "由于你尚未发布任何作品，这裡还没有任何数据能与你分享哦！发布第一篇作品来介绍你自己，以此开启你的创作之旅吧！",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
+  "cyR7Kh": {
+    "defaultMessage": "返回"
+  },
   "d4waan": {
     "defaultMessage": "营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
@@ -823,18 +828,11 @@
   "eXDZGQ": {
     "defaultMessage": "主理人"
   },
-  "ei+kyp": {
-    "defaultMessage": "围炉名称",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "enMIYK": {
     "defaultMessage": "我的"
   },
   "eov+J2": {
     "defaultMessage": "自定义网址名称"
-  },
-  "fG41Ux": {
-    "defaultMessage": "登出成功"
   },
   "fWDtpq": {
     "defaultMessage": "邀请中",
@@ -917,6 +915,9 @@
     "defaultMessage": "在 {circlename} 发布广播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "k0ooDW": {
+    "defaultMessage": "标签描述"
+  },
   "k5NnNF": {
     "defaultMessage": "追踪了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
@@ -945,12 +946,12 @@
     "defaultMessage": "评论了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
-  "ldNgRA": {
-    "defaultMessage": "你的站內暱稱，之後可以修改",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
-  },
   "ll/ufR": {
     "defaultMessage": "热门"
+  },
+  "m/Wg7b": {
+    "defaultMessage": "Circle Description",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "m4GG4b": {
     "defaultMessage": "删除选集"
@@ -997,9 +998,6 @@
   },
   "nYrKWp": {
     "defaultMessage": "编辑个人信息"
-  },
-  "nsaJRn": {
-    "defaultMessage": "上站成功"
   },
   "o2Na0B": {
     "defaultMessage": "返回全部"
@@ -1060,8 +1058,14 @@
     "defaultMessage": "微博",
     "description": "src/components/Share/Buttons/Weibo.tsx"
   },
+  "rLlTQ9": {
+    "defaultMessage": "标签名称"
+  },
   "rXnmeE": {
     "defaultMessage": "确认发送"
+  },
+  "rbrahO": {
+    "defaultMessage": "关闭"
   },
   "reOeq5": {
     "defaultMessage": "你已拥有个人创作空间站，期待你的第一篇作品。",
@@ -1101,16 +1105,15 @@
     "defaultMessage": "你的作品 {articleTitle} 已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
-  "tW3hM/": {
-    "defaultMessage": "围炉描述",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "tzq2+W": {
     "defaultMessage": "寄出邀请",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "u5aHb4": {
     "defaultMessage": "复制链接"
+  },
+  "uJkv2X": {
+    "defaultMessage": "编辑标签"
   },
   "uVCg1l": {
     "defaultMessage": "玩转 Matters 实用指南"
