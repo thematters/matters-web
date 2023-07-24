@@ -124,6 +124,9 @@
   "5FO4vn": {
     "defaultMessage": "You do not have permission to perform this operation"
   },
+  "5MDGuM": {
+    "defaultMessage": "Enter your email"
+  },
   "5iii3x": {
     "defaultMessage": "Circle：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
@@ -376,6 +379,9 @@
   "GZJpDf": {
     "defaultMessage": "Analytics"
   },
+  "GcvLBC": {
+    "defaultMessage": "Understood"
+  },
   "GugBCe": {
     "defaultMessage": "New Followers This Month",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -403,10 +409,6 @@
   "HzaRKA": {
     "defaultMessage": "Migrate to Matters"
   },
-  "IFY8r4": {
-    "defaultMessage": "Enter Password",
-    "description": "src/components/Forms/EmailLoginForm/index.tsx"
-  },
   "IKPYe9": {
     "defaultMessage": "View",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -425,6 +427,9 @@
   "JTWayV": {
     "defaultMessage": "Add description",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "JXdbo8": {
+    "defaultMessage": "Done"
   },
   "JaLEXz": {
     "defaultMessage": "Enter Circle",
@@ -605,9 +610,6 @@
   },
   "U86B6w": {
     "defaultMessage": "Stats"
-  },
-  "UNUROl": {
-    "defaultMessage": "Maximum 200 characters."
   },
   "UOdEqi": {
     "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
@@ -796,6 +798,9 @@
     "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
+  "cyR7Kh": {
+    "defaultMessage": "Back"
+  },
   "d4waan": {
     "defaultMessage": "Income",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
@@ -823,18 +828,11 @@
   "eXDZGQ": {
     "defaultMessage": "Maintainer"
   },
-  "ei+kyp": {
-    "defaultMessage": "Name of the Circle",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "enMIYK": {
     "defaultMessage": "My Page"
   },
   "eov+J2": {
     "defaultMessage": "Custom URL Name"
-  },
-  "fG41Ux": {
-    "defaultMessage": "Logged out successfully"
   },
   "fWDtpq": {
     "defaultMessage": "Pending",
@@ -917,6 +915,9 @@
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "k0ooDW": {
+    "defaultMessage": "Tag Description"
+  },
   "k5NnNF": {
     "defaultMessage": " followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
@@ -945,12 +946,12 @@
     "defaultMessage": "commented",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
-  "ldNgRA": {
-    "defaultMessage": "Display name, can be changed later",
-    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
-  },
   "ll/ufR": {
     "defaultMessage": "Trending"
+  },
+  "m/Wg7b": {
+    "defaultMessage": "Circle Description",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "m4GG4b": {
     "defaultMessage": "Delete collection"
@@ -997,9 +998,6 @@
   },
   "nYrKWp": {
     "defaultMessage": "Edit profile"
-  },
-  "nsaJRn": {
-    "defaultMessage": "Logged in successfully"
   },
   "o2Na0B": {
     "defaultMessage": "Back to All"
@@ -1060,8 +1058,14 @@
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
   },
+  "rLlTQ9": {
+    "defaultMessage": "Tag Name"
+  },
   "rXnmeE": {
     "defaultMessage": "Confirm and Send"
+  },
+  "rbrahO": {
+    "defaultMessage": "Close"
   },
   "reOeq5": {
     "defaultMessage": "You have created your personal creative space. Publish your first work!",
@@ -1101,16 +1105,15 @@
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
-  "tW3hM/": {
-    "defaultMessage": "Description of the Circle",
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
   "tzq2+W": {
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "u5aHb4": {
     "defaultMessage": "Copy Link"
+  },
+  "uJkv2X": {
+    "defaultMessage": "Edit Tag"
   },
   "uVCg1l": {
     "defaultMessage": "Explore Matters"
