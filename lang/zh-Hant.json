@@ -965,7 +965,7 @@
     "description": "src/components/BlockUser/Button/index.tsx"
   },
   "mWcca9": {
-    "defaultMessage": "確認要將「{article}」封存吗？"
+    "defaultMessage": "確認要將「{article}」封存嗎？"
   },
   "mWjpk9": {
     "defaultMessage": "還沒有廣播",
