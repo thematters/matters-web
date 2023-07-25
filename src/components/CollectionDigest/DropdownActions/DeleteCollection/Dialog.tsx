@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
@@ -9,16 +9,29 @@ import {
   useDialogSwitch,
   useMutation,
   useRoute,
+  ViewerContext,
 } from '~/components'
 import updateUserCollections from '~/components/GQL/updates/userCollections'
 import {
   DeleteCollectionCollectionFragment,
   DeleteCollectionMutation,
+  ViewerArticleCountQuery,
 } from '~/gql/graphql'
 
 const DELETE_COLLECTION = gql`
   mutation DeleteCollection($id: ID!) {
     deleteCollections(input: { ids: [$id] })
+  }
+`
+
+const VIEWER_ARTICLE_COUNT = gql`
+  query ViewerArticleCount {
+    viewer {
+      id
+      status {
+        articleCount
+      }
+    }
   }
 `
 
@@ -33,6 +46,7 @@ const DeleteCollectionDialog = ({
   collection,
   children,
 }: DeleteCollectionDialogProps) => {
+  const viewer = useContext(ViewerContext)
   const { show, openDialog, closeDialog: cd } = useDialogSwitch(true)
   const { isInPath, router } = useRoute()
   const isInUserCollectionDetail = isInPath('USER_COLLECTION_DETAIL')
@@ -46,20 +60,33 @@ const DeleteCollectionDialog = ({
     }, 1000)
   }
 
-  const [deleteCollection, { loading }] = useMutation<DeleteCollectionMutation>(
-    DELETE_COLLECTION,
-    {
+  const [deleteCollection, { loading, client }] =
+    useMutation<DeleteCollectionMutation>(DELETE_COLLECTION, {
       variables: { id: collection.id },
       update: (cache) => {
-        updateUserCollections({
+        const result = updateUserCollections({
           cache,
           collectionIds: [collection.id],
           userName: collection.author.userName,
           type: 'delete',
         })
+        if (result?.collectionCount === 0) {
+          onEmptyCollection()
+        }
       },
-    }
-  )
+    })
+
+  const onEmptyCollection = async () => {
+    const result = await client?.query<ViewerArticleCountQuery>({
+      query: VIEWER_ARTICLE_COUNT,
+      fetchPolicy: 'network-only',
+    })
+
+    if (result?.data.viewer?.status?.articleCount === 0)
+      router.push(
+        toPath({ page: 'userProfile', userName: viewer.userName || '' }).href
+      )
+  }
 
   const onDelete = async () => {
     await deleteCollection()
@@ -123,7 +150,6 @@ const DeleteCollectionDialog = ({
                 onClick={() => {
                   setStep('confirmDelete')
                 }}
-                loading={loading}
               />
             }
             smUpBtns={
@@ -133,7 +159,6 @@ const DeleteCollectionDialog = ({
                 onClick={() => {
                   setStep('confirmDelete')
                 }}
-                loading={loading}
               />
             }
           />
@@ -145,21 +170,23 @@ const DeleteCollectionDialog = ({
             btns={
               <Dialog.RoundedButton
                 text={<FormattedMessage defaultMessage="Confirm Deletion" />}
-                color="red"
-                onClick={() => {
-                  onDelete()
+                color={loading ? 'green' : 'red'}
+                onClick={async () => {
+                  await onDelete()
                   closeDialog()
                 }}
+                loading={loading}
               />
             }
             smUpBtns={
               <Dialog.TextButton
                 text={<FormattedMessage defaultMessage="Confirm Deletion" />}
-                color="red"
-                onClick={() => {
-                  onDelete()
+                color={loading ? 'green' : 'red'}
+                onClick={async () => {
+                  await onDelete()
                   closeDialog()
                 }}
+                loading={loading}
               />
             }
           />

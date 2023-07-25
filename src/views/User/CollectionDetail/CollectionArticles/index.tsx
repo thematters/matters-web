@@ -16,7 +16,7 @@ import {
   ViewerContext,
 } from '~/components'
 import EndOfResults from '~/components/Interaction/InfiniteScroll/EndOfResults'
-import { CollectionDetailFragment } from '~/gql/graphql'
+import { ArticleState, CollectionDetailFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -41,7 +41,12 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
   const isDirectionUp = direction === 'up'
 
   const { articles, updatedAt } = collection
-  let articleEdges = articles.edges
+
+  // filter out inactive articles for local updating
+  // at ArchiveArticle/Dialog.tsx
+  let articleEdges = articles.edges?.filter(
+    ({ node }) => node.articleState === ArticleState.Active
+  )
 
   if (isViewer) {
     return <DynamicViewerArticles collection={collection} />

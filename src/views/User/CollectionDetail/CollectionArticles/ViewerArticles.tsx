@@ -17,6 +17,7 @@ import {
 import DropdownActions from '~/components/CollectionDigest/DropdownActions'
 import EndOfResults from '~/components/Interaction/InfiniteScroll/EndOfResults'
 import {
+  ArticleState,
   CollectionDetailFragment,
   ReorderCollectionArticlesMutation,
 } from '~/gql/graphql'
@@ -61,7 +62,12 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
   const [hasReset, setHasReset] = useState(false)
 
   const { id, articles, updatedAt } = collection
-  let articleEdges = articles.edges
+
+  // filter out inactive articles for local updating
+  // at ArchiveArticle/Dialog.tsx
+  let articleEdges = articles.edges?.filter(
+    ({ node }) => node.articleState === ArticleState.Active
+  )
   const [items, setItems] = useState(articleEdges)
 
   useEffect(() => {

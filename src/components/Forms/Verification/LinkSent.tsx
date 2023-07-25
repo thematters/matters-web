@@ -55,7 +55,7 @@ export const VerificationLinkSent = ({
           smUpBtns={
             <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Understood" />}
-              color="greyDarker"
+              color="green"
               onClick={closeDialog}
             />
           }

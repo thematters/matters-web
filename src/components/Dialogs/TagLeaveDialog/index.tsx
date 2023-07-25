@@ -88,7 +88,7 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
                   en="Confirm Resignation"
                 />
               }
-              color="red"
+              color={loading ? 'green' : 'red'}
               onClick={onClick}
               loading={loading}
             />
@@ -102,7 +102,7 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
                   en="Confirm Resignation"
                 />
               }
-              color="red"
+              color={loading ? 'green' : 'red'}
               onClick={onClick}
               loading={loading}
             />

@@ -68,6 +68,8 @@ const update = ({
       },
     },
   })
+
+  return { collectionCount: data.user.collections.totalCount }
 }
 
 export default update

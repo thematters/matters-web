@@ -109,8 +109,8 @@ const Content = ({
         data-test-id={TEST_ID.COMMENT_CONETNT}
       >
         <Translate
-          zh_hant={`此${COMMENT_TYPE_TEXT.zh_hant[type]}因違反用戶協定而被隱藏`}
-          zh_hans={`此${COMMENT_TYPE_TEXT.zh_hans[type]}因违反用户协定而被隐藏`}
+          zh_hant={`此${COMMENT_TYPE_TEXT.zh_hant[type]}因違反用戶協定而被歸檔`}
+          zh_hans={`此${COMMENT_TYPE_TEXT.zh_hans[type]}因违反用户协定而被封存`}
         />
       </p>
     )

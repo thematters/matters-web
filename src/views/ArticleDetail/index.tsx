@@ -569,8 +569,8 @@ const ArticleDetail = ({
               />
             ) : article.state === 'banned' ? (
               <Translate
-                zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
-                zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
+                zh_hant="該作品因違反社區約章，已被站方強制歸檔。"
+                zh_hans="该作品因违反社区约章，已被站方强制封存。"
                 en="This work is archived due to violation of community guidelines."
               />
             ) : null
