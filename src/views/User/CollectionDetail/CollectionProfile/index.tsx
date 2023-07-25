@@ -66,7 +66,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                   </Expandable>
                 )}
                 {!description && isViewer && (
-                  <p>
+                  <p className={styles.addDescription}>
                     <Button
                       textColor="greyDarker"
                       textActiveColor="green"
@@ -106,7 +106,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                   <p className={styles.description}>{description}</p>
                 )}
                 {!description && isViewer && (
-                  <p>
+                  <p className={styles.addDescription}>
                     <Button
                       textColor="greyDarker"
                       textActiveColor="green"

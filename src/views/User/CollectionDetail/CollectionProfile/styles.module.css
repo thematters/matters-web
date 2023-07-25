@@ -48,3 +48,7 @@
     margin-bottom: 0;
   }
 }
+
+.addDescription {
+  font-size: var(--font-size-sm);
+}
