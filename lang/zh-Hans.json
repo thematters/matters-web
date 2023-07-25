@@ -113,6 +113,9 @@
     "defaultMessage": "在行动装置上使用问题，参考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "4l6vz1": {
+    "defaultMessage": "复制"
+  },
   "4sl6yu": {
     "defaultMessage": "开始创作",
     "description": "src/views/User/Articles/UserArticles.tsx"

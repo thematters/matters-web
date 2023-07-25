@@ -1,15 +1,13 @@
-import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { getAddress } from 'viem'
 
-import { maskAddress, translate } from '~/common/utils'
+import { maskAddress } from '~/common/utils'
 import {
   Button,
   ButtonProps,
   CopyToClipboard,
   IconCopy16,
   IconExternalLink16,
-  LanguageContext,
   TextIcon,
   TextIconProps,
 } from '~/components'
@@ -25,7 +23,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
   ensName,
   hasLinkedIPNS,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const buttonProps: ButtonProps = {
     spacing: ['xxtight', 'tight'],
     bgColor: 'greenLighter',
@@ -57,7 +55,10 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
       text={ensName || address}
       successMessage={<FormattedMessage defaultMessage="Address copied" />}
     >
-      <Button {...buttonProps} aria-label={translate({ id: 'copy', lang })}>
+      <Button
+        {...buttonProps}
+        aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
+      >
         <TextIcon {...textIconProps} icon={<IconCopy16 size="sm" />}>
           {ensName || maskAddress(getAddress(address))}
         </TextIcon>

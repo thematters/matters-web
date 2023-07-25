@@ -37,15 +37,6 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
       variables: { id: articleId, enabled: true },
-      optimisticResponse: articleId
-        ? {
-            toggleSubscribeArticle: {
-              id: articleId,
-              subscribed: true,
-              __typename: 'Article',
-            },
-          }
-        : undefined,
     }
   )
 

@@ -2,14 +2,13 @@ import { DialogContent, DialogOverlay } from '@reach/dialog'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _get from 'lodash/get'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
 import { KEYVALUE } from '~/common/enums'
-import { capitalizeFirstLetter, dom, translate } from '~/common/utils'
+import { capitalizeFirstLetter, dom } from '~/common/utils'
 import {
-  LanguageContext,
   Media,
   // useOutsideClick
 } from '~/components'
@@ -43,6 +42,7 @@ const Container: React.FC<
     {
       style?: React.CSSProperties
       setDragGoal: (val: any) => void
+      initialFocusRef: React.RefObject<any>
     } & DialogProps
   >
 > = ({
@@ -54,6 +54,7 @@ const Container: React.FC<
   children,
   style,
   setDragGoal,
+  initialFocusRef,
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
 
@@ -104,6 +105,10 @@ const Container: React.FC<
         closeTopDialog()
       }}
     >
+      <VisuallyHidden>
+        <button type="button" ref={initialFocusRef} aria-hidden="true" />
+      </VisuallyHidden>
+
       {children}
 
       <Media at="sm">
@@ -124,10 +129,9 @@ export const Dialog: React.ComponentType<
   RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
-  const { lang } = useContext(LanguageContext)
   const { isOpen, onRest } = props
   const [mounted, setMounted] = useState(isOpen)
-  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const initialFocusRef = useRef<any>(null)
 
   // Drag
   const [{ top }, setDragGoal] = useSpring(() => ({ top: 0 }))
@@ -173,23 +177,15 @@ export const Dialog: React.ComponentType<
     <>
       <AnimatedDialogOverlay
         className="dialog"
-        initialFocusRef={closeButtonRef}
+        initialFocusRef={initialFocusRef}
       >
         <AnimatedOverlay style={{ opacity: opacity as any }} />
-
-        <VisuallyHidden>
-          <button
-            ref={closeButtonRef}
-            type="button"
-            onClick={props.onDismiss}
-            aria-label={translate({ id: 'close', lang })}
-          />
-        </VisuallyHidden>
 
         <DialogContent aria-labelledby="dialog-title">
           <AnimatedContainer
             style={{ opacity: opacity as any, top }}
             setDragGoal={setDragGoal}
+            initialFocusRef={initialFocusRef}
             {...props}
           />
         </DialogContent>

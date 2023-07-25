@@ -1,14 +1,12 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
   IconCopy16,
   IconLocked24,
-  LanguageContext,
   TextIcon,
   Translate,
 } from '~/components'
@@ -34,7 +32,7 @@ export const QUERY_SECRET = gql`
 `
 
 const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const { data } = useQuery<ArticleSecretQuery>(QUERY_SECRET, {
     variables: { id },
   })
@@ -59,7 +57,7 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
       <section className={styles.key}>
         <CopyToClipboard text={secret}>
           <Button
-            aria-label={translate({ id: 'copy', lang })}
+            aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
             spacing={['xtight', 'base']}
             bgColor="yellowLighter"
           >
