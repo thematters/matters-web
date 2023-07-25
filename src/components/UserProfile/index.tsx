@@ -147,10 +147,10 @@ export const UserProfile = () => {
                 {({ openDialog: openEditProfileDialog }) => (
                   <Button
                     borderColor="greyDarker"
-                    borderActiveColor="green"
+                    borderActiveColor="greenDark"
                     borderWidth="md"
                     textColor="greyDarker"
-                    textActiveColor="green"
+                    textActiveColor="greenDark"
                     onClick={openEditProfileDialog}
                     size={['5.3125rem', '2rem']}
                   >

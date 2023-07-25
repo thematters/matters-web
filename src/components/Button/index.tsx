@@ -104,7 +104,7 @@ type ButtonBgActiveColor = Extract<
   | 'red'
 >
 
-type ButtonBorderActiveColor = Extract<ButtonColor, 'green' | 'black'>
+type ButtonBorderActiveColor = Extract<ButtonColor, 'greenDark' | 'black'>
 
 export type ButtonProps = {
   size?: [ButtonWidth, ButtonHeight]
