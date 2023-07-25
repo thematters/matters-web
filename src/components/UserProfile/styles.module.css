@@ -123,8 +123,16 @@
   & .count {
     font-weight: var(--font-weight-medium);
   }
+
+  @media (--sm-up) {
+    padding: 0;
+  }
 }
 
 .footer {
   padding: 0 var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
 }
