@@ -20,10 +20,6 @@
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-base);
 
-  @media (--sm-up) {
-    padding: 0;
-  }
-
   & .avatar {
     z-index: 0;
     display: inline-flex;
@@ -36,10 +32,6 @@
 .info {
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-tight);
-
-  @media (--sm-up) {
-    padding: 0;
-  }
 
   & .displayName,
   & .username {
@@ -123,16 +115,8 @@
   & .count {
     font-weight: var(--font-weight-medium);
   }
-
-  @media (--sm-up) {
-    padding: 0;
-  }
 }
 
 .footer {
   padding: 0 var(--spacing-base);
-
-  @media (--sm-up) {
-    padding: 0;
-  }
 }
