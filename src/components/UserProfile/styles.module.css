@@ -20,10 +20,6 @@
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-base);
 
-  @media (--sm-up) {
-    padding: 0;
-  }
-
   & .avatar {
     z-index: 0;
     display: inline-flex;
@@ -36,10 +32,6 @@
 .info {
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-tight);
-
-  @media (--sm-up) {
-    padding: 0;
-  }
 
   & .displayName,
   & .username {
@@ -70,7 +62,9 @@
     & > span > * {
       position: relative;
       display: inline-block;
-      box-shadow: 0 0 0 1.5px var(--color-white);
+      margin-left: -4.5px;
+      border: 2px solid var(--color-white);
+      border-radius: 50%;
 
       &:nth-child(1) {
         z-index: 9;
