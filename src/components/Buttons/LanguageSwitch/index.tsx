@@ -64,7 +64,7 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
         <Button
           onClick={openDropdown}
           size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
-          spacing={[0, 0]}
+          spacing={size === 'sm' ? [0, 0] : [0, 'xtight']}
           bgColor={bgColor}
           aria-haspopup="listbox"
           ref={ref}

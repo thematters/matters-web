@@ -47,8 +47,13 @@
     font-size: 1.75rem;
   }
 
+  & .text {
+    flex-shrink: 0;
+  }
+
   & .ilusCity {
     display: block;
+    flex-shrink: 0;
     height: 349px;
     margin: var(--spacing-xx-loose) calc(var(--spacing-base) * -1) 0;
     background-position: left top;
@@ -88,8 +93,8 @@
 
   @media (--lg-up) {
     & .ilusCity {
-      width: 764px;
-      height: 474px;
+      width: 705px;
+      height: 437px;
     }
   }
 }

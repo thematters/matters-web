@@ -27,7 +27,7 @@ const Footer = () => {
           <div
             className={[styles.container, layoutStyles.columnFull].join(' ')}
           >
-            <Media at="md">
+            <Media lessThan="lg">
               <section className={styles.languageSwitch}>
                 <LanguageSwitch size="lg" bgColor="greyDarkest" />
               </section>
@@ -269,7 +269,7 @@ const Footer = () => {
                 </TextIcon>
               </Button>
 
-              <Media greaterThan="md">
+              <Media greaterThanOrEqual="lg">
                 <section className={styles.languageSwitch}>
                   <LanguageSwitch size="lg" bgColor="greyDarkest" />
                 </section>
