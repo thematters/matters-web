@@ -86,7 +86,7 @@ const Hero = () => {
           <section
             className={[layoutStyles.columnFull, styles.slogan].join(' ')}
           >
-            <section>
+            <section className={styles.text}>
               <h2>
                 <Translate
                   zh_hant="去中心化的"

@@ -1,15 +1,19 @@
+import { useContext } from 'react'
+
 import IMAGE_ILLUSTRATION_1 from '@/public/static/images/about/intro-illustration-1.png'
 import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/intro-illustration-2.png'
 import IMAGE_ILLUSTRATION_3 from '@/public/static/images/about/intro-illustration-3.png'
 import IMAGE_WAVE_1 from '@/public/static/images/about/wave-intro-1.svg'
 import IMAGE_WAVE_2 from '@/public/static/images/about/wave-intro-2.svg'
 import { EXTERNAL_LINKS } from '~/common/enums'
-import { Button, TextIcon, Translate } from '~/components'
+import { Button, LanguageContext, TextIcon, Translate } from '~/components'
+import { UserLanguage } from '~/gql/graphql'
 
 import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Intro = () => {
+  const { lang } = useContext(LanguageContext)
   const style = {
     '--about-wave-bg-1': `url(${IMAGE_WAVE_1})`,
     '--about-wave-bg-2': `url(${IMAGE_WAVE_2})`,
@@ -135,7 +139,11 @@ const Intro = () => {
                   bgColor="green"
                   textColor="white"
                   spacing={['tight', 'loose']}
-                  htmlHref="https://www.frontlinefellowship.io/"
+                  htmlHref={
+                    lang === UserLanguage.En
+                      ? 'https://en.frontlinefellowship.io/'
+                      : 'https://www.frontlinefellowship.io/'
+                  }
                   htmlTarget="_blank"
                   rel="noopener"
                 >

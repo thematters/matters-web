@@ -30,6 +30,7 @@
 /* layout */
 .intro {
   & img {
+    align-self: center;
     justify-self: center;
   }
 
@@ -124,7 +125,7 @@
 }
 
 .community {
-  padding: 3.25rem var(--spacing-base);
+  padding: 4.375rem var(--spacing-base);
   color: var(--color-white);
   background-color: var(--color-black);
 
@@ -168,7 +169,7 @@
 }
 
 .feature {
-  padding: 3.25rem var(--spacing-base) 0;
+  padding: 5rem var(--spacing-base);
   background-color: var(--color-green-lighter);
   background-image: var(--about-wave-bg-2);
   background-position: right bottom;
@@ -177,8 +178,8 @@
   & img {
     width: 258px;
     height: 312px;
-    margin-top: var(--spacing-x-loose);
-    margin-bottom: var(--spacing-x-loose);
+    margin-top: var(--spacing-xx-loose);
+    margin-bottom: var(--spacing-xx-loose);
 
     @media (--sm-up) {
       width: 328px;
@@ -216,10 +217,6 @@
 
     & .flag {
       text-align: left;
-    }
-
-    & .content {
-      padding-bottom: 8rem;
     }
   }
 }
