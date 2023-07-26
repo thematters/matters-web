@@ -10,6 +10,7 @@ import {
   Expandable,
   FollowUserButton,
   IconCamera24,
+  LinkWrapper,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -38,7 +39,7 @@ const DynamicWalletLabel = dynamic(() => import('../WalletLabel'), {
 })
 
 export const AsideUserProfile = () => {
-  const { isInPath, getQuery, router } = useRoute()
+  const { isInPath, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
   // public user data
@@ -146,49 +147,49 @@ export const AsideUserProfile = () => {
         )}
         {isInUserPage && !isMe && (
           <section className={styles.avatar}>
-            {hasTraveloggersBadge ? (
-              <TraveloggersAvatar user={user} isMe={isMe} />
-            ) : (
-              <Avatar size="xxxxl" user={user} inProfile />
-            )}
+            <LinkWrapper {...userProfilePath}>
+              {hasTraveloggersBadge ? (
+                <TraveloggersAvatar user={user} isMe={isMe} />
+              ) : (
+                <Avatar size="xxxxl" user={user} inProfile />
+              )}
+            </LinkWrapper>
           </section>
         )}
         {!isInUserPage && (
-          <section
-            className={styles.avatar}
-            onClick={() => {
-              router.push(userProfilePath.href)
-            }}
-          >
-            {hasTraveloggersBadge ? (
-              <TraveloggersAvatar user={user} isMe={isMe} size="xxxll" />
-            ) : (
-              <Avatar size="xxxll" user={user} inProfile />
-            )}
-          </section>
+          <LinkWrapper {...userProfilePath}>
+            <section className={styles.avatar}>
+              {hasTraveloggersBadge ? (
+                <TraveloggersAvatar user={user} isMe={isMe} size="xxxll" />
+              ) : (
+                <Avatar size="xxxll" user={user} inProfile />
+              )}
+            </section>
+          </LinkWrapper>
         )}
       </header>
 
       <section className={styles.info}>
         <section className={styles.displayName}>
           {isInUserPage && (
-            <h1
-              className={styles.isInUserPageName}
-              data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
-            >
-              {user.displayName}
-            </h1>
+            <LinkWrapper {...userProfilePath}>
+              <h1
+                className={styles.isInUserPageName}
+                data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
+              >
+                {user.displayName}
+              </h1>
+            </LinkWrapper>
           )}
           {!isInUserPage && (
-            <h1
-              className={styles.name}
-              data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
-              onClick={() => {
-                router.push(userProfilePath.href)
-              }}
-            >
-              {user.displayName}
-            </h1>
+            <LinkWrapper {...userProfilePath}>
+              <h1
+                className={styles.name}
+                data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
+              >
+                {user.displayName}
+              </h1>
+            </LinkWrapper>
           )}
         </section>
 
