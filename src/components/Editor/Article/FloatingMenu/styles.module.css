@@ -14,7 +14,7 @@
   }
 
   @media (--md-up) {
-    left: calc((2rem + var(--spacing-x-loose)) * - 1);
+    left: calc((2rem + var(--spacing-base)) * - 1);
   }
 }
 
