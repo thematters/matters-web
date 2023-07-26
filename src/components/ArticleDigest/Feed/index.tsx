@@ -151,7 +151,7 @@ const BaseArticleDigestFeed = ({
         {cover && (
           <LinkWrapper {...path} onClick={onClick}>
             <div className={styles.cover}>
-              <ResponsiveImage url={cover} size="144w" />
+              <ResponsiveImage url={cover} size="360w" />
             </div>
           </LinkWrapper>
         )}
