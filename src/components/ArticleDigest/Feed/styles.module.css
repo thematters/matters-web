@@ -41,6 +41,7 @@
 
   &.lineClamp2 {
     -webkit-line-clamp: 2;
+    min-height: 2.75rem;
   }
 }
 
@@ -55,7 +56,7 @@
     @mixin object-fit-cover;
 
     background-color: var(--color-grey-lighter);
-    border-radius: var(--spacing-xx-tight);
+    border-radius: var(--spacing-x-tight);
   }
 
   @media (--sm-up) {

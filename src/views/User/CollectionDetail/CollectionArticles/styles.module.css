@@ -15,6 +15,8 @@
   & .sortButton {
     @mixin transition;
 
+    color: var(--color-grey-darker);
+
     &:hover,
     &:focus {
       color: var(--color-matters-green);

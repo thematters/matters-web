@@ -13,10 +13,10 @@ const CreateCollection = () => {
             <Button
               spacing={['xtight', 'tight']}
               borderColor="green"
-              borderActiveColor="green"
+              borderActiveColor="greenDark"
               borderWidth="md"
               textColor="green"
-              textActiveColor="green"
+              textActiveColor="greenDark"
               onClick={openDialog}
             >
               <FormattedMessage

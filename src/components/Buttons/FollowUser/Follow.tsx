@@ -87,9 +87,9 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
       size={sizes[size]}
       spacing={spacings[size]}
       textColor="green"
-      textActiveColor="green"
+      textActiveColor="greenDark"
       borderColor="green"
-      borderActiveColor="green"
+      borderActiveColor="greenDark"
       onClick={onClick}
     >
       <TextIcon

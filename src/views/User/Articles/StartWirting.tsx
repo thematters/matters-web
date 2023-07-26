@@ -29,10 +29,10 @@ const StartWriting = () => {
         size={[null, '2rem']}
         spacing={[0, 'tight']}
         borderColor="green"
-        borderActiveColor="green"
+        borderActiveColor="greenDark"
         borderWidth="md"
         textColor="green"
-        textActiveColor="green"
+        textActiveColor="greenDark"
         onClick={async () => {
           if (viewer.shouldSetupLikerID) {
             window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
