@@ -44,7 +44,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   const user = data?.user
   const collections = user?.collections
 
-  const formId = 'add-collection-article-form'
+  const formId = 'add-collections-article-form'
   const hasCheckedEdges = collections?.edges?.filter(
     ({ node }) => !!node.contains
   )

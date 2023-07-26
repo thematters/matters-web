@@ -11,28 +11,36 @@ const Telegram = ({
   title: string
   link: string
   circle?: boolean
-}) => (
-  <button
-    type="button"
-    onClick={() => {
-      const shareUrl = `https://telegram.me/share?${new URLSearchParams({
-        url: link,
-        text: title,
-      }).toString()}`
-      analytics.trackEvent('share', {
-        type: 'telegram',
-      })
-      return window.open(shareUrl, 'Share to Telegram')
-    }}
-  >
-    {circle && withIcon(IconShareTelegramCircle)({ size: 'xlM' })}
+}) => {
+  // append utm_source to link
+  const utm_source = 'share_telegram'
+  const url = new URL(link)
+  url.searchParams.append('utm_source', utm_source)
+  link = url.toString()
 
-    {!circle && (
-      <TextIcon icon={withIcon(IconShareTelegram)({})} spacing="base">
-        Telegram
-      </TextIcon>
-    )}
-  </button>
-)
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        const shareUrl = `https://telegram.me/share?${new URLSearchParams({
+          url: link,
+          text: title,
+        }).toString()}`
+        analytics.trackEvent('share', {
+          type: 'telegram',
+        })
+        return window.open(shareUrl, 'Share to Telegram')
+      }}
+    >
+      {circle && withIcon(IconShareTelegramCircle)({ size: 'xlM' })}
+
+      {!circle && (
+        <TextIcon icon={withIcon(IconShareTelegram)({})} spacing="base">
+          Telegram
+        </TextIcon>
+      )}
+    </button>
+  )
+}
 
 export default Telegram

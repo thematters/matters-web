@@ -1,4 +1,5 @@
-import { Layout } from '~/components'
+import { toPath } from '@/src/common/utils'
+import { Head, Layout } from '~/components'
 import { QueryError, Throw404, usePublicQuery, useRoute } from '~/components'
 import AsideUserProfile from '~/components/UserProfile/AsideUserProfile'
 import { CollectionDetailQuery } from '~/gql/graphql'
@@ -46,6 +47,20 @@ const BaseCollectionDetail = () => {
 
   return (
     <>
+      <Head
+        title={`${collection.title} - ${collection.author.displayName} (@${collection.author.userName})`}
+        path={
+          toPath({
+            page: 'collectionDetail',
+            collection,
+            userName: collection.author.userName!,
+          }).href
+        }
+        noSuffix
+        description={collection.description}
+        image={collection.cover}
+      />
+
       <CollectionProfile collection={collection} />
       <CollectionArticles collection={collection} />
     </>

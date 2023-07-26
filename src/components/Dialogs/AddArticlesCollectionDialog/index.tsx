@@ -15,15 +15,12 @@ import {
 import updateUserCollectionDetail from '~/components/GQL/updates/userCollectionDetail'
 import {
   AddArticlesCollectionMutation,
-  AddArticlesCollectionUserPublicQuery,
-  CollectionDetailFragment,
+  AddArticlesCollectionUserQuery,
+  CollectionArticlesCollectionFragment,
 } from '~/gql/graphql'
 import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 
-import {
-  ADD_ARTICLES_COLLECTION,
-  ADD_ARTICLES_COLLECTION_USER_PUBLIC,
-} from './gql'
+import { ADD_ARTICLES_COLLECTION, ADD_ARTICLES_COLLECTION_USER } from './gql'
 import SearchingDialogContent from './SearchingDialogContent'
 import SearchInput from './SearchInput'
 import SelectDialogContent from './SelectDialogContent'
@@ -36,7 +33,7 @@ interface FormValues {
 
 interface AddArticlesCollectionDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-  collection: CollectionDetailFragment
+  collection: CollectionArticlesCollectionFragment
   onUpdate: () => void
 }
 
@@ -47,7 +44,7 @@ const BaseAddArticlesCollectionDialog = ({
 }: AddArticlesCollectionDialogProps) => {
   const viewer = useContext(ViewerContext)
 
-  const formId = 'add-collection-article-form'
+  const formId = 'add-articles-collection-form'
 
   const [update] = useMutation<AddArticlesCollectionMutation>(
     ADD_ARTICLES_COLLECTION,
@@ -67,8 +64,8 @@ const BaseAddArticlesCollectionDialog = ({
 
   const userName = getQuery('name')
   const { data, loading, error } =
-    usePublicQuery<AddArticlesCollectionUserPublicQuery>(
-      ADD_ARTICLES_COLLECTION_USER_PUBLIC,
+    usePublicQuery<AddArticlesCollectionUserQuery>(
+      ADD_ARTICLES_COLLECTION_USER,
       {
         variables: { userName },
       }
