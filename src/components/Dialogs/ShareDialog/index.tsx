@@ -80,9 +80,14 @@ export const ShareDialog = (props: ShareDialogProps) => {
 
     if (navigator.share && isMobile() && !props.disableNativeShare) {
       try {
+        // append utm_source to link
+        const utm_source = 'share_native'
+        const url = new URL(shareLink)
+        url.searchParams.append('utm_source', utm_source)
+
         await navigator.share({
           title: shareTitle,
-          url: shareLink,
+          url: url.toString(),
         })
       } catch (e) {
         console.error(e)

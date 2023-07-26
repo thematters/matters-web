@@ -11,28 +11,36 @@ const Whatsapp = ({
   title: string
   link: string
   circle?: boolean
-}) => (
-  <button
-    type="button"
-    onClick={() => {
-      const shareUrl = `https://api.whatsapp.com/send?${new URLSearchParams({
-        text: title ? title + ' ' + link : link,
-      }).toString()}`
+}) => {
+  // append utm_source to link
+  const utm_source = 'share_whatsapp'
+  const url = new URL(link)
+  url.searchParams.append('utm_source', utm_source)
+  link = url.toString()
 
-      analytics.trackEvent('share', {
-        type: 'whatsapp',
-      })
-      return window.open(shareUrl, 'Share to WhatsApp')
-    }}
-  >
-    {circle && withIcon(IconShareWhatsAppCircle)({ size: 'xlM' })}
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        const shareUrl = `https://api.whatsapp.com/send?${new URLSearchParams({
+          text: title ? title + ' ' + link : link,
+        }).toString()}`
 
-    {!circle && (
-      <TextIcon icon={withIcon(IconShareWhatsApp)({})} spacing="base">
-        WhatsApp
-      </TextIcon>
-    )}
-  </button>
-)
+        analytics.trackEvent('share', {
+          type: 'whatsapp',
+        })
+        return window.open(shareUrl, 'Share to WhatsApp')
+      }}
+    >
+      {circle && withIcon(IconShareWhatsAppCircle)({ size: 'xlM' })}
+
+      {!circle && (
+        <TextIcon icon={withIcon(IconShareWhatsApp)({})} spacing="base">
+          WhatsApp
+        </TextIcon>
+      )}
+    </button>
+  )
+}
 
 export default Whatsapp

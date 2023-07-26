@@ -11,31 +11,39 @@ const LINE = ({
   title: string
   link: string
   circle?: boolean
-}) => (
-  <button
-    type="button"
-    onClick={() => {
-      const shareUrl = `https://social-plugins.line.me/lineit/share?${new URLSearchParams(
-        {
-          url: link,
-          text: title,
-        }
-      ).toString()}`
+}) => {
+  // append utm_source to link
+  const utm_source = 'share_line'
+  const url = new URL(link)
+  url.searchParams.append('utm_source', utm_source)
+  link = url.toString()
 
-      analytics.trackEvent('share', {
-        type: 'line',
-      })
-      return window.open(shareUrl, 'Share to Line')
-    }}
-  >
-    {circle && withIcon(IconShareLINECircle)({ size: 'xlM' })}
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        const shareUrl = `https://social-plugins.line.me/lineit/share?${new URLSearchParams(
+          {
+            url: link,
+            text: title,
+          }
+        ).toString()}`
 
-    {!circle && (
-      <TextIcon icon={withIcon(IconShareLINE)({})} spacing="base">
-        LINE
-      </TextIcon>
-    )}
-  </button>
-)
+        analytics.trackEvent('share', {
+          type: 'line',
+        })
+        return window.open(shareUrl, 'Share to Line')
+      }}
+    >
+      {circle && withIcon(IconShareLINECircle)({ size: 'xlM' })}
+
+      {!circle && (
+        <TextIcon icon={withIcon(IconShareLINE)({})} spacing="base">
+          LINE
+        </TextIcon>
+      )}
+    </button>
+  )
+}
 
 export default LINE

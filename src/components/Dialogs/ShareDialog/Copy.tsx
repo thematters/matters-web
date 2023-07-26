@@ -7,6 +7,13 @@ import styles from './styles.module.css'
 
 const Copy = ({ link }: { link: string }) => {
   const intl = useIntl()
+
+  // append utm_source to link
+  const utm_source = 'share_copy'
+  const url = new URL(link)
+  url.searchParams.append('utm_source', utm_source)
+  link = url.toString()
+
   return (
     <section className={styles.copy}>
       <CopyToClipboard text={link}>
