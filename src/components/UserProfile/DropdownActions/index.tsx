@@ -6,7 +6,8 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import {
   Button,
   Dropdown,
-  IconMore32,
+  IconMore16,
+  IconMore22,
   IconRss20,
   IconShare20,
   Menu,
@@ -126,7 +127,7 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <IconMore32 size="mdM" />
+                <IconMore22 size="mdM" />
               </Button>
             )}
             {isInAside && !isMe && (
@@ -143,7 +144,7 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <IconMore32 size="mdM" />
+                <IconMore22 size="mdM" />
               </Button>
             )}
             {!isInAside && (
@@ -160,7 +161,7 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <IconMore32 />
+                <IconMore16 />
               </Button>
             )}
           </>
