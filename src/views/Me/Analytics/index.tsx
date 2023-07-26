@@ -104,7 +104,15 @@ const MyAnalytics = () => {
   const articleCount = data?.viewer?.articles.totalCount || 0
 
   if (articleCount === 0) {
-    return <EmptyAnalytics />
+    return (
+      <Layout.Main>
+        <Header />
+
+        <Layout.Main.Spacing>
+          <EmptyAnalytics />
+        </Layout.Main.Spacing>
+      </Layout.Main>
+    )
   }
 
   return (

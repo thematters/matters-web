@@ -1,4 +1,10 @@
 .editorTitle {
+  margin: 0 0 var(--spacing-base);
+
+  @media (--sm-up) {
+    margin: var(--spacing-base) 0;
+  }
+
   & input {
     margin-bottom: var(--spacing-base);
     font-size: var(--font-size-article-title);
