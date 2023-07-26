@@ -15,15 +15,15 @@ const fragments = {
 
 const BannedHeader = () => (
   <Translate
-    zh_hant="此作品因違反用戶協定而被強制隱藏。"
-    zh_hans="此作品因违反用户协定而被强制隐藏。"
+    zh_hant="此作品因違反用戶協定而被強制歸檔。"
+    zh_hans="此作品因违反用户协定而被强制封存。"
     en="This work is archived due to violation of user agreement."
   />
 )
 const ArchivedHeader = () => (
   <Translate
-    zh_hant="此作品已在站內隱藏。"
-    zh_hans="此作品已在站內隐藏。"
+    zh_hant="此作品已在站內歸檔。"
+    zh_hans="此作品已在站內封存。"
     en="This work is archived on Matters."
   />
 )

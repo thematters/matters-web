@@ -105,8 +105,8 @@ const ConfirmPublishDialogContent: React.FC<
           </li>
           <li>
             <Translate
-              zh_hant="首次發布作品後有四次正文修訂機會，你也可以隱藏原文重新發布作品。"
-              zh_hans="首次发布作品后有四次正文修订机会，你也可以隐藏原文重新发布作品。"
+              zh_hant="首次發布作品後有四次正文修訂機會，你也可以歸檔原文重新發布作品。"
+              zh_hans="首次发布作品后有四次正文修订机会，你也可以封存原文重新发布作品。"
               en="You can edit the article four times after publishing it. You can also archive the original and republish.."
             />
           </li>

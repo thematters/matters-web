@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestFeed } from '~/components'
+import { ArticleDigestFeed } from '~/components/ArticleDigest/Feed'
 
 import UserTabs from '../UserTabs'
 import PinBoard from './PinBoard'

@@ -105,7 +105,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
                 en="Confirm Removal"
               />
             }
-            color="red"
+            color={loading ? 'green' : 'red'}
             onClick={onClick}
             loading={loading}
           />
@@ -119,7 +119,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
                 en="Confirm Removal"
               />
             }
-            color="red"
+            color={loading ? 'green' : 'red'}
             onClick={onClick}
             loading={loading}
           />

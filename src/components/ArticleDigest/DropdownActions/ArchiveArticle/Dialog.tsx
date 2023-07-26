@@ -77,11 +77,11 @@ const ArchiveArticleDialog = ({
     })
   }
 
-  const onClickArchive = () => {
+  const onClickArchive = async () => {
     if (isPreConfirm) {
       nextStep()
     } else {
-      onArchive()
+      await onArchive()
       closeDialog()
     }
   }
@@ -125,7 +125,7 @@ const ArchiveArticleDialog = ({
                   <FormattedMessage defaultMessage="Confirm Archiving" />
                 )
               }
-              color="red"
+              color={loading ? 'green' : 'red'}
               onClick={onClickArchive}
               loading={loading}
             />
@@ -139,7 +139,7 @@ const ArchiveArticleDialog = ({
                   <FormattedMessage defaultMessage="Confirm Archiving" />
                 )
               }
-              color="red"
+              color={loading ? 'green' : 'red'}
               onClick={onClickArchive}
               loading={loading}
             />

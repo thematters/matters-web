@@ -3,30 +3,30 @@
   padding: var(--spacing-xx-loose) 0 var(--spacing-x-tight);
   background-image: var(--about-hero-bg);
   background-position:
-    right top,
     top 128px right -70px,
+    right top,
     left bottom;
-  background-size: 258px, 281px, 123px;
+  background-size: 281px, 258px, 123px;
 
   @media (--sm-up) {
     padding-bottom: 5rem;
     background-position:
-      right top,
       top 259px right var(--spacing-x-loose),
+      right top,
       left bottom;
-    background-size: 521px, 258px, 270px;
+    background-size: 258px, 521px, 270px;
   }
 
   @media (--md-up) {
     background-position:
-      right top,
       top 98px right 5rem,
+      right top,
       left bottom;
-    background-size: 521px, 308px, 270px;
+    background-size: 308px, 521px, 270px;
   }
 
   @media (--md-up) {
-    background-size: 521px, 308px, 357px;
+    background-size: 308px, 521px, 357px;
   }
 }
 

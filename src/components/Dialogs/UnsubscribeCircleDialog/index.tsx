@@ -68,7 +68,7 @@ const BaseUnsubscribeCircleDialog = ({
             isUnsubscribed ? null : (
               <Dialog.RoundedButton
                 text={<FormattedMessage defaultMessage="Confirm" />}
-                color="red"
+                color={loading ? 'green' : 'red'}
                 loading={loading}
                 onClick={() => unsubscribe()}
               />
@@ -78,7 +78,7 @@ const BaseUnsubscribeCircleDialog = ({
             isUnsubscribed ? null : (
               <Dialog.TextButton
                 text={<FormattedMessage defaultMessage="Confirm" />}
-                color="red"
+                color={loading ? 'green' : 'red'}
                 loading={loading}
                 onClick={() => unsubscribe()}
               />
