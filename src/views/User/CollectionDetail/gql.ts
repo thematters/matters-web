@@ -1,42 +1,33 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestFeed } from '~/components'
+import CollectionArticles from './CollectionArticles'
+import CollectionProfile from './CollectionProfile'
 
-export const fragment = gql`
-  fragment CollectionDetail on Collection {
-    id
-    title
-    description
-    cover
-    updatedAt
-    pinned
-    author {
+const fragments = {
+  collection: gql`
+    fragment CollectionDetailCollection on Collection {
       id
-      userName
-    }
-    articles(input: { first: 100 }) {
-      totalCount
-      edges {
-        cursor
-        node {
-          ...ArticleDigestFeedArticlePublic
-          ...ArticleDigestFeedArticlePrivate
-        }
+      author {
+        id
+        displayName
+        userName
       }
+      ...CollectionProfileCollection
+      ...CollectionArticlesCollection
     }
-  }
-  ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
-`
+    ${CollectionProfile.fragments.collection}
+    ${CollectionArticles.fragments.collection}
+  `,
+}
 
 export const COLLECTION_DETAIL = gql`
   query CollectionDetail($id: ID!) {
     node(input: { id: $id }) {
       id
       ... on Collection {
-        ...CollectionDetail
+        ...CollectionDetailCollection
       }
     }
   }
-  ${fragment}
+  ${fragments.collection}
 `

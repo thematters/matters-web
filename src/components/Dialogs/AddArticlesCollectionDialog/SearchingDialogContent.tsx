@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { Form } from '~/components'
 import {
-  CollectionDetailFragment,
+  CollectionArticlesCollectionFragment,
   UserArticlesUserFragment,
 } from '~/gql/graphql'
 
@@ -12,7 +12,7 @@ import styles from './styles.module.css'
 interface SearchingDialogContentProps {
   formik: any
   user: UserArticlesUserFragment
-  collection: CollectionDetailFragment
+  collection: CollectionArticlesCollectionFragment
   checkingIds: string[]
   searchValue: string
   formId: string
@@ -31,7 +31,7 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
     articles?.edges?.filter(({ node }) => node.state === 'active') || []
 
   const hasAddedArticlesId =
-    collection.articles.edges?.map(({ node }) => node.id) || []
+    collection.articleList.edges?.map(({ node }) => node.id) || []
   const hasCheckedEdges = articles?.edges?.filter(
     ({ node }) => hasAddedArticlesId.indexOf(node.id) !== -1
   )

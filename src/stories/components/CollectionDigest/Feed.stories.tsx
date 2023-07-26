@@ -19,5 +19,7 @@ const Template: ComponentStory<typeof CollectionDigest.Feed> = (args) => (
 
 export const Feed = Template.bind({})
 Feed.args = {
-  collection: MOCK_COLLECTION,
+  collection: {
+    ...MOCK_COLLECTION,
+  },
 }

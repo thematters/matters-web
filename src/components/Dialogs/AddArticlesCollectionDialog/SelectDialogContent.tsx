@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import { Form, InfiniteScroll } from '~/components'
 import {
-  CollectionDetailFragment,
+  CollectionArticlesCollectionFragment,
   UserArticlesUserFragment,
 } from '~/gql/graphql'
 
@@ -12,7 +12,7 @@ import styles from './styles.module.css'
 interface SelectDialogContentProps {
   formik: any
   user: UserArticlesUserFragment
-  collection: CollectionDetailFragment
+  collection: CollectionArticlesCollectionFragment
   checkingIds: string[]
   formId: string
 }
@@ -29,7 +29,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   const articlesLength = 20
 
   const hasAddedArticlesId =
-    collection.articles.edges?.map(({ node }) => node.id) || []
+    collection.articleList.edges?.map(({ node }) => node.id) || []
 
   const hasCheckedEdges = articles?.edges?.filter(
     ({ node }) => hasAddedArticlesId.indexOf(node.id) !== -1

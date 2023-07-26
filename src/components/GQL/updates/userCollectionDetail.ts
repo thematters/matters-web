@@ -22,9 +22,7 @@ const update = ({
   type: 'add' | 'delete' | 'setTop' | 'setBottom'
 }) => {
   // FIXME: circular dependencies
-  const {
-    COLLECTION_DETAIL,
-  } = require('~/views/User/CollectionDetail/CollectionProfile/gql')
+  const { COLLECTION_DETAIL } = require('~/views/User/CollectionDetail/gql')
 
   if (!collectionId) {
     return
@@ -40,21 +38,23 @@ const update = ({
       return
     }
 
-    if (!data?.node?.articles.edges) {
+    if (!data?.node?.articleList.edges) {
       return
     }
 
-    let edges = data.node.articles.edges
+    let edges = data.node.articleList.edges
 
     switch (type) {
       case 'add':
         const addEdges =
           result?.data?.addCollectionsArticles[0].articles.edges || []
         edges = [...addEdges, ...edges]
+        data.node.articleList.totalCount += addEdges.length
         data.node.articles.totalCount += addEdges.length
         break
       case 'delete':
         edges = edges.filter(({ node }) => node.id !== articleId)
+        data.node.articleList.totalCount -= 1
         data.node.articles.totalCount -= 1
         break
       case 'setTop':
@@ -87,8 +87,8 @@ const update = ({
         ...data,
         node: {
           ...data.node,
-          articles: {
-            ...data.node.articles,
+          articleList: {
+            ...data.node.articleList,
             edges,
           },
         },

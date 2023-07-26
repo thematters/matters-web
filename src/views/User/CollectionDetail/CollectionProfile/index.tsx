@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { CollectionProfileCollectionFragment } from '@/src/gql/graphql'
 import {
   Book,
   Button,
@@ -10,12 +11,12 @@ import {
   ViewerContext,
 } from '~/components'
 import EditCollection from '~/components/CollectionDigest/DropdownActions/EditCollection'
-import { CollectionDetailFragment } from '~/gql/graphql'
 
+import { fragments } from './gql'
 import styles from './styles.module.css'
 
 interface CollectionProfileProps {
-  collection: CollectionDetailFragment
+  collection: CollectionProfileCollectionFragment
 }
 
 const CollectionProfile = ({ collection }: CollectionProfileProps) => {
@@ -24,7 +25,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
 
-  const { title, cover, description, articles } = collection
+  const { title, cover, description, articles, author } = collection
 
   return (
     <EditCollection.Dialog collection={collection}>
@@ -41,7 +42,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                 )}
                 <section className={styles.info}>
                   <h2 className={styles.title}>{title}</h2>
-                  <p className={styles.author}>{collection.author.userName}</p>
+                  <p className={styles.author}>{author.userName}</p>
                   <p className={styles.articleCount}>
                     <FormattedMessage
                       defaultMessage="{articleCount} Articles"
@@ -127,5 +128,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
     </EditCollection.Dialog>
   )
 }
+
+CollectionProfile.fragments = fragments
 
 export default CollectionProfile
