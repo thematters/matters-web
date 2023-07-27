@@ -74,7 +74,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
     if (hasReset) {
       setItems(articleEdges)
     }
-  }, [articleEdges])
+  }, [articles.edges])
 
   return (
     <>
