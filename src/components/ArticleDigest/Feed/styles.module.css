@@ -70,4 +70,10 @@
   align-items: center;
   margin-bottom: var(--spacing-x-tight);
   line-height: 1;
+
+  & .author {
+    & :global(span[data-test-id='digest/user/mini/display-name']) {
+      line-height: 1.125rem;
+    }
+  }
 }
