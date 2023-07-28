@@ -36,18 +36,18 @@ const Amount = ({ amount, currency, state, testId }: AmountProps) => {
       : 'black'
 
   return (
-    <section
-      className={styles.content}
-      {...(testId ? { ['data-test-id']: testId } : {})}
-    >
-      <TextIcon spacing="xtight" size="mdS" weight="semibold" color={color}>
+    <TextIcon spacing="xtight" size="md" weight="md" color={color}>
+      <span
+        className={styles.amount}
+        {...(testId ? { ['data-test-id']: testId } : {})}
+      >
         {amount > 0 ? '+' : '-'}
         &nbsp;
         {currency}
         &nbsp;
         {formatAmount(Math.abs(amount))}
-      </TextIcon>
-    </section>
+      </span>
+    </TextIcon>
   )
 }
 
