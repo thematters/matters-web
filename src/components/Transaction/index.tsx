@@ -58,8 +58,6 @@ const fragments = {
 const BaseTransaction = ({ tx }: TransactionProps) => {
   const viewer = useContext(ViewerContext)
   const {
-    amount,
-    currency,
     purpose,
     sender,
     recipient,
@@ -86,12 +84,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
           <PurposeTitle tx={tx} />
         )}
 
-        <Amount
-          amount={amount}
-          currency={currency}
-          state={state}
-          testId={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM_AMOUNT}
-        />
+        <Amount tx={tx} testId={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM_AMOUNT} />
       </header>
 
       <Entity tx={tx} />
