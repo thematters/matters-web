@@ -27,6 +27,9 @@
     "defaultMessage": "进入社区",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
+  "/jJLYy": {
+    "defaultMessage": "交易记录"
+  },
   "/ns2st": {
     "defaultMessage": "下载应用"
   },
@@ -47,6 +50,14 @@
   "0ThOw1": {
     "defaultMessage": "新建选集",
     "description": "src/views/User/Collections/UserCollections.tsx"
+  },
+  "0qagOO": {
+    "defaultMessage": "围炉营收",
+    "description": "src/components/Transaction/index.tsx"
+  },
+  "1COpAA": {
+    "defaultMessage": "失败",
+    "description": "src/components/Transaction/State/index.tsx"
   },
   "1Z1M77": {
     "defaultMessage": "尚无阅读记录",
@@ -156,16 +167,31 @@
     "defaultMessage": "在你的围炉中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "6aE6hr": {
+    "defaultMessage": "全部",
+    "description": "src/views/Me/Transactions/index.tsx"
+  },
   "6flWFg": {
     "defaultMessage": "用户协议"
+  },
+  "6kMb9Z": {
+    "defaultMessage": "链上纪录"
   },
   "6q0G5e": {
     "defaultMessage": "加入成功",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
   },
+  "6uavsa": {
+    "defaultMessage": "已取消",
+    "description": "src/components/Transaction/State/index.tsx"
+  },
   "77tYPg": {
     "defaultMessage": "确认删除后，{commentType}会立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "79Ydsg": {
+    "defaultMessage": "提现撤销",
+    "description": "src/components/Transaction/index.tsx"
   },
   "7JlauX": {
     "defaultMessage": "指南"
@@ -232,6 +258,10 @@
   },
   "A7ugfn": {
     "defaultMessage": "更多操作"
+  },
+  "AB5rDl": {
+    "defaultMessage": "信用卡交易内容有疑虑时，发卡机构暂停或退回的款项",
+    "description": "src/components/Transaction/index.tsx"
   },
   "AGcU5J": {
     "defaultMessage": "置顶",
@@ -511,6 +541,10 @@
   "NAidKb": {
     "defaultMessage": "通知"
   },
+  "NCBtyI": {
+    "defaultMessage": "支持",
+    "description": "src/views/Me/Transactions/index.tsx"
+  },
   "NONfAh": {
     "defaultMessage": "豆瓣",
     "description": "src/components/Share/Buttons/Douban.tsx"
@@ -552,6 +586,10 @@
     "defaultMessage": "设置围炉网址（创建后不可修改）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "R7yHDl": {
+    "defaultMessage": "圍爐營收",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "RFzVUD": {
     "defaultMessage": "取消置顶",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -579,8 +617,16 @@
   "Seanpx": {
     "defaultMessage": "必填欄位"
   },
+  "Sep44m": {
+    "defaultMessage": "提现",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "Szd1tH": {
     "defaultMessage": "登出失败，再来一次"
+  },
+  "T73SwS": {
+    "defaultMessage": "订阅",
+    "description": "src/views/Me/Transactions/index.tsx"
   },
   "T9oZC8": {
     "defaultMessage": "确认要删除该选集“{collection}”吗？"
@@ -744,6 +790,10 @@
   },
   "adThp5": {
     "defaultMessage": "最新"
+  },
+  "awW+lk": {
+    "defaultMessage": "进行中…",
+    "description": "src/components/Transaction/State/index.tsx"
   },
   "b+LSgI": {
     "defaultMessage": "回复了你在围炉 ",
@@ -1122,6 +1172,10 @@
   "ulh3kf": {
     "defaultMessage": "选集"
   },
+  "up6Uh/": {
+    "defaultMessage": "争议款退回",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "uw32VR": {
     "defaultMessage": "教学指南"
   },
@@ -1200,6 +1254,10 @@
     "defaultMessage": "选集暂时不允许超过 100 篇",
     "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
   },
+  "yOKEVx": {
+    "defaultMessage": "储值",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "ySGgTo": {
     "defaultMessage": "添加精选",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -1207,6 +1265,10 @@
   "yZfKI4": {
     "defaultMessage": " 眾聊提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "yoRaUc": {
+    "defaultMessage": "退款",
+    "description": "src/components/Transaction/index.tsx"
   },
   "zKOr2x": {
     "defaultMessage": "已追踪用户占总观看人数比例",
