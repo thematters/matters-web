@@ -1,18 +1,17 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
-import { Card, DateTime, Translate, ViewerContext } from '~/components'
+import { DateTime, ViewerContext } from '~/components'
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { CircleDigest } from '~/components/CircleDigest'
 import { UserDigest } from '~/components/UserDigest'
 import { DigestTransactionFragment } from '~/gql/graphql'
 
 import Amount from './Amount'
-import Currency from './Currency'
 import Donator from './Donator'
+import Entity from './Entity'
+import PurposeTitle from './PurposeTitle'
 import State from './State'
 import styles from './styles.module.css'
 
@@ -65,118 +64,43 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
     sender,
     recipient,
     state,
-    target,
     message,
     createdAt,
     blockchainTx,
   } = tx
 
   const isViewerSender = sender && viewer.id === sender.id
-  const isViewerRecipient = recipient && viewer.id === recipient.id
-
-  const isAddCredit = purpose === 'addCredit'
-  const isRefund = purpose === 'refund'
   const isDonation = purpose === 'donation'
-  const isPayout = purpose === 'payout'
   const isSubscription = purpose === 'subscriptionSplit'
-  const isWalletAction = isAddCredit || isRefund || isPayout
-
-  const article = target?.__typename === 'Article' && target
-  const circle = target?.__typename === 'Circle' && target
-  const path = article
-    ? toPath({ page: 'articleDetail', article })
-    : circle
-    ? toPath({ page: 'circleDetail', circle })
-    : null
-
-  const dateTimeClasses = classNames({
-    [styles.dateTime]: true,
-    [styles.isDonation]: isDonation,
-  })
+  const useUserHeader = isSubscription || isDonation
 
   return (
-    <Card {...path} spacing={[0, 0]} bgActiveColor="none">
-      <section
-        className={styles.container}
-        data-test-id={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM}
-      >
-        {(isAddCredit || isPayout || isSubscription) && (
-          <section className={styles.txIcon}>
-            <Currency currency={currency} />
-          </section>
+    <section
+      className={styles.transaction}
+      data-test-id={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM}
+    >
+      <header className={styles.header}>
+        {useUserHeader ? (
+          <Donator user={isViewerSender ? recipient : sender} />
+        ) : (
+          <PurposeTitle tx={tx} />
         )}
 
-        <section className={styles.txInfo}>
-          <section className={styles.left}>
-            {isDonation && (
-              <Donator user={isViewerSender ? recipient : sender} />
-            )}
+        <Amount
+          amount={amount}
+          currency={currency}
+          state={state}
+          testId={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM_AMOUNT}
+        />
+      </header>
 
-            {isDonation && article && (
-              <section className={styles.title}>
-                <ArticleDigestTitle
-                  article={article}
-                  is="h2"
-                  textWeight="normal"
-                  textSize="xs"
-                />
-              </section>
-            )}
+      <Entity tx={tx} />
 
-            {isWalletAction && (
-              <section className={styles.walletAction}>
-                <p>
-                  {isAddCredit && <Translate id="topUp" />}
-                  {isRefund && <Translate id="refund" />}
-                  {isPayout && <Translate id="paymentPayout" />}
-                </p>
-              </section>
-            )}
-
-            {isSubscription && circle && (
-              <>
-                <section className={styles.subscription}>
-                  <p>
-                    {isViewerRecipient && (
-                      <Translate zh_hant="圍爐營收" zh_hans="围炉营收" />
-                    )}
-                    {isViewerSender && (
-                      <Translate zh_hant="圍爐訂閱" zh_hans="围炉订阅" />
-                    )}
-                  </p>
-                </section>
-                <section className={`${styles.title} ${styles.circleTitle}`}>
-                  <CircleDigest.Title
-                    circle={circle}
-                    is="h2"
-                    textWeight="normal"
-                    textSize="xs"
-                  />
-                </section>
-              </>
-            )}
-
-            <section className={dateTimeClasses}>
-              <DateTime date={createdAt} />
-            </section>
-          </section>
-
-          <section className={styles.right}>
-            <Amount
-              amount={amount}
-              currency={currency}
-              state={state}
-              testId={TEST_ID.ME_WALLET_TRANSACTIONS_ITEM_AMOUNT}
-            />
-            <State
-              state={state}
-              message={message}
-              blockchainTx={blockchainTx}
-            />
-          </section>
-        </section>
-      </section>
-    </Card>
+      <footer className={styles.footer}>
+        <DateTime date={createdAt} />
+        <State state={state} message={message} blockchainTx={blockchainTx} />
+      </footer>
+    </section>
   )
 }
 

@@ -1,0 +1,4 @@
+.entity {
+  margin-top: var(--spacing-x-tight);
+  margin-left: var(--spacing-x-loose);
+}

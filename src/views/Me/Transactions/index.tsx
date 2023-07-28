@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -15,7 +16,6 @@ import {
   SegmentedTabs,
   Spinner,
   Transaction,
-  Translate,
 } from '~/components'
 import { MeTransactionsQuery } from '~/gql/graphql'
 
@@ -149,11 +149,18 @@ const Transactions = () => {
   const isDonaion = purpose === Purpose.DONATION
   const isSubscription = purpose === Purpose.SUBSCRIPTION
 
+  const intl = useIntl()
+  const title = intl.formatMessage({
+    defaultMessage: 'Transactions',
+  })
+
   return (
     <Layout.Main>
-      <Layout.Header right={<Layout.Header.Title id="paymentTransactions" />} />
+      <Layout.Header
+        right={<Layout.Header.Title>{title}</Layout.Header.Title>}
+      />
 
-      <Head title={{ id: 'paymentTransactions' }} />
+      <Head title={title} />
 
       <SegmentedTabs
         sticky
@@ -170,21 +177,30 @@ const Transactions = () => {
           selected={isALL}
           onClick={() => setPurpose(Purpose.ALL)}
         >
-          <Translate zh_hans="全部" zh_hant="全部" en="All" />
+          <FormattedMessage
+            defaultMessage="All"
+            description="src/views/Me/Transactions/index.tsx"
+          />
         </SegmentedTabs.Tab>
 
         <SegmentedTabs.Tab
           selected={isDonaion}
           onClick={() => setPurpose(Purpose.DONATION)}
         >
-          <Translate zh_hans="支持" zh_hant="支持" en="Supports" />
+          <FormattedMessage
+            defaultMessage="Supports"
+            description="src/views/Me/Transactions/index.tsx"
+          />
         </SegmentedTabs.Tab>
 
         <SegmentedTabs.Tab
           selected={isSubscription}
           onClick={() => setPurpose(Purpose.SUBSCRIPTION)}
         >
-          <Translate id="subscriptions" />
+          <FormattedMessage
+            defaultMessage="Subscriptions"
+            description="src/views/Me/Transactions/index.tsx"
+          />
         </SegmentedTabs.Tab>
       </SegmentedTabs>
 

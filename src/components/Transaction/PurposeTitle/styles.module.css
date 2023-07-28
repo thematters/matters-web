@@ -1,0 +1,15 @@
+.purpose {
+  @mixin inline-flex-center-all;
+
+  flex-shrink: 0;
+}
+
+.title {
+  @mixin inline-flex-center-all;
+
+  margin-left: var(--spacing-x-tight);
+}
+
+.tooltip {
+  margin-left: var(--spacing-xx-tight);
+}
