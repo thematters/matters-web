@@ -16,6 +16,7 @@ export const fragments = {
             id
             title
             state
+            createdAt
           }
         }
       }
