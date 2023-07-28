@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React from 'react'
+import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
@@ -11,11 +11,18 @@ import {
   MAX_COLLECTION_DESCRIPTION_LENGTH,
   MAX_COLLECTION_TITLE_LENGTH,
 } from '~/common/enums'
-import { CoverUploader, Dialog, Form, useMutation } from '~/components'
+import {
+  CoverUploader,
+  Dialog,
+  Form,
+  useMutation,
+  ViewerContext,
+} from '~/components'
 import {
   EditCollectionCollectionFragment,
   PutCollectionMutation,
 } from '~/gql/graphql'
+import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 
 interface FormProps {
   collection: EditCollectionCollectionFragment
@@ -49,6 +56,8 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
   collection,
   closeDialog,
 }) => {
+  const viewer = useContext(ViewerContext)
+
   const [update] = useMutation<PutCollectionMutation>(
     PUT_COLLECTION,
     undefined,
@@ -101,6 +110,12 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
               description,
             },
           },
+          refetchQueries: [
+            {
+              query: USER_COLLECTIONS,
+              variables: { userName: viewer.userName },
+            },
+          ],
         })
         setSubmitting(false)
         closeDialog()
