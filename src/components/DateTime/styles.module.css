@@ -14,7 +14,7 @@
 
 .sizeXs {
   font-size: var(--font-size-subtext);
-  line-height: var(--line-height-subtext);
+  line-height: var(--line-height-article-title);
 }
 
 .sizeSm {

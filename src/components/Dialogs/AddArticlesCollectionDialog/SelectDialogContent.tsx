@@ -1,7 +1,8 @@
 import { FormikProvider } from 'formik'
-import { useState } from 'react'
+import { memo } from 'react'
+import { areEqual, FixedSizeList } from 'react-window'
 
-import { Form, InfiniteScroll } from '~/components'
+import { Form } from '~/components'
 import {
   CollectionArticlesCollectionFragment,
   UserArticlesUserFragment,
@@ -26,8 +27,6 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
 }) => {
   const articles = user.articles
 
-  const articlesLength = 20
-
   const hasAddedArticlesId =
     collection.articleList.edges?.map(({ node }) => node.id) || []
 
@@ -36,61 +35,49 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   )
   const hasChecked = hasCheckedEdges?.map(({ node }) => node.id) || []
 
-  const [loadedArticles, setLoadedArticles] = useState(
-    articles.edges?.slice(0, articlesLength) || []
-  )
-
-  // load next page
-  const loadMore = async () => {
-    setLoadedArticles(
-      loadedArticles.concat(
-        articles.edges?.slice(
-          loadedArticles.length,
-          loadedArticles.length + articlesLength
-        ) || []
-      )
-    )
-  }
-
   return (
-    <InfiniteScroll
-      hasNextPage={loadedArticles.length < (articles.edges?.length as number)}
-      loadMore={loadMore}
-      loader={null}
-    >
-      <FormikProvider value={formik}>
-        <Form
-          id={formId}
-          onSubmit={formik.handleSubmit}
-          className={styles.form}
+    <FormikProvider value={formik}>
+      <Form id={formId} onSubmit={formik.handleSubmit} className={styles.form}>
+        <FixedSizeList
+          height={52 * 7.5}
+          itemCount={articles.edges?.length || 0}
+          itemData={articles.edges}
+          itemSize={52}
+          width={'100%'}
         >
-          {loadedArticles.map(
-            ({ node }) =>
-              node.state === 'active' && (
+          {memo(function Item({ index, style, data }) {
+            if (!data) {
+              return null
+            }
+            const node = data[index].node
+            return (
+              <section style={style}>
                 <section key={node.id} className={styles.item}>
-                  <Form.SquareCheckBox
+                  <Form.IndexSquareCheckBox
                     key={node.id}
                     hasTooltip={true}
                     checked={
                       hasChecked.includes(node.id) ||
                       checkingIds.includes(node.id)
                     }
+                    index={
+                      checkingIds.includes(node.id)
+                        ? checkingIds.indexOf(node.id) + 1
+                        : undefined
+                    }
+                    createAt={node.createdAt}
                     hint={node.title}
                     disabled={hasChecked.includes(node.id)}
                     {...formik.getFieldProps('checked')}
                     value={node.id}
                   />
-                  {checkingIds.includes(node.id) && (
-                    <span className={styles.index}>
-                      {checkingIds.indexOf(node.id) + 1}
-                    </span>
-                  )}
                 </section>
-              )
-          )}
-        </Form>
-      </FormikProvider>
-    </InfiniteScroll>
+              </section>
+            )
+          }, areEqual)}
+        </FixedSizeList>
+      </Form>
+    </FormikProvider>
   )
 }
 
