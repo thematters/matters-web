@@ -1,5 +1,7 @@
 import { Page } from '@playwright/test'
 
+import { TEST_ID } from '~/common/enums'
+
 import { waitForAPIResponse } from './api'
 
 export type User = {
@@ -64,7 +66,7 @@ export const login = async ({
 
 export const logout = async ({ page }: { page: Page }) => {
   // Click "My Page" button
-  await page.getByRole('button', { name: 'My Page' }).click()
+  await page.getByTestId(TEST_ID.SIDE_NAV_MY_PAGE).click()
 
   // Click "Log Out" button
   // Promise.all prevents a race condition between clicking and waiting.
