@@ -163,12 +163,28 @@ export const UserProfile = () => {
 
         <section className={styles.info}>
           <section className={styles.displayName}>
-            <h1
-              className={styles.name}
-              data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
-            >
-              {user.displayName}
-            </h1>
+            {isMe && (
+              <EditProfileDialog user={user}>
+                {({ openDialog: openEditProfileDialog }) => (
+                  <button onClick={openEditProfileDialog}>
+                    <h1
+                      className={styles.name}
+                      data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
+                    >
+                      {user.displayName}
+                    </h1>
+                  </button>
+                )}
+              </EditProfileDialog>
+            )}
+            {!isMe && (
+              <h1
+                className={styles.name}
+                data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
+              >
+                {user.displayName}
+              </h1>
+            )}
             <BadgesDialog content={<Badges isInDialog />}>
               {({ openDialog }) => {
                 return (

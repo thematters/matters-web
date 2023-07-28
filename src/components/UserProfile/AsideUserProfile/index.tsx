@@ -158,7 +158,21 @@ export const AsideUserProfile = () => {
 
       <section className={styles.info}>
         <section className={styles.displayName}>
-          {isInUserPage && (
+          {isInUserPage && isMe && (
+            <EditProfileDialog user={user}>
+              {({ openDialog: openEditProfileDialog }) => (
+                <button onClick={openEditProfileDialog}>
+                  <h1
+                    className={styles.isInUserPageName}
+                    data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
+                  >
+                    {user.displayName}
+                  </h1>
+                </button>
+              )}
+            </EditProfileDialog>
+          )}
+          {isInUserPage && !isMe && (
             <LinkWrapper {...userProfilePath}>
               <h1
                 className={styles.isInUserPageName}
