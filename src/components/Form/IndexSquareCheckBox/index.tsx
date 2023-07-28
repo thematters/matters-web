@@ -52,7 +52,6 @@ const IndexSquareCheckBox: React.FC<IndexSquareCheckBoxBoxProps> = ({
       return
     }
     let height = node.current.firstElementChild?.clientHeight || 0
-    console.log({ height }, node.current.firstElementChild)
     const computedStyle = window.getComputedStyle(node.current, null)
     const dateHeight = 18
     height -=
