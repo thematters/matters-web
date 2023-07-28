@@ -27,6 +27,9 @@
     "defaultMessage": "Enter Community",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
+  "/jJLYy": {
+    "defaultMessage": "Transactions"
+  },
   "/ns2st": {
     "defaultMessage": "Download App"
   },
@@ -47,6 +50,14 @@
   "0ThOw1": {
     "defaultMessage": "Create collection",
     "description": "src/views/User/Collections/UserCollections.tsx"
+  },
+  "0qagOO": {
+    "defaultMessage": "Circle Subscription",
+    "description": "src/components/Transaction/index.tsx"
+  },
+  "1COpAA": {
+    "defaultMessage": "Failed",
+    "description": "src/components/Transaction/State/index.tsx"
   },
   "1Z1M77": {
     "defaultMessage": "No data yet",
@@ -156,16 +167,31 @@
     "defaultMessage": "left a comment in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "6aE6hr": {
+    "defaultMessage": "All",
+    "description": "src/views/Me/Transactions/index.tsx"
+  },
   "6flWFg": {
     "defaultMessage": "Term of Services"
+  },
+  "6kMb9Z": {
+    "defaultMessage": "On-chain records"
   },
   "6q0G5e": {
     "defaultMessage": "Successfully added",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
   },
+  "6uavsa": {
+    "defaultMessage": "Cancelled",
+    "description": "src/components/Transaction/State/index.tsx"
+  },
   "77tYPg": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "79Ydsg": {
+    "defaultMessage": "Payout Canceled",
+    "description": "src/components/Transaction/index.tsx"
   },
   "7JlauX": {
     "defaultMessage": "Explore"
@@ -232,6 +258,10 @@
   },
   "A7ugfn": {
     "defaultMessage": "More Actions"
+  },
+  "AB5rDl": {
+    "defaultMessage": "Payment suspended or returned by card issuer when there are doubts about the transaction",
+    "description": "src/components/Transaction/index.tsx"
   },
   "AGcU5J": {
     "defaultMessage": "Pin Broadcast",
@@ -511,6 +541,10 @@
   "NAidKb": {
     "defaultMessage": "Notifications"
   },
+  "NCBtyI": {
+    "defaultMessage": "Supports",
+    "description": "src/views/Me/Transactions/index.tsx"
+  },
   "NONfAh": {
     "defaultMessage": "Douban",
     "description": "src/components/Share/Buttons/Douban.tsx"
@@ -552,6 +586,10 @@
     "defaultMessage": "Set the Circle URL (cannot be modified after creation)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "R7yHDl": {
+    "defaultMessage": "Circle Revenue",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "RFzVUD": {
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -579,8 +617,16 @@
   "Seanpx": {
     "defaultMessage": "Required"
   },
+  "Sep44m": {
+    "defaultMessage": "Payout",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again."
+  },
+  "T73SwS": {
+    "defaultMessage": "Subscriptions",
+    "description": "src/views/Me/Transactions/index.tsx"
   },
   "T9oZC8": {
     "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?"
@@ -744,6 +790,10 @@
   },
   "adThp5": {
     "defaultMessage": "Latest"
+  },
+  "awW+lk": {
+    "defaultMessage": "Processing",
+    "description": "src/components/Transaction/State/index.tsx"
   },
   "b+LSgI": {
     "defaultMessage": " replied to your discussion on ",
@@ -1122,6 +1172,10 @@
   "ulh3kf": {
     "defaultMessage": "Collections"
   },
+  "up6Uh/": {
+    "defaultMessage": "Dispute Refund",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "uw32VR": {
     "defaultMessage": "tutorial"
   },
@@ -1200,6 +1254,10 @@
     "defaultMessage": "Collections allow up to 100 articles currently",
     "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
   },
+  "yOKEVx": {
+    "defaultMessage": "Top Up",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "ySGgTo": {
     "defaultMessage": "Add Articles into Featured",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -1207,6 +1265,10 @@
   "yZfKI4": {
     "defaultMessage": "discussion and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "yoRaUc": {
+    "defaultMessage": "Refund",
+    "description": "src/components/Transaction/index.tsx"
   },
   "zKOr2x": {
     "defaultMessage": "Conversion Rate of Followers",
