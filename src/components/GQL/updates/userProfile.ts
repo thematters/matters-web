@@ -2,7 +2,7 @@ import { DataProxy } from 'apollo-cache'
 
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
-const update = ({
+export const updateUserProfile = ({
   cache,
   userName,
   type,
@@ -60,5 +60,3 @@ const update = ({
     collectionCount: profileData.user.userCollections.totalCount,
   }
 }
-
-export default update

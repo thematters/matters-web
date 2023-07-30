@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { IconArrowBottom20, Menu, useMutation } from '~/components'
-import updateUserCollectionDetail from '~/components/GQL/updates/userCollectionDetail'
+import { updateUserCollectionDetail } from '~/components/GQL'
 import { SetBottomCollectionMutation } from '~/gql/graphql'
 
 const SET_BOTTOM_COLLECTION = gql`

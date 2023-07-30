@@ -11,9 +11,11 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import updateUserArticles from '~/components/GQL/updates/userArticles'
-import updateUserCollections from '~/components/GQL/updates/userCollections'
-import updateUserProfile from '~/components/GQL/updates/userProfile'
+import {
+  updateUserArticles,
+  updateUserCollections,
+  updateUserProfile,
+} from '~/components/GQL'
 import {
   DeleteCollectionCollectionFragment,
   DeleteCollectionMutation,

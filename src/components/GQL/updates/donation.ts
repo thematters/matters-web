@@ -7,7 +7,7 @@ import { ERROR_CODES } from '~/common/enums'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 import { ARTICLE_DETAIL_PUBLIC_BY_NODE_ID } from '~/views/ArticleDetail/gql'
 
-const update = ({
+export const updateDonation = ({
   cache,
   id,
   viewer,
@@ -86,5 +86,3 @@ const update = ({
     }
   }
 }
-
-export default update

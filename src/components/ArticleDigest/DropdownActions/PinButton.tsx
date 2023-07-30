@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ERROR_CODES } from '~/common/enums'
 import { IconPin20, IconUnPin20, Menu, toast, useMutation } from '~/components'
-import updateUserArticles from '~/components/GQL/updates/userArticles'
+import { updateUserArticles } from '~/components/GQL'
 import { PinButtonArticleFragment, TogglePinMutation } from '~/gql/graphql'
 
 type PinButtonProps = { article: PinButtonArticleFragment }

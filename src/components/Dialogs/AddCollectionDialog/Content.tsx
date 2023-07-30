@@ -16,7 +16,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import updateUserProfile from '~/components/GQL/updates/userProfile'
+import { updateUserProfile } from '~/components/GQL'
 import { CreateCollectionMutation } from '~/gql/graphql'
 import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 

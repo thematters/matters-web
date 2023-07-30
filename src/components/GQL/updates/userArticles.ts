@@ -3,7 +3,7 @@ import { DataProxy } from 'apollo-cache'
 import { UserArticlesPublicQuery } from '~/gql/graphql'
 import { UserCollectionsQuery } from '~/gql/graphql'
 
-const update = ({
+export const updateUserArticles = ({
   cache,
   targetId,
   userName,
@@ -85,5 +85,3 @@ const update = ({
     })
   }
 }
-
-export default update

@@ -8,8 +8,7 @@ import {
   useMutation,
   useStep,
 } from '~/components'
-import updateUserArticles from '~/components/GQL/updates/userArticles'
-import updateUserProfile from '~/components/GQL/updates/userProfile'
+import { updateUserArticles, updateUserProfile } from '~/components/GQL'
 import {
   ArchiveArticleArticleFragment,
   ArchiveArticleMutation,
