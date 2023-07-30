@@ -73,8 +73,9 @@ const Follow = () => {
     <Layout.Main>
       <Media at="sm">
         <Layout.Header
-          left={<Layout.Header.MeButton />}
-          right={<Layout.Header.Title id="following" />}
+          // left={<Layout.Header.MeButton />}
+          // right={<Layout.Header.Title id="following" />}
+          left={<Layout.Header.Title id="following" />}
         />
       </Media>
       <Media greaterThan="sm">
