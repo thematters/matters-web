@@ -21,7 +21,6 @@ import {
 import { EmptyCollection } from '~/components/Empty/EmptyCollection'
 import { UserCollectionsQuery } from '~/gql/graphql'
 
-import UserTabs from '../UserTabs'
 import CreateCollection from './CreateCollection'
 import { USER_COLLECTIONS } from './gql'
 import Placeholder from './Placeholder'
@@ -76,22 +75,14 @@ const UserCollections = () => {
    */
   if (loading) {
     return (
-      <>
-        <UserTabs loading />
-        <Layout.Main.Spacing hasVertical={false}>
-          <Placeholder />
-        </Layout.Main.Spacing>
-      </>
+      <Layout.Main.Spacing hasVertical={false}>
+        <Placeholder />
+      </Layout.Main.Spacing>
     )
   }
 
   if (error) {
-    return (
-      <>
-        <UserTabs />
-        <QueryError error={error} />
-      </>
-    )
+    return <QueryError error={error} />
   }
 
   // customize title
@@ -127,7 +118,6 @@ const UserCollections = () => {
     return (
       <>
         <CustomHead />
-        <UserTabs user={user!} />
         <EmptyCollection />
         {isViewer && <CreateCollection />}
       </>
@@ -137,8 +127,6 @@ const UserCollections = () => {
   return (
     <>
       <CustomHead />
-
-      <UserTabs user={user!} />
 
       {isViewer && (
         <AddCollectionDialog gotoDetailPage>
