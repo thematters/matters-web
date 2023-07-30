@@ -16,7 +16,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import updateUserArticles from '~/components/GQL/updates/userArticles'
+import updateUserProfile from '~/components/GQL/updates/userProfile'
 import { CreateCollectionMutation } from '~/gql/graphql'
 import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 
@@ -90,10 +90,10 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
             },
           },
           update(cache, result) {
-            updateUserArticles({
+            updateUserProfile({
               cache,
               userName,
-              type: 'addCollection',
+              type: 'increaseCollection',
             })
             if (onUpdate) {
               onUpdate(cache, result.data?.putCollection || ({} as Collection))

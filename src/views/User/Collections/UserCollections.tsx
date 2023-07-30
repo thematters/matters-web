@@ -7,6 +7,7 @@ import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   AddCollectionDialog,
   CollectionDigest,
+  Empty,
   Head,
   IconAdd20,
   InfiniteScroll,
@@ -14,6 +15,7 @@ import {
   List,
   QueryError,
   TextIcon,
+  Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -85,8 +87,26 @@ const UserCollections = () => {
     return <QueryError error={error} />
   }
 
-  // customize title
+  if (!user) {
+    return <></>
+  }
 
+  if (user?.status?.state === 'archived') {
+    return (
+      <Empty
+        spacingY="xxxloose"
+        description={
+          <Translate
+            en="Deleted user"
+            zh_hans="用户已注销"
+            zh_hant="用戶已註銷"
+          />
+        }
+      />
+    )
+  }
+
+  // customize title
   const description = stripSpaces(user?.info?.description)
 
   const CustomHead = () => (

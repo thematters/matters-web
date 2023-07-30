@@ -46,7 +46,7 @@ const PinButton = ({ article }: PinButtonProps) => {
         updateUserArticles({
           cache,
           targetId: article.id,
-          userName: article.author.userName,
+          userName: article.author.userName!,
           type: article.pinned ? 'unpin' : 'pin',
         })
       },

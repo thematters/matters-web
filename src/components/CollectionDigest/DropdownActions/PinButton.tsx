@@ -52,7 +52,7 @@ const PinButton = ({
         updateUserArticles({
           cache,
           targetId: collection.id,
-          userName: collection.author.userName,
+          userName: collection.author.userName!,
           type: collection.pinned ? 'unpin' : 'pin',
         })
       },

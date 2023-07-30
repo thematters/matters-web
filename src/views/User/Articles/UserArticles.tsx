@@ -121,18 +121,16 @@ const UserArticles = () => {
 
   if (user?.status?.state === 'archived') {
     return (
-      <>
-        <Empty
-          spacingY="xxxloose"
-          description={
-            <Translate
-              en="Deleted user"
-              zh_hans="用户已注销"
-              zh_hant="用戶已註銷"
-            />
-          }
-        />
-      </>
+      <Empty
+        spacingY="xxxloose"
+        description={
+          <Translate
+            en="Deleted user"
+            zh_hans="用户已注销"
+            zh_hant="用戶已註銷"
+          />
+        }
+      />
     )
   }
 

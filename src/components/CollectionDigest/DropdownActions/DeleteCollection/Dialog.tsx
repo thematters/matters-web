@@ -13,6 +13,7 @@ import {
 } from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 import updateUserCollections from '~/components/GQL/updates/userCollections'
+import updateUserProfile from '~/components/GQL/updates/userProfile'
 import {
   DeleteCollectionCollectionFragment,
   DeleteCollectionMutation,
@@ -68,15 +69,19 @@ const DeleteCollectionDialog = ({
         updateUserArticles({
           cache,
           targetId: collection.id,
-          userName: collection.author.userName,
+          userName: collection.author.userName!,
           type: 'unpin',
         })
-
-        const result = updateUserCollections({
+        updateUserCollections({
           cache,
           collectionIds: [collection.id],
-          userName: collection.author.userName,
+          userName: collection.author.userName!,
           type: 'delete',
+        })
+        const result = updateUserProfile({
+          cache,
+          userName: collection.author.userName!,
+          type: 'decreaseCollection',
         })
         if (result?.collectionCount === 0) {
           onEmptyCollection()

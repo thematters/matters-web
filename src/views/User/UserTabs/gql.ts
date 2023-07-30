@@ -7,7 +7,7 @@ export const fragments = {
       status {
         articleCount
       }
-      tabsCollections: collections(input: { first: 0 }) {
+      userCollections: collections(input: { first: 0 }) {
         totalCount
       }
     }
