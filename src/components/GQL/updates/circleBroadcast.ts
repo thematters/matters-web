@@ -13,7 +13,7 @@ const sortEdgesByCreatedAtDesc = (
   )
 }
 
-const update = ({
+export const updateCircleBroadcast = ({
   cache,
   commentId,
   name,
@@ -82,5 +82,3 @@ const update = ({
     console.error(e)
   }
 }
-
-export default update

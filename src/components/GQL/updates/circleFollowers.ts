@@ -4,7 +4,7 @@ import { ERROR_CODES } from '~/common/enums'
 import { CircleFollowersPublicQuery } from '~/gql/graphql'
 import { CIRCLE_FOLLOWERS_PUBLIC } from '~/views/Circle/Profile/FollowersDialog/gql'
 
-const update = ({
+export const updateCircleFollowers = ({
   cache,
   name,
   type,
@@ -89,5 +89,3 @@ const update = ({
     }
   }
 }
-
-export default update

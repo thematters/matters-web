@@ -27,7 +27,7 @@ const UserTabs = ({
   })
 
   const articleCount = user?.status?.articleCount || 0
-  const collectionCount = user?.tabsCollections.totalCount || 0
+  const collectionCount = user?.userCollections.totalCount || 0
 
   return (
     <Tabs>

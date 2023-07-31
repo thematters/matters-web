@@ -9,7 +9,7 @@ type TagMaintainersNodeTagEditor = NonNullable<
   NonNullable<TagMaintainersQuery['node'] & { __typename: 'Tag' }>['editors']
 >[0]
 
-const update = ({
+export const updateTagMaintainers = ({
   cache,
   id,
   type,
@@ -67,5 +67,3 @@ const update = ({
     }
   }
 }
-
-export default update

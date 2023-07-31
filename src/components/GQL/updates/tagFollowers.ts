@@ -4,7 +4,7 @@ import { ERROR_CODES } from '~/common/enums'
 import TAG_FOLLOWERS from '~/components/GQL/queries/tagFollowers'
 import { TagFollowersQuery } from '~/gql/graphql'
 
-const update = ({
+export const updateTagFollowers = ({
   cache,
   id,
   type,
@@ -71,5 +71,3 @@ const update = ({
     }
   }
 }
-
-export default update

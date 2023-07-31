@@ -18,8 +18,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { updateDraftAssets } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import updateDraftAssets from '~/components/GQL/updates/draftAssets'
 import { AssetFragment, SingleFileUploadMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'

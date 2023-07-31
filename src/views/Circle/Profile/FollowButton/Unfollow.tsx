@@ -3,9 +3,11 @@ import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
+import {
+  updateCircleFollowerCount,
+  updateCircleFollowers,
+} from '~/components/GQL'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
-import updateCircleFollowerCount from '~/components/GQL/updates/circleFollowerCount'
-import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
 import {
   FollowButtonCirclePrivateFragment,
   ToggleFollowCircleMutation,

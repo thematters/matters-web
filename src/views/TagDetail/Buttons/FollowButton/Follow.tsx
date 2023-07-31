@@ -13,8 +13,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { updateTagFollowers } from '~/components/GQL'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
-import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
 import {
   FollowButtonTagPrivateFragment,
   ToggleFollowTagMutation,

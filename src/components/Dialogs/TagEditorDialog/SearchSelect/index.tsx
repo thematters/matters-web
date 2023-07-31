@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Dialog, toast, Translate, useMutation } from '~/components'
+import { updateTagMaintainers } from '~/components/GQL'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
-import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 import SearchingArea, {
   SelectNode,
 } from '~/components/SearchSelect/SearchingArea'

@@ -3,7 +3,7 @@ import { DataProxy } from 'apollo-cache'
 import UNREAD_FOLLOWING from '~/components/GQL/queries/unreadFollowing'
 import { UnreadFollowingQuery } from '~/gql/graphql'
 
-const update = (cache: DataProxy) => {
+export const updateViewerUnreadFollowing = (cache: DataProxy) => {
   try {
     const data = cache.readQuery<UnreadFollowingQuery>({
       query: UNREAD_FOLLOWING,
@@ -29,5 +29,3 @@ const update = (cache: DataProxy) => {
     console.error(e)
   }
 }
-
-export default update

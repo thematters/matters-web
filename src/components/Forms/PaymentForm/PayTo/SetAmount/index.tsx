@@ -38,10 +38,10 @@ import {
   useTargetNetwork,
   ViewerContext,
 } from '~/components'
+import { updateDonation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-import updateDonation from '~/components/GQL/updates/donation'
 import {
   ArticleDetailPublicQuery,
   ExchangeRatesQuery,

@@ -2,8 +2,6 @@ import gql from 'graphql-tag'
 
 import CollectionDigestFeed from '~/components/CollectionDigest/Feed'
 
-import UserTabs from '../UserTabs'
-
 const fragments = gql`
   fragment CollectionsUser on User {
     id
@@ -13,6 +11,9 @@ const fragments = gql`
     info {
       description
       profileCover
+    }
+    status {
+      state
     }
     collections(input: { first: 20, after: $after }) {
       totalCount
@@ -29,10 +30,8 @@ const fragments = gql`
         }
       }
     }
-    ...TabsUser
   }
   ${CollectionDigestFeed.fragments.collection}
-  ${UserTabs.fragments.user}
 `
 
 export const USER_COLLECTIONS = gql`

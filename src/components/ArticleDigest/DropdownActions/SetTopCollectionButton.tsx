@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { IconArrowTop20, Menu, useMutation } from '~/components'
-import updateUserCollectionDetail from '~/components/GQL/updates/userCollectionDetail'
+import { updateUserCollectionDetail } from '~/components/GQL'
 import { SetTopCollectionMutation } from '~/gql/graphql'
 
 const SET_TOP_COLLECTION = gql`

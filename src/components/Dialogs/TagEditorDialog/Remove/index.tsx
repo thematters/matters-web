@@ -1,6 +1,6 @@
 import { Dialog, toast, Translate, useMutation } from '~/components'
+import { updateTagMaintainers } from '~/components/GQL'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
-import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 import { TagMaintainersQuery, UpdateTagSettingMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
