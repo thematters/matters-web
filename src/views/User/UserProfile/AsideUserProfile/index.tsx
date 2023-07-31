@@ -123,7 +123,10 @@ export const AsideUserProfile = () => {
    * Active or Onboarding User
    */
   return (
-    <section className={styles.userProfile} data-test-id={TEST_ID.USER_PROFILE}>
+    <section
+      className={styles.userProfile}
+      data-test-id={TEST_ID.ASIDE_USER_PROFILE}
+    >
       <header className={styles.header}>
         {isInUserPage && isMe && (
           <EditProfileDialog user={user}>

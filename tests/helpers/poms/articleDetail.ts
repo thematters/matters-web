@@ -106,7 +106,7 @@ export class ArticleDetailPage {
 
     // dialog
     this.dialog = this.page.getByRole('dialog')
-    this.dialogCommentInput = this.dialog.locator('.ProseMirror')
+    this.dialogCommentInput = this.dialog.locator('.tiptap')
   }
 
   async getTitle() {

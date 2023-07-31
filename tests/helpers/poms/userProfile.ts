@@ -72,7 +72,7 @@ export class UserProfilePage {
     await pageGoto(this.page, '/')
 
     // click "My Page" button
-    await this.page.getByRole('button', { name: 'My Page' }).click()
+    await this.page.getByTestId(TEST_ID.SIDE_NAV_MY_PAGE).click()
 
     // click "Profile" link
     await this.page.getByRole('link', { name: 'Profile' }).click()
@@ -87,7 +87,7 @@ export class UserProfilePage {
     await pageGoto(this.page, '/')
 
     // click "My Page" button
-    await this.page.getByRole('button', { name: 'My Page' }).click()
+    await this.page.getByTestId(TEST_ID.SIDE_NAV_MY_PAGE).click()
 
     // click "Settings" link
     await this.page.getByRole('link', { name: 'Settings' }).click()
