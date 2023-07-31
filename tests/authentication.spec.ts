@@ -30,9 +30,7 @@ test.describe('Authentication', () => {
     await expect(page).toHaveURL('/')
 
     // Expect homepage has "Notification" button on the left side
-    await expect(
-      page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)
-    ).toBeVisible()
+    await expect(page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)).toBeVisible()
   })
 
   test('can login in login page', async ({ page }) => {
@@ -40,9 +38,7 @@ test.describe('Authentication', () => {
     await expect(page).toHaveURL('/')
 
     // Expect homepage has "Notification" button on the left side
-    await expect(
-      page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)
-    ).toBeVisible()
+    await expect(page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)).toBeVisible()
   })
 
   authedTest(

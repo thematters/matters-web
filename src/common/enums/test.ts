@@ -4,6 +4,7 @@ export enum TEST_ID {
   // side nav
   SIDE_NAV_NOTIFICATIONS = 'sidenav/notifications',
   SIDE_NAV_MY_PAGE = 'sidenav/my-page',
+  SIDE_NAY_WRITE_BUTTON = 'sidenav/write-button',
   // digests
   DIGEST_ARTICLE_CARD = 'digest/article/card',
   DIGEST_ARTICLE_FEED = 'digest/article/feed',

@@ -99,7 +99,11 @@ const SideNavMenu = () => {
         )}
       </Dropdown>
 
-      <li role="menuitem" className={styles.listItem}>
+      <li
+        role="menuitem"
+        className={styles.listItem}
+        data-test-id={TEST_ID.SIDE_NAY_WRITE_BUTTON}
+      >
         <WriteButton
           allowed={!viewer.shouldSetupLikerID}
           authed={viewer.isAuthed}
