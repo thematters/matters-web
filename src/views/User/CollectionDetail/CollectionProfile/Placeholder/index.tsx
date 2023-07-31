@@ -13,7 +13,7 @@ const Placeholder = () => {
           <h2 className={styles.title}>
             <div className={placeholderStyles.title}></div>
           </h2>
-          <p className={styles.description}>
+          <p>
             <div className={placeholderStyles.description}></div>
             <div className={placeholderStyles.description}></div>
             <div className={placeholderStyles.description}></div>
