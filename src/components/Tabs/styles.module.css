@@ -6,9 +6,13 @@
   top: 0;
   z-index: var(--z-index-sticky-tabs);
   padding: 0 var(--spacing-base);
-  margin-top: var(--spacing-base-loose);
+  margin-top: var(--spacing-tight);
   white-space: nowrap;
   background: var(--color-white);
+
+  @media (--sm-up) {
+    margin-top: var(--spacing-base-loose);
+  }
 }
 
 .list {

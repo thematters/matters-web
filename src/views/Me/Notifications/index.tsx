@@ -107,8 +107,9 @@ const Notifications = () => {
     <Layout.Main>
       <Media at="sm">
         <Layout.Header
-          left={<Layout.Header.MeButton />}
-          right={<Layout.Header.Title id="notifications" />}
+          // left={<Layout.Header.MeButton />}
+          // right={<Layout.Header.Title id="notifications" />}
+          left={<Layout.Header.Title id="notifications" />}
         />
         <Spacer size="base" />
       </Media>
