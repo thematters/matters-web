@@ -5,7 +5,8 @@ import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
 import IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING from '@/public/static/icons/civic-liker-architect-ring.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
-import { ResponsiveImage } from '~/components'
+import LOGBOOK from '@/public/static/images/logbook.gif'
+import { IconLogbookBadge16, ResponsiveImage } from '~/components'
 import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -61,7 +62,7 @@ const fragments = {
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const { user, size = 'default', src, title, inEditor } = props
+  const { user, size = 'default', src, title, inEditor, inProfile } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
   const isFallback =
     (!src && !user?.avatar) || source.indexOf('data:image') >= 0
@@ -99,6 +100,19 @@ export const Avatar = (props: AvatarProps) => {
       )}
       {hasArchitectBadge && isCivicLiker && (
         <span className={[styles.ring, styles.civicRrchitect].join(' ')} />
+      )}
+      {hasLogbook && (
+        <section className={styles.badge}>
+          {inProfile ? (
+            <img
+              className={styles.logbook}
+              src={LOGBOOK.src}
+              alt="logbook icon"
+            />
+          ) : (
+            <IconLogbookBadge16 />
+          )}
+        </section>
       )}
     </div>
   )
