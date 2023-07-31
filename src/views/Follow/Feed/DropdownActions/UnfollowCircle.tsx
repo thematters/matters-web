@@ -10,8 +10,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { updateCircleFollowers } from '~/components/GQL'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
-import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
 import {
   ToggleFollowCircleMutation,
   UnfollowActionButtonCirclePrivateFragment,

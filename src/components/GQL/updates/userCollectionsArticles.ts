@@ -5,7 +5,7 @@ import {
   CreateCollectionMutation,
 } from '~/gql/graphql'
 
-const update = ({
+export const updateUserCollectionsArticles = ({
   cache,
   articleId,
   collection,
@@ -77,5 +77,3 @@ const update = ({
     console.error(e)
   }
 }
-
-export default update

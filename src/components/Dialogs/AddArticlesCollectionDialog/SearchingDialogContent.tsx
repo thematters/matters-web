@@ -57,12 +57,18 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
       <Form id={formId} onSubmit={formik.handleSubmit} className={styles.form}>
         {searchingEdges.map(({ node }) => (
           <section key={node.id} className={styles.item}>
-            <Form.SquareCheckBox
+            <Form.IndexSquareCheckBox
               key={node.id}
               hasTooltip={true}
               checked={
                 hasChecked.includes(node.id) || checkingIds.includes(node.id)
               }
+              index={
+                checkingIds.includes(node.id)
+                  ? checkingIds.indexOf(node.id) + 1
+                  : undefined
+              }
+              createAt={node.createdAt}
               hint={node.title}
               disabled={hasChecked.includes(node.id)}
               {...formik.getFieldProps('checked')}
@@ -79,11 +85,6 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
                 return content
               })()}
             />
-            {checkingIds.includes(node.id) && (
-              <div className={styles.index}>
-                {checkingIds.indexOf(node.id) + 1}
-              </div>
-            )}
           </section>
         ))}
       </Form>

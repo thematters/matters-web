@@ -41,9 +41,9 @@ const EmptyAnalytics = () => {
         bgColor="green"
         onClick={async () => {
           const result = await putDraft()
-          const { slug, id } = result?.data?.putDraft || {}
+          const { slug = '', id } = result?.data?.putDraft || {}
 
-          if (slug && id) {
+          if (id) {
             const path = toPath({ page: 'draftDetail', slug, id })
             router.push(path.href)
           }

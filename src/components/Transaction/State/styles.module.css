@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: flex-end;
 
-  & span.text {
-    line-height: 2;
+  & .stateText {
+    line-height: 1.125rem;
   }
 }

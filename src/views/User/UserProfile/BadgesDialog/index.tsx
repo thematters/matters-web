@@ -14,7 +14,7 @@ const BaseBadgesDialog = ({ content, children }: BadgesDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog} dismissOnClickOutside>
         <Dialog.Header
           title={
             <FormattedMessage

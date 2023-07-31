@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Z_INDEX } from '~/common/enums'
-import { IconUnPin20, Tooltip, useMutation } from '~/components'
-import updateUserArticles from '~/components/GQL/updates/userArticles'
+import { IconUnPin20, Tooltip, useMutation, ViewerContext } from '~/components'
+import { updateUserArticles } from '~/components/GQL'
 import { UnpinArticleMutation, UnpinCollectionMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -35,6 +36,7 @@ const UnPinButton = ({
   userName: string
   type: 'article' | 'collection'
 }) => {
+  const viewer = useContext(ViewerContext)
   const isArticle = type === 'article'
   const [unpin] = useMutation<UnpinArticleMutation | UnpinCollectionMutation>(
     isArticle ? UNPIN_ARTICLE : UNPIN_COLLECTION,
@@ -65,6 +67,10 @@ const UnPinButton = ({
       },
     }
   )
+
+  if (viewer.userName !== userName) {
+    return null
+  }
 
   return (
     <Tooltip

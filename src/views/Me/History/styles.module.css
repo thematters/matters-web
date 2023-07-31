@@ -6,3 +6,11 @@
     padding: var(--spacing-base) 0;
   }
 }
+
+.tabs {
+  padding: var(--spacing-x-tight) 0;
+
+  @media (--sm-up) {
+    padding: 0;
+  }
+}

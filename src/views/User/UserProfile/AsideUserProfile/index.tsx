@@ -30,7 +30,6 @@ import { EditProfileDialog } from '../DropdownActions/EditProfileDialog'
 import { FollowersDialog } from '../FollowersDialog'
 import { FollowingDialog } from '../FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from '../gql'
-import TraveloggersAvatar from '../TraveloggersAvatar'
 import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
@@ -133,11 +132,7 @@ export const AsideUserProfile = () => {
                 className={styles.avatar + ' ' + styles.clickable}
                 onClick={openEditProfileDialog}
               >
-                {hasTraveloggersBadge ? (
-                  <TraveloggersAvatar user={user} isMe={isMe} />
-                ) : (
-                  <Avatar size="xxxxl" user={user} inProfile />
-                )}
+                <Avatar size="xxxxl" user={user} inProfile />
                 <div className={styles.mask}>
                   <IconCamera24 color="white" size="xlM" />
                 </div>
@@ -148,22 +143,14 @@ export const AsideUserProfile = () => {
         {isInUserPage && !isMe && (
           <section className={styles.avatar}>
             <LinkWrapper {...userProfilePath}>
-              {hasTraveloggersBadge ? (
-                <TraveloggersAvatar user={user} isMe={isMe} />
-              ) : (
-                <Avatar size="xxxxl" user={user} inProfile />
-              )}
+              <Avatar size="xxxxl" user={user} inProfile />
             </LinkWrapper>
           </section>
         )}
         {!isInUserPage && (
           <LinkWrapper {...userProfilePath}>
             <section className={styles.avatar}>
-              {hasTraveloggersBadge ? (
-                <TraveloggersAvatar user={user} isMe={isMe} size="xxxll" />
-              ) : (
-                <Avatar size="xxxll" user={user} inProfile />
-              )}
+              <Avatar size="xxxll" user={user} inProfile />
             </section>
           </LinkWrapper>
         )}
@@ -171,7 +158,21 @@ export const AsideUserProfile = () => {
 
       <section className={styles.info}>
         <section className={styles.displayName}>
-          {isInUserPage && (
+          {isInUserPage && isMe && (
+            <EditProfileDialog user={user}>
+              {({ openDialog: openEditProfileDialog }) => (
+                <button onClick={openEditProfileDialog}>
+                  <h1
+                    className={styles.isInUserPageName}
+                    data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
+                  >
+                    {user.displayName}
+                  </h1>
+                </button>
+              )}
+            </EditProfileDialog>
+          )}
+          {isInUserPage && !isMe && (
             <LinkWrapper {...userProfilePath}>
               <h1
                 className={styles.isInUserPageName}

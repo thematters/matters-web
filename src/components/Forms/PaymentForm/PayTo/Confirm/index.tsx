@@ -21,9 +21,9 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { updateDonation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-import updateDonation from '~/components/GQL/updates/donation'
 import {
   ArticleDetailPublicQuery,
   PayToMutation,

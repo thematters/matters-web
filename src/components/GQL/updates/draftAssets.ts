@@ -4,7 +4,7 @@ import { ERROR_CODES } from '~/common/enums'
 import { DraftAssetsQuery } from '~/gql/graphql'
 import { DRAFT_ASSETS } from '~/views/Me/DraftDetail/gql'
 
-const update = ({
+export const updateDraftAssets = ({
   cache,
   id,
   asset,
@@ -48,5 +48,3 @@ const update = ({
     }
   }
 }
-
-export default update

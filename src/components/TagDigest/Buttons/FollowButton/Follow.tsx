@@ -12,8 +12,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { updateViewerFollowingTagCount } from '~/components/GQL'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
-import updateViewerFollowingTagCount from '~/components/GQL/updates/viewerFollowingTagCount'
 import {
   TagDigestFollowButtonPrivateFragment,
   ToggleFollowTagMutation,

@@ -4,7 +4,7 @@ import { ERROR_CODES } from '~/common/enums'
 import CIRCLE_FOLLOWER_COUNT from '~/components/GQL/queries/circleFollowerCount'
 import { CircleFollowerCountQuery } from '~/gql/graphql'
 
-const update = ({
+export const updateCircleFollowerCount = ({
   cache,
   type,
   name,
@@ -47,5 +47,3 @@ const update = ({
     }
   }
 }
-
-export default update

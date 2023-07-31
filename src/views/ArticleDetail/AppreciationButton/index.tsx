@@ -11,8 +11,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { updateAppreciation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import updateAppreciation from '~/components/GQL/updates/appreciation'
 import {
   AppreciateArticleMutation,
   AppreciationButtonArticlePrivateFragment,

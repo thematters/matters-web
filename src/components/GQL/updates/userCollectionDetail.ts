@@ -6,7 +6,7 @@ import {
   CollectionDetailQuery,
 } from '~/gql/graphql'
 
-const update = ({
+export const updateUserCollectionDetail = ({
   cache,
   collectionId,
   result,
@@ -98,5 +98,3 @@ const update = ({
     console.error(e)
   }
 }
-
-export default update

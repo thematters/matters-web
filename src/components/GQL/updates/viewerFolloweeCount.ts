@@ -17,7 +17,7 @@ const VIEWER_FOLLOWEE_COUNT = gql`
   }
 `
 
-const update = ({
+export const updateViewerFolloweeCount = ({
   cache,
   type,
 }: {
@@ -51,5 +51,3 @@ const update = ({
     }
   }
 }
-
-export default update

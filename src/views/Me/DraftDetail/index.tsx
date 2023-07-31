@@ -1,8 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import {
+  ASSET_TYPE,
+  ENTITY_TYPE,
+  MAX_ARTICLE_CONTENT_LENGTH,
+} from '~/common/enums'
 import { stripHtml } from '~/common/utils'
 import {
   EmptyLayout,
@@ -11,6 +16,7 @@ import {
   Media,
   Spinner,
   Throw404,
+  toast,
   useRoute,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
@@ -117,6 +123,23 @@ const DraftDetail = () => {
   }) => {
     try {
       if (draft?.publishState === 'published') {
+        return
+      }
+
+      // check content length
+      const contentCount = newDraft.content?.length || 0
+      if (contentCount > MAX_ARTICLE_CONTENT_LENGTH) {
+        toast.error({
+          message: (
+            <FormattedMessage
+              defaultMessage={`Content length exceeds limit ({length}/{limit})`}
+              values={{
+                length: contentCount,
+                limit: MAX_ARTICLE_CONTENT_LENGTH,
+              }}
+            />
+          ),
+        })
         return
       }
 

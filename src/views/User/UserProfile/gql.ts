@@ -4,6 +4,7 @@ import { Avatar } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
 import { CircleDigest } from '~/components/CircleDigest'
 
+import UserTabs from '../UserTabs'
 import DropdownActions from './DropdownActions'
 
 const fragments = {
@@ -45,11 +46,13 @@ const fragments = {
         ...AvatarUser
         ...AvatarUserLogbook
         ...DropdownActionsUserPublic
+        ...TabsUser
       }
       ${Avatar.fragments.user}
       ${Avatar.fragments.logbook}
       ${CircleDigest.Rich.fragments.circle.public}
       ${DropdownActions.fragments.user.public}
+      ${UserTabs.fragments.user}
     `,
     private: gql`
       fragment ProfileUserPrivate on User {

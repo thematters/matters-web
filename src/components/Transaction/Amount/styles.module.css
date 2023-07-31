@@ -1,5 +1,3 @@
-.content {
-  @mixin flex-center-start;
-
-  margin-bottom: var(--spacing-xx-tight);
+.amount {
+  line-height: 1.5rem;
 }
