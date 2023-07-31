@@ -14,9 +14,11 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import {
+  updateUserFollowerCount,
+  updateViewerFolloweeCount,
+} from '~/components/GQL'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
-import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
-import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 import {
   ArticleFeedFollowButtonUserPrivateFragment,
   ToggleFollowUserMutation,

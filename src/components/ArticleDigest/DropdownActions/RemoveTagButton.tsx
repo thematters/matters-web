@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import { IconCircleMinus20, Menu, useMutation } from '~/components'
-import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
+import { updateTagArticlesCount } from '~/components/GQL'
 import {
   DeleteArticlesTagsMutation,
   RemoveTagButtonArticleFragment,

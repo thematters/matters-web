@@ -7,6 +7,7 @@ import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   AddCollectionDialog,
   CollectionDigest,
+  Empty,
   Head,
   IconAdd20,
   InfiniteScroll,
@@ -14,6 +15,7 @@ import {
   List,
   QueryError,
   TextIcon,
+  Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -21,7 +23,6 @@ import {
 import { EmptyCollection } from '~/components/Empty/EmptyCollection'
 import { UserCollectionsQuery } from '~/gql/graphql'
 
-import UserTabs from '../UserTabs'
 import CreateCollection from './CreateCollection'
 import { USER_COLLECTIONS } from './gql'
 import Placeholder from './Placeholder'
@@ -76,26 +77,36 @@ const UserCollections = () => {
    */
   if (loading) {
     return (
-      <>
-        <UserTabs loading />
-        <Layout.Main.Spacing hasVertical={false}>
-          <Placeholder />
-        </Layout.Main.Spacing>
-      </>
+      <Layout.Main.Spacing hasVertical={false}>
+        <Placeholder />
+      </Layout.Main.Spacing>
     )
   }
 
   if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!user) {
+    return <></>
+  }
+
+  if (user?.status?.state === 'archived') {
     return (
-      <>
-        <UserTabs />
-        <QueryError error={error} />
-      </>
+      <Empty
+        spacingY="xxxloose"
+        description={
+          <Translate
+            en="Deleted user"
+            zh_hans="用户已注销"
+            zh_hant="用戶已註銷"
+          />
+        }
+      />
     )
   }
 
   // customize title
-
   const description = stripSpaces(user?.info?.description)
 
   const CustomHead = () => (
@@ -127,7 +138,6 @@ const UserCollections = () => {
     return (
       <>
         <CustomHead />
-        <UserTabs user={user!} />
         <EmptyCollection />
         {isViewer && <CreateCollection />}
       </>
@@ -137,8 +147,6 @@ const UserCollections = () => {
   return (
     <>
       <CustomHead />
-
-      <UserTabs user={user!} />
 
       {isViewer && (
         <AddCollectionDialog gotoDetailPage>

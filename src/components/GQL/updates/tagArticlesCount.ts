@@ -5,7 +5,7 @@ import { ERROR_CODES } from '~/common/enums'
 import TAG_ARTICLES_COUNT from '~/components/GQL/queries/tagArticlesCount'
 import { TagArticlesCountQuery } from '~/gql/graphql'
 
-const update = ({
+export const updateTagArticlesCount = ({
   cache,
   id,
   count = 1,
@@ -51,5 +51,3 @@ const update = ({
     }
   }
 }
-
-export default update

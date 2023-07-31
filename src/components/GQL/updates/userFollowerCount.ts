@@ -4,7 +4,7 @@ import { ERROR_CODES } from '~/common/enums'
 import USER_FOLLOWER_COUNT from '~/components/GQL/queries/userFollowerCount'
 import { UserFollowerCountQuery } from '~/gql/graphql'
 
-const update = ({
+export const updateUserFollowerCount = ({
   cache,
   type,
   userName,
@@ -47,5 +47,3 @@ const update = ({
     }
   }
 }
-
-export default update

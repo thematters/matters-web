@@ -9,8 +9,8 @@ import {
   Menu,
   useMutation,
 } from '~/components'
+import { updateCircleBroadcast } from '~/components/GQL'
 import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
-import updateCircleBroadcast from '~/components/GQL/updates/circleBroadcast'
 import {
   PinButtonCommentFragment,
   TogglePinCommentMutation,

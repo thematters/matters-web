@@ -2,7 +2,10 @@ import { normalizeArticleHTML } from '@matters/matters-editor'
 import { useContext, useEffect, useRef } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
+import {
+  MAX_ARTICLE_CONTENT_LENGTH,
+  MAX_ARTICLE_REVISION_DIFF,
+} from '~/common/enums'
 import { measureDiffs, stripHtml } from '~/common/utils'
 import {
   Button,
@@ -90,6 +93,20 @@ const EditModeHeader = ({
   const [editArticle, { loading }] =
     useMutation<EditArticleMutation>(EDIT_ARTICLE)
   const onSave = async () => {
+    // check content length
+    const contentCount = editContent?.length || 0
+    if (isContentRevised && contentCount > MAX_ARTICLE_CONTENT_LENGTH) {
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage={`Content length exceeds limit ({length}/{limit})`}
+            values={{ length: contentCount, limit: MAX_ARTICLE_CONTENT_LENGTH }}
+          />
+        ),
+      })
+      return
+    }
+
     try {
       await editArticle({
         variables: {

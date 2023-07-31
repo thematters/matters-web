@@ -53,11 +53,10 @@ const BaseWriteButton = ({
 
 export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
   const router = useRouter()
-  const { lang } = useContext(LanguageContext)
   const [putDraft, { loading }] = useMutation<CreateDraftMutation>(
     CREATE_DRAFT,
     {
-      variables: { title: translate({ id: 'untitle', lang }) },
+      variables: { title: '' },
     }
   )
 
@@ -95,9 +94,9 @@ export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
           type: 'write',
         })
         const result = await putDraft()
-        const { slug, id } = result?.data?.putDraft || {}
+        const { slug = '', id } = result?.data?.putDraft || {}
 
-        if (slug && id) {
+        if (id) {
           const path = toPath({ page: 'draftDetail', slug, id })
           router.push(path.href)
         }

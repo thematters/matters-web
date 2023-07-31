@@ -15,7 +15,7 @@ import {
   Spinner,
   useMutation,
 } from '~/components'
-import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
+import { updateViewerUnreadNoticeCount } from '~/components/GQL'
 import {
   MarkAllNoticesAsReadMutation,
   MeNotificationsQuery,

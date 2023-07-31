@@ -1,6 +1,7 @@
 import jump from 'jump.js'
 import { forwardRef } from 'react'
 
+import { Z_INDEX } from '~/common/enums'
 import { Button, ButtonProps, TextIcon, Tooltip } from '~/components'
 
 import styles from './styles.module.css'
@@ -27,7 +28,12 @@ const NavListItemButton = forwardRef(
     ref
   ) => {
     return (
-      <Tooltip content={name} placement="left" delay={[1000, null]}>
+      <Tooltip
+        content={name}
+        placement="left"
+        delay={[1000, null]}
+        zIndex={Z_INDEX.OVER_STICKY_TABS}
+      >
         <Button
           bgActiveColor="greyLighter"
           size={['2rem', '2rem']}

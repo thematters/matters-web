@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { Z_INDEX } from '~/common/enums'
 import { IconUnPin20, Tooltip, useMutation } from '~/components'
-import updateUserArticles from '~/components/GQL/updates/userArticles'
+import { updateUserArticles } from '~/components/GQL'
 import { UnpinArticleMutation, UnpinCollectionMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'

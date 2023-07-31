@@ -1,9 +1,9 @@
 import { toPath } from '@/src/common/utils'
 import { Head, Layout } from '~/components'
 import { QueryError, Throw404, usePublicQuery, useRoute } from '~/components'
-import AsideUserProfile from '~/components/UserProfile/AsideUserProfile'
 import { CollectionDetailQuery } from '~/gql/graphql'
 
+import AsideUserProfile from '../UserProfile/AsideUserProfile'
 import CollectionArticles from './CollectionArticles'
 import CollectinoArticlesPlaceholder from './CollectionArticles/Placeholder'
 import CollectionProfile from './CollectionProfile'

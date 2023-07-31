@@ -9,12 +9,11 @@ import {
   OPEN_RECOMMEND_TAG_DIALOG,
   URL_QS,
 } from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 import {
   Button,
   Dialog,
   EmbedShare,
-  LanguageContext,
   TextIcon,
   Translate,
   useMutation,
@@ -33,22 +32,18 @@ interface Props {
 const Tasks = ({ task }: Props) => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
 
   const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
-    variables: {
-      title: translate({ id: 'untitle', lang }),
-      tags: ['新人打卡'],
-    },
+    variables: { title: '', tags: ['新人打卡'] },
   })
   const createDraft = async () => {
     analytics.trackEvent('click_button', {
       type: 'write',
     })
     const result = await putDraft()
-    const { slug, id } = result?.data?.putDraft || {}
+    const { slug = '', id } = result?.data?.putDraft || {}
 
-    if (slug && id) {
+    if (id) {
       const path = toPath({ page: 'draftDetail', slug, id })
       router.push(path.href)
     }

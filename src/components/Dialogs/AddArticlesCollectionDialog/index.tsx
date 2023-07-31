@@ -12,7 +12,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import updateUserCollectionDetail from '~/components/GQL/updates/userCollectionDetail'
+import { updateUserCollectionDetail } from '~/components/GQL'
 import {
   AddArticlesCollectionMutation,
   AddArticlesCollectionUserQuery,
