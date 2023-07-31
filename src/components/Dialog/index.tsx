@@ -8,10 +8,7 @@ import { useDrag } from 'react-use-gesture'
 
 import { KEYVALUE } from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
-import {
-  Media,
-  // useOutsideClick
-} from '~/components'
+import { Media, useOutsideClick } from '~/components'
 
 import { RoundedButton, TextButton } from './Buttons'
 import Content from './Content'
@@ -27,6 +24,7 @@ export interface DialogOverlayProps {
   isOpen: boolean | undefined
   onDismiss: () => void
   onRest?: () => void
+  dismissOnClickOutside?: boolean
 }
 
 export type DialogProps = {
@@ -51,6 +49,7 @@ const Container: React.FC<
   hidePaddingBottom,
   testId,
   onDismiss,
+  dismissOnClickOutside = false,
   children,
   style,
   setDragGoal,
@@ -82,6 +81,14 @@ const Container: React.FC<
     onDismiss()
   }
 
+  const handleClickOutside = () => {
+    if (!dismissOnClickOutside) {
+      return
+    }
+
+    closeTopDialog()
+  }
+
   const bind = useDrag(({ down, movement: [, my] }) => {
     if (!down && my > 30) {
       onDismiss()
@@ -90,7 +97,7 @@ const Container: React.FC<
     }
   })
 
-  // useOutsideClick(node, closeTopDialog)
+  useOutsideClick(node, handleClickOutside)
 
   return (
     <div
