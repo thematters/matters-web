@@ -31,3 +31,7 @@
   font-size: var(--font-size-sm);
   color: var(--color-grey);
 }
+
+.fixedSizeList {
+  @mixin scrollbar-thin;
+}
