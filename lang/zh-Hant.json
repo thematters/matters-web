@@ -675,6 +675,9 @@
   "VZsE96": {
     "defaultMessage": "選集名稱"
   },
+  "VefaFQ": {
+    "defaultMessage": "內容長度超出限制 ({length}/{limit})"
+  },
   "Vn5KLr": {
     "defaultMessage": "開啟後，正文將被暫時遮蔽，只顯示標題與摘要，並由讀者選擇是否繼續閱讀（例如含有色情、暴力、血腥等內容）",
     "description": "src/components/Editor/ToggleAccess/index.tsx"
