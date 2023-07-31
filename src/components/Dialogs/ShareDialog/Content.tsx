@@ -53,7 +53,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
         <Dialog.Header title="share" />
       )}
 
-      <Dialog.Content noSpacing>
+      <Dialog.Content noSpacing smExtraSpacing={false}>
         {description && (
           <section className={styles.description}>{description}</section>
         )}
