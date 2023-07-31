@@ -8,9 +8,12 @@
 }
 
 .createCollection {
-  position: sticky;
-  bottom: 0;
+  padding: 0 var(--spacing-base) var(--spacing-base);
   background: white;
+
+  @media (--sm-up) {
+    padding: 0 var(--spacing-base-loose);
+  }
 
   & .hr {
     padding-top: var(--spacing-tight);

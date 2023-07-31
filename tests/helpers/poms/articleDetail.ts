@@ -106,7 +106,7 @@ export class ArticleDetailPage {
 
     // dialog
     this.dialog = this.page.getByRole('dialog')
-    this.dialogCommentInput = this.dialog.locator('.ql-editor')
+    this.dialogCommentInput = this.dialog.locator('.ProseMirror')
   }
 
   async getTitle() {

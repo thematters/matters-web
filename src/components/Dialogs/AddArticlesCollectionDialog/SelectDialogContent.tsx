@@ -43,7 +43,8 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
           itemCount={articles.edges?.length || 0}
           itemData={articles.edges}
           itemSize={52}
-          width={'100%'}
+          width="100%"
+          className={styles.fixedSizeList}
         >
           {memo(function Item({ index, style, data }) {
             if (!data) {

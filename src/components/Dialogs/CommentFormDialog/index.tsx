@@ -21,7 +21,7 @@ const BaseCommentFormDialog = ({
       return
     }
 
-    const $editor = ref.current?.querySelector('.ql-editor') as HTMLElement
+    const $editor = ref.current?.querySelector('.ProseMirror') as HTMLElement
     if ($editor) {
       $editor.focus()
     }
