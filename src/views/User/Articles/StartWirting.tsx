@@ -3,13 +3,8 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
-import {
-  Button,
-  LanguageContext,
-  useMutation,
-  ViewerContext,
-} from '~/components'
+import { toPath } from '~/common/utils'
+import { Button, useMutation, ViewerContext } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 import { CreateDraftMutation } from '~/gql/graphql'
 
@@ -18,9 +13,8 @@ import styles from './styles.module.css'
 const StartWriting = () => {
   const viewer = useContext(ViewerContext)
   const router = useRouter()
-  const { lang } = useContext(LanguageContext)
   const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
-    variables: { title: translate({ id: 'untitle', lang }) },
+    variables: { title: '' },
   })
 
   return (
@@ -40,9 +34,9 @@ const StartWriting = () => {
           }
 
           const result = await putDraft()
-          const { slug, id } = result?.data?.putDraft || {}
+          const { slug = '', id } = result?.data?.putDraft || {}
 
-          if (slug && id) {
+          if (id) {
             const path = toPath({ page: 'draftDetail', slug, id })
             router.push(path.href)
           }

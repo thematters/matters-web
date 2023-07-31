@@ -13,7 +13,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import updateUserCollectionsArticles from '~/components/GQL/updates/userCollectionsArticles'
+import { updateUserCollectionsArticles } from '~/components/GQL'
 import { AddCollectionsArticlesMutation } from '~/gql/graphql'
 import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 

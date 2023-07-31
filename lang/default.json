@@ -675,6 +675,9 @@
   "VZsE96": {
     "defaultMessage": "Collection Name"
   },
+  "VefaFQ": {
+    "defaultMessage": "Content length exceeds limit ({length}/{limit})"
+  },
   "Vn5KLr": {
     "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)",
     "description": "src/components/Editor/ToggleAccess/index.tsx"

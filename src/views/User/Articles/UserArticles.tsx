@@ -21,7 +21,6 @@ import {
 } from '~/components'
 import { UserArticlesPublicQuery } from '~/gql/graphql'
 
-import UserTabs from '../UserTabs'
 import {
   USER_ARTICLES_PRIVATE,
   USER_ARTICLES_PUBLIC,
@@ -106,23 +105,14 @@ const UserArticles = () => {
    */
   if (loading) {
     return (
-      <>
-        <UserTabs loading />
-
-        <Layout.Main.Spacing hasVertical={false}>
-          <Placeholder />
-        </Layout.Main.Spacing>
-      </>
+      <Layout.Main.Spacing hasVertical={false}>
+        <Placeholder />
+      </Layout.Main.Spacing>
     )
   }
 
   if (error) {
-    return (
-      <>
-        <UserTabs />
-        <QueryError error={error} />
-      </>
-    )
+    return <QueryError error={error} />
   }
 
   if (!user) {
@@ -131,19 +121,16 @@ const UserArticles = () => {
 
   if (user?.status?.state === 'archived') {
     return (
-      <>
-        <UserTabs />
-        <Empty
-          spacingY="xxxloose"
-          description={
-            <Translate
-              en="Deleted user"
-              zh_hans="用户已注销"
-              zh_hant="用戶已註銷"
-            />
-          }
-        />
-      </>
+      <Empty
+        spacingY="xxxloose"
+        description={
+          <Translate
+            en="Deleted user"
+            zh_hans="用户已注销"
+            zh_hant="用戶已註銷"
+          />
+        }
+      />
     )
   }
 
@@ -192,7 +179,6 @@ const UserArticles = () => {
     return (
       <>
         <CustomHead />
-        <UserTabs user={user!} />
         <EmptyArticle />
         {isViewer && <StartWriting />}
       </>
@@ -206,8 +192,6 @@ const UserArticles = () => {
   return (
     <>
       <CustomHead />
-
-      <UserTabs user={user!} />
 
       <PinBoard user={user} />
 

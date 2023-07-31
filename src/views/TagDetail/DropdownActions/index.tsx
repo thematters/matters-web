@@ -22,8 +22,8 @@ import {
 } from '~/components'
 import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
+import { updateTagArticlesCount } from '~/components/GQL'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
-import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 import { AddArticlesTagsMutation, TagFragmentFragment } from '~/gql/graphql'
 interface DropdownActionsProps {
   // id: string

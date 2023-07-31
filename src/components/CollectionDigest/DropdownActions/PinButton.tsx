@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { ERROR_CODES } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { IconPin20, IconUnPin20, Menu, toast, useMutation } from '~/components'
-import updateUserArticles from '~/components/GQL/updates/userArticles'
+import { updateUserArticles } from '~/components/GQL'
 import {
   PinButtonCollectionFragment,
   TogglePinWorkMutation,
@@ -52,7 +52,7 @@ const PinButton = ({
         updateUserArticles({
           cache,
           targetId: collection.id,
-          userName: collection.author.userName,
+          userName: collection.author.userName!,
           type: collection.pinned ? 'unpin' : 'pin',
         })
       },

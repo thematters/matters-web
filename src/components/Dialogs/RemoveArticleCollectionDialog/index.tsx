@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { Dialog, toast, useDialogSwitch, useMutation } from '~/components'
-import updateUserCollectionDetail from '~/components/GQL/updates/userCollectionDetail'
+import { updateUserCollectionDetail } from '~/components/GQL'
 import { RemoveArticleCollectionMutation } from '~/gql/graphql'
 
 const REMOVE_ARTICLE_COLLECTION = gql`

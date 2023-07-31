@@ -13,14 +13,6 @@
     background: var(--color-white);
   }
 
-  &.solid {
-    @mixin shadow-border-bottom-grey;
-
-    @media (--sm-up) {
-      box-shadow: none;
-    }
-  }
-
   &.transparent {
     position: absolute;
   }
@@ -28,10 +20,10 @@
 
 .solid {
   & .content {
-    height: var(--global-header-height-mobile);
+    margin-top: var(--spacing-base);
+    margin-bottom: var(--spacing-x-tight);
 
     @media (--sm-up) {
-      height: initial;
       margin-top: var(--spacing-x-loose);
       margin-bottom: var(--spacing-base);
     }

@@ -1,6 +1,7 @@
-import { Layout, UserProfile } from '~/components'
-import AsideUserProfile from '~/components/UserProfile/AsideUserProfile'
+import { Layout } from '~/components'
 
+import UserProfile from '../UserProfile'
+import AsideUserProfile from '../UserProfile/AsideUserProfile'
 import BaseUserCollections from './UserCollections'
 
 const UserCollections = () => (

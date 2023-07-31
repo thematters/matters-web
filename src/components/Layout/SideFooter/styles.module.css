@@ -2,7 +2,7 @@
   @mixin flex-center-space-between;
 
   padding-left: var(--spacing-x-tight);
-  margin: var(--spacing-x-loose) 0;
+  margin: var(--spacing-x-loose) 0 var(--spacing-base-loose);
 }
 
 .links {

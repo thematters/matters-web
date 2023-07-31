@@ -6,10 +6,9 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
+import { toPath } from '~/common/utils'
 import {
   IconCollection24,
-  LanguageContext,
   Menu,
   toast,
   Translate,
@@ -46,12 +45,8 @@ const ExtendButton = ({
 }) => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
   const [collectArticle] = useMutation<ExtendArticleMutation>(EXTEND_ARTICLE, {
-    variables: {
-      title: translate({ id: 'untitle', lang }),
-      collection: [article.id],
-    },
+    variables: { title: '', collection: [article.id] },
   })
 
   const onClick = async () => {
@@ -73,9 +68,9 @@ const ExtendButton = ({
     }
 
     const { data } = await collectArticle()
-    const { slug, id } = data?.putDraft || {}
+    const { slug = '', id } = data?.putDraft || {}
 
-    if (slug && id) {
+    if (id) {
       const path = toPath({ page: 'draftDetail', slug, id })
       router.push(path.href)
     }
