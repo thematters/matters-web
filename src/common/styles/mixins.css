@@ -230,6 +230,47 @@
   }
 }
 
+/* Scrollbar
+   ========================================================================== */
+@define-mixin hide-scrollbar {
+  /* IE 10+ */
+  -ms-overflow-style: none;
+
+  /* Firefox */
+  overflow: -moz-scrollbars-none;
+
+  /* Chrome & Safari */
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
+
+@define-mixin scrollbar-thin {
+  /* Width */
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    border: solid 6px transparent;
+    box-shadow: inset 0 0 15px 15px transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border: solid 6px transparent;
+    border-radius: 8px;
+    box-shadow: inset 0 0 15px 15px var(--color-grey-light);
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 0 0 15px 15px var(--color-grey);
+  }
+}
+
 /* Utilities
    ========================================================================== */
 @define-mixin expand-to-container {
@@ -272,18 +313,4 @@
   /* autoprefixer: ignore next */
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-@define-mixin hide-scrollbar {
-  /* IE 10+ */
-  -ms-overflow-style: none;
-
-  /* Firefox */
-  overflow: -moz-scrollbars-none;
-
-  /* Chrome & Safari */
-  &::-webkit-scrollbar {
-    width: 0 !important;
-    height: 0 !important;
-  }
 }
