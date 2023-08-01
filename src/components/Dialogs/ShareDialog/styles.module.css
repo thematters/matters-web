@@ -57,4 +57,8 @@
   font-size: var(--font-size-md-s);
   line-height: 1.5rem;
   color: var(--color-black);
+
+  @media (--sm-up) {
+    padding: 0 var(--spacing-base) var(--spacing-x-tight);
+  }
 }
