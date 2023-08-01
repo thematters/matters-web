@@ -15,7 +15,7 @@ const Placeholder = () => {
         </section>
 
         <div className={styles.cover}>
-          <ResponsiveImage url={IMG_PLACEHOLDER} size="144w" />
+          <ResponsiveImage url={IMG_PLACEHOLDER} width={144} />
         </div>
       </section>
     </Card>

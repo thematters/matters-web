@@ -88,7 +88,8 @@ export const Avatar = (props: AvatarProps) => {
     <div className={avatarClasses} style={style} title={title}>
       <ResponsiveImage
         url={source}
-        size="144w"
+        width={152}
+        smUpWidth={240}
         disabled={isFallback || inEditor}
       />
 

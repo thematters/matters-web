@@ -8,8 +8,8 @@ import { toSizedImageURL, ToSizedImageURLSize } from '~/common/utils'
 
 interface ResponsiveImageProps {
   url: string
-  size: ToSizedImageURLSize
-  smUpSize?: ToSizedImageURLSize
+  width: ToSizedImageURLSize
+  smUpWidth?: ToSizedImageURLSize
   disabled?: boolean
   loading?: 'eager' | 'lazy'
   anonymous?: boolean
@@ -17,8 +17,8 @@ interface ResponsiveImageProps {
 
 const BaseResponsiveImage = ({
   url,
-  size,
-  smUpSize,
+  width,
+  smUpWidth,
   disabled,
   loading,
   anonymous,
@@ -34,11 +34,11 @@ const BaseResponsiveImage = ({
 
   return (
     <picture onError={() => setError(true)}>
-      {smUpSize && (
+      {smUpWidth && (
         <>
           <source
             media="(min-width: 768px)"
-            srcSet={toSizedImageURL({ url, size: smUpSize })}
+            srcSet={toSizedImageURL({ url, width: smUpWidth })}
           />
         </>
       )}
@@ -46,13 +46,13 @@ const BaseResponsiveImage = ({
       <source
         srcSet={toSizedImageURL({
           url,
-          size,
+          width,
         })}
       />
 
       <img
         src={url}
-        srcSet={toSizedImageURL({ url, size })}
+        srcSet={toSizedImageURL({ url, width })}
         loading={loading}
         alt=""
         crossOrigin={anonymous ? 'anonymous' : undefined}
@@ -73,8 +73,8 @@ export const ResponsiveImage = React.memo(
   (prevProps, props) => {
     return (
       prevProps.url === props.url &&
-      prevProps.size === props.size &&
-      prevProps.smUpSize === props.smUpSize &&
+      prevProps.width === props.width &&
+      prevProps.smUpWidth === props.smUpWidth &&
       prevProps.disabled === props.disabled
     )
   }
