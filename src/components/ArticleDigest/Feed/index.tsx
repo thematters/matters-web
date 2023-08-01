@@ -83,6 +83,7 @@ const BaseArticleDigestFeed = ({
   const summaryClasses = classNames({
     [styles.description]: true,
     [styles.lineClamp2]: titleLine === 1,
+    [styles.hasCover]: !!cover,
   })
 
   const path = toPath({
