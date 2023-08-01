@@ -36,13 +36,8 @@ const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
   }
 
   return (
-    <li
-      role="tab"
-      aria-selected={selected}
-      className={classes}
-      onClick={onClick}
-    >
-      <button>
+    <li role="tab" aria-selected={selected} className={classes}>
+      <button onClick={onClick}>
         {children}
         {count && <span className={styles.count}>&nbsp;{count}</span>}
       </button>
