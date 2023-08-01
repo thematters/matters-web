@@ -1,5 +1,9 @@
 .menuItem {
   & .content {
+    @mixin flex-center-start;
+
+    height: 1.5rem;
+
     /* add extra right spacing since left icon has a inner spacing */
     padding-right: var(--spacing-xx-tight);
   }

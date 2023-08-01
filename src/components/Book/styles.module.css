@@ -83,8 +83,12 @@
       }
     }
 
-    &.titleMd {
+    &.titleMd:not(.hasCount) {
+      @mixin inline-flex-center-start;
+
       & .title {
+        position: relative;
+        top: 0;
         font-size: var(--font-size-sm-s);
         line-height: 1.25rem;
       }

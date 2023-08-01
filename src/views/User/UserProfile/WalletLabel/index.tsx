@@ -6,6 +6,7 @@ import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 import {
   analytics,
   featureSupportedChains,
+  maskAddress,
   PublicResolverABI,
 } from '~/common/utils'
 import {
@@ -83,7 +84,9 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
           {Content}
         </Tooltip>
       )}
+
       {!hasTooltip && Content}
+
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
@@ -98,7 +101,9 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
           <section className={styles.dialogContent}>
             {ensName && <section className={styles.ensName}>{ensName}</section>}
             {!ensName && (
-              <section className={styles.address}>{address}</section>
+              <section className={styles.address}>
+                {maskAddress(address)}
+              </section>
             )}
             {hasLinkedIPNS && !isMe && (
               <section className={styles.linkedIPNS}>

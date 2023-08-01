@@ -48,7 +48,7 @@ export const Book: React.FC<BookProps> & {
     [styles.jacket]: true,
     [styles.hasCount]: hasCount,
     [styles.titleLg]: titleWidth <= 12,
-    [styles.titleMd]: titleWidth > 12 && titleWidth <= 36 && !hasCount,
+    [styles.titleMd]: titleWidth > 12 && titleWidth <= 28,
   })
 
   return (

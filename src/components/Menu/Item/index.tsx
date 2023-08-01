@@ -28,13 +28,13 @@ const MenuItem: React.FC<React.PropsWithChildren<MenuItemProps>> = ({
         bgColor="transparent"
         {...restProps}
       >
-        <div className={styles.content}>
-          {children || (
+        {children || (
+          <div className={styles.content}>
             <TextIcon icon={icon} size={size} spacing="tight" weight={weight}>
               {text}
             </TextIcon>
-          )}
-        </div>
+          </div>
+        )}
       </Card>
     </li>
   )

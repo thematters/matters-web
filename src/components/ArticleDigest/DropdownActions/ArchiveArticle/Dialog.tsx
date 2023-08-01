@@ -13,6 +13,7 @@ import {
   ArchiveArticleArticleFragment,
   ArchiveArticleMutation,
 } from '~/gql/graphql'
+import { USER_PINNED_WORKS } from '~/views/User/Articles/PinBoard/gql'
 
 const ARCHIVE_ARTICLE = gql`
   mutation ArchiveArticle($id: ID!) {
@@ -66,6 +67,12 @@ const ArchiveArticleDialog = ({
           type: 'decreaseArticle',
         })
       },
+      refetchQueries: [
+        {
+          query: USER_PINNED_WORKS,
+          variables: { userName: article.author.userName! },
+        },
+      ],
     }
   )
 

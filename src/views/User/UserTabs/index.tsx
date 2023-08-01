@@ -1,7 +1,8 @@
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Tabs, useRoute } from '~/components'
+import { Tabs, useRoute, ViewerContext } from '~/components'
 import { TabsUserFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -15,6 +16,7 @@ const UserTabs = ({
 }) => {
   const { isInPath, getQuery } = useRoute()
   const userName = getQuery('name')
+  const viewer = useContext(ViewerContext)
 
   const userArticlesPath = toPath({
     page: 'userProfile',
@@ -29,6 +31,10 @@ const UserTabs = ({
   const articleCount = user?.status?.articleCount || 0
   const collectionCount = user?.userCollections.totalCount || 0
 
+  const showCollectionTab =
+    loading ||
+    ((articleCount > 0 || collectionCount > 0) && viewer.userName === userName)
+
   return (
     <Tabs>
       <Tabs.Tab
@@ -39,7 +45,7 @@ const UserTabs = ({
         <FormattedMessage defaultMessage="Articles" />
       </Tabs.Tab>
 
-      {(loading || articleCount > 0 || collectionCount > 0) && (
+      {showCollectionTab && (
         <Tabs.Tab
           {...userCollectionsPath}
           selected={isInPath('USER_COLLECTIONS')}
