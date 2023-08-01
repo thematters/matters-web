@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
+import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -14,6 +15,7 @@ import {
   RssFeedDialog,
   ShareDialog,
   Translate,
+  ViewerContext,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 import {
@@ -33,7 +35,6 @@ interface DropdownActionsProps {
 }
 
 interface DialogProps {
-  openEditProfileDialog: () => void
   openBlockUserDialog: () => void
   openRssFeedDialog: () => void
   openShareDialog: () => void
@@ -73,11 +74,9 @@ const BaseDropdownActions = ({
   isMe,
   isInAside = false,
 
-  hasEditProfile,
   hasBlockUser,
   hasRssFeed,
 
-  openEditProfileDialog,
   openBlockUserDialog,
   openRssFeedDialog,
   openShareDialog,
@@ -172,9 +171,11 @@ const BaseDropdownActions = ({
 }
 
 const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
+  const viewer = useContext(ViewerContext)
+
   const controls = {
     hasEditProfile: isMe,
-    hasBlockUser: !isMe,
+    hasBlockUser: !!viewer.id && !isMe,
     hasRssFeed: user?.articles.totalCount > 0 && !!user?.info.ipnsKey,
   }
 
@@ -189,24 +190,19 @@ const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
       {({ openDialog: openShareDialog }) => (
         <RssFeedDialog user={user}>
           {({ openDialog: openRssFeedDialog }) => (
-            <EditProfileDialog user={user}>
-              {({ openDialog: openEditProfileDialog }) => (
-                <BlockUser.Dialog user={user}>
-                  {({ openDialog: openBlockUserDialog }) => (
-                    <BaseDropdownActions
-                      user={user}
-                      isMe={isMe}
-                      isInAside={isInAside}
-                      {...controls}
-                      openEditProfileDialog={openEditProfileDialog}
-                      openBlockUserDialog={openBlockUserDialog}
-                      openRssFeedDialog={openRssFeedDialog}
-                      openShareDialog={openShareDialog}
-                    />
-                  )}
-                </BlockUser.Dialog>
+            <BlockUser.Dialog user={user}>
+              {({ openDialog: openBlockUserDialog }) => (
+                <BaseDropdownActions
+                  user={user}
+                  isMe={isMe}
+                  isInAside={isInAside}
+                  {...controls}
+                  openBlockUserDialog={openBlockUserDialog}
+                  openRssFeedDialog={openRssFeedDialog}
+                  openShareDialog={openShareDialog}
+                />
               )}
-            </EditProfileDialog>
+            </BlockUser.Dialog>
           )}
         </RssFeedDialog>
       )}

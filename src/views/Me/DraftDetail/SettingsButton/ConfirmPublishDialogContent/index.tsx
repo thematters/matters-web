@@ -12,6 +12,7 @@ import {
 } from '~/components'
 import { PublishArticleMutation } from '~/gql/graphql'
 import { VIEWER_ARTICLES } from '~/views/User/Articles/gql'
+import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
 
 import styles from './styles.module.css'
 
@@ -37,6 +38,10 @@ const ConfirmPublishDialogContent: React.FC<
   const id = getQuery('draftId')
   const [publish] = useMutation<PublishArticleMutation>(PUBLISH_ARTICLE, {
     refetchQueries: [
+      {
+        query: USER_PROFILE_PUBLIC,
+        variables: { userName: viewer.userName },
+      },
       {
         query: VIEWER_ARTICLES,
         variables: { userName: viewer.userName },
