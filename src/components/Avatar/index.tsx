@@ -89,7 +89,9 @@ export const Avatar = (props: AvatarProps) => {
       <ResponsiveImage
         url={source}
         width={152}
+        height={152}
         smUpWidth={240}
+        smUpHeight={240}
         disabled={isFallback || inEditor}
       />
 

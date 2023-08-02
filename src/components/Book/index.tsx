@@ -60,7 +60,12 @@ export const Book: React.FC<BookProps> & {
       }
     >
       <div className={styles.cover}>
-        <ResponsiveImage url={cover || BOOK_COVER.src} width={240} anonymous />
+        <ResponsiveImage
+          url={cover || BOOK_COVER.src}
+          width={240}
+          height={200}
+          anonymous
+        />
         {hasMask && (
           <div className={styles.mask}>
             {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}

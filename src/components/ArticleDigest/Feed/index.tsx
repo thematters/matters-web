@@ -152,7 +152,13 @@ const BaseArticleDigestFeed = ({
         {cover && (
           <LinkWrapper {...path} onClick={onClick}>
             <div className={styles.cover}>
-              <ResponsiveImage url={cover} width={152} smUpWidth={212} />
+              <ResponsiveImage
+                url={cover}
+                width={152}
+                height={152}
+                smUpWidth={212}
+                smUpHeight={212}
+              />
             </div>
           </LinkWrapper>
         )}
