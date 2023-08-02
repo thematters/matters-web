@@ -27,7 +27,7 @@ const FeedHeader = ({
   const path = pathMap[type]
 
   return (
-    <PageHeader title={titleMap[type]} is="h2" hasBorder={false}>
+    <PageHeader title={titleMap[type]} is="h2" hasBorder={false} type="base">
       <section className={styles.right}>
         {rightButton}
 
