@@ -27,7 +27,9 @@ import { SingleFileUploadMutation } from '~/gql/graphql'
 import styles from './styles.module.css'
 
 export type AvatarUploaderProps = {
-  onUpload: (assetId: string) => void
+  onUploaded: (assetId: string) => void
+  onUploadStart: () => void
+  onUploadEnd: () => void
   hasBorder?: boolean
 
   type?: 'circle'
@@ -35,7 +37,9 @@ export type AvatarUploaderProps = {
 } & (Omit<AvatarProps, 'size'> | Omit<CircleAvatarProps, 'size'>)
 
 export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
-  onUpload,
+  onUploaded,
+  onUploadStart,
+  onUploadEnd,
   hasBorder,
 
   type,
@@ -81,6 +85,10 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     }
 
     try {
+      if (onUploadStart) {
+        onUploadStart()
+      }
+
       const { data } = await upload({
         variables: {
           input: {
@@ -96,7 +104,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
       if (id && path) {
         setAvatar(path)
-        onUpload(id)
+        onUploaded(id)
       } else {
         throw new Error()
       }
@@ -104,6 +112,10 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
       toast.error({
         message: <Translate id="failureUploadImage" />,
       })
+    }
+
+    if (onUploadEnd) {
+      onUploadEnd()
     }
   }
 

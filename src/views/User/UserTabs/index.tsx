@@ -31,9 +31,10 @@ const UserTabs = ({
   const articleCount = user?.status?.articleCount || 0
   const collectionCount = user?.userCollections.totalCount || 0
 
+  const isAuthor = viewer.userName === userName
   const showCollectionTab =
     loading ||
-    ((articleCount > 0 || collectionCount > 0) && viewer.userName === userName)
+    (isAuthor ? articleCount > 0 || collectionCount > 0 : collectionCount > 0)
 
   return (
     <Tabs>

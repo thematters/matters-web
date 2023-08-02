@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
@@ -125,6 +125,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
     },
   })
 
+  const [coverLoading, setCoverLoading] = useState(false)
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <CoverUploader
@@ -134,7 +135,9 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
         fallbackCover={IMAGE_COVER.src}
         entityType={ENTITY_TYPE.collection}
         inEditor
-        onUpload={(assetId) => setFieldValue('cover', assetId)}
+        onUploaded={(assetId) => setFieldValue('cover', assetId)}
+        onUploadStart={() => setCoverLoading(true)}
+        onUploadEnd={() => setCoverLoading(false)}
         type="collection"
         bookTitle={values.title}
         bookArticleCount={collection.articles.totalCount}
@@ -178,9 +181,9 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
     <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={isSubmitting}
+      disabled={isSubmitting || coverLoading}
       text={<FormattedMessage defaultMessage="Confirm" />}
-      loading={isSubmitting}
+      loading={isSubmitting || coverLoading}
     />
   )
 

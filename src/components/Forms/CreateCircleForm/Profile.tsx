@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
@@ -139,6 +139,8 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
     },
   })
 
+  const [avatarLoading, setAvatarLoading] = useState(false)
+  const [coverLoading, setCoverLoading] = useState(false)
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <section className={styles.coverField}>
@@ -148,7 +150,9 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           cover={circle.cover}
           fallbackCover={CIRCLE_COVER}
           inEditor
-          onUpload={(assetId) => setFieldValue('cover', assetId)}
+          onUploaded={(assetId) => setFieldValue('cover', assetId)}
+          onUploadStart={() => setCoverLoading(true)}
+          onUploadEnd={() => setCoverLoading(false)}
           entityType={ENTITY_TYPE.user}
           entityId={circle.id}
         />
@@ -162,7 +166,9 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
         <AvatarUploader
           type="circle"
           circle={circle}
-          onUpload={(assetId) => setFieldValue('avatar', assetId)}
+          onUploaded={(assetId) => setFieldValue('avatar', assetId)}
+          onUploadStart={() => setAvatarLoading(true)}
+          onUploadEnd={() => setAvatarLoading(false)}
           entityId={circle.id}
         />
       </section>
@@ -219,9 +225,9 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
     <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={isSubmitting}
+      disabled={isSubmitting || coverLoading || avatarLoading}
       text={<FormattedMessage defaultMessage="Confirm" />}
-      loading={isSubmitting}
+      loading={isSubmitting || coverLoading || avatarLoading}
     />
   )
 
@@ -236,9 +242,9 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
               <Layout.Header.RightButton
                 type="submit"
                 form={formId}
-                disabled={isSubmitting}
+                disabled={isSubmitting || coverLoading}
                 text={<FormattedMessage defaultMessage="Confirm" />}
-                loading={isSubmitting}
+                loading={isSubmitting || coverLoading}
               />
             </>
           }

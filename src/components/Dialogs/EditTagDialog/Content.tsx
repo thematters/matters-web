@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
@@ -127,6 +127,7 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
     },
   })
 
+  const [coverLoading, setCoverLoading] = useState(false)
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <section className={styles.coverField}>
@@ -137,7 +138,9 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
           entityId={id}
           entityType={ENTITY_TYPE.tag}
           inEditor
-          onUpload={(assetId) => setFieldValue('newCover', assetId)}
+          onUploaded={(assetId) => setFieldValue('newCover', assetId)}
+          onUploadStart={() => setCoverLoading(true)}
+          onUploadEnd={() => setCoverLoading(false)}
         />
       </section>
 
@@ -184,8 +187,8 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
       text={<FormattedMessage defaultMessage="Confirm" />}
       type="submit"
       form={formId}
-      disabled={isSubmitting}
-      loading={isSubmitting}
+      disabled={isSubmitting || coverLoading}
+      loading={isSubmitting || coverLoading}
     />
   )
 

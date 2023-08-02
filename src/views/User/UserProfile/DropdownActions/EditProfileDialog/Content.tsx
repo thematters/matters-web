@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
@@ -163,6 +163,8 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     },
   })
 
+  const [avatarLoading, setAvatarLoading] = useState(false)
+  const [coverLoading, setCoverLoading] = useState(false)
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <section className={styles.coverField}>
@@ -172,14 +174,18 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           fallbackCover={IMAGE_COVER.src}
           entityType={ENTITY_TYPE.user}
           inEditor
-          onUpload={(assetId) => setFieldValue('profileCover', assetId)}
+          onUploaded={(assetId) => setFieldValue('profileCover', assetId)}
+          onUploadStart={() => setCoverLoading(true)}
+          onUploadEnd={() => setCoverLoading(false)}
         />
       </section>
 
       <section className={styles.avatarField}>
         <AvatarUploader
           user={user}
-          onUpload={(assetId) => setFieldValue('avatar', assetId)}
+          onUploaded={(assetId) => setFieldValue('avatar', assetId)}
+          onUploadStart={() => setAvatarLoading(true)}
+          onUploadEnd={() => setAvatarLoading(false)}
           hasBorder
         />
       </section>
@@ -223,9 +229,9 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={isSubmitting}
+      disabled={isSubmitting || coverLoading || avatarLoading}
       text={<FormattedMessage defaultMessage="Confirm" />}
-      loading={isSubmitting}
+      loading={isSubmitting || coverLoading || avatarLoading}
     />
   )
 
