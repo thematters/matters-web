@@ -1,8 +1,11 @@
 .imageContainer {
   position: relative;
-  margin: calc(var(--spacing-base) * -1) calc(var(--spacing-base) * -1)
-    var(--spacing-base);
+  margin: 0 calc(var(--spacing-base) * -1) var(--spacing-base);
   border-bottom: 1px solid var(--color-line-grey);
+
+  @media (--sm-up) {
+    margin: 0 calc(var(--spacing-base-loose) * -1) var(--spacing-base);
+  }
 
   & .image {
     &::after {

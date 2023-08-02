@@ -62,8 +62,8 @@ const PayoutItem = ({
       <section className={styles.payoutItem}>
         <TextIcon
           icon={<IconPayout24 size="mdS" color="grey" />}
-          size="xm"
-          spacing="base"
+          size="md"
+          spacing="tight"
           color="grey"
         >
           <Translate id="paymentPayout" />

@@ -1,43 +1,15 @@
-import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { analytics, toPath } from '~/common/utils'
 import { Book, Media } from '~/components'
 import { PinnedWorksUserFragment } from '~/gql/graphql'
 
+import { fragments } from './gql'
 import styles from './styles.module.css'
 import UnPinButton from './UnPinButton'
 
 type PinBoardProps = {
   user: PinnedWorksUserFragment
-}
-
-const fragments = {
-  user: gql`
-    fragment PinnedWorksUser on User {
-      id
-      userName
-      pinnedWorks {
-        id
-        pinned
-        title
-        cover
-        ... on Article {
-          slug
-          mediaHash
-          author {
-            id
-            userName
-          }
-        }
-        ... on Collection {
-          articles(input: { first: 0 }) {
-            totalCount
-          }
-        }
-      }
-    }
-  `,
 }
 
 const PinBoard = ({ user }: PinBoardProps) => {

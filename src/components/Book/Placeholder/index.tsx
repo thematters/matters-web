@@ -7,7 +7,7 @@ const Placeholder = () => {
   return (
     <section className={placeholderStyles.book}>
       <div className={placeholderStyles.cover}>
-        <ResponsiveImage url={IMG_PLACEHOLDER} size="360w" />
+        <ResponsiveImage url={IMG_PLACEHOLDER} width={240} />
       </div>
     </section>
   )

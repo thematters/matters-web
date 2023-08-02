@@ -134,7 +134,7 @@ const Carousel = ({ items }: CarouselProps) => {
               <div key={item.id} className={styles.slide}>
                 <Card htmlHref={itemLink} spacing={[0, 0]} bgActiveColor="none">
                   <div className={styles.content}>
-                    <ResponsiveImage url={item.cover} size="1280w" />
+                    <ResponsiveImage url={item.cover} width={1376} />
                     <h3>{title}</h3>
                     <p>{itemContent}</p>
                   </div>

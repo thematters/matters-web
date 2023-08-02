@@ -34,18 +34,15 @@ const UserCollections = () => {
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
 
-  let query = USER_COLLECTIONS
-  let publicQuery = true
-
   /**
    * Data Fetching
    */
   // public data
   const { data, loading, error, fetchMore } =
     usePublicQuery<UserCollectionsQuery>(
-      query,
+      USER_COLLECTIONS,
       { variables: { userName } },
-      { publicQuery }
+      { publicQuery: true }
     )
   const user = data?.user
   const collections = user?.collections
