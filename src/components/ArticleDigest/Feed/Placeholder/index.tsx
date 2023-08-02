@@ -1,5 +1,5 @@
 import IMG_PLACEHOLDER from '@/public/static/images/placeholder.svg'
-import { Card, ResponsiveImage } from '~/components'
+import { Card } from '~/components'
 
 import styles from '../styles.module.css'
 import placeholderStyles from './styles.module.css'
@@ -15,7 +15,7 @@ const Placeholder = () => {
         </section>
 
         <div className={styles.cover}>
-          <ResponsiveImage url={IMG_PLACEHOLDER} width={144} />
+          <img src={IMG_PLACEHOLDER} alt="" />
         </div>
       </section>
     </Card>
