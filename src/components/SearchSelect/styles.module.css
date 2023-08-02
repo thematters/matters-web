@@ -5,8 +5,6 @@
 }
 
 .area {
-  @mxin scrollbar-thin;
-
   flex-grow: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;

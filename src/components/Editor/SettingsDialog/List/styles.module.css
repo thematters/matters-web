@@ -1,6 +1,4 @@
 .container {
-  @mixin scrollbar-thin;
-
   overflow-y: auto;
 }
 

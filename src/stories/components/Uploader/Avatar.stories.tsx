@@ -17,13 +17,20 @@ const Template: ComponentStory<typeof AvatarUploader> = () => (
     <ul className={styles.avatarContainer}>
       {/* User */}
       <li>
-        <AvatarUploader hasBorder onUpload={(assetId) => alert({ assetId })} />
+        <AvatarUploader
+          hasBorder
+          onUploaded={(assetId) => alert({ assetId })}
+          onUploadStart={() => null}
+          onUploadEnd={() => null}
+        />
       </li>
       <li>
         <AvatarUploader
           user={MOCK_USER}
           hasBorder
-          onUpload={(assetId) => alert({ assetId })}
+          onUploaded={(assetId) => alert({ assetId })}
+          onUploadStart={() => null}
+          onUploadEnd={() => null}
         />
       </li>
 
@@ -31,7 +38,9 @@ const Template: ComponentStory<typeof AvatarUploader> = () => (
       <li>
         <AvatarUploader
           type="circle"
-          onUpload={(assetId) => alert({ assetId })}
+          onUploaded={(assetId) => alert({ assetId })}
+          onUploadStart={() => null}
+          onUploadEnd={() => null}
           entityId=""
         />
       </li>
@@ -39,7 +48,9 @@ const Template: ComponentStory<typeof AvatarUploader> = () => (
         <AvatarUploader
           type="circle"
           circle={MOCK_CIRCLE}
-          onUpload={(assetId) => alert({ assetId })}
+          onUploaded={(assetId) => alert({ assetId })}
+          onUploadStart={() => null}
+          onUploadEnd={() => null}
           entityId=""
         />
       </li>

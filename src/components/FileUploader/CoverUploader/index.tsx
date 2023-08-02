@@ -54,7 +54,9 @@ export type CoverUploaderProps = {
     | ENTITY_TYPE.tag
     | ENTITY_TYPE.circle
     | ENTITY_TYPE.collection
-  onUpload: (assetId: string | null) => void
+  onUploaded: (assetId: string | null) => void
+  onUploadStart: () => void
+  onUploadEnd: () => void
   type?: 'circle' | 'collection'
 
   bookTitle?: string
@@ -68,7 +70,9 @@ export const CoverUploader = ({
   entityId,
   entityType,
   inEditor,
-  onUpload,
+  onUploaded,
+  onUploadStart,
+  onUploadEnd,
   type,
   bookTitle,
   bookArticleCount,
@@ -110,6 +114,10 @@ export const CoverUploader = ({
     }
 
     try {
+      if (onUploadStart) {
+        onUploadStart()
+      }
+
       const { data } = await upload({
         variables: {
           input: { file, type: assetType, entityId, entityType },
@@ -120,7 +128,7 @@ export const CoverUploader = ({
 
       if (id && path) {
         setCover(path)
-        onUpload(id)
+        onUploaded(id)
       } else {
         throw new Error()
       }
@@ -128,6 +136,10 @@ export const CoverUploader = ({
       toast.error({
         message: <Translate id="failureUploadImage" />,
       })
+    }
+
+    if (onUploadEnd) {
+      onUploadEnd()
     }
   }
 

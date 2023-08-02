@@ -24,6 +24,7 @@
 .index {
   @mixin inline-flex-center-all;
 
+  flex-shrink: 0;
   width: 1.25rem;
   height: 1.25rem;
   font-size: var(--font-size-sm);
