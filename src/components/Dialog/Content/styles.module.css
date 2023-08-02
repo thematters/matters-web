@@ -1,6 +1,4 @@
 .content {
-  @mixin scrollbar-thin;
-
   display: flex;
   flex-direction: column;
   flex-shrink: 1;
