@@ -22,7 +22,9 @@ const Template: ComponentStory<typeof CoverUploader> = () => (
         <CoverUploader
           assetType={ASSET_TYPE.profileCover}
           entityType={ENTITY_TYPE.user}
-          onUpload={(assetId) => alert({ assetId })}
+          onUploaded={(assetId) => alert({ assetId })}
+          onUploadStart={() => null}
+          onUploadEnd={() => null}
           fallbackCover={IMAGE_COVER.src}
         />
       </li>
@@ -30,7 +32,9 @@ const Template: ComponentStory<typeof CoverUploader> = () => (
         <CoverUploader
           assetType={ASSET_TYPE.profileCover}
           entityType={ENTITY_TYPE.user}
-          onUpload={(assetId) => alert({ assetId })}
+          onUploaded={(assetId) => alert({ assetId })}
+          onUploadStart={() => null}
+          onUploadEnd={() => null}
           fallbackCover={IMAGE_COVER.src}
           cover="https://source.unsplash.com/512x512?cover"
         />
@@ -42,7 +46,9 @@ const Template: ComponentStory<typeof CoverUploader> = () => (
           type="circle"
           assetType={ASSET_TYPE.circleCover}
           entityType={ENTITY_TYPE.circle}
-          onUpload={(assetId) => alert({ assetId })}
+          onUploaded={(assetId) => alert({ assetId })}
+          onUploadStart={() => null}
+          onUploadEnd={() => null}
           fallbackCover={CIRCLE_COVER}
         />
       </li>
@@ -51,7 +57,9 @@ const Template: ComponentStory<typeof CoverUploader> = () => (
           type="circle"
           assetType={ASSET_TYPE.circleCover}
           entityType={ENTITY_TYPE.circle}
-          onUpload={(assetId) => alert({ assetId })}
+          onUploaded={(assetId) => alert({ assetId })}
+          onUploadStart={() => null}
+          onUploadEnd={() => null}
           fallbackCover={CIRCLE_COVER}
           cover="https://source.unsplash.com/512x512?circle-cover"
         />
