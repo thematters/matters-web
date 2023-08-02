@@ -32,7 +32,9 @@ const RecommendHead = ({ type }: Props) => {
     ),
   }
 
-  return <PageHeader title={titleMap[type]} is="h2" hasBorder={false} />
+  return (
+    <PageHeader title={titleMap[type]} is="h2" hasBorder={false} type="base" />
+  )
 }
 
 export default RecommendHead
