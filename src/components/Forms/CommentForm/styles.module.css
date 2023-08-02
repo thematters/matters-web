@@ -7,10 +7,6 @@
   margin-bottom: var(--spacing-tight);
   background: var(--color-grey-lighter);
   border-radius: var(--spacing-base);
-
-  & :global(.ql-editor) {
-    min-height: 7rem;
-  }
 }
 
 .footer {

@@ -39,7 +39,6 @@ import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import Inactive from './Inactive'
 import Placeholder from './Placeholder'
 import styles from './styles.module.css'
-import TraveloggersAvatar from './TraveloggersAvatar'
 
 const DynamicWalletLabel = dynamic(() => import('./WalletLabel'), {
   ssr: false,
@@ -123,11 +122,7 @@ export const UserProfile = () => {
    */
   const avatar = (
     <section className={styles.avatar}>
-      {hasTraveloggersBadge ? (
-        <TraveloggersAvatar user={user} isMe={isMe} size="xxxlm" />
-      ) : (
-        <Avatar size="xxxlm" user={user} inProfile />
-      )}
+      <Avatar size="xxxlm" user={user} inProfile />
     </section>
   )
 

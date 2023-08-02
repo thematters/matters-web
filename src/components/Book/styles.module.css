@@ -37,7 +37,7 @@
   & .cover {
     position: relative;
     z-index: -1;
-    flex-grow: 1;
+    height: 6.25rem;
 
     & img {
       @mixin object-fit-cover;
@@ -47,9 +47,11 @@
   }
 
   & .jacket {
-    position: relative;
-    flex-shrink: 0;
-    height: 3.75rem;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: calc(3.75rem + 1px);
     background: var(--jacket-bg);
 
     & .title,
@@ -83,8 +85,12 @@
       }
     }
 
-    &.titleMd {
+    &.titleMd:not(.hasCount) {
+      @mixin inline-flex-center-start;
+
       & .title {
+        position: relative;
+        top: 0;
         font-size: var(--font-size-sm-s);
         line-height: 1.25rem;
       }

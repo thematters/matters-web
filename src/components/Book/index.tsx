@@ -48,7 +48,7 @@ export const Book: React.FC<BookProps> & {
     [styles.jacket]: true,
     [styles.hasCount]: hasCount,
     [styles.titleLg]: titleWidth <= 12,
-    [styles.titleMd]: titleWidth > 12 && titleWidth <= 36 && !hasCount,
+    [styles.titleMd]: titleWidth > 12 && titleWidth <= 28,
   })
 
   return (
@@ -60,7 +60,7 @@ export const Book: React.FC<BookProps> & {
       }
     >
       <div className={styles.cover}>
-        <ResponsiveImage url={cover || BOOK_COVER.src} size="360w" anonymous />
+        <ResponsiveImage url={cover || BOOK_COVER.src} width={240} anonymous />
         {hasMask && (
           <div className={styles.mask}>
             {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}

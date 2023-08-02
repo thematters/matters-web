@@ -80,6 +80,7 @@ const DeleteCollectionDialog = ({
           userName: collection.author.userName!,
           type: 'delete',
         })
+
         const result = updateUserProfile({
           cache,
           userName: collection.author.userName!,

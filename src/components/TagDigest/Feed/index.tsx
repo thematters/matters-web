@@ -121,7 +121,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
                 </VisuallyHidden>
                 <ResponsiveImage
                   url={tag.cover || IMAGE_TAG_COVER.src}
-                  size="360w"
+                  width={144}
                 />
               </a>
             </Link>

@@ -110,17 +110,17 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
             </FormikProvider>
           </section>
         )}
-
-        <section className={styles.createCollection}>
-          {enableCollections.length > 0 && <hr className={styles.hr}></hr>}
-
-          <button className={styles.button} onClick={switchToCreating}>
-            <TextIcon icon={<IconAdd20 size="mdS" />}>
-              <FormattedMessage defaultMessage="New Collection" />
-            </TextIcon>
-          </button>
-        </section>
       </Dialog.Content>
+
+      <section className={styles.createCollection}>
+        {enableCollections.length > 0 && <hr className={styles.hr}></hr>}
+
+        <button className={styles.button} onClick={switchToCreating}>
+          <TextIcon icon={<IconAdd20 size="mdS" />}>
+            <FormattedMessage defaultMessage="New Collection" />
+          </TextIcon>
+        </button>
+      </section>
 
       <Dialog.Footer
         smUpBtns={

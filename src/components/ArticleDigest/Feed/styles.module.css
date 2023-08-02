@@ -3,7 +3,7 @@
 }
 
 .container {
-  @mixin flex-center-space-between;
+  @mixin flex-start-space-between;
 
   gap: 2rem;
 
@@ -41,6 +41,9 @@
 
   &.lineClamp2 {
     -webkit-line-clamp: 2;
+  }
+
+  &.hasCover {
     min-height: 2.75rem;
   }
 }

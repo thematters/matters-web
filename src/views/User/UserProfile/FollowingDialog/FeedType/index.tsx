@@ -1,4 +1,4 @@
-import { SegmentedTabs, Translate } from '~/components'
+import { Tabs, Translate } from '~/components'
 
 export type FollowingFeedType = 'user' | 'circle' | 'tag'
 
@@ -16,25 +16,19 @@ const FeedType = ({ type, setFeedType }: FeedTypeProps) => {
 
   return (
     <section className={styles.container}>
-      <SegmentedTabs sticky>
-        <SegmentedTabs.Tab
-          onClick={() => setFeedType('user')}
-          selected={isUser}
-        >
+      <Tabs>
+        <Tabs.Tab onClick={() => setFeedType('user')} selected={isUser}>
           <Translate zh_hant="作者" zh_hans="作者" en="Authors" />
-        </SegmentedTabs.Tab>
+        </Tabs.Tab>
 
-        <SegmentedTabs.Tab
-          onClick={() => setFeedType('circle')}
-          selected={isCircle}
-        >
+        <Tabs.Tab onClick={() => setFeedType('circle')} selected={isCircle}>
           <Translate zh_hant="圍爐" zh_hans="围炉" en="Circles" />
-        </SegmentedTabs.Tab>
+        </Tabs.Tab>
 
-        <SegmentedTabs.Tab onClick={() => setFeedType('tag')} selected={isTag}>
+        <Tabs.Tab onClick={() => setFeedType('tag')} selected={isTag}>
           <Translate id="tags" />
-        </SegmentedTabs.Tab>
-      </SegmentedTabs>
+        </Tabs.Tab>
+      </Tabs>
     </section>
   )
 }

@@ -6,7 +6,7 @@ import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.s
 import IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING from '@/public/static/icons/civic-liker-architect-ring.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 import LOGBOOK from '@/public/static/images/logbook.gif'
-import { IconLogbookBadge16, ResponsiveImage } from '~/components'
+import { IconLogbookBadge16, ResponsiveImage, Tooltip } from '~/components'
 import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -88,7 +88,8 @@ export const Avatar = (props: AvatarProps) => {
     <div className={avatarClasses} style={style} title={title}>
       <ResponsiveImage
         url={source}
-        size="144w"
+        width={152}
+        smUpWidth={240}
         disabled={isFallback || inEditor}
       />
 
@@ -104,11 +105,13 @@ export const Avatar = (props: AvatarProps) => {
       {hasLogbook && (
         <section className={styles.badge}>
           {inProfile ? (
-            <img
-              className={styles.logbook}
-              src={LOGBOOK.src}
-              alt="logbook icon"
-            />
+            <Tooltip content="Logbook">
+              <img
+                className={styles.logbook}
+                src={LOGBOOK.src}
+                alt="logbook icon"
+              />
+            </Tooltip>
           ) : (
             <IconLogbookBadge16 />
           )}
