@@ -76,7 +76,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
             } else if (isDirectionUp) {
               setDirection('down')
             }
-            articleEdges = articleEdges?.reverse()
+            articles.edges = articles.edges?.reverse()
           }}
           className={styles.sortButton}
         >
