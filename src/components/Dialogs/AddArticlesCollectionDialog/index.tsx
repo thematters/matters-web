@@ -82,7 +82,10 @@ const BaseAddArticlesCollectionDialog = ({
         return
       }
 
-      const addChecked = checked.slice(0, 100 - collection.articles.totalCount)
+      const addChecked = checked.slice(
+        0,
+        100 - collection.articles.totalCount - 1
+      )
 
       onUpdate()
       await update({
