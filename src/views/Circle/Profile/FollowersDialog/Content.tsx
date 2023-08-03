@@ -90,15 +90,13 @@ const FollowersDialogContent = () => {
   if (!data || !circle || !edges || edges.length <= 0 || !pageInfo) {
     return (
       <EmptyWarning
-        description={
-          <FormattedMessage defaultMessage="No followers yet" description="" />
-        }
+        description={<FormattedMessage defaultMessage="No followers yet" />}
       />
     )
   }
 
   return (
-    <Dialog.Content spacing={['base', 0]}>
+    <Dialog.Content>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
@@ -113,6 +111,7 @@ const FollowersDialogContent = () => {
                     id: node.id,
                   })
                 }
+                hasFollow={false}
               />
             </List.Item>
           ))}

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
@@ -23,7 +23,6 @@ import {
   SearchAggregateArticlesPublicQuery,
 } from '~/gql/graphql'
 
-import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
 
 const AggregateArticleResults = () => {
@@ -103,7 +102,7 @@ const AggregateArticleResults = () => {
   }
 
   return (
-    <section>
+    <>
       <Head
         title={intl.formatMessage(
           {
@@ -122,8 +121,9 @@ const AggregateArticleResults = () => {
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
+        eof={<FormattedMessage defaultMessage="End of the results" />}
       >
-        <List responsiveWrapper>
+        <List>
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'Article' && (
@@ -133,8 +133,6 @@ const AggregateArticleResults = () => {
                       node as ArticleDigestFeedArticlePublicFragment &
                         Partial<ArticleDigestFeedArticlePrivateFragment>
                     }
-                    is="link"
-                    isConciseFooter={true}
                     hasCircle={false}
                     hasFollow={false}
                     onClick={() =>
@@ -161,10 +159,7 @@ const AggregateArticleResults = () => {
           )}
         </List>
       </InfiniteScroll>
-      {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
-        <EndOfResults />
-      )}
-    </section>
+    </>
   )
 }
 

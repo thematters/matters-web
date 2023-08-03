@@ -125,15 +125,20 @@ const CONNECT_SRC = [
   '*.alchemy.com',
 
   // IPFS Gateways
-  'ipfs.io/ipfs/',
-  'ipfs.infura.io/ipfs/',
-  'dweb.link/ipfs/',
-  'crustwebsites.net/ipfs/',
+  'gateway.ipfs.io/ipfs/',
   'cloudflare-ipfs.com/ipfs/',
-  'ipfs.fleek.co/ipfs/',
   'gateway.pinata.cloud/ipfs/',
-  'meson.network/ipfs/',
-  'ipfs.filebase.io/ipfs/',
+  'ipfs.io/ipfs/',
+  '*.cf-ipfs.com',
+  'cf-ipfs.com/ipfs/',
+  '4everland.io/ipfs/',
+  '*.4everland.io',
+  'storry.tv/ipfs/',
+  '*.storry.tv',
+  'ipfs.runfission.com/ipfs/',
+  'konubinix.eu/ipfs/',
+  'starbase.gw3.io/ipfs/',
+  '*.gw3.io',
 ]
 
 const FRAME_SRC = [

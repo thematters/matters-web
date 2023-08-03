@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Dialog,
@@ -83,10 +84,14 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
         <Dialog.Header
           title="contentFeedEntrance"
           closeDialog={closeDialog}
-          closeTextId="close"
+          closeText={<FormattedMessage defaultMessage="Close" />}
         />
 
-        <DynamicContent user={user} refetch={refetch} />
+        <DynamicContent
+          user={user}
+          refetch={refetch}
+          closeDialog={closeDialog}
+        />
       </Dialog>
     </>
   )

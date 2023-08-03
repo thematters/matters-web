@@ -1,0 +1,39 @@
+.form {
+  position: relative;
+  width: initial;
+  margin-bottom: var(--spacing-base);
+
+  & input[type='search'] {
+    @mixin border-grey;
+
+    padding: var(--spacing-tight) calc(2rem + var(--spacing-x-tight));
+    font-size: var(--font-size-sm);
+    line-height: 1.375rem;
+    color: var(--color-black);
+    caret-color: var(--color-matters-green);
+    background: white;
+    border-radius: var(--spacing-x-tight);
+
+    &::placeholder {
+      color: var(--color-grey-dark);
+      opacity: 1; /* Firefox */
+    }
+  }
+
+  & button.search,
+  & button.clear {
+    position: absolute;
+    top: 0;
+    width: 2rem;
+    height: 100%;
+  }
+
+  & button.search {
+    left: var(--spacing-x-tight);
+    cursor: initial;
+  }
+
+  & button.clear {
+    right: var(--spacing-x-tight);
+  }
+}

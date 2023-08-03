@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import _find from 'lodash/find'
 import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY, TEST_ID } from '~/common/enums'
 import { formatAmount, translate } from '~/common/utils'
@@ -35,6 +36,7 @@ interface FormProps {
   recipient: UserDonationRecipientFragment
   switchToSetAmount: (c: CURRENCY) => void
   switchToWalletSelect: () => void
+  closeDialog: () => any
 }
 
 const CurrencyChoice: React.FC<FormProps> = ({
@@ -42,6 +44,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
   recipient,
   switchToSetAmount,
   switchToWalletSelect,
+  closeDialog,
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -83,7 +86,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
       className={styles.wrapper}
       data-test-id={TEST_ID.PAY_TO_CURRENCY_CHOICE}
     >
-      <section className={styles.header}>
+      <header className={styles.header}>
         <span>
           <Translate zh_hant="選擇支持" zh_hans="选择支持" en="Support " />
         </span>
@@ -102,7 +105,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
         <span>
           <Translate zh_hant="的方式：" zh_hans="的方式：" en="with: " />
         </span>
-      </section>
+      </header>
 
       {/* USDT */}
       <USDTChoice
@@ -157,7 +160,19 @@ const CurrencyChoice: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Header closeDialog={closeDialog} title="donation" />
+
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Cancel" />}
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
+      />
     </>
   )
 }

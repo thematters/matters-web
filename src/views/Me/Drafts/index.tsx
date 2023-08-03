@@ -86,7 +86,11 @@ export const BaseMeDrafts = () => {
 
   return (
     <DraftsContextProvider>
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
         <List>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
@@ -101,11 +105,13 @@ export const BaseMeDrafts = () => {
 
 const MeDrafts = () => (
   <Layout.Main>
-    <Layout.Header right={<Layout.Header.Title id="myDrafts" />} />
+    <Layout.Header left={<Layout.Header.Title id="myDrafts" />} />
 
     <Head title={{ id: 'myDrafts' }} />
 
-    <BaseMeDrafts />
+    <Layout.Main.Spacing hasVertical={false}>
+      <BaseMeDrafts />
+    </Layout.Main.Spacing>
   </Layout.Main>
 )
 

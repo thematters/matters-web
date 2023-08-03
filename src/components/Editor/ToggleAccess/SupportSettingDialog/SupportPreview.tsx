@@ -20,27 +20,30 @@ const SupportPreview = ({
 }) => {
   const viewer = useContext(ViewerContext)
   return (
-    <section className={styles.donation}>
-      <span className={styles.content}>
+    <section className={styles.preview}>
+      <section className={styles.content}>
         {!content &&
           (tabType === 'request' ? (
             <Translate id="supportRequestDescription" />
           ) : (
-            <section className={styles.previewResponse}>
-              <p>
+            <>
+              <p className={styles.tagline}>
                 <Translate
                   zh_hans="🎉感谢支持"
                   zh_hant="🎉 感謝支持！"
                   en="🎉Thanks for your support!"
                 />
               </p>
-              <Translate id="supportResponseDescription" />
-            </section>
+              <p>
+                <Translate id="supportResponseDescription" />
+              </p>
+            </>
           ))}
+
         {content && tabType === 'reply' && (
-          <section>
+          <>
             <Avatar src={viewer?.avatar} size="xl" />
-            <p>
+            <p className={styles.tagline}>
               <TextIcon weight="md">{viewer?.displayName}</TextIcon>
               <TextIcon color="greyDarker">
                 <Translate
@@ -51,11 +54,15 @@ const SupportPreview = ({
               </TextIcon>
             </p>
             <Spacer size="xtight" />
-          </section>
+          </>
         )}
-        {<Translate zh_hant={content} zh_hans={content} en={content} />}
-      </span>
-      <section className={styles.previewButton}>
+
+        <p>
+          <Translate zh_hant={content} zh_hans={content} en={content} />
+        </p>
+      </section>
+
+      <section className={styles.button}>
         {tabType === 'request' && <DonationButton supported={false} />}
         {tabType === 'reply' && <DonationButton supported={true} />}
       </section>

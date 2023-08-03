@@ -6,9 +6,9 @@ const ToS = () => (
 
     <Head title={{ id: 'termAndPrivacy' }} />
 
-    <Layout.Spacing>
+    <Layout.Main.Spacing>
       <Term />
-    </Layout.Spacing>
+    </Layout.Main.Spacing>
   </Layout.Main>
 )
 

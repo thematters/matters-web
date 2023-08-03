@@ -2,11 +2,12 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST, COMMENT_TYPE_TEXT } from '~/common/enums'
+import { COMMENT_TYPE_TEXT } from '~/common/enums'
 import {
   CommentFormType,
   Dialog,
   LanguageContext,
+  toast,
   useDialogSwitch,
   useMutation,
 } from '~/components'
@@ -54,31 +55,24 @@ const DeleteCommentDialog = ({
   const onDelete = async () => {
     await deleteComment()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <FormattedMessage
-              defaultMessage="{commentType} has been deleted"
-              description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
-              values={{
-                commentType: COMMENT_TYPE_TEXT[lang][type],
-              }}
-            />
-          ),
-
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="{commentType} has been deleted"
+          description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+          values={{
+            commentType: COMMENT_TYPE_TEXT[lang][type],
+          }}
+        />
+      ),
+    })
   }
 
   return (
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <FormattedMessage
@@ -89,8 +83,6 @@ const DeleteCommentDialog = ({
               }}
             />
           }
-          closeDialog={closeDialog}
-          mode="inner"
         />
 
         <Dialog.Message>
@@ -105,25 +97,29 @@ const DeleteCommentDialog = ({
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="red"
-            onClick={() => {
-              onDelete()
-              closeDialog()
-            }}
-          >
-            <FormattedMessage defaultMessage="Confirm" description="" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="greyLighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <FormattedMessage defaultMessage="Cancel" description="" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={<FormattedMessage defaultMessage="Confirm" />}
+              color="red"
+              onClick={() => {
+                onDelete()
+                closeDialog()
+              }}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Confirm" />}
+              color="red"
+              onClick={() => {
+                onDelete()
+                closeDialog()
+              }}
+            />
+          }
+        />
       </Dialog>
     </>
   )

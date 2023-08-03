@@ -6,6 +6,7 @@ import Request from './Request'
 type Step = 'request' | 'onboarding'
 
 interface Props {
+  back?: () => void
   nextStep: () => void
   closeDialog: () => void
 }

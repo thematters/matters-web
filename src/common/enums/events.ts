@@ -1,10 +1,6 @@
 // Analytics
 export const ANALYTICS = 'analytics'
 
-// Toasts
-export const ADD_TOAST = 'addToast'
-export const REMOVE_TOAST = 'removeToast'
-
 // Article
 export const REFETCH_RESPONSES = 'refetchResponses'
 

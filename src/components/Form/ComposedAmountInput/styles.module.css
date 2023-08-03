@@ -1,7 +1,3 @@
-.amountInput {
-  margin-bottom: var(--spacing-loose);
-}
-
 .radioInputOptions {
   @mixin flex-start-space-between;
 
@@ -43,14 +39,15 @@
 .customInput {
   margin-top: var(--spacing-base);
 
-  & input {
-    @mixin form-input-round;
+  & .input {
+    @mixin form-input;
+    @mixin form-input-number;
 
     text-align: center;
   }
 
   & .hint {
-    padding-top: var(--spacing-loose);
+    padding-top: var(--spacing-base);
     font-size: var(--font-size-xs);
     color: var(--color-grey-dark);
   }

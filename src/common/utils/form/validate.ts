@@ -1,4 +1,12 @@
 import {
+  MAX_ARTICLE_SUPPORT_LENGTH,
+  MAX_CIRCLE_DISPLAY_NAME_LENGTH,
+  MAX_CIRCLE_NAME_LENGTH,
+  MAX_DESCRIPTION_LENGTH,
+  MAX_USER_DISPLAY_NAME_LENGTH,
+  MIN_CIRCLE_DISPLAY_NAME_LENGTH,
+  MIN_CIRCLE_NAME_LENGTH,
+  MIN_USER_DISPLAY_NAME_LENGTH,
   PAYMENT_CURRENCY,
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
   PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT,
@@ -157,6 +165,30 @@ export const validateComparedUserName = (
   }
 }
 
+export const validateCollectionTitle = (value: string, lang: Language) => {
+  if (!value) {
+    return translate({ id: 'required', lang })
+  }
+
+  if (value.length < 1) {
+    return translate({
+      zh_hant: '輸入字數過短，僅供輸入 1-40 個字元',
+      zh_hans: '输入字数过短，仅供输入 1-40 个字符',
+      en: 'Must be between 1-40 characters long.',
+      lang,
+    })
+  }
+
+  if (value.length > 40) {
+    return translate({
+      zh_hant: '輸入字數過長，僅供輸入 1-40 個字元',
+      zh_hans: '输入字数过长，仅供输入 1-40 个字符',
+      en: 'Must be between 1-40 characters long.',
+      lang,
+    })
+  }
+}
+
 export const validateDisplayName = (
   value: string,
   lang: Language,
@@ -166,20 +198,20 @@ export const validateDisplayName = (
     return translate({ id: 'required', lang })
   }
 
-  if (value.length < 2) {
+  if (value.length < MIN_USER_DISPLAY_NAME_LENGTH) {
     return translate({
-      zh_hant: '輸入字數過短，僅供輸入 2-20 個字元',
-      zh_hans: '输入字数过短，仅供输入 2-20 个字符',
-      en: 'Must be between 2-20 characters long.',
+      zh_hant: `輸入字數過短，僅供輸入 ${MIN_USER_DISPLAY_NAME_LENGTH}-${MAX_USER_DISPLAY_NAME_LENGTH} 個字元`,
+      zh_hans: `输入字数过短，仅供输入 ${MIN_USER_DISPLAY_NAME_LENGTH}-${MAX_USER_DISPLAY_NAME_LENGTH} 个字符`,
+      en: `Must be between ${MIN_USER_DISPLAY_NAME_LENGTH}-${MAX_USER_DISPLAY_NAME_LENGTH} characters long.`,
       lang,
     })
   }
 
-  if (value.length > 20) {
+  if (value.length > MAX_USER_DISPLAY_NAME_LENGTH) {
     return translate({
-      zh_hant: '輸入字數過長，僅供輸入 2-20 個字元',
-      zh_hans: '输入字数过长，仅供输入 2-20 个字符',
-      en: 'Must be between 2-20 characters long.',
+      zh_hant: `輸入字數過長，僅供輸入 ${MIN_USER_DISPLAY_NAME_LENGTH}-${MAX_USER_DISPLAY_NAME_LENGTH} 個字元`,
+      zh_hans: `输入字数过长，仅供输入 ${MIN_USER_DISPLAY_NAME_LENGTH}-${MAX_USER_DISPLAY_NAME_LENGTH} 个字符`,
+      en: `Must be between ${MIN_USER_DISPLAY_NAME_LENGTH}-${MAX_USER_DISPLAY_NAME_LENGTH} characters long.`,
       lang,
     })
   }
@@ -207,11 +239,11 @@ export const validateDisplayName = (
 export const validateDescription = (value: string, lang: Language) => {
   if (!value) {
     return translate({ id: 'required', lang })
-  } else if (value.length > 200) {
+  } else if (value.length > MAX_DESCRIPTION_LENGTH) {
     return translate({
-      zh_hant: `已超過 200 字，目前 ${value.length} 字`,
-      zh_hans: `已超过 200 字，目前 ${value.length} 字`,
-      en: 'Maximum 200 characters, current ${value.length} characters.',
+      zh_hant: `已超過 ${MAX_DESCRIPTION_LENGTH} 字，目前 ${value.length} 字`,
+      zh_hans: `已超过 ${MAX_DESCRIPTION_LENGTH} 字，目前 ${value.length} 字`,
+      en: `Maximum ${MAX_DESCRIPTION_LENGTH} characters, current ${value.length} characters.`,
       lang,
     })
   }
@@ -219,12 +251,12 @@ export const validateDescription = (value: string, lang: Language) => {
 
 export const validateSupportWords = (value: string, lang: Language) => {
   if (!value) return
-  if (value.length > 140) {
+  if (value.length > MAX_ARTICLE_SUPPORT_LENGTH) {
     {
       return translate({
-        zh_hant: `已超過 140 字，目前 ${value.length} 字`,
-        zh_hans: `已超过 140 字，目前 ${value.length} 字`,
-        en: 'Maximum 140 characters, current ${value.length} characters.',
+        zh_hant: `已超過 ${MAX_ARTICLE_SUPPORT_LENGTH} 字，目前 ${value.length} 字`,
+        zh_hans: `已超过 ${MAX_ARTICLE_SUPPORT_LENGTH} 字，目前 ${value.length} 字`,
+        en: `Maximum ${MAX_ARTICLE_SUPPORT_LENGTH} characters, current ${value.length} characters.`,
         lang,
       })
     }
@@ -257,20 +289,20 @@ export const validateCircleName = (value: string, lang: Language) => {
   }
 
   // 2-20 characters, only accept alphabet, number and _.
-  if (value.length < 2) {
+  if (value.length < MIN_CIRCLE_NAME_LENGTH) {
     return translate({
-      zh_hant: '輸入字數過短，僅供輸入 2-20 個字元',
-      zh_hans: '输入字数过短，仅供输入 2-20 个字符',
-      en: 'Must be between 2-20 characters long.',
+      zh_hant: `輸入字數過短，僅供輸入 ${MIN_CIRCLE_NAME_LENGTH}-${MAX_CIRCLE_NAME_LENGTH} 個字元`,
+      zh_hans: `输入字数过短，仅供输入 ${MIN_CIRCLE_NAME_LENGTH}-${MAX_CIRCLE_NAME_LENGTH} 个字符`,
+      en: `Must be between ${MIN_CIRCLE_NAME_LENGTH}-${MAX_CIRCLE_NAME_LENGTH} characters long.`,
       lang,
     })
   }
 
-  if (value.length > 20) {
+  if (value.length > MAX_CIRCLE_NAME_LENGTH) {
     return translate({
-      zh_hant: '輸入字數過長，僅供輸入 2-20 個字元',
-      zh_hans: '输入字数过长，仅供输入 2-20 个字符',
-      en: 'Must be between 2-20 characters long.',
+      zh_hant: `輸入字數過長，僅供輸入 ${MIN_CIRCLE_NAME_LENGTH}-${MAX_CIRCLE_NAME_LENGTH} 個字元`,
+      zh_hans: `输入字数过长，仅供输入 ${MIN_CIRCLE_NAME_LENGTH}-${MAX_CIRCLE_NAME_LENGTH} 个字符`,
+      en: `Must be between ${MIN_CIRCLE_NAME_LENGTH}-${MAX_CIRCLE_NAME_LENGTH} characters long.`,
       lang,
     })
   }
@@ -307,20 +339,20 @@ export const validateCircleDisplayName = (value: string, lang: Language) => {
     return translate({ id: 'required', lang })
   }
 
-  if (value.length < 2) {
+  if (value.length < MIN_CIRCLE_DISPLAY_NAME_LENGTH) {
     return translate({
-      zh_hant: '輸入字數過短，僅供輸入 2-12 個字元',
-      zh_hans: '输入字数过短，仅供输入 2-12 個字符',
-      en: 'Must be between 2-12 characters long.',
+      zh_hant: `輸入字數過短，僅供輸入 ${MIN_CIRCLE_DISPLAY_NAME_LENGTH}-${MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字元`,
+      zh_hans: `输入字数过短，仅供输入 ${MIN_CIRCLE_DISPLAY_NAME_LENGTH}-${MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字符`,
+      en: `Must be between ${MIN_CIRCLE_DISPLAY_NAME_LENGTH}-${MAX_CIRCLE_DISPLAY_NAME_LENGTH} characters long.`,
       lang,
     })
   }
 
-  if (value.length > 12) {
+  if (value.length > MAX_CIRCLE_DISPLAY_NAME_LENGTH) {
     return translate({
-      zh_hant: '輸入字數過長，僅供輸入 2-12 個字元',
-      zh_hans: '输入字数过长，仅供输入 2-12 個字符',
-      en: 'Must be between 2-12 characters long.',
+      zh_hant: `輸入字數過長，僅供輸入 ${MIN_CIRCLE_DISPLAY_NAME_LENGTH}-${MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字元`,
+      zh_hans: `输入字数过长，仅供输入 ${MIN_CIRCLE_DISPLAY_NAME_LENGTH}-${MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字符`,
+      en: `Must be between ${MIN_CIRCLE_DISPLAY_NAME_LENGTH}-${MAX_CIRCLE_DISPLAY_NAME_LENGTH} characters long.`,
       lang,
     })
   }

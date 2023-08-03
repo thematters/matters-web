@@ -1,98 +1,87 @@
 import { DataProxy } from 'apollo-cache'
 
 import { UserArticlesPublicQuery } from '~/gql/graphql'
+import { UserCollectionsQuery } from '~/gql/graphql'
 
-type UserArticlesPublicUserArticlesEdges = NonNullable<
-  NonNullable<UserArticlesPublicQuery['user']>['articles']['edges']
->
-
-const sortEdgesByCreatedAtDesc = (
-  edges: UserArticlesPublicUserArticlesEdges
-) => {
-  return edges.sort(
-    ({ node: n1 }, { node: n2 }) =>
-      Date.parse(n2.createdAt) - Date.parse(n1.createdAt)
-  )
-}
-
-const update = ({
+export const updateUserArticles = ({
   cache,
-  articleId,
+  targetId,
   userName,
   type,
 }: {
   cache: DataProxy
-  articleId: string
-  userName?: string | null
-  type: 'sticky' | 'unsticky' | 'archive'
+  targetId?: string
+  userName: string
+  type: 'pin' | 'unpin' | 'archive'
 }) => {
   // FIXME: circular dependencies
   const { USER_ARTICLES_PUBLIC } = require('~/views/User/Articles/gql')
+  const { USER_COLLECTIONS } = require('~/views/User/Collections/gql')
 
-  if (!userName) {
-    return
-  }
-
+  let articlesData: UserArticlesPublicQuery | null = null
   try {
-    const data = cache.readQuery<UserArticlesPublicQuery>({
+    articlesData = cache.readQuery<UserArticlesPublicQuery>({
       query: USER_ARTICLES_PUBLIC,
       variables: { userName },
     })
+  } catch (e) {
+    //
+  }
 
-    if (!data?.user?.status || !data.user.articles.edges) {
-      return
-    }
+  let collectionsData: UserCollectionsQuery | null = null
+  try {
+    collectionsData = cache.readQuery<UserCollectionsQuery>({
+      query: USER_COLLECTIONS,
+      variables: { userName },
+    })
+  } catch (e) {
+    //
+  }
 
-    let edges = data.user.articles.edges
-    let { articleCount, totalWordCount } = data.user.status
-    const targetEdge = edges.filter(({ node }) => node.id === articleId)[0]
+  const articleEdges = articlesData?.user?.articles?.edges || []
+  const collectionEdges = collectionsData?.user?.collections?.edges || []
+  const articles = articleEdges.map((e) => e.node)
+  const collecetions = collectionEdges.map((e) => e.node)
 
-    switch (type) {
-      case 'sticky':
-        // unsticky rest articles
-        const restEdges = edges.filter(({ node }) => {
-          if (node.id !== articleId) {
-            node.sticky = false
-            return true
-          }
-        })
-        edges = [targetEdge, ...sortEdgesByCreatedAtDesc(restEdges)]
-        break
-      case 'unsticky':
-        // unsticky all articles
-        edges = edges.map((edge) => {
-          edge.node.sticky = false
-          return edge
-        })
-        edges = sortEdgesByCreatedAtDesc(edges)
-        break
-      case 'archive':
-        articleCount = articleCount - 1
-        totalWordCount = totalWordCount - (targetEdge.node.wordCount || 0)
-        break
-    }
+  const target = (articles.find((a) => a.id === targetId) ||
+    collecetions.find((a) => a.id === targetId))!
+  let pinnedWorks = articlesData?.user?.pinnedWorks || []
 
+  switch (type) {
+    case 'pin':
+      pinnedWorks = [...pinnedWorks, target]
+      break
+    case 'unpin':
+      pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
+      break
+    case 'archive':
+      // remove pinned article if it's archived
+      pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
+
+      break
+  }
+
+  if (articlesData) {
     cache.writeQuery({
       query: USER_ARTICLES_PUBLIC,
       variables: { userName },
       data: {
+        ...articlesData,
         user: {
-          ...data.user,
-          articles: {
-            ...data.user.articles,
-            edges,
-          },
-          status: {
-            ...data.user.status,
-            articleCount,
-            totalWordCount,
-          },
+          ...articlesData?.user,
+          pinnedWorks,
         },
       },
     })
-  } catch (e) {
-    console.error(e)
+  }
+
+  if (collectionsData) {
+    cache.writeQuery({
+      query: USER_COLLECTIONS,
+      variables: { userName },
+      data: {
+        ...collectionsData,
+      },
+    })
   }
 }
-
-export default update

@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
 import {
@@ -24,6 +25,7 @@ import styles from './styles.module.css'
 
 interface FormProps {
   submitCallback: () => void
+  closeDialog?: () => any
 }
 
 interface FormValues {
@@ -42,7 +44,10 @@ const SET_PAYMENT_PASSWORD = gql`
   }
 `
 
-const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
+const PaymentSetPasswordForm: React.FC<FormProps> = ({
+  submitCallback,
+  closeDialog,
+}) => {
   const [setPassword] = useMutation<SetPaymentPasswordMutation>(
     SET_PAYMENT_PASSWORD,
     undefined,
@@ -153,44 +158,58 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
 
   if (isSubmitting) {
     return (
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Spinner />
       </Dialog.Content>
     )
   }
 
   return (
-    <Dialog.Content hasGrow>
-      <section className={styles.reason}>
-        {isInPassword && (
-          <p>
-            <Translate
-              zh_hant="爲了保護你的資產安全"
-              zh_hans="为了保护你的资产安全"
-              en="To protect your assets,"
-            />
-            <br />
-            <Translate
-              zh_hant="在储值前請先設置交易密碼"
-              zh_hans="在储值前请先设置交易密码"
-              en="please set transaction password before top-up"
-            />
+    <>
+      <Dialog.Header title="paymentPassword" closeDialog={closeDialog} />
+
+      <Dialog.Content>
+        <section className={styles.reason}>
+          {isInPassword && (
+            <p>
+              <Translate
+                zh_hant="爲了保護你的資產安全"
+                zh_hans="为了保护你的资产安全"
+                en="To protect your assets,"
+              />
+              <br />
+              <Translate
+                zh_hant="在储值前請先設置交易密碼"
+                zh_hans="在储值前请先设置交易密码"
+                en="please set transaction password before top-up"
+              />
+            </p>
+          )}
+
+          {isInComparedPassword && (
+            <p>
+              <Translate id="enterPaymentPasswordAgain" />
+            </p>
+          )}
+
+          <p className={styles.hint}>
+            <Translate id="hintPaymentPassword" />
           </p>
-        )}
+        </section>
 
-        {isInComparedPassword && (
-          <p>
-            <Translate id="enterPaymentPasswordAgain" />
-          </p>
-        )}
+        {InnerForm}
+      </Dialog.Content>
 
-        <p className={styles.hint}>
-          <Translate id="hintPaymentPassword" />
-        </p>
-      </section>
-
-      {InnerForm}
-    </Dialog.Content>
+      <Dialog.Footer
+        smUpBtns={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Cancel" />}
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
+      />
+    </>
   )
 }
 

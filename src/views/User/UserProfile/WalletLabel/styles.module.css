@@ -1,0 +1,38 @@
+.walletLabel {
+  @mixin flex-center-start;
+
+  margin-top: var(--spacing-base);
+
+  & > * + * {
+    margin-left: var(--spacing-x-tight);
+  }
+}
+
+.wallet {
+  @mixin transition;
+
+  font-size: 0;
+  color: var(--color-grey-darker);
+  cursor: pointer;
+  transition-property: color;
+
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green);
+  }
+}
+
+.helpIcon {
+  font-size: 0;
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-darker);
+
+  & .ensName {
+    color: var(--color-matters-green);
+  }
+}

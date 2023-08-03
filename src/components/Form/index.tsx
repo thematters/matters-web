@@ -3,11 +3,12 @@ import CheckBox from './CheckBox'
 import ComposedAmountInput from './ComposedAmountInput'
 import CurrencyRadioInput from './CurrencyRadioInput'
 import Field from './Field'
+import IndexSquareCheckBox from './IndexSquareCheckBox'
 import Input from './Input'
 import List from './List'
 import PinInput from './PinInput'
 import Select from './Select'
-import styles from './styles.module.css'
+import SquareCheckBox from './SquareCheckBox'
 import Textarea from './Textarea'
 
 type FormProps = React.DetailedHTMLProps<
@@ -19,6 +20,8 @@ export const Form: React.FC<FormProps> & {
   Input: typeof Input
   Textarea: typeof Textarea
   CheckBox: typeof CheckBox
+  SquareCheckBox: typeof SquareCheckBox
+  IndexSquareCheckBox: typeof IndexSquareCheckBox
   PinInput: typeof PinInput
   AmountInput: typeof AmountInput
   List: typeof List
@@ -27,7 +30,7 @@ export const Form: React.FC<FormProps> & {
   ComposedAmountInput: typeof ComposedAmountInput
   CurrencyRadioInput: typeof CurrencyRadioInput
 } = ({ children, ...formProps }) => (
-  <form className={styles.form} method="POST" autoComplete="off" {...formProps}>
+  <form method="POST" autoComplete="off" {...formProps}>
     {children}
   </form>
 )
@@ -35,6 +38,8 @@ export const Form: React.FC<FormProps> & {
 Form.Input = Input
 Form.Textarea = Textarea
 Form.CheckBox = CheckBox
+Form.SquareCheckBox = SquareCheckBox
+Form.IndexSquareCheckBox = IndexSquareCheckBox
 Form.PinInput = PinInput
 Form.AmountInput = AmountInput
 Form.List = List

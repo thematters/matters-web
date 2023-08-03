@@ -1,12 +1,11 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
 import {
-  DropdownDialog,
+  Dropdown,
   Form,
   Menu,
-  TextIcon,
+  toast,
   Translate,
   useMutation,
   ViewerContext,
@@ -49,14 +48,9 @@ const CurrencyConvertor = () => {
         },
       })
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureChange" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="failureChange" />,
+      })
     }
   }
 
@@ -64,35 +58,25 @@ const CurrencyConvertor = () => {
   const isHKDActive = currency === QuoteCurrency.Hkd
   const isTWDActive = currency === QuoteCurrency.Twd
 
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
-      <Menu.Item onClick={() => updateCurrency(QuoteCurrency.Usd)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={isUSDActive ? 'bold' : 'normal'}
-        >
-          {QuoteCurrency.Usd}
-        </TextIcon>
-      </Menu.Item>
-      <Menu.Item onClick={() => updateCurrency(QuoteCurrency.Hkd)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={isHKDActive ? 'bold' : 'normal'}
-        >
-          {QuoteCurrency.Hkd}
-        </TextIcon>
-      </Menu.Item>
-      <Menu.Item onClick={() => updateCurrency(QuoteCurrency.Twd)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={isTWDActive ? 'bold' : 'normal'}
-        >
-          {QuoteCurrency.Twd}
-        </TextIcon>
-      </Menu.Item>
+  const Content = () => (
+    <Menu>
+      <Menu.Item
+        text={QuoteCurrency.Usd}
+        onClick={() => updateCurrency(QuoteCurrency.Usd)}
+        weight={isUSDActive ? 'bold' : 'normal'}
+      />
+
+      <Menu.Item
+        text={QuoteCurrency.Hkd}
+        onClick={() => updateCurrency(QuoteCurrency.Hkd)}
+        weight={isHKDActive ? 'bold' : 'normal'}
+      />
+
+      <Menu.Item
+        text={QuoteCurrency.Twd}
+        onClick={() => updateCurrency(QuoteCurrency.Twd)}
+        weight={isTWDActive ? 'bold' : 'normal'}
+      />
     </Menu>
   )
 
@@ -101,27 +85,18 @@ const CurrencyConvertor = () => {
   }
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: <Title />,
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ openDropdown, ref }) => (
         <Form.List.Item
           title={<Title />}
-          onClick={openDialog}
+          onClick={openDropdown}
           rightText={currency}
-          ariaHasPopup={type}
+          ariaHasPopup="listbox"
           role="button"
           ref={ref}
         />
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

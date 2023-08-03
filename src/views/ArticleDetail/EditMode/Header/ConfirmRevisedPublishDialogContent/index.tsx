@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
 import { Dialog, Translate } from '~/components'
 
@@ -20,21 +22,23 @@ const ConfirmRevisedPublishDialogContent = ({
   }
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
-      text={<Translate id="publish" />}
-      onClick={onPublish}
-    />
+    <Dialog.TextButton text={<Translate id="publish" />} onClick={onPublish} />
   )
 
   return (
     <>
       <Dialog.Header
         title={<Translate zh_hant="發布須知" zh_hans="發布须知" en="Notice" />}
-        leftButton={<Dialog.Header.BackButton onClick={onBack} />}
-        rightButton={SubmitButton}
+        leftBtn={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            onClick={onBack}
+          />
+        }
+        rightBtn={SubmitButton}
       />
 
-      <Dialog.Message align="left" type="info">
+      <Dialog.Message align="left" smUpAlign="left">
         <section className={styles.imageContainer}>
           <div
             className={styles.image}
@@ -57,6 +61,19 @@ const ConfirmRevisedPublishDialogContent = ({
           </li>
         </ul>
       </Dialog.Message>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={onBack}
+            />
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

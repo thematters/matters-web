@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   normalizeName,
@@ -19,8 +20,6 @@ import {
   useMutation,
 } from '~/components'
 import { UpdateUserInfoUserNameMutation } from '~/gql/graphql'
-
-import styles from '../styles.module.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -120,53 +119,52 @@ const Confirm: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <section className={styles.container}>
-      <Form id={formId} onSubmit={handleSubmit}>
-        <Form.Input
-          label="Matters ID"
-          type="text"
-          name="userName"
-          required
-          placeholder={translate({
-            id: 'enterUserName',
-            lang,
-          })}
-          hint={<Translate id="hintUserName" />}
-          value={values.userName}
-          error={touched.userName && errors.userName}
-          onBlur={handleBlur}
-          onChange={(e) => {
-            const userName = normalizeName(e.target.value)
-            setFieldValue('userName', userName)
-            return userName
-          }}
-        />
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label="Matters ID"
+        type="text"
+        name="userName"
+        required
+        placeholder={translate({
+          id: 'enterUserName',
+          lang,
+        })}
+        hint={<Translate id="hintUserName" />}
+        value={values.userName}
+        error={touched.userName && errors.userName}
+        onBlur={handleBlur}
+        onChange={(e) => {
+          const userName = normalizeName(e.target.value)
+          setFieldValue('userName', userName)
+          return userName
+        }}
+        spacingBottom="base"
+      />
 
-        <Form.Input
-          type="text"
-          name="comparedUserName"
-          required
-          placeholder={translate({ id: 'enterUserNameAgain', lang })}
-          value={values.comparedUserName}
-          error={touched.comparedUserName && errors.comparedUserName}
-          onBlur={handleBlur}
-          hint={<Translate id="hintUserName" />}
-          onChange={(e) => {
-            const userName = normalizeName(e.target.value)
-            setFieldValue('comparedUserName', userName)
-            return userName
-          }}
-        />
-      </Form>
-    </section>
+      <Form.Input
+        type="text"
+        name="comparedUserName"
+        required
+        placeholder={translate({ id: 'enterUserNameAgain', lang })}
+        value={values.comparedUserName}
+        error={touched.comparedUserName && errors.comparedUserName}
+        onBlur={handleBlur}
+        hint={<Translate id="hintUserName" />}
+        onChange={(e) => {
+          const userName = normalizeName(e.target.value)
+          setFieldValue('comparedUserName', userName)
+          return userName
+        }}
+      />
+    </Form>
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<Translate id="nextStep" />}
+      text={<FormattedMessage defaultMessage="Next Step" />}
       loading={isSubmitting}
     />
   )
@@ -178,27 +176,45 @@ const Confirm: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="changeUserName" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<FormattedMessage defaultMessage="Next Step" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
 
-        {InnerForm}
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="changeUserName"
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="changeUserName"
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

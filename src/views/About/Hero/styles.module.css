@@ -2,23 +2,31 @@
   position: relative;
   padding: var(--spacing-xx-loose) 0 var(--spacing-x-tight);
   background-image: var(--about-hero-bg);
-  background-position: right top, top 128px right -70px, left bottom;
-  background-size: 258px, 281px, 123px;
+  background-position:
+    top 128px right -70px,
+    right top,
+    left bottom;
+  background-size: 281px, 258px, 123px;
 
   @media (--sm-up) {
     padding-bottom: 5rem;
-    background-position: right top, top 259px right var(--spacing-x-loose),
+    background-position:
+      top 259px right var(--spacing-x-loose),
+      right top,
       left bottom;
-    background-size: 521px, 258px, 270px;
+    background-size: 258px, 521px, 270px;
   }
 
   @media (--md-up) {
-    background-position: right top, top 98px right 5rem, left bottom;
-    background-size: 521px, 308px, 270px;
+    background-position:
+      top 98px right 5rem,
+      right top,
+      left bottom;
+    background-size: 308px, 521px, 270px;
   }
 
   @media (--md-up) {
-    background-size: 521px, 308px, 357px;
+    background-size: 308px, 521px, 357px;
   }
 }
 
@@ -39,8 +47,13 @@
     font-size: 1.75rem;
   }
 
+  & .text {
+    flex-shrink: 0;
+  }
+
   & .ilusCity {
     display: block;
+    flex-shrink: 0;
     height: 349px;
     margin: var(--spacing-xx-loose) calc(var(--spacing-base) * -1) 0;
     background-position: left top;
@@ -80,8 +93,8 @@
 
   @media (--lg-up) {
     & .ilusCity {
-      width: 810px;
-      height: 503px;
+      width: 705px;
+      height: 437px;
     }
   }
 }
@@ -157,10 +170,7 @@
   @media (--sm-up) {
     display: grid;
     grid-template-areas: 'spacingLeft content spacingRight';
-    grid-template-columns: minmax(0, 1fr) var(--layout-width-sm-up) minmax(
-        0,
-        1fr
-      );
+    grid-template-columns: minmax(0, 1fr) 100% minmax(0, 1fr);
 
     & .container {
       grid-column: content;
@@ -186,11 +196,6 @@
   }
 
   @media (--md-up) {
-    grid-template-columns: minmax(0, 1fr) var(--layout-width-md-up) minmax(
-        0,
-        1fr
-      );
-
     & .container {
       grid-column: content;
 
@@ -212,10 +217,7 @@
   }
 
   @media (--lg-up) {
-    grid-template-columns: minmax(0, 1fr) var(--layout-width-lg-up) minmax(
-        0,
-        1fr
-      );
+    grid-template-columns: minmax(0, 1fr) 1105px minmax(0, 1fr);
   }
 }
 

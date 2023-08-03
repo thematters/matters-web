@@ -1,23 +1,13 @@
-.container {
-  padding: var(--spacing-loose) var(--spacing-base);
-}
-
 .content {
   @mixin flex-center-start;
 
   flex-direction: column;
   width: 100%;
-  padding-top: var(--spacing-loose);
+  margin-top: var(--spacing-base);
 
   & p {
     color: var(--color-grey-darker);
   }
-}
-
-.title {
-  @mixin: flex-start-space-between;
-
-  flex-direction: row;
 }
 
 .rocket {

@@ -3,8 +3,8 @@ import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
+import { updateTagFollowers } from '~/components/GQL'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
-import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
 import {
   FollowButtonTagPrivateFragment,
   ToggleFollowTagMutation,
@@ -51,9 +51,9 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
     >
       <TextIcon weight="md" size="mdS">
         {hover ? (
-          <FormattedMessage defaultMessage="Unfollow" description="" />
+          <FormattedMessage defaultMessage="Unfollow" />
         ) : (
-          <FormattedMessage defaultMessage="Followed" description="" />
+          <FormattedMessage defaultMessage="Followed" />
         )}
       </TextIcon>
     </Button>

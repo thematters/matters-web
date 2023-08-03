@@ -1,13 +1,7 @@
 .mention {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: var(--z-index-under-global-header);
-  width: var(--sizing-menu-md);
-  max-height: calc(4rem * 3);
-  overflow-y: auto;
   color: var(--color-black);
   background: var(--color-white);
+  border: 1px solid var(--color-grey-light);
   border-radius: var(--spacing-x-tight);
-  box-shadow: var(--shadow-dark);
+  box-shadow: var(--shadow-light);
 }

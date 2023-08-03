@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
@@ -17,7 +18,6 @@ import {
 } from '~/components'
 import { SearchAggregateUsersPublicQuery } from '~/gql/graphql'
 
-import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_USERS_PUBLIC } from './gql'
 import styles from './styles.module.css'
 
@@ -100,6 +100,7 @@ const AggregateUserResults = () => {
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
+        eof={<FormattedMessage defaultMessage="End of the results" />}
       >
         <Menu>
           {edges.map(
@@ -129,9 +130,6 @@ const AggregateUserResults = () => {
           )}
         </Menu>
       </InfiniteScroll>
-      {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
-        <EndOfResults />
-      )}
     </section>
   )
 }

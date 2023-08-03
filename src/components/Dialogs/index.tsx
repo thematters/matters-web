@@ -13,13 +13,19 @@ export * from './ReviseArticleDialog'
 export * from './ShareDialog'
 export * from './SupportersDialog'
 
+// Collection
+export * from './AddArticlesCollectionDialog'
+export * from './AddCollectionDialog'
+export * from './AddCollectionsArticleDialog'
+export * from './RemoveArticleCollectionDialog'
+
 // Editor
 export * from './EditorSearchSelectDialog'
 
 // Tag
+export * from './EditTagDialog'
 export * from './RecommendTagDialog'
 export * from './TagAdoptionDialog'
-export * from './TagDialog'
 export * from './TagEditorDialog'
 export * from './TagLeaveDialog'
 
@@ -35,8 +41,4 @@ export * from './SubscribeCircleDialog'
 export * from './UnsubscribeCircleDialog'
 
 // Misc
-export * from './GoogleSearchDialog'
 export * from './PaymentPointerDialog'
-
-// Help
-export * from './HelpDialog'

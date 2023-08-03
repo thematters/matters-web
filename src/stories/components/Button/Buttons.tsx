@@ -3,11 +3,9 @@ import React from 'react'
 import { TEXT } from '~/common/enums'
 import {
   Button,
-  Dialog,
   IconMore16,
   IconNavSearch32,
   LoginButton,
-  Translate,
   ViewMoreButton,
   WriteButton,
 } from '~/components'
@@ -37,7 +35,7 @@ const Buttons = () => (
       </li>
 
       <li>
-        <WriteButton variant="sidenav" allowed />
+        <WriteButton allowed />
       </li>
 
       <li>
@@ -53,7 +51,7 @@ const Buttons = () => (
         />
       </li>
 
-      <li>
+      {/* <li>
         <Dialog.Footer>
           <Dialog.Footer.Button type="submit">
             <Translate id="agreeAndContinue" />
@@ -63,7 +61,7 @@ const Buttons = () => (
             <Translate id="disagree" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
-      </li>
+      </li> */}
     </ul>
   </section>
 )

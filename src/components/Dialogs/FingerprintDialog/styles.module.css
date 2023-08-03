@@ -1,5 +1,4 @@
 .container {
-  padding: var(--spacing-base);
   text-align: left;
 
   & > .card + .card {
@@ -84,7 +83,10 @@
     background: var(--color-green-lighter);
     border-radius: 0.25rem;
 
-    & input {
+    & .hash {
+      @mixin line-clamp;
+
+      padding-right: var(--spacing-x-tight);
       font-family: var(--font-mono);
       font-size: var(--font-size-sm);
       background: transparent;

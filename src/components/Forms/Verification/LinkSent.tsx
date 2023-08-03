@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { Dialog, Layout, Translate } from '~/components'
 
 export const VerificationLinkSent = ({
@@ -16,15 +18,15 @@ export const VerificationLinkSent = ({
     <>
       {isInPage && <Layout.Header left={<Layout.Header.Title id={type} />} />}
 
-      <Dialog.Message spacing="md">
-        <h3>
-          <Translate
-            zh_hant={isRegister ? '已發送快速註冊連結' : '已發送快速驗證連結'}
-            zh_hans={isRegister ? '已发送快速注册链接' : '已发送快速验证链接'}
-            en={isRegister ? 'Register link sent' : 'Verification link sent'}
-          />
-        </h3>
+      {closeDialog && (
+        <Dialog.Header
+          title="register"
+          closeDialog={closeDialog}
+          closeText={<FormattedMessage defaultMessage="Understood" />}
+        />
+      )}
 
+      <Dialog.Message>
         <p>
           <Translate
             zh_hant={
@@ -49,15 +51,15 @@ export const VerificationLinkSent = ({
       </Dialog.Message>
 
       {closeDialog && (
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            onClick={closeDialog}
-            bgColor="greyLighter"
-            textColor="black"
-          >
-            <Translate id="understood" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Understood" />}
+              color="green"
+              onClick={closeDialog}
+            />
+          }
+        />
       )}
     </>
   )

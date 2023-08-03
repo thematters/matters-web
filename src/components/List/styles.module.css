@@ -1,13 +1,9 @@
 .list {
   &.hasBorder {
     & > :global(.list-item) {
-      @mixin border-bottom-grey;
+      @mixin border-bottom-grey-light;
 
       border-bottom-style: dashed;
-    }
-
-    & > :global(.list-item):last-child {
-      border-bottom: 0;
     }
   }
 

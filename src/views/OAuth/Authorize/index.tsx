@@ -70,6 +70,8 @@ const BaseOAuthAuthorize = () => {
     ? requestScopes.split(/[,\s]/).filter((s) => !!s)
     : clientScopes
 
+  const isNoLiker = name === 'LikeCoin' && !viewer.liker.likerId
+
   return (
     <Box
       avatar={avatar}
@@ -160,21 +162,42 @@ const BaseOAuthAuthorize = () => {
           </p>
         </section>
 
-        <Dialog.Footer>
-          {name === 'LikeCoin' && !viewer.liker.likerId ? (
-            <Dialog.Footer.Button href={PATHS.ME_SETTINGS}>
-              <Translate
-                zh_hant="請先設置 Liker ID"
-                zh_hans="请先设置 Liker ID"
-                en="Please setup Liker ID first"
-              />
-            </Dialog.Footer.Button>
-          ) : (
-            <Dialog.Footer.Button type="submit">
-              <Translate id="agree" />
-            </Dialog.Footer.Button>
-          )}
-        </Dialog.Footer>
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={
+                isNoLiker ? (
+                  <Translate
+                    zh_hant="請先設置 Liker ID"
+                    zh_hans="请先设置 Liker ID"
+                    en="Please setup Liker ID first"
+                  />
+                ) : (
+                  <Translate id="agree" />
+                )
+              }
+              href={isNoLiker ? PATHS.ME_SETTINGS : undefined}
+              type={isNoLiker ? 'button' : 'submit'}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={
+                isNoLiker ? (
+                  <Translate
+                    zh_hant="請先設置 Liker ID"
+                    zh_hans="请先设置 Liker ID"
+                    en="Please setup Liker ID first"
+                  />
+                ) : (
+                  <Translate id="agree" />
+                )
+              }
+              href={isNoLiker ? PATHS.ME_SETTINGS : undefined}
+              type={isNoLiker ? 'button' : 'submit'}
+            />
+          }
+        />
       </form>
     </Box>
   )
@@ -184,9 +207,9 @@ const OAuthAuthorize = () => (
   <Layout.Main>
     <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
 
-    <Layout.Spacing>
+    <Layout.Main.Spacing>
       <BaseOAuthAuthorize />
-    </Layout.Spacing>
+    </Layout.Main.Spacing>
   </Layout.Main>
 )
 

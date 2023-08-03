@@ -1,5 +1,6 @@
 .input {
-  @mixin form-input-round;
+  @mixin form-input;
+  @mixin form-input-number;
 
   text-align: right;
 }

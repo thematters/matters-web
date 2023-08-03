@@ -1,12 +1,13 @@
 import { Translate } from '~/components'
 
+import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Timeline = () => {
   return (
     <section className={styles.timeline}>
-      <div className="l-container">
-        <div className="l-row">
+      <div className={layoutStyles.container}>
+        <div className={layoutStyles.content}>
           <ul>
             <li>
               <time>May, 2018</time>
@@ -40,6 +41,7 @@ const Timeline = () => {
                 />
               </p>
             </li>
+
             <li>
               <time>May, 2020</time>
               <p className={styles.event}>
@@ -61,7 +63,9 @@ const Timeline = () => {
                 />
               </p>
             </li>
+          </ul>
 
+          <ul>
             <li>
               <time>Dec, 2021</time>
               <p className={styles.event}>
@@ -72,9 +76,7 @@ const Timeline = () => {
                 />
               </p>
             </li>
-          </ul>
 
-          <ul>
             <li>
               <time>Jan, 2022</time>
               <p className={styles.event}>
@@ -101,8 +103,8 @@ const Timeline = () => {
               <time>Oct, 2022</time>
               <p className={styles.event}>
                 <Translate
-                  zh_hant="去中心化內容訂閱功能 IPNS 上線"
-                  zh_hans="去中心化內容订阅功能 IPNS 上线"
+                  zh_hant="內容訂閱 IPNS 上線"
+                  zh_hans="內容订阅 IPNS 上线"
                   en="Decentralized Content Subscription with IPNS"
                 />
               </p>

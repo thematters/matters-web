@@ -102,7 +102,7 @@ const MembersDialogContent = () => {
   }
 
   return (
-    <Dialog.Content spacing={['base', 0]}>
+    <Dialog.Content>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
@@ -117,6 +117,7 @@ const MembersDialogContent = () => {
                     id: node.user.id,
                   })
                 }
+                hasFollow={false}
               />
             </List.Item>
           ))}

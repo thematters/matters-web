@@ -1,27 +1,22 @@
-.container {
-  @mixin form-container;
-}
-
-/* Select.tsx */
-.msg {
-  margin: var(--spacing-x-tight) 0 var(--spacing-base) var(--spacing-base);
+.form {
+  margin-top: calc(var(--spacing-loose) * -1);
 
   @media (--sm-up) {
-    margin-left: 0;
+    margin-top: calc(var(--spacing-x-tight) * -1);
   }
 }
 
-.isInDialog {
-  padding: 0 var(--spacing-base);
+.intro {
+  margin: calc(var(--spacing-base) * -1) 0;
+
+  @media (--sm-up) {
+    margin: calc(var(--spacing-base) * -1);
+  }
 }
 
 /* Connect.tsx */
 .divider {
   margin: var(--spacing-loose) 0;
-}
-
-.connectMsg {
-  margin: var(--spacing-x-tight) 0 var(--spacing-base);
 }
 
 .subtitle {
@@ -31,7 +26,7 @@
 
 .notice {
   padding: var(--spacing-base);
-  margin: var(--spacing-xx-loose) 0 var(--spacing-loose);
+  margin: var(--spacing-loose) 0 var(--spacing-loose);
   font-size: var(--font-size-sm-s);
   line-height: 1.5rem;
   text-align: center;
@@ -39,16 +34,29 @@
   border: 1px solid var(--color-matters-gold);
   border-radius: 0.5rem;
 
-  &.inDialog {
-    margin-right: var(--spacing-base);
-    margin-left: var(--spacing-base);
-  }
-
   & h4 {
     color: var(--color-matters-gold);
   }
 
   & p {
     color: var(--color-grey-darker);
+  }
+}
+
+/* Dialog */
+.inDialog {
+  &.form {
+    margin-top: calc(var(--spacing-loose) * -1);
+    margin-right: calc(var(--spacing-base) * -1);
+    margin-left: calc(var(--spacing-base) * -1);
+
+    @media (--sm-up) {
+      margin-top: calc(var(--spacing-base) * -1);
+    }
+  }
+
+  & .container {
+    margin-right: var(--spacing-base);
+    margin-left: var(--spacing-base);
   }
 }

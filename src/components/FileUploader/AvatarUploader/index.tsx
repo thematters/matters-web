@@ -4,7 +4,6 @@ import { useContext, useState } from 'react'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ADD_TOAST,
   ASSET_TYPE,
   ENTITY_TYPE,
   UPLOAD_IMAGE_SIZE_LIMIT,
@@ -18,6 +17,7 @@ import {
   IconCamera24,
   LanguageContext,
   Spinner,
+  toast,
   Translate,
   useMutation,
 } from '~/components'
@@ -27,7 +27,9 @@ import { SingleFileUploadMutation } from '~/gql/graphql'
 import styles from './styles.module.css'
 
 export type AvatarUploaderProps = {
-  onUpload: (assetId: string) => void
+  onUploaded: (assetId: string) => void
+  onUploadStart: () => void
+  onUploadEnd: () => void
   hasBorder?: boolean
 
   type?: 'circle'
@@ -35,7 +37,9 @@ export type AvatarUploaderProps = {
 } & (Omit<AvatarProps, 'size'> | Omit<CircleAvatarProps, 'size'>)
 
 export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
-  onUpload,
+  onUploaded,
+  onUploadStart,
+  onUploadEnd,
   hasBorder,
 
   type,
@@ -68,24 +72,23 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     event.target.value = ''
 
     if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant="上傳檔案超過 5 MB"
-                zh_hans="上传文件超过 5 MB"
-                en="upload file exceed 5 MB"
-              />
-            ),
-          },
-        })
-      )
+      toast.error({
+        message: (
+          <Translate
+            zh_hant="上傳檔案超過 5 MB"
+            zh_hans="上传文件超过 5 MB"
+            en="upload file exceed 5 MB"
+          />
+        ),
+      })
       return
     }
 
     try {
+      if (onUploadStart) {
+        onUploadStart()
+      }
+
       const { data } = await upload({
         variables: {
           input: {
@@ -101,19 +104,18 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
       if (id && path) {
         setAvatar(path)
-        onUpload(id)
+        onUploaded(id)
       } else {
         throw new Error()
       }
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureUploadImage" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="failureUploadImage" />,
+      })
+    }
+
+    if (onUploadEnd) {
+      onUploadEnd()
     }
   }
 

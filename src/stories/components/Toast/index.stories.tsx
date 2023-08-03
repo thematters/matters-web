@@ -2,18 +2,21 @@ import { MockedProvider } from '@apollo/react-testing'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
-import { Toast } from '~/components'
+import { Toaster } from '~/components'
 
 import Toasts from './Toasts'
 
 export default {
   title: 'Components/Toast',
-  component: Toast.Instance,
-} as ComponentMeta<typeof Toast.Instance>
+  component: Toaster,
+} as ComponentMeta<typeof Toaster>
 
-const Template: ComponentStory<typeof Toast.Instance> = () => (
+const Template: ComponentStory<typeof Toaster> = () => (
   <MockedProvider>
-    <Toasts />
+    <>
+      <Toasts />
+      <Toaster />
+    </>
   </MockedProvider>
 )
 

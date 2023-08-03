@@ -1,5 +1,3 @@
 .input {
   @mixin form-input;
-
-  height: var(--input-height);
 }

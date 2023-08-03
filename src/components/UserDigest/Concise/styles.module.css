@@ -1,5 +1,7 @@
 .container {
   @mixin flex-center-start;
+
+  color: var(--color-black);
 }
 
 .name {

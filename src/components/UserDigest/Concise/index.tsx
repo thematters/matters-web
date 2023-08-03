@@ -41,7 +41,7 @@ export const toUserDigestConcisePlaceholder = (displayName: string) =>
       __typename: 'Liker',
       civicLiker: false,
     },
-  } as UserDigestConciseUserFragment)
+  }) as UserDigestConciseUserFragment
 
 const Concise = ({
   user,

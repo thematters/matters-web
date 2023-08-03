@@ -21,13 +21,13 @@ const FeedHeader = ({
     tags: PATHS.TAGS,
   }
   const titleMap = {
-    authors: <FormattedMessage defaultMessage="Authors" description="" />,
-    tags: <FormattedMessage defaultMessage="Topics" description="" />,
+    authors: <FormattedMessage defaultMessage="Authors" />,
+    tags: <FormattedMessage defaultMessage="Topics" />,
   }
   const path = pathMap[type]
 
   return (
-    <PageHeader title={titleMap[type]} is="h2" hasNoBorder>
+    <PageHeader title={titleMap[type]} is="h2" hasBorder={false} type="base">
       <section className={styles.right}>
         {rightButton}
 

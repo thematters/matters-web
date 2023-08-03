@@ -1,10 +1,14 @@
 .footer {
+  position: relative;
+}
+
+.content {
   @mixin flex-center-space-between;
   @mixin safe-area-botttom;
 
   flex-direction: column;
   flex-shrink: 0;
-  margin: var(--spacing-base);
+  padding: var(--spacing-base-loose) var(--spacing-base) var(--spacing-xx-loose);
 
   & > * {
     flex: 1;
@@ -13,5 +17,17 @@
 
   & > * + * {
     margin-top: var(--spacing-base);
+  }
+}
+
+.smUpContent {
+  @mixin flex-center-end;
+
+  padding: 0 var(--spacing-base-loose) 0;
+  margin: var(--spacing-base) 0 var(--spacing-base-loose);
+  text-align: right;
+
+  & > * + * {
+    margin-left: var(--spacing-x-loose);
   }
 }

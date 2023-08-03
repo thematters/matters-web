@@ -17,8 +17,8 @@ import {
   Expandable,
   Head,
   Layout,
+  SegmentedTabs,
   Spinner,
-  Tabs,
   Throw404,
   useFeatures,
   usePublicQuery,
@@ -26,7 +26,6 @@ import {
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
-import ShareButton from '~/components/Layout/Header/ShareButton'
 import {
   TagDetailPublicBySearchQuery,
   TagDetailPublicQuery,
@@ -126,7 +125,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
           <>
             <span />
             <section className={styles.buttons}>
-              <ShareButton
+              <Layout.Header.ShareButton
                 title={title}
                 tags={title.endsWith(tag.content) ? undefined : keywords}
               />
@@ -139,7 +138,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             </section>
           </>
         }
-        mode="transparent-absolute"
+        mode="transparent"
       />
 
       <Head
@@ -195,28 +194,37 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         )}
       </section>
 
-      <Tabs sticky>
-        <Tabs.Tab selected={isHottest} onClick={() => changeFeed('hottest')}>
-          <FormattedMessage defaultMessage="Trending" description="" />
-        </Tabs.Tab>
+      <SegmentedTabs sticky>
+        <SegmentedTabs.Tab
+          selected={isHottest}
+          onClick={() => changeFeed('hottest')}
+        >
+          <FormattedMessage defaultMessage="Trending" />
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab selected={isLatest} onClick={() => changeFeed('latest')}>
-          <FormattedMessage defaultMessage="Latest" description="" />
-        </Tabs.Tab>
+        <SegmentedTabs.Tab
+          selected={isLatest}
+          onClick={() => changeFeed('latest')}
+        >
+          <FormattedMessage defaultMessage="Latest" />
+        </SegmentedTabs.Tab>
 
         {hasSelectedFeed && (
-          <Tabs.Tab
+          <SegmentedTabs.Tab
             selected={isSelected}
             onClick={() => changeFeed('selected')}
           >
-            <FormattedMessage defaultMessage="Featured" description="" />
-          </Tabs.Tab>
+            <FormattedMessage defaultMessage="Featured" />
+          </SegmentedTabs.Tab>
         )}
 
-        <Tabs.Tab selected={isCreators} onClick={() => changeFeed('creators')}>
-          <FormattedMessage defaultMessage="Creators" description="" />
-        </Tabs.Tab>
-      </Tabs>
+        <SegmentedTabs.Tab
+          selected={isCreators}
+          onClick={() => changeFeed('creators')}
+        >
+          <FormattedMessage defaultMessage="Creators" />
+        </SegmentedTabs.Tab>
+      </SegmentedTabs>
 
       {(isHottest || isLatest || isSelected) && (
         <TagDetailArticles tag={tag} feedType={feedType} />

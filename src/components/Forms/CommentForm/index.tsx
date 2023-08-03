@@ -100,7 +100,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
 
       // clear content
       const $editor = document.querySelector(
-        `#${formId} .ql-editor`
+        `#${formId} .ProseMirror`
       ) as HTMLElement
 
       if ($editor) {

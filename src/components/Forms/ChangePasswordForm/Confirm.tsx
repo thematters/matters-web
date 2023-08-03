@@ -1,8 +1,8 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   parseFormSubmitErrors,
@@ -23,8 +23,6 @@ import {
   ConfirmVerificationCodeMutation,
   ResetPasswordMutation,
 } from '~/gql/graphql'
-
-import styles from '../styles.module.css'
 
 interface FormProps {
   email: string
@@ -126,45 +124,42 @@ const Confirm: React.FC<FormProps> = ({
     },
   })
 
-  const containerClasses = classNames({ [styles.container]: !!isInPage })
-
   const InnerForm = (
-    <section className={containerClasses}>
-      <Form id={formId} onSubmit={handleSubmit}>
-        <Form.Input
-          label={<Translate id="newPassword" />}
-          type="password"
-          name="password"
-          required
-          placeholder={translate({ id: 'enterNewPassword', lang })}
-          value={values.password}
-          error={touched.password && errors.password}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<Translate id="newPassword" />}
+        type="password"
+        name="password"
+        required
+        placeholder={translate({ id: 'enterNewPassword', lang })}
+        value={values.password}
+        error={touched.password && errors.password}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        spacingBottom="base"
+      />
 
-        <Form.Input
-          label={<Translate id="newPassword" />}
-          type="password"
-          name="comparedPassword"
-          required
-          placeholder={translate({ id: 'enterNewPasswordAgain', lang })}
-          value={values.comparedPassword}
-          error={touched.comparedPassword && errors.comparedPassword}
-          hint={<Translate id="hintPassword" />}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-      </Form>
-    </section>
+      <Form.Input
+        label={<Translate id="newPassword" />}
+        type="password"
+        name="comparedPassword"
+        required
+        placeholder={translate({ id: 'enterNewPasswordAgain', lang })}
+        value={values.comparedPassword}
+        error={touched.comparedPassword && errors.comparedPassword}
+        hint={<Translate id="hintPassword" />}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+    </Form>
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<Translate id="confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
@@ -177,27 +172,31 @@ const Confirm: React.FC<FormProps> = ({
           right={
             <>
               <span />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<FormattedMessage defaultMessage="Confirm" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
 
-        {InnerForm}
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title={titleId}
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title={titleId}
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
     </>
   )
 }

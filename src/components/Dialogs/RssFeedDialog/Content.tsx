@@ -26,6 +26,7 @@ import styles from '../FingerprintDialog/styles.module.css'
 type RssFeedDialogContentProps = {
   user: AuthorRssFeedFragment
   refetch: () => any
+  closeDialog: () => any
 }
 
 const RSS_GATEWAYS = gql`
@@ -38,6 +39,7 @@ const RSS_GATEWAYS = gql`
 
 const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
   user,
+  closeDialog,
 }) => {
   const { loading, data } = useQuery<RssGatewaysQuery>(RSS_GATEWAYS)
 
@@ -66,150 +68,157 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
   const displayIPNS = hasLinkedIPNS ? ensName : user.info.ipnsKey
 
   const intl = useIntl()
+
   return (
-    <Dialog.Content hasGrow>
-      <section className={styles.container}>
-        <SectionCard>
-          {!ipnsKey ? (
-            <>
-              <section className={styles.warningCard}>
-                <IconInfo24 size="md" />
-
-                <p>
-                  <FormattedMessage
-                    defaultMessage="Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article."
-                    description="src/components/Dialogs/RssFeedDialog/Content.tsx"
-                  />
-                </p>
-              </section>
-              <Spacer size="loose" />
-            </>
-          ) : null}
-
-          {/* hash */}
-          <section className={styles.hash}>
-            <h4 className={styles.title}>
-              <FormattedMessage
-                defaultMessage="IPNS Subscription"
-                description="src/components/Dialogs/RssFeedDialog/Content.tsx"
-              />
-            </h4>
-            <p className={styles.description}>
-              <FormattedMessage
-                defaultMessage="Add hash from IPFS into compatible reader such as "
-                description="src/components/Dialogs/RssFeedDialog/Content.tsx"
-              />
-              <a
-                className="u-link-green"
-                href={EXTERNAL_LINKS.PLANET}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Planet
-              </a>
-            </p>
-
-            {ipnsKey ? (
-              <section className={styles.copy}>
-                <input
-                  type="text"
-                  value={displayIPNS!}
-                  readOnly
-                  onClick={(event) => event.currentTarget.select()}
-                />
-                <CopyToClipboard text={displayIPNS!}>
-                  <Button
-                    aria-label={intl.formatMessage({
-                      defaultMessage: 'Copy Link',
-                      description: '',
-                    })}
-                  >
-                    <IconCopy16 />
-                  </Button>
-                </CopyToClipboard>
-              </section>
-            ) : (
+    <>
+      <Dialog.Content>
+        <section className={styles.container}>
+          <SectionCard>
+            {!ipnsKey ? (
               <>
-                <Spacer size="base" />
-                <section className={styles.warningInput}>
-                  <TextIcon
-                    icon={<IconInfo24 size="md" />}
-                    color="green"
-                    size="mdS"
-                  >
+                <section className={styles.warningCard}>
+                  <IconInfo24 size="md" />
+
+                  <p>
                     <FormattedMessage
-                      defaultMessage="Waiting ..."
+                      defaultMessage="Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article."
                       description="src/components/Dialogs/RssFeedDialog/Content.tsx"
                     />
-                  </TextIcon>
+                  </p>
                 </section>
+                <Spacer size="loose" />
               </>
-            )}
-          </section>
+            ) : null}
 
-          <Spacer size="base" />
-          <hr />
-          <Spacer size="base" />
+            {/* hash */}
+            <section className={styles.hash}>
+              <h4 className={styles.title}>
+                <FormattedMessage
+                  defaultMessage="IPNS Subscription"
+                  description="src/components/Dialogs/RssFeedDialog/Content.tsx"
+                />
+              </h4>
+              <p className={styles.description}>
+                <FormattedMessage
+                  defaultMessage="Add hash from IPFS into compatible reader such as "
+                  description="src/components/Dialogs/RssFeedDialog/Content.tsx"
+                />
+                <a
+                  className="u-link-green"
+                  href={EXTERNAL_LINKS.PLANET}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Planet
+                </a>
+              </p>
 
-          {/* gateways */}
-          <section className={styles.gateways}>
-            <h4 className={styles.title}>
-              <FormattedMessage
-                defaultMessage="RSS Subscription"
-                description="src/components/Dialogs/RssFeedDialog/Content.tsx"
-              />
-            </h4>
-            <p className={styles.description}>
-              <FormattedMessage
-                defaultMessage="Add any URL in the following list into RSS reader"
-                description="src/components/Dialogs/RssFeedDialog/Content.tsx"
-              />
-            </p>
+              {ipnsKey ? (
+                <section className={styles.copy}>
+                  <div className={styles.hash}>{displayIPNS}</div>
 
-            <ul>
-              {(!data || loading) && <Spinner />}
-
-              {/* FIXME: remove filebase.io and meson.network */}
-              {gateways.slice(2, 6).map((url) => {
-                const gatewayUrl = url
-                  .replace(':hash', displayIPNS!)
-                  .replace('/ipfs/', '/ipns/')
-                  .concat('/rss.xml')
-                const hostname = url.replace(
-                  /(https:\/\/|\/ipfs\/|:hash.?)/g,
-                  ''
-                )
-
-                return (
-                  <li key={url}>
-                    <span
-                      className={classNames({
-                        [styles.gatewayUrl]: true,
-                        [styles.disabled]: !ipnsKey,
+                  <CopyToClipboard text={displayIPNS!}>
+                    <Button
+                      aria-label={intl.formatMessage({
+                        defaultMessage: 'Copy Link',
                       })}
                     >
-                      {hostname}
+                      <IconCopy16 />
+                    </Button>
+                  </CopyToClipboard>
+                </section>
+              ) : (
+                <>
+                  <Spacer size="base" />
+                  <section className={styles.warningInput}>
+                    <TextIcon
+                      icon={<IconInfo24 size="md" />}
+                      color="green"
+                      size="mdS"
+                    >
+                      <FormattedMessage
+                        defaultMessage="Waiting ..."
+                        description="src/components/Dialogs/RssFeedDialog/Content.tsx"
+                      />
+                    </TextIcon>
+                  </section>
+                </>
+              )}
+            </section>
 
-                      <CopyToClipboard text={gatewayUrl}>
-                        <Button
-                          disabled={!ipnsKey}
-                          aria-label={intl.formatMessage({
-                            defaultMessage: 'Copy Link',
-                            description: '',
-                          })}
-                        >
-                          <IconCopy16 />
-                        </Button>
-                      </CopyToClipboard>
-                    </span>
-                  </li>
-                )
-              })}
-            </ul>
-          </section>
-        </SectionCard>
-      </section>
-    </Dialog.Content>
+            <Spacer size="base" />
+            <hr />
+            <Spacer size="base" />
+
+            {/* gateways */}
+            <section className={styles.gateways}>
+              <h4 className={styles.title}>
+                <FormattedMessage
+                  defaultMessage="RSS Subscription"
+                  description="src/components/Dialogs/RssFeedDialog/Content.tsx"
+                />
+              </h4>
+              <p className={styles.description}>
+                <FormattedMessage
+                  defaultMessage="Add any URL in the following list into RSS reader"
+                  description="src/components/Dialogs/RssFeedDialog/Content.tsx"
+                />
+              </p>
+
+              <ul>
+                {(!data || loading) && <Spinner />}
+
+                {/* FIXME: remove filebase.io and meson.network */}
+                {gateways.slice(0, 4).map((url) => {
+                  const gatewayUrl = url
+                    .replace(':hash', displayIPNS!)
+                    .replace('/ipfs/', '/ipns/')
+                    .concat('/rss.xml')
+                  const hostname = url.replace(
+                    /(https:\/\/|\/ipfs\/|:hash.?)/g,
+                    ''
+                  )
+
+                  return (
+                    <li key={url}>
+                      <span
+                        className={classNames({
+                          [styles.gatewayUrl]: true,
+                          [styles.disabled]: !ipnsKey,
+                        })}
+                      >
+                        {hostname}
+
+                        <CopyToClipboard text={gatewayUrl}>
+                          <Button
+                            disabled={!ipnsKey}
+                            aria-label={intl.formatMessage({
+                              defaultMessage: 'Copy Link',
+                            })}
+                          >
+                            <IconCopy16 />
+                          </Button>
+                        </CopyToClipboard>
+                      </span>
+                    </li>
+                  )
+                })}
+              </ul>
+            </section>
+          </SectionCard>
+        </section>
+      </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <Dialog.TextButton
+            color="greyDarker"
+            text={<FormattedMessage defaultMessage="Close" />}
+            onClick={closeDialog}
+          />
+        }
+      />
+    </>
   )
 }
 

@@ -19,7 +19,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import ShareButton from '~/components/Layout/Header/ShareButton'
 import { CircleProfileCirclePublicQuery } from '~/gql/graphql'
 
 import SubscriptionBanner from '../SubscriptionBanner'
@@ -92,26 +91,6 @@ const CircleProfile = () => {
    * Render
    */
 
-  const Right = () => (
-    <>
-      <span />
-      {circle && (
-        <section className={styles.buttons}>
-          <ShareButton
-            tags={
-              [
-                circle.displayName,
-                circle.name,
-                circle.owner.displayName,
-                // circle.owner.userName,
-              ].filter(Boolean) as string[]
-            }
-          />
-          <DropdownActions circle={circle} />
-        </section>
-      )}
-    </>
-  )
   const LayoutHeader = () => (
     <>
       {circle && (
@@ -142,7 +121,30 @@ const CircleProfile = () => {
           }}
         />
       )}
-      <Layout.Header right={<Right />} mode="transparent-absolute" />
+
+      <Layout.Header
+        right={
+          <>
+            <span />
+            {circle && (
+              <section className={styles.buttons}>
+                <Layout.Header.ShareButton
+                  tags={
+                    [
+                      circle.displayName,
+                      circle.name,
+                      circle.owner.displayName,
+                      // circle.owner.userName,
+                    ].filter(Boolean) as string[]
+                  }
+                />
+                <DropdownActions circle={circle} />
+              </section>
+            )}
+          </>
+        }
+        mode="transparent"
+      />
     </>
   )
 
@@ -181,8 +183,7 @@ const CircleProfile = () => {
             <section className={styles.price}>
               <span className={styles.amount}>{price.amount}</span>
               <br />
-              {price.currency} /{' '}
-              <FormattedMessage defaultMessage="month" description="" />
+              {price.currency} / <FormattedMessage defaultMessage="month" />
             </section>
           )}
         </header>
@@ -215,7 +216,7 @@ const CircleProfile = () => {
                     {numAbbr(circle.members.totalCount)}
                   </span>
                   {/* <Translate id="members" /> */}
-                  <FormattedMessage defaultMessage="Members" description="" />
+                  <FormattedMessage defaultMessage="Members" />
                 </button>
               )}
             </MembersDialog>
@@ -232,7 +233,7 @@ const CircleProfile = () => {
                   </span>
                   {/* <Translate id="follower" />  */}
 
-                  <FormattedMessage defaultMessage="Followers" description="" />
+                  <FormattedMessage defaultMessage="Followers" />
                 </button>
               )}
             </FollowersDialog>

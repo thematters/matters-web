@@ -1,4 +1,5 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useEffect, useRef, useState } from 'react'
@@ -9,6 +10,7 @@ import { KEYVALUE } from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
 import { Media, useOutsideClick } from '~/components'
 
+import { RoundedButton, TextButton } from './Buttons'
 import Content from './Content'
 import Footer from './Footer'
 import Handle from './Handle'
@@ -22,13 +24,12 @@ export interface DialogOverlayProps {
   isOpen: boolean | undefined
   onDismiss: () => void
   onRest?: () => void
+  dismissOnClickOutside?: boolean
 }
 
 export type DialogProps = {
-  size?: 'sm' | 'lg'
   smBgColor?: 'greyLighter'
   smUpBgColor?: 'greyLighter'
-  fixedHeight?: boolean
   hidePaddingBottom?: boolean
 
   testId?: string
@@ -39,26 +40,25 @@ const Container: React.FC<
     {
       style?: React.CSSProperties
       setDragGoal: (val: any) => void
+      initialFocusRef: React.RefObject<any>
     } & DialogProps
   >
 > = ({
-  size = 'lg',
   smBgColor,
   smUpBgColor,
-  fixedHeight,
   hidePaddingBottom,
   testId,
   onDismiss,
+  dismissOnClickOutside = false,
   children,
   style,
   setDragGoal,
+  initialFocusRef,
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
 
   const containerClasses = classNames({
     [styles.container]: true,
-    [styles.fixedHeight]: !!fixedHeight,
-    [styles[size]]: true,
     [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
       !!smBgColor,
     [smUpBgColor ? styles[`bg${capitalizeFirstLetter(smUpBgColor)}SmUp`] : '']:
@@ -81,6 +81,14 @@ const Container: React.FC<
     onDismiss()
   }
 
+  const handleClickOutside = () => {
+    if (!dismissOnClickOutside) {
+      return
+    }
+
+    closeTopDialog()
+  }
+
   const bind = useDrag(({ down, movement: [, my] }) => {
     if (!down && my > 30) {
       onDismiss()
@@ -89,26 +97,30 @@ const Container: React.FC<
     }
   })
 
-  useOutsideClick(node, closeTopDialog)
+  useOutsideClick(node, handleClickOutside)
 
   return (
-    <div className="l-row" {...(testId ? { 'data-test-id': testId } : {})}>
-      <div
-        ref={node}
-        className={containerClasses}
-        style={style}
-        onKeyDown={(event) => {
-          if (event.key.toLowerCase() === KEYVALUE.escape) {
-            closeTopDialog()
-          }
-        }}
-      >
-        {children}
+    <div
+      {...(testId ? { 'data-test-id': testId } : {})}
+      ref={node}
+      className={containerClasses}
+      style={style}
+      onKeyDown={(event) => {
+        if (event.code.toLowerCase() !== KEYVALUE.escape) {
+          return
+        }
+        closeTopDialog()
+      }}
+    >
+      <VisuallyHidden>
+        <button type="button" ref={initialFocusRef} aria-hidden="true" />
+      </VisuallyHidden>
 
-        <Media at="sm">
-          <Handle closeDialog={onDismiss} {...bind()} />
-        </Media>
-      </div>
+      {children}
+
+      <Media at="sm">
+        <Handle closeDialog={onDismiss} {...bind()} />
+      </Media>
     </div>
   )
 }
@@ -120,10 +132,13 @@ export const Dialog: React.ComponentType<
   Content: typeof Content
   Footer: typeof Footer
   Message: typeof Message
+  TextButton: typeof TextButton
+  RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
   const { isOpen, onRest } = props
   const [mounted, setMounted] = useState(isOpen)
+  const initialFocusRef = useRef<any>(null)
 
   // Drag
   const [{ top }, setDragGoal] = useSpring(() => ({ top: 0 }))
@@ -167,16 +182,17 @@ export const Dialog: React.ComponentType<
 
   return (
     <>
-      <AnimatedDialogOverlay className="dialog">
+      <AnimatedDialogOverlay
+        className="dialog"
+        initialFocusRef={initialFocusRef}
+      >
         <AnimatedOverlay style={{ opacity: opacity as any }} />
 
-        <DialogContent
-          className="l-container full"
-          aria-labelledby="dialog-title"
-        >
+        <DialogContent aria-labelledby="dialog-title">
           <AnimatedContainer
             style={{ opacity: opacity as any, top }}
             setDragGoal={setDragGoal}
+            initialFocusRef={initialFocusRef}
             {...props}
           />
         </DialogContent>
@@ -189,4 +205,6 @@ Dialog.Header = Header
 Dialog.Content = Content
 Dialog.Footer = Footer
 Dialog.Message = Message
+Dialog.TextButton = TextButton
+Dialog.RoundedButton = RoundedButton
 Dialog.Lazy = Lazy

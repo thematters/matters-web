@@ -2,7 +2,7 @@ import { ReactRenderer } from '@tiptap/react'
 import ApolloClient from 'apollo-client'
 import tippy from 'tippy.js'
 
-import { KEYVALUE } from '@/src/common/enums'
+import { KEYVALUE } from '~/common/enums'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { SearchUsersQuery, UserDigestMiniUserFragment } from '~/gql/graphql'
 

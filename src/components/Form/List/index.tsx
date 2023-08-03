@@ -16,18 +16,11 @@ interface ListProps {
   groupName?: string | React.ReactNode
   spacingY?: 0 | 'xloose'
   spacingX?: 0 | 'base'
-  forceGreyStyle?: boolean
 }
 
 const List: React.FC<React.PropsWithChildren<ListProps>> & {
   Item: typeof Item
-} = ({
-  groupName,
-  spacingY = 0,
-  spacingX = 'base',
-  forceGreyStyle,
-  children,
-}) => {
+} = ({ groupName, spacingY = 0, spacingX = 'base', children }) => {
   const groupClasses = classNames({
     [styles.group]: true,
     [spacingX ? styles[`spacingX${capitalizeFirstLetter(spacingX)}`] : '']:
@@ -36,7 +29,6 @@ const List: React.FC<React.PropsWithChildren<ListProps>> & {
 
   const listClasses = classNames({
     [styles.list]: true,
-    [styles.grey]: forceGreyStyle,
     [spacingY ? styles[`spacingY${capitalizeFirstLetter(spacingY)}`] : '']:
       !!spacingY,
   })

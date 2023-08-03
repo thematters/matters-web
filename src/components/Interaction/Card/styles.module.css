@@ -4,7 +4,7 @@
   position: relative;
   display: block;
   outline: none;
-  transition-property: background-color;
+  transition-property: color, background-color;
 
   &:not(.disabled) {
     cursor: pointer;
@@ -90,10 +90,44 @@
   }
 }
 
+/* Text color */
+.textBlack {
+  color: var(--color-black);
+}
+
+.textGreyDarker {
+  color: var(--color-grey-darker);
+}
+
+.textRed {
+  color: var(--color-red);
+}
+
+/* Text active color */
+
+.textActiveBlack {
+  &:hover,
+  &:focus {
+    color: var(--color-black);
+  }
+}
+
+.textActiveRedDark {
+  &:hover,
+  &:focus {
+    color: var(--color-red-dark);
+  }
+}
+
 /* Spacing */
 .spacingYXtight {
   padding-top: var(--spacing-x-tight);
   padding-bottom: var(--spacing-x-tight);
+}
+
+.spacingYBaseTight {
+  padding-top: var(--spacing-base-tight);
+  padding-bottom: var(--spacing-base-tight);
 }
 
 .spacingYTight {
@@ -106,6 +140,11 @@
   padding-bottom: var(--spacing-base);
 }
 
+.spacingYBaseLoose {
+  padding-top: var(--spacing-base-loose);
+  padding-bottom: var(--spacing-base-loose);
+}
+
 .spacingYLoose {
   padding-top: var(--spacing-loose);
   padding-bottom: var(--spacing-loose);
@@ -116,6 +155,11 @@
   padding-left: var(--spacing-x-tight);
 }
 
+.spacingXBaseTight {
+  padding-right: var(--spacing-base-tight);
+  padding-left: var(--spacing-base-tight);
+}
+
 .spacingXTight {
   padding-right: var(--spacing-tight);
   padding-left: var(--spacing-tight);
@@ -124,6 +168,11 @@
 .spacingXBase {
   padding-right: var(--spacing-base);
   padding-left: var(--spacing-base);
+}
+
+.spacingXBaseLoose {
+  padding-right: var(--spacing-base-loose);
+  padding-left: var(--spacing-base-loose);
 }
 
 .spacingXLoose {

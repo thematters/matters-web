@@ -1,7 +1,6 @@
-import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useMutation } from '~/components'
+import { Dialog, toast, Translate, useMutation } from '~/components'
+import { updateTagMaintainers } from '~/components/GQL'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
-import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 import { TagMaintainersQuery, UpdateTagSettingMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -36,6 +35,37 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
   const [update, { loading }] =
     useMutation<UpdateTagSettingMutation>(UPDATE_TAG_SETTING)
 
+  const onClick = async () => {
+    const result = await update({
+      variables: {
+        input: { id, type: 'remove_editor', editors: [editor.id] },
+      },
+      update: (cache) =>
+        updateTagMaintainers({
+          cache,
+          id,
+          type: 'remove',
+          editors: [editor.id],
+        }),
+    })
+
+    if (!result) {
+      throw new Error('tag leave failed')
+    }
+
+    toast.success({
+      message: (
+        <Translate
+          zh_hant="移除協作者成功"
+          zh_hans="移除协作者成功"
+          en="successfully removed collaborator"
+        />
+      ),
+    })
+
+    closeDialog()
+  }
+
   return (
     <>
       <Dialog.Header
@@ -46,8 +76,6 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
             en="confirm collaborator removal"
           />
         }
-        closeDialog={closeDialog}
-        closeTextId="cancel"
       />
 
       <Dialog.Message>
@@ -66,63 +94,37 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
         </p>
       </Dialog.Message>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          bgColor="red"
-          textColor="white"
-          loading={loading}
-          onClick={async () => {
-            const result = await update({
-              variables: {
-                input: { id, type: 'remove_editor', editors: [editor.id] },
-              },
-              update: (cache) =>
-                updateTagMaintainers({
-                  cache,
-                  id,
-                  type: 'remove',
-                  editors: [editor.id],
-                }),
-            })
-
-            if (!result) {
-              throw new Error('tag leave failed')
+      <Dialog.Footer
+        closeDialog={closeDialog}
+        btns={
+          <Dialog.RoundedButton
+            text={
+              <Translate
+                zh_hant="確認移除"
+                zh_hans="确认移除"
+                en="Confirm Removal"
+              />
             }
-
-            window.dispatchEvent(
-              new CustomEvent(ADD_TOAST, {
-                detail: {
-                  color: 'green',
-                  content: (
-                    <Translate
-                      zh_hant="移除協作者成功"
-                      zh_hans="移除协作者成功"
-                      en="successfully removed collaborator"
-                    />
-                  ),
-                  duration: 2000,
-                },
-              })
-            )
-
-            closeDialog()
-          }}
-        >
-          <Translate
-            zh_hant="確認移除"
-            zh_hans="确认移除"
-            en="Confirm Removal"
+            color={loading ? 'green' : 'red'}
+            onClick={onClick}
+            loading={loading}
           />
-        </Dialog.Footer.Button>
-
-        <Dialog.Footer.Button
-          textColor="black"
-          bgColor="greyLighter"
-          onClick={closeDialog}
-        >
-          <Translate zh_hant="取消" zh_hans="取消" en="cancel" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+        }
+        smUpBtns={
+          <Dialog.TextButton
+            text={
+              <Translate
+                zh_hant="確認移除"
+                zh_hans="确认移除"
+                en="Confirm Removal"
+              />
+            }
+            color={loading ? 'green' : 'red'}
+            onClick={onClick}
+            loading={loading}
+          />
+        }
+      />
     </>
   )
 }

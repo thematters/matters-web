@@ -2,7 +2,6 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
-  ADD_TOAST,
   CLOSE_ACTIVE_DIALOG,
   OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -21,6 +20,7 @@ import {
   LanguageContext,
   Media,
   TextIcon,
+  toast,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -137,14 +137,9 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
       <Content
         article={article}
         onClick={() => {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: <Translate id="failureCommentOnboarding" />,
-              },
-            })
-          )
+          toast.error({
+            message: <Translate id="failureCommentOnboarding" />,
+          })
         }}
       />
     )
@@ -155,14 +150,9 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
       <Content
         article={article}
         onClick={() => {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: <Translate id="FORBIDDEN" />,
-              },
-            })
-          )
+          toast.error({
+            message: <Translate id="FORBIDDEN" />,
+          })
         }}
       />
     )
@@ -173,14 +163,9 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
       <Content
         article={article}
         onClick={() => {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: <Translate id="failureCommentBlocked" />,
-              },
-            })
-          )
+          toast.error({
+            message: <Translate id="failureCommentBlocked" />,
+          })
         }}
       />
     )

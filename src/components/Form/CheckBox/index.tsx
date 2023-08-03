@@ -19,6 +19,10 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
   hint,
   error,
+  hintAlign,
+
+  spacingTop,
+  spacingBottom,
 
   ...inputProps
 }) => {
@@ -26,7 +30,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
   const fieldMsgId = `field-msg-${name}`
 
   return (
-    <Field>
+    <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
       <label className={styles.label} htmlFor={fieldId}>
         <TextIcon
           icon={
@@ -52,7 +56,11 @@ const CheckBox: React.FC<CheckBoxProps> = ({
         </VisuallyHidden>
       </label>
 
-      <Field.Footer fieldMsgId={fieldMsgId} error={error} />
+      <Field.Footer
+        fieldMsgId={fieldMsgId}
+        error={error}
+        hintAlign={hintAlign}
+      />
     </Field>
   )
 }

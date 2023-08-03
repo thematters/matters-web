@@ -108,6 +108,26 @@
   border-right: 1px solid var(--color-line-grey-light);
 }
 
+@define-mixin border-grey-light {
+  border: 1px solid var(--color-grey-light);
+}
+
+@define-mixin border-bottom-grey-light {
+  border-bottom: 1px solid var(--color-grey-light);
+}
+
+@define-mixin border-top-grey-light {
+  border-top: 1px solid var(--color-grey-light);
+}
+
+@define-mixin border-left-grey-light {
+  border-left: 1px solid var(--color-grey-light);
+}
+
+@define-mixin border-right-grey-light {
+  border-right: 1px solid var(--color-grey-light);
+}
+
 @define-mixin shadow-border-bottom-grey {
   box-shadow: 0 1px 0 0 var(--color-line-grey-light);
 }
@@ -122,11 +142,14 @@
   @mixin transition;
   @mixin border-grey;
 
+  height: var(--input-height);
   padding: var(--spacing-base);
   font-size: var(--font-size-md);
+  line-height: 1.375rem;
   color: var(--color-black);
   background-color: var(--color-white);
   border-radius: var(--spacing-x-tight);
+  transition-property: border-color, background-color;
 
   &:focus,
   &.focus {
@@ -159,38 +182,8 @@
   }
 }
 
-@define-mixin form-input-round {
-  @mixin transition;
-  @mixin border-grey;
-
-  height: var(--input-height);
-  padding: var(--spacing-base);
-  color: var(--color-black);
-  background-color: var(--color-white);
-  border-radius: var(--spacing-x-tight);
-  transition-property: border-color, background-color;
+@define-mixin form-input-number {
   caret-color: var(--color-matters-green);
-
-  &:focus,
-  &.focus {
-    border-color: var(--color-grey);
-  }
-
-  &:disabled {
-    color: var(--color-grey-dark);
-    background-color: var(--color-grey-lighter);
-    border-color: transparent;
-  }
-
-  &.error {
-    border-color: var(--color-red);
-
-    &:focus,
-    &.focus {
-      background-color: transparent;
-      border-color: var(--color-red);
-    }
-  }
 
   /* Chrome, Safari, Edge, Opera */
   &::-webkit-outer-spin-button,
@@ -202,25 +195,6 @@
   /* Firefox */
   &[type='number'] {
     appearance: textfield;
-  }
-}
-
-@define-mixin form-container {
-  margin-right: var(--spacing-base);
-  margin-left: var(--spacing-base);
-
-  @media (--sm-up) {
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  & :global(.field) {
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  & :global(.inputContainer) {
-    margin: 0;
   }
 }
 
@@ -240,7 +214,7 @@
   }
 
   & .left {
-    color: var(--color-grey-dark);
+    color: var(--color-grey);
 
     & > * + * {
       margin-left: var(--spacing-base);
@@ -253,6 +227,48 @@
     & > * + * {
       margin-left: var(--spacing-base);
     }
+  }
+}
+
+/* Scrollbar
+   ========================================================================== */
+@define-mixin hide-scrollbar {
+  /* IE 10+ */
+  -ms-overflow-style: none;
+
+  /* Firefox */
+  overflow: -moz-scrollbars-none;
+
+  /* Chrome & Safari */
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
+
+@define-mixin scrollbar-thin {
+  /* Width */
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    border: solid 6px transparent;
+    box-shadow: inset 0 0 15px 15px transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    min-height: 68px;
+    border: solid 6px transparent;
+    border-radius: 8px;
+    box-shadow: inset 0 0 15px 15px var(--color-grey-light);
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 0 0 15px 15px var(--color-grey);
   }
 }
 
@@ -298,18 +314,4 @@
   /* autoprefixer: ignore next */
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-@define-mixin hide-scrollbar {
-  /* IE 10+ */
-  -ms-overflow-style: none;
-
-  /* Firefox */
-  overflow: -moz-scrollbars-none;
-
-  /* Chrome & Safari */
-  &::-webkit-scrollbar {
-    width: 0 !important;
-    height: 0 !important;
-  }
 }

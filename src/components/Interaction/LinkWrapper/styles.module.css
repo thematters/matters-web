@@ -1,6 +1,9 @@
 .link {
+  @mixin transition;
+
   display: inline-flex;
   align-items: center;
+  transition-property: color;
 }
 
 .textActiveGreen {

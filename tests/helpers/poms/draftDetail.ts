@@ -97,7 +97,7 @@ export class DraftDetailPage {
     // editing
     this.titleInput = this.page.getByPlaceholder('Enter title')
     this.summaryInput = this.page.getByPlaceholder('Enter summary')
-    this.contentInput = this.page.locator('.ql-editor')
+    this.contentInput = this.page.locator('.ProseMirror')
 
     // dialog
     this.dialog = this.page.getByRole('dialog')

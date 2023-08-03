@@ -1,8 +1,15 @@
 .spacing {
-  padding: var(--spacing-base);
+  padding: 0 var(--spacing-base);
 
   @media (--sm-up) {
-    padding-right: 0;
-    padding-left: 0;
+    padding: 0;
+  }
+
+  &.hasVertical {
+    padding: var(--spacing-base);
+
+    @media (--sm-up) {
+      padding: 0;
+    }
   }
 }

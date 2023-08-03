@@ -272,7 +272,7 @@
     &:hover,
     &:active,
     &:focus {
-      color: var(--color-matters-green-active);
+      color: var(--color-matters-green-dark);
     }
   }
 

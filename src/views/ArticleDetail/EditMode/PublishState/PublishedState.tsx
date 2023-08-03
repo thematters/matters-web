@@ -67,19 +67,35 @@ const PublishedState = ({ article, cancel, newestMediaHash }: Props) => {
           en="Article republished"
         />
       }
-      footerButtons={
-        <Dialog.Footer.Button
+      btns={
+        <Dialog.RoundedButton
+          text={
+            <Translate
+              zh_hant="查看修訂作品"
+              zh_hans="查看修订作品"
+              en="View republished article"
+            />
+          }
           onClick={() => {
             cancel()
             router.push(path.href)
           }}
-        >
-          <Translate
-            zh_hant="查看修訂作品"
-            zh_hans="查看修订作品"
-            en="View republished article"
-          />
-        </Dialog.Footer.Button>
+        />
+      }
+      smUpBtns={
+        <Dialog.TextButton
+          text={
+            <Translate
+              zh_hant="查看修訂作品"
+              zh_hans="查看修订作品"
+              en="View republished article"
+            />
+          }
+          onClick={() => {
+            cancel()
+            router.push(path.href)
+          }}
+        />
       }
     >
       {({ openDialog }) => <BasePublishedState openShareDialog={openDialog} />}

@@ -1,6 +1,4 @@
-import autosize from 'autosize'
 import classNames from 'classnames'
-import { useEffect, useRef } from 'react'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.module.css'
@@ -32,14 +30,17 @@ const Textarea: React.FC<TextareaProps> = ({
   name,
   label,
   extraButton,
-  labelVisHidden,
+  hasLabel,
 
   hint,
   error,
+  hintAlign,
+
+  spacingTop,
+  spacingBottom,
 
   ...textareaProps
 }) => {
-  const node: React.RefObject<any> | null = useRef(null)
   const fieldId = `field-${name}`
   const fieldMsgId = `field-msg-${name}`
   const textareaClasses = classNames({
@@ -47,24 +48,17 @@ const Textarea: React.FC<TextareaProps> = ({
     [styles.error]: error,
   })
 
-  useEffect(() => {
-    if (node && node.current) {
-      autosize(node.current)
-    }
-  }, [])
-
   return (
-    <Field>
+    <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
       <Field.Header
         label={label}
         htmlFor={fieldId}
         extraButton={extraButton}
-        labelVisHidden={labelVisHidden}
+        hasLabel={hasLabel}
       />
 
       <Field.Content>
         <textarea
-          ref={node}
           {...textareaProps}
           id={fieldId}
           name={name}
@@ -73,7 +67,12 @@ const Textarea: React.FC<TextareaProps> = ({
         />
       </Field.Content>
 
-      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+      <Field.Footer
+        fieldMsgId={fieldMsgId}
+        hint={hint}
+        error={error}
+        hintAlign={hintAlign}
+      />
     </Field>
   )
 }

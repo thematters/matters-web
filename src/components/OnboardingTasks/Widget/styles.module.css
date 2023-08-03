@@ -1,15 +1,12 @@
-.header {
-  padding: var(--spacing-loose) var(--spacing-base) var(--spacing-loose);
+.description {
+  margin-top: var(--spacing-tight);
+  margin-bottom: var(--spacing-loose);
+  font-size: var(--font-size-sm-s);
+  color: var(--color-grey-darker);
 
-  & section {
-    margin-top: var(--spacing-tight);
-    font-size: var(--font-size-sm-s);
-    line-height: var(--spacing-loose);
-    color: var(--color-grey-darker);
-
-    & .bold {
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-black);
-    }
+  & .bold {
+    padding-top: var(--spacing-xx-tight);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-black);
   }
 }

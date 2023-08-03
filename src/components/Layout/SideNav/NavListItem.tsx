@@ -1,7 +1,8 @@
 import jump from 'jump.js'
 import { forwardRef } from 'react'
 
-import { Button, ButtonProps, TextIcon } from '~/components'
+import { Z_INDEX } from '~/common/enums'
+import { Button, ButtonProps, TextIcon, Tooltip } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -11,7 +12,6 @@ type NavListItemProps = {
   activeIcon: React.ReactNode
   active: boolean
   canScrollTop?: boolean
-  isMdUp?: boolean
 } & ButtonProps
 
 const NavListItemButton = forwardRef(
@@ -22,31 +22,34 @@ const NavListItemButton = forwardRef(
       activeIcon,
       active,
       onClick,
-      isMdUp,
       canScrollTop,
       ...props
     }: NavListItemProps,
     ref
   ) => {
     return (
-      <Button
-        bgActiveColor="greyLighter"
-        spacing={isMdUp ? ['xxtight', 'xtight'] : undefined}
-        size={isMdUp ? undefined : ['2rem', '2rem']}
-        ref={ref}
-        {...props}
-        onClick={onClick}
+      <Tooltip
+        content={name}
+        placement="left"
+        delay={[1000, null]}
+        zIndex={Z_INDEX.OVER_STICKY_TABS}
       >
-        <TextIcon
-          icon={active ? activeIcon : icon}
-          size="lg"
-          weight="semibold"
-          spacing="tight"
-          color="black"
+        <Button
+          bgActiveColor="greyLighter"
+          size={['2rem', '2rem']}
+          ref={ref}
+          {...props}
+          onClick={onClick}
         >
-          {isMdUp && name}
-        </TextIcon>
-      </Button>
+          <TextIcon
+            icon={active ? activeIcon : icon}
+            size="lg"
+            weight="semibold"
+            spacing="tight"
+            color="black"
+          />
+        </Button>
+      </Tooltip>
     )
   }
 )

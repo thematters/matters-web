@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { FormattedMessage } from 'react-intl'
 
 import { TextId } from '~/common/enums'
 import { Dialog, ShareButtons, Translate } from '~/components'
@@ -15,7 +16,8 @@ export interface ShareDialogContentProps {
 
   headerTitle?: TextId | React.ReactNode
   description?: React.ReactNode
-  footerButtons?: React.ReactNode
+  btns?: React.ReactNode
+  smUpBtns?: React.ReactNode
 }
 
 const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
@@ -27,7 +29,8 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
 
   headerTitle,
   description,
-  footerButtons,
+  btns,
+  smUpBtns,
 }) => {
   const url = new URL(shareLink)
   if (url.searchParams.get('locale')) {
@@ -45,26 +48,12 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
   return (
     <>
       {headerTitle ? (
-        <Dialog.Header
-          title={headerTitle}
-          closeDialog={closeDialog}
-          closeTextId="close"
-          mode="inner"
-        />
+        <Dialog.Header title={headerTitle} />
       ) : (
-        <Dialog.Header
-          title={'share'}
-          closeDialog={closeDialog}
-          leftButton={
-            <Dialog.Header.CloseButton
-              closeDialog={closeDialog}
-              textId="close"
-            />
-          }
-        />
+        <Dialog.Header title="share" />
       )}
 
-      <Dialog.Content>
+      <Dialog.Content noSpacing smExtraSpacing={false}>
         {description && (
           <section className={styles.description}>{description}</section>
         )}
@@ -91,7 +80,26 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
         </section>
       </Dialog.Content>
 
-      {footerButtons && <Dialog.Footer>{footerButtons}</Dialog.Footer>}
+      {btns || smUpBtns ? (
+        <Dialog.Footer btns={btns} smUpBtns={smUpBtns} />
+      ) : (
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={<FormattedMessage defaultMessage="Close" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Close" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+        />
+      )}
     </>
   )
 }

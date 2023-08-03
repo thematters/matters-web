@@ -1,16 +1,16 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { getAddress } from 'viem'
 
 import { OPEN_LIKE_COIN_DIALOG, PATHS } from '~/common/enums'
-import { maskAddress, translate } from '~/common/utils'
+import { maskAddress } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
   Form,
   IconCopy16,
-  LanguageContext,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -36,7 +36,7 @@ const VIEWER_LIKE_INFO = gql`
 
 const WalletSettings = () => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const likerId = viewer.liker.likerId
   const { data } = useQuery<ViewerLikeInfoQuery>(VIEWER_LIKE_INFO, {
@@ -77,10 +77,15 @@ const WalletSettings = () => {
           ethAddress ? (
             <>
               <span className={styles.address}>{shortAddress}</span>
-              <CopyToClipboard text={ethAddress}>
+              <CopyToClipboard
+                text={ethAddress}
+                successMessage={
+                  <FormattedMessage defaultMessage="Address copied" />
+                }
+              >
                 <Button
                   spacing={['xtight', 'xtight']}
-                  aria-label={translate({ id: 'copy', lang })}
+                  aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
                 >
                   <IconCopy16 color="grey" />
                 </Button>

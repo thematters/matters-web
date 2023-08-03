@@ -1,0 +1,12 @@
+.container {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky-tabs);
+  margin: 0;
+  background: var(--color-white);
+
+  @media (--sm-up) {
+    top: calc(var(--spacing-base) * -1);
+    margin: calc(var(--spacing-base-loose) * -1) var(--spacing-base) 0;
+  }
+}

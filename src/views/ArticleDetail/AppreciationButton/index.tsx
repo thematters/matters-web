@@ -2,16 +2,17 @@ import { useQuery } from '@apollo/react-hooks'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { ADD_TOAST, APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
+import { APPRECIATE_DEBOUNCE, EXTERNAL_LINKS, Z_INDEX } from '~/common/enums'
 import {
   ReCaptchaContext,
+  toast,
   Tooltip,
   Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
+import { updateAppreciation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import updateAppreciation from '~/components/GQL/updates/appreciation'
 import {
   AppreciateArticleMutation,
   AppreciationButtonArticlePrivateFragment,
@@ -26,7 +27,6 @@ import CivicLikerButton from './CivicLikerButton'
 import ForbiddenButton from './ForbiddenButton'
 import { APPRECIATE_ARTICLE, fragments } from './gql'
 import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
-import ViewSuperLikeButton from './ViewSuperLikeButton'
 
 interface AppreciationButtonProps {
   article: AppreciationButtonArticlePublicFragment &
@@ -101,22 +101,23 @@ const AppreciationButton = ({
           })
         },
       })
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: (
-              <Translate
-                zh_hant="你對作品送出了一個 Super Like！"
-                zh_hans="你对作品送出了一个 Super Like！"
-                en="You sent a Super Like to this article!"
-              />
-            ),
-            customButton: <ViewSuperLikeButton />,
-            buttonPlacement: 'center',
+
+      toast.success({
+        message: (
+          <Translate
+            zh_hant="你對作品送出了一個 Super Like！"
+            zh_hans="你对作品送出了一个 Super Like！"
+            en="You sent a Super Like to this article!"
+          />
+        ),
+        actions: [
+          {
+            content: <Translate zh_hant="詳情" zh_hans="详情" en="More info" />,
+            htmlHref: EXTERNAL_LINKS.SUPER_LIKE,
+            htmlTarget: '_blank',
           },
-        })
-      )
+        ],
+      })
     } catch (e) {
       setSuperLiked(false)
       console.error(e)
@@ -249,22 +250,24 @@ const AppreciationButton = ({
         count="MAX"
         total={total}
         onClick={() => {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'green',
+          toast.success({
+            message: (
+              <Translate
+                zh_hant="12:00 或 00:00 就可以再次送出 Super Like 啦！"
+                zh_hans="12:00 或 00:00 就可以再次送出 Super Like 啦！"
+                en="You can send another Super Like after 12:00 or 00:00"
+              />
+            ),
+            actions: [
+              {
                 content: (
-                  <Translate
-                    zh_hant="12:00 或 00:00 就可以再次送出 Super Like 啦！"
-                    zh_hans="12:00 或 00:00 就可以再次送出 Super Like 啦！"
-                    en="You can send another Super Like after 12:00 or 00:00"
-                  />
+                  <Translate zh_hant="詳情" zh_hans="详情" en="More info" />
                 ),
-                customButton: <ViewSuperLikeButton />,
-                buttonPlacement: 'center',
+                htmlHref: EXTERNAL_LINKS.SUPER_LIKE,
+                htmlTarget: '_blank',
               },
-            })
-          )
+            ],
+          })
         }}
         isSuperLike={isSuperLike}
         superLiked={superLiked}

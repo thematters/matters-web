@@ -20,29 +20,47 @@ const ConfirmContent: React.FC<ContentProps> = ({
     ArticleLicenseType.CcByNcNd_4
   )
 
+  const ConfirmButton = () => (
+    <Dialog.TextButton
+      onClick={() => onConfirm(license === ArticleLicenseType.Arr, license)}
+      text={<FormattedMessage defaultMessage="Confirm" />}
+      loading={loading}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title="addArticles"
-        leftButton={<Dialog.Header.BackButton onClick={onBack} />}
-        rightButton={
-          <Dialog.Header.RightButton
-            onClick={() =>
-              onConfirm(license === ArticleLicenseType.Arr, license)
-            }
-            text={<FormattedMessage defaultMessage="Confirm" description="" />}
-            loading={loading}
+        leftBtn={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            onClick={onBack}
           />
         }
+        rightBtn={<ConfirmButton />}
       />
 
-      <Dialog.Content hasFixed>
+      <Dialog.Content fixedHeight>
         <SelectLicense
           isInCircle
           license={license}
           onChange={(newLicense) => setLicense(newLicense)}
         />
       </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={onBack}
+            />
+            <ConfirmButton />
+          </>
+        }
+      />
     </>
   )
 }

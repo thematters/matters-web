@@ -7,9 +7,11 @@ import {
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
+import {
+  updateCircleFollowerCount,
+  updateCircleFollowers,
+} from '~/components/GQL'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
-import updateCircleFollowerCount from '~/components/GQL/updates/circleFollowerCount'
-import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
 import {
   FollowButtonCirclePrivateFragment,
   ToggleFollowCircleMutation,
@@ -74,7 +76,7 @@ const Follow = ({ circle }: FollowProps) => {
       onClick={onClick}
     >
       <TextIcon weight="md" size="mdS">
-        <FormattedMessage defaultMessage="Follow" description="" />
+        <FormattedMessage defaultMessage="Follow" />
       </TextIcon>
     </Button>
   )

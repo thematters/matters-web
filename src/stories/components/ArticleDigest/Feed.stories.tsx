@@ -20,16 +20,28 @@ const Template: ComponentStory<typeof ArticleDigestFeed> = (args) => (
 export const Default = Template.bind({})
 Default.args = {
   article: MOCK_ARTILCE,
+  hasReadTime: true,
+  hasDonationCount: true,
 }
 
-export const Sticky = Template.bind({})
-Sticky.args = {
-  article: { ...MOCK_ARTILCE, sticky: true },
+export const LongTitleFeed = Template.bind({})
+LongTitleFeed.args = {
+  article: {
+    ...MOCK_ARTILCE,
+    title: MOCK_ARTILCE.title.repeat(4),
+  },
+  hasReadTime: true,
+}
+
+export const InUserPageFeed = Template.bind({})
+InUserPageFeed.args = {
+  article: { ...MOCK_ARTILCE, pinned: true, subscribed: false },
   inUserArticles: true,
+  hasAuthor: false,
 }
 
-export const Archived = Template.bind({})
-Archived.args = {
-  article: { ...MOCK_ARTILCE, articleState: 'archived' as any },
+export const Subscribed = Template.bind({})
+Subscribed.args = {
+  article: { ...MOCK_ARTILCE, pinned: true, subscribed: true },
   inUserArticles: true,
 }

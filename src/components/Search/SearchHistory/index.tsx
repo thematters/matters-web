@@ -23,6 +23,7 @@ export const SearchHistory = ({
           <Translate zh_hans="最近搜索" zh_hant="最近搜尋" en="History" />
         </TextIcon>
       </section>
+
       <Menu>
         {data.map((value, i) => (
           <Menu.Item

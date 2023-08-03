@@ -7,6 +7,7 @@ const fragments = {
   article: gql`
     fragment ArchiveArticleArticle on Article {
       id
+      title
       articleState: state
       author {
         id

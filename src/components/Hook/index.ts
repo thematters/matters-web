@@ -1,5 +1,6 @@
 export * from './useCache'
 export * from './useCarousel'
+export * from './useColorThief'
 export * from './useCountdown'
 export * from './useCuration'
 export * from './useDialogSwitch'

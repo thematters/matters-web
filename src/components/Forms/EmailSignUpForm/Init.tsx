@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
@@ -16,7 +15,6 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  LanguageSwitch,
   Layout,
   //  ReCaptchaContext,
   useMutation,
@@ -24,7 +22,6 @@ import {
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
-import { EmailLoginButton } from './Buttons'
 import styles from './styles.module.css'
 
 interface FormProps {
@@ -116,46 +113,39 @@ const Init: React.FC<FormProps> = ({
     },
   })
 
-  const containerClasses = classNames({
-    [styles.container]: true,
-    [styles.isInPage]: !!isInPage,
-  })
-
   const InnerForm = (
-    <section className={containerClasses}>
-      <Form id={formId} onSubmit={handleSubmit}>
-        <Form.Input
-          label={
-            <FormattedMessage defaultMessage="Display Name" description="" />
-          }
-          type="text"
-          name="displayName"
-          required
-          placeholder={intl.formatMessage({
-            defaultMessage: 'Display name, can be changed later',
-            description: 'src/components/Forms/EmailSignUpForm/Init.tsx',
-          })}
-          value={values.displayName}
-          error={touched.displayName && errors.displayName}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<FormattedMessage defaultMessage="Display Name" />}
+        type="text"
+        name="displayName"
+        required
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Display Name',
+        })}
+        value={values.displayName}
+        error={touched.displayName && errors.displayName}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        spacingBottom="base"
+      />
 
-        <Form.Input
-          label={<FormattedMessage defaultMessage="Email" description="" />}
-          type="email"
-          name="email"
-          required
-          placeholder={intl.formatMessage({
-            defaultMessage: 'Email',
-            description: '',
-          })}
-          value={values.email}
-          error={touched.email && errors.email}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+      <Form.Input
+        label={<FormattedMessage defaultMessage="Email" />}
+        type="email"
+        name="email"
+        required
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Email',
+        })}
+        value={values.email}
+        error={touched.email && errors.email}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        spacingBottom="base"
+      />
 
+      <section className={styles.tos}>
         <Form.CheckBox
           name="tos"
           checked={values.tos}
@@ -163,35 +153,27 @@ const Init: React.FC<FormProps> = ({
           onChange={handleChange}
           hint={
             <>
-              <FormattedMessage
-                defaultMessage="I have read and agree to"
-                description=""
-              />
+              <FormattedMessage defaultMessage="I have read and agree to" />
               <Link href={PATHS.TOS} legacyBehavior>
                 <a className="u-link-green" target="_blank">
                   &nbsp;
-                  <FormattedMessage
-                    defaultMessage="Terms and Privacy Policy"
-                    description=""
-                  />
+                  <FormattedMessage defaultMessage="Terms and Privacy Policy" />
                 </a>
               </Link>
             </>
           }
           required
         />
-
-        <EmailLoginButton gotoEmailLogin={gotoEmailLogin} isInPage={isInPage} />
-      </Form>
-    </section>
+      </section>
+    </Form>
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Next" description="" />}
+      text={<FormattedMessage defaultMessage="Next" />}
       loading={isSubmitting}
     />
   )
@@ -203,32 +185,53 @@ const Init: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="register" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<FormattedMessage defaultMessage="Next" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
 
-        {InnerForm}
-
-        <footer className={styles.footer}>
-          <LanguageSwitch />
-        </footer>
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="register"
-          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="register"
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
+          ) : null
+        }
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

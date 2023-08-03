@@ -81,6 +81,7 @@ interface ClickButtonProp {
 interface LoadMoreProp {
   type:
     | ArticleFeedType
+    | CollectionFeedType
     | CommentFeedType
     | UserFeedType
     | TagFeedType
@@ -175,6 +176,7 @@ interface TagExposureProp {
 // content type
 export type ContentType =
   | 'article'
+  | 'collection'
   | 'comment'
   | 'circle'
   | 'user'
@@ -198,12 +200,14 @@ export type ActivityType =
 // feed type
 export type FeedType =
   | ArticleFeedType
+  | CollectionFeedType
   | CommentFeedType
   | UserFeedType
   | TagFeedType
   | CircleFeedType
   | 'following'
   | 'search_history'
+  | 'user_pinned_work'
 
 type ArticleFeedType =
   | 'all_authors'
@@ -230,6 +234,8 @@ type ArticleFeedType =
   | 'wallet'
   | 'related_donations'
   | 'circle_detail'
+
+type CollectionFeedType = 'user_collection' | 'collection_article'
 
 type CommentFeedType =
   //  'follow-comment' |

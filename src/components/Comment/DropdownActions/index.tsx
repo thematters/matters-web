@@ -3,16 +3,16 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Button,
   CommentFormDialog,
   CommentFormType,
-  DropdownDialog,
+  Dropdown,
   IconMore16,
   LanguageContext,
   Menu,
+  toast,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -146,8 +146,8 @@ const BaseDropdownActions = ({
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
 
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu>
       {hasPin && <PinButton comment={comment} type={type} />}
       {hasEdit && <EditButton openEditCommentDialog={openEditCommentDialog} />}
       {hasDelete && (
@@ -167,29 +167,20 @@ const BaseDropdownActions = ({
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type: popupType, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ openDropdown, ref }) => (
         <Button
+          onClick={openDropdown}
           spacing={['xtight', 'xtight']}
           bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
           aria-label={translate({ id: 'moreActions', lang })}
-          aria-haspopup={popupType}
-          onClick={openDialog}
+          aria-haspopup="listbox"
           ref={ref}
         >
           <IconMore16 color="grey" />
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 
@@ -221,14 +212,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   const forbid = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: <Translate id="FORBIDDEN_BY_STATE" />,
-        },
-      })
-    )
+    toast.error({
+      message: <Translate id="FORBIDDEN_BY_STATE" />,
+    })
   }
 
   if (_isEmpty(_pickBy(controls)) || isArchived) {

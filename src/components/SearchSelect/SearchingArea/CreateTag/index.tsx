@@ -1,12 +1,13 @@
 import { useContext } from 'react'
 
-import { ADD_TOAST, TEST_ID } from '~/common/enums'
+import { TEST_ID } from '~/common/enums'
 import { validateTagName } from '~/common/utils'
 import {
   Card,
   IconAdd16,
   LanguageContext,
   TextIcon,
+  toast,
   Translate,
 } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
@@ -24,14 +25,9 @@ const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
   const create = () => {
     const msg = validateTagName(tag.content, lang)
     if (msg) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: msg,
-          },
-        })
-      )
+      toast.error({
+        message: msg,
+      })
       return
     }
 

@@ -1,9 +1,22 @@
 .empty {
   padding: var(--spacing-xxx-loose) var(--spacing-base);
+  font-size: var(--font-size-md);
+  line-height: 1.5rem;
   color: var(--color-grey-light);
   text-align: center;
 }
 
 .description {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--spacing-base);
+  color: var(--color-grey);
+}
+
+.spacingYXxloose {
+  padding-top: var(--spacing-xx-loose);
+  padding-bottom: var(--spacing-xx-loose);
+}
+
+.spacingYXxxloose {
+  padding-top: var(--spacing-xxx-loose);
+  padding-bottom: var(--spacing-xxx-loose);
 }

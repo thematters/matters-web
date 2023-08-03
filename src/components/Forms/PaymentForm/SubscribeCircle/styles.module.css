@@ -1,13 +1,9 @@
 .head {
-  & .product {
-    margin: var(--spacing-loose) var(--spacing-base);
-  }
-
   & .features {
     @mixin flex-center-space-between;
 
     padding: var(--spacing-x-tight) var(--spacing-loose);
-    margin: var(--spacing-loose) var(--spacing-base);
+    margin: var(--spacing-base) 0;
     background: var(--color-yellow-lighter);
     border-radius: var(--spacing-loose);
 
@@ -17,12 +13,10 @@
   }
 }
 
-.hint {
-  margin: var(--spacing-base);
-}
-
 .currentCard {
   @mixin flex-center-space-between;
+}
 
-  margin: var(--spacing-base);
+.hint {
+  margin: var(--spacing-base) 0;
 }

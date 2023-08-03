@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 
 import { Z_INDEX } from '~/common/enums'
-import { DropdownDialog } from '~/components'
+import { Dropdown } from '~/components'
 
 import Field, { FieldProps } from '../Field'
 import Option from './Option'
@@ -39,12 +39,15 @@ const Select: React.FC<SelectProps> = ({
   name,
   title,
   label,
-  labelVisHidden,
+  hasLabel,
 
   options,
   onChange,
 
   size,
+
+  spacingTop,
+  spacingBottom,
 }) => {
   const fieldId = `field-${name}`
   const selectedOptionId = `${fieldId}-selected`
@@ -83,43 +86,28 @@ const Select: React.FC<SelectProps> = ({
   }
 
   const Content = (
-    <DropdownDialog
-      dropdown={{
-        appendTo: 'parent',
-        content: <Options dropdown />,
-        placement: 'bottom-end',
-        zIndex: Z_INDEX.OVER_DIALOG,
-      }}
-      dialog={{
-        content: <Options />,
-        title: title || label,
-      }}
-    >
-      {({ openDialog, type, ref }) => (
-        <ul aria-labelledby={fieldId}>
+    <Dropdown content={<Options dropdown />} zIndex={Z_INDEX.OVER_DIALOG}>
+      {({ openDropdown, ref }) => (
+        <ul aria-labelledby={fieldId} className={styles.list}>
           <Option
+            onClick={openDropdown}
             role="button"
-            ariaHasPopup={type}
+            ariaHasPopup="listbox"
             name={selectedOption.name}
             subtitle={selectedOption.subtitle}
             selected
             extra={selectedOption?.extra}
             size={size}
-            onClick={openDialog}
             ref={ref}
           />
         </ul>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 
   return (
-    <Field>
-      <Field.Header
-        label={label}
-        labelId={fieldId}
-        labelVisHidden={labelVisHidden}
-      />
+    <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
+      <Field.Header label={label} labelId={fieldId} hasLabel={hasLabel} />
 
       {Content}
     </Field>

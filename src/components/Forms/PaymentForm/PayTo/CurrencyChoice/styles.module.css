@@ -1,12 +1,11 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  margin: 0 var(--spacing-base);
 
   & .header {
     @mixin flex-center-start;
 
-    margin: var(--spacing-base) 0;
+    margin-bottom: var(--spacing-base);
     font-size: var(--font-size-md-s);
     line-height: 1.5rem;
 
@@ -15,6 +14,8 @@
     }
 
     & .userInfo {
+      @mixin inline-flex-center-all;
+
       flex-shrink: 1;
       margin: 0 var(--spacing-x-tight);
     }

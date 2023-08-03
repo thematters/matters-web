@@ -1,7 +1,5 @@
 .time {
-  font-size: var(--font-size-subtext);
   font-weight: var(--font-weight-subtext);
-  line-height: var(--line-height-subtext);
   color: var(--color-grey-dark);
   white-space: nowrap;
 }
@@ -12,4 +10,14 @@
 
 .greyDark {
   color: var(--color-grey-dark);
+}
+
+.sizeXs {
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-article-title);
+}
+
+.sizeSm {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base-loose);
 }

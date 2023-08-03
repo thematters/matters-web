@@ -8,6 +8,7 @@ import { loadStripe, StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { STRIPE_ERROR_MESSAGES } from '~/common/enums'
 import { analytics, parseFormSubmitErrors, translate } from '~/common/utils'
@@ -34,6 +35,7 @@ import Processing from './Processing'
 interface CardPaymentProps {
   circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
   submitCallback: () => void
+  closeDialog: () => void
 }
 
 type Step = 'confirmation' | 'processing'
@@ -47,6 +49,7 @@ const stripePromise = loadStripe(
 const BaseCardPayment: React.FC<CardPaymentProps> = ({
   circle,
   submitCallback,
+  closeDialog,
 }) => {
   const stripe = useStripe()
   const elements = useElements()
@@ -152,25 +155,45 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
 
   return (
     <>
-      <Dialog.Content hasGrow>
-        <section>
-          <Head circle={circle} />
+      <Dialog.Header closeDialog={closeDialog} title="subscribeCircle" />
 
-          <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
+      <Dialog.Content fixedHeight>
+        <Head circle={circle} />
 
-          <Hint />
-        </section>
+        <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
+
+        <Hint />
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={handleSubmit}
-          disabled={disabled || isSubmitting || !!checkoutError}
-          loading={isSubmitting}
-        >
-          <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={
+              <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
+            }
+            disabled={disabled || isSubmitting || !!checkoutError}
+            loading={isSubmitting}
+            onClick={handleSubmit}
+          />
+        }
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              onClick={closeDialog}
+            />
+            <Dialog.TextButton
+              text={
+                <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
+              }
+              disabled={disabled || isSubmitting || !!checkoutError}
+              loading={isSubmitting}
+              onClick={handleSubmit}
+            />
+          </>
+        }
+      />
     </>
   )
 }

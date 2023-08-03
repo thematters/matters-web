@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import { iscnLinkUrl, translate } from '~/common/utils'
 import {
@@ -73,6 +74,7 @@ const FingerprintDialogContent = ({
   pending: boolean
   refetch: () => any
 }) => {
+  const intl = useIntl()
   const { lang } = useContext(LanguageContext)
   const { loading, data } = useQuery<GatewaysQuery>(GATEWAYS)
 
@@ -113,7 +115,7 @@ const FingerprintDialogContent = ({
   })
 
   return (
-    <Dialog.Content hasGrow>
+    <Dialog.Content>
       <section className={styles.container}>
         <SectionCard
           title={
@@ -204,14 +206,13 @@ const FingerprintDialogContent = ({
             </p>
 
             <section className={styles.copy}>
-              <input
-                type="text"
-                value={dataHash || translate({ id: 'waitingForHash', lang })}
-                readOnly
-                onClick={(event) => event.currentTarget.select()}
-              />
+              <div className={styles.hash}>
+                {dataHash || translate({ id: 'waitingForHash', lang })}
+              </div>
               <CopyToClipboard text={dataHash}>
-                <Button aria-label={translate({ id: 'copy', lang })}>
+                <Button
+                  aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
+                >
                   <IconCopy16 />
                 </Button>
               </CopyToClipboard>

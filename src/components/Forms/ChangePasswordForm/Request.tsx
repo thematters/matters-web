@@ -1,21 +1,18 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { parseFormSubmitErrors, translate, validateEmail } from '~/common/utils'
+import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
 import {
   Dialog,
   Form,
   LanguageContext,
   Layout,
-  Translate,
   useMutation,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
-
-import styles from '../styles.module.css'
 
 interface FormProps {
   defaultEmail?: string
@@ -39,6 +36,7 @@ const Request: React.FC<FormProps> = ({
   back,
 }) => {
   const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const isForget = type === 'forget'
   const isInPage = purpose === 'page'
@@ -93,36 +91,39 @@ const Request: React.FC<FormProps> = ({
     },
   })
 
-  const containerClasses = classNames({ [styles.container]: !!isInPage })
+  // id: isForget ? 'enterRegisteredEmail' : 'enterEmail',
 
   const InnerForm = (
-    <section className={containerClasses}>
-      <Form id={formId} onSubmit={handleSubmit}>
-        <Form.Input
-          label={<Translate id="email" />}
-          type="email"
-          name="email"
-          required
-          placeholder={translate({
-            id: isForget ? 'enterRegisteredEmail' : 'enterEmail',
-            lang,
-          })}
-          value={values.email}
-          error={touched.email && errors.email}
-          disabled={!!defaultEmail}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-      </Form>
-    </section>
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<FormattedMessage defaultMessage="Email" />}
+        type="email"
+        name="email"
+        required
+        placeholder={
+          isForget
+            ? intl.formatMessage({
+                defaultMessage: 'Enter your email',
+              })
+            : intl.formatMessage({
+                defaultMessage: 'Email',
+              })
+        }
+        value={values.email}
+        error={touched.email && errors.email}
+        disabled={!!defaultEmail}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+    </Form>
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<Translate id="nextStep" />}
+      text={<FormattedMessage defaultMessage="Next Step" />}
       loading={isSubmitting}
     />
   )
@@ -135,28 +136,53 @@ const Request: React.FC<FormProps> = ({
           right={
             <>
               <span />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<FormattedMessage defaultMessage="Next Step" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
 
-        {InnerForm}
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title={titleId}
-          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title={titleId}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
+          ) : null
+        }
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

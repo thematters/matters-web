@@ -84,10 +84,11 @@ export const MOCK_ARTILCE = {
   id: 'article-0000',
   title: '中國四川：挑戰世界最危險的公路之一 川藏公路絕美風光',
   slug: 'slug',
-  mediaHash: 'article-media-hash',
+  mediaHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
+  dataHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
   articleState: 'active' as any,
   state: 'active' as any,
-  cover: 'https://source.unsplash.com/256x256?user',
+  cover: 'https://source.unsplash.com/256x256?article',
   summary:
     '其實已經開始兩週了XD,不過最近才想說應該來記錄一下我在火箭隊的日常,順便練一下文筆,也可以讓大家了解一下火箭隊軟體培訓營裡面大概是在做些什麼事情,上課的模式及氣氛是怎樣等等...畢竟我當時得知有這個免費培訓營時,也是網路上各種爬文類似這種免費培訓工程師半年的心得及成',
   author: MOCK_USER,
@@ -97,9 +98,8 @@ export const MOCK_ARTILCE = {
     __typename: 'AppreciationConnection' as any,
     totalCount: 0,
   },
-  dataHash: 'article-data-hash',
   iscnId: '',
-  sticky: false,
+  pinned: false,
   readTime: 1234.5,
   tags: [],
   likesReceivedTotal: 1,
@@ -176,6 +176,24 @@ export const MOCK_TAG = {
   },
   numArticles: 100,
   numAuthors: 21,
+}
+
+// Collection
+export const MOCK_COLLECTION = {
+  __typename: 'Collection' as any,
+  id: 'collection-0000',
+  title: '香港',
+  author: MOCK_USER,
+  updatedAt: '2020-12-24T07:29:17.682Z',
+  pinned: false,
+  cover: 'https://source.unsplash.com/256x256?collection',
+  description:
+    'Nostrud eu est proident sit fugiat aliqua pariatur tempor proident sint. Lorem deserunt labore incididunt quis voluptate sint sit aute proident adipisicing. Labore nostrud cupidatat deserunt. Culpa anim laboris deserunt proident.',
+  articles: {
+    __typename: 'ArticleConnection' as any,
+    totalCount: 1,
+    edges: [{ node: MOCK_ARTILCE }],
+  },
 }
 
 // Transaction

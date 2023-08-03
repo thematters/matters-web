@@ -4,7 +4,6 @@ import gql from 'graphql-tag'
 import {
   Head,
   Layout,
-  ResponsiveWrapper,
   Spacer,
   Spinner,
   Translate,
@@ -118,7 +117,7 @@ const BaseNotificationSettings = ({
   }
 
   return (
-    <ResponsiveWrapper>
+    <Layout.Main.Spacing>
       <div className={styles.title}>
         <h2>
           {' '}
@@ -176,7 +175,7 @@ const BaseNotificationSettings = ({
         settings={settings}
         spacingX={spacingX}
       />
-    </ResponsiveWrapper>
+    </Layout.Main.Spacing>
   )
 }
 

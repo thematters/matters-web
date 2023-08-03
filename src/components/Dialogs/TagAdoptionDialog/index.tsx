@@ -1,5 +1,10 @@
-import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import {
+  Dialog,
+  toast,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+} from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import { UpdateTagSettingMutation } from '~/gql/graphql'
 
@@ -29,69 +34,73 @@ const BaseDialog = ({ id, children }: Props) => {
   const [update, { loading }] =
     useMutation<UpdateTagSettingMutation>(UPDATE_TAG_SETTING)
 
+  const onClick = async () => {
+    const result = await update({
+      variables: { input: { id, type: 'adopt' } },
+    })
+
+    if (!result) {
+      throw new Error('tag adoption failed')
+    }
+
+    toast.success({
+      message: <Translate zh_hant="認領成功" zh_hans="认领成功" />,
+    })
+  }
+
   return (
     <>
       {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate zh_hant="認領標籤" zh_hans="认领标签" en="Adopt Tag" />
           }
-          closeDialog={closeDialog}
-          closeTextId="cancel"
         />
+
         <Dialog.Message>
           <p>
             <Translate zh_hant={textZhHant} zh_hans={textZhHans} en={textEn} />
           </p>
         </Dialog.Message>
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            textColor="white"
-            bgColor="green"
-            loading={loading}
-            onClick={async () => {
-              const result = await update({
-                variables: { input: { id, type: 'adopt' } },
-              })
 
-              if (!result) {
-                throw new Error('tag adoption failed')
-              }
-
-              window.dispatchEvent(
-                new CustomEvent(ADD_TOAST, {
-                  detail: {
-                    color: 'green',
-                    content: (
-                      <Translate zh_hant="認領成功" zh_hans="认领成功" />
-                    ),
-                    duration: 2000,
-                  },
-                })
-              )
-            }}
-          >
-            <Translate
-              zh_hant="即刻主理"
-              zh_hans="即刻主理"
-              en="Maintain immediately"
-            />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            textColor="black"
-            bgColor="greyLighter"
-            onClick={closeDialog}
-          >
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          closeText={
             <Translate
               zh_hant="考慮一下"
               zh_hans="考虑一下"
               en="Let me think about it"
             />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+          }
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <Translate
+                  zh_hant="即刻主理"
+                  zh_hans="即刻主理"
+                  en="Maintain immediately"
+                />
+              }
+              loading={loading}
+              onClick={onClick}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={
+                <Translate
+                  zh_hant="即刻主理"
+                  zh_hans="即刻主理"
+                  en="Maintain immediately"
+                />
+              }
+              loading={loading}
+              onClick={onClick}
+            />
+          }
+        />
       </Dialog>
     </>
   )

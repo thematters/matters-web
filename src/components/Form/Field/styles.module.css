@@ -1,3 +1,15 @@
-.field {
-  margin: var(--spacing-loose) var(--spacing-base);
+.spacingTopBase {
+  margin-top: var(--spacing-base);
+}
+
+.spacingTopLoose {
+  margin-top: var(--spacing-loose);
+}
+
+.spacingBottomBase {
+  margin-bottom: var(--spacing-base);
+}
+
+.spacingBottomLoose {
+  margin-bottom: var(--spacing-loose);
 }

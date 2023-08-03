@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useEffect } from 'react'
 
-import { Toast, Translate } from '~/components'
+import { Layout, Translate } from '~/components'
 import { EditModeArticleNewestPublishDraftQuery } from '~/gql/graphql'
 
 import EDIT_MODE_ARTICLE_NEWEST_PUBLISH_DRAFT from './gql'
@@ -46,7 +46,7 @@ const PendingState = ({
   }
 
   return (
-    <Toast.Instance
+    <Layout.Notice
       color="green"
       content={<Translate id="publishing" />}
       subDescription={

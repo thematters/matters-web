@@ -81,8 +81,12 @@ const FollowingFeed = () => {
     <>
       <Head title={{ id: 'follow' }} />
 
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List responsiveWrapper>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
+        <List>
           {edges.map(({ node }, i) => (
             <List.Item key={`${node.__typename}:${i}`}>
               {node.__typename === 'UserPublishArticleActivity' && (

@@ -1,0 +1,7 @@
+.coverField {
+  margin: calc(var(--spacing-base) * -1) calc(var(--spacing-base) * -1) 0;
+
+  @media (--sm-up) {
+    margin: 0 calc(var(--spacing-base-loose) * -1);
+  }
+}

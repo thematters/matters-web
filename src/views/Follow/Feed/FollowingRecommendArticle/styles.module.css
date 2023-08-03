@@ -1,6 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  height: 8.5rem;
 }
 
 .head {
@@ -17,7 +18,7 @@
 
   & .title {
     margin-bottom: var(--spacing-x-tight);
-    font-size: var(--font-size-xm);
+    font-size: var(--font-size-md);
     font-weight: var(--font-weight-medium);
 
     & > a {

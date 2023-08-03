@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { translate } from '~/common/utils'
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
   IconUnfollow24,
   LanguageContext,
   Menu,
@@ -22,34 +22,23 @@ type BaseDropdownActionsProps = DropdownActionsProps
 const BaseDropdownActions = ({ actions }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
 
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>{actions}</Menu>
-  )
+  const Content = () => <Menu>{actions}</Menu>
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ openDropdown, ref }) => (
         <Button
+          onClick={openDropdown}
           spacing={['xtight', 'xtight']}
           bgActiveColor="greyLighterActive"
           aria-label={translate({ id: 'moreActions', lang })}
-          aria-haspopup={type}
-          onClick={openDialog}
+          aria-haspopup="listbox"
           ref={ref}
         >
           <IconUnfollow24 style={{ width: '1.125rem', height: '1.125rem' }} />
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

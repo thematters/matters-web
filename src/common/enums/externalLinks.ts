@@ -22,6 +22,7 @@ export const EXTERNAL_LINKS = {
   DEVELOPER_RESOURCE: 'https://thematters.github.io/developer-resource/',
   SECURITY_LINK:
     'https://thematters.github.io/developer-resource/SECURITY.html',
+  BUG_REPORT: 'https://feedback.matters.town/bug-reports',
 }
 
 export const GUIDE_LINKS = {

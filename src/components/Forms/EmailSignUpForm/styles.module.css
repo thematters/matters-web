@@ -1,11 +1,4 @@
-.container {
-  &.isInPage {
-    @mixin form-container;
-  }
-}
-
-.footer {
-  @mixin flex-center-all;
-
-  margin: var(--spacing-x-loose) 0;
+.tos {
+  padding: var(--spacing-base);
+  text-align: center;
 }

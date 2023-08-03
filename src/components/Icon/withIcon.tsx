@@ -7,12 +7,16 @@ export type IconSize =
   | 'xs'
   | 'smS'
   | 'sm'
+  | 'mdXS'
   | 'mdS'
+  | 'mdM'
   | 'md'
   | 'lg'
   | 'xlM'
   | 'xl'
   | 'xxl'
+  | 'xxxl'
+  | 'xxxlM'
 
 export type IconColor =
   | 'white'

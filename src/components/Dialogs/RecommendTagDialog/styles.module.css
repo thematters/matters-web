@@ -4,6 +4,10 @@
   }
 }
 
+.tabs {
+  padding: 0 var(--spacing-base);
+}
+
 .feed {
   padding-bottom: var(--spacing-base);
 }

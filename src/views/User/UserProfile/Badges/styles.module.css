@@ -1,0 +1,16 @@
+.badge {
+  font-size: 0;
+}
+
+.item {
+  @mixin flex-center-all;
+
+  flex-direction: column;
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+  color: var(--color-grey-dark);
+
+  & > * + * {
+    margin-top: var(--spacing-tight);
+  }
+}

@@ -358,7 +358,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               type="button"
               onClick={onUrlInputSubmit}
             >
-              <FormattedMessage defaultMessage="Confirm" description="" />
+              <FormattedMessage defaultMessage="Confirm" />
             </button>
           </>
         )}

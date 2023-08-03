@@ -89,18 +89,11 @@ const Authors = () => {
           viewAll={false}
         />
       </Media>
-      <Media between={['md', 'xl']}>
+      <Media greaterThanOrEqual="md">
         <SectionHeader
           type="authors"
           rightButton={<ShuffleButton onClick={shuffle} />}
           viewAll={true}
-        />
-      </Media>
-      <Media greaterThanOrEqual="xl">
-        <SectionHeader
-          type="authors"
-          rightButton={<ShuffleButton onClick={shuffle} />}
-          viewAll={false}
         />
       </Media>
     </>
@@ -154,7 +147,7 @@ const Authors = () => {
             }}
             textAlign="center"
           >
-            <FormattedMessage defaultMessage="View All" description="" />
+            <FormattedMessage defaultMessage="View All" />
           </ViewMoreCard>
         </section>
       </Media>

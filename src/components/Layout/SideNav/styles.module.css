@@ -3,12 +3,6 @@
   flex-direction: column;
   align-items: center;
   padding-top: var(--spacing-x-loose);
-  margin-right: calc(40px * -1);
-
-  @media (--md-up) {
-    align-items: flex-start;
-    margin-right: 0;
-  }
 }
 
 .logo {
@@ -30,8 +24,4 @@
     margin-top: var(--spacing-x-loose);
     font-size: 0;
   }
-}
-
-.dropdownMenu {
-  width: 12rem;
 }

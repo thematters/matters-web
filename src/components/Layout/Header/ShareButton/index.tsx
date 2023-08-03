@@ -17,7 +17,6 @@ export const ShareButton: React.FC<Omit<ShareDialogProps, 'children'>> = (
         <Button
           aria-label={intl.formatMessage({
             defaultMessage: 'Share',
-            description: '',
           })}
           aria-haspopup="dialog"
           bgColor="halfBlack"

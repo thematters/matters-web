@@ -13,31 +13,39 @@ const Email = ({
   title: string
   link: string
   circle?: boolean
-}) => (
-  <button
-    type="button"
-    onClick={() => {
-      const description = dom
-        .$('meta[name="description"]')
-        ?.getAttribute('content')
-      const shareUrl = `mailto:?${new URLSearchParams({
-        subject: title,
-        body: `${description}\n\n${link}`,
-      }).toString()}`
-      analytics.trackEvent('share', {
-        type: 'email',
-      })
-      return (window.location.href = shareUrl)
-    }}
-  >
-    {circle && withIcon(IconShareEmailCircle)({ size: 'xlM' })}
+}) => {
+  // append utm_source to link
+  const utm_source = 'share_email'
+  const url = new URL(link)
+  url.searchParams.append('utm_source', utm_source)
+  link = url.toString()
 
-    {!circle && (
-      <TextIcon icon={withIcon(IconShareEmail)({})} spacing="base">
-        <FormattedMessage defaultMessage="Email" description="" />
-      </TextIcon>
-    )}
-  </button>
-)
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        const description = dom
+          .$('meta[name="description"]')
+          ?.getAttribute('content')
+        const shareUrl = `mailto:?${new URLSearchParams({
+          subject: title,
+          body: `${description}\n\n${link}`,
+        }).toString()}`
+        analytics.trackEvent('share', {
+          type: 'email',
+        })
+        return (window.location.href = shareUrl)
+      }}
+    >
+      {circle && withIcon(IconShareEmailCircle)({ size: 'xlM' })}
+
+      {!circle && (
+        <TextIcon icon={withIcon(IconShareEmail)({})} spacing="base">
+          <FormattedMessage defaultMessage="Email" />
+        </TextIcon>
+      )}
+    </button>
+  )
+}
 
 export default Email

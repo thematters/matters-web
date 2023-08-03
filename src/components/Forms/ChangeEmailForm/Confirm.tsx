@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 // import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   parseFormSubmitErrors,
@@ -24,8 +25,6 @@ import {
   ChangeEmailMutation,
   ConfirmVerificationCodeMutation,
 } from '~/gql/graphql'
-
-import styles from '../styles.module.css'
 
 interface FormProps {
   oldData: { email: string; codeId: string }
@@ -122,49 +121,50 @@ const Confirm: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <section className={styles.container}>
-      <Form id={formId} onSubmit={handleSubmit}>
-        <Form.Input
-          label={<Translate id="email" />}
-          type="email"
-          name="email"
-          required
-          placeholder={translate({ id: 'enterNewEmail', lang })}
-          value={values.email}
-          error={touched.email && errors.email}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<Translate id="email" />}
+        hasLabel
+        type="email"
+        name="email"
+        required
+        placeholder={translate({ id: 'enterNewEmail', lang })}
+        value={values.email}
+        error={touched.email && errors.email}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        spacingBottom="base"
+      />
 
-        <Form.Input
-          label={<Translate id="verificationCode" />}
-          type="text"
-          name="code"
-          required
-          placeholder={translate({ id: 'enterVerificationCode', lang })}
-          hint={translate({ id: 'hintVerificationCode', lang })}
-          value={values.code}
-          error={touched.code && errors.code}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          extraButton={
-            <VerificationSendCodeButton
-              email={values.email}
-              type="email_reset_confirm"
-              disabled={!!errors.email}
-            />
-          }
-        />
-      </Form>
-    </section>
+      <Form.Input
+        label={<Translate id="verificationCode" />}
+        hasLabel
+        type="text"
+        name="code"
+        required
+        placeholder={translate({ id: 'enterVerificationCode', lang })}
+        hint={translate({ id: 'hintVerificationCode', lang })}
+        value={values.code}
+        error={touched.code && errors.code}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        extraButton={
+          <VerificationSendCodeButton
+            email={values.email}
+            type="email_reset_confirm"
+            disabled={!!errors.email}
+          />
+        }
+      />
+    </Form>
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<Translate id="confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
@@ -177,27 +177,45 @@ const Confirm: React.FC<FormProps> = ({
           right={
             <>
               <span />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<FormattedMessage defaultMessage="Confirm" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
 
-        {InnerForm}
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="changeEmail"
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="changeEmail"
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

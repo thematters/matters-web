@@ -1,7 +1,10 @@
 /* Container
    ========================================================================== */
 .container {
+  @mixin transition;
+
   display: inline-flex;
+  transition-property: color;
 }
 
 span.container {
@@ -33,6 +36,10 @@ span.container {
   color: var(--color-grey);
 }
 
+.textGreyDarker {
+  color: var(--color-grey-darker);
+}
+
 .textActiveWhite {
   &:hover,
   &:focus {
@@ -51,6 +58,20 @@ span.container {
   &:hover,
   &:focus {
     color: var(--color-matters-green);
+  }
+}
+
+.textActiveGreenDark {
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green-dark);
+  }
+}
+
+.textActiveRedDark {
+  &:hover,
+  &:focus {
+    color: var(--color-red-dark);
   }
 }
 
@@ -73,7 +94,7 @@ span.container {
 
   z-index: 0;
   background: transparent;
-  transition-property: color, background;
+  transition-property: color, background, border-color;
 
   & + * {
     z-index: 1;
@@ -244,7 +265,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-matters-green-active);
+      background: var(--color-matters-green-dark);
     }
   }
 }
@@ -382,6 +403,12 @@ span.container {
   }
 }
 
+.borderGreyDarker {
+  & .hotarea {
+    border-color: var(--color-grey-darker);
+  }
+}
+
 .borderGrey {
   & .hotarea {
     border-color: var(--color-grey);
@@ -427,6 +454,24 @@ span.container {
 .borderLikecoinGreen {
   & .hotarea {
     border-color: var(--color-likecoin-green);
+  }
+}
+
+.borderActiveGreenDark {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-matters-green-dark);
+    }
+  }
+}
+
+.borderActiveBlack {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-matters-black);
+    }
   }
 }
 

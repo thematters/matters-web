@@ -44,9 +44,9 @@ const PickAuthors = () => (
   <>
     <Head title={{ id: 'followAuthor' }} />
 
-    <Layout.Spacing>
+    <Layout.Main.Spacing>
       <PickIntroHeader />
-    </Layout.Spacing>
+    </Layout.Main.Spacing>
 
     <AuthorPicker title={<Translate id="followAuthor" />} />
   </>

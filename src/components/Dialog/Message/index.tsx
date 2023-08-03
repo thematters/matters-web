@@ -6,9 +6,11 @@ import { Dialog } from '~/components'
 import styles from './styles.module.css'
 
 interface DialogMessageProps {
-  align?: 'left'
-  type?: 'error' | 'info'
-  spacing?: 'md' | 'xxl'
+  align?: 'left' | 'center'
+  smUpAlign?: 'left' | 'center'
+  type?: 'error'
+
+  noSpacing?: boolean
 }
 
 /**
@@ -27,9 +29,11 @@ interface DialogMessageProps {
  *
  */
 const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
-  align,
+  align = 'center',
+  smUpAlign = 'left',
   type,
-  spacing = 'base',
+
+  noSpacing,
 
   children,
 }) => {
@@ -37,11 +41,12 @@ const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
     [styles.content]: true,
     [styles[`${type}`]]: !!type,
     [align ? styles[`align${capitalizeFirstLetter(align)}`] : '']: !!align,
-    [styles[`spacing${capitalizeFirstLetter(spacing)}`]]: !!spacing,
+    [smUpAlign ? styles[`alignSmUp${capitalizeFirstLetter(smUpAlign)}`] : '']:
+      !!smUpAlign,
   })
 
   return (
-    <Dialog.Content spacing={['base', 'base']} hasFixed>
+    <Dialog.Content noSpacing={noSpacing}>
       <section className={contentClasses}>{children}</section>
     </Dialog.Content>
   )

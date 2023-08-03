@@ -4,7 +4,7 @@ import { analytics, formatAmount } from '~/common/utils'
 import {
   AddCreditDialog,
   CurrencyFormatter,
-  DropdownDialog,
+  Dropdown,
   IconArrowRight16,
   IconFiatCurrency40,
   IconPayout24,
@@ -33,15 +33,13 @@ interface ItemProps {
 const TopUpItem = ({ openDialog }: ItemProps) => {
   return (
     <Menu.Item
+      text={<Translate id="topUp" />}
+      icon={<IconWallet24 size="mdS" />}
       onClick={() => {
         openDialog()
         analytics.trackEvent('click_button', { type: 'top_up' })
       }}
-    >
-      <TextIcon icon={<IconWallet24 size="md" />} size="xm" spacing="base">
-        <Translate id="topUp" />
-      </TextIcon>
-    </Menu.Item>
+    />
   )
 }
 
@@ -51,11 +49,11 @@ const PayoutItem = ({
 }: ItemProps & { canPayout: boolean }) => {
   if (canPayout) {
     return (
-      <Menu.Item onClick={openDialog}>
-        <TextIcon icon={<IconPayout24 size="md" />} size="xm" spacing="base">
-          <Translate id="paymentPayout" />
-        </TextIcon>
-      </Menu.Item>
+      <Menu.Item
+        text={<Translate id="paymentPayout" />}
+        icon={<IconPayout24 size="mdS" />}
+        onClick={openDialog}
+      />
     )
   }
 
@@ -63,9 +61,9 @@ const PayoutItem = ({
     <Menu.Item>
       <section className={styles.payoutItem}>
         <TextIcon
-          icon={<IconPayout24 size="md" color="grey" />}
-          size="xm"
-          spacing="base"
+          icon={<IconPayout24 size="mdS" color="grey" />}
+          size="md"
+          spacing="tight"
           color="grey"
         >
           <Translate id="paymentPayout" />
@@ -97,15 +95,13 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
   })
 
   const Content = ({
-    isInDropdown,
     openAddCreditDialog,
     openPayoutDialog,
   }: {
-    isInDropdown?: boolean
     openAddCreditDialog: () => void
     openPayoutDialog: () => void
   }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+    <Menu>
       <TopUpItem openDialog={openAddCreditDialog} />
       <PayoutItem openDialog={openPayoutDialog} canPayout={canPayout} />
     </Menu>
@@ -116,33 +112,20 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
       {({ openDialog: openPayoutDialog }) => (
         <AddCreditDialog>
           {({ openDialog: openAddCreditDialog }) => (
-            <DropdownDialog
-              dropdown={{
-                content: (
-                  <Content
-                    isInDropdown
-                    openAddCreditDialog={openAddCreditDialog}
-                    openPayoutDialog={openPayoutDialog}
-                  />
-                ),
-                placement: 'bottom-end',
-              }}
-              dialog={{
-                content: (
-                  <Content
-                    openAddCreditDialog={openAddCreditDialog}
-                    openPayoutDialog={openPayoutDialog}
-                  />
-                ),
-                title: 'moreActions',
-              }}
+            <Dropdown
+              content={
+                <Content
+                  openAddCreditDialog={openAddCreditDialog}
+                  openPayoutDialog={openPayoutDialog}
+                />
+              }
             >
-              {({ openDialog, type, ref }) => (
+              {({ openDropdown, ref }) => (
                 <section
                   className={classes}
-                  onClick={openDialog}
-                  aria-haspopup={type}
+                  aria-haspopup="listbox"
                   role="button"
+                  onClick={openDropdown}
                   ref={ref}
                 >
                   <TextIcon
@@ -170,7 +153,7 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                   </TextIcon>
                 </section>
               )}
-            </DropdownDialog>
+            </Dropdown>
           )}
         </AddCreditDialog>
       )}

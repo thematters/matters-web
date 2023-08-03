@@ -84,6 +84,8 @@ const Toolbar = ({
     inCard: false,
     sharePath,
     hasExtend: !lock,
+    hasEdit: true,
+    hasArchive: true,
     ...props,
   }
 
@@ -132,10 +134,15 @@ const Toolbar = ({
             article={article}
             {...dropdonwActionsProps}
             hasShare
+            hasBookmark={false}
           />
         </Media>
         <Media greaterThan="sm">
-          <DropdownActions article={article} {...dropdonwActionsProps} />
+          <DropdownActions
+            article={article}
+            {...dropdonwActionsProps}
+            hasBookmark={false}
+          />
         </Media>
       </section>
     </section>

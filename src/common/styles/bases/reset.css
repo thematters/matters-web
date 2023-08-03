@@ -120,10 +120,10 @@ button {
   font: inherit;
   line-height: 1.15;
   color: inherit;
+  appearance: none;
   border: 0;
   border-radius: 0;
   outline: 0;
-  appearance: none;
 }
 
 button {
@@ -212,8 +212,8 @@ textarea {
 }
 
 ::-webkit-file-upload-button {
-  appearance: button;
   font: inherit;
+  appearance: button;
 }
 
 /* Interactive

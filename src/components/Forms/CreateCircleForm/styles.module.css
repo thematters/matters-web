@@ -1,4 +1,4 @@
-.displayNameInput :global(.inputContainer) {
+.nameInput :global(.inputContainer) {
   position: relative;
 
   &::before {
@@ -17,6 +17,7 @@
 
 .coverField {
   position: relative;
+  margin: calc(var(--spacing-base) * -1) calc(var(--spacing-base) * -1);
 
   & .hint {
     position: absolute;
@@ -26,16 +27,12 @@
     font-size: var(--font-size-xs);
     color: var(--color-grey);
   }
-}
-
-.avatarField {
-  margin: var(--spacing-loose) var(--spacing-base);
 
   @media (--sm-up) {
-    margin: var(--spacing-loose) 0;
+    margin: 0;
   }
 }
 
-.container {
-  @mixin form-container;
+.avatarField {
+  margin: var(--spacing-loose) 0;
 }

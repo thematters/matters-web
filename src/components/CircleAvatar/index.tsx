@@ -38,7 +38,8 @@ export const CircleAvatar = (props: CircleAvatarProps) => {
     <div className={avatarClasses}>
       <ResponsiveImage
         url={source}
-        size="144w"
+        width={144}
+        height={144}
         disabled={isFallback || inEditor}
       />
     </div>

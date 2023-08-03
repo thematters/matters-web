@@ -8,25 +8,27 @@ export interface PageHeaderProps {
   title: string | React.ReactNode
 
   is?: 'h1' | 'h2' | 'h3'
-  hasNoBorder?: boolean
+  hasBorder?: boolean
+  type?: 'nav' | 'base'
 }
 
 export const PageHeader: React.FC<React.PropsWithChildren<PageHeaderProps>> = ({
   title,
   is = 'h1',
-  hasNoBorder = false,
+  type = 'nav',
+  hasBorder = true,
 
   children,
 }) => {
   const headerClasses = classNames({
     [styles.header]: true,
-    [styles.hasNoBorder]: !!hasNoBorder,
+    [styles.hasBorder]: hasBorder,
   })
 
   return (
     <header className={headerClasses}>
       <section className={styles.title}>
-        <Title type="nav" is={is}>
+        <Title type={type} is={is}>
           {title}
         </Title>
 

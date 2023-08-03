@@ -1,13 +1,12 @@
-import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount, maskAddress, translate } from '~/common/utils'
+import { formatAmount, maskAddress } from '~/common/utils'
 import {
   Avatar,
   Button,
   CopyToClipboard,
   IconCopy16,
-  LanguageContext,
   TextIcon,
   Translate,
 } from '~/components'
@@ -31,7 +30,7 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
   showLikerID = false,
   showEthAddress = false,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const address = recipient.info.ethAddress || ''
   return (
     <section className={styles.info}>
@@ -46,11 +45,16 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
       <p className={styles.recipient}>{recipient.displayName}</p>
       {showEthAddress && (
         <div className={styles.address}>
-          <CopyToClipboard text={address}>
+          <CopyToClipboard
+            text={address}
+            successMessage={
+              <FormattedMessage defaultMessage="Address copied" />
+            }
+          >
             <Button
               spacing={['xxtight', 'tight']}
               bgColor="greenLighter"
-              aria-label={translate({ id: 'copy', lang })}
+              aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
             >
               <TextIcon
                 icon={<IconCopy16 color="green" size="sm" />}

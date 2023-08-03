@@ -35,6 +35,7 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --font-weight-bolder: 900;
+  --line-height-base-loose: 1.571428; /* 22/14 */
 
   /* Base */
   --font-size-base: var(--font-size-md);

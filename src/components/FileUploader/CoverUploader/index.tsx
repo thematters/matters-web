@@ -3,20 +3,19 @@ import { useContext, useState } from 'react'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ADD_TOAST,
   ASSET_TYPE,
   ENTITY_TYPE,
   UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
-  Button,
+  Book,
   Cover,
   CoverProps,
   IconCamera24,
   LanguageContext,
   Spinner,
-  TextIcon,
+  toast,
   Translate,
   useMutation,
 } from '~/components'
@@ -48,10 +47,20 @@ export type CoverUploaderProps = {
     | ASSET_TYPE.profileCover
     | ASSET_TYPE.tagCover
     | ASSET_TYPE.circleCover
+    | ASSET_TYPE.collectionCover
   entityId?: string
-  entityType: ENTITY_TYPE.user | ENTITY_TYPE.tag | ENTITY_TYPE.circle
-  onUpload: (assetId: string | null) => void
-  type?: 'circle'
+  entityType:
+    | ENTITY_TYPE.user
+    | ENTITY_TYPE.tag
+    | ENTITY_TYPE.circle
+    | ENTITY_TYPE.collection
+  onUploaded: (assetId: string | null) => void
+  onUploadStart: () => void
+  onUploadEnd: () => void
+  type?: 'circle' | 'collection'
+
+  bookTitle?: string
+  bookArticleCount?: number
 } & CoverProps
 
 export const CoverUploader = ({
@@ -61,8 +70,12 @@ export const CoverUploader = ({
   entityId,
   entityType,
   inEditor,
-  onUpload,
+  onUploaded,
+  onUploadStart,
+  onUploadEnd,
   type,
+  bookTitle,
+  bookArticleCount,
 }: CoverUploaderProps) => {
   const { lang } = useContext(LanguageContext)
 
@@ -87,24 +100,24 @@ export const CoverUploader = ({
     event.target.value = ''
 
     if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant="上傳檔案超過 5 MB"
-                zh_hans="上传文件超过 5 MB"
-                en="upload file exceed 5 MB"
-              />
-            ),
-          },
-        })
-      )
+      toast.error({
+        message: (
+          <Translate
+            zh_hant="上傳檔案超過 5 MB"
+            zh_hans="上传文件超过 5 MB"
+            en="upload file exceed 5 MB"
+          />
+        ),
+      })
+
       return
     }
 
     try {
+      if (onUploadStart) {
+        onUploadStart()
+      }
+
       const { data } = await upload({
         variables: {
           input: { file, type: assetType, entityId, entityType },
@@ -115,54 +128,33 @@ export const CoverUploader = ({
 
       if (id && path) {
         setCover(path)
-        onUpload(id)
+        onUploaded(id)
       } else {
         throw new Error()
       }
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureUploadImage" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="failureUploadImage" />,
+      })
     }
-  }
 
-  const removeCover = () => {
-    setCover(undefined)
-    onUpload(null)
+    if (onUploadEnd) {
+      onUploadEnd()
+    }
   }
 
   const Mask = () => (
     <div className={styles.mask}>
       {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
-
-      {initCover && (
-        <section className={styles.delete}>
-          <Button
-            size={[null, '1.25rem']}
-            spacing={[0, 'xtight']}
-            borderColor="white"
-            borderWidth="sm"
-            onClick={removeCover}
-          >
-            <TextIcon color="white" size="xs">
-              <Translate id="delete" />
-            </TextIcon>
-          </Button>
-        </section>
-      )}
     </div>
   )
 
   const isCircle = type === 'circle'
+  const isCollection = type === 'collection'
 
   return (
     <label className={styles.label} htmlFor={fieldId}>
-      {!isCircle && (
+      {!isCircle && !isCollection && (
         <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
           <Mask />
         </Cover>
@@ -171,6 +163,21 @@ export const CoverUploader = ({
         <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
           <Mask />
         </Cover>
+      )}
+      {isCollection && (
+        <section className={styles.collection}>
+          <section className={styles.collectionContent}>
+            {
+              <Book
+                title={bookTitle || ''}
+                cover={cover}
+                articleCount={bookArticleCount}
+                hasMask
+                loading={loading}
+              />
+            }
+          </section>
+        </section>
       )}
 
       <VisuallyHidden>

@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
@@ -32,6 +33,7 @@ interface FormProps {
   submitCallback: () => void
   switchToCardPayment: () => void
   switchToResetPassword: () => void
+  closeDialog: () => void
 }
 
 interface FormValues {
@@ -44,6 +46,7 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   switchToCardPayment,
   switchToResetPassword,
+  closeDialog,
 }) => {
   const formId = 'subscirbe-circle-form'
 
@@ -113,7 +116,7 @@ const Confirm: React.FC<FormProps> = ({
 
   if (isSubmitting) {
     return (
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Spinner />
       </Dialog.Content>
     )
@@ -121,42 +124,56 @@ const Confirm: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Content hasGrow>
-        <section>
-          <Head circle={circle} />
+      <Dialog.Header closeDialog={closeDialog} title="subscribeCircle" />
 
-          <section className={styles.currentCard}>
-            <TextIcon
-              icon={withIcon(IconStripeCard)({ size: 'md' })}
-              color="grey"
-              size="xs"
-              spacing="tight"
-            >
-              •••• •••• •••• {cardLast4}
+      <Dialog.Content fixedHeight>
+        <Head circle={circle} />
+
+        <section className={styles.currentCard}>
+          <TextIcon
+            icon={withIcon(IconStripeCard)({ size: 'md' })}
+            color="grey"
+            size="xs"
+            spacing="tight"
+          >
+            •••• •••• •••• {cardLast4}
+          </TextIcon>
+
+          <button type="button" onClick={switchToCardPayment}>
+            <TextIcon color="green" size="xs">
+              <Translate zh_hant="更改" zh_hans="更改" />
             </TextIcon>
-
-            <button type="button" onClick={switchToCardPayment}>
-              <TextIcon color="green" size="xs">
-                <Translate zh_hant="更改" zh_hans="更改" />
-              </TextIcon>
-            </button>
-          </section>
-
-          <Hint />
-
-          {InnerForm}
+          </button>
         </section>
+
+        <Hint />
+
+        {InnerForm}
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          bgColor="white"
-          textColor="grey"
-          onClick={switchToResetPassword}
-        >
-          <Translate id="forgetPassword" />？
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate id="forgetPassword" />}
+            color="greyDarker"
+            onClick={switchToResetPassword}
+          />
+        }
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              onClick={closeDialog}
+            />
+            <Dialog.TextButton
+              text={<Translate id="forgetPassword" />}
+              color="greyDarker"
+              onClick={switchToResetPassword}
+            />
+          </>
+        }
+      />
     </>
   )
 }

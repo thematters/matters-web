@@ -1,0 +1,35 @@
+.formContainer {
+  flex-grow: 1;
+
+  /* FIXME: rendering issue when checkbox is checked */
+  & :global(form) {
+    position: relative;
+  }
+}
+
+.createCollection {
+  padding: 0 var(--spacing-base) var(--spacing-base);
+  background: white;
+
+  @media (--sm-up) {
+    padding: 0 var(--spacing-base-loose);
+  }
+
+  & .hr {
+    padding-top: var(--spacing-tight);
+    margin-top: var(--spacing-tight);
+  }
+
+  & .button {
+    padding: var(--spacing-x-tight) 0;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-base-loose);
+    color: var(--color-matters-green);
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: var(--color-matters-green-dark);
+    }
+  }
+}

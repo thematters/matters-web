@@ -8,7 +8,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
 import {
-  ADD_TOAST,
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
@@ -32,6 +31,7 @@ import {
   LanguageContext,
   Layout,
   TextIcon,
+  // toast,
   useMutation,
   VerificationSendCodeButton,
   ViewerContext,
@@ -64,13 +64,9 @@ interface FormValues {
   code: string
 }
 
-const ImportantNotice = ({ isInDialog }: { isInDialog: boolean }) => {
-  const containeClasses = classNames({
-    [styles.notice]: true,
-    [styles.inDialog]: !!isInDialog,
-  })
+const ImportantNotice = () => {
   return (
-    <section className={containeClasses}>
+    <section className={styles.notice}>
       <h4>
         <FormattedMessage
           defaultMessage="As a reminder, the email address will not be used as a login but only as a contact channel."
@@ -251,19 +247,12 @@ const Connect: React.FC<FormProps> = ({
         analytics.identifyUser()
 
         if (loginData?.walletLogin.type === AuthResultType.Login) {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'green',
-                content: (
-                  <FormattedMessage
-                    defaultMessage="Logged in successfully"
-                    description=""
-                  />
-                ),
-              },
-            })
-          )
+          // toast.success({
+          //   message: (
+          //     <FormattedMessage defaultMessage="Logged in successfully" />
+          //   ),
+          // })
+
           redirectToTarget({
             fallback: isInPage ? 'homepage' : 'current',
           })
@@ -285,168 +274,150 @@ const Connect: React.FC<FormProps> = ({
     },
   })
 
-  const msgClasses = classNames({
-    [styles.connectMsg]: true,
-    [styles.isInDialog]: isInDialog,
+  const formClasses = classNames({
+    [styles.form]: true,
+    [styles.inDialog]: isInDialog,
   })
-
-  const subtitleClasses = classNames({
-    [styles.subtitle]: true,
-    [styles.isInDialog]: isInDialog,
-  })
-
-  const containerClasses = classNames({ [styles.container]: !!isInPage })
 
   const InnerForm = (
-    <section className={containerClasses}>
+    <section className={formClasses}>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.List
-          groupName={
-            <FormattedMessage defaultMessage="Connect Wallet" description="" />
-          }
+          groupName={<FormattedMessage defaultMessage="Connect Wallet" />}
           spacingX={isInPage ? 0 : 'base'}
         >
           <Form.List.Item title={maskAddress(values.address)} />
         </Form.List>
 
-        <section className={msgClasses}>
+        <section className={styles.container}>
           <Form.Field.Footer
             fieldMsgId={fieldMsgId}
             hint={
               !errors.address ? (
-                <FormattedMessage
-                  defaultMessage="To change, switch it directly on your wallet"
-                  description=""
-                />
+                <FormattedMessage defaultMessage="To change, switch it directly on your wallet" />
               ) : undefined
             }
             error={errors.address}
           />
-        </section>
 
-        {isSignUp && (
-          <div className={styles.divider}>
-            <hr />
-          </div>
-        )}
+          {isSignUp && (
+            <div className={styles.divider}>
+              <hr />
+            </div>
+          )}
 
-        {isSignUp && (
-          <h3 className={subtitleClasses}>
-            <FormattedMessage
-              defaultMessage="Contact Channel"
-              description="src/components/Forms/WalletAuthForm/Connect.tsx"
-            />
-          </h3>
-        )}
-
-        {isSignUp && (
-          <Form.Input
-            label={<FormattedMessage defaultMessage="Email" description="" />}
-            type="email"
-            name="email"
-            required
-            placeholder={intl.formatMessage({
-              defaultMessage: 'Enter Email',
-              description: '',
-            })}
-            extraButton={
-              <TextIcon
-                icon={<IconInfo16 color="gold" />}
-                color="gold"
-                size="sm"
-                weight="md"
-                spacing="xxtight"
-              >
-                <FormattedMessage
-                  defaultMessage="Not for login"
-                  description="src/components/Forms/WalletAuthForm/Connect.tsx"
-                />
-              </TextIcon>
-            }
-            value={values.email}
-            error={touched.email && errors.email}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            hint={
+          {isSignUp && (
+            <h3 className={styles.subtitle}>
               <FormattedMessage
-                defaultMessage="Email will not be used as a login but only as a contact channel."
-                description=""
-              />
-            }
-          />
-        )}
-
-        {isSignUp && (
-          <Form.Input
-            label={
-              <FormattedMessage
-                defaultMessage="Verification Code"
+                defaultMessage="Contact Channel"
                 description="src/components/Forms/WalletAuthForm/Connect.tsx"
               />
-            }
-            type="text"
-            name="code"
-            required
-            placeholder={intl.formatMessage({
-              defaultMessage: 'Enter verification code',
-              description: 'src/components/Forms/WalletAuthForm/Connect.tsx',
-            })}
-            hint={intl.formatMessage({
-              defaultMessage: 'Code will expire after 20 minutes',
-              description: '',
-            })}
-            value={values.code}
-            error={touched.code && errors.code}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            extraButton={
-              <VerificationSendCodeButton
-                email={values.email}
-                type="register"
-                disabled={!!errors.email}
-              />
-            }
-          />
-        )}
+            </h3>
+          )}
 
-        {isSignUp && (
-          <Form.CheckBox
-            name="tos"
-            checked={values.tos}
-            error={touched.tos && errors.tos}
-            onChange={handleChange}
-            hint={
-              <>
+          {isSignUp && (
+            <Form.Input
+              label={<FormattedMessage defaultMessage="Email" />}
+              hasLabel
+              type="email"
+              name="email"
+              required
+              placeholder={intl.formatMessage({
+                defaultMessage: 'Enter Email',
+              })}
+              extraButton={
+                <TextIcon
+                  icon={<IconInfo16 color="gold" />}
+                  color="gold"
+                  size="sm"
+                  weight="md"
+                  spacing="xxtight"
+                >
+                  <FormattedMessage
+                    defaultMessage="Not for login"
+                    description="src/components/Forms/WalletAuthForm/Connect.tsx"
+                  />
+                </TextIcon>
+              }
+              value={values.email}
+              error={touched.email && errors.email}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              hint={
+                <FormattedMessage defaultMessage="Email will not be used as a login but only as a contact channel." />
+              }
+              spacingTop="base"
+              spacingBottom="base"
+            />
+          )}
+
+          {isSignUp && (
+            <Form.Input
+              label={
                 <FormattedMessage
-                  defaultMessage="I have read and agree to"
-                  description=""
+                  defaultMessage="Verification Code"
+                  description="src/components/Forms/WalletAuthForm/Connect.tsx"
                 />
-                <Link href={PATHS.TOS} legacyBehavior>
-                  <a className="u-link-green" target="_blank">
-                    &nbsp;
-                    <FormattedMessage
-                      defaultMessage="Terms and Privacy Policy"
-                      description=""
-                    />
-                  </a>
-                </Link>
-              </>
-            }
-            required
-          />
-        )}
+              }
+              hasLabel
+              type="text"
+              name="code"
+              required
+              placeholder={intl.formatMessage({
+                defaultMessage: 'Enter verification code',
+                description: 'src/components/Forms/WalletAuthForm/Connect.tsx',
+              })}
+              hint={intl.formatMessage({
+                defaultMessage: 'Code will expire after 20 minutes',
+              })}
+              value={values.code}
+              error={touched.code && errors.code}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              extraButton={
+                <VerificationSendCodeButton
+                  email={values.email}
+                  type="register"
+                  disabled={!!errors.email}
+                />
+              }
+              spacingBottom="base"
+            />
+          )}
 
-        {isSignUp && <ImportantNotice isInDialog={isInDialog} />}
+          {isSignUp && (
+            <Form.CheckBox
+              name="tos"
+              checked={values.tos}
+              error={touched.tos && errors.tos}
+              onChange={handleChange}
+              hint={
+                <>
+                  <FormattedMessage defaultMessage="I have read and agree to" />
+                  <Link href={PATHS.TOS} legacyBehavior>
+                    <a className="u-link-green" target="_blank">
+                      &nbsp;
+                      <FormattedMessage defaultMessage="Terms and Privacy Policy" />
+                    </a>
+                  </Link>
+                </>
+              }
+              required
+            />
+          )}
+
+          {isSignUp && <ImportantNotice />}
+        </section>
       </Form>
     </section>
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting || loading || !account}
-      text={<FormattedMessage defaultMessage="Next" description="" />}
+      text={<FormattedMessage defaultMessage="Next" />}
       loading={isSubmitting || loading}
     />
   )
@@ -458,30 +429,53 @@ const Connect: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="authEntries" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting || loading || !account}
+                text={<FormattedMessage defaultMessage="Next" />}
+                loading={isSubmitting || loading}
+              />
             </>
           }
         />
 
-        {InnerForm}
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="authEntries"
-          leftButton={
-            back ? <Dialog.Header.BackButton onClick={onBack} /> : null
-          }
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="authEntries"
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={onBack}
+            />
+          ) : null
+        }
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

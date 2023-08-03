@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Dialog, Spinner, Translate } from '~/components'
+import { Spinner, Translate } from '~/components'
 
 import { Step } from './types'
 
@@ -31,16 +31,6 @@ const DynamicConnectStripeAccountForm = dynamic(
   { loading: Spinner }
 )
 
-const ContinuePayoutButton = ({
-  forward,
-}: {
-  forward: (step: Step) => void
-}) => (
-  <Dialog.Footer.Button type="button" onClick={() => forward('confirm')}>
-    <Translate zh_hant="繼續提現" zh_hans="继续提现" />
-  </Dialog.Footer.Button>
-)
-
 const PayoutDialogContent = ({
   hasStripeAccount,
   forward,
@@ -56,28 +46,9 @@ const PayoutDialogContent = ({
 
   return (
     <>
-      <Dialog.Header
-        leftButton={
-          prevStep ? <Dialog.Header.BackButton onClick={back} /> : <span />
-        }
-        rightButton={
-          <Dialog.Header.CloseButton closeDialog={closeDialog} textId="close" />
-        }
-        title={
-          isConnectStripeAccount
-            ? 'connectStripeAccount'
-            : isResetPassword
-            ? 'resetPaymentPassword'
-            : isComplete
-            ? 'paymentPayoutComplete'
-            : 'paymentPayout'
-        }
-        closeDialog={closeDialog}
-        closeTextId="close"
-      />
-
       {isConnectStripeAccount && (
         <DynamicConnectStripeAccountForm
+          back={prevStep ? back : undefined}
           nextStep={() => forward('confirm')}
           closeDialog={closeDialog}
         />
@@ -85,9 +56,11 @@ const PayoutDialogContent = ({
 
       {isConfirm && (
         <DynamicPayoutFormConfirm
+          back={prevStep ? back : undefined}
           currency={CURRENCY.HKD}
           submitCallback={() => forward('complete')}
           switchToResetPassword={() => forward('resetPassword')}
+          closeDialog={closeDialog}
         />
       )}
 
@@ -95,8 +68,10 @@ const PayoutDialogContent = ({
 
       {isResetPassword && (
         <DynamicPaymentResetPasswordForm
-          callbackButtons={<ContinuePayoutButton forward={forward} />}
+          callback={() => forward('confirm')}
+          callbackText={<Translate zh_hant="繼續提現" zh_hans="继续提现" />}
           closeDialog={closeDialog}
+          back={back}
         />
       )}
     </>

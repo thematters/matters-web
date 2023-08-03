@@ -1,4 +1,10 @@
+import { Protected } from '~/components'
 import MeSettings from '~/views/Me/Settings/Settings'
-const ProtectedMeSettings = () => <MeSettings />
+
+const ProtectedMeSettings = () => (
+  <Protected>
+    <MeSettings />
+  </Protected>
+)
 
 export default ProtectedMeSettings

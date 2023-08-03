@@ -1,20 +1,18 @@
-.buttons {
-  margin-bottom: var(--spacing-base);
+.footer {
+  @mixin flex-center-space-between;
+
+  padding-left: var(--spacing-x-tight);
+  margin: var(--spacing-x-loose) 0 var(--spacing-base-loose);
 }
 
 .links {
-  @mixin safe-area-botttom;
+  @mixin flex-center-space-between;
 
-  margin-bottom: var(--global-nav-height);
-  font-size: var(--font-size-sm-s);
+  font-size: var(--font-size-xs);
+  line-height: 1.125rem;
   color: var(--color-grey);
+}
 
-  & > * {
-    display: inline-block;
-    margin: 0 var(--spacing-base) var(--spacing-base) 0;
-  }
-
-  & .copyright {
-    color: var(--color-grey-light);
-  }
+.dot {
+  color: var(--color-grey-light);
 }

@@ -1,5 +1,4 @@
 :root {
-  --shadow-light: 0 4px 16px rgb(0 0 0 / 8%);
-  --shadow-dark: 0 4px 16px rgb(0 0 0 / 12%);
-  --shadow-sm-lighter: 0 0 4px rgb(0 0 0 / 16%);
+  --shadow-light: 0 4px 8px rgb(0 0 0 / 8%);
+  --shadow-dark: 0 4px 8px rgb(0 0 0 / 12%);
 }

@@ -6,7 +6,6 @@ import {
   Form,
   Head,
   Layout,
-  ResponsiveWrapper,
   Spinner,
   Translate,
   useMutation,
@@ -89,8 +88,9 @@ const BaseNotificationSettings = () => {
   }
 
   return (
-    <ResponsiveWrapper>
+    <>
       <PreferenceSettings toggle={toggle} settings={settings} />
+
       <Form.List
         groupName={
           <Translate zh_hant="站內通知" zh_hans="站内通知" en="Site" />
@@ -108,7 +108,7 @@ const BaseNotificationSettings = () => {
           href={PATHS.ME_SETTINGS_NOTIFICATION_CIRCLE}
         />
       </Form.List>
-    </ResponsiveWrapper>
+    </>
   )
 }
 
@@ -118,7 +118,9 @@ const NotificationSettings = () => (
 
     <Head title={{ id: 'settingsNotification' }} />
 
-    <BaseNotificationSettings />
+    <Layout.Main.Spacing>
+      <BaseNotificationSettings />
+    </Layout.Main.Spacing>
   </Layout.Main>
 )
 

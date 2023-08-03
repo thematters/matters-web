@@ -63,7 +63,7 @@ export const usePublicQuery = <TData = any, TVariables = OperationVariables>(
 
 export const usePublicLazyQuery = <
   TData = any,
-  TVariables = OperationVariables
+  TVariables = OperationVariables,
 >(
   query: DocumentNode,
   options?: LazyQueryHookOptions<TData, TVariables>,
@@ -95,7 +95,7 @@ export const usePublicLazyQuery = <
  */
 export const useImperativeQuery = <
   TData = any,
-  TVariables = OperationVariables
+  TVariables = OperationVariables,
 >(
   query: DocumentNode,
   options: QueryHookOptions<TData, TVariables> = {}

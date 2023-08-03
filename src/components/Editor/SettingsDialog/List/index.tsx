@@ -59,13 +59,20 @@ const SettingsList = ({
     <>
       <Dialog.Header
         title={<Translate id="settings" />}
-        closeDialog={closeDialog}
-        closeTextId="close"
-        mode="hidden"
+        closeDialog={cancelButtonText ? closeDialog : undefined}
+        closeText={cancelButtonText || undefined}
+        rightBtn={
+          <Dialog.TextButton
+            text={confirmButtonText}
+            onClick={onConfirm ? onConfirm : () => forward('confirm')}
+            loading={saving}
+            disabled={disabled}
+          />
+        }
       />
 
-      <Dialog.Content hasGrow>
-        <ul className={styles.list} role="list">
+      <Dialog.Content noSpacing>
+        <ul className={styles.container} role="list">
           <ListItem
             title={<Translate id="addTags" />}
             subTitle={
@@ -102,34 +109,28 @@ const SettingsList = ({
           <section className={styles.access}>
             <ToggleAccess {...restProps} />
           </section>
-
-          {(confirmButtonText || cancelButtonText) && (
-            <Dialog.Footer>
-              {confirmButtonText && (
-                <Dialog.Footer.Button
-                  bgColor="green"
-                  onClick={onConfirm ? onConfirm : () => forward('confirm')}
-                  loading={saving}
-                  disabled={disabled}
-                >
-                  {confirmButtonText}
-                </Dialog.Footer.Button>
-              )}
-
-              {cancelButtonText && (
-                <Dialog.Footer.Button
-                  bgColor="greyLighter"
-                  textColor="black"
-                  onClick={closeDialog}
-                  disabled={disabled}
-                >
-                  {cancelButtonText}
-                </Dialog.Footer.Button>
-              )}
-            </Dialog.Footer>
-          )}
         </ul>
       </Dialog.Content>
+
+      {(confirmButtonText || cancelButtonText) && (
+        <Dialog.Footer
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text={cancelButtonText}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+              <Dialog.TextButton
+                text={confirmButtonText}
+                onClick={onConfirm ? onConfirm : () => forward('confirm')}
+                loading={saving}
+                disabled={disabled}
+              />
+            </>
+          }
+        />
+      )}
     </>
   )
 }

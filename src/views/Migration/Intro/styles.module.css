@@ -31,7 +31,7 @@
   }
 }
 
-@media (--xl-up) {
+@media (--lg-up) {
   .intro {
     background-image: var(--migration-intro-bg-xl);
   }

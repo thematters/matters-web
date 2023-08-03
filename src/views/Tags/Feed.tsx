@@ -4,8 +4,8 @@ import { analytics, mergeConnections, toPath } from '~/common/utils'
 import {
   EmptyTag,
   InfiniteScroll,
+  Layout,
   QueryError,
-  ResponsiveWrapper,
   Spinner,
   TagDigest,
   usePublicQuery,
@@ -64,8 +64,12 @@ const Feed = ({ type }: Props) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ResponsiveWrapper>
+    <Layout.Main.Spacing hasVertical={false}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
         <ul className={styles.list}>
           {edges.map(({ node: tag }, i) => (
             <li key={tag.id} className={styles.listItem}>
@@ -90,8 +94,8 @@ const Feed = ({ type }: Props) => {
             </li>
           ))}
         </ul>
-      </ResponsiveWrapper>
-    </InfiniteScroll>
+      </InfiniteScroll>
+    </Layout.Main.Spacing>
   )
 }
 

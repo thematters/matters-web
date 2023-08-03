@@ -3,16 +3,14 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
-  ADD_TOAST,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
+import { toPath } from '~/common/utils'
 import {
   IconCollection24,
-  LanguageContext,
   Menu,
-  TextIcon,
+  toast,
   Translate,
   useMutation,
   ViewerContext,
@@ -47,12 +45,8 @@ const ExtendButton = ({
 }) => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
   const [collectArticle] = useMutation<ExtendArticleMutation>(EXTEND_ARTICLE, {
-    variables: {
-      title: translate({ id: 'untitle', lang }),
-      collection: [article.id],
-    },
+    variables: { title: '', collection: [article.id] },
   })
 
   const onClick = async () => {
@@ -66,32 +60,28 @@ const ExtendButton = ({
     }
 
     if (viewer.isInactive) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="FORBIDDEN" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="FORBIDDEN" />,
+      })
+
       return
     }
 
     const { data } = await collectArticle()
-    const { slug, id } = data?.putDraft || {}
+    const { slug = '', id } = data?.putDraft || {}
 
-    if (slug && id) {
+    if (id) {
       const path = toPath({ page: 'draftDetail', slug, id })
       router.push(path.href)
     }
   }
 
   return (
-    <Menu.Item onClick={onClick}>
-      <TextIcon icon={<IconCollection24 size="md" />} size="md" spacing="base">
-        <Translate id="collectArticle" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      text={<Translate id="collectArticle" />}
+      icon={<IconCollection24 size="mdS" />}
+      onClick={onClick}
+    />
   )
 }
 

@@ -5,7 +5,7 @@ import jump from 'jump.js'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
+import { URL_FRAGMENT } from '~/common/enums'
 import { dom, filterComments, mergeConnections } from '~/common/utils'
 import {
   CommentForm,
@@ -16,6 +16,7 @@ import {
   Spinner,
   ThreadComment,
   Throw404,
+  toast,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -146,20 +147,15 @@ const CricleDiscussion = () => {
   )
 
   const submitCallback = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <FormattedMessage
-              defaultMessage="Discussion sent"
-              description="src/views/Circle/Discussion/Discussion.tsx"
-            />
-          ),
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="Discussion sent"
+          description="src/views/Circle/Discussion/Discussion.tsx"
+        />
+      ),
+    })
+
     refetch()
   }
 
@@ -278,6 +274,7 @@ const CricleDiscussion = () => {
         <InfiniteScroll
           hasNextPage={!!pageInfo?.hasNextPage}
           loadMore={loadMore}
+          eof
         >
           <List spacing={['xloose', 0]}>
             {comments.map((comment) => (

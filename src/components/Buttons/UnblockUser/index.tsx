@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
 
-import { ADD_TOAST } from '~/common/enums'
-import { Button, TextIcon, Translate, useMutation } from '~/components'
+import { Button, TextIcon, toast, Translate, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {
   ToggleBlockUserMutation,
@@ -50,14 +49,10 @@ export const UnblockUserButton = ({ user }: UnblockUserButtonProps) => {
       borderColor="red"
       onClick={async () => {
         await unblockUser()
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: <Translate id="successUnblock" />,
-            },
-          })
-        )
+
+        toast.success({
+          message: <Translate id="successUnblock" />,
+        })
       }}
     >
       <TextIcon weight="md" size="xs">

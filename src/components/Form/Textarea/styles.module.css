@@ -1,6 +1,7 @@
 .textarea {
   @mixin form-input;
+  @mixin scrollbar-thin;
 
-  min-height: 8rem;
-  line-height: 1.5rem;
+  height: 8.875rem;
+  resize: none;
 }

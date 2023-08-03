@@ -10,12 +10,8 @@ interface Props {
 const PayToFallback: React.FC<Props> = ({ closeDialog }) => {
   return (
     <>
-      <Dialog.Header
-        leftButton={<span />}
-        rightButton={<span />}
-        title={'failureDonation'}
-      />
-      <Dialog.Content hasGrow>
+      <Dialog.Header title={'failureDonation'} />
+      <Dialog.Content>
         <section className={styles.fallbackContent}>
           <p>
             <Translate
@@ -34,19 +30,17 @@ const PayToFallback: React.FC<Props> = ({ closeDialog }) => {
           <img src={IMAGE_PAYMENT_FAILURE.src} alt="payment failure" />
         </section>
       </Dialog.Content>
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={closeDialog}
-          bgColor="green"
-          textColor="white"
-        >
+
+      <Dialog.Footer
+        closeDialog={closeDialog}
+        closeText={
           <Translate
             zh_hant="回到作品頁，稍後再試"
             zh_hans="回到作品页，稍后再试"
             en="Return to work page, try again later"
           />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+        }
+      />
     </>
   )
 }

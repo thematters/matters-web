@@ -1,60 +1,60 @@
 import classNames from 'classnames'
-
-import { Button, ButtonProps, TextIcon } from '~/components'
+import Link from 'next/link'
 
 import styles from './styles.module.css'
 
 type TabProps = {
+  href?: string
   selected?: boolean
-} & ButtonProps
+  count?: number
+  onClick?: () => void
+}
 
 const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
+  href,
   selected,
+  count,
   children,
-  ...buttonProps
+  onClick,
 }) => {
+  const classes = classNames({
+    [styles.item]: true,
+    [styles.selected]: selected,
+  })
+
+  if (href) {
+    return (
+      <li role="tab" aria-selected={selected} className={classes}>
+        <Link href={href || ''} legacyBehavior>
+          <a>
+            {children}
+            {count && <span className={styles.count}>&nbsp;{count}</span>}
+          </a>
+        </Link>
+      </li>
+    )
+  }
+
   return (
-    <li
-      role="tab"
-      aria-disabled={buttonProps.disabled}
-      aria-selected={selected}
-    >
-      <Button
-        spacing={['xtight', 'base']}
-        bgColor={selected ? 'greenLighter' : 'white'}
-        bgActiveColor={selected ? 'greenLighter' : 'greyLighter'}
-        {...buttonProps}
-      >
-        <TextIcon
-          size="md"
-          color={selected ? 'green' : 'greyDarker'}
-          weight="semibold"
-        >
-          {children}
-        </TextIcon>
-      </Button>
+    <li role="tab" aria-selected={selected} className={classes}>
+      <button onClick={onClick}>
+        {children}
+        {count && <span className={styles.count}>&nbsp;{count}</span>}
+      </button>
     </li>
   )
 }
 
-interface TabsProps {
-  sticky?: boolean
-  side?: React.ReactNode
-}
+interface TabsProps {}
 
 export const Tabs: React.FC<React.PropsWithChildren<TabsProps>> & {
   Tab: typeof Tab
-} = ({ sticky, side, children }) => {
-  const navClasses = classNames({
-    [styles.nav]: true,
-    [styles.sticky]: sticky,
-    [styles.hasSide]: !!side,
-  })
-
+} = ({ children }) => {
   return (
-    <nav className={navClasses}>
-      <ul role="tablist">{children}</ul>
-      {side}
+    <nav className={styles.tabs}>
+      <ul role="tablist" className={styles.list}>
+        {children}
+      </ul>
     </nav>
   )
 }

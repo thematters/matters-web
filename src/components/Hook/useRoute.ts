@@ -18,6 +18,7 @@ type QueryKey =
   | 'mediaHash'
   | 'draftId'
   | 'tagId'
+  | 'collectionId'
   | 'q'
   | 'type'
   | 'provider'

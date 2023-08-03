@@ -65,7 +65,7 @@ const Search = () => {
 
   return (
     <Layout.Main>
-      <Media lessThan="xl">
+      <Media lessThan="lg">
         <Layout.Header
           right={
             <section className={styles.layoutHeaderRight}>
@@ -78,13 +78,14 @@ const Search = () => {
       <Head title={{ id: 'search' }} />
 
       {isHistory && (
-        <Media lessThan="xl">
+        <Media lessThan="lg">
           <SearchHistory
             data={searchHistory?.slice(0, SEARCH_HISTORY_DISPLAY_LENGTH)}
             removeSearchHistoryItem={removeSearchHistory}
           />
         </Media>
       )}
+
       {isAggregate && <AggregateResults />}
     </Layout.Main>
   )

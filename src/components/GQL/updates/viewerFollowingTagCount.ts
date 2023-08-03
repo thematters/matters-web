@@ -17,7 +17,7 @@ const VIEWER_FOLLOWING_TAG_COUNT = gql`
   }
 `
 
-const update = ({
+export const updateViewerFollowingTagCount = ({
   cache,
   type,
 }: {
@@ -51,5 +51,3 @@ const update = ({
     }
   }
 }
-
-export default update

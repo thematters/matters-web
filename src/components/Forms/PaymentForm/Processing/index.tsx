@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { parseUnits } from 'viem'
 import { useAccount, useContractWrite, useNetwork } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
@@ -20,8 +21,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { updateDonation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
-import updateDonation from '~/components/GQL/updates/donation'
 import {
   ArticleDetailPublicQuery,
   PayToMutation,
@@ -129,11 +130,7 @@ const OthersProcessingForm: React.FC<Props> = ({
         <PayToFallback closeDialog={closeDialog} />
       ) : (
         <>
-          <Dialog.Header
-            closeDialog={closeDialog}
-            leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
-            title="donation"
-          />
+          <Dialog.Header title="donation" />
           <Dialog.Content>
             <section>
               <PaymentInfo
@@ -290,9 +287,10 @@ const USDTProcessingForm: React.FC<Props> = ({
     <>
       <Dialog.Header
         closeDialog={closeDialog}
-        leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
+        closeText={<FormattedMessage defaultMessage="Close" />}
         title="donation"
       />
+
       <Dialog.Content>
         <section>
           <PaymentInfo

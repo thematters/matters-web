@@ -13,6 +13,11 @@ export const stripHtml = (html: string, replacement = ' ') =>
   (String(html) || '')
     .replace(/(<\/p><p>|&nbsp;)/g, ' ') // replace line break and space first
     .replace(/(<([^>]+)>)/gi, replacement)
+
+export const collapseContent = (content?: string | null) => {
+  return stripHtml(content ? content.replace(/\r?\n|\r|\s\s/g, '') : '', '')
+}
+
 /**
  * Return beginning of text in html as summary, split on sentence break within buffer range.
  * @param html - html string to extract summary
@@ -104,13 +109,13 @@ export const optimizeEmbed = (content: string) => {
         return /* html */ `
       <picture>
         <source
-          srcSet=${toSizedImageURL({ url: src, size: '1280w' })}
+          srcSet=${toSizedImageURL({ url: src, width: 1376 })}
           onerror="this.srcset='${src}'"
         />
 
         <img
           src=${src}
-          srcSet=${toSizedImageURL({ url: src, size: '1280w' })}
+          srcSet=${toSizedImageURL({ url: src, width: 1376 })}
           loading="lazy"
         />
       </picture>

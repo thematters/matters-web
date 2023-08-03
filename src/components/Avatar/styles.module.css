@@ -162,6 +162,48 @@
   }
 }
 
+/* 76px */
+.xxxlm {
+  width: 4.75rem;
+  height: 4.75rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        transform: translateX(25%);
+      }
+    }
+  }
+}
+
+/* 88px */
+.xxxll {
+  width: 5.5rem;
+  height: 5.5rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        transform: translateX(25%);
+      }
+    }
+  }
+}
+
+/* 120px */
+.xxxxl {
+  width: 7.5rem;
+  height: 7.5rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        transform: translateX(25%);
+      }
+    }
+  }
+}
+
 .ring {
   &.civicLiker {
     background-image: var(--avatar-ring-civic-liker);

@@ -24,12 +24,7 @@ const InvitationSentTitle = (
  */
 const InvitationSent = ({ closeDialog }: Props) => (
   <>
-    <Dialog.Header
-      title={InvitationSentTitle}
-      closeDialog={closeDialog}
-      closeTextId="cancel"
-      mode="hidden"
-    />
+    <Dialog.Header title={InvitationSentTitle} />
 
     <Dialog.Message>
       <h3>{InvitationSentTitle}</h3>
@@ -41,15 +36,20 @@ const InvitationSent = ({ closeDialog }: Props) => (
       </p>
     </Dialog.Message>
 
-    <Dialog.Footer>
-      <Dialog.Footer.Button
-        bgColor="greyLighter"
-        textColor="black"
-        onClick={closeDialog}
-      >
-        <FormattedMessage defaultMessage="I see" description="" />
-      </Dialog.Footer.Button>
-    </Dialog.Footer>
+    <Dialog.Footer
+      btns={
+        <Dialog.RoundedButton
+          text={<FormattedMessage defaultMessage="I see" />}
+          onClick={closeDialog}
+        />
+      }
+      smUpBtns={
+        <Dialog.TextButton
+          text={<FormattedMessage defaultMessage="I see" />}
+          onClick={closeDialog}
+        />
+      }
+    />
   </>
 )
 

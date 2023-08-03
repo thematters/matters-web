@@ -1,7 +1,8 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { OPEN_RECOMMEND_TAG_DIALOG } from '~/common/enums'
-import { Dialog, Tabs, Translate, useDialogSwitch } from '~/components'
+import { Dialog, SegmentedTabs, Translate, useDialogSwitch } from '~/components'
 import { useEventListener } from '~/components/Hook'
 
 import Feed, { FeedType } from './Feed'
@@ -26,15 +27,17 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
     <>
       {children && children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={<Translate zh_hant="追蹤標籤" zh_hans="追踪标签" />}
+          title={
+            <Translate zh_hant="追蹤標籤" zh_hans="追踪标签" en="Follow Tags" />
+          }
           closeDialog={closeDialog}
-          closeTextId="cancel"
+          closeText={<FormattedMessage defaultMessage="Close" />}
         />
 
-        <Dialog.Content hasGrow>
-          <Dialog.Message align="left">
+        <Dialog.Content noSpacing>
+          <Dialog.Message align="left" smUpAlign="left">
             <p className={styles.message}>
               <Translate
                 zh_hant="挑選至少"
@@ -50,17 +53,39 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
             </p>
           </Dialog.Message>
 
-          <Tabs>
-            <Tabs.Tab onClick={() => setFeed('hottest')} selected={isHottest}>
-              <Translate zh_hant="熱門標籤" zh_hans="热门标签" />
-            </Tabs.Tab>
-            <Tabs.Tab onClick={() => setFeed('selected')} selected={isSelected}>
-              <Translate zh_hant="編輯精選" zh_hans="编辑精选" />
-            </Tabs.Tab>
-          </Tabs>
+          <section className={styles.tabs}>
+            <SegmentedTabs>
+              <SegmentedTabs.Tab
+                onClick={() => setFeed('hottest')}
+                selected={isHottest}
+              >
+                <Translate zh_hant="熱門標籤" zh_hans="热门标签" en="Hottest" />
+              </SegmentedTabs.Tab>
+              <SegmentedTabs.Tab
+                onClick={() => setFeed('selected')}
+                selected={isSelected}
+              >
+                <Translate
+                  zh_hant="編輯精選"
+                  zh_hans="编辑精选"
+                  en="Featured"
+                />
+              </SegmentedTabs.Tab>
+            </SegmentedTabs>
+          </section>
+
+          <Feed type={feed} />
         </Dialog.Content>
 
-        <Feed type={feed} />
+        <Dialog.Footer
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Close" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+        />
       </Dialog>
     </>
   )

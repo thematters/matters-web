@@ -9,7 +9,6 @@ import {
 } from '~/common/enums'
 import {
   Dialog,
-  // ReCaptchaProvider,
   Spinner,
   useDialogSwitch,
   useEventListener,
@@ -96,12 +95,7 @@ const BaseUniversalAuthDialog = ({
   )
 
   return (
-    <Dialog
-      size="sm"
-      isOpen={show}
-      onDismiss={closeDialog}
-      testId={TEST_ID.DIALOG_AUTH}
-    >
+    <Dialog isOpen={show} onDismiss={closeDialog} testId={TEST_ID.DIALOG_AUTH}>
       {currStep === 'select-login-method' && (
         <DynamicSelectAuthMethodForm
           purpose="dialog"
@@ -124,7 +118,6 @@ const BaseUniversalAuthDialog = ({
         />
       )}
       {currStep === 'wallet-connect' && (
-        // <ReCaptchaProvider>
         <DynamicWalletAuthFormConnect
           purpose="dialog"
           submitCallback={(type?: AuthResultType) => {
@@ -133,9 +126,8 @@ const BaseUniversalAuthDialog = ({
             }
           }}
           closeDialog={closeDialog}
-          back={() => forward('wallet-select')}
+          back={() => forward('select-login-method')}
         />
-        // </ReCaptchaProvider>
       )}
 
       {/* Email */}
@@ -149,7 +141,6 @@ const BaseUniversalAuthDialog = ({
         />
       )}
       {currStep === 'email-sign-up-init' && (
-        // <ReCaptchaProvider>
         <DynamicEmailSignUpFormInit
           purpose="dialog"
           submitCallback={() => forward('email-verification-sent')}
@@ -157,10 +148,13 @@ const BaseUniversalAuthDialog = ({
           closeDialog={closeDialog}
           back={() => forward('email-login')}
         />
-        // </ReCaptchaProvider>
       )}
       {currStep === 'email-verification-sent' && (
-        <VerificationLinkSent type="changePassword" purpose="dialog" />
+        <VerificationLinkSent
+          type="changePassword"
+          purpose="dialog"
+          closeDialog={closeDialog}
+        />
       )}
       {currStep === 'reset-password-request' && (
         <DynamicChangePasswordFormRequest
@@ -174,7 +168,10 @@ const BaseUniversalAuthDialog = ({
 
       {/* Misc */}
       {currStep === 'complete' && (
-        <DynamicEmailSignUpFormComplete purpose="dialog" />
+        <DynamicEmailSignUpFormComplete
+          purpose="dialog"
+          closeDialog={closeDialog}
+        />
       )}
     </Dialog>
   )

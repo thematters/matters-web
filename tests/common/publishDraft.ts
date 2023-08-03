@@ -47,7 +47,7 @@ export const publishDraft = async ({
       ),
       string | undefined,
       boolean | undefined,
-      boolean | undefined
+      boolean | undefined,
     ]
 
   await draftDetail.checkResponse({ allow: allowResponse })

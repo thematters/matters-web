@@ -97,18 +97,11 @@ const TagsFeed = () => {
           viewAll={false}
         />
       </Media>
-      <Media between={['md', 'xl']}>
+      <Media greaterThanOrEqual="md">
         <SectionHeader
           type="tags"
           rightButton={<ShuffleButton onClick={shuffle} />}
           viewAll={true}
-        />
-      </Media>
-      <Media greaterThanOrEqual="xl">
-        <SectionHeader
-          type="tags"
-          rightButton={<ShuffleButton onClick={shuffle} />}
-          viewAll={false}
         />
       </Media>
     </>
@@ -158,7 +151,7 @@ const TagsFeed = () => {
             }}
             textAlign="center"
           >
-            <FormattedMessage defaultMessage="View All" description="" />
+            <FormattedMessage defaultMessage="View All" />
           </ViewMoreCard>
         </section>
       </Media>

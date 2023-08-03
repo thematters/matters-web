@@ -1,0 +1,47 @@
+import React from 'react'
+import { FormattedMessage } from 'react-intl'
+
+import { toPath, UtmParams } from '~/common/utils'
+import { Card } from '~/components'
+import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
+
+import { ArticleDigestTitle } from '../Title'
+import styles from './styles.module.css'
+
+export type ArticleDigestArchiveProps = {
+  article: ArticleDigestTitleArticleFragment
+} & UtmParams
+
+export const ArticleDigestArchive = ({
+  article,
+  utm_source,
+  utm_medium,
+}: ArticleDigestArchiveProps) => {
+  const path = toPath({
+    page: 'articleDetail',
+    article,
+    utm_source,
+    utm_medium,
+  })
+
+  return (
+    <Card {...path} spacing={['base', 0]} bgActiveColor="none">
+      <section className={styles.container}>
+        <section className={styles.left}>
+          <ArticleDigestTitle
+            article={article}
+            textSize="sm"
+            textWeight="normal"
+            lineClamp={1}
+          />
+        </section>
+        <section className={styles.right}>
+          <FormattedMessage
+            defaultMessage="Archived"
+            description="src/components/ArticleDigest/Archive/index.tsx"
+          />
+        </section>
+      </section>
+    </Card>
+  )
+}

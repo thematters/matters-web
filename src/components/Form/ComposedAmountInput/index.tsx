@@ -123,9 +123,13 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
 
   hint,
   error,
+  hintAlign,
 
   lang,
   customAmount,
+
+  spacingTop,
+  spacingBottom,
 
   ...inputProps
 }) => {
@@ -149,7 +153,7 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
 
   return (
     <section className={styles.amountInput}>
-      <Field>
+      <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
         <ul className={styles.radioInputOptions}>
           {options.map((option) => (
             <AmountOption {...baseInputProps} key={option} amount={option} />
@@ -159,7 +163,9 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
         {customAmount && (
           <section className={styles.customInput}>
             <input
-              className={customAmountError ? 'error' : ''}
+              className={
+                customAmountError ? `error ${styles.input}` : styles.input
+              }
               type="number"
               name="customAmount"
               placeholder={translate({ id: 'enterCustomAmount', lang })}
@@ -177,7 +183,12 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
           </section>
         )}
 
-        <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+        <Field.Footer
+          fieldMsgId={fieldMsgId}
+          hint={hint}
+          error={error}
+          hintAlign={hintAlign}
+        />
       </Field>
     </section>
   )

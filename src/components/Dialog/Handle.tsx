@@ -1,7 +1,4 @@
-import { useContext } from 'react'
-
-import { translate } from '~/common/utils'
-import { LanguageContext } from '~/components'
+import { useIntl } from 'react-intl'
 
 import styles from './styles.module.css'
 
@@ -10,13 +7,13 @@ interface HandleProps {
 }
 
 const Handle: React.FC<HandleProps> = ({ closeDialog, ...props }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   return (
     <button
       type="button"
       className={styles.handle}
-      aria-label={translate({ id: 'close', lang })}
+      aria-label={intl.formatMessage({ defaultMessage: 'Close' })}
       onClick={closeDialog}
       {...props}
     >

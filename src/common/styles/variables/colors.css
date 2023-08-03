@@ -1,6 +1,7 @@
 :root {
   --color-matters-gold: #c0a46b;
   --color-matters-green: #0d6763;
+  --color-matters-green-dark: #0a524f;
   --color-black: #333;
   --color-grey-darkest: #505050;
   --color-grey-darker: #808080;
@@ -9,6 +10,7 @@
   --color-grey-light: #ddd;
   --color-grey-lighter: #f7f7f7;
   --color-white: #fff;
+  --color-red-dark: #a04a34;
   --color-red: #c85c41;
   --color-red-lighter: #fae7e3;
   --color-green-lighter: #f2faf7;
@@ -18,7 +20,6 @@
 
   /* hover */
   --color-matters-gold-active: #b69c66;
-  --color-matters-green-active: #0c625e;
   --color-grey-lighter-active: #ededed;
 
   /* line */

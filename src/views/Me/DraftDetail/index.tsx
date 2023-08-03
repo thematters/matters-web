@@ -1,8 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import {
+  ASSET_TYPE,
+  ENTITY_TYPE,
+  MAX_ARTICLE_CONTENT_LENGTH,
+} from '~/common/enums'
 import { stripHtml } from '~/common/utils'
 import {
   EmptyLayout,
@@ -11,6 +16,7 @@ import {
   Media,
   Spinner,
   Throw404,
+  toast,
   useRoute,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
@@ -120,6 +126,23 @@ const DraftDetail = () => {
         return
       }
 
+      // check content length
+      const contentCount = newDraft.content?.length || 0
+      if (contentCount > MAX_ARTICLE_CONTENT_LENGTH) {
+        toast.error({
+          message: (
+            <FormattedMessage
+              defaultMessage={`Content length exceeds limit ({length}/{limit})`}
+              values={{
+                length: contentCount,
+                limit: MAX_ARTICLE_CONTENT_LENGTH,
+              }}
+            />
+          ),
+        })
+        return
+      }
+
       setSaveStatus('saving')
 
       await setContent({ variables: { id: draft?.id, ...newDraft } })
@@ -140,13 +163,14 @@ const DraftDetail = () => {
   return (
     <Layout.Main
       aside={
-        <Media greaterThanOrEqual="xl">
+        <Media greaterThanOrEqual="lg">
           <Sidebar draft={draft} ownCircles={ownCircles} />
         </Media>
       }
       inEditor
     >
       <Layout.Header
+        mode="compact"
         right={
           <>
             <SaveStatus status={saveStatus} />
@@ -171,11 +195,11 @@ const DraftDetail = () => {
 
       <PublishState draft={draft} />
 
-      <Layout.Spacing>
+      <Layout.Main.Spacing>
         <Editor draft={draft} update={update} upload={upload} />
-      </Layout.Spacing>
+      </Layout.Main.Spacing>
 
-      <Media lessThan="xl">
+      <Media lessThan="lg">
         <BottomBar draft={draft} ownCircles={ownCircles} />
       </Media>
     </Layout.Main>

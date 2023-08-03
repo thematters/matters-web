@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { PATHS } from '~/common/enums'
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 
@@ -12,12 +14,8 @@ const Ask = ({ children }: AskProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
-        <Dialog.Header
-          title="changeUserName"
-          closeDialog={closeDialog}
-          mode="inner"
-        />
+      <Dialog isOpen={show} onDismiss={closeDialog}>
+        <Dialog.Header title="changeUserName" />
 
         <Dialog.Message>
           <p>
@@ -29,19 +27,21 @@ const Ask = ({ children }: AskProps) => {
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button href={PATHS.ME_SETTINGS_CHANGE_USERNAME}>
-            <Translate id="confirm" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="greyLighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="close" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={<FormattedMessage defaultMessage="Confirm" />}
+              href={PATHS.ME_SETTINGS_CHANGE_USERNAME}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Confirm" />}
+              href={PATHS.ME_SETTINGS_CHANGE_USERNAME}
+            />
+          }
+        />
       </Dialog>
     </>
   )

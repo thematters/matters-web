@@ -23,7 +23,7 @@ const BaseLikeCoinDialog: React.FC<LikeCoinDialogProps> = ({ children }) => {
     <>
       {children && children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent closeDialog={closeDialog} />
       </Dialog>
     </>

@@ -51,7 +51,7 @@ export function useCache<T>(
 ): [
   T,
   Dispatch<SetStateAction<T>>,
-  ({ children }: { children: ReactNode }) => JSX.Element
+  ({ children }: { children: ReactNode }) => JSX.Element,
 ] {
   const [cache, setCache] = useState<T>(initialCache)
 

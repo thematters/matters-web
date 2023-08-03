@@ -1,12 +1,6 @@
 import gql from 'graphql-tag'
 
-import {
-  IconExpand16,
-  Menu,
-  TextIcon,
-  Translate,
-  useMutation,
-} from '~/components'
+import { IconExpand16, Menu, Translate, useMutation } from '~/components'
 import { UncollapseCommentMutation } from '~/gql/graphql'
 
 const UNCOLLAPSE_COMMENT = gql`
@@ -36,11 +30,11 @@ const UncollapseButton = ({ commentId }: { commentId: string }) => {
   )
 
   return (
-    <Menu.Item onClick={uncollapseComment}>
-      <TextIcon icon={<IconExpand16 size="md" />} size="md" spacing="base">
-        <Translate zh_hant="取消闔上" zh_hans="取消折叠" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      text={<Translate zh_hant="取消闔上" zh_hans="取消折叠" />}
+      icon={<IconExpand16 size="mdS" />}
+      onClick={uncollapseComment}
+    />
   )
 }
 

@@ -1,5 +1,6 @@
 import contentHash from '@ensdomains/content-hash'
 import { Fragment, useContext, useEffect, useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { namehash } from 'viem/ens'
 import {
   useAccount,
@@ -16,14 +17,12 @@ import {
   featureSupportedChains,
   maskAddress,
   PublicResolverABI,
-  translate,
 } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
   Dialog,
   IconCopy16,
-  LanguageContext,
   TextIcon,
   Translate,
   useTargetNetwork,
@@ -39,15 +38,17 @@ interface LinkENSProps {
   user: UserProfileUserPublicQuery['user']
   switchToWalletSelect: () => void
   switchToComplete: (txHash: string) => void
+  closeDialog: () => void
 }
 
 const LinkENS = ({
   user,
   switchToWalletSelect,
   switchToComplete,
+  closeDialog,
 }: LinkENSProps) => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const { address } = useAccount()
   const isConnectedAddress =
@@ -105,12 +106,22 @@ const LinkENS = ({
     }
   }, [address])
 
+  const CancelButton = () => (
+    <Dialog.TextButton
+      text={<FormattedMessage defaultMessage="Cancel" />}
+      color="greyDarker"
+      onClick={closeDialog}
+    />
+  )
+
   /**
    * Switch Network
    */
   if (isUnsupportedNetwork || isSwitchingNetwork) {
     return (
       <Fragment key="network">
+        <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
+
         <Dialog.Content>
           <section className={styles.content}>
             {isSwitchingNetwork ? (
@@ -127,17 +138,43 @@ const LinkENS = ({
           </section>
         </Dialog.Content>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            onClick={switchToTargetNetwork}
-            loading={isSwitchingNetwork}
-          >
-            <Translate zh_hant="切換到 " zh_hans="切换到 " en="Switch to " />
-            {targetNetwork.name}
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-
         <ENSDescription />
+
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <>
+                  <Translate
+                    zh_hant="切換到 "
+                    zh_hans="切换到 "
+                    en="Switch to "
+                  />
+                  {targetNetwork.name}
+                </>
+              }
+              onClick={switchToTargetNetwork}
+            />
+          }
+          smUpBtns={
+            <>
+              <CancelButton />
+              <Dialog.TextButton
+                text={
+                  <>
+                    <Translate
+                      zh_hant="切換到 "
+                      zh_hans="切换到 "
+                      en="Switch to "
+                    />
+                    {targetNetwork.name}
+                  </>
+                }
+                loading={isSwitchingNetwork}
+              />
+            </>
+          }
+        />
       </Fragment>
     )
   }
@@ -148,16 +185,23 @@ const LinkENS = ({
   if (!isConnectedAddress) {
     return (
       <Fragment key="reconnect">
+        <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
+
         <Dialog.Content>
           <section className={styles.content}>
             <LinkENSIntro ensName={ensName} />
 
             <p className={styles.error}>
               <Translate id="reconnectHint" />
-              <CopyToClipboard text={viewer.info.ethAddress || ''}>
+              <CopyToClipboard
+                text={viewer.info.ethAddress || ''}
+                successMessage={
+                  <FormattedMessage defaultMessage="Address copied" />
+                }
+              >
                 <Button
                   spacing={['xtight', 'xtight']}
-                  aria-label={translate({ id: 'copy', lang })}
+                  aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
                 >
                   <TextIcon
                     icon={<IconCopy16 color="black" size="xs" />}
@@ -172,23 +216,38 @@ const LinkENS = ({
           </section>
         </Dialog.Content>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="green"
-            textColor="white"
-            onClick={() => {
-              disconnect()
-            }}
-          >
-            <Translate
-              zh_hant="重新連接錢包"
-              zh_hans="重新连接钱包"
-              en="Reconnect Wallet"
-            />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-
         <ENSDescription />
+
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <Translate
+                  zh_hant="重新連接錢包"
+                  zh_hans="重新连接钱包"
+                  en="Reconnect Wallet"
+                />
+              }
+              onClick={() => disconnect()}
+            />
+          }
+          smUpBtns={
+            <>
+              <CancelButton />
+
+              <Dialog.TextButton
+                text={
+                  <Translate
+                    zh_hant="重新連接錢包"
+                    zh_hans="重新连接钱包"
+                    en="Reconnect Wallet"
+                  />
+                }
+                onClick={() => disconnect()}
+              />
+            </>
+          }
+        />
       </Fragment>
     )
   }
@@ -198,6 +257,8 @@ const LinkENS = ({
    */
   return (
     <Fragment key="link">
+      <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
+
       <Dialog.Content>
         <section className={styles.content}>
           <LinkENSIntro ensName={ensName} />
@@ -214,16 +275,26 @@ const LinkENS = ({
         </section>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={linkIPNStoENS}
-          loading={isLoading || txConfirming}
-        >
-          <Translate id="bindIPNStoENS" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-
       <ENSDescription />
+
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate id="bindIPNStoENS" />}
+            onClick={linkIPNStoENS}
+          />
+        }
+        smUpBtns={
+          <>
+            <CancelButton />
+
+            <Dialog.TextButton
+              text={<Translate id="bindIPNStoENS" />}
+              loading={isLoading || txConfirming}
+            />
+          </>
+        }
+      />
     </Fragment>
   )
 }

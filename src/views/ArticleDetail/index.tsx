@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { ADD_TOAST, URL_QS } from '~/common/enums'
+import { URL_QS } from '~/common/enums'
 import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
@@ -19,6 +19,7 @@ import {
   Spinner,
   Throw404,
   Title,
+  toast,
   Translate,
   useFeatures,
   usePublicQuery,
@@ -162,20 +163,15 @@ const BaseArticleDetail = ({
   const translate = () => {
     getTranslation({ variables: { mediaHash, language: preferredLang } })
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="正在透過 Google 翻譯..."
-              zh_hans="正在通过 Google 翻译..."
-              en="Translating by Google..."
-            />
-          ),
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <Translate
+          zh_hant="正在透過 Google 翻譯..."
+          zh_hans="正在通过 Google 翻译..."
+          en="Translating by Google..."
+        />
+      ),
+    })
   }
 
   const toggleTranslate = () => {
@@ -185,25 +181,25 @@ const BaseArticleDetail = ({
       translate()
     }
   }
+
   useEffect(() => {
     if (!!autoTranslation) {
-      setTimeout(() => {
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'black',
-              placement: 'bottom',
-              duration: 8 * 1000,
-              clearable: true,
-              content: (
-                <TranslationToast.Content language={autoTranslation.language} />
-              ),
-              switchContent: (
-                <TranslationToast.SwitchContent onClick={toggleTranslate} />
-              ),
-            },
-          })
-        )
+      toast.success({
+        message: (
+          <TranslationToast.Content language={autoTranslation.language} />
+        ),
+        actions: [
+          {
+            content: (
+              <Translate
+                zh_hans="阅读原文"
+                zh_hant="閱讀原文"
+                en="View original content"
+              />
+            ),
+            onClick: toggleTranslate,
+          },
+        ],
       })
     }
   }, [])
@@ -238,6 +234,7 @@ const BaseArticleDetail = ({
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header
+        mode="compact"
         right={
           <UserDigest.Rich
             user={article.author}
@@ -344,7 +341,7 @@ const BaseArticleDetail = ({
           <DynamicResponse id={article.id} lock={!canReadFullContent} />
         </section>
 
-        <Media lessThan="xl">
+        <Media lessThan="lg">
           <RelatedArticles article={article} />
         </Media>
       </section>
@@ -572,8 +569,8 @@ const ArticleDetail = ({
               />
             ) : article.state === 'banned' ? (
               <Translate
-                zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
-                zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
+                zh_hant="該作品因違反社區約章，已被站方強制歸檔。"
+                zh_hans="该作品因违反社区约章，已被站方强制封存。"
                 en="This work is archived due to violation of community guidelines."
               />
             ) : null

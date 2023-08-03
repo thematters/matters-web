@@ -30,6 +30,7 @@
 /* layout */
 .intro {
   & img {
+    align-self: center;
     justify-self: center;
   }
 
@@ -39,6 +40,26 @@
   }
 
   @media (--md-up) {
+    & img {
+      grid-column: col-start 1 / span 5;
+    }
+
+    & .content {
+      grid-column: col-start 6 / span 3;
+    }
+
+    & .feature {
+      & .content {
+        grid-column: col-start 2 / span 3;
+      }
+
+      & img {
+        grid-column: col-start 5 / span 5;
+      }
+    }
+  }
+
+  @media (--lg-up) {
     & img {
       grid-column: col-start 1 / span 5;
     }
@@ -82,7 +103,7 @@
     }
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 4rem 0 7.5rem;
     background-size: 408px;
 
@@ -92,7 +113,7 @@
     }
   }
 
-  @media (--md-up) {
+  @media (--lg-up) {
     & img {
       margin-bottom: 0;
     }
@@ -101,14 +122,10 @@
       text-align: left;
     }
   }
-
-  @media (--lg-up) {
-    padding: 5rem 0 12rem;
-  }
 }
 
 .community {
-  padding: 3.25rem var(--spacing-base);
+  padding: 4.375rem var(--spacing-base);
   color: var(--color-white);
   background-color: var(--color-black);
 
@@ -131,7 +148,7 @@
     }
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     padding: 5rem 0;
 
     & img {
@@ -140,7 +157,7 @@
     }
   }
 
-  @media (--md-up) {
+  @media (--lg-up) {
     & img {
       margin-bottom: 0;
     }
@@ -152,16 +169,22 @@
 }
 
 .feature {
-  padding: 3.25rem var(--spacing-base) 0;
+  padding: 5rem var(--spacing-base);
   background-color: var(--color-green-lighter);
   background-image: var(--about-wave-bg-2);
   background-position: right bottom;
   background-size: 100%;
 
   & img {
-    width: 328px;
-    height: 506px;
-    margin-top: var(--spacing-x-loose);
+    width: 258px;
+    height: 312px;
+    margin-top: var(--spacing-xx-loose);
+    margin-bottom: var(--spacing-xx-loose);
+
+    @media (--sm-up) {
+      width: 328px;
+      height: 398px;
+    }
   }
 
   & .buttons {
@@ -179,11 +202,11 @@
     text-align: center;
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     background-size: 1202px;
   }
 
-  @media (--md-up) {
+  @media (--lg-up) {
     & img {
       margin-top: 0;
     }
@@ -194,10 +217,6 @@
 
     & .flag {
       text-align: left;
-    }
-
-    & .content {
-      padding-bottom: 8rem;
     }
   }
 }

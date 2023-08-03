@@ -5,9 +5,9 @@
   height: var(--input-height);
   padding: 0 0 0 var(--spacing-base);
   color: var(--color-grey-dark);
+  caret-color: var(--color-matters-green);
   border-radius: var(--spacing-x-tight);
   transition-property: border-color, background-color;
-  caret-color: var(--color-matters-green);
 
   &.StripeElement--focus {
     color: var(--color-black);

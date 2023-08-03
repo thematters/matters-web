@@ -20,6 +20,10 @@
   }
 }
 
+.title {
+  grid-column: 1 / -1;
+}
+
 .group {
   position: relative;
   grid-column: 1 / -1;

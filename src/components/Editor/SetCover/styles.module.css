@@ -1,11 +1,7 @@
-.container {
-  padding: var(--spacing-base);
-}
-
 .uploader {
   display: block;
   padding: var(--spacing-x-tight) var(--spacing-base);
-  margin-bottom: var(--spacing-loose);
+  margin-bottom: var(--spacing-base);
   border: 2px solid var(--color-grey-light);
   border-style: dashed;
   border-radius: var(--spacing-xx-tight);

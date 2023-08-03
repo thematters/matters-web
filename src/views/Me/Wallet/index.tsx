@@ -13,7 +13,6 @@ import {
   Form,
   Head,
   Layout,
-  ResponsiveWrapper,
   Spinner,
   TextIcon,
   Translate,
@@ -117,7 +116,7 @@ const Wallet = () => {
         />
       </section>
 
-      <ResponsiveWrapper>
+      <Layout.Main.Spacing>
         <Form.List spacingX={0}>
           {hasPaymentPassword && (
             <>
@@ -129,7 +128,7 @@ const Wallet = () => {
           {hasStripeAccount && <ViewStripeAccount />}
           <PaymentPointer />
         </Form.List>
-      </ResponsiveWrapper>
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

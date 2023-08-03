@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Dialog, Spinner, Translate, ViewerContext } from '~/components'
+import { Spinner, Translate, ViewerContext } from '~/components'
 import { PayToMutation } from '~/gql/graphql'
 
 import { BaseDonationDialogProps, Step } from './types'
@@ -59,15 +59,6 @@ const DynamicPaymentSetPasswordForm = dynamic(
 const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
   { loading: Spinner }
-)
-const ContinueDonationButton = ({
-  forward,
-}: {
-  forward: (step: Step) => void
-}) => (
-  <Dialog.Footer.Button onClick={() => forward('setAmount')}>
-    <Translate zh_hant="回到支持" zh_hans="回到支持" en="Back to support" />
-  </Dialog.Footer.Button>
 )
 
 const DonationDialogContent = ({
@@ -144,30 +135,6 @@ const DonationDialogContent = ({
 
   return (
     <>
-      {!isProcessing && !isWalletSelect && (
-        <Dialog.Header
-          closeDialog={closeDialog}
-          leftButton={
-            isAddCredit ? (
-              <Dialog.Header.BackButton onClick={back} />
-            ) : (
-              <Dialog.Header.CloseButton closeDialog={closeDialog} />
-            )
-          }
-          title={
-            isAddCredit
-              ? 'topUp'
-              : isSetPaymentPassword
-              ? 'paymentPassword'
-              : isResetPassword
-              ? 'resetPaymentPassword'
-              : isComplete
-              ? 'successDonation'
-              : 'donation'
-          }
-        />
-      )}
-
       {isCurrencyChoice && (
         <DynamicPayToFormCurrencyChoice
           recipient={recipient}
@@ -179,6 +146,7 @@ const DonationDialogContent = ({
           switchToWalletSelect={() => {
             forward('walletSelect')
           }}
+          closeDialog={closeDialog}
         />
       )}
 
@@ -206,6 +174,9 @@ const DonationDialogContent = ({
           }}
           switchToAddCredit={() => {
             forward('addCredit')
+          }}
+          back={() => {
+            forward('currencyChoice')
           }}
           setTabUrl={setTabUrl}
           setTx={setTx}
@@ -264,14 +235,30 @@ const DonationDialogContent = ({
 
       {isAddCredit && (
         <DynamicAddCreditForm
-          callbackButtons={<ContinueDonationButton forward={forward} />}
+          closeDialog={closeDialog}
+          callback={() => forward('setAmount')}
+          callbackText={
+            <Translate
+              zh_hant="回到支持"
+              zh_hans="回到支持"
+              en="Back to support"
+            />
+          }
         />
       )}
 
       {isResetPassword && (
         <DynamicPaymentResetPasswordForm
-          callbackButtons={<ContinueDonationButton forward={forward} />}
+          callback={() => forward('setAmount')}
+          callbackText={
+            <Translate
+              zh_hant="回到支持"
+              zh_hans="回到支持"
+              en="Back to support"
+            />
+          }
           closeDialog={closeDialog}
+          back={() => forward('currencyChoice')}
         />
       )}
     </>

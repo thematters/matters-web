@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import Sticky from 'react-stickynode'
 
-import { capitalizeFirstLetter } from '~/common/utils'
 import {
   Head,
   Media,
@@ -19,6 +18,7 @@ import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
 import Header from './Header'
 import NavBar from './NavBar'
+import Notice from './Notice'
 import SideFooter from './SideFooter'
 import SideNav from './SideNav'
 import Spacing from './Spacing'
@@ -46,9 +46,9 @@ const DynamicOnboardingTasksWidget = dynamic(
 export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Main: typeof Main
   Header: typeof Header
-  Spacing: typeof Spacing
   FixedMain: typeof FixedMain
   AuthHeader: typeof AuthHeader
+  Notice: typeof Notice
 } = ({ children }) => {
   const { isInPath } = useRoute()
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
@@ -57,10 +57,10 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
     <>
       <Head />
 
-      <div className="l-container full">
-        <main className="l-row">
-          <nav role="navigation" className="l-col-three-left">
-            <section className={styles.sidenav}>
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <nav role="navigation" className={styles.sidenav}>
+            <section className={styles.sideNavContent}>
               <Media greaterThan="sm">
                 <SideNav />
               </Media>
@@ -84,34 +84,26 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
 interface MainProps {
   aside?: React.ReactNode
-  smBgColor?: 'greyLighter'
   inEditor?: boolean
 }
 
-const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
-  aside,
-  smBgColor,
-  inEditor,
-  children,
-}) => {
-  const { isInPath, isPathStartWith } = useRoute()
+const Main: React.FC<React.PropsWithChildren<MainProps>> & {
+  Spacing: typeof Spacing
+} = ({ aside, inEditor, children }) => {
+  const { isInPath } = useRoute()
+  const isInHome = isInPath('HOME')
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
-  const isInCircle = isPathStartWith('/~', true)
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
 
   const { data } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
   const onboardingTasks = data?.clientPreference.onboardingTasks
-  const showOnboardingTasks =
-    !inEditor && !isInArticleDetail && !isInCircle && onboardingTasks?.enabled
+  const showOnboardingTasks = isInHome && onboardingTasks?.enabled
 
   const articleClasses = classNames({
     [styles.article]: true,
-    'l-col-three-mid': true,
-    [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
-      !!smBgColor,
     [styles.hasNavBar]: !isInArticleDetail && !isInDraftDetail,
     [styles.hasOnboardingTasks]: showOnboardingTasks,
   })
@@ -126,22 +118,24 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
           {children}
 
           {showOnboardingTasks && (
-            <Media lessThan="xl">
+            <Media lessThan="lg">
               <DynamicOnboardingTasksNavBar />
             </Media>
           )}
         </PullToRefresh>
       </article>
 
-      <aside className={`l-col-three-right ${styles.aside}`}>
-        <Media greaterThanOrEqual="xl">
-          <Sticky enabled={true} top={32}>
+      <aside className={styles.aside}>
+        <Media greaterThanOrEqual="lg">
+          <Sticky enabled top={0}>
             <section className={styles.content}>
-              {!inEditor && <SearchBar />}
+              <section className={styles.top}>
+                {!inEditor && <SearchBar />}
 
-              {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
+                {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
 
-              {aside}
+                {aside}
+              </section>
 
               {!inEditor && !isInSettings && <SideFooter />}
             </section>
@@ -152,8 +146,10 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   )
 }
 
+Main.Spacing = Spacing
+
 Layout.Main = Main
 Layout.Header = Header
-Layout.Spacing = Spacing
 Layout.FixedMain = FixedMain
 Layout.AuthHeader = AuthHeader
+Layout.Notice = Notice

@@ -1,7 +1,3 @@
-.spacingXtight {
-  margin: var(--spacing-x-tight) 0;
-}
-
-.spacingLoose {
-  margin: var(--spacing-loose) 0;
+.divider {
+  margin: var(--spacing-base-xx-tight) 0;
 }

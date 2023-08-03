@@ -14,17 +14,14 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
     <>
       {children && children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate zh_hant="修訂須知" zh_hans="修订须知" en="Notice" />
           }
-          closeDialog={closeDialog}
-          closeTextId="cancel"
-          mode="inner"
         />
 
-        <Dialog.Message align="left" type="info">
+        <Dialog.Message align="left" smUpAlign="left">
           <p>
             <Translate
               zh_hant="修訂作品正文目前支持增加、刪除或替換中英文字符，"
@@ -66,11 +63,24 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button onClick={closeDialog}>
-            <Translate zh_hant="開始修訂" zh_hans="开始修订" en="Edit" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <Translate zh_hant="開始修訂" zh_hans="开始修订" en="Edit" />
+              }
+              onClick={closeDialog}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={
+                <Translate zh_hant="開始修訂" zh_hans="开始修订" en="Edit" />
+              }
+              onClick={closeDialog}
+            />
+          }
+        />
       </Dialog>
     </>
   )

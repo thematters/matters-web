@@ -2,18 +2,14 @@ import classNames from 'classnames'
 
 import styles from './styles.module.css'
 
-type ContentProps = {
-  noMargin?: boolean
-}
+type ContentProps = {}
 
 const Content: React.FC<React.PropsWithChildren<ContentProps>> = ({
-  noMargin,
   children,
 }) => {
   const contentClass = classNames({
     [styles.content]: true,
-    inputContainer: true, // global selector for `@mixin form-container`
-    [styles.noMargin]: noMargin,
+    inputContainer: true, // global selector for `src/components/Forms/CreateCircleForm/styles.module.css`
   })
 
   return <section className={contentClass}>{children}</section>

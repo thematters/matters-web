@@ -3,8 +3,7 @@ import _filter from 'lodash/filter'
 import _get from 'lodash/get'
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
-import { IconUnPin24, Menu, TextIcon, useMutation } from '~/components'
+import { IconUnSelected20, Menu, toast, useMutation } from '~/components'
 import {
   SetTagUnselectedButtonArticleFragment,
   SetTagUnselectedMutation,
@@ -96,35 +95,29 @@ const SetTagUnselectedButton = ({
   })
 
   const sync = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <FormattedMessage
-              defaultMessage="This article has been removed from Trending"
-              description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
-            />
-          ),
-          duration: 2000,
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="This article has been removed from Trending"
+          description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+        />
+      ),
+    })
   }
 
   return (
     <Menu.Item
-      onClick={async () => {
-        await update()
-      }}
-    >
-      <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
+      text={
         <FormattedMessage
           defaultMessage="Unpin from Trending"
           description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
         />
-      </TextIcon>
-    </Menu.Item>
+      }
+      icon={<IconUnSelected20 size="mdS" />}
+      onClick={async () => {
+        await update()
+      }}
+    />
   )
 }
 

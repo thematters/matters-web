@@ -75,7 +75,11 @@ const Feed = ({ type }: Props) => {
       <section className={styles.feed}>
         <EmptyWarning
           description={
-            <Translate zh_hant="還沒有可追蹤標籤" zh_hans="还没有可追踪标签" />
+            <Translate
+              zh_hant="還沒有可追蹤標籤"
+              zh_hans="还没有可追踪标签"
+              en="No tags yet."
+            />
           }
         />
       </section>

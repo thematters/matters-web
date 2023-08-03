@@ -1,0 +1,7 @@
+.container.inPage {
+  padding: var(--spacing-base) var(--spacing-base) 0;
+
+  @media (--sm-up) {
+    padding: 0;
+  }
+}

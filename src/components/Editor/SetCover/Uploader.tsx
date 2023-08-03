@@ -4,7 +4,6 @@ import { useContext } from 'react'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ADD_TOAST,
   ASSET_TYPE,
   ENTITY_TYPE,
   UPLOAD_IMAGE_SIZE_LIMIT,
@@ -15,11 +14,12 @@ import {
   IconSpinner16,
   LanguageContext,
   TextIcon,
+  toast,
   Translate,
   useMutation,
 } from '~/components'
+import { updateDraftAssets } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import updateDraftAssets from '~/components/GQL/updates/draftAssets'
 import { AssetFragment, SingleFileUploadMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -72,20 +72,15 @@ const Uploader: React.FC<UploaderProps> = ({
     event.target.value = ''
 
     if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant="上傳檔案超過 5 MB"
-                zh_hans="上传文件超过 5 MB"
-                en="upload file size exceeds 5 MB"
-              />
-            ),
-          },
-        })
-      )
+      toast.error({
+        message: (
+          <Translate
+            zh_hant="上傳檔案超過 5 MB"
+            zh_hans="上传文件超过 5 MB"
+            en="upload file size exceeds 5 MB"
+          />
+        ),
+      })
       return
     }
 
@@ -109,23 +104,13 @@ const Uploader: React.FC<UploaderProps> = ({
         throw new Error()
       }
 
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: <Translate id="successUploadImage" />,
-          },
-        })
-      )
+      toast.success({
+        message: <Translate id="successUploadImage" />,
+      })
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureUploadImage" />,
-          },
-        })
-      )
+      toast.error({
+        message: <Translate id="failureUploadImage" />,
+      })
     }
   }
 
@@ -152,9 +137,9 @@ const Uploader: React.FC<UploaderProps> = ({
 
       <p>
         <Translate
-          zh_hant="上傳一張圖片用作封面，建議尺寸：1600 x 900 像素"
-          zh_hans="上传一张图片用作封面，建议尺寸：1600 x 900 像素"
-          en="Upload an image as cover. Suggested image size: 1600 x 900 pixels"
+          zh_hant="上傳一張照片，建議尺寸 1600 x 900 像素"
+          zh_hans="上传一张照片，建议尺寸 1600 x 900 像素"
+          en="Recommended size 1600 x 900 pixels"
         />
       </p>
 

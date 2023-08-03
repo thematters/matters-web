@@ -1,10 +1,8 @@
-import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
 import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
 import {
   Dialog,
-  Form,
   IconEmail24,
   IconWallet24,
   LanguageSwitch,
@@ -32,61 +30,52 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 }) => {
   const isInPage = purpose === 'page'
 
-  const containerClasses = classNames({ [styles.container]: !!isInPage })
-
   const InnerForm = (
-    <>
-      <section className={containerClasses}>
-        <Form.List spacingX={isInPage ? 0 : 'base'}>
-          <Form.List.Item
-            title={
-              <TextIcon
-                color="black"
-                icon={<IconWallet24 size="md" />}
-                size="md"
-                spacing="xtight"
-              >
-                <FormattedMessage
-                  defaultMessage="Continue with Wallet"
-                  description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-                />
-              </TextIcon>
-            }
-            subtitle={
-              <FormattedMessage
-                defaultMessage="For unregistered or users enabled wallet login"
-                description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-              />
-            }
-            onClick={gotoWalletAuth}
-            role="button"
+    <ul className={styles.select}>
+      <li className={styles.option} role="button" onClick={gotoWalletAuth}>
+        <header className={styles.header}>
+          <TextIcon
+            color="black"
+            icon={<IconWallet24 size="md" />}
+            size="md"
+            spacing="xtight"
+          >
+            <FormattedMessage
+              defaultMessage="Continue with Wallet"
+              description="src/components/Forms/SelectAuthMethodForm/index.tsx"
+            />
+          </TextIcon>
+        </header>
+        <p className={styles.subtitle}>
+          <FormattedMessage
+            defaultMessage="For unregistered or users enabled wallet login"
+            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
           />
-          <Form.List.Item
-            title={
-              <TextIcon
-                color="black"
-                icon={<IconEmail24 size="md" />}
-                size="md"
-                spacing="xtight"
-              >
-                <FormattedMessage
-                  defaultMessage="Continue with Email"
-                  description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-                />
-              </TextIcon>
-            }
-            subtitle={
-              <FormattedMessage
-                defaultMessage="User registered by email can login and enable wallet login later"
-                description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-              />
-            }
-            onClick={gotoEmailLogin}
-            role="button"
+        </p>
+      </li>
+
+      <li className={styles.option} role="button" onClick={gotoEmailLogin}>
+        <header className={styles.header}>
+          <TextIcon
+            color="black"
+            icon={<IconEmail24 size="md" />}
+            size="md"
+            spacing="xtight"
+          >
+            <FormattedMessage
+              defaultMessage="Continue with Email"
+              description="src/components/Forms/SelectAuthMethodForm/index.tsx"
+            />
+          </TextIcon>
+        </header>
+        <p className={styles.subtitle}>
+          <FormattedMessage
+            defaultMessage="User registered by email can login and enable wallet login later"
+            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
           />
-        </Form.List>
-      </section>
-    </>
+        </p>
+      </li>
+    </ul>
   )
 
   if (isInPage) {
@@ -94,7 +83,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
       <>
         <Layout.Header left={<Layout.Header.Title id="authEntries" />} />
 
-        {InnerForm}
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
 
         <footer className={styles.footer}>
           <LanguageSwitch />
@@ -105,15 +94,23 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header title="authEntries" closeDialog={closeDialog} />
-      )}
+      <Dialog.Header title="authEntries" closeDialog={closeDialog} />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <SourceHeader source={source} />
 
         {InnerForm}
       </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <Dialog.TextButton
+            color="greyDarker"
+            text={<FormattedMessage defaultMessage="Close" />}
+            onClick={closeDialog}
+          />
+        }
+      />
     </>
   )
 }

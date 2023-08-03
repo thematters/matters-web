@@ -5,10 +5,10 @@ import _random from 'lodash/random'
 import {
   Button,
   IconReload12,
+  Layout,
   List,
   PageHeader,
   QueryError,
-  ResponsiveWrapper,
   Spinner,
   TextIcon,
   Translate,
@@ -87,7 +87,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
       {error && <QueryError error={error} />}
 
       {!loading && (
-        <ResponsiveWrapper>
+        <Layout.Main.Spacing>
           <List hasBorder={false}>
             {edges.map(({ node, cursor }) => (
               <List.Item key={cursor}>
@@ -95,7 +95,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
               </List.Item>
             ))}
           </List>
-        </ResponsiveWrapper>
+        </Layout.Main.Spacing>
       )}
     </section>
   )

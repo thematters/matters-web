@@ -1,6 +1,5 @@
 .socialsContainer {
   display: flex;
-  padding-top: var(--spacing-x-tight);
 }
 
 .left,
@@ -54,11 +53,12 @@
 }
 
 .description {
-  @mixin border-top-grey;
-
   padding: var(--spacing-base) var(--spacing-base) var(--spacing-x-tight);
   font-size: var(--font-size-md-s);
   line-height: 1.5rem;
   color: var(--color-black);
-  text-align: center;
+
+  @media (--sm-up) {
+    padding: 0 var(--spacing-base) var(--spacing-x-tight);
+  }
 }

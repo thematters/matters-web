@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -39,6 +40,8 @@ interface FormProps {
   currency: CURRENCY
   submitCallback: () => void
   switchToResetPassword: () => void
+  closeDialog: () => void
+  back?: () => void
 }
 
 interface FormValues {
@@ -51,6 +54,8 @@ const BaseConfirm: React.FC<FormProps> = ({
   currency,
   submitCallback,
   switchToResetPassword,
+  closeDialog,
+  back,
 }: FormProps) => {
   const formId = 'payout-confirm-form'
 
@@ -111,9 +116,33 @@ const BaseConfirm: React.FC<FormProps> = ({
   const fee = calcMattersFee(values.amount)
   const total = Math.max(numRound(values.amount - fee), 0)
 
+  const SubmitButton = (
+    <Dialog.TextButton
+      text={<FormattedMessage defaultMessage="Confirm" />}
+      type="submit"
+      form={formId}
+      disabled={isSubmitting}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
-      <Dialog.Content hasGrow>
+      <Dialog.Header
+        title="paymentPayout"
+        closeDialog={closeDialog}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
+          ) : undefined
+        }
+        rightBtn={SubmitButton}
+      />
+
+      <Dialog.Content>
         <Form id={formId} onSubmit={handleSubmit}>
           <ConfirmTable>
             <ConfirmTable.Row type="balance">
@@ -128,10 +157,6 @@ const BaseConfirm: React.FC<FormProps> = ({
           </ConfirmTable>
 
           <Form.AmountInput
-            required
-            min={PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD}
-            max={balance}
-            currency={currency}
             label={
               <Translate
                 zh_hant="提現金額"
@@ -139,9 +164,14 @@ const BaseConfirm: React.FC<FormProps> = ({
                 en="Withdraw amoumt"
               />
             }
+            hasLabel
             name="amount"
             value={values.amount}
             error={touched.amount && errors.amount}
+            required
+            min={PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD}
+            max={balance}
+            currency={currency}
             onBlur={handleBlur}
             onChange={(e) => {
               const amount = e.target.valueAsNumber || 0
@@ -153,6 +183,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               setFieldValue('amount', amount)
             }}
             ref={inputRef}
+            spacingBottom="base"
           />
 
           <ConfirmTable>
@@ -234,24 +265,32 @@ const BaseConfirm: React.FC<FormProps> = ({
         </Form>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          form={formId}
-          disabled={isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate id="confirm" />
-        </Dialog.Footer.Button>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<Translate id="forgetPassword" />}
+            color="greyDarker"
+            onClick={switchToResetPassword}
+          />
+        }
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
 
-        <Dialog.Footer.Button
-          bgColor="white"
-          textColor="grey"
-          onClick={switchToResetPassword}
-        >
-          <Translate id="forgetPassword" />？
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+            <Dialog.TextButton
+              text={<Translate id="forgetPassword" />}
+              color="greyDarker"
+              onClick={switchToResetPassword}
+            />
+
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

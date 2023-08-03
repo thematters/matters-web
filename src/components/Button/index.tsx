@@ -8,10 +8,13 @@ import styles from './styles.module.css'
 
 export type ButtonWidth =
   | '2rem'
+  | '2.5rem'
   | '3rem'
   | '3.25rem'
   | '4rem'
   | '5rem'
+  | '5.3125rem'
+  | '5.5rem'
   | '6rem'
   | '7rem'
   | '7.5rem'
@@ -48,23 +51,31 @@ type ButtonColor =
   | 'white'
   | 'black'
   | 'halfBlack'
-  | 'greyDarkest'
   | 'greyDark'
+  | 'greyDarker'
+  | 'greyDarkest'
   | 'grey'
   | 'greyLight'
   | 'greyLighter'
   | 'greyLighterActive'
   | 'greenLighter'
+  | 'greenDark'
   | 'green'
   | 'gold'
   | 'red'
+  | 'redDark'
   | 'likecoinGreen'
   | 'yellowLighter'
   | 'goldLinearGradient'
 
 type ButtonTextColor = Extract<
   ButtonColor,
-  'white' | 'black' | 'green' | 'gold' | 'red' | 'grey'
+  'white' | 'black' | 'green' | 'gold' | 'red' | 'grey' | 'greyDarker'
+>
+
+type ButtonTextActiveColor = Extract<
+  ButtonColor,
+  'white' | 'black' | 'green' | 'greenDark' | 'redDark'
 >
 
 export type ButtonBgColor = Extract<
@@ -93,17 +104,20 @@ type ButtonBgActiveColor = Extract<
   | 'red'
 >
 
+type ButtonBorderActiveColor = Extract<ButtonColor, 'greenDark' | 'black'>
+
 export type ButtonProps = {
   size?: [ButtonWidth, ButtonHeight]
   spacing?: [ButtonSpacingY, ButtonSpacingX]
 
   textColor?: ButtonTextColor
-  textActiveColor?: ButtonTextColor
+  textActiveColor?: ButtonTextActiveColor
 
   bgColor?: ButtonBgColor
   bgActiveColor?: ButtonBgActiveColor
 
   borderColor?: ButtonColor
+  borderActiveColor?: ButtonBorderActiveColor
   borderWidth?: 'sm' | 'md'
   borderRadius?: 0 | '5rem'
 
@@ -111,7 +125,7 @@ export type ButtonProps = {
   replace?: boolean
 
   is?: 'span'
-
+  className?: string
   ref?: RefObject<any> | ((instance: any) => void) | null | undefined
 
   // navtive props
@@ -170,6 +184,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         bgActiveColor,
 
         borderColor,
+        borderActiveColor,
         borderWidth = 'md',
         borderRadius = '5rem',
 
@@ -177,7 +192,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         replace,
 
         is,
-
+        className,
         htmlHref,
         htmlTarget,
         type = 'button',
@@ -211,6 +226,9 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         [borderColor
           ? styles[`border${capitalizeFirstLetter(borderColor)}`]
           : '']: !!borderColor,
+        [borderActiveColor
+          ? styles[`borderActive${capitalizeFirstLetter(borderActiveColor)}`]
+          : '']: !!borderActiveColor && isClickable,
         [styles[`border${capitalizeFirstLetter(borderWidth)}`]]:
           borderWidth && borderColor,
         [textColor ? styles[`text${capitalizeFirstLetter(textColor)}`] : '']:
@@ -218,6 +236,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         [textActiveColor
           ? styles[`textActive${capitalizeFirstLetter(textActiveColor)}`]
           : '']: !!textActiveColor && isClickable,
+        [`${className}`]: !!className,
       })
 
       // handle click

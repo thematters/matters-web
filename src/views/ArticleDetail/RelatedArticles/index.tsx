@@ -72,7 +72,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
         <Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" en="Recommendations" />
       }
       is="h2"
-      hasNoBorder
+      hasBorder={false}
     />
   )
 

@@ -1,0 +1,41 @@
+.nav {
+  position: relative;
+  padding: var(--spacing-x-tight) var(--spacing-base);
+  white-space: nowrap;
+
+  @media (--sm-up) {
+    padding: var(--spacing-base) 0;
+  }
+
+  &.sticky {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-sticky-tabs);
+    background: var(--color-white);
+  }
+
+  &.hasSide {
+    @mixin flex-center-space-between;
+
+    & ul {
+      display: inline-flex;
+      flex-shrink: 0;
+      align-items: center;
+    }
+  }
+
+  & ul {
+    @mixin hide-scrollbar;
+
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    & li {
+      display: inline-block;
+
+      & + li {
+        margin-left: var(--spacing-x-tight);
+      }
+    }
+  }
+}

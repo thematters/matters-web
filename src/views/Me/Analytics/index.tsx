@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
-import { Head, Layout, List, QueryError, Spacer, Spinner } from '~/components'
+import { Head, Layout, List, QueryError, Spinner } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { MeAnalyticsQuery } from '~/gql/graphql'
 
@@ -60,43 +60,12 @@ const MyAnalytics = () => {
     },
   })
 
-  if (loading) {
-    return (
-      <Layout.Main>
-        <Spacer />
-        <Layout.Header.Title id="myAnalytics">
-          <FormattedMessage defaultMessage="Top Supporters" description="" />
-        </Layout.Header.Title>
-        <Spinner />
-      </Layout.Main>
-    )
-  }
-
-  if (error) {
-    return (
-      <Layout.Main>
-        <Spacer />
-        <Layout.Header.Title id="myAnalytics">
-          <FormattedMessage defaultMessage="Top Supporters" description="" />
-        </Layout.Header.Title>
-        <QueryError error={error} />
-      </Layout.Main>
-    )
-  }
-
-  const edges = data?.viewer?.analytics.topDonators.edges
-  const articleCount = data?.viewer?.articles.totalCount || 0
-
-  if (articleCount === 0) {
-    return <EmptyAnalytics />
-  }
-
-  return (
-    <Layout.Main>
+  const Header = () => (
+    <>
       <Layout.Header
         left={
           <Layout.Header.Title id="myAnalytics">
-            <FormattedMessage defaultMessage="Top Supporters" description="" />
+            <FormattedMessage defaultMessage="Top Supporters" />
           </Layout.Header.Title>
         }
         right={
@@ -106,20 +75,63 @@ const MyAnalytics = () => {
           </>
         }
       />
+
       <Head title={{ id: 'myAnalytics' }} />
-      <section className={styles.container}>
+    </>
+  )
+
+  if (loading) {
+    return (
+      <Layout.Main>
+        <Header />
+
+        <Spinner />
+      </Layout.Main>
+    )
+  }
+
+  if (error) {
+    return (
+      <Layout.Main>
+        <Header />
+
+        <QueryError error={error} />
+      </Layout.Main>
+    )
+  }
+
+  const edges = data?.viewer?.analytics.topDonators.edges
+  const articleCount = data?.viewer?.articles.totalCount || 0
+
+  if (articleCount === 0) {
+    return (
+      <Layout.Main>
+        <Header />
+
+        <Layout.Main.Spacing>
+          <EmptyAnalytics />
+        </Layout.Main.Spacing>
+      </Layout.Main>
+    )
+  }
+
+  return (
+    <Layout.Main>
+      <Header />
+
+      <Layout.Main.Spacing hasVertical={false}>
         {edges?.length === 0 && (
           <section className={styles.noSupporter}>
             <section className={styles.noSupporterImg}>
               <AnalyticsNoSupporter />
             </section>
             <p>
-              <FormattedMessage defaultMessage="No data yet." description="" />
+              <FormattedMessage defaultMessage="No data yet." />
             </p>
           </section>
         )}
 
-        <List responsiveWrapper>
+        <List>
           {edges?.map(({ node, cursor, donationCount }, i) => (
             <List.Item key={cursor}>
               <SupporterDigestFeed
@@ -130,7 +142,7 @@ const MyAnalytics = () => {
             </List.Item>
           ))}
         </List>
-      </section>
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

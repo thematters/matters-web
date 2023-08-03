@@ -33,12 +33,16 @@ const AmountInput = forwardRef(
       name,
       label,
       extraButton,
-      labelVisHidden,
+      hasLabel,
 
       hint,
       error,
+      hintAlign,
 
       currency,
+
+      spacingTop,
+      spacingBottom,
 
       ...inputProps
     }: AmountInputProps,
@@ -48,15 +52,15 @@ const AmountInput = forwardRef(
     const fieldMsgId = `field-msg-${name}`
 
     return (
-      <Field>
+      <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
         <Field.Header
           htmlFor={fieldId}
           label={label}
           extraButton={extraButton}
-          labelVisHidden={labelVisHidden}
+          hasLabel={hasLabel}
         />
 
-        <Field.Content noMargin>
+        <Field.Content>
           <span className={styles.currency}>{currency}</span>
 
           <input
@@ -74,7 +78,12 @@ const AmountInput = forwardRef(
           />
         </Field.Content>
 
-        <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+        <Field.Footer
+          fieldMsgId={fieldMsgId}
+          hint={hint}
+          error={error}
+          hintAlign={hintAlign}
+        />
       </Field>
     )
   }

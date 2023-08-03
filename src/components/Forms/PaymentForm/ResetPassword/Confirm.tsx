@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
 import {
@@ -23,6 +24,8 @@ import { ResetPaymentPasswordMutation } from '~/gql/graphql'
 interface FormProps {
   codeId: string
   submitCallback: () => void
+  closeDialog?: () => any
+  back?: () => void
 }
 
 interface FormValues {
@@ -36,7 +39,12 @@ export const RESET_PAYMENT_PASSWORD = gql`
   }
 `
 
-const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
+const Confirm: React.FC<FormProps> = ({
+  codeId,
+  submitCallback,
+  closeDialog,
+  back,
+}) => {
   const [reset] = useMutation<ResetPaymentPasswordMutation>(
     RESET_PAYMENT_PASSWORD,
     undefined,
@@ -108,11 +116,12 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
     <Form onSubmit={handleSubmit}>
       {isInPassword && (
         <Form.PinInput
-          length={PAYMENT_PASSSWORD_LENGTH}
           label={<Translate id="hintPaymentPassword" />}
+          hasLabel
           name="password"
           value={values.password}
           error={touched.password && errors.password}
+          length={PAYMENT_PASSSWORD_LENGTH}
           onChange={(value) => {
             const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
             setTouched({ password: true }, shouldValidate)
@@ -122,11 +131,12 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
       )}
       {isInComparedPassword && (
         <Form.PinInput
-          length={PAYMENT_PASSSWORD_LENGTH}
           label={<Translate id="enterPaymentPasswordAgain" />}
+          hasLabel
           name="compared-password"
           value={values.comparedPassword}
           error={touched.comparedPassword && errors.comparedPassword}
+          length={PAYMENT_PASSSWORD_LENGTH}
           onChange={(value) => {
             const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
             setTouched({ comparedPassword: true }, shouldValidate)
@@ -149,13 +159,40 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
 
   if (isSubmitting) {
     return (
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <Spinner />
       </Dialog.Content>
     )
   }
 
-  return <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+  return (
+    <>
+      <Dialog.Header
+        title="resetPaymentPassword"
+        closeDialog={closeDialog}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
+          ) : undefined
+        }
+      />
+
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Cancel" />}
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
+      />
+    </>
+  )
 }
 
 export default Confirm

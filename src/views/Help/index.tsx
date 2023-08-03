@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { EXTERNAL_LINKS, GUIDE_LINKS, PATHS } from '~/common/enums'
-import { Form, LanguageContext, Layout, ResponsiveWrapper } from '~/components'
+import { Form, LanguageContext, Layout } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -12,13 +12,12 @@ const BaseHelp = () => {
 
   const intl = useIntl()
   return (
-    <ResponsiveWrapper>
+    <>
       <Form.List spacingX={0}>
         <Form.List.Item
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'About Us',
-            description: '',
           })}
           href={PATHS.ABOUT}
         />
@@ -26,7 +25,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Explore Matters',
-            description: '',
           })}
           href={PATHS.GUIDE}
         />
@@ -34,7 +32,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Matters Community',
-            description: '',
           })}
           href={PATHS.COMMUNITY}
         />
@@ -42,7 +39,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Migrate to Matters',
-            description: '',
           })}
           href={PATHS.MIGRATION}
         />
@@ -50,7 +46,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Term of Services',
-            description: '',
           })}
           href={PATHS.TOS}
         />
@@ -58,7 +53,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Open Source',
-            description: '',
           })}
           htmlHref={EXTERNAL_LINKS.DEVELOPER_RESOURCE}
           htmlTarget="_blank"
@@ -67,7 +61,6 @@ const BaseHelp = () => {
           role="link"
           title={intl.formatMessage({
             defaultMessage: 'Download App',
-            description: '',
           })}
           href={GUIDE_LINKS.PWA[lang]}
         />
@@ -100,14 +93,16 @@ const BaseHelp = () => {
           <span itemProp="copyrightHolder">Matters</span>
         </p>
       </footer>
-    </ResponsiveWrapper>
+    </>
   )
 }
 
 const Help = () => (
   <Layout.Main>
     <Layout.Header left={<Layout.Header.Title id="helpCenter" />} />
-    <BaseHelp />
+    <Layout.Main.Spacing>
+      <BaseHelp />
+    </Layout.Main.Spacing>
   </Layout.Main>
 )
 
