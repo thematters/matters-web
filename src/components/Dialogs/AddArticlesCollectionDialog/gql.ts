@@ -8,7 +8,7 @@ export const fragments = {
   user: gql`
     fragment UserArticlesUser on User {
       id
-      articles(input: { first: 500 }) {
+      articles(input: { first: 1000 }) {
         totalCount
         edges {
           cursor
