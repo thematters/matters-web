@@ -516,6 +516,9 @@
     "defaultMessage": "{articleCount} 篇文章",
     "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
   },
+  "LWE7oq": {
+    "defaultMessage": "草稿保存中，确定要离开吗？"
+  },
   "Lc/azT": {
     "defaultMessage": "IPNS 订阅",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
