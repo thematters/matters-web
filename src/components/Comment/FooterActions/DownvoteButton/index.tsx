@@ -84,8 +84,6 @@ const DownvoteButton = ({
     },
   })
 
-  console.log(comment)
-
   if (comment.myVote === 'down') {
     return (
       <Button
