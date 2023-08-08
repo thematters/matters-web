@@ -516,6 +516,9 @@
     "defaultMessage": "{articleCount} Articles",
     "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
   },
+  "LWE7oq": {
+    "defaultMessage": "Saving draft, are you sure you want to leave?"
+  },
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
