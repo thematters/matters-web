@@ -6,7 +6,9 @@ import {
 } from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useContext } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 
+import { INPUT_DEBOUNCE } from '~/common/enums'
 import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 import { EditorDraftFragment } from '~/gql/graphql'
@@ -46,6 +48,10 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   const isPublished = publishState === 'published'
   const isReadOnly = isPending || isPublished
 
+  const debouncedUpdate = useDebouncedCallback((c) => {
+    update(c)
+  }, INPUT_DEBOUNCE)
+
   const editor = useArticleEdtor({
     editable: !isReadOnly,
     placeholder: translate({
@@ -57,7 +63,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
       const content = editor.getHTML()
-      update({ content })
+      debouncedUpdate({ content })
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
     extensions: [
