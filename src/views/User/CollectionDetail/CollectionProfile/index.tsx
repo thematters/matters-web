@@ -1,16 +1,18 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { CollectionProfileCollectionFragment } from '@/src/gql/graphql'
+import { toPath } from '~/common/utils'
 import {
   Book,
   Button,
   Expandable,
+  LinkWrapper,
   Media,
   useRoute,
   ViewerContext,
 } from '~/components'
 import EditCollection from '~/components/CollectionDigest/DropdownActions/EditCollection'
+import { CollectionProfileCollectionFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.module.css'
@@ -42,7 +44,16 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                 )}
                 <section className={styles.info}>
                   <h2 className={styles.title}>{title}</h2>
-                  <p className={styles.author}>{author.userName}</p>
+                  <p className={styles.author}>
+                    <LinkWrapper
+                      {...toPath({
+                        page: 'userProfile',
+                        userName: author.userName || '',
+                      })}
+                    >
+                      {author.displayName}
+                    </LinkWrapper>
+                  </p>
                   <p className={styles.articleCount}>
                     <FormattedMessage
                       defaultMessage="{articleCount} Articles"
