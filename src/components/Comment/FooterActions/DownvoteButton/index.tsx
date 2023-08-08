@@ -44,7 +44,6 @@ const fragments = {
     private: gql`
       fragment DownvoteCommentPrivate on Comment {
         id
-
         myVote
       }
     `,
@@ -84,6 +83,8 @@ const DownvoteButton = ({
       },
     },
   })
+
+  console.log(comment)
 
   if (comment.myVote === 'down') {
     return (
