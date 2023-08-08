@@ -114,7 +114,11 @@ const EditorSearchSelectForm = ({
         .map(({ node }) => node),
       node,
     ])
-    toStagingArea()
+    // FIXME: Switching back to the staging area when clicking on a search result entry triggers an ObservableQuery error
+    // https://github.com/apollographql/apollo-client/issues/5231#issuecomment-1275764711
+    setTimeout(() => {
+      toStagingArea()
+    }, 1000)
   }
 
   const syncStagingNodes = async (nodes: StagingNode[]) => {

@@ -97,6 +97,12 @@ export enum TEST_ID {
   USER_PROFILE_USER_NAME = 'user-profile/user-name',
   USER_PROFILE_FOLLOWERS_COUNT = 'user-profile/followers/count',
   USER_PROFILE_BIO = 'user-profile/bio',
+  USER_PROFILE_PIN_BOARD = 'user-profile/pin-board',
+  USER_PROFILE_PIN_BOARD_PINNED_WORK = 'user-profile/pin-board/pinned-work',
+  USER_PROFILE_PIN_BOARD_UNPIN_BUTTON = 'user-profile/pin-board/unpin-button',
+
+  // Book
+  BOOK_TITLE = 'book/title',
 
   // Editor
   EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON = 'editor/search-select-form/dialog/add-button',

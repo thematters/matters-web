@@ -29,10 +29,7 @@ export const publishDraft = async ({
         () => draftDetail.fillSummary(),
         () => draftDetail.setTags(),
         () => draftDetail.setCover(),
-        // ---------- TODO: fix search ----------
-        () => (async () => {})(),
-        // () => draftDetail.setCollection(),
-        // --------------------------------------
+        () => draftDetail.setCollection(),
         () => draftDetail.setSupportSetting({}),
         () => draftDetail.setLicense({}),
         () => draftDetail.checkAddToCicle(),
