@@ -1,6 +1,6 @@
-import { DigestTransactionFragment } from '@/src/gql/graphql'
 import { toPath } from '~/common/utils'
 import { ArticleDigestTitle, CircleDigest, LinkWrapper } from '~/components'
+import { DigestTransactionFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 

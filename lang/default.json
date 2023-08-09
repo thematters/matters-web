@@ -327,6 +327,9 @@
     "defaultMessage": "Not for login",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "CxYcYR": {
+    "defaultMessage": "Recommended square image."
+  },
   "D2Sw/t": {
     "defaultMessage": "Add any URL in the following list into RSS reader",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -515,6 +518,9 @@
   "LQxY1o": {
     "defaultMessage": "{articleCount} Articles",
     "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
+  },
+  "LWE7oq": {
+    "defaultMessage": "Saving draft, are you sure you want to leave?"
   },
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",
@@ -1118,9 +1124,6 @@
   "reOeq5": {
     "defaultMessage": "You have created your personal creative space. Publish your first work!",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  },
-  "rfz/fN": {
-    "defaultMessage": "Recommended size: 1600px x 900px"
   },
   "s5JCCO": {
     "defaultMessage": "This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?",

@@ -47,10 +47,13 @@
   }
 
   & .jacket {
+    @mixin flex-start-center;
+
     position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
+    flex-direction: column;
     height: calc(3.75rem + 1px);
     background: var(--jacket-bg);
 
@@ -66,14 +69,11 @@
     & .title {
       @mixin line-clamp;
 
-      position: absolute;
-      top: var(--spacing-xx-tight);
       color: var(--color-white);
       -webkit-line-clamp: 3;
     }
 
     & .count {
-      position: absolute;
       bottom: var(--spacing-xx-tight);
       margin-top: var(--spacing-xxx-tight);
       color: rgb(255 255 255 / 68%);
@@ -85,12 +85,8 @@
       }
     }
 
-    &.titleMd:not(.hasCount) {
-      @mixin inline-flex-center-start;
-
+    &.titleMd {
       & .title {
-        position: relative;
-        top: 0;
         font-size: var(--font-size-sm-s);
         line-height: 1.25rem;
       }
@@ -98,13 +94,18 @@
 
     &.titleLg {
       & .title {
-        top: var(--spacing-x-tight);
         font-size: var(--font-size-md);
         line-height: 1.5rem;
       }
 
       & .count {
         bottom: var(--spacing-x-tight);
+      }
+
+      &:not(.hasCount) {
+        @mixin flex-start-start;
+
+        padding-top: var(--spacing-x-tight);
       }
     }
   }

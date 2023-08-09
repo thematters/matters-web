@@ -287,8 +287,8 @@ export const OAUTH_SCOPE_TREE = {
       },
       generateLikerId: {
         _t: {
-          zh_hant: '生成 Liker ID',
-          zh_hans: '生成 Liker ID',
+          zh_hant: '創建新的 Liker ID',
+          zh_hans: '创建新的 Liker ID',
         },
       },
       clearReadHistory: {

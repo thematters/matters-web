@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useEffect, useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   ASSET_TYPE,
@@ -43,7 +43,8 @@ const Editor = dynamic(
 )
 
 const DraftDetail = () => {
-  const { getQuery } = useRoute()
+  const intl = useIntl()
+  const { getQuery, router } = useRoute()
   const id = getQuery('draftId')
 
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
@@ -62,6 +63,46 @@ const DraftDetail = () => {
   )
   const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined
   const ownCircles = data?.viewer?.ownCircles || undefined
+
+  const onLeaveConfirmText = intl.formatMessage({
+    defaultMessage: 'Saving draft, are you sure you want to leave?',
+  })
+
+  const onRouteChange = () => {
+    if (saveStatus !== 'saving') {
+      return null
+    }
+
+    if (window.confirm(onLeaveConfirmText)) {
+      return true
+    }
+
+    throw "Abort route change by user's confirmation."
+  }
+
+  const onBeforeUnload = (event: any) => {
+    if (saveStatus !== 'saving') {
+      return null
+    }
+
+    // legacy browsers
+    if (event) {
+      event.returnValue = onLeaveConfirmText
+    }
+
+    // modern browsers (ignore text)
+    return onLeaveConfirmText
+  }
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', onBeforeUnload)
+    router.events.on('routeChangeStart', onRouteChange)
+
+    return () => {
+      window.removeEventListener('beforeunload', onBeforeUnload)
+      router.events.off('routeChangeStart', onRouteChange)
+    }
+  }, [])
 
   if (loading) {
     return (

@@ -9,6 +9,7 @@ export const fragments = {
       author {
         id
         userName
+        displayName
       }
       ...EditCollectionCollection
     }

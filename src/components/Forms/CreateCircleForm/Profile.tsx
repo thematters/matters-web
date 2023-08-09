@@ -158,7 +158,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
         />
 
         <p className={styles.hint}>
-          <FormattedMessage defaultMessage="Recommended size: 1600px x 900px" />
+          <FormattedMessage defaultMessage="Recommended square image." />
         </p>
       </section>
 

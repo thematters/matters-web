@@ -103,10 +103,10 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
   const [searchingNodes, setSearchingNodes] = useState<SelectNode[]>([])
 
   const [searchKey, setSearchKey] = useState('')
-  const [debouncedSearchKey, setdebouncedSearchKey] = useState('')
+  const [debouncedSearchKey, setDebouncedSearchKey] = useState('')
   const debouncedSetSearchKey = useDebouncedCallback((sk0) => {
     const sk = isTag ? normalizeTag(sk0) : sk0
-    setdebouncedSearchKey(sk)
+    setDebouncedSearchKey(sk)
     setSearchKey(sk)
   }, INPUT_DEBOUNCE)
 

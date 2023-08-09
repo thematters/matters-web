@@ -328,6 +328,9 @@
     "defaultMessage": "非登入用途",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "CxYcYR": {
+    "defaultMessage": "建议使用正方形图片"
+  },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一网址到 RSS 阅读器",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -516,6 +519,9 @@
   "LQxY1o": {
     "defaultMessage": "{articleCount} 篇文章",
     "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
+  },
+  "LWE7oq": {
+    "defaultMessage": "草稿保存中，确定要离开吗？"
   },
   "Lc/azT": {
     "defaultMessage": "IPNS 订阅",
@@ -1119,9 +1125,6 @@
   "reOeq5": {
     "defaultMessage": "你已拥有个人创作空间站，期待你的第一篇作品。",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  },
-  "rfz/fN": {
-    "defaultMessage": "建议封面尺寸 1600 x 900 像素"
   },
   "s5JCCO": {
     "defaultMessage": "此文已被{actor}标示为限制级内容，是否确定展开全文？",
