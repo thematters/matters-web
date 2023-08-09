@@ -17,8 +17,8 @@ import {
   TextIcon,
   toast,
   Translate,
-  useBlockUnload,
   useMutation,
+  useUnloadConfirm,
 } from '~/components'
 import { updateDraftAssets } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
@@ -121,7 +121,7 @@ const Uploader: React.FC<UploaderProps> = ({
     'u-area-disable': loading,
   })
 
-  useBlockUnload({ isBlocking: loading })
+  useUnloadConfirm({ block: loading })
 
   return (
     <label className={labelClasses} htmlFor={fieldId}>

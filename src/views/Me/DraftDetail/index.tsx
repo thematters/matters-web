@@ -17,8 +17,8 @@ import {
   Spinner,
   Throw404,
   toast,
-  useBlockUnload,
   useRoute,
+  useUnloadConfirm,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
@@ -64,7 +64,7 @@ const DraftDetail = () => {
   const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined
   const ownCircles = data?.viewer?.ownCircles || undefined
 
-  useBlockUnload({ isBlocking: saveStatus === 'saving' })
+  useUnloadConfirm({ block: saveStatus === 'saving' })
 
   if (loading) {
     return (

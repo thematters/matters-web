@@ -3,11 +3,11 @@ import { useIntl } from 'react-intl'
 
 import { useRoute } from './useRoute'
 
-export const useBlockUnload = ({
-  isBlocking,
+export const useUnloadConfirm = ({
+  block,
   hint,
 }: {
-  isBlocking: boolean
+  block: boolean
   hint?: string
 }) => {
   const blockRef = useRef<boolean>()
@@ -57,6 +57,6 @@ export const useBlockUnload = ({
   }, [])
 
   useEffect(() => {
-    blockRef.current = isBlocking
-  }, [isBlocking])
+    blockRef.current = block
+  }, [block])
 }
