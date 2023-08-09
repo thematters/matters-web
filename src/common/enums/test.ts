@@ -92,6 +92,7 @@ export enum TEST_ID {
   ME_WALLET_TRANSACTIONS_ITEM_AMOUNT = 'me/wallet/transactions/item/amount',
   // user profile
   ASIDE_USER_PROFILE = 'aside-user-profile',
+  ASIDE_USER_PROFILE_FOLLOWERS_COUNT = 'aside-user-profile/followers/count',
   USER_PROFILE = 'user-profile',
   USER_PROFILE_DISPLAY_NAME = 'user-profile/display-name',
   USER_PROFILE_USER_NAME = 'user-profile/user-name',
