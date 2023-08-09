@@ -15,7 +15,7 @@ Currently, ${process.env.NEXT_PUBLIC_SITE_BRAND_NAME} is not yet available as an
 
 ${process.env.NEXT_PUBLIC_SITE_BRAND_NAME} is dedicated to exploring Web3 and the creator economy ecosystem. We encourage wallet registration and login for on-chain payment and withdrawal functions.
 
-*   [Using Crypto Wallet on ${process.env.NEXT_PUBLIC_SITE_BRAND_NAME}](https://matters.town/en/@hi176/387112)
+*   [Using Crypto Wallet on ${process.env.NEXT_PUBLIC_SITE_BRAND_NAME}](https://matters.town/@hi176/387112?locale=en)
 
 Currently, ${process.env.NEXT_PUBLIC_SITE_BRAND_NAME} support donation with fiat currency (HKD), crypto currencies USDT and LikeCoin. You can support the creators and collect your reward with the above methods.
 

@@ -45,6 +45,8 @@ const unfollow = async (page: Page) => {
   ).toBeVisible()
 }
 
+test.describe.configure({ mode: 'serial' })
+
 test.describe('User Mutation', () => {
   authedTest(
     'Alice is followed by Bob',
@@ -114,7 +116,11 @@ test.describe('User Mutation', () => {
       }
 
       const followCount = await bobPage
-        .getByTestId(TEST_ID.USER_PROFILE_FOLLOWERS_COUNT)
+        .getByTestId(
+          isMobile
+            ? TEST_ID.USER_PROFILE_FOLLOWERS_COUNT
+            : TEST_ID.ASIDE_USER_PROFILE_FOLLOWERS_COUNT
+        )
         .innerText()
 
       await unfollow(bobPage)
@@ -123,7 +129,11 @@ test.describe('User Mutation', () => {
       await bobPage.waitForLoadState('networkidle')
 
       const unfollowCount = await bobPage
-        .getByTestId(TEST_ID.USER_PROFILE_FOLLOWERS_COUNT)
+        .getByTestId(
+          isMobile
+            ? TEST_ID.USER_PROFILE_FOLLOWERS_COUNT
+            : TEST_ID.ASIDE_USER_PROFILE_FOLLOWERS_COUNT
+        )
         .innerText()
 
       expect(Number(followCount) === Number(unfollowCount) + 1)
