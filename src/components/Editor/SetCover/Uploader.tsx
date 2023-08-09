@@ -1,6 +1,7 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
@@ -16,6 +17,7 @@ import {
   TextIcon,
   toast,
   Translate,
+  useBlockUnload,
   useMutation,
 } from '~/components'
 import { updateDraftAssets } from '~/components/GQL'
@@ -119,6 +121,8 @@ const Uploader: React.FC<UploaderProps> = ({
     'u-area-disable': loading,
   })
 
+  useBlockUnload({ isBlocking: loading })
+
   return (
     <label className={labelClasses} htmlFor={fieldId}>
       <h3>
@@ -136,11 +140,7 @@ const Uploader: React.FC<UploaderProps> = ({
       </h3>
 
       <p>
-        <Translate
-          zh_hant="上傳一張照片，建議尺寸 1600 x 900 像素"
-          zh_hans="上传一张照片，建议尺寸 1600 x 900 像素"
-          en="Recommended size 1600 x 900 pixels"
-        />
+        <FormattedMessage defaultMessage="Recommended square image." />
       </p>
 
       <VisuallyHidden>

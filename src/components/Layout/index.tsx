@@ -52,6 +52,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 } = ({ children }) => {
   const { isInPath } = useRoute()
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+  const isInArticleDetail = isInPath('ARTICLE_DETAIL')
 
   return (
     <>
@@ -71,7 +72,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
         </main>
       </div>
 
-      {!isInDraftDetail && (
+      {!isInDraftDetail && !isInArticleDetail && (
         <Media at="sm">
           <footer>
             <NavBar />

@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { Dialog, Translate } from '~/components'
 import { SetPublishISCNProps } from '~/components/Editor'
 
@@ -88,7 +90,9 @@ const SettingsList = ({
 
           <ListItem
             title={<Translate id="setCover" />}
-            subTitle={<Translate id="recommendedCoverSize" />}
+            subTitle={
+              <FormattedMessage defaultMessage="Recommended square image." />
+            }
             hint
             onClick={() => forward('cover')}
           >
