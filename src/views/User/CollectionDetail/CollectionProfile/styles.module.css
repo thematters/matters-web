@@ -18,7 +18,7 @@
       font-size: var(--font-size-base);
       font-weight: var(--font-weight-medium);
 
-      @media (--sm-up) {
+      @media (--md-up) {
         margin-bottom: var(--spacing-base);
         font-size: var(--font-size-article-h2);
       }
