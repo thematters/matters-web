@@ -116,7 +116,11 @@ test.describe('User Mutation', () => {
       }
 
       const followCount = await bobPage
-        .getByTestId(TEST_ID.USER_PROFILE_FOLLOWERS_COUNT)
+        .getByTestId(
+          isMobile
+            ? TEST_ID.USER_PROFILE_FOLLOWERS_COUNT
+            : TEST_ID.ASIDE_USER_PROFILE_FOLLOWERS_COUNT
+        )
         .innerText()
 
       await unfollow(bobPage)
