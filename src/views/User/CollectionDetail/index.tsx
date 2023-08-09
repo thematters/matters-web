@@ -1,4 +1,4 @@
-import { toPath } from '@/src/common/utils'
+import { toPath } from '~/common/utils'
 import { Head, Layout } from '~/components'
 import { QueryError, Throw404, usePublicQuery, useRoute } from '~/components'
 import { CollectionDetailQuery } from '~/gql/graphql'

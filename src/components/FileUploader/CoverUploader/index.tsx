@@ -2,6 +2,7 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import { useContext, useState } from 'react'
 
 import {
+  ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES,
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
   ENTITY_TYPE,
@@ -86,7 +87,10 @@ export const CoverUploader = ({
     { showToast: false }
   )
 
-  const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
+  const acceptTypes =
+    type === 'collection'
+      ? ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES.join(',')
+      : ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'cover-upload-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {

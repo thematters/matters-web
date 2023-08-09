@@ -53,7 +53,7 @@ const BaseCollectionDigestFeed = ({
 
         <section className={styles.content}>
           <header className={styles.header}>
-            <LinkWrapper {...path}>
+            <LinkWrapper {...path} onClick={onClick} textActiveColor="green">
               <h2 className={styles.title}>{title}</h2>
             </LinkWrapper>
           </header>

@@ -44,7 +44,6 @@ const fragments = {
     private: gql`
       fragment DownvoteCommentPrivate on Comment {
         id
-
         myVote
       }
     `,

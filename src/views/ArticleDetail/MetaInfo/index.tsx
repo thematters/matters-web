@@ -1,4 +1,4 @@
-import { DateTime, IconPaywall16, Translate } from '~/components'
+import { DateTime, IconPaywall24, Translate } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import FingerprintButton from './FingerprintButton'
@@ -51,7 +51,7 @@ const MetaInfo = ({
         </>
       )}
 
-      {article.access.type === 'paywall' && <IconPaywall16 color="grey" />}
+      {article.access.type === 'paywall' && <IconPaywall24 color="grey" />}
     </section>
   )
 }

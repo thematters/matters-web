@@ -3,7 +3,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { MAX_ARTICLE_SUPPORT_LENGTH } from '@/src/common/enums'
+import { MAX_ARTICLE_SUPPORT_LENGTH } from '~/common/enums'
 import { translate, validateSupportWords } from '~/common/utils'
 import {
   Dialog,

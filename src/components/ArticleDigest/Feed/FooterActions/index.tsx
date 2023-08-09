@@ -1,4 +1,4 @@
-import { CircleDigest } from '~/components'
+import { CircleDigest, IconPaywall24, TextIcon } from '~/components'
 import { FooterActionsArticlePublicFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
@@ -30,6 +30,7 @@ const FooterActions = ({
   const {
     access: { circle },
   } = article
+
   return (
     <footer className={styles.footer}>
       <section className={styles.left}>
@@ -40,12 +41,22 @@ const FooterActions = ({
         {tag}
 
         {hasCircle && circle && (
-          <CircleDigest.Title
-            circle={circle}
-            is="span"
-            textSize="xs"
-            textWeight="normal"
-          />
+          <TextIcon
+            icon={
+              article.access.type === 'paywall' ? (
+                <IconPaywall24 color="grey" size="sm" />
+              ) : null
+            }
+            textPlacement="left"
+            spacing="xxtight"
+          >
+            <CircleDigest.Title
+              circle={circle}
+              is="span"
+              textSize="xs"
+              textWeight="normal"
+            />
+          </TextIcon>
         )}
       </section>
 
