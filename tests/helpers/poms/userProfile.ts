@@ -61,10 +61,10 @@ export class UserProfilePage {
     // dialog
     this.dialog = this.page.getByRole('dialog')
     this.dialogSaveButton = this.dialog.getByRole('button', {
-      name: 'Save',
+      name: 'Confirm',
     })
-    this.dialogDisplayNameInput = this.page.getByPlaceholder('Display Name')
-    this.dialogBioInput = this.page.getByPlaceholder('Enter Bio')
+    this.dialogDisplayNameInput = this.page.getByPlaceholder('Name')
+    this.dialogBioInput = this.page.getByPlaceholder('Bio')
   }
 
   async gotoMeProfile() {
