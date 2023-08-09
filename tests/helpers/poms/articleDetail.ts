@@ -106,7 +106,7 @@ export class ArticleDetailPage {
 
     // dialog
     this.dialog = this.page.getByRole('dialog')
-    this.dialogCommentInput = this.dialog.locator('.ProseMirror')
+    this.dialogCommentInput = this.dialog.locator('.tiptap')
   }
 
   async getTitle() {
@@ -147,7 +147,7 @@ export class ArticleDetailPage {
     return (
       {
         'NO RIGHTS RESERVED': 'CC0 License',
-        'CC BY-NC-ND 2.0': 'CC BY-NC-ND 2.0 License',
+        'CC BY-NC-ND 4.0': 'CC BY-NC-ND 4.0 License',
         'ALL RIGHTS RESERVED': 'All Rights Reserved',
       }[licenseText] || ''
     )
@@ -213,14 +213,20 @@ export class ArticleDetailPage {
     await this.dialog.locator('#field-checkout').click() // activate form to fillable
     await this.dialog
       .frameLocator('iframe')
+      .first()
       .getByPlaceholder('Card number')
       .fill('4242424242424242')
     const YY = new Date(Date.now()).getFullYear() - 2000 + 1
     await this.dialog
       .frameLocator('iframe')
+      .first()
       .getByPlaceholder('MM / YY')
       .fill(`12${YY}`)
-    await this.dialog.frameLocator('iframe').getByPlaceholder('CVC').fill('123')
+    await this.dialog
+      .frameLocator('iframe')
+      .first()
+      .getByPlaceholder('CVC')
+      .fill('123')
     await this.dialog.getByRole('button', { name: 'Confirm' }).click()
     await this.dialog.getByRole('button', { name: 'Back to support' }).click()
 
@@ -230,7 +236,7 @@ export class ArticleDetailPage {
       .fill(amount.toString())
 
     // click next step
-    await this.dialog.getByRole('button', { name: 'Next' }).click()
+    await this.dialog.getByRole('button', { name: 'Next Step' }).click()
 
     // fill incorrect payment password
     await this.dialog.locator('#field-password-1').fill(password[0])

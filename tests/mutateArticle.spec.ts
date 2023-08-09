@@ -167,58 +167,74 @@ test.describe('Mutate article', () => {
     const aliceProfile = new UserProfilePage(alicePage, isMobile)
     await aliceProfile.gotoMeProfile()
 
+    // clean pinned works
+    if (
+      await alicePage.getByTestId(TEST_ID.USER_PROFILE_PIN_BOARD).isVisible()
+    ) {
+      const unpinButtons = await alicePage.getByTestId(
+        TEST_ID.USER_PROFILE_PIN_BOARD_UNPIN_BUTTON
+      )
+      const count = await unpinButtons.count()
+      for (let i = 0; i < count; ++i) {
+        await Promise.all([
+          waitForAPIResponse({
+            page: alicePage,
+            path: 'data.editArticle.pinned',
+            isOK: (data) => data === false,
+          }),
+          unpinButtons.nth(0).click(),
+        ])
+      }
+
+      await alicePage.getByTestId(TEST_ID.USER_PROFILE_PIN_BOARD).isHidden()
+    }
+
     // [Alice] Get first article
     const aliceArticles = await aliceProfile.feedArticles.all()
-    const secondArticle = await aliceArticles[1].first()
-    await expect(secondArticle).toBeVisible()
-    const secondArticleTitle = await secondArticle
+    const firstArticle = await aliceArticles[0].first()
+    await expect(firstArticle).toBeVisible()
+    const firstArticleTitle = await firstArticle
       .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
       .innerText()
 
-    await secondArticle.getByRole('button', { name: 'More Actions' }).click()
+    await firstArticle.getByRole('button', { name: 'More Actions' }).click()
     const pinButton = await alicePage
-      .getByRole('menuitem', { name: 'Pin article' })
+      .getByRole('menuitem', { name: 'Pin to profile' })
       .locator('section')
     await Promise.all([
       waitForAPIResponse({
         page: alicePage,
-        path: 'data.editArticle.sticky',
+        path: 'data.editArticle.pinned',
         isOK: (data) => data === true,
       }),
       pinButton.click(),
     ])
 
-    const firstArticle = await aliceProfile.feedArticles.first()
-    const firstArticleTitle = await firstArticle
-      .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
+    await expect(
+      alicePage.getByTestId(TEST_ID.USER_PROFILE_PIN_BOARD)
+    ).toBeVisible()
+    const firstPinnedWork = await alicePage
+      .getByTestId(TEST_ID.USER_PROFILE_PIN_BOARD_PINNED_WORK)
+      .first()
+    const firstBookTitle = await firstPinnedWork
+      .getByTestId(TEST_ID.BOOK_TITLE)
       .innerText()
-    expect(stripSpaces(firstArticleTitle)).toBe(stripSpaces(secondArticleTitle))
-    const footerPin = firstArticle.getByTestId(
-      TEST_ID.DIGEST_ARTICLE_FEED_FOOTER_PIN
-    )
-    await expect(footerPin).toBeVisible()
+    expect(stripSpaces(firstBookTitle)).toBe(stripSpaces(firstArticleTitle))
 
     // unpin
-    await firstArticle.getByRole('button', { name: 'More Actions' }).click()
-    const unpinButton = await alicePage
-      .getByRole('menuitem', { name: 'Unpin' })
-      .locator('section')
+    const unpinButton = await firstPinnedWork.getByTestId(
+      TEST_ID.USER_PROFILE_PIN_BOARD_UNPIN_BUTTON
+    )
     await Promise.all([
       waitForAPIResponse({
         page: alicePage,
-        path: 'data.editArticle.sticky',
+        path: 'data.editArticle.pinned',
         isOK: (data) => data === false,
       }),
       unpinButton.click(),
     ])
-    const firstArticleAfterUnpin = await aliceProfile.feedArticles.first()
-    const firstArticleTitleAfterUnpin = await firstArticleAfterUnpin
-      .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
-      .innerText()
-    expect(
-      stripSpaces(firstArticleTitle) !==
-        stripSpaces(firstArticleTitleAfterUnpin)
-    ).toBeTruthy()
+
+    await alicePage.getByTestId(TEST_ID.USER_PROFILE_PIN_BOARD).isHidden()
   })
 
   authedTest('revise article', async ({ alicePage, isMobile }) => {
