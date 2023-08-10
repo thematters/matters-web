@@ -86,6 +86,7 @@ const Toolbar = ({
     hasExtend: !lock,
     hasEdit: true,
     hasArchive: true,
+    hasAddCollection: true,
     ...props,
   }
 
