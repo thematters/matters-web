@@ -58,8 +58,8 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
         >
           <TextIcon color="green" size="xs">
             <Translate
-              zh_hant="綁定 Liker ID"
-              zh_hans="綁定 Liker ID"
+              zh_hant="綁定現有 Liker ID"
+              zh_hans="绑定现有 Liker ID"
               en="Go to link your Liker ID"
             />
           </TextIcon>

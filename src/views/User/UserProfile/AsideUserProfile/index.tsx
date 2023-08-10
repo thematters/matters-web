@@ -123,7 +123,10 @@ export const AsideUserProfile = () => {
    * Active or Onboarding User
    */
   return (
-    <section className={styles.userProfile} data-test-id={TEST_ID.USER_PROFILE}>
+    <section
+      className={styles.userProfile}
+      data-test-id={TEST_ID.ASIDE_USER_PROFILE}
+    >
       <header className={styles.header}>
         {isInUserPage && isMe && (
           <EditProfileDialog user={user}>
@@ -228,7 +231,7 @@ export const AsideUserProfile = () => {
               <button type="button" onClick={openFollowersDialog}>
                 <span
                   className={styles.count}
-                  data-test-id={TEST_ID.USER_PROFILE_FOLLOWERS_COUNT}
+                  data-test-id={TEST_ID.ASIDE_USER_PROFILE_FOLLOWERS_COUNT}
                 >
                   {numAbbr(user.followers.totalCount)}
                 </span>

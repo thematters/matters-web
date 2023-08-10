@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Z_INDEX } from '~/common/enums'
+import { TEST_ID, Z_INDEX } from '~/common/enums'
 import { IconUnPin20, Tooltip, useMutation, ViewerContext } from '~/components'
 import { updateUserArticles } from '~/components/GQL'
 import { UnpinArticleMutation, UnpinCollectionMutation } from '~/gql/graphql'
@@ -84,7 +84,12 @@ const UnPinButton = ({
       zIndex={Z_INDEX.OVER_STICKY_TABS}
       delay={[1000, null]}
     >
-      <button type="button" onClick={() => unpin()} className={styles.unpin}>
+      <button
+        type="button"
+        onClick={() => unpin()}
+        className={styles.unpin}
+        data-test-id={TEST_ID.USER_PROFILE_PIN_BOARD_UNPIN_BUTTON}
+      >
         <IconUnPin20 size="mdS" color="white" />
       </button>
     </Tooltip>

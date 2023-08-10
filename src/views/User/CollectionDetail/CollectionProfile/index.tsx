@@ -1,16 +1,18 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { CollectionProfileCollectionFragment } from '@/src/gql/graphql'
+import { toPath } from '~/common/utils'
 import {
   Book,
   Button,
   Expandable,
+  LinkWrapper,
   Media,
   useRoute,
   ViewerContext,
 } from '~/components'
 import EditCollection from '~/components/CollectionDigest/DropdownActions/EditCollection'
+import { CollectionProfileCollectionFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.module.css'
@@ -31,7 +33,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
     <EditCollection.Dialog collection={collection}>
       {({ openDialog: openEditeCollection }) => (
         <section>
-          <Media at="sm">
+          <Media lessThan="lg">
             <section>
               <section className={styles.header}>
                 {(!!cover || !isViewer) && <Book title={title} cover={cover} />}
@@ -42,7 +44,16 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                 )}
                 <section className={styles.info}>
                   <h2 className={styles.title}>{title}</h2>
-                  <p className={styles.author}>{author.userName}</p>
+                  <p className={styles.author}>
+                    <LinkWrapper
+                      {...toPath({
+                        page: 'userProfile',
+                        userName: author.userName || '',
+                      })}
+                    >
+                      {author.displayName}
+                    </LinkWrapper>
+                  </p>
                   <p className={styles.articleCount}>
                     <FormattedMessage
                       defaultMessage="{articleCount} Articles"
@@ -83,7 +94,8 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
               </section>
             </section>
           </Media>
-          <Media greaterThan="sm">
+
+          <Media greaterThanOrEqual="lg">
             <section className={styles.header}>
               {(!!cover || !isViewer) && (
                 <Book

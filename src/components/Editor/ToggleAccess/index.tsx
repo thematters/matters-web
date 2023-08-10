@@ -219,7 +219,11 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
         <p className={styles.hint}>
           <Translate id="publishToISCNHint_1" />
-          <a href="https://iscn.io/" target="_blank" rel="noreferrer">
+          <a
+            href="https://docs.like.co/v/zh/general-guides/writing-nft/nft-portal#publish-writing-nft-with-iscn-id"
+            target="_blank"
+            rel="noreferrer"
+          >
             ISCN
           </a>
           <Translate id="publishToISCNHint_2" />

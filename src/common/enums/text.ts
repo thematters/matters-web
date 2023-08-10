@@ -264,7 +264,8 @@ export const TEXT = {
     publishing2: '寫入中…',
     publishToISCN: '註冊 ISCN',
     publishToISCNHint_1: '發布時註冊 ',
-    publishToISCNHint_2: '，費用 ≈1 LIKE，推廣期由平台補助',
+    publishToISCNHint_2:
+      ' 用以出版 Writing NFT，費用 ≈1 LIKE，推廣期由平台補助',
     putComment: '發布評論',
     QUERY_FIELD_NOT_FOUND: '要查詢的數據不存在',
     RATE_LIMIT_EXCEEDED: '操作過於頻繁，請稍候重試',
@@ -669,7 +670,8 @@ export const TEXT = {
     publishing2: '写入中…',
     publishToISCN: '註冊 ISCN',
     publishToISCNHint_1: '发布时註冊 ',
-    publishToISCNHint_2: '，费用 ≈1 LIKE，推广期由平台补助',
+    publishToISCNHint_2:
+      ' 用以出版 Writing NFT，费用 ≈1 LIKE，推广期由平台补助',
     putComment: '发布评论',
     QUERY_FIELD_NOT_FOUND: '要查询的数据不存在',
     RATE_LIMIT_EXCEEDED: '操作过于频繁，请稍候重试',
@@ -1097,7 +1099,8 @@ export const TEXT = {
     publishing: 'Publishing...',
     publishing2: 'Publishing...',
     publishToISCN: 'Register for ISCN',
-    publishToISCNHint_1: 'The cost of ',
+    publishToISCNHint_1:
+      'Registering ISCN allows you to publish Writing NFT. The cost of ',
     publishToISCNHint_2:
       ' registration is about 1 LIKE. During promotion period it is sponsored by Matters.News.',
     putComment: 'Comment',

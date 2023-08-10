@@ -1,7 +1,7 @@
 .link {
   @mixin transition;
 
-  display: inline-flex;
+  display: flex;
   align-items: center;
   transition-property: color;
 }

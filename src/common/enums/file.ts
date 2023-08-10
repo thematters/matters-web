@@ -13,6 +13,12 @@ export const ACCEPTED_UPLOAD_IMAGE_TYPES: string[] = [
   'image/webp',
 ]
 
+export const ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES: string[] = [
+  'image/png',
+  'image/jpeg',
+  'image/webp',
+]
+
 export const ACCEPTED_UPLOAD_AUDIO_TYPES: string[] = ['audio/mpeg', 'audio/aac']
 
 export const ACCEPTED_UPLOAD_MIGRATION_TYPES: string[] = ['text/html']

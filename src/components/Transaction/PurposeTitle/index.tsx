@@ -2,11 +2,6 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
-  DigestTransactionFragment,
-  TransactionCurrency,
-  TransactionPurpose,
-} from '@/src/gql/graphql'
-import {
   IconFiatCurrency40,
   IconHelp16,
   IconLikeCoin40,
@@ -14,6 +9,11 @@ import {
   Tooltip,
   ViewerContext,
 } from '~/components'
+import {
+  DigestTransactionFragment,
+  TransactionCurrency,
+  TransactionPurpose,
+} from '~/gql/graphql'
 
 import styles from './styles.module.css'
 

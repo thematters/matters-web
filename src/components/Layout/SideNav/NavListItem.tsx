@@ -1,7 +1,7 @@
 import jump from 'jump.js'
 import { forwardRef } from 'react'
 
-import { Z_INDEX } from '~/common/enums'
+import { TEST_ID, Z_INDEX } from '~/common/enums'
 import { Button, ButtonProps, TextIcon, Tooltip } from '~/components'
 
 import styles from './styles.module.css'
@@ -12,6 +12,7 @@ type NavListItemProps = {
   activeIcon: React.ReactNode
   active: boolean
   canScrollTop?: boolean
+  testId?: TEST_ID
 } & ButtonProps
 
 const NavListItemButton = forwardRef(
@@ -57,7 +58,7 @@ const NavListItemButton = forwardRef(
 NavListItemButton.displayName = 'NavListItemButton'
 
 const NavListItem = forwardRef((props: NavListItemProps, ref) => {
-  const { active, canScrollTop = true, onClick: baseOnClick } = props
+  const { active, canScrollTop = true, onClick: baseOnClick, testId } = props
   const onClick = (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (baseOnClick) {
       baseOnClick()
@@ -70,7 +71,11 @@ const NavListItem = forwardRef((props: NavListItemProps, ref) => {
   }
 
   return (
-    <li role="menuitem" className={styles.listItem}>
+    <li
+      role="menuitem"
+      className={styles.listItem}
+      {...(testId ? { ['data-test-id']: testId } : {})}
+    >
       <NavListItemButton {...props} onClick={onClick} ref={ref} />
     </li>
   )

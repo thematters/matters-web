@@ -329,6 +329,9 @@
     "defaultMessage": "Not for login",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "CxYcYR": {
+    "defaultMessage": "Recommended square image."
+  },
   "D2Sw/t": {
     "defaultMessage": "Add any URL in the following list into RSS reader",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -518,6 +521,9 @@
   "LQxY1o": {
     "defaultMessage": "{articleCount} Articles",
     "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
+  },
+  "LWE7oq": {
+    "defaultMessage": "Saving draft, are you sure you want to leave?"
   },
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",

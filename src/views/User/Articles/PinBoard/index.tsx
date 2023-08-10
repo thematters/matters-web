@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { TEST_ID } from '@/src/common/enums'
 import { analytics, toPath } from '~/common/utils'
 import { Book, Media } from '~/components'
 import { PinnedWorksUserFragment } from '~/gql/graphql'
@@ -18,10 +19,17 @@ const PinBoard = ({ user }: PinBoardProps) => {
   }
 
   return (
-    <section className={styles.pinBoard}>
+    <section
+      className={styles.pinBoard}
+      data-test-id={TEST_ID.USER_PROFILE_PIN_BOARD}
+    >
       <ul className={styles.list}>
         {user.pinnedWorks.map((work, index) => (
-          <li key={work.id} className={styles.listItem}>
+          <li
+            key={work.id}
+            className={styles.listItem}
+            data-test-id={TEST_ID.USER_PROFILE_PIN_BOARD_PINNED_WORK}
+          >
             <Link
               legacyBehavior
               {...toPath(

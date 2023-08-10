@@ -45,6 +45,8 @@ const unfollow = async (page: Page) => {
   ).toBeVisible()
 }
 
+test.describe.configure({ mode: 'serial' })
+
 test.describe('User Mutation', () => {
   authedTest(
     'Alice is followed by Bob',
@@ -114,7 +116,11 @@ test.describe('User Mutation', () => {
       }
 
       const followCount = await bobPage
-        .getByTestId(TEST_ID.USER_PROFILE_FOLLOWERS_COUNT)
+        .getByTestId(
+          isMobile
+            ? TEST_ID.USER_PROFILE_FOLLOWERS_COUNT
+            : TEST_ID.ASIDE_USER_PROFILE_FOLLOWERS_COUNT
+        )
         .innerText()
 
       await unfollow(bobPage)
@@ -123,7 +129,11 @@ test.describe('User Mutation', () => {
       await bobPage.waitForLoadState('networkidle')
 
       const unfollowCount = await bobPage
-        .getByTestId(TEST_ID.USER_PROFILE_FOLLOWERS_COUNT)
+        .getByTestId(
+          isMobile
+            ? TEST_ID.USER_PROFILE_FOLLOWERS_COUNT
+            : TEST_ID.ASIDE_USER_PROFILE_FOLLOWERS_COUNT
+        )
         .innerText()
 
       expect(Number(followCount) === Number(unfollowCount) + 1)
@@ -146,7 +156,7 @@ test.describe('User Mutation', () => {
       await pageGoto(bobPage, alicePage.url())
 
       await bobPage
-        .getByTestId(TEST_ID.LAYOUT_HEADER)
+        .getByTestId(TEST_ID.ASIDE_USER_PROFILE)
         .getByRole('button', { name: 'More Actions' })
         .click()
 
@@ -166,7 +176,7 @@ test.describe('User Mutation', () => {
             .click(),
         ])
         await bobPage
-          .getByTestId(TEST_ID.LAYOUT_HEADER)
+          .getByTestId(TEST_ID.ASIDE_USER_PROFILE)
           .getByRole('button', { name: 'More Actions' })
           .click()
       }
@@ -212,7 +222,7 @@ test.describe('User Mutation', () => {
       // [Bob] Go to Alice's User Profile and Check Block state
       await bobPage.goto(alicePage.url(), { waitUntil: 'networkidle' })
       await bobPage
-        .getByTestId(TEST_ID.LAYOUT_HEADER)
+        .getByTestId(TEST_ID.ASIDE_USER_PROFILE)
         .getByRole('button', { name: 'More Actions' })
         .click()
       await expect(
@@ -226,11 +236,7 @@ test.describe('User Mutation', () => {
     const aliceProfile = new UserProfilePage(alicePage, isMobile)
     await aliceProfile.gotoMeProfile()
 
-    await aliceProfile.moreButton.click()
-    await alicePage
-      .getByRole('menuitem', { name: 'Edit' })
-      .locator('section')
-      .click()
+    await aliceProfile.displayName.click()
 
     await aliceProfile.setCover()
     await aliceProfile.setAvatar()

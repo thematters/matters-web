@@ -368,30 +368,27 @@ const SetAmount: React.FC<FormProps> = ({
     return <Spinner />
   }
 
-  const SubmitBtn = ({ mode }: { mode: 'text' | 'rounded' }) => (
-    <SubmitButton
-      mode={mode}
-      currency={currency}
-      formId={formId}
-      recipient={recipient}
-      isValid={isValid}
-      isSubmitting={isSubmitting}
-      isBalanceInsufficient={isBalanceInsufficient}
-      isConnectedAddress={isConnectedAddress}
-      isUnsupportedNetwork={isUnsupportedNetwork}
-      isSwitchingNetwork={isSwitchingNetwork}
-      targetChainName={targetNetork.name}
-      allowanceUSDT={allowanceUSDT}
-      approving={approving}
-      approveConfirming={approveConfirming}
-      allowanceLoading={allowanceLoading}
-      approveWrite={approveWrite}
-      switchToTargetNetwork={switchToTargetNetwork}
-      switchToCurrencyChoice={switchToCurrencyChoice}
-      switchToAddCredit={switchToAddCredit}
-      back={back}
-    />
-  )
+  const submitButtonProps = {
+    currency,
+    formId,
+    recipient,
+    isValid,
+    isSubmitting,
+    isBalanceInsufficient,
+    isConnectedAddress,
+    isUnsupportedNetwork,
+    isSwitchingNetwork,
+    targetChainName: targetNetork.name,
+    allowanceUSDT,
+    approving,
+    approveConfirming,
+    allowanceLoading,
+    approveWrite,
+    switchToTargetNetwork,
+    switchToCurrencyChoice,
+    switchToAddCredit,
+    back,
+  }
 
   return (
     <>
@@ -431,7 +428,7 @@ const SetAmount: React.FC<FormProps> = ({
       <Dialog.Footer
         btns={
           <>
-            <SubmitBtn mode="rounded" />
+            <SubmitButton mode="rounded" {...submitButtonProps} />
             <Dialog.RoundedButton
               text={<FormattedMessage defaultMessage="Back" />}
               color="greyDarker"
@@ -446,7 +443,7 @@ const SetAmount: React.FC<FormProps> = ({
               color="greyDarker"
               onClick={back}
             />
-            <SubmitBtn mode="text" />
+            <SubmitButton mode="text" {...submitButtonProps} />
           </>
         }
       />

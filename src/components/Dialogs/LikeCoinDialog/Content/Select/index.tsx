@@ -31,9 +31,9 @@ const Select: React.FC<SelectProps> = ({
           <Form.List.Item
             title={
               <Translate
-                zh_hant="生成 Liker ID"
-                zh_hans="生成 Liker ID"
-                en="Generate Liker ID"
+                zh_hant="創建新的 Liker ID"
+                zh_hans="创建新的 Liker ID"
+                en="Create new Liker ID"
               />
             }
             subtitle={
@@ -49,8 +49,8 @@ const Select: React.FC<SelectProps> = ({
           <Form.List.Item
             title={
               <Translate
-                zh_hant="綁定 Liker ID"
-                zh_hans="綁定 Liker ID"
+                zh_hant="綁定現有 Liker ID"
+                zh_hans="绑定现有 Liker ID"
                 en="Connect your own Liker ID"
               />
             }

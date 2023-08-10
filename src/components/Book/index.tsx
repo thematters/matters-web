@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import BOOK_COVER from '@/public/static/images/book-cover.png'
+import { TEST_ID } from '@/src/common/enums'
 import { countStrWidth } from '~/common/utils'
 import {
   IconCamera24,
@@ -38,6 +39,7 @@ export const Book: React.FC<BookProps> & {
   }, [cover])
 
   const titleWidth = countStrWidth(title)
+  const hasNonCJK = title.length * 2 !== titleWidth
 
   const bookClasses = classNames({
     [styles.book]: true,
@@ -47,8 +49,9 @@ export const Book: React.FC<BookProps> & {
   const jacketClasses = classNames({
     [styles.jacket]: true,
     [styles.hasCount]: hasCount,
-    [styles.titleLg]: titleWidth <= 12,
-    [styles.titleMd]: titleWidth > 12 && titleWidth <= 28,
+    [styles.titleLg]: hasNonCJK ? titleWidth <= 10 : titleWidth <= 12,
+    [styles.titleMd]:
+      !hasCount && titleWidth > 12 && titleWidth <= 28 && !hasNonCJK,
   })
 
   return (
@@ -74,7 +77,9 @@ export const Book: React.FC<BookProps> & {
       </div>
 
       <section className={jacketClasses}>
-        <h2 className={styles.title}>{title}</h2>
+        <h2 className={styles.title} data-test-id={TEST_ID.BOOK_TITLE}>
+          {title}
+        </h2>
 
         {hasCount && (
           <p className={styles.count}>

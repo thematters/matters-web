@@ -2,7 +2,7 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS, Z_INDEX } from '~/common/enums'
+import { PATHS, TEST_ID, Z_INDEX } from '~/common/enums'
 import {
   Dropdown,
   hidePopperOnClick,
@@ -61,6 +61,7 @@ const SideNavMenu = () => {
         activeIcon={<UnreadIcon.Notification active />}
         active={isInNotification}
         href={PATHS.ME_NOTIFICATIONS}
+        testId={TEST_ID.SIDE_NAV_NOTIFICATIONS}
       />
 
       <Media lessThan="lg">
@@ -93,11 +94,16 @@ const SideNavMenu = () => {
             canScrollTop={false}
             aira-haspopup="menu"
             ref={ref}
+            testId={TEST_ID.SIDE_NAV_MY_PAGE}
           />
         )}
       </Dropdown>
 
-      <li role="menuitem" className={styles.listItem}>
+      <li
+        role="menuitem"
+        className={styles.listItem}
+        data-test-id={TEST_ID.SIDE_NAY_WRITE_BUTTON}
+      >
         <WriteButton
           allowed={!viewer.shouldSetupLikerID}
           authed={viewer.isAuthed}
