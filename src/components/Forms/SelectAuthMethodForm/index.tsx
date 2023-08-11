@@ -1,23 +1,21 @@
+import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
+import { useConnect } from 'wagmi'
 
 import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
-import {
-  Dialog,
-  IconEmail24,
-  IconWallet24,
-  LanguageSwitch,
-  Layout,
-  TextIcon,
-} from '~/components'
+import { Dialog, LanguageSwitch, Layout } from '~/components'
 
-import SourceHeader from './SourceHeader'
+import AuthTabs, { AuthType } from './AuthTabs'
+import NormalFeed from './NormalFeed'
 import styles from './styles.module.css'
+import WalletFeed from './WalletFeed'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
   source: UNIVERSAL_AUTH_SOURCE
   gotoWalletAuth: () => void
   gotoEmailLogin: () => void
+  gotoEmailSignup: () => void
   closeDialog?: () => void
 }
 
@@ -26,56 +24,26 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   source,
   gotoWalletAuth,
   gotoEmailLogin,
+  gotoEmailSignup,
   closeDialog,
 }) => {
   const isInPage = purpose === 'page'
+  const { connectors } = useConnect()
+  const injectedConnector = connectors.find((c) => c.id === 'metaMask')
+
+  const [type, setAuthType] = useState<AuthType>(
+    injectedConnector?.ready ? 'wallet' : 'normal'
+  )
+  const isNormal = type === 'normal'
+  const isWallet = type === 'wallet'
 
   const InnerForm = (
-    <ul className={styles.select}>
-      <li className={styles.option} role="button" onClick={gotoWalletAuth}>
-        <header className={styles.header}>
-          <TextIcon
-            color="black"
-            icon={<IconWallet24 size="md" />}
-            size="md"
-            spacing="xtight"
-          >
-            <FormattedMessage
-              defaultMessage="Continue with Wallet"
-              description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-            />
-          </TextIcon>
-        </header>
-        <p className={styles.subtitle}>
-          <FormattedMessage
-            defaultMessage="For unregistered or users enabled wallet login"
-            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-          />
-        </p>
-      </li>
+    <>
+      <AuthTabs type={type} setAuthType={setAuthType} />
 
-      <li className={styles.option} role="button" onClick={gotoEmailLogin}>
-        <header className={styles.header}>
-          <TextIcon
-            color="black"
-            icon={<IconEmail24 size="md" />}
-            size="md"
-            spacing="xtight"
-          >
-            <FormattedMessage
-              defaultMessage="Continue with Email"
-              description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-            />
-          </TextIcon>
-        </header>
-        <p className={styles.subtitle}>
-          <FormattedMessage
-            defaultMessage="User registered by email can login and enable wallet login later"
-            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-          />
-        </p>
-      </li>
-    </ul>
+      {isNormal && <NormalFeed gotoEmailSignup={gotoEmailSignup} />}
+      {isWallet && <WalletFeed />}
+    </>
   )
 
   if (isInPage) {
@@ -94,13 +62,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header title="authEntries" closeDialog={closeDialog} />
-
-      <Dialog.Content>
-        <SourceHeader source={source} />
-
-        {InnerForm}
-      </Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

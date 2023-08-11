@@ -15,28 +15,11 @@
   }
 }
 
-.noSpacing {
-  padding: 0;
-  margin-top: 0;
-}
-
 .list {
   @mixin hide-scrollbar;
 
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-}
-
-.fillList {
-  display: flex;
-
-  & li {
-    flex-grow: 1;
-
-    & + li {
-      margin-left: 0 !important;
-    }
-  }
 }
 
 .item {
@@ -48,7 +31,6 @@
   font-weight: var(--font-weight-medium);
   line-height: 1.375rem;
   color: var(--color-grey-dark);
-  cursor: pointer;
   transition-property: color;
 
   &.selected,

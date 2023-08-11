@@ -102,6 +102,7 @@ const BaseUniversalAuthDialog = ({
           source={source}
           gotoWalletAuth={() => forward('wallet-select')}
           gotoEmailLogin={() => forward('email-login')}
+          gotoEmailSignup={() => forward('email-sign-up-init')}
           closeDialog={closeDialog}
         />
       )}
