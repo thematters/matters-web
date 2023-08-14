@@ -120,7 +120,7 @@ export const AsideUserProfile = () => {
   }
 
   /**
-   * Active or Onboarding User
+   * Active
    */
   return (
     <section
