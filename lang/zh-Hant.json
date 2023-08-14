@@ -100,6 +100,10 @@
   "3KNMbJ": {
     "defaultMessage": "作品"
   },
+  "3Tg548": {
+    "defaultMessage": "登入",
+    "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
+  },
   "3kbIhS": {
     "defaultMessage": "未命名"
   },
@@ -396,6 +400,10 @@
   "Ft76YC": {
     "defaultMessage": "選集已刪除",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  },
+  "GHxtae": {
+    "defaultMessage": "數字錢包",
+    "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
   "GRtGnZ": {
     "defaultMessage": "辭去權限",
@@ -1019,10 +1027,6 @@
     "defaultMessage": "站內閱讀熱門排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
-  "mH1a7I": {
-    "defaultMessage": "登入",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
   "mPe6DK": {
     "defaultMessage": "訂閱了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -1148,10 +1152,6 @@
   "sPgUkN": {
     "defaultMessage": "本月營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
-  },
-  "saXJdD": {
-    "defaultMessage": "數字錢包",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "skbUBl": {
     "defaultMessage": "登入",
