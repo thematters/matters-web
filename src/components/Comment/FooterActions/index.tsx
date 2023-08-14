@@ -120,8 +120,6 @@ const BaseFooterActions = ({
   if (viewer.shouldSetupLikerID) {
     onClick = () =>
       window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-  } else if (viewer.isOnboarding && targetAuthor?.id !== viewer.id) {
-    onClick = () => addToast('failureCommentOnboarding')
   } else if (viewer.isArchived || viewer.isFrozen) {
     onClick = forbid
   } else if (targetAuthor?.isBlocking) {
