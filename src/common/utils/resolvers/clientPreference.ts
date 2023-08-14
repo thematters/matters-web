@@ -5,10 +5,6 @@ const clientPreferenceResolver = (_: any) => {
     readCivicLikerDialog: false,
     wall: true,
     routeHistory: [],
-    onboardingTasks: {
-      enabled: false,
-      __typename: 'OnboardingTasks',
-    },
     circleBanner: true,
   }
 }

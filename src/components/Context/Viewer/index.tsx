@@ -92,16 +92,6 @@ export type Viewer = ViewerUser & {
   isInactive: boolean
   isCivicLiker: boolean
   shouldSetupLikerID: boolean
-  onboardingTasks: {
-    finished: boolean
-    tasks: {
-      likerId: boolean
-      followingTag: boolean
-      article: boolean
-      followee: boolean
-      commentPermission: boolean
-    }
-  }
 }
 
 export const processViewer = (viewer: ViewerUser): Viewer => {
@@ -116,19 +106,6 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const isInactive = isAuthed && (isBanned || isFrozen || isArchived)
   const isCivicLiker = viewer.liker.civicLiker
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
-
-  // Onbooarding Tasks
-  const hasLikerId = !!viewer.liker.likerId
-  const hasFollowingTag = viewer?.following?.tags.totalCount >= 5
-  const hasArticle = viewer?.articles?.totalCount >= 1
-  const hasFollowee = viewer?.following.users?.totalCount >= 5
-  const hasCommentPermission = isAuthed && !isOnboarding
-  const isOnboardingTasksFinished =
-    hasLikerId &&
-    hasFollowingTag &&
-    hasArticle &&
-    hasFollowee &&
-    hasCommentPermission
 
   // Add user info for Sentry
   import('@sentry/browser').then((Sentry) => {
@@ -152,16 +129,6 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
     isInactive,
     isCivicLiker,
     shouldSetupLikerID,
-    onboardingTasks: {
-      finished: isOnboardingTasksFinished,
-      tasks: {
-        likerId: hasLikerId,
-        followingTag: hasFollowingTag,
-        article: hasArticle,
-        followee: hasFollowee,
-        commentPermission: hasCommentPermission,
-      },
-    },
   }
 }
 
