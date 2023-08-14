@@ -1,6 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import dynamic from 'next/dynamic'
 import Sticky from 'react-stickynode'
 
 import {
@@ -11,8 +9,6 @@ import {
   usePullToRefresh,
   useRoute,
 } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { ClientPreferenceQuery } from '~/gql/graphql'
 
 import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
@@ -23,25 +19,6 @@ import SideFooter from './SideFooter'
 import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.module.css'
-
-const DynamicOnboardingTasksNavBar = dynamic(
-  () =>
-    import('~/components/OnboardingTasks').then(
-      (mod) => mod.OnboardingTasks.NavBar
-    ),
-  {
-    ssr: true, // enable for first screen
-  }
-)
-const DynamicOnboardingTasksWidget = dynamic(
-  () =>
-    import('~/components/OnboardingTasks').then(
-      (mod) => mod.OnboardingTasks.Widget
-    ),
-  {
-    ssr: true, // enable for first screen
-  }
-)
 
 export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Main: typeof Main
@@ -92,21 +69,13 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
   Spacing: typeof Spacing
 } = ({ aside, inEditor, children }) => {
   const { isInPath } = useRoute()
-  const isInHome = isInPath('HOME')
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
 
-  const { data } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
-  const onboardingTasks = data?.clientPreference.onboardingTasks
-  const showOnboardingTasks = isInHome && onboardingTasks?.enabled
-
   const articleClasses = classNames({
     [styles.article]: true,
     [styles.hasNavBar]: !isInArticleDetail && !isInDraftDetail,
-    [styles.hasOnboardingTasks]: showOnboardingTasks,
   })
 
   usePullToRefresh.Register('#ptr')
@@ -115,15 +84,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
   return (
     <>
       <article id="ptr" className={articleClasses}>
-        <PullToRefresh>
-          {children}
-
-          {showOnboardingTasks && (
-            <Media lessThan="lg">
-              <DynamicOnboardingTasksNavBar />
-            </Media>
-          )}
-        </PullToRefresh>
+        <PullToRefresh>{children}</PullToRefresh>
       </article>
 
       <aside className={styles.aside}>
@@ -132,8 +93,6 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
             <section className={styles.content}>
               <section className={styles.top}>
                 {!inEditor && <SearchBar />}
-
-                {showOnboardingTasks && <DynamicOnboardingTasksWidget />}
 
                 {aside}
               </section>
