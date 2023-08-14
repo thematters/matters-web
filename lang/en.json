@@ -101,6 +101,10 @@
   "3KNMbJ": {
     "defaultMessage": "Articles"
   },
+  "3Tg548": {
+    "defaultMessage": "Sign In",
+    "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
+  },
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
@@ -398,6 +402,10 @@
   "Ft76YC": {
     "defaultMessage": "Collection is deleted",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  },
+  "GHxtae": {
+    "defaultMessage": "Wallet",
+    "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
   "GRtGnZ": {
     "defaultMessage": "Resign From Maintainer",
@@ -1025,10 +1033,6 @@
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx",
     "defaultMessage": "Hottest"
   },
-  "mH1a7I": {
-    "defaultMessage": "Sign in",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
   "mPe6DK": {
     "defaultMessage": "subscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -1156,10 +1160,6 @@
   "sPgUkN": {
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx",
     "defaultMessage": "This Month"
-  },
-  "saXJdD": {
-    "defaultMessage": "Wallet",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
   },
   "skbUBl": {
     "defaultMessage": "Log in",

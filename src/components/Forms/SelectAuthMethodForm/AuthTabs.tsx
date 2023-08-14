@@ -20,15 +20,15 @@ const AuthTabs = ({ type, setAuthType }: AuthTabsProps) => {
       <Tabs noSpacing fill>
         <Tabs.Tab onClick={() => setAuthType('normal')} selected={isNormal}>
           <FormattedMessage
-            defaultMessage="Sign in"
-            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
+            defaultMessage="Sign In"
+            description="src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
           />
         </Tabs.Tab>
 
         <Tabs.Tab onClick={() => setAuthType('wallet')} selected={isWallet}>
           <FormattedMessage
             defaultMessage="Wallet"
-            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
+            description="src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
           />
         </Tabs.Tab>
       </Tabs>
