@@ -15,6 +15,11 @@
   }
 }
 
+.noSpacing {
+  padding: 0;
+  margin-top: 0;
+}
+
 .list {
   @mixin hide-scrollbar;
 
@@ -22,14 +27,28 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.fillList {
+  display: flex;
+
+  & li {
+    flex-grow: 1;
+
+    & + li {
+      margin-left: 0 !important;
+    }
+  }
+}
+
 .item {
   @mixin inline-flex-center-all;
   @mixin transition;
 
   padding: var(--spacing-tight) 0 var(--spacing-x-tight);
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   line-height: 1.375rem;
   color: var(--color-grey-dark);
+  cursor: pointer;
   transition-property: color;
 
   &.selected,

@@ -100,8 +100,16 @@
   "3KNMbJ": {
     "defaultMessage": "作品"
   },
+  "3Tg548": {
+    "defaultMessage": "登录",
+    "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
+  },
   "3kbIhS": {
     "defaultMessage": "未命名"
+  },
+  "3phEFL": {
+    "defaultMessage": "继续使用表示您同意",
+    "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "3uQKhx": {
     "defaultMessage": "若你希望向 Matters 提出建议，或遭遇操作异常，请发送邮件至",
@@ -397,6 +405,10 @@
     "defaultMessage": "选集已刪除",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
+  "GHxtae": {
+    "defaultMessage": "数字钱包",
+    "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
+  },
   "GRtGnZ": {
     "defaultMessage": "辞去权限",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -453,10 +465,6 @@
     "defaultMessage": "邀你加入围炉 {circleName} ，你可以免费体验 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
-  "J+LXrH": {
-    "defaultMessage": "使用邮箱进入，未来可随时启用钱包登入",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
   "JTWayV": {
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -497,6 +505,10 @@
   "L0J61B": {
     "defaultMessage": "免费",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "L34EMG": {
+    "defaultMessage": "没有帐号？",
+    "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "L4Fcr8": {
     "defaultMessage": "新建选集"
@@ -674,6 +686,10 @@
   "UjKkhq": {
     "defaultMessage": "作品已添加标签",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "V5OMr4": {
+    "defaultMessage": "什么是数字钱包？",
+    "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
   },
   "V8msLJ": {
     "defaultMessage": "在你的围炉中留言提及你",
@@ -934,10 +950,6 @@
   "hrgo+E": {
     "defaultMessage": "归档"
   },
-  "iCFXtS": {
-    "defaultMessage": "欢迎未注册或已启用钱包登入的朋友使用",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
   "ieGrWo": {
     "defaultMessage": "追踪"
   },
@@ -950,6 +962,10 @@
   },
   "izWS4J": {
     "defaultMessage": "取消追踪"
+  },
+  "jBx/nm": {
+    "defaultMessage": "邮箱注册",
+    "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "jJ1Brc": {
     "defaultMessage": "喜欢回应",
@@ -1148,10 +1164,6 @@
   "sy+pv5": {
     "defaultMessage": "邮箱"
   },
-  "t8/r8X": {
-    "defaultMessage": "连接加密钱包",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
@@ -1239,10 +1251,6 @@
     "defaultMessage": "{follower, plural, =1 {人} other {人}}",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "xiKjd/": {
-    "defaultMessage": "使用电子邮箱",
-    "description": "src/components/Forms/SelectAuthMethodForm/index.tsx"
-  },
   "xkr+zo": {
     "defaultMessage": "协议"
   },
@@ -1283,6 +1291,10 @@
   "zKOr2x": {
     "defaultMessage": "已追踪用户占总观看人数比例",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "zOZ77e": {
+    "defaultMessage": "用户协议及隐私条款",
+    "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "zQvVDJ": {
     "defaultMessage": "全部"

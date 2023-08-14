@@ -36,23 +36,39 @@ const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
   }
 
   return (
-    <li role="tab" aria-selected={selected} className={classes}>
-      <button onClick={onClick}>
-        {children}
-        {count && <span className={styles.count}>&nbsp;{count}</span>}
-      </button>
+    <li
+      role="tab"
+      aria-selected={selected}
+      className={classes}
+      onClick={onClick}
+    >
+      {children}
+      {count && <span className={styles.count}>&nbsp;{count}</span>}
     </li>
   )
 }
 
-interface TabsProps {}
+interface TabsProps {
+  noSpacing?: boolean
+  fill?: boolean
+}
 
 export const Tabs: React.FC<React.PropsWithChildren<TabsProps>> & {
   Tab: typeof Tab
-} = ({ children }) => {
+} = ({ noSpacing, fill, children }) => {
+  const tabsClasses = classNames({
+    [styles.tabs]: true,
+    [styles.noSpacing]: !!noSpacing,
+  })
+
+  const listClasses = classNames({
+    [styles.list]: true,
+    [styles.fillList]: !!fill,
+  })
+
   return (
-    <nav className={styles.tabs}>
-      <ul role="tablist" className={styles.list}>
+    <nav className={tabsClasses}>
+      <ul role="tablist" className={listClasses}>
         {children}
       </ul>
     </nav>
