@@ -108,6 +108,10 @@
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
+  "3phEFL": {
+    "defaultMessage": "Continued use indicates your agreement to ",
+    "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+  },
   "3uQKhx": {
     "defaultMessage": "Please email",
     "description": "src/views/Help/index.tsx"
@@ -1083,10 +1087,6 @@
     "defaultMessage": "Following",
     "description": "src/components/UserProfile/index.tsx"
   },
-  "p+A406": {
-    "defaultMessage": "Continued use indicates your agreement to the User Agreement and Privacy Policy.",
-    "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
-  },
   "p5qZnJ": {
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
@@ -1300,6 +1300,10 @@
   "zKOr2x": {
     "defaultMessage": "Conversion Rate of Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "zOZ77e": {
+    "defaultMessage": "the User Agreement and Privacy Policy.",
+    "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "zQvVDJ": {
     "defaultMessage": "All"

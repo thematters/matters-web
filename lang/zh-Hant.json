@@ -107,6 +107,10 @@
   "3kbIhS": {
     "defaultMessage": "未命名"
   },
+  "3phEFL": {
+    "defaultMessage": "繼續使用表示您同意",
+    "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+  },
   "3uQKhx": {
     "defaultMessage": "若你希望向 Matters 提出建議，或遭遇操作異常，請發送郵件至",
     "description": "src/views/Help/index.tsx"
@@ -1077,10 +1081,6 @@
     "defaultMessage": "追蹤中",
     "description": "src/components/UserProfile/index.tsx"
   },
-  "p+A406": {
-    "defaultMessage": "繼續使用表示您同意用戶協議及隱私條款",
-    "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
-  },
   "p5qZnJ": {
     "defaultMessage": "讚賞了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
@@ -1291,6 +1291,10 @@
   "zKOr2x": {
     "defaultMessage": "已追蹤用戶佔總觀看人數比例",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "zOZ77e": {
+    "defaultMessage": "用戶協議及隱私條款",
+    "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "zQvVDJ": {
     "defaultMessage": "全部"

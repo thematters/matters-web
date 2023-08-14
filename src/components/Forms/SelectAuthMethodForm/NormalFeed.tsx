@@ -1,5 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
+import { PATHS } from '@/src/common/enums'
 import { IconFacebook22, IconGoogle22, IconMail22, IconX22 } from '~/components'
 
 import styles from './styles.module.css'
@@ -61,9 +62,15 @@ const NormalFeed = ({ gotoEmailSignup }: Props) => {
         </section>
         <section className={styles.policy}>
           <FormattedMessage
-            defaultMessage="Continued use indicates your agreement to the User Agreement and Privacy Policy."
+            defaultMessage="Continued use indicates your agreement to"
             description="src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
           />
+          <a href={PATHS.TOS} target="_blank">
+            <FormattedMessage
+              defaultMessage="the User Agreement and Privacy Policy."
+              description="src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+            />
+          </a>
         </section>
       </section>
     </>
