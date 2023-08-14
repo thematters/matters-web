@@ -48,7 +48,11 @@ const NormalFeed = ({ gotoEmailSignup }: Props) => {
             />
           </span>
 
-          <span className={styles.right} onClick={gotoEmailSignup}>
+          <span
+            className={styles.right}
+            onClick={gotoEmailSignup}
+            role="button"
+          >
             <FormattedMessage
               defaultMessage="Sign up with email"
               description="src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
