@@ -2,7 +2,6 @@ import { useContext, useEffect } from 'react'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
-import { URL_QS } from '~/common/enums'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   ArticleDigestArchive,
@@ -135,27 +134,17 @@ const UserArticles = () => {
   }
 
   // customize title
-  const shareSource = getQuery(URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key)
-  const isShareOnboardingTasks =
-    shareSource === URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.value
 
   const description = stripSpaces(user.info.description)
 
   const CustomHead = () => (
     <Head
       title={{
-        zh_hant: isShareOnboardingTasks
-          ? `${user.displayName} 已解鎖新手獎賞，快點加入 Matters 獲得創作者獎勵吧`
-          : `${user.displayName} 的創作空間站`,
-        zh_hans: isShareOnboardingTasks
-          ? `${user.displayName} 已解锁新手奖赏，快点加入 Matters 获得创作者奖励吧`
-          : `${user.displayName} 的创作空间站`,
-        en: isShareOnboardingTasks
-          ? `${user.displayName} has unlocked new user reward, join Matters to get creator reward`
-          : `${user.displayName}'s creative space`,
+        zh_hant: `${user.displayName} 的創作空間站`,
+        zh_hans: `${user.displayName} 的创作空间站`,
+        en: `${user.displayName}'s creative space`,
       }}
       // title={`Matters - ${user.displayName} (@${user.userName})`}
-      noSuffix={isShareOnboardingTasks}
       description={description}
       // keywords={...} // show user's top10 most used tags?
       image={

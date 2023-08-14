@@ -126,8 +126,6 @@ export const TEXT = {
     collectArticle: '關聯作品',
     failureChange: '修改失敗，請稍候重試',
     failureCommentBlocked: '因爲作者設置，你無法參與討論。',
-    failureCommentOnboarding:
-      '當你獲得 15 次讚賞或積極閱讀作品，即可獲得評論相關權限',
     failureCopy: '複製失敗',
     failureLogout: '登出失敗，請重試',
     failureDonation: '支持失敗',
@@ -532,8 +530,6 @@ export const TEXT = {
     collectArticle: '关联作品',
     failureChange: '修改失败，请稍候重试',
     failureCommentBlocked: '因为作者设置，你无法参与讨论。',
-    failureCommentOnboarding:
-      '当你获得 15 次赞赏或积极阅读作品，即可获得评论相关权限',
     failureCopy: '复制失败',
     failureLogout: '登出失败，再来一次',
     failureDonation: '支持失败',
@@ -948,8 +944,6 @@ export const TEXT = {
     collectArticle: 'Collect Article',
     failureChange: 'Failed to edit, please try again.',
     failureCommentBlocked: 'The author has disabled comments for this article',
-    failureCommentOnboarding:
-      'You can comment when you have 15 likes or read more articles.',
     failureCopy: 'Failed to copy, please try again.',
     failureLogout: 'Failed to log out, please try again.',
     failureDonation: 'Failed to Donate',

@@ -132,19 +132,6 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
     )
   }
 
-  if (viewer.isOnboarding && article.author?.id !== viewer.id) {
-    return (
-      <Content
-        article={article}
-        onClick={() => {
-          toast.error({
-            message: <Translate id="failureCommentOnboarding" />,
-          })
-        }}
-      />
-    )
-  }
-
   if (viewer.isInactive) {
     return (
       <Content

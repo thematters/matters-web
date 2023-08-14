@@ -14,7 +14,6 @@ import { updateViewerUnreadFollowing } from '~/components/GQL'
 import { MeFollowQuery, ReadFollowingFeedMutation } from '~/gql/graphql'
 
 import Feed from './Feed'
-import PickAuthors from './PickAuthors'
 
 const READ_FOLLOWING = gql`
   mutation ReadFollowingFeed {
@@ -59,24 +58,14 @@ const BaseFollow = () => {
     return null
   }
 
-  const followeeCount = data?.viewer?.following.users.totalCount || 0
-
-  if (followeeCount < 5) {
-    return <PickAuthors />
-  } else {
-    return <Feed />
-  }
+  return <Feed />
 }
 
 const Follow = () => {
   return (
     <Layout.Main>
       <Media at="sm">
-        <Layout.Header
-          // left={<Layout.Header.MeButton />}
-          // right={<Layout.Header.Title id="following" />}
-          left={<Layout.Header.Title id="following" />}
-        />
+        <Layout.Header left={<Layout.Header.Title id="following" />} />
       </Media>
       <Media greaterThan="sm">
         <Spacer size="base" />
