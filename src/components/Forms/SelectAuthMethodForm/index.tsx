@@ -3,10 +3,13 @@ import { FormattedMessage } from 'react-intl'
 import { useConnect } from 'wagmi'
 
 import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
-import { AuthTabs, AuthType, Dialog } from '~/components'
-
-import NormalFeed from './NormalFeed'
-import WalletFeed from './WalletFeed'
+import {
+  AuthNormalFeed,
+  AuthTabs,
+  AuthType,
+  AuthWalletFeed,
+  Dialog,
+} from '~/components'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -39,12 +42,12 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
       <AuthTabs type={type} setAuthType={setAuthType} />
 
       {isNormal && (
-        <NormalFeed
+        <AuthNormalFeed
           gotoEmailSignup={gotoEmailSignup}
           gotoEmailLogin={gotoEmailLogin}
         />
       )}
-      {isWallet && <WalletFeed />}
+      {isWallet && <AuthWalletFeed />}
     </>
   )
 

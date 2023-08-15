@@ -10,7 +10,7 @@ interface Props {
   gotoEmailLogin: () => void
 }
 
-const NormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
+export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
   return (
     <>
       <ul className={styles.feed}>
@@ -77,5 +77,3 @@ const NormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
     </>
   )
 }
-
-export default NormalFeed

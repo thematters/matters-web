@@ -1,17 +1,3 @@
-.footer {
-  @mixin flex-center-all;
-
-  margin: var(--spacing-x-loose) 0;
-}
-
-.sourceHeader {
-  text-align: center;
-
-  & img {
-    width: 12.5rem;
-  }
-}
-
 .feed {
   margin-top: var(--spacing-loose);
 

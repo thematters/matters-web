@@ -4,7 +4,7 @@ import { IconMetamask22, IconWalletConnect22 } from '~/components'
 
 import styles from './styles.module.css'
 
-const WalletFeed = () => {
+export const AuthWalletFeed = () => {
   return (
     <>
       <ul className={styles.feed}>
@@ -32,5 +32,3 @@ const WalletFeed = () => {
     </>
   )
 }
-
-export default WalletFeed
