@@ -97,6 +97,9 @@
     "defaultMessage": "追蹤",
     "description": "src/components/Layout/SideNav/index.tsx"
   },
+  "39AHJm": {
+    "defaultMessage": "註冊"
+  },
   "3KNMbJ": {
     "defaultMessage": "作品"
   },
@@ -145,6 +148,10 @@
   },
   "5FO4vn": {
     "defaultMessage": "你尚無權限進行該操作"
+  },
+  "5JN+nl": {
+    "defaultMessage": "請檢查郵件",
+    "description": "src/components/Forms/Verification/LinkSent.tsx"
   },
   "5MDGuM": {
     "defaultMessage": "請輸入你的註冊電子信箱"
@@ -1093,9 +1100,6 @@
     "defaultMessage": "闔上",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   },
-  "pwlQEY": {
-    "defaultMessage": "姓名"
-  },
   "pzTOmv": {
     "defaultMessage": "追蹤者"
   },
@@ -1162,7 +1166,7 @@
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "sy+pv5": {
-    "defaultMessage": "電子郵箱"
+    "defaultMessage": "郵件地址"
   },
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已發布到分佈式網絡",
@@ -1224,6 +1228,10 @@
   "wER32z": {
     "defaultMessage": "在 {circleName} 中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "wK4kLf": {
+    "defaultMessage": "註冊",
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
   "wSEOxH": {
     "defaultMessage": "聯繫渠道",
@@ -1287,6 +1295,10 @@
   "yoRaUc": {
     "defaultMessage": "退款",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "zAK5G+": {
+    "defaultMessage": "登入連結已發送至 {email}",
+    "description": "src/components/Forms/Verification/LinkSent.tsx"
   },
   "zKOr2x": {
     "defaultMessage": "已追蹤用戶佔總觀看人數比例",

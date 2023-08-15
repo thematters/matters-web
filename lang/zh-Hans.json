@@ -97,6 +97,9 @@
     "defaultMessage": "追踪",
     "description": "src/components/Layout/SideNav/index.tsx"
   },
+  "39AHJm": {
+    "defaultMessage": "注册"
+  },
   "3KNMbJ": {
     "defaultMessage": "作品"
   },
@@ -145,6 +148,10 @@
   },
   "5FO4vn": {
     "defaultMessage": "你尚无权限进行该操作"
+  },
+  "5JN+nl": {
+    "defaultMessage": "请检查邮件",
+    "description": "src/components/Forms/Verification/LinkSent.tsx"
   },
   "5MDGuM": {
     "defaultMessage": "请输入你的注册邮箱"
@@ -1093,9 +1100,6 @@
     "defaultMessage": "折叠",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   },
-  "pwlQEY": {
-    "defaultMessage": "姓名"
-  },
   "pzTOmv": {
     "defaultMessage": "追踪者"
   },
@@ -1225,6 +1229,10 @@
     "defaultMessage": "在 {circleName} 中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "wK4kLf": {
+    "defaultMessage": "注册",
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+  },
   "wSEOxH": {
     "defaultMessage": "联系渠道",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -1287,6 +1295,10 @@
   "yoRaUc": {
     "defaultMessage": "退款",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "zAK5G+": {
+    "defaultMessage": "登入链接已发送至 {email}",
+    "description": "src/components/Forms/Verification/LinkSent.tsx"
   },
   "zKOr2x": {
     "defaultMessage": "已追踪用户占总观看人数比例",

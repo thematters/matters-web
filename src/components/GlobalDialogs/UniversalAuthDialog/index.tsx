@@ -74,6 +74,7 @@ const BaseUniversalAuthDialog = ({
     initSource || UNIVERSAL_AUTH_SOURCE.enter
   )
   const { currStep, forward } = useStep<Step>('select-login-method')
+  const [email, setEmail] = useState('')
 
   const {
     show,
@@ -144,7 +145,10 @@ const BaseUniversalAuthDialog = ({
       {currStep === 'email-sign-up-init' && (
         <DynamicEmailSignUpFormInit
           purpose="dialog"
-          submitCallback={() => forward('email-verification-sent')}
+          submitCallback={(email: string) => {
+            setEmail(email)
+            forward('email-verification-sent')
+          }}
           gotoEmailLogin={() => forward('email-login')}
           closeDialog={closeDialog}
           back={() => forward('email-login')}
@@ -152,9 +156,10 @@ const BaseUniversalAuthDialog = ({
       )}
       {currStep === 'email-verification-sent' && (
         <VerificationLinkSent
-          type="changePassword"
+          type="register"
           purpose="dialog"
           closeDialog={closeDialog}
+          email={email}
         />
       )}
       {currStep === 'reset-password-request' && (
