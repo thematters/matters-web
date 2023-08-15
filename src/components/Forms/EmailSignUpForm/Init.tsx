@@ -164,6 +164,7 @@ const Init: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
+        smUpSpaceBetween
         smUpBtns={
           <>
             <Dialog.TextButton
