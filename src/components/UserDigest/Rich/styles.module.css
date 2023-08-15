@@ -42,6 +42,7 @@
 
 .name {
   @mixin line-clamp;
+  @mixin fix-cropped-letters;
 
   font-weight: var(--font-weight-medium);
 }
