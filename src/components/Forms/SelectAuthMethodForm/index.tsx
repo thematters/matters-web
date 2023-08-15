@@ -4,9 +4,9 @@ import { useConnect } from 'wagmi'
 
 import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
 import {
+  AuthFeedType,
   AuthNormalFeed,
   AuthTabs,
-  AuthType,
   AuthWalletFeed,
   Dialog,
 } from '~/components'
@@ -31,15 +31,15 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   const { connectors } = useConnect()
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
 
-  const [type, setAuthType] = useState<AuthType>(
+  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(
     injectedConnector?.ready ? 'wallet' : 'normal'
   )
-  const isNormal = type === 'normal'
-  const isWallet = type === 'wallet'
+  const isNormal = authTypeFeed === 'normal'
+  const isWallet = authTypeFeed === 'wallet'
 
   const InnerForm = (
     <>
-      <AuthTabs type={type} setAuthType={setAuthType} />
+      <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
 
       {isNormal && (
         <AuthNormalFeed

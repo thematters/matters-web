@@ -1,6 +1,4 @@
 .feed {
-  margin-top: var(--spacing-loose);
-
   & .item {
     @mixin border-grey-light;
     @mixin flex-center-all;

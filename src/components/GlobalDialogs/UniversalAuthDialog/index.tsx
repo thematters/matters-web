@@ -151,7 +151,7 @@ const BaseUniversalAuthDialog = ({
           }}
           gotoEmailLogin={() => forward('email-login')}
           closeDialog={closeDialog}
-          back={() => forward('email-login')}
+          back={() => forward('select-login-method')}
         />
       )}
       {currStep === 'email-verification-sent' && (

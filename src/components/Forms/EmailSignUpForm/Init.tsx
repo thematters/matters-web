@@ -1,14 +1,19 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
 import {
+  AuthFeedType,
+  AuthTabs,
+  AuthWalletFeed,
   Dialog,
   Form,
+  IconLeft20,
   LanguageContext,
-  Layout,
+  Media,
+  TextIcon,
   //  ReCaptchaContext,
   useMutation,
 } from '~/components'
@@ -20,7 +25,7 @@ interface FormProps {
   submitCallback: (email: string) => void
   gotoEmailLogin: () => void
   closeDialog?: () => void
-  back?: () => void
+  back: () => void
 }
 
 interface FormValues {
@@ -35,8 +40,11 @@ const Init: React.FC<FormProps> = ({
   back,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const isInPage = purpose === 'page'
   const formId = 'email-sign-up-init-form'
+
+  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>('normal')
+  const isNormal = authTypeFeed === 'normal'
+  const isWallet = authTypeFeed === 'wallet'
 
   // const { token, refreshToken } = useContext(ReCaptchaContext)
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
@@ -126,53 +134,46 @@ const Init: React.FC<FormProps> = ({
     />
   )
 
-  if (isInPage) {
-    return (
-      <>
-        <Layout.Header
-          right={
-            <>
-              <Layout.Header.Title id="register">
-                <FormattedMessage defaultMessage="Sign Up" />
-              </Layout.Header.Title>
-              <Layout.Header.RightButton
-                type="submit"
-                form={formId}
-                disabled={isSubmitting}
-                text={
-                  <FormattedMessage
-                    defaultMessage="Continue"
-                    description="src/components/Forms/EmailSignUpForm/Init.tsx"
-                  />
-                }
-                loading={isSubmitting}
-              />
-            </>
-          }
-        />
-
-        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
-      </>
-    )
-  }
-
   return (
     <>
       <Dialog.Header
         title={<FormattedMessage defaultMessage="Sign Up" />}
+        hasSmUpTitle={false}
+        leftBtn={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            color="greyDarker"
+            onClick={back}
+          />
+        }
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Dialog.Content>
+        <Media at="sm">{InnerForm}</Media>
+        <Media greaterThan="sm">
+          <AuthTabs
+            type={authTypeFeed}
+            setType={setAuthTypeFeed}
+            normalText={<FormattedMessage defaultMessage="Sign Up" />}
+          />
+          {isNormal && <>{InnerForm}</>}
+          {isWallet && <AuthWalletFeed />}
+        </Media>
+      </Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Close" />}
+              text={
+                <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
+                  <FormattedMessage defaultMessage="Back" />
+                </TextIcon>
+              }
               color="greyDarker"
-              onClick={closeDialog}
+              onClick={back}
             />
 
             {SubmitButton}
