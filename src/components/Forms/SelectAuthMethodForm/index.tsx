@@ -3,11 +3,9 @@ import { FormattedMessage } from 'react-intl'
 import { useConnect } from 'wagmi'
 
 import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
-import { Dialog, LanguageSwitch, Layout } from '~/components'
+import { AuthTabs, AuthType, Dialog } from '~/components'
 
-import AuthTabs, { AuthType } from './AuthTabs'
 import NormalFeed from './NormalFeed'
-import styles from './styles.module.css'
 import WalletFeed from './WalletFeed'
 
 interface FormProps {
@@ -27,7 +25,6 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   gotoEmailSignup,
   closeDialog,
 }) => {
-  const isInPage = purpose === 'page'
   const { connectors } = useConnect()
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
 
@@ -41,24 +38,15 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
     <>
       <AuthTabs type={type} setAuthType={setAuthType} />
 
-      {isNormal && <NormalFeed gotoEmailSignup={gotoEmailSignup} />}
+      {isNormal && (
+        <NormalFeed
+          gotoEmailSignup={gotoEmailSignup}
+          gotoEmailLogin={gotoEmailLogin}
+        />
+      )}
       {isWallet && <WalletFeed />}
     </>
   )
-
-  if (isInPage) {
-    return (
-      <>
-        <Layout.Header left={<Layout.Header.Title id="authEntries" />} />
-
-        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
-
-        <footer className={styles.footer}>
-          <LanguageSwitch />
-        </footer>
-      </>
-    )
-  }
 
   return (
     <>

@@ -11,7 +11,7 @@ interface AuthTabsProps {
   setAuthType: (type: AuthType) => void
 }
 
-const AuthTabs = ({ type, setAuthType }: AuthTabsProps) => {
+export const AuthTabs = ({ type, setAuthType }: AuthTabsProps) => {
   const isNormal = type === 'normal'
   const isWallet = type === 'wallet'
 
@@ -35,5 +35,3 @@ const AuthTabs = ({ type, setAuthType }: AuthTabsProps) => {
     </section>
   )
 }
-
-export default AuthTabs

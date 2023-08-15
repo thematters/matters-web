@@ -1,6 +1,7 @@
 /**
  * Atomics
  */
+export * from './AuthTabs'
 export * from './Avatar'
 export * from './Book'
 export * from './Button'
