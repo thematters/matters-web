@@ -107,6 +107,9 @@ const Init: React.FC<FormProps> = ({
         placeholder={intl.formatMessage({
           defaultMessage: 'Email',
         })}
+        hintSize="sm"
+        hintAlign="center"
+        hintSpace="baseLoose"
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
@@ -163,24 +166,26 @@ const Init: React.FC<FormProps> = ({
         </Media>
       </Dialog.Content>
 
-      <Dialog.Footer
-        smUpSpaceBetween
-        smUpBtns={
-          <>
-            <Dialog.TextButton
-              text={
-                <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
-                  <FormattedMessage defaultMessage="Back" />
-                </TextIcon>
-              }
-              color="greyDarker"
-              onClick={back}
-            />
+      {isNormal && (
+        <Dialog.Footer
+          smUpSpaceBetween
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text={
+                  <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
+                    <FormattedMessage defaultMessage="Back" />
+                  </TextIcon>
+                }
+                color="greyDarker"
+                onClick={back}
+              />
 
-            {SubmitButton}
-          </>
-        }
-      />
+              {SubmitButton}
+            </>
+          }
+        />
+      )}
     </>
   )
 }
