@@ -19,8 +19,6 @@ export const REFETCH_DONATORS = 'refetchDonators'
 export const OPEN_UNIVERSAL_AUTH_DIALOG = 'openUniversalAuthDialog'
 export const CLOSE_ACTIVE_DIALOG = 'closeActiveDialog'
 export const OPEN_LIKE_COIN_DIALOG = 'openLikeCoinDialog'
-export const OPEN_RECOMMEND_AUTHOR_DIALOG = 'openRecommendAuthorDialog'
-export const OPEN_RECOMMEND_TAG_DIALOG = 'openRecommendTagDialog'
 export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
 
 export enum UNIVERSAL_AUTH_SOURCE {
