@@ -186,6 +186,17 @@ const Init: React.FC<FormProps> = ({
           }
         />
       )}
+      {isWallet && (
+        <Dialog.Footer
+          smUpBtns={
+            <Dialog.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Close" />}
+              onClick={closeDialog}
+            />
+          }
+        />
+      )}
     </>
   )
 }
