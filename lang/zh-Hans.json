@@ -68,8 +68,8 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "1zVIWy": {
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx",
-    "defaultMessage": "在 {commentArticle} 评论提到了你"
+    "defaultMessage": "在 {commentArticle} 评论提到了你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "20bImY": {
     "defaultMessage": "众聊"
@@ -233,8 +233,7 @@
     "defaultMessage": "漏洞报告"
   },
   "9J0iCw": {
-    "defaultMessage": "已注销用户",
-    "description": "src/components/UserProfile/index.tsx"
+    "defaultMessage": "已注销用户"
   },
   "9mfw9c": {
     "defaultMessage": "钱包地址",
@@ -1303,3 +1302,4 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
+
