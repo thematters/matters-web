@@ -111,7 +111,7 @@
     "defaultMessage": "Wallet"
   },
   "3ynsJ3": {
-    "defaultMessage": "Want to know more? Check the ",
+    "defaultMessage": "Want to know more? Check the",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "47FYwb": {
@@ -121,7 +121,7 @@
     "defaultMessage": "Community"
   },
   "4giHJT": {
-    "defaultMessage": "Have wallet questions on mobile device ? Click the ",
+    "defaultMessage": "Have wallet questions on mobile device ? Click the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "4l6vz1": {
@@ -288,7 +288,7 @@
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
   },
   "BHFHeY": {
-    "defaultMessage": " commented in {commentCircle}",
+    "defaultMessage": "commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "Bc20la": {
@@ -571,7 +571,7 @@
     "defaultMessage": "Share"
   },
   "Po+kJe": {
-    "defaultMessage": "Last {months} month",
+    "defaultMessage": "Last {month} month",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "Pp/0po": {
@@ -649,7 +649,7 @@
     "defaultMessage": "Creators"
   },
   "U/Tqmx": {
-    "defaultMessage": " commented on your bookmarked article ",
+    "defaultMessage": "commented on your bookmarked article",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
   "U7o9Ba": {
@@ -805,7 +805,7 @@
     "description": "src/components/Transaction/State/index.tsx"
   },
   "b+LSgI": {
-    "defaultMessage": " replied to your discussion on ",
+    "defaultMessage": "replied to your discussion on",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "b3onWZ": {
@@ -838,7 +838,7 @@
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
   },
   "cf37Zy": {
-    "defaultMessage": "Add hash from IPFS into compatible reader such as ",
+    "defaultMessage": "Add hash from IPFS into compatible reader such as",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "cfL5uk": {
@@ -923,11 +923,11 @@
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
   "hk2aiz": {
-    "defaultMessage": " followed your circle",
+    "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hrfF+i": {
-    "defaultMessage": "Don't have a wallet yet? Check the ",
+    "defaultMessage": "Don't have a wallet yet? Check the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "hrgo+E": {
@@ -973,7 +973,7 @@
     "defaultMessage": "Tag Description"
   },
   "k5NnNF": {
-    "defaultMessage": " followed you",
+    "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
   "k97/u7": {
@@ -1015,7 +1015,7 @@
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
   "mPe6DK": {
-    "defaultMessage": " subscribed your circle",
+    "defaultMessage": "subscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "mSAY3/": {
@@ -1090,7 +1090,7 @@
     "defaultMessage": "Circle Name"
   },
   "qYzBk8": {
-    "defaultMessage": " unsubscribed your circle",
+    "defaultMessage": "unsubscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "qgPR68": {
