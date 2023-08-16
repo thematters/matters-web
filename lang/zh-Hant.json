@@ -68,8 +68,8 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "1zVIWy": {
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx",
-    "defaultMessage": "在 {commentArticle} 評論提到了你"
+    "defaultMessage": "在 {commentArticle} 評論提到了你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "20bImY": {
     "defaultMessage": "眾聊"
@@ -233,8 +233,7 @@
     "defaultMessage": "漏洞提報"
   },
   "9J0iCw": {
-    "defaultMessage": "已註銷用戶",
-    "description": "src/components/UserProfile/index.tsx"
+    "defaultMessage": "已註銷用戶"
   },
   "9mfw9c": {
     "defaultMessage": "錢包地址",
@@ -676,8 +675,8 @@
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "V8msLJ": {
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx",
-    "defaultMessage": "在你的圍爐中留言並提及你"
+    "defaultMessage": "在你的圍爐中留言並提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "VZsE96": {
     "defaultMessage": "選集名稱"
@@ -1303,3 +1302,4 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
+
