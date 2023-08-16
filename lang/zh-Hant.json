@@ -68,8 +68,8 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "1zVIWy": {
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx",
-    "defaultMessage": "在 {commentArticle} 評論提到了你"
+    "defaultMessage": "在 {commentArticle} 評論提到了你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "20bImY": {
     "defaultMessage": "眾聊"
@@ -233,8 +233,7 @@
     "defaultMessage": "漏洞提報"
   },
   "9J0iCw": {
-    "defaultMessage": "已註銷用戶",
-    "description": "src/components/UserProfile/index.tsx"
+    "defaultMessage": "已註銷用戶"
   },
   "9mfw9c": {
     "defaultMessage": "錢包地址",
@@ -277,7 +276,7 @@
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "AVpR3Q": {
-    "defaultMessage": "Wallet linked",
+    "defaultMessage": "已綁定錢包",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
   "AYTnjk": {
@@ -343,7 +342,7 @@
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
   "DYrDcG": {
-    "defaultMessage": "Badges",
+    "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
   },
   "DyuHBH": {
@@ -676,8 +675,8 @@
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "V8msLJ": {
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx",
-    "defaultMessage": "在你的圍爐中留言並提及你"
+    "defaultMessage": "在你的圍爐中留言並提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "VZsE96": {
     "defaultMessage": "選集名稱"
@@ -924,7 +923,7 @@
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
   "hk2aiz": {
-    "defaultMessage": "追蹤了你的圍爐",
+    "defaultMessage": " 追蹤了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hrfF+i": {
@@ -1016,7 +1015,7 @@
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
   "mPe6DK": {
-    "defaultMessage": "訂閱了你的圍爐",
+    "defaultMessage": " 訂閱了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "mSAY3/": {
@@ -1303,3 +1302,4 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
+
