@@ -923,7 +923,7 @@
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
   "hk2aiz": {
-    "defaultMessage": " 追踪了你的围炉",
+    "defaultMessage": "追踪了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hrfF+i": {
@@ -1015,7 +1015,7 @@
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
   "mPe6DK": {
-    "defaultMessage": " 订阅了你的围炉",
+    "defaultMessage": "订阅了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "mSAY3/": {
