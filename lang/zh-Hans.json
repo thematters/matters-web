@@ -68,8 +68,8 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "1zVIWy": {
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx",
-    "defaultMessage": "在 {commentArticle} 评论提到了你"
+    "defaultMessage": "在 {commentArticle} 评论提到了你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "20bImY": {
     "defaultMessage": "众聊"
@@ -91,7 +91,7 @@
     "defaultMessage": "最多可设置 3 个代表作"
   },
   "2slIPX": {
-    "defaultMessage": "我的赞赏"
+    "defaultMessage": "赞赏"
   },
   "32bml8": {
     "defaultMessage": "追踪",
@@ -233,8 +233,7 @@
     "defaultMessage": "漏洞报告"
   },
   "9J0iCw": {
-    "defaultMessage": "已注销用户",
-    "description": "src/components/UserProfile/index.tsx"
+    "defaultMessage": "已注销用户"
   },
   "9mfw9c": {
     "defaultMessage": "钱包地址",
@@ -924,7 +923,7 @@
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
   "hk2aiz": {
-    "defaultMessage": "追踪了你的围炉",
+    "defaultMessage": " 追踪了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hrfF+i": {
@@ -1016,7 +1015,7 @@
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
   "mPe6DK": {
-    "defaultMessage": "订阅了你的围炉",
+    "defaultMessage": " 订阅了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "mSAY3/": {
@@ -1303,3 +1302,4 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
+
