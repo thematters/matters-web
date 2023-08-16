@@ -111,7 +111,7 @@
     "defaultMessage": "我的钱包"
   },
   "3ynsJ3": {
-    "defaultMessage": "想了解更多？详见 ",
+    "defaultMessage": "Want to know more? Check the",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "47FYwb": {
@@ -121,7 +121,7 @@
     "defaultMessage": "自治"
   },
   "4giHJT": {
-    "defaultMessage": "在行动装置上使用问题，参考 ",
+    "defaultMessage": "Have wallet questions on mobile device ? Click the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "4l6vz1": {
@@ -288,7 +288,7 @@
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
   },
   "BHFHeY": {
-    "defaultMessage": " 在围炉 {commentCircle}",
+    "defaultMessage": "commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "Bc20la": {
@@ -571,7 +571,7 @@
     "defaultMessage": "分享"
   },
   "Po+kJe": {
-    "defaultMessage": "最近 {month} 个月",
+    "defaultMessage": "Last {month} month",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "Pp/0po": {
@@ -649,7 +649,7 @@
     "defaultMessage": "创作者"
   },
   "U/Tqmx": {
-    "defaultMessage": "评论了你收藏的作品 ",
+    "defaultMessage": "commented on your bookmarked article",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
   "U7o9Ba": {
@@ -805,7 +805,7 @@
     "description": "src/components/Transaction/State/index.tsx"
   },
   "b+LSgI": {
-    "defaultMessage": "回复了你在围炉 ",
+    "defaultMessage": "replied to your discussion on",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "b3onWZ": {
@@ -838,7 +838,7 @@
     "defaultMessage": "{totalCount, plural, =1 {篇文章} other {篇文章}}"
   },
   "cf37Zy": {
-    "defaultMessage": "添加 IPFS 生成的 IPNS 指纹到阅读器，如：",
+    "defaultMessage": "Add hash from IPFS into compatible reader such as",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "cfL5uk": {
@@ -927,7 +927,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hrfF+i": {
-    "defaultMessage": "刚接触加密钱包？参考 ",
+    "defaultMessage": "Don't have a wallet yet? Check the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "hrgo+E": {
@@ -973,7 +973,7 @@
     "defaultMessage": "标签描述"
   },
   "k5NnNF": {
-    "defaultMessage": "追踪了你",
+    "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
   "k97/u7": {
@@ -1090,7 +1090,7 @@
     "defaultMessage": "围炉名称"
   },
   "qYzBk8": {
-    "defaultMessage": "退订了你的围炉",
+    "defaultMessage": "unsubscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "qgPR68": {
