@@ -2,7 +2,7 @@ import React from 'react'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { Button, Media, TextIcon, Translate } from '~/components'
+import { Button, TextIcon, Translate } from '~/components'
 
 export const UniversalAuthButton: React.FC = () => {
   const props = {
@@ -23,17 +23,9 @@ export const UniversalAuthButton: React.FC = () => {
 
   return (
     <>
-      <Media lessThan="lg">
-        <Button bgColor="green" spacing={['tight', 'base']} {...props}>
-          <ButtonText />
-        </Button>
-      </Media>
-
-      <Media greaterThanOrEqual="lg">
-        <Button bgColor="green" spacing={['tight', 'base']} {...props}>
-          <ButtonText />
-        </Button>
-      </Media>
+      <Button bgColor="green" spacing={['tight', 'base']} {...props}>
+        <ButtonText />
+      </Button>
     </>
   )
 }
