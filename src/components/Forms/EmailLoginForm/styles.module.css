@@ -1,5 +1,5 @@
 .otherOptions {
-  padding: var(--spacing-tight);
+  padding: 0 var(--spacing-tight);
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
   color: var(--color-grey);
@@ -8,9 +8,7 @@
   & .option {
     @mixin flex-center-all;
 
-    & + .option {
-      margin-top: var(--spacing-tight);
-    }
+    gap: var(--spacing-xx-tight);
 
     & a,
     & button {

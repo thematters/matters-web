@@ -6,6 +6,10 @@
   padding-bottom: var(--spacing-base);
 }
 
+.baseLoose {
+  padding-bottom: var(--spacing-base-loose);
+}
+
 .loose {
   padding-bottom: var(--spacing-loose);
 }

@@ -22,6 +22,7 @@ import styles from './styles.module.css'
 type InputProps = {
   type: 'text' | 'password' | 'email' | 'number'
   name: string
+  hasFooter?: boolean
 } & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -32,6 +33,7 @@ const Input: React.FC<InputProps> = ({
   type,
 
   name,
+  hasFooter = true,
   label,
   extraButton,
   hasLabel,
@@ -78,14 +80,16 @@ const Input: React.FC<InputProps> = ({
         />
       </Field.Content>
 
-      <Field.Footer
-        fieldMsgId={fieldMsgId}
-        hint={hint}
-        error={error}
-        hintSize={hintSize}
-        hintAlign={hintAlign}
-        hintSpace={hintSpace}
-      />
+      {hasFooter && (
+        <Field.Footer
+          fieldMsgId={fieldMsgId}
+          hint={hint}
+          error={error}
+          hintSize={hintSize}
+          hintAlign={hintAlign}
+          hintSpace={hintSpace}
+        />
+      )}
     </Field>
   )
 }

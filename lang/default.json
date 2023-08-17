@@ -490,10 +490,6 @@
     "defaultMessage": "This article has been removed from Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
-  "JxlxVc": {
-    "defaultMessage": "Forget Password",
-    "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
-  },
   "K3r6DQ": {
     "defaultMessage": "Delete"
   },
@@ -581,6 +577,10 @@
   "O0QB1v": {
     "defaultMessage": "Friends will receive free trial invitations to Circle. Set up your invitations now!",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "O2Nqk8": {
+    "defaultMessage": "Forgot password?",
+    "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
   "OIj8pQ": {
     "defaultMessage": "Invitation Sent",
@@ -684,6 +684,9 @@
   "URljhZ": {
     "defaultMessage": "Successfully removed",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "Ub+AGc": {
+    "defaultMessage": "Sign In"
   },
   "Udp4Bm": {
     "defaultMessage": "Move to bottom",
@@ -1069,10 +1072,6 @@
     "defaultMessage": "replied your comment in",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
-  "nYeDrI": {
-    "defaultMessage": "Not Registered?",
-    "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
-  },
   "nYrKWp": {
     "defaultMessage": "Edit profile"
   },
@@ -1108,6 +1107,10 @@
   },
   "q9oMKE": {
     "defaultMessage": "Circle Name"
+  },
+  "qNuRmA": {
+    "defaultMessage": "Send login code",
+    "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
   "qYzBk8": {
     "defaultMessage": "unsubscribed your circle",

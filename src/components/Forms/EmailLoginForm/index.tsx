@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -18,15 +18,23 @@ import {
   // validatePassword,
 } from '~/common/utils'
 import {
+  AuthFeedType,
+  AuthTabs,
+  AuthWalletFeed,
   Dialog,
   Form,
+  IconLeft20,
   LanguageContext,
   Layout,
+  Media,
+  Spacer,
+  TextIcon,
   // toast,
   useMutation,
 } from '~/components'
 import { UserLoginMutation } from '~/gql/graphql'
 
+import Field from '../../Form/Field'
 import OtherOptions from './OtherOptions'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
@@ -35,7 +43,6 @@ interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
   gotoResetPassword?: () => void
-  gotoEmailSignUp?: () => void
   closeDialog: () => void
   back?: () => void
 }
@@ -66,7 +73,6 @@ export const USER_LOGIN = gql`
 export const EmailLoginForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
-  gotoEmailSignUp,
   gotoResetPassword,
   closeDialog,
   back,
@@ -78,6 +84,10 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const isInPage = purpose === 'page'
   const formId = 'email-login-form'
+
+  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>('normal')
+  const isNormal = authTypeFeed === 'normal'
+  const isWallet = authTypeFeed === 'wallet'
 
   const intl = useIntl()
   const {
@@ -145,6 +155,10 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     },
   })
 
+  console.log({ errors })
+
+  const fieldMsgId = `field-msg-sign-in`
+
   const InnerForm = (
     <>
       <Form id={formId} onSubmit={handleSubmit}>
@@ -160,7 +174,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           error={touched.email && errors.email}
           onBlur={handleBlur}
           onChange={handleChange}
-          spacingBottom="base"
+          spacingBottom="baseLoose"
+          hasFooter={false}
         />
 
         <Form.Input
@@ -175,15 +190,25 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           error={touched.password && errors.password}
           onBlur={handleBlur}
           onChange={handleChange}
-          spacingBottom="base"
+          spacingBottom="baseLoose"
+          hasFooter={false}
         />
+
+        {(!!errors.email || !!errors.password) && (
+          <>
+            <Field.Footer
+              fieldMsgId={fieldMsgId}
+              error={errors.email || errors.password}
+              hintSize="sm"
+              hintAlign="center"
+              hintSpace="baseLoose"
+            />
+            <Spacer size="baseLoose" />
+          </>
+        )}
       </Form>
 
-      <OtherOptions
-        isInPage={isInPage}
-        gotoResetPassword={gotoResetPassword}
-        gotoEmailSignUp={gotoEmailSignUp}
-      />
+      <OtherOptions isInPage={isInPage} gotoResetPassword={gotoResetPassword} />
     </>
   )
 
@@ -223,34 +248,63 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title="login"
+        title={<FormattedMessage defaultMessage="Sign In" />}
+        hasSmUpTitle={false}
         leftBtn={
-          back ? (
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
-              onClick={back}
-            />
-          ) : null
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            color="greyDarker"
+            onClick={back}
+          />
         }
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Dialog.Content>
+        <Media at="sm">{InnerForm}</Media>
+        <Media greaterThan="sm">
+          <AuthTabs
+            type={authTypeFeed}
+            setType={setAuthTypeFeed}
+            normalText={<FormattedMessage defaultMessage="Sign Up" />}
+          />
+          {isNormal && <>{InnerForm}</>}
+          {isWallet && <AuthWalletFeed />}
+        </Media>
+      </Dialog.Content>
 
-      <Dialog.Footer
-        smUpBtns={
-          <>
+      {isNormal && (
+        <Dialog.Footer
+          smUpSpaceBetween
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text={
+                  <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
+                    <FormattedMessage defaultMessage="Back" />
+                  </TextIcon>
+                }
+                color="greyDarker"
+                onClick={back}
+              />
+
+              {SubmitButton}
+            </>
+          }
+        />
+      )}
+      {isWallet && (
+        <Dialog.Footer
+          smUpBtns={
             <Dialog.TextButton
-              text={back ? 'back' : 'cancel'}
               color="greyDarker"
-              onClick={back || closeDialog}
+              text={<FormattedMessage defaultMessage="Close" />}
+              onClick={closeDialog}
             />
-
-            {SubmitButton}
-          </>
-        }
-      />
+          }
+        />
+      )}
     </>
   )
 }
