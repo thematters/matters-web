@@ -218,7 +218,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={isSubmitting}
+      disabled={!values.email || !values.password || isSubmitting}
       text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
