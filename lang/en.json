@@ -20,6 +20,10 @@
     "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "/BQWEh": {
+    "defaultMessage": "Last 1 month",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
   },
@@ -50,6 +54,10 @@
   "0ThOw1": {
     "defaultMessage": "Create collection",
     "description": "src/views/User/Collections/UserCollections.tsx"
+  },
+  "0iyH+q": {
+    "defaultMessage": "Last 7 days",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "0qagOO": {
     "defaultMessage": "Circle Subscription",
@@ -245,10 +253,6 @@
   },
   "A3g33H": {
     "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
-  },
-  "A3rLZt": {
-    "defaultMessage": "Last {months} months",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "A41QIy": {
     "defaultMessage": "Enter Password"
@@ -570,10 +574,6 @@
   "OKhRC6": {
     "defaultMessage": "Share"
   },
-  "Po+kJe": {
-    "defaultMessage": "Last {month} month",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
-  },
   "Pp/0po": {
     "defaultMessage": "Shuffle"
   },
@@ -699,6 +699,10 @@
   "VzzYJk": {
     "defaultMessage": "Create"
   },
+  "W0sZaX": {
+    "defaultMessage": "Last 3 months",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
   "W8OZ3G": {
     "defaultMessage": "Confirm Deletion"
   },
@@ -807,10 +811,6 @@
   "b+LSgI": {
     "defaultMessage": "replied to your discussion on",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  },
-  "b3onWZ": {
-    "defaultMessage": "Last {days} days",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "b6zdPs": {
     "defaultMessage": "{count} Articles",
@@ -1302,4 +1302,3 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
-

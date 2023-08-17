@@ -20,6 +20,10 @@
     "defaultMessage": "嘗試將內容寫入 IPFS 網絡中，需要一段時間，請耐心等候。若等候時間過久，可透過發佈文章來加速。",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "/BQWEh": {
+    "defaultMessage": "最近 1 個月",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
@@ -50,6 +54,10 @@
   "0ThOw1": {
     "defaultMessage": "新建選集",
     "description": "src/views/User/Collections/UserCollections.tsx"
+  },
+  "0iyH+q": {
+    "defaultMessage": "最近 7 日",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "0qagOO": {
     "defaultMessage": "圍爐訂閱",
@@ -246,10 +254,6 @@
   "A3g33H": {
     "defaultMessage": "封存作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
   },
-  "A3rLZt": {
-    "defaultMessage": "最近 {months} 個月",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
-  },
   "A41QIy": {
     "defaultMessage": "輸入密碼"
   },
@@ -276,7 +280,7 @@
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "AVpR3Q": {
-    "defaultMessage": "Wallet linked",
+    "defaultMessage": "已綁定錢包",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
   "AYTnjk": {
@@ -342,7 +346,7 @@
     "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
   "DYrDcG": {
-    "defaultMessage": "Badges",
+    "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
   },
   "DyuHBH": {
@@ -570,10 +574,6 @@
   "OKhRC6": {
     "defaultMessage": "分享"
   },
-  "Po+kJe": {
-    "defaultMessage": "最近 {month} 個月",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
-  },
   "Pp/0po": {
     "defaultMessage": "換一批"
   },
@@ -593,7 +593,7 @@
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
   "R7yHDl": {
-    "defaultMessage": "Circle Revenue",
+    "defaultMessage": "圍爐營收",
     "description": "src/components/Transaction/index.tsx"
   },
   "RFzVUD": {
@@ -698,6 +698,10 @@
   },
   "VzzYJk": {
     "defaultMessage": "新建"
+  },
+  "W0sZaX": {
+    "defaultMessage": "最近 3 個月",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "W8OZ3G": {
     "defaultMessage": "確認刪除"
@@ -807,10 +811,6 @@
   "b+LSgI": {
     "defaultMessage": "回覆了你在圍爐 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  },
-  "b3onWZ": {
-    "defaultMessage": "最近 {days} 天",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "b6zdPs": {
     "defaultMessage": "{count} 篇文章",
@@ -1302,4 +1302,3 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
-
