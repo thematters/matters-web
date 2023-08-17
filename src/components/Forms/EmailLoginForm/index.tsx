@@ -142,9 +142,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         codes.forEach((code) => {
-          if (code.includes('USER_EMAIL_')) {
+          if (
+            code.includes('USER_EMAIL_') ||
+            code.indexOf('USER_PASSWORD_') >= 0
+          ) {
             setFieldError('email', messages[code])
-          } else if (code.indexOf('USER_PASSWORD_') >= 0) {
             setFieldError('password', messages[code])
           } else {
             setFieldError('email', messages[code])
