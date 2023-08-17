@@ -111,7 +111,7 @@
     "defaultMessage": "Wallet"
   },
   "3ynsJ3": {
-    "defaultMessage": "Want to know more? Check the",
+    "defaultMessage": "Want to know more? Check the ",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "47FYwb": {
@@ -288,7 +288,7 @@
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
   },
   "BHFHeY": {
-    "defaultMessage": "commented in {commentCircle}",
+    "defaultMessage": " commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "Bc20la": {
@@ -299,7 +299,7 @@
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "C8GQaD": {
-    "defaultMessage": "upadted {date}",
+    "defaultMessage": "Upadted {date}",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "CBDDR5": {
@@ -649,7 +649,7 @@
     "defaultMessage": "Creators"
   },
   "U/Tqmx": {
-    "defaultMessage": "commented on your bookmarked article",
+    "defaultMessage": " commented on your bookmarked article ",
     "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
   },
   "U7o9Ba": {
@@ -772,7 +772,7 @@
     "description": "src/views/Circle/Settings/index.tsx"
   },
   "ZUPQzl": {
-    "defaultMessage": "comment",
+    "defaultMessage": " ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
@@ -813,7 +813,7 @@
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "b6zdPs": {
-    "defaultMessage": "{count} articles",
+    "defaultMessage": "{count} Articles",
     "description": "src/components/Book/index.tsx"
   },
   "b8ogKp": {
@@ -838,7 +838,7 @@
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
   },
   "cf37Zy": {
-    "defaultMessage": "Add hash from IPFS into compatible reader such as",
+    "defaultMessage": "Add hash from IPFS into compatible reader such as ",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "cfL5uk": {
@@ -927,7 +927,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hrfF+i": {
-    "defaultMessage": "Don't have a wallet yet? Check the",
+    "defaultMessage": "Don't have a wallet yet? Check the ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "hrgo+E": {
@@ -941,7 +941,7 @@
     "defaultMessage": "Follow"
   },
   "ioPWl8": {
-    "defaultMessage": "Undo bookmark",
+    "defaultMessage": "Remove bookmark",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
   "itPgxd": {
@@ -1047,7 +1047,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "nYeDrI": {
-    "defaultMessage": "Not Registered?",
+    "defaultMessage": "Not Registered? ",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
   "nYrKWp": {
@@ -1057,7 +1057,7 @@
     "defaultMessage": "Back to All"
   },
   "oHQmBt": {
-    "defaultMessage": "{articleCount} articles",
+    "defaultMessage": "{articleCount} Articles",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "ohgTH4": {
