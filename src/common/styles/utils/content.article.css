@@ -27,6 +27,11 @@
     white-space: pre-wrap;
   }
 
+  /* FIXME: first line of code has some indent */
+  & code {
+    padding: 0;
+  }
+
   /* Media
    ========================================================================== */
   & img,

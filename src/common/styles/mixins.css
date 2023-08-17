@@ -315,3 +315,9 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* FIXME: fix cropped descenders of letters  */
+@define-mixin fix-cropped-letters {
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12rem;
+}

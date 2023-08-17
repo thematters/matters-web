@@ -20,6 +20,10 @@
     "defaultMessage": "尝试将内容写入 IPFS 网络中，需要一段时间，请耐心等候。若等候时间过久，可通过发布文章来加速。",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "/BQWEh": {
+    "defaultMessage": "最近 1 个月",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
@@ -51,6 +55,10 @@
     "defaultMessage": "新建选集",
     "description": "src/views/User/Collections/UserCollections.tsx"
   },
+  "0iyH+q": {
+    "defaultMessage": "最近 7 日",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
   "0qagOO": {
     "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"
@@ -68,8 +76,8 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "1zVIWy": {
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx",
-    "defaultMessage": "在 {commentArticle} 评论提到了你"
+    "defaultMessage": "在 {commentArticle} 评论提到了你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "20bImY": {
     "defaultMessage": "众聊"
@@ -233,8 +241,7 @@
     "defaultMessage": "漏洞报告"
   },
   "9J0iCw": {
-    "defaultMessage": "已注销用户",
-    "description": "src/components/UserProfile/index.tsx"
+    "defaultMessage": "已注销用户"
   },
   "9mfw9c": {
     "defaultMessage": "钱包地址",
@@ -246,10 +253,6 @@
   },
   "A3g33H": {
     "defaultMessage": "归档的作品仅自己可见，且操作无法撤销。如文章已加入选集，将从选集中移除。（已发布到 IPFS 的版本不受影响）"
-  },
-  "A3rLZt": {
-    "defaultMessage": "最近 {months} 个月",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "A41QIy": {
     "defaultMessage": "输入密码"
@@ -571,10 +574,6 @@
   "OKhRC6": {
     "defaultMessage": "分享"
   },
-  "Po+kJe": {
-    "defaultMessage": "最近 {month} 个月",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
-  },
   "Pp/0po": {
     "defaultMessage": "换一批"
   },
@@ -594,7 +593,7 @@
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
   "R7yHDl": {
-    "defaultMessage": "圍爐營收",
+    "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"
   },
   "RFzVUD": {
@@ -699,6 +698,10 @@
   },
   "VzzYJk": {
     "defaultMessage": "新建"
+  },
+  "W0sZaX": {
+    "defaultMessage": "最近 3 个月",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "W8OZ3G": {
     "defaultMessage": "确认删除"
@@ -808,10 +811,6 @@
   "b+LSgI": {
     "defaultMessage": "回复了你在围炉 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  },
-  "b3onWZ": {
-    "defaultMessage": "最近 {days} 天",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "b6zdPs": {
     "defaultMessage": "{count} 篇文章",
@@ -1005,7 +1004,7 @@
     "defaultMessage": "热门"
   },
   "m/Wg7b": {
-    "defaultMessage": "Circle Description",
+    "defaultMessage": "围炉描述",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "m4GG4b": {
