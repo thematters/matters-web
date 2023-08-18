@@ -19,6 +19,7 @@ import {
 } from '~/common/utils'
 import {
   AuthFeedType,
+  AuthNormalFeed,
   AuthTabs,
   AuthWalletFeed,
   Dialog,
@@ -45,6 +46,7 @@ interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
   gotoResetPassword?: () => void
+  gotoEmailSignup: () => void
   closeDialog: () => void
   back?: () => void
 }
@@ -76,6 +78,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
   gotoResetPassword,
+  gotoEmailSignup,
   closeDialog,
   back,
 }) => {
@@ -90,6 +93,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>('normal')
   const isNormal = authTypeFeed === 'normal'
   const isWallet = authTypeFeed === 'wallet'
+
+  const [isSelectMethod, setIsSelectMethod] = useState(false)
 
   const [hasSendCode, setHasSendCode] = useState(false)
   const [countdown, setCountdown] = useState(0)
@@ -210,6 +215,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           onChange={handleChange}
           spacingBottom="baseLoose"
           hasFooter={false}
+          autoFocus
         />
 
         <Form.Input
@@ -319,7 +325,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           <Dialog.TextButton
             text={<FormattedMessage defaultMessage="Back" />}
             color="greyDarker"
-            onClick={back}
+            onClick={() => {
+              setIsSelectMethod(true)
+            }}
           />
         }
         closeDialog={closeDialog}
@@ -327,15 +335,24 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       />
 
       <Dialog.Content>
-        <Media at="sm">{InnerForm}</Media>
+        <Media at="sm">
+          {!isSelectMethod && <>{InnerForm}</>}
+          {/* {isSelectMethod && } */}
+        </Media>
         <Media greaterThan="sm">
           <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
-          {isNormal && <>{InnerForm}</>}
+          {isNormal && !isSelectMethod && <>{InnerForm}</>}
+          {isNormal && isSelectMethod && (
+            <AuthNormalFeed
+              gotoEmailLogin={() => setIsSelectMethod(false)}
+              gotoEmailSignup={gotoEmailSignup}
+            />
+          )}
           {isWallet && <AuthWalletFeed />}
         </Media>
       </Dialog.Content>
 
-      {isNormal && (
+      {isNormal && !isSelectMethod && (
         <Dialog.Footer
           smUpSpaceBetween
           smUpBtns={
@@ -347,7 +364,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
                   </TextIcon>
                 }
                 color="greyDarker"
-                onClick={back}
+                onClick={() => {
+                  setIsSelectMethod(true)
+                }}
               />
 
               {SubmitButton}
@@ -355,7 +374,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           }
         />
       )}
-      {isWallet && (
+      {((isNormal && isSelectMethod) || isWallet) && (
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
