@@ -4,17 +4,17 @@ import { Button } from '~/components'
 
 import styles from './styles.module.css'
 
-export const PasswordResetDialogButton = ({
-  gotoResetPassword,
+export const SendLoginCodeButton = ({
+  sendLoginCode,
 }: {
-  gotoResetPassword: () => void
+  sendLoginCode: () => void
 }) => (
   <section className={styles.option}>
     <FormattedMessage
       defaultMessage="Forgot password?"
       description="src/components/Forms/EmailLoginForm/Buttons.tsx"
     />
-    <Button aria-haspopup="dialog" onClick={gotoResetPassword}>
+    <Button aria-haspopup="dialog" onClick={sendLoginCode}>
       <FormattedMessage
         defaultMessage="Send login code"
         description="src/components/Forms/EmailLoginForm/Buttons.tsx"
@@ -25,15 +25,25 @@ export const PasswordResetDialogButton = ({
 
 const OtherOptions = ({
   isInPage,
-  gotoResetPassword,
+  hasSendCode,
+  sendLoginCode,
 }: {
   isInPage: boolean
-  gotoResetPassword?: () => any
+  hasSendCode: boolean
+  sendLoginCode?: () => any
 }) => {
   return (
     <section className={styles.otherOptions}>
-      {gotoResetPassword && (
-        <PasswordResetDialogButton gotoResetPassword={gotoResetPassword} />
+      {!hasSendCode && sendLoginCode && (
+        <SendLoginCodeButton sendLoginCode={sendLoginCode} />
+      )}
+      {hasSendCode && (
+        <section className={styles.hasSendCode}>
+          <FormattedMessage
+            defaultMessage="The login code has been sent to your inbox"
+            description="src/components/Forms/EmailLoginForm/OtherOptions.tsx"
+          />
+        </section>
       )}
     </section>
   )

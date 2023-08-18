@@ -1243,6 +1243,10 @@
   "wXzTZ0": {
     "defaultMessage": "給圍爐取一個吸引人的名字吧"
   },
+  "wbIHgJ": {
+    "defaultMessage": "The login code has been sent to your inbox",
+    "description": "src/components/Forms/EmailLoginForm/OtherOptions.tsx"
+  },
   "wbcwKd": {
     "defaultMessage": "查看全部"
   },

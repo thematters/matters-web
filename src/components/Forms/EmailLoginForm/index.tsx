@@ -32,7 +32,8 @@ import {
   // toast,
   useMutation,
 } from '~/components'
-import { UserLoginMutation } from '~/gql/graphql'
+import SEND_CODE from '~/components/GQL/mutations/sendCode'
+import { SendVerificationCodeMutation, UserLoginMutation } from '~/gql/graphql'
 
 import Field from '../../Form/Field'
 import OtherOptions from './OtherOptions'
@@ -89,6 +90,16 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const isNormal = authTypeFeed === 'normal'
   const isWallet = authTypeFeed === 'wallet'
 
+  const [hasSendCode, setHasSendCode] = useState(false)
+
+  const [sendCode] = useMutation<SendVerificationCodeMutation>(
+    SEND_CODE,
+    undefined,
+    {
+      showToast: false,
+    }
+  )
+
   const intl = useIntl()
   const {
     values,
@@ -97,6 +108,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldError,
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
@@ -159,6 +171,19 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   console.log({ errors })
 
+  const sendLoginCode = async () => {
+    const error = validateEmail(values.email, lang, { allowPlusSign: true })
+    if (error) {
+      setFieldError('email', error)
+      return
+    }
+
+    await sendCode({
+      variables: { input: { email: values.email, type: 'email_otp' } },
+    })
+    setHasSendCode(true)
+  }
+
   const fieldMsgId = `field-msg-sign-in`
 
   const InnerForm = (
@@ -173,7 +198,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
             defaultMessage: 'Email',
           })}
           value={values.email}
-          error={touched.email && errors.email}
+          error={errors.email}
           onBlur={handleBlur}
           onChange={handleChange}
           spacingBottom="baseLoose"
@@ -210,7 +235,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         )}
       </Form>
 
-      <OtherOptions isInPage={isInPage} gotoResetPassword={gotoResetPassword} />
+      <OtherOptions
+        isInPage={isInPage}
+        sendLoginCode={sendLoginCode}
+        hasSendCode={hasSendCode}
+      />
     </>
   )
 

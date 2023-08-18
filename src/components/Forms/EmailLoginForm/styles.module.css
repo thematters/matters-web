@@ -15,4 +15,8 @@
       color: var(--color-matters-green);
     }
   }
+
+  & .hasSendCode {
+    color: var(--color-black);
+  }
 }

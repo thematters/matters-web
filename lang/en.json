@@ -1252,6 +1252,10 @@
     "description": "",
     "defaultMessage": "Enter the name of your Circle"
   },
+  "wbIHgJ": {
+    "defaultMessage": "The login code has been sent to your inbox",
+    "description": "src/components/Forms/EmailLoginForm/OtherOptions.tsx"
+  },
   "wbcwKd": {
     "defaultMessage": "View All"
   },
