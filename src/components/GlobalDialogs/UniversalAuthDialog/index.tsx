@@ -5,7 +5,6 @@ import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEST_ID,
-  UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import {
   Dialog,
@@ -65,14 +64,7 @@ type Step =
   // misc
   | 'complete'
 
-const BaseUniversalAuthDialog = ({
-  initSource,
-}: {
-  initSource?: UNIVERSAL_AUTH_SOURCE
-}) => {
-  const [source, setSource] = useState<UNIVERSAL_AUTH_SOURCE>(
-    initSource || UNIVERSAL_AUTH_SOURCE.enter
-  )
+const BaseUniversalAuthDialog = () => {
   const { currStep, forward } = useStep<Step>('select-login-method')
   const [email, setEmail] = useState('')
 
@@ -90,7 +82,6 @@ const BaseUniversalAuthDialog = ({
   useEventListener(
     OPEN_UNIVERSAL_AUTH_DIALOG,
     (payload: { [key: string]: any }) => {
-      setSource(payload?.source || UNIVERSAL_AUTH_SOURCE.enter)
       openDialog()
     }
   )
@@ -99,8 +90,6 @@ const BaseUniversalAuthDialog = ({
     <Dialog isOpen={show} onDismiss={closeDialog} testId={TEST_ID.DIALOG_AUTH}>
       {currStep === 'select-login-method' && (
         <DynamicSelectAuthMethodForm
-          purpose="dialog"
-          source={source}
           gotoWalletAuth={() => forward('wallet-select')}
           gotoEmailLogin={() => forward('email-login')}
           gotoEmailSignup={() => forward('email-sign-up-init')}
@@ -144,7 +133,6 @@ const BaseUniversalAuthDialog = ({
       )}
       {currStep === 'email-sign-up-init' && (
         <DynamicEmailSignUpFormInit
-          purpose="dialog"
           submitCallback={(email: string) => {
             setEmail(email)
             forward('email-verification-sent')
@@ -184,13 +172,10 @@ const BaseUniversalAuthDialog = ({
 }
 
 const UniversalAuthDialog = () => {
-  const [source, setSource] = useState<UNIVERSAL_AUTH_SOURCE>()
-
   const Children = ({ openDialog }: { openDialog: () => void }) => {
     useEventListener(
       OPEN_UNIVERSAL_AUTH_DIALOG,
       (payload: { [key: string]: any }) => {
-        setSource(payload?.source || '')
         openDialog()
       }
     )
@@ -198,7 +183,7 @@ const UniversalAuthDialog = () => {
   }
 
   return (
-    <Dialog.Lazy mounted={<BaseUniversalAuthDialog initSource={source} />}>
+    <Dialog.Lazy mounted={<BaseUniversalAuthDialog />}>
       {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useConnect } from 'wagmi'
 
-import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
 import {
   AuthFeedType,
   AuthNormalFeed,
@@ -12,8 +11,6 @@ import {
 } from '~/components'
 
 interface FormProps {
-  purpose: 'dialog' | 'page'
-  source: UNIVERSAL_AUTH_SOURCE
   gotoWalletAuth: () => void
   gotoEmailLogin: () => void
   gotoEmailSignup: () => void
@@ -21,8 +18,6 @@ interface FormProps {
 }
 
 export const SelectAuthMethodForm: React.FC<FormProps> = ({
-  purpose,
-  source,
   gotoWalletAuth,
   gotoEmailLogin,
   gotoEmailSignup,
