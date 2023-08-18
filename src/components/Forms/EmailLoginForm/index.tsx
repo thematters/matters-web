@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -37,6 +37,7 @@ import { SendVerificationCodeMutation, UserLoginMutation } from '~/gql/graphql'
 
 import Field from '../../Form/Field'
 import OtherOptions from './OtherOptions'
+import styles from './styles.module.css'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -91,6 +92,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const isWallet = authTypeFeed === 'wallet'
 
   const [hasSendCode, setHasSendCode] = useState(false)
+  const [countdown, setCountdown] = useState(0)
+
+  useEffect(() => {
+    countdown > 0 && setTimeout(() => setCountdown(countdown - 1), 1000)
+  }, [countdown])
 
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
     SEND_CODE,
@@ -182,6 +188,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       variables: { input: { email: values.email, type: 'email_otp' } },
     })
     setHasSendCode(true)
+    setCountdown(3)
   }
 
   const fieldMsgId = `field-msg-sign-in`
@@ -219,6 +226,33 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           onChange={handleChange}
           spacingBottom="baseLoose"
           hasFooter={false}
+          rightButton={
+            <>
+              {hasSendCode && countdown > 0 && (
+                <span className={styles.resendButton}>
+                  {countdown}&nbsp;
+                  <FormattedMessage
+                    defaultMessage="Resend"
+                    description="src/components/Forms/EmailLoginForm/index.tsx"
+                  />
+                </span>
+              )}
+              {hasSendCode && countdown === 0 && (
+                <button
+                  className={styles.resendButton}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    sendLoginCode()
+                  }}
+                >
+                  <FormattedMessage
+                    defaultMessage="Resend"
+                    description="src/components/Forms/EmailLoginForm/index.tsx"
+                  />
+                </button>
+              )}
+            </>
+          }
         />
 
         {(!!errors.email || !!errors.password) && (
@@ -295,11 +329,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       <Dialog.Content>
         <Media at="sm">{InnerForm}</Media>
         <Media greaterThan="sm">
-          <AuthTabs
-            type={authTypeFeed}
-            setType={setAuthTypeFeed}
-            normalText={<FormattedMessage defaultMessage="Sign Up" />}
-          />
+          <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
           {isNormal && <>{InnerForm}</>}
           {isWallet && <AuthWalletFeed />}
         </Media>

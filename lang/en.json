@@ -903,6 +903,10 @@
     "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
     "description": "src/views/Help/index.tsx"
   },
+  "dzF4ci": {
+    "defaultMessage": "Resend",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
   "eJ131z": {
     "defaultMessage": "resigned as the maintainer of {tag}",
     "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"

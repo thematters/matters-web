@@ -13,10 +13,31 @@
     & a,
     & button {
       color: var(--color-matters-green);
+
+      &:hover,
+      &:focus {
+        color: var(--color-matters-green-dark);
+      }
     }
   }
 
   & .hasSendCode {
     color: var(--color-black);
+  }
+}
+
+.resendButton {
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+  color: var(--color-grey);
+  word-break: keep-all;
+
+  &button {
+    color: var(--color-matters-green);
+
+    &:hover,
+    &:focus {
+      color: var(--color-matters-green-dark);
+    }
   }
 }

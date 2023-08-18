@@ -687,7 +687,7 @@
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
   "Ub+AGc": {
-    "defaultMessage": "Sign In"
+    "defaultMessage": "登入"
   },
   "Udp4Bm": {
     "defaultMessage": "移至底部",
@@ -898,6 +898,10 @@
   "dnsfmR": {
     "defaultMessage": "，我們會儘快回覆!",
     "description": "src/views/Help/index.tsx"
+  },
+  "dzF4ci": {
+    "defaultMessage": "重新發送",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "eJ131z": {
     "defaultMessage": "辭去了 {tag} 的主理人",
@@ -1244,7 +1248,7 @@
     "defaultMessage": "给围炉取一个吸引人的名字吧"
   },
   "wbIHgJ": {
-    "defaultMessage": "The login code has been sent to your inbox",
+    "defaultMessage": "臨時密碼已通過郵件發送",
     "description": "src/components/Forms/EmailLoginForm/OtherOptions.tsx"
   },
   "wbcwKd": {

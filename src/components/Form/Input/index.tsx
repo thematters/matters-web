@@ -23,6 +23,7 @@ type InputProps = {
   type: 'text' | 'password' | 'email' | 'number'
   name: string
   hasFooter?: boolean
+  rightButton?: React.ReactNode
 } & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -34,6 +35,8 @@ const Input: React.FC<InputProps> = ({
 
   name,
   hasFooter = true,
+  rightButton,
+
   label,
   extraButton,
   hasLabel,
@@ -54,6 +57,7 @@ const Input: React.FC<InputProps> = ({
   const inputClasses = classNames({
     [styles.input]: true,
     [styles.error]: error,
+    [styles.wrapper]: !!rightButton,
   })
 
   return (
@@ -65,20 +69,41 @@ const Input: React.FC<InputProps> = ({
         hasLabel={hasLabel}
       />
 
-      <Field.Content>
-        <input
-          {...inputProps}
-          id={fieldId}
-          name={name}
-          type={type}
-          aria-describedby={fieldMsgId}
-          autoComplete="nope"
-          autoCorrect="off"
-          autoCapitalize="off"
-          spellCheck="false"
-          className={inputClasses}
-        />
-      </Field.Content>
+      {rightButton && (
+        <Field.Content>
+          <section className={inputClasses}>
+            <input
+              {...inputProps}
+              id={fieldId}
+              name={name}
+              type={type}
+              aria-describedby={fieldMsgId}
+              autoComplete="nope"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              // className={inputClasses}
+            />
+            {rightButton}
+          </section>
+        </Field.Content>
+      )}
+      {!rightButton && (
+        <Field.Content>
+          <input
+            {...inputProps}
+            id={fieldId}
+            name={name}
+            type={type}
+            aria-describedby={fieldMsgId}
+            autoComplete="nope"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            className={inputClasses}
+          />
+        </Field.Content>
+      )}
 
       {hasFooter && (
         <Field.Footer
