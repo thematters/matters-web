@@ -14,6 +14,7 @@ import {
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
+  translate,
   validateEmail,
   // validatePassword,
 } from '~/common/utils'
@@ -95,7 +96,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const isWallet = authTypeFeed === 'wallet'
 
   const [isSelectMethod, setIsSelectMethod] = useState(false)
-
+  const [errorCode, setErrorCode] = useState<any>(null)
   const [hasSendCode, setHasSendCode] = useState(false)
   const [countdown, setCountdown] = useState(0)
 
@@ -120,6 +121,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     setFieldError,
+    setFieldValue,
+    setErrors,
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
@@ -164,12 +167,18 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         })
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+        setErrorCode(codes[0])
         codes.forEach((code) => {
           if (
             code.includes('USER_EMAIL_') ||
-            code.indexOf('USER_PASSWORD_') >= 0
+            code.indexOf('USER_PASSWORD_') >= 0 ||
+            code.includes('CODE_INVALID') ||
+            code.includes('CODE_INACTIVE')
           ) {
-            setFieldError('email', messages[code])
+            const m = translate({ id: 'USER_PASSWORD_INVALID', lang })
+            setFieldError('email', m)
+            setFieldError('password', m)
+          } else if (code.includes('CODE_EXPIRED')) {
             setFieldError('password', messages[code])
           } else {
             setFieldError('email', messages[code])
@@ -192,8 +201,13 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     await sendCode({
       variables: { input: { email: values.email, type: 'email_otp' } },
     })
+    setCountdown(10)
     setHasSendCode(true)
-    setCountdown(3)
+
+    // clear
+    setErrors({})
+    setFieldValue('password', '')
+    setErrorCode(null)
   }
 
   const fieldMsgId = `field-msg-sign-in`
@@ -243,20 +257,21 @@ export const EmailLoginForm: React.FC<FormProps> = ({
                   />
                 </span>
               )}
-              {hasSendCode && countdown === 0 && (
-                <button
-                  className={styles.resendButton}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    sendLoginCode()
-                  }}
-                >
-                  <FormattedMessage
-                    defaultMessage="Resend"
-                    description="src/components/Forms/EmailLoginForm/index.tsx"
-                  />
-                </button>
-              )}
+              {(hasSendCode || errorCode === 'CODE_EXPIRED') &&
+                countdown === 0 && (
+                  <button
+                    className={styles.resendButton}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      sendLoginCode()
+                    }}
+                  >
+                    <FormattedMessage
+                      defaultMessage="Resend"
+                      description="src/components/Forms/EmailLoginForm/index.tsx"
+                    />
+                  </button>
+                )}
             </>
           }
         />
@@ -275,11 +290,14 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         )}
       </Form>
 
-      <OtherOptions
-        isInPage={isInPage}
-        sendLoginCode={sendLoginCode}
-        hasSendCode={hasSendCode}
-      />
+      {errorCode !== 'CODE_EXPIRED' &&
+        !(hasSendCode && errorCode === 'CODE_INVALID') && (
+          <OtherOptions
+            isInPage={isInPage}
+            sendLoginCode={sendLoginCode}
+            hasSendCode={hasSendCode}
+          />
+        )}
     </>
   )
 

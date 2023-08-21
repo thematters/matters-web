@@ -62,7 +62,7 @@ export const TEXT = {
     circleDiscussion: '衆聊',
     clear: '清空',
     close: '關閉',
-    CODE_EXPIRED: '驗證碼已過期，請重新發送',
+    CODE_EXPIRED: '臨時密碼已過期，請嘗試重新發送',
     CODE_INACTIVE: '驗證碼已失效，請使用最新驗證碼或重新發送',
     CODE_INVALID: '驗證碼不正確，請檢查輸入內容或重新發送',
     collectedOnly: '只看衍生作品',
@@ -466,7 +466,7 @@ export const TEXT = {
     circleDiscussion: '众聊',
     clear: '清空',
     close: '关闭',
-    CODE_EXPIRED: '验证码已过期，请重新发送',
+    CODE_EXPIRED: '临时密码已过期，请尝试重新发送',
     CODE_INACTIVE: '验证码已失效，请使用最新验证码或重新发送',
     CODE_INVALID: '验证码不正确，请检查输入内容或重新发送',
     collectedOnly: '只看衍生作品',
@@ -871,7 +871,7 @@ export const TEXT = {
     circleDiscussion: 'Discussion',
     clear: 'Clear',
     close: 'Cancel',
-    CODE_EXPIRED: 'Verification code expired, try resend',
+    CODE_EXPIRED: 'This login code has expired, please try to resend',
     CODE_INACTIVE:
       'Verification code is no longer valid. Please use the latest code we sent, or try resend',
     CODE_INVALID:
