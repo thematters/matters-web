@@ -34,7 +34,7 @@ import {
   useMutation,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
-import { SendVerificationCodeMutation, UserLoginMutation } from '~/gql/graphql'
+import { EmailLoginMutation, SendVerificationCodeMutation } from '~/gql/graphql'
 
 import Field from '../../Form/Field'
 import OtherOptions from './OtherOptions'
@@ -56,9 +56,9 @@ interface FormValues {
   password: ''
 }
 
-export const USER_LOGIN = gql`
-  mutation UserLogin($input: UserLoginInput!) {
-    userLogin(input: $input) {
+export const EMAIL_LOGIN = gql`
+  mutation EmailLogin($input: EmailLoginInput!) {
+    emailLogin(input: $input) {
       auth
       token
       user {
@@ -82,7 +82,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   closeDialog,
   back,
 }) => {
-  const [login] = useMutation<UserLoginMutation>(USER_LOGIN, undefined, {
+  const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)
@@ -136,12 +136,12 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await login({
-          variables: { input: { email, password } },
+          variables: { input: { email, passwordOrCode: password } },
         })
 
-        const token = data?.userLogin.token || ''
-        const language = data?.userLogin.user?.settings.language || ''
-        const group = data?.userLogin.user?.info.group || ''
+        const token = data?.emailLogin.token || ''
+        const language = data?.emailLogin.user?.settings.language || ''
+        const group = data?.emailLogin.user?.info.group || ''
         setCookies({
           [COOKIE_LANGUAGE]: language,
           [COOKIE_USER_GROUP]: group,
