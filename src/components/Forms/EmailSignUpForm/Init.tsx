@@ -21,7 +21,6 @@ import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
 interface FormProps {
-  purpose: 'dialog' | 'page'
   submitCallback: (email: string) => void
   gotoEmailLogin: () => void
   closeDialog?: () => void
@@ -33,7 +32,6 @@ interface FormValues {
 }
 
 const Init: React.FC<FormProps> = ({
-  purpose,
   submitCallback,
   gotoEmailLogin,
   closeDialog,
