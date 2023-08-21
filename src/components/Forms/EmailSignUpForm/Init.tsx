@@ -1,53 +1,48 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import Link from 'next/link'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
+import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
 import {
-  parseFormSubmitErrors,
-  validateDisplayName,
-  validateEmail,
-  validateToS,
-} from '~/common/utils'
-import {
+  AuthFeedType,
+  AuthTabs,
+  AuthWalletFeed,
   Dialog,
   Form,
+  IconLeft20,
   LanguageContext,
-  Layout,
+  Media,
+  TextIcon,
   //  ReCaptchaContext,
   useMutation,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
-import styles from './styles.module.css'
-
 interface FormProps {
-  purpose: 'dialog' | 'page'
-  submitCallback: () => void
+  submitCallback: (email: string) => void
   gotoEmailLogin: () => void
   closeDialog?: () => void
-  back?: () => void
+  back: () => void
 }
 
 interface FormValues {
-  displayName: string
   email: string
-  tos: boolean
 }
 
 const Init: React.FC<FormProps> = ({
-  purpose,
   submitCallback,
   gotoEmailLogin,
   closeDialog,
   back,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const isInPage = purpose === 'page'
   const formId = 'email-sign-up-init-form'
+
+  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>('normal')
+  const isNormal = authTypeFeed === 'normal'
+  const isWallet = authTypeFeed === 'wallet'
 
   // const { token, refreshToken } = useContext(ReCaptchaContext)
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
@@ -68,38 +63,25 @@ const Init: React.FC<FormProps> = ({
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
-      displayName: '',
       email: '',
-      tos: true,
     },
     validateOnBlur: false,
     validateOnChange: true, // enable for signup form
-    validate: ({ displayName, email, tos }) =>
+    validate: ({ email }) =>
       _pickBy({
-        displayName: validateDisplayName(displayName, lang),
         email: validateEmail(email, lang, { allowPlusSign: false }),
-        tos: validateToS(tos, lang),
       }),
-    onSubmit: async (
-      { displayName, email },
-      { setFieldError, setSubmitting }
-    ) => {
-      const redirectUrl = `${
-        window.location.origin
-      }/signup?email=${encodeURIComponent(
-        email
-      )}&displayName=${encodeURIComponent(displayName)}`
-
+    onSubmit: async ({ email }, { setFieldError, setSubmitting }) => {
       try {
         // reCaptcha check is disabled for now
         await sendCode({
           variables: {
-            input: { email, type: 'register', token: '', redirectUrl },
+            input: { email, type: 'register', token: '' },
           },
         })
 
         setSubmitting(false)
-        submitCallback()
+        submitCallback(email)
       } catch (error) {
         setSubmitting(false)
 
@@ -116,21 +98,6 @@ const Init: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<FormattedMessage defaultMessage="Display Name" />}
-        type="text"
-        name="displayName"
-        required
-        placeholder={intl.formatMessage({
-          defaultMessage: 'Display Name',
-        })}
-        value={values.displayName}
-        error={touched.displayName && errors.displayName}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        spacingBottom="base"
-      />
-
-      <Form.Input
         label={<FormattedMessage defaultMessage="Email" />}
         type="email"
         name="email"
@@ -138,33 +105,16 @@ const Init: React.FC<FormProps> = ({
         placeholder={intl.formatMessage({
           defaultMessage: 'Email',
         })}
+        hintSize="sm"
+        hintAlign="center"
+        hintSpace="baseLoose"
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
         onChange={handleChange}
         spacingBottom="base"
+        autoFocus
       />
-
-      <section className={styles.tos}>
-        <Form.CheckBox
-          name="tos"
-          checked={values.tos}
-          error={touched.tos && errors.tos}
-          onChange={handleChange}
-          hint={
-            <>
-              <FormattedMessage defaultMessage="I have read and agree to" />
-              <Link href={PATHS.TOS} legacyBehavior>
-                <a className="u-link-green" target="_blank">
-                  &nbsp;
-                  <FormattedMessage defaultMessage="Terms and Privacy Policy" />
-                </a>
-              </Link>
-            </>
-          }
-          required
-        />
-      </section>
     </Form>
   )
 
@@ -172,66 +122,79 @@ const Init: React.FC<FormProps> = ({
     <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Next" />}
+      disabled={
+        values.email === '' || errors.email !== undefined || isSubmitting
+      }
+      text={
+        <FormattedMessage
+          defaultMessage="Continue"
+          description="src/components/Forms/EmailSignUpForm/Init.tsx"
+        />
+      }
       loading={isSubmitting}
     />
   )
 
-  if (isInPage) {
-    return (
-      <>
-        <Layout.Header
-          right={
-            <>
-              <Layout.Header.Title id="register" />
-              <Layout.Header.RightButton
-                type="submit"
-                form={formId}
-                disabled={isSubmitting}
-                text={<FormattedMessage defaultMessage="Next" />}
-                loading={isSubmitting}
-              />
-            </>
-          }
-        />
-
-        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
-      </>
-    )
-  }
-
   return (
     <>
       <Dialog.Header
-        title="register"
+        title={<FormattedMessage defaultMessage="Sign Up" />}
+        hasSmUpTitle={false}
         leftBtn={
-          back ? (
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
-              onClick={back}
-            />
-          ) : null
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            color="greyDarker"
+            onClick={back}
+          />
         }
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Dialog.Content>
+        <Media at="sm">{InnerForm}</Media>
+        <Media greaterThan="sm">
+          <AuthTabs
+            type={authTypeFeed}
+            setType={setAuthTypeFeed}
+            normalText={<FormattedMessage defaultMessage="Sign Up" />}
+          />
+          {isNormal && <>{InnerForm}</>}
+          {isWallet && <AuthWalletFeed />}
+        </Media>
+      </Dialog.Content>
 
-      <Dialog.Footer
-        smUpBtns={
-          <>
+      {isNormal && (
+        <Dialog.Footer
+          smUpSpaceBetween
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text={
+                  <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
+                    <FormattedMessage defaultMessage="Back" />
+                  </TextIcon>
+                }
+                color="greyDarker"
+                onClick={back}
+              />
+
+              {SubmitButton}
+            </>
+          }
+        />
+      )}
+      {isWallet && (
+        <Dialog.Footer
+          smUpBtns={
             <Dialog.TextButton
-              text={back ? 'back' : 'cancel'}
               color="greyDarker"
-              onClick={back || closeDialog}
+              text={<FormattedMessage defaultMessage="Close" />}
+              onClick={closeDialog}
             />
-
-            {SubmitButton}
-          </>
-        }
-      />
+          }
+        />
+      )}
     </>
   )
 }

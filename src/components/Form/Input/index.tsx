@@ -38,7 +38,9 @@ const Input: React.FC<InputProps> = ({
 
   hint,
   error,
+  hintSize,
   hintAlign,
+  hintSpace,
 
   spacingTop,
   spacingBottom,
@@ -80,7 +82,9 @@ const Input: React.FC<InputProps> = ({
         fieldMsgId={fieldMsgId}
         hint={hint}
         error={error}
+        hintSize={hintSize}
         hintAlign={hintAlign}
+        hintSpace={hintSpace}
       />
     </Field>
   )

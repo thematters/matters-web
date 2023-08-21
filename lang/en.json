@@ -98,6 +98,9 @@
     "defaultMessage": "Following",
     "description": "src/components/Layout/SideNav/index.tsx"
   },
+  "39AHJm": {
+    "defaultMessage": "Sign Up"
+  },
   "3KNMbJ": {
     "defaultMessage": "Articles"
   },
@@ -146,6 +149,10 @@
   },
   "5FO4vn": {
     "defaultMessage": "You do not have permission to perform this operation"
+  },
+  "5JN+nl": {
+    "defaultMessage": "Check your inbox",
+    "description": "src/components/Forms/Verification/LinkSent.tsx"
   },
   "5MDGuM": {
     "defaultMessage": "Enter your email"
@@ -1099,9 +1106,6 @@
     "defaultMessage": "Collapse",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   },
-  "pwlQEY": {
-    "defaultMessage": "Display Name"
-  },
   "pzTOmv": {
     "defaultMessage": "Followers"
   },
@@ -1233,6 +1237,10 @@
     "defaultMessage": "left a comment in {circleName} and mentioned you",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "wK4kLf": {
+    "defaultMessage": "Continue",
+    "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+  },
   "wSEOxH": {
     "defaultMessage": "Contact Channel",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -1296,6 +1304,10 @@
   "yoRaUc": {
     "defaultMessage": "Refund",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "zAK5G+": {
+    "defaultMessage": "The login link has been sent to {email}",
+    "description": "src/components/Forms/Verification/LinkSent.tsx"
   },
   "zKOr2x": {
     "defaultMessage": "Conversion Rate of Followers",

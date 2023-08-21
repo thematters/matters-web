@@ -7,13 +7,14 @@ import styles from './styles.module.css'
 
 interface Props {
   gotoEmailSignup: () => void
+  gotoEmailLogin: () => void
 }
 
-const NormalFeed = ({ gotoEmailSignup }: Props) => {
+export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
   return (
     <>
       <ul className={styles.feed}>
-        <li className={styles.item}>
+        <li className={styles.item} role="button" onClick={gotoEmailLogin}>
           <span className={styles.icon}>
             <IconMail22 size="mdM" />
           </span>
@@ -76,5 +77,3 @@ const NormalFeed = ({ gotoEmailSignup }: Props) => {
     </>
   )
 }
-
-export default NormalFeed
