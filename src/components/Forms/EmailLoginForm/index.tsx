@@ -208,6 +208,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     setErrors({})
     setFieldValue('password', '')
     setErrorCode(null)
+
+    // TODO: focus password input
   }
 
   const fieldMsgId = `field-msg-sign-in`
@@ -336,38 +338,41 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header
-        title={<FormattedMessage defaultMessage="Sign In" />}
-        hasSmUpTitle={false}
-        leftBtn={
-          <Dialog.TextButton
-            text={<FormattedMessage defaultMessage="Back" />}
-            color="greyDarker"
-            onClick={() => {
-              setIsSelectMethod(true)
-            }}
-          />
-        }
-        closeDialog={closeDialog}
-        rightBtn={SubmitButton}
-      />
+      {!isSelectMethod && (
+        <Dialog.Header
+          title={<FormattedMessage defaultMessage="Sign In" />}
+          hasSmUpTitle={false}
+          leftBtn={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              color="greyDarker"
+              onClick={() => {
+                setIsSelectMethod(true)
+              }}
+            />
+          }
+          closeDialog={closeDialog}
+          rightBtn={SubmitButton}
+        />
+      )}
 
       <Dialog.Content>
         <Media at="sm">
-          {!isSelectMethod && <>{InnerForm}</>}
-          {/* {isSelectMethod && } */}
+          {isSelectMethod && (
+            <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
+          )}
         </Media>
         <Media greaterThan="sm">
           <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
-          {isNormal && !isSelectMethod && <>{InnerForm}</>}
-          {isNormal && isSelectMethod && (
-            <AuthNormalFeed
-              gotoEmailLogin={() => setIsSelectMethod(false)}
-              gotoEmailSignup={gotoEmailSignup}
-            />
-          )}
-          {isWallet && <AuthWalletFeed />}
         </Media>
+        {isNormal && !isSelectMethod && <>{InnerForm}</>}
+        {isNormal && isSelectMethod && (
+          <AuthNormalFeed
+            gotoEmailLogin={() => setIsSelectMethod(false)}
+            gotoEmailSignup={gotoEmailSignup}
+          />
+        )}
+        {isWallet && <AuthWalletFeed />}
       </Dialog.Content>
 
       {isNormal && !isSelectMethod && (
