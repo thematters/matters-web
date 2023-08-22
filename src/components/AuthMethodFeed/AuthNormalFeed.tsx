@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '@/src/common/enums'
+import { PATHS } from '~/common/enums'
 import { IconFacebook22, IconGoogle22, IconMail22, IconX22 } from '~/components'
 
 import styles from './styles.module.css'

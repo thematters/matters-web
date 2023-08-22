@@ -1,5 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
+import { PATHS } from '~/common/enums'
 import { IconMetamask22, IconWalletConnect22 } from '~/components'
 
 import styles from './styles.module.css'
@@ -23,10 +24,12 @@ export const AuthWalletFeed = () => {
       </ul>
       <section className={styles.info}>
         <section className={styles.title}>
-          <FormattedMessage
-            defaultMessage="What is a digital wallet?"
-            description="src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
-          />
+          <a href={PATHS.GUIDE} target="_blank">
+            <FormattedMessage
+              defaultMessage="What is a digital wallet?"
+              description="src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
+            />
+          </a>
         </section>
       </section>
     </>
