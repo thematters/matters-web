@@ -1,5 +1,6 @@
 .otherOptions {
-  padding: 0 var(--spacing-tight);
+  padding: 0 var(--spacing-tight) var(--spacing-x-tight);
+  margin-top: var(--spacing-base-loose);
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
   color: var(--color-grey);

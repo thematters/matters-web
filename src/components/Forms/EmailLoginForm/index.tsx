@@ -28,7 +28,6 @@ import {
   IconLeft20,
   LanguageContext,
   Media,
-  Spacer,
   TextIcon,
   // toast,
   useMutation,
@@ -289,19 +288,18 @@ export const EmailLoginForm: React.FC<FormProps> = ({
               hintAlign="center"
               hintSpace="baseLoose"
             />
-            <Spacer size="baseLoose" />
           </>
         )}
-      </Form>
 
-      {errorCode !== 'CODE_EXPIRED' &&
-        !(hasSendCode && errorCode === 'CODE_INVALID') && (
-          <OtherOptions
-            isInPage={isInPage}
-            sendLoginCode={sendLoginCode}
-            hasSendCode={hasSendCode}
-          />
-        )}
+        {errorCode !== 'CODE_EXPIRED' &&
+          !(hasSendCode && errorCode === 'CODE_INVALID') && (
+            <OtherOptions
+              isInPage={isInPage}
+              sendLoginCode={sendLoginCode}
+              hasSendCode={hasSendCode}
+            />
+          )}
+      </Form>
     </>
   )
 
