@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -27,7 +27,6 @@ import {
   Form,
   IconLeft20,
   LanguageContext,
-  Layout,
   Media,
   Spacer,
   TextIcon,
@@ -99,6 +98,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const [errorCode, setErrorCode] = useState<any>(null)
   const [hasSendCode, setHasSendCode] = useState(false)
   const [countdown, setCountdown] = useState(0)
+
+  const passwordRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     countdown > 0 && setTimeout(() => setCountdown(countdown - 1), 1000)
@@ -189,8 +190,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     },
   })
 
-  console.log({ errors })
-
   const sendLoginCode = async () => {
     const error = validateEmail(values.email, lang, { allowPlusSign: true })
     if (error) {
@@ -209,7 +208,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     setFieldValue('password', '')
     setErrorCode(null)
 
-    // TODO: focus password input
+    if (passwordRef.current) {
+      passwordRef.current.focus()
+    }
   }
 
   const fieldMsgId = `field-msg-sign-in`
@@ -235,6 +236,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         />
 
         <Form.Input
+          ref={passwordRef}
           label={<FormattedMessage defaultMessage="Password" />}
           type="password"
           name="password"
@@ -312,29 +314,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       loading={isSubmitting}
     />
   )
-
-  if (isInPage) {
-    return (
-      <>
-        <Layout.Header
-          right={
-            <>
-              <Layout.Header.Title id="login" />
-              <Layout.Header.RightButton
-                type="submit"
-                form={formId}
-                disabled={isSubmitting}
-                text={<FormattedMessage defaultMessage="Confirm" />}
-                loading={isSubmitting}
-              />
-            </>
-          }
-        />
-
-        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
-      </>
-    )
-  }
 
   return (
     <>

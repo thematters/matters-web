@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { forwardRef } from 'react'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.module.css'
@@ -30,49 +31,73 @@ type InputProps = {
     HTMLInputElement
   >
 
-const Input: React.FC<InputProps> = ({
-  type,
+const Input = forwardRef(
+  (
+    {
+      type,
 
-  name,
-  hasFooter = true,
-  rightButton,
+      name,
+      hasFooter = true,
+      rightButton,
 
-  label,
-  extraButton,
-  hasLabel,
+      label,
+      extraButton,
+      hasLabel,
 
-  hint,
-  error,
-  hintSize,
-  hintAlign,
-  hintSpace,
+      hint,
+      error,
+      hintSize,
+      hintAlign,
+      hintSpace,
 
-  spacingTop,
-  spacingBottom,
+      spacingTop,
+      spacingBottom,
 
-  ...inputProps
-}) => {
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
-  const inputClasses = classNames({
-    [styles.input]: true,
-    [styles.error]: error,
-    [styles.wrapper]: !!rightButton,
-  })
+      ...inputProps
+    }: InputProps,
+    ref
+  ) => {
+    const fieldId = `field-${name}`
+    const fieldMsgId = `field-msg-${name}`
+    const inputClasses = classNames({
+      [styles.input]: true,
+      [styles.error]: error,
+      [styles.wrapper]: !!rightButton,
+    })
 
-  return (
-    <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
-      <Field.Header
-        htmlFor={fieldId}
-        label={label}
-        extraButton={extraButton}
-        hasLabel={hasLabel}
-      />
+    return (
+      <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
+        <Field.Header
+          htmlFor={fieldId}
+          label={label}
+          extraButton={extraButton}
+          hasLabel={hasLabel}
+        />
 
-      {rightButton && (
-        <Field.Content>
-          <section className={inputClasses}>
+        {rightButton && (
+          <Field.Content>
+            <section className={inputClasses}>
+              <input
+                ref={ref as React.RefObject<any> | null}
+                {...inputProps}
+                id={fieldId}
+                name={name}
+                type={type}
+                aria-describedby={fieldMsgId}
+                autoComplete="nope"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
+                // className={inputClasses}
+              />
+              {rightButton}
+            </section>
+          </Field.Content>
+        )}
+        {!rightButton && (
+          <Field.Content>
             <input
+              ref={ref as React.RefObject<any> | null}
               {...inputProps}
               id={fieldId}
               name={name}
@@ -82,41 +107,26 @@ const Input: React.FC<InputProps> = ({
               autoCorrect="off"
               autoCapitalize="off"
               spellCheck="false"
-              // className={inputClasses}
+              className={inputClasses}
             />
-            {rightButton}
-          </section>
-        </Field.Content>
-      )}
-      {!rightButton && (
-        <Field.Content>
-          <input
-            {...inputProps}
-            id={fieldId}
-            name={name}
-            type={type}
-            aria-describedby={fieldMsgId}
-            autoComplete="nope"
-            autoCorrect="off"
-            autoCapitalize="off"
-            spellCheck="false"
-            className={inputClasses}
-          />
-        </Field.Content>
-      )}
+          </Field.Content>
+        )}
 
-      {hasFooter && (
-        <Field.Footer
-          fieldMsgId={fieldMsgId}
-          hint={hint}
-          error={error}
-          hintSize={hintSize}
-          hintAlign={hintAlign}
-          hintSpace={hintSpace}
-        />
-      )}
-    </Field>
-  )
-}
+        {hasFooter && (
+          <Field.Footer
+            fieldMsgId={fieldMsgId}
+            hint={hint}
+            error={error}
+            hintSize={hintSize}
+            hintAlign={hintAlign}
+            hintSpace={hintSpace}
+          />
+        )}
+      </Field>
+    )
+  }
+)
+
+Input.displayName = 'Input'
 
 export default Input
