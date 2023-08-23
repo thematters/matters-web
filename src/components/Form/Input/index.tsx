@@ -65,6 +65,22 @@ const Input = forwardRef(
       [styles.wrapper]: !!rightButton,
     })
 
+    const input = (
+      <input
+        ref={ref as React.RefObject<any> | null}
+        {...inputProps}
+        id={fieldId}
+        name={name}
+        type={type}
+        aria-describedby={fieldMsgId}
+        autoComplete="nope"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
+        className={!rightButton ? inputClasses : undefined}
+      />
+    )
+
     return (
       <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
         <Field.Header
@@ -77,40 +93,12 @@ const Input = forwardRef(
         {rightButton && (
           <Field.Content>
             <section className={inputClasses}>
-              <input
-                ref={ref as React.RefObject<any> | null}
-                {...inputProps}
-                id={fieldId}
-                name={name}
-                type={type}
-                aria-describedby={fieldMsgId}
-                autoComplete="nope"
-                autoCorrect="off"
-                autoCapitalize="off"
-                spellCheck="false"
-                // className={inputClasses}
-              />
+              {input}
               {rightButton}
             </section>
           </Field.Content>
         )}
-        {!rightButton && (
-          <Field.Content>
-            <input
-              ref={ref as React.RefObject<any> | null}
-              {...inputProps}
-              id={fieldId}
-              name={name}
-              type={type}
-              aria-describedby={fieldMsgId}
-              autoComplete="nope"
-              autoCorrect="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              className={inputClasses}
-            />
-          </Field.Content>
-        )}
+        {!rightButton && <Field.Content>{input}</Field.Content>}
 
         {hasFooter && (
           <Field.Footer
