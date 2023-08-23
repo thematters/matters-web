@@ -28,6 +28,8 @@
 }
 
 .resendButton {
+  display: inline-block;
+  padding-left: var(--spacing-x-tight);
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
   color: var(--color-grey);
