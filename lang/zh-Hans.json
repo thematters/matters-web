@@ -219,10 +219,6 @@
   "8KFsZN": {
     "defaultMessage": "阅读次数"
   },
-  "8PWD05": {
-    "defaultMessage": "邀请你成为 {tag} 的协作者",
-    "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
-  },
   "8cv9D4": {
     "defaultMessage": "下一步"
   },
@@ -313,10 +309,6 @@
     "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
-  "CNbggD": {
-    "defaultMessage": "成为了 {tag} 的主理人",
-    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
-  },
   "Cdkhl8": {
     "defaultMessage": "刪除{commentType}",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -340,10 +332,6 @@
   },
   "D3idYv": {
     "defaultMessage": "设定"
-  },
-  "DFieKt": {
-    "defaultMessage": "辞去了 {tag} 的协作者",
-    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
   "DYrDcG": {
     "defaultMessage": "徽章",
@@ -648,10 +636,6 @@
   "TzhzIH": {
     "defaultMessage": "创作者"
   },
-  "U/Tqmx": {
-    "defaultMessage": "评论了你收藏的作品 ",
-    "description": "src/components/Notice/CommentNotice/SubscribedArticleNewCommentNotice.tsx"
-  },
   "U7o9Ba": {
     "defaultMessage": "累计阅读时長"
   },
@@ -760,10 +744,6 @@
     "defaultMessage": "在你的围炉中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "YUtHE9": {
-    "defaultMessage": "将你的作品 {articleTitle} 在 {tag} 中选为精华",
-    "description": "src/components/Notice/ArticleTagNotice/ArticleTagAddedNotice.tsx"
-  },
   "YjNkcK": {
     "defaultMessage": "若要变更地址，请直接操作钱包切換"
   },
@@ -871,10 +851,6 @@
   "dnsfmR": {
     "defaultMessage": "，我们会尽快回复!",
     "description": "src/views/Help/index.tsx"
-  },
-  "eJ131z": {
-    "defaultMessage": "辞去了 {tag} 的主理人",
-    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
   },
   "eTpiYa": {
     "defaultMessage": "尚无支持数据"
@@ -1067,10 +1043,6 @@
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
-  },
-  "pCcbaC": {
-    "defaultMessage": "将你的作品 {articleTitle} 从 {tag} 中移除",
-    "description": "src/components/Notice/ArticleTagNotice/ArticleTagRemovedNotice.tsx"
   },
   "pRV+UD": {
     "defaultMessage": "折叠",

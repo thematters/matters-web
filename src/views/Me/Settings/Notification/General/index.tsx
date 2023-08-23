@@ -18,7 +18,6 @@ const VIEWER_NOTIFICATION_GENERAL_SETTINGS = gql`
       settings {
         language
         notification {
-          enable
           mention
           userNewFollower
           articleNewComment
@@ -41,7 +40,6 @@ const UPDATE_VIEWER_NOTIFICATION_GENERAL = gql`
       id
       settings {
         notification {
-          enable
           mention
           userNewFollower
           articleNewComment
