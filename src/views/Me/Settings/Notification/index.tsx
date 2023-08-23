@@ -24,7 +24,6 @@ const VIEWER_NOTIFICATION_SETTINGS = gql`
       settings {
         language
         notification {
-          enable
           email
         }
       }
@@ -41,7 +40,6 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
       id
       settings {
         notification {
-          enable
           email
         }
       }
