@@ -170,13 +170,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         setErrorCode(codes[0])
         codes.forEach((code) => {
-          if (
-            code.includes('USER_EMAIL_') ||
-            code.indexOf('USER_PASSWORD_') >= 0 ||
-            code.includes('CODE_INVALID') ||
-            code.includes('CODE_INACTIVE')
-          ) {
-            const m = translate({ id: 'USER_PASSWORD_INVALID', lang })
+          if (code.includes('CODE_INVALID') || code.includes('CODE_INACTIVE')) {
+            const m = translate({ id: 'CODE_INVALID', lang })
             setFieldError('email', m)
             setFieldError('password', m)
           } else if (code.includes('CODE_EXPIRED')) {

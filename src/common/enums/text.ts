@@ -64,7 +64,7 @@ export const TEXT = {
     close: '關閉',
     CODE_EXPIRED: '臨時密碼已過期，請嘗試重新發送',
     CODE_INACTIVE: '驗證碼已失效，請使用最新驗證碼或重新發送',
-    CODE_INVALID: '驗證碼不正確，請檢查輸入內容或重新發送',
+    CODE_INVALID: '郵件地址或密碼錯誤',
     collectedOnly: '只看衍生作品',
     COMMENT_NOT_FOUND: '評論不存在',
     community: '社區共建基地',
@@ -468,7 +468,7 @@ export const TEXT = {
     close: '关闭',
     CODE_EXPIRED: '临时密码已过期，请尝试重新发送',
     CODE_INACTIVE: '验证码已失效，请使用最新验证码或重新发送',
-    CODE_INVALID: '验证码不正确，请检查输入内容或重新发送',
+    CODE_INVALID: '邮箱或密码错误',
     collectedOnly: '只看衍生作品',
     COMMENT_NOT_FOUND: '评论不存在',
     community: '社区共建基地',
@@ -874,8 +874,7 @@ export const TEXT = {
     CODE_EXPIRED: 'This login code has expired, please try to resend',
     CODE_INACTIVE:
       'Verification code is no longer valid. Please use the latest code we sent, or try resend',
-    CODE_INVALID:
-      'Incorrect verification code. Please check your input, or try resend',
+    CODE_INVALID: 'Incorrect email or password',
     collapseComment: 'Collapse response',
     collectedOnly: 'Articles Only',
     COMMENT_NOT_FOUND: 'Response not found',
