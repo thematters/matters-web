@@ -112,6 +112,7 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const isBanned = state === 'banned'
   const isArchived = state === 'archived'
   const isFrozen = state === 'frozen'
+  // @ts-ignore
   const isOnboarding = state === 'onboarding'
   const isInactive = isAuthed && (isBanned || isFrozen || isArchived)
   const isCivicLiker = viewer.liker.civicLiker

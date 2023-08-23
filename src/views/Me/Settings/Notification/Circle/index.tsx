@@ -29,7 +29,6 @@ const VIEWER_NOTIFICATION_CIRCLE_SETTINGS = gql`
       settings {
         language
         notification {
-          enable
           circleNewSubscriber
           circleNewFollower
           circleNewUnsubscriber
@@ -56,7 +55,6 @@ const UPDATE_VIEWER_NOTIFICATION_CIRCLE = gql`
       id
       settings {
         notification {
-          enable
           circleNewSubscriber
           circleNewFollower
           circleNewUnsubscriber
