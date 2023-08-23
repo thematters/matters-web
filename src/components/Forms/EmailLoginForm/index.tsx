@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -30,6 +30,7 @@ import {
   LanguageContext,
   Media,
   TextIcon,
+  useCountdown,
   // toast,
   useMutation,
 } from '~/components'
@@ -97,13 +98,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const [isSelectMethod, setIsSelectMethod] = useState(false)
   const [errorCode, setErrorCode] = useState<any>(null)
   const [hasSendCode, setHasSendCode] = useState(false)
-  const [countdown, setCountdown] = useState(0)
+  const { countdown, setCountdown } = useCountdown(0)
 
   const passwordRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    countdown > 0 && setTimeout(() => setCountdown(countdown - 1), 1000)
-  }, [countdown])
 
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
     SEND_CODE,
