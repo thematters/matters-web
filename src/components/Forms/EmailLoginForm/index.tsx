@@ -8,6 +8,7 @@ import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
+  SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
 import {
   analytics,
@@ -199,7 +200,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     await sendCode({
       variables: { input: { email: values.email, type: 'email_otp' } },
     })
-    setCountdown(10)
+    setCountdown(SEND_CODE_COUNTDOWN)
     setHasSendCode(true)
 
     // clear
