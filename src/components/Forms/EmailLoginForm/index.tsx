@@ -48,6 +48,7 @@ interface FormProps {
   submitCallback?: () => void
   gotoResetPassword?: () => void
   gotoEmailSignup: () => void
+  gotoWalletConnect: () => void
   closeDialog: () => void
   back?: () => void
 }
@@ -79,6 +80,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
   gotoResetPassword,
+  gotoWalletConnect,
   gotoEmailSignup,
   closeDialog,
   back,
@@ -342,7 +344,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
             gotoEmailSignup={gotoEmailSignup}
           />
         )}
-        {isWallet && <AuthWalletFeed />}
+        {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
       </Dialog.Content>
 
       {isNormal && !isSelectMethod && (

@@ -238,9 +238,6 @@
     "defaultMessage": "Unsubscribe Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
-  "9+Ddtu": {
-    "defaultMessage": "Next"
-  },
   "9Fpc9S": {
     "defaultMessage": "Bug Report"
   },
@@ -332,10 +329,6 @@
   "Cu3Cty": {
     "defaultMessage": "month"
   },
-  "CwSpld": {
-    "defaultMessage": "Not for login",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
   "CxYcYR": {
     "defaultMessage": "Recommended square image."
   },
@@ -368,13 +361,6 @@
   "EZMrtJ": {
     "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
-  "EfJYPI": {
-    "defaultMessage": "Verification Code",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
-  "EwVnoC": {
-    "defaultMessage": "I have read and agree to"
   },
   "FOOymB": {
     "defaultMessage": "No members yet",
@@ -443,6 +429,10 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "Confirm Archiving"
+  },
+  "HkozYU": {
+    "defaultMessage": "Switch wallet",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
@@ -532,9 +522,6 @@
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
-  "LphWYP": {
-    "defaultMessage": "Terms and Privacy Policy"
-  },
   "LqxIEU": {
     "defaultMessage": "Wallet address will be part of your digital identity and shown in your profile page.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -545,10 +532,6 @@
   },
   "N2IrpM": {
     "defaultMessage": "Confirm"
-  },
-  "N3K1H9": {
-    "defaultMessage": "Matters will never ask for your wallet mnemonic through any channel.",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "NAidKb": {
     "defaultMessage": "Notifications"
@@ -716,6 +699,10 @@
   "W8OZ3G": {
     "defaultMessage": "Confirm Deletion"
   },
+  "WDZndZ": {
+    "defaultMessage": "Please sign message in your wallet",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
   "WQT8ZA": {
     "defaultMessage": "Edit collection"
   },
@@ -769,9 +756,6 @@
   "Y+spJC": {
     "defaultMessage": "commented in your circle broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
-  "YjNkcK": {
-    "defaultMessage": "To change, switch it directly on your wallet"
   },
   "YlPCRU": {
     "defaultMessage": "connected",
@@ -926,10 +910,6 @@
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx",
     "defaultMessage": "{commentType} has been deleted"
   },
-  "hWs95P": {
-    "defaultMessage": "Important information will be notified by email. So filling in your email address will be required.",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
   "hYG5fb": {
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
@@ -966,13 +946,6 @@
     "defaultMessage": "Pin Comment",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
-  "jL2ZHb": {
-    "defaultMessage": "Code will expire after 20 minutes"
-  },
-  "jgLiba": {
-    "defaultMessage": "Enter verification code",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
   "jkrM1r": {
     "defaultMessage": "Open IPNS page",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
@@ -997,9 +970,6 @@
   "kkZioy": {
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
-  },
-  "lD4FPZ": {
-    "defaultMessage": "Enter Email"
   },
   "lIir/P": {
     "description": "",
@@ -1107,9 +1077,6 @@
   "qlki7w": {
     "defaultMessage": "Remove Article",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
-  },
-  "qswU4E": {
-    "defaultMessage": "Email will not be used as a login but only as a contact channel."
   },
   "r66dXx": {
     "defaultMessage": "mentioned you in broadcast comment in {circleName}",
@@ -1220,10 +1187,6 @@
     "defaultMessage": "Continue",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
-  "wSEOxH": {
-    "defaultMessage": "Contact Channel",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
   "wXzTZ0": {
     "description": "",
     "defaultMessage": "Enter the name of your Circle"
@@ -1234,10 +1197,6 @@
   },
   "wbcwKd": {
     "defaultMessage": "View All"
-  },
-  "xGh9O7": {
-    "defaultMessage": "As a reminder, the email address will not be used as a login but only as a contact channel.",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "xMaFCO": {
     "defaultMessage": "Articles",

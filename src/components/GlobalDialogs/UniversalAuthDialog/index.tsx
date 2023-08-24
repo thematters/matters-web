@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
+import { useConnect } from 'wagmi'
 
 import {
   CLOSE_ACTIVE_DIALOG,
@@ -7,6 +8,7 @@ import {
   TEST_ID,
 } from '~/common/enums'
 import {
+  AuthFeedType,
   Dialog,
   Spinner,
   useDialogSwitch,
@@ -68,6 +70,12 @@ const BaseUniversalAuthDialog = () => {
   const { currStep, forward } = useStep<Step>('select-login-method')
   const [email, setEmail] = useState('')
 
+  const { connectors } = useConnect()
+  const injectedConnector = connectors.find((c) => c.id === 'metaMask')
+  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(
+    injectedConnector?.ready ? 'wallet' : 'normal'
+  )
+
   const {
     show,
     openDialog: baseOpenDialog,
@@ -90,10 +98,11 @@ const BaseUniversalAuthDialog = () => {
     <Dialog isOpen={show} onDismiss={closeDialog} testId={TEST_ID.DIALOG_AUTH}>
       {currStep === 'select-login-method' && (
         <DynamicSelectAuthMethodForm
-          gotoWalletAuth={() => forward('wallet-select')}
+          gotoWalletConnect={() => forward('wallet-connect')}
           gotoEmailLogin={() => forward('email-login')}
           gotoEmailSignup={() => forward('email-sign-up-init')}
           closeDialog={closeDialog}
+          type={authTypeFeed}
         />
       )}
 
@@ -118,6 +127,10 @@ const BaseUniversalAuthDialog = () => {
           }}
           closeDialog={closeDialog}
           back={() => forward('select-login-method')}
+          gotoSignInTab={() => {
+            setAuthTypeFeed('normal')
+            forward('select-login-method')
+          }}
         />
       )}
 
@@ -137,6 +150,7 @@ const BaseUniversalAuthDialog = () => {
             setEmail(email)
             forward('email-verification-sent')
           }}
+          gotoWalletConnect={() => forward('wallet-connect')}
           gotoEmailLogin={() => forward('email-login')}
           closeDialog={closeDialog}
           back={() => forward('select-login-method')}

@@ -237,9 +237,6 @@
     "defaultMessage": "離開圍爐",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
-  "9+Ddtu": {
-    "defaultMessage": "下一步"
-  },
   "9Fpc9S": {
     "defaultMessage": "漏洞提報"
   },
@@ -331,10 +328,6 @@
   "Cu3Cty": {
     "defaultMessage": "月"
   },
-  "CwSpld": {
-    "defaultMessage": "非登入用途",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
   "CxYcYR": {
     "defaultMessage": "建議使用正方形圖片"
   },
@@ -367,13 +360,6 @@
   "EZMrtJ": {
     "defaultMessage": "在 {circleName} 的廣播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
-  "EfJYPI": {
-    "defaultMessage": "驗證碼",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
-  "EwVnoC": {
-    "defaultMessage": "我已閱讀並同意"
   },
   "FOOymB": {
     "defaultMessage": "還沒有成員",
@@ -441,6 +427,10 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "確認封存"
+  },
+  "HkozYU": {
+    "defaultMessage": "更換錢包",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "HxcjQl": {
     "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
@@ -530,9 +520,6 @@
     "defaultMessage": "IPNS 訂閱",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
-  "LphWYP": {
-    "defaultMessage": "用戶協議和隱私政策"
-  },
   "LqxIEU": {
     "defaultMessage": "錢包地址將作為身份識別之一在個人頁公開顯示。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -543,10 +530,6 @@
   },
   "N2IrpM": {
     "defaultMessage": "確認"
-  },
-  "N3K1H9": {
-    "defaultMessage": "Matters 不會透過任何渠道詢問你的錢包私鑰。",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "NAidKb": {
     "defaultMessage": "通知"
@@ -713,6 +696,10 @@
   "W8OZ3G": {
     "defaultMessage": "確認刪除"
   },
+  "WDZndZ": {
+    "defaultMessage": "請在錢包中完成簽名",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
   "WQT8ZA": {
     "defaultMessage": "編輯選集"
   },
@@ -766,9 +753,6 @@
   "Y+spJC": {
     "defaultMessage": "在你的圍爐中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-  },
-  "YjNkcK": {
-    "defaultMessage": "若要變更地址，請直接操作錢包切換"
   },
   "YlPCRU": {
     "defaultMessage": "關聯了",
@@ -921,10 +905,6 @@
     "defaultMessage": "{commentType}已刪除",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
-  "hWs95P": {
-    "defaultMessage": "重要訊息將透過郵件通知，請填入信箱完成設定。",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
   "hYG5fb": {
     "defaultMessage": "人追蹤",
     "description": "src/views/TagDetail/Followers/index.tsx"
@@ -961,13 +941,6 @@
     "defaultMessage": "喜歡回應",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
-  "jL2ZHb": {
-    "defaultMessage": "驗證碼有效期 20 分鐘"
-  },
-  "jgLiba": {
-    "defaultMessage": "請輸入驗證碼",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
   "jkrM1r": {
     "defaultMessage": "打開 IPNS 頁面",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
@@ -992,9 +965,6 @@
   "kkZioy": {
     "defaultMessage": "確認移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
-  },
-  "lD4FPZ": {
-    "defaultMessage": "請輸入電子信箱"
   },
   "lIir/P": {
     "defaultMessage": "我知道了"
@@ -1100,9 +1070,6 @@
   "qlki7w": {
     "defaultMessage": "移除作品",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
-  },
-  "qswU4E": {
-    "defaultMessage": "信箱將不作為登入使用，僅作為聯繫渠道"
   },
   "r66dXx": {
     "defaultMessage": "在 {circleName} 的廣播留言中提及你",
@@ -1212,10 +1179,6 @@
     "defaultMessage": "註冊",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
-  "wSEOxH": {
-    "defaultMessage": "聯繫渠道",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
   "wXzTZ0": {
     "defaultMessage": "给围炉取一个吸引人的名字吧"
   },
@@ -1225,10 +1188,6 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"
-  },
-  "xGh9O7": {
-    "defaultMessage": "提醒：信箱將不作為登入使用，僅作為聯繫渠道",
-    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "xMaFCO": {
     "defaultMessage": "閱讀",

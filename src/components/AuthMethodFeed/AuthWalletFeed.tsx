@@ -13,16 +13,19 @@ import {
 
 import styles from './styles.module.css'
 
-export const AuthWalletFeed = () => {
-  // const { disconnect } = useDisconnect()
-  const {
-    connectors,
-    connect,
-    // error: connectError,
-    pendingConnector,
-  } = useConnect()
+export interface Props {
+  submitCallback: () => void
+  closeDialog?: () => void
+  back?: () => void
+}
+
+export const AuthWalletFeed: React.FC<Props> = ({
+  submitCallback,
+  closeDialog,
+  back,
+}) => {
+  const { connectors, connect, pendingConnector } = useConnect()
   const { address: account, isConnecting } = useAccount()
-  // const errorMessage = connectError?.message
 
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
   const walletConnectConnector = connectors.find(
@@ -37,19 +40,8 @@ export const AuthWalletFeed = () => {
   useEffect(() => {
     if (!account) return
 
-    // TODO:
-    // submitCallback()
+    submitCallback()
   }, [account])
-
-  // disconnect before go back to previous step
-  // TODO:
-  // const onBack = () => {
-  //   disconnect()
-
-  //   // if (back) {
-  //   //   back()
-  //   // }
-  // }
 
   return (
     <>

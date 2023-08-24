@@ -23,6 +23,7 @@ import { SendVerificationCodeMutation } from '~/gql/graphql'
 interface FormProps {
   submitCallback: (email: string) => void
   gotoEmailLogin: () => void
+  gotoWalletConnect: () => void
   closeDialog?: () => void
   back: () => void
 }
@@ -34,6 +35,7 @@ interface FormValues {
 const Init: React.FC<FormProps> = ({
   submitCallback,
   gotoEmailLogin,
+  gotoWalletConnect,
   closeDialog,
   back,
 }) => {
@@ -160,7 +162,7 @@ const Init: React.FC<FormProps> = ({
             normalText={<FormattedMessage defaultMessage="Sign Up" />}
           />
           {isNormal && <>{InnerForm}</>}
-          {isWallet && <AuthWalletFeed />}
+          {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
         </Media>
       </Dialog.Content>
 

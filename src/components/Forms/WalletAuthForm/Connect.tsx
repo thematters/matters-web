@@ -1,17 +1,13 @@
-import { useLazyQuery } from '@apollo/react-hooks'
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import Link from 'next/link'
-import { useContext, useEffect } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
-  PATHS,
 } from '~/common/enums'
 import {
   analytics,
@@ -19,33 +15,28 @@ import {
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
-  validateCode,
-  validateEmail,
-  validateToS,
   WALLET_ERROR_MESSAGES,
 } from '~/common/utils'
 import {
+  AuthFeedType,
+  AuthTabs,
   Dialog,
-  Form,
-  IconInfo16,
+  IconLeft20,
+  IconMetamask22,
+  IconSpinner22,
   LanguageContext,
-  Layout,
+  Media,
   TextIcon,
   // toast,
   useMutation,
-  VerificationSendCodeButton,
-  ViewerContext,
 } from '~/components'
-import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import {
   AuthResultType,
-  ConfirmVerificationCodeMutation,
-  EthAddressUserQuery,
   GenerateSigningMessageMutation,
   WalletLoginMutation,
 } from '~/gql/graphql'
 
-import { ETH_ADDRESS_USER, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
+import { GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
 import styles from './styles.module.css'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
@@ -55,39 +46,11 @@ interface FormProps {
   submitCallback?: (type?: AuthResultType) => void
   closeDialog?: () => void
   back?: () => void
+  gotoSignInTab?: () => void
 }
 
 interface FormValues {
   address: string
-  tos: boolean
-  email: string
-  code: string
-}
-
-const ImportantNotice = () => {
-  return (
-    <section className={styles.notice}>
-      <h4>
-        <FormattedMessage
-          defaultMessage="As a reminder, the email address will not be used as a login but only as a contact channel."
-          description="src/components/Forms/WalletAuthForm/Connect.tsx"
-        />
-      </h4>
-
-      <p>
-        <b>
-          <FormattedMessage
-            defaultMessage="Matters will never ask for your wallet mnemonic through any channel. "
-            description="src/components/Forms/WalletAuthForm/Connect.tsx"
-          />
-        </b>
-        <FormattedMessage
-          defaultMessage="Important information will be notified by email. So filling in your email address will be required."
-          description="src/components/Forms/WalletAuthForm/Connect.tsx"
-        />
-      </p>
-    </section>
-  )
 }
 
 const Connect: React.FC<FormProps> = ({
@@ -95,13 +58,10 @@ const Connect: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
   back,
+  gotoSignInTab,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const viewer = useContext(ViewerContext)
-  const isInPage = purpose === 'page'
-  const isInDialog = purpose === 'dialog'
-  const formId = 'wallet-auth-connect-form'
-  const fieldMsgId = 'wallet-auth-connect-msg'
+  const [authTypeFeed] = useState<AuthFeedType>('wallet')
 
   const [generateSigningMessage] = useMutation<GenerateSigningMessageMutation>(
     GENERATE_SIGNING_MESSAGE,
@@ -115,19 +75,10 @@ const Connect: React.FC<FormProps> = ({
       showToast: false,
     }
   )
-  const [confirmCode] =
-    useMutation<ConfirmVerificationCodeMutation>(CONFIRM_CODE)
-
-  const [queryEthAddressUser, { data, loading }] =
-    useLazyQuery<EthAddressUserQuery>(ETH_ADDRESS_USER)
 
   const { disconnect } = useDisconnect()
   const { address: account } = useAccount()
   const { signMessageAsync } = useSignMessage()
-
-  const intl = useIntl()
-  // sign up if eth address didn't bind with a user
-  const isSignUp = !!(data && account && !data?.user?.id && !viewer.isAuthed)
 
   useEffect(() => {
     if (!account && back) {
@@ -136,7 +87,7 @@ const Connect: React.FC<FormProps> = ({
 
     setFieldValue('address', account || '')
 
-    queryEthAddressUser({ variables: { ethAddress: account } })
+    handleSubmit()
   }, [account])
 
   // disconnect before go back to previous step
@@ -148,36 +99,20 @@ const Connect: React.FC<FormProps> = ({
     }
   }
 
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleSubmit,
-    handleBlur,
-    isSubmitting,
-    setFieldValue,
-  } = useFormik<FormValues>({
+  const onCloseDialog = () => {
+    disconnect()
+    if (closeDialog) {
+      closeDialog()
+    }
+  }
+
+  const { values, handleSubmit, setFieldValue } = useFormik<FormValues>({
     initialValues: {
       address: account || '',
-      tos: true,
-      email: '',
-      code: '',
     },
     validateOnBlur: false,
     validateOnChange: false,
-    validate: ({ tos, email, code }) =>
-      _pickBy({
-        tos: isSignUp ? validateToS(tos, lang) : undefined,
-        email: isSignUp
-          ? validateEmail(email, lang, { allowPlusSign: false })
-          : undefined,
-        code: isSignUp ? validateCode(code, lang) : undefined,
-      }),
-    onSubmit: async (
-      { address, email, code },
-      { setFieldError, setSubmitting }
-    ) => {
+    onSubmit: async ({ address }, { setFieldError, setSubmitting }) => {
       try {
         if (!address) {
           setFieldError('address', WALLET_ERROR_MESSAGES[lang].invalidAddress)
@@ -193,6 +128,7 @@ const Connect: React.FC<FormProps> = ({
         const signingMessage = signingMessageData?.generateSigningMessage
         if (!signingMessage) {
           setFieldError('address', WALLET_ERROR_MESSAGES[lang].unknown)
+          onBack()
           setSubmitting(false)
           return
         }
@@ -208,17 +144,9 @@ const Connect: React.FC<FormProps> = ({
             'address',
             WALLET_ERROR_MESSAGES[lang].userRejectedSignMessage
           )
+          onBack()
           setSubmitting(false)
           return
-        }
-
-        // verifiy email (sign up only)
-        let codeId = ''
-        if (isSignUp && email && code) {
-          const { data: confirmCodeData } = await confirmCode({
-            variables: { input: { email, type: 'register', code } },
-          })
-          codeId = confirmCodeData?.confirmVerificationCode || ''
         }
 
         // confirm auth
@@ -229,8 +157,6 @@ const Connect: React.FC<FormProps> = ({
               nonce: signingMessage.nonce,
               signedMessage: signingMessage.signingMessage,
               signature,
-              ...(email ? { email } : {}),
-              ...(codeId ? { codeId } : {}),
             },
           },
         })
@@ -254,7 +180,7 @@ const Connect: React.FC<FormProps> = ({
           // })
 
           redirectToTarget({
-            fallback: isInPage ? 'homepage' : 'current',
+            fallback: 'current',
           })
         } else if (submitCallback) {
           submitCallback(loginData?.walletLogin.type)
@@ -274,205 +200,78 @@ const Connect: React.FC<FormProps> = ({
     },
   })
 
-  const formClasses = classNames({
-    [styles.form]: true,
-    [styles.inDialog]: isInDialog,
-  })
-
-  const InnerForm = (
-    <section className={formClasses}>
-      <Form id={formId} onSubmit={handleSubmit}>
-        <Form.List
-          groupName={<FormattedMessage defaultMessage="Connect Wallet" />}
-          spacingX={isInPage ? 0 : 'base'}
-        >
-          <Form.List.Item title={maskAddress(values.address)} />
-        </Form.List>
-
-        <section className={styles.container}>
-          <Form.Field.Footer
-            fieldMsgId={fieldMsgId}
-            hint={
-              !errors.address ? (
-                <FormattedMessage defaultMessage="To change, switch it directly on your wallet" />
-              ) : undefined
-            }
-            error={errors.address}
-          />
-
-          {isSignUp && (
-            <div className={styles.divider}>
-              <hr />
-            </div>
-          )}
-
-          {isSignUp && (
-            <h3 className={styles.subtitle}>
-              <FormattedMessage
-                defaultMessage="Contact Channel"
-                description="src/components/Forms/WalletAuthForm/Connect.tsx"
-              />
-            </h3>
-          )}
-
-          {isSignUp && (
-            <Form.Input
-              label={<FormattedMessage defaultMessage="Email" />}
-              hasLabel
-              type="email"
-              name="email"
-              required
-              placeholder={intl.formatMessage({
-                defaultMessage: 'Enter Email',
-              })}
-              extraButton={
-                <TextIcon
-                  icon={<IconInfo16 color="gold" />}
-                  color="gold"
-                  size="sm"
-                  weight="md"
-                  spacing="xxtight"
-                >
-                  <FormattedMessage
-                    defaultMessage="Not for login"
-                    description="src/components/Forms/WalletAuthForm/Connect.tsx"
-                  />
-                </TextIcon>
-              }
-              value={values.email}
-              error={touched.email && errors.email}
-              onBlur={handleBlur}
-              onChange={handleChange}
-              hint={
-                <FormattedMessage defaultMessage="Email will not be used as a login but only as a contact channel." />
-              }
-              spacingTop="base"
-              spacingBottom="base"
-            />
-          )}
-
-          {isSignUp && (
-            <Form.Input
-              label={
-                <FormattedMessage
-                  defaultMessage="Verification Code"
-                  description="src/components/Forms/WalletAuthForm/Connect.tsx"
-                />
-              }
-              hasLabel
-              type="text"
-              name="code"
-              required
-              placeholder={intl.formatMessage({
-                defaultMessage: 'Enter verification code',
-                description: 'src/components/Forms/WalletAuthForm/Connect.tsx',
-              })}
-              hint={intl.formatMessage({
-                defaultMessage: 'Code will expire after 20 minutes',
-              })}
-              value={values.code}
-              error={touched.code && errors.code}
-              onBlur={handleBlur}
-              onChange={handleChange}
-              extraButton={
-                <VerificationSendCodeButton
-                  email={values.email}
-                  type="register"
-                  disabled={!!errors.email}
-                />
-              }
-              spacingBottom="base"
-            />
-          )}
-
-          {isSignUp && (
-            <Form.CheckBox
-              name="tos"
-              checked={values.tos}
-              error={touched.tos && errors.tos}
-              onChange={handleChange}
-              hint={
-                <>
-                  <FormattedMessage defaultMessage="I have read and agree to" />
-                  <Link href={PATHS.TOS} legacyBehavior>
-                    <a className="u-link-green" target="_blank">
-                      &nbsp;
-                      <FormattedMessage defaultMessage="Terms and Privacy Policy" />
-                    </a>
-                  </Link>
-                </>
-              }
-              required
-            />
-          )}
-
-          {isSignUp && <ImportantNotice />}
-        </section>
-      </Form>
-    </section>
-  )
-
-  const SubmitButton = (
-    <Dialog.TextButton
-      type="submit"
-      form={formId}
-      disabled={isSubmitting || loading || !account}
-      text={<FormattedMessage defaultMessage="Next" />}
-      loading={isSubmitting || loading}
-    />
-  )
-
-  if (isInPage) {
-    return (
-      <>
-        <Layout.Header
-          right={
-            <>
-              <Layout.Header.Title id="authEntries" />
-              <Layout.Header.RightButton
-                type="submit"
-                form={formId}
-                disabled={isSubmitting || loading || !account}
-                text={<FormattedMessage defaultMessage="Next" />}
-                loading={isSubmitting || loading}
-              />
-            </>
-          }
-        />
-
-        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
-      </>
-    )
-  }
-
   return (
     <>
       <Dialog.Header
-        title="authEntries"
+        title={<>MetaMask</>}
+        hasSmUpTitle={false}
         leftBtn={
           back ? (
             <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Back" />}
               onClick={onBack}
+              color="greyDarker"
             />
           ) : null
         }
-        closeDialog={closeDialog}
-        rightBtn={SubmitButton}
+        closeDialog={onCloseDialog}
       />
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Dialog.Content>
+        <Media greaterThan="sm">
+          <AuthTabs
+            type={authTypeFeed}
+            setType={(type) => {
+              if (type === 'normal') {
+                disconnect()
+                if (gotoSignInTab) {
+                  gotoSignInTab()
+                }
+              }
+            }}
+          />
+        </Media>
+        <section className={styles.walletInfo}>
+          <span className={styles.icon}>
+            <IconMetamask22 size="mdM" />
+          </span>
+          <span className={styles.address}>{maskAddress(values.address)}</span>
+        </section>
+        <section className={styles.loadingInfo}>
+          <span>
+            <IconSpinner22 color="grey" size="mdM" />
+          </span>
+          <span>
+            <FormattedMessage
+              defaultMessage="Please sign message in your wallet"
+              description="src/components/Forms/WalletAuthForm/Connect.tsx"
+            />
+          </span>
+        </section>
+      </Dialog.Content>
 
       <Dialog.Footer
+        smUpSpaceBetween
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={back ? 'back' : 'cancel'}
+              text={
+                <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
+                  <FormattedMessage
+                    defaultMessage="Switch wallet"
+                    description="src/components/Forms/WalletAuthForm/Connect.tsx"
+                  />
+                </TextIcon>
+              }
               color="greyDarker"
-              onClick={back || closeDialog}
+              onClick={onBack}
             />
 
-            {SubmitButton}
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Close" />}
+              color="greyDarker"
+              onClick={onCloseDialog}
+            />
           </>
         }
       />
