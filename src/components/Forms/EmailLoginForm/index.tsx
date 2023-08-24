@@ -1,13 +1,14 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
+  SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
 import {
   analytics,
@@ -29,6 +30,7 @@ import {
   LanguageContext,
   Media,
   TextIcon,
+  useCountdown,
   // toast,
   useMutation,
 } from '~/components'
@@ -96,13 +98,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const [isSelectMethod, setIsSelectMethod] = useState(false)
   const [errorCode, setErrorCode] = useState<any>(null)
   const [hasSendCode, setHasSendCode] = useState(false)
-  const [countdown, setCountdown] = useState(0)
+  const { countdown, setCountdown } = useCountdown(0)
 
   const passwordRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    countdown > 0 && setTimeout(() => setCountdown(countdown - 1), 1000)
-  }, [countdown])
 
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
     SEND_CODE,
@@ -169,13 +167,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         setErrorCode(codes[0])
         codes.forEach((code) => {
-          if (
-            code.includes('USER_EMAIL_') ||
-            code.indexOf('USER_PASSWORD_') >= 0 ||
-            code.includes('CODE_INVALID') ||
-            code.includes('CODE_INACTIVE')
-          ) {
-            const m = translate({ id: 'USER_PASSWORD_INVALID', lang })
+          if (code.includes('CODE_INVALID') || code.includes('CODE_INACTIVE')) {
+            const m = translate({ id: 'CODE_INVALID', lang })
             setFieldError('email', m)
             setFieldError('password', m)
           } else if (code.includes('CODE_EXPIRED')) {
@@ -199,7 +192,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     await sendCode({
       variables: { input: { email: values.email, type: 'email_otp' } },
     })
-    setCountdown(10)
+    setCountdown(SEND_CODE_COUNTDOWN)
     setHasSendCode(true)
 
     // clear
