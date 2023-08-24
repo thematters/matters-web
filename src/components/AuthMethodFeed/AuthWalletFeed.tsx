@@ -26,7 +26,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
 }) => {
   const { connectors, connect, pendingConnector } = useConnect()
   const { address: account, isConnecting } = useAccount()
-  const [walletType, setWalletType] = useState<WalletType>('Metamask')
+  const [walletType, setWalletType] = useState<WalletType>('MetaMask')
 
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
   const walletConnectConnector = connectors.find(
@@ -54,7 +54,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
               analytics.trackEvent('click_button', {
                 type: 'connectorMetaMask',
               })
-              setWalletType('Metamask')
+              setWalletType('MetaMask')
               connect({ connector: injectedConnector })
             }}
             role="button"

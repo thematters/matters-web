@@ -67,7 +67,7 @@ const Connect: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const [authTypeFeed] = useState<AuthFeedType>('wallet')
 
-  const isMetamask = walletType === 'Metamask'
+  const isMetamask = walletType === 'MetaMask'
   const isWalletConnect = walletType === 'WalletConnect'
 
   const [generateSigningMessage] = useMutation<GenerateSigningMessageMutation>(

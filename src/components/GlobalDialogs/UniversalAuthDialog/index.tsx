@@ -60,7 +60,7 @@ const BaseUniversalAuthDialog = () => {
     injectedConnector?.ready ? 'wallet' : 'normal'
   )
 
-  const [walletType, setWalletType] = useState<WalletType>('Metamask')
+  const [walletType, setWalletType] = useState<WalletType>('MetaMask')
 
   const {
     show,

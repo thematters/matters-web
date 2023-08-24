@@ -98,4 +98,4 @@ export const MaxUint256 = BigInt(
   '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
 )
 
-export type WalletType = 'Metamask' | 'WalletConnect'
+export type WalletType = 'MetaMask' | 'WalletConnect'
