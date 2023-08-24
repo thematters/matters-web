@@ -4,6 +4,7 @@ import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
+import { WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   AuthTabs,
@@ -23,7 +24,7 @@ import { SendVerificationCodeMutation } from '~/gql/graphql'
 interface FormProps {
   submitCallback: (email: string) => void
   gotoEmailLogin: () => void
-  gotoWalletConnect: () => void
+  gotoWalletConnect: (type: WalletType) => void
   closeDialog?: () => void
   back: () => void
 }

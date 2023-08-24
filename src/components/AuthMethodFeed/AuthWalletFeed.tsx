@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount, useConnect } from 'wagmi'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { analytics, WalletType } from '~/common/utils'
 import {
   IconMetamask22,
   IconSpinner22,
@@ -14,7 +14,7 @@ import {
 import styles from './styles.module.css'
 
 export interface Props {
-  submitCallback: () => void
+  submitCallback: (type: WalletType) => void
   closeDialog?: () => void
   back?: () => void
 }
@@ -26,6 +26,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
 }) => {
   const { connectors, connect, pendingConnector } = useConnect()
   const { address: account, isConnecting } = useAccount()
+  const [walletType, setWalletType] = useState<WalletType>('Metamask')
 
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
   const walletConnectConnector = connectors.find(
@@ -40,7 +41,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
   useEffect(() => {
     if (!account) return
 
-    submitCallback()
+    submitCallback(walletType)
   }, [account])
 
   return (
@@ -53,6 +54,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
               analytics.trackEvent('click_button', {
                 type: 'connectorMetaMask',
               })
+              setWalletType('Metamask')
               connect({ connector: injectedConnector })
             }}
             role="button"
@@ -83,6 +85,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
             analytics.trackEvent('click_button', {
               type: 'connectorWalletConnect',
             })
+            setWalletType('WalletConnect')
             connect({ connector: walletConnectConnector })
           }}
           role="button"

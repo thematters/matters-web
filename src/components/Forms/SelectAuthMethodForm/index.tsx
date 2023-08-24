@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   AuthNormalFeed,
@@ -10,7 +11,7 @@ import {
 } from '~/components'
 
 interface FormProps {
-  gotoWalletConnect: () => void
+  gotoWalletConnect: (type: WalletType) => void
   gotoEmailLogin: () => void
   gotoEmailSignup: () => void
   closeDialog?: () => void

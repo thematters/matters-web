@@ -16,6 +16,7 @@ import {
   redirectToTarget,
   setCookies,
   WALLET_ERROR_MESSAGES,
+  WalletType,
 } from '~/common/utils'
 import {
   AuthFeedType,
@@ -24,6 +25,7 @@ import {
   IconLeft20,
   IconMetamask22,
   IconSpinner22,
+  IconWalletConnect22,
   LanguageContext,
   Media,
   TextIcon,
@@ -43,6 +45,7 @@ const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
+  walletType?: WalletType
   submitCallback?: (type?: AuthResultType) => void
   closeDialog?: () => void
   back?: () => void
@@ -55,6 +58,7 @@ interface FormValues {
 
 const Connect: React.FC<FormProps> = ({
   purpose,
+  walletType,
   submitCallback,
   closeDialog,
   back,
@@ -62,6 +66,9 @@ const Connect: React.FC<FormProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
   const [authTypeFeed] = useState<AuthFeedType>('wallet')
+
+  const isMetamask = walletType === 'Metamask'
+  const isWalletConnect = walletType === 'WalletConnect'
 
   const [generateSigningMessage] = useMutation<GenerateSigningMessageMutation>(
     GENERATE_SIGNING_MESSAGE,
@@ -173,12 +180,6 @@ const Connect: React.FC<FormProps> = ({
         analytics.identifyUser()
 
         if (loginData?.walletLogin.type === AuthResultType.Login) {
-          // toast.success({
-          //   message: (
-          //     <FormattedMessage defaultMessage="Logged in successfully" />
-          //   ),
-          // })
-
           redirectToTarget({
             fallback: 'current',
           })
@@ -203,7 +204,7 @@ const Connect: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<>MetaMask</>}
+        title={<>{isMetamask ? 'MetaMask' : 'Wallet Connect'}</>}
         hasSmUpTitle={false}
         leftBtn={
           back ? (
@@ -233,7 +234,8 @@ const Connect: React.FC<FormProps> = ({
         </Media>
         <section className={styles.walletInfo}>
           <span className={styles.icon}>
-            <IconMetamask22 size="mdM" />
+            {isMetamask && <IconMetamask22 size="mdM" />}
+            {isWalletConnect && <IconWalletConnect22 size="mdM" />}
           </span>
           <span className={styles.address}>{maskAddress(values.address)}</span>
         </section>

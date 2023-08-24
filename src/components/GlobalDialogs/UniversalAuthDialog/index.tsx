@@ -7,6 +7,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEST_ID,
 } from '~/common/enums'
+import { WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   Dialog,
@@ -76,6 +77,8 @@ const BaseUniversalAuthDialog = () => {
     injectedConnector?.ready ? 'wallet' : 'normal'
   )
 
+  const [walletType, setWalletType] = useState<WalletType>('Metamask')
+
   const {
     show,
     openDialog: baseOpenDialog,
@@ -98,7 +101,10 @@ const BaseUniversalAuthDialog = () => {
     <Dialog isOpen={show} onDismiss={closeDialog} testId={TEST_ID.DIALOG_AUTH}>
       {currStep === 'select-login-method' && (
         <DynamicSelectAuthMethodForm
-          gotoWalletConnect={() => forward('wallet-connect')}
+          gotoWalletConnect={(type: WalletType) => {
+            setWalletType(type)
+            forward('wallet-connect')
+          }}
           gotoEmailLogin={() => forward('email-login')}
           gotoEmailSignup={() => forward('email-sign-up-init')}
           closeDialog={closeDialog}
@@ -120,6 +126,7 @@ const BaseUniversalAuthDialog = () => {
       {currStep === 'wallet-connect' && (
         <DynamicWalletAuthFormConnect
           purpose="dialog"
+          walletType={walletType}
           submitCallback={(type?: AuthResultType) => {
             if (type === AuthResultType.Signup) {
               forward('complete')
@@ -150,7 +157,10 @@ const BaseUniversalAuthDialog = () => {
             setEmail(email)
             forward('email-verification-sent')
           }}
-          gotoWalletConnect={() => forward('wallet-connect')}
+          gotoWalletConnect={(type) => {
+            setWalletType(type)
+            forward('wallet-connect')
+          }}
           gotoEmailLogin={() => forward('email-login')}
           closeDialog={closeDialog}
           back={() => forward('select-login-method')}
