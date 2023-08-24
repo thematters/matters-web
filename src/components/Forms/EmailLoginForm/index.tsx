@@ -1,33 +1,45 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
+  SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
+  translate,
   validateEmail,
   // validatePassword,
 } from '~/common/utils'
 import {
+  AuthFeedType,
+  AuthNormalFeed,
+  AuthTabs,
+  AuthWalletFeed,
   Dialog,
   Form,
+  IconLeft20,
   LanguageContext,
-  Layout,
+  Media,
+  TextIcon,
+  useCountdown,
   // toast,
   useMutation,
 } from '~/components'
-import { UserLoginMutation } from '~/gql/graphql'
+import SEND_CODE from '~/components/GQL/mutations/sendCode'
+import { EmailLoginMutation, SendVerificationCodeMutation } from '~/gql/graphql'
 
+import Field from '../../Form/Field'
 import OtherOptions from './OtherOptions'
+import styles from './styles.module.css'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -35,7 +47,7 @@ interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
   gotoResetPassword?: () => void
-  gotoEmailSignUp?: () => void
+  gotoEmailSignup: () => void
   closeDialog: () => void
   back?: () => void
 }
@@ -45,9 +57,9 @@ interface FormValues {
   password: ''
 }
 
-export const USER_LOGIN = gql`
-  mutation UserLogin($input: UserLoginInput!) {
-    userLogin(input: $input) {
+export const EMAIL_LOGIN = gql`
+  mutation EmailLogin($input: EmailLoginInput!) {
+    emailLogin(input: $input) {
       auth
       token
       user {
@@ -66,18 +78,37 @@ export const USER_LOGIN = gql`
 export const EmailLoginForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
-  gotoEmailSignUp,
   gotoResetPassword,
+  gotoEmailSignup,
   closeDialog,
   back,
 }) => {
-  const [login] = useMutation<UserLoginMutation>(USER_LOGIN, undefined, {
+  const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)
 
   const isInPage = purpose === 'page'
   const formId = 'email-login-form'
+
+  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>('normal')
+  const isNormal = authTypeFeed === 'normal'
+  const isWallet = authTypeFeed === 'wallet'
+
+  const [isSelectMethod, setIsSelectMethod] = useState(false)
+  const [errorCode, setErrorCode] = useState<any>(null)
+  const [hasSendCode, setHasSendCode] = useState(false)
+  const { countdown, setCountdown } = useCountdown(0)
+
+  const passwordRef = useRef<HTMLInputElement>(null)
+
+  const [sendCode] = useMutation<SendVerificationCodeMutation>(
+    SEND_CODE,
+    undefined,
+    {
+      showToast: false,
+    }
+  )
 
   const intl = useIntl()
   const {
@@ -87,6 +118,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldError,
+    setFieldValue,
+    setErrors,
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
@@ -103,12 +137,12 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await login({
-          variables: { input: { email, password } },
+          variables: { input: { email, passwordOrCode: password } },
         })
 
-        const token = data?.userLogin.token || ''
-        const language = data?.userLogin.user?.settings.language || ''
-        const group = data?.userLogin.user?.info.group || ''
+        const token = data?.emailLogin.token || ''
+        const language = data?.emailLogin.user?.settings.language || ''
+        const group = data?.emailLogin.user?.info.group || ''
         setCookies({
           [COOKIE_LANGUAGE]: language,
           [COOKIE_USER_GROUP]: group,
@@ -131,10 +165,13 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         })
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+        setErrorCode(codes[0])
         codes.forEach((code) => {
-          if (code.includes('USER_EMAIL_')) {
-            setFieldError('email', messages[code])
-          } else if (code.indexOf('USER_PASSWORD_') >= 0) {
+          if (code.includes('CODE_INVALID') || code.includes('CODE_INACTIVE')) {
+            const m = translate({ id: 'CODE_INVALID', lang })
+            setFieldError('email', m)
+            setFieldError('password', m)
+          } else if (code.includes('CODE_EXPIRED')) {
             setFieldError('password', messages[code])
           } else {
             setFieldError('email', messages[code])
@@ -144,6 +181,31 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       }
     },
   })
+
+  const sendLoginCode = async () => {
+    const error = validateEmail(values.email, lang, { allowPlusSign: true })
+    if (error) {
+      setFieldError('email', error)
+      return
+    }
+
+    await sendCode({
+      variables: { input: { email: values.email, type: 'email_otp' } },
+    })
+    setCountdown(SEND_CODE_COUNTDOWN)
+    setHasSendCode(true)
+
+    // clear
+    setErrors({})
+    setFieldValue('password', '')
+    setErrorCode(null)
+
+    if (passwordRef.current) {
+      passwordRef.current.focus()
+    }
+  }
+
+  const fieldMsgId = `field-msg-sign-in`
 
   const InnerForm = (
     <>
@@ -157,13 +219,16 @@ export const EmailLoginForm: React.FC<FormProps> = ({
             defaultMessage: 'Email',
           })}
           value={values.email}
-          error={touched.email && errors.email}
+          error={errors.email}
           onBlur={handleBlur}
           onChange={handleChange}
-          spacingBottom="base"
+          spacingBottom="baseLoose"
+          hasFooter={false}
+          autoFocus
         />
 
         <Form.Input
+          ref={passwordRef}
           label={<FormattedMessage defaultMessage="Password" />}
           type="password"
           name="password"
@@ -175,15 +240,59 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           error={touched.password && errors.password}
           onBlur={handleBlur}
           onChange={handleChange}
-          spacingBottom="base"
+          spacingBottom="baseLoose"
+          hasFooter={false}
+          rightButton={
+            <>
+              {hasSendCode && countdown > 0 && (
+                <span className={styles.resendButton}>
+                  {countdown}&nbsp;
+                  <FormattedMessage
+                    defaultMessage="Resend"
+                    description="src/components/Forms/EmailLoginForm/index.tsx"
+                  />
+                </span>
+              )}
+              {(hasSendCode || errorCode === 'CODE_EXPIRED') &&
+                countdown === 0 && (
+                  <button
+                    className={styles.resendButton}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      sendLoginCode()
+                    }}
+                  >
+                    <FormattedMessage
+                      defaultMessage="Resend"
+                      description="src/components/Forms/EmailLoginForm/index.tsx"
+                    />
+                  </button>
+                )}
+            </>
+          }
         />
-      </Form>
 
-      <OtherOptions
-        isInPage={isInPage}
-        gotoResetPassword={gotoResetPassword}
-        gotoEmailSignUp={gotoEmailSignUp}
-      />
+        {(!!errors.email || !!errors.password) && (
+          <>
+            <Field.Footer
+              fieldMsgId={fieldMsgId}
+              error={errors.email || errors.password}
+              hintSize="sm"
+              hintAlign="center"
+              hintSpace="baseLoose"
+            />
+          </>
+        )}
+
+        {errorCode !== 'CODE_EXPIRED' &&
+          !(hasSendCode && errorCode === 'CODE_INVALID') && (
+            <OtherOptions
+              isInPage={isInPage}
+              sendLoginCode={sendLoginCode}
+              hasSendCode={hasSendCode}
+            />
+          )}
+      </Form>
     </>
   )
 
@@ -191,66 +300,84 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={isSubmitting}
+      disabled={!values.email || !values.password || isSubmitting}
       text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
 
-  if (isInPage) {
-    return (
-      <>
-        <Layout.Header
-          right={
+  return (
+    <>
+      {!isSelectMethod && (
+        <Dialog.Header
+          title={<FormattedMessage defaultMessage="Sign In" />}
+          hasSmUpTitle={false}
+          leftBtn={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              color="greyDarker"
+              onClick={() => {
+                setIsSelectMethod(true)
+              }}
+            />
+          }
+          closeDialog={closeDialog}
+          rightBtn={SubmitButton}
+        />
+      )}
+
+      <Dialog.Content>
+        <Media at="sm">
+          {isSelectMethod && (
+            <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
+          )}
+        </Media>
+        <Media greaterThan="sm">
+          <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
+        </Media>
+        {isNormal && !isSelectMethod && <>{InnerForm}</>}
+        {isNormal && isSelectMethod && (
+          <AuthNormalFeed
+            gotoEmailLogin={() => setIsSelectMethod(false)}
+            gotoEmailSignup={gotoEmailSignup}
+          />
+        )}
+        {isWallet && <AuthWalletFeed />}
+      </Dialog.Content>
+
+      {isNormal && !isSelectMethod && (
+        <Dialog.Footer
+          smUpSpaceBetween
+          smUpBtns={
             <>
-              <Layout.Header.Title id="login" />
-              <Layout.Header.RightButton
-                type="submit"
-                form={formId}
-                disabled={isSubmitting}
-                text={<FormattedMessage defaultMessage="Confirm" />}
-                loading={isSubmitting}
+              <Dialog.TextButton
+                text={
+                  <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
+                    <FormattedMessage defaultMessage="Back" />
+                  </TextIcon>
+                }
+                color="greyDarker"
+                onClick={() => {
+                  setIsSelectMethod(true)
+                }}
               />
+
+              {SubmitButton}
             </>
           }
         />
-
-        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
-      </>
-    )
-  }
-
-  return (
-    <>
-      <Dialog.Header
-        title="login"
-        leftBtn={
-          back ? (
+      )}
+      {((isNormal && isSelectMethod) || isWallet) && (
+        <Dialog.Footer
+          smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
-              onClick={back}
-            />
-          ) : null
-        }
-        closeDialog={closeDialog}
-        rightBtn={SubmitButton}
-      />
-
-      <Dialog.Content>{InnerForm}</Dialog.Content>
-
-      <Dialog.Footer
-        smUpBtns={
-          <>
-            <Dialog.TextButton
-              text={back ? 'back' : 'cancel'}
               color="greyDarker"
-              onClick={back || closeDialog}
+              text={<FormattedMessage defaultMessage="Close" />}
+              onClick={closeDialog}
             />
-
-            {SubmitButton}
-          </>
-        }
-      />
+          }
+        />
+      )}
     </>
   )
 }

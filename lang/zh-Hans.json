@@ -479,10 +479,6 @@
     "defaultMessage": "作品已取消精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
-  "JxlxVc": {
-    "defaultMessage": "忘记密码",
-    "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
-  },
   "K3r6DQ": {
     "defaultMessage": "刪除"
   },
@@ -570,6 +566,10 @@
   "O0QB1v": {
     "defaultMessage": "用户将收到你的围炉免费资格邀请函，设置免费的时限，邀请他们一起加入吧！",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+  },
+  "O2Nqk8": {
+    "defaultMessage": "忘记密码？",
+    "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
   "OIj8pQ": {
     "defaultMessage": "成功发送邀请",
@@ -669,6 +669,9 @@
   "URljhZ": {
     "defaultMessage": "作品已移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "Ub+AGc": {
+    "defaultMessage": "登录"
   },
   "Udp4Bm": {
     "defaultMessage": "移至底部",
@@ -876,6 +879,10 @@
     "defaultMessage": "，我们会尽快回复!",
     "description": "src/views/Help/index.tsx"
   },
+  "dzF4ci": {
+    "defaultMessage": "重新发送",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
   "eTpiYa": {
     "defaultMessage": "尚无支持数据"
   },
@@ -1046,10 +1053,6 @@
     "defaultMessage": "在 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
-  "nYeDrI": {
-    "defaultMessage": "沒有帐户？",
-    "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
-  },
   "nYrKWp": {
     "defaultMessage": "编辑个人信息"
   },
@@ -1081,6 +1084,10 @@
   },
   "q9oMKE": {
     "defaultMessage": "围炉名称"
+  },
+  "qNuRmA": {
+    "defaultMessage": "发送临时密码",
+    "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
   "qYzBk8": {
     "defaultMessage": "退订了你的围炉",
@@ -1211,6 +1218,10 @@
   },
   "wXzTZ0": {
     "defaultMessage": "給圍爐取一個吸引人的名字吧"
+  },
+  "wbIHgJ": {
+    "defaultMessage": "临时密码已通过邮件发送",
+    "description": "src/components/Forms/EmailLoginForm/OtherOptions.tsx"
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"

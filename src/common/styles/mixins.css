@@ -143,7 +143,7 @@
   @mixin border-grey;
 
   height: var(--input-height);
-  padding: var(--spacing-base);
+  padding: var(--spacing-tight);
   font-size: var(--font-size-md);
   line-height: 1.375rem;
   color: var(--color-black);

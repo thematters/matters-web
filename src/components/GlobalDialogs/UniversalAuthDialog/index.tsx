@@ -126,7 +126,7 @@ const BaseUniversalAuthDialog = () => {
         <DynamicEmailLoginForm
           purpose="dialog"
           closeDialog={closeDialog}
-          gotoEmailSignUp={() => forward('email-sign-up-init')}
+          gotoEmailSignup={() => forward('email-sign-up-init')}
           gotoResetPassword={() => forward('reset-password-request')}
           back={() => forward('select-login-method')}
         />
