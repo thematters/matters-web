@@ -66,7 +66,11 @@ const Root = ({
   const { isInPath } = useRoute()
   const isInAbout = isInPath('ABOUT')
   const isInMigration = isInPath('MIGRATION')
-  const shouldApplyLayout = !isInAbout && !isInMigration
+  const isInAuthCallback =
+    isInPath('GOOGLE_CALLBACK') ||
+    isInPath('FACEBOOK_CALLBACK') ||
+    isInPath('TWITTER_CALLBACK')
+  const shouldApplyLayout = !isInAbout && !isInMigration && !isInAuthCallback
 
   const { loading, data, error } =
     useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)

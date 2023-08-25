@@ -1,7 +1,19 @@
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
-import { IconFacebook22, IconGoogle22, IconMail22, IconX22 } from '~/components'
+import {
+  OAUTH_STORAGE_NONCE,
+  OAUTH_STORAGE_PATH,
+  OAUTH_STORAGE_STATE,
+  PATHS,
+} from '~/common/enums'
+import { randomString, storage } from '~/common/utils'
+import {
+  IconFacebook22,
+  IconGoogle22,
+  IconMail22,
+  IconX22,
+  useRoute,
+} from '~/components'
 
 import styles from './styles.module.css'
 
@@ -11,6 +23,21 @@ interface Props {
 }
 
 export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
+  const { router } = useRoute()
+
+  const gotoGoogle = () => {
+    const state = randomString(8)
+    const nonce = randomString(8)
+    storage.set(OAUTH_STORAGE_STATE, state)
+    storage.set(OAUTH_STORAGE_NONCE, nonce)
+    storage.set(OAUTH_STORAGE_PATH, window.location.href)
+    const clientId =
+      '315393900359-2r9fundftis7dc0tdeo2hf8630nfdd8h.apps.googleusercontent.com'
+    const redirectUri = 'https://web-develop.matters.town/google-callback/'
+    const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&scope=openid%20email&redirect_uri=${redirectUri}&state=${state}&nonce=${nonce}`
+    router.push(url)
+  }
+
   return (
     <>
       <ul className={styles.feed}>
@@ -22,7 +49,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
             <FormattedMessage defaultMessage="Email" />
           </span>
         </li>
-        <li className={styles.item}>
+        <li className={styles.item} role="button" onClick={gotoGoogle}>
           <span className={styles.icon}>
             <IconGoogle22 size="mdM" />
           </span>

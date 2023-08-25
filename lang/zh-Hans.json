@@ -361,6 +361,10 @@
     "defaultMessage": "在 {circleName} 的广播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "EwbNbl": {
+    "defaultMessage": "Oops！链接已失效",
+    "description": "src/views/Callback/GoogleCallback.tsx"
+  },
   "FOOymB": {
     "defaultMessage": "还没有成员",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
@@ -570,6 +574,10 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "描述"
+  },
+  "QBEE1c": {
+    "defaultMessage": "请移步相关页面重新获取链接，您也可以 ",
+    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "QUqfbW": {
     "defaultMessage": "说说围炉的有趣之处，吸引支持者加入",
@@ -1117,6 +1125,10 @@
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
+  },
+  "tQimre": {
+    "defaultMessage": "前往首页",
+    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀请",

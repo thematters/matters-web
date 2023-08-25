@@ -361,6 +361,10 @@
     "defaultMessage": "在 {circleName} 的廣播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "EwbNbl": {
+    "defaultMessage": "Oops！連結已失效",
+    "description": "src/views/Callback/GoogleCallback.tsx"
+  },
   "FOOymB": {
     "defaultMessage": "還沒有成員",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
@@ -570,6 +574,10 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "描述"
+  },
+  "QBEE1c": {
+    "defaultMessage": "請移步相關頁面重新獲取連結，您也可以 ",
+    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "QUqfbW": {
     "defaultMessage": "說說圍爐的有趣之處，吸引支持者加入",
@@ -1117,6 +1125,10 @@
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已發布到分佈式網絡",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
+  },
+  "tQimre": {
+    "defaultMessage": "前往首頁",
+    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
