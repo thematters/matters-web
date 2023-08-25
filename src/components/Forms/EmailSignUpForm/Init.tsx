@@ -4,6 +4,7 @@ import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
+import { WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   AuthTabs,
@@ -23,6 +24,7 @@ import { SendVerificationCodeMutation } from '~/gql/graphql'
 interface FormProps {
   submitCallback: (email: string) => void
   gotoEmailLogin: () => void
+  gotoWalletConnect: (type: WalletType) => void
   closeDialog?: () => void
   back: () => void
 }
@@ -34,6 +36,7 @@ interface FormValues {
 const Init: React.FC<FormProps> = ({
   submitCallback,
   gotoEmailLogin,
+  gotoWalletConnect,
   closeDialog,
   back,
 }) => {
@@ -160,7 +163,7 @@ const Init: React.FC<FormProps> = ({
             normalText={<FormattedMessage defaultMessage="Sign Up" />}
           />
           {isNormal && <>{InnerForm}</>}
-          {isWallet && <AuthWalletFeed />}
+          {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
         </Media>
       </Dialog.Content>
 

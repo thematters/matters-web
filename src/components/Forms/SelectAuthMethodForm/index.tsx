@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { useConnect } from 'wagmi'
 
+import { WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   AuthNormalFeed,
@@ -11,24 +11,21 @@ import {
 } from '~/components'
 
 interface FormProps {
-  gotoWalletAuth: () => void
+  gotoWalletConnect: (type: WalletType) => void
   gotoEmailLogin: () => void
   gotoEmailSignup: () => void
   closeDialog?: () => void
+  type?: AuthFeedType
 }
 
 export const SelectAuthMethodForm: React.FC<FormProps> = ({
-  gotoWalletAuth,
+  gotoWalletConnect,
   gotoEmailLogin,
   gotoEmailSignup,
   closeDialog,
+  type = 'normal',
 }) => {
-  const { connectors } = useConnect()
-  const injectedConnector = connectors.find((c) => c.id === 'metaMask')
-
-  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(
-    injectedConnector?.ready ? 'wallet' : 'normal'
-  )
+  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(type)
   const isNormal = authTypeFeed === 'normal'
   const isWallet = authTypeFeed === 'wallet'
 
@@ -42,7 +39,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
           gotoEmailLogin={gotoEmailLogin}
         />
       )}
-      {isWallet && <AuthWalletFeed />}
+      {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
     </>
   )
 

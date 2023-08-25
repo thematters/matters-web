@@ -24,6 +24,12 @@
       left: var(--spacing-base-loose);
       height: 1.375rem;
     }
+
+    & .right {
+      position: absolute;
+      right: var(--spacing-base-loose);
+      height: 1.375rem;
+    }
   }
 }
 
