@@ -31,9 +31,8 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
     storage.set(OAUTH_STORAGE_STATE, state)
     storage.set(OAUTH_STORAGE_NONCE, nonce)
     storage.set(OAUTH_STORAGE_PATH, window.location.href)
-    const clientId =
-      '315393900359-2r9fundftis7dc0tdeo2hf8630nfdd8h.apps.googleusercontent.com'
-    const redirectUri = 'https://web-develop.matters.town/google-callback/'
+    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
+    const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/google-callback/`
     const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&scope=openid%20email&redirect_uri=${redirectUri}&state=${state}&nonce=${nonce}`
     router.push(url)
   }
