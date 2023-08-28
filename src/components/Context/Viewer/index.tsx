@@ -68,6 +68,13 @@ const ViewerFragments = {
     private: gql`
       fragment ViewerUserPrivate on User {
         id
+        info {
+          socialAccounts {
+            type
+            userName
+            email
+          }
+        }
         status {
           role
           hasEmailLoginPassword

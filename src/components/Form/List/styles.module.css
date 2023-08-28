@@ -1,6 +1,6 @@
 .group {
   & .name {
-    margin: var(--spacing-base) 0 var(--spacing-x-tight);
+    margin: var(--spacing-x-loose) 0 0;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-normal);
     color: var(--color-grey-dark);
@@ -11,11 +11,7 @@
     -webkit-tap-highlight-color: transparent;
 
     & > li {
-      border: none;
-    }
-
-    & > li + li {
-      border-top: 1px dashed var(--color-grey-light);
+      border-bottom: 1px dashed var(--color-grey-light);
     }
   }
 }
