@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -12,6 +13,7 @@ import {
   IconFacebook22,
   IconGoogle22,
   IconMail22,
+  IconSpinner22,
   IconX22,
   useRoute,
 } from '~/components'
@@ -25,8 +27,16 @@ interface Props {
 
 export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
   const { router } = useRoute()
+  const [loadingState, setLoadingState] = useState('')
+  const isGoogleLoading = loadingState === 'Google'
+  const isTwitterLoading = loadingState === 'Twitter'
+  const isFacebookLoading = loadingState === 'Facebook'
+  useEffect(() => {
+    return setLoadingState('')
+  }, [])
 
   const gotoGoogle = () => {
+    setLoadingState('Google')
     const state = randomString(8)
     const nonce = randomString(8)
     storage.set(OAUTH_STORAGE_STATE, state)
@@ -39,6 +49,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
   }
 
   const gotoTwitter = async () => {
+    setLoadingState('Twitter')
     const state = randomString(8)
     const codeVerifier = crypto.randomUUID()
     const codeChallenge = await generateChallenge(codeVerifier)
@@ -52,6 +63,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
   }
 
   const gotoFacebook = async () => {
+    setLoadingState('Facebook')
     const state = randomString(8)
     const codeVerifier = crypto.randomUUID() + crypto.randomUUID()
     const codeChallenge = await generateChallenge(codeVerifier)
@@ -80,18 +92,33 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
             <IconGoogle22 size="mdM" />
           </span>
           <span className={styles.name}>Google</span>
+          {isGoogleLoading && (
+            <span className={styles.right}>
+              <IconSpinner22 color="grey" size="mdM" />
+            </span>
+          )}
         </li>
         <li className={styles.item} role="button" onClick={gotoTwitter}>
           <span className={styles.icon}>
             <IconX22 size="mdM" />
           </span>
           <span className={styles.name}>Twitter</span>
+          {isTwitterLoading && (
+            <span className={styles.right}>
+              <IconSpinner22 color="grey" size="mdM" />
+            </span>
+          )}
         </li>
         <li className={styles.item} role="button" onClick={gotoFacebook}>
           <span className={styles.icon}>
             <IconFacebook22 size="mdM" />
           </span>
           <span className={styles.name}>Facebook</span>
+          {isFacebookLoading && (
+            <span className={styles.right}>
+              <IconSpinner22 color="grey" size="mdM" />
+            </span>
+          )}
         </li>
       </ul>
       <section className={styles.info}>
