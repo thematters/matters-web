@@ -1,12 +1,13 @@
 import { FormattedMessage } from 'react-intl'
 
 import {
+  OAUTH_STORAGE_CODE_VERIFIER,
   OAUTH_STORAGE_NONCE,
   OAUTH_STORAGE_PATH,
   OAUTH_STORAGE_STATE,
   PATHS,
 } from '~/common/enums'
-import { randomString, storage } from '~/common/utils'
+import { generateChallenge, randomString, storage } from '~/common/utils'
 import {
   IconFacebook22,
   IconGoogle22,
@@ -37,6 +38,19 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
     router.push(url)
   }
 
+  const gotoTwitter = async () => {
+    const state = randomString(8)
+    const codeVerifier = crypto.randomUUID()
+    const codeChallenge = await generateChallenge(codeVerifier)
+    storage.set(OAUTH_STORAGE_STATE, state)
+    storage.set(OAUTH_STORAGE_PATH, window.location.href)
+    storage.set(OAUTH_STORAGE_CODE_VERIFIER, codeVerifier)
+    const clientId = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID
+    const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/twitter-callback/`
+    const url = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=users.read%20tweet.read&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
+    router.push(url)
+  }
+
   return (
     <>
       <ul className={styles.feed}>
@@ -54,7 +68,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
           </span>
           <span className={styles.name}>Google</span>
         </li>
-        <li className={styles.item}>
+        <li className={styles.item} role="button" onClick={gotoTwitter}>
           <span className={styles.icon}>
             <IconX22 size="mdM" />
           </span>
