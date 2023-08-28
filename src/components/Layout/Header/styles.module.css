@@ -25,7 +25,7 @@
 
     @media (--sm-up) {
       margin-top: var(--spacing-x-loose);
-      margin-bottom: var(--spacing-base);
+      margin-bottom: var(--spacing-base-loose);
     }
   }
 }

@@ -1,24 +1,31 @@
 import React from 'react'
 
-import { Head, Layout, Spacer } from '~/components'
+import { Form, Head, Layout } from '~/components'
 
-import AccountSettings from './Account'
-import UISettings from './UI'
-import WalletSettings from './Wallet'
+import Email from './Email'
+import MattersID from './MattersID'
+import MyProfile from './MyProfile'
+import Password from './Password'
+import SettingsTabs from './SettingsTabs'
 
 const Settings = () => {
   return (
     <Layout.Main>
       <Layout.Header left={<Layout.Header.Title id="settings" />} />
+
       <Head title={{ id: 'settings' }} />
 
-      <Layout.Main.Spacing>
-        <UISettings />
-        <AccountSettings />
-        <WalletSettings />
-      </Layout.Main.Spacing>
+      <SettingsTabs />
 
-      <Spacer size="xxxloose" />
+      <Form.List>
+        <MattersID />
+        <MyProfile />
+        <Email />
+        <Password />
+      </Form.List>
+
+      {/* Wallet */}
+      {/* Socail Login */}
     </Layout.Main>
   )
 }

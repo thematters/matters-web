@@ -1,6 +1,4 @@
 .group {
-  user-select: none;
-
   & .name {
     margin: var(--spacing-base) 0 var(--spacing-x-tight);
     font-size: var(--font-size-sm);
@@ -10,7 +8,6 @@
 
   & .list {
     overflow: hidden;
-    user-select: none;
     -webkit-tap-highlight-color: transparent;
 
     & > li {

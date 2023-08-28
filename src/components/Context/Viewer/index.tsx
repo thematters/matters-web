@@ -70,6 +70,7 @@ const ViewerFragments = {
         id
         status {
           role
+          hasEmailLoginPassword
         }
         articles(input: { first: 0 }) {
           totalCount
