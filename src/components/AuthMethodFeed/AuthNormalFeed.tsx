@@ -35,13 +35,21 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
     return setLoadingState('')
   }, [])
 
-  const gotoGoogle = () => {
-    setLoadingState('Google')
+  const generateParams = async () => {
     const state = randomString(8)
     const nonce = randomString(8)
+    const codeVerifier = crypto.randomUUID() + crypto.randomUUID()
+    const codeChallenge = await generateChallenge(codeVerifier)
     storage.set(OAUTH_STORAGE_STATE, state)
     storage.set(OAUTH_STORAGE_NONCE, nonce)
     storage.set(OAUTH_STORAGE_PATH, window.location.href)
+    storage.set(OAUTH_STORAGE_CODE_VERIFIER, codeVerifier)
+    return { state, nonce, codeChallenge }
+  }
+
+  const gotoGoogle = async () => {
+    setLoadingState('Google')
+    const { state, nonce } = await generateParams()
     const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
     const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/google-callback/`
     const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&scope=openid%20email&redirect_uri=${redirectUri}&state=${state}&nonce=${nonce}`
@@ -50,12 +58,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
 
   const gotoTwitter = async () => {
     setLoadingState('Twitter')
-    const state = randomString(8)
-    const codeVerifier = crypto.randomUUID()
-    const codeChallenge = await generateChallenge(codeVerifier)
-    storage.set(OAUTH_STORAGE_STATE, state)
-    storage.set(OAUTH_STORAGE_PATH, window.location.href)
-    storage.set(OAUTH_STORAGE_CODE_VERIFIER, codeVerifier)
+    const { state, codeChallenge } = await generateParams()
     const clientId = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID
     const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/twitter-callback/`
     const url = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=users.read%20tweet.read&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
@@ -64,12 +67,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
 
   const gotoFacebook = async () => {
     setLoadingState('Facebook')
-    const state = randomString(8)
-    const codeVerifier = crypto.randomUUID() + crypto.randomUUID()
-    const codeChallenge = await generateChallenge(codeVerifier)
-    storage.set(OAUTH_STORAGE_STATE, state)
-    storage.set(OAUTH_STORAGE_PATH, window.location.href)
-    storage.set(OAUTH_STORAGE_CODE_VERIFIER, codeVerifier)
+    const { state, codeChallenge } = await generateParams()
     const clientId = process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID
     const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/facebook-callback/`
     const url = `https://www.facebook.com/v17.0/dialog/oauth?response_type=code&scope=openid&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
