@@ -3,13 +3,6 @@
 
   position: relative;
   width: 100%;
-
-  &:not(.disabled) .name {
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-  }
 }
 
 .avatar {
