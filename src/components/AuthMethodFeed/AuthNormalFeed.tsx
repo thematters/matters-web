@@ -51,6 +51,19 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
     router.push(url)
   }
 
+  const gotoFacebook = async () => {
+    const state = randomString(8)
+    const codeVerifier = crypto.randomUUID() + crypto.randomUUID()
+    const codeChallenge = await generateChallenge(codeVerifier)
+    storage.set(OAUTH_STORAGE_STATE, state)
+    storage.set(OAUTH_STORAGE_PATH, window.location.href)
+    storage.set(OAUTH_STORAGE_CODE_VERIFIER, codeVerifier)
+    const clientId = process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID
+    const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/facebook-callback/`
+    const url = `https://www.facebook.com/v17.0/dialog/oauth?response_type=code&scope=openid&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
+    router.push(url)
+  }
+
   return (
     <>
       <ul className={styles.feed}>
@@ -74,7 +87,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
           </span>
           <span className={styles.name}>Twitter</span>
         </li>
-        <li className={styles.item}>
+        <li className={styles.item} role="button" onClick={gotoFacebook}>
           <span className={styles.icon}>
             <IconFacebook22 size="mdM" />
           </span>
