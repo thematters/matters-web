@@ -9,6 +9,7 @@ import {
 } from '~/common/enums'
 import {
   Dialog,
+  ReCaptchaProvider,
   Spinner,
   useDialogSwitch,
   useEventListener,
@@ -118,16 +119,18 @@ const BaseUniversalAuthDialog = ({
         />
       )}
       {currStep === 'wallet-connect' && (
-        <DynamicWalletAuthFormConnect
-          purpose="dialog"
-          submitCallback={(type?: AuthResultType) => {
-            if (type === AuthResultType.Signup) {
-              forward('complete')
-            }
-          }}
-          closeDialog={closeDialog}
-          back={() => forward('select-login-method')}
-        />
+        <ReCaptchaProvider>
+          <DynamicWalletAuthFormConnect
+            purpose="dialog"
+            submitCallback={(type?: AuthResultType) => {
+              if (type === AuthResultType.Signup) {
+                forward('complete')
+              }
+            }}
+            closeDialog={closeDialog}
+            back={() => forward('select-login-method')}
+          />
+        </ReCaptchaProvider>
       )}
 
       {/* Email */}
@@ -141,13 +144,15 @@ const BaseUniversalAuthDialog = ({
         />
       )}
       {currStep === 'email-sign-up-init' && (
-        <DynamicEmailSignUpFormInit
-          purpose="dialog"
-          submitCallback={() => forward('email-verification-sent')}
-          gotoEmailLogin={() => forward('email-login')}
-          closeDialog={closeDialog}
-          back={() => forward('email-login')}
-        />
+        <ReCaptchaProvider>
+          <DynamicEmailSignUpFormInit
+            purpose="dialog"
+            submitCallback={() => forward('email-verification-sent')}
+            gotoEmailLogin={() => forward('email-login')}
+            closeDialog={closeDialog}
+            back={() => forward('email-login')}
+          />
+        </ReCaptchaProvider>
       )}
       {currStep === 'email-verification-sent' && (
         <VerificationLinkSent
