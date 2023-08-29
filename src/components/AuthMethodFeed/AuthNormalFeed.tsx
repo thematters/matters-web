@@ -51,7 +51,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
     setLoadingState('Google')
     const { state, nonce } = await generateParams()
     const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
-    const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/google-callback/`
+    const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/google`
     const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&scope=openid%20email&redirect_uri=${redirectUri}&state=${state}&nonce=${nonce}`
     router.push(url)
   }
@@ -60,7 +60,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
     setLoadingState('Twitter')
     const { state, codeChallenge } = await generateParams()
     const clientId = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID
-    const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/twitter-callback/`
+    const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/twitter`
     const url = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=users.read%20tweet.read&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
     router.push(url)
   }
@@ -69,7 +69,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
     setLoadingState('Facebook')
     const { state, codeChallenge } = await generateParams()
     const clientId = process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID
-    const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/facebook-callback/`
+    const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/facebook`
     const url = `https://www.facebook.com/v17.0/dialog/oauth?response_type=code&scope=openid&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
     router.push(url)
   }

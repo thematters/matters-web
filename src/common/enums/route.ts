@@ -62,9 +62,9 @@ type ROUTE_KEY =
   | 'OAUTH_CALLBACK_FAILURE'
   | 'PAY_CALLBACK_SUCCESS'
   | 'PAY_CALLBACK_FAILURE'
-  | 'GOOGLE_CALLBACK'
-  | 'FACEBOOK_CALLBACK'
-  | 'TWITTER_CALLBACK'
+  | 'CALLBACK_GOOGLE'
+  | 'CALLBACK_FACEBOOK'
+  | 'CALLBACK_TWITTER'
   // Misc
   | 'HELP'
   | 'MIGRATION'
@@ -123,9 +123,9 @@ export const ROUTES: {
   { key: 'LOGIN', pathname: '/login' },
   { key: 'SIGNUP', pathname: '/signup' },
   { key: 'FORGET', pathname: '/forget' },
-  { key: 'GOOGLE_CALLBACK', pathname: '/google-callback' },
-  { key: 'FACEBOOK_CALLBACK', pathname: '/facebook-callback' },
-  { key: 'TWITTER_CALLBACK', pathname: '/twitter-callback' },
+  { key: 'CALLBACK_GOOGLE', pathname: '/callback/google' },
+  { key: 'CALLBACK_FACEBOOK', pathname: '/callback/facebook' },
+  { key: 'CALLBACK_TWITTER', pathname: '/callback/twitter' },
 
   // Misc
   { key: 'HELP', pathname: '/help' },

@@ -67,9 +67,9 @@ const Root = ({
   const isInAbout = isInPath('ABOUT')
   const isInMigration = isInPath('MIGRATION')
   const isInAuthCallback =
-    isInPath('GOOGLE_CALLBACK') ||
-    isInPath('FACEBOOK_CALLBACK') ||
-    isInPath('TWITTER_CALLBACK')
+    isInPath('CALLBACK_GOOGLE') ||
+    isInPath('CALLBACK_FACEBOOK') ||
+    isInPath('CALLBACK_TWITTER')
   const shouldApplyLayout = !isInAbout && !isInMigration && !isInAuthCallback
 
   const { loading, data, error } =
