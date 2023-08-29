@@ -26,11 +26,11 @@
     "target": "esnext",
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
       "~/*": [
         "./src/*"
+      ],
+      "@/*": [
+        "./*"
       ]
     },
     "forceConsistentCasingInFileNames": true,
