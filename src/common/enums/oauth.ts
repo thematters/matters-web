@@ -306,3 +306,8 @@ export const OAUTH_SCOPE_TREE = {
     },
   },
 }
+
+export const OAUTH_STORAGE_STATE = 'oauth-storage-state'
+export const OAUTH_STORAGE_NONCE = 'oauth-storage-nonce'
+export const OAUTH_STORAGE_PATH = 'oauth-storage-path'
+export const OAUTH_STORAGE_CODE_VERIFIER = 'oauth-storage-code-verifier'

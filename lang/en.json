@@ -370,6 +370,10 @@
     "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "EwbNbl": {
+    "defaultMessage": "Oops！This link has expired",
+    "description": "src/views/Callback/GoogleCallback.tsx"
+  },
   "FOOymB": {
     "defaultMessage": "No members yet",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
@@ -593,6 +597,10 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "Description"
+  },
+  "QBEE1c": {
+    "defaultMessage": "Please go to the relevant page to resend the link. You can also ",
+    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "QUqfbW": {
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx",
@@ -1151,6 +1159,10 @@
   "tEeEJT": {
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
+  },
+  "tQimre": {
+    "defaultMessage": "go to the homepage",
+    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "tzq2+W": {
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx",
