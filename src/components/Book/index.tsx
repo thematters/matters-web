@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import BOOK_COVER from '@/public/static/images/book-cover.png'
-import { TEST_ID } from '~/common/enums'
+import { TEST_ID } from '@/src/common/enums'
 import { countStrWidth } from '~/common/utils'
 import {
   IconCamera24,

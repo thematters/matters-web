@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { TEST_ID } from '~/common/enums'
+import { TEST_ID } from '@/src/common/enums'
 import { analytics, toPath } from '~/common/utils'
 import { Book, Media } from '~/components'
 import { PinnedWorksUserFragment } from '~/gql/graphql'
