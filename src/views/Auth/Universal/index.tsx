@@ -5,6 +5,7 @@ import { PATHS } from '~/common/enums'
 import {
   Head,
   Layout,
+  ReCaptchaProvider,
   Spinner,
   useRoute,
   useStep,
@@ -94,13 +95,15 @@ const UniversalAuth = () => {
 
       {/* Wallet */}
       {currStep === 'wallet-select' && (
-        <DynamicWalletAuthFormSelect
-          purpose="page"
-          submitCallback={() => {
-            forward('wallet-connect')
-          }}
-          back={() => forward('select-login-method')}
-        />
+        <ReCaptchaProvider>
+          <DynamicWalletAuthFormSelect
+            purpose="page"
+            submitCallback={() => {
+              forward('wallet-connect')
+            }}
+            back={() => forward('select-login-method')}
+          />
+        </ReCaptchaProvider>
       )}
       {currStep === 'wallet-connect' && (
         <DynamicWalletAuthFormConnect
@@ -123,12 +126,14 @@ const UniversalAuth = () => {
         />
       )}
       {currStep === 'email-sign-up-init' && (
-        <DynamicEmailSignUpFormInit
-          purpose="page"
-          submitCallback={() => forward('email-verification-sent')}
-          gotoEmailLogin={() => forward('email-login')}
-          back={() => forward('email-login')}
-        />
+        <ReCaptchaProvider>
+          <DynamicEmailSignUpFormInit
+            purpose="page"
+            submitCallback={() => forward('email-verification-sent')}
+            gotoEmailLogin={() => forward('email-login')}
+            back={() => forward('email-login')}
+          />
+        </ReCaptchaProvider>
       )}
       {currStep === 'email-sign-up-password' && (
         <DynamicEmailSignUpFormPassword
