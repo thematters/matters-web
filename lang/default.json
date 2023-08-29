@@ -16,6 +16,9 @@
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+vVZ/G": {
+    "defaultMessage": "Connect"
+  },
   "/3kw6k": {
     "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -29,9 +32,6 @@
   },
   "/jJLYy": {
     "defaultMessage": "Transactions"
-  },
-  "/ns2st": {
-    "defaultMessage": "Download App"
   },
   "/podGX": {
     "defaultMessage": "Public",
@@ -114,10 +114,6 @@
     "defaultMessage": "Continued use indicates your agreement to",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
-  "3uQKhx": {
-    "defaultMessage": "Please email",
-    "description": "src/views/Help/index.tsx"
-  },
   "3yk8fB": {
     "defaultMessage": "Wallet"
   },
@@ -186,11 +182,16 @@
     "defaultMessage": "All",
     "description": "src/views/Me/Transactions/index.tsx"
   },
-  "6flWFg": {
-    "defaultMessage": "Term of Services"
+  "6e8teX": {
+    "defaultMessage": "Notifications",
+    "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
   },
   "6kMb9Z": {
     "defaultMessage": "On-chain records"
+  },
+  "6lwWCu": {
+    "defaultMessage": "Misc",
+    "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
   },
   "6q0G5e": {
     "defaultMessage": "Successfully added",
@@ -291,6 +292,10 @@
     "defaultMessage": "Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "At8Qd2": {
+    "defaultMessage": "Account",
+    "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
+  },
   "B2As08": {
     "defaultMessage": "That's all",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
@@ -298,6 +303,9 @@
   "BHFHeY": {
     "defaultMessage": "commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "BY343C": {
+    "defaultMessage": "Change"
   },
   "Bc20la": {
     "defaultMessage": "days"
@@ -407,6 +415,10 @@
   "GcvLBC": {
     "defaultMessage": "Understood"
   },
+  "Gt7K6r": {
+    "defaultMessage": "Wallet address",
+    "description": "src/views/Me/Settings/Settings/Wallet/index.tsx"
+  },
   "GugBCe": {
     "defaultMessage": "New Followers This Month",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -427,6 +439,10 @@
   "HJ0iZJ": {
     "defaultMessage": "Confirm Archiving"
   },
+  "HPVOw/": {
+    "defaultMessage": "Wallet",
+    "description": "src/views/Me/Settings/Settings/index.tsx"
+  },
   "HkozYU": {
     "defaultMessage": "Switch wallet",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -434,9 +450,6 @@
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
-  "HzaRKA": {
-    "defaultMessage": "Migrate to Matters"
   },
   "IKPYe9": {
     "defaultMessage": "View",
@@ -545,6 +558,10 @@
     "defaultMessage": "Enter password again",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
   },
+  "O0MQs/": {
+    "defaultMessage": "Please add email first",
+    "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
   "O0QB1v": {
     "defaultMessage": "Friends will receive free trial invitations to Circle. Set up your invitations now!",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -559,6 +576,10 @@
   },
   "OKhRC6": {
     "defaultMessage": "Share"
+  },
+  "PLBmDT": {
+    "defaultMessage": "Password",
+    "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
   "Po+kJe": {
     "defaultMessage": "Last {month} month",
@@ -769,9 +790,6 @@
     "defaultMessage": "Edit",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
-  "ZjDH42": {
-    "defaultMessage": "About Us"
-  },
   "a/YQ1Z": {
     "defaultMessage": "Archived",
     "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
@@ -786,6 +804,10 @@
   "aaUBvF": {
     "defaultMessage": "comment_circle",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "aacIz8": {
+    "defaultMessage": "Email",
+    "description": "src/views/Me/Settings/Settings/Email/index.tsx"
   },
   "adThp5": {
     "defaultMessage": "Latest"
@@ -857,10 +879,6 @@
   },
   "djJp6c": {
     "defaultMessage": "History"
-  },
-  "dnsfmR": {
-    "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
-    "description": "src/views/Help/index.tsx"
   },
   "dzF4ci": {
     "defaultMessage": "Resend",
@@ -1015,6 +1033,10 @@
   "ml3SZN": {
     "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
   },
+  "n2Sc6g": {
+    "defaultMessage": "My profile",
+    "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
+  },
   "nGBrvw": {
     "defaultMessage": "Bookmarks"
   },
@@ -1031,6 +1053,10 @@
   "oHQmBt": {
     "defaultMessage": "{articleCount} articles",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
+  },
+  "ohbnFU": {
+    "defaultMessage": "Social Login",
+    "description": "src/views/Me/Settings/Settings/index.tsx"
   },
   "ohgTH4": {
     "defaultMessage": "Following",
@@ -1126,9 +1152,6 @@
   },
   "uJkv2X": {
     "defaultMessage": "Edit Tag"
-  },
-  "uVCg1l": {
-    "defaultMessage": "Explore Matters"
   },
   "ub1kHa": {
     "defaultMessage": "Add to collection"

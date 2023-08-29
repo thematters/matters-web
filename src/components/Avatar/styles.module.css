@@ -77,6 +77,20 @@
   }
 }
 
+/* 22px */
+.mdS {
+  width: 1.375rem;
+  height: 1.375rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        width: calc(1.375rem * 0.4);
+      }
+    }
+  }
+}
+
 /* 24px */
 .md {
   width: 1.5rem;

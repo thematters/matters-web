@@ -16,6 +16,9 @@
     "defaultMessage": "确认要将“{article}”从选集中移出吗？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+vVZ/G": {
+    "defaultMessage": "綁定"
+  },
   "/3kw6k": {
     "defaultMessage": "尝试将内容写入 IPFS 网络中，需要一段时间，请耐心等候。若等候时间过久，可通过发布文章来加速。",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -29,9 +32,6 @@
   },
   "/jJLYy": {
     "defaultMessage": "交易记录"
-  },
-  "/ns2st": {
-    "defaultMessage": "下载应用"
   },
   "/podGX": {
     "defaultMessage": "公开",
@@ -114,10 +114,6 @@
     "defaultMessage": "继续使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
-  "3uQKhx": {
-    "defaultMessage": "若你希望向 Matters 提出建议，或遭遇操作异常，请发送邮件至",
-    "description": "src/views/Help/index.tsx"
-  },
   "3yk8fB": {
     "defaultMessage": "我的钱包"
   },
@@ -186,11 +182,16 @@
     "defaultMessage": "全部",
     "description": "src/views/Me/Transactions/index.tsx"
   },
-  "6flWFg": {
-    "defaultMessage": "用户协议"
+  "6e8teX": {
+    "defaultMessage": "通知",
+    "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
   },
   "6kMb9Z": {
     "defaultMessage": "链上纪录"
+  },
+  "6lwWCu": {
+    "defaultMessage": "其他",
+    "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
   },
   "6q0G5e": {
     "defaultMessage": "加入成功",
@@ -292,6 +293,10 @@
     "defaultMessage": "追踪",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "At8Qd2": {
+    "defaultMessage": "账号",
+    "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
+  },
   "B2As08": {
     "defaultMessage": "没有更多",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
@@ -299,6 +304,9 @@
   "BHFHeY": {
     "defaultMessage": " 在围炉 {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "BY343C": {
+    "defaultMessage": "修改"
   },
   "Bc20la": {
     "defaultMessage": "天"
@@ -408,6 +416,10 @@
   "GcvLBC": {
     "defaultMessage": "我知道了"
   },
+  "Gt7K6r": {
+    "defaultMessage": "钱包地址",
+    "description": "src/views/Me/Settings/Settings/Wallet/index.tsx"
+  },
   "GugBCe": {
     "defaultMessage": "本月新增追踪人数",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -428,6 +440,10 @@
   "HJ0iZJ": {
     "defaultMessage": "确认归档"
   },
+  "HPVOw/": {
+    "defaultMessage": "数字钱包",
+    "description": "src/views/Me/Settings/Settings/index.tsx"
+  },
   "HkozYU": {
     "defaultMessage": "更换钱包",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -435,9 +451,6 @@
   "HxcjQl": {
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
-  "HzaRKA": {
-    "defaultMessage": "一键搬家"
   },
   "IKPYe9": {
     "defaultMessage": "查看",
@@ -546,6 +559,10 @@
     "defaultMessage": "再次输入密码",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
   },
+  "O0MQs/": {
+    "defaultMessage": "请先绑定邮箱",
+    "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
   "O0QB1v": {
     "defaultMessage": "用户将收到你的围炉免费资格邀请函，设置免费的时限，邀请他们一起加入吧！",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -560,6 +577,10 @@
   },
   "OKhRC6": {
     "defaultMessage": "分享"
+  },
+  "PLBmDT": {
+    "defaultMessage": "登录密码",
+    "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
   "Po+kJe": {
     "defaultMessage": "最近 {month} 个月",
@@ -770,9 +791,6 @@
     "defaultMessage": "修订",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
-  "ZjDH42": {
-    "defaultMessage": "关于我们"
-  },
   "a/YQ1Z": {
     "defaultMessage": "作品已归档",
     "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
@@ -787,6 +805,10 @@
   "aaUBvF": {
     "defaultMessage": " 中的发言",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "aacIz8": {
+    "defaultMessage": "邮箱",
+    "description": "src/views/Me/Settings/Settings/Email/index.tsx"
   },
   "adThp5": {
     "defaultMessage": "最新"
@@ -858,10 +880,6 @@
   },
   "djJp6c": {
     "defaultMessage": "我的足跡"
-  },
-  "dnsfmR": {
-    "defaultMessage": "，我们会尽快回复!",
-    "description": "src/views/Help/index.tsx"
   },
   "dzF4ci": {
     "defaultMessage": "重新发送",
@@ -1016,6 +1034,10 @@
   "ml3SZN": {
     "defaultMessage": "至少 8 个字符，支持英文大小写字母、数字和特殊符号"
   },
+  "n2Sc6g": {
+    "defaultMessage": "个人信息",
+    "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
+  },
   "nGBrvw": {
     "defaultMessage": "我的收藏"
   },
@@ -1032,6 +1054,10 @@
   "oHQmBt": {
     "defaultMessage": "{articleCount} 篇文章",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
+  },
+  "ohbnFU": {
+    "defaultMessage": "社交登录",
+    "description": "src/views/Me/Settings/Settings/index.tsx"
   },
   "ohgTH4": {
     "defaultMessage": "追踪中",
@@ -1127,9 +1153,6 @@
   },
   "uJkv2X": {
     "defaultMessage": "编辑标签"
-  },
-  "uVCg1l": {
-    "defaultMessage": "玩转 Matters 实用指南"
   },
   "ub1kHa": {
     "defaultMessage": "加入选集"
