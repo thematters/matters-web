@@ -66,10 +66,7 @@ const Root = ({
   const { isInPath } = useRoute()
   const isInAbout = isInPath('ABOUT')
   const isInMigration = isInPath('MIGRATION')
-  const isInAuthCallback =
-    isInPath('CALLBACK_GOOGLE') ||
-    isInPath('CALLBACK_FACEBOOK') ||
-    isInPath('CALLBACK_TWITTER')
+  const isInAuthCallback = isInPath('CALLBACK_PROVIDER')
   const shouldApplyLayout = !isInAbout && !isInMigration && !isInAuthCallback
 
   const { loading, data, error } =
