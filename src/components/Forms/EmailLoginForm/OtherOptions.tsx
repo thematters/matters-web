@@ -1,72 +1,49 @@
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
-import { appendTarget } from '~/common/utils'
 import { Button } from '~/components'
 
 import styles from './styles.module.css'
 
-export const PasswordResetDialogButton = ({
-  gotoResetPassword,
+export const SendLoginCodeButton = ({
+  sendLoginCode,
 }: {
-  gotoResetPassword: () => void
-}) => (
-  <section className={styles.option}>
-    <Button aria-haspopup="dialog" onClick={gotoResetPassword}>
-      <FormattedMessage
-        defaultMessage="Forget Password"
-        description="src/components/Forms/EmailLoginForm/Buttons.tsx"
-      />
-    </Button>
-  </section>
-)
-
-export const PasswordResetRedirectButton = () => (
-  <section className={styles.option}>
-    <Button {...appendTarget(PATHS.FORGET)} tabIndex={-1}>
-      <FormattedMessage
-        defaultMessage="Forget Password"
-        description="src/components/Forms/EmailLoginForm/Buttons.tsx"
-      />
-    </Button>
-  </section>
-)
-
-export const EmailSignUpDialogButton = ({
-  gotoEmailSignUp,
-}: {
-  gotoEmailSignUp: () => void
+  sendLoginCode: () => void
 }) => (
   <section className={styles.option}>
     <FormattedMessage
-      defaultMessage="Not Registered?"
+      defaultMessage="Forgot password?"
       description="src/components/Forms/EmailLoginForm/Buttons.tsx"
     />
-    <Button onClick={gotoEmailSignUp}>
-      &nbsp;
-      <FormattedMessage defaultMessage="Register" />
+    <Button aria-haspopup="dialog" onClick={sendLoginCode}>
+      <FormattedMessage
+        defaultMessage="Send login code"
+        description="src/components/Forms/EmailLoginForm/Buttons.tsx"
+      />
     </Button>
   </section>
 )
 
 const OtherOptions = ({
   isInPage,
-  gotoResetPassword,
-  gotoEmailSignUp,
+  hasSendCode,
+  sendLoginCode,
 }: {
   isInPage: boolean
-  gotoResetPassword?: () => any
-  gotoEmailSignUp?: () => any
+  hasSendCode: boolean
+  sendLoginCode?: () => any
 }) => {
   return (
     <section className={styles.otherOptions}>
-      {!isInPage && gotoResetPassword && (
-        <PasswordResetDialogButton gotoResetPassword={gotoResetPassword} />
+      {!hasSendCode && sendLoginCode && (
+        <SendLoginCodeButton sendLoginCode={sendLoginCode} />
       )}
-      {isInPage && <PasswordResetRedirectButton />}
-
-      {gotoEmailSignUp && (
-        <EmailSignUpDialogButton gotoEmailSignUp={gotoEmailSignUp} />
+      {hasSendCode && (
+        <section className={styles.hasSendCode}>
+          <FormattedMessage
+            defaultMessage="The login code has been sent to your inbox"
+            description="src/components/Forms/EmailLoginForm/OtherOptions.tsx"
+          />
+        </section>
       )}
     </section>
   )

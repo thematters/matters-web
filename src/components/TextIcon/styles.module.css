@@ -142,6 +142,20 @@
   }
 }
 
+.spacingBasexxtight.hasIcon {
+  &.textRight > .text {
+    padding-left: var(--spacing-base-xx-tight);
+  }
+
+  &.textLeft > .text {
+    padding-right: var(--spacing-base-xx-tight);
+  }
+
+  &.textBottom > .text {
+    padding-top: var(--spacing-base-xx-tight);
+  }
+}
+
 .spacingXtight.hasIcon {
   &.textRight > .text {
     padding-left: var(--spacing-x-tight);

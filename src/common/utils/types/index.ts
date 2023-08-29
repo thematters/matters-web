@@ -32,8 +32,6 @@ export default gql`
     "Log route history for page back button"
     routeHistory: [String!]
 
-    onboardingTasks: OnboardingTasks!
-
     "Whether cicle banner is shown"
     circleBanner: Boolean!
 

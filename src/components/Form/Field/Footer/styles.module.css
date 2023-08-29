@@ -2,14 +2,26 @@
   margin-top: var(--spacing-x-tight);
 }
 
+.spaceBaseLoose {
+  margin-top: var(--spacing-base-loose);
+}
+
 .hint {
   font-size: var(--font-size-xs);
   color: var(--color-grey);
 }
 
+.hintSizeSm {
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+}
+
 .error {
-  font-size: var(--font-size-xs);
   color: var(--color-red);
+}
+
+.alignCenter {
+  text-align: center;
 }
 
 .alignRight {

@@ -29,11 +29,3 @@ export const WALLET_LOGIN = gql`
     }
   }
 `
-
-export const ETH_ADDRESS_USER = gql`
-  query ETHAddressUser($ethAddress: String) {
-    user(input: { ethAddress: $ethAddress }) {
-      id
-    }
-  }
-`

@@ -98,12 +98,12 @@ const BaseNotificationSettings = () => {
         <Form.List.Item
           role="link"
           title={<Translate id="settingsNotificationGeneral" />}
-          href={PATHS.ME_SETTINGS_NOTIFICATION_GENERAL}
+          href={PATHS.ME_SETTINGS_NOTIFICATIONS_GENERAL}
         />
         <Form.List.Item
           role="link"
           title={<Translate id="settingsNotificationCircle" />}
-          href={PATHS.ME_SETTINGS_NOTIFICATION_CIRCLE}
+          href={PATHS.ME_SETTINGS_NOTIFICATIONS_CIRCLE}
         />
       </Form.List>
     </>

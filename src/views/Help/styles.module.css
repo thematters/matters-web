@@ -1,9 +1,0 @@
-.footer {
-  margin: var(--spacing-loose) 0;
-  font-size: var(--font-size-sm);
-  color: var(--color-grey-dark);
-
-  & p {
-    margin-bottom: var(--spacing-x-tight);
-  }
-}

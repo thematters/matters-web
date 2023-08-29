@@ -118,7 +118,7 @@ export const UserProfile = () => {
   }
 
   /**
-   * Active or Onboarding User
+   * Active
    */
   const avatar = (
     <section className={styles.avatar}>

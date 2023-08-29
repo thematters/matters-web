@@ -1,0 +1,7 @@
+.tabs {
+  margin-bottom: var(--spacing-loose);
+
+  @media (--sm-up) {
+    margin-top: var(--spacing-base);
+  }
+}

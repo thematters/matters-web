@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
-import { Card, CardProps, IconArrowRight16, TextIcon } from '~/components'
+import { Card, CardProps, IconArrowRight20, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -11,11 +11,12 @@ type ItemProps = {
 
   right?: React.ReactNode
   rightText?: string | React.ReactNode
-  rightTextColor?: 'green' | 'greyDarker' | 'black'
+  rightTextColor?: 'green' | 'greyDarker' | 'grey' | 'black'
   rightSubText?: string | React.ReactNode
   rightIcon?: React.ReactNode
 
   bold?: boolean
+  clickable?: boolean
 
   ref?: any
 } & CardProps
@@ -29,18 +30,24 @@ const Item: React.FC<ItemProps> = forwardRef(
       rightText,
       rightTextColor = 'greyDarker',
       rightSubText,
-      rightIcon = <IconArrowRight16 color="grey" />,
+      rightIcon = <IconArrowRight20 size="mdS" color="greyDarker" />,
 
       bold,
+      clickable: isClickable,
 
       ...cardProps
     },
     ref
   ) => {
-    const clickable = cardProps.href || cardProps.htmlHref || cardProps.onClick
+    const clickable =
+      isClickable || cardProps.href || cardProps.htmlHref || cardProps.onClick
     const leftClasses = classNames({
       [styles.left]: true,
       [styles.bold]: !!bold,
+    })
+    const rightClasses = classNames({
+      [styles.right]: true,
+      [styles.clickable]: !!clickable,
     })
 
     const itemContent = (
@@ -50,13 +57,13 @@ const Item: React.FC<ItemProps> = forwardRef(
           {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         </section>
 
-        <section className={styles.right}>
+        <section className={rightClasses}>
           {right || (
             <TextIcon
               icon={clickable && rightIcon}
-              size="md"
+              size="sm"
               textPlacement="left"
-              spacing="xtight"
+              spacing="basexxtight"
               color={rightTextColor}
             >
               {rightText}

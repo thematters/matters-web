@@ -6,7 +6,7 @@ import {
   //  ReCaptchaContext,
   TextIcon,
   Translate,
-  useCountdown,
+  useLegacyCountdown,
   useMutation,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -41,7 +41,7 @@ export const VerificationSendCodeButton: React.FC<
   const [send] = useMutation<SendVerificationCodeMutation>(SEND_CODE)
   const [sent, setSent] = useState(false)
 
-  const { countdown, setCountdown, formattedTimeLeft } = useCountdown({
+  const { countdown, setCountdown, formattedTimeLeft } = useLegacyCountdown({
     timeLeft: 0,
   })
 

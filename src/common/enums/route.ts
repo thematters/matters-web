@@ -46,12 +46,13 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_CHANGE_USERNAME'
   | 'ME_SETTINGS_CHANGE_EMAIL'
   | 'ME_SETTINGS_CHANGE_PASSWORD'
-  | 'ME_SETTINGS_NOTIFICATION'
+  | 'ME_SETTINGS_NOTIFICATIONS'
   | 'ME_SETTINGS_BLOCKED'
   | 'ME_SETTINGS_CONNECT_WALLET'
+  | 'ME_SETTINGS_OTHERS'
   | 'ME_DRAFT_DETAIL'
-  | 'ME_SETTINGS_NOTIFICATION_GENERAL'
-  | 'ME_SETTINGS_NOTIFICATION_CIRCLE'
+  | 'ME_SETTINGS_NOTIFICATIONS_GENERAL' // TODO: remove
+  | 'ME_SETTINGS_NOTIFICATIONS_CIRCLE'
   // Form
   | 'LOGIN'
   | 'SIGNUP'
@@ -63,7 +64,6 @@ type ROUTE_KEY =
   | 'PAY_CALLBACK_SUCCESS'
   | 'PAY_CALLBACK_FAILURE'
   // Misc
-  | 'HELP'
   | 'MIGRATION'
   | 'ABOUT'
   | 'GUIDE'
@@ -122,7 +122,6 @@ export const ROUTES: {
   { key: 'FORGET', pathname: '/forget' },
 
   // Misc
-  { key: 'HELP', pathname: '/help' },
   { key: 'MIGRATION', pathname: '/migration' },
   { key: 'ABOUT', pathname: '/about' },
   { key: 'GUIDE', pathname: '/guide' },
@@ -155,19 +154,23 @@ export const ROUTES: {
     key: 'ME_SETTINGS_CHANGE_PASSWORD',
     pathname: '/me/settings/change-password',
   },
-  { key: 'ME_SETTINGS_NOTIFICATION', pathname: '/me/settings/notification' },
+  { key: 'ME_SETTINGS_NOTIFICATIONS', pathname: '/me/settings/notifications' },
   {
-    key: 'ME_SETTINGS_NOTIFICATION_GENERAL',
-    pathname: '/me/settings/notification-general',
+    key: 'ME_SETTINGS_NOTIFICATIONS_GENERAL',
+    pathname: '/me/settings/notifications/general',
   },
   {
-    key: 'ME_SETTINGS_NOTIFICATION_CIRCLE',
-    pathname: '/me/settings/notification-circle',
+    key: 'ME_SETTINGS_NOTIFICATIONS_CIRCLE',
+    pathname: '/me/settings/notifications/circle',
   },
   { key: 'ME_SETTINGS_BLOCKED', pathname: '/me/settings/blocked' },
   {
     key: 'ME_SETTINGS_CONNECT_WALLET',
     pathname: '/me/settings/connect-wallet',
+  },
+  {
+    key: 'ME_SETTINGS_OTHERS',
+    pathname: '/me/settings/others',
   },
 
   // Draft
