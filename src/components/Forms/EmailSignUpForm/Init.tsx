@@ -16,7 +16,7 @@ import {
   Form,
   LanguageContext,
   Layout,
-  //  ReCaptchaContext,
+  ReCaptchaContext,
   useMutation,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -49,7 +49,7 @@ const Init: React.FC<FormProps> = ({
   const isInPage = purpose === 'page'
   const formId = 'email-sign-up-init-form'
 
-  // const { token, refreshToken } = useContext(ReCaptchaContext)
+  const { token, refreshToken } = useContext(ReCaptchaContext)
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
     SEND_CODE,
     undefined,
@@ -91,10 +91,9 @@ const Init: React.FC<FormProps> = ({
       )}&displayName=${encodeURIComponent(displayName)}`
 
       try {
-        // reCaptcha check is disabled for now
         await sendCode({
           variables: {
-            input: { email, type: 'register', token: '', redirectUrl },
+            input: { email, type: 'register', token, redirectUrl },
           },
         })
 
@@ -106,9 +105,9 @@ const Init: React.FC<FormProps> = ({
         const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         setFieldError('email', messages[codes[0]])
 
-        // if (refreshToken) {
-        //   refreshToken()
-        // }
+        if (refreshToken) {
+          refreshToken()
+        }
       }
     },
   })
