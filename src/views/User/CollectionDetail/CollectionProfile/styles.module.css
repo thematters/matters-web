@@ -45,6 +45,9 @@
 
   @media (--sm-up) {
     padding: 0;
+  }
+
+  @media (--md-up) {
     margin-bottom: 0;
   }
 }

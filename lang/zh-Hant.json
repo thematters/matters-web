@@ -23,6 +23,10 @@
     "defaultMessage": "嘗試將內容寫入 IPFS 網絡中，需要一段時間，請耐心等候。若等候時間過久，可透過發佈文章來加速。",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "/BQWEh": {
+    "defaultMessage": "最近 1 個月",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
@@ -51,6 +55,10 @@
     "defaultMessage": "新建選集",
     "description": "src/views/User/Collections/UserCollections.tsx"
   },
+  "0iyH+q": {
+    "defaultMessage": "最近 7 日",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
   "0qagOO": {
     "defaultMessage": "圍爐訂閱",
     "description": "src/components/Transaction/index.tsx"
@@ -68,8 +76,8 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "1zVIWy": {
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx",
-    "defaultMessage": "在 {commentArticle} 評論提到了你"
+    "defaultMessage": "在 {commentArticle} 評論提到了你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "20bImY": {
     "defaultMessage": "眾聊"
@@ -242,8 +250,7 @@
     "defaultMessage": "漏洞提報"
   },
   "9J0iCw": {
-    "defaultMessage": "已註銷用戶",
-    "description": "src/components/UserProfile/index.tsx"
+    "defaultMessage": "已註銷用戶"
   },
   "9mfw9c": {
     "defaultMessage": "錢包地址",
@@ -255,10 +262,6 @@
   },
   "A3g33H": {
     "defaultMessage": "封存作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
-  },
-  "A3rLZt": {
-    "defaultMessage": "最近 {months} 個月",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "A41QIy": {
     "defaultMessage": "輸入密碼"
@@ -286,7 +289,7 @@
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "AVpR3Q": {
-    "defaultMessage": "Wallet linked",
+    "defaultMessage": "已綁定錢包",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
   "AYTnjk": {
@@ -347,7 +350,7 @@
     "defaultMessage": "設定"
   },
   "DYrDcG": {
-    "defaultMessage": "Badges",
+    "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
   },
   "DyuHBH": {
@@ -586,10 +589,6 @@
     "defaultMessage": "登入密碼",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
-  "Po+kJe": {
-    "defaultMessage": "最近 {month} 個月",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
-  },
   "Pp/0po": {
     "defaultMessage": "換一批"
   },
@@ -613,7 +612,7 @@
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
   "R7yHDl": {
-    "defaultMessage": "Circle Revenue",
+    "defaultMessage": "圍爐營收",
     "description": "src/components/Transaction/index.tsx"
   },
   "RFzVUD": {
@@ -698,8 +697,8 @@
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
   },
   "V8msLJ": {
-    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx",
-    "defaultMessage": "在你的圍爐中留言並提及你"
+    "defaultMessage": "在你的圍爐中留言並提及你",
+    "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
   "VZsE96": {
     "defaultMessage": "選集名稱"
@@ -721,6 +720,10 @@
   },
   "VzzYJk": {
     "defaultMessage": "新建"
+  },
+  "W0sZaX": {
+    "defaultMessage": "最近 3 個月",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "W8OZ3G": {
     "defaultMessage": "確認刪除"
@@ -829,10 +832,6 @@
     "defaultMessage": "回覆了你在圍爐 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
-  "b3onWZ": {
-    "defaultMessage": "最近 {days} 天",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
-  },
   "b6zdPs": {
     "defaultMessage": "{count} 篇文章",
     "description": "src/components/Book/index.tsx"
@@ -890,7 +889,7 @@
     "defaultMessage": "我的足跡"
   },
   "dzF4ci": {
-    "defaultMessage": "重新發送",
+    "defaultMessage": "Resend",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "eTpiYa": {
@@ -1007,7 +1006,7 @@
     "defaultMessage": "熱門"
   },
   "m/Wg7b": {
-    "defaultMessage": "Circle Description",
+    "defaultMessage": "圍爐描述",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "m4GG4b": {

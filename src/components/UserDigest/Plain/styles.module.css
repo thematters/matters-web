@@ -1,12 +1,5 @@
 .container {
   &:not(.disabled) {
-    &:hover,
-    &:focus {
-      & .name {
-        text-decoration: underline;
-      }
-    }
-
     & .hasUnderline {
       text-decoration: underline;
     }

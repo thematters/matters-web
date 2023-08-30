@@ -30,7 +30,7 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   // FIXME: https://github.com/apollographql/apollo-client/issues/3775
   useEffect(() => {
     if (viewer.isAuthed) {
-      startPolling(1000 * 60) // 60s
+      startPolling(1000 * 60 * 3) // 3 mins
     }
   }, [])
 

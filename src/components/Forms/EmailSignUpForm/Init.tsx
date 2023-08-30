@@ -14,8 +14,8 @@ import {
   IconLeft20,
   LanguageContext,
   Media,
+  ReCaptchaContext,
   TextIcon,
-  //  ReCaptchaContext,
   useMutation,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -46,6 +46,7 @@ const Init: React.FC<FormProps> = ({
   const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>('normal')
   const isNormal = authTypeFeed === 'normal'
   const isWallet = authTypeFeed === 'wallet'
+  const { token, refreshToken } = useContext(ReCaptchaContext)
 
   // const { token, refreshToken } = useContext(ReCaptchaContext)
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
@@ -76,10 +77,9 @@ const Init: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ email }, { setFieldError, setSubmitting }) => {
       try {
-        // reCaptcha check is disabled for now
         await sendCode({
           variables: {
-            input: { email, type: 'register', token: '' },
+            input: { email, type: 'register', token },
           },
         })
 
@@ -91,9 +91,9 @@ const Init: React.FC<FormProps> = ({
         const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         setFieldError('email', messages[codes[0]])
 
-        // if (refreshToken) {
-        //   refreshToken()
-        // }
+        if (refreshToken) {
+          refreshToken()
+        }
       }
     },
   })
