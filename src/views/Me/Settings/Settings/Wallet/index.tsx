@@ -57,7 +57,7 @@ const WalletSettings = () => {
           !likerId
             ? () =>
                 window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-            : undefined
+            : () => window.open('https://like.co/in?legacy=1')
         }
         role="button"
         rightText={likerId || <Translate id="setup" />}
