@@ -1,15 +1,15 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { KEYVALUE } from '~/common/enums'
-import { validateUserName } from '~/common/utils'
+import { KEYVALUE, MAX_USER_NAME_LENGTH } from '~/common/enums'
+import { filterUserName, validateUserName } from '~/common/utils'
 import { Dialog, Form, LanguageContext, Spacer } from '~/components'
 
 import Field from '../../Form/Field'
+import { QUERY_USER_NAME } from './gql'
 import styles from './styles.module.css'
 
 interface Props {
@@ -21,20 +21,12 @@ interface FormValues {
   userName: string
 }
 
-const QUERY_USER_NAME = gql`
-  query QueryUserName($userName: String!) {
-    user(input: { userName: $userName }) {
-      id
-    }
-  }
-`
-
 const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
   const { lang } = useContext(LanguageContext)
 
   const client = useApolloClient()
 
-  const maxUsername = 15
+  const maxUsername = MAX_USER_NAME_LENGTH
   const formId = 'edit-user-name-input'
 
   const intl = useIntl()
@@ -89,6 +81,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         type="text"
         name="userName"
         required
+        autoFocus
         placeholder={intl.formatMessage({
           defaultMessage: 'English letters, numbers, and underscores',
           description: 'src/components/Dialogs/SetUserNameDialog/Content.tsx',
@@ -108,10 +101,8 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
           return false
         }}
         onKeyUp={() => {
-          const v = values.userName
-            .split('')
-            .filter((c) => /^[a-zA-Z0-9_]*$/.test(c))
-          setFieldValue('userName', v.join('').slice(0, maxUsername))
+          const v = filterUserName(values.userName)
+          setFieldValue('userName', v.slice(0, maxUsername))
         }}
         leftButton={<span className={styles.atFlag}>@</span>}
         hasFooter={false}

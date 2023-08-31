@@ -1,5 +1,6 @@
 export * from './article'
 export * from './tag'
+export * from './user'
 
 // for Twitter and others which do not support non-English in URL
 export const stripNonEnglishUrl = (url: string) => {

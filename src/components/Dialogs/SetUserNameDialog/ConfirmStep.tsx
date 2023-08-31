@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
@@ -7,21 +6,15 @@ import { PATHS } from '~/common/enums'
 import { Dialog, toast, useMutation, useRoute } from '~/components'
 import { ROOT_QUERY_PRIVATE } from '~/components/Root/gql'
 import { SetUserNameMutation } from '~/gql/graphql'
+import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
+
+import { SET_USER_NAME } from './gql'
 
 interface Props {
   userName: string
   back: () => void
   closeDialog: () => void
 }
-
-const SET_USER_NAME = gql`
-  mutation SetUserName($userName: String!) {
-    setUserName(input: { userName: $userName }) {
-      id
-      userName
-    }
-  }
-`
 
 const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
   const { router } = useRoute()
@@ -43,6 +36,10 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
         refetchQueries: [
           {
             query: ROOT_QUERY_PRIVATE,
+          },
+          {
+            query: USER_PROFILE_PUBLIC,
+            variables: { userName },
           },
         ],
       })
