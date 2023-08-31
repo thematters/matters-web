@@ -41,6 +41,10 @@
   "0Azlrb": {
     "defaultMessage": "Manage"
   },
+  "0CyECR": {
+    "defaultMessage": "Matters ID has been set up. More account info can be found in Settings",
+    "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
   "0JLcHr": {
     "defaultMessage": "Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress.",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
@@ -60,6 +64,10 @@
     "defaultMessage": "Failed",
     "description": "src/components/Transaction/State/index.tsx"
   },
+  "1QrwIl": {
+    "defaultMessage": "Take a look",
+    "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
   "1Z1M77": {
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
@@ -71,6 +79,10 @@
   "1zVIWy": {
     "defaultMessage": "mentioned you in a comment at {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "202PEj": {
+    "defaultMessage": "Confirm Matters ID",
+    "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
   "20bImY": {
     "defaultMessage": "Discussion"
@@ -400,6 +412,10 @@
     "defaultMessage": "Collection is deleted",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
+  "FxrSCh": {
+    "defaultMessage": "This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?",
+    "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
   "GHxtae": {
     "defaultMessage": "Wallet",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
@@ -461,6 +477,10 @@
   "IKPYe9": {
     "defaultMessage": "View",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
+  "IPqNCS": {
+    "defaultMessage": "Confirm use",
+    "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
   "Ihwz5K": {
     "defaultMessage": "Unpinned from profile"
@@ -542,6 +562,10 @@
   "LqxIEU": {
     "defaultMessage": "Wallet address will be part of your digital identity and shown in your profile page.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "LwFJTy": {
+    "defaultMessage": "Matters ID is your unique identifier, and cannot be modified once set.",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "MDNaxs": {
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx",
@@ -993,9 +1017,17 @@
   "kc79d3": {
     "defaultMessage": "Topics"
   },
+  "kf5NAv": {
+    "defaultMessage": "English letters, numbers, and underscores",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
   "kkZioy": {
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "l0/EvT": {
+    "defaultMessage": "Last step: Set Matters ID",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "lIir/P": {
     "description": "",
@@ -1232,6 +1264,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "View All"
+  },
+  "x7O1/5": {
+    "defaultMessage": "This ID has been taken, please try another one",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "xMaFCO": {
     "defaultMessage": "Articles",

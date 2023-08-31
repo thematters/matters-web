@@ -24,6 +24,7 @@ type InputProps = {
   type: 'text' | 'password' | 'email' | 'number'
   name: string
   hasFooter?: boolean
+  leftButton?: React.ReactNode
   rightButton?: React.ReactNode
 } & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
@@ -38,6 +39,7 @@ const Input = forwardRef(
 
       name,
       hasFooter = true,
+      leftButton,
       rightButton,
 
       label,
@@ -62,7 +64,7 @@ const Input = forwardRef(
     const inputClasses = classNames({
       [styles.input]: true,
       [styles.error]: error,
-      [styles.wrapper]: !!rightButton,
+      [styles.wrapper]: !!leftButton || !!rightButton,
     })
 
     const input = (
@@ -77,7 +79,7 @@ const Input = forwardRef(
         autoCorrect="off"
         autoCapitalize="off"
         spellCheck="false"
-        className={!rightButton ? inputClasses : undefined}
+        className={!leftButton && !rightButton ? inputClasses : undefined}
       />
     )
 
@@ -90,6 +92,15 @@ const Input = forwardRef(
           hasLabel={hasLabel}
         />
 
+        {leftButton && (
+          <Field.Content>
+            <section className={inputClasses}>
+              {leftButton}
+              {input}
+            </section>
+          </Field.Content>
+        )}
+
         {rightButton && (
           <Field.Content>
             <section className={inputClasses}>
@@ -98,7 +109,7 @@ const Input = forwardRef(
             </section>
           </Field.Content>
         )}
-        {!rightButton && <Field.Content>{input}</Field.Content>}
+        {!leftButton && !rightButton && <Field.Content>{input}</Field.Content>}
 
         {hasFooter && (
           <Field.Footer

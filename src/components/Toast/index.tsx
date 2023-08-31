@@ -30,9 +30,13 @@ const ToastActions: React.FC<ToastActionsProps> = ({
 }) => {
   return (
     <section className={styles.actions}>
-      {actions.map(({ content, ...props }, index) => (
+      {actions.map(({ content, onClick, ...props }, index) => (
         <Button
           textColor={type === 'error' ? 'white' : 'greyDarker'}
+          onClick={() => {
+            onClick && onClick()
+            onDismiss && onDismiss()
+          }}
           {...props}
           key={index}
         >
@@ -107,10 +111,10 @@ const Toast: React.FC<
 Toast.displayName = 'Toast'
 
 export const toast = {
-  success: (props: ToastProps) => {
+  success: ({ duration, ...props }: ToastProps & { duration?: number }) => {
     return baseToast.custom(
       (toast) => <Toast {...props} toast={toast} type="success" />,
-      { duration: props.actions ? 5000 : 3000 }
+      { duration: !!duration ? duration : props.actions ? 5000 : 3000 }
     )
   },
   error: (props: ToastProps) => {
