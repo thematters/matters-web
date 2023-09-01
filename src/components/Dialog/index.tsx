@@ -111,6 +111,9 @@ const Container: React.FC<
         if (event.code.toLowerCase() !== KEYVALUE.escape) {
           return
         }
+        if (!dismissOnHandle) {
+          return
+        }
         closeTopDialog()
       }}
     >
