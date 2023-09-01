@@ -18,7 +18,6 @@ type Step = 'input' | 'confirm'
 
 const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const viewer = useContext(ViewerContext)
-  console.log({ viewer })
   const client = useApolloClient()
 
   const email = viewer.info.email
