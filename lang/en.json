@@ -328,6 +328,10 @@
     "defaultMessage": "followers_empty",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "C3NKBg": {
+    "defaultMessage": "Connected to {type}",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
+  },
   "C8GQaD": {
     "defaultMessage": "Upadted {date}",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
@@ -351,6 +355,10 @@
   },
   "CxYcYR": {
     "defaultMessage": "Recommended square image."
+  },
+  "D+N1Q6": {
+    "defaultMessage": "This {type} account is connected to a Matters account. Sign in to that account to disconnect it then try again",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
   "D2Sw/t": {
     "defaultMessage": "Add any URL in the following list into RSS reader",

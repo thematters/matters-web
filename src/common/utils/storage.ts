@@ -36,6 +36,8 @@ export const storage = {
     if (process.env.DEBUG) {
       console.log(`[storage:REMOVE] ${key}`)
     }
-    return localStorage.removeItem(key)
+    const item = parseJSON(localStorage.getItem(key))
+    localStorage.removeItem(key)
+    return item
   },
 }

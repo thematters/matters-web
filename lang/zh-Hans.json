@@ -327,6 +327,10 @@
     "defaultMessage": "目前总追踪人数",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "C3NKBg": {
+    "defaultMessage": "{type} 已绑定",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
+  },
   "C8GQaD": {
     "defaultMessage": "{date}更新",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
@@ -350,6 +354,10 @@
   },
   "CxYcYR": {
     "defaultMessage": "建议使用正方形图片"
+  },
+  "D+N1Q6": {
+    "defaultMessage": "该 {type} 账号已关联至其他 Matters 账号，请登录该账号解绑后再试",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一网址到 RSS 阅读器",

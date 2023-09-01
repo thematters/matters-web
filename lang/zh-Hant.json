@@ -327,6 +327,10 @@
     "defaultMessage": "目前總追蹤人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "C3NKBg": {
+    "defaultMessage": "{type} 已綁定",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
+  },
   "C8GQaD": {
     "defaultMessage": "{date}更新",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
@@ -350,6 +354,10 @@
   },
   "CxYcYR": {
     "defaultMessage": "建議使用正方形圖片"
+  },
+  "D+N1Q6": {
+    "defaultMessage": "該 {type} 帳號已關聯至其他 Matters 帳號，請登入該帳號解綁後再試",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一網址到 RSS 閱讀器",
