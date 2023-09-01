@@ -21,7 +21,7 @@ const BaseSetUserNameDialog = ({ children }: SetUserNameDialogProps) => {
     <>
       {children && children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog} dismissOnHandle={false}>
         <DynamicContent closeDialog={closeDialog} />
       </Dialog>
     </>
