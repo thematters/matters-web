@@ -155,7 +155,21 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
       <Spacer size="base" />
       <Dialog.Content>{InnerForm}</Dialog.Content>
 
-      <Dialog.Footer smUpBtns={<>{SubmitButton}</>} />
+      <Dialog.Footer
+        btns={
+          <>
+            <Dialog.RoundedButton
+              type="submit"
+              color="green"
+              form={formId}
+              disabled={isSubmitting || values.userName.length < 4}
+              text={<FormattedMessage defaultMessage="Confirm" />}
+              loading={isSubmitting}
+            />
+          </>
+        }
+        smUpBtns={<>{SubmitButton}</>}
+      />
     </>
   )
 }

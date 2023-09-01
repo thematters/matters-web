@@ -95,6 +95,26 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
       </Dialog.Message>
 
       <Dialog.Footer
+        btns={
+          <>
+            <Dialog.RoundedButton
+              disabled={loading}
+              text={
+                <FormattedMessage
+                  defaultMessage="Confirm use"
+                  description="src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+                />
+              }
+              loading={loading}
+              onClick={confirmUse}
+            />
+            <Dialog.RoundedButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              color="greyDarker"
+              onClick={back}
+            />
+          </>
+        }
         smUpBtns={
           <>
             <Dialog.TextButton
