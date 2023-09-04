@@ -21,7 +21,7 @@ const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const viewer = useContext(ViewerContext)
   const client = useApolloClient()
 
-  const maxQueryCount = 1000
+  const maxQueryCount = 10
 
   const googleId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Google
