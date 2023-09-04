@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 
+import { capitalizeFirstLetter } from '@/src/common/utils'
+
 import styles from './styles.module.css'
 
 export interface FooterProps {
@@ -8,7 +10,7 @@ export interface FooterProps {
   error?: string | React.ReactNode
   hintSize?: 'xs' | 'sm'
   hintAlign?: 'left' | 'right' | 'center'
-  hintSpace?: 'xTight' | 'baseLoose'
+  hintSpace?: 'xTight' | 'base' | 'baseLoose'
 }
 
 const Footer: React.FC<FooterProps> = ({
@@ -21,7 +23,7 @@ const Footer: React.FC<FooterProps> = ({
 }) => {
   const footerClasses = classNames({
     [styles.footer]: true,
-    [styles.spaceBaseLoose]: hintSpace === 'baseLoose',
+    [styles[`space${capitalizeFirstLetter(hintSpace)}`]]: true,
   })
 
   const hintClasses = classNames({

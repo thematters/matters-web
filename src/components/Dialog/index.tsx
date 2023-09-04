@@ -25,6 +25,7 @@ export interface DialogOverlayProps {
   onDismiss: () => void
   onRest?: () => void
   dismissOnClickOutside?: boolean
+  dismissOnHandle?: boolean
 }
 
 export type DialogProps = {
@@ -50,6 +51,7 @@ const Container: React.FC<
   testId,
   onDismiss,
   dismissOnClickOutside = false,
+  dismissOnHandle = true,
   children,
   style,
   setDragGoal,
@@ -109,6 +111,9 @@ const Container: React.FC<
         if (event.code.toLowerCase() !== KEYVALUE.escape) {
           return
         }
+        if (!dismissOnHandle) {
+          return
+        }
         closeTopDialog()
       }}
     >
@@ -119,7 +124,7 @@ const Container: React.FC<
       {children}
 
       <Media at="sm">
-        <Handle closeDialog={onDismiss} {...bind()} />
+        {dismissOnHandle && <Handle closeDialog={onDismiss} {...bind()} />}
       </Media>
     </div>
   )

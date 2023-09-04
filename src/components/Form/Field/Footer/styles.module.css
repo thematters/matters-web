@@ -2,6 +2,14 @@
   margin-top: var(--spacing-x-tight);
 }
 
+.spaceXTight {
+  margin-top: var(--spacing-x-tight);
+}
+
+.spaceBase {
+  margin-top: var(--spacing-base);
+}
+
 .spaceBaseLoose {
   margin-top: var(--spacing-base-loose);
 }
