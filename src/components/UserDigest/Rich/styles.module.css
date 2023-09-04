@@ -38,9 +38,10 @@
   @mixin fix-cropped-letters;
 
   font-weight: var(--font-weight-medium);
+  color: var(--color-black);
 }
 
-.description {
+.subtitle {
   @mixin line-clamp;
 
   font-size: var(--font-size-sm-s);
@@ -62,7 +63,7 @@
   }
 
   & .name,
-  & .description {
+  & .subtitle {
     line-height: 1rem; /* 16px, half of the avatar height */
   }
 
@@ -81,7 +82,7 @@
   }
 
   & .name,
-  & .description {
+  & .subtitle {
     line-height: 1.5rem; /* 24px, half of the avatar height */
   }
 

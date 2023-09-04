@@ -30,7 +30,7 @@ export type UserDigestRichProps = {
 
   size?: 'sm' | 'lg'
   avatarBadge?: React.ReactNode
-  descriptionReplacement?: React.ReactNode
+  subtitle?: React.ReactNode
   extraButton?: React.ReactNode
 
   hasFollow?: boolean
@@ -44,7 +44,7 @@ const Rich = ({
 
   size = 'lg',
   avatarBadge,
-  descriptionReplacement,
+  subtitle,
   extraButton,
 
   hasFollow = true,
@@ -131,12 +131,10 @@ const Rich = ({
             {hasState && <FollowUserButton.State user={user} />}
           </header>
 
-          {!descriptionReplacement && user.info.description && (
-            <p className={styles.description}>{user.info.description}</p>
+          {!subtitle && user.info.description && (
+            <p className={styles.subtitle}>{user.info.description}</p>
           )}
-          {descriptionReplacement && (
-            <p className={styles.description}>{descriptionReplacement}</p>
-          )}
+          {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         </section>
 
         <section className={styles.extraButton}>

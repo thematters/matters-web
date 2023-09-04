@@ -116,7 +116,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
             <List.Item>
               <UserDigest.Rich
                 user={tag.owner}
-                descriptionReplacement={
+                subtitle={
                   <Translate
                     zh_hant="主理人"
                     zh_hans="主理人"
@@ -134,7 +134,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
               <UserDigest.Rich
                 user={editor}
                 hasFollow={false}
-                descriptionReplacement={
+                subtitle={
                   <Translate
                     zh_hant="協作者"
                     zh_hans="协作者"
