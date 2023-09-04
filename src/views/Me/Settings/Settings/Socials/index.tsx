@@ -5,7 +5,7 @@ import {
   OAUTH_STORAGE_BIND_STATE,
   OAUTH_STORAGE_BIND_STATE_FAILURE,
   OAUTH_STORAGE_BIND_STATE_SUCCESS,
-} from '@/src/common/enums'
+} from '~/common/enums'
 import {
   facebookOauthUrl,
   googleOauthUrl,
@@ -20,6 +20,7 @@ import {
   IconGoogle22,
   IconSpinner16,
   IconX22,
+  RemoveSocialLoginDialog,
   TextIcon,
   toast,
   useRoute,
@@ -111,106 +112,130 @@ const Socials = () => {
   return (
     <>
       {/* Google */}
-      <Form.List.Item
-        title={
-          <TextIcon icon={<IconGoogle22 size="mdM" />} spacing="tight">
-            Google
-          </TextIcon>
-        }
-        rightText={googleId}
-        rightIcon={
-          googleId ? <IconClose20 size="mdS" color="greyDarker" /> : undefined
-        }
-        onClick={googleId ? () => {} : undefined} // TODO
-        right={
-          googleId ? undefined : (
-            <>
-              {!isGoogleLoading && (
-                <Button
-                  size={[null, '1.5rem']}
-                  spacing={[0, 'tight']}
-                  textColor="green"
-                  borderColor="green"
-                  onClick={gotoGoogle} // TODO
-                >
-                  <FormattedMessage defaultMessage="Connect" />
-                </Button>
-              )}
-              {isGoogleLoading && (
-                <IconSpinner16 color="greyLight" size="mdS" />
-              )}
-            </>
+      <RemoveSocialLoginDialog type={SocialAccountType.Google}>
+        {({ openDialog }) => {
+          return (
+            <Form.List.Item
+              title={
+                <TextIcon icon={<IconGoogle22 size="mdM" />} spacing="tight">
+                  Google
+                </TextIcon>
+              }
+              rightText={googleId}
+              rightIcon={
+                googleId ? (
+                  <IconClose20 size="mdS" color="greyDarker" />
+                ) : undefined
+              }
+              onClick={googleId ? () => openDialog() : undefined}
+              right={
+                googleId ? undefined : (
+                  <>
+                    {!isGoogleLoading && (
+                      <Button
+                        size={[null, '1.5rem']}
+                        spacing={[0, 'tight']}
+                        textColor="green"
+                        borderColor="green"
+                        onClick={gotoGoogle}
+                      >
+                        <FormattedMessage defaultMessage="Connect" />
+                      </Button>
+                    )}
+                    {isGoogleLoading && (
+                      <IconSpinner16 color="greyLight" size="mdS" />
+                    )}
+                  </>
+                )
+              }
+            />
           )
-        }
-      />
+        }}
+      </RemoveSocialLoginDialog>
 
       {/* Twitter */}
-      <Form.List.Item
-        title={
-          <TextIcon icon={<IconX22 size="mdM" />} spacing="tight">
-            Twitter
-          </TextIcon>
-        }
-        rightText={twitterId ? `@${twitterId}` : undefined}
-        rightIcon={
-          twitterId ? <IconClose20 size="mdS" color="greyDarker" /> : undefined
-        }
-        onClick={twitterId ? () => {} : undefined} // TODO
-        right={
-          twitterId ? undefined : (
-            <>
-              {!isTwitterLoading && (
-                <Button
-                  size={[null, '1.5rem']}
-                  spacing={[0, 'tight']}
-                  textColor="green"
-                  borderColor="green"
-                  onClick={gotoTwitter} // TODO
-                >
-                  <FormattedMessage defaultMessage="Connect" />
-                </Button>
-              )}
-              {isTwitterLoading && (
-                <IconSpinner16 color="greyLight" size="mdS" />
-              )}
-            </>
+      <RemoveSocialLoginDialog type={SocialAccountType.Twitter}>
+        {({ openDialog }) => {
+          return (
+            <Form.List.Item
+              title={
+                <TextIcon icon={<IconX22 size="mdM" />} spacing="tight">
+                  Twitter
+                </TextIcon>
+              }
+              rightText={twitterId ? `@${twitterId}` : undefined}
+              rightIcon={
+                twitterId ? (
+                  <IconClose20 size="mdS" color="greyDarker" />
+                ) : undefined
+              }
+              onClick={twitterId ? () => openDialog() : undefined}
+              right={
+                twitterId ? undefined : (
+                  <>
+                    {!isTwitterLoading && (
+                      <Button
+                        size={[null, '1.5rem']}
+                        spacing={[0, 'tight']}
+                        textColor="green"
+                        borderColor="green"
+                        onClick={gotoTwitter}
+                      >
+                        <FormattedMessage defaultMessage="Connect" />
+                      </Button>
+                    )}
+                    {isTwitterLoading && (
+                      <IconSpinner16 color="greyLight" size="mdS" />
+                    )}
+                  </>
+                )
+              }
+            />
           )
-        }
-      />
+        }}
+      </RemoveSocialLoginDialog>
 
       {/* Facebook */}
-      <Form.List.Item
-        title={
-          <TextIcon icon={<IconFacebook22 size="mdM" />} spacing="tight">
-            Facebook
-          </TextIcon>
-        }
-        rightText={facebookId ? `@${facebookId}` : undefined}
-        rightIcon={
-          facebookId ? <IconClose20 size="mdS" color="greyDarker" /> : undefined
-        }
-        onClick={facebookId ? () => {} : undefined} // TODO
-        right={
-          facebookId ? undefined : (
-            <>
-              {!isFacebookLoading && (
-                <Button
-                  size={[null, '1.5rem']}
-                  spacing={[0, 'tight']}
-                  textColor="green"
-                  borderColor="green"
-                  onClick={gotoFacebook} // TODO
-                >
-                  <FormattedMessage defaultMessage="Connect" />
-                </Button>
-              )}
-              {isFacebookLoading && (
-                <IconSpinner16 color="greyLight" size="mdS" />
-              )}
-            </>
+      <RemoveSocialLoginDialog type={SocialAccountType.Facebook}>
+        {({ openDialog }) => {
+          return (
+            <Form.List.Item
+              title={
+                <TextIcon icon={<IconFacebook22 size="mdM" />} spacing="tight">
+                  Facebook
+                </TextIcon>
+              }
+              rightText={facebookId ? `@${facebookId}` : undefined}
+              rightIcon={
+                facebookId ? (
+                  <IconClose20 size="mdS" color="greyDarker" />
+                ) : undefined
+              }
+              onClick={facebookId ? () => openDialog() : undefined}
+              right={
+                facebookId ? undefined : (
+                  <>
+                    {!isFacebookLoading && (
+                      <Button
+                        size={[null, '1.5rem']}
+                        spacing={[0, 'tight']}
+                        textColor="green"
+                        borderColor="green"
+                        onClick={gotoFacebook}
+                      >
+                        <FormattedMessage defaultMessage="Connect" />
+                      </Button>
+                    )}
+                    {isFacebookLoading && (
+                      <IconSpinner16 color="greyLight" size="mdS" />
+                    )}
+                  </>
+                )
+              }
+            />
           )
-        }
-      />
+        }}
+      </RemoveSocialLoginDialog>
     </>
   )
 }

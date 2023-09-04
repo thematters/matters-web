@@ -93,6 +93,10 @@
     "defaultMessage": "總數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "2P5JII": {
+    "defaultMessage": "解綁",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "2W0f9h": {
     "defaultMessage": "個人簡介"
   },
@@ -153,6 +157,10 @@
   "50cquj": {
     "defaultMessage": "還沒有眾聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "5CcjZy": {
+    "defaultMessage": "確認要解綁 {type} 嗎？",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "5FO4vn": {
     "defaultMessage": "你尚無權限進行該操作"
@@ -514,6 +522,10 @@
     "defaultMessage": "作品已取消精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
+  "K2/mHF": {
+    "defaultMessage": "暫時無法解綁 {type}，因為你沒有其他登入方式（電子郵件/數字錢包/社交帳號）。",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "K3r6DQ": {
     "defaultMessage": "刪除"
   },
@@ -794,6 +806,10 @@
   },
   "XVYrS/": {
     "defaultMessage": "還沒有追蹤者"
+  },
+  "XYUhx0": {
+    "defaultMessage": "解綁 {type}",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "Xd0J7Y": {
     "defaultMessage": "開放社區"
@@ -1263,6 +1279,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"
+  },
+  "wm9xNB": {
+    "defaultMessage": "{type} 已解綁",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "x7O1/5": {
     "defaultMessage": "ID 已被使用，請修改後再試",

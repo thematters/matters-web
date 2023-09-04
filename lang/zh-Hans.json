@@ -93,6 +93,10 @@
     "defaultMessage": "总数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "2P5JII": {
+    "defaultMessage": "解绑",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "2W0f9h": {
     "defaultMessage": "个人简介"
   },
@@ -153,6 +157,10 @@
   "50cquj": {
     "defaultMessage": "还没有众聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "5CcjZy": {
+    "defaultMessage": "确认要解绑 {type} 吗？",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "5FO4vn": {
     "defaultMessage": "你尚无权限进行该操作"
@@ -514,6 +522,10 @@
     "defaultMessage": "作品已取消精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
+  "K2/mHF": {
+    "defaultMessage": "暂时无法解绑 {type}，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "K3r6DQ": {
     "defaultMessage": "刪除"
   },
@@ -794,6 +806,10 @@
   },
   "XVYrS/": {
     "defaultMessage": "还没有追踪者"
+  },
+  "XYUhx0": {
+    "defaultMessage": "解绑 {type}",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "Xd0J7Y": {
     "defaultMessage": "开放社区"
@@ -1263,6 +1279,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"
+  },
+  "wm9xNB": {
+    "defaultMessage": "{type} 已解绑",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "x7O1/5": {
     "defaultMessage": "ID 已被使用，请修改后再试",

@@ -94,6 +94,10 @@
     "defaultMessage": "Total",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "2P5JII": {
+    "defaultMessage": "Disconnect",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "2W0f9h": {
     "defaultMessage": "Bio"
   },
@@ -154,6 +158,10 @@
   "50cquj": {
     "defaultMessage": "No discussion yet",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "5CcjZy": {
+    "defaultMessage": "Do you want to disconnect from {type}?",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "5FO4vn": {
     "defaultMessage": "You do not have permission to perform this operation"
@@ -516,6 +524,10 @@
     "defaultMessage": "This article has been removed from Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
+  "K2/mHF": {
+    "defaultMessage": "Unable to disconnect from {type} temporarily because you do not have any other log in methods (Email/Crypto wallet/Social account).",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "K3r6DQ": {
     "defaultMessage": "Delete"
   },
@@ -797,6 +809,10 @@
   },
   "XVYrS/": {
     "defaultMessage": "No followers yet"
+  },
+  "XYUhx0": {
+    "defaultMessage": "Disconnect from {type}",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "Xd0J7Y": {
     "defaultMessage": "Open Source"
@@ -1272,6 +1288,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "View All"
+  },
+  "wm9xNB": {
+    "defaultMessage": "{type} disconnected",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "x7O1/5": {
     "defaultMessage": "This ID has been taken, please try another one",
