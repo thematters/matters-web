@@ -8,7 +8,6 @@ import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { Card, CardProps, Translate } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
-import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 import {
   UserDigestRichUserPrivateFragment,
   UserDigestRichUserPublicFragment,
@@ -36,8 +35,6 @@ export type UserDigestRichProps = {
 
   hasFollow?: boolean
   hasState?: boolean
-  hasUnblock?: boolean
-  hasDescriptionReplacement?: boolean
   canClamp?: boolean
 } & CardProps &
   AvatarProps
@@ -52,8 +49,6 @@ const Rich = ({
 
   hasFollow = true,
   hasState = true,
-  hasUnblock,
-  hasDescriptionReplacement = false,
   canClamp = false,
 
   ...cardProps
@@ -71,7 +66,7 @@ const Rich = ({
 
   const contentClasses = classNames({
     [styles.content]: true,
-    [styles.hasExtraButton]: hasUnblock || hasFollow || !!extraButton,
+    [styles.hasExtraButton]: hasFollow || !!extraButton,
   })
 
   if (isArchived) {
@@ -96,8 +91,8 @@ const Rich = ({
           </section>
 
           <section className={styles.extraButton}>
-            {hasUnblock && <UnblockUserButton user={user} />}
             {hasFollow && <FollowUserButton user={user} />}
+            {extraButton}
           </section>
         </section>
       </Card>
@@ -136,7 +131,7 @@ const Rich = ({
             {hasState && <FollowUserButton.State user={user} />}
           </header>
 
-          {!hasDescriptionReplacement && user.info.description && (
+          {!descriptionReplacement && user.info.description && (
             <p className={styles.description}>{user.info.description}</p>
           )}
           {descriptionReplacement && (
@@ -145,7 +140,6 @@ const Rich = ({
         </section>
 
         <section className={styles.extraButton}>
-          {hasUnblock && <UnblockUserButton user={user} />}
           {hasFollow && <FollowUserButton user={user} />}
           {extraButton}
         </section>
@@ -167,8 +161,7 @@ const MemoizedRich = React.memo(Rich, ({ user: prevUser }, { user }) => {
   return (
     prevUser.id === user.id &&
     prevUser.isFollowee === user.isFollowee &&
-    prevUser.isFollower === user.isFollower &&
-    prevUser.isBlocked === user.isBlocked
+    prevUser.isFollower === user.isFollower
   )
 }) as MemoizedRichType
 

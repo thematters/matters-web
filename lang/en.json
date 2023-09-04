@@ -381,6 +381,10 @@
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "DqQvtL": {
+    "defaultMessage": "Unblock",
+    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
   "DyuHBH": {
     "defaultMessage": "Unpin from profile",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
@@ -538,6 +542,10 @@
   },
   "KQi/UZ": {
     "defaultMessage": "Archive works"
+  },
+  "KxVlDj": {
+    "defaultMessage": "Settings - Blocked Users",
+    "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
   "L0J61B": {
     "defaultMessage": "Free",
@@ -850,6 +858,10 @@
     "defaultMessage": "commented in your circle broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "YUXRsM": {
+    "defaultMessage": "Blocked Users",
+    "description": "src/views/Me/Settings/Blocked/index.tsx"
+  },
   "YlPCRU": {
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -983,6 +995,10 @@
   },
   "eov+J2": {
     "defaultMessage": "Custom URL Name"
+  },
+  "f0/gC1": {
+    "defaultMessage": "Unblocked",
+    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
   "fWDtpq": {
     "defaultMessage": "Pending",

@@ -381,6 +381,10 @@
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "DqQvtL": {
+    "defaultMessage": "解除封锁",
+    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
   "DyuHBH": {
     "defaultMessage": "取消代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
@@ -538,6 +542,10 @@
   },
   "KQi/UZ": {
     "defaultMessage": "归档作品"
+  },
+  "KxVlDj": {
+    "defaultMessage": "设置 - 已封锁用户",
+    "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
   "L0J61B": {
     "defaultMessage": "免费",
@@ -850,6 +858,10 @@
     "defaultMessage": "在你的围炉中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "YUXRsM": {
+    "defaultMessage": "已封锁用户",
+    "description": "src/views/Me/Settings/Blocked/index.tsx"
+  },
   "YlPCRU": {
     "defaultMessage": "关联了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -983,6 +995,10 @@
   },
   "eov+J2": {
     "defaultMessage": "自定义网址名称"
+  },
+  "f0/gC1": {
+    "defaultMessage": "已解封",
+    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
   "fWDtpq": {
     "defaultMessage": "邀请中",
