@@ -3,7 +3,7 @@ import _pickBy from 'lodash/pickBy'
 import React, { useContext, useEffect, useState } from 'react'
 
 import { MAX_USER_NAME_LENGTH, MIN_USER_NAME_LENGTH } from '~/common/enums'
-import { filterUserName } from '~/common/utils'
+import { normalizeUserName } from '~/common/utils'
 import { Spinner, ViewerContext } from '~/components'
 
 import ConfirmStep from './ConfirmStep'
@@ -24,9 +24,10 @@ const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const [loading, setLoading] = useState(email !== null)
 
   const [index, setIndex] = useState(1)
-  const pureUserName =
-    email && filterUserName(email.split('@')[0].slice(0, MAX_USER_NAME_LENGTH))
-  let initUserName = pureUserName
+  const normalizedUserName =
+    email &&
+    normalizeUserName(email.split('@')[0].slice(0, MAX_USER_NAME_LENGTH))
+  let initUserName = normalizedUserName
   if (initUserName && initUserName.length < MIN_USER_NAME_LENGTH) {
     initUserName = initUserName + String(index).padStart(3, '0')
   }
@@ -49,7 +50,7 @@ const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       })
       if (!!data.user) {
         initUserName =
-          pureUserName.slice(0, MAX_USER_NAME_LENGTH - 3) +
+          normalizedUserName.slice(0, MAX_USER_NAME_LENGTH - 3) +
           String(index + 1).padStart(3, '0')
         setIndex(index + 1)
       } else {

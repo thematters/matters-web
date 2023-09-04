@@ -9,7 +9,7 @@ import {
   MAX_USER_NAME_LENGTH,
   MIN_USER_NAME_LENGTH,
 } from '~/common/enums'
-import { filterUserName, validateUserName } from '~/common/utils'
+import { normalizeUserName, validateUserName } from '~/common/utils'
 import { Dialog, Form, LanguageContext, Spacer } from '~/components'
 
 import Field from '../../Form/Field'
@@ -105,7 +105,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
           return false
         }}
         onKeyUp={() => {
-          const v = filterUserName(values.userName)
+          const v = normalizeUserName(values.userName)
           setFieldValue('userName', v.slice(0, maxUsername))
         }}
         leftButton={<span className={styles.atFlag}>@</span>}
