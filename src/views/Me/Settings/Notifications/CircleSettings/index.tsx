@@ -2,11 +2,21 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { Form, Head, Layout, Spinner, Switch, useMutation } from '~/components'
+import {
+  Form,
+  Head,
+  Layout,
+  Spacer,
+  Spinner,
+  Switch,
+  useMutation,
+} from '~/components'
 import {
   UpdateViewerNotificationsCircleMutation,
   ViewerNotificationsCircleSettingsQuery,
 } from '~/gql/graphql'
+
+import styles from '../styles.module.css'
 
 const VIEWER_NOTIFICATIONS_CIRCLE_SETTINGS = gql`
   query ViewerNotificationsCircleSettings {
@@ -97,7 +107,7 @@ const BaseNotificationSettings = () => {
   }
 
   return (
-    <Layout.Main.Spacing>
+    <>
       {/* My cirlce */}
       <Form.List
         groupName={
@@ -372,7 +382,7 @@ const BaseNotificationSettings = () => {
           }
         />
       </Form.List>
-    </Layout.Main.Spacing>
+    </>
   )
 }
 
@@ -398,7 +408,11 @@ const NotificationsCircleSettings = () => {
 
       <Head title={title} />
 
-      <BaseNotificationSettings />
+      <section className={styles.container}>
+        <BaseNotificationSettings />
+      </section>
+
+      <Spacer size="xloose" />
     </Layout.Main>
   )
 }

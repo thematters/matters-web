@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { Form, Head, Layout } from '~/components'
+import { Form, Head, Layout, Spacer } from '~/components'
 
 import SettingsTabs from '../SettingsTabs'
 import Email from './Email'
@@ -68,6 +68,8 @@ const Settings = () => {
           <Socials />
         </Form.List>
       </section>
+
+      <Spacer size="xloose" />
     </Layout.Main>
   )
 }

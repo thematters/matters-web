@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { Form, Layout, Spinner, Switch, useMutation } from '~/components'
+import { Form, Spinner, Switch, useMutation } from '~/components'
 import {
   UpdateViewerNotificationsGeneralMutation,
   ViewerNotificationsGeneralSettingsQuery,
@@ -92,7 +92,7 @@ const NotificationsGeneralSettings = () => {
     })
   }
   return (
-    <Layout.Main.Spacing>
+    <>
       <Form.List spacingX={0}>
         {/* New followers */}
         <Form.List.Item
@@ -257,7 +257,7 @@ const NotificationsGeneralSettings = () => {
       </Form.List>
 
       <Email toggle={toggle} settings={settings} />
-    </Layout.Main.Spacing>
+    </>
   )
 }
 

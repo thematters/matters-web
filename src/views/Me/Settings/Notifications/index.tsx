@@ -1,10 +1,11 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { Form, Head, Layout } from '~/components'
+import { Form, Head, Layout, Spacer } from '~/components'
 
 import SettingsTabs from '../SettingsTabs'
 import GeneralSettings from './GeneralSettings'
+import styles from './styles.module.css'
 
 const NotificationSettings = () => {
   const intl = useIntl()
@@ -30,7 +31,7 @@ const NotificationSettings = () => {
 
       <SettingsTabs />
 
-      <Layout.Main.Spacing>
+      <section className={styles.container}>
         <GeneralSettings />
 
         {/* Entry: circle notifications */}
@@ -54,7 +55,9 @@ const NotificationSettings = () => {
             href={PATHS.ME_SETTINGS_NOTIFICATIONS_CIRCLE}
           />
         </Form.List>
-      </Layout.Main.Spacing>
+      </section>
+
+      <Spacer size="xloose" />
     </Layout.Main>
   )
 }
