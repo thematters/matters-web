@@ -2,7 +2,7 @@ import { useApolloClient } from '@apollo/react-hooks'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext, useEffect, useState } from 'react'
 
-import { MAX_USER_NAME_LENGTH } from '~/common/enums'
+import { MAX_USER_NAME_LENGTH, MIN_USER_NAME_LENGTH } from '~/common/enums'
 import { filterUserName } from '~/common/utils'
 import { Spinner, ViewerContext } from '~/components'
 
@@ -27,7 +27,7 @@ const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const pureUserName =
     email && filterUserName(email.split('@')[0].slice(0, MAX_USER_NAME_LENGTH))
   let initUserName = pureUserName
-  if (initUserName && initUserName.length < 4) {
+  if (initUserName && initUserName.length < MIN_USER_NAME_LENGTH) {
     initUserName = initUserName + String(index).padStart(3, '0')
   }
 

@@ -44,7 +44,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
         ],
       })
       toast.success({
-        duration: 1000 * 60 * 60 * 24 * 10,
+        duration: Infinity,
         message: (
           <FormattedMessage
             defaultMessage="Matters ID has been set up. More account info can be found in Settings"
