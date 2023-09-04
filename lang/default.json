@@ -89,6 +89,10 @@
     "defaultMessage": "Total",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "2DkkhD": {
+    "defaultMessage": "Settings - Notifications",
+    "description": "src/views/Me/Settings/Notifications/index.tsx"
+  },
   "2W0f9h": {
     "defaultMessage": "Bio"
   },
@@ -100,6 +104,10 @@
   },
   "2slIPX": {
     "defaultMessage": "Likes"
+  },
+  "2vpUYs": {
+    "defaultMessage": "New replies to discussions",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "32bml8": {
     "defaultMessage": "Following",
@@ -260,6 +268,14 @@
     "defaultMessage": "Discussion sent",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
+  "A0KB7s": {
+    "defaultMessage": "New replies to broadcast",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "A0jNj2": {
+    "defaultMessage": "Matters daily report",
+    "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
   "A3g33H": {
     "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
   },
@@ -307,6 +323,10 @@
   "BHFHeY": {
     "defaultMessage": "commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "BMGZE2": {
+    "defaultMessage": "Mention me",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "BY343C": {
     "defaultMessage": "Change"
@@ -423,6 +443,10 @@
   "GcvLBC": {
     "defaultMessage": "Understood"
   },
+  "GhogWq": {
+    "defaultMessage": "Subscription cancellations",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
   "Gt7K6r": {
     "defaultMessage": "Wallet address",
     "description": "src/views/Me/Settings/Settings/Wallet/index.tsx"
@@ -480,6 +504,10 @@
   "JaLEXz": {
     "defaultMessage": "Enter Circle",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
+  "JkWLg6": {
+    "defaultMessage": "New followers",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "JpS59y": {
     "defaultMessage": "Accepted",
@@ -548,6 +576,14 @@
     "defaultMessage": "followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "Mn7GEf": {
+    "defaultMessage": "Selected activities related to you in the past 24 hours",
+    "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
+  "MoyOR+": {
+    "defaultMessage": "Settings - Circle notifications",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
   "N2IrpM": {
     "defaultMessage": "Confirm"
   },
@@ -557,6 +593,10 @@
   "NCBtyI": {
     "defaultMessage": "Supports",
     "description": "src/views/Me/Transactions/index.tsx"
+  },
+  "NEKHMm": {
+    "defaultMessage": "Email",
+    "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "NONfAh": {
     "defaultMessage": "Douban",
@@ -584,6 +624,10 @@
   },
   "OKhRC6": {
     "defaultMessage": "Share"
+  },
+  "Opaa0R": {
+    "defaultMessage": "New likes",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "Password",
@@ -622,6 +666,10 @@
   "RNKSCj": {
     "defaultMessage": "Archived",
     "description": "src/components/ArticleDigest/Archive/index.tsx"
+  },
+  "ROPCC0": {
+    "defaultMessage": "Please add email first",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
   "RxiHr/": {
     "defaultMessage": "friends have not accepted your invitations.",
@@ -738,6 +786,10 @@
   "WSUAwk": {
     "defaultMessage": "Add to Featured",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "Wg0ZvI": {
+    "defaultMessage": "Articles has been bookmarked",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "WpvsPu": {
     "defaultMessage": "Subscribe",
@@ -872,12 +924,24 @@
     "defaultMessage": "You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
+  "ctl5tq": {
+    "defaultMessage": "New articles",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
   "cyR7Kh": {
     "defaultMessage": "Back"
+  },
+  "d1mBsg": {
+    "defaultMessage": "Following circles",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "d4waan": {
     "defaultMessage": "Income",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "dVbKzB": {
+    "defaultMessage": "Comments and replies",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "deEeEI": {
     "defaultMessage": "Register"
@@ -922,9 +986,17 @@
     "defaultMessage": "Your work {articleTitle} has been republished to decentralized network",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
+  "gW/KWu": {
+    "defaultMessage": "Comments has been pinned",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "h+punE": {
     "defaultMessage": "Updated {date}",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "h7sMQs": {
+    "defaultMessage": "New followers",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "h9CG9E": {
     "defaultMessage": "{commentType} has been deleted",
@@ -984,12 +1056,24 @@
   "k97/u7": {
     "defaultMessage": "Add Articles"
   },
+  "kPylKK": {
+    "defaultMessage": "Circle",
+    "description": "src/views/Me/Settings/Notifications/index.tsx"
+  },
   "kc79d3": {
     "defaultMessage": "Topics"
+  },
+  "kkF6ZR": {
+    "defaultMessage": "Settings",
+    "description": "src/views/Me/Settings/Settings/index.tsx"
   },
   "kkZioy": {
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "l02bPO": {
+    "defaultMessage": "Articles has been collected",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "lIir/P": {
     "defaultMessage": "I see"
@@ -1011,6 +1095,10 @@
   },
   "m4GG4b": {
     "defaultMessage": "Delete collection"
+  },
+  "m4KtjK": {
+    "defaultMessage": "New subscribers",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "mCAIcg": {
     "defaultMessage": "Hottest",
@@ -1040,6 +1128,10 @@
   },
   "ml3SZN": {
     "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
+  },
+  "mp9SBo": {
+    "defaultMessage": "Circle notifications",
+    "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "n2Sc6g": {
     "defaultMessage": "My profile",
@@ -1115,6 +1207,10 @@
   "rLlTQ9": {
     "defaultMessage": "Tag Name"
   },
+  "rSVVMb": {
+    "defaultMessage": "Settings - Account",
+    "description": "src/views/Me/Settings/Settings/index.tsx"
+  },
   "rXnmeE": {
     "defaultMessage": "Confirm and Send"
   },
@@ -1159,6 +1255,10 @@
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
+  "u+cgOo": {
+    "defaultMessage": "My circle",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
   "u5aHb4": {
     "defaultMessage": "Copy Link"
   },
@@ -1199,6 +1299,10 @@
     "defaultMessage": "supported",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
+  "viMrzF": {
+    "defaultMessage": "New broadcasts",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
   "wCgTu5": {
     "defaultMessage": "Comments"
   },
@@ -1234,6 +1338,10 @@
   "xWZr13": {
     "defaultMessage": "{follower, plural, =1 {follower} other {followers}}",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "xafreT": {
+    "defaultMessage": "New discussions",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "xkr+zo": {
     "defaultMessage": "Terms"
@@ -1271,6 +1379,10 @@
   "yoRaUc": {
     "defaultMessage": "Refund",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "z+a1SW": {
+    "defaultMessage": "Settings",
+    "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "zAK5G+": {
     "defaultMessage": "The login link has been sent to {email}",

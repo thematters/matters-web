@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import {
   Button,
+  ButtonProps,
   Form,
   IconClose20,
   IconFacebook22,
@@ -25,6 +26,15 @@ const Socials = () => {
     (s) => s.type === SocialAccountType.Twitter
   )?.userName
 
+  const buttonProps: ButtonProps = {
+    size: [null, '1.5rem'],
+    spacing: [0, 'tight'],
+    textColor: 'green',
+    borderColor: 'green',
+    textActiveColor: 'greenDark',
+    borderActiveColor: 'greenDark',
+  }
+
   return (
     <>
       {/* Google */}
@@ -42,10 +52,7 @@ const Socials = () => {
         right={
           googleId ? undefined : (
             <Button
-              size={[null, '1.5rem']}
-              spacing={[0, 'tight']}
-              textColor="green"
-              borderColor="green"
+              {...buttonProps}
               onClick={() => {}} // TODO
             >
               <FormattedMessage defaultMessage="Connect" />
@@ -69,10 +76,7 @@ const Socials = () => {
         right={
           twitterId ? undefined : (
             <Button
-              size={[null, '1.5rem']}
-              spacing={[0, 'tight']}
-              textColor="green"
-              borderColor="green"
+              {...buttonProps}
               onClick={() => {}} // TODO
             >
               <FormattedMessage defaultMessage="Connect" />
@@ -96,10 +100,7 @@ const Socials = () => {
         right={
           facebookId ? undefined : (
             <Button
-              size={[null, '1.5rem']}
-              spacing={[0, 'tight']}
-              textColor="green"
-              borderColor="green"
+              {...buttonProps}
               onClick={() => {}} // TODO
             >
               <FormattedMessage defaultMessage="Connect" />

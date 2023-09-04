@@ -1,23 +1,38 @@
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { Form, Head, Layout } from '~/components'
 
+import SettingsTabs from '../SettingsTabs'
 import Email from './Email'
 import MattersID from './MattersID'
 import MyProfile from './MyProfile'
 import Password from './Password'
-import SettingsTabs from './SettingsTabs'
 import Socials from './Socials'
 import styles from './styles.module.css'
 import Wallet from './Wallet'
 
 const Settings = () => {
+  const intl = useIntl()
+  const title = intl.formatMessage({
+    defaultMessage: 'Settings - Account',
+    description: 'src/views/Me/Settings/Settings/index.tsx',
+  })
+
   return (
     <Layout.Main>
-      <Layout.Header left={<Layout.Header.Title id="settings" />} />
+      <Layout.Header
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage
+              defaultMessage="Settings"
+              description="src/views/Me/Settings/Settings/index.tsx"
+            />
+          </Layout.Header.Title>
+        }
+      />
 
-      <Head title={{ id: 'settings' }} />
+      <Head title={title} />
 
       <SettingsTabs />
 

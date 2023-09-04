@@ -7,7 +7,7 @@ import styles from './styles.module.css'
 
 type SwitchProps = {
   name: string
-  label: string
+  label: string | React.ReactNode
   onChange: () => void
   checked: boolean
   loading?: boolean

@@ -51,7 +51,6 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_CONNECT_WALLET'
   | 'ME_SETTINGS_OTHERS'
   | 'ME_DRAFT_DETAIL'
-  | 'ME_SETTINGS_NOTIFICATIONS_GENERAL' // TODO: remove
   | 'ME_SETTINGS_NOTIFICATIONS_CIRCLE'
   // Form
   | 'LOGIN'
@@ -157,10 +156,6 @@ export const ROUTES: {
     pathname: '/me/settings/change-password',
   },
   { key: 'ME_SETTINGS_NOTIFICATIONS', pathname: '/me/settings/notifications' },
-  {
-    key: 'ME_SETTINGS_NOTIFICATIONS_GENERAL',
-    pathname: '/me/settings/notifications/general',
-  },
   {
     key: 'ME_SETTINGS_NOTIFICATIONS_CIRCLE',
     pathname: '/me/settings/notifications/circle',

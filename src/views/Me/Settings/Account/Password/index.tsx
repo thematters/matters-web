@@ -1,12 +1,21 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Button, Form, ViewerContext } from '~/components'
+import { Button, ButtonProps, Form, ViewerContext } from '~/components'
 
 const Password = () => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
   const hasPassword = !!viewer.status?.hasEmailLoginPassword
+
+  const buttonProps: ButtonProps = {
+    size: [null, '1.5rem'],
+    spacing: [0, 'tight'],
+    textColor: 'green',
+    borderColor: 'green',
+    textActiveColor: 'greenDark',
+    borderActiveColor: 'greenDark',
+  }
 
   return (
     <Form.List.Item
@@ -33,10 +42,7 @@ const Password = () => {
       right={
         hasEmail && !hasPassword ? (
           <Button
-            size={[null, '1.5rem']}
-            spacing={[0, 'tight']}
-            textColor="green"
-            borderColor="green"
+            {...buttonProps}
             onClick={() => {}} // TODO
           >
             <FormattedMessage defaultMessage="Connect" />
