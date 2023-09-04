@@ -2,6 +2,7 @@
 export * from './ENSDialog'
 export * from './LikeCoinDialog'
 export * from './RssFeedDialog'
+export * from './SetUserNameDialog'
 
 // Article
 export * from './AppreciatorsDialog'
