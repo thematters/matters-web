@@ -26,7 +26,9 @@ const SettingsBlocked = () => {
 
       <Head title={title} />
 
-      <BaseSettingsBlocked />
+      <Layout.Main.Spacing hasVertical={false}>
+        <BaseSettingsBlocked />
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }
