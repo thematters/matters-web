@@ -48,7 +48,7 @@
     &:hover,
     &:focus {
       & :global(.icon) {
-        color: var(--color-black);
+        color: var(--color-matters-green);
       }
     }
   }
