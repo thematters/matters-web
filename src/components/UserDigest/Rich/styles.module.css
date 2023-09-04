@@ -2,13 +2,6 @@
   @mixin flex-center-start;
 
   position: relative;
-
-  &:not(.disabled) .name {
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-  }
 }
 
 .avatar {
@@ -42,6 +35,7 @@
 
 .name {
   @mixin line-clamp;
+  @mixin fix-cropped-letters;
 
   font-weight: var(--font-weight-medium);
 }

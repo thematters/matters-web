@@ -1,6 +1,5 @@
 {
   "+7SAix": {
-    "description": "",
     "defaultMessage": "Must be between 2-12 characters long."
   },
   "+S8mxW": {
@@ -23,6 +22,10 @@
   "/3kw6k": {
     "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "/BQWEh": {
+    "defaultMessage": "Last 1 month",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
@@ -55,6 +58,10 @@
   "0ThOw1": {
     "defaultMessage": "Create collection",
     "description": "src/views/User/Collections/UserCollections.tsx"
+  },
+  "0iyH+q": {
+    "defaultMessage": "Last 7 days",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "0qagOO": {
     "defaultMessage": "Circle Subscription",
@@ -263,8 +270,7 @@
     "defaultMessage": "Bug Report"
   },
   "9J0iCw": {
-    "defaultMessage": "Deleted user",
-    "description": "src/components/UserProfile/index.tsx"
+    "defaultMessage": "Deleted user"
   },
   "9mfw9c": {
     "defaultMessage": "Wallet address",
@@ -276,10 +282,6 @@
   },
   "A3g33H": {
     "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
-  },
-  "A3rLZt": {
-    "defaultMessage": "Last {months} months",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "A41QIy": {
     "defaultMessage": "Enter Password"
@@ -421,7 +423,6 @@
     "defaultMessage": "Matters Community"
   },
   "FmWYRt": {
-    "description": "",
     "defaultMessage": "Free trial period"
   },
   "Ft76YC": {
@@ -459,8 +460,8 @@
     "description": "src/views/Me/Settings/Settings/Wallet/index.tsx"
   },
   "GugBCe": {
-    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx",
-    "defaultMessage": "New Followers This Month"
+    "defaultMessage": "New Followers This Month",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "H0JBH6": {
     "defaultMessage": "Log Out"
@@ -517,8 +518,8 @@
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
   "JpS59y": {
-    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx",
-    "defaultMessage": "Accepted"
+    "defaultMessage": "Accepted",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
   "Js/Fij": {
     "defaultMessage": "This article has been removed from Trending",
@@ -532,8 +533,8 @@
     "defaultMessage": "Delete"
   },
   "KLQ1/z": {
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx",
-    "defaultMessage": "Circle successfully created"
+    "defaultMessage": "Circle successfully created",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "KMcrz8": {
     "defaultMessage": "Maintain Tag",
@@ -543,8 +544,8 @@
     "defaultMessage": "Archive works"
   },
   "L0J61B": {
-    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
-    "defaultMessage": "Free"
+    "defaultMessage": "Free",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "L34EMG": {
     "defaultMessage": "No account?",
@@ -554,8 +555,8 @@
     "defaultMessage": "New Collection"
   },
   "L4NXXh": {
-    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx",
-    "defaultMessage": "Total"
+    "defaultMessage": "Total",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "L7Si5/": {
     "defaultMessage": "Manage Community",
@@ -565,8 +566,8 @@
     "defaultMessage": "Followed"
   },
   "LOefol": {
-    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx",
-    "defaultMessage": "Paywalled"
+    "defaultMessage": "Paywalled",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
   "LQxY1o": {
     "defaultMessage": "{articleCount} Articles",
@@ -588,8 +589,8 @@
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "MDNaxs": {
-    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx",
-    "defaultMessage": "followers"
+    "defaultMessage": "followers",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "N2IrpM": {
     "defaultMessage": "Confirm"
@@ -614,16 +615,16 @@
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
   "O0QB1v": {
-    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx",
-    "defaultMessage": "Friends will receive free trial invitations to Circle. Set up your invitations now!"
+    "defaultMessage": "Friends will receive free trial invitations to Circle. Set up your invitations now!",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "O2Nqk8": {
     "defaultMessage": "Forgot password?",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
   "OIj8pQ": {
-    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx",
-    "defaultMessage": "Invitation Sent"
+    "defaultMessage": "Invitation Sent",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
   "OKhRC6": {
     "defaultMessage": "Share"
@@ -631,10 +632,6 @@
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
-  },
-  "Po+kJe": {
-    "defaultMessage": "Last {months} month",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "Pp/0po": {
     "defaultMessage": "Shuffle"
@@ -647,16 +644,16 @@
     "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "QUqfbW": {
-    "description": "src/components/Forms/CreateCircleForm/Profile.tsx",
-    "defaultMessage": "Describe more about your Circle"
+    "defaultMessage": "Describe more about your Circle",
+    "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "QV19cI": {
     "defaultMessage": "Failed to republish article",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
   "QZXKhG": {
-    "description": "src/components/Forms/CreateCircleForm/Init.tsx",
-    "defaultMessage": "Set the Circle URL (cannot be modified after creation)"
+    "defaultMessage": "Set the Circle URL (cannot be modified after creation)",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
   "R7yHDl": {
     "defaultMessage": "Circle Revenue",
@@ -671,23 +668,22 @@
     "description": "src/components/ArticleDigest/Archive/index.tsx"
   },
   "RxiHr/": {
-    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx",
-    "defaultMessage": "friends have not accepted your invitations."
+    "defaultMessage": "friends have not accepted your invitations.",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
   },
   "S8PcQf": {
     "defaultMessage": "Unpin from profile",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
   "SNh1n0": {
-    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
-    "defaultMessage": "View Members"
+    "defaultMessage": "View Members",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "SdXoXI": {
-    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx",
-    "defaultMessage": "Invitations have been sent. You can check invitation status on the invitation management page."
+    "defaultMessage": "Invitations have been sent. You can check invitation status on the invitation management page.",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
   "Seanpx": {
-    "description": "",
     "defaultMessage": "Required"
   },
   "Sep44m": {
@@ -705,8 +701,8 @@
     "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?"
   },
   "TSDiqB": {
-    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
-    "defaultMessage": "Subscribers"
+    "defaultMessage": "Subscribers",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
@@ -763,11 +759,15 @@
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "VwuiYK": {
-    "description": "src/components/Forms/CreateCircleForm/Init.tsx",
-    "defaultMessage": "This URL name has already been used, try another one"
+    "defaultMessage": "This URL name has already been used, try another one",
+    "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
   "VzzYJk": {
     "defaultMessage": "Create"
+  },
+  "W0sZaX": {
+    "defaultMessage": "Last 3 months",
+    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "W8OZ3G": {
     "defaultMessage": "Confirm Deletion"
@@ -780,12 +780,12 @@
     "defaultMessage": "Edit collection"
   },
   "WSUAwk": {
-    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx",
-    "defaultMessage": "Add to Featured"
+    "defaultMessage": "Add to Featured",
+    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "WpvsPu": {
-    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
-    "defaultMessage": "Subscribe"
+    "defaultMessage": "Subscribe",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "WuvE8X": {
     "defaultMessage": "Followers of {circleName}",
@@ -800,8 +800,8 @@
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "XHMco9": {
-    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
-    "defaultMessage": "subscribers"
+    "defaultMessage": "subscribers",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "XQTBu6": {
     "defaultMessage": "mentioned you in your circle broadcast comment",
@@ -827,8 +827,8 @@
     "defaultMessage": "Pinned to profile"
   },
   "Xz/AHp": {
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx",
-    "defaultMessage": "broadcast and mentioned you"
+    "defaultMessage": "broadcast and mentioned you",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "Y+spJC": {
     "defaultMessage": "commented in your circle broadcast",
@@ -839,11 +839,11 @@
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
   "ZAs170": {
-    "description": "src/views/Circle/Settings/index.tsx",
-    "defaultMessage": "Profile"
+    "defaultMessage": "Profile",
+    "description": "src/views/Circle/Settings/index.tsx"
   },
   "ZUPQzl": {
-    "defaultMessage": "",
+    "defaultMessage": " ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
@@ -862,7 +862,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
   "aaUBvF": {
-    "defaultMessage": "",
+    "defaultMessage": "comment_circle",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "aacIz8": {
@@ -877,20 +877,16 @@
     "description": "src/components/Transaction/State/index.tsx"
   },
   "b+LSgI": {
-    "defaultMessage": " replied to your discussion on ",
+    "defaultMessage": "replied to your discussion on",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  },
-  "b3onWZ": {
-    "defaultMessage": "Last {days} days",
-    "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
   "b6zdPs": {
     "defaultMessage": "{count} Articles",
     "description": "src/components/Book/index.tsx"
   },
   "b8ogKp": {
-    "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx",
-    "defaultMessage": "Add Invitation"
+    "defaultMessage": "Add Invitation",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
   },
   "bBYO6x": {
     "defaultMessage": "Unblock",
@@ -907,7 +903,6 @@
     "defaultMessage": "Discover"
   },
   "cd/II9": {
-    "description": "",
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
   },
   "cf37Zy": {
@@ -929,8 +924,8 @@
     "defaultMessage": "Back"
   },
   "d4waan": {
-    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx",
-    "defaultMessage": "Income"
+    "defaultMessage": "Income",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "deEeEI": {
     "defaultMessage": "Register"
@@ -955,12 +950,11 @@
     "defaultMessage": "My Page"
   },
   "eov+J2": {
-    "description": "",
     "defaultMessage": "Custom URL Name"
   },
   "fWDtpq": {
-    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx",
-    "defaultMessage": "Pending"
+    "defaultMessage": "Pending",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
   "fsB/4p": {
     "defaultMessage": "Saved"
@@ -1054,12 +1048,11 @@
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "lIir/P": {
-    "description": "",
     "defaultMessage": "I see"
   },
   "lNjDPr": {
-    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx",
-    "defaultMessage": "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'."
+    "defaultMessage": "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'.",
+    "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
   },
   "lZukEr": {
     "defaultMessage": "commented",
@@ -1076,8 +1069,8 @@
     "defaultMessage": "Delete collection"
   },
   "mCAIcg": {
-    "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx",
-    "defaultMessage": "Hottest"
+    "defaultMessage": "Hottest",
+    "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
   "mPe6DK": {
     "defaultMessage": "subscribed your circle",
@@ -1149,7 +1142,6 @@
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
   "q9oMKE": {
-    "description": "",
     "defaultMessage": "Circle Name"
   },
   "qNuRmA": {
@@ -1180,7 +1172,6 @@
     "defaultMessage": "Tag Name"
   },
   "rXnmeE": {
-    "description": "",
     "defaultMessage": "Confirm and Send"
   },
   "rbrahO": {
@@ -1198,8 +1189,8 @@
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "sPgUkN": {
-    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx",
-    "defaultMessage": "This Month"
+    "defaultMessage": "This Month",
+    "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "skbUBl": {
     "defaultMessage": "Log in",
@@ -1221,8 +1212,8 @@
     "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "tzq2+W": {
-    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx",
-    "defaultMessage": "Send"
+    "defaultMessage": "Send",
+    "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "u5aHb4": {
     "defaultMessage": "Copy Link"
@@ -1279,7 +1270,6 @@
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
   "wXzTZ0": {
-    "description": "",
     "defaultMessage": "Enter the name of your Circle"
   },
   "wbIHgJ": {
@@ -1316,8 +1306,8 @@
     "defaultMessage": "Search"
   },
   "y0b6Kp": {
-    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
-    "defaultMessage": "Pay"
+    "defaultMessage": "Pay",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
@@ -1335,12 +1325,12 @@
     "description": "src/components/Transaction/index.tsx"
   },
   "ySGgTo": {
-    "description": "src/views/TagDetail/DropdownActions/index.tsx",
-    "defaultMessage": "Add Articles into Featured"
+    "defaultMessage": "Add Articles into Featured",
+    "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "yZfKI4": {
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx",
-    "defaultMessage": "discussion and mentioned you"
+    "defaultMessage": "discussion and mentioned you",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "yoRaUc": {
     "defaultMessage": "Refund",
@@ -1373,7 +1363,7 @@
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "zxy15q": {
-    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx",
-    "defaultMessage": "{subscriber, plural, =1 {subscriber} other {subscribers}}"
+    "defaultMessage": "{subscriber, plural, =1 {subscriber} other {subscribers}}",
+    "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }

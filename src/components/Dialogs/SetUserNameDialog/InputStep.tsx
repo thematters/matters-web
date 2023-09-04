@@ -4,8 +4,12 @@ import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { KEYVALUE, MAX_USER_NAME_LENGTH } from '~/common/enums'
-import { filterUserName, validateUserName } from '~/common/utils'
+import {
+  KEYVALUE,
+  MAX_USER_NAME_LENGTH,
+  MIN_USER_NAME_LENGTH,
+} from '~/common/enums'
+import { normalizeUserName, validateUserName } from '~/common/utils'
 import { Dialog, Form, LanguageContext, Spacer } from '~/components'
 
 import Field from '../../Form/Field'
@@ -101,7 +105,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
           return false
         }}
         onKeyUp={() => {
-          const v = filterUserName(values.userName)
+          const v = normalizeUserName(values.userName)
           setFieldValue('userName', v.slice(0, maxUsername))
         }}
         leftButton={<span className={styles.atFlag}>@</span>}
@@ -127,7 +131,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={isSubmitting || values.userName.length < 4}
+      disabled={isSubmitting || values.userName.length < MIN_USER_NAME_LENGTH}
       text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
@@ -162,7 +166,9 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
               type="submit"
               color="green"
               form={formId}
-              disabled={isSubmitting || values.userName.length < 4}
+              disabled={
+                isSubmitting || values.userName.length < MIN_USER_NAME_LENGTH
+              }
               text={<FormattedMessage defaultMessage="Confirm" />}
               loading={isSubmitting}
             />

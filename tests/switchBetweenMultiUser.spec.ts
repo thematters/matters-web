@@ -17,17 +17,27 @@ test.describe('Switch between multiple users', () => {
   authedTest('Same context', async ({ alicePage: page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only!')
     await pageGoto(page, '/')
-    const firstArticleLink = (await page
-      .getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
-      .first()
-      .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
-      .getAttribute('href')) as string
+    let i = 0
+    let articleLink
+    while (true) {
+      articleLink = (await page
+        .getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
+        .nth(i)
+        .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
+        .getAttribute('href')) as string
+      expect(articleLink).toBeTruthy()
 
-    expect(firstArticleLink).toBeTruthy()
+      await pageGoto(page, articleLink)
+      await sleep(3 * 1000)
+      // Confirm that the comment area is clickable
+      const articleDetail = new ArticleDetailPage(page, isMobile)
+      if (await articleDetail.toolbarCommentButton.isEnabled()) {
+        break
+      }
+      i += 1
+      await page.goBack()
+    }
 
-    await pageGoto(page, firstArticleLink)
-
-    await sleep(3 * 1000)
     // [Alice] Logout
     await logout({ page })
 
@@ -36,7 +46,7 @@ test.describe('Switch between multiple users', () => {
       email: users.bob.email,
       password: users.bob.password,
       page,
-      target: firstArticleLink,
+      target: articleLink,
     })
     await page.waitForLoadState('networkidle')
 
@@ -77,18 +87,34 @@ test.describe('Switch between multiple users', () => {
     const bobPage = await bobContext.newPage()
 
     await pageGoto(alicePage, '/')
-    const firstArticleLink = (await alicePage
-      .getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
-      .first()
-      .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
-      .getAttribute('href')) as string
+    let i = 0
+    let articleLink
+    while (true) {
+      articleLink = (await alicePage
+        .getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
+        .nth(i)
+        .getByTestId(TEST_ID.DIGEST_ARTICLE_TITLE)
+        .getAttribute('href')) as string
+      expect(articleLink).toBeTruthy()
+
+      await pageGoto(alicePage, articleLink)
+      await sleep(3 * 1000)
+      // Confirm that the comment area is clickable
+      const articleDetail = new ArticleDetailPage(alicePage, isMobile)
+      if (await articleDetail.toolbarCommentButton.isEnabled()) {
+        await pageGoto(alicePage, '/')
+        break
+      }
+      i += 1
+      await alicePage.goBack()
+    }
 
     // [Alice] login
     await login({
       email: users.alice.email,
       password: users.alice.password,
       page: alicePage,
-      target: firstArticleLink,
+      target: articleLink,
     })
 
     await sleep(3 * 1000)
@@ -100,7 +126,7 @@ test.describe('Switch between multiple users', () => {
       email: users.bob.email,
       password: users.bob.password,
       page: bobPage,
-      target: firstArticleLink,
+      target: articleLink,
     })
     await bobPage.waitForLoadState('networkidle')
 

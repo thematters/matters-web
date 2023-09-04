@@ -11,6 +11,7 @@ import { WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   Dialog,
+  ReCaptchaProvider,
   Spinner,
   useDialogSwitch,
   useEventListener,
@@ -97,16 +98,18 @@ const BaseUniversalAuthDialog = () => {
 
       {/* Wallet */}
       {currStep === 'wallet-connect' && (
-        <DynamicWalletAuthFormConnect
-          purpose="dialog"
-          walletType={walletType}
-          closeDialog={closeDialog}
-          back={() => forward('select-login-method')}
-          gotoSignInTab={() => {
-            setAuthTypeFeed('normal')
-            forward('select-login-method')
-          }}
-        />
+        <ReCaptchaProvider>
+          <DynamicWalletAuthFormConnect
+            purpose="dialog"
+            walletType={walletType}
+            closeDialog={closeDialog}
+            back={() => forward('select-login-method')}
+            gotoSignInTab={() => {
+              setAuthTypeFeed('normal')
+              forward('select-login-method')
+            }}
+          />
+        </ReCaptchaProvider>
       )}
 
       {/* Email */}
@@ -119,19 +122,21 @@ const BaseUniversalAuthDialog = () => {
         />
       )}
       {currStep === 'email-sign-up-init' && (
-        <DynamicEmailSignUpFormInit
-          submitCallback={(email: string) => {
-            setEmail(email)
-            forward('email-verification-sent')
-          }}
-          gotoWalletConnect={(type) => {
-            setWalletType(type)
-            forward('wallet-connect')
-          }}
-          gotoEmailLogin={() => forward('email-login')}
-          closeDialog={closeDialog}
-          back={() => forward('select-login-method')}
-        />
+        <ReCaptchaProvider>
+          <DynamicEmailSignUpFormInit
+            submitCallback={(email: string) => {
+              setEmail(email)
+              forward('email-verification-sent')
+            }}
+            gotoWalletConnect={(type) => {
+              setWalletType(type)
+              forward('wallet-connect')
+            }}
+            gotoEmailLogin={() => forward('email-login')}
+            closeDialog={closeDialog}
+            back={() => forward('select-login-method')}
+          />
+        </ReCaptchaProvider>
       )}
       {currStep === 'email-verification-sent' && (
         <VerificationLinkSent

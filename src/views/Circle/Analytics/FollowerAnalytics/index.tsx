@@ -58,8 +58,7 @@ const Content = () => {
           <InfoTiles.Tile
             title={
               <FormattedMessage
-                defaultMessage="followers_empty
-              "
+                defaultMessage="followers_empty"
                 description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
               />
             }

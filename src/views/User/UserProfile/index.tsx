@@ -139,7 +139,13 @@ export const UserProfile = () => {
             {isMe && (
               <EditProfileDialog user={user}>
                 {({ openDialog: openEditProfileDialog }) => (
-                  <section onClick={openEditProfileDialog}>{avatar}</section>
+                  <section
+                    className={styles.avatarBtn}
+                    role="button"
+                    onClick={openEditProfileDialog}
+                  >
+                    {avatar}
+                  </section>
                 )}
               </EditProfileDialog>
             )}

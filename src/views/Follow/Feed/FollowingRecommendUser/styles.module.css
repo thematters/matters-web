@@ -1,15 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-
-  &:not(.disabled) .wrap {
-    & .name {
-      &:hover,
-      &:focus {
-        text-decoration: underline;
-      }
-    }
-  }
 }
 
 .head {
