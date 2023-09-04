@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Dropdown,
@@ -23,7 +24,7 @@ const SET_CURRENCY = gql`
   }
 `
 
-const CurrencyConvertor = () => {
+const Currency = () => {
   const viewer = useContext(ViewerContext)
   const currency = viewer.settings.currency
   const [setCurrency] = useMutation<SetCurrencyMutation>(SET_CURRENCY)
@@ -80,15 +81,16 @@ const CurrencyConvertor = () => {
     </Menu>
   )
 
-  const Title = () => {
-    return <Translate zh_hant="匯率幣別" zh_hans="汇率币别" en="Currency" />
-  }
-
   return (
     <Dropdown content={<Content />}>
       {({ openDropdown, ref }) => (
         <Form.List.Item
-          title={<Title />}
+          title={
+            <FormattedMessage
+              defaultMessage="Currency"
+              description="src/views/Me/Settings/Misc/Currency/index.tsx"
+            />
+          }
           onClick={openDropdown}
           rightText={currency}
           ariaHasPopup="listbox"
@@ -100,4 +102,4 @@ const CurrencyConvertor = () => {
   )
 }
 
-export default CurrencyConvertor
+export default Currency

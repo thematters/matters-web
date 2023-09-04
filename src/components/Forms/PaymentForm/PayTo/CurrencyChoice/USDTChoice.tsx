@@ -140,7 +140,7 @@ const USDTChoice: React.FC<FormProps> = ({
           size={[null, '1.5rem']}
           borderColor="green"
           borderRadius="5rem"
-          href={PATHS.ME_SETTINGS_CONNECT_WALLET}
+          href={PATHS.ME_SETTINGS}
         >
           <TextIcon color="green" size="xs">
             <Translate

@@ -4,8 +4,8 @@ import { PATHS } from '~/common/enums'
 import { Form, Head, Layout, Spacer } from '~/components'
 
 import SettingsTabs from '../SettingsTabs'
+import styles from '../styles.module.css'
 import GeneralSettings from './GeneralSettings'
-import styles from './styles.module.css'
 
 const NotificationSettings = () => {
   const intl = useIntl()

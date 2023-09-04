@@ -10,7 +10,7 @@ const SettingsTabs: React.FC = () => {
   const isNotifications =
     isInPath('ME_SETTINGS_NOTIFICATIONS') ||
     isInPath('ME_SETTINGS_NOTIFICATIONS_CIRCLE')
-  const isOthers = isInPath('ME_SETTINGS_OTHERS')
+  const isOthers = isInPath('ME_SETTINGS_MISC')
 
   return (
     <Tabs>
@@ -31,7 +31,7 @@ const SettingsTabs: React.FC = () => {
         />
       </Tabs.Tab>
 
-      <Tabs.Tab href={PATHS.ME_SETTINGS_OTHERS} selected={isOthers}>
+      <Tabs.Tab href={PATHS.ME_SETTINGS_MISC} selected={isOthers}>
         <FormattedMessage
           defaultMessage="Misc"
           description="src/views/Me/Settings/Settings/SettingsTabs/index.tsx"

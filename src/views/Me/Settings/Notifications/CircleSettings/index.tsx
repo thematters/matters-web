@@ -16,7 +16,7 @@ import {
   ViewerNotificationsCircleSettingsQuery,
 } from '~/gql/graphql'
 
-import styles from '../styles.module.css'
+import styles from '../../styles.module.css'
 
 const VIEWER_NOTIFICATIONS_CIRCLE_SETTINGS = gql`
   query ViewerNotificationsCircleSettings {

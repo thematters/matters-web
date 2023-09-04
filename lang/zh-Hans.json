@@ -246,6 +246,10 @@
   "8cv9D4": {
     "defaultMessage": "下一步"
   },
+  "8qGjpr": {
+    "defaultMessage": "设置",
+    "description": "src/views/Me/Settings/Misc/index.tsx"
+  },
   "8w3GEA": {
     "defaultMessage": "在作品 {article} 中提及你",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
@@ -337,6 +341,10 @@
   "Bjdw71": {
     "defaultMessage": "目前总追踪人数",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "BnMru1": {
+    "defaultMessage": "语言",
+    "description": "src/views/Me/Settings/Misc/Language.tsx"
   },
   "C8GQaD": {
     "defaultMessage": "{date}更新",
@@ -567,6 +575,10 @@
   "Lc/azT": {
     "defaultMessage": "IPNS 订阅",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "Lp6CiR": {
+    "defaultMessage": "设置 - 其他",
+    "description": "src/views/Me/Settings/Misc/index.tsx"
   },
   "LqxIEU": {
     "defaultMessage": "钱包地址将作为身份识别之一在个人页公开显示。",
@@ -906,6 +918,10 @@
   "cE4Hfw": {
     "defaultMessage": "发现"
   },
+  "cQYXjl": {
+    "defaultMessage": "汇率币别",
+    "description": "src/views/Me/Settings/Misc/Currency/index.tsx"
+  },
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {篇文章} other {篇文章}}"
   },
@@ -1002,6 +1018,10 @@
     "defaultMessage": "{commentType}已刪除",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
+  "hASeng": {
+    "defaultMessage": "已封锁用户",
+    "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
+  },
   "hYG5fb": {
     "defaultMessage": "人追踪",
     "description": "src/views/TagDetail/Followers/index.tsx"
@@ -1059,6 +1079,10 @@
   "kPylKK": {
     "defaultMessage": "围炉",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
+  },
+  "kS3vTS": {
+    "defaultMessage": "Liker ID",
+    "description": "src/views/Me/Settings/Misc/LikerID.tsx"
   },
   "kc79d3": {
     "defaultMessage": "找你想看的"

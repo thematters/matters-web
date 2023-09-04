@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { LANG_TEXT_MAP } from '~/common/enums'
 import {
@@ -6,19 +7,23 @@ import {
   Form,
   LanguageContext,
   LanguageSwitchContent,
-  Translate,
 } from '~/components'
 
-const SwitchLanguage = () => {
+const Language = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
     <Dropdown content={<LanguageSwitchContent />}>
       {({ openDropdown, ref }) => (
         <Form.List.Item
-          onClick={openDropdown}
-          title={<Translate id="settingsLanguage" />}
+          title={
+            <FormattedMessage
+              defaultMessage="Language"
+              description="src/views/Me/Settings/Misc/Language.tsx"
+            />
+          }
           rightText={LANG_TEXT_MAP[lang]}
+          onClick={openDropdown}
           aria-haspopup="listbox"
           role="button"
           ref={ref}
@@ -28,4 +33,4 @@ const SwitchLanguage = () => {
   )
 }
 
-export default SwitchLanguage
+export default Language
