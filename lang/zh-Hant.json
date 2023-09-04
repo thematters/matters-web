@@ -44,6 +44,10 @@
   "0Azlrb": {
     "defaultMessage": "管理"
   },
+  "0CyECR": {
+    "defaultMessage": "Matters ID 已設置，更多帳號相關設置可前往設定頁修改",
+    "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
   "0JLcHr": {
     "defaultMessage": "內容可能包含色情、暴力、血腥等限制級內容，部分用戶可能不適合觀看，或引起不適、心理負擔，請謹慎判斷是否閱讀。",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
@@ -67,6 +71,10 @@
     "defaultMessage": "失敗",
     "description": "src/components/Transaction/State/index.tsx"
   },
+  "1QrwIl": {
+    "defaultMessage": "去看看",
+    "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
   "1Z1M77": {
     "defaultMessage": "尚無閱讀紀錄",
     "description": "src/views/Me/History/index.tsx"
@@ -78,6 +86,10 @@
   "1zVIWy": {
     "defaultMessage": "在 {commentArticle} 評論提到了你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "202PEj": {
+    "defaultMessage": "確認 Matters ID",
+    "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
   "20bImY": {
     "defaultMessage": "眾聊"
@@ -433,6 +445,10 @@
     "defaultMessage": "選集已刪除",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
+  "FxrSCh": {
+    "defaultMessage": "ID 設置後無法修改，確認使用 {id} 作為 Matters ID 嗎？",
+    "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
   "GHxtae": {
     "defaultMessage": "數字錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
@@ -498,6 +514,10 @@
   "IKPYe9": {
     "defaultMessage": "查看",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
+  },
+  "IPqNCS": {
+    "defaultMessage": "確認使用",
+    "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
   "Ihwz5K": {
     "defaultMessage": "代表作已取消"
@@ -591,6 +611,10 @@
   "LqxIEU": {
     "defaultMessage": "錢包地址將作為身份識別之一在個人頁公開顯示。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "LwFJTy": {
+    "defaultMessage": "Matters ID 為用戶唯一標識，設置後無法修改。",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "MDNaxs": {
     "defaultMessage": "人",
@@ -1103,6 +1127,10 @@
   "kc79d3": {
     "defaultMessage": "找你想看的"
   },
+  "kf5NAv": {
+    "defaultMessage": "可使用英文、數字及下劃線",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
   "kkF6ZR": {
     "defaultMessage": "設定",
     "description": "src/views/Me/Settings/Settings/index.tsx"
@@ -1110,6 +1138,10 @@
   "kkZioy": {
     "defaultMessage": "確認移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "l0/EvT": {
+    "defaultMessage": "最後一步：设置 Matters ID",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "l02bPO": {
     "defaultMessage": "作品被關聯",
@@ -1366,6 +1398,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"
+  },
+  "x7O1/5": {
+    "defaultMessage": "ID 已被使用，請修改後再試",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "xMaFCO": {
     "defaultMessage": "閱讀",
