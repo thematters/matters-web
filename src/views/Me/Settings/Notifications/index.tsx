@@ -1,7 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
-import { Head, Layout, Spacer, TableView } from '~/components'
+import { Head, Layout, Spacer } from '~/components'
 
 import SettingsTabs from '../SettingsTabs'
 import styles from '../styles.module.css'
@@ -33,28 +32,6 @@ const NotificationSettings = () => {
 
       <section className={styles.container}>
         <GeneralSettings />
-
-        {/* Entry: circle notifications */}
-        <TableView
-          groupName={
-            <FormattedMessage
-              defaultMessage="Circle"
-              description="src/views/Me/Settings/Notifications/index.tsx"
-            />
-          }
-          spacingX={0}
-        >
-          <TableView.Cell
-            role="link"
-            title={
-              <FormattedMessage
-                defaultMessage="Circle notifications"
-                description="src/views/Me/Settings/Notifications/index.tsx"
-              />
-            }
-            href={PATHS.ME_SETTINGS_NOTIFICATIONS_CIRCLE}
-          />
-        </TableView>
       </section>
 
       <Spacer size="xloose" />
