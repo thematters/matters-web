@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import { TextId } from '~/common/enums'
-import { ConnectWalletButton, Layout, Media, ViewerContext } from '~/components'
+import { Layout, Media, ViewerContext } from '~/components'
 
 type HeaderProps = {
   title: TextId
@@ -9,7 +9,6 @@ type HeaderProps = {
 
 const AuthedHeader: React.FC<HeaderProps> = ({ title }) => {
   const viewer = useContext(ViewerContext)
-  const showConnect = viewer.isAuthed && !viewer.info.ethAddress
 
   if (!viewer.isAuthed) {
     return (
@@ -26,8 +25,6 @@ const AuthedHeader: React.FC<HeaderProps> = ({ title }) => {
         right={
           <>
             <Layout.Header.Title id={title} />
-
-            {showConnect && <ConnectWalletButton />}
           </>
         }
       />

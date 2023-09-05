@@ -56,8 +56,7 @@ const MemoizedFeedUser = React.memo(
     return (
       prevUser.id === user.id &&
       prevUser.isFollowee === user.isFollowee &&
-      prevUser.isFollower === user.isFollower &&
-      prevUser.isBlocked === user.isBlocked
+      prevUser.isFollower === user.isFollower
     )
   }
 ) as MemoizedFeedUserType
