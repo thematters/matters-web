@@ -1,25 +1,17 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { Form, IconSpinner22 } from '~/components'
 import { ViewerBlockedUsersQuery } from '~/gql/graphql'
 
-const VIEWER_BLOCKED_USERS = gql`
-  query ViewerBlockedUsers {
-    viewer {
-      id
-      blockList(input: { first: 0 }) {
-        totalCount
-      }
-    }
-  }
-`
+import { VIEWER_BLOCKED_USERS } from './gql'
 
 const BlockedUsers = () => {
-  const { data, loading } =
-    useQuery<ViewerBlockedUsersQuery>(VIEWER_BLOCKED_USERS)
+  const { data, loading } = useQuery<ViewerBlockedUsersQuery>(
+    VIEWER_BLOCKED_USERS,
+    { fetchPolicy: 'network-only' }
+  )
 
   return (
     <Form.List.Item
@@ -30,7 +22,7 @@ const BlockedUsers = () => {
           description="src/views/Me/Settings/Misc/BlockedUsers.tsx"
         />
       }
-      rightText={data?.viewer?.blockList.totalCount}
+      rightText={loading ? undefined : data?.viewer?.blockList.totalCount}
       rightIcon={
         loading ? <IconSpinner22 size="mdS" color="greyDarker" /> : undefined
       }

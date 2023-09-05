@@ -156,13 +156,17 @@ type MemoizedRichType = React.MemoExoticComponent<
   fragments: typeof fragments
 }
 
-const MemoizedRich = React.memo(Rich, ({ user: prevUser }, { user }) => {
-  return (
-    prevUser.id === user.id &&
-    prevUser.isFollowee === user.isFollowee &&
-    prevUser.isFollower === user.isFollower
-  )
-}) as MemoizedRichType
+const MemoizedRich = React.memo(
+  Rich,
+  ({ user: prevUser, ...prevProps }, { user, ...props }) => {
+    return (
+      prevUser.id === user.id &&
+      prevUser.isFollowee === user.isFollowee &&
+      prevUser.isFollower === user.isFollower &&
+      prevProps.extraButton === props.extraButton
+    )
+  }
+) as MemoizedRichType
 
 MemoizedRich.fragments = fragments
 

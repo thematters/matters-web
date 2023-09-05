@@ -42,8 +42,12 @@ const VIEWER_BLOCK_LIST = gql`
 `
 
 const SettingsBlocked = () => {
-  const { data, loading, error, fetchMore } =
-    useQuery<ViewerBlockListQuery>(VIEWER_BLOCK_LIST)
+  const { data, loading, error, fetchMore } = useQuery<ViewerBlockListQuery>(
+    VIEWER_BLOCK_LIST,
+    {
+      fetchPolicy: 'network-only',
+    }
+  )
 
   if (loading) {
     return <Spinner />
