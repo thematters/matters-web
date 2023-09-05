@@ -32,7 +32,7 @@ const Cell: React.FC<CellProps> = forwardRef(
     },
     ref
   ) => {
-    // const clickable = cardProps.href || cardProps.htmlHref || cardProps.onClick
+    const clickable = cardProps.href || cardProps.htmlHref || cardProps.onClick
     const leftClasses = classNames({
       [styles.left]: true,
     })
@@ -49,10 +49,10 @@ const Cell: React.FC<CellProps> = forwardRef(
 
         <section className={rightClasses}>
           {right || (
-            <span className={styles.section}>
-              {rightText}
-              {rightIcon}
-            </span>
+            <>
+              <span className={styles.text}>{rightText}</span>
+              {clickable && rightIcon}
+            </>
           )}
         </section>
       </section>
