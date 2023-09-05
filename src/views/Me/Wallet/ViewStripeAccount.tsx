@@ -44,7 +44,7 @@ const ViewStripeAccount = () => {
         loading ? (
           <IconSpinner16 color="grey" size="sm" />
         ) : (
-          <TextIcon icon={<IconExternalLink16 color="grey" size="sm" />} />
+          <TextIcon icon={<IconExternalLink16 color="greyDarker" />} />
         )
       }
       role="link"

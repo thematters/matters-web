@@ -91,6 +91,7 @@ const NotificationsGeneralSettings = () => {
       },
     })
   }
+
   return (
     <>
       <TableView spacingX={0}>
@@ -112,9 +113,9 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.userNewFollower}
-              onChange={() => toggle('userNewFollower')}
             />
           }
+          onClick={() => toggle('userNewFollower')}
         />
 
         {/* New likes */}
@@ -135,9 +136,9 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.articleNewAppreciation}
-              onChange={() => toggle('articleNewAppreciation')}
             />
           }
+          onClick={() => toggle('articleNewAppreciation')}
         />
 
         {/* Comments and replies */}
@@ -158,9 +159,9 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.articleNewComment}
-              onChange={() => toggle('articleNewComment')}
             />
           }
+          onClick={() => toggle('articleNewComment')}
         />
 
         {/* Mention me */}
@@ -181,9 +182,9 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.mention}
-              onChange={() => toggle('mention')}
             />
           }
+          onClick={() => toggle('mention')}
         />
 
         {/* Articles has been bookmarked */}
@@ -204,9 +205,9 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.articleNewSubscription}
-              onChange={() => toggle('articleNewSubscription')}
             />
           }
+          onClick={() => toggle('articleNewSubscription')}
         />
 
         {/* Articles has been collected */}
@@ -227,9 +228,9 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.articleNewCollected}
-              onChange={() => toggle('articleNewCollected')}
             />
           }
+          onClick={() => toggle('articleNewCollected')}
         />
 
         {/* Comments has been pinned */}
@@ -250,9 +251,9 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.articleCommentPinned}
-              onChange={() => toggle('articleCommentPinned')}
             />
           }
+          onClick={() => toggle('articleCommentPinned')}
         />
       </TableView>
 

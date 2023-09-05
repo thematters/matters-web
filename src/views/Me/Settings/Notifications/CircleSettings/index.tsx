@@ -136,9 +136,9 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.circleNewSubscriber}
-              onChange={() => toggle('circleNewSubscriber')}
             />
           }
+          onClick={() => toggle('circleNewSubscriber')}
         />
 
         {/* New followers */}
@@ -159,9 +159,9 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.circleNewFollower}
-              onChange={() => toggle('circleNewFollower')}
             />
           }
+          onClick={() => toggle('circleNewFollower')}
         />
 
         {/* Subscription cancellations */}
@@ -182,9 +182,9 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.circleNewUnsubscriber}
-              onChange={() => toggle('circleNewUnsubscriber')}
             />
           }
+          onClick={() => toggle('circleNewUnsubscriber')}
         />
 
         {/* New replies to broadcast */}
@@ -205,9 +205,9 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.circleMemberNewBroadcastReply}
-              onChange={() => toggle('circleMemberNewBroadcastReply')}
             />
           }
+          onClick={() => toggle('circleMemberNewBroadcastReply')}
         />
 
         {/* New discussions */}
@@ -228,9 +228,9 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.circleMemberNewDiscussion}
-              onChange={() => toggle('circleMemberNewDiscussion')}
             />
           }
+          onClick={() => toggle('circleMemberNewDiscussion')}
         />
 
         {/* New replies to discussions */}
@@ -251,9 +251,9 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.circleMemberNewDiscussionReply}
-              onChange={() => toggle('circleMemberNewDiscussionReply')}
             />
           }
+          onClick={() => toggle('circleMemberNewDiscussionReply')}
         />
       </TableView>
 
@@ -285,9 +285,9 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.inCircleNewArticle}
-              onChange={() => toggle('inCircleNewArticle')}
             />
           }
+          onClick={() => toggle('inCircleNewArticle')}
         />
 
         {/* New broadcasts */}
@@ -308,9 +308,9 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.inCircleNewBroadcast}
-              onChange={() => toggle('inCircleNewBroadcast')}
             />
           }
+          onClick={() => toggle('inCircleNewBroadcast')}
         />
 
         {/* New replies to broadcast */}
@@ -331,9 +331,9 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.inCircleNewBroadcastReply}
-              onChange={() => toggle('inCircleNewBroadcastReply')}
             />
           }
+          onClick={() => toggle('inCircleNewBroadcastReply')}
         />
 
         {/* New discussions */}
@@ -354,9 +354,9 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.inCircleNewDiscussion}
-              onChange={() => toggle('inCircleNewDiscussion')}
             />
           }
+          onClick={() => toggle('inCircleNewDiscussion')}
         />
 
         {/* New replies to discussions */}
@@ -377,9 +377,9 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.inCircleNewDiscussionReply}
-              onChange={() => toggle('inCircleNewDiscussionReply')}
             />
           }
+          onClick={() => toggle('inCircleNewDiscussionReply')}
         />
       </TableView>
     </>

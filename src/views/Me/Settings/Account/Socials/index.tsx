@@ -48,13 +48,12 @@ const Socials = () => {
         rightIcon={
           googleId ? <IconClose20 size="mdS" color="greyDarker" /> : undefined
         }
-        onClick={googleId ? () => {} : undefined} // TODO
+        onClick={
+          googleId ? () => alert('Remove Google') : () => alert('Add Google')
+        }
         right={
           googleId ? undefined : (
-            <Button
-              {...buttonProps}
-              onClick={() => {}} // TODO
-            >
+            <Button {...buttonProps}>
               <FormattedMessage defaultMessage="Connect" />
             </Button>
           )
@@ -72,13 +71,12 @@ const Socials = () => {
         rightIcon={
           twitterId ? <IconClose20 size="mdS" color="greyDarker" /> : undefined
         }
-        onClick={twitterId ? () => {} : undefined} // TODO
+        onClick={
+          twitterId ? () => alert('Remove Twitter') : () => alert('Add Twitter')
+        }
         right={
           twitterId ? undefined : (
-            <Button
-              {...buttonProps}
-              onClick={() => {}} // TODO
-            >
+            <Button {...buttonProps}>
               <FormattedMessage defaultMessage="Connect" />
             </Button>
           )
@@ -96,13 +94,14 @@ const Socials = () => {
         rightIcon={
           facebookId ? <IconClose20 size="mdS" color="greyDarker" /> : undefined
         }
-        onClick={facebookId ? () => {} : undefined} // TODO
+        onClick={
+          facebookId
+            ? () => alert('Remove Facebook')
+            : () => alert('Add Facebook')
+        }
         right={
           facebookId ? undefined : (
-            <Button
-              {...buttonProps}
-              onClick={() => {}} // TODO
-            >
+            <Button {...buttonProps}>
               <FormattedMessage defaultMessage="Connect" />
             </Button>
           )
