@@ -67,6 +67,7 @@ const Rich = ({
   const contentClasses = classNames({
     [styles.content]: true,
     [styles.hasExtraButton]: hasFollow || !!extraButton,
+    [styles.archived]: isArchived,
   })
 
   if (isArchived) {

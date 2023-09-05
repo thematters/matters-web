@@ -58,7 +58,7 @@
 }
 
 .sizeSm {
-  & .content {
+  & .content:not(.archived) {
     height: 2rem;
   }
 
@@ -77,7 +77,7 @@
 }
 
 .sizeLg {
-  & .content {
+  & .content:not(.archived) {
     height: 3rem;
   }
 
