@@ -14,13 +14,13 @@ import {
 } from '~/common/utils'
 import {
   Button,
-  Form,
   IconClose20,
   IconFacebook22,
   IconGoogle22,
   IconSpinner16,
   IconX22,
   RemoveSocialLoginDialog,
+  TableView,
   TextIcon,
   toast,
   useRoute,
@@ -114,7 +114,7 @@ const Socials = () => {
       <RemoveSocialLoginDialog type={SocialAccountType.Google}>
         {({ openDialog }) => {
           return (
-            <Form.List.Item
+            <TableView.Cell
               title={
                 <TextIcon icon={<IconGoogle22 size="mdM" />} spacing="tight">
                   Google
@@ -126,7 +126,7 @@ const Socials = () => {
                   <IconClose20 size="mdS" color="greyDarker" />
                 ) : undefined
               }
-              onClick={googleId ? () => openDialog() : undefined}
+              onClick={googleId ? () => openDialog() : gotoGoogle}
               right={
                 googleId ? undefined : (
                   <>
@@ -136,7 +136,6 @@ const Socials = () => {
                         spacing={[0, 'tight']}
                         textColor="green"
                         borderColor="green"
-                        onClick={gotoGoogle}
                       >
                         <FormattedMessage defaultMessage="Connect" />
                       </Button>
@@ -156,7 +155,7 @@ const Socials = () => {
       <RemoveSocialLoginDialog type={SocialAccountType.Twitter}>
         {({ openDialog }) => {
           return (
-            <Form.List.Item
+            <TableView.Cell
               title={
                 <TextIcon icon={<IconX22 size="mdM" />} spacing="tight">
                   Twitter
@@ -168,7 +167,7 @@ const Socials = () => {
                   <IconClose20 size="mdS" color="greyDarker" />
                 ) : undefined
               }
-              onClick={twitterId ? () => openDialog() : undefined}
+              onClick={twitterId ? () => openDialog() : gotoTwitter}
               right={
                 twitterId ? undefined : (
                   <>
@@ -178,7 +177,6 @@ const Socials = () => {
                         spacing={[0, 'tight']}
                         textColor="green"
                         borderColor="green"
-                        onClick={gotoTwitter}
                       >
                         <FormattedMessage defaultMessage="Connect" />
                       </Button>
@@ -198,7 +196,7 @@ const Socials = () => {
       <RemoveSocialLoginDialog type={SocialAccountType.Facebook}>
         {({ openDialog }) => {
           return (
-            <Form.List.Item
+            <TableView.Cell
               title={
                 <TextIcon icon={<IconFacebook22 size="mdM" />} spacing="tight">
                   Facebook
@@ -210,7 +208,7 @@ const Socials = () => {
                   <IconClose20 size="mdS" color="greyDarker" />
                 ) : undefined
               }
-              onClick={facebookId ? () => openDialog() : undefined}
+              onClick={facebookId ? () => openDialog() : gotoFacebook}
               right={
                 facebookId ? undefined : (
                   <>
@@ -220,7 +218,6 @@ const Socials = () => {
                         spacing={[0, 'tight']}
                         textColor="green"
                         borderColor="green"
-                        onClick={gotoFacebook}
                       >
                         <FormattedMessage defaultMessage="Connect" />
                       </Button>

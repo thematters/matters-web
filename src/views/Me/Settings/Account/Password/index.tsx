@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Button, Form, ViewerContext } from '~/components'
+import { Button, TableView, ViewerContext } from '~/components'
 
 const Password = () => {
   const viewer = useContext(ViewerContext)
@@ -9,7 +9,7 @@ const Password = () => {
   const hasPassword = !!viewer.status?.hasEmailLoginPassword
 
   return (
-    <Form.List.Item
+    <TableView.Cell
       title={
         <FormattedMessage
           defaultMessage="Password"

@@ -1,7 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
-import { Form, Head, Layout, Spacer } from '~/components'
+import { Head, Layout, Spacer } from '~/components'
 
 import SettingsTabs from '../SettingsTabs'
 import styles from '../styles.module.css'
@@ -33,28 +32,6 @@ const NotificationSettings = () => {
 
       <section className={styles.container}>
         <GeneralSettings />
-
-        {/* Entry: circle notifications */}
-        <Form.List
-          groupName={
-            <FormattedMessage
-              defaultMessage="Circle"
-              description="src/views/Me/Settings/Notifications/index.tsx"
-            />
-          }
-          spacingX={0}
-        >
-          <Form.List.Item
-            role="link"
-            title={
-              <FormattedMessage
-                defaultMessage="Circle notifications"
-                description="src/views/Me/Settings/Notifications/index.tsx"
-              />
-            }
-            href={PATHS.ME_SETTINGS_NOTIFICATIONS_CIRCLE}
-          />
-        </Form.List>
       </section>
 
       <Spacer size="xloose" />

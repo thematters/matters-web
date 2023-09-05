@@ -2,9 +2,9 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
-  Form,
   IconExternalLink16,
   IconSpinner16,
+  TableView,
   TextIcon,
   Translate,
 } from '~/components'
@@ -30,7 +30,7 @@ const ViewStripeAccount = () => {
   const loginUrl = data?.viewer?.wallet.stripeAccount?.loginUrl
 
   return (
-    <Form.List.Item
+    <TableView.Cell
       title={
         <Translate
           zh_hant="管理 Stripe 賬戶"
@@ -44,7 +44,7 @@ const ViewStripeAccount = () => {
         loading ? (
           <IconSpinner16 color="grey" size="sm" />
         ) : (
-          <TextIcon icon={<IconExternalLink16 color="grey" size="sm" />} />
+          <TextIcon icon={<IconExternalLink16 color="greyDarker" />} />
         )
       }
       role="link"

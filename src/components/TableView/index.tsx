@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { capitalizeFirstLetter } from '~/common/utils'
 
-import Item from './Item'
+import Cell from './Cell'
 import styles from './styles.module.css'
 
 /**
@@ -12,14 +12,14 @@ import styles from './styles.module.css'
  *
  */
 
-interface ListProps {
+interface TableViewProps {
   groupName?: string | React.ReactNode
   spacingY?: 0 | 'xloose'
   spacingX?: 0 | 'base'
 }
 
-const List: React.FC<React.PropsWithChildren<ListProps>> & {
-  Item: typeof Item
+export const TableView: React.FC<React.PropsWithChildren<TableViewProps>> & {
+  Cell: typeof Cell
 } = ({ groupName, spacingY = 0, spacingX = 'base', children }) => {
   const groupClasses = classNames({
     [styles.group]: true,
@@ -44,6 +44,4 @@ const List: React.FC<React.PropsWithChildren<ListProps>> & {
   )
 }
 
-List.Item = Item
-
-export default List
+TableView.Cell = Cell

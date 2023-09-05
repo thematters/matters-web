@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { Form, IconSpinner22 } from '~/components'
+import { IconSpinner22, TableView } from '~/components'
 import { ViewerBlockedUsersQuery } from '~/gql/graphql'
 
 import { VIEWER_BLOCKED_USERS } from './gql'
@@ -14,7 +14,7 @@ const BlockedUsers = () => {
   )
 
   return (
-    <Form.List.Item
+    <TableView.Cell
       role="link"
       title={
         <FormattedMessage

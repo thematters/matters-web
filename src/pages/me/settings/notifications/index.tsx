@@ -1,10 +1,10 @@
 import { Protected } from '~/components'
-import MeSettingsNotification from '~/views/Me/Settings/Notification'
+import MeSettingsNotifications from '~/views/Me/Settings/Notifications'
 
-const ProtectedMeSettingsNotification = () => (
+const ProtectedMeSettingsNotifications = () => (
   <Protected>
-    <MeSettingsNotification />
+    <MeSettingsNotifications />
   </Protected>
 )
 
-export default ProtectedMeSettingsNotification
+export default ProtectedMeSettingsNotifications

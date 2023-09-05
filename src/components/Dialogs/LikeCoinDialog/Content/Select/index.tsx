@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Form, Translate } from '~/components'
+import { Dialog, TableView, Translate } from '~/components'
 
 import Hint from './Hint'
 import Intro from './Intro'
@@ -27,8 +27,8 @@ const Select: React.FC<SelectProps> = ({
       <Dialog.Content>
         <Hint />
 
-        <Form.List spacingX={0}>
-          <Form.List.Item
+        <TableView spacingX={0}>
+          <TableView.Cell
             title={
               <Translate
                 zh_hant="創建新的 Liker ID"
@@ -46,7 +46,7 @@ const Select: React.FC<SelectProps> = ({
             role="button"
             onClick={startGenerate}
           />
-          <Form.List.Item
+          <TableView.Cell
             title={
               <Translate
                 zh_hant="綁定現有 Liker ID"
@@ -71,7 +71,7 @@ const Select: React.FC<SelectProps> = ({
             }}
             role="button"
           />
-        </Form.List>
+        </TableView>
 
         <Intro />
       </Dialog.Content>

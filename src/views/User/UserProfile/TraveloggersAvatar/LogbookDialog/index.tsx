@@ -3,10 +3,10 @@ import { FormattedMessage } from 'react-intl'
 
 import {
   Dialog,
-  Form,
   IconLogbook1,
   IconLogbook2,
   LanguageContext,
+  TableView,
   TextIcon,
   Translate,
   useDialogSwitch,
@@ -61,8 +61,8 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
         </Dialog.Message>
 
         <section className={styles.options}>
-          <Form.List>
-            <Form.List.Item
+          <TableView>
+            <TableView.Cell
               role="link"
               htmlHref={logbook2Url}
               htmlTarget="_blank"
@@ -82,7 +82,7 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
               }
             />
 
-            <Form.List.Item
+            <TableView.Cell
               role="link"
               htmlHref={logbook1Url}
               htmlTarget="_blank"
@@ -101,7 +101,7 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
                 </TextIcon>
               }
             />
-          </Form.List>
+          </TableView>
         </section>
 
         <Dialog.Footer

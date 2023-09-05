@@ -1,10 +1,10 @@
 import { Protected } from '~/components'
-import NotificationCircleSettings from '~/views/Me/Settings/Notification/Circle'
+import MeSettingsNotificationsCircle from '~/views/Me/Settings/Notifications/CircleSettings'
 
-const ProtectedMeSettingsNotification = () => (
+const ProtectedMeSettingsNotificationsCircle = () => (
   <Protected>
-    <NotificationCircleSettings />
+    <MeSettingsNotificationsCircle />
   </Protected>
 )
 
-export default ProtectedMeSettingsNotification
+export default ProtectedMeSettingsNotificationsCircle

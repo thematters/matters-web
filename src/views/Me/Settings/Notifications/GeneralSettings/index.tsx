@@ -2,7 +2,8 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { Form, Spinner, Switch, useMutation } from '~/components'
+import { PATHS } from '~/common/enums'
+import { Spinner, Switch, TableView, useMutation } from '~/components'
 import {
   UpdateViewerNotificationsGeneralMutation,
   ViewerNotificationsGeneralSettingsQuery,
@@ -91,11 +92,12 @@ const NotificationsGeneralSettings = () => {
       },
     })
   }
+
   return (
     <>
-      <Form.List spacingX={0}>
+      <TableView spacingX={0}>
         {/* New followers */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New followers"
@@ -112,13 +114,13 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.userNewFollower}
-              onChange={() => toggle('userNewFollower')}
             />
           }
+          onClick={() => toggle('userNewFollower')}
         />
 
         {/* New likes */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New likes"
@@ -135,13 +137,13 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.articleNewAppreciation}
-              onChange={() => toggle('articleNewAppreciation')}
             />
           }
+          onClick={() => toggle('articleNewAppreciation')}
         />
 
         {/* Comments and replies */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Comments and replies"
@@ -158,13 +160,13 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.articleNewComment}
-              onChange={() => toggle('articleNewComment')}
             />
           }
+          onClick={() => toggle('articleNewComment')}
         />
 
         {/* Mention me */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Mention me"
@@ -181,13 +183,13 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.mention}
-              onChange={() => toggle('mention')}
             />
           }
+          onClick={() => toggle('mention')}
         />
 
         {/* Articles has been bookmarked */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Articles has been bookmarked"
@@ -204,13 +206,13 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.articleNewSubscription}
-              onChange={() => toggle('articleNewSubscription')}
             />
           }
+          onClick={() => toggle('articleNewSubscription')}
         />
 
         {/* Articles has been collected */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Articles has been collected"
@@ -227,13 +229,13 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.articleNewCollected}
-              onChange={() => toggle('articleNewCollected')}
             />
           }
+          onClick={() => toggle('articleNewCollected')}
         />
 
         {/* Comments has been pinned */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Comments has been pinned"
@@ -250,13 +252,35 @@ const NotificationsGeneralSettings = () => {
                 />
               }
               checked={settings.articleCommentPinned}
-              onChange={() => toggle('articleCommentPinned')}
             />
           }
+          onClick={() => toggle('articleCommentPinned')}
         />
-      </Form.List>
+      </TableView>
 
       <Email toggle={toggle} settings={settings} />
+
+      {/* Entry: circle notifications */}
+      <TableView
+        groupName={
+          <FormattedMessage
+            defaultMessage="Circle"
+            description="src/views/Me/Settings/Notifications/index.tsx"
+          />
+        }
+        spacingX={0}
+      >
+        <TableView.Cell
+          role="link"
+          title={
+            <FormattedMessage
+              defaultMessage="Circle notifications"
+              description="src/views/Me/Settings/Notifications/index.tsx"
+            />
+          }
+          href={PATHS.ME_SETTINGS_NOTIFICATIONS_CIRCLE}
+        />
+      </TableView>
     </>
   )
 }

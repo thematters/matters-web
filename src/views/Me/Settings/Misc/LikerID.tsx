@@ -2,14 +2,14 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { EXTERNAL_LINKS, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
-import { Button, Form, ViewerContext } from '~/components'
+import { Button, TableView, ViewerContext } from '~/components'
 
 const LikerID = () => {
   const viewer = useContext(ViewerContext)
   const likerId = viewer.liker.likerId
 
   return (
-    <Form.List.Item
+    <TableView.Cell
       title={
         <FormattedMessage
           defaultMessage="Liker ID"

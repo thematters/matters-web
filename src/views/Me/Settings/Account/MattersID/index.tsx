@@ -1,11 +1,11 @@
 import { useContext } from 'react'
 
-import { Form, ViewerContext } from '~/components'
+import { TableView, ViewerContext } from '~/components'
 
 const MattersID = () => {
   const viewer = useContext(ViewerContext)
 
-  return <Form.List.Item title="Matters ID" rightText={`@${viewer.userName}`} />
+  return <TableView.Cell title="Matters ID" rightText={`@${viewer.userName}`} />
 }
 
 export default MattersID

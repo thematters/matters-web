@@ -3,12 +3,12 @@ import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
-  Form,
   Head,
   Layout,
   Spacer,
   Spinner,
   Switch,
+  TableView,
   useMutation,
 } from '~/components'
 import {
@@ -109,7 +109,7 @@ const BaseNotificationSettings = () => {
   return (
     <>
       {/* My cirlce */}
-      <Form.List
+      <TableView
         groupName={
           <FormattedMessage
             defaultMessage="My circle"
@@ -119,7 +119,7 @@ const BaseNotificationSettings = () => {
         spacingX={0}
       >
         {/* New subscribers */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New subscribers"
@@ -136,13 +136,13 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.circleNewSubscriber}
-              onChange={() => toggle('circleNewSubscriber')}
             />
           }
+          onClick={() => toggle('circleNewSubscriber')}
         />
 
         {/* New followers */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New followers"
@@ -159,13 +159,13 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.circleNewFollower}
-              onChange={() => toggle('circleNewFollower')}
             />
           }
+          onClick={() => toggle('circleNewFollower')}
         />
 
         {/* Subscription cancellations */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Subscription cancellations"
@@ -182,13 +182,13 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.circleNewUnsubscriber}
-              onChange={() => toggle('circleNewUnsubscriber')}
             />
           }
+          onClick={() => toggle('circleNewUnsubscriber')}
         />
 
         {/* New replies to broadcast */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New replies to broadcast"
@@ -205,13 +205,13 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.circleMemberNewBroadcastReply}
-              onChange={() => toggle('circleMemberNewBroadcastReply')}
             />
           }
+          onClick={() => toggle('circleMemberNewBroadcastReply')}
         />
 
         {/* New discussions */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New discussions"
@@ -228,13 +228,13 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.circleMemberNewDiscussion}
-              onChange={() => toggle('circleMemberNewDiscussion')}
             />
           }
+          onClick={() => toggle('circleMemberNewDiscussion')}
         />
 
         {/* New replies to discussions */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New replies to discussions"
@@ -251,14 +251,14 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.circleMemberNewDiscussionReply}
-              onChange={() => toggle('circleMemberNewDiscussionReply')}
             />
           }
+          onClick={() => toggle('circleMemberNewDiscussionReply')}
         />
-      </Form.List>
+      </TableView>
 
       {/* Following circles */}
-      <Form.List
+      <TableView
         groupName={
           <FormattedMessage
             defaultMessage="Following circles"
@@ -268,7 +268,7 @@ const BaseNotificationSettings = () => {
         spacingX={0}
       >
         {/* New articles */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New articles"
@@ -285,13 +285,13 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.inCircleNewArticle}
-              onChange={() => toggle('inCircleNewArticle')}
             />
           }
+          onClick={() => toggle('inCircleNewArticle')}
         />
 
         {/* New broadcasts */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New broadcasts"
@@ -308,13 +308,13 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.inCircleNewBroadcast}
-              onChange={() => toggle('inCircleNewBroadcast')}
             />
           }
+          onClick={() => toggle('inCircleNewBroadcast')}
         />
 
         {/* New replies to broadcast */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New replies to broadcast"
@@ -331,13 +331,13 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.inCircleNewBroadcastReply}
-              onChange={() => toggle('inCircleNewBroadcastReply')}
             />
           }
+          onClick={() => toggle('inCircleNewBroadcastReply')}
         />
 
         {/* New discussions */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New discussions"
@@ -354,13 +354,13 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.inCircleNewDiscussion}
-              onChange={() => toggle('inCircleNewDiscussion')}
             />
           }
+          onClick={() => toggle('inCircleNewDiscussion')}
         />
 
         {/* New replies to discussions */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New replies to discussions"
@@ -377,11 +377,11 @@ const BaseNotificationSettings = () => {
                 />
               }
               checked={settings.inCircleNewDiscussionReply}
-              onChange={() => toggle('inCircleNewDiscussionReply')}
             />
           }
+          onClick={() => toggle('inCircleNewDiscussionReply')}
         />
-      </Form.List>
+      </TableView>
     </>
   )
 }

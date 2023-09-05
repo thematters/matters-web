@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl'
 
 import {
   Dropdown,
-  Form,
   Menu,
+  TableView,
   toast,
   Translate,
   useMutation,
@@ -84,7 +84,7 @@ const Currency = () => {
   return (
     <Dropdown content={<Content />}>
       {({ openDropdown, ref }) => (
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Currency"

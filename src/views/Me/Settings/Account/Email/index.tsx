@@ -1,14 +1,14 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Button, Form, ViewerContext } from '~/components'
+import { Button, TableView, ViewerContext } from '~/components'
 
 const Email = () => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
 
   return (
-    <Form.List.Item
+    <TableView.Cell
       title={
         <FormattedMessage
           defaultMessage="Email"

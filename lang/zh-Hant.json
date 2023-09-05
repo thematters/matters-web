@@ -102,7 +102,7 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "2DkkhD": {
-    "defaultMessage": "Settings - Notifications",
+    "defaultMessage": "設定 - 通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "2P5JII": {
@@ -115,6 +115,10 @@
   "2atspc": {
     "defaultMessage": "我的草稿"
   },
+  "2ef/Xl": {
+    "defaultMessage": "封鎖",
+    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
   "2oxLHg": {
     "defaultMessage": "最多可設置 3 個代表作"
   },
@@ -122,7 +126,7 @@
     "defaultMessage": "讚賞"
   },
   "2vpUYs": {
-    "defaultMessage": "New replies to discussions",
+    "defaultMessage": "回覆留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "32bml8": {
@@ -270,6 +274,10 @@
     "defaultMessage": "設定",
     "description": "src/views/Me/Settings/Misc/index.tsx"
   },
+  "8t6Cs8": {
+    "defaultMessage": "Matters 日報",
+    "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
   "8w3GEA": {
     "defaultMessage": "在作品 {article} 中提及你",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
@@ -293,12 +301,8 @@
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "A0KB7s": {
-    "defaultMessage": "New replies to broadcast",
+    "defaultMessage": "廣播留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
-  },
-  "A0jNj2": {
-    "defaultMessage": "Matters daily report",
-    "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "A3g33H": {
     "defaultMessage": "封存作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
@@ -349,7 +353,7 @@
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "BMGZE2": {
-    "defaultMessage": "Mention me",
+    "defaultMessage": "作品或評論提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "BY343C": {
@@ -488,7 +492,7 @@
     "defaultMessage": "我知道了"
   },
   "GhogWq": {
-    "defaultMessage": "Subscription cancellations",
+    "defaultMessage": "退訂",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "Gt7K6r": {
@@ -554,7 +558,7 @@
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
   "JkWLg6": {
-    "defaultMessage": "New followers",
+    "defaultMessage": "被追蹤",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "JpS59y": {
@@ -641,11 +645,11 @@
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "Mn7GEf": {
-    "defaultMessage": "Selected activities related to you in the past 24 hours",
+    "defaultMessage": "精選過去 24 小時與你有關的消息",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "MoyOR+": {
-    "defaultMessage": "Settings - Circle notifications",
+    "defaultMessage": "設定 - 圍爐通知",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "N2IrpM": {
@@ -690,7 +694,7 @@
     "defaultMessage": "分享"
   },
   "Opaa0R": {
-    "defaultMessage": "New likes",
+    "defaultMessage": "作品被讚賞",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "PLBmDT": {
@@ -732,7 +736,7 @@
     "description": "src/components/ArticleDigest/Archive/index.tsx"
   },
   "ROPCC0": {
-    "defaultMessage": "Please add email first",
+    "defaultMessage": "作品被讚賞",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
   "RxiHr/": {
@@ -852,7 +856,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "Wg0ZvI": {
-    "defaultMessage": "Articles has been bookmarked",
+    "defaultMessage": "作品被收藏",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "WpvsPu": {
@@ -1001,14 +1005,14 @@
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "ctl5tq": {
-    "defaultMessage": "New articles",
+    "defaultMessage": "新作品",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "cyR7Kh": {
     "defaultMessage": "返回"
   },
   "d1mBsg": {
-    "defaultMessage": "Following circles",
+    "defaultMessage": "追蹤的圍爐",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "d4waan": {
@@ -1016,7 +1020,7 @@
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "dVbKzB": {
-    "defaultMessage": "Comments and replies",
+    "defaultMessage": "作品或評論提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "deEeEI": {
@@ -1029,7 +1033,7 @@
     "defaultMessage": "我的足跡"
   },
   "dzF4ci": {
-    "defaultMessage": "Resend",
+    "defaultMessage": "重新發送",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "eTpiYa": {
@@ -1043,10 +1047,6 @@
   },
   "eov+J2": {
     "defaultMessage": "自定義網址名稱"
-  },
-  "f0/gC1": {
-    "defaultMessage": "已解封",
-    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
   "fWDtpq": {
     "defaultMessage": "邀請中",
@@ -1067,7 +1067,7 @@
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "gW/KWu": {
-    "defaultMessage": "Comments has been pinned",
+    "defaultMessage": "評論被精選",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "h+punE": {
@@ -1075,7 +1075,7 @@
     "description": "src/views/User/CollectionDetail/Content.tsx"
   },
   "h7sMQs": {
-    "defaultMessage": "New followers",
+    "defaultMessage": "新追蹤者",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "h9CG9E": {
@@ -1164,7 +1164,7 @@
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "l02bPO": {
-    "defaultMessage": "Articles has been collected",
+    "defaultMessage": "作品被關聯",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "lIir/P": {
@@ -1189,7 +1189,7 @@
     "defaultMessage": "刪除選集"
   },
   "m4KtjK": {
-    "defaultMessage": "New subscribers",
+    "defaultMessage": "新訂閱者",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "mCAIcg": {
@@ -1222,7 +1222,7 @@
     "defaultMessage": "至少 8 個字元，支持英文大小寫字母、數字和特殊符號"
   },
   "mp9SBo": {
-    "defaultMessage": "Circle notifications",
+    "defaultMessage": "圍爐通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "n2Sc6g": {
@@ -1344,7 +1344,7 @@
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "u+cgOo": {
-    "defaultMessage": "My circle",
+    "defaultMessage": "我的圍爐",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "u5aHb4": {
@@ -1388,7 +1388,7 @@
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
   "viMrzF": {
-    "defaultMessage": "New broadcasts",
+    "defaultMessage": "廣播",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "wCgTu5": {
@@ -1436,7 +1436,7 @@
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "xafreT": {
-    "defaultMessage": "New discussions",
+    "defaultMessage": "留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "xkr+zo": {
@@ -1477,7 +1477,7 @@
     "description": "src/components/Transaction/index.tsx"
   },
   "z+a1SW": {
-    "defaultMessage": "Settings",
+    "defaultMessage": "設定",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "zAK5G+": {
