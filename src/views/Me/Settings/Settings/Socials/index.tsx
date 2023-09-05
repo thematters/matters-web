@@ -95,8 +95,7 @@ const Socials = () => {
         toast.error({
           message: (
             <FormattedMessage
-              defaultMessage="This {type} account is connected to a Matters account.
-              Sign in to that account to disconnect it then try again"
+              defaultMessage="This {type} account is connected to a Matters account. Sign in to that account to disconnect it then try again"
               description="src/views/Me/Settings/Settings/Socials/index.tsx"
               values={{
                 type: bindResult.type,

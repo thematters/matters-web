@@ -1,18 +1,17 @@
 import { useContext, useLayoutEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
+
 import {
   OAUTH_STORAGE_BIND_STATE,
   OAUTH_STORAGE_BIND_STATE_FAILURE,
   OAUTH_STORAGE_BIND_STATE_SUCCESS,
 } from '~/common/enums'
-
 import {
   facebookOauthUrl,
   googleOauthUrl,
   storage,
   twitterOauthUrl,
 } from '~/common/utils'
-
 import {
   Button,
   Form,
