@@ -13,6 +13,8 @@ import {
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerBlockListQuery } from '~/gql/graphql'
 
+import { ToggleBlockUserButton } from './ToggleBlockButton'
+
 const VIEWER_BLOCK_LIST = gql`
   query ViewerBlockList($after: String) {
     viewer {
@@ -28,6 +30,7 @@ const VIEWER_BLOCK_LIST = gql`
           node {
             ...UserDigestRichUserPublic
             ...UserDigestRichUserPrivate
+            ...ToggleBlockUserButtonUserPrivate
           }
         }
       }
@@ -35,11 +38,16 @@ const VIEWER_BLOCK_LIST = gql`
   }
   ${UserDigest.Rich.fragments.user.public}
   ${UserDigest.Rich.fragments.user.private}
+  ${ToggleBlockUserButton.fragments.user.private}
 `
 
 const SettingsBlocked = () => {
-  const { data, loading, error, fetchMore } =
-    useQuery<ViewerBlockListQuery>(VIEWER_BLOCK_LIST)
+  const { data, loading, error, fetchMore } = useQuery<ViewerBlockListQuery>(
+    VIEWER_BLOCK_LIST,
+    {
+      fetchPolicy: 'network-only',
+    }
+  )
 
   if (loading) {
     return <Spinner />
@@ -52,16 +60,14 @@ const SettingsBlocked = () => {
   const connectionPath = 'viewer.blockList'
   const { edges, pageInfo } = data?.viewer?.blockList || {}
 
-  const filteredUsers = (edges || []).filter(({ node }) => node.isBlocked)
-
-  if (!edges || edges.length <= 0 || filteredUsers.length <= 0 || !pageInfo) {
+  if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <EmptyWarning
         description={
           <Translate
             zh_hant="還沒有封鎖用戶"
-            zh_hans="还没有屏蔽用户"
-            en="no blocked users yet"
+            zh_hans="还没有封锁用户"
+            en="No blocked users yet"
           />
         }
       />
@@ -82,10 +88,16 @@ const SettingsBlocked = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
-      <List hasBorder={false}>
-        {filteredUsers.map(({ node, cursor }, i) => (
+      <List hasBorder>
+        {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
-            <UserDigest.Rich user={node} hasUnblock hasFollow={false} />
+            <UserDigest.Rich
+              user={node}
+              spacing={['base', 0]}
+              subtitle={`@${node.userName}`}
+              hasFollow={false}
+              extraButton={<ToggleBlockUserButton user={node} />}
+            />
           </List.Item>
         ))}
       </List>

@@ -258,6 +258,10 @@
   "8cv9D4": {
     "defaultMessage": "Next Step"
   },
+  "8qGjpr": {
+    "defaultMessage": "Settings",
+    "description": "src/views/Me/Settings/Misc/index.tsx"
+  },
   "8w3GEA": {
     "defaultMessage": "mentioned you in {article}",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
@@ -342,6 +346,10 @@
     "defaultMessage": "Connected to {type}",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
+  "BnMru1": {
+    "defaultMessage": "Language",
+    "description": "src/views/Me/Settings/Misc/Language.tsx"
+  },
   "C8GQaD": {
     "defaultMessage": "upadted {date}",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
@@ -380,6 +388,10 @@
   "DYrDcG": {
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "DqQvtL": {
+    "defaultMessage": "Unblock",
+    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
   "DyuHBH": {
     "defaultMessage": "Unpin from profile",
@@ -543,6 +555,10 @@
   "KQi/UZ": {
     "defaultMessage": "Archive works"
   },
+  "KxVlDj": {
+    "defaultMessage": "Settings - Blocked Users",
+    "description": "src/views/Me/Settings/Blocked/index.tsx"
+  },
   "L0J61B": {
     "defaultMessage": "Free",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -579,6 +595,10 @@
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "Lp6CiR": {
+    "defaultMessage": "Settings - Misc",
+    "description": "src/views/Me/Settings/Misc/index.tsx"
   },
   "LqxIEU": {
     "defaultMessage": "Wallet address will be part of your digital identity and shown in your profile page.",
@@ -834,6 +854,10 @@
     "defaultMessage": "commented in your circle broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "YUXRsM": {
+    "defaultMessage": "Blocked Users",
+    "description": "src/views/Me/Settings/Blocked/index.tsx"
+  },
   "YlPCRU": {
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -902,6 +926,10 @@
   "cE4Hfw": {
     "defaultMessage": "Discover"
   },
+  "cQYXjl": {
+    "defaultMessage": "Currency",
+    "description": "src/views/Me/Settings/Misc/Currency/index.tsx"
+  },
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
   },
@@ -952,6 +980,10 @@
   "eov+J2": {
     "defaultMessage": "Custom URL Name"
   },
+  "f0/gC1": {
+    "defaultMessage": "Unblocked",
+    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
   "fWDtpq": {
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -977,6 +1009,10 @@
   "h9CG9E": {
     "defaultMessage": "{commentType} has been deleted",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "hASeng": {
+    "defaultMessage": "Blocked Users",
+    "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
   },
   "hYG5fb": {
     "defaultMessage": "are following",
@@ -1031,6 +1067,14 @@
   },
   "k97/u7": {
     "defaultMessage": "Add Articles"
+  },
+  "kPylKK": {
+    "defaultMessage": "Circle",
+    "description": "src/views/Me/Settings/Notifications/index.tsx"
+  },
+  "kS3vTS": {
+    "defaultMessage": "Liker ID",
+    "description": "src/views/Me/Settings/Misc/LikerID.tsx"
   },
   "kc79d3": {
     "defaultMessage": "Topics"

@@ -47,7 +47,7 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
           spacing={[0, 'tight']}
           size={[null, '1.5rem']}
           borderColor="black"
-          href={PATHS.ME_SETTINGS_CONNECT_WALLET}
+          href={PATHS.ME_SETTINGS}
         >
           <TextIcon color="black" size="xs">
             <Translate zh_hant="前往設置" zh_hans="前往设置" en="Setup" />

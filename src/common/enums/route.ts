@@ -43,13 +43,9 @@ type ROUTE_KEY =
   | 'ME_WALLET'
   | 'ME_WALLET_TRANSACTIONS'
   | 'ME_SETTINGS'
-  | 'ME_SETTINGS_CHANGE_USERNAME'
-  | 'ME_SETTINGS_CHANGE_EMAIL'
-  | 'ME_SETTINGS_CHANGE_PASSWORD'
   | 'ME_SETTINGS_NOTIFICATIONS'
+  | 'ME_SETTINGS_MISC'
   | 'ME_SETTINGS_BLOCKED'
-  | 'ME_SETTINGS_CONNECT_WALLET'
-  | 'ME_SETTINGS_OTHERS'
   | 'ME_DRAFT_DETAIL'
   | 'ME_SETTINGS_NOTIFICATIONS_GENERAL' // TODO: remove
   | 'ME_SETTINGS_NOTIFICATIONS_CIRCLE'
@@ -147,15 +143,6 @@ export const ROUTES: {
 
   // Settings
   { key: 'ME_SETTINGS', pathname: '/me/settings' },
-  {
-    key: 'ME_SETTINGS_CHANGE_USERNAME',
-    pathname: '/me/settings/change-username',
-  },
-  { key: 'ME_SETTINGS_CHANGE_EMAIL', pathname: '/me/settings/change-email' },
-  {
-    key: 'ME_SETTINGS_CHANGE_PASSWORD',
-    pathname: '/me/settings/change-password',
-  },
   { key: 'ME_SETTINGS_NOTIFICATIONS', pathname: '/me/settings/notifications' },
   {
     key: 'ME_SETTINGS_NOTIFICATIONS_GENERAL',
@@ -165,15 +152,11 @@ export const ROUTES: {
     key: 'ME_SETTINGS_NOTIFICATIONS_CIRCLE',
     pathname: '/me/settings/notifications/circle',
   },
+  {
+    key: 'ME_SETTINGS_MISC',
+    pathname: '/me/settings/misc',
+  },
   { key: 'ME_SETTINGS_BLOCKED', pathname: '/me/settings/blocked' },
-  {
-    key: 'ME_SETTINGS_CONNECT_WALLET',
-    pathname: '/me/settings/connect-wallet',
-  },
-  {
-    key: 'ME_SETTINGS_OTHERS',
-    pathname: '/me/settings/others',
-  },
 
   // Draft
   { key: 'ME_DRAFT_DETAIL', pathname: '/me/drafts/[draftId]' },

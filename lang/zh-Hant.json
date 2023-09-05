@@ -258,6 +258,10 @@
   "8cv9D4": {
     "defaultMessage": "下一步"
   },
+  "8qGjpr": {
+    "defaultMessage": "設定",
+    "description": "src/views/Me/Settings/Misc/index.tsx"
+  },
   "8w3GEA": {
     "defaultMessage": "在作品 {article} 中提及你",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
@@ -342,6 +346,10 @@
     "defaultMessage": "{type} 已綁定",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
+  "BnMru1": {
+    "defaultMessage": "語言",
+    "description": "src/views/Me/Settings/Misc/Language.tsx"
+  },
   "C8GQaD": {
     "defaultMessage": "{date}更新",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
@@ -380,6 +388,10 @@
   "DYrDcG": {
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "DqQvtL": {
+    "defaultMessage": "解除封鎖",
+    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
   "DyuHBH": {
     "defaultMessage": "取消代表作",
@@ -543,6 +555,10 @@
   "KQi/UZ": {
     "defaultMessage": "封存作品"
   },
+  "KxVlDj": {
+    "defaultMessage": "設定 - 已封鎖用戶",
+    "description": "src/views/Me/Settings/Blocked/index.tsx"
+  },
   "L0J61B": {
     "defaultMessage": "免費",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -579,6 +595,10 @@
   "Lc/azT": {
     "defaultMessage": "IPNS 訂閱",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "Lp6CiR": {
+    "defaultMessage": "設定 - 其他",
+    "description": "src/views/Me/Settings/Misc/index.tsx"
   },
   "LqxIEU": {
     "defaultMessage": "錢包地址將作為身份識別之一在個人頁公開顯示。",
@@ -834,6 +854,10 @@
     "defaultMessage": "在你的圍爐中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "YUXRsM": {
+    "defaultMessage": "已封鎖用戶",
+    "description": "src/views/Me/Settings/Blocked/index.tsx"
+  },
   "YlPCRU": {
     "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -902,6 +926,10 @@
   "cE4Hfw": {
     "defaultMessage": "發現"
   },
+  "cQYXjl": {
+    "defaultMessage": "匯率幣別",
+    "description": "src/views/Me/Settings/Misc/Currency/index.tsx"
+  },
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {篇文章} other {篇文章}}"
   },
@@ -952,6 +980,10 @@
   "eov+J2": {
     "defaultMessage": "自定義網址名稱"
   },
+  "f0/gC1": {
+    "defaultMessage": "已解封",
+    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
   "fWDtpq": {
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -977,6 +1009,10 @@
   "h9CG9E": {
     "defaultMessage": "{commentType}已刪除",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "hASeng": {
+    "defaultMessage": "已封鎖用戶",
+    "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
   },
   "hYG5fb": {
     "defaultMessage": "人追蹤",
@@ -1031,6 +1067,14 @@
   },
   "k97/u7": {
     "defaultMessage": "添加作品"
+  },
+  "kPylKK": {
+    "defaultMessage": "圍爐",
+    "description": "src/views/Me/Settings/Notifications/index.tsx"
+  },
+  "kS3vTS": {
+    "defaultMessage": "Liker ID",
+    "description": "src/views/Me/Settings/Misc/LikerID.tsx"
   },
   "kc79d3": {
     "defaultMessage": "找你想看的"
