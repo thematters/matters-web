@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { maskAddress } from '~/common/utils'
-import { Button, Form, IconClose20, ViewerContext } from '~/components'
+import { Button, IconClose20, TableView, ViewerContext } from '~/components'
 
 const Wallet = () => {
   const viewer = useContext(ViewerContext)
@@ -10,7 +10,7 @@ const Wallet = () => {
   const hasETHAddress = !!ethAddress
 
   return (
-    <Form.List.Item
+    <TableView.Cell
       title={
         <FormattedMessage
           defaultMessage="Wallet address"

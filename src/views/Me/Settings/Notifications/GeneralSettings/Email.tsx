@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { Form, Switch, ViewerContext } from '~/components'
+import { Switch, TableView, ViewerContext } from '~/components'
 import { ViewerNotificationsGeneralSettingsQuery } from '~/gql/graphql'
 
 type NotificationType = NonNullable<
@@ -18,7 +18,7 @@ interface EmailProps {
 const Email = ({ settings, toggle }: EmailProps) => {
   const intl = useIntl()
   const label = intl.formatMessage({
-    defaultMessage: 'Matters daily report',
+    defaultMessage: 'Matters Daily Report',
     description: 'src/views/Me/Settings/Notifications/Email.tsx',
   })
 
@@ -26,14 +26,14 @@ const Email = ({ settings, toggle }: EmailProps) => {
   const hasEmail = !!viewer.info.email
 
   return (
-    <Form.List
+    <TableView
       groupName={intl.formatMessage({
         defaultMessage: 'Email',
         description: 'src/views/Me/Settings/Notifications/Email.tsx',
       })}
       spacingX={0}
     >
-      <Form.List.Item
+      <TableView.Cell
         title={label}
         subtitle={
           <FormattedMessage
@@ -61,7 +61,7 @@ const Email = ({ settings, toggle }: EmailProps) => {
         }
         rightTextColor={!hasEmail ? 'grey' : undefined}
       />
-    </Form.List>
+    </TableView>
   )
 }
 export default Email

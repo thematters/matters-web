@@ -262,6 +262,10 @@
     "defaultMessage": "Settings",
     "description": "src/views/Me/Settings/Misc/index.tsx"
   },
+  "8t6Cs8": {
+    "defaultMessage": "Matters Daily Report",
+    "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
   "8w3GEA": {
     "defaultMessage": "mentioned you in {article}",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
@@ -287,10 +291,6 @@
   "A0KB7s": {
     "defaultMessage": "New replies to broadcast",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
-  },
-  "A0jNj2": {
-    "defaultMessage": "Matters daily report",
-    "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "A3g33H": {
     "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"

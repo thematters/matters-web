@@ -4,9 +4,9 @@ import { FormattedMessage } from 'react-intl'
 import { LANG_TEXT_MAP } from '~/common/enums'
 import {
   Dropdown,
-  Form,
   LanguageContext,
   LanguageSwitchContent,
+  TableView,
 } from '~/components'
 
 const Language = () => {
@@ -15,7 +15,7 @@ const Language = () => {
   return (
     <Dropdown content={<LanguageSwitchContent />}>
       {({ openDropdown, ref }) => (
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Language"

@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { Form, Head, Layout, Spacer } from '~/components'
+import { Head, Layout, Spacer, TableView } from '~/components'
 
 import SettingsTabs from '../SettingsTabs'
 import styles from '../styles.module.css'
@@ -37,14 +37,14 @@ const Settings = () => {
       <SettingsTabs />
 
       <section className={styles.container}>
-        <Form.List spacingX={0}>
+        <TableView spacingX={0}>
           <MattersID />
           <MyProfile />
           <Email />
           <Password />
-        </Form.List>
+        </TableView>
 
-        <Form.List
+        <TableView
           spacingX={0}
           groupName={
             <FormattedMessage
@@ -54,9 +54,9 @@ const Settings = () => {
           }
         >
           <Wallet />
-        </Form.List>
+        </TableView>
 
-        <Form.List
+        <TableView
           spacingX={0}
           groupName={
             <FormattedMessage
@@ -66,7 +66,7 @@ const Settings = () => {
           }
         >
           <Socials />
-        </Form.List>
+        </TableView>
       </section>
 
       <Spacer size="xloose" />

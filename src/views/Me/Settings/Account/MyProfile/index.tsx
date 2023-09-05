@@ -1,12 +1,11 @@
-import Link from 'next/link'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
 import {
   Avatar,
-  Form,
   IconArrowRight20,
+  TableView,
   TextIcon,
   ViewerContext,
 } from '~/components'
@@ -21,7 +20,7 @@ const MyProfile = () => {
   })
 
   return (
-    <Form.List.Item
+    <TableView.Cell
       title={
         <FormattedMessage
           defaultMessage="My profile"
@@ -29,21 +28,19 @@ const MyProfile = () => {
         />
       }
       right={
-        <Link {...path} legacyBehavior>
-          <a className={styles.viewerProfile}>
-            <span className={styles.displayName}>{viewer.displayName}</span>
-            <TextIcon
-              icon={<IconArrowRight20 size="mdS" color="greyDarker" />}
-              size="sm"
-              textPlacement="left"
-              spacing="basexxtight"
-            >
-              <Avatar size="mdS" user={viewer} />
-            </TextIcon>
-          </a>
-        </Link>
+        <span className={styles.viewerProfile}>
+          <span className={styles.displayName}>{viewer.displayName}</span>
+          <TextIcon
+            icon={<IconArrowRight20 size="mdS" color="greyDarker" />}
+            size="sm"
+            textPlacement="left"
+            spacing="basexxtight"
+          >
+            <Avatar size="mdS" user={viewer} />
+          </TextIcon>
+        </span>
       }
-      clickable
+      href={path.href}
     />
   )
 }

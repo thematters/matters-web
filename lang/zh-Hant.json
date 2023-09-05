@@ -262,6 +262,10 @@
     "defaultMessage": "設定",
     "description": "src/views/Me/Settings/Misc/index.tsx"
   },
+  "8t6Cs8": {
+    "defaultMessage": "Matters 日報",
+    "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
   "8w3GEA": {
     "defaultMessage": "在作品 {article} 中提及你",
     "description": "src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
@@ -287,10 +291,6 @@
   "A0KB7s": {
     "defaultMessage": "廣播留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
-  },
-  "A0jNj2": {
-    "defaultMessage": "Matters 日報",
-    "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "A3g33H": {
     "defaultMessage": "封存作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"

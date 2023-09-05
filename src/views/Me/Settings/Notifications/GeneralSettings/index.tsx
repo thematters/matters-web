@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { Form, Spinner, Switch, useMutation } from '~/components'
+import { Spinner, Switch, TableView, useMutation } from '~/components'
 import {
   UpdateViewerNotificationsGeneralMutation,
   ViewerNotificationsGeneralSettingsQuery,
@@ -93,9 +93,9 @@ const NotificationsGeneralSettings = () => {
   }
   return (
     <>
-      <Form.List spacingX={0}>
+      <TableView spacingX={0}>
         {/* New followers */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New followers"
@@ -118,7 +118,7 @@ const NotificationsGeneralSettings = () => {
         />
 
         {/* New likes */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New likes"
@@ -141,7 +141,7 @@ const NotificationsGeneralSettings = () => {
         />
 
         {/* Comments and replies */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Comments and replies"
@@ -164,7 +164,7 @@ const NotificationsGeneralSettings = () => {
         />
 
         {/* Mention me */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Mention me"
@@ -187,7 +187,7 @@ const NotificationsGeneralSettings = () => {
         />
 
         {/* Articles has been bookmarked */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Articles has been bookmarked"
@@ -210,7 +210,7 @@ const NotificationsGeneralSettings = () => {
         />
 
         {/* Articles has been collected */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Articles has been collected"
@@ -233,7 +233,7 @@ const NotificationsGeneralSettings = () => {
         />
 
         {/* Comments has been pinned */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Comments has been pinned"
@@ -254,7 +254,7 @@ const NotificationsGeneralSettings = () => {
             />
           }
         />
-      </Form.List>
+      </TableView>
 
       <Email toggle={toggle} settings={settings} />
     </>

@@ -4,11 +4,11 @@ import { FormattedMessage } from 'react-intl'
 import {
   Button,
   ButtonProps,
-  Form,
   IconClose20,
   IconFacebook22,
   IconGoogle22,
   IconX22,
+  TableView,
   TextIcon,
   ViewerContext,
 } from '~/components'
@@ -38,7 +38,7 @@ const Socials = () => {
   return (
     <>
       {/* Google */}
-      <Form.List.Item
+      <TableView.Cell
         title={
           <TextIcon icon={<IconGoogle22 size="mdM" />} spacing="tight">
             Google
@@ -62,7 +62,7 @@ const Socials = () => {
       />
 
       {/* Twitter */}
-      <Form.List.Item
+      <TableView.Cell
         title={
           <TextIcon icon={<IconX22 size="mdM" />} spacing="tight">
             Twitter
@@ -86,7 +86,7 @@ const Socials = () => {
       />
 
       {/* Facebook */}
-      <Form.List.Item
+      <TableView.Cell
         title={
           <TextIcon icon={<IconFacebook22 size="mdM" />} spacing="tight">
             Facebook

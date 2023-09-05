@@ -1,53 +1,43 @@
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
-import { Card, CardProps, IconArrowRight20, TextIcon } from '~/components'
+import { Card, CardProps, IconArrowRight20 } from '~/components'
 
 import styles from './styles.module.css'
 
-type ItemProps = {
+type CellProps = {
   title: string | React.ReactNode
   subtitle?: string | React.ReactNode
 
   right?: React.ReactNode
   rightText?: string | React.ReactNode
   rightTextColor?: 'green' | 'greyDarker' | 'grey' | 'black'
-  rightSubText?: string | React.ReactNode
   rightIcon?: React.ReactNode
-
-  bold?: boolean
-  clickable?: boolean
 
   ref?: any
 } & CardProps
 
-const Item: React.FC<ItemProps> = forwardRef(
+const Cell: React.FC<CellProps> = forwardRef(
   (
     {
       title,
       subtitle,
+
       right,
       rightText,
       rightTextColor = 'greyDarker',
-      rightSubText,
       rightIcon = <IconArrowRight20 size="mdS" color="greyDarker" />,
-
-      bold,
-      clickable: isClickable,
 
       ...cardProps
     },
     ref
   ) => {
-    const clickable =
-      isClickable || cardProps.href || cardProps.htmlHref || cardProps.onClick
+    // const clickable = cardProps.href || cardProps.htmlHref || cardProps.onClick
     const leftClasses = classNames({
       [styles.left]: true,
-      [styles.bold]: !!bold,
     })
     const rightClasses = classNames({
       [styles.right]: true,
-      [styles.clickable]: !!clickable,
     })
 
     const itemContent = (
@@ -59,18 +49,10 @@ const Item: React.FC<ItemProps> = forwardRef(
 
         <section className={rightClasses}>
           {right || (
-            <TextIcon
-              icon={clickable && rightIcon}
-              size="sm"
-              textPlacement="left"
-              spacing="basexxtight"
-              color={rightTextColor}
-            >
+            <span className={styles.section}>
               {rightText}
-              {rightSubText && (
-                <span className={styles.subtext}>{rightSubText}</span>
-              )}
-            </TextIcon>
+              {rightIcon}
+            </span>
           )}
         </section>
       </section>
@@ -91,6 +73,6 @@ const Item: React.FC<ItemProps> = forwardRef(
   }
 )
 
-Item.displayName = 'List.Item'
+Cell.displayName = 'TableView.Cell'
 
-export default Item
+export default Cell

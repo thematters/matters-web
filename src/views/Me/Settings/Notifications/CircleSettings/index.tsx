@@ -3,12 +3,12 @@ import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
-  Form,
   Head,
   Layout,
   Spacer,
   Spinner,
   Switch,
+  TableView,
   useMutation,
 } from '~/components'
 import {
@@ -109,7 +109,7 @@ const BaseNotificationSettings = () => {
   return (
     <>
       {/* My cirlce */}
-      <Form.List
+      <TableView
         groupName={
           <FormattedMessage
             defaultMessage="My circle"
@@ -119,7 +119,7 @@ const BaseNotificationSettings = () => {
         spacingX={0}
       >
         {/* New subscribers */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New subscribers"
@@ -142,7 +142,7 @@ const BaseNotificationSettings = () => {
         />
 
         {/* New followers */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New followers"
@@ -165,7 +165,7 @@ const BaseNotificationSettings = () => {
         />
 
         {/* Subscription cancellations */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="Subscription cancellations"
@@ -188,7 +188,7 @@ const BaseNotificationSettings = () => {
         />
 
         {/* New replies to broadcast */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New replies to broadcast"
@@ -211,7 +211,7 @@ const BaseNotificationSettings = () => {
         />
 
         {/* New discussions */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New discussions"
@@ -234,7 +234,7 @@ const BaseNotificationSettings = () => {
         />
 
         {/* New replies to discussions */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New replies to discussions"
@@ -255,10 +255,10 @@ const BaseNotificationSettings = () => {
             />
           }
         />
-      </Form.List>
+      </TableView>
 
       {/* Following circles */}
-      <Form.List
+      <TableView
         groupName={
           <FormattedMessage
             defaultMessage="Following circles"
@@ -268,7 +268,7 @@ const BaseNotificationSettings = () => {
         spacingX={0}
       >
         {/* New articles */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New articles"
@@ -291,7 +291,7 @@ const BaseNotificationSettings = () => {
         />
 
         {/* New broadcasts */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New broadcasts"
@@ -314,7 +314,7 @@ const BaseNotificationSettings = () => {
         />
 
         {/* New replies to broadcast */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New replies to broadcast"
@@ -337,7 +337,7 @@ const BaseNotificationSettings = () => {
         />
 
         {/* New discussions */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New discussions"
@@ -360,7 +360,7 @@ const BaseNotificationSettings = () => {
         />
 
         {/* New replies to discussions */}
-        <Form.List.Item
+        <TableView.Cell
           title={
             <FormattedMessage
               defaultMessage="New replies to discussions"
@@ -381,7 +381,7 @@ const BaseNotificationSettings = () => {
             />
           }
         />
-      </Form.List>
+      </TableView>
     </>
   )
 }

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Button, ButtonProps, Form, ViewerContext } from '~/components'
+import { Button, ButtonProps, TableView, ViewerContext } from '~/components'
 
 const Password = () => {
   const viewer = useContext(ViewerContext)
@@ -18,7 +18,7 @@ const Password = () => {
   }
 
   return (
-    <Form.List.Item
+    <TableView.Cell
       title={
         <FormattedMessage
           defaultMessage="Password"

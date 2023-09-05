@@ -1,6 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { Form, Head, Layout, Spacer } from '~/components'
+import { Head, Layout, Spacer, TableView } from '~/components'
 
 import SettingsTabs from '../SettingsTabs'
 import styles from '../styles.module.css'
@@ -34,12 +34,12 @@ const SettingsMisc = () => {
       <SettingsTabs />
 
       <section className={styles.container}>
-        <Form.List spacingX={0}>
+        <TableView spacingX={0}>
           <Language />
           <Currency />
           <BlockedUsers />
           <LikerID />
-        </Form.List>
+        </TableView>
       </section>
 
       <Spacer size="xloose" />
