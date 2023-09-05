@@ -63,6 +63,10 @@
     "defaultMessage": "最近 7 日",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "0jf0/t": {
+    "defaultMessage": "郵件",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "0qagOO": {
     "defaultMessage": "圍爐訂閱",
     "description": "src/components/Transaction/index.tsx"
@@ -439,6 +443,10 @@
   "EwbNbl": {
     "defaultMessage": "Oops！連結已失效",
     "description": "src/views/Callback/GoogleCallback.tsx"
+  },
+  "FEI5Fv": {
+    "defaultMessage": "郵件地址",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "FOOymB": {
     "defaultMessage": "還沒有成員",
