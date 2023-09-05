@@ -105,6 +105,10 @@
     "defaultMessage": "設定 - 通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
+  "2P5JII": {
+    "defaultMessage": "解綁",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "2W0f9h": {
     "defaultMessage": "個人簡介"
   },
@@ -169,6 +173,10 @@
   "50cquj": {
     "defaultMessage": "還沒有眾聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "5CcjZy": {
+    "defaultMessage": "確認要解綁 {type} 嗎？",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "5FO4vn": {
     "defaultMessage": "你尚無權限進行該操作"
@@ -358,6 +366,10 @@
     "defaultMessage": "語言",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
   },
+  "C3NKBg": {
+    "defaultMessage": "{type} 已綁定",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
+  },
   "C8GQaD": {
     "defaultMessage": "{date}更新",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
@@ -381,6 +393,10 @@
   },
   "CxYcYR": {
     "defaultMessage": "建議使用正方形圖片"
+  },
+  "D+N1Q6": {
+    "defaultMessage": "該 {type} 帳號已關聯至其他 Matters 帳號，請登入該帳號解綁後再試",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一網址到 RSS 閱讀器",
@@ -549,6 +565,10 @@
     "defaultMessage": "作品已取消精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
+  "K2/mHF": {
+    "defaultMessage": "暫時無法解綁 {type}，因為你沒有其他登入方式（電子郵件/數字錢包/社交帳號）。",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "K3r6DQ": {
     "defaultMessage": "刪除"
   },
@@ -639,7 +659,7 @@
     "description": "src/views/Me/Transactions/index.tsx"
   },
   "NEKHMm": {
-    "defaultMessage": "電子郵件",
+    "defaultMessage": "Email",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "NONfAh": {
@@ -712,7 +732,7 @@
     "description": "src/components/ArticleDigest/Archive/index.tsx"
   },
   "ROPCC0": {
-    "defaultMessage": "請先绑定電子郵件",
+    "defaultMessage": "作品被讚賞",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
   "RxiHr/": {
@@ -862,6 +882,10 @@
   "XVYrS/": {
     "defaultMessage": "還沒有追蹤者"
   },
+  "XYUhx0": {
+    "defaultMessage": "解綁 {type}",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "Xd0J7Y": {
     "defaultMessage": "開放社區"
   },
@@ -992,7 +1016,7 @@
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "dVbKzB": {
-    "defaultMessage": "評論和回覆",
+    "defaultMessage": "作品或評論提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "deEeEI": {
@@ -1005,7 +1029,7 @@
     "defaultMessage": "我的足跡"
   },
   "dzF4ci": {
-    "defaultMessage": "Resend",
+    "defaultMessage": "重新發送",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "eTpiYa": {
@@ -1130,10 +1154,6 @@
   "kf5NAv": {
     "defaultMessage": "可使用英文、數字及下劃線",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
-  },
-  "kkF6ZR": {
-    "defaultMessage": "設定",
-    "description": "src/views/Me/Settings/Settings/index.tsx"
   },
   "kkZioy": {
     "defaultMessage": "確認移出",
@@ -1279,10 +1299,6 @@
   "rLlTQ9": {
     "defaultMessage": "標籤名稱"
   },
-  "rSVVMb": {
-    "defaultMessage": "設定 - 帳號",
-    "description": "src/views/Me/Settings/Settings/index.tsx"
-  },
   "rXnmeE": {
     "defaultMessage": "確認發送"
   },
@@ -1398,6 +1414,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"
+  },
+  "wm9xNB": {
+    "defaultMessage": "{type} 已解綁",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "x7O1/5": {
     "defaultMessage": "ID 已被使用，請修改後再試",

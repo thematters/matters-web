@@ -17,3 +17,11 @@ export const SOCIAL_LOGIN = gql`
     }
   }
 `
+
+export const ADD_SOCIAL_LOGIN = gql`
+  mutation AddSocialLogin($input: SocialLoginInput!) {
+    addSocialLogin(input: $input) {
+      id
+    }
+  }
+`

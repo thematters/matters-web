@@ -1,7 +1,7 @@
 import React from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
-import { Head, Layout, Spacer, TableView } from '~/components'
+import { Head, Layout, TableView } from '~/components'
 
 import SettingsTabs from '../SettingsTabs'
 import styles from '../styles.module.css'
@@ -13,26 +13,11 @@ import Socials from './Socials'
 import Wallet from './Wallet'
 
 const Settings = () => {
-  const intl = useIntl()
-  const title = intl.formatMessage({
-    defaultMessage: 'Settings - Account',
-    description: 'src/views/Me/Settings/Settings/index.tsx',
-  })
-
   return (
     <Layout.Main>
-      <Layout.Header
-        left={
-          <Layout.Header.Title>
-            <FormattedMessage
-              defaultMessage="Settings"
-              description="src/views/Me/Settings/Settings/index.tsx"
-            />
-          </Layout.Header.Title>
-        }
-      />
+      <Layout.Header left={<Layout.Header.Title id="settings" />} />
 
-      <Head title={title} />
+      <Head title={{ id: 'settings' }} />
 
       <SettingsTabs />
 
@@ -68,8 +53,6 @@ const Settings = () => {
           <Socials />
         </TableView>
       </section>
-
-      <Spacer size="xloose" />
     </Layout.Main>
   )
 }

@@ -105,6 +105,10 @@
     "defaultMessage": "设置 - 通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
+  "2P5JII": {
+    "defaultMessage": "解绑",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "2W0f9h": {
     "defaultMessage": "个人简介"
   },
@@ -169,6 +173,10 @@
   "50cquj": {
     "defaultMessage": "还没有众聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "5CcjZy": {
+    "defaultMessage": "确认要解绑 {type} 吗？",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "5FO4vn": {
     "defaultMessage": "你尚无权限进行该操作"
@@ -358,6 +366,10 @@
     "defaultMessage": "语言",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
   },
+  "C3NKBg": {
+    "defaultMessage": "{type} 已绑定",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
+  },
   "C8GQaD": {
     "defaultMessage": "{date}更新",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
@@ -381,6 +393,10 @@
   },
   "CxYcYR": {
     "defaultMessage": "建议使用正方形图片"
+  },
+  "D+N1Q6": {
+    "defaultMessage": "该 {type} 账号已关联至其他 Matters 账号，请登录该账号解绑后再试",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一网址到 RSS 阅读器",
@@ -549,6 +565,10 @@
     "defaultMessage": "作品已取消精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
+  "K2/mHF": {
+    "defaultMessage": "暂时无法解绑 {type}，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "K3r6DQ": {
     "defaultMessage": "刪除"
   },
@@ -639,7 +659,7 @@
     "description": "src/views/Me/Transactions/index.tsx"
   },
   "NEKHMm": {
-    "defaultMessage": "邮件",
+    "defaultMessage": "Email",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "NONfAh": {
@@ -862,6 +882,10 @@
   "XVYrS/": {
     "defaultMessage": "还没有追踪者"
   },
+  "XYUhx0": {
+    "defaultMessage": "解绑 {type}",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "Xd0J7Y": {
     "defaultMessage": "开放社区"
   },
@@ -984,7 +1008,7 @@
     "defaultMessage": "返回"
   },
   "d1mBsg": {
-    "defaultMessage": "追踪的围炉",
+    "defaultMessage": "新订阅者",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "d4waan": {
@@ -1131,10 +1155,6 @@
     "defaultMessage": "可使用英文、数字及下划线",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
-  "kkF6ZR": {
-    "defaultMessage": "设置",
-    "description": "src/views/Me/Settings/Settings/index.tsx"
-  },
   "kkZioy": {
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -1279,10 +1299,6 @@
   "rLlTQ9": {
     "defaultMessage": "标签名称"
   },
-  "rSVVMb": {
-    "defaultMessage": "设置 - 账号",
-    "description": "src/views/Me/Settings/Settings/index.tsx"
-  },
   "rXnmeE": {
     "defaultMessage": "确认发送"
   },
@@ -1398,6 +1414,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"
+  },
+  "wm9xNB": {
+    "defaultMessage": "{type} 已解绑",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "x7O1/5": {
     "defaultMessage": "ID 已被使用，请修改后再试",
