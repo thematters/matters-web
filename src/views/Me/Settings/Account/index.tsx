@@ -3,13 +3,13 @@ import { FormattedMessage } from 'react-intl'
 
 import { Form, Head, Layout } from '~/components'
 
+import SettingsTabs from '../SettingsTabs'
+import styles from '../styles.module.css'
 import Email from './Email'
 import MattersID from './MattersID'
 import MyProfile from './MyProfile'
 import Password from './Password'
-import SettingsTabs from './SettingsTabs'
 import Socials from './Socials'
-import styles from './styles.module.css'
 import Wallet from './Wallet'
 
 const Settings = () => {
