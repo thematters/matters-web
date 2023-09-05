@@ -1,6 +1,7 @@
 // User
 export * from './ENSDialog'
 export * from './LikeCoinDialog'
+export * from './RemoveSocialLoginDialog'
 export * from './RssFeedDialog'
 export * from './SetUserNameDialog'
 

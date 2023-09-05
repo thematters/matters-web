@@ -102,8 +102,12 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
   "2DkkhD": {
-    "defaultMessage": "设置 - 通知",
+    "defaultMessage": "Settings - Notifications",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
+  },
+  "2P5JII": {
+    "defaultMessage": "解绑",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "2W0f9h": {
     "defaultMessage": "个人简介"
@@ -118,7 +122,7 @@
     "defaultMessage": "我的赞赏"
   },
   "2vpUYs": {
-    "defaultMessage": "回复留言",
+    "defaultMessage": "New replies to discussions",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "32bml8": {
@@ -169,6 +173,10 @@
   "50cquj": {
     "defaultMessage": "还没有众聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "5CcjZy": {
+    "defaultMessage": "确认要解绑 {type} 吗？",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "5FO4vn": {
     "defaultMessage": "你尚无权限进行该操作"
@@ -285,11 +293,11 @@
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
   "A0KB7s": {
-    "defaultMessage": "广播留言",
+    "defaultMessage": "New replies to broadcast",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "A0jNj2": {
-    "defaultMessage": "Matters 日报",
+    "defaultMessage": "Matters daily report",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "A3g33H": {
@@ -341,7 +349,7 @@
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "BMGZE2": {
-    "defaultMessage": "作品或评论提及我",
+    "defaultMessage": "Mention me",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "BY343C": {
@@ -357,6 +365,10 @@
   "BnMru1": {
     "defaultMessage": "语言",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
+  },
+  "C3NKBg": {
+    "defaultMessage": "{type} 已绑定",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
   "C8GQaD": {
     "defaultMessage": "{date}更新",
@@ -381,6 +393,10 @@
   },
   "CxYcYR": {
     "defaultMessage": "建议使用正方形图片"
+  },
+  "D+N1Q6": {
+    "defaultMessage": "该 {type} 账号已关联至其他 Matters 账号，请登录该账号解绑后再试",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一网址到 RSS 阅读器",
@@ -472,7 +488,7 @@
     "defaultMessage": "我知道了"
   },
   "GhogWq": {
-    "defaultMessage": "退订",
+    "defaultMessage": "Subscription cancellations",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "Gt7K6r": {
@@ -538,7 +554,7 @@
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
   "JkWLg6": {
-    "defaultMessage": "被追踪",
+    "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "JpS59y": {
@@ -548,6 +564,10 @@
   "Js/Fij": {
     "defaultMessage": "作品已取消精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+  },
+  "K2/mHF": {
+    "defaultMessage": "暂时无法解绑 {type}，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "K3r6DQ": {
     "defaultMessage": "刪除"
@@ -621,11 +641,11 @@
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "Mn7GEf": {
-    "defaultMessage": "精选过去 24 小时与你有关的消息",
+    "defaultMessage": "Selected activities related to you in the past 24 hours",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "MoyOR+": {
-    "defaultMessage": "设置 - 围炉通知",
+    "defaultMessage": "Settings - Circle notifications",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "N2IrpM": {
@@ -639,7 +659,7 @@
     "description": "src/views/Me/Transactions/index.tsx"
   },
   "NEKHMm": {
-    "defaultMessage": "邮件",
+    "defaultMessage": "Email",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "NONfAh": {
@@ -670,7 +690,7 @@
     "defaultMessage": "分享"
   },
   "Opaa0R": {
-    "defaultMessage": "作品被赞赏",
+    "defaultMessage": "New likes",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "PLBmDT": {
@@ -712,7 +732,7 @@
     "description": "src/components/ArticleDigest/Archive/index.tsx"
   },
   "ROPCC0": {
-    "defaultMessage": "请先绑定邮箱",
+    "defaultMessage": "Please add email first",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
   "RxiHr/": {
@@ -832,7 +852,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "Wg0ZvI": {
-    "defaultMessage": "作品被收藏",
+    "defaultMessage": "Articles has been bookmarked",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "WpvsPu": {
@@ -861,6 +881,10 @@
   },
   "XVYrS/": {
     "defaultMessage": "还没有追踪者"
+  },
+  "XYUhx0": {
+    "defaultMessage": "解绑 {type}",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "Xd0J7Y": {
     "defaultMessage": "开放社区"
@@ -977,14 +1001,14 @@
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "ctl5tq": {
-    "defaultMessage": "新作品",
+    "defaultMessage": "New articles",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "cyR7Kh": {
     "defaultMessage": "返回"
   },
   "d1mBsg": {
-    "defaultMessage": "追踪的围炉",
+    "defaultMessage": "Following circles",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "d4waan": {
@@ -992,7 +1016,7 @@
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "dVbKzB": {
-    "defaultMessage": "评论和回复",
+    "defaultMessage": "Comments and replies",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "deEeEI": {
@@ -1043,7 +1067,7 @@
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "gW/KWu": {
-    "defaultMessage": "评论被精选",
+    "defaultMessage": "Comments has been pinned",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "h+punE": {
@@ -1051,7 +1075,7 @@
     "description": "src/views/User/CollectionDetail/Content.tsx"
   },
   "h7sMQs": {
-    "defaultMessage": "新追踪者",
+    "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "h9CG9E": {
@@ -1131,10 +1155,6 @@
     "defaultMessage": "可使用英文、数字及下划线",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
-  "kkF6ZR": {
-    "defaultMessage": "设置",
-    "description": "src/views/Me/Settings/Settings/index.tsx"
-  },
   "kkZioy": {
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -1144,7 +1164,7 @@
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "l02bPO": {
-    "defaultMessage": "作品被关联",
+    "defaultMessage": "Articles has been collected",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "lIir/P": {
@@ -1169,7 +1189,7 @@
     "defaultMessage": "删除选集"
   },
   "m4KtjK": {
-    "defaultMessage": "新订阅者",
+    "defaultMessage": "New subscribers",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "mCAIcg": {
@@ -1202,7 +1222,7 @@
     "defaultMessage": "至少 8 个字符，支持英文大小写字母、数字和特殊符号"
   },
   "mp9SBo": {
-    "defaultMessage": "围炉通知",
+    "defaultMessage": "Circle notifications",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "n2Sc6g": {
@@ -1279,10 +1299,6 @@
   "rLlTQ9": {
     "defaultMessage": "标签名称"
   },
-  "rSVVMb": {
-    "defaultMessage": "设置 - 账号",
-    "description": "src/views/Me/Settings/Settings/index.tsx"
-  },
   "rXnmeE": {
     "defaultMessage": "确认发送"
   },
@@ -1328,7 +1344,7 @@
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
   "u+cgOo": {
-    "defaultMessage": "我的围炉",
+    "defaultMessage": "My circle",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "u5aHb4": {
@@ -1372,7 +1388,7 @@
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
   "viMrzF": {
-    "defaultMessage": "广播",
+    "defaultMessage": "New broadcasts",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "wCgTu5": {
@@ -1399,6 +1415,10 @@
   "wbcwKd": {
     "defaultMessage": "查看全部"
   },
+  "wm9xNB": {
+    "defaultMessage": "{type} 已解绑",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "x7O1/5": {
     "defaultMessage": "ID 已被使用，请修改后再试",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -1416,7 +1436,7 @@
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "xafreT": {
-    "defaultMessage": "留言",
+    "defaultMessage": "New discussions",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "xkr+zo": {
@@ -1457,7 +1477,7 @@
     "description": "src/components/Transaction/index.tsx"
   },
   "z+a1SW": {
-    "defaultMessage": "设置",
+    "defaultMessage": "Settings",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "zAK5G+": {

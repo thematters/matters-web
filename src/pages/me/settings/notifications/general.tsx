@@ -1,9 +1,9 @@
 import { Protected } from '~/components'
-import MeSettingsNotification from '~/views/Me/Settings/Notification'
+import NotificationGeneralSettings from '~/views/Me/Settings/Notification/General'
 
 const ProtectedMeSettingsNotification = () => (
   <Protected>
-    <MeSettingsNotification />
+    <NotificationGeneralSettings />
   </Protected>
 )
 

@@ -47,6 +47,7 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_MISC'
   | 'ME_SETTINGS_BLOCKED'
   | 'ME_DRAFT_DETAIL'
+  | 'ME_SETTINGS_NOTIFICATIONS_GENERAL' // TODO: remove
   | 'ME_SETTINGS_NOTIFICATIONS_CIRCLE'
   // Form
   | 'LOGIN'
@@ -143,6 +144,10 @@ export const ROUTES: {
   // Settings
   { key: 'ME_SETTINGS', pathname: '/me/settings' },
   { key: 'ME_SETTINGS_NOTIFICATIONS', pathname: '/me/settings/notifications' },
+  {
+    key: 'ME_SETTINGS_NOTIFICATIONS_GENERAL',
+    pathname: '/me/settings/notifications/general',
+  },
   {
     key: 'ME_SETTINGS_NOTIFICATIONS_CIRCLE',
     pathname: '/me/settings/notifications/circle',

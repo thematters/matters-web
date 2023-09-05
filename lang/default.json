@@ -105,6 +105,10 @@
     "defaultMessage": "Settings - Notifications",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
+  "2P5JII": {
+    "defaultMessage": "Disconnect",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "2W0f9h": {
     "defaultMessage": "Bio"
   },
@@ -169,6 +173,10 @@
   "50cquj": {
     "defaultMessage": "No discussion yet",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "5CcjZy": {
+    "defaultMessage": "Do you want to disconnect from {type}?",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "5FO4vn": {
     "defaultMessage": "You do not have permission to perform this operation"
@@ -358,6 +366,10 @@
     "defaultMessage": "Language",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
   },
+  "C3NKBg": {
+    "defaultMessage": "Connected to {type}",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
+  },
   "C8GQaD": {
     "defaultMessage": "upadted {date}",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
@@ -381,6 +393,10 @@
   },
   "CxYcYR": {
     "defaultMessage": "Recommended square image."
+  },
+  "D+N1Q6": {
+    "defaultMessage": "This {type} account is connected to a Matters account. Sign in to that account to disconnect it then try again",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
   "D2Sw/t": {
     "defaultMessage": "Add any URL in the following list into RSS reader",
@@ -548,6 +564,10 @@
   "Js/Fij": {
     "defaultMessage": "This article has been removed from Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+  },
+  "K2/mHF": {
+    "defaultMessage": "Unable to disconnect from {type} temporarily because you do not have any other log in methods (Email/Crypto wallet/Social account).",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "K3r6DQ": {
     "defaultMessage": "Delete"
@@ -862,6 +882,10 @@
   "XVYrS/": {
     "defaultMessage": "No followers yet"
   },
+  "XYUhx0": {
+    "defaultMessage": "Disconnect from {type}",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
   "Xd0J7Y": {
     "defaultMessage": "Open Source"
   },
@@ -1131,10 +1155,6 @@
     "defaultMessage": "English letters, numbers, and underscores",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
-  "kkF6ZR": {
-    "defaultMessage": "Settings",
-    "description": "src/views/Me/Settings/Settings/index.tsx"
-  },
   "kkZioy": {
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -1279,10 +1299,6 @@
   "rLlTQ9": {
     "defaultMessage": "Tag Name"
   },
-  "rSVVMb": {
-    "defaultMessage": "Settings - Account",
-    "description": "src/views/Me/Settings/Settings/index.tsx"
-  },
   "rXnmeE": {
     "defaultMessage": "Confirm and Send"
   },
@@ -1398,6 +1414,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "View All"
+  },
+  "wm9xNB": {
+    "defaultMessage": "{type} disconnected",
+    "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
   "x7O1/5": {
     "defaultMessage": "This ID has been taken, please try another one",
