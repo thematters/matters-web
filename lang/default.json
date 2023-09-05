@@ -115,6 +115,10 @@
   "2atspc": {
     "defaultMessage": "Drafts"
   },
+  "2ef/Xl": {
+    "defaultMessage": "Block",
+    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
   "2oxLHg": {
     "defaultMessage": "Up to 3 articles/collections can be pinned"
   },
@@ -1043,10 +1047,6 @@
   },
   "eov+J2": {
     "defaultMessage": "Custom URL Name"
-  },
-  "f0/gC1": {
-    "defaultMessage": "Unblocked",
-    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
   "fWDtpq": {
     "defaultMessage": "Pending",

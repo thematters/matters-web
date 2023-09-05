@@ -115,6 +115,10 @@
   "2atspc": {
     "defaultMessage": "我的草稿"
   },
+  "2ef/Xl": {
+    "defaultMessage": "屏蔽",
+    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
   "2oxLHg": {
     "defaultMessage": "最多可设置 3 个代表作"
   },
@@ -410,7 +414,7 @@
     "description": "src/components/UserProfile/index.tsx"
   },
   "DqQvtL": {
-    "defaultMessage": "解除封锁",
+    "defaultMessage": "解除屏蔽",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
   "DyuHBH": {
@@ -584,7 +588,7 @@
     "defaultMessage": "归档作品"
   },
   "KxVlDj": {
-    "defaultMessage": "设置 - 已封锁用户",
+    "defaultMessage": "设置 - 已屏蔽用户",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
   "L0J61B": {
@@ -907,7 +911,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
   "YUXRsM": {
-    "defaultMessage": "已封锁用户",
+    "defaultMessage": "已屏蔽用户",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
   "YlPCRU": {
@@ -1044,10 +1048,6 @@
   "eov+J2": {
     "defaultMessage": "自定义网址名称"
   },
-  "f0/gC1": {
-    "defaultMessage": "已解封",
-    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
-  },
   "fWDtpq": {
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1083,7 +1083,7 @@
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "hASeng": {
-    "defaultMessage": "已封锁用户",
+    "defaultMessage": "已屏蔽用户",
     "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
   },
   "hYG5fb": {
@@ -1378,7 +1378,7 @@
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "vAc1Bw": {
-    "defaultMessage": "封锁用户"
+    "defaultMessage": "屏蔽用户"
   },
   "vH8sCb": {
     "defaultMessage": "我的围炉"

@@ -115,6 +115,10 @@
   "2atspc": {
     "defaultMessage": "我的草稿"
   },
+  "2ef/Xl": {
+    "defaultMessage": "封鎖",
+    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
   "2oxLHg": {
     "defaultMessage": "最多可設置 3 個代表作"
   },
@@ -1043,10 +1047,6 @@
   },
   "eov+J2": {
     "defaultMessage": "自定義網址名稱"
-  },
-  "f0/gC1": {
-    "defaultMessage": "已解封",
-    "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
   "fWDtpq": {
     "defaultMessage": "邀請中",
