@@ -101,6 +101,10 @@
     "defaultMessage": "總數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "2DkkhD": {
+    "defaultMessage": "Settings - Notifications",
+    "description": "src/views/Me/Settings/Notifications/index.tsx"
+  },
   "2P5JII": {
     "defaultMessage": "解綁",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -116,6 +120,10 @@
   },
   "2slIPX": {
     "defaultMessage": "讚賞"
+  },
+  "2vpUYs": {
+    "defaultMessage": "New replies to discussions",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "32bml8": {
     "defaultMessage": "追蹤",
@@ -284,6 +292,14 @@
     "defaultMessage": "討論已送出",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
+  "A0KB7s": {
+    "defaultMessage": "New replies to broadcast",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "A0jNj2": {
+    "defaultMessage": "Matters daily report",
+    "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
   "A3g33H": {
     "defaultMessage": "封存作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
   },
@@ -332,6 +348,10 @@
     "defaultMessage": " 在圍爐 {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "BMGZE2": {
+    "defaultMessage": "Mention me",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "BY343C": {
     "defaultMessage": "修改"
   },
@@ -342,13 +362,13 @@
     "defaultMessage": "目前總追蹤人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "C3NKBg": {
-    "defaultMessage": "{type} 已綁定",
-    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
-  },
   "BnMru1": {
     "defaultMessage": "語言",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
+  },
+  "C3NKBg": {
+    "defaultMessage": "{type} 已綁定",
+    "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
   "C8GQaD": {
     "defaultMessage": "{date}更新",
@@ -467,6 +487,10 @@
   "GcvLBC": {
     "defaultMessage": "我知道了"
   },
+  "GhogWq": {
+    "defaultMessage": "Subscription cancellations",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
   "Gt7K6r": {
     "defaultMessage": "錢包地址",
     "description": "src/views/Me/Settings/Settings/Wallet/index.tsx"
@@ -528,6 +552,10 @@
   "JaLEXz": {
     "defaultMessage": "進入圍爐",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
+  "JkWLg6": {
+    "defaultMessage": "New followers",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "JpS59y": {
     "defaultMessage": "已接受",
@@ -612,6 +640,14 @@
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "Mn7GEf": {
+    "defaultMessage": "Selected activities related to you in the past 24 hours",
+    "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
+  "MoyOR+": {
+    "defaultMessage": "Settings - Circle notifications",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
   "N2IrpM": {
     "defaultMessage": "確認"
   },
@@ -621,6 +657,10 @@
   "NCBtyI": {
     "defaultMessage": "支持",
     "description": "src/views/Me/Transactions/index.tsx"
+  },
+  "NEKHMm": {
+    "defaultMessage": "Email",
+    "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "NONfAh": {
     "defaultMessage": "豆瓣",
@@ -648,6 +688,10 @@
   },
   "OKhRC6": {
     "defaultMessage": "分享"
+  },
+  "Opaa0R": {
+    "defaultMessage": "New likes",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "登入密碼",
@@ -686,6 +730,10 @@
   "RNKSCj": {
     "defaultMessage": "已封存",
     "description": "src/components/ArticleDigest/Archive/index.tsx"
+  },
+  "ROPCC0": {
+    "defaultMessage": "Please add email first",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
   "RxiHr/": {
     "defaultMessage": "還沒有任何用戶回覆你的邀請喔！",
@@ -802,6 +850,10 @@
   "WSUAwk": {
     "defaultMessage": "添加到精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "Wg0ZvI": {
+    "defaultMessage": "Articles has been bookmarked",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "WpvsPu": {
     "defaultMessage": "訂閱",
@@ -948,12 +1000,24 @@
     "defaultMessage": "由於你尚未發布任何作品，這裡還沒有任何數據能與你分享哦！發布第一篇作品來介紹你自己，以此開啟你的創作之旅吧！",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
+  "ctl5tq": {
+    "defaultMessage": "New articles",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
   "cyR7Kh": {
     "defaultMessage": "返回"
+  },
+  "d1mBsg": {
+    "defaultMessage": "Following circles",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "d4waan": {
     "defaultMessage": "營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "dVbKzB": {
+    "defaultMessage": "Comments and replies",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "deEeEI": {
     "defaultMessage": "註冊"
@@ -1002,9 +1066,17 @@
     "defaultMessage": "你的修訂作品 {articleTitle} 已發布到分佈式網絡",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
+  "gW/KWu": {
+    "defaultMessage": "Comments has been pinned",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "h+punE": {
     "defaultMessage": "{date}更新",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "h7sMQs": {
+    "defaultMessage": "New followers",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "h9CG9E": {
     "defaultMessage": "{commentType}已刪除",
@@ -1091,6 +1163,10 @@
     "defaultMessage": "最後一步：设置 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
+  "l02bPO": {
+    "defaultMessage": "Articles has been collected",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "lIir/P": {
     "defaultMessage": "我知道了"
   },
@@ -1111,6 +1187,10 @@
   },
   "m4GG4b": {
     "defaultMessage": "刪除選集"
+  },
+  "m4KtjK": {
+    "defaultMessage": "New subscribers",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "mCAIcg": {
     "defaultMessage": "站內閱讀熱門排行",
@@ -1140,6 +1220,10 @@
   },
   "ml3SZN": {
     "defaultMessage": "至少 8 個字元，支持英文大小寫字母、數字和特殊符號"
+  },
+  "mp9SBo": {
+    "defaultMessage": "Circle notifications",
+    "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "n2Sc6g": {
     "defaultMessage": "個人信息",
@@ -1259,6 +1343,10 @@
     "defaultMessage": "寄出邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
   },
+  "u+cgOo": {
+    "defaultMessage": "My circle",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
   "u5aHb4": {
     "defaultMessage": "複製連結"
   },
@@ -1298,6 +1386,10 @@
   "vLEnrs": {
     "defaultMessage": "支持了",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
+  "viMrzF": {
+    "defaultMessage": "New broadcasts",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "評論"
@@ -1343,6 +1435,10 @@
     "defaultMessage": "{follower, plural, =1 {人} other {人}}",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "xafreT": {
+    "defaultMessage": "New discussions",
+    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
   "xkr+zo": {
     "defaultMessage": "協議"
   },
@@ -1379,6 +1475,10 @@
   "yoRaUc": {
     "defaultMessage": "退款",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "z+a1SW": {
+    "defaultMessage": "Settings",
+    "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "zAK5G+": {
     "defaultMessage": "登入連結已發送至 {email}",
