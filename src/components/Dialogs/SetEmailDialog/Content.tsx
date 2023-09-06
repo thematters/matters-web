@@ -4,7 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { KEYVALUE } from '~/common/enums'
+import { KEYVALUE, OAUTH_CALLBACK_PROVIDERS } from '~/common/enums'
 import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
 import {
   Dialog,
@@ -104,7 +104,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
           // ],
         })
 
-        const redirectPath = '/me/settings/'
+        const redirectPath = `/callback/${OAUTH_CALLBACK_PROVIDERS.EmailVerification}`
         const redirectUrl = `${
           process.env.NEXT_PUBLIC_SITE_DOMAIN
         }${redirectPath}?email=${encodeURIComponent(email)}`

@@ -316,6 +316,13 @@ export const OAUTH_STORAGE_BIND_STATE = 'oauth-storage-bind-state'
 export const OAUTH_STORAGE_BIND_STATE_SUCCESS = 'oauth-storage-state-success'
 export const OAUTH_STORAGE_BIND_STATE_FAILURE = 'oauth-srorage-state-failure'
 
+export const OAUTH_CALLBACK_PROVIDERS = {
+  Google: 'google',
+  Facebook: 'facebook',
+  Twitter: 'twitter',
+  EmailVerification: 'email-verification',
+}
+
 export const OAUTH_TYPE = {
   login: 'lg',
   bind: 'bd',

@@ -63,10 +63,6 @@
     "defaultMessage": "最近 7 日",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
-  "0jf0/t": {
-    "defaultMessage": "邮箱",
-    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
-  },
   "0qagOO": {
     "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"

@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconIllustation } from '@/public/static/images/callback/Illustation.svg'
-import { ReactComponent as IconLogo } from '@/public/static/images/callback/logo.svg'
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
@@ -15,10 +12,9 @@ import {
   OAUTH_STORAGE_PATH,
   OAUTH_STORAGE_STATE,
   OAUTH_TYPE,
-  PATHS,
 } from '~/common/enums'
 import { analytics, setCookies, storage } from '~/common/utils'
-import { getErrorCodes, useMutation, useRoute, withIcon } from '~/components'
+import { getErrorCodes, useMutation, useRoute } from '~/components'
 import {
   AddSocialLoginMutation,
   SocialAccountType,
@@ -26,7 +22,7 @@ import {
 } from '~/gql/graphql'
 
 import { ADD_SOCIAL_LOGIN, SOCIAL_LOGIN } from './gql'
-import styles from './styles.module.css'
+import UI from './UI'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -133,38 +129,7 @@ const SocialCallback = ({ type }: Props) => {
     }
   }, [])
 
-  return (
-    <section className={styles.callback}>
-      {hasError && (
-        <section className={styles.error}>
-          {withIcon(IconIllustation)({})}
-          <section className={styles.hint}>
-            <section className={styles.title}>
-              <FormattedMessage
-                defaultMessage="Oops！This link has expired"
-                description="src/views/Callback/GoogleCallback.tsx"
-              />
-            </section>
-            <section className={styles.content}>
-              <FormattedMessage
-                defaultMessage="Please go to the relevant page to resend the link. You can also "
-                description="src/views/Callback/GoogleCallback.tsx"
-              />
-              <a className={styles.link} href={PATHS.HOME}>
-                <FormattedMessage
-                  defaultMessage="go to the homepage"
-                  description="src/views/Callback/GoogleCallback.tsx"
-                />
-              </a>
-            </section>
-          </section>
-        </section>
-      )}
-      {!hasError && (
-        <section className={styles.logo}>{withIcon(IconLogo)({})}</section>
-      )}
-    </section>
-  )
+  return <UI hasError={hasError} />
 }
 
 export default SocialCallback
