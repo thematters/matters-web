@@ -1,6 +1,8 @@
 /**
  * Atomics
  */
+export * from './AuthMethodFeed'
+export * from './AuthTabs'
 export * from './Avatar'
 export * from './Book'
 export * from './Button'
@@ -30,6 +32,7 @@ export * from './Slides'
 export * from './Spacer'
 export * from './Spinner'
 export * from './Switch'
+export * from './TableView'
 export * from './Tabs'
 export * from './Tag'
 export * from './TextIcon'

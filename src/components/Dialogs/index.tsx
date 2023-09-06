@@ -1,8 +1,9 @@
 // User
 export * from './ENSDialog'
 export * from './LikeCoinDialog'
-export * from './RecommendAuthorDialog'
+export * from './RemoveSocialLoginDialog'
 export * from './RssFeedDialog'
+export * from './SetUserNameDialog'
 
 // Article
 export * from './AppreciatorsDialog'
@@ -24,7 +25,6 @@ export * from './EditorSearchSelectDialog'
 
 // Tag
 export * from './EditTagDialog'
-export * from './RecommendTagDialog'
 export * from './TagAdoptionDialog'
 export * from './TagEditorDialog'
 export * from './TagLeaveDialog'

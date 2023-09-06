@@ -6,13 +6,18 @@
   top: 0;
   z-index: var(--z-index-sticky-tabs);
   padding: 0 var(--spacing-base);
-  margin-top: var(--spacing-tight);
+  margin-top: var(--spacing-x-tight);
   white-space: nowrap;
   background: var(--color-white);
 
   @media (--sm-up) {
     margin-top: var(--spacing-base-loose);
   }
+}
+
+.noSpacing {
+  padding: 0;
+  margin-top: 0;
 }
 
 .list {
@@ -22,14 +27,28 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.fillList {
+  display: flex;
+
+  & li {
+    flex-grow: 1;
+
+    & + li {
+      margin-left: 0 !important;
+    }
+  }
+}
+
 .item {
   @mixin inline-flex-center-all;
   @mixin transition;
 
   padding: var(--spacing-tight) 0 var(--spacing-x-tight);
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   line-height: 1.375rem;
   color: var(--color-grey-dark);
+  cursor: pointer;
   transition-property: color;
 
   &.selected,

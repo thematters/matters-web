@@ -50,7 +50,6 @@ export const updateCircleFollowers = ({
               cryptoWallet: viewer.info.cryptoWallet,
               __typename: 'UserInfo',
             },
-            isBlocked: false,
             isFollowee: false,
             isFollower: false,
             liker: {

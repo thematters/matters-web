@@ -14,6 +14,7 @@ import {
   LanguageContext,
   Layout,
   Media,
+  TableView,
   TextIcon,
   ViewerContext,
 } from '~/components'
@@ -167,7 +168,7 @@ const Select: React.FC<FormProps> = ({
     <section className={formClasses}>
       <Form id={formId} onSubmit={submitCallback}>
         {isConnect && (
-          <Form.List
+          <TableView
             groupName={
               <FormattedMessage
                 defaultMessage="Account"
@@ -176,16 +177,16 @@ const Select: React.FC<FormProps> = ({
             }
             spacingX={isInPage ? 0 : 'base'}
           >
-            <Form.List.Item title="Matters ID" rightText={viewer.userName} />
-          </Form.List>
+            <TableView.Cell title="Matters ID" rightText={viewer.userName} />
+          </TableView>
         )}
 
-        <Form.List
+        <TableView
           groupName={<FormattedMessage defaultMessage="Connect Wallet" />}
           spacingX={isInPage ? 0 : 'base'}
         >
           {injectedConnector?.ready ? (
-            <Form.List.Item
+            <TableView.Cell
               title={
                 <TextIcon
                   color="black"
@@ -206,7 +207,7 @@ const Select: React.FC<FormProps> = ({
               right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
             />
           ) : (
-            <Form.List.Item
+            <TableView.Cell
               title={
                 <TextIcon
                   color="black"
@@ -229,7 +230,7 @@ const Select: React.FC<FormProps> = ({
               role="button"
             />
           )}
-          <Form.List.Item
+          <TableView.Cell
             title={
               <TextIcon
                 color="black"
@@ -251,7 +252,7 @@ const Select: React.FC<FormProps> = ({
               isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null
             }
           />
-        </Form.List>
+        </TableView>
 
         <section className={styles.container}>
           <Form.Field.Footer

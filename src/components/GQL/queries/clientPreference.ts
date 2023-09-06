@@ -7,9 +7,6 @@ export default gql`
       readCivicLikerDialog
       wall
       routeHistory
-      onboardingTasks {
-        enabled
-      }
       circleBanner
     }
   }

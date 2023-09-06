@@ -1,0 +1,7 @@
+.viewerProfile {
+  @mixin flex-center-space-between;
+}
+
+.displayName {
+  margin-right: var(--spacing-x-tight);
+}

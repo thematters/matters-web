@@ -1,0 +1,49 @@
+.container {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-base) 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.375rem;
+
+  &:hover,
+  &:focus {
+    & .right :global(.icon) {
+      color: var(--color-black);
+    }
+  }
+}
+
+.left {
+  display: inline-flex;
+  flex-direction: column;
+
+  & .title {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+
+  & .subtitle {
+    margin-top: var(--spacing-xx-tight);
+    font-size: var(--font-size-sm-s);
+    line-height: 1rem;
+    color: var(--color-grey);
+  }
+}
+
+.right {
+  @mixin inline-flex-center-all;
+
+  color: var(--color-grey-darker);
+
+  & > * + * {
+    margin-left: var(--spacing-base-xx-tight);
+  }
+
+  & :global(.icon) {
+    @mixin transition;
+
+    transition-property: color;
+  }
+}

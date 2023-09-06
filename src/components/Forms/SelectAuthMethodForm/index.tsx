@@ -1,106 +1,51 @@
+import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
+import { WalletType } from '~/common/utils'
 import {
+  AuthFeedType,
+  AuthNormalFeed,
+  AuthTabs,
+  AuthWalletFeed,
   Dialog,
-  IconEmail24,
-  IconWallet24,
-  LanguageSwitch,
-  Layout,
-  TextIcon,
 } from '~/components'
 
-import SourceHeader from './SourceHeader'
-import styles from './styles.module.css'
-
 interface FormProps {
-  purpose: 'dialog' | 'page'
-  source: UNIVERSAL_AUTH_SOURCE
-  gotoWalletAuth: () => void
+  gotoWalletConnect: (type: WalletType) => void
   gotoEmailLogin: () => void
+  gotoEmailSignup: () => void
   closeDialog?: () => void
+  type?: AuthFeedType
 }
 
 export const SelectAuthMethodForm: React.FC<FormProps> = ({
-  purpose,
-  source,
-  gotoWalletAuth,
+  gotoWalletConnect,
   gotoEmailLogin,
+  gotoEmailSignup,
   closeDialog,
+  type = 'normal',
 }) => {
-  const isInPage = purpose === 'page'
+  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(type)
+  const isNormal = authTypeFeed === 'normal'
+  const isWallet = authTypeFeed === 'wallet'
 
   const InnerForm = (
-    <ul className={styles.select}>
-      <li className={styles.option} role="button" onClick={gotoWalletAuth}>
-        <header className={styles.header}>
-          <TextIcon
-            color="black"
-            icon={<IconWallet24 size="md" />}
-            size="md"
-            spacing="xtight"
-          >
-            <FormattedMessage
-              defaultMessage="Continue with Wallet"
-              description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-            />
-          </TextIcon>
-        </header>
-        <p className={styles.subtitle}>
-          <FormattedMessage
-            defaultMessage="For unregistered or users enabled wallet login"
-            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-          />
-        </p>
-      </li>
+    <>
+      <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
 
-      <li className={styles.option} role="button" onClick={gotoEmailLogin}>
-        <header className={styles.header}>
-          <TextIcon
-            color="black"
-            icon={<IconEmail24 size="md" />}
-            size="md"
-            spacing="xtight"
-          >
-            <FormattedMessage
-              defaultMessage="Continue with Email"
-              description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-            />
-          </TextIcon>
-        </header>
-        <p className={styles.subtitle}>
-          <FormattedMessage
-            defaultMessage="User registered by email can login and enable wallet login later"
-            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-          />
-        </p>
-      </li>
-    </ul>
+      {isNormal && (
+        <AuthNormalFeed
+          gotoEmailSignup={gotoEmailSignup}
+          gotoEmailLogin={gotoEmailLogin}
+        />
+      )}
+      {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
+    </>
   )
-
-  if (isInPage) {
-    return (
-      <>
-        <Layout.Header left={<Layout.Header.Title id="authEntries" />} />
-
-        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
-
-        <footer className={styles.footer}>
-          <LanguageSwitch />
-        </footer>
-      </>
-    )
-  }
 
   return (
     <>
-      <Dialog.Header title="authEntries" closeDialog={closeDialog} />
-
-      <Dialog.Content>
-        <SourceHeader source={source} />
-
-        {InnerForm}
-      </Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

@@ -19,10 +19,8 @@ export const REFETCH_DONATORS = 'refetchDonators'
 export const OPEN_UNIVERSAL_AUTH_DIALOG = 'openUniversalAuthDialog'
 export const CLOSE_ACTIVE_DIALOG = 'closeActiveDialog'
 export const OPEN_LIKE_COIN_DIALOG = 'openLikeCoinDialog'
-export const CLOSE_ONBOARDING_TASKS_DIALOG = 'closeOnboardingTasksDialog'
-export const OPEN_RECOMMEND_AUTHOR_DIALOG = 'openRecommendAuthorDialog'
-export const OPEN_RECOMMEND_TAG_DIALOG = 'openRecommendTagDialog'
 export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
+export const OPEN_SET_USER_NAME_DIALOG = 'openSetUserNameDialog'
 
 export enum UNIVERSAL_AUTH_SOURCE {
   enter = 'enter',
@@ -37,9 +35,6 @@ export enum UNIVERSAL_AUTH_SOURCE {
   followCircle = 'followCircle',
   support = 'support',
 }
-
-// Onboarding Tasks
-export const ONBOARDING_TASKS_HIDE = 'onboardingTasksHide'
 
 // Support
 export const SUPPORT_SUCCESS_ANIMATION = 'supportSuccessAnimation'

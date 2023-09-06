@@ -1,9 +1,9 @@
 import {
   Dropdown,
-  Form,
   IconUnlock24,
   Menu,
   ResetPaymentPasswordDialog,
+  TableView,
   Translate,
 } from '~/components'
 
@@ -28,7 +28,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
   return (
     <Dropdown content={<Content />}>
       {({ openDropdown, ref }) => (
-        <Form.List.Item
+        <TableView.Cell
           title={
             <Translate
               zh_hant="管理交易密碼"

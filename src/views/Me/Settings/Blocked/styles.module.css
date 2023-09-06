@@ -1,0 +1,14 @@
+.unblockButton {
+  @mixin transition;
+
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.375rem;
+  color: var(--color-grey-darker);
+  transition-property: color;
+
+  &:hover,
+  &:focus {
+    color: var(--color-grey-darkest);
+  }
+}

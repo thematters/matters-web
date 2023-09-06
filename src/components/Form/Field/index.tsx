@@ -9,7 +9,7 @@ import styles from './styles.module.css'
 
 export type FieldProps = FooterProps & HeaderProps & FieldFieledProps
 
-type FieldSpacing = 0 | 'base' | 'loose'
+type FieldSpacing = 0 | 'base' | 'baseLoose' | 'loose'
 
 type FieldFieledProps = {
   spacingTop?: FieldSpacing

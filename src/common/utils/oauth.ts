@@ -1,6 +1,6 @@
 import _get from 'lodash/get'
 
-import { OAUTH_SCOPE_TREE } from '~/common/enums'
+import { OAUTH_SCOPE_TREE, OAUTH_TYPE } from '~/common/enums'
 
 export const toReadableScope = ({
   scope,
@@ -33,4 +33,50 @@ export const toReadableScope = ({
   }
 
   return prefix + text
+}
+
+import {
+  OAUTH_STORAGE_CODE_VERIFIER,
+  OAUTH_STORAGE_NONCE,
+  OAUTH_STORAGE_PATH,
+  OAUTH_STORAGE_STATE,
+} from '~/common/enums'
+import { generateChallenge, randomString, storage } from '~/common/utils'
+
+export type OauthType = 'login' | 'bind'
+
+export const generateSocialOauthParams = async (type: OauthType) => {
+  const state = OAUTH_TYPE[type] + randomString(8)
+  const nonce = randomString(8)
+  const codeVerifier = crypto.randomUUID() + crypto.randomUUID()
+  const codeChallenge = await generateChallenge(codeVerifier)
+  storage.set(OAUTH_STORAGE_STATE, state)
+  storage.set(OAUTH_STORAGE_NONCE, nonce)
+  storage.set(OAUTH_STORAGE_PATH, window.location.href)
+  storage.set(OAUTH_STORAGE_CODE_VERIFIER, codeVerifier)
+  return { state, nonce, codeChallenge }
+}
+
+export const googleOauthUrl = async (type: OauthType) => {
+  const { state, nonce } = await generateSocialOauthParams(type)
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
+  const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/google`
+  const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&scope=openid%20email&redirect_uri=${redirectUri}&state=${state}&nonce=${nonce}`
+  return url
+}
+
+export const twitterOauthUrl = async (type: OauthType) => {
+  const { state, codeChallenge } = await generateSocialOauthParams(type)
+  const clientId = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID
+  const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/twitter`
+  const url = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=users.read%20tweet.read&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
+  return url
+}
+
+export const facebookOauthUrl = async (type: OauthType) => {
+  const { state, codeChallenge } = await generateSocialOauthParams(type)
+  const clientId = process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID
+  const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/facebook`
+  const url = `https://www.facebook.com/v17.0/dialog/oauth?response_type=code&scope=openid&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
+  return url
 }

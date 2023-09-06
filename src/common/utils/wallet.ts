@@ -97,3 +97,5 @@ export const WALLET_ERROR_MESSAGES = {
 export const MaxUint256 = BigInt(
   '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
 )
+
+export type WalletType = 'MetaMask' | 'WalletConnect'

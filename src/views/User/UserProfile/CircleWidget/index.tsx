@@ -52,8 +52,8 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({
 
     // return (
     //   <section className={circleWidgetClasses}>
-    //     <Form.List spacingX={0}>
-    //       <Form.List.Item
+    //     <TableView spacingX={0}>
+    //       <TableView.Cell
     //         bold
     //         title={
     //           <FormattedMessage
@@ -71,7 +71,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({
     //         spacing={[0, 'base']}
     //         borderRadius="xtight"
     //       />
-    //     </Form.List>
+    //     </TableView>
     //   </section>
     // )
   }
