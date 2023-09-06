@@ -4,7 +4,11 @@ import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { KEYVALUE, OAUTH_CALLBACK_PROVIDERS } from '~/common/enums'
+import {
+  KEYVALUE,
+  OAUTH_CALLBACK_PROVIDERS,
+  TOAST_SEND_EMAIL_VERIFICATION,
+} from '~/common/enums'
 import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
 import {
   Dialog,
@@ -84,24 +88,6 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
               email,
             },
           },
-
-          // TODO:
-          // update(cache, result) {
-          //   updateUserProfile({
-          //     cache,
-          //     userName,
-          //     type: 'increaseCollection',
-          //   })
-          //   if (onUpdate) {
-          //     onUpdate(cache, result.data?.putCollection || ({} as Collection))
-          //   }
-          // },
-          // refetchQueries: [
-          //   {
-          //     query: USER_COLLECTIONS,
-          //     variables: { userName: viewer.userName },
-          //   },
-          // ],
         })
 
         const redirectPath = `/callback/${OAUTH_CALLBACK_PROVIDERS.EmailVerification}`
@@ -124,7 +110,8 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
           ],
         })
 
-        // TODO: toast
+        // toast
+        window.dispatchEvent(new CustomEvent(TOAST_SEND_EMAIL_VERIFICATION))
 
         setSubmitting(false)
         closeDialog()

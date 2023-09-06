@@ -22,6 +22,9 @@ export const OPEN_LIKE_COIN_DIALOG = 'openLikeCoinDialog'
 export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
 export const OPEN_SET_USER_NAME_DIALOG = 'openSetUserNameDialog'
 
+// Toast
+export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'
+
 export enum UNIVERSAL_AUTH_SOURCE {
   enter = 'enter',
   appreciation = 'appreciation',

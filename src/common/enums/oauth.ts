@@ -315,6 +315,8 @@ export const OAUTH_STORAGE_BIND_RESULT = 'oauth-storage-result'
 export const OAUTH_STORAGE_BIND_STATE = 'oauth-storage-bind-state'
 export const OAUTH_STORAGE_BIND_STATE_SUCCESS = 'oauth-storage-state-success'
 export const OAUTH_STORAGE_BIND_STATE_FAILURE = 'oauth-srorage-state-failure'
+export const OAUTH_STORAGE_SEND_EMAIL_CODE_COUNTDOWN =
+  'oauth-storage-send-email-code-countdown'
 
 export const OAUTH_CALLBACK_PROVIDERS = {
   Google: 'google',

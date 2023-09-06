@@ -510,6 +510,10 @@
   "H0JBH6": {
     "defaultMessage": "登出"
   },
+  "H7bMRx": {
+    "defaultMessage": "驗證連結已發送，請查收郵件",
+    "description": "src/components/GlobalToast/index.tsx"
+  },
   "H8KGyc": {
     "defaultMessage": "進入"
   },
@@ -542,6 +546,9 @@
   "IPqNCS": {
     "defaultMessage": "確認使用",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
+  "IXycMo": {
+    "defaultMessage": "重新發送"
   },
   "Ihwz5K": {
     "defaultMessage": "代表作已取消"

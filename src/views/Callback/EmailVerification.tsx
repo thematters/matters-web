@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { PATHS } from '~/common/enums'
 import { useMutation, useRoute } from '~/components'
+import { ROOT_QUERY_PRIVATE } from '~/components/Root/gql'
 import { VerifyEmailMutation } from '~/gql/graphql'
 
 import { VERIFY_EMAIL } from './gql'
@@ -25,6 +26,11 @@ const EmailVerification = () => {
               code,
             },
           },
+          refetchQueries: [
+            {
+              query: ROOT_QUERY_PRIVATE,
+            },
+          ],
         })
 
         router.push(PATHS.ME_SETTINGS)

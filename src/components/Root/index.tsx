@@ -37,6 +37,10 @@ const DynamicGlobalDialogs = dynamic(
   () => import('~/components/GlobalDialogs'),
   { ssr: false }
 )
+
+const DynamicGlobalToasts = dynamic(() => import('~/components/GlobalToasts'), {
+  ssr: false,
+})
 const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
   ssr: false,
 })
@@ -101,6 +105,7 @@ const Root = ({
                 <DynamicToaster />
                 <DynamicAnalyticsInitilizer user={viewer || {}} />
                 <DynamicGlobalDialogs />
+                <DynamicGlobalToasts />
                 <DynamicProgressBar />
                 <DynamicFingerprint />
               </TranslationsProvider>

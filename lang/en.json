@@ -510,6 +510,10 @@
   "H0JBH6": {
     "defaultMessage": "Log Out"
   },
+  "H7bMRx": {
+    "defaultMessage": "The verification link has been sent, please check your inbox",
+    "description": "src/components/GlobalToast/index.tsx"
+  },
   "H8KGyc": {
     "defaultMessage": "Enter"
   },
@@ -542,6 +546,9 @@
   "IPqNCS": {
     "defaultMessage": "Confirm use",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
+  "IXycMo": {
+    "defaultMessage": "Resend"
   },
   "Ihwz5K": {
     "defaultMessage": "Unpinned from profile"
