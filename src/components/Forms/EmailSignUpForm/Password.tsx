@@ -136,6 +136,14 @@ const Password: React.FC<FormProps> = ({
         })
 
         analytics.identifyUser()
+        const referralCode =
+          storage.get(STORAGE_KEY_REFERRAL_CODE)?.referralCode || undefined
+        if (referralCode) {
+          analytics.trackEvent('signup', {
+            type: 'signup',
+            referralCode,
+          })
+        }
 
         setSubmitting(false)
 

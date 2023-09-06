@@ -24,6 +24,7 @@ type EventArgs =
   | ['pull_to_refresh']
   | ['click_feed', ClickFeedProp]
   | ['click_button', ClickButtonProp]
+  | ['signup', SignupProp]
   | ['load_more', LoadMoreProp]
   | ['share', ShareProp]
   | ['share_dialog', ViewDialogProp]
@@ -73,6 +74,11 @@ interface ClickButtonProp {
     | 'bind_ens'
     | 'bind_ens_successfully'
   pageType?: PageType
+}
+
+interface SignupProp {
+  type: 'login' | 'signup'
+  referralCode?: string // for signup
 }
 
 /**

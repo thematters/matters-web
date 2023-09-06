@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, STORAGE_KEY_REFERRAL_CODE } from '~/common/enums'
+import { storage } from '~/common/utils'
 import {
   Head,
   Layout,
@@ -67,6 +68,7 @@ const UniversalAuth = () => {
   const { getQuery, router } = useRoute()
   const email = getQuery('email')
   const code = getQuery('code')
+  const referralCode = getQuery('referral')
   const displayName = getQuery('displayName')
 
   const initStep =
@@ -76,9 +78,13 @@ const UniversalAuth = () => {
   const { currStep, forward } = useStep<Step>(initStep)
 
   useEffect(() => {
-    if (!viewer.id) return
-
-    router.push(PATHS.HOME)
+    if (viewer.id) {
+      router.push(PATHS.HOME)
+      return
+    }
+    if (referralCode) {
+      storage.set(STORAGE_KEY_REFERRAL_CODE, { referralCode })
+    }
   }, [viewer.id])
 
   return (
