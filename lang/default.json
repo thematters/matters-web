@@ -63,6 +63,10 @@
     "defaultMessage": "Last 7 days",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "0jf0/t": {
+    "defaultMessage": "Email",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "0qagOO": {
     "defaultMessage": "Circle Subscription",
     "description": "src/components/Transaction/index.tsx"
