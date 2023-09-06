@@ -126,7 +126,7 @@ const Socials = () => {
                   <IconClose20 size="mdS" color="greyDarker" />
                 ) : undefined
               }
-              onClick={googleId ? () => openDialog() : gotoGoogle}
+              onClick={googleId ? () => openDialog() : undefined}
               right={
                 googleId ? undefined : (
                   <>
@@ -136,6 +136,7 @@ const Socials = () => {
                         spacing={[0, 'tight']}
                         textColor="green"
                         borderColor="green"
+                        onClick={gotoGoogle}
                       >
                         <FormattedMessage defaultMessage="Connect" />
                       </Button>
@@ -167,7 +168,7 @@ const Socials = () => {
                   <IconClose20 size="mdS" color="greyDarker" />
                 ) : undefined
               }
-              onClick={twitterId ? () => openDialog() : gotoTwitter}
+              onClick={twitterId ? () => openDialog() : undefined}
               right={
                 twitterId ? undefined : (
                   <>
@@ -177,6 +178,7 @@ const Socials = () => {
                         spacing={[0, 'tight']}
                         textColor="green"
                         borderColor="green"
+                        onClick={gotoTwitter}
                       >
                         <FormattedMessage defaultMessage="Connect" />
                       </Button>
@@ -208,7 +210,7 @@ const Socials = () => {
                   <IconClose20 size="mdS" color="greyDarker" />
                 ) : undefined
               }
-              onClick={facebookId ? () => openDialog() : gotoFacebook}
+              onClick={facebookId ? () => openDialog() : undefined}
               right={
                 facebookId ? undefined : (
                   <>
@@ -218,6 +220,7 @@ const Socials = () => {
                         spacing={[0, 'tight']}
                         textColor="green"
                         borderColor="green"
+                        onClick={gotoFacebook}
                       >
                         <FormattedMessage defaultMessage="Connect" />
                       </Button>
