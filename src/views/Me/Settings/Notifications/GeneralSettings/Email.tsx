@@ -47,6 +47,7 @@ const Email = ({ settings, toggle }: EmailProps) => {
               name="notification-email"
               label={label}
               checked={settings.email}
+              onChange={() => toggle('email')}
             />
           )
         }
@@ -59,7 +60,6 @@ const Email = ({ settings, toggle }: EmailProps) => {
           )
         }
         rightTextColor={!hasEmail ? 'grey' : undefined}
-        onClick={hasEmail ? () => toggle('email') : undefined}
       />
     </TableView>
   )
