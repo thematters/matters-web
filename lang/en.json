@@ -1089,6 +1089,10 @@
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "h9A6AT": {
+    "defaultMessage": "For security, we will {resetHint} for this. You can set your password again after verifying new email address.",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "h9CG9E": {
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx",
     "defaultMessage": "{commentType} has been deleted"
@@ -1401,6 +1405,10 @@
   "viMrzF": {
     "defaultMessage": "New broadcasts",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "vsD2wm": {
+    "defaultMessage": "reset your login password",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "Comments"

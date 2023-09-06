@@ -14,6 +14,8 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  Media,
+  Spacer,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -43,7 +45,7 @@ const SET_EMAIL = gql`
 
 const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const viewer = useContext(ViewerContext)
-  console.log({ viewer })
+  const hasPassword = !!viewer.status?.hasEmailLoginPassword
 
   const [set] = useMutation<SetEmailMutation>(SET_EMAIL, undefined, {
     showToast: false,
@@ -117,7 +119,6 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         closeDialog()
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        console.log({ messages, codes })
         codes.forEach((code) => {
           setFieldError('email', messages[code])
         })
@@ -170,6 +171,32 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />
+
+      {hasPassword && (
+        <>
+          <Dialog.Message>
+            <p>
+              <FormattedMessage
+                defaultMessage="For security, we will {resetHint} for this. You can set your password again after verifying new email address."
+                description="src/components/Dialogs/SetEmailDialog/Content.tsx"
+                values={{
+                  resetHint: (
+                    <span className="u-highlight">
+                      <FormattedMessage
+                        defaultMessage="reset your login password"
+                        description="src/components/Dialogs/SetEmailDialog/Content.tsx"
+                      ></FormattedMessage>
+                    </span>
+                  ),
+                }}
+              />
+            </p>
+          </Dialog.Message>
+          <Media greaterThan="sm">
+            <Spacer size="base" />
+          </Media>
+        </>
+      )}
 
       <Dialog.Content>{InnerForm}</Dialog.Content>
 
