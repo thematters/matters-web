@@ -1,7 +1,9 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Button, SetEmailDialog, TableView, ViewerContext } from '~/components'
+import { SetEmailDialog, TableView, ViewerContext } from '~/components'
+
+import { SettingsButton } from '../../Button'
 
 const Email = () => {
   const viewer = useContext(ViewerContext)
@@ -22,15 +24,9 @@ const Email = () => {
             onClick={hasEmail ? openDialog : undefined}
             right={
               hasEmail ? undefined : (
-                <Button
-                  size={[null, '1.5rem']}
-                  spacing={[0, 'tight']}
-                  textColor="green"
-                  borderColor="green"
-                  onClick={openDialog}
-                >
+                <SettingsButton onClick={openDialog}>
                   <FormattedMessage defaultMessage="Connect" />
-                </Button>
+                </SettingsButton>
               )
             }
           />

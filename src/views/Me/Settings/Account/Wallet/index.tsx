@@ -2,7 +2,9 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { maskAddress } from '~/common/utils'
-import { Button, IconClose20, TableView, ViewerContext } from '~/components'
+import { IconClose20, TableView, ViewerContext } from '~/components'
+
+import { SettingsButton } from '../../Button'
 
 const Wallet = () => {
   const viewer = useContext(ViewerContext)
@@ -26,15 +28,11 @@ const Wallet = () => {
       onClick={hasETHAddress ? () => {} : undefined} // TODO
       right={
         ethAddress ? undefined : (
-          <Button
-            size={[null, '1.5rem']}
-            spacing={[0, 'tight']}
-            textColor="green"
-            borderColor="green"
+          <SettingsButton
             onClick={() => {}} // TODO
           >
             <FormattedMessage defaultMessage="Connect" />
-          </Button>
+          </SettingsButton>
         )
       }
     />
