@@ -24,13 +24,17 @@ import {
 import { QueryError, useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import {
+  ArticleAccessType,
+  ArticleLicenseType,
+  DraftDetailCirclesQueryQuery,
   DraftDetailQueryQuery,
+  PublishState as PublishStateType,
   SetDraftContentMutation,
   SingleFileUploadMutation,
 } from '~/gql/graphql'
 
 import BottomBar from './BottomBar'
-import { DRAFT_DETAIL, SET_CONTENT } from './gql'
+import { DRAFT_DETAIL, DRAFT_DETAIL_CIRCLES, SET_CONTENT } from './gql'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
@@ -44,34 +48,34 @@ const Editor = dynamic(
   }
 )
 
-const EMPTY_DRAFT = {
+const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
   id: '',
   title: '',
-  publishState: 'unpublished',
+  publishState: PublishStateType.Unpublished,
   content: '',
   summary: '',
   summaryCustomized: false,
   __typename: 'Draft',
   article: null,
   cover: null,
-  assets: null,
+  assets: [],
   tags: null,
   collection: {
     edges: null,
     __typename: 'ArticleConnection',
   },
   access: {
-    type: 'public',
+    type: ArticleAccessType.Public,
     circle: null,
     __typename: 'DraftAccess',
   },
-  license: 'cc_0',
+  license: ArticleLicenseType.Cc_0,
   requestForDonation: null,
   replyToDonator: null,
   sensitiveByAuthor: false,
   iscnPublish: null,
   canComment: true,
-} as any
+}
 
 const DraftDetail = () => {
   const { getQuery } = useRoute()
@@ -95,12 +99,17 @@ const DraftDetail = () => {
       skip: isInNew,
     }
   )
+  const { data: circleData, loading: circleLoading } =
+    useQuery<DraftDetailCirclesQueryQuery>(DRAFT_DETAIL_CIRCLES, {
+      fetchPolicy: 'network-only',
+    })
+
   const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
-  const ownCircles = data?.viewer?.ownCircles || undefined
+  const ownCircles = circleData?.viewer?.ownCircles || undefined
 
   useUnloadConfirm({ block: saveStatus === 'saving' && !isInNew })
 
-  if (loading && !initNew) {
+  if ((loading && !initNew) || circleLoading) {
     return (
       <EmptyLayout>
         <Spinner />

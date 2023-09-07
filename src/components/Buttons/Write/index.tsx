@@ -15,6 +15,7 @@ import {
   toast,
   Tooltip,
   Translate,
+  useRoute,
 } from '~/components'
 
 interface Props {
@@ -45,6 +46,9 @@ const BaseWriteButton = (props: ButtonProps) => {
 }
 
 export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
+  const { isInPath } = useRoute()
+  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+
   if (!allowed) {
     return (
       <BaseWriteButton
@@ -57,7 +61,14 @@ export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
 
   return (
     <BaseWriteButton
-      href={authed && !forbidden ? PATHS.ME_DRAFT_NEW : undefined}
+      href={
+        authed && !forbidden && !isInDraftDetail
+          ? PATHS.ME_DRAFT_NEW
+          : undefined
+      }
+      htmlHref={
+        authed && !forbidden && isInDraftDetail ? PATHS.ME_DRAFT_NEW : undefined
+      }
       onClick={async () => {
         if (!authed) {
           window.dispatchEvent(
