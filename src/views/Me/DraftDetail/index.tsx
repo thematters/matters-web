@@ -17,6 +17,7 @@ import {
   Spinner,
   Throw404,
   toast,
+  useCreateDraft,
   useRoute,
   useUnloadConfirm,
 } from '~/components'
@@ -43,10 +44,42 @@ const Editor = dynamic(
   }
 )
 
+const EMPTY_DRAFT = {
+  id: '',
+  title: '',
+  publishState: 'unpublished',
+  content: '',
+  summary: '',
+  summaryCustomized: false,
+  __typename: 'Draft',
+  article: null,
+  cover: null,
+  assets: null,
+  tags: null,
+  collection: {
+    edges: null,
+    __typename: 'ArticleConnection',
+  },
+  access: {
+    type: 'public',
+    circle: null,
+    __typename: 'DraftAccess',
+  },
+  license: 'cc_0',
+  requestForDonation: null,
+  replyToDonator: null,
+  sensitiveByAuthor: false,
+  iscnPublish: null,
+  canComment: true,
+} as any
+
 const DraftDetail = () => {
   const { getQuery } = useRoute()
   const id = getQuery('draftId')
+  const isInNew = id === 'new'
 
+  const [initNew] = useState(isInNew)
+  const { createDraft } = useCreateDraft()
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
   const [singleFileUpload] = useMutation<SingleFileUploadMutation>(UPLOAD_FILE)
   const [saveStatus, setSaveStatus] = useState<
@@ -59,14 +92,15 @@ const DraftDetail = () => {
     {
       variables: { id },
       fetchPolicy: 'network-only',
+      skip: isInNew,
     }
   )
-  const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined
+  const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
   const ownCircles = data?.viewer?.ownCircles || undefined
 
-  useUnloadConfirm({ block: saveStatus === 'saving' })
+  useUnloadConfirm({ block: saveStatus === 'saving' && !isInNew })
 
-  if (loading) {
+  if (loading && !initNew) {
     return (
       <EmptyLayout>
         <Spinner />
@@ -82,7 +116,7 @@ const DraftDetail = () => {
     )
   }
 
-  if (!draft) {
+  if (!draft && !isInNew) {
     return (
       <EmptyLayout>
         <Throw404 />
@@ -148,7 +182,16 @@ const DraftDetail = () => {
 
       setSaveStatus('saving')
 
-      await setContent({ variables: { id: draft?.id, ...newDraft } })
+      if (draft?.id) {
+        await setContent({ variables: { id: draft.id, ...newDraft } })
+      } else {
+        await createDraft({
+          onCreate: async (draftId: string) => {
+            await setContent({ variables: { id: draftId, ...newDraft } })
+          },
+        })
+      }
+
       setSaveStatus('saved')
 
       if (newDraft.summary && !hasValidSummary) {
