@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  mutation CreateDraft($title: String!, $tags: [String!]) {
-    putDraft(input: { title: $title, tags: $tags }) {
+  mutation CreateDraft {
+    putDraft(input: { title: "" }) {
       id
       slug
     }

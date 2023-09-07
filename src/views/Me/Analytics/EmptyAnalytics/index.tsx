@@ -1,28 +1,15 @@
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as SupporterListRocket } from '@/public/static/images/supporter-list-rocket.svg'
-import { GUIDE_LINKS } from '~/common/enums'
-import { toPath } from '~/common/utils'
-import { Button, LanguageContext, TextIcon, useMutation } from '~/components'
-import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-import { CreateDraftMutation } from '~/gql/graphql'
+import { GUIDE_LINKS, PATHS } from '~/common/enums'
+import { analytics } from '~/common/utils'
+import { Button, LanguageContext, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
 const EmptyAnalytics = () => {
-  const router = useRouter()
   const { lang } = useContext(LanguageContext)
-
-  const intl = useIntl()
-  const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
-    variables: {
-      title: intl.formatMessage({
-        defaultMessage: 'Untitled',
-      }),
-    },
-  })
 
   return (
     <section className={styles.content}>
@@ -39,20 +26,14 @@ const EmptyAnalytics = () => {
         size={['19.5rem', '3rem']}
         spacing={[0, 0]}
         bgColor="green"
-        onClick={async () => {
-          const result = await putDraft()
-          const { slug = '', id } = result?.data?.putDraft || {}
-
-          if (id) {
-            const path = toPath({ page: 'draftDetail', slug, id })
-            router.push(path.href)
-          }
-        }}
+        href={PATHS.ME_DRAFT_NEW}
+        onClick={() => analytics.trackEvent('click_button', { type: 'write' })}
       >
         <TextIcon color="white" weight="md">
           <FormattedMessage defaultMessage="Start Creating" />
         </TextIcon>
       </Button>
+
       <section className={styles.tips}>
         <p>
           <FormattedMessage

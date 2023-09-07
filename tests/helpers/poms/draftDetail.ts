@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test'
 import _sample from 'lodash/sample'
 import _uniq from 'lodash/uniq'
 
-import { TEST_ID } from '~/common/enums'
+import { PATHS, TEST_ID } from '~/common/enums'
 
 import { waitForAPIResponse } from '../api'
 import {
@@ -132,14 +132,11 @@ export class DraftDetailPage {
   }
 
   async createDraft() {
-    await pageGoto(this.page, '/')
+    await pageGoto(this.page, PATHS.ME_DRAFT_NEW)
 
     // Promise.all prevents a race condition between clicking and waiting.
-    await Promise.all([
-      this.page.waitForNavigation(),
-      this.page.getByTestId(TEST_ID.SIDE_NAY_WRITE_BUTTON).click(),
-    ])
-    await expect(this.page).toHaveURL(/\/me\/drafts\/.*-.*/)
+    await this.page.waitForNavigation()
+    await expect(this.page).toHaveURL(PATHS.ME_DRAFT_NEW)
   }
 
   async gotoLatestDraft() {
