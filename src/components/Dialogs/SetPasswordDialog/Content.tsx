@@ -5,7 +5,11 @@ import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { KEYVALUE } from '~/common/enums'
-import { parseFormSubmitErrors, validatePassword } from '~/common/utils'
+import {
+  normalizePassowrd,
+  parseFormSubmitErrors,
+  validatePassword,
+} from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -52,6 +56,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue,
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
@@ -105,6 +110,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       <Form.Input
         type="text"
         name="password"
+        autoFocus
         required
         placeholder={intl.formatMessage({ defaultMessage: 'Password' })}
         value={values.password}
@@ -115,6 +121,10 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
           if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
             e.stopPropagation()
           }
+        }}
+        onKeyUp={() => {
+          const p = normalizePassowrd(values.password)
+          setFieldValue('password', p)
         }}
       />
     </Form>
