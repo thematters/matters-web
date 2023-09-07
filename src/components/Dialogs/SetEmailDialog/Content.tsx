@@ -46,6 +46,7 @@ const SET_EMAIL = gql`
 const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const viewer = useContext(ViewerContext)
   const hasPassword = !!viewer.status?.hasEmailLoginPassword
+  // TODO: max change email limit
 
   const [set] = useMutation<SetEmailMutation>(SET_EMAIL, undefined, {
     showToast: false,

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { PATHS } from '~/common/enums'
 import { useMutation, useRoute } from '~/components'
-import { ROOT_QUERY_PRIVATE } from '~/components/Root/gql'
+import { updateUser } from '~/components/GQL'
 import { VerifyEmailMutation } from '~/gql/graphql'
 
 import { VERIFY_EMAIL } from './gql'
@@ -26,11 +26,15 @@ const EmailVerification = () => {
               code,
             },
           },
-          refetchQueries: [
-            {
-              query: ROOT_QUERY_PRIVATE,
-            },
-          ],
+          update: (cache) => {
+            // Instant Updates
+            // If you use refetchQueries, due to network delays, toast(EmailVerificationToast) will be thrown before fetching the latest value.
+            updateUser({
+              cache,
+              emailVerified: true,
+              hasEmailLoginPassword: false,
+            })
+          },
         })
 
         router.push(PATHS.ME_SETTINGS)
