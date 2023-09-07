@@ -143,9 +143,6 @@
     "defaultMessage": "登入",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
-  "3kbIhS": {
-    "defaultMessage": "未命名"
-  },
   "3phEFL": {
     "defaultMessage": "繼續使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
