@@ -15,7 +15,10 @@ interface Props {
 
 type Step = 'confirm' | 'failure'
 
-const AddCollectionDialogContent: React.FC<Props> = ({ closeDialog, type }) => {
+const RemoveSocailLoginDialogContent: React.FC<Props> = ({
+  closeDialog,
+  type,
+}) => {
   const [removeLogin, { loading }] = useMutation<RemoveSocialLoginMutation>(
     REMOVE_SOCIAL_LOGIN,
     undefined,
@@ -166,4 +169,4 @@ const AddCollectionDialogContent: React.FC<Props> = ({ closeDialog, type }) => {
   )
 }
 
-export default AddCollectionDialogContent
+export default RemoveSocailLoginDialogContent
