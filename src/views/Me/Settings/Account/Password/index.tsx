@@ -1,7 +1,9 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Button, TableView, ViewerContext } from '~/components'
+import { TableView, ViewerContext } from '~/components'
+
+import { SettingsButton } from '../../Button'
 
 const Password = () => {
   const viewer = useContext(ViewerContext)
@@ -32,15 +34,11 @@ const Password = () => {
       onClick={hasEmail && hasPassword ? () => {} : undefined} // TODO
       right={
         hasEmail && !hasPassword ? (
-          <Button
-            size={[null, '1.5rem']}
-            spacing={[0, 'tight']}
-            textColor="green"
-            borderColor="green"
+          <SettingsButton
             onClick={() => {}} // TODO
           >
             <FormattedMessage defaultMessage="Connect" />
-          </Button>
+          </SettingsButton>
         ) : undefined
       }
     />

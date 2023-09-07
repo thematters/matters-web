@@ -13,7 +13,6 @@ import {
   twitterOauthUrl,
 } from '~/common/utils'
 import {
-  Button,
   IconClose20,
   IconFacebook22,
   IconGoogle22,
@@ -27,6 +26,8 @@ import {
   ViewerContext,
 } from '~/components'
 import { SocialAccountType } from '~/gql/graphql'
+
+import { SettingsButton } from '../../Button'
 
 const Socials = () => {
   const viewer = useContext(ViewerContext)
@@ -131,15 +132,9 @@ const Socials = () => {
                 googleId ? undefined : (
                   <>
                     {!isGoogleLoading && (
-                      <Button
-                        size={[null, '1.5rem']}
-                        spacing={[0, 'tight']}
-                        textColor="green"
-                        borderColor="green"
-                        onClick={gotoGoogle}
-                      >
+                      <SettingsButton onClick={gotoGoogle}>
                         <FormattedMessage defaultMessage="Connect" />
-                      </Button>
+                      </SettingsButton>
                     )}
                     {isGoogleLoading && (
                       <IconSpinner16 color="greyLight" size="mdS" />
@@ -173,15 +168,9 @@ const Socials = () => {
                 twitterId ? undefined : (
                   <>
                     {!isTwitterLoading && (
-                      <Button
-                        size={[null, '1.5rem']}
-                        spacing={[0, 'tight']}
-                        textColor="green"
-                        borderColor="green"
-                        onClick={gotoTwitter}
-                      >
+                      <SettingsButton onClick={gotoTwitter}>
                         <FormattedMessage defaultMessage="Connect" />
-                      </Button>
+                      </SettingsButton>
                     )}
                     {isTwitterLoading && (
                       <IconSpinner16 color="greyLight" size="mdS" />
@@ -215,15 +204,9 @@ const Socials = () => {
                 facebookId ? undefined : (
                   <>
                     {!isFacebookLoading && (
-                      <Button
-                        size={[null, '1.5rem']}
-                        spacing={[0, 'tight']}
-                        textColor="green"
-                        borderColor="green"
-                        onClick={gotoFacebook}
-                      >
+                      <SettingsButton onClick={gotoFacebook}>
                         <FormattedMessage defaultMessage="Connect" />
-                      </Button>
+                      </SettingsButton>
                     )}
                     {isFacebookLoading && (
                       <IconSpinner16 color="greyLight" size="mdS" />
