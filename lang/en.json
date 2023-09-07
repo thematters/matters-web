@@ -392,6 +392,10 @@
   "CnPG8j": {
     "defaultMessage": "Featured"
   },
+  "CoF9qv": {
+    "defaultMessage": "Are you sure you want to disconnect from this?",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "Cu3Cty": {
     "defaultMessage": "month"
   },
@@ -1038,6 +1042,10 @@
     "defaultMessage": "Income",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "dSjI7E": {
+    "defaultMessage": "Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account).",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "dVbKzB": {
     "defaultMessage": "Comments and replies",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1133,6 +1141,10 @@
   },
   "itPgxd": {
     "defaultMessage": "Profile"
+  },
+  "iu3XKs": {
+    "defaultMessage": "Wallet disconnected",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "izWS4J": {
     "defaultMessage": "Unfollow"
@@ -1261,6 +1273,10 @@
   },
   "nYrKWp": {
     "defaultMessage": "Edit profile"
+  },
+  "no7l8z": {
+    "defaultMessage": "Disconnect wallet",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "o2Na0B": {
     "defaultMessage": "Back to All"

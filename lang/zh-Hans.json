@@ -392,6 +392,10 @@
   "CnPG8j": {
     "defaultMessage": "精华"
   },
+  "CoF9qv": {
+    "defaultMessage": "确认要解绑钱包？",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "Cu3Cty": {
     "defaultMessage": "月"
   },
@@ -1038,6 +1042,10 @@
     "defaultMessage": "营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "dSjI7E": {
+    "defaultMessage": "暂无法断开钱包链接，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "dVbKzB": {
     "defaultMessage": "评论和回复",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1133,6 +1141,10 @@
   },
   "itPgxd": {
     "defaultMessage": "个人主页"
+  },
+  "iu3XKs": {
+    "defaultMessage": "钱包已解绑",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "izWS4J": {
     "defaultMessage": "取消追踪"
@@ -1261,6 +1273,10 @@
   },
   "nYrKWp": {
     "defaultMessage": "编辑个人信息"
+  },
+  "no7l8z": {
+    "defaultMessage": "解绑钱包",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "o2Na0B": {
     "defaultMessage": "返回全部"
