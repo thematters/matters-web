@@ -2,7 +2,7 @@ import { DataProxy } from 'apollo-cache'
 
 import { RootQueryPrivateQuery } from '~/gql/graphql'
 
-export const updateUser = ({
+export const updateRootUser = ({
   cache,
   emailVerified,
   hasEmailLoginPassword,

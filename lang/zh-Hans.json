@@ -587,6 +587,10 @@
   "K3r6DQ": {
     "defaultMessage": "刪除"
   },
+  "KIQUHo": {
+    "defaultMessage": "登录密码",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
   "KLQ1/z": {
     "defaultMessage": "围炉创建成功",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
@@ -851,6 +855,10 @@
   "W0sZaX": {
     "defaultMessage": "最近 3 个月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "W66Eyq": {
+    "defaultMessage": "密码需至少 8 位，支持字母、数字及符号的组合。",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
   "W8OZ3G": {
     "defaultMessage": "确认删除"
@@ -1272,6 +1280,10 @@
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
+  },
+  "pHg5Ju": {
+    "defaultMessage": "登录密码已设置",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
   "pRV+UD": {
     "defaultMessage": "折叠",

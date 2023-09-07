@@ -3,7 +3,10 @@ export * from './ENSDialog'
 export * from './LikeCoinDialog'
 export * from './RemoveSocialLoginDialog'
 export * from './RssFeedDialog'
+
+// Settings
 export * from './SetEmailDialog'
+export * from './SetPasswordDialog'
 export * from './SetUserNameDialog'
 
 // Article
