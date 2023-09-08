@@ -8,11 +8,13 @@ import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
+  STORAGE_KEY_REFERRAL_CODE,
 } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
   setCookies,
+  storage,
   validateComparedPassword,
   validatePassword,
 } from '~/common/utils'
