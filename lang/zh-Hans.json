@@ -59,6 +59,10 @@
     "defaultMessage": "新建选集",
     "description": "src/views/User/Collections/UserCollections.tsx"
   },
+  "0e1xjL": {
+    "defaultMessage": "邮箱每天最多可修改 {count} 次",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "0iyH+q": {
     "defaultMessage": "最近 7 日",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"

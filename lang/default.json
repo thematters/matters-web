@@ -59,6 +59,10 @@
     "defaultMessage": "Create collection",
     "description": "src/views/User/Collections/UserCollections.tsx"
   },
+  "0e1xjL": {
+    "defaultMessage": "Email can be modified up to {count} times per day.",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "0iyH+q": {
     "defaultMessage": "Last 7 days",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
