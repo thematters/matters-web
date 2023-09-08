@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
+import { useDisconnect } from 'wagmi'
 
 import { Dialog, toast, useMutation } from '~/components'
 import { RemoveWalletLoginMutation } from '~/gql/graphql'
@@ -22,12 +23,15 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
     }
   )
 
+  const { disconnect } = useDisconnect()
+
   const [step, setStep] = useState<Step>('confirm')
   const isConfirm = step === 'confirm'
   const isFailure = step === 'failure'
 
   const remove = async () => {
     try {
+      disconnect()
       await removeLogin({
         refetchQueries: [
           {
