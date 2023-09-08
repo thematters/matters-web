@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { maskAddress } from '~/common/utils'
 import {
+  AddWalletLoginDialog,
   IconClose20,
   RemoveWalletLoginDialog,
   TableView,
@@ -17,36 +18,44 @@ const Wallet = () => {
   const hasETHAddress = !!ethAddress
 
   return (
-    <RemoveWalletLoginDialog>
-      {({ openDialog: openRemoveWalletLoginDialog }) => {
+    <AddWalletLoginDialog>
+      {({ openDialog: openAddWalletLoginDialog }) => {
         return (
-          <TableView.Cell
-            title={
-              <FormattedMessage
-                defaultMessage="Wallet address"
-                description="src/views/Me/Settings/Settings/Wallet/index.tsx"
-              />
-            }
-            rightText={hasETHAddress ? maskAddress(ethAddress, 6) : undefined}
-            rightIcon={
-              hasETHAddress ? (
-                <IconClose20 size="mdS" color="greyDarker" />
-              ) : undefined
-            }
-            onClick={hasETHAddress ? openRemoveWalletLoginDialog : undefined}
-            right={
-              ethAddress ? undefined : (
-                <SettingsButton
-                  onClick={() => {}} // TODO
-                >
-                  <FormattedMessage defaultMessage="Connect" />
-                </SettingsButton>
+          <RemoveWalletLoginDialog>
+            {({ openDialog: openRemoveWalletLoginDialog }) => {
+              return (
+                <TableView.Cell
+                  title={
+                    <FormattedMessage
+                      defaultMessage="Wallet address"
+                      description="src/views/Me/Settings/Settings/Wallet/index.tsx"
+                    />
+                  }
+                  rightText={
+                    hasETHAddress ? maskAddress(ethAddress, 6) : undefined
+                  }
+                  rightIcon={
+                    hasETHAddress ? (
+                      <IconClose20 size="mdS" color="greyDarker" />
+                    ) : undefined
+                  }
+                  onClick={
+                    hasETHAddress ? openRemoveWalletLoginDialog : undefined
+                  }
+                  right={
+                    ethAddress ? undefined : (
+                      <SettingsButton onClick={openAddWalletLoginDialog}>
+                        <FormattedMessage defaultMessage="Connect" />
+                      </SettingsButton>
+                    )
+                  }
+                />
               )
-            }
-          />
+            }}
+          </RemoveWalletLoginDialog>
         )
       }}
-    </RemoveWalletLoginDialog>
+    </AddWalletLoginDialog>
   )
 }
 

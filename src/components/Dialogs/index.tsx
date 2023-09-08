@@ -4,6 +4,7 @@ export * from './LikeCoinDialog'
 export * from './RssFeedDialog'
 
 // Settings
+export * from './AddWalletLoginDialog'
 export * from './RemoveSocialLoginDialog'
 export * from './RemoveWalletLoginDialog'
 export * from './SetEmailDialog'

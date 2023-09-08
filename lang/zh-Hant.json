@@ -421,6 +421,10 @@
     "defaultMessage": "解除封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
+  "Dt1o78": {
+    "defaultMessage": "該錢包已關聯至其他帳號",
+    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
+  },
   "DyuHBH": {
     "defaultMessage": "取消代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
@@ -606,6 +610,10 @@
   "KQi/UZ": {
     "defaultMessage": "封存作品"
   },
+  "KlJEP9": {
+    "defaultMessage": "錢包已綁定",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
   "KxVlDj": {
     "defaultMessage": "設定 - 已封鎖用戶",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
@@ -662,6 +670,10 @@
   "MDNaxs": {
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "Me5cJu": {
+    "defaultMessage": "綁定錢包",
+    "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
   },
   "Mn7GEf": {
     "defaultMessage": "精選過去 24 小時與你有關的消息",
@@ -1354,6 +1366,10 @@
   },
   "rfz/fN": {
     "defaultMessage": "建議尺寸 1600 x 900 像素"
+  },
+  "rqS2aA": {
+    "defaultMessage": "請登入該帳戶解綁錢包後再試",
+    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
   "s5JCCO": {
     "defaultMessage": "此文已被{actor}標示為限制級內容，是否確定展開全文？",
