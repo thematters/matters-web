@@ -3,7 +3,6 @@ import { useContext } from 'react'
 
 import {
   CLOSE_ACTIVE_DIALOG,
-  OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
   REFETCH_RESPONSES,
@@ -118,18 +117,6 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
 
   if (disabled) {
     return <Content article={article} disabled />
-  }
-
-  if (viewer.shouldSetupLikerID) {
-    return (
-      <Content
-        article={article}
-        aria-haspopup="dialog"
-        onClick={() =>
-          window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-        }
-      />
-    )
   }
 
   if (viewer.isInactive) {

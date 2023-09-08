@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 
 import { OPEN_SET_USER_NAME_DIALOG } from '~/common/enums'
-import { LikeCoinDialog, SetUserNameDialog, ViewerContext } from '~/components'
+import { SetUserNameDialog, ViewerContext } from '~/components'
 
 import UniversalAuthDialog from './UniversalAuthDialog'
 
@@ -17,7 +17,6 @@ const GlobalDialogs = () => {
   return (
     <>
       <UniversalAuthDialog />
-      <LikeCoinDialog />
       <SetUserNameDialog />
     </>
   )

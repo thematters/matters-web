@@ -26,7 +26,6 @@ import BlockedButton from './BlockedButton'
 import CivicLikerButton from './CivicLikerButton'
 import ForbiddenButton from './ForbiddenButton'
 import { APPRECIATE_ARTICLE, fragments } from './gql'
-import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 
 interface AppreciationButtonProps {
   article: AppreciationButtonArticlePublicFragment &
@@ -165,8 +164,7 @@ const AppreciationButton = ({
   const readCivicLikerDialog =
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
-    (!isReachLimit && !viewer.isArchived && viewer.liker.likerId) ||
-    (isSuperLike && canSuperLike)
+    (!isReachLimit && !viewer.isArchived) || (isSuperLike && canSuperLike)
 
   // Anonymous
   if (!viewer.isAuthed) {
@@ -201,11 +199,6 @@ const AppreciationButton = ({
         </span>
       </Tooltip>
     )
-  }
-
-  // Liker ID
-  if (viewer.shouldSetupLikerID) {
-    return <SetupLikerIdAppreciateButton total={total} />
   }
 
   // Blocked by private query

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { OPEN_LIKE_COIN_DIALOG, TextId } from '~/common/enums'
+import { TextId } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   CommentFormType,
@@ -117,10 +117,7 @@ const BaseFooterActions = ({
 
   let onClick
 
-  if (viewer.shouldSetupLikerID) {
-    onClick = () =>
-      window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-  } else if (viewer.isArchived || viewer.isFrozen) {
+  if (viewer.isArchived || viewer.isFrozen) {
     onClick = forbid
   } else if (targetAuthor?.isBlocking) {
     onClick = () => addToast('failureCommentBlocked')

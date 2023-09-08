@@ -88,7 +88,7 @@ const NavBar = () => {
         {!isInDraftDetail && (
           <li className={styles.listItem}>
             <WriteButton
-              allowed={!viewer.shouldSetupLikerID}
+              allowed
               authed={viewer.isAuthed}
               forbidden={viewer.isInactive}
             />

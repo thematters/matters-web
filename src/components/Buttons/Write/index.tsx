@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 
 import {
-  OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
   UNIVERSAL_AUTH_SOURCE,
@@ -45,19 +44,9 @@ const BaseWriteButton = (props: ButtonProps) => {
   )
 }
 
-export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
+export const WriteButton = ({ authed, forbidden }: Props) => {
   const { isInPath } = useRoute()
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
-
-  if (!allowed) {
-    return (
-      <BaseWriteButton
-        onClick={() =>
-          window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-        }
-      />
-    )
-  }
 
   return (
     <BaseWriteButton

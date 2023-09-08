@@ -105,7 +105,7 @@ const SideNavMenu = () => {
         data-test-id={TEST_ID.SIDE_NAY_WRITE_BUTTON}
       >
         <WriteButton
-          allowed={!viewer.shouldSetupLikerID}
+          allowed
           authed={viewer.isAuthed}
           forbidden={viewer.isInactive}
         />
