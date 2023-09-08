@@ -821,7 +821,7 @@
     "defaultMessage": "数据"
   },
   "UOdEqi": {
-    "defaultMessage": "原有透过电子信箱登入方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",
+    "defaultMessage": "原有透过电子信箱登录方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "URljhZ": {
@@ -1380,7 +1380,7 @@
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "skbUBl": {
-    "defaultMessage": "登入",
+    "defaultMessage": "登录",
     "description": "src/components/Buttons/Login/index.tsx"
   },
   "stjoBH": {
@@ -1544,7 +1544,7 @@
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "zAK5G+": {
-    "defaultMessage": "登入链接已发送至 {email}",
+    "defaultMessage": "登录链接已发送至 {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
   },
   "zKOr2x": {
