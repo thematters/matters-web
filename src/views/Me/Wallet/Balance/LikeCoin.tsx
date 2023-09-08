@@ -89,7 +89,7 @@ export const LikeCoinBalance = ({
           spacing={[0, 'tight']}
           size={[null, '1.5rem']}
           borderColor="black"
-          href={PATHS.ME_SETTINGS}
+          href={PATHS.ME_SETTINGS_MISC}
         >
           <TextIcon color="black" size="xs">
             <Translate
@@ -122,7 +122,7 @@ export const LikeCoinBalance = ({
         spacing={[0, 'tight']}
         size={[null, '1.5rem']}
         borderColor="black"
-        href={PATHS.ME_SETTINGS}
+        href={PATHS.ME_SETTINGS_MISC}
       >
         <TextIcon color="black" size="xs">
           <Translate zh_hant="前往設置" zh_hans="前往设置" en="Setup" />
