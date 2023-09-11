@@ -5,7 +5,6 @@ import { useDisconnect } from 'wagmi'
 import { Dialog, toast, useMutation } from '~/components'
 import { RemoveWalletLoginMutation } from '~/gql/graphql'
 
-import { ROOT_QUERY_PRIVATE } from '../../Root/gql'
 import { REMOVE_WALLET_LOGIN } from './gql'
 
 interface Props {
@@ -32,13 +31,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
   const remove = async () => {
     try {
       disconnect()
-      await removeLogin({
-        refetchQueries: [
-          {
-            query: ROOT_QUERY_PRIVATE,
-          },
-        ],
-      })
+      await removeLogin()
       toast.success({
         message: (
           <FormattedMessage
