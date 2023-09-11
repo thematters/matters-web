@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
 import {
@@ -64,6 +64,7 @@ const Connect: React.FC<FormProps> = ({
   back,
   gotoSignInTab,
 }) => {
+  const intl = useIntl()
   const { lang } = useContext(LanguageContext)
   const [authTypeFeed] = useState<AuthFeedType>('wallet')
 
@@ -187,12 +188,12 @@ const Connect: React.FC<FormProps> = ({
           submitCallback(loginData?.walletLogin.type)
         }
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        codes.forEach((c) => {
-          if (c.includes('CODE_')) {
-            setFieldError('code', messages[c])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        codes.forEach((code) => {
+          if (code.includes('CODE_')) {
+            setFieldError('code', intl.formatMessage(messages[code]))
           } else {
-            setFieldError('address', messages[c])
+            setFieldError('address', intl.formatMessage(messages[code]))
           }
         })
       }

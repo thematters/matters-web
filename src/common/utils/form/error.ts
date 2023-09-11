@@ -1,25 +1,19 @@
 import { ApolloError } from 'apollo-client'
+import { MessageDescriptor } from 'react-intl'
 
-import { ErrorCodeKeys, TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
-import { getErrorCodes } from '~/components/GQL'
+import { ERROR_CODES } from '~/common/enums'
+import { ERROR_MESSAGES, getErrorCodes } from '~/components/GQL'
 
-type ErrorMessages = { [key in ErrorCodeKeys]: string }
+type ErrorMessages = { [key in ERROR_CODES]: MessageDescriptor }
 
 export const parseFormSubmitErrors = (
-  error: ApolloError,
-  lang: Language
-): [ErrorMessages, ErrorCodeKeys[]] => {
+  error: ApolloError
+): [ErrorMessages, ERROR_CODES[]] => {
   const codes = getErrorCodes(error)
   const messages: ErrorMessages = {} as any
 
   codes.forEach((code) => {
-    messages[code] = translate({
-      zh_hant: TEXT.zh_hant[code] || TEXT.zh_hant.UNKNOWN_ERROR,
-      zh_hans: TEXT.zh_hans[code] || TEXT.zh_hans.UNKNOWN_ERROR,
-      en: TEXT.en[code] || TEXT.en.UNKNOWN_ERROR,
-      lang,
-    })
+    messages[code] = ERROR_MESSAGES[code]
   })
 
   return [messages, codes]

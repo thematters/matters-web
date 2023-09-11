@@ -1,3 +1,4 @@
+import { ApolloError } from 'apollo-client'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
@@ -8,6 +9,7 @@ import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import {
   ASSET_TYPE,
   ENTITY_TYPE,
+  ERROR_CODES,
   MAX_USER_DESCRIPTION_LENGTH,
   MAX_USER_DISPLAY_NAME_LENGTH,
 } from '~/common/enums'
@@ -145,9 +147,9 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         codes.forEach((code) => {
-          if (code === 'DISPLAYNAME_INVALID') {
+          if (code === ERROR_CODES.DISPLAYNAME_INVALID) {
             setFieldError(
               'displayName',
               intl.formatMessage({
@@ -156,7 +158,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
               })
             )
           } else {
-            setFieldError('description', messages[code])
+            setFieldError('description', intl.formatMessage(messages[code]))
           }
         })
       }

@@ -11,7 +11,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   PAYMENT_CURRENCY,
@@ -81,6 +81,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
   callbackText,
   closeDialog,
 }) => {
+  const intl = useIntl()
   const stripe = useStripe()
   const elements = useElements()
   const { lang } = useContext(LanguageContext)
@@ -147,9 +148,9 @@ const BaseAddCredit: React.FC<FormProps> = ({
         const txResult = await addCredit({ variables: { input: { amount } } })
         data = txResult.data
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any)
         codes.forEach((code) => {
-          setFieldError('amount', messages[code])
+          setFieldError('amount', intl.formatMessage(messages[code]))
         })
       }
 

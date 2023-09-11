@@ -8,6 +8,7 @@ import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
+  ERROR_CODES,
   SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
 import {
@@ -15,7 +16,6 @@ import {
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
-  translate,
   validateEmail,
   // validatePassword,
 } from '~/common/utils'
@@ -25,6 +25,7 @@ import {
   AuthTabs,
   AuthWalletFeed,
   Dialog,
+  ERROR_MESSAGES,
   Form,
   IconLeft20,
   LanguageContext,
@@ -166,17 +167,19 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           fallback: !!isInPage ? 'homepage' : 'current',
         })
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any)
         setErrorCode(codes[0])
         codes.forEach((code) => {
           if (code.includes('CODE_INVALID') || code.includes('CODE_INACTIVE')) {
-            const m = translate({ id: 'CODE_INVALID', lang })
+            const m = intl.formatMessage(
+              ERROR_MESSAGES[ERROR_CODES.CODE_INVALID]
+            )
             setFieldError('email', m)
             setFieldError('password', m)
           } else if (code.includes('CODE_EXPIRED')) {
-            setFieldError('password', messages[code])
+            setFieldError('password', intl.formatMessage(messages[code]))
           } else {
-            setFieldError('email', messages[code])
+            setFieldError('email', intl.formatMessage(messages[code]))
           }
         })
         setSubmitting(false)

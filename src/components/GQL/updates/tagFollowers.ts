@@ -1,6 +1,5 @@
 import { DataProxy } from 'apollo-cache'
 
-import { ERROR_CODES } from '~/common/enums'
 import TAG_FOLLOWERS from '~/components/GQL/queries/tagFollowers'
 import { TagFollowersQuery } from '~/gql/graphql'
 
@@ -64,10 +63,6 @@ export const updateTagFollowers = ({
       data: cacheData,
     })
   } catch (e) {
-    if ((e as any).message.startsWith("Can't find field")) {
-      console.warn(ERROR_CODES.QUERY_FIELD_NOT_FOUND)
-    } else {
-      console.error(e)
-    }
+    console.error(e)
   }
 }

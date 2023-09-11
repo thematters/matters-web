@@ -2,7 +2,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
 import {
@@ -45,12 +45,13 @@ const Confirm: React.FC<FormProps> = ({
   closeDialog,
   back,
 }) => {
+  const intl = useIntl()
+  const { lang } = useContext(LanguageContext)
   const [reset] = useMutation<ResetPaymentPasswordMutation>(
     RESET_PAYMENT_PASSWORD,
     undefined,
     { showToast: false }
   )
-  const { lang } = useContext(LanguageContext)
   const { currStep, forward } = useStep<'password' | 'comparedPassword'>(
     'password'
   )
@@ -105,8 +106,8 @@ const Confirm: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        setFieldError('password', messages[codes[0]])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        setFieldError('password', intl.formatMessage(messages[codes[0]]))
         setFieldValue('comparedPassword', '', false)
       }
     },
