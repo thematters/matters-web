@@ -588,6 +588,10 @@
   "K3r6DQ": {
     "defaultMessage": "刪除"
   },
+  "KIQUHo": {
+    "defaultMessage": "登入密碼",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
   "KLQ1/z": {
     "defaultMessage": "圍爐創建成功",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
@@ -852,6 +856,10 @@
   "W0sZaX": {
     "defaultMessage": "最近 3 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "W66Eyq": {
+    "defaultMessage": "密碼需至少 8 位，支持字母、數字及符號的組合。",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
   "W8OZ3G": {
     "defaultMessage": "確認刪除"
@@ -1273,6 +1281,10 @@
   "p5qZnJ": {
     "defaultMessage": "讚賞了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
+  },
+  "pHg5Ju": {
+    "defaultMessage": "登入密碼已設定",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
   "pRV+UD": {
     "defaultMessage": "闔上",

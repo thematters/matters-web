@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { PATHS } from '~/common/enums'
 import { useMutation, useRoute } from '~/components'
-import { updateUser } from '~/components/GQL'
+import { updateRootUser } from '~/components/GQL'
 import { VerifyEmailMutation } from '~/gql/graphql'
 
 import { VERIFY_EMAIL } from './gql'
@@ -29,7 +29,7 @@ const EmailVerification = () => {
           update: (cache) => {
             // Instant Updates
             // If you use refetchQueries, due to network delays, toast(EmailVerificationToast) will be thrown before fetching the latest value.
-            updateUser({
+            updateRootUser({
               cache,
               emailVerified: true,
               hasEmailLoginPassword: false,

@@ -588,6 +588,10 @@
   "K3r6DQ": {
     "defaultMessage": "Delete"
   },
+  "KIQUHo": {
+    "defaultMessage": "Login password",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
   "KLQ1/z": {
     "defaultMessage": "Circle successfully created",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
@@ -852,6 +856,10 @@
   "W0sZaX": {
     "defaultMessage": "Last 3 months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "W66Eyq": {
+    "defaultMessage": "Password must be at least 8 characters long, support letter, numbers and symbols.",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
   "W8OZ3G": {
     "defaultMessage": "Confirm Deletion"
@@ -1273,6 +1281,10 @@
   "p5qZnJ": {
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
+  },
+  "pHg5Ju": {
+    "defaultMessage": "Set password succeed",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
   "pRV+UD": {
     "defaultMessage": "Collapse",
