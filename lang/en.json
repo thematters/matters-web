@@ -393,6 +393,10 @@
   "CnPG8j": {
     "defaultMessage": "Featured"
   },
+  "CoF9qv": {
+    "defaultMessage": "Are you sure you want to disconnect from this?",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "Cu3Cty": {
     "defaultMessage": "month"
   },
@@ -417,6 +421,10 @@
   "DqQvtL": {
     "defaultMessage": "Unblock",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
+  "Dt1o78": {
+    "defaultMessage": "Wallet is linked to a different account",
+    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
   "DyuHBH": {
     "defaultMessage": "Unpin from profile",
@@ -588,6 +596,10 @@
   "K3r6DQ": {
     "defaultMessage": "Delete"
   },
+  "KIQUHo": {
+    "defaultMessage": "Login password",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
   "KLQ1/z": {
     "defaultMessage": "Circle successfully created",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
@@ -598,6 +610,10 @@
   },
   "KQi/UZ": {
     "defaultMessage": "Archive works"
+  },
+  "KlJEP9": {
+    "defaultMessage": "Wallet connected",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "KxVlDj": {
     "defaultMessage": "Settings - Blocked Users",
@@ -655,6 +671,10 @@
   "MDNaxs": {
     "defaultMessage": "followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "Me5cJu": {
+    "defaultMessage": "Connect wallet",
+    "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
   },
   "Mn7GEf": {
     "defaultMessage": "Selected activities related to you in the past 24 hours",
@@ -853,6 +873,10 @@
     "defaultMessage": "Last 3 months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "W66Eyq": {
+    "defaultMessage": "Password must be at least 8 characters long, support letter, numbers and symbols.",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
   "W8OZ3G": {
     "defaultMessage": "Confirm Deletion"
   },
@@ -1031,6 +1055,10 @@
     "defaultMessage": "Income",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "dSjI7E": {
+    "defaultMessage": "Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account).",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "dVbKzB": {
     "defaultMessage": "Comments and replies",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1126,6 +1154,10 @@
   },
   "itPgxd": {
     "defaultMessage": "Profile"
+  },
+  "iu3XKs": {
+    "defaultMessage": "Wallet disconnected",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "izWS4J": {
     "defaultMessage": "Unfollow"
@@ -1255,6 +1287,10 @@
   "nYrKWp": {
     "defaultMessage": "Edit profile"
   },
+  "no7l8z": {
+    "defaultMessage": "Disconnect wallet",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "o2Na0B": {
     "defaultMessage": "Back to All"
   },
@@ -1273,6 +1309,10 @@
   "p5qZnJ": {
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
+  },
+  "pHg5Ju": {
+    "defaultMessage": "Set password succeed",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
   "pRV+UD": {
     "defaultMessage": "Collapse",
@@ -1327,6 +1367,10 @@
   },
   "rfz/fN": {
     "defaultMessage": "Recommended size: 1600px x 900px"
+  },
+  "rqS2aA": {
+    "defaultMessage": "Sign in to that account to unlink it then try again",
+    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
   "s5JCCO": {
     "defaultMessage": "This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?",
