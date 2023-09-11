@@ -65,7 +65,7 @@ type ToPathArgs =
       article?: ArticleArgs | null
       circle?: CircleArgs | null
     }
-  | { page: 'draftDetail'; id: string; slug: string }
+  | { page: 'draftDetail'; id: string }
   | {
       page: 'tagDetail'
       tag: TagArgs
@@ -203,7 +203,7 @@ export const toPath = (
     }
     case 'draftDetail': {
       return {
-        href: `/me/drafts/${args.slug}-${args.id}`,
+        href: `/me/drafts/${args.id}`,
       }
     }
     case 'tagDetail': {

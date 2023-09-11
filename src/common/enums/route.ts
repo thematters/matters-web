@@ -46,6 +46,7 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_NOTIFICATIONS'
   | 'ME_SETTINGS_MISC'
   | 'ME_SETTINGS_BLOCKED'
+  | 'ME_DRAFT_NEW'
   | 'ME_DRAFT_DETAIL'
   | 'ME_SETTINGS_NOTIFICATIONS_CIRCLE'
   // Form
@@ -154,6 +155,7 @@ export const ROUTES: {
   { key: 'ME_SETTINGS_BLOCKED', pathname: '/me/settings/blocked' },
 
   // Draft
+  { key: 'ME_DRAFT_NEW', pathname: '/me/drafts/new' },
   { key: 'ME_DRAFT_DETAIL', pathname: '/me/drafts/[draftId]' },
 
   // OAuth

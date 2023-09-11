@@ -147,9 +147,6 @@
     "defaultMessage": "Sign In",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
-  "3kbIhS": {
-    "defaultMessage": "Untitled"
-  },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to ",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"

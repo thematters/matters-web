@@ -68,10 +68,10 @@ const ExtendButton = ({
     }
 
     const { data } = await collectArticle()
-    const { slug = '', id } = data?.putDraft || {}
+    const { id } = data?.putDraft || {}
 
     if (id) {
-      const path = toPath({ page: 'draftDetail', slug, id })
+      const path = toPath({ page: 'draftDetail', id })
       router.push(path.href)
     }
   }
