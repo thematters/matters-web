@@ -45,7 +45,6 @@ export const useRoute = () => {
         query = query.replace(/[@~～]/g, '')
         break
       case 'mediaHash':
-      case 'draftId':
         query = query.split('-').slice(-1)[0]
         break
     }

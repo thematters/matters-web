@@ -44,7 +44,7 @@ const BaseAccessDialog = ({
           rightBtn={<CloseButton />}
         />
 
-        <Dialog.Content>
+        <Dialog.Content noSpacing>
           <section className={styles.response}>
             <ToggleResponse {...toggleResponseProps} />
           </section>

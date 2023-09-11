@@ -26,12 +26,8 @@ const fragments = {
 }
 
 const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
-  const { id, title, slug } = draft
-  const path = toPath({
-    page: 'draftDetail',
-    slug,
-    id,
-  })
+  const { id, title } = draft
+  const path = toPath({ page: 'draftDetail', id })
 
   return (
     <Card {...path} spacing={['base', 0]} bgActiveColor="none">

@@ -17,19 +17,24 @@ import {
   Spinner,
   Throw404,
   toast,
+  useCreateDraft,
   useRoute,
   useUnloadConfirm,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import {
+  ArticleAccessType,
+  ArticleLicenseType,
+  DraftDetailCirclesQueryQuery,
   DraftDetailQueryQuery,
+  PublishState as PublishStateType,
   SetDraftContentMutation,
   SingleFileUploadMutation,
 } from '~/gql/graphql'
 
 import BottomBar from './BottomBar'
-import { DRAFT_DETAIL, SET_CONTENT } from './gql'
+import { DRAFT_DETAIL, DRAFT_DETAIL_CIRCLES, SET_CONTENT } from './gql'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
@@ -43,10 +48,42 @@ const Editor = dynamic(
   }
 )
 
+const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
+  id: '',
+  title: '',
+  publishState: PublishStateType.Unpublished,
+  content: '',
+  summary: '',
+  summaryCustomized: false,
+  __typename: 'Draft',
+  article: null,
+  cover: null,
+  assets: [],
+  tags: null,
+  collection: {
+    edges: null,
+    __typename: 'ArticleConnection',
+  },
+  access: {
+    type: ArticleAccessType.Public,
+    circle: null,
+    __typename: 'DraftAccess',
+  },
+  license: ArticleLicenseType.Cc_0,
+  requestForDonation: null,
+  replyToDonator: null,
+  sensitiveByAuthor: false,
+  iscnPublish: null,
+  canComment: true,
+}
+
 const DraftDetail = () => {
   const { getQuery } = useRoute()
   const id = getQuery('draftId')
+  const isInNew = id === 'new'
 
+  const [initNew] = useState(isInNew)
+  const { createDraft } = useCreateDraft()
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
   const [singleFileUpload] = useMutation<SingleFileUploadMutation>(UPLOAD_FILE)
   const [saveStatus, setSaveStatus] = useState<
@@ -59,14 +96,20 @@ const DraftDetail = () => {
     {
       variables: { id },
       fetchPolicy: 'network-only',
+      skip: isInNew,
     }
   )
-  const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined
-  const ownCircles = data?.viewer?.ownCircles || undefined
+  const { data: circleData, loading: circleLoading } =
+    useQuery<DraftDetailCirclesQueryQuery>(DRAFT_DETAIL_CIRCLES, {
+      fetchPolicy: 'network-only',
+    })
 
-  useUnloadConfirm({ block: saveStatus === 'saving' })
+  const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
+  const ownCircles = circleData?.viewer?.ownCircles || undefined
 
-  if (loading) {
+  useUnloadConfirm({ block: saveStatus === 'saving' && !isInNew })
+
+  if ((loading && !initNew) || circleLoading) {
     return (
       <EmptyLayout>
         <Spinner />
@@ -82,7 +125,7 @@ const DraftDetail = () => {
     )
   }
 
-  if (!draft) {
+  if (!draft && !isInNew) {
     return (
       <EmptyLayout>
         <Throw404 />
@@ -148,7 +191,16 @@ const DraftDetail = () => {
 
       setSaveStatus('saving')
 
-      await setContent({ variables: { id: draft?.id, ...newDraft } })
+      if (draft?.id) {
+        await setContent({ variables: { id: draft.id, ...newDraft } })
+      } else {
+        await createDraft({
+          onCreate: async (draftId: string) => {
+            await setContent({ variables: { id: draftId, ...newDraft } })
+          },
+        })
+      }
+
       setSaveStatus('saved')
 
       if (newDraft.summary && !hasValidSummary) {

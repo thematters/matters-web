@@ -54,7 +54,7 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
           size={[null, '1.5rem']}
           borderColor="green"
           borderRadius="5rem"
-          href={PATHS.ME_SETTINGS}
+          href={PATHS.ME_SETTINGS_MISC}
         >
           <TextIcon color="green" size="xs">
             <Translate

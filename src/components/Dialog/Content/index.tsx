@@ -6,11 +6,13 @@ interface DialogContentProps {
   noSpacing?: boolean
   smExtraSpacing?: boolean
   fixedHeight?: boolean
+  noSpacingBottom?: boolean
 }
 
 const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> = ({
   noSpacing,
   smExtraSpacing = true,
+  noSpacingBottom,
   fixedHeight,
   children,
 }) => {
@@ -19,6 +21,7 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> = ({
     [styles.spacing]: !noSpacing,
     [styles.smExtraSpacing]: smExtraSpacing,
     [styles.fixedHeight]: !!fixedHeight,
+    [styles.noSpacingBottom]: !!noSpacingBottom,
   })
 
   return <section className={contentClasses}>{children}</section>
