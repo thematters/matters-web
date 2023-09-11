@@ -148,6 +148,10 @@ export const ERROR_MESSAGES: { [key in ERROR_CODES]: MessageDescriptor } = {
     defaultMessage: 'Incorrect email or password',
     description: 'USER_PASSWORD_INVALID',
   }),
+  [ERROR_CODES.CRYPTO_WALLET_EXISTS]: defineMessage({
+    defaultMessage: 'Wallet is linked to a different account',
+    description: 'CRYPTO_WALLET_EXISTS',
+  }),
   [ERROR_CODES.DUPLICATE_TAG]: defineMessage({
     defaultMessage: 'This tag is already taken',
     description: 'DUPLICATE_TAG',

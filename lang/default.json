@@ -297,6 +297,9 @@
   "7JlauX": {
     "defaultMessage": "Explore"
   },
+  "7cwoRo": {
+    "defaultMessage": "The author has disabled comments for this article"
+  },
   "7jjWxF": {
     "defaultMessage": "No results",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
@@ -426,6 +429,9 @@
   "BnMru1": {
     "defaultMessage": "Language",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
+  },
+  "BrFpL2": {
+    "defaultMessage": "This login code is invalid, please try to resend"
   },
   "C3NKBg": {
     "defaultMessage": "Connected to {type}",
@@ -868,6 +874,9 @@
   },
   "T9oZC8": {
     "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?"
+  },
+  "TF1OhT": {
+    "defaultMessage": "This login code has expired, please try to resend"
   },
   "TSDiqB": {
     "defaultMessage": "Subscribers",
@@ -1533,6 +1542,10 @@
   "v6YjIn": {
     "defaultMessage": "Account",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "v8dGSd": {
+    "defaultMessage": "Wallet is linked to a different account",
+    "description": "CRYPTO_WALLET_EXISTS"
   },
   "vAc1Bw": {
     "defaultMessage": "Block User"
