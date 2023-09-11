@@ -10,7 +10,7 @@ interface Props {
 
 type Step = 'select' | 'connect'
 
-const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
+const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
   const [step, setStep] = useState<Step>('select')
   const [walletType, setWalletType] = useState<WalletType>('MetaMask')
   const [hasWalletExist, setHasWalletExist] = useState(false)
@@ -56,4 +56,4 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
   )
 }
 
-export default RemoveWalletLoginDialogContent
+export default AddWalletLoginDialogContent
