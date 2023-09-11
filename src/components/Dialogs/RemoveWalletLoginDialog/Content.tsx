@@ -1,31 +1,28 @@
-import _pickBy from 'lodash/pickBy'
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
+import { useDisconnect } from 'wagmi'
 
 import { Dialog, toast, useMutation } from '~/components'
-import { RemoveSocialLoginMutation, SocialAccountType } from '~/gql/graphql'
+import { RemoveWalletLoginMutation } from '~/gql/graphql'
 
-import { ROOT_QUERY_PRIVATE } from '../../Root/gql'
-import { REMOVE_SOCIAL_LOGIN } from './gql'
+import { REMOVE_WALLET_LOGIN } from './gql'
 
 interface Props {
   closeDialog: () => void
-  type: SocialAccountType
 }
 
 type Step = 'confirm' | 'failure'
 
-const RemoveSocailLoginDialogContent: React.FC<Props> = ({
-  closeDialog,
-  type,
-}) => {
-  const [removeLogin, { loading }] = useMutation<RemoveSocialLoginMutation>(
-    REMOVE_SOCIAL_LOGIN,
+const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
+  const [removeLogin, { loading }] = useMutation<RemoveWalletLoginMutation>(
+    REMOVE_WALLET_LOGIN,
     undefined,
     {
       showToast: false,
     }
   )
+
+  const { disconnect } = useDisconnect()
 
   const [step, setStep] = useState<Step>('confirm')
   const isConfirm = step === 'confirm'
@@ -33,26 +30,13 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
 
   const remove = async () => {
     try {
-      await removeLogin({
-        variables: {
-          input: {
-            type,
-          },
-        },
-        refetchQueries: [
-          {
-            query: ROOT_QUERY_PRIVATE,
-          },
-        ],
-      })
+      disconnect()
+      await removeLogin()
       toast.success({
         message: (
           <FormattedMessage
-            defaultMessage="{type} disconnected"
-            description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
-            values={{
-              type,
-            }}
+            defaultMessage="Wallet disconnected"
+            description="src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
           />
         ),
       })
@@ -68,11 +52,8 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
       <Dialog.Header
         title={
           <FormattedMessage
-            defaultMessage="Disconnect from {type}"
-            description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
-            values={{
-              type,
-            }}
+            defaultMessage="Disconnect wallet"
+            description="src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
           />
         }
       />
@@ -81,20 +62,14 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
         <p>
           {isConfirm && (
             <FormattedMessage
-              defaultMessage="Do you want to disconnect from {type}?"
-              description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
-              values={{
-                type,
-              }}
+              defaultMessage="Are you sure you want to disconnect from this?"
+              description="src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
             />
           )}
           {isFailure && (
             <FormattedMessage
-              defaultMessage="Unable to disconnect from {type} temporarily because you do not have any other log in methods (Email/Crypto wallet/Social account)."
-              description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
-              values={{
-                type,
-              }}
+              defaultMessage="Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account)."
+              description="src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
             />
           )}
         </p>
@@ -169,4 +144,4 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
   )
 }
 
-export default RemoveSocailLoginDialogContent
+export default RemoveWalletLoginDialogContent

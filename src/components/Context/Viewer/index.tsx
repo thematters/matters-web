@@ -74,6 +74,7 @@ const ViewerFragments = {
             userName
             email
           }
+          emailVerified
         }
         status {
           role

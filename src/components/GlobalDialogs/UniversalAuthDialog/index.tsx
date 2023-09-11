@@ -100,6 +100,7 @@ const BaseUniversalAuthDialog = () => {
       {currStep === 'wallet-connect' && (
         <ReCaptchaProvider>
           <DynamicWalletAuthFormConnect
+            type="login"
             purpose="dialog"
             walletType={walletType}
             closeDialog={closeDialog}

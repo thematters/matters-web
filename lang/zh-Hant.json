@@ -79,6 +79,10 @@
     "defaultMessage": "新建選集",
     "description": "src/views/User/Collections/UserCollections.tsx"
   },
+  "0e1xjL": {
+    "defaultMessage": "郵件地址每天最多可修改 {count} 次",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "0iyH+q": {
     "defaultMessage": "最近 7 日",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -455,6 +459,10 @@
   "CnPG8j": {
     "defaultMessage": "精華"
   },
+  "CoF9qv": {
+    "defaultMessage": "確認要解綁錢包？",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "Cu3Cty": {
     "defaultMessage": "月"
   },
@@ -479,6 +487,10 @@
   "DqQvtL": {
     "defaultMessage": "解除封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
+  "Dt1o78": {
+    "defaultMessage": "該錢包已關聯至其他帳號",
+    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
   "DyuHBH": {
     "defaultMessage": "取消代表作",
@@ -506,6 +518,10 @@
   "EwbNbl": {
     "defaultMessage": "Oops！連結已失效",
     "description": "src/views/Callback/GoogleCallback.tsx"
+  },
+  "FEI5Fv": {
+    "defaultMessage": "郵件地址",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "FOOymB": {
     "defaultMessage": "還沒有成員",
@@ -573,6 +589,10 @@
   "H0JBH6": {
     "defaultMessage": "登出"
   },
+  "H7bMRx": {
+    "defaultMessage": "驗證連結已發送，請查收郵件",
+    "description": "src/components/GlobalToast/index.tsx"
+  },
   "H8KGyc": {
     "defaultMessage": "進入"
   },
@@ -605,6 +625,9 @@
   "IPqNCS": {
     "defaultMessage": "確認使用",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
+  "IXycMo": {
+    "defaultMessage": "重新發送"
   },
   "Ihwz5K": {
     "defaultMessage": "代表作已取消"
@@ -643,6 +666,10 @@
   "K3r6DQ": {
     "defaultMessage": "刪除"
   },
+  "KIQUHo": {
+    "defaultMessage": "登入密碼",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
   "KLQ1/z": {
     "defaultMessage": "圍爐創建成功",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
@@ -653,6 +680,10 @@
   },
   "KQi/UZ": {
     "defaultMessage": "封存作品"
+  },
+  "KlJEP9": {
+    "defaultMessage": "錢包已綁定",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "KxVlDj": {
     "defaultMessage": "設定 - 已封鎖用戶",
@@ -718,6 +749,10 @@
   "MPEeBy": {
     "defaultMessage": "操作失敗，請稍候重試",
     "description": "ACTION_FAILED"
+  },
+  "Me5cJu": {
+    "defaultMessage": "綁定錢包",
+    "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
   },
   "Mn7GEf": {
     "defaultMessage": "精選過去 24 小時與你有關的消息",
@@ -947,6 +982,10 @@
     "defaultMessage": "最近 3 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "W66Eyq": {
+    "defaultMessage": "密碼需至少 8 位，支持字母、數字及符號的組合。",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
   "W8OZ3G": {
     "defaultMessage": "確認刪除"
   },
@@ -1145,6 +1184,10 @@
     "defaultMessage": "營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "dSjI7E": {
+    "defaultMessage": "暫無法斷開錢包連結，因為你沒有其他可用於登錄的身份（電子郵件/數字錢包/社交帳號）。",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "dVbKzB": {
     "defaultMessage": "作品或評論提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1208,6 +1251,10 @@
     "defaultMessage": "新追蹤者",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "h9A6AT": {
+    "defaultMessage": "為確保帳號安全，修改郵件地址將{resetHint}，你可在驗證郵箱後再次設定密碼。",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "h9CG9E": {
     "defaultMessage": "{commentType}已刪除",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1240,6 +1287,10 @@
   },
   "itPgxd": {
     "defaultMessage": "個人主頁"
+  },
+  "iu3XKs": {
+    "defaultMessage": "錢包已解綁",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "izWS4J": {
     "defaultMessage": "取消追蹤"
@@ -1385,6 +1436,10 @@
   "nYrKWp": {
     "defaultMessage": "編輯個人資料"
   },
+  "no7l8z": {
+    "defaultMessage": "解綁錢包",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "nozN+j": {
     "defaultMessage": "電子信箱不正確",
     "description": "USER_EMAIL_INVALID"
@@ -1407,6 +1462,10 @@
   "p5qZnJ": {
     "defaultMessage": "讚賞了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
+  },
+  "pHg5Ju": {
+    "defaultMessage": "登入密碼已設定",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
   "pRV+UD": {
     "defaultMessage": "闔上",
@@ -1469,6 +1528,10 @@
   },
   "rfz/fN": {
     "defaultMessage": "建議尺寸 1600 x 900 像素"
+  },
+  "rqS2aA": {
+    "defaultMessage": "請登入該帳戶解綁錢包後再試",
+    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
   "s5JCCO": {
     "defaultMessage": "此文已被{actor}標示為限制級內容，是否確定展開全文？",
@@ -1564,6 +1627,10 @@
   "viMrzF": {
     "defaultMessage": "廣播",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "vsD2wm": {
+    "defaultMessage": "重置你的登入密碼",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "評論"

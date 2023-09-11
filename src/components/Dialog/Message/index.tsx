@@ -11,6 +11,7 @@ interface DialogMessageProps {
   type?: 'error'
 
   noSpacing?: boolean
+  noSpacingBottom?: boolean
 }
 
 /**
@@ -34,6 +35,7 @@ const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
   type,
 
   noSpacing,
+  noSpacingBottom,
 
   children,
 }) => {
@@ -46,7 +48,7 @@ const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
   })
 
   return (
-    <Dialog.Content noSpacing={noSpacing}>
+    <Dialog.Content noSpacing={noSpacing} noSpacingBottom={noSpacingBottom}>
       <section className={contentClasses}>{children}</section>
     </Dialog.Content>
   )

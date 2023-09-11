@@ -17,10 +17,12 @@ export interface Props {
   submitCallback: (type: WalletType) => void
   closeDialog?: () => void
   back?: () => void
+  hasWalletExist?: boolean
 }
 
 export const AuthWalletFeed: React.FC<Props> = ({
   submitCallback,
+  hasWalletExist,
   closeDialog,
   back,
 }) => {
@@ -102,6 +104,22 @@ export const AuthWalletFeed: React.FC<Props> = ({
         </li>
       </ul>
       <section className={styles.info}>
+        {hasWalletExist && (
+          <section className={styles.errorHint}>
+            <p>
+              <FormattedMessage
+                defaultMessage="Wallet is linked to a different account"
+                description="src/components/AuthMethodFeed/AuthWalletFeed.tsx"
+              />
+            </p>
+            <p>
+              <FormattedMessage
+                defaultMessage="Sign in to that account to unlink it then try again"
+                description="src/components/AuthMethodFeed/AuthWalletFeed.tsx"
+              />
+            </p>
+          </section>
+        )}
         <section className={styles.title}>
           <a href={PATHS.GUIDE} target="_blank">
             <FormattedMessage
