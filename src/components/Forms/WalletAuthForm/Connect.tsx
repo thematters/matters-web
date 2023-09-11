@@ -29,27 +29,30 @@ import {
   LanguageContext,
   Media,
   TextIcon,
-  // toast,
+  toast,
   useMutation,
 } from '~/components'
 import {
+  AddWalletLoginMutation,
   AuthResultType,
   GenerateSigningMessageMutation,
   WalletLoginMutation,
 } from '~/gql/graphql'
 
-import { GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
+import { ADD_WALLET_LOGIN, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
 import styles from './styles.module.css'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 interface FormProps {
+  type: 'login' | 'connect'
   purpose: 'dialog' | 'page'
   walletType?: WalletType
   submitCallback?: (type?: AuthResultType) => void
   closeDialog?: () => void
   back?: () => void
   gotoSignInTab?: () => void
+  setHasWalletExist?: () => void
 }
 
 interface FormValues {
@@ -57,14 +60,19 @@ interface FormValues {
 }
 
 const Connect: React.FC<FormProps> = ({
+  type,
   purpose,
   walletType,
   submitCallback,
   closeDialog,
   back,
   gotoSignInTab,
+  setHasWalletExist,
 }) => {
   const { lang } = useContext(LanguageContext)
+  const isLogin = type === 'login'
+  const isConnect = type === 'connect'
+
   const [authTypeFeed] = useState<AuthFeedType>('wallet')
 
   const isMetamask = walletType === 'MetaMask'
@@ -77,6 +85,14 @@ const Connect: React.FC<FormProps> = ({
   )
   const [walletLogin] = useMutation<WalletLoginMutation>(
     WALLET_LOGIN,
+    undefined,
+    {
+      showToast: false,
+    }
+  )
+
+  const [addWalletLogin] = useMutation<AddWalletLoginMutation>(
+    ADD_WALLET_LOGIN,
     undefined,
     {
       showToast: false,
@@ -129,7 +145,7 @@ const Connect: React.FC<FormProps> = ({
 
         // get signing message
         const { data: signingMessageData } = await generateSigningMessage({
-          variables: { input: { address } },
+          variables: { input: { address, purpose: type } },
         })
 
         const signingMessage = signingMessageData?.generateSigningMessage
@@ -156,41 +172,65 @@ const Connect: React.FC<FormProps> = ({
           return
         }
 
-        // confirm auth
-        const { data: loginData } = await walletLogin({
-          variables: {
-            input: {
-              ethAddress: address,
-              nonce: signingMessage.nonce,
-              signedMessage: signingMessage.signingMessage,
-              signature,
-            },
+        const variables = {
+          input: {
+            ethAddress: address,
+            nonce: signingMessage.nonce,
+            signedMessage: signingMessage.signingMessage,
+            signature,
           },
-        })
+        }
 
-        const token = loginData?.walletLogin.token || ''
-        const language = loginData?.walletLogin.user?.settings.language || ''
-        const group = loginData?.walletLogin.user?.info.group || ''
-        setCookies({
-          [COOKIE_LANGUAGE]: language,
-          [COOKIE_USER_GROUP]: group,
-          ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
-        })
-
-        analytics.identifyUser()
-
-        if (loginData?.walletLogin.type === AuthResultType.Login) {
-          redirectToTarget({
-            fallback: 'current',
+        if (isLogin) {
+          // confirm auth
+          const { data: loginData } = await walletLogin({
+            variables,
           })
-        } else if (submitCallback) {
-          submitCallback(loginData?.walletLogin.type)
+
+          const token = loginData?.walletLogin.token || ''
+          const language = loginData?.walletLogin.user?.settings.language || ''
+          const group = loginData?.walletLogin.user?.info.group || ''
+          setCookies({
+            [COOKIE_LANGUAGE]: language,
+            [COOKIE_USER_GROUP]: group,
+            ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
+          })
+
+          analytics.identifyUser()
+
+          if (loginData?.walletLogin.type === AuthResultType.Login) {
+            redirectToTarget({
+              fallback: 'current',
+            })
+          } else if (submitCallback) {
+            submitCallback(loginData?.walletLogin.type)
+          }
+        }
+
+        if (isConnect) {
+          await addWalletLogin({
+            variables: variables,
+          })
+
+          toast.success({
+            message: (
+              <FormattedMessage
+                defaultMessage="Wallet connected"
+                description="src/components/Forms/WalletAuthForm/Connect.tsx"
+              />
+            ),
+          })
+
+          !!closeDialog && closeDialog()
         }
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         codes.forEach((c) => {
           if (c.includes('CODE_')) {
             setFieldError('code', messages[c])
+          } else if (c.includes('CRYPTO_WALLET_EXISTS')) {
+            disconnect()
+            !!setHasWalletExist && setHasWalletExist()
           } else {
             setFieldError('address', messages[c])
           }
@@ -203,35 +243,39 @@ const Connect: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header
-        title={<>{isMetamask ? 'MetaMask' : 'Wallet Connect'}</>}
-        hasSmUpTitle={false}
-        leftBtn={
-          back ? (
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
-              onClick={onBack}
-              color="greyDarker"
-            />
-          ) : null
-        }
-        closeDialog={onCloseDialog}
-      />
+      {isLogin && (
+        <Dialog.Header
+          title={<>{isMetamask ? 'MetaMask' : 'Wallet Connect'}</>}
+          hasSmUpTitle={false}
+          leftBtn={
+            back ? (
+              <Dialog.TextButton
+                text={<FormattedMessage defaultMessage="Back" />}
+                onClick={onBack}
+                color="greyDarker"
+              />
+            ) : null
+          }
+          closeDialog={onCloseDialog}
+        />
+      )}
 
       <Dialog.Content>
-        <Media greaterThan="sm">
-          <AuthTabs
-            type={authTypeFeed}
-            setType={(type) => {
-              if (type === 'normal') {
-                disconnect()
-                if (gotoSignInTab) {
-                  gotoSignInTab()
+        {isLogin && (
+          <Media greaterThan="sm">
+            <AuthTabs
+              type={authTypeFeed}
+              setType={(type) => {
+                if (type === 'normal') {
+                  disconnect()
+                  if (gotoSignInTab) {
+                    gotoSignInTab()
+                  }
                 }
-              }
-            }}
-          />
-        </Media>
+              }}
+            />
+          </Media>
+        )}
         <section className={styles.walletInfo}>
           <span className={styles.icon}>
             {isMetamask && <IconMetamask22 size="mdM" />}

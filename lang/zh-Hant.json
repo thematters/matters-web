@@ -393,6 +393,10 @@
   "CnPG8j": {
     "defaultMessage": "精華"
   },
+  "CoF9qv": {
+    "defaultMessage": "確認要解綁錢包？",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "Cu3Cty": {
     "defaultMessage": "月"
   },
@@ -417,6 +421,10 @@
   "DqQvtL": {
     "defaultMessage": "解除封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
+  "Dt1o78": {
+    "defaultMessage": "該錢包已關聯至其他帳號",
+    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
   "DyuHBH": {
     "defaultMessage": "取消代表作",
@@ -603,6 +611,10 @@
   "KQi/UZ": {
     "defaultMessage": "封存作品"
   },
+  "KlJEP9": {
+    "defaultMessage": "錢包已綁定",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
   "KxVlDj": {
     "defaultMessage": "設定 - 已封鎖用戶",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
@@ -659,6 +671,10 @@
   "MDNaxs": {
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "Me5cJu": {
+    "defaultMessage": "綁定錢包",
+    "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
   },
   "Mn7GEf": {
     "defaultMessage": "精選過去 24 小時與你有關的消息",
@@ -1039,6 +1055,10 @@
     "defaultMessage": "營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "dSjI7E": {
+    "defaultMessage": "暫無法斷開錢包連結，因為你沒有其他可用於登錄的身份（電子郵件/數字錢包/社交帳號）。",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "dVbKzB": {
     "defaultMessage": "作品或評論提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1134,6 +1154,10 @@
   },
   "itPgxd": {
     "defaultMessage": "個人主頁"
+  },
+  "iu3XKs": {
+    "defaultMessage": "錢包已解綁",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "izWS4J": {
     "defaultMessage": "取消追蹤"
@@ -1263,6 +1287,10 @@
   "nYrKWp": {
     "defaultMessage": "編輯個人資料"
   },
+  "no7l8z": {
+    "defaultMessage": "解綁錢包",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "o2Na0B": {
     "defaultMessage": "返回全部"
   },
@@ -1339,6 +1367,10 @@
   },
   "rfz/fN": {
     "defaultMessage": "建議尺寸 1600 x 900 像素"
+  },
+  "rqS2aA": {
+    "defaultMessage": "請登入該帳戶解綁錢包後再試",
+    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
   "s5JCCO": {
     "defaultMessage": "此文已被{actor}標示為限制級內容，是否確定展開全文？",
