@@ -93,6 +93,11 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
               email,
             },
           },
+          refetchQueries: [
+            {
+              query: ROOT_QUERY_PRIVATE,
+            },
+          ],
         })
 
         const redirectPath = `/callback/${CALLBACK_PROVIDERS.EmailVerification}`
@@ -108,11 +113,6 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
               redirectUrl,
             },
           },
-          refetchQueries: [
-            {
-              query: ROOT_QUERY_PRIVATE,
-            },
-          ],
         })
 
         // toast
