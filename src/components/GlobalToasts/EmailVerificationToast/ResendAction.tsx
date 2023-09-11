@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
-  OAUTH_CALLBACK_PROVIDERS,
+  CALLBACK_PROVIDERS,
   OAUTH_STORAGE_SEND_EMAIL_CODE_COUNTDOWN,
   SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
@@ -51,7 +51,7 @@ const ResendAction = ({ initCountdown }: Props) => {
   const resend = async () => {
     const email = viewer.info.email
 
-    const redirectPath = `/callback/${OAUTH_CALLBACK_PROVIDERS.EmailVerification}`
+    const redirectPath = `/callback/${CALLBACK_PROVIDERS.EmailVerification}`
     const redirectUrl = `${
       process.env.NEXT_PUBLIC_SITE_DOMAIN
     }${redirectPath}?email=${encodeURIComponent(email)}`

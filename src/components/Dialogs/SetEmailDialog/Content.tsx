@@ -5,9 +5,9 @@ import React, { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
+  CALLBACK_PROVIDERS,
   KEYVALUE,
   MAX_CHANGE_EMAIL_TIME_DAILY,
-  OAUTH_CALLBACK_PROVIDERS,
   TOAST_SEND_EMAIL_VERIFICATION,
 } from '~/common/enums'
 import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
@@ -95,7 +95,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
           },
         })
 
-        const redirectPath = `/callback/${OAUTH_CALLBACK_PROVIDERS.EmailVerification}`
+        const redirectPath = `/callback/${CALLBACK_PROVIDERS.EmailVerification}`
         const redirectUrl = `${
           process.env.NEXT_PUBLIC_SITE_DOMAIN
         }${redirectPath}?email=${encodeURIComponent(email)}`
