@@ -210,13 +210,6 @@ const Connect: React.FC<FormProps> = ({
         if (isConnect) {
           await addWalletLogin({
             variables: variables,
-            // FIXME: Why automatically update?
-            // FIXME: Why Internal Server Error
-            // refetchQueries: [
-            //   {
-            //     query: ROOT_QUERY_PRIVATE,
-            //   },
-            // ],
           })
 
           toast.success({
