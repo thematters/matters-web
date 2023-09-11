@@ -393,6 +393,10 @@
   "CnPG8j": {
     "defaultMessage": "精华"
   },
+  "CoF9qv": {
+    "defaultMessage": "确认要解绑钱包？",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "Cu3Cty": {
     "defaultMessage": "月"
   },
@@ -417,6 +421,10 @@
   "DqQvtL": {
     "defaultMessage": "解除屏蔽",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
+  "Dt1o78": {
+    "defaultMessage": "该钱包已关联至其他帐号",
+    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
   "DyuHBH": {
     "defaultMessage": "取消代表作",
@@ -588,6 +596,10 @@
   "K3r6DQ": {
     "defaultMessage": "刪除"
   },
+  "KIQUHo": {
+    "defaultMessage": "登录密码",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
   "KLQ1/z": {
     "defaultMessage": "围炉创建成功",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
@@ -598,6 +610,10 @@
   },
   "KQi/UZ": {
     "defaultMessage": "归档作品"
+  },
+  "KlJEP9": {
+    "defaultMessage": "钱包已绑定",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "KxVlDj": {
     "defaultMessage": "设置 - 已屏蔽用户",
@@ -655,6 +671,10 @@
   "MDNaxs": {
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "Me5cJu": {
+    "defaultMessage": "绑定钱包",
+    "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
   },
   "Mn7GEf": {
     "defaultMessage": "精选过去 24 小时与你有关的消息",
@@ -802,7 +822,7 @@
     "defaultMessage": "数据"
   },
   "UOdEqi": {
-    "defaultMessage": "原有透过电子信箱登入方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",
+    "defaultMessage": "原有透过电子信箱登录方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "URljhZ": {
@@ -852,6 +872,10 @@
   "W0sZaX": {
     "defaultMessage": "最近 3 个月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "W66Eyq": {
+    "defaultMessage": "密码需至少 8 位，支持字母、数字及符号的组合。",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
   "W8OZ3G": {
     "defaultMessage": "确认删除"
@@ -1031,6 +1055,10 @@
     "defaultMessage": "营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "dSjI7E": {
+    "defaultMessage": "暂无法断开钱包链接，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "dVbKzB": {
     "defaultMessage": "评论和回复",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1126,6 +1154,10 @@
   },
   "itPgxd": {
     "defaultMessage": "个人主页"
+  },
+  "iu3XKs": {
+    "defaultMessage": "钱包已解绑",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "izWS4J": {
     "defaultMessage": "取消追踪"
@@ -1255,6 +1287,10 @@
   "nYrKWp": {
     "defaultMessage": "编辑个人信息"
   },
+  "no7l8z": {
+    "defaultMessage": "解绑钱包",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "o2Na0B": {
     "defaultMessage": "返回全部"
   },
@@ -1273,6 +1309,10 @@
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
+  },
+  "pHg5Ju": {
+    "defaultMessage": "登录密码已设置",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
   "pRV+UD": {
     "defaultMessage": "折叠",
@@ -1328,6 +1368,10 @@
   "rfz/fN": {
     "defaultMessage": "建議尺寸 1600 x 900 像素"
   },
+  "rqS2aA": {
+    "defaultMessage": "请登录该帐户解绑钱包后再试",
+    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
+  },
   "s5JCCO": {
     "defaultMessage": "此文已被{actor}标示为限制级内容，是否确定展开全文？",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
@@ -1337,7 +1381,7 @@
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "skbUBl": {
-    "defaultMessage": "登入",
+    "defaultMessage": "登录",
     "description": "src/components/Buttons/Login/index.tsx"
   },
   "stjoBH": {
@@ -1501,7 +1545,7 @@
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "zAK5G+": {
-    "defaultMessage": "登入链接已发送至 {email}",
+    "defaultMessage": "登录链接已发送至 {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
   },
   "zKOr2x": {
