@@ -35,3 +35,7 @@
     padding: 0 var(--spacing-base-loose);
   }
 }
+
+.noSpacingBottom {
+  padding-bottom: 0;
+}

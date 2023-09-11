@@ -59,6 +59,10 @@
     "defaultMessage": "Create collection",
     "description": "src/views/User/Collections/UserCollections.tsx"
   },
+  "0e1xjL": {
+    "defaultMessage": "Email can be modified up to {count} times per day.",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "0iyH+q": {
     "defaultMessage": "Last 7 days",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -437,6 +441,10 @@
     "defaultMessage": "Oops！This link has expired",
     "description": "src/views/Callback/GoogleCallback.tsx"
   },
+  "FEI5Fv": {
+    "defaultMessage": "Email address",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "FOOymB": {
     "defaultMessage": "No members yet",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
@@ -503,6 +511,10 @@
   "H0JBH6": {
     "defaultMessage": "Log Out"
   },
+  "H7bMRx": {
+    "defaultMessage": "The verification link has been sent, please check your inbox",
+    "description": "src/components/GlobalToast/index.tsx"
+  },
   "H8KGyc": {
     "defaultMessage": "Enter"
   },
@@ -535,6 +547,9 @@
   "IPqNCS": {
     "defaultMessage": "Confirm use",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
+  "IXycMo": {
+    "defaultMessage": "Resend"
   },
   "Ihwz5K": {
     "defaultMessage": "Unpinned from profile"
@@ -1075,6 +1090,10 @@
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "h9A6AT": {
+    "defaultMessage": "For security, we will {resetHint} for this. You can set your password again after verifying new email address.",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "h9CG9E": {
     "defaultMessage": "{commentType} has been deleted",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1387,6 +1406,10 @@
   "viMrzF": {
     "defaultMessage": "New broadcasts",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "vsD2wm": {
+    "defaultMessage": "reset your login password",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "Comments"

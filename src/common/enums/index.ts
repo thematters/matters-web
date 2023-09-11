@@ -79,3 +79,5 @@ export const MAX_USER_DISPLAY_NAME_LENGTH = 20
 export const MAX_USER_DESCRIPTION_LENGTH = 140
 export const MIN_USER_NAME_LENGTH = 4
 export const MAX_USER_NAME_LENGTH = 15
+
+export const MAX_CHANGE_EMAIL_TIME_DAILY = 3

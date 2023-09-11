@@ -25,3 +25,11 @@ export const ADD_SOCIAL_LOGIN = gql`
     }
   }
 `
+
+export const VERIFY_EMAIL = gql`
+  mutation VerifyEmail($input: VerifyEmailInput!) {
+    verifyEmail(input: $input) {
+      id
+    }
+  }
+`

@@ -59,6 +59,10 @@
     "defaultMessage": "新建选集",
     "description": "src/views/User/Collections/UserCollections.tsx"
   },
+  "0e1xjL": {
+    "defaultMessage": "邮箱每天最多可修改 {count} 次",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "0iyH+q": {
     "defaultMessage": "最近 7 日",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -437,6 +441,10 @@
     "defaultMessage": "Oops！链接已失效",
     "description": "src/views/Callback/GoogleCallback.tsx"
   },
+  "FEI5Fv": {
+    "defaultMessage": "邮箱",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "FOOymB": {
     "defaultMessage": "还没有成员",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
@@ -503,6 +511,10 @@
   "H0JBH6": {
     "defaultMessage": "登出"
   },
+  "H7bMRx": {
+    "defaultMessage": "验证链接已发送，请查收邮件",
+    "description": "src/components/GlobalToast/index.tsx"
+  },
   "H8KGyc": {
     "defaultMessage": "进入"
   },
@@ -535,6 +547,9 @@
   "IPqNCS": {
     "defaultMessage": "确认使用",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
+  "IXycMo": {
+    "defaultMessage": "重新发送"
   },
   "Ihwz5K": {
     "defaultMessage": "代表作已取消"
@@ -1075,6 +1090,10 @@
     "defaultMessage": "新追踪者",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "h9A6AT": {
+    "defaultMessage": "为确保帐号安全，修改邮箱將{resetHint}，你可在验证邮箱后再次设置密码。",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "h9CG9E": {
     "defaultMessage": "{commentType}已刪除",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1387,6 +1406,10 @@
   "viMrzF": {
     "defaultMessage": "广播",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "vsD2wm": {
+    "defaultMessage": "重置你的登录密码",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "评论"
