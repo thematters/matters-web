@@ -5,8 +5,9 @@ import React, { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
+  CALLBACK_PROVIDERS,
   KEYVALUE,
-  OAUTH_CALLBACK_PROVIDERS,
+  MAX_CHANGE_EMAIL_TIME_DAILY,
   TOAST_SEND_EMAIL_VERIFICATION,
 } from '~/common/enums'
 import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
@@ -14,8 +15,6 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  Media,
-  Spacer,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -26,6 +25,8 @@ import {
   SetEmailMutation,
   VerificationCodeType,
 } from '~/gql/graphql'
+
+import styles from './styles.module.css'
 
 interface FormProps {
   closeDialog: () => void
@@ -47,6 +48,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const viewer = useContext(ViewerContext)
   const hasPassword = !!viewer.status?.hasEmailLoginPassword
   // TODO: max change email limit
+  const editable = true
 
   const [set] = useMutation<SetEmailMutation>(SET_EMAIL, undefined, {
     showToast: false,
@@ -91,9 +93,14 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
               email,
             },
           },
+          refetchQueries: [
+            {
+              query: ROOT_QUERY_PRIVATE,
+            },
+          ],
         })
 
-        const redirectPath = `/callback/${OAUTH_CALLBACK_PROVIDERS.EmailVerification}`
+        const redirectPath = `/callback/${CALLBACK_PROVIDERS.EmailVerification}`
         const redirectUrl = `${
           process.env.NEXT_PUBLIC_SITE_DOMAIN
         }${redirectPath}?email=${encodeURIComponent(email)}`
@@ -106,11 +113,6 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
               redirectUrl,
             },
           },
-          refetchQueries: [
-            {
-              query: ROOT_QUERY_PRIVATE,
-            },
-          ],
         })
 
         // toast
@@ -135,6 +137,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         name="email"
         required
         placeholder="Email"
+        disabled={!editable}
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
@@ -170,13 +173,13 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
           />
         }
         closeDialog={closeDialog}
-        rightBtn={SubmitButton}
+        rightBtn={editable ? SubmitButton : undefined}
       />
 
-      {hasPassword && (
+      {editable && hasPassword && (
         <>
-          <Dialog.Message>
-            <p>
+          <Dialog.Message noSpacingBottom>
+            <p className={styles.hint}>
               <FormattedMessage
                 defaultMessage="For security, we will {resetHint} for this. You can set your password again after verifying new email address."
                 description="src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -193,9 +196,22 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
               />
             </p>
           </Dialog.Message>
-          <Media greaterThan="sm">
-            <Spacer size="base" />
-          </Media>
+        </>
+      )}
+
+      {!editable && (
+        <>
+          <Dialog.Message noSpacingBottom>
+            <p className={styles.hint}>
+              <FormattedMessage
+                defaultMessage="Email can be modified up to {count} times per day."
+                description="src/components/Dialogs/SetEmailDialog/Content.tsx"
+                values={{
+                  count: MAX_CHANGE_EMAIL_TIME_DAILY,
+                }}
+              />
+            </p>
+          </Dialog.Message>
         </>
       )}
 
@@ -209,7 +225,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
               color="greyDarker"
               onClick={closeDialog}
             />
-            {SubmitButton}
+            {editable && SubmitButton}
           </>
         }
       />

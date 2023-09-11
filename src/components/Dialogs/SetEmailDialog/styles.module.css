@@ -1,0 +1,5 @@
+.hint {
+  @media (--sm-up) {
+    margin-bottom: var(--spacing-base);
+  }
+}

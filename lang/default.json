@@ -59,6 +59,10 @@
     "defaultMessage": "Create collection",
     "description": "src/views/User/Collections/UserCollections.tsx"
   },
+  "0e1xjL": {
+    "defaultMessage": "Email can be modified up to {count} times per day.",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "0iyH+q": {
     "defaultMessage": "Last 7 days",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -142,9 +146,6 @@
   "3Tg548": {
     "defaultMessage": "Sign In",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
-  },
-  "3kbIhS": {
-    "defaultMessage": "Untitled"
   },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to",

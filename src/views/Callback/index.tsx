@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import { OAUTH_CALLBACK_PROVIDERS } from '~/common/enums'
+import { CALLBACK_PROVIDERS } from '~/common/enums'
 import { SocialAccountType } from '~/gql/graphql'
 
 import EmailVerification from './EmailVerification'
@@ -11,16 +11,16 @@ const Callback = () => {
   const provider = router.query.provider
   return (
     <>
-      {provider === OAUTH_CALLBACK_PROVIDERS.Google && (
+      {provider === CALLBACK_PROVIDERS.Google && (
         <SocialCallback type={SocialAccountType.Google} />
       )}
-      {provider === OAUTH_CALLBACK_PROVIDERS.Twitter && (
+      {provider === CALLBACK_PROVIDERS.Twitter && (
         <SocialCallback type={SocialAccountType.Twitter} />
       )}
-      {provider === OAUTH_CALLBACK_PROVIDERS.Facebook && (
+      {provider === CALLBACK_PROVIDERS.Facebook && (
         <SocialCallback type={SocialAccountType.Facebook} />
       )}
-      {provider === OAUTH_CALLBACK_PROVIDERS.EmailVerification && (
+      {provider === CALLBACK_PROVIDERS.EmailVerification && (
         <EmailVerification />
       )}
     </>
