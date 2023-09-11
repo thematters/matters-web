@@ -26,18 +26,39 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
             description="src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
           />
         }
+        leftBtn={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Close" />}
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
+        closeDialog={closeDialog}
       />
 
       {isSelect && (
-        <Dialog.Content>
-          <AuthWalletFeed
-            submitCallback={(type: WalletType) => {
-              setWalletType(type)
-              setStep('connect')
-            }}
-            hasWalletExist={hasWalletExist}
+        <>
+          <Dialog.Content>
+            <AuthWalletFeed
+              submitCallback={(type: WalletType) => {
+                setWalletType(type)
+                setStep('connect')
+              }}
+              hasWalletExist={hasWalletExist}
+            />
+          </Dialog.Content>
+          <Dialog.Footer
+            smUpBtns={
+              <>
+                <Dialog.TextButton
+                  text={<FormattedMessage defaultMessage="Close" />}
+                  color="greyDarker"
+                  onClick={closeDialog}
+                />
+              </>
+            }
           />
-        </Dialog.Content>
+        </>
       )}
       {isConnect && (
         <WalletAuthForm.Connect
