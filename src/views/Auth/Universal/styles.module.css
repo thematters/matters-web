@@ -1,0 +1,32 @@
+.wrapper {
+  @mixin polka-dot-background;
+  @mixin flex-center-all;
+
+  width: 100vw;
+  height: 100vh;
+
+  & .container {
+    @mixin border-grey-light;
+
+    padding: var(--spacing-xx-loose) var(--spacing-loose) var(--spacing-x-loose);
+    background: white;
+    border-radius: 0.5rem;
+
+    @media (--sm-up) {
+      width: 23.4375rem; /* 375px */
+    }
+
+    & .logo {
+      margin-bottom: var(--spacing-loose);
+
+      & svg {
+        width: 96px;
+        height: 20px;
+      }
+    }
+
+    & .footer {
+      @mixin flex-center-all;
+    }
+  }
+}

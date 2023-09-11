@@ -321,3 +321,13 @@
   padding-bottom: 0.12em;
   margin-bottom: -0.12rem;
 }
+
+@define-mixin polka-dot-background {
+  background:
+    linear-gradient(90deg, var(--color-white) 2px, transparent 1%) center,
+    linear-gradient(var(--color-white) 2px, transparent 1%) center,
+    var(--color-grey-light);
+  background-repeat: repeat;
+  background-position: -2px -1px;
+  background-size: 3px 3px;
+}

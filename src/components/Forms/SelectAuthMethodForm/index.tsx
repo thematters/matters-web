@@ -11,6 +11,7 @@ import {
 } from '~/components'
 
 interface FormProps {
+  purpose: 'dialog' | 'page'
   gotoWalletConnect: (type: WalletType) => void
   gotoEmailLogin: () => void
   gotoEmailSignup: () => void
@@ -19,12 +20,14 @@ interface FormProps {
 }
 
 export const SelectAuthMethodForm: React.FC<FormProps> = ({
+  purpose,
   gotoWalletConnect,
   gotoEmailLogin,
   gotoEmailSignup,
   closeDialog,
   type = 'normal',
 }) => {
+  const isInPage = purpose === 'page'
   const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(type)
   const isNormal = authTypeFeed === 'normal'
   const isWallet = authTypeFeed === 'wallet'
@@ -42,6 +45,10 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
       {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
     </>
   )
+
+  if (isInPage) {
+    return <>{InnerForm}</>
+  }
 
   return (
     <>

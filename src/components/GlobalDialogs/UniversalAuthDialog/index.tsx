@@ -85,6 +85,7 @@ const BaseUniversalAuthDialog = () => {
     <Dialog isOpen={show} onDismiss={closeDialog} testId={TEST_ID.DIALOG_AUTH}>
       {currStep === 'select-login-method' && (
         <DynamicSelectAuthMethodForm
+          purpose="dialog"
           gotoWalletConnect={(type: WalletType) => {
             setWalletType(type)
             forward('wallet-connect')
