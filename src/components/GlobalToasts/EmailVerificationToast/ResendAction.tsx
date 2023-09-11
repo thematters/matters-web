@@ -9,7 +9,6 @@ import {
 import { storage } from '~/common/utils'
 import { useCountdown, useMutation, ViewerContext } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
-import { ROOT_QUERY_PRIVATE } from '~/components/Root/gql'
 import {
   SendVerificationCodeMutation,
   VerificationCodeType,
@@ -64,11 +63,6 @@ const ResendAction = ({ initCountdown }: Props) => {
           redirectUrl,
         },
       },
-      refetchQueries: [
-        {
-          query: ROOT_QUERY_PRIVATE,
-        },
-      ],
     })
 
     setCountdown(SEND_CODE_COUNTDOWN)
