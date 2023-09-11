@@ -126,6 +126,7 @@ const BaseUniversalAuthDialog = () => {
       {currStep === 'email-sign-up-init' && (
         <ReCaptchaProvider>
           <DynamicEmailSignUpFormInit
+            purpose="dialog"
             submitCallback={(email: string) => {
               setEmail(email)
               forward('email-verification-sent')

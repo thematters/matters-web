@@ -32,6 +32,10 @@
   }
 }
 
+.smUpContentNoSpacing {
+  padding: 0;
+}
+
 .smUpSpaceBetween {
   @mixin flex-center-space-between;
 }

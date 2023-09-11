@@ -34,7 +34,11 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
   const InnerForm = (
     <>
-      <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
+      <AuthTabs
+        type={authTypeFeed}
+        setType={setAuthTypeFeed}
+        purpose={purpose}
+      />
 
       {isNormal && (
         <AuthNormalFeed

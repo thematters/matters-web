@@ -28,6 +28,7 @@ import {
   Form,
   IconLeft20,
   LanguageContext,
+  LanguageSwitch,
   Media,
   TextIcon,
   useCountdown,
@@ -331,11 +332,19 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       <Dialog.Content>
         <Media at="sm">
           {isSelectMethod && (
-            <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
+            <AuthTabs
+              type={authTypeFeed}
+              setType={setAuthTypeFeed}
+              purpose={purpose}
+            />
           )}
         </Media>
         <Media greaterThan="sm">
-          <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
+          <AuthTabs
+            type={authTypeFeed}
+            setType={setAuthTypeFeed}
+            purpose={purpose}
+          />
         </Media>
         {isNormal && !isSelectMethod && <>{InnerForm}</>}
         {isNormal && isSelectMethod && (
@@ -369,7 +378,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           }
         />
       )}
-      {((isNormal && isSelectMethod) || isWallet) && (
+      {((isNormal && isSelectMethod) || isWallet) && !isInPage && (
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
@@ -379,6 +388,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
             />
           }
         />
+      )}
+      {isSelectMethod && isInPage && (
+        <section className={styles.footer}>
+          <LanguageSwitch />
+        </section>
       )}
     </>
   )
