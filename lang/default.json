@@ -434,9 +434,6 @@
     "defaultMessage": "Language",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
   },
-  "BrFpL2": {
-    "defaultMessage": "This login code is invalid, please try to resend"
-  },
   "C3NKBg": {
     "defaultMessage": "Connected to {type}",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"

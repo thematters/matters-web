@@ -434,9 +434,6 @@
     "defaultMessage": "语言",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
   },
-  "BrFpL2": {
-    "defaultMessage": "临时密码不正确，请尝试重新发送"
-  },
   "C3NKBg": {
     "defaultMessage": "{type} 已绑定",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"

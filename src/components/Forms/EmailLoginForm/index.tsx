@@ -171,16 +171,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         setFieldError('email', '')
 
         codes.forEach((code) => {
-          if (
-            code.includes(ERROR_CODES.CODE_INVALID) ||
-            code.includes(ERROR_CODES.CODE_INACTIVE)
-          ) {
-            const m = intl.formatMessage({
-              defaultMessage:
-                'This login code is invalid, please try to resend',
-            })
-            setFieldError('password', m)
-          } else if (code.includes(ERROR_CODES.CODE_EXPIRED)) {
+          if (code.includes(ERROR_CODES.CODE_EXPIRED)) {
             setFieldError(
               'password',
               intl.formatMessage({
