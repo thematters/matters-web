@@ -1,7 +1,9 @@
 import classNames from 'classnames'
-import { FormattedMessage } from 'react-intl'
+import Link from 'next/link'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconMatters } from '@/public/static/images/matters.svg'
+import { PATHS } from '~/common/enums'
 import { Tabs, withIcon } from '~/components'
 
 import styles from './styles.module.css'
@@ -21,6 +23,8 @@ export const AuthTabs = ({
   setType,
   normalText,
 }: AuthTabsProps) => {
+  const intl = useIntl()
+
   const isInPage = purpose === 'page'
 
   const isNormal = type === 'normal'
@@ -34,7 +38,17 @@ export const AuthTabs = ({
   return (
     <section className={tabsClasses}>
       {isInPage && (
-        <section className={styles.logo}>{withIcon(IconMatters)({})}</section>
+        <section className={styles.logo}>
+          <Link href={PATHS.HOME} legacyBehavior>
+            <a
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Discover',
+              })}
+            >
+              {withIcon(IconMatters)({})}
+            </a>
+          </Link>
+        </section>
       )}
       <Tabs noSpacing fill>
         <Tabs.Tab onClick={() => setType('normal')} selected={isNormal}>
