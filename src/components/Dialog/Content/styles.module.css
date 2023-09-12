@@ -39,3 +39,7 @@
 .noSpacingBottom {
   padding-bottom: 0;
 }
+
+.noMaxHeight {
+  max-height: none;
+}

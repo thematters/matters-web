@@ -56,6 +56,12 @@ export const VerificationLinkSent = ({
 
       {isInPage && (
         <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={<FormattedMessage defaultMessage="Enter Matters" />}
+              onClick={() => router.push(PATHS.HOME)}
+            />
+          }
           smUpBtns={
             <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Enter Matters" />}

@@ -27,6 +27,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   closeDialog,
   type = 'normal',
 }) => {
+  const isInPage = purpose === 'page'
   const isInDialog = purpose === 'dialog'
   const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(type)
   const isNormal = authTypeFeed === 'normal'
@@ -52,7 +53,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Dialog.Content noMaxHeight={isInPage}>{InnerForm}</Dialog.Content>
 
       {isInDialog && (
         <Dialog.Footer

@@ -1,27 +1,26 @@
 .wrapper {
-  @mixin polka-dot-background;
-  @mixin flex-center-all;
+  @media (--sm-up) {
+    @mixin polka-dot-background;
+    @mixin flex-center-all;
 
-  width: 100vw;
-  height: 100vh;
+    width: 100vw;
+    height: 100vh;
 
-  & .container {
-    @mixin border-grey-light;
+    & .container {
+      @mixin border-grey-light;
 
-    background: white;
-    border-radius: 0.5rem;
-
-    @media (--sm-up) {
       width: 26.4375rem; /* 423px */
-    }
+      background: white;
+      border-radius: 0.5rem;
 
-    &.containerSpace {
-      padding: var(--spacing-xx-loose) var(--spacing-loose)
-        var(--spacing-x-loose);
-    }
-
-    & .footer {
-      @mixin flex-center-all;
+      &.containerSpace {
+        padding: var(--spacing-xx-loose) var(--spacing-loose)
+          var(--spacing-x-loose);
+      }
     }
   }
+}
+
+.footer {
+  @mixin flex-center-all;
 }
