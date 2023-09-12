@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconMatters } from '@/public/static/images/matters.svg'
@@ -25,8 +26,13 @@ export const AuthTabs = ({
   const isNormal = type === 'normal'
   const isWallet = type === 'wallet'
 
+  const tabsClasses = classNames({
+    [styles.tabs]: true,
+    [styles.spacingTop]: !isInPage,
+  })
+
   return (
-    <section className={styles.tabs}>
+    <section className={tabsClasses}>
       {isInPage && (
         <section className={styles.logo}>{withIcon(IconMatters)({})}</section>
       )}

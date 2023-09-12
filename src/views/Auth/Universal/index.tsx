@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { useConnect } from 'wagmi'
@@ -56,6 +57,7 @@ const UniversalAuth = () => {
   const { router } = useRoute()
 
   const { currStep, forward } = useStep<Step>('select-login-method')
+  // const { currStep, forward } = useStep<Step>('email-verification-sent')
   const [email, setEmail] = useState('')
 
   const { connectors } = useConnect()
@@ -63,6 +65,11 @@ const UniversalAuth = () => {
   const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(
     injectedConnector?.ready ? 'wallet' : 'normal'
   )
+
+  const containerClasses = classNames({
+    [styles.container]: true,
+    [styles.containerSpace]: currStep !== 'email-verification-sent',
+  })
 
   const [walletType, setWalletType] = useState<WalletType>('MetaMask')
 
@@ -75,7 +82,7 @@ const UniversalAuth = () => {
   return (
     <section className={styles.wrapper}>
       {currStep === 'select-login-method' && (
-        <section className={styles.container}>
+        <section className={containerClasses}>
           <DynamicSelectAuthMethodForm
             purpose="page"
             gotoWalletConnect={(type: WalletType) => {
@@ -94,7 +101,7 @@ const UniversalAuth = () => {
 
       {/* Wallet */}
       {currStep === 'wallet-connect' && (
-        <section className={styles.container}>
+        <section className={containerClasses}>
           <ReCaptchaProvider>
             <DynamicWalletAuthFormConnect
               type="login"
@@ -112,7 +119,7 @@ const UniversalAuth = () => {
 
       {/* Email */}
       {currStep === 'email-login' && (
-        <section className={styles.container}>
+        <section className={containerClasses}>
           <DynamicEmailLoginForm
             purpose="page"
             gotoEmailSignup={() => forward('email-sign-up-init')}
@@ -123,7 +130,7 @@ const UniversalAuth = () => {
 
       {currStep === 'email-sign-up-init' && (
         <ReCaptchaProvider>
-          <section className={styles.container}>
+          <section className={containerClasses}>
             <DynamicEmailSignUpFormInit
               purpose="page"
               submitCallback={(email: string) => {
@@ -141,8 +148,8 @@ const UniversalAuth = () => {
         </ReCaptchaProvider>
       )}
       {currStep === 'email-verification-sent' && (
-        <section className={styles.container}>
-          <VerificationLinkSent type="register" purpose="page" email={email} />
+        <section className={containerClasses}>
+          <VerificationLinkSent purpose="page" email={email} />
         </section>
       )}
     </section>

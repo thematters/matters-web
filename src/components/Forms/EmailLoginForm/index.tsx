@@ -329,7 +329,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content>
+      <Dialog.Content noSpacing={isInPage}>
         <Media at="sm">
           {isSelectMethod && (
             <AuthTabs
@@ -358,6 +358,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
       {isNormal && !isSelectMethod && (
         <Dialog.Footer
+          smUpContentNoSpacing={isInPage}
           smUpSpaceBetween
           smUpBtns={
             <>

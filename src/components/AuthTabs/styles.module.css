@@ -1,10 +1,6 @@
 .tabs {
   margin-bottom: var(--spacing-loose);
 
-  @media (--sm-up) {
-    margin-top: var(--spacing-base);
-  }
-
   & .logo {
     margin-bottom: var(--spacing-loose);
 
@@ -12,5 +8,11 @@
       width: 96px;
       height: 20px;
     }
+  }
+}
+
+.spacingTop {
+  @media (--sm-up) {
+    margin-top: var(--spacing-base);
   }
 }
