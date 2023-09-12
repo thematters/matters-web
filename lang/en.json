@@ -1129,6 +1129,10 @@
   "beLe/F": {
     "defaultMessage": "Broadcast"
   },
+  "c/z318": {
+    "defaultMessage": "Incorrect email or password",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
   "cAP9g5": {
     "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"

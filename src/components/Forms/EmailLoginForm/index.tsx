@@ -171,7 +171,21 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         setFieldError('email', '')
 
         codes.forEach((code) => {
-          if (code.includes(ERROR_CODES.CODE_EXPIRED)) {
+          // catch errors if try to login to a unregistered account with
+          // a wrong verification code
+          if (
+            code.includes(ERROR_CODES.CODE_INVALID) ||
+            code.includes(ERROR_CODES.CODE_INACTIVE)
+          ) {
+            const m = intl.formatMessage({
+              defaultMessage: 'Incorrect email or password',
+              description: 'src/components/Forms/EmailLoginForm/index.tsx',
+            })
+            setFieldError('password', m)
+          }
+          // catch error if try to login to a unregistered account with
+          // an expired passpharse
+          else if (code.includes(ERROR_CODES.CODE_EXPIRED)) {
             setFieldError(
               'password',
               intl.formatMessage({

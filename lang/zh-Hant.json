@@ -1129,6 +1129,10 @@
   "beLe/F": {
     "defaultMessage": "廣播"
   },
+  "c/z318": {
+    "defaultMessage": "郵件地址或密碼錯誤",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
   "cAP9g5": {
     "defaultMessage": "將你的評論在 {commentArticle} 中置頂",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"

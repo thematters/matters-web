@@ -1129,6 +1129,10 @@
   "beLe/F": {
     "defaultMessage": "广播"
   },
+  "c/z318": {
+    "defaultMessage": "邮箱或密码错误",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
   "cAP9g5": {
     "defaultMessage": "将你的评论在 {commentArticle} 中置顶",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
