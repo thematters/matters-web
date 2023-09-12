@@ -143,6 +143,7 @@ const BaseUniversalAuthDialog = () => {
       )}
       {currStep === 'email-verification-sent' && (
         <VerificationLinkSent
+          type="register"
           purpose="dialog"
           closeDialog={closeDialog}
           email={email}

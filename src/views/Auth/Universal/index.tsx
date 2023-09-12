@@ -143,7 +143,7 @@ const UniversalAuth = () => {
           </ReCaptchaProvider>
         )}
         {currStep === 'email-verification-sent' && (
-          <VerificationLinkSent purpose="page" email={email} />
+          <VerificationLinkSent type="register" purpose="page" email={email} />
         )}
       </section>
     </section>
