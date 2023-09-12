@@ -81,27 +81,27 @@ const UniversalAuth = () => {
 
   return (
     <section className={styles.wrapper}>
-      {currStep === 'select-login-method' && (
-        <section className={containerClasses}>
-          <DynamicSelectAuthMethodForm
-            purpose="page"
-            gotoWalletConnect={(type: WalletType) => {
-              setWalletType(type)
-              forward('wallet-connect')
-            }}
-            gotoEmailLogin={() => forward('email-login')}
-            gotoEmailSignup={() => forward('email-sign-up-init')}
-            type={authTypeFeed}
-          />
-          <section className={styles.footer}>
-            <LanguageSwitch />
-          </section>
-        </section>
-      )}
+      <section className={containerClasses}>
+        {currStep === 'select-login-method' && (
+          <>
+            <DynamicSelectAuthMethodForm
+              purpose="page"
+              gotoWalletConnect={(type: WalletType) => {
+                setWalletType(type)
+                forward('wallet-connect')
+              }}
+              gotoEmailLogin={() => forward('email-login')}
+              gotoEmailSignup={() => forward('email-sign-up-init')}
+              type={authTypeFeed}
+            />
+            <section className={styles.footer}>
+              <LanguageSwitch />
+            </section>
+          </>
+        )}
 
-      {/* Wallet */}
-      {currStep === 'wallet-connect' && (
-        <section className={containerClasses}>
+        {/* Wallet */}
+        {currStep === 'wallet-connect' && (
           <ReCaptchaProvider>
             <DynamicWalletAuthFormConnect
               type="login"
@@ -114,23 +114,19 @@ const UniversalAuth = () => {
               }}
             />
           </ReCaptchaProvider>
-        </section>
-      )}
+        )}
 
-      {/* Email */}
-      {currStep === 'email-login' && (
-        <section className={containerClasses}>
+        {/* Email */}
+        {currStep === 'email-login' && (
           <DynamicEmailLoginForm
             purpose="page"
             gotoEmailSignup={() => forward('email-sign-up-init')}
             back={() => forward('select-login-method')}
           />
-        </section>
-      )}
+        )}
 
-      {currStep === 'email-sign-up-init' && (
-        <ReCaptchaProvider>
-          <section className={containerClasses}>
+        {currStep === 'email-sign-up-init' && (
+          <ReCaptchaProvider>
             <DynamicEmailSignUpFormInit
               purpose="page"
               submitCallback={(email: string) => {
@@ -144,14 +140,12 @@ const UniversalAuth = () => {
               gotoEmailLogin={() => forward('email-login')}
               back={() => forward('select-login-method')}
             />
-          </section>
-        </ReCaptchaProvider>
-      )}
-      {currStep === 'email-verification-sent' && (
-        <section className={containerClasses}>
+          </ReCaptchaProvider>
+        )}
+        {currStep === 'email-verification-sent' && (
           <VerificationLinkSent purpose="page" email={email} />
-        </section>
-      )}
+        )}
+      </section>
     </section>
   )
 }
