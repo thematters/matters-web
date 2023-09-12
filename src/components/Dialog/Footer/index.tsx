@@ -10,7 +10,7 @@ import styles from './styles.module.css'
 type FooterProps = {
   btns?: React.ReactNode
   smUpBtns?: React.ReactNode
-  smUpContentNoSpacing?: boolean
+  smUpContentNoSpacingBottom?: boolean
   smUpSpaceBetween?: boolean
   closeText?: React.ReactNode
   closeDialog?: () => any
@@ -19,7 +19,7 @@ type FooterProps = {
 const Footer: React.FC<FooterProps> = ({
   btns,
   smUpBtns,
-  smUpContentNoSpacing = false,
+  smUpContentNoSpacingBottom = false,
   smUpSpaceBetween = false,
   closeText,
   closeDialog,
@@ -39,7 +39,7 @@ const Footer: React.FC<FooterProps> = ({
   const smUpContentClasses = classNames({
     [styles.smUpContent]: true,
     [styles.smUpSpaceBetween]: !!smUpSpaceBetween,
-    [styles.smUpContentNoSpacing]: !!smUpContentNoSpacing,
+    [styles.smUpContentNoSpacingBottom]: !!smUpContentNoSpacingBottom,
   })
 
   return (

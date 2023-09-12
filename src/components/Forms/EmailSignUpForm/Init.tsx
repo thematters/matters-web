@@ -158,7 +158,7 @@ const Init: React.FC<FormProps> = ({
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content noSpacing={isInPage}>
+      <Dialog.Content>
         <Media at="sm">{InnerForm}</Media>
         <Media greaterThan="sm">
           <AuthTabs
@@ -174,7 +174,7 @@ const Init: React.FC<FormProps> = ({
 
       {isNormal && (
         <Dialog.Footer
-          smUpContentNoSpacing={isInPage}
+          smUpContentNoSpacingBottom={isInPage}
           smUpSpaceBetween
           smUpBtns={
             <>

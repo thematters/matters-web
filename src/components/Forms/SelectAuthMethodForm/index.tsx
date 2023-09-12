@@ -27,7 +27,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   closeDialog,
   type = 'normal',
 }) => {
-  const isInPage = purpose === 'page'
+  const isInDialog = purpose === 'dialog'
   const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(type)
   const isNormal = authTypeFeed === 'normal'
   const isWallet = authTypeFeed === 'wallet'
@@ -50,23 +50,21 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
     </>
   )
 
-  if (isInPage) {
-    return <>{InnerForm}</>
-  }
-
   return (
     <>
       <Dialog.Content>{InnerForm}</Dialog.Content>
 
-      <Dialog.Footer
-        smUpBtns={
-          <Dialog.TextButton
-            color="greyDarker"
-            text={<FormattedMessage defaultMessage="Close" />}
-            onClick={closeDialog}
-          />
-        }
-      />
+      {isInDialog && (
+        <Dialog.Footer
+          smUpBtns={
+            <Dialog.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Close" />}
+              onClick={closeDialog}
+            />
+          }
+        />
+      )}
     </>
   )
 }

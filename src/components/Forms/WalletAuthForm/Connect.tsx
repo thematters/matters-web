@@ -263,7 +263,7 @@ const Connect: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content noSpacing={isInPage}>
+      <Dialog.Content>
         {isLogin && (
           <Media greaterThan="sm">
             <AuthTabs
@@ -301,7 +301,7 @@ const Connect: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
-        smUpContentNoSpacing={isInPage}
+        smUpContentNoSpacingBottom={isInPage}
         smUpSpaceBetween
         smUpBtns={
           <>

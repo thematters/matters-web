@@ -12,7 +12,7 @@
     border-radius: 0.5rem;
 
     @media (--sm-up) {
-      width: 23.4375rem; /* 375px */
+      width: 26.4375rem; /* 423px */
     }
 
     &.containerSpace {
