@@ -168,6 +168,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as any)
         setErrorCode(codes[0])
+        setFieldError('email', '')
+
         codes.forEach((code) => {
           if (
             code.includes(ERROR_CODES.CODE_INVALID) ||
