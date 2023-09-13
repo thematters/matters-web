@@ -70,6 +70,9 @@ const Connect: React.FC<FormProps> = ({
   gotoSignInTab,
   setHasWalletExist,
 }) => {
+  const isInPage = purpose === 'page'
+  const isInDialog = purpose === 'dialog'
+
   const intl = useIntl()
   const { lang } = useContext(LanguageContext)
   const isLogin = type === 'login'
@@ -202,7 +205,7 @@ const Connect: React.FC<FormProps> = ({
 
           if (loginData?.walletLogin.type === AuthResultType.Login) {
             redirectToTarget({
-              fallback: 'current',
+              fallback: isInPage ? 'homepage' : 'current',
             })
           } else if (submitCallback) {
             submitCallback(loginData?.walletLogin.type)
@@ -266,6 +269,7 @@ const Connect: React.FC<FormProps> = ({
         {isLogin && (
           <Media greaterThan="sm">
             <AuthTabs
+              purpose={purpose}
               type={authTypeFeed}
               setType={(type) => {
                 if (type === 'normal') {
@@ -299,6 +303,7 @@ const Connect: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer
+        smUpContentNoSpacingBottom={isInPage}
         smUpSpaceBetween
         smUpBtns={
           <>
@@ -315,11 +320,13 @@ const Connect: React.FC<FormProps> = ({
               onClick={onBack}
             />
 
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Close" />}
-              color="greyDarker"
-              onClick={onCloseDialog}
-            />
+            {isInDialog && (
+              <Dialog.TextButton
+                text={<FormattedMessage defaultMessage="Close" />}
+                color="greyDarker"
+                onClick={onCloseDialog}
+              />
+            )}
           </>
         }
       />

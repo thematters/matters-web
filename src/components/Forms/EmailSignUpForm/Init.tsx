@@ -22,6 +22,7 @@ import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
 interface FormProps {
+  purpose: 'dialog' | 'page'
   submitCallback: (email: string) => void
   gotoEmailLogin: () => void
   gotoWalletConnect: (type: WalletType) => void
@@ -34,6 +35,7 @@ interface FormValues {
 }
 
 const Init: React.FC<FormProps> = ({
+  purpose,
   submitCallback,
   gotoEmailLogin,
   gotoWalletConnect,
@@ -42,6 +44,8 @@ const Init: React.FC<FormProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
   const formId = 'email-sign-up-init-form'
+
+  const isInPage = purpose === 'page'
 
   const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>('normal')
   const isNormal = authTypeFeed === 'normal'
@@ -158,6 +162,7 @@ const Init: React.FC<FormProps> = ({
         <Media at="sm">{InnerForm}</Media>
         <Media greaterThan="sm">
           <AuthTabs
+            purpose={purpose}
             type={authTypeFeed}
             setType={setAuthTypeFeed}
             normalText={<FormattedMessage defaultMessage="Sign Up" />}
@@ -169,6 +174,7 @@ const Init: React.FC<FormProps> = ({
 
       {isNormal && (
         <Dialog.Footer
+          smUpContentNoSpacingBottom={isInPage}
           smUpSpaceBetween
           smUpBtns={
             <>
@@ -187,7 +193,7 @@ const Init: React.FC<FormProps> = ({
           }
         />
       )}
-      {isWallet && (
+      {isWallet && !isInPage && (
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton

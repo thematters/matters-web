@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useConnect } from 'wagmi'
 
 import {
@@ -55,11 +55,19 @@ const BaseUniversalAuthDialog = () => {
   const { currStep, forward } = useStep<Step>('select-login-method')
   const [email, setEmail] = useState('')
 
+  const [firstRender, setFirstRender] = useState(true)
+
   const { connectors } = useConnect()
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
-  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(
-    injectedConnector?.ready ? 'wallet' : 'normal'
-  )
+  const [authFeedType, setAuthFeedType] = useState<AuthFeedType>('normal')
+
+  useEffect(() => {
+    if (injectedConnector?.ready && firstRender) {
+      setAuthFeedType('wallet')
+    }
+
+    setFirstRender(false)
+  }, [])
 
   const [walletType, setWalletType] = useState<WalletType>('MetaMask')
 
@@ -85,6 +93,7 @@ const BaseUniversalAuthDialog = () => {
     <Dialog isOpen={show} onDismiss={closeDialog} testId={TEST_ID.DIALOG_AUTH}>
       {currStep === 'select-login-method' && (
         <DynamicSelectAuthMethodForm
+          purpose="dialog"
           gotoWalletConnect={(type: WalletType) => {
             setWalletType(type)
             forward('wallet-connect')
@@ -92,7 +101,9 @@ const BaseUniversalAuthDialog = () => {
           gotoEmailLogin={() => forward('email-login')}
           gotoEmailSignup={() => forward('email-sign-up-init')}
           closeDialog={closeDialog}
-          type={authTypeFeed}
+          authFeedType={authFeedType}
+          setAuthFeedType={setAuthFeedType}
+          checkWallet={false}
         />
       )}
 
@@ -106,7 +117,7 @@ const BaseUniversalAuthDialog = () => {
             closeDialog={closeDialog}
             back={() => forward('select-login-method')}
             gotoSignInTab={() => {
-              setAuthTypeFeed('normal')
+              setAuthFeedType('normal')
               forward('select-login-method')
             }}
           />
@@ -119,12 +130,17 @@ const BaseUniversalAuthDialog = () => {
           purpose="dialog"
           closeDialog={closeDialog}
           gotoEmailSignup={() => forward('email-sign-up-init')}
+          gotoWalletConnect={(type: WalletType) => {
+            setWalletType(type)
+            forward('wallet-connect')
+          }}
           back={() => forward('select-login-method')}
         />
       )}
       {currStep === 'email-sign-up-init' && (
         <ReCaptchaProvider>
           <DynamicEmailSignUpFormInit
+            purpose="dialog"
             submitCallback={(email: string) => {
               setEmail(email)
               forward('email-verification-sent')

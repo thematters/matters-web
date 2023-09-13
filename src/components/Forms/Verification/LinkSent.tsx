@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Layout, Translate } from '~/components'
+import { PATHS } from '~/common/enums'
+import { Dialog, Layout, Translate, useRoute } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -16,25 +17,22 @@ export const VerificationLinkSent = ({
   email?: string
 }) => {
   const isRegister = type === 'register'
+  const { router } = useRoute()
   const isInPage = purpose === 'page'
 
   if (isRegister) {
     return (
       <>
-        {isInPage && <Layout.Header left={<Layout.Header.Title id={type} />} />}
-
-        {closeDialog && (
-          <Dialog.Header
-            title={
-              <FormattedMessage
-                defaultMessage="Check your inbox"
-                description="src/components/Forms/Verification/LinkSent.tsx"
-              />
-            }
-            closeDialog={closeDialog}
-            closeText={<FormattedMessage defaultMessage="Close" />}
-          />
-        )}
+        <Dialog.Header
+          title={
+            <FormattedMessage
+              defaultMessage="Check your inbox"
+              description="src/components/Forms/Verification/LinkSent.tsx"
+            />
+          }
+          closeDialog={closeDialog}
+          closeText={<FormattedMessage defaultMessage="Close" />}
+        />
 
         <Dialog.Message>
           <p>
@@ -55,6 +53,23 @@ export const VerificationLinkSent = ({
                 text={<FormattedMessage defaultMessage="Close" />}
                 color="greyDarker"
                 onClick={closeDialog}
+              />
+            }
+          />
+        )}
+
+        {isInPage && (
+          <Dialog.Footer
+            btns={
+              <Dialog.RoundedButton
+                text={<FormattedMessage defaultMessage="Enter Matters" />}
+                onClick={() => router.push(PATHS.HOME)}
+              />
+            }
+            smUpBtns={
+              <Dialog.TextButton
+                text={<FormattedMessage defaultMessage="Enter Matters" />}
+                onClick={() => router.push(PATHS.HOME)}
               />
             }
           />
