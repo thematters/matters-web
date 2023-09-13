@@ -1,13 +1,14 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
+  ERROR_CODES,
 } from '~/common/enums'
 import {
   analytics,
@@ -69,6 +70,7 @@ const Connect: React.FC<FormProps> = ({
   gotoSignInTab,
   setHasWalletExist,
 }) => {
+  const intl = useIntl()
   const { lang } = useContext(LanguageContext)
   const isLogin = type === 'login'
   const isConnect = type === 'connect'
@@ -224,15 +226,15 @@ const Connect: React.FC<FormProps> = ({
           !!closeDialog && closeDialog()
         }
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        codes.forEach((c) => {
-          if (c.includes('CODE_')) {
-            setFieldError('code', messages[c])
-          } else if (c.includes('CRYPTO_WALLET_EXISTS')) {
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        codes.forEach((code) => {
+          if (code.includes('CODE_')) {
+            setFieldError('code', intl.formatMessage(messages[code]))
+          } else if (code.includes(ERROR_CODES.CRYPTO_WALLET_EXISTS)) {
             disconnect()
             !!setHasWalletExist && setHasWalletExist()
           } else {
-            setFieldError('address', messages[c])
+            setFieldError('address', intl.formatMessage(messages[code]))
           }
         })
       }

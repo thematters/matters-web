@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import {
   parseFormSubmitErrors,
@@ -46,6 +47,7 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
   closeDialog,
   formId = `set-payment-pointer-form`,
 }) => {
+  const intl = useIntl()
   const [submitPaymentPointer] = useMutation<UpdatePaymentPointerMutation>(
     UPDATE_PAYMENT_POINTER
   )
@@ -93,9 +95,9 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
       } catch (error) {
         setIsSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        codes.forEach((c) => {
-          setFieldError('paymentPointer', messages[c])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        codes.forEach((code) => {
+          setFieldError('paymentPointer', intl.formatMessage(messages[code]))
         })
       }
     },

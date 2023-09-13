@@ -1,6 +1,8 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
+  ERROR_CODES,
   OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
@@ -10,11 +12,11 @@ import { analytics, translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
+  ERROR_MESSAGES,
   IconNavCreate32,
   LanguageContext,
   toast,
   Tooltip,
-  Translate,
   useRoute,
 } from '~/components'
 
@@ -81,7 +83,11 @@ export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
 
         if (forbidden) {
           toast.error({
-            message: <Translate id="FORBIDDEN_BY_STATE" />,
+            message: (
+              <FormattedMessage
+                {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+              />
+            ),
           })
 
           return

@@ -135,3 +135,4 @@ compiled-lang
 # Relay build output
 
 *__generated__*
+*.diff

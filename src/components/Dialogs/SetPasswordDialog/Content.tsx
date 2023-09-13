@@ -96,9 +96,9 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         setSubmitting(false)
         closeDialog()
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any)
         codes.forEach((code) => {
-          setFieldError('password', messages[code])
+          setFieldError('password', intl.formatMessage(messages[code]))
         })
         setSubmitting(false)
       }

@@ -1,6 +1,8 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
+  ERROR_CODES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEST_ID,
   UNIVERSAL_AUTH_SOURCE,
@@ -8,6 +10,7 @@ import {
 import { translate } from '~/common/utils'
 import {
   Button,
+  ERROR_MESSAGES,
   IconBookmark16,
   IconBookmark20,
   IconSize,
@@ -52,7 +55,11 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
 
     if (viewer.isFrozen) {
       toast.error({
-        message: <Translate id="FORBIDDEN_BY_STATE" />,
+        message: (
+          <FormattedMessage
+            {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+          />
+        ),
       })
       return
     }
