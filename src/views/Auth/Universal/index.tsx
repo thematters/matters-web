@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
-import { useConnect } from 'wagmi'
 
 import { PATHS } from '~/common/enums'
 import { WalletType } from '~/common/utils'
@@ -23,7 +22,7 @@ const DynamicSelectAuthMethodForm = dynamic<any>(
     import('~/components/Forms/SelectAuthMethodForm').then(
       (mod) => mod.SelectAuthMethodForm
     ),
-  { ssr: false, loading: Spinner }
+  { ssr: true }
 )
 
 const DynamicEmailLoginForm = dynamic<any>(
@@ -57,14 +56,10 @@ const UniversalAuth = () => {
   const { router } = useRoute()
 
   const { currStep, forward } = useStep<Step>('select-login-method')
-  // const { currStep, forward } = useStep<Step>('email-verification-sent')
   const [email, setEmail] = useState('')
 
-  const { connectors } = useConnect()
-  const injectedConnector = connectors.find((c) => c.id === 'metaMask')
-  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(
-    injectedConnector?.ready ? 'wallet' : 'normal'
-  )
+  const [firstRender, setFirstRender] = useState(true)
+  const [authFeedType, setAuthFeedType] = useState<AuthFeedType>('normal')
 
   const containerClasses = classNames({
     [styles.container]: true,
@@ -79,6 +74,10 @@ const UniversalAuth = () => {
     router.push(PATHS.HOME)
   }, [viewer.id])
 
+  useEffect(() => {
+    setFirstRender(false)
+  }, [])
+
   return (
     <section className={styles.wrapper}>
       <section className={containerClasses}>
@@ -92,7 +91,9 @@ const UniversalAuth = () => {
               }}
               gotoEmailLogin={() => forward('email-login')}
               gotoEmailSignup={() => forward('email-sign-up-init')}
-              type={authTypeFeed}
+              authFeedType={authFeedType}
+              setAuthFeedType={setAuthFeedType}
+              checkWallet={firstRender}
             />
             <section className={styles.footer}>
               <LanguageSwitch />
@@ -109,7 +110,7 @@ const UniversalAuth = () => {
               walletType={walletType}
               back={() => forward('select-login-method')}
               gotoSignInTab={() => {
-                setAuthTypeFeed('normal')
+                setAuthFeedType('normal')
                 forward('select-login-method')
               }}
             />
@@ -121,6 +122,10 @@ const UniversalAuth = () => {
           <DynamicEmailLoginForm
             purpose="page"
             gotoEmailSignup={() => forward('email-sign-up-init')}
+            gotoWalletConnect={(type: WalletType) => {
+              setWalletType(type)
+              forward('wallet-connect')
+            }}
             back={() => forward('select-login-method')}
           />
         )}

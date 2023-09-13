@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
+import { useConnect } from 'wagmi'
 
 import { WalletType } from '~/common/utils'
 import {
@@ -12,11 +13,15 @@ import {
 
 interface FormProps {
   purpose: 'dialog' | 'page'
+  checkWallet: boolean
   gotoWalletConnect: (type: WalletType) => void
   gotoEmailLogin: () => void
   gotoEmailSignup: () => void
+
+  authFeedType: AuthFeedType
+  setAuthFeedType: (type: AuthFeedType) => void
+
   closeDialog?: () => void
-  type?: AuthFeedType
 }
 
 export const SelectAuthMethodForm: React.FC<FormProps> = ({
@@ -25,19 +30,29 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   gotoEmailLogin,
   gotoEmailSignup,
   closeDialog,
-  type = 'normal',
+  authFeedType = 'normal',
+  setAuthFeedType,
+  checkWallet,
 }) => {
   const isInPage = purpose === 'page'
   const isInDialog = purpose === 'dialog'
-  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(type)
-  const isNormal = authTypeFeed === 'normal'
-  const isWallet = authTypeFeed === 'wallet'
+  const isNormal = authFeedType === 'normal'
+  const isWallet = authFeedType === 'wallet'
+
+  const { connectors } = useConnect()
+  const injectedConnector = connectors.find((c) => c.id === 'metaMask')
+
+  useEffect(() => {
+    if (injectedConnector?.ready && checkWallet) {
+      setAuthFeedType('wallet')
+    }
+  }, [injectedConnector?.ready])
 
   const InnerForm = (
     <>
       <AuthTabs
-        type={authTypeFeed}
-        setType={setAuthTypeFeed}
+        type={authFeedType}
+        setType={setAuthFeedType}
         purpose={purpose}
       />
 
