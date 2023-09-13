@@ -90,3 +90,9 @@ export const signupCallabckUrl = (email: string) => {
     CALLBACK_PROVIDERS.EmailSignup
   }?email=${encodeURIComponent(email)}`
 }
+
+export const signinCallabckUrl = (email: string) => {
+  return `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${
+    CALLBACK_PROVIDERS.EmailSignin
+  }?email=${encodeURIComponent(email)}`
+}

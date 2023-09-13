@@ -14,7 +14,7 @@ import UI from './UI'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
-const SignupCallback = () => {
+const LoginCallback = () => {
   const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
     showToast: false,
   })
@@ -55,4 +55,4 @@ const SignupCallback = () => {
   return <UI hasError={hasError} />
 }
 
-export default SignupCallback
+export default LoginCallback

@@ -321,6 +321,7 @@ export const OAUTH_STORAGE_SEND_EMAIL_CODE_COUNTDOWN =
 export const CALLBACK_VERIFIER = {
   EmailVerification: 'email-verification',
   EmailSignup: 'email-signup',
+  EmailSignin: 'email-signin',
 }
 
 export const OAUTH_CALLBACK_PROVIDERS = {
