@@ -121,8 +121,8 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        setFieldError('newContent', messages[codes[0]])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        setFieldError('newContent', intl.formatMessage(messages[codes[0]]))
       }
     },
   })

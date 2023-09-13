@@ -1,13 +1,16 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
+  ERROR_CODES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
+  ERROR_MESSAGES,
   IconCollection24,
   Menu,
   toast,
@@ -61,7 +64,9 @@ const ExtendButton = ({
 
     if (viewer.isInactive) {
       toast.error({
-        message: <Translate id="FORBIDDEN" />,
+        message: (
+          <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN]} />
+        ),
       })
 
       return

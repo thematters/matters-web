@@ -13,13 +13,13 @@ import { DocumentNode } from 'graphql'
 
 import { GQL_CONTEXT_PUBLIC_QUERY_KEY } from '~/common/enums'
 
-import { mutationOnError, MutationOnErrorOptions } from './error'
+import { toastMutationErrors, ToastMutationErrorsOptions } from './error'
 
 /**
  * `useMutation` wrapper with error catching
  *
  */
-type CustomMutationProps = MutationOnErrorOptions
+type CustomMutationProps = ToastMutationErrorsOptions
 
 export const useMutation = <TData = any, TVariables = OperationVariables>(
   mutation: DocumentNode,
@@ -27,7 +27,7 @@ export const useMutation = <TData = any, TVariables = OperationVariables>(
   customMutationProps?: CustomMutationProps
 ): MutationTuple<TData, TVariables> => {
   const [mutate, result] = baseUseMutation(mutation, {
-    onError: (error) => mutationOnError(error, customMutationProps),
+    onError: (error) => toastMutationErrors(error, customMutationProps),
     ...options,
   })
 

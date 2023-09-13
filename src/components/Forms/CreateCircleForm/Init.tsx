@@ -100,9 +100,9 @@ const Init: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        codes.forEach((c) => {
-          if (c === 'NAME_EXISTS') {
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        codes.forEach((code) => {
+          if (code === 'NAME_EXISTS') {
             setFieldError(
               'name',
               intl.formatMessage({
@@ -111,7 +111,7 @@ const Init: React.FC<FormProps> = ({
                 description: 'src/components/Forms/CreateCircleForm/Init.tsx',
               })
             )
-          } else if (c === 'NAME_INVALID') {
+          } else if (code === 'NAME_INVALID') {
             setFieldError(
               'name',
               intl.formatMessage({
@@ -119,7 +119,7 @@ const Init: React.FC<FormProps> = ({
                   'Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.',
               })
             )
-          } else if (c === 'DISPLAYNAME_INVALID') {
+          } else if (code === 'DISPLAYNAME_INVALID') {
             setFieldError(
               'name',
               intl.formatMessage({
@@ -127,7 +127,7 @@ const Init: React.FC<FormProps> = ({
               })
             )
           } else {
-            setFieldError('name', messages[c])
+            setFieldError('name', intl.formatMessage(messages[code]))
           }
         })
       }

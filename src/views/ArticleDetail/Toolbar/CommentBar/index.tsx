@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   CLOSE_ACTIVE_DIALOG,
+  ERROR_CODES,
   OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
@@ -16,6 +18,7 @@ import {
   Card,
   CardProps,
   CommentFormDialog,
+  ERROR_MESSAGES,
   IconComment16,
   LanguageContext,
   Media,
@@ -138,7 +141,11 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
         article={article}
         onClick={() => {
           toast.error({
-            message: <Translate id="FORBIDDEN" />,
+            message: (
+              <FormattedMessage
+                {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+              />
+            ),
           })
         }}
       />
@@ -151,7 +158,9 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
         article={article}
         onClick={() => {
           toast.error({
-            message: <Translate id="failureCommentBlocked" />,
+            message: (
+              <FormattedMessage defaultMessage="The author has disabled comments for this article" />
+            ),
           })
         }}
       />

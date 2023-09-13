@@ -2,7 +2,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   CALLBACK_PROVIDERS,
@@ -61,10 +61,11 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       showToast: false,
     }
   )
+
+  const intl = useIntl()
   const { lang } = useContext(LanguageContext)
 
   const presetEmail = viewer.info.email
-
   const formId = 'edit-email-form'
 
   const {
@@ -121,9 +122,9 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         setSubmitting(false)
         closeDialog()
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any)
         codes.forEach((code) => {
-          setFieldError('email', messages[code])
+          setFieldError('email', intl.formatMessage(messages[code]))
         })
         setSubmitting(false)
       }

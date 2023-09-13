@@ -8,6 +8,7 @@ import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
+  ERROR_CODES,
   SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
 import {
@@ -15,7 +16,6 @@ import {
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
-  translate,
   validateEmail,
   // validatePassword,
 } from '~/common/utils'
@@ -99,7 +99,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const isWallet = authTypeFeed === 'wallet'
 
   const [isSelectMethod, setIsSelectMethod] = useState(false)
-  const [errorCode, setErrorCode] = useState<any>(null)
+  const [errorCode, setErrorCode] = useState<ERROR_CODES | null>(null)
   const [hasSendCode, setHasSendCode] = useState(false)
   const { countdown, setCountdown } = useCountdown(0)
 
@@ -167,17 +167,35 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           fallback: !!isInPage ? 'homepage' : 'current',
         })
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any)
         setErrorCode(codes[0])
+        setFieldError('email', '')
+
         codes.forEach((code) => {
-          if (code.includes('CODE_INVALID') || code.includes('CODE_INACTIVE')) {
-            const m = translate({ id: 'CODE_INVALID', lang })
-            setFieldError('email', m)
+          // catch errors if try to login to a unregistered account with
+          // a wrong verification code
+          if (
+            code.includes(ERROR_CODES.CODE_INVALID) ||
+            code.includes(ERROR_CODES.CODE_INACTIVE)
+          ) {
+            const m = intl.formatMessage({
+              defaultMessage: 'Incorrect email or password',
+              description: 'src/components/Forms/EmailLoginForm/index.tsx',
+            })
             setFieldError('password', m)
-          } else if (code.includes('CODE_EXPIRED')) {
-            setFieldError('password', messages[code])
+          }
+          // catch error if try to login to a unregistered account with
+          // an expired passpharse
+          else if (code.includes(ERROR_CODES.CODE_EXPIRED)) {
+            setFieldError(
+              'password',
+              intl.formatMessage({
+                defaultMessage:
+                  'This login code has expired, please try to resend',
+              })
+            )
           } else {
-            setFieldError('email', messages[code])
+            setFieldError('password', intl.formatMessage(messages[code]))
           }
         })
         setSubmitting(false)
@@ -192,8 +210,14 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       return
     }
 
+    const redirectUrl = `${
+      window.location.origin
+    }/login?email=${encodeURIComponent(values.email)}`
+
     await sendCode({
-      variables: { input: { email: values.email, type: 'email_otp' } },
+      variables: {
+        input: { email: values.email, type: 'email_otp', redirectUrl },
+      },
     })
     setCountdown(SEND_CODE_COUNTDOWN)
     setHasSendCode(true)
@@ -256,7 +280,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
                   />
                 </span>
               )}
-              {(hasSendCode || errorCode === 'CODE_EXPIRED') &&
+              {(hasSendCode || errorCode === ERROR_CODES.CODE_EXPIRED) &&
                 countdown === 0 && (
                   <button
                     className={styles.resendButton}
@@ -287,8 +311,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           </>
         )}
 
-        {errorCode !== 'CODE_EXPIRED' &&
-          !(hasSendCode && errorCode === 'CODE_INVALID') && (
+        {errorCode !== ERROR_CODES.CODE_EXPIRED &&
+          !(hasSendCode && errorCode === ERROR_CODES.CODE_INVALID) && (
             <OtherOptions
               isInPage={isInPage}
               sendLoginCode={sendLoginCode}

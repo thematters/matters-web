@@ -2,7 +2,7 @@ import { useFormik } from 'formik'
 // import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   parseFormSubmitErrors,
@@ -44,6 +44,7 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
+  const intl = useIntl()
   const [confirmCode] = useMutation<ConfirmVerificationCodeMutation>(
     CONFIRM_CODE,
     undefined,
@@ -108,12 +109,12 @@ const Confirm: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        codes.forEach((c) => {
-          if (c.includes('CODE_')) {
-            setFieldError('code', messages[c])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        codes.forEach((code) => {
+          if (code.includes('CODE_')) {
+            setFieldError('code', intl.formatMessage(messages[code]))
           } else {
-            setFieldError('email', messages[c])
+            setFieldError('email', intl.formatMessage(messages[code]))
           }
         })
       }

@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -57,9 +57,10 @@ const BaseConfirm: React.FC<FormProps> = ({
   closeDialog,
   back,
 }: FormProps) => {
+  const intl = useIntl()
+  const { lang } = useContext(LanguageContext)
   const formId = 'payout-confirm-form'
 
-  const { lang } = useContext(LanguageContext)
   const inputRef: React.RefObject<any> | null = useRef(null)
   const [payout] = useMutation<PayoutMutation>(PAYOUT, undefined, {
     showToast: false,
@@ -106,8 +107,8 @@ const BaseConfirm: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        setFieldError('password', messages[codes[0]])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        setFieldError('password', intl.formatMessage(messages[codes[0]]))
         setFieldValue('password', '', false)
       }
     },

@@ -8,7 +8,7 @@ import { loadStripe, StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { STRIPE_ERROR_MESSAGES } from '~/common/enums'
 import { analytics, parseFormSubmitErrors, translate } from '~/common/utils'
@@ -51,9 +51,11 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
   submitCallback,
   closeDialog,
 }) => {
+  const intl = useIntl()
+  const { lang } = useContext(LanguageContext)
+
   const stripe = useStripe()
   const elements = useElements()
-  const { lang } = useContext(LanguageContext)
 
   const [subscribeCircle] = useMutation<SubscribeCircleMutation>(
     SUBSCRIBE_CIRCLE,
@@ -97,9 +99,9 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
       })
       data = subscribeResult.data
     } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+      const [messages, codes] = parseFormSubmitErrors(error as any)
       codes.forEach((code) => {
-        setCheckoutError(messages[code])
+        setCheckoutError(intl.formatMessage(messages[code]))
       })
     }
 

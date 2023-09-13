@@ -2,7 +2,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   normalizeName,
@@ -46,6 +46,7 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
+  const intl = useIntl()
   const [update] = useMutation<UpdateUserInfoUserNameMutation>(
     UPDATE_USER_INFO,
     undefined,
@@ -91,7 +92,7 @@ const Confirm: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any)
         codes.forEach((code) => {
           if (code === 'NAME_EXISTS') {
             setFieldError(
@@ -111,7 +112,7 @@ const Confirm: React.FC<FormProps> = ({
               })
             )
           } else {
-            setFieldError('userName', messages[code])
+            setFieldError('userName', intl.formatMessage(messages[code]))
           }
         })
       }
