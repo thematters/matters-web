@@ -8,15 +8,15 @@ import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 import { ArticleDigestTitle } from '../Title'
 import styles from './styles.module.css'
 
-export type ArticleDigestArchiveProps = {
+export type ArticleDigestArchivedProps = {
   article: ArticleDigestTitleArticleFragment
 } & UtmParams
 
-export const ArticleDigestArchive = ({
+export const ArticleDigestArchived = ({
   article,
   utm_source,
   utm_medium,
-}: ArticleDigestArchiveProps) => {
+}: ArticleDigestArchivedProps) => {
   const path = toPath({
     page: 'articleDetail',
     article,
