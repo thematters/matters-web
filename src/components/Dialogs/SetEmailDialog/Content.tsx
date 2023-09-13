@@ -40,6 +40,9 @@ const SET_EMAIL = gql`
   mutation SetEmail($input: SetEmailInput!) {
     setEmail(input: $input) {
       id
+      status {
+        changeEmailTimesLeft
+      }
     }
   }
 `
@@ -47,8 +50,7 @@ const SET_EMAIL = gql`
 const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const viewer = useContext(ViewerContext)
   const hasPassword = !!viewer.status?.hasEmailLoginPassword
-  // TODO: max change email limit
-  const editable = true
+  const editable = (viewer.status?.changeEmailTimesLeft as number) > 0
 
   const [set] = useMutation<SetEmailMutation>(SET_EMAIL, undefined, {
     showToast: false,
@@ -218,18 +220,33 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
 
       <Dialog.Content>{InnerForm}</Dialog.Content>
 
-      <Dialog.Footer
-        smUpBtns={
-          <>
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
-              color="greyDarker"
-              onClick={closeDialog}
-            />
-            {editable && SubmitButton}
-          </>
-        }
-      />
+      {editable && (
+        <Dialog.Footer
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text={<FormattedMessage defaultMessage="Cancel" />}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+              {SubmitButton}
+            </>
+          }
+        />
+      )}
+      {!editable && (
+        <Dialog.Footer
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text={<FormattedMessage defaultMessage="Close" />}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+            </>
+          }
+        />
+      )}
     </>
   )
 }
