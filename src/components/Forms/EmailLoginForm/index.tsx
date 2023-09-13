@@ -1,5 +1,4 @@
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -35,6 +34,7 @@ import {
   // toast,
   useMutation,
 } from '~/components'
+import { EMAIL_LOGIN } from '~/components/GQL/mutations/emailLogin'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { EmailLoginMutation, SendVerificationCodeMutation } from '~/gql/graphql'
 
@@ -58,24 +58,6 @@ interface FormValues {
   email: string
   password: ''
 }
-
-export const EMAIL_LOGIN = gql`
-  mutation EmailLogin($input: EmailLoginInput!) {
-    emailLogin(input: $input) {
-      auth
-      token
-      user {
-        id
-        settings {
-          language
-        }
-        info {
-          group
-        }
-      }
-    }
-  }
-`
 
 export const EmailLoginForm: React.FC<FormProps> = ({
   purpose,
