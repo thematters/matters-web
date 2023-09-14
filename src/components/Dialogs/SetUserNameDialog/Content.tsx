@@ -35,7 +35,9 @@ const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
 
   const presetUserName =
     viewer.info.email || googleId || facebookId || twitterId
-  const [loading, setLoading] = useState(presetUserName !== null)
+
+  // Confirm that preset user name is available
+  const [loading, setLoading] = useState(!!presetUserName)
 
   const [index, setIndex] = useState(1)
   const normalizedUserName =
@@ -48,9 +50,7 @@ const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     initUserName = initUserName + String(index).padStart(3, '0')
   }
 
-  const [userName, setUserName] = useState(
-    presetUserName === null ? '' : initUserName
-  )
+  const [userName, setUserName] = useState(!presetUserName ? '' : initUserName)
 
   const [step, setStep] = useState<Step>('input')
   const isInput = step === 'input'
