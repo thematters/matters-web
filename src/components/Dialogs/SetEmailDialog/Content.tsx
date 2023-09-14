@@ -139,6 +139,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         type="email"
         name="email"
         required
+        autoFocus
         placeholder="Email"
         disabled={!editable}
         value={values.email}
