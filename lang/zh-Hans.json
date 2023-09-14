@@ -423,9 +423,6 @@
     "defaultMessage": "作品或评论提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
-  "BY343C": {
-    "defaultMessage": "修改"
-  },
   "Bc20la": {
     "defaultMessage": "天"
   },
@@ -613,6 +610,9 @@
   "HkozYU": {
     "defaultMessage": "更换钱包",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "HnxG15": {
+    "defaultMessage": "设定"
   },
   "HxcjQl": {
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",

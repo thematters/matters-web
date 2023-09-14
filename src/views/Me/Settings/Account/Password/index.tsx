@@ -24,7 +24,7 @@ const Password = () => {
             rightText={
               hasEmail ? (
                 hasPassword ? (
-                  <FormattedMessage defaultMessage="Change" />
+                  <FormattedMessage defaultMessage="Set" />
                 ) : undefined
               ) : (
                 <FormattedMessage

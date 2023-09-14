@@ -423,9 +423,6 @@
     "defaultMessage": "Mention me",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
-  "BY343C": {
-    "defaultMessage": "Change"
-  },
   "Bc20la": {
     "defaultMessage": "days"
   },
@@ -613,6 +610,9 @@
   "HkozYU": {
     "defaultMessage": "Switch wallet",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "HnxG15": {
+    "defaultMessage": "Set"
   },
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
