@@ -3,7 +3,11 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
+import {
+  parseFormSubmitErrors,
+  signupCallabckUrl,
+  validateEmail,
+} from '~/common/utils'
 import { WalletType } from '~/common/utils'
 import {
   AuthFeedType,
@@ -81,9 +85,10 @@ const Init: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ email }, { setFieldError, setSubmitting }) => {
       try {
+        const redirectUrl = signupCallabckUrl(email)
         await sendCode({
           variables: {
-            input: { email, type: 'register', token },
+            input: { email, type: 'register', token, redirectUrl },
           },
         })
 
