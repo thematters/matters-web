@@ -39,6 +39,10 @@ const SET_EMAIL = gql`
   mutation SetEmail($input: SetEmailInput!) {
     setEmail(input: $input) {
       id
+      info {
+        email
+        emailVerified
+      }
       status {
         changeEmailTimesLeft
       }
