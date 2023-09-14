@@ -1188,6 +1188,10 @@
     "defaultMessage": "营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "dAvP6d": {
+    "defaultMessage": "尚无屏蔽记录",
+    "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
+  },
   "dSjI7E": {
     "defaultMessage": "暂无法断开钱包链接，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
