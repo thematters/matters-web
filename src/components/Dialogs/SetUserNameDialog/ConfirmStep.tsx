@@ -4,9 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { Dialog, toast, useMutation, useRoute } from '~/components'
-import { ROOT_QUERY_PRIVATE } from '~/components/Root/gql'
 import { SetUserNameMutation } from '~/gql/graphql'
-import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
 
 import { SET_USER_NAME } from './gql'
 
@@ -29,20 +27,8 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
 
   const confirmUse = async () => {
     try {
-      await update({
-        variables: {
-          userName,
-        },
-        refetchQueries: [
-          {
-            query: ROOT_QUERY_PRIVATE,
-          },
-          {
-            query: USER_PROFILE_PUBLIC,
-            variables: { userName },
-          },
-        ],
-      })
+      await update({ variables: { userName } })
+
       toast.success({
         duration: Infinity,
         message: (

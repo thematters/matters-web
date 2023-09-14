@@ -19,7 +19,6 @@ import {
   ViewerContext,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
-import { ROOT_QUERY_PRIVATE } from '~/components/Root/gql'
 import {
   SendVerificationCodeMutation,
   SetEmailMutation,
@@ -90,18 +89,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       }),
     onSubmit: async ({ email }, { setSubmitting, setFieldError }) => {
       try {
-        await set({
-          variables: {
-            input: {
-              email,
-            },
-          },
-          refetchQueries: [
-            {
-              query: ROOT_QUERY_PRIVATE,
-            },
-          ],
-        })
+        await set({ variables: { input: { email } } })
 
         const redirectPath = `/callback/${CALLBACK_PROVIDERS.EmailVerification}`
         const redirectUrl = `${

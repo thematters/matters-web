@@ -13,6 +13,7 @@ export const SET_USER_NAME = gql`
     setUserName(input: { userName: $userName }) {
       id
       userName
+      displayName
     }
   }
 `

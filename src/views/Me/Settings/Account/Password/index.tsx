@@ -24,7 +24,7 @@ const Password = () => {
             rightText={
               hasEmail ? (
                 hasPassword ? (
-                  <FormattedMessage defaultMessage="Set" />
+                  <FormattedMessage defaultMessage="Change" />
                 ) : undefined
               ) : (
                 <FormattedMessage
@@ -38,7 +38,7 @@ const Password = () => {
             right={
               hasEmail && !hasPassword ? (
                 <SettingsButton onClick={openDialog}>
-                  <FormattedMessage defaultMessage="Connect" />
+                  <FormattedMessage defaultMessage="Set" />
                 </SettingsButton>
               ) : undefined
             }
