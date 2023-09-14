@@ -423,9 +423,6 @@
     "defaultMessage": "Mention me",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
-  "BY343C": {
-    "defaultMessage": "Change"
-  },
   "Bc20la": {
     "defaultMessage": "days"
   },
@@ -617,6 +614,9 @@
   "HkozYU": {
     "defaultMessage": "Switch wallet",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "HnxG15": {
+    "defaultMessage": "Set"
   },
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
@@ -1199,6 +1199,10 @@
   "d4waan": {
     "defaultMessage": "Income",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "dAvP6d": {
+    "defaultMessage": "No blocked users yet",
+    "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
   "dSjI7E": {
     "defaultMessage": "Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account).",

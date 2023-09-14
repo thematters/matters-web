@@ -145,7 +145,7 @@ export const validateUserName = (value: string, lang: Language) => {
     })
   }
 
-  if (!/^[a-zA-Z0-9_]*$/.test(value)) {
+  if (!/^[a-z0-9_]*$/.test(value)) {
     return translate({
       id: 'hintUserName',
       lang,
