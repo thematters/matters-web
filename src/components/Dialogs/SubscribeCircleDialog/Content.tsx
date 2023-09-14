@@ -44,6 +44,7 @@ const SubscribeCircleDialogContent = ({
       {isSetPaymentPassword && (
         <DynamicPaymentSetPasswordForm
           submitCallback={() => forward('subscribeCircle')}
+          closeDialog={closeDialog}
         />
       )}
 
