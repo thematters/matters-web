@@ -203,7 +203,10 @@ const Connect: React.FC<FormProps> = ({
 
           analytics.identifyUser()
 
-          if (loginData?.walletLogin.type === AuthResultType.Login) {
+          if (
+            loginData?.walletLogin.type === AuthResultType.Login ||
+            loginData?.walletLogin.type === AuthResultType.Signup
+          ) {
             redirectToTarget({
               fallback: isInPage ? 'homepage' : 'current',
             })
