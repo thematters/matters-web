@@ -1,17 +1,31 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { SetEmailDialog, TableView, ViewerContext } from '~/components'
+import {
+  SetEmailDialog,
+  TableView,
+  useRoute,
+  ViewerContext,
+} from '~/components'
 
 import { SettingsButton } from '../../Button'
 
 const Email = () => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
+  const { getQuery, replaceQuery } = useRoute()
+  const key = 'setting'
+  const needOpenDialog = getQuery(key) === 'email'
 
   return (
     <SetEmailDialog>
       {({ openDialog }) => {
+        if (needOpenDialog) {
+          setTimeout(() => {
+            replaceQuery(key, '')
+            openDialog()
+          })
+        }
         return (
           <TableView.Cell
             title={
