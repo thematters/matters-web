@@ -13,6 +13,7 @@ export * from './SetUserNameDialog'
 
 // Article
 export * from './AppreciatorsDialog'
+export * from './BindEmailHintDialog'
 export * from './CommentFormDialog'
 export * from './FingerprintDialog'
 export * from './MigrationDialog'
