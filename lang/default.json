@@ -107,6 +107,10 @@
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
   },
+  "1hyiZ8": {
+    "defaultMessage": "Confirm Matters ID",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
   "1qQzV0": {
     "defaultMessage": "Invitees",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -422,6 +426,9 @@
   "BMGZE2": {
     "defaultMessage": "Mention me",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "BY343C": {
+    "defaultMessage": "Change"
   },
   "Bc20la": {
     "defaultMessage": "days"
@@ -1748,6 +1755,10 @@
   "ySGgTo": {
     "defaultMessage": "Add Articles into Featured",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "ySSF/a": {
+    "defaultMessage": "In order to ensure the identity security of the citizens of Matters City, we've upgraded some security settings. Please confirm your Matters ID (cannot be modified once confirmation).",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "yToCTn": {
     "defaultMessage": "Please refresh the page and try again.",

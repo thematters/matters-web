@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl'
 import { Dialog, toast, useMutation } from '~/components'
 import { RemoveSocialLoginMutation, SocialAccountType } from '~/gql/graphql'
 
-import { ROOT_QUERY_PRIVATE } from '../../Root/gql'
 import { REMOVE_SOCIAL_LOGIN } from './gql'
 
 interface Props {
@@ -39,11 +38,6 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
             type,
           },
         },
-        refetchQueries: [
-          {
-            query: ROOT_QUERY_PRIVATE,
-          },
-        ],
       })
       toast.success({
         message: (
