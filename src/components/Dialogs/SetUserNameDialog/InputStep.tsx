@@ -39,7 +39,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
 
   const maxUsername = MAX_USER_NAME_LENGTH
   const formId = 'edit-user-name-input'
-  const isLegacyUserConfirm = viewer.info.userNameEditable
+  const isLegacyUserConfirm = viewer.userName && viewer.info.userNameEditable
 
   const intl = useIntl()
   const {
