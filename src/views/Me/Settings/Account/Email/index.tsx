@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { URL_ME_SETTINGS } from '~/common/enums'
 import {
   SetEmailDialog,
   TableView,
@@ -14,8 +15,9 @@ const Email = () => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
   const { getQuery, replaceQuery } = useRoute()
-  const key = 'setting'
-  const needOpenDialog = getQuery(key) === 'email'
+  const key = URL_ME_SETTINGS.OPEN_SET_EMAIL_DIALOG.key
+  const needOpenDialog =
+    getQuery(key) === URL_ME_SETTINGS.OPEN_SET_EMAIL_DIALOG.value
 
   return (
     <SetEmailDialog>

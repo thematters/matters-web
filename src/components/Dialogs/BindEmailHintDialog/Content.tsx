@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, URL_ME_SETTINGS } from '~/common/enums'
 import { Dialog } from '~/components/Dialog'
 import { useRoute } from '~/components/Hook'
 
@@ -13,7 +13,10 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
 
   const gotoBindEmail = () => {
     // go to settings page and open setEmailDialog
-    router.push(PATHS.ME_SETTINGS + '?setting=email')
+    router.push(
+      PATHS.ME_SETTINGS +
+        `?${URL_ME_SETTINGS.OPEN_SET_EMAIL_DIALOG.key}=${URL_ME_SETTINGS.OPEN_SET_EMAIL_DIALOG.value}`
+    )
   }
 
   return (
