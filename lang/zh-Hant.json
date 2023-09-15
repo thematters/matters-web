@@ -488,6 +488,10 @@
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "Dq29Hb": {
+    "defaultMessage": "你尚未綁定電子郵件。 基於資金安全考慮，儲值需綁定郵箱。",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
+  },
   "DqQvtL": {
     "defaultMessage": "解除封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
@@ -756,6 +760,10 @@
   "MPEeBy": {
     "defaultMessage": "操作失敗，請稍候重試",
     "description": "ACTION_FAILED"
+  },
+  "Me4s4Q": {
+    "defaultMessage": "請先綁定電子郵件",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "Me5cJu": {
     "defaultMessage": "綁定錢包",
@@ -1048,6 +1056,10 @@
   "XdLnXf": {
     "defaultMessage": "錢包餘額不足",
     "description": "PAYMENT_BALANCE_INSUFFICIENT"
+  },
+  "XfRKZY": {
+    "defaultMessage": "去綁定",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "XgdZSb": {
     "defaultMessage": "值得關注"

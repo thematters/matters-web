@@ -488,6 +488,10 @@
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "Dq29Hb": {
+    "defaultMessage": "你尚未绑定邮箱。基于资金安全考虑，储值需绑定邮箱。",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
+  },
   "DqQvtL": {
     "defaultMessage": "解除屏蔽",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
@@ -756,6 +760,10 @@
   "MPEeBy": {
     "defaultMessage": "操作失败，请稍候重试",
     "description": "ACTION_FAILED"
+  },
+  "Me4s4Q": {
+    "defaultMessage": "请先绑定邮箱",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "Me5cJu": {
     "defaultMessage": "绑定钱包",
@@ -1048,6 +1056,10 @@
   "XdLnXf": {
     "defaultMessage": "钱包余额不足",
     "description": "PAYMENT_BALANCE_INSUFFICIENT"
+  },
+  "XfRKZY": {
+    "defaultMessage": "去绑定",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "XgdZSb": {
     "defaultMessage": "值得关注"

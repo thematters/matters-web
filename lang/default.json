@@ -488,6 +488,10 @@
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "Dq29Hb": {
+    "defaultMessage": "You have not connected your email yet. For security, email is required for top-up.",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
+  },
   "DqQvtL": {
     "defaultMessage": "Unblock",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
@@ -756,6 +760,10 @@
   "MPEeBy": {
     "defaultMessage": "Operation failed, please try again later.",
     "description": "ACTION_FAILED"
+  },
+  "Me4s4Q": {
+    "defaultMessage": "Please connect email",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "Me5cJu": {
     "defaultMessage": "Connect wallet",
@@ -1048,6 +1056,10 @@
   "XdLnXf": {
     "defaultMessage": "Insufficient wallet balance.",
     "description": "PAYMENT_BALANCE_INSUFFICIENT"
+  },
+  "XfRKZY": {
+    "defaultMessage": "Go to Settings",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "XgdZSb": {
     "defaultMessage": "Authors"

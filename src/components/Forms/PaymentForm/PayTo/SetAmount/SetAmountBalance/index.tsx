@@ -2,7 +2,14 @@ import { useContext } from 'react'
 
 import { GUIDE_LINKS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
-import { Button, LanguageContext, TextIcon, Translate } from '~/components'
+import {
+  BindEmailHintDialog,
+  Button,
+  LanguageContext,
+  TextIcon,
+  Translate,
+  ViewerContext,
+} from '~/components'
 
 import styles from './styles.module.css'
 
@@ -24,6 +31,8 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
   switchToAddCredit,
 }) => {
   const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
+  const hasEmail = !!viewer.info.email
 
   const isUSDT = currency === CURRENCY.USDT
   const isHKD = currency === CURRENCY.HKD
@@ -39,24 +48,30 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
       </span>
 
       {isHKD && (
-        <Button onClick={switchToAddCredit}>
-          <TextIcon
-            size="xs"
-            textDecoration="underline"
-            color="green"
-            weight="md"
-          >
-            {isBalanceInsufficient ? (
-              <Translate
-                zh_hant="餘額不足，請儲值"
-                zh_hans="余额不足，请储值"
-                en="Insufficient balance, please top up"
-              />
-            ) : (
-              <Translate zh_hant="儲值" zh_hans="储值" en="Top Up" />
-            )}
-          </TextIcon>
-        </Button>
+        <BindEmailHintDialog>
+          {({ openDialog }) => {
+            return (
+              <Button onClick={hasEmail ? switchToAddCredit : openDialog}>
+                <TextIcon
+                  size="xs"
+                  textDecoration="underline"
+                  color="green"
+                  weight="md"
+                >
+                  {isBalanceInsufficient ? (
+                    <Translate
+                      zh_hant="餘額不足，請儲值"
+                      zh_hans="余额不足，请储值"
+                      en="Insufficient balance, please top up"
+                    />
+                  ) : (
+                    <Translate zh_hant="儲值" zh_hans="储值" en="Top Up" />
+                  )}
+                </TextIcon>
+              </Button>
+            )
+          }}
+        </BindEmailHintDialog>
       )}
       {isUSDT && balanceUSDT <= 0 && (
         <a href={GUIDE_LINKS.payment[lang]} target="_blank" rel="noreferrer">
