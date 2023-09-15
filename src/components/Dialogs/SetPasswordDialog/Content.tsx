@@ -19,7 +19,6 @@ import {
   toast,
   useMutation,
 } from '~/components'
-import { ROOT_QUERY_PRIVATE } from '~/components/Root/gql'
 import { SetPasswordMutation } from '~/gql/graphql'
 
 interface FormProps {
@@ -34,6 +33,12 @@ const SET_PASSWORD = gql`
   mutation SetPassword($input: SetPasswordInput!) {
     setPassword(input: $input) {
       id
+      info {
+        email
+      }
+      status {
+        hasEmailLoginPassword
+      }
     }
   }
 `
@@ -70,18 +75,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       }),
     onSubmit: async ({ password }, { setSubmitting, setFieldError }) => {
       try {
-        await set({
-          variables: {
-            input: {
-              password,
-            },
-          },
-          refetchQueries: [
-            {
-              query: ROOT_QUERY_PRIVATE,
-            },
-          ],
-        })
+        await set({ variables: { input: { password } } })
 
         // toast
         toast.success({

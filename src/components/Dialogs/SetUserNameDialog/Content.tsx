@@ -1,14 +1,10 @@
-import { useApolloClient } from '@apollo/react-hooks'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 
-import { MAX_USER_NAME_LENGTH, MIN_USER_NAME_LENGTH } from '~/common/enums'
-import { normalizeUserName } from '~/common/utils'
 import { Spinner, ViewerContext } from '~/components'
-import { SocialAccountType } from '~/gql/graphql'
 
 import ConfirmStep from './ConfirmStep'
-import { QUERY_USER_NAME } from './gql'
+import { useAvailableUserName } from './hook'
 import InputStep from './InputStep'
 
 interface FormProps {
@@ -18,70 +14,17 @@ interface FormProps {
 type Step = 'input' | 'confirm'
 
 const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
-  const viewer = useContext(ViewerContext)
-  const client = useApolloClient()
-
-  const maxQueryCount = 10
-
-  const googleId = viewer.info.socialAccounts.find(
-    (s) => s.type === SocialAccountType.Google
-  )?.email
-  const facebookId = viewer.info.socialAccounts.find(
-    (s) => s.type === SocialAccountType.Facebook
-  )?.userName
-  const twitterId = viewer.info.socialAccounts.find(
-    (s) => s.type === SocialAccountType.Twitter
-  )?.userName
-
-  const presetUserName =
-    viewer.info.email || googleId || facebookId || twitterId
-
-  // Confirm that preset user name is available
-  const [loading, setLoading] = useState(!!presetUserName)
-
-  const [index, setIndex] = useState(1)
-  const normalizedUserName =
-    presetUserName &&
-    normalizeUserName(
-      presetUserName.split('@')[0].slice(0, MAX_USER_NAME_LENGTH)
-    )
-  let initUserName = normalizedUserName
-  if (initUserName && initUserName.length < MIN_USER_NAME_LENGTH) {
-    initUserName = initUserName + String(index).padStart(3, '0')
-  }
-
-  const [userName, setUserName] = useState(!presetUserName ? '' : initUserName)
-
   const [step, setStep] = useState<Step>('input')
   const isInput = step === 'input'
   const isConfirm = step === 'confirm'
 
-  useEffect(() => {
-    ;(async () => {
-      if (!presetUserName) {
-        return
-      }
-      const { data } = await client.query({
-        query: QUERY_USER_NAME,
-        variables: { userName: initUserName },
-        fetchPolicy: 'network-only',
-      })
-      if (!!data.user) {
-        initUserName =
-          normalizedUserName.slice(0, MAX_USER_NAME_LENGTH - 3) +
-          String(index + 1).padStart(3, '0')
-        if (index < maxQueryCount) {
-          setIndex(index + 1)
-        } else {
-          setUserName('')
-          setLoading(false)
-        }
-      } else {
-        setUserName(initUserName)
-        setLoading(false)
-      }
-    })()
-  }, [index])
+  const viewer = useContext(ViewerContext)
+  const isLegacyUserConfirm = viewer.userName && viewer.info.userNameEditable
+
+  const [userName, setUserName] = useState('')
+  const { loading, availableUserName } = useAvailableUserName({
+    enable: !isLegacyUserConfirm,
+  })
 
   if (loading) {
     return <Spinner />
@@ -91,7 +34,9 @@ const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     <>
       {isInput && (
         <InputStep
-          userName={userName}
+          userName={
+            isLegacyUserConfirm ? viewer.userName || '' : availableUserName
+          }
           gotoConfirm={(userName) => {
             setStep('confirm')
             setUserName(userName)

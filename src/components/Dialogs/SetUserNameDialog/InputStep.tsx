@@ -10,7 +10,13 @@ import {
   MIN_USER_NAME_LENGTH,
 } from '~/common/enums'
 import { normalizeUserName, validateUserName } from '~/common/utils'
-import { Dialog, Form, LanguageContext, Spacer } from '~/components'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Spacer,
+  ViewerContext,
+} from '~/components'
 
 import Field from '../../Form/Field'
 import { QUERY_USER_NAME } from './gql'
@@ -27,11 +33,13 @@ interface FormValues {
 
 const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
   const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
 
   const client = useApolloClient()
 
   const maxUsername = MAX_USER_NAME_LENGTH
   const formId = 'edit-user-name-input'
+  const isLegacyUserConfirm = viewer.userName && viewer.info.userNameEditable
 
   const intl = useIntl()
   const {
@@ -53,6 +61,11 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         userName: validateUserName(userName, lang),
       }),
     onSubmit: async ({ userName }, { setSubmitting, setFieldError }) => {
+      if (isLegacyUserConfirm) {
+        gotoConfirm(userName)
+        return
+      }
+
       try {
         const { data } = await client.query({
           query: QUERY_USER_NAME,
@@ -141,19 +154,33 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     <>
       <Dialog.Header
         title={
-          <FormattedMessage
-            defaultMessage="Last step: Set Matters ID"
-            description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
-          />
+          isLegacyUserConfirm ? (
+            <FormattedMessage
+              defaultMessage="Confirm Matters ID"
+              description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
+            />
+          ) : (
+            <FormattedMessage
+              defaultMessage="Last step: Set Matters ID"
+              description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
+            />
+          )
         }
       />
 
       <Dialog.Message>
         <p>
-          <FormattedMessage
-            defaultMessage="Matters ID is your unique identifier, and cannot be modified once set."
-            description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
-          />
+          {isLegacyUserConfirm ? (
+            <FormattedMessage
+              defaultMessage="In order to ensure the identity security of the citizens of Matters City, we've upgraded some security settings. Please confirm your Matters ID (cannot be modified once confirmation)."
+              description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
+            />
+          ) : (
+            <FormattedMessage
+              defaultMessage="Matters ID is your unique identifier, and cannot be modified once set."
+              description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
+            />
+          )}
         </p>
       </Dialog.Message>
       <Spacer size="base" />
