@@ -107,6 +107,10 @@
     "defaultMessage": "尚無閱讀紀錄",
     "description": "src/views/Me/History/index.tsx"
   },
+  "1hyiZ8": {
+    "defaultMessage": "確認 Matters ID",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
   "1qQzV0": {
     "defaultMessage": "免費邀請",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -422,6 +426,9 @@
   "BMGZE2": {
     "defaultMessage": "作品或評論提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "BY343C": {
+    "defaultMessage": "修改"
   },
   "Bc20la": {
     "defaultMessage": "天"
@@ -1748,6 +1755,10 @@
   "ySGgTo": {
     "defaultMessage": "添加精選",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "ySSF/a": {
+    "defaultMessage": "爲了保障馬特市市民的身份安全，我們升級了管理設定。請確認您的 Matters ID（確認後不可再次修改）",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "yToCTn": {
     "defaultMessage": "網路錯誤，請刷新頁面",
