@@ -126,6 +126,8 @@ const UniversalAuth = () => {
               setWalletType(type)
               forward('wallet-connect')
             }}
+            authFeedType={authFeedType}
+            setAuthFeedType={setAuthFeedType}
             back={() => forward('select-login-method')}
           />
         )}
@@ -142,7 +144,8 @@ const UniversalAuth = () => {
                 setWalletType(type)
                 forward('wallet-connect')
               }}
-              gotoEmailLogin={() => forward('email-login')}
+              authFeedType={authFeedType}
+              setAuthFeedType={setAuthFeedType}
               back={() => forward('select-login-method')}
             />
           </ReCaptchaProvider>
