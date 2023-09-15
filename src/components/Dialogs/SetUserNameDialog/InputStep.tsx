@@ -61,6 +61,11 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         userName: validateUserName(userName, lang),
       }),
     onSubmit: async ({ userName }, { setSubmitting, setFieldError }) => {
+      if (isLegacyUserConfirm) {
+        gotoConfirm(userName)
+        return
+      }
+
       try {
         const { data } = await client.query({
           query: QUERY_USER_NAME,
