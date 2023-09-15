@@ -7,6 +7,7 @@ import {
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
+  BindEmailHintDialog,
   Card,
   IconCircle16,
   TextIcon,
@@ -32,6 +33,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
   const isMember = circle.isMember
   const isOwner = circle?.owner?.id === viewer.id
   const isInvited = circle?.invitedBy?.state === InvitationState.Pending
+  const hasEmail = !!viewer.info.email
 
   if (isMember || isOwner) {
     return null
@@ -41,42 +43,61 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
 
   return (
-    <Card
-      bgColor="none"
-      spacing={[0, 0]}
-      onClick={() => {
-        analytics.trackEvent('click_button', {
-          type: 'subscribe_circle_banner',
-          pageType: 'circle_detail',
-        })
+    <BindEmailHintDialog>
+      {({ openDialog: openBindEmailHintDialog }) => {
+        return (
+          <Card
+            bgColor="none"
+            spacing={[0, 0]}
+            onClick={() => {
+              analytics.trackEvent('click_button', {
+                type: 'subscribe_circle_banner',
+                pageType: 'circle_detail',
+              })
 
-        if (!viewer.isAuthed) {
-          window.dispatchEvent(
-            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-              detail: { source: UNIVERSAL_AUTH_SOURCE.circle },
-            })
-          )
-          return
-        }
+              if (!viewer.isAuthed) {
+                window.dispatchEvent(
+                  new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                    detail: { source: UNIVERSAL_AUTH_SOURCE.circle },
+                  })
+                )
+                return
+              }
 
-        openSubscribeCircleDialog()
+              if (!hasEmail) {
+                openBindEmailHintDialog()
+                return
+              }
+
+              openSubscribeCircleDialog()
+            }}
+          >
+            <section className={styles.subscriptionBanner}>
+              <TextIcon
+                icon={<IconCircle16 size="mdS" />}
+                size="xm"
+                color="white"
+                weight="md"
+              >
+                {isInvited ? (
+                  <Translate
+                    zh_hant="免費體驗"
+                    zh_hans="免费体验"
+                    en="Free Trial"
+                  />
+                ) : (
+                  <Translate
+                    zh_hant="訂閱圍爐"
+                    zh_hans="订阅围炉"
+                    en="Subscribe"
+                  />
+                )}
+              </TextIcon>
+            </section>
+          </Card>
+        )
       }}
-    >
-      <section className={styles.subscriptionBanner}>
-        <TextIcon
-          icon={<IconCircle16 size="mdS" />}
-          size="xm"
-          color="white"
-          weight="md"
-        >
-          {isInvited ? (
-            <Translate zh_hant="免費體驗" zh_hans="免费体验" en="Free Trial" />
-          ) : (
-            <Translate zh_hant="訂閱圍爐" zh_hans="订阅围炉" en="Subscribe" />
-          )}
-        </TextIcon>
-      </section>
-    </Card>
+    </BindEmailHintDialog>
   )
 }
 
