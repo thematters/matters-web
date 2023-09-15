@@ -48,9 +48,12 @@ const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
-  gotoResetPassword?: () => void
   gotoEmailSignup: () => void
   gotoWalletConnect: () => void
+
+  authFeedType: AuthFeedType
+  setAuthFeedType: (type: AuthFeedType) => void
+
   closeDialog: () => void
   back?: () => void
 }
@@ -63,10 +66,11 @@ interface FormValues {
 export const EmailLoginForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
-  gotoResetPassword,
   gotoWalletConnect,
   gotoEmailSignup,
   closeDialog,
+  authFeedType,
+  setAuthFeedType,
   back,
 }) => {
   const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
@@ -77,9 +81,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const isInPage = purpose === 'page'
   const formId = 'email-login-form'
 
-  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>('normal')
-  const isNormal = authTypeFeed === 'normal'
-  const isWallet = authTypeFeed === 'wallet'
+  const isNormal = authFeedType === 'normal'
+  const isWallet = authFeedType === 'wallet'
 
   const [isSelectMethod, setIsSelectMethod] = useState(false)
   const [errorCode, setErrorCode] = useState<ERROR_CODES | null>(null)
@@ -338,16 +341,16 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         <Media at="sm">
           {isSelectMethod && (
             <AuthTabs
-              type={authTypeFeed}
-              setType={setAuthTypeFeed}
+              type={authFeedType}
+              setType={setAuthFeedType}
               purpose={purpose}
             />
           )}
         </Media>
         <Media greaterThan="sm">
           <AuthTabs
-            type={authTypeFeed}
-            setType={setAuthTypeFeed}
+            type={authFeedType}
+            setType={setAuthFeedType}
             purpose={purpose}
           />
         </Media>

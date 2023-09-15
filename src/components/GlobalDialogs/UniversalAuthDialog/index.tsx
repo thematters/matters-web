@@ -134,6 +134,8 @@ const BaseUniversalAuthDialog = () => {
             setWalletType(type)
             forward('wallet-connect')
           }}
+          authFeedType={authFeedType}
+          setAuthFeedType={setAuthFeedType}
           back={() => forward('select-login-method')}
         />
       )}
@@ -149,7 +151,8 @@ const BaseUniversalAuthDialog = () => {
               setWalletType(type)
               forward('wallet-connect')
             }}
-            gotoEmailLogin={() => forward('email-login')}
+            authFeedType={authFeedType}
+            setAuthFeedType={setAuthFeedType}
             closeDialog={closeDialog}
             back={() => forward('select-login-method')}
           />
