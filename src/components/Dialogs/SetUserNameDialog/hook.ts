@@ -33,7 +33,7 @@ export const useAvailableUserName = ({
   const presetUserName =
     (viewer.info.email as string) || googleId || facebookId || twitterId
 
-  const [loading, setLoading] = useState(!!presetUserName)
+  const [loading, setLoading] = useState(enable && !!presetUserName)
   const [index, setIndex] = useState(0)
 
   const [availableUserName, setAvailableUserName] = useState('')
@@ -46,6 +46,7 @@ export const useAvailableUserName = ({
       )
 
     if (!normalizedUserName) {
+      setLoading(false)
       return
     }
 
