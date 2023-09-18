@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { URL_COLLECTION_DETAIL } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   ArticleDigestFeed,
@@ -32,19 +33,46 @@ interface CollectionArticlesProps {
   collection: CollectionArticlesCollectionFragment
 }
 
-type DirectionType = 'up' | 'down'
+type SorterSequenceType = 'normal' | 'reverse'
 
 const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
   const viewer = useContext(ViewerContext)
-  const { getQuery } = useRoute()
+  const { getQuery, setQuery } = useRoute()
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
 
-  const [direction, setDirection] = useState<DirectionType>('down')
-  const isDirectionDown = direction === 'down'
-  const isDirectionUp = direction === 'up'
+  let sorterSequence = getQuery(
+    URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key
+  ) as SorterSequenceType
+  if (
+    sorterSequence !== URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.normal &&
+    sorterSequence !== URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.reverse
+  ) {
+    sorterSequence = URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value
+      .normal as SorterSequenceType
+  }
+  const [sequence, setSequence] = useState<SorterSequenceType>(sorterSequence)
+  const isSequenceNormal =
+    sequence === URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.normal
+  const isSequenceReverse =
+    sequence === URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.reverse
+
+  const [, setFirstRender] = useState(true)
 
   const { articleList: articles, updatedAt } = collection
+
+  const changeSequence = (newSequence: SorterSequenceType) => {
+    setQuery(URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key, newSequence)
+    setSequence(newSequence)
+    articles.edges = articles.edges?.reverse()
+  }
+
+  useEffect(() => {
+    if (isSequenceReverse) {
+      articles.edges = articles.edges?.reverse()
+    }
+    setFirstRender(false)
+  }, [])
 
   // filter out inactive articles for local updating
   // at ArchiveArticle/Dialog.tsx
@@ -71,21 +99,26 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
 
         <button
           onClick={() => {
-            if (isDirectionDown) {
-              setDirection('up')
-            } else if (isDirectionUp) {
-              setDirection('down')
+            if (isSequenceNormal) {
+              changeSequence(
+                URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value
+                  .reverse as SorterSequenceType
+              )
+            } else if (isSequenceReverse) {
+              changeSequence(
+                URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value
+                  .normal as SorterSequenceType
+              )
             }
-            articles.edges = articles.edges?.reverse()
           }}
           className={styles.sortButton}
         >
-          {isDirectionDown && (
+          {isSequenceNormal && (
             <TextIcon icon={<IconArrowDown20 size="mdS" />}>
               <FormattedMessage defaultMessage="Sort" />
             </TextIcon>
           )}
-          {isDirectionUp && (
+          {isSequenceReverse && (
             <TextIcon icon={<IconArrowUp20 size="mdS" />}>
               <FormattedMessage defaultMessage="Sort" />
             </TextIcon>
