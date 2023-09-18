@@ -57,28 +57,22 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
   const isSequenceReverse =
     sequence === URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.reverse
 
-  const [, setFirstRender] = useState(true)
-
   const { articleList: articles, updatedAt } = collection
 
   const changeSequence = (newSequence: SorterSequenceType) => {
     setQuery(URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key, newSequence)
     setSequence(newSequence)
-    articles.edges = articles.edges?.reverse()
   }
-
-  useEffect(() => {
-    if (isSequenceReverse) {
-      articles.edges = articles.edges?.reverse()
-    }
-    setFirstRender(false)
-  }, [])
 
   // filter out inactive articles for local updating
   // at ArchiveArticle/Dialog.tsx
   let articleEdges = articles.edges?.filter(
     ({ node }) => node.articleState === ArticleState.Active
   )
+
+  if (isSequenceReverse) {
+    articleEdges = articleEdges?.reverse()
+  }
 
   if (isViewer) {
     return <DynamicViewerArticles collection={collection} />
