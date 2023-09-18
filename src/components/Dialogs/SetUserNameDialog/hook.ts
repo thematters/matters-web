@@ -1,4 +1,5 @@
 import { useApolloClient } from '@apollo/react-hooks'
+import { toLower } from 'lodash'
 import { useContext, useEffect, useState } from 'react'
 
 import { MAX_USER_NAME_LENGTH, MIN_USER_NAME_LENGTH } from '~/common/enums'
@@ -42,7 +43,7 @@ export const useAvailableUserName = ({
     const normalizedUserName =
       presetUserName &&
       normalizeUserName(
-        presetUserName.split('@')[0].slice(0, MAX_USER_NAME_LENGTH)
+        toLower(presetUserName.split('@')[0].slice(0, MAX_USER_NAME_LENGTH))
       )
 
     if (!normalizedUserName) {
