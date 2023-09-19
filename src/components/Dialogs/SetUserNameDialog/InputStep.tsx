@@ -14,6 +14,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  Media,
   Spacer,
   ViewerContext,
 } from '~/components'
@@ -168,7 +169,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         }
       />
 
-      <Dialog.Message>
+      <Dialog.Message noSpacingBottom>
         <p>
           {isLegacyUserConfirm ? (
             <FormattedMessage
@@ -183,8 +184,10 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
           )}
         </p>
       </Dialog.Message>
-      <Spacer size="base" />
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Media greaterThan="sm">
+        <Spacer size="base" />
+      </Media>
+      <Dialog.Content noSpacingBottom>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         btns={

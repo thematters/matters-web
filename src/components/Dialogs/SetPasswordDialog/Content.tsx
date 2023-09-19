@@ -147,7 +147,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Message>
+      <Dialog.Message noSpacingBottom>
         <p>
           <FormattedMessage
             defaultMessage="Password must be at least 8 characters long, support letter, numbers and symbols."
@@ -159,7 +159,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         </Media>
       </Dialog.Message>
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Dialog.Content smExtraSpacing>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

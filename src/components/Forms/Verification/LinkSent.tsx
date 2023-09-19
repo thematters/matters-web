@@ -34,7 +34,7 @@ export const VerificationLinkSent = ({
           closeText={<FormattedMessage defaultMessage="Close" />}
         />
 
-        <Dialog.Message>
+        <Dialog.Message smExtraSpacing>
           <p>
             <FormattedMessage
               defaultMessage="The login link has been sent to {email}"

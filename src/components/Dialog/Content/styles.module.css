@@ -20,19 +20,19 @@
   }
 }
 
-.smExtraSpacing {
-  padding-bottom: var(--spacing-xx-loose);
-
-  @media (--sm-up) {
-    padding-bottom: 0;
-  }
-}
-
 .spacing {
   padding: var(--spacing-base);
 
   @media (--sm-up) {
     padding: 0 var(--spacing-base-loose);
+  }
+}
+
+.smExtraSpacing {
+  padding-bottom: var(--spacing-xx-loose);
+
+  @media (--sm-up) {
+    padding-bottom: 0;
   }
 }
 

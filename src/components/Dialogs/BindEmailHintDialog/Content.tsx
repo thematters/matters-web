@@ -29,7 +29,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
           />
         }
       />
-      <Dialog.Message>
+      <Dialog.Message noSpacingBottom>
         <p>
           <FormattedMessage
             defaultMessage="You have not connected your email yet. For security, email is required for top-up."

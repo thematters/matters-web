@@ -10,6 +10,7 @@ interface DialogMessageProps {
   smUpAlign?: 'left' | 'center'
   type?: 'error'
 
+  smExtraSpacing?: boolean
   noSpacing?: boolean
   noSpacingBottom?: boolean
 }
@@ -34,6 +35,7 @@ const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
   smUpAlign = 'left',
   type,
 
+  smExtraSpacing = false,
   noSpacing,
   noSpacingBottom,
 
@@ -48,7 +50,11 @@ const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
   })
 
   return (
-    <Dialog.Content noSpacing={noSpacing} noSpacingBottom={noSpacingBottom}>
+    <Dialog.Content
+      noSpacing={noSpacing}
+      noSpacingBottom={noSpacingBottom}
+      smExtraSpacing={smExtraSpacing}
+    >
       <section className={contentClasses}>{children}</section>
     </Dialog.Content>
   )
