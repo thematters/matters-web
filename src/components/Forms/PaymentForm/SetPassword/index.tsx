@@ -171,7 +171,7 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
     <>
       <Dialog.Header title="paymentPassword" closeDialog={closeDialog} />
 
-      <Dialog.Content>
+      <Dialog.Content smExtraSpacing>
         <section className={styles.reason}>
           {isInPassword && (
             <p>

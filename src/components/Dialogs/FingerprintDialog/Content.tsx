@@ -115,7 +115,7 @@ const FingerprintDialogContent = ({
   })
 
   return (
-    <Dialog.Content>
+    <Dialog.Content smExtraSpacing>
       <section className={styles.container}>
         <SectionCard
           title={

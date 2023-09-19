@@ -201,7 +201,7 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
         hasSmUpTitle={false}
       />
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Dialog.Content smExtraSpacing>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

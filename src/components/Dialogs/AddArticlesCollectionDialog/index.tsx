@@ -178,7 +178,7 @@ const BaseAddArticlesCollectionDialog = ({
           rightBtn={SubmitButton}
         />
 
-        <Dialog.Content fixedHeight>
+        <Dialog.Content fixedHeight smExtraSpacing>
           <SearchInput
             value={searchValue}
             onChange={(value) => setSearchValue(value)}

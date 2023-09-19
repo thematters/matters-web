@@ -195,7 +195,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Dialog.Content smExtraSpacing>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

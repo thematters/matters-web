@@ -181,7 +181,7 @@ const Confirm: React.FC<FormProps> = ({
         }
       />
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Dialog.Content smExtraSpacing>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

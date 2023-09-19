@@ -79,7 +79,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content>
+      <Dialog.Content smExtraSpacing>
         {/* Uploader */}
         <Uploader setSelected={setSelected} {...uploadEntity} />
 
