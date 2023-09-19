@@ -7,7 +7,7 @@ import { SettingsButton } from '../../Button'
 
 const Password = () => {
   const viewer = useContext(ViewerContext)
-  const hasEmail = !!viewer.info.email
+  const hasEmail = !!viewer.info.email && !!viewer.info.emailVerified
   const hasPassword = !!viewer.status?.hasEmailLoginPassword
 
   return (
