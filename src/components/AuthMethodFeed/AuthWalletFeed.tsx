@@ -95,7 +95,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
           <span className={styles.icon}>
             <IconWalletConnect22 size="mdM" />
           </span>
-          <span className={styles.name}>Wallet Connect</span>
+          <span className={styles.name}>WalletConnect</span>
           {isWalletConnectLoading && (
             <span className={styles.right}>
               <IconSpinner22 color="grey" size="mdM" />
