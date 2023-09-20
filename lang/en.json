@@ -1,4 +1,8 @@
 {
+  "+51DoZ": {
+    "defaultMessage": "Please verify email first",
+    "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
   "+63O1f": {
     "defaultMessage": "Incorrect email or password",
     "description": "USER_PASSWORD_INVALID"
