@@ -46,7 +46,7 @@ const Footer: React.FC<FooterProps> = ({
     <footer className={footerClasses}>
       <Media at="sm">
         {hasBtns && (
-          <section className={styles.content}>
+          <section className={styles.content} data-dialog-entity>
             {btns}
             {closeDialog && (
               <RoundedButton
