@@ -54,9 +54,13 @@ type Step =
 
 const UniversalAuth = () => {
   const viewer = useContext(ViewerContext)
-  const { router } = useRoute()
+  const { router, isInPath } = useRoute()
 
-  const { currStep, forward } = useStep<Step>('select-login-method')
+  const isInSignup = isInPath('SIGNUP')
+
+  const { currStep, forward } = useStep<Step>(
+    isInSignup ? 'email-sign-up-init' : 'select-login-method'
+  )
   const [email, setEmail] = useState('')
 
   const [firstRender, setFirstRender] = useState(true)
