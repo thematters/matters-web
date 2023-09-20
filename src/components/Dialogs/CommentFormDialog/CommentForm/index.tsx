@@ -155,7 +155,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
         }
       />
 
-      <Dialog.Content smExtraSpacing>
+      <Dialog.Content>
         {context && <section className={styles.context}>{context}</section>}
 
         <form className={styles.form} id={formId} onSubmit={handleSubmit}>

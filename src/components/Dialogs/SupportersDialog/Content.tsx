@@ -81,7 +81,7 @@ const SupportersDialogContent = ({
         closeText={<FormattedMessage defaultMessage="Close" />}
       />
 
-      <Dialog.Content noSpacing smExtraSpacing>
+      <Dialog.Content noSpacing>
         <InfiniteScroll
           loader={<Spinner />}
           loadMore={loadMore}

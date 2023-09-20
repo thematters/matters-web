@@ -114,7 +114,7 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content noSpacing fixedHeight smExtraSpacing>
+      <Dialog.Content noSpacing fixedHeight>
         <SearchingArea
           inSearchingArea={inSearchingArea}
           searchType="User"

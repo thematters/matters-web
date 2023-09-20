@@ -73,7 +73,7 @@ const SettingsList = ({
         }
       />
 
-      <Dialog.Content noSpacing smExtraSpacing>
+      <Dialog.Content noSpacing>
         <ul className={styles.container} role="list">
           <ListItem
             title={<Translate id="addTags" />}

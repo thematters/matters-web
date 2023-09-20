@@ -83,7 +83,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content fixedHeight smExtraSpacing>
+      <Dialog.Content fixedHeight>
         {enableCollections.length > 0 && (
           <section className={styles.formContainer}>
             <FormikProvider value={formik}>
