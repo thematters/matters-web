@@ -18,6 +18,9 @@ const SCRIPT_SRC = [
   'www.google.com/recaptcha/',
   'www.gstatic.com/recaptcha/',
 
+  // Turnstile
+  'challenges.cloudflare.com',
+
   // Programmable Google Search
   'cse.google.com',
   'www.google.com/cse/',
@@ -157,6 +160,9 @@ const FRAME_SRC = [
   // ReCaptcha
   'www.google.com/recaptcha/',
   'recaptcha.google.com/recaptcha/',
+
+  // Turnstile
+  'challenges.cloudflare.com',
 
   // Stripe
   'js.stripe.com',
