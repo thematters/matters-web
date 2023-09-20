@@ -8,6 +8,7 @@ import {
   CALLBACK_PROVIDERS,
   KEYVALUE,
   MAX_CHANGE_EMAIL_TIME_DAILY,
+  PATHS,
   TOAST_SEND_EMAIL_VERIFICATION,
 } from '~/common/enums'
 import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
@@ -96,9 +97,12 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         await set({ variables: { input: { email } } })
 
         const redirectPath = `/callback/${CALLBACK_PROVIDERS.EmailVerification}`
-        const redirectUrl = `${
-          process.env.NEXT_PUBLIC_SITE_DOMAIN
-        }${redirectPath}?email=${encodeURIComponent(email)}`
+        const host = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`
+        const redirectUrl = `${host}${redirectPath}?email=${encodeURIComponent(
+          email
+        )}&target=${encodeURIComponent(host)}${encodeURIComponent(
+          PATHS.ME_SETTINGS
+        )}`
 
         await sendCode({
           variables: {
