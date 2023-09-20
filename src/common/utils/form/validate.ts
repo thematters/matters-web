@@ -4,9 +4,11 @@ import {
   MAX_CIRCLE_NAME_LENGTH,
   MAX_DESCRIPTION_LENGTH,
   MAX_USER_DISPLAY_NAME_LENGTH,
+  MAX_USER_NAME_LENGTH,
   MIN_CIRCLE_DISPLAY_NAME_LENGTH,
   MIN_CIRCLE_NAME_LENGTH,
   MIN_USER_DISPLAY_NAME_LENGTH,
+  MIN_USER_NAME_LENGTH,
   PAYMENT_CURRENCY,
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
   PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT,
@@ -114,40 +116,14 @@ export const validateUserName = (value: string, lang: Language) => {
     return translate({ id: 'required', lang })
   }
 
-  const en =
-    'Must be between 4-15 characters long. Only lowercase letters, numbers and underline are accepted.'
-
-  // 4-15 characters, only accept alphabet, number and _.
-  if (value.length < 4) {
+  if (
+    value.length < MIN_USER_NAME_LENGTH ||
+    value.length > MAX_USER_NAME_LENGTH
+  ) {
     return translate({
-      zh_hant: '輸入字數過短，僅供輸入 4-15 個字元',
-      zh_hans: '输入字数过短，仅供输入 4-15 个字符',
-      en,
-      lang,
-    })
-  }
-
-  if (value.length > 15) {
-    return translate({
-      zh_hant: '輸入字數過長，僅供輸入 4-15 個字元',
-      zh_hans: '输入字数过长，仅供输入 4-15 个字符',
-      en,
-      lang,
-    })
-  }
-
-  if (REGEXP_ALL_PUNCTUATIONS.test(value)) {
-    return translate({
-      zh_hant: '不支持單獨使用標點符號',
-      zh_hans: '不支持单独使用标点符号',
-      en,
-      lang,
-    })
-  }
-
-  if (!/^[a-z0-9_]*$/.test(value)) {
-    return translate({
-      id: 'hintUserName',
+      zh_hant: `ID 字符數須介於 ${MIN_USER_NAME_LENGTH} 到 ${MAX_USER_NAME_LENGTH} 之間`,
+      zh_hans: `ID 字符数须介于 ${MIN_USER_NAME_LENGTH} 到 ${MAX_USER_NAME_LENGTH} 之间`,
+      en: `ID must be between ${MIN_USER_NAME_LENGTH} and ${MAX_USER_NAME_LENGTH} characters long`,
       lang,
     })
   }

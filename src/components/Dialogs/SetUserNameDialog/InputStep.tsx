@@ -1,7 +1,7 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -39,7 +39,9 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
 
   const maxUsername = MAX_USER_NAME_LENGTH
   const formId = 'edit-user-name-input'
-  const isLegacyUserConfirm = viewer.userName && viewer.info.userNameEditable
+  const isLegacyUserConfirm = !!(
+    viewer.userName && viewer.info.userNameEditable
+  )
 
   const intl = useIntl()
   const {
@@ -49,13 +51,14 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     handleChange,
     handleSubmit,
     setFieldValue,
+    validateForm,
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
       userName: userName,
     },
     validateOnBlur: false,
-    validateOnChange: false,
+    validateOnChange: isLegacyUserConfirm,
     validate: ({ userName }) =>
       _pickBy({
         userName: validateUserName(userName, lang),
@@ -92,6 +95,12 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     },
   })
 
+  useEffect(() => {
+    if (!isLegacyUserConfirm) return
+
+    validateForm()
+  }, [isLegacyUserConfirm])
+
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
@@ -127,6 +136,9 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
       <Field.Footer
         fieldMsgId={'field-msg-username'}
         hint={`${values.userName.length}/${maxUsername}`}
+        error={
+          errors.userName ? `${values.userName.length}/${maxUsername}` : ''
+        }
         hintAlign="right"
       />
       {errors.userName && (
