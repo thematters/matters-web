@@ -12,7 +12,7 @@ interface DialogContentProps {
 
 const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> = ({
   noSpacing,
-  smExtraSpacing = false,
+  smExtraSpacing = true,
   noSpacingBottom,
   noMaxHeight,
   fixedHeight,

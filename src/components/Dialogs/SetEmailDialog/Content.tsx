@@ -211,7 +211,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         </>
       )}
 
-      <Dialog.Content smExtraSpacing>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
 
       {editable && (
         <Dialog.Footer

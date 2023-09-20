@@ -77,7 +77,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
         }
       />
 
-      <Dialog.Message noSpacingBottom>
+      <Dialog.Message>
         <p>
           <FormattedMessage
             defaultMessage="This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?"
