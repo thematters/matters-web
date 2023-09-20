@@ -1,10 +1,12 @@
 import { useQuery } from '@apollo/react-hooks'
-import { useContext, useState } from 'react'
+import type { TurnstileInstance } from '@marsidev/react-turnstile'
+import { Turnstile } from '@marsidev/react-turnstile'
+import { useContext, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { APPRECIATE_DEBOUNCE, EXTERNAL_LINKS, Z_INDEX } from '~/common/enums'
 import {
-  ReCaptchaContext,
+  // ReCaptchaContext,
   toast,
   Tooltip,
   Translate,
@@ -41,7 +43,10 @@ const AppreciationButton = ({
   disabled,
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
-  const { token, refreshToken } = useContext(ReCaptchaContext)
+
+  const turnstileRef = useRef<TurnstileInstance>(null)
+  // const { token, refreshToken } = useContext(ReCaptchaContext)
+
   const { data, client } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
@@ -67,9 +72,9 @@ const AppreciationButton = ({
         variables: {
           id: article.id,
           amount,
-          token,
+          token: turnstileRef.current?.getResponse(),
         },
-      }).then(refreshToken)
+      }) // .then(refreshToken)
     } catch (e) {
       console.error(e)
     }
@@ -87,7 +92,7 @@ const AppreciationButton = ({
         variables: {
           id: article.id,
           amount: 1,
-          token,
+          token: turnstileRef.current?.getResponse(),
           superLike: true,
         },
         update: (cache) => {
@@ -216,13 +221,21 @@ const AppreciationButton = ({
   // Appreciable
   if (canAppreciate && !disabled) {
     return (
-      <AppreciateButton
-        onClick={appreciate}
-        count={appreciatedCount > 0 ? appreciatedCount : undefined}
-        total={total}
-        isSuperLike={isSuperLike}
-        superLiked={superLiked}
-      />
+      <>
+        <Turnstile
+          ref={turnstileRef}
+          options={{ size: 'invisible' }}
+          siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY!}
+          scriptOptions={{ appendTo: 'body' }}
+        />
+        <AppreciateButton
+          onClick={appreciate}
+          count={appreciatedCount > 0 ? appreciatedCount : undefined}
+          total={total}
+          isSuperLike={isSuperLike}
+          superLiked={superLiked}
+        />
+      </>
     )
   }
 

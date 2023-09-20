@@ -1,6 +1,8 @@
+import type { TurnstileInstance } from '@marsidev/react-turnstile'
+import { Turnstile } from '@marsidev/react-turnstile'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -18,7 +20,7 @@ import {
   IconLeft20,
   LanguageContext,
   Media,
-  ReCaptchaContext,
+  // ReCaptchaContext,
   TextIcon,
   useMutation,
 } from '~/components'
@@ -59,9 +61,8 @@ const Init: React.FC<FormProps> = ({
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
-  const { token, refreshToken } = useContext(ReCaptchaContext)
+  const turnstileRef = useRef<TurnstileInstance>(null)
 
-  // const { token, refreshToken } = useContext(ReCaptchaContext)
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
     SEND_CODE,
     undefined,
@@ -93,7 +94,12 @@ const Init: React.FC<FormProps> = ({
         const redirectUrl = signupCallbackUrl(email)
         await sendCode({
           variables: {
-            input: { email, type: 'register', token, redirectUrl },
+            input: {
+              email,
+              type: 'register',
+              token: turnstileRef.current?.getResponse(),
+              redirectUrl,
+            },
           },
         })
 
@@ -104,16 +110,22 @@ const Init: React.FC<FormProps> = ({
 
         const [messages, codes] = parseFormSubmitErrors(error as any)
         setFieldError('email', intl.formatMessage(messages[codes[0]]))
-
-        if (refreshToken) {
-          refreshToken()
-        }
       }
     },
   })
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
+      <Turnstile
+        // {...props}
+        ref={turnstileRef}
+        options={{ size: 'invisible' }}
+        siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY!}
+        // onError={() => setStatus('error')}
+        // onExpire={() => setStatus('expired')}
+        // onSuccess={token => { setToken(token); setStatus('solved') }}
+      />
+
       <Form.Input
         label={<FormattedMessage defaultMessage="Email" />}
         type="email"

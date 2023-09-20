@@ -50,6 +50,13 @@ const nextConfig = {
       ],
     })
 
+    // config.resolve.alias["react"] = path.resolve("./node_modules/react");
+    config.resolve.alias = Object.assign(
+      config.resolve.alias,
+      // "react/jsx-dev-runtime": "react/jsx-dev-runtime.js",
+      // "react/jsx-runtime": "react/jsx-runtime.js"
+    )
+
     return config
   },
 
