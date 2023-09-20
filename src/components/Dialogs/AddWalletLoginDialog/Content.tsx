@@ -2,7 +2,12 @@ import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { WalletType } from '~/common/utils'
-import { AuthWalletFeed, Dialog, WalletAuthForm } from '~/components'
+import {
+  AuthWalletFeed,
+  Dialog,
+  DialogBeta,
+  WalletAuthForm,
+} from '~/components'
 
 interface Props {
   closeDialog: () => void
@@ -19,7 +24,7 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={
           <FormattedMessage
             defaultMessage="Connect wallet"
@@ -27,7 +32,7 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
           />
         }
         leftBtn={
-          <Dialog.TextButton
+          <DialogBeta.TextButton
             text={<FormattedMessage defaultMessage="Close" />}
             color="greyDarker"
             onClick={closeDialog}
@@ -38,7 +43,7 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
 
       {isSelect && (
         <>
-          <Dialog.Content>
+          <DialogBeta.Content>
             <AuthWalletFeed
               submitCallback={(type: WalletType) => {
                 setWalletType(type)
@@ -46,8 +51,8 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
               }}
               hasWalletExist={hasWalletExist}
             />
-          </Dialog.Content>
-          <Dialog.Footer
+          </DialogBeta.Content>
+          <DialogBeta.Footer
             smUpBtns={
               <>
                 <Dialog.TextButton

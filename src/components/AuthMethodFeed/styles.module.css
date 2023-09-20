@@ -34,9 +34,13 @@
 }
 
 .info {
-  padding: 0 var(--spacing-base) var(--spacing-loose);
+  padding: 0 var(--spacing-base);
   color: var(--color-grey);
   text-align: center;
+
+  @media (--sm-up) {
+    padding-bottom: var(--spacing-loose);
+  }
 
   .errorHint {
     margin-bottom: var(--spacing-base);
