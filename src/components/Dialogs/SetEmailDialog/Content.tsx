@@ -16,6 +16,7 @@ import {
 } from '~/common/utils'
 import {
   Dialog,
+  DialogBeta,
   Form,
   LanguageContext,
   useMutation,
@@ -27,8 +28,6 @@ import {
   SetEmailMutation,
   VerificationCodeType,
 } from '~/gql/graphql'
-
-import styles from './styles.module.css'
 
 interface FormProps {
   closeDialog: () => void
@@ -148,7 +147,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   )
 
   const SubmitButton = (
-    <Dialog.TextButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
       disabled={
@@ -161,7 +160,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={
           <FormattedMessage
             defaultMessage="Email address"
@@ -172,10 +171,10 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         rightBtn={editable ? SubmitButton : undefined}
       />
 
-      {editable && hasPassword && (
-        <>
-          <Dialog.Message noSpacingBottom>
-            <p className={styles.hint}>
+      <DialogBeta.Content>
+        {editable && hasPassword && (
+          <DialogBeta.Content.Message spacingBottom>
+            <p>
               <FormattedMessage
                 defaultMessage="For security, we will {resetHint} for this. You can set your password again after verifying new email address."
                 description="src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -191,14 +190,12 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
                 }}
               />
             </p>
-          </Dialog.Message>
-        </>
-      )}
+          </DialogBeta.Content.Message>
+        )}
 
-      {!editable && (
-        <>
-          <Dialog.Message noSpacingBottom>
-            <p className={styles.hint}>
+        {!editable && (
+          <DialogBeta.Content.Message spacingBottom>
+            <p>
               <FormattedMessage
                 defaultMessage="Email can be modified up to {count} times per day."
                 description="src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -207,14 +204,14 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
                 }}
               />
             </p>
-          </Dialog.Message>
-        </>
-      )}
+          </DialogBeta.Content.Message>
+        )}
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+        {InnerForm}
+      </DialogBeta.Content>
 
       {editable && (
-        <Dialog.Footer
+        <DialogBeta.Footer
           smUpBtns={
             <>
               <Dialog.TextButton
@@ -228,7 +225,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         />
       )}
       {!editable && (
-        <Dialog.Footer
+        <DialogBeta.Footer
           smUpBtns={
             <>
               <Dialog.TextButton

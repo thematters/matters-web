@@ -69,3 +69,7 @@
     text-align: left;
   }
 }
+
+.spacingBottom {
+  padding-bottom: var(--spacing-base);
+}

@@ -8,6 +8,7 @@ interface DialogMessageProps {
   align?: 'left' | 'center'
   smUpAlign?: 'left' | 'center'
   type?: 'error'
+  spacingBottom?: boolean
 }
 
 /**
@@ -28,12 +29,14 @@ interface DialogMessageProps {
 const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
   align = 'center',
   smUpAlign = 'left',
+  spacingBottom,
   type,
 
   children,
 }) => {
   const contentClasses = classNames({
     [styles.content]: true,
+    [styles.spacingBottom]: !!spacingBottom,
     [styles[`${type}`]]: !!type,
     [align ? styles[`align${capitalizeFirstLetter(align)}`] : '']: !!align,
     [smUpAlign ? styles[`alignSmUp${capitalizeFirstLetter(smUpAlign)}`] : '']:
