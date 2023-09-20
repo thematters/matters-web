@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { URL_COLLECTION_DETAIL } from '~/common/enums'
@@ -37,7 +37,7 @@ type SorterSequenceType = 'normal' | 'reverse'
 
 const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
   const viewer = useContext(ViewerContext)
-  const { getQuery, setQuery } = useRoute()
+  const { getQuery, router } = useRoute()
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
 
@@ -60,7 +60,14 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
   const { articleList: articles, updatedAt } = collection
 
   const changeSequence = (newSequence: SorterSequenceType) => {
-    setQuery(URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key, newSequence)
+    // Using setQuery will encode the URL, it was ugly.
+    // eg: /@Matty/Collection --> /%40Matty/Collection
+    // setQuery(URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key, newSequence)
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    urlParams.set(URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key, newSequence)
+    router.push(`${window.location.pathname}?${urlParams.toString()}`)
+
     setSequence(newSequence)
   }
 
