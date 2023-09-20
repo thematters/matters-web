@@ -1,4 +1,8 @@
 {
+  "+51DoZ": {
+    "defaultMessage": "請先驗證郵箱",
+    "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
   "+63O1f": {
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "USER_PASSWORD_INVALID"
