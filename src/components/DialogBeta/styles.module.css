@@ -25,6 +25,12 @@
     background: var(--color-white);
   }
 
+  &:last-child [data-dialog-entity] {
+    @media (--sm-down) {
+      padding-bottom: var(--spacing-xx-loose);
+    }
+  }
+
   &.bgGreyLighter {
     background: var(--color-grey-lighter);
 

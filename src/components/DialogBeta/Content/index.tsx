@@ -30,7 +30,11 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> & {
     [styles.noMaxHeight]: !!noMaxHeight,
   })
 
-  return <section className={contentClasses}>{children}</section>
+  return (
+    <section className={contentClasses} data-dialog-entity>
+      {children}
+    </section>
+  )
 }
 
 DialogContent.Message = Message
