@@ -5,13 +5,15 @@ import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
-  CALLBACK_PROVIDERS,
   KEYVALUE,
   MAX_CHANGE_EMAIL_TIME_DAILY,
-  PATHS,
   TOAST_SEND_EMAIL_VERIFICATION,
 } from '~/common/enums'
-import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
+import {
+  emailVerifyCallbackUrl,
+  parseFormSubmitErrors,
+  validateEmail,
+} from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -96,13 +98,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       try {
         await set({ variables: { input: { email } } })
 
-        const redirectPath = `/callback/${CALLBACK_PROVIDERS.EmailVerification}`
-        const host = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`
-        const redirectUrl = `${host}${redirectPath}?email=${encodeURIComponent(
-          email
-        )}&target=${encodeURIComponent(host)}${encodeURIComponent(
-          PATHS.ME_SETTINGS
-        )}`
+        const redirectUrl = emailVerifyCallbackUrl(email)
 
         await sendCode({
           variables: {
