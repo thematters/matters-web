@@ -33,7 +33,7 @@ export const useAvailableUserName = ({
   const presetUserName =
     (viewer.info.email as string) || googleId || facebookId || twitterId
 
-  const [loading, setLoading] = useState(!!presetUserName)
+  const [loading, setLoading] = useState(enable && !!presetUserName)
   const [index, setIndex] = useState(0)
 
   const [availableUserName, setAvailableUserName] = useState('')
@@ -42,10 +42,14 @@ export const useAvailableUserName = ({
     const normalizedUserName =
       presetUserName &&
       normalizeUserName(
-        presetUserName.split('@')[0].slice(0, MAX_USER_NAME_LENGTH)
+        presetUserName
+          .split('@')[0]
+          .slice(0, MAX_USER_NAME_LENGTH)
+          .toLocaleLowerCase()
       )
 
     if (!normalizedUserName) {
+      setLoading(false)
       return
     }
 

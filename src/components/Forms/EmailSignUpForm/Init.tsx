@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -28,9 +28,12 @@ import { SendVerificationCodeMutation } from '~/gql/graphql'
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback: (email: string) => void
-  gotoEmailLogin: () => void
   gotoWalletConnect: (type: WalletType) => void
   closeDialog?: () => void
+
+  authFeedType: AuthFeedType
+  setAuthFeedType: (type: AuthFeedType) => void
+
   back: () => void
 }
 
@@ -41,9 +44,10 @@ interface FormValues {
 const Init: React.FC<FormProps> = ({
   purpose,
   submitCallback,
-  gotoEmailLogin,
   gotoWalletConnect,
   closeDialog,
+  authFeedType,
+  setAuthFeedType,
   back,
 }) => {
   const { lang } = useContext(LanguageContext)
@@ -51,9 +55,8 @@ const Init: React.FC<FormProps> = ({
 
   const isInPage = purpose === 'page'
 
-  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>('normal')
-  const isNormal = authTypeFeed === 'normal'
-  const isWallet = authTypeFeed === 'wallet'
+  const isNormal = authFeedType === 'normal'
+  const isWallet = authFeedType === 'wallet'
   const { token, refreshToken } = useContext(ReCaptchaContext)
 
   // const { token, refreshToken } = useContext(ReCaptchaContext)
@@ -168,8 +171,8 @@ const Init: React.FC<FormProps> = ({
         <Media greaterThan="sm">
           <AuthTabs
             purpose={purpose}
-            type={authTypeFeed}
-            setType={setAuthTypeFeed}
+            type={authFeedType}
+            setType={setAuthFeedType}
             normalText={<FormattedMessage defaultMessage="Sign Up" />}
           />
           {isNormal && <>{InnerForm}</>}

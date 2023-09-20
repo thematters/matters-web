@@ -111,7 +111,7 @@
 
   margin-top: var(--spacing-x-loose);
 
-  & > *:first-child {
+  & > button:first-child {
     margin-right: var(--spacing-base);
   }
 }

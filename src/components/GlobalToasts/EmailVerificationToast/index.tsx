@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -17,6 +18,7 @@ const EmailVerificationToast = () => {
   const [hasToasted, setHasToasted] = useState(false)
 
   const ignite = () => {
+    baseToast.dismiss()
     toast.success({
       message: (
         <FormattedMessage
