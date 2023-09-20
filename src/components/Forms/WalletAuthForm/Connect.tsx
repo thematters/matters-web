@@ -253,7 +253,7 @@ const Connect: React.FC<FormProps> = ({
     <>
       {isLogin && (
         <Dialog.Header
-          title={<>{isMetamask ? 'MetaMask' : 'Wallet Connect'}</>}
+          title={<>{isMetamask ? 'MetaMask' : 'WalletConnect'}</>}
           hasSmUpTitle={false}
           leftBtn={
             back ? (
