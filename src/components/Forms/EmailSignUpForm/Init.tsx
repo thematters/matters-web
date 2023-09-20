@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   parseFormSubmitErrors,
-  signupCallabckUrl,
+  signupCallbackUrl,
   validateEmail,
 } from '~/common/utils'
 import { WalletType } from '~/common/utils'
@@ -88,7 +88,7 @@ const Init: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ email }, { setFieldError, setSubmitting }) => {
       try {
-        const redirectUrl = signupCallabckUrl(email)
+        const redirectUrl = signupCallbackUrl(email)
         await sendCode({
           variables: {
             input: { email, type: 'register', token, redirectUrl },

@@ -15,7 +15,7 @@ import {
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
-  signinCallabckUrl,
+  signinCallbackUrl,
   validateEmail,
   // validatePassword,
 } from '~/common/utils'
@@ -196,7 +196,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       return
     }
 
-    const redirectUrl = signinCallabckUrl(values.email)
+    const redirectUrl = signinCallbackUrl(values.email)
 
     await sendCode({
       variables: {
