@@ -31,10 +31,8 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> & {
   })
 
   return (
-    <section>
-      <section className={contentClasses} data-dialog-entity>
-        {children}
-      </section>
+    <section className={contentClasses} data-dialog-entity>
+      {children}
     </section>
   )
 }

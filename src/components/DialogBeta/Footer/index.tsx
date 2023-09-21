@@ -42,28 +42,8 @@ const Footer: React.FC<FooterProps> = ({
     // [styles.smUpContentNoSpacingBottom]: !!smUpContentNoSpacingBottom,
   })
 
-  return (
-    <footer className={footerClasses}>
-      <Media at="sm">
-        {hasBtns && (
-          <section className={styles.content} data-dialog-entity>
-            {btns}
-            {closeDialog && (
-              <RoundedButton
-                text={text}
-                color="greyDarker"
-                onClick={closeDialog}
-              />
-            )}
-          </section>
-        )}
-
-        {/* show bottom spacing for dialog if there is no buttons,
-         * otherwise, the footer will be too close to the content
-         */}
-        {/* {!hasBtns && <Spacer size="xxloose" />} */}
-      </Media>
-
+  const SmUpBtns = () => (
+    <>
       {hasSmUpBtns && (
         <Media greaterThan="sm">
           <section className={smUpContentClasses}>
@@ -78,6 +58,33 @@ const Footer: React.FC<FooterProps> = ({
           </section>
         </Media>
       )}
+    </>
+  )
+
+  if (hasBtns) {
+    return (
+      <footer className={footerClasses} data-dialog-entity>
+        <Media at="sm">
+          <section className={styles.content}>
+            {btns}
+            {closeDialog && (
+              <RoundedButton
+                text={text}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+            )}
+          </section>
+        </Media>
+
+        <SmUpBtns />
+      </footer>
+    )
+  }
+
+  return (
+    <footer className={footerClasses}>
+      <SmUpBtns />
     </footer>
   )
 }

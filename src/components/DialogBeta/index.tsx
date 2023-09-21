@@ -120,11 +120,11 @@ const Container: React.FC<
         <button type="button" ref={initialFocusRef} aria-hidden="true" />
       </VisuallyHidden>
 
-      {children}
-
       <Media at="sm">
         {dismissOnHandle && <Handle closeDialog={onDismiss} {...bind()} />}
       </Media>
+
+      {children}
     </div>
   )
 }

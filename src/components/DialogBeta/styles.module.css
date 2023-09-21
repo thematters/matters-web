@@ -25,7 +25,7 @@
     background: var(--color-white);
   }
 
-  & [data-dialog-entity]:last-child {
+  & :nth-last-child(1 of [data-dialog-entity]) {
     @media (--sm-down) {
       padding-bottom: var(--spacing-xx-loose);
     }
@@ -59,6 +59,7 @@
   position: absolute;
   top: 0;
   left: 50%;
+  z-index: var(--z-index-dialog);
   padding: var(--spacing-x-tight);
   transform: translateX(-50%);
 
