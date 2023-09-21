@@ -8,9 +8,8 @@ import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
   ENTITY_TYPE,
-  UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { translate, validateImage } from '~/common/utils'
 import {
   IconCamera16,
   IconSpinner16,
@@ -86,16 +85,8 @@ const Uploader: React.FC<UploaderProps> = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
-      toast.error({
-        message: (
-          <Translate
-            zh_hant="上傳檔案超過 5 MB"
-            zh_hans="上传文件超过 5 MB"
-            en="upload file size exceeds 5 MB"
-          />
-        ),
-      })
+    const isValidImage = await validateImage(file)
+    if (!isValidImage) {
       return
     }
 
