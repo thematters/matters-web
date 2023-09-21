@@ -3,8 +3,8 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Media } from '~/components'
+import { RoundedButton, TextButton } from '~/components/Dialog/Buttons'
 
-import { RoundedButton, TextButton } from '../Buttons'
 import styles from './styles.module.css'
 
 type FooterProps = {
