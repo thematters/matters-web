@@ -2,12 +2,7 @@ import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { WalletType } from '~/common/utils'
-import {
-  AuthWalletFeed,
-  Dialog,
-  DialogBeta,
-  WalletAuthForm,
-} from '~/components'
+import { AuthWalletFeed, DialogBeta, WalletAuthForm } from '~/components'
 
 interface Props {
   closeDialog: () => void
@@ -55,7 +50,7 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
           <DialogBeta.Footer
             smUpBtns={
               <>
-                <Dialog.TextButton
+                <DialogBeta.TextButton
                   text={<FormattedMessage defaultMessage="Close" />}
                   color="greyDarker"
                   onClick={closeDialog}
