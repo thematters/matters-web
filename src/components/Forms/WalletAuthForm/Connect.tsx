@@ -306,8 +306,6 @@ const Connect: React.FC<FormProps> = ({
       </DialogBeta.Content>
 
       <DialogBeta.Footer
-        // smUpContentNoSpacingBottom={isInPage}
-        // smUpSpaceBetween
         smUpBtns={
           <>
             <DialogBeta.TextButton
