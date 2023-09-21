@@ -24,7 +24,7 @@ import {
   AuthNormalFeed,
   AuthTabs,
   AuthWalletFeed,
-  Dialog,
+  DialogBeta,
   Form,
   IconLeft20,
   LanguageContext,
@@ -308,7 +308,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <Dialog.TextButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
       disabled={!values.email || !values.password || isSubmitting}
@@ -320,11 +320,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   return (
     <>
       {!isSelectMethod && (
-        <Dialog.Header
+        <DialogBeta.Header
           title={<FormattedMessage defaultMessage="Sign In" />}
           hasSmUpTitle={false}
           leftBtn={
-            <Dialog.TextButton
+            <DialogBeta.TextButton
               text={<FormattedMessage defaultMessage="Back" />}
               color="greyDarker"
               onClick={() => {
@@ -337,7 +337,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content noMaxHeight={isInPage}>
+      <DialogBeta.Content noMaxHeight={isInPage}>
         <Media at="sm">
           {isSelectMethod && (
             <AuthTabs
@@ -362,15 +362,13 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           />
         )}
         {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
-      </Dialog.Content>
+      </DialogBeta.Content>
 
       {isNormal && !isSelectMethod && (
-        <Dialog.Footer
-          smUpContentNoSpacingBottom={isInPage}
-          smUpSpaceBetween
+        <DialogBeta.Footer
           smUpBtns={
-            <>
-              <Dialog.TextButton
+            <section className={styles.footerBtns}>
+              <DialogBeta.TextButton
                 text={
                   <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
                     <FormattedMessage defaultMessage="Back" />
@@ -382,14 +380,14 @@ export const EmailLoginForm: React.FC<FormProps> = ({
                 }}
               />
               {SubmitButton}
-            </>
+            </section>
           }
         />
       )}
       {((isNormal && isSelectMethod) || isWallet) && !isInPage && (
-        <Dialog.Footer
+        <DialogBeta.Footer
           smUpBtns={
-            <Dialog.TextButton
+            <DialogBeta.TextButton
               color="greyDarker"
               text={<FormattedMessage defaultMessage="Close" />}
               onClick={closeDialog}

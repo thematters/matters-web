@@ -39,7 +39,7 @@
   text-align: center;
 
   @media (--sm-up) {
-    padding-bottom: var(--spacing-loose);
+    padding-bottom: var(--spacing-x-tight);
   }
 
   .errorHint {
