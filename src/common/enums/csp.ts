@@ -102,6 +102,9 @@ const CONNECT_SRC = [
     site_domain_tld_old
   ),
 
+  // Cloudflare Image Upload
+  'upload.imagedelivery.net',
+
   // Sentry
   '*.ingest.sentry.io',
 

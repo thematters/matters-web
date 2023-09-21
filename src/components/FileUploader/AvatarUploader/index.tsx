@@ -21,7 +21,7 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import { SINGLE_FILE_UPLOAD } from '~/components/GQL/mutations/uploadFile'
 import { SingleFileUploadMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -50,7 +50,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   const { lang } = useContext(LanguageContext)
 
   const [upload, { loading }] = useMutation<SingleFileUploadMutation>(
-    UPLOAD_FILE,
+    SINGLE_FILE_UPLOAD,
     undefined,
     { showToast: false }
   )

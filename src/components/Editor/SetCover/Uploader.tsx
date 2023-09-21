@@ -21,7 +21,7 @@ import {
   useUnloadConfirm,
 } from '~/components'
 import { updateDraftAssets } from '~/components/GQL'
-import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import { SINGLE_FILE_UPLOAD } from '~/components/GQL/mutations/uploadFile'
 import { AssetFragment, SingleFileUploadMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -45,7 +45,7 @@ const Uploader: React.FC<UploaderProps> = ({
   const { lang } = useContext(LanguageContext)
 
   const [upload, { loading }] = useMutation<SingleFileUploadMutation>(
-    UPLOAD_FILE,
+    SINGLE_FILE_UPLOAD,
     {
       update: (cache, { data }) => {
         if (data?.singleFileUpload) {
