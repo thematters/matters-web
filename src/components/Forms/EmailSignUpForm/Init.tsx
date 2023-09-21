@@ -13,7 +13,7 @@ import {
   AuthFeedType,
   AuthTabs,
   AuthWalletFeed,
-  Dialog,
+  DialogBeta,
   Form,
   IconLeft20,
   LanguageContext,
@@ -24,6 +24,8 @@ import {
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
+
+import styles from './styles.module.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -134,7 +136,7 @@ const Init: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <Dialog.TextButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
       disabled={
@@ -152,11 +154,11 @@ const Init: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={<FormattedMessage defaultMessage="Sign Up" />}
         hasSmUpTitle={false}
         leftBtn={
-          <Dialog.TextButton
+          <DialogBeta.TextButton
             text={<FormattedMessage defaultMessage="Back" />}
             color="greyDarker"
             onClick={back}
@@ -166,7 +168,7 @@ const Init: React.FC<FormProps> = ({
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content>
+      <DialogBeta.Content>
         <Media at="sm">{InnerForm}</Media>
         <Media greaterThan="sm">
           <AuthTabs
@@ -178,15 +180,13 @@ const Init: React.FC<FormProps> = ({
           {isNormal && <>{InnerForm}</>}
           {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
         </Media>
-      </Dialog.Content>
+      </DialogBeta.Content>
 
       {isNormal && (
-        <Dialog.Footer
-          smUpContentNoSpacingBottom={isInPage}
-          smUpSpaceBetween
+        <DialogBeta.Footer
           smUpBtns={
-            <>
-              <Dialog.TextButton
+            <section className={styles.footerBtns}>
+              <DialogBeta.TextButton
                 text={
                   <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
                     <FormattedMessage defaultMessage="Back" />
@@ -197,14 +197,14 @@ const Init: React.FC<FormProps> = ({
               />
 
               {SubmitButton}
-            </>
+            </section>
           }
         />
       )}
       {isWallet && !isInPage && (
-        <Dialog.Footer
+        <DialogBeta.Footer
           smUpBtns={
-            <Dialog.TextButton
+            <DialogBeta.TextButton
               color="greyDarker"
               text={<FormattedMessage defaultMessage="Close" />}
               onClick={closeDialog}

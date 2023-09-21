@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { Dialog, Layout, Translate, useRoute } from '~/components'
+import { Dialog, DialogBeta, Layout, Translate, useRoute } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -23,7 +23,7 @@ export const VerificationLinkSent = ({
   if (isRegister) {
     return (
       <>
-        <Dialog.Header
+        <DialogBeta.Header
           title={
             <FormattedMessage
               defaultMessage="Check your inbox"
@@ -34,22 +34,24 @@ export const VerificationLinkSent = ({
           closeText={<FormattedMessage defaultMessage="Close" />}
         />
 
-        <Dialog.Message>
-          <p>
-            <FormattedMessage
-              defaultMessage="The login link has been sent to {email}"
-              description="src/components/Forms/Verification/LinkSent.tsx"
-              values={{
-                email: <span className={styles.email}>{email}</span>,
-              }}
-            />
-          </p>
-        </Dialog.Message>
+        <DialogBeta.Content>
+          <DialogBeta.Content.Message>
+            <p>
+              <FormattedMessage
+                defaultMessage="The login link has been sent to {email}"
+                description="src/components/Forms/Verification/LinkSent.tsx"
+                values={{
+                  email: <span className={styles.email}>{email}</span>,
+                }}
+              />
+            </p>
+          </DialogBeta.Content.Message>
+        </DialogBeta.Content>
 
         {closeDialog && (
-          <Dialog.Footer
+          <DialogBeta.Footer
             smUpBtns={
-              <Dialog.TextButton
+              <DialogBeta.TextButton
                 text={<FormattedMessage defaultMessage="Close" />}
                 color="greyDarker"
                 onClick={closeDialog}
@@ -59,15 +61,15 @@ export const VerificationLinkSent = ({
         )}
 
         {isInPage && (
-          <Dialog.Footer
+          <DialogBeta.Footer
             btns={
-              <Dialog.RoundedButton
+              <DialogBeta.RoundedButton
                 text={<FormattedMessage defaultMessage="Enter Matters" />}
                 onClick={() => router.push(PATHS.HOME)}
               />
             }
             smUpBtns={
-              <Dialog.TextButton
+              <DialogBeta.TextButton
                 text={<FormattedMessage defaultMessage="Enter Matters" />}
                 onClick={() => router.push(PATHS.HOME)}
               />

@@ -3,7 +3,7 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { Dialog, toast, useMutation, useRoute } from '~/components'
+import { DialogBeta, toast, useMutation, useRoute } from '~/components'
 import { SetUserNameMutation } from '~/gql/graphql'
 import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
 
@@ -68,7 +68,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={
           <FormattedMessage
             defaultMessage="Confirm Matters ID"
@@ -76,23 +76,24 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
           />
         }
       />
+      <DialogBeta.Content>
+        <DialogBeta.Content.Message>
+          <p>
+            <FormattedMessage
+              defaultMessage="This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?"
+              description="src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+              values={{
+                id: <span className="u-highlight">{userName}</span>,
+              }}
+            />
+          </p>
+        </DialogBeta.Content.Message>
+      </DialogBeta.Content>
 
-      <Dialog.Message>
-        <p>
-          <FormattedMessage
-            defaultMessage="This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?"
-            description="src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
-            values={{
-              id: <span className="u-highlight">{userName}</span>,
-            }}
-          />
-        </p>
-      </Dialog.Message>
-
-      <Dialog.Footer
+      <DialogBeta.Footer
         btns={
           <>
-            <Dialog.RoundedButton
+            <DialogBeta.RoundedButton
               disabled={loading}
               text={
                 <FormattedMessage
@@ -103,7 +104,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
               loading={loading}
               onClick={confirmUse}
             />
-            <Dialog.RoundedButton
+            <DialogBeta.RoundedButton
               text={<FormattedMessage defaultMessage="Back" />}
               color="greyDarker"
               onClick={back}
@@ -112,12 +113,12 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
         }
         smUpBtns={
           <>
-            <Dialog.TextButton
+            <DialogBeta.TextButton
               text={<FormattedMessage defaultMessage="Back" />}
               color="greyDarker"
               onClick={back}
             />
-            <Dialog.TextButton
+            <DialogBeta.TextButton
               disabled={loading}
               text={
                 <FormattedMessage

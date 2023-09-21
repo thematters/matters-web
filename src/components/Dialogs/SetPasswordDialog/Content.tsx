@@ -12,9 +12,9 @@ import {
 } from '~/common/utils'
 import {
   Dialog,
+  DialogBeta,
   Form,
   LanguageContext,
-  Media,
   Spacer,
   toast,
   useMutation,
@@ -125,7 +125,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   )
 
   const SubmitButton = (
-    <Dialog.TextButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting || values.password.length < 8}
@@ -136,7 +136,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={
           <FormattedMessage
             defaultMessage="Login password"
@@ -147,21 +147,20 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Message>
-        <p>
-          <FormattedMessage
-            defaultMessage="Password must be at least 8 characters long, support letter, numbers and symbols."
-            description="src/components/Dialogs/SetPasswordDialog/Content.tsx"
-          />
-        </p>
-        <Media greaterThan="sm">
+      <DialogBeta.Content>
+        <DialogBeta.Content.Message>
+          <p>
+            <FormattedMessage
+              defaultMessage="Password must be at least 8 characters long, support letter, numbers and symbols."
+              description="src/components/Dialogs/SetPasswordDialog/Content.tsx"
+            />
+          </p>
           <Spacer size="base" />
-        </Media>
-      </Dialog.Message>
+        </DialogBeta.Content.Message>
+        {InnerForm}
+      </DialogBeta.Content>
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
-
-      <Dialog.Footer
+      <DialogBeta.Footer
         smUpBtns={
           <>
             <Dialog.TextButton

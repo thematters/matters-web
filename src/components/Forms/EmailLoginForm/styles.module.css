@@ -47,4 +47,12 @@
 
 .footer {
   @mixin flex-center-all;
+
+  margin-top: var(--spacing-base);
+}
+
+.footerBtns {
+  @mixin flex-center-space-between;
+
+  flex: 1;
 }

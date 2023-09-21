@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useDisconnect } from 'wagmi'
 
-import { Dialog, toast, useMutation } from '~/components'
+import { DialogBeta, toast, useMutation } from '~/components'
 import { RemoveWalletLoginMutation } from '~/gql/graphql'
 
 import { REMOVE_WALLET_LOGIN } from './gql'
@@ -49,7 +49,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={
           <FormattedMessage
             defaultMessage="Disconnect wallet"
@@ -58,28 +58,30 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
         }
       />
 
-      <Dialog.Message>
-        <p>
-          {isConfirm && (
-            <FormattedMessage
-              defaultMessage="Are you sure you want to disconnect from this?"
-              description="src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
-            />
-          )}
-          {isFailure && (
-            <FormattedMessage
-              defaultMessage="Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account)."
-              description="src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
-            />
-          )}
-        </p>
-      </Dialog.Message>
+      <DialogBeta.Content>
+        <DialogBeta.Content.Message>
+          <p>
+            {isConfirm && (
+              <FormattedMessage
+                defaultMessage="Are you sure you want to disconnect from this?"
+                description="src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+              />
+            )}
+            {isFailure && (
+              <FormattedMessage
+                defaultMessage="Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account)."
+                description="src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+              />
+            )}
+          </p>
+        </DialogBeta.Content.Message>
+      </DialogBeta.Content>
 
       {isConfirm && (
-        <Dialog.Footer
+        <DialogBeta.Footer
           btns={
             <>
-              <Dialog.RoundedButton
+              <DialogBeta.RoundedButton
                 text={
                   <FormattedMessage
                     defaultMessage="Disconnect"
@@ -89,7 +91,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
                 loading={loading}
                 onClick={remove}
               />
-              <Dialog.RoundedButton
+              <DialogBeta.RoundedButton
                 text={<FormattedMessage defaultMessage="Close" />}
                 color="greyDarker"
                 onClick={closeDialog}
@@ -98,12 +100,12 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
           }
           smUpBtns={
             <>
-              <Dialog.TextButton
+              <DialogBeta.TextButton
                 text={<FormattedMessage defaultMessage="Cancel" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
-              <Dialog.TextButton
+              <DialogBeta.TextButton
                 text={
                   <FormattedMessage
                     defaultMessage="Disconnect"
@@ -119,10 +121,10 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
       )}
 
       {isFailure && (
-        <Dialog.Footer
+        <DialogBeta.Footer
           btns={
             <>
-              <Dialog.RoundedButton
+              <DialogBeta.RoundedButton
                 text={<FormattedMessage defaultMessage="Close" />}
                 color="greyDarker"
                 onClick={closeDialog}
@@ -131,7 +133,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
           }
           smUpBtns={
             <>
-              <Dialog.TextButton
+              <DialogBeta.TextButton
                 text={<FormattedMessage defaultMessage="Close" />}
                 color="greyDarker"
                 onClick={closeDialog}

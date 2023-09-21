@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { DialogBeta, Spinner, useDialogSwitch } from '~/components'
 
 interface AddWalletLoginDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -15,15 +15,15 @@ const BaseAddWalletLoginDialog = ({ children }: AddWalletLoginDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <DialogBeta isOpen={show} onDismiss={closeDialog}>
         <DynamicContent closeDialog={closeDialog} />
-      </Dialog>
+      </DialogBeta>
     </>
   )
 }
 
 export const AddWalletLoginDialog = (props: AddWalletLoginDialogProps) => (
-  <Dialog.Lazy mounted={<BaseAddWalletLoginDialog {...props} />}>
+  <DialogBeta.Lazy mounted={<BaseAddWalletLoginDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
-  </Dialog.Lazy>
+  </DialogBeta.Lazy>
 )
