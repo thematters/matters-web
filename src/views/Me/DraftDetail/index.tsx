@@ -97,7 +97,9 @@ const DraftDetail = () => {
   const [directImageUpload] =
     useMutation<DirectImageUploadMutation>(DIRECT_IMAGE_UPLOAD)
   const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
-    DIRECT_IMAGE_UPLOAD_DONE
+    DIRECT_IMAGE_UPLOAD_DONE,
+    undefined,
+    { showToast: false }
   )
   const [saveStatus, setSaveStatus] = useState<
     'saved' | 'saving' | 'saveFailed'
@@ -180,7 +182,6 @@ const DraftDetail = () => {
 
       if (assetId && path && uploadURL) {
         try {
-          console.log({ assetId, path, uploadURL })
           const data = new FormData()
           data.append('file', input.file)
           await fetch(uploadURL, { method: 'POST', body: data })
@@ -190,18 +191,13 @@ const DraftDetail = () => {
         }
 
         // (async) mark asset draft as false
-        try {
-          directImageUploadDone({
-            variables: {
-              ..._omit(variables.input, ['file']),
-              draft: false,
-              url: path,
-            },
-          })
-        } catch (error) {
-          console.error(error)
-          // do nothing
-        }
+        directImageUploadDone({
+          variables: {
+            ..._omit(variables.input, ['file']),
+            draft: false,
+            url: path,
+          },
+        }).catch(console.error)
 
         return { id: assetId, path }
       } else {

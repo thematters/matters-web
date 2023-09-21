@@ -1,5 +1,6 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
+import _omit from 'lodash/omit'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -21,8 +22,15 @@ import {
   useUnloadConfirm,
 } from '~/components'
 import { updateDraftAssets } from '~/components/GQL'
-import { SINGLE_FILE_UPLOAD } from '~/components/GQL/mutations/uploadFile'
-import { AssetFragment, SingleFileUploadMutation } from '~/gql/graphql'
+import {
+  DIRECT_IMAGE_UPLOAD,
+  DIRECT_IMAGE_UPLOAD_DONE,
+} from '~/components/GQL/mutations/uploadFile'
+import {
+  AssetFragment,
+  DirectImageUploadDoneMutation,
+  DirectImageUploadMutation,
+} from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -44,19 +52,24 @@ const Uploader: React.FC<UploaderProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const [upload, { loading }] = useMutation<SingleFileUploadMutation>(
-    SINGLE_FILE_UPLOAD,
+  const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
+    DIRECT_IMAGE_UPLOAD,
     {
       update: (cache, { data }) => {
-        if (data?.singleFileUpload) {
+        if (data?.directImageUpload) {
           updateDraftAssets({
             cache,
             id: entityId,
-            asset: data.singleFileUpload,
+            asset: data.directImageUpload,
           })
         }
       },
     },
+    { showToast: false }
+  )
+  const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
+    DIRECT_IMAGE_UPLOAD_DONE,
+    undefined,
     { showToast: false }
   )
 
@@ -87,32 +100,41 @@ const Uploader: React.FC<UploaderProps> = ({
     }
 
     try {
-      const { data } = await upload({
-        variables: {
-          input: {
-            file,
-            type: ASSET_TYPE.cover,
-            entityId,
-            entityType,
-          },
+      const variables = {
+        input: {
+          file,
+          type: ASSET_TYPE.cover,
+          entityId,
+          entityType,
         },
-      })
+      }
+      const { data } = await upload({ variables })
+      const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
-      refetchAssets()
+      if (assetId && path && uploadURL) {
+        const formData = new FormData()
+        formData.append('file', file)
+        await fetch(uploadURL, { method: 'POST', body: formData })
 
-      if (data?.singleFileUpload) {
-        setSelected(data?.singleFileUpload)
+        // (async) mark asset draft as false
+        directImageUploadDone({
+          variables: {
+            ..._omit(variables.input, ['file']),
+            draft: false,
+            url: path,
+          },
+        }).catch(console.error)
+
+        refetchAssets()
+
+        if (data?.directImageUpload) {
+          setSelected(data?.directImageUpload)
+        }
       } else {
         throw new Error()
       }
-
-      toast.success({
-        message: <Translate id="successUploadImage" />,
-      })
     } catch (e) {
-      toast.error({
-        message: <Translate id="failureUploadImage" />,
-      })
+      toast.error({ message: <Translate id="failureUploadImage" /> })
     }
   }
 

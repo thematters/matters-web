@@ -25,7 +25,7 @@ export const DIRECT_IMAGE_UPLOAD_DONE = gql`
     $url: url_String_format_uri!
     $type: AssetType!
     $entityType: EntityType!
-    $entityId: ID!
+    $entityId: ID
   ) {
     directImageUpload(
       input: {
