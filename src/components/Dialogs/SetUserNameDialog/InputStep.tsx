@@ -10,13 +10,7 @@ import {
   MIN_USER_NAME_LENGTH,
 } from '~/common/enums'
 import { normalizeUserName, validateUserName } from '~/common/utils'
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  Spacer,
-  ViewerContext,
-} from '~/components'
+import { DialogBeta, Form, LanguageContext, ViewerContext } from '~/components'
 
 import Field from '../../Form/Field'
 import { QUERY_USER_NAME } from './gql'
@@ -153,7 +147,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
   )
 
   const SubmitButton = (
-    <Dialog.TextButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting || values.userName.length < MIN_USER_NAME_LENGTH}
@@ -164,7 +158,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={
           isLegacyUserConfirm ? (
             <FormattedMessage
@@ -179,29 +173,29 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
           )
         }
       />
+      <DialogBeta.Content>
+        <DialogBeta.Content.Message spacingBottom>
+          <p>
+            {isLegacyUserConfirm ? (
+              <FormattedMessage
+                defaultMessage="In order to ensure the identity security of the citizens of Matters City, we've upgraded some security settings. Please confirm your Matters ID (cannot be modified once confirmation)."
+                description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
+              />
+            ) : (
+              <FormattedMessage
+                defaultMessage="Matters ID is your unique identifier, and cannot be modified once set."
+                description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
+              />
+            )}
+          </p>
+        </DialogBeta.Content.Message>
+        {InnerForm}
+      </DialogBeta.Content>
 
-      <Dialog.Message>
-        <p>
-          {isLegacyUserConfirm ? (
-            <FormattedMessage
-              defaultMessage="In order to ensure the identity security of the citizens of Matters City, we've upgraded some security settings. Please confirm your Matters ID (cannot be modified once confirmation)."
-              description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
-            />
-          ) : (
-            <FormattedMessage
-              defaultMessage="Matters ID is your unique identifier, and cannot be modified once set."
-              description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
-            />
-          )}
-        </p>
-      </Dialog.Message>
-      <Spacer size="base" />
-      <Dialog.Content>{InnerForm}</Dialog.Content>
-
-      <Dialog.Footer
+      <DialogBeta.Footer
         btns={
           <>
-            <Dialog.RoundedButton
+            <DialogBeta.RoundedButton
               type="submit"
               color="green"
               form={formId}

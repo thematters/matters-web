@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 
 import { OPEN_SET_USER_NAME_DIALOG } from '~/common/enums'
 import {
-  Dialog,
+  DialogBeta,
   Spinner,
   useDialogSwitch,
   useEventListener,
@@ -21,9 +21,9 @@ const BaseSetUserNameDialog = ({ children }: SetUserNameDialogProps) => {
     <>
       {children && children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} dismissOnHandle={false}>
+      <DialogBeta isOpen={show} onDismiss={closeDialog} dismissOnHandle={false}>
         <DynamicContent closeDialog={closeDialog} />
-      </Dialog>
+      </DialogBeta>
     </>
   )
 }
@@ -35,8 +35,8 @@ export const SetUserNameDialog = (props: SetUserNameDialogProps) => {
   }
 
   return (
-    <Dialog.Lazy mounted={<BaseSetUserNameDialog {...props} />}>
+    <DialogBeta.Lazy mounted={<BaseSetUserNameDialog {...props} />}>
       {({ openDialog }) => <Children openDialog={openDialog} />}
-    </Dialog.Lazy>
+    </DialogBeta.Lazy>
   )
 }
