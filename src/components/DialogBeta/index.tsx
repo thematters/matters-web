@@ -10,13 +10,13 @@ import { KEYVALUE } from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
 import { Media, useOutsideClick } from '~/components'
 
+import Handle from '../Dialog/Handle'
+import Header from '../Dialog/Header'
+import Lazy from '../Dialog/Lazy'
+import Overlay from '../Dialog/Overlay'
 import { RoundedButton, TextButton } from './Buttons'
 import Content from './Content'
 import Footer from './Footer'
-import Handle from './Handle'
-import Header from './Header'
-import Lazy from './Lazy'
-import Overlay from './Overlay'
 import styles from './styles.module.css'
 
 export interface DialogBetaOverlayProps {
