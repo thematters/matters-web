@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { REFETCH_USER_PROFILE_PUBLIC } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Dialog,
@@ -86,10 +87,17 @@ const DeleteCollectionDialog = ({
           userName: collection.author.userName!,
           type: 'decreaseCollection',
         })
+        console.log({ result })
         if (result?.collectionCount === 0) {
           onEmptyCollection()
         }
       },
+      // refetchQueries: [
+      //   {
+      //     query: USER_PROFILE_PUBLIC,
+      //     variables: { userName: collection.author.userName! },
+      //   },
+      // ],
     })
 
   const onEmptyCollection = async () => {
@@ -106,6 +114,9 @@ const DeleteCollectionDialog = ({
 
   const onDelete = async () => {
     await deleteCollection()
+
+    // FIXME:
+    window.dispatchEvent(new Event(REFETCH_USER_PROFILE_PUBLIC))
 
     toast.success({
       message: (

@@ -4,6 +4,9 @@ export const ANALYTICS = 'analytics'
 // Article
 export const REFETCH_RESPONSES = 'refetchResponses'
 
+// User Profile
+export const REFETCH_USER_PROFILE_PUBLIC = 'refetchUserProfilePublic'
+
 // Tag
 export const REFETCH_TAG_DETAIL_ARTICLES = 'refetchTagDetailArticles'
 

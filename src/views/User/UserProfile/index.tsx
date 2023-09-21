@@ -3,7 +3,7 @@ import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
-import { TEST_ID } from '~/common/enums'
+import { REFETCH_USER_PROFILE_PUBLIC, TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import {
   Avatar,
@@ -14,6 +14,7 @@ import {
   Media,
   Throw404,
   Translate,
+  useEventListener,
   // Translate,
   usePublicQuery,
   useRoute,
@@ -51,13 +52,20 @@ export const UserProfile = () => {
   // public user data
   const userName = getQuery('name')
   const isMe = !userName || viewer.userName === userName
-  const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
-    USER_PROFILE_PUBLIC,
-    {
+  const { data, loading, client, refetch } =
+    usePublicQuery<UserProfileUserPublicQuery>(USER_PROFILE_PUBLIC, {
       variables: { userName },
-    }
-  )
+    })
+  console.log({ data })
   const user = data?.user
+  console.log({ user })
+
+  // Why still old number
+  // data from network/cache?
+  useEventListener(REFETCH_USER_PROFILE_PUBLIC, () => {
+    console.log('exec refetch')
+    refetch()
+  })
 
   // fetch private data
   useEffect(() => {

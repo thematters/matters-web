@@ -50,5 +50,7 @@ export const useColorThief = () => {
     }
   }
 
+  console.log('useColorThief', { dominantColor })
+
   return { getColor, dominantColor, nodeRef }
 }
