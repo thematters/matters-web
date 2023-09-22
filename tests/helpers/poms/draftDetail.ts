@@ -166,13 +166,11 @@ export class DraftDetailPage {
     const content = generateContent({})
     await this.contentInput.fill(content)
 
+    // Update the content to make the publish button clickable
     await this.contentInput.press('KeyA')
     await sleep(5 * 1000)
-
     await this.contentInput.press('KeyB')
-
     await this.contentInput.press('KeyC')
-
     await this.contentInput.press('KeyD')
     await sleep(5 * 1000)
 
