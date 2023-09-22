@@ -104,7 +104,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     values,
     errors,
     touched,
-    handleBlur,
+    // handleBlur,
     handleChange,
     handleSubmit,
     setFieldError,
@@ -231,7 +231,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           })}
           value={values.email}
           error={errors.email}
-          onBlur={handleBlur}
+          // FIXME: handleBlur will cause the component to re-render
+          // onBlur={handleBlur}
           onChange={handleChange}
           spacingBottom="baseLoose"
           hasFooter={false}
@@ -249,7 +250,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           })}
           value={values.password}
           error={touched.password && errors.password}
-          onBlur={handleBlur}
+          // FIXME: handleBlur will cause the component to re-render
+          // onBlur={handleBlur}
           onChange={handleChange}
           spacingBottom="baseLoose"
           hasFooter={false}
