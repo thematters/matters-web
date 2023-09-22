@@ -74,7 +74,7 @@ const Init: React.FC<FormProps> = ({
     values,
     errors,
     touched,
-    handleBlur,
+    // handleBlur,
     handleChange,
     handleSubmit,
     isSubmitting,
@@ -127,7 +127,8 @@ const Init: React.FC<FormProps> = ({
         hintSpace="baseLoose"
         value={values.email}
         error={touched.email && errors.email}
-        onBlur={handleBlur}
+        // FIXME: handleBlur will cause the component to re-render
+        // onBlur={handleBlur}
         onChange={handleChange}
         spacingBottom="base"
         autoFocus
