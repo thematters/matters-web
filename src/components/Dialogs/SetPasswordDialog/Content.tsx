@@ -58,7 +58,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     values,
     errors,
     touched,
-    handleBlur,
+    // handleBlur,
     handleChange,
     handleSubmit,
     setFieldValue,
@@ -109,7 +109,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         placeholder={intl.formatMessage({ defaultMessage: 'Password' })}
         value={values.password}
         error={touched.password && errors.password}
-        onBlur={handleBlur}
+        // onBlur={handleBlur}
         onChange={handleChange}
         onKeyDown={(e) => {
           if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
