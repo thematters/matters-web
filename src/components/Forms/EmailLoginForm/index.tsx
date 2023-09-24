@@ -87,6 +87,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const [isSelectMethod, setIsSelectMethod] = useState(false)
   const [errorCode, setErrorCode] = useState<ERROR_CODES | null>(null)
   const [hasSendCode, setHasSendCode] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const { countdown, setCountdown } = useCountdown(0)
 
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -110,7 +111,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     setFieldError,
     setFieldValue,
     setErrors,
-    isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
       email: '',
@@ -123,8 +123,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         email: validateEmail(email, lang, { allowPlusSign: true }),
         // password: validatePassword(password, lang),
       }),
-    onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
+    onSubmit: async ({ email, password }, { setFieldError }) => {
       try {
+        setIsSubmitting(true)
         const { data } = await login({
           variables: { input: { email, passwordOrCode: password } },
         })
@@ -148,7 +149,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
         analytics.identifyUser()
 
-        setSubmitting(false)
         redirectToTarget({
           fallback: !!isInPage ? 'homepage' : 'current',
         })
@@ -184,7 +184,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
             setFieldError('password', intl.formatMessage(messages[code]))
           }
         })
-        setSubmitting(false)
+        setIsSubmitting(false)
       }
     },
   })
@@ -236,11 +236,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           onChange={handleChange}
           spacingBottom="baseLoose"
           hasFooter={false}
-          autoFocus
+          autoFocus={false}
         />
 
         <Form.Input
-          ref={passwordRef}
+          // ref={passwordRef}
           label={<FormattedMessage defaultMessage="Password" />}
           type="password"
           name="password"
@@ -321,6 +321,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         />
       }
       loading={isSubmitting}
+      // onClick={() => {
+      //   setIsSubmitting(true)
+      // }}
     />
   )
 
