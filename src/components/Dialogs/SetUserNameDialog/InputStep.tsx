@@ -41,7 +41,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
   const {
     values,
     errors,
-    handleBlur,
+    // handleBlur,
     handleChange,
     handleSubmit,
     setFieldValue,
@@ -108,7 +108,8 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         })}
         value={values.userName}
         error={errors.userName}
-        onBlur={handleBlur}
+        // FIXME: handleBlur will cause the component to re-render
+        // onBlur={handleBlur}
         onChange={handleChange}
         maxLength={maxUsername}
         onKeyDown={(e) => {
