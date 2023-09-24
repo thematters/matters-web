@@ -58,7 +58,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         userName: validateUserName(mattersID, lang),
       }),
     onSubmit: async ({ mattersID }, { setSubmitting, setFieldError }) => {
-      if (isLegacyUserConfirm) {
+      if (isLegacyUserConfirm && viewer.userName === mattersID) {
         gotoConfirm(mattersID)
         return
       }
@@ -73,7 +73,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
 
         if (!!data.user) {
           setFieldError(
-            'userName',
+            'mattersID',
             intl.formatMessage({
               defaultMessage: 'This ID has been taken, please try another one',
               description:
