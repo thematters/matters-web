@@ -41,7 +41,7 @@ const Password = () => {
             }
             rightTextColor={!hasEmail ? 'grey' : undefined}
             onClick={
-              hasEmail && isEmailVerified && !hasPassword
+              hasEmail && isEmailVerified && hasPassword
                 ? openDialog
                 : undefined
             }
