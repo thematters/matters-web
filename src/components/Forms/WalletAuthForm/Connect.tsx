@@ -307,7 +307,7 @@ const Connect: React.FC<FormProps> = ({
 
       <DialogBeta.Footer
         smUpBtns={
-          <>
+          <section className={styles.footerSmUpBtns}>
             <DialogBeta.TextButton
               text={
                 <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
@@ -328,7 +328,7 @@ const Connect: React.FC<FormProps> = ({
                 onClick={onCloseDialog}
               />
             )}
-          </>
+          </section>
         }
       />
     </>
