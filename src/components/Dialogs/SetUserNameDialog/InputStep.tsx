@@ -55,7 +55,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     validateOnChange: isLegacyUserConfirm,
     validate: ({ mattersID }) =>
       _pickBy({
-        userName: validateUserName(mattersID, lang),
+        mattersID: validateUserName(mattersID, lang),
       }),
     onSubmit: async ({ mattersID }, { setSubmitting, setFieldError }) => {
       if (isLegacyUserConfirm && viewer.userName === mattersID) {
@@ -112,7 +112,6 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         // FIXME: handleBlur will cause the component to re-render
         // onBlur={handleBlur}
         onChange={handleChange}
-        maxLength={maxUsername}
         onKeyDown={(e) => {
           if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
             e.stopPropagation()
@@ -152,7 +151,11 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     <DialogBeta.TextButton
       type="submit"
       form={formId}
-      disabled={isSubmitting || values.mattersID.length < MIN_USER_NAME_LENGTH}
+      disabled={
+        isSubmitting ||
+        values.mattersID.length < MIN_USER_NAME_LENGTH ||
+        values.mattersID.length > MAX_USER_NAME_LENGTH
+      }
       text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
