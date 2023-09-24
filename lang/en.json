@@ -1583,6 +1583,10 @@
   "sy+pv5": {
     "defaultMessage": "Email"
   },
+  "tBt9u0": {
+    "defaultMessage": "Sign in",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
   "tEeEJT": {
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"

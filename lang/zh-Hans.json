@@ -1583,6 +1583,10 @@
   "sy+pv5": {
     "defaultMessage": "邮箱"
   },
+  "tBt9u0": {
+    "defaultMessage": "登录",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"

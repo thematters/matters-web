@@ -314,7 +314,12 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!values.email || !values.password || isSubmitting}
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={
+        <FormattedMessage
+          defaultMessage="Sign in"
+          description="src/components/Forms/EmailLoginForm/index.tsx"
+        />
+      }
       loading={isSubmitting}
     />
   )
