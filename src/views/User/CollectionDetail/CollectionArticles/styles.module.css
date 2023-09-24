@@ -17,8 +17,7 @@
 
     color: var(--color-grey-darker);
 
-    &:hover,
-    &:focus {
+    &:hover {
       color: var(--color-matters-green);
       transition-property: color;
     }
