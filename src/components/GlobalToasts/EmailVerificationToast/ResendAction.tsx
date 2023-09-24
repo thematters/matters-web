@@ -65,7 +65,7 @@ const ResendAction = ({ initCountdown }: Props) => {
 
   if (countdown > 0) {
     return (
-      <span className={styles.resendButton}>
+      <span className={styles.resendCountButton}>
         {countdown}&nbsp;
         <FormattedMessage
           defaultMessage="Resend"
@@ -76,7 +76,7 @@ const ResendAction = ({ initCountdown }: Props) => {
   }
 
   return (
-    <span onClick={resend}>
+    <span onClick={resend} className={styles.resendButton}>
       <FormattedMessage defaultMessage="Resend" />
     </span>
   )
