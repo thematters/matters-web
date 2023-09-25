@@ -7,6 +7,7 @@ import { numAbbr, toPath } from '~/common/utils'
 import {
   Avatar,
   Button,
+  EditProfileDialog,
   Expandable,
   FollowUserButton,
   IconCamera24,
@@ -26,7 +27,6 @@ import {
 } from '../Badges'
 import CircleWidget from '../CircleWidget'
 import DropdownActions from '../DropdownActions'
-import { EditProfileDialog } from '../DropdownActions/EditProfileDialog'
 import { FollowersDialog } from '../FollowersDialog'
 import { FollowingDialog } from '../FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from '../gql'
