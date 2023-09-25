@@ -13,6 +13,7 @@ import { DocumentNode } from 'graphql'
 
 import { GQL_CONTEXT_PUBLIC_QUERY_KEY } from '~/common/enums'
 
+import { useRoute } from '../Hook'
 import { toastMutationErrors, ToastMutationErrorsOptions } from './error'
 
 /**
@@ -26,8 +27,12 @@ export const useMutation = <TData = any, TVariables = OperationVariables>(
   options?: MutationHookOptions<TData, TVariables>,
   customMutationProps?: CustomMutationProps
 ): MutationTuple<TData, TVariables> => {
+  const { isInPath } = useRoute()
+  const isInCallback = isInPath('CALLBACK_PROVIDER')
+  const shouldToast = !isInCallback
   const [mutate, result] = baseUseMutation(mutation, {
-    onError: (error) => toastMutationErrors(error, customMutationProps),
+    onError: (error) =>
+      toastMutationErrors(error, shouldToast, customMutationProps),
     ...options,
   })
 

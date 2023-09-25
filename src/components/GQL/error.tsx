@@ -238,8 +238,13 @@ export type ToastMutationErrorsOptions = {
 }
 export const toastMutationErrors = (
   error: ApolloError,
+  shouldToast: boolean,
   options?: ToastMutationErrorsOptions
 ) => {
+  if (!shouldToast) {
+    return
+  }
+
   let { showToast, toastType = 'error', customErrors } = options || {}
   showToast = typeof showToast === 'undefined' ? true : showToast
 
