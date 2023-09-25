@@ -488,6 +488,10 @@
   "D3idYv": {
     "defaultMessage": "Settings"
   },
+  "DUoV1W": {
+    "defaultMessage": "Over 140 words, current {numbers}",
+    "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
+  },
   "DYrDcG": {
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
@@ -1180,10 +1184,6 @@
   "cf37Zy": {
     "defaultMessage": "Add hash from IPFS into compatible reader such as",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
-  },
-  "cfL5uk": {
-    "defaultMessage": "Over 200 words, current {numbers}",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
   },
   "cg1VJ2": {
     "defaultMessage": "Connect Wallet"

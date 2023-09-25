@@ -488,6 +488,10 @@
   "D3idYv": {
     "defaultMessage": "设定"
   },
+  "DUoV1W": {
+    "defaultMessage": "已超过 140 字，目前 {numbers} 字",
+    "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
+  },
   "DYrDcG": {
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
@@ -1180,10 +1184,6 @@
   "cf37Zy": {
     "defaultMessage": "添加 IPFS 生成的 IPNS 指纹到阅读器，如：",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
-  },
-  "cfL5uk": {
-    "defaultMessage": "已超过 200 字，目前 {numbers} 字",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
   },
   "cg1VJ2": {
     "defaultMessage": "连接加密钱包"
