@@ -142,6 +142,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
           error={errors.mattersID}
           hintAlign="center"
           hintSpace="base"
+          hintSize="sm"
         />
       )}
     </Form>
