@@ -1383,6 +1383,10 @@
     "defaultMessage": "Articles has been collected",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "l9LpDx": {
+    "defaultMessage": "{q} - Matters Search",
+    "description": "src/views/Search/AggregateResults/Articles.tsx"
+  },
   "lI2l2/": {
     "defaultMessage": "Incorrect verification code. Please check your input, or try resend",
     "description": "CODE_INVALID"
@@ -1623,10 +1627,6 @@
   },
   "ub1kHa": {
     "defaultMessage": "Add to collection"
-  },
-  "uclzDH": {
-    "defaultMessage": "{q}: {totalCount, plural, =0 {} one {} other {# Results}} - Matters Search",
-    "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
   "ui1+QC": {
     "defaultMessage": "End of the results"
