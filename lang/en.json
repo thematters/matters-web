@@ -1572,6 +1572,10 @@
     "defaultMessage": "This Month",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "sg3nVO": {
+    "defaultMessage": "This email has been used, please go to login or try another one",
+    "description": "USER_EMAIL_EXISTS"
+  },
   "skbUBl": {
     "defaultMessage": "Log in",
     "description": "src/components/Buttons/Login/index.tsx"
@@ -1598,10 +1602,6 @@
   "tQimre": {
     "defaultMessage": "go to the homepage",
     "description": "src/views/Callback/GoogleCallback.tsx"
-  },
-  "tbHAOb": {
-    "defaultMessage": "This email has been used, please try another one",
-    "description": "USER_EMAIL_EXISTS"
   },
   "tzq2+W": {
     "defaultMessage": "Send",

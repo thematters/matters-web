@@ -137,7 +137,8 @@ export const ERROR_MESSAGES: { [key in ERROR_CODES]: MessageDescriptor } = {
     description: 'USER_EMAIL_INVALID',
   }),
   [ERROR_CODES.USER_EMAIL_EXISTS]: defineMessage({
-    defaultMessage: 'This email has been used, please try another one',
+    defaultMessage:
+      'This email has been used, please go to login or try another one',
     description: 'USER_EMAIL_EXISTS',
   }),
   [ERROR_CODES.USER_EMAIL_NOT_FOUND]: defineMessage({
