@@ -37,6 +37,10 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     viewer.userName && viewer.info.userNameEditable
   )
 
+  useEffect(() => {
+    setFieldValue('mattersID', userName)
+  }, [userName])
+
   const intl = useIntl()
   const {
     values,
@@ -52,7 +56,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
       mattersID: userName,
     },
     validateOnBlur: false,
-    validateOnChange: isLegacyUserConfirm,
+    validateOnChange: true,
     validate: ({ mattersID }) =>
       _pickBy({
         mattersID: validateUserName(mattersID, lang),
