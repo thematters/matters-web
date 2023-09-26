@@ -387,6 +387,10 @@
     "defaultMessage": "Payment suspended or returned by card issuer when there are doubts about the transaction",
     "description": "src/components/Transaction/index.tsx"
   },
+  "AEiogR": {
+    "defaultMessage": "This Google account is connected to a Matters account. Sign in to that account to disconnect it then try again",
+    "description": "USER_SOCIAL_ACCOUNT_EXISTS"
+  },
   "AGcU5J": {
     "defaultMessage": "Pin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"

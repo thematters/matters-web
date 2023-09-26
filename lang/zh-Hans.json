@@ -387,6 +387,10 @@
     "defaultMessage": "信用卡交易内容有疑虑时，发卡机构暂停或退回的款项",
     "description": "src/components/Transaction/index.tsx"
   },
+  "AEiogR": {
+    "defaultMessage": "该 Google 账号已关联至其他 Matters 账号，请登录该账号解绑后再试",
+    "description": "USER_SOCIAL_ACCOUNT_EXISTS"
+  },
   "AGcU5J": {
     "defaultMessage": "置顶",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"

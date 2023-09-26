@@ -153,6 +153,11 @@ export const ERROR_MESSAGES: { [key in ERROR_CODES]: MessageDescriptor } = {
     defaultMessage: 'Wallet is linked to a different account',
     description: 'CRYPTO_WALLET_EXISTS',
   }),
+  [ERROR_CODES.USER_SOCIAL_ACCOUNT_EXISTS]: defineMessage({
+    defaultMessage:
+      'This Google account is connected to a Matters account. Sign in to that account to disconnect it then try again',
+    description: 'USER_SOCIAL_ACCOUNT_EXISTS',
+  }),
   [ERROR_CODES.DUPLICATE_TAG]: defineMessage({
     defaultMessage: 'This tag is already taken',
     description: 'DUPLICATE_TAG',

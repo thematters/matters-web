@@ -387,6 +387,10 @@
     "defaultMessage": "信用卡交易內容有疑慮時，發卡機構暫停或退回的款項",
     "description": "src/components/Transaction/index.tsx"
   },
+  "AEiogR": {
+    "defaultMessage": "該 Google 帳號已關聯至其他 Matters 帳號，請登入該帳號解綁後再試",
+    "description": "USER_SOCIAL_ACCOUNT_EXISTS"
+  },
   "AGcU5J": {
     "defaultMessage": "置頂",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
