@@ -172,6 +172,11 @@ const DraftDetail = () => {
     cover?: string | null
     summary?: string | null
   }) => {
+    const isEmpty = Object.values(newDraft).every((x) => x === '')
+    if (isInNew && isEmpty) {
+      return
+    }
+
     try {
       if (draft?.publishState === 'published') {
         return
