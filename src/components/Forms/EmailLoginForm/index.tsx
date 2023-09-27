@@ -1,5 +1,4 @@
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -16,6 +15,7 @@ import {
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
+  signinCallbackUrl,
   validateEmail,
   // validatePassword,
 } from '~/common/utils'
@@ -24,16 +24,18 @@ import {
   AuthNormalFeed,
   AuthTabs,
   AuthWalletFeed,
-  Dialog,
+  DialogBeta,
   Form,
   IconLeft20,
   LanguageContext,
+  LanguageSwitch,
   Media,
   TextIcon,
   useCountdown,
   // toast,
   useMutation,
 } from '~/components'
+import { EMAIL_LOGIN } from '~/components/GQL/mutations/emailLogin'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { EmailLoginMutation, SendVerificationCodeMutation } from '~/gql/graphql'
 
@@ -46,9 +48,12 @@ const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
-  gotoResetPassword?: () => void
   gotoEmailSignup: () => void
   gotoWalletConnect: () => void
+
+  authFeedType: AuthFeedType
+  setAuthFeedType: (type: AuthFeedType) => void
+
   closeDialog: () => void
   back?: () => void
 }
@@ -58,31 +63,14 @@ interface FormValues {
   password: ''
 }
 
-export const EMAIL_LOGIN = gql`
-  mutation EmailLogin($input: EmailLoginInput!) {
-    emailLogin(input: $input) {
-      auth
-      token
-      user {
-        id
-        settings {
-          language
-        }
-        info {
-          group
-        }
-      }
-    }
-  }
-`
-
 export const EmailLoginForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
-  gotoResetPassword,
   gotoWalletConnect,
   gotoEmailSignup,
   closeDialog,
+  authFeedType,
+  setAuthFeedType,
   back,
 }) => {
   const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
@@ -93,9 +81,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const isInPage = purpose === 'page'
   const formId = 'email-login-form'
 
-  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>('normal')
-  const isNormal = authTypeFeed === 'normal'
-  const isWallet = authTypeFeed === 'wallet'
+  const isNormal = authFeedType === 'normal'
+  const isWallet = authFeedType === 'wallet'
 
   const [isSelectMethod, setIsSelectMethod] = useState(false)
   const [errorCode, setErrorCode] = useState<ERROR_CODES | null>(null)
@@ -117,7 +104,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     values,
     errors,
     touched,
-    handleBlur,
+    // handleBlur,
     handleChange,
     handleSubmit,
     setFieldError,
@@ -209,9 +196,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       return
     }
 
-    const redirectUrl = `${
-      window.location.origin
-    }/login?email=${encodeURIComponent(values.email)}`
+    const redirectUrl = signinCallbackUrl(values.email)
 
     await sendCode({
       variables: {
@@ -246,7 +231,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           })}
           value={values.email}
           error={errors.email}
-          onBlur={handleBlur}
+          // FIXME: handleBlur will cause the component to re-render
+          // onBlur={handleBlur}
           onChange={handleChange}
           spacingBottom="baseLoose"
           hasFooter={false}
@@ -264,7 +250,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           })}
           value={values.password}
           error={touched.password && errors.password}
-          onBlur={handleBlur}
+          // FIXME: handleBlur will cause the component to re-render
+          // onBlur={handleBlur}
           onChange={handleChange}
           spacingBottom="baseLoose"
           hasFooter={false}
@@ -323,7 +310,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <Dialog.TextButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
       disabled={!values.email || !values.password || isSubmitting}
@@ -335,11 +322,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   return (
     <>
       {!isSelectMethod && (
-        <Dialog.Header
+        <DialogBeta.Header
           title={<FormattedMessage defaultMessage="Sign In" />}
           hasSmUpTitle={false}
           leftBtn={
-            <Dialog.TextButton
+            <DialogBeta.TextButton
               text={<FormattedMessage defaultMessage="Back" />}
               color="greyDarker"
               onClick={() => {
@@ -352,14 +339,22 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content>
+      <DialogBeta.Content noMaxHeight={isInPage}>
         <Media at="sm">
           {isSelectMethod && (
-            <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
+            <AuthTabs
+              type={authFeedType}
+              setType={setAuthFeedType}
+              purpose={purpose}
+            />
           )}
         </Media>
         <Media greaterThan="sm">
-          <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
+          <AuthTabs
+            type={authFeedType}
+            setType={setAuthFeedType}
+            purpose={purpose}
+          />
         </Media>
         {isNormal && !isSelectMethod && <>{InnerForm}</>}
         {isNormal && isSelectMethod && (
@@ -369,14 +364,13 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           />
         )}
         {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
-      </Dialog.Content>
+      </DialogBeta.Content>
 
       {isNormal && !isSelectMethod && (
-        <Dialog.Footer
-          smUpSpaceBetween
+        <DialogBeta.Footer
           smUpBtns={
-            <>
-              <Dialog.TextButton
+            <section className={styles.footerBtns}>
+              <DialogBeta.TextButton
                 text={
                   <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
                     <FormattedMessage defaultMessage="Back" />
@@ -387,22 +381,26 @@ export const EmailLoginForm: React.FC<FormProps> = ({
                   setIsSelectMethod(true)
                 }}
               />
-
               {SubmitButton}
-            </>
+            </section>
           }
         />
       )}
-      {((isNormal && isSelectMethod) || isWallet) && (
-        <Dialog.Footer
+      {((isNormal && isSelectMethod) || isWallet) && !isInPage && (
+        <DialogBeta.Footer
           smUpBtns={
-            <Dialog.TextButton
+            <DialogBeta.TextButton
               color="greyDarker"
               text={<FormattedMessage defaultMessage="Close" />}
               onClick={closeDialog}
             />
           }
         />
+      )}
+      {isSelectMethod && isInPage && (
+        <section className={styles.footer}>
+          <LanguageSwitch />
+        </section>
       )}
     </>
   )

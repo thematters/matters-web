@@ -1,8 +1,10 @@
 import classNames from 'classnames'
+import { useContext } from 'react'
 
 import { analytics, formatAmount } from '~/common/utils'
 import {
   AddCreditDialog,
+  BindEmailHintDialog,
   CurrencyFormatter,
   Dropdown,
   IconArrowRight16,
@@ -13,6 +15,7 @@ import {
   PayoutDialog,
   TextIcon,
   Translate,
+  ViewerContext,
 } from '~/components'
 import { QuoteCurrency } from '~/gql/graphql'
 
@@ -30,13 +33,23 @@ interface ItemProps {
   openDialog: () => void
 }
 
-const TopUpItem = ({ openDialog }: ItemProps) => {
+const TopUpItem = ({
+  openDialog,
+  openBindEmailHintDialog,
+}: ItemProps & { openBindEmailHintDialog: () => void }) => {
+  const viewer = useContext(ViewerContext)
+  const hasEmail = !!viewer.info.email
+
   return (
     <Menu.Item
       text={<Translate id="topUp" />}
       icon={<IconWallet24 size="mdS" />}
       onClick={() => {
-        openDialog()
+        if (hasEmail) {
+          openDialog()
+        } else {
+          openBindEmailHintDialog()
+        }
         analytics.trackEvent('click_button', { type: 'top_up' })
       }}
     />
@@ -97,66 +110,81 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
   const Content = ({
     openAddCreditDialog,
     openPayoutDialog,
+    openBindEmailHintDialog,
   }: {
     openAddCreditDialog: () => void
     openPayoutDialog: () => void
+    openBindEmailHintDialog: () => void
   }) => (
     <Menu>
-      <TopUpItem openDialog={openAddCreditDialog} />
+      <TopUpItem
+        openDialog={openAddCreditDialog}
+        openBindEmailHintDialog={openBindEmailHintDialog}
+      />
       <PayoutItem openDialog={openPayoutDialog} canPayout={canPayout} />
     </Menu>
   )
 
   return (
-    <PayoutDialog hasStripeAccount={hasStripeAccount}>
-      {({ openDialog: openPayoutDialog }) => (
-        <AddCreditDialog>
-          {({ openDialog: openAddCreditDialog }) => (
-            <Dropdown
-              content={
-                <Content
-                  openAddCreditDialog={openAddCreditDialog}
-                  openPayoutDialog={openPayoutDialog}
-                />
-              }
-            >
-              {({ openDropdown, ref }) => (
-                <section
-                  className={classes}
-                  aria-haspopup="listbox"
-                  role="button"
-                  onClick={openDropdown}
-                  ref={ref}
-                >
-                  <TextIcon
-                    icon={<IconFiatCurrency40 size="xlM" />}
-                    size="md"
-                    spacing="xtight"
+    <BindEmailHintDialog>
+      {({ openDialog: openBindEmailHintDialog }) => {
+        return (
+          <PayoutDialog hasStripeAccount={hasStripeAccount}>
+            {({ openDialog: openPayoutDialog }) => (
+              <AddCreditDialog>
+                {({ openDialog: openAddCreditDialog }) => (
+                  <Dropdown
+                    content={
+                      <Content
+                        openAddCreditDialog={openAddCreditDialog}
+                        openPayoutDialog={openPayoutDialog}
+                        openBindEmailHintDialog={openBindEmailHintDialog}
+                      />
+                    }
                   >
-                    <Translate
-                      zh_hant="法幣"
-                      zh_hans="法币"
-                      en="Fiat Currency"
-                    />
-                  </TextIcon>
-                  <TextIcon
-                    icon={<IconArrowRight16 />}
-                    spacing="xtight"
-                    textPlacement="left"
-                  >
-                    <CurrencyFormatter
-                      value={formatAmount(balanceHKD)}
-                      currency="HKD"
-                      subCurrency={currency}
-                      subValue={formatAmount(balanceHKD * exchangeRate, 2)}
-                    />
-                  </TextIcon>
-                </section>
-              )}
-            </Dropdown>
-          )}
-        </AddCreditDialog>
-      )}
-    </PayoutDialog>
+                    {({ openDropdown, ref }) => (
+                      <section
+                        className={classes}
+                        aria-haspopup="listbox"
+                        role="button"
+                        onClick={openDropdown}
+                        ref={ref}
+                      >
+                        <TextIcon
+                          icon={<IconFiatCurrency40 size="xlM" />}
+                          size="md"
+                          spacing="xtight"
+                        >
+                          <Translate
+                            zh_hant="法幣"
+                            zh_hans="法币"
+                            en="Fiat Currency"
+                          />
+                        </TextIcon>
+                        <TextIcon
+                          icon={<IconArrowRight16 />}
+                          spacing="xtight"
+                          textPlacement="left"
+                        >
+                          <CurrencyFormatter
+                            value={formatAmount(balanceHKD)}
+                            currency="HKD"
+                            subCurrency={currency}
+                            subValue={formatAmount(
+                              balanceHKD * exchangeRate,
+                              2
+                            )}
+                          />
+                        </TextIcon>
+                      </section>
+                    )}
+                  </Dropdown>
+                )}
+              </AddCreditDialog>
+            )}
+          </PayoutDialog>
+        )
+      }}
+    </BindEmailHintDialog>
   )
 }

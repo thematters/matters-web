@@ -1,4 +1,8 @@
 {
+  "+51DoZ": {
+    "defaultMessage": "請先驗證郵箱",
+    "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
   "+63O1f": {
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "USER_PASSWORD_INVALID"
@@ -106,6 +110,10 @@
   "1Z1M77": {
     "defaultMessage": "尚無閱讀紀錄",
     "description": "src/views/Me/History/index.tsx"
+  },
+  "1hyiZ8": {
+    "defaultMessage": "確認 Matters ID",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "1qQzV0": {
     "defaultMessage": "免費邀請",
@@ -369,6 +377,9 @@
   "A6ozr9": {
     "defaultMessage": "選集名稱"
   },
+  "A6r2p1": {
+    "defaultMessage": "Enter Matters"
+  },
   "A7ugfn": {
     "defaultMessage": "更多操作"
   },
@@ -480,6 +491,10 @@
   "DYrDcG": {
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "Dq29Hb": {
+    "defaultMessage": "你尚未綁定電子郵件。 基於資金安全考慮，儲值需綁定郵箱。",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "DqQvtL": {
     "defaultMessage": "解除封鎖",
@@ -610,6 +625,9 @@
   "HkozYU": {
     "defaultMessage": "更換錢包",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "HnxG15": {
+    "defaultMessage": "設定"
   },
   "HxcjQl": {
     "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
@@ -747,6 +765,10 @@
     "defaultMessage": "操作失敗，請稍候重試",
     "description": "ACTION_FAILED"
   },
+  "Me4s4Q": {
+    "defaultMessage": "請先綁定電子郵件",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
+  },
   "Me5cJu": {
     "defaultMessage": "綁定錢包",
     "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
@@ -855,7 +877,7 @@
     "description": "src/components/ArticleDigest/Archive/index.tsx"
   },
   "ROPCC0": {
-    "defaultMessage": "作品被讚賞",
+    "defaultMessage": "請先綁定郵箱",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
   "Ro0CuW": {
@@ -1039,6 +1061,10 @@
     "defaultMessage": "錢包餘額不足",
     "description": "PAYMENT_BALANCE_INSUFFICIENT"
   },
+  "XfRKZY": {
+    "defaultMessage": "去綁定",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
+  },
   "XgdZSb": {
     "defaultMessage": "值得關注"
   },
@@ -1184,6 +1210,10 @@
   "d4waan": {
     "defaultMessage": "營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "dAvP6d": {
+    "defaultMessage": "尚無封鎖紀錄",
+    "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
   "dSjI7E": {
     "defaultMessage": "暫無法斷開錢包連結，因為你沒有其他可用於登錄的身份（電子郵件/數字錢包/社交帳號）。",
@@ -1729,6 +1759,10 @@
   "ySGgTo": {
     "defaultMessage": "添加精選",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "ySSF/a": {
+    "defaultMessage": "爲了保障馬特市市民的身份安全，我們升級了管理設定。請確認您的 Matters ID（確認後不可再次修改）",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "yToCTn": {
     "defaultMessage": "網路錯誤，請刷新頁面",

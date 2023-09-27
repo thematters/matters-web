@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Layout, Translate } from '~/components'
+import { PATHS } from '~/common/enums'
+import { Dialog, DialogBeta, Layout, Translate, useRoute } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -16,45 +17,61 @@ export const VerificationLinkSent = ({
   email?: string
 }) => {
   const isRegister = type === 'register'
+  const { router } = useRoute()
   const isInPage = purpose === 'page'
 
   if (isRegister) {
     return (
       <>
-        {isInPage && <Layout.Header left={<Layout.Header.Title id={type} />} />}
-
-        {closeDialog && (
-          <Dialog.Header
-            title={
-              <FormattedMessage
-                defaultMessage="Check your inbox"
-                description="src/components/Forms/Verification/LinkSent.tsx"
-              />
-            }
-            closeDialog={closeDialog}
-            closeText={<FormattedMessage defaultMessage="Close" />}
-          />
-        )}
-
-        <Dialog.Message>
-          <p>
+        <DialogBeta.Header
+          title={
             <FormattedMessage
-              defaultMessage="The login link has been sent to {email}"
+              defaultMessage="Check your inbox"
               description="src/components/Forms/Verification/LinkSent.tsx"
-              values={{
-                email: <span className={styles.email}>{email}</span>,
-              }}
             />
-          </p>
-        </Dialog.Message>
+          }
+          closeDialog={closeDialog}
+          closeText={<FormattedMessage defaultMessage="Close" />}
+        />
+
+        <DialogBeta.Content>
+          <DialogBeta.Content.Message>
+            <p>
+              <FormattedMessage
+                defaultMessage="The login link has been sent to {email}"
+                description="src/components/Forms/Verification/LinkSent.tsx"
+                values={{
+                  email: <span className={styles.email}>{email}</span>,
+                }}
+              />
+            </p>
+          </DialogBeta.Content.Message>
+        </DialogBeta.Content>
 
         {closeDialog && (
-          <Dialog.Footer
+          <DialogBeta.Footer
             smUpBtns={
-              <Dialog.TextButton
+              <DialogBeta.TextButton
                 text={<FormattedMessage defaultMessage="Close" />}
                 color="greyDarker"
                 onClick={closeDialog}
+              />
+            }
+          />
+        )}
+
+        {isInPage && (
+          <DialogBeta.Footer
+            btns={
+              <DialogBeta.RoundedButton
+                text={<FormattedMessage defaultMessage="Enter Matters" />}
+                onClick={() => router.push(PATHS.HOME)}
+              />
+            }
+            smUpBtns={
+              <DialogBeta.TextButton
+                text={<FormattedMessage defaultMessage="Enter Matters" />}
+                onClick={() => router.push(PATHS.HOME)}
               />
             }
           />

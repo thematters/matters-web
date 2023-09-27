@@ -1,4 +1,8 @@
 {
+  "+51DoZ": {
+    "defaultMessage": "Please verify email first",
+    "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
   "+63O1f": {
     "defaultMessage": "Incorrect email or password",
     "description": "USER_PASSWORD_INVALID"
@@ -106,6 +110,10 @@
   "1Z1M77": {
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
+  },
+  "1hyiZ8": {
+    "defaultMessage": "Confirm Matters ID",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "1qQzV0": {
     "defaultMessage": "Invitees",
@@ -369,6 +377,9 @@
   "A6ozr9": {
     "defaultMessage": "Collection name"
   },
+  "A6r2p1": {
+    "defaultMessage": "Enter Matters"
+  },
   "A7ugfn": {
     "defaultMessage": "More Actions"
   },
@@ -480,6 +491,10 @@
   "DYrDcG": {
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "Dq29Hb": {
+    "defaultMessage": "You have not connected your email yet. For security, email is required for top-up.",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "DqQvtL": {
     "defaultMessage": "Unblock",
@@ -610,6 +625,9 @@
   "HkozYU": {
     "defaultMessage": "Switch wallet",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "HnxG15": {
+    "defaultMessage": "Set"
   },
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
@@ -746,6 +764,10 @@
   "MPEeBy": {
     "defaultMessage": "Operation failed, please try again later.",
     "description": "ACTION_FAILED"
+  },
+  "Me4s4Q": {
+    "defaultMessage": "Please connect email",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "Me5cJu": {
     "defaultMessage": "Connect wallet",
@@ -1039,6 +1061,10 @@
     "defaultMessage": "Insufficient wallet balance.",
     "description": "PAYMENT_BALANCE_INSUFFICIENT"
   },
+  "XfRKZY": {
+    "defaultMessage": "Go to Settings",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
+  },
   "XgdZSb": {
     "defaultMessage": "Authors"
   },
@@ -1184,6 +1210,10 @@
   "d4waan": {
     "defaultMessage": "Income",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "dAvP6d": {
+    "defaultMessage": "No blocked users yet",
+    "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
   "dSjI7E": {
     "defaultMessage": "Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account).",
@@ -1729,6 +1759,10 @@
   "ySGgTo": {
     "defaultMessage": "Add Articles into Featured",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "ySSF/a": {
+    "defaultMessage": "In order to ensure the identity security of the citizens of Matters City, we've upgraded some security settings. Please confirm your Matters ID (cannot be modified once confirmation).",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "yToCTn": {
     "defaultMessage": "Please refresh the page and try again.",

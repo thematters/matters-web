@@ -5,28 +5,29 @@ import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
-  CALLBACK_PROVIDERS,
   KEYVALUE,
   MAX_CHANGE_EMAIL_TIME_DAILY,
   TOAST_SEND_EMAIL_VERIFICATION,
 } from '~/common/enums'
-import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
+import {
+  emailVerifyCallbackUrl,
+  parseFormSubmitErrors,
+  validateEmail,
+} from '~/common/utils'
 import {
   Dialog,
+  DialogBeta,
   Form,
   LanguageContext,
   useMutation,
   ViewerContext,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
-import { ROOT_QUERY_PRIVATE } from '~/components/Root/gql'
 import {
   SendVerificationCodeMutation,
   SetEmailMutation,
   VerificationCodeType,
 } from '~/gql/graphql'
-
-import styles from './styles.module.css'
 
 interface FormProps {
   closeDialog: () => void
@@ -40,6 +41,13 @@ const SET_EMAIL = gql`
   mutation SetEmail($input: SetEmailInput!) {
     setEmail(input: $input) {
       id
+      info {
+        email
+        emailVerified
+      }
+      status {
+        changeEmailTimesLeft
+      }
     }
   }
 `
@@ -47,8 +55,7 @@ const SET_EMAIL = gql`
 const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const viewer = useContext(ViewerContext)
   const hasPassword = !!viewer.status?.hasEmailLoginPassword
-  // TODO: max change email limit
-  const editable = true
+  const editable = (viewer.status?.changeEmailTimesLeft as number) > 0
 
   const [set] = useMutation<SetEmailMutation>(SET_EMAIL, undefined, {
     showToast: false,
@@ -88,23 +95,9 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       }),
     onSubmit: async ({ email }, { setSubmitting, setFieldError }) => {
       try {
-        await set({
-          variables: {
-            input: {
-              email,
-            },
-          },
-          refetchQueries: [
-            {
-              query: ROOT_QUERY_PRIVATE,
-            },
-          ],
-        })
+        await set({ variables: { input: { email } } })
 
-        const redirectPath = `/callback/${CALLBACK_PROVIDERS.EmailVerification}`
-        const redirectUrl = `${
-          process.env.NEXT_PUBLIC_SITE_DOMAIN
-        }${redirectPath}?email=${encodeURIComponent(email)}`
+        const redirectUrl = emailVerifyCallbackUrl(email)
 
         await sendCode({
           variables: {
@@ -137,6 +130,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         type="email"
         name="email"
         required
+        autoFocus
         placeholder="Email"
         disabled={!editable}
         value={values.email}
@@ -153,7 +147,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   )
 
   const SubmitButton = (
-    <Dialog.TextButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
       disabled={
@@ -166,7 +160,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={
           <FormattedMessage
             defaultMessage="Email address"
@@ -177,10 +171,10 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         rightBtn={editable ? SubmitButton : undefined}
       />
 
-      {editable && hasPassword && (
-        <>
-          <Dialog.Message noSpacingBottom>
-            <p className={styles.hint}>
+      <DialogBeta.Content>
+        {editable && hasPassword && (
+          <DialogBeta.Content.Message spacingBottom>
+            <p>
               <FormattedMessage
                 defaultMessage="For security, we will {resetHint} for this. You can set your password again after verifying new email address."
                 description="src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -196,14 +190,12 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
                 }}
               />
             </p>
-          </Dialog.Message>
-        </>
-      )}
+          </DialogBeta.Content.Message>
+        )}
 
-      {!editable && (
-        <>
-          <Dialog.Message noSpacingBottom>
-            <p className={styles.hint}>
+        {!editable && (
+          <DialogBeta.Content.Message spacingBottom>
+            <p>
               <FormattedMessage
                 defaultMessage="Email can be modified up to {count} times per day."
                 description="src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -212,24 +204,39 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
                 }}
               />
             </p>
-          </Dialog.Message>
-        </>
+          </DialogBeta.Content.Message>
+        )}
+
+        {InnerForm}
+      </DialogBeta.Content>
+
+      {editable && (
+        <DialogBeta.Footer
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text={<FormattedMessage defaultMessage="Cancel" />}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+              {SubmitButton}
+            </>
+          }
+        />
       )}
-
-      <Dialog.Content>{InnerForm}</Dialog.Content>
-
-      <Dialog.Footer
-        smUpBtns={
-          <>
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
-              color="greyDarker"
-              onClick={closeDialog}
-            />
-            {editable && SubmitButton}
-          </>
-        }
-      />
+      {!editable && (
+        <DialogBeta.Footer
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text={<FormattedMessage defaultMessage="Close" />}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+            </>
+          }
+        />
+      )}
     </>
   )
 }

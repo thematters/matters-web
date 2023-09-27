@@ -1,7 +1,7 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -10,7 +10,7 @@ import {
   MIN_USER_NAME_LENGTH,
 } from '~/common/enums'
 import { normalizeUserName, validateUserName } from '~/common/utils'
-import { Dialog, Form, LanguageContext, Spacer } from '~/components'
+import { DialogBeta, Form, LanguageContext, ViewerContext } from '~/components'
 
 import Field from '../../Form/Field'
 import { QUERY_USER_NAME } from './gql'
@@ -27,11 +27,15 @@ interface FormValues {
 
 const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
   const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
 
   const client = useApolloClient()
 
   const maxUsername = MAX_USER_NAME_LENGTH
   const formId = 'edit-user-name-input'
+  const isLegacyUserConfirm = !!(
+    viewer.userName && viewer.info.userNameEditable
+  )
 
   const intl = useIntl()
   const {
@@ -41,18 +45,24 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     handleChange,
     handleSubmit,
     setFieldValue,
+    validateForm,
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
       userName: userName,
     },
     validateOnBlur: false,
-    validateOnChange: false,
+    validateOnChange: isLegacyUserConfirm,
     validate: ({ userName }) =>
       _pickBy({
         userName: validateUserName(userName, lang),
       }),
     onSubmit: async ({ userName }, { setSubmitting, setFieldError }) => {
+      if (isLegacyUserConfirm) {
+        gotoConfirm(userName)
+        return
+      }
+
       try {
         const { data } = await client.query({
           query: QUERY_USER_NAME,
@@ -78,6 +88,12 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
       }
     },
   })
+
+  useEffect(() => {
+    if (!isLegacyUserConfirm) return
+
+    validateForm()
+  }, [isLegacyUserConfirm])
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
@@ -114,6 +130,9 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
       <Field.Footer
         fieldMsgId={'field-msg-username'}
         hint={`${values.userName.length}/${maxUsername}`}
+        error={
+          errors.userName ? `${values.userName.length}/${maxUsername}` : ''
+        }
         hintAlign="right"
       />
       {errors.userName && (
@@ -128,7 +147,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
   )
 
   const SubmitButton = (
-    <Dialog.TextButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting || values.userName.length < MIN_USER_NAME_LENGTH}
@@ -139,30 +158,44 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={
-          <FormattedMessage
-            defaultMessage="Last step: Set Matters ID"
-            description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
-          />
+          isLegacyUserConfirm ? (
+            <FormattedMessage
+              defaultMessage="Confirm Matters ID"
+              description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
+            />
+          ) : (
+            <FormattedMessage
+              defaultMessage="Last step: Set Matters ID"
+              description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
+            />
+          )
         }
       />
+      <DialogBeta.Content>
+        <DialogBeta.Content.Message spacingBottom>
+          <p>
+            {isLegacyUserConfirm ? (
+              <FormattedMessage
+                defaultMessage="In order to ensure the identity security of the citizens of Matters City, we've upgraded some security settings. Please confirm your Matters ID (cannot be modified once confirmation)."
+                description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
+              />
+            ) : (
+              <FormattedMessage
+                defaultMessage="Matters ID is your unique identifier, and cannot be modified once set."
+                description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
+              />
+            )}
+          </p>
+        </DialogBeta.Content.Message>
+        {InnerForm}
+      </DialogBeta.Content>
 
-      <Dialog.Message>
-        <p>
-          <FormattedMessage
-            defaultMessage="Matters ID is your unique identifier, and cannot be modified once set."
-            description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
-          />
-        </p>
-      </Dialog.Message>
-      <Spacer size="base" />
-      <Dialog.Content>{InnerForm}</Dialog.Content>
-
-      <Dialog.Footer
+      <DialogBeta.Footer
         btns={
           <>
-            <Dialog.RoundedButton
+            <DialogBeta.RoundedButton
               type="submit"
               color="green"
               form={formId}

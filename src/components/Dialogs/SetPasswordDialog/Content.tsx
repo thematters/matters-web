@@ -12,14 +12,13 @@ import {
 } from '~/common/utils'
 import {
   Dialog,
+  DialogBeta,
   Form,
   LanguageContext,
-  Media,
   Spacer,
   toast,
   useMutation,
 } from '~/components'
-import { ROOT_QUERY_PRIVATE } from '~/components/Root/gql'
 import { SetPasswordMutation } from '~/gql/graphql'
 
 interface FormProps {
@@ -34,6 +33,12 @@ const SET_PASSWORD = gql`
   mutation SetPassword($input: SetPasswordInput!) {
     setPassword(input: $input) {
       id
+      info {
+        email
+      }
+      status {
+        hasEmailLoginPassword
+      }
     }
   }
 `
@@ -70,18 +75,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       }),
     onSubmit: async ({ password }, { setSubmitting, setFieldError }) => {
       try {
-        await set({
-          variables: {
-            input: {
-              password,
-            },
-          },
-          refetchQueries: [
-            {
-              query: ROOT_QUERY_PRIVATE,
-            },
-          ],
-        })
+        await set({ variables: { input: { password } } })
 
         // toast
         toast.success({
@@ -131,7 +125,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   )
 
   const SubmitButton = (
-    <Dialog.TextButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting || values.password.length < 8}
@@ -142,7 +136,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={
           <FormattedMessage
             defaultMessage="Login password"
@@ -153,21 +147,20 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Message>
-        <p>
-          <FormattedMessage
-            defaultMessage="Password must be at least 8 characters long, support letter, numbers and symbols."
-            description="src/components/Dialogs/SetPasswordDialog/Content.tsx"
-          />
-        </p>
-        <Media greaterThan="sm">
+      <DialogBeta.Content>
+        <DialogBeta.Content.Message>
+          <p>
+            <FormattedMessage
+              defaultMessage="Password must be at least 8 characters long, support letter, numbers and symbols."
+              description="src/components/Dialogs/SetPasswordDialog/Content.tsx"
+            />
+          </p>
           <Spacer size="base" />
-        </Media>
-      </Dialog.Message>
+        </DialogBeta.Content.Message>
+        {InnerForm}
+      </DialogBeta.Content>
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
-
-      <Dialog.Footer
+      <DialogBeta.Footer
         smUpBtns={
           <>
             <Dialog.TextButton

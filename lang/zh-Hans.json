@@ -1,4 +1,8 @@
 {
+  "+51DoZ": {
+    "defaultMessage": "请先验证邮箱",
+    "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
   "+63O1f": {
     "defaultMessage": "邮箱或密码错误",
     "description": "USER_PASSWORD_INVALID"
@@ -106,6 +110,10 @@
   "1Z1M77": {
     "defaultMessage": "尚无阅读记录",
     "description": "src/views/Me/History/index.tsx"
+  },
+  "1hyiZ8": {
+    "defaultMessage": "确认 Matters ID",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "1qQzV0": {
     "defaultMessage": "免费邀请",
@@ -369,6 +377,9 @@
   "A6ozr9": {
     "defaultMessage": "选集名称"
   },
+  "A6r2p1": {
+    "defaultMessage": "Enter Matters"
+  },
   "A7ugfn": {
     "defaultMessage": "更多操作"
   },
@@ -480,6 +491,10 @@
   "DYrDcG": {
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "Dq29Hb": {
+    "defaultMessage": "你尚未绑定邮箱。基于资金安全考虑，储值需绑定邮箱。",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "DqQvtL": {
     "defaultMessage": "解除屏蔽",
@@ -610,6 +625,9 @@
   "HkozYU": {
     "defaultMessage": "更换钱包",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "HnxG15": {
+    "defaultMessage": "设定"
   },
   "HxcjQl": {
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
@@ -746,6 +764,10 @@
   "MPEeBy": {
     "defaultMessage": "操作失败，请稍候重试",
     "description": "ACTION_FAILED"
+  },
+  "Me4s4Q": {
+    "defaultMessage": "请先绑定邮箱",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "Me5cJu": {
     "defaultMessage": "绑定钱包",
@@ -1039,6 +1061,10 @@
     "defaultMessage": "钱包余额不足",
     "description": "PAYMENT_BALANCE_INSUFFICIENT"
   },
+  "XfRKZY": {
+    "defaultMessage": "去绑定",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
+  },
   "XgdZSb": {
     "defaultMessage": "值得关注"
   },
@@ -1184,6 +1210,10 @@
   "d4waan": {
     "defaultMessage": "营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "dAvP6d": {
+    "defaultMessage": "尚无屏蔽记录",
+    "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
   "dSjI7E": {
     "defaultMessage": "暂无法断开钱包链接，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
@@ -1729,6 +1759,10 @@
   "ySGgTo": {
     "defaultMessage": "添加精选",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "ySSF/a": {
+    "defaultMessage": "为了保障马特市市民的身份安全，我们升级了管理设定。请确认您的 Matters ID（确认后不可再次修改）",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "yToCTn": {
     "defaultMessage": "网络错误，请刷新页面",

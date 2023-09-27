@@ -1,6 +1,25 @@
 .tabs {
   margin-bottom: var(--spacing-loose);
 
+  & .logo {
+    @mixin flex-start-center;
+
+    margin-top: var(--spacing-loose);
+    margin-bottom: var(--spacing-loose);
+
+    @media (--sm-up) {
+      justify-content: start;
+      margin-top: 0;
+    }
+
+    & svg {
+      width: 96px;
+      height: 20px;
+    }
+  }
+}
+
+.spacingTop {
   @media (--sm-up) {
     margin-top: var(--spacing-base);
   }

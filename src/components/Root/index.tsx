@@ -71,7 +71,9 @@ const Root = ({
   const isInAbout = isInPath('ABOUT')
   const isInMigration = isInPath('MIGRATION')
   const isInAuthCallback = isInPath('CALLBACK_PROVIDER')
-  const shouldApplyLayout = !isInAbout && !isInMigration && !isInAuthCallback
+  const isInAuth = isInPath('LOGIN') || isInPath('SIGNUP')
+  const shouldApplyLayout =
+    !isInAbout && !isInMigration && !isInAuthCallback && !isInAuth
 
   const { loading, data, error } =
     useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)
