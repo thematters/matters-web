@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { KEYVALUE } from '~/common/enums'
@@ -11,7 +11,6 @@ import {
   validatePassword,
 } from '~/common/utils'
 import {
-  Dialog,
   DialogBeta,
   Form,
   LanguageContext,
@@ -49,6 +48,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const [set] = useMutation<SetPasswordMutation>(SET_PASSWORD, undefined, {
     showToast: false,
   })
+  const [inputType, setInputType] = useState<'password' | 'text'>('password')
 
   const { lang } = useContext(LanguageContext)
 
@@ -99,10 +99,15 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     },
   })
 
+  useEffect(() => {
+    // Switch back to plaintext display
+    setInputType('text')
+  }, [])
+
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        type="text"
+        type={inputType}
         name="password"
         autoFocus
         required
@@ -163,7 +168,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       <DialogBeta.Footer
         smUpBtns={
           <>
-            <Dialog.TextButton
+            <DialogBeta.TextButton
               text={<FormattedMessage defaultMessage="Cancel" />}
               color="greyDarker"
               onClick={closeDialog}
