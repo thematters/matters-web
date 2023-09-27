@@ -164,14 +164,17 @@ export const AsideUserProfile = () => {
           {isInUserPage && isMe && (
             <EditProfileDialog user={user}>
               {({ openDialog: openEditProfileDialog }) => (
-                <button onClick={openEditProfileDialog}>
+                <span
+                  onClick={openEditProfileDialog}
+                  className={styles.meDisplayName}
+                >
                   <h1
                     className={styles.isInUserPageName}
                     data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
                   >
                     {user.displayName}
                   </h1>
-                </button>
+                </span>
               )}
             </EditProfileDialog>
           )}
