@@ -108,6 +108,9 @@ export enum TEST_ID {
   // Editor
   EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON = 'editor/search-select-form/dialog/add-button',
 
+  // Icons
+  ICON_SPINNER = 'icon/spinner',
+
   // misc
   SPINNER = 'spinner',
 }
