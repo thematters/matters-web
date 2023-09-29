@@ -1,15 +1,7 @@
 {
   "presets": [
     [
-      "next/babel",
-      {
-        "preset-env": {
-          "modules": false
-        },
-        "transform-runtime": {
-          "useESModules": false
-        },
-      }
+      "next/babel"
     ]
   ],
   "plugins": [
