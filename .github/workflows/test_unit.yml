@@ -1,0 +1,31 @@
+name: Test Unit
+
+on: push
+
+jobs:
+  unit:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.14'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Types (Develop)
+        if: github.base_ref != 'master'
+        run: npm run gen:type
+
+      - name: Generate Types (production)
+        if: github.base_ref == 'master'
+        run: npm run gen:type:prod
+
+      - name: Run unit tests
+        run: cp .env.dev .env.local && npm run test:unit
