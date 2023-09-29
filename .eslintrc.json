@@ -2,11 +2,13 @@
   "extends": [
     "next/core-web-vitals",
     "prettier",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "plugin:testing-library/react"
   ],
   "plugins": [
     "simple-import-sort",
-    "formatjs"
+    "formatjs",
+    "testing-library"
   ],
   "rules": {
     "simple-import-sort/imports": "error",
@@ -16,5 +18,14 @@
     "formatjs/no-offset": "error",
     "formatjs/enforce-default-message": "error",
     "formatjs/no-multiple-whitespaces": "error"
-  }
+  },
+  "overrides": [
+    // Only uses Testing Library lint rules in test files
+    {
+      "files": [
+        "**/*.test.{ts,tsx}"
+      ],
+      "extends": ["plugin:testing-library/react"]
+    }
+  ]
 }
