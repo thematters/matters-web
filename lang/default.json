@@ -387,6 +387,10 @@
     "defaultMessage": "Payment suspended or returned by card issuer when there are doubts about the transaction",
     "description": "src/components/Transaction/index.tsx"
   },
+  "AEiogR": {
+    "defaultMessage": "This Google account is connected to a Matters account. Sign in to that account to disconnect it then try again",
+    "description": "USER_SOCIAL_ACCOUNT_EXISTS"
+  },
   "AGcU5J": {
     "defaultMessage": "Pin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -487,6 +491,10 @@
   },
   "D3idYv": {
     "defaultMessage": "Settings"
+  },
+  "DUoV1W": {
+    "defaultMessage": "Over 140 words, current {numbers}",
+    "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
   "DYrDcG": {
     "defaultMessage": "Badges",
@@ -1181,10 +1189,6 @@
     "defaultMessage": "Add hash from IPFS into compatible reader such as",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
-  "cfL5uk": {
-    "defaultMessage": "Over 200 words, current {numbers}",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
-  },
   "cg1VJ2": {
     "defaultMessage": "Connect Wallet"
   },
@@ -1572,6 +1576,10 @@
     "defaultMessage": "This Month",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "sg3nVO": {
+    "defaultMessage": "This email has been used, please go to login or try another one",
+    "description": "USER_EMAIL_EXISTS"
+  },
   "skbUBl": {
     "defaultMessage": "Log in",
     "description": "src/components/Buttons/Login/index.tsx"
@@ -1582,6 +1590,10 @@
   },
   "sy+pv5": {
     "defaultMessage": "Email"
+  },
+  "tBt9u0": {
+    "defaultMessage": "Sign in",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "tEeEJT": {
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
@@ -1594,10 +1606,6 @@
   "tQimre": {
     "defaultMessage": "go to the homepage",
     "description": "src/views/Callback/GoogleCallback.tsx"
-  },
-  "tbHAOb": {
-    "defaultMessage": "This email has been used, please try another one",
-    "description": "USER_EMAIL_EXISTS"
   },
   "tzq2+W": {
     "defaultMessage": "Send",

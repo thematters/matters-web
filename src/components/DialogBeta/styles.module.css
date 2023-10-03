@@ -25,7 +25,7 @@
     background: var(--color-white);
   }
 
-  & :nth-last-child(1 of [data-dialog-entity]) {
+  & :nth-last-child(1 of [data-dialog-entity='true']) {
     @media (--sm-down) {
       padding-bottom: var(--spacing-xx-loose);
     }

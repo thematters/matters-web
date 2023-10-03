@@ -1,7 +1,7 @@
 .callback {
   @mixin flex-center-all;
 
-  height: 100vh;
+  height: 100dvh;
 
   & .logo {
     & svg {
@@ -36,6 +36,7 @@
       }
 
       & .content {
+        margin-top: var(--spacing-x-tight);
         font-size: var(--font-size-sm);
         line-height: 1.375rem;
         color: var(--color-grey-dark);

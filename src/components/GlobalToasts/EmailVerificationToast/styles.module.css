@@ -1,4 +1,4 @@
-.resendButton {
+.resendCountButton {
   display: inline-block;
   padding-left: var(--spacing-x-tight);
   font-size: var(--font-size-sm);
@@ -6,4 +6,8 @@
   color: var(--color-grey-darker);
   word-break: keep-all;
   cursor: not-allowed;
+}
+
+.resendButton {
+  color: var(--color-grey-countdown);
 }
