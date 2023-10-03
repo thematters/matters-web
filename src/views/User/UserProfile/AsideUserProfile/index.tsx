@@ -165,6 +165,7 @@ export const AsideUserProfile = () => {
             <EditProfileDialog user={user}>
               {({ openDialog: openEditProfileDialog }) => (
                 <span
+                  role="button"
                   onClick={openEditProfileDialog}
                   className={styles.meDisplayName}
                 >
