@@ -239,20 +239,22 @@ export const ERROR_MESSAGES: { [key in ERROR_CODES]: MessageDescriptor } = {
  */
 export type ToastMutationErrorsOptions = {
   showToast?: boolean
+  showLoginToast?: boolean
   toastType?: 'error' | 'success'
   customErrors?: { [key: string]: string | React.ReactNode }
 }
 export const toastMutationErrors = (
   error: ApolloError,
-  shouldToast: boolean,
   options?: ToastMutationErrorsOptions
 ) => {
-  if (!shouldToast) {
-    return
-  }
-
-  let { showToast, toastType = 'error', customErrors } = options || {}
+  let {
+    showToast,
+    showLoginToast,
+    toastType = 'error',
+    customErrors,
+  } = options || {}
   showToast = typeof showToast === 'undefined' ? true : showToast
+  showLoginToast = typeof showLoginToast === 'undefined' ? true : showLoginToast
 
   // Add info to Sentry
   import('@sentry/browser').then((Sentry) => {
@@ -282,7 +284,7 @@ export const toastMutationErrors = (
   const isForbidden = errorMap[ERROR_CODES.FORBIDDEN]
   const isTokenInvalid = errorMap[ERROR_CODES.TOKEN_INVALID]
 
-  if (isUnauthenticated || isForbidden || isTokenInvalid) {
+  if (showLoginToast && (isUnauthenticated || isForbidden || isTokenInvalid)) {
     toast[toastType]({
       message: customErrorMessage || <FormattedMessage {...errorMessage} />,
       actions: [
