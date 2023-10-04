@@ -47,3 +47,19 @@
     transition-property: color;
   }
 }
+
+.rightTextGreyDarker {
+  color: var(--color-grey-darker);
+}
+
+.rightTextGrey {
+  color: var(--color-grey);
+}
+
+.rightTextGreen {
+  color: var(--color-matters-green);
+}
+
+.rightTextBlack {
+  color: var(--color-black);
+}

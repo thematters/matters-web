@@ -1,4 +1,8 @@
 {
+  "+51DoZ": {
+    "defaultMessage": "请先验证邮箱",
+    "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
   "+63O1f": {
     "defaultMessage": "邮箱或密码错误",
     "description": "USER_PASSWORD_INVALID"
@@ -383,6 +387,10 @@
     "defaultMessage": "信用卡交易内容有疑虑时，发卡机构暂停或退回的款项",
     "description": "src/components/Transaction/index.tsx"
   },
+  "AEiogR": {
+    "defaultMessage": "该 Google 账号已关联至其他 Matters 账号，请登录该账号解绑后再试",
+    "description": "USER_SOCIAL_ACCOUNT_EXISTS"
+  },
   "AGcU5J": {
     "defaultMessage": "置顶",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -483,6 +491,10 @@
   },
   "D3idYv": {
     "defaultMessage": "设定"
+  },
+  "DUoV1W": {
+    "defaultMessage": "已超过 140 字，目前 {numbers} 字",
+    "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
   "DYrDcG": {
     "defaultMessage": "徽章",
@@ -1177,10 +1189,6 @@
     "defaultMessage": "添加 IPFS 生成的 IPNS 指纹到阅读器，如：",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
-  "cfL5uk": {
-    "defaultMessage": "已超过 200 字，目前 {numbers} 字",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
-  },
   "cg1VJ2": {
     "defaultMessage": "连接加密钱包"
   },
@@ -1568,6 +1576,10 @@
     "defaultMessage": "本月营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "sg3nVO": {
+    "defaultMessage": "邮箱已被使用，请前往登录或尝试另一个",
+    "description": "USER_EMAIL_EXISTS"
+  },
   "skbUBl": {
     "defaultMessage": "登录",
     "description": "src/components/Buttons/Login/index.tsx"
@@ -1578,6 +1590,10 @@
   },
   "sy+pv5": {
     "defaultMessage": "邮箱"
+  },
+  "tBt9u0": {
+    "defaultMessage": "登录",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已发布到分布式网络",
@@ -1590,10 +1606,6 @@
   "tQimre": {
     "defaultMessage": "前往首页",
     "description": "src/views/Callback/GoogleCallback.tsx"
-  },
-  "tbHAOb": {
-    "defaultMessage": "邮箱已被使用，请尝试另一个",
-    "description": "USER_EMAIL_EXISTS"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀请",

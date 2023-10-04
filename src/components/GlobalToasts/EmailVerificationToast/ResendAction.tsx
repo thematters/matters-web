@@ -2,11 +2,10 @@ import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
-  CALLBACK_PROVIDERS,
   OAUTH_STORAGE_SEND_EMAIL_CODE_COUNTDOWN,
   SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
-import { storage } from '~/common/utils'
+import { emailVerifyCallbackUrl, storage } from '~/common/utils'
 import { useCountdown, useMutation, ViewerContext } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import {
@@ -50,11 +49,7 @@ const ResendAction = ({ initCountdown }: Props) => {
   const resend = async () => {
     const email = viewer.info.email
 
-    const redirectPath = `/callback/${CALLBACK_PROVIDERS.EmailVerification}`
-    const redirectUrl = `${
-      process.env.NEXT_PUBLIC_SITE_DOMAIN
-    }${redirectPath}?email=${encodeURIComponent(email)}`
-
+    const redirectUrl = emailVerifyCallbackUrl(email)
     await sendCode({
       variables: {
         input: {
@@ -70,7 +65,7 @@ const ResendAction = ({ initCountdown }: Props) => {
 
   if (countdown > 0) {
     return (
-      <span className={styles.resendButton}>
+      <span className={styles.resendCountButton}>
         {countdown}&nbsp;
         <FormattedMessage
           defaultMessage="Resend"
@@ -81,7 +76,7 @@ const ResendAction = ({ initCountdown }: Props) => {
   }
 
   return (
-    <span onClick={resend}>
+    <span onClick={resend} className={styles.resendButton}>
       <FormattedMessage defaultMessage="Resend" />
     </span>
   )

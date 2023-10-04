@@ -106,6 +106,13 @@ export const Head: React.FC<HeadProps> = (props) => {
         key="favicon-64"
       />
       <link
+        rel="shortcut icon"
+        type="image/png"
+        href={IMAGE_FAVICON_64.src}
+        sizes="64x64"
+        key="favicon-wallet-64"
+      />
+      <link
         rel="search"
         title="Matters"
         href="/opensearch.xml"

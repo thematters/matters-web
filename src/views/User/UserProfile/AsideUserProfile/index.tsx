@@ -7,6 +7,7 @@ import { numAbbr, toPath } from '~/common/utils'
 import {
   Avatar,
   Button,
+  EditProfileDialog,
   Expandable,
   FollowUserButton,
   IconCamera24,
@@ -26,7 +27,6 @@ import {
 } from '../Badges'
 import CircleWidget from '../CircleWidget'
 import DropdownActions from '../DropdownActions'
-import { EditProfileDialog } from '../DropdownActions/EditProfileDialog'
 import { FollowersDialog } from '../FollowersDialog'
 import { FollowingDialog } from '../FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from '../gql'
@@ -164,14 +164,18 @@ export const AsideUserProfile = () => {
           {isInUserPage && isMe && (
             <EditProfileDialog user={user}>
               {({ openDialog: openEditProfileDialog }) => (
-                <button onClick={openEditProfileDialog}>
+                <span
+                  role="button"
+                  onClick={openEditProfileDialog}
+                  className={styles.meDisplayName}
+                >
                   <h1
                     className={styles.isInUserPageName}
                     data-test-id={TEST_ID.USER_PROFILE_DISPLAY_NAME}
                   >
                     {user.displayName}
                   </h1>
-                </button>
+                </span>
               )}
             </EditProfileDialog>
           )}

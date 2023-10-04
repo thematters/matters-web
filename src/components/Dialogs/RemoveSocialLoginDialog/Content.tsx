@@ -2,7 +2,7 @@ import _pickBy from 'lodash/pickBy'
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, toast, useMutation } from '~/components'
+import { DialogBeta, toast, useMutation } from '~/components'
 import { RemoveSocialLoginMutation, SocialAccountType } from '~/gql/graphql'
 
 import { REMOVE_SOCIAL_LOGIN } from './gql'
@@ -59,7 +59,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={
           <FormattedMessage
             defaultMessage="Disconnect from {type}"
@@ -70,35 +70,36 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
           />
         }
       />
-
-      <Dialog.Message>
-        <p>
-          {isConfirm && (
-            <FormattedMessage
-              defaultMessage="Do you want to disconnect from {type}?"
-              description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
-              values={{
-                type,
-              }}
-            />
-          )}
-          {isFailure && (
-            <FormattedMessage
-              defaultMessage="Unable to disconnect from {type} temporarily because you do not have any other log in methods (Email/Crypto wallet/Social account)."
-              description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
-              values={{
-                type,
-              }}
-            />
-          )}
-        </p>
-      </Dialog.Message>
+      <DialogBeta.Content>
+        <DialogBeta.Content.Message>
+          <p>
+            {isConfirm && (
+              <FormattedMessage
+                defaultMessage="Do you want to disconnect from {type}?"
+                description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+                values={{
+                  type,
+                }}
+              />
+            )}
+            {isFailure && (
+              <FormattedMessage
+                defaultMessage="Unable to disconnect from {type} temporarily because you do not have any other log in methods (Email/Crypto wallet/Social account)."
+                description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+                values={{
+                  type,
+                }}
+              />
+            )}
+          </p>
+        </DialogBeta.Content.Message>
+      </DialogBeta.Content>
 
       {isConfirm && (
-        <Dialog.Footer
+        <DialogBeta.Footer
           btns={
             <>
-              <Dialog.RoundedButton
+              <DialogBeta.RoundedButton
                 text={
                   <FormattedMessage
                     defaultMessage="Disconnect"
@@ -108,7 +109,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
                 loading={loading}
                 onClick={remove}
               />
-              <Dialog.RoundedButton
+              <DialogBeta.RoundedButton
                 text={<FormattedMessage defaultMessage="Close" />}
                 color="greyDarker"
                 onClick={closeDialog}
@@ -117,12 +118,12 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
           }
           smUpBtns={
             <>
-              <Dialog.TextButton
+              <DialogBeta.TextButton
                 text={<FormattedMessage defaultMessage="Cancel" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
-              <Dialog.TextButton
+              <DialogBeta.TextButton
                 text={
                   <FormattedMessage
                     defaultMessage="Disconnect"
@@ -138,10 +139,10 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
       )}
 
       {isFailure && (
-        <Dialog.Footer
+        <DialogBeta.Footer
           btns={
             <>
-              <Dialog.RoundedButton
+              <DialogBeta.RoundedButton
                 text={<FormattedMessage defaultMessage="Close" />}
                 color="greyDarker"
                 onClick={closeDialog}
@@ -150,7 +151,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
           }
           smUpBtns={
             <>
-              <Dialog.TextButton
+              <DialogBeta.TextButton
                 text={<FormattedMessage defaultMessage="Close" />}
                 color="greyDarker"
                 onClick={closeDialog}

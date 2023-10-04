@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { DialogBeta, Spinner, useDialogSwitch } from '~/components'
 
 interface SetEmailDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -15,15 +15,15 @@ const BaseSetEmailDialog = ({ children }: SetEmailDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <DialogBeta isOpen={show} onDismiss={closeDialog}>
         <DynamicContent closeDialog={closeDialog} />
-      </Dialog>
+      </DialogBeta>
     </>
   )
 }
 
 export const SetEmailDialog = (props: SetEmailDialogProps) => (
-  <Dialog.Lazy mounted={<BaseSetEmailDialog {...props} />}>
+  <DialogBeta.Lazy mounted={<BaseSetEmailDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
-  </Dialog.Lazy>
+  </DialogBeta.Lazy>
 )
