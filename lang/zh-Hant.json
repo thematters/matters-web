@@ -1383,6 +1383,10 @@
     "defaultMessage": "作品被關聯",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "l9LpDx": {
+    "defaultMessage": "{q} - Matters 搜尋",
+    "description": "src/views/Search/AggregateResults/Articles.tsx"
+  },
   "lI2l2/": {
     "defaultMessage": "驗證碼不正確，請檢查輸入內容或重新發送",
     "description": "CODE_INVALID"
@@ -1623,10 +1627,6 @@
   },
   "ub1kHa": {
     "defaultMessage": "加入選集"
-  },
-  "uclzDH": {
-    "defaultMessage": "{q}: {totalCount, plural, =0 {} other {# 條結果}} - Matters 搜尋",
-    "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
   "ui1+QC": {
     "defaultMessage": "已顯示所有結果"
