@@ -1383,6 +1383,10 @@
     "defaultMessage": "作品被关联",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "l9LpDx": {
+    "defaultMessage": "{q} - Matters 搜索",
+    "description": "src/views/Search/AggregateResults/Articles.tsx"
+  },
   "lI2l2/": {
     "defaultMessage": "验证码不正确，请检查输入内容或重新发送",
     "description": "CODE_INVALID"
@@ -1623,10 +1627,6 @@
   },
   "ub1kHa": {
     "defaultMessage": "加入选集"
-  },
-  "uclzDH": {
-    "defaultMessage": "{q}: {totalCount, plural, =0 {} other {# 条结果}} - Matters 搜索",
-    "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
   "ui1+QC": {
     "defaultMessage": "已显示所有结果"
