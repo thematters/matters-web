@@ -356,6 +356,9 @@
   "9J0iCw": {
     "defaultMessage": "已注销用户"
   },
+  "9Vkz9W": {
+    "defaultMessage": "图片面积不得超过 1 亿像素（如 10,000 x 10,000 像素）"
+  },
   "9mfw9c": {
     "defaultMessage": "钱包地址",
     "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
@@ -830,6 +833,9 @@
     "defaultMessage": "作品被赞赏",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "OyvGvT": {
+    "defaultMessage": "图片大小不得超过 5MB"
+  },
   "PLBmDT": {
     "defaultMessage": "登录密码",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1085,6 +1091,9 @@
   "Y+spJC": {
     "defaultMessage": "在你的围炉中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Y7N/Jg": {
+    "defaultMessage": "图片边长不得超过 12,000 像素"
   },
   "YPMn9n": {
     "defaultMessage": "请先登入再进行操作",
