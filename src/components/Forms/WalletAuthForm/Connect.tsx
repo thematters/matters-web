@@ -22,7 +22,7 @@ import {
 import {
   AuthFeedType,
   AuthTabs,
-  Dialog,
+  DialogBeta,
   IconLeft20,
   IconMetamask22,
   IconSpinner22,
@@ -252,12 +252,12 @@ const Connect: React.FC<FormProps> = ({
   return (
     <>
       {isLogin && (
-        <Dialog.Header
+        <DialogBeta.Header
           title={<>{isMetamask ? 'MetaMask' : 'WalletConnect'}</>}
           hasSmUpTitle={false}
           leftBtn={
             back ? (
-              <Dialog.TextButton
+              <DialogBeta.TextButton
                 text={<FormattedMessage defaultMessage="Back" />}
                 onClick={onBack}
                 color="greyDarker"
@@ -268,7 +268,7 @@ const Connect: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content>
+      <DialogBeta.Content>
         {isLogin && (
           <Media greaterThan="sm">
             <AuthTabs
@@ -303,14 +303,12 @@ const Connect: React.FC<FormProps> = ({
             />
           </span>
         </section>
-      </Dialog.Content>
+      </DialogBeta.Content>
 
-      <Dialog.Footer
-        smUpContentNoSpacingBottom={isInPage}
-        smUpSpaceBetween
+      <DialogBeta.Footer
         smUpBtns={
-          <>
-            <Dialog.TextButton
+          <section className={styles.footerSmUpBtns}>
+            <DialogBeta.TextButton
               text={
                 <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
                   <FormattedMessage
@@ -324,13 +322,13 @@ const Connect: React.FC<FormProps> = ({
             />
 
             {isInDialog && (
-              <Dialog.TextButton
+              <DialogBeta.TextButton
                 text={<FormattedMessage defaultMessage="Close" />}
                 color="greyDarker"
                 onClick={onCloseDialog}
               />
             )}
-          </>
+          </section>
         }
       />
     </>

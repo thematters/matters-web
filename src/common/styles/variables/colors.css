@@ -26,4 +26,7 @@
   --color-line-grey-light: rgb(0 0 0 / 8%);
   --color-line-grey: rgb(0 0 0 / 16%);
   --color-line-grey-dark: rgb(0 0 0 / 24%);
+
+  /* button */
+  --color-grey-countdown: #fff9;
 }

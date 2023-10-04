@@ -10,13 +10,7 @@ import {
   MIN_USER_NAME_LENGTH,
 } from '~/common/enums'
 import { normalizeUserName, validateUserName } from '~/common/utils'
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  Spacer,
-  ViewerContext,
-} from '~/components'
+import { DialogBeta, Form, LanguageContext, ViewerContext } from '~/components'
 
 import Field from '../../Form/Field'
 import { QUERY_USER_NAME } from './gql'
@@ -28,7 +22,7 @@ interface Props {
 }
 
 interface FormValues {
-  userName: string
+  mattersID: string
 }
 
 const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
@@ -43,11 +37,15 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     viewer.userName && viewer.info.userNameEditable
   )
 
+  useEffect(() => {
+    setFieldValue('mattersID', userName)
+  }, [userName])
+
   const intl = useIntl()
   const {
     values,
     errors,
-    handleBlur,
+    // handleBlur,
     handleChange,
     handleSubmit,
     setFieldValue,
@@ -55,31 +53,31 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
-      userName: userName,
+      mattersID: userName,
     },
     validateOnBlur: false,
-    validateOnChange: isLegacyUserConfirm,
-    validate: ({ userName }) =>
+    validateOnChange: true,
+    validate: ({ mattersID }) =>
       _pickBy({
-        userName: validateUserName(userName, lang),
+        mattersID: validateUserName(mattersID, lang),
       }),
-    onSubmit: async ({ userName }, { setSubmitting, setFieldError }) => {
-      if (isLegacyUserConfirm) {
-        gotoConfirm(userName)
+    onSubmit: async ({ mattersID }, { setSubmitting, setFieldError }) => {
+      if (isLegacyUserConfirm && viewer.userName === mattersID) {
+        gotoConfirm(mattersID)
         return
       }
 
       try {
         const { data } = await client.query({
           query: QUERY_USER_NAME,
-          variables: { userName },
+          variables: { userName: mattersID },
           fetchPolicy: 'network-only',
         })
         setSubmitting(false)
 
         if (!!data.user) {
           setFieldError(
-            'userName',
+            'mattersID',
             intl.formatMessage({
               defaultMessage: 'This ID has been taken, please try another one',
               description:
@@ -87,7 +85,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
             })
           )
         } else {
-          gotoConfirm(userName)
+          gotoConfirm(mattersID)
         }
       } catch (error) {
         setSubmitting(false)
@@ -105,18 +103,19 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
         type="text"
-        name="userName"
+        // Why not use userName, userName will trigger auto fill feature in safari
+        name="mattersID"
         required
         autoFocus
         placeholder={intl.formatMessage({
           defaultMessage: 'English letters, numbers, and underscores',
           description: 'src/components/Dialogs/SetUserNameDialog/Content.tsx',
         })}
-        value={values.userName}
-        error={errors.userName}
-        onBlur={handleBlur}
+        value={values.mattersID}
+        error={errors.mattersID}
+        // FIXME: handleBlur will cause the component to re-render
+        // onBlur={handleBlur}
         onChange={handleChange}
-        maxLength={maxUsername}
         onKeyDown={(e) => {
           if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
             e.stopPropagation()
@@ -127,7 +126,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
           return false
         }}
         onKeyUp={() => {
-          const v = normalizeUserName(values.userName)
+          const v = normalizeUserName(values.mattersID)
           setFieldValue('userName', v.slice(0, maxUsername))
         }}
         leftButton={<span className={styles.atFlag}>@</span>}
@@ -135,28 +134,33 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
       />
       <Field.Footer
         fieldMsgId={'field-msg-username'}
-        hint={`${values.userName.length}/${maxUsername}`}
+        hint={`${values.mattersID.length}/${maxUsername}`}
         error={
-          errors.userName ? `${values.userName.length}/${maxUsername}` : ''
+          errors.mattersID ? `${values.mattersID.length}/${maxUsername}` : ''
         }
         hintAlign="right"
       />
-      {errors.userName && (
+      {errors.mattersID && (
         <Field.Footer
           fieldMsgId={'field-msg-username-error'}
-          error={errors.userName}
+          error={errors.mattersID}
           hintAlign="center"
           hintSpace="base"
+          hintSize="sm"
         />
       )}
     </Form>
   )
 
   const SubmitButton = (
-    <Dialog.TextButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
-      disabled={isSubmitting || values.userName.length < MIN_USER_NAME_LENGTH}
+      disabled={
+        isSubmitting ||
+        values.mattersID.length < MIN_USER_NAME_LENGTH ||
+        values.mattersID.length > MAX_USER_NAME_LENGTH
+      }
       text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
@@ -164,7 +168,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={
           isLegacyUserConfirm ? (
             <FormattedMessage
@@ -179,34 +183,34 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
           )
         }
       />
+      <DialogBeta.Content>
+        <DialogBeta.Content.Message spacingBottom>
+          <p>
+            {isLegacyUserConfirm ? (
+              <FormattedMessage
+                defaultMessage="In order to ensure the identity security of the citizens of Matters City, we've upgraded some security settings. Please confirm your Matters ID (cannot be modified once confirmation)."
+                description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
+              />
+            ) : (
+              <FormattedMessage
+                defaultMessage="Matters ID is your unique identifier, and cannot be modified once set."
+                description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
+              />
+            )}
+          </p>
+        </DialogBeta.Content.Message>
+        {InnerForm}
+      </DialogBeta.Content>
 
-      <Dialog.Message>
-        <p>
-          {isLegacyUserConfirm ? (
-            <FormattedMessage
-              defaultMessage="In order to ensure the identity security of the citizens of Matters City, we've upgraded some security settings. Please confirm your Matters ID (cannot be modified once confirmation)."
-              description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
-            />
-          ) : (
-            <FormattedMessage
-              defaultMessage="Matters ID is your unique identifier, and cannot be modified once set."
-              description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
-            />
-          )}
-        </p>
-      </Dialog.Message>
-      <Spacer size="base" />
-      <Dialog.Content>{InnerForm}</Dialog.Content>
-
-      <Dialog.Footer
+      <DialogBeta.Footer
         btns={
           <>
-            <Dialog.RoundedButton
+            <DialogBeta.RoundedButton
               type="submit"
               color="green"
               form={formId}
               disabled={
-                isSubmitting || values.userName.length < MIN_USER_NAME_LENGTH
+                isSubmitting || values.mattersID.length < MIN_USER_NAME_LENGTH
               }
               text={<FormattedMessage defaultMessage="Confirm" />}
               loading={isSubmitting}

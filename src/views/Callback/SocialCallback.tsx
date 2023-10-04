@@ -48,11 +48,17 @@ const SocialCallback = ({ type }: Props) => {
   const isLoginType = oauthType === OAUTH_TYPE.login
   const isBindType = oauthType === OAUTH_TYPE.bind
   const code = getQuery('code')
+  const error = getQuery('error')
   useEffect(() => {
     const localState = storage.get(OAUTH_STORAGE_STATE)
     const localNonce = storage.get(OAUTH_STORAGE_NONCE)
     const localCodeVerifier = storage.get(OAUTH_STORAGE_CODE_VERIFIER)
     const localPath = storage.get(OAUTH_STORAGE_PATH)
+    if (!!error) {
+      window.location.href = localPath
+      return
+    }
+
     if (localState !== state) {
       setHasError(true)
     }

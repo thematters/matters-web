@@ -7,7 +7,8 @@ import { SettingsButton } from '../../Button'
 
 const Password = () => {
   const viewer = useContext(ViewerContext)
-  const hasEmail = !!viewer.info.email && !!viewer.info.emailVerified
+  const hasEmail = !!viewer.info.email
+  const isEmailVerified = !!viewer.info.emailVerified
   const hasPassword = !!viewer.status?.hasEmailLoginPassword
 
   return (
@@ -23,7 +24,12 @@ const Password = () => {
             }
             rightText={
               hasEmail ? (
-                hasPassword ? (
+                !isEmailVerified ? (
+                  <FormattedMessage
+                    defaultMessage="Please verify email first"
+                    description="src/views/Me/Settings/Settings/Password/index.tsx"
+                  />
+                ) : hasPassword ? (
                   <FormattedMessage defaultMessage="Change" />
                 ) : undefined
               ) : (
@@ -33,10 +39,16 @@ const Password = () => {
                 />
               )
             }
-            rightTextColor={!hasEmail ? 'grey' : undefined}
-            onClick={hasEmail && hasPassword ? openDialog : undefined}
+            rightTextColor={
+              !hasEmail || (hasEmail && !isEmailVerified) ? 'grey' : undefined
+            }
+            onClick={
+              hasEmail && isEmailVerified && hasPassword
+                ? openDialog
+                : undefined
+            }
             right={
-              hasEmail && !hasPassword ? (
+              hasEmail && isEmailVerified && !hasPassword ? (
                 <SettingsButton onClick={openDialog}>
                   <FormattedMessage defaultMessage="Set" />
                 </SettingsButton>

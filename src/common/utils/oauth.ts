@@ -4,6 +4,7 @@ import {
   CALLBACK_PROVIDERS,
   OAUTH_SCOPE_TREE,
   OAUTH_TYPE,
+  PATHS,
 } from '~/common/enums'
 
 export const toReadableScope = ({
@@ -85,14 +86,23 @@ export const facebookOauthUrl = async (type: OauthType) => {
   return url
 }
 
-export const signupCallabckUrl = (email: string) => {
+export const signupCallbackUrl = (email: string) => {
   return `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${
     CALLBACK_PROVIDERS.EmailSignup
   }?email=${encodeURIComponent(email)}`
 }
 
-export const signinCallabckUrl = (email: string) => {
+export const signinCallbackUrl = (email: string) => {
   return `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${
     CALLBACK_PROVIDERS.EmailSignin
   }?email=${encodeURIComponent(email)}`
+}
+
+export const emailVerifyCallbackUrl = (email: string) => {
+  const redirectPath = `/callback/${CALLBACK_PROVIDERS.EmailVerification}`
+  const host = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`
+  const redirectUrl = `${host}${redirectPath}?email=${encodeURIComponent(
+    email
+  )}&target=${encodeURIComponent(host)}${encodeURIComponent(PATHS.ME_SETTINGS)}`
+  return redirectUrl
 }

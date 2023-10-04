@@ -10,7 +10,7 @@ import {
 import { WalletType } from '~/common/utils'
 import {
   AuthFeedType,
-  Dialog,
+  DialogBeta,
   ReCaptchaProvider,
   Spinner,
   useDialogSwitch,
@@ -90,7 +90,11 @@ const BaseUniversalAuthDialog = () => {
   )
 
   return (
-    <Dialog isOpen={show} onDismiss={closeDialog} testId={TEST_ID.DIALOG_AUTH}>
+    <DialogBeta
+      isOpen={show}
+      onDismiss={closeDialog}
+      testId={TEST_ID.DIALOG_AUTH}
+    >
       {currStep === 'select-login-method' && (
         <DynamicSelectAuthMethodForm
           purpose="dialog"
@@ -166,7 +170,7 @@ const BaseUniversalAuthDialog = () => {
           email={email}
         />
       )}
-    </Dialog>
+    </DialogBeta>
   )
 }
 
@@ -182,9 +186,9 @@ const UniversalAuthDialog = () => {
   }
 
   return (
-    <Dialog.Lazy mounted={<BaseUniversalAuthDialog />}>
+    <DialogBeta.Lazy mounted={<BaseUniversalAuthDialog />}>
       {({ openDialog }) => <Children openDialog={openDialog} />}
-    </Dialog.Lazy>
+    </DialogBeta.Lazy>
   )
 }
 

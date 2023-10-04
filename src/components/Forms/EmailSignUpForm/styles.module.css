@@ -2,3 +2,9 @@
   padding: var(--spacing-base);
   text-align: center;
 }
+
+.footerBtns {
+  @mixin flex-center-space-between;
+
+  flex: 1;
+}

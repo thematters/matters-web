@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { KEYVALUE } from '~/common/enums'
@@ -11,10 +11,9 @@ import {
   validatePassword,
 } from '~/common/utils'
 import {
-  Dialog,
+  DialogBeta,
   Form,
   LanguageContext,
-  Media,
   Spacer,
   toast,
   useMutation,
@@ -49,6 +48,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const [set] = useMutation<SetPasswordMutation>(SET_PASSWORD, undefined, {
     showToast: false,
   })
+  const [inputType, setInputType] = useState<'password' | 'text'>('password')
 
   const { lang } = useContext(LanguageContext)
 
@@ -58,7 +58,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     values,
     errors,
     touched,
-    handleBlur,
+    // handleBlur,
     handleChange,
     handleSubmit,
     setFieldValue,
@@ -99,17 +99,22 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     },
   })
 
+  useEffect(() => {
+    // Switch back to plaintext display
+    setInputType('text')
+  }, [])
+
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        type="text"
+        type={inputType}
         name="password"
         autoFocus
         required
         placeholder={intl.formatMessage({ defaultMessage: 'Password' })}
         value={values.password}
         error={touched.password && errors.password}
-        onBlur={handleBlur}
+        // onBlur={handleBlur}
         onChange={handleChange}
         onKeyDown={(e) => {
           if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
@@ -125,7 +130,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   )
 
   const SubmitButton = (
-    <Dialog.TextButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting || values.password.length < 8}
@@ -136,7 +141,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
 
   return (
     <>
-      <Dialog.Header
+      <DialogBeta.Header
         title={
           <FormattedMessage
             defaultMessage="Login password"
@@ -147,24 +152,23 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Message>
-        <p>
-          <FormattedMessage
-            defaultMessage="Password must be at least 8 characters long, support letter, numbers and symbols."
-            description="src/components/Dialogs/SetPasswordDialog/Content.tsx"
-          />
-        </p>
-        <Media greaterThan="sm">
+      <DialogBeta.Content>
+        <DialogBeta.Content.Message>
+          <p>
+            <FormattedMessage
+              defaultMessage="Password must be at least 8 characters long, support letter, numbers and symbols."
+              description="src/components/Dialogs/SetPasswordDialog/Content.tsx"
+            />
+          </p>
           <Spacer size="base" />
-        </Media>
-      </Dialog.Message>
+        </DialogBeta.Content.Message>
+        {InnerForm}
+      </DialogBeta.Content>
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
-
-      <Dialog.Footer
+      <DialogBeta.Footer
         smUpBtns={
           <>
-            <Dialog.TextButton
+            <DialogBeta.TextButton
               text={<FormattedMessage defaultMessage="Cancel" />}
               color="greyDarker"
               onClick={closeDialog}

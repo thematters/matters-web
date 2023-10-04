@@ -95,10 +95,18 @@
   gap: var(--spacing-tight);
   align-self: stretch;
   height: 6.88rem;
-  margin-bottom: var(--spacing-loose);
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
   color: var(--color-grey-darker);
   background: var(--color-green-lighter);
   border-radius: 0.5rem;
+
+  @media (--sm-up) {
+    margin-bottom: var(--spacing-xx-tight);
+  }
+}
+
+.footerSmUpBtns {
+  flex: 1;
+  @mixin flex-center-space-between;
 }

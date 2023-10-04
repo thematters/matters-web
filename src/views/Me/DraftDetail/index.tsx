@@ -137,8 +137,13 @@ const DraftDetail = () => {
     draft?.content && stripHtml(draft.content).trim().length > 0
   const hasTitle = draft?.title && draft.title.length > 0
   const isUnpublished = draft?.publishState === 'unpublished'
-  const publishable =
-    id && isUnpublished && hasContent && hasTitle && hasValidSummary
+  const publishable = !!(
+    id &&
+    isUnpublished &&
+    hasContent &&
+    hasTitle &&
+    hasValidSummary
+  )
 
   const upload = async (input: { [key: string]: any }) => {
     const result = await singleFileUpload({
@@ -167,6 +172,11 @@ const DraftDetail = () => {
     cover?: string | null
     summary?: string | null
   }) => {
+    const isEmpty = Object.values(newDraft).every((x) => x === '')
+    if (isInNew && isEmpty) {
+      return
+    }
+
     try {
       if (draft?.publishState === 'published') {
         return

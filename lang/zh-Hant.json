@@ -1,4 +1,8 @@
 {
+  "+51DoZ": {
+    "defaultMessage": "請先驗證郵箱",
+    "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
   "+63O1f": {
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "USER_PASSWORD_INVALID"
@@ -383,6 +387,10 @@
     "defaultMessage": "信用卡交易內容有疑慮時，發卡機構暫停或退回的款項",
     "description": "src/components/Transaction/index.tsx"
   },
+  "AEiogR": {
+    "defaultMessage": "該 Google 帳號已關聯至其他 Matters 帳號，請登入該帳號解綁後再試",
+    "description": "USER_SOCIAL_ACCOUNT_EXISTS"
+  },
   "AGcU5J": {
     "defaultMessage": "置頂",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -483,6 +491,10 @@
   },
   "D3idYv": {
     "defaultMessage": "設定"
+  },
+  "DUoV1W": {
+    "defaultMessage": "已超過 140 字，目前 {numbers} 字",
+    "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
   "DYrDcG": {
     "defaultMessage": "徽章",
@@ -1177,10 +1189,6 @@
     "defaultMessage": "添加 IPFS 生成的 IPNS 指紋到閱讀器，如：",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
-  "cfL5uk": {
-    "defaultMessage": "已超過 200 字，目前 {numbers} 字",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
-  },
   "cg1VJ2": {
     "defaultMessage": "連接加密錢包"
   },
@@ -1442,7 +1450,7 @@
     "description": "CODE_INACTIVE"
   },
   "n2Sc6g": {
-    "defaultMessage": "個人信息",
+    "defaultMessage": "個人資料",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
   },
   "n3shsQ": {
@@ -1568,6 +1576,10 @@
     "defaultMessage": "本月營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "sg3nVO": {
+    "defaultMessage": "郵箱已被使用，請前往登入或嘗試另一個",
+    "description": "USER_EMAIL_EXISTS"
+  },
   "skbUBl": {
     "defaultMessage": "登入",
     "description": "src/components/Buttons/Login/index.tsx"
@@ -1578,6 +1590,10 @@
   },
   "sy+pv5": {
     "defaultMessage": "郵件地址"
+  },
+  "tBt9u0": {
+    "defaultMessage": "登入",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已發布到分佈式網絡",
@@ -1590,10 +1606,6 @@
   "tQimre": {
     "defaultMessage": "前往首頁",
     "description": "src/views/Callback/GoogleCallback.tsx"
-  },
-  "tbHAOb": {
-    "defaultMessage": "郵件地址已被使用，請嘗試另一個",
-    "description": "USER_EMAIL_EXISTS"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
