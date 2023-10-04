@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   COOKIE_LANGUAGE,
@@ -14,7 +14,12 @@ import {
   OAUTH_TYPE,
 } from '~/common/enums'
 import { analytics, setCookies, storage } from '~/common/utils'
-import { getErrorCodes, useMutation, useRoute } from '~/components'
+import {
+  getErrorCodes,
+  LanguageContext,
+  useMutation,
+  useRoute,
+} from '~/components'
 import {
   AddSocialLoginMutation,
   SocialAccountType,
@@ -41,6 +46,8 @@ const SocialCallback = ({ type }: Props) => {
       showToast: false,
     }
   )
+  const { lang } = useContext(LanguageContext)
+
   const [hasError, setHasError] = useState(false)
   const { getQuery } = useRoute()
   const state = getQuery('state')
@@ -73,6 +80,7 @@ const SocialCallback = ({ type }: Props) => {
                 nonce: localNonce,
                 codeVerifier: localCodeVerifier,
                 authorizationCode: code,
+                language: lang,
               },
             },
           })
