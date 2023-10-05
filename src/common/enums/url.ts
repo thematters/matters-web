@@ -11,6 +11,7 @@ export const URL_ME_SETTINGS = {
 }
 
 export const URL_COLLECTION_DETAIL = {
+  // ?sort=seq:asc,date:dsc
   SORTER_KEY: 'sort',
   SORTER_SEPARATOR: ',',
   SORTER_TYPE_SEPARATOR: ':',
