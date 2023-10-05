@@ -189,7 +189,7 @@ const Connect: React.FC<FormProps> = ({
         if (isLogin) {
           // confirm auth
           const { data: loginData } = await walletLogin({
-            variables,
+            variables: { input: { ...variables.input, language: lang } },
           })
 
           const token = loginData?.walletLogin.token || ''
@@ -216,9 +216,7 @@ const Connect: React.FC<FormProps> = ({
         }
 
         if (isConnect) {
-          await addWalletLogin({
-            variables: variables,
-          })
+          await addWalletLogin({ variables })
 
           toast.success({
             message: (

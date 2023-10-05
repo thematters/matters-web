@@ -2,7 +2,7 @@
   @mixin flex-center-space-between;
 
   font-size: var(--font-size-sm);
-  color: var(--color-grey);
+  color: var(--color-grey-dark);
 
   & .right {
     word-break: keep-all;
