@@ -127,7 +127,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       try {
         setIsSubmitting(true)
         const { data } = await login({
-          variables: { input: { email, passwordOrCode: password } },
+          variables: {
+            input: { email, passwordOrCode: password, language: lang },
+          },
         })
 
         const token = data?.emailLogin.token || ''
