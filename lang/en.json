@@ -356,6 +356,9 @@
   "9J0iCw": {
     "defaultMessage": "Deleted user"
   },
+  "9Vkz9W": {
+    "defaultMessage": "Maximum image area is limited to 100 megapixels (for example, 10,000×10,000 pixels)."
+  },
   "9mfw9c": {
     "defaultMessage": "Wallet address",
     "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
@@ -838,6 +841,9 @@
     "defaultMessage": "New likes",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "OyvGvT": {
+    "defaultMessage": "Images have a 5 megabyte (MB) size limit."
+  },
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1093,6 +1099,9 @@
   "Y+spJC": {
     "defaultMessage": "commented in your circle broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Y7N/Jg": {
+    "defaultMessage": "Maximum image dimension is 12,000 pixels."
   },
   "YPMn9n": {
     "defaultMessage": "Please log in.",

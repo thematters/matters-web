@@ -1,3 +1,4 @@
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const site_domain_tld =
     process.env.NEXT_PUBLIC_SITE_DOMAIN_TLD || 'matters.town',
   site_domain_tld_old =
@@ -70,6 +71,13 @@ const IMG_SRC = [
     site_domain_tld_old
   ),
 
+  // For image validation
+  // @see {@url src/common/utils/form/image.tsx}
+  'blob:',
+  `*.${site_domain_tld}`,
+  isProd ? undefined : 'localhost',
+  isProd ? undefined : '127.0.0.1',
+
   // Alchemy NFT CDN
   'nft-cdn.alchemy.com',
 
@@ -104,6 +112,9 @@ const CONNECT_SRC = [
     site_domain_tld,
     site_domain_tld_old
   ),
+
+  // Cloudflare Image Upload
+  'upload.imagedelivery.net',
 
   // Sentry
   '*.ingest.sentry.io',
