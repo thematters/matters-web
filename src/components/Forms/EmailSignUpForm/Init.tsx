@@ -111,6 +111,7 @@ const Init: React.FC<FormProps> = ({
                   ? `${reCaptchaToken} ${turnstileToken}`
                   : reCaptchaToken,
               redirectUrl,
+              language: lang,
             },
           },
         })
