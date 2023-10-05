@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { URL_COLLECTION_DETAIL } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { analytics, parseSorter, stringifySorter } from '~/common/utils'
 import {
   ArticleDigestFeed,
   DateTime,
@@ -33,7 +33,7 @@ interface CollectionArticlesProps {
   collection: CollectionArticlesCollectionFragment
 }
 
-type SorterSequenceType = 'normal' | 'reverse'
+type SorterSequenceType = 'asc' | 'dsc'
 
 const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
   const viewer = useContext(ViewerContext)
@@ -41,35 +41,42 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
 
-  let sorterSequence = getQuery(
-    URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key
-  ) as SorterSequenceType
+  let sorter = parseSorter(getQuery(URL_COLLECTION_DETAIL.SORTER_KEY))
+
+  let sorterSequence = sorter[URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key]
+
   if (
-    sorterSequence !== URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.normal &&
-    sorterSequence !== URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.reverse
+    sorterSequence !== URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.DSC &&
+    sorterSequence !== URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.ASC
   ) {
     sorterSequence = URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value
-      .normal as SorterSequenceType
+      .DSC as SorterSequenceType
   }
   const [sequence, setSequence] = useState<SorterSequenceType>(sorterSequence)
   const isSequenceNormal =
-    sequence === URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.normal
+    sequence === URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.DSC
   const isSequenceReverse =
-    sequence === URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.reverse
+    sequence === URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.ASC
 
-  const { articleList: articles, updatedAt } = collection
-
-  const changeSequence = (newSequence: SorterSequenceType) => {
+  const updateSorter = (key: string, value: string) => {
+    sorter[key] = value
     // Using setQuery will encode the URL, it was ugly.
     // eg: /@Matty/Collection --> /%40Matty/Collection
     // setQuery(URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key, newSequence)
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
-    urlParams.set(URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key, newSequence)
-    router.push(`${window.location.pathname}?${urlParams.toString()}`)
+    urlParams.set(URL_COLLECTION_DETAIL.SORTER_KEY, stringifySorter(sorter))
+    router.push(
+      `${window.location.pathname}?${decodeURIComponent(urlParams.toString())}`
+    )
+  }
 
+  const changeSequence = (newSequence: SorterSequenceType) => {
+    updateSorter(URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key, newSequence)
     setSequence(newSequence)
   }
+
+  const { articleList: articles, updatedAt } = collection
 
   // filter out inactive articles for local updating
   // at ArchiveArticle/Dialog.tsx
@@ -103,12 +110,12 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
             if (isSequenceNormal) {
               changeSequence(
                 URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value
-                  .reverse as SorterSequenceType
+                  .ASC as SorterSequenceType
               )
             } else if (isSequenceReverse) {
               changeSequence(
                 URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value
-                  .normal as SorterSequenceType
+                  .DSC as SorterSequenceType
               )
             }
           }}

@@ -11,8 +11,11 @@ export const URL_ME_SETTINGS = {
 }
 
 export const URL_COLLECTION_DETAIL = {
+  SORTER_KEY: 'sort',
+  SORTER_SEPARATOR: ',',
+  SORTER_TYPE_SEPARATOR: ':',
   SORTER_SEQUENCE: {
-    key: 'sorter-sequence',
-    value: { normal: 'normal', reverse: 'reverse' },
+    key: 'seq',
+    value: { ASC: 'asc', DSC: 'dsc' },
   },
 }
