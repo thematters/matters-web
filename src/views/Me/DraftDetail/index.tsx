@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import _omit from 'lodash/omit'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
@@ -22,10 +23,16 @@ import {
   useUnloadConfirm,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
-import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import {
+  DIRECT_IMAGE_UPLOAD,
+  DIRECT_IMAGE_UPLOAD_DONE,
+  SINGLE_FILE_UPLOAD,
+} from '~/components/GQL/mutations/uploadFile'
 import {
   ArticleAccessType,
   ArticleLicenseType,
+  DirectImageUploadDoneMutation,
+  DirectImageUploadMutation,
   DraftDetailCirclesQueryQuery,
   DraftDetailQueryQuery,
   PublishState as PublishStateType,
@@ -85,7 +92,15 @@ const DraftDetail = () => {
   const [initNew] = useState(isInNew)
   const { createDraft } = useCreateDraft()
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
-  const [singleFileUpload] = useMutation<SingleFileUploadMutation>(UPLOAD_FILE)
+  const [singleFileUpload] =
+    useMutation<SingleFileUploadMutation>(SINGLE_FILE_UPLOAD)
+  const [directImageUpload] =
+    useMutation<DirectImageUploadMutation>(DIRECT_IMAGE_UPLOAD)
+  const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
+    DIRECT_IMAGE_UPLOAD_DONE,
+    undefined,
+    { showToast: false }
+  )
   const [saveStatus, setSaveStatus] = useState<
     'saved' | 'saving' | 'saveFailed'
   >()
@@ -145,24 +160,65 @@ const DraftDetail = () => {
     hasValidSummary
   )
 
-  const upload = async (input: { [key: string]: any }) => {
-    const result = await singleFileUpload({
-      variables: {
-        input: {
-          type: ASSET_TYPE.embed,
-          entityType: ENTITY_TYPE.draft,
-          entityId: draft && draft.id,
-          ...input,
-        },
+  const upload = async (input: {
+    [key: string]: any
+  }): Promise<{ id: string; path: string }> => {
+    const isImage = input.type !== ASSET_TYPE.embedaudio
+    const variables = {
+      input: {
+        type: ASSET_TYPE.embed,
+        entityType: ENTITY_TYPE.draft,
+        entityId: draft && draft.id,
+        ...input,
       },
-    })
-    const { id: assetId, path } =
-      (result && result.data && result.data.singleFileUpload) || {}
+    }
 
-    if (assetId && path) {
-      return { id: assetId, path }
-    } else {
-      throw new Error('upload not successful')
+    // feature flag
+    const isForceSingleFileUpload = !!getQuery('single-file-upload')
+
+    // upload via directImageUpload
+    if (isImage && !isForceSingleFileUpload) {
+      const result = await directImageUpload({ variables })
+      const {
+        id: assetId,
+        path,
+        uploadURL,
+      } = result?.data?.directImageUpload || {}
+
+      if (assetId && path && uploadURL) {
+        try {
+          const data = new FormData()
+          data.append('file', input.file)
+          await fetch(uploadURL, { method: 'POST', body: data })
+        } catch (error) {
+          console.error(error)
+          throw new Error('upload not successful')
+        }
+
+        // (async) mark asset draft as false
+        directImageUploadDone({
+          variables: {
+            ..._omit(variables.input, ['file']),
+            draft: false,
+            url: path,
+          },
+        }).catch(console.error)
+
+        return { id: assetId, path }
+      } else {
+        throw new Error('upload not successful')
+      }
+    }
+    // upload via singleFileUpload
+    else {
+      const result = await singleFileUpload({ variables })
+      const { id: assetId, path } = result?.data?.singleFileUpload || {}
+
+      if (assetId && path) {
+        return { id: assetId, path }
+      } else {
+        throw new Error('upload not successful')
+      }
     }
   }
 
