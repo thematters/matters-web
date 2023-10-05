@@ -47,7 +47,7 @@ const EmailVerificationToast = () => {
       !hasToasted &&
       !isInPath('CALLBACK_PROVIDER') &&
       viewer.isAuthed &&
-      viewer.info.email !== '' &&
+      viewer.info.email &&
       viewer.info.emailVerified === false
     ) {
       ignite()
