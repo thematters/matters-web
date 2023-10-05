@@ -9,7 +9,7 @@ import {
   ASSET_TYPE,
   ENTITY_TYPE,
 } from '~/common/enums'
-import { translate, validateImage } from '~/common/utils'
+import { sleep, translate, validateImage } from '~/common/utils'
 import {
   IconCamera16,
   IconSpinner16,
@@ -54,8 +54,12 @@ const Uploader: React.FC<UploaderProps> = ({
   const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
     DIRECT_IMAGE_UPLOAD,
     {
-      update: (cache, { data }) => {
+      update: async (cache, { data }) => {
         if (data?.directImageUpload) {
+          // FIXME: newly uploaded images will return 404 in a short time
+          // https://community.cloudflare.com/t/new-uploaded-images-need-about-10-min-to-display-in-my-website/121568
+          await sleep(300)
+
           updateDraftAssets({
             cache,
             id: entityId,
@@ -100,6 +104,7 @@ const Uploader: React.FC<UploaderProps> = ({
         },
       }
       const { data } = await upload({ variables })
+
       const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
       if (assetId && path && uploadURL) {
