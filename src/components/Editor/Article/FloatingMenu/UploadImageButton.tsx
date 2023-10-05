@@ -46,12 +46,12 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
     }
 
     const files = event.target.files
-    event.target.value = ''
 
     const hasInvalidImage = await Promise.all(
       Array.from(files).map(validateImage)
     ).then((results) => results.some((result) => !result))
     if (hasInvalidImage) {
+      event.target.value = ''
       return
     }
 
