@@ -202,7 +202,12 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
     await sendCode({
       variables: {
-        input: { email: values.email, type: 'email_otp', redirectUrl },
+        input: {
+          email: values.email,
+          type: 'email_otp',
+          redirectUrl,
+          language: lang,
+        },
       },
     })
     setCountdown(SEND_CODE_COUNTDOWN)
