@@ -5,6 +5,7 @@
   color: var(--color-grey-dark);
 
   & .right {
+    color: var(--color-grey);
     word-break: keep-all;
   }
 }
