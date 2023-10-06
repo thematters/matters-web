@@ -1,22 +1,28 @@
 import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
+  ERROR_CODES,
   OAUTH_STORAGE_BIND_STATE,
   OAUTH_STORAGE_BIND_STATE_FAILURE,
   OAUTH_STORAGE_BIND_STATE_SUCCESS,
+  OAUTH_STORAGE_BIND_STATE_UNAVAILABLE,
   OAUTH_STORAGE_CODE_VERIFIER,
   OAUTH_STORAGE_NONCE,
   OAUTH_STORAGE_PATH,
   OAUTH_STORAGE_STATE,
   OAUTH_TYPE,
+  PATHS,
 } from '~/common/enums'
 import { analytics, setCookies, storage } from '~/common/utils'
 import {
+  ERROR_MESSAGES,
   getErrorCodes,
   LanguageContext,
+  toast,
   useMutation,
   useRoute,
 } from '~/components'
@@ -49,7 +55,7 @@ const SocialCallback = ({ type }: Props) => {
   const { lang } = useContext(LanguageContext)
 
   const [hasError, setHasError] = useState(false)
-  const { getQuery } = useRoute()
+  const { getQuery, router } = useRoute()
   const state = getQuery('state')
   const oauthType = state.slice(0, 2)
   const isLoginType = oauthType === OAUTH_TYPE.login
@@ -98,6 +104,25 @@ const SocialCallback = ({ type }: Props) => {
 
           window.location.href = localPath
         } catch (error) {
+          let hasFobiddenError = false
+          const codes = getErrorCodes(error as any)
+          codes.forEach((code) => {
+            if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+              hasFobiddenError = true
+              router.push(PATHS.HOME)
+              toast.error({
+                message: (
+                  <FormattedMessage
+                    {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+                  />
+                ),
+              })
+              return
+            }
+          })
+          if (hasFobiddenError) {
+            return
+          }
           setHasError(true)
         }
       })()
@@ -125,10 +150,16 @@ const SocialCallback = ({ type }: Props) => {
           const codes = getErrorCodes(error as any)
           let hasBindFailure = false
           codes.forEach((code) => {
-            if (code.includes('ACTION_FAILED')) {
+            if (code.includes(ERROR_CODES.ACTION_FAILED)) {
               storage.set(OAUTH_STORAGE_BIND_STATE, {
                 type,
                 state: OAUTH_STORAGE_BIND_STATE_FAILURE,
+              })
+              hasBindFailure = true
+            } else if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+              storage.set(OAUTH_STORAGE_BIND_STATE, {
+                type,
+                state: OAUTH_STORAGE_BIND_STATE_UNAVAILABLE,
               })
               hasBindFailure = true
             }
