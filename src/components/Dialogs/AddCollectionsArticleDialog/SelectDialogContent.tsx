@@ -36,9 +36,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   const { data, loading } =
     usePublicQuery<AddCollectionsArticleUserPublicQuery>(
       ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
-      {
-        variables: { userName, id: articleId },
-      }
+      { variables: { userName, id: articleId }, fetchPolicy: 'network-only' }
     )
 
   const user = data?.user
