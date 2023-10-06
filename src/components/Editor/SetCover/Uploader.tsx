@@ -9,7 +9,7 @@ import {
   ASSET_TYPE,
   ENTITY_TYPE,
 } from '~/common/enums'
-import { translate, validateImage } from '~/common/utils'
+import { sleep, translate, validateImage } from '~/common/utils'
 import {
   IconCamera16,
   IconSpinner16,
@@ -17,7 +17,9 @@ import {
   TextIcon,
   toast,
   Translate,
+  useCreateDraft,
   useMutation,
+  useRoute,
   useUnloadConfirm,
 } from '~/components'
 import { updateDraftAssets } from '~/components/GQL'
@@ -54,8 +56,12 @@ const Uploader: React.FC<UploaderProps> = ({
   const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
     DIRECT_IMAGE_UPLOAD,
     {
-      update: (cache, { data }) => {
+      update: async (cache, { data }) => {
         if (data?.directImageUpload) {
+          // FIXME: newly uploaded images will return 404 in a short time
+          // https://community.cloudflare.com/t/new-uploaded-images-need-about-10-min-to-display-in-my-website/121568
+          await sleep(300)
+
           updateDraftAssets({
             cache,
             id: entityId,
@@ -71,6 +77,9 @@ const Uploader: React.FC<UploaderProps> = ({
     undefined,
     { showToast: false }
   )
+
+  const { isInPath } = useRoute()
+  const { createDraft } = useCreateDraft()
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'editor-cover-upload-form'
@@ -91,6 +100,16 @@ const Uploader: React.FC<UploaderProps> = ({
     }
 
     try {
+      // create draft if not exist
+      const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+      if (isInDraftDetail && !entityId) {
+        await createDraft({
+          onCreate: (newDraftId) => {
+            entityId = newDraftId
+          },
+        })
+      }
+
       const variables = {
         input: {
           file,
@@ -100,6 +119,7 @@ const Uploader: React.FC<UploaderProps> = ({
         },
       }
       const { data } = await upload({ variables })
+
       const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
       if (assetId && path && uploadURL) {
