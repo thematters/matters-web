@@ -18,6 +18,7 @@ import {
   Spinner,
   toast,
   Translate,
+  useDirectImageUpload,
   useMutation,
 } from '~/components'
 import {
@@ -97,6 +98,8 @@ export const CoverUploader = ({
     undefined,
     { showToast: false }
   )
+  const { upload: uploadImage, uploading } = useDirectImageUpload()
+
   const acceptTypes =
     type === 'collection'
       ? ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES.join(',')
@@ -130,9 +133,7 @@ export const CoverUploader = ({
       const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
       if (assetId && path && uploadURL) {
-        const formData = new FormData()
-        formData.append('file', file)
-        await fetch(uploadURL, { method: 'POST', body: formData })
+        await uploadImage({ uploadURL, file })
 
         // (async) mark asset draft as false
         directImageUploadDone({
@@ -159,7 +160,11 @@ export const CoverUploader = ({
 
   const Mask = () => (
     <div className={styles.mask}>
-      {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
+      {loading || uploading ? (
+        <Spinner />
+      ) : (
+        <IconCamera24 color="white" size="xl" />
+      )}
     </div>
   )
 
