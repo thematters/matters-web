@@ -39,6 +39,9 @@ const BaseAddCollectionsArticleDialog = ({
   children,
   articleId,
 }: AddCollectionsArticleDialogProps) => {
+  // FIXME: circular dependencies
+  const { COLLECTION_DETAIL } = require('~/views/User/CollectionDetail/gql')
+
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
 
@@ -76,6 +79,10 @@ const BaseAddCollectionsArticleDialog = ({
           {
             query: USER_COLLECTIONS,
             variables: { userName: viewer.userName },
+          },
+          {
+            query: COLLECTION_DETAIL,
+            variables: { id: checked[0] },
           },
         ],
       })
