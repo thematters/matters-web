@@ -76,8 +76,12 @@ export const ERROR_MESSAGES: { [key in ERROR_CODES]: MessageDescriptor } = {
     defaultMessage: 'You do not have permission to perform this operation',
     description: 'FORBIDDEN',
   }),
-  [ERROR_CODES.FORBIDDEN_BY_STATE]: defineMessage({
+  [ERROR_CODES.INSUFFICIENT_AUTHORITY]: defineMessage({
     defaultMessage: 'You do not have permission to perform this operation',
+    description: 'INSUFFICIENT_AUTHORITY',
+  }),
+  [ERROR_CODES.FORBIDDEN_BY_STATE]: defineMessage({
+    defaultMessage: 'Unavailable',
     description: 'FORBIDDEN_BY_STATE',
   }),
   [ERROR_CODES.FORBIDDEN_BY_TARGET_STATE]: defineMessage({

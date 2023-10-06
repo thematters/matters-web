@@ -534,10 +534,6 @@
     "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "EoeUjA": {
-    "defaultMessage": "You do not have permission to perform this operation",
-    "description": "FORBIDDEN_BY_STATE"
-  },
   "EwbNbl": {
     "defaultMessage": "Oops！This link has expired",
     "description": "src/views/Callback/GoogleCallback.tsx"
@@ -1168,6 +1164,10 @@
   "bBYO6x": {
     "defaultMessage": "Unblock",
     "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "bZtfkT": {
+    "defaultMessage": "You do not have permission to perform this operation",
+    "description": "INSUFFICIENT_AUTHORITY"
   },
   "beLe/F": {
     "defaultMessage": "Broadcast"

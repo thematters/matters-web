@@ -112,7 +112,9 @@ const BaseFooterActions = ({
   const forbid = () =>
     toast.error({
       message: (
-        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+        <FormattedMessage
+          {...ERROR_MESSAGES[ERROR_CODES.INSUFFICIENT_AUTHORITY]}
+        />
       ),
     })
 

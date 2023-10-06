@@ -45,7 +45,7 @@ const Unsubscribe = ({
       toast.error({
         message: (
           <FormattedMessage
-            {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+            {...ERROR_MESSAGES[ERROR_CODES.INSUFFICIENT_AUTHORITY]}
           />
         ),
       })

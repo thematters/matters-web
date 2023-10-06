@@ -45,7 +45,9 @@ const SupportButton = ({
       message: isAuthor ? (
         <Translate zh_hant="去支持其他用戶吧" zh_hans="去支持其他用户吧" />
       ) : (
-        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+        <FormattedMessage
+          {...ERROR_MESSAGES[ERROR_CODES.INSUFFICIENT_AUTHORITY]}
+        />
       ),
     })
   }
