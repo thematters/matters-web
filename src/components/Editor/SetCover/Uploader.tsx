@@ -17,7 +17,9 @@ import {
   TextIcon,
   toast,
   Translate,
+  useCreateDraft,
   useMutation,
+  useRoute,
   useUnloadConfirm,
 } from '~/components'
 import { updateDraftAssets } from '~/components/GQL'
@@ -76,6 +78,9 @@ const Uploader: React.FC<UploaderProps> = ({
     { showToast: false }
   )
 
+  const { isInPath } = useRoute()
+  const { createDraft } = useCreateDraft()
+
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'editor-cover-upload-form'
 
@@ -95,6 +100,16 @@ const Uploader: React.FC<UploaderProps> = ({
     }
 
     try {
+      // create draft if not exist
+      const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+      if (isInDraftDetail && !entityId) {
+        await createDraft({
+          onCreate: (newDraftId) => {
+            entityId = newDraftId
+          },
+        })
+      }
+
       const variables = {
         input: {
           file,
