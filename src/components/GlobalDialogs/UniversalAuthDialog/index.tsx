@@ -54,6 +54,7 @@ type Step =
 const BaseUniversalAuthDialog = () => {
   const { currStep, forward } = useStep<Step>('select-login-method')
   const [email, setEmail] = useState('')
+  const [hasUnavailable, setHasUnavailable] = useState(false)
 
   const [firstRender, setFirstRender] = useState(true)
 
@@ -108,6 +109,7 @@ const BaseUniversalAuthDialog = () => {
           authFeedType={authFeedType}
           setAuthFeedType={setAuthFeedType}
           checkWallet={false}
+          hasUnavailable={hasUnavailable}
         />
       )}
 
@@ -123,6 +125,9 @@ const BaseUniversalAuthDialog = () => {
             gotoSignInTab={() => {
               setAuthFeedType('normal')
               forward('select-login-method')
+            }}
+            setUnavailable={() => {
+              setHasUnavailable(true)
             }}
           />
         </ReCaptchaProvider>

@@ -21,6 +21,7 @@ interface FormProps {
   authFeedType: AuthFeedType
   setAuthFeedType: (type: AuthFeedType) => void
 
+  hasUnavailable?: boolean
   closeDialog?: () => void
 }
 
@@ -33,6 +34,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   authFeedType = 'normal',
   setAuthFeedType,
   checkWallet,
+  hasUnavailable,
 }) => {
   const isInPage = purpose === 'page'
   const isInDialog = purpose === 'dialog'
@@ -62,7 +64,12 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
           gotoEmailLogin={gotoEmailLogin}
         />
       )}
-      {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
+      {isWallet && (
+        <AuthWalletFeed
+          submitCallback={gotoWalletConnect}
+          hasUnavailable={hasUnavailable}
+        />
+      )}
     </>
   )
 
