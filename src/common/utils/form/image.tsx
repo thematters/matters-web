@@ -58,6 +58,4 @@ export const validateImage = (image: File) =>
     } catch (exception) {
       return reject(exception)
     }
-
-    return resolve(true)
   })
