@@ -19,6 +19,7 @@ import {
   Spinner,
   toast,
   Translate,
+  useDirectImageUpload,
   useMutation,
 } from '~/components'
 import {
@@ -65,6 +66,8 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     undefined,
     { showToast: false }
   )
+  const { upload: uploadImage, uploading } = useDirectImageUpload()
+
   const [avatar, setAvatar] = useState<string | undefined | null>(
     avatarProps.src
   )
@@ -104,9 +107,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
       const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
       if (assetId && path && uploadURL) {
-        const formData = new FormData()
-        formData.append('file', file)
-        await fetch(uploadURL, { method: 'POST', body: formData })
+        await uploadImage({ uploadURL, file })
 
         // (async) mark asset draft as false
         directImageUploadDone({
@@ -144,7 +145,11 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
       {isCircle && <CircleAvatar size="xxxl" {...avatarProps} src={avatar} />}
 
       <div className={styles.mask}>
-        {loading ? <Spinner /> : <IconCamera24 color="white" size="lg" />}
+        {loading || uploading ? (
+          <Spinner />
+        ) : (
+          <IconCamera24 color="white" size="lg" />
+        )}
       </div>
 
       <VisuallyHidden>

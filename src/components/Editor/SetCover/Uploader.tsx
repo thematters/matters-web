@@ -18,6 +18,7 @@ import {
   toast,
   Translate,
   useCreateDraft,
+  useDirectImageUpload,
   useMutation,
   useRoute,
   useUnloadConfirm,
@@ -77,6 +78,7 @@ const Uploader: React.FC<UploaderProps> = ({
     undefined,
     { showToast: false }
   )
+  const { upload: uploadImage, uploading } = useDirectImageUpload()
 
   const { isInPath } = useRoute()
   const { createDraft } = useCreateDraft()
@@ -123,9 +125,7 @@ const Uploader: React.FC<UploaderProps> = ({
       const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
       if (assetId && path && uploadURL) {
-        const formData = new FormData()
-        formData.append('file', file)
-        await fetch(uploadURL, { method: 'POST', body: formData })
+        await uploadImage({ uploadURL, file })
 
         // (async) mark asset draft as false
         directImageUploadDone({
@@ -151,10 +151,10 @@ const Uploader: React.FC<UploaderProps> = ({
 
   const labelClasses = classNames({
     [styles.uploader]: true,
-    'u-area-disable': loading,
+    'u-area-disable': loading || uploading,
   })
 
-  useUnloadConfirm({ block: loading })
+  useUnloadConfirm({ block: loading || uploading })
 
   return (
     <label className={labelClasses} htmlFor={fieldId}>
@@ -169,7 +169,7 @@ const Uploader: React.FC<UploaderProps> = ({
           <Translate id="uploadCover" />
         </TextIcon>
 
-        {loading && <IconSpinner16 color="greyLight" />}
+        {(loading || uploading) && <IconSpinner16 color="greyLight" />}
       </h3>
 
       <p>
