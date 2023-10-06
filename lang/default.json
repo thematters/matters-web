@@ -1553,6 +1553,10 @@
     "defaultMessage": "mentioned you in broadcast comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "rADhX5": {
+    "defaultMessage": "Unavailable",
+    "description": "FORBIDDEN_BY_STATE"
+  },
   "rBjwQy": {
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
