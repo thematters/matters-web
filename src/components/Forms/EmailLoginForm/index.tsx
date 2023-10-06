@@ -92,13 +92,10 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const passwordRef = useRef<HTMLInputElement>(null)
 
-  const [sendCode] = useMutation<SendVerificationCodeMutation>(
-    SEND_CODE,
-    undefined,
-    {
+  const [sendCode, { loading: sendingCode }] =
+    useMutation<SendVerificationCodeMutation>(SEND_CODE, undefined, {
       showToast: false,
-    }
-  )
+    })
 
   const intl = useIntl()
   const {
@@ -307,9 +304,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         {errorCode !== ERROR_CODES.CODE_EXPIRED &&
           !(hasSendCode && errorCode === ERROR_CODES.CODE_INVALID) && (
             <OtherOptions
-              isInPage={isInPage}
               sendLoginCode={sendLoginCode}
               hasSendCode={hasSendCode}
+              disabled={sendingCode}
             />
           )}
       </Form>
