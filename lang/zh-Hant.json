@@ -381,7 +381,7 @@
     "defaultMessage": "選集名稱"
   },
   "A6r2p1": {
-    "defaultMessage": "Enter Matters"
+    "defaultMessage": "進入 Matters"
   },
   "A7ugfn": {
     "defaultMessage": "更多操作"
@@ -1552,6 +1552,10 @@
   "r66dXx": {
     "defaultMessage": "在 {circleName} 的廣播留言中提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "rADhX5": {
+    "defaultMessage": "不可用",
+    "description": "FORBIDDEN_BY_STATE"
   },
   "rBjwQy": {
     "defaultMessage": "微博",
