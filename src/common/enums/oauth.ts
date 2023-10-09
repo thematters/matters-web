@@ -314,7 +314,9 @@ export const OAUTH_STORAGE_CODE_VERIFIER = 'oauth-storage-code-verifier'
 export const OAUTH_STORAGE_BIND_RESULT = 'oauth-storage-result'
 export const OAUTH_STORAGE_BIND_STATE = 'oauth-storage-bind-state'
 export const OAUTH_STORAGE_BIND_STATE_SUCCESS = 'oauth-storage-state-success'
-export const OAUTH_STORAGE_BIND_STATE_FAILURE = 'oauth-srorage-state-failure'
+export const OAUTH_STORAGE_BIND_STATE_FAILURE = 'oauth-storage-state-failure'
+export const OAUTH_STORAGE_BIND_STATE_UNAVAILABLE =
+  'oauth-storage-state-unavailable'
 export const OAUTH_STORAGE_SEND_EMAIL_CODE_COUNTDOWN =
   'oauth-storage-send-email-code-countdown'
 

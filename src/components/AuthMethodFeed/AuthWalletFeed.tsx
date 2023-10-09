@@ -18,11 +18,13 @@ export interface Props {
   closeDialog?: () => void
   back?: () => void
   hasWalletExist?: boolean
+  hasUnavailable?: boolean
 }
 
 export const AuthWalletFeed: React.FC<Props> = ({
   submitCallback,
   hasWalletExist,
+  hasUnavailable,
   closeDialog,
   back,
 }) => {
@@ -116,6 +118,16 @@ export const AuthWalletFeed: React.FC<Props> = ({
               <FormattedMessage
                 defaultMessage="Sign in to that account to unlink it then try again"
                 description="src/components/AuthMethodFeed/AuthWalletFeed.tsx"
+              />
+            </p>
+          </section>
+        )}
+        {hasUnavailable && (
+          <section className={styles.errorHint}>
+            <p>
+              <FormattedMessage
+                defaultMessage="Unavailable"
+                description="FORBIDDEN_BY_STATE"
               />
             </p>
           </section>

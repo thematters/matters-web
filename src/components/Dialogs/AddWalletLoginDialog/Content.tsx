@@ -14,6 +14,7 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
   const [step, setStep] = useState<Step>('select')
   const [walletType, setWalletType] = useState<WalletType>('MetaMask')
   const [hasWalletExist, setHasWalletExist] = useState(false)
+  const [hasUnavailable, setHasUnavailable] = useState(false)
   const isSelect = step === 'select'
   const isConnect = step === 'connect'
 
@@ -45,6 +46,7 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
                 setStep('connect')
               }}
               hasWalletExist={hasWalletExist}
+              hasUnavailable={hasUnavailable}
             />
           </DialogBeta.Content>
           <DialogBeta.Footer
@@ -69,6 +71,10 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
           back={() => setStep('select')}
           setHasWalletExist={() => {
             setHasWalletExist(true)
+            setStep('select')
+          }}
+          setUnavailable={() => {
+            setHasUnavailable(true)
             setStep('select')
           }}
         />

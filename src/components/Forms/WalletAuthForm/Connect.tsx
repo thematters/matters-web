@@ -54,6 +54,7 @@ interface FormProps {
   back?: () => void
   gotoSignInTab?: () => void
   setHasWalletExist?: () => void
+  setUnavailable?: () => void
 }
 
 interface FormValues {
@@ -69,6 +70,7 @@ const Connect: React.FC<FormProps> = ({
   back,
   gotoSignInTab,
   setHasWalletExist,
+  setUnavailable,
 }) => {
   const isInPage = purpose === 'page'
   const isInDialog = purpose === 'dialog'
@@ -237,7 +239,11 @@ const Connect: React.FC<FormProps> = ({
           } else if (code.includes(ERROR_CODES.CRYPTO_WALLET_EXISTS)) {
             disconnect()
             !!setHasWalletExist && setHasWalletExist()
+          } else if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+            disconnect()
+            !!setUnavailable && setUnavailable()
           } else {
+            disconnect()
             setFieldError('address', intl.formatMessage(messages[code]))
           }
         })
