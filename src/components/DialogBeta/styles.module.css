@@ -55,6 +55,10 @@
   }
 }
 
+.scrollable {
+  overflow: auto !important;
+}
+
 .handle {
   position: absolute;
   top: 0;

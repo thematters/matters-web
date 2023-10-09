@@ -36,7 +36,6 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   checkWallet,
   hasUnavailable,
 }) => {
-  const isInPage = purpose === 'page'
   const isInDialog = purpose === 'dialog'
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
@@ -75,9 +74,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
   return (
     <>
-      <DialogBeta.Content noMaxHeight={isInPage}>
-        {InnerForm}
-      </DialogBeta.Content>
+      <DialogBeta.Content noMaxHeight={true}>{InnerForm}</DialogBeta.Content>
 
       {isInDialog && (
         <DialogBeta.Footer

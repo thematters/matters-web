@@ -33,6 +33,7 @@ export type DialogBetaProps = {
   hidePaddingBottom?: boolean
 
   testId?: string
+  scrollable?: boolean
 } & DialogBetaOverlayProps
 
 const Container: React.FC<
@@ -139,7 +140,7 @@ export const DialogBeta: React.ComponentType<
   RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
-  const { isOpen, onRest } = props
+  const { isOpen, onRest, scrollable } = props
   const [mounted, setMounted] = useState(isOpen)
   const initialFocusRef = useRef<any>(null)
 
@@ -175,6 +176,11 @@ export const DialogBeta: React.ComponentType<
     }
   })
 
+  const dialogOverlayClasses = classNames({
+    dialog: true,
+    [styles.scrollable]: !!scrollable,
+  })
+
   const AnimatedDialogOverlay = animated(DialogOverlay)
   const AnimatedContainer = animated(Container)
   const AnimatedOverlay = animated(Overlay)
@@ -186,7 +192,7 @@ export const DialogBeta: React.ComponentType<
   return (
     <>
       <AnimatedDialogOverlay
-        className="dialog"
+        className={dialogOverlayClasses}
         initialFocusRef={initialFocusRef}
       >
         <AnimatedOverlay style={{ opacity: opacity as any }} />
