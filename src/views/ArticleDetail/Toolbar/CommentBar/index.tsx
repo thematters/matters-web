@@ -143,7 +143,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
           toast.error({
             message: (
               <FormattedMessage
-                {...ERROR_MESSAGES[ERROR_CODES.INSUFFICIENT_AUTHORITY]}
+                {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
               />
             ),
           })

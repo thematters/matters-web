@@ -534,6 +534,10 @@
     "defaultMessage": "在 {circleName} 的广播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "EoeUjA": {
+    "defaultMessage": "你无权限进行该操作",
+    "description": "FORBIDDEN_BY_STATE"
+  },
   "EwbNbl": {
     "defaultMessage": "Oops！链接已失效",
     "description": "src/views/Callback/GoogleCallback.tsx"
@@ -1164,10 +1168,6 @@
   "bBYO6x": {
     "defaultMessage": "取消屏蔽",
     "description": "src/components/BlockUser/Button/index.tsx"
-  },
-  "bZtfkT": {
-    "defaultMessage": "你无权限进行该操作",
-    "description": "INSUFFICIENT_AUTHORITY"
   },
   "beLe/F": {
     "defaultMessage": "广播"

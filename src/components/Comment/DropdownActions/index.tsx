@@ -216,9 +216,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const forbid = () => {
     toast.error({
       message: (
-        <FormattedMessage
-          {...ERROR_MESSAGES[ERROR_CODES.INSUFFICIENT_AUTHORITY]}
-        />
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
       ),
     })
   }
