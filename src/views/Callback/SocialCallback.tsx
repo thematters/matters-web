@@ -19,7 +19,6 @@ import {
 } from '~/common/enums'
 import { analytics, setCookies, storage } from '~/common/utils'
 import {
-  ERROR_MESSAGES,
   getErrorCodes,
   LanguageContext,
   toast,
@@ -113,7 +112,8 @@ const SocialCallback = ({ type }: Props) => {
               toast.error({
                 message: (
                   <FormattedMessage
-                    {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+                    defaultMessage="Unavailable"
+                    description="FORBIDDEN_BY_STATE"
                   />
                 ),
               })

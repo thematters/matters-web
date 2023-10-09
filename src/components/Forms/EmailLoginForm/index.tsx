@@ -179,6 +179,14 @@ export const EmailLoginForm: React.FC<FormProps> = ({
                   'This login code has expired, please try to resend',
               })
             )
+          } else if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+            setFieldError(
+              'email',
+              intl.formatMessage({
+                defaultMessage: 'Unavailable',
+                description: 'FORBIDDEN_BY_STATE',
+              })
+            )
           } else {
             setFieldError('password', intl.formatMessage(messages[code]))
           }
@@ -220,10 +228,16 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         passwordRef.current.focus()
       }
     } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error as any)
+      const [, codes] = parseFormSubmitErrors(error as any)
       codes.forEach((code) => {
         if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
-          setFieldError('password', intl.formatMessage(messages[code]))
+          setFieldError(
+            'email',
+            intl.formatMessage({
+              defaultMessage: 'Unavailable',
+              description: 'FORBIDDEN_BY_STATE',
+            })
+          )
         }
       })
     }

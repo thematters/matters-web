@@ -4,6 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ERROR_CODES } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   signupCallbackUrl,
@@ -122,7 +123,17 @@ const Init: React.FC<FormProps> = ({
         setSubmitting(false)
 
         const [messages, codes] = parseFormSubmitErrors(error as any)
-        setFieldError('email', intl.formatMessage(messages[codes[0]]))
+        if (codes[0].includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+          setFieldError(
+            'email',
+            intl.formatMessage({
+              defaultMessage: 'Unavailable',
+              description: 'FORBIDDEN_BY_STATE',
+            })
+          )
+        } else {
+          setFieldError('email', intl.formatMessage(messages[codes[0]]))
+        }
 
         refreshToken?.()
         turnstileRef.current?.reset()

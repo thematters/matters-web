@@ -5,6 +5,7 @@ import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
+  ERROR_CODES,
   KEYVALUE,
   MAX_CHANGE_EMAIL_TIME_DAILY,
   TOAST_SEND_EMAIL_VERIFICATION,
@@ -117,7 +118,17 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as any)
         codes.forEach((code) => {
-          setFieldError('email', intl.formatMessage(messages[code]))
+          if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+            setFieldError(
+              'email',
+              intl.formatMessage({
+                defaultMessage: 'Unavailable',
+                description: 'FORBIDDEN_BY_STATE',
+              })
+            )
+          } else {
+            setFieldError('email', intl.formatMessage(messages[code]))
+          }
         })
         setSubmitting(false)
       }
