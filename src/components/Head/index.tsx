@@ -112,7 +112,7 @@ export const Head: React.FC<HeadProps> = (props) => {
         type="image/png"
         href={IMAGE_FAVICON_128.src}
         sizes="128x128"
-        // With the attribute key, the metamask does not work
+        // Note: With the attribute key, dapp can't get the shortcut icon.
         // key="favicon-128"
       />
       <link
