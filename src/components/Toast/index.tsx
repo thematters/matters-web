@@ -35,7 +35,7 @@ const ToastActions: React.FC<ToastActionsProps> = ({
     <section className={styles.actions}>
       {actions.map(({ content, onClick, ...props }, index) => (
         <Button
-          textColor={type === 'error' ? 'white' : 'greyDarker'}
+          textColor={type === 'error' ? 'white' : 'whiteLight'}
           onClick={() => {
             onClick && onClick()
             if (hasClose) {
@@ -52,7 +52,7 @@ const ToastActions: React.FC<ToastActionsProps> = ({
       {hasClose && (
         <button type="button" onClick={onDismiss}>
           <IconClose22
-            color={type === 'error' ? 'white' : 'greyDarker'}
+            color={type === 'error' ? 'white' : 'whiteLight'}
             size="mdM"
           />
         </button>

@@ -10,6 +10,7 @@
   --color-grey-light: #ddd;
   --color-grey-lighter: #f7f7f7;
   --color-white: #fff;
+  --color-white-light: #fff9;
   --color-red-dark: #a04a34;
   --color-red: #c85c41;
   --color-red-lighter: #fae7e3;
@@ -26,7 +27,4 @@
   --color-line-grey-light: rgb(0 0 0 / 8%);
   --color-line-grey: rgb(0 0 0 / 16%);
   --color-line-grey-dark: rgb(0 0 0 / 24%);
-
-  /* button */
-  --color-grey-countdown: #fff9;
 }
