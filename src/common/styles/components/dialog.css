@@ -3,6 +3,8 @@
   inset: 0;
   z-index: var(--z-index-dialog);
   overflow: hidden;
+  background: rgb(0 0 0 / 40%);
+  will-change: opacity;
 
   @media (--sm-up) {
     @mixin flex-center-all;
@@ -22,5 +24,8 @@
     bottom: auto;
     left: auto;
     width: 23.4375rem; /* 375px */
+    margin-top: auto;
+    margin-bottom: auto;
+    transform-origin: center bottom 0;
   }
 }

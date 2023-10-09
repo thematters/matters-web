@@ -14,7 +14,6 @@ import { RoundedButton, TextButton } from '../Dialog/Buttons'
 import Handle from '../Dialog/Handle'
 import Header from '../Dialog/Header'
 import Lazy from '../Dialog/Lazy'
-import Overlay from '../Dialog/Overlay'
 import Content from './Content'
 import Footer from './Footer'
 import styles from './styles.module.css'
@@ -183,7 +182,6 @@ export const DialogBeta: React.ComponentType<
 
   const AnimatedDialogOverlay = animated(DialogOverlay)
   const AnimatedContainer = animated(Container)
-  const AnimatedOverlay = animated(Overlay)
 
   if (!mounted) {
     return null
@@ -194,9 +192,8 @@ export const DialogBeta: React.ComponentType<
       <AnimatedDialogOverlay
         className={dialogOverlayClasses}
         initialFocusRef={initialFocusRef}
+        style={{ opacity: opacity as any }}
       >
-        <AnimatedOverlay style={{ opacity: opacity as any }} />
-
         <DialogContent aria-labelledby="dialog-title">
           <AnimatedContainer
             style={{ opacity: opacity as any, top }}
