@@ -1,16 +1,16 @@
-import { CollectionDigest, List } from '~/components'
+import { CollectionDigestFeed, List } from '~/components'
 
 const Placeholder = () => {
   return (
     <List aria-busy="true" aria-live="polite">
       <List.Item>
-        <CollectionDigest.Feed.Placeholder />
+        <CollectionDigestFeed.Placeholder />
       </List.Item>
       <List.Item>
-        <CollectionDigest.Feed.Placeholder />
+        <CollectionDigestFeed.Placeholder />
       </List.Item>
       <List.Item>
-        <CollectionDigest.Feed.Placeholder />
+        <CollectionDigestFeed.Placeholder />
       </List.Item>
     </List>
   )
