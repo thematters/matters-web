@@ -19,6 +19,7 @@ import {
   Throw404,
   toast,
   useCreateDraft,
+  useDirectImageUpload,
   useRoute,
   useUnloadConfirm,
 } from '~/components'
@@ -101,6 +102,8 @@ const DraftDetail = () => {
     undefined,
     { showToast: false }
   )
+  const { upload: uploadImage } = useDirectImageUpload()
+
   const [saveStatus, setSaveStatus] = useState<
     'saved' | 'saving' | 'saveFailed'
   >()
@@ -187,9 +190,7 @@ const DraftDetail = () => {
 
       if (assetId && path && uploadURL) {
         try {
-          const data = new FormData()
-          data.append('file', input.file)
-          await fetch(uploadURL, { method: 'POST', body: data })
+          await uploadImage({ uploadURL, file: input.file })
         } catch (error) {
           console.error(error)
           throw new Error('upload not successful')
