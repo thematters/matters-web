@@ -1,7 +1,4 @@
 .overlay {
-  @mixin expand-to-container;
-
-  content: '';
   background: rgb(0 0 0 / 40%);
   will-change: opacity;
 }
@@ -53,6 +50,10 @@
       display: none;
     }
   }
+}
+
+.scrollable {
+  overflow: auto !important;
 }
 
 .handle {
