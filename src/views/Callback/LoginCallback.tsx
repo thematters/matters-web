@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   COOKIE_LANGUAGE,
@@ -6,7 +6,7 @@ import {
   COOKIE_USER_GROUP,
 } from '~/common/enums'
 import { redirectToTarget, setCookies } from '~/common/utils'
-import { useMutation, useRoute } from '~/components'
+import { LanguageContext, useMutation, useRoute } from '~/components'
 import { EMAIL_LOGIN } from '~/components/GQL/mutations/emailLogin'
 import { EmailLoginMutation } from '~/gql/graphql'
 
@@ -19,6 +19,7 @@ const LoginCallback = () => {
     showToast: false,
   })
 
+  const { lang } = useContext(LanguageContext)
   const [hasError, setHasError] = useState(false)
   const { getQuery } = useRoute()
   const email = getQuery('email')
@@ -32,6 +33,7 @@ const LoginCallback = () => {
             input: {
               email,
               passwordOrCode: code,
+              language: lang,
             },
           },
         })

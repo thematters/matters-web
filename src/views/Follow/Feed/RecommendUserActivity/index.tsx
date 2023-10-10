@@ -1,5 +1,7 @@
+import { useContext } from 'react'
+
 import { analytics } from '~/common/utils'
-import { Slides } from '~/components'
+import { Slides, ViewerContext } from '~/components'
 import { RecommendUserActivityFragment } from '~/gql/graphql'
 
 import FollowingRecommendHead from '../FollowingRecommendHead'
@@ -12,6 +14,9 @@ interface Props {
 }
 
 const RecommendUserActivity = ({ users }: Props) => {
+  const viewer = useContext(ViewerContext)
+  users = users?.filter((u) => u.id !== viewer.id)
+
   if (!users || users.length <= 0) {
     return null
   }

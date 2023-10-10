@@ -1,5 +1,5 @@
 import _pickBy from 'lodash/pickBy'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { Spinner, ViewerContext } from '~/components'
 
@@ -21,10 +21,18 @@ const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const viewer = useContext(ViewerContext)
   const isLegacyUserConfirm = viewer.userName && viewer.info.userNameEditable
 
-  const [userName, setUserName] = useState('')
+  const [userName, setUserName] = useState(
+    isLegacyUserConfirm ? viewer.userName || '' : ''
+  )
   const { loading, availableUserName } = useAvailableUserName({
     enable: !isLegacyUserConfirm,
   })
+
+  useEffect(() => {
+    if (!isLegacyUserConfirm) {
+      setUserName(availableUserName)
+    }
+  }, [loading])
 
   if (loading) {
     return <Spinner />
@@ -34,9 +42,7 @@ const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     <>
       {isInput && (
         <InputStep
-          userName={
-            isLegacyUserConfirm ? viewer.userName || '' : availableUserName
-          }
+          userName={userName}
           gotoConfirm={(userName) => {
             setStep('confirm')
             setUserName(userName)

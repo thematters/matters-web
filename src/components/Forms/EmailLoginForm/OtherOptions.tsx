@@ -6,15 +6,17 @@ import styles from './styles.module.css'
 
 export const SendLoginCodeButton = ({
   sendLoginCode,
+  disabled,
 }: {
   sendLoginCode: () => void
+  disabled?: boolean
 }) => (
   <section className={styles.option}>
     <FormattedMessage
       defaultMessage="Forgot password?"
       description="src/components/Forms/EmailLoginForm/Buttons.tsx"
     />
-    <Button aria-haspopup="dialog" onClick={sendLoginCode}>
+    <Button aria-haspopup="dialog" onClick={sendLoginCode} disabled={disabled}>
       <FormattedMessage
         defaultMessage="Send login code"
         description="src/components/Forms/EmailLoginForm/Buttons.tsx"
@@ -24,18 +26,21 @@ export const SendLoginCodeButton = ({
 )
 
 const OtherOptions = ({
-  isInPage,
   hasSendCode,
   sendLoginCode,
+  disabled,
 }: {
-  isInPage: boolean
   hasSendCode: boolean
   sendLoginCode?: () => any
+  disabled?: boolean
 }) => {
   return (
     <section className={styles.otherOptions}>
       {!hasSendCode && sendLoginCode && (
-        <SendLoginCodeButton sendLoginCode={sendLoginCode} />
+        <SendLoginCodeButton
+          sendLoginCode={sendLoginCode}
+          disabled={disabled}
+        />
       )}
       {hasSendCode && (
         <section className={styles.hasSendCode}>

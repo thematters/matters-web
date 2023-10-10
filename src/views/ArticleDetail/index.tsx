@@ -222,7 +222,7 @@ const BaseArticleDetail = ({
   const title = translated && translatedTitle ? translatedTitle : article.title
   const summary =
     translated && translatedSummary ? translatedSummary : article.summary
-  const isEnableMd = !!getQuery('md')
+  const isEnableMd = !!getQuery('md') // feature flag
   const originalContent =
     isEnableMd && article.contents.markdown
       ? md2html(article.contents.markdown)

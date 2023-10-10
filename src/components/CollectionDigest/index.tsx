@@ -1,5 +1,1 @@
-import Feed from './Feed'
-
-export const CollectionDigest = {
-  Feed,
-}
+export * from './Feed'

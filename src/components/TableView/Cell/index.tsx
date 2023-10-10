@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
+import { capitalizeFirstLetter } from '~/common/utils'
 import { Card, CardProps, IconArrowRight20 } from '~/components'
 
 import styles from './styles.module.css'
@@ -38,6 +39,7 @@ const Cell: React.FC<CellProps> = forwardRef(
     })
     const rightClasses = classNames({
       [styles.right]: true,
+      [styles[`rightText${capitalizeFirstLetter(rightTextColor)}`]]: true,
     })
 
     const itemContent = (

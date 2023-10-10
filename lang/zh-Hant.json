@@ -356,6 +356,9 @@
   "9J0iCw": {
     "defaultMessage": "已註銷用戶"
   },
+  "9Vkz9W": {
+    "defaultMessage": "圖片面積不得超過 1 億像素（如 10,000x10,000 像素）"
+  },
   "9mfw9c": {
     "defaultMessage": "錢包地址",
     "description": "src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
@@ -378,7 +381,7 @@
     "defaultMessage": "選集名稱"
   },
   "A6r2p1": {
-    "defaultMessage": "Enter Matters"
+    "defaultMessage": "進入 Matters"
   },
   "A7ugfn": {
     "defaultMessage": "更多操作"
@@ -386,6 +389,10 @@
   "AB5rDl": {
     "defaultMessage": "信用卡交易內容有疑慮時，發卡機構暫停或退回的款項",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "AEiogR": {
+    "defaultMessage": "該 Google 帳號已關聯至其他 Matters 帳號，請登入該帳號解綁後再試",
+    "description": "USER_SOCIAL_ACCOUNT_EXISTS"
   },
   "AGcU5J": {
     "defaultMessage": "置頂",
@@ -487,6 +494,10 @@
   },
   "D3idYv": {
     "defaultMessage": "設定"
+  },
+  "DUoV1W": {
+    "defaultMessage": "已超過 140 字，目前 {numbers} 字",
+    "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
   "DYrDcG": {
     "defaultMessage": "徽章",
@@ -600,10 +611,6 @@
   },
   "H0JBH6": {
     "defaultMessage": "登出"
-  },
-  "H7bMRx": {
-    "defaultMessage": "驗證連結已發送，請查收郵件",
-    "description": "src/components/GlobalToast/index.tsx"
   },
   "H8KGyc": {
     "defaultMessage": "進入"
@@ -819,6 +826,10 @@
     "defaultMessage": "忘記密碼？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
+  "OAc8+i": {
+    "defaultMessage": "郵件地址驗證連結已發送至 {email}，請查收郵件",
+    "description": "src/components/GlobalToast/index.tsx"
+  },
   "OIj8pQ": {
     "defaultMessage": "成功發送邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -829,6 +840,9 @@
   "Opaa0R": {
     "defaultMessage": "作品被讚賞",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "OyvGvT": {
+    "defaultMessage": "圖片大小不得超過 5MB"
   },
   "PLBmDT": {
     "defaultMessage": "登入密碼",
@@ -1086,6 +1100,9 @@
     "defaultMessage": "在你的圍爐中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "Y7N/Jg": {
+    "defaultMessage": "圖片邊長不得超過 12,000 像素"
+  },
   "YPMn9n": {
     "defaultMessage": "請先登入再進行操作",
     "description": "UNAUTHENTICATED"
@@ -1180,10 +1197,6 @@
   "cf37Zy": {
     "defaultMessage": "添加 IPFS 生成的 IPNS 指紋到閱讀器，如：",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
-  },
-  "cfL5uk": {
-    "defaultMessage": "已超過 200 字，目前 {numbers} 字",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
   },
   "cg1VJ2": {
     "defaultMessage": "連接加密錢包"
@@ -1379,6 +1392,10 @@
     "defaultMessage": "作品被關聯",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "l9LpDx": {
+    "defaultMessage": "{q} - Matters 搜尋",
+    "description": "src/views/Search/AggregateResults/Articles.tsx"
+  },
   "lI2l2/": {
     "defaultMessage": "驗證碼不正確，請檢查輸入內容或重新發送",
     "description": "CODE_INVALID"
@@ -1446,7 +1463,7 @@
     "description": "CODE_INACTIVE"
   },
   "n2Sc6g": {
-    "defaultMessage": "個人信息",
+    "defaultMessage": "個人資料",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
   },
   "n3shsQ": {
@@ -1536,6 +1553,10 @@
     "defaultMessage": "在 {circleName} 的廣播留言中提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "rADhX5": {
+    "defaultMessage": "不可用",
+    "description": "FORBIDDEN_BY_STATE"
+  },
   "rBjwQy": {
     "defaultMessage": "微博",
     "description": "src/components/Share/Buttons/Weibo.tsx"
@@ -1572,6 +1593,10 @@
     "defaultMessage": "本月營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "sg3nVO": {
+    "defaultMessage": "郵箱已被使用，請前往登入或嘗試另一個",
+    "description": "USER_EMAIL_EXISTS"
+  },
   "skbUBl": {
     "defaultMessage": "登入",
     "description": "src/components/Buttons/Login/index.tsx"
@@ -1582,6 +1607,10 @@
   },
   "sy+pv5": {
     "defaultMessage": "郵件地址"
+  },
+  "tBt9u0": {
+    "defaultMessage": "登入",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已發布到分佈式網絡",
@@ -1594,10 +1623,6 @@
   "tQimre": {
     "defaultMessage": "前往首頁",
     "description": "src/views/Callback/GoogleCallback.tsx"
-  },
-  "tbHAOb": {
-    "defaultMessage": "郵件地址已被使用，請嘗試另一個",
-    "description": "USER_EMAIL_EXISTS"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
@@ -1615,10 +1640,6 @@
   },
   "ub1kHa": {
     "defaultMessage": "加入選集"
-  },
-  "uclzDH": {
-    "defaultMessage": "{q}: {totalCount, plural, =0 {} other {# 條結果}} - Matters 搜尋",
-    "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
   "ui1+QC": {
     "defaultMessage": "已顯示所有結果"

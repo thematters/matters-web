@@ -1,14 +1,14 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
+import _omit from 'lodash/omit'
 import { useContext, useState } from 'react'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
   ENTITY_TYPE,
-  UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { translate, validateImage } from '~/common/utils'
 import {
   Avatar,
   AvatarProps,
@@ -19,10 +19,17 @@ import {
   Spinner,
   toast,
   Translate,
+  useDirectImageUpload,
   useMutation,
 } from '~/components'
-import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { SingleFileUploadMutation } from '~/gql/graphql'
+import {
+  DIRECT_IMAGE_UPLOAD,
+  DIRECT_IMAGE_UPLOAD_DONE,
+} from '~/components/GQL/mutations/uploadFile'
+import {
+  DirectImageUploadDoneMutation,
+  DirectImageUploadMutation,
+} from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -49,11 +56,18 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const [upload, { loading }] = useMutation<SingleFileUploadMutation>(
-    UPLOAD_FILE,
+  const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
+    DIRECT_IMAGE_UPLOAD,
     undefined,
     { showToast: false }
   )
+  const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
+    DIRECT_IMAGE_UPLOAD_DONE,
+    undefined,
+    { showToast: false }
+  )
+  const { upload: uploadImage, uploading } = useDirectImageUpload()
+
   const [avatar, setAvatar] = useState<string | undefined | null>(
     avatarProps.src
   )
@@ -71,16 +85,8 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
-      toast.error({
-        message: (
-          <Translate
-            zh_hant="上傳檔案超過 5 MB"
-            zh_hans="上传文件超过 5 MB"
-            en="upload file exceed 5 MB"
-          />
-        ),
-      })
+    const isValidImage = await validateImage(file)
+    if (!isValidImage) {
       return
     }
 
@@ -89,29 +95,36 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
         onUploadStart()
       }
 
-      const { data } = await upload({
-        variables: {
-          input: {
-            file,
-            type: isCircle ? ASSET_TYPE.circleAvatar : ASSET_TYPE.avatar,
-            entityType: isCircle ? ENTITY_TYPE.circle : ENTITY_TYPE.user,
-            entityId,
-          },
+      const variables = {
+        input: {
+          file,
+          type: isCircle ? ASSET_TYPE.circleAvatar : ASSET_TYPE.avatar,
+          entityType: isCircle ? ENTITY_TYPE.circle : ENTITY_TYPE.user,
+          entityId,
         },
-      })
-      const id = data?.singleFileUpload.id
-      const path = data?.singleFileUpload.path
+      }
+      const { data } = await upload({ variables })
+      const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
-      if (id && path) {
+      if (assetId && path && uploadURL) {
+        await uploadImage({ uploadURL, file })
+
+        // (async) mark asset draft as false
+        directImageUploadDone({
+          variables: {
+            ..._omit(variables.input, ['file']),
+            draft: false,
+            url: path,
+          },
+        }).catch(console.error)
+
         setAvatar(path)
-        onUploaded(id)
+        onUploaded(assetId)
       } else {
         throw new Error()
       }
     } catch (e) {
-      toast.error({
-        message: <Translate id="failureUploadImage" />,
-      })
+      toast.error({ message: <Translate id="failureUploadImage" /> })
     }
 
     if (onUploadEnd) {
@@ -132,7 +145,11 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
       {isCircle && <CircleAvatar size="xxxl" {...avatarProps} src={avatar} />}
 
       <div className={styles.mask}>
-        {loading ? <Spinner /> : <IconCamera24 color="white" size="lg" />}
+        {loading || uploading ? (
+          <Spinner />
+        ) : (
+          <IconCamera24 color="white" size="lg" />
+        )}
       </div>
 
       <VisuallyHidden>

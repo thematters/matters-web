@@ -50,6 +50,10 @@
   }
 
   & .displayName {
+    & .meDisplayName {
+      cursor: pointer;
+    }
+
     & .isInUserPageName {
       font-size: var(--font-size-xl);
       line-height: 1.5;

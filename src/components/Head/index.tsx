@@ -5,6 +5,7 @@ import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
 import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png'
 import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
 import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
+import IMAGE_FAVICON_128 from '@/public/static/favicon-128x128.png'
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import {
   toLocale,
@@ -88,6 +89,7 @@ export const Head: React.FC<HeadProps> = (props) => {
         rel="icon"
         type="image/png"
         href={IMAGE_FAVICON_16.src}
+        // href={IMAGE_FAVICON_128.src}
         sizes="16x16"
         key="favicon-16"
       />
@@ -104,6 +106,14 @@ export const Head: React.FC<HeadProps> = (props) => {
         href={IMAGE_FAVICON_64.src}
         sizes="64x64"
         key="favicon-64"
+      />
+      <link
+        rel="shortcut icon"
+        type="image/png"
+        href={IMAGE_FAVICON_128.src}
+        sizes="128x128"
+        // Note: With the attribute key, dapp can't get the shortcut icon.
+        // key="favicon-128"
       />
       <link
         rel="search"

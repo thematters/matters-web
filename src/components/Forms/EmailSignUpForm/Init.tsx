@@ -1,8 +1,10 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+// import Script from 'next/script'
+import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ERROR_CODES } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   signupCallbackUrl,
@@ -20,9 +22,14 @@ import {
   Media,
   ReCaptchaContext,
   TextIcon,
+  Turnstile,
+  // TURNSTILE_DEFAULT_SCRIPT_ID,
+  TurnstileInstance,
   useMutation,
+  ViewerContext,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
+// import { UserGroup } from '~/gql/graphql'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -52,6 +59,7 @@ const Init: React.FC<FormProps> = ({
   setAuthFeedType,
   back,
 }) => {
+  const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const formId = 'email-sign-up-init-form'
 
@@ -59,9 +67,10 @@ const Init: React.FC<FormProps> = ({
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
-  const { token, refreshToken } = useContext(ReCaptchaContext)
+  const { token: reCaptchaToken, refreshToken } = useContext(ReCaptchaContext)
+  const turnstileRef = useRef<TurnstileInstance>(null)
+  const [turnstileToken, setTurnstileToken] = useState<string>()
 
-  // const { token, refreshToken } = useContext(ReCaptchaContext)
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
     SEND_CODE,
     undefined,
@@ -93,7 +102,18 @@ const Init: React.FC<FormProps> = ({
         const redirectUrl = signupCallbackUrl(email)
         await sendCode({
           variables: {
-            input: { email, type: 'register', token, redirectUrl },
+            input: {
+              email,
+              type: 'register',
+              token:
+                // (viewer.info.group === UserGroup.A && turnstileToken) ||
+                // turnstileRef.current?.getResponse() || // fallback to ReCaptchaContext token
+                turnstileToken
+                  ? `${reCaptchaToken} ${turnstileToken}`
+                  : reCaptchaToken,
+              redirectUrl,
+              language: lang,
+            },
           },
         })
 
@@ -103,17 +123,50 @@ const Init: React.FC<FormProps> = ({
         setSubmitting(false)
 
         const [messages, codes] = parseFormSubmitErrors(error as any)
-        setFieldError('email', intl.formatMessage(messages[codes[0]]))
-
-        if (refreshToken) {
-          refreshToken()
+        if (codes[0].includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+          setFieldError(
+            'email',
+            intl.formatMessage({
+              defaultMessage: 'Unavailable',
+              description: 'FORBIDDEN_BY_STATE',
+            })
+          )
+        } else {
+          setFieldError('email', intl.formatMessage(messages[codes[0]]))
         }
+
+        refreshToken?.()
+        turnstileRef.current?.reset()
       }
     },
   })
 
+  // useEffect(() => { console.log('turnstileToken changed to:', turnstileToken); }, [turnstileRef, turnstileToken])
+
+  const siteKey = process.env
+    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={siteKey}
+        options={{
+          action: 'register',
+          cData: `user-group-${viewer.info.group}`,
+          // refreshExpired: 'manual',
+          size: 'invisible',
+        }}
+        // injectScript={false}
+
+        scriptOptions={{
+          compat: 'recaptcha',
+          appendTo: 'body',
+        }}
+        onSuccess={(token) => {
+          setTurnstileToken(token)
+          // console.log('setTurnstileToken:', token)
+        }}
+      />
       <Form.Input
         label={<FormattedMessage defaultMessage="Email" />}
         type="email"

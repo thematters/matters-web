@@ -79,6 +79,10 @@
     color: var(--color-white);
   }
 
+  &.whiteLight {
+    color: var(--color-white-light);
+  }
+
   &.black {
     color: var(--color-black);
   }

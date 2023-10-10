@@ -122,7 +122,7 @@ const FingerprintDialogContent = ({
             <TextIcon
               icon={<IconIPFSGreen24 size="md" />}
               spacing="xtight"
-              size="xl"
+              size="lg"
             >
               IPFS
             </TextIcon>
@@ -226,7 +226,7 @@ const FingerprintDialogContent = ({
             title={
               <TextIcon
                 icon={<IconISCN24 size="md" />}
-                size="xl"
+                size="lg"
                 spacing="xtight"
               >
                 ISCN

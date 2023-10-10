@@ -76,6 +76,7 @@ code,
 kbd,
 samp,
 pre {
+  font-family: var(--font-mono);
   background: var(--color-grey-lighter);
 }
 

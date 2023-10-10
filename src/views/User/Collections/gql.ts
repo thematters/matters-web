@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import CollectionDigestFeed from '~/components/CollectionDigest/Feed'
+import { CollectionDigestFeed } from '~/components/CollectionDigest/Feed'
 
 const fragments = gql`
   fragment CollectionsUser on User {

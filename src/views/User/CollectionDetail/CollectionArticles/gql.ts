@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestFeed, CollectionDigest } from '~/components'
+import { ArticleDigestFeed } from '~/components/ArticleDigest/Feed'
+import { CollectionDigestFeed } from '~/components/CollectionDigest/Feed'
 
 export const fragments = {
   collection: gql`
@@ -22,6 +23,6 @@ export const fragments = {
     }
     ${ArticleDigestFeed.fragments.article.public}
     ${ArticleDigestFeed.fragments.article.private}
-    ${CollectionDigest.Feed.fragments.collection}
+    ${CollectionDigestFeed.fragments.collection}
   `,
 }

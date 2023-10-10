@@ -1,4 +1,5 @@
 export * from './Features'
 export * from './Language'
 export * from './ReCaptcha'
+export * from './Turnstile'
 export * from './Viewer'

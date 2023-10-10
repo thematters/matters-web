@@ -1,7 +1,4 @@
 .overlay {
-  @mixin expand-to-container;
-
-  content: '';
   background: rgb(0 0 0 / 40%);
   will-change: opacity;
 }
@@ -25,7 +22,7 @@
     background: var(--color-white);
   }
 
-  & :nth-last-child(1 of [data-dialog-entity]) {
+  & :nth-last-child(1 of [data-dialog-entity='true']) {
     @media (--sm-down) {
       padding-bottom: var(--spacing-xx-loose);
     }
@@ -53,6 +50,10 @@
       display: none;
     }
   }
+}
+
+.scrollable {
+  overflow: auto !important;
 }
 
 .handle {

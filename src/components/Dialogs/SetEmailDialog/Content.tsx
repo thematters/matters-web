@@ -5,6 +5,7 @@ import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
+  ERROR_CODES,
   KEYVALUE,
   MAX_CHANGE_EMAIL_TIME_DAILY,
   TOAST_SEND_EMAIL_VERIFICATION,
@@ -79,7 +80,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     values,
     errors,
     touched,
-    handleBlur,
+    // handleBlur,
     handleChange,
     handleSubmit,
     isSubmitting,
@@ -117,7 +118,17 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as any)
         codes.forEach((code) => {
-          setFieldError('email', intl.formatMessage(messages[code]))
+          if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+            setFieldError(
+              'email',
+              intl.formatMessage({
+                defaultMessage: 'Unavailable',
+                description: 'FORBIDDEN_BY_STATE',
+              })
+            )
+          } else {
+            setFieldError('email', intl.formatMessage(messages[code]))
+          }
         })
         setSubmitting(false)
       }
@@ -135,7 +146,8 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         disabled={!editable}
         value={values.email}
         error={touched.email && errors.email}
-        onBlur={handleBlur}
+        // FIXME: handleBlur will cause the component to re-render
+        // onBlur={handleBlur}
         onChange={handleChange}
         onKeyDown={(e) => {
           if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {

@@ -16,6 +16,10 @@ span.container {
   color: var(--color-white);
 }
 
+.textWhiteLight {
+  color: var(--color-white-light);
+}
+
 .textBlack {
   color: var(--color-black);
 }

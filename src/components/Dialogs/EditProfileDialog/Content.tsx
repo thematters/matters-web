@@ -81,16 +81,11 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   const intl = useIntl()
 
   const validateDescription = (value: string, lang: Language) => {
-    if (!value) {
-      return intl.formatMessage({
-        defaultMessage: 'Required',
-      })
-    } else if (value.length > MAX_USER_DESCRIPTION_LENGTH) {
+    if (value.length > MAX_USER_DESCRIPTION_LENGTH) {
       return intl.formatMessage(
         {
-          defaultMessage: 'Over 200 words, current {numbers}',
-          description:
-            'src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx',
+          defaultMessage: 'Over 140 words, current {numbers}',
+          description: 'src/components/Dialogs/EditProfileDialog/Content.tsx',
         },
         {
           numbers: value.length,
@@ -212,7 +207,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
 
       <Form.Textarea
         name="description"
-        required
         placeholder={intl.formatMessage({
           defaultMessage: 'Bio',
         })}

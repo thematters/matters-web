@@ -1,6 +1,4 @@
 .reason {
-  @mixin border-bottom-grey;
-
   padding: var(--spacing-loose) 0;
   margin: 0 var(--spacing-base);
   font-size: var(--font-size-md);

@@ -36,8 +36,22 @@ const Footer: React.FC<FooterProps> = ({
     [styles.smUpContent]: true,
   })
 
-  const SmUpBtns = () => (
-    <>
+  return (
+    <footer className={footerClasses} data-dialog-entity={!!hasBtns}>
+      <Media at="sm">
+        {hasBtns && (
+          <section className={styles.content}>
+            {btns}
+            {closeDialog && (
+              <RoundedButton
+                text={text}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+            )}
+          </section>
+        )}
+      </Media>
       {hasSmUpBtns && (
         <Media greaterThan="sm">
           <section className={smUpContentClasses}>
@@ -52,33 +66,6 @@ const Footer: React.FC<FooterProps> = ({
           </section>
         </Media>
       )}
-    </>
-  )
-
-  if (hasBtns) {
-    return (
-      <footer className={footerClasses} data-dialog-entity>
-        <Media at="sm">
-          <section className={styles.content}>
-            {btns}
-            {closeDialog && (
-              <RoundedButton
-                text={text}
-                color="greyDarker"
-                onClick={closeDialog}
-              />
-            )}
-          </section>
-        </Media>
-
-        <SmUpBtns />
-      </footer>
-    )
-  }
-
-  return (
-    <footer className={footerClasses}>
-      <SmUpBtns />
     </footer>
   )
 }

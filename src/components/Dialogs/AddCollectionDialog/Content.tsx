@@ -8,7 +8,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { KEYVALUE } from '~/common/enums'
 import { toPath, validateCollectionTitle } from '~/common/utils'
 import {
-  CollectionDigest,
+  CollectionDigestFeed,
   Dialog,
   Form,
   LanguageContext,
@@ -38,7 +38,7 @@ const CREATE_COLLECTION = gql`
       ...CollectionDigestFeedCollection
     }
   }
-  ${CollectionDigest.Feed.fragments.collection}
+  ${CollectionDigestFeed.fragments.collection}
 `
 
 const AddCollectionDialogContent: React.FC<FormProps> = ({

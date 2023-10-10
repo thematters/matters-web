@@ -1,8 +1,6 @@
 import gql from 'graphql-tag'
 
-// circular dependencies？ 👇
-// import { ArticleDigestFeed } from '~/components'
-import { ArticleDigestFeed } from '../../ArticleDigest/Feed'
+import { ArticleDigestFeed } from '~/components/ArticleDigest/Feed'
 
 export const fragments = {
   user: gql`

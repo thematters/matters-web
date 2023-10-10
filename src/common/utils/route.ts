@@ -287,6 +287,12 @@ export const redirectToLogin = () => {
   return Router.push(`${PATHS.LOGIN}?target=${target}`)
 }
 
+export const redirectToHomePage = () => {
+  const target = getTarget() || getEncodedCurrent()
+
+  return Router.push(`${PATHS.HOME}?target=${target}`)
+}
+
 /**
  * Append `?target` to the given path.
  *
