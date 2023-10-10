@@ -612,10 +612,6 @@
   "H0JBH6": {
     "defaultMessage": "登出"
   },
-  "H7bMRx": {
-    "defaultMessage": "驗證連結已發送，請查收郵件",
-    "description": "src/components/GlobalToast/index.tsx"
-  },
   "H8KGyc": {
     "defaultMessage": "進入"
   },
@@ -829,6 +825,10 @@
   "O2Nqk8": {
     "defaultMessage": "忘記密碼？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "OAc8+i": {
+    "defaultMessage": "郵件地址驗證連結已發送至 {email}，請查收郵件",
+    "description": "src/components/GlobalToast/index.tsx"
   },
   "OIj8pQ": {
     "defaultMessage": "成功發送邀請",
