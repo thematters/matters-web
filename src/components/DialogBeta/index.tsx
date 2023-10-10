@@ -178,6 +178,7 @@ export const DialogBeta: React.ComponentType<
   const dialogOverlayClasses = classNames({
     dialog: true,
     [styles.scrollable]: !!scrollable,
+    [styles.overlay]: !!mounted,
   })
 
   const AnimatedDialogOverlay = animated(DialogOverlay)
