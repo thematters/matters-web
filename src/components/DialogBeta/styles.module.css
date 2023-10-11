@@ -60,7 +60,7 @@
   position: absolute;
   top: 0;
   left: 50%;
-  z-index: var(--z-index-dialog);
+  z-index: calc(var(--z-index-dialog) + 1);
   padding: var(--spacing-x-tight);
   transform: translateX(-50%);
 

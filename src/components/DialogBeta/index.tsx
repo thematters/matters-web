@@ -11,11 +11,11 @@ import { capitalizeFirstLetter, dom } from '~/common/utils'
 import { Media, useOutsideClick } from '~/components'
 
 import { RoundedButton, TextButton } from '../Dialog/Buttons'
-import Handle from '../Dialog/Handle'
 import Header from '../Dialog/Header'
 import Lazy from '../Dialog/Lazy'
 import Content from './Content'
 import Footer from './Footer'
+import Handle from './Handle'
 import styles from './styles.module.css'
 
 export interface DialogBetaOverlayProps {
@@ -74,6 +74,7 @@ const Container: React.FC<
     const topDialog = dialogs[dialogs.length - 1]
     const isTopDialog =
       topDialog && node.current && topDialog.contains(node.current)
+    console.log({ dialogs, topDialog, isTopDialog })
 
     if (!isTopDialog) {
       return
