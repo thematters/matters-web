@@ -74,7 +74,6 @@ const Container: React.FC<
     const topDialog = dialogs[dialogs.length - 1]
     const isTopDialog =
       topDialog && node.current && topDialog.contains(node.current)
-    console.log({ dialogs, topDialog, isTopDialog })
 
     if (!isTopDialog) {
       return
