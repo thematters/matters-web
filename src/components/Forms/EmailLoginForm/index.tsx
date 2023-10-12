@@ -301,6 +301,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
                       e.preventDefault()
                       sendLoginCode()
                     }}
+                    disabled={sendingCode}
                   >
                     <FormattedMessage
                       defaultMessage="Resend"
