@@ -120,9 +120,10 @@ const FingerprintDialogContent = ({
         <SectionCard
           title={
             <TextIcon
-              icon={<IconIPFSGreen24 size="md" />}
+              icon={<IconIPFSGreen24 size="mdXS" />}
               spacing="xtight"
-              size="lg"
+              size="xm"
+              weight="md"
             >
               IPFS
             </TextIcon>
@@ -135,7 +136,7 @@ const FingerprintDialogContent = ({
             />
           }
         >
-          <Spacer size="xtight" />
+          <Spacer size="base" />
           <hr />
           <Spacer size="base" />
 
@@ -157,7 +158,7 @@ const FingerprintDialogContent = ({
               />
             </p>
 
-            <ul>
+            <ul className={styles.gatewayUrls}>
               {(!data || loading) && <Spinner />}
 
               {gateways.slice(0, 4).map((url) => {
@@ -222,71 +223,79 @@ const FingerprintDialogContent = ({
 
         {/* iscnId */}
         {iscnPublish && (isAuthor || iscnId) && !timeCooling && (
-          <SectionCard
-            title={
-              <TextIcon
-                icon={<IconISCN24 size="md" />}
-                size="lg"
-                spacing="xtight"
-              >
-                ISCN
-              </TextIcon>
-            }
-            description={
-              iscnId ? (
-                <Translate
-                  zh_hant="已在 LikeCoin 鏈上註冊的元數據"
-                  zh_hans="已在 LikeCoin 鏈上註冊的元數據"
-                  en="The metadata registered on LikeCoin chain"
-                />
-              ) : (
-                <Translate
-                  zh_hant="ISCN 寫入未成功"
-                  zh_hans="ISCN 写入未成功"
-                  en="ISCN is failed to register on LikeCoin chain"
-                />
-              )
-            }
-            warning={!iscnId}
-            right={
-              iscnId ? (
-                <a href={iscnLinkUrl(iscnId)} target="_blank" rel="noreferrer">
-                  <IconExternalLink16 color="greyDarker" />
-                </a>
-              ) : isAuthor ? (
-                <Button
-                  spacing={[0, 'xtight']}
-                  size={[null, '1.5rem']}
-                  bgColor="green"
-                  textColor="white"
-                  aria-label={translate({ id: 'retry', lang })}
-                  disabled={!pending && (timeCooling || retryPublishing)}
-                  onClick={() => {
-                    editArticle({
-                      variables: {
-                        id: articleId,
-                        iscnPublish: true,
-                      },
-                    })
-                    setTimeCooling(true)
-                    pooling(Date.now())
-                  }}
+          <>
+            <Spacer size="base" />
+            <SectionCard
+              title={
+                <TextIcon
+                  icon={<IconISCN24 size="mdXS" />}
+                  spacing="xtight"
+                  size="xm"
+                  weight="md"
                 >
-                  <TextIcon size="smS">
-                    {timeCooling ? (
-                      <Translate id="publishing2" />
-                    ) : retryPublishing ? (
-                      <Translate id="retrying" />
-                    ) : (
-                      <Translate id="retry" />
-                    )}
-                  </TextIcon>
-                </Button>
-              ) : (
-                <></>
-              )
-            }
-          />
+                  ISCN
+                </TextIcon>
+              }
+              description={
+                iscnId ? (
+                  <Translate
+                    zh_hant="已在 LikeCoin 鏈上註冊的元數據"
+                    zh_hans="已在 LikeCoin 鏈上註冊的元數據"
+                    en="The metadata registered on LikeCoin chain"
+                  />
+                ) : (
+                  <Translate
+                    zh_hant="ISCN 寫入未成功"
+                    zh_hans="ISCN 写入未成功"
+                    en="ISCN is failed to register on LikeCoin chain"
+                  />
+                )
+              }
+              warning={!iscnId}
+              right={
+                iscnId ? (
+                  <a
+                    href={iscnLinkUrl(iscnId)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <IconExternalLink16 color="greyDarker" />
+                  </a>
+                ) : isAuthor ? (
+                  <Button
+                    spacing={[0, 'xtight']}
+                    size={[null, '1.5rem']}
+                    bgColor="green"
+                    textColor="white"
+                    aria-label={translate({ id: 'retry', lang })}
+                    disabled={!pending && (timeCooling || retryPublishing)}
+                    onClick={() => {
+                      editArticle({
+                        variables: {
+                          id: articleId,
+                          iscnPublish: true,
+                        },
+                      })
+                      setTimeCooling(true)
+                      pooling(Date.now())
+                    }}
+                  >
+                    <TextIcon size="smS">
+                      {timeCooling ? (
+                        <Translate id="publishing2" />
+                      ) : retryPublishing ? (
+                        <Translate id="retrying" />
+                      ) : (
+                        <Translate id="retry" />
+                      )}
+                    </TextIcon>
+                  </Button>
+                ) : (
+                  <></>
+                )
+              }
+            />
+          </>
         )}
       </section>
     </Dialog.Content>

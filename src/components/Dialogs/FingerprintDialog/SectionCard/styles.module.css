@@ -10,4 +10,8 @@
   & .description {
     margin-top: var(--spacing-xx-tight);
   }
+
+  & .error {
+    color: var(--color-red);
+  }
 }
