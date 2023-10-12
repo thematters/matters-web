@@ -165,7 +165,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                 />
               </p>
 
-              <ul>
+              <ul className={styles.gatewayUrls}>
                 {(!data || loading) && <Spinner />}
 
                 {/* FIXME: remove filebase.io and meson.network */}
