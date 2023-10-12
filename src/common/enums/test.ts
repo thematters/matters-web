@@ -111,6 +111,14 @@ export enum TEST_ID {
   // Icons
   ICON_SPINNER = 'icon/spinner',
 
+  // Avatar
+  AVATAR = 'avatar',
+  AVATAR_CIVIC_LIKER = 'avatar/civic-liker',
+  AVATAR_ARCHITECT = 'avatar/architect',
+  AVATAR_CIVIC_ARCHITECT = 'avatar/civic-architect',
+  AVATAR_LOGBOOK = 'avatar/logbook',
+
   // misc
+  RESPONSIVE_IMG = 'responsive-img',
   SPINNER = 'spinner',
 }

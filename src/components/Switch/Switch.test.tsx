@@ -3,8 +3,7 @@ import { useState } from 'react'
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-
-import { Switch, SwitchProps } from './'
+import { Switch, SwitchProps } from '~/components'
 
 const AnySwitch = ({
   checked: initChecked,

@@ -2,8 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vitest } from 'vitest'
 
 import { PATHS } from '~/common/enums'
-
-import { Button } from './'
+import { Button } from '~/components'
 
 describe('Button', () => {
   it('should allow to be clicked', async () => {
@@ -57,21 +56,25 @@ describe('Button', () => {
 
   it('should allow to be a link', async () => {
     // internal link
-    render(<Button href={PATHS.ABOUT} />)
-    let $links = screen.getAllByRole('link')
-    expect($links[0]).toHaveAttribute('href', PATHS.ABOUT)
+    const { unmount } = render(<Button href={PATHS.ABOUT} />)
+    let $link = screen.getByRole('link')
+    expect($link).toHaveAttribute('href', PATHS.ABOUT)
+    unmount()
 
     // external link
     const externalLink = 'https://example.com'
-    render(<Button htmlHref={externalLink} htmlTarget="_blank" />)
-    $links = screen.getAllByRole('link')
-    expect($links[1]).toHaveAttribute('href', externalLink)
-    expect($links[1]).toHaveAttribute('target', '_blank')
+    const { unmount: unmount2 } = render(
+      <Button htmlHref={externalLink} htmlTarget="_blank" />
+    )
+    $link = screen.getByRole('link')
+    expect($link).toHaveAttribute('href', externalLink)
+    expect($link).toHaveAttribute('target', '_blank')
+    unmount2()
 
     // external link: provide both `href` and `htmlHref`
     render(<Button href={PATHS.ABOUT} htmlHref={externalLink} />)
-    $links = screen.getAllByRole('link')
-    expect($links[2]).toHaveAttribute('href', externalLink)
+    $link = screen.getByRole('link')
+    expect($link).toHaveAttribute('href', externalLink)
   })
 
   it('should allow to be a <span>', async () => {
