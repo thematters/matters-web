@@ -87,17 +87,15 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const [isSelectMethod, setIsSelectMethod] = useState(false)
   const [errorCode, setErrorCode] = useState<ERROR_CODES | null>(null)
   const [hasSendCode, setHasSendCode] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const { countdown, setCountdown } = useCountdown(0)
 
   const passwordRef = useRef<HTMLInputElement>(null)
 
-  const [sendCode] = useMutation<SendVerificationCodeMutation>(
-    SEND_CODE,
-    undefined,
-    {
+  const [sendCode, { loading: sendingCode }] =
+    useMutation<SendVerificationCodeMutation>(SEND_CODE, undefined, {
       showToast: false,
-    }
-  )
+    })
 
   const intl = useIntl()
   const {
@@ -110,7 +108,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     setFieldError,
     setFieldValue,
     setErrors,
-    isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
       email: '',
@@ -123,10 +120,13 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         email: validateEmail(email, lang, { allowPlusSign: true }),
         // password: validatePassword(password, lang),
       }),
-    onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
+    onSubmit: async ({ email, password }, { setFieldError }) => {
       try {
+        setIsSubmitting(true)
         const { data } = await login({
-          variables: { input: { email, passwordOrCode: password } },
+          variables: {
+            input: { email, passwordOrCode: password, language: lang },
+          },
         })
 
         const token = data?.emailLogin.token || ''
@@ -148,7 +148,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
         analytics.identifyUser()
 
-        setSubmitting(false)
         redirectToTarget({
           fallback: !!isInPage ? 'homepage' : 'current',
         })
@@ -180,11 +179,19 @@ export const EmailLoginForm: React.FC<FormProps> = ({
                   'This login code has expired, please try to resend',
               })
             )
+          } else if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+            setFieldError(
+              'email',
+              intl.formatMessage({
+                defaultMessage: 'Unavailable',
+                description: 'FORBIDDEN_BY_STATE',
+              })
+            )
           } else {
             setFieldError('password', intl.formatMessage(messages[code]))
           }
         })
-        setSubmitting(false)
+        setIsSubmitting(false)
       }
     },
   })
@@ -198,21 +205,41 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
     const redirectUrl = signinCallbackUrl(values.email)
 
-    await sendCode({
-      variables: {
-        input: { email: values.email, type: 'email_otp', redirectUrl },
-      },
-    })
-    setCountdown(SEND_CODE_COUNTDOWN)
-    setHasSendCode(true)
+    try {
+      await sendCode({
+        variables: {
+          input: {
+            email: values.email,
+            type: 'email_otp',
+            redirectUrl,
+            language: lang,
+          },
+        },
+      })
+      setCountdown(SEND_CODE_COUNTDOWN)
+      setHasSendCode(true)
 
-    // clear
-    setErrors({})
-    setFieldValue('password', '')
-    setErrorCode(null)
+      // clear
+      setErrors({})
+      setFieldValue('password', '')
+      setErrorCode(null)
 
-    if (passwordRef.current) {
-      passwordRef.current.focus()
+      if (passwordRef.current) {
+        passwordRef.current.focus()
+      }
+    } catch (error) {
+      const [, codes] = parseFormSubmitErrors(error as any)
+      codes.forEach((code) => {
+        if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+          setFieldError(
+            'email',
+            intl.formatMessage({
+              defaultMessage: 'Unavailable',
+              description: 'FORBIDDEN_BY_STATE',
+            })
+          )
+        }
+      })
     }
   }
 
@@ -236,11 +263,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           onChange={handleChange}
           spacingBottom="baseLoose"
           hasFooter={false}
-          autoFocus
+          autoFocus={false}
         />
 
         <Form.Input
-          ref={passwordRef}
+          // ref={passwordRef}
           label={<FormattedMessage defaultMessage="Password" />}
           type="password"
           name="password"
@@ -300,9 +327,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         {errorCode !== ERROR_CODES.CODE_EXPIRED &&
           !(hasSendCode && errorCode === ERROR_CODES.CODE_INVALID) && (
             <OtherOptions
-              isInPage={isInPage}
               sendLoginCode={sendLoginCode}
               hasSendCode={hasSendCode}
+              disabled={sendingCode}
             />
           )}
       </Form>
@@ -314,8 +341,16 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!values.email || !values.password || isSubmitting}
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={
+        <FormattedMessage
+          defaultMessage="Sign in"
+          description="src/components/Forms/EmailLoginForm/index.tsx"
+        />
+      }
       loading={isSubmitting}
+      // onClick={() => {
+      //   setIsSubmitting(true)
+      // }}
     />
   )
 

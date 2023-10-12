@@ -2,14 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
-import {
-  Button,
-  CopyToClipboard,
-  IconCopy16,
-  IconLocked24,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { CopyToClipboard, IconCopy16, TextIcon, Translate } from '~/components'
 import { ArticleSecretQuery } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -56,21 +49,18 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
 
       <section className={styles.key}>
         <CopyToClipboard text={secret}>
-          <Button
+          <button
             aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
-            spacing={['xtight', 'base']}
-            bgColor="yellowLighter"
+            className={styles.copyButton}
           >
-            <TextIcon icon={<IconLocked24 size="md" />} spacing="xxtight">
-              <TextIcon
-                icon={<IconCopy16 />}
-                textPlacement="left"
-                spacing="xtight"
-              >
-                {secret.slice(0, 3)}...{secret.slice(-2)}
-              </TextIcon>
+            <TextIcon
+              icon={<IconCopy16 />}
+              textPlacement="left"
+              spacing="xtight"
+            >
+              {secret.slice(0, 4)}...{secret.slice(-4)}
             </TextIcon>
-          </Button>
+          </button>
         </CopyToClipboard>
       </section>
     </section>

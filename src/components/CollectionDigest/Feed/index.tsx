@@ -119,7 +119,7 @@ type MemoizedCollectionDigestFeed = React.MemoExoticComponent<
   fragments: typeof fragments
 }
 
-const CollectionDigestFeed = React.memo(
+export const CollectionDigestFeed = React.memo(
   BaseCollectionDigestFeed,
   ({ collection: prevCollection }, { collection }) => {
     return (
@@ -134,5 +134,3 @@ const CollectionDigestFeed = React.memo(
 
 CollectionDigestFeed.Placeholder = Placeholder
 CollectionDigestFeed.fragments = fragments
-
-export default CollectionDigestFeed

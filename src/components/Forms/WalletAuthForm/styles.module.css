@@ -105,3 +105,8 @@
     margin-bottom: var(--spacing-xx-tight);
   }
 }
+
+.footerSmUpBtns {
+  flex: 1;
+  @mixin flex-center-space-between;
+}

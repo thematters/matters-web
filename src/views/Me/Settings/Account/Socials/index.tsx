@@ -5,6 +5,7 @@ import {
   OAUTH_STORAGE_BIND_STATE,
   OAUTH_STORAGE_BIND_STATE_FAILURE,
   OAUTH_STORAGE_BIND_STATE_SUCCESS,
+  OAUTH_STORAGE_BIND_STATE_UNAVAILABLE,
 } from '~/common/enums'
 import {
   facebookOauthUrl,
@@ -101,6 +102,20 @@ const Socials = () => {
               values={{
                 type: bindResult.type,
               }}
+            />
+          ),
+        })
+      })
+      return
+    }
+
+    if (state === OAUTH_STORAGE_BIND_STATE_UNAVAILABLE) {
+      setTimeout(() => {
+        toast.error({
+          message: (
+            <FormattedMessage
+              defaultMessage="Unavailable"
+              description="FORBIDDEN_BY_STATE"
             />
           ),
         })

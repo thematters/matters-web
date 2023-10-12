@@ -11,12 +11,11 @@ import { capitalizeFirstLetter, dom } from '~/common/utils'
 import { Media, useOutsideClick } from '~/components'
 
 import { RoundedButton, TextButton } from '../Dialog/Buttons'
-import Handle from '../Dialog/Handle'
 import Header from '../Dialog/Header'
 import Lazy from '../Dialog/Lazy'
-import Overlay from '../Dialog/Overlay'
 import Content from './Content'
 import Footer from './Footer'
+import Handle from './Handle'
 import styles from './styles.module.css'
 
 export interface DialogBetaOverlayProps {
@@ -33,6 +32,7 @@ export type DialogBetaProps = {
   hidePaddingBottom?: boolean
 
   testId?: string
+  scrollable?: boolean
 } & DialogBetaOverlayProps
 
 const Container: React.FC<
@@ -139,7 +139,7 @@ export const DialogBeta: React.ComponentType<
   RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
-  const { isOpen, onRest } = props
+  const { isOpen, onRest, scrollable } = props
   const [mounted, setMounted] = useState(isOpen)
   const initialFocusRef = useRef<any>(null)
 
@@ -175,9 +175,14 @@ export const DialogBeta: React.ComponentType<
     }
   })
 
+  const dialogOverlayClasses = classNames({
+    dialog: true,
+    [styles.scrollable]: !!scrollable,
+    [styles.overlay]: !!mounted,
+  })
+
   const AnimatedDialogOverlay = animated(DialogOverlay)
   const AnimatedContainer = animated(Container)
-  const AnimatedOverlay = animated(Overlay)
 
   if (!mounted) {
     return null
@@ -186,11 +191,10 @@ export const DialogBeta: React.ComponentType<
   return (
     <>
       <AnimatedDialogOverlay
-        className="dialog"
+        className={dialogOverlayClasses}
         initialFocusRef={initialFocusRef}
+        style={{ opacity: opacity as any }}
       >
-        <AnimatedOverlay style={{ opacity: opacity as any }} />
-
         <DialogContent aria-labelledby="dialog-title">
           <AnimatedContainer
             style={{ opacity: opacity as any, top }}

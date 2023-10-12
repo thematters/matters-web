@@ -4,7 +4,7 @@ import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
-  ArticleDigestArchive,
+  ArticleDigestArchived,
   ArticleDigestFeed,
   Empty,
   EmptyArticle,
@@ -195,7 +195,7 @@ const UserArticles = () => {
             {articleEdges.map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
                 {node.articleState !== 'active' ? (
-                  <ArticleDigestArchive article={node} />
+                  <ArticleDigestArchived article={node} />
                 ) : (
                   <ArticleDigestFeed
                     article={node}

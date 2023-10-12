@@ -54,6 +54,7 @@ interface FormProps {
   back?: () => void
   gotoSignInTab?: () => void
   setHasWalletExist?: () => void
+  setUnavailable?: () => void
 }
 
 interface FormValues {
@@ -69,6 +70,7 @@ const Connect: React.FC<FormProps> = ({
   back,
   gotoSignInTab,
   setHasWalletExist,
+  setUnavailable,
 }) => {
   const isInPage = purpose === 'page'
   const isInDialog = purpose === 'dialog'
@@ -189,7 +191,7 @@ const Connect: React.FC<FormProps> = ({
         if (isLogin) {
           // confirm auth
           const { data: loginData } = await walletLogin({
-            variables,
+            variables: { input: { ...variables.input, language: lang } },
           })
 
           const token = loginData?.walletLogin.token || ''
@@ -216,9 +218,7 @@ const Connect: React.FC<FormProps> = ({
         }
 
         if (isConnect) {
-          await addWalletLogin({
-            variables: variables,
-          })
+          await addWalletLogin({ variables })
 
           toast.success({
             message: (
@@ -239,7 +239,11 @@ const Connect: React.FC<FormProps> = ({
           } else if (code.includes(ERROR_CODES.CRYPTO_WALLET_EXISTS)) {
             disconnect()
             !!setHasWalletExist && setHasWalletExist()
+          } else if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+            disconnect()
+            !!setUnavailable && setUnavailable()
           } else {
+            disconnect()
             setFieldError('address', intl.formatMessage(messages[code]))
           }
         })
@@ -307,7 +311,7 @@ const Connect: React.FC<FormProps> = ({
 
       <DialogBeta.Footer
         smUpBtns={
-          <>
+          <section className={styles.footerSmUpBtns}>
             <DialogBeta.TextButton
               text={
                 <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
@@ -328,7 +332,7 @@ const Connect: React.FC<FormProps> = ({
                 onClick={onCloseDialog}
               />
             )}
-          </>
+          </section>
         }
       />
     </>
