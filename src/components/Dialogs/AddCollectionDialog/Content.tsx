@@ -90,6 +90,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
             },
           },
           update(cache, result) {
+            // FIXME: Why not update user profile tab collection count?
             // updateUserProfile({
             //   cache,
             //   userName,
