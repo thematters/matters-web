@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
@@ -9,16 +9,32 @@ import {
   useDialogSwitch,
   useMutation,
   useRoute,
+  ViewerContext,
 } from '~/components'
 import { updateUserArticles, updateUserCollections } from '~/components/GQL'
 import {
   DeleteCollectionCollectionFragment,
   DeleteCollectionMutation,
+  ViewerTabsCountQuery,
 } from '~/gql/graphql'
 
 const DELETE_COLLECTION = gql`
   mutation DeleteCollection($id: ID!) {
     deleteCollections(input: { ids: [$id] })
+  }
+`
+
+const VIEWER_TABS_COUNT = gql`
+  query ViewerTabsCount {
+    viewer {
+      id
+      status {
+        articleCount
+      }
+      collections(input: { first: 0 }) {
+        totalCount
+      }
+    }
   }
 `
 
@@ -33,6 +49,7 @@ const DeleteCollectionDialog = ({
   collection,
   children,
 }: DeleteCollectionDialogProps) => {
+  const viewer = useContext(ViewerContext)
   const { show, openDialog, closeDialog: cd } = useDialogSwitch(true)
   const { isInPath, router } = useRoute()
   const isInUserCollectionDetail = isInPath('USER_COLLECTION_DETAIL')
@@ -46,9 +63,8 @@ const DeleteCollectionDialog = ({
     }, 1000)
   }
   const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
-  const [deleteCollection, { loading }] = useMutation<DeleteCollectionMutation>(
-    DELETE_COLLECTION,
-    {
+  const [deleteCollection, { loading, client }] =
+    useMutation<DeleteCollectionMutation>(DELETE_COLLECTION, {
       variables: { id: collection.id },
       update: (cache) => {
         updateUserArticles({
@@ -70,6 +86,7 @@ const DeleteCollectionDialog = ({
         //   userName: collection.author.userName!,
         //   type: 'decreaseCollection',
         // })
+        onEmptyCollection()
       },
       refetchQueries: [
         {
@@ -77,8 +94,22 @@ const DeleteCollectionDialog = ({
           variables: { userName: collection.author.userName },
         },
       ],
-    }
-  )
+    })
+
+  const onEmptyCollection = async () => {
+    const result = await client?.query<ViewerTabsCountQuery>({
+      query: VIEWER_TABS_COUNT,
+      fetchPolicy: 'network-only',
+    })
+
+    if (
+      result?.data.viewer?.status?.articleCount === 0 &&
+      result.data.viewer?.collections.totalCount === 0
+    )
+      router.push(
+        toPath({ page: 'userProfile', userName: viewer.userName || '' }).href
+      )
+  }
 
   const onDelete = async () => {
     await deleteCollection()

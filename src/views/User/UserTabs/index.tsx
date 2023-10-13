@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
@@ -14,7 +14,7 @@ const UserTabs = ({
   user?: TabsUserFragment
   loading?: boolean
 }) => {
-  const { isInPath, getQuery, router } = useRoute()
+  const { isInPath, getQuery } = useRoute()
   const userName = getQuery('name')
   const viewer = useContext(ViewerContext)
 
@@ -30,14 +30,6 @@ const UserTabs = ({
 
   const articleCount = user?.status?.articleCount || 0
   const collectionCount = user?.userCollections.totalCount || 0
-
-  useEffect(() => {
-    if (collectionCount === 0 && articleCount === 0) {
-      router.push(
-        toPath({ page: 'userProfile', userName: viewer.userName || '' }).href
-      )
-    }
-  }, [articleCount, collectionCount])
 
   const isAuthor = viewer.userName === userName
   const showCollectionTab =
