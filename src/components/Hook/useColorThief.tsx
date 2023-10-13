@@ -20,6 +20,7 @@ const rgbToHsl = (r: number, g: number, b: number) => {
 export const useColorThief = () => {
   const [dominantColor, setDominantColor] = useState<string>()
   const nodeRef = useRef<HTMLDivElement>(null)
+  let tryGetColorTime = 5
 
   const _getColor = () => {
     import('colorthief').then(({ default: ColorThief }) => {
@@ -37,7 +38,10 @@ export const useColorThief = () => {
         if (error.name === 'SecurityError') {
           // Throws this error in Firefox
           setTimeout(() => {
-            _getColor()
+            if (tryGetColorTime > 0) {
+              _getColor()
+              tryGetColorTime--
+            }
           }, 1000)
         }
       }
