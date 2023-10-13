@@ -1,4 +1,4 @@
-import { useContext, useLayoutEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -69,7 +69,7 @@ const Socials = () => {
     router.push(url)
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const bindResult = storage.remove(OAUTH_STORAGE_BIND_STATE)
     if (!bindResult) {
       return
