@@ -33,8 +33,13 @@ export const useColorThief = () => {
             2
           )}% 30%)`
         )
-      } catch (error) {
-        //
+      } catch (error: any) {
+        if (error.name === 'SecurityError') {
+          // Throws this error in Firefox
+          setTimeout(() => {
+            _getColor()
+          }, 1000)
+        }
       }
     })
   }
