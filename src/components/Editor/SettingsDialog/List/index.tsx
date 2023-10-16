@@ -91,7 +91,10 @@ const SettingsList = ({
           <ListItem
             title={<Translate id="setCover" />}
             subTitle={
-              <FormattedMessage defaultMessage="Recommended square image." />
+              <FormattedMessage
+                defaultMessage="Recommended square image."
+                id="CxYcYR"
+              />
             }
             hint
             onClick={() => forward('cover')}

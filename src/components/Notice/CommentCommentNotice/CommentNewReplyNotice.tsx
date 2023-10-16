@@ -37,6 +37,7 @@ const CommentNewReplyNotice = ({
           action={
             <FormattedMessage
               defaultMessage="replied your comment in"
+              id="nNB7KU"
               description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
             />
           }
@@ -44,6 +45,7 @@ const CommentNewReplyNotice = ({
           secondAction={
             <FormattedMessage
               defaultMessage="comment"
+              id="ZUPQzl"
               description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
             />
           }
@@ -61,6 +63,7 @@ const CommentNewReplyNotice = ({
           action={
             <FormattedMessage
               defaultMessage=" replied to your discussion on"
+              id="8rMZWb"
               description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
             />
           }
@@ -68,6 +71,7 @@ const CommentNewReplyNotice = ({
           secondAction={
             <FormattedMessage
               defaultMessage="comment_circle"
+              id="aaUBvF"
               description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
             />
           }

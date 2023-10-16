@@ -57,6 +57,7 @@ const BaseDropdownActions = ({
           text={
             <FormattedMessage
               defaultMessage="Manage Circle"
+              id="q+N5Wd"
               description="src/views/Circle/Profile/DropdownActions/index.tsx"
             />
           }
@@ -68,7 +69,7 @@ const BaseDropdownActions = ({
 
       {isCircleOwner && (
         <Menu.Item
-          text={<FormattedMessage defaultMessage="Analytics" />}
+          text={<FormattedMessage defaultMessage="Analytics" id="GZJpDf" />}
           icon={<IconAnalytics24 size="mdS" />}
           {...toPath({ page: 'circleAnalytics', circle })}
           is="link"
@@ -80,6 +81,7 @@ const BaseDropdownActions = ({
           text={
             <FormattedMessage
               defaultMessage="Unsubscribe Circle"
+              id="8xPi0N"
               description="src/views/Circle/Profile/DropdownActions/index.tsx"
             />
           }
@@ -99,6 +101,7 @@ const BaseDropdownActions = ({
           bgColor="halfBlack"
           aria-label={intl.formatMessage({
             defaultMessage: 'More Actions',
+            id: 'A7ugfn',
           })}
           aria-haspopup="listbox"
           ref={ref}

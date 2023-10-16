@@ -20,6 +20,7 @@ const SensitiveWall = ({
       <p className={styles.bgBlurContent}>
         <FormattedMessage
           defaultMessage="Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress."
+          id="0JLcHr"
           description="src/views/ArticleDetail/Wall/Sensitive/index.tsx"
         />
       </p>
@@ -27,6 +28,7 @@ const SensitiveWall = ({
         <section className={styles.header}>
           <FormattedMessage
             defaultMessage="This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?"
+            id="s5JCCO"
             description="src/views/ArticleDetail/Wall/Sensitive/index.tsx"
             values={{
               actor: sensitiveByAuthor ? (
@@ -40,6 +42,7 @@ const SensitiveWall = ({
         <section className={styles.content}>
           <FormattedMessage
             defaultMessage="Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress."
+            id="0JLcHr"
             description="src/views/ArticleDetail/Wall/Sensitive/index.tsx"
           />
         </section>

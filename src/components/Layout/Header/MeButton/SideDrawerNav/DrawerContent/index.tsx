@@ -46,7 +46,10 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
       <VisuallyHidden>
         <Button
           onClick={onDismiss}
-          aria-label={intl.formatMessage({ defaultMessage: 'Close' })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Close',
+            id: 'rbrahO',
+          })}
         />
       </VisuallyHidden>
 

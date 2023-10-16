@@ -112,6 +112,7 @@ const LikesReceived = () => {
   const intl = useIntl()
   const title = intl.formatMessage({
     defaultMessage: 'History',
+    id: 'djJp6c',
   })
 
   return (

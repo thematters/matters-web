@@ -159,7 +159,10 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
         onClick={() => {
           toast.error({
             message: (
-              <FormattedMessage defaultMessage="The author has disabled comments for this article" />
+              <FormattedMessage
+                defaultMessage="The author has disabled comments for this article"
+                id="7cwoRo"
+              />
             ),
           })
         }}

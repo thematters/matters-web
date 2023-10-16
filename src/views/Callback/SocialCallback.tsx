@@ -113,6 +113,7 @@ const SocialCallback = ({ type }: Props) => {
                 message: (
                   <FormattedMessage
                     defaultMessage="Unavailable"
+                    id="rADhX5"
                     description="FORBIDDEN_BY_STATE"
                   />
                 ),

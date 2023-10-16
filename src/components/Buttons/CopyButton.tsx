@@ -14,7 +14,10 @@ export const CopyButton: React.FC<
         <Button
           spacing={['xtight', 'xtight']}
           bgActiveColor="greyLighter"
-          aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Copy',
+            id: '4l6vz1',
+          })}
         >
           <IconCopy16 color="grey" />
         </Button>

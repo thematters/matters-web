@@ -114,7 +114,7 @@ const AddCircleArticleDialog = ({
             nodes={articles}
             saving={loading}
             headerRightButtonText={
-              <FormattedMessage defaultMessage="Next Step" />
+              <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />
             }
             closeDialog={closeDialog}
           />

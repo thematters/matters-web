@@ -22,6 +22,7 @@ const ArticleMentionedYouNotice = ({
       action={
         <FormattedMessage
           defaultMessage="mentioned you in {article}"
+          id="8w3GEA"
           description="src/components/Notice/ArticleNotice/ArticleMentionedYouNotice.tsx"
           values={{
             article: <NoticeArticleTitle article={notice.article} />,

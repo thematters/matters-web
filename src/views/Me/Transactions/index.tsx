@@ -152,6 +152,7 @@ const Transactions = () => {
   const intl = useIntl()
   const title = intl.formatMessage({
     defaultMessage: 'Transactions',
+    id: '/jJLYy',
   })
 
   return (
@@ -179,6 +180,7 @@ const Transactions = () => {
         >
           <FormattedMessage
             defaultMessage="All"
+            id="6aE6hr"
             description="src/views/Me/Transactions/index.tsx"
           />
         </SegmentedTabs.Tab>
@@ -189,6 +191,7 @@ const Transactions = () => {
         >
           <FormattedMessage
             defaultMessage="Supports"
+            id="NCBtyI"
             description="src/views/Me/Transactions/index.tsx"
           />
         </SegmentedTabs.Tab>
@@ -199,6 +202,7 @@ const Transactions = () => {
         >
           <FormattedMessage
             defaultMessage="Subscriptions"
+            id="T73SwS"
             description="src/views/Me/Transactions/index.tsx"
           />
         </SegmentedTabs.Tab>

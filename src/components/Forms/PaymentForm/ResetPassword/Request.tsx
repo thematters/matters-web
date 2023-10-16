@@ -140,7 +140,7 @@ const Request: React.FC<FormProps> = ({
 
   const SubmitButton = (
     <Dialog.TextButton
-      text={<FormattedMessage defaultMessage="Next Step" />}
+      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -156,7 +156,7 @@ const Request: React.FC<FormProps> = ({
         leftBtn={
           back ? (
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               onClick={back}
             />
           ) : undefined

@@ -59,6 +59,7 @@ const DeleteCommentDialog = ({
       message: (
         <FormattedMessage
           defaultMessage="{commentType} has been deleted"
+          id="h9CG9E"
           description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
           values={{
             commentType: COMMENT_TYPE_TEXT[lang][type],
@@ -77,6 +78,7 @@ const DeleteCommentDialog = ({
           title={
             <FormattedMessage
               defaultMessage="Delete {commentType}"
+              id="Cdkhl8"
               description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
               values={{
                 commentType: COMMENT_TYPE_TEXT[lang][type],
@@ -89,6 +91,7 @@ const DeleteCommentDialog = ({
           <p>
             <FormattedMessage
               defaultMessage="After deletion, the {commentType} will be removed immediately"
+              id="77tYPg"
               description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
               values={{
                 commentType: COMMENT_TYPE_TEXT[lang][type],
@@ -101,7 +104,7 @@ const DeleteCommentDialog = ({
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
               color="red"
               onClick={() => {
                 onDelete()
@@ -111,7 +114,7 @@ const DeleteCommentDialog = ({
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
               color="red"
               onClick={() => {
                 onDelete()

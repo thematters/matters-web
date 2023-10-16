@@ -19,6 +19,7 @@ const Language = () => {
           title={
             <FormattedMessage
               defaultMessage="Language"
+              id="BnMru1"
               description="src/views/Me/Settings/Misc/Language.tsx"
             />
           }

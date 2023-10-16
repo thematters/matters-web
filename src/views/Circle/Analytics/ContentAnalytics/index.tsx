@@ -97,6 +97,7 @@ const CircleContentAnalytics = () => {
         title={
           <FormattedMessage
             defaultMessage="Hottest"
+            id="mCAIcg"
             description="src/views/Circle/Analytics/ContentAnalytics/index.tsx"
           />
         }

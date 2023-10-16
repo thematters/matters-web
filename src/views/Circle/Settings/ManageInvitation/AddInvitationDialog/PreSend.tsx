@@ -99,7 +99,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
 
   const SubmitButton = (
     <Dialog.TextButton
-      text={<FormattedMessage defaultMessage="Confirm and Send" />}
+      text={<FormattedMessage defaultMessage="Confirm and Send" id="rXnmeE" />}
       onClick={send}
       loading={inviteLoading}
     />
@@ -111,6 +111,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
         title={
           <FormattedMessage
             defaultMessage="Send"
+            id="tzq2+W"
             description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
           />
         }
@@ -122,6 +123,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
         <p>
           <FormattedMessage
             defaultMessage="Friends will receive free trial invitations to Circle. Set up your invitations now!"
+            id="O0QB1v"
             description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
           />
         </p>
@@ -155,7 +157,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

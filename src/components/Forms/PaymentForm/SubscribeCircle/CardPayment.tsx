@@ -182,7 +182,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
           <>
             <Dialog.TextButton
               color="greyDarker"
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               onClick={closeDialog}
             />
             <Dialog.TextButton

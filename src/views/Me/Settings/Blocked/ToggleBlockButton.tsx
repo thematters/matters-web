@@ -51,11 +51,13 @@ export const ToggleBlockUserButton = ({ user }: ToggleBlockUserButtonProps) => {
         {isBlocked ? (
           <FormattedMessage
             defaultMessage="Unblock"
+            id="DqQvtL"
             description="src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
           />
         ) : (
           <FormattedMessage
             defaultMessage="Block"
+            id="2ef/Xl"
             description="src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
           />
         )}

@@ -19,6 +19,7 @@ const BlockedUsers = () => {
       title={
         <FormattedMessage
           defaultMessage="Blocked Users"
+          id="hASeng"
           description="src/views/Me/Settings/Misc/BlockedUsers.tsx"
         />
       }

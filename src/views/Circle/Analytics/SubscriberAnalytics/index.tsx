@@ -84,6 +84,7 @@ const Content = () => {
         <span class="indicator rect" style="color: #EDEDED"></span>
         ${intl.formatMessage({
           defaultMessage: 'Total',
+          id: '2CqWQE',
           description:
             'src/views/Circle/Analytics/SubscriberAnalytics/index.tsx',
         })}: ${d3Sum(Object.values(values))}
@@ -92,11 +93,13 @@ const Content = () => {
         const keyName = {
           [DatumKey.subscriber]: intl.formatMessage({
             defaultMessage: 'Pay',
+            id: 'y0b6Kp',
             description:
               'src/views/Circle/Analytics/SubscriberAnalytics/index.tsx',
           }),
           [DatumKey.invitee]: intl.formatMessage({
             defaultMessage: 'Free',
+            id: 'L0J61B',
             description:
               'src/views/Circle/Analytics/SubscriberAnalytics/index.tsx',
           }),
@@ -118,6 +121,7 @@ const Content = () => {
             title={
               <FormattedMessage
                 defaultMessage="subscribers_empty"
+                id="6OBAOi"
                 description="src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
               />
             }
@@ -126,6 +130,7 @@ const Content = () => {
               // <Translate zh_hant="人" zh_hans="人" en="subscribers" />
               <FormattedMessage
                 defaultMessage={`{subscriber, plural, =1 {subscriber} other {subscribers}}`}
+                id="zxy15q"
                 description="src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
                 values={{
                   subscriber:
@@ -140,6 +145,7 @@ const Content = () => {
             title={
               <FormattedMessage
                 defaultMessage="Subscribers"
+                id="TSDiqB"
                 description="src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
               />
             }
@@ -147,6 +153,7 @@ const Content = () => {
             unit={
               <FormattedMessage
                 defaultMessage="subscribers"
+                id="XHMco9"
                 description="src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
               />
             }
@@ -156,6 +163,7 @@ const Content = () => {
             title={
               <FormattedMessage
                 defaultMessage="Invitees"
+                id="1qQzV0"
                 description="src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
               />
             }
@@ -163,6 +171,7 @@ const Content = () => {
             unit={
               <FormattedMessage
                 defaultMessage="subscribers"
+                id="XHMco9"
                 description="src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
               />
             }
@@ -199,6 +208,7 @@ const SubscriberAnalytics = () => {
         title={
           <FormattedMessage
             defaultMessage="Subscribe"
+            id="WpvsPu"
             description="src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
           />
         }
@@ -215,6 +225,7 @@ const SubscriberAnalytics = () => {
               <TextIcon color="greyDarker" size="xs">
                 <FormattedMessage
                   defaultMessage="View Members"
+                  id="SNh1n0"
                   description="src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
                 />
               </TextIcon>

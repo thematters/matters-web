@@ -96,7 +96,7 @@ const Request: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<FormattedMessage defaultMessage="Email" />}
+        label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
         type="email"
         name="email"
         required
@@ -104,9 +104,11 @@ const Request: React.FC<FormProps> = ({
           isForget
             ? intl.formatMessage({
                 defaultMessage: 'Enter your email',
+                id: '5MDGuM',
               })
             : intl.formatMessage({
                 defaultMessage: 'Email',
+                id: 'sy+pv5',
               })
         }
         value={values.email}
@@ -123,7 +125,7 @@ const Request: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Next Step" />}
+      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
       loading={isSubmitting}
     />
   )
@@ -140,7 +142,9 @@ const Request: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={<FormattedMessage defaultMessage="Next Step" />}
+                text={
+                  <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />
+                }
                 loading={isSubmitting}
               />
             </>
@@ -159,7 +163,7 @@ const Request: React.FC<FormProps> = ({
         leftBtn={
           back ? (
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               onClick={back}
             />
           ) : null

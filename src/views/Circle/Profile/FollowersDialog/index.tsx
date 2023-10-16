@@ -23,6 +23,7 @@ const BaseFollowersDialog = ({ circle, children }: FollowersDialogProps) => {
           title={
             <FormattedMessage
               defaultMessage="Followers of {circleName}"
+              id="WuvE8X"
               description="src/views/Circle/Profile/FollowersDialog/index.tsx"
               values={{
                 circleName: circle.displayName,
@@ -30,7 +31,7 @@ const BaseFollowersDialog = ({ circle, children }: FollowersDialogProps) => {
             />
           }
           closeDialog={closeDialog}
-          closeText={<FormattedMessage defaultMessage="Close" />}
+          closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
         />
 
         <DynamicContent />
@@ -38,7 +39,7 @@ const BaseFollowersDialog = ({ circle, children }: FollowersDialogProps) => {
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Close" />}
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               color="greyDarker"
               onClick={closeDialog}
             />

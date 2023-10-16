@@ -29,14 +29,14 @@ const ConfirmDialog = ({ removeArticle, children }: ConfirmDialogProps) => {
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Delete" />}
+              text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
               color="red"
               onClick={removeArticle}
             />
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Delete" />}
+              text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
               color="red"
               onClick={removeArticle}
             />

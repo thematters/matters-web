@@ -69,6 +69,7 @@ const ResendAction = ({ initCountdown }: Props) => {
         {countdown}&nbsp;
         <FormattedMessage
           defaultMessage="Resend"
+          id="dzF4ci"
           description="src/components/Forms/EmailLoginForm/index.tsx"
         />
       </span>
@@ -77,7 +78,7 @@ const ResendAction = ({ initCountdown }: Props) => {
 
   return (
     <span onClick={resend} className={styles.resendButton}>
-      <FormattedMessage defaultMessage="Resend" />
+      <FormattedMessage defaultMessage="Resend" id="IXycMo" />
     </span>
   )
 }

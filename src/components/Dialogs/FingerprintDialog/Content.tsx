@@ -212,7 +212,10 @@ const FingerprintDialogContent = ({
               </div>
               <CopyToClipboard text={dataHash}>
                 <Button
-                  aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Copy',
+                    id: '4l6vz1',
+                  })}
                 >
                   <IconCopy16 />
                 </Button>

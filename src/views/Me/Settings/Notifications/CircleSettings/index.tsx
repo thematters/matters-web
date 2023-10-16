@@ -113,6 +113,7 @@ const BaseNotificationSettings = () => {
         groupName={
           <FormattedMessage
             defaultMessage="My circle"
+            id="u+cgOo"
             description="src/views/Me/Settings/Notifications/Circle/index.tsx"
           />
         }
@@ -123,6 +124,7 @@ const BaseNotificationSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="New subscribers"
+              id="m4KtjK"
               description="src/views/Me/Settings/Notifications/Circle/index.tsx"
             />
           }
@@ -132,6 +134,7 @@ const BaseNotificationSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="New subscribers"
+                  id="m4KtjK"
                   description="src/views/Me/Settings/Notifications/Circle/index.tsx"
                 />
               }
@@ -146,6 +149,7 @@ const BaseNotificationSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="New followers"
+              id="h7sMQs"
               description="src/views/Me/Settings/Notifications/Circle/index.tsx"
             />
           }
@@ -155,6 +159,7 @@ const BaseNotificationSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="New followers"
+                  id="h7sMQs"
                   description="src/views/Me/Settings/Notifications/Circle/index.tsx"
                 />
               }
@@ -169,6 +174,7 @@ const BaseNotificationSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="Subscription cancellations"
+              id="GhogWq"
               description="src/views/Me/Settings/Notifications/Circle/index.tsx"
             />
           }
@@ -178,6 +184,7 @@ const BaseNotificationSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="Subscription cancellations"
+                  id="GhogWq"
                   description="src/views/Me/Settings/Notifications/Circle/index.tsx"
                 />
               }
@@ -192,6 +199,7 @@ const BaseNotificationSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="New replies to broadcast"
+              id="A0KB7s"
               description="src/views/Me/Settings/Notifications/Circle/index.tsx"
             />
           }
@@ -201,6 +209,7 @@ const BaseNotificationSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="New replies to broadcast"
+                  id="A0KB7s"
                   description="src/views/Me/Settings/Notifications/Circle/index.tsx"
                 />
               }
@@ -215,6 +224,7 @@ const BaseNotificationSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="New discussions"
+              id="xafreT"
               description="src/views/Me/Settings/Notifications/Circle/index.tsx"
             />
           }
@@ -224,6 +234,7 @@ const BaseNotificationSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="New discussions"
+                  id="xafreT"
                   description="src/views/Me/Settings/Notifications/Circle/index.tsx"
                 />
               }
@@ -238,6 +249,7 @@ const BaseNotificationSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="New replies to discussions"
+              id="2vpUYs"
               description="src/views/Me/Settings/Notifications/Circle/index.tsx"
             />
           }
@@ -247,6 +259,7 @@ const BaseNotificationSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="New replies to discussions"
+                  id="2vpUYs"
                   description="src/views/Me/Settings/Notifications/Circle/index.tsx"
                 />
               }
@@ -262,6 +275,7 @@ const BaseNotificationSettings = () => {
         groupName={
           <FormattedMessage
             defaultMessage="Following circles"
+            id="d1mBsg"
             description="src/views/Me/Settings/Notifications/Circle/index.tsx"
           />
         }
@@ -272,6 +286,7 @@ const BaseNotificationSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="New articles"
+              id="ctl5tq"
               description="src/views/Me/Settings/Notifications/Circle/index.tsx"
             />
           }
@@ -281,6 +296,7 @@ const BaseNotificationSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="New articles"
+                  id="ctl5tq"
                   description="src/views/Me/Settings/Notifications/Circle/index.tsx"
                 />
               }
@@ -295,6 +311,7 @@ const BaseNotificationSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="New broadcasts"
+              id="viMrzF"
               description="src/views/Me/Settings/Notifications/Circle/index.tsx"
             />
           }
@@ -304,6 +321,7 @@ const BaseNotificationSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="New broadcasts"
+                  id="viMrzF"
                   description="src/views/Me/Settings/Notifications/Circle/index.tsx"
                 />
               }
@@ -318,6 +336,7 @@ const BaseNotificationSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="New replies to broadcast"
+              id="A0KB7s"
               description="src/views/Me/Settings/Notifications/Circle/index.tsx"
             />
           }
@@ -327,6 +346,7 @@ const BaseNotificationSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="New replies to broadcast"
+                  id="A0KB7s"
                   description="src/views/Me/Settings/Notifications/Circle/index.tsx"
                 />
               }
@@ -341,6 +361,7 @@ const BaseNotificationSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="New discussions"
+              id="xafreT"
               description="src/views/Me/Settings/Notifications/Circle/index.tsx"
             />
           }
@@ -350,6 +371,7 @@ const BaseNotificationSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="New discussions"
+                  id="xafreT"
                   description="src/views/Me/Settings/Notifications/Circle/index.tsx"
                 />
               }
@@ -364,6 +386,7 @@ const BaseNotificationSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="New replies to discussions"
+              id="2vpUYs"
               description="src/views/Me/Settings/Notifications/Circle/index.tsx"
             />
           }
@@ -373,6 +396,7 @@ const BaseNotificationSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="New replies to discussions"
+                  id="2vpUYs"
                   description="src/views/Me/Settings/Notifications/Circle/index.tsx"
                 />
               }
@@ -390,6 +414,7 @@ const NotificationsCircleSettings = () => {
   const intl = useIntl()
   const title = intl.formatMessage({
     defaultMessage: 'Settings - Circle notifications',
+    id: 'MoyOR+',
     description: 'src/views/Me/Settings/Notifications/Circle/index.tsx',
   })
 
@@ -400,6 +425,7 @@ const NotificationsCircleSettings = () => {
           <Layout.Header.Title>
             <FormattedMessage
               defaultMessage="Circle notifications"
+              id="mp9SBo"
               description="src/views/Me/Settings/Notifications/index.tsx"
             />
           </Layout.Header.Title>

@@ -37,7 +37,7 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
       {!isInPage && (
         <Dialog.Footer
           closeDialog={closeDialog}
-          closeText={<FormattedMessage defaultMessage="Close" />}
+          closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
           btns={
             isForget ? (
               <Dialog.RoundedButton

@@ -17,6 +17,7 @@ const SettingsTabs: React.FC = () => {
       <Tabs.Tab href={PATHS.ME_SETTINGS} selected={isAccount}>
         <FormattedMessage
           defaultMessage="Account"
+          id="At8Qd2"
           description="src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
         />
       </Tabs.Tab>
@@ -27,6 +28,7 @@ const SettingsTabs: React.FC = () => {
       >
         <FormattedMessage
           defaultMessage="Notifications"
+          id="6e8teX"
           description="src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
         />
       </Tabs.Tab>
@@ -34,6 +36,7 @@ const SettingsTabs: React.FC = () => {
       <Tabs.Tab href={PATHS.ME_SETTINGS_MISC} selected={isOthers}>
         <FormattedMessage
           defaultMessage="Misc"
+          id="6lwWCu"
           description="src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
         />
       </Tabs.Tab>

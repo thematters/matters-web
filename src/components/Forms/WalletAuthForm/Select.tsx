@@ -38,6 +38,7 @@ const Hint = () => {
         <p>
           <FormattedMessage
             defaultMessage="Have wallet questions on mobile device ? Click the "
+            id="70UCEy"
             description="src/components/Forms/WalletAuthForm/Select.tsx"
           />
           <a
@@ -46,7 +47,7 @@ const Hint = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <FormattedMessage defaultMessage="tutorial" />
+            <FormattedMessage defaultMessage="tutorial" id="uw32VR" />
           </a>
         </p>
       </Media>
@@ -54,6 +55,7 @@ const Hint = () => {
         <p>
           <FormattedMessage
             defaultMessage="Don't have a wallet yet? Check the "
+            id="vCt85u"
             description="src/components/Forms/WalletAuthForm/Select.tsx"
           />
           <a
@@ -62,7 +64,7 @@ const Hint = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <FormattedMessage defaultMessage="tutorial" />
+            <FormattedMessage defaultMessage="tutorial" id="uw32VR" />
           </a>
         </p>
       </Media>
@@ -128,6 +130,7 @@ const Select: React.FC<FormProps> = ({
             <li>
               <FormattedMessage
                 defaultMessage="Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet."
+                id="HxcjQl"
                 description="src/components/Forms/WalletAuthForm/Select.tsx"
               />
             </li>
@@ -135,6 +138,7 @@ const Select: React.FC<FormProps> = ({
               <strong>
                 <FormattedMessage
                   defaultMessage="Wallet address will be part of your digital identity and shown in your profile page."
+                  id="LqxIEU"
                   description="src/components/Forms/WalletAuthForm/Select.tsx"
                 />
               </strong>
@@ -142,6 +146,7 @@ const Select: React.FC<FormProps> = ({
             <li>
               <FormattedMessage
                 defaultMessage="The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security."
+                id="UOdEqi"
                 description="src/components/Forms/WalletAuthForm/Select.tsx"
               />
             </li>
@@ -149,6 +154,7 @@ const Select: React.FC<FormProps> = ({
               <strong>
                 <FormattedMessage
                   defaultMessage="Matters will never ask your wallet key through any channel."
+                  id="VrOoVf"
                   description="src/components/Forms/WalletAuthForm/Select.tsx"
                 />
               </strong>
@@ -172,6 +178,7 @@ const Select: React.FC<FormProps> = ({
             groupName={
               <FormattedMessage
                 defaultMessage="Account"
+                id="v6YjIn"
                 description="src/components/Forms/WalletAuthForm/Select.tsx"
               />
             }
@@ -182,7 +189,9 @@ const Select: React.FC<FormProps> = ({
         )}
 
         <TableView
-          groupName={<FormattedMessage defaultMessage="Connect Wallet" />}
+          groupName={
+            <FormattedMessage defaultMessage="Connect Wallet" id="cg1VJ2" />
+          }
           spacingX={isInPage ? 0 : 'base'}
         >
           {injectedConnector?.ready ? (
@@ -217,6 +226,7 @@ const Select: React.FC<FormProps> = ({
                 >
                   <FormattedMessage
                     defaultMessage="Install MetaMask"
+                    id="FaTb0A"
                     description="src/components/Forms/WalletAuthForm/Select.tsx"
                   />
                 </TextIcon>
@@ -290,16 +300,16 @@ const Select: React.FC<FormProps> = ({
         leftBtn={
           back ? (
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               onClick={onBack}
             />
           ) : null
         }
         title={
           isConnect ? (
-            <FormattedMessage defaultMessage="Connect Wallet" />
+            <FormattedMessage defaultMessage="Connect Wallet" id="cg1VJ2" />
           ) : (
-            <FormattedMessage defaultMessage="Enter" />
+            <FormattedMessage defaultMessage="Enter" id="H8KGyc" />
           )
         }
       />

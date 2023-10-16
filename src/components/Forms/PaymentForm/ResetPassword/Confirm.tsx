@@ -174,7 +174,7 @@ const Confirm: React.FC<FormProps> = ({
         leftBtn={
           back ? (
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               onClick={back}
             />
           ) : undefined
@@ -186,7 +186,7 @@ const Confirm: React.FC<FormProps> = ({
       <Dialog.Footer
         smUpBtns={
           <Dialog.TextButton
-            text={<FormattedMessage defaultMessage="Cancel" />}
+            text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
             color="greyDarker"
             onClick={closeDialog}
           />

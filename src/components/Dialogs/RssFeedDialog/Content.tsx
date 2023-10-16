@@ -82,6 +82,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                   <p>
                     <FormattedMessage
                       defaultMessage="Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article."
+                      id="/3kw6k"
                       description="src/components/Dialogs/RssFeedDialog/Content.tsx"
                     />
                   </p>
@@ -95,12 +96,14 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
               <h4 className={styles.title}>
                 <FormattedMessage
                   defaultMessage="IPNS Subscription"
+                  id="Lc/azT"
                   description="src/components/Dialogs/RssFeedDialog/Content.tsx"
                 />
               </h4>
               <p className={styles.description}>
                 <FormattedMessage
                   defaultMessage="Add hash from IPFS into compatible reader such as "
+                  id="HqnUd1"
                   description="src/components/Dialogs/RssFeedDialog/Content.tsx"
                 />
                 <a
@@ -121,6 +124,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                     <Button
                       aria-label={intl.formatMessage({
                         defaultMessage: 'Copy Link',
+                        id: 'u5aHb4',
                       })}
                     >
                       <IconCopy16 />
@@ -138,6 +142,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                     >
                       <FormattedMessage
                         defaultMessage="Waiting ..."
+                        id="zxlwbc"
                         description="src/components/Dialogs/RssFeedDialog/Content.tsx"
                       />
                     </TextIcon>
@@ -155,12 +160,14 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
               <h4 className={styles.title}>
                 <FormattedMessage
                   defaultMessage="RSS Subscription"
+                  id="gMZfHO"
                   description="src/components/Dialogs/RssFeedDialog/Content.tsx"
                 />
               </h4>
               <p className={styles.description}>
                 <FormattedMessage
                   defaultMessage="Add any URL in the following list into RSS reader"
+                  id="D2Sw/t"
                   description="src/components/Dialogs/RssFeedDialog/Content.tsx"
                 />
               </p>
@@ -194,6 +201,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                             disabled={!ipnsKey}
                             aria-label={intl.formatMessage({
                               defaultMessage: 'Copy Link',
+                              id: 'u5aHb4',
                             })}
                           >
                             <IconCopy16 />
@@ -213,7 +221,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
         smUpBtns={
           <Dialog.TextButton
             color="greyDarker"
-            text={<FormattedMessage defaultMessage="Close" />}
+            text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
             onClick={closeDialog}
           />
         }

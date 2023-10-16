@@ -139,7 +139,7 @@ const BaseAddArticlesCollectionDialog = ({
       type="submit"
       form={formId}
       disabled={formik.isSubmitting || formik.values.checked.length === 0}
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={formik.isSubmitting}
     />
   )
@@ -173,7 +173,9 @@ const BaseAddArticlesCollectionDialog = ({
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={<FormattedMessage defaultMessage="Add to collection" />}
+          title={
+            <FormattedMessage defaultMessage="Add to collection" id="ub1kHa" />
+          }
           closeDialog={closeDialog}
           rightBtn={SubmitButton}
         />
@@ -210,7 +212,7 @@ const BaseAddArticlesCollectionDialog = ({
           smUpBtns={
             <>
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Cancel" />}
+                text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
