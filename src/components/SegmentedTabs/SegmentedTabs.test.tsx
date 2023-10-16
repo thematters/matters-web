@@ -24,7 +24,7 @@ const AnyTabs = () => {
   )
 }
 
-describe('SegmentedTabs', () => {
+describe('<SegmentedTabs>', () => {
   it('should allow to select a tab', async () => {
     render(<AnyTabs />)
 

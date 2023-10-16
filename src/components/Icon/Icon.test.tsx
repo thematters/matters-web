@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest'
 import { ReactComponent as IconX } from '@/public/static/icons/22px/x.svg'
 import { IconX22, withIcon } from '~/components'
 
-describe('Icon', () => {
+describe('<Icon>', () => {
   it('should allow to render', async () => {
     const { container } = render(<IconX22 />)
     /* eslint-disable */

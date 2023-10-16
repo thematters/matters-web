@@ -24,7 +24,7 @@ const AnySwitch = ({
   )
 }
 
-describe('Switch', () => {
+describe('<Switch>', () => {
   it('should allow to be toggled', async () => {
     // ARRANGE
     render(<AnySwitch checked={false} />)

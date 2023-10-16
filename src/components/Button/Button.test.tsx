@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react'
-import { describe, expect, it, vitest } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { PATHS } from '~/common/enums'
 import { Button } from '~/components'
 
-describe('Button', () => {
+describe('<Button>', () => {
   it('should allow to be clicked', async () => {
-    const handleClick = vitest.fn()
+    const handleClick = vi.fn()
 
     // ARRANGE
     render(<Button onClick={handleClick} />)
@@ -23,7 +23,7 @@ describe('Button', () => {
   })
 
   it('should allow to be a form submit button', async () => {
-    const handleClick = vitest.fn()
+    const handleClick = vi.fn()
     const formId = '__form_id'
 
     // ARRANGE
@@ -40,7 +40,7 @@ describe('Button', () => {
   })
 
   it('should allow to be disabled', async () => {
-    const handleClick = vitest.fn()
+    const handleClick = vi.fn()
 
     // ARRANGE
     render(<Button onClick={handleClick} disabled />)

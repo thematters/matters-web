@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest'
 import { TEST_ID } from '~/common/enums'
 import { Avatar } from '~/components'
 
-describe('Avatar', () => {
+describe('<Avatar>', () => {
   it('should be able to render with civic liker ring', async () => {
     const user = {
       avatar: 'https://example.com/avatar.png',

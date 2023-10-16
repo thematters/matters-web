@@ -21,7 +21,7 @@ const AnyTabs = () => {
   )
 }
 
-describe('Tabs', () => {
+describe('<Tabs>', () => {
   it('should allow to select a tab', async () => {
     render(<AnyTabs />)
 

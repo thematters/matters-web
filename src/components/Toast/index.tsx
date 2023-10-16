@@ -3,6 +3,7 @@ import React from 'react'
 import type { Toast as ToastType } from 'react-hot-toast'
 import baseToast, { Toaster as BaseToaster } from 'react-hot-toast'
 
+// import { useIntl } from 'react-intl'
 import {
   Button,
   ButtonProps,
@@ -31,6 +32,8 @@ const ToastActions: React.FC<ToastActionsProps> = ({
   onDismiss,
   hasClose = true,
 }) => {
+  // const intl = useIntl()
+
   return (
     <section className={styles.actions}>
       {actions.map(({ content, onClick, ...props }, index) => (
@@ -50,7 +53,14 @@ const ToastActions: React.FC<ToastActionsProps> = ({
       ))}
 
       {hasClose && (
-        <button type="button" onClick={onDismiss}>
+        <button
+          type="button"
+          onClick={onDismiss}
+          aria-label="Close"
+          // aria-label={intl.formatMessage({
+          //   defaultMessage: 'Close',
+          // })}
+        >
           <IconClose22
             color={type === 'error' ? 'white' : 'whiteLight'}
             size="mdM"
@@ -97,6 +107,9 @@ const Toast: React.FC<
     <section
       className={[styles.toast, styles[type]].join(' ')}
       style={{ ...animationStyle }}
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
     >
       {isSuccess && message}
       {isError && (
