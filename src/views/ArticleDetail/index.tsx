@@ -446,8 +446,9 @@ const ArticleDetail = ({
     setPrivateFetched(true)
   }
 
-  // reset state to private fetchable when URL query is changed
   useEffect(() => {
+    refetchPublic()
+    // reset state to private fetchable when URL query is changed
     setPrivateFetched(false)
   }, [mediaHash])
 
