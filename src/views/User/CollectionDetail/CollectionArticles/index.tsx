@@ -98,6 +98,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
         <section className={styles.updatedDate}>
           <FormattedMessage
             defaultMessage="Updated {date}"
+            id="h+punE"
             description="src/views/User/CollectionDetail/Content.tsx"
             values={{
               date: <DateTime date={updatedAt} color="grey" size="sm" />,
@@ -123,12 +124,12 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
         >
           {isSequenceNormal && (
             <TextIcon icon={<IconArrowDown20 size="mdS" />}>
-              <FormattedMessage defaultMessage="Sort" />
+              <FormattedMessage defaultMessage="Sort" id="25oM9Q" />
             </TextIcon>
           )}
           {isSequenceReverse && (
             <TextIcon icon={<IconArrowUp20 size="mdS" />}>
-              <FormattedMessage defaultMessage="Sort" />
+              <FormattedMessage defaultMessage="Sort" id="25oM9Q" />
             </TextIcon>
           )}
         </button>

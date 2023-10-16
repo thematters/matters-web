@@ -165,6 +165,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           ) {
             const m = intl.formatMessage({
               defaultMessage: 'Incorrect email or password',
+              id: 'c/z318',
               description: 'src/components/Forms/EmailLoginForm/index.tsx',
             })
             setFieldError('password', m)
@@ -177,6 +178,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
               intl.formatMessage({
                 defaultMessage:
                   'This login code has expired, please try to resend',
+                id: 'TF1OhT',
               })
             )
           } else if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
@@ -184,6 +186,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
               'email',
               intl.formatMessage({
                 defaultMessage: 'Unavailable',
+                id: 'rADhX5',
                 description: 'FORBIDDEN_BY_STATE',
               })
             )
@@ -235,6 +238,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
             'email',
             intl.formatMessage({
               defaultMessage: 'Unavailable',
+              id: 'rADhX5',
               description: 'FORBIDDEN_BY_STATE',
             })
           )
@@ -249,12 +253,13 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     <>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
-          label={<FormattedMessage defaultMessage="Email" />}
+          label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
           type="email"
           name="email"
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Email',
+            id: 'sy+pv5',
           })}
           value={values.email}
           error={errors.email}
@@ -268,12 +273,13 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
         <Form.Input
           // ref={passwordRef}
-          label={<FormattedMessage defaultMessage="Password" />}
+          label={<FormattedMessage defaultMessage="Password" id="5sg7KC" />}
           type="password"
           name="password"
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Password',
+            id: '5sg7KC',
           })}
           value={values.password}
           error={touched.password && errors.password}
@@ -289,6 +295,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
                   {countdown}&nbsp;
                   <FormattedMessage
                     defaultMessage="Resend"
+                    id="dzF4ci"
                     description="src/components/Forms/EmailLoginForm/index.tsx"
                   />
                 </span>
@@ -301,9 +308,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
                       e.preventDefault()
                       sendLoginCode()
                     }}
+                    disabled={sendingCode}
                   >
                     <FormattedMessage
                       defaultMessage="Resend"
+                      id="dzF4ci"
                       description="src/components/Forms/EmailLoginForm/index.tsx"
                     />
                   </button>
@@ -344,6 +353,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       text={
         <FormattedMessage
           defaultMessage="Sign in"
+          id="tBt9u0"
           description="src/components/Forms/EmailLoginForm/index.tsx"
         />
       }
@@ -358,11 +368,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     <>
       {!isSelectMethod && (
         <DialogBeta.Header
-          title={<FormattedMessage defaultMessage="Sign In" />}
+          title={<FormattedMessage defaultMessage="Sign In" id="Ub+AGc" />}
           hasSmUpTitle={false}
           leftBtn={
             <DialogBeta.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               color="greyDarker"
               onClick={() => {
                 setIsSelectMethod(true)
@@ -408,7 +418,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
               <DialogBeta.TextButton
                 text={
                   <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
-                    <FormattedMessage defaultMessage="Back" />
+                    <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
                   </TextIcon>
                 }
                 color="greyDarker"
@@ -426,7 +436,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           smUpBtns={
             <DialogBeta.TextButton
               color="greyDarker"
-              text={<FormattedMessage defaultMessage="Close" />}
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               onClick={closeDialog}
             />
           }

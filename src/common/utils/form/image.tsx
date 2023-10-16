@@ -14,7 +14,10 @@ export const validateImage = (image: File) =>
     if (isExceedSizeLimit) {
       toast.error({
         message: (
-          <FormattedMessage defaultMessage="Images have a 5 megabyte (MB) size limit." />
+          <FormattedMessage
+            defaultMessage="Images have a 5 megabyte (MB) size limit."
+            id="OyvGvT"
+          />
         ),
       })
       return resolve(false)
@@ -36,7 +39,10 @@ export const validateImage = (image: File) =>
         if (isExceedDimensionLimit) {
           toast.error({
             message: (
-              <FormattedMessage defaultMessage="Maximum image dimension is 12,000 pixels." />
+              <FormattedMessage
+                defaultMessage="Maximum image dimension is 12,000 pixels."
+                id="Y7N/Jg"
+              />
             ),
           })
           return resolve(false)
@@ -45,7 +51,10 @@ export const validateImage = (image: File) =>
         if (isExceedAreaLimit) {
           toast.error({
             message: (
-              <FormattedMessage defaultMessage="Maximum image area is limited to 100 megapixels (for example, 10,000×10,000 pixels)." />
+              <FormattedMessage
+                defaultMessage="Maximum image area is limited to 100 megapixels (for example, 10,000×10,000 pixels)."
+                id="9Vkz9W"
+              />
             ),
           })
           return resolve(false)

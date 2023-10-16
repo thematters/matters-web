@@ -84,7 +84,7 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
         <Dialog.Header
           title="contentFeedEntrance"
           closeDialog={closeDialog}
-          closeText={<FormattedMessage defaultMessage="Close" />}
+          closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
         />
 
         <DynamicContent

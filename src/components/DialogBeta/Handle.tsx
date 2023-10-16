@@ -13,7 +13,7 @@ const Handle: React.FC<HandleProps> = ({ closeDialog, ...props }) => {
     <button
       type="button"
       className={styles.handle}
-      aria-label={intl.formatMessage({ defaultMessage: 'Close' })}
+      aria-label={intl.formatMessage({ defaultMessage: 'Close', id: 'rbrahO' })}
       onClick={closeDialog}
       {...props}
     >

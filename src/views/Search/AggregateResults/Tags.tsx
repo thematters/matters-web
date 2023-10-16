@@ -100,7 +100,9 @@ const AggregateTagResults = () => {
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
-        eof={<FormattedMessage defaultMessage="End of the results" />}
+        eof={
+          <FormattedMessage defaultMessage="End of the results" id="ui1+QC" />
+        }
       >
         <Menu>
           {edges.map(

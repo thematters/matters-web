@@ -48,13 +48,16 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
           <CopyToClipboard
             text={address}
             successMessage={
-              <FormattedMessage defaultMessage="Address copied" />
+              <FormattedMessage defaultMessage="Address copied" id="+aMAeT" />
             }
           >
             <Button
               spacing={['xxtight', 'tight']}
               bgColor="greenLighter"
-              aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Copy',
+                id: '4l6vz1',
+              })}
             >
               <TextIcon
                 icon={<IconCopy16 color="green" size="sm" />}

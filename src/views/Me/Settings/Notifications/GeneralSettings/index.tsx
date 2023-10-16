@@ -101,6 +101,7 @@ const NotificationsGeneralSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="New followers"
+              id="JkWLg6"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
@@ -110,6 +111,7 @@ const NotificationsGeneralSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="New followers"
+                  id="JkWLg6"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
@@ -124,6 +126,7 @@ const NotificationsGeneralSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="New likes"
+              id="Opaa0R"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
@@ -133,6 +136,7 @@ const NotificationsGeneralSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="New likes"
+                  id="Opaa0R"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
@@ -147,6 +151,7 @@ const NotificationsGeneralSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="Comments and replies"
+              id="dVbKzB"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
@@ -156,6 +161,7 @@ const NotificationsGeneralSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="Comments and replies"
+                  id="dVbKzB"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
@@ -170,6 +176,7 @@ const NotificationsGeneralSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="Mention me"
+              id="BMGZE2"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
@@ -179,6 +186,7 @@ const NotificationsGeneralSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="Mention me"
+                  id="BMGZE2"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
@@ -193,6 +201,7 @@ const NotificationsGeneralSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="Articles has been bookmarked"
+              id="Wg0ZvI"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
@@ -202,6 +211,7 @@ const NotificationsGeneralSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="Articles has been bookmarked"
+                  id="Wg0ZvI"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
@@ -216,6 +226,7 @@ const NotificationsGeneralSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="Articles has been collected"
+              id="l02bPO"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
@@ -225,6 +236,7 @@ const NotificationsGeneralSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="Articles has been collected"
+                  id="l02bPO"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
@@ -239,6 +251,7 @@ const NotificationsGeneralSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="Comments has been pinned"
+              id="gW/KWu"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
@@ -248,6 +261,7 @@ const NotificationsGeneralSettings = () => {
               label={
                 <FormattedMessage
                   defaultMessage="Comments has been pinned"
+                  id="gW/KWu"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
@@ -265,6 +279,7 @@ const NotificationsGeneralSettings = () => {
         groupName={
           <FormattedMessage
             defaultMessage="Circle"
+            id="kPylKK"
             description="src/views/Me/Settings/Notifications/index.tsx"
           />
         }
@@ -275,6 +290,7 @@ const NotificationsGeneralSettings = () => {
           title={
             <FormattedMessage
               defaultMessage="Circle notifications"
+              id="mp9SBo"
               description="src/views/Me/Settings/Notifications/index.tsx"
             />
           }

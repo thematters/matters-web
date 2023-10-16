@@ -16,9 +16,9 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { updateUserProfile } from '~/components/GQL'
 import { CreateCollectionMutation } from '~/gql/graphql'
 import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
+import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
 
 type Collection = CreateCollectionMutation['putCollection']
 interface FormProps {
@@ -90,11 +90,12 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
             },
           },
           update(cache, result) {
-            updateUserProfile({
-              cache,
-              userName,
-              type: 'increaseCollection',
-            })
+            // FIXME: Why not update user profile tab collection count?
+            // updateUserProfile({
+            //   cache,
+            //   userName,
+            //   type: 'increaseCollection',
+            // })
             if (onUpdate) {
               onUpdate(cache, result.data?.putCollection || ({} as Collection))
             }
@@ -102,6 +103,10 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
           refetchQueries: [
             {
               query: USER_COLLECTIONS,
+              variables: { userName: viewer.userName },
+            },
+            {
+              query: USER_PROFILE_PUBLIC,
               variables: { userName: viewer.userName },
             },
           ],
@@ -132,6 +137,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Collection Name',
+          id: 'VZsE96',
         })}
         value={values.title}
         hint={`${values.title.length}/${maxCollectionTitle}`}
@@ -154,7 +160,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Create" />}
+      text={<FormattedMessage defaultMessage="Create" id="VzzYJk" />}
       loading={isSubmitting}
     />
   )
@@ -162,7 +168,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<FormattedMessage defaultMessage="New Collection" />}
+        title={<FormattedMessage defaultMessage="New Collection" id="L4Fcr8" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />
@@ -173,7 +179,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

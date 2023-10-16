@@ -92,7 +92,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
               color="red"
               onClick={() => {
                 onDelete()
@@ -102,7 +102,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
               color="red"
               onClick={() => {
                 onDelete()

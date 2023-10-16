@@ -79,6 +79,7 @@ const AcceptedInvites = () => {
         description={
           <FormattedMessage
             defaultMessage="friends have not accepted your invitations."
+            id="RxiHr/"
             description="src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
           />
         }

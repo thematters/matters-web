@@ -14,11 +14,13 @@ export const SendLoginCodeButton = ({
   <section className={styles.option}>
     <FormattedMessage
       defaultMessage="Forgot password?"
+      id="O2Nqk8"
       description="src/components/Forms/EmailLoginForm/Buttons.tsx"
     />
     <Button aria-haspopup="dialog" onClick={sendLoginCode} disabled={disabled}>
       <FormattedMessage
         defaultMessage="Send login code"
+        id="qNuRmA"
         description="src/components/Forms/EmailLoginForm/Buttons.tsx"
       />
     </Button>
@@ -46,6 +48,7 @@ const OtherOptions = ({
         <section className={styles.hasSendCode}>
           <FormattedMessage
             defaultMessage="The login code has been sent to your inbox"
+            id="wbIHgJ"
             description="src/components/Forms/EmailLoginForm/OtherOptions.tsx"
           />
         </section>

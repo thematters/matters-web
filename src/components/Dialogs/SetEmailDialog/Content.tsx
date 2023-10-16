@@ -123,6 +123,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
               'email',
               intl.formatMessage({
                 defaultMessage: 'Unavailable',
+                id: 'rADhX5',
                 description: 'FORBIDDEN_BY_STATE',
               })
             )
@@ -165,7 +166,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       disabled={
         isSubmitting || values.email === '' || presetEmail === values.email
       }
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting}
     />
   )
@@ -176,6 +177,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         title={
           <FormattedMessage
             defaultMessage="Email address"
+            id="FEI5Fv"
             description="src/components/Dialogs/SetEmailDialog/Content.tsx"
           />
         }
@@ -189,12 +191,14 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
             <p>
               <FormattedMessage
                 defaultMessage="For security, we will {resetHint} for this. You can set your password again after verifying new email address."
+                id="h9A6AT"
                 description="src/components/Dialogs/SetEmailDialog/Content.tsx"
                 values={{
                   resetHint: (
                     <span className="u-highlight">
                       <FormattedMessage
                         defaultMessage="reset your login password"
+                        id="vsD2wm"
                         description="src/components/Dialogs/SetEmailDialog/Content.tsx"
                       ></FormattedMessage>
                     </span>
@@ -210,6 +214,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
             <p>
               <FormattedMessage
                 defaultMessage="Email can be modified up to {count} times per day."
+                id="0e1xjL"
                 description="src/components/Dialogs/SetEmailDialog/Content.tsx"
                 values={{
                   count: MAX_CHANGE_EMAIL_TIME_DAILY,
@@ -227,7 +232,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
           smUpBtns={
             <>
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Cancel" />}
+                text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -241,7 +246,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
           smUpBtns={
             <>
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Close" />}
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />

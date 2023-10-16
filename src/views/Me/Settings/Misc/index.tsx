@@ -13,6 +13,7 @@ const SettingsMisc = () => {
   const intl = useIntl()
   const title = intl.formatMessage({
     defaultMessage: 'Settings - Misc',
+    id: 'Lp6CiR',
     description: 'src/views/Me/Settings/Misc/index.tsx',
   })
 
@@ -23,6 +24,7 @@ const SettingsMisc = () => {
           <Layout.Header.Title>
             <FormattedMessage
               defaultMessage="Settings"
+              id="8qGjpr"
               description="src/views/Me/Settings/Misc/index.tsx"
             />
           </Layout.Header.Title>

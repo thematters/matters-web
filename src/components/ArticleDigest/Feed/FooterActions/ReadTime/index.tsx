@@ -28,6 +28,7 @@ const ReadTime = ({ article }: ResponseCountProps) => {
       type="button"
       title={intl.formatMessage({
         defaultMessage: 'Accumulated read time',
+        id: 'U7o9Ba',
       })}
     >
       <TextIcon icon={<IconReadTime18 size="mdXS" />} size="xs" color="grey">

@@ -20,6 +20,7 @@ const ArticlesCount = ({ tag }: ArticlesCountProps) => {
         &nbsp;
         <FormattedMessage
           defaultMessage={`{totalCount, plural, =1 {article} other {articles}}`}
+          id="cd/II9"
           values={{
             totalCount: numAbbr(totalCount),
           }}

@@ -38,6 +38,7 @@ export const ArticleDigestArchived = ({
         <section className={styles.right}>
           <FormattedMessage
             defaultMessage="Archived"
+            id="RNKSCj"
             description="src/components/ArticleDigest/Archive/index.tsx"
           />
         </section>

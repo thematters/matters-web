@@ -119,7 +119,7 @@ const BaseConfirm: React.FC<FormProps> = ({
 
   const SubmitButton = (
     <Dialog.TextButton
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -135,7 +135,7 @@ const BaseConfirm: React.FC<FormProps> = ({
         leftBtn={
           back ? (
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               onClick={back}
             />
           ) : undefined

@@ -96,6 +96,7 @@ const BaseAddCollectionsArticleDialog = ({
         message: (
           <FormattedMessage
             defaultMessage="Successfully added"
+            id="6q0G5e"
             description="src/components/Dialogs/CollectionSelectDialog/index.tsx"
           />
         ),
@@ -106,6 +107,7 @@ const BaseAddCollectionsArticleDialog = ({
                   content: (
                     <FormattedMessage
                       defaultMessage="View"
+                      id="IKPYe9"
                       description="src/components/Dialogs/CollectionSelectDialog/index.tsx"
                     />
                   ),

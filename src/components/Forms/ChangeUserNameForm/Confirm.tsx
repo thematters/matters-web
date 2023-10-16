@@ -165,7 +165,7 @@ const Confirm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Next Step" />}
+      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
       loading={isSubmitting}
     />
   )
@@ -181,7 +181,9 @@ const Confirm: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={<FormattedMessage defaultMessage="Next Step" />}
+                text={
+                  <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />
+                }
                 loading={isSubmitting}
               />
             </>
@@ -207,7 +209,7 @@ const Confirm: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

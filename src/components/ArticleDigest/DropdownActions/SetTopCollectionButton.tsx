@@ -36,6 +36,7 @@ const SetTopCollectionButton = ({
       text={
         <FormattedMessage
           defaultMessage="Move to top"
+          id="+S8mxW"
           description="src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
         />
       }

@@ -53,11 +53,16 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
   return (
     <CopyToClipboard
       text={ensName || address}
-      successMessage={<FormattedMessage defaultMessage="Address copied" />}
+      successMessage={
+        <FormattedMessage defaultMessage="Address copied" id="+aMAeT" />
+      }
     >
       <Button
         {...buttonProps}
-        aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Copy',
+          id: '4l6vz1',
+        })}
       >
         <TextIcon {...textIconProps} icon={<IconCopy16 size="sm" />}>
           {ensName || maskAddress(getAddress(address))}

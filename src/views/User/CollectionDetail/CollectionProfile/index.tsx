@@ -57,6 +57,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                   <p className={styles.articleCount}>
                     <FormattedMessage
                       defaultMessage="{articleCount} Articles"
+                      id="LQxY1o"
                       description="src/views/User/CollectionDetail/CollectionProfile/index.tsx"
                       values={{
                         articleCount: articles.totalCount,
@@ -86,6 +87,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                     >
                       <FormattedMessage
                         defaultMessage="Add description"
+                        id="JTWayV"
                         description="src/views/User/CollectionDetail/Content.tsx"
                       />
                     </Button>
@@ -127,6 +129,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                     >
                       <FormattedMessage
                         defaultMessage="Add description"
+                        id="JTWayV"
                         description="src/views/User/CollectionDetail/Content.tsx"
                       />
                     </Button>

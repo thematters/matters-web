@@ -199,14 +199,14 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
           selected={isHottest}
           onClick={() => changeFeed('hottest')}
         >
-          <FormattedMessage defaultMessage="Trending" />
+          <FormattedMessage defaultMessage="Trending" id="ll/ufR" />
         </SegmentedTabs.Tab>
 
         <SegmentedTabs.Tab
           selected={isLatest}
           onClick={() => changeFeed('latest')}
         >
-          <FormattedMessage defaultMessage="Latest" />
+          <FormattedMessage defaultMessage="Latest" id="adThp5" />
         </SegmentedTabs.Tab>
 
         {hasSelectedFeed && (
@@ -214,7 +214,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             selected={isSelected}
             onClick={() => changeFeed('selected')}
           >
-            <FormattedMessage defaultMessage="Featured" />
+            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
           </SegmentedTabs.Tab>
         )}
 
@@ -222,7 +222,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
           selected={isCreators}
           onClick={() => changeFeed('creators')}
         >
-          <FormattedMessage defaultMessage="Creators" />
+          <FormattedMessage defaultMessage="Creators" id="TzhzIH" />
         </SegmentedTabs.Tab>
       </SegmentedTabs>
 

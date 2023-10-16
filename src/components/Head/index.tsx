@@ -2,7 +2,6 @@ import NextHead from 'next/head'
 import { useContext } from 'react'
 
 import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
-import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png'
 import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
 import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
 import IMAGE_FAVICON_128 from '@/public/static/favicon-128x128.png'
@@ -85,14 +84,6 @@ export const Head: React.FC<HeadProps> = (props) => {
       <title>{head.title}</title>
       <meta name="description" key="description" content={head.description} />
       <meta name="keywords" key="keywords" content={head.keywords} />
-      <link
-        rel="icon"
-        type="image/png"
-        href={IMAGE_FAVICON_16.src}
-        // href={IMAGE_FAVICON_128.src}
-        sizes="16x16"
-        key="favicon-16"
-      />
       <link
         rel="icon"
         type="image/png"

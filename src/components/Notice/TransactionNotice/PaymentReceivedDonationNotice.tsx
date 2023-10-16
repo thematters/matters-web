@@ -28,6 +28,7 @@ const PaymentReceivedDonationNotice = ({
       action={
         <FormattedMessage
           defaultMessage="supported"
+          id="vLEnrs"
           description="src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
         />
       }
