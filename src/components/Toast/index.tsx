@@ -58,6 +58,7 @@ const ToastActions: React.FC<ToastActionsProps> = ({
           onClick={onDismiss}
           aria-label={intl.formatMessage({
             defaultMessage: 'Close',
+            id: 'rbrahO',
           })}
         >
           <IconClose22
