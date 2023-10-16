@@ -27,3 +27,5 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: vi.fn(),
   })),
 })
+
+vi.mock('next/router', () => require('next-router-mock'))

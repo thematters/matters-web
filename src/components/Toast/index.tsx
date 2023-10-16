@@ -2,8 +2,8 @@ import { keyframes } from 'goober'
 import React from 'react'
 import type { Toast as ToastType } from 'react-hot-toast'
 import baseToast, { Toaster as BaseToaster } from 'react-hot-toast'
+import { useIntl } from 'react-intl'
 
-// import { useIntl } from 'react-intl'
 import {
   Button,
   ButtonProps,
@@ -32,7 +32,7 @@ const ToastActions: React.FC<ToastActionsProps> = ({
   onDismiss,
   hasClose = true,
 }) => {
-  // const intl = useIntl()
+  const intl = useIntl()
 
   return (
     <section className={styles.actions}>
@@ -56,10 +56,9 @@ const ToastActions: React.FC<ToastActionsProps> = ({
         <button
           type="button"
           onClick={onDismiss}
-          aria-label="Close"
-          // aria-label={intl.formatMessage({
-          //   defaultMessage: 'Close',
-          // })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Close',
+          })}
         >
           <IconClose22
             color={type === 'error' ? 'white' : 'whiteLight'}

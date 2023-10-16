@@ -1,6 +1,6 @@
-import { act, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { act, fireEvent, render, screen } from '~/common/utils/test'
 import { toast, Toaster } from '~/components'
 
 beforeEach(() => {
@@ -50,6 +50,7 @@ describe('<Toast>', () => {
     render(<AnyToast />)
 
     // show toast
+    screen.debug()
     fireEvent.click(screen.getByRole('button', { name: /Notify/i }))
     const $toast = screen.getByRole('alert')
     expect($toast).toBeInTheDocument()

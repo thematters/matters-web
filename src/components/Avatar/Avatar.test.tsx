@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
+import { render, screen } from '~/common/utils/test'
 import { Avatar } from '~/components'
 
 describe('<Avatar>', () => {
