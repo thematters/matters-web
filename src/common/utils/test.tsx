@@ -38,7 +38,7 @@ const TranslationsProvider = ({ children }: { children: React.ReactNode }) => {
 }
 
 // src/components/Root/index.tsx
-const AllProviders = ({ children }: { children: React.ReactNode }) => {
+const wrapper = ({ children }: { children: React.ReactNode }) => {
   // src/common/utils/withApollo.ts
   const client = new ApolloClient({
     link: ApolloLink.empty(),
@@ -61,12 +61,8 @@ const AllProviders = ({ children }: { children: React.ReactNode }) => {
 const customRender = (
   ui: ReactElement,
   options?: Omit<RenderOptions, 'wrapper'>
-) =>
-  render(ui, {
-    wrapper: AllProviders,
-    ...options,
-  })
+) => render(ui, { wrapper, ...options })
 
 // re-export & override render method
 export * from '@testing-library/react'
-export { customRender as render }
+export { customRender as render, wrapper }

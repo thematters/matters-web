@@ -27,5 +27,9 @@ jobs:
         if: github.base_ref == 'master'
         run: npm run gen:type:prod
 
+      - name: Compile i18n
+        run: |
+          npm run i18n
+
       - name: Run unit tests
         run: cp .env.dev .env.local && npm run test:unit

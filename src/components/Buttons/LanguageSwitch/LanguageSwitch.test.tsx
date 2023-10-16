@@ -1,30 +1,24 @@
+import { renderHook } from '@testing-library/react-hooks'
 import React, { useContext } from 'react'
 import { describe, expect, it } from 'vitest'
 
 import { LANG_TEXT_MAP } from '~/common/enums'
-import { fireEvent, render, screen, within } from '~/common/utils/test'
+import { fireEvent, render, screen, within, wrapper } from '~/common/utils/test'
 import { LanguageContext, LanguageSwitch } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
-
-const TEST_ID_CURRENT_LANG = '_TEST_ID_CURRENT_LANG'
-
-const Lang = () => {
-  const { lang } = useContext(LanguageContext)
-  return <div data-test-id={TEST_ID_CURRENT_LANG}>{lang}</div>
-}
 
 describe('<LanguageSwitch>', () => {
   it('should render the language switch menu', () => {
     // get current language
-    // TODO: get current language from context directly
-    const { unmount } = render(<Lang />)
-    const lang = screen.getByTestId(TEST_ID_CURRENT_LANG).textContent
+    const { result } = renderHook(() => useContext(LanguageContext), {
+      wrapper,
+    })
+    const lang = result.current.lang
     expect([
       UserLanguage.En,
       UserLanguage.ZhHans,
       UserLanguage.ZhHant,
     ]).toContain(lang)
-    unmount()
 
     // render <LanguageSwitch>
     render(<LanguageSwitch />)
@@ -49,8 +43,11 @@ describe('<LanguageSwitch>', () => {
     fireEvent.click($targetLangBtn)
 
     // get current language
-    render(<Lang />)
-    const newLang = screen.getByTestId(TEST_ID_CURRENT_LANG).textContent
+    const { result: newResult } = renderHook(
+      () => useContext(LanguageContext),
+      { wrapper }
+    )
+    const newLang = newResult.current.lang
     expect(newLang).toBe(targetLang)
   })
 })
