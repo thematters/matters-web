@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog } from '~/components'
+import { Dialog, Spacer } from '~/components'
 
 import CirclesFeed from '../CirclesFeed'
 import FeedType, { FollowingFeedType } from '../FeedType'
@@ -13,6 +13,7 @@ const FollowingDialogContent = () => {
   return (
     <Dialog.Content noSpacing>
       <FeedType type={feedType} setFeedType={setFeedType} />
+      <Spacer size="xtight" />
       {feedType === 'circle' && <CirclesFeed />}
       {feedType === 'tag' && <TagsFeed />}
       {feedType === 'user' && <UsersFeed />}

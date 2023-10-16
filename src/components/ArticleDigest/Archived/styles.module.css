@@ -2,9 +2,10 @@
   @mixin flex-center-space-between;
 
   font-size: var(--font-size-sm);
-  color: var(--color-grey);
+  color: var(--color-grey-dark);
 
   & .right {
+    color: var(--color-grey);
     word-break: keep-all;
   }
 }

@@ -6,7 +6,7 @@ import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   AddCollectionDialog,
-  CollectionDigest,
+  CollectionDigestFeed,
   Empty,
   Head,
   IconAdd20,
@@ -169,7 +169,7 @@ const UserCollections = () => {
           <List>
             {edges.map(({ node, cursor }, i) => (
               <List.Item key={node.id}>
-                <CollectionDigest.Feed
+                <CollectionDigestFeed
                   collection={node}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {

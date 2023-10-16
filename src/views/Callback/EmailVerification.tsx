@@ -19,6 +19,7 @@ const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const EmailVerification = () => {
   const [verify] = useMutation<VerifyEmailMutation>(VERIFY_EMAIL, undefined, {
     showToast: false,
+    showLoginToast: false,
   })
 
   const [hasError, setHasError] = useState(false)

@@ -9,6 +9,7 @@ import {
   Avatar,
   Button,
   Cover,
+  EditProfileDialog,
   Expandable,
   FollowUserButton,
   Media,
@@ -32,7 +33,6 @@ import {
 import { BadgesDialog } from './BadgesDialog'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
-import { EditProfileDialog } from './DropdownActions/EditProfileDialog'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'

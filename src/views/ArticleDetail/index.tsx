@@ -222,7 +222,7 @@ const BaseArticleDetail = ({
   const title = translated && translatedTitle ? translatedTitle : article.title
   const summary =
     translated && translatedSummary ? translatedSummary : article.summary
-  const isEnableMd = !!getQuery('md')
+  const isEnableMd = !!getQuery('md') // feature flag
   const originalContent =
     isEnableMd && article.contents.markdown
       ? md2html(article.contents.markdown)
@@ -380,7 +380,11 @@ const ArticleDetail = ({
   /**
    * fetch public data
    */
-  const isQueryByHash = !!(mediaHash && isMediaHashPossiblyValid(mediaHash))
+  const isQueryByHash = !!(
+    mediaHash &&
+    isMediaHashPossiblyValid(mediaHash) &&
+    !articleId
+  )
 
   // backward compatible with:
   // - `/:username:/:articleId:-:slug:-:mediaHash`
@@ -607,7 +611,12 @@ const ArticleDetailOuter = () => {
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
 
-  const isQueryByHash = !!(mediaHash && isMediaHashPossiblyValid(mediaHash))
+  const isQueryByHash = !!(
+    mediaHash &&
+    isMediaHashPossiblyValid(mediaHash) &&
+    !articleId
+  )
+
   const resultByHash = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS,
     { variables: { mediaHash }, skip: !isQueryByHash }

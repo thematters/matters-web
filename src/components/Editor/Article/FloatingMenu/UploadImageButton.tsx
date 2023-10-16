@@ -4,12 +4,8 @@ import classNames from 'classnames'
 import { useContext, useState } from 'react'
 
 import { ReactComponent as IconEditorMenuImage } from '@/public/static/icons/32px/editor-menu-image.svg'
-import {
-  ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ASSET_TYPE,
-  UPLOAD_IMAGE_SIZE_LIMIT,
-} from '~/common/enums'
-import { translate } from '~/common/utils'
+import { ACCEPTED_UPLOAD_IMAGE_TYPES, ASSET_TYPE } from '~/common/enums'
+import { translate, validateImage } from '~/common/utils'
 import {
   IconSpinner16,
   LanguageContext,
@@ -51,20 +47,10 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
 
     const files = event.target.files
 
-    const hasExceedLimit = Array.from(files).some(
-      (file) => file.size > UPLOAD_IMAGE_SIZE_LIMIT
-    )
-    if (hasExceedLimit) {
-      toast.error({
-        message: (
-          <Translate
-            zh_hant="上傳檔案超過 5 MB"
-            zh_hans="上传文件超过 5 MB"
-            en="upload file size exceeds 5 MB"
-          />
-        ),
-      })
-
+    const hasInvalidImage = await Promise.all(
+      Array.from(files).map(validateImage)
+    ).then((results) => results.some((result) => !result))
+    if (hasInvalidImage) {
       event.target.value = ''
       return
     }

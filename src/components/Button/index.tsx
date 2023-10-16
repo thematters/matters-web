@@ -49,6 +49,7 @@ export type ButtonSpacingX =
 
 type ButtonColor =
   | 'white'
+  | 'whiteLight'
   | 'black'
   | 'halfBlack'
   | 'greyDark'
@@ -70,7 +71,14 @@ type ButtonColor =
 
 type ButtonTextColor = Extract<
   ButtonColor,
-  'white' | 'black' | 'green' | 'gold' | 'red' | 'grey' | 'greyDarker'
+  | 'white'
+  | 'whiteLight'
+  | 'black'
+  | 'green'
+  | 'gold'
+  | 'red'
+  | 'grey'
+  | 'greyDarker'
 >
 
 type ButtonTextActiveColor = Extract<

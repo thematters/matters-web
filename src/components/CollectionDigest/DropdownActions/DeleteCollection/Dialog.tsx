@@ -11,15 +11,11 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import {
-  updateUserArticles,
-  updateUserCollections,
-  updateUserProfile,
-} from '~/components/GQL'
+import { updateUserArticles, updateUserCollections } from '~/components/GQL'
 import {
   DeleteCollectionCollectionFragment,
   DeleteCollectionMutation,
-  ViewerArticleCountQuery,
+  ViewerTabsCountQuery,
 } from '~/gql/graphql'
 
 const DELETE_COLLECTION = gql`
@@ -28,12 +24,15 @@ const DELETE_COLLECTION = gql`
   }
 `
 
-const VIEWER_ARTICLE_COUNT = gql`
-  query ViewerArticleCount {
+const VIEWER_TABS_COUNT = gql`
+  query ViewerTabsCount {
     viewer {
       id
       status {
         articleCount
+      }
+      collections(input: { first: 0 }) {
+        totalCount
       }
     }
   }
@@ -63,7 +62,7 @@ const DeleteCollectionDialog = ({
       setStep('delete')
     }, 1000)
   }
-
+  const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
   const [deleteCollection, { loading, client }] =
     useMutation<DeleteCollectionMutation>(DELETE_COLLECTION, {
       variables: { id: collection.id },
@@ -81,24 +80,32 @@ const DeleteCollectionDialog = ({
           type: 'delete',
         })
 
-        const result = updateUserProfile({
-          cache,
-          userName: collection.author.userName!,
-          type: 'decreaseCollection',
-        })
-        if (result?.collectionCount === 0) {
-          onEmptyCollection()
-        }
+        // FIXME: Why not update user profile tab collection count?
+        // const result = updateUserProfile({
+        //   cache,
+        //   userName: collection.author.userName!,
+        //   type: 'decreaseCollection',
+        // })
+        onEmptyCollection()
       },
+      refetchQueries: [
+        {
+          query: USER_PROFILE_PUBLIC,
+          variables: { userName: collection.author.userName },
+        },
+      ],
     })
 
   const onEmptyCollection = async () => {
-    const result = await client?.query<ViewerArticleCountQuery>({
-      query: VIEWER_ARTICLE_COUNT,
+    const result = await client?.query<ViewerTabsCountQuery>({
+      query: VIEWER_TABS_COUNT,
       fetchPolicy: 'network-only',
     })
 
-    if (result?.data.viewer?.status?.articleCount === 0)
+    if (
+      result?.data.viewer?.status?.articleCount === 0 &&
+      result.data.viewer?.collections.totalCount === 0
+    )
       router.push(
         toPath({ page: 'userProfile', userName: viewer.userName || '' }).href
       )

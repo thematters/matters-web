@@ -8,7 +8,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { KEYVALUE } from '~/common/enums'
 import { toPath, validateCollectionTitle } from '~/common/utils'
 import {
-  CollectionDigest,
+  CollectionDigestFeed,
   Dialog,
   Form,
   LanguageContext,
@@ -16,9 +16,9 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { updateUserProfile } from '~/components/GQL'
 import { CreateCollectionMutation } from '~/gql/graphql'
 import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
+import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
 
 type Collection = CreateCollectionMutation['putCollection']
 interface FormProps {
@@ -38,7 +38,7 @@ const CREATE_COLLECTION = gql`
       ...CollectionDigestFeedCollection
     }
   }
-  ${CollectionDigest.Feed.fragments.collection}
+  ${CollectionDigestFeed.fragments.collection}
 `
 
 const AddCollectionDialogContent: React.FC<FormProps> = ({
@@ -90,11 +90,12 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
             },
           },
           update(cache, result) {
-            updateUserProfile({
-              cache,
-              userName,
-              type: 'increaseCollection',
-            })
+            // FIXME: Why not update user profile tab collection count?
+            // updateUserProfile({
+            //   cache,
+            //   userName,
+            //   type: 'increaseCollection',
+            // })
             if (onUpdate) {
               onUpdate(cache, result.data?.putCollection || ({} as Collection))
             }
@@ -102,6 +103,10 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
           refetchQueries: [
             {
               query: USER_COLLECTIONS,
+              variables: { userName: viewer.userName },
+            },
+            {
+              query: USER_PROFILE_PUBLIC,
               variables: { userName: viewer.userName },
             },
           ],

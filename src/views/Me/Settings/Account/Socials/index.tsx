@@ -1,10 +1,11 @@
-import { useContext, useLayoutEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
   OAUTH_STORAGE_BIND_STATE,
   OAUTH_STORAGE_BIND_STATE_FAILURE,
   OAUTH_STORAGE_BIND_STATE_SUCCESS,
+  OAUTH_STORAGE_BIND_STATE_UNAVAILABLE,
 } from '~/common/enums'
 import {
   facebookOauthUrl,
@@ -68,7 +69,7 @@ const Socials = () => {
     router.push(url)
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const bindResult = storage.remove(OAUTH_STORAGE_BIND_STATE)
     if (!bindResult) {
       return
@@ -101,6 +102,20 @@ const Socials = () => {
               values={{
                 type: bindResult.type,
               }}
+            />
+          ),
+        })
+      })
+      return
+    }
+
+    if (state === OAUTH_STORAGE_BIND_STATE_UNAVAILABLE) {
+      setTimeout(() => {
+        toast.error({
+          message: (
+            <FormattedMessage
+              defaultMessage="Unavailable"
+              description="FORBIDDEN_BY_STATE"
             />
           ),
         })

@@ -11,7 +11,6 @@ import {
   validatePassword,
 } from '~/common/utils'
 import {
-  Dialog,
   DialogBeta,
   Form,
   LanguageContext,
@@ -58,7 +57,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     values,
     errors,
     touched,
-    handleBlur,
+    // handleBlur,
     handleChange,
     handleSubmit,
     setFieldValue,
@@ -109,7 +108,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         placeholder={intl.formatMessage({ defaultMessage: 'Password' })}
         value={values.password}
         error={touched.password && errors.password}
-        onBlur={handleBlur}
+        // onBlur={handleBlur}
         onChange={handleChange}
         onKeyDown={(e) => {
           if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
@@ -163,7 +162,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       <DialogBeta.Footer
         smUpBtns={
           <>
-            <Dialog.TextButton
+            <DialogBeta.TextButton
               text={<FormattedMessage defaultMessage="Cancel" />}
               color="greyDarker"
               onClick={closeDialog}
