@@ -100,6 +100,7 @@ const EditModeHeader = ({
         message: (
           <FormattedMessage
             defaultMessage={`Content length exceeds limit ({length}/{limit})`}
+            id="VefaFQ"
             values={{ length: contentCount, limit: MAX_ARTICLE_CONTENT_LENGTH }}
           />
         ),
@@ -227,7 +228,7 @@ const EditModeHeader = ({
             disabled={isEditDisabled || isOverDiffLimit}
           >
             <TextIcon color="white" size="md" weight="md">
-              <FormattedMessage defaultMessage="Next Step" />
+              <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />
             </TextIcon>
           </Button>
         )}

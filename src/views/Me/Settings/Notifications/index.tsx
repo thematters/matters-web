@@ -10,6 +10,7 @@ const NotificationSettings = () => {
   const intl = useIntl()
   const title = intl.formatMessage({
     defaultMessage: 'Settings - Notifications',
+    id: '2DkkhD',
     description: 'src/views/Me/Settings/Notifications/index.tsx',
   })
 
@@ -20,6 +21,7 @@ const NotificationSettings = () => {
           <Layout.Header.Title>
             <FormattedMessage
               defaultMessage="Settings"
+              id="z+a1SW"
               description="src/views/Me/Settings/Notifications/index.tsx"
             />
           </Layout.Header.Title>

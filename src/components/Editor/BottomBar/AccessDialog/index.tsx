@@ -29,7 +29,7 @@ const BaseAccessDialog = ({
   const CloseButton = () => (
     <Dialog.TextButton
       onClick={closeDialog}
-      text={<FormattedMessage defaultMessage="Done" />}
+      text={<FormattedMessage defaultMessage="Done" id="JXdbo8" />}
     />
   )
 

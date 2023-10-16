@@ -9,6 +9,7 @@ interface Props {
 const InvitationSentTitle = (
   <FormattedMessage
     defaultMessage="Invitation Sent"
+    id="OIj8pQ"
     description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   />
 )
@@ -31,6 +32,7 @@ const InvitationSent = ({ closeDialog }: Props) => (
       <p>
         <FormattedMessage
           defaultMessage="Invitations have been sent. You can check invitation status on the invitation management page."
+          id="SdXoXI"
           description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
         />
       </p>
@@ -39,13 +41,13 @@ const InvitationSent = ({ closeDialog }: Props) => (
     <Dialog.Footer
       btns={
         <Dialog.RoundedButton
-          text={<FormattedMessage defaultMessage="I see" />}
+          text={<FormattedMessage defaultMessage="I see" id="lIir/P" />}
           onClick={closeDialog}
         />
       }
       smUpBtns={
         <Dialog.TextButton
-          text={<FormattedMessage defaultMessage="I see" />}
+          text={<FormattedMessage defaultMessage="I see" id="lIir/P" />}
           onClick={closeDialog}
         />
       }

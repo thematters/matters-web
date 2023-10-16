@@ -27,6 +27,7 @@ const CircleInvitationNotice = ({
       action={
         <FormattedMessage
           defaultMessage="invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free"
+          id="ItUuuX"
           description="src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
           values={{
             circleName: <NoticeCircleName circle={notice.circle} />,

@@ -60,6 +60,7 @@ const RemoveTagButton = ({
       text={
         <FormattedMessage
           defaultMessage="Remove Article"
+          id="qlki7w"
           description="src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
         />
       }

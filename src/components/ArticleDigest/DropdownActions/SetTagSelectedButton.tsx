@@ -53,6 +53,7 @@ const SetTagSelectedButton = ({
       text={
         <FormattedMessage
           defaultMessage="Add to Featured"
+          id="WSUAwk"
           description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
         />
       }
@@ -64,6 +65,7 @@ const SetTagSelectedButton = ({
           message: (
             <FormattedMessage
               defaultMessage="The article has been added to the Trending"
+              id="7xnrxG"
               description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
             />
           ),

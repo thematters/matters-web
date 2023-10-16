@@ -60,12 +60,14 @@ const CircleNewBroadcastComments = ({
             {replyCount && !mentionCount && (
               <FormattedMessage
                 defaultMessage="commented in your circle broadcast"
+                id="Y+spJC"
                 description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
               />
             )}
             {replyCount && mentionCount && (
               <FormattedMessage
                 defaultMessage="mentioned you in your circle broadcast comment"
+                id="XQTBu6"
                 description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
               />
             )}
@@ -91,6 +93,7 @@ const CircleNewBroadcastComments = ({
           {replyCount && !mentionCount && (
             <FormattedMessage
               defaultMessage="commented broadcast in {circleName}"
+              id="EZMrtJ"
               description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
               values={{
                 circleName: (
@@ -105,6 +108,7 @@ const CircleNewBroadcastComments = ({
           {replyCount && mentionCount && (
             <FormattedMessage
               defaultMessage="mentioned you in broadcast comment in {circleName}"
+              id="r66dXx"
               description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
               values={{
                 circleName: (

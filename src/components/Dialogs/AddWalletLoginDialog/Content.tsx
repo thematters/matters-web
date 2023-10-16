@@ -24,12 +24,13 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
         title={
           <FormattedMessage
             defaultMessage="Connect wallet"
+            id="Me5cJu"
             description="src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
           />
         }
         leftBtn={
           <DialogBeta.TextButton
-            text={<FormattedMessage defaultMessage="Close" />}
+            text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
             color="greyDarker"
             onClick={closeDialog}
           />
@@ -53,7 +54,7 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
             smUpBtns={
               <>
                 <DialogBeta.TextButton
-                  text={<FormattedMessage defaultMessage="Close" />}
+                  text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                   color="greyDarker"
                   onClick={closeDialog}
                 />

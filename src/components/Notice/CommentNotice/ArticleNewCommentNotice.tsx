@@ -30,6 +30,7 @@ const ArticleNewCommentNotice = ({
       action={
         <FormattedMessage
           defaultMessage="commented"
+          id="lZukEr"
           description="src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
         />
       }

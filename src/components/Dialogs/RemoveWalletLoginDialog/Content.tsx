@@ -36,6 +36,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
         message: (
           <FormattedMessage
             defaultMessage="Wallet disconnected"
+            id="iu3XKs"
             description="src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
           />
         ),
@@ -53,6 +54,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
         title={
           <FormattedMessage
             defaultMessage="Disconnect wallet"
+            id="no7l8z"
             description="src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
           />
         }
@@ -64,12 +66,14 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
             {isConfirm && (
               <FormattedMessage
                 defaultMessage="Are you sure you want to disconnect from this?"
+                id="CoF9qv"
                 description="src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
               />
             )}
             {isFailure && (
               <FormattedMessage
                 defaultMessage="Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account)."
+                id="dSjI7E"
                 description="src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
               />
             )}
@@ -85,6 +89,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
                 text={
                   <FormattedMessage
                     defaultMessage="Disconnect"
+                    id="2P5JII"
                     description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
                   />
                 }
@@ -92,7 +97,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
                 onClick={remove}
               />
               <DialogBeta.RoundedButton
-                text={<FormattedMessage defaultMessage="Close" />}
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -101,7 +106,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
           smUpBtns={
             <>
               <DialogBeta.TextButton
-                text={<FormattedMessage defaultMessage="Cancel" />}
+                text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -109,6 +114,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
                 text={
                   <FormattedMessage
                     defaultMessage="Disconnect"
+                    id="2P5JII"
                     description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
                   />
                 }
@@ -125,7 +131,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
           btns={
             <>
               <DialogBeta.RoundedButton
-                text={<FormattedMessage defaultMessage="Close" />}
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -134,7 +140,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
           smUpBtns={
             <>
               <DialogBeta.TextButton
-                text={<FormattedMessage defaultMessage="Close" />}
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />

@@ -128,6 +128,7 @@ const Init: React.FC<FormProps> = ({
             'email',
             intl.formatMessage({
               defaultMessage: 'Unavailable',
+              id: 'rADhX5',
               description: 'FORBIDDEN_BY_STATE',
             })
           )
@@ -168,12 +169,13 @@ const Init: React.FC<FormProps> = ({
         }}
       />
       <Form.Input
-        label={<FormattedMessage defaultMessage="Email" />}
+        label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
         type="email"
         name="email"
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Email',
+          id: 'sy+pv5',
         })}
         hintSize="sm"
         hintAlign="center"
@@ -199,6 +201,7 @@ const Init: React.FC<FormProps> = ({
       text={
         <FormattedMessage
           defaultMessage="Continue"
+          id="wK4kLf"
           description="src/components/Forms/EmailSignUpForm/Init.tsx"
         />
       }
@@ -209,11 +212,11 @@ const Init: React.FC<FormProps> = ({
   return (
     <>
       <DialogBeta.Header
-        title={<FormattedMessage defaultMessage="Sign Up" />}
+        title={<FormattedMessage defaultMessage="Sign Up" id="39AHJm" />}
         hasSmUpTitle={false}
         leftBtn={
           <DialogBeta.TextButton
-            text={<FormattedMessage defaultMessage="Back" />}
+            text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
             color="greyDarker"
             onClick={back}
           />
@@ -229,7 +232,9 @@ const Init: React.FC<FormProps> = ({
             purpose={purpose}
             type={authFeedType}
             setType={setAuthFeedType}
-            normalText={<FormattedMessage defaultMessage="Sign Up" />}
+            normalText={
+              <FormattedMessage defaultMessage="Sign Up" id="39AHJm" />
+            }
           />
           {isNormal && <>{InnerForm}</>}
           {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
@@ -243,7 +248,7 @@ const Init: React.FC<FormProps> = ({
               <DialogBeta.TextButton
                 text={
                   <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
-                    <FormattedMessage defaultMessage="Back" />
+                    <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
                   </TextIcon>
                 }
                 color="greyDarker"
@@ -260,7 +265,7 @@ const Init: React.FC<FormProps> = ({
           smUpBtns={
             <DialogBeta.TextButton
               color="greyDarker"
-              text={<FormattedMessage defaultMessage="Close" />}
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               onClick={closeDialog}
             />
           }

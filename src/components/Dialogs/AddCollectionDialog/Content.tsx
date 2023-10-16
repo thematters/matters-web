@@ -137,6 +137,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Collection Name',
+          id: 'VZsE96',
         })}
         value={values.title}
         hint={`${values.title.length}/${maxCollectionTitle}`}
@@ -159,7 +160,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Create" />}
+      text={<FormattedMessage defaultMessage="Create" id="VzzYJk" />}
       loading={isSubmitting}
     />
   )
@@ -167,7 +168,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<FormattedMessage defaultMessage="New Collection" />}
+        title={<FormattedMessage defaultMessage="New Collection" id="L4Fcr8" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />
@@ -178,7 +179,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

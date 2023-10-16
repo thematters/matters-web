@@ -58,7 +58,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
   const SubmitButton = (
     <Dialog.TextButton
       onClick={onSave}
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={coverSaving}
     />
   )
@@ -71,7 +71,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
         leftBtn={
           back ? (
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               onClick={back}
             />
           ) : undefined
@@ -98,7 +98,11 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
           <>
             <Dialog.TextButton
               text={
-                back ? 'back' : <FormattedMessage defaultMessage="Cancel" />
+                back ? (
+                  'back'
+                ) : (
+                  <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+                )
               }
               color="greyDarker"
               onClick={back || closeDialog}

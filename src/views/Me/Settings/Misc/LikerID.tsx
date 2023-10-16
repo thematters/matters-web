@@ -13,6 +13,7 @@ const LikerID = () => {
       title={
         <FormattedMessage
           defaultMessage="Liker ID"
+          id="kS3vTS"
           description="src/views/Me/Settings/Misc/LikerID.tsx"
         />
       }
@@ -29,7 +30,7 @@ const LikerID = () => {
               window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
             }
           >
-            <FormattedMessage defaultMessage="Connect" />
+            <FormattedMessage defaultMessage="Connect" id="+vVZ/G" />
           </Button>
         )
       }

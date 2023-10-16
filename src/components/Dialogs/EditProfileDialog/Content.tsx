@@ -85,6 +85,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       return intl.formatMessage(
         {
           defaultMessage: 'Over 140 words, current {numbers}',
+          id: 'DUoV1W',
           description: 'src/components/Dialogs/EditProfileDialog/Content.tsx',
         },
         {
@@ -134,7 +135,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         })
 
         toast.success({
-          message: <FormattedMessage defaultMessage="Saved" />,
+          message: <FormattedMessage defaultMessage="Saved" id="fsB/4p" />,
         })
 
         setSubmitting(false)
@@ -150,6 +151,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
               intl.formatMessage({
                 defaultMessage:
                   'Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed.',
+                id: 'E8W3qa',
               })
             )
           } else {
@@ -193,6 +195,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Name',
+          id: 'HAlOn1',
         })}
         value={values.displayName}
         hint={`${values.displayName.length}/${MAX_USER_DISPLAY_NAME_LENGTH}`}
@@ -209,6 +212,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         name="description"
         placeholder={intl.formatMessage({
           defaultMessage: 'Bio',
+          id: '2W0f9h',
         })}
         maxLength={MAX_USER_DESCRIPTION_LENGTH}
         value={values.description}
@@ -226,7 +230,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting || coverLoading || avatarLoading}
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting || coverLoading || avatarLoading}
     />
   )
@@ -234,7 +238,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<FormattedMessage defaultMessage="Edit profile" />}
+        title={<FormattedMessage defaultMessage="Edit profile" id="nYrKWp" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
         hasSmUpTitle={false}
@@ -246,7 +250,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

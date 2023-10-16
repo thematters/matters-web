@@ -81,6 +81,7 @@ const Socials = () => {
           message: (
             <FormattedMessage
               defaultMessage="Connected to {type}"
+              id="C3NKBg"
               description="src/views/Me/Settings/Settings/Socials/index.tsx"
               values={{
                 type: bindResult.type,
@@ -98,6 +99,7 @@ const Socials = () => {
           message: (
             <FormattedMessage
               defaultMessage="This {type} account is connected to a Matters account. Sign in to that account to disconnect it then try again"
+              id="D+N1Q6"
               description="src/views/Me/Settings/Settings/Socials/index.tsx"
               values={{
                 type: bindResult.type,
@@ -115,6 +117,7 @@ const Socials = () => {
           message: (
             <FormattedMessage
               defaultMessage="Unavailable"
+              id="rADhX5"
               description="FORBIDDEN_BY_STATE"
             />
           ),
@@ -148,7 +151,10 @@ const Socials = () => {
                   <>
                     {!isGoogleLoading && (
                       <SettingsButton onClick={gotoGoogle}>
-                        <FormattedMessage defaultMessage="Connect" />
+                        <FormattedMessage
+                          defaultMessage="Connect"
+                          id="+vVZ/G"
+                        />
                       </SettingsButton>
                     )}
                     {isGoogleLoading && (
@@ -184,7 +190,10 @@ const Socials = () => {
                   <>
                     {!isTwitterLoading && (
                       <SettingsButton onClick={gotoTwitter}>
-                        <FormattedMessage defaultMessage="Connect" />
+                        <FormattedMessage
+                          defaultMessage="Connect"
+                          id="+vVZ/G"
+                        />
                       </SettingsButton>
                     )}
                     {isTwitterLoading && (
@@ -220,7 +229,10 @@ const Socials = () => {
                   <>
                     {!isFacebookLoading && (
                       <SettingsButton onClick={gotoFacebook}>
-                        <FormattedMessage defaultMessage="Connect" />
+                        <FormattedMessage
+                          defaultMessage="Connect"
+                          id="+vVZ/G"
+                        />
                       </SettingsButton>
                     )}
                     {isFacebookLoading && (

@@ -23,6 +23,7 @@ const EmailVerificationToast = () => {
       message: (
         <FormattedMessage
           defaultMessage="The email verification link has been sent to {email}, please check your inbox"
+          id="OAc8+i"
           description="src/components/GlobalToast/index.tsx"
           values={{
             email: viewer.info.email,

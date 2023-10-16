@@ -53,9 +53,12 @@ const PinButton = ({ article }: PinButtonProps) => {
       onCompleted: () => {
         toast.success({
           message: article.pinned ? (
-            <FormattedMessage defaultMessage="Unpinned from profile" />
+            <FormattedMessage
+              defaultMessage="Unpinned from profile"
+              id="Ihwz5K"
+            />
           ) : (
-            <FormattedMessage defaultMessage="Pinned to profile" />
+            <FormattedMessage defaultMessage="Pinned to profile" id="XuYhBC" />
           ),
         })
       },
@@ -64,7 +67,10 @@ const PinButton = ({ article }: PinButtonProps) => {
       toastType: 'success',
       customErrors: {
         [ERROR_CODES.ACTION_LIMIT_EXCEEDED]: (
-          <FormattedMessage defaultMessage="Up to 3 articles/collections can be pinned" />
+          <FormattedMessage
+            defaultMessage="Up to 3 articles/collections can be pinned"
+            id="2oxLHg"
+          />
         ),
       },
     }
@@ -76,11 +82,13 @@ const PinButton = ({ article }: PinButtonProps) => {
         article.pinned ? (
           <FormattedMessage
             defaultMessage="Unpin from profile"
+            id="S8PcQf"
             description="src/components/ArticleDigest/DropdownActions/PinButton.tsx"
           />
         ) : (
           <FormattedMessage
             defaultMessage="Pin to profile"
+            id="qgPR68"
             description="src/components/ArticleDigest/DropdownActions/PinButton.tsx"
           />
         )

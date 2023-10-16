@@ -13,13 +13,15 @@ const SelectPeriod = ({ period, onChange }: Props) => {
   return (
     <Form.Select
       name="select-period"
-      label={<FormattedMessage defaultMessage="Free trial period" />}
+      label={
+        <FormattedMessage defaultMessage="Free trial period" id="FmWYRt" />
+      }
       onChange={(option) => onChange(option.value)}
       options={options.map((value) => ({
         name: (
           <>
             {value}
-            <FormattedMessage defaultMessage="days" />
+            <FormattedMessage defaultMessage="days" id="Bc20la" />
           </>
         ),
         value,

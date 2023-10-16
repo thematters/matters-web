@@ -50,7 +50,10 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
       <section className={styles.key}>
         <CopyToClipboard text={secret}>
           <button
-            aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Copy',
+              id: '4l6vz1',
+            })}
             className={styles.copyButton}
           >
             <TextIcon

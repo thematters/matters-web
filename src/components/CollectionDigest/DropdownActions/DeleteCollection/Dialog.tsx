@@ -118,6 +118,7 @@ const DeleteCollectionDialog = ({
       message: (
         <FormattedMessage
           defaultMessage="Collection is deleted"
+          id="Ft76YC"
           description="src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
         />
       ),
@@ -138,7 +139,9 @@ const DeleteCollectionDialog = ({
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={<FormattedMessage defaultMessage="Delete collection" />}
+          title={
+            <FormattedMessage defaultMessage="Delete collection" id="m4GG4b" />
+          }
         />
 
         <Dialog.Message>
@@ -146,6 +149,7 @@ const DeleteCollectionDialog = ({
             <p>
               <FormattedMessage
                 defaultMessage="Are you sure you want to delete this collection ‘{collection}’?"
+                id="T9oZC8"
                 values={{
                   collection: (
                     <span className="u-highlight">{collection.title}</span>
@@ -153,12 +157,18 @@ const DeleteCollectionDialog = ({
                 }}
               />
               <br />
-              <FormattedMessage defaultMessage="(Articles in this collection will not be deleted)" />
+              <FormattedMessage
+                defaultMessage="(Articles in this collection will not be deleted)"
+                id="a/xacb"
+              />
             </p>
           )}
           {isInConfirmDelete && (
             <p>
-              <FormattedMessage defaultMessage="This action cannot be undone. Are you sure you want to delete this collection?" />
+              <FormattedMessage
+                defaultMessage="This action cannot be undone. Are you sure you want to delete this collection?"
+                id="Xi40U9"
+              />
             </p>
           )}
         </Dialog.Message>
@@ -168,7 +178,7 @@ const DeleteCollectionDialog = ({
             closeDialog={closeDialog}
             btns={
               <Dialog.RoundedButton
-                text={<FormattedMessage defaultMessage="Delete" />}
+                text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
                 color="red"
                 onClick={() => {
                   setStep('confirmDelete')
@@ -177,7 +187,7 @@ const DeleteCollectionDialog = ({
             }
             smUpBtns={
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Delete" />}
+                text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
                 color="red"
                 onClick={() => {
                   setStep('confirmDelete')
@@ -192,7 +202,12 @@ const DeleteCollectionDialog = ({
             closeDialog={closeDialog}
             btns={
               <Dialog.RoundedButton
-                text={<FormattedMessage defaultMessage="Confirm Deletion" />}
+                text={
+                  <FormattedMessage
+                    defaultMessage="Confirm Deletion"
+                    id="W8OZ3G"
+                  />
+                }
                 color={loading ? 'green' : 'red'}
                 onClick={async () => {
                   await onDelete()
@@ -203,7 +218,12 @@ const DeleteCollectionDialog = ({
             }
             smUpBtns={
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Confirm Deletion" />}
+                text={
+                  <FormattedMessage
+                    defaultMessage="Confirm Deletion"
+                    id="W8OZ3G"
+                  />
+                }
                 color={loading ? 'green' : 'red'}
                 onClick={async () => {
                   await onDelete()

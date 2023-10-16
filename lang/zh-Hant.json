@@ -190,10 +190,6 @@
   "3yk8fB": {
     "defaultMessage": "我的錢包"
   },
-  "3ynsJ3": {
-    "defaultMessage": "想了解更多？詳見 ",
-    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
-  },
   "47FYwb": {
     "defaultMessage": "取消"
   },
@@ -203,10 +199,6 @@
   "4KuZ0o": {
     "defaultMessage": "資源不存在",
     "description": "ASSET_NOT_FOUND"
-  },
-  "4giHJT": {
-    "defaultMessage": "在行動裝置上使用問題，參考 ",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "4l6vz1": {
     "defaultMessage": "複製"
@@ -294,6 +286,10 @@
     "defaultMessage": "已取消",
     "description": "src/components/Transaction/State/index.tsx"
   },
+  "70UCEy": {
+    "defaultMessage": "Have wallet questions on mobile device ? Click the",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
   "73iajM": {
     "defaultMessage": "出錯了，請檢查你輸入的內容",
     "description": "BAD_USER_INPUT"
@@ -337,6 +333,10 @@
   "8qGjpr": {
     "defaultMessage": "設定",
     "description": "src/views/Me/Settings/Misc/index.tsx"
+  },
+  "8rMZWb": {
+    "defaultMessage": "replied to your discussion on",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "8t6Cs8": {
     "defaultMessage": "Matters 日報",
@@ -575,6 +575,10 @@
     "defaultMessage": "ID 設置後無法修改，確認使用 {id} 作為 Matters ID 嗎？",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
+  "GG9uXH": {
+    "defaultMessage": "Please go to the relevant page to resend the link. You can also",
+    "description": "src/views/Callback/GoogleCallback.tsx"
+  },
   "GHxtae": {
     "defaultMessage": "數字錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
@@ -635,6 +639,10 @@
   },
   "HnxG15": {
     "defaultMessage": "設定"
+  },
+  "HqnUd1": {
+    "defaultMessage": "Add hash from IPFS into compatible reader such as",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "HxcjQl": {
     "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
@@ -857,10 +865,6 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "描述"
-  },
-  "QBEE1c": {
-    "defaultMessage": "請移步相關頁面重新獲取連結，您也可以 ",
-    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "QUqfbW": {
     "defaultMessage": "說說圍爐的有趣之處，吸引支持者加入",
@@ -1153,10 +1157,6 @@
     "defaultMessage": "進行中…",
     "description": "src/components/Transaction/State/index.tsx"
   },
-  "b+LSgI": {
-    "defaultMessage": "回覆了你在圍爐 ",
-    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  },
   "b6zdPs": {
     "defaultMessage": "{count} 篇文章",
     "description": "src/components/Book/index.tsx"
@@ -1193,10 +1193,6 @@
   },
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {篇文章} other {篇文章}}"
-  },
-  "cf37Zy": {
-    "defaultMessage": "添加 IPFS 生成的 IPNS 指紋到閱讀器，如：",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "cg1VJ2": {
     "defaultMessage": "連接加密錢包"
@@ -1315,10 +1311,6 @@
     "defaultMessage": "追蹤了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
-  "hrfF+i": {
-    "defaultMessage": "剛接觸加密錢包？參考 ",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "hrgo+E": {
     "defaultMessage": "封存"
   },
@@ -1383,6 +1375,10 @@
   "kkZioy": {
     "defaultMessage": "確認移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "l/f7bu": {
+    "defaultMessage": "Want to know more? Check the",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "l0/EvT": {
     "defaultMessage": "最後一步：设置 Matters ID",
@@ -1664,6 +1660,10 @@
   },
   "vAc1Bw": {
     "defaultMessage": "封鎖用戶"
+  },
+  "vCt85u": {
+    "defaultMessage": "Don't have a wallet yet? Check the",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "vH8sCb": {
     "defaultMessage": "我的圍爐"

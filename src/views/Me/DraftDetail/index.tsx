@@ -246,6 +246,7 @@ const DraftDetail = () => {
           message: (
             <FormattedMessage
               defaultMessage={`Content length exceeds limit ({length}/{limit})`}
+              id="VefaFQ"
               values={{
                 length: contentCount,
                 limit: MAX_ARTICLE_CONTENT_LENGTH,

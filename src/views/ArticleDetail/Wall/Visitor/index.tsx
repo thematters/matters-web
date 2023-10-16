@@ -70,7 +70,10 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
           <div className={styles.close}>
             <Button
               onClick={closeDialog}
-              aria-label={intl.formatMessage({ defaultMessage: 'Close' })}
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Close',
+                id: 'rbrahO',
+              })}
             >
               <IconClear16 color="grey" />
             </Button>

@@ -43,6 +43,7 @@ const Weibo = ({
         <TextIcon icon={withIcon(IconShareWeibo)({})} spacing="base">
           <FormattedMessage
             defaultMessage="Weibo"
+            id="rBjwQy"
             description="src/components/Share/Buttons/Weibo.tsx"
           />
         </TextIcon>

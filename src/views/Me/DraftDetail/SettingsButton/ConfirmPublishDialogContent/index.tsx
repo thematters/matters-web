@@ -64,7 +64,7 @@ const ConfirmPublishDialogContent: React.FC<
         title={<Translate zh_hant="發布須知" zh_hans="發布须知" en="Notice" />}
         leftBtn={
           <Dialog.TextButton
-            text={<FormattedMessage defaultMessage="Back" />}
+            text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
             onClick={onBack}
           />
         }
@@ -123,7 +123,7 @@ const ConfirmPublishDialogContent: React.FC<
           <>
             <Dialog.TextButton
               color="greyDarker"
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               onClick={onBack}
             />
             {SubmitButton}

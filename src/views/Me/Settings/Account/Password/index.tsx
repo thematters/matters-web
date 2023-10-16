@@ -19,6 +19,7 @@ const Password = () => {
             title={
               <FormattedMessage
                 defaultMessage="Password"
+                id="PLBmDT"
                 description="src/views/Me/Settings/Settings/Password/index.tsx"
               />
             }
@@ -27,14 +28,16 @@ const Password = () => {
                 !isEmailVerified ? (
                   <FormattedMessage
                     defaultMessage="Please verify email first"
+                    id="+51DoZ"
                     description="src/views/Me/Settings/Settings/Password/index.tsx"
                   />
                 ) : hasPassword ? (
-                  <FormattedMessage defaultMessage="Change" />
+                  <FormattedMessage defaultMessage="Change" id="BY343C" />
                 ) : undefined
               ) : (
                 <FormattedMessage
                   defaultMessage="Please add email first"
+                  id="O0MQs/"
                   description="src/views/Me/Settings/Settings/Password/index.tsx"
                 />
               )
@@ -50,7 +53,7 @@ const Password = () => {
             right={
               hasEmail && isEmailVerified && !hasPassword ? (
                 <SettingsButton onClick={openDialog}>
-                  <FormattedMessage defaultMessage="Set" />
+                  <FormattedMessage defaultMessage="Set" id="HnxG15" />
                 </SettingsButton>
               ) : undefined
             }

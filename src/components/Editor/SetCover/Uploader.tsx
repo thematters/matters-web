@@ -173,7 +173,10 @@ const Uploader: React.FC<UploaderProps> = ({
       </h3>
 
       <p>
-        <FormattedMessage defaultMessage="Recommended square image." />
+        <FormattedMessage
+          defaultMessage="Recommended square image."
+          id="CxYcYR"
+        />
       </p>
 
       <VisuallyHidden>
