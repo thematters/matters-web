@@ -20,7 +20,7 @@ import {
   UserDonationRecipientFragment,
 } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -52,9 +52,9 @@ const USDTChoice: React.FC<FormProps> = ({
 
   if (mediaHash === '') {
     return (
-      <section className="item">
+      <section className={styles.item}>
         <TextIcon
-          icon={<IconUSDT40 size="xl-m" />}
+          icon={<IconUSDT40 size="xlM" />}
           size="md"
           spacing="xtight"
           color="grey"
@@ -68,17 +68,15 @@ const USDTChoice: React.FC<FormProps> = ({
             en="Not available temporarily"
           />
         </TextIcon>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
 
   if (!creatorAddress) {
     return (
-      <section className="item">
+      <section className={styles.item}>
         <TextIcon
-          icon={<IconUSDT40 size="xl-m" />}
+          icon={<IconUSDT40 size="xlM" />}
           size="md"
           spacing="xtight"
           color="grey"
@@ -92,8 +90,6 @@ const USDTChoice: React.FC<FormProps> = ({
             en="The author has not opened"
           />
         </TextIcon>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -102,12 +98,12 @@ const USDTChoice: React.FC<FormProps> = ({
     return (
       <section
         role="button"
-        className="item clickable"
+        className={`${styles.item} ${styles.clickable}`}
         onClick={switchToSetAmount}
         aria-label="Tether"
       >
         <TextIcon
-          icon={<IconUSDTActive40 size="xl-m" />}
+          icon={<IconUSDTActive40 size="xlM" />}
           size="md"
           spacing="xtight"
         >
@@ -123,16 +119,14 @@ const USDTChoice: React.FC<FormProps> = ({
             subValue={formatAmount(balanceUSDT * exchangeRate, 2)}
           />
         )}
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
 
   return (
-    <section className="item" aria-label="Tether">
+    <section className={styles.item} aria-label="Tether">
       <TextIcon
-        icon={<IconUSDT40 size="xl-m" color="grey" />}
+        icon={<IconUSDT40 size="xlM" color="grey" />}
         size="md"
         spacing="xtight"
         color="grey"
@@ -146,7 +140,7 @@ const USDTChoice: React.FC<FormProps> = ({
           size={[null, '1.5rem']}
           borderColor="green"
           borderRadius="5rem"
-          href={PATHS.ME_SETTINGS_CONNECT_WALLET}
+          href={PATHS.ME_SETTINGS}
         >
           <TextIcon color="green" size="xs">
             <Translate
@@ -177,8 +171,6 @@ const USDTChoice: React.FC<FormProps> = ({
           </TextIcon>
         </Button>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

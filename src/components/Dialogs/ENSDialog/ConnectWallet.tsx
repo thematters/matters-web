@@ -6,16 +6,18 @@ import { Dialog, Translate, ViewerContext } from '~/components'
 
 import ENSDescription from './ENSDescription'
 import LinkENSIntro from './LinkENSIntro'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface ConnectWalletProps {
   switchToWalletSelect: () => void
   switchToLinkENS: () => void
+  closeDialog: () => void
 }
 
 const ConnectWallet = ({
   switchToWalletSelect,
   switchToLinkENS,
+  closeDialog,
 }: ConnectWalletProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -38,29 +40,42 @@ const ConnectWallet = ({
 
   return (
     <>
+      <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
+
       <Dialog.Content>
-        <section className="content">
+        <section className={styles.content}>
           <LinkENSIntro ensName={ensName} />
         </section>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={() => {
-            switchToWalletSelect()
-          }}
-        >
-          <Translate
-            zh_hans="连接钱包"
-            zh_hant="連接錢包"
-            en="Connect Wallet"
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={
+              <Translate
+                zh_hans="连接钱包"
+                zh_hant="連接錢包"
+                en="Connect Wallet"
+              />
+            }
+            onClick={switchToWalletSelect}
           />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+        }
+        smUpBtns={
+          <Dialog.TextButton
+            text={
+              <Translate
+                zh_hans="连接钱包"
+                zh_hant="連接錢包"
+                en="Connect Wallet"
+              />
+            }
+            onClick={switchToWalletSelect}
+          />
+        }
+      />
 
       <ENSDescription />
-
-      <style jsx>{styles}</style>
     </>
   )
 }

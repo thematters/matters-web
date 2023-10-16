@@ -17,8 +17,8 @@ import {
   Expandable,
   Head,
   Layout,
+  SegmentedTabs,
   Spinner,
-  Tabs,
   Throw404,
   useFeatures,
   usePublicQuery,
@@ -26,7 +26,6 @@ import {
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
-import ShareButton from '~/components/Layout/Header/ShareButton'
 import {
   TagDetailPublicBySearchQuery,
   TagDetailPublicQuery,
@@ -46,7 +45,7 @@ import {
 } from './gql'
 import Owner from './Owner'
 import RelatedTags from './RelatedTags'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const DynamicCommunity = dynamic(() => import('./Community'), {
   ssr: false,
@@ -125,8 +124,8 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         right={
           <>
             <span />
-            <section className="buttons">
-              <ShareButton
+            <section className={styles.buttons}>
+              <Layout.Header.ShareButton
                 title={title}
                 tags={title.endsWith(tag.content) ? undefined : keywords}
               />
@@ -139,14 +138,14 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             </section>
           </>
         }
-        mode="transparent-absolute"
+        mode="transparent"
       />
 
       <Head
         // title={`#${normalizeTag(tag.content)}`}
         // description={tag.description}
         title={title}
-        path={path.href}
+        path={qsType ? `${path.href}?type=${qsType}` : path.href}
         description={description}
         keywords={keywords} // add top10 most using author names?
         image={
@@ -169,11 +168,11 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
 
       <TagCover tag={tag} />
 
-      <section className="info">
+      <section className={styles.info}>
         {features.NOTICE_TAG_ADOPTION && <Owner tag={tag} />}
 
-        <section className="top">
-          <section className="statistics">
+        <section className={styles.top}>
+          <section className={styles.statistics}>
             <Followers tag={tag} />
             <ArticlesCount tag={tag} />
           </section>
@@ -186,45 +185,52 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         {tag.description && (
           <Expandable
             content={tag.description}
-            color="grey-darker"
+            color="greyDarker"
             spacingTop="base"
-            size="md-s"
+            size="mdS"
           >
             <p>{tag.description}</p>
           </Expandable>
         )}
       </section>
 
-      <Tabs sticky>
-        <Tabs.Tab selected={isHottest} onClick={() => changeFeed('hottest')}>
-          <FormattedMessage defaultMessage="Trending" description="" />
-        </Tabs.Tab>
+      <SegmentedTabs sticky>
+        <SegmentedTabs.Tab
+          selected={isHottest}
+          onClick={() => changeFeed('hottest')}
+        >
+          <FormattedMessage defaultMessage="Trending" />
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab selected={isLatest} onClick={() => changeFeed('latest')}>
-          <FormattedMessage defaultMessage="Latest" description="" />
-        </Tabs.Tab>
+        <SegmentedTabs.Tab
+          selected={isLatest}
+          onClick={() => changeFeed('latest')}
+        >
+          <FormattedMessage defaultMessage="Latest" />
+        </SegmentedTabs.Tab>
 
         {hasSelectedFeed && (
-          <Tabs.Tab
+          <SegmentedTabs.Tab
             selected={isSelected}
             onClick={() => changeFeed('selected')}
           >
-            <FormattedMessage defaultMessage="Featured" description="" />
-          </Tabs.Tab>
+            <FormattedMessage defaultMessage="Featured" />
+          </SegmentedTabs.Tab>
         )}
 
-        <Tabs.Tab selected={isCreators} onClick={() => changeFeed('creators')}>
-          <FormattedMessage defaultMessage="Creators" description="" />
-        </Tabs.Tab>
-      </Tabs>
+        <SegmentedTabs.Tab
+          selected={isCreators}
+          onClick={() => changeFeed('creators')}
+        >
+          <FormattedMessage defaultMessage="Creators" />
+        </SegmentedTabs.Tab>
+      </SegmentedTabs>
 
       {(isHottest || isLatest || isSelected) && (
         <TagDetailArticles tag={tag} feedType={feedType} />
       )}
 
       {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
-
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

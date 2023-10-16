@@ -8,10 +8,10 @@ import {
   ArticleDigestFeed,
   EmptyTagArticles,
   InfiniteScroll,
+  Layout,
   List,
   Media,
   QueryError,
-  ResponsiveWrapper,
   Spinner,
   useEventListener,
   usePublicQuery,
@@ -174,8 +174,12 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
   const canEditTag = isEditor || isCreator || viewer.status?.role === 'admin'
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ResponsiveWrapper>
+    <Layout.Main.Spacing hasVertical={false}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
         <List>
           {(edges || []).map(({ node, cursor }, i) => (
             <React.Fragment key={`${feedType}:${cursor}`}>
@@ -199,14 +203,16 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
                     })
                   }}
                   tagDetailId={tag.id}
+                  hasEdit={true}
                   hasSetTagSelected={canEditTag && !isSelected}
                   hasSetTagUnselected={canEditTag && isSelected}
                   hasRemoveTag={canEditTag}
+                  hasArchive={true}
                 />
               </List.Item>
 
               {edges.length >= 4 && i === 3 && (
-                <Media lessThan="xl">
+                <Media lessThan="lg">
                   <RelatedTags tagId={tag.id} />
                 </Media>
               )}
@@ -215,12 +221,12 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
         </List>
 
         {edges.length < 4 && (
-          <Media lessThan="xl">
+          <Media lessThan="lg">
             <RelatedTags tagId={tag.id} />
           </Media>
         )}
-      </ResponsiveWrapper>
-    </InfiniteScroll>
+      </InfiniteScroll>
+    </Layout.Main.Spacing>
   )
 }
 

@@ -13,7 +13,7 @@ import {
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 import { TagMaintainersQuery } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface Props {
   id: string
@@ -34,7 +34,7 @@ const ManageButton = ({ id }: Props) => {
           aria-haspopup="dialog"
         >
           <TextIcon icon={<IconSettings24 />} weight="md" size={'xs'}>
-            <FormattedMessage defaultMessage="Manage" description="" />
+            <FormattedMessage defaultMessage="Manage" />
           </TextIcon>
         </Button>
       )}
@@ -72,9 +72,9 @@ const Maintainers = ({ id, isOwner }: Props) => {
     <>
       {tag.owner && (
         <>
-          <section className="category">
+          <section className={styles.category}>
             <section>
-              <FormattedMessage defaultMessage="Maintainer" description="" />
+              <FormattedMessage defaultMessage="Maintainer" />
             </section>
             {isOwner && (
               <section>
@@ -94,10 +94,10 @@ const Maintainers = ({ id, isOwner }: Props) => {
 
       {isHavingEditors && (
         <>
-          <section className="category">
+          <section className={styles.category}>
             <section>
-              <FormattedMessage defaultMessage="collaborators" description="" />
-              <span className="count">({editors.length})</span>
+              <FormattedMessage defaultMessage="collaborators" />
+              <span className={styles.count}>({editors.length})</span>
             </section>
           </section>
           <ul>
@@ -113,7 +113,6 @@ const Maintainers = ({ id, isOwner }: Props) => {
           </ul>
         </>
       )}
-      <style jsx>{styles}</style>
     </>
   )
 }

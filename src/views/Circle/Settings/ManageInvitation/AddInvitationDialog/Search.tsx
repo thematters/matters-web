@@ -45,35 +45,51 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
   const selectedNodes = stagingNodes.filter(({ selected }) => !!selected)
   const disabled = selectedNodes.length === 0
 
+  const SubmitButton = (
+    <Dialog.TextButton
+      disabled={disabled}
+      onClick={() => save({ nodes: selectedNodes })}
+      text={<FormattedMessage defaultMessage="Confirm" />}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title="addCircleInvitation"
         closeDialog={closeDialog}
-        closeTextId="cancel"
-        rightButton={
-          <Dialog.Header.RightButton
-            disabled={disabled}
-            onClick={() => save({ nodes: selectedNodes })}
-            text={<FormattedMessage defaultMessage="Confirm" description="" />}
-          />
-        }
-      />
-      <SearchingArea
-        inSearchingArea={inSearchingArea}
-        searchType="Invitee"
-        toStagingArea={toStagingArea}
-        toSearchingArea={toSearchingArea}
-        addNodeToStaging={addNodeToStaging}
-        inviteEmail
+        rightBtn={SubmitButton}
       />
 
-      <StagingArea
-        nodes={stagingNodes}
-        setNodes={setStagingNodes}
-        hint="hintAddCircleInvitee"
-        inStagingArea={inStagingArea}
-        draggable={false}
+      <Dialog.Content noSpacing fixedHeight>
+        <SearchingArea
+          inSearchingArea={inSearchingArea}
+          searchType="Invitee"
+          toStagingArea={toStagingArea}
+          toSearchingArea={toSearchingArea}
+          addNodeToStaging={addNodeToStaging}
+          inviteEmail
+        />
+        <StagingArea
+          nodes={stagingNodes}
+          setNodes={setStagingNodes}
+          hint="hintAddCircleInvitee"
+          inStagingArea={inStagingArea}
+          draggable={false}
+        />
+      </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            {SubmitButton}
+          </>
+        }
       />
     </>
   )

@@ -7,7 +7,6 @@ import {
   ArticleNewCollectedNoticeFragment,
   ArticleNewCommentNoticeFragment,
   ArticleNewSubscriberNoticeFragment,
-  ArticleTagAddedNoticeFragment,
   CircleInvitationNoticeFragment,
   CircleNewBroadcastNoticeFragment,
   CircleNewDiscussionCommentsFragment,
@@ -15,7 +14,6 @@ import {
   CommentMentionedYouNoticeFragment,
   CommentNewReplyNoticeFragment,
   PaymentReceivedDonationNoticeFragment,
-  TagAddEditorNoticeFragment,
   UserNewFollowerNoticeFragment,
 } from '~/gql/graphql'
 
@@ -25,11 +23,10 @@ import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeDate from '../NoticeDate'
 import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeMultiActors from '../NoticeMultiActors'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 type NoticeDigestProps = {
   notice:
-    | ArticleTagAddedNoticeFragment
     | ArticleNewSubscriberNoticeFragment
     | ArticleNewAppreciationNoticeFragment
     | ArticleNewCollectedNoticeFragment
@@ -42,7 +39,6 @@ type NoticeDigestProps = {
     | CommentNewReplyNoticeFragment
     | PaymentReceivedDonationNoticeFragment
     | UserNewFollowerNoticeFragment
-    | TagAddEditorNoticeFragment
   actors?: any[]
   action: string | ReactElement
   secondAction?: string | ReactElement
@@ -71,13 +67,13 @@ const NoticeDigest = ({
 
   return (
     <section
-      className="container"
+      className={styles.container}
       {...(testId ? { ['data-test-id']: testId } : {})}
     >
-      <section className="header">
+      <section className={styles.header}>
         <NoticeMultiActors actors={actors} size="lg" />
         {!isMultiActors && (
-          <section className="single-actor-info">
+          <section className={styles.singleActorInfo}>
             <NoticeActorsNameAndTitle
               actors={actors}
               action={action}
@@ -89,7 +85,7 @@ const NoticeDigest = ({
       </section>
 
       {isMultiActors && (
-        <section className="content">
+        <section className={styles.content}>
           <NoticeActorsNameAndTitle
             actors={actors}
             action={action}
@@ -99,13 +95,11 @@ const NoticeDigest = ({
         </section>
       )}
 
-      {content && <section className="content">{content}</section>}
+      {content && <section className={styles.content}>{content}</section>}
 
-      <section className="footer">
+      <section className={styles.footer}>
         <NoticeDate notice={notice} />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -10,7 +10,7 @@ import { DigestTagFragment } from '~/gql/graphql'
 
 import TagCustomStagingArea from '../../TagCustomStagingArea'
 import Box from '../Box'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface SidebarTagsProps {
   tags: DigestTagFragment[]
@@ -27,7 +27,6 @@ const SidebarTags = ({
 }: SidebarTagsProps) => {
   return (
     <EditorSearchSelectDialog
-      size="sm"
       title="addTag"
       hint="hintAddTag"
       searchType="Tag"
@@ -48,7 +47,7 @@ const SidebarTags = ({
           disabled={disabled}
         >
           {tags.length > 0 && (
-            <ul>
+            <ul className={styles.list}>
               {tags.map((tag) => (
                 <li key={tag.id}>
                   <Tag
@@ -66,8 +65,6 @@ const SidebarTags = ({
                   />
                 </li>
               ))}
-
-              <style jsx>{styles}</style>
             </ul>
           )}
         </Box>

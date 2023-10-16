@@ -1,0 +1,21 @@
+.coverField {
+  position: relative;
+  margin: calc(var(--spacing-base) * -1) calc(var(--spacing-base) * -1);
+
+  @media (--sm-up) {
+    margin: 0 calc(var(--spacing-base-loose) * -1);
+  }
+
+  & .hint {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: var(--spacing-x-tight) var(--spacing-base);
+    font-size: var(--font-size-xs);
+    color: var(--color-grey);
+  }
+}
+
+.avatarField {
+  margin-top: calc(var(--spacing-xx-loose) * -1);
+}

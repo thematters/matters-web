@@ -22,7 +22,7 @@ import { FeedAuthorsQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import { FEED_AUTHORS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)
@@ -89,25 +89,18 @@ const Authors = () => {
           viewAll={false}
         />
       </Media>
-      <Media between={['md', 'xl']}>
+      <Media greaterThanOrEqual="md">
         <SectionHeader
           type="authors"
           rightButton={<ShuffleButton onClick={shuffle} />}
           viewAll={true}
         />
       </Media>
-      <Media greaterThanOrEqual="xl">
-        <SectionHeader
-          type="authors"
-          rightButton={<ShuffleButton onClick={shuffle} />}
-          viewAll={false}
-        />
-      </Media>
     </>
   )
 
   return (
-    <section className="authors">
+    <section className={styles.authors}>
       <Slides header={SlidesHeader}>
         {loading && (
           <Slides.Item size="md">
@@ -143,7 +136,7 @@ const Authors = () => {
       </Slides>
 
       <Media lessThan="md">
-        <section className="backToAll">
+        <section className={styles.backToAll}>
           <ViewMoreCard
             spacing={['tight', 'tight']}
             href={PATHS.AUTHORS}
@@ -154,12 +147,10 @@ const Authors = () => {
             }}
             textAlign="center"
           >
-            <FormattedMessage defaultMessage="View All" description="" />
+            <FormattedMessage defaultMessage="View All" />
           </ViewMoreCard>
         </section>
       </Media>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

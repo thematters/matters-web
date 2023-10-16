@@ -43,6 +43,8 @@ const articlePublicFragment = gql`
     }
     canComment
     license
+    sensitiveByAuthor
+    sensitiveByAdmin
     requestForDonation
     replyToDonator
     drafts {
@@ -139,7 +141,6 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
     article: node(input: { id: $id }) {
       ... on Article {
         id
-        content
         author {
           id
           ...UserDigestRichUserPrivate
@@ -150,11 +151,13 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
             ...CircleWallCirclePrivate
           }
         }
+        ...ContentArticle
         ...ToolbarArticlePrivate
         ...SupportWidgetArticlePrivate
       }
     }
   }
+  ${Content.fragments.article}
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.private}
   ${supportWidgetFragments.article.private}

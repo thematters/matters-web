@@ -1,39 +1,33 @@
 import classNames from 'classnames'
 
-import styles from './styles.css'
-
-type SpacingX = 0 | 'tight' | 'base' | 'xloose'
-type SpacingY = 0 | 'tight' | 'base' | 'xloose'
+import styles from './styles.module.css'
 
 interface DialogContentProps {
-  // Note: only apply in "sm-up" if the spacing is large than "base"
-  spacing?: [SpacingY, SpacingX]
-  hasFixed?: boolean
-  hasGrow?: boolean
+  noSpacing?: boolean
+  smExtraSpacing?: boolean
+  fixedHeight?: boolean
+  noSpacingBottom?: boolean
+  noMaxHeight?: boolean
 }
 
 const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> = ({
-  spacing = [0, 0],
-  hasFixed,
-  hasGrow,
-
+  noSpacing,
+  smExtraSpacing = true,
+  noSpacingBottom,
+  noMaxHeight,
+  fixedHeight,
   children,
 }) => {
   const contentClasses = classNames({
-    content: true,
-    'has-fixed': !!hasFixed,
-    'has-grow': !!hasGrow,
-    [`spacing-y-${spacing[0]}`]: true,
-    [`spacing-x-${spacing[1]}`]: true,
+    [styles.content]: true,
+    [styles.spacing]: !noSpacing,
+    [styles.smExtraSpacing]: smExtraSpacing,
+    [styles.fixedHeight]: !!fixedHeight,
+    [styles.noSpacingBottom]: !!noSpacingBottom,
+    [styles.noMaxHeight]: !!noMaxHeight,
   })
 
-  return (
-    <section className={contentClasses}>
-      {children}
-
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <section className={contentClasses}>{children}</section>
 }
 
 export default DialogContent

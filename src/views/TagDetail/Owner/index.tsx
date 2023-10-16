@@ -1,36 +1,28 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
 import {
   Button,
   IconAvatarEmpty24,
   TagAdoptionDialog,
   TextIcon,
+  toast,
   UserDigest,
   ViewerContext,
 } from '~/components'
 import { TagFragmentFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
   const viewer = useContext(ViewerContext)
 
   const forbid = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: (
-            <FormattedMessage
-              defaultMessage="You do not have permission to perform this operation"
-              description=""
-            />
-          ),
-        },
-      })
-    )
+    toast.error({
+      message: (
+        <FormattedMessage defaultMessage="You do not have permission to perform this operation" />
+      ),
+    })
   }
 
   if (!tag) {
@@ -39,12 +31,12 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
 
   if (!tag.owner) {
     return (
-      <section className="container">
-        <section className="left">
+      <section className={styles.container}>
+        <section className={styles.left}>
           <TextIcon
             icon={<IconAvatarEmpty24 size="md" />}
-            color="grey-dark"
-            size="md-s"
+            color="greyDark"
+            size="mdS"
             spacing="xtight"
           >
             <FormattedMessage
@@ -53,7 +45,7 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
             />
           </TextIcon>
         </section>
-        <section className="right">
+        <section className={styles.right}>
           <TagAdoptionDialog id={tag.id}>
             {({ openDialog }) => (
               <Button
@@ -75,14 +67,13 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
             )}
           </TagAdoptionDialog>
         </section>
-        <style jsx>{styles}</style>
       </section>
     )
   }
 
   return (
-    <section className="container">
-      <section className="left">
+    <section className={styles.container}>
+      <section className={styles.left}>
         <UserDigest.Mini
           user={tag.owner}
           avatarSize="md"
@@ -90,15 +81,14 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
           hasDisplayName
         />
 
-        <TextIcon size="sm" color="grey-dark">
+        <TextIcon size="sm" color="greyDark">
           <FormattedMessage
             defaultMessage="Maintain"
             description="src/views/TagDetail/Owner/index.tsx"
           />
         </TextIcon>
       </section>
-      <section className="right">{/* editos */}</section>
-      <style jsx>{styles}</style>
+      <section className={styles.right}>{/* editos */}</section>
     </section>
   )
 }

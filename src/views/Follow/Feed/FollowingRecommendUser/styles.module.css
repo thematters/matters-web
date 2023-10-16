@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: var(--spacing-x-tight);
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: var(--spacing-base);
+
+  & .name {
+    margin-bottom: var(--spacing-xx-tight);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+.content {
+  @mixin line-clamp;
+
+  height: 4rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-dark);
+  -webkit-line-clamp: 3;
+}

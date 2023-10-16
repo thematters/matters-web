@@ -1,10 +1,10 @@
-import { useRoute } from '~/components'
+import classNames from 'classnames'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * <Layout.FixedMain> is a container component that has the fixed position and
- * width same as the middle column, used by <BottomBar>, <NavBar> and <Toast>.
+ * width same as the middle column, used by <BottomBar>, <NavBar>.
  *
  */
 type FixedMainProps = {
@@ -12,33 +12,19 @@ type FixedMainProps = {
 }
 
 const FixedMain: React.FC<FixedMainProps> = ({ children }) => {
-  const { isInPath } = useRoute()
-  const isSingleColumnPage = isInPath('MIGRATION') || isInPath('ABOUT')
-
-  if (isSingleColumnPage) {
-    return (
-      <div className="fixed-main single-col">
-        <div className="l-container full">
-          <div className="l-row">
-            <div className="content">{children}</div>
-          </div>
-        </div>
-
-        <style jsx>{styles}</style>
-      </div>
-    )
-  }
+  const classes = classNames({
+    [styles.fixedMain]: true,
+    fixedMain: true, // global selector
+  })
 
   return (
-    <div className="fixed-main">
-      <div className="l-container full">
-        <div className="l-row">
-          <div className="l-col-three-mid content">{children}</div>
-        </div>
-      </div>
-
-      <style jsx>{styles}</style>
-    </div>
+    <section className={classes}>
+      <section className={styles.wrapper}>
+        <main className={styles.main}>
+          <article className={styles.article}>{children}</article>
+        </main>
+      </section>
+    </section>
   )
 }
 

@@ -1,7 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { PATHS } from '~/common/enums'
 import { Dialog, Translate } from '~/components'
-
-import styles from './styles.css'
 
 const texts: {
   zh_hant: Record<string, string>
@@ -9,19 +9,18 @@ const texts: {
   en: Record<string, string>
 } = {
   zh_hant: {
-    content_1: '搬家已經開始！',
-    content_2: '你無需守候在電腦旁，搬家完成後你會收到郵件通知，請你上站檢視。',
+    content:
+      '搬家已經開始！你無需守候在電腦旁，搬家完成後你會收到郵件通知，請你上站檢視。',
     back: '返回首頁',
   },
   zh_hans: {
-    content_1: '搬家已经开始！',
-    content_2: '你无需守候在电脑旁，搬家完成后你会收到邮件通知，请你上站查看。',
+    content:
+      '搬家已经开始！你无需守候在电脑旁，搬家完成后你会收到邮件通知，请你上站查看。',
     back: '返回首页',
   },
   en: {
-    content_1: 'Migration started!',
-    content_2:
-      'You do not have to stay by your computer. You will receive notification by email and be redirected to Matters.',
+    content:
+      'Migration started! You do not have to stay by your computer. You will receive notification by email and be redirected to Matters.',
     back: 'go home',
   },
 }
@@ -31,33 +30,30 @@ const MigrationDialogSuccess = () => {
 
   return (
     <>
-      <Dialog.Content spacing={['base', 'base']}>
-        <p className="action">
+      <Dialog.Message>
+        <p>
           <Translate
-            zh_hant={zh_hant.content_1}
-            zh_hans={zh_hans.content_1}
-            en={en.content_1}
+            zh_hant={zh_hant.content}
+            zh_hans={zh_hans.content}
+            en={en.content}
           />
         </p>
-        <p className="description">
-          <Translate
-            zh_hant={zh_hant.content_2}
-            zh_hans={zh_hans.content_2}
-            en={en.content_2}
-          />
-        </p>
-      </Dialog.Content>
+      </Dialog.Message>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button href={PATHS.HOME}>
-          <Translate
-            zh_hant={zh_hant.back}
-            zh_hans={zh_hans.back}
-            en={en.back}
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            href={PATHS.HOME}
           />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-      <style jsx>{styles}</style>
+        }
+        smUpBtns={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            href={PATHS.HOME}
+          />
+        }
+      />
     </>
   )
 }

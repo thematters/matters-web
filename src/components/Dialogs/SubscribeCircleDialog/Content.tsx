@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, Translate } from '~/components'
+import { Spinner, Translate } from '~/components'
 
 import Complete from './Complete'
 import { BaseSubscribeCircleDialogProps, Step } from './types'
@@ -26,16 +26,6 @@ const DynamicSubscribeCircleForm = dynamic(
   { loading: Spinner }
 )
 
-const ContinueSubscribeButton = ({
-  forward,
-}: {
-  forward: (step: Step) => void
-}) => (
-  <Dialog.Footer.Button onClick={() => forward('subscribeCircle')}>
-    <Translate zh_hant="回到訂閱" zh_hans="回到订阅" />
-  </Dialog.Footer.Button>
-)
-
 const SubscribeCircleDialogContent = ({
   forward,
   back,
@@ -51,30 +41,10 @@ const SubscribeCircleDialogContent = ({
 
   return (
     <>
-      <Dialog.Header
-        leftButton={
-          prevStep ? <Dialog.Header.BackButton onClick={back} /> : <span />
-        }
-        rightButton={
-          <Dialog.Header.CloseButton closeDialog={closeDialog} textId="close" />
-        }
-        title={
-          isSetPaymentPassword
-            ? 'paymentPassword'
-            : isComplete
-            ? 'successSubscribeCircle'
-            : isResetPassword
-            ? 'resetPaymentPassword'
-            : 'subscribeCircle'
-        }
-        closeDialog={closeDialog}
-        closeTextId="close"
-        mode={isComplete ? 'inner' : undefined}
-      />
-
       {isSetPaymentPassword && (
         <DynamicPaymentSetPasswordForm
           submitCallback={() => forward('subscribeCircle')}
+          closeDialog={closeDialog}
         />
       )}
 
@@ -83,13 +53,16 @@ const SubscribeCircleDialogContent = ({
           circle={circle}
           submitCallback={() => forward('complete')}
           switchToResetPassword={() => forward('resetPassword')}
+          closeDialog={closeDialog}
         />
       )}
 
       {isResetPassword && (
         <DynamicPaymentResetPasswordForm
-          callbackButtons={<ContinueSubscribeButton forward={forward} />}
+          callback={() => forward('subscribeCircle')}
+          callbackText={<Translate zh_hant="回到訂閱" zh_hans="回到订阅" />}
           closeDialog={closeDialog}
+          back={() => forward('subscribeCircle')}
         />
       )}
 

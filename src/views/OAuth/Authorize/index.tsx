@@ -19,7 +19,7 @@ import {
 import { OAuthClientInfoQuery } from '~/gql/graphql'
 
 import { Box } from '../Box'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const OAUTH_AUTHORIZE_ENDPOINT = `${process.env.NEXT_PUBLIC_OAUTH_URL}/authorize`
 
@@ -70,6 +70,8 @@ const BaseOAuthAuthorize = () => {
     ? requestScopes.split(/[,\s]/).filter((s) => !!s)
     : clientScopes
 
+  const isNoLiker = name === 'LikeCoin' && !viewer.liker.likerId
+
   return (
     <Box
       avatar={avatar}
@@ -103,9 +105,9 @@ const BaseOAuthAuthorize = () => {
         )}
         <input type="hidden" name="response_type" value="code" />
 
-        <section className="content">
-          <ul>
-            <li>
+        <section className={styles.content}>
+          <ul className={styles.list}>
+            <li className={styles.listItem}>
               <Translate
                 zh_hant="讀取你的公開資料"
                 zh_hans="读取你的公开资料"
@@ -123,13 +125,17 @@ const BaseOAuthAuthorize = () => {
                   return null
                 }
 
-                return <li key={s}>{readableScope}</li>
+                return (
+                  <li key={s} className={styles.listItem}>
+                    {readableScope}
+                  </li>
+                )
               })}
           </ul>
 
           <hr />
 
-          <section className="current-account">
+          <section className={styles.currentAccount}>
             <UserDigest.Mini
               user={viewer}
               avatarSize="xs"
@@ -139,7 +145,7 @@ const BaseOAuthAuthorize = () => {
             />
           </section>
 
-          <p className="switch-account">
+          <p className={styles.switchAccount}>
             <span>
               <Translate zh_hant="不是你？" zh_hans="不是你？" en="Not you?" />
             </span>
@@ -156,24 +162,43 @@ const BaseOAuthAuthorize = () => {
           </p>
         </section>
 
-        <Dialog.Footer>
-          {name === 'LikeCoin' && !viewer.liker.likerId ? (
-            <Dialog.Footer.Button href={PATHS.ME_SETTINGS}>
-              <Translate
-                zh_hant="請先設置 Liker ID"
-                zh_hans="请先设置 Liker ID"
-                en="Please setup Liker ID first"
-              />
-            </Dialog.Footer.Button>
-          ) : (
-            <Dialog.Footer.Button type="submit">
-              <Translate id="agree" />
-            </Dialog.Footer.Button>
-          )}
-        </Dialog.Footer>
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={
+                isNoLiker ? (
+                  <Translate
+                    zh_hant="請先設置 Liker ID"
+                    zh_hans="请先设置 Liker ID"
+                    en="Please setup Liker ID first"
+                  />
+                ) : (
+                  <Translate id="agree" />
+                )
+              }
+              href={isNoLiker ? PATHS.ME_SETTINGS_MISC : undefined}
+              type={isNoLiker ? 'button' : 'submit'}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={
+                isNoLiker ? (
+                  <Translate
+                    zh_hant="請先設置 Liker ID"
+                    zh_hans="请先设置 Liker ID"
+                    en="Please setup Liker ID first"
+                  />
+                ) : (
+                  <Translate id="agree" />
+                )
+              }
+              href={isNoLiker ? PATHS.ME_SETTINGS_MISC : undefined}
+              type={isNoLiker ? 'button' : 'submit'}
+            />
+          }
+        />
       </form>
-
-      <style jsx>{styles}</style>
     </Box>
   )
 }
@@ -182,9 +207,9 @@ const OAuthAuthorize = () => (
   <Layout.Main>
     <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
 
-    <Layout.Spacing>
+    <Layout.Main.Spacing>
       <BaseOAuthAuthorize />
-    </Layout.Spacing>
+    </Layout.Main.Spacing>
   </Layout.Main>
 )
 

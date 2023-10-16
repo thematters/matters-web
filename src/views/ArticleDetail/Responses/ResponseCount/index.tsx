@@ -5,7 +5,7 @@ import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 import { ResponseCountArticleFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const fragments = {
   article: gql`
@@ -26,7 +26,7 @@ const ResponseCount = ({
 
   return (
     <span
-      className="count"
+      className={styles.count}
       aria-label={translate({
         zh_hant: `${count} 條回應`,
         zh_hans: `${count} 条回应`,
@@ -35,8 +35,6 @@ const ResponseCount = ({
       })}
     >
       {count}
-
-      <style jsx>{styles}</style>
     </span>
   )
 }

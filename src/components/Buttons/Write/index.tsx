@@ -1,97 +1,59 @@
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
-  ADD_TOAST,
+  ERROR_CODES,
   OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
+  PATHS,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
+import { analytics, translate } from '~/common/utils'
 import {
   Button,
-  IconCreate16,
+  ButtonProps,
+  ERROR_MESSAGES,
   IconNavCreate32,
-  IconSpinner16,
   LanguageContext,
-  TextIcon,
-  Translate,
-  useMutation,
+  toast,
+  Tooltip,
+  useRoute,
 } from '~/components'
-import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-import { CreateDraftMutation } from '~/gql/graphql'
 
 interface Props {
-  variant: 'navbar' | 'sidenav'
   allowed: boolean
   authed?: boolean
   forbidden?: boolean
 }
 
-const BaseWriteButton = ({
-  variant,
-  onClick,
-  loading,
-}: {
-  variant: 'navbar' | 'sidenav'
-  onClick: () => any
-  loading?: boolean
-}) => {
+const BaseWriteButton = (props: ButtonProps) => {
   const { lang } = useContext(LanguageContext)
 
-  if (variant === 'navbar') {
-    return (
+  return (
+    <Tooltip
+      content={translate({ id: 'write', lang })}
+      placement="left"
+      delay={[1000, null]}
+    >
       <Button
-        bgActiveColor="grey-lighter"
+        bgActiveColor="greyLighter"
         size={['2rem', '2rem']}
-        onClick={onClick}
         aria-label={translate({ id: 'write', lang })}
+        {...props}
       >
         <IconNavCreate32 size="lg" color="black" />
       </Button>
-    )
-  }
-
-  return (
-    <Button
-      size={[null, '2.25rem']}
-      spacing={[0, 'base']}
-      bgColor="gold"
-      onClick={onClick}
-      aria-label={translate({ id: 'write', lang })}
-    >
-      <TextIcon
-        icon={
-          loading ? (
-            <IconSpinner16 color="white" />
-          ) : (
-            <IconCreate16 color="white" />
-          )
-        }
-        spacing="xtight"
-        weight="md"
-        color="white"
-      >
-        <Translate id="write" />
-      </TextIcon>
-    </Button>
+    </Tooltip>
   )
 }
 
-export const WriteButton = ({ variant, allowed, authed, forbidden }: Props) => {
-  const router = useRouter()
-  const { lang } = useContext(LanguageContext)
-  const [putDraft, { loading }] = useMutation<CreateDraftMutation>(
-    CREATE_DRAFT,
-    {
-      variables: { title: translate({ id: 'untitle', lang }) },
-    }
-  )
+export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
+  const { isInPath } = useRoute()
+  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
 
   if (!allowed) {
     return (
       <BaseWriteButton
-        variant={variant}
         onClick={() =>
           window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
         }
@@ -101,7 +63,14 @@ export const WriteButton = ({ variant, allowed, authed, forbidden }: Props) => {
 
   return (
     <BaseWriteButton
-      variant={variant}
+      href={
+        authed && !forbidden && !isInDraftDetail
+          ? PATHS.ME_DRAFT_NEW
+          : undefined
+      }
+      htmlHref={
+        authed && !forbidden && isInDraftDetail ? PATHS.ME_DRAFT_NEW : undefined
+      }
       onClick={async () => {
         if (!authed) {
           window.dispatchEvent(
@@ -113,29 +82,19 @@ export const WriteButton = ({ variant, allowed, authed, forbidden }: Props) => {
         }
 
         if (forbidden) {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: <Translate id="FORBIDDEN_BY_STATE" />,
-              },
-            })
-          )
+          toast.error({
+            message: (
+              <FormattedMessage
+                {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+              />
+            ),
+          })
+
           return
         }
 
-        analytics.trackEvent('click_button', {
-          type: 'write',
-        })
-        const result = await putDraft()
-        const { slug, id } = result?.data?.putDraft || {}
-
-        if (slug && id) {
-          const path = toPath({ page: 'draftDetail', slug, id })
-          router.push(path.href)
-        }
+        analytics.trackEvent('click_button', { type: 'write' })
       }}
-      loading={loading}
     />
   )
 }

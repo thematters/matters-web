@@ -1,0 +1,5 @@
+.content {
+  & span + span {
+    margin-left: 0.625rem;
+  }
+}

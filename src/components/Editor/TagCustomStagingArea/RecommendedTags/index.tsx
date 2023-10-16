@@ -2,7 +2,7 @@ import { Tag, Translate } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { EditorRecommendedTagsQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type EditorRecommendedTagsUserTagsEdgesNode = NonNullable<
   NonNullable<EditorRecommendedTagsQuery['user']>['tags']['edges']
@@ -20,12 +20,12 @@ const RecommendedTags: React.FC<RecommendedTagsProps> = ({
   disabled,
 }) => {
   return (
-    <section className="recommendedTags">
-      <p className="hint">
+    <section className={styles.recommendedTags}>
+      <p className={styles.hint}>
         <Translate id="hintAddRecommendedTag" />
       </p>
 
-      <ul className="tagList">
+      <ul className={styles.tagList}>
         {tags.map((tag) => (
           <li key={tag.id}>
             <Tag
@@ -37,8 +37,6 @@ const RecommendedTags: React.FC<RecommendedTagsProps> = ({
           </li>
         ))}
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

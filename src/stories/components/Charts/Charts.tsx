@@ -4,6 +4,8 @@ import _random from 'lodash/random'
 import { CHART_COLOR } from '~/common/enums'
 import { StackedAreaChart } from '~/components'
 
+import styles from './styles.module.css'
+
 const MOCK_INCOME_ANALYTICS = [
   { time: new Date(2021, 0, 1), income: 255 },
   { time: new Date(2021, 1, 1), income: 433 },
@@ -41,7 +43,7 @@ const MOCK_SUBSCRIBER_ANALYTICS = [
 ]
 
 const Charts = () => (
-  <section>
+  <section className={styles.styles}>
     <ul>
       {/* single-area */}
       <li>
@@ -100,9 +102,9 @@ const Charts = () => (
       <li>
         <StackedAreaChart
           data={MOCK_SUBSCRIBER_ANALYTICS.map((d) => {
-            const abc = d.paid + _random(1, 10)
-            const def = abc + _random(5, 20)
-            return { ...d, abc, def }
+            // const abc = d.paid + _random(1, 10)
+            // const def = abc + _random(5, 20)
+            return { ...d }
           })}
         >
           {(props) => (
@@ -121,14 +123,6 @@ const Charts = () => (
         </StackedAreaChart>
       </li>
     </ul>
-
-    <style jsx>{`
-      li {
-        @mixin border-bottom-grey;
-        margin-bottom: var(--spacing-loose);
-        border: 1px solid #999c9d;
-      }
-    `}</style>
   </section>
 )
 

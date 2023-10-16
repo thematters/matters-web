@@ -1,6 +1,5 @@
 import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
-import { useState } from 'react'
 
 import {
   Button,
@@ -12,9 +11,11 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import {
+  updateUserFollowerCount,
+  updateViewerFolloweeCount,
+} from '~/components/GQL'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
-import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
-import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 import {
   FollowButtonUserPrivateFragment,
   ToggleFollowUserMutation,
@@ -28,7 +29,6 @@ interface UnfollowProps {
 }
 
 const UnfollowUser = ({ user, size }: UnfollowProps) => {
-  const [hover, setHover] = useState(false)
   const [unfollow] = useMutation<ToggleFollowUserMutation>(TOGGLE_FOLLOW_USER, {
     variables: { id: user.id, enabled: false },
     optimisticResponse:
@@ -50,6 +50,7 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
   })
 
   const sizes: Record<FollowUserButtonSize, [ButtonWidth, ButtonHeight]> = {
+    xl: ['7.5rem', '2.5rem'],
     lg: ['6rem', '2rem'],
     md: [null, '1.5rem'],
   }
@@ -57,6 +58,7 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
     FollowUserButtonSize,
     [ButtonSpacingY, ButtonSpacingX]
   > = {
+    xl: [0, 0],
     lg: [0, 0],
     md: [0, 'tight'],
   }
@@ -65,15 +67,17 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
     <Button
       size={sizes[size]}
       spacing={spacings[size]}
-      textColor="white"
-      bgColor="green"
-      bgActiveColor="red"
+      textColor="greyDarker"
+      textActiveColor="black"
+      borderColor="greyDarker"
+      borderActiveColor="black"
       onClick={() => unfollow()}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
     >
-      <TextIcon weight="md" size={size === 'lg' ? 'sm' : 'xs'}>
-        {hover ? <Translate id="unfollow" /> : <Translate id="followed" />}
+      <TextIcon
+        weight="md"
+        size={size === 'xl' ? 'md' : size === 'lg' ? 'sm' : 'xs'}
+      >
+        <Translate id="followed" />
       </TextIcon>
     </Button>
   )

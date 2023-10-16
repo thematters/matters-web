@@ -1,0 +1,233 @@
+.avatar {
+  position: relative;
+  display: inline-block;
+
+  /* may under a flex layout, keep it unshrinkable */
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  & img:not(.logbook) {
+    @mixin object-fit-cover;
+
+    background-color: var(--color-grey-lighter);
+    border-radius: 50%;
+  }
+}
+
+/**
+ * Ring
+ */
+.hasRing {
+  & .ring {
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.hasBadge {
+  & .badge {
+    @mixin flex-center-all;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    & img {
+      width: var(--spacing-base);
+      height: auto;
+      transform: translateX(25%);
+    }
+
+    & svg {
+      height: auto;
+      transform: translateX(50%);
+    }
+  }
+}
+
+/**
+ * Sizes
+ */
+
+/* 16px */
+.xs {
+  width: 1rem;
+  height: 1rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        width: calc(1rem * 0.4);
+      }
+    }
+  }
+}
+
+/* 20px */
+.sm {
+  width: 1.25rem;
+  height: 1.25rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        width: calc(1.25rem * 0.4);
+      }
+    }
+  }
+}
+
+/* 22px */
+.mdS {
+  width: 1.375rem;
+  height: 1.375rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        width: calc(1.375rem * 0.4);
+      }
+    }
+  }
+}
+
+/* 24px */
+.md {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        width: calc(1.5rem * 0.35);
+      }
+    }
+  }
+}
+
+/* 32px */
+.lg {
+  width: 2rem;
+  height: 2rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        width: calc(2rem * 0.3);
+      }
+    }
+  }
+}
+
+/* 40px */
+.default {
+  width: 2.5rem;
+  height: 2.5rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        width: calc(2.5rem * 0.3);
+      }
+    }
+  }
+}
+
+/* 48px */
+.xl {
+  width: 3rem;
+  height: 3rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        width: calc(3rem * 0.3);
+        transform: translateX(20%);
+      }
+    }
+  }
+}
+
+/* 56px */
+.xxl {
+  width: 3.5rem;
+  height: 3.5rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        transform: translateX(25%);
+      }
+    }
+  }
+}
+
+/* 72px */
+.xxxl {
+  width: 4.5rem;
+  height: 4.5rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        transform: translateX(25%);
+      }
+    }
+  }
+}
+
+/* 76px */
+.xxxlm {
+  width: 4.75rem;
+  height: 4.75rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        transform: translateX(25%);
+      }
+    }
+  }
+}
+
+/* 88px */
+.xxxll {
+  width: 5.5rem;
+  height: 5.5rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        transform: translateX(25%);
+      }
+    }
+  }
+}
+
+/* 120px */
+.xxxxl {
+  width: 7.5rem;
+  height: 7.5rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        transform: translateX(25%);
+      }
+    }
+  }
+}
+
+.ring {
+  &.civicLiker {
+    background-image: var(--avatar-ring-civic-liker);
+  }
+
+  &.architect {
+    background-image: var(--avatar-ring-architect);
+  }
+
+  &.civicArchitect {
+    background-image: var(--avatar-ring-civic-architect);
+  }
+}

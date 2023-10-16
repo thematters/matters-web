@@ -1,12 +1,14 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG, TextId } from '~/common/enums'
+import { ERROR_CODES, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   CommentFormType,
+  ERROR_MESSAGES,
   LanguageContext,
-  Translate,
+  toast,
   ViewerContext,
 } from '~/components'
 import {
@@ -17,7 +19,7 @@ import {
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
 import DownvoteButton from './DownvoteButton'
 import ReplyButton, { ReplyButtonProps } from './ReplyButton'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import UpvoteButton from './UpvoteButton'
 
 export type FooterActionsControls = {
@@ -107,29 +109,27 @@ const BaseFooterActions = ({
   const isActive = state === 'active'
   const isCollapsed = state === 'collapsed'
   const isDisabled = disabled || (!isActive && !isCollapsed)
-  const addToast = (id: TextId) => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: <Translate id={id} />,
-        },
-      })
-    )
-  }
-  const forbid = () => addToast('FORBIDDEN_BY_STATE')
+  const forbid = () =>
+    toast.error({
+      message: (
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+      ),
+    })
 
   let onClick
 
   if (viewer.shouldSetupLikerID) {
     onClick = () =>
       window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-  } else if (viewer.isOnboarding && targetAuthor?.id !== viewer.id) {
-    onClick = () => addToast('failureCommentOnboarding')
   } else if (viewer.isArchived || viewer.isFrozen) {
     onClick = forbid
   } else if (targetAuthor?.isBlocking) {
-    onClick = () => addToast('failureCommentBlocked')
+    onClick = () =>
+      toast.error({
+        message: (
+          <FormattedMessage defaultMessage="The author has disabled comments for this article" />
+        ),
+      })
   }
 
   const buttonProps = {
@@ -144,6 +144,7 @@ const BaseFooterActions = ({
 
   return (
     <footer
+      className={styles.footer}
       aria-label={translate({
         zh_hant: `${comment.upvotes} 點讚`,
         zh_hans: `${comment.upvotes} 点赞`,
@@ -151,7 +152,7 @@ const BaseFooterActions = ({
         lang,
       })}
     >
-      <section className="left">
+      <section className={styles.left}>
         {hasReply && (
           <ReplyButton
             type={type}
@@ -167,7 +168,6 @@ const BaseFooterActions = ({
       </section>
 
       {hasCreatedAt && <CreatedAt comment={comment} hasLink={hasLink} />}
-      <style jsx>{styles}</style>
     </footer>
   )
 }

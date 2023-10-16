@@ -1,5 +1,4 @@
-/* @styled-jsx=global */
-
 body {
   --w3m-z-index: var(--z-index-wallet-connect-modal);
+  --wcm-z-index: var(--z-index-wallet-connect-modal);
 }

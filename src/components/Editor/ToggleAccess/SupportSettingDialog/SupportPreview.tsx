@@ -9,7 +9,7 @@ import {
 } from '~/components'
 import DonationButton from '~/components/Buttons/DonationButton'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const SupportPreview = ({
   content,
@@ -20,29 +20,32 @@ const SupportPreview = ({
 }) => {
   const viewer = useContext(ViewerContext)
   return (
-    <section className="donation">
-      <span>
+    <section className={styles.preview}>
+      <section className={styles.content}>
         {!content &&
           (tabType === 'request' ? (
             <Translate id="supportRequestDescription" />
           ) : (
-            <section className="preview-response">
-              <p>
+            <>
+              <p className={styles.tagline}>
                 <Translate
                   zh_hans="🎉感谢支持"
                   zh_hant="🎉 感謝支持！"
                   en="🎉Thanks for your support!"
                 />
               </p>
-              <Translate id="supportResponseDescription" />
-            </section>
+              <p>
+                <Translate id="supportResponseDescription" />
+              </p>
+            </>
           ))}
+
         {content && tabType === 'reply' && (
-          <section>
+          <>
             <Avatar src={viewer?.avatar} size="xl" />
-            <p>
+            <p className={styles.tagline}>
               <TextIcon weight="md">{viewer?.displayName}</TextIcon>
-              <TextIcon color="grey-darker">
+              <TextIcon color="greyDarker">
                 <Translate
                   zh_hant="&nbsp;想對你說："
                   zh_hans="&nbsp;想对你說："
@@ -51,15 +54,18 @@ const SupportPreview = ({
               </TextIcon>
             </p>
             <Spacer size="xtight" />
-          </section>
+          </>
         )}
-        {<Translate zh_hant={content} zh_hans={content} en={content} />}
-      </span>
-      <section className="preview-button">
+
+        <p>
+          <Translate zh_hant={content} zh_hans={content} en={content} />
+        </p>
+      </section>
+
+      <section className={styles.button}>
         {tabType === 'request' && <DonationButton supported={false} />}
         {tabType === 'reply' && <DonationButton supported={true} />}
       </section>
-      <style jsx>{styles}</style>
     </section>
   )
 }

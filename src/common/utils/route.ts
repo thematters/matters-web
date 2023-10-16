@@ -21,6 +21,10 @@ interface CircleArgs {
   name: string
 }
 
+interface CollectionArgs {
+  id: string
+}
+
 interface TagArgs {
   id: string
   slug?: string
@@ -61,21 +65,25 @@ type ToPathArgs =
       article?: ArticleArgs | null
       circle?: CircleArgs | null
     }
-  | { page: 'draftDetail'; id: string; slug: string }
+  | { page: 'draftDetail'; id: string }
   | {
       page: 'tagDetail'
       tag: TagArgs
       feedType?: string
     }
   | {
-      page: 'userProfile' | 'userSubscriptons' | 'userComments' | 'userTags'
-
+      page: 'userProfile' | 'userCollections'
       userName: string
     }
   | {
       page: 'search'
       q?: string
       type?: 'article' | 'tag' | 'user'
+    }
+  | {
+      page: 'collectionDetail'
+      userName: string
+      collection: CollectionArgs
     }
 
 /**
@@ -195,7 +203,7 @@ export const toPath = (
     }
     case 'draftDetail': {
       return {
-        href: `/me/drafts/${args.slug}-${args.id}`,
+        href: `/me/drafts/${args.id}`,
       }
     }
     case 'tagDetail': {
@@ -213,19 +221,14 @@ export const toPath = (
         href: `/@${args.userName}`,
       }
     }
-    case 'userSubscriptons': {
+    case 'userCollections': {
       return {
-        href: `/@${args.userName}/subscriptions`,
+        href: `/@${args.userName}/collections`,
       }
     }
-    case 'userComments': {
+    case 'collectionDetail': {
       return {
-        href: `/@${args.userName}/comments`,
-      }
-    }
-    case 'userTags': {
-      return {
-        href: `/@${args.userName}/tags`,
+        href: `/@${args.userName}/collections/${args.collection.id}`,
       }
     }
 
@@ -282,6 +285,12 @@ export const redirectToLogin = () => {
   const target = getTarget() || getEncodedCurrent()
 
   return Router.push(`${PATHS.LOGIN}?target=${target}`)
+}
+
+export const redirectToHomePage = () => {
+  const target = getTarget() || getEncodedCurrent()
+
+  return Router.push(`${PATHS.HOME}?target=${target}`)
 }
 
 /**

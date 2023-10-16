@@ -16,7 +16,7 @@ import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
 import ReplyTo from '../ReplyTo'
 import { fragments, REFETCH_COMMENT } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CommentControls = {
   avatarSize?: Extract<AvatarSize, 'md' | 'lg'>
@@ -54,21 +54,22 @@ export const BaseCommentFeed = ({
 
   return (
     <article
+      className={styles.comment}
       id={actionControls.hasLink ? nodeId : ''}
       data-test-id={TEST_ID.ARTICLE_COMMENT_FEED}
     >
-      <header>
+      <header className={styles.header}>
         <UserDigest.Mini
           user={author}
           avatarSize={avatarSize}
-          textSize="md-s"
+          textSize="mdS"
           textWeight="md"
           hasAvatar
           hasDisplayName
           hasUserName={hasUserName}
         />
 
-        <section className="right">
+        <section className={styles.right}>
           <DonatorLabel comment={comment} />
           <PinnedLabel comment={comment} />
           <DropdownActions
@@ -81,17 +82,17 @@ export const BaseCommentFeed = ({
       </header>
 
       {replyTo && (!parentComment || replyTo.id !== parentComment.id) && (
-        <section className="reply-to-container">
+        <section className={styles.replyToContainer}>
           <ReplyTo user={replyTo.author} />
         </section>
       )}
 
-      <section className="content-container">
+      <section className={styles.contentContainer}>
         <Media at="sm">
-          <Content comment={comment} type={type} size="md-s" limit={17} />
+          <Content comment={comment} type={type} size="mdS" limit={17} />
         </Media>
         <Media greaterThan="sm">
-          <Content comment={comment} type={type} size="md-s" limit={13} />
+          <Content comment={comment} type={type} size="mdS" limit={13} />
         </Media>
 
         <FooterActions
@@ -101,8 +102,6 @@ export const BaseCommentFeed = ({
           {...actionControls}
         />
       </section>
-
-      <style jsx>{styles}</style>
     </article>
   )
 }
@@ -120,6 +119,7 @@ const CommentFeed = React.memo(
     return (
       prevComment.content === comment.content &&
       prevComment.upvotes === comment.upvotes &&
+      prevComment.myVote === comment.myVote &&
       prevComment.state === comment.state &&
       prevComment.pinned === comment.pinned &&
       prevComment.author.isBlocked === comment.author.isBlocked &&

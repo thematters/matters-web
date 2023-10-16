@@ -1,0 +1,13 @@
+.translating {
+  opacity: 0.5;
+}
+
+@keyframes play-spinning {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

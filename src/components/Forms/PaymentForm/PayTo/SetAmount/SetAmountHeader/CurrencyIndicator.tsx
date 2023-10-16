@@ -8,7 +8,7 @@ import {
   Translate,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CurrencyIndicatorProps = {
   currency: CURRENCY
@@ -56,9 +56,9 @@ const CurrencyIndicator: React.FC<CurrencyIndicatorProps> = ({
         </TextIcon>
       )}
 
-      <span className="change-button">
+      <span className={styles.changeButton}>
         <Button onClick={switchToCurrencyChoice}>
-          <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+          <TextIcon size="xs" textDecoration="underline" color="greyDark">
             <Translate
               zh_hant="更改支持方式"
               zh_hans="更改支持方式"
@@ -67,8 +67,6 @@ const CurrencyIndicator: React.FC<CurrencyIndicatorProps> = ({
           </TextIcon>
         </Button>
       </span>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

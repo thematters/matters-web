@@ -1,6 +1,7 @@
 const tsconfig = require('../tsconfig.json')
 const path = require('path')
 const { mergeWithCustomize } = require('webpack-merge')
+
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
@@ -8,99 +9,76 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
     '@storybook/addon-mdx-gfm',
+    {
+      name: '@storybook/addon-styling',
+      options: {
+        postCss: true,
+        cssModules: true,
+      },
+    },
   ],
   framework: {
     name: '@storybook/nextjs',
     options: {},
   },
-  /*
-    Next.js automatically supports the tsconfig.json "paths" and "baseUrl"
-    options but the webpack configuration of Storybook doesn't yet.
-    Also need to keep the same effect from `next.config.js` for loaders or plugins of webpack.
-  */
-  webpackFinal(config) {
-    config.module.rules = config.module.rules.filter(
-      (it) => it.test && it.test.toString() !== '/\\.css$/'
-    )
-    config.module.rules.push({
-      resolve: {
-        fullySpecified: false,
-      },
-    })
-    const newConfig = mergeWithCustomize({
-      customizeArray(a, b, key) {
-        if (key === 'module.rules') {
-          return b.concat(a)
-        }
-      },
-    })(
-      config,
-      {
-        module: {
-          rules: [
-            {
-              test: /\.svg$/,
-              use: [
-                {
-                  loader: '@svgr/webpack',
-                  options: {
-                    memo: true,
-                    dimensions: false,
-                  },
-                },
-              ],
-            },
-            {
-              test: /\.css$/,
-              use: [
-                'babel-loader',
-                {
-                  loader: require('styled-jsx/webpack').loader,
-                },
-              ],
-            },
-          ],
-        },
-      },
-      {
-        resolve: {
-          alias: Object.entries(tsconfig.compilerOptions.paths)
-            /*
-          @see https://webpack.js.org/configuration/resolve/#resolvealias
-         */ .map((pair) => [
-              pair[0].replace('/*', ''),
-              path.join(
-                path.dirname(require.resolve('../tsconfig.json')),
-                tsconfig.compilerOptions.baseUrl,
-                pair[1][0].replace('/*', '')
-              ),
-            ])
-            .reduce(
-              (acc, [key, value]) =>
-                Object.assign(acc, {
-                  [key]: value,
-                }),
-              {}
-            ),
-        },
+
+  webpackFinal: async (config) => {
+    // this modifies the existing image rule to exclude .svg files
+    // since we want to handle those files with @svgr/webpack
+    const imageRule = config.module.rules.find((rule) => {
+      if (typeof rule !== 'string' && rule.test instanceof RegExp) {
+        return rule.test.test('.svg')
       }
-    )
-    return newConfig
+    })
+    if (typeof imageRule !== 'string') {
+      imageRule.exclude = /\.svg$/
+    }
+
+    // configure .svg files to be loaded with @svgr/webpack
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: [
+                {
+                  name: 'removeViewBox',
+                  active: false,
+                },
+                {
+                  name: 'removeDimensions',
+                  active: true,
+                },
+                {
+                  name: 'prefixIds',
+                  active: true,
+                },
+              ],
+            },
+          },
+        },
+        {
+          loader: 'url-loader',
+          options: {
+            limit: 1024,
+            publicPath: '/_next/static/',
+            outputPath: `static/`,
+          },
+        },
+      ],
+    })
+
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, '..'),
+      '~': path.resolve(__dirname, '../src'),
+    }
+
+    return config
   },
-  /*
-    make the components' PropTypes interface works for argTypes of storybook
-  */
-  typescript: {
-    reactDocgen: false,
-    // reactDocgen: 'react-docgen-typescript',
-    // reactDocgenTypescriptOptions: {
-    //   shouldExtractLiteralValuesFromEnum: true,
-    //   // @see https://github.com/storybookjs/storybook/issues/11019#issuecomment-656776919
-    //   shouldRemoveUndefinedFromOptional: true,
-    //   propFilter: (prop) =>
-    //     prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
-    // },
-  },
+
   docs: {
     autodocs: true,
   },

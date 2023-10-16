@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { featureSupportedChains } from '~/common/utils'
 import {
   Button,
@@ -5,11 +7,10 @@ import {
   IconInfo16,
   TextIcon,
   Tooltip,
-  Translate,
 } from '~/components'
 import { DigestTransactionFragment, TransactionState } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /***
  * This is a sub component of Transaction that presents canceled, failed
@@ -51,57 +52,72 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
           color="grey"
           textPlacement="left"
         >
-          <Translate
-            zh_hant="鏈上紀錄"
-            zh_hans="链上纪录"
-            en="On-chain records"
-          />
+          <FormattedMessage defaultMessage="On-chain records" />
         </TextIcon>
       </Button>
     )
   }
 
   const StateIcon = () => {
-    if (message) {
-      return (
-        <Tooltip content={message}>
-          <span onClick={(event) => event.stopPropagation()}>
-            <IconInfo16 size="xs" />
-          </span>
-        </Tooltip>
-      )
+    if (!message) {
+      return null
     }
 
-    return null
+    return (
+      <Tooltip content={message}>
+        <button
+          type="button"
+          aria-hidden
+          onClick={(event) => event.stopPropagation()}
+        >
+          <IconInfo16 size="xs" />
+        </button>
+      </Tooltip>
+    )
   }
 
   const StateText = () => {
     switch (state) {
       case TransactionState.Canceled:
-        return <Translate id="cancel" />
+        return (
+          <FormattedMessage
+            defaultMessage="Cancelled"
+            description="src/components/Transaction/State/index.tsx"
+          />
+        )
       case TransactionState.Failed:
-        return <Translate zh_hant="失敗" zh_hans="失敗" en="Failed" />
+        return (
+          <FormattedMessage
+            defaultMessage="Failed"
+            description="src/components/Transaction/State/index.tsx"
+          />
+        )
       case TransactionState.Pending:
-        return <Translate zh_hant="進行中…" zh_hans="进行中…" en="Processing" />
+        return (
+          <FormattedMessage
+            defaultMessage="Processing"
+            description="src/components/Transaction/State/index.tsx"
+          />
+        )
       default:
         return null
     }
   }
 
   return (
-    <section>
+    <section className={styles.content}>
       <TextIcon
         icon={<StateIcon />}
         spacing="xxtight"
         size="xs"
         weight="normal"
-        color={state === TransactionState.Failed ? 'red' : 'grey-dark'}
+        color={state === TransactionState.Failed ? 'red' : 'greyDark'}
         textPlacement="left"
       >
-        <StateText />
+        <span className={styles.stateText}>
+          <StateText />
+        </span>
       </TextIcon>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

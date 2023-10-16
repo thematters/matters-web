@@ -39,6 +39,7 @@ export const EDIT_MODE_ARTICLE = gql`
           }
         }
         license
+        sensitiveByAuthor
         requestForDonation
         replyToDonator
         revisionCount

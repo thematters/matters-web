@@ -1,8 +1,7 @@
 import { Chain, configureChains, createConfig, createStorage } from 'wagmi'
 import { goerli, mainnet, polygon, polygonMumbai } from 'wagmi/chains'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-// import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
-import { WalletConnectLegacyConnector } from 'wagmi/connectors/walletConnectLegacy'
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 
 import { WalletErrorType } from '~/common/enums'
@@ -34,17 +33,11 @@ export const wagmiConfig = createConfig({
         UNSTABLE_shimOnConnectSelectAccount: true,
       },
     }),
-    // new WalletConnectConnector({
-    //   chains,
-    //   options: {
-    //     projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_ID!,
-    //     showQrModal: true,
-    //   },
-    // }),
-    new WalletConnectLegacyConnector({
+    new WalletConnectConnector({
       chains,
       options: {
-        qrcode: true,
+        projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_ID!,
+        showQrModal: true,
       },
     }),
   ],
@@ -61,9 +54,9 @@ export const wagmiConfig = createConfig({
   }),
 })
 
-export const maskAddress = (address: string, prefixLen: number = 6) => {
+export const maskAddress = (address: string, prefixLen: number = 8) => {
   return `${address.substring(0, prefixLen)}...${address.substring(
-    address.length - 4
+    address.length - 6
   )}`
 }
 
@@ -104,3 +97,5 @@ export const WALLET_ERROR_MESSAGES = {
 export const MaxUint256 = BigInt(
   '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
 )
+
+export type WalletType = 'MetaMask' | 'WalletConnect'

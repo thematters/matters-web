@@ -15,7 +15,7 @@ export type ShareDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & Pick<
   ShareDialogContentProps,
-  'description' | 'footerButtons' | 'headerTitle'
+  'description' | 'btns' | 'smUpBtns' | 'headerTitle'
 >
 
 type BaseShareDialogProps = {
@@ -25,7 +25,7 @@ type BaseShareDialogProps = {
   shareTags?: string[]
 } & Pick<
   ShareDialogProps,
-  'children' | 'headerTitle' | 'description' | 'footerButtons'
+  'children' | 'headerTitle' | 'description' | 'btns' | 'smUpBtns'
 >
 
 const DynamicContent = dynamic(() => import('./Content'), {
@@ -46,7 +46,7 @@ const BaseShareDialog = ({
     <>
       {children({ openDialog: () => onShare(openDialog) })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent {...props} closeDialog={closeDialog} />
       </Dialog>
     </>
@@ -80,9 +80,14 @@ export const ShareDialog = (props: ShareDialogProps) => {
 
     if (navigator.share && isMobile() && !props.disableNativeShare) {
       try {
+        // append utm_source to link
+        const utm_source = 'share_native'
+        const url = new URL(shareLink)
+        url.searchParams.append('utm_source', utm_source)
+
         await navigator.share({
           title: shareTitle,
-          url: shareLink,
+          url: url.toString(),
         })
       } catch (e) {
         console.error(e)

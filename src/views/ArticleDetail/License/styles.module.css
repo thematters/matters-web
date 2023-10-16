@@ -1,0 +1,12 @@
+.license {
+  margin: var(--spacing-base) 0;
+  text-align: center;
+}
+
+.icons {
+  display: inline-flex;
+
+  & * + * {
+    margin-left: var(--spacing-x-tight);
+  }
+}

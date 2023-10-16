@@ -4,6 +4,8 @@ import { useContext, useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
+  MAX_CIRCLE_DISPLAY_NAME_LENGTH,
+  MAX_CIRCLE_NAME_LENGTH,
   PAYMENT_CURRENCY,
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
   PAYMENT_MINIMAL_CIRCLE_AMOUNT,
@@ -26,7 +28,7 @@ import {
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
 import { PutCircleMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -45,6 +47,7 @@ const Init: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
+  const intl = useIntl()
   const [create] = useMutation<PutCircleMutation>(PUT_CIRCLE, undefined, {
     showToast: false,
   })
@@ -54,7 +57,6 @@ const Init: React.FC<FormProps> = ({
   const isInPage = purpose === 'page'
   const formId = 'create-circle-init-form'
 
-  const intl = useIntl()
   const {
     values,
     errors,
@@ -98,9 +100,9 @@ const Init: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        codes.forEach((c) => {
-          if (c === 'NAME_EXISTS') {
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        codes.forEach((code) => {
+          if (code === 'NAME_EXISTS') {
             setFieldError(
               'name',
               intl.formatMessage({
@@ -109,25 +111,23 @@ const Init: React.FC<FormProps> = ({
                 description: 'src/components/Forms/CreateCircleForm/Init.tsx',
               })
             )
-          } else if (c === 'NAME_INVALID') {
+          } else if (code === 'NAME_INVALID') {
             setFieldError(
               'name',
               intl.formatMessage({
                 defaultMessage:
                   'Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.',
-                description: '',
               })
             )
-          } else if (c === 'DISPLAYNAME_INVALID') {
+          } else if (code === 'DISPLAYNAME_INVALID') {
             setFieldError(
               'name',
               intl.formatMessage({
                 defaultMessage: 'Must be between 2-12 characters long.',
-                description: '',
               })
             )
           } else {
-            setFieldError('name', messages[c])
+            setFieldError('name', intl.formatMessage(messages[code]))
           }
         })
       }
@@ -135,100 +135,96 @@ const Init: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <section className="container">
-      <Form id={formId} onSubmit={handleSubmit}>
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<FormattedMessage defaultMessage="Circle Name" />}
+        hasLabel
+        type="text"
+        name="displayName"
+        required
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter the name of your Circle',
+        })}
+        value={values.displayName}
+        hint={`${values.displayName.length}/${MAX_CIRCLE_DISPLAY_NAME_LENGTH}`}
+        error={touched.displayName && errors.displayName}
+        hintAlign={touched.displayName && errors.displayName ? 'left' : 'right'}
+        maxLength={MAX_CIRCLE_DISPLAY_NAME_LENGTH}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        spacingBottom="base"
+      />
+
+      <section className={styles.nameInput}>
         <Form.Input
           label={
-            <FormattedMessage defaultMessage="Circle Name" description="" />
-          }
-          type="text"
-          name="displayName"
-          required
-          placeholder={intl.formatMessage({
-            defaultMessage: 'Enter the name of your Circle',
-            description: '',
-          })}
-          value={values.displayName}
-          error={touched.displayName && errors.displayName}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-
-        <section className="displayNameInput">
-          <Form.Input
-            label={
-              <FormattedMessage
-                defaultMessage="Set the Circle URL (cannot be modified after creation)"
-                description="src/components/Forms/CreateCircleForm/Init.tsx"
-              />
-            }
-            type="text"
-            name="name"
-            required
-            placeholder={intl.formatMessage({
-              defaultMessage: 'Custom URL Name',
-              description: '',
-            })}
-            value={values.name}
-            error={touched.name && errors.name}
-            onBlur={handleBlur}
-            onChange={(e) => {
-              const name = normalizeName(e.target.value)
-              setFieldValue('name', name)
-              return name
-            }}
-          />
-        </section>
-
-        <Form.AmountInput
-          required
-          min={PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}
-          max={PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}
-          currency={PAYMENT_CURRENCY.HKD}
-          label={
             <FormattedMessage
-              defaultMessage="Set threshold for circle (per month)"
+              defaultMessage="Set the Circle URL (cannot be modified after creation)"
               description="src/components/Forms/CreateCircleForm/Init.tsx"
             />
           }
-          name="amount"
-          value={values.amount}
-          error={touched.amount && errors.amount}
+          hasLabel
+          type="text"
+          name="name"
+          required
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Custom URL Name',
+          })}
+          value={values.name}
+          hint={`${values.name.length}/${MAX_CIRCLE_NAME_LENGTH}`}
+          error={touched.name && errors.name}
+          hintAlign={touched.name && errors.name ? 'left' : 'right'}
+          maxLength={MAX_CIRCLE_NAME_LENGTH}
           onBlur={handleBlur}
           onChange={(e) => {
-            const amount = e.target.valueAsNumber || 0
-            const sanitizedAmount = Math.min(
-              Math.floor(amount),
-              PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD
-            )
-
-            // remove extra left pad 0
-            if (inputRef.current) {
-              inputRef.current.value = sanitizedAmount
-            }
-            setFieldValue('amount', sanitizedAmount)
+            const name = normalizeName(e.target.value)
+            setFieldValue('name', name)
+            return name
           }}
-          ref={inputRef}
+          spacingBottom="base"
         />
-      </Form>
+      </section>
 
-      <style jsx>{styles}</style>
-      <style jsx>{`
-        .displayNameInput :global(.input-container) {
-          &::before {
-            content: '${process.env.NEXT_PUBLIC_SITE_DOMAIN}/~';
-          }
+      <Form.AmountInput
+        label={
+          <FormattedMessage
+            defaultMessage="Set threshold for circle (per month)"
+            description="src/components/Forms/CreateCircleForm/Init.tsx"
+          />
         }
-      `}</style>
-    </section>
+        hasLabel
+        required
+        min={PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}
+        max={PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}
+        currency={PAYMENT_CURRENCY.HKD}
+        name="amount"
+        value={values.amount}
+        error={touched.amount && errors.amount}
+        onBlur={handleBlur}
+        onChange={(e) => {
+          const amount = e.target.valueAsNumber || 0
+          const sanitizedAmount = Math.min(
+            Math.floor(amount),
+            PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD
+          )
+
+          // remove extra left pad 0
+          if (inputRef.current) {
+            inputRef.current.value = sanitizedAmount
+          }
+          setFieldValue('amount', sanitizedAmount)
+        }}
+        ref={inputRef}
+      />
+    </Form>
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Next Step" description="" />}
+      text={<FormattedMessage defaultMessage="Next Step" />}
       loading={isSubmitting}
     />
   )
@@ -240,26 +236,45 @@ const Init: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="circleCreation" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<FormattedMessage defaultMessage="Next Step" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
-        {InnerForm}
+
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="circleCreation"
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="circleCreation"
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

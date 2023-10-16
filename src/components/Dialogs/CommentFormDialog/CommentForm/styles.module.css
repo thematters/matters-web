@@ -1,0 +1,13 @@
+.context {
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-bottom: var(--spacing-base);
+}
+
+.form {
+  @mixin scrollbar-thin;
+
+  position: relative;
+  flex-grow: 1;
+  overflow-y: auto;
+}

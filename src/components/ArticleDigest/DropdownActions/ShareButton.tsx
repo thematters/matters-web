@@ -1,4 +1,4 @@
-import { IconShare16, Menu, TextIcon, Translate } from '~/components'
+import { IconShare16, Menu, Translate } from '~/components'
 
 interface ShareButtonProps {
   openDialog: () => void
@@ -6,11 +6,12 @@ interface ShareButtonProps {
 
 const ShareButton = ({ openDialog }: ShareButtonProps) => {
   return (
-    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconShare16 size="md" />} size="md" spacing="base">
-        <Translate id="shareArticle" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      text={<Translate id="shareArticle" />}
+      icon={<IconShare16 size="mdS" />}
+      onClick={openDialog}
+      ariaHasPopup="dialog"
+    />
   )
 }
 

@@ -15,9 +15,11 @@ import { Avatar, AvatarProps } from '~/components/Avatar'
 import { DonatorsArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
-type AvatarItemPros = Pick<AvatarProps, 'user'>
+type AvatarItemPros = Pick<AvatarProps, 'user'> & {
+  user: { displayName?: string | null }
+}
 
 const AvatarItem = ({ user }: AvatarItemPros) => {
   return (
@@ -25,6 +27,7 @@ const AvatarItem = ({ user }: AvatarItemPros) => {
       user={user || undefined}
       src={user ? undefined : IMAGE_PIXEL}
       size="lg"
+      title={user?.displayName || ''}
     />
   )
 }
@@ -62,7 +65,7 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
             aria-label={translate({ id: 'viewSupporters', lang })}
             aria-haspopup="dialog"
           >
-            <section className="avatar-list">
+            <section className={styles.avatarList}>
               {frontDonators.map((user, index) => (
                 <Fragment key={index}>
                   {showAvatarAnimation && (
@@ -94,19 +97,19 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
               )}
 
               {donatorsCount > maxAvatarNum && (
-                <span className="count">
+                <span className={styles.count}>
                   {donatorsCount - (maxAvatarNum - 1)}
                 </span>
               )}
 
               {donatorsCount === 1 && (
-                <span className="donator-name">
+                <span className={styles.donatorName}>
                   <UserDigest.Plain user={donators[0]} hasUnderline />
                 </span>
               )}
             </section>
           </button>
-          <section className="avatar-list-footer">
+          <section className={styles.avatarListFooter}>
             {donatorsCount === 1 && (
               <section>
                 <span>
@@ -122,7 +125,7 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                 aria-label={translate({ id: 'viewSupporters', lang })}
                 aria-haspopup="dialog"
               >
-                <span className="count">{donatorsCount}</span>
+                <span className={styles.count}>{donatorsCount}</span>
                 <TextIcon
                   icon={<IconArrowRight16 size="xs" />}
                   textPlacement="left"
@@ -137,8 +140,6 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
               </button>
             )}
           </section>
-
-          <style jsx>{styles}</style>
         </section>
       )}
     </SupportersDialog>

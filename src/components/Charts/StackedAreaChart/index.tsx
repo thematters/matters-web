@@ -14,7 +14,7 @@ import { useWindowResize } from '~/components'
 
 import Area from './Area'
 import Axis, { AXIS_OFFSET_X, AXIS_OFFSET_Y } from './Axis'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Tooltip, { TOOLTIP_CIRCLE_RADIUS } from './Tooltip'
 
 export type Datum = Record<'time' | string, number | Date>
@@ -114,7 +114,12 @@ export const StackedAreaChart: React.FC<StackedAreaChartProps> & {
 
   return (
     <div ref={containerRef}>
-      <svg ref={svgRef} width={svgWidth} height={svgHeight}>
+      <svg
+        className={styles.svg}
+        ref={svgRef}
+        width={svgWidth}
+        height={svgHeight}
+      >
         {svgWidth > 0 &&
           children({
             data,
@@ -130,7 +135,6 @@ export const StackedAreaChart: React.FC<StackedAreaChartProps> & {
             svgRef,
           })}
       </svg>
-      <style jsx>{styles}</style>
     </div>
   )
 }

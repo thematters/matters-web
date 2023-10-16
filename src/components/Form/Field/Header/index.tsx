@@ -1,39 +1,37 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface HeaderProps {
   label?: string | React.ReactNode
   htmlFor?: string
-  extraButton?: React.ReactNode
   labelId?: string
-  labelVisHidden?: boolean
+  hasLabel?: boolean
+  extraButton?: React.ReactNode
 }
 
 const Header: React.FC<HeaderProps> = ({
   label,
   htmlFor,
-  extraButton,
   labelId,
-  labelVisHidden,
+  hasLabel,
+  extraButton,
 }) => {
   if (!label && !extraButton) {
     return null
   }
 
   const Inner = () => (
-    <header>
+    <header className={styles.header}>
       <label htmlFor={htmlFor} {...(labelId ? { id: labelId } : {})}>
         {label}
       </label>
 
       {extraButton}
-
-      <style jsx>{styles}</style>
     </header>
   )
 
-  if (labelVisHidden) {
+  if (!hasLabel) {
     return (
       <VisuallyHidden>
         <Inner />

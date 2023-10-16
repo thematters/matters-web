@@ -1,9 +1,0 @@
-.container {
-  padding-top: var(--spacing-base);
-  padding-bottom: var(--spacing-xxx-loose);
-  background: var(--color-white);
-
-  @media (--sm-up) {
-    padding-bottom: var(--spacing-xx-loose);
-  }
-}

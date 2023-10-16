@@ -1,17 +1,11 @@
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
-import {
-  Button,
-  CopyToClipboard,
-  IconCopy16,
-  LanguageContext,
-} from '~/components'
+import { Button, CopyToClipboard, IconCopy16 } from '~/components'
 
 export const CopyButton: React.FC<
   React.PropsWithChildren<{ text: string }>
 > = ({ text, children }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   return (
     <>
@@ -19,8 +13,8 @@ export const CopyButton: React.FC<
       <CopyToClipboard text={text}>
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="grey-lighter"
-          aria-label={translate({ id: 'copy', lang })}
+          bgActiveColor="greyLighter"
+          aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
         >
           <IconCopy16 color="grey" />
         </Button>

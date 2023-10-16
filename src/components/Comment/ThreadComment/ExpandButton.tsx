@@ -1,7 +1,5 @@
 import { Button, IconArrowDown16, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
-
 const ExpandButton = ({
   onClick,
   restCount,
@@ -12,7 +10,7 @@ const ExpandButton = ({
   <Button
     size={[null, '1.25rem']}
     spacing={[0, 'xtight']}
-    bgActiveColor="grey-lighter"
+    bgActiveColor="greyLighter"
     onClick={onClick}
   >
     <TextIcon
@@ -27,8 +25,6 @@ const ExpandButton = ({
         en={`load the rest ${restCount} replies`}
       />
     </TextIcon>
-
-    <style jsx>{styles}</style>
   </Button>
 )
 export default ExpandButton

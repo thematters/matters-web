@@ -1,9 +1,14 @@
 export enum TEST_ID {
   // layout
   LAYOUT_HEADER = 'layout/header',
+  // side nav
+  SIDE_NAV_NOTIFICATIONS = 'sidenav/notifications',
+  SIDE_NAV_MY_PAGE = 'sidenav/my-page',
+  SIDE_NAY_WRITE_BUTTON = 'sidenav/write-button',
   // digests
   DIGEST_ARTICLE_CARD = 'digest/article/card',
   DIGEST_ARTICLE_FEED = 'digest/article/feed',
+  DIGEST_ARTICLE_LIST = 'digest/article/list',
   DIGEST_ARTICLE_FEED_FOOTER_PIN = 'digest/article/feed/footer/pin',
   DIGEST_ARTICLE_NOTICE = 'digest/article/notice',
   DIGEST_ARTICLE_SIDEBAR = 'digest/article/sidebar',
@@ -18,6 +23,7 @@ export enum TEST_ID {
   DIGEST_TAG_FEED = 'digest/tag/feed',
   DIGEST_TAG_RICH = 'digest/tag/rich',
   DIGEST_TAG_SIDEBAR = 'digest/tag/sidebar',
+  DIGEST_COLLECTION_FEED = 'digest/collection/feed',
   // dialogs
   DIALOG_AUTH = 'dialog/auth',
   // search
@@ -85,11 +91,19 @@ export enum TEST_ID {
   ME_WALLET_TRANSACTIONS_ITEM = 'me/wallet/transactions/item',
   ME_WALLET_TRANSACTIONS_ITEM_AMOUNT = 'me/wallet/transactions/item/amount',
   // user profile
+  ASIDE_USER_PROFILE = 'aside-user-profile',
+  ASIDE_USER_PROFILE_FOLLOWERS_COUNT = 'aside-user-profile/followers/count',
   USER_PROFILE = 'user-profile',
   USER_PROFILE_DISPLAY_NAME = 'user-profile/display-name',
   USER_PROFILE_USER_NAME = 'user-profile/user-name',
   USER_PROFILE_FOLLOWERS_COUNT = 'user-profile/followers/count',
   USER_PROFILE_BIO = 'user-profile/bio',
+  USER_PROFILE_PIN_BOARD = 'user-profile/pin-board',
+  USER_PROFILE_PIN_BOARD_PINNED_WORK = 'user-profile/pin-board/pinned-work',
+  USER_PROFILE_PIN_BOARD_UNPIN_BUTTON = 'user-profile/pin-board/unpin-button',
+
+  // Book
+  BOOK_TITLE = 'book/title',
 
   // Editor
   EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON = 'editor/search-select-form/dialog/add-button',

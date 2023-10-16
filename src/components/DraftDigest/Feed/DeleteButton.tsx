@@ -1,20 +1,21 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Dialog,
   IconTrash24,
   LanguageContext,
+  toast,
   Translate,
   useDialogSwitch,
   useMutation,
 } from '~/components'
+import { updateUserDrafts } from '~/components/GQL'
 import { DeleteButtonDraftFragment, DeleteDraftMutation } from '~/gql/graphql'
 
-import { DraftsContext } from '../../../views/Me/Drafts/context'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface DeleteButtonProps {
   draft: DeleteButtonDraftFragment
@@ -35,58 +36,47 @@ const fragments = {
 
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
-  const [edges, setEdges] = useContext(DraftsContext)
 
   const { lang } = useContext(LanguageContext)
 
   const [deleteDraft] = useMutation<DeleteDraftMutation>(DELETE_DRAFT, {
     variables: { id: draft.id },
-    update: () => {
-      const filteredEdges = (edges ?? []).filter(
-        ({ node }) => node.id !== draft.id
-      )
-      setEdges(filteredEdges)
+    update: (cache) => {
+      updateUserDrafts({
+        cache,
+        targetId: draft.id,
+        type: 'remove',
+      })
     },
   })
 
   const onDelete = async () => {
     await deleteDraft()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="草稿已刪除"
-              zh_hans="草稿已删除"
-              en="draft has been deleted"
-            />
-          ),
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <Translate
+          zh_hant="草稿已刪除"
+          zh_hans="草稿已删除"
+          en="draft has been deleted"
+        />
+      ),
+    })
   }
 
   return (
     <>
       <button
         onClick={openDialog}
-        className="delete-button"
+        className={styles.deleteButton}
         type="button"
         aria-label={translate({ id: 'delete', lang })}
       >
         <IconTrash24 size="md" />
-        <style jsx>{styles}</style>
       </button>
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
-        <Dialog.Header
-          title="deleteDraft"
-          closeDialog={closeDialog}
-          mode="inner"
-        />
+      <Dialog isOpen={show} onDismiss={closeDialog}>
+        <Dialog.Header title="deleteDraft" />
 
         <Dialog.Message>
           <p>
@@ -98,25 +88,29 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="red"
-            onClick={() => {
-              onDelete()
-              closeDialog()
-            }}
-          >
-            <Translate id="confirm" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="cancel" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={<FormattedMessage defaultMessage="Confirm" />}
+              color="red"
+              onClick={() => {
+                onDelete()
+                closeDialog()
+              }}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Confirm" />}
+              color="red"
+              onClick={() => {
+                onDelete()
+                closeDialog()
+              }}
+            />
+          }
+        />
       </Dialog>
     </>
   )

@@ -9,7 +9,7 @@ import {
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface CircleWallProps {
   circle: CircleWallCirclePublicFragment &
@@ -17,9 +17,14 @@ interface CircleWallProps {
 }
 
 const CircleWall = ({ circle }: CircleWallProps) => {
+  const style = {
+    '--circle-wall-bg-sm': `url(${IMAGE_WALL_BACKGROUND_SM})`,
+    '--circle-wall-bg-md': `url(${IMAGE_WALL_BACKGROUND_MD})`,
+  } as React.CSSProperties
+
   return (
-    <section className="container">
-      <section className="message">
+    <section className={styles.container} style={style}>
+      <section className={styles.message}>
         \\&nbsp;
         <Translate zh_hans="订阅围炉看更多" zh_hant="訂閱圍爐看更多" />
         &nbsp;//
@@ -27,7 +32,7 @@ const CircleWall = ({ circle }: CircleWallProps) => {
 
       <CircleDigest.Rich
         borderRadius="xtight"
-        borderColor="line-grey-light"
+        borderColor="lineGreyLight"
         circle={circle}
         hasFooter
         hasPrice
@@ -38,19 +43,6 @@ const CircleWall = ({ circle }: CircleWallProps) => {
           })
         }}
       />
-
-      <style jsx>{styles}</style>
-      <style jsx>{`
-        .container {
-          background-image: url(${IMAGE_WALL_BACKGROUND_SM.src});
-          background-size: cover;
-          background-position: center top;
-
-          @media (--sm-up) {
-            background-image: url(${IMAGE_WALL_BACKGROUND_MD.src});
-          }
-        }
-      `}</style>
     </section>
   )
 }

@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { parseUnits } from 'viem'
 import { useAccount, useContractWrite, useNetwork } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
@@ -20,8 +21,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { updateDonation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
-import updateDonation from '~/components/GQL/updates/donation'
 import {
   ArticleDetailPublicQuery,
   PayToMutation,
@@ -31,7 +32,7 @@ import {
 
 import PaymentInfo from '../PaymentInfo'
 import PayToFallback from './PayToFallback'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   amount: number
@@ -129,11 +130,7 @@ const OthersProcessingForm: React.FC<Props> = ({
         <PayToFallback closeDialog={closeDialog} />
       ) : (
         <>
-          <Dialog.Header
-            closeDialog={closeDialog}
-            leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
-            title="donation"
-          />
+          <Dialog.Header title="donation" />
           <Dialog.Content>
             <section>
               <PaymentInfo
@@ -143,7 +140,7 @@ const OthersProcessingForm: React.FC<Props> = ({
                 showLikerID={currency === CURRENCY.LIKE}
               />
               {currency === CURRENCY.HKD && (
-                <p className="hint">
+                <p className={styles.hint}>
                   <Translate
                     zh_hant="交易進行中，請稍候..."
                     zh_hans="交易进行中，请稍候..."
@@ -152,7 +149,7 @@ const OthersProcessingForm: React.FC<Props> = ({
                 </p>
               )}
               {currency === CURRENCY.LIKE && (
-                <p className="hint">
+                <p className={styles.hint}>
                   <p>
                     <Translate
                       zh_hant="請在 Liker Pay 頁面繼續操作"
@@ -170,7 +167,6 @@ const OthersProcessingForm: React.FC<Props> = ({
                 </p>
               )}
               <Spinner />
-              <style jsx>{styles}</style>
             </section>
           </Dialog.Content>
         </>
@@ -291,9 +287,10 @@ const USDTProcessingForm: React.FC<Props> = ({
     <>
       <Dialog.Header
         closeDialog={closeDialog}
-        leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
+        closeText={<FormattedMessage defaultMessage="Close" />}
         title="donation"
       />
+
       <Dialog.Content>
         <section>
           <PaymentInfo
@@ -302,7 +299,7 @@ const USDTProcessingForm: React.FC<Props> = ({
             recipient={recipient}
             showEthAddress={true}
           />
-          <section className="hint">
+          <section className={styles.hint}>
             <p>
               <Translate
                 zh_hant="請在加密錢包內繼續操作，"
@@ -319,7 +316,6 @@ const USDTProcessingForm: React.FC<Props> = ({
             </p>
           </section>
           <Spinner />
-          <style jsx>{styles}</style>
         </section>
       </Dialog.Content>
     </>

@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { translate } from '~/common/utils'
 import { IconClear16, IconSearch16, LanguageContext } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type SearchType = 'Article' | 'Tag' | 'User' | 'Invitee'
 
@@ -33,8 +33,8 @@ const SearchInput: React.FC<SearchInputProps> = ({
   const textAriaLabel = translate({ id: 'search', lang })
   const textPlaceholder = {
     Article: translate({
-      zh_hant: '輸入文章標題或粘貼文章鏈接',
-      zh_hans: '输入文章标题或粘贴文章链接',
+      zh_hant: '輸入作品標題或貼上作品連結',
+      zh_hans: '输入作品标题或贴上作品连结',
       en: 'Enter article title or paste article link',
       lang,
     }),
@@ -69,6 +69,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       {({ values, setValues, handleSubmit, handleChange }) => {
         return (
           <form
+            className={styles.form}
             onSubmit={handleSubmit}
             role="search"
             autoComplete="off"
@@ -100,7 +101,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
             />
 
             <button
-              className="search"
+              className={styles.search}
               type="submit"
               aria-label={translate({ id: 'search', lang })}
             >
@@ -109,7 +110,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 
             {value && (
               <button
-                className="clear"
+                className={styles.clear}
                 type="button"
                 aria-label={translate({ id: 'clear', lang })}
                 onClick={() => {
@@ -120,7 +121,6 @@ const SearchInput: React.FC<SearchInputProps> = ({
                 <IconClear16 color="grey" />
               </button>
             )}
-            <style jsx>{styles}</style>
           </form>
         )
       }}

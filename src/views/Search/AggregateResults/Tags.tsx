@@ -1,4 +1,5 @@
 import { Fragment, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
@@ -17,9 +18,8 @@ import {
 } from '~/components'
 import { SearchAggregateTagsPublicQuery } from '~/gql/graphql'
 
-import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_TAGS_PUBLIC } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const AggregateTagResults = () => {
   const { getQuery } = useRoute()
@@ -94,12 +94,13 @@ const AggregateTagResults = () => {
   }
 
   return (
-    <section className="aggregate-section">
+    <section className={styles.aggregateSection}>
       <InfiniteScroll
         hasNextPage={
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
+        eof={<FormattedMessage defaultMessage="End of the results" />}
       >
         <Menu>
           {edges.map(
@@ -130,10 +131,6 @@ const AggregateTagResults = () => {
           )}
         </Menu>
       </InfiniteScroll>
-      {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
-        <EndOfResults />
-      )}
-      <style jsx>{styles}</style>
     </section>
   )
 }

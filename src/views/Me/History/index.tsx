@@ -1,13 +1,15 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
-  ArticleDigestFeed,
+  ArticleDigestList,
   Button,
-  EmptyHistory,
+  EmptyArticle,
   Head,
+  HorizontalRule,
   InfiniteScroll,
   Layout,
   List,
@@ -18,6 +20,9 @@ import {
   useMutation,
 } from '~/components'
 import { ClearReadHistoryMutation, MeHistoryFeedQuery } from '~/gql/graphql'
+
+import HistoryTabs from './HistoryTabs'
+import styles from './styles.module.css'
 
 const ME_HISTORY_FEED = gql`
   query MeHistoryFeed($after: String) {
@@ -34,8 +39,7 @@ const ME_HISTORY_FEED = gql`
             cursor
             node {
               article {
-                ...ArticleDigestFeedArticlePublic
-                ...ArticleDigestFeedArticlePrivate
+                ...ArticleDigestListArticle
               }
             }
           }
@@ -43,8 +47,7 @@ const ME_HISTORY_FEED = gql`
       }
     }
   }
-  ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
+  ${ArticleDigestList.fragments.article}
 `
 
 const CLEAR_READ_HISTORY = gql`
@@ -60,6 +63,7 @@ const CLEAR_READ_HISTORY = gql`
 `
 
 const BaseMeHistory = () => {
+  const intl = useIntl()
   const { data, loading, error, fetchMore } =
     useQuery<MeHistoryFeedQuery>(ME_HISTORY_FEED)
 
@@ -76,7 +80,6 @@ const BaseMeHistory = () => {
   if (loading) {
     return (
       <>
-        <Layout.Header left={<Layout.Header.Title id="readHistory" />} />
         <Spinner />
       </>
     )
@@ -85,7 +88,6 @@ const BaseMeHistory = () => {
   if (error) {
     return (
       <>
-        <Layout.Header left={<Layout.Header.Title id="readHistory" />} />
         <QueryError error={error} />
       </>
     )
@@ -96,10 +98,12 @@ const BaseMeHistory = () => {
 
   if (!edges || edges.length <= 0 || !pageInfo || emptyHistory) {
     return (
-      <>
-        <Layout.Header left={<Layout.Header.Title id="readHistory" />} />
-        <EmptyHistory />
-      </>
+      <EmptyArticle
+        description={intl.formatMessage({
+          defaultMessage: 'No data yet',
+          description: 'src/views/Me/History/index.tsx',
+        })}
+      />
     )
   }
 
@@ -121,60 +125,77 @@ const BaseMeHistory = () => {
 
   return (
     <>
-      <Layout.Header
-        right={
-          <>
-            <Layout.Header.Title id="readHistory" />
-            <Button
-              bgColor="green"
-              spacing={['xtight', 'base']}
-              onClick={handlerClear}
-            >
-              <TextIcon color="white" size="md-s" weight="md">
-                <Translate id="clear" />
-              </TextIcon>
-            </Button>
-          </>
-        }
-      />
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List responsiveWrapper>
-          {edges.map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <ArticleDigestFeed
-                article={node.article}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'read_history',
-                    contentType: 'article',
-                    location: i,
+      <section className={styles.clear}>
+        <Button
+          textColor="greyDarker"
+          textActiveColor="black"
+          onClick={handlerClear}
+        >
+          <TextIcon size="sm">
+            <Translate id="clear" />
+          </TextIcon>
+        </Button>
+      </section>
 
-                    id: node.article.id,
-                  })
-                }
-                onClickAuthor={() => {
-                  analytics.trackEvent('click_feed', {
-                    type: 'read_history',
-                    contentType: 'user',
-                    location: i,
-                    id: node.article.author.id,
-                  })
-                }}
-              />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
+      <HorizontalRule />
+
+      <Layout.Main.Spacing hasVertical={false}>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          eof
+        >
+          <List>
+            {edges.map(({ node, cursor }, i) => (
+              <List.Item key={cursor}>
+                <ArticleDigestList
+                  article={node.article}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'read_history',
+                      contentType: 'article',
+                      location: i,
+
+                      id: node.article.id,
+                    })
+                  }
+                  onClickAuthor={() => {
+                    analytics.trackEvent('click_feed', {
+                      type: 'read_history',
+                      contentType: 'user',
+                      location: i,
+                      id: node.article.author.id,
+                    })
+                  }}
+                />
+              </List.Item>
+            ))}
+          </List>
+        </InfiniteScroll>
+      </Layout.Main.Spacing>
     </>
   )
 }
 
-const MeHistory = () => (
-  <Layout.Main>
-    <Head title={{ id: 'readHistory' }} />
+const MeHistory = () => {
+  const intl = useIntl()
+  const title = intl.formatMessage({
+    defaultMessage: 'History',
+  })
 
-    <BaseMeHistory />
-  </Layout.Main>
-)
+  return (
+    <Layout.Main>
+      <Layout.Header
+        left={<Layout.Header.Title>{title}</Layout.Header.Title>}
+      />
+
+      <Head title={title} />
+
+      <HistoryTabs />
+
+      <BaseMeHistory />
+    </Layout.Main>
+  )
+}
 
 export default MeHistory

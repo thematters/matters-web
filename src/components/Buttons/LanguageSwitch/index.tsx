@@ -3,21 +3,16 @@ import { useContext } from 'react'
 import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
   IconWorld16,
   LanguageConsumer,
   LanguageContext,
   Menu,
   TextIcon,
-  Translate,
 } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
 
-export const LanguageSwitchContent = ({
-  isInDropdown,
-}: {
-  isInDropdown?: boolean
-}) => (
+export const LanguageSwitchContent = () => (
   <LanguageConsumer>
     {({ lang, setLang }) => {
       const isEnActive = lang === 'en'
@@ -25,36 +20,24 @@ export const LanguageSwitchContent = ({
       const isZhHansActive = lang === 'zh_hans'
 
       return (
-        <Menu width={isInDropdown ? 'sm' : undefined}>
-          <Menu.Item onClick={() => setLang(UserLanguage.ZhHant)}>
-            <TextIcon
-              spacing="base"
-              size="md"
-              weight={isZhHantActive ? 'bold' : 'normal'}
-            >
-              {LANG_TEXT_MAP.zh_hant}
-            </TextIcon>
-          </Menu.Item>
+        <Menu>
+          <Menu.Item
+            text={LANG_TEXT_MAP.zh_hant}
+            onClick={() => setLang(UserLanguage.ZhHant)}
+            weight={isZhHantActive ? 'bold' : 'normal'}
+          />
 
-          <Menu.Item onClick={() => setLang(UserLanguage.ZhHans)}>
-            <TextIcon
-              spacing="base"
-              size="md"
-              weight={isZhHansActive ? 'bold' : 'normal'}
-            >
-              {LANG_TEXT_MAP.zh_hans}
-            </TextIcon>
-          </Menu.Item>
+          <Menu.Item
+            text={LANG_TEXT_MAP.zh_hans}
+            onClick={() => setLang(UserLanguage.ZhHans)}
+            weight={isZhHansActive ? 'bold' : 'normal'}
+          />
 
-          <Menu.Item onClick={() => setLang(UserLanguage.En)}>
-            <TextIcon
-              spacing="base"
-              size="md"
-              weight={isEnActive ? 'bold' : 'normal'}
-            >
-              {LANG_TEXT_MAP.en}
-            </TextIcon>
-          </Menu.Item>
+          <Menu.Item
+            text={LANG_TEXT_MAP.en}
+            onClick={() => setLang(UserLanguage.En)}
+            weight={isEnActive ? 'bold' : 'normal'}
+          />
         </Menu>
       )
     }}
@@ -63,7 +46,7 @@ export const LanguageSwitchContent = ({
 
 type LanguageSwitchProps = {
   size?: 'sm' | 'lg'
-  bgColor?: 'grey-darkest'
+  bgColor?: 'greyDarkest'
 }
 
 export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
@@ -72,37 +55,18 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const iconColor = bgColor === 'grey-darkest' ? 'white' : 'grey'
-  const textSize = size === 'sm' ? 'sm-s' : 'md'
+  const iconColor = bgColor === 'greyDarkest' ? 'white' : 'grey'
+  const textSize = size === 'sm' ? 'xs' : 'md'
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <LanguageSwitchContent isInDropdown />,
-        placement: 'bottom-end',
-        zIndex: Z_INDEX.OVER_DIALOG,
-      }}
-      dialog={{
-        content: <LanguageSwitchContent />,
-        title: (
-          <Translate
-            zh_hant="修改界面語言"
-            zh_hans="修改介面语言"
-            en="Language"
-          />
-        ),
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<LanguageSwitchContent />} zIndex={Z_INDEX.OVER_DIALOG}>
+      {({ openDropdown, ref }) => (
         <Button
+          onClick={openDropdown}
           size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
-          spacing={[0, 'xtight']}
+          spacing={size === 'sm' ? [0, 0] : [0, 'xtight']}
           bgColor={bgColor}
-          bgActiveColor={
-            bgColor === 'grey-darkest' ? undefined : 'grey-lighter'
-          }
-          onClick={openDialog}
-          aria-haspopup={type}
+          aria-haspopup="listbox"
           ref={ref}
         >
           <TextIcon icon={<IconWorld16 />} size={textSize} color={iconColor}>
@@ -110,6 +74,6 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
           </TextIcon>
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }

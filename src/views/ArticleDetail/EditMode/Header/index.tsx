@@ -1,8 +1,20 @@
-import { useEffect, useRef } from 'react'
+import { normalizeArticleHTML } from '@matters/matters-editor'
+import { useContext, useEffect, useRef } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
+import {
+  MAX_ARTICLE_CONTENT_LENGTH,
+  MAX_ARTICLE_REVISION_DIFF,
+} from '~/common/enums'
 import { measureDiffs, stripHtml } from '~/common/utils'
-import { Button, TextIcon, Translate, useMutation } from '~/components'
+import {
+  Button,
+  TextIcon,
+  toast,
+  Translate,
+  useMutation,
+  ViewerContext,
+} from '~/components'
 import {
   ConfirmStepContentProps,
   EditorSettingsDialog,
@@ -13,10 +25,11 @@ import {
   EditArticleMutation,
   EditorDraftFragment,
 } from '~/gql/graphql'
+import { VIEWER_ARTICLES } from '~/views/User/Articles/gql'
 
 import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type EditModeHeaderProps = {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -58,6 +71,8 @@ const EditModeHeader = ({
 
   ...restProps
 }: EditModeHeaderProps) => {
+  const viewer = useContext(ViewerContext)
+
   const initContent = useRef<string>()
   useEffect(() => {
     initContent.current = draft?.content || ''
@@ -66,8 +81,8 @@ const EditModeHeader = ({
   const currContent = editContent || ''
   const diff =
     measureDiffs(
-      stripHtml(initContent.current || ''),
-      stripHtml(currContent || '')
+      stripHtml(normalizeArticleHTML(initContent.current || '')),
+      stripHtml(normalizeArticleHTML(currContent || ''))
     ) || 0
   const diffCount = `${diff}`.padStart(2, '0')
   const isOverDiffLimit = diff > MAX_ARTICLE_REVISION_DIFF
@@ -78,6 +93,20 @@ const EditModeHeader = ({
   const [editArticle, { loading }] =
     useMutation<EditArticleMutation>(EDIT_ARTICLE)
   const onSave = async () => {
+    // check content length
+    const contentCount = editContent?.length || 0
+    if (isContentRevised && contentCount > MAX_ARTICLE_CONTENT_LENGTH) {
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage={`Content length exceeds limit ({length}/{limit})`}
+            values={{ length: contentCount, limit: MAX_ARTICLE_CONTENT_LENGTH }}
+          />
+        ),
+      })
+      return
+    }
+
     try {
       await editArticle({
         variables: {
@@ -92,7 +121,14 @@ const EditModeHeader = ({
           first: null,
           iscnPublish: restProps.iscnPublish,
           canComment: restProps.canComment,
+          sensitive: restProps.contentSensitive,
         },
+        refetchQueries: [
+          {
+            query: VIEWER_ARTICLES,
+            variables: { userName: viewer.userName },
+          },
+        ],
       })
       if (isContentRevised) {
         onPublish()
@@ -102,26 +138,21 @@ const EditModeHeader = ({
         onSaved()
       }
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: isContentRevised ? (
-              <Translate
-                zh_hant="發布失敗"
-                zh_hans="發布失敗"
-                en="failed to republish"
-              />
-            ) : (
-              <Translate
-                zh_hant="保存失敗"
-                zh_hans="保存失敗"
-                en="failed to save"
-              />
-            ),
-          },
-        })
-      )
+      toast.error({
+        message: isContentRevised ? (
+          <Translate
+            zh_hant="發布失敗"
+            zh_hans="發布失敗"
+            en="failed to republish"
+          />
+        ) : (
+          <Translate
+            zh_hant="保存失敗"
+            zh_hans="保存失敗"
+            en="failed to save"
+          />
+        ),
+      })
     }
   }
 
@@ -142,7 +173,7 @@ const EditModeHeader = ({
         zh_hans=" 次修订"
         en=" revisions remaining"
       />
-      <span className={isOverDiffLimit ? 'red' : 'green'}>
+      <span className={isOverDiffLimit ? styles.red : styles.green}>
         &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
       </span>
     </>
@@ -150,7 +181,7 @@ const EditModeHeader = ({
 
   return (
     <>
-      <p>
+      <p className={styles.hint}>
         {isSameHash && (
           <>
             {!isOverRevisionLimit ? (
@@ -196,13 +227,11 @@ const EditModeHeader = ({
             disabled={isEditDisabled || isOverDiffLimit}
           >
             <TextIcon color="white" size="md" weight="md">
-              <Translate id="nextStep" />
+              <FormattedMessage defaultMessage="Next Step" />
             </TextIcon>
           </Button>
         )}
       </EditorSettingsDialog>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

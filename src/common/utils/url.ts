@@ -1,3 +1,5 @@
+import { URL_COLLECTION_DETAIL } from '../enums'
+
 const pattern = /^(:?\/\/|https?:\/\/)?([^/]*@)?(.+?)(:\d{2,5})?([/?].*)?$/
 
 export const extractDomain = (url: string) => {
@@ -24,11 +26,12 @@ export const parseURL = (url: string) => {
 /**
  * Responsive Image
  */
-export type ToSizedImageURLSize = '144w' | '360w' | '540w' | '1080w' | '1280w'
+export type ToSizedImageURLSize = number
 
 interface ToSizedImageURLProps {
   url: string
-  size?: ToSizedImageURLSize
+  width: ToSizedImageURLSize
+  height?: ToSizedImageURLSize
   ext?: 'webp'
 }
 
@@ -44,7 +47,12 @@ export const changeExt = ({ key, ext }: { key: string; ext?: 'webp' }) => {
   return `${key}${ext ? '.' + ext : ''}`
 }
 
-export const toSizedImageURL = ({ url, size, ext }: ToSizedImageURLProps) => {
+export const toSizedImageURL = ({
+  url,
+  width,
+  height,
+  ext,
+}: ToSizedImageURLProps) => {
   const assetDomain = process.env.NEXT_PUBLIC_CF_IMAGE_URL
     ? `${process.env.NEXT_PUBLIC_CF_IMAGE_URL}`
     : ''
@@ -68,7 +76,9 @@ export const toSizedImageURL = ({ url, size, ext }: ToSizedImageURLProps) => {
   const hostnameless = url.replace(urlDomain, ``)
   const key = hostnameless.replace('/public', '')
   const extedUrl = changeExt({ key, ext })
-  const postfix = size ? size : 'public'
+  const postfix = height
+    ? `w=${width},h=${height},fit=crop`
+    : `w=${width},h=${width * 4},fit=scale-down`
 
   return assetDomain + extedUrl + '/' + postfix
 }
@@ -79,4 +89,31 @@ export const isUrl = (key: string) => {
   } catch (e) {
     return false
   }
+}
+
+export const parseSorter = (sorterStr: string) => {
+  const sorter: any = {}
+  if (sorterStr === '') {
+    return sorter
+  }
+  const sorters = sorterStr.split(URL_COLLECTION_DETAIL.SORTER_SEPARATOR)
+  sorters.map((s) => {
+    const [key, value] = s.split(URL_COLLECTION_DETAIL.SORTER_TYPE_SEPARATOR)
+    sorter[key] = value
+  })
+  return sorter
+}
+
+export const stringifySorter = (sorter: any) => {
+  let sorterStr = ''
+  const keys = Object.keys(sorter)
+  keys.map((key, index) => {
+    sorterStr += `${key}${URL_COLLECTION_DETAIL.SORTER_TYPE_SEPARATOR}${sorter[
+      key
+    ].toString()}`
+    if (index < keys.length - 1) {
+      sorterStr += URL_COLLECTION_DETAIL.SORTER_SEPARATOR
+    }
+  })
+  return sorterStr
 }

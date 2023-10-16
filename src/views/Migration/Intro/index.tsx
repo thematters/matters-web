@@ -7,14 +7,23 @@ import IMAGE_MIGRATION_XL from '@/public/static/images/migration-intro-xl.svg'
 import IMAGE_MIGRATION_XS from '@/public/static/images/migration-intro-xs.svg'
 import { Button, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
+import layoutStyles from '../../About/layout.module.css'
+import styles from './styles.module.css'
 
 const Intro = () => {
+  const style = {
+    '--migration-intro-bg-xs': `url(${IMAGE_MIGRATION_XS})`,
+    '--migration-intro-bg-sm': `url(${IMAGE_MIGRATION_SM})`,
+    '--migration-intro-bg-md': `url(${IMAGE_MIGRATION_MD})`,
+    '--migration-intro-bg-lg': `url(${IMAGE_MIGRATION_LG})`,
+    '--migration-intro-bg-xl': `url(${IMAGE_MIGRATION_XL})`,
+  } as React.CSSProperties
+
   return (
-    <section className="intro">
-      <div className="l-container">
-        <div className="l-row">
-          <div className="l-col-full">
+    <section className={styles.intro} style={style}>
+      <div className={layoutStyles.container}>
+        <div className={layoutStyles.content}>
+          <div className={layoutStyles.columnFull}>
             <h2>
               <Translate
                 zh_hant="搬家到 Matters"
@@ -53,29 +62,6 @@ const Intro = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{styles}</style>
-      <style jsx>{`
-        .intro {
-          background-image: url(${IMAGE_MIGRATION_XS});
-
-          @media (--sm-up) {
-            background-image: url(${IMAGE_MIGRATION_SM});
-          }
-
-          @media (--md-up) {
-            background-image: url(${IMAGE_MIGRATION_MD});
-          }
-
-          @media (--lg-up) {
-            background-image: url(${IMAGE_MIGRATION_LG});
-          }
-
-          @media (--xl-up) {
-            background-image: url(${IMAGE_MIGRATION_XL});
-          }
-        }
-      `}</style>
     </section>
   )
 }

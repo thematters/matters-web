@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -12,7 +13,7 @@ import {
 import { UserDigest } from '~/components/UserDigest'
 import { ArticleAppreciatorsQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface AppreciatorsDialogContentProps {
   id: string
@@ -110,10 +111,10 @@ const AppreciatorsDialogContent = ({
           />
         }
         closeDialog={closeDialog}
-        closeTextId="close"
+        closeText={<FormattedMessage defaultMessage="Close" />}
       />
 
-      <Dialog.Content>
+      <Dialog.Content noSpacing>
         <InfiniteScroll
           loader={<Spinner />}
           loadMore={loadMore}
@@ -121,11 +122,13 @@ const AppreciatorsDialogContent = ({
         >
           {edges.map(({ node, cursor }, index) =>
             node.sender ? (
-              <div className="dialog-appreciators-list" key={cursor}>
+              <div className={styles.dialogAppreciatorsList} key={cursor}>
                 <UserDigest.Rich
                   user={node.sender}
                   avatarBadge={
-                    <span className="appreciation-amount">{node.amount}</span>
+                    <span className={styles.appreciationAmount}>
+                      {node.amount}
+                    </span>
                   }
                   onClick={() => {
                     analytics.trackEvent('click_feed', {
@@ -135,13 +138,23 @@ const AppreciatorsDialogContent = ({
                       id: node.sender?.id,
                     })
                   }}
+                  hasFollow={false}
                 />
-                <style jsx>{styles}</style>
               </div>
             ) : null
           )}
         </InfiniteScroll>
       </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Close" />}
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
+      />
     </>
   )
 }

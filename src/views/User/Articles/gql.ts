@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestFeed } from '~/components'
+import { ArticleDigestFeed } from '~/components/ArticleDigest/Feed'
 
-const fragment = gql`
+import PinBoard from './PinBoard'
+
+const fragments = gql`
   fragment ArticlesUser on User {
     id
     userName
@@ -31,12 +33,12 @@ const fragment = gql`
     }
     status {
       state
-      articleCount
-      totalWordCount
     }
+    ...PinnedWorksUser
   }
   ${ArticleDigestFeed.fragments.article.public}
   ${ArticleDigestFeed.fragments.article.private}
+  ${PinBoard.fragments.user}
 `
 
 // without `Public` suffix, query as a logged-in user
@@ -46,7 +48,7 @@ export const VIEWER_ARTICLES = gql`
       ...ArticlesUser
     }
   }
-  ${fragment}
+  ${fragments}
 `
 
 // with `Public` suffix, query as an anonymous user
@@ -56,7 +58,7 @@ export const USER_ARTICLES_PUBLIC = gql`
       ...ArticlesUser
     }
   }
-  ${fragment}
+  ${fragments}
 `
 
 export const USER_ARTICLES_PRIVATE = gql`

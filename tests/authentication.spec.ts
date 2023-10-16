@@ -30,9 +30,7 @@ test.describe('Authentication', () => {
     await expect(page).toHaveURL('/')
 
     // Expect homepage has "Notification" button on the left side
-    await expect(
-      page.getByRole('link', { name: 'Notifications' })
-    ).toBeVisible()
+    await expect(page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)).toBeVisible()
   })
 
   test('can login in login page', async ({ page }) => {
@@ -40,9 +38,7 @@ test.describe('Authentication', () => {
     await expect(page).toHaveURL('/')
 
     // Expect homepage has "Notification" button on the left side
-    await expect(
-      page.getByRole('link', { name: 'Notifications' })
-    ).toBeVisible()
+    await expect(page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)).toBeVisible()
   })
 
   authedTest(
@@ -52,7 +48,7 @@ test.describe('Authentication', () => {
 
       // [Logged-in] Expect homepage has "Notification" button on the left side
       await expect(
-        page.getByRole('link', { name: 'Notifications' })
+        page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)
       ).toBeVisible()
 
       // Logout

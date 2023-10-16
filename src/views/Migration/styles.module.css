@@ -1,0 +1,7 @@
+.main {
+  & h2 {
+    @mixin font-serif;
+
+    font-size: var(--font-size-xxl);
+  }
+}

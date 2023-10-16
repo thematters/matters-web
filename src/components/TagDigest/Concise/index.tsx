@@ -9,11 +9,11 @@ import {
 } from '~/components'
 import { TagDigestConciseTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type TagDigestConciseTagProps = {
   tag: TagDigestConciseTagFragment
-  textSize?: 'sm' | 'md-s'
+  textSize?: 'sm' | 'mdS'
   showArticlesNum?: boolean
 }
 
@@ -29,7 +29,7 @@ const fragments = {
 
 const Concise = ({
   tag,
-  textSize = 'md-s',
+  textSize = 'mdS',
   showArticlesNum,
 }: TagDigestConciseTagProps) => {
   const path = toPath({
@@ -38,7 +38,7 @@ const Concise = ({
   })
   return (
     <LinkWrapper {...path}>
-      <section className="content">
+      <section className={styles.content}>
         <TextIcon
           icon={<IconHashTag16 color="grey" />}
           color="black"
@@ -51,15 +51,14 @@ const Concise = ({
 
         {showArticlesNum && (
           <TextIcon
-            icon={<IconArticle16 color="grey-dark" size="xs" />}
+            icon={<IconArticle16 color="greyDark" size="xs" />}
             size="xs"
             spacing="xxtight"
-            color="grey-dark"
+            color="greyDark"
           >
             {numAbbr(tag.numArticles)}
           </TextIcon>
         )}
-        <style jsx>{styles}</style>
       </section>
     </LinkWrapper>
   )

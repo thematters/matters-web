@@ -1,7 +1,9 @@
+import { FormattedMessage } from 'react-intl'
+
 import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
 import { Dialog, Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   onSave: () => Promise<void>
@@ -20,24 +22,26 @@ const ConfirmRevisedPublishDialogContent = ({
   }
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
-      text={<Translate id="publish" />}
-      onClick={onPublish}
-    />
+    <Dialog.TextButton text={<Translate id="publish" />} onClick={onPublish} />
   )
 
   return (
     <>
       <Dialog.Header
         title={<Translate zh_hant="發布須知" zh_hans="發布须知" en="Notice" />}
-        leftButton={<Dialog.Header.BackButton onClick={onBack} />}
-        rightButton={SubmitButton}
+        leftBtn={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            onClick={onBack}
+          />
+        }
+        rightBtn={SubmitButton}
       />
 
-      <Dialog.Message align="left" type="info">
-        <section className="image-container">
+      <Dialog.Message align="left" smUpAlign="left">
+        <section className={styles.imageContainer}>
           <div
-            className="image"
+            className={styles.image}
             style={{ backgroundImage: `url(${PUBLISH_IMAGE})` }}
           />
         </section>
@@ -58,7 +62,18 @@ const ConfirmRevisedPublishDialogContent = ({
         </ul>
       </Dialog.Message>
 
-      <style jsx>{styles}</style>
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={onBack}
+            />
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

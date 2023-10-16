@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
@@ -16,7 +17,7 @@ import {
 } from '~/components'
 import { QuoteCurrency, ViewerLikeBalanceQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface LikeCoinBalanceProps {
   currency: QuoteCurrency
@@ -35,17 +36,22 @@ const VIEWER_LIKE_BALANCE = gql`
   }
 `
 
-const Wrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
-  <section className="assetsItem">
-    <TextIcon icon={<IconLikeCoin40 size="xl-m" />} size="md" spacing="xtight">
-      <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
-    </TextIcon>
+const Wrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+  const classes = classNames({
+    [styles.assetsItem]: true,
+    assetsItem: true, // global selector for overriding
+  })
 
-    {children}
+  return (
+    <section className={classes}>
+      <TextIcon icon={<IconLikeCoin40 size="xlM" />} size="md" spacing="xtight">
+        <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
+      </TextIcon>
 
-    <style jsx>{styles}</style>
-  </section>
-)
+      {children}
+    </section>
+  )
+}
 
 export const LikeCoinBalance = ({
   currency,
@@ -71,7 +77,7 @@ export const LikeCoinBalance = ({
   if (loading) {
     return (
       <Wrapper>
-        <IconSpinner16 color="grey-light" size="sm" />
+        <IconSpinner16 color="greyLight" size="sm" />
       </Wrapper>
     )
   }
@@ -83,7 +89,7 @@ export const LikeCoinBalance = ({
           spacing={[0, 'tight']}
           size={[null, '1.5rem']}
           borderColor="black"
-          href={PATHS.ME_SETTINGS}
+          href={PATHS.ME_SETTINGS_MISC}
         >
           <TextIcon color="black" size="xs">
             <Translate
@@ -116,7 +122,7 @@ export const LikeCoinBalance = ({
         spacing={[0, 'tight']}
         size={[null, '1.5rem']}
         borderColor="black"
-        href={PATHS.ME_SETTINGS}
+        href={PATHS.ME_SETTINGS_MISC}
       >
         <TextIcon color="black" size="xs">
           <Translate zh_hant="前往設置" zh_hans="前往设置" en="Setup" />

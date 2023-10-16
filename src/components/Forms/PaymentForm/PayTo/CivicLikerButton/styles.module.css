@@ -1,0 +1,18 @@
+.container {
+  position: relative;
+  flex: 1;
+
+  & > *:not(svg) {
+    width: 100%;
+  }
+
+  & > svg {
+    position: absolute;
+    top: var(--spacing-xx-tight);
+    left: var(--spacing-xx-tight);
+
+    & path {
+      fill: var(--color-likecoin-green);
+    }
+  }
+}

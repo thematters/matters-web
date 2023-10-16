@@ -21,7 +21,7 @@ const BaseCommentFormDialog = ({
       return
     }
 
-    const $editor = ref.current?.querySelector('.ql-editor') as HTMLElement
+    const $editor = ref.current?.querySelector('.ProseMirror') as HTMLElement
     if ($editor) {
       $editor.focus()
     }
@@ -31,12 +31,7 @@ const BaseCommentFormDialog = ({
     <div ref={ref}>
       {children && children({ openDialog })}
 
-      <Dialog
-        isOpen={show}
-        onDismiss={closeDialog}
-        onRest={focusEditor}
-        fixedHeight
-      >
+      <Dialog isOpen={show} onDismiss={closeDialog} onRest={focusEditor}>
         <CommentForm {...props} closeDialog={closeDialog} />
       </Dialog>
     </div>

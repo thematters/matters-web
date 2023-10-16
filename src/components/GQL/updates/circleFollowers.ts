@@ -1,10 +1,9 @@
 import { DataProxy } from 'apollo-cache'
 
-import { ERROR_CODES } from '~/common/enums'
 import { CircleFollowersPublicQuery } from '~/gql/graphql'
 import { CIRCLE_FOLLOWERS_PUBLIC } from '~/views/Circle/Profile/FollowersDialog/gql'
 
-const update = ({
+export const updateCircleFollowers = ({
   cache,
   name,
   type,
@@ -50,7 +49,6 @@ const update = ({
               cryptoWallet: viewer.info.cryptoWallet,
               __typename: 'UserInfo',
             },
-            isBlocked: false,
             isFollowee: false,
             isFollower: false,
             liker: {
@@ -82,12 +80,6 @@ const update = ({
       data: cacheData,
     })
   } catch (e) {
-    if ((e as any).message.startsWith("Can't find field")) {
-      console.warn(ERROR_CODES.QUERY_FIELD_NOT_FOUND)
-    } else {
-      console.error(e)
-    }
+    console.error(e)
   }
 }
-
-export default update

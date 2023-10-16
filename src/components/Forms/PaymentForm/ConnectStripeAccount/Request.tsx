@@ -1,20 +1,16 @@
 import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ADD_TOAST, PAYOUT_COUNTRY } from '~/common/enums'
+import { PAYOUT_COUNTRY } from '~/common/enums'
 import { parseFormSubmitErrors, sleep } from '~/common/utils'
-import {
-  Dialog,
-  LanguageContext,
-  Spacer,
-  Translate,
-  useMutation,
-} from '~/components'
+import { Dialog, Spacer, toast, useMutation } from '~/components'
 import { ConnectStripeAccountMutation } from '~/gql/graphql'
 
 import SelectCountry from './SelectCountry'
 
 interface Props {
+  back?: () => void
   nextStep: () => void
   closeDialog: () => void
 }
@@ -27,8 +23,8 @@ const CONNECT_STRIPE_ACCOUNT = gql`
   }
 `
 
-const Request: React.FC<Props> = ({ nextStep, closeDialog }) => {
-  const { lang } = useContext(LanguageContext)
+const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
+  const intl = useIntl()
   const [country, setCountry] = useState<PAYOUT_COUNTRY>(
     PAYOUT_COUNTRY.HongKong
   )
@@ -43,42 +39,50 @@ const Request: React.FC<Props> = ({ nextStep, closeDialog }) => {
       window.open(redirectUrl, '_blank')
       nextStep()
     } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: messages[codes[0]],
-          },
-        })
-      )
+      const [messages, codes] = parseFormSubmitErrors(error as any)
+
+      toast.error({ message: intl.formatMessage(messages[codes[0]]) })
     }
   }
 
   return (
     <>
-      <Dialog.Content hasGrow>
+      <Dialog.Header
+        title="connectStripeAccount"
+        closeDialog={closeDialog}
+        leftBtn={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            onClick={back}
+          />
+        }
+      />
+
+      <Dialog.Content>
         <SelectCountry country={country} onChange={setCountry} />
         <Spacer size="xxloose" />
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={request}
-          disabled={loading}
-          loading={loading}
-        >
-          <Translate id="nextStep" />
-        </Dialog.Footer.Button>
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            {back && (
+              <Dialog.TextButton
+                text={<FormattedMessage defaultMessage="Back" />}
+                color="greyDarker"
+                onClick={back}
+              />
+            )}
 
-        <Dialog.Footer.Button
-          bgColor="grey-lighter"
-          textColor="black"
-          onClick={closeDialog}
-        >
-          <Translate id="cancel" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Next Step" />}
+              onClick={request}
+              disabled={loading}
+              loading={loading}
+            />
+          </>
+        }
+      />
     </>
   )
 }

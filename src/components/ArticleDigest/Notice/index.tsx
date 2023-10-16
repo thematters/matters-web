@@ -7,7 +7,7 @@ import { LinkWrapper } from '~/components'
 import { ArticleDigestNoticeArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ArticleDigestNoticeProps = {
   article: ArticleDigestNoticeArticleFragment
@@ -37,7 +37,7 @@ export const ArticleDigestNotice = ({
   const { summary } = article
 
   const containerClasses = classNames({
-    container: true,
+    [styles.container]: true,
   })
   const path = toPath({
     page: 'articleDetail',
@@ -50,7 +50,7 @@ export const ArticleDigestNotice = ({
         className={containerClasses}
         data-test-id={TEST_ID.DIGEST_ARTICLE_NOTICE}
       >
-        <header>
+        <header className={styles.header}>
           <ArticleDigestTitle
             article={article}
             textSize={titleTextSize}
@@ -58,9 +58,8 @@ export const ArticleDigestNotice = ({
             lineClamp={1}
           />
         </header>
-        <section className="content">{summary}</section>
 
-        <style jsx>{styles}</style>
+        <section className={styles.content}>{summary}</section>
       </section>
     </LinkWrapper>
   )

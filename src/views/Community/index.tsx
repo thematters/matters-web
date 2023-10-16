@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 
-import contentStyles from '~/common/styles/utils/content.article.css'
 import { captureClicks, translate } from '~/common/utils'
 import { Head, LanguageContext, Layout } from '~/components'
 
@@ -15,7 +14,7 @@ const Community = () => {
 
       <Head title={{ id: 'community' }} />
 
-      <Layout.Spacing>
+      <Layout.Main.Spacing>
         <section
           dangerouslySetInnerHTML={{
             __html: translate({
@@ -26,9 +25,7 @@ const Community = () => {
           className="u-content"
           onClick={captureClicks}
         />
-      </Layout.Spacing>
-
-      <style jsx>{contentStyles}</style>
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

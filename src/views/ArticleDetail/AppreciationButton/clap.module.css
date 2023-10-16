@@ -1,0 +1,32 @@
+.clap {
+  &:hover {
+    & .iconLike,
+    & .iconSuperlike {
+      will-change: transform;
+      transition: transform 0.15s ease-in;
+      transform: scale(1) !important;
+    }
+
+    & .clapExplode svg {
+      will-change: transform, opacity;
+    }
+  }
+
+  &.clapHandZoomIn {
+    & .iconLike,
+    & .iconSuperlike {
+      transform: scale(1.15) !important;
+    }
+  }
+
+  & .clapExplode {
+    & svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      animation-duration: 0.5s;
+      animation-timing-function: ease-in;
+      animation-fill-mode: forwards;
+    }
+  }
+}

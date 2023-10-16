@@ -1,0 +1,43 @@
+.header {
+  @mixin flex-center-space-between;
+
+  position: relative;
+  flex-shrink: 0;
+  padding: var(--spacing-x-loose) var(--spacing-base) var(--spacing-x-tight);
+  background: var(--color-white);
+  border-radius: var(--spacing-x-tight) var(--spacing-x-tight) 0 0;
+
+  & .title {
+    @mixin flex-center-all;
+
+    position: absolute;
+    inset: 0;
+    padding: var(--spacing-x-loose) 0 var(--spacing-x-tight);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.75rem;
+  }
+
+  & .left,
+  & .right {
+    display: inline-flex;
+    min-height: 1.75rem;
+
+    & > * {
+      line-height: 1.5rem;
+    }
+  }
+}
+
+.smUpheader {
+  @mixin flex-center-space-between;
+
+  padding: 0 var(--spacing-base-loose);
+  margin: var(--spacing-base-loose) 0 var(--spacing-base);
+
+  & .title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.875rem;
+  }
+}

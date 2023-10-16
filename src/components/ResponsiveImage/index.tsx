@@ -8,18 +8,24 @@ import { toSizedImageURL, ToSizedImageURLSize } from '~/common/utils'
 
 interface ResponsiveImageProps {
   url: string
-  size: ToSizedImageURLSize
-  smUpSize?: ToSizedImageURLSize
+  width: ToSizedImageURLSize
+  height?: ToSizedImageURLSize
+  smUpWidth?: ToSizedImageURLSize
+  smUpHeight?: ToSizedImageURLSize
   disabled?: boolean
   loading?: 'eager' | 'lazy'
+  anonymous?: boolean
 }
 
 const BaseResponsiveImage = ({
   url,
-  size,
-  smUpSize,
+  width,
+  smUpWidth,
+  height,
+  smUpHeight,
   disabled,
   loading,
+  anonymous,
 }: ResponsiveImageProps) => {
   const [error, setError] = useState(false)
 
@@ -32,11 +38,15 @@ const BaseResponsiveImage = ({
 
   return (
     <picture onError={() => setError(true)}>
-      {smUpSize && (
+      {smUpWidth && (
         <>
           <source
-            media="(min-width: 768px)"
-            srcSet={toSizedImageURL({ url, size: smUpSize })}
+            media="(min-width: 475px)"
+            srcSet={toSizedImageURL({
+              url,
+              width: smUpWidth,
+              height: smUpHeight,
+            })}
           />
         </>
       )}
@@ -44,15 +54,17 @@ const BaseResponsiveImage = ({
       <source
         srcSet={toSizedImageURL({
           url,
-          size,
+          width,
+          height,
         })}
       />
 
       <img
         src={url}
-        srcSet={toSizedImageURL({ url, size })}
+        srcSet={toSizedImageURL({ url, width, height })}
         loading={loading}
         alt=""
+        crossOrigin={anonymous ? 'anonymous' : undefined}
       />
     </picture>
   )
@@ -70,8 +82,10 @@ export const ResponsiveImage = React.memo(
   (prevProps, props) => {
     return (
       prevProps.url === props.url &&
-      prevProps.size === props.size &&
-      prevProps.smUpSize === props.smUpSize &&
+      prevProps.width === props.width &&
+      prevProps.height === props.height &&
+      prevProps.smUpWidth === props.smUpWidth &&
+      prevProps.smUpHeight === props.smUpHeight &&
       prevProps.disabled === props.disabled
     )
   }

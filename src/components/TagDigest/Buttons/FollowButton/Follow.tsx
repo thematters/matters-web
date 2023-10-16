@@ -12,8 +12,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { updateViewerFollowingTagCount } from '~/components/GQL'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
-import updateViewerFollowingTagCount from '~/components/GQL/updates/viewerFollowingTagCount'
 import {
   TagDigestFollowButtonPrivateFragment,
   ToggleFollowTagMutation,
@@ -58,7 +58,8 @@ const Follow = ({ tag }: Props) => {
 
   return (
     <Button
-      size={['3rem', '1.5rem']}
+      size={[null, '1.5rem']}
+      spacing={[0, 'tight']}
       textColor="green"
       textActiveColor="white"
       bgActiveColor="green"

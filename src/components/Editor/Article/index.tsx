@@ -1,103 +1,167 @@
-import { useLazyQuery } from '@apollo/react-hooks'
-import { MattersArticleEditor } from '@matters/matters-editor'
-import { FC, useContext } from 'react'
+import { useApolloClient } from '@apollo/react-hooks'
+import {
+  EditorContent,
+  useArticleEdtor,
+  useEditArticleEdtor,
+} from '@matters/matters-editor'
+import classNames from 'classnames'
+import { useContext } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 
-import { ADD_TOAST, ASSET_TYPE } from '~/common/enums'
-import editorStyles from '~/common/styles/utils/content.article.css'
-import themeStyles from '~/common/styles/vendors/quill.bubble.css'
+import { INPUT_DEBOUNCE } from '~/common/enums'
+import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
-import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
-import { EditorDraftFragment, SearchUsersQuery } from '~/gql/graphql'
+import { EditorDraftFragment } from '~/gql/graphql'
 
-import MentionUserList from '../MentionUserList'
-import styles from './styles.css'
+import { BubbleMenu } from './BubbleMenu'
+import {
+  CaptionLimit,
+  FigureEmbedLinkInput,
+  FigurePlaceholder,
+  makeMentionSuggestion,
+} from './extensions'
+import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
+import styles from './styles.module.css'
+import EditorSummary from './Summary'
+import EditorTitle from './Title'
 
-interface Props {
+type ArticleEditorProps = {
   draft: EditorDraftFragment
-
-  isReviseMode?: boolean
-  isSummaryReadOnly?: boolean
-  isTitleReadOnly?: boolean
-
   update: (draft: {
     title?: string | null
     content?: string | null
     cover?: string | null
     summary?: string | null
   }) => Promise<void>
-  upload: (input: {
-    file?: any
-    url?: string
-    type?: ASSET_TYPE.embed | ASSET_TYPE.embedaudio
-  }) => Promise<{
-    id: string
-    path: string
-  }>
+} & Pick<FloatingMenuProps, 'upload'>
+
+export const ArticleEditor: React.FC<ArticleEditorProps> = ({
+  draft,
+  update,
+  upload,
+}) => {
+  const { lang } = useContext(LanguageContext)
+  const client = useApolloClient()
+
+  const { content, publishState, summary, summaryCustomized, title } = draft
+  const isPending = publishState === 'pending'
+  const isPublished = publishState === 'published'
+  const isReadOnly = isPending || isPublished
+
+  const debouncedUpdate = useDebouncedCallback((c) => {
+    update(c)
+  }, INPUT_DEBOUNCE)
+
+  const editor = useArticleEdtor({
+    editable: !isReadOnly,
+    placeholder: translate({
+      zh_hant: '請輸入正文…',
+      zh_hans: '请输入正文…',
+      en: 'Enter content…',
+      lang,
+    }),
+    content: content || '',
+    onUpdate: async ({ editor, transaction }) => {
+      const content = editor.getHTML()
+      debouncedUpdate({ content })
+    },
+    mentionSuggestion: makeMentionSuggestion({ client }),
+    extensions: [
+      FigureEmbedLinkInput,
+      FigurePlaceholder.configure({
+        placeholder: translate({
+          zh_hant: '添加說明文字…',
+          zh_hans: '添加说明文字…',
+          en: 'Add caption…',
+          lang,
+        }),
+      }),
+      CaptionLimit.configure({
+        maxCaptionLength: 100,
+      }),
+    ],
+  })
+
+  return (
+    <div
+      className={classNames({
+        [styles.articleEditor]: true,
+      })}
+      id="editor" // anchor for mention plugin
+    >
+      <EditorTitle defaultValue={title || ''} update={update} />
+
+      <EditorSummary
+        defaultValue={summaryCustomized && summary ? summary : ''}
+        update={update}
+        enable
+      />
+
+      {editor && <BubbleMenu editor={editor} />}
+      {editor && <FloatingMenu editor={editor} upload={upload} />}
+
+      <EditorContent editor={editor} />
+    </div>
+  )
 }
 
-type SearchUsersSearchEdgesNodeUser = NonNullable<
-  NonNullable<SearchUsersQuery['search']['edges']>[0]['node'] & {
-    __typename: 'User'
-  }
->
-
-const ArticleEditor: FC<Props> = ({
+export const EditArticleEditor: React.FC<ArticleEditorProps> = ({
   draft,
-
-  isReviseMode = false,
-  isSummaryReadOnly = false,
-  isTitleReadOnly = false,
 
   update,
   upload,
 }) => {
-  const [search, searchResult] = useLazyQuery<SearchUsersQuery>(SEARCH_USERS)
   const { lang } = useContext(LanguageContext)
+  const client = useApolloClient()
 
-  const { id, content, publishState, summary, summaryCustomized, title } = draft
+  const { content, publishState, summary, summaryCustomized, title } = draft
   const isPending = publishState === 'pending'
-  const isPublished = publishState === 'published'
-  const isReadOnly = (isPending || isPublished) && !isReviseMode
-  const { data, loading } = searchResult
+  const isReadOnly = isPending
 
-  const mentionUsers = (data?.search.edges || []).map(
-    ({ node }: any) => node
-  ) as SearchUsersSearchEdgesNodeUser[]
-
-  const mentionKeywordChange = (keyword: string) => {
-    search({ variables: { search: keyword, exclude: 'blocked' } })
-  }
+  const editor = useEditArticleEdtor({
+    editable: !isReadOnly,
+    placeholder: translate({
+      zh_hant: '請輸入正文…',
+      zh_hans: '请输入正文…',
+      en: 'Enter content…',
+      lang,
+    }),
+    content: content || '',
+    onUpdate: async ({ editor, transaction }) => {
+      const content = editor.getHTML()
+      update({ content })
+    },
+    mentionSuggestion: makeMentionSuggestion({ client }),
+    extensions: [
+      FigureEmbedLinkInput,
+      FigurePlaceholder.configure({
+        placeholder: translate({
+          zh_hant: '添加說明文字…',
+          zh_hans: '添加说明文字…',
+          en: 'Add caption…',
+          lang,
+        }),
+      }),
+    ],
+  })
 
   return (
-    <>
-      <div className="container">
-        <MattersArticleEditor
-          editorContent={content || ''}
-          editorContentId={id}
-          editorUpdate={update}
-          editorUpload={upload}
-          enableReviseMode={isReviseMode}
-          enableSummary
-          enableToolbar={!isReviseMode}
-          eventName={ADD_TOAST}
-          language={lang}
-          mentionLoading={loading}
-          mentionKeywordChange={mentionKeywordChange}
-          mentionUsers={mentionUsers}
-          mentionListComponent={MentionUserList}
-          readOnly={isReadOnly}
-          summaryDefaultValue={summaryCustomized && summary ? summary : ''}
-          summaryReadOnly={isSummaryReadOnly}
-          theme="bubble"
-          titleDefaultValue={title || ''}
-          titleReadOnly={isTitleReadOnly}
-        />
-      </div>
-      <style jsx>{themeStyles}</style>
-      <style jsx>{editorStyles}</style>
-      <style jsx>{styles}</style>
-    </>
+    <div
+      className={classNames({
+        [styles.articleEditor]: true,
+        [styles.revisedMode]: true,
+      })}
+    >
+      <EditorTitle defaultValue={title || ''} readOnly update={update} />
+
+      <EditorSummary
+        defaultValue={summaryCustomized && summary ? summary : ''}
+        readOnly
+        update={update}
+        enable
+      />
+
+      <EditorContent editor={editor} />
+    </div>
   )
 }
-
-export default ArticleEditor

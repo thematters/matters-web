@@ -1,0 +1,17 @@
+.input {
+  @mixin form-input;
+  @mixin form-input-number;
+
+  text-align: right;
+}
+
+.currency {
+  position: absolute;
+  top: 0;
+  left: var(--spacing-base);
+  height: 100%;
+  font-size: var(--font-size-md);
+  line-height: var(--input-height);
+  color: var(--color-black);
+  pointer-events: none;
+}

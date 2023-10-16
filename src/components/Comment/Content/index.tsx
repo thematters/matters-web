@@ -2,8 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
-import contentCommentStyles from '~/common/styles/utils/content.comment.css'
-import { captureClicks } from '~/common/utils'
+import { capitalizeFirstLetter, captureClicks } from '~/common/utils'
 import { CommentFormType, Expandable, Translate } from '~/components'
 import {
   ContentCommentPrivateFragment,
@@ -11,13 +10,13 @@ import {
 } from '~/gql/graphql'
 
 import Collapsed from './Collapsed'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface ContentProps {
   comment: ContentCommentPublicFragment & Partial<ContentCommentPrivateFragment>
   type: CommentFormType
-  size?: 'sm' | 'md-s'
-  bgColor?: 'grey-lighter' | 'white'
+  size?: 'sm' | 'mdS'
+  bgColor?: 'greyLighter' | 'white'
   limit?: number
   textIndent?: boolean
   isRichShow?: boolean
@@ -57,8 +56,8 @@ const Content = ({
   const isBlocked = comment.author?.isBlocked
 
   const contentClasses = classNames({
-    content: true,
-    [`size-${size}`]: !!size,
+    [styles.content]: true,
+    [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
   })
 
   if (state === 'collapsed' || isBlocked) {
@@ -99,9 +98,6 @@ const Content = ({
             data-test-id={TEST_ID.COMMENT_CONETNT}
           />
         </Expandable>
-
-        <style jsx>{styles}</style>
-        <style jsx>{contentCommentStyles}</style>
       </>
     )
   }
@@ -113,11 +109,9 @@ const Content = ({
         data-test-id={TEST_ID.COMMENT_CONETNT}
       >
         <Translate
-          zh_hant={`此${COMMENT_TYPE_TEXT.zh_hant[type]}因違反用戶協定而被隱藏`}
-          zh_hans={`此${COMMENT_TYPE_TEXT.zh_hans[type]}因违反用户协定而被隐藏`}
+          zh_hant={`此${COMMENT_TYPE_TEXT.zh_hant[type]}因違反用戶協定而被歸檔`}
+          zh_hans={`此${COMMENT_TYPE_TEXT.zh_hans[type]}因违反用户协定而被封存`}
         />
-
-        <style jsx>{styles}</style>
       </p>
     )
   }
@@ -129,8 +123,6 @@ const Content = ({
           zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}被原作者刪除`}
           zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}被原作者删除`}
         />
-
-        <style jsx>{styles}</style>
       </p>
     )
   }

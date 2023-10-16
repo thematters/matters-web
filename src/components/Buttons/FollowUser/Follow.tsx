@@ -17,9 +17,11 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import {
+  updateUserFollowerCount,
+  updateViewerFolloweeCount,
+} from '~/components/GQL'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
-import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
-import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 import {
   FollowButtonUserPrivateFragment,
   ToggleFollowUserMutation,
@@ -56,6 +58,7 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
   })
 
   const sizes: Record<FollowUserButtonSize, [ButtonWidth, ButtonHeight]> = {
+    xl: ['7.5rem', '2.5rem'],
     lg: ['6rem', '2rem'],
     md: [null, '1.5rem'],
   }
@@ -63,6 +66,7 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
     FollowUserButtonSize,
     [ButtonSpacingY, ButtonSpacingX]
   > = {
+    xl: [0, 0],
     lg: [0, 0],
     md: [0, 'tight'],
   }
@@ -85,12 +89,15 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
       size={sizes[size]}
       spacing={spacings[size]}
       textColor="green"
-      textActiveColor="white"
-      bgActiveColor="green"
+      textActiveColor="greenDark"
       borderColor="green"
+      borderActiveColor="greenDark"
       onClick={onClick}
     >
-      <TextIcon weight="md" size={size === 'lg' ? 'sm' : 'xs'}>
+      <TextIcon
+        weight="md"
+        size={size === 'xl' ? 'md' : size === 'lg' ? 'sm' : 'xs'}
+      >
         <Translate id="follow" />
       </TextIcon>
     </Button>

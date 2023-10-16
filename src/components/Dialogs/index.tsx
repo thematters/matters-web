@@ -1,11 +1,20 @@
 // User
+export * from './EditProfileDialog'
 export * from './ENSDialog'
 export * from './LikeCoinDialog'
-export * from './RecommendAuthorDialog'
 export * from './RssFeedDialog'
+
+// Settings
+export * from './AddWalletLoginDialog'
+export * from './RemoveSocialLoginDialog'
+export * from './RemoveWalletLoginDialog'
+export * from './SetEmailDialog'
+export * from './SetPasswordDialog'
+export * from './SetUserNameDialog'
 
 // Article
 export * from './AppreciatorsDialog'
+export * from './BindEmailHintDialog'
 export * from './CommentFormDialog'
 export * from './FingerprintDialog'
 export * from './MigrationDialog'
@@ -13,13 +22,18 @@ export * from './ReviseArticleDialog'
 export * from './ShareDialog'
 export * from './SupportersDialog'
 
+// Collection
+export * from './AddArticlesCollectionDialog'
+export * from './AddCollectionDialog'
+export * from './AddCollectionsArticleDialog'
+export * from './RemoveArticleCollectionDialog'
+
 // Editor
 export * from './EditorSearchSelectDialog'
 
 // Tag
-export * from './RecommendTagDialog'
+export * from './EditTagDialog'
 export * from './TagAdoptionDialog'
-export * from './TagDialog'
 export * from './TagEditorDialog'
 export * from './TagLeaveDialog'
 
@@ -35,8 +49,4 @@ export * from './SubscribeCircleDialog'
 export * from './UnsubscribeCircleDialog'
 
 // Misc
-export * from './GoogleSearchDialog'
 export * from './PaymentPointerDialog'
-
-// Help
-export * from './HelpDialog'

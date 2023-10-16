@@ -4,8 +4,8 @@ import { analytics, mergeConnections, toPath } from '~/common/utils'
 import {
   EmptyTag,
   InfiniteScroll,
+  Layout,
   QueryError,
-  ResponsiveWrapper,
   Spinner,
   TagDigest,
   usePublicQuery,
@@ -13,7 +13,7 @@ import {
 import { AllTagsHottestQuery } from '~/gql/graphql'
 
 import { ALL_TAGS_HOTTEST } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FeedType = 'recommended' | 'hottest'
 
@@ -64,11 +64,15 @@ const Feed = ({ type }: Props) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ResponsiveWrapper>
-        <ul>
+    <Layout.Main.Spacing hasVertical={false}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
+        <ul className={styles.list}>
           {edges.map(({ node: tag }, i) => (
-            <li key={tag.id}>
+            <li key={tag.id} className={styles.listItem}>
               <TagDigest.Feed
                 tag={tag}
                 spacing={['xtight', 0]}
@@ -90,10 +94,8 @@ const Feed = ({ type }: Props) => {
             </li>
           ))}
         </ul>
-      </ResponsiveWrapper>
-
-      <style jsx>{styles}</style>
-    </InfiniteScroll>
+      </InfiniteScroll>
+    </Layout.Main.Spacing>
   )
 }
 

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { URL_QS } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { IconEdit16, Menu, TextIcon } from '~/components'
+import { IconEdit20, Menu } from '~/components'
 import { EditArticleButtonArticleFragment } from '~/gql/graphql'
 
 const fragments = {
@@ -29,16 +29,16 @@ const EditArticleButton = ({
 
   return (
     <Menu.Item
-      href={`${href}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`}
-      is="link"
-    >
-      <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
+      text={
         <FormattedMessage
           defaultMessage="Edit"
           description="src/components/ArticleDigest/DropdownActions/EditButton.tsx"
         />
-      </TextIcon>
-    </Menu.Item>
+      }
+      icon={<IconEdit20 size="mdS" />}
+      href={`${href}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`}
+      is="link"
+    />
   )
 }
 

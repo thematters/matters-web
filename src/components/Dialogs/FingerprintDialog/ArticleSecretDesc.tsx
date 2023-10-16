@@ -5,7 +5,6 @@ import { Translate } from '~/components'
 import { ArticleSecretQuery } from '~/gql/graphql'
 
 import { QUERY_SECRET } from './ArticleSecret'
-import styles from './styles.css'
 
 type ArticleSecretDescProps = {
   id: string
@@ -51,7 +50,6 @@ const ArticleSecretDesc: React.FC<ArticleSecretDescProps> = ({ id }) => {
         zh_hant={` 是非公開文章加密解密所使用的鑰匙，只有掌握了密鑰才能夠解鎖 IPFS 中的非公開文章。請妥善保管密鑰，勿隨意洩漏。`}
         en={` is the encryption and decryption key for non-public articles, one can only unlock non-public articles on IPFS with it. Please keep the secret confidential and only share it with people you trust.`}
       />
-      <style jsx>{styles}</style>
     </p>
   )
 }

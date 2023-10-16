@@ -5,7 +5,7 @@ import { IconCircle16, LinkWrapper, TextIcon } from '~/components'
 import { DigestPlainCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CircleDigestPlainProps = {
   circle: DigestPlainCircleFragment
@@ -28,10 +28,8 @@ const CircleDigestPlain = ({ circle, onClick }: CircleDigestPlainProps) => {
         weight="normal"
         size="xs"
       >
-        <span className="name">{circle.displayName}</span>
+        <span className={styles.name}>{circle.displayName}</span>
       </TextIcon>
-
-      <style jsx>{styles}</style>
     </LinkWrapper>
   )
 }

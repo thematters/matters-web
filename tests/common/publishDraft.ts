@@ -20,6 +20,8 @@ export const publishDraft = async ({
   // Required: Fill title and content
   const title = await draftDetail.fillTitle()
   const content = await draftDetail.fillContent()
+
+  await draftDetail.checkResponse({ allow: allowResponse })
   // Optional
   const [summary, tags, , collectedArticleTitle, supportSetting, license, , ,] =
     (await fuzzingRun({
@@ -47,10 +49,8 @@ export const publishDraft = async ({
       ),
       string | undefined,
       boolean | undefined,
-      boolean | undefined
+      boolean | undefined,
     ]
-
-  await draftDetail.checkResponse({ allow: allowResponse })
 
   // Publish
   await draftDetail.publish()

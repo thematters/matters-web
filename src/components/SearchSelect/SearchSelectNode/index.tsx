@@ -8,6 +8,7 @@ interface SearchSelectNodeProps {
   selected?: boolean
   onClick: (node: SelectNode) => void
   inStagingArea?: boolean
+  inSearchingArea?: boolean
 }
 
 const SearchSelectNode: React.FC<SearchSelectNodeProps> = ({

@@ -1,88 +1,73 @@
 import Link from 'next/link'
-import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { EXTERNAL_LINKS, GUIDE_LINKS, PATHS } from '~/common/enums'
-import { LanguageContext, LanguageSwitch } from '~/components'
+import { EXTERNAL_LINKS, PATHS, Z_INDEX } from '~/common/enums'
+import { Dropdown, LanguageSwitch, Menu } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
+
+const CommunityMenu = () => {
+  return (
+    <Menu>
+      <Menu.Item
+        text={<FormattedMessage defaultMessage="Matters Community" />}
+        href={PATHS.COMMUNITY}
+      />
+
+      <Menu.Item
+        text={<FormattedMessage defaultMessage="Open Source" />}
+        htmlHref={EXTERNAL_LINKS.DEVELOPER_RESOURCE}
+        htmlTarget="_blank"
+      />
+
+      <Menu.Item
+        text={<FormattedMessage defaultMessage="Bug Report" />}
+        htmlHref={EXTERNAL_LINKS.BUG_REPORT}
+        htmlTarget="_blank"
+      />
+    </Menu>
+  )
+}
+
+const Dot = () => {
+  return <span className={styles.dot}>&nbsp;·&nbsp;</span>
+}
 
 const SideFooter = () => {
-  const { lang } = useContext(LanguageContext)
-  const year = new Date().getFullYear()
-
   return (
-    <footer>
-      <section className="buttons">
-        <LanguageSwitch />
-      </section>
+    <footer className={styles.footer}>
+      <LanguageSwitch />
 
-      <section className="links">
+      <section className={styles.links}>
         <Link href={PATHS.ABOUT} legacyBehavior>
           <a>
-            <FormattedMessage defaultMessage="About Us" description="" />
+            <FormattedMessage defaultMessage="About" />
+            <Dot />
           </a>
         </Link>
 
         <Link href={PATHS.GUIDE} legacyBehavior>
           <a>
-            <FormattedMessage defaultMessage="Explore Matters" description="" />
-          </a>
-        </Link>
-
-        <Link href={PATHS.COMMUNITY} legacyBehavior>
-          <a>
-            <FormattedMessage
-              defaultMessage="Matters Community"
-              description=""
-            />
-          </a>
-        </Link>
-
-        <Link href={PATHS.MIGRATION} legacyBehavior>
-          <a>
-            <FormattedMessage
-              defaultMessage="Migrate to Matters"
-              description=""
-            />
+            <FormattedMessage defaultMessage="Explore" />
+            <Dot />
           </a>
         </Link>
 
         <Link href={PATHS.TOS} legacyBehavior>
           <a>
-            <FormattedMessage
-              defaultMessage="Term of Services"
-              description=""
-            />
+            <FormattedMessage defaultMessage="Terms" />
+            <Dot />
           </a>
         </Link>
 
-        <a
-          href={EXTERNAL_LINKS.DEVELOPER_RESOURCE}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <FormattedMessage defaultMessage="Open Source" description="" />
-        </a>
-
-        <a href={EXTERNAL_LINKS.SECURITY_LINK} target="_blank" rel="noreferrer">
-          <FormattedMessage defaultMessage="Bug Bounty" description="" />
-        </a>
-
-        <Link href={GUIDE_LINKS.PWA[lang]} legacyBehavior>
-          <a>
-            <FormattedMessage defaultMessage="Download App" description="" />
-          </a>
-        </Link>
-
-        <span className="copyright">
-          {'@ '}
-          <span itemProp="copyrightYear">{year}</span>{' '}
-          <span itemProp="copyrightHolder">Matters</span>
-        </span>
+        <Dropdown content={<CommunityMenu />} zIndex={Z_INDEX.OVER_DIALOG}>
+          {({ openDropdown, ref }) => (
+            <button onClick={openDropdown} ref={ref}>
+              <FormattedMessage defaultMessage="Community" />
+            </button>
+          )}
+        </Dropdown>
       </section>
-
-      <style jsx>{styles}</style>
     </footer>
   )
 }

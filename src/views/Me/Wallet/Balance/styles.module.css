@@ -1,0 +1,30 @@
+.payoutItem {
+  color: var(--color-grey);
+
+  & .subtitle {
+    padding-left: calc(1.25rem + var(--spacing-tight));
+    margin-top: var(--spacing-xx-tight);
+    font-size: var(--font-size-xs);
+  }
+}
+
+.assetsItem {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-loose) var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: var(--spacing-base) 0;
+  }
+
+  &.clickable {
+    @mixin transition;
+
+    cursor: pointer;
+    transition-property: background-color;
+
+    &:hover {
+      background-color: var(--color-grey-lighter-active);
+    }
+  }
+}

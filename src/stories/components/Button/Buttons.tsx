@@ -3,23 +3,23 @@ import React from 'react'
 import { TEXT } from '~/common/enums'
 import {
   Button,
-  Dialog,
   IconMore16,
   IconNavSearch32,
   LoginButton,
-  Translate,
   ViewMoreButton,
   WriteButton,
 } from '~/components'
 import NavListItem from '~/components/Layout/NavBar/NavListItem'
 
+import styles from './styles.module.css'
+
 const Buttons = () => (
-  <section>
+  <section className={styles.container}>
     <ul>
       <li>
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="grey-lighter-active"
+          bgActiveColor="greyLighterActive"
           aria-haspopup="dialog"
         >
           <IconMore16 color="grey" />
@@ -35,7 +35,7 @@ const Buttons = () => (
       </li>
 
       <li>
-        <WriteButton variant="sidenav" allowed />
+        <WriteButton allowed />
       </li>
 
       <li>
@@ -51,25 +51,18 @@ const Buttons = () => (
         />
       </li>
 
-      <li>
+      {/* <li>
         <Dialog.Footer>
           <Dialog.Footer.Button type="submit">
             <Translate id="agreeAndContinue" />
           </Dialog.Footer.Button>
 
-          <Dialog.Footer.Button bgColor="grey-lighter" textColor="black">
+          <Dialog.Footer.Button bgColor="greyLighter" textColor="black">
             <Translate id="disagree" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
-      </li>
+      </li> */}
     </ul>
-
-    <style jsx>{`
-      li {
-        @mixin border-bottom-grey;
-        padding: var(--spacing-base);
-      }
-    `}</style>
   </section>
 )
 

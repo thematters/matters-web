@@ -7,6 +7,8 @@ import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import { CoverUploader } from '~/components'
 
+import styles from './styles.module.css'
+
 export default {
   title: 'Components/Uploader',
   component: CoverUploader,
@@ -14,13 +16,15 @@ export default {
 
 const Template: ComponentStory<typeof CoverUploader> = () => (
   <MockedProvider>
-    <ul>
+    <ul className={styles.coverContainer}>
       {/* User & Tag */}
       <li>
         <CoverUploader
           assetType={ASSET_TYPE.profileCover}
           entityType={ENTITY_TYPE.user}
-          onUpload={(assetId) => alert({ assetId })}
+          onUploaded={(assetId) => alert({ assetId })}
+          onUploadStart={() => null}
+          onUploadEnd={() => null}
           fallbackCover={IMAGE_COVER.src}
         />
       </li>
@@ -28,7 +32,9 @@ const Template: ComponentStory<typeof CoverUploader> = () => (
         <CoverUploader
           assetType={ASSET_TYPE.profileCover}
           entityType={ENTITY_TYPE.user}
-          onUpload={(assetId) => alert({ assetId })}
+          onUploaded={(assetId) => alert({ assetId })}
+          onUploadStart={() => null}
+          onUploadEnd={() => null}
           fallbackCover={IMAGE_COVER.src}
           cover="https://source.unsplash.com/512x512?cover"
         />
@@ -40,7 +46,9 @@ const Template: ComponentStory<typeof CoverUploader> = () => (
           type="circle"
           assetType={ASSET_TYPE.circleCover}
           entityType={ENTITY_TYPE.circle}
-          onUpload={(assetId) => alert({ assetId })}
+          onUploaded={(assetId) => alert({ assetId })}
+          onUploadStart={() => null}
+          onUploadEnd={() => null}
           fallbackCover={CIRCLE_COVER}
         />
       </li>
@@ -49,18 +57,13 @@ const Template: ComponentStory<typeof CoverUploader> = () => (
           type="circle"
           assetType={ASSET_TYPE.circleCover}
           entityType={ENTITY_TYPE.circle}
-          onUpload={(assetId) => alert({ assetId })}
+          onUploaded={(assetId) => alert({ assetId })}
+          onUploadStart={() => null}
+          onUploadEnd={() => null}
           fallbackCover={CIRCLE_COVER}
           cover="https://source.unsplash.com/512x512?circle-cover"
         />
       </li>
-
-      <style jsx>{`
-        li {
-          margin: 0 -1rem;
-          margin-bottom: var(--spacing-base);
-        }
-      `}</style>
     </ul>
   </MockedProvider>
 )

@@ -27,6 +27,7 @@ import {
   useEditDraftCollection,
   useEditDraftCover,
   useEditDraftPublishISCN,
+  useEditDraftSensitiveByAuthor,
   useEditDraftTags,
   useEditSupportSetting,
 } from '../hooks'
@@ -74,6 +75,8 @@ const SettingsButton = ({
     refetch,
   } = useEditDraftCover(draft)
   const { edit: editTags, saving: tagsSaving } = useEditDraftTags(draft)
+  const { edit: toggleContentSensitive, saving: contentSensitiveSaving } =
+    useEditDraftSensitiveByAuthor(draft)
   const { edit: togglePublishISCN, saving: iscnPublishSaving } =
     useEditDraftPublishISCN(draft)
   const { edit: editAccess, saving: accessSaving } = useEditDraftAccess(
@@ -124,6 +127,9 @@ const SettingsButton = ({
     editSupportSetting: editSupport,
     supportSettingSaving: supportSaving,
     onOpenSupportSetting: () => undefined,
+    contentSensitive: draft.sensitiveByAuthor,
+    toggleContentSensitive,
+    contentSensitiveSaving,
     iscnPublish: draft.iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,

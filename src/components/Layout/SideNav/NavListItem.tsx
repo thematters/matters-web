@@ -1,9 +1,10 @@
 import jump from 'jump.js'
 import { forwardRef } from 'react'
 
-import { Button, ButtonProps, TextIcon } from '~/components'
+import { TEST_ID, Z_INDEX } from '~/common/enums'
+import { Button, ButtonProps, TextIcon, Tooltip } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type NavListItemProps = {
   name: React.ReactNode
@@ -11,7 +12,7 @@ type NavListItemProps = {
   activeIcon: React.ReactNode
   active: boolean
   canScrollTop?: boolean
-  isMdUp?: boolean
+  testId?: TEST_ID
 } & ButtonProps
 
 const NavListItemButton = forwardRef(
@@ -22,31 +23,34 @@ const NavListItemButton = forwardRef(
       activeIcon,
       active,
       onClick,
-      isMdUp,
       canScrollTop,
       ...props
     }: NavListItemProps,
     ref
   ) => {
     return (
-      <Button
-        bgActiveColor="grey-lighter"
-        spacing={isMdUp ? ['xxtight', 'xtight'] : undefined}
-        size={isMdUp ? undefined : ['2rem', '2rem']}
-        ref={ref}
-        {...props}
-        onClick={onClick}
+      <Tooltip
+        content={name}
+        placement="left"
+        delay={[1000, null]}
+        zIndex={Z_INDEX.OVER_STICKY_TABS}
       >
-        <TextIcon
-          icon={active ? activeIcon : icon}
-          size="lg"
-          weight="semibold"
-          spacing="tight"
-          color="black"
+        <Button
+          bgActiveColor="greyLighter"
+          size={['2rem', '2rem']}
+          ref={ref}
+          {...props}
+          onClick={onClick}
         >
-          {isMdUp && name}
-        </TextIcon>
-      </Button>
+          <TextIcon
+            icon={active ? activeIcon : icon}
+            size="lg"
+            weight="semibold"
+            spacing="tight"
+            color="black"
+          />
+        </Button>
+      </Tooltip>
     )
   }
 )
@@ -54,7 +58,7 @@ const NavListItemButton = forwardRef(
 NavListItemButton.displayName = 'NavListItemButton'
 
 const NavListItem = forwardRef((props: NavListItemProps, ref) => {
-  const { active, canScrollTop = true, onClick: baseOnClick } = props
+  const { active, canScrollTop = true, onClick: baseOnClick, testId } = props
   const onClick = (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (baseOnClick) {
       baseOnClick()
@@ -67,10 +71,12 @@ const NavListItem = forwardRef((props: NavListItemProps, ref) => {
   }
 
   return (
-    <li role="menuitem">
+    <li
+      role="menuitem"
+      className={styles.listItem}
+      {...(testId ? { ['data-test-id']: testId } : {})}
+    >
       <NavListItemButton {...props} onClick={onClick} ref={ref} />
-
-      <style jsx>{styles}</style>
     </li>
   )
 })

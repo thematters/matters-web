@@ -23,5 +23,5 @@ Dropdown.args = {
   titleTextSize: 'sm',
   spacing: ['base', 'base'],
   bgColor: 'none',
-  bgActiveColor: 'grey-lighter',
+  bgActiveColor: 'greyLighter',
 }

@@ -1,13 +1,11 @@
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const FollowingFeedHead: React.FC<{ children?: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <section className="head">
+    <section className={styles.head}>
       <h4>{children}</h4>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

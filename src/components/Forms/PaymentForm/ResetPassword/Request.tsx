@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   parseFormSubmitErrors,
@@ -22,6 +23,8 @@ import { ConfirmVerificationCodeMutation } from '~/gql/graphql'
 interface FormProps {
   defaultEmail: string
   submitCallback?: (params: any) => void
+  closeDialog?: () => any
+  back?: () => void
 }
 
 interface FormValues {
@@ -32,14 +35,17 @@ interface FormValues {
 const Request: React.FC<FormProps> = ({
   defaultEmail = '',
   submitCallback,
+  closeDialog,
+  back,
 }) => {
   const [confirmCode] = useMutation<ConfirmVerificationCodeMutation>(
     CONFIRM_CODE,
     undefined,
     { showToast: false }
   )
-  const { lang } = useContext(LanguageContext)
 
+  const intl = useIntl()
+  const { lang } = useContext(LanguageContext)
   const formId = `payment-password-reset-request-form`
 
   const {
@@ -77,12 +83,12 @@ const Request: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        codes.forEach((c) => {
-          if (c.includes('CODE_')) {
-            setFieldError('code', messages[c])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        codes.forEach((code) => {
+          if (code.includes('CODE_')) {
+            setFieldError('code', intl.formatMessage(messages[code]))
           } else {
-            setFieldError('email', messages[c])
+            setFieldError('email', intl.formatMessage(messages[code]))
           }
         })
       }
@@ -93,6 +99,7 @@ const Request: React.FC<FormProps> = ({
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
         label={<Translate id="email" />}
+        hasLabel
         type="email"
         name="email"
         required
@@ -105,10 +112,12 @@ const Request: React.FC<FormProps> = ({
         disabled={!!defaultEmail}
         onBlur={handleBlur}
         onChange={handleChange}
+        spacingBottom="base"
       />
 
       <Form.Input
         label={<Translate id="verificationCode" />}
+        hasLabel
         type="text"
         name="code"
         required
@@ -129,20 +138,47 @@ const Request: React.FC<FormProps> = ({
     </Form>
   )
 
+  const SubmitButton = (
+    <Dialog.TextButton
+      text={<FormattedMessage defaultMessage="Next Step" />}
+      type="submit"
+      form={formId}
+      disabled={isSubmitting}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Header
+        title="resetPaymentPassword"
+        closeDialog={closeDialog}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
+          ) : undefined
+        }
+        rightBtn={SubmitButton}
+      />
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          form={formId}
-          disabled={isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate id="nextStep" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

@@ -1,0 +1,53 @@
+.container {
+  position: relative;
+}
+
+.header {
+  @mixin flex-center-space-between;
+}
+
+.nums {
+  display: inline-flex;
+  flex-shrink: 0;
+
+  & > * {
+    margin-left: var(--spacing-x-tight);
+  }
+}
+
+.content {
+  @mixin flex-start-space-between;
+
+  margin-top: var(--spacing-x-tight);
+}
+
+.cover {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-left: var(--spacing-x-tight);
+
+  & img {
+    @mixin object-fit-cover;
+
+    background-color: var(--color-grey-lighter);
+    border-radius: 0.5rem;
+  }
+}
+
+.articles {
+  & .title {
+    @mixin line-clamp;
+
+    font-size: var(--font-size-sm-s);
+    line-height: 1.5rem;
+    color: var(--color-grey-dark);
+
+    &:hover,
+    &:focus {
+      color: var(--color-black);
+    }
+  }
+}

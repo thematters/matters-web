@@ -2,7 +2,7 @@ import { useApolloClient } from '@apollo/react-hooks'
 import { useEffect, useState } from 'react'
 
 import { getSearchType } from '~/common/utils'
-import { Tabs, Translate, useRoute } from '~/components'
+import { Layout, SegmentedTabs, Translate, useRoute } from '~/components'
 
 import Articles from './Articles'
 import {
@@ -10,7 +10,7 @@ import {
   SEARCH_AGGREGATE_TAGS_PUBLIC,
   SEARCH_AGGREGATE_USERS_PUBLIC,
 } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Tags from './Tags'
 import Users from './Users'
 
@@ -58,33 +58,45 @@ const AggregateResults = () => {
 
   return (
     <>
-      <section className="title">
-        <span className="titleLeft">
+      <section className={styles.title}>
+        <span className={styles.titleLeft}>
           <Translate zh_hans="有关" zh_hant="有關" en="All results for" />
         </span>
         <span>
-          <span className="titleMiddle">&nbsp;{q}</span>
+          <span className={styles.titleMiddle}>&nbsp;{q}</span>
         </span>
-        <span className="titleRight">
+        <span className={styles.titleRight}>
           &nbsp;
           <Translate zh_hans="的搜索結果" zh_hant="的檢索結果" en="" />
         </span>
       </section>
-      <Tabs>
-        <Tabs.Tab selected={isArticle} onClick={() => updateType(Type.ARTICLE)}>
+
+      <SegmentedTabs>
+        <SegmentedTabs.Tab
+          selected={isArticle}
+          onClick={() => updateType(Type.ARTICLE)}
+        >
           <Translate zh_hans="作品" zh_hant="作品" en="Articles" />
-        </Tabs.Tab>
-        <Tabs.Tab selected={isUser} onClick={() => updateType(Type.USER)}>
+        </SegmentedTabs.Tab>
+        <SegmentedTabs.Tab
+          selected={isUser}
+          onClick={() => updateType(Type.USER)}
+        >
           <Translate zh_hans="用户" zh_hant="用戶" en="Users" />
-        </Tabs.Tab>
-        <Tabs.Tab selected={isTag} onClick={() => updateType(Type.TAG)}>
+        </SegmentedTabs.Tab>
+        <SegmentedTabs.Tab
+          selected={isTag}
+          onClick={() => updateType(Type.TAG)}
+        >
           <Translate zh_hans="标签" zh_hant="標籤" en="Tags" />
-        </Tabs.Tab>
-      </Tabs>
-      {isArticle && <Articles />}
-      {isTag && <Tags />}
-      {isUser && <Users />}
-      <style jsx>{styles}</style>
+        </SegmentedTabs.Tab>
+      </SegmentedTabs>
+
+      <Layout.Main.Spacing hasVertical={false}>
+        {isArticle && <Articles />}
+        {isTag && <Tags />}
+        {isUser && <Users />}
+      </Layout.Main.Spacing>
     </>
   )
 }

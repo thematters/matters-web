@@ -10,7 +10,7 @@ import { EditorRecommendedTagsQuery } from '~/gql/graphql'
 import { EDITOR_RECOMMENDED_TAGS } from './gql'
 import RecommendedTags from './RecommendedTags'
 import SelectedTags from './SelectedTags'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type EditorRecommendedTagsUserTagsEdgesNode = Required<
   NonNullable<
@@ -60,7 +60,7 @@ const TagCustomStagingArea = ({
 
   if (loading) {
     return (
-      <section className="customTagArea">
+      <section className={styles.customTagArea}>
         <Spinner />
       </section>
     )
@@ -71,18 +71,16 @@ const TagCustomStagingArea = ({
 
   if (!hasTag && !hasRecommendedTags) {
     return (
-      <section className="customTagArea">
-        <section className="hint">
+      <section className={styles.customTagArea}>
+        <section className={styles.hint}>
           <Translate id={hint} />
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
 
   return (
-    <section className="customTagArea">
+    <section className={styles.customTagArea}>
       {hasTag && (
         <SelectedTags
           tags={tags.map(

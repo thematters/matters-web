@@ -17,8 +17,6 @@ import {
 import CIRCLE_ACCEPTED_INVITES from '~/components/GQL/queries/circleAcceptedInvites'
 import { CircleAcceptedInvitesQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
-
 /**
  * This component is for listing circle accepted invitations.
  *
@@ -89,19 +87,15 @@ const AcceptedInvites = () => {
   }
 
   return (
-    <section className="container">
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List hasBorder={false}>
-          {(edges || []).map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <CircleInvitation invitation={node} />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
-
-      <style jsx>{styles}</style>
-    </section>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List hasBorder={false}>
+        {(edges || []).map(({ node, cursor }, i) => (
+          <List.Item key={cursor}>
+            <CircleInvitation invitation={node} />
+          </List.Item>
+        ))}
+      </List>
+    </InfiniteScroll>
   )
 }
 

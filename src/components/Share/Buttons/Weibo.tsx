@@ -13,34 +13,42 @@ const Weibo = ({
   title: string
   link: string
   circle?: boolean
-}) => (
-  <button
-    type="button"
-    onClick={() => {
-      const cover = dom
-        .$('meta[property="og:image"]')
-        ?.getAttribute('content') as string
-      const shareUrl = `http://service.weibo.com/share/share.php?${new URLSearchParams(
-        {
-          url: link,
-          title,
-          pic: cover,
-        }
-      ).toString()}`
-      return window.open(shareUrl, '分享到微博')
-    }}
-  >
-    {circle && withIcon(IconShareWeiboCircle)({ size: 'xl-m' })}
+}) => {
+  // append utm_source to link
+  const utm_source = 'share_weibo'
+  const url = new URL(link)
+  url.searchParams.append('utm_source', utm_source)
+  link = url.toString()
 
-    {!circle && (
-      <TextIcon icon={withIcon(IconShareWeibo)({})} spacing="base">
-        <FormattedMessage
-          defaultMessage="Weibo"
-          description="src/components/Share/Buttons/Weibo.tsx"
-        />
-      </TextIcon>
-    )}
-  </button>
-)
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        const cover = dom
+          .$('meta[property="og:image"]')
+          ?.getAttribute('content') as string
+        const shareUrl = `http://service.weibo.com/share/share.php?${new URLSearchParams(
+          {
+            url: link,
+            title,
+            pic: cover,
+          }
+        ).toString()}`
+        return window.open(shareUrl, '分享到微博')
+      }}
+    >
+      {circle && withIcon(IconShareWeiboCircle)({ size: 'xlM' })}
+
+      {!circle && (
+        <TextIcon icon={withIcon(IconShareWeibo)({})} spacing="base">
+          <FormattedMessage
+            defaultMessage="Weibo"
+            description="src/components/Share/Buttons/Weibo.tsx"
+          />
+        </TextIcon>
+      )}
+    </button>
+  )
+}
 
 export default Weibo

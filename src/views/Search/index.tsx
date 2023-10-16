@@ -19,8 +19,8 @@ import {
 } from '~/components'
 
 import AggregateResults from './AggregateResults'
-// import EmptySearch from './EmptySearch'
-import styles from './styles.css'
+import styles from './styles.module.css'
+
 const Search = () => {
   const viewer = useContext(ViewerContext)
   const storageKey = STORAGE_KEY_SEARCH_HISTORY + '_' + viewer.id
@@ -65,10 +65,10 @@ const Search = () => {
 
   return (
     <Layout.Main>
-      <Media lessThan="xl">
+      <Media lessThan="lg">
         <Layout.Header
           right={
-            <section className="layoutHeaderRight">
+            <section className={styles.layoutHeaderRight}>
               <SearchBar hasDropdown={false} />
             </section>
           }
@@ -76,16 +76,17 @@ const Search = () => {
       </Media>
 
       <Head title={{ id: 'search' }} />
+
       {isHistory && (
-        <Media lessThan="xl">
+        <Media lessThan="lg">
           <SearchHistory
             data={searchHistory?.slice(0, SEARCH_HISTORY_DISPLAY_LENGTH)}
             removeSearchHistoryItem={removeSearchHistory}
           />
         </Media>
       )}
+
       {isAggregate && <AggregateResults />}
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

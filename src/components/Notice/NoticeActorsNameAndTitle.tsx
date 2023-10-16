@@ -5,7 +5,7 @@ import { numAbbr } from '~/common/utils'
 import { Translate } from '~/components'
 
 import NoticeActorName from './NoticeActorName'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type NoticeActorsNameAndTitleProps = {
   actors: any[]
@@ -33,7 +33,7 @@ const NoticeActorsNameAndTitle = ({
           <Fragment key={index}>
             <NoticeActorName user={actor} />
             {index === 0 && (
-              <span className="notice-actors-name-and-title-info">
+              <span className={styles.noticeActorsNameAndTitleInfo}>
                 &nbsp;
                 <Translate zh_hant="和" zh_hans="和" en="and" />
                 &nbsp;
@@ -42,7 +42,7 @@ const NoticeActorsNameAndTitle = ({
           </Fragment>
         ))}
 
-      <span className="notice-actors-name-and-title-info">
+      <span className={styles.noticeActorsNameAndTitleInfo}>
         {isMoreActors && (
           <>
             <NoticeActorName user={actors[0]} />
@@ -60,16 +60,15 @@ const NoticeActorsNameAndTitle = ({
         {!isMoreActors && <>&nbsp;{action}</>}
       </span>
       {!!title && (
-        <span className="notice-actors-name-and-title-title">
+        <span className={styles.noticeActorsNameAndTitleTitle}>
           &nbsp;{title}
         </span>
       )}
       {!!secondAction && (
-        <span className="notice-actors-name-and-title-info">
+        <span className={styles.noticeActorsNameAndTitleInfo}>
           &nbsp;{secondAction}
         </span>
       )}
-      <style jsx>{styles}</style>
     </>
   )
 }

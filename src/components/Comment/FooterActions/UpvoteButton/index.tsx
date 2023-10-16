@@ -83,7 +83,7 @@ const UpvoteButton = ({
     return (
       <Button
         spacing={['xtight', 'xtight']}
-        bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
+        bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
         onClick={() => {
           onClick ? onClick() : unvote()
         }}
@@ -105,7 +105,7 @@ const UpvoteButton = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
+      bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       onClick={() => {
         onClick ? onClick() : upvote()
       }}

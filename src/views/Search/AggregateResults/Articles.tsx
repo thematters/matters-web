@@ -1,13 +1,15 @@
 import { useEffect } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
   MAX_SEARCH_RESULTS_LENGTH,
 } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptySearch,
+  Head,
   InfiniteScroll,
   List,
   Spinner,
@@ -21,9 +23,7 @@ import {
   SearchAggregateArticlesPublicQuery,
 } from '~/gql/graphql'
 
-import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
-import styles from './styles.css'
 
 const AggregateArticleResults = () => {
   const { getQuery } = useRoute()
@@ -52,6 +52,8 @@ const AggregateArticleResults = () => {
   // pagination
   const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
+
+  const intl = useIntl()
 
   /**
    * Render
@@ -100,14 +102,27 @@ const AggregateArticleResults = () => {
   }
 
   return (
-    <section>
+    <>
+      <Head
+        title={intl.formatMessage(
+          {
+            defaultMessage: '{q} - Matters Search',
+            description: 'src/views/Search/AggregateResults/Articles.tsx',
+          },
+          { q: stripSpaces(q) }
+        )}
+        path={`/search?q=${stripSpaces(q)}&type=article`}
+        noSuffix
+      />
+
       <InfiniteScroll
         hasNextPage={
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
+        eof={<FormattedMessage defaultMessage="End of the results" />}
       >
-        <List responsiveWrapper>
+        <List>
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'Article' && (
@@ -117,8 +132,6 @@ const AggregateArticleResults = () => {
                       node as ArticleDigestFeedArticlePublicFragment &
                         Partial<ArticleDigestFeedArticlePrivateFragment>
                     }
-                    is="link"
-                    isConciseFooter={true}
                     hasCircle={false}
                     hasFollow={false}
                     onClick={() =>
@@ -145,11 +158,7 @@ const AggregateArticleResults = () => {
           )}
         </List>
       </InfiniteScroll>
-      {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
-        <EndOfResults />
-      )}
-      <style jsx>{styles}</style>
-    </section>
+    </>
   )
 }
 

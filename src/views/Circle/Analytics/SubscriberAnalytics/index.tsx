@@ -19,8 +19,7 @@ import { MembersDialog } from '~/views/Circle/Profile/MembersDialog'
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
 import { CIRCLE_SUBSCRIBER_ANALYTICS } from './gql'
-import styles from './styles.css'
-import globalStyles from './styles.global.css'
+import styles from './styles.module.css'
 
 enum DatumKey {
   invitee = 'invitee',
@@ -173,7 +172,7 @@ const Content = () => {
       </InfoTiles>
 
       {chartData && (
-        <section className="chart">
+        <section className={styles.chart}>
           <StackedAreaChart data={chartData}>
             {(props) => (
               <>
@@ -188,15 +187,13 @@ const Content = () => {
           </StackedAreaChart>
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }
 
 const SubscriberAnalytics = () => {
   return (
-    <section className="container">
+    <section className={styles.container}>
       <SectionHead
         icon={IconAnalyticsSubscriber24}
         title={
@@ -209,13 +206,13 @@ const SubscriberAnalytics = () => {
         <MembersDialog>
           {({ openDialog: openMembersDialog }) => (
             <Button
-              borderColor="grey-light"
+              borderColor="greyLight"
               borderWidth="sm"
               spacing={['xxtight', 'xtight']}
               onClick={openMembersDialog}
               aria-haspopup="dialog"
             >
-              <TextIcon color="grey-darker" size="xs">
+              <TextIcon color="greyDarker" size="xs">
                 <FormattedMessage
                   defaultMessage="View Members"
                   description="src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -227,11 +224,6 @@ const SubscriberAnalytics = () => {
       </SectionHead>
 
       <Content />
-
-      <style jsx>{styles}</style>
-      <style jsx global>
-        {globalStyles}
-      </style>
     </section>
   )
 }

@@ -1,0 +1,49 @@
+.container {
+  @mixin flex-center-all;
+  @mixin border-grey;
+
+  position: relative;
+  width: 21.5rem;
+  padding: var(--spacing-x-tight) var(--spacing-base);
+  background: var(--color-white);
+  border-radius: var(--spacing-xx-tight);
+  box-shadow: var(--shadow-dark);
+
+  &.comment {
+    width: 16.5rem;
+  }
+
+  & * + * {
+    margin-left: var(--spacing-tight);
+  }
+
+  & .active {
+    color: var(--color-matters-green);
+  }
+
+  & input {
+    width: 100%;
+    height: 1.5rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-black);
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+
+  & .urlInput {
+    width: 100%;
+    height: 1.5rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-black);
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+
+  & .urlSubmitButton {
+    height: 1.5rem;
+    font-size: var(--font-size-sm-s);
+    color: var(--color-matters-green);
+  }
+}

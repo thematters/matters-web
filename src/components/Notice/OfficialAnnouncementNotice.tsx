@@ -4,7 +4,7 @@ import { TEST_ID } from '~/common/enums'
 import { OfficialAnnouncementNoticeFragment } from '~/gql/graphql'
 
 import NoticeDate from './NoticeDate'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const OfficialAnnouncementNotice = ({
   notice,
@@ -15,10 +15,10 @@ const OfficialAnnouncementNotice = ({
 
   return (
     <section
-      className="container"
+      className={styles.container}
       data-test-id={TEST_ID.NOTICE_OFFICIAL_ANNOUNCEMENT}
     >
-      <section className="content-wrap">
+      <section className={styles.contentWrap}>
         {notice.link ? (
           <a href={notice.link}>
             <Message />
@@ -27,11 +27,9 @@ const OfficialAnnouncementNotice = ({
           <Message />
         )}
       </section>
-      <section className="footer">
+      <section className={styles.footer}>
         <NoticeDate notice={notice} />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

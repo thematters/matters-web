@@ -7,7 +7,7 @@ import { ArticlePublishedNoticeFragment } from '~/gql/graphql'
 import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const ArticlePublishedNotice = ({
   notice,
@@ -16,10 +16,10 @@ const ArticlePublishedNotice = ({
 }) => {
   return (
     <section
-      className="container"
+      className={styles.container}
       data-test-id={TEST_ID.NOTICE_ARTICLE_PUBLISHED}
     >
-      <section className="notice-actors-name-and-title-info">
+      <section className={styles.noticeActorsNameAndTitleInfo}>
         <FormattedMessage
           defaultMessage="Your work {articleTitle} has been published to decentralized network"
           description="src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
@@ -29,11 +29,9 @@ const ArticlePublishedNotice = ({
         />
       </section>
 
-      <section className="footer">
+      <section className={styles.footer}>
         <NoticeDate notice={notice} />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

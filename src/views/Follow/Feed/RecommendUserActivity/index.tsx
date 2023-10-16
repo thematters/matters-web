@@ -1,23 +1,28 @@
+import { useContext } from 'react'
+
 import { analytics } from '~/common/utils'
-import { Slides } from '~/components'
+import { Slides, ViewerContext } from '~/components'
 import { RecommendUserActivityFragment } from '~/gql/graphql'
 
 import FollowingRecommendHead from '../FollowingRecommendHead'
 import FollowingRecommendUser from '../FollowingRecommendUser'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   users: RecommendUserActivityFragment['recommendUsers'] | null
 }
 
 const RecommendUserActivity = ({ users }: Props) => {
+  const viewer = useContext(ViewerContext)
+  users = users?.filter((u) => u.id !== viewer.id)
+
   if (!users || users.length <= 0) {
     return null
   }
 
   return (
-    <section className="container">
+    <section className={styles.container}>
       <Slides header={<FollowingRecommendHead type="user" />}>
         {users.map((user, index) => (
           <Slides.Item
@@ -32,13 +37,12 @@ const RecommendUserActivity = ({ users }: Props) => {
               })
             }}
           >
-            <section className="item">
+            <section className={styles.item}>
               <FollowingRecommendUser user={user} />
             </section>
           </Slides.Item>
         ))}
       </Slides>
-      <style jsx>{styles}</style>
     </section>
   )
 }

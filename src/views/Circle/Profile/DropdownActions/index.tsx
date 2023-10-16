@@ -6,14 +6,13 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { toPath } from '~/common/utils'
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
   IconAnalytics24,
   IconEdit16,
   IconLogout24,
   IconMore32,
   IconSettings32,
   Menu,
-  TextIcon,
   UnsubscribeCircleDialog,
   ViewerContext,
 } from '~/components'
@@ -51,64 +50,57 @@ const BaseDropdownActions = ({
   openUnsubscribeCircleDialog,
 }: BaseDropdownActionsProps) => {
   const intl = useIntl()
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu>
       {isCircleOwner && (
-        <Menu.Item {...toPath({ page: 'circleSettings', circle })} is="link">
-          <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
+        <Menu.Item
+          text={
             <FormattedMessage
               defaultMessage="Manage Circle"
               description="src/views/Circle/Profile/DropdownActions/index.tsx"
             />
-          </TextIcon>
-        </Menu.Item>
+          }
+          icon={<IconEdit16 size="mdS" />}
+          {...toPath({ page: 'circleSettings', circle })}
+          is="link"
+        />
       )}
 
       {isCircleOwner && (
-        <Menu.Item {...toPath({ page: 'circleAnalytics', circle })} is="link">
-          <TextIcon
-            icon={<IconAnalytics24 size="md" />}
-            size="md"
-            spacing="base"
-          >
-            <FormattedMessage defaultMessage="Analytics" description="" />
-          </TextIcon>
-        </Menu.Item>
+        <Menu.Item
+          text={<FormattedMessage defaultMessage="Analytics" />}
+          icon={<IconAnalytics24 size="mdS" />}
+          {...toPath({ page: 'circleAnalytics', circle })}
+          is="link"
+        />
       )}
 
       {hasUnsubscribeCircle && (
-        <Menu.Item onClick={openUnsubscribeCircleDialog} aria-haspopup="dialog">
-          <TextIcon icon={<IconLogout24 size="md" />} size="md" spacing="base">
+        <Menu.Item
+          text={
             <FormattedMessage
               defaultMessage="Unsubscribe Circle"
               description="src/views/Circle/Profile/DropdownActions/index.tsx"
             />
-          </TextIcon>
-        </Menu.Item>
+          }
+          icon={<IconLogout24 size="mdS" />}
+          onClick={openUnsubscribeCircleDialog}
+          aria-haspopup="dialog"
+        />
       )}
     </Menu>
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ openDropdown, ref }) => (
         <Button
-          bgColor="half-black"
+          onClick={openDropdown}
+          bgColor="halfBlack"
           aria-label={intl.formatMessage({
             defaultMessage: 'More Actions',
-            description: '',
           })}
-          aria-haspopup={type}
-          onClick={openDialog}
+          aria-haspopup="listbox"
           ref={ref}
         >
           {isCircleOwner ? (
@@ -118,7 +110,7 @@ const BaseDropdownActions = ({
           )}
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

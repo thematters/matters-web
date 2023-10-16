@@ -1,3 +1,4 @@
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const site_domain_tld =
     process.env.NEXT_PUBLIC_SITE_DOMAIN_TLD || 'matters.town',
   site_domain_tld_old =
@@ -18,6 +19,9 @@ const SCRIPT_SRC = [
   'www.google.com/recaptcha/',
   'www.gstatic.com/recaptcha/',
 
+  // Turnstile
+  'challenges.cloudflare.com',
+
   // Programmable Google Search
   'cse.google.com',
   'www.google.com/cse/',
@@ -37,6 +41,9 @@ const SCRIPT_SRC = [
 
 const STYLE_SRC = [
   "'self'",
+
+  // Next.js Assets
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
 
   // style-jsx
   "'unsafe-inline'",
@@ -64,11 +71,15 @@ const IMG_SRC = [
     site_domain_tld_old
   ),
 
-  // get server hostname, for img-cache redirected url
-  // NEXT_PUBLIC_API_HOSTNAME as string,
-  process.env.NEXT_PUBLIC_API_URL
-    ? new URL(process.env.NEXT_PUBLIC_API_URL).hostname
-    : undefined,
+  // For image validation
+  // @see {@url src/common/utils/form/image.tsx}
+  'blob:',
+  `*.${site_domain_tld}`,
+  isProd ? undefined : 'localhost',
+  isProd ? undefined : '127.0.0.1',
+
+  // Alchemy NFT CDN
+  'nft-cdn.alchemy.com',
 
   // for some old articles were using this s3 urls directly
   'matters-server-production.s3-ap-southeast-1.amazonaws.com',
@@ -87,6 +98,9 @@ const CONNECT_SRC = [
   'ws:',
   'wss:',
 
+  // Next.js Assets
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
+
   // API
   process.env.NEXT_PUBLIC_API_URL,
   process.env.NEXT_PUBLIC_API_URL?.replace(
@@ -98,6 +112,9 @@ const CONNECT_SRC = [
     site_domain_tld,
     site_domain_tld_old
   ),
+
+  // Cloudflare Image Upload
+  'upload.imagedelivery.net',
 
   // Sentry
   '*.ingest.sentry.io',
@@ -122,30 +139,41 @@ const CONNECT_SRC = [
   '*.alchemy.com',
 
   // IPFS Gateways
-  'ipfs.io/ipfs/',
-  'ipfs.infura.io/ipfs/',
-  'dweb.link/ipfs/',
-  'crustwebsites.net/ipfs/',
+  'gateway.ipfs.io/ipfs/',
   'cloudflare-ipfs.com/ipfs/',
-  'ipfs.fleek.co/ipfs/',
   'gateway.pinata.cloud/ipfs/',
-  'meson.network/ipfs/',
-  'ipfs.filebase.io/ipfs/',
+  'ipfs.io/ipfs/',
+  '*.cf-ipfs.com',
+  'cf-ipfs.com/ipfs/',
+  '4everland.io/ipfs/',
+  '*.4everland.io',
+  'storry.tv/ipfs/',
+  '*.storry.tv',
+  'ipfs.runfission.com/ipfs/',
+  'konubinix.eu/ipfs/',
+  'starbase.gw3.io/ipfs/',
+  '*.gw3.io',
 ]
 
 const FRAME_SRC = [
   "'self'",
 
   // Embed
-  'jsfiddle.net',
   'button.like.co',
   'www.youtube.com',
   'player.vimeo.com',
-  'player.youku.com',
+  'player.bilibili.com',
+  'www.bilibili.com',
+  'www.instagram.com',
+  'jsfiddle.net',
+  'codepen.io',
 
   // ReCaptcha
   'www.google.com/recaptcha/',
   'recaptcha.google.com/recaptcha/',
+
+  // Turnstile
+  'challenges.cloudflare.com',
 
   // Stripe
   'js.stripe.com',

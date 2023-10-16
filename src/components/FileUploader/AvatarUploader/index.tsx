@@ -1,15 +1,14 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
+import _omit from 'lodash/omit'
 import { useContext, useState } from 'react'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ADD_TOAST,
   ASSET_TYPE,
   ENTITY_TYPE,
-  UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { translate, validateImage } from '~/common/utils'
 import {
   Avatar,
   AvatarProps,
@@ -18,16 +17,26 @@ import {
   IconCamera24,
   LanguageContext,
   Spinner,
+  toast,
   Translate,
+  useDirectImageUpload,
   useMutation,
 } from '~/components'
-import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { SingleFileUploadMutation } from '~/gql/graphql'
+import {
+  DIRECT_IMAGE_UPLOAD,
+  DIRECT_IMAGE_UPLOAD_DONE,
+} from '~/components/GQL/mutations/uploadFile'
+import {
+  DirectImageUploadDoneMutation,
+  DirectImageUploadMutation,
+} from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type AvatarUploaderProps = {
-  onUpload: (assetId: string) => void
+  onUploaded: (assetId: string) => void
+  onUploadStart: () => void
+  onUploadEnd: () => void
   hasBorder?: boolean
 
   type?: 'circle'
@@ -35,7 +44,9 @@ export type AvatarUploaderProps = {
 } & (Omit<AvatarProps, 'size'> | Omit<CircleAvatarProps, 'size'>)
 
 export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
-  onUpload,
+  onUploaded,
+  onUploadStart,
+  onUploadEnd,
   hasBorder,
 
   type,
@@ -45,11 +56,18 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const [upload, { loading }] = useMutation<SingleFileUploadMutation>(
-    UPLOAD_FILE,
+  const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
+    DIRECT_IMAGE_UPLOAD,
     undefined,
     { showToast: false }
   )
+  const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
+    DIRECT_IMAGE_UPLOAD_DONE,
+    undefined,
+    { showToast: false }
+  )
+  const { upload: uploadImage, uploading } = useDirectImageUpload()
+
   const [avatar, setAvatar] = useState<string | undefined | null>(
     avatarProps.src
   )
@@ -67,60 +85,58 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant="上傳檔案超過 5 MB"
-                zh_hans="上传文件超过 5 MB"
-                en="upload file exceed 5 MB"
-              />
-            ),
-          },
-        })
-      )
+    const isValidImage = await validateImage(file)
+    if (!isValidImage) {
       return
     }
 
     try {
-      const { data } = await upload({
-        variables: {
-          input: {
-            file,
-            type: isCircle ? ASSET_TYPE.circleAvatar : ASSET_TYPE.avatar,
-            entityType: isCircle ? ENTITY_TYPE.circle : ENTITY_TYPE.user,
-            entityId,
-          },
-        },
-      })
-      const id = data?.singleFileUpload.id
-      const path = data?.singleFileUpload.path
+      if (onUploadStart) {
+        onUploadStart()
+      }
 
-      if (id && path) {
+      const variables = {
+        input: {
+          file,
+          type: isCircle ? ASSET_TYPE.circleAvatar : ASSET_TYPE.avatar,
+          entityType: isCircle ? ENTITY_TYPE.circle : ENTITY_TYPE.user,
+          entityId,
+        },
+      }
+      const { data } = await upload({ variables })
+      const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
+
+      if (assetId && path && uploadURL) {
+        await uploadImage({ uploadURL, file })
+
+        // (async) mark asset draft as false
+        directImageUploadDone({
+          variables: {
+            ..._omit(variables.input, ['file']),
+            draft: false,
+            url: path,
+          },
+        }).catch(console.error)
+
         setAvatar(path)
-        onUpload(id)
+        onUploaded(assetId)
       } else {
         throw new Error()
       }
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureUploadImage" />,
-          },
-        })
-      )
+      toast.error({ message: <Translate id="failureUploadImage" /> })
+    }
+
+    if (onUploadEnd) {
+      onUploadEnd()
     }
   }
 
   const isCircle = type === 'circle'
   const labelClasses = classNames({
-    'has-border': hasBorder,
-    circle: isCircle,
+    [styles.label]: true,
+    [styles.hasBorder]: hasBorder,
+    [styles.circle]: isCircle,
   })
 
   return (
@@ -128,8 +144,12 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
       {!isCircle && <Avatar size="xxxl" {...avatarProps} src={avatar} />}
       {isCircle && <CircleAvatar size="xxxl" {...avatarProps} src={avatar} />}
 
-      <div className="mask">
-        {loading ? <Spinner /> : <IconCamera24 color="white" size="lg" />}
+      <div className={styles.mask}>
+        {loading || uploading ? (
+          <Spinner />
+        ) : (
+          <IconCamera24 color="white" size="lg" />
+        )}
       </div>
 
       <VisuallyHidden>
@@ -148,8 +168,6 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
           onChange={handleChange}
         />
       </VisuallyHidden>
-
-      <style jsx>{styles}</style>
     </label>
   )
 }

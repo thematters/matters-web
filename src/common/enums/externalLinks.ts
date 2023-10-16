@@ -4,6 +4,7 @@ export const EXTERNAL_LINKS = {
   FACEBOOK: 'https://www.facebook.com/MattersLab2018',
   WEIBO: 'https://weibo.com/6695370718/profile?topnav=1&wvr=6',
   TELEGRAM: 'https://t.me/joinchat/BXzlWUhXaWNZ-TXJZJCzDQ',
+  LIKECOIN_LEGACY: 'https://like.co/in?legacy=1',
   CIVIC_LIKER_SUPPORT:
     'https://docs.like.co/v/zh/user-guide/civic-liker?utm_source=Matters&utm_medium=website',
   CIVIC_LIKER_JOIN: isProd
@@ -22,42 +23,43 @@ export const EXTERNAL_LINKS = {
   DEVELOPER_RESOURCE: 'https://thematters.github.io/developer-resource/',
   SECURITY_LINK:
     'https://thematters.github.io/developer-resource/SECURITY.html',
+  BUG_REPORT: 'https://feedback.matters.town/bug-reports',
 }
 
 export const GUIDE_LINKS = {
   readerToolbox: {
     zh_hant: `https://matters.town/@hi176/387122`,
-    zh_hans: `https://matters.town/zh-Hans/@hi176/387122`,
-    en: `https://matters.town/en/@hi176/387122`,
+    zh_hans: `https://matters.town/@hi176/387122?locale=zh-Hans`,
+    en: `https://matters.town/@hi176/387122?locale=en`,
   },
   authorToolbox: {
     zh_hant: `https://matters.town/@hi176/387126`,
-    zh_hans: `https://matters.town/zh-Hans/@hi176/387126`,
-    en: `https://matters.town/en/@hi176/387126`,
+    zh_hans: `https://matters.town/@hi176/387126?locale=zh-Hans`,
+    en: `https://matters.town/@hi176/387126?locale=en`,
   },
   connectWallet: {
     zh_hant: `https://matters.town/@hi176/387112`,
-    zh_hans: `https://matters.town/zh-Hans/@hi176/387112`,
-    en: `https://matters.town/en/@hi176/387112`,
+    zh_hans: `https://matters.town/@hi176/387112?locale=zh-Hans`,
+    en: `https://matters.town@hi176/387112?locale=en`,
   },
   payment: {
     zh_hant: `https://matters.town/@hi176/387119`,
-    zh_hans: `https://matters.town/zh-Hans/@hi176/387119`,
-    en: `https://matters.town/en/@hi176/387119`,
+    zh_hans: `https://matters.town/@hi176/387119?locale=zh-Hans`,
+    en: `https://matters.town/@hi176/387119?locale=en`,
   },
   PWA: {
     zh_hant: `https://matters.town/@hi176/387115`,
-    zh_hans: `https://matters.town/zh-Hans/@hi176/387115`,
-    en: `https://matters.town/en/@hi176/387115`,
+    zh_hans: `https://matters.town/@hi176/387115?locale=zh-Hans`,
+    en: `https://matters.town/@hi176/387115?locale=en`,
   },
   RSS: {
     zh_hant: `https://matters.town/@hi176/387116`,
-    zh_hans: `https://matters.town/zh-Hans/@hi176/387116`,
-    en: `https://matters.town/en/@hi176/387116`,
+    zh_hans: `https://matters.town/@hi176/387116?locale=zh-Hans`,
+    en: `https://matters.town/@hi176/387116?locale=en`,
   },
   mobilePayment: {
     zh_hant: `https://matters.town/@hi176/387120`,
-    zh_hans: `https://matters.town/zh_Hans/@hi176/387120`,
-    en: `https://matters.town/en/@hi176/387120`,
+    zh_hans: `https://matters.town/zh_Hans/@hi176/387120?locale=zh-Hans`,
+    en: `https://matters.town/@hi176/387120?locale=en`,
   },
 }

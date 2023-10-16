@@ -1,6 +1,6 @@
 import { ResponsiveImage } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface CoverProps {
   cover?: string | null
@@ -18,16 +18,14 @@ export const Cover: React.FC<React.PropsWithChildren<CoverProps>> = ({
   const isFallback = !cover
 
   return (
-    <div className="cover">
+    <div className={styles.cover}>
       <ResponsiveImage
         url={url}
-        size="1280w"
+        width={1376}
         disabled={isFallback || inEditor}
       />
 
       {children}
-
-      <style jsx>{styles}</style>
     </div>
   )
 }

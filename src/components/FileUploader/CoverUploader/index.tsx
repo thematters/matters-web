@@ -1,29 +1,36 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
+import _omit from 'lodash/omit'
 import { useContext, useState } from 'react'
 
 import {
+  ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES,
   ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ADD_TOAST,
   ASSET_TYPE,
   ENTITY_TYPE,
-  UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { translate, validateImage } from '~/common/utils'
 import {
-  Button,
+  Book,
   Cover,
   CoverProps,
   IconCamera24,
   LanguageContext,
   Spinner,
-  TextIcon,
+  toast,
   Translate,
+  useDirectImageUpload,
   useMutation,
 } from '~/components'
-import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { SingleFileUploadMutation } from '~/gql/graphql'
+import {
+  DIRECT_IMAGE_UPLOAD,
+  DIRECT_IMAGE_UPLOAD_DONE,
+} from '~/components/GQL/mutations/uploadFile'
+import {
+  DirectImageUploadDoneMutation,
+  DirectImageUploadMutation,
+} from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * This shared component is for uploading cover.
@@ -48,10 +55,20 @@ export type CoverUploaderProps = {
     | ASSET_TYPE.profileCover
     | ASSET_TYPE.tagCover
     | ASSET_TYPE.circleCover
+    | ASSET_TYPE.collectionCover
   entityId?: string
-  entityType: ENTITY_TYPE.user | ENTITY_TYPE.tag | ENTITY_TYPE.circle
-  onUpload: (assetId: string | null) => void
-  type?: 'circle'
+  entityType:
+    | ENTITY_TYPE.user
+    | ENTITY_TYPE.tag
+    | ENTITY_TYPE.circle
+    | ENTITY_TYPE.collection
+  onUploaded: (assetId: string | null) => void
+  onUploadStart: () => void
+  onUploadEnd: () => void
+  type?: 'circle' | 'collection'
+
+  bookTitle?: string
+  bookArticleCount?: number
 } & CoverProps
 
 export const CoverUploader = ({
@@ -61,19 +78,32 @@ export const CoverUploader = ({
   entityId,
   entityType,
   inEditor,
-  onUpload,
+  onUploaded,
+  onUploadStart,
+  onUploadEnd,
   type,
+  bookTitle,
+  bookArticleCount,
 }: CoverUploaderProps) => {
   const { lang } = useContext(LanguageContext)
 
   const [cover, setCover] = useState<string | undefined | null>(initCover)
-  const [upload, { loading }] = useMutation<SingleFileUploadMutation>(
-    UPLOAD_FILE,
+  const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
+    DIRECT_IMAGE_UPLOAD,
     undefined,
     { showToast: false }
   )
+  const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
+    DIRECT_IMAGE_UPLOAD_DONE,
+    undefined,
+    { showToast: false }
+  )
+  const { upload: uploadImage, uploading } = useDirectImageUpload()
 
-  const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
+  const acceptTypes =
+    type === 'collection'
+      ? ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES.join(',')
+      : ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'cover-upload-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,85 +116,64 @@ export const CoverUploader = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant="上傳檔案超過 5 MB"
-                zh_hans="上传文件超过 5 MB"
-                en="upload file exceed 5 MB"
-              />
-            ),
-          },
-        })
-      )
+    const isValidImage = await validateImage(file)
+    if (!isValidImage) {
       return
     }
 
     try {
-      const { data } = await upload({
-        variables: {
-          input: { file, type: assetType, entityId, entityType },
-        },
-      })
-      const id = data?.singleFileUpload.id
-      const path = data?.singleFileUpload.path
+      if (onUploadStart) {
+        onUploadStart()
+      }
 
-      if (id && path) {
+      const variables = {
+        input: { file, type: assetType, entityId, entityType },
+      }
+      const { data } = await upload({ variables })
+      const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
+
+      if (assetId && path && uploadURL) {
+        await uploadImage({ uploadURL, file })
+
+        // (async) mark asset draft as false
+        directImageUploadDone({
+          variables: {
+            ..._omit(variables.input, ['file']),
+            draft: false,
+            url: path,
+          },
+        }).catch(console.error)
+
         setCover(path)
-        onUpload(id)
+        onUploaded(assetId)
       } else {
         throw new Error()
       }
     } catch (e) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureUploadImage" />,
-          },
-        })
-      )
+      toast.error({ message: <Translate id="failureUploadImage" /> })
+    }
+
+    if (onUploadEnd) {
+      onUploadEnd()
     }
   }
 
-  const removeCover = () => {
-    setCover(undefined)
-    onUpload(null)
-  }
-
   const Mask = () => (
-    <div className="mask">
-      {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
-
-      {initCover && (
-        <section className="delete">
-          <Button
-            size={[null, '1.25rem']}
-            spacing={[0, 'xtight']}
-            borderColor="white"
-            borderWidth="sm"
-            onClick={removeCover}
-          >
-            <TextIcon color="white" size="xs">
-              <Translate id="delete" />
-            </TextIcon>
-          </Button>
-        </section>
+    <div className={styles.mask}>
+      {loading || uploading ? (
+        <Spinner />
+      ) : (
+        <IconCamera24 color="white" size="xl" />
       )}
-
-      <style jsx>{styles}</style>
     </div>
   )
 
   const isCircle = type === 'circle'
+  const isCollection = type === 'collection'
 
   return (
-    <label htmlFor={fieldId}>
-      {!isCircle && (
+    <label className={styles.label} htmlFor={fieldId}>
+      {!isCircle && !isCollection && (
         <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
           <Mask />
         </Cover>
@@ -173,6 +182,21 @@ export const CoverUploader = ({
         <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
           <Mask />
         </Cover>
+      )}
+      {isCollection && (
+        <section className={styles.collection}>
+          <section className={styles.collectionContent}>
+            {
+              <Book
+                title={bookTitle || ''}
+                cover={cover}
+                articleCount={bookArticleCount}
+                hasMask
+                loading={loading}
+              />
+            }
+          </section>
+        </section>
       )}
 
       <VisuallyHidden>
@@ -186,8 +210,6 @@ export const CoverUploader = ({
           onChange={handleChange}
         />
       </VisuallyHidden>
-
-      <style jsx>{styles}</style>
     </label>
   )
 }

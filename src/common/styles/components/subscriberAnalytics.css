@@ -1,0 +1,15 @@
+.subscriber-tooltip-item {
+  @mixin inline-flex-center-start;
+
+  & .indicator {
+    width: 0.3125rem;
+    height: 0.3125rem;
+    margin-right: 0.25rem;
+    background: currentcolor;
+    border-radius: 50%;
+
+    &.rect {
+      border-radius: 0;
+    }
+  }
+}

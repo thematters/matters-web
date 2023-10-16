@@ -1,0 +1,98 @@
+import Link from 'next/link'
+
+import { TEST_ID } from '~/common/enums'
+import { analytics, toPath } from '~/common/utils'
+import { Book, Media } from '~/components'
+import { PinnedWorksUserFragment } from '~/gql/graphql'
+
+import { fragments } from './gql'
+import styles from './styles.module.css'
+import UnPinButton from './UnPinButton'
+
+type PinBoardProps = {
+  user: PinnedWorksUserFragment
+}
+
+const PinBoard = ({ user }: PinBoardProps) => {
+  if (user.pinnedWorks.length <= 0) {
+    return null
+  }
+
+  return (
+    <section
+      className={styles.pinBoard}
+      data-test-id={TEST_ID.USER_PROFILE_PIN_BOARD}
+    >
+      <ul className={styles.list}>
+        {user.pinnedWorks.map((work, index) => (
+          <li
+            key={work.id}
+            className={styles.listItem}
+            data-test-id={TEST_ID.USER_PROFILE_PIN_BOARD_PINNED_WORK}
+          >
+            <Link
+              legacyBehavior
+              {...toPath(
+                work.__typename === 'Article'
+                  ? {
+                      page: 'articleDetail',
+                      article: work,
+                    }
+                  : {
+                      page: 'collectionDetail',
+                      userName: user.userName!,
+                      collection: work,
+                    }
+              )}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'user_pinned_work',
+                  contentType:
+                    work.__typename === 'Article' ? 'article' : 'collection',
+                  location: index,
+                  id: work.id,
+                })
+              }
+            >
+              <a>
+                <Media lessThan="lg">
+                  <Book
+                    {...work}
+                    articleCount={
+                      work.__typename === 'Collection'
+                        ? work.articles.totalCount || 0
+                        : undefined
+                    }
+                    variant="flat"
+                  />
+                </Media>
+                <Media greaterThanOrEqual="lg">
+                  <Book
+                    {...work}
+                    articleCount={
+                      work.__typename === 'Collection'
+                        ? work.articles.totalCount || 0
+                        : undefined
+                    }
+                  />
+                </Media>
+              </a>
+            </Link>
+
+            <section className={styles.unpinButton}>
+              <UnPinButton
+                id={work.id}
+                userName={user.userName!}
+                type={work.__typename === 'Article' ? 'article' : 'collection'}
+              />
+            </section>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+PinBoard.fragments = fragments
+
+export default PinBoard

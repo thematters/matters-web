@@ -1,13 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
-import {
-  IconMute24,
-  IconUnMute24,
-  Menu,
-  TextIcon,
-  useMutation,
-} from '~/components'
+import { IconMute20, Menu, toast, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {
   BlockUserPrivateFragment,
@@ -37,40 +30,41 @@ const BlockUserButton = ({
   )
   const onUnblock = async () => {
     await unblockUser()
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <FormattedMessage
-              defaultMessage="User unblocked. User can now comment on your articles."
-              description="src/components/BlockUser/Button/index.tsx"
-            />
-          ),
-        },
-      })
-    )
+
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="User unblocked. User can now comment on your articles."
+          description="src/components/BlockUser/Button/index.tsx"
+        />
+      ),
+    })
   }
 
   if (user.isBlocked) {
     return (
-      <Menu.Item onClick={onUnblock}>
-        <TextIcon icon={<IconUnMute24 size="md" />} size="md" spacing="base">
+      <Menu.Item
+        text={
           <FormattedMessage
             defaultMessage="Unblock"
             description="src/components/BlockUser/Button/index.tsx"
           />
-        </TextIcon>
-      </Menu.Item>
+        }
+        icon={<IconMute20 size="mdS" />}
+        onClick={onUnblock}
+      />
     )
   }
 
   return (
-    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconMute24 size="md" />} size="md" spacing="base">
-        <FormattedMessage defaultMessage="Block User" description="" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      onClick={openDialog}
+      ariaHasPopup="dialog"
+      textColor="greyDarker"
+      textActiveColor="black"
+      text={<FormattedMessage defaultMessage="Block User" />}
+      icon={<IconMute20 size="mdS" />}
+    />
   )
 }
 

@@ -1,16 +1,11 @@
 import gql from 'graphql-tag'
 
-import { ADD_TOAST } from '~/common/enums'
+import { IconRemove24, Menu, toast, Translate, useMutation } from '~/components'
 import {
-  IconRemove24,
-  Menu,
-  TextIcon,
-  Translate,
-  useMutation,
-} from '~/components'
+  updateUserFollowerCount,
+  updateViewerFolloweeCount,
+} from '~/components/GQL'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
-import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
-import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 import {
   ToggleFollowUserMutation,
   UnfollowActionButtonUserPrivateFragment,
@@ -59,31 +54,26 @@ const UnfollowUserActionButton = ({ user }: UnfollowUserActionButtonProps) => {
 
   return (
     <Menu.Item
-      onClick={async () => {
-        await unfollow()
-
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <Translate
-                  zh_hant={`已取消追蹤 ${user.displayName}`}
-                  zh_hans={`已取消追踪 ${user.displayName}`}
-                />
-              ),
-            },
-          })
-        )
-      }}
-    >
-      <TextIcon icon={<IconRemove24 size="md" />} size="md" spacing="base">
+      text={
         <Translate
           zh_hant={`取消追蹤 ${user.displayName}`}
           zh_hans={`取消追踪 ${user.displayName}`}
         />
-      </TextIcon>
-    </Menu.Item>
+      }
+      icon={<IconRemove24 size="mdS" />}
+      onClick={async () => {
+        await unfollow()
+
+        toast.success({
+          message: (
+            <Translate
+              zh_hant={`已取消追蹤 ${user.displayName}`}
+              zh_hans={`已取消追踪 ${user.displayName}`}
+            />
+          ),
+        })
+      }}
+    />
   )
 }
 

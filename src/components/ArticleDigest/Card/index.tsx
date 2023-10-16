@@ -13,7 +13,7 @@ import { ArticleDigestCardArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface ArticleDigestCardProps {
   article: ArticleDigestCardArticleFragment
@@ -35,8 +35,8 @@ export const ArticleDigestCard = ({
     ? ''
     : makeSummary(summary, countChars(article.title) > 40 ? 50 : 70)
   const containerClasses = classNames({
-    container: true,
-    'has-cover': !!cover,
+    [styles.container]: true,
+    [styles.hasCover]: !!cover,
   })
   const path = toPath({
     page: 'articleDetail',
@@ -47,8 +47,8 @@ export const ArticleDigestCard = ({
     <Card
       {...path}
       spacing={[0, 0]}
-      borderColor={cover ? undefined : 'grey-lighter'}
-      bgActiveColor={cover ? undefined : 'grey-lighter'}
+      borderColor={cover ? undefined : 'greyLighter'}
+      bgActiveColor={cover ? undefined : 'greyLighter'}
       borderRadius="xtight"
       onClick={onClick}
       testId={TEST_ID.DIGEST_ARTICLE_CARD}
@@ -63,17 +63,17 @@ export const ArticleDigestCard = ({
             : undefined
         }
       >
-        <header>
+        <header className={styles.header}>
           <ArticleDigestTitle
             article={{ ...article, title }}
             is="h3"
-            textSize="md-s"
+            textSize="mdS"
           />
 
-          {!cover && <p className="summary">{cleanedSummary}</p>}
+          {!cover && <p className={styles.summary}>{cleanedSummary}</p>}
         </header>
 
-        <footer>
+        <footer className={styles.footer}>
           <UserDigest.Mini
             user={article.author}
             avatarSize="xs"
@@ -83,8 +83,6 @@ export const ArticleDigestCard = ({
             onClick={onClickAuthor}
           />
         </footer>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

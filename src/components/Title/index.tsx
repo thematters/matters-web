@@ -1,60 +1,46 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
-type TitleType = 'article' | 'feed' | 'sidebar' | 'nav' | 'tag'
+type TitleType = 'article' | 'feed' | 'nav' | 'base'
 
 type TitleIs = 'h1' | 'h2' | 'h3'
 
 type TitleProps = {
   type: TitleType
   is?: TitleIs
-} & React.DetailedHTMLProps<
-  React.HTMLAttributes<HTMLHeadingElement>,
-  HTMLHeadingElement
->
+}
 
 /**
  * Usage:
  *
  * ```tsx
- * <Title type="page">
+ * <Title type="article">
  *   <Translate zh_hant='給Matters朋友們的一封信：向星際啟航' />
  * </Title>
  * ```
  */
 
-export const Title: React.FC<TitleProps> = ({
+export const Title: React.FC<React.PropsWithChildren<TitleProps>> = ({
   type,
   is = 'h1',
 
   children,
-
-  ...props
 }) => {
   const titleClasses = classNames({
-    [type]: true,
-    clickable: !!props.onClick,
+    [styles[type]]: true,
   })
 
   return (
     <>
       {is === 'h1' ? (
-        <h1 className={titleClasses} {...props}>
-          {children}
-        </h1>
+        <h1 className={titleClasses}>{children}</h1>
       ) : is === 'h2' ? (
-        <h2 className={titleClasses} {...props}>
-          {children}
-        </h2>
+        <h2 className={titleClasses}>{children}</h2>
       ) : (
-        <h3 className={titleClasses} {...props}>
-          {children}
-        </h3>
+        <h3 className={titleClasses}>{children}</h3>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }

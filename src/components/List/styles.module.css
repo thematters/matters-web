@@ -1,0 +1,51 @@
+.list {
+  &.hasBorder {
+    & > :global(.list-item) {
+      @mixin border-bottom-grey-light;
+
+      border-bottom-style: dashed;
+    }
+  }
+
+  &.spacingYBase {
+    & > :global(.list-item) {
+      padding-bottom: calc(var(--spacing-base) / 2);
+      margin-bottom: calc(var(--spacing-base) / 2);
+    }
+  }
+
+  &.spacingYLoose {
+    & > :global(.list-item) {
+      padding-bottom: calc(var(--spacing-loose) / 2);
+      margin-bottom: calc(var(--spacing-loose) / 2);
+    }
+  }
+
+  &.spacingYXloose {
+    & > :global(.list-item) {
+      padding-bottom: calc(var(--spacing-x-loose) / 2);
+      margin-bottom: calc(var(--spacing-x-loose) / 2);
+    }
+  }
+
+  &.spacingXBase {
+    & > :global(.list-item) {
+      padding-right: var(--spacing-base);
+      padding-left: var(--spacing-base);
+    }
+  }
+
+  &.spacingXLoose {
+    & > :global(.list-item) {
+      padding-right: var(--spacing-loose);
+      padding-left: var(--spacing-loose);
+    }
+  }
+
+  &.spacingXXloose {
+    & > :global(.list-item) {
+      padding-right: var(--spacing-x-loose);
+      padding-left: var(--spacing-x-loose);
+    }
+  }
+}

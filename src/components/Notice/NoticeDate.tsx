@@ -3,13 +3,11 @@ import gql from 'graphql-tag'
 import { DateTime } from '~/components'
 import { NoticeDateFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const NoticeDate = ({ notice }: { notice: NoticeDateFragment }) => (
-  <section className="date">
+  <section className={styles.date}>
     <DateTime date={notice.createdAt} type="relative" color="grey" />
-
-    <style jsx>{styles}</style>
   </section>
 )
 

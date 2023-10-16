@@ -1,0 +1,13 @@
+.header {
+  padding-bottom: var(--spacing-x-tight);
+
+  &.hasBorder {
+    @mixin border-bottom-grey;
+  }
+}
+
+.title {
+  @mixin flex-center-space-between;
+
+  flex-wrap: wrap;
+}

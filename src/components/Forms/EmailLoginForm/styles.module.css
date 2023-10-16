@@ -1,0 +1,58 @@
+.otherOptions {
+  padding: 0 var(--spacing-tight) var(--spacing-x-tight);
+  margin-top: var(--spacing-base-loose);
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+  color: var(--color-grey);
+  text-align: center;
+
+  & .option {
+    @mixin flex-center-all;
+
+    gap: var(--spacing-xx-tight);
+
+    & a,
+    & button {
+      color: var(--color-matters-green);
+
+      &:hover,
+      &:focus {
+        color: var(--color-matters-green-dark);
+      }
+    }
+  }
+
+  & .hasSendCode {
+    color: var(--color-black);
+  }
+}
+
+.resendButton {
+  display: inline-block;
+  padding-left: var(--spacing-x-tight);
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+  color: var(--color-grey);
+  word-break: keep-all;
+
+  &button {
+    color: var(--color-matters-green);
+
+    &:hover,
+    &:focus {
+      color: var(--color-matters-green-dark);
+    }
+  }
+}
+
+.footer {
+  @mixin flex-center-all;
+
+  margin-top: var(--spacing-base);
+}
+
+.footerBtns {
+  @mixin flex-center-space-between;
+
+  flex: 1;
+}

@@ -7,6 +7,7 @@ import {
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
+  BindEmailHintDialog,
   Button,
   Card,
   CardProps,
@@ -24,7 +25,7 @@ import {
 
 import Footer from './Footer'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type Props = {
   circle: FollowingFeedRecommendCirclePublicFragment &
@@ -33,6 +34,7 @@ type Props = {
 
 const RecommendCircle = ({ circle, ...cardProps }: Props) => {
   const viewer = useContext(ViewerContext)
+  const hasEmail = !!viewer.info.email
 
   const { displayName, description } = circle
   const path = toPath({
@@ -44,63 +46,76 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
 
   return (
-    <Card
-      bgActiveColor="none"
-      borderRadius="xtight"
-      spacing={['base', 'base']}
-      {...path}
-      {...cardProps}
-    >
-      <section className="container">
-        <section className="head">
-          <CircleAvatar circle={circle} size="xxl" />
+    <BindEmailHintDialog>
+      {({ openDialog: openBindEmailHintDialog }) => {
+        return (
+          <Card
+            bgActiveColor="none"
+            borderRadius="xtight"
+            spacing={['base', 'base']}
+            {...path}
+            {...cardProps}
+          >
+            <section className={styles.container}>
+              <section className={styles.head}>
+                <CircleAvatar circle={circle} size="xxl" />
 
-          <section className="wrap">
-            <p className="name">
-              <LinkWrapper textActiveColor="green" {...path}>
-                {displayName}
-              </LinkWrapper>
-            </p>
+                <section className={styles.wrap}>
+                  <p className={styles.name}>
+                    <LinkWrapper textActiveColor="green" {...path}>
+                      {displayName}
+                    </LinkWrapper>
+                  </p>
 
-            <section className="follow">
-              <Button
-                spacing={['xtight', 'tight']}
-                textColor="green"
-                textActiveColor="white"
-                bgActiveColor="green"
-                borderColor="green"
-                onClick={() => {
-                  if (!viewer.isAuthed) {
-                    window.dispatchEvent(
-                      new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-                        detail: { source: UNIVERSAL_AUTH_SOURCE.followCircle },
-                      })
-                    )
-                    return
-                  }
+                  <section className={styles.follow}>
+                    <Button
+                      spacing={['xtight', 'tight']}
+                      textColor="green"
+                      textActiveColor="white"
+                      bgActiveColor="green"
+                      borderColor="green"
+                      onClick={() => {
+                        if (!viewer.isAuthed) {
+                          window.dispatchEvent(
+                            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                              detail: {
+                                source: UNIVERSAL_AUTH_SOURCE.followCircle,
+                              },
+                            })
+                          )
+                          return
+                        }
 
-                  openSubscribeCircleDialog()
-                }}
-              >
-                <TextIcon weight="md" size="xs">
-                  <Translate id="subscriptions" />
-                </TextIcon>
-              </Button>
+                        if (!hasEmail) {
+                          openBindEmailHintDialog()
+                          return
+                        }
+
+                        openSubscribeCircleDialog()
+                      }}
+                    >
+                      <TextIcon weight="md" size="xs">
+                        <Translate id="subscriptions" />
+                      </TextIcon>
+                    </Button>
+                  </section>
+                </section>
+              </section>
+
+              <section className={styles.content}>
+                {description && (
+                  <p className={styles.description}>{description}</p>
+                )}
+
+                <Footer circle={circle} />
+              </section>
+
+              <SubscribeCircleDialog circle={circle} />
             </section>
-          </section>
-        </section>
-
-        <section className="content">
-          {description && <p className="description">{description}</p>}
-
-          <Footer circle={circle} />
-        </section>
-
-        <SubscribeCircleDialog circle={circle} />
-
-        <style jsx>{styles}</style>
-      </section>
-    </Card>
+          </Card>
+        )
+      }}
+    </BindEmailHintDialog>
   )
 }
 

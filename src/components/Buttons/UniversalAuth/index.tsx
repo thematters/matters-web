@@ -6,13 +6,9 @@ import {
   PATHS,
 } from '~/common/enums'
 import { analytics, appendTarget } from '~/common/utils'
-import { Button, ButtonProps, Media, TextIcon, Translate } from '~/components'
+import { Button, Media, TextIcon, Translate } from '~/components'
 
-type UniversalAuthButtonProps = Pick<ButtonProps, 'size'>
-
-export const UniversalAuthButton: React.FC<
-  React.PropsWithChildren<UniversalAuthButtonProps>
-> = ({ children, size }) => {
+export const UniversalAuthButton: React.FC = () => {
   const smUpProps = {
     onClick: () => {
       analytics.trackEvent('click_button', {
@@ -22,8 +18,9 @@ export const UniversalAuthButton: React.FC<
       window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
     },
   }
+
   const smProps = {
-    ...appendTarget(PATHS.SIGNUP, true),
+    ...appendTarget(PATHS.LOGIN, true),
     onClick: () => {
       analytics.trackEvent('click_button', {
         type: 'login/signup',
@@ -46,12 +43,7 @@ export const UniversalAuthButton: React.FC<
       </Media>
 
       <Media greaterThanOrEqual="lg">
-        <Button
-          aria-haspopup="dialog"
-          bgColor="green"
-          size={['7.5rem', '2.5rem']}
-          {...smUpProps}
-        >
+        <Button bgColor="green" spacing={['tight', 'base']} {...smUpProps}>
           <ButtonText />
         </Button>
       </Media>

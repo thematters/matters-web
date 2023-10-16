@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
-  ADD_TOAST,
+  ERROR_CODES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEXT,
   UNIVERSAL_AUTH_SOURCE,
@@ -11,10 +12,11 @@ import { analytics, numAbbr, translate } from '~/common/utils'
 import {
   Button,
   DonationDialog,
+  ERROR_MESSAGES,
   IconDonate24,
   LanguageContext,
   TextIcon,
-  Translate,
+  toast,
   ViewerContext,
 } from '~/components'
 import {
@@ -54,14 +56,11 @@ const DonationButton = ({
   const { lang } = useContext(LanguageContext)
 
   const forbid = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: <Translate id="FORBIDDEN_BY_STATE" />,
-        },
-      })
-    )
+    toast.error({
+      message: (
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+      ),
+    })
   }
 
   const donationCount =
@@ -70,55 +69,53 @@ const DonationButton = ({
       : 0
 
   return (
-    <section className="container">
-      <DonationDialog
-        recipient={article.author}
-        targetId={article.id}
-        article={articleDetail}
-      >
-        {({ openDialog }) => (
-          <Button
-            spacing={['xtight', 'xtight']}
-            bgActiveColor="grey-lighter"
-            aria-label={translate({
-              zh_hant: `${TEXT.zh_hant.donation}（當前 ${donationCount} 次支持）`,
-              zh_hans: `${TEXT.zh_hans.donation}（当前 ${donationCount} 次支持）`,
-              en: `${TEXT.en.donation} (current ${donationCount} supports)`,
-              lang,
-            })}
-            aria-haspopup="dialog"
-            disabled={disabled || article.author.id === viewer.id}
-            onClick={() => {
-              analytics.trackEvent('click_button', { type: 'donate' })
-              if (!viewer.isAuthed) {
-                window.dispatchEvent(
-                  new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-                    detail: { source: UNIVERSAL_AUTH_SOURCE.support },
-                  })
-                )
-                return
-              }
-              if (viewer.isFrozen) {
-                forbid()
-                return
-              }
-              openDialog()
-            }}
+    <DonationDialog
+      recipient={article.author}
+      targetId={article.id}
+      article={articleDetail}
+    >
+      {({ openDialog }) => (
+        <Button
+          spacing={['xtight', 'xtight']}
+          bgActiveColor="greyLighter"
+          aria-label={translate({
+            zh_hant: `${TEXT.zh_hant.donation}（當前 ${donationCount} 次支持）`,
+            zh_hans: `${TEXT.zh_hans.donation}（当前 ${donationCount} 次支持）`,
+            en: `${TEXT.en.donation} (current ${donationCount} supports)`,
+            lang,
+          })}
+          aria-haspopup="dialog"
+          disabled={disabled || article.author.id === viewer.id}
+          onClick={() => {
+            analytics.trackEvent('click_button', { type: 'donate' })
+            if (!viewer.isAuthed) {
+              window.dispatchEvent(
+                new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                  detail: { source: UNIVERSAL_AUTH_SOURCE.support },
+                })
+              )
+              return
+            }
+            if (viewer.isFrozen) {
+              forbid()
+              return
+            }
+            openDialog()
+          }}
+        >
+          <TextIcon
+            icon={<IconDonate24 size="mdS" />}
+            weight="md"
+            spacing="xtight"
+            size="sm"
           >
-            <TextIcon
-              icon={<IconDonate24 size="md-s" />}
-              weight="md"
-              spacing="xtight"
-              size="sm"
-            >
-              {article.donationsToolbar.totalCount > 0
-                ? numAbbr(article.donationsToolbar.totalCount)
-                : undefined}
-            </TextIcon>
-          </Button>
-        )}
-      </DonationDialog>
-    </section>
+            {article.donationsToolbar.totalCount > 0
+              ? numAbbr(article.donationsToolbar.totalCount)
+              : undefined}
+          </TextIcon>
+        </Button>
+      )}
+    </DonationDialog>
   )
 }
 

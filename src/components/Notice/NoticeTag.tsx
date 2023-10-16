@@ -5,7 +5,7 @@ import { LinkWrapper } from '~/components'
 import { Tag } from '~/components/Tag'
 import { NoticeTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const NoticeTag = ({ tag }: { tag: NoticeTagFragment | null }) => {
   if (!tag) {
@@ -21,10 +21,8 @@ const NoticeTag = ({ tag }: { tag: NoticeTagFragment | null }) => {
 
   return (
     <LinkWrapper {...path}>
-      <span className="tag-content">
+      <span className={styles.tagContent}>
         <span>#{tagName}</span>
-
-        <style jsx>{styles}</style>
       </span>
     </LinkWrapper>
   )

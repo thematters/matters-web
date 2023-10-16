@@ -10,7 +10,7 @@ import {
 } from '~/gql/graphql'
 
 import ConfirmTable from '../ConfirmTable'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type HeadProps = {
   circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
@@ -27,12 +27,12 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
   const isInvited = invitation && invitation.state === InvitationState.Pending
 
   return (
-    <section className="head">
-      <section className="product">
+    <section className={styles.head}>
+      <section className={styles.product}>
         <CircleDigest.Rich
           circle={circle}
           borderRadius="xtight"
-          borderColor="line-grey-light"
+          borderColor="lineGreyLight"
           hasFooter={false}
           hasDescription
           hasOwner
@@ -40,30 +40,30 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
         />
       </section>
 
-      <ul className="features">
+      <ul className={styles.features}>
         <li>
           <TextIcon
-            icon={withIcon(IconCircleFeatureReading)({ size: 'md-s' })}
+            icon={withIcon(IconCircleFeatureReading)({ size: 'mdS' })}
             color="gold"
-            size="md-s"
+            size="mdS"
           >
             <Translate zh_hant="無限閱讀" zh_hans="无限阅读" />
           </TextIcon>
         </li>
         <li>
           <TextIcon
-            icon={withIcon(IconCircleFeatureDiscussion)({ size: 'md-s' })}
+            icon={withIcon(IconCircleFeatureDiscussion)({ size: 'mdS' })}
             color="gold"
-            size="md-s"
+            size="mdS"
           >
             <Translate zh_hant="眾聊互動" zh_hans="众聊互动" />
           </TextIcon>
         </li>
         <li>
           <TextIcon
-            icon={withIcon(IconCircleFeatureConnection)({ size: 'md-s' })}
+            icon={withIcon(IconCircleFeatureConnection)({ size: 'mdS' })}
             color="gold"
-            size="md-s"
+            size="mdS"
           >
             <Translate zh_hant="解鎖社群" zh_hans="解锁社群" />
           </TextIcon>
@@ -107,8 +107,6 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
           </>
         )}
       </ConfirmTable>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -1,0 +1,14 @@
+.link {
+  @mixin transition;
+
+  display: flex;
+  align-items: center;
+  transition-property: color;
+}
+
+.textActiveGreen {
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green);
+  }
+}

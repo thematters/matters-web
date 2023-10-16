@@ -15,7 +15,8 @@ import IMAGE_YX from '@/public/static/images/about/team-yx.svg'
 import IMAGE_ZECK from '@/public/static/images/about/team-zeck.svg'
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import layoutStyles from '../layout.module.css'
+import styles from './styles.module.css'
 
 const CREW = [
   {
@@ -149,18 +150,16 @@ const CREW = [
 
 const Team = () => {
   return (
-    <section className="team">
-      <div className="l-container">
-        <div className="l-row">
-          <div className="l-col-full">
-            <h2>
-              <Translate zh_hant="團隊成員" zh_hans="团队成员" en="Our Team" />
-            </h2>
-          </div>
+    <section className={styles.team}>
+      <div className={layoutStyles.container}>
+        <div className={layoutStyles.content}>
+          <h2 className={styles.title}>
+            <Translate zh_hant="團隊成員" zh_hans="团队成员" en="Our Team" />
+          </h2>
 
           {CREW.map(({ group, type, people }, gid) => (
-            <section className={`group ${type}`} key={gid}>
-              <div className="container">
+            <section className={`${styles.group} ${styles[type]}`} key={gid}>
+              <div className={styles.container}>
                 {group && (
                   <h3>
                     <span>{group}</span>
@@ -184,8 +183,6 @@ const Team = () => {
           ))}
         </div>
       </div>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

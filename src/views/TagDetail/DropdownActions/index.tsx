@@ -3,27 +3,27 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
+import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
+  EditTagDialog,
   IconAdd24,
   IconEdit16,
   IconProfile24,
   IconRemove24,
   IconSettings32,
   Menu,
-  TagDialog,
   TagEditorDialog,
   TagLeaveDialog,
-  TextIcon,
+  toast,
   useMutation,
   ViewerContext,
 } from '~/components'
 import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
+import { updateTagArticlesCount } from '~/components/GQL'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
-import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 import { AddArticlesTagsMutation, TagFragmentFragment } from '~/gql/graphql'
 interface DropdownActionsProps {
   // id: string
@@ -35,7 +35,7 @@ interface DropdownActionsProps {
 
 interface DialogProps {
   openTagAddSelectedArticlesDialog: () => void
-  openTagDialog: () => void
+  openEditTagDialog: () => void
   openTagEditorDialog: () => void
   openTagLeaveDialog: () => void
 }
@@ -56,87 +56,79 @@ const BaseDropdownActions = ({
   hasTagLeave,
 
   openTagAddSelectedArticlesDialog,
-  openTagDialog,
+  openEditTagDialog,
   openTagEditorDialog,
   openTagLeaveDialog,
 }: BaseDropdownActionsProps) => {
   const intl = useIntl()
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu>
       {hasEditTag && (
-        <Menu.Item onClick={openTagDialog} ariaHasPopup="dialog">
-          <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
-            <FormattedMessage defaultMessage="Edit" description="" />
-          </TextIcon>
-        </Menu.Item>
+        <Menu.Item
+          text={<FormattedMessage defaultMessage="Edit" />}
+          icon={<IconEdit16 size="mdS" />}
+          onClick={openEditTagDialog}
+          ariaHasPopup="dialog"
+        />
       )}
       {hasAddSelectedArticle && (
         <Menu.Item
-          onClick={openTagAddSelectedArticlesDialog}
-          ariaHasPopup="dialog"
-        >
-          <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
+          text={
             <FormattedMessage
               defaultMessage="Add Articles into Featured"
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
-          </TextIcon>
-        </Menu.Item>
+          }
+          icon={<IconAdd24 size="mdS" />}
+          onClick={openTagAddSelectedArticlesDialog}
+          ariaHasPopup="dialog"
+        />
       )}
       {hasManageCommunity && (
-        <Menu.Item onClick={openTagEditorDialog} ariaHasPopup="dialog">
-          <TextIcon icon={<IconProfile24 size="md" />} size="md" spacing="base">
+        <Menu.Item
+          text={
             <FormattedMessage
               defaultMessage="Manage Community"
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
-          </TextIcon>
-        </Menu.Item>
+          }
+          icon={<IconProfile24 size="mdS" />}
+          onClick={openTagEditorDialog}
+          ariaHasPopup="dialog"
+        />
       )}
       {hasTagLeave && (
-        <Menu.Item onClick={openTagLeaveDialog} ariaHasPopup="dialog">
-          <TextIcon
-            icon={<IconRemove24 size="md" />}
-            color="red"
-            size="md"
-            spacing="base"
-          >
+        <Menu.Item
+          text={
             <FormattedMessage
               defaultMessage="Resign From Maintainer"
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
-          </TextIcon>
-        </Menu.Item>
+          }
+          icon={<IconRemove24 size="mdS" />}
+          onClick={openTagLeaveDialog}
+          ariaHasPopup="dialog"
+        />
       )}
     </Menu>
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => (
+    <Dropdown content={<Content />}>
+      {({ openDropdown, ref }) => (
         <Button
-          bgColor="half-black"
+          onClick={openDropdown}
+          bgColor="halfBlack"
           aria-label={intl.formatMessage({
             defaultMessage: 'More Actions',
-            description: '',
           })}
-          onClick={openDialog}
-          aria-haspopup={type}
+          aria-haspopup="listbox"
           ref={ref}
         >
           <IconSettings32 size="lg" color="white" />
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 
@@ -170,18 +162,12 @@ const DropdownActions = (props: DropdownActionsProps) => {
         },
       })
 
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: intl.formatMessage({
-              defaultMessage: 'Tags added',
-              description: 'src/views/TagDetail/DropdownActions/index.tsx',
-            }),
-            duration: 2000,
-          },
-        })
-      )
+      toast.success({
+        message: intl.formatMessage({
+          defaultMessage: 'Tags added',
+          description: 'src/views/TagDetail/DropdownActions/index.tsx',
+        }),
+      })
 
       window.dispatchEvent(
         new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
@@ -194,19 +180,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
     }
 
   const forbid = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: (
-            <FormattedMessage
-              defaultMessage="You do not have permission to perform this operation"
-              description=""
-            />
-          ),
-        },
-      })
-    )
+    toast.error({
+      message: (
+        <FormattedMessage defaultMessage="You do not have permission to perform this operation" />
+      ),
+    })
     return
   }
 
@@ -222,10 +200,15 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   return (
-    <TagDialog {...props.tag}>
-      {({ openDialog: openTagDialog }) => (
+    <EditTagDialog {...props.tag}>
+      {({ openDialog: openEditTagDialog }) => (
         <SearchSelectDialog
-          title="tagAddSelectedArticle"
+          title={
+            <FormattedMessage
+              defaultMessage="Add Articles into Featured"
+              description="src/views/TagDetail/DropdownActions/index.tsx"
+            />
+          }
           hint="hintEditCollection"
           searchType="Article"
           onSave={addArticlesToTag(true)}
@@ -244,7 +227,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
                           ? forbid
                           : openTagAddSelectedArticlesDialog
                       }
-                      openTagDialog={viewer.isFrozen ? forbid : openTagDialog}
+                      openEditTagDialog={
+                        viewer.isFrozen ? forbid : openEditTagDialog
+                      }
                       openTagLeaveDialog={
                         viewer.isFrozen ? forbid : openTagLeaveDialog
                       }
@@ -259,7 +244,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
           )}
         </SearchSelectDialog>
       )}
-    </TagDialog>
+    </EditTagDialog>
   )
 }
 

@@ -1,0 +1,38 @@
+.nameInput :global(.inputContainer) {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: var(--spacing-base);
+    line-height: var(--input-height);
+    color: var(--color-black);
+    content: 'matters.town/~';
+  }
+
+  & input {
+    padding-left: 8.5rem;
+  }
+}
+
+.coverField {
+  position: relative;
+  margin: calc(var(--spacing-base) * -1) calc(var(--spacing-base) * -1);
+
+  & .hint {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: var(--spacing-loose) var(--spacing-base);
+    font-size: var(--font-size-xs);
+    color: var(--color-grey);
+  }
+
+  @media (--sm-up) {
+    margin: 0;
+  }
+}
+
+.avatarField {
+  margin: var(--spacing-loose) 0;
+}

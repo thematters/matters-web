@@ -1,0 +1,48 @@
+.confirmTable {
+  width: 100%;
+  margin-bottom: var(--spacing-base);
+  font-size: var(--font-size-sm);
+  line-height: 1.5rem;
+  color: var(--color-grey);
+}
+
+.row {
+  @mixin flex-center-space-between;
+
+  & + .row {
+    margin-top: var(--spacing-base);
+  }
+
+  & .col:last-child {
+    text-align: right;
+  }
+
+  &.total {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-black);
+
+    & .col:last-child {
+      font-size: var(--font-size-lg);
+    }
+  }
+
+  &.balance {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+  }
+
+  &.insufficient {
+    color: var(--color-red);
+  }
+
+  &.breaker {
+    margin: var(--spacing-base) 0;
+    border-bottom: 0.5px solid rgb(0 0 0 / 15%);
+  }
+}
+
+.col {
+  &.insufficient {
+    color: var(--color-red);
+  }
+}

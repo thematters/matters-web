@@ -4,18 +4,17 @@ import Link from 'next/link'
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { Card, CardProps, Translate } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
-import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 import {
   UserDigestRichUserPrivateFragment,
   UserDigestRichUserPublicFragment,
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * UeserDigest.Rich is a component for presenting user's avatar, display
@@ -31,13 +30,11 @@ export type UserDigestRichProps = {
 
   size?: 'sm' | 'lg'
   avatarBadge?: React.ReactNode
-  descriptionReplacement?: React.ReactNode
+  subtitle?: React.ReactNode
   extraButton?: React.ReactNode
 
   hasFollow?: boolean
   hasState?: boolean
-  hasUnblock?: boolean
-  hasDescriptionReplacement?: boolean
   canClamp?: boolean
 } & CardProps &
   AvatarProps
@@ -47,13 +44,11 @@ const Rich = ({
 
   size = 'lg',
   avatarBadge,
-  descriptionReplacement,
+  subtitle,
   extraButton,
 
   hasFollow = true,
   hasState = true,
-  hasUnblock,
-  hasDescriptionReplacement = false,
   canClamp = false,
 
   ...cardProps
@@ -64,14 +59,15 @@ const Rich = ({
   })
   const isArchived = user?.status?.state === 'archived'
   const containerClasses = classNames({
-    container: true,
-    [`size-${size}`]: !!size,
-    disabled: isArchived,
+    [styles.container]: true,
+    [styles[`size${capitalizeFirstLetter(size)}`]]: !!size,
+    [styles.disabled]: isArchived,
   })
 
   const contentClasses = classNames({
-    content: true,
-    'has-extra-button': hasUnblock || hasFollow || !!extraButton,
+    [styles.content]: true,
+    [styles.hasExtraButton]: hasFollow || !!extraButton,
+    [styles.archived]: isArchived,
   })
 
   if (isArchived) {
@@ -83,24 +79,22 @@ const Rich = ({
         testId={TEST_ID.DIGEST_USER_RICH}
       >
         <section className={containerClasses}>
-          <span className="avatar">
+          <span className={styles.avatar}>
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
           </span>
 
           <section className={contentClasses}>
-            <header className="header">
-              <span className="name">
+            <header className={styles.header}>
+              <span className={styles.name}>
                 <Translate id="accountArchived" />
               </span>
             </header>
           </section>
 
-          <section className="extra-button">
-            {hasUnblock && <UnblockUserButton user={user} />}
+          <section className={styles.extraButton}>
             {hasFollow && <FollowUserButton user={user} />}
+            {extraButton}
           </section>
-
-          <style jsx>{styles}</style>
         </section>
       </Card>
     )
@@ -116,20 +110,20 @@ const Rich = ({
     >
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
-          <a className="avatar">
+          <a className={styles.avatar}>
             <VisuallyHidden>
               <span>{user.displayName}</span>
             </VisuallyHidden>
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} user={user} />
-            {avatarBadge && <span className="badge">{avatarBadge}</span>}
+            {avatarBadge && <span className={styles.badge}>{avatarBadge}</span>}
           </a>
         </Link>
 
         <section className={contentClasses}>
-          <header className="header">
+          <header className={styles.header}>
             <Link {...path} legacyBehavior>
               <a
-                className="name"
+                className={styles.name}
                 data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
               >
                 {user.displayName}
@@ -138,21 +132,16 @@ const Rich = ({
             {hasState && <FollowUserButton.State user={user} />}
           </header>
 
-          {!hasDescriptionReplacement && user.info.description && (
-            <p className="description">{user.info.description}</p>
+          {!subtitle && user.info.description && (
+            <p className={styles.subtitle}>{user.info.description}</p>
           )}
-          {descriptionReplacement && (
-            <p className="description">{descriptionReplacement}</p>
-          )}
+          {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         </section>
 
-        <section className="extra-button">
-          {hasUnblock && <UnblockUserButton user={user} />}
+        <section className={styles.extraButton}>
           {hasFollow && <FollowUserButton user={user} />}
           {extraButton}
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )
@@ -167,14 +156,17 @@ type MemoizedRichType = React.MemoExoticComponent<
   fragments: typeof fragments
 }
 
-const MemoizedRich = React.memo(Rich, ({ user: prevUser }, { user }) => {
-  return (
-    prevUser.id === user.id &&
-    prevUser.isFollowee === user.isFollowee &&
-    prevUser.isFollower === user.isFollower &&
-    prevUser.isBlocked === user.isBlocked
-  )
-}) as MemoizedRichType
+const MemoizedRich = React.memo(
+  Rich,
+  ({ user: prevUser, ...prevProps }, { user, ...props }) => {
+    return (
+      prevUser.id === user.id &&
+      prevUser.isFollowee === user.isFollowee &&
+      prevUser.isFollower === user.isFollower &&
+      prevProps.extraButton === props.extraButton
+    )
+  }
+) as MemoizedRichType
 
 MemoizedRich.fragments = fragments
 

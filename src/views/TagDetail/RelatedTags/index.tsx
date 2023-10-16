@@ -21,7 +21,7 @@ import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { LastFetchRandomQuery, TagDetailRecommendedQuery } from '~/gql/graphql'
 
 import { RELATED_TAGS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface RelatedTagsProps {
   tagId: string
@@ -46,13 +46,12 @@ const RelatedTagsHeader = ({
         />
       }
       is="h2"
-      hasNoBorder
+      hasBorder={false}
     >
-      <section className="right">
+      <section className={styles.right}>
         {hasShuffle && <ShuffleButton onClick={onShuffle} />}
         {hasViewAll && <ViewAllButton href={PATHS.TAGS} />}
       </section>
-      <style jsx>{styles}</style>
     </PageHeader>
   )
 }
@@ -98,8 +97,8 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   }
 
   const relatedTagsClasses = classNames({
-    relatedTags: true,
-    inSidebar,
+    [styles.relatedTags]: true,
+    [styles.inSidebar]: inSidebar,
   })
 
   if (!inSidebar) {
@@ -126,7 +125,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
           ))}
         </Slides>
 
-        <section className="backToAll">
+        <section className={styles.backToAll}>
           <ViewMoreCard
             spacing={['tight', 'tight']}
             href={PATHS.TAGS}
@@ -134,10 +133,9 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
             textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
             textAlign="center"
           >
-            <FormattedMessage defaultMessage="Back to All" description="" />
+            <FormattedMessage defaultMessage="Back to All" />
           </ViewMoreCard>
         </section>
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -155,8 +153,6 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
           </List.Item>
         ))}
       </List>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

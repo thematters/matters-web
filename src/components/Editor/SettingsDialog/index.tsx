@@ -91,6 +91,10 @@ const BaseEditorSettingsDialog = ({
   editSupportSetting,
   supportSettingSaving,
 
+  contentSensitive,
+  toggleContentSensitive,
+  contentSensitiveSaving,
+
   iscnPublish,
   togglePublishISCN,
   iscnPublishSaving,
@@ -144,6 +148,9 @@ const BaseEditorSettingsDialog = ({
     accessType,
     license,
     canToggleCircle,
+    contentSensitive,
+    toggleContentSensitive,
+    contentSensitiveSaving,
     iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,
@@ -166,7 +173,7 @@ const BaseEditorSettingsDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} hidePaddingBottom>
+      <Dialog isOpen={show} onDismiss={closeDialog} hidePaddingBottom>
         {isList && (
           <SettingsList
             saving={saving}
@@ -185,27 +192,30 @@ const BaseEditorSettingsDialog = ({
         )}
 
         {isCover && (
-          <DynamicSetCover onBack={() => forward('list')} {...coverProps} />
+          <DynamicSetCover
+            {...coverProps}
+            back={() => forward('list')}
+            closeDialog={closeDialog}
+            submitCallback={() => forward('list')}
+          />
         )}
 
         {isCollection && (
           <DynamicEditorSearchSelectForm
             title="collectArticle"
             hint="hintEditCollection"
-            headerLeftButton={
-              <Dialog.Header.BackButton onClick={() => forward('list')} />
-            }
             searchType="Article"
             searchExclude={SearchExclude.Blocked}
             onSave={async (nodes: SearchSelectNode[]) => {
               await editCollection(
                 nodes as ArticleDigestDropdownArticleFragment[]
               )
-              forward('list')
             }}
             nodes={collection}
             saving={collectionSaving}
+            back={() => forward('list')}
             closeDialog={closeDialog}
+            submitCallback={() => forward('list')}
             CustomStagingArea={ArticleCustomStagingArea}
           />
         )}
@@ -214,9 +224,6 @@ const BaseEditorSettingsDialog = ({
           <DynamicEditorSearchSelectForm
             title="addTag"
             hint="hintAddTag"
-            headerLeftButton={
-              <Dialog.Header.BackButton onClick={() => forward('list')} />
-            }
             searchType="Tag"
             onSave={async (nodes: SearchSelectNode[]) => {
               await editTags(nodes as DigestTagFragment[])
@@ -225,19 +232,22 @@ const BaseEditorSettingsDialog = ({
             nodes={tags}
             saving={tagsSaving}
             createTag
+            back={() => forward('list')}
             closeDialog={closeDialog}
+            submitCallback={() => forward('list')}
             CustomStagingArea={TagCustomStagingArea}
           />
         )}
 
         {isSupportSetting && (
           <DynamicSetSupportFeedback
-            onBack={() => forward('list')}
+            back={() => forward('list')}
+            submitCallback={() => forward('list')}
+            closeDialog={closeDialog}
             article={article}
             draft={draft}
             editSupportSetting={editSupportSetting}
             supportSettingSaving={supportSettingSaving}
-            closeDialog={closeDialog}
           />
         )}
 

@@ -1,10 +1,20 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
-import { Dialog, Translate, useMutation, useRoute } from '~/components'
+import {
+  Dialog,
+  Translate,
+  useMutation,
+  useRoute,
+  ViewerContext,
+} from '~/components'
 import { PublishArticleMutation } from '~/gql/graphql'
+import { VIEWER_ARTICLES } from '~/views/User/Articles/gql'
+import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface ConfirmPublishDialogContentProps {
   onBack: () => void
@@ -23,9 +33,21 @@ const PUBLISH_ARTICLE = gql`
 const ConfirmPublishDialogContent: React.FC<
   ConfirmPublishDialogContentProps
 > = ({ onBack, closeDialog }) => {
+  const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const id = getQuery('draftId')
-  const [publish] = useMutation<PublishArticleMutation>(PUBLISH_ARTICLE)
+  const [publish] = useMutation<PublishArticleMutation>(PUBLISH_ARTICLE, {
+    refetchQueries: [
+      {
+        query: USER_PROFILE_PUBLIC,
+        variables: { userName: viewer.userName },
+      },
+      {
+        query: VIEWER_ARTICLES,
+        variables: { userName: viewer.userName },
+      },
+    ],
+  })
 
   const onPublish = async () => {
     publish({ variables: { id } })
@@ -33,24 +55,26 @@ const ConfirmPublishDialogContent: React.FC<
   }
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
-      text={<Translate id="publish" />}
-      onClick={onPublish}
-    />
+    <Dialog.TextButton text={<Translate id="publish" />} onClick={onPublish} />
   )
 
   return (
     <>
       <Dialog.Header
         title={<Translate zh_hant="發布須知" zh_hans="發布须知" en="Notice" />}
-        leftButton={<Dialog.Header.BackButton onClick={onBack} />}
-        rightButton={SubmitButton}
+        leftBtn={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Back" />}
+            onClick={onBack}
+          />
+        }
+        rightBtn={SubmitButton}
       />
 
-      <Dialog.Message align="left" type="info">
-        <section className="image-container">
+      <Dialog.Message align="left" smUpAlign="left">
+        <section className={styles.imageContainer}>
           <div
-            className="image"
+            className={styles.image}
             style={{ backgroundImage: `url(${PUBLISH_IMAGE})` }}
           />
         </section>
@@ -86,15 +110,26 @@ const ConfirmPublishDialogContent: React.FC<
           </li>
           <li>
             <Translate
-              zh_hant="首次發布作品後有四次正文修訂機會，你也可以隱藏原文重新發布作品。"
-              zh_hans="首次发布作品后有四次正文修订机会，你也可以隐藏原文重新发布作品。"
+              zh_hant="首次發布作品後有四次正文修訂機會，你也可以歸檔原文重新發布作品。"
+              zh_hans="首次发布作品后有四次正文修订机会，你也可以封存原文重新发布作品。"
               en="You can edit the article four times after publishing it. You can also archive the original and republish.."
             />
           </li>
         </ul>
       </Dialog.Message>
 
-      <style jsx>{styles}</style>
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={onBack}
+            />
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

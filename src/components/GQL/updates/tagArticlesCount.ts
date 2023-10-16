@@ -1,11 +1,10 @@
 import { DataProxy } from 'apollo-cache'
 import _cloneDeep from 'lodash/cloneDeep'
 
-import { ERROR_CODES } from '~/common/enums'
 import TAG_ARTICLES_COUNT from '~/components/GQL/queries/tagArticlesCount'
 import { TagArticlesCountQuery } from '~/gql/graphql'
 
-const update = ({
+export const updateTagArticlesCount = ({
   cache,
   id,
   count = 1,
@@ -44,12 +43,6 @@ const update = ({
       data,
     })
   } catch (e) {
-    if ((e as any).message.startsWith("Can't find field")) {
-      console.warn(ERROR_CODES.QUERY_FIELD_NOT_FOUND)
-    } else {
-      console.error(e)
-    }
+    console.error(e)
   }
 }
-
-export default update

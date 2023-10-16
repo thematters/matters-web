@@ -6,7 +6,7 @@ import { clampTag, toPath } from '~/common/utils'
 import { IconClose16, IconProps, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface TagProps {
   tag: DigestTagFragment
@@ -44,7 +44,7 @@ export const toDigestTagPlaceholder = (content: string) =>
     },
     numArticles: 0,
     numAuthors: 0,
-  } as DigestTagFragment)
+  }) as DigestTagFragment
 
 export const Tag = ({
   tag,
@@ -60,11 +60,11 @@ export const Tag = ({
   onClick,
 }: TagProps) => {
   const tagClasses = classNames({
-    tag: true,
-    [type]: type,
-    active,
-    clickable: !!onClick,
-    disabled: !!disabled && !onClick,
+    [styles.tag]: true,
+    [styles[type]]: type,
+    [styles.active]: active,
+    [styles.clickable]: !!onClick,
+    [styles.disabled]: !!disabled && !onClick,
   })
 
   const tagName = canClamp ? clampTag(tag.content) : tag.content
@@ -107,17 +107,17 @@ export const Tag = ({
         color: active ? 'green' : 'grey',
       }
       textIconProps = {
-        size: 'sm-s',
+        size: 'smS',
         weight: 'normal',
         spacing: 'xxtight',
-        color: active ? 'white' : 'grey-darker',
+        color: active ? 'white' : 'greyDarker',
       }
       break
     case 'plain':
       textIconProps = {
-        size: 'sm-s',
+        size: 'xs',
         weight: 'normal',
-        spacing: 'xxxtight',
+        spacing: 0,
         color: 'green',
       }
       break
@@ -136,12 +136,12 @@ export const Tag = ({
   const Inner = () => (
     <>
       <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
-        <span className="name">#&nbsp;{tagName}</span>
+        <span className={styles.name}>#&nbsp;{tagName}</span>
       </TextIcon>
 
       {hasClose && (
         <button
-          className="close"
+          className={styles.close}
           onClick={() => {
             removeTag?.(tag)
           }}
@@ -151,10 +151,8 @@ export const Tag = ({
       )}
 
       {hasCount && type === 'list' && tag?.numArticles ? (
-        <span className="count">{tag.numArticles}</span>
+        <span className={styles.count}>{tag.numArticles}</span>
       ) : null}
-
-      <style jsx>{styles}</style>
     </>
   )
 
@@ -162,7 +160,6 @@ export const Tag = ({
     return (
       <span className={tagClasses} onClick={onClick}>
         <Inner />
-        <style jsx>{styles}</style>
       </span>
     )
   }
@@ -171,7 +168,6 @@ export const Tag = ({
     <Link {...path} legacyBehavior>
       <a className={tagClasses} onClick={onClick}>
         <Inner />
-        <style jsx>{styles}</style>
       </a>
     </Link>
   )

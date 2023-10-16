@@ -4,7 +4,7 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { Button, IconInfo24, TextIcon, Translate } from '~/components'
 
 import CurrencyIndicator from './CurrencyIndicator'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import WhyPolygonDialog from './WhyPolygonDialog'
 
 type SetAmountHeaderProps = {
@@ -29,7 +29,7 @@ const SetAmountHeader: React.FC<SetAmountHeaderProps> = ({
   const isUSDT = currency === CURRENCY.USDT
 
   return (
-    <section className="set-amount-header">
+    <section className={styles.setAmountHeader}>
       <CurrencyIndicator
         currency={currency}
         switchToCurrencyChoice={switchToCurrencyChoice}
@@ -38,7 +38,7 @@ const SetAmountHeader: React.FC<SetAmountHeaderProps> = ({
       <section>
         {isUSDT && !isConnectedAddress && (
           <Button onClick={() => disconnect()}>
-            <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+            <TextIcon size="xs" textDecoration="underline" color="greyDark">
               <Translate
                 zh_hant="切換錢包地址"
                 zh_hans="切换钱包地址"
@@ -55,7 +55,7 @@ const SetAmountHeader: React.FC<SetAmountHeaderProps> = ({
                   <TextIcon
                     size="xs"
                     textDecoration="underline"
-                    color="grey-dark"
+                    color="greyDark"
                   >
                     <Translate
                       zh_hant="切換到 "
@@ -82,8 +82,6 @@ const SetAmountHeader: React.FC<SetAmountHeaderProps> = ({
           </>
         )}
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

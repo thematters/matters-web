@@ -40,15 +40,10 @@ const CivicLikerDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
-        <Dialog.Header
-          title="joinCivicLiker"
-          closeDialog={closeDialog}
-          closeTextId="close"
-          mode="inner"
-        />
+      <Dialog isOpen={show} onDismiss={closeDialog}>
+        <Dialog.Header title="joinCivicLiker" />
 
-        <Dialog.Message align="left" type="info">
+        <Dialog.Message align="left" smUpAlign="left">
           <p>
             <Translate
               zh_hant="讚賞公民是一群願意持續回饋創作的網絡公民。成為讚賞公民可享以下福利："
@@ -111,32 +106,45 @@ const CivicLikerDialog = ({
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            htmlHref={
-              user.liker.likerId
-                ? EXTERNAL_LINKS.CIVIC_LIKER(user.liker.likerId)
-                : EXTERNAL_LINKS.CIVIC_LIKER_JOIN
-            }
-            htmlTarget="_blank"
-            rel="noopener"
-            onClick={closeDialog}
-          >
-            <Translate
-              zh_hant="立即登記"
-              zh_hans="立即登记"
-              en="Register now"
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <Translate
+                  zh_hant="立即登記"
+                  zh_hans="立即登记"
+                  en="Register now"
+                />
+              }
+              htmlHref={
+                user.liker.likerId
+                  ? EXTERNAL_LINKS.CIVIC_LIKER(user.liker.likerId)
+                  : EXTERNAL_LINKS.CIVIC_LIKER_JOIN
+              }
+              htmlTarget="_blank"
+              rel="noopener"
             />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="understood" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={
+                <Translate
+                  zh_hant="立即登記"
+                  zh_hans="立即登记"
+                  en="Register now"
+                />
+              }
+              htmlHref={
+                user.liker.likerId
+                  ? EXTERNAL_LINKS.CIVIC_LIKER(user.liker.likerId)
+                  : EXTERNAL_LINKS.CIVIC_LIKER_JOIN
+              }
+              htmlTarget="_blank"
+              rel="noopener"
+            />
+          }
+        />
       </Dialog>
     </>
   )

@@ -12,8 +12,8 @@ import {
 } from '~/components'
 
 import * as clap from './clap'
-import clapStyles from './styles.clap.css'
-import styles from './styles.css'
+import clapStyles from './clap.module.css'
+import styles from './styles.module.css'
 
 interface AppreciateButtonProps {
   disabled?: boolean
@@ -36,16 +36,16 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
 
   const iconRef = useRef<HTMLButtonElement>(null)
   const buttonClasses = classNames({
-    'appreciate-button': true,
-    isSuperLike,
-    superLiked,
+    [styles.appreciateButton]: true,
+    [styles.isSuperLike]: isSuperLike,
+    [styles.superLiked]: superLiked,
   })
 
   return (
     <span className={buttonClasses}>
       <Button
         spacing={['xtight', 'xtight']}
-        bgActiveColor="grey-lighter"
+        bgActiveColor="greyLighter"
         aria-label={translate({
           zh_hant: `讚賞作品（當前 ${total} 次讚賞）`,
           zh_hans: `赞赏作品（当前 ${total} 次赞赏）`,
@@ -69,7 +69,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
           size="sm"
           icon={
             <span
-              className="icon clap"
+              className={`${styles.icon} ${clapStyles.clap}`}
               ref={iconRef}
               onTransitionEnd={(e) => {
                 if (e.propertyName === 'transform' && iconRef.current) {
@@ -77,8 +77,17 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
                 }
               }}
             >
-              <IconClap16 className="icon-like" size="md-s" />
-              <IconSuperLike className="icon-superlike" size="md-s" />
+              <IconClap16
+                className={[styles.iconLike, clapStyles.iconLike].join(' ')}
+                size="mdS"
+              />
+              <IconSuperLike
+                className={[
+                  styles.iconSuperlike,
+                  clapStyles.iconSuperlike,
+                ].join(' ')}
+                size="mdS"
+              />
             </span>
           }
         >
@@ -87,11 +96,6 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
           </span>
         </TextIcon>
       </Button>
-
-      <style jsx>{styles}</style>
-      <style jsx global>
-        {clapStyles}
-      </style>
     </span>
   )
 }

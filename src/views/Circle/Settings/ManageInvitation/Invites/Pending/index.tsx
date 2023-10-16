@@ -19,8 +19,6 @@ import {
 import CIRCLE_PENDING_INVITES from '~/components/GQL/queries/circlePendingInvites'
 import { CirclePendingInvitesQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
-
 /**
  * This component is for listing circle pending invitations.
  *
@@ -93,19 +91,15 @@ const PendingInvites = () => {
   }
 
   return (
-    <section className="container">
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List hasBorder={false}>
-          {(edges || []).map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <CircleInvitation invitation={node} />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
-
-      <style jsx>{styles}</style>
-    </section>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List hasBorder={false}>
+        {(edges || []).map(({ node, cursor }, i) => (
+          <List.Item key={cursor}>
+            <CircleInvitation invitation={node} />
+          </List.Item>
+        ))}
+      </List>
+    </InfiniteScroll>
   )
 }
 

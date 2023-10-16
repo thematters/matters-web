@@ -1,62 +1,64 @@
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Tabs, usePublicQuery, useRoute } from '~/components'
-import { UserTabsPublicQuery } from '~/gql/graphql'
+import { Tabs, useRoute, ViewerContext } from '~/components'
+import { TabsUserFragment } from '~/gql/graphql'
 
-import { USER_TAGS_PUBLIC } from '../Tags/gql'
+import { fragments } from './gql'
 
-const UserTabs = () => {
+const UserTabs = ({
+  user,
+  loading,
+}: {
+  user?: TabsUserFragment
+  loading?: boolean
+}) => {
   const { isInPath, getQuery } = useRoute()
   const userName = getQuery('name')
+  const viewer = useContext(ViewerContext)
 
-  const { data } = usePublicQuery<UserTabsPublicQuery>(USER_TAGS_PUBLIC, {
-    variables: { userName },
-  })
-
-  const hasSubscriptions = (data?.user?.subscribedCircles.totalCount || 0) > 0
-
-  const userSubscriptonsPath = toPath({
-    page: 'userSubscriptons',
-    userName,
-  })
   const userArticlesPath = toPath({
     page: 'userProfile',
     userName,
   })
-  const userCommentsPath = toPath({
-    page: 'userComments',
+
+  const userCollectionsPath = toPath({
+    page: 'userCollections',
     userName,
   })
-  const userTagsPath = toPath({
-    page: 'userTags',
-    userName,
-  })
+
+  const articleCount = user?.status?.articleCount || 0
+  const collectionCount = user?.userCollections.totalCount || 0
+
+  const isAuthor = viewer.userName === userName
+  const showCollectionTab =
+    loading ||
+    (isAuthor ? articleCount > 0 || collectionCount > 0 : collectionCount > 0)
 
   return (
-    <Tabs sticky>
-      {hasSubscriptions && (
+    <Tabs>
+      <Tabs.Tab
+        {...userArticlesPath}
+        selected={isInPath('USER_ARTICLES')}
+        count={articleCount > 0 ? articleCount : undefined}
+      >
+        <FormattedMessage defaultMessage="Articles" />
+      </Tabs.Tab>
+
+      {showCollectionTab && (
         <Tabs.Tab
-          {...userSubscriptonsPath}
-          selected={isInPath('USER_SUBSCRIPTIONS')}
+          {...userCollectionsPath}
+          selected={isInPath('USER_COLLECTIONS')}
+          count={collectionCount > 0 ? collectionCount : undefined}
         >
-          <FormattedMessage defaultMessage="Subscriptions" description="" />
+          <FormattedMessage defaultMessage="Collections" />
         </Tabs.Tab>
       )}
-
-      <Tabs.Tab {...userArticlesPath} selected={isInPath('USER_ARTICLES')}>
-        <FormattedMessage defaultMessage="Articles" description="" />
-      </Tabs.Tab>
-
-      <Tabs.Tab {...userCommentsPath} selected={isInPath('USER_COMMENTS')}>
-        <FormattedMessage defaultMessage="Responses" description="" />
-      </Tabs.Tab>
-
-      <Tabs.Tab {...userTagsPath} selected={isInPath('USER_TAGS')}>
-        <FormattedMessage defaultMessage="Tags" description="" />
-      </Tabs.Tab>
     </Tabs>
   )
 }
+
+UserTabs.fragments = fragments
 
 export default UserTabs

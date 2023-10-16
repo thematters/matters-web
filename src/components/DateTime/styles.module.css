@@ -1,0 +1,23 @@
+.time {
+  font-weight: var(--font-weight-subtext);
+  color: var(--color-grey-dark);
+  white-space: nowrap;
+}
+
+.grey {
+  color: var(--color-grey);
+}
+
+.greyDark {
+  color: var(--color-grey-dark);
+}
+
+.sizeXs {
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-article-title);
+}
+
+.sizeSm {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base-loose);
+}

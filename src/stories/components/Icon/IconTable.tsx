@@ -2,6 +2,8 @@ import React from 'react'
 
 import { IconLogo, IconProps, Tooltip } from '~/components'
 
+import styles from './styles.module.css'
+
 const icons = require.context('~/components/Icon', false, /\/Icon.+\.tsx$/)
 
 // Metters' Logo is not a square
@@ -21,7 +23,7 @@ export default function IconTable(props: IconProps) {
       </Tooltip>
 
       {/* Other Icons */}
-      <div className="container">
+      <div className={styles.container}>
         {icons
           .keys()
           .filter((key) => !LOGO_REQUEST.test(key))
@@ -38,14 +40,6 @@ export default function IconTable(props: IconProps) {
             )
           })}
       </div>
-      <style jsx>{`
-        .container {
-          margin-top: 8px;
-          display: grid;
-          grid-gap: 12px;
-          grid-template-columns: repeat(auto-fit, minmax(12px, 64px));
-        }
-      `}</style>
     </>
   )
 }

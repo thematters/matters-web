@@ -2,34 +2,39 @@ import { Dialog, Translate } from '~/components'
 
 interface CompleteProps {
   closeDialog: () => void
-  callbackButtons?: React.ReactNode
+  callback?: () => any
+  callbackText?: React.ReactNode
 }
 
 const Complete: React.FC<CompleteProps> = ({
   closeDialog,
-  callbackButtons,
+  callback,
+  callbackText,
 }) => {
   return (
     <>
-      <Dialog.Message spacing="md">
-        <h3>
+      <Dialog.Header title="resetPaymentPassword" />
+
+      <Dialog.Message>
+        <p>
           <Translate id="successResetPaymentPassword" />
-        </h3>
+        </p>
       </Dialog.Message>
 
-      <Dialog.Footer>
-        {callbackButtons ? (
-          callbackButtons
-        ) : (
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="close" />
-          </Dialog.Footer.Button>
-        )}
-      </Dialog.Footer>
+      <Dialog.Footer
+        closeDialog={callback ? undefined : closeDialog}
+        closeText={callback ? undefined : 'close'}
+        btns={
+          callback ? (
+            <Dialog.RoundedButton text={callbackText} onClick={callback} />
+          ) : null
+        }
+        smUpBtns={
+          callback ? (
+            <Dialog.TextButton text={callbackText} onClick={callback} />
+          ) : null
+        }
+      />
     </>
   )
 }

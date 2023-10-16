@@ -1,62 +1,76 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 
-import { Button, ButtonProps, TextIcon } from '~/components'
-
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type TabProps = {
+  href?: string
   selected?: boolean
-} & ButtonProps
+  count?: number
+  onClick?: () => void
+}
 
 const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
+  href,
   selected,
+  count,
   children,
-  ...buttonProps
+  onClick,
 }) => {
+  const classes = classNames({
+    [styles.item]: true,
+    [styles.selected]: selected,
+  })
+
+  if (href) {
+    return (
+      <li role="tab" aria-selected={selected} className={classes}>
+        <Link href={href || ''} legacyBehavior>
+          <a>
+            {children}
+            {count && <span className={styles.count}>&nbsp;{count}</span>}
+          </a>
+        </Link>
+      </li>
+    )
+  }
+
   return (
     <li
       role="tab"
-      aria-disabled={buttonProps.disabled}
       aria-selected={selected}
+      className={classes}
+      onClick={onClick}
     >
-      <Button
-        spacing={['xtight', 'base']}
-        bgColor={selected ? 'green-lighter' : 'white'}
-        bgActiveColor={selected ? 'green-lighter' : 'grey-lighter'}
-        {...buttonProps}
-      >
-        <TextIcon
-          size="md"
-          color={selected ? 'green' : 'grey-darker'}
-          weight="semibold"
-        >
-          {children}
-        </TextIcon>
-      </Button>
-
-      <style jsx>{styles}</style>
+      {children}
+      {count && <span className={styles.count}>&nbsp;{count}</span>}
     </li>
   )
 }
 
 interface TabsProps {
-  sticky?: boolean
-  side?: React.ReactNode
+  noSpacing?: boolean
+  fill?: boolean
 }
 
 export const Tabs: React.FC<React.PropsWithChildren<TabsProps>> & {
   Tab: typeof Tab
-} = ({ sticky, side, children }) => {
-  const navClasses = classNames({
-    sticky,
-    hasSide: !!side,
+} = ({ noSpacing, fill, children }) => {
+  const tabsClasses = classNames({
+    [styles.tabs]: true,
+    [styles.noSpacing]: !!noSpacing,
+  })
+
+  const listClasses = classNames({
+    [styles.list]: true,
+    [styles.fillList]: !!fill,
   })
 
   return (
-    <nav className={navClasses}>
-      <ul role="tablist">{children}</ul>
-      {side}
-      <style jsx>{styles}</style>
+    <nav className={tabsClasses}>
+      <ul role="tablist" className={listClasses}>
+        {children}
+      </ul>
     </nav>
   )
 }

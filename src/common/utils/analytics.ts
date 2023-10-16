@@ -35,6 +35,7 @@ type EventArgs =
   | ['banner_exposure', BannerExposureProp]
   | ['card_exposure', CardExposureProp]
   | ['tag_exposure', TagExposureProp]
+  | ['image_upload', ImageUploadProp]
 
 /**
  * Event: Page View
@@ -81,6 +82,7 @@ interface ClickButtonProp {
 interface LoadMoreProp {
   type:
     | ArticleFeedType
+    | CollectionFeedType
     | CommentFeedType
     | UserFeedType
     | TagFeedType
@@ -172,9 +174,17 @@ interface TagExposureProp {
   delay_msecs?: number
 }
 
+interface ImageUploadProp {
+  uploadURL: string
+  type: string
+  size: number | string
+  delay_msecs?: number
+}
+
 // content type
 export type ContentType =
   | 'article'
+  | 'collection'
   | 'comment'
   | 'circle'
   | 'user'
@@ -198,12 +208,14 @@ export type ActivityType =
 // feed type
 export type FeedType =
   | ArticleFeedType
+  | CollectionFeedType
   | CommentFeedType
   | UserFeedType
   | TagFeedType
   | CircleFeedType
   | 'following'
   | 'search_history'
+  | 'user_pinned_work'
 
 type ArticleFeedType =
   | 'all_authors'
@@ -230,6 +242,8 @@ type ArticleFeedType =
   | 'wallet'
   | 'related_donations'
   | 'circle_detail'
+
+type CollectionFeedType = 'user_collection' | 'collection_article'
 
 type CommentFeedType =
   //  'follow-comment' |

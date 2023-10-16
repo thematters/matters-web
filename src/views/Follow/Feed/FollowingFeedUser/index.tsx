@@ -8,7 +8,7 @@ import {
 } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FeedUserProps = {
   user: FollowingFeedUserPublicFragment &
@@ -19,26 +19,24 @@ export type FeedUserProps = {
 
 const FeedUser = ({ user, header, date, actions }: FeedUserProps) => {
   return (
-    <section className="container">
+    <section className={styles.container}>
       {header}
 
       <UserDigest.Rich
         user={user}
-        bgColor="grey-lighter"
+        bgColor="greyLighter"
         borderRadius="xtight"
       />
 
-      <footer>
-        <section className="left">
+      <footer className={styles.footer}>
+        <section className={styles.left}>
           <DateTime date={date} />
         </section>
 
-        <section className="right">
+        <section className={styles.right}>
           <DropdownActions actions={actions} />
         </section>
       </footer>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }
@@ -58,8 +56,7 @@ const MemoizedFeedUser = React.memo(
     return (
       prevUser.id === user.id &&
       prevUser.isFollowee === user.isFollowee &&
-      prevUser.isFollower === user.isFollower &&
-      prevUser.isBlocked === user.isBlocked
+      prevUser.isFollower === user.isFollower
     )
   }
 ) as MemoizedFeedUserType

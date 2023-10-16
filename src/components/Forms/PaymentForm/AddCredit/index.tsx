@@ -11,6 +11,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   PAYMENT_CURRENCY,
@@ -34,14 +35,20 @@ import {
   useMutation,
 } from '~/components'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-import { AddCreditMutation, WalletBalanceQuery } from '~/gql/graphql'
+import {
+  AddCreditMutation,
+  UserLanguage,
+  WalletBalanceQuery,
+} from '~/gql/graphql'
 
 import ConfirmTable from '../ConfirmTable'
 import StripeCheckout from '../StripeCheckout'
 
 interface FormProps {
   defaultAmount?: number
-  callbackButtons?: React.ReactNode
+  callback?: () => any
+  callbackText?: React.ReactNode
+  closeDialog?: () => any
 }
 
 interface FormValues {
@@ -70,8 +77,11 @@ const stripePromise = loadStripe(
 
 const BaseAddCredit: React.FC<FormProps> = ({
   defaultAmount,
-  callbackButtons,
+  callback,
+  callbackText,
+  closeDialog,
 }) => {
+  const intl = useIntl()
   const stripe = useStripe()
   const elements = useElements()
   const { lang } = useContext(LanguageContext)
@@ -138,9 +148,9 @@ const BaseAddCredit: React.FC<FormProps> = ({
         const txResult = await addCredit({ variables: { input: { amount } } })
         data = txResult.data
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any)
         codes.forEach((code) => {
-          setFieldError('amount', messages[code])
+          setFieldError('amount', intl.formatMessage(messages[code]))
         })
       }
 
@@ -200,6 +210,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         label={
           <Translate zh_hant="輸入金額" zh_hans="输入金额" en="Enter amount" />
         }
+        hasLabel
         name="amount"
         min={0}
         max={PAYMENT_MAXIMUM_ADD_CREDIT_AMOUNT[currency]}
@@ -223,6 +234,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
           setFieldValue('amount', sanitizedAmount)
         }}
         autoFocus
+        spacingBottom="base"
       />
     </Form>
   )
@@ -234,10 +246,9 @@ const BaseAddCredit: React.FC<FormProps> = ({
   if (completed) {
     return (
       <>
-        <Dialog.Message spacing="xxl">
-          <h3>
-            <Translate id="successTopUp" />
-          </h3>
+        <Dialog.Header title={<Translate id="successTopUp" />} />
+
+        <Dialog.Message align="center" smUpAlign="center">
           <p>
             <Translate
               zh_hant="創作者們望眼欲穿，快去送上支持吧"
@@ -249,43 +260,77 @@ const BaseAddCredit: React.FC<FormProps> = ({
           <CurrencyAmount amount={values.amount} currency={currency} />
         </Dialog.Message>
 
-        {callbackButtons && <Dialog.Footer>{callbackButtons}</Dialog.Footer>}
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={callbackText || <FormattedMessage defaultMessage="Done" />}
+              onClick={callback || closeDialog}
+            />
+          }
+          smUpBtns={
+            callback ? (
+              <Dialog.TextButton text={callbackText} onClick={callback} />
+            ) : (
+              <Dialog.TextButton
+                text={<FormattedMessage defaultMessage="Done" />}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+            )
+          }
+        />
       </>
     )
   }
 
+  const SubmitButton = (
+    <Dialog.TextButton
+      text={<Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />}
+      type="submit"
+      form={formId}
+      disabled={disabled || !isValid || isSubmitting || !!checkoutError}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
-      <Dialog.Content hasGrow>
-        <section>
-          <ConfirmTable>
-            <ConfirmTable.Row type="balance">
-              <ConfirmTable.Col>
-                <Translate id="walletBalance" />
-              </ConfirmTable.Col>
+      <Dialog.Header
+        title="topUp"
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
-              <ConfirmTable.Col>
-                {currency} {formatAmount(balance)}
-              </ConfirmTable.Col>
-            </ConfirmTable.Row>
-          </ConfirmTable>
+      <Dialog.Content>
+        <ConfirmTable>
+          <ConfirmTable.Row type="balance">
+            <ConfirmTable.Col>
+              <Translate id="walletBalance" />
+            </ConfirmTable.Col>
 
-          {InnerForm}
+            <ConfirmTable.Col>
+              {currency} {formatAmount(balance)}
+            </ConfirmTable.Col>
+          </ConfirmTable.Row>
+        </ConfirmTable>
 
-          <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
-        </section>
+        {InnerForm}
+
+        <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          form={formId}
-          disabled={disabled || !isValid || isSubmitting || !!checkoutError}
-          loading={isSubmitting}
-        >
-          <Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }
@@ -296,7 +341,7 @@ const AddCreditForm: React.FC<FormProps> = (props) => {
   return (
     <Elements
       stripe={stripePromise}
-      options={{ locale: lang === 'zh_hans' ? 'zh' : 'en' }}
+      options={{ locale: lang === UserLanguage.ZhHans ? 'zh' : 'en' }}
     >
       <BaseAddCredit {...props} />
     </Elements>

@@ -1,5 +1,3 @@
-/* @styled-jsx=global */
-
 :root {
   /* header */
   --z-index-global-header: 100;
@@ -7,6 +5,7 @@
 
   /* sticky tabs */
   --z-index-sticky-tabs: 110;
+  --z-index-over-sticky-tabs: 111;
 
   /* bottom bar */
   --z-index-global-bottom-bar: 149;

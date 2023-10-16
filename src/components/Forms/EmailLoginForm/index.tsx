@@ -1,49 +1,60 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
-  ADD_TOAST,
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
+  ERROR_CODES,
+  SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
+  signinCallbackUrl,
   validateEmail,
   // validatePassword,
 } from '~/common/utils'
 import {
-  Dialog,
+  AuthFeedType,
+  AuthNormalFeed,
+  AuthTabs,
+  AuthWalletFeed,
+  DialogBeta,
   Form,
+  IconLeft20,
   LanguageContext,
   LanguageSwitch,
-  Layout,
+  Media,
+  TextIcon,
+  useCountdown,
+  // toast,
   useMutation,
 } from '~/components'
-import { UserLoginMutation } from '~/gql/graphql'
+import { EMAIL_LOGIN } from '~/components/GQL/mutations/emailLogin'
+import SEND_CODE from '~/components/GQL/mutations/sendCode'
+import { EmailLoginMutation, SendVerificationCodeMutation } from '~/gql/graphql'
 
-import {
-  EmailSignUpDialogButton,
-  PasswordResetDialogButton,
-  PasswordResetRedirectButton,
-} from './Buttons'
-import styles from './styles.css'
+import Field from '../../Form/Field'
+import OtherOptions from './OtherOptions'
+import styles from './styles.module.css'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
-  gotoResetPassword?: () => void
-  gotoEmailSignUp?: () => void
-  closeDialog?: () => void
+  gotoEmailSignup: () => void
+  gotoWalletConnect: () => void
+
+  authFeedType: AuthFeedType
+  setAuthFeedType: (type: AuthFeedType) => void
+
+  closeDialog: () => void
   back?: () => void
 }
 
@@ -52,50 +63,51 @@ interface FormValues {
   password: ''
 }
 
-export const USER_LOGIN = gql`
-  mutation UserLogin($input: UserLoginInput!) {
-    userLogin(input: $input) {
-      auth
-      token
-      user {
-        id
-        settings {
-          language
-        }
-        info {
-          group
-        }
-      }
-    }
-  }
-`
-
 export const EmailLoginForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
-  gotoEmailSignUp,
-  gotoResetPassword,
+  gotoWalletConnect,
+  gotoEmailSignup,
   closeDialog,
+  authFeedType,
+  setAuthFeedType,
   back,
 }) => {
-  const [login] = useMutation<UserLoginMutation>(USER_LOGIN, undefined, {
+  const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)
 
-  const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
   const formId = 'email-login-form'
+
+  const isNormal = authFeedType === 'normal'
+  const isWallet = authFeedType === 'wallet'
+
+  const [isSelectMethod, setIsSelectMethod] = useState(false)
+  const [errorCode, setErrorCode] = useState<ERROR_CODES | null>(null)
+  const [hasSendCode, setHasSendCode] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { countdown, setCountdown } = useCountdown(0)
+
+  const passwordRef = useRef<HTMLInputElement>(null)
+
+  const [sendCode, { loading: sendingCode }] =
+    useMutation<SendVerificationCodeMutation>(SEND_CODE, undefined, {
+      showToast: false,
+    })
 
   const intl = useIntl()
   const {
     values,
     errors,
     touched,
-    handleBlur,
+    // handleBlur,
     handleChange,
     handleSubmit,
-    isSubmitting,
+    setFieldError,
+    setFieldValue,
+    setErrors,
   } = useFormik<FormValues>({
     initialValues: {
       email: '',
@@ -108,15 +120,18 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         email: validateEmail(email, lang, { allowPlusSign: true }),
         // password: validatePassword(password, lang),
       }),
-    onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
+    onSubmit: async ({ email, password }, { setFieldError }) => {
       try {
+        setIsSubmitting(true)
         const { data } = await login({
-          variables: { input: { email, password } },
+          variables: {
+            input: { email, passwordOrCode: password, language: lang },
+          },
         })
 
-        const token = data?.userLogin.token || ''
-        const language = data?.userLogin.user?.settings.language || ''
-        const group = data?.userLogin.user?.info.group || ''
+        const token = data?.emailLogin.token || ''
+        const language = data?.emailLogin.user?.settings.language || ''
+        const group = data?.emailLogin.user?.info.group || ''
         setCookies({
           [COOKIE_LANGUAGE]: language,
           [COOKIE_USER_GROUP]: group,
@@ -127,141 +142,302 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           submitCallback()
         }
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <FormattedMessage
-                  defaultMessage="Logged in successfully"
-                  description=""
-                />
-              ),
-            },
-          })
-        )
+        // toast.success({
+        //   message: <FormattedMessage defaultMessage="Logged in successfully" />,
+        // })
+
         analytics.identifyUser()
 
-        setSubmitting(false)
         redirectToTarget({
           fallback: !!isInPage ? 'homepage' : 'current',
         })
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        setErrorCode(codes[0])
+        setFieldError('email', '')
+
         codes.forEach((code) => {
-          if (code.includes('USER_EMAIL_')) {
-            setFieldError('email', messages[code])
-          } else if (code.indexOf('USER_PASSWORD_') >= 0) {
-            setFieldError('password', messages[code])
+          // catch errors if try to login to a unregistered account with
+          // a wrong verification code
+          if (
+            code.includes(ERROR_CODES.CODE_INVALID) ||
+            code.includes(ERROR_CODES.CODE_INACTIVE)
+          ) {
+            const m = intl.formatMessage({
+              defaultMessage: 'Incorrect email or password',
+              description: 'src/components/Forms/EmailLoginForm/index.tsx',
+            })
+            setFieldError('password', m)
+          }
+          // catch error if try to login to a unregistered account with
+          // an expired passpharse
+          else if (code.includes(ERROR_CODES.CODE_EXPIRED)) {
+            setFieldError(
+              'password',
+              intl.formatMessage({
+                defaultMessage:
+                  'This login code has expired, please try to resend',
+              })
+            )
+          } else if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+            setFieldError(
+              'email',
+              intl.formatMessage({
+                defaultMessage: 'Unavailable',
+                description: 'FORBIDDEN_BY_STATE',
+              })
+            )
           } else {
-            setFieldError('email', messages[code])
+            setFieldError('password', intl.formatMessage(messages[code]))
           }
         })
-        setSubmitting(false)
+        setIsSubmitting(false)
       }
     },
   })
 
-  const containerClasses = classNames({ container: !!isInPage })
+  const sendLoginCode = async () => {
+    const error = validateEmail(values.email, lang, { allowPlusSign: true })
+    if (error) {
+      setFieldError('email', error)
+      return
+    }
+
+    const redirectUrl = signinCallbackUrl(values.email)
+
+    try {
+      await sendCode({
+        variables: {
+          input: {
+            email: values.email,
+            type: 'email_otp',
+            redirectUrl,
+            language: lang,
+          },
+        },
+      })
+      setCountdown(SEND_CODE_COUNTDOWN)
+      setHasSendCode(true)
+
+      // clear
+      setErrors({})
+      setFieldValue('password', '')
+      setErrorCode(null)
+
+      if (passwordRef.current) {
+        passwordRef.current.focus()
+      }
+    } catch (error) {
+      const [, codes] = parseFormSubmitErrors(error as any)
+      codes.forEach((code) => {
+        if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+          setFieldError(
+            'email',
+            intl.formatMessage({
+              defaultMessage: 'Unavailable',
+              description: 'FORBIDDEN_BY_STATE',
+            })
+          )
+        }
+      })
+    }
+  }
+
+  const fieldMsgId = `field-msg-sign-in`
 
   const InnerForm = (
-    <section className={containerClasses}>
+    <>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
-          label={<FormattedMessage defaultMessage="Email" description="" />}
+          label={<FormattedMessage defaultMessage="Email" />}
           type="email"
           name="email"
           required
           placeholder={intl.formatMessage({
-            defaultMessage: 'Enter Email',
-            description: '',
+            defaultMessage: 'Email',
           })}
           value={values.email}
-          error={touched.email && errors.email}
-          onBlur={handleBlur}
+          error={errors.email}
+          // FIXME: handleBlur will cause the component to re-render
+          // onBlur={handleBlur}
           onChange={handleChange}
+          spacingBottom="baseLoose"
+          hasFooter={false}
+          autoFocus={false}
         />
 
         <Form.Input
-          label={<FormattedMessage defaultMessage="Password" description="" />}
+          // ref={passwordRef}
+          label={<FormattedMessage defaultMessage="Password" />}
           type="password"
           name="password"
           required
           placeholder={intl.formatMessage({
-            defaultMessage: 'Enter Password',
-            description: 'src/components/Forms/EmailLoginForm/index.tsx',
+            defaultMessage: 'Password',
           })}
           value={values.password}
           error={touched.password && errors.password}
-          onBlur={handleBlur}
+          // FIXME: handleBlur will cause the component to re-render
+          // onBlur={handleBlur}
           onChange={handleChange}
-          extraButton={
+          spacingBottom="baseLoose"
+          hasFooter={false}
+          rightButton={
             <>
-              {isInDialog && gotoResetPassword && (
-                <PasswordResetDialogButton
-                  gotoResetPassword={gotoResetPassword}
-                />
+              {hasSendCode && countdown > 0 && (
+                <span className={styles.resendButton}>
+                  {countdown}&nbsp;
+                  <FormattedMessage
+                    defaultMessage="Resend"
+                    description="src/components/Forms/EmailLoginForm/index.tsx"
+                  />
+                </span>
               )}
-              {isInPage && <PasswordResetRedirectButton />}
+              {(hasSendCode || errorCode === ERROR_CODES.CODE_EXPIRED) &&
+                countdown === 0 && (
+                  <button
+                    className={styles.resendButton}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      sendLoginCode()
+                    }}
+                    disabled={sendingCode}
+                  >
+                    <FormattedMessage
+                      defaultMessage="Resend"
+                      description="src/components/Forms/EmailLoginForm/index.tsx"
+                    />
+                  </button>
+                )}
             </>
           }
         />
 
-        {gotoEmailSignUp && (
-          <EmailSignUpDialogButton
-            gotoEmailSignUp={gotoEmailSignUp}
-            isInPage={isInPage}
-          />
+        {(!!errors.email || !!errors.password) && (
+          <>
+            <Field.Footer
+              fieldMsgId={fieldMsgId}
+              error={errors.email || errors.password}
+              hintSize="sm"
+              hintAlign="center"
+              hintSpace="baseLoose"
+            />
+          </>
         )}
+
+        {errorCode !== ERROR_CODES.CODE_EXPIRED &&
+          !(hasSendCode && errorCode === ERROR_CODES.CODE_INVALID) && (
+            <OtherOptions
+              sendLoginCode={sendLoginCode}
+              hasSendCode={hasSendCode}
+              disabled={sendingCode}
+            />
+          )}
       </Form>
-      <style jsx>{styles}</style>
-    </section>
+    </>
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
-      disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      disabled={!values.email || !values.password || isSubmitting}
+      text={
+        <FormattedMessage
+          defaultMessage="Sign in"
+          description="src/components/Forms/EmailLoginForm/index.tsx"
+        />
+      }
       loading={isSubmitting}
+      // onClick={() => {
+      //   setIsSubmitting(true)
+      // }}
     />
   )
 
-  if (isInPage) {
-    return (
-      <>
-        <Layout.Header
-          right={
-            <>
-              <Layout.Header.Title id="login" />
-              {SubmitButton}
-            </>
-          }
-        />
-
-        {InnerForm}
-
-        <footer>
-          <LanguageSwitch />
-          <style jsx>{styles}</style>
-        </footer>
-      </>
-    )
-  }
-
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="login"
-          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
+      {!isSelectMethod && (
+        <DialogBeta.Header
+          title={<FormattedMessage defaultMessage="Sign In" />}
+          hasSmUpTitle={false}
+          leftBtn={
+            <DialogBeta.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              color="greyDarker"
+              onClick={() => {
+                setIsSelectMethod(true)
+              }}
+            />
+          }
           closeDialog={closeDialog}
-          rightButton={SubmitButton}
+          rightBtn={SubmitButton}
         />
       )}
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <DialogBeta.Content noMaxHeight={isInPage}>
+        <Media at="sm">
+          {isSelectMethod && (
+            <AuthTabs
+              type={authFeedType}
+              setType={setAuthFeedType}
+              purpose={purpose}
+            />
+          )}
+        </Media>
+        <Media greaterThan="sm">
+          <AuthTabs
+            type={authFeedType}
+            setType={setAuthFeedType}
+            purpose={purpose}
+          />
+        </Media>
+        {isNormal && !isSelectMethod && <>{InnerForm}</>}
+        {isNormal && isSelectMethod && (
+          <AuthNormalFeed
+            gotoEmailLogin={() => setIsSelectMethod(false)}
+            gotoEmailSignup={gotoEmailSignup}
+          />
+        )}
+        {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
+      </DialogBeta.Content>
+
+      {isNormal && !isSelectMethod && (
+        <DialogBeta.Footer
+          smUpBtns={
+            <section className={styles.footerBtns}>
+              <DialogBeta.TextButton
+                text={
+                  <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
+                    <FormattedMessage defaultMessage="Back" />
+                  </TextIcon>
+                }
+                color="greyDarker"
+                onClick={() => {
+                  setIsSelectMethod(true)
+                }}
+              />
+              {SubmitButton}
+            </section>
+          }
+        />
+      )}
+      {((isNormal && isSelectMethod) || isWallet) && !isInPage && (
+        <DialogBeta.Footer
+          smUpBtns={
+            <DialogBeta.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Close" />}
+              onClick={closeDialog}
+            />
+          }
+        />
+      )}
+      {isSelectMethod && isInPage && (
+        <section className={styles.footer}>
+          <LanguageSwitch />
+        </section>
+      )}
     </>
   )
 }

@@ -5,7 +5,7 @@ import jump from 'jump.js'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
+import { URL_FRAGMENT } from '~/common/enums'
 import { dom, filterComments, mergeConnections } from '~/common/utils'
 import {
   CommentForm,
@@ -16,6 +16,7 @@ import {
   Spinner,
   ThreadComment,
   Throw404,
+  toast,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -28,7 +29,7 @@ import {
   DISCUSSION_PRIVATE,
   DISCUSSION_PUBLIC,
 } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Wall from './Wall'
 
 type Comment = NonNullable<
@@ -146,20 +147,15 @@ const CricleDiscussion = () => {
   )
 
   const submitCallback = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <FormattedMessage
-              defaultMessage="Discussion sent"
-              description="src/views/Circle/Discussion/Discussion.tsx"
-            />
-          ),
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="Discussion sent"
+          description="src/views/Circle/Discussion/Discussion.tsx"
+        />
+      ),
+    })
+
     refetch()
   }
 
@@ -248,9 +244,9 @@ const CricleDiscussion = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="discussion">
+      <section className={styles.discussion}>
         {!circle.owner.isBlocking && (
-          <header>
+          <header className={styles.header}>
             <CommentForm
               circleId={circle?.id}
               type="circleDiscussion"
@@ -278,6 +274,7 @@ const CricleDiscussion = () => {
         <InfiniteScroll
           hasNextPage={!!pageInfo?.hasNextPage}
           loadMore={loadMore}
+          eof
         >
           <List spacing={['xloose', 0]}>
             {comments.map((comment) => (
@@ -295,8 +292,6 @@ const CricleDiscussion = () => {
             ))}
           </List>
         </InfiniteScroll>
-
-        <style jsx>{styles}</style>
       </section>
     </>
   )

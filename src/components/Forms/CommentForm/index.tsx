@@ -16,7 +16,7 @@ import PUT_COMMENT from '~/components/GQL/mutations/putComment'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 import { CommentDraftQuery, PutCommentMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
@@ -100,7 +100,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
 
       // clear content
       const $editor = document.querySelector(
-        `#${formId} .ql-editor`
+        `#${formId} .ProseMirror`
       ) as HTMLElement
 
       if ($editor) {
@@ -129,11 +129,12 @@ export const CommentForm: React.FC<CommentFormProps> = ({
 
   return (
     <form
+      className={styles.form}
       id={formId}
       onSubmit={handleSubmit}
       aria-label={translate({ id: 'putComment', lang })}
     >
-      <section className="content">
+      <section className={styles.content}>
         <CommentEditor
           content={content}
           update={onUpdate}
@@ -141,7 +142,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
         />
       </section>
 
-      <footer>
+      <footer className={styles.footer}>
         <Button
           type="submit"
           form={formId}
@@ -152,7 +153,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
         >
           <TextIcon
             color="white"
-            size="md-s"
+            size="mdS"
             weight="md"
             icon={isSubmitting && <IconSpinner16 size="sm" />}
           >
@@ -162,8 +163,6 @@ export const CommentForm: React.FC<CommentFormProps> = ({
           </TextIcon>
         </Button>
       </footer>
-
-      <style jsx>{styles}</style>
     </form>
   )
 }

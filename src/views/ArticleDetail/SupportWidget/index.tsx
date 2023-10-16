@@ -28,7 +28,7 @@ import { ArticleDetailPublicQuery, HasDonatedQuery } from '~/gql/graphql'
 
 import Donators from './Donators'
 import { fragments, HAS_DONATED } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import SupportButton from './SupportButton'
 
 interface DonationProps {
@@ -51,8 +51,8 @@ const SupportWidget = ({ article }: DonationProps) => {
   const [showAvatarAnimation, setShowAvatarAnimation] = useState(false)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const supportWidgetClasses = classNames({
-    'support-widget': true,
-    hasCircle: article?.access.circle,
+    [styles.supportWidget]: true,
+    [styles.hasCircle]: article?.access.circle,
   })
 
   const {
@@ -100,7 +100,7 @@ const SupportWidget = ({ article }: DonationProps) => {
   return (
     <section className={supportWidgetClasses} id="animation">
       {showAnimation && (
-        <section className="donation">
+        <section className={styles.donation}>
           <DynamicAnimation
             playShipWaiting={playShipWaiting}
             playEnd={() => {
@@ -112,8 +112,8 @@ const SupportWidget = ({ article }: DonationProps) => {
       )}
 
       {!showAnimation && (
-        <section className="donation note">
-          {loading && <IconSpinner16 color="grey-light" size="lg" />}
+        <section className={`${styles.donation} ${styles.note}`}>
+          {loading && <IconSpinner16 color="greyLight" size="lg" />}
 
           {!loading && (
             <>
@@ -126,7 +126,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                         <TextIcon weight="md">
                           {article?.author.displayName}
                         </TextIcon>
-                        <TextIcon color="grey-darker">
+                        <TextIcon color="greyDarker">
                           <Translate
                             zh_hant="&nbsp;想對你說："
                             zh_hans="&nbsp;想對你說："
@@ -189,7 +189,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                 </>
               )}
 
-              <section className="donation-button">
+              <section className={styles.donationButton}>
                 <SupportButton
                   recipient={article.author}
                   targetId={article.id}
@@ -199,7 +199,7 @@ const SupportWidget = ({ article }: DonationProps) => {
               </section>
 
               {article.donations.totalCount > 0 && (
-                <section className="donators">
+                <section className={styles.donators}>
                   <Donators
                     article={article}
                     showAvatarAnimation={showAvatarAnimation}
@@ -208,20 +208,20 @@ const SupportWidget = ({ article }: DonationProps) => {
               )}
 
               {isViewerDonated && (
-                <section className="transaction">
-                  <span className="transaction-left">
+                <section className={styles.transaction}>
+                  <span className={styles.transactionLeft}>
                     <Translate zh_hant="查看" zh_hans="查看" en="View" />
                   </span>
                   <Button href={PATHS.ME_WALLET_TRANSACTIONS}>
-                    <span className="transaction-button">
+                    <span className={styles.transactionButton}>
                       <TextIcon
                         icon={<IconDollarCircle16 />}
                         color="gold"
                         size="xs"
                       >
                         <Translate
-                          zh_hant="交易紀錄"
-                          zh_hans="交易纪录"
+                          zh_hant="交易記錄"
+                          zh_hans="交易记录"
                           en="Transaction History"
                         />
                       </TextIcon>
@@ -235,10 +235,10 @@ const SupportWidget = ({ article }: DonationProps) => {
       )}
 
       {article.access.circle && (
-        <section className="circle">
+        <section className={styles.circle}>
           <CircleDigest.Rich
             circle={article.access.circle}
-            bgColor="grey-lighter"
+            bgColor="greyLighter"
             hasFooter
             hasPrice
             onClickPrice={() => {
@@ -250,8 +250,6 @@ const SupportWidget = ({ article }: DonationProps) => {
           />
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

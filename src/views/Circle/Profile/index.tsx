@@ -19,7 +19,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import ShareButton from '~/components/Layout/Header/ShareButton'
 import { CircleProfileCirclePublicQuery } from '~/gql/graphql'
 
 import SubscriptionBanner from '../SubscriptionBanner'
@@ -30,7 +29,7 @@ import FollowButton from './FollowButton'
 import { FollowersDialog } from './FollowersDialog'
 import { CIRCLE_PROFILE_PRIVATE, CIRCLE_PROFILE_PUBLIC } from './gql'
 import { MembersDialog } from './MembersDialog'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const CircleProfile = () => {
   const viewer = useContext(ViewerContext)
@@ -92,27 +91,6 @@ const CircleProfile = () => {
    * Render
    */
 
-  const Right = () => (
-    <>
-      <span />
-      {circle && (
-        <section className="buttons">
-          <ShareButton
-            tags={
-              [
-                circle.displayName,
-                circle.name,
-                circle.owner.displayName,
-                // circle.owner.userName,
-              ].filter(Boolean) as string[]
-            }
-          />
-          <DropdownActions circle={circle} />
-          <style jsx>{styles}</style>
-        </section>
-      )}
-    </>
-  )
   const LayoutHeader = () => (
     <>
       {circle && (
@@ -143,7 +121,30 @@ const CircleProfile = () => {
           }}
         />
       )}
-      <Layout.Header right={<Right />} mode="transparent-absolute" />
+
+      <Layout.Header
+        right={
+          <>
+            <span />
+            {circle && (
+              <section className={styles.buttons}>
+                <Layout.Header.ShareButton
+                  tags={
+                    [
+                      circle.displayName,
+                      circle.name,
+                      circle.owner.displayName,
+                      // circle.owner.userName,
+                    ].filter(Boolean) as string[]
+                  }
+                />
+                <DropdownActions circle={circle} />
+              </section>
+            )}
+          </>
+        }
+        mode="transparent"
+      />
     </>
   )
 
@@ -169,30 +170,29 @@ const CircleProfile = () => {
     <>
       <LayoutHeader />
 
-      <section className="profile">
+      <section className={styles.profile}>
         <Cover cover={circle.cover} fallbackCover={CIRCLE_COVER} />
 
-        <header>
-          <section className="info">
+        <header className={styles.header}>
+          <section className={styles.info}>
             <CircleAvatar size="xxxl" circle={circle} />
-            <h2 className="name">{circle.displayName}</h2>
+            <h2 className={styles.name}>{circle.displayName}</h2>
           </section>
 
           {price && (
-            <section className="price">
-              <span className="amount">{price.amount}</span>
+            <section className={styles.price}>
+              <span className={styles.amount}>{price.amount}</span>
               <br />
-              {price.currency} /{' '}
-              <FormattedMessage defaultMessage="month" description="" />
+              {price.currency} / <FormattedMessage defaultMessage="month" />
             </section>
           )}
         </header>
 
         {circle.description && (
-          <section className="description">
+          <section className={styles.description}>
             <Expandable
               content={circle.description}
-              color="grey-darker"
+              color="greyDarker"
               spacingTop="base"
               size="md"
             >
@@ -203,8 +203,8 @@ const CircleProfile = () => {
 
         {privateFetched && <SubscriptionBanner circle={circle} />}
 
-        <footer>
-          <section className="counts">
+        <footer className={styles.footer}>
+          <section className={styles.counts}>
             <MembersDialog>
               {({ openDialog: openMembersDialog }) => (
                 <button
@@ -212,11 +212,11 @@ const CircleProfile = () => {
                   onClick={openMembersDialog}
                   aria-haspopup="dialog"
                 >
-                  <span className="count">
+                  <span className={styles.count}>
                     {numAbbr(circle.members.totalCount)}
                   </span>
                   {/* <Translate id="members" /> */}
-                  <FormattedMessage defaultMessage="Members" description="" />
+                  <FormattedMessage defaultMessage="Members" />
                 </button>
               )}
             </MembersDialog>
@@ -228,12 +228,12 @@ const CircleProfile = () => {
                   onClick={openFollowersDialog}
                   aria-haspopup="dialog"
                 >
-                  <span className="count">
+                  <span className={styles.count}>
                     {numAbbr(circle.followers.totalCount)}
                   </span>
                   {/* <Translate id="follower" />  */}
 
-                  <FormattedMessage defaultMessage="Followers" description="" />
+                  <FormattedMessage defaultMessage="Followers" />
                 </button>
               )}
             </FollowersDialog>
@@ -248,8 +248,6 @@ const CircleProfile = () => {
         <AuthorWidget circle={circle} />
 
         <SubscribeCircleDialog circle={circle} />
-
-        <style jsx>{styles}</style>
       </section>
     </>
   )

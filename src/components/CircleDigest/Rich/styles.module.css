@@ -1,0 +1,37 @@
+.content {
+  @mixin flex-start-start;
+}
+
+.header {
+  margin-left: var(--spacing-base);
+}
+
+.title {
+  margin-bottom: var(--spacing-xx-tight);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5rem;
+}
+
+.textSizeMdS {
+  font-size: var(--font-size-md-s);
+}
+
+.textSizeXm {
+  font-size: var(--font-size-xm);
+}
+
+.description {
+  @mixin line-clamp;
+
+  -webkit-line-clamp: 3;
+  margin-top: var(--spacing-base);
+  font-size: var(--font-size-md-s);
+  line-height: 1.5rem;
+  color: var(--color-grey-darker);
+}
+
+.footer {
+  @mixin flex-center-space-between;
+
+  margin-top: var(--spacing-base);
+}

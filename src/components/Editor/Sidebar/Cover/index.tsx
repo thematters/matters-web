@@ -2,7 +2,7 @@ import { IconImage24 } from '~/components'
 
 import SetCover, { SetCoverProps } from '../../SetCover'
 import Box from '../Box'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type SidebarCoverProps = {
   disabled?: boolean
@@ -19,12 +19,10 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
           disabled={disabled}
         >
           {cover && (
-            <section className="container">
-              <div className="cover">
+            <section className={styles.container}>
+              <div className={styles.cover}>
                 <img src={cover} alt="cover" />
               </div>
-
-              <style jsx>{styles}</style>
             </section>
           )}
         </Box>

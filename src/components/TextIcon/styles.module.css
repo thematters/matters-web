@@ -1,0 +1,224 @@
+.textIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  vertical-align: middle;
+}
+
+.noneSelect {
+  user-select: none;
+}
+
+.text {
+  display: inline-flex;
+  line-height: 1;
+}
+
+/* placement */
+.textBottom {
+  flex-direction: column;
+}
+
+/* size */
+.sizeXs {
+  & .text {
+    font-size: var(--font-size-xs);
+  }
+}
+
+.sizeSm {
+  & .text {
+    font-size: var(--font-size-sm);
+  }
+}
+
+.sizeSmS {
+  & .text {
+    font-size: var(--font-size-sm-s);
+  }
+}
+
+.sizeMd {
+  & .text {
+    font-size: var(--font-size-md);
+  }
+}
+
+.sizeMdS {
+  & .text {
+    font-size: var(--font-size-md-s);
+  }
+}
+
+.sizeXm {
+  & .text {
+    font-size: var(--font-size-xm);
+  }
+}
+
+.sizeLg {
+  & .text {
+    font-size: var(--font-size-lg);
+  }
+}
+
+.sizeXl {
+  & .text {
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* color */
+.black {
+  color: var(--color-black);
+}
+
+.green {
+  color: var(--color-matters-green);
+}
+
+.gold {
+  color: var(--color-matters-gold);
+}
+
+.grey {
+  color: var(--color-grey);
+}
+
+.greyLight {
+  color: var(--color-grey-light);
+}
+
+.greyDark {
+  color: var(--color-grey-dark);
+}
+
+.greyDarker {
+  color: var(--color-grey-darker);
+}
+
+.white {
+  color: var(--color-white);
+}
+
+.red {
+  color: var(--color-red);
+}
+
+.likecoinGreen {
+  color: var(--color-likecoin-green);
+}
+
+.yellowLighter {
+  color: var(--color-yellow-lighter);
+}
+
+/* spacing */
+.spacingXxxtight.hasIcon {
+  &.textRight > .text {
+    padding-left: var(--spacing-xxx-tight);
+  }
+
+  &.textLeft > .text {
+    padding-right: var(--spacing-xxx-tight);
+  }
+
+  &.textBottom > .text {
+    padding-top: var(--spacing-xxx-tight);
+  }
+}
+
+.spacingXxtight.hasIcon {
+  &.textRight > .text {
+    padding-left: var(--spacing-xx-tight);
+  }
+
+  &.textLeft > .text {
+    padding-right: var(--spacing-xx-tight);
+  }
+
+  &.textBottom > .text {
+    padding-top: var(--spacing-xx-tight);
+  }
+}
+
+.spacingBasexxtight.hasIcon {
+  &.textRight > .text {
+    padding-left: var(--spacing-base-xx-tight);
+  }
+
+  &.textLeft > .text {
+    padding-right: var(--spacing-base-xx-tight);
+  }
+
+  &.textBottom > .text {
+    padding-top: var(--spacing-base-xx-tight);
+  }
+}
+
+.spacingXtight.hasIcon {
+  &.textRight > .text {
+    padding-left: var(--spacing-x-tight);
+  }
+
+  &.textLeft > .text {
+    padding-right: var(--spacing-x-tight);
+  }
+
+  &.textBottom > .text {
+    padding-top: var(--spacing-x-tight);
+  }
+}
+
+.spacingTight.hasIcon {
+  &.textRight > .text {
+    padding-left: var(--spacing-tight);
+  }
+
+  &.textLeft > .text {
+    padding-right: var(--spacing-tight);
+  }
+
+  &.textBottom > .text {
+    padding-top: var(--spacing-tight);
+  }
+}
+
+.spacingBase.hasIcon {
+  &.textRight > .text {
+    padding-left: var(--spacing-base);
+  }
+
+  &.textLeft > .text {
+    padding-right: var(--spacing-base);
+  }
+
+  &.textBottom > .text {
+    padding-top: var(--spacing-base);
+  }
+}
+
+/* weight */
+.weightLight {
+  font-weight: var(--font-weight-light);
+}
+
+.weightNormal {
+  font-weight: var(--font-weight-normal);
+}
+
+.weightMd {
+  font-weight: var(--font-weight-medium);
+}
+
+.weightSemibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.weightBold {
+  font-weight: var(--font-weight-bold);
+}
+
+.textUnderline {
+  text-decoration: underline;
+}

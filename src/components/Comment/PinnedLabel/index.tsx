@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { IconPin24, TextIcon, Translate } from '~/components'
 import { PinnedLabelCommentFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const fragments = {
   comment: gql`
@@ -38,10 +38,8 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelCommentFragment }) => {
   }
 
   return (
-    <span className="label">
+    <span className={styles.label}>
       <Translate zh_hant="作者精選" zh_hans="作者精选" en="Featured" />
-
-      <style jsx>{styles}</style>
     </span>
   )
 }

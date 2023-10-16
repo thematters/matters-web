@@ -1,17 +1,18 @@
 import { useContext } from 'react'
 
-import { ADD_TOAST, TEST_ID } from '~/common/enums'
+import { TEST_ID } from '~/common/enums'
 import { validateTagName } from '~/common/utils'
 import {
   Card,
   IconAdd16,
   LanguageContext,
   TextIcon,
+  toast,
   Translate,
 } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface CreateTagProps {
   tag: DigestTagFragment
@@ -24,14 +25,9 @@ const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
   const create = () => {
     const msg = validateTagName(tag.content, lang)
     if (msg) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: msg,
-          },
-        })
-      )
+      toast.error({
+        message: msg,
+      })
       return
     }
 
@@ -44,14 +40,12 @@ const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
       onClick={create}
       testId={TEST_ID.SEARCH_RESULTS_ITEM}
     >
-      <section className="add-tag">
+      <section className={styles.addTag}>
         <TextIcon icon={<IconAdd16 />} color="green" size="md">
           <Translate id="create" />
         </TextIcon>
 
-        <span className="content">&nbsp;{tag.content}</span>
-
-        <style jsx> {styles}</style>
+        <span className={styles.content}>&nbsp;{tag.content}</span>
       </section>
     </Card>
   )

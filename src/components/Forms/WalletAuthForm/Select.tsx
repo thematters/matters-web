@@ -14,11 +14,12 @@ import {
   LanguageContext,
   Layout,
   Media,
+  TableView,
   TextIcon,
   ViewerContext,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface FormProps {
   type?: 'connect' | 'auth'
@@ -45,7 +46,7 @@ const Hint = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <FormattedMessage defaultMessage="tutorial" description="" />
+            <FormattedMessage defaultMessage="tutorial" />
           </a>
         </p>
       </Media>
@@ -61,7 +62,7 @@ const Hint = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <FormattedMessage defaultMessage="tutorial" description="" />
+            <FormattedMessage defaultMessage="tutorial" />
           </a>
         </p>
       </Media>
@@ -96,8 +97,7 @@ const Select: React.FC<FormProps> = ({
 
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
   const walletConnectConnector = connectors.find(
-    // (c) => c.id === 'walletConnect'
-    (c) => c.id === 'walletConnectLegacy'
+    (c) => c.id === 'walletConnect'
   )
   const isMetaMaskLoading =
     isConnecting && pendingConnector?.id === injectedConnector?.id
@@ -121,78 +121,72 @@ const Select: React.FC<FormProps> = ({
   }
 
   const Intro = () => {
-    if (!isConnect) return null
-
     return (
-      <Dialog.Message align="left">
-        <ul>
-          <li>
-            <FormattedMessage
-              defaultMessage="Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet."
-              description="src/components/Forms/WalletAuthForm/Select.tsx"
-            />
-          </li>
-          <li>
-            <strong>
+      <section className={styles.intro}>
+        <Dialog.Message align="left" smUpAlign="left">
+          <ul>
+            <li>
               <FormattedMessage
-                defaultMessage="Wallet address will be part of your digital identity and shown in your profile page."
+                defaultMessage="Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet."
                 description="src/components/Forms/WalletAuthForm/Select.tsx"
               />
-            </strong>
-          </li>
-          <li>
-            <FormattedMessage
-              defaultMessage="The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security."
-              description="src/components/Forms/WalletAuthForm/Select.tsx"
-            />
-          </li>
-          <li>
-            <strong>
+            </li>
+            <li>
+              <strong>
+                <FormattedMessage
+                  defaultMessage="Wallet address will be part of your digital identity and shown in your profile page."
+                  description="src/components/Forms/WalletAuthForm/Select.tsx"
+                />
+              </strong>
+            </li>
+            <li>
               <FormattedMessage
-                defaultMessage="Matters will never ask your wallet key through any channel."
+                defaultMessage="The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security."
                 description="src/components/Forms/WalletAuthForm/Select.tsx"
               />
-            </strong>
-          </li>
-        </ul>
-      </Dialog.Message>
+            </li>
+            <li>
+              <strong>
+                <FormattedMessage
+                  defaultMessage="Matters will never ask your wallet key through any channel."
+                  description="src/components/Forms/WalletAuthForm/Select.tsx"
+                />
+              </strong>
+            </li>
+          </ul>
+        </Dialog.Message>
+      </section>
     )
   }
 
-  const containerClasses = classNames({
-    container: !!isInPage,
-  })
-
-  const msgClasses = classNames({
-    msg: true,
-    isInDialog,
+  const formClasses = classNames({
+    [styles.form]: true,
+    [styles.inDialog]: isInDialog,
   })
 
   const InnerForm = (
-    <Form id={formId} onSubmit={submitCallback}>
-      {isConnect && (
-        <Form.List
-          groupName={
-            <FormattedMessage
-              defaultMessage="Account"
-              description="src/components/Forms/WalletAuthForm/Select.tsx"
-            />
-          }
-          spacingX={isInPage ? 0 : 'base'}
-        >
-          <Form.List.Item title="Matters ID" rightText={viewer.userName} />
-        </Form.List>
-      )}
+    <section className={formClasses}>
+      <Form id={formId} onSubmit={submitCallback}>
+        {isConnect && (
+          <TableView
+            groupName={
+              <FormattedMessage
+                defaultMessage="Account"
+                description="src/components/Forms/WalletAuthForm/Select.tsx"
+              />
+            }
+            spacingX={isInPage ? 0 : 'base'}
+          >
+            <TableView.Cell title="Matters ID" rightText={viewer.userName} />
+          </TableView>
+        )}
 
-      <section className={containerClasses}>
-        <Form.List
-          groupName={
-            <FormattedMessage defaultMessage="Connect Wallet" description="" />
-          }
+        <TableView
+          groupName={<FormattedMessage defaultMessage="Connect Wallet" />}
           spacingX={isInPage ? 0 : 'base'}
         >
           {injectedConnector?.ready ? (
-            <Form.List.Item
+            <TableView.Cell
               title={
                 <TextIcon
                   color="black"
@@ -213,7 +207,7 @@ const Select: React.FC<FormProps> = ({
               right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
             />
           ) : (
-            <Form.List.Item
+            <TableView.Cell
               title={
                 <TextIcon
                   color="black"
@@ -236,7 +230,7 @@ const Select: React.FC<FormProps> = ({
               role="button"
             />
           )}
-          <Form.List.Item
+          <TableView.Cell
             title={
               <TextIcon
                 color="black"
@@ -258,19 +252,17 @@ const Select: React.FC<FormProps> = ({
               isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null
             }
           />
-        </Form.List>
-        <style jsx>{styles}</style>
-      </section>
+        </TableView>
 
-      <section className={msgClasses}>
-        <Form.Field.Footer
-          fieldMsgId={fieldMsgId}
-          hint={errorMessage ? undefined : <Hint />}
-          error={errorMessage}
-        />
-        <style jsx>{styles}</style>
-      </section>
-    </Form>
+        <section className={styles.container}>
+          <Form.Field.Footer
+            fieldMsgId={fieldMsgId}
+            hint={errorMessage ? undefined : <Hint />}
+            error={errorMessage}
+          />
+        </section>
+      </Form>
+    </section>
   )
 
   if (isInPage) {
@@ -284,39 +276,49 @@ const Select: React.FC<FormProps> = ({
           }
         />
 
-        <Intro />
+        {isConnect && <Intro />}
 
-        {InnerForm}
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          leftButton={
-            back ? <Dialog.Header.BackButton onClick={onBack} /> : null
-          }
-          title={
-            isConnect ? (
-              <FormattedMessage
-                defaultMessage="Connect Wallet"
-                description=""
-              />
-            ) : (
-              <FormattedMessage defaultMessage="Enter" description="" />
-            )
-          }
-          closeDialog={closeDialog}
-        />
-      )}
+      <Dialog.Header
+        closeDialog={closeDialog}
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={onBack}
+            />
+          ) : null
+        }
+        title={
+          isConnect ? (
+            <FormattedMessage defaultMessage="Connect Wallet" />
+          ) : (
+            <FormattedMessage defaultMessage="Enter" />
+          )
+        }
+      />
 
-      <Dialog.Content hasGrow>
-        <Intro />
+      <Dialog.Content>
+        {isConnect && <Intro />}
 
         {InnerForm}
       </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <Dialog.TextButton
+            text={back ? 'back' : 'cancel'}
+            color="greyDarker"
+            onClick={onBack || closeDialog}
+          />
+        }
+      />
     </>
   )
 }

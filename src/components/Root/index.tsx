@@ -22,8 +22,8 @@ import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
 
-const DynamicToastContainer = dynamic(
-  () => import('~/components/Toast').then((mod) => mod.Toast.Container),
+const DynamicToaster = dynamic(
+  () => import('~/components/Toast').then((mod) => mod.Toaster),
   { ssr: false }
 )
 const DynamicAnalyticsInitilizer = dynamic(
@@ -37,6 +37,10 @@ const DynamicGlobalDialogs = dynamic(
   () => import('~/components/GlobalDialogs'),
   { ssr: false }
 )
+
+const DynamicGlobalToasts = dynamic(() => import('~/components/GlobalToasts'), {
+  ssr: false,
+})
 const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
   ssr: false,
 })
@@ -66,7 +70,10 @@ const Root = ({
   const { isInPath } = useRoute()
   const isInAbout = isInPath('ABOUT')
   const isInMigration = isInPath('MIGRATION')
-  const shouldApplyLayout = !isInAbout && !isInMigration
+  const isInAuthCallback = isInPath('CALLBACK_PROVIDER')
+  const isInAuth = isInPath('LOGIN') || isInPath('SIGNUP')
+  const shouldApplyLayout =
+    !isInAbout && !isInMigration && !isInAuthCallback && !isInAuth
 
   const { loading, data, error } =
     useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)
@@ -97,9 +104,10 @@ const Root = ({
               <TranslationsProvider>
                 {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-                <DynamicToastContainer />
+                <DynamicToaster />
                 <DynamicAnalyticsInitilizer user={viewer || {}} />
                 <DynamicGlobalDialogs />
+                <DynamicGlobalToasts />
                 <DynamicProgressBar />
                 <DynamicFingerprint />
               </TranslationsProvider>

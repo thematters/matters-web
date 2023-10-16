@@ -6,7 +6,7 @@ interface SearchHistoryProps {
   removeSearchHistoryItem: (value: string) => void
 }
 import EmptySearchHistory from './EmptySearchHistory'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export const SearchHistory = ({
   data,
@@ -18,11 +18,12 @@ export const SearchHistory = ({
 
   return (
     <section>
-      <section className="title">
+      <section className={styles.title}>
         <TextIcon size="xm" color="grey" weight="md">
           <Translate zh_hans="最近搜索" zh_hant="最近搜尋" en="History" />
         </TextIcon>
       </section>
+
       <Menu>
         {data.map((value, i) => (
           <Menu.Item
@@ -41,8 +42,8 @@ export const SearchHistory = ({
               })
             }}
           >
-            <section className="item">
-              <span className="key">{value}</span>
+            <section className={styles.item}>
+              <span className={styles.key}>{value}</span>
               <Button
                 onClick={(e) => {
                   e?.stopPropagation()
@@ -55,7 +56,6 @@ export const SearchHistory = ({
           </Menu.Item>
         ))}
       </Menu>
-      <style jsx>{styles}</style>
     </section>
   )
 }

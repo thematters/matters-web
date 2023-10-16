@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -77,10 +78,10 @@ const SupportersDialogContent = ({
           </>
         }
         closeDialog={closeDialog}
-        closeTextId="close"
+        closeText={<FormattedMessage defaultMessage="Close" />}
       />
 
-      <Dialog.Content>
+      <Dialog.Content noSpacing>
         <InfiniteScroll
           loader={<Spinner />}
           loadMore={loadMore}
@@ -98,10 +99,21 @@ const SupportersDialogContent = ({
                   id: node.id,
                 })
               }}
+              hasFollow={false}
             />
           ))}
         </InfiniteScroll>
       </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Close" />}
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
+      />
     </>
   )
 }

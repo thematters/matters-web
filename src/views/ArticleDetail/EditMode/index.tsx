@@ -36,7 +36,6 @@ import {
   EditModeArticleQuery,
 } from '~/gql/graphql'
 
-import ConfirmExitDialog from './ConfirmExitDialog'
 import {
   EDIT_ARTICLE_SUPPORT_SETTING,
   EDIT_MODE_ARTICLE,
@@ -44,7 +43,7 @@ import {
 } from './gql'
 import EditModeHeader from './Header'
 import PublishState from './PublishState'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface EditModeProps {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -73,10 +72,14 @@ export const useEditArticleDetailSupportSetting = (
   return { edit, saving }
 }
 
-const Editor = dynamic(() => import('~/components/Editor/Article'), {
-  ssr: false,
-  loading: Spinner,
-})
+const Editor = dynamic(
+  () =>
+    import('~/components/Editor/Article').then((mod) => mod.EditArticleEditor),
+  {
+    ssr: false,
+    loading: Spinner,
+  }
+)
 
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const [editContent, setEditContent] = useState('')
@@ -118,7 +121,13 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const [accessType, editAccessType] = useState<ArticleAccessType>(
     article.access.type
   )
-  const [license, editLicense] = useState<ArticleLicenseType>(article.license)
+
+  // cc2.0 is replace by cc4.0 when editting article
+  const initialLicense =
+    article.license === ArticleLicenseType.CcByNcNd_2
+      ? ArticleLicenseType.CcByNcNd_4
+      : article.license
+  const [license, editLicense] = useState<ArticleLicenseType>(initialLicense)
 
   const ownCircles = editModeArticle?.author.ownCircles
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
@@ -160,6 +169,10 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
 
   const { edit: editSupport, saving: supportSaving } =
     useEditArticleDetailSupportSetting(article)
+
+  const [contentSensitive, setContentSensitive] = useState<boolean>(
+    article.sensitiveByAuthor
+  )
 
   const [iscnPublish, setIscnPublish] = useState<boolean>(false) // always start false
 
@@ -242,6 +255,12 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     supportSettingSaving: false,
     onOpenSupportSetting: () => undefined,
 
+    contentSensitive,
+    toggleContentSensitive() {
+      setContentSensitive(!contentSensitive)
+    },
+    contentSensitiveSaving: false,
+
     togglePublishISCN() {
       setIscnPublish(!iscnPublish)
     },
@@ -250,103 +269,96 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
 
   return (
     <>
-      <ConfirmExitDialog onExit={onCancel}>
-        {({ openDialog: openConfirmExitDialog }) => (
-          <Layout.Main
-            aside={
-              <section className="sidebar">
-                <Sidebar.Tags {...tagsProps} />
-                <Sidebar.Cover {...coverProps} />
-                <Sidebar.Collection {...collectionProps} />
-                <Sidebar.Response
-                  inSidebar
-                  disableChangeCanComment={article.canComment}
-                  {...setCommentProps}
-                />
-
-                <SupportSettingDialog
-                  article={article}
-                  editSupportSetting={editSupport}
-                  supportSettingSaving={supportSaving}
-                >
-                  {({ openDialog }) => (
-                    <Sidebar.Management
-                      {...accessProps}
-                      onOpenSupportSetting={openDialog}
-                    />
-                  )}
-                </SupportSettingDialog>
-                <style jsx>{styles}</style>
-              </section>
-            }
-            inEditor
-          >
-            <Layout.Header
-              right={
-                <EditModeHeader
-                  {...coverProps}
-                  {...tagsProps}
-                  {...collectionProps}
-                  {...accessProps}
-                  {...setCommentProps}
-                  article={article}
-                  draft={draft as any}
-                  editContent={editContent || draft.content || ''}
-                  coverId={cover?.id}
-                  revisionCountLeft={revisionCountLeft}
-                  isOverRevisionLimit={isOverRevisionLimit}
-                  isSameHash={isSameHash}
-                  isEditDisabled={isEditDisabled}
-                  onSaved={() => {
-                    onSaved()
-                  }}
-                  onPublish={() => {
-                    setShowPublishState(true)
-                  }}
-                />
-              }
+      <Layout.Main
+        aside={
+          <section className={styles.sidebar}>
+            <Sidebar.Tags {...tagsProps} />
+            <Sidebar.Cover {...coverProps} />
+            <Sidebar.Collection {...collectionProps} />
+            <Sidebar.Response
+              inSidebar
+              disableChangeCanComment={article.canComment}
+              {...setCommentProps}
             />
 
-            {showPublishState && (
-              <PublishState article={article} cancel={onCancel} />
-            )}
+            <SupportSettingDialog
+              article={article}
+              editSupportSetting={editSupport}
+              supportSettingSaving={supportSaving}
+            >
+              {({ openDialog }) => (
+                <Sidebar.Management
+                  {...accessProps}
+                  onOpenSupportSetting={openDialog}
+                />
+              )}
+            </SupportSettingDialog>
+          </section>
+        }
+        inEditor
+      >
+        <Layout.Header
+          mode="compact"
+          right={
+            <EditModeHeader
+              {...coverProps}
+              {...tagsProps}
+              {...collectionProps}
+              {...accessProps}
+              {...setCommentProps}
+              article={article}
+              draft={draft as any}
+              editContent={editContent || draft.content || ''}
+              coverId={cover?.id}
+              revisionCountLeft={revisionCountLeft}
+              isOverRevisionLimit={isOverRevisionLimit}
+              isSameHash={isSameHash}
+              isEditDisabled={isEditDisabled}
+              onSaved={() => {
+                onSaved()
+              }}
+              onPublish={() => {
+                setShowPublishState(true)
+              }}
+            />
+          }
+        />
 
-            <Layout.Spacing>
-              <Editor
-                draft={draft}
-                isReviseMode={!isReviseDisabled}
-                isSummaryReadOnly
-                isTitleReadOnly
-                update={async (update) => {
-                  setEditContent(update.content || '')
-                }}
-                upload={async () => ({ id: '', path: '' })}
-              />
-            </Layout.Spacing>
-
-            <Media lessThan="xl">
-              <SupportSettingDialog
-                article={article}
-                editSupportSetting={editSupport}
-                supportSettingSaving={supportSaving}
-              >
-                {({ openDialog }) => (
-                  <BottomBar
-                    saving={loading}
-                    disabled={loading}
-                    {...coverProps}
-                    {...tagsProps}
-                    {...collectionProps}
-                    {...accessProps}
-                    {...setCommentProps}
-                    onOpenSupportSetting={openDialog}
-                  />
-                )}
-              </SupportSettingDialog>
-            </Media>
-          </Layout.Main>
+        {showPublishState && (
+          <PublishState article={article} cancel={onCancel} />
         )}
-      </ConfirmExitDialog>
+
+        <Layout.Main.Spacing>
+          <Editor
+            draft={draft}
+            update={async (update) => {
+              setEditContent(update.content || '')
+            }}
+            upload={async () => ({ id: '', path: '' })}
+          />
+        </Layout.Main.Spacing>
+
+        <Media lessThan="lg">
+          <SupportSettingDialog
+            article={article}
+            editSupportSetting={editSupport}
+            supportSettingSaving={supportSaving}
+          >
+            {({ openDialog }) => (
+              <BottomBar
+                saving={loading}
+                disabled={loading}
+                {...coverProps}
+                {...tagsProps}
+                {...collectionProps}
+                {...accessProps}
+                {...setCommentProps}
+                onOpenSupportSetting={openDialog}
+              />
+            )}
+          </SupportSettingDialog>
+        </Media>
+      </Layout.Main>
 
       {!isReviseDisabled && (
         <ReviseArticleDialog revisionCountLeft={revisionCountLeft} />

@@ -1,0 +1,125 @@
+.userProfile {
+  margin-bottom: var(--spacing-base);
+}
+
+.header {
+  @mixin flex-end-space-between;
+
+  padding: 0 var(--spacing-base);
+  margin-bottom: var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
+
+  & .avatar {
+    display: inline-flex;
+    cursor: pointer;
+
+    &.clickable {
+      position: relative;
+
+      & .mask {
+        @mixin expand-to-container;
+        @mixin flex-center-all;
+        @mixin transition;
+
+        background: rgb(0 0 0 / 50%);
+        border-radius: 50%;
+        opacity: 0;
+        transition-property: opacity;
+      }
+
+      &:hover,
+      &:focus {
+        & .mask {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.info {
+  padding-left: var(--spacing-x-tight);
+  margin-bottom: var(--spacing-base);
+
+  & .displayName,
+  & .username {
+    @mixin flex-center-start;
+  }
+
+  & .displayName {
+    & .meDisplayName {
+      cursor: pointer;
+    }
+
+    & .isInUserPageName {
+      font-size: var(--font-size-xl);
+      line-height: 1.5;
+    }
+
+    & .name {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+  }
+
+  & .username,
+  & .description {
+    margin-bottom: var(--spacing-base);
+    font-size: var(--font-size-sm);
+    line-height: 1.375rem;
+    color: var(--color-grey);
+  }
+}
+
+.badges {
+  display: flex;
+
+  & > * + * {
+    margin-left: var(--spacing-tight);
+  }
+}
+
+.follow {
+  margin-top: var(--spacing-base);
+  font-size: var(--font-size-md);
+  line-height: 1.5rem;
+  color: var(--color-grey-darker);
+
+  & > * + * {
+    margin-left: var(--spacing-base);
+  }
+
+  & .count {
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+.meButtons {
+  @mixin flex-center-start;
+
+  margin-top: var(--spacing-base);
+  font-size: var(--font-size-sm);
+
+  & > *:first-child {
+    margin-right: var(--spacing-tight);
+  }
+}
+
+.buttons {
+  @mixin flex-center-start;
+
+  margin-top: var(--spacing-x-loose);
+
+  & > button:first-child {
+    margin-right: var(--spacing-base);
+  }
+}
+
+.footer {
+  padding-left: var(--spacing-x-tight);
+}

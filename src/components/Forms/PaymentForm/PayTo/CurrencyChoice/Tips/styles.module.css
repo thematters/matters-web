@@ -1,0 +1,5 @@
+.tips {
+  font-size: var(--font-size-xs);
+  line-height: 1rem;
+  color: var(--color-grey);
+}

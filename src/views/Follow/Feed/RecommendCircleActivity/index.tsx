@@ -5,7 +5,7 @@ import { RecommendCircleActivityFragment } from '~/gql/graphql'
 import FollowingRecommendCircle from '../FollowingRecommendCircle'
 import FollowingRecommendHead from '../FollowingRecommendHead'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   circles: RecommendCircleActivityFragment['recommendCircles'] | null
@@ -18,7 +18,7 @@ const RecommendCircleActivity = ({ circles, location }: Props) => {
   }
 
   return (
-    <section className="container">
+    <section className={styles.container}>
       <Slides header={<FollowingRecommendHead type="circle" />}>
         {circles.map((circle, index) => (
           <Slides.Item
@@ -33,13 +33,12 @@ const RecommendCircleActivity = ({ circles, location }: Props) => {
               })
             }}
           >
-            <section className="item">
+            <section className={styles.item}>
               <FollowingRecommendCircle circle={circle} />
             </section>
           </Slides.Item>
         ))}
       </Slides>
-      <style jsx>{styles}</style>
     </section>
   )
 }

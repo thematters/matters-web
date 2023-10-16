@@ -1,5 +1,5 @@
 import { numAbbr } from '~/common/utils'
-import { IconDonate24, TextIcon } from '~/components'
+import { IconDonate18, TextIcon } from '~/components'
 import { ActionsDonationCountArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -15,7 +15,7 @@ const DonationCount = ({ article }: DonationCountProps) => {
 
   return (
     <>
-      <TextIcon icon={<IconDonate24 size="xs" />} size="xs" color="grey-dark">
+      <TextIcon icon={<IconDonate18 size="mdXS" />} size="xs" color="grey">
         {article.transactionsReceivedBy.totalCount > 0
           ? numAbbr(article.transactionsReceivedBy.totalCount)
           : undefined}

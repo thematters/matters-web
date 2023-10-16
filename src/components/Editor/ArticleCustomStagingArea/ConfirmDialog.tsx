@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 interface ConfirmDialogProps {
@@ -12,7 +14,7 @@ const ConfirmDialog = ({ removeArticle, children }: ConfirmDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate
@@ -21,28 +23,25 @@ const ConfirmDialog = ({ removeArticle, children }: ConfirmDialogProps) => {
               zh_hant="確認刪除"
             />
           }
-          closeDialog={closeDialog}
-          mode="inner"
         />
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="red"
-            onClick={() => {
-              removeArticle()
-            }}
-          >
-            <Translate id="delete" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="cancel" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={<FormattedMessage defaultMessage="Delete" />}
+              color="red"
+              onClick={removeArticle}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Delete" />}
+              color="red"
+              onClick={removeArticle}
+            />
+          }
+        />
       </Dialog>
     </>
   )

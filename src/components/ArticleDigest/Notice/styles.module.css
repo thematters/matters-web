@@ -1,0 +1,18 @@
+.container {
+  & .header {
+    margin-bottom: var(--spacing-x-tight);
+  }
+
+  & .content {
+    @mixin border-left-grey;
+
+    padding-left: var(--spacing-tight);
+    font-size: var(--font-size-md);
+    color: var(--color-grey);
+    text-overflow: ellipsis;
+    border-left-width: 3px;
+    -webkit-line-clamp: 3;
+
+    @mixin line-clamp;
+  }
+}

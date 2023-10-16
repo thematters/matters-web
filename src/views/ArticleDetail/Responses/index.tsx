@@ -10,7 +10,7 @@ import {
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import ResponseCount from './ResponseCount'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const ARTICLE_RESPONSE = gql`
   query ArticleResponse(
@@ -45,11 +45,11 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
   const canComment = article.__typename === 'Article' && article.canComment
   if (!canComment) {
     return (
-      <section className="disable-response">
+      <section className={styles.disableResponse}>
         <TextIcon
           icon={<IconDisableComment24 size="md" />}
           color="grey"
-          size="sm-s"
+          size="smS"
           allowUserSelect
         >
           <Translate
@@ -58,14 +58,13 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
             en="The author has turned off all responses"
           />
         </TextIcon>
-        <style jsx>{styles}</style>
       </section>
     )
   }
 
   return (
-    <section className="responses">
-      <header>
+    <section className={styles.responses}>
+      <header className={styles.header}>
         <Title type="nav" is="h2">
           <Translate id="responses" />
           <ResponseCount article={article as ResponseCountArticleFragment} />

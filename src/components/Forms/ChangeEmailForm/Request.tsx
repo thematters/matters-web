@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   parseFormSubmitErrors,
@@ -20,8 +21,6 @@ import {
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { ConfirmVerificationCodeMutation } from '~/gql/graphql'
 
-import styles from '../styles.css'
-
 interface FormProps {
   defaultEmail: string
   purpose: 'dialog' | 'page'
@@ -40,6 +39,7 @@ const Request: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
+  const intl = useIntl()
   const [confirmCode] =
     useMutation<ConfirmVerificationCodeMutation>(CONFIRM_CODE)
   const { lang } = useContext(LanguageContext)
@@ -81,12 +81,12 @@ const Request: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        codes.forEach((c) => {
-          if (c.includes('CODE_')) {
-            setFieldError('code', messages[c])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        codes.forEach((code) => {
+          if (code.includes('CODE_')) {
+            setFieldError('code', intl.formatMessage(messages[code]))
           } else {
-            setFieldError('email', messages[c])
+            setFieldError('email', intl.formatMessage(messages[code]))
           }
         })
       }
@@ -94,50 +94,50 @@ const Request: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <section className="container">
-      <Form id={formId} onSubmit={handleSubmit}>
-        <Form.Input
-          label={<Translate id="email" />}
-          type="email"
-          name="email"
-          disabled
-          required
-          value={values.email}
-          error={touched.email && errors.email}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<Translate id="email" />}
+        hasLabel
+        type="email"
+        name="email"
+        disabled
+        required
+        value={values.email}
+        error={touched.email && errors.email}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        spacingBottom="base"
+      />
 
-        <Form.Input
-          label={<Translate id="verificationCode" />}
-          type="text"
-          name="code"
-          required
-          placeholder={translate({ id: 'enterVerificationCode', lang })}
-          hint={translate({ id: 'hintVerificationCode', lang })}
-          value={values.code}
-          error={touched.code && errors.code}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          extraButton={
-            <VerificationSendCodeButton
-              email={values.email}
-              type="email_reset"
-              disabled={!!errors.email}
-            />
-          }
-        />
-      </Form>
-      <style jsx>{styles}</style>
-    </section>
+      <Form.Input
+        label={<Translate id="verificationCode" />}
+        hasLabel
+        type="text"
+        name="code"
+        required
+        placeholder={translate({ id: 'enterVerificationCode', lang })}
+        hint={translate({ id: 'hintVerificationCode', lang })}
+        value={values.code}
+        error={touched.code && errors.code}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        extraButton={
+          <VerificationSendCodeButton
+            email={values.email}
+            type="email_reset"
+            disabled={!!errors.email}
+          />
+        }
+      />
+    </Form>
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<Translate id="nextStep" />}
+      text={<FormattedMessage defaultMessage="Next Step" />}
       loading={isSubmitting}
     />
   )
@@ -150,26 +150,45 @@ const Request: React.FC<FormProps> = ({
           right={
             <>
               <span />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={<FormattedMessage defaultMessage="Next Step" />}
+                loading={isSubmitting}
+              />
             </>
           }
         />
-        {InnerForm}
+
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="changeEmail"
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="changeEmail"
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

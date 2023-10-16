@@ -1,10 +1,12 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Dialog,
   Spinner,
+  Translate,
   useDialogSwitch,
   usePublicQuery,
   ViewerContext,
@@ -91,13 +93,17 @@ const BaseFingerprintDialog = ({
       <Dialog
         isOpen={show}
         onDismiss={closeDialog}
-        smBgColor="grey-lighter"
-        smUpBgColor="grey-lighter"
+        smBgColor="greyLighter"
+        smUpBgColor="greyLighter"
       >
         <Dialog.Header
           title="IPFSEntrance"
-          closeDialog={closeDialog}
-          closeTextId="close"
+          leftBtn={
+            <Dialog.TextButton
+              text={<Translate id="cancel" />}
+              onClick={closeDialog}
+            />
+          }
         />
 
         <DynamicContent
@@ -114,6 +120,16 @@ const BaseFingerprintDialog = ({
           articleLastModified={article.revisedAt || article.createdAt}
           pending={loading}
           refetch={refetch}
+        />
+
+        <Dialog.Footer
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Close" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
         />
       </Dialog>
     </>

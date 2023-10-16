@@ -1,11 +1,8 @@
 import { useState } from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
 import { Button, IconExpand16, TextIcon, Translate } from '~/components'
-
-import styles from './styles.css'
 
 interface CollapsedProps {
   content?: string | null
@@ -31,9 +28,6 @@ const Collapsed = ({
           onClick={captureClicks}
           data-test-id={TEST_ID.COMMENT_CONETNT}
         />
-
-        <style jsx>{styles}</style>
-        <style jsx>{contentCommentStyles}</style>
       </>
     )
   }
@@ -45,7 +39,7 @@ const Collapsed = ({
       {collapsed && (
         <Button
           spacing={['xxtight', 'xtight']}
-          bgActiveColor="grey-lighter"
+          bgActiveColor="greyLighter"
           onClick={() => {
             setCollapsed(false)
           }}
@@ -60,8 +54,6 @@ const Collapsed = ({
           </TextIcon>
         </Button>
       )}
-
-      <style jsx>{styles}</style>
     </p>
   )
 }

@@ -1,7 +1,8 @@
 import classNames from 'classnames'
+import { forwardRef } from 'react'
 
 import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * Pure UI component for <input> element
@@ -22,60 +23,109 @@ import styles from './styles.css'
 type InputProps = {
   type: 'text' | 'password' | 'email' | 'number'
   name: string
+  hasFooter?: boolean
+  leftButton?: React.ReactNode
+  rightButton?: React.ReactNode
 } & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >
 
-const Input: React.FC<InputProps> = ({
-  type,
+const Input = forwardRef(
+  (
+    {
+      type,
 
-  name,
-  label,
-  extraButton,
-  labelVisHidden,
+      name,
+      hasFooter = true,
+      leftButton,
+      rightButton,
 
-  hint,
-  error,
+      label,
+      extraButton,
+      hasLabel,
 
-  ...inputProps
-}) => {
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
-  const inputClasses = classNames({
-    error,
-  })
+      hint,
+      error,
+      hintSize,
+      hintAlign,
+      hintSpace,
 
-  return (
-    <Field>
-      <Field.Header
-        htmlFor={fieldId}
-        label={label}
-        extraButton={extraButton}
-        labelVisHidden={labelVisHidden}
+      spacingTop,
+      spacingBottom,
+
+      ...inputProps
+    }: InputProps,
+    ref
+  ) => {
+    const fieldId = `field-${name}`
+    const fieldMsgId = `field-msg-${name}`
+    const inputClasses = classNames({
+      [styles.input]: true,
+      [styles.error]: error,
+      [styles.wrapper]: !!leftButton || !!rightButton,
+    })
+
+    const input = (
+      <input
+        ref={ref as React.RefObject<any> | null}
+        {...inputProps}
+        id={fieldId}
+        name={name}
+        type={type}
+        aria-describedby={fieldMsgId}
+        autoComplete="nope"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
+        className={!leftButton && !rightButton ? inputClasses : undefined}
       />
+    )
 
-      <Field.Content>
-        <input
-          {...inputProps}
-          id={fieldId}
-          name={name}
-          type={type}
-          aria-describedby={fieldMsgId}
-          autoComplete="nope"
-          autoCorrect="off"
-          autoCapitalize="off"
-          spellCheck="false"
-          className={inputClasses}
+    return (
+      <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
+        <Field.Header
+          htmlFor={fieldId}
+          label={label}
+          extraButton={extraButton}
+          hasLabel={hasLabel}
         />
-      </Field.Content>
 
-      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+        {leftButton && (
+          <Field.Content>
+            <section className={inputClasses}>
+              {leftButton}
+              {input}
+            </section>
+          </Field.Content>
+        )}
 
-      <style jsx>{styles}</style>
-    </Field>
-  )
-}
+        {rightButton && (
+          <Field.Content>
+            <section className={inputClasses}>
+              {input}
+              {rightButton}
+            </section>
+          </Field.Content>
+        )}
+        {!leftButton && !rightButton && <Field.Content>{input}</Field.Content>}
+
+        {hasFooter && (
+          <Field.Footer
+            fieldMsgId={fieldMsgId}
+            hint={hint}
+            error={error}
+            hintSize={hintSize}
+            hintAlign={hintAlign}
+            hintSpace={hintSpace}
+          />
+        )}
+      </Field>
+    )
+  }
+)
+
+Input.displayName = 'Input'
 
 export default Input

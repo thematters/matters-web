@@ -5,7 +5,7 @@ import { translate } from '~/common/utils'
 import { IconChecked, LanguageContext, Translate } from '~/components'
 import { AssetFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SelectorProps {
   assets: AssetFragment[]
@@ -26,7 +26,7 @@ const Selector: React.FC<SelectorProps> = ({
   )
 
   return (
-    <section className="selector">
+    <section className={styles.selector}>
       <h3>
         <Translate
           zh_hant="你也可以選擇一張已有的圖片作為封面"
@@ -62,8 +62,6 @@ const Selector: React.FC<SelectorProps> = ({
           </li>
         ))}
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

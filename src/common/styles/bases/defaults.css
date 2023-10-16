@@ -1,5 +1,3 @@
-/* @styled-jsx=global */
-
 html {
   @mixin font-sans;
 
@@ -41,17 +39,8 @@ button {
 }
 
 a {
-  &:link,
-  &:visited {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  &:hover,
-  &:active,
-  &:focus {
-    text-decoration: none;
-  }
+  color: inherit;
+  text-decoration: none;
 }
 
 svg {
@@ -87,6 +76,7 @@ code,
 kbd,
 samp,
 pre {
+  font-family: var(--font-mono);
   background: var(--color-grey-lighter);
 }
 

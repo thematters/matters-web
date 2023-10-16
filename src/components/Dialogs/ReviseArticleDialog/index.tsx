@@ -1,6 +1,6 @@
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -14,17 +14,14 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
     <>
       {children && children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate zh_hant="修訂須知" zh_hans="修订须知" en="Notice" />
           }
-          closeDialog={closeDialog}
-          closeTextId="cancel"
-          mode="inner"
         />
 
-        <Dialog.Message align="left" type="info">
+        <Dialog.Message align="left" smUpAlign="left">
           <p>
             <Translate
               zh_hant="修訂作品正文目前支持增加、刪除或替換中英文字符，"
@@ -37,7 +34,7 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
                 zh_hans="单次修订上限为"
                 en="with a maximum of"
               />
-              <span className="count"> 50 </span>
+              <span className={styles.count}> 50 </span>
               <Translate
                 zh_hant="個編輯距離。"
                 zh_hans="個編輯距離。"
@@ -56,7 +53,7 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
           <p>
             <b>
               <Translate zh_hant="你還可以修訂" zh_hans="你还可以修订" en="" />
-              <span className="count"> {revisionCountLeft} </span>
+              <span className={styles.count}> {revisionCountLeft} </span>
               <Translate
                 zh_hant="版"
                 zh_hans="版"
@@ -66,13 +63,25 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button onClick={closeDialog}>
-            <Translate zh_hant="開始修訂" zh_hans="开始修订" en="Edit" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <Translate zh_hant="開始修訂" zh_hans="开始修订" en="Edit" />
+              }
+              onClick={closeDialog}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={
+                <Translate zh_hant="開始修訂" zh_hans="开始修订" en="Edit" />
+              }
+              onClick={closeDialog}
+            />
+          }
+        />
       </Dialog>
-      <style jsx>{styles}</style>
     </>
   )
 }

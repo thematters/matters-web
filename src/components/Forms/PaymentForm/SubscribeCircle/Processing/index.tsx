@@ -1,7 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Spinner, Translate } from '~/components'
+import { ERROR_CODES } from '~/common/enums'
+import { Dialog, ERROR_MESSAGES, Spinner } from '~/components'
 import { ViewerCircleStateQuery } from '~/gql/graphql'
 
 import { VIEWER_CIRLCE_STATE } from './gql'
@@ -38,10 +40,14 @@ const Processing: React.FC<Props> = ({ circleName, nextStep }) => {
   }, [isMember])
 
   return (
-    <Dialog.Message type={error ? 'error' : undefined} spacing="md">
+    <Dialog.Message
+      align="center"
+      smUpAlign="center"
+      type={error ? 'error' : undefined}
+    >
       {error ? (
         <h3>
-          <Translate id="NETWORK_ERROR" />
+          <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.NETWORK_ERROR]} />
         </h3>
       ) : (
         <Spinner />

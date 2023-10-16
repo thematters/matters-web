@@ -1,0 +1,38 @@
+.container {
+  padding-right: calc(4.25rem + 5.25rem);
+  padding-left: var(--spacing-base);
+
+  @media (--sm-up) {
+    padding-left: 0;
+  }
+}
+
+.info {
+  @mixin inline-flex-center-end;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  padding-right: var(--spacing-base);
+
+  @media (--sm-up) {
+    padding-right: 0;
+  }
+
+  & .subtext {
+    font-size: var(--font-size-xs);
+  }
+
+  & .period {
+    color: var(--color-grey-darker);
+  }
+
+  & .succeeded {
+    color: var(--color-matters-gold);
+  }
+
+  & .marginRight {
+    margin-right: var(--spacing-base);
+  }
+}

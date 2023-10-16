@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import { iscnLinkUrl, translate } from '~/common/utils'
 import {
@@ -22,7 +23,7 @@ import { GatewaysQuery, RetryEditArticleMutation } from '~/gql/graphql'
 
 import ArticleSecret from './ArticleSecret'
 import SectionCard from './SectionCard'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const EDIT_ARTICLE = gql`
   mutation RetryEditArticle($id: ID!, $iscnPublish: Boolean) {
@@ -73,6 +74,7 @@ const FingerprintDialogContent = ({
   pending: boolean
   refetch: () => any
 }) => {
+  const intl = useIntl()
   const { lang } = useContext(LanguageContext)
   const { loading, data } = useQuery<GatewaysQuery>(GATEWAYS)
 
@@ -113,14 +115,15 @@ const FingerprintDialogContent = ({
   })
 
   return (
-    <Dialog.Content hasGrow>
-      <section className="container">
+    <Dialog.Content>
+      <section className={styles.container}>
         <SectionCard
           title={
             <TextIcon
-              icon={<IconIPFSGreen24 size="md" />}
+              icon={<IconIPFSGreen24 size="mdXS" />}
               spacing="xtight"
-              size="xl"
+              size="xm"
+              weight="md"
             >
               IPFS
             </TextIcon>
@@ -133,13 +136,13 @@ const FingerprintDialogContent = ({
             />
           }
         >
-          <Spacer size="xtight" />
+          <Spacer size="base" />
           <hr />
           <Spacer size="base" />
 
           {/* gateways */}
-          <section className="gateways">
-            <h4 className="title">
+          <section className={styles.gateways}>
+            <h4 className={styles.title}>
               <Translate
                 zh_hans="公共节点"
                 zh_hant="公共節點"
@@ -147,7 +150,7 @@ const FingerprintDialogContent = ({
               />
             </h4>
 
-            <p className="description">
+            <p className={styles.description}>
               <Translate
                 zh_hans="內容分佈節點，可以複製以下地址對作品進行傳播"
                 zh_hant="內容分佈節點，可以複製以下地址對作品進行傳播"
@@ -155,7 +158,7 @@ const FingerprintDialogContent = ({
               />
             </p>
 
-            <ul>
+            <ul className={styles.gatewayUrls}>
               {(!data || loading) && <Spinner />}
 
               {gateways.slice(0, 4).map((url) => {
@@ -171,7 +174,7 @@ const FingerprintDialogContent = ({
                       href={gatewayUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="gateway-url"
+                      className={styles.gatewayUrl}
                     >
                       {hostname}
                       <IconExternalLink16 />
@@ -190,12 +193,12 @@ const FingerprintDialogContent = ({
           <Spacer size="base" />
 
           {/* hash */}
-          <section className="hash">
-            <h4 className="title">
+          <section className={styles.hash}>
+            <h4 className={styles.title}>
               <Translate id="articleFingerprint" />
             </h4>
 
-            <p className="description">
+            <p className={styles.description}>
               <Translate
                 zh_hant="使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
                 zh_hans="使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
@@ -203,15 +206,14 @@ const FingerprintDialogContent = ({
               />
             </p>
 
-            <section className="copy">
-              <input
-                type="text"
-                value={dataHash || translate({ id: 'waitingForHash', lang })}
-                readOnly
-                onClick={(event) => event.currentTarget.select()}
-              />
+            <section className={styles.copy}>
+              <div className={styles.hash}>
+                {dataHash || translate({ id: 'waitingForHash', lang })}
+              </div>
               <CopyToClipboard text={dataHash}>
-                <Button aria-label={translate({ id: 'copy', lang })}>
+                <Button
+                  aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
+                >
                   <IconCopy16 />
                 </Button>
               </CopyToClipboard>
@@ -221,74 +223,80 @@ const FingerprintDialogContent = ({
 
         {/* iscnId */}
         {iscnPublish && (isAuthor || iscnId) && !timeCooling && (
-          <SectionCard
-            title={
-              <TextIcon
-                icon={<IconISCN24 size="md" />}
-                size="xl"
-                spacing="xtight"
-              >
-                ISCN
-              </TextIcon>
-            }
-            description={
-              iscnId ? (
-                <Translate
-                  zh_hant="已在 LikeCoin 鏈上註冊的元數據"
-                  zh_hans="已在 LikeCoin 鏈上註冊的元數據"
-                  en="The metadata registered on LikeCoin chain"
-                />
-              ) : (
-                <Translate
-                  zh_hant="ISCN 寫入未成功"
-                  zh_hans="ISCN 写入未成功"
-                  en="ISCN is failed to register on LikeCoin chain"
-                />
-              )
-            }
-            warning={!iscnId}
-            right={
-              iscnId ? (
-                <a href={iscnLinkUrl(iscnId)} target="_blank" rel="noreferrer">
-                  <IconExternalLink16 color="grey-darker" />
-                </a>
-              ) : isAuthor ? (
-                <Button
-                  spacing={[0, 'xtight']}
-                  size={[null, '1.5rem']}
-                  bgColor="green"
-                  textColor="white"
-                  aria-label={translate({ id: 'retry', lang })}
-                  disabled={!pending && (timeCooling || retryPublishing)}
-                  onClick={() => {
-                    editArticle({
-                      variables: {
-                        id: articleId,
-                        iscnPublish: true,
-                      },
-                    })
-                    setTimeCooling(true)
-                    pooling(Date.now())
-                  }}
+          <>
+            <Spacer size="base" />
+            <SectionCard
+              title={
+                <TextIcon
+                  icon={<IconISCN24 size="mdXS" />}
+                  spacing="xtight"
+                  size="xm"
+                  weight="md"
                 >
-                  <TextIcon size="sm-s">
-                    {timeCooling ? (
-                      <Translate id="publishing2" />
-                    ) : retryPublishing ? (
-                      <Translate id="retrying" />
-                    ) : (
-                      <Translate id="retry" />
-                    )}
-                  </TextIcon>
-                </Button>
-              ) : (
-                <></>
-              )
-            }
-          />
+                  ISCN
+                </TextIcon>
+              }
+              description={
+                iscnId ? (
+                  <Translate
+                    zh_hant="已在 LikeCoin 鏈上註冊的元數據"
+                    zh_hans="已在 LikeCoin 鏈上註冊的元數據"
+                    en="The metadata registered on LikeCoin chain"
+                  />
+                ) : (
+                  <Translate
+                    zh_hant="ISCN 寫入未成功"
+                    zh_hans="ISCN 写入未成功"
+                    en="ISCN is failed to register on LikeCoin chain"
+                  />
+                )
+              }
+              warning={!iscnId}
+              right={
+                iscnId ? (
+                  <a
+                    href={iscnLinkUrl(iscnId)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <IconExternalLink16 color="greyDarker" />
+                  </a>
+                ) : isAuthor ? (
+                  <Button
+                    spacing={[0, 'xtight']}
+                    size={[null, '1.5rem']}
+                    bgColor="green"
+                    textColor="white"
+                    aria-label={translate({ id: 'retry', lang })}
+                    disabled={!pending && (timeCooling || retryPublishing)}
+                    onClick={() => {
+                      editArticle({
+                        variables: {
+                          id: articleId,
+                          iscnPublish: true,
+                        },
+                      })
+                      setTimeCooling(true)
+                      pooling(Date.now())
+                    }}
+                  >
+                    <TextIcon size="smS">
+                      {timeCooling ? (
+                        <Translate id="publishing2" />
+                      ) : retryPublishing ? (
+                        <Translate id="retrying" />
+                      ) : (
+                        <Translate id="retry" />
+                      )}
+                    </TextIcon>
+                  </Button>
+                ) : (
+                  <></>
+                )
+              }
+            />
+          </>
         )}
-
-        <style jsx>{styles}</style>
       </section>
     </Dialog.Content>
   )

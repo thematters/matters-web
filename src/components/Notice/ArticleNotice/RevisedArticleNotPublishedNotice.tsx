@@ -8,7 +8,7 @@ import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const RevisedArticleNotPublishedNotice = ({
   notice,
@@ -17,14 +17,14 @@ const RevisedArticleNotPublishedNotice = ({
 }) => {
   return (
     <section
-      className="container"
+      className={styles.container}
       data-test-id={TEST_ID.NOTICE_REVISED_ARTICLE_NOT_PUBLISHED}
     >
-      <section className="avatar-wrap">
+      <section className={styles.avatarWrap}>
         <NoticeTypeIcon type="logo" />
       </section>
 
-      <section className="content-wrap">
+      <section className={styles.contentWrap}>
         <NoticeHead>
           <FormattedMessage
             defaultMessage="Failed to republish article"
@@ -36,8 +36,6 @@ const RevisedArticleNotPublishedNotice = ({
 
         <NoticeDate notice={notice} />
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

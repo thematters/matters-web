@@ -11,7 +11,7 @@ import { IconSort16, LanguageContext } from '~/components'
 
 import { SelectNode } from '../SearchingArea'
 import SearchSelectNode from '../SearchSelectNode'
-import areaStyles from '../styles.css'
+import areaStyles from '../styles.module.css'
 
 interface StagingNode {
   node: SelectNode
@@ -63,7 +63,7 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
       <Droppable droppableId="droppable-staging-nodes">
         {(dropProvided) => (
           <ul
-            className="nodes"
+            className={areaStyles.nodes}
             ref={dropProvided.innerRef}
             {...dropProvided.droppableProps}
           >
@@ -77,7 +77,7 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
                     {...dragProvided.dragHandleProps}
                   >
                     <span
-                      className="drag-handler"
+                      className={areaStyles.dragHandler}
                       aria-label={translate({
                         zh_hant: '拖拽',
                         zh_hans: '拖拽',
@@ -85,7 +85,7 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
                         lang,
                       })}
                     >
-                      <IconSort16 color="grey-light" />
+                      <IconSort16 color="greyLight" />
                     </span>
 
                     <SearchSelectNode
@@ -98,8 +98,6 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
                 )}
               </Draggable>
             ))}
-
-            <style jsx>{areaStyles}</style>
           </ul>
         )}
       </Droppable>

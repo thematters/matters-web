@@ -12,7 +12,7 @@ import {
 } from '~/components'
 import { TagParticipantsQuery } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import TAG_PARTICIPANTS from './gql'
 
 interface Props {
@@ -75,10 +75,10 @@ const Participants = ({ id }: Props) => {
 
   return (
     <>
-      <section className="category">
+      <section className={styles.category}>
         <section>
-          <FormattedMessage defaultMessage="Creators" description="" />
-          <span className="count">({count})</span>
+          <FormattedMessage defaultMessage="Creators" />
+          <span className={styles.count}>({count})</span>
         </section>
       </section>
 
@@ -103,8 +103,6 @@ const Participants = ({ id }: Props) => {
           ))}
         </List>
       </InfiniteScroll>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

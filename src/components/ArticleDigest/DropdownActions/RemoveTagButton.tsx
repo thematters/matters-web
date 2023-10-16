@@ -3,8 +3,8 @@ import _isArray from 'lodash/isArray'
 import { FormattedMessage } from 'react-intl'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import { IconRemove24, Menu, TextIcon, useMutation } from '~/components'
-import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
+import { IconCircleMinus20, Menu, useMutation } from '~/components'
+import { updateTagArticlesCount } from '~/components/GQL'
 import {
   DeleteArticlesTagsMutation,
   RemoveTagButtonArticleFragment,
@@ -57,6 +57,13 @@ const RemoveTagButton = ({
 
   return (
     <Menu.Item
+      text={
+        <FormattedMessage
+          defaultMessage="Remove Article"
+          description="src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
+        />
+      }
+      icon={<IconCircleMinus20 size="mdS" />}
       onClick={async () => {
         await deleteArticlesTags()
 
@@ -68,14 +75,7 @@ const RemoveTagButton = ({
           })
         )
       }}
-    >
-      <TextIcon icon={<IconRemove24 size="md" />} size="md" spacing="base">
-        <FormattedMessage
-          defaultMessage="Remove Article"
-          description="src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
-        />
-      </TextIcon>
-    </Menu.Item>
+    />
   )
 }
 

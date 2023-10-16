@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
-import { ADD_TOAST } from '~/common/enums'
-import { Button, TextIcon, Translate, useMutation } from '~/components'
+import { Button, TextIcon, toast, Translate, useMutation } from '~/components'
 import INVITE_CIRCLE from '~/components/GQL/mutations/invite'
 import { InviteCircleInvitee, InviteCircleMutation } from '~/gql/graphql'
 
@@ -43,20 +42,15 @@ const CircleInvitationResendButton = ({
         },
       })
 
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: (
-              <Translate
-                zh_hant="邀請已送出"
-                zh_hans="邀请已送出"
-                en="Invitation sent"
-              />
-            ),
-          },
-        })
-      )
+      toast.success({
+        message: (
+          <Translate
+            zh_hant="邀請已送出"
+            zh_hans="邀请已送出"
+            en="Invitation sent"
+          />
+        ),
+      })
     } catch (e) {
       console.error(e)
     } finally {
@@ -68,11 +62,11 @@ const CircleInvitationResendButton = ({
     <Button
       spacing={[0, 'base']}
       size={[null, '2rem']}
-      bgColor="grey-lighter"
+      bgColor="greyLighter"
       onClick={() => resend()}
       disabled={disabled}
     >
-      <TextIcon size="sm-s" color="black" weight="md">
+      <TextIcon size="smS" color="black" weight="md">
         <Translate id="resend" />
       </TextIcon>
     </Button>

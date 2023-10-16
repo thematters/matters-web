@@ -3,6 +3,8 @@ import { useContext } from 'react'
 import { Form, LanguageContext, Translate } from '~/components'
 import { ArticleLicenseType } from '~/gql/graphql'
 
+import About from './About'
+
 interface Props {
   isInCircle: boolean
   license: ArticleLicenseType
@@ -11,16 +13,21 @@ interface Props {
 
 const LICENSE_TEXT = {
   1: {
-    [ArticleLicenseType.CcByNcNd_2]: {
+    [ArticleLicenseType.CcByNcNd_4]: {
       title: {
-        zh_hant: '不上鎖，CC BY-NC-ND 2.0 聲明',
-        zh_hans: '不上锁，CC BY-NC-ND 2.0 声明',
-        en: 'Public, CC BY-NC-ND 2.0 License',
+        zh_hant: '不上鎖，CC BY-NC-ND 4.0 聲明',
+        zh_hans: '不上锁，CC BY-NC-ND 4.0 声明',
+        en: 'Public, CC BY-NC-ND 4.0 License',
       },
       subtitle: {
         zh_hant: '可分享，需姓名標示、非商業用途、禁止改作',
         zh_hans: '可分享，需姓名标示、非商业用途、禁止改作',
         en: 'Free to Share, Attribution, Non-Commercial, No Derivatives',
+      },
+      extra: {
+        zh_hant: '關於 CC 4.0',
+        zh_hans: '关于 CC 4.0',
+        en: 'About CC 4.0',
       },
     },
     [ArticleLicenseType.Cc_0]: {
@@ -34,6 +41,7 @@ const LICENSE_TEXT = {
         zh_hans: '可分享，不需姓名标示、可商业用途及改作',
         en: 'No Copyright',
       },
+      extra: { zh_hant: '', zh_hans: '', en: '' },
     },
     [ArticleLicenseType.Arr]: {
       title: {
@@ -46,19 +54,25 @@ const LICENSE_TEXT = {
         zh_hans: '未订阅者无法阅读摘要外的正文',
         en: 'Only circle members can read the full article.',
       },
+      extra: { zh_hant: '', zh_hans: '', en: '' },
     },
   },
   0: {
-    [ArticleLicenseType.CcByNcNd_2]: {
+    [ArticleLicenseType.CcByNcNd_4]: {
       title: {
-        zh_hant: 'CC BY-NC-ND 2.0 聲明',
-        zh_hans: 'CC BY-NC-ND 2.0 声明',
-        en: 'CC BY-NC-ND 2.0 License',
+        zh_hant: 'CC BY-NC-ND 4.0 聲明',
+        zh_hans: 'CC BY-NC-ND 4.0 声明',
+        en: 'CC BY-NC-ND 4.0 License',
       },
       subtitle: {
         zh_hant: '可分享，需姓名標示、非商業用途、禁止改作',
         zh_hans: '可分享，需姓名标示、非商业用途、禁止改作',
         en: 'Free to Share, Attribution, Non-Commercial, No Derivatives',
+      },
+      extra: {
+        zh_hant: '關於 CC 4.0',
+        zh_hans: '关于 CC 4.0',
+        en: 'About CC 4.0',
       },
     },
     [ArticleLicenseType.Cc_0]: {
@@ -72,6 +86,7 @@ const LICENSE_TEXT = {
         zh_hans: '可分享，不需姓名标示、可商业用途及改作',
         en: 'No Copyright',
       },
+      extra: { zh_hant: '', zh_hans: '', en: '' },
     },
     [ArticleLicenseType.Arr]: {
       title: {
@@ -80,6 +95,7 @@ const LICENSE_TEXT = {
         en: 'All Rights Reserved',
       },
       subtitle: { zh_hant: '', zh_hans: '', en: '' },
+      extra: { zh_hant: '', zh_hans: '', en: '' },
     },
   },
 }
@@ -88,24 +104,32 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
   const { lang } = useContext(LanguageContext)
 
   const options = [
-    ArticleLicenseType.CcByNcNd_2,
+    ArticleLicenseType.CcByNcNd_4,
     ArticleLicenseType.Cc_0,
     ArticleLicenseType.Arr,
-  ]
+  ] as const
+  const cc4link = 'https://creativecommons.org/licenses/by-nc-nd/4.0/'
 
   return (
     <Form.Select
       name="select-license"
       label={<Translate id="license" />}
-      labelVisHidden
       title={<Translate id="license" />}
       onChange={(option) => onChange(option.value)}
-      options={options.map((value) => ({
-        name: LICENSE_TEXT[isInCircle ? 1 : 0][value].title[lang],
-        subtitle: LICENSE_TEXT[isInCircle ? 1 : 0][value].subtitle[lang],
-        value,
-        selected: license === value,
-      }))}
+      options={options.map((value) => {
+        const extraDesc = LICENSE_TEXT[isInCircle ? 1 : 0][value].extra[lang]
+        let extra: string | React.ReactNode = ''
+        if (extraDesc) {
+          extra = <About desc={extraDesc} url={cc4link} />
+        }
+        return {
+          name: LICENSE_TEXT[isInCircle ? 1 : 0][value].title[lang],
+          subtitle: LICENSE_TEXT[isInCircle ? 1 : 0][value].subtitle[lang],
+          extra,
+          value,
+          selected: license === value,
+        }
+      })}
       size="sm"
     />
   )

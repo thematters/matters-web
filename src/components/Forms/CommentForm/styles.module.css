@@ -1,0 +1,14 @@
+.form {
+  position: relative;
+}
+
+.content {
+  padding: var(--spacing-base);
+  margin-bottom: var(--spacing-tight);
+  background: var(--color-grey-lighter);
+  border-radius: var(--spacing-base);
+}
+
+.footer {
+  text-align: right;
+}

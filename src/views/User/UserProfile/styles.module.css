@@ -1,0 +1,126 @@
+.userProfile {
+  margin-bottom: var(--spacing-base-loose);
+}
+
+.right {
+  @mixin flex-start-space-between;
+
+  margin-top: var(--spacing-base);
+
+  & > * {
+    &:nth-child(2) {
+      margin-left: var(--spacing-base);
+    }
+  }
+}
+
+.header {
+  @mixin flex-start-space-between;
+
+  padding: 0 var(--spacing-base);
+  margin-bottom: var(--spacing-base);
+
+  & .avatar {
+    z-index: 0;
+    display: inline-flex;
+    margin-top: calc(var(--spacing-loose) * -1);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--color-white);
+  }
+
+  & .avatarBtn {
+    position: relative;
+  }
+}
+
+.info {
+  padding: 0 var(--spacing-base);
+  margin-bottom: var(--spacing-tight);
+
+  & .displayName,
+  & .username {
+    @mixin flex-center-start;
+
+    & > * + * {
+      margin-left: var(--spacing-x-tight);
+    }
+  }
+
+  & .displayName {
+    font-size: var(--font-size-xl);
+    line-height: 1;
+
+    & .name {
+      line-height: 1.5rem;
+    }
+  }
+
+  & .username {
+    margin-top: var(--spacing-x-tight);
+    font-size: var(--font-size-md);
+    line-height: 1;
+    color: var(--color-grey-dark);
+  }
+
+  .badges {
+    & > span > * {
+      position: relative;
+      display: inline-block;
+      margin-left: -4.5px;
+      border: 2px solid var(--color-white);
+      border-radius: 50%;
+
+      &:nth-child(1) {
+        z-index: 9;
+      }
+
+      &:nth-child(2) {
+        z-index: 8;
+      }
+
+      &:nth-child(3) {
+        z-index: 7;
+      }
+
+      &:nth-child(4) {
+        z-index: 6;
+      }
+
+      &:nth-child(5) {
+        z-index: 5;
+      }
+    }
+  }
+}
+
+.badgesInDialog {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-row-gap: var(--spacing-loose);
+  margin-bottom: var(--spacing-loose);
+}
+
+.badgesInPage {
+  display: flex;
+  align-items: center;
+}
+
+.follow {
+  padding: 0 var(--spacing-base);
+  margin-top: var(--spacing-base);
+  font-size: var(--font-size-md);
+  line-height: 1.5rem;
+  color: var(--color-grey-darker);
+
+  & > * + * {
+    margin-left: var(--spacing-base);
+  }
+
+  & .count {
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+.footer {
+  padding: 0 var(--spacing-base);
+}

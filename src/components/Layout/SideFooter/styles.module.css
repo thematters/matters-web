@@ -1,0 +1,18 @@
+.footer {
+  @mixin flex-center-space-between;
+
+  padding-left: var(--spacing-x-tight);
+  margin: var(--spacing-x-loose) 0 var(--spacing-base-loose);
+}
+
+.links {
+  @mixin flex-center-space-between;
+
+  font-size: var(--font-size-xs);
+  line-height: 1.125rem;
+  color: var(--color-grey);
+}
+
+.dot {
+  color: var(--color-grey-light);
+}

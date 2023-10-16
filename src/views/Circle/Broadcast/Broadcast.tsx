@@ -4,7 +4,7 @@ import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
+import { URL_FRAGMENT } from '~/common/enums'
 import { dom, filterComments, mergeConnections } from '~/common/utils'
 import {
   CommentForm,
@@ -15,6 +15,7 @@ import {
   Spinner,
   ThreadComment,
   Throw404,
+  toast,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -23,7 +24,7 @@ import { BroadcastPrivateQuery, BroadcastPublicQuery } from '~/gql/graphql'
 
 import CircleDetailTabs from '../CircleDetailTabs'
 import { BROADCAST_PRIVATE, BROADCAST_PUBLIC } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CommentPublic = NonNullable<
   NonNullable<BroadcastPublicQuery['circle']>['broadcast']['edges']
@@ -198,20 +199,14 @@ const CricleBroadcast = () => {
   const isMember = circle?.circleIsMember
   const lock = viewer.isAuthed && !isOwner && !isMember
   const submitCallback = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <FormattedMessage
-              defaultMessage="Broadcast sent"
-              description="src/views/Circle/Broadcast/Broadcast.tsx"
-            />
-          ),
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="Broadcast sent"
+          description="src/views/Circle/Broadcast/Broadcast.tsx"
+        />
+      ),
+    })
     refetch()
   }
 
@@ -219,9 +214,9 @@ const CricleBroadcast = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="broadcast">
+      <section className={styles.broadcast}>
         {isOwner && (
-          <header>
+          <header className={styles.header}>
             <CommentForm
               circleId={circle?.id}
               type="circleBroadcast"
@@ -245,7 +240,11 @@ const CricleBroadcast = () => {
             />
           ))}
 
-        <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          eof
+        >
           <List spacing={['xloose', 0]}>
             {comments.map((comment) => (
               <List.Item key={comment.id}>
@@ -262,8 +261,6 @@ const CricleBroadcast = () => {
             ))}
           </List>
         </InfiniteScroll>
-
-        <style jsx>{styles}</style>
       </section>
     </>
   )

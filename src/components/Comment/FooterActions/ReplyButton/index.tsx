@@ -71,7 +71,7 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
+      bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       aria-label={translate({ id: 'replyComment', lang })}
       {...props}
     >

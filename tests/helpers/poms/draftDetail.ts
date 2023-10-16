@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test'
 import _sample from 'lodash/sample'
 import _uniq from 'lodash/uniq'
 
-import { TEST_ID } from '~/common/enums'
+import { PATHS, TEST_ID } from '~/common/enums'
 
 import { waitForAPIResponse } from '../api'
 import {
@@ -14,7 +14,7 @@ import {
 } from '../text'
 import { pageGoto } from '../utils'
 
-type License = 'CC BY-NC-ND 2.0 License' | 'CC0 License' | 'All Rights Reserved'
+type License = 'CC BY-NC-ND 4.0 License' | 'CC0 License' | 'All Rights Reserved'
 
 export class DraftDetailPage {
   readonly page: Page
@@ -77,7 +77,7 @@ export class DraftDetailPage {
     this.barToggleAddToCircle = this.page.getByLabel('Add to Circle')
     this.barToggleISCN = this.page.getByLabel('Register for ISCN')
     this.barSetLicense = this.page.getByRole('button', {
-      name: 'CC BY-NC-ND 2.0 License',
+      name: 'CC BY-NC-ND 4.0 License',
     })
     this.barSupportSetting = this.page.getByRole('button', {
       name: 'Support Setting',
@@ -97,7 +97,7 @@ export class DraftDetailPage {
     // editing
     this.titleInput = this.page.getByPlaceholder('Enter title')
     this.summaryInput = this.page.getByPlaceholder('Enter summary')
-    this.contentInput = this.page.locator('.ql-editor')
+    this.contentInput = this.page.locator('.tiptap')
 
     // dialog
     this.dialog = this.page.getByRole('dialog')
@@ -114,7 +114,7 @@ export class DraftDetailPage {
       name: 'View Article',
     })
     this.dialogSaveButton = this.dialog.getByRole('button', {
-      name: 'Save',
+      name: 'Confirm',
     })
     this.dialogDoneButton = this.dialog.getByRole('button', {
       name: 'Done',
@@ -132,14 +132,11 @@ export class DraftDetailPage {
   }
 
   async createDraft() {
-    await pageGoto(this.page, '/')
+    await pageGoto(this.page, PATHS.ME_DRAFT_NEW)
 
     // Promise.all prevents a race condition between clicking and waiting.
-    await Promise.all([
-      this.page.waitForNavigation(),
-      this.page.getByRole('button', { name: 'Create' }).click(),
-    ])
-    await expect(this.page).toHaveURL(/\/me\/drafts\/.*-.*/)
+    await this.page.waitForNavigation()
+    await expect(this.page).toHaveURL(PATHS.ME_DRAFT_NEW)
   }
 
   async gotoLatestDraft() {
@@ -280,8 +277,14 @@ export class DraftDetailPage {
     }
 
     if (allow) {
+      await this.page.evaluate(() => {
+        window.scrollTo(0, 0)
+      })
       await this.barResponsesAllow.click()
     } else {
+      await this.page.evaluate(() => {
+        window.scrollTo(0, 0)
+      })
       await this.barResponsesDisallow.click()
     }
 
@@ -344,7 +347,7 @@ export class DraftDetailPage {
   async setLicense({ license }: { license?: License }) {
     license =
       license ||
-      _sample(['CC BY-NC-ND 2.0 License', 'CC0 License', 'All Rights Reserved'])
+      _sample(['CC BY-NC-ND 4.0 License', 'CC0 License', 'All Rights Reserved'])
 
     if (this.isMobile) {
       await this.bottombarManage.click()

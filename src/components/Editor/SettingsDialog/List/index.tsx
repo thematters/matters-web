@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { Dialog, Translate } from '~/components'
 import { SetPublishISCNProps } from '~/components/Editor'
 
@@ -5,7 +7,7 @@ import ListItem from '../../ListItem'
 import { Step } from '../../SettingsDialog'
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type SettingsListDialogButtons = {
   confirmButtonText?: string | React.ReactNode
@@ -59,13 +61,20 @@ const SettingsList = ({
     <>
       <Dialog.Header
         title={<Translate id="settings" />}
-        closeDialog={closeDialog}
-        closeTextId="close"
-        mode="hidden"
+        closeDialog={cancelButtonText ? closeDialog : undefined}
+        closeText={cancelButtonText || undefined}
+        rightBtn={
+          <Dialog.TextButton
+            text={confirmButtonText}
+            onClick={onConfirm ? onConfirm : () => forward('confirm')}
+            loading={saving}
+            disabled={disabled}
+          />
+        }
       />
 
-      <Dialog.Content hasGrow>
-        <ul role="list">
+      <Dialog.Content noSpacing>
+        <ul className={styles.container} role="list">
           <ListItem
             title={<Translate id="addTags" />}
             subTitle={
@@ -81,7 +90,9 @@ const SettingsList = ({
 
           <ListItem
             title={<Translate id="setCover" />}
-            subTitle={<Translate id="recommendedCoverSize" />}
+            subTitle={
+              <FormattedMessage defaultMessage="Recommended square image." />
+            }
             hint
             onClick={() => forward('cover')}
           >
@@ -95,43 +106,35 @@ const SettingsList = ({
             <ListItem.NumberIndicator num={collectionCount} />
           </ListItem>
 
-          <section className="response">
+          <section className={styles.response}>
             <ToggleResponse {...responseProps} />
           </section>
 
-          <section className="access">
+          <section className={styles.access}>
             <ToggleAccess {...restProps} />
           </section>
-
-          {(confirmButtonText || cancelButtonText) && (
-            <Dialog.Footer>
-              {confirmButtonText && (
-                <Dialog.Footer.Button
-                  bgColor="green"
-                  onClick={onConfirm ? onConfirm : () => forward('confirm')}
-                  loading={saving}
-                  disabled={disabled}
-                >
-                  {confirmButtonText}
-                </Dialog.Footer.Button>
-              )}
-
-              {cancelButtonText && (
-                <Dialog.Footer.Button
-                  bgColor="grey-lighter"
-                  textColor="black"
-                  onClick={closeDialog}
-                  disabled={disabled}
-                >
-                  {cancelButtonText}
-                </Dialog.Footer.Button>
-              )}
-            </Dialog.Footer>
-          )}
         </ul>
       </Dialog.Content>
 
-      <style jsx>{styles}</style>
+      {(confirmButtonText || cancelButtonText) && (
+        <Dialog.Footer
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text={cancelButtonText}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+              <Dialog.TextButton
+                text={confirmButtonText}
+                onClick={onConfirm ? onConfirm : () => forward('confirm')}
+                loading={saving}
+                disabled={disabled}
+              />
+            </>
+          }
+        />
+      )}
     </>
   )
 }

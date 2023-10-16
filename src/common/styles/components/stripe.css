@@ -1,0 +1,33 @@
+.StripeElement {
+  @mixin transition;
+  @mixin border-grey;
+
+  height: var(--input-height);
+  padding: 0 0 0 var(--spacing-base);
+  color: var(--color-grey-dark);
+  caret-color: var(--color-matters-green);
+  border-radius: var(--spacing-x-tight);
+  transition-property: border-color, background-color;
+
+  &.StripeElement--focus {
+    color: var(--color-black);
+    border-color: var(--color-grey);
+  }
+
+  &.StripeElement--invalid {
+    background-color: transparent;
+    border-color: var(--color-red);
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    margin: 0;
+    appearance: none;
+  }
+
+  /* Firefox */
+  &[type='number'] {
+    appearance: textfield;
+  }
+}

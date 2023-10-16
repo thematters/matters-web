@@ -1,28 +1,30 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
+import { MAX_ARTICLE_SUPPORT_LENGTH } from '~/common/enums'
 import { translate, validateSupportWords } from '~/common/utils'
 import {
   Dialog,
   Form,
   LanguageContext,
-  Media,
-  Spacer,
   TextIcon,
+  toast,
   Translate,
   useRoute,
 } from '~/components'
 import { ArticleDetailPublicQuery, EditMetaDraftFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 import SupportPreview from './SupportPreview'
 import Tab, { TabType } from './Tab'
 
 interface FormProps {
+  back?: () => any
   closeDialog: () => void
-  onBack?: () => any
+  submitCallback?: () => void
+
   draft?: EditMetaDraftFragment
   article?: ArticleDetailPublicQuery['article']
   editSupportSetting: (
@@ -38,8 +40,10 @@ interface FormValues {
 }
 
 const SupportSettingDialogContent: React.FC<FormProps> = ({
+  back,
   closeDialog,
-  onBack,
+  submitCallback,
+
   draft,
   article,
   editSupportSetting,
@@ -76,17 +80,18 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       }),
     onSubmit: async ({}, { setSubmitting }) => {
       editSupportSetting(values.requestForDonation, values.replyToDonator)
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: <Translate id="successSetSupportSetting" />,
-          },
-        })
-      )
+
+      toast.success({
+        message: <Translate id="successSetSupportSetting" />,
+      })
 
       setSubmitting(false)
-      closeDialog()
+
+      if (submitCallback) {
+        submitCallback()
+      } else {
+        closeDialog()
+      }
     },
   })
 
@@ -100,15 +105,17 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         {tab === 'request' && (
           <Form.Textarea
             label={<Translate id="requestForDonation" />}
-            labelVisHidden
             name="requestForDonation"
             placeholder={translate({
               id: 'supportRequestDescription',
               lang,
             })}
-            hint={<Translate id="supportSettingHint" />}
             value={values.requestForDonation! || ''}
+            hint={`${
+              values.requestForDonation?.length || 0
+            }/${MAX_ARTICLE_SUPPORT_LENGTH}`}
             error={errors.requestForDonation}
+            hintAlign={errors.requestForDonation ? 'left' : 'right'}
             onBlur={handleBlur}
             onChange={(e) => {
               setFieldValue('requestForDonation', e.currentTarget.value)
@@ -118,15 +125,16 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         {tab === 'reply' && (
           <Form.Textarea
             label={<Translate id="replyToDonator" />}
-            labelVisHidden
             name="replyToDonator"
             placeholder={translate({
               id: 'supportResponseDescription',
               lang,
             })}
-            hint={<Translate id="supportSettingHint" />}
-            value={values.replyToDonator! || ''}
+            hint={`${
+              values.replyToDonator?.length || 0
+            }/${MAX_ARTICLE_SUPPORT_LENGTH}`}
             error={errors.replyToDonator}
+            hintAlign={errors.replyToDonator ? 'left' : 'right'}
             onBlur={handleBlur}
             onChange={(e) =>
               setFieldValue('replyToDonator', e.currentTarget.value)
@@ -138,11 +146,11 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
   }
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting || supportSettingSaving}
-      text={<Translate id="save" />}
+      text={<FormattedMessage defaultMessage="Confirm" />}
       loading={isSubmitting}
     />
   )
@@ -152,44 +160,56 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       <Dialog.Header
         title="setSupportSetting"
         closeDialog={closeDialog}
-        leftButton={
-          onBack ? <Dialog.Header.BackButton onClick={onBack} /> : null
+        leftBtn={
+          back ? (
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Back" />}
+              onClick={back}
+            />
+          ) : null
         }
-        rightButton={SubmitButton}
+        rightBtn={SubmitButton}
       />
 
-      <Dialog.Content>
-        <Media at="sm">
-          <Spacer size="base" />
-        </Media>
-
-        <Tab tabType={tabType} setTabType={changeTabType} />
-
-        <section className="content-input">{InnerForm(tabType)}</section>
-
-        <section className="preview">
-          <h3>
-            <TextIcon size="md" weight="md">
-              <Translate
-                zh_hans="效果预览"
-                zh_hant="效果預覽"
-                en="Support Setting Preview"
-              />
-            </TextIcon>
-          </h3>
-
-          <SupportPreview
-            content={
-              tabType === 'request'
-                ? values.requestForDonation!
-                : values.replyToDonator!
-            }
-            tabType={tabType}
-          />
+      <Dialog.Content fixedHeight>
+        <section className={styles.tabs}>
+          <Tab tabType={tabType} setTabType={changeTabType} />
         </section>
 
-        <style jsx>{styles}</style>
+        {InnerForm(tabType)}
+
+        <h3>
+          <TextIcon size="md" weight="md">
+            <Translate
+              zh_hans="效果预览"
+              zh_hant="效果預覽"
+              en="Support Setting Preview"
+            />
+          </TextIcon>
+        </h3>
+
+        <SupportPreview
+          content={
+            tabType === 'request'
+              ? values.requestForDonation!
+              : values.replyToDonator!
+          }
+          tabType={tabType}
+        />
       </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={back ? 'back' : 'cancel'}
+              color="greyDarker"
+              onClick={back || closeDialog}
+            />
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }
