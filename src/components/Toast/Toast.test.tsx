@@ -50,7 +50,6 @@ describe('<Toast>', () => {
     render(<AnyToast />)
 
     // show toast
-    screen.debug()
     fireEvent.click(screen.getByRole('button', { name: /Notify/i }))
     const $toast = screen.getByRole('alert')
     expect($toast).toBeInTheDocument()

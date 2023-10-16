@@ -6,7 +6,7 @@ import React from 'react'
  *
  * @see {@url https://gist.github.com/atomiks/520f4b0c7b537202a23a3059d4eec908}
  */
-const LazyTippy = (props: TippyProps) => {
+export const LazyTippy = (props: TippyProps) => {
   const [mounted, setMounted] = React.useState(false)
 
   const lazyPlugin = {
@@ -23,5 +23,3 @@ const LazyTippy = (props: TippyProps) => {
 
   return <Tippy {...computedProps} />
 }
-
-export default LazyTippy
