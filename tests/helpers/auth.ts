@@ -53,7 +53,7 @@ export const login = async ({
   await page.getByPlaceholder('Password').fill(password)
 
   // Submit
-  await page.getByRole('button', { name: 'Confirm' }).click()
+  await page.getByRole('button', { name: 'Sign in' }).click()
 
   await Promise.all([
     waitForAPIResponse({
