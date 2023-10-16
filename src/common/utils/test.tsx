@@ -6,14 +6,36 @@ import { render, RenderOptions } from '@testing-library/react'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import ApolloClient from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import { IntlProvider } from 'react-intl'
 
+import TRANSLATIONS_EN from '@/compiled-lang/en.json'
+import TRANSLATIONS_ZH_HANS from '@/compiled-lang/zh-Hans.json'
+import TRANSLATIONS_ZH_HANT from '@/compiled-lang/zh-Hant.json'
 import {
   FeaturesProvider,
+  LanguageContext,
   LanguageProvider,
   MediaContextProvider,
 } from '~/components'
+import { UserLanguage } from '~/gql/graphql'
+
+import { toLocale } from './language'
+
+const TranslationsProvider = ({ children }: { children: React.ReactNode }) => {
+  const { lang } = useContext(LanguageContext)
+  const translations = {
+    [UserLanguage.ZhHant]: TRANSLATIONS_ZH_HANT,
+    [UserLanguage.ZhHans]: TRANSLATIONS_ZH_HANS,
+    [UserLanguage.En]: TRANSLATIONS_EN,
+  }
+
+  return (
+    <IntlProvider locale={toLocale(lang)} messages={translations[lang]}>
+      {children}
+    </IntlProvider>
+  )
+}
 
 // src/components/Root/index.tsx
 const AllProviders = ({ children }: { children: React.ReactNode }) => {
@@ -28,9 +50,7 @@ const AllProviders = ({ children }: { children: React.ReactNode }) => {
       <LanguageProvider headers={undefined}>
         <FeaturesProvider official={undefined}>
           <MediaContextProvider>
-            <IntlProvider locale="en" messages={undefined}>
-              {children}
-            </IntlProvider>
+            <TranslationsProvider>{children}</TranslationsProvider>
           </MediaContextProvider>
         </FeaturesProvider>
       </LanguageProvider>
