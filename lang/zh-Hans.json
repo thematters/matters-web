@@ -190,10 +190,6 @@
   "3yk8fB": {
     "defaultMessage": "我的钱包"
   },
-  "3ynsJ3": {
-    "defaultMessage": "想了解更多？详见 ",
-    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
-  },
   "47FYwb": {
     "defaultMessage": "取消"
   },
@@ -203,10 +199,6 @@
   "4KuZ0o": {
     "defaultMessage": "资源不存在",
     "description": "ASSET_NOT_FOUND"
-  },
-  "4giHJT": {
-    "defaultMessage": "在行动装置上使用问题，参考 ",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "4l6vz1": {
     "defaultMessage": "复制"
@@ -294,6 +286,10 @@
     "defaultMessage": "已取消",
     "description": "src/components/Transaction/State/index.tsx"
   },
+  "70UCEy": {
+    "defaultMessage": "在行动装置上使用问题，参考 ",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
   "73iajM": {
     "defaultMessage": "出错了，请检查你输入的内容",
     "description": "BAD_USER_INPUT"
@@ -337,6 +333,10 @@
   "8qGjpr": {
     "defaultMessage": "设置",
     "description": "src/views/Me/Settings/Misc/index.tsx"
+  },
+  "8rMZWb": {
+    "defaultMessage": "回复了你在围炉 ",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "8t6Cs8": {
     "defaultMessage": "Matters 日报",
@@ -575,6 +575,10 @@
     "defaultMessage": "ID 设置后无法修改，确认使用 {id} 作为 Matters ID 吗？",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
+  "GG9uXH": {
+    "defaultMessage": "请移步相关页面重新获取链接，您也可以 ",
+    "description": "src/views/Callback/GoogleCallback.tsx"
+  },
   "GHxtae": {
     "defaultMessage": "数字钱包",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
@@ -635,6 +639,10 @@
   },
   "HnxG15": {
     "defaultMessage": "设定"
+  },
+  "HqnUd1": {
+    "defaultMessage": "添加 IPFS 生成的 IPNS 指纹到阅读器，如：",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "HxcjQl": {
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
@@ -857,10 +865,6 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "描述"
-  },
-  "QBEE1c": {
-    "defaultMessage": "请移步相关页面重新获取链接，您也可以 ",
-    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "QUqfbW": {
     "defaultMessage": "说说围炉的有趣之处，吸引支持者加入",
@@ -1153,10 +1157,6 @@
     "defaultMessage": "进行中…",
     "description": "src/components/Transaction/State/index.tsx"
   },
-  "b+LSgI": {
-    "defaultMessage": "回复了你在围炉 ",
-    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  },
   "b6zdPs": {
     "defaultMessage": "{count} 篇文章",
     "description": "src/components/Book/index.tsx"
@@ -1193,10 +1193,6 @@
   },
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {篇文章} other {篇文章}}"
-  },
-  "cf37Zy": {
-    "defaultMessage": "添加 IPFS 生成的 IPNS 指纹到阅读器，如：",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "cg1VJ2": {
     "defaultMessage": "连接加密钱包"
@@ -1315,10 +1311,6 @@
     "defaultMessage": "追踪了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
-  "hrfF+i": {
-    "defaultMessage": "刚接触加密钱包？参考 ",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "hrgo+E": {
     "defaultMessage": "归档"
   },
@@ -1383,6 +1375,10 @@
   "kkZioy": {
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "l/f7bu": {
+    "defaultMessage": "想了解更多？詳見 ",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "l0/EvT": {
     "defaultMessage": "最后一步：设置 Matters ID",
@@ -1664,6 +1660,10 @@
   },
   "vAc1Bw": {
     "defaultMessage": "屏蔽用户"
+  },
+  "vCt85u": {
+    "defaultMessage": "刚接触加密钱包？参考 ",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "vH8sCb": {
     "defaultMessage": "我的围炉"
