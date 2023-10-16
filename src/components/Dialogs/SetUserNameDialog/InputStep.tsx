@@ -80,6 +80,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
             'mattersID',
             intl.formatMessage({
               defaultMessage: 'This ID has been taken, please try another one',
+              id: 'x7O1/5',
               description:
                 'src/components/Dialogs/SetUserNameDialog/Content.tsx',
             })
@@ -109,6 +110,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         autoFocus
         placeholder={intl.formatMessage({
           defaultMessage: 'English letters, numbers, and underscores',
+          id: 'kf5NAv',
           description: 'src/components/Dialogs/SetUserNameDialog/Content.tsx',
         })}
         value={values.mattersID}
@@ -161,7 +163,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         values.mattersID.length < MIN_USER_NAME_LENGTH ||
         values.mattersID.length > MAX_USER_NAME_LENGTH
       }
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting}
     />
   )
@@ -173,11 +175,13 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
           isLegacyUserConfirm ? (
             <FormattedMessage
               defaultMessage="Confirm Matters ID"
+              id="1hyiZ8"
               description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
             />
           ) : (
             <FormattedMessage
               defaultMessage="Last step: Set Matters ID"
+              id="l0/EvT"
               description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
             />
           )
@@ -189,11 +193,13 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
             {isLegacyUserConfirm ? (
               <FormattedMessage
                 defaultMessage="In order to ensure the identity security of the citizens of Matters City, we've upgraded some security settings. Please confirm your Matters ID (cannot be modified once confirmation)."
+                id="ySSF/a"
                 description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
               />
             ) : (
               <FormattedMessage
                 defaultMessage="Matters ID is your unique identifier, and cannot be modified once set."
+                id="LwFJTy"
                 description="src/components/Dialogs/SetUserNameDialog/Content.tsx"
               />
             )}
@@ -212,7 +218,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
               disabled={
                 isSubmitting || values.mattersID.length < MIN_USER_NAME_LENGTH
               }
-              text={<FormattedMessage defaultMessage="Confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
               loading={isSubmitting}
             />
           </>

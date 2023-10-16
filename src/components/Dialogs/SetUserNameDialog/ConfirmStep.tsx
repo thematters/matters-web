@@ -43,6 +43,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
         message: (
           <FormattedMessage
             defaultMessage="Matters ID has been set up. More account info can be found in Settings"
+            id="0CyECR"
             description="src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
           />
         ),
@@ -51,6 +52,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
             content: (
               <FormattedMessage
                 defaultMessage="Take a look"
+                id="1QrwIl"
                 description="src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
               />
             ),
@@ -72,6 +74,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
         title={
           <FormattedMessage
             defaultMessage="Confirm Matters ID"
+            id="202PEj"
             description="src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
           />
         }
@@ -81,6 +84,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
           <p>
             <FormattedMessage
               defaultMessage="This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?"
+              id="FxrSCh"
               description="src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
               values={{
                 id: <span className="u-highlight">{userName}</span>,
@@ -98,6 +102,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
               text={
                 <FormattedMessage
                   defaultMessage="Confirm use"
+                  id="IPqNCS"
                   description="src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
                 />
               }
@@ -105,7 +110,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
               onClick={confirmUse}
             />
             <DialogBeta.RoundedButton
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               color="greyDarker"
               onClick={back}
             />
@@ -114,7 +119,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
         smUpBtns={
           <>
             <DialogBeta.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               color="greyDarker"
               onClick={back}
             />
@@ -123,6 +128,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
               text={
                 <FormattedMessage
                   defaultMessage="Confirm use"
+                  id="IPqNCS"
                   description="src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
                 />
               }

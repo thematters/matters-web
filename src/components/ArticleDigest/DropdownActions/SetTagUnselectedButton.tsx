@@ -99,6 +99,7 @@ const SetTagUnselectedButton = ({
       message: (
         <FormattedMessage
           defaultMessage="This article has been removed from Trending"
+          id="Js/Fij"
           description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
         />
       ),
@@ -110,6 +111,7 @@ const SetTagUnselectedButton = ({
       text={
         <FormattedMessage
           defaultMessage="Unpin from Trending"
+          id="aa0nss"
           description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
         />
       }

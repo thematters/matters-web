@@ -24,7 +24,9 @@ const Footer: React.FC<FooterProps> = ({
     return null
   }
 
-  const text = closeText || <FormattedMessage defaultMessage="Cancel" />
+  const text = closeText || (
+    <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+  )
 
   const footerClasses = classNames({
     [styles.footer]: true,

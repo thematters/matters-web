@@ -263,7 +263,11 @@ const BaseAddCredit: React.FC<FormProps> = ({
         <Dialog.Footer
           btns={
             <Dialog.RoundedButton
-              text={callbackText || <FormattedMessage defaultMessage="Done" />}
+              text={
+                callbackText || (
+                  <FormattedMessage defaultMessage="Done" id="JXdbo8" />
+                )
+              }
               onClick={callback || closeDialog}
             />
           }
@@ -272,7 +276,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
               <Dialog.TextButton text={callbackText} onClick={callback} />
             ) : (
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Done" />}
+                text={<FormattedMessage defaultMessage="Done" id="JXdbo8" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -323,7 +327,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

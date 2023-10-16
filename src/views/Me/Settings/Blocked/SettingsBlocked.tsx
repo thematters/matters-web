@@ -61,6 +61,7 @@ const SettingsBlocked = () => {
         description={
           <FormattedMessage
             defaultMessage="No blocked users yet"
+            id="dAvP6d"
             description="src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
           />
         }

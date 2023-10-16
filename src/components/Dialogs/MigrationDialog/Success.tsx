@@ -43,13 +43,13 @@ const MigrationDialogSuccess = () => {
       <Dialog.Footer
         btns={
           <Dialog.RoundedButton
-            text={<FormattedMessage defaultMessage="Back" />}
+            text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
             href={PATHS.HOME}
           />
         }
         smUpBtns={
           <Dialog.TextButton
-            text={<FormattedMessage defaultMessage="Back" />}
+            text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
             href={PATHS.HOME}
           />
         }

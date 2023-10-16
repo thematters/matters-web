@@ -103,7 +103,7 @@ const Price = ({ circle, onClick }: PriceProps) => {
     >
       <TextIcon weight="md" size="sm" color="white">
         {price.amount} {price.currency} /
-        <FormattedMessage defaultMessage="month" />
+        <FormattedMessage defaultMessage="month" id="Cu3Cty" />
       </TextIcon>
     </Button>
   )

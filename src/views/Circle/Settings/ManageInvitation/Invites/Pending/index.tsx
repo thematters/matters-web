@@ -83,6 +83,7 @@ const PendingInvites = () => {
         description={
           <FormattedMessage
             defaultMessage="You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'."
+            id="lNjDPr"
             description="src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
           />
         }

@@ -49,6 +49,7 @@ const SetBottomCollectionButton = ({
       text={
         <FormattedMessage
           defaultMessage="Move to bottom"
+          id="Udp4Bm"
           description="src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
         />
       }

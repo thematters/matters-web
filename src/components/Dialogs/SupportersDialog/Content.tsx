@@ -78,7 +78,7 @@ const SupportersDialogContent = ({
           </>
         }
         closeDialog={closeDialog}
-        closeText={<FormattedMessage defaultMessage="Close" />}
+        closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
       />
 
       <Dialog.Content noSpacing>
@@ -108,7 +108,7 @@ const SupportersDialogContent = ({
       <Dialog.Footer
         smUpBtns={
           <Dialog.TextButton
-            text={<FormattedMessage defaultMessage="Close" />}
+            text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
             color="greyDarker"
             onClick={closeDialog}
           />

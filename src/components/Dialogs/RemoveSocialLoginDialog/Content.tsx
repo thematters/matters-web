@@ -43,6 +43,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
         message: (
           <FormattedMessage
             defaultMessage="{type} disconnected"
+            id="wm9xNB"
             description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
             values={{
               type,
@@ -63,6 +64,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
         title={
           <FormattedMessage
             defaultMessage="Disconnect from {type}"
+            id="XYUhx0"
             description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
             values={{
               type,
@@ -76,6 +78,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
             {isConfirm && (
               <FormattedMessage
                 defaultMessage="Do you want to disconnect from {type}?"
+                id="5CcjZy"
                 description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
                 values={{
                   type,
@@ -85,6 +88,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
             {isFailure && (
               <FormattedMessage
                 defaultMessage="Unable to disconnect from {type} temporarily because you do not have any other log in methods (Email/Crypto wallet/Social account)."
+                id="K2/mHF"
                 description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
                 values={{
                   type,
@@ -103,6 +107,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
                 text={
                   <FormattedMessage
                     defaultMessage="Disconnect"
+                    id="2P5JII"
                     description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
                   />
                 }
@@ -110,7 +115,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
                 onClick={remove}
               />
               <DialogBeta.RoundedButton
-                text={<FormattedMessage defaultMessage="Close" />}
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -119,7 +124,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
           smUpBtns={
             <>
               <DialogBeta.TextButton
-                text={<FormattedMessage defaultMessage="Cancel" />}
+                text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -127,6 +132,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
                 text={
                   <FormattedMessage
                     defaultMessage="Disconnect"
+                    id="2P5JII"
                     description="src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
                   />
                 }
@@ -143,7 +149,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
           btns={
             <>
               <DialogBeta.RoundedButton
-                text={<FormattedMessage defaultMessage="Close" />}
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -152,7 +158,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
           smUpBtns={
             <>
               <DialogBeta.TextButton
-                text={<FormattedMessage defaultMessage="Close" />}
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />

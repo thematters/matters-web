@@ -12,6 +12,7 @@ const EndOfResults: React.FC<EndOfResultsProps> = ({ message }) => {
       {typeof message === 'boolean' && message ? (
         <FormattedMessage
           defaultMessage="That's all"
+          id="B2As08"
           description="src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
         />
       ) : (

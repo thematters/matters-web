@@ -21,8 +21,8 @@ const FeedHeader = ({
     tags: PATHS.TAGS,
   }
   const titleMap = {
-    authors: <FormattedMessage defaultMessage="Authors" />,
-    tags: <FormattedMessage defaultMessage="Topics" />,
+    authors: <FormattedMessage defaultMessage="Authors" id="XgdZSb" />,
+    tags: <FormattedMessage defaultMessage="Topics" id="kc79d3" />,
   }
   const path = pathMap[type]
 

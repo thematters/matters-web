@@ -240,8 +240,8 @@ const Confirm: React.FC<FormProps> = ({
           <>
             <p className={styles.hint}>
               <Translate
-                zh_hant="输入六位數字交易密碼即可完成："
-                zh_hans="輸入六位数字交易密码即可完成："
+                zh_hant="輸入六位數字交易密碼即可完成："
+                zh_hans="输入六位数字交易密码即可完成："
                 en="Please Enter a 6-digit payment password"
               />
             </p>

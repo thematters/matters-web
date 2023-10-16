@@ -39,7 +39,9 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
             />
           }
           closeDialog={closeDialog}
-          closeText={<FormattedMessage defaultMessage="Understood" />}
+          closeText={
+            <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
+          }
         />
 
         <Dialog.Message align="left" smUpAlign="left">
@@ -84,7 +86,9 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Understood" />}
+              text={
+                <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
+              }
               color="green"
               onClick={closeDialog}
             />

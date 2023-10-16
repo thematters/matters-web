@@ -54,7 +54,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={<FormattedMessage defaultMessage="Block User" />}
+          title={<FormattedMessage defaultMessage="Block User" id="vAc1Bw" />}
         />
 
         <Dialog.Message>

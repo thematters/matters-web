@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { KEYVALUE } from '~/common/enums'
@@ -48,7 +48,6 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const [set] = useMutation<SetPasswordMutation>(SET_PASSWORD, undefined, {
     showToast: false,
   })
-  const [inputType, setInputType] = useState<'password' | 'text'>('password')
 
   const { lang } = useContext(LanguageContext)
 
@@ -82,6 +81,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
           message: (
             <FormattedMessage
               defaultMessage="Set password succeed"
+              id="pHg5Ju"
               description="src/components/Dialogs/SetPasswordDialog/Content.tsx"
             />
           ),
@@ -99,19 +99,17 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     },
   })
 
-  useEffect(() => {
-    // Switch back to plaintext display
-    setInputType('text')
-  }, [])
-
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        type={inputType}
+        type="text"
         name="password"
         autoFocus
         required
-        placeholder={intl.formatMessage({ defaultMessage: 'Password' })}
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Password',
+          id: '5sg7KC',
+        })}
         value={values.password}
         error={touched.password && errors.password}
         // onBlur={handleBlur}
@@ -134,7 +132,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
       type="submit"
       form={formId}
       disabled={isSubmitting || values.password.length < 8}
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting}
     />
   )
@@ -145,6 +143,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         title={
           <FormattedMessage
             defaultMessage="Login password"
+            id="KIQUHo"
             description="src/components/Dialogs/SetPasswordDialog/Content.tsx"
           />
         }
@@ -157,6 +156,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
           <p>
             <FormattedMessage
               defaultMessage="Password must be at least 8 characters long, support letter, numbers and symbols."
+              id="W66Eyq"
               description="src/components/Dialogs/SetPasswordDialog/Content.tsx"
             />
           </p>
@@ -169,7 +169,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         smUpBtns={
           <>
             <DialogBeta.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

@@ -52,7 +52,7 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
         closeDialog={closeDialog}
         leftBtn={
           <Dialog.TextButton
-            text={<FormattedMessage defaultMessage="Back" />}
+            text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
             onClick={back}
           />
         }
@@ -68,14 +68,14 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
           <>
             {back && (
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Back" />}
+                text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
                 color="greyDarker"
                 onClick={back}
               />
             )}
 
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Next Step" />}
+              text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
               onClick={request}
               disabled={loading}
               loading={loading}

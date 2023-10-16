@@ -17,7 +17,13 @@
     "@next/next/no-img-element": "off",
     "formatjs/no-offset": "error",
     "formatjs/enforce-default-message": "error",
-    "formatjs/no-multiple-whitespaces": "error"
+    "formatjs/no-multiple-whitespaces": "error",
+    "formatjs/enforce-id": [
+      "error",
+      {
+        "idInterpolationPattern": "[sha512:contenthash:base64:6]"
+      }
+    ]
   },
   "overrides": [
     // Only uses Testing Library lint rules in test files

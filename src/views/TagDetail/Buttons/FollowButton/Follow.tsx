@@ -71,7 +71,7 @@ const Follow = ({ tag }: FollowProps) => {
       onClick={onClick}
     >
       <TextIcon icon={<IconAdd16 />} weight="md" size="mdS">
-        <FormattedMessage defaultMessage="Follow" />
+        <FormattedMessage defaultMessage="Follow" id="ieGrWo" />
       </TextIcon>
     </Button>
   )

@@ -65,7 +65,7 @@ const BaseDropdownActions = ({
     <Menu>
       {hasEditTag && (
         <Menu.Item
-          text={<FormattedMessage defaultMessage="Edit" />}
+          text={<FormattedMessage defaultMessage="Edit" id="wEQDC6" />}
           icon={<IconEdit16 size="mdS" />}
           onClick={openEditTagDialog}
           ariaHasPopup="dialog"
@@ -76,6 +76,7 @@ const BaseDropdownActions = ({
           text={
             <FormattedMessage
               defaultMessage="Add Articles into Featured"
+              id="ySGgTo"
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           }
@@ -89,6 +90,7 @@ const BaseDropdownActions = ({
           text={
             <FormattedMessage
               defaultMessage="Manage Community"
+              id="L7Si5/"
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           }
@@ -102,6 +104,7 @@ const BaseDropdownActions = ({
           text={
             <FormattedMessage
               defaultMessage="Resign From Maintainer"
+              id="GRtGnZ"
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           }
@@ -121,6 +124,7 @@ const BaseDropdownActions = ({
           bgColor="halfBlack"
           aria-label={intl.formatMessage({
             defaultMessage: 'More Actions',
+            id: 'A7ugfn',
           })}
           aria-haspopup="listbox"
           ref={ref}
@@ -165,6 +169,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
       toast.success({
         message: intl.formatMessage({
           defaultMessage: 'Tags added',
+          id: 'UjKkhq',
           description: 'src/views/TagDetail/DropdownActions/index.tsx',
         }),
       })
@@ -182,7 +187,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const forbid = () => {
     toast.error({
       message: (
-        <FormattedMessage defaultMessage="You do not have permission to perform this operation" />
+        <FormattedMessage
+          defaultMessage="You do not have permission to perform this operation"
+          id="5FO4vn"
+        />
       ),
     })
     return
@@ -206,6 +214,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
           title={
             <FormattedMessage
               defaultMessage="Add Articles into Featured"
+              id="ySGgTo"
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           }

@@ -22,6 +22,7 @@ const RevisedArticlePublishedNotice = ({
       <section className={styles.noticeActorsNameAndTitleInfo}>
         <FormattedMessage
           defaultMessage="Your work {articleTitle} has been republished to decentralized network"
+          id="gN4jLB"
           description="src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
           values={{
             articleTitle: <NoticeArticleTitle article={notice.article} />,

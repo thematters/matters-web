@@ -43,6 +43,7 @@ export const AuthTabs = ({
             <a
               aria-label={intl.formatMessage({
                 defaultMessage: 'Discover',
+                id: 'cE4Hfw',
               })}
             >
               {withIcon(IconMatters)({})}
@@ -57,6 +58,7 @@ export const AuthTabs = ({
           ) : (
             <FormattedMessage
               defaultMessage="Sign In"
+              id="3Tg548"
               description="src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
             />
           )}
@@ -65,6 +67,7 @@ export const AuthTabs = ({
         <Tabs.Tab onClick={() => setType('wallet')} selected={isWallet}>
           <FormattedMessage
             defaultMessage="Wallet"
+            id="GHxtae"
             description="src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
           />
         </Tabs.Tab>

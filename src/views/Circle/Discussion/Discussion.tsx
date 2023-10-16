@@ -151,6 +151,7 @@ const CricleDiscussion = () => {
       message: (
         <FormattedMessage
           defaultMessage="Discussion sent"
+          id="9nNpKP"
           description="src/views/Circle/Discussion/Discussion.tsx"
         />
       ),
@@ -252,6 +253,7 @@ const CricleDiscussion = () => {
               type="circleDiscussion"
               placeholder={intl.formatMessage({
                 defaultMessage: 'Request an update, ask, share and discuss',
+                id: 'EW5R4p',
                 description: 'src/views/Circle/Discussion/Discussion.tsx',
               })}
               submitCallback={submitCallback}
@@ -265,6 +267,7 @@ const CricleDiscussion = () => {
               description={
                 <FormattedMessage
                   defaultMessage="No discussion yet"
+                  id="50cquj"
                   description="src/views/Circle/Discussion/Discussion.tsx"
                 />
               }

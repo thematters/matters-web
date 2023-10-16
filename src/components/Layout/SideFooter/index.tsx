@@ -10,18 +10,20 @@ const CommunityMenu = () => {
   return (
     <Menu>
       <Menu.Item
-        text={<FormattedMessage defaultMessage="Matters Community" />}
+        text={
+          <FormattedMessage defaultMessage="Matters Community" id="FhWC22" />
+        }
         href={PATHS.COMMUNITY}
       />
 
       <Menu.Item
-        text={<FormattedMessage defaultMessage="Open Source" />}
+        text={<FormattedMessage defaultMessage="Open Source" id="Xd0J7Y" />}
         htmlHref={EXTERNAL_LINKS.DEVELOPER_RESOURCE}
         htmlTarget="_blank"
       />
 
       <Menu.Item
-        text={<FormattedMessage defaultMessage="Bug Report" />}
+        text={<FormattedMessage defaultMessage="Bug Report" id="9Fpc9S" />}
         htmlHref={EXTERNAL_LINKS.BUG_REPORT}
         htmlTarget="_blank"
       />
@@ -41,21 +43,21 @@ const SideFooter = () => {
       <section className={styles.links}>
         <Link href={PATHS.ABOUT} legacyBehavior>
           <a>
-            <FormattedMessage defaultMessage="About" />
+            <FormattedMessage defaultMessage="About" id="g5pX+a" />
             <Dot />
           </a>
         </Link>
 
         <Link href={PATHS.GUIDE} legacyBehavior>
           <a>
-            <FormattedMessage defaultMessage="Explore" />
+            <FormattedMessage defaultMessage="Explore" id="7JlauX" />
             <Dot />
           </a>
         </Link>
 
         <Link href={PATHS.TOS} legacyBehavior>
           <a>
-            <FormattedMessage defaultMessage="Terms" />
+            <FormattedMessage defaultMessage="Terms" id="xkr+zo" />
             <Dot />
           </a>
         </Link>
@@ -63,7 +65,7 @@ const SideFooter = () => {
         <Dropdown content={<CommunityMenu />} zIndex={Z_INDEX.OVER_DIALOG}>
           {({ openDropdown, ref }) => (
             <button onClick={openDropdown} ref={ref}>
-              <FormattedMessage defaultMessage="Community" />
+              <FormattedMessage defaultMessage="Community" id="4CrCbD" />
             </button>
           )}
         </Dropdown>

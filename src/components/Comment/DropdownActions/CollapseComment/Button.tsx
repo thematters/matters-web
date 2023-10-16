@@ -8,6 +8,7 @@ const CollapseCommentButton = ({ openDialog }: { openDialog: () => void }) => {
       text={
         <FormattedMessage
           defaultMessage="Collapse"
+          id="pRV+UD"
           description="src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
         />
       }

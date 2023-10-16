@@ -62,6 +62,7 @@ const CircleNewDiscussionComments = ({
             {(newDiscussionCount || replyCount) && !mentionCount && (
               <FormattedMessage
                 defaultMessage="left a comment in your circle"
+                id="6Vznnt"
                 description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
               />
             )}
@@ -69,6 +70,7 @@ const CircleNewDiscussionComments = ({
             {(newDiscussionCount || replyCount) && mentionCount && (
               <FormattedMessage
                 defaultMessage="left comments and mentioned you in your circle"
+                id="V8msLJ"
                 description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
               />
             )}
@@ -87,6 +89,7 @@ const CircleNewDiscussionComments = ({
           {(newDiscussionCount || replyCount) && !mentionCount && (
             <FormattedMessage
               defaultMessage="left a comment in {circleName}"
+              id="zllCbU"
               description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
               values={{
                 circleName: (
@@ -101,6 +104,7 @@ const CircleNewDiscussionComments = ({
           {(newDiscussionCount || replyCount) && mentionCount && (
             <FormattedMessage
               defaultMessage="left a comment in {circleName} and mentioned you"
+              id="wER32z"
               description="src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
               values={{
                 circleName: (

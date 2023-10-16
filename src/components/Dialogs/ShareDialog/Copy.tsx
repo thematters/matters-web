@@ -20,6 +20,7 @@ const Copy = ({ link }: { link: string }) => {
         <button
           aria-label={intl.formatMessage({
             defaultMessage: 'Copy Link',
+            id: 'u5aHb4',
           })}
           onClick={() => {
             analytics.trackEvent('share', {
@@ -30,7 +31,7 @@ const Copy = ({ link }: { link: string }) => {
           <TextIcon icon={<IconLink16 color="grey" />} spacing="base">
             <div className={styles.text}>
               <span>
-                <FormattedMessage defaultMessage="Copy Link" />
+                <FormattedMessage defaultMessage="Copy Link" id="u5aHb4" />
               </span>
             </div>
           </TextIcon>

@@ -39,6 +39,7 @@ const UserProfile = ({
             {!hasDescription && !hasFooter && (
               <FormattedMessage
                 defaultMessage="Circle："
+                id="5iii3x"
                 description="src/components/CircleDigest/UserProfile/index.tsx"
               />
             )}
@@ -57,6 +58,7 @@ const UserProfile = ({
             <Button textColor="greyDarker" textActiveColor="green">
               <FormattedMessage
                 defaultMessage="Enter Circle"
+                id="JaLEXz"
                 description="src/components/CircleDigest/UserProfile/index.tsx"
               />
             </Button>

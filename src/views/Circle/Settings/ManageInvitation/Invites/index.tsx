@@ -23,6 +23,7 @@ const InvitesFeed: React.FC = () => {
         >
           <FormattedMessage
             defaultMessage="Pending"
+            id="fWDtpq"
             description="src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
           />
         </SegmentedTabs.Tab>
@@ -33,6 +34,7 @@ const InvitesFeed: React.FC = () => {
         >
           <FormattedMessage
             defaultMessage="Accepted"
+            id="JpS59y"
             description="src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
           />
         </SegmentedTabs.Tab>

@@ -25,6 +25,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
         title={
           <FormattedMessage
             defaultMessage="Please connect email"
+            id="Me4s4Q"
             description="src/components/Dialogs/BindEmailHintDialog/index.tsx"
           />
         }
@@ -33,6 +34,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
         <p>
           <FormattedMessage
             defaultMessage="You have not connected your email yet. For security, email is required for top-up."
+            id="Dq29Hb"
             description="src/components/Dialogs/BindEmailHintDialog/index.tsx"
           />
         </p>
@@ -44,13 +46,14 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
               text={
                 <FormattedMessage
                   defaultMessage="Go to Settings"
+                  id="XfRKZY"
                   description="src/components/Dialogs/BindEmailHintDialog/index.tsx"
                 />
               }
               onClick={gotoBindEmail}
             />
             <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />
@@ -59,7 +62,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />
@@ -67,6 +70,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
               text={
                 <FormattedMessage
                   defaultMessage="Go to Settings"
+                  id="XfRKZY"
                   description="src/components/Dialogs/BindEmailHintDialog/index.tsx"
                 />
               }

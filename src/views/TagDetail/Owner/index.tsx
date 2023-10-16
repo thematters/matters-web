@@ -20,7 +20,10 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
   const forbid = () => {
     toast.error({
       message: (
-        <FormattedMessage defaultMessage="You do not have permission to perform this operation" />
+        <FormattedMessage
+          defaultMessage="You do not have permission to perform this operation"
+          id="5FO4vn"
+        />
       ),
     })
   }
@@ -41,6 +44,7 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
           >
             <FormattedMessage
               defaultMessage="This tag has no manager currently"
+              id="63HuBz"
               description="src/views/TagDetail/Owner/index.tsx"
             />
           </TextIcon>
@@ -60,6 +64,7 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
                 <TextIcon weight="md" size="xs">
                   <FormattedMessage
                     defaultMessage="Maintain Tag"
+                    id="KMcrz8"
                     description="src/views/TagDetail/Owner/index.tsx"
                   />
                 </TextIcon>
@@ -84,6 +89,7 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
         <TextIcon size="sm" color="greyDark">
           <FormattedMessage
             defaultMessage="Maintain"
+            id="ANA7sk"
             description="src/views/TagDetail/Owner/index.tsx"
           />
         </TextIcon>

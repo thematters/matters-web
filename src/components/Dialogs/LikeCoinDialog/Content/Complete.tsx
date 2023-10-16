@@ -21,7 +21,7 @@ const Complete: React.FC = () => {
       <Dialog.Footer
         btns={
           <Dialog.RoundedButton
-            text={<FormattedMessage defaultMessage="Done" />}
+            text={<FormattedMessage defaultMessage="Done" id="JXdbo8" />}
             onClick={() => {
               redirectToTarget({
                 fallback: 'current',
@@ -31,7 +31,7 @@ const Complete: React.FC = () => {
         }
         smUpBtns={
           <Dialog.TextButton
-            text={<FormattedMessage defaultMessage="Done" />}
+            text={<FormattedMessage defaultMessage="Done" id="JXdbo8" />}
             onClick={() => {
               redirectToTarget({
                 fallback: 'current',

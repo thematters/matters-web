@@ -88,6 +88,7 @@ const Currency = () => {
           title={
             <FormattedMessage
               defaultMessage="Currency"
+              id="cQYXjl"
               description="src/views/Me/Settings/Misc/Currency/index.tsx"
             />
           }

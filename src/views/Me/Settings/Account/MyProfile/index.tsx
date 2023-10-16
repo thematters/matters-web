@@ -22,6 +22,7 @@ const MyProfile = () => {
           title={
             <FormattedMessage
               defaultMessage="My profile"
+              id="n2Sc6g"
               description="src/views/Me/Settings/Settings/MyProfile/index.tsx"
             />
           }

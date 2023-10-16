@@ -24,7 +24,7 @@ const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
             <Translate zh_hant="追蹤內容" zh_hans="追踪内容" en={`Following`} />
           }
           closeDialog={closeDialog}
-          closeText={<FormattedMessage defaultMessage="Close" />}
+          closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
         />
 
         <DynamicContent />
@@ -32,7 +32,7 @@ const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Close" />}
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               color="greyDarker"
               onClick={closeDialog}
             />
