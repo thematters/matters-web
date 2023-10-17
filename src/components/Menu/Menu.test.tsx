@@ -5,7 +5,7 @@ import { fireEvent, render, screen } from '~/common/utils/test'
 import { Menu } from '~/components'
 
 describe('<Menu>', () => {
-  it('should render Menu with items', () => {
+  it('should render menu with items', () => {
     const handleMenuAClick = vi.fn()
     const handleMenuBClick = vi.fn()
 
