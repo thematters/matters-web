@@ -46,7 +46,7 @@ export const login = async ({
   }
 
   // Login with email & password
-  await page.getByRole('button', { name: 'Continue with Email' }).click()
+  await page.getByRole('button', { name: 'Email', exact: true }).click()
 
   // Fill the form
   await page.getByPlaceholder('Email').fill(email)
@@ -58,7 +58,7 @@ export const login = async ({
   await Promise.all([
     waitForAPIResponse({
       page,
-      path: 'data.userLogin.token',
+      path: 'data.emailLogin.token',
     }),
     waitForNavigation ? page.waitForNavigation() : undefined,
   ])
