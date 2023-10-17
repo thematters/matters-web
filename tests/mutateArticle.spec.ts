@@ -255,6 +255,7 @@ test.describe('Mutate article', () => {
     // Goto republished article page
     await draftDetail.dialogViewRepublishedArticle.click()
     await alicePage.waitForLoadState('networkidle')
+    await sleep(3 * 1000)
     const articleContent = await aliceArticleDetail.content.innerText()
     expect(stripSpaces(articleContent)).toBe(stripSpaces(newContent))
   })
