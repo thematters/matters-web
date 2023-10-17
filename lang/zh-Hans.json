@@ -226,9 +226,6 @@
     "defaultMessage": "标签名称已被使用",
     "description": "DUPLICATE_TAG"
   },
-  "5MDGuM": {
-    "defaultMessage": "请输入你的注册邮箱"
-  },
   "5iii3x": {
     "defaultMessage": "围炉：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
