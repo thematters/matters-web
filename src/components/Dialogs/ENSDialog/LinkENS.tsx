@@ -108,7 +108,7 @@ const LinkENS = ({
 
   const CancelButton = () => (
     <Dialog.TextButton
-      text={<FormattedMessage defaultMessage="Cancel" />}
+      text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
       color="greyDarker"
       onClick={closeDialog}
     />
@@ -196,12 +196,18 @@ const LinkENS = ({
               <CopyToClipboard
                 text={viewer.info.ethAddress || ''}
                 successMessage={
-                  <FormattedMessage defaultMessage="Address copied" />
+                  <FormattedMessage
+                    defaultMessage="Address copied"
+                    id="+aMAeT"
+                  />
                 }
               >
                 <Button
                   spacing={['xtight', 'xtight']}
-                  aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Copy',
+                    id: '4l6vz1',
+                  })}
                 >
                   <TextIcon
                     icon={<IconCopy16 color="black" size="xs" />}

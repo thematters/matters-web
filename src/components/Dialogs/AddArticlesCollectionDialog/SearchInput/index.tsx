@@ -25,7 +25,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
 }) => {
   const fieldId = `search-input`
   const intl = useIntl()
-  const searchCopy = intl.formatMessage({ defaultMessage: 'Search' })
+  const searchCopy = intl.formatMessage({
+    defaultMessage: 'Search',
+    id: 'xmcVZ0',
+  })
   const { lang } = useContext(LanguageContext)
 
   return (

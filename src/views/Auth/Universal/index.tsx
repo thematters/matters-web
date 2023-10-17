@@ -1,25 +1,31 @@
+import classNames from 'classnames'
 import dynamic from 'next/dynamic'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { PATHS } from '~/common/enums'
+import { WalletType } from '~/common/utils'
 import {
+  AuthFeedType,
   Head,
-  Layout,
+  LanguageSwitch,
+  ReCaptchaProvider,
   Spinner,
   useRoute,
   useStep,
   VerificationLinkSent,
   ViewerContext,
 } from '~/components'
-import { AuthResultType } from '~/gql/graphql'
+
+import styles from './styles.module.css'
 
 const DynamicSelectAuthMethodForm = dynamic<any>(
   () =>
     import('~/components/Forms/SelectAuthMethodForm').then(
       (mod) => mod.SelectAuthMethodForm
     ),
-  { ssr: false, loading: Spinner }
+  { ssr: true }
 )
+
 const DynamicEmailLoginForm = dynamic<any>(
   () =>
     import('~/components/Forms/EmailLoginForm').then(
@@ -31,48 +37,41 @@ const DynamicEmailSignUpFormInit = dynamic(
   () => import('~/components/Forms/EmailSignUpForm/Init'),
   { ssr: false, loading: Spinner }
 )
-const DynamicWalletAuthFormSelect = dynamic(
-  () => import('~/components/Forms/WalletAuthForm/Select'),
-  { ssr: false, loading: Spinner }
-)
+
 const DynamicWalletAuthFormConnect = dynamic(
   () => import('~/components/Forms/WalletAuthForm/Connect'),
-  { ssr: false, loading: Spinner }
-)
-const DynamicEmailSignUpFormPassword = dynamic(
-  () => import('~/components/Forms/EmailSignUpForm/Password'),
-  { ssr: false, loading: Spinner }
-)
-const DynamicEmailSignUpFormComplete = dynamic(
-  () => import('~/components/Forms/EmailSignUpForm/Complete'),
   { ssr: false, loading: Spinner }
 )
 
 type Step =
   | 'select-login-method'
   // wallet
-  | 'wallet-select'
   | 'wallet-connect'
   // email
   | 'email-login'
   | 'email-sign-up-init'
-  | 'email-sign-up-password'
   | 'email-verification-sent'
-  // misc
-  | 'complete'
 
 const UniversalAuth = () => {
   const viewer = useContext(ViewerContext)
-  const { getQuery, router } = useRoute()
-  const email = getQuery('email')
-  const code = getQuery('code')
-  const displayName = getQuery('displayName')
+  const { router, isInPath } = useRoute()
 
-  const initStep =
-    email && code && displayName
-      ? 'email-sign-up-password'
-      : 'select-login-method'
-  const { currStep, forward } = useStep<Step>(initStep)
+  const isInSignup = isInPath('SIGNUP')
+
+  const { currStep, forward } = useStep<Step>(
+    isInSignup ? 'email-sign-up-init' : 'select-login-method'
+  )
+  const [email, setEmail] = useState('')
+
+  const [firstRender, setFirstRender] = useState(true)
+  const [authFeedType, setAuthFeedType] = useState<AuthFeedType>('normal')
+
+  const containerClasses = classNames({
+    [styles.container]: true,
+    [styles.containerSpace]: currStep !== 'email-verification-sent',
+  })
+
+  const [walletType, setWalletType] = useState<WalletType>('MetaMask')
 
   useEffect(() => {
     if (!viewer.id) return
@@ -80,74 +79,94 @@ const UniversalAuth = () => {
     router.push(PATHS.HOME)
   }, [viewer.id])
 
+  useEffect(() => {
+    setFirstRender(false)
+  }, [])
+
   return (
-    <Layout.Main>
-      <Head title={{ id: 'authEntries' }} />
+    <>
+      <Head />
+      <section className={styles.wrapper}>
+        <section className={containerClasses}>
+          {currStep === 'select-login-method' && (
+            <>
+              <DynamicSelectAuthMethodForm
+                purpose="page"
+                gotoWalletConnect={(type: WalletType) => {
+                  setWalletType(type)
+                  forward('wallet-connect')
+                }}
+                gotoEmailLogin={() => forward('email-login')}
+                gotoEmailSignup={() => forward('email-sign-up-init')}
+                authFeedType={authFeedType}
+                setAuthFeedType={setAuthFeedType}
+                checkWallet={firstRender}
+              />
+              <section className={styles.footer}>
+                <LanguageSwitch />
+              </section>
+            </>
+          )}
 
-      {currStep === 'select-login-method' && (
-        <DynamicSelectAuthMethodForm
-          purpose="page"
-          gotoWalletAuth={() => forward('wallet-select')}
-          gotoEmailLogin={() => forward('email-login')}
-        />
-      )}
+          {/* Wallet */}
+          {currStep === 'wallet-connect' && (
+            <ReCaptchaProvider>
+              <DynamicWalletAuthFormConnect
+                type="login"
+                purpose="page"
+                walletType={walletType}
+                back={() => forward('select-login-method')}
+                gotoSignInTab={() => {
+                  setAuthFeedType('normal')
+                  forward('select-login-method')
+                }}
+              />
+            </ReCaptchaProvider>
+          )}
 
-      {/* Wallet */}
-      {currStep === 'wallet-select' && (
-        <DynamicWalletAuthFormSelect
-          purpose="page"
-          submitCallback={() => {
-            forward('wallet-connect')
-          }}
-          back={() => forward('select-login-method')}
-        />
-      )}
-      {currStep === 'wallet-connect' && (
-        <DynamicWalletAuthFormConnect
-          purpose="page"
-          submitCallback={(type?: AuthResultType) => {
-            if (type === AuthResultType.Signup) {
-              forward('complete')
-            }
-          }}
-          back={() => forward('wallet-select')}
-        />
-      )}
+          {/* Email */}
+          {currStep === 'email-login' && (
+            <DynamicEmailLoginForm
+              purpose="page"
+              gotoEmailSignup={() => forward('email-sign-up-init')}
+              gotoWalletConnect={(type: WalletType) => {
+                setWalletType(type)
+                forward('wallet-connect')
+              }}
+              authFeedType={authFeedType}
+              setAuthFeedType={setAuthFeedType}
+              back={() => forward('select-login-method')}
+            />
+          )}
 
-      {/* Email */}
-      {currStep === 'email-login' && (
-        <DynamicEmailLoginForm
-          purpose="page"
-          gotoEmailSignUp={() => forward('email-sign-up-init')}
-          back={() => forward('select-login-method')}
-        />
-      )}
-      {currStep === 'email-sign-up-init' && (
-        <DynamicEmailSignUpFormInit
-          purpose="page"
-          submitCallback={() => forward('email-verification-sent')}
-          gotoEmailLogin={() => forward('email-login')}
-          back={() => forward('email-login')}
-        />
-      )}
-      {currStep === 'email-sign-up-password' && (
-        <DynamicEmailSignUpFormPassword
-          email={email}
-          code={code}
-          displayName={displayName}
-          purpose="page"
-          submitCallback={() => forward('complete')}
-        />
-      )}
-      {currStep === 'email-verification-sent' && (
-        <VerificationLinkSent type="changePassword" purpose="page" />
-      )}
-
-      {/* Misc */}
-      {currStep === 'complete' && (
-        <DynamicEmailSignUpFormComplete purpose="page" />
-      )}
-    </Layout.Main>
+          {currStep === 'email-sign-up-init' && (
+            <ReCaptchaProvider>
+              <DynamicEmailSignUpFormInit
+                purpose="page"
+                submitCallback={(email: string) => {
+                  setEmail(email)
+                  forward('email-verification-sent')
+                }}
+                gotoWalletConnect={(type) => {
+                  setWalletType(type)
+                  forward('wallet-connect')
+                }}
+                authFeedType={authFeedType}
+                setAuthFeedType={setAuthFeedType}
+                back={() => forward('select-login-method')}
+              />
+            </ReCaptchaProvider>
+          )}
+          {currStep === 'email-verification-sent' && (
+            <VerificationLinkSent
+              type="register"
+              purpose="page"
+              email={email}
+            />
+          )}
+        </section>
+      </section>
+    </>
   )
 }
 

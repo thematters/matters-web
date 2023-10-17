@@ -101,7 +101,9 @@ const AggregateUserResults = () => {
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
-        eof={<FormattedMessage defaultMessage="End of the results" />}
+        eof={
+          <FormattedMessage defaultMessage="End of the results" id="ui1+QC" />
+        }
       >
         <Menu>
           {edges.map(
@@ -125,7 +127,15 @@ const AggregateUserResults = () => {
                     })
                   }
                 >
-                  <UserDigest.Concise user={node} avatarSize="xl" />
+                  <UserDigest.Rich
+                    user={node}
+                    bgColor="transparent"
+                    bgActiveColor="transparent"
+                    hasFollow={false}
+                    hasState={false}
+                    spacing={[0, 0]}
+                    subtitle={`@${node.userName}`}
+                  />
                 </Menu.Item>
               )
           )}

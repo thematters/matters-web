@@ -20,6 +20,7 @@ export type IconSize =
 
 export type IconColor =
   | 'white'
+  | 'whiteLight'
   | 'black'
   | 'greyDark'
   | 'greyDarker'

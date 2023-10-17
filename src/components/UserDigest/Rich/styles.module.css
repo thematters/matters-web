@@ -2,13 +2,6 @@
   @mixin flex-center-start;
 
   position: relative;
-
-  &:not(.disabled) .name {
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-  }
 }
 
 .avatar {
@@ -45,9 +38,10 @@
   @mixin fix-cropped-letters;
 
   font-weight: var(--font-weight-medium);
+  color: var(--color-black);
 }
 
-.description {
+.subtitle {
   @mixin line-clamp;
 
   font-size: var(--font-size-sm-s);
@@ -64,12 +58,12 @@
 }
 
 .sizeSm {
-  & .content {
+  & .content:not(.archived) {
     height: 2rem;
   }
 
   & .name,
-  & .description {
+  & .subtitle {
     line-height: 1rem; /* 16px, half of the avatar height */
   }
 
@@ -83,12 +77,12 @@
 }
 
 .sizeLg {
-  & .content {
+  & .content:not(.archived) {
     height: 3rem;
   }
 
   & .name,
-  & .description {
+  & .subtitle {
     line-height: 1.5rem; /* 24px, half of the avatar height */
   }
 

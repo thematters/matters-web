@@ -32,6 +32,7 @@ const EditArticleButton = ({
       text={
         <FormattedMessage
           defaultMessage="Edit"
+          id="ZVoJan"
           description="src/components/ArticleDigest/DropdownActions/EditButton.tsx"
         />
       }

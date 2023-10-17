@@ -1,18 +1,19 @@
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Form, Head, Layout, useRoute } from '~/components'
+import { Head, Layout, TableView, useRoute } from '~/components'
 
 const BaseSettings = () => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
   return (
-    <Form.List spacingX={0}>
-      <Form.List.Item
+    <TableView spacingX={0}>
+      <TableView.Cell
         title={
           <FormattedMessage
             defaultMessage="Profile"
+            id="ZAs170"
             description="src/views/Circle/Settings/index.tsx"
           />
         }
@@ -20,17 +21,18 @@ const BaseSettings = () => {
         role="link"
       />
 
-      <Form.List.Item
+      <TableView.Cell
         title={
           <FormattedMessage
             defaultMessage="Manage Invitation"
+            id="EQeKnO"
             description="src/views/Circle/Settings/index.tsx"
           />
         }
         {...toPath({ page: 'circleManageInvitation', circle: { name } })}
         role="link"
       />
-    </Form.List>
+    </TableView>
   )
 }
 

@@ -1,18 +1,96 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Layout, Translate } from '~/components'
+import { PATHS } from '~/common/enums'
+import { Dialog, DialogBeta, Layout, Translate, useRoute } from '~/components'
+
+import styles from './styles.module.css'
 
 export const VerificationLinkSent = ({
   type,
   purpose,
   closeDialog,
+  email,
 }: {
   type: 'register' | 'resetPassword' | 'changePassword'
   purpose?: 'dialog' | 'page'
   closeDialog?: () => void
+  email?: string
 }) => {
   const isRegister = type === 'register'
+  const { router } = useRoute()
   const isInPage = purpose === 'page'
+
+  if (isRegister) {
+    return (
+      <>
+        <DialogBeta.Header
+          title={
+            <FormattedMessage
+              defaultMessage="Check your inbox"
+              id="5JN+nl"
+              description="src/components/Forms/Verification/LinkSent.tsx"
+            />
+          }
+          closeDialog={closeDialog}
+          closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+        />
+
+        <DialogBeta.Content>
+          <DialogBeta.Content.Message>
+            <p>
+              <FormattedMessage
+                defaultMessage="The login link has been sent to {email}"
+                id="zAK5G+"
+                description="src/components/Forms/Verification/LinkSent.tsx"
+                values={{
+                  email: <span className={styles.email}>{email}</span>,
+                }}
+              />
+            </p>
+          </DialogBeta.Content.Message>
+        </DialogBeta.Content>
+
+        {closeDialog && (
+          <DialogBeta.Footer
+            smUpBtns={
+              <DialogBeta.TextButton
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+            }
+          />
+        )}
+
+        {isInPage && (
+          <DialogBeta.Footer
+            btns={
+              <DialogBeta.RoundedButton
+                text={
+                  <FormattedMessage
+                    defaultMessage="Enter Matters"
+                    id="A6r2p1"
+                  />
+                }
+                onClick={() => router.push(PATHS.HOME)}
+              />
+            }
+            smUpBtns={
+              <DialogBeta.TextButton
+                text={
+                  <FormattedMessage
+                    defaultMessage="Enter Matters"
+                    id="A6r2p1"
+                  />
+                }
+                onClick={() => router.push(PATHS.HOME)}
+              />
+            }
+          />
+        )}
+      </>
+    )
+  }
 
   return (
     <>
@@ -22,24 +100,18 @@ export const VerificationLinkSent = ({
         <Dialog.Header
           title="register"
           closeDialog={closeDialog}
-          closeText={<FormattedMessage defaultMessage="Understood" />}
+          closeText={
+            <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
+          }
         />
       )}
 
       <Dialog.Message>
         <p>
           <Translate
-            zh_hant={
-              isRegister ? '我們已將註冊連結寄出 📩' : '我們已將驗證連結寄出 📩'
-            }
-            zh_hans={
-              isRegister ? '我们已将注册链接寄出 📩' : '我们已将验证链接寄出 📩'
-            }
-            en={
-              isRegister
-                ? 'We have sent register link to you 📩'
-                : 'We have sent verification link to you 📩'
-            }
+            zh_hant="我們已將驗證連結寄出 📩"
+            zh_hans="我们已将验证链接寄出 📩"
+            en="We have sent verification link to you 📩"
           />
           <br />
           <Translate
@@ -54,7 +126,9 @@ export const VerificationLinkSent = ({
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Understood" />}
+              text={
+                <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
+              }
               color="green"
               onClick={closeDialog}
             />

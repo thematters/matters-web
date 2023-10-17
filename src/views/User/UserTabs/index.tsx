@@ -43,7 +43,7 @@ const UserTabs = ({
         selected={isInPath('USER_ARTICLES')}
         count={articleCount > 0 ? articleCount : undefined}
       >
-        <FormattedMessage defaultMessage="Articles" />
+        <FormattedMessage defaultMessage="Articles" id="3KNMbJ" />
       </Tabs.Tab>
 
       {showCollectionTab && (
@@ -52,7 +52,7 @@ const UserTabs = ({
           selected={isInPath('USER_COLLECTIONS')}
           count={collectionCount > 0 ? collectionCount : undefined}
         >
-          <FormattedMessage defaultMessage="Collections" />
+          <FormattedMessage defaultMessage="Collections" id="ulh3kf" />
         </Tabs.Tab>
       )}
     </Tabs>

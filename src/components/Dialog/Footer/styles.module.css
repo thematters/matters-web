@@ -31,3 +31,11 @@
     margin-left: var(--spacing-x-loose);
   }
 }
+
+.smUpContentNoSpacingBottom {
+  margin-bottom: 0;
+}
+
+.smUpSpaceBetween {
+  @mixin flex-center-space-between;
+}

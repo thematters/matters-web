@@ -19,7 +19,7 @@ export const QUICK_RESULT = gql`
         cursor
         node {
           ... on User {
-            ...UserDigestConciseUser
+            ...UserDigestRichUserPublic
           }
         }
       }
@@ -44,6 +44,6 @@ export const QUICK_RESULT = gql`
       }
     }
   }
-  ${UserDigest.Concise.fragments.user}
+  ${UserDigest.Rich.fragments.user.public}
   ${TagDigest.Concise.fragments.tag}
 `

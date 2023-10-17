@@ -112,7 +112,7 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
         })
 
         toast.success({
-          message: <FormattedMessage defaultMessage="Saved" />,
+          message: <FormattedMessage defaultMessage="Saved" id="fsB/4p" />,
         })
 
         setSubmitting(false)
@@ -121,8 +121,8 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        setFieldError('newContent', messages[codes[0]])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        setFieldError('newContent', intl.formatMessage(messages[codes[0]]))
       }
     },
   })
@@ -145,10 +145,13 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
       </section>
 
       <Form.Input
-        label={intl.formatMessage({ defaultMessage: 'Tag Name' })}
+        label={intl.formatMessage({ defaultMessage: 'Tag Name', id: 'rLlTQ9' })}
         type="text"
         name="newContent"
-        placeholder={intl.formatMessage({ defaultMessage: 'Tag Name' })}
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Tag Name',
+          id: 'rLlTQ9',
+        })}
         value={values.newContent}
         onBlur={handleBlur}
         onChange={(e) => {
@@ -165,9 +168,15 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
       />
 
       <Form.Textarea
-        label={intl.formatMessage({ defaultMessage: 'Tag Description' })}
+        label={intl.formatMessage({
+          defaultMessage: 'Tag Description',
+          id: 'k0ooDW',
+        })}
         name="newDescription"
-        placeholder={intl.formatMessage({ defaultMessage: 'Tag Description' })}
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Tag Description',
+          id: 'k0ooDW',
+        })}
         value={values.newDescription}
         onBlur={handleBlur}
         onChange={handleChange}
@@ -184,7 +193,7 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
 
   const SubmitButton = (
     <Dialog.TextButton
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       type="submit"
       form={formId}
       disabled={isSubmitting || coverLoading}
@@ -195,7 +204,7 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<FormattedMessage defaultMessage="Edit Tag" />}
+        title={<FormattedMessage defaultMessage="Edit Tag" id="uJkv2X" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
         hasSmUpTitle={false}
@@ -207,7 +216,7 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

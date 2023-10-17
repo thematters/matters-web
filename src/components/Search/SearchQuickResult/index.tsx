@@ -133,10 +133,15 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
                     })
                   }}
                 >
-                  <UserDigest.Concise
+                  <UserDigest.Rich
                     user={node}
-                    avatarSize="lg"
-                    nameStyle="tight"
+                    size="sm"
+                    bgColor="transparent"
+                    bgActiveColor="transparent"
+                    hasFollow={false}
+                    hasState={false}
+                    spacing={[0, 0]}
+                    subtitle={`@${node.userName}`}
                   />
                 </Menu.Item>
               </Fragment>

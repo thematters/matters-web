@@ -1,12 +1,20 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
+  ERROR_CODES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   REFETCH_DONATORS,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { DonationDialog, toast, Translate, ViewerContext } from '~/components'
+import {
+  DonationDialog,
+  ERROR_MESSAGES,
+  toast,
+  Translate,
+  ViewerContext,
+} from '~/components'
 import DonationButton from '~/components/Buttons/DonationButton'
 import {
   ArticleDetailPublicQuery,
@@ -37,7 +45,7 @@ const SupportButton = ({
       message: isAuthor ? (
         <Translate zh_hant="去支持其他用戶吧" zh_hans="去支持其他用户吧" />
       ) : (
-        <Translate id="FORBIDDEN_BY_STATE" />
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
       ),
     })
   }

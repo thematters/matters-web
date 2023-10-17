@@ -15,6 +15,7 @@ export type AvatarSize =
   | 'xs'
   | 'sm'
   | 'md'
+  | 'mdS'
   | 'lg'
   | 'xl'
   | 'xxl'

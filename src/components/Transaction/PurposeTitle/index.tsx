@@ -34,12 +34,14 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
           isViewerRecipient && (
             <FormattedMessage
               defaultMessage="Circle Revenue"
+              id="R7yHDl"
               description="src/components/Transaction/index.tsx"
             />
           )}
         {purpose === TransactionPurpose.SubscriptionSplit && isViewerSender && (
           <FormattedMessage
             defaultMessage="Circle Subscription"
+            id="0qagOO"
             description="src/components/Transaction/index.tsx"
           />
         )}
@@ -47,6 +49,7 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
         {purpose === TransactionPurpose.AddCredit && (
           <FormattedMessage
             defaultMessage="Top Up"
+            id="yOKEVx"
             description="src/components/Transaction/index.tsx"
           />
         )}
@@ -54,6 +57,7 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
         {purpose === TransactionPurpose.Refund && (
           <FormattedMessage
             defaultMessage="Refund"
+            id="yoRaUc"
             description="src/components/Transaction/index.tsx"
           />
         )}
@@ -61,6 +65,7 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
         {purpose === TransactionPurpose.Payout && (
           <FormattedMessage
             defaultMessage="Payout"
+            id="Sep44m"
             description="src/components/Transaction/index.tsx"
           />
         )}
@@ -68,6 +73,7 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
         {purpose === TransactionPurpose.PayoutReversal && (
           <FormattedMessage
             defaultMessage="Payout Canceled"
+            id="79Ydsg"
             description="src/components/Transaction/index.tsx"
           />
         )}
@@ -76,6 +82,7 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
           <>
             <FormattedMessage
               defaultMessage="Dispute Refund"
+              id="up6Uh/"
               description="src/components/Transaction/index.tsx"
             />
 
@@ -83,6 +90,7 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
               content={
                 <FormattedMessage
                   defaultMessage="Payment suspended or returned by card issuer when there are doubts about the transaction"
+                  id="AB5rDl"
                   description="src/components/Transaction/index.tsx"
                 />
               }

@@ -1,9 +1,9 @@
-import { Form, PaymentPointerDialog, Translate } from '~/components'
+import { PaymentPointerDialog, TableView, Translate } from '~/components'
 
 const PaymentPointer = () => (
   <PaymentPointerDialog>
     {({ openDialog }) => (
-      <Form.List.Item
+      <TableView.Cell
         title={<Translate id="paymentPointer" />}
         onClick={openDialog}
         role="button"

@@ -30,10 +30,13 @@ export const WALLET_LOGIN = gql`
   }
 `
 
-export const ETH_ADDRESS_USER = gql`
-  query ETHAddressUser($ethAddress: String) {
-    user(input: { ethAddress: $ethAddress }) {
+export const ADD_WALLET_LOGIN = gql`
+  mutation AddWalletLogin($input: WalletLoginInput!) {
+    addWalletLogin(input: $input) {
       id
+      info {
+        ethAddress
+      }
     }
   }
 `

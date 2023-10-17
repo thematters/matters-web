@@ -26,6 +26,7 @@ const ArticleNewCollectedNotice = ({
       action={
         <FormattedMessage
           defaultMessage="connected"
+          id="YlPCRU"
           description="src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
         />
       }

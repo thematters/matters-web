@@ -18,8 +18,9 @@ export const UniversalAuthButton: React.FC = () => {
       window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
     },
   }
+
   const smProps = {
-    ...appendTarget(PATHS.SIGNUP, true),
+    ...appendTarget(PATHS.LOGIN, true),
     onClick: () => {
       analytics.trackEvent('click_button', {
         type: 'login/signup',

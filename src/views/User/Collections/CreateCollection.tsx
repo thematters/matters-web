@@ -21,6 +21,7 @@ const CreateCollection = () => {
             >
               <FormattedMessage
                 defaultMessage="Create collection"
+                id="0ThOw1"
                 description="src/views/User/Collections/UserCollections.tsx"
               />
             </Button>

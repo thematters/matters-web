@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import _omit from 'lodash/omit'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
@@ -17,19 +18,31 @@ import {
   Spinner,
   Throw404,
   toast,
+  useCreateDraft,
+  useDirectImageUpload,
   useRoute,
   useUnloadConfirm,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
-import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import {
+  DIRECT_IMAGE_UPLOAD,
+  DIRECT_IMAGE_UPLOAD_DONE,
+  SINGLE_FILE_UPLOAD,
+} from '~/components/GQL/mutations/uploadFile'
+import {
+  ArticleAccessType,
+  ArticleLicenseType,
+  DirectImageUploadDoneMutation,
+  DirectImageUploadMutation,
+  DraftDetailCirclesQueryQuery,
   DraftDetailQueryQuery,
+  PublishState as PublishStateType,
   SetDraftContentMutation,
   SingleFileUploadMutation,
 } from '~/gql/graphql'
 
 import BottomBar from './BottomBar'
-import { DRAFT_DETAIL, SET_CONTENT } from './gql'
+import { DRAFT_DETAIL, DRAFT_DETAIL_CIRCLES, SET_CONTENT } from './gql'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
@@ -43,12 +56,54 @@ const Editor = dynamic(
   }
 )
 
+const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
+  id: '',
+  title: '',
+  publishState: PublishStateType.Unpublished,
+  content: '',
+  summary: '',
+  summaryCustomized: false,
+  __typename: 'Draft',
+  article: null,
+  cover: null,
+  assets: [],
+  tags: null,
+  collection: {
+    edges: null,
+    __typename: 'ArticleConnection',
+  },
+  access: {
+    type: ArticleAccessType.Public,
+    circle: null,
+    __typename: 'DraftAccess',
+  },
+  license: ArticleLicenseType.Cc_0,
+  requestForDonation: null,
+  replyToDonator: null,
+  sensitiveByAuthor: false,
+  iscnPublish: null,
+  canComment: true,
+}
+
 const DraftDetail = () => {
   const { getQuery } = useRoute()
   const id = getQuery('draftId')
+  const isInNew = id === 'new'
 
+  const [initNew] = useState(isInNew)
+  const { createDraft } = useCreateDraft()
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
-  const [singleFileUpload] = useMutation<SingleFileUploadMutation>(UPLOAD_FILE)
+  const [singleFileUpload] =
+    useMutation<SingleFileUploadMutation>(SINGLE_FILE_UPLOAD)
+  const [directImageUpload] =
+    useMutation<DirectImageUploadMutation>(DIRECT_IMAGE_UPLOAD)
+  const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
+    DIRECT_IMAGE_UPLOAD_DONE,
+    undefined,
+    { showToast: false }
+  )
+  const { upload: uploadImage } = useDirectImageUpload()
+
   const [saveStatus, setSaveStatus] = useState<
     'saved' | 'saving' | 'saveFailed'
   >()
@@ -59,14 +114,20 @@ const DraftDetail = () => {
     {
       variables: { id },
       fetchPolicy: 'network-only',
+      skip: isInNew,
     }
   )
-  const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined
-  const ownCircles = data?.viewer?.ownCircles || undefined
+  const { data: circleData, loading: circleLoading } =
+    useQuery<DraftDetailCirclesQueryQuery>(DRAFT_DETAIL_CIRCLES, {
+      fetchPolicy: 'network-only',
+    })
 
-  useUnloadConfirm({ block: saveStatus === 'saving' })
+  const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
+  const ownCircles = circleData?.viewer?.ownCircles || undefined
 
-  if (loading) {
+  useUnloadConfirm({ block: saveStatus === 'saving' && !isInNew })
+
+  if ((loading && !initNew) || circleLoading) {
     return (
       <EmptyLayout>
         <Spinner />
@@ -82,7 +143,7 @@ const DraftDetail = () => {
     )
   }
 
-  if (!draft) {
+  if (!draft && !isInNew) {
     return (
       <EmptyLayout>
         <Throw404 />
@@ -94,27 +155,71 @@ const DraftDetail = () => {
     draft?.content && stripHtml(draft.content).trim().length > 0
   const hasTitle = draft?.title && draft.title.length > 0
   const isUnpublished = draft?.publishState === 'unpublished'
-  const publishable =
-    id && isUnpublished && hasContent && hasTitle && hasValidSummary
+  const publishable = !!(
+    id &&
+    isUnpublished &&
+    hasContent &&
+    hasTitle &&
+    hasValidSummary
+  )
 
-  const upload = async (input: { [key: string]: any }) => {
-    const result = await singleFileUpload({
-      variables: {
-        input: {
-          type: ASSET_TYPE.embed,
-          entityType: ENTITY_TYPE.draft,
-          entityId: draft && draft.id,
-          ...input,
-        },
+  const upload = async (input: {
+    [key: string]: any
+  }): Promise<{ id: string; path: string }> => {
+    const isImage = input.type !== ASSET_TYPE.embedaudio
+    const variables = {
+      input: {
+        type: ASSET_TYPE.embed,
+        entityType: ENTITY_TYPE.draft,
+        entityId: draft && draft.id,
+        ...input,
       },
-    })
-    const { id: assetId, path } =
-      (result && result.data && result.data.singleFileUpload) || {}
+    }
 
-    if (assetId && path) {
-      return { id: assetId, path }
-    } else {
-      throw new Error('upload not successful')
+    // feature flag
+    const isForceSingleFileUpload = !!getQuery('single-file-upload')
+
+    // upload via directImageUpload
+    if (isImage && !isForceSingleFileUpload) {
+      const result = await directImageUpload({ variables })
+      const {
+        id: assetId,
+        path,
+        uploadURL,
+      } = result?.data?.directImageUpload || {}
+
+      if (assetId && path && uploadURL) {
+        try {
+          await uploadImage({ uploadURL, file: input.file })
+        } catch (error) {
+          console.error(error)
+          throw new Error('upload not successful')
+        }
+
+        // (async) mark asset draft as false
+        directImageUploadDone({
+          variables: {
+            ..._omit(variables.input, ['file']),
+            draft: false,
+            url: path,
+          },
+        }).catch(console.error)
+
+        return { id: assetId, path }
+      } else {
+        throw new Error('upload not successful')
+      }
+    }
+    // upload via singleFileUpload
+    else {
+      const result = await singleFileUpload({ variables })
+      const { id: assetId, path } = result?.data?.singleFileUpload || {}
+
+      if (assetId && path) {
+        return { id: assetId, path }
+      } else {
+        throw new Error('upload not successful')
+      }
     }
   }
 
@@ -124,6 +229,11 @@ const DraftDetail = () => {
     cover?: string | null
     summary?: string | null
   }) => {
+    const isEmpty = Object.values(newDraft).every((x) => x === '')
+    if (isInNew && isEmpty) {
+      return
+    }
+
     try {
       if (draft?.publishState === 'published') {
         return
@@ -136,6 +246,7 @@ const DraftDetail = () => {
           message: (
             <FormattedMessage
               defaultMessage={`Content length exceeds limit ({length}/{limit})`}
+              id="VefaFQ"
               values={{
                 length: contentCount,
                 limit: MAX_ARTICLE_CONTENT_LENGTH,
@@ -148,7 +259,16 @@ const DraftDetail = () => {
 
       setSaveStatus('saving')
 
-      await setContent({ variables: { id: draft?.id, ...newDraft } })
+      if (draft?.id) {
+        await setContent({ variables: { id: draft.id, ...newDraft } })
+      } else {
+        await createDraft({
+          onCreate: async (draftId: string) => {
+            await setContent({ variables: { id: draftId, ...newDraft } })
+          },
+        })
+      }
+
       setSaveStatus('saved')
 
       if (newDraft.summary && !hasValidSummary) {

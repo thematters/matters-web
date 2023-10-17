@@ -116,8 +116,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
             <List.Item>
               <UserDigest.Rich
                 user={tag.owner}
-                hasDescriptionReplacement
-                descriptionReplacement={
+                subtitle={
                   <Translate
                     zh_hant="主理人"
                     zh_hans="主理人"
@@ -134,9 +133,8 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
             <List.Item key={editor.id}>
               <UserDigest.Rich
                 user={editor}
-                hasDescriptionReplacement
                 hasFollow={false}
-                descriptionReplacement={
+                subtitle={
                   <Translate
                     zh_hant="協作者"
                     zh_hans="协作者"
@@ -204,7 +202,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
           smUpBtns={
             <>
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Cancel" />}
+                text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />

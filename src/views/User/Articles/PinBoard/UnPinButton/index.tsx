@@ -78,6 +78,7 @@ const UnPinButton = ({
       content={
         <FormattedMessage
           defaultMessage="Unpin from profile"
+          id="84VOdX"
           description="src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
         />
       }

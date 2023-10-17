@@ -77,7 +77,7 @@ const Participants = ({ id }: Props) => {
     <>
       <section className={styles.category}>
         <section>
-          <FormattedMessage defaultMessage="Creators" />
+          <FormattedMessage defaultMessage="Creators" id="TzhzIH" />
           <span className={styles.count}>({count})</span>
         </section>
       </section>

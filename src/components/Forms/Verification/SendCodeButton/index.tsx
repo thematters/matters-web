@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { SEND_CODE_COUNTDOWN, VERIFICATION_CODE_TYPES } from '~/common/enums'
 import {
   Button,
-  //  ReCaptchaContext,
+  ReCaptchaContext,
   TextIcon,
   Translate,
-  useCountdown,
+  useLegacyCountdown,
   useMutation,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -36,27 +36,27 @@ interface VerificationSendCodeButtonProps {
 export const VerificationSendCodeButton: React.FC<
   VerificationSendCodeButtonProps
 > = ({ email, type, disabled }) => {
-  // const { token, refreshToken } = useContext(ReCaptchaContext)
+  const { token, refreshToken } = useContext(ReCaptchaContext)
 
   const [send] = useMutation<SendVerificationCodeMutation>(SEND_CODE)
   const [sent, setSent] = useState(false)
 
-  const { countdown, setCountdown, formattedTimeLeft } = useCountdown({
+  const { countdown, setCountdown, formattedTimeLeft } = useLegacyCountdown({
     timeLeft: 0,
   })
 
   const sendCode = async () => {
     // reCaptcha check is disabled for now
     await send({
-      variables: { input: { email, type, token: '' } },
+      variables: { input: { email, type, token } },
     })
 
     setCountdown({ timeLeft: SEND_CODE_COUNTDOWN })
     setSent(true)
 
-    // if (refreshToken) {
-    //   refreshToken()
-    // }
+    if (refreshToken) {
+      refreshToken()
+    }
   }
 
   return (

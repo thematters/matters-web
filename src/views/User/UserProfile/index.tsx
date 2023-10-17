@@ -9,6 +9,7 @@ import {
   Avatar,
   Button,
   Cover,
+  EditProfileDialog,
   Expandable,
   FollowUserButton,
   Media,
@@ -32,7 +33,6 @@ import {
 import { BadgesDialog } from './BadgesDialog'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
-import { EditProfileDialog } from './DropdownActions/EditProfileDialog'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
@@ -118,7 +118,7 @@ export const UserProfile = () => {
   }
 
   /**
-   * Active or Onboarding User
+   * Active
    */
   const avatar = (
     <section className={styles.avatar}>
@@ -221,7 +221,7 @@ export const UserProfile = () => {
                     {numAbbr(user.followers.totalCount)}
                   </span>
                   &nbsp;
-                  <FormattedMessage defaultMessage="Followers" />
+                  <FormattedMessage defaultMessage="Followers" id="pzTOmv" />
                 </button>
               )}
             </FollowersDialog>
@@ -235,6 +235,7 @@ export const UserProfile = () => {
                   &nbsp;
                   <FormattedMessage
                     defaultMessage="Following"
+                    id="ohgTH4"
                     description="src/components/UserProfile/index.tsx"
                   />
                 </button>

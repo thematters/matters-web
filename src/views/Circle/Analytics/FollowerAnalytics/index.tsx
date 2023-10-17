@@ -58,8 +58,8 @@ const Content = () => {
           <InfoTiles.Tile
             title={
               <FormattedMessage
-                defaultMessage="followers_empty
-              "
+                defaultMessage="followers_empty"
+                id="Bjdw71"
                 description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
               />
             }
@@ -67,6 +67,7 @@ const Content = () => {
             unit={
               <FormattedMessage
                 defaultMessage={`{follower, plural, =1 {follower} other {followers}}`}
+                id="xWZr13"
                 description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
                 values={{
                   follower: follower.current,
@@ -78,6 +79,7 @@ const Content = () => {
             title={
               <FormattedMessage
                 defaultMessage="New Followers This Month"
+                id="GugBCe"
                 description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
               />
             }
@@ -85,6 +87,7 @@ const Content = () => {
             unit={
               <FormattedMessage
                 defaultMessage="followers"
+                id="MDNaxs"
                 description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
               />
             }
@@ -96,6 +99,7 @@ const Content = () => {
             title={
               <FormattedMessage
                 defaultMessage="Conversion Rate of Followers"
+                id="zKOr2x"
                 description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
               />
             }
@@ -121,6 +125,7 @@ const Content = () => {
                   formatter={(datum: any) =>
                     `<span>&nbsp;${datum.value}${intl.formatMessage({
                       defaultMessage: 'followers',
+                      id: 'MDNaxs',
                       description:
                         'src/views/Circle/Analytics/FollowerAnalytics/index.tsx',
                     })}&nbsp;</span>`
@@ -144,6 +149,7 @@ const FollowerAnalytics = () => {
           <FormattedMessage
             description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
             defaultMessage="Followers"
+            id="AYTnjk"
           />
         }
       />

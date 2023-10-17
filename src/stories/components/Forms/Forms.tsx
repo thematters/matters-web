@@ -56,23 +56,6 @@ const Forms = () => (
         </Form>
       </li>
 
-      {/* Form.List */}
-      <li>
-        <Form.List spacingY="xloose">
-          <Form.List.Item
-            title={
-              <Translate
-                zh_hant="沒有帳戶？"
-                zh_hans="沒有帐户？"
-                en="Not Registered?"
-              />
-            }
-            rightText={<Translate id="register" />}
-            rightTextColor="green"
-          />
-        </Form.List>
-      </li>
-
       {/* Form.CheckBox */}
       <li>
         <Form.CheckBox

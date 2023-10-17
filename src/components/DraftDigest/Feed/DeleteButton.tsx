@@ -12,9 +12,9 @@ import {
   useDialogSwitch,
   useMutation,
 } from '~/components'
+import { updateUserDrafts } from '~/components/GQL'
 import { DeleteButtonDraftFragment, DeleteDraftMutation } from '~/gql/graphql'
 
-import { DraftsContext } from '../../../views/Me/Drafts/context'
 import styles from './styles.module.css'
 
 interface DeleteButtonProps {
@@ -36,17 +36,17 @@ const fragments = {
 
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
-  const [edges, setEdges] = useContext(DraftsContext)
 
   const { lang } = useContext(LanguageContext)
 
   const [deleteDraft] = useMutation<DeleteDraftMutation>(DELETE_DRAFT, {
     variables: { id: draft.id },
-    update: () => {
-      const filteredEdges = (edges ?? []).filter(
-        ({ node }) => node.id !== draft.id
-      )
-      setEdges(filteredEdges)
+    update: (cache) => {
+      updateUserDrafts({
+        cache,
+        targetId: draft.id,
+        type: 'remove',
+      })
     },
   })
 
@@ -92,7 +92,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
               color="red"
               onClick={() => {
                 onDelete()
@@ -102,7 +102,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
               color="red"
               onClick={() => {
                 onDelete()

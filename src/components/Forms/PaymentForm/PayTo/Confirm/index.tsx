@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useAccount, useNetwork } from 'wagmi'
 
 import {
@@ -72,10 +73,12 @@ const Confirm: React.FC<FormProps> = ({
   tabUrl,
   tx,
 }) => {
+  const intl = useIntl()
+  const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
+
   const formId = 'pay-to-confirm-form'
 
-  const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
   const [payTo] = useMutation<PayToMutation>(PAY_TO, undefined, {
     showToast: false,
   })
@@ -148,8 +151,8 @@ const Confirm: React.FC<FormProps> = ({
         submitCallback()
       } catch (error) {
         setSubmitting(false)
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        setFieldError('password', messages[codes[0]])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        setFieldError('password', intl.formatMessage(messages[codes[0]]))
         setFieldValue('password', '', false)
       }
     },
@@ -237,8 +240,8 @@ const Confirm: React.FC<FormProps> = ({
           <>
             <p className={styles.hint}>
               <Translate
-                zh_hant="數入六位數字交易密碼即可完成："
-                zh_hans="数入六位数字交易密码即可完成："
+                zh_hant="輸入六位數字交易密碼即可完成："
+                zh_hans="输入六位数字交易密码即可完成："
                 en="Please Enter a 6-digit payment password"
               />
             </p>

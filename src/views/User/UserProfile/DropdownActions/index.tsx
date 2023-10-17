@@ -7,6 +7,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import {
   Button,
   Dropdown,
+  EditProfileDialog,
   IconMore16,
   IconMore22,
   IconRss20,
@@ -23,8 +24,6 @@ import {
   DropdownActionsUserPrivateFragment,
   DropdownActionsUserPublicFragment,
 } from '~/gql/graphql'
-
-import { EditProfileDialog } from './EditProfileDialog'
 
 interface DropdownActionsProps {
   user: DropdownActionsUserPublicFragment &
@@ -90,7 +89,7 @@ const BaseDropdownActions = ({
         textColor="greyDarker"
         textActiveColor="black"
         spacing={['xtight', 'base']}
-        text={<FormattedMessage defaultMessage="Share" />}
+        text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
         icon={<IconShare20 size="mdS" />}
       />
       {hasRssFeed && (
@@ -122,6 +121,7 @@ const BaseDropdownActions = ({
                 textActiveColor="green"
                 aria-label={intl.formatMessage({
                   defaultMessage: 'More Actions',
+                  id: 'A7ugfn',
                 })}
                 onClick={openDropdown}
                 ref={ref}
@@ -139,6 +139,7 @@ const BaseDropdownActions = ({
                 borderActiveColor="black"
                 aria-label={intl.formatMessage({
                   defaultMessage: 'More Actions',
+                  id: 'A7ugfn',
                 })}
                 onClick={openDropdown}
                 ref={ref}
@@ -156,6 +157,7 @@ const BaseDropdownActions = ({
                 borderActiveColor="black"
                 aria-label={intl.formatMessage({
                   defaultMessage: 'More Actions',
+                  id: 'A7ugfn',
                 })}
                 onClick={openDropdown}
                 ref={ref}

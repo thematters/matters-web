@@ -1,72 +1,57 @@
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
-import { appendTarget } from '~/common/utils'
 import { Button } from '~/components'
 
 import styles from './styles.module.css'
 
-export const PasswordResetDialogButton = ({
-  gotoResetPassword,
+export const SendLoginCodeButton = ({
+  sendLoginCode,
+  disabled,
 }: {
-  gotoResetPassword: () => void
-}) => (
-  <section className={styles.option}>
-    <Button aria-haspopup="dialog" onClick={gotoResetPassword}>
-      <FormattedMessage
-        defaultMessage="Forget Password"
-        description="src/components/Forms/EmailLoginForm/Buttons.tsx"
-      />
-    </Button>
-  </section>
-)
-
-export const PasswordResetRedirectButton = () => (
-  <section className={styles.option}>
-    <Button {...appendTarget(PATHS.FORGET)} tabIndex={-1}>
-      <FormattedMessage
-        defaultMessage="Forget Password"
-        description="src/components/Forms/EmailLoginForm/Buttons.tsx"
-      />
-    </Button>
-  </section>
-)
-
-export const EmailSignUpDialogButton = ({
-  gotoEmailSignUp,
-}: {
-  gotoEmailSignUp: () => void
+  sendLoginCode: () => void
+  disabled?: boolean
 }) => (
   <section className={styles.option}>
     <FormattedMessage
-      defaultMessage="Not Registered?"
+      defaultMessage="Forgot password?"
+      id="O2Nqk8"
       description="src/components/Forms/EmailLoginForm/Buttons.tsx"
     />
-    <Button onClick={gotoEmailSignUp}>
-      &nbsp;
-      <FormattedMessage defaultMessage="Register" />
+    <Button aria-haspopup="dialog" onClick={sendLoginCode} disabled={disabled}>
+      <FormattedMessage
+        defaultMessage="Send login code"
+        id="qNuRmA"
+        description="src/components/Forms/EmailLoginForm/Buttons.tsx"
+      />
     </Button>
   </section>
 )
 
 const OtherOptions = ({
-  isInPage,
-  gotoResetPassword,
-  gotoEmailSignUp,
+  hasSendCode,
+  sendLoginCode,
+  disabled,
 }: {
-  isInPage: boolean
-  gotoResetPassword?: () => any
-  gotoEmailSignUp?: () => any
+  hasSendCode: boolean
+  sendLoginCode?: () => any
+  disabled?: boolean
 }) => {
   return (
     <section className={styles.otherOptions}>
-      {!isInPage && gotoResetPassword && (
-        <PasswordResetDialogButton gotoResetPassword={gotoResetPassword} />
+      {!hasSendCode && sendLoginCode && (
+        <SendLoginCodeButton
+          sendLoginCode={sendLoginCode}
+          disabled={disabled}
+        />
       )}
-      {isInPage && <PasswordResetRedirectButton />}
-
-      {gotoEmailSignUp && (
-        <EmailSignUpDialogButton gotoEmailSignUp={gotoEmailSignUp} />
+      {hasSendCode && (
+        <section className={styles.hasSendCode}>
+          <FormattedMessage
+            defaultMessage="The login code has been sent to your inbox"
+            id="wbIHgJ"
+            description="src/components/Forms/EmailLoginForm/OtherOptions.tsx"
+          />
+        </section>
       )}
     </section>
   )

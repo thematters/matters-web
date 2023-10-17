@@ -24,6 +24,7 @@ const Followers = ({ tag }: FollowersProps) => {
           &nbsp;
           <FormattedMessage
             defaultMessage="are following"
+            id="hYG5fb"
             description="src/views/TagDetail/Followers/index.tsx"
           />
         </span>

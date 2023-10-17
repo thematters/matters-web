@@ -99,11 +99,11 @@ export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
         cursor
         node {
           ... on User {
-            ...UserDigestConciseUser
+            ...UserDigestRichUserPublic
           }
         }
       }
     }
   }
-  ${UserDigest.Concise.fragments.user}
+  ${UserDigest.Rich.fragments.user.public}
 `

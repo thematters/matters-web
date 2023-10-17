@@ -101,6 +101,7 @@ const BaseMeHistory = () => {
       <EmptyArticle
         description={intl.formatMessage({
           defaultMessage: 'No data yet',
+          id: '1Z1M77',
           description: 'src/views/Me/History/index.tsx',
         })}
       />
@@ -181,6 +182,7 @@ const MeHistory = () => {
   const intl = useIntl()
   const title = intl.formatMessage({
     defaultMessage: 'History',
+    id: 'djJp6c',
   })
 
   return (

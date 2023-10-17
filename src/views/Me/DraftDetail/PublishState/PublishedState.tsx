@@ -2,8 +2,15 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 import { toPath } from '~/common/utils'
-import { Dialog, ShareDialog, Translate } from '~/components'
-import { PublishStateDraftFragment } from '~/gql/graphql'
+import {
+  Dialog,
+  ShareDialog,
+  Translate,
+  useImperativeQuery,
+} from '~/components'
+import { MeDraftFeedQuery, PublishStateDraftFragment } from '~/gql/graphql'
+
+import { ME_DRAFTS_FEED } from '../../Drafts/gql'
 
 const BasePublishedState = ({
   openShareDialog,
@@ -19,6 +26,14 @@ const BasePublishedState = ({
 
 const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   const router = useRouter()
+
+  // refetch /me/drafts on published
+  const refetch = useImperativeQuery<MeDraftFeedQuery>(ME_DRAFTS_FEED, {
+    variables: { id: draft.id },
+  })
+  useEffect(() => {
+    refetch()
+  }, [])
 
   if (!draft.article) {
     return null

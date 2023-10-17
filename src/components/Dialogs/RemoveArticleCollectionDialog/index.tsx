@@ -57,6 +57,7 @@ const BaseRemoveArticleCollectionDialog = ({
       message: (
         <FormattedMessage
           defaultMessage="Successfully removed"
+          id="URljhZ"
           description="src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
         />
       ),
@@ -70,13 +71,19 @@ const BaseRemoveArticleCollectionDialog = ({
       {children({ openDialog })}
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={<FormattedMessage defaultMessage="Remove from collection" />}
+          title={
+            <FormattedMessage
+              defaultMessage="Remove from collection"
+              id="0Om2Kl"
+            />
+          }
         />
 
         <Dialog.Message>
           <p>
             <FormattedMessage
               defaultMessage="Are you sure you want to remove ‘{article}’ from this collection?"
+              id="+cS08C"
               values={{
                 article: <span className="u-highlight">{articleTitle}</span>,
               }}
@@ -92,6 +99,7 @@ const BaseRemoveArticleCollectionDialog = ({
               text={
                 <FormattedMessage
                   defaultMessage="Remove"
+                  id="kkZioy"
                   description="src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
                 />
               }
@@ -105,6 +113,7 @@ const BaseRemoveArticleCollectionDialog = ({
               text={
                 <FormattedMessage
                   defaultMessage="Remove"
+                  id="kkZioy"
                   description="src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
                 />
               }

@@ -1,23 +1,24 @@
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
+  ERROR_CODES,
   OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
+  PATHS,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
+import { analytics, translate } from '~/common/utils'
 import {
   Button,
+  ButtonProps,
+  ERROR_MESSAGES,
   IconNavCreate32,
   LanguageContext,
   toast,
   Tooltip,
-  Translate,
-  useMutation,
+  useRoute,
 } from '~/components'
-import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-import { CreateDraftMutation } from '~/gql/graphql'
 
 interface Props {
   allowed: boolean
@@ -25,12 +26,7 @@ interface Props {
   forbidden?: boolean
 }
 
-const BaseWriteButton = ({
-  onClick,
-}: {
-  onClick: () => any
-  loading?: boolean
-}) => {
+const BaseWriteButton = (props: ButtonProps) => {
   const { lang } = useContext(LanguageContext)
 
   return (
@@ -42,8 +38,8 @@ const BaseWriteButton = ({
       <Button
         bgActiveColor="greyLighter"
         size={['2rem', '2rem']}
-        onClick={onClick}
         aria-label={translate({ id: 'write', lang })}
+        {...props}
       >
         <IconNavCreate32 size="lg" color="black" />
       </Button>
@@ -52,13 +48,8 @@ const BaseWriteButton = ({
 }
 
 export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
-  const router = useRouter()
-  const [putDraft, { loading }] = useMutation<CreateDraftMutation>(
-    CREATE_DRAFT,
-    {
-      variables: { title: '' },
-    }
-  )
+  const { isInPath } = useRoute()
+  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
 
   if (!allowed) {
     return (
@@ -72,6 +63,14 @@ export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
 
   return (
     <BaseWriteButton
+      href={
+        authed && !forbidden && !isInDraftDetail
+          ? PATHS.ME_DRAFT_NEW
+          : undefined
+      }
+      htmlHref={
+        authed && !forbidden && isInDraftDetail ? PATHS.ME_DRAFT_NEW : undefined
+      }
       onClick={async () => {
         if (!authed) {
           window.dispatchEvent(
@@ -84,24 +83,18 @@ export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
 
         if (forbidden) {
           toast.error({
-            message: <Translate id="FORBIDDEN_BY_STATE" />,
+            message: (
+              <FormattedMessage
+                {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+              />
+            ),
           })
 
           return
         }
 
-        analytics.trackEvent('click_button', {
-          type: 'write',
-        })
-        const result = await putDraft()
-        const { slug = '', id } = result?.data?.putDraft || {}
-
-        if (id) {
-          const path = toPath({ page: 'draftDetail', slug, id })
-          router.push(path.href)
-        }
+        analytics.trackEvent('click_button', { type: 'write' })
       }}
-      loading={loading}
     />
   )
 }

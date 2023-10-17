@@ -1,8 +1,10 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
+  ERROR_CODES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UPLOAD_FILE_COUNT_LIMIT,
   UPLOAD_MIGRATION_SIZE_LIMIT,
@@ -10,6 +12,7 @@ import {
 import { translate } from '~/common/utils'
 import {
   Dialog,
+  ERROR_MESSAGES,
   LanguageContext,
   toast,
   Translate,
@@ -91,7 +94,11 @@ const MigrationDialogUpload = ({
 
     if (sizes > UPLOAD_MIGRATION_SIZE_LIMIT) {
       toast.error({
-        message: <Translate id="MIGRATION_REACH_LIMIT" />,
+        message: (
+          <FormattedMessage
+            {...ERROR_MESSAGES[ERROR_CODES.MIGRATION_REACH_LIMIT]}
+          />
+        ),
       })
       return
     }

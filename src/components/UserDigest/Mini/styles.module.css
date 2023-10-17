@@ -1,14 +1,5 @@
 .container {
   @mixin flex-center-start;
-
-  &:not(.disabled) {
-    &:hover,
-    &:focus {
-      & .displayname {
-        text-decoration: underline;
-      }
-    }
-  }
 }
 
 .name {

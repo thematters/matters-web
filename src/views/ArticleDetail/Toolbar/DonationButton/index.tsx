@@ -1,7 +1,9 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
+  ERROR_CODES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEXT,
   UNIVERSAL_AUTH_SOURCE,
@@ -10,11 +12,11 @@ import { analytics, numAbbr, translate } from '~/common/utils'
 import {
   Button,
   DonationDialog,
+  ERROR_MESSAGES,
   IconDonate24,
   LanguageContext,
   TextIcon,
   toast,
-  Translate,
   ViewerContext,
 } from '~/components'
 import {
@@ -55,7 +57,9 @@ const DonationButton = ({
 
   const forbid = () => {
     toast.error({
-      message: <Translate id="FORBIDDEN_BY_STATE" />,
+      message: (
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+      ),
     })
   }
 

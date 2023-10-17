@@ -5,12 +5,22 @@
     "plugin:storybook/recommended"
   ],
   "plugins": [
-    "simple-import-sort"
+    "simple-import-sort",
+    "formatjs"
   ],
   "rules": {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "react-hooks/exhaustive-deps": "off",
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "formatjs/no-offset": "error",
+    "formatjs/enforce-default-message": "error",
+    "formatjs/no-multiple-whitespaces": "error",
+    "formatjs/enforce-id": [
+      "error",
+      {
+        "idInterpolationPattern": "[sha512:contenthash:base64:6]"
+      }
+    ]
   }
 }

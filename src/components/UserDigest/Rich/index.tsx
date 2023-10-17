@@ -8,7 +8,6 @@ import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { Card, CardProps, Translate } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
-import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 import {
   UserDigestRichUserPrivateFragment,
   UserDigestRichUserPublicFragment,
@@ -31,13 +30,11 @@ export type UserDigestRichProps = {
 
   size?: 'sm' | 'lg'
   avatarBadge?: React.ReactNode
-  descriptionReplacement?: React.ReactNode
+  subtitle?: React.ReactNode
   extraButton?: React.ReactNode
 
   hasFollow?: boolean
   hasState?: boolean
-  hasUnblock?: boolean
-  hasDescriptionReplacement?: boolean
   canClamp?: boolean
 } & CardProps &
   AvatarProps
@@ -47,13 +44,11 @@ const Rich = ({
 
   size = 'lg',
   avatarBadge,
-  descriptionReplacement,
+  subtitle,
   extraButton,
 
   hasFollow = true,
   hasState = true,
-  hasUnblock,
-  hasDescriptionReplacement = false,
   canClamp = false,
 
   ...cardProps
@@ -71,7 +66,8 @@ const Rich = ({
 
   const contentClasses = classNames({
     [styles.content]: true,
-    [styles.hasExtraButton]: hasUnblock || hasFollow || !!extraButton,
+    [styles.hasExtraButton]: hasFollow || !!extraButton,
+    [styles.archived]: isArchived,
   })
 
   if (isArchived) {
@@ -96,8 +92,8 @@ const Rich = ({
           </section>
 
           <section className={styles.extraButton}>
-            {hasUnblock && <UnblockUserButton user={user} />}
             {hasFollow && <FollowUserButton user={user} />}
+            {extraButton}
           </section>
         </section>
       </Card>
@@ -136,16 +132,13 @@ const Rich = ({
             {hasState && <FollowUserButton.State user={user} />}
           </header>
 
-          {!hasDescriptionReplacement && user.info.description && (
-            <p className={styles.description}>{user.info.description}</p>
+          {!subtitle && user.info.description && (
+            <p className={styles.subtitle}>{user.info.description}</p>
           )}
-          {descriptionReplacement && (
-            <p className={styles.description}>{descriptionReplacement}</p>
-          )}
+          {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         </section>
 
         <section className={styles.extraButton}>
-          {hasUnblock && <UnblockUserButton user={user} />}
           {hasFollow && <FollowUserButton user={user} />}
           {extraButton}
         </section>
@@ -163,14 +156,17 @@ type MemoizedRichType = React.MemoExoticComponent<
   fragments: typeof fragments
 }
 
-const MemoizedRich = React.memo(Rich, ({ user: prevUser }, { user }) => {
-  return (
-    prevUser.id === user.id &&
-    prevUser.isFollowee === user.isFollowee &&
-    prevUser.isFollower === user.isFollower &&
-    prevUser.isBlocked === user.isBlocked
-  )
-}) as MemoizedRichType
+const MemoizedRich = React.memo(
+  Rich,
+  ({ user: prevUser, ...prevProps }, { user, ...props }) => {
+    return (
+      prevUser.id === user.id &&
+      prevUser.isFollowee === user.isFollowee &&
+      prevUser.isFollower === user.isFollower &&
+      prevProps.extraButton === props.extraButton
+    )
+  }
+) as MemoizedRichType
 
 MemoizedRich.fragments = fragments
 
