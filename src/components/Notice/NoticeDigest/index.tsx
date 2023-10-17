@@ -7,7 +7,6 @@ import {
   ArticleNewCollectedNoticeFragment,
   ArticleNewCommentNoticeFragment,
   ArticleNewSubscriberNoticeFragment,
-  ArticleTagAddedNoticeFragment,
   CircleInvitationNoticeFragment,
   CircleNewBroadcastNoticeFragment,
   CircleNewDiscussionCommentsFragment,
@@ -15,7 +14,6 @@ import {
   CommentMentionedYouNoticeFragment,
   CommentNewReplyNoticeFragment,
   PaymentReceivedDonationNoticeFragment,
-  TagAddEditorNoticeFragment,
   UserNewFollowerNoticeFragment,
 } from '~/gql/graphql'
 
@@ -29,7 +27,6 @@ import styles from '../styles.module.css'
 
 type NoticeDigestProps = {
   notice:
-    | ArticleTagAddedNoticeFragment
     | ArticleNewSubscriberNoticeFragment
     | ArticleNewAppreciationNoticeFragment
     | ArticleNewCollectedNoticeFragment
@@ -42,7 +39,6 @@ type NoticeDigestProps = {
     | CommentNewReplyNoticeFragment
     | PaymentReceivedDonationNoticeFragment
     | UserNewFollowerNoticeFragment
-    | TagAddEditorNoticeFragment
   actors?: any[]
   action: string | ReactElement
   secondAction?: string | ReactElement

@@ -219,10 +219,6 @@
   "8KFsZN": {
     "defaultMessage": "Read Counts"
   },
-  "8PWD05": {
-    "defaultMessage": "invites you to {tag} collaborator",
-    "description": "src/components/Notice/TagNotice/TagAddEditorNotice.tsx"
-  },
   "8cv9D4": {
     "defaultMessage": "Next Step"
   },
@@ -313,10 +309,6 @@
     "defaultMessage": "bookmarked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
-  "CNbggD": {
-    "defaultMessage": "became the maintainer of {tag}",
-    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
-  },
   "Cdkhl8": {
     "defaultMessage": "Delete {commentType}",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -340,10 +332,6 @@
   },
   "D3idYv": {
     "defaultMessage": "Settings"
-  },
-  "DFieKt": {
-    "defaultMessage": "resigned from {tag} collaborator",
-    "description": "src/components/Notice/TagNotice/TagLeaveEditorNotice.tsx"
   },
   "DYrDcG": {
     "defaultMessage": "Badges",
@@ -760,10 +748,6 @@
     "defaultMessage": "commented in your circle broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "YUtHE9": {
-    "defaultMessage": "selected your work {articleTitle} to {tag} featured",
-    "description": "src/components/Notice/ArticleTagNotice/ArticleTagAddedNotice.tsx"
-  },
   "YjNkcK": {
     "defaultMessage": "To change, switch it directly on your wallet"
   },
@@ -871,10 +855,6 @@
   "dnsfmR": {
     "defaultMessage": "for bug reports or suggestions. We will reply to you as soon we can!",
     "description": "src/views/Help/index.tsx"
-  },
-  "eJ131z": {
-    "defaultMessage": "resigned as the maintainer of {tag}",
-    "description": "src/components/Notice/TagNotice/TagAdoptionNotice.tsx"
   },
   "eTpiYa": {
     "defaultMessage": "No data yet."
@@ -1067,10 +1047,6 @@
   "p5qZnJ": {
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
-  },
-  "pCcbaC": {
-    "defaultMessage": "remove your work {articleTitle} from {tag}",
-    "description": "src/components/Notice/ArticleTagNotice/ArticleTagRemovedNotice.tsx"
   },
   "pRV+UD": {
     "defaultMessage": "Collapse",
