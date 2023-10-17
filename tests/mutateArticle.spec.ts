@@ -31,17 +31,6 @@ test.describe('Mutate article', () => {
 
       const bobArticleDetail = new ArticleDetailPage(bobPage, isMobile)
 
-      while (true) {
-        const appreciationButtonState =
-          await bobArticleDetail.toolbarAppreciationButton.getAttribute(
-            'disabled'
-          )
-        if (appreciationButtonState === null) break
-        await sleep(5 * 1000)
-        await bobPage.reload()
-        await bobPage.waitForLoadState('networkidle')
-      }
-
       const title = await bobArticleDetail.getTitle()
 
       const amount = _random(1, 5, false)
@@ -137,7 +126,7 @@ test.describe('Mutate article', () => {
       const draftDetail = new DraftDetailPage(bobPage, isMobile)
       // Required: Fill title and content
       const title = await draftDetail.fillTitle()
-      const content = await draftDetail.fillContent()
+      const content = await draftDetail.fillContent(title)
       await draftDetail.publish()
 
       // Goto published article page
