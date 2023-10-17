@@ -372,6 +372,7 @@ const ArticleDetail = ({
   includeTranslation: boolean
 }) => {
   const { getQuery, router, routerLang } = useRoute()
+  const [needRefetchData, setNeedRefetchData] = useState(false)
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
@@ -452,8 +453,12 @@ const ArticleDetail = ({
 
     // refetch data when URL query is changed
     ;(async () => {
+      if (!needRefetchData) {
+        return
+      }
       await refetchPublic()
       await loadPrivate()
+      setNeedRefetchData(false)
     })()
   }, [mediaHash])
 
@@ -509,6 +514,7 @@ const ArticleDetail = ({
       return
     }
 
+    setNeedRefetchData(true)
     const path = toPath({ page: 'articleDetail', article })
     router.replace(path.href)
   }
@@ -516,6 +522,9 @@ const ArticleDetail = ({
   const onEditSaved = async () => {
     setEditMode(false)
     exitEditMode()
+
+    await refetchPublic()
+    loadPrivate()
   }
 
   useEffect(() => {
