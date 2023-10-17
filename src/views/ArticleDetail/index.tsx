@@ -447,9 +447,14 @@ const ArticleDetail = ({
   }
 
   useEffect(() => {
-    refetchPublic()
     // reset state to private fetchable when URL query is changed
     setPrivateFetched(false)
+
+    // refetch data when URL query is changed
+    ;(async () => {
+      await refetchPublic()
+      await loadPrivate()
+    })()
   }, [mediaHash])
 
   // fetch private data when mediaHash of public data is changed
@@ -511,9 +516,6 @@ const ArticleDetail = ({
   const onEditSaved = async () => {
     setEditMode(false)
     exitEditMode()
-
-    await refetchPublic()
-    loadPrivate()
   }
 
   useEffect(() => {
