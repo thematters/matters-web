@@ -3,7 +3,6 @@ import _sample from 'lodash/sample'
 import _uniq from 'lodash/uniq'
 
 import { PATHS, TEST_ID } from '~/common/enums'
-import { sleep } from '~/common/utils/time'
 
 import { waitForAPIResponse } from '../api'
 import {
@@ -150,10 +149,10 @@ export class DraftDetailPage {
     ])
   }
 
-  async fillTitle() {
-    const title = generateTitle()
-    await this.titleInput.fill(title)
-    return title
+  async fillTitle(title?: string) {
+    const _title = title || generateTitle()
+    await this.titleInput.fill(_title)
+    return _title
   }
 
   async fillSummary() {
@@ -162,19 +161,20 @@ export class DraftDetailPage {
     return summary
   }
 
-  async fillContent() {
-    const content = generateContent({})
+  async fillContent(title: string) {
+    let content = generateContent({})
     await this.contentInput.fill(content)
 
     // Update the content to make the publish button clickable
-    await this.contentInput.press('KeyA')
-    await sleep(5 * 1000)
-    await this.contentInput.press('KeyB')
-    await this.contentInput.press('KeyC')
-    await this.contentInput.press('KeyD')
-    await sleep(5 * 1000)
+    while (await this.publishButton.isDisabled()) {
+      await this.contentInput.press('End')
+      await this.contentInput.press('KeyA')
+      content += 'a'
+      await this.page.waitForTimeout(1000 * 2)
+      await this.fillTitle(title)
+    }
 
-    return content + 'abcd'
+    return content
   }
 
   async setTags() {
