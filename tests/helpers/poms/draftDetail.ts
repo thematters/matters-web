@@ -3,6 +3,7 @@ import _sample from 'lodash/sample'
 import _uniq from 'lodash/uniq'
 
 import { PATHS, TEST_ID } from '~/common/enums'
+import { sleep } from '~/common/utils/time'
 
 import { waitForAPIResponse } from '../api'
 import {
@@ -95,8 +96,8 @@ export class DraftDetailPage {
     })
 
     // editing
-    this.titleInput = this.page.getByPlaceholder('Enter title')
-    this.summaryInput = this.page.getByPlaceholder('Enter summary')
+    this.titleInput = this.page.getByPlaceholder('Enter title ...')
+    this.summaryInput = this.page.getByPlaceholder('Enter summary…')
     this.contentInput = this.page.locator('.tiptap')
 
     // dialog
@@ -164,7 +165,16 @@ export class DraftDetailPage {
   async fillContent() {
     const content = generateContent({})
     await this.contentInput.fill(content)
-    return content
+
+    // Update the content to make the publish button clickable
+    await this.contentInput.press('KeyA')
+    await sleep(5 * 1000)
+    await this.contentInput.press('KeyB')
+    await this.contentInput.press('KeyC')
+    await this.contentInput.press('KeyD')
+    await sleep(5 * 1000)
+
+    return content + 'abcd'
   }
 
   async setTags() {
