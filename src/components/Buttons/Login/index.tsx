@@ -47,6 +47,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
     <TextIcon color={textIconColor} size={textIconSize} weight="md">
       <FormattedMessage
         defaultMessage="Log in"
+        id="skbUBl"
         description="src/components/Buttons/Login/index.tsx"
       />
     </TextIcon>

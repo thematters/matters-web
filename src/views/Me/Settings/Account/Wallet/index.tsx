@@ -28,6 +28,7 @@ const Wallet = () => {
                   title={
                     <FormattedMessage
                       defaultMessage="Wallet address"
+                      id="Gt7K6r"
                       description="src/views/Me/Settings/Settings/Wallet/index.tsx"
                     />
                   }
@@ -45,7 +46,10 @@ const Wallet = () => {
                   right={
                     ethAddress ? undefined : (
                       <SettingsButton onClick={openAddWalletLoginDialog}>
-                        <FormattedMessage defaultMessage="Connect" />
+                        <FormattedMessage
+                          defaultMessage="Connect"
+                          id="+vVZ/G"
+                        />
                       </SettingsButton>
                     )
                   }

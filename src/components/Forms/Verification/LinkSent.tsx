@@ -27,11 +27,12 @@ export const VerificationLinkSent = ({
           title={
             <FormattedMessage
               defaultMessage="Check your inbox"
+              id="5JN+nl"
               description="src/components/Forms/Verification/LinkSent.tsx"
             />
           }
           closeDialog={closeDialog}
-          closeText={<FormattedMessage defaultMessage="Close" />}
+          closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
         />
 
         <DialogBeta.Content>
@@ -39,6 +40,7 @@ export const VerificationLinkSent = ({
             <p>
               <FormattedMessage
                 defaultMessage="The login link has been sent to {email}"
+                id="zAK5G+"
                 description="src/components/Forms/Verification/LinkSent.tsx"
                 values={{
                   email: <span className={styles.email}>{email}</span>,
@@ -52,7 +54,7 @@ export const VerificationLinkSent = ({
           <DialogBeta.Footer
             smUpBtns={
               <DialogBeta.TextButton
-                text={<FormattedMessage defaultMessage="Close" />}
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -64,13 +66,23 @@ export const VerificationLinkSent = ({
           <DialogBeta.Footer
             btns={
               <DialogBeta.RoundedButton
-                text={<FormattedMessage defaultMessage="Enter Matters" />}
+                text={
+                  <FormattedMessage
+                    defaultMessage="Enter Matters"
+                    id="A6r2p1"
+                  />
+                }
                 onClick={() => router.push(PATHS.HOME)}
               />
             }
             smUpBtns={
               <DialogBeta.TextButton
-                text={<FormattedMessage defaultMessage="Enter Matters" />}
+                text={
+                  <FormattedMessage
+                    defaultMessage="Enter Matters"
+                    id="A6r2p1"
+                  />
+                }
                 onClick={() => router.push(PATHS.HOME)}
               />
             }
@@ -88,7 +100,9 @@ export const VerificationLinkSent = ({
         <Dialog.Header
           title="register"
           closeDialog={closeDialog}
-          closeText={<FormattedMessage defaultMessage="Understood" />}
+          closeText={
+            <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
+          }
         />
       )}
 
@@ -112,7 +126,9 @@ export const VerificationLinkSent = ({
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Understood" />}
+              text={
+                <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
+              }
               color="green"
               onClick={closeDialog}
             />

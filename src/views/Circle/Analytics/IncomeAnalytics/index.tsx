@@ -64,6 +64,7 @@ const Content = () => {
             title={
               <FormattedMessage
                 defaultMessage="This Month"
+                id="sPgUkN"
                 description="src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
               />
             }
@@ -75,6 +76,7 @@ const Content = () => {
             title={
               <FormattedMessage
                 defaultMessage="Next Month (Estimation)"
+                id="Fe682o"
                 description="src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
               />
             }
@@ -88,6 +90,7 @@ const Content = () => {
             title={
               <FormattedMessage
                 defaultMessage="Total"
+                id="L4NXXh"
                 description="src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
               />
             }
@@ -132,6 +135,7 @@ const IncomeAnalytics = () => {
         title={
           <FormattedMessage
             defaultMessage="Income"
+            id="d4waan"
             description="src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
           />
         }

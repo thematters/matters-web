@@ -111,12 +111,14 @@ export const AuthWalletFeed: React.FC<Props> = ({
             <p>
               <FormattedMessage
                 defaultMessage="Wallet is linked to a different account"
+                id="Dt1o78"
                 description="src/components/AuthMethodFeed/AuthWalletFeed.tsx"
               />
             </p>
             <p>
               <FormattedMessage
                 defaultMessage="Sign in to that account to unlink it then try again"
+                id="rqS2aA"
                 description="src/components/AuthMethodFeed/AuthWalletFeed.tsx"
               />
             </p>
@@ -127,6 +129,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
             <p>
               <FormattedMessage
                 defaultMessage="Unavailable"
+                id="rADhX5"
                 description="FORBIDDEN_BY_STATE"
               />
             </p>
@@ -136,6 +139,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
           <a href={PATHS.GUIDE} target="_blank">
             <FormattedMessage
               defaultMessage="What is a digital wallet?"
+              id="V5OMr4"
               description="src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
             />
           </a>

@@ -41,7 +41,7 @@ const Email = ({
 
       {!circle && (
         <TextIcon icon={withIcon(IconShareEmail)({})} spacing="base">
-          <FormattedMessage defaultMessage="Email" />
+          <FormattedMessage defaultMessage="Email" id="sy+pv5" />
         </TextIcon>
       )}
     </button>

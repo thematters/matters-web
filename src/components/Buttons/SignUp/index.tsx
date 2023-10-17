@@ -55,7 +55,7 @@ export const SignUpButton: React.FC<
   }
   const ButtonText = () => (
     <TextIcon color="white" weight="md">
-      <FormattedMessage defaultMessage="Register" />
+      <FormattedMessage defaultMessage="Register" id="deEeEI" />
     </TextIcon>
   )
 

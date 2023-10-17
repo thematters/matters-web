@@ -30,6 +30,7 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
         action={
           <FormattedMessage
             defaultMessage="followed your circle"
+            id="hk2aiz"
             description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
           />
         }
@@ -45,6 +46,7 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
         action={
           <FormattedMessage
             defaultMessage="subscribed your circle"
+            id="mPe6DK"
             description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
           />
         }
@@ -59,6 +61,7 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
       action={
         <FormattedMessage
           defaultMessage="unsubscribed your circle"
+          id="qYzBk8"
           description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
         />
       }

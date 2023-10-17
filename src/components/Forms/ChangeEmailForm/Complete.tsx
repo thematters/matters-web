@@ -34,7 +34,7 @@ const Complete = ({
       {!isInPage && closeDialog && (
         <Dialog.Footer
           closeDialog={closeDialog}
-          closeText={<FormattedMessage defaultMessage="Close" />}
+          closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
         />
       )}
     </>

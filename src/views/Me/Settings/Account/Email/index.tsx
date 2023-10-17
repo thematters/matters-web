@@ -33,6 +33,7 @@ const Email = () => {
             title={
               <FormattedMessage
                 defaultMessage="Email"
+                id="aacIz8"
                 description="src/views/Me/Settings/Settings/Email/index.tsx"
               />
             }
@@ -41,7 +42,7 @@ const Email = () => {
             right={
               hasEmail ? undefined : (
                 <SettingsButton onClick={openDialog}>
-                  <FormattedMessage defaultMessage="Connect" />
+                  <FormattedMessage defaultMessage="Connect" id="+vVZ/G" />
                 </SettingsButton>
               )
             }

@@ -83,7 +83,7 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
   return (
     <WrapperButton
       mode={mode}
-      text={<FormattedMessage defaultMessage="Next Step" />}
+      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting || isBalanceInsufficient}
@@ -108,7 +108,7 @@ const LIKESubmitButton: React.FC<SubmitButtonProps> = ({
 
       <WrapperButton
         mode={mode}
-        text={<FormattedMessage defaultMessage="Next Step" />}
+        text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
         type="submit"
         form={formId}
         disabled={!isValid || isSubmitting || isBalanceInsufficient}
@@ -196,7 +196,7 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
     return (
       <WrapperButton
         mode={mode}
-        text={<FormattedMessage defaultMessage="Next Step" />}
+        text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
         type="submit"
         form={formId}
         disabled={!isValid || isSubmitting || isBalanceInsufficient}

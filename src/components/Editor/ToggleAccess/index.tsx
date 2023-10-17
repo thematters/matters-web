@@ -195,6 +195,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         <p className={styles.hint}>
           <FormattedMessage
             defaultMessage="Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)"
+            id="Vn5KLr"
             description="src/components/Editor/ToggleAccess/index.tsx"
           />
         </p>

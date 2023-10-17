@@ -26,7 +26,7 @@ export const ShuffleButton: React.FC<ShuffleButtonProps> = ({
       size="xs"
       weight="md"
     >
-      <FormattedMessage defaultMessage="Shuffle" />
+      <FormattedMessage defaultMessage="Shuffle" id="Pp/0po" />
     </TextIcon>
   </Button>
 )

@@ -107,6 +107,7 @@ const AggregateArticleResults = () => {
         title={intl.formatMessage(
           {
             defaultMessage: '{q} - Matters Search',
+            id: 'l9LpDx',
             description: 'src/views/Search/AggregateResults/Articles.tsx',
           },
           { q: stripSpaces(q) }
@@ -120,7 +121,9 @@ const AggregateArticleResults = () => {
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
-        eof={<FormattedMessage defaultMessage="End of the results" />}
+        eof={
+          <FormattedMessage defaultMessage="End of the results" id="ui1+QC" />
+        }
       >
         <List>
           {edges.map(

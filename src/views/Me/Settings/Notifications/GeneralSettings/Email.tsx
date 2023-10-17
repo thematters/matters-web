@@ -19,6 +19,7 @@ const Email = ({ settings, toggle }: EmailProps) => {
   const intl = useIntl()
   const label = intl.formatMessage({
     defaultMessage: 'Matters Daily Report',
+    id: '8t6Cs8',
     description: 'src/views/Me/Settings/Notifications/Email.tsx',
   })
 
@@ -29,6 +30,7 @@ const Email = ({ settings, toggle }: EmailProps) => {
     <TableView
       groupName={intl.formatMessage({
         defaultMessage: 'Email',
+        id: 'NEKHMm',
         description: 'src/views/Me/Settings/Notifications/Email.tsx',
       })}
       spacingX={0}
@@ -38,6 +40,7 @@ const Email = ({ settings, toggle }: EmailProps) => {
         subtitle={
           <FormattedMessage
             defaultMessage="Selected activities related to you in the past 24 hours"
+            id="Mn7GEf"
             description="src/views/Me/Settings/Notifications/Email.tsx"
           />
         }
@@ -55,6 +58,7 @@ const Email = ({ settings, toggle }: EmailProps) => {
           !hasEmail && (
             <FormattedMessage
               defaultMessage="Please add email first"
+              id="ROPCC0"
               description="src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
             />
           )

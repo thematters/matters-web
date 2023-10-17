@@ -71,6 +71,7 @@ const Unsubscribe = ({
         text={
           <FormattedMessage
             defaultMessage="Undo bookmark"
+            id="ioPWl8"
             description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
           />
         }
@@ -88,6 +89,7 @@ const Unsubscribe = ({
       aria-label={
         <FormattedMessage
           defaultMessage="Undo bookmark"
+          id="ioPWl8"
           description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
         />
       }

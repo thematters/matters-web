@@ -110,7 +110,7 @@ export const AsideUserProfile = () => {
           <section className={styles.displayName}>
             <h1 className={styles.name}>
               {isUserArchived && (
-                <FormattedMessage defaultMessage="Deleted user" />
+                <FormattedMessage defaultMessage="Deleted user" id="9J0iCw" />
               )}
             </h1>
           </section>
@@ -240,7 +240,7 @@ export const AsideUserProfile = () => {
                   {numAbbr(user.followers.totalCount)}
                 </span>
                 &nbsp;
-                <FormattedMessage defaultMessage="Followers" />
+                <FormattedMessage defaultMessage="Followers" id="pzTOmv" />
               </button>
             )}
           </FollowersDialog>
@@ -254,6 +254,7 @@ export const AsideUserProfile = () => {
                 &nbsp;
                 <FormattedMessage
                   defaultMessage="Following"
+                  id="ohgTH4"
                   description="src/components/UserProfile/index.tsx"
                 />
               </button>
@@ -285,7 +286,7 @@ export const AsideUserProfile = () => {
                   textActiveColor="green"
                   onClick={openEditProfileDialog}
                 >
-                  <FormattedMessage defaultMessage="Edit profile" />
+                  <FormattedMessage defaultMessage="Edit profile" id="nYrKWp" />
                 </Button>
               )}
             </EditProfileDialog>

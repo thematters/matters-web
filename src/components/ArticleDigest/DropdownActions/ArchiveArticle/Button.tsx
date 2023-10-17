@@ -5,7 +5,7 @@ import { IconArchive20, Menu } from '~/components'
 const ArchiveArticleButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
     <Menu.Item
-      text={<FormattedMessage defaultMessage="Archive" />}
+      text={<FormattedMessage defaultMessage="Archive" id="hrgo+E" />}
       icon={<IconArchive20 size="mdS" />}
       onClick={openDialog}
       ariaHasPopup="dialog"

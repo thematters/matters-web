@@ -18,6 +18,7 @@ export const useUnloadConfirm = ({
     hint ||
     intl.formatMessage({
       defaultMessage: 'Saving draft, are you sure you want to leave?',
+      id: 'LWE7oq',
     })
 
   const onRouteChange = () => {

@@ -94,6 +94,7 @@ const MembersDialogContent = () => {
         description={
           <FormattedMessage
             defaultMessage="No members yet"
+            id="FOOymB"
             description="src/views/Circle/Profile/MembersDialog/Content.tsx"
           />
         }

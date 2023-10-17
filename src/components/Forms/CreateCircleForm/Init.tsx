@@ -108,6 +108,7 @@ const Init: React.FC<FormProps> = ({
               intl.formatMessage({
                 defaultMessage:
                   'This URL name has already been used, try another one',
+                id: 'VwuiYK',
                 description: 'src/components/Forms/CreateCircleForm/Init.tsx',
               })
             )
@@ -117,6 +118,7 @@ const Init: React.FC<FormProps> = ({
               intl.formatMessage({
                 defaultMessage:
                   'Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.',
+                id: 'CBDDR5',
               })
             )
           } else if (code === 'DISPLAYNAME_INVALID') {
@@ -124,6 +126,7 @@ const Init: React.FC<FormProps> = ({
               'name',
               intl.formatMessage({
                 defaultMessage: 'Must be between 2-12 characters long.',
+                id: '+7SAix',
               })
             )
           } else {
@@ -137,13 +140,14 @@ const Init: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<FormattedMessage defaultMessage="Circle Name" />}
+        label={<FormattedMessage defaultMessage="Circle Name" id="q9oMKE" />}
         hasLabel
         type="text"
         name="displayName"
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Enter the name of your Circle',
+          id: 'wXzTZ0',
         })}
         value={values.displayName}
         hint={`${values.displayName.length}/${MAX_CIRCLE_DISPLAY_NAME_LENGTH}`}
@@ -160,6 +164,7 @@ const Init: React.FC<FormProps> = ({
           label={
             <FormattedMessage
               defaultMessage="Set the Circle URL (cannot be modified after creation)"
+              id="QZXKhG"
               description="src/components/Forms/CreateCircleForm/Init.tsx"
             />
           }
@@ -169,6 +174,7 @@ const Init: React.FC<FormProps> = ({
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Custom URL Name',
+            id: 'eov+J2',
           })}
           value={values.name}
           hint={`${values.name.length}/${MAX_CIRCLE_NAME_LENGTH}`}
@@ -189,6 +195,7 @@ const Init: React.FC<FormProps> = ({
         label={
           <FormattedMessage
             defaultMessage="Set threshold for circle (per month)"
+            id="6BXcdo"
             description="src/components/Forms/CreateCircleForm/Init.tsx"
           />
         }
@@ -224,7 +231,7 @@ const Init: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Next Step" />}
+      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
       loading={isSubmitting}
     />
   )
@@ -240,7 +247,9 @@ const Init: React.FC<FormProps> = ({
                 type="submit"
                 form={formId}
                 disabled={isSubmitting}
-                text={<FormattedMessage defaultMessage="Next Step" />}
+                text={
+                  <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />
+                }
                 loading={isSubmitting}
               />
             </>
@@ -266,7 +275,7 @@ const Init: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

@@ -76,6 +76,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
           content={
             <FormattedMessage
               defaultMessage="Wallet linked"
+              id="AVpR3Q"
               description="src/components/UserProfile/WalletLabel/index.tsx"
             />
           }
@@ -92,6 +93,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
           title={
             <FormattedMessage
               defaultMessage="Wallet address"
+              id="9mfw9c"
               description="src/components/UserProfile/WalletLabel/WalletDialog/index.tsx"
             />
           }
@@ -123,11 +125,19 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
               <CopyToClipboard
                 text={ensName || address}
                 successMessage={
-                  <FormattedMessage defaultMessage="Address copied" />
+                  <FormattedMessage
+                    defaultMessage="Address copied"
+                    id="+aMAeT"
+                  />
                 }
               >
                 <Dialog.RoundedButton
-                  text={<FormattedMessage defaultMessage="Copy Address" />}
+                  text={
+                    <FormattedMessage
+                      defaultMessage="Copy Address"
+                      id="me1nR+"
+                    />
+                  }
                   color="green"
                 />
               </CopyToClipboard>
@@ -137,6 +147,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
                   text={
                     <FormattedMessage
                       defaultMessage="Open IPNS page"
+                      id="jkrM1r"
                       description="src/components/UserProfile/WalletLabel/index.tsx"
                     />
                   }
@@ -164,7 +175,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
               )}
 
               <Dialog.RoundedButton
-                text={<FormattedMessage defaultMessage="Close" />}
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -173,19 +184,27 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
           smUpBtns={
             <>
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Close" />}
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
               <CopyToClipboard
                 text={ensName || address}
                 successMessage={
-                  <FormattedMessage defaultMessage="Address copied" />
+                  <FormattedMessage
+                    defaultMessage="Address copied"
+                    id="+aMAeT"
+                  />
                 }
               >
                 <Dialog.TextButton
                   color="green"
-                  text={<FormattedMessage defaultMessage="Copy Address" />}
+                  text={
+                    <FormattedMessage
+                      defaultMessage="Copy Address"
+                      id="me1nR+"
+                    />
+                  }
                 />
               </CopyToClipboard>
               {ensName && hasLinkedIPNS && (
@@ -194,6 +213,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
                   text={
                     <FormattedMessage
                       defaultMessage="Open IPNS page"
+                      id="jkrM1r"
                       description="src/components/UserProfile/WalletLabel/index.tsx"
                     />
                   }

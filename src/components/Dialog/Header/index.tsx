@@ -32,7 +32,9 @@ const Header: React.FC<HeaderProps> = ({
   closeText,
   closeDialog,
 }) => {
-  const text = closeText || <FormattedMessage defaultMessage="Cancel" />
+  const text = closeText || (
+    <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+  )
 
   return (
     <>

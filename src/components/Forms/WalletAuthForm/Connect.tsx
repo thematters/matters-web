@@ -224,6 +224,7 @@ const Connect: React.FC<FormProps> = ({
             message: (
               <FormattedMessage
                 defaultMessage="Wallet connected"
+                id="KlJEP9"
                 description="src/components/Forms/WalletAuthForm/Connect.tsx"
               />
             ),
@@ -262,7 +263,7 @@ const Connect: React.FC<FormProps> = ({
           leftBtn={
             back ? (
               <DialogBeta.TextButton
-                text={<FormattedMessage defaultMessage="Back" />}
+                text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
                 onClick={onBack}
                 color="greyDarker"
               />
@@ -303,6 +304,7 @@ const Connect: React.FC<FormProps> = ({
           <span>
             <FormattedMessage
               defaultMessage="Please sign message in your wallet"
+              id="WDZndZ"
               description="src/components/Forms/WalletAuthForm/Connect.tsx"
             />
           </span>
@@ -317,6 +319,7 @@ const Connect: React.FC<FormProps> = ({
                 <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
                   <FormattedMessage
                     defaultMessage="Switch wallet"
+                    id="HkozYU"
                     description="src/components/Forms/WalletAuthForm/Connect.tsx"
                   />
                 </TextIcon>
@@ -327,7 +330,7 @@ const Connect: React.FC<FormProps> = ({
 
             {isInDialog && (
               <DialogBeta.TextButton
-                text={<FormattedMessage defaultMessage="Close" />}
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={onCloseDialog}
               />

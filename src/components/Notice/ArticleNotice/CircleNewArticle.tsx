@@ -30,6 +30,7 @@ const CircleNewArticle = ({
         <FormattedMessage
           description="src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
           defaultMessage="published in {circleName}"
+          id="GVes61"
           values={{
             circleName: <NoticeCircleName circle={circle} />,
           }}

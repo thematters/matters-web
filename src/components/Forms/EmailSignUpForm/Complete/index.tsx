@@ -25,6 +25,7 @@ const Complete = ({
       text={
         <FormattedMessage
           defaultMessage="Enter Community"
+          id="/asuIY"
           description="src/components/Forms/EmailSignUpForm/Complete.tsx"
         />
       }
@@ -65,6 +66,7 @@ const Complete = ({
           <h2>
             <FormattedMessage
               defaultMessage="Welcome to Matters!"
+              id="XH0Lb6"
               description="src/components/Forms/EmailSignUpForm/Complete.tsx"
             />
           </h2>
@@ -72,6 +74,7 @@ const Complete = ({
           <p>
             <FormattedMessage
               defaultMessage="Now, go like the authors you support! Your Likes will become their income"
+              id="stjoBH"
               description="src/components/Forms/EmailSignUpForm/Complete.tsx"
             />
           </p>
@@ -79,6 +82,7 @@ const Complete = ({
           <p>
             <FormattedMessage
               defaultMessage="You have created your personal creative space. Publish your first work!"
+              id="reOeq5"
               description="src/components/Forms/EmailSignUpForm/Complete.tsx"
             />
           </p>
@@ -86,6 +90,7 @@ const Complete = ({
           <p>
             <FormattedMessage
               defaultMessage="Start creating now!"
+              id="ANhCde"
               description="src/components/Forms/EmailSignUpForm/Complete.tsx"
             />
           </p>
