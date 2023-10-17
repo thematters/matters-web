@@ -1293,8 +1293,8 @@
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "h9CG9E": {
-    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx",
-    "defaultMessage": "{commentType} has been deleted"
+    "defaultMessage": "{commentType} has been deleted",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "hASeng": {
     "defaultMessage": "Blocked Users",
@@ -1730,8 +1730,8 @@
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
   "xWZr13": {
-    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx",
-    "defaultMessage": "{follower, plural, =1 {follower} other {followers}}"
+    "defaultMessage": "{follower, plural, =1 {follower} other {followers}}",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "xafreT": {
     "defaultMessage": "New discussions",
@@ -1833,3 +1833,4 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
+
