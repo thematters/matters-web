@@ -804,7 +804,7 @@
     "description": "src/views/Me/Transactions/index.tsx"
   },
   "NEKHMm": {
-    "defaultMessage": "Email",
+    "defaultMessage": "電子郵件",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "NNF+3f": {
@@ -1833,3 +1833,4 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
+
