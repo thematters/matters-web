@@ -71,6 +71,8 @@ export const logout = async ({ page }: { page: Page }) => {
   // Click "Log Out" button
   // Promise.all prevents a race condition between clicking and waiting.
   await Promise.all([
+    // Still need to wait for navigation if navigation happens to the same url
+    // https://github.com/microsoft/playwright/issues/20853
     page.waitForNavigation(),
     page.getByRole('menuitem', { name: 'Log Out' }).click(),
   ])
