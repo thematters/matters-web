@@ -169,7 +169,8 @@ export class DraftDetailPage {
     while (await this.publishButton.isDisabled()) {
       await this.contentInput.press('End')
       await this.contentInput.press('KeyA')
-      content += 'a'
+      await this.page.waitForTimeout(1000 * 2)
+      await this.contentInput.press('Backspace')
       await this.page.waitForTimeout(1000 * 2)
       await this.fillTitle(title)
     }
