@@ -134,19 +134,15 @@ export class DraftDetailPage {
   async createDraft() {
     await pageGoto(this.page, PATHS.ME_DRAFT_NEW)
 
-    // Promise.all prevents a race condition between clicking and waiting.
-    await this.page.waitForNavigation()
+    await this.page.waitForURL(`**${PATHS.ME_DRAFT_NEW}`)
     await expect(this.page).toHaveURL(PATHS.ME_DRAFT_NEW)
   }
 
   async gotoLatestDraft() {
-    await this.page.goto('/me/drafts')
+    await this.page.goto(PATHS.ME_DRAFTS)
 
-    // Promise.all prevents a race condition between clicking and waiting.
-    await Promise.all([
-      this.page.getByRole('listitem').first().click(),
-      this.page.waitForNavigation(),
-    ])
+    await this.page.getByRole('listitem').first().click()
+    await this.page.waitForURL(`**${PATHS.ME_DRAFT_DETAIL}`)
   }
 
   async fillTitle(title?: string) {

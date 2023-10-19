@@ -4,6 +4,8 @@ import { TEST_ID } from '~/common/enums'
 
 import { authedTest, login, logout, pageGoto } from './helpers'
 
+test.describe.configure({ mode: 'serial' })
+
 test.describe('Authentication', () => {
   test('can login in homepage dialog', async ({ page, isMobile }) => {
     await pageGoto(page, '/')
