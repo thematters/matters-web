@@ -58,6 +58,7 @@ test.describe('User Mutation', () => {
       // [Bob] Go to profile page
       const bobProfile = new UserProfilePage(bobPage, isMobile)
       await bobProfile.gotoMeProfile()
+      await bobPage.waitForTimeout(2 * 1000)
       const bobDisplayName = await bobProfile.displayName.innerText()
 
       // [Bob] Go to Alice's User Profile
