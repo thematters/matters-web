@@ -147,6 +147,7 @@ test.describe('User Mutation', () => {
       // [Alice] Go to profile page
       const aliceProfile = new UserProfilePage(alicePage, isMobile)
       await aliceProfile.gotoMeProfile()
+      await bobPage.waitForTimeout(2 * 1000)
       const aliceDisplayName = await aliceProfile.displayName.innerText()
 
       // [Bob] Go to profile page
@@ -237,6 +238,7 @@ test.describe('User Mutation', () => {
     const aliceProfile = new UserProfilePage(alicePage, isMobile)
     await aliceProfile.gotoMeProfile()
 
+    await alicePage.waitForTimeout(2 * 1000)
     await aliceProfile.displayName.click()
 
     await aliceProfile.setCover()
