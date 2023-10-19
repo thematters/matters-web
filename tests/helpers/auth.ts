@@ -52,14 +52,13 @@ export const login = async ({
   await page.getByPlaceholder('Email').fill(email)
   await page.getByPlaceholder('Password').fill(password)
 
-  // Submit
-  await page.getByRole('button', { name: 'Sign in' }).click()
-
+  // Submit and redirect to target
   await Promise.all([
     waitForAPIResponse({
       page,
       path: 'data.emailLogin.token',
     }),
+    page.getByRole('button', { name: 'Sign in' }).click(),
     waitForNavigation ? page.waitForNavigation() : undefined,
   ])
 }
