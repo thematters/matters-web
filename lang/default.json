@@ -622,6 +622,9 @@
   "HAlOn1": {
     "defaultMessage": "Name"
   },
+  "HEpsZ3": {
+    "defaultMessage": "Back to discovery"
+  },
   "HFVDeB": {
     "defaultMessage": "Related Tags",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"

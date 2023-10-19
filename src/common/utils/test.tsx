@@ -6,6 +6,7 @@ import { render, RenderOptions } from '@testing-library/react'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import ApolloClient from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
+import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider'
 import React, { ReactElement, useContext } from 'react'
 import { IntlProvider } from 'react-intl'
 
@@ -46,15 +47,17 @@ const wrapper = ({ children }: { children: React.ReactNode }) => {
   })
 
   return (
-    <ApolloProvider client={client}>
-      <LanguageProvider headers={undefined}>
-        <FeaturesProvider official={undefined}>
-          <MediaContextProvider>
-            <TranslationsProvider>{children}</TranslationsProvider>
-          </MediaContextProvider>
-        </FeaturesProvider>
-      </LanguageProvider>
-    </ApolloProvider>
+    <MemoryRouterProvider>
+      <ApolloProvider client={client}>
+        <LanguageProvider headers={undefined}>
+          <FeaturesProvider official={undefined}>
+            <MediaContextProvider>
+              <TranslationsProvider>{children}</TranslationsProvider>
+            </MediaContextProvider>
+          </FeaturesProvider>
+        </LanguageProvider>
+      </ApolloProvider>
+    </MemoryRouterProvider>
   )
 }
 

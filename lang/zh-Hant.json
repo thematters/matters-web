@@ -622,6 +622,9 @@
   "HAlOn1": {
     "defaultMessage": "用戶名"
   },
+  "HEpsZ3": {
+    "defaultMessage": "返回發現"
+  },
   "HFVDeB": {
     "defaultMessage": "相關標籤",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
