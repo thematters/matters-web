@@ -40,6 +40,7 @@ test.describe('Mutate article', () => {
 
       // [Alice] Go to notifications page
       const aliceNotifications = new NotificationsPage(alicePage)
+      await alicePage.waitForTimeout(5 * 1000)
       await aliceNotifications.goto()
 
       // [Alice] Expect it has "liked your article" notice
