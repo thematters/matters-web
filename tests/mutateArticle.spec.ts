@@ -187,6 +187,14 @@ test.describe('Mutate article', () => {
       .innerText()
 
     await firstArticle.getByRole('button', { name: 'More Actions' }).click()
+    while (
+      !(await alicePage
+        .getByRole('menuitem', { name: 'Pin to profile' })
+        .isVisible())
+    ) {
+      await sleep(1000)
+      await firstArticle.getByRole('button', { name: 'More Actions' }).click()
+    }
     const pinButton = await alicePage
       .getByRole('menuitem', { name: 'Pin to profile' })
       .locator('section')
