@@ -9,16 +9,19 @@ import { ApolloLink } from 'apollo-link'
 import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider'
 import React, { ReactElement, useContext } from 'react'
 import { IntlProvider } from 'react-intl'
+import { WagmiConfig } from 'wagmi'
 
 import TRANSLATIONS_EN from '@/compiled-lang/en.json'
 import TRANSLATIONS_ZH_HANS from '@/compiled-lang/zh-Hans.json'
 import TRANSLATIONS_ZH_HANT from '@/compiled-lang/zh-Hant.json'
+import { wagmiConfig } from '~/common/utils'
 import {
   FeaturesProvider,
   LanguageContext,
   LanguageProvider,
   MediaContextProvider,
 } from '~/components'
+import GlobalDialogs from '~/components/GlobalDialogs'
 import { UserLanguage } from '~/gql/graphql'
 
 import { toLocale } from './language'
@@ -49,13 +52,19 @@ const wrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <MemoryRouterProvider>
       <ApolloProvider client={client}>
-        <LanguageProvider headers={undefined}>
-          <FeaturesProvider official={undefined}>
-            <MediaContextProvider>
-              <TranslationsProvider>{children}</TranslationsProvider>
-            </MediaContextProvider>
-          </FeaturesProvider>
-        </LanguageProvider>
+        <WagmiConfig config={wagmiConfig}>
+          <LanguageProvider headers={undefined}>
+            <FeaturesProvider official={undefined}>
+              <MediaContextProvider>
+                <TranslationsProvider>
+                  {children}
+
+                  <GlobalDialogs />
+                </TranslationsProvider>
+              </MediaContextProvider>
+            </FeaturesProvider>
+          </LanguageProvider>
+        </WagmiConfig>
       </ApolloProvider>
     </MemoryRouterProvider>
   )

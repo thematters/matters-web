@@ -441,6 +441,10 @@
   "BY343C": {
     "defaultMessage": "Change"
   },
+  "Bb2R0G": {
+    "defaultMessage": "Create",
+    "description": "src/components/Buttons/Write/index.tsx"
+  },
   "Bc20la": {
     "defaultMessage": "days"
   },

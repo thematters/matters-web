@@ -441,6 +441,10 @@
   "BY343C": {
     "defaultMessage": "修改"
   },
+  "Bb2R0G": {
+    "defaultMessage": "创作",
+    "description": "src/components/Buttons/Write/index.tsx"
+  },
   "Bc20la": {
     "defaultMessage": "天"
   },

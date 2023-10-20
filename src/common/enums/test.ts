@@ -26,6 +26,7 @@ export enum TEST_ID {
   DIGEST_COLLECTION_FEED = 'digest/collection/feed',
   // dialogs
   DIALOG_AUTH = 'dialog/auth',
+  DIALOG_LIKECOIN = 'dialog/likecoin',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
   // drafts

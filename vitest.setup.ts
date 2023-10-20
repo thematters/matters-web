@@ -42,7 +42,7 @@ vi.mock('next/dynamic', async () => {
   const dynamicModule: any = await vi.importActual('next/dynamic')
   return {
     default: (loader: any) => {
-      const dynamicActualComp = dynamicModule.default
+      const dynamicActualComp = dynamicModule['default']
       const RequiredComponent = dynamicActualComp(loader)
 
       if (RequiredComponent?.render?.displayName) {
@@ -52,6 +52,7 @@ vi.mock('next/dynamic', async () => {
       RequiredComponent.preload
         ? RequiredComponent.preload()
         : RequiredComponent.render.preload()
+
       return RequiredComponent
     },
   }
