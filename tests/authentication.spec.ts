@@ -1,9 +1,15 @@
 import { expect, test } from '@playwright/test'
 
-import { TEST_ID } from '~/common/enums'
+import { PATHS, TEST_ID } from '~/common/enums'
 
-import { authedTest, login, logout, pageGoto } from './helpers'
-import { PASSWORDOR_CODE } from './helpers/enum'
+import {
+  authedTest,
+  login,
+  logout,
+  pageGoto,
+  waitForAPIResponse,
+} from './helpers'
+import { PASSWORDOR_CODE, REGISTER_CODE } from './helpers/enum'
 
 test.describe.configure({ mode: 'serial' })
 
@@ -60,6 +66,14 @@ test.describe('Authentication', () => {
     await expect(
       page.getByText('This login code has expired, please try to resend')
     ).toBeVisible()
+    await Promise.all([
+      waitForAPIResponse({
+        page,
+        path: 'data.sendVerificationCode',
+        isOK: (value) => value === true,
+      }),
+      page.getByRole('button', { name: 'Resend' }).click(),
+    ])
 
     // USER_PASSWORD_INVALID error
     await page
@@ -74,6 +88,41 @@ test.describe('Authentication', () => {
     await expect(
       page.getByText('Unknown error. Please try again later.')
     ).toBeVisible()
+
+    // CODE_INVALID error
+    await page.getByPlaceholder('Password').fill(REGISTER_CODE.CODE_INVALID)
+    await page.getByRole('button', { name: 'Sign in' }).click()
+    await expect(page.getByText('Incorrect email or password')).toBeVisible()
+
+    // CODE_RETIRED error
+    await page.getByPlaceholder('Password').fill(REGISTER_CODE.CODE_RETIRED)
+    await page.getByRole('button', { name: 'Sign in' }).click()
+    await expect(page.getByText('Incorrect email or password')).toBeVisible()
+
+    // CODE_EXPIRED error
+    await page.getByPlaceholder('Password').fill(REGISTER_CODE.CODE_EXPIRED)
+    await page.getByRole('button', { name: 'Sign in' }).click()
+    await expect(
+      page.getByText('This login code has expired, please try to resend')
+    ).toBeVisible()
+
+    // login successfully
+    await page.getByPlaceholder('Password').fill('12345678')
+    await page.getByRole('button', { name: 'Sign in' }).click()
+    // Expect homepage has "Notification" button on the left side
+    await page.waitForURL(`**${PATHS.HOME}`)
+    await expect(page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)).toBeVisible()
+
+    // Confirm Matters ID
+    await expect(
+      page.getByText(
+        'Matters ID is your unique identifier, and cannot be modified once set.'
+      )
+    ).toBeVisible()
+    await page.getByRole('button', { name: 'Confirm' }).click()
+    await page.getByRole('button', { name: 'Confirm use' }).click()
+    await page.getByRole('button', { name: 'Take a look' }).click()
+    await page.waitForURL(`**${PATHS.ME_SETTINGS}`)
   })
 
   authedTest(
