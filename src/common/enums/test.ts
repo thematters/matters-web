@@ -10,6 +10,7 @@ export enum TEST_ID {
   DIGEST_ARTICLE_CARD = 'digest/article/card',
   DIGEST_ARTICLE_DROPDOWN = 'digest/article/dropdown',
   DIGEST_ARTICLE_FEED = 'digest/article/feed',
+  DIGEST_ARTICLE_FEED_COVER = 'digest/article/feed/cover',
   DIGEST_ARTICLE_LIST = 'digest/article/list',
   DIGEST_ARTICLE_FEED_FOOTER_PIN = 'digest/article/feed/footer/pin',
   DIGEST_ARTICLE_NOTICE = 'digest/article/notice',

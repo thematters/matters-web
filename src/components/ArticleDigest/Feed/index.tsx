@@ -26,7 +26,6 @@ export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
   hasHeader?: boolean
-  hasFollow?: boolean
   hasCircle?: boolean
   hasAuthor?: boolean
 }
@@ -44,7 +43,6 @@ const BaseArticleDigestFeed = ({
   header,
   date,
 
-  hasFollow,
   hasHeader = true,
   hasCircle = true,
   hasAuthor = true,
@@ -151,7 +149,10 @@ const BaseArticleDigestFeed = ({
         </section>
         {cover && (
           <LinkWrapper {...path} onClick={onClick}>
-            <div className={styles.cover}>
+            <div
+              className={styles.cover}
+              data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
+            >
               <ResponsiveImage
                 url={cover}
                 width={152}
