@@ -42,8 +42,10 @@ vi.mock('next/dynamic', async () => {
   const dynamicModule: any = await vi.importActual('next/dynamic')
   return {
     default: (loader: any) => {
-      const dynamicActualComp = dynamicModule['default']
-      const RequiredComponent = dynamicActualComp(loader)
+      const dynamicActualComp = dynamicModule.default
+      const RequiredComponent = dynamicActualComp(() =>
+        loader().then((mod: any) => mod.default || mod)
+      )
 
       if (RequiredComponent?.render?.displayName) {
         RequiredComponent.render.displayName = loader.toString()

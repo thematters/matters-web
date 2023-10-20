@@ -12,12 +12,9 @@ interface LikeCoinDialogProps {
   children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicContent = dynamic(
-  () => import('./Content').then((mod) => mod.default),
-  {
-    loading: Spinner,
-  }
-)
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: Spinner,
+})
 
 const BaseLikeCoinDialog: React.FC<LikeCoinDialogProps> = ({ children }) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
