@@ -6,7 +6,6 @@ import {
   OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
-  UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { analytics, translate } from '~/common/utils'
 import {
@@ -73,11 +72,7 @@ export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
       }
       onClick={async () => {
         if (!authed) {
-          window.dispatchEvent(
-            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-              detail: { source: UNIVERSAL_AUTH_SOURCE.create },
-            })
-          )
+          window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
           return
         }
 
