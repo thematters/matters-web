@@ -41,7 +41,6 @@ export type ArticleDigestFeedProps = {
 const BaseArticleDigestFeed = ({
   article,
   header,
-  date,
 
   hasHeader = true,
   hasCircle = true,
@@ -98,7 +97,6 @@ const BaseArticleDigestFeed = ({
       hasDonationCount={hasDonationCount}
       hasCircle={hasCircle}
       inCard
-      date={date}
       {...controls}
     />
   )
@@ -186,7 +184,6 @@ export const ArticleDigestFeed = React.memo(
       prevArticle.subscribed === article.subscribed &&
       prevArticle.articleState === article.articleState &&
       prevArticle.pinned === article.pinned &&
-      prevArticle.author.isFollowee === article.author.isFollowee &&
       prevProps.hasSetTagSelected === props.hasSetTagSelected &&
       prevProps.hasSetTagUnselected === props.hasSetTagUnselected &&
       prevProps.hasRemoveTag === props.hasRemoveTag

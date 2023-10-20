@@ -11,7 +11,6 @@ export type FooterActionsControls = DropdownActionsControls
 
 export type FooterActionsProps = {
   article: FooterActionsArticlePublicFragment
-  date?: Date | string | number | boolean
   hasReadTime?: boolean
   hasDonationCount?: boolean
   hasCircle?: boolean
@@ -20,7 +19,6 @@ export type FooterActionsProps = {
 
 const FooterActions = ({
   article,
-  date,
   hasReadTime,
   hasDonationCount,
   hasCircle,
@@ -37,8 +35,6 @@ const FooterActions = ({
         {hasReadTime && <ReadTime article={article} />}
 
         {hasDonationCount && <DonationCount article={article} />}
-
-        {tag}
 
         {hasCircle && circle && (
           <TextIcon

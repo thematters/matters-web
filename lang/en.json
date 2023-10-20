@@ -499,6 +499,9 @@
   "D3idYv": {
     "defaultMessage": "Settings"
   },
+  "DP3yqI": {
+    "defaultMessage": "Donation count"
+  },
   "DUoV1W": {
     "defaultMessage": "Over 140 words, current {numbers}",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"

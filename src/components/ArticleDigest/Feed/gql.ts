@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 import { ArticleDigestTitle } from '../Title'
-import FollowButton from './FollowButton'
 import FooterActions from './FooterActions'
 
 export const fragments = {
@@ -32,13 +31,9 @@ export const fragments = {
     private: gql`
       fragment ArticleDigestFeedArticlePrivate on Article {
         id
-        author {
-          ...ArticleFeedFollowButtonUserPrivate
-        }
         ...FooterActionsArticlePrivate
       }
       ${FooterActions.fragments.article.private}
-      ${FollowButton.fragments.user.private}
     `,
   },
 }
