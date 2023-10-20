@@ -1,19 +1,16 @@
 import dynamic from 'next/dynamic'
-import router from 'next/router'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useConnect } from 'wagmi'
 
 import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
   TEST_ID,
 } from '~/common/enums'
-import { appendTarget, WalletType } from '~/common/utils'
+import { WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   DialogBeta,
-  MediaContext,
   ReCaptchaProvider,
   Spinner,
   useDialogSwitch,
@@ -58,7 +55,6 @@ const BaseUniversalAuthDialog = () => {
   const { currStep, forward } = useStep<Step>('select-login-method')
   const [email, setEmail] = useState('')
   const [hasUnavailable, setHasUnavailable] = useState(false)
-  const media = useContext(MediaContext)
 
   const [firstRender, setFirstRender] = useState(true)
 
@@ -90,11 +86,6 @@ const BaseUniversalAuthDialog = () => {
   useEventListener(
     OPEN_UNIVERSAL_AUTH_DIALOG,
     (payload: { [key: string]: any }) => {
-      if (media.currentBreakpoint === 'sm') {
-        const { href } = appendTarget(PATHS.LOGIN, true)
-        router.push(href)
-        return
-      }
       openDialog()
     }
   )
@@ -190,16 +181,10 @@ const BaseUniversalAuthDialog = () => {
 }
 
 const UniversalAuthDialog = () => {
-  const media = useContext(MediaContext)
   const Children = ({ openDialog }: { openDialog: () => void }) => {
     useEventListener(
       OPEN_UNIVERSAL_AUTH_DIALOG,
       (payload: { [key: string]: any }) => {
-        if (media.currentBreakpoint === 'sm') {
-          const { href } = appendTarget(PATHS.LOGIN, true)
-          router.push(href)
-          return
-        }
         openDialog()
       }
     )

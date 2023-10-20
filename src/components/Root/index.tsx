@@ -12,7 +12,6 @@ import {
   LanguageProvider,
   Layout,
   MediaContextProvider,
-  MediaProvider,
   QueryError,
   TranslationsProvider,
   useRoute,
@@ -102,18 +101,16 @@ const Root = ({
         <LanguageProvider headers={headers}>
           <FeaturesProvider official={official}>
             <MediaContextProvider>
-              <MediaProvider>
-                <TranslationsProvider>
-                  {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+              <TranslationsProvider>
+                {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-                  <DynamicToaster />
-                  <DynamicAnalyticsInitilizer user={viewer || {}} />
-                  <DynamicGlobalDialogs />
-                  <DynamicGlobalToasts />
-                  <DynamicProgressBar />
-                  <DynamicFingerprint />
-                </TranslationsProvider>
-              </MediaProvider>
+                <DynamicToaster />
+                <DynamicAnalyticsInitilizer user={viewer || {}} />
+                <DynamicGlobalDialogs />
+                <DynamicGlobalToasts />
+                <DynamicProgressBar />
+                <DynamicFingerprint />
+              </TranslationsProvider>
             </MediaContextProvider>
           </FeaturesProvider>
         </LanguageProvider>
