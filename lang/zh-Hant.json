@@ -43,6 +43,9 @@
     "defaultMessage": "最近 1 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "/GyMKa": {
+    "defaultMessage": "分享作品"
+  },
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
@@ -64,6 +67,10 @@
   "/podGX": {
     "defaultMessage": "公開",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+  },
+  "/qgntf": {
+    "defaultMessage": "查看支持者",
+    "description": "src/components/ArticleDigest/DropdownActions/DonatorsButton/index.tsx"
   },
   "0Azlrb": {
     "defaultMessage": "管理"
@@ -322,6 +329,10 @@
   },
   "8KFsZN": {
     "defaultMessage": "閱讀次數"
+  },
+  "8UWUW8": {
+    "defaultMessage": "關聯作品",
+    "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
   },
   "8cv9D4": {
     "defaultMessage": "下一步"
@@ -628,6 +639,10 @@
   },
   "HAlOn1": {
     "defaultMessage": "用戶名"
+  },
+  "HDjV1k": {
+    "defaultMessage": "分佈式入口",
+    "description": "src/components/ArticleDigest/DropdownActions/FingerprintButton/index.tsx"
   },
   "HEpsZ3": {
     "defaultMessage": "返回發現"
@@ -1241,6 +1256,10 @@
   "dVbKzB": {
     "defaultMessage": "作品或評論提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "dZQ+ba": {
+    "defaultMessage": "查看讚賞",
+    "description": "src/components/ArticleDigest/DropdownActions/AppreciatorsButton/index.tsx"
   },
   "deEeEI": {
     "defaultMessage": "註冊"

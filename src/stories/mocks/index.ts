@@ -4,14 +4,30 @@ export const MOCK_USER = {
   id: 'user-0000',
   userName: 'matty',
   displayName: 'Matty',
+  avatar: 'https://source.unsplash.com/256x256?user',
+  liker: {
+    __typename: 'Liker' as any,
+    likerId: 'user-0000',
+    civicLiker: false,
+  },
   status: {
     __typename: 'UserStatus' as any,
     state: 'active' as any,
+    unreadNoticeCount: 0,
+    hasPaymentPassword: true,
+    role: 'user' as any,
+    hasEmailLoginPassword: true,
+    changeEmailTimesLeft: 0,
   },
-  avatar: 'https://source.unsplash.com/256x256?user',
   info: {
     __typename: 'UserInfo' as any,
     badges: null,
+    isWalletAuth: true,
+    agreeOn: true,
+    userNameEditable: true,
+    socialAccounts: [],
+    emailVerified: true,
+    group: 'a' as any,
     description: 'Matters 唯一官方帳號',
     cryptoWallet: {
       __typename: 'CryptoWallet' as any,
@@ -26,9 +42,27 @@ export const MOCK_USER = {
       ],
     },
   },
-  liker: {
-    __typename: 'Liker' as any,
-    civicLiker: false,
+  settings: {
+    language: 'en' as any,
+    currency: 'HKD' as any,
+  },
+  following: {
+    users: {
+      __typename: 'UserConnection' as any,
+      totalCount: 0,
+    },
+    tags: {
+      __typename: 'TagConnection' as any,
+      totalCount: 0,
+    },
+  },
+  followers: {
+    __typename: 'UserConnection' as any,
+    totalCount: 0,
+  },
+  articles: {
+    __typename: 'ArticleConnection' as any,
+    totalCount: 0,
   },
   ownCircles: null,
   isFollower: false,

@@ -21,9 +21,11 @@ import {
   LanguageProvider,
   MediaContextProvider,
   Toaster,
+  ViewerProvider,
 } from '~/components'
 import GlobalDialogs from '~/components/GlobalDialogs'
 import { UserLanguage } from '~/gql/graphql'
+import { MOCK_USER } from '~/stories/mocks'
 
 import { toLocale } from './language'
 
@@ -54,18 +56,20 @@ const wrapper = ({ children }: { children: React.ReactNode }) => {
     <MemoryRouterProvider>
       <ApolloProvider client={client}>
         <WagmiConfig config={wagmiConfig}>
-          <LanguageProvider headers={undefined}>
-            <FeaturesProvider official={undefined}>
-              <MediaContextProvider>
-                <TranslationsProvider>
-                  {children}
+          <ViewerProvider viewer={MOCK_USER}>
+            <LanguageProvider headers={undefined}>
+              <FeaturesProvider official={undefined}>
+                <MediaContextProvider>
+                  <TranslationsProvider>
+                    {children}
 
-                  <Toaster />
-                  <GlobalDialogs />
-                </TranslationsProvider>
-              </MediaContextProvider>
-            </FeaturesProvider>
-          </LanguageProvider>
+                    <Toaster />
+                    <GlobalDialogs />
+                  </TranslationsProvider>
+                </MediaContextProvider>
+              </FeaturesProvider>
+            </LanguageProvider>
+          </ViewerProvider>
         </WagmiConfig>
       </ApolloProvider>
     </MemoryRouterProvider>
