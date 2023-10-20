@@ -27,6 +27,7 @@ export enum TEST_ID {
   // dialogs
   DIALOG_AUTH = 'dialog/auth',
   DIALOG_LIKECOIN = 'dialog/likecoin',
+  DIALOG_SHARE = 'dialog/share',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
   // drafts
