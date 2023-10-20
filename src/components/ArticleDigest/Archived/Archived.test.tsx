@@ -7,7 +7,7 @@ import { ArticleDigestArchived } from '~/components'
 import { MOCK_ARTILCE } from '~/stories/mocks'
 
 describe('<ArticleDigest.Archived>', () => {
-  it('should render the ArticleDigest.Archived', () => {
+  it('should render an ArticleDigest.Archived', () => {
     render(<ArticleDigestArchived article={MOCK_ARTILCE} />)
 
     const $digest = screen.getByTestId(TEST_ID.DIGEST_ARTICLE_ARCHIVED)

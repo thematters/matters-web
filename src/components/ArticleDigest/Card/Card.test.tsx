@@ -7,7 +7,7 @@ import { ArticleDigestCard } from '~/components'
 import { MOCK_ARTILCE } from '~/stories/mocks'
 
 describe('<ArticleDigest.Card>', () => {
-  it('should render the ArticleDigest.Card', () => {
+  it('should render an ArticleDigest.Card', () => {
     const handleClickDigest = vi.fn()
     const handleClickAuthor = vi.fn()
 

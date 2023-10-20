@@ -8,6 +8,7 @@ export enum TEST_ID {
   // digests
   DIGEST_ARTICLE_ARCHIVED = 'digest/article/archived',
   DIGEST_ARTICLE_CARD = 'digest/article/card',
+  DIGEST_ARTICLE_DROPDOWN = 'digest/article/dropdown',
   DIGEST_ARTICLE_FEED = 'digest/article/feed',
   DIGEST_ARTICLE_LIST = 'digest/article/list',
   DIGEST_ARTICLE_FEED_FOOTER_PIN = 'digest/article/feed/footer/pin',
