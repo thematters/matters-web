@@ -1,12 +1,8 @@
 import { FormattedMessage } from 'react-intl'
 
-import {
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
-} from '~/common/enums'
-import { analytics, appendTarget } from '~/common/utils'
-import { Button, ButtonProps, Media, TextIcon } from '~/components'
+import { CLOSE_ACTIVE_DIALOG, OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
+import { analytics } from '~/common/utils'
+import { Button, ButtonProps, TextIcon } from '~/components'
 
 type SignUpButtonProps = {
   isPlain?: boolean
@@ -15,7 +11,7 @@ type SignUpButtonProps = {
 export const SignUpButton: React.FC<
   React.PropsWithChildren<SignUpButtonProps>
 > = ({ children, isPlain, size }) => {
-  const smUpProps = {
+  const props = {
     onClick: () => {
       analytics.trackEvent('click_button', {
         type: 'signup',
@@ -24,26 +20,13 @@ export const SignUpButton: React.FC<
       window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
     },
   }
-  const smProps = {
-    ...appendTarget(PATHS.SIGNUP, true),
-    onClick: () => {
-      analytics.trackEvent('click_button', {
-        type: 'signup',
-      })
-    },
-  }
 
   if (isPlain) {
     return (
       <>
-        <Media at="sm">
-          <Button {...smProps}>{children}</Button>
-        </Media>
-        <Media greaterThan="sm">
-          <Button aria-haspopup="dialog" {...smUpProps}>
-            {children}
-          </Button>
-        </Media>
+        <Button aria-haspopup="dialog" {...props}>
+          {children}
+        </Button>
       </>
     )
   }
@@ -61,16 +44,9 @@ export const SignUpButton: React.FC<
 
   return (
     <>
-      <Media at="sm">
-        <Button {...buttonProps} {...smProps}>
-          <ButtonText />
-        </Button>
-      </Media>
-      <Media greaterThan="sm">
-        <Button aria-haspopup="dialog" {...buttonProps} {...smUpProps}>
-          <ButtonText />
-        </Button>
-      </Media>
+      <Button aria-haspopup="dialog" {...buttonProps} {...props}>
+        <ButtonText />
+      </Button>
     </>
   )
 }
