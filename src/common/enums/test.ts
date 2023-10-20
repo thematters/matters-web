@@ -6,6 +6,7 @@ export enum TEST_ID {
   SIDE_NAV_MY_PAGE = 'sidenav/my-page',
   SIDE_NAY_WRITE_BUTTON = 'sidenav/write-button',
   // digests
+  DIGEST_ARTICLE_ARCHIVED = 'digest/article/archived',
   DIGEST_ARTICLE_CARD = 'digest/article/card',
   DIGEST_ARTICLE_FEED = 'digest/article/feed',
   DIGEST_ARTICLE_LIST = 'digest/article/list',
