@@ -2,12 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import {
-  ERROR_CODES,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  TEXT,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
+import { ERROR_CODES, OPEN_UNIVERSAL_AUTH_DIALOG, TEXT } from '~/common/enums'
 import { analytics, numAbbr, translate } from '~/common/utils'
 import {
   Button,
@@ -89,11 +84,7 @@ const DonationButton = ({
           onClick={() => {
             analytics.trackEvent('click_button', { type: 'donate' })
             if (!viewer.isAuthed) {
-              window.dispatchEvent(
-                new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-                  detail: { source: UNIVERSAL_AUTH_SOURCE.support },
-                })
-              )
+              window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
               return
             }
             if (viewer.isFrozen) {

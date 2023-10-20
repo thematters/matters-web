@@ -1,11 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import {
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
+import { CLOSE_ACTIVE_DIALOG, OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Button,
@@ -102,11 +98,7 @@ const ReplyButton = ({
     const props = {
       onClick: () => {
         window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-        window.dispatchEvent(
-          new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-            detail: { source: UNIVERSAL_AUTH_SOURCE.comment },
-          })
-        )
+        window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
       },
     }
 
