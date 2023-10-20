@@ -20,6 +20,7 @@ import {
   LanguageContext,
   LanguageProvider,
   MediaContextProvider,
+  Toaster,
 } from '~/components'
 import GlobalDialogs from '~/components/GlobalDialogs'
 import { UserLanguage } from '~/gql/graphql'
@@ -59,6 +60,7 @@ const wrapper = ({ children }: { children: React.ReactNode }) => {
                 <TranslationsProvider>
                   {children}
 
+                  <Toaster />
                   <GlobalDialogs />
                 </TranslationsProvider>
               </MediaContextProvider>

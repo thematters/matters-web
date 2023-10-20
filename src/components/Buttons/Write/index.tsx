@@ -2,6 +2,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
@@ -10,7 +11,6 @@ import { analytics } from '~/common/utils'
 import {
   Button,
   ButtonProps,
-  ERROR_MESSAGES,
   IconNavCreate32,
   toast,
   Tooltip,

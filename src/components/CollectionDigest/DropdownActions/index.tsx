@@ -1,11 +1,10 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ERROR_CODES } from '~/common/enums'
+import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Dropdown,
-  ERROR_MESSAGES,
   IconMore16,
   LanguageContext,
   Menu,

@@ -3,10 +3,13 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ERROR_CODES, OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
+import {
+  ERROR_CODES,
+  ERROR_MESSAGES,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+} from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
-  ERROR_MESSAGES,
   IconCollection24,
   Menu,
   toast,

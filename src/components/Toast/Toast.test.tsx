@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { act, fireEvent, render, screen } from '~/common/utils/test'
-import { toast, Toaster } from '~/components'
+import { toast } from '~/components'
 
 beforeEach(() => {
   // Tests should run in serial for improved isolation
@@ -38,12 +38,9 @@ describe('<Toast>', () => {
       }
 
       return (
-        <div>
-          <button type="button" onClick={showToast}>
-            Notify
-          </button>
-          <Toaster />
-        </div>
+        <button type="button" onClick={showToast}>
+          Notify
+        </button>
       )
     }
 
@@ -78,12 +75,9 @@ describe('<Toast>', () => {
       }
 
       return (
-        <div>
-          <button type="button" onClick={showToast}>
-            Notify
-          </button>
-          <Toaster />
-        </div>
+        <button type="button" onClick={showToast}>
+          Notify
+        </button>
       )
     }
 
