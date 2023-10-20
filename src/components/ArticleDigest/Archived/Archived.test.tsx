@@ -1,3 +1,4 @@
+import mockRouter from 'next-router-mock'
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
@@ -8,8 +9,14 @@ import { MOCK_ARTILCE } from '~/stories/mocks'
 describe('<ArticleDigest.Archived>', () => {
   it('should render the ArticleDigest.Archived', () => {
     render(<ArticleDigestArchived article={MOCK_ARTILCE} />)
-    expect(
-      screen.getByTestId(TEST_ID.DIGEST_ARTICLE_ARCHIVED)
-    ).toBeInTheDocument()
+
+    const $digest = screen.getByTestId(TEST_ID.DIGEST_ARTICLE_ARCHIVED)
+    expect($digest).toBeInTheDocument()
+
+    const $title = screen.getByRole('heading', { name: MOCK_ARTILCE.title })
+    expect($title).toBeInTheDocument()
+
+    $title.click()
+    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.slug)
   })
 })
