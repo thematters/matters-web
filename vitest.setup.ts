@@ -2,6 +2,7 @@ import '@testing-library/jest-dom/vitest'
 
 import { Globals } from '@react-spring/web'
 import { cleanup, configure } from '@testing-library/react'
+import mockRouter from 'next-router-mock'
 import { afterEach, beforeAll, vi } from 'vitest'
 
 // runs a setup before all test cases (e.g. setting up jsdom)
@@ -17,6 +18,7 @@ beforeAll(() => {
 // runs a cleanup after each test case (e.g. clearing jsdom)
 afterEach(() => {
   cleanup()
+  mockRouter.push('/')
 })
 
 // via https://github.com/vitest-dev/vitest/issues/821

@@ -36,6 +36,8 @@ const FooterActions = ({
 
         {hasDonationCount && <DonationCount article={article} />}
 
+        {tag}
+
         {hasCircle && circle && (
           <TextIcon
             icon={
