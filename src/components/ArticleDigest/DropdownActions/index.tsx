@@ -334,8 +334,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
       hasSetBottomCollection && isActive && isArticleAuthor,
   }
 
-  console.log({ hasEdit, isActive, isArticleAuthor })
-
   if (_isEmpty(_pickBy(controls))) {
     return null
   }

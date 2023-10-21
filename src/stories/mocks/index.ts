@@ -24,7 +24,7 @@ export const MOCK_USER = {
     badges: null,
     isWalletAuth: true,
     agreeOn: true,
-    userNameEditable: true,
+    userNameEditable: false,
     socialAccounts: [],
     emailVerified: true,
     group: 'a' as any,
