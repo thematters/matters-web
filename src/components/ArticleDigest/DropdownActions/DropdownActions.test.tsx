@@ -213,14 +213,151 @@ describe('<ArticleDigest/DropdownActions>', () => {
   })
 
   // hasBookmark
+  it('should render bookmark button', async () => {
+    render(<DropdownActions article={MOCK_ARTILCE} hasBookmark inCard />)
+
+    const $button = screen.getByLabelText('More Actions')
+    expect($button).toBeInTheDocument()
+
+    // open menu
+    $button.click()
+    const $menu = screen.getByRole('menu')
+    expect($menu).toBeInTheDocument()
+
+    const $bookmarkButton = screen.getByRole('menuitem', {
+      name: /bookmark/i,
+    })
+    expect($bookmarkButton).toBeInTheDocument()
+  })
+
+  // hasEdit
+  it('should render edit button', async () => {
+    render(<DropdownActions article={MOCK_ARTILCE} hasEdit inCard />)
+
+    const $button = screen.getByLabelText('More Actions')
+    expect($button).toBeInTheDocument()
+
+    // open menu
+    $button.click()
+    const $menu = screen.getByRole('menu')
+    expect($menu).toBeInTheDocument()
+
+    // edit button render as link
+    const $editButton = screen.getByRole('link', {
+      name: 'Edit',
+    })
+    expect($editButton).toBeInTheDocument()
+  })
+
   // hasArchive
+  it('should render archive button', async () => {
+    render(<DropdownActions article={MOCK_ARTILCE} hasArchive />)
+
+    const $button = screen.getByLabelText('More Actions')
+    expect($button).toBeInTheDocument()
+
+    // open menu
+    $button.click()
+    const $menu = screen.getByRole('menu')
+    expect($menu).toBeInTheDocument()
+
+    const $archiveButton = screen.getByRole('menuitem', {
+      name: 'Archive',
+    })
+    expect($archiveButton).toBeInTheDocument()
+  })
 
   // hasSetTagSelected
   // hasSetTagUnselected
   // hasRemoveTag
+  it('should render tag buttons', async () => {
+    render(
+      <DropdownActions
+        article={MOCK_ARTILCE}
+        tagDetailId="1"
+        hasSetTagSelected
+        hasSetTagUnselected
+        hasRemoveTag
+      />
+    )
+
+    const $button = screen.getByLabelText('More Actions')
+    expect($button).toBeInTheDocument()
+
+    // open menu
+    $button.click()
+    const $menu = screen.getByRole('menu')
+    expect($menu).toBeInTheDocument()
+
+    // hasSetTagSelected
+    const $setTagSelectedBtn = screen.getByRole('menuitem', {
+      name: 'Add to Featured',
+    })
+    expect($setTagSelectedBtn).toBeInTheDocument()
+
+    // hasUnsetTagSelected
+    const $setTagUnselectedBtn = screen.getByRole('menuitem', {
+      name: 'Unpin from Trending',
+    })
+    expect($setTagUnselectedBtn).toBeInTheDocument()
+
+    // hasRemoveTag
+    const $removeTagBtn = screen.getByRole('menuitem', {
+      name: 'Remove Article',
+    })
+    expect($removeTagBtn).toBeInTheDocument()
+  })
 
   // hasSetTopCollection
   // hasSetBottomCollection
   // hasAddCollection
   // hasRemoveCollection
+  it('should render collection buttons', async () => {
+    render(
+      <DropdownActions
+        article={MOCK_ARTILCE}
+        collectionId="1"
+        collectionArticleCount={1}
+        hasSetTopCollection
+        hasSetBottomCollection
+        hasAddCollection
+        hasRemoveCollection
+        onSetTopCollection={() => {}}
+        onSetBottomCollection={() => {}}
+        onRemoveCollection={() => {}}
+      />
+    )
+
+    const $button = screen.getByLabelText('More Actions')
+    expect($button).toBeInTheDocument()
+
+    // open menu
+    $button.click()
+    const $menu = screen.getByRole('menu')
+    expect($menu).toBeInTheDocument()
+
+    // hasSetTopCollection
+    const $setTopCollectionBtn = screen.getByRole('menuitem', {
+      name: 'Move to top',
+    })
+    expect($setTopCollectionBtn).toBeInTheDocument()
+
+    // hasSetBottomCollection
+    const $setBottomCollectionBtn = screen.getByRole('menuitem', {
+      name: 'Move to bottom',
+    })
+    expect($setBottomCollectionBtn).toBeInTheDocument()
+
+    // hasAddCollection
+    const $addCollectionBtn = screen.getByRole('menuitem', {
+      name: 'Add to collection',
+    })
+    expect($addCollectionBtn).toBeInTheDocument()
+
+    // hasRemoveCollection
+    const $removeCollectionBtn = screen.getByRole('menuitem', {
+      name: 'Remove from collection',
+    })
+    expect($removeCollectionBtn).toBeInTheDocument()
+  })
 })
