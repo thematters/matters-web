@@ -89,9 +89,9 @@ const MeMenu: React.FC = () => {
       />
 
       <Menu.Item
-        text={<FormattedMessage defaultMessage="Drafts" id="2atspc" />}
+        text={<FormattedMessage defaultMessage="My Works" id="ai7kS4" />}
         icon={<IconDraft24 size="mdS" />}
-        href={PATHS.ME_DRAFTS}
+        href={PATHS.ME_WORKS}
         is="link"
       />
 

@@ -994,6 +994,10 @@
   "VZsE96": {
     "defaultMessage": "Collection Name"
   },
+  "VeEfHm": {
+    "defaultMessage": "Drafts",
+    "description": "src/views/Me/Works/WorksTabs/index.tsx"
+  },
   "VefaFQ": {
     "defaultMessage": "Content length exceeds limit ({length}/{limit})"
   },
@@ -1112,6 +1116,10 @@
     "defaultMessage": "Blocked Users",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
+  "YgZOAm": {
+    "defaultMessage": "My Works - Archived",
+    "description": "src/views/Me/Works/Archived/index.tsx"
+  },
   "YlPCRU": {
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -1149,6 +1157,9 @@
   },
   "adThp5": {
     "defaultMessage": "Latest"
+  },
+  "ai7kS4": {
+    "defaultMessage": "My Works"
   },
   "awW+lk": {
     "defaultMessage": "Processing",
@@ -1504,6 +1515,10 @@
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
+  "pAQR0S": {
+    "defaultMessage": "Published",
+    "description": "src/views/Me/Works/WorksTabs/index.tsx"
+  },
   "pHg5Ju": {
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
@@ -1529,6 +1544,10 @@
   "qNuRmA": {
     "defaultMessage": "Send login code",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "qPqap+": {
+    "defaultMessage": "Archived",
+    "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
   "qYzBk8": {
     "defaultMessage": "unsubscribed your circle",
@@ -1604,6 +1623,10 @@
   "tBt9u0": {
     "defaultMessage": "Sign in",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
+  "tDqnVf": {
+    "defaultMessage": "My Works - Drafts",
+    "description": "src/views/Me/Works/Drafts/index.tsx"
   },
   "tEeEJT": {
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
@@ -1758,6 +1781,10 @@
   "y4Lyf1": {
     "defaultMessage": "This name is already taken.",
     "description": "NAME_EXISTS"
+  },
+  "yBCdku": {
+    "defaultMessage": "My Works - Published",
+    "description": "src/views/Me/Works/Published/index.tsx"
   },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
