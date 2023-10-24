@@ -994,10 +994,6 @@
   "VZsE96": {
     "defaultMessage": "选集名称"
   },
-  "VeEfHm": {
-    "defaultMessage": "草稿",
-    "description": "src/views/Me/Works/WorksTabs/index.tsx"
-  },
   "VefaFQ": {
     "defaultMessage": "内容长度超出限制 ({length}/{limit})"
   },
@@ -1116,10 +1112,6 @@
     "defaultMessage": "已屏蔽用户",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
-  "YgZOAm": {
-    "defaultMessage": "我的创作 - 已归档",
-    "description": "src/views/Me/Works/Archived/index.tsx"
-  },
   "YlPCRU": {
     "defaultMessage": "关联了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -1157,9 +1149,6 @@
   },
   "adThp5": {
     "defaultMessage": "最新"
-  },
-  "ai7kS4": {
-    "defaultMessage": "我的创作"
   },
   "awW+lk": {
     "defaultMessage": "进行中…",
@@ -1515,10 +1504,6 @@
     "defaultMessage": "赞赏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
-  "pAQR0S": {
-    "defaultMessage": "已发布",
-    "description": "src/views/Me/Works/WorksTabs/index.tsx"
-  },
   "pHg5Ju": {
     "defaultMessage": "登录密码已设置",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
@@ -1544,10 +1529,6 @@
   "qNuRmA": {
     "defaultMessage": "发送临时密码",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
-  },
-  "qPqap+": {
-    "defaultMessage": "已归档",
-    "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
   "qYzBk8": {
     "defaultMessage": "退订了你的围炉",
@@ -1623,10 +1604,6 @@
   "tBt9u0": {
     "defaultMessage": "登录",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
-  },
-  "tDqnVf": {
-    "defaultMessage": "我的创作 - 草稿",
-    "description": "src/views/Me/Works/Drafts/index.tsx"
   },
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已发布到分布式网络",
@@ -1781,10 +1758,6 @@
   "y4Lyf1": {
     "defaultMessage": "该名称已被其他用户使用",
     "description": "NAME_EXISTS"
-  },
-  "yBCdku": {
-    "defaultMessage": "我的创作 - 已发布",
-    "description": "src/views/Me/Works/Published/index.tsx"
   },
   "yBUiiy": {
     "defaultMessage": "操作无法撤销，确认归档吗？"
