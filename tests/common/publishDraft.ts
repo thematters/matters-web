@@ -19,7 +19,7 @@ export const publishDraft = async ({
 
   // Required: Fill title and content
   const title = await draftDetail.fillTitle()
-  const content = await draftDetail.fillContent()
+  const content = await draftDetail.fillContent(title)
 
   await draftDetail.checkResponse({ allow: allowResponse })
   // Optional

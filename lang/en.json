@@ -233,9 +233,6 @@
     "defaultMessage": "This tag is already taken",
     "description": "DUPLICATE_TAG"
   },
-  "5MDGuM": {
-    "defaultMessage": "Enter your email"
-  },
   "5iii3x": {
     "defaultMessage": "Circle：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
@@ -1325,8 +1322,8 @@
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "h9CG9E": {
-    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx",
-    "defaultMessage": "{commentType} has been deleted"
+    "defaultMessage": "{commentType} has been deleted",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "hASeng": {
     "defaultMessage": "Blocked Users",
@@ -1762,8 +1759,8 @@
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
   "xWZr13": {
-    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx",
-    "defaultMessage": "{follower, plural, =1 {follower} other {followers}}"
+    "defaultMessage": "{follower, plural, =1 {follower} other {followers}}",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "xafreT": {
     "defaultMessage": "New discussions",

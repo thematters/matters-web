@@ -372,6 +372,7 @@ const ArticleDetail = ({
   includeTranslation: boolean
 }) => {
   const { getQuery, router, routerLang } = useRoute()
+  const [needRefetchData, setNeedRefetchData] = useState(false)
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
@@ -447,9 +448,18 @@ const ArticleDetail = ({
   }
 
   useEffect(() => {
-    refetchPublic()
     // reset state to private fetchable when URL query is changed
     setPrivateFetched(false)
+
+    // refetch data when URL query is changed
+    ;(async () => {
+      if (!needRefetchData) {
+        return
+      }
+      await refetchPublic()
+      await loadPrivate()
+      setNeedRefetchData(false)
+    })()
   }, [mediaHash])
 
   // fetch private data when mediaHash of public data is changed
@@ -504,6 +514,7 @@ const ArticleDetail = ({
       return
     }
 
+    setNeedRefetchData(true)
     const path = toPath({ page: 'articleDetail', article })
     router.replace(path.href)
   }

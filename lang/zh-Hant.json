@@ -233,9 +233,6 @@
     "defaultMessage": "標籤名稱已被使用",
     "description": "DUPLICATE_TAG"
   },
-  "5MDGuM": {
-    "defaultMessage": "請輸入你的註冊電子信箱"
-  },
   "5iii3x": {
     "defaultMessage": "圍爐：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
@@ -832,7 +829,7 @@
     "description": "src/views/Me/Transactions/index.tsx"
   },
   "NEKHMm": {
-    "defaultMessage": "Email",
+    "defaultMessage": "電子郵件",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
   "NNF+3f": {
@@ -1410,7 +1407,7 @@
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "l0/EvT": {
-    "defaultMessage": "最後一步：设置 Matters ID",
+    "defaultMessage": "最後一步：設置 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "l02bPO": {

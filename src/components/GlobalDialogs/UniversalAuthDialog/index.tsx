@@ -1,13 +1,16 @@
 import dynamic from 'next/dynamic'
+import router from 'next/router'
 import { useEffect, useState } from 'react'
 import { useConnect } from 'wagmi'
 
 import {
+  BREAKPOINTS,
   CLOSE_ACTIVE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
+  PATHS,
   TEST_ID,
 } from '~/common/enums'
-import { WalletType } from '~/common/utils'
+import { appendTarget, WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   DialogBeta,
@@ -15,6 +18,7 @@ import {
   Spinner,
   useDialogSwitch,
   useEventListener,
+  useMediaQuery,
   useStep,
   VerificationLinkSent,
 } from '~/components'
@@ -55,6 +59,7 @@ const BaseUniversalAuthDialog = () => {
   const { currStep, forward } = useStep<Step>('select-login-method')
   const [email, setEmail] = useState('')
   const [hasUnavailable, setHasUnavailable] = useState(false)
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   const [firstRender, setFirstRender] = useState(true)
 
@@ -86,7 +91,12 @@ const BaseUniversalAuthDialog = () => {
   useEventListener(
     OPEN_UNIVERSAL_AUTH_DIALOG,
     (payload: { [key: string]: any }) => {
-      openDialog()
+      if (isSmUp) {
+        openDialog()
+        return
+      }
+      const { href } = appendTarget(PATHS.LOGIN, true)
+      router.push(href)
     }
   )
 
@@ -181,11 +191,17 @@ const BaseUniversalAuthDialog = () => {
 }
 
 const UniversalAuthDialog = () => {
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
   const Children = ({ openDialog }: { openDialog: () => void }) => {
     useEventListener(
       OPEN_UNIVERSAL_AUTH_DIALOG,
       (payload: { [key: string]: any }) => {
-        openDialog()
+        if (isSmUp) {
+          openDialog()
+          return
+        }
+        const { href } = appendTarget(PATHS.LOGIN, true)
+        router.push(href)
       }
     )
     return null

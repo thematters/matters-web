@@ -8,10 +8,9 @@ import {
   ERROR_MESSAGES,
   OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
   REFETCH_RESPONSES,
 } from '~/common/enums'
-import { appendTarget, numAbbr, translate } from '~/common/utils'
+import { numAbbr, translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
@@ -170,24 +169,14 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
   }
 
   if (!viewer.isAuthed) {
-    const smUpProps = {
+    const props = {
       onClick: () => {
         window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
         window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
       },
     }
-    const smProps = appendTarget(PATHS.LOGIN, true)
 
-    return (
-      <>
-        <Media at="sm">
-          <Content article={article} {...smProps} />
-        </Media>
-        <Media greaterThan="sm">
-          <Content aria-haspopup="dialog" article={article} {...smUpProps} />
-        </Media>
-      </>
-    )
+    return <Content aria-haspopup="dialog" article={article} {...props} />
   }
 
   return (

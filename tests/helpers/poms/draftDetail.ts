@@ -95,8 +95,8 @@ export class DraftDetailPage {
     })
 
     // editing
-    this.titleInput = this.page.getByPlaceholder('Enter title')
-    this.summaryInput = this.page.getByPlaceholder('Enter summary')
+    this.titleInput = this.page.getByPlaceholder('Enter title ...')
+    this.summaryInput = this.page.getByPlaceholder('Enter summary…')
     this.contentInput = this.page.locator('.tiptap')
 
     // dialog
@@ -134,25 +134,21 @@ export class DraftDetailPage {
   async createDraft() {
     await pageGoto(this.page, PATHS.ME_DRAFT_NEW)
 
-    // Promise.all prevents a race condition between clicking and waiting.
-    await this.page.waitForNavigation()
+    await this.page.waitForURL(`**${PATHS.ME_DRAFT_NEW}`)
     await expect(this.page).toHaveURL(PATHS.ME_DRAFT_NEW)
   }
 
   async gotoLatestDraft() {
-    await this.page.goto('/me/drafts')
+    await this.page.goto(PATHS.ME_DRAFTS)
 
-    // Promise.all prevents a race condition between clicking and waiting.
-    await Promise.all([
-      this.page.getByRole('listitem').first().click(),
-      this.page.waitForNavigation(),
-    ])
+    await this.page.getByRole('listitem').first().click()
+    await this.page.waitForURL(`**${PATHS.ME_DRAFT_DETAIL}`)
   }
 
-  async fillTitle() {
-    const title = generateTitle()
-    await this.titleInput.fill(title)
-    return title
+  async fillTitle(title?: string) {
+    const _title = title || generateTitle()
+    await this.titleInput.fill(_title)
+    return _title
   }
 
   async fillSummary() {
@@ -161,9 +157,20 @@ export class DraftDetailPage {
     return summary
   }
 
-  async fillContent() {
-    const content = generateContent({})
+  async fillContent(title: string) {
+    let content = generateContent({})
     await this.contentInput.fill(content)
+
+    // Update the content to make the publish button clickable
+    while (await this.publishButton.isDisabled()) {
+      await this.contentInput.press('End')
+      await this.contentInput.press('KeyA')
+      await this.page.waitForTimeout(1000 * 2)
+      await this.contentInput.press('Backspace')
+      await this.page.waitForTimeout(1000 * 2)
+      await this.fillTitle(title)
+    }
+
     return content
   }
 

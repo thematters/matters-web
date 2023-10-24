@@ -233,9 +233,6 @@
     "defaultMessage": "This tag is already taken",
     "description": "DUPLICATE_TAG"
   },
-  "5MDGuM": {
-    "defaultMessage": "Enter your email"
-  },
   "5iii3x": {
     "defaultMessage": "Circle：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
