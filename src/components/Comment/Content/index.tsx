@@ -69,6 +69,7 @@ const Content = ({
             <Translate zh_hant="你屏蔽了该用户" zh_hans="你封鎖了該用戶" />
           ) : (
             <Translate
+              en={`This ${COMMENT_TYPE_TEXT.en[type]} has been collapsed by the author`}
               zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}被創作者闔上`}
               zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}被创作者折叠`}
             />
