@@ -994,6 +994,10 @@
   "VZsE96": {
     "defaultMessage": "選集名稱"
   },
+  "VeEfHm": {
+    "defaultMessage": "草稿",
+    "description": "src/views/Me/Works/WorksTabs/index.tsx"
+  },
   "VefaFQ": {
     "defaultMessage": "內容長度超出限制 ({length}/{limit})"
   },
@@ -1112,6 +1116,10 @@
     "defaultMessage": "已封鎖用戶",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
+  "YgZOAm": {
+    "defaultMessage": "我的創作 - 已封存",
+    "description": "src/views/Me/Works/Archived/index.tsx"
+  },
   "YlPCRU": {
     "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -1149,6 +1157,9 @@
   },
   "adThp5": {
     "defaultMessage": "最新"
+  },
+  "ai7kS4": {
+    "defaultMessage": "我的創作"
   },
   "awW+lk": {
     "defaultMessage": "進行中…",
@@ -1378,7 +1389,7 @@
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "l0/EvT": {
-    "defaultMessage": "最後一步：设置 Matters ID",
+    "defaultMessage": "最後一步：設置 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "l02bPO": {
@@ -1504,6 +1515,10 @@
     "defaultMessage": "讚賞了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
+  "pAQR0S": {
+    "defaultMessage": "已發布",
+    "description": "src/views/Me/Works/WorksTabs/index.tsx"
+  },
   "pHg5Ju": {
     "defaultMessage": "登入密碼已設定",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
@@ -1529,6 +1544,10 @@
   "qNuRmA": {
     "defaultMessage": "發送臨時密碼",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "qPqap+": {
+    "defaultMessage": "已封存",
+    "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
   "qYzBk8": {
     "defaultMessage": "退訂了你的圍爐",
@@ -1604,6 +1623,10 @@
   "tBt9u0": {
     "defaultMessage": "登入",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
+  "tDqnVf": {
+    "defaultMessage": "我的創作 - 草稿",
+    "description": "src/views/Me/Works/Drafts/index.tsx"
   },
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已發布到分佈式網絡",
@@ -1758,6 +1781,10 @@
   "y4Lyf1": {
     "defaultMessage": "該名稱已被其他使用者使用",
     "description": "NAME_EXISTS"
+  },
+  "yBCdku": {
+    "defaultMessage": "我的創作 - 已發布",
+    "description": "src/views/Me/Works/Published/index.tsx"
   },
   "yBUiiy": {
     "defaultMessage": "操作無法撤銷，確認封存嗎？"
