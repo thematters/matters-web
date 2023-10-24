@@ -3,10 +3,7 @@ import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
-import {
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
+import { OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
 import {
   IconDotDivider,
   TextIcon,
@@ -64,11 +61,7 @@ const FollowButton = ({ user }: FollowButtonProps) => {
 
   const onClick = () => {
     if (!viewer.isAuthed) {
-      window.dispatchEvent(
-        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { source: UNIVERSAL_AUTH_SOURCE.bookmark },
-        })
-      )
+      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
       return
     }
 
