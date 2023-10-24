@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 import { PATHS } from '~/common/enums'
+import { render, screen } from '~/common/utils/test'
 import { Button } from '~/components'
 
 describe('<Button>', () => {

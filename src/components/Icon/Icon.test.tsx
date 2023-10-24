@@ -1,7 +1,7 @@
-import { render } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
 import { ReactComponent as IconX } from '@/public/static/icons/22px/x.svg'
+import { render } from '~/common/utils/test'
 import { IconX22, withIcon } from '~/components'
 
 describe('<Icon>', () => {
