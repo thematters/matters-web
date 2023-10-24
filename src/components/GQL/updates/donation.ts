@@ -4,7 +4,6 @@ import _remove from 'lodash/remove'
 import _some from 'lodash/some'
 
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
-import { ARTICLE_DETAIL_PUBLIC_BY_NODE_ID } from '~/views/ArticleDetail/gql'
 
 export const updateDonation = ({
   cache,
@@ -15,6 +14,10 @@ export const updateDonation = ({
   id: string
   viewer: any
 }) => {
+  const {
+    ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
+  } = require('~/views/ArticleDetail/gql')
+
   try {
     if (!id) {
       return

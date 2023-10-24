@@ -1,7 +1,6 @@
 import { DataProxy } from 'apollo-cache'
 
 import { DraftAssetsQuery } from '~/gql/graphql'
-import { DRAFT_ASSETS } from '~/views/Me/DraftDetail/gql'
 
 export const updateDraftAssets = ({
   cache,
@@ -14,6 +13,8 @@ export const updateDraftAssets = ({
     DraftAssetsQuery['node'] & { __typename: 'Draft' }
   >['assets'][0]
 }) => {
+  const { DRAFT_ASSETS } = require('~/views/Me/DraftDetail/gql')
+
   try {
     if (!id) {
       return

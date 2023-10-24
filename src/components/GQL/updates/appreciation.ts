@@ -3,7 +3,6 @@ import _cloneDeep from 'lodash/cloneDeep'
 import _some from 'lodash/some'
 
 import { ArticleDetailPublicByNodeIdQuery } from '~/gql/graphql'
-import { ARTICLE_DETAIL_PUBLIC_BY_NODE_ID } from '~/views/ArticleDetail/gql'
 
 export const updateAppreciation = ({
   cache,
@@ -20,6 +19,10 @@ export const updateAppreciation = ({
   viewer: any
   canSuperLike?: boolean
 }) => {
+  const {
+    ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
+  } = require('~/views/ArticleDetail/gql')
+
   try {
     if (!id) {
       return

@@ -6,6 +6,7 @@ import { alchemyProvider } from 'wagmi/providers/alchemy'
 
 import { WalletErrorType } from '~/common/enums'
 
+const isTest = process.env.NODE_ENV === 'test'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
 
@@ -33,13 +34,17 @@ export const wagmiConfig = createConfig({
         UNSTABLE_shimOnConnectSelectAccount: true,
       },
     }),
-    new WalletConnectConnector({
-      chains,
-      options: {
-        projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_ID!,
-        showQrModal: true,
-      },
-    }),
+    ...(isTest
+      ? []
+      : [
+          new WalletConnectConnector({
+            chains,
+            options: {
+              projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_ID!,
+              showQrModal: true,
+            },
+          }),
+        ]),
   ],
   publicClient,
   /*
