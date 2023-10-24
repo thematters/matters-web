@@ -3,11 +3,11 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
-  CLOSE_ACTIVE_DIALOG,
   ERROR_CODES,
   OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   REFETCH_RESPONSES,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 import {
@@ -171,8 +171,13 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
   if (!viewer.isAuthed) {
     const props = {
       onClick: () => {
-        window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-        window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+        // deprecated
+        // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+        window.dispatchEvent(
+          new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+            detail: { trigger: UNIVERSAL_AUTH_TRIGGER.comment },
+          })
+        )
       },
     }
 

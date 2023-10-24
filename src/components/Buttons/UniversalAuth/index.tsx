@@ -1,17 +1,32 @@
 import React from 'react'
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
+import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { Button, TextIcon, Translate } from '~/components'
 
-export const UniversalAuthButton: React.FC = () => {
+type UniversalAuthButtonProps = { resideIn?: 'nav' | 'sideNav' }
+
+export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
+  resideIn,
+}) => {
   const props = {
     onClick: () => {
       analytics.trackEvent('click_button', {
         type: 'login/signup',
       })
-      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+
+      // deprecated
+      // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          ...(resideIn
+            ? { detail: { trigger: UNIVERSAL_AUTH_TRIGGER[resideIn] } }
+            : {}),
+        })
+      )
     },
   }
 

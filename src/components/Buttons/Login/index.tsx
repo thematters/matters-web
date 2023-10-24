@@ -1,10 +1,14 @@
 import { FormattedMessage } from 'react-intl'
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
+import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
 import { Button, ButtonProps, IconSize, TextIcon } from '~/components'
 
 interface LoginButtonBaseProps {
   iconSize?: Extract<IconSize, 'md'>
+  resideIn?: 'visitorWall' | 'migration'
 }
 
 type LoginButtonProps = LoginButtonBaseProps &
@@ -16,11 +20,19 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   size,
   spacing,
   onClick,
+  resideIn,
 }) => {
   const props = {
     onClick: () => {
-      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+      // deprecated
+      // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          ...(resideIn
+            ? { detail: { trigger: UNIVERSAL_AUTH_TRIGGER[resideIn] } }
+            : {}),
+        })
+      )
       onClick?.()
     },
   }

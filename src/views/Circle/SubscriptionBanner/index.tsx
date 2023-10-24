@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
@@ -56,7 +57,11 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
 
               if (!viewer.isAuthed) {
                 window.dispatchEvent(
-                  new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG)
+                  new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                    detail: {
+                      trigger: UNIVERSAL_AUTH_TRIGGER.circleSubscription,
+                    },
+                  })
                 )
                 return
               }

@@ -3,7 +3,11 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ERROR_CODES, OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
+import {
+  ERROR_CODES,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   ERROR_MESSAGES,
@@ -50,7 +54,12 @@ const ExtendButton = ({
 
   const onClick = async () => {
     if (!viewer.isAuthed) {
-      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.collectArticle },
+        })
+      )
+
       return
     }
 

@@ -6,6 +6,7 @@ import {
   CLOSE_ACTIVE_DIALOG,
   ERROR_CODES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { Error, toast } from '~/components'
 
@@ -348,7 +349,11 @@ export const toastMutationErrors = (
           ),
           onClick: () => {
             window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+            window.dispatchEvent(
+              new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                detail: { trigger: UNIVERSAL_AUTH_TRIGGER.error },
+              })
+            )
           },
         },
       ],

@@ -36,6 +36,7 @@ type EventArgs =
   | ['card_exposure', CardExposureProp]
   | ['tag_exposure', TagExposureProp]
   | ['image_upload', ImageUploadProp]
+  | ['authenticate', AuthenticateProp]
 
 /**
  * Event: Page View
@@ -179,6 +180,11 @@ interface ImageUploadProp {
   type: string
   size: number | string
   delay_msecs?: number
+}
+
+interface AuthenticateProp {
+  step: string
+  trigger?: string
 }
 
 // content type

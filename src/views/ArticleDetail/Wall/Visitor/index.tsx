@@ -64,6 +64,7 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
                   pageType: 'article_detail',
                 })
               }}
+              resideIn="visitorWall"
             />
           </div>
 

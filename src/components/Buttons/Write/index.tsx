@@ -6,6 +6,7 @@ import {
   OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics, translate } from '~/common/utils'
 import {
@@ -72,7 +73,11 @@ export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
       }
       onClick={async () => {
         if (!authed) {
-          window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+          window.dispatchEvent(
+            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+              detail: { trigger: UNIVERSAL_AUTH_TRIGGER.createDraft },
+            })
+          )
           return
         }
 

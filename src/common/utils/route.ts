@@ -248,6 +248,13 @@ export const getTarget = (url?: string) => {
   return target
 }
 
+export const getTrigger = (url?: string) => {
+  const qs = new URL(url || window.location.href).searchParams
+  const trigger = encodeURIComponent((qs.get('trigger') as string) || '')
+
+  return trigger
+}
+
 export const getEncodedCurrent = () => {
   return encodeURIComponent(window.location.href)
 }
@@ -298,8 +305,17 @@ export const redirectToHomePage = () => {
  *
  * (works on SSR & CSR)
  */
-export const appendTarget = (href: string, fallbackCurrent?: boolean) => {
+export const appendTarget = (
+  href: string,
+  fallbackCurrent?: boolean,
+  trigger?: string
+) => {
   let target = ''
+  let params = ''
+
+  if (trigger) {
+    params = params + `&trigger=${trigger}`
+  }
 
   if (typeof window !== 'undefined') {
     target = getTarget()
@@ -308,7 +324,7 @@ export const appendTarget = (href: string, fallbackCurrent?: boolean) => {
 
   if (target) {
     return {
-      href: `${href}?target=${target}`,
+      href: `${href}?target=${target}${params}`,
     }
   } else {
     return {

@@ -5,6 +5,7 @@ import {
   ERROR_CODES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   REFETCH_DONATORS,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
@@ -65,9 +66,10 @@ const SupportButton = ({
 
               if (!viewer.isAuthed) {
                 window.dispatchEvent(
-                  new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG)
+                  new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                    detail: { trigger: UNIVERSAL_AUTH_TRIGGER.support },
+                  })
                 )
-
                 return
               }
 

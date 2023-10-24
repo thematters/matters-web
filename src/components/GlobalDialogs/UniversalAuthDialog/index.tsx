@@ -10,7 +10,7 @@ import {
   PATHS,
   TEST_ID,
 } from '~/common/enums'
-import { appendTarget, WalletType } from '~/common/utils'
+import { analytics, appendTarget, WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   DialogBeta,
@@ -80,8 +80,19 @@ const BaseUniversalAuthDialog = () => {
   const {
     show,
     openDialog: baseOpenDialog,
-    closeDialog,
+    closeDialog: baseCloseDialog,
   } = useDialogSwitch(true)
+
+  const closeDialog = () => {
+    analytics.trackEvent('authenticate', {
+      step:
+        currStep === 'email-verification-sent'
+          ? 'leaveVerificationSent'
+          : 'leave',
+    })
+    baseCloseDialog()
+  }
+
   const openDialog = () => {
     forward('select-login-method')
     baseOpenDialog()
@@ -91,11 +102,17 @@ const BaseUniversalAuthDialog = () => {
   useEventListener(
     OPEN_UNIVERSAL_AUTH_DIALOG,
     (payload: { [key: string]: any }) => {
+      const trigger = payload?.trigger
+
       if (isSmUp) {
+        analytics.trackEvent('authenticate', {
+          step: 'engage',
+          ...(trigger ? { trigger } : {}),
+        })
         openDialog()
         return
       }
-      const { href } = appendTarget(PATHS.LOGIN, true)
+      const { href } = appendTarget(PATHS.LOGIN, true, trigger)
       router.push(href)
     }
   )
@@ -196,11 +213,17 @@ const UniversalAuthDialog = () => {
     useEventListener(
       OPEN_UNIVERSAL_AUTH_DIALOG,
       (payload: { [key: string]: any }) => {
+        const trigger = payload?.trigger
+
         if (isSmUp) {
+          analytics.trackEvent('authenticate', {
+            step: 'engage',
+            ...(trigger ? { trigger } : {}),
+          })
           openDialog()
           return
         }
-        const { href } = appendTarget(PATHS.LOGIN, true)
+        const { href } = appendTarget(PATHS.LOGIN, true, trigger)
         router.push(href)
       }
     )

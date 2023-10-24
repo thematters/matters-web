@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
 import { PATHS } from '~/common/enums'
-import { WalletType } from '~/common/utils'
+import { analytics, getTrigger, WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   Head,
@@ -82,6 +82,32 @@ const UniversalAuth = () => {
   useEffect(() => {
     setFirstRender(false)
   }, [])
+
+  useEffect(() => {
+    const trigger = getTrigger(window.location.href)
+    analytics.trackEvent('authenticate', {
+      step: 'engage',
+      ...(trigger ? { trigger } : {}),
+    })
+  }, [])
+
+  useEffect(() => {
+    const track = (url: string) => {
+      const as = window?.history?.state?.as
+      if (url === as || url === PATHS.HOME) {
+        analytics.trackEvent('authenticate', {
+          step:
+            currStep === 'email-verification-sent'
+              ? 'leaveVerificationSent'
+              : 'leave',
+        })
+      }
+    }
+    router.events.on('routeChangeStart', track)
+    return () => {
+      router.events.off('routeChangeStart', track)
+    }
+  }, [currStep])
 
   return (
     <>

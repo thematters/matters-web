@@ -5,6 +5,7 @@ import {
   ERROR_CODES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEST_ID,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
@@ -44,7 +45,11 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
 
   const onClick = async () => {
     if (!viewer.isAuthed) {
-      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.bookmark },
+        })
+      )
       return
     }
 
