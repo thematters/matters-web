@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import React from 'react'
 
 import { toPath } from '~/common/utils'
-import { Card, LinkWrapper, Translate } from '~/components'
+import { Card, DateTime, LinkWrapper, Translate } from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
 import DeleteButton from './DeleteButton'
@@ -27,13 +27,17 @@ const fragments = {
 }
 
 const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
-  const { id, title } = draft
+  const { id, title, updatedAt } = draft
   const path = toPath({ page: 'draftDetail', id })
 
   return (
-    <Card {...path} spacing={['base', 0]} bgActiveColor="none">
+    <Card spacing={['base', 0]} bgActiveColor="none">
       <section className={styles.container}>
         <section className={styles.left}>
+          <section>
+            <DateTime date={updatedAt} color="grey" />
+          </section>
+
           <LinkWrapper {...path} textActiveColor="green">
             <section className={styles.title}>
               {title || <Translate id="untitle" />}

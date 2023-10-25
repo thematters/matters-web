@@ -66,6 +66,12 @@
   justify-content: flex-end;
 }
 
+@define-mixin inline-flex-start-center {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
 /* Fonts
    ========================================================================== */
 @define-mixin font-serif {
