@@ -203,10 +203,6 @@
   "4l6vz1": {
     "defaultMessage": "複製"
   },
-  "4sl6yu": {
-    "defaultMessage": "開始創作",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "50cquj": {
     "defaultMessage": "還沒有眾聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
@@ -853,6 +849,10 @@
     "defaultMessage": "登入密碼",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
+  "PmLGMc": {
+    "defaultMessage": "尚無草稿",
+    "description": "src/components/Empty/EmptyDraft.tsx"
+  },
   "Pp/0po": {
     "defaultMessage": "換一批"
   },
@@ -1123,6 +1123,10 @@
   "YlPCRU": {
     "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
+  },
+  "Z2iL9Z": {
+    "defaultMessage": "開始創作",
+    "description": "src/components/Buttons/StartWriting/index.tsx"
   },
   "ZAs170": {
     "defaultMessage": "基本資料",

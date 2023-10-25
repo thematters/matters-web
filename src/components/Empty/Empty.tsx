@@ -9,12 +9,14 @@ interface EmptyProps {
   description: string | React.ReactNode
   icon?: React.ReactNode
   spacingY?: 'xxloose' | 'xxxloose'
+  footer?: React.ReactNode
 }
 
 export const Empty = ({
   icon,
   description,
   spacingY = 'xxxloose',
+  footer,
 }: EmptyProps) => {
   const emptyClasses = classNames({
     [styles.empty]: true,
@@ -28,6 +30,7 @@ export const Empty = ({
       <Alert type="polite">
         <section className={styles.description}>{description}</section>
       </Alert>
+      {footer && <section className={styles.footer}>{footer}</section>}
     </section>
   )
 }
