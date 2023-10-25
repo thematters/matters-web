@@ -1,31 +1,48 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useState } from 'react'
+// import Script from 'next/script'
+import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { parseFormSubmitErrors, validateEmail } from '~/common/utils'
+import { ERROR_CODES } from '~/common/enums'
+import {
+  parseFormSubmitErrors,
+  signupCallbackUrl,
+  validateEmail,
+} from '~/common/utils'
 import { WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   AuthTabs,
   AuthWalletFeed,
-  Dialog,
+  DialogBeta,
   Form,
   IconLeft20,
   LanguageContext,
   Media,
   ReCaptchaContext,
   TextIcon,
+  Turnstile,
+  // TURNSTILE_DEFAULT_SCRIPT_ID,
+  TurnstileInstance,
   useMutation,
+  ViewerContext,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
+// import { UserGroup } from '~/gql/graphql'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
+import styles from './styles.module.css'
+
 interface FormProps {
+  purpose: 'dialog' | 'page'
   submitCallback: (email: string) => void
-  gotoEmailLogin: () => void
   gotoWalletConnect: (type: WalletType) => void
   closeDialog?: () => void
+
+  authFeedType: AuthFeedType
+  setAuthFeedType: (type: AuthFeedType) => void
+
   back: () => void
 }
 
@@ -34,21 +51,26 @@ interface FormValues {
 }
 
 const Init: React.FC<FormProps> = ({
+  purpose,
   submitCallback,
-  gotoEmailLogin,
   gotoWalletConnect,
   closeDialog,
+  authFeedType,
+  setAuthFeedType,
   back,
 }) => {
+  const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const formId = 'email-sign-up-init-form'
 
-  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>('normal')
-  const isNormal = authTypeFeed === 'normal'
-  const isWallet = authTypeFeed === 'wallet'
-  const { token, refreshToken } = useContext(ReCaptchaContext)
+  const isInPage = purpose === 'page'
 
-  // const { token, refreshToken } = useContext(ReCaptchaContext)
+  const isNormal = authFeedType === 'normal'
+  const isWallet = authFeedType === 'wallet'
+  const { token: reCaptchaToken, refreshToken } = useContext(ReCaptchaContext)
+  const turnstileRef = useRef<TurnstileInstance>(null)
+  const [turnstileToken, setTurnstileToken] = useState<string>()
+
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
     SEND_CODE,
     undefined,
@@ -61,7 +83,7 @@ const Init: React.FC<FormProps> = ({
     values,
     errors,
     touched,
-    handleBlur,
+    // handleBlur,
     handleChange,
     handleSubmit,
     isSubmitting,
@@ -77,9 +99,21 @@ const Init: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ email }, { setFieldError, setSubmitting }) => {
       try {
+        const redirectUrl = signupCallbackUrl(email)
         await sendCode({
           variables: {
-            input: { email, type: 'register', token },
+            input: {
+              email,
+              type: 'register',
+              token:
+                // (viewer.info.group === UserGroup.A && turnstileToken) ||
+                // turnstileRef.current?.getResponse() || // fallback to ReCaptchaContext token
+                turnstileToken
+                  ? `${reCaptchaToken} ${turnstileToken}`
+                  : reCaptchaToken,
+              redirectUrl,
+              language: lang,
+            },
           },
         })
 
@@ -88,32 +122,68 @@ const Init: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        setFieldError('email', messages[codes[0]])
-
-        if (refreshToken) {
-          refreshToken()
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        if (codes[0].includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+          setFieldError(
+            'email',
+            intl.formatMessage({
+              defaultMessage: 'Unavailable',
+              id: 'rADhX5',
+              description: 'FORBIDDEN_BY_STATE',
+            })
+          )
+        } else {
+          setFieldError('email', intl.formatMessage(messages[codes[0]]))
         }
+
+        refreshToken?.()
+        turnstileRef.current?.reset()
       }
     },
   })
 
+  // useEffect(() => { console.log('turnstileToken changed to:', turnstileToken); }, [turnstileRef, turnstileToken])
+
+  const siteKey = process.env
+    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={siteKey}
+        options={{
+          action: 'register',
+          cData: `user-group-${viewer.info.group}`,
+          // refreshExpired: 'manual',
+          size: 'invisible',
+        }}
+        // injectScript={false}
+
+        scriptOptions={{
+          compat: 'recaptcha',
+          appendTo: 'body',
+        }}
+        onSuccess={(token) => {
+          setTurnstileToken(token)
+          // console.log('setTurnstileToken:', token)
+        }}
+      />
       <Form.Input
-        label={<FormattedMessage defaultMessage="Email" />}
+        label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
         type="email"
         name="email"
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Email',
+          id: 'sy+pv5',
         })}
         hintSize="sm"
         hintAlign="center"
         hintSpace="baseLoose"
         value={values.email}
         error={touched.email && errors.email}
-        onBlur={handleBlur}
+        // FIXME: handleBlur will cause the component to re-render
+        // onBlur={handleBlur}
         onChange={handleChange}
         spacingBottom="base"
         autoFocus
@@ -122,7 +192,7 @@ const Init: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <Dialog.TextButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
       disabled={
@@ -131,6 +201,7 @@ const Init: React.FC<FormProps> = ({
       text={
         <FormattedMessage
           defaultMessage="Continue"
+          id="wK4kLf"
           description="src/components/Forms/EmailSignUpForm/Init.tsx"
         />
       }
@@ -140,12 +211,12 @@ const Init: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header
-        title={<FormattedMessage defaultMessage="Sign Up" />}
+      <DialogBeta.Header
+        title={<FormattedMessage defaultMessage="Sign Up" id="39AHJm" />}
         hasSmUpTitle={false}
         leftBtn={
-          <Dialog.TextButton
-            text={<FormattedMessage defaultMessage="Back" />}
+          <DialogBeta.TextButton
+            text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
             color="greyDarker"
             onClick={back}
           />
@@ -154,28 +225,30 @@ const Init: React.FC<FormProps> = ({
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content>
+      <DialogBeta.Content>
         <Media at="sm">{InnerForm}</Media>
         <Media greaterThan="sm">
           <AuthTabs
-            type={authTypeFeed}
-            setType={setAuthTypeFeed}
-            normalText={<FormattedMessage defaultMessage="Sign Up" />}
+            purpose={purpose}
+            type={authFeedType}
+            setType={setAuthFeedType}
+            normalText={
+              <FormattedMessage defaultMessage="Sign Up" id="39AHJm" />
+            }
           />
           {isNormal && <>{InnerForm}</>}
           {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
         </Media>
-      </Dialog.Content>
+      </DialogBeta.Content>
 
       {isNormal && (
-        <Dialog.Footer
-          smUpSpaceBetween
+        <DialogBeta.Footer
           smUpBtns={
-            <>
-              <Dialog.TextButton
+            <section className={styles.footerBtns}>
+              <DialogBeta.TextButton
                 text={
                   <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
-                    <FormattedMessage defaultMessage="Back" />
+                    <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
                   </TextIcon>
                 }
                 color="greyDarker"
@@ -183,16 +256,16 @@ const Init: React.FC<FormProps> = ({
               />
 
               {SubmitButton}
-            </>
+            </section>
           }
         />
       )}
-      {isWallet && (
-        <Dialog.Footer
+      {isWallet && !isInPage && (
+        <DialogBeta.Footer
           smUpBtns={
-            <Dialog.TextButton
+            <DialogBeta.TextButton
               color="greyDarker"
-              text={<FormattedMessage defaultMessage="Close" />}
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               onClick={closeDialog}
             />
           }

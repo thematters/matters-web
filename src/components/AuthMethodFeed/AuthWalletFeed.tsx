@@ -17,10 +17,14 @@ export interface Props {
   submitCallback: (type: WalletType) => void
   closeDialog?: () => void
   back?: () => void
+  hasWalletExist?: boolean
+  hasUnavailable?: boolean
 }
 
 export const AuthWalletFeed: React.FC<Props> = ({
   submitCallback,
+  hasWalletExist,
+  hasUnavailable,
   closeDialog,
   back,
 }) => {
@@ -93,7 +97,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
           <span className={styles.icon}>
             <IconWalletConnect22 size="mdM" />
           </span>
-          <span className={styles.name}>Wallet Connect</span>
+          <span className={styles.name}>WalletConnect</span>
           {isWalletConnectLoading && (
             <span className={styles.right}>
               <IconSpinner22 color="grey" size="mdM" />
@@ -102,10 +106,40 @@ export const AuthWalletFeed: React.FC<Props> = ({
         </li>
       </ul>
       <section className={styles.info}>
+        {hasWalletExist && (
+          <section className={styles.errorHint}>
+            <p>
+              <FormattedMessage
+                defaultMessage="Wallet is linked to a different account"
+                id="Dt1o78"
+                description="src/components/AuthMethodFeed/AuthWalletFeed.tsx"
+              />
+            </p>
+            <p>
+              <FormattedMessage
+                defaultMessage="Sign in to that account to unlink it then try again"
+                id="rqS2aA"
+                description="src/components/AuthMethodFeed/AuthWalletFeed.tsx"
+              />
+            </p>
+          </section>
+        )}
+        {hasUnavailable && (
+          <section className={styles.errorHint}>
+            <p>
+              <FormattedMessage
+                defaultMessage="Unavailable"
+                id="rADhX5"
+                description="FORBIDDEN_BY_STATE"
+              />
+            </p>
+          </section>
+        )}
         <section className={styles.title}>
           <a href={PATHS.GUIDE} target="_blank">
             <FormattedMessage
               defaultMessage="What is a digital wallet?"
+              id="V5OMr4"
               description="src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
             />
           </a>

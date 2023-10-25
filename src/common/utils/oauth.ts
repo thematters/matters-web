@@ -1,6 +1,11 @@
 import _get from 'lodash/get'
 
-import { OAUTH_SCOPE_TREE, OAUTH_TYPE } from '~/common/enums'
+import {
+  CALLBACK_PROVIDERS,
+  OAUTH_SCOPE_TREE,
+  OAUTH_TYPE,
+  PATHS,
+} from '~/common/enums'
 
 export const toReadableScope = ({
   scope,
@@ -60,7 +65,7 @@ export const generateSocialOauthParams = async (type: OauthType) => {
 export const googleOauthUrl = async (type: OauthType) => {
   const { state, nonce } = await generateSocialOauthParams(type)
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
-  const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/google`
+  const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${CALLBACK_PROVIDERS.Google}`
   const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&scope=openid%20email&redirect_uri=${redirectUri}&state=${state}&nonce=${nonce}`
   return url
 }
@@ -68,7 +73,7 @@ export const googleOauthUrl = async (type: OauthType) => {
 export const twitterOauthUrl = async (type: OauthType) => {
   const { state, codeChallenge } = await generateSocialOauthParams(type)
   const clientId = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID
-  const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/twitter`
+  const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${CALLBACK_PROVIDERS.Twitter}`
   const url = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=users.read%20tweet.read&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
   return url
 }
@@ -76,7 +81,28 @@ export const twitterOauthUrl = async (type: OauthType) => {
 export const facebookOauthUrl = async (type: OauthType) => {
   const { state, codeChallenge } = await generateSocialOauthParams(type)
   const clientId = process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID
-  const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/facebook`
+  const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${CALLBACK_PROVIDERS.Facebook}`
   const url = `https://www.facebook.com/v17.0/dialog/oauth?response_type=code&scope=openid&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
   return url
+}
+
+export const signupCallbackUrl = (email: string) => {
+  return `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${
+    CALLBACK_PROVIDERS.EmailSignup
+  }?email=${encodeURIComponent(email)}`
+}
+
+export const signinCallbackUrl = (email: string) => {
+  return `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${
+    CALLBACK_PROVIDERS.EmailSignin
+  }?email=${encodeURIComponent(email)}`
+}
+
+export const emailVerifyCallbackUrl = (email: string) => {
+  const redirectPath = `/callback/${CALLBACK_PROVIDERS.EmailVerification}`
+  const host = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`
+  const redirectUrl = `${host}${redirectPath}?email=${encodeURIComponent(
+    email
+  )}&target=${encodeURIComponent(host)}${encodeURIComponent(PATHS.ME_SETTINGS)}`
+  return redirectUrl
 }

@@ -9,9 +9,12 @@ import { useDialogSwitch, useNativeEventListener } from '../Hook'
 export type PopperInstance = any
 export type PopperProps = import('@tippyjs/react').TippyProps
 
-const DynamicLazyTippy = dynamic(() => import('./LazyTippy'), {
-  ssr: true, // enable for first screen
-})
+const DynamicLazyTippy = dynamic(
+  () => import('./LazyTippy').then((mod) => mod.LazyTippy),
+  {
+    ssr: true, // enable for first screen
+  }
+)
 
 type ForwardChildrenNode = ({
   openDropdown,
@@ -149,6 +152,7 @@ export const hidePopperOnClick = (instance: PopperInstance) => {
   box.addEventListener('click', (event: any) => {
     const target = event.target as HTMLElement
 
+    console.log('click....')
     if (target?.closest && target.closest('[data-clickable], a, button')) {
       instance.hide()
     }

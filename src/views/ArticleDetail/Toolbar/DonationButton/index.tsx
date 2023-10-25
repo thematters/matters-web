@@ -1,20 +1,17 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import {
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  TEXT,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
+import { ERROR_CODES, OPEN_UNIVERSAL_AUTH_DIALOG, TEXT } from '~/common/enums'
 import { analytics, numAbbr, translate } from '~/common/utils'
 import {
   Button,
   DonationDialog,
+  ERROR_MESSAGES,
   IconDonate24,
   LanguageContext,
   TextIcon,
   toast,
-  Translate,
   ViewerContext,
 } from '~/components'
 import {
@@ -55,7 +52,9 @@ const DonationButton = ({
 
   const forbid = () => {
     toast.error({
-      message: <Translate id="FORBIDDEN_BY_STATE" />,
+      message: (
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+      ),
     })
   }
 
@@ -85,11 +84,7 @@ const DonationButton = ({
           onClick={() => {
             analytics.trackEvent('click_button', { type: 'donate' })
             if (!viewer.isAuthed) {
-              window.dispatchEvent(
-                new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-                  detail: { source: UNIVERSAL_AUTH_SOURCE.support },
-                })
-              )
+              window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
               return
             }
             if (viewer.isFrozen) {

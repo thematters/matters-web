@@ -1,25 +1,7 @@
 {
   "presets": [
     [
-      "next/babel",
-      {
-        "preset-env": {
-          "modules": false
-        },
-        "transform-runtime": {
-          "useESModules": false
-        },
-      }
-    ]
-  ],
-  "plugins": [
-    "@babel/plugin-proposal-optional-chaining",
-    [
-      "formatjs",
-      {
-        "idInterpolationPattern": "[sha512:contenthash:base64:6]",
-        "ast": true
-      }
+      "next/babel"
     ]
   ]
 }

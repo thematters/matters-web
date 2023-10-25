@@ -287,7 +287,7 @@ const USDTProcessingForm: React.FC<Props> = ({
     <>
       <Dialog.Header
         closeDialog={closeDialog}
-        closeText={<FormattedMessage defaultMessage="Close" />}
+        closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
         title="donation"
       />
 

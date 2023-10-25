@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
-import { useContext, useState } from 'react'
+// import Script from 'next/script'
+import { useContext, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { APPRECIATE_DEBOUNCE, EXTERNAL_LINKS, Z_INDEX } from '~/common/enums'
@@ -8,11 +9,16 @@ import {
   toast,
   Tooltip,
   Translate,
+  Turnstile,
+  // TURNSTILE_DEFAULT_SCRIPT_ID,
+  // TURNSTILE_SCRIPT_URL,
+  TurnstileInstance,
   useMutation,
   ViewerContext,
 } from '~/components'
 import { updateAppreciation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+// import { UserGroup } from '~/gql/graphql'
 import {
   AppreciateArticleMutation,
   AppreciationButtonArticlePrivateFragment,
@@ -40,7 +46,10 @@ const AppreciationButton = ({
   disabled,
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
+
+  const turnstileRef = useRef<TurnstileInstance>(null)
   const { token, refreshToken } = useContext(ReCaptchaContext)
+
   const { data, client } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
@@ -66,11 +75,17 @@ const AppreciationButton = ({
         variables: {
           id: article.id,
           amount,
-          token,
+          token:
+            // (viewer.info.group === UserGroup.A &&
+            // turnstileRef.current?.getResponse()) || // fallback to ReCaptchaContext token
+            `${token} ${turnstileRef.current?.getResponse()}`,
         },
-      }).then(refreshToken)
+      }) // .then(refreshToken)
     } catch (e) {
       console.error(e)
+    } finally {
+      refreshToken?.()
+      turnstileRef.current?.reset()
     }
   }, APPRECIATE_DEBOUNCE)
 
@@ -86,7 +101,10 @@ const AppreciationButton = ({
         variables: {
           id: article.id,
           amount: 1,
-          token,
+          token:
+            // (viewer.info.group === UserGroup.A &&
+            // turnstileRef.current?.getResponse()) || // fallback to ReCaptchaContext token
+            `${token} ${turnstileRef.current?.getResponse()}`,
           superLike: true,
         },
         update: (cache) => {
@@ -206,16 +224,35 @@ const AppreciationButton = ({
     return <AppreciateButton total={total} disabled />
   }
 
+  const siteKey = process.env
+    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
   // Appreciable
   if (canAppreciate && !disabled) {
     return (
-      <AppreciateButton
-        onClick={appreciate}
-        count={appreciatedCount > 0 ? appreciatedCount : undefined}
-        total={total}
-        isSuperLike={isSuperLike}
-        superLiked={superLiked}
-      />
+      <>
+        <Turnstile
+          ref={turnstileRef}
+          options={{
+            action: 'appreciate',
+            cData: `user-group-${viewer.info.group}`,
+            // refreshExpired: 'manual',
+            size: 'invisible',
+          }}
+          siteKey={siteKey}
+          // injectScript={false}
+          scriptOptions={{
+            compat: 'recaptcha',
+            appendTo: 'body',
+          }}
+        />
+        <AppreciateButton
+          onClick={appreciate}
+          count={appreciatedCount > 0 ? appreciatedCount : undefined}
+          total={total}
+          isSuperLike={isSuperLike}
+          superLiked={superLiked}
+        />
+      </>
     )
   }
 

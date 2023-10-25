@@ -4,6 +4,7 @@ export const QUERY_USER_NAME = gql`
   query QueryUserName($userName: String!) {
     user(input: { userName: $userName }) {
       id
+      userName
     }
   }
 `
@@ -13,6 +14,7 @@ export const SET_USER_NAME = gql`
     setUserName(input: { userName: $userName }) {
       id
       userName
+      displayName
     }
   }
 `

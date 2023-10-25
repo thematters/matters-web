@@ -19,6 +19,7 @@ const BaseBadgesDialog = ({ content, children }: BadgesDialogProps) => {
           title={
             <FormattedMessage
               defaultMessage="Badges"
+              id="DYrDcG"
               description="src/components/UserProfile/index.tsx"
             />
           }

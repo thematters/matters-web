@@ -113,10 +113,11 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           message: isCreate ? (
             <FormattedMessage
               defaultMessage="Circle successfully created"
+              id="KLQ1/z"
               description="src/components/Forms/CreateCircleForm/Profile.tsx"
             />
           ) : (
-            <FormattedMessage defaultMessage="Saved" />
+            <FormattedMessage defaultMessage="Saved" id="fsB/4p" />
           ),
         })
 
@@ -133,8 +134,8 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        setFieldError('description', messages[codes[0]])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        setFieldError('description', intl.formatMessage(messages[codes[0]]))
       }
     },
   })
@@ -158,7 +159,10 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
         />
 
         <p className={styles.hint}>
-          <FormattedMessage defaultMessage="Recommended size: 1600px x 900px" />
+          <FormattedMessage
+            defaultMessage="Recommended size: 1600px x 900px"
+            id="rfz/fN"
+          />
         </p>
       </section>
 
@@ -175,13 +179,14 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
 
       {!isCreate && (
         <Form.Input
-          label={<FormattedMessage defaultMessage="Circle Name" />}
+          label={<FormattedMessage defaultMessage="Circle Name" id="q9oMKE" />}
           hasLabel
           type="text"
           name="displayName"
           required
           placeholder={intl.formatMessage({
             defaultMessage: 'Enter the name of your Circle',
+            id: 'wXzTZ0',
           })}
           value={values.displayName}
           hint={`${values.displayName.length}/${MAX_CIRCLE_DISPLAY_NAME_LENGTH}`}
@@ -200,6 +205,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
         label={
           <FormattedMessage
             defaultMessage="Circle Description"
+            id="m/Wg7b"
             description="src/components/Forms/CreateCircleForm/Profile.tsx"
           />
         }
@@ -208,6 +214,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Describe more about your Circle',
+          id: 'QUqfbW',
           description: 'src/components/Forms/CreateCircleForm/Profile.tsx',
         })}
         value={values.description}
@@ -226,7 +233,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       type="submit"
       form={formId}
       disabled={isSubmitting || coverLoading || avatarLoading}
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting || coverLoading || avatarLoading}
     />
   )
@@ -243,7 +250,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
                 type="submit"
                 form={formId}
                 disabled={isSubmitting || coverLoading}
-                text={<FormattedMessage defaultMessage="Confirm" />}
+                text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
                 loading={isSubmitting || coverLoading}
               />
             </>
@@ -269,7 +276,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

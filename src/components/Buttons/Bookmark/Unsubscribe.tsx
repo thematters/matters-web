@@ -1,9 +1,10 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { TEST_ID } from '~/common/enums'
+import { ERROR_CODES, TEST_ID } from '~/common/enums'
 import {
   Button,
+  ERROR_MESSAGES,
   IconBookmarked16,
   IconBookmarked20,
   IconSize,
@@ -42,7 +43,11 @@ const Unsubscribe = ({
   const onClick = async () => {
     if (viewer.isFrozen) {
       toast.error({
-        message: <Translate id="FORBIDDEN_BY_STATE" />,
+        message: (
+          <FormattedMessage
+            {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+          />
+        ),
       })
       return
     }
@@ -66,6 +71,7 @@ const Unsubscribe = ({
         text={
           <FormattedMessage
             defaultMessage="Undo bookmark"
+            id="ioPWl8"
             description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
           />
         }
@@ -83,6 +89,7 @@ const Unsubscribe = ({
       aria-label={
         <FormattedMessage
           defaultMessage="Undo bookmark"
+          id="ioPWl8"
           description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
         />
       }

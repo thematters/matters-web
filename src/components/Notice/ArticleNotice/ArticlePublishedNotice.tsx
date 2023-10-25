@@ -22,6 +22,7 @@ const ArticlePublishedNotice = ({
       <section className={styles.noticeActorsNameAndTitleInfo}>
         <FormattedMessage
           defaultMessage="Your work {articleTitle} has been published to decentralized network"
+          id="tEeEJT"
           description="src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
           values={{
             articleTitle: <NoticeArticleTitle article={notice.article} />,

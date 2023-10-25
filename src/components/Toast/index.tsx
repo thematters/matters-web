@@ -2,6 +2,7 @@ import { keyframes } from 'goober'
 import React from 'react'
 import type { Toast as ToastType } from 'react-hot-toast'
 import baseToast, { Toaster as BaseToaster } from 'react-hot-toast'
+import { useIntl } from 'react-intl'
 
 import {
   Button,
@@ -17,25 +18,32 @@ type ToastActionsProps = {
   type: 'success' | 'error'
   actions: Array<{ content: string | React.ReactNode } & ButtonProps>
   onDismiss?: () => void
+  hasClose?: boolean
 }
 
 type ToastProps = {
   message: string | React.ReactNode
+  hasClose?: boolean
 } & Partial<Pick<ToastActionsProps, 'actions'>>
 
 const ToastActions: React.FC<ToastActionsProps> = ({
   type,
   actions,
   onDismiss,
+  hasClose = true,
 }) => {
+  const intl = useIntl()
+
   return (
     <section className={styles.actions}>
       {actions.map(({ content, onClick, ...props }, index) => (
         <Button
-          textColor={type === 'error' ? 'white' : 'greyDarker'}
+          textColor={type === 'error' ? 'white' : 'whiteLight'}
           onClick={() => {
             onClick && onClick()
-            onDismiss && onDismiss()
+            if (hasClose) {
+              onDismiss && onDismiss()
+            }
           }}
           {...props}
           key={index}
@@ -44,12 +52,21 @@ const ToastActions: React.FC<ToastActionsProps> = ({
         </Button>
       ))}
 
-      <button type="button" onClick={onDismiss}>
-        <IconClose22
-          color={type === 'error' ? 'white' : 'greyDarker'}
-          size="mdM"
-        />
-      </button>
+      {hasClose && (
+        <button
+          type="button"
+          onClick={onDismiss}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Close',
+            id: 'rbrahO',
+          })}
+        >
+          <IconClose22
+            color={type === 'error' ? 'white' : 'whiteLight'}
+            size="mdM"
+          />
+        </button>
+      )}
     </section>
   )
 }
@@ -79,7 +96,7 @@ const getAnimationStyle = (visible: boolean): React.CSSProperties => {
 
 const Toast: React.FC<
   ToastProps & { type: 'success' | 'error'; toast: ToastType }
-> = React.memo(({ message, actions, type, toast }) => {
+> = React.memo(({ message, actions, type, toast, hasClose = true }) => {
   const animationStyle: React.CSSProperties = toast.height
     ? getAnimationStyle(toast.visible)
     : { opacity: 0 }
@@ -90,6 +107,9 @@ const Toast: React.FC<
     <section
       className={[styles.toast, styles[type]].join(' ')}
       style={{ ...animationStyle }}
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
     >
       {isSuccess && message}
       {isError && (
@@ -103,6 +123,7 @@ const Toast: React.FC<
           type={type}
           actions={actions}
           onDismiss={() => baseToast.dismiss(toast.id)}
+          hasClose={hasClose}
         />
       )}
     </section>

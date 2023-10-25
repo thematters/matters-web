@@ -62,7 +62,7 @@ code,
 kbd,
 samp,
 pre {
-  font-family: monospace;
+  /* font-family: monospace; */
   font-size: 1em;
 }
 

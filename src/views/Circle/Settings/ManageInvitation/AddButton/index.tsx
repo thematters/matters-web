@@ -26,6 +26,7 @@ const CircleInvitationAddButton = () => {
           <TextIcon color="white" size="mdS" weight="md">
             <FormattedMessage
               defaultMessage="Add Invitation"
+              id="b8ogKp"
               description="src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
             />
           </TextIcon>

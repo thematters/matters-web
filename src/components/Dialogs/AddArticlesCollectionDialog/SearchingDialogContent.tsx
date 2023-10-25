@@ -46,6 +46,7 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
       <section className={styles.emptyResult}>
         <FormattedMessage
           defaultMessage="No results"
+          id="7jjWxF"
           description="src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
         />
       </section>

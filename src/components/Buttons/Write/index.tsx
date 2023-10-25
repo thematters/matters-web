@@ -1,24 +1,20 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import {
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
+import { ERROR_CODES, OPEN_UNIVERSAL_AUTH_DIALOG, PATHS } from '~/common/enums'
 import { analytics, translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
+  ERROR_MESSAGES,
   IconNavCreate32,
   LanguageContext,
   toast,
   Tooltip,
-  Translate,
   useRoute,
 } from '~/components'
 
 interface Props {
-  allowed: boolean
   authed?: boolean
   forbidden?: boolean
 }
@@ -60,17 +56,17 @@ export const WriteButton = ({ authed, forbidden }: Props) => {
       }
       onClick={async () => {
         if (!authed) {
-          window.dispatchEvent(
-            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-              detail: { source: UNIVERSAL_AUTH_SOURCE.create },
-            })
-          )
+          window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
           return
         }
 
         if (forbidden) {
           toast.error({
-            message: <Translate id="FORBIDDEN_BY_STATE" />,
+            message: (
+              <FormattedMessage
+                {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+              />
+            ),
           })
 
           return

@@ -34,6 +34,7 @@ const Settings = () => {
           groupName={
             <FormattedMessage
               defaultMessage="Wallet"
+              id="HPVOw/"
               description="src/views/Me/Settings/Settings/index.tsx"
             />
           }
@@ -46,6 +47,7 @@ const Settings = () => {
           groupName={
             <FormattedMessage
               defaultMessage="Social Login"
+              id="ohbnFU"
               description="src/views/Me/Settings/Settings/index.tsx"
             />
           }

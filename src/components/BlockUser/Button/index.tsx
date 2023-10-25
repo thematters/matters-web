@@ -35,6 +35,7 @@ const BlockUserButton = ({
       message: (
         <FormattedMessage
           defaultMessage="User unblocked. User can now comment on your articles."
+          id="mSAY3/"
           description="src/components/BlockUser/Button/index.tsx"
         />
       ),
@@ -47,6 +48,7 @@ const BlockUserButton = ({
         text={
           <FormattedMessage
             defaultMessage="Unblock"
+            id="bBYO6x"
             description="src/components/BlockUser/Button/index.tsx"
           />
         }
@@ -62,7 +64,7 @@ const BlockUserButton = ({
       ariaHasPopup="dialog"
       textColor="greyDarker"
       textActiveColor="black"
-      text={<FormattedMessage defaultMessage="Block User" />}
+      text={<FormattedMessage defaultMessage="Block User" id="vAc1Bw" />}
       icon={<IconMute20 size="mdS" />}
     />
   )

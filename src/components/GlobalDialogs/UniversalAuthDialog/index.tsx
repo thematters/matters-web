@@ -1,20 +1,24 @@
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import router from 'next/router'
+import { useEffect, useState } from 'react'
 import { useConnect } from 'wagmi'
 
 import {
+  BREAKPOINTS,
   CLOSE_ACTIVE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
+  PATHS,
   TEST_ID,
 } from '~/common/enums'
-import { WalletType } from '~/common/utils'
+import { appendTarget, WalletType } from '~/common/utils'
 import {
   AuthFeedType,
-  Dialog,
+  DialogBeta,
   ReCaptchaProvider,
   Spinner,
   useDialogSwitch,
   useEventListener,
+  useMediaQuery,
   useStep,
   VerificationLinkSent,
 } from '~/components'
@@ -54,12 +58,22 @@ type Step =
 const BaseUniversalAuthDialog = () => {
   const { currStep, forward } = useStep<Step>('select-login-method')
   const [email, setEmail] = useState('')
+  const [hasUnavailable, setHasUnavailable] = useState(false)
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
+
+  const [firstRender, setFirstRender] = useState(true)
 
   const { connectors } = useConnect()
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
-  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(
-    injectedConnector?.ready ? 'wallet' : 'normal'
-  )
+  const [authFeedType, setAuthFeedType] = useState<AuthFeedType>('normal')
+
+  useEffect(() => {
+    if (injectedConnector?.ready && firstRender) {
+      setAuthFeedType('wallet')
+    }
+
+    setFirstRender(false)
+  }, [])
 
   const [walletType, setWalletType] = useState<WalletType>('MetaMask')
 
@@ -77,14 +91,25 @@ const BaseUniversalAuthDialog = () => {
   useEventListener(
     OPEN_UNIVERSAL_AUTH_DIALOG,
     (payload: { [key: string]: any }) => {
-      openDialog()
+      if (isSmUp) {
+        openDialog()
+        return
+      }
+      const { href } = appendTarget(PATHS.LOGIN, true)
+      router.push(href)
     }
   )
 
   return (
-    <Dialog isOpen={show} onDismiss={closeDialog} testId={TEST_ID.DIALOG_AUTH}>
+    <DialogBeta
+      isOpen={show}
+      onDismiss={closeDialog}
+      testId={TEST_ID.DIALOG_AUTH}
+      scrollable={true}
+    >
       {currStep === 'select-login-method' && (
         <DynamicSelectAuthMethodForm
+          purpose="dialog"
           gotoWalletConnect={(type: WalletType) => {
             setWalletType(type)
             forward('wallet-connect')
@@ -92,7 +117,10 @@ const BaseUniversalAuthDialog = () => {
           gotoEmailLogin={() => forward('email-login')}
           gotoEmailSignup={() => forward('email-sign-up-init')}
           closeDialog={closeDialog}
-          type={authTypeFeed}
+          authFeedType={authFeedType}
+          setAuthFeedType={setAuthFeedType}
+          checkWallet={false}
+          hasUnavailable={hasUnavailable}
         />
       )}
 
@@ -100,13 +128,17 @@ const BaseUniversalAuthDialog = () => {
       {currStep === 'wallet-connect' && (
         <ReCaptchaProvider>
           <DynamicWalletAuthFormConnect
+            type="login"
             purpose="dialog"
             walletType={walletType}
             closeDialog={closeDialog}
             back={() => forward('select-login-method')}
             gotoSignInTab={() => {
-              setAuthTypeFeed('normal')
+              setAuthFeedType('normal')
               forward('select-login-method')
+            }}
+            setUnavailable={() => {
+              setHasUnavailable(true)
             }}
           />
         </ReCaptchaProvider>
@@ -118,12 +150,19 @@ const BaseUniversalAuthDialog = () => {
           purpose="dialog"
           closeDialog={closeDialog}
           gotoEmailSignup={() => forward('email-sign-up-init')}
+          gotoWalletConnect={(type: WalletType) => {
+            setWalletType(type)
+            forward('wallet-connect')
+          }}
+          authFeedType={authFeedType}
+          setAuthFeedType={setAuthFeedType}
           back={() => forward('select-login-method')}
         />
       )}
       {currStep === 'email-sign-up-init' && (
         <ReCaptchaProvider>
           <DynamicEmailSignUpFormInit
+            purpose="dialog"
             submitCallback={(email: string) => {
               setEmail(email)
               forward('email-verification-sent')
@@ -132,7 +171,8 @@ const BaseUniversalAuthDialog = () => {
               setWalletType(type)
               forward('wallet-connect')
             }}
-            gotoEmailLogin={() => forward('email-login')}
+            authFeedType={authFeedType}
+            setAuthFeedType={setAuthFeedType}
             closeDialog={closeDialog}
             back={() => forward('select-login-method')}
           />
@@ -146,25 +186,31 @@ const BaseUniversalAuthDialog = () => {
           email={email}
         />
       )}
-    </Dialog>
+    </DialogBeta>
   )
 }
 
 const UniversalAuthDialog = () => {
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
   const Children = ({ openDialog }: { openDialog: () => void }) => {
     useEventListener(
       OPEN_UNIVERSAL_AUTH_DIALOG,
       (payload: { [key: string]: any }) => {
-        openDialog()
+        if (isSmUp) {
+          openDialog()
+          return
+        }
+        const { href } = appendTarget(PATHS.LOGIN, true)
+        router.push(href)
       }
     )
     return null
   }
 
   return (
-    <Dialog.Lazy mounted={<BaseUniversalAuthDialog />}>
+    <DialogBeta.Lazy mounted={<BaseUniversalAuthDialog />}>
       {({ openDialog }) => <Children openDialog={openDialog} />}
-    </Dialog.Lazy>
+    </DialogBeta.Lazy>
   )
 }
 

@@ -40,6 +40,7 @@ const CircleNewBroadcastNotice = ({
       action={
         <FormattedMessage
           defaultMessage="broadcast in {circlename}"
+          id="jy3tx0"
           values={{
             circlename: commentCircle && (
               <NoticeCircleName

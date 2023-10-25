@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconIllustation } from '@/public/static/images/callback/Illustation.svg'
-import { ReactComponent as IconLogo } from '@/public/static/images/callback/logo.svg'
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
+  ERROR_CODES,
   OAUTH_STORAGE_BIND_STATE,
   OAUTH_STORAGE_BIND_STATE_FAILURE,
   OAUTH_STORAGE_BIND_STATE_SUCCESS,
+  OAUTH_STORAGE_BIND_STATE_UNAVAILABLE,
   OAUTH_STORAGE_CODE_VERIFIER,
   OAUTH_STORAGE_NONCE,
   OAUTH_STORAGE_PATH,
@@ -18,7 +18,13 @@ import {
   PATHS,
 } from '~/common/enums'
 import { analytics, setCookies, storage } from '~/common/utils'
-import { getErrorCodes, useMutation, useRoute, withIcon } from '~/components'
+import {
+  getErrorCodes,
+  LanguageContext,
+  toast,
+  useMutation,
+  useRoute,
+} from '~/components'
 import {
   AddSocialLoginMutation,
   SocialAccountType,
@@ -26,7 +32,7 @@ import {
 } from '~/gql/graphql'
 
 import { ADD_SOCIAL_LOGIN, SOCIAL_LOGIN } from './gql'
-import styles from './styles.module.css'
+import UI from './UI'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -45,18 +51,26 @@ const SocialCallback = ({ type }: Props) => {
       showToast: false,
     }
   )
+  const { lang } = useContext(LanguageContext)
+
   const [hasError, setHasError] = useState(false)
-  const { getQuery } = useRoute()
+  const { getQuery, router } = useRoute()
   const state = getQuery('state')
   const oauthType = state.slice(0, 2)
   const isLoginType = oauthType === OAUTH_TYPE.login
   const isBindType = oauthType === OAUTH_TYPE.bind
   const code = getQuery('code')
+  const error = getQuery('error')
   useEffect(() => {
     const localState = storage.get(OAUTH_STORAGE_STATE)
     const localNonce = storage.get(OAUTH_STORAGE_NONCE)
     const localCodeVerifier = storage.get(OAUTH_STORAGE_CODE_VERIFIER)
     const localPath = storage.get(OAUTH_STORAGE_PATH)
+    if (!!error) {
+      window.location.href = localPath
+      return
+    }
+
     if (localState !== state) {
       setHasError(true)
     }
@@ -71,6 +85,7 @@ const SocialCallback = ({ type }: Props) => {
                 nonce: localNonce,
                 codeVerifier: localCodeVerifier,
                 authorizationCode: code,
+                language: lang,
               },
             },
           })
@@ -88,6 +103,27 @@ const SocialCallback = ({ type }: Props) => {
 
           window.location.href = localPath
         } catch (error) {
+          let hasFobiddenError = false
+          const codes = getErrorCodes(error as any)
+          codes.forEach((code) => {
+            if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+              hasFobiddenError = true
+              router.push(PATHS.HOME)
+              toast.error({
+                message: (
+                  <FormattedMessage
+                    defaultMessage="Unavailable"
+                    id="rADhX5"
+                    description="FORBIDDEN_BY_STATE"
+                  />
+                ),
+              })
+              return
+            }
+          })
+          if (hasFobiddenError) {
+            return
+          }
           setHasError(true)
         }
       })()
@@ -115,10 +151,16 @@ const SocialCallback = ({ type }: Props) => {
           const codes = getErrorCodes(error as any)
           let hasBindFailure = false
           codes.forEach((code) => {
-            if (code.includes('ACTION_FAILED')) {
+            if (code.includes(ERROR_CODES.ACTION_FAILED)) {
               storage.set(OAUTH_STORAGE_BIND_STATE, {
                 type,
                 state: OAUTH_STORAGE_BIND_STATE_FAILURE,
+              })
+              hasBindFailure = true
+            } else if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+              storage.set(OAUTH_STORAGE_BIND_STATE, {
+                type,
+                state: OAUTH_STORAGE_BIND_STATE_UNAVAILABLE,
               })
               hasBindFailure = true
             }
@@ -133,38 +175,7 @@ const SocialCallback = ({ type }: Props) => {
     }
   }, [])
 
-  return (
-    <section className={styles.callback}>
-      {hasError && (
-        <section className={styles.error}>
-          {withIcon(IconIllustation)({})}
-          <section className={styles.hint}>
-            <section className={styles.title}>
-              <FormattedMessage
-                defaultMessage="Oops！This link has expired"
-                description="src/views/Callback/GoogleCallback.tsx"
-              />
-            </section>
-            <section className={styles.content}>
-              <FormattedMessage
-                defaultMessage="Please go to the relevant page to resend the link. You can also "
-                description="src/views/Callback/GoogleCallback.tsx"
-              />
-              <a className={styles.link} href={PATHS.HOME}>
-                <FormattedMessage
-                  defaultMessage="go to the homepage"
-                  description="src/views/Callback/GoogleCallback.tsx"
-                />
-              </a>
-            </section>
-          </section>
-        </section>
-      )}
-      {!hasError && (
-        <section className={styles.logo}>{withIcon(IconLogo)({})}</section>
-      )}
-    </section>
-  )
+  return <UI hasError={hasError} />
 }
 
 export default SocialCallback

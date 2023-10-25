@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Layout, Translate } from '~/components'
+import { PATHS } from '~/common/enums'
+import { Dialog, DialogBeta, Layout, Translate, useRoute } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -16,45 +17,73 @@ export const VerificationLinkSent = ({
   email?: string
 }) => {
   const isRegister = type === 'register'
+  const { router } = useRoute()
   const isInPage = purpose === 'page'
 
   if (isRegister) {
     return (
       <>
-        {isInPage && <Layout.Header left={<Layout.Header.Title id={type} />} />}
+        <DialogBeta.Header
+          title={
+            <FormattedMessage
+              defaultMessage="Check your inbox"
+              id="5JN+nl"
+              description="src/components/Forms/Verification/LinkSent.tsx"
+            />
+          }
+          closeDialog={closeDialog}
+          closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+        />
+
+        <DialogBeta.Content>
+          <DialogBeta.Content.Message>
+            <p>
+              <FormattedMessage
+                defaultMessage="The login link has been sent to {email}"
+                id="zAK5G+"
+                description="src/components/Forms/Verification/LinkSent.tsx"
+                values={{
+                  email: <span className={styles.email}>{email}</span>,
+                }}
+              />
+            </p>
+          </DialogBeta.Content.Message>
+        </DialogBeta.Content>
 
         {closeDialog && (
-          <Dialog.Header
-            title={
-              <FormattedMessage
-                defaultMessage="Check your inbox"
-                description="src/components/Forms/Verification/LinkSent.tsx"
+          <DialogBeta.Footer
+            smUpBtns={
+              <DialogBeta.TextButton
+                text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+                color="greyDarker"
+                onClick={closeDialog}
               />
             }
-            closeDialog={closeDialog}
-            closeText={<FormattedMessage defaultMessage="Close" />}
           />
         )}
 
-        <Dialog.Message>
-          <p>
-            <FormattedMessage
-              defaultMessage="The login link has been sent to {email}"
-              description="src/components/Forms/Verification/LinkSent.tsx"
-              values={{
-                email: <span className={styles.email}>{email}</span>,
-              }}
-            />
-          </p>
-        </Dialog.Message>
-
-        {closeDialog && (
-          <Dialog.Footer
+        {isInPage && (
+          <DialogBeta.Footer
+            btns={
+              <DialogBeta.RoundedButton
+                text={
+                  <FormattedMessage
+                    defaultMessage="Enter Matters"
+                    id="A6r2p1"
+                  />
+                }
+                onClick={() => router.push(PATHS.HOME)}
+              />
+            }
             smUpBtns={
-              <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Close" />}
-                color="greyDarker"
-                onClick={closeDialog}
+              <DialogBeta.TextButton
+                text={
+                  <FormattedMessage
+                    defaultMessage="Enter Matters"
+                    id="A6r2p1"
+                  />
+                }
+                onClick={() => router.push(PATHS.HOME)}
               />
             }
           />
@@ -71,7 +100,9 @@ export const VerificationLinkSent = ({
         <Dialog.Header
           title="register"
           closeDialog={closeDialog}
-          closeText={<FormattedMessage defaultMessage="Understood" />}
+          closeText={
+            <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
+          }
         />
       )}
 
@@ -95,7 +126,9 @@ export const VerificationLinkSent = ({
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Understood" />}
+              text={
+                <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
+              }
               color="green"
               onClick={closeDialog}
             />

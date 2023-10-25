@@ -21,19 +21,8 @@ export const CLOSE_ACTIVE_DIALOG = 'closeActiveDialog'
 export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
 export const OPEN_SET_USER_NAME_DIALOG = 'openSetUserNameDialog'
 
-export enum UNIVERSAL_AUTH_SOURCE {
-  enter = 'enter',
-  appreciation = 'appreciation',
-  bookmark = 'bookmark',
-  circle = 'circle',
-  collectArticle = 'collectArticle',
-  comment = 'comment',
-  create = 'create',
-  followUser = 'followUser',
-  followTag = 'followTag',
-  followCircle = 'followCircle',
-  support = 'support',
-}
+// Toast
+export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'
 
 // Support
 export const SUPPORT_SUCCESS_ANIMATION = 'supportSuccessAnimation'

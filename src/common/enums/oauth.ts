@@ -308,7 +308,28 @@ export const OAUTH_STORAGE_CODE_VERIFIER = 'oauth-storage-code-verifier'
 export const OAUTH_STORAGE_BIND_RESULT = 'oauth-storage-result'
 export const OAUTH_STORAGE_BIND_STATE = 'oauth-storage-bind-state'
 export const OAUTH_STORAGE_BIND_STATE_SUCCESS = 'oauth-storage-state-success'
-export const OAUTH_STORAGE_BIND_STATE_FAILURE = 'oauth-srorage-state-failure'
+export const OAUTH_STORAGE_BIND_STATE_FAILURE = 'oauth-storage-state-failure'
+export const OAUTH_STORAGE_BIND_STATE_UNAVAILABLE =
+  'oauth-storage-state-unavailable'
+export const OAUTH_STORAGE_SEND_EMAIL_CODE_COUNTDOWN =
+  'oauth-storage-send-email-code-countdown'
+
+export const CALLBACK_VERIFIER = {
+  EmailVerification: 'email-verification',
+  EmailSignup: 'email-signup',
+  EmailSignin: 'email-signin',
+}
+
+export const OAUTH_CALLBACK_PROVIDERS = {
+  Google: 'google',
+  Facebook: 'facebook',
+  Twitter: 'twitter',
+}
+
+export const CALLBACK_PROVIDERS = {
+  ...OAUTH_CALLBACK_PROVIDERS,
+  ...CALLBACK_VERIFIER,
+}
 
 export const OAUTH_TYPE = {
   login: 'lg',

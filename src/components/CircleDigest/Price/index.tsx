@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl'
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Button, TextIcon, Translate, ViewerContext } from '~/components'
@@ -85,11 +84,7 @@ const Price = ({ circle, onClick }: PriceProps) => {
       bgColor="gold"
       onClick={() => {
         if (!viewer.isAuthed) {
-          window.dispatchEvent(
-            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-              detail: { source: UNIVERSAL_AUTH_SOURCE.circle },
-            })
-          )
+          window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
 
           return
         }
@@ -103,7 +98,7 @@ const Price = ({ circle, onClick }: PriceProps) => {
     >
       <TextIcon weight="md" size="sm" color="white">
         {price.amount} {price.currency} /
-        <FormattedMessage defaultMessage="month" />
+        <FormattedMessage defaultMessage="month" id="Cu3Cty" />
       </TextIcon>
     </Button>
   )

@@ -1,12 +1,20 @@
 // User
+export * from './EditProfileDialog'
 export * from './ENSDialog'
 export * from './LikeCoinDialog'
-export * from './RemoveSocialLoginDialog'
 export * from './RssFeedDialog'
+
+// Settings
+export * from './AddWalletLoginDialog'
+export * from './RemoveSocialLoginDialog'
+export * from './RemoveWalletLoginDialog'
+export * from './SetEmailDialog'
+export * from './SetPasswordDialog'
 export * from './SetUserNameDialog'
 
 // Article
 export * from './AppreciatorsDialog'
+export * from './BindEmailHintDialog'
 export * from './CommentFormDialog'
 export * from './FingerprintDialog'
 export * from './MigrationDialog'

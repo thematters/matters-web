@@ -50,6 +50,10 @@
   }
 
   & .displayName {
+    & .meDisplayName {
+      cursor: pointer;
+    }
+
     & .isInUserPageName {
       font-size: var(--font-size-xl);
       line-height: 1.5;
@@ -111,7 +115,7 @@
 
   margin-top: var(--spacing-x-loose);
 
-  & > *:first-child {
+  & > button:first-child {
     margin-right: var(--spacing-base);
   }
 }

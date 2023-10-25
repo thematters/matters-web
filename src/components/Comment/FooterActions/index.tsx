@@ -1,13 +1,14 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { TextId } from '~/common/enums'
+import { ERROR_CODES } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   CommentFormType,
+  ERROR_MESSAGES,
   LanguageContext,
   toast,
-  Translate,
   ViewerContext,
 } from '~/components'
 import {
@@ -108,19 +109,27 @@ const BaseFooterActions = ({
   const isActive = state === 'active'
   const isCollapsed = state === 'collapsed'
   const isDisabled = disabled || (!isActive && !isCollapsed)
-  const addToast = (id: TextId) => {
+  const forbid = () =>
     toast.error({
-      message: <Translate id={id} />,
+      message: (
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+      ),
     })
-  }
-  const forbid = () => addToast('FORBIDDEN_BY_STATE')
 
   let onClick
 
   if (viewer.isArchived || viewer.isFrozen) {
     onClick = forbid
   } else if (targetAuthor?.isBlocking) {
-    onClick = () => addToast('failureCommentBlocked')
+    onClick = () =>
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="The author has disabled comments for this article"
+            id="7cwoRo"
+          />
+        ),
+      })
   }
 
   const buttonProps = {

@@ -1,20 +1,21 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   CLOSE_ACTIVE_DIALOG,
+  ERROR_CODES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
   REFETCH_RESPONSES,
-  UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
-import { appendTarget, numAbbr, translate } from '~/common/utils'
+import { numAbbr, translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
   Card,
   CardProps,
   CommentFormDialog,
+  ERROR_MESSAGES,
   IconComment16,
   LanguageContext,
   Media,
@@ -125,7 +126,11 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
         article={article}
         onClick={() => {
           toast.error({
-            message: <Translate id="FORBIDDEN" />,
+            message: (
+              <FormattedMessage
+                {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+              />
+            ),
           })
         }}
       />
@@ -138,7 +143,12 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
         article={article}
         onClick={() => {
           toast.error({
-            message: <Translate id="failureCommentBlocked" />,
+            message: (
+              <FormattedMessage
+                defaultMessage="The author has disabled comments for this article"
+                id="7cwoRo"
+              />
+            ),
           })
         }}
       />
@@ -146,28 +156,14 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
   }
 
   if (!viewer.isAuthed) {
-    const smUpProps = {
+    const props = {
       onClick: () => {
         window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-        window.dispatchEvent(
-          new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-            detail: { source: UNIVERSAL_AUTH_SOURCE.comment },
-          })
-        )
+        window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
       },
     }
-    const smProps = appendTarget(PATHS.LOGIN, true)
 
-    return (
-      <>
-        <Media at="sm">
-          <Content article={article} {...smProps} />
-        </Media>
-        <Media greaterThan="sm">
-          <Content aria-haspopup="dialog" article={article} {...smUpProps} />
-        </Media>
-      </>
-    )
+    return <Content aria-haspopup="dialog" article={article} {...props} />
   }
 
   return (

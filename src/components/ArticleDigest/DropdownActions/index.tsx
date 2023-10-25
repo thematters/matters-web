@@ -1,7 +1,9 @@
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
+import { ERROR_CODES } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   AddCollectionsArticleDialog,
@@ -9,6 +11,7 @@ import {
   BookmarkButton,
   Button,
   Dropdown,
+  ERROR_MESSAGES,
   FingerprintDialog,
   IconMore16,
   IconSize,
@@ -18,7 +21,6 @@ import {
   ShareDialog,
   SupportersDialog,
   toast,
-  Translate,
   ViewerContext,
 } from '~/components'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
@@ -296,7 +298,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   const forbid = () => {
     toast.error({
-      message: <Translate id="FORBIDDEN_BY_STATE" />,
+      message: (
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+      ),
     })
   }
 

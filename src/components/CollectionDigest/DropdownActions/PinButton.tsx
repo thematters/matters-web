@@ -59,15 +59,20 @@ const PinButton = ({
       onCompleted: () => {
         toast.success({
           message: collection.pinned ? (
-            <FormattedMessage defaultMessage="Unpinned from profile" />
+            <FormattedMessage
+              defaultMessage="Unpinned from profile"
+              id="Ihwz5K"
+            />
           ) : (
-            <FormattedMessage defaultMessage="Pinned to profile" />
+            <FormattedMessage defaultMessage="Pinned to profile" id="XuYhBC" />
           ),
           actions: collection.pinned
             ? undefined
             : [
                 {
-                  content: <FormattedMessage defaultMessage="View" />,
+                  content: (
+                    <FormattedMessage defaultMessage="View" id="FgydNe" />
+                  ),
                   href: toPath({
                     page: 'userProfile',
                     userName: collection.author.userName!,
@@ -81,7 +86,10 @@ const PinButton = ({
       toastType: 'success',
       customErrors: {
         [ERROR_CODES.ACTION_LIMIT_EXCEEDED]: (
-          <FormattedMessage defaultMessage="Up to 3 articles/collections can be pinned" />
+          <FormattedMessage
+            defaultMessage="Up to 3 articles/collections can be pinned"
+            id="2oxLHg"
+          />
         ),
       },
     }
@@ -93,11 +101,13 @@ const PinButton = ({
         collection.pinned ? (
           <FormattedMessage
             defaultMessage="Unpin from profile"
+            id="DyuHBH"
             description="src/components/CollectionDigest/DropdownActions/PinButton.tsx"
           />
         ) : (
           <FormattedMessage
             defaultMessage="Pin to profile"
+            id="xOUZu2"
             description="src/components/CollectionDigest/DropdownActions/PinButton.tsx"
           />
         )

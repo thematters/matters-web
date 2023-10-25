@@ -85,6 +85,7 @@ export const Book: React.FC<BookProps> & {
           <p className={styles.count}>
             <FormattedMessage
               defaultMessage="{count} articles"
+              id="b6zdPs"
               description="src/components/Book/index.tsx"
               values={{ count: articleCount }}
             />

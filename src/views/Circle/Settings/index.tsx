@@ -13,6 +13,7 @@ const BaseSettings = () => {
         title={
           <FormattedMessage
             defaultMessage="Profile"
+            id="ZAs170"
             description="src/views/Circle/Settings/index.tsx"
           />
         }
@@ -24,6 +25,7 @@ const BaseSettings = () => {
         title={
           <FormattedMessage
             defaultMessage="Manage Invitation"
+            id="EQeKnO"
             description="src/views/Circle/Settings/index.tsx"
           />
         }

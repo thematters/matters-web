@@ -71,6 +71,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
     if (!value) {
       return intl.formatMessage({
         defaultMessage: 'Required',
+        id: 'Seanpx',
       })
     }
   }
@@ -149,6 +150,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Collection name',
+          id: 'A6ozr9',
         })}
         value={values.title}
         hint={`${values.title.length}/${MAX_COLLECTION_TITLE_LENGTH}`}
@@ -165,6 +167,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
         name="description"
         placeholder={intl.formatMessage({
           defaultMessage: 'Description',
+          id: 'Q8Qw5B',
         })}
         maxLength={MAX_COLLECTION_DESCRIPTION_LENGTH}
         value={values.description}
@@ -182,7 +185,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting || coverLoading}
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting || coverLoading}
     />
   )
@@ -190,7 +193,9 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<FormattedMessage defaultMessage="Edit collection" />}
+        title={
+          <FormattedMessage defaultMessage="Edit collection" id="WQT8ZA" />
+        }
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />
@@ -201,7 +206,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

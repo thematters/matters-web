@@ -108,6 +108,17 @@ export enum TEST_ID {
   // Editor
   EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON = 'editor/search-select-form/dialog/add-button',
 
+  // Icons
+  ICON_SPINNER = 'icon/spinner',
+
+  // Avatar
+  AVATAR = 'avatar',
+  AVATAR_CIVIC_LIKER = 'avatar/civic-liker',
+  AVATAR_ARCHITECT = 'avatar/architect',
+  AVATAR_CIVIC_ARCHITECT = 'avatar/civic-architect',
+  AVATAR_LOGBOOK = 'avatar/logbook',
+
   // misc
+  RESPONSIVE_IMG = 'responsive-img',
   SPINNER = 'spinner',
 }

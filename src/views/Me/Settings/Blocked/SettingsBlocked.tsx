@@ -1,15 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
-import {
-  EmptyWarning,
-  InfiniteScroll,
-  List,
-  QueryError,
-  Spinner,
-  Translate,
-} from '~/components'
+import { Empty, InfiniteScroll, List, QueryError, Spinner } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerBlockListQuery } from '~/gql/graphql'
 
@@ -62,12 +56,13 @@ const SettingsBlocked = () => {
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
-      <EmptyWarning
+      <Empty
+        spacingY="xxloose"
         description={
-          <Translate
-            zh_hant="還沒有封鎖用戶"
-            zh_hans="还没有封锁用户"
-            en="No blocked users yet"
+          <FormattedMessage
+            defaultMessage="No blocked users yet"
+            id="dAvP6d"
+            description="src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
           />
         }
       />

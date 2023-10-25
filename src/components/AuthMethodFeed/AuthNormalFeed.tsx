@@ -61,7 +61,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
             <IconMail22 size="mdM" />
           </span>
           <span className={styles.name}>
-            <FormattedMessage defaultMessage="Email" />
+            <FormattedMessage defaultMessage="Email" id="sy+pv5" />
           </span>
         </li>
         <li className={styles.item} role="button" onClick={gotoGoogle}>
@@ -103,6 +103,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
           <span className={styles.left}>
             <FormattedMessage
               defaultMessage="No account?"
+              id="L34EMG"
               description="src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
             />
           </span>
@@ -114,6 +115,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
           >
             <FormattedMessage
               defaultMessage="Sign up with email"
+              id="jBx/nm"
               description="src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
             />
           </span>
@@ -121,11 +123,13 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
         <section className={styles.policy}>
           <FormattedMessage
             defaultMessage="Continued use indicates your agreement to"
+            id="3phEFL"
             description="src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
           />
           <a href={PATHS.TOS} target="_blank">
             <FormattedMessage
               defaultMessage="the User Agreement and Privacy Policy."
+              id="zOZ77e"
               description="src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
             />
           </a>

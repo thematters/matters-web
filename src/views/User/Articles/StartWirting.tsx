@@ -22,6 +22,7 @@ const StartWriting = () => {
       >
         <FormattedMessage
           defaultMessage="Start writing"
+          id="4sl6yu"
           description="src/views/User/Articles/UserArticles.tsx"
         />
       </Button>

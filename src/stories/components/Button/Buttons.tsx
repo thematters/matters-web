@@ -35,7 +35,7 @@ const Buttons = () => (
       </li>
 
       <li>
-        <WriteButton allowed />
+        <WriteButton />
       </li>
 
       <li>

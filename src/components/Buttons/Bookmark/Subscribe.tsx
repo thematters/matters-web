@@ -1,13 +1,15 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
+  ERROR_CODES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEST_ID,
-  UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Button,
+  ERROR_MESSAGES,
   IconBookmark16,
   IconBookmark20,
   IconSize,
@@ -42,17 +44,17 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
 
   const onClick = async () => {
     if (!viewer.isAuthed) {
-      window.dispatchEvent(
-        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { source: UNIVERSAL_AUTH_SOURCE.bookmark },
-        })
-      )
+      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
       return
     }
 
     if (viewer.isFrozen) {
       toast.error({
-        message: <Translate id="FORBIDDEN_BY_STATE" />,
+        message: (
+          <FormattedMessage
+            {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+          />
+        ),
       })
       return
     }

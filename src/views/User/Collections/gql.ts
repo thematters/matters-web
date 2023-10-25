@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
-import CollectionDigestFeed from '~/components/CollectionDigest/Feed'
+// FIXME: This is a hack to avoid circular dependency.
+import { fragments as CollectionDigestFeedFragments } from '~/components/CollectionDigest/Feed/gql'
 
 const fragments = gql`
   fragment CollectionsUser on User {
@@ -31,7 +32,7 @@ const fragments = gql`
       }
     }
   }
-  ${CollectionDigestFeed.fragments.collection}
+  ${CollectionDigestFeedFragments.collection}
 `
 
 export const USER_COLLECTIONS = gql`

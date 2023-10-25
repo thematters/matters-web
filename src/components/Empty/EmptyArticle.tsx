@@ -18,6 +18,7 @@ export const EmptyArticle = ({
         description ||
         intl.formatMessage({
           defaultMessage: 'No published articles yet',
+          id: 'yIlC0R',
           description: 'src/components/Empty/EmptyArticle.tsx',
         })
       }

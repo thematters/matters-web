@@ -48,7 +48,7 @@ const Top: React.FC = () => {
     <Menu>
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Profile" />}
+        text={<FormattedMessage defaultMessage="Profile" id="itPgxd" />}
         icon={<IconProfile24 size="md" />}
         {...viewerPath}
         is="link"
@@ -56,7 +56,7 @@ const Top: React.FC = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="History" />}
+        text={<FormattedMessage defaultMessage="History" id="djJp6c" />}
         icon={<IconHistory24 size="md" />}
         href={PATHS.ME_HISTORY}
         is="link"
@@ -64,7 +64,7 @@ const Top: React.FC = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Bookmarks" />}
+        text={<FormattedMessage defaultMessage="Bookmarks" id="nGBrvw" />}
         icon={<IconBookmark24 size="md" />}
         href={PATHS.ME_BOOKMARKS}
         is="link"
@@ -72,7 +72,7 @@ const Top: React.FC = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Drafts" />}
+        text={<FormattedMessage defaultMessage="Drafts" id="2atspc" />}
         icon={<IconDraft24 size="md" />}
         href={PATHS.ME_DRAFTS}
         is="link"
@@ -81,7 +81,7 @@ const Top: React.FC = () => {
       {circlePath && (
         <Menu.Item
           {...menuItemProps}
-          text={<FormattedMessage defaultMessage="Circle" />}
+          text={<FormattedMessage defaultMessage="Circle" id="vH8sCb" />}
           icon={<IconCircle24 size="md" />}
           href={circlePath.href}
           is="link"
@@ -90,7 +90,7 @@ const Top: React.FC = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Wallet" />}
+        text={<FormattedMessage defaultMessage="Wallet" id="3yk8fB" />}
         icon={<IconWallet24 size="md" />}
         href={PATHS.ME_WALLET}
         is="link"
@@ -98,7 +98,7 @@ const Top: React.FC = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Stats" />}
+        text={<FormattedMessage defaultMessage="Stats" id="U86B6w" />}
         icon={<IconAnalytics24 size="md" />}
         href={PATHS.ME_ANALYTICS}
         is="link"
@@ -127,7 +127,10 @@ const Bottom = () => {
     } catch (e) {
       toast.error({
         message: (
-          <FormattedMessage defaultMessage="Failed to log out, please try again." />
+          <FormattedMessage
+            defaultMessage="Failed to log out, please try again."
+            id="Szd1tH"
+          />
         ),
       })
     }
@@ -137,7 +140,7 @@ const Bottom = () => {
     <Menu>
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Settings" />}
+        text={<FormattedMessage defaultMessage="Settings" id="D3idYv" />}
         icon={<IconSettings24 size="md" />}
         href={PATHS.ME_SETTINGS}
         is="link"
@@ -145,7 +148,7 @@ const Bottom = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Log Out" />}
+        text={<FormattedMessage defaultMessage="Log Out" id="H0JBH6" />}
         icon={<IconLogout24 size="md" />}
         onClick={onClickLogout}
       />

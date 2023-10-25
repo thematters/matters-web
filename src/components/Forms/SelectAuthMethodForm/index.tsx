@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
+import { useConnect } from 'wagmi'
 
 import { WalletType } from '~/common/utils'
 import {
@@ -7,31 +8,54 @@ import {
   AuthNormalFeed,
   AuthTabs,
   AuthWalletFeed,
-  Dialog,
+  DialogBeta,
 } from '~/components'
 
 interface FormProps {
+  purpose: 'dialog' | 'page'
+  checkWallet: boolean
   gotoWalletConnect: (type: WalletType) => void
   gotoEmailLogin: () => void
   gotoEmailSignup: () => void
+
+  authFeedType: AuthFeedType
+  setAuthFeedType: (type: AuthFeedType) => void
+
+  hasUnavailable?: boolean
   closeDialog?: () => void
-  type?: AuthFeedType
 }
 
 export const SelectAuthMethodForm: React.FC<FormProps> = ({
+  purpose,
   gotoWalletConnect,
   gotoEmailLogin,
   gotoEmailSignup,
   closeDialog,
-  type = 'normal',
+  authFeedType = 'normal',
+  setAuthFeedType,
+  checkWallet,
+  hasUnavailable,
 }) => {
-  const [authTypeFeed, setAuthTypeFeed] = useState<AuthFeedType>(type)
-  const isNormal = authTypeFeed === 'normal'
-  const isWallet = authTypeFeed === 'wallet'
+  const isInDialog = purpose === 'dialog'
+  const isNormal = authFeedType === 'normal'
+  const isWallet = authFeedType === 'wallet'
+
+  const { connectors } = useConnect()
+  const injectedConnector = connectors.find((c) => c.id === 'metaMask')
+
+  useEffect(() => {
+    if (injectedConnector?.ready && checkWallet) {
+      setAuthFeedType('wallet')
+    }
+  }, [injectedConnector?.ready])
 
   const InnerForm = (
     <>
-      <AuthTabs type={authTypeFeed} setType={setAuthTypeFeed} />
+      <AuthTabs
+        type={authFeedType}
+        setType={setAuthFeedType}
+        purpose={purpose}
+      />
 
       {isNormal && (
         <AuthNormalFeed
@@ -39,23 +63,30 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
           gotoEmailLogin={gotoEmailLogin}
         />
       )}
-      {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
+      {isWallet && (
+        <AuthWalletFeed
+          submitCallback={gotoWalletConnect}
+          hasUnavailable={hasUnavailable}
+        />
+      )}
     </>
   )
 
   return (
     <>
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <DialogBeta.Content noMaxHeight={true}>{InnerForm}</DialogBeta.Content>
 
-      <Dialog.Footer
-        smUpBtns={
-          <Dialog.TextButton
-            color="greyDarker"
-            text={<FormattedMessage defaultMessage="Close" />}
-            onClick={closeDialog}
-          />
-        }
-      />
+      {isInDialog && (
+        <DialogBeta.Footer
+          smUpBtns={
+            <DialogBeta.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+              onClick={closeDialog}
+            />
+          }
+        />
+      )}
     </>
   )
 }

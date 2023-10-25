@@ -203,6 +203,7 @@ const CricleBroadcast = () => {
       message: (
         <FormattedMessage
           defaultMessage="Broadcast sent"
+          id="TjWWxF"
           description="src/views/Circle/Broadcast/Broadcast.tsx"
         />
       ),
@@ -222,6 +223,7 @@ const CricleBroadcast = () => {
               type="circleBroadcast"
               placeholder={intl.formatMessage({
                 defaultMessage: 'Announcement, reminder, chattering...',
+                id: 'zb8Kx1',
               })}
               submitCallback={submitCallback}
             />
@@ -234,6 +236,7 @@ const CricleBroadcast = () => {
               description={
                 <FormattedMessage
                   defaultMessage="No broadcast yet."
+                  id="mWjpk9"
                   description="src/views/Circle/Broadcast/Broadcast.tsx"
                 />
               }

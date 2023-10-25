@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { DialogBeta, Spinner, useDialogSwitch } from '~/components'
 import { SocialAccountType } from '~/gql/graphql'
 
 interface RemoveSocialLoginDialogProps {
@@ -20,9 +20,9 @@ const BaseRemoveSocialLoginDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <DialogBeta isOpen={show} onDismiss={closeDialog}>
         <DynamicContent closeDialog={closeDialog} type={type} />
-      </Dialog>
+      </DialogBeta>
     </>
   )
 }
@@ -30,7 +30,7 @@ const BaseRemoveSocialLoginDialog = ({
 export const RemoveSocialLoginDialog = (
   props: RemoveSocialLoginDialogProps
 ) => (
-  <Dialog.Lazy mounted={<BaseRemoveSocialLoginDialog {...props} />}>
+  <DialogBeta.Lazy mounted={<BaseRemoveSocialLoginDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
-  </Dialog.Lazy>
+  </DialogBeta.Lazy>
 )

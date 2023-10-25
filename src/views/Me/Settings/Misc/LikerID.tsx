@@ -15,6 +15,7 @@ const LikerID = () => {
           title={
             <FormattedMessage
               defaultMessage="Liker ID"
+              id="kS3vTS"
               description="src/views/Me/Settings/Misc/LikerID.tsx"
             />
           }
@@ -29,7 +30,7 @@ const LikerID = () => {
                 borderColor="green"
                 onClick={openDialog}
               >
-                <FormattedMessage defaultMessage="Connect" />
+                <FormattedMessage defaultMessage="Connect" id="+vVZ/G" />
               </Button>
             )
           }

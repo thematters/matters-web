@@ -16,6 +16,7 @@ const EmptyAnalytics = () => {
       <p>
         <FormattedMessage
           defaultMessage="You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!"
+          id="cmtHjM"
           description="src/views/Me/Analytics/EmptyAnalytics/index.tsx"
         />
       </p>
@@ -30,7 +31,7 @@ const EmptyAnalytics = () => {
         onClick={() => analytics.trackEvent('click_button', { type: 'write' })}
       >
         <TextIcon color="white" weight="md">
-          <FormattedMessage defaultMessage="Start Creating" />
+          <FormattedMessage defaultMessage="Start Creating" id="69+D96" />
         </TextIcon>
       </Button>
 
@@ -38,6 +39,7 @@ const EmptyAnalytics = () => {
         <p>
           <FormattedMessage
             defaultMessage="Want to know more? Check the "
+            id="l/f7bu"
             description="src/views/Me/Analytics/EmptyAnalytics/index.tsx"
           />
           <a
@@ -46,7 +48,7 @@ const EmptyAnalytics = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <FormattedMessage defaultMessage="tutorial" />
+            <FormattedMessage defaultMessage="tutorial" id="uw32VR" />
           </a>
         </p>
       </section>

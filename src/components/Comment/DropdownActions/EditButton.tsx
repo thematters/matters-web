@@ -12,6 +12,7 @@ const EditButton = ({ openEditCommentDialog }: EditButtonProps) => {
       text={
         <FormattedMessage
           defaultMessage="Edit"
+          id="mikY/9"
           description="src/components/Comment/DropdownActions/EditButton.tsx"
         />
       }

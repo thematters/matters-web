@@ -42,6 +42,7 @@ const RelatedTagsHeader = ({
       title={
         <FormattedMessage
           defaultMessage="Related Tags"
+          id="HFVDeB"
           description="src/views/TagDetail/RelatedTags/index.tsx"
         />
       }
@@ -133,7 +134,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
             textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
             textAlign="center"
           >
-            <FormattedMessage defaultMessage="Back to All" />
+            <FormattedMessage defaultMessage="Back to All" id="o2Na0B" />
           </ViewMoreCard>
         </section>
       </section>

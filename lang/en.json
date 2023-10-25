@@ -1,4 +1,12 @@
 {
+  "+51DoZ": {
+    "defaultMessage": "Please verify email first",
+    "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
+  "+63O1f": {
+    "defaultMessage": "Incorrect email or password",
+    "description": "USER_PASSWORD_INVALID"
+  },
   "+7SAix": {
     "defaultMessage": "Must be between 2-12 characters long."
   },
@@ -16,6 +24,14 @@
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+o9W2T": {
+    "defaultMessage": "File upload failed, please verify the file link is valid, or manually download and upload again.",
+    "description": "UNABLE_TO_UPLOAD_FROM_URL"
+  },
+  "+rB5Am": {
+    "defaultMessage": "Article not found",
+    "description": "ARTICLE_NOT_FOUND"
+  },
   "+vVZ/G": {
     "defaultMessage": "Connect"
   },
@@ -30,12 +46,20 @@
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
   },
+  "/TXBJR": {
+    "defaultMessage": "Unknown error. Please try again later.",
+    "description": "UNKNOWN_ERROR"
+  },
   "/asuIY": {
     "defaultMessage": "Enter Community",
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "/jJLYy": {
     "defaultMessage": "Transactions"
+  },
+  "/pnYHM": {
+    "defaultMessage": "Circle not found",
+    "description": "CIRCLE_NOT_FOUND"
   },
   "/podGX": {
     "defaultMessage": "Public",
@@ -59,9 +83,17 @@
     "defaultMessage": "Create collection",
     "description": "src/views/User/Collections/UserCollections.tsx"
   },
+  "0e1xjL": {
+    "defaultMessage": "Email can be modified up to {count} times per day.",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "0iyH+q": {
     "defaultMessage": "Last 7 days",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "0jvbdb": {
+    "defaultMessage": "Oops. Something went wrong. Please try again later.",
+    "description": "INTERNAL_SERVER_ERROR"
   },
   "0qagOO": {
     "defaultMessage": "Circle Subscription",
@@ -79,9 +111,17 @@
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
   },
+  "1hyiZ8": {
+    "defaultMessage": "Confirm Matters ID",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
   "1qQzV0": {
     "defaultMessage": "Invitees",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "1y1U9f": {
+    "defaultMessage": "Liker ID is already taken.",
+    "description": "LIKER_USER_ID_EXISTS"
   },
   "1zVIWy": {
     "defaultMessage": "mentioned you in a comment at {commentArticle}",
@@ -150,19 +190,15 @@
   "3yk8fB": {
     "defaultMessage": "Wallet"
   },
-  "3ynsJ3": {
-    "defaultMessage": "Want to know more? Check the ",
-    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
-  },
   "47FYwb": {
     "defaultMessage": "Cancel"
   },
   "4CrCbD": {
     "defaultMessage": "Community"
   },
-  "4giHJT": {
-    "defaultMessage": "Have wallet questions on mobile device ? Click the ",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  "4KuZ0o": {
+    "defaultMessage": "Asset not found",
+    "description": "ASSET_NOT_FOUND"
   },
   "4l6vz1": {
     "defaultMessage": "Copy"
@@ -186,12 +222,17 @@
     "defaultMessage": "Check your inbox",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
   },
-  "5MDGuM": {
-    "defaultMessage": "Enter your email"
+  "5MDA6O": {
+    "defaultMessage": "This tag is already taken",
+    "description": "DUPLICATE_TAG"
   },
   "5iii3x": {
     "defaultMessage": "Circle：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
+  "5sWnog": {
+    "defaultMessage": "Liker ID email is already taken.",
+    "description": "LIKER_EMAIL_EXISTS"
   },
   "5sg7KC": {
     "defaultMessage": "Password"
@@ -206,6 +247,10 @@
   "6BXcdo": {
     "defaultMessage": "Set threshold for circle (per month)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6N2LKY": {
+    "defaultMessage": "Please log in again.",
+    "description": "OAUTH_TOKEN_INVALID"
   },
   "6OBAOi": {
     "defaultMessage": "subscribers_empty",
@@ -238,6 +283,14 @@
     "defaultMessage": "Cancelled",
     "description": "src/components/Transaction/State/index.tsx"
   },
+  "70UCEy": {
+    "defaultMessage": "Have wallet questions on mobile device ? Click the",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "73iajM": {
+    "defaultMessage": "Oops. Something went wrong. Please try again later.",
+    "description": "BAD_USER_INPUT"
+  },
   "77tYPg": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -248,6 +301,9 @@
   },
   "7JlauX": {
     "defaultMessage": "Explore"
+  },
+  "7cwoRo": {
+    "defaultMessage": "The author has disabled comments for this article"
   },
   "7jjWxF": {
     "defaultMessage": "No results",
@@ -267,9 +323,17 @@
   "8cv9D4": {
     "defaultMessage": "Next Step"
   },
+  "8iciCA": {
+    "defaultMessage": "Entity not found",
+    "description": "ENTITY_NOT_FOUND"
+  },
   "8qGjpr": {
     "defaultMessage": "Settings",
     "description": "src/views/Me/Settings/Misc/index.tsx"
+  },
+  "8rMZWb": {
+    "defaultMessage": "replied to your discussion on",
+    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "8t6Cs8": {
     "defaultMessage": "Matters Daily Report",
@@ -288,6 +352,9 @@
   },
   "9J0iCw": {
     "defaultMessage": "Deleted user"
+  },
+  "9Vkz9W": {
+    "defaultMessage": "Maximum image area is limited to 100 megapixels (for example, 10,000×10,000 pixels)."
   },
   "9mfw9c": {
     "defaultMessage": "Wallet address",
@@ -310,12 +377,19 @@
   "A6ozr9": {
     "defaultMessage": "Collection name"
   },
+  "A6r2p1": {
+    "defaultMessage": "Enter Matters"
+  },
   "A7ugfn": {
     "defaultMessage": "More Actions"
   },
   "AB5rDl": {
     "defaultMessage": "Payment suspended or returned by card issuer when there are doubts about the transaction",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "AEiogR": {
+    "defaultMessage": "This Google account is connected to a Matters account. Sign in to that account to disconnect it then try again",
+    "description": "USER_SOCIAL_ACCOUNT_EXISTS"
   },
   "AGcU5J": {
     "defaultMessage": "Pin Broadcast",
@@ -340,6 +414,14 @@
   "At8Qd2": {
     "defaultMessage": "Account",
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
+  },
+  "Avukw5": {
+    "defaultMessage": "The payment amount is too small, please re-enter.",
+    "description": "PAYMENT_AMOUNT_TOO_SMALL"
+  },
+  "AwQHHA": {
+    "defaultMessage": "Please set your transcation password.",
+    "description": "PAYMENT_PASSWORD_NOT_SET"
   },
   "B2As08": {
     "defaultMessage": "That's all",
@@ -389,6 +471,10 @@
   "CnPG8j": {
     "defaultMessage": "Featured"
   },
+  "CoF9qv": {
+    "defaultMessage": "Are you sure you want to disconnect from this?",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
   "Cu3Cty": {
     "defaultMessage": "month"
   },
@@ -406,13 +492,25 @@
   "D3idYv": {
     "defaultMessage": "Settings"
   },
+  "DUoV1W": {
+    "defaultMessage": "Over 140 words, current {numbers}",
+    "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
+  },
   "DYrDcG": {
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "Dq29Hb": {
+    "defaultMessage": "You have not connected your email yet. For security, email is required for top-up.",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
+  },
   "DqQvtL": {
     "defaultMessage": "Unblock",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
+  "Dt1o78": {
+    "defaultMessage": "Wallet is linked to a different account",
+    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
   "DyuHBH": {
     "defaultMessage": "Unpin from profile",
@@ -433,9 +531,17 @@
     "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "EoeUjA": {
+    "defaultMessage": "You do not have permission to perform this operation",
+    "description": "FORBIDDEN_BY_STATE"
+  },
   "EwbNbl": {
     "defaultMessage": "Oops！This link has expired",
     "description": "src/views/Callback/GoogleCallback.tsx"
+  },
+  "FEI5Fv": {
+    "defaultMessage": "Email address",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "FOOymB": {
     "defaultMessage": "No members yet",
@@ -465,6 +571,10 @@
   "FxrSCh": {
     "defaultMessage": "This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
+  "GG9uXH": {
+    "defaultMessage": "Please go to the relevant page to resend the link. You can also",
+    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "GHxtae": {
     "defaultMessage": "Wallet",
@@ -524,6 +634,13 @@
     "defaultMessage": "Switch wallet",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "HnxG15": {
+    "defaultMessage": "Set"
+  },
+  "HqnUd1": {
+    "defaultMessage": "Add hash from IPFS into compatible reader such as",
+    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -535,6 +652,9 @@
   "IPqNCS": {
     "defaultMessage": "Confirm use",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
+  "IXycMo": {
+    "defaultMessage": "Resend"
   },
   "Ihwz5K": {
     "defaultMessage": "Unpinned from profile"
@@ -573,6 +693,10 @@
   "K3r6DQ": {
     "defaultMessage": "Delete"
   },
+  "KIQUHo": {
+    "defaultMessage": "Login password",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
   "KLQ1/z": {
     "defaultMessage": "Circle successfully created",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
@@ -583,6 +707,10 @@
   },
   "KQi/UZ": {
     "defaultMessage": "Archive works"
+  },
+  "KlJEP9": {
+    "defaultMessage": "Wallet connected",
+    "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "KxVlDj": {
     "defaultMessage": "Settings - Blocked Users",
@@ -625,6 +753,10 @@
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "LmiUWG": {
+    "defaultMessage": "You do not have permissionn to perform this operation",
+    "description": "FORBIDDEN_BY_TARGET_STATE"
+  },
   "Lp6CiR": {
     "defaultMessage": "Settings - Misc",
     "description": "src/views/Me/Settings/Misc/index.tsx"
@@ -640,6 +772,18 @@
   "MDNaxs": {
     "defaultMessage": "followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "MPEeBy": {
+    "defaultMessage": "Operation failed, please try again later.",
+    "description": "ACTION_FAILED"
+  },
+  "Me4s4Q": {
+    "defaultMessage": "Please connect email",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
+  },
+  "Me5cJu": {
+    "defaultMessage": "Connect wallet",
+    "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
   },
   "Mn7GEf": {
     "defaultMessage": "Selected activities related to you in the past 24 hours",
@@ -663,6 +807,10 @@
     "defaultMessage": "Email",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "NNF+3f": {
+    "defaultMessage": "Tag not found",
+    "description": "TAG_NOT_FOUND"
+  },
   "NONfAh": {
     "defaultMessage": "Douban",
     "description": "src/components/Share/Buttons/Douban.tsx"
@@ -683,6 +831,10 @@
     "defaultMessage": "Forgot password?",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
+  "OAc8+i": {
+    "defaultMessage": "The email verification link has been sent to {email}, please check your inbox",
+    "description": "src/components/GlobalToast/index.tsx"
+  },
   "OIj8pQ": {
     "defaultMessage": "Invitation Sent",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -694,6 +846,9 @@
     "defaultMessage": "New likes",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "OyvGvT": {
+    "defaultMessage": "Images have a 5 megabyte (MB) size limit."
+  },
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -701,12 +856,12 @@
   "Pp/0po": {
     "defaultMessage": "Shuffle"
   },
+  "PtV68+": {
+    "defaultMessage": "Incorrect email or password",
+    "description": "USER_EMAIL_NOT_FOUND"
+  },
   "Q8Qw5B": {
     "defaultMessage": "Description"
-  },
-  "QBEE1c": {
-    "defaultMessage": "Please go to the relevant page to resend the link. You can also ",
-    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "QUqfbW": {
     "defaultMessage": "Describe more about your Circle",
@@ -715,6 +870,10 @@
   "QV19cI": {
     "defaultMessage": "Failed to republish article",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
+  },
+  "QXJQ5G": {
+    "defaultMessage": "Please log in again.",
+    "description": "TOKEN_INVALID"
   },
   "QZXKhG": {
     "defaultMessage": "Set the Circle URL (cannot be modified after creation)",
@@ -736,9 +895,17 @@
     "defaultMessage": "Please add email first",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
+  "Ro0CuW": {
+    "defaultMessage": "You do not have permission to perform this operation",
+    "description": "FORBIDDEN"
+  },
   "RxiHr/": {
     "defaultMessage": "friends have not accepted your invitations.",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
+  },
+  "S/hoJx": {
+    "defaultMessage": "User not found",
+    "description": "USER_NOT_FOUND"
   },
   "S8PcQf": {
     "defaultMessage": "Unpin from profile",
@@ -762,12 +929,23 @@
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again."
   },
+  "SzrjpI": {
+    "defaultMessage": "Article revision content is invalid",
+    "description": "ARTICLE_REVISION_CONTENT_INVALID"
+  },
+  "T2kMnM": {
+    "defaultMessage": "Each user can only create one circle.",
+    "description": "CIRCLE_CREATION_REACH_LIMIT"
+  },
   "T73SwS": {
     "defaultMessage": "Subscriptions",
     "description": "src/views/Me/Transactions/index.tsx"
   },
   "T9oZC8": {
     "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?"
+  },
+  "TF1OhT": {
+    "defaultMessage": "This login code has expired, please try to resend"
   },
   "TSDiqB": {
     "defaultMessage": "Subscribers",
@@ -838,6 +1016,10 @@
     "defaultMessage": "Last 3 months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "W66Eyq": {
+    "defaultMessage": "Password must be at least 8 characters long, support letter, numbers and symbols.",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
   "W8OZ3G": {
     "defaultMessage": "Confirm Deletion"
   },
@@ -890,11 +1072,23 @@
   "Xd0J7Y": {
     "defaultMessage": "Open Source"
   },
+  "XdLnXf": {
+    "defaultMessage": "Insufficient wallet balance.",
+    "description": "PAYMENT_BALANCE_INSUFFICIENT"
+  },
+  "XfRKZY": {
+    "defaultMessage": "Go to Settings",
+    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
+  },
   "XgdZSb": {
     "defaultMessage": "Authors"
   },
   "Xi40U9": {
     "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
+  },
+  "XmnzQT": {
+    "defaultMessage": "Maximum 4 editors allowed for each tag",
+    "description": "TAG_EDITORS_REACH_LIMIT"
   },
   "XuYhBC": {
     "defaultMessage": "Pinned to profile"
@@ -906,6 +1100,13 @@
   "Y+spJC": {
     "defaultMessage": "commented in your circle broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Y7N/Jg": {
+    "defaultMessage": "Maximum image dimension is 12,000 pixels."
+  },
+  "YPMn9n": {
+    "defaultMessage": "Please log in.",
+    "description": "UNAUTHENTICATED"
   },
   "YUXRsM": {
     "defaultMessage": "Blocked Users",
@@ -953,10 +1154,6 @@
     "defaultMessage": "Processing",
     "description": "src/components/Transaction/State/index.tsx"
   },
-  "b+LSgI": {
-    "defaultMessage": "replied to your discussion on",
-    "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  },
   "b6zdPs": {
     "defaultMessage": "{count} Articles",
     "description": "src/components/Book/index.tsx"
@@ -972,6 +1169,10 @@
   "beLe/F": {
     "defaultMessage": "Broadcast"
   },
+  "c/z318": {
+    "defaultMessage": "Incorrect email or password",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
   "cAP9g5": {
     "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
@@ -983,16 +1184,12 @@
     "defaultMessage": "Currency",
     "description": "src/views/Me/Settings/Misc/Currency/index.tsx"
   },
+  "cYvIpp": {
+    "defaultMessage": "Already subscribed to this circle.",
+    "description": "DUPLICATE_CIRCLE_SUBSCRIPTION"
+  },
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
-  },
-  "cf37Zy": {
-    "defaultMessage": "Add hash from IPFS into compatible reader such as ",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
-  },
-  "cfL5uk": {
-    "defaultMessage": "Over 200 words, current {numbers}",
-    "description": "src/components/UserProfile/DropdownActions/EditProfileDialog/Content.tsx"
   },
   "cg1VJ2": {
     "defaultMessage": "Connect Wallet"
@@ -1005,6 +1202,10 @@
     "defaultMessage": "New articles",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "cufo9X": {
+    "defaultMessage": "The daily limit is 5000 HKD",
+    "description": "PAYMENT_REACH_MAXIMUM_LIMIT"
+  },
   "cyR7Kh": {
     "defaultMessage": "Back"
   },
@@ -1015,6 +1216,14 @@
   "d4waan": {
     "defaultMessage": "Income",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "dAvP6d": {
+    "defaultMessage": "No blocked users yet",
+    "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
+  },
+  "dSjI7E": {
+    "defaultMessage": "Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account).",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "dVbKzB": {
     "defaultMessage": "Comments and replies",
@@ -1067,6 +1276,10 @@
     "defaultMessage": "Comments has been pinned",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "ggS9L7": {
+    "defaultMessage": "The payment amount is invalid, please re-enter.",
+    "description": "PAYMENT_AMOUNT_INVALID"
+  },
   "h+punE": {
     "defaultMessage": "Updated {date}",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -1075,9 +1288,13 @@
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "h9A6AT": {
+    "defaultMessage": "For security, we will {resetHint} for this. You can set your password again after verifying new email address.",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "h9CG9E": {
-    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx",
-    "defaultMessage": "{commentType} has been deleted"
+    "defaultMessage": "{commentType} has been deleted",
+    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "hASeng": {
     "defaultMessage": "Blocked Users",
@@ -1091,10 +1308,6 @@
     "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
-  "hrfF+i": {
-    "defaultMessage": "Don't have a wallet yet? Check the ",
-    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
-  },
   "hrgo+E": {
     "defaultMessage": "Archive"
   },
@@ -1107,6 +1320,10 @@
   },
   "itPgxd": {
     "defaultMessage": "Profile"
+  },
+  "iu3XKs": {
+    "defaultMessage": "Wallet disconnected",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
   },
   "izWS4J": {
     "defaultMessage": "Unfollow"
@@ -1156,6 +1373,10 @@
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "l/f7bu": {
+    "defaultMessage": "Want to know more? Check the",
+    "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
+  },
   "l0/EvT": {
     "defaultMessage": "Last step: Set Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -1163,6 +1384,14 @@
   "l02bPO": {
     "defaultMessage": "Articles has been collected",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "l9LpDx": {
+    "defaultMessage": "{q} - Matters Search",
+    "description": "src/views/Search/AggregateResults/Articles.tsx"
+  },
+  "lI2l2/": {
+    "defaultMessage": "Incorrect verification code. Please check your input, or try resend",
+    "description": "CODE_INVALID"
   },
   "lIir/P": {
     "defaultMessage": "I see"
@@ -1222,9 +1451,21 @@
     "defaultMessage": "Circle notifications",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
+  "mu01Gw": {
+    "defaultMessage": "Verification code is no longer valid. Please use the latest code we sent, or try resend",
+    "description": "CODE_INACTIVE"
+  },
   "n2Sc6g": {
     "defaultMessage": "My profile",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
+  },
+  "n3shsQ": {
+    "defaultMessage": "Invalid name",
+    "description": "NAME_INVALID"
+  },
+  "n6ZdqD": {
+    "defaultMessage": "This circle is already taken.",
+    "description": "DUPLICATE_CIRCLE"
   },
   "nGBrvw": {
     "defaultMessage": "Bookmarks"
@@ -1235,6 +1476,14 @@
   },
   "nYrKWp": {
     "defaultMessage": "Edit profile"
+  },
+  "no7l8z": {
+    "defaultMessage": "Disconnect wallet",
+    "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
+  "nozN+j": {
+    "defaultMessage": "Invalid Email",
+    "description": "USER_EMAIL_INVALID"
   },
   "o2Na0B": {
     "defaultMessage": "Back to All"
@@ -1255,9 +1504,17 @@
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
+  "pHg5Ju": {
+    "defaultMessage": "Set password succeed",
+    "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
   "pRV+UD": {
     "defaultMessage": "Collapse",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
+  },
+  "pjunBi": {
+    "defaultMessage": "1MB maximum",
+    "description": "MIGRATION_REACH_LIMIT"
   },
   "pzTOmv": {
     "defaultMessage": "Followers"
@@ -1289,6 +1546,10 @@
     "defaultMessage": "mentioned you in broadcast comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "rADhX5": {
+    "defaultMessage": "Unavailable",
+    "description": "FORBIDDEN_BY_STATE"
+  },
   "rBjwQy": {
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
@@ -1298,6 +1559,10 @@
   },
   "rXnmeE": {
     "defaultMessage": "Confirm and Send"
+  },
+  "rZyVay": {
+    "defaultMessage": "Verification code expired, try resend",
+    "description": "CODE_EXPIRED"
   },
   "rbrahO": {
     "defaultMessage": "Close"
@@ -1309,6 +1574,10 @@
   "rfz/fN": {
     "defaultMessage": "Recommended size: 1600px x 900px"
   },
+  "rqS2aA": {
+    "defaultMessage": "Sign in to that account to unlink it then try again",
+    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
+  },
   "s5JCCO": {
     "defaultMessage": "This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
@@ -1316,6 +1585,10 @@
   "sPgUkN": {
     "defaultMessage": "This Month",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "sg3nVO": {
+    "defaultMessage": "This email has been used, please go to login or try another one",
+    "description": "USER_EMAIL_EXISTS"
   },
   "skbUBl": {
     "defaultMessage": "Log in",
@@ -1328,9 +1601,17 @@
   "sy+pv5": {
     "defaultMessage": "Email"
   },
+  "tBt9u0": {
+    "defaultMessage": "Sign in",
+    "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
   "tEeEJT": {
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
+  },
+  "tQ3+Xo": {
+    "defaultMessage": "Add up to 5 tags",
+    "description": "TOO_MANY_TAGS_FOR_ARTICLE"
   },
   "tQimre": {
     "defaultMessage": "go to the homepage",
@@ -1353,10 +1634,6 @@
   "ub1kHa": {
     "defaultMessage": "Add to collection"
   },
-  "uclzDH": {
-    "defaultMessage": "{q}: {totalCount, plural, =0 {} one {} other {# Results}} - Matters Search",
-    "description": "src/views/Search/AggregateResults/Articles.tsx"
-  },
   "ui1+QC": {
     "defaultMessage": "End of the results"
   },
@@ -1374,11 +1651,23 @@
     "defaultMessage": "Account",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "v8dGSd": {
+    "defaultMessage": "Wallet is linked to a different account",
+    "description": "CRYPTO_WALLET_EXISTS"
+  },
   "vAc1Bw": {
     "defaultMessage": "Block User"
   },
+  "vCt85u": {
+    "defaultMessage": "Don't have a wallet yet? Check the",
+    "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
   "vH8sCb": {
     "defaultMessage": "Circle"
+  },
+  "vJd1we": {
+    "defaultMessage": "Comment not found",
+    "description": "COMMENT_NOT_FOUND"
   },
   "vLEnrs": {
     "defaultMessage": "supported",
@@ -1388,8 +1677,16 @@
     "defaultMessage": "New broadcasts",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "vsD2wm": {
+    "defaultMessage": "reset your login password",
+    "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
   "wCgTu5": {
     "defaultMessage": "Comments"
+  },
+  "wDX7zn": {
+    "defaultMessage": "Draft not found",
+    "description": "DRAFT_NOT_FOUND"
   },
   "wEQDC6": {
     "defaultMessage": "Edit"
@@ -1401,6 +1698,10 @@
   "wK4kLf": {
     "defaultMessage": "Continue",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
+  },
+  "wMNZJa": {
+    "defaultMessage": "Notification not found",
+    "description": "NOTICE_NOT_FOUND"
   },
   "wXzTZ0": {
     "defaultMessage": "Enter the name of your Circle"
@@ -1429,12 +1730,16 @@
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
   "xWZr13": {
-    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx",
-    "defaultMessage": "{follower, plural, =1 {follower} other {followers}}"
+    "defaultMessage": "{follower, plural, =1 {follower} other {followers}}",
+    "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "xafreT": {
     "defaultMessage": "New discussions",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "xjHiYx": {
+    "defaultMessage": "Article revision count reach limit",
+    "description": "ARTICLE_REVISION_REACH_LIMIT"
   },
   "xkr+zo": {
     "defaultMessage": "Terms"
@@ -1442,9 +1747,17 @@
   "xmcVZ0": {
     "defaultMessage": "Search"
   },
+  "xxDjET": {
+    "defaultMessage": "Invalid display name",
+    "description": "DISPLAYNAME_INVALID"
+  },
   "y0b6Kp": {
     "defaultMessage": "Pay",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "y4Lyf1": {
+    "defaultMessage": "This name is already taken.",
+    "description": "NAME_EXISTS"
   },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
@@ -1464,6 +1777,14 @@
   "ySGgTo": {
     "defaultMessage": "Add Articles into Featured",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "ySSF/a": {
+    "defaultMessage": "In order to ensure the identity security of the citizens of Matters City, we've upgraded some security settings. Please confirm your Matters ID (cannot be modified once confirmation).",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "yToCTn": {
+    "defaultMessage": "Please refresh the page and try again.",
+    "description": "NETWORK_ERROR"
   },
   "yZfKI4": {
     "defaultMessage": "discussion and mentioned you",
@@ -1498,6 +1819,10 @@
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zvNfwL": {
+    "defaultMessage": "Operation too frequent, please try again later.",
+    "description": "ACTION_LIMIT_EXCEEDED"
   },
   "zxlwbc": {
     "defaultMessage": "Waiting ...",

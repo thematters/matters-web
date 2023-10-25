@@ -8,6 +8,7 @@ const SettingsBlocked = () => {
   const intl = useIntl()
   const title = intl.formatMessage({
     defaultMessage: 'Settings - Blocked Users',
+    id: 'KxVlDj',
     description: 'src/views/Me/Settings/Blocked/index.tsx',
   })
 
@@ -18,6 +19,7 @@ const SettingsBlocked = () => {
           <Layout.Header.Title>
             <FormattedMessage
               defaultMessage="Blocked Users"
+              id="YUXRsM"
               description="src/views/Me/Settings/Blocked/index.tsx"
             />
           </Layout.Header.Title>

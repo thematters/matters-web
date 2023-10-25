@@ -46,6 +46,7 @@ const SideNavMenu = () => {
         name={
           <FormattedMessage
             defaultMessage="Following"
+            id="32bml8"
             description="src/components/Layout/SideNav/index.tsx"
           />
         }
@@ -56,7 +57,7 @@ const SideNavMenu = () => {
       />
 
       <NavListItem
-        name={<FormattedMessage defaultMessage="Notifications" />}
+        name={<FormattedMessage defaultMessage="Notifications" id="NAidKb" />}
         icon={<UnreadIcon.Notification />}
         activeIcon={<UnreadIcon.Notification active />}
         active={isInNotification}
@@ -73,7 +74,7 @@ const SideNavMenu = () => {
           <section>
             <VisuallyHidden>
               <button type="button">
-                <FormattedMessage defaultMessage="Cancel" />
+                <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
               </button>
             </VisuallyHidden>
             <MeMenu />
@@ -87,7 +88,7 @@ const SideNavMenu = () => {
         {({ openDropdown, ref }) => (
           <NavListItem
             onClick={openDropdown}
-            name={<FormattedMessage defaultMessage="My Page" />}
+            name={<FormattedMessage defaultMessage="My Page" id="enMIYK" />}
             icon={<IconNavMe32 size="lg" />}
             activeIcon={<IconNavMeActive32 size="lg" />}
             active={isInMe}
@@ -104,11 +105,7 @@ const SideNavMenu = () => {
         className={styles.listItem}
         data-test-id={TEST_ID.SIDE_NAY_WRITE_BUTTON}
       >
-        <WriteButton
-          allowed
-          authed={viewer.isAuthed}
-          forbidden={viewer.isInactive}
-        />
+        <WriteButton authed={viewer.isAuthed} forbidden={viewer.isInactive} />
       </li>
     </ul>
   )

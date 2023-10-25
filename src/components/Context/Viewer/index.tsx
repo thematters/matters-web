@@ -74,10 +74,12 @@ const ViewerFragments = {
             userName
             email
           }
+          emailVerified
         }
         status {
           role
           hasEmailLoginPassword
+          changeEmailTimesLeft
         }
         articles(input: { first: 0 }) {
           totalCount

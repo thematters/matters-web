@@ -37,6 +37,10 @@ const DynamicGlobalDialogs = dynamic(
   () => import('~/components/GlobalDialogs'),
   { ssr: false }
 )
+
+const DynamicGlobalToasts = dynamic(() => import('~/components/GlobalToasts'), {
+  ssr: false,
+})
 const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
   ssr: false,
 })
@@ -67,7 +71,9 @@ const Root = ({
   const isInAbout = isInPath('ABOUT')
   const isInMigration = isInPath('MIGRATION')
   const isInAuthCallback = isInPath('CALLBACK_PROVIDER')
-  const shouldApplyLayout = !isInAbout && !isInMigration && !isInAuthCallback
+  const isInAuth = isInPath('LOGIN') || isInPath('SIGNUP')
+  const shouldApplyLayout =
+    !isInAbout && !isInMigration && !isInAuthCallback && !isInAuth
 
   const { loading, data, error } =
     useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)
@@ -101,6 +107,7 @@ const Root = ({
                 <DynamicToaster />
                 <DynamicAnalyticsInitilizer user={viewer || {}} />
                 <DynamicGlobalDialogs />
+                <DynamicGlobalToasts />
                 <DynamicProgressBar />
                 <DynamicFingerprint />
               </TranslationsProvider>

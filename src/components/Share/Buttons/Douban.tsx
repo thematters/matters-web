@@ -46,6 +46,7 @@ const Douban = ({
         <TextIcon icon={withIcon(IconShareDouban)({})} spacing="base">
           <FormattedMessage
             defaultMessage="Douban"
+            id="NONfAh"
             description="src/components/Share/Buttons/Douban.tsx"
           />
         </TextIcon>

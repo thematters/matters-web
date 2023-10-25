@@ -62,6 +62,7 @@ const BaseCollectionDigestFeed = ({
             <p className={styles.articleCount}>
               <FormattedMessage
                 defaultMessage="{articleCount} articles"
+                id="oHQmBt"
                 description="src/components/CollectionDigest/Feed/index.tsx"
                 values={{ articleCount }}
               />
@@ -79,6 +80,7 @@ const BaseCollectionDigestFeed = ({
               <span className={styles.articleCount}>
                 <FormattedMessage
                   defaultMessage="{articleCount} articles"
+                  id="oHQmBt"
                   description="src/components/CollectionDigest/Feed/index.tsx"
                   values={{ articleCount }}
                 />
@@ -91,6 +93,7 @@ const BaseCollectionDigestFeed = ({
               <span>
                 <FormattedMessage
                   defaultMessage="upadted {date}"
+                  id="C8GQaD"
                   description="src/components/CollectionDigest/Feed/index.tsx"
                   values={{
                     date: <DateTime date={updatedAt} color="grey" />,
@@ -119,7 +122,7 @@ type MemoizedCollectionDigestFeed = React.MemoExoticComponent<
   fragments: typeof fragments
 }
 
-const CollectionDigestFeed = React.memo(
+export const CollectionDigestFeed = React.memo(
   BaseCollectionDigestFeed,
   ({ collection: prevCollection }, { collection }) => {
     return (
@@ -134,5 +137,3 @@ const CollectionDigestFeed = React.memo(
 
 CollectionDigestFeed.Placeholder = Placeholder
 CollectionDigestFeed.fragments = fragments
-
-export default CollectionDigestFeed
