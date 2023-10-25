@@ -103,16 +103,16 @@ const BaseUniversalAuthDialog = () => {
     OPEN_UNIVERSAL_AUTH_DIALOG,
     (payload: { [key: string]: any }) => {
       const trigger = payload?.trigger
+      analytics.trackEvent('authenticate', {
+        step: 'engage',
+        ...(trigger ? { trigger } : {}),
+      })
 
       if (isSmUp) {
-        analytics.trackEvent('authenticate', {
-          step: 'engage',
-          ...(trigger ? { trigger } : {}),
-        })
         openDialog()
         return
       }
-      const { href } = appendTarget(PATHS.LOGIN, true, trigger)
+      const { href } = appendTarget(PATHS.LOGIN, true)
       router.push(href)
     }
   )
@@ -214,16 +214,16 @@ const UniversalAuthDialog = () => {
       OPEN_UNIVERSAL_AUTH_DIALOG,
       (payload: { [key: string]: any }) => {
         const trigger = payload?.trigger
+        analytics.trackEvent('authenticate', {
+          step: 'engage',
+          ...(trigger ? { trigger } : {}),
+        })
 
         if (isSmUp) {
-          analytics.trackEvent('authenticate', {
-            step: 'engage',
-            ...(trigger ? { trigger } : {}),
-          })
           openDialog()
           return
         }
-        const { href } = appendTarget(PATHS.LOGIN, true, trigger)
+        const { href } = appendTarget(PATHS.LOGIN, true)
         router.push(href)
       }
     )
