@@ -1,6 +1,12 @@
 .container {
   @mixin flex-center-space-between;
 
+  padding: 0 var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
+
   & .right {
     @mixin inline-flex-center-all;
 
@@ -13,12 +19,17 @@
     @mixin inline-flex-start-center;
 
     flex-direction: column;
+    flex-grow: 1;
     gap: var(--spacing-x-tight);
 
-    & .title {
-      @mixin line-clamp;
+    & .content {
+      width: 100%;
 
-      -webkit-line-clamp: 2;
+      & .title {
+        @mixin line-clamp;
+
+        -webkit-line-clamp: 2;
+      }
     }
   }
 }

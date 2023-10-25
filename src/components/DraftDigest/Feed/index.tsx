@@ -37,12 +37,13 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
           <section>
             <DateTime date={updatedAt} color="grey" />
           </section>
-
-          <LinkWrapper {...path} textActiveColor="green">
-            <section className={styles.title}>
-              {title || <Translate id="untitle" />}
-            </section>
-          </LinkWrapper>
+          <section className={styles.content}>
+            <LinkWrapper {...path} textActiveColor="green">
+              <section className={styles.title}>
+                {title || <Translate id="untitle" />}
+              </section>
+            </LinkWrapper>
+          </section>
         </section>
 
         <section className={styles.right}>
