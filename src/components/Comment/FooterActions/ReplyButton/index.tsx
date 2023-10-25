@@ -1,13 +1,8 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import {
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-import { appendTarget, translate } from '~/common/utils'
+import { CLOSE_ACTIVE_DIALOG, OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
@@ -15,7 +10,6 @@ import {
   CommentFormType,
   IconComment16,
   LanguageContext,
-  Media,
   ViewerContext,
 } from '~/components'
 import { ReplyComemntFragment } from '~/gql/graphql'
@@ -101,31 +95,21 @@ const ReplyButton = ({
   }
 
   if (!viewer.isAuthed) {
-    const smUpProps = {
+    const props = {
       onClick: () => {
         window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-        window.dispatchEvent(
-          new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-            detail: { source: UNIVERSAL_AUTH_SOURCE.comment },
-          })
-        )
+        window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
       },
     }
-    const smProps = appendTarget(PATHS.LOGIN, true)
 
     return (
       <>
-        <Media at="sm">
-          <CommentButton inCard={inCard} disabled={disabled} {...smProps} />
-        </Media>
-        <Media greaterThan="sm">
-          <CommentButton
-            aria-haspopup="dialog"
-            inCard={inCard}
-            disabled={disabled}
-            {...smUpProps}
-          />
-        </Media>
+        <CommentButton
+          aria-haspopup="dialog"
+          inCard={inCard}
+          disabled={disabled}
+          {...props}
+        />
       </>
     )
   }

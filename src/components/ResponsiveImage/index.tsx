@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { toSizedImageURL, ToSizedImageURLSize } from '~/common/utils'
 
 /**
@@ -37,7 +38,10 @@ const BaseResponsiveImage = ({
   }
 
   return (
-    <picture onError={() => setError(true)}>
+    <picture
+      onError={() => setError(true)}
+      data-test-id={TEST_ID.RESPONSIVE_IMG}
+    >
       {smUpWidth && (
         <>
           <source

@@ -1378,7 +1378,7 @@
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
   },
   "l0/EvT": {
-    "defaultMessage": "最後一步：设置 Matters ID",
+    "defaultMessage": "最後一步：設置 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "l02bPO": {
@@ -1833,4 +1833,3 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
-

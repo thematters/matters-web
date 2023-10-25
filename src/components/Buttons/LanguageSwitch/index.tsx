@@ -29,7 +29,9 @@ export const LanguageSwitchContent = () => (
 
           <Menu.Item
             text={LANG_TEXT_MAP.zh_hans}
-            onClick={() => setLang(UserLanguage.ZhHans)}
+            onClick={() => {
+              setLang(UserLanguage.ZhHans)
+            }}
             weight={isZhHansActive ? 'bold' : 'normal'}
           />
 

@@ -158,6 +158,7 @@ export const Turnstile = forwardRef<
             return
           }
 
+          /* eslint-disable */
           const id = turnstile.render(containerRef.current, renderConfig)
           setWidgetId(id)
 

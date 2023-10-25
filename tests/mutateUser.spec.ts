@@ -58,6 +58,7 @@ test.describe('User Mutation', () => {
       // [Bob] Go to profile page
       const bobProfile = new UserProfilePage(bobPage, isMobile)
       await bobProfile.gotoMeProfile()
+      await bobPage.waitForTimeout(2 * 1000)
       const bobDisplayName = await bobProfile.displayName.innerText()
 
       // [Bob] Go to Alice's User Profile
@@ -146,6 +147,7 @@ test.describe('User Mutation', () => {
       // [Alice] Go to profile page
       const aliceProfile = new UserProfilePage(alicePage, isMobile)
       await aliceProfile.gotoMeProfile()
+      await bobPage.waitForTimeout(2 * 1000)
       const aliceDisplayName = await aliceProfile.displayName.innerText()
 
       // [Bob] Go to profile page
@@ -236,6 +238,7 @@ test.describe('User Mutation', () => {
     const aliceProfile = new UserProfilePage(alicePage, isMobile)
     await aliceProfile.gotoMeProfile()
 
+    await alicePage.waitForTimeout(2 * 1000)
     await aliceProfile.displayName.click()
 
     await aliceProfile.setCover()
