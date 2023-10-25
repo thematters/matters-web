@@ -1370,6 +1370,9 @@
   "k0ooDW": {
     "defaultMessage": "标签描述"
   },
+  "k2veDA": {
+    "defaultMessage": "创作"
+  },
   "k5NnNF": {
     "defaultMessage": "追踪了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"

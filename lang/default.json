@@ -1370,6 +1370,9 @@
   "k0ooDW": {
     "defaultMessage": "Tag Description"
   },
+  "k2veDA": {
+    "defaultMessage": "Write"
+  },
   "k5NnNF": {
     "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
