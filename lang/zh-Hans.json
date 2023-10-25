@@ -535,6 +535,10 @@
     "defaultMessage": "Oops！链接已失效",
     "description": "src/views/Callback/GoogleCallback.tsx"
   },
+  "F3zk7E": {
+    "defaultMessage": "（草稿删除后无法恢复）",
+    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
+  },
   "FEI5Fv": {
     "defaultMessage": "邮箱",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -1322,6 +1326,10 @@
   "hk2aiz": {
     "defaultMessage": "追踪了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "hpIFGj": {
+    "defaultMessage": "确认要删除草稿「{title}」吗？",
+    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
   "hrgo+E": {
     "defaultMessage": "归档"
