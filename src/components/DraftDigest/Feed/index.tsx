@@ -6,6 +6,7 @@ import { Card, LinkWrapper, Translate } from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
 import DeleteButton from './DeleteButton'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 interface DraftDigestFeedProps {
@@ -54,6 +55,7 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
 type MemoizedDraftDigestFeedType = React.MemoExoticComponent<
   React.FC<DraftDigestFeedProps>
 > & {
+  Placeholder: typeof Placeholder
   fragments: typeof fragments
 }
 
@@ -62,6 +64,7 @@ const MemoizedDraftDigestFeed = React.memo(
   () => true
 ) as MemoizedDraftDigestFeedType
 
+MemoizedDraftDigestFeed.Placeholder = Placeholder
 MemoizedDraftDigestFeed.fragments = fragments
 
 export default MemoizedDraftDigestFeed

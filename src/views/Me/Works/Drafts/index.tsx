@@ -3,6 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { Head, Layout } from '~/components'
 
 import WorksTabs from '../WorksTabs'
+import Placeholder from './Placeholder'
 
 const MeWorksDrafts = () => {
   const init = useIntl()
@@ -25,6 +26,7 @@ const MeWorksDrafts = () => {
       <Head title={title} />
 
       <WorksTabs />
+      <Placeholder />
     </Layout.Main>
   )
 }
