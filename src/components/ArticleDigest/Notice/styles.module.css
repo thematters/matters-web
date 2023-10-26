@@ -5,6 +5,7 @@
 
   & .content {
     @mixin border-left-grey;
+    @mixin line-clamp;
 
     padding-left: var(--spacing-tight);
     font-size: var(--font-size-md);
@@ -12,7 +13,5 @@
     text-overflow: ellipsis;
     border-left-width: 3px;
     -webkit-line-clamp: 3;
-
-    @mixin line-clamp;
   }
 }

@@ -20,12 +20,13 @@ const MenuItem: React.FC<React.PropsWithChildren<MenuItemProps>> = ({
   ...restProps
 }) => {
   return (
-    <li role="menuitem" className={styles.menuItem}>
+    <li className={styles.menuItem}>
       <Card
         spacing={spacing}
         textColor="greyDarker"
         textActiveColor="black"
         bgColor="transparent"
+        role="menuitem"
         {...restProps}
       >
         {children || (

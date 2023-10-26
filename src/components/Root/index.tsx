@@ -16,7 +16,6 @@ import {
   TranslationsProvider,
   useRoute,
   ViewerProvider,
-  ViewerUser,
 } from '~/components'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
 
@@ -97,7 +96,7 @@ const Root = ({
 
   return (
     <WagmiConfig config={wagmiConfig}>
-      <ViewerProvider viewer={viewer as ViewerUser}>
+      <ViewerProvider viewer={viewer}>
         <LanguageProvider headers={headers}>
           <FeaturesProvider official={official}>
             <MediaContextProvider>

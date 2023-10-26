@@ -6,8 +6,11 @@ export enum TEST_ID {
   SIDE_NAV_MY_PAGE = 'sidenav/my-page',
   SIDE_NAY_WRITE_BUTTON = 'sidenav/write-button',
   // digests
+  DIGEST_ARTICLE_ARCHIVED = 'digest/article/archived',
   DIGEST_ARTICLE_CARD = 'digest/article/card',
+  DIGEST_ARTICLE_DROPDOWN = 'digest/article/dropdown',
   DIGEST_ARTICLE_FEED = 'digest/article/feed',
+  DIGEST_ARTICLE_FEED_COVER = 'digest/article/feed/cover',
   DIGEST_ARTICLE_LIST = 'digest/article/list',
   DIGEST_ARTICLE_FEED_FOOTER_PIN = 'digest/article/feed/footer/pin',
   DIGEST_ARTICLE_NOTICE = 'digest/article/notice',
@@ -26,6 +29,11 @@ export enum TEST_ID {
   DIGEST_COLLECTION_FEED = 'digest/collection/feed',
   // dialogs
   DIALOG_AUTH = 'dialog/auth',
+  DIALOG_LIKECOIN = 'dialog/likecoin',
+  DIALOG_SHARE = 'dialog/share',
+  DIALOG_APPRECIATORS = 'dialog/appreciators',
+  DIALOG_SUPPORTERS = 'dialog/supporters',
+  DIALOG_FINGERPRINT = 'dialog/fingerprint',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
   // drafts

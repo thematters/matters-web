@@ -3,13 +3,13 @@ import { FormattedMessage } from 'react-intl'
 
 import {
   ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEST_ID,
 } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Button,
-  ERROR_MESSAGES,
   IconBookmark16,
   IconBookmark20,
   IconSize,

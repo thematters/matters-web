@@ -136,7 +136,6 @@ const AggregateArticleResults = () => {
                         Partial<ArticleDigestFeedArticlePrivateFragment>
                     }
                     hasCircle={false}
-                    hasFollow={false}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'search_article',

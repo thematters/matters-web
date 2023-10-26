@@ -24,18 +24,18 @@ const ReadTime = ({ article }: ResponseCountProps) => {
   }
 
   return (
-    <button
-      type="button"
-      title={intl.formatMessage({
+    <TextIcon
+      icon={<IconReadTime18 size="mdXS" />}
+      size="xs"
+      color="grey"
+      aria-label={intl.formatMessage({
         defaultMessage: 'Accumulated read time',
         id: 'U7o9Ba',
       })}
     >
-      <TextIcon icon={<IconReadTime18 size="mdXS" />} size="xs" color="grey">
-        {numAbbr(readHour, 1)}{' '}
-        <Translate zh_hant="小時" zh_hans="小时" en="hours" />
-      </TextIcon>
-    </button>
+      {numAbbr(readHour, 1)}{' '}
+      <Translate zh_hant="小時" zh_hans="小时" en="hours" />
+    </TextIcon>
   )
 }
 

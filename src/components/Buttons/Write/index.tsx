@@ -1,14 +1,16 @@
-import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ERROR_CODES, OPEN_UNIVERSAL_AUTH_DIALOG, PATHS } from '~/common/enums'
-import { analytics, translate } from '~/common/utils'
+import {
+  ERROR_CODES,
+  ERROR_MESSAGES,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  PATHS,
+} from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   Button,
   ButtonProps,
-  ERROR_MESSAGES,
   IconNavCreate32,
-  LanguageContext,
   toast,
   Tooltip,
   useRoute,
@@ -20,18 +22,26 @@ interface Props {
 }
 
 const BaseWriteButton = (props: ButtonProps) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   return (
     <Tooltip
-      content={translate({ id: 'write', lang })}
+      content={intl.formatMessage({
+        defaultMessage: 'Create',
+        description: 'src/components/Buttons/Write/index.tsx',
+        id: 'Bb2R0G',
+      })}
       placement="left"
       delay={[1000, null]}
     >
       <Button
         bgActiveColor="greyLighter"
         size={['2rem', '2rem']}
-        aria-label={translate({ id: 'write', lang })}
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Create',
+          description: 'src/components/Buttons/Write/index.tsx',
+          id: 'Bb2R0G',
+        })}
         {...props}
       >
         <IconNavCreate32 size="lg" color="black" />
