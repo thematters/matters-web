@@ -14,7 +14,7 @@ const isCI = process.env.PLAYWRIGHT_RUNTIME_ENV === 'ci'
 const config: PlaywrightTestConfig = {
   testDir: './tests',
   outputDir: 'test-results/',
-  timeout: 200e3,
+  timeout: 150e3,
   expect: {
     timeout: 200e3,
   },
