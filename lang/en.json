@@ -43,6 +43,9 @@
     "defaultMessage": "Last 1 month",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "/GyMKa": {
+    "defaultMessage": "Share Article"
+  },
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
   },
@@ -64,6 +67,10 @@
   "/podGX": {
     "defaultMessage": "Public",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+  },
+  "/qgntf": {
+    "defaultMessage": "Supporters",
+    "description": "src/components/ArticleDigest/DropdownActions/DonatorsButton/index.tsx"
   },
   "0Azlrb": {
     "defaultMessage": "Manage"
@@ -320,6 +327,10 @@
   "8KFsZN": {
     "defaultMessage": "Read Counts"
   },
+  "8UWUW8": {
+    "defaultMessage": "Collect Article",
+    "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
+  },
   "8cv9D4": {
     "defaultMessage": "Next Step"
   },
@@ -438,6 +449,10 @@
   "BY343C": {
     "defaultMessage": "Change"
   },
+  "Bb2R0G": {
+    "defaultMessage": "Create",
+    "description": "src/components/Buttons/Write/index.tsx"
+  },
   "Bc20la": {
     "defaultMessage": "days"
   },
@@ -491,6 +506,9 @@
   },
   "D3idYv": {
     "defaultMessage": "Settings"
+  },
+  "DP3yqI": {
+    "defaultMessage": "Donation count"
   },
   "DUoV1W": {
     "defaultMessage": "Over 140 words, current {numbers}",
@@ -618,6 +636,13 @@
   },
   "HAlOn1": {
     "defaultMessage": "Name"
+  },
+  "HDjV1k": {
+    "defaultMessage": "IPFS",
+    "description": "src/components/ArticleDigest/DropdownActions/FingerprintButton/index.tsx"
+  },
+  "HEpsZ3": {
+    "defaultMessage": "Back to discovery"
   },
   "HFVDeB": {
     "defaultMessage": "Related Tags",
@@ -1229,6 +1254,10 @@
     "defaultMessage": "Comments and replies",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "dZQ+ba": {
+    "defaultMessage": "Likers",
+    "description": "src/components/ArticleDigest/DropdownActions/AppreciatorsButton/index.tsx"
+  },
   "deEeEI": {
     "defaultMessage": "Register"
   },
@@ -1833,3 +1862,4 @@
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   }
 }
+
