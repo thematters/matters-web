@@ -1,12 +1,9 @@
-import { useContext } from 'react'
-
-import { ENTITY_TYPE, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
+import { ENTITY_TYPE } from '~/common/enums'
 import {
   Button,
   TextIcon,
   toDigestTagPlaceholder,
   Translate,
-  ViewerContext,
 } from '~/components'
 import {
   SetCollectionProps,
@@ -65,8 +62,6 @@ const SettingsButton = ({
   ownCircles,
   publishable,
 }: SettingsButtonProps) => {
-  const viewer = useContext(ViewerContext)
-
   const { edit: editCollection, saving: collectionSaving } =
     useEditDraftCollection(draft)
   const {
@@ -140,43 +135,32 @@ const SettingsButton = ({
     toggleComment,
   }
 
-  if (!viewer.shouldSetupLikerID) {
-    return (
-      <EditorSettingsDialog
-        saving={false}
-        disabled={
-          collectionSaving ||
-          coverSaving ||
-          tagsSaving ||
-          accessSaving ||
-          canCommentSaving
-        }
-        confirmButtonText={<Translate id="publishNow" />}
-        cancelButtonText={<Translate id="publishAbort" />}
-        ConfirmStepContent={ConfirmPublishDialogContent}
-        {...coverProps}
-        {...tagsProps}
-        {...collectionProps}
-        {...accessProps}
-        {...responseProps}
-      >
-        {({ openDialog: openEditorSettingsDialog }) => (
-          <ConfirmButton
-            openDialog={openEditorSettingsDialog}
-            disabled={disabled}
-          />
-        )}
-      </EditorSettingsDialog>
-    )
-  }
-
   return (
-    <ConfirmButton
-      openDialog={() =>
-        window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
+    <EditorSettingsDialog
+      saving={false}
+      disabled={
+        collectionSaving ||
+        coverSaving ||
+        tagsSaving ||
+        accessSaving ||
+        canCommentSaving
       }
-      disabled={disabled}
-    />
+      confirmButtonText={<Translate id="publishNow" />}
+      cancelButtonText={<Translate id="publishAbort" />}
+      ConfirmStepContent={ConfirmPublishDialogContent}
+      {...coverProps}
+      {...tagsProps}
+      {...collectionProps}
+      {...accessProps}
+      {...responseProps}
+    >
+      {({ openDialog: openEditorSettingsDialog }) => (
+        <ConfirmButton
+          openDialog={openEditorSettingsDialog}
+          disabled={disabled}
+        />
+      )}
+    </EditorSettingsDialog>
   )
 }
 

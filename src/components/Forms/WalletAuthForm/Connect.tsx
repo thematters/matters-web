@@ -9,6 +9,7 @@ import {
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
   ERROR_CODES,
+  WALLET_ERROR_MESSAGES,
 } from '~/common/enums'
 import {
   analytics,
@@ -16,7 +17,6 @@ import {
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
-  WALLET_ERROR_MESSAGES,
   WalletType,
 } from '~/common/utils'
 import {

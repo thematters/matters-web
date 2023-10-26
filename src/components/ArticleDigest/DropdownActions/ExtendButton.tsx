@@ -1,20 +1,19 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
-  ERROR_MESSAGES,
   IconCollection24,
   Menu,
   toast,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -47,6 +46,7 @@ const ExtendButton = ({
   article: ExtendButtonArticleFragment
 }) => {
   const router = useRouter()
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const [collectArticle] = useMutation<ExtendArticleMutation>(EXTEND_ARTICLE, {
     variables: { title: '', collection: [article.id] },
@@ -84,7 +84,12 @@ const ExtendButton = ({
 
   return (
     <Menu.Item
-      text={<Translate id="collectArticle" />}
+      text={intl.formatMessage({
+        defaultMessage: 'Collect Article',
+        id: '8UWUW8',
+        description:
+          'src/components/ArticleDigest/DropdownActions/ExtendButton.tsx',
+      })}
       icon={<IconCollection24 size="mdS" />}
       onClick={onClick}
     />

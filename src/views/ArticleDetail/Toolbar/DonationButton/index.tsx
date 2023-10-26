@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import {
   ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEXT,
   UNIVERSAL_AUTH_TRIGGER,
@@ -12,7 +13,6 @@ import { analytics, numAbbr, translate } from '~/common/utils'
 import {
   Button,
   DonationDialog,
-  ERROR_MESSAGES,
   IconDonate24,
   LanguageContext,
   TextIcon,
