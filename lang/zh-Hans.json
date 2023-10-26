@@ -358,6 +358,10 @@
     "defaultMessage": "离开围炉",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
+  "91IQdk": {
+    "defaultMessage": "已追踪",
+    "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
+  },
   "9Fpc9S": {
     "defaultMessage": "漏洞报告"
   },
@@ -1133,6 +1137,9 @@
     "defaultMessage": "请先登入再进行操作",
     "description": "UNAUTHENTICATED"
   },
+  "YS8YSV": {
+    "defaultMessage": "已注销用户"
+  },
   "YUXRsM": {
     "defaultMessage": "已屏蔽用户",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
@@ -1283,6 +1290,10 @@
   "eov+J2": {
     "defaultMessage": "自定义网址名称"
   },
+  "erE5/4": {
+    "defaultMessage": "互相追踪",
+    "description": "src/components/Buttons/FollowUser/FollowState.tsx"
+  },
   "fWDtpq": {
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1339,6 +1350,10 @@
   },
   "hrgo+E": {
     "defaultMessage": "归档"
+  },
+  "icdrwy": {
+    "defaultMessage": "追踪了你",
+    "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
   "ieGrWo": {
     "defaultMessage": "追踪"
@@ -1582,6 +1597,10 @@
   "rBjwQy": {
     "defaultMessage": "微博",
     "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "rJSVni": {
+    "defaultMessage": "追踪",
+    "description": "src/components/Buttons/FollowUser/Follow.tsx"
   },
   "rLlTQ9": {
     "defaultMessage": "标签名称"

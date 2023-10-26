@@ -12,7 +12,7 @@ describe('<UserDigest.Plain>', () => {
 
     render(<UserDigest.Plain user={MOCK_USER} onClick={handleClick} />)
 
-    const $digest = screen.getByTestId(TEST_ID.DIGEST_USER_MINI)
+    const $digest = screen.getByTestId(TEST_ID.DIGEST_USER_PLAIN)
     expect($digest).toBeInTheDocument()
 
     // display name

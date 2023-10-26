@@ -358,6 +358,10 @@
     "defaultMessage": "Unsubscribe Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
+  "91IQdk": {
+    "defaultMessage": "Followed",
+    "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
+  },
   "9Fpc9S": {
     "defaultMessage": "Bug Report"
   },
@@ -1133,6 +1137,9 @@
     "defaultMessage": "Please log in.",
     "description": "UNAUTHENTICATED"
   },
+  "YS8YSV": {
+    "defaultMessage": "Account Archived"
+  },
   "YUXRsM": {
     "defaultMessage": "Blocked Users",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
@@ -1283,6 +1290,10 @@
   "eov+J2": {
     "defaultMessage": "Custom URL Name"
   },
+  "erE5/4": {
+    "defaultMessage": "Followed",
+    "description": "src/components/Buttons/FollowUser/FollowState.tsx"
+  },
   "fWDtpq": {
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1339,6 +1350,10 @@
   },
   "hrgo+E": {
     "defaultMessage": "Archive"
+  },
+  "icdrwy": {
+    "defaultMessage": "Followed You",
+    "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
   "ieGrWo": {
     "defaultMessage": "Follow"
@@ -1582,6 +1597,10 @@
   "rBjwQy": {
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "rJSVni": {
+    "defaultMessage": "Follow",
+    "description": "src/components/Buttons/FollowUser/Follow.tsx"
   },
   "rLlTQ9": {
     "defaultMessage": "Tag Name"
