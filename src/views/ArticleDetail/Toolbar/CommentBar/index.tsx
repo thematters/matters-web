@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import {
   CLOSE_ACTIVE_DIALOG,
   ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   REFETCH_RESPONSES,
@@ -16,7 +17,6 @@ import {
   Card,
   CardProps,
   CommentFormDialog,
-  ERROR_MESSAGES,
   IconComment16,
   LanguageContext,
   Media,

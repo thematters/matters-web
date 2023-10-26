@@ -2,6 +2,7 @@ import '@testing-library/jest-dom/vitest'
 
 import { Globals } from '@react-spring/web'
 import { cleanup, configure } from '@testing-library/react'
+import mockRouter from 'next-router-mock'
 import { afterEach, beforeAll, vi } from 'vitest'
 
 // runs a setup before all test cases (e.g. setting up jsdom)
@@ -17,6 +18,7 @@ beforeAll(() => {
 // runs a cleanup after each test case (e.g. clearing jsdom)
 afterEach(() => {
   cleanup()
+  mockRouter.push('/')
 })
 
 // via https://github.com/vitest-dev/vitest/issues/821
@@ -43,7 +45,9 @@ vi.mock('next/dynamic', async () => {
   return {
     default: (loader: any) => {
       const dynamicActualComp = dynamicModule.default
-      const RequiredComponent = dynamicActualComp(loader)
+      const RequiredComponent = dynamicActualComp(() =>
+        loader().then((mod: any) => mod.default || mod)
+      )
 
       if (RequiredComponent?.render?.displayName) {
         RequiredComponent.render.displayName = loader.toString()
@@ -52,6 +56,7 @@ vi.mock('next/dynamic', async () => {
       RequiredComponent.preload
         ? RequiredComponent.preload()
         : RequiredComponent.render.preload()
+
       return RequiredComponent
     },
   }

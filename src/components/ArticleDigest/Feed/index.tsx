@@ -26,7 +26,6 @@ export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
   hasHeader?: boolean
-  hasFollow?: boolean
   hasCircle?: boolean
   hasAuthor?: boolean
 }
@@ -42,9 +41,7 @@ export type ArticleDigestFeedProps = {
 const BaseArticleDigestFeed = ({
   article,
   header,
-  date,
 
-  hasFollow,
   hasHeader = true,
   hasCircle = true,
   hasAuthor = true,
@@ -100,7 +97,6 @@ const BaseArticleDigestFeed = ({
       hasDonationCount={hasDonationCount}
       hasCircle={hasCircle}
       inCard
-      date={date}
       {...controls}
     />
   )
@@ -151,7 +147,10 @@ const BaseArticleDigestFeed = ({
         </section>
         {cover && (
           <LinkWrapper {...path} onClick={onClick}>
-            <div className={styles.cover}>
+            <div
+              className={styles.cover}
+              data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
+            >
               <ResponsiveImage
                 url={cover}
                 width={152}
@@ -185,7 +184,6 @@ export const ArticleDigestFeed = React.memo(
       prevArticle.subscribed === article.subscribed &&
       prevArticle.articleState === article.articleState &&
       prevArticle.pinned === article.pinned &&
-      prevArticle.author.isFollowee === article.author.isFollowee &&
       prevProps.hasSetTagSelected === props.hasSetTagSelected &&
       prevProps.hasSetTagUnselected === props.hasSetTagUnselected &&
       prevProps.hasRemoveTag === props.hasRemoveTag

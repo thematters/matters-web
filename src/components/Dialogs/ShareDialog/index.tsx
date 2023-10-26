@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 
+import { TEST_ID } from '~/common/enums'
 import { analytics, isMobile } from '~/common/utils'
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
@@ -46,7 +47,11 @@ const BaseShareDialog = ({
     <>
       {children({ openDialog: () => onShare(openDialog) })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_SHARE}
+      >
         <DynamicContent {...props} closeDialog={closeDialog} />
       </Dialog>
     </>

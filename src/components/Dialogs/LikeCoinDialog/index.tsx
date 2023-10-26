@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
+import { OPEN_LIKE_COIN_DIALOG, TEST_ID } from '~/common/enums'
 import {
   Dialog,
   Spinner,
@@ -12,7 +12,9 @@ interface LikeCoinDialogProps {
   children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: Spinner,
+})
 
 const BaseLikeCoinDialog: React.FC<LikeCoinDialogProps> = ({ children }) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
@@ -23,7 +25,11 @@ const BaseLikeCoinDialog: React.FC<LikeCoinDialogProps> = ({ children }) => {
     <>
       {children && children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_LIKECOIN}
+      >
         <DynamicContent closeDialog={closeDialog} />
       </Dialog>
     </>
