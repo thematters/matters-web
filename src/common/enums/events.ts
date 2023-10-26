@@ -26,3 +26,24 @@ export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'
 
 // Support
 export const SUPPORT_SUCCESS_ANIMATION = 'supportSuccessAnimation'
+
+// Universal auth
+export enum UNIVERSAL_AUTH_TRIGGER {
+  appreciation = 'appreciation',
+  bookmark = 'bookmark',
+  circlePrice = 'circlePrice',
+  circleSubscription = 'circleSubscription',
+  collectArticle = 'collectArticle',
+  comment = 'comment',
+  createDraft = 'createDraft',
+  error = 'error',
+  followUser = 'followUser',
+  followTag = 'followTag',
+  followCircle = 'followCircle',
+  migration = 'migration',
+  nav = 'nav',
+  replyComment = 'replyComment',
+  sideNav = 'sideNav',
+  support = 'support',
+  visitorWall = 'visitorWall',
+}

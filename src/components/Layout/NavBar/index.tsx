@@ -41,7 +41,7 @@ const NavBar = () => {
           />
 
           <li role="menuitem" className={styles.listItem}>
-            <UniversalAuthButton />
+            <UniversalAuthButton resideIn="nav" />
           </li>
 
           <NavListItem

@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Button, TextIcon, Translate, ViewerContext } from '~/components'
@@ -84,8 +85,11 @@ const Price = ({ circle, onClick }: PriceProps) => {
       bgColor="gold"
       onClick={() => {
         if (!viewer.isAuthed) {
-          window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
-
+          window.dispatchEvent(
+            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+              detail: { trigger: UNIVERSAL_AUTH_TRIGGER.circlePrice },
+            })
+          )
           return
         }
 

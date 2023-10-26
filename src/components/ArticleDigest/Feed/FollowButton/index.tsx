@@ -1,3 +1,4 @@
+import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
@@ -7,11 +8,7 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import {
-  Button,
-  ButtonHeight,
-  ButtonSpacingX,
-  ButtonSpacingY,
-  ButtonWidth,
+  IconDotDivider,
   TextIcon,
   Translate,
   useMutation,
@@ -23,20 +20,28 @@ import {
 } from '~/components/GQL'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import {
-  FollowButtonUserPrivateFragment,
+  ArticleFeedFollowButtonUserPrivateFragment,
   ToggleFollowUserMutation,
 } from '~/gql/graphql'
 
-import { FollowUserButtonSize } from './index'
-
-interface FollowUserProps {
-  user: Partial<FollowButtonUserPrivateFragment>
-  size: FollowUserButtonSize
+interface FollowButtonProps {
+  user: Partial<ArticleFeedFollowButtonUserPrivateFragment>
 }
 
-const FollowUser = ({ user, size }: FollowUserProps) => {
-  const viewer = useContext(ViewerContext)
+const fragments = {
+  user: {
+    private: gql`
+      fragment ArticleFeedFollowButtonUserPrivate on User {
+        id
+        isFollower
+        isFollowee
+      }
+    `,
+  },
+}
 
+const FollowButton = ({ user }: FollowButtonProps) => {
+  const viewer = useContext(ViewerContext)
   const [follow] = useMutation<ToggleFollowUserMutation>(TOGGLE_FOLLOW_USER, {
     variables: { id: user.id, enabled: true },
     optimisticResponse:
@@ -57,20 +62,6 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
     },
   })
 
-  const sizes: Record<FollowUserButtonSize, [ButtonWidth, ButtonHeight]> = {
-    xl: ['7.5rem', '2.5rem'],
-    lg: ['6rem', '2rem'],
-    md: [null, '1.5rem'],
-  }
-  const spacings: Record<
-    FollowUserButtonSize,
-    [ButtonSpacingY, ButtonSpacingX]
-  > = {
-    xl: [0, 0],
-    lg: [0, 0],
-    md: [0, 'tight'],
-  }
-
   const onClick = () => {
     if (!viewer.isAuthed) {
       window.dispatchEvent(
@@ -85,24 +76,28 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
     follow()
   }
 
+  if (viewer.isInactive || viewer.id === user.id) {
+    return null
+  }
+
+  if (user.isFollowee) {
+    return null
+  }
+
   return (
-    <Button
-      size={sizes[size]}
-      spacing={spacings[size]}
-      textColor="green"
-      textActiveColor="greenDark"
-      borderColor="green"
-      borderActiveColor="greenDark"
-      onClick={onClick}
+    <TextIcon
+      icon={<IconDotDivider color="greyDark" />}
+      color="green"
+      size="sm"
+      spacing={0}
     >
-      <TextIcon
-        weight="md"
-        size={size === 'xl' ? 'md' : size === 'lg' ? 'sm' : 'xs'}
-      >
+      <button type="button" onClick={onClick}>
         <Translate id="follow" />
-      </TextIcon>
-    </Button>
+      </button>
+    </TextIcon>
   )
 }
 
-export default FollowUser
+FollowButton.fragments = fragments
+
+export default FollowButton
