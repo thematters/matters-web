@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ERROR_CODES } from '~/common/enums'
-import { Empty, ERROR_MESSAGES, IconHashTag16 } from '~/components'
+import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
+import { Empty, IconHashTag16 } from '~/components'
 
 export const EmptyTag = ({
   description,

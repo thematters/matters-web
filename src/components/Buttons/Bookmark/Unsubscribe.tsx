@@ -1,10 +1,9 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ERROR_CODES, TEST_ID } from '~/common/enums'
+import { ERROR_CODES, ERROR_MESSAGES, TEST_ID } from '~/common/enums'
 import {
   Button,
-  ERROR_MESSAGES,
   IconBookmarked16,
   IconBookmarked20,
   IconSize,

@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { LinkWrapper } from '~/components'
+import { Card } from '~/components'
 import { ArticleDigestNoticeArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
@@ -12,7 +12,6 @@ import styles from './styles.module.css'
 export type ArticleDigestNoticeProps = {
   article: ArticleDigestNoticeArticleFragment
   titleTextSize?: ArticleDigestTitleTextSize
-  onClick?: () => any
 }
 
 const fragments = {
@@ -28,11 +27,7 @@ const fragments = {
 
 export const ArticleDigestNotice = ({
   article,
-
   titleTextSize = 'md',
-  onClick,
-
-  ...cardProps
 }: ArticleDigestNoticeProps) => {
   const { summary } = article
 
@@ -45,7 +40,7 @@ export const ArticleDigestNotice = ({
   })
 
   return (
-    <LinkWrapper {...path}>
+    <Card {...path} spacing={[0, 0]} bgColor="none">
       <section
         className={containerClasses}
         data-test-id={TEST_ID.DIGEST_ARTICLE_NOTICE}
@@ -61,7 +56,7 @@ export const ArticleDigestNotice = ({
 
         <section className={styles.content}>{summary}</section>
       </section>
-    </LinkWrapper>
+    </Card>
   )
 }
 

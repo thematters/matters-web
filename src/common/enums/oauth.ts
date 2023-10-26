@@ -285,12 +285,6 @@ export const OAUTH_SCOPE_TREE = {
           zh_hans: '修改邮箱',
         },
       },
-      generateLikerId: {
-        _t: {
-          zh_hant: '創建新的 Liker ID',
-          zh_hans: '创建新的 Liker ID',
-        },
-      },
       clearReadHistory: {
         _t: {
           zh_hant: '清空閱讀歷史',

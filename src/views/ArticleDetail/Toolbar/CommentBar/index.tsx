@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import {
   CLOSE_ACTIVE_DIALOG,
   ERROR_CODES,
-  OPEN_LIKE_COIN_DIALOG,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   REFETCH_RESPONSES,
 } from '~/common/enums'
@@ -16,7 +16,6 @@ import {
   Card,
   CardProps,
   CommentFormDialog,
-  ERROR_MESSAGES,
   IconComment16,
   LanguageContext,
   Media,
@@ -119,18 +118,6 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
 
   if (disabled) {
     return <Content article={article} disabled />
-  }
-
-  if (viewer.shouldSetupLikerID) {
-    return (
-      <Content
-        article={article}
-        aria-haspopup="dialog"
-        onClick={() =>
-          window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-        }
-      />
-    )
   }
 
   if (viewer.isInactive) {

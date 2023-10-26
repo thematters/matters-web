@@ -18,7 +18,6 @@ export const REFETCH_DONATORS = 'refetchDonators'
 // Dialogs
 export const OPEN_UNIVERSAL_AUTH_DIALOG = 'openUniversalAuthDialog'
 export const CLOSE_ACTIVE_DIALOG = 'closeActiveDialog'
-export const OPEN_LIKE_COIN_DIALOG = 'openLikeCoinDialog'
 export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
 export const OPEN_SET_USER_NAME_DIALOG = 'openSetUserNameDialog'
 

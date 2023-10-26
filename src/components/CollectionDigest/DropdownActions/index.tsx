@@ -1,17 +1,8 @@
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ERROR_CODES } from '~/common/enums'
-import { translate } from '~/common/utils'
-import {
-  Dropdown,
-  ERROR_MESSAGES,
-  IconMore16,
-  LanguageContext,
-  Menu,
-  toast,
-  ViewerContext,
-} from '~/components'
+import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
+import { Dropdown, IconMore16, Menu, toast, ViewerContext } from '~/components'
 import { DropdownActionsCollectionFragment } from '~/gql/graphql'
 
 import DeleteCollection from './DeleteCollection'
@@ -36,8 +27,6 @@ const BaseDropdownActions = ({
   openEditDialog,
   openDeleteDialog,
 }: BaseDropdownActionsProps) => {
-  const { lang } = useContext(LanguageContext)
-
   const Content = () => (
     <Menu>
       <EditCollection.Button openDialog={openEditDialog} />
@@ -47,6 +36,12 @@ const BaseDropdownActions = ({
     </Menu>
   )
 
+  const intl = useIntl()
+  const moreActionText = intl.formatMessage({
+    defaultMessage: 'More Actions',
+    id: 'A7ugfn',
+  })
+
   return (
     <Dropdown content={<Content />}>
       {({ openDropdown, ref }) => (
@@ -55,7 +50,7 @@ const BaseDropdownActions = ({
             e.preventDefault()
             openDropdown()
           }}
-          aria-label={translate({ id: 'moreActions', lang })}
+          aria-label={moreActionText}
           aria-haspopup="listbox"
           ref={ref}
           className={styles.moreButton}
