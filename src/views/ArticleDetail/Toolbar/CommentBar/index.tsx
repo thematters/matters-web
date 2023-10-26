@@ -6,7 +6,6 @@ import {
   CLOSE_ACTIVE_DIALOG,
   ERROR_CODES,
   ERROR_MESSAGES,
-  OPEN_LIKE_COIN_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   REFETCH_RESPONSES,
 } from '~/common/enums'
@@ -119,18 +118,6 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
 
   if (disabled) {
     return <Content article={article} disabled />
-  }
-
-  if (viewer.shouldSetupLikerID) {
-    return (
-      <Content
-        article={article}
-        aria-haspopup="dialog"
-        onClick={() =>
-          window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-        }
-      />
-    )
   }
 
   if (viewer.isInactive) {

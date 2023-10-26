@@ -7,7 +7,7 @@ import { WriteButton } from '~/components'
 
 describe('<WriteButton>', () => {
   it('should navigate to the write page when clicked', () => {
-    render(<WriteButton allowed authed forbidden={false} />)
+    render(<WriteButton authed forbidden={false} />)
 
     const button = screen.getByRole('link', { name: 'Create' })
     button.click()
@@ -16,7 +16,7 @@ describe('<WriteButton>', () => {
   })
 
   it('should open auth dialog when clicked', () => {
-    render(<WriteButton allowed authed={false} forbidden={false} />)
+    render(<WriteButton authed={false} forbidden={false} />)
 
     const button = screen.getByRole('button', { name: 'Create' })
     button.click()
@@ -24,17 +24,8 @@ describe('<WriteButton>', () => {
     expect(screen.getByTestId(TEST_ID.DIALOG_AUTH)).toBeInTheDocument()
   })
 
-  it('should open LikeCoin dialog when clicked', () => {
-    render(<WriteButton allowed={false} authed forbidden={false} />)
-
-    const button = screen.getByRole('button', { name: 'Create' })
-    button.click()
-
-    expect(screen.getByTestId(TEST_ID.DIALOG_LIKECOIN)).toBeInTheDocument()
-  })
-
   it('should show toast when forbidden', () => {
-    render(<WriteButton allowed authed forbidden />)
+    render(<WriteButton authed forbidden />)
 
     const button = screen.getByRole('button', { name: 'Create' })
     button.click()
