@@ -151,9 +151,6 @@ const AppreciationButton = ({
    * Article Author:
    *   1) Disabled, show tooltip on hover
    *
-   * No LikerID:
-   *   1) Show Setup LikerID modal on click
-   *
    * Non-Civic Liker:
    *   1) Allow to like 5 times
    *   2) Show modal to introduce Civic Liker on click
@@ -226,6 +223,7 @@ const AppreciationButton = ({
 
   const siteKey = process.env
     .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
+
   // Appreciable
   if (canAppreciate && !disabled) {
     return (
@@ -257,7 +255,7 @@ const AppreciationButton = ({
   }
 
   // Civic Liker
-  if (isReachLimit && !readCivicLikerDialog) {
+  if (isReachLimit && !readCivicLikerDialog && viewer.liker.likerId) {
     return (
       <CivicLikerButton
         user={article.author}
