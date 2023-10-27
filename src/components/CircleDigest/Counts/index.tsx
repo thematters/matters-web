@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 import {
   IconArticle16,
@@ -49,6 +50,7 @@ const Counts = ({ circle }: CountsProps) => {
           en: `${memberCount} members`,
           lang,
         })}
+        data-test-id={TEST_ID.DIGEST_CIRCLE_MEMBER_COUNT}
       >
         {numAbbr(memberCount)}
       </TextIcon>
@@ -64,6 +66,7 @@ const Counts = ({ circle }: CountsProps) => {
           en: `${articleCount} articles`,
           lang,
         })}
+        data-test-id={TEST_ID.DIGEST_CIRCLE_ARTICLE_COUNT}
       >
         {numAbbr(articleCount)}
       </TextIcon>
