@@ -7,7 +7,7 @@ import { CircleDigest } from '~/components'
 import { MOCK_CIRCLE } from '~/stories/mocks'
 
 describe('<CircleDigest.Mini>', () => {
-  it('should render an CircleDigest.Mini', () => {
+  it('should render a CircleDigest.Mini', () => {
     const handleClick = vi.fn()
 
     render(<CircleDigest.Mini circle={MOCK_CIRCLE} onClick={handleClick} />)

@@ -7,14 +7,14 @@ import { MOCK_CIRCLE } from '~/stories/mocks'
 import CircleDigestPrice from './'
 
 describe('<CircleDigest/Price>', () => {
-  it('should render an CircleDigest/Price ', () => {
+  it('should render a CircleDigest/Price ', () => {
     render(<CircleDigestPrice circle={{ ...MOCK_CIRCLE, isMember: false }} />)
 
     const $cta = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_PRICE)
     expect($cta.textContent).toContain(MOCK_CIRCLE.prices[0].amount)
   })
 
-  it('should not render an CircleDigest/Price ', () => {
+  it('should not render a CircleDigest/Price ', () => {
     render(<CircleDigestPrice circle={{ ...MOCK_CIRCLE, isMember: true }} />)
 
     const $cta = screen.getByText('Enter')

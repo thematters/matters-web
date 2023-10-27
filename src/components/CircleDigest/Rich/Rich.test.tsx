@@ -7,7 +7,7 @@ import { CircleDigest } from '~/components'
 import { MOCK_CIRCLE } from '~/stories/mocks'
 
 describe('<CircleDigest.Rich>', () => {
-  it('should render an CircleDigest.Rich', () => {
+  it('should render a CircleDigest.Rich', () => {
     const handleClick = vi.fn()
 
     render(
@@ -64,7 +64,7 @@ describe('<CircleDigest.Rich>', () => {
     expect($cta).toBeInTheDocument()
   })
 
-  it('should render an disabled CircleDigest.Rich', () => {
+  it('should render a disabled CircleDigest.Rich', () => {
     const handleClick = vi.fn()
 
     render(
@@ -94,21 +94,21 @@ describe('<CircleDigest.Rich>', () => {
     expect(handleClick).toBeCalledTimes(0)
   })
 
-  it('should render an CircleDigest.Rich without description', () => {
+  it('should render a CircleDigest.Rich without description', () => {
     render(<CircleDigest.Rich circle={MOCK_CIRCLE} hasDescription={false} />)
 
     const $description = screen.queryByText(MOCK_CIRCLE.description)
     expect($description).not.toBeInTheDocument()
   })
 
-  it('should render an CircleDigest.Rich without owner', () => {
+  it('should render a CircleDigest.Rich without owner', () => {
     render(<CircleDigest.Rich circle={MOCK_CIRCLE} hasOwner={false} />)
 
     const $author = screen.queryByTestId(TEST_ID.DIGEST_USER_MINI)
     expect($author).not.toBeInTheDocument()
   })
 
-  it('should render an CircleDigest.Rich without footer', () => {
+  it('should render a CircleDigest.Rich without footer', () => {
     render(<CircleDigest.Rich circle={MOCK_CIRCLE} hasFooter={false} />)
 
     const $countMember = screen.queryByTestId(
@@ -121,7 +121,7 @@ describe('<CircleDigest.Rich>', () => {
     expect($countArticle).not.toBeInTheDocument()
   })
 
-  it('should render an CircleDigest.Rich with price', () => {
+  it('should render a CircleDigest.Rich with price', () => {
     render(
       <CircleDigest.Rich
         circle={{ ...MOCK_CIRCLE, isMember: false }}

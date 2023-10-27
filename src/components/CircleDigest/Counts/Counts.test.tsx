@@ -7,7 +7,7 @@ import { MOCK_CIRCLE } from '~/stories/mocks'
 import CircleDigestCounts from './'
 
 describe('<CircleDigest/Counts>', () => {
-  it('should render an CircleDigest/Counts ', () => {
+  it('should render a CircleDigest/Counts ', () => {
     render(<CircleDigestCounts circle={{ ...MOCK_CIRCLE }} />)
 
     const $countMember = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_MEMBER_COUNT)
