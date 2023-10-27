@@ -1,3 +1,4 @@
+import { useApolloClient } from '@apollo/react-hooks'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -26,12 +27,14 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { OAUTH_REQUEST_TOKEN } from '~/components/GQL/queries/oauthRequestToken'
 import { SocialAccountType } from '~/gql/graphql'
 
 import { SettingsButton } from '../../Button'
 
 const Socials = () => {
   const viewer = useContext(ViewerContext)
+  const client = useApolloClient()
 
   const googleId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Google
@@ -59,7 +62,12 @@ const Socials = () => {
 
   const gotoTwitter = async () => {
     setLoadingState('Twitter')
-    const url = await twitterOauthUrl(oauthType)
+    const response = await client.query({
+      query: OAUTH_REQUEST_TOKEN,
+      fetchPolicy: 'network-only',
+    })
+    const oauthRequestToken = response.data.oauthRequestToken
+    const url = await twitterOauthUrl(oauthType, oauthRequestToken)
     router.push(url)
   }
 
