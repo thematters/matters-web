@@ -100,9 +100,7 @@ export class ArticleDetailPage {
     this.toolbarCollectButton = this.page.getByRole('menuitem', {
       name: 'Collect Article',
     })
-    this.toolbarEditButton = this.page.getByRole('menuitem', {
-      name: 'Edit',
-    })
+    this.toolbarEditButton = this.page.getByRole('link', { name: 'Edit' })
 
     // dialog
     this.dialog = this.page.getByRole('dialog')
