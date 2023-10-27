@@ -6,6 +6,7 @@ import { PATHS } from '~/common/enums'
 import {
   facebookOauthUrl,
   googleOauthUrl,
+  sleep,
   twitterOauthUrl,
 } from '~/common/utils'
 import {
@@ -46,13 +47,18 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
 
   const gotoTwitter = async () => {
     setLoadingState('Twitter')
-    const response = await client.query({
-      query: OAUTH_REQUEST_TOKEN,
-      fetchPolicy: 'network-only',
-    })
-    const oauthRequestToken = response.data.oauthRequestToken
-    const url = await twitterOauthUrl(oauthType, oauthRequestToken)
-    router.push(url)
+    try {
+      const response = await client.query({
+        query: OAUTH_REQUEST_TOKEN,
+        fetchPolicy: 'network-only',
+      })
+      const oauthRequestToken = response.data.oauthRequestToken
+      const url = await twitterOauthUrl(oauthType, oauthRequestToken)
+      router.push(url)
+    } catch (error) {
+      await sleep(3 * 1000)
+      gotoTwitter()
+    }
   }
 
   const gotoFacebook = async () => {

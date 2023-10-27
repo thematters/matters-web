@@ -11,6 +11,7 @@ import {
 import {
   facebookOauthUrl,
   googleOauthUrl,
+  sleep,
   storage,
   twitterOauthUrl,
 } from '~/common/utils'
@@ -62,13 +63,18 @@ const Socials = () => {
 
   const gotoTwitter = async () => {
     setLoadingState('Twitter')
-    const response = await client.query({
-      query: OAUTH_REQUEST_TOKEN,
-      fetchPolicy: 'network-only',
-    })
-    const oauthRequestToken = response.data.oauthRequestToken
-    const url = await twitterOauthUrl(oauthType, oauthRequestToken)
-    router.push(url)
+    try {
+      const response = await client.query({
+        query: OAUTH_REQUEST_TOKEN,
+        fetchPolicy: 'network-only',
+      })
+      const oauthRequestToken = response.data.oauthRequestToken
+      const url = await twitterOauthUrl(oauthType, oauthRequestToken)
+      router.push(url)
+    } catch (error) {
+      await sleep(3 * 1000)
+      gotoTwitter()
+    }
   }
 
   const gotoFacebook = async () => {
