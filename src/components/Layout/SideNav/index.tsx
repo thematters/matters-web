@@ -121,7 +121,7 @@ const VisitorSideNavMenu = () => {
       </Media>
 
       <li role="menuitem" className={styles.listItem}>
-        <UniversalAuthButton />
+        <UniversalAuthButton resideIn="sideNav" />
       </li>
     </ul>
   )

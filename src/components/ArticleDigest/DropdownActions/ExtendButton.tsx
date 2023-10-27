@@ -7,6 +7,7 @@ import {
   ERROR_CODES,
   ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
@@ -53,7 +54,12 @@ const ExtendButton = ({
 
   const onClick = async () => {
     if (!viewer.isAuthed) {
-      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.collectArticle },
+        })
+      )
+
       return
     }
 

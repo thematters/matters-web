@@ -7,6 +7,7 @@ import {
   ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEXT,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics, numAbbr, translate } from '~/common/utils'
 import {
@@ -88,7 +89,11 @@ const DonationButton = ({
           onClick={() => {
             analytics.trackEvent('click_button', { type: 'donate' })
             if (!viewer.isAuthed) {
-              window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+              window.dispatchEvent(
+                new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                  detail: { trigger: UNIVERSAL_AUTH_TRIGGER.support },
+                })
+              )
               return
             }
             if (viewer.isFrozen) {
