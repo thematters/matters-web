@@ -1819,6 +1819,10 @@
     "defaultMessage": " 众聊提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "ydQPbv": {
+    "defaultMessage": "進入圍爐",
+    "description": "src/components/CircleDigest/Price/index.tsx"
+  },
   "yoRaUc": {
     "defaultMessage": "退款",
     "description": "src/components/Transaction/index.tsx"

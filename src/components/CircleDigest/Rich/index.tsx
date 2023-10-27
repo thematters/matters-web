@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import {
   Card,
@@ -70,6 +71,8 @@ const Rich = ({
       href={disabled ? undefined : path.href}
       spacing={['base', 'base']}
       {...cardProps}
+      onClick={disabled ? undefined : cardProps.onClick}
+      testId={TEST_ID.DIGEST_CIRCLE_RICH}
     >
       <section className={containerClasses}>
         <section className={styles.content}>
@@ -81,6 +84,7 @@ const Rich = ({
                 {...path}
                 textActiveColor="green"
                 disabled={disabled}
+                testId={TEST_ID.DIGEST_CIRCLE_DISPLAY_NAME}
               >
                 {displayName}
               </LinkWrapper>

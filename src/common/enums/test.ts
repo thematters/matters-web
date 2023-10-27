@@ -35,6 +35,7 @@ export enum TEST_ID {
   DIGEST_CIRCLE_DISPLAY_NAME = 'digest/circle/display-name',
   DIGEST_CIRCLE_MEMBER_COUNT = 'digest/circle/member-count',
   DIGEST_CIRCLE_ARTICLE_COUNT = 'digest/circle/article-count',
+  DIGEST_CIRCLE_PRICE = 'digest/circle/price',
   DIGEST_COLLECTION_FEED = 'digest/collection/feed',
   // dialogs
   DIALOG_AUTH = 'dialog/auth',

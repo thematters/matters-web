@@ -5,9 +5,10 @@ import { FormattedMessage } from 'react-intl'
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
+  TEST_ID,
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Button, TextIcon, Translate, ViewerContext } from '~/components'
+import { Button, TextIcon, ViewerContext } from '~/components'
 import {
   PriceCirclePrivateFragment,
   PriceCirclePublicFragment,
@@ -68,7 +69,11 @@ const Price = ({ circle, onClick }: PriceProps) => {
         {...path}
       >
         <TextIcon weight="md" size="sm" color="white">
-          <Translate zh_hant="進入圍爐" zh_hans="进入围炉" />
+          <FormattedMessage
+            defaultMessage="Enter"
+            id="ydQPbv"
+            description="src/components/CircleDigest/Price/index.tsx"
+          />
         </TextIcon>
       </Button>
     )
@@ -95,6 +100,7 @@ const Price = ({ circle, onClick }: PriceProps) => {
           onClick()
         }
       }}
+      testId={TEST_ID.DIGEST_CIRCLE_PRICE}
     >
       <TextIcon weight="md" size="sm" color="white">
         {price.amount} {price.currency} /
