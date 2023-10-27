@@ -174,7 +174,7 @@ test.describe('User Mutation', () => {
           }),
           bobPage
             .getByRole('menuitem', { name: 'Unblock' })
-            .locator('section')
+            .locator('div')
             .click(),
         ])
         await bobPage
