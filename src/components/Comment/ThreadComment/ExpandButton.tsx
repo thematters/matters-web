@@ -22,7 +22,7 @@ const ExpandButton = ({
       <Translate
         zh_hant={`查看 ${restCount} 條回應`}
         zh_hans={`查看 ${restCount} 条回应`}
-        en={`load the rest ${restCount} replies`}
+        en={`Load the rest ${restCount} replies`}
       />
     </TextIcon>
   </Button>
