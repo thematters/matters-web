@@ -60,6 +60,7 @@ export enum TEST_ID {
   PAY_TO_CURRENCY_CHOICE = 'payto/currency-choice',
   // comment
   COMMENT_CONETNT = 'comment/content',
+  COMMENT_REPLY_TO = 'comment/reply-to',
   // notification:components
   NOTICE_USER_DISPLAY_NAME = 'notice/user/display-name',
   NOTICE_ARTICLE_TITLE = 'notice/article/title',
