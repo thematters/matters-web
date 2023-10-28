@@ -1405,6 +1405,10 @@
   "k0ooDW": {
     "defaultMessage": "標籤描述"
   },
+  "k1SWZ2": {
+    "defaultMessage": "取消闔上",
+    "description": "src/components/Comment/DropdownActions/UncollapseButton.tsx"
+  },
   "k5NnNF": {
     "defaultMessage": "追蹤了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"

@@ -36,7 +36,7 @@ const BaseCommentFormDialog = ({
         isOpen={show}
         onDismiss={closeDialog}
         onRest={focusEditor}
-        testId={TEST_ID.DIALOG_COMMENT}
+        testId={TEST_ID.DIALOG_COMMENT_FORM}
       >
         <CommentForm {...props} closeDialog={closeDialog} />
       </Dialog>

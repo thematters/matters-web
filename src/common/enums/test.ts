@@ -34,7 +34,10 @@ export enum TEST_ID {
   DIALOG_APPRECIATORS = 'dialog/appreciators',
   DIALOG_SUPPORTERS = 'dialog/supporters',
   DIALOG_FINGERPRINT = 'dialog/fingerprint',
-  DIALOG_COMMENT = 'dialog/comment',
+  DIALOG_BLOCK_USER = 'dialog/block-user',
+  DIALOG_COMMENT_FORM = 'dialog/comment-form',
+  DIALOG_COMMENT_DELETE = 'dialog/delete-comment',
+  DIALOG_COMMENT_COLLAPSE = 'dialog/collapse-comment',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
   // drafts

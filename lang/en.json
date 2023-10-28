@@ -1405,6 +1405,10 @@
   "k0ooDW": {
     "defaultMessage": "Tag Description"
   },
+  "k1SWZ2": {
+    "defaultMessage": "Uncollapse",
+    "description": "src/components/Comment/DropdownActions/UncollapseButton.tsx"
+  },
   "k5NnNF": {
     "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"

@@ -15,7 +15,7 @@ describe('<Comemnt/FooterActions/ReplyButton>', () => {
 
     // open dialog
     $button.click()
-    expect(screen.getByTestId(TEST_ID.DIALOG_COMMENT)).toBeInTheDocument()
+    expect(screen.getByTestId(TEST_ID.DIALOG_COMMENT_FORM)).toBeInTheDocument()
   })
 
   it('should render a Comment/FooterActions/ReplyButton with custom onClick', () => {

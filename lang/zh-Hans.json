@@ -1405,6 +1405,10 @@
   "k0ooDW": {
     "defaultMessage": "标签描述"
   },
+  "k1SWZ2": {
+    "defaultMessage": "取消折叠",
+    "description": "src/components/Comment/DropdownActions/UncollapseButton.tsx"
+  },
   "k5NnNF": {
     "defaultMessage": "追踪了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
