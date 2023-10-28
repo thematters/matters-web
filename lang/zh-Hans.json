@@ -1159,6 +1159,10 @@
     "defaultMessage": "修订",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
+  "ZYvVYX": {
+    "defaultMessage": "支持者",
+    "description": "src/components/Comment/DonatorLabel/index.tsx"
+  },
   "a/YQ1Z": {
     "defaultMessage": "作品已归档",
     "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
@@ -1213,6 +1217,10 @@
   },
   "cE4Hfw": {
     "defaultMessage": "发现"
+  },
+  "cO0im6": {
+    "defaultMessage": "作者精选",
+    "description": "src/components/Comment/PinnedLabel/index.tsx"
   },
   "cQYXjl": {
     "defaultMessage": "汇率币别",
@@ -1859,6 +1867,10 @@
   },
   "zb8Kx1": {
     "defaultMessage": "公告、提醒、碎碎念…"
+  },
+  "zkmfjn": {
+    "defaultMessage": "置頂",
+    "description": "src/components/Comment/PinnedLabel/index.tsx"
   },
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",

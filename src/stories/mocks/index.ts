@@ -182,11 +182,13 @@ export const MOCK_COMMENT = {
   id: 'comment-0000',
   state: 'active' as any,
   node: MOCK_ARTILCE,
+  type: 'article' as any,
   parentComment: MOCK_PARENT_COMMENT,
   createdAt: '2020-12-24T07:29:17.682Z',
   content:
     '今晚要跟大家說的是關於嘎嘎比森林的故事，故事是源自於安哲的繪本《不安分的石頭》。幾年前看過這本書，這不只是給孩童，也是給大人閱讀的一本好書。內容是提到關於一座從來都固守原貌的森林，突然闖入了一顆小石頭，大家原本井然有序的生活被打亂了。在這個大家都害怕「不安分」的世界，又中國傳統文學裡的「幽」傳統，對此的文論並不多，我聽說李歐梵教授在做此研究，蔡老師能否多講一些',
   author: { ...MOCK_USER, isBlocked: false },
+  fromDonator: false,
 }
 
 export const MOCK_CIRCLE_COMMENT = {

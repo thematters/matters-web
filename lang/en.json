@@ -1159,6 +1159,10 @@
     "defaultMessage": "Edit",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
+  "ZYvVYX": {
+    "defaultMessage": "Supporter",
+    "description": "src/components/Comment/DonatorLabel/index.tsx"
+  },
   "a/YQ1Z": {
     "defaultMessage": "Archived",
     "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
@@ -1213,6 +1217,10 @@
   },
   "cE4Hfw": {
     "defaultMessage": "Discover"
+  },
+  "cO0im6": {
+    "defaultMessage": "Featured",
+    "description": "src/components/Comment/PinnedLabel/index.tsx"
   },
   "cQYXjl": {
     "defaultMessage": "Currency",
@@ -1859,6 +1867,10 @@
   },
   "zb8Kx1": {
     "defaultMessage": "Announcement, reminder, chattering..."
+  },
+  "zkmfjn": {
+    "defaultMessage": "Pinned",
+    "description": "src/components/Comment/PinnedLabel/index.tsx"
   },
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",
