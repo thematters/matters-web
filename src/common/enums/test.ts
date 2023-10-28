@@ -34,6 +34,7 @@ export enum TEST_ID {
   DIALOG_APPRECIATORS = 'dialog/appreciators',
   DIALOG_SUPPORTERS = 'dialog/supporters',
   DIALOG_FINGERPRINT = 'dialog/fingerprint',
+  DIALOG_COMMENT = 'dialog/comment',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
   // drafts

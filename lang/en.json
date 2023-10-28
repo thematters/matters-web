@@ -1135,6 +1135,9 @@
   "Y7N/Jg": {
     "defaultMessage": "Maximum image dimension is 12,000 pixels."
   },
+  "Y8zV4A": {
+    "defaultMessage": "Write a comment"
+  },
   "YPMn9n": {
     "defaultMessage": "Please log in.",
     "description": "UNAUTHENTICATED"
@@ -1151,6 +1154,9 @@
     "defaultMessage": "Profile",
     "description": "src/views/Circle/Settings/index.tsx"
   },
+  "ZD+vm/": {
+    "defaultMessage": "Upvote"
+  },
   "ZUPQzl": {
     "defaultMessage": " ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
@@ -1162,6 +1168,9 @@
   "ZYvVYX": {
     "defaultMessage": "Supporter",
     "description": "src/components/Comment/DonatorLabel/index.tsx"
+  },
+  "ZZ9zIR": {
+    "defaultMessage": "Downvote"
   },
   "a/YQ1Z": {
     "defaultMessage": "Archived",
@@ -1591,6 +1600,9 @@
     "defaultMessage": "Remove Article",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
   },
+  "qlxeW+": {
+    "defaultMessage": "Undo downvote"
+  },
   "r66dXx": {
     "defaultMessage": "mentioned you in broadcast comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -1849,6 +1861,9 @@
   "z+a1SW": {
     "defaultMessage": "Settings",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
+  },
+  "z3uIHQ": {
+    "defaultMessage": "Undo upvote"
   },
   "zAK5G+": {
     "defaultMessage": "The login link has been sent to {email}",

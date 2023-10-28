@@ -1135,6 +1135,9 @@
   "Y7N/Jg": {
     "defaultMessage": "图片边长不得超过 12,000 像素"
   },
+  "Y8zV4A": {
+    "defaultMessage": "回复评论"
+  },
   "YPMn9n": {
     "defaultMessage": "请先登入再进行操作",
     "description": "UNAUTHENTICATED"
@@ -1151,6 +1154,9 @@
     "defaultMessage": "基本资料",
     "description": "src/views/Circle/Settings/index.tsx"
   },
+  "ZD+vm/": {
+    "defaultMessage": "点赞"
+  },
   "ZUPQzl": {
     "defaultMessage": "回复了你",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
@@ -1162,6 +1168,9 @@
   "ZYvVYX": {
     "defaultMessage": "支持者",
     "description": "src/components/Comment/DonatorLabel/index.tsx"
+  },
+  "ZZ9zIR": {
+    "defaultMessage": "点踩"
   },
   "a/YQ1Z": {
     "defaultMessage": "作品已归档",
@@ -1591,6 +1600,9 @@
     "defaultMessage": "移除作品",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
   },
+  "qlxeW+": {
+    "defaultMessage": "取消点踩"
+  },
   "r66dXx": {
     "defaultMessage": "在 {circleName} 的广播留言中提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -1849,6 +1861,9 @@
   "z+a1SW": {
     "defaultMessage": "设置",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
+  },
+  "z3uIHQ": {
+    "defaultMessage": "取消点赞"
   },
   "zAK5G+": {
     "defaultMessage": "登录链接已发送至 {email}",

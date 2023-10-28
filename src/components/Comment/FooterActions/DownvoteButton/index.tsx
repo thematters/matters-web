@@ -1,15 +1,10 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
-import {
-  // numAbbr,
-  translate,
-} from '~/common/utils'
 import {
   Button,
   IconDownVote16,
   IconDownVoted16,
-  LanguageContext,
   TextIcon,
   useMutation,
 } from '~/components'
@@ -56,7 +51,7 @@ const DownvoteButton = ({
   disabled,
   inCard,
 }: DownvoteButtonProps) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const [unvote] = useMutation<UnvoteCommentMutation>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
@@ -93,11 +88,9 @@ const DownvoteButton = ({
           onClick ? onClick() : unvote()
         }}
         disabled={disabled}
-        aria-label={translate({
-          zh_hant: '取消點踩',
-          zh_hans: '取消点踩',
-          en: 'Undo Downvote',
-          lang,
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Undo downvote',
+          id: 'qlxeW+',
         })}
       >
         <TextIcon icon={<IconDownVoted16 />} color="green" weight="md">
@@ -115,11 +108,9 @@ const DownvoteButton = ({
         onClick ? onClick() : downvote()
       }}
       disabled={disabled}
-      aria-label={translate({
-        zh_hant: '點踩',
-        zh_hans: '点踩',
-        en: 'Downvote',
-        lang,
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Downvote',
+        id: 'ZZ9zIR',
       })}
     >
       <TextIcon icon={<IconDownVote16 color="grey" />} color="grey" weight="md">
