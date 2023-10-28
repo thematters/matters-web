@@ -27,6 +27,7 @@ export enum TEST_ID {
   DIGEST_TAG_RICH = 'digest/tag/rich',
   DIGEST_TAG_SIDEBAR = 'digest/tag/sidebar',
   DIGEST_COLLECTION_FEED = 'digest/collection/feed',
+  DIGEST_DRAFT_FEED = 'digest/draft/feed',
   // dialogs
   DIALOG_AUTH = 'dialog/auth',
   DIALOG_LIKECOIN = 'dialog/likecoin',
@@ -34,6 +35,7 @@ export enum TEST_ID {
   DIALOG_APPRECIATORS = 'dialog/appreciators',
   DIALOG_SUPPORTERS = 'dialog/supporters',
   DIALOG_FINGERPRINT = 'dialog/fingerprint',
+  DIALOG_DELETE_DRAFT = 'dialog/delete-draft',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
   // drafts

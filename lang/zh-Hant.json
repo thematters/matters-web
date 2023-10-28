@@ -190,6 +190,9 @@
     "defaultMessage": "登入",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3kbIhS": {
+    "defaultMessage": "未命名"
+  },
   "3phEFL": {
     "defaultMessage": "繼續使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -1019,6 +1022,9 @@
   "VZsE96": {
     "defaultMessage": "選集名稱"
   },
+  "VbxMwX": {
+    "defaultMessage": "確認刪除草稿，草稿會馬上消失。"
+  },
   "VefaFQ": {
     "defaultMessage": "內容長度超出限制 ({length}/{limit})"
   },
@@ -1787,6 +1793,9 @@
   "y4Lyf1": {
     "defaultMessage": "該名稱已被其他使用者使用",
     "description": "NAME_EXISTS"
+  },
+  "yAflVX": {
+    "defaultMessage": "草稿已刪除"
   },
   "yBUiiy": {
     "defaultMessage": "操作無法撤銷，確認封存嗎？"

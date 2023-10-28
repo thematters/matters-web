@@ -189,6 +189,13 @@ export const MOCK_COMMENT = {
   author: { ...MOCK_USER, isBlocked: false },
 }
 
+export const MOCK_DRAFT = {
+  id: 'draft-0000',
+  title: 'draft-title',
+  slug: 'draft-slug',
+  updatedAt: '2020-12-24T07:29:17.682Z',
+}
+
 export const MOCK_CIRCLE_COMMENT = {
   ...MOCK_COMMENT,
   node: MOCK_CIRCLE,

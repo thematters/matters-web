@@ -190,6 +190,9 @@
     "defaultMessage": "Sign In",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3kbIhS": {
+    "defaultMessage": "Untitled"
+  },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to ",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -1019,6 +1022,9 @@
   "VZsE96": {
     "defaultMessage": "Collection Name"
   },
+  "VbxMwX": {
+    "defaultMessage": "Are you sure you want to delete draft?"
+  },
   "VefaFQ": {
     "defaultMessage": "Content length exceeds limit ({length}/{limit})"
   },
@@ -1787,6 +1793,9 @@
   "y4Lyf1": {
     "defaultMessage": "This name is already taken.",
     "description": "NAME_EXISTS"
+  },
+  "yAflVX": {
+    "defaultMessage": "Draft has been deleted"
   },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
