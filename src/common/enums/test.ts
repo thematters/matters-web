@@ -113,6 +113,7 @@ export enum TEST_ID {
   USER_PROFILE_PIN_BOARD_UNPIN_BUTTON = 'user-profile/pin-board/unpin-button',
 
   // Book
+  BOOK = 'book',
   BOOK_TITLE = 'book/title',
 
   // Editor

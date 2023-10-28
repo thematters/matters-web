@@ -874,6 +874,10 @@
     "defaultMessage": "New likes",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "OwKIEe": {
+    "defaultMessage": "{count, plural, =1 {1 article} other {{count} articles}}",
+    "description": "src/components/Book/index.tsx"
+  },
   "OyvGvT": {
     "defaultMessage": "Images have a 5 megabyte (MB) size limit."
   },
@@ -942,6 +946,10 @@
   "SNh1n0": {
     "defaultMessage": "View Members",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SaV7mi": {
+    "defaultMessage": "{articleCount, plural, =1 {1 article} other {{articleCount} articles}}",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "SdXoXI": {
     "defaultMessage": "Invitations have been sent. You can check invitation status on the invitation management page.",
@@ -1184,10 +1192,6 @@
   "awW+lk": {
     "defaultMessage": "Processing",
     "description": "src/components/Transaction/State/index.tsx"
-  },
-  "b6zdPs": {
-    "defaultMessage": "{count} articles",
-    "description": "src/components/Book/index.tsx"
   },
   "b8ogKp": {
     "defaultMessage": "Add Invitation",
@@ -1522,10 +1526,6 @@
   },
   "o2Na0B": {
     "defaultMessage": "Back to All"
-  },
-  "oHQmBt": {
-    "defaultMessage": "{articleCount} articles",
-    "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "ohbnFU": {
     "defaultMessage": "Social Login",

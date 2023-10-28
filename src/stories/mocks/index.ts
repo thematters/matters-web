@@ -196,6 +196,21 @@ export const MOCK_DRAFT = {
   updatedAt: '2020-12-24T07:29:17.682Z',
 }
 
+export const MOCK_COLLECTON = {
+  id: 'collection-0000',
+  title: 'collection-title',
+  cover: 'https://source.unsplash.com/256x256?collection',
+  description: 'collection-description',
+  author: MOCK_USER,
+  articles: {
+    __typename: 'ArticleConnection' as any,
+    totalCount: 1,
+    edges: [{ node: MOCK_ARTILCE }],
+  },
+  pinned: false,
+  updatedAt: '2020-12-24T07:29:17.682Z',
+}
+
 export const MOCK_CIRCLE_COMMENT = {
   ...MOCK_COMMENT,
   node: MOCK_CIRCLE,
