@@ -102,6 +102,9 @@
     "defaultMessage": "服务器错误，请稍候重试",
     "description": "INTERNAL_SERVER_ERROR"
   },
+  "0oLj/t": {
+    "defaultMessage": "展开"
+  },
   "0qagOO": {
     "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"
@@ -774,6 +777,9 @@
   "LWE7oq": {
     "defaultMessage": "草稿保存中，确定要离开吗？"
   },
+  "Lb0JsC": {
+    "defaultMessage": "你屏蔽了该用户"
+  },
   "Lc/azT": {
     "defaultMessage": "IPNS 订阅",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -1202,6 +1208,9 @@
     "defaultMessage": "将你的评论在 {commentArticle} 中置顶",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
+  "cCsxxw": {
+    "defaultMessage": "此 {type} 因违反用户协定而被封存"
+  },
   "cE4Hfw": {
     "defaultMessage": "发现"
   },
@@ -1282,6 +1291,9 @@
   },
   "eov+J2": {
     "defaultMessage": "自定义网址名称"
+  },
+  "fDdcbi": {
+    "defaultMessage": "此 {type} 被原作者删除"
   },
   "fWDtpq": {
     "defaultMessage": "邀请中",
@@ -1672,6 +1684,9 @@
   "up6Uh/": {
     "defaultMessage": "争议款退回",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "us5QHt": {
+    "defaultMessage": "{type} 被创作者折叠"
   },
   "uw32VR": {
     "defaultMessage": "教学指南"

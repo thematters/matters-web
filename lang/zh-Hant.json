@@ -102,6 +102,9 @@
     "defaultMessage": "伺服器錯誤，請稍候重試",
     "description": "INTERNAL_SERVER_ERROR"
   },
+  "0oLj/t": {
+    "defaultMessage": "打開"
+  },
   "0qagOO": {
     "defaultMessage": "圍爐訂閱",
     "description": "src/components/Transaction/index.tsx"
@@ -774,6 +777,9 @@
   "LWE7oq": {
     "defaultMessage": "草稿保存中，確定要離開嗎？"
   },
+  "Lb0JsC": {
+    "defaultMessage": "你封鎖了該用戶"
+  },
   "Lc/azT": {
     "defaultMessage": "IPNS 訂閱",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -1202,6 +1208,9 @@
     "defaultMessage": "將你的評論在 {commentArticle} 中置頂",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
+  "cCsxxw": {
+    "defaultMessage": "此 {type} 因違反用戶協定而被歸檔"
+  },
   "cE4Hfw": {
     "defaultMessage": "發現"
   },
@@ -1282,6 +1291,9 @@
   },
   "eov+J2": {
     "defaultMessage": "自定義網址名稱"
+  },
+  "fDdcbi": {
+    "defaultMessage": "此 {type} 被原作者刪除"
   },
   "fWDtpq": {
     "defaultMessage": "邀請中",
@@ -1672,6 +1684,9 @@
   "up6Uh/": {
     "defaultMessage": "爭議款退回",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "us5QHt": {
+    "defaultMessage": "{type} 被創作者闔上"
   },
   "uw32VR": {
     "defaultMessage": "教學指南"

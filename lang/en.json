@@ -102,6 +102,9 @@
     "defaultMessage": "Oops. Something went wrong. Please try again later.",
     "description": "INTERNAL_SERVER_ERROR"
   },
+  "0oLj/t": {
+    "defaultMessage": "Expand"
+  },
   "0qagOO": {
     "defaultMessage": "Circle Subscription",
     "description": "src/components/Transaction/index.tsx"
@@ -774,6 +777,9 @@
   "LWE7oq": {
     "defaultMessage": "Saving draft, are you sure you want to leave?"
   },
+  "Lb0JsC": {
+    "defaultMessage": "You have blocked that user"
+  },
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -1202,6 +1208,9 @@
     "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
+  "cCsxxw": {
+    "defaultMessage": "This {type} has been archived due to a violation of the user agreement"
+  },
   "cE4Hfw": {
     "defaultMessage": "Discover"
   },
@@ -1282,6 +1291,9 @@
   },
   "eov+J2": {
     "defaultMessage": "Custom URL Name"
+  },
+  "fDdcbi": {
+    "defaultMessage": "This {type} has been deleted by the author"
   },
   "fWDtpq": {
     "defaultMessage": "Pending",
@@ -1672,6 +1684,9 @@
   "up6Uh/": {
     "defaultMessage": "Dispute Refund",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "us5QHt": {
+    "defaultMessage": "This {type} has been collapsed by the author"
   },
   "uw32VR": {
     "defaultMessage": "tutorial"
