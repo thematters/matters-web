@@ -36,6 +36,8 @@ export enum TEST_ID {
   DIALOG_SUPPORTERS = 'dialog/supporters',
   DIALOG_FINGERPRINT = 'dialog/fingerprint',
   DIALOG_DELETE_DRAFT = 'dialog/delete-draft',
+  DIALOG_EDIT_COLLECTION = 'dialog/edit-collection',
+  DIALOG_DELETE_COLLECTION = 'dialog/delete-collection',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
   // drafts
