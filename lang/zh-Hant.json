@@ -437,6 +437,10 @@
     "defaultMessage": "請先設定交易密碼",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
+  "Ayepqz": {
+    "defaultMessage": "移除",
+    "description": "src/components/Tag/index.tsx"
+  },
   "B2As08": {
     "defaultMessage": "沒有更多",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"

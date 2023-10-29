@@ -31,7 +31,7 @@ const RecommendedTags: React.FC<RecommendedTagsProps> = ({
             <Tag
               tag={tag}
               type="inline"
-              disabled
+              is="span"
               onClick={!disabled ? () => onAddTag(tag) : undefined}
             />
           </li>

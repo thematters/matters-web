@@ -23,9 +23,12 @@ export enum TEST_ID {
   DIGEST_USER_RICH = 'digest/user/rich',
   DIGEST_USER_RICH_DISPLAY_NAME = 'digest/user/rich/display-name',
   DIGEST_USER_VERBOSE = 'digest/user/verbose',
+  DIGEST_TAG_CONCISE = 'digest/tag/concise',
   DIGEST_TAG_FEED = 'digest/tag/feed',
+  DIGEST_TAG_FEED_COVER = 'digest/tag/feed/cover',
   DIGEST_TAG_RICH = 'digest/tag/rich',
   DIGEST_TAG_SIDEBAR = 'digest/tag/sidebar',
+  DIGEST_TAG_SIDEBAR_COVER = 'digest/tag/sidebar/cover',
   DIGEST_COLLECTION_FEED = 'digest/collection/feed',
   DIGEST_DRAFT_FEED = 'digest/draft/feed',
   // dialogs
