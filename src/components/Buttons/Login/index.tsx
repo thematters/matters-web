@@ -49,21 +49,16 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
     spacing: buttonSpacing,
     bgActiveColor: buttonBgActiveColor,
   }
-  const ButtonText = () => (
-    <TextIcon color={textIconColor} size={textIconSize} weight="md">
-      <FormattedMessage
-        defaultMessage="Log in"
-        id="skbUBl"
-        description="src/components/Buttons/Login/index.tsx"
-      />
-    </TextIcon>
-  )
 
   return (
-    <>
-      <Button aria-haspopup="dialog" {...buttonProps} {...props}>
-        <ButtonText />
-      </Button>
-    </>
+    <Button aria-haspopup="dialog" {...buttonProps} {...props}>
+      <TextIcon color={textIconColor} size={textIconSize} weight="md">
+        <FormattedMessage
+          defaultMessage="Log in"
+          id="skbUBl"
+          description="src/components/Buttons/Login/index.tsx"
+        />
+      </TextIcon>
+    </Button>
   )
 }

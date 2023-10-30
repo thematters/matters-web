@@ -358,6 +358,10 @@
     "defaultMessage": "Unsubscribe Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
+  "91IQdk": {
+    "defaultMessage": "Followed",
+    "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
+  },
   "9Fpc9S": {
     "defaultMessage": "Bug Report"
   },
@@ -560,6 +564,10 @@
   "FEI5Fv": {
     "defaultMessage": "Email address",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
+  "FEkOVJ": {
+    "defaultMessage": "Remove bookmark",
+    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
   "FOOymB": {
     "defaultMessage": "No members yet",
@@ -1343,10 +1351,6 @@
   "ieGrWo": {
     "defaultMessage": "Follow"
   },
-  "ioPWl8": {
-    "defaultMessage": "Undo bookmark",
-    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
-  },
   "itPgxd": {
     "defaultMessage": "Profile"
   },
@@ -1383,6 +1387,10 @@
   "k97/u7": {
     "defaultMessage": "Add Articles"
   },
+  "kLEWkV": {
+    "defaultMessage": "Bookmark",
+    "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
+  },
   "kPylKK": {
     "defaultMessage": "Circle",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -1390,6 +1398,10 @@
   "kS3vTS": {
     "defaultMessage": "Liker ID",
     "description": "src/views/Me/Settings/Misc/LikerID.tsx"
+  },
+  "kSt4il": {
+    "defaultMessage": "Bookmark removed",
+    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
   "kc79d3": {
     "defaultMessage": "Topics"
@@ -1555,9 +1567,17 @@
   "q9oMKE": {
     "defaultMessage": "Circle Name"
   },
+  "qE8ew4": {
+    "defaultMessage": "Bookmarked",
+    "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
+  },
   "qNuRmA": {
     "defaultMessage": "Send login code",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "qVhxp5": {
+    "defaultMessage": "Enter",
+    "description": "src/components/Buttons/UniversalAuth/index.tsx"
   },
   "qYzBk8": {
     "defaultMessage": "unsubscribed your circle",
