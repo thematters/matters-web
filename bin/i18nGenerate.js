@@ -40,7 +40,7 @@ for (let locale of locales) {
 for (let locale of locales) {
   fs.writeFileSync(
     `./lang/${locale}.json`,
-    JSON.stringify(generate(source, target[locale]), null, 2),
+    JSON.stringify(generate(source, target[locale]), null, 2) + '\n',
     'utf8'
   )
 }
