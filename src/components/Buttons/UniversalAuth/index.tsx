@@ -1,11 +1,12 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { Button, TextIcon, Translate } from '~/components'
+import { Button, TextIcon } from '~/components'
 
 type UniversalAuthButtonProps = { resideIn?: 'nav' | 'sideNav' }
 
@@ -30,16 +31,16 @@ export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
     },
   }
 
-  const ButtonText = () => (
-    <TextIcon color="white" weight="md">
-      <Translate id="authEntries" />
-    </TextIcon>
-  )
-
   return (
     <>
       <Button bgColor="green" spacing={['tight', 'base']} {...props}>
-        <ButtonText />
+        <TextIcon color="white" weight="md">
+          <FormattedMessage
+            defaultMessage="Enter"
+            description="src/components/Buttons/UniversalAuth/index.tsx"
+            id="qVhxp5"
+          />
+        </TextIcon>
       </Button>
     </>
   )

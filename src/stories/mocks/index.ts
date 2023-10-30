@@ -182,11 +182,38 @@ export const MOCK_COMMENT = {
   id: 'comment-0000',
   state: 'active' as any,
   node: MOCK_ARTILCE,
+  type: 'article' as any,
   parentComment: MOCK_PARENT_COMMENT,
   createdAt: '2020-12-24T07:29:17.682Z',
+  pinned: false,
   content:
     '今晚要跟大家說的是關於嘎嘎比森林的故事，故事是源自於安哲的繪本《不安分的石頭》。幾年前看過這本書，這不只是給孩童，也是給大人閱讀的一本好書。內容是提到關於一座從來都固守原貌的森林，突然闖入了一顆小石頭，大家原本井然有序的生活被打亂了。在這個大家都害怕「不安分」的世界，又中國傳統文學裡的「幽」傳統，對此的文論並不多，我聽說李歐梵教授在做此研究，蔡老師能否多講一些',
   author: { ...MOCK_USER, isBlocked: false },
+  fromDonator: false,
+  upvotes: 1,
+  downvotes: 2,
+}
+
+export const MOCK_DRAFT = {
+  id: 'draft-0000',
+  title: 'draft-title',
+  slug: 'draft-slug',
+  updatedAt: '2020-12-24T07:29:17.682Z',
+}
+
+export const MOCK_COLLECTON = {
+  id: 'collection-0000',
+  title: 'collection-title',
+  cover: 'https://source.unsplash.com/256x256?collection',
+  description: 'collection-description',
+  author: MOCK_USER,
+  articles: {
+    __typename: 'ArticleConnection' as any,
+    totalCount: 1,
+    edges: [{ node: MOCK_ARTILCE }],
+  },
+  pinned: false,
+  updatedAt: '2020-12-24T07:29:17.682Z',
 }
 
 export const MOCK_CIRCLE_COMMENT = {
@@ -198,15 +225,22 @@ export const MOCK_CIRCLE_COMMENT = {
 export const MOCK_TAG = {
   __typename: 'Tag' as any,
   id: 'tag-0000',
+  slug: 'tag-slug',
   editors: [MOCK_USER],
   owner: MOCK_USER,
   content: '香港',
+  cover: 'https://source.unsplash.com/256x256?collection',
   description:
     '香港（英語：Hong Kong；縮寫：HK／HKG），全稱香港特別行政區（英語：Hong Kong Special Administrative Region；縮寫：HKSAR），簡稱「港」，雅稱「香江」',
   articles: {
     __typename: 'ArticleConnection' as any,
-    totalCount: 8,
-    edges: [{ node: MOCK_ARTILCE }],
+    totalCount: 4,
+    edges: [
+      { node: MOCK_ARTILCE, cursor: 'tag-1' },
+      { node: MOCK_ARTILCE, cursor: 'tag-2' },
+      { node: MOCK_ARTILCE, cursor: 'tag-3' },
+      { node: MOCK_ARTILCE, cursor: 'tag-4' },
+    ],
   },
   numArticles: 100,
   numAuthors: 21,

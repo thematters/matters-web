@@ -61,8 +61,8 @@ const BaseCollectionDigestFeed = ({
           <Media at="sm">
             <p className={styles.articleCount}>
               <FormattedMessage
-                defaultMessage="{articleCount} articles"
-                id="oHQmBt"
+                defaultMessage={`{articleCount, plural, =1 {1 article} other {{articleCount} articles}}`}
+                id="SaV7mi"
                 description="src/components/CollectionDigest/Feed/index.tsx"
                 values={{ articleCount }}
               />
@@ -79,8 +79,8 @@ const BaseCollectionDigestFeed = ({
             <section className={styles.left}>
               <span className={styles.articleCount}>
                 <FormattedMessage
-                  defaultMessage="{articleCount} articles"
-                  id="oHQmBt"
+                  defaultMessage={`{articleCount, plural, =1 {1 article} other {{articleCount} articles}}`}
+                  id="SaV7mi"
                   description="src/components/CollectionDigest/Feed/index.tsx"
                   values={{ articleCount }}
                 />

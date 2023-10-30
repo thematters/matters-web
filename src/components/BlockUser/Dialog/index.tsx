@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, TEST_ID } from '~/common/enums'
 import {
   Dialog,
   toast,
@@ -52,7 +52,11 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_BLOCK_USER}
+      >
         <Dialog.Header
           title={<FormattedMessage defaultMessage="Block User" id="vAc1Bw" />}
         />

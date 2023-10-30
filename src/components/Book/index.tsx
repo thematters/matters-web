@@ -61,6 +61,7 @@ export const Book: React.FC<BookProps> & {
       style={
         { '--jacket-bg': dominantColor || '#b3b3b3' } as React.CSSProperties
       }
+      data-test-id={TEST_ID.BOOK}
     >
       <div className={styles.cover}>
         <ResponsiveImage
@@ -84,8 +85,8 @@ export const Book: React.FC<BookProps> & {
         {hasCount && (
           <p className={styles.count}>
             <FormattedMessage
-              defaultMessage="{count} articles"
-              id="b6zdPs"
+              defaultMessage={`{count, plural, =1 {1 article} other {{count} articles}}`}
+              id="OwKIEe"
               description="src/components/Book/index.tsx"
               values={{ count: articleCount }}
             />

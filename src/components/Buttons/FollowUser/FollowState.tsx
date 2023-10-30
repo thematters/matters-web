@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
-import { Button, TextIcon, Translate } from '~/components'
+import { Button, TextIcon } from '~/components'
 import { FollowStateUserPrivateFragment } from '~/gql/graphql'
 
 interface FollowStateProps {
@@ -22,9 +23,17 @@ const FollowState = ({ user }: FollowStateProps) => {
     >
       <TextIcon size="xs" color="grey" weight="md">
         {user.isFollowee ? (
-          <Translate id="mutualFollowing" />
+          <FormattedMessage
+            defaultMessage="Followed"
+            id="erE5/4"
+            description="src/components/Buttons/FollowUser/FollowState.tsx"
+          />
         ) : (
-          <Translate zh_hant="追蹤了你" zh_hans="追踪了你" en="Followed You" />
+          <FormattedMessage
+            defaultMessage="Followed You"
+            id="icdrwy"
+            description="src/components/Buttons/FollowUser/FollowState.tsx"
+          />
         )}
       </TextIcon>
     </Button>
