@@ -36,7 +36,7 @@ describe('<CircleDigest.Rich>', () => {
     expect(handleClick).toBeCalledTimes(2)
 
     // avatar
-    const $avatar = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_AVATAR)
+    const $avatar = screen.getByTestId(TEST_ID.CIRCLE_AVATAR)
     expect($avatar).toBeInTheDocument()
     mockRouter.push('/')
     $avatar.click()

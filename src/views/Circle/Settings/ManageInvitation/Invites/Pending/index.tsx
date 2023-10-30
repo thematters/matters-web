@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl'
 import { REFETCH_CIRCLE_PENDING_INVITES } from '~/common/enums'
 import { mergeConnections } from '~/common/utils'
 import {
-  CircleInvitation,
   EmptyWarning,
   InfiniteScroll,
   List,
@@ -16,8 +15,10 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import CIRCLE_PENDING_INVITES from '~/components/GQL/queries/circlePendingInvites'
 import { CirclePendingInvitesQuery } from '~/gql/graphql'
+
+import { CircleInvitation } from '../CircleInvitation'
+import { CIRCLE_PENDING_INVITES } from './gql'
 
 /**
  * This component is for listing circle pending invitations.

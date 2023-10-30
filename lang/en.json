@@ -706,6 +706,9 @@
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "JRkgKV": {
+    "defaultMessage": "Failed to copy, please try again."
+  },
   "JTWayV": {
     "defaultMessage": "Add description",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -964,6 +967,9 @@
   "SNh1n0": {
     "defaultMessage": "View Members",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SYyBFF": {
+    "defaultMessage": "Copied successful"
   },
   "SaV7mi": {
     "defaultMessage": "{articleCount, plural, =1 {1 article} other {{articleCount} articles}}",
