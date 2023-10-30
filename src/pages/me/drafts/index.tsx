@@ -1,10 +1,10 @@
 import { Protected } from '~/components'
-import MeDrafts from '~/views/Me/Drafts'
+import MeWorksDrafts from '~/views/Me/Works/Drafts'
 
-const ProtectedMeDrafts = () => (
+const ProtectedMeWorksDrafts = () => (
   <Protected>
-    <MeDrafts />
+    <MeWorksDrafts />
   </Protected>
 )
 
-export default ProtectedMeDrafts
+export default ProtectedMeWorksDrafts

@@ -210,10 +210,6 @@
   "4l6vz1": {
     "defaultMessage": "Copy"
   },
-  "4sl6yu": {
-    "defaultMessage": "Start writing",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "50cquj": {
     "defaultMessage": "No discussion yet",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
@@ -557,6 +553,10 @@
     "defaultMessage": "Oops！This link has expired",
     "description": "src/views/Callback/GoogleCallback.tsx"
   },
+  "F3zk7E": {
+    "defaultMessage": "(This action cannot be undone)",
+    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
+  },
   "FEI5Fv": {
     "defaultMessage": "Email address",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -878,6 +878,10 @@
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
+  "PmLGMc": {
+    "defaultMessage": "No drafts yet",
+    "description": "src/components/Empty/EmptyDraft.tsx"
+  },
   "Pp/0po": {
     "defaultMessage": "Shuffle"
   },
@@ -1149,6 +1153,10 @@
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
+  "Z2iL9Z": {
+    "defaultMessage": "Start writing",
+    "description": "src/components/Buttons/StartWriting/index.tsx"
+  },
   "ZAs170": {
     "defaultMessage": "Profile",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -1348,6 +1356,10 @@
     "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
+  "hpIFGj": {
+    "defaultMessage": "Are you sure you want to delete draft ‘{title}’?",
+    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
+  },
   "hrgo+E": {
     "defaultMessage": "Archive"
   },
@@ -1386,6 +1398,9 @@
   },
   "k0ooDW": {
     "defaultMessage": "Tag Description"
+  },
+  "k2veDA": {
+    "defaultMessage": "Write"
   },
   "k5NnNF": {
     "defaultMessage": "followed you",

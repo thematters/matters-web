@@ -27,7 +27,6 @@ import {
 } from './gql'
 import PinBoard from './PinBoard'
 import Placeholder from './Placeholder'
-import StartWriting from './StartWirting'
 
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
@@ -168,8 +167,7 @@ const UserArticles = () => {
     return (
       <>
         <CustomHead />
-        <EmptyArticle />
-        {isViewer && <StartWriting />}
+        <EmptyArticle isMe={isViewer} />
       </>
     )
   }

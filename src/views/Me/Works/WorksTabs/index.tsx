@@ -1,18 +1,29 @@
+import { useQuery } from '@apollo/react-hooks'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { Tabs, useRoute } from '~/components'
+import { MeWorksTabsQuery } from '~/gql/graphql'
+
+import { ME_WORKS_TABS } from './gql'
 
 const WorksTabs: React.FC = () => {
   const { isInPath } = useRoute()
+  const { data } = useQuery<MeWorksTabsQuery>(ME_WORKS_TABS)
 
   const isDrafts = isInPath('ME_DRAFTS')
   const isPublished = isInPath('ME_PUBLISHED')
   const isArchived = isInPath('ME_ARCHIVED')
 
+  const draftsCount = data?.viewer?.drafts.totalCount || 0
+
   return (
     <Tabs>
-      <Tabs.Tab href={PATHS.ME_DRAFTS} selected={isDrafts}>
+      <Tabs.Tab
+        href={PATHS.ME_DRAFTS}
+        selected={isDrafts}
+        count={draftsCount > 0 ? draftsCount : undefined}
+      >
         <FormattedMessage
           defaultMessage="Drafts"
           id="VeEfHm"

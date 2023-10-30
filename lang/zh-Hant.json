@@ -210,10 +210,6 @@
   "4l6vz1": {
     "defaultMessage": "複製"
   },
-  "4sl6yu": {
-    "defaultMessage": "開始創作",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "50cquj": {
     "defaultMessage": "還沒有眾聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
@@ -557,6 +553,10 @@
     "defaultMessage": "Oops！連結已失效",
     "description": "src/views/Callback/GoogleCallback.tsx"
   },
+  "F3zk7E": {
+    "defaultMessage": "(草稿刪除後無法恢復)",
+    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
+  },
   "FEI5Fv": {
     "defaultMessage": "郵件地址",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -878,6 +878,10 @@
     "defaultMessage": "登入密碼",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
+  "PmLGMc": {
+    "defaultMessage": "尚無草稿",
+    "description": "src/components/Empty/EmptyDraft.tsx"
+  },
   "Pp/0po": {
     "defaultMessage": "換一批"
   },
@@ -1149,6 +1153,10 @@
     "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
+  "Z2iL9Z": {
+    "defaultMessage": "開始創作",
+    "description": "src/components/Buttons/StartWriting/index.tsx"
+  },
   "ZAs170": {
     "defaultMessage": "基本資料",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -1348,6 +1356,10 @@
     "defaultMessage": "追蹤了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
+  "hpIFGj": {
+    "defaultMessage": "確認要刪除草稿「{title}」嗎？",
+    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
+  },
   "hrgo+E": {
     "defaultMessage": "封存"
   },
@@ -1386,6 +1398,9 @@
   },
   "k0ooDW": {
     "defaultMessage": "標籤描述"
+  },
+  "k2veDA": {
+    "defaultMessage": "創作"
   },
   "k5NnNF": {
     "defaultMessage": "追蹤了你",
