@@ -1,9 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 import router from 'next/router'
-import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { OPEN_LIKE_COIN_DIALOG, PATHS } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   DraftDigest,
@@ -15,7 +14,6 @@ import {
   List,
   QueryError,
   TextIcon,
-  ViewerContext,
 } from '~/components'
 import Placeholder from '~/components/Book/Placeholder'
 import { MeWorksDraftFeedQuery } from '~/gql/graphql'
@@ -25,8 +23,6 @@ import { ME_WORKS_DRAFTS_FEED } from './gql'
 import styles from './styles.module.css'
 
 export const BaseMeWorksDrafts = () => {
-  const viewer = useContext(ViewerContext)
-
   const { data, loading, error, fetchMore } =
     useQuery<MeWorksDraftFeedQuery>(ME_WORKS_DRAFTS_FEED)
 
@@ -57,10 +53,6 @@ export const BaseMeWorksDrafts = () => {
     })
 
   const addDraft = () => {
-    if (viewer.shouldSetupLikerID) {
-      window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-      return
-    }
     analytics.trackEvent('click_button', { type: 'write' })
     router.push(PATHS.ME_DRAFT_NEW)
   }
