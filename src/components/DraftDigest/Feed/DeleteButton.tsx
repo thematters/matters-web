@@ -12,7 +12,7 @@ import {
   useDialogSwitch,
   useMutation,
 } from '~/components'
-import { updateUserDrafts } from '~/components/GQL'
+import { updateUserDrafts, updateViewerWorksTabs } from '~/components/GQL'
 import { DeleteButtonDraftFragment, DeleteDraftMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -47,6 +47,10 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         cache,
         targetId: draft.id,
         type: 'remove',
+      })
+      updateViewerWorksTabs({
+        cache,
+        type: 'decreaseDraft',
       })
     },
   })

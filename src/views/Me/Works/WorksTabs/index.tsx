@@ -1,21 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { Tabs, useRoute } from '~/components'
 import { MeWorksTabsQuery } from '~/gql/graphql'
 
-export const ME_WORKS_TABS = gql`
-  query MeWorksTabs {
-    viewer {
-      id
-      drafts(input: { first: 0 }) @connection(key: "viewerDrafts") {
-        totalCount
-      }
-    }
-  }
-`
+import { ME_WORKS_TABS } from './gql'
 
 const WorksTabs: React.FC = () => {
   const { isInPath } = useRoute()
