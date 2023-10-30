@@ -23,6 +23,7 @@ export const Cover: React.FC<React.PropsWithChildren<CoverProps>> = ({
         url={url}
         width={1376}
         disabled={isFallback || inEditor}
+        disableAnimation={true}
       />
 
       {children}
