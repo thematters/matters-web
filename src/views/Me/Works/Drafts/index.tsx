@@ -15,9 +15,9 @@ import {
   QueryError,
   TextIcon,
 } from '~/components'
-import Placeholder from '~/components/Book/Placeholder'
 import { MeWorksDraftFeedQuery } from '~/gql/graphql'
 
+import Placeholder from '../Placeholder'
 import WorksTabs from '../WorksTabs'
 import { ME_WORKS_DRAFTS_FEED } from './gql'
 import styles from './styles.module.css'
