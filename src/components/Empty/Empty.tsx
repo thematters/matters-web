@@ -30,7 +30,7 @@ export const Empty = ({
       <Alert type="polite">
         <section className={styles.description}>{description}</section>
       </Alert>
-      {footer && <section className={styles.footer}>{footer}</section>}
+      {footer && <footer>{footer}</footer>}
     </section>
   )
 }
