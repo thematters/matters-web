@@ -23,7 +23,9 @@ export enum TEST_ID {
   DIGEST_USER_RICH = 'digest/user/rich',
   DIGEST_USER_RICH_DISPLAY_NAME = 'digest/user/rich/display-name',
   DIGEST_USER_VERBOSE = 'digest/user/verbose',
+  DIGEST_TAG_CONCISE = 'digest/tag/concise',
   DIGEST_TAG_FEED = 'digest/tag/feed',
+  DIGEST_TAG_FEED_COVER = 'digest/tag/feed/cover',
   DIGEST_TAG_RICH = 'digest/tag/rich',
   DIGEST_TAG_SIDEBAR = 'digest/tag/sidebar',
   DIGRET_CIRCLE_PLAIN = 'digest/circle/plain',
@@ -36,7 +38,9 @@ export enum TEST_ID {
   DIGEST_CIRCLE_MEMBER_COUNT = 'digest/circle/member-count',
   DIGEST_CIRCLE_ARTICLE_COUNT = 'digest/circle/article-count',
   DIGEST_CIRCLE_PRICE = 'digest/circle/price',
+  DIGEST_TAG_SIDEBAR_COVER = 'digest/tag/sidebar/cover',
   DIGEST_COLLECTION_FEED = 'digest/collection/feed',
+  DIGEST_DRAFT_FEED = 'digest/draft/feed',
   // dialogs
   DIALOG_AUTH = 'dialog/auth',
   DIALOG_LIKECOIN = 'dialog/likecoin',
@@ -48,6 +52,9 @@ export enum TEST_ID {
   DIALOG_COMMENT_FORM = 'dialog/comment-form',
   DIALOG_COMMENT_DELETE = 'dialog/delete-comment',
   DIALOG_COMMENT_COLLAPSE = 'dialog/collapse-comment',
+  DIALOG_DELETE_DRAFT = 'dialog/delete-draft',
+  DIALOG_EDIT_COLLECTION = 'dialog/edit-collection',
+  DIALOG_DELETE_COLLECTION = 'dialog/delete-collection',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
   // drafts
@@ -126,6 +133,7 @@ export enum TEST_ID {
   USER_PROFILE_PIN_BOARD_UNPIN_BUTTON = 'user-profile/pin-board/unpin-button',
 
   // Book
+  BOOK = 'book',
   BOOK_TITLE = 'book/title',
 
   // Editor

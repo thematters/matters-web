@@ -194,6 +194,28 @@ export const MOCK_COMMENT = {
   downvotes: 2,
 }
 
+export const MOCK_DRAFT = {
+  id: 'draft-0000',
+  title: 'draft-title',
+  slug: 'draft-slug',
+  updatedAt: '2020-12-24T07:29:17.682Z',
+}
+
+export const MOCK_COLLECTON = {
+  id: 'collection-0000',
+  title: 'collection-title',
+  cover: 'https://source.unsplash.com/256x256?collection',
+  description: 'collection-description',
+  author: MOCK_USER,
+  articles: {
+    __typename: 'ArticleConnection' as any,
+    totalCount: 1,
+    edges: [{ node: MOCK_ARTILCE }],
+  },
+  pinned: false,
+  updatedAt: '2020-12-24T07:29:17.682Z',
+}
+
 export const MOCK_CIRCLE_COMMENT = {
   ...MOCK_COMMENT,
   node: MOCK_CIRCLE,
@@ -203,15 +225,22 @@ export const MOCK_CIRCLE_COMMENT = {
 export const MOCK_TAG = {
   __typename: 'Tag' as any,
   id: 'tag-0000',
+  slug: 'tag-slug',
   editors: [MOCK_USER],
   owner: MOCK_USER,
   content: '香港',
+  cover: 'https://source.unsplash.com/256x256?collection',
   description:
     '香港（英語：Hong Kong；縮寫：HK／HKG），全稱香港特別行政區（英語：Hong Kong Special Administrative Region；縮寫：HKSAR），簡稱「港」，雅稱「香江」',
   articles: {
     __typename: 'ArticleConnection' as any,
-    totalCount: 8,
-    edges: [{ node: MOCK_ARTILCE }],
+    totalCount: 4,
+    edges: [
+      { node: MOCK_ARTILCE, cursor: 'tag-1' },
+      { node: MOCK_ARTILCE, cursor: 'tag-2' },
+      { node: MOCK_ARTILCE, cursor: 'tag-3' },
+      { node: MOCK_ARTILCE, cursor: 'tag-4' },
+    ],
   },
   numArticles: 100,
   numAuthors: 21,

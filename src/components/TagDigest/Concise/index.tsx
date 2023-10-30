@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { TEST_ID } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
 import {
   IconArticle16,
@@ -37,7 +38,7 @@ const Concise = ({
     tag,
   })
   return (
-    <LinkWrapper {...path}>
+    <LinkWrapper {...path} testId={TEST_ID.DIGEST_TAG_CONCISE}>
       <section className={styles.content}>
         <TextIcon
           icon={<IconHashTag16 color="grey" />}

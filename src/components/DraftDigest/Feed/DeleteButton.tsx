@@ -1,14 +1,11 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
+import { TEST_ID } from '~/common/enums'
 import {
   Dialog,
   IconTrash24,
-  LanguageContext,
   toast,
-  Translate,
   useDialogSwitch,
   useMutation,
 } from '~/components'
@@ -36,8 +33,7 @@ const fragments = {
 
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
-
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const [deleteDraft] = useMutation<DeleteDraftMutation>(DELETE_DRAFT, {
     variables: { id: draft.id },
@@ -55,11 +51,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
 
     toast.success({
       message: (
-        <Translate
-          zh_hant="草稿已刪除"
-          zh_hans="草稿已删除"
-          en="draft has been deleted"
-        />
+        <FormattedMessage defaultMessage="Draft has been deleted" id="yAflVX" />
       ),
     })
   }
@@ -70,20 +62,26 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         onClick={openDialog}
         className={styles.deleteButton}
         type="button"
-        aria-label={translate({ id: 'delete', lang })}
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Delete',
+          id: 'K3r6DQ',
+        })}
       >
         <IconTrash24 size="md" />
       </button>
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_DELETE_DRAFT}
+      >
         <Dialog.Header title="deleteDraft" />
 
         <Dialog.Message>
           <p>
-            <Translate
-              zh_hant="確認刪除草稿，草稿會馬上消失。"
-              zh_hans="确认删除草稿，草稿会马上消失。"
-              en="Are you sure you want to delete draft?."
+            <FormattedMessage
+              defaultMessage="Are you sure you want to delete draft?"
+              id="VbxMwX"
             />
           </p>
         </Dialog.Message>

@@ -193,6 +193,9 @@
     "defaultMessage": "Sign In",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3kbIhS": {
+    "defaultMessage": "Untitled"
+  },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -440,6 +443,10 @@
   "AwQHHA": {
     "defaultMessage": "Please set your transcation password.",
     "description": "PAYMENT_PASSWORD_NOT_SET"
+  },
+  "Ayepqz": {
+    "defaultMessage": "Remove",
+    "description": "src/components/Tag/index.tsx"
   },
   "B2As08": {
     "defaultMessage": "That's all",
@@ -881,6 +888,10 @@
     "defaultMessage": "New likes",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "OwKIEe": {
+    "defaultMessage": "{count, plural, =1 {1 article} other {{count} articles}}",
+    "description": "src/components/Book/index.tsx"
+  },
   "OyvGvT": {
     "defaultMessage": "Images have a 5 megabyte (MB) size limit."
   },
@@ -949,6 +960,10 @@
   "SNh1n0": {
     "defaultMessage": "View Members",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SaV7mi": {
+    "defaultMessage": "{articleCount, plural, =1 {1 article} other {{articleCount} articles}}",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "SdXoXI": {
     "defaultMessage": "Invitations have been sent. You can check invitation status on the invitation management page.",
@@ -1028,6 +1043,9 @@
   },
   "VZsE96": {
     "defaultMessage": "Collection Name"
+  },
+  "VbxMwX": {
+    "defaultMessage": "Are you sure you want to delete draft?"
   },
   "VefaFQ": {
     "defaultMessage": "Content length exceeds limit ({length}/{limit})"
@@ -1204,10 +1222,6 @@
   "awW+lk": {
     "defaultMessage": "Processing",
     "description": "src/components/Transaction/State/index.tsx"
-  },
-  "b6zdPs": {
-    "defaultMessage": "{count} articles",
-    "description": "src/components/Book/index.tsx"
   },
   "b8ogKp": {
     "defaultMessage": "Add Invitation",
@@ -1565,10 +1579,6 @@
   "o2Na0B": {
     "defaultMessage": "Back to All"
   },
-  "oHQmBt": {
-    "defaultMessage": "{articleCount} articles",
-    "description": "src/components/CollectionDigest/Feed/index.tsx"
-  },
   "ohbnFU": {
     "defaultMessage": "Social Login",
     "description": "src/views/Me/Settings/Settings/index.tsx"
@@ -1845,6 +1855,9 @@
   "y4Lyf1": {
     "defaultMessage": "This name is already taken.",
     "description": "NAME_EXISTS"
+  },
+  "yAflVX": {
+    "defaultMessage": "Draft has been deleted"
   },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"

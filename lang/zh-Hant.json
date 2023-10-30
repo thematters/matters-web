@@ -193,6 +193,9 @@
     "defaultMessage": "登入",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3kbIhS": {
+    "defaultMessage": "未命名"
+  },
   "3phEFL": {
     "defaultMessage": "繼續使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -440,6 +443,10 @@
   "AwQHHA": {
     "defaultMessage": "請先設定交易密碼",
     "description": "PAYMENT_PASSWORD_NOT_SET"
+  },
+  "Ayepqz": {
+    "defaultMessage": "移除",
+    "description": "src/components/Tag/index.tsx"
   },
   "B2As08": {
     "defaultMessage": "沒有更多",
@@ -881,6 +888,10 @@
     "defaultMessage": "作品被讚賞",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "OwKIEe": {
+    "defaultMessage": "{count, plural, =1 {1 篇文章} other {{count} 篇文章}}",
+    "description": "src/components/Book/index.tsx"
+  },
   "OyvGvT": {
     "defaultMessage": "圖片大小不得超過 5MB"
   },
@@ -949,6 +960,10 @@
   "SNh1n0": {
     "defaultMessage": "查看名單",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SaV7mi": {
+    "defaultMessage": "{articleCount, plural, =1 {1 篇文章} other {{articleCount} 篇文章}}",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "SdXoXI": {
     "defaultMessage": "你已寄出邀請給朋友們，快去已邀請管理查看他們加入的進度吧！",
@@ -1028,6 +1043,9 @@
   },
   "VZsE96": {
     "defaultMessage": "選集名稱"
+  },
+  "VbxMwX": {
+    "defaultMessage": "確認刪除草稿，草稿會馬上消失。"
   },
   "VefaFQ": {
     "defaultMessage": "內容長度超出限制 ({length}/{limit})"
@@ -1204,10 +1222,6 @@
   "awW+lk": {
     "defaultMessage": "進行中…",
     "description": "src/components/Transaction/State/index.tsx"
-  },
-  "b6zdPs": {
-    "defaultMessage": "{count} 篇文章",
-    "description": "src/components/Book/index.tsx"
   },
   "b8ogKp": {
     "defaultMessage": "新增邀請",
@@ -1565,10 +1579,6 @@
   "o2Na0B": {
     "defaultMessage": "返回全部"
   },
-  "oHQmBt": {
-    "defaultMessage": "{articleCount} 篇文章",
-    "description": "src/components/CollectionDigest/Feed/index.tsx"
-  },
   "ohbnFU": {
     "defaultMessage": "社交登入",
     "description": "src/views/Me/Settings/Settings/index.tsx"
@@ -1845,6 +1855,9 @@
   "y4Lyf1": {
     "defaultMessage": "該名稱已被其他使用者使用",
     "description": "NAME_EXISTS"
+  },
+  "yAflVX": {
+    "defaultMessage": "草稿已刪除"
   },
   "yBUiiy": {
     "defaultMessage": "操作無法撤銷，確認封存嗎？"
