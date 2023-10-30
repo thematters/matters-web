@@ -1,10 +1,10 @@
 .container {
   @mixin flex-center-space-between;
 
-  padding: 0 var(--spacing-base);
+  padding: var(--spacing-base);
 
   @media (--sm-up) {
-    padding: 0;
+    padding: var(--spacing-base) 0;
   }
 
   & .right {
