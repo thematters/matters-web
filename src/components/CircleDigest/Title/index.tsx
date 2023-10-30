@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 
+import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { LinkWrapper, LinkWrapperProps } from '~/components'
 import { DigestTitleCircleFragment } from '~/gql/graphql'
@@ -49,6 +50,7 @@ const CircleDigestTitle = ({
       textActiveColor={!disabled ? 'green' : undefined}
       disabled={disabled}
       onClick={onClick}
+      testId={TEST_ID.DIGEST_CIRCLE_TITLE}
     >
       <>{is === 'h2' && <h2 className={titleClasses}>{displayName}</h2>}</>
       <>

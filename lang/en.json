@@ -1838,6 +1838,10 @@
     "defaultMessage": "discussion and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "ydQPbv": {
+    "defaultMessage": "Enter",
+    "description": "src/components/CircleDigest/Price/index.tsx"
+  },
   "yoRaUc": {
     "defaultMessage": "Refund",
     "description": "src/components/Transaction/index.tsx"

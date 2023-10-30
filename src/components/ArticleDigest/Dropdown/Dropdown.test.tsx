@@ -31,7 +31,7 @@ describe('<ArticleDigest.Dropdown>', () => {
     expect(handleClickDigest).toHaveBeenCalled()
   })
 
-  it('should render an disabled ArticleDigest.Dropdown', () => {
+  it('should render a disabled ArticleDigest.Dropdown', () => {
     const handleClickDigest = vi.fn()
 
     render(
