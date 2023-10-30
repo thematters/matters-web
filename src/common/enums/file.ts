@@ -16,7 +16,7 @@ export const ACCEPTED_UPLOAD_IMAGE_TYPES: string[] = [
   'image/webp',
 ]
 
-export const ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES: string[] = [
+export const ACCEPTED_COVER_UPLOAD_IMAGE_TYPES: string[] = [
   'image/png',
   'image/jpeg',
   'image/webp',
