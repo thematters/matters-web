@@ -53,6 +53,9 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
         fetchPolicy: 'network-only',
       })
       const oauthRequestToken = response.data.oauthRequestToken
+      if (!oauthRequestToken) {
+        throw new Error('failed to get oauth request token')
+      }
       const url = await twitterOauthUrl(oauthType, oauthRequestToken)
       router.push(url)
     } catch (error) {
