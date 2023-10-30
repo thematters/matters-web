@@ -1,8 +1,9 @@
 import classNames from 'classnames'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
-import { LinkWrapper, Translate } from '~/components'
+import { LinkWrapper } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
@@ -102,7 +103,7 @@ const Mini = ({
         <span className={nameClasses}>
           {hasDisplayName && (
             <span className={styles.displayname}>
-              <Translate id="accountArchived" />
+              <FormattedMessage defaultMessage="Account Archived" id="YS8YSV" />
             </span>
           )}
         </span>
