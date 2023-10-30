@@ -6,13 +6,13 @@ import { Tabs, useRoute } from '~/components'
 const WorksTabs: React.FC = () => {
   const { isInPath } = useRoute()
 
-  const isDrafts = isInPath('ME_WORKS')
-  const isPublished = isInPath('ME_WORKS_PUBLISHED')
-  const isArchived = isInPath('ME_WORKS_ARCHIVED')
+  const isDrafts = isInPath('ME_DRAFTS')
+  const isPublished = isInPath('ME_PUBLISHED')
+  const isArchived = isInPath('ME_ARCHIVED')
 
   return (
     <Tabs>
-      <Tabs.Tab href={PATHS.ME_WORKS} selected={isDrafts}>
+      <Tabs.Tab href={PATHS.ME_DRAFTS} selected={isDrafts}>
         <FormattedMessage
           defaultMessage="Drafts"
           id="VeEfHm"
@@ -21,7 +21,7 @@ const WorksTabs: React.FC = () => {
       </Tabs.Tab>
 
       {/* TODO: add count props */}
-      <Tabs.Tab href={PATHS.ME_WORKS_PUBLISHED} selected={isPublished}>
+      <Tabs.Tab href={PATHS.ME_PUBLISHED} selected={isPublished}>
         <FormattedMessage
           defaultMessage="Published"
           id="pAQR0S"
@@ -30,7 +30,7 @@ const WorksTabs: React.FC = () => {
       </Tabs.Tab>
 
       {/* TODO: add count props */}
-      <Tabs.Tab href={PATHS.ME_WORKS_ARCHIVED} selected={isArchived}>
+      <Tabs.Tab href={PATHS.ME_ARCHIVED} selected={isArchived}>
         <FormattedMessage
           defaultMessage="Archived"
           id="qPqap+"
