@@ -62,7 +62,7 @@ const SocialCallback = ({ type }: Props) => {
   const isLoginType = oauthType === OAUTH_TYPE.login
   const isBindType = oauthType === OAUTH_TYPE.bind
   const code = getQuery('code')
-  const error = getQuery('error')
+  const error = getQuery('error') || getQuery('denied')
   // Twitter
   const oauthToken = getQuery('oauth_token')
   const oauthVerifier = getQuery('oauth_verifier')
