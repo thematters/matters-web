@@ -174,7 +174,7 @@ test.describe('User Mutation', () => {
           }),
           bobPage
             .getByRole('menuitem', { name: 'Unblock' })
-            .locator('section')
+            .locator('div')
             .click(),
         ])
         await bobPage
@@ -185,7 +185,7 @@ test.describe('User Mutation', () => {
 
       await bobPage
         .getByRole('menuitem', { name: 'Block user' })
-        .locator('section')
+        .locator('div')
         .click()
 
       await Promise.all([

@@ -6,16 +6,11 @@ import Hint from './Hint'
 import Intro from './Intro'
 
 interface SelectProps {
-  startGenerate: () => void
   startBind: (windowRef: Window) => void
   closeDialog: () => void
 }
 
-const Select: React.FC<SelectProps> = ({
-  startGenerate,
-  startBind,
-  closeDialog,
-}) => {
+const Select: React.FC<SelectProps> = ({ startBind, closeDialog }) => {
   return (
     <>
       <Dialog.Header
@@ -28,24 +23,6 @@ const Select: React.FC<SelectProps> = ({
         <Hint />
 
         <TableView spacingX={0}>
-          <TableView.Cell
-            title={
-              <Translate
-                zh_hant="創建新的 Liker ID"
-                zh_hans="创建新的 Liker ID"
-                en="Create new Liker ID"
-              />
-            }
-            subtitle={
-              <Translate
-                zh_hant="同意 Matters 幫我創建 Liker ID"
-                zh_hans="同意 Matters 帮我创建 Liker ID"
-                en="I Agree to have Matters generate a new Liker ID for me"
-              />
-            }
-            role="button"
-            onClick={startGenerate}
-          />
           <TableView.Cell
             title={
               <Translate

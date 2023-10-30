@@ -10,7 +10,7 @@ import {
   PATHS,
   TEST_ID,
 } from '~/common/enums'
-import { appendTarget, WalletType } from '~/common/utils'
+import { analytics, appendTarget, WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   DialogBeta,
@@ -80,8 +80,19 @@ const BaseUniversalAuthDialog = () => {
   const {
     show,
     openDialog: baseOpenDialog,
-    closeDialog,
+    closeDialog: baseCloseDialog,
   } = useDialogSwitch(true)
+
+  const closeDialog = () => {
+    analytics.trackEvent('authenticate', {
+      step:
+        currStep === 'email-verification-sent'
+          ? 'leaveVerificationSent'
+          : 'leave',
+    })
+    baseCloseDialog()
+  }
+
   const openDialog = () => {
     forward('select-login-method')
     baseOpenDialog()
@@ -91,6 +102,12 @@ const BaseUniversalAuthDialog = () => {
   useEventListener(
     OPEN_UNIVERSAL_AUTH_DIALOG,
     (payload: { [key: string]: any }) => {
+      const trigger = payload?.trigger
+      analytics.trackEvent('authenticate', {
+        step: 'engage',
+        ...(trigger ? { trigger } : {}),
+      })
+
       if (isSmUp) {
         openDialog()
         return
@@ -196,6 +213,12 @@ const UniversalAuthDialog = () => {
     useEventListener(
       OPEN_UNIVERSAL_AUTH_DIALOG,
       (payload: { [key: string]: any }) => {
+        const trigger = payload?.trigger
+        analytics.trackEvent('authenticate', {
+          step: 'engage',
+          ...(trigger ? { trigger } : {}),
+        })
+
         if (isSmUp) {
           openDialog()
           return

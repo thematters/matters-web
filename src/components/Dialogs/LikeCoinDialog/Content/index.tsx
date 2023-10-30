@@ -4,10 +4,9 @@ import { useStep } from '~/components'
 
 import Binding from './Binding'
 import Complete from './Complete'
-import Generating from './Generating'
 import Select from './Select'
 
-type Step = 'select' | 'binding' | 'generating' | 'complete'
+type Step = 'select' | 'binding' | 'complete'
 
 interface Props {
   closeDialog: () => void
@@ -36,7 +35,6 @@ const LikeCoinDialogContent: React.FC<Props> = ({
     <>
       {currStep === 'select' && (
         <Select
-          startGenerate={() => forward('generating')}
           startBind={(windowRef?: Window) => {
             forward('binding')
             if (windowRef) {
@@ -45,10 +43,6 @@ const LikeCoinDialogContent: React.FC<Props> = ({
           }}
           closeDialog={closeDialog}
         />
-      )}
-
-      {currStep === 'generating' && (
-        <Generating prevStep={backToSelect} nextStep={complete} />
       )}
 
       {currStep === 'binding' && (

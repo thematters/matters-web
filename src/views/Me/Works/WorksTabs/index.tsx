@@ -11,16 +11,16 @@ const WorksTabs: React.FC = () => {
   const { isInPath } = useRoute()
   const { data } = useQuery<MeWorksTabsQuery>(ME_WORKS_TABS)
 
-  const isDrafts = isInPath('ME_WORKS')
-  const isPublished = isInPath('ME_WORKS_PUBLISHED')
-  const isArchived = isInPath('ME_WORKS_ARCHIVED')
+  const isDrafts = isInPath('ME_DRAFTS')
+  const isPublished = isInPath('ME_PUBLISHED')
+  const isArchived = isInPath('ME_ARCHIVED')
 
   const draftsCount = data?.viewer?.drafts.totalCount || 0
 
   return (
     <Tabs>
       <Tabs.Tab
-        href={PATHS.ME_WORKS}
+        href={PATHS.ME_DRAFTS}
         selected={isDrafts}
         count={draftsCount > 0 ? draftsCount : undefined}
       >
@@ -32,7 +32,7 @@ const WorksTabs: React.FC = () => {
       </Tabs.Tab>
 
       {/* TODO: add count props */}
-      <Tabs.Tab href={PATHS.ME_WORKS_PUBLISHED} selected={isPublished}>
+      <Tabs.Tab href={PATHS.ME_PUBLISHED} selected={isPublished}>
         <FormattedMessage
           defaultMessage="Published"
           id="pAQR0S"
@@ -41,7 +41,7 @@ const WorksTabs: React.FC = () => {
       </Tabs.Tab>
 
       {/* TODO: add count props */}
-      <Tabs.Tab href={PATHS.ME_WORKS_ARCHIVED} selected={isArchived}>
+      <Tabs.Tab href={PATHS.ME_ARCHIVED} selected={isArchived}>
         <FormattedMessage
           defaultMessage="Archived"
           id="qPqap+"

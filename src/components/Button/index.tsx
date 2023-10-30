@@ -266,6 +266,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         onClick,
         ref: buttonRef as React.RefObject<any>,
         className: containerClasses,
+        ...(testId ? { ['data-test-id']: testId } : {}),
       }
 
       // content

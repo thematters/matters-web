@@ -1,7 +1,6 @@
 import { DataProxy } from 'apollo-cache'
 
 import { CircleFollowersPublicQuery } from '~/gql/graphql'
-import { CIRCLE_FOLLOWERS_PUBLIC } from '~/views/Circle/Profile/FollowersDialog/gql'
 
 export const updateCircleFollowers = ({
   cache,
@@ -14,6 +13,10 @@ export const updateCircleFollowers = ({
   type: 'follow' | 'unfollow'
   viewer: any
 }) => {
+  const {
+    CIRCLE_FOLLOWERS_PUBLIC,
+  } = require('~/views/Circle/Profile/FollowersDialog/gql')
+
   try {
     if (!name) {
       return

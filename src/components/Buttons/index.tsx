@@ -1,6 +1,5 @@
 export * from './BackToHome'
 export * from './Bookmark'
-export * from './CopyButton'
 export * from './DonationButton'
 export * from './FollowUser'
 export * from './LanguageSwitch'

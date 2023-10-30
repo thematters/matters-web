@@ -33,9 +33,8 @@ type ROUTE_KEY =
   | 'CIRCLE_CREATION'
   // Me
   | 'ME_DRAFTS'
-  | 'ME_WORKS'
-  | 'ME_WORKS_PUBLISHED'
-  | 'ME_WORKS_ARCHIVED'
+  | 'ME_PUBLISHED'
+  | 'ME_ARCHIVED'
   | 'ME_BOOKMARKS'
   | 'ME_HISTORY'
   | 'ME_HISTORY_COMMENTS'
@@ -134,9 +133,8 @@ export const ROUTES: {
    */
   // Me
   { key: 'ME_DRAFTS', pathname: '/me/drafts' },
-  { key: 'ME_WORKS_PUBLISHED', pathname: '/me/works/published' },
-  { key: 'ME_WORKS_ARCHIVED', pathname: '/me/works/archived' },
-  { key: 'ME_WORKS', pathname: '/me/works' },
+  { key: 'ME_PUBLISHED', pathname: '/me/published' },
+  { key: 'ME_ARCHIVED', pathname: '/me/archived' },
   { key: 'ME_BOOKMARKS', pathname: '/me/bookmarks' },
   { key: 'ME_HISTORY', pathname: '/me/history' },
   { key: 'ME_HISTORY_COMMENTS', pathname: '/me/history/comments' },

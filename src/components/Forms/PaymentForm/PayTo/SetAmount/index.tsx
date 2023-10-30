@@ -10,6 +10,7 @@ import { waitForTransaction } from 'wagmi/actions'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
+  WALLET_ERROR_MESSAGES,
 } from '~/common/enums'
 import {
   featureSupportedChains,
@@ -18,7 +19,6 @@ import {
   numRound,
   validateCurrency,
   validateDonationAmount,
-  WALLET_ERROR_MESSAGES,
 } from '~/common/utils'
 import {
   Button,

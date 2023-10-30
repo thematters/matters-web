@@ -41,7 +41,7 @@ const NavBar = () => {
           />
 
           <li role="menuitem" className={styles.listItem}>
-            <UniversalAuthButton />
+            <UniversalAuthButton resideIn="nav" />
           </li>
 
           <NavListItem
@@ -88,7 +88,6 @@ const NavBar = () => {
         {!isInDraftDetail && (
           <li className={styles.listItem}>
             <WriteButton
-              allowed={!viewer.shouldSetupLikerID}
               authed={viewer.isAuthed}
               forbidden={viewer.isInactive}
             />

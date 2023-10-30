@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 
+import { TEST_ID } from '~/common/enums'
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
 import { SupportsDialogArticleFragment } from '~/gql/graphql'
 
@@ -32,7 +33,11 @@ const BaseSupportersDialog = ({ article, children }: SupportersDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_SUPPORTERS}
+      >
         <DynamicContent article={article} closeDialog={closeDialog} />
       </Dialog>
     </>

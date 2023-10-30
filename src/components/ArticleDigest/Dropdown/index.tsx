@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Card, CardProps } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
@@ -66,7 +67,12 @@ export const ArticleDigestDropdown = ({
   const cardDisabled = isBanned || disabled
 
   return (
-    <Card href={cardDisabled ? undefined : path.href} {...cardProps}>
+    <Card
+      {...cardProps}
+      href={cardDisabled ? undefined : path.href}
+      onClick={cardDisabled ? undefined : cardProps.onClick}
+      testId={TEST_ID.DIGEST_ARTICLE_DROPDOWN}
+    >
       <section className={containerClasses}>
         <header>
           <ArticleDigestTitle
