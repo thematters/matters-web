@@ -1,4 +1,5 @@
 export const UPLOAD_IMAGE_SIZE_LIMIT: number = 5 * 1024 * 1024 // 5MB
+export const UPLOAD_GIF_AVATAR_SIZE_LIMIT: number = 1 * 1024 * 1024 // 1MB
 export const UPLOAD_IMAGE_DIMENSION_LIMIT: number = 12e3 // 12,000 pixels
 export const UPLOAD_IMAGE_AREA_LIMIT: number = 10e3 * 10e3 // 100 megapixels
 export const UPLOAD_IMAGE_METADATA_SIZE_LIMIT: number = 1024 // 1024 bytes
