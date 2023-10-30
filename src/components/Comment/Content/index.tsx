@@ -1,9 +1,11 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, captureClicks } from '~/common/utils'
-import { CommentFormType, Expandable, Translate } from '~/components'
+import { CommentFormType, Expandable, LanguageContext } from '~/components'
 import {
   ContentCommentPrivateFragment,
   ContentCommentPublicFragment,
@@ -52,6 +54,7 @@ const Content = ({
   textIndent = false,
   isRichShow = true,
 }: ContentProps) => {
+  const { lang } = useContext(LanguageContext)
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
 
@@ -66,12 +69,15 @@ const Content = ({
         content={content}
         collapsedContent={
           isBlocked ? (
-            <Translate zh_hant="你屏蔽了该用户" zh_hans="你封鎖了該用戶" />
+            <FormattedMessage
+              defaultMessage="You have blocked that user"
+              id="Lb0JsC"
+            />
           ) : (
-            <Translate
-              en={`This ${COMMENT_TYPE_TEXT.en[type]} has been collapsed by the author`}
-              zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}被創作者闔上`}
-              zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}被创作者折叠`}
+            <FormattedMessage
+              defaultMessage="This {type} has been collapsed by the author"
+              id="us5QHt"
+              values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
             />
           )
         }
@@ -109,9 +115,10 @@ const Content = ({
         className={`${contentClasses} inactive`}
         data-test-id={TEST_ID.COMMENT_CONETNT}
       >
-        <Translate
-          zh_hant={`此${COMMENT_TYPE_TEXT.zh_hant[type]}因違反用戶協定而被歸檔`}
-          zh_hans={`此${COMMENT_TYPE_TEXT.zh_hans[type]}因违反用户协定而被封存`}
+        <FormattedMessage
+          defaultMessage="This {type} has been archived due to a violation of the user agreement"
+          id="cCsxxw"
+          values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
         />
       </p>
     )
@@ -120,9 +127,10 @@ const Content = ({
   if (state === 'archived') {
     return (
       <p className={`${contentClasses} inactive`}>
-        <Translate
-          zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}被原作者刪除`}
-          zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}被原作者删除`}
+        <FormattedMessage
+          defaultMessage="This {type} has been deleted by the author"
+          id="fDdcbi"
+          values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
         />
       </p>
     )

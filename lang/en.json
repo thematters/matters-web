@@ -102,6 +102,9 @@
     "defaultMessage": "Oops. Something went wrong. Please try again later.",
     "description": "INTERNAL_SERVER_ERROR"
   },
+  "0oLj/t": {
+    "defaultMessage": "Expand"
+  },
   "0qagOO": {
     "defaultMessage": "Circle Subscription",
     "description": "src/components/Transaction/index.tsx"
@@ -778,6 +781,9 @@
   "LWE7oq": {
     "defaultMessage": "Saving draft, are you sure you want to leave?"
   },
+  "Lb0JsC": {
+    "defaultMessage": "You have blocked that user"
+  },
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -1133,6 +1139,9 @@
   "Y7N/Jg": {
     "defaultMessage": "Maximum image dimension is 12,000 pixels."
   },
+  "Y8zV4A": {
+    "defaultMessage": "Write a comment"
+  },
   "YPMn9n": {
     "defaultMessage": "Please log in.",
     "description": "UNAUTHENTICATED"
@@ -1152,6 +1161,9 @@
     "defaultMessage": "Profile",
     "description": "src/views/Circle/Settings/index.tsx"
   },
+  "ZD+vm/": {
+    "defaultMessage": "Upvote"
+  },
   "ZUPQzl": {
     "defaultMessage": " ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
@@ -1159,6 +1171,13 @@
   "ZVoJan": {
     "defaultMessage": "Edit",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
+  },
+  "ZYvVYX": {
+    "defaultMessage": "Supporter",
+    "description": "src/components/Comment/DonatorLabel/index.tsx"
+  },
+  "ZZ9zIR": {
+    "defaultMessage": "Downvote"
   },
   "a/YQ1Z": {
     "defaultMessage": "Archived",
@@ -1209,8 +1228,15 @@
     "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
+  "cCsxxw": {
+    "defaultMessage": "This {type} has been archived due to a violation of the user agreement"
+  },
   "cE4Hfw": {
     "defaultMessage": "Discover"
+  },
+  "cO0im6": {
+    "defaultMessage": "Featured",
+    "description": "src/components/Comment/PinnedLabel/index.tsx"
   },
   "cQYXjl": {
     "defaultMessage": "Currency",
@@ -1293,6 +1319,9 @@
   "erE5/4": {
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
+  },
+  "fDdcbi": {
+    "defaultMessage": "This {type} has been deleted by the author"
   },
   "fWDtpq": {
     "defaultMessage": "Pending",
@@ -1390,6 +1419,10 @@
   },
   "k0ooDW": {
     "defaultMessage": "Tag Description"
+  },
+  "k1SWZ2": {
+    "defaultMessage": "Uncollapse",
+    "description": "src/components/Comment/DropdownActions/UncollapseButton.tsx"
   },
   "k5NnNF": {
     "defaultMessage": "followed you",
@@ -1586,6 +1619,9 @@
     "defaultMessage": "Remove Article",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
   },
+  "qlxeW+": {
+    "defaultMessage": "Undo downvote"
+  },
   "r66dXx": {
     "defaultMessage": "mentioned you in broadcast comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -1691,6 +1727,9 @@
   "up6Uh/": {
     "defaultMessage": "Dispute Refund",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "us5QHt": {
+    "defaultMessage": "This {type} has been collapsed by the author"
   },
   "uw32VR": {
     "defaultMessage": "tutorial"
@@ -1850,6 +1889,9 @@
     "defaultMessage": "Settings",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
+  "z3uIHQ": {
+    "defaultMessage": "Undo upvote"
+  },
   "zAK5G+": {
     "defaultMessage": "The login link has been sent to {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
@@ -1867,6 +1909,10 @@
   },
   "zb8Kx1": {
     "defaultMessage": "Announcement, reminder, chattering..."
+  },
+  "zkmfjn": {
+    "defaultMessage": "Pinned",
+    "description": "src/components/Comment/PinnedLabel/index.tsx"
   },
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",

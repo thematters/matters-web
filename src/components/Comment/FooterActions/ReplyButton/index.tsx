@@ -1,18 +1,17 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
   CommentFormDialog,
   CommentFormType,
   IconComment16,
-  LanguageContext,
   ViewerContext,
 } from '~/components'
 import { ReplyComemntFragment } from '~/gql/graphql'
@@ -63,13 +62,16 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
   inCard,
   ...props
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   return (
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
-      aria-label={translate({ id: 'replyComment', lang })}
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Write a comment',
+        id: 'Y8zV4A',
+      })}
       {...props}
     >
       <IconComment16 />

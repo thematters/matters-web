@@ -44,6 +44,10 @@ export enum TEST_ID {
   DIALOG_APPRECIATORS = 'dialog/appreciators',
   DIALOG_SUPPORTERS = 'dialog/supporters',
   DIALOG_FINGERPRINT = 'dialog/fingerprint',
+  DIALOG_BLOCK_USER = 'dialog/block-user',
+  DIALOG_COMMENT_FORM = 'dialog/comment-form',
+  DIALOG_COMMENT_DELETE = 'dialog/delete-comment',
+  DIALOG_COMMENT_COLLAPSE = 'dialog/collapse-comment',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
   // drafts
@@ -66,6 +70,7 @@ export enum TEST_ID {
   PAY_TO_CURRENCY_CHOICE = 'payto/currency-choice',
   // comment
   COMMENT_CONETNT = 'comment/content',
+  COMMENT_REPLY_TO = 'comment/reply-to',
   // notification:components
   NOTICE_USER_DISPLAY_NAME = 'notice/user/display-name',
   NOTICE_ARTICLE_TITLE = 'notice/article/title',
