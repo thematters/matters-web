@@ -1,6 +1,7 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath, UtmParams } from '~/common/utils'
 import { Card } from '~/components'
 import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
@@ -25,7 +26,12 @@ export const ArticleDigestArchived = ({
   })
 
   return (
-    <Card {...path} spacing={['base', 0]} bgActiveColor="none">
+    <Card
+      {...path}
+      spacing={['base', 0]}
+      bgActiveColor="none"
+      testId={TEST_ID.DIGEST_ARTICLE_ARCHIVED}
+    >
       <section className={styles.container}>
         <section className={styles.left}>
           <ArticleDigestTitle

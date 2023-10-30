@@ -32,7 +32,6 @@ import BlockedButton from './BlockedButton'
 import CivicLikerButton from './CivicLikerButton'
 import ForbiddenButton from './ForbiddenButton'
 import { APPRECIATE_ARTICLE, fragments } from './gql'
-import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 
 interface AppreciationButtonProps {
   article: AppreciationButtonArticlePublicFragment &
@@ -152,9 +151,6 @@ const AppreciationButton = ({
    * Article Author:
    *   1) Disabled, show tooltip on hover
    *
-   * No LikerID:
-   *   1) Show Setup LikerID modal on click
-   *
    * Non-Civic Liker:
    *   1) Allow to like 5 times
    *   2) Show modal to introduce Civic Liker on click
@@ -183,8 +179,7 @@ const AppreciationButton = ({
   const readCivicLikerDialog =
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
-    (!isReachLimit && !viewer.isArchived && viewer.liker.likerId) ||
-    (isSuperLike && canSuperLike)
+    (!isReachLimit && !viewer.isArchived) || (isSuperLike && canSuperLike)
 
   // Anonymous
   if (!viewer.isAuthed) {
@@ -221,11 +216,6 @@ const AppreciationButton = ({
     )
   }
 
-  // Liker ID
-  if (viewer.shouldSetupLikerID) {
-    return <SetupLikerIdAppreciateButton total={total} />
-  }
-
   // Blocked by private query
   if (!privateFetched) {
     return <AppreciateButton total={total} disabled />
@@ -233,6 +223,7 @@ const AppreciationButton = ({
 
   const siteKey = process.env
     .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
+
   // Appreciable
   if (canAppreciate && !disabled) {
     return (
@@ -264,7 +255,7 @@ const AppreciationButton = ({
   }
 
   // Civic Liker
-  if (isReachLimit && !readCivicLikerDialog) {
+  if (isReachLimit && !readCivicLikerDialog && viewer.liker.likerId) {
     return (
       <CivicLikerButton
         user={article.author}

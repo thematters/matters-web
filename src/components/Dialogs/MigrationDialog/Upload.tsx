@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
   ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UPLOAD_FILE_COUNT_LIMIT,
   UPLOAD_MIGRATION_SIZE_LIMIT,
@@ -12,7 +13,6 @@ import {
 import { translate } from '~/common/utils'
 import {
   Dialog,
-  ERROR_MESSAGES,
   LanguageContext,
   toast,
   Translate,

@@ -1,3 +1,4 @@
+import { useApolloClient } from '@apollo/react-hooks'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -10,6 +11,7 @@ import {
 import {
   facebookOauthUrl,
   googleOauthUrl,
+  sleep,
   storage,
   twitterOauthUrl,
 } from '~/common/utils'
@@ -26,12 +28,14 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { OAUTH_REQUEST_TOKEN } from '~/components/GQL/queries/oauthRequestToken'
 import { SocialAccountType } from '~/gql/graphql'
 
 import { SettingsButton } from '../../Button'
 
 const Socials = () => {
   const viewer = useContext(ViewerContext)
+  const client = useApolloClient()
 
   const googleId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Google
@@ -59,8 +63,21 @@ const Socials = () => {
 
   const gotoTwitter = async () => {
     setLoadingState('Twitter')
-    const url = await twitterOauthUrl(oauthType)
-    router.push(url)
+    try {
+      const response = await client.query({
+        query: OAUTH_REQUEST_TOKEN,
+        fetchPolicy: 'network-only',
+      })
+      const oauthRequestToken = response.data.oauthRequestToken
+      if (!oauthRequestToken) {
+        throw new Error('failed to get oauth request token')
+      }
+      const url = await twitterOauthUrl(oauthType, oauthRequestToken)
+      router.push(url)
+    } catch (error) {
+      await sleep(3 * 1000)
+      gotoTwitter()
+    }
   }
 
   const gotoFacebook = async () => {

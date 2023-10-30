@@ -1,7 +1,6 @@
 import { DataProxy } from 'apollo-cache'
 
-import { UserArticlesPublicQuery } from '~/gql/graphql'
-import { UserCollectionsQuery } from '~/gql/graphql'
+import { UserArticlesPublicQuery, UserCollectionsQuery } from '~/gql/graphql'
 
 export const updateUserArticles = ({
   cache,

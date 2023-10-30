@@ -1,3 +1,4 @@
+import { useApolloClient } from '@apollo/react-hooks'
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -5,6 +6,7 @@ import { PATHS } from '~/common/enums'
 import {
   facebookOauthUrl,
   googleOauthUrl,
+  sleep,
   twitterOauthUrl,
 } from '~/common/utils'
 import {
@@ -16,6 +18,7 @@ import {
   useRoute,
 } from '~/components'
 
+import { OAUTH_REQUEST_TOKEN } from '../GQL/queries/oauthRequestToken'
 import styles from './styles.module.css'
 
 interface Props {
@@ -24,6 +27,7 @@ interface Props {
 }
 
 export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
+  const client = useApolloClient()
   const { router } = useRoute()
   const [loadingState, setLoadingState] = useState('')
   const isGoogleLoading = loadingState === 'Google'
@@ -43,8 +47,21 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
 
   const gotoTwitter = async () => {
     setLoadingState('Twitter')
-    const url = await twitterOauthUrl(oauthType)
-    router.push(url)
+    try {
+      const response = await client.query({
+        query: OAUTH_REQUEST_TOKEN,
+        fetchPolicy: 'network-only',
+      })
+      const oauthRequestToken = response.data.oauthRequestToken
+      if (!oauthRequestToken) {
+        throw new Error('failed to get oauth request token')
+      }
+      const url = await twitterOauthUrl(oauthType, oauthRequestToken)
+      router.push(url)
+    } catch (error) {
+      await sleep(3 * 1000)
+      gotoTwitter()
+    }
   }
 
   const gotoFacebook = async () => {

@@ -43,6 +43,9 @@
     "defaultMessage": "最近 1 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "/GyMKa": {
+    "defaultMessage": "分享作品"
+  },
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
@@ -64,6 +67,10 @@
   "/podGX": {
     "defaultMessage": "公開",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+  },
+  "/qgntf": {
+    "defaultMessage": "查看支持者",
+    "description": "src/components/ArticleDigest/DropdownActions/DonatorsButton/index.tsx"
   },
   "0Azlrb": {
     "defaultMessage": "管理"
@@ -320,6 +327,10 @@
   "8KFsZN": {
     "defaultMessage": "閱讀次數"
   },
+  "8UWUW8": {
+    "defaultMessage": "關聯作品",
+    "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
+  },
   "8cv9D4": {
     "defaultMessage": "下一步"
   },
@@ -438,6 +449,10 @@
   "BY343C": {
     "defaultMessage": "修改"
   },
+  "Bb2R0G": {
+    "defaultMessage": "創作",
+    "description": "src/components/Buttons/Write/index.tsx"
+  },
   "Bc20la": {
     "defaultMessage": "天"
   },
@@ -491,6 +506,9 @@
   },
   "D3idYv": {
     "defaultMessage": "設定"
+  },
+  "DP3yqI": {
+    "defaultMessage": "支持人數"
   },
   "DUoV1W": {
     "defaultMessage": "已超過 140 字，目前 {numbers} 字",
@@ -618,6 +636,13 @@
   },
   "HAlOn1": {
     "defaultMessage": "用戶名"
+  },
+  "HDjV1k": {
+    "defaultMessage": "分佈式入口",
+    "description": "src/components/ArticleDigest/DropdownActions/FingerprintButton/index.tsx"
+  },
+  "HEpsZ3": {
+    "defaultMessage": "返回發現"
   },
   "HFVDeB": {
     "defaultMessage": "相關標籤",
@@ -1240,6 +1265,10 @@
     "defaultMessage": "作品或評論提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "dZQ+ba": {
+    "defaultMessage": "查看讚賞",
+    "description": "src/components/ArticleDigest/DropdownActions/AppreciatorsButton/index.tsx"
+  },
   "deEeEI": {
     "defaultMessage": "註冊"
   },
@@ -1618,7 +1647,7 @@
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "sy+pv5": {
-    "defaultMessage": "郵件地址"
+    "defaultMessage": "電子郵件"
   },
   "tBt9u0": {
     "defaultMessage": "登入",

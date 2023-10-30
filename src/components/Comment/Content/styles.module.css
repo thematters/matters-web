@@ -1,6 +1,6 @@
 .content {
   &.inactive {
-    @mixin flex-center-start;
+    @mixin flex-center-space-between;
 
     color: var(--color-grey);
 

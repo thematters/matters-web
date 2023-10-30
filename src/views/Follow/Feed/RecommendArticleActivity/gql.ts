@@ -7,9 +7,7 @@ export const fragments = gql`
     source
     recommendArticles: nodes {
       ...FollowingFeedRecommendArticlePublic
-      ...FollowingFeedRecommendArticlePrivate
     }
   }
   ${FollowingRecommendArticle.fragments.article.public}
-  ${FollowingRecommendArticle.fragments.article.private}
 `

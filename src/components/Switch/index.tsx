@@ -6,7 +6,7 @@ import { IconSpinner16 } from '~/components'
 
 import styles from './styles.module.css'
 
-type SwitchProps = {
+export type SwitchProps = {
   name: string
   label: string | React.ReactNode
   onChange?: () => void

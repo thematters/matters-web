@@ -2,7 +2,10 @@ import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
-import { OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
+import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
 import {
   Button,
   ButtonHeight,
@@ -70,7 +73,12 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
 
   const onClick = () => {
     if (!viewer.isAuthed) {
-      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.followUser },
+        })
+      )
+
       return
     }
 

@@ -8,17 +8,13 @@ import {
   ResponsiveImage,
   UserDigest,
 } from '~/components'
-import {
-  FollowingFeedRecommendArticlePrivateFragment,
-  FollowingFeedRecommendArticlePublicFragment,
-} from '~/gql/graphql'
+import { FollowingFeedRecommendArticlePublicFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 import styles from './styles.module.css'
 
 type Props = {
-  article: FollowingFeedRecommendArticlePublicFragment &
-    Partial<FollowingFeedRecommendArticlePrivateFragment>
+  article: FollowingFeedRecommendArticlePublicFragment
 } & CardProps
 
 const RecommendArticle = ({ article, ...cardProps }: Props) => {
@@ -83,10 +79,7 @@ type MemoizedRecommendArticleType = React.MemoExoticComponent<
 const MemoizedRecommendArticle = React.memo(
   RecommendArticle,
   ({ article: prevArticle }, { article }) => {
-    return (
-      prevArticle.recommendArticleState === article.recommendArticleState &&
-      prevArticle.author.isFollowee === article.author.isFollowee
-    )
+    return prevArticle.recommendArticleState === article.recommendArticleState
   }
 ) as MemoizedRecommendArticleType
 

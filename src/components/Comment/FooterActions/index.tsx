@@ -2,11 +2,10 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ERROR_CODES, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
+import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   CommentFormType,
-  ERROR_MESSAGES,
   LanguageContext,
   toast,
   ViewerContext,
@@ -118,10 +117,7 @@ const BaseFooterActions = ({
 
   let onClick
 
-  if (viewer.shouldSetupLikerID) {
-    onClick = () =>
-      window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-  } else if (viewer.isArchived || viewer.isFrozen) {
+  if (viewer.isArchived || viewer.isFrozen) {
     onClick = forbid
   } else if (targetAuthor?.isBlocking) {
     onClick = () =>

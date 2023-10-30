@@ -6,6 +6,8 @@ import {
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
   ERROR_CODES,
+  OAUTH_SESSSION_STORAGE_OAUTH_TOKEN,
+  OAUTH_SESSSION_STORAGE_OAUTH_TYPE,
   OAUTH_STORAGE_BIND_STATE,
   OAUTH_STORAGE_BIND_STATE_FAILURE,
   OAUTH_STORAGE_BIND_STATE_SUCCESS,
@@ -17,7 +19,7 @@ import {
   OAUTH_TYPE,
   PATHS,
 } from '~/common/enums'
-import { analytics, setCookies, storage } from '~/common/utils'
+import { analytics, sessionStorage, setCookies, storage } from '~/common/utils'
 import {
   getErrorCodes,
   LanguageContext,
@@ -61,31 +63,58 @@ const SocialCallback = ({ type }: Props) => {
   const isBindType = oauthType === OAUTH_TYPE.bind
   const code = getQuery('code')
   const error = getQuery('error')
+  // Twitter
+  const oauthToken = getQuery('oauth_token')
+  const oauthVerifier = getQuery('oauth_verifier')
   useEffect(() => {
     const localState = storage.get(OAUTH_STORAGE_STATE)
     const localNonce = storage.get(OAUTH_STORAGE_NONCE)
     const localCodeVerifier = storage.get(OAUTH_STORAGE_CODE_VERIFIER)
     const localPath = storage.get(OAUTH_STORAGE_PATH)
+
+    const localOauthToken = sessionStorage.get(
+      OAUTH_SESSSION_STORAGE_OAUTH_TOKEN
+    )
+    const localOauthType = sessionStorage.get(OAUTH_SESSSION_STORAGE_OAUTH_TYPE)
+
     if (!!error) {
       window.location.href = localPath
       return
     }
 
-    if (localState !== state) {
+    if (type !== SocialAccountType.Twitter && localState !== state) {
       setHasError(true)
+      return
     }
 
-    if (isLoginType) {
+    if (type === SocialAccountType.Twitter && localOauthToken !== oauthToken) {
+      setHasError(true)
+      return
+    }
+
+    if (isLoginType || localOauthType === OAUTH_TYPE.login) {
       ;(async () => {
         try {
+          let input: Object = {
+            nonce: localNonce,
+            codeVerifier: localCodeVerifier,
+            authorizationCode: code,
+          }
+
+          if (type === SocialAccountType.Twitter) {
+            input = {
+              oauth1Credential: {
+                oauthToken,
+                oauthVerifier,
+              },
+            }
+          }
           const { data: loginData } = await login({
             variables: {
               input: {
                 type,
-                nonce: localNonce,
-                codeVerifier: localCodeVerifier,
-                authorizationCode: code,
                 language: lang,
+                ...input,
               },
             },
           })
@@ -129,16 +158,28 @@ const SocialCallback = ({ type }: Props) => {
       })()
     }
 
-    if (isBindType) {
+    if (isBindType || localOauthType === OAUTH_TYPE.bind) {
       ;(async () => {
         try {
+          let input: Object = {
+            nonce: localNonce,
+            codeVerifier: localCodeVerifier,
+            authorizationCode: code,
+          }
+
+          if (type === SocialAccountType.Twitter) {
+            input = {
+              oauth1Credential: {
+                oauthToken,
+                oauthVerifier,
+              },
+            }
+          }
           await addLogin({
             variables: {
               input: {
                 type,
-                nonce: localNonce,
-                codeVerifier: localCodeVerifier,
-                authorizationCode: code,
+                ...input,
               },
             },
           })

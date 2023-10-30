@@ -6,6 +6,7 @@ import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.s
 import IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING from '@/public/static/icons/civic-liker-architect-ring.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 import LOGBOOK from '@/public/static/images/logbook.gif'
+import { TEST_ID } from '~/common/enums'
 import { IconLogbookBadge16, ResponsiveImage, Tooltip } from '~/components'
 import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
@@ -86,7 +87,12 @@ export const Avatar = (props: AvatarProps) => {
   } as React.CSSProperties
 
   return (
-    <div className={avatarClasses} style={style} title={title}>
+    <div
+      className={avatarClasses}
+      style={style}
+      title={title}
+      data-test-id={TEST_ID.AVATAR}
+    >
       <ResponsiveImage
         url={source}
         width={152}
@@ -97,16 +103,25 @@ export const Avatar = (props: AvatarProps) => {
       />
 
       {isCivicLiker && !hasArchitectBadge && (
-        <span className={[styles.ring, styles.civicLiker].join(' ')} />
+        <span
+          data-test-id={TEST_ID.AVATAR_CIVIC_LIKER}
+          className={[styles.ring, styles.civicLiker].join(' ')}
+        />
       )}
       {hasArchitectBadge && !isCivicLiker && (
-        <span className={[styles.ring, styles.architect].join(' ')} />
+        <span
+          data-test-id={TEST_ID.AVATAR_ARCHITECT}
+          className={[styles.ring, styles.architect].join(' ')}
+        />
       )}
       {hasArchitectBadge && isCivicLiker && (
-        <span className={[styles.ring, styles.civicRrchitect].join(' ')} />
+        <span
+          data-test-id={TEST_ID.AVATAR_CIVIC_ARCHITECT}
+          className={[styles.ring, styles.civicRrchitect].join(' ')}
+        />
       )}
       {hasLogbook && (
-        <section className={styles.badge}>
+        <section className={styles.badge} data-test-id={TEST_ID.AVATAR_LOGBOOK}>
           {inProfile ? (
             <Tooltip content="Logbook">
               <img
