@@ -23,11 +23,9 @@ export const SignUpButton: React.FC<
 
   if (isPlain) {
     return (
-      <>
-        <Button aria-haspopup="dialog" {...props}>
-          {children}
-        </Button>
-      </>
+      <Button aria-haspopup="dialog" {...props}>
+        {children}
+      </Button>
     )
   }
 
@@ -36,17 +34,12 @@ export const SignUpButton: React.FC<
     size: size || [null, '2.25rem'],
     spacing: [0, 'loose'],
   }
-  const ButtonText = () => (
-    <TextIcon color="white" weight="md">
-      <FormattedMessage defaultMessage="Register" id="deEeEI" />
-    </TextIcon>
-  )
 
   return (
-    <>
-      <Button aria-haspopup="dialog" {...buttonProps} {...props}>
-        <ButtonText />
-      </Button>
-    </>
+    <Button aria-haspopup="dialog" {...buttonProps} {...props}>
+      <TextIcon color="white" weight="md">
+        <FormattedMessage defaultMessage="Register" id="deEeEI" />
+      </TextIcon>
+    </Button>
   )
 }

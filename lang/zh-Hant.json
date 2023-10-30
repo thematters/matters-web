@@ -575,6 +575,10 @@
     "defaultMessage": "郵件地址",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "FEkOVJ": {
+    "defaultMessage": "取消收藏",
+    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
+  },
   "FOOymB": {
     "defaultMessage": "還沒有成員",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
@@ -1401,10 +1405,6 @@
   "ieGrWo": {
     "defaultMessage": "追蹤"
   },
-  "ioPWl8": {
-    "defaultMessage": "取消收藏",
-    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
-  },
   "itPgxd": {
     "defaultMessage": "個人主頁"
   },
@@ -1445,6 +1445,10 @@
   "k97/u7": {
     "defaultMessage": "添加作品"
   },
+  "kLEWkV": {
+    "defaultMessage": "收藏",
+    "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
+  },
   "kPylKK": {
     "defaultMessage": "圍爐",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -1452,6 +1456,10 @@
   "kS3vTS": {
     "defaultMessage": "Liker ID",
     "description": "src/views/Me/Settings/Misc/LikerID.tsx"
+  },
+  "kSt4il": {
+    "defaultMessage": "收藏已取消",
+    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
   "kc79d3": {
     "defaultMessage": "找你想看的"
@@ -1613,9 +1621,17 @@
   "q9oMKE": {
     "defaultMessage": "圍爐名稱"
   },
+  "qE8ew4": {
+    "defaultMessage": "收藏成功",
+    "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
+  },
   "qNuRmA": {
     "defaultMessage": "發送臨時密碼",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "qVhxp5": {
+    "defaultMessage": "進入",
+    "description": "src/components/Buttons/UniversalAuth/index.tsx"
   },
   "qYzBk8": {
     "defaultMessage": "退訂了你的圍爐",
