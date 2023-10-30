@@ -265,6 +265,9 @@
     "defaultMessage": "授權信息已失效，請重新登入",
     "description": "OAUTH_TOKEN_INVALID"
   },
+  "6OB9UA": {
+    "defaultMessage": "星球連線出現問題，請稍後看看"
+  },
   "6OBAOi": {
     "defaultMessage": "目前總訂閱人數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1121,6 +1124,9 @@
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "XHcb2q": {
+    "defaultMessage": "飛船正在檢修中，請稍後看看"
+  },
   "XQTBu6": {
     "defaultMessage": "在你的圍爐廣播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -1682,6 +1688,9 @@
   },
   "rbrahO": {
     "defaultMessage": "關閉"
+  },
+  "rdZi0V": {
+    "defaultMessage": "你似乎遨遊到了一個未知空間，請返回重試"
   },
   "reOeq5": {
     "defaultMessage": "你已擁有個人創作空間站，期待你的第一篇作品。",

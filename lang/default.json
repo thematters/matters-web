@@ -265,6 +265,9 @@
     "defaultMessage": "Please log in again.",
     "description": "OAUTH_TOKEN_INVALID"
   },
+  "6OB9UA": {
+    "defaultMessage": "Connection error, please come back later"
+  },
   "6OBAOi": {
     "defaultMessage": "subscribers_empty",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1121,6 +1124,9 @@
     "defaultMessage": "subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "XHcb2q": {
+    "defaultMessage": "Spaceship maintaining, please come back later"
+  },
   "XQTBu6": {
     "defaultMessage": "mentioned you in your circle broadcast comment",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -1682,6 +1688,9 @@
   },
   "rbrahO": {
     "defaultMessage": "Close"
+  },
+  "rdZi0V": {
+    "defaultMessage": "It seems you've come to an unknown space, please go back and retry"
   },
   "reOeq5": {
     "defaultMessage": "You have created your personal creative space. Publish your first work!",
