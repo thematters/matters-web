@@ -59,7 +59,7 @@ export const BaseMeWorksDrafts = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
-      <section className={styles.addDraft} onClick={addDraft}>
+      <section className={styles.addDraft} onClick={addDraft} role="button">
         <TextIcon icon={<IconAdd20 size="mdS" />}>
           <FormattedMessage defaultMessage="Write" id="k2veDA" />
         </TextIcon>
