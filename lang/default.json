@@ -1533,6 +1533,9 @@
     "defaultMessage": "Hottest",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
+  "mJEqC/": {
+    "defaultMessage": "Go to {href}"
+  },
   "mPe6DK": {
     "defaultMessage": "subscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"

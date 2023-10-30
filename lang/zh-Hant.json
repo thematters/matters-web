@@ -1533,6 +1533,9 @@
     "defaultMessage": "站內閱讀熱門排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
+  "mJEqC/": {
+    "defaultMessage": "跳轉至 {href}"
+  },
   "mPe6DK": {
     "defaultMessage": "訂閱了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
