@@ -20,7 +20,7 @@ describe('<CircleDigest.Mini>', () => {
 
     // displayName
     const $displayName = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_DISPLAY_NAME)
-    expect($displayName.textContent).toContain(MOCK_CIRCLE.displayName)
+    expect($displayName).toHaveTextContent(MOCK_CIRCLE.displayName)
     mockRouter.push('/')
     $displayName.click()
     expect(mockRouter.asPath).toContain(MOCK_CIRCLE.name)
@@ -36,11 +36,11 @@ describe('<CircleDigest.Mini>', () => {
 
     // counts
     const $countMember = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_MEMBER_COUNT)
-    expect($countMember.textContent).toContain(MOCK_CIRCLE.members.totalCount)
+    expect($countMember).toHaveTextContent(MOCK_CIRCLE.members.totalCount + '')
     const $countArticle = screen.getByTestId(
       TEST_ID.DIGEST_CIRCLE_ARTICLE_COUNT
     )
-    expect($countArticle.textContent).toContain(MOCK_CIRCLE.works.totalCount)
+    expect($countArticle).toHaveTextContent(MOCK_CIRCLE.works.totalCount + '')
 
     // description
     const $description = screen.getByText(MOCK_CIRCLE.description)

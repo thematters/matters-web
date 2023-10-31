@@ -29,7 +29,7 @@ describe('<CircleDigest.Rich>', () => {
 
     // displayName
     const $displayName = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_DISPLAY_NAME)
-    expect($displayName.textContent).toContain(MOCK_CIRCLE.displayName)
+    expect($displayName).toHaveTextContent(MOCK_CIRCLE.displayName)
     mockRouter.push('/')
     $displayName.click()
     expect(mockRouter.asPath).toContain(MOCK_CIRCLE.name)
@@ -53,11 +53,11 @@ describe('<CircleDigest.Rich>', () => {
 
     // counts
     const $countMember = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_MEMBER_COUNT)
-    expect($countMember.textContent).toContain(MOCK_CIRCLE.members.totalCount)
+    expect($countMember).toHaveTextContent(MOCK_CIRCLE.members.totalCount + '')
     const $countArticle = screen.getByTestId(
       TEST_ID.DIGEST_CIRCLE_ARTICLE_COUNT
     )
-    expect($countArticle.textContent).toContain(MOCK_CIRCLE.works.totalCount)
+    expect($countArticle).toHaveTextContent(MOCK_CIRCLE.works.totalCount + '')
 
     // CTA button
     const $cta = screen.getByText('Enter')
@@ -131,6 +131,6 @@ describe('<CircleDigest.Rich>', () => {
     )
 
     const $cta = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_PRICE)
-    expect($cta.textContent).toContain(MOCK_CIRCLE.prices[0].amount)
+    expect($cta).toHaveTextContent(MOCK_CIRCLE.prices[0].amount + '')
   })
 })
