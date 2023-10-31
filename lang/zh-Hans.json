@@ -916,10 +916,6 @@
     "defaultMessage": "取消置顶",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
-  "RNKSCj": {
-    "defaultMessage": "已归档",
-    "description": "src/components/ArticleDigest/Archive/index.tsx"
-  },
   "ROPCC0": {
     "defaultMessage": "请先绑定邮箱",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
