@@ -3,10 +3,10 @@ import { describe, expect, it, vi } from 'vitest'
 import { fireEvent, render, screen } from '~/common/utils/test'
 import { Form } from '~/components'
 
-describe('<Form.Input>', () => {
-  it('should render an Input', () => {
+// almost indentical to src/components/Form/Input/Input.test.tsx
+describe('<Form.Textarea>', () => {
+  it('should render an Textarea', () => {
     const name = 'userName'
-    const type = 'text'
     const placeholder = 'Username'
     const hint = 'This is a hint'
     const fieldId = `field-${name}`
@@ -16,8 +16,7 @@ describe('<Form.Input>', () => {
     const handleOnBlur = vi.fn()
 
     render(
-      <Form.Input
-        type={type}
+      <Form.Textarea
         name={name}
         label={name}
         hint={hint}
@@ -28,14 +27,13 @@ describe('<Form.Input>', () => {
       />
     )
 
-    // input
-    const $input = screen.getByLabelText(name)
-    expect($input).toBeInTheDocument()
-    expect($input).toHaveAttribute('name', name)
-    expect($input).toHaveAttribute('required')
-    expect($input).toHaveAttribute('type', type)
-    expect($input).toHaveAttribute('id', fieldId)
-    expect($input).toHaveAttribute('aria-describedby', fieldMsgId)
+    // textarea
+    const $textarea = screen.getByLabelText(name)
+    expect($textarea).toBeInTheDocument()
+    expect($textarea).toHaveAttribute('name', name)
+    expect($textarea).toHaveAttribute('required')
+    expect($textarea).toHaveAttribute('id', fieldId)
+    expect($textarea).toHaveAttribute('aria-describedby', fieldMsgId)
     expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument()
 
     // hint
@@ -43,14 +41,14 @@ describe('<Form.Input>', () => {
     expect($hint).toBeInTheDocument()
 
     // focusing
-    $input.focus()
-    $input.blur()
+    $textarea.focus()
+    $textarea.blur()
     expect(handleOnBlur).toBeCalled()
 
     // typing
     const value = 'test'
-    fireEvent.change($input, { target: { value } })
+    fireEvent.change($textarea, { target: { value } })
     expect(handleOnChange).toBeCalled()
-    expect($input).toHaveValue(value)
+    expect($textarea).toHaveValue(value)
   })
 })
