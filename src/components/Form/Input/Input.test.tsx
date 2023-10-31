@@ -31,6 +31,7 @@ describe('<Form.Input>', () => {
     // input
     const $input = screen.getByLabelText(name)
     expect($input).toBeInTheDocument()
+    expect($input).toBeRequired()
     expect($input).toHaveAttribute('name', name)
     expect($input).toHaveAttribute('required')
     expect($input).toHaveAttribute('type', type)
@@ -42,15 +43,23 @@ describe('<Form.Input>', () => {
     const $hint = screen.getByText(hint)
     expect($hint).toBeInTheDocument()
 
-    // focusing
+    // focus & blur
     $input.focus()
+    expect($input).toHaveFocus()
     $input.blur()
+    expect($input).not.toHaveFocus()
     expect(handleOnBlur).toBeCalled()
 
-    // typing
+    // type alphabets
     const value = 'test'
     fireEvent.change($input, { target: { value } })
-    expect(handleOnChange).toBeCalled()
+    expect(handleOnChange).toBeCalledTimes(1)
     expect($input).toHaveValue(value)
+
+    // type numbers
+    const numbers = '1234'
+    fireEvent.change($input, { target: { value: numbers } })
+    expect(handleOnChange).toBeCalledTimes(2)
+    expect($input).toHaveValue(numbers)
   })
 })
