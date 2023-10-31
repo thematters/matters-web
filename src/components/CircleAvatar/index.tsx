@@ -36,7 +36,7 @@ export const CircleAvatar = (props: CircleAvatarProps) => {
   })
 
   return (
-    <div className={avatarClasses} data-test-id={TEST_ID.DIGEST_CIRCLE_AVATAR}>
+    <div className={avatarClasses} data-test-id={TEST_ID.CIRCLE_AVATAR}>
       <ResponsiveImage
         url={source}
         width={144}

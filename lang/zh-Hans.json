@@ -265,6 +265,9 @@
     "defaultMessage": "授权信息已失效，请重新登入",
     "description": "OAUTH_TOKEN_INVALID"
   },
+  "6OB9UA": {
+    "defaultMessage": "星球连线出现问题，请稍后看看"
+  },
   "6OBAOi": {
     "defaultMessage": "目前总订阅人数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -706,6 +709,9 @@
     "defaultMessage": "邀你加入围炉 {circleName} ，你可以免费体验 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "JRkgKV": {
+    "defaultMessage": "复制失败"
+  },
   "JTWayV": {
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -965,6 +971,9 @@
     "defaultMessage": "查看名单",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "SYyBFF": {
+    "defaultMessage": "复制成功"
+  },
   "SaV7mi": {
     "defaultMessage": "{articleCount, plural, =1 {1 篇文章} other {{articleCount} 篇文章}}",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
@@ -1114,6 +1123,9 @@
   "XHMco9": {
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "XHcb2q": {
+    "defaultMessage": "飞船正在检修中，请稍后看看"
   },
   "XQTBu6": {
     "defaultMessage": "在你的围炉广播中留言提及你",
@@ -1521,6 +1533,9 @@
     "defaultMessage": "站内阅读热门排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
   },
+  "mJEqC/": {
+    "defaultMessage": "跳转至 {href}"
+  },
   "mPe6DK": {
     "defaultMessage": "订阅了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -1676,6 +1691,9 @@
   },
   "rbrahO": {
     "defaultMessage": "关闭"
+  },
+  "rdZi0V": {
+    "defaultMessage": "你似乎遨游到了一个未知空间，请返回重试"
   },
   "reOeq5": {
     "defaultMessage": "你已拥有个人创作空间站，期待你的第一篇作品。",

@@ -1,16 +1,16 @@
 import gql from 'graphql-tag'
 
-import { CircleInvitation } from '~/components'
+import { CircleInvitation } from '../CircleInvitation'
 
-export default gql`
-  query CircleAcceptedInvites($name: String!, $after: String) {
+export const CIRCLE_PENDING_INVITES = gql`
+  query CirclePendingInvites($name: String!, $after: String) {
     circle(input: { name: $name }) {
       id
       owner {
         id
       }
       invites {
-        accepted(input: { first: 20, after: $after }) {
+        pending(input: { first: 20, after: $after }) {
           pageInfo {
             startCursor
             endCursor

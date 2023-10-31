@@ -33,7 +33,6 @@ export enum TEST_ID {
   DIGEST_CIRCLE_TITLE = 'digest/circle/title',
   DIGEST_CIRCLE_MINI = 'digest/circle/mini',
   DIGEST_CIRCLE_USER_PROFILE = 'digest/circle/user-profile',
-  DIGEST_CIRCLE_AVATAR = 'digest/circle/avatar',
   DIGEST_CIRCLE_DISPLAY_NAME = 'digest/circle/display-name',
   DIGEST_CIRCLE_MEMBER_COUNT = 'digest/circle/member-count',
   DIGEST_CIRCLE_ARTICLE_COUNT = 'digest/circle/article-count',
@@ -148,6 +147,7 @@ export enum TEST_ID {
   AVATAR_ARCHITECT = 'avatar/architect',
   AVATAR_CIVIC_ARCHITECT = 'avatar/civic-architect',
   AVATAR_LOGBOOK = 'avatar/logbook',
+  CIRCLE_AVATAR = 'circle-avatar',
 
   // misc
   RESPONSIVE_IMG = 'responsive-img',
