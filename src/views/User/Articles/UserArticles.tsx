@@ -171,6 +171,10 @@ const UserArticles = () => {
     )
   }
 
+  const articleEdges = edges.filter(
+    ({ node }) => node.articleState === 'active'
+  )
+
   return (
     <>
       <CustomHead />
@@ -185,7 +189,7 @@ const UserArticles = () => {
           eof
         >
           <List>
-            {edges.map(({ node, cursor }, i) => (
+            {articleEdges.map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
                 <ArticleDigestFeed
                   article={node}
