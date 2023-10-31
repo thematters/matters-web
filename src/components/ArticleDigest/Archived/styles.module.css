@@ -1,11 +1,16 @@
 .container {
-  @mixin flex-center-space-between;
-
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-x-tight);
+  padding: var(--spacing-base);
   font-size: var(--font-size-sm);
-  color: var(--color-grey-dark);
+  color: var(--color-grey);
 
-  & .right {
-    color: var(--color-grey);
-    word-break: keep-all;
+  & header {
+    line-height: 1.025rem;
+  }
+
+  @media (--sm-up) {
+    padding: var(--spacing-base) 0;
   }
 }
