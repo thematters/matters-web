@@ -41,7 +41,7 @@ describe('<InfiniteScroll>', () => {
     expect(screen.getByText('No more results')).toBeInTheDocument()
   })
 
-  // FIXME: not support clipboard in jsdom yet
+  // FIXME: not support scroll in jsdom yet
   // it('should call the loadMore function when the waypoint is reached', () => {
   //   const loadMoreMock = vi.fn()
 
