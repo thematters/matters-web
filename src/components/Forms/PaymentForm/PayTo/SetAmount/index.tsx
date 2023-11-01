@@ -309,9 +309,10 @@ const SetAmount: React.FC<FormProps> = ({
         currency={currency}
         balance={balance}
         amounts={AMOUNT_OPTIONS}
+        defaultAmount={AMOUNT_DEFAULT[currency]}
+        currentAmount={values.amount}
         name="amount"
         disabled={isUSDT && !isConnectedAddress}
-        value={values.amount}
         error={errors.amount || networkError}
         onBlur={handleBlur}
         onChange={async (e) => {
@@ -325,7 +326,6 @@ const SetAmount: React.FC<FormProps> = ({
           }
         }}
         // custom input
-        lang={lang}
         customAmount={{
           disabled: isUSDT && !isConnectedAddress,
           min: 0,

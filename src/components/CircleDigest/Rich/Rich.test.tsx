@@ -53,11 +53,15 @@ describe('<CircleDigest.Rich>', () => {
 
     // counts
     const $countMember = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_MEMBER_COUNT)
-    expect($countMember).toHaveTextContent(MOCK_CIRCLE.members.totalCount + '')
+    expect($countMember).toHaveTextContent(
+      String(MOCK_CIRCLE.members.totalCount)
+    )
     const $countArticle = screen.getByTestId(
       TEST_ID.DIGEST_CIRCLE_ARTICLE_COUNT
     )
-    expect($countArticle).toHaveTextContent(MOCK_CIRCLE.works.totalCount + '')
+    expect($countArticle).toHaveTextContent(
+      String(MOCK_CIRCLE.works.totalCount)
+    )
 
     // CTA button
     const $cta = screen.getByText('Enter')
@@ -131,6 +135,6 @@ describe('<CircleDigest.Rich>', () => {
     )
 
     const $cta = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_PRICE)
-    expect($cta).toHaveTextContent(MOCK_CIRCLE.prices[0].amount + '')
+    expect($cta).toHaveTextContent(String(MOCK_CIRCLE.prices[0].amount))
   })
 })

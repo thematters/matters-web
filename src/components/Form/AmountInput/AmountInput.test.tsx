@@ -114,7 +114,7 @@ describe('<Form.AmountInput>', () => {
     expect(screen.queryByDisplayValue(symbols)).not.toBeInTheDocument()
   })
 
-  // FIXME: not working
+  // FIXME: not supported yet
   // it('should not allow numbers out of range to be inputted', () => {
   //   const { $input, min, max } = setup()
 
