@@ -1,8 +1,63 @@
+import { useQuery } from '@apollo/react-hooks'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { Head, Layout } from '~/components'
+import { mergeConnections } from '~/common/utils'
+import {
+  ArticleDigestPublished,
+  Head,
+  InfiniteScroll,
+  Layout,
+  List,
+  QueryError,
+} from '~/components'
+import { MeWorksPublishedFeedQuery } from '~/gql/graphql'
 
+import Placeholder from '../Placeholder'
 import WorksTabs from '../WorksTabs'
+import { ME_WORKS_PUBLISHED_FEED } from './gql'
+
+export const BaseMeWorksPublished = () => {
+  const { data, loading, error, fetchMore } =
+    useQuery<MeWorksPublishedFeedQuery>(ME_WORKS_PUBLISHED_FEED)
+
+  if (loading) {
+    return <Placeholder />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  const connectionPath = 'viewer.articles'
+  const { edges, pageInfo } = data?.viewer?.articles || {}
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return null
+  }
+
+  const loadMore = () =>
+    fetchMore({
+      variables: { after: pageInfo.endCursor },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+
+  return (
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
+      <List>
+        {edges.map(({ node, cursor }) => (
+          <List.Item key={cursor}>
+            <ArticleDigestPublished article={node} />
+          </List.Item>
+        ))}
+      </List>
+    </InfiniteScroll>
+  )
+}
 
 const MeWorksPublished = () => {
   const init = useIntl()
@@ -25,6 +80,8 @@ const MeWorksPublished = () => {
       <Head title={title} />
 
       <WorksTabs />
+
+      <BaseMeWorksPublished />
     </Layout.Main>
   )
 }
