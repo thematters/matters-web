@@ -5,7 +5,7 @@ import {
   ArticleDigestPublishedArticlePublicFragment,
 } from '~/gql/graphql'
 
-import FooterActions, { FooterActionsProps } from '../Feed/FooterActions'
+import FooterActions, { FooterActionsProps } from './FooterActions'
 import { fragments } from './gql'
 import styles from './styles.module.css'
 

@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
-import FooterActions from '../Feed/FooterActions'
 import { ArticleDigestTitle } from '../Title'
-// import FooterActions from './FooterActions'
+import FooterActions from './FooterActions'
 
 export const fragments = {
   article: {
@@ -14,7 +13,7 @@ export const fragments = {
         mediaHash
         articleState: state
         ...ArticleDigestTitleArticle
-        ...FooterActionsArticlePublic
+        ...FooterActionsPublishedArticlePublic
       }
       ${ArticleDigestTitle.fragments.article}
       ${FooterActions.fragments.article.public}
@@ -22,7 +21,7 @@ export const fragments = {
     private: gql`
       fragment ArticleDigestPublishedArticlePrivate on Article {
         id
-        ...FooterActionsArticlePrivate
+        ...FooterActionsPublishedArticlePrivate
       }
       ${FooterActions.fragments.article.private}
     `,
