@@ -90,6 +90,7 @@ export const ArticleDigestSidebar = ({
               url={cover}
               width={hasBackground ? 336 : 144}
               height={hasBackground ? undefined : 144}
+              disableAnimation={true}
             />
           </aside>
         )}

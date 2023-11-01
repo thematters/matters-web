@@ -3,8 +3,7 @@ import _omit from 'lodash/omit'
 import { useContext, useState } from 'react'
 
 import {
-  ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES,
-  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  ACCEPTED_COVER_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
   ENTITY_TYPE,
 } from '~/common/enums'
@@ -100,10 +99,7 @@ export const CoverUploader = ({
   )
   const { upload: uploadImage, uploading } = useDirectImageUpload()
 
-  const acceptTypes =
-    type === 'collection'
-      ? ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES.join(',')
-      : ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
+  const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'cover-upload-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {

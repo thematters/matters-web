@@ -65,6 +65,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
                 url={tag.cover || IMAGE_TAG_COVER.src}
                 width={144}
                 height={144}
+                disableAnimation={true}
               />
             </a>
           </Link>

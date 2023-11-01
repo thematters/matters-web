@@ -1,3 +1,4 @@
+import { toSizedImageURL } from '~/common/utils'
 import { IconImage24 } from '~/components'
 
 import SetCover, { SetCoverProps } from '../../SetCover'
@@ -21,7 +22,15 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
           {cover && (
             <section className={styles.container}>
               <div className={styles.cover}>
-                <img src={cover} alt="cover" />
+                <img
+                  src={toSizedImageURL({
+                    url: cover,
+                    width: 230,
+                    height: 230,
+                    disableAnimation: true,
+                  })}
+                  alt="cover"
+                />
               </div>
             </section>
           )}

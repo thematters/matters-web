@@ -33,6 +33,7 @@ interface ToSizedImageURLProps {
   width: ToSizedImageURLSize
   height?: ToSizedImageURLSize
   ext?: 'webp'
+  disableAnimation?: boolean
 }
 
 export const changeExt = ({ key, ext }: { key: string; ext?: 'webp' }) => {
@@ -52,6 +53,7 @@ export const toSizedImageURL = ({
   width,
   height,
   ext,
+  disableAnimation,
 }: ToSizedImageURLProps) => {
   const assetDomain = process.env.NEXT_PUBLIC_CF_IMAGE_URL
     ? `${process.env.NEXT_PUBLIC_CF_IMAGE_URL}`
@@ -76,9 +78,13 @@ export const toSizedImageURL = ({
   const hostnameless = url.replace(urlDomain, ``)
   const key = hostnameless.replace('/public', '')
   const extedUrl = changeExt({ key, ext })
-  const postfix = height
+  let postfix = height
     ? `w=${width},h=${height},fit=crop`
     : `w=${width},h=${width * 4},fit=scale-down`
+
+  if (disableAnimation) {
+    postfix += ',anim=false'
+  }
 
   return assetDomain + extedUrl + '/' + postfix
 }

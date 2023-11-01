@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
-  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  ACCEPTED_COVER_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
   ENTITY_TYPE,
 } from '~/common/enums'
@@ -83,7 +83,7 @@ const Uploader: React.FC<UploaderProps> = ({
   const { isInPath } = useRoute()
   const { createDraft } = useCreateDraft()
 
-  const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
+  const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'editor-cover-upload-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
