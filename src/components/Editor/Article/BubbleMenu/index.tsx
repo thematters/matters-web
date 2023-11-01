@@ -60,9 +60,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
       tippyOptions={{
         theme: 'bubble-menu',
         duration: 200,
-        placement: 'top',
+        placement: 'auto-start',
         arrow: false,
-        // appendTo: () => document.body,
         onHidden: () => setShowLinkInput(false),
       }}
       shouldShow={({ view, state, from, to }) => {
