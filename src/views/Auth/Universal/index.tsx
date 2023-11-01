@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
 import { PATHS } from '~/common/enums'
-import { analytics, WalletType } from '~/common/utils'
+import { analytics, redirectToTarget, WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   Head,
@@ -76,7 +76,7 @@ const UniversalAuth = () => {
   useEffect(() => {
     if (!viewer.id) return
 
-    router.push(PATHS.HOME)
+    redirectToTarget({ fallback: 'homepage' })
   }, [viewer.id])
 
   useEffect(() => {
