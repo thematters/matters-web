@@ -47,11 +47,11 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
         <VisuallyHidden>
           <input
+            {...inputProps}
             id={fieldId}
             type="checkbox"
             aria-describedby={fieldMsgId}
             name={name}
-            {...inputProps}
           />
         </VisuallyHidden>
       </label>

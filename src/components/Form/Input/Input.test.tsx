@@ -3,34 +3,58 @@ import { describe, expect, it, vi } from 'vitest'
 import { fireEvent, render, screen } from '~/common/utils/test'
 import { Form } from '~/components'
 
+const setup = () => {
+  const name = 'userName'
+  const type = 'text'
+  const placeholder = 'Username'
+  const hint = 'This is a hint'
+  const fieldId = `field-${name}`
+  const fieldMsgId = `field-msg-${name}`
+
+  const handleOnChange = vi.fn()
+  const handleOnBlur = vi.fn()
+
+  render(
+    <Form.Input
+      type={type}
+      name={name}
+      label={name}
+      hint={hint}
+      required
+      placeholder={placeholder}
+      onBlur={handleOnBlur}
+      onChange={handleOnChange}
+    />
+  )
+
+  const $input = screen.getByLabelText(name)
+  expect($input).toBeInTheDocument()
+
+  return {
+    $input,
+    name,
+    type,
+    placeholder,
+    hint,
+    fieldId,
+    fieldMsgId,
+    handleOnChange,
+    handleOnBlur,
+  }
+}
+
 describe('<Form.Input>', () => {
   it('should render an Input', () => {
-    const name = 'userName'
-    const type = 'text'
-    const placeholder = 'Username'
-    const hint = 'This is a hint'
-    const fieldId = `field-${name}`
-    const fieldMsgId = `field-msg-${name}`
+    const {
+      $input,
+      type,
+      fieldId,
+      fieldMsgId,
+      placeholder,
+      hint,
+      handleOnBlur,
+    } = setup()
 
-    const handleOnChange = vi.fn()
-    const handleOnBlur = vi.fn()
-
-    render(
-      <Form.Input
-        type={type}
-        name={name}
-        label={name}
-        hint={hint}
-        required
-        placeholder={placeholder}
-        onBlur={handleOnBlur}
-        onChange={handleOnChange}
-      />
-    )
-
-    // input
-    const $input = screen.getByLabelText(name)
-    expect($input).toBeInTheDocument()
     expect($input).toBeRequired()
     expect($input).toHaveAttribute('name', name)
     expect($input).toHaveAttribute('required')
@@ -49,17 +73,33 @@ describe('<Form.Input>', () => {
     $input.blur()
     expect($input).not.toHaveFocus()
     expect(handleOnBlur).toBeCalled()
+  })
 
-    // type alphabets
+  it('should allow any characters to be inputted', () => {
+    const { $input, handleOnChange } = setup()
+
+    //  alphabets
     const value = 'test'
     fireEvent.change($input, { target: { value } })
     expect(handleOnChange).toBeCalledTimes(1)
     expect($input).toHaveValue(value)
 
-    // type numbers
+    //  numbers
     const numbers = '1234'
     fireEvent.change($input, { target: { value: numbers } })
     expect(handleOnChange).toBeCalledTimes(2)
     expect($input).toHaveValue(numbers)
+
+    // symbols
+    const symbols = '!@#$%^&*()'
+    fireEvent.change($input, { target: { value: symbols } })
+    expect(handleOnChange).toBeCalledTimes(3)
+    expect($input).toHaveValue(symbols)
+
+    // mixed
+    const mixed = 'a1!@'
+    fireEvent.change($input, { target: { value: mixed } })
+    expect(handleOnChange).toBeCalledTimes(4)
+    expect($input).toHaveValue(mixed)
   })
 })
