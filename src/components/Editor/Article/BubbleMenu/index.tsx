@@ -37,9 +37,13 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   const [showLinkInput, setShowLinkInput] = useState(false)
 
   const onUrlInputSubmit = () => {
-    const url = urlInput?.current?.value
+    let url = urlInput?.current?.value
 
     if (url && isUrl(url)) {
+      // if not starts with http:// or https://
+      if (!url.match(/^https?:\/\//i)) {
+        url = `https://${url}`
+      }
       editor.chain().focus().toggleLink({ href: url, target: '_blank' }).run()
     }
 
