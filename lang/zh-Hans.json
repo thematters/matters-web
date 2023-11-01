@@ -761,6 +761,9 @@
     "defaultMessage": "钱包已绑定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "KuP/6B": {
+    "defaultMessage": "图片大小不得超过 {sizeInMB}MB"
+  },
   "KxVlDj": {
     "defaultMessage": "设置 - 已屏蔽用户",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
@@ -901,9 +904,6 @@
   "OwKIEe": {
     "defaultMessage": "{count, plural, =1 {1 篇文章} other {{count} 篇文章}}",
     "description": "src/components/Book/index.tsx"
-  },
-  "OyvGvT": {
-    "defaultMessage": "图片大小不得超过 5MB"
   },
   "PLBmDT": {
     "defaultMessage": "登录密码",
