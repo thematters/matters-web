@@ -16,6 +16,7 @@ const WorksTabs: React.FC = () => {
   const isArchived = isInPath('ME_ARCHIVED')
 
   const draftsCount = data?.viewer?.drafts.totalCount || 0
+  const publishedCount = data?.viewer?.publishedArticles.totalCount || 0
   const archivedCount = data?.viewer?.archivedArticles.totalCount || 0
 
   return (
@@ -32,8 +33,11 @@ const WorksTabs: React.FC = () => {
         />
       </Tabs.Tab>
 
-      {/* TODO: add count props */}
-      <Tabs.Tab href={PATHS.ME_PUBLISHED} selected={isPublished}>
+      <Tabs.Tab
+        href={PATHS.ME_PUBLISHED}
+        selected={isPublished}
+        count={publishedCount > 0 ? publishedCount : undefined}
+      >
         <FormattedMessage
           defaultMessage="Published"
           id="pAQR0S"
