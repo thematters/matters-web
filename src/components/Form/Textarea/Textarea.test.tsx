@@ -54,7 +54,7 @@ describe('<Form.Textarea>', () => {
     } = setup()
 
     expect($textarea).toHaveAttribute('name', name)
-    expect($textarea).toHaveAttribute('required')
+    expect($textarea).toBeRequired()
     expect($textarea).toHaveAttribute('id', fieldId)
     expect($textarea).toHaveAttribute('aria-describedby', fieldMsgId)
     expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument()

@@ -58,7 +58,6 @@ describe('<Form.Input>', () => {
 
     expect($input).toBeRequired()
     expect($input).toHaveAttribute('name', name)
-    expect($input).toHaveAttribute('required')
     expect($input).toHaveAttribute('type', type)
     expect($input).toHaveAttribute('id', fieldId)
     expect($input).toHaveAttribute('aria-describedby', fieldMsgId)

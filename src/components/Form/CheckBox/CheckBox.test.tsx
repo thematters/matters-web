@@ -48,7 +48,7 @@ describe('<Form.CheckBox>', () => {
 
     expect($checkbox).toBeRequired()
     expect($checkbox).toHaveAttribute('name', name)
-    expect($checkbox).toHaveAttribute('required')
+    expect($checkbox).toBeRequired()
     expect($checkbox).toHaveAttribute('type', 'checkbox') // force to be checkbox
     expect($checkbox).toHaveAttribute('id', fieldId)
     expect($checkbox).toHaveAttribute('aria-describedby', fieldMsgId)

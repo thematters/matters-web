@@ -50,7 +50,7 @@ describe('<Form.SquareCheckBox>', () => {
     rerender(<Form.SquareCheckBox {...props} checked={true} />)
     expect($checkbox).toBeChecked()
 
-    // // disabled
+    //  disabled
     rerender(<Form.SquareCheckBox {...props} checked={true} disabled={true} />)
     expect($checkbox).toBeDisabled()
 
@@ -63,5 +63,13 @@ describe('<Form.SquareCheckBox>', () => {
       />
     )
     expect(screen.getByText('icon-test')).toBeInTheDocument()
+
+    // onChange has never been called
+    expect(handleOnChange).toHaveBeenCalledTimes(0)
+
+    // onChange has been called
+    $checkbox.click()
+    expect($checkbox).toBeChecked()
+    expect(handleOnChange).toHaveBeenCalledTimes(1)
   })
 })

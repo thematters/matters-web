@@ -65,7 +65,7 @@ describe('<Form.AmountInput>', () => {
 
     // textarea
     expect($input).toHaveAttribute('name', name)
-    expect($input).toHaveAttribute('required')
+    expect($input).toBeRequired()
     expect($input).toHaveAttribute('id', fieldId)
     expect($input).toHaveAttribute('type', 'number') // fixed to number
     expect($input).toHaveAttribute('aria-describedby', fieldMsgId)
