@@ -103,7 +103,7 @@ describe('<ComposedAmountInput>', () => {
       }
     }
 
-    // hint
+    // hint for radio inputs
     expect(screen.getByText(hint)).toBeInTheDocument()
     expect(screen.queryByText(customInputHint)).not.toBeInTheDocument()
 
@@ -124,7 +124,7 @@ describe('<ComposedAmountInput>', () => {
       customAmount: true,
     })
 
-    // hint
+    // hints for both radio inputs and custom input
     expect(screen.getByText(hint)).toBeInTheDocument()
     expect(screen.getByText(customInputHint)).toBeInTheDocument()
 
@@ -136,10 +136,15 @@ describe('<ComposedAmountInput>', () => {
     expect($customInput).toHaveAttribute('max', String(max))
     expect($customInput).toHaveAttribute('step', String(step))
 
-    // type
+    // int
     const customAmount = 123
     fireEvent.change($customInput, { target: { value: customAmount } })
     expect($customInput).toHaveValue(customAmount)
+
+    // decimal
+    const customAmountDecimal = 123.456
+    fireEvent.change($customInput, { target: { value: customAmountDecimal } })
+    expect($customInput).toHaveValue(customAmountDecimal)
 
     // FIXME: not supported yet
     // min & max

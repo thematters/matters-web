@@ -7,7 +7,7 @@ import { TagDigest } from '~/components'
 import { MOCK_TAG } from '~/stories/mocks'
 
 describe('<TagDigest.Rich>', () => {
-  it('should render an TagDigest.Rich', () => {
+  it('should render a TagDigest.Rich', () => {
     render(<TagDigest.Rich tag={MOCK_TAG} hasDesc hasFollow />)
 
     const $digest = screen.getByTestId(TEST_ID.DIGEST_TAG_RICH)
@@ -25,7 +25,7 @@ describe('<TagDigest.Rich>', () => {
     expect($description).toBeInTheDocument()
   })
 
-  it('should render an TagDigest.Rich without description', () => {
+  it('should render a TagDigest.Rich without description', () => {
     render(<TagDigest.Rich tag={MOCK_TAG} hasFollow />)
 
     const $digest = screen.getByTestId(TEST_ID.DIGEST_TAG_RICH)
@@ -35,7 +35,7 @@ describe('<TagDigest.Rich>', () => {
     expect($description).not.toBeInTheDocument()
   })
 
-  it('should render an TagDigest.Rich without follow button', () => {
+  it('should render a TagDigest.Rich without follow button', () => {
     render(<TagDigest.Rich tag={MOCK_TAG} hasFollow={false} />)
 
     const $digest = screen.getByTestId(TEST_ID.DIGEST_TAG_RICH)

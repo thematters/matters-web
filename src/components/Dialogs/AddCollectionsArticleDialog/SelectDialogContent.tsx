@@ -93,18 +93,19 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
                 className={styles.listForm}
               >
                 {enableCollections.map(({ node }) => (
-                  <Form.SquareCheckBox
-                    key={node.id}
-                    hasTooltip={true}
-                    checked={
-                      hasChecked.includes(node.id) ||
-                      checkingIds.includes(node.id)
-                    }
-                    hint={node.title}
-                    disabled={hasChecked.includes(node.id)}
-                    {...formik.getFieldProps('checked')}
-                    value={node.id}
-                  />
+                  <section key={node.id} className={styles.item}>
+                    <Form.SquareCheckBox
+                      hasTooltip={true}
+                      checked={
+                        hasChecked.includes(node.id) ||
+                        checkingIds.includes(node.id)
+                      }
+                      hint={node.title}
+                      disabled={hasChecked.includes(node.id)}
+                      {...formik.getFieldProps('checked')}
+                      value={node.id}
+                    />
+                  </section>
                 ))}
               </Form>
             </FormikProvider>

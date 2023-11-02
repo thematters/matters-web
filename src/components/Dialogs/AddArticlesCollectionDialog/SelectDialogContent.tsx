@@ -2,7 +2,7 @@ import { FormikProvider } from 'formik'
 import { memo } from 'react'
 import { areEqual, FixedSizeList } from 'react-window'
 
-import { Form } from '~/components'
+import { DateTime, Form } from '~/components'
 import {
   CollectionArticlesCollectionFragment,
   UserArticlesUserFragment,
@@ -51,24 +51,28 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
               return null
             }
             const node = data[index].node
+            const checked =
+              hasChecked.includes(node.id) || checkingIds.includes(node.id)
+            const checkedIndex = checkingIds.includes(node.id)
+              ? checkingIds.indexOf(node.id) + 1
+              : undefined
+            const disabled = hasChecked.includes(node.id)
+
             return (
               <section style={style}>
                 <section key={node.id} className={styles.item}>
-                  <Form.IndexSquareCheckBox
-                    key={node.id}
+                  <Form.SquareCheckBox
                     hasTooltip={true}
-                    checked={
-                      hasChecked.includes(node.id) ||
-                      checkingIds.includes(node.id)
+                    checked={checked}
+                    icon={
+                      checked && !disabled && checkedIndex !== undefined ? (
+                        <span className={styles.indexIcon}>{checkedIndex}</span>
+                      ) : undefined
                     }
-                    index={
-                      checkingIds.includes(node.id)
-                        ? checkingIds.indexOf(node.id) + 1
-                        : undefined
-                    }
-                    createAt={node.createdAt}
+                    sup={<DateTime date={node.createdAt} color="grey" />}
+                    supHeight={18}
                     hint={node.title}
-                    disabled={hasChecked.includes(node.id)}
+                    disabled={disabled}
                     {...formik.getFieldProps('checked')}
                     value={node.id}
                   />

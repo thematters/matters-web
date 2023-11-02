@@ -7,7 +7,7 @@ import { TagDigest } from '~/components'
 import { MOCK_TAG } from '~/stories/mocks'
 
 describe('<TagDigest.Feed>', () => {
-  it('should render an TagDigest.Feed', () => {
+  it('should render a TagDigest.Feed', () => {
     render(<TagDigest.Feed tag={MOCK_TAG} />)
 
     const $digest = screen.getByTestId(TEST_ID.DIGEST_TAG_FEED)

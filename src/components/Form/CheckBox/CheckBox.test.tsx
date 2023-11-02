@@ -43,7 +43,7 @@ const setup = () => {
 }
 
 describe('<Form.CheckBox>', () => {
-  it('should render an CheckBox', () => {
+  it('should render a CheckBox', () => {
     const { $checkbox, name, fieldId, fieldMsgId, placeholder } = setup()
 
     expect($checkbox).toBeRequired()

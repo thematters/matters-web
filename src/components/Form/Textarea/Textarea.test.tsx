@@ -42,7 +42,7 @@ const setup = () => {
 
 // almost indentical to src/components/Form/Input/Input.test.tsx
 describe('<Form.Textarea>', () => {
-  it('should render an Textarea', () => {
+  it('should render a Textarea', () => {
     const {
       $textarea,
       name,

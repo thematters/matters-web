@@ -5,7 +5,7 @@ import { cleanup, render, screen } from '~/common/utils/test'
 import FieldFooter from './'
 
 describe('<Form.Field.Footer>', () => {
-  it('should render an Form.Field.Footer with hint', () => {
+  it('should render a Form.Field.Footer with hint', () => {
     const name = 'userName'
     const fieldMsgId = `field-msg-${name}`
 
@@ -17,7 +17,7 @@ describe('<Form.Field.Footer>', () => {
     expect(screen.queryByRole('alert')).not.toBeInTheDocument()
   })
 
-  it('should render an Form.Field.Footer with error', () => {
+  it('should render a Form.Field.Footer with error', () => {
     const name = 'userName'
     const fieldMsgId = `field-msg-${name}`
 

@@ -5,7 +5,7 @@ import { render, screen } from '~/common/utils/test'
 import FieldHeader from './'
 
 describe('<Form.Field.Header>', () => {
-  it('should render an Form.Field.Header', () => {
+  it('should render a Form.Field.Header', () => {
     const name = 'userName'
     const fieldId = `field-${name}`
 
