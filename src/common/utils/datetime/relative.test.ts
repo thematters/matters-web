@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import toRelativeDate from './relative'
 
-describe('datetime/relative', () => {
+describe('utils/datetime/relative', () => {
   it('should parse a string date', () => {
     const date = '2022-01-01'
     const result = toRelativeDate(date, 'en')

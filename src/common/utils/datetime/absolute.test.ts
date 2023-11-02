@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import toAbsoluteDate from './absolute'
 
-describe('datetime/absolute', () => {
+describe('utils/datetime/absolute', () => {
   it('should parse a string date', () => {
     const date = '2022-01-01'
     const result = toAbsoluteDate(date, 'en')
