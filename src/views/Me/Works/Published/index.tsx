@@ -4,6 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { mergeConnections } from '~/common/utils'
 import {
   ArticleDigestPublished,
+  EmptyArticle,
   Head,
   InfiniteScroll,
   Layout,
@@ -32,7 +33,7 @@ export const BaseMeWorksPublished = () => {
   const { edges, pageInfo } = data?.viewer?.articles || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
+    return <EmptyArticle isMe />
   }
 
   const loadMore = () =>
