@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 // import Script from 'next/script'
 import { useContext, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
@@ -17,19 +16,16 @@ import {
   ViewerContext,
 } from '~/components'
 import { updateAppreciation } from '~/components/GQL'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 // import { UserGroup } from '~/gql/graphql'
 import {
   AppreciateArticleMutation,
   AppreciationButtonArticlePrivateFragment,
   AppreciationButtonArticlePublicFragment,
-  ClientPreferenceQuery,
 } from '~/gql/graphql'
 
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
 import BlockedButton from './BlockedButton'
-import CivicLikerButton from './CivicLikerButton'
 import ForbiddenButton from './ForbiddenButton'
 import { APPRECIATE_ARTICLE, fragments } from './gql'
 
@@ -50,9 +46,6 @@ const AppreciationButton = ({
   const turnstileRef = useRef<TurnstileInstance>(null)
   const { token, refreshToken } = useContext(ReCaptchaContext)
 
-  const { data, client } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
   const isArticleAuthor = article.author.id === viewer.id
 
   /**
@@ -176,8 +169,6 @@ const AppreciationButton = ({
     }
   }
 
-  const readCivicLikerDialog =
-    viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
     (!isReachLimit && !viewer.isArchived) || (isSuperLike && canSuperLike)
 
@@ -251,23 +242,6 @@ const AppreciationButton = ({
           superLiked={superLiked}
         />
       </>
-    )
-  }
-
-  // Civic Liker
-  if (isReachLimit && !readCivicLikerDialog && viewer.liker.likerId) {
-    return (
-      <CivicLikerButton
-        user={article.author}
-        onClose={() => {
-          client.writeData({
-            id: 'ClientPreference:local',
-            data: { readCivicLikerDialog: true },
-          })
-        }}
-        count={appreciatedCount > 0 ? appreciatedCount : undefined}
-        total={total}
-      />
     )
   }
 
