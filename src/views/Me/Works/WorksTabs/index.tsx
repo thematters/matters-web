@@ -16,6 +16,7 @@ const WorksTabs: React.FC = () => {
   const isArchived = isInPath('ME_ARCHIVED')
 
   const draftsCount = data?.viewer?.drafts.totalCount || 0
+  const archivedCount = data?.viewer?.archivedArticles.totalCount || 0
 
   return (
     <Tabs>
@@ -40,14 +41,19 @@ const WorksTabs: React.FC = () => {
         />
       </Tabs.Tab>
 
-      {/* TODO: add count props */}
-      <Tabs.Tab href={PATHS.ME_ARCHIVED} selected={isArchived}>
-        <FormattedMessage
-          defaultMessage="Archived"
-          id="qPqap+"
-          description="src/views/Me/Works/WorksTabs/index.tsx"
-        />
-      </Tabs.Tab>
+      {archivedCount > 0 && (
+        <Tabs.Tab
+          href={PATHS.ME_ARCHIVED}
+          selected={isArchived}
+          count={archivedCount > 0 ? archivedCount : undefined}
+        >
+          <FormattedMessage
+            defaultMessage="Archived"
+            id="qPqap+"
+            description="src/views/Me/Works/WorksTabs/index.tsx"
+          />
+        </Tabs.Tab>
+      )}
     </Tabs>
   )
 }

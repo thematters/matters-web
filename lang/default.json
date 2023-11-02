@@ -916,10 +916,6 @@
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
-  "RNKSCj": {
-    "defaultMessage": "Archived",
-    "description": "src/components/ArticleDigest/Archive/index.tsx"
-  },
   "ROPCC0": {
     "defaultMessage": "Please add email first",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"

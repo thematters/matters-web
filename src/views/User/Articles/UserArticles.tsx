@@ -4,7 +4,6 @@ import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
-  ArticleDigestArchived,
   ArticleDigestFeed,
   Empty,
   EmptyArticle,
@@ -173,7 +172,7 @@ const UserArticles = () => {
   }
 
   const articleEdges = edges.filter(
-    ({ node }) => node.articleState === 'active' || viewer.id === node.author.id
+    ({ node }) => node.articleState === 'active'
   )
 
   return (
@@ -192,26 +191,22 @@ const UserArticles = () => {
           <List>
             {articleEdges.map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
-                {node.articleState !== 'active' ? (
-                  <ArticleDigestArchived article={node} />
-                ) : (
-                  <ArticleDigestFeed
-                    article={node}
-                    inUserArticles
-                    hasAuthor={false}
-                    hasEdit={true}
-                    hasAddCollection={true}
-                    hasArchive={true}
-                    onClick={() =>
-                      analytics.trackEvent('click_feed', {
-                        type: 'user_article',
-                        contentType: 'article',
-                        location: i,
-                        id: node.id,
-                      })
-                    }
-                  />
-                )}
+                <ArticleDigestFeed
+                  article={node}
+                  inUserArticles
+                  hasAuthor={false}
+                  hasEdit={true}
+                  hasAddCollection={true}
+                  hasArchive={true}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'user_article',
+                      contentType: 'article',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                />
               </List.Item>
             ))}
           </List>

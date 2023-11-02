@@ -7,6 +7,11 @@ export const ME_WORKS_TABS = gql`
       drafts(input: { first: 0 }) @connection(key: "viewerDrafts") {
         totalCount
       }
+      archivedArticles: articles(
+        input: { first: 0, filter: { state: archived } }
+      ) @connection(key: "viewerArticles") {
+        totalCount
+      }
     }
   }
 `
