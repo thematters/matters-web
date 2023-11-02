@@ -7,6 +7,7 @@
   color: var(--color-grey);
 
   & header {
+    /* 1.125rem will eventually be rendered as 19px */
     line-height: 1.025rem;
   }
 
