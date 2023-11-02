@@ -1,6 +1,5 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
-import { useField } from 'formik'
 import { useLayoutEffect, useRef, useState } from 'react'
 
 import {
@@ -13,7 +12,7 @@ import {
 import { FieldProps } from '../Field'
 import styles from './styles.module.css'
 
-type SquareCheckBoxBoxProps = {
+export type SquareCheckBoxBoxProps = {
   name: string
   value: string
   content?: React.ReactNode
@@ -45,8 +44,6 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   const { value, disabled, checked } = inputProps
   const fieldId = `field-${value}`
   const fieldMsgId = `field-msg-${value}`
-
-  const [field] = useField({ ...inputProps, type: 'checkbox' })
 
   const [lineClampable, setLineClampable] = useState(false)
   const [firstRender, setFirstRender] = useState(true)
@@ -80,12 +77,11 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
     [styles.lineClamp]: !firstRender,
   })
 
-  const checkboxIcon =
-    icon || checked ? (
-      <IconSquireChecked20 size="mdS" color={disabled ? 'grey' : 'green'} />
-    ) : (
-      <IconSquireCheck20 size="mdS" color="greyDark" />
-    )
+  const checkboxIcon = checked ? (
+    <IconSquireChecked20 size="mdS" color={disabled ? 'grey' : 'green'} />
+  ) : (
+    <IconSquireCheck20 size="mdS" color="greyDark" />
+  )
 
   return (
     <Tooltip
@@ -98,7 +94,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
     >
       <section className={styles.wrapper} ref={node}>
         <label className={labelClasses}>
-          <TextIcon spacing="xtight" size="sm" icon={checkboxIcon}>
+          <TextIcon spacing="xtight" size="sm" icon={icon || checkboxIcon}>
             <section className={styles.content}>
               {sup}
               <span className={hintClasses}>{content || hint}</span>
@@ -107,11 +103,10 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
 
           <VisuallyHidden>
             <input
+              {...inputProps}
               id={fieldId}
               type="checkbox"
               aria-describedby={fieldMsgId}
-              {...field}
-              {...inputProps}
             />
           </VisuallyHidden>
         </label>

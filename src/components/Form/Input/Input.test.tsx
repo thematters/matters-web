@@ -48,6 +48,7 @@ describe('<Form.Input>', () => {
     const {
       $input,
       type,
+      name,
       fieldId,
       fieldMsgId,
       placeholder,

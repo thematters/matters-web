@@ -1,8 +1,9 @@
-import { FormikProvider } from 'formik'
+import { FieldInputProps, FormikProvider, useField } from 'formik'
 import { memo } from 'react'
 import { areEqual, FixedSizeList } from 'react-window'
 
 import { DateTime, Form } from '~/components'
+import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
 import {
   CollectionArticlesCollectionFragment,
   UserArticlesUserFragment,
@@ -16,6 +17,11 @@ interface SelectDialogContentProps {
   collection: CollectionArticlesCollectionFragment
   checkingIds: string[]
   formId: string
+}
+
+const SquareCheckBoxField: React.FC<SquareCheckBoxBoxProps> = (props) => {
+  const [field] = useField({ name: props.name, type: 'checkbox' })
+  return <Form.SquareCheckBox {...field} {...props} />
 }
 
 const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
@@ -61,8 +67,8 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
             return (
               <section style={style}>
                 <section key={node.id} className={styles.item}>
-                  <Form.SquareCheckBox
-                    hasTooltip={true}
+                  <SquareCheckBoxField
+                    hasTooltip
                     checked={checked}
                     icon={
                       checked && !disabled && checkedIndex !== undefined ? (
@@ -73,7 +79,9 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
                     supHeight={18}
                     hint={node.title}
                     disabled={disabled}
-                    {...formik.getFieldProps('checked')}
+                    {...(formik.getFieldProps(
+                      'checked'
+                    ) as FieldInputProps<any>)}
                     value={node.id}
                   />
                 </section>

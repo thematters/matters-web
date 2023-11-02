@@ -1,4 +1,4 @@
-import { FormikProvider } from 'formik'
+import { FieldInputProps, FormikProvider, useField } from 'formik'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -10,6 +10,7 @@ import {
   usePublicQuery,
   useRoute,
 } from '~/components'
+import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
 import { AddCollectionsArticleUserPublicQuery } from '~/gql/graphql'
 
 import { ADD_COLLECTIONS_ARTICLE_USER_PUBLIC } from './gql'
@@ -21,6 +22,11 @@ interface SelectDialogContentProps {
   checkingIds: string[]
   closeDialog: () => void
   switchToCreating: () => void
+}
+
+const SquareCheckBoxField: React.FC<SquareCheckBoxBoxProps> = (props) => {
+  const [field] = useField({ name: props.name, type: 'checkbox' })
+  return <Form.SquareCheckBox {...field} {...props} />
 }
 
 const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
@@ -94,7 +100,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
               >
                 {enableCollections.map(({ node }) => (
                   <section key={node.id} className={styles.item}>
-                    <Form.SquareCheckBox
+                    <SquareCheckBoxField
                       hasTooltip={true}
                       checked={
                         hasChecked.includes(node.id) ||
@@ -102,7 +108,9 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
                       }
                       hint={node.title}
                       disabled={hasChecked.includes(node.id)}
-                      {...formik.getFieldProps('checked')}
+                      {...(formik.getFieldProps(
+                        'checked'
+                      ) as FieldInputProps<any>)}
                       value={node.id}
                     />
                   </section>

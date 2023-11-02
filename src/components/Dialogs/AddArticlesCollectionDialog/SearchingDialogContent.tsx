@@ -1,7 +1,8 @@
-import { FormikProvider } from 'formik'
+import { FieldInputProps, FormikProvider, useField } from 'formik'
 import { FormattedMessage } from 'react-intl'
 
 import { DateTime, Form } from '~/components'
+import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
 import {
   CollectionArticlesCollectionFragment,
   UserArticlesUserFragment,
@@ -16,6 +17,11 @@ interface SearchingDialogContentProps {
   checkingIds: string[]
   searchValue: string
   formId: string
+}
+
+const SquareCheckBoxField: React.FC<SquareCheckBoxBoxProps> = (props) => {
+  const [field] = useField({ name: props.name, type: 'checkbox' })
+  return <Form.SquareCheckBox {...field} {...props} />
 }
 
 const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
@@ -66,7 +72,7 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
 
           return (
             <section key={node.id} className={styles.item}>
-              <Form.SquareCheckBox
+              <SquareCheckBoxField
                 hasTooltip={true}
                 checked={checked}
                 icon={
@@ -78,7 +84,7 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
                 supHeight={18}
                 hint={node.title}
                 disabled={disabled}
-                {...formik.getFieldProps('checked')}
+                {...(formik.getFieldProps('checked') as FieldInputProps<any>)}
                 value={node.id}
                 content={(() => {
                   const index = node.title.indexOf(searchValue)
