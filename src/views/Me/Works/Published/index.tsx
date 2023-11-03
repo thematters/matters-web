@@ -52,7 +52,12 @@ export const BaseMeWorksPublished = () => {
     })
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      loader={<Placeholder />}
+      eof
+    >
       <List>
         {articleEdges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
