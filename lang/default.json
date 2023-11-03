@@ -874,6 +874,10 @@
     "defaultMessage": "Douban",
     "description": "src/components/Share/Buttons/Douban.tsx"
   },
+  "NdtzIs": {
+    "defaultMessage": "The email verification link has been sent to {email}",
+    "description": "src/components/GlobalToast/index.tsx"
+  },
   "NzfL1d": {
     "defaultMessage": "Enter password again",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
@@ -889,10 +893,6 @@
   "O2Nqk8": {
     "defaultMessage": "Forgot password?",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
-  },
-  "OAc8+i": {
-    "defaultMessage": "The email verification link has been sent to {email}, please check your inbox",
-    "description": "src/components/GlobalToast/index.tsx"
   },
   "OIj8pQ": {
     "defaultMessage": "Invitation Sent",
