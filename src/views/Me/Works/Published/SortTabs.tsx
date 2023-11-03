@@ -1,16 +1,16 @@
 import classNames from 'classnames'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { UserArticlesSort } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 const TabItem = ({
-  children,
   active,
   onClick,
+  title,
 }: {
-  children: React.ReactNode
+  title: string
   active: boolean
   onClick: () => void
 }) => {
@@ -19,8 +19,13 @@ const TabItem = ({
     [styles.active]: active,
   })
   return (
-    <li className={liClasses} role="button" onClick={onClick}>
-      {children}
+    <li
+      className={liClasses}
+      role="button"
+      onClick={onClick}
+      data-title={title}
+    >
+      {title}
     </li>
   )
 }
@@ -32,58 +37,55 @@ export const SortTabs = ({
   sort: UserArticlesSort
   setSort: React.Dispatch<React.SetStateAction<UserArticlesSort>>
 }) => {
+  const intl = useIntl()
   return (
     <ul className={styles.tabList}>
       <TabItem
         active={sort === UserArticlesSort.Newest}
         onClick={() => setSort(UserArticlesSort.Newest)}
-      >
-        <FormattedMessage
-          defaultMessage="Latest"
-          id="SPTRiT"
-          description="src/views/Me/Works/Published/SortTabs.tsx"
-        />
-      </TabItem>
+        title={intl.formatMessage({
+          defaultMessage: 'Latest',
+          id: 'SPTRiT',
+          description: 'src/views/Me/Works/Published/SortTabs.tsx',
+        })}
+      />
       <TabItem
         active={sort === UserArticlesSort.MostReaders}
         onClick={() => setSort(UserArticlesSort.MostReaders)}
-      >
-        <FormattedMessage
-          defaultMessage="Most readers"
-          id="rHi+cL"
-          description="src/views/Me/Works/Published/SortTabs.tsx"
-        />
-      </TabItem>
+        title={intl.formatMessage({
+          defaultMessage: 'Most readers',
+          id: 'rHi+cL',
+          description: 'src/views/Me/Works/Published/SortTabs.tsx',
+        })}
+      />
       <TabItem
         active={sort === UserArticlesSort.MostAppreciations}
         onClick={() => setSort(UserArticlesSort.MostAppreciations)}
-      >
-        <FormattedMessage
-          defaultMessage="Most claps"
-          id="AA5PkU"
-          description="src/views/Me/Works/Published/SortTabs.tsx"
-        />
-      </TabItem>
+        title={intl.formatMessage({
+          defaultMessage: 'Most claps',
+          id: 'AA5PkU',
+          description: 'src/views/Me/Works/Published/SortTabs.tsx',
+        })}
+      />
       <TabItem
         active={sort === UserArticlesSort.MostComments}
         onClick={() => setSort(UserArticlesSort.MostComments)}
-      >
-        <FormattedMessage
-          defaultMessage="Most comments"
-          id="aOFCqL"
-          description="src/views/Me/Works/Published/SortTabs.tsx"
-        />
-      </TabItem>
+        title={intl.formatMessage({
+          defaultMessage: 'Most comments',
+          id: 'aOFCqL',
+          description: 'src/views/Me/Works/Published/SortTabs.tsx',
+        })}
+      />
+
       <TabItem
         active={sort === UserArticlesSort.MostDonations}
         onClick={() => setSort(UserArticlesSort.MostDonations)}
-      >
-        <FormattedMessage
-          defaultMessage="Most Supporters"
-          id="n/w6lW"
-          description="src/views/Me/Works/Published/SortTabs.tsx"
-        />
-      </TabItem>
+        title={intl.formatMessage({
+          defaultMessage: 'Most Supporters',
+          id: 'n/w6lW',
+          description: 'src/views/Me/Works/Published/SortTabs.tsx',
+        })}
+      />
     </ul>
   )
 }

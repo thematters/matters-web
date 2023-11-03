@@ -47,6 +47,19 @@
     border-radius: 0.5rem;
     transition-property: background-color, color;
 
+    /* FIX: change the font-weight of a font, the text will typically cause a bit of a layout shift
+    ref: https://stackoverflow.com/a/32570813
+    */
+    &::after {
+      display: block;
+      height: 0;
+      overflow: hidden;
+      font-weight: var(--font-weight-semibold);
+      color: transparent;
+      visibility: hidden;
+      content: attr(data-title);
+    }
+
     &:hover {
       background: var(--color-grey-light);
     }
