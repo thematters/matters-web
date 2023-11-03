@@ -218,7 +218,7 @@ const AppreciationButton = ({
   // Appreciable
   if (canAppreciate && !disabled) {
     return (
-      <>
+      <section>
         <Turnstile
           ref={turnstileRef}
           options={{
@@ -241,7 +241,7 @@ const AppreciationButton = ({
           isSuperLike={isSuperLike}
           superLiked={superLiked}
         />
-      </>
+      </section>
     )
   }
 
