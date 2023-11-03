@@ -90,20 +90,29 @@ export const toSizedImageURL = ({
 }
 
 export const isUrl = (key: string) => {
+  let valid = false
+
   try {
-    const pattern = new RegExp(
-      '^([a-zA-Z]+:\\/\\/)?' + // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR IP (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-        '(\\#[-a-z\\d_]*)?$', // fragment locator
-      'i'
-    )
-    return pattern.test(key)
+    valid = Boolean(new URL(key))
   } catch (e) {
-    return false
+    // do nothing
   }
+
+  if (valid) {
+    return valid
+  }
+
+  // fallback to match url w/o protocol
+  const pattern = new RegExp(
+    '^([a-zA-Z]+:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR IP (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$', // fragment locator
+    'i'
+  )
+  return pattern.test(key)
 }
 
 export const parseSorter = (sorterStr: string) => {
