@@ -83,6 +83,10 @@
     "defaultMessage": "内容可能包含色情、暴力、血腥等限制级内容，部分用户可能不适合观看，或引起不适、心理负担，请谨慎判断是否阅读。",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
+  "0JlaP1": {
+    "defaultMessage": "Oops！链接已失效",
+    "description": "src/views/Callback/UI.tsx"
+  },
   "0Om2Kl": {
     "defaultMessage": "移出选集"
   },
@@ -108,6 +112,10 @@
   "0qagOO": {
     "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "0zZd0T": {
+    "defaultMessage": "作品发布成功，快把作品分享到不同渠道，吸引更多人为你拍手！",
+    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
   "1COpAA": {
     "defaultMessage": "失败",
@@ -570,10 +578,6 @@
     "defaultMessage": "你无权限进行该操作",
     "description": "FORBIDDEN_BY_STATE"
   },
-  "EwbNbl": {
-    "defaultMessage": "Oops！链接已失效",
-    "description": "src/views/Callback/GoogleCallback.tsx"
-  },
   "FEI5Fv": {
     "defaultMessage": "邮箱",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -610,10 +614,6 @@
   "FxrSCh": {
     "defaultMessage": "ID 设置后无法修改，确认使用 {id} 作为 Matters ID 吗？",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
-  },
-  "GG9uXH": {
-    "defaultMessage": "请移步相关页面重新获取链接，您也可以 ",
-    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "GHxtae": {
     "defaultMessage": "数字钱包",
@@ -808,6 +808,10 @@
     "defaultMessage": "IPNS 订阅",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "Lhhi5l": {
+    "defaultMessage": "作品已发布",
+    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
+  },
   "LmiUWG": {
     "defaultMessage": "你无法对此对象进行该操作",
     "description": "FORBIDDEN_BY_TARGET_STATE"
@@ -870,6 +874,10 @@
     "defaultMessage": "豆瓣",
     "description": "src/components/Share/Buttons/Douban.tsx"
   },
+  "NdtzIs": {
+    "defaultMessage": "邮箱地址验证链接已发送至 {email}",
+    "description": "src/components/GlobalToast/index.tsx"
+  },
   "NzfL1d": {
     "defaultMessage": "再次输入密码",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
@@ -885,10 +893,6 @@
   "O2Nqk8": {
     "defaultMessage": "忘记密码？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
-  },
-  "OAc8+i": {
-    "defaultMessage": "邮箱地址验证链接已发送至 {email}，请查收邮件",
-    "description": "src/components/GlobalToast/index.tsx"
   },
   "OIj8pQ": {
     "defaultMessage": "成功发送邀请",
@@ -908,6 +912,10 @@
   "PLBmDT": {
     "defaultMessage": "登录密码",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
+  "PliM8z": {
+    "defaultMessage": "请移步相关页面重新获取链接，您也可以",
+    "description": "src/views/Callback/UI.tsx"
   },
   "Pp/0po": {
     "defaultMessage": "换一批"
@@ -1187,6 +1195,10 @@
     "defaultMessage": "已屏蔽用户",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
+  "YWQTXE": {
+    "defaultMessage": "查看作品",
+    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
+  },
   "YlPCRU": {
     "defaultMessage": "关联了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -1234,6 +1246,10 @@
   },
   "adThp5": {
     "defaultMessage": "最新"
+  },
+  "aqX2Bt": {
+    "defaultMessage": "前往首页",
+    "description": "src/views/Callback/UI.tsx"
   },
   "awW+lk": {
     "defaultMessage": "进行中…",
@@ -1740,10 +1756,6 @@
   "tQ3+Xo": {
     "defaultMessage": "标签添加最多至 5 个",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
-  },
-  "tQimre": {
-    "defaultMessage": "前往首页",
-    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀请",
