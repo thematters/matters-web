@@ -390,6 +390,10 @@
   "A7ugfn": {
     "defaultMessage": "更多操作"
   },
+  "AA5PkU": {
+    "defaultMessage": "最多拍手",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "AB5rDl": {
     "defaultMessage": "信用卡交易內容有疑慮時，發卡機構暫停或退回的款項",
     "description": "src/components/Transaction/index.tsx"
@@ -940,6 +944,10 @@
     "defaultMessage": "查看名單",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "SPTRiT": {
+    "defaultMessage": "最新",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "SdXoXI": {
     "defaultMessage": "你已寄出邀請給朋友們，快去已邀請管理查看他們加入的進度吧！",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -1171,6 +1179,10 @@
   },
   "a/xacb": {
     "defaultMessage": "（不會刪除選集內文章）"
+  },
+  "aOFCqL": {
+    "defaultMessage": "最多評論",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "aa0nss": {
     "defaultMessage": "取消精選",
@@ -1506,6 +1518,10 @@
     "defaultMessage": "驗證碼已失效，請使用最新驗證碼或重新發送",
     "description": "CODE_INACTIVE"
   },
+  "n/w6lW": {
+    "defaultMessage": "最多支持",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "n2Sc6g": {
     "defaultMessage": "個人資料",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
@@ -1612,6 +1628,10 @@
   "rBjwQy": {
     "defaultMessage": "微博",
     "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "rHi+cL": {
+    "defaultMessage": "最多讀者",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "rLlTQ9": {
     "defaultMessage": "標籤名稱"

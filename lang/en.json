@@ -390,6 +390,10 @@
   "A7ugfn": {
     "defaultMessage": "More Actions"
   },
+  "AA5PkU": {
+    "defaultMessage": "Most claps",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "AB5rDl": {
     "defaultMessage": "Payment suspended or returned by card issuer when there are doubts about the transaction",
     "description": "src/components/Transaction/index.tsx"
@@ -940,6 +944,10 @@
     "defaultMessage": "View Members",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "SPTRiT": {
+    "defaultMessage": "Latest",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "SdXoXI": {
     "defaultMessage": "Invitations have been sent. You can check invitation status on the invitation management page.",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -1171,6 +1179,10 @@
   },
   "a/xacb": {
     "defaultMessage": "(Articles in this collection will not be deleted)"
+  },
+  "aOFCqL": {
+    "defaultMessage": "Most comments",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "aa0nss": {
     "defaultMessage": "Unpin from Trending",
@@ -1506,6 +1518,10 @@
     "defaultMessage": "Verification code is no longer valid. Please use the latest code we sent, or try resend",
     "description": "CODE_INACTIVE"
   },
+  "n/w6lW": {
+    "defaultMessage": "Most Supporters",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "n2Sc6g": {
     "defaultMessage": "My profile",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
@@ -1612,6 +1628,10 @@
   "rBjwQy": {
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "rHi+cL": {
+    "defaultMessage": "Most readers",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "rLlTQ9": {
     "defaultMessage": "Tag Name"
