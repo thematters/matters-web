@@ -36,6 +36,10 @@ export const BaseMeWorksPublished = () => {
     return <EmptyArticle isMe />
   }
 
+  const articleEdges = edges.filter(
+    ({ node }) => node.articleState === 'active'
+  )
+
   const loadMore = () =>
     fetchMore({
       variables: { after: pageInfo.endCursor },
@@ -50,7 +54,7 @@ export const BaseMeWorksPublished = () => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
-        {edges.map(({ node, cursor }) => (
+        {articleEdges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
             <ArticleDigestPublished article={node} />
           </List.Item>
