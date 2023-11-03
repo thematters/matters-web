@@ -83,6 +83,10 @@
     "defaultMessage": "Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress.",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
+  "0JlaP1": {
+    "defaultMessage": "Oops！This link has expired",
+    "description": "src/views/Callback/UI.tsx"
+  },
   "0Om2Kl": {
     "defaultMessage": "Remove from collection"
   },
@@ -108,6 +112,10 @@
   "0qagOO": {
     "defaultMessage": "Circle Subscription",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "0zZd0T": {
+    "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
+    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
   "1COpAA": {
     "defaultMessage": "Failed",
@@ -570,10 +578,6 @@
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN_BY_STATE"
   },
-  "EwbNbl": {
-    "defaultMessage": "Oops！This link has expired",
-    "description": "src/views/Callback/GoogleCallback.tsx"
-  },
   "FEI5Fv": {
     "defaultMessage": "Email address",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -610,10 +614,6 @@
   "FxrSCh": {
     "defaultMessage": "This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
-  },
-  "GG9uXH": {
-    "defaultMessage": "Please go to the relevant page to resend the link. You can also",
-    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "GHxtae": {
     "defaultMessage": "Wallet",
@@ -808,6 +808,10 @@
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "Lhhi5l": {
+    "defaultMessage": "Article published",
+    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
+  },
   "LmiUWG": {
     "defaultMessage": "You do not have permissionn to perform this operation",
     "description": "FORBIDDEN_BY_TARGET_STATE"
@@ -908,6 +912,10 @@
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
+  "PliM8z": {
+    "defaultMessage": "Please go to the relevant page to resend the link. You can also",
+    "description": "src/views/Callback/UI.tsx"
   },
   "Pp/0po": {
     "defaultMessage": "Shuffle"
@@ -1187,6 +1195,10 @@
     "defaultMessage": "Blocked Users",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
+  "YWQTXE": {
+    "defaultMessage": "View article",
+    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
+  },
   "YlPCRU": {
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -1234,6 +1246,10 @@
   },
   "adThp5": {
     "defaultMessage": "Latest"
+  },
+  "aqX2Bt": {
+    "defaultMessage": "go to the homepage",
+    "description": "src/views/Callback/UI.tsx"
   },
   "awW+lk": {
     "defaultMessage": "Processing",
@@ -1740,10 +1756,6 @@
   "tQ3+Xo": {
     "defaultMessage": "Add up to 5 tags",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
-  },
-  "tQimre": {
-    "defaultMessage": "go to the homepage",
-    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "tzq2+W": {
     "defaultMessage": "Send",

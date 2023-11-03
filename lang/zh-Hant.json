@@ -83,6 +83,10 @@
     "defaultMessage": "內容可能包含色情、暴力、血腥等限制級內容，部分用戶可能不適合觀看，或引起不適、心理負擔，請謹慎判斷是否閱讀。",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
+  "0JlaP1": {
+    "defaultMessage": "Oops！連結已失效",
+    "description": "src/views/Callback/UI.tsx"
+  },
   "0Om2Kl": {
     "defaultMessage": "移出選集"
   },
@@ -108,6 +112,10 @@
   "0qagOO": {
     "defaultMessage": "圍爐訂閱",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "0zZd0T": {
+    "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
+    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
   "1COpAA": {
     "defaultMessage": "失敗",
@@ -570,10 +578,6 @@
     "defaultMessage": "你無權限進行該操作",
     "description": "FORBIDDEN_BY_STATE"
   },
-  "EwbNbl": {
-    "defaultMessage": "Oops！連結已失效",
-    "description": "src/views/Callback/GoogleCallback.tsx"
-  },
   "FEI5Fv": {
     "defaultMessage": "郵件地址",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -610,10 +614,6 @@
   "FxrSCh": {
     "defaultMessage": "ID 設置後無法修改，確認使用 {id} 作為 Matters ID 嗎？",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
-  },
-  "GG9uXH": {
-    "defaultMessage": "請移步相關頁面重新獲取連結，您也可以 ",
-    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "GHxtae": {
     "defaultMessage": "數字錢包",
@@ -808,6 +808,10 @@
     "defaultMessage": "IPNS 訂閱",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "Lhhi5l": {
+    "defaultMessage": "作品已發布",
+    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
+  },
   "LmiUWG": {
     "defaultMessage": "你無法對此對象進行該操作",
     "description": "FORBIDDEN_BY_TARGET_STATE"
@@ -908,6 +912,10 @@
   "PLBmDT": {
     "defaultMessage": "登入密碼",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
+  "PliM8z": {
+    "defaultMessage": "請移步相關頁面重新獲取連結，您也可以",
+    "description": "src/views/Callback/UI.tsx"
   },
   "Pp/0po": {
     "defaultMessage": "換一批"
@@ -1187,6 +1195,10 @@
     "defaultMessage": "已封鎖用戶",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
+  "YWQTXE": {
+    "defaultMessage": "查看作品",
+    "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
+  },
   "YlPCRU": {
     "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -1234,6 +1246,10 @@
   },
   "adThp5": {
     "defaultMessage": "最新"
+  },
+  "aqX2Bt": {
+    "defaultMessage": "前往首頁",
+    "description": "src/views/Callback/UI.tsx"
   },
   "awW+lk": {
     "defaultMessage": "進行中…",
@@ -1740,10 +1756,6 @@
   "tQ3+Xo": {
     "defaultMessage": "標籤添加最多至 5 個",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
-  },
-  "tQimre": {
-    "defaultMessage": "前往首頁",
-    "description": "src/views/Callback/GoogleCallback.tsx"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
