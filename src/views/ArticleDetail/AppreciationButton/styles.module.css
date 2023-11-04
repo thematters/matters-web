@@ -4,11 +4,6 @@
   position: relative;
   display: inline-flex;
 
-  /* FIXME: adjacent element <Turnstile /> makes this has a margin-left
-  * since the parent styles of src/views/ArticleDetail/Toolbar/styles.module.css
-   */
-  margin-left: 0 !important;
-
   & .icon {
     position: relative;
     width: 1.25rem;

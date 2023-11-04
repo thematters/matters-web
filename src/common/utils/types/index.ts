@@ -23,9 +23,6 @@ export default gql`
   type ClientPreference {
     id: ID!
 
-    "Whether civic liker dialog is hidden"
-    readCivicLikerDialog: Boolean!
-
     "Login or sign up wall in article detail page"
     wall: Boolean!
 
