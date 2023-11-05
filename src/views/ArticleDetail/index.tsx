@@ -486,9 +486,7 @@ const ArticleDetail = ({
       `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
     )
     const n = new URL(
-      `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${
-        newPath.href || newPath.pathname
-      }`
+      `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${newPath.href}`
     )
 
     // hide all utm_ tracking code parameters

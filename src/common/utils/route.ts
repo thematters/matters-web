@@ -41,12 +41,10 @@ interface CommentArgs {
 }
 
 type ToPathArgs =
-  | ({
+  | {
       page: 'articleDetail'
       article: ArticleArgs
-      fragment?: string
-      // [UtmParam]?: string
-    } & UtmParams)
+    }
   | {
       page:
         | 'circleDetail'
@@ -57,7 +55,6 @@ type ToPathArgs =
         | 'circleEditProfile'
         | 'circleManageInvitation'
       circle: CircleArgs
-      fragment?: string
     }
   | {
       page: 'commentDetail'
@@ -87,19 +84,18 @@ type ToPathArgs =
     }
 
 /**
- * Get `href` and `as` for `<Link>` with `args`
+ * Get `href` for `<Link>` with `args`
  *
  * (works on SSR & CSR)
  */
 export const toPath = (
-  args: ToPathArgs
+  args: ToPathArgs & UtmParams & { fragment?: string }
 ): {
   href: string
-  pathname?: string
-  // search?: string
-  // searchParams?: URLSearchParams | null
-  // hash?: string
 } => {
+  let href = ''
+  let search = {}
+
   switch (args.page) {
     case 'articleDetail': {
       const {
@@ -109,136 +105,141 @@ export const toPath = (
         author: { userName },
       } = args.article
 
-      let pathname = `/@${userName}/${slug}-${mediaHash}`
+      href = `/@${userName}/${slug}-${mediaHash}`
+
       try {
-        if (id) {
-          const { id: articleId } = fromGlobalId(id as string)
-          pathname = `/@${userName}/${articleId}-${slug}${
+        const { id: articleId } = fromGlobalId(id as string)
+        if (id && articleId) {
+          href = `/@${userName}/${articleId}-${slug}${
             mediaHash ? '-' + mediaHash : ''
           }`
         }
       } catch (err) {
-        console.error(`unable to parse global id:`, { id }, err)
+        // do nothing
       }
 
-      let search = ''
-      let searchParams: URLSearchParams | null = null
-      const { utm_source, utm_medium } = args
-      if ([utm_source, utm_medium].some(Boolean)) {
-        searchParams = new URLSearchParams(
-          [
-            ['utm_source', utm_source as string],
-            ['utm_medium', utm_medium as string],
-          ].filter(([k, v]) => !!v)
-        )
-        search = '?' + searchParams.toString()
-      }
-
-      const hash = args.fragment ? `#${args.fragment}` : ''
-
-      return {
-        href: `${pathname}${search}${hash}`,
-        pathname,
-        // search,
-        // searchParams,
-        // hash,
-      }
+      break
     }
     case 'circleDetail': {
-      return {
-        href: `/~${args.circle.name}`,
-      }
+      href = `/~${args.circle.name}`
+      break
     }
     case 'circleDiscussion': {
-      const hash = args.fragment ? `#${args.fragment}` : ''
-      return {
-        href: `/~${args.circle.name}/discussion${hash}`,
-      }
+      href = `/~${args.circle.name}/discussion`
+      break
     }
     case 'circleBroadcast': {
-      const hash = args.fragment ? `#${args.fragment}` : ''
-      return {
-        href: `/~${args.circle.name}/broadcast${hash}`,
-      }
+      href = `/~${args.circle.name}/broadcast`
+      break
     }
     case 'circleSettings': {
-      return {
-        href: `/~${args.circle.name}/settings`,
-      }
+      href = `/~${args.circle.name}/settings`
+      break
     }
     case 'circleAnalytics': {
-      return {
-        href: `/~${args.circle.name}/analytics`,
-      }
+      href = `/~${args.circle.name}/analytics`
+      break
     }
     case 'circleEditProfile': {
-      return {
-        href: `/~${args.circle.name}/settings/edit-profile`,
-      }
+      href = `/~${args.circle.name}/settings/edit-profile`
+      break
     }
     case 'circleManageInvitation': {
-      return {
-        href: `/~${args.circle.name}/settings/manage-invitation`,
-      }
+      href = `/~${args.circle.name}/settings/manage-invitation`
+      break
     }
     case 'commentDetail': {
       const { parentComment, id, type } = args.comment || {}
       const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
       switch (type) {
         case 'article':
-          return toPath({
+          href = toPath({
             page: 'articleDetail',
             article: args.article!,
             fragment,
-          })
+          }).href
+          break
         case 'circleDiscussion':
         case 'circleBroadcast':
-          return toPath({
+          href = toPath({
             page: type, // 'circleDiscussion' or 'circleBroadcast'
             circle: args.circle!, // as { name: string },
             fragment,
-          })
-        default:
-          throw new Error(`unknown comment type: ${type}`)
+          }).href
+          break
       }
+      break
     }
     case 'draftDetail': {
-      return {
-        href: `/me/drafts/${args.id}`,
-      }
+      href = `/me/drafts/${args.id}`
+      break
     }
     case 'tagDetail': {
       const { id, slug, content } = args.tag
+      const name = slug || slugifyTag(content)
       const { id: numberId } = fromGlobalId(id as string)
-      const pathname = `/tags/${numberId}-${slug || slugifyTag(content)}`
-      const typeStr = args.feedType ? `?type=${args.feedType}` : ''
-      return {
-        href: `${pathname}${typeStr}`,
-        pathname,
+      if (args.feedType) {
+        search = {
+          ...search,
+          type: args.feedType,
+        }
       }
+      href = `/tags/${numberId}-${name}`
+      break
     }
     case 'userProfile': {
-      return {
-        href: `/@${args.userName}`,
-      }
+      href = `/@${args.userName}`
+      break
     }
     case 'userCollections': {
-      return {
-        href: `/@${args.userName}/collections`,
-      }
+      href = `/@${args.userName}/collections`
+      break
     }
     case 'collectionDetail': {
-      return {
-        href: `/@${args.userName}/collections/${args.collection.id}`,
-      }
+      href = `/@${args.userName}/collections/${args.collection.id}`
+      break
     }
-
     case 'search': {
-      const typeStr = args.type ? `&type=${args.type}` : ''
-      return {
-        href: `${PATHS.SEARCH}?q=${args.q || ''}${typeStr}`,
+      search = {
+        ...search,
+        q: args.q,
       }
+
+      if (args.type) {
+        search = {
+          ...search,
+          type: args.type,
+        }
+      }
+      href = PATHS.SEARCH
+      break
     }
+  }
+
+  // query string
+  let searchParams: URLSearchParams = new URLSearchParams(
+    [
+      ['utm_source', args.utm_source as string],
+      ['utm_medium', args.utm_medium as string],
+      ['utm_campaign', args.utm_campaign as string],
+      ['utm_content', args.utm_content as string],
+      ['utm_id', args.utm_id as string],
+      ['utm_term', args.utm_term as string],
+      ...(Object.entries(search) as [string, string][]),
+    ].filter(([k, v]) => !!v)
+  )
+  if (searchParams.toString()) {
+    href = `${href}?${searchParams.toString()}`
+  }
+
+  // hash
+  if (args.fragment) {
+    const hash = `#${args.fragment}`
+    href = `${href}${hash}`
+  }
+
+  return {
+    href,
   }
 }
 
