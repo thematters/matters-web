@@ -243,7 +243,7 @@ export const toPath = (
   }
 }
 
-export const getTarget = (url?: string) => {
+const getTarget = (url?: string) => {
   const qs = new URL(url || window.location.href).searchParams
   const target = encodeURIComponent((qs.get('target') as string) || '')
 
@@ -270,6 +270,7 @@ export const redirectToTarget = ({
       : window.location.href
   let target = decodeURIComponent(getTarget())
 
+  console.log({ target, href: window.location.href })
   const isValidTarget = /^((http|https):\/\/)/.test(target)
   if (!isValidTarget) {
     target = fallbackTarget

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import toAbsoluteDate from './absolute'
 
@@ -23,19 +23,8 @@ describe('utils/datetime/absolute', () => {
   })
 
   it("should format this year's date correctly", () => {
-    // two days ago
-    const date = new Date()
-    date.setDate(date.getDate() - 2)
-
-    const thisYear = new Date().getFullYear()
-    const thisYearDate = new Date(`${thisYear}-01-01`)
-
-    // skip test
-    if (thisYearDate > date) {
-      return
-    }
-
-    const result = toAbsoluteDate(thisYearDate, 'en')
+    vi.setSystemTime(new Date(2023, 6, 1))
+    const result = toAbsoluteDate(new Date('2023-01-01'), 'en')
     expect(result).toBe('Jan 1')
   })
 

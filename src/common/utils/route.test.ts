@@ -11,16 +11,7 @@ import {
 } from '~/stories/mocks'
 
 import { fromGlobalId } from './globalId'
-import {
-  // appendTarget,
-  // getEncodedCurrent,
-  getSearchType,
-  // getTarget,
-  // redirectToHomePage,
-  // redirectToLogin,
-  // redirectToTarget,
-  toPath,
-} from './route'
+import { getSearchType, toPath } from './route'
 
 describe('utils/route/toPath', () => {
   describe('page: articleDetail', () => {
