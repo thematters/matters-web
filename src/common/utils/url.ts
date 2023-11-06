@@ -1,4 +1,4 @@
-export { default as isUrl } from 'validator/lib/isUrl'
+export { default as isUrl } from 'validator/lib/isURL'
 
 import { URL_COLLECTION_DETAIL } from '../enums'
 

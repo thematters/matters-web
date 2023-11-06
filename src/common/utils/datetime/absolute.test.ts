@@ -1,6 +1,10 @@
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import toAbsoluteDate from './absolute'
+
+beforeEach(() => {
+  vi.setSystemTime(new Date(2023, 6, 1))
+})
 
 describe('utils/datetime/absolute', () => {
   it('should parse a string date', () => {
@@ -10,20 +14,18 @@ describe('utils/datetime/absolute', () => {
   })
 
   it("should format today's date correctly", () => {
-    const date = new Date()
+    const date = new Date(2023, 6, 1)
     const result = toAbsoluteDate(date, 'en')
     expect(result).toContain('Today')
   })
 
   it("should format yesterday's date correctly", () => {
-    const date = new Date()
-    date.setDate(date.getDate() - 1)
+    const date = new Date(2023, 6, 0)
     const result = toAbsoluteDate(date, 'en')
     expect(result).toContain('Yesterday')
   })
 
   it("should format this year's date correctly", () => {
-    vi.setSystemTime(new Date(2023, 6, 1))
     const result = toAbsoluteDate(new Date('2023-01-01'), 'en')
     expect(result).toBe('Jan 1')
   })
@@ -35,8 +37,7 @@ describe('utils/datetime/absolute', () => {
   })
 
   it('should format a date in the future correctly', () => {
-    const now = new Date()
-    const date = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 365)
+    const date = new Date('2025-01-01')
     const result = toAbsoluteDate(date, 'en')
     expect(result).toContain(date.getFullYear())
   })

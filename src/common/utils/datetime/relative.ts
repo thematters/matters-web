@@ -50,7 +50,7 @@ const relative = (date: Date | string | number, lang: Language = 'zh_hant') => {
 
   if (isThisHour(date)) {
     const diffMins = differenceInMinutes(new Date(), date) || 1
-    return diffMins + DIFFS[lang][diffMins === 1 ? 'minuteAgo' : 'minuteAgo']
+    return diffMins + DIFFS[lang][diffMins === 1 ? 'minuteAgo' : 'minutesAgo']
   }
 
   if (isToday(date)) {

@@ -270,7 +270,6 @@ export const redirectToTarget = ({
       : window.location.href
   let target = decodeURIComponent(getTarget())
 
-  console.log({ target, href: window.location.href })
   const isValidTarget = /^((http|https):\/\/)/.test(target)
   if (!isValidTarget) {
     target = fallbackTarget

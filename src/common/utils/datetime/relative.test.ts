@@ -1,6 +1,10 @@
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import toRelativeDate from './relative'
+
+beforeEach(() => {
+  vi.setSystemTime(new Date(2023, 6, 1, 8, 30, 0))
+})
 
 describe('utils/datetime/relative', () => {
   it('should parse a string date', () => {
@@ -16,24 +20,26 @@ describe('utils/datetime/relative', () => {
   })
 
   it('should format a date within this hour but not this minute correctly', () => {
-    const now = new Date()
-    const date = new Date(now.getTime() - 1000 * 60)
-    const result = toRelativeDate(date, 'en')
-    expect(result).toBe('1 minute ago')
+    expect(toRelativeDate(new Date(2023, 6, 1, 8, 29), 'en')).toBe(
+      '1 minute ago'
+    )
+    expect(toRelativeDate(new Date(2023, 6, 1, 8, 28), 'en')).toBe(
+      '2 minutes ago'
+    )
   })
 
   it('should format a date within today but not this hour correctly', () => {
-    const now = new Date()
-    const date = new Date(now.getTime() - 1000 * 60 * 60)
-    const result = toRelativeDate(date, 'en')
-    expect(result).toBe('1 hour ago')
+    expect(toRelativeDate(new Date(2023, 6, 1, 7, 30, 0), 'en')).toBe(
+      '1 hour ago'
+    )
+    expect(toRelativeDate(new Date(2023, 6, 1, 6, 20, 0), 'en')).toBe(
+      '2 hours ago'
+    )
   })
 
   it('should format a date within this week but not today correctly', () => {
-    const now = new Date()
-    const date = new Date(now.getTime() - 1000 * 60 * 60 * 24)
-    const result = toRelativeDate(date, 'en')
-    expect(result).toBe('1 day ago')
+    expect(toRelativeDate(new Date('2023-06-30'), 'en')).toBe('1 day ago')
+    expect(toRelativeDate(new Date('2023-06-26'), 'en')).toBe('5 days ago')
   })
 
   it('should format a date within this year but not this week correctly', () => {
