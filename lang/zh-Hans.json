@@ -53,10 +53,6 @@
     "defaultMessage": "不知道哪里出错了，过几分钟看看",
     "description": "UNKNOWN_ERROR"
   },
-  "/asuIY": {
-    "defaultMessage": "进入社区",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  },
   "/jJLYy": {
     "defaultMessage": "交易记录"
   },
@@ -403,9 +399,6 @@
   "A3g33H": {
     "defaultMessage": "归档的作品仅自己可见，且操作无法撤销。如文章已加入选集，将从选集中移除。（已发布到 IPFS 的版本不受影响）"
   },
-  "A41QIy": {
-    "defaultMessage": "输入密码"
-  },
   "A6ozr9": {
     "defaultMessage": "选集名称"
   },
@@ -430,10 +423,6 @@
   "ANA7sk": {
     "defaultMessage": "主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
-  },
-  "ANhCde": {
-    "defaultMessage": "马上开始你的创作吧！",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "AVpR3Q": {
     "defaultMessage": "已绑定钱包",
@@ -878,10 +867,6 @@
     "defaultMessage": "邮箱地址验证链接已发送至 {email}",
     "description": "src/components/GlobalToast/index.tsx"
   },
-  "NzfL1d": {
-    "defaultMessage": "再次输入密码",
-    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
-  },
   "O0MQs/": {
     "defaultMessage": "请先绑定邮箱",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1123,10 +1108,6 @@
   "X+Xvgq": {
     "defaultMessage": "取消精选",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
-  },
-  "XH0Lb6": {
-    "defaultMessage": "欢迎加入 Matters！",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "XHMco9": {
     "defaultMessage": "人",
@@ -1574,9 +1555,6 @@
     "defaultMessage": "编辑",
     "description": "src/components/Comment/DropdownActions/EditButton.tsx"
   },
-  "ml3SZN": {
-    "defaultMessage": "至少 8 个字符，支持英文大小写字母、数字和特殊符号"
-  },
   "mp9SBo": {
     "defaultMessage": "围炉通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -1711,10 +1689,6 @@
   "rdZi0V": {
     "defaultMessage": "你似乎遨游到了一个未知空间，请返回重试"
   },
-  "reOeq5": {
-    "defaultMessage": "你已拥有个人创作空间站，期待你的第一篇作品。",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  },
   "rfz/fN": {
     "defaultMessage": "建議尺寸 1600 x 900 像素"
   },
@@ -1737,10 +1711,6 @@
   "skbUBl": {
     "defaultMessage": "登录",
     "description": "src/components/Buttons/Login/index.tsx"
-  },
-  "stjoBH": {
-    "defaultMessage": "现在，去为你喜欢的作者打赏吧！你的每一次打赏都将为作者带来收入。",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "sy+pv5": {
     "defaultMessage": "邮箱"
