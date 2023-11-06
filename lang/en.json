@@ -1396,6 +1396,10 @@
     "defaultMessage": "Pin Comment",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "jaTUgx": {
+    "defaultMessage": "Number of readers: unique registered users plus number of anonymous IP addresses visited the article",
+    "description": "src/views/Me/Works/Published/index.tsx"
+  },
   "jkrM1r": {
     "defaultMessage": "Open IPNS page",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"

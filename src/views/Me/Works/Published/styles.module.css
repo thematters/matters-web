@@ -8,11 +8,16 @@
   border-radius: 0.5rem;
 
   & .left {
+    position: relative;
     font-size: var(--font-size-sm);
     line-height: 1.375rem;
     color: var(--color-grey);
 
     & svg {
+      position: relative;
+
+      /* FIX: align text */
+      top: 2px;
       margin-right: var(--spacing-x-tight);
     }
   }

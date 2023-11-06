@@ -5,10 +5,11 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { mergeConnections } from '~/common/utils'
 import {
   ArticleDigestPublished,
+  Button,
   EmptyArticle,
   Head,
-  // IconClose20,
-  // IconUser2V16,
+  IconClose20,
+  IconUser2V16,
   InfiniteScroll,
   Layout,
   List,
@@ -20,7 +21,7 @@ import Placeholder from '../Placeholder'
 import WorksTabs from '../WorksTabs'
 import { ME_WORKS_PUBLISHED_FEED } from './gql'
 import { SortTabs } from './SortTabs'
-// import styles from './styles.module.css'
+import styles from './styles.module.css'
 
 export const BaseMeWorksPublished = ({ sort }: { sort: UserArticlesSort }) => {
   const { data, loading, error, fetchMore } =
@@ -87,6 +88,7 @@ const MeWorksPublished = () => {
   })
 
   const [sort, setSort] = useState<UserArticlesSort>(UserArticlesSort.Newest)
+  const [showHint, setShowHint] = useState(true)
 
   return (
     <Layout.Main>
@@ -103,19 +105,27 @@ const MeWorksPublished = () => {
       <WorksTabs />
 
       <SortTabs sort={sort} setSort={setSort} />
-      {/* <section className={styles.hint}>
-        <p className={styles.left}>
-          <IconUser2V16 color="grey" />
-          <FormattedMessage
-            defaultMessage="Number of readers: unique registered users plus number of anonymous IP addresses visited the article"
-            description="src/views/Me/Works/Published/index.tsx"
-            id="jaTUgx"
-          />
-        </p>
-        <section className={styles.right}>
-          <IconClose20 size="mdS" color="greyDark" />
+      {showHint && (
+        <section className={styles.hint}>
+          <p className={styles.left}>
+            <IconUser2V16 color="grey" />
+            <FormattedMessage
+              defaultMessage="Number of readers: unique registered users plus number of anonymous IP addresses visited the article"
+              description="src/views/Me/Works/Published/index.tsx"
+              id="jaTUgx"
+            />
+          </p>
+          <section className={styles.right}>
+            <Button
+              textColor="greyDarker"
+              textActiveColor="black"
+              onClick={() => setShowHint(false)}
+            >
+              <IconClose20 size="mdS" />
+            </Button>
+          </section>
         </section>
-      </section> */}
+      )}
       <BaseMeWorksPublished sort={sort} />
     </Layout.Main>
   )

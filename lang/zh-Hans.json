@@ -1396,6 +1396,10 @@
     "defaultMessage": "喜欢回应",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "jaTUgx": {
+    "defaultMessage": "读者数量：访问过作品页的不重复的登录用户数加匿名 IP 数",
+    "description": "src/views/Me/Works/Published/index.tsx"
+  },
   "jkrM1r": {
     "defaultMessage": "打开 IPNS 页面",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
