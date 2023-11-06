@@ -147,6 +147,7 @@ export class DraftDetailPage {
 
   async fillTitle(title?: string) {
     const _title = title || generateTitle()
+    await this.titleInput.focus()
     await this.titleInput.fill(_title)
     return _title
   }
@@ -166,6 +167,7 @@ export class DraftDetailPage {
       await this.contentInput.press('End')
       await this.contentInput.press('KeyA')
       await this.page.waitForTimeout(1000 * 2)
+      await this.contentInput.focus()
       await this.contentInput.press('Backspace')
       await this.page.waitForTimeout(1000 * 2)
       await this.fillTitle(title)

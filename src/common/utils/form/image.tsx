@@ -1,22 +1,27 @@
 import { FormattedMessage } from 'react-intl'
 
 import {
+  UPLOAD_GIF_AVATAR_SIZE_LIMIT,
   UPLOAD_IMAGE_AREA_LIMIT,
   UPLOAD_IMAGE_DIMENSION_LIMIT,
   UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
 import { toast } from '~/components'
 
-export const validateImage = (image: File) =>
+export const validateImage = (image: File, isAvatar: boolean = false) =>
   new Promise<boolean>((resolve, reject) => {
     // size limits
-    const isExceedSizeLimit = image.size > UPLOAD_IMAGE_SIZE_LIMIT
+    const isGIF = image.type === 'image/gif'
+    const sizeLimit =
+      isAvatar && isGIF ? UPLOAD_GIF_AVATAR_SIZE_LIMIT : UPLOAD_IMAGE_SIZE_LIMIT
+    const isExceedSizeLimit = image.size > sizeLimit
     if (isExceedSizeLimit) {
       toast.error({
         message: (
           <FormattedMessage
-            defaultMessage="Images have a 5 megabyte (MB) size limit."
-            id="OyvGvT"
+            defaultMessage="Images have a {sizeInMB} megabyte (MB) size limit."
+            id="KuP/6B"
+            values={{ sizeInMB: sizeLimit / 1024 / 1024 }}
           />
         ),
       })

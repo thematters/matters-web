@@ -1,18 +1,11 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import {
-  AriaAttributes,
-  AriaRole,
-  forwardRef,
-  useContext,
-  useEffect,
-  useRef,
-} from 'react'
+import { AriaAttributes, AriaRole, forwardRef, useEffect, useRef } from 'react'
+import { useIntl } from 'react-intl'
 
 import { KEYVALUE, TEST_ID } from '~/common/enums'
-import { capitalizeFirstLetter, translate } from '~/common/utils'
-import { LanguageContext } from '~/components'
+import { capitalizeFirstLetter } from '~/common/utils'
 
 import styles from './styles.module.css'
 
@@ -95,7 +88,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
     ref
   ) => {
     const router = useRouter()
-    const { lang } = useContext(LanguageContext)
+    const intl = useIntl()
 
     const disabled = !href && !htmlHref && !onClick
     const fallbackRef = useRef(null)
@@ -132,12 +125,15 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
     })
     const ariaLabel =
       htmlHref || href
-        ? translate({
-            zh_hant: `跳轉至 ${href || htmlHref}`,
-            zh_hans: `跳转至 ${href || htmlHref}`,
-            en: `Go to ${href || htmlHref}`,
-            lang,
-          })
+        ? intl.formatMessage(
+            {
+              defaultMessage: 'Go to {href}',
+              id: 'mJEqC/',
+            },
+            {
+              href: href || htmlHref,
+            }
+          )
         : undefined
 
     const openLink = ({
@@ -206,29 +202,28 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       }
     }, [cardRef, isActive])
 
+    const props = {
+      className: cardClasses,
+      ref: cardRef,
+      'data-clickable': true,
+      onClick,
+      ...(ariaLabel && disabled ? { ['aria-label']: ariaLabel } : {}),
+      ...(ariaHasPopup && disabled ? { ['aria-haspopup']: ariaHasPopup } : {}),
+      ...(disabled ? { ['aria-disabled']: disabled } : {}),
+      ...(testId ? { ['data-test-id']: testId } : {}),
+    }
+
     if (is === 'link' && href) {
       return (
         <Link href={href} legacyBehavior>
-          <a
-            className={cardClasses}
-            ref={cardRef}
-            {...(testId ? { ['data-test-id']: testId } : {})}
-          >
-            {children}
-          </a>
+          <a {...props}>{children}</a>
         </Link>
       )
     }
 
     if (is === 'anchor' && htmlHref) {
       return (
-        <a
-          className={cardClasses}
-          href={htmlHref}
-          target={htmlTarget}
-          ref={cardRef}
-          {...(testId ? { ['data-test-id']: testId } : {})}
-        >
+        <a href={htmlHref} target={htmlTarget} {...props}>
           {children}
         </a>
       )
@@ -236,10 +231,8 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
     return (
       <section
-        className={cardClasses}
+        {...props}
         tabIndex={disabled ? -1 : 0}
-        ref={cardRef}
-        data-clickable
         onKeyDown={(event) => {
           if (event.key.toLowerCase() !== KEYVALUE.enter) {
             return
@@ -252,11 +245,11 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         onClick={(event) => {
           openLink({ newTab: event.metaKey, event })
         }}
-        {...(ariaLabel ? { ['aria-label']: ariaLabel } : {})}
-        {...(role ? { ['role']: role } : {})}
-        {...(ariaHasPopup ? { ['aria-haspopup']: ariaHasPopup } : {})}
-        {...(disabled ? { ['aria-disabled']: disabled } : {})}
-        {...(testId ? { ['data-test-id']: testId } : {})}
+        {...(role
+          ? { ['role']: role }
+          : !disabled
+          ? { ['role']: 'button' }
+          : {})}
       >
         {children}
       </section>

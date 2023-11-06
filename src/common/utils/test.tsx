@@ -6,19 +6,26 @@ import { render, RenderOptions } from '@testing-library/react'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import ApolloClient from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
+import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider'
 import React, { ReactElement, useContext } from 'react'
 import { IntlProvider } from 'react-intl'
+import { WagmiConfig } from 'wagmi'
 
 import TRANSLATIONS_EN from '@/compiled-lang/en.json'
 import TRANSLATIONS_ZH_HANS from '@/compiled-lang/zh-Hans.json'
 import TRANSLATIONS_ZH_HANT from '@/compiled-lang/zh-Hant.json'
+import { wagmiConfig } from '~/common/utils'
 import {
   FeaturesProvider,
   LanguageContext,
   LanguageProvider,
   MediaContextProvider,
+  Toaster,
+  ViewerProvider,
 } from '~/components'
+import GlobalDialogs from '~/components/GlobalDialogs'
 import { UserLanguage } from '~/gql/graphql'
+import { MOCK_USER } from '~/stories/mocks'
 
 import { toLocale } from './language'
 
@@ -46,15 +53,26 @@ const wrapper = ({ children }: { children: React.ReactNode }) => {
   })
 
   return (
-    <ApolloProvider client={client}>
-      <LanguageProvider headers={undefined}>
-        <FeaturesProvider official={undefined}>
-          <MediaContextProvider>
-            <TranslationsProvider>{children}</TranslationsProvider>
-          </MediaContextProvider>
-        </FeaturesProvider>
-      </LanguageProvider>
-    </ApolloProvider>
+    <MemoryRouterProvider>
+      <ApolloProvider client={client}>
+        <WagmiConfig config={wagmiConfig}>
+          <ViewerProvider viewer={MOCK_USER}>
+            <LanguageProvider headers={undefined}>
+              <FeaturesProvider official={undefined}>
+                <MediaContextProvider>
+                  <TranslationsProvider>
+                    {children}
+
+                    <Toaster />
+                    <GlobalDialogs />
+                  </TranslationsProvider>
+                </MediaContextProvider>
+              </FeaturesProvider>
+            </LanguageProvider>
+          </ViewerProvider>
+        </WagmiConfig>
+      </ApolloProvider>
+    </MemoryRouterProvider>
   )
 }
 

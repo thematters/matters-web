@@ -19,7 +19,7 @@
     "start": "PORT=\"${PORT:-3000}\"; next start -p $PORT",
     "build": "npm run i18n && NODE_ENV=production next build",
     "export": "next export",
-    "format": "prettier --write \"{,!(.next|build|node_modules|coverage|out)/**/*.{js,jsx,ts,tsx,json}}\"",
+    "format": "prettier --write \"{,!(.next|build|node_modules|coverage|out|lang)/**/*.{js,jsx,ts,tsx,json}}\"",
     "format:check": "npm run format -- --list-different",
     "lint": "npm run lint:ts && npm run lint:css",
     "lint:ts": "tsc --project tsconfig.json --noEmit && next lint",

@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 
-import FollowButton from '~/components/ArticleDigest/Feed/FollowButton'
 import { ArticleDigestTitle } from '~/components/ArticleDigest/Title'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -24,15 +23,6 @@ export const fragments = {
       }
       ${UserDigest.Mini.fragments.user}
       ${ArticleDigestTitle.fragments.article}
-    `,
-    private: gql`
-      fragment FollowingFeedRecommendArticlePrivate on Article {
-        id
-        author {
-          ...ArticleFeedFollowButtonUserPrivate
-        }
-      }
-      ${FollowButton.fragments.user.private}
     `,
   },
 }

@@ -1,15 +1,8 @@
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
-import {
-  Button,
-  Dropdown,
-  IconUnfollow24,
-  LanguageContext,
-  Menu,
-} from '~/components'
+import { Button, Dropdown, IconUnfollow24, Menu } from '~/components'
 
 export interface DropdownActionsControls {
   actions?: React.ReactNode
@@ -20,9 +13,13 @@ type DropdownActionsProps = DropdownActionsControls
 type BaseDropdownActionsProps = DropdownActionsProps
 
 const BaseDropdownActions = ({ actions }: BaseDropdownActionsProps) => {
-  const { lang } = useContext(LanguageContext)
-
   const Content = () => <Menu>{actions}</Menu>
+
+  const intl = useIntl()
+  const moreActionText = intl.formatMessage({
+    defaultMessage: 'More Actions',
+    id: 'A7ugfn',
+  })
 
   return (
     <Dropdown content={<Content />}>
@@ -31,7 +28,7 @@ const BaseDropdownActions = ({ actions }: BaseDropdownActionsProps) => {
           onClick={openDropdown}
           spacing={['xtight', 'xtight']}
           bgActiveColor="greyLighterActive"
-          aria-label={translate({ id: 'moreActions', lang })}
+          aria-label={moreActionText}
           aria-haspopup="listbox"
           ref={ref}
         >

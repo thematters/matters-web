@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Card, CardProps, CircleAvatar } from '~/components'
 import { DigestMiniCircleFragment } from '~/gql/graphql'
@@ -27,7 +28,12 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
   })
 
   return (
-    <Card {...path} spacing={[0, 0]} {...cardProps}>
+    <Card
+      {...path}
+      spacing={[0, 0]}
+      {...cardProps}
+      testId={TEST_ID.DIGEST_CIRCLE_MINI}
+    >
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
           <a className={styles.avatar}>
@@ -41,7 +47,12 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
         <section className={styles.content}>
           <header className={styles.header}>
             <Link {...path} legacyBehavior>
-              <a className={styles.name}>{displayName}</a>
+              <a
+                className={styles.name}
+                data-test-id={TEST_ID.DIGEST_CIRCLE_DISPLAY_NAME}
+              >
+                {displayName}
+              </a>
             </Link>
 
             <section className={styles.info}>

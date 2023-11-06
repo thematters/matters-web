@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 // import Script from 'next/script'
 import { useContext, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
@@ -17,22 +16,18 @@ import {
   ViewerContext,
 } from '~/components'
 import { updateAppreciation } from '~/components/GQL'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 // import { UserGroup } from '~/gql/graphql'
 import {
   AppreciateArticleMutation,
   AppreciationButtonArticlePrivateFragment,
   AppreciationButtonArticlePublicFragment,
-  ClientPreferenceQuery,
 } from '~/gql/graphql'
 
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
 import BlockedButton from './BlockedButton'
-import CivicLikerButton from './CivicLikerButton'
 import ForbiddenButton from './ForbiddenButton'
 import { APPRECIATE_ARTICLE, fragments } from './gql'
-import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 
 interface AppreciationButtonProps {
   article: AppreciationButtonArticlePublicFragment &
@@ -51,9 +46,6 @@ const AppreciationButton = ({
   const turnstileRef = useRef<TurnstileInstance>(null)
   const { token, refreshToken } = useContext(ReCaptchaContext)
 
-  const { data, client } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
   const isArticleAuthor = article.author.id === viewer.id
 
   /**
@@ -152,9 +144,6 @@ const AppreciationButton = ({
    * Article Author:
    *   1) Disabled, show tooltip on hover
    *
-   * No LikerID:
-   *   1) Show Setup LikerID modal on click
-   *
    * Non-Civic Liker:
    *   1) Allow to like 5 times
    *   2) Show modal to introduce Civic Liker on click
@@ -180,11 +169,8 @@ const AppreciationButton = ({
     }
   }
 
-  const readCivicLikerDialog =
-    viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
-    (!isReachLimit && !viewer.isArchived && viewer.liker.likerId) ||
-    (isSuperLike && canSuperLike)
+    (!isReachLimit && !viewer.isArchived) || (isSuperLike && canSuperLike)
 
   // Anonymous
   if (!viewer.isAuthed) {
@@ -221,11 +207,6 @@ const AppreciationButton = ({
     )
   }
 
-  // Liker ID
-  if (viewer.shouldSetupLikerID) {
-    return <SetupLikerIdAppreciateButton total={total} />
-  }
-
   // Blocked by private query
   if (!privateFetched) {
     return <AppreciateButton total={total} disabled />
@@ -233,10 +214,11 @@ const AppreciationButton = ({
 
   const siteKey = process.env
     .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
+
   // Appreciable
   if (canAppreciate && !disabled) {
     return (
-      <>
+      <section>
         <Turnstile
           ref={turnstileRef}
           options={{
@@ -259,24 +241,7 @@ const AppreciationButton = ({
           isSuperLike={isSuperLike}
           superLiked={superLiked}
         />
-      </>
-    )
-  }
-
-  // Civic Liker
-  if (isReachLimit && !readCivicLikerDialog) {
-    return (
-      <CivicLikerButton
-        user={article.author}
-        onClose={() => {
-          client.writeData({
-            id: 'ClientPreference:local',
-            data: { readCivicLikerDialog: true },
-          })
-        }}
-        count={appreciatedCount > 0 ? appreciatedCount : undefined}
-        total={total}
-      />
+      </section>
     )
   }
 

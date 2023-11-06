@@ -6,8 +6,11 @@ export enum TEST_ID {
   SIDE_NAV_MY_PAGE = 'sidenav/my-page',
   SIDE_NAY_WRITE_BUTTON = 'sidenav/write-button',
   // digests
+  DIGEST_ARTICLE_ARCHIVED = 'digest/article/archived',
   DIGEST_ARTICLE_CARD = 'digest/article/card',
+  DIGEST_ARTICLE_DROPDOWN = 'digest/article/dropdown',
   DIGEST_ARTICLE_FEED = 'digest/article/feed',
+  DIGEST_ARTICLE_FEED_COVER = 'digest/article/feed/cover',
   DIGEST_ARTICLE_LIST = 'digest/article/list',
   DIGEST_ARTICLE_FEED_FOOTER_PIN = 'digest/article/feed/footer/pin',
   DIGEST_ARTICLE_NOTICE = 'digest/article/notice',
@@ -20,12 +23,37 @@ export enum TEST_ID {
   DIGEST_USER_RICH = 'digest/user/rich',
   DIGEST_USER_RICH_DISPLAY_NAME = 'digest/user/rich/display-name',
   DIGEST_USER_VERBOSE = 'digest/user/verbose',
+  DIGEST_TAG_CONCISE = 'digest/tag/concise',
   DIGEST_TAG_FEED = 'digest/tag/feed',
+  DIGEST_TAG_FEED_COVER = 'digest/tag/feed/cover',
   DIGEST_TAG_RICH = 'digest/tag/rich',
   DIGEST_TAG_SIDEBAR = 'digest/tag/sidebar',
+  DIGRET_CIRCLE_PLAIN = 'digest/circle/plain',
+  DIGEST_CIRCLE_RICH = 'digest/circle/rich',
+  DIGEST_CIRCLE_TITLE = 'digest/circle/title',
+  DIGEST_CIRCLE_MINI = 'digest/circle/mini',
+  DIGEST_CIRCLE_USER_PROFILE = 'digest/circle/user-profile',
+  DIGEST_CIRCLE_DISPLAY_NAME = 'digest/circle/display-name',
+  DIGEST_CIRCLE_MEMBER_COUNT = 'digest/circle/member-count',
+  DIGEST_CIRCLE_ARTICLE_COUNT = 'digest/circle/article-count',
+  DIGEST_CIRCLE_PRICE = 'digest/circle/price',
+  DIGEST_TAG_SIDEBAR_COVER = 'digest/tag/sidebar/cover',
   DIGEST_COLLECTION_FEED = 'digest/collection/feed',
+  DIGEST_DRAFT_FEED = 'digest/draft/feed',
   // dialogs
   DIALOG_AUTH = 'dialog/auth',
+  DIALOG_LIKECOIN = 'dialog/likecoin',
+  DIALOG_SHARE = 'dialog/share',
+  DIALOG_APPRECIATORS = 'dialog/appreciators',
+  DIALOG_SUPPORTERS = 'dialog/supporters',
+  DIALOG_FINGERPRINT = 'dialog/fingerprint',
+  DIALOG_BLOCK_USER = 'dialog/block-user',
+  DIALOG_COMMENT_FORM = 'dialog/comment-form',
+  DIALOG_COMMENT_DELETE = 'dialog/delete-comment',
+  DIALOG_COMMENT_COLLAPSE = 'dialog/collapse-comment',
+  DIALOG_DELETE_DRAFT = 'dialog/delete-draft',
+  DIALOG_EDIT_COLLECTION = 'dialog/edit-collection',
+  DIALOG_DELETE_COLLECTION = 'dialog/delete-collection',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
   // drafts
@@ -48,6 +76,7 @@ export enum TEST_ID {
   PAY_TO_CURRENCY_CHOICE = 'payto/currency-choice',
   // comment
   COMMENT_CONETNT = 'comment/content',
+  COMMENT_REPLY_TO = 'comment/reply-to',
   // notification:components
   NOTICE_USER_DISPLAY_NAME = 'notice/user/display-name',
   NOTICE_ARTICLE_TITLE = 'notice/article/title',
@@ -103,6 +132,7 @@ export enum TEST_ID {
   USER_PROFILE_PIN_BOARD_UNPIN_BUTTON = 'user-profile/pin-board/unpin-button',
 
   // Book
+  BOOK = 'book',
   BOOK_TITLE = 'book/title',
 
   // Editor
@@ -117,6 +147,7 @@ export enum TEST_ID {
   AVATAR_ARCHITECT = 'avatar/architect',
   AVATAR_CIVIC_ARCHITECT = 'avatar/civic-architect',
   AVATAR_LOGBOOK = 'avatar/logbook',
+  CIRCLE_AVATAR = 'circle-avatar',
 
   // misc
   RESPONSIVE_IMG = 'responsive-img',

@@ -3,17 +3,13 @@ import { FormattedMessage } from 'react-intl'
 
 import {
   ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   REFETCH_DONATORS,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import {
-  DonationDialog,
-  ERROR_MESSAGES,
-  toast,
-  Translate,
-  ViewerContext,
-} from '~/components'
+import { DonationDialog, toast, Translate, ViewerContext } from '~/components'
 import DonationButton from '~/components/Buttons/DonationButton'
 import {
   ArticleDetailPublicQuery,
@@ -65,9 +61,10 @@ const SupportButton = ({
 
               if (!viewer.isAuthed) {
                 window.dispatchEvent(
-                  new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG)
+                  new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                    detail: { trigger: UNIVERSAL_AUTH_TRIGGER.support },
+                  })
                 )
-
                 return
               }
 

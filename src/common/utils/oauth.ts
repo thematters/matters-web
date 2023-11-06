@@ -3,6 +3,8 @@ import _get from 'lodash/get'
 import {
   CALLBACK_PROVIDERS,
   OAUTH_SCOPE_TREE,
+  OAUTH_SESSSION_STORAGE_OAUTH_TOKEN,
+  OAUTH_SESSSION_STORAGE_OAUTH_TYPE,
   OAUTH_TYPE,
   PATHS,
 } from '~/common/enums'
@@ -46,7 +48,12 @@ import {
   OAUTH_STORAGE_PATH,
   OAUTH_STORAGE_STATE,
 } from '~/common/enums'
-import { generateChallenge, randomString, storage } from '~/common/utils'
+import {
+  generateChallenge,
+  randomString,
+  sessionStorage as _sessionStorage,
+  storage,
+} from '~/common/utils'
 
 export type OauthType = 'login' | 'bind'
 
@@ -66,15 +73,18 @@ export const googleOauthUrl = async (type: OauthType) => {
   const { state, nonce } = await generateSocialOauthParams(type)
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
   const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${CALLBACK_PROVIDERS.Google}`
-  const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&scope=openid%20email&redirect_uri=${redirectUri}&state=${state}&nonce=${nonce}`
+  const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&scope=openid%20email&redirect_uri=${redirectUri}&state=${state}&nonce=${nonce}&prompt=select_account`
   return url
 }
 
-export const twitterOauthUrl = async (type: OauthType) => {
-  const { state, codeChallenge } = await generateSocialOauthParams(type)
-  const clientId = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID
-  const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${CALLBACK_PROVIDERS.Twitter}`
-  const url = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=users.read%20tweet.read&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
+export const twitterOauthUrl = async (type: OauthType, oauthToken: string) => {
+  await generateSocialOauthParams(type)
+  _sessionStorage.set(OAUTH_SESSSION_STORAGE_OAUTH_TOKEN, oauthToken)
+  _sessionStorage.set(
+    OAUTH_SESSSION_STORAGE_OAUTH_TYPE,
+    type === 'bind' ? OAUTH_TYPE.bind : OAUTH_TYPE.login
+  )
+  const url = `https://api.twitter.com/oauth/authenticate?oauth_token=${oauthToken}`
   return url
 }
 

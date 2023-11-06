@@ -42,7 +42,7 @@ const Plain = ({
       {...path}
       disabled={disabled}
       onClick={onClick}
-      testId={TEST_ID.DIGEST_USER_MINI}
+      testId={TEST_ID.DIGEST_USER_PLAIN}
     >
       <section className={containerClasses}>
         <span className={displayNameClasses}>{user.displayName}</span>

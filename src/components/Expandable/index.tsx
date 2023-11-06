@@ -1,4 +1,3 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import TextTruncate from 'react-text-truncate'
@@ -99,9 +98,6 @@ export const Expandable: React.FC<ExpandableProps> = ({
 
   return (
     <section className={contentClasses}>
-      <VisuallyHidden>
-        <div>{children}</div>
-      </VisuallyHidden>
       <div ref={node}>
         {(!expandable || (expandable && expand)) && <div>{children}</div>}
       </div>

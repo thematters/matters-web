@@ -156,6 +156,7 @@ const Steps = () => {
                   iconSize="md"
                   size={['7rem', '2.5rem']}
                   spacing={[0, 0]}
+                  resideIn="migration"
                 />
                 <p className={styles.subContent}>
                   <Translate

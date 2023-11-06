@@ -17,6 +17,7 @@ import {
   setCookies,
   signinCallbackUrl,
   validateEmail,
+  WalletType,
   // validatePassword,
 } from '~/common/utils'
 import {
@@ -49,12 +50,12 @@ interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
   gotoEmailSignup: () => void
-  gotoWalletConnect: () => void
+  gotoWalletConnect: (type: WalletType) => void
 
   authFeedType: AuthFeedType
   setAuthFeedType: (type: AuthFeedType) => void
 
-  closeDialog: () => void
+  closeDialog?: () => void
   back?: () => void
 }
 

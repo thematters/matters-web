@@ -27,7 +27,6 @@ import {
   validateAmount,
 } from '~/common/utils'
 import {
-  CurrencyAmount,
   Dialog,
   Form,
   LanguageContext,
@@ -42,6 +41,7 @@ import {
 } from '~/gql/graphql'
 
 import ConfirmTable from '../ConfirmTable'
+import { CurrencyAmount } from '../CurrencyAmount'
 import StripeCheckout from '../StripeCheckout'
 
 interface FormProps {

@@ -21,7 +21,7 @@ const TagCover = ({ tag }: TagCoverProps) => {
     <Cover cover={tag.cover} fallbackCover={IMAGE_TAG_COVER.src}>
       <div className={titleClasses}>
         <div className={styles.content}>
-          <Tag tag={tag} type="title" disabled />
+          <Tag tag={tag} type="title" is="span" />
         </div>
       </div>
     </Cover>

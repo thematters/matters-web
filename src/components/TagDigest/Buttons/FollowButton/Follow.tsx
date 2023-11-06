@@ -1,14 +1,12 @@
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
 import {
-  Button,
-  TextIcon,
-  Translate,
-  useMutation,
-  ViewerContext,
-} from '~/components'
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
+import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
 import { updateViewerFollowingTagCount } from '~/components/GQL'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import {
@@ -42,7 +40,11 @@ const Follow = ({ tag }: Props) => {
 
   const onClick = () => {
     if (!viewer.isAuthed) {
-      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.followTag },
+        })
+      )
       return
     }
 
@@ -60,7 +62,7 @@ const Follow = ({ tag }: Props) => {
       onClick={onClick}
     >
       <TextIcon weight="md" size="xs">
-        <Translate id="follow" />
+        <FormattedMessage defaultMessage="Follow" id="ieGrWo" />
       </TextIcon>
     </Button>
   )

@@ -285,12 +285,6 @@ export const OAUTH_SCOPE_TREE = {
           zh_hans: '修改邮箱',
         },
       },
-      generateLikerId: {
-        _t: {
-          zh_hant: '創建新的 Liker ID',
-          zh_hans: '创建新的 Liker ID',
-        },
-      },
       clearReadHistory: {
         _t: {
           zh_hant: '清空閱讀歷史',
@@ -307,6 +301,10 @@ export const OAUTH_SCOPE_TREE = {
   },
 }
 
+export const OAUTH_SESSSION_STORAGE_OAUTH_TOKEN =
+  'oauth-session-storage-oauth-token'
+export const OAUTH_SESSSION_STORAGE_OAUTH_TYPE =
+  'oauth-session-storage-oauth-type'
 export const OAUTH_STORAGE_STATE = 'oauth-storage-state'
 export const OAUTH_STORAGE_NONCE = 'oauth-storage-nonce'
 export const OAUTH_STORAGE_PATH = 'oauth-storage-path'

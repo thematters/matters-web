@@ -1,16 +1,14 @@
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ERROR_CODES, TEST_ID } from '~/common/enums'
+import { ERROR_CODES, ERROR_MESSAGES, TEST_ID } from '~/common/enums'
 import {
   Button,
-  ERROR_MESSAGES,
   IconBookmarked16,
   IconBookmarked20,
   IconSize,
   Menu,
   toast,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -32,6 +30,7 @@ const Unsubscribe = ({
   inCard,
 }: UnsubscribeProps) => {
   const viewer = useContext(ViewerContext)
+  const intl = useIntl()
 
   const [unsubscribe] = useMutation<ToggleSubscribeArticleMutation>(
     TOGGLE_SUBSCRIBE_ARTICLE,
@@ -56,10 +55,10 @@ const Unsubscribe = ({
 
     toast.success({
       message: (
-        <Translate
-          en="Bookmark removed"
-          zh_hans="收藏已取消"
-          zh_hant="收藏已取消"
+        <FormattedMessage
+          defaultMessage="Bookmark removed"
+          id="kSt4il"
+          description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
         />
       ),
     })
@@ -70,8 +69,8 @@ const Unsubscribe = ({
       <Menu.Item
         text={
           <FormattedMessage
-            defaultMessage="Undo bookmark"
-            id="ioPWl8"
+            defaultMessage="Remove bookmark"
+            id="FEkOVJ"
             description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
           />
         }
@@ -86,13 +85,11 @@ const Unsubscribe = ({
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
-      aria-label={
-        <FormattedMessage
-          defaultMessage="Undo bookmark"
-          id="ioPWl8"
-          description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
-        />
-      }
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Remove bookmark',
+        id: 'FEkOVJ',
+        description: 'src/components/Buttons/Bookmark/Unsubscribe.tsx',
+      })}
       onClick={onClick}
       disabled={disabled}
       data-test-id={TEST_ID.ARTICLE_BOOKMARK}

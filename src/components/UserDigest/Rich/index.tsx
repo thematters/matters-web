@@ -2,10 +2,11 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
-import { Card, CardProps, Translate } from '~/components'
+import { Card, CardProps } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
 import {
@@ -76,6 +77,7 @@ const Rich = ({
         spacing={['tight', 'tight']}
         bgActiveColor="none"
         {...cardProps}
+        onClick={undefined}
         testId={TEST_ID.DIGEST_USER_RICH}
       >
         <section className={containerClasses}>
@@ -85,8 +87,14 @@ const Rich = ({
 
           <section className={contentClasses}>
             <header className={styles.header}>
-              <span className={styles.name}>
-                <Translate id="accountArchived" />
+              <span
+                className={styles.name}
+                data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
+              >
+                <FormattedMessage
+                  defaultMessage="Account Archived"
+                  id="YS8YSV"
+                />
               </span>
             </header>
           </section>

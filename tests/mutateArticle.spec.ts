@@ -196,16 +196,17 @@ test.describe('Mutate article', () => {
       await sleep(1000)
       await firstArticle.getByRole('button', { name: 'More Actions' }).click()
     }
-    const pinButton = await alicePage
-      .getByRole('menuitem', { name: 'Pin to profile' })
-      .locator('section')
+
     await Promise.all([
       waitForAPIResponse({
         page: alicePage,
         path: 'data.editArticle.pinned',
         isOK: (data) => data === true,
       }),
-      pinButton.click(),
+      alicePage
+        .getByRole('menuitem', { name: 'Pin to profile' })
+        .locator('div')
+        .click(),
     ])
 
     await expect(

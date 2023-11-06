@@ -31,7 +31,7 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
       testId={TEST_ID.SEARCH_RESULTS_ITEM}
     >
       <section className={nodeClass}>
-        <Tag tag={tag} type="list" hasCount disabled />
+        <Tag tag={tag} type="list" hasCount is="span" />
 
         <span className={styles.iconSelect}>
           {inStagingArea && selected && (

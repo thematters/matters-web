@@ -152,7 +152,6 @@ export const hidePopperOnClick = (instance: PopperInstance) => {
   box.addEventListener('click', (event: any) => {
     const target = event.target as HTMLElement
 
-    console.log('click....')
     if (target?.closest && target.closest('[data-clickable], a, button')) {
       instance.hide()
     }

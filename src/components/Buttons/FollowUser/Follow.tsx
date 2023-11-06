@@ -1,8 +1,12 @@
 import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
+import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
 import {
   Button,
   ButtonHeight,
@@ -10,7 +14,6 @@ import {
   ButtonSpacingY,
   ButtonWidth,
   TextIcon,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -70,7 +73,12 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
 
   const onClick = () => {
     if (!viewer.isAuthed) {
-      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.followUser },
+        })
+      )
+
       return
     }
 
@@ -91,7 +99,11 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
         weight="md"
         size={size === 'xl' ? 'md' : size === 'lg' ? 'sm' : 'xs'}
       >
-        <Translate id="follow" />
+        <FormattedMessage
+          defaultMessage="Follow"
+          id="rJSVni"
+          description="src/components/Buttons/FollowUser/Follow.tsx"
+        />
       </TextIcon>
     </Button>
   )

@@ -2,8 +2,8 @@ import { useQuery } from '@apollo/react-hooks'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ERROR_CODES } from '~/common/enums'
-import { Dialog, ERROR_MESSAGES, Spinner } from '~/components'
+import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
+import { Dialog, Spinner } from '~/components'
 import { ViewerCircleStateQuery } from '~/gql/graphql'
 
 import { VIEWER_CIRLCE_STATE } from './gql'

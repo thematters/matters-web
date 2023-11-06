@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
@@ -76,7 +77,11 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
                       onClick={() => {
                         if (!viewer.isAuthed) {
                           window.dispatchEvent(
-                            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG)
+                            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                              detail: {
+                                trigger: UNIVERSAL_AUTH_TRIGGER.followCircle,
+                              },
+                            })
                           )
                           return
                         }
