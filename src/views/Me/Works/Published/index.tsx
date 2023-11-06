@@ -23,7 +23,13 @@ import { ME_WORKS_PUBLISHED_FEED } from './gql'
 import { SortTabs } from './SortTabs'
 import styles from './styles.module.css'
 
-export const BaseMeWorksPublished = ({ sort }: { sort: UserArticlesSort }) => {
+export const BaseMeWorksPublished = ({
+  sort,
+  onFirstLoading,
+}: {
+  sort: UserArticlesSort
+  onFirstLoading: () => void
+}) => {
   const { data, loading, error, fetchMore } =
     useQuery<MeWorksPublishedFeedQuery>(ME_WORKS_PUBLISHED_FEED, {
       variables: { sort },
@@ -59,6 +65,7 @@ export const BaseMeWorksPublished = ({ sort }: { sort: UserArticlesSort }) => {
         }),
     })
 
+  onFirstLoading()
   return (
     <Layout.Main.Spacing>
       <InfiniteScroll
@@ -89,6 +96,7 @@ const MeWorksPublished = () => {
 
   const [sort, setSort] = useState<UserArticlesSort>(UserArticlesSort.Newest)
   const [showHint, setShowHint] = useState(true)
+  const [firstLoading, setFirstLoading] = useState(true)
 
   return (
     <Layout.Main>
@@ -104,29 +112,37 @@ const MeWorksPublished = () => {
 
       <WorksTabs />
 
-      <SortTabs sort={sort} setSort={setSort} />
-      {showHint && (
-        <section className={styles.hint}>
-          <p className={styles.left}>
-            <IconUser2V16 color="grey" />
-            <FormattedMessage
-              defaultMessage="Number of readers: unique registered users plus number of anonymous IP addresses visited the article"
-              description="src/views/Me/Works/Published/index.tsx"
-              id="jaTUgx"
-            />
-          </p>
-          <section className={styles.right}>
-            <Button
-              textColor="greyDarker"
-              textActiveColor="black"
-              onClick={() => setShowHint(false)}
-            >
-              <IconClose20 size="mdS" />
-            </Button>
-          </section>
-        </section>
+      {!firstLoading && (
+        <>
+          <SortTabs sort={sort} setSort={setSort} />
+          {showHint && (
+            <section className={styles.hint}>
+              <p className={styles.left}>
+                <IconUser2V16 color="grey" />
+                <FormattedMessage
+                  defaultMessage="Number of readers: unique registered users plus number of anonymous IP addresses visited the article"
+                  description="src/views/Me/Works/Published/index.tsx"
+                  id="jaTUgx"
+                />
+              </p>
+              <section className={styles.right}>
+                <Button
+                  textColor="greyDarker"
+                  textActiveColor="black"
+                  onClick={() => setShowHint(false)}
+                >
+                  <IconClose20 size="mdS" />
+                </Button>
+              </section>
+            </section>
+          )}
+        </>
       )}
-      <BaseMeWorksPublished sort={sort} />
+
+      <BaseMeWorksPublished
+        sort={sort}
+        onFirstLoading={() => setFirstLoading(false)}
+      />
     </Layout.Main>
   )
 }
