@@ -1,3 +1,4 @@
+import { TEST_ID } from '~/common/enums'
 import { ArticleDigestTitle } from '~/components'
 import { DateTime } from '~/components/DateTime'
 import {
@@ -18,7 +19,10 @@ export const ArticleDigestPublished = ({
   article,
 }: ArticleDigestPublishedProps) => {
   return (
-    <section className={styles.wrapper}>
+    <section
+      className={styles.wrapper}
+      data-test-id={TEST_ID.DIGEST_ARTICLE_PUBLISHED}
+    >
       <header>
         <DateTime date={article.createdAt} color="grey" />
       </header>
