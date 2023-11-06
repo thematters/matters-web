@@ -68,6 +68,24 @@ describe('utils/route/toPath', () => {
         }?utm_source=test-source&utm_campaign=test-campaign`
       )
     })
+
+    it('should return the correct path with custom search', () => {
+      const { href } = toPath({
+        page: 'articleDetail',
+        article: MOCK_ARTILCE,
+        search: {
+          referral: 'code',
+          utm_source: 'test-source',
+        },
+      })
+      expect(href).toBe(
+        `/@${MOCK_ARTILCE.author.userName}/${
+          fromGlobalId(MOCK_ARTILCE.id).id
+        }-${MOCK_ARTILCE.slug}-${
+          MOCK_ARTILCE.mediaHash
+        }?referral=code&utm_source=test-source`
+      )
+    })
   })
 
   describe('page: circleDetail', () => {

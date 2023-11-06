@@ -89,12 +89,13 @@ type ToPathArgs =
  * (works on SSR & CSR)
  */
 export const toPath = (
-  args: ToPathArgs & UtmParams & { fragment?: string }
+  args: ToPathArgs &
+    UtmParams & { fragment?: string; search?: { [key: string]: string } }
 ): {
   href: string
 } => {
   let href = ''
-  let search = {}
+  let search = { ...args.search }
 
   switch (args.page) {
     case 'articleDetail': {
@@ -200,9 +201,11 @@ export const toPath = (
       break
     }
     case 'search': {
-      search = {
-        ...search,
-        q: args.q,
+      if (args.q) {
+        search = {
+          ...search,
+          q: args.q,
+        }
       }
 
       if (args.type) {
