@@ -1,3 +1,5 @@
+import { useIntl } from 'react-intl'
+
 import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import { TextIcon } from '~/components'
@@ -26,11 +28,22 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
     commentCount,
     donationCount,
   } = article
+  const intl = useIntl()
 
   return (
     <footer className={styles.footer}>
       <section className={styles.left}>
-        <TextIcon icon={<IconUser2V16 />} spacing="basexxtight" size="sm">
+        <TextIcon
+          icon={<IconUser2V16 />}
+          spacing="basexxtight"
+          size="sm"
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Number of readers',
+            id: 'hv1iYZ',
+            description:
+              'src/components/ArticleDigest/Published/FooterActions/index.tsx',
+          })}
+        >
           <span
             className={styles.count}
             data-test-id={TEST_ID.DIGEST_ARTICLE_PUBLISHED_READER_COUNT}
@@ -39,7 +52,17 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
           </span>
         </TextIcon>
 
-        <TextIcon icon={<IconClap2V16 />} spacing="basexxtight" size="sm">
+        <TextIcon
+          icon={<IconClap2V16 />}
+          spacing="basexxtight"
+          size="sm"
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Number of claps',
+            id: 'C9jbHn',
+            description:
+              'src/components/ArticleDigest/Published/FooterActions/index.tsx',
+          })}
+        >
           <span
             className={styles.count}
             data-test-id={
@@ -50,7 +73,17 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
           </span>
         </TextIcon>
 
-        <TextIcon icon={<IconComment2V16 />} spacing="basexxtight" size="sm">
+        <TextIcon
+          icon={<IconComment2V16 />}
+          spacing="basexxtight"
+          size="sm"
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Number of comments',
+            id: 'J6f6iN',
+            description:
+              'src/components/ArticleDigest/Published/FooterActions/index.tsx',
+          })}
+        >
           <span
             className={styles.count}
             data-test-id={TEST_ID.DIGEST_ARTICLE_PUBLISHED_COMMENT_COUNT}
@@ -59,7 +92,17 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
           </span>
         </TextIcon>
 
-        <TextIcon icon={<IconMoney16 />} spacing="basexxtight" size="sm">
+        <TextIcon
+          icon={<IconMoney16 />}
+          spacing="basexxtight"
+          size="sm"
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Number of supporters',
+            id: 'NfCbnZ',
+            description:
+              'src/components/ArticleDigest/Published/FooterActions/index.tsx',
+          })}
+        >
           <span
             className={styles.count}
             data-test-id={TEST_ID.DIGEST_ARTICLE_PUBLISHED_DONATION_COUNT}

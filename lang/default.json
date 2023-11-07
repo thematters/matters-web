@@ -472,6 +472,10 @@
     "defaultMessage": "upadted {date}",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
+  "C9jbHn": {
+    "defaultMessage": "Number of claps",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
   "CBDDR5": {
     "defaultMessage": "Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed."
   },
@@ -692,6 +696,10 @@
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "J6f6iN": {
+    "defaultMessage": "Number of comments",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
   "JTWayV": {
     "defaultMessage": "Add description",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -843,6 +851,10 @@
   "NONfAh": {
     "defaultMessage": "Douban",
     "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "NfCbnZ": {
+    "defaultMessage": "Number of supporters",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
   "NzfL1d": {
     "defaultMessage": "Enter password again",
@@ -1370,6 +1382,10 @@
   },
   "hrgo+E": {
     "defaultMessage": "Archive"
+  },
+  "hv1iYZ": {
+    "defaultMessage": "Number of readers",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
   "ieGrWo": {
     "defaultMessage": "Follow"
