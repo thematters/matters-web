@@ -29,7 +29,7 @@ export default defineConfig({
     include: ['src/**/*.test.{ts,tsx}'],
     setupFiles: './vitest.setup.ts',
     coverage: {
-      reporter: ['text', 'json', 'html'],
+      reporter: ['text', 'json-summary', 'json'],
     },
   },
   resolve: {

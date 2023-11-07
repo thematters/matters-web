@@ -1,4 +1,4 @@
-name: Test Unit
+name: Test Units
 
 on: push
 
@@ -6,6 +6,11 @@ jobs:
   unit:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    permissions:
+      # Required to checkout the code
+      contents: read
+      # Required to put a comment into the pull-request
+      pull-requests: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -32,4 +37,8 @@ jobs:
           npm run i18n
 
       - name: Run unit tests
-        run: cp .env.dev .env.local && npm run test:unit
+        run: cp .env.dev .env.local && npm run test:unit:coverage
+
+      - name: 'Report Coverage'
+        if: always() # Also generate the report if tests are failing
+        uses: davelosert/vitest-coverage-report-action@v2
