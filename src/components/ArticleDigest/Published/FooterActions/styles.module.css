@@ -5,7 +5,7 @@
 
   & .left {
     & .count {
-      width: 2rem;
+      width: 2.375rem;
       word-break: keep-all;
     }
   }
