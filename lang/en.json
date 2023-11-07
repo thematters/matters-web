@@ -792,6 +792,10 @@
     "defaultMessage": "Manage Community",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
+  "LETb4b": {
+    "defaultMessage": "Collections allow up to {count} articles currently",
+    "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
+  },
   "LGox1K": {
     "defaultMessage": "Followed"
   },
@@ -1982,10 +1986,6 @@
   "yIlC0R": {
     "defaultMessage": "No published articles yet",
     "description": "src/components/Empty/EmptyArticle.tsx"
-  },
-  "yJsERg": {
-    "defaultMessage": "Collections allow up to 100 articles currently",
-    "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
   },
   "yOKEVx": {
     "defaultMessage": "Top Up",

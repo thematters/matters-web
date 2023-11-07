@@ -792,6 +792,10 @@
     "defaultMessage": "管理社群",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
+  "LETb4b": {
+    "defaultMessage": "选集暂时不允许超过 {count} 篇",
+    "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
+  },
   "LGox1K": {
     "defaultMessage": "已追踪"
   },
@@ -1982,10 +1986,6 @@
   "yIlC0R": {
     "defaultMessage": "尚未发布作品",
     "description": "src/components/Empty/EmptyArticle.tsx"
-  },
-  "yJsERg": {
-    "defaultMessage": "选集暂时不允许超过 100 篇",
-    "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
   },
   "yOKEVx": {
     "defaultMessage": "储值",
