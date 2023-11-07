@@ -25,10 +25,10 @@ import styles from './styles.module.css'
 
 export const BaseMeWorksPublished = ({
   sort,
-  onFirstLoading,
+  setShowSort,
 }: {
   sort: UserArticlesSort
-  onFirstLoading: () => void
+  setShowSort: (state: boolean) => void
 }) => {
   const { data, loading, error, fetchMore } =
     useQuery<MeWorksPublishedFeedQuery>(ME_WORKS_PUBLISHED_FEED, {
@@ -65,7 +65,7 @@ export const BaseMeWorksPublished = ({
         }),
     })
 
-  onFirstLoading()
+  setShowSort(true)
   return (
     <Layout.Main.Spacing>
       <InfiniteScroll
@@ -96,7 +96,7 @@ const MeWorksPublished = () => {
 
   const [sort, setSort] = useState<UserArticlesSort>(UserArticlesSort.Newest)
   const [showHint, setShowHint] = useState(true)
-  const [firstLoading, setFirstLoading] = useState(true)
+  const [showSort, setShowSort] = useState(false)
 
   return (
     <Layout.Main>
@@ -112,7 +112,7 @@ const MeWorksPublished = () => {
 
       <WorksTabs />
 
-      {!firstLoading && (
+      {showSort && (
         <>
           <SortTabs sort={sort} setSort={setSort} />
           {showHint && (
@@ -141,7 +141,9 @@ const MeWorksPublished = () => {
 
       <BaseMeWorksPublished
         sort={sort}
-        onFirstLoading={() => setFirstLoading(false)}
+        setShowSort={(state) => {
+          setShowSort(state)
+        }}
       />
     </Layout.Main>
   )
