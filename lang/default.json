@@ -743,6 +743,10 @@
     "defaultMessage": "This article has been removed from Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
+  "Jxr/TM": {
+    "defaultMessage": "FULL",
+    "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
+  },
   "K2/mHF": {
     "defaultMessage": "Unable to disconnect from {type} temporarily because you do not have any other log in methods (Email/Crypto wallet/Social account).",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
