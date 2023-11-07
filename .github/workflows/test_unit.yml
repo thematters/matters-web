@@ -40,5 +40,8 @@ jobs:
         run: cp .env.dev .env.local && npm run test:unit:coverage
 
       - name: 'Report Coverage'
-        if: always() # Also generate the report if tests are failing
+        if: always()
         uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file-coverage-mode: 'all'
