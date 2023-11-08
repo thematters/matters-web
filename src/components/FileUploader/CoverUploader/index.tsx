@@ -125,7 +125,9 @@ export const CoverUploader = ({
       const variables = {
         input: { file, type: assetType, entityId, entityType },
       }
-      const { data } = await upload({ variables })
+      const { data } = await upload({
+        variables: _omit(variables, ['input.file']),
+      })
       const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
       if (assetId && path && uploadURL) {
