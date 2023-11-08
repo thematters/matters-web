@@ -22,3 +22,21 @@ export const Spinner = () => {
     </div>
   )
 }
+
+export const SpinnerWhite = () => {
+  return (
+    <div
+      className={styles.spinner}
+      data-test-id={TEST_ID.SPINNER}
+      aria-busy="true"
+      aria-live="polite"
+    >
+      <VisuallyHidden>
+        <span>
+          <Translate zh_hant="載入中…" zh_hans="加载中…" en="Loading..." />
+        </span>
+      </VisuallyHidden>
+      <IconSpinner16 color="white" size="lg" />
+    </div>
+  )
+}

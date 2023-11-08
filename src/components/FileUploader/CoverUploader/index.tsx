@@ -1,4 +1,5 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
+import classNames from 'classnames'
 import _omit from 'lodash/omit'
 import { useContext, useState } from 'react'
 
@@ -11,11 +12,15 @@ import {
 import { translate, validateImage } from '~/common/utils'
 import {
   Book,
+  Button,
   Cover,
   CoverProps,
   IconCamera24,
+  IconCamera32,
+  IconClose2V32,
   LanguageContext,
   Spinner,
+  SpinnerWhite,
   toast,
   Translate,
   useDirectImageUpload,
@@ -65,7 +70,7 @@ export type CoverUploaderProps = {
   onUploaded: (assetId: string | null) => void
   onUploadStart: () => void
   onUploadEnd: () => void
-  type?: 'circle' | 'collection'
+  type?: 'circle' | 'collection' | 'userProfile'
 
   bookTitle?: string
   bookArticleCount?: number
@@ -158,6 +163,12 @@ export const CoverUploader = ({
     }
   }
 
+  const removeCover = (event: any) => {
+    event.preventDefault()
+    setCover(undefined)
+    onUploaded(null)
+  }
+
   const Mask = () => (
     <div className={styles.mask}>
       {loading || uploading ? (
@@ -168,19 +179,42 @@ export const CoverUploader = ({
     </div>
   )
 
-  const isCircle = type === 'circle'
+  const UserProfileMask = () => {
+    const maskClasses = classNames({
+      [styles.mask]: true,
+      [styles.emptyMask]: !cover,
+    })
+    return (
+      <div className={maskClasses}>
+        {loading || uploading ? (
+          <>{cover ? <Spinner /> : <SpinnerWhite />}</>
+        ) : (
+          <section className={styles.userProfileCover}>
+            <IconCamera32 color="white" size="lg" />
+            {cover && (
+              <Button onClick={removeCover}>
+                <IconClose2V32 color="white" size="lg" />
+              </Button>
+            )}
+          </section>
+        )}
+      </div>
+    )
+  }
+
   const isCollection = type === 'collection'
+  const isUserProfile = type === 'userProfile'
 
   return (
     <label className={styles.label} htmlFor={fieldId}>
-      {!isCircle && !isCollection && (
+      {!isCollection && !isUserProfile && (
         <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
           <Mask />
         </Cover>
       )}
-      {isCircle && (
-        <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
-          <Mask />
+      {isUserProfile && (
+        <Cover cover={cover} inEditor={inEditor}>
+          <UserProfileMask />
         </Cover>
       )}
       {isCollection && (
