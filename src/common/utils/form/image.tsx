@@ -31,9 +31,9 @@ export const validateImage = (image: File, isAvatar: boolean = false) =>
         toast.error({
           message: (
             <FormattedMessage
-              defaultMessage="Images have a {sizeInMB} megabyte (MB) size limit."
-              id="KuP/6B"
-              values={{ sizeInMB: sizeLimit / 1024 / 1024 }}
+              defaultMessage="{ext, select, gif {GIF format i} other {I} }mages have a {sizeInMB} megabyte (MB) size limit."
+              id="bSqeXm"
+              values={{ ext: fileType.ext, sizeInMB: sizeLimit / 1024 / 1024 }}
             />
           ),
         })
