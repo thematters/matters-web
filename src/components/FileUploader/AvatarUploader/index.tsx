@@ -103,7 +103,9 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
           entityId,
         },
       }
-      const { data } = await upload({ variables })
+      const { data } = await upload({
+        variables: _omit(variables, ['input.file']),
+      })
       const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
       if (assetId && path && uploadURL) {
