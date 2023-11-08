@@ -106,7 +106,6 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         type="text"
         // Why not use userName, userName will trigger auto fill feature in safari
         name="mattersID"
-        required
         autoFocus
         placeholder={intl.formatMessage({
           defaultMessage: 'English letters, numbers, and underscores',
