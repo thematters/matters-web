@@ -112,8 +112,8 @@ export const CoverUploader = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    const isValidImage = await validateImage(file)
-    if (!isValidImage) {
+    const mime = await validateImage(file)
+    if (!mime) {
       return
     }
 
@@ -123,7 +123,7 @@ export const CoverUploader = ({
       }
 
       const variables = {
-        input: { file, type: assetType, entityId, entityType },
+        input: { file, mime, type: assetType, entityId, entityType },
       }
       const { data } = await upload({
         variables: _omit(variables, ['input.file']),
