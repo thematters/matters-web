@@ -390,6 +390,10 @@
   "A7ugfn": {
     "defaultMessage": "More Actions"
   },
+  "AA5PkU": {
+    "defaultMessage": "Most claps",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "AB5rDl": {
     "defaultMessage": "Payment suspended or returned by card issuer when there are doubts about the transaction",
     "description": "src/components/Transaction/index.tsx"
@@ -467,6 +471,10 @@
   "C8GQaD": {
     "defaultMessage": "Upadted {date}",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
+  },
+  "C9jbHn": {
+    "defaultMessage": "Number of claps",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
   "CBDDR5": {
     "defaultMessage": "Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed."
@@ -688,6 +696,10 @@
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "J6f6iN": {
+    "defaultMessage": "Number of comments",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
   "JTWayV": {
     "defaultMessage": "Add description",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -840,6 +852,10 @@
     "defaultMessage": "Douban",
     "description": "src/components/Share/Buttons/Douban.tsx"
   },
+  "NfCbnZ": {
+    "defaultMessage": "Number of supporters",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
   "NzfL1d": {
     "defaultMessage": "Enter password again",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
@@ -939,6 +955,10 @@
   "SNh1n0": {
     "defaultMessage": "View Members",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SPTRiT": {
+    "defaultMessage": "Latest",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "SdXoXI": {
     "defaultMessage": "Invitations have been sent. You can check invitation status on the invitation management page.",
@@ -1172,6 +1192,10 @@
   "a/xacb": {
     "defaultMessage": "(Articles in this collection will not be deleted)"
   },
+  "aOFCqL": {
+    "defaultMessage": "Most comments",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "aa0nss": {
     "defaultMessage": "Unpin from Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
@@ -1359,6 +1383,10 @@
   "hrgo+E": {
     "defaultMessage": "Archive"
   },
+  "hv1iYZ": {
+    "defaultMessage": "Number of readers",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
   "ieGrWo": {
     "defaultMessage": "Follow"
   },
@@ -1383,6 +1411,10 @@
   "jJ1Brc": {
     "defaultMessage": "Pin Comment",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "jaTUgx": {
+    "defaultMessage": "Number of readers: unique registered users plus number of anonymous IP addresses visited the article",
+    "description": "src/views/Me/Works/Published/index.tsx"
   },
   "jkrM1r": {
     "defaultMessage": "Open IPNS page",
@@ -1506,6 +1538,10 @@
     "defaultMessage": "Verification code is no longer valid. Please use the latest code we sent, or try resend",
     "description": "CODE_INACTIVE"
   },
+  "n/w6lW": {
+    "defaultMessage": "Most Supporters",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "n2Sc6g": {
     "defaultMessage": "My profile",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
@@ -1612,6 +1648,10 @@
   "rBjwQy": {
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "rHi+cL": {
+    "defaultMessage": "Most readers",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "rLlTQ9": {
     "defaultMessage": "Tag Name"

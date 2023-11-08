@@ -1,8 +1,90 @@
+import { useQuery } from '@apollo/react-hooks'
+import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { Head, Layout } from '~/components'
+import { mergeConnections } from '~/common/utils'
+import {
+  ArticleDigestPublished,
+  EmptyArticle,
+  Head,
+  InfiniteScroll,
+  Layout,
+  List,
+  QueryError,
+} from '~/components'
+import { MeWorksPublishedFeedQuery, UserArticlesSort } from '~/gql/graphql'
 
+import Placeholder from '../Placeholder'
 import WorksTabs from '../WorksTabs'
+import { ME_WORKS_PUBLISHED_FEED } from './gql'
+import { SortTabs } from './SortTabs'
+
+export const BaseMeWorksPublished = () => {
+  const [sort, setSort] = useState<UserArticlesSort>(UserArticlesSort.Newest)
+  const { data, loading, error, fetchMore } =
+    useQuery<MeWorksPublishedFeedQuery>(ME_WORKS_PUBLISHED_FEED, {
+      variables: { sort },
+    })
+
+  const connectionPath = 'viewer.articles'
+  const { edges, pageInfo } = data?.viewer?.articles || {}
+
+  const isEmptyArticle = !edges || edges.length <= 0 || !pageInfo
+
+  if (loading) {
+    return (
+      <>
+        {!isEmptyArticle && <SortTabs sort={sort} setSort={setSort} />}
+        <Placeholder />
+      </>
+    )
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptyArticle isMe />
+  }
+
+  const articleEdges = edges.filter(
+    ({ node }) => node.articleState === 'active'
+  )
+
+  const loadMore = () =>
+    fetchMore({
+      variables: { after: pageInfo.endCursor },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+
+  return (
+    <>
+      <SortTabs sort={sort} setSort={setSort} />
+      <Layout.Main.Spacing>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          loader={<Placeholder />}
+          eof
+        >
+          <List>
+            {articleEdges.map(({ node, cursor }) => (
+              <List.Item key={cursor}>
+                <ArticleDigestPublished article={node} />
+              </List.Item>
+            ))}
+          </List>
+        </InfiniteScroll>
+      </Layout.Main.Spacing>
+    </>
+  )
+}
 
 const MeWorksPublished = () => {
   const init = useIntl()
@@ -25,6 +107,8 @@ const MeWorksPublished = () => {
       <Head title={title} />
 
       <WorksTabs />
+
+      <BaseMeWorksPublished />
     </Layout.Main>
   )
 }

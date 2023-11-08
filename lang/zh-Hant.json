@@ -390,6 +390,10 @@
   "A7ugfn": {
     "defaultMessage": "更多操作"
   },
+  "AA5PkU": {
+    "defaultMessage": "最多拍手",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "AB5rDl": {
     "defaultMessage": "信用卡交易內容有疑慮時，發卡機構暫停或退回的款項",
     "description": "src/components/Transaction/index.tsx"
@@ -467,6 +471,10 @@
   "C8GQaD": {
     "defaultMessage": "{date}更新",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
+  },
+  "C9jbHn": {
+    "defaultMessage": "拍手數量",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
   "CBDDR5": {
     "defaultMessage": "2-20 個字元，僅支持英文小写字母、數字或下劃線"
@@ -688,6 +696,10 @@
     "defaultMessage": "邀你加入圍爐 {circleName} ，你可以免費體驗 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "J6f6iN": {
+    "defaultMessage": "評論數量",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
   "JTWayV": {
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -840,6 +852,10 @@
     "defaultMessage": "豆瓣",
     "description": "src/components/Share/Buttons/Douban.tsx"
   },
+  "NfCbnZ": {
+    "defaultMessage": "支持者數量",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
   "NzfL1d": {
     "defaultMessage": "再次輸入密碼",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
@@ -939,6 +955,10 @@
   "SNh1n0": {
     "defaultMessage": "查看名單",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SPTRiT": {
+    "defaultMessage": "最新",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "SdXoXI": {
     "defaultMessage": "你已寄出邀請給朋友們，快去已邀請管理查看他們加入的進度吧！",
@@ -1172,6 +1192,10 @@
   "a/xacb": {
     "defaultMessage": "（不會刪除選集內文章）"
   },
+  "aOFCqL": {
+    "defaultMessage": "最多評論",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "aa0nss": {
     "defaultMessage": "取消精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
@@ -1359,6 +1383,10 @@
   "hrgo+E": {
     "defaultMessage": "封存"
   },
+  "hv1iYZ": {
+    "defaultMessage": "讀者數量",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
   "ieGrWo": {
     "defaultMessage": "追蹤"
   },
@@ -1383,6 +1411,10 @@
   "jJ1Brc": {
     "defaultMessage": "喜歡回應",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "jaTUgx": {
+    "defaultMessage": "讀者數量：訪問過作品頁的不重複的登入用戶數加匿名 IP 數",
+    "description": "src/views/Me/Works/Published/index.tsx"
   },
   "jkrM1r": {
     "defaultMessage": "打開 IPNS 頁面",
@@ -1506,6 +1538,10 @@
     "defaultMessage": "驗證碼已失效，請使用最新驗證碼或重新發送",
     "description": "CODE_INACTIVE"
   },
+  "n/w6lW": {
+    "defaultMessage": "最多支持",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "n2Sc6g": {
     "defaultMessage": "個人資料",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
@@ -1612,6 +1648,10 @@
   "rBjwQy": {
     "defaultMessage": "微博",
     "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "rHi+cL": {
+    "defaultMessage": "最多讀者",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "rLlTQ9": {
     "defaultMessage": "標籤名稱"

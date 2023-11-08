@@ -19,11 +19,7 @@ import {
 } from '~/components'
 import { UserArticlesPublicQuery } from '~/gql/graphql'
 
-import {
-  USER_ARTICLES_PRIVATE,
-  USER_ARTICLES_PUBLIC,
-  VIEWER_ARTICLES,
-} from './gql'
+import { USER_ARTICLES_PRIVATE, USER_ARTICLES_PUBLIC } from './gql'
 import PinBoard from './PinBoard'
 import Placeholder from './Placeholder'
 
@@ -33,23 +29,14 @@ const UserArticles = () => {
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
 
-  let query = USER_ARTICLES_PUBLIC
-  let publicQuery = true
-  if (isViewer) {
-    query = VIEWER_ARTICLES
-    publicQuery = false
-  }
-
   /**
    * Data Fetching
    */
   // public data
   const { data, loading, error, fetchMore, client } =
-    usePublicQuery<UserArticlesPublicQuery>(
-      query,
-      { variables: { userName } },
-      { publicQuery }
-    )
+    usePublicQuery<UserArticlesPublicQuery>(USER_ARTICLES_PUBLIC, {
+      variables: { userName },
+    })
 
   // pagination
   const connectionPath = 'user.articles'
