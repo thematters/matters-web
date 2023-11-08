@@ -761,9 +761,6 @@
     "defaultMessage": "Wallet connected",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "KuP/6B": {
-    "defaultMessage": "Images have a {sizeInMB} megabyte (MB) size limit."
-  },
   "KxVlDj": {
     "defaultMessage": "Settings - Blocked Users",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
@@ -1262,6 +1259,9 @@
   "bBYO6x": {
     "defaultMessage": "Unblock",
     "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "bSqeXm": {
+    "defaultMessage": "{ext, select, gif {GIF format i} other {I} }mages have a {sizeInMB} megabyte (MB) size limit."
   },
   "beLe/F": {
     "defaultMessage": "Broadcast"
