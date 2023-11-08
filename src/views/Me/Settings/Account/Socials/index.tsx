@@ -11,6 +11,7 @@ import {
 import {
   // facebookOauthUrl,
   googleOauthUrl,
+  isSafari,
   sleep,
   storage,
   twitterOauthUrl,
@@ -92,6 +93,7 @@ const Socials = () => {
       return
     }
     const state = bindResult.state
+    const delay = isSafari() ? 2 * 1000 : 0
     if (state === OAUTH_STORAGE_BIND_STATE_SUCCESS) {
       setTimeout(() => {
         toast.success({
@@ -106,7 +108,7 @@ const Socials = () => {
             />
           ),
         })
-      })
+      }, delay)
       return
     }
 
@@ -124,7 +126,7 @@ const Socials = () => {
             />
           ),
         })
-      })
+      }, delay)
       return
     }
 
@@ -139,7 +141,7 @@ const Socials = () => {
             />
           ),
         })
-      })
+      }, delay)
       return
     }
   }, [])

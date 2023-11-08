@@ -112,14 +112,7 @@ export const validatePaymentPointer = (value: string, lang: Language) => {
 }
 
 export const validateUserName = (value: string, lang: Language) => {
-  if (!value) {
-    return translate({ id: 'required', lang })
-  }
-
-  if (
-    value.length < MIN_USER_NAME_LENGTH ||
-    value.length > MAX_USER_NAME_LENGTH
-  ) {
+  if (value.length > MAX_USER_NAME_LENGTH) {
     return translate({
       zh_hant: `ID 字符數須介於 ${MIN_USER_NAME_LENGTH} 到 ${MAX_USER_NAME_LENGTH} 之間`,
       zh_hans: `ID 字符数须介于 ${MIN_USER_NAME_LENGTH} 到 ${MAX_USER_NAME_LENGTH} 之间`,
