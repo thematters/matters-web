@@ -761,9 +761,6 @@
     "defaultMessage": "錢包已綁定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "KuP/6B": {
-    "defaultMessage": "圖片大小不得超過 {sizeInMB}MB"
-  },
   "KxVlDj": {
     "defaultMessage": "設定 - 已封鎖用戶",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
@@ -1262,6 +1259,9 @@
   "bBYO6x": {
     "defaultMessage": "取消封鎖",
     "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "bSqeXm": {
+    "defaultMessage": "{ext, select, gif {GIF 格式} other {} }圖片大小不得超過 {sizeInMB}MB"
   },
   "beLe/F": {
     "defaultMessage": "廣播"
