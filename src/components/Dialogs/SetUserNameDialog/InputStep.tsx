@@ -128,7 +128,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         }}
         onKeyUp={() => {
           const v = normalizeUserName(values.mattersID)
-          setFieldValue('userName', v.slice(0, maxUsername))
+          setFieldValue('mattersID', v.slice(0, maxUsername))
         }}
         leftButton={<span className={styles.atFlag}>@</span>}
         hasFooter={false}
