@@ -1,4 +1,7 @@
-import { Empty, IconHashTag16, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
+import { Empty, IconHashTag16 } from '~/components'
 
 export const EmptyTag = ({
   description,
@@ -7,6 +10,10 @@ export const EmptyTag = ({
 }) => (
   <Empty
     icon={<IconHashTag16 size="xxl" />}
-    description={description || <Translate id="TAG_NOT_FOUND" />}
+    description={
+      description || (
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.TAG_NOT_FOUND]} />
+      )
+    }
   />
 )

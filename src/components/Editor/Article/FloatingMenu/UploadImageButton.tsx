@@ -4,12 +4,8 @@ import classNames from 'classnames'
 import { useContext, useState } from 'react'
 
 import { ReactComponent as IconEditorMenuImage } from '@/public/static/icons/32px/editor-menu-image.svg'
-import {
-  ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ASSET_TYPE,
-  UPLOAD_IMAGE_SIZE_LIMIT,
-} from '~/common/enums'
-import { translate } from '~/common/utils'
+import { ACCEPTED_UPLOAD_IMAGE_TYPES, ASSET_TYPE } from '~/common/enums'
+import { getFileType, translate, validateImage } from '~/common/utils'
 import {
   IconSpinner16,
   LanguageContext,
@@ -26,6 +22,7 @@ export type UploadImageButtonProps = {
     file?: any
     url?: string
     type?: ASSET_TYPE.embed | ASSET_TYPE.embedaudio
+    mime?: string
   }) => Promise<{
     id: string
     path: string
@@ -51,20 +48,10 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
 
     const files = event.target.files
 
-    const hasExceedLimit = Array.from(files).some(
-      (file) => file.size > UPLOAD_IMAGE_SIZE_LIMIT
-    )
-    if (hasExceedLimit) {
-      toast.error({
-        message: (
-          <Translate
-            zh_hant="上傳檔案超過 5 MB"
-            zh_hans="上传文件超过 5 MB"
-            en="upload file size exceeds 5 MB"
-          />
-        ),
-      })
-
+    const hasInvalidImage = await Promise.all(
+      Array.from(files).map((file) => validateImage(file))
+    ).then((results) => results.some((result) => !result))
+    if (hasInvalidImage) {
       event.target.value = ''
       return
     }
@@ -73,7 +60,8 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
       setUploading(true)
 
       for (const file of files) {
-        const { path } = await upload({ file, type: ASSET_TYPE.embed })
+        const mime = (await getFileType(file))!.mime
+        const { path } = await upload({ file, type: ASSET_TYPE.embed, mime })
         editor.chain().focus().setFigureImage({ src: path }).run()
         toast.success({
           message: <Translate id="successUploadImage" />,

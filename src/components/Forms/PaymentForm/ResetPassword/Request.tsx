@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   parseFormSubmitErrors,
@@ -43,8 +43,9 @@ const Request: React.FC<FormProps> = ({
     undefined,
     { showToast: false }
   )
-  const { lang } = useContext(LanguageContext)
 
+  const intl = useIntl()
+  const { lang } = useContext(LanguageContext)
   const formId = `payment-password-reset-request-form`
 
   const {
@@ -82,12 +83,12 @@ const Request: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        codes.forEach((c) => {
-          if (c.includes('CODE_')) {
-            setFieldError('code', messages[c])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        codes.forEach((code) => {
+          if (code.includes('CODE_')) {
+            setFieldError('code', intl.formatMessage(messages[code]))
           } else {
-            setFieldError('email', messages[c])
+            setFieldError('email', intl.formatMessage(messages[code]))
           }
         })
       }
@@ -139,7 +140,7 @@ const Request: React.FC<FormProps> = ({
 
   const SubmitButton = (
     <Dialog.TextButton
-      text={<FormattedMessage defaultMessage="Next Step" />}
+      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
       type="submit"
       form={formId}
       disabled={isSubmitting}
@@ -155,7 +156,7 @@ const Request: React.FC<FormProps> = ({
         leftBtn={
           back ? (
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               onClick={back}
             />
           ) : undefined

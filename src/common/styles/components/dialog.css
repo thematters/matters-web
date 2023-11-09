@@ -22,5 +22,8 @@
     bottom: auto;
     left: auto;
     width: 23.4375rem; /* 375px */
+    margin-top: auto;
+    margin-bottom: auto;
+    transform-origin: center bottom 0;
   }
 }

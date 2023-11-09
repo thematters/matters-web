@@ -82,6 +82,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
         <section className={styles.updatedDate}>
           <FormattedMessage
             defaultMessage="Updated {date}"
+            id="h+punE"
             description="src/views/User/CollectionDetail/Content.tsx"
             values={{
               date: <DateTime date={updatedAt} color="grey" size="sm" />,
@@ -98,6 +99,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
           content={
             <FormattedMessage
               defaultMessage="Collections allow up to 100 articles currently"
+              id="yJsERg"
               description="src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
             />
           }
@@ -105,7 +107,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
         >
           <section className={styles.disableAddArticles}>
             <TextIcon icon={<IconAdd20 size="mdS" />}>
-              <FormattedMessage defaultMessage="Add Articles" />
+              <FormattedMessage defaultMessage="Add Articles" id="k97/u7" />
             </TextIcon>
           </section>
         </Tooltip>
@@ -121,7 +123,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
               onClick={openAddArticlesCollection}
             >
               <TextIcon icon={<IconAdd20 size="mdS" />}>
-                <FormattedMessage defaultMessage="Add Articles" />
+                <FormattedMessage defaultMessage="Add Articles" id="k97/u7" />
               </TextIcon>
             </section>
           )}

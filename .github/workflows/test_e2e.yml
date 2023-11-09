@@ -40,7 +40,7 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
       - name: Install Playwright Browsers
-        run: npm run test:prepare
+        run: npm run test:e2e:prepare
         if: steps.playwright_cache.outputs.cache-hit != 'true'
 
       - name: Generate Types (Develop)
@@ -52,7 +52,7 @@ jobs:
         run: npm run gen:type:prod
 
       - name: Run Playwright tests
-        run: cp .env.dev .env.local && npm run test
+        run: cp .env.dev .env.local && npm run test:e2e
 
       - name: Output Playwright tests
         uses: actions/upload-artifact@v3

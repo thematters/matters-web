@@ -4,14 +4,14 @@ import { FormattedMessage } from 'react-intl'
 import {
   CLOSE_ACTIVE_DIALOG,
   ERROR_CODES,
-  ErrorCodeKeys,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  TEXT,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { Error, toast, Translate } from '~/components'
+import { Error, toast } from '~/components'
 
-export const getErrorCodes = (error?: ApolloError): ErrorCodeKeys[] => {
-  const errorCodes: ErrorCodeKeys[] = []
+export const getErrorCodes = (error?: ApolloError): ERROR_CODES[] => {
+  const errorCodes: ERROR_CODES[] = []
 
   if (!error || !error.graphQLErrors) {
     return errorCodes
@@ -28,35 +28,26 @@ export const getErrorCodes = (error?: ApolloError): ErrorCodeKeys[] => {
 }
 
 /**
- * Check error code has corresponding text
- */
-export const isErrorCodeValid = (code: string) =>
-  code in TEXT.zh_hant && code in TEXT.zh_hans && code in TEXT.en
-
-/**
- * Return translated error content, provide zh_hant message, error code, or error message as fallback
- */
-export const getErrorContent = (code: ErrorCodeKeys, error: ApolloError) => {
-  if (isErrorCodeValid(code)) return <Translate id={code} />
-  else if (code in TEXT.zh_hant) return TEXT.zh_hant[code]
-  else if (code) return code
-  else return error.message
-}
-
-/**
  * Check mutation on error to throw a `<Toast>`
  */
-export type MutationOnErrorOptions = {
+export type ToastMutationErrorsOptions = {
   showToast?: boolean
+  showLoginToast?: boolean
   toastType?: 'error' | 'success'
   customErrors?: { [key: string]: string | React.ReactNode }
 }
-export const mutationOnError = (
+export const toastMutationErrors = (
   error: ApolloError,
-  options?: MutationOnErrorOptions
+  options?: ToastMutationErrorsOptions
 ) => {
-  let { showToast, toastType = 'error', customErrors } = options || {}
+  let {
+    showToast,
+    showLoginToast,
+    toastType = 'error',
+    customErrors,
+  } = options || {}
   showToast = typeof showToast === 'undefined' ? true : showToast
+  showLoginToast = typeof showLoginToast === 'undefined' ? true : showLoginToast
 
   // Add info to Sentry
   import('@sentry/browser').then((Sentry) => {
@@ -76,9 +67,12 @@ export const mutationOnError = (
   // Get error code and check corresponding content, if it's invalid
   // then expose error code
   const errorCode = errorCodes[0] || ''
-  const errorContent =
-    (customErrors ? customErrors[errorCode] : '') ||
-    getErrorContent(errorCode, error)
+  const customErrorMessage = customErrors ? customErrors[errorCode] : ''
+  const errorMessage = ERROR_MESSAGES[errorCode]
+
+  if (!customErrorMessage || !errorMessage) {
+    throw error
+  }
 
   /**
    * Catch auth errors
@@ -87,20 +81,25 @@ export const mutationOnError = (
   const isForbidden = errorMap[ERROR_CODES.FORBIDDEN]
   const isTokenInvalid = errorMap[ERROR_CODES.TOKEN_INVALID]
 
-  if (isUnauthenticated || isForbidden || isTokenInvalid) {
+  if (showLoginToast && (isUnauthenticated || isForbidden || isTokenInvalid)) {
     toast[toastType]({
-      message: errorContent,
+      message: customErrorMessage || <FormattedMessage {...errorMessage} />,
       actions: [
         {
           content: (
             <FormattedMessage
               defaultMessage="Log in"
+              id="skbUBl"
               description="src/components/Buttons/Login/index.tsx"
             />
           ),
           onClick: () => {
             window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+            window.dispatchEvent(
+              new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                detail: { trigger: UNIVERSAL_AUTH_TRIGGER.error },
+              })
+            )
           },
         },
       ],
@@ -111,7 +110,7 @@ export const mutationOnError = (
 
   if (showToast) {
     toast[toastType]({
-      message: errorContent,
+      message: customErrorMessage || <FormattedMessage {...errorMessage} />,
     })
   }
 
@@ -127,7 +126,7 @@ export const QueryError = ({ error }: { error: ApolloError }) => {
     Sentry.captureException(error)
   })
 
-  const errorCodes = getErrorCodes(error)
+  // const errorCodes = getErrorCodes(error)
 
-  return <Error statusCode={errorCodes[0]} type="network" error={error} />
+  return <Error type="network" error={error} />
 }

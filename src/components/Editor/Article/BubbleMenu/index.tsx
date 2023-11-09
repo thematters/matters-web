@@ -64,9 +64,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
       tippyOptions={{
         theme: 'bubble-menu',
         duration: 200,
-        placement: 'top',
+        placement: 'auto-start',
         arrow: false,
-        // appendTo: () => document.body,
         onHidden: () => setShowLinkInput(false),
       }}
       shouldShow={({ view, state, from, to }) => {
@@ -362,7 +361,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               type="button"
               onClick={onUrlInputSubmit}
             >
-              <FormattedMessage defaultMessage="Confirm" />
+              <FormattedMessage defaultMessage="Confirm" id="N2IrpM" />
             </button>
           </>
         )}

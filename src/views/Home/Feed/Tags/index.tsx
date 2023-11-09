@@ -151,7 +151,7 @@ const TagsFeed = () => {
             }}
             textAlign="center"
           >
-            <FormattedMessage defaultMessage="View All" />
+            <FormattedMessage defaultMessage="View All" id="wbcwKd" />
           </ViewMoreCard>
         </section>
       </Media>

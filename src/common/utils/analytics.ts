@@ -24,7 +24,6 @@ type EventArgs =
   | ['pull_to_refresh']
   | ['click_feed', ClickFeedProp]
   | ['click_button', ClickButtonProp]
-  | ['signup', SignupProp]
   | ['load_more', LoadMoreProp]
   | ['share', ShareProp]
   | ['share_dialog', ViewDialogProp]
@@ -36,6 +35,8 @@ type EventArgs =
   | ['banner_exposure', BannerExposureProp]
   | ['card_exposure', CardExposureProp]
   | ['tag_exposure', TagExposureProp]
+  | ['image_upload', ImageUploadProp]
+  | ['authenticate', AuthenticateProp]
 
 /**
  * Event: Page View
@@ -74,11 +75,6 @@ interface ClickButtonProp {
     | 'bind_ens'
     | 'bind_ens_successfully'
   pageType?: PageType
-}
-
-interface SignupProp {
-  type: 'login' | 'signup'
-  referralCode?: string // for signup
 }
 
 /**
@@ -177,6 +173,18 @@ interface TagExposureProp {
   id: string
   location: number | string
   delay_msecs?: number
+}
+
+interface ImageUploadProp {
+  uploadURL: string
+  type: string
+  size: number | string
+  delay_msecs?: number
+}
+
+interface AuthenticateProp {
+  step: string
+  trigger?: string
 }
 
 // content type

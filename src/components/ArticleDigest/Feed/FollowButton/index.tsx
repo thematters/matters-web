@@ -5,7 +5,7 @@ import { useContext } from 'react'
 
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import {
   IconDotDivider,
@@ -66,9 +66,10 @@ const FollowButton = ({ user }: FollowButtonProps) => {
     if (!viewer.isAuthed) {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { source: UNIVERSAL_AUTH_SOURCE.bookmark },
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.followUser },
         })
       )
+
       return
     }
 

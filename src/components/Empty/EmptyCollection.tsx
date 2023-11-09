@@ -11,6 +11,7 @@ export const EmptyCollection = () => {
       icon={<IconBook88 size="xxxlM" />}
       description={intl.formatMessage({
         defaultMessage: 'No collection created yet',
+        id: 'GU6vV0',
         description: 'src/components/Empty/EmptyCollection.tsx',
       })}
     />

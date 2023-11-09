@@ -71,6 +71,7 @@ test.describe('Switch between multiple users', () => {
     // [Bob] Get display name and user name
     const bobProfile = new UserProfilePage(page, isMobile)
     await bobProfile.gotoMeProfile()
+    await page.waitForTimeout(2 * 1000)
     const profileDisplayName = await bobProfile.displayName.innerText()
     const profileUserName = await bobProfile.userName.innerText()
 

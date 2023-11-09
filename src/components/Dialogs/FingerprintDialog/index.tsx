@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { TEST_ID } from '~/common/enums'
 import {
   Dialog,
   Spinner,
@@ -95,6 +96,7 @@ const BaseFingerprintDialog = ({
         onDismiss={closeDialog}
         smBgColor="greyLighter"
         smUpBgColor="greyLighter"
+        testId={TEST_ID.DIALOG_FINGERPRINT}
       >
         <Dialog.Header
           title="IPFSEntrance"
@@ -125,7 +127,7 @@ const BaseFingerprintDialog = ({
         <Dialog.Footer
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Close" />}
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               color="greyDarker"
               onClick={closeDialog}
             />

@@ -108,7 +108,7 @@ export class UserProfilePage {
 
     await waitForAPIResponse({
       page: this.page,
-      path: 'data.singleFileUpload.type',
+      path: 'data.directImageUpload.type',
       isOK: (value) => value === 'profileCover',
     })
 
@@ -122,7 +122,7 @@ export class UserProfilePage {
 
     await waitForAPIResponse({
       page: this.page,
-      path: 'data.singleFileUpload.type',
+      path: 'data.directImageUpload.type',
       isOK: (value) => value === 'avatar',
     })
 

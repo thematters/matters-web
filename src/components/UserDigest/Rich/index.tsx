@@ -2,13 +2,13 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
-import { Card, CardProps, Translate } from '~/components'
+import { Card, CardProps } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
-import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 import {
   UserDigestRichUserPrivateFragment,
   UserDigestRichUserPublicFragment,
@@ -31,13 +31,11 @@ export type UserDigestRichProps = {
 
   size?: 'sm' | 'lg'
   avatarBadge?: React.ReactNode
-  descriptionReplacement?: React.ReactNode
+  subtitle?: React.ReactNode
   extraButton?: React.ReactNode
 
   hasFollow?: boolean
   hasState?: boolean
-  hasUnblock?: boolean
-  hasDescriptionReplacement?: boolean
   canClamp?: boolean
 } & CardProps &
   AvatarProps
@@ -47,13 +45,11 @@ const Rich = ({
 
   size = 'lg',
   avatarBadge,
-  descriptionReplacement,
+  subtitle,
   extraButton,
 
   hasFollow = true,
   hasState = true,
-  hasUnblock,
-  hasDescriptionReplacement = false,
   canClamp = false,
 
   ...cardProps
@@ -71,7 +67,8 @@ const Rich = ({
 
   const contentClasses = classNames({
     [styles.content]: true,
-    [styles.hasExtraButton]: hasUnblock || hasFollow || !!extraButton,
+    [styles.hasExtraButton]: hasFollow || !!extraButton,
+    [styles.archived]: isArchived,
   })
 
   if (isArchived) {
@@ -80,6 +77,7 @@ const Rich = ({
         spacing={['tight', 'tight']}
         bgActiveColor="none"
         {...cardProps}
+        onClick={undefined}
         testId={TEST_ID.DIGEST_USER_RICH}
       >
         <section className={containerClasses}>
@@ -89,15 +87,21 @@ const Rich = ({
 
           <section className={contentClasses}>
             <header className={styles.header}>
-              <span className={styles.name}>
-                <Translate id="accountArchived" />
+              <span
+                className={styles.name}
+                data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
+              >
+                <FormattedMessage
+                  defaultMessage="Account Archived"
+                  id="YS8YSV"
+                />
               </span>
             </header>
           </section>
 
           <section className={styles.extraButton}>
-            {hasUnblock && <UnblockUserButton user={user} />}
             {hasFollow && <FollowUserButton user={user} />}
+            {extraButton}
           </section>
         </section>
       </Card>
@@ -136,16 +140,13 @@ const Rich = ({
             {hasState && <FollowUserButton.State user={user} />}
           </header>
 
-          {!hasDescriptionReplacement && user.info.description && (
-            <p className={styles.description}>{user.info.description}</p>
+          {!subtitle && user.info.description && (
+            <p className={styles.subtitle}>{user.info.description}</p>
           )}
-          {descriptionReplacement && (
-            <p className={styles.description}>{descriptionReplacement}</p>
-          )}
+          {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         </section>
 
         <section className={styles.extraButton}>
-          {hasUnblock && <UnblockUserButton user={user} />}
           {hasFollow && <FollowUserButton user={user} />}
           {extraButton}
         </section>
@@ -163,14 +164,17 @@ type MemoizedRichType = React.MemoExoticComponent<
   fragments: typeof fragments
 }
 
-const MemoizedRich = React.memo(Rich, ({ user: prevUser }, { user }) => {
-  return (
-    prevUser.id === user.id &&
-    prevUser.isFollowee === user.isFollowee &&
-    prevUser.isFollower === user.isFollower &&
-    prevUser.isBlocked === user.isBlocked
-  )
-}) as MemoizedRichType
+const MemoizedRich = React.memo(
+  Rich,
+  ({ user: prevUser, ...prevProps }, { user, ...props }) => {
+    return (
+      prevUser.id === user.id &&
+      prevUser.isFollowee === user.isFollowee &&
+      prevUser.isFollower === user.isFollower &&
+      prevProps.extraButton === props.extraButton
+    )
+  }
+) as MemoizedRichType
 
 MemoizedRich.fragments = fragments
 

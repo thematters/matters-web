@@ -11,7 +11,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   PAYMENT_CURRENCY,
@@ -27,7 +27,6 @@ import {
   validateAmount,
 } from '~/common/utils'
 import {
-  CurrencyAmount,
   Dialog,
   Form,
   LanguageContext,
@@ -42,6 +41,7 @@ import {
 } from '~/gql/graphql'
 
 import ConfirmTable from '../ConfirmTable'
+import { CurrencyAmount } from '../CurrencyAmount'
 import StripeCheckout from '../StripeCheckout'
 
 interface FormProps {
@@ -81,6 +81,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
   callbackText,
   closeDialog,
 }) => {
+  const intl = useIntl()
   const stripe = useStripe()
   const elements = useElements()
   const { lang } = useContext(LanguageContext)
@@ -147,9 +148,9 @@ const BaseAddCredit: React.FC<FormProps> = ({
         const txResult = await addCredit({ variables: { input: { amount } } })
         data = txResult.data
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any)
         codes.forEach((code) => {
-          setFieldError('amount', messages[code])
+          setFieldError('amount', intl.formatMessage(messages[code]))
         })
       }
 
@@ -262,7 +263,11 @@ const BaseAddCredit: React.FC<FormProps> = ({
         <Dialog.Footer
           btns={
             <Dialog.RoundedButton
-              text={callbackText || <FormattedMessage defaultMessage="Done" />}
+              text={
+                callbackText || (
+                  <FormattedMessage defaultMessage="Done" id="JXdbo8" />
+                )
+              }
               onClick={callback || closeDialog}
             />
           }
@@ -271,7 +276,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
               <Dialog.TextButton text={callbackText} onClick={callback} />
             ) : (
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Done" />}
+                text={<FormattedMessage defaultMessage="Done" id="JXdbo8" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
@@ -322,7 +327,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

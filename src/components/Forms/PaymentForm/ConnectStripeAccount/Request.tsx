@@ -1,16 +1,10 @@
 import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { PAYOUT_COUNTRY } from '~/common/enums'
 import { parseFormSubmitErrors, sleep } from '~/common/utils'
-import {
-  Dialog,
-  LanguageContext,
-  Spacer,
-  toast,
-  useMutation,
-} from '~/components'
+import { Dialog, Spacer, toast, useMutation } from '~/components'
 import { ConnectStripeAccountMutation } from '~/gql/graphql'
 
 import SelectCountry from './SelectCountry'
@@ -30,7 +24,7 @@ const CONNECT_STRIPE_ACCOUNT = gql`
 `
 
 const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const [country, setCountry] = useState<PAYOUT_COUNTRY>(
     PAYOUT_COUNTRY.HongKong
   )
@@ -45,11 +39,9 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
       window.open(redirectUrl, '_blank')
       nextStep()
     } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+      const [messages, codes] = parseFormSubmitErrors(error as any)
 
-      toast.error({
-        message: messages[codes[0]],
-      })
+      toast.error({ message: intl.formatMessage(messages[codes[0]]) })
     }
   }
 
@@ -60,7 +52,7 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
         closeDialog={closeDialog}
         leftBtn={
           <Dialog.TextButton
-            text={<FormattedMessage defaultMessage="Back" />}
+            text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
             onClick={back}
           />
         }
@@ -76,14 +68,14 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
           <>
             {back && (
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Back" />}
+                text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
                 color="greyDarker"
                 onClick={back}
               />
             )}
 
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Next Step" />}
+              text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
               onClick={request}
               disabled={loading}
               loading={loading}

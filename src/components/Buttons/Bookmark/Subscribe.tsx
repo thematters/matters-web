@@ -1,20 +1,20 @@
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
+  ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEST_ID,
-  UNIVERSAL_AUTH_SOURCE,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   Button,
   IconBookmark16,
   IconBookmark20,
   IconSize,
-  LanguageContext,
   Menu,
   toast,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -31,7 +31,7 @@ interface SubscribeProps {
 
 const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const [subscribe] = useMutation<ToggleSubscribeArticleMutation>(
     TOGGLE_SUBSCRIBE_ARTICLE,
@@ -44,7 +44,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
     if (!viewer.isAuthed) {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { source: UNIVERSAL_AUTH_SOURCE.bookmark },
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.bookmark },
         })
       )
       return
@@ -52,7 +52,11 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
 
     if (viewer.isFrozen) {
       toast.error({
-        message: <Translate id="FORBIDDEN_BY_STATE" />,
+        message: (
+          <FormattedMessage
+            {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+          />
+        ),
       })
       return
     }
@@ -61,7 +65,11 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
 
     toast.success({
       message: (
-        <Translate en="Bookmarked" zh_hans="收藏成功" zh_hant="收藏成功" />
+        <FormattedMessage
+          defaultMessage="Bookmarked"
+          id="qE8ew4"
+          description="src/components/Buttons/Bookmark/Subscribe.tsx"
+        />
       ),
     })
   }
@@ -69,7 +77,13 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
   if (inCard) {
     return (
       <Menu.Item
-        text={<Translate id="bookmark" />}
+        text={
+          <FormattedMessage
+            defaultMessage="Bookmark"
+            id="kLEWkV"
+            description="src/components/Buttons/Bookmark/Subscribe.tsx"
+          />
+        }
         icon={<IconBookmark20 size="mdS" />}
         onClick={onClick}
         testId={TEST_ID.ARTICLE_BOOKMARK}
@@ -81,11 +95,10 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor={'greyLighter'}
-      aria-label={translate({
-        zh_hant: '收藏',
-        zh_hans: '收藏',
-        en: 'Bookmark',
-        lang,
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Bookmark',
+        id: 'kLEWkV',
+        description: 'src/components/Buttons/Bookmark/Subscribe.tsx',
       })}
       onClick={onClick}
       disabled={disabled}

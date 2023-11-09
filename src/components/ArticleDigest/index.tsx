@@ -1,4 +1,4 @@
-export * from './Archive'
+export * from './Archived'
 export * from './Card'
 export * from './Dropdown'
 export * from './Feed'

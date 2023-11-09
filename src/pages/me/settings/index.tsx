@@ -1,9 +1,9 @@
 import { Protected } from '~/components'
-import MeSettings from '~/views/Me/Settings/Settings'
+import MeSettingsAccount from '~/views/Me/Settings/Account'
 
 const ProtectedMeSettings = () => (
   <Protected>
-    <MeSettings />
+    <MeSettingsAccount />
   </Protected>
 )
 

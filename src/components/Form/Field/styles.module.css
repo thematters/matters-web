@@ -10,6 +10,10 @@
   margin-bottom: var(--spacing-base);
 }
 
+.spacingBottomBaseLoose {
+  margin-bottom: var(--spacing-base-loose);
+}
+
 .spacingBottomLoose {
   margin-bottom: var(--spacing-loose);
 }

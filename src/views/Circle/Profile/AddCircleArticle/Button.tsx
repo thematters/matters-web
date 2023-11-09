@@ -24,7 +24,7 @@ const AddArticlesButton = ({ circle }: AddArticlesButtonProps) => {
           aria-haspopup="dialog"
         >
           <TextIcon icon={<IconPen16 />} weight="md" size="mdS">
-            <FormattedMessage defaultMessage="Add Articles" />
+            <FormattedMessage defaultMessage="Add Articles" id="k97/u7" />
           </TextIcon>
         </Button>
       )}

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { COMMENT_TYPE_TEXT } from '~/common/enums'
+import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import {
   CommentFormType,
   Dialog,
@@ -71,7 +71,11 @@ const CollapseCommentDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_COMMENT_COLLAPSE}
+      >
         <Dialog.Header
           title={
             <Translate
@@ -94,7 +98,7 @@ const CollapseCommentDialog = ({
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
               color="red"
               onClick={() => {
                 onCollapse()
@@ -104,7 +108,7 @@ const CollapseCommentDialog = ({
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
               color="red"
               onClick={() => {
                 onCollapse()

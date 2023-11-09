@@ -17,7 +17,7 @@ export type ArticleDigestTitleTextSize =
   | 'xm'
   | 'xl'
 export type ArticleDigestTitleTextWeight = 'normal' | 'md' | 'semibold'
-export type ArticleDigestTitleIs = 'h2' | 'h3' | 'h4' | 'h5'
+export type ArticleDigestTitleIs = 'h2' | 'h3'
 
 type ArticleDigestTitleProps = {
   article: ArticleDigestTitleArticleFragment

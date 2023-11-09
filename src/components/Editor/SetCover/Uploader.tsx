@@ -1,15 +1,15 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
+import _omit from 'lodash/omit'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
-  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  ACCEPTED_COVER_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
   ENTITY_TYPE,
-  UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { sleep, translate, validateImage } from '~/common/utils'
 import {
   IconCamera16,
   IconSpinner16,
@@ -17,12 +17,22 @@ import {
   TextIcon,
   toast,
   Translate,
+  useCreateDraft,
+  useDirectImageUpload,
   useMutation,
+  useRoute,
   useUnloadConfirm,
 } from '~/components'
 import { updateDraftAssets } from '~/components/GQL'
-import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { AssetFragment, SingleFileUploadMutation } from '~/gql/graphql'
+import {
+  DIRECT_IMAGE_UPLOAD,
+  DIRECT_IMAGE_UPLOAD_DONE,
+} from '~/components/GQL/mutations/uploadFile'
+import {
+  AssetFragment,
+  DirectImageUploadDoneMutation,
+  DirectImageUploadMutation,
+} from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -44,23 +54,36 @@ const Uploader: React.FC<UploaderProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const [upload, { loading }] = useMutation<SingleFileUploadMutation>(
-    UPLOAD_FILE,
+  const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
+    DIRECT_IMAGE_UPLOAD,
     {
-      update: (cache, { data }) => {
-        if (data?.singleFileUpload) {
+      update: async (cache, { data }) => {
+        if (data?.directImageUpload) {
+          // FIXME: newly uploaded images will return 404 in a short time
+          // https://community.cloudflare.com/t/new-uploaded-images-need-about-10-min-to-display-in-my-website/121568
+          await sleep(300)
+
           updateDraftAssets({
             cache,
             id: entityId,
-            asset: data.singleFileUpload,
+            asset: data.directImageUpload,
           })
         }
       },
     },
     { showToast: false }
   )
+  const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
+    DIRECT_IMAGE_UPLOAD_DONE,
+    undefined,
+    { showToast: false }
+  )
+  const { upload: uploadImage, uploading } = useDirectImageUpload()
 
-  const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
+  const { isInPath } = useRoute()
+  const { createDraft } = useCreateDraft()
+
+  const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'editor-cover-upload-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,55 +96,68 @@ const Uploader: React.FC<UploaderProps> = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
-      toast.error({
-        message: (
-          <Translate
-            zh_hant="上傳檔案超過 5 MB"
-            zh_hans="上传文件超过 5 MB"
-            en="upload file size exceeds 5 MB"
-          />
-        ),
-      })
+    const mime = await validateImage(file)
+    if (!mime) {
       return
     }
 
     try {
-      const { data } = await upload({
-        variables: {
-          input: {
-            file,
-            type: ASSET_TYPE.cover,
-            entityId,
-            entityType,
+      // create draft if not exist
+      const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+      if (isInDraftDetail && !entityId) {
+        await createDraft({
+          onCreate: (newDraftId) => {
+            entityId = newDraftId
           },
+        })
+      }
+
+      const variables = {
+        input: {
+          file,
+          type: ASSET_TYPE.cover,
+          entityId,
+          entityType,
+          mime,
         },
+      }
+      const { data } = await upload({
+        variables: _omit(variables, ['input.file']),
       })
 
-      refetchAssets()
+      const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
-      if (data?.singleFileUpload) {
-        setSelected(data?.singleFileUpload)
+      if (assetId && path && uploadURL) {
+        await uploadImage({ uploadURL, file })
+
+        // (async) mark asset draft as false
+        directImageUploadDone({
+          variables: {
+            ..._omit(variables.input, ['file']),
+            draft: false,
+            url: path,
+          },
+        }).catch(console.error)
+
+        refetchAssets()
+
+        if (data?.directImageUpload) {
+          setSelected(data?.directImageUpload)
+        }
       } else {
         throw new Error()
       }
-
-      toast.success({
-        message: <Translate id="successUploadImage" />,
-      })
     } catch (e) {
-      toast.error({
-        message: <Translate id="failureUploadImage" />,
-      })
+      toast.error({ message: <Translate id="failureUploadImage" /> })
     }
   }
 
   const labelClasses = classNames({
     [styles.uploader]: true,
-    'u-area-disable': loading,
+    'u-area-disable': loading || uploading,
   })
 
-  useUnloadConfirm({ block: loading })
+  useUnloadConfirm({ block: loading || uploading })
 
   return (
     <label className={labelClasses} htmlFor={fieldId}>
@@ -136,11 +172,14 @@ const Uploader: React.FC<UploaderProps> = ({
           <Translate id="uploadCover" />
         </TextIcon>
 
-        {loading && <IconSpinner16 color="greyLight" />}
+        {(loading || uploading) && <IconSpinner16 color="greyLight" />}
       </h3>
 
       <p>
-        <FormattedMessage defaultMessage="Recommended square image." />
+        <FormattedMessage
+          defaultMessage="Recommended square image."
+          id="CxYcYR"
+        />
       </p>
 
       <VisuallyHidden>

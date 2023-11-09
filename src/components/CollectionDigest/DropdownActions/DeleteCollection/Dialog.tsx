@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Dialog,
@@ -11,15 +12,11 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import {
-  updateUserArticles,
-  updateUserCollections,
-  updateUserProfile,
-} from '~/components/GQL'
+import { updateUserArticles, updateUserCollections } from '~/components/GQL'
 import {
   DeleteCollectionCollectionFragment,
   DeleteCollectionMutation,
-  ViewerArticleCountQuery,
+  ViewerTabsCountQuery,
 } from '~/gql/graphql'
 
 const DELETE_COLLECTION = gql`
@@ -28,12 +25,15 @@ const DELETE_COLLECTION = gql`
   }
 `
 
-const VIEWER_ARTICLE_COUNT = gql`
-  query ViewerArticleCount {
+const VIEWER_TABS_COUNT = gql`
+  query ViewerTabsCount {
     viewer {
       id
       status {
         articleCount
+      }
+      collections(input: { first: 0 }) {
+        totalCount
       }
     }
   }
@@ -63,7 +63,7 @@ const DeleteCollectionDialog = ({
       setStep('delete')
     }, 1000)
   }
-
+  const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
   const [deleteCollection, { loading, client }] =
     useMutation<DeleteCollectionMutation>(DELETE_COLLECTION, {
       variables: { id: collection.id },
@@ -81,24 +81,32 @@ const DeleteCollectionDialog = ({
           type: 'delete',
         })
 
-        const result = updateUserProfile({
-          cache,
-          userName: collection.author.userName!,
-          type: 'decreaseCollection',
-        })
-        if (result?.collectionCount === 0) {
-          onEmptyCollection()
-        }
+        // FIXME: Why not update user profile tab collection count?
+        // const result = updateUserProfile({
+        //   cache,
+        //   userName: collection.author.userName!,
+        //   type: 'decreaseCollection',
+        // })
+        onEmptyCollection()
       },
+      refetchQueries: [
+        {
+          query: USER_PROFILE_PUBLIC,
+          variables: { userName: collection.author.userName },
+        },
+      ],
     })
 
   const onEmptyCollection = async () => {
-    const result = await client?.query<ViewerArticleCountQuery>({
-      query: VIEWER_ARTICLE_COUNT,
+    const result = await client?.query<ViewerTabsCountQuery>({
+      query: VIEWER_TABS_COUNT,
       fetchPolicy: 'network-only',
     })
 
-    if (result?.data.viewer?.status?.articleCount === 0)
+    if (
+      result?.data.viewer?.status?.articleCount === 0 &&
+      result.data.viewer?.collections.totalCount === 0
+    )
       router.push(
         toPath({ page: 'userProfile', userName: viewer.userName || '' }).href
       )
@@ -111,6 +119,7 @@ const DeleteCollectionDialog = ({
       message: (
         <FormattedMessage
           defaultMessage="Collection is deleted"
+          id="Ft76YC"
           description="src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
         />
       ),
@@ -129,9 +138,15 @@ const DeleteCollectionDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_DELETE_COLLECTION}
+      >
         <Dialog.Header
-          title={<FormattedMessage defaultMessage="Delete collection" />}
+          title={
+            <FormattedMessage defaultMessage="Delete collection" id="m4GG4b" />
+          }
         />
 
         <Dialog.Message>
@@ -139,6 +154,7 @@ const DeleteCollectionDialog = ({
             <p>
               <FormattedMessage
                 defaultMessage="Are you sure you want to delete this collection ‘{collection}’?"
+                id="T9oZC8"
                 values={{
                   collection: (
                     <span className="u-highlight">{collection.title}</span>
@@ -146,12 +162,18 @@ const DeleteCollectionDialog = ({
                 }}
               />
               <br />
-              <FormattedMessage defaultMessage="(Articles in this collection will not be deleted)" />
+              <FormattedMessage
+                defaultMessage="(Articles in this collection will not be deleted)"
+                id="a/xacb"
+              />
             </p>
           )}
           {isInConfirmDelete && (
             <p>
-              <FormattedMessage defaultMessage="This action cannot be undone. Are you sure you want to delete this collection?" />
+              <FormattedMessage
+                defaultMessage="This action cannot be undone. Are you sure you want to delete this collection?"
+                id="Xi40U9"
+              />
             </p>
           )}
         </Dialog.Message>
@@ -161,7 +183,7 @@ const DeleteCollectionDialog = ({
             closeDialog={closeDialog}
             btns={
               <Dialog.RoundedButton
-                text={<FormattedMessage defaultMessage="Delete" />}
+                text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
                 color="red"
                 onClick={() => {
                   setStep('confirmDelete')
@@ -170,7 +192,7 @@ const DeleteCollectionDialog = ({
             }
             smUpBtns={
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Delete" />}
+                text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
                 color="red"
                 onClick={() => {
                   setStep('confirmDelete')
@@ -185,7 +207,12 @@ const DeleteCollectionDialog = ({
             closeDialog={closeDialog}
             btns={
               <Dialog.RoundedButton
-                text={<FormattedMessage defaultMessage="Confirm Deletion" />}
+                text={
+                  <FormattedMessage
+                    defaultMessage="Confirm Deletion"
+                    id="W8OZ3G"
+                  />
+                }
                 color={loading ? 'green' : 'red'}
                 onClick={async () => {
                   await onDelete()
@@ -196,7 +223,12 @@ const DeleteCollectionDialog = ({
             }
             smUpBtns={
               <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Confirm Deletion" />}
+                text={
+                  <FormattedMessage
+                    defaultMessage="Confirm Deletion"
+                    id="W8OZ3G"
+                  />
+                }
                 color={loading ? 'green' : 'red'}
                 onClick={async () => {
                   await onDelete()

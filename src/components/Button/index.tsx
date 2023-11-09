@@ -49,6 +49,7 @@ export type ButtonSpacingX =
 
 type ButtonColor =
   | 'white'
+  | 'whiteLight'
   | 'black'
   | 'halfBlack'
   | 'greyDark'
@@ -70,7 +71,14 @@ type ButtonColor =
 
 type ButtonTextColor = Extract<
   ButtonColor,
-  'white' | 'black' | 'green' | 'gold' | 'red' | 'grey' | 'greyDarker'
+  | 'white'
+  | 'whiteLight'
+  | 'black'
+  | 'green'
+  | 'gold'
+  | 'red'
+  | 'grey'
+  | 'greyDarker'
 >
 
 type ButtonTextActiveColor = Extract<
@@ -135,6 +143,7 @@ export type ButtonProps = {
   disabled?: boolean
   form?: string
   rel?: string
+  testId?: string
   tabIndex?: number
   onClick?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
   onMouseEnter?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
@@ -198,6 +207,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         type = 'button',
 
         children,
+        testId,
         ...restProps
       },
       ref
@@ -256,6 +266,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         onClick,
         ref: buttonRef as React.RefObject<any>,
         className: containerClasses,
+        ...(testId ? { ['data-test-id']: testId } : {}),
       }
 
       // content

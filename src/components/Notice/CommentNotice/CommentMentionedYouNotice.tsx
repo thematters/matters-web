@@ -53,6 +53,7 @@ const CommentMentionedYouNotice = ({
           action={
             <FormattedMessage
               defaultMessage="mentioned you in a comment at {commentArticle}"
+              id="1zVIWy"
               description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
               values={{
                 commentArticle: <NoticeArticleTitle article={commentArticle} />,
@@ -69,6 +70,7 @@ const CommentMentionedYouNotice = ({
           action={
             <FormattedMessage
               defaultMessage="commented in {commentCircle}"
+              id="BHFHeY"
               description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
               values={{
                 commentCircle: (
@@ -84,11 +86,13 @@ const CommentMentionedYouNotice = ({
             commentCircleDiscussion ? (
               <FormattedMessage
                 defaultMessage="discussion and mentioned you"
+                id="yZfKI4"
                 description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
               />
             ) : commentCircleBroadcast ? (
               <FormattedMessage
                 defaultMessage="broadcast and mentioned you"
+                id="Xz/AHp"
                 description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
               />
             ) : undefined

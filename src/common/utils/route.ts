@@ -65,7 +65,7 @@ type ToPathArgs =
       article?: ArticleArgs | null
       circle?: CircleArgs | null
     }
-  | { page: 'draftDetail'; id: string; slug: string }
+  | { page: 'draftDetail'; id: string }
   | {
       page: 'tagDetail'
       tag: TagArgs
@@ -184,7 +184,6 @@ export const toPath = (
     case 'commentDetail': {
       const { parentComment, id, type } = args.comment || {}
       const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
-
       switch (type) {
         case 'article':
           return toPath({
@@ -199,11 +198,13 @@ export const toPath = (
             circle: args.circle!, // as { name: string },
             fragment,
           })
+        default:
+          throw new Error(`unknown comment type: ${type}`)
       }
     }
     case 'draftDetail': {
       return {
-        href: `/me/drafts/${args.slug}-${args.id}`,
+        href: `/me/drafts/${args.id}`,
       }
     }
     case 'tagDetail': {
@@ -285,6 +286,12 @@ export const redirectToLogin = () => {
   const target = getTarget() || getEncodedCurrent()
 
   return Router.push(`${PATHS.LOGIN}?target=${target}`)
+}
+
+export const redirectToHomePage = () => {
+  const target = getTarget() || getEncodedCurrent()
+
+  return Router.push(`${PATHS.HOME}?target=${target}`)
 }
 
 /**

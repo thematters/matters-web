@@ -22,6 +22,7 @@ const ArticleNewAppreciationNotice = ({
       action={
         <FormattedMessage
           defaultMessage="liked"
+          id="p5qZnJ"
           description="src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
         />
       }

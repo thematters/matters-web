@@ -1,9 +1,10 @@
 import classNames from 'classnames'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { captureClicks } from '~/common/utils'
-import { Button, IconArrowDown16, TextIcon, Translate } from '~/components'
+import { Button, IconArrowDown16, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -22,16 +23,14 @@ const Collapsed = ({
 
   if (!collapsed) {
     return (
-      <>
-        <div
-          className={`${className} u-content-comment`}
-          dangerouslySetInnerHTML={{
-            __html: content || '',
-          }}
-          onClick={captureClicks}
-          data-test-id={TEST_ID.COMMENT_CONETNT}
-        />
-      </>
+      <div
+        className={`${className} u-content-comment`}
+        dangerouslySetInnerHTML={{
+          __html: content || '',
+        }}
+        onClick={captureClicks}
+        data-test-id={TEST_ID.COMMENT_CONETNT}
+      />
     )
   }
 
@@ -59,7 +58,7 @@ const Collapsed = ({
             weight="normal"
             color="greyDarker"
           >
-            <Translate zh_hant="打開" zh_hans="展开" en="Expand" />
+            <FormattedMessage defaultMessage="Expand" id="0oLj/t" />
           </TextIcon>
         </Button>
       )}

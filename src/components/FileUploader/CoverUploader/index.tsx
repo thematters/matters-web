@@ -1,14 +1,13 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
+import _omit from 'lodash/omit'
 import { useContext, useState } from 'react'
 
 import {
-  ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES,
-  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  ACCEPTED_COVER_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
   ENTITY_TYPE,
-  UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { translate, validateImage } from '~/common/utils'
 import {
   Book,
   Cover,
@@ -18,10 +17,17 @@ import {
   Spinner,
   toast,
   Translate,
+  useDirectImageUpload,
   useMutation,
 } from '~/components'
-import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { SingleFileUploadMutation } from '~/gql/graphql'
+import {
+  DIRECT_IMAGE_UPLOAD,
+  DIRECT_IMAGE_UPLOAD_DONE,
+} from '~/components/GQL/mutations/uploadFile'
+import {
+  DirectImageUploadDoneMutation,
+  DirectImageUploadMutation,
+} from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -81,16 +87,19 @@ export const CoverUploader = ({
   const { lang } = useContext(LanguageContext)
 
   const [cover, setCover] = useState<string | undefined | null>(initCover)
-  const [upload, { loading }] = useMutation<SingleFileUploadMutation>(
-    UPLOAD_FILE,
+  const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
+    DIRECT_IMAGE_UPLOAD,
     undefined,
     { showToast: false }
   )
+  const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
+    DIRECT_IMAGE_UPLOAD_DONE,
+    undefined,
+    { showToast: false }
+  )
+  const { upload: uploadImage, uploading } = useDirectImageUpload()
 
-  const acceptTypes =
-    type === 'collection'
-      ? ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES.join(',')
-      : ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
+  const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'cover-upload-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,17 +112,8 @@ export const CoverUploader = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
-      toast.error({
-        message: (
-          <Translate
-            zh_hant="上傳檔案超過 5 MB"
-            zh_hans="上传文件超过 5 MB"
-            en="upload file exceed 5 MB"
-          />
-        ),
-      })
-
+    const mime = await validateImage(file)
+    if (!mime) {
       return
     }
 
@@ -122,24 +122,33 @@ export const CoverUploader = ({
         onUploadStart()
       }
 
+      const variables = {
+        input: { file, mime, type: assetType, entityId, entityType },
+      }
       const { data } = await upload({
-        variables: {
-          input: { file, type: assetType, entityId, entityType },
-        },
+        variables: _omit(variables, ['input.file']),
       })
-      const id = data?.singleFileUpload.id
-      const path = data?.singleFileUpload.path
+      const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
-      if (id && path) {
+      if (assetId && path && uploadURL) {
+        await uploadImage({ uploadURL, file })
+
+        // (async) mark asset draft as false
+        directImageUploadDone({
+          variables: {
+            ..._omit(variables.input, ['file']),
+            draft: false,
+            url: path,
+          },
+        }).catch(console.error)
+
         setCover(path)
-        onUploaded(id)
+        onUploaded(assetId)
       } else {
         throw new Error()
       }
     } catch (e) {
-      toast.error({
-        message: <Translate id="failureUploadImage" />,
-      })
+      toast.error({ message: <Translate id="failureUploadImage" /> })
     }
 
     if (onUploadEnd) {
@@ -149,7 +158,11 @@ export const CoverUploader = ({
 
   const Mask = () => (
     <div className={styles.mask}>
-      {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
+      {loading || uploading ? (
+        <Spinner />
+      ) : (
+        <IconCamera24 color="white" size="xl" />
+      )}
     </div>
   )
 

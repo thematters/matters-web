@@ -1,0 +1,28 @@
+.wrapper {
+  @media (--sm-up) {
+    @mixin polka-dot-background;
+    @mixin flex-center-all;
+
+    width: 100vw;
+    height: 100vh;
+
+    & .container {
+      @mixin border-grey-light;
+
+      width: 26.4375rem; /* 423px */
+      background: white;
+      border-radius: 0.5rem;
+
+      &.containerSpace {
+        padding: var(--spacing-xx-loose) var(--spacing-loose)
+          var(--spacing-x-loose);
+      }
+    }
+  }
+}
+
+.footer {
+  @mixin flex-center-all;
+
+  margin-top: var(--spacing-base);
+}

@@ -29,7 +29,7 @@ const BaseAccessDialog = ({
   const CloseButton = () => (
     <Dialog.TextButton
       onClick={closeDialog}
-      text={<FormattedMessage defaultMessage="Done" />}
+      text={<FormattedMessage defaultMessage="Done" id="JXdbo8" />}
     />
   )
 
@@ -44,7 +44,7 @@ const BaseAccessDialog = ({
           rightBtn={<CloseButton />}
         />
 
-        <Dialog.Content>
+        <Dialog.Content noSpacing>
           <section className={styles.response}>
             <ToggleResponse {...toggleResponseProps} />
           </section>

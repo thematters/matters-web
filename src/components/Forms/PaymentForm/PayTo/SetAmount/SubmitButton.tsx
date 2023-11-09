@@ -1,8 +1,14 @@
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useDisconnect } from 'wagmi'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Dialog, Translate } from '~/components'
+import {
+  BindEmailHintDialog,
+  Dialog,
+  Translate,
+  ViewerContext,
+} from '~/components'
 import type { DialogTextButtonProps } from '~/components/Dialog/Buttons'
 import { UserDonationRecipientFragment } from '~/gql/graphql'
 
@@ -49,22 +55,35 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
   isBalanceInsufficient,
   switchToAddCredit,
 }) => {
+  const viewer = useContext(ViewerContext)
+  const hasEmail = !!viewer.info.email
   if (isBalanceInsufficient) {
+    const props = {
+      mode,
+      text: 'topUp',
+      form: formId,
+    }
     return (
-      <WrapperButton
-        mode={mode}
-        text="topUp"
-        type="button"
-        onClick={switchToAddCredit}
-        form={formId}
-      />
+      <>
+        <BindEmailHintDialog>
+          {({ openDialog }) => {
+            return (
+              <WrapperButton
+                type="button"
+                onClick={hasEmail ? switchToAddCredit : openDialog}
+                {...props}
+              />
+            )
+          }}
+        </BindEmailHintDialog>
+      </>
     )
   }
 
   return (
     <WrapperButton
       mode={mode}
-      text={<FormattedMessage defaultMessage="Next Step" />}
+      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting || isBalanceInsufficient}
@@ -89,7 +108,7 @@ const LIKESubmitButton: React.FC<SubmitButtonProps> = ({
 
       <WrapperButton
         mode={mode}
-        text={<FormattedMessage defaultMessage="Next Step" />}
+        text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
         type="submit"
         form={formId}
         disabled={!isValid || isSubmitting || isBalanceInsufficient}
@@ -177,7 +196,7 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
     return (
       <WrapperButton
         mode={mode}
-        text={<FormattedMessage defaultMessage="Next Step" />}
+        text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
         type="submit"
         form={formId}
         disabled={!isValid || isSubmitting || isBalanceInsufficient}

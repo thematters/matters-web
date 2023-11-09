@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { leftPad } from '~/common/utils'
 
@@ -15,7 +15,11 @@ interface UseCountdownProps {
   step?: number
 }
 
-export const useCountdown = ({ timeLeft, step = 1000 }: UseCountdownProps) => {
+// TODO: Will remove after New Social Login Release
+export const useLegacyCountdown = ({
+  timeLeft,
+  step = 1000,
+}: UseCountdownProps) => {
   const [countdown, setCountdown] = useState({ timeLeft, step })
   const formatted = formatTimeLeft(countdown.timeLeft)
 
@@ -47,4 +51,14 @@ export const useCountdown = ({ timeLeft, step = 1000 }: UseCountdownProps) => {
       ss: `${leftPad(formatted.secs, 2, 0)}`,
     },
   }
+}
+
+export const useCountdown = (initValue: number) => {
+  const [countdown, setCountdown] = useState(initValue)
+
+  useEffect(() => {
+    countdown > 0 && setTimeout(() => setCountdown(countdown - 1), 1000)
+  }, [countdown])
+
+  return { countdown, setCountdown }
 }

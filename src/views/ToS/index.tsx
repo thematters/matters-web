@@ -1,4 +1,6 @@
-import { Head, Layout, Term } from '~/components'
+import { Head, Layout } from '~/components'
+
+import { Term } from './Term'
 
 const ToS = () => (
   <Layout.Main>

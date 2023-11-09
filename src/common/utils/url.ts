@@ -1,3 +1,5 @@
+import { URL_COLLECTION_DETAIL } from '../enums'
+
 const pattern = /^(:?\/\/|https?:\/\/)?([^/]*@)?(.+?)(:\d{2,5})?([/?].*)?$/
 
 export const extractDomain = (url: string) => {
@@ -31,6 +33,7 @@ interface ToSizedImageURLProps {
   width: ToSizedImageURLSize
   height?: ToSizedImageURLSize
   ext?: 'webp'
+  disableAnimation?: boolean
 }
 
 export const changeExt = ({ key, ext }: { key: string; ext?: 'webp' }) => {
@@ -50,6 +53,7 @@ export const toSizedImageURL = ({
   width,
   height,
   ext,
+  disableAnimation,
 }: ToSizedImageURLProps) => {
   const assetDomain = process.env.NEXT_PUBLIC_CF_IMAGE_URL
     ? `${process.env.NEXT_PUBLIC_CF_IMAGE_URL}`
@@ -74,9 +78,13 @@ export const toSizedImageURL = ({
   const hostnameless = url.replace(urlDomain, ``)
   const key = hostnameless.replace('/public', '')
   const extedUrl = changeExt({ key, ext })
-  const postfix = height
+  let postfix = height
     ? `w=${width},h=${height},fit=crop`
     : `w=${width},h=${width * 4},fit=scale-down`
+
+  if (disableAnimation) {
+    postfix += ',anim=false'
+  }
 
   return assetDomain + extedUrl + '/' + postfix
 }
@@ -105,4 +113,31 @@ export const isUrl = (key: string) => {
     'i'
   )
   return pattern.test(key)
+}
+
+export const parseSorter = (sorterStr: string) => {
+  const sorter: any = {}
+  if (sorterStr === '') {
+    return sorter
+  }
+  const sorters = sorterStr.split(URL_COLLECTION_DETAIL.SORTER_SEPARATOR)
+  sorters.map((s) => {
+    const [key, value] = s.split(URL_COLLECTION_DETAIL.SORTER_TYPE_SEPARATOR)
+    sorter[key] = value
+  })
+  return sorter
+}
+
+export const stringifySorter = (sorter: any) => {
+  let sorterStr = ''
+  const keys = Object.keys(sorter)
+  keys.map((key, index) => {
+    sorterStr += `${key}${URL_COLLECTION_DETAIL.SORTER_TYPE_SEPARATOR}${sorter[
+      key
+    ].toString()}`
+    if (index < keys.length - 1) {
+      sorterStr += URL_COLLECTION_DETAIL.SORTER_SEPARATOR
+    }
+  })
+  return sorterStr
 }

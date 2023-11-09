@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import { ASSET_TYPE } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { toSizedImageURL, translate } from '~/common/utils'
 import { IconChecked, LanguageContext, Translate } from '~/components'
 import { AssetFragment } from '~/gql/graphql'
 
@@ -53,7 +53,15 @@ const Selector: React.FC<SelectorProps> = ({
                 lang,
               })}
             >
-              <img src={asset.path} alt="cover" />
+              <img
+                src={toSizedImageURL({
+                  url: asset.path,
+                  width: 72,
+                  height: 72,
+                  disableAnimation: true,
+                })}
+                alt="cover"
+              />
 
               {asset.path === selected?.path && (
                 <IconChecked size="md" color="green" />

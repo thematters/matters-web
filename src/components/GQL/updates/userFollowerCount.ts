@@ -1,6 +1,5 @@
 import { DataProxy } from 'apollo-cache'
 
-import { ERROR_CODES } from '~/common/enums'
 import USER_FOLLOWER_COUNT from '~/components/GQL/queries/userFollowerCount'
 import { UserFollowerCountQuery } from '~/gql/graphql'
 
@@ -40,10 +39,6 @@ export const updateUserFollowerCount = ({
       data: cacheData,
     })
   } catch (e) {
-    if ((e as any).message.startsWith("Can't find field")) {
-      console.warn(ERROR_CODES.QUERY_FIELD_NOT_FOUND)
-    } else {
-      console.error(e)
-    }
+    console.error(e)
   }
 }

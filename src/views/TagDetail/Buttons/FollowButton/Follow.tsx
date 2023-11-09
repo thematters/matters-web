@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import {
   Button,
@@ -52,7 +52,7 @@ const Follow = ({ tag }: FollowProps) => {
     if (!viewer.isAuthed) {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { source: UNIVERSAL_AUTH_SOURCE.followTag },
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.followTag },
         })
       )
       return
@@ -71,7 +71,7 @@ const Follow = ({ tag }: FollowProps) => {
       onClick={onClick}
     >
       <TextIcon icon={<IconAdd16 />} weight="md" size="mdS">
-        <FormattedMessage defaultMessage="Follow" />
+        <FormattedMessage defaultMessage="Follow" id="ieGrWo" />
       </TextIcon>
     </Button>
   )

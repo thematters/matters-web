@@ -9,6 +9,7 @@ import {
   LanguageContext,
   Switch,
   Translate,
+  ViewerContext,
 } from '~/components'
 import {
   ArticleAccessType,
@@ -79,6 +80,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
   const content = draft ? draft : article
+  const viewer = useContext(ViewerContext)
+  const likerId = viewer.liker.likerId
 
   return (
     <section className={inSidebar ? styles.inSidebar : ''}>
@@ -195,40 +198,43 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         <p className={styles.hint}>
           <FormattedMessage
             defaultMessage="Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)"
+            id="Vn5KLr"
             description="src/components/Editor/ToggleAccess/index.tsx"
           />
         </p>
       </section>
 
-      <section className={styles.iscn}>
-        <header className={styles.header}>
-          <h3 className={styles.title}>
-            <Translate id="publishToISCN" />
-          </h3>
+      {likerId && (
+        <section className={styles.iscn}>
+          <header className={styles.header}>
+            <h3 className={styles.title}>
+              <Translate id="publishToISCN" />
+            </h3>
 
-          <Switch
-            name="iscn"
-            label={translate({ id: 'publishToISCN', lang })}
-            checked={!!iscnPublish}
-            onChange={() => {
-              togglePublishISCN(!iscnPublish)
-            }}
-            loading={iscnPublishSaving}
-          />
-        </header>
+            <Switch
+              name="iscn"
+              label={translate({ id: 'publishToISCN', lang })}
+              checked={!!iscnPublish}
+              onChange={() => {
+                togglePublishISCN(!iscnPublish)
+              }}
+              loading={iscnPublishSaving}
+            />
+          </header>
 
-        <p className={styles.hint}>
-          <Translate id="publishToISCNHint_1" />
-          <a
-            href="https://docs.like.co/v/zh/general-guides/writing-nft/nft-portal#publish-writing-nft-with-iscn-id"
-            target="_blank"
-            rel="noreferrer"
-          >
-            ISCN
-          </a>
-          <Translate id="publishToISCNHint_2" />
-        </p>
-      </section>
+          <p className={styles.hint}>
+            <Translate id="publishToISCNHint_1" />
+            <a
+              href="https://docs.like.co/v/zh/general-guides/writing-nft/nft-portal#publish-writing-nft-with-iscn-id"
+              target="_blank"
+              rel="noreferrer"
+            >
+              ISCN
+            </a>
+            <Translate id="publishToISCNHint_2" />
+          </p>
+        </section>
+      )}
     </section>
   )
 }

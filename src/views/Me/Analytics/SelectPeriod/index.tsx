@@ -16,6 +16,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
         <>
           <FormattedMessage
             defaultMessage="Last 7 days"
+            id="0iyH+q"
             description="src/views/Me/Analytics/SelectPeriod/index.tsx"
           />
         </>
@@ -27,6 +28,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
         <>
           <FormattedMessage
             defaultMessage="Last 1 month"
+            id="/BQWEh"
             description="src/views/Me/Analytics/SelectPeriod/index.tsx"
           />
         </>
@@ -38,6 +40,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
         <>
           <FormattedMessage
             defaultMessage="Last 3 months"
+            id="W0sZaX"
             description="src/views/Me/Analytics/SelectPeriod/index.tsx"
           />
         </>
@@ -47,7 +50,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <FormattedMessage defaultMessage="All" />
+          <FormattedMessage defaultMessage="All" id="zQvVDJ" />
         </>
       ),
       value: 0,

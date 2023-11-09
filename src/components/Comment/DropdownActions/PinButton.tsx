@@ -108,11 +108,13 @@ const PinButton = ({
           circle ? (
             <FormattedMessage
               defaultMessage="Unpin Broadcast"
+              id="RFzVUD"
               description="src/components/Comment/DropdownActions/PinButton.tsx"
             />
           ) : (
             <FormattedMessage
               defaultMessage="Unpin Comment"
+              id="X+Xvgq"
               description="src/components/Comment/DropdownActions/PinButton.tsx"
             />
           )
@@ -132,11 +134,13 @@ const PinButton = ({
         circle ? (
           <FormattedMessage
             defaultMessage="Pin Broadcast"
+            id="AGcU5J"
             description="src/components/Comment/DropdownActions/PinButton.tsx"
           />
         ) : (
           <FormattedMessage
             defaultMessage="Pin Comment"
+            id="jJ1Brc"
             description="src/components/Comment/DropdownActions/PinButton.tsx"
           />
         )

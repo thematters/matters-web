@@ -52,7 +52,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
           color="grey"
           textPlacement="left"
         >
-          <FormattedMessage defaultMessage="On-chain records" />
+          <FormattedMessage defaultMessage="On-chain records" id="6kMb9Z" />
         </TextIcon>
       </Button>
     )
@@ -82,6 +82,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
         return (
           <FormattedMessage
             defaultMessage="Cancelled"
+            id="6uavsa"
             description="src/components/Transaction/State/index.tsx"
           />
         )
@@ -89,6 +90,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
         return (
           <FormattedMessage
             defaultMessage="Failed"
+            id="1COpAA"
             description="src/components/Transaction/State/index.tsx"
           />
         )
@@ -96,6 +98,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
         return (
           <FormattedMessage
             defaultMessage="Processing"
+            id="awW+lk"
             description="src/components/Transaction/State/index.tsx"
           />
         )

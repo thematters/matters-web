@@ -27,6 +27,7 @@ const CommentPinnedNotice = ({
       action={
         <FormattedMessage
           defaultMessage="pinned your comment in {commentArticle}"
+          id="cAP9g5"
           description="src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
           values={{
             commentArticle: commentArticle && (

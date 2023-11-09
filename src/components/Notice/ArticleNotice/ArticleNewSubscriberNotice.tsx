@@ -22,6 +22,7 @@ const ArticleNewSubscriberNotice = ({
       action={
         <FormattedMessage
           defaultMessage="bookmarked"
+          id="CD688y"
           description="src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
         />
       }

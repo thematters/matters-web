@@ -1,8 +1,9 @@
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
+import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import {
   AddCollectionsArticleDialog,
   AppreciatorsDialog,
@@ -12,13 +13,11 @@ import {
   FingerprintDialog,
   IconMore16,
   IconSize,
-  LanguageContext,
   Menu,
   RemoveArticleCollectionDialog,
   ShareDialog,
   SupportersDialog,
   toast,
-  Translate,
   ViewerContext,
 } from '~/components'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
@@ -148,8 +147,6 @@ const BaseDropdownActions = ({
   onSetTopCollection,
   onRemoveCollection,
 }: BaseDropdownActionsProps) => {
-  const { lang } = useContext(LanguageContext)
-
   const hasPublic =
     hasShare || hasAppreciators || hasDonators || hasFingerprint || hasExtend
   const hasPrivate =
@@ -233,6 +230,12 @@ const BaseDropdownActions = ({
     </Menu>
   )
 
+  const intl = useIntl()
+  const moreActionText = intl.formatMessage({
+    defaultMessage: 'More Actions',
+    id: 'A7ugfn',
+  })
+
   return (
     <Dropdown content={<Content />}>
       {({ openDropdown, ref }) =>
@@ -242,7 +245,7 @@ const BaseDropdownActions = ({
               e.preventDefault()
               openDropdown()
             }}
-            aria-label={translate({ id: 'moreActions', lang })}
+            aria-label={moreActionText}
             aria-haspopup="listbox"
             ref={ref}
             className={styles.moreButton}
@@ -254,7 +257,7 @@ const BaseDropdownActions = ({
             onClick={openDropdown}
             spacing={['xtight', 'xtight']}
             bgActiveColor="greyLighter"
-            aria-label={translate({ id: 'moreActions', lang })}
+            aria-label={moreActionText}
             ref={ref}
           >
             {icon ? icon : <IconMore16 size={size} />}
@@ -296,7 +299,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   const forbid = () => {
     toast.error({
-      message: <Translate id="FORBIDDEN_BY_STATE" />,
+      message: (
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+      ),
     })
   }
 

@@ -1,15 +1,14 @@
 import { FormattedMessage } from 'react-intl'
 
 import {
-  CLOSE_ACTIVE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { appendTarget } from '~/common/utils'
-import { Button, ButtonProps, IconSize, Media, TextIcon } from '~/components'
+import { Button, ButtonProps, IconSize, TextIcon } from '~/components'
 
 interface LoginButtonBaseProps {
   iconSize?: Extract<IconSize, 'md'>
+  resideIn?: 'visitorWall' | 'migration'
 }
 
 type LoginButtonProps = LoginButtonBaseProps &
@@ -21,15 +20,22 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   size,
   spacing,
   onClick,
+  resideIn,
 }) => {
-  const smUpProps = {
+  const props = {
     onClick: () => {
-      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+      // deprecated
+      // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          ...(resideIn
+            ? { detail: { trigger: UNIVERSAL_AUTH_TRIGGER[resideIn] } }
+            : {}),
+        })
+      )
       onClick?.()
     },
   }
-  const smProps = appendTarget(PATHS.LOGIN, true)
 
   const isGreen = bgColor === 'green'
   const buttonBgActiveColor = isGreen ? undefined : 'greyLighter'
@@ -43,27 +49,16 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
     spacing: buttonSpacing,
     bgActiveColor: buttonBgActiveColor,
   }
-  const ButtonText = () => (
-    <TextIcon color={textIconColor} size={textIconSize} weight="md">
-      <FormattedMessage
-        defaultMessage="Log in"
-        description="src/components/Buttons/Login/index.tsx"
-      />
-    </TextIcon>
-  )
 
   return (
-    <>
-      <Media at="sm">
-        <Button {...buttonProps} {...smProps}>
-          <ButtonText />
-        </Button>
-      </Media>
-      <Media greaterThan="sm">
-        <Button aria-haspopup="dialog" {...buttonProps} {...smUpProps}>
-          <ButtonText />
-        </Button>
-      </Media>
-    </>
+    <Button aria-haspopup="dialog" {...buttonProps} {...props}>
+      <TextIcon color={textIconColor} size={textIconSize} weight="md">
+        <FormattedMessage
+          defaultMessage="Log in"
+          id="skbUBl"
+          description="src/components/Buttons/Login/index.tsx"
+        />
+      </TextIcon>
+    </Button>
   )
 }

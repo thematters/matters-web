@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Button, LinkWrapper } from '~/components'
 import { DigestUserProfileCircleFragment } from '~/gql/graphql'
@@ -19,7 +20,6 @@ const UserProfile = ({
   circle,
   hasDescription = true,
   hasFooter = true,
-  ...cardProps
 }: CircleDigestUserProfileProps) => {
   const { displayName, description } = circle
   const path = toPath({
@@ -32,19 +32,21 @@ const UserProfile = ({
   })
 
   return (
-    <section className={containerClasses}>
+    <section
+      className={containerClasses}
+      data-test-id={TEST_ID.DIGEST_CIRCLE_USER_PROFILE}
+    >
       <header className={styles.header}>
-        <LinkWrapper {...path}>
-          <Button textColor="green" textActiveColor="greenDark">
-            {!hasDescription && !hasFooter && (
-              <FormattedMessage
-                defaultMessage="Circle："
-                description="src/components/CircleDigest/UserProfile/index.tsx"
-              />
-            )}
-            <span className={styles.name}>{displayName}</span>
-          </Button>
-        </LinkWrapper>
+        <Button {...path} textColor="green" textActiveColor="greenDark">
+          {!hasDescription && !hasFooter && (
+            <FormattedMessage
+              defaultMessage="Circle："
+              id="5iii3x"
+              description="src/components/CircleDigest/UserProfile/index.tsx"
+            />
+          )}
+          <span className={styles.name}>{displayName}</span>
+        </Button>
       </header>
 
       {hasDescription && description && (
@@ -57,6 +59,7 @@ const UserProfile = ({
             <Button textColor="greyDarker" textActiveColor="green">
               <FormattedMessage
                 defaultMessage="Enter Circle"
+                id="JaLEXz"
                 description="src/components/CircleDigest/UserProfile/index.tsx"
               />
             </Button>

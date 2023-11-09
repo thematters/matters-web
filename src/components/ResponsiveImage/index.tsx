@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { toSizedImageURL, ToSizedImageURLSize } from '~/common/utils'
 
 /**
@@ -15,6 +16,7 @@ interface ResponsiveImageProps {
   disabled?: boolean
   loading?: 'eager' | 'lazy'
   anonymous?: boolean
+  disableAnimation?: boolean
 }
 
 const BaseResponsiveImage = ({
@@ -26,6 +28,7 @@ const BaseResponsiveImage = ({
   disabled,
   loading,
   anonymous,
+  disableAnimation,
 }: ResponsiveImageProps) => {
   const [error, setError] = useState(false)
 
@@ -37,7 +40,10 @@ const BaseResponsiveImage = ({
   }
 
   return (
-    <picture onError={() => setError(true)}>
+    <picture
+      onError={() => setError(true)}
+      data-test-id={TEST_ID.RESPONSIVE_IMG}
+    >
       {smUpWidth && (
         <>
           <source
@@ -46,6 +52,7 @@ const BaseResponsiveImage = ({
               url,
               width: smUpWidth,
               height: smUpHeight,
+              disableAnimation,
             })}
           />
         </>
@@ -56,12 +63,13 @@ const BaseResponsiveImage = ({
           url,
           width,
           height,
+          disableAnimation,
         })}
       />
 
       <img
         src={url}
-        srcSet={toSizedImageURL({ url, width, height })}
+        srcSet={toSizedImageURL({ url, width, height, disableAnimation })}
         loading={loading}
         alt=""
         crossOrigin={anonymous ? 'anonymous' : undefined}
@@ -86,7 +94,8 @@ export const ResponsiveImage = React.memo(
       prevProps.height === props.height &&
       prevProps.smUpWidth === props.smUpWidth &&
       prevProps.smUpHeight === props.smUpHeight &&
-      prevProps.disabled === props.disabled
+      prevProps.disabled === props.disabled &&
+      prevProps.disableAnimation === props.disableAnimation
     )
   }
 ) as MemoizedResponsiveImage

@@ -68,8 +68,18 @@ const ViewerFragments = {
     private: gql`
       fragment ViewerUserPrivate on User {
         id
+        info {
+          socialAccounts {
+            type
+            userName
+            email
+          }
+          emailVerified
+        }
         status {
           role
+          hasEmailLoginPassword
+          changeEmailTimesLeft
         }
         articles(input: { first: 0 }) {
           totalCount
@@ -88,20 +98,9 @@ export type Viewer = ViewerUser & {
   isArchived: boolean
   isBanned: boolean
   isFrozen: boolean
-  isOnboarding: boolean
   isInactive: boolean
   isCivicLiker: boolean
   shouldSetupLikerID: boolean
-  onboardingTasks: {
-    finished: boolean
-    tasks: {
-      likerId: boolean
-      followingTag: boolean
-      article: boolean
-      followee: boolean
-      commentPermission: boolean
-    }
-  }
 }
 
 export const processViewer = (viewer: ViewerUser): Viewer => {
@@ -112,24 +111,9 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const isBanned = state === 'banned'
   const isArchived = state === 'archived'
   const isFrozen = state === 'frozen'
-  // const isOnboarding = state === 'onboarding'
-  const isOnboarding = false
   const isInactive = isAuthed && (isBanned || isFrozen || isArchived)
   const isCivicLiker = viewer.liker.civicLiker
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
-
-  // Onbooarding Tasks
-  const hasLikerId = !!viewer.liker.likerId
-  const hasFollowingTag = viewer?.following?.tags.totalCount >= 5
-  const hasArticle = viewer?.articles?.totalCount >= 1
-  const hasFollowee = viewer?.following.users?.totalCount >= 5
-  const hasCommentPermission = isAuthed && !isOnboarding
-  const isOnboardingTasksFinished =
-    hasLikerId &&
-    hasFollowingTag &&
-    hasArticle &&
-    hasFollowee &&
-    hasCommentPermission
 
   // Add user info for Sentry
   import('@sentry/browser').then((Sentry) => {
@@ -149,20 +133,9 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
     isBanned,
     isArchived,
     isFrozen,
-    isOnboarding,
     isInactive,
     isCivicLiker,
     shouldSetupLikerID,
-    onboardingTasks: {
-      finished: isOnboardingTasksFinished,
-      tasks: {
-        likerId: hasLikerId,
-        followingTag: hasFollowingTag,
-        article: hasArticle,
-        followee: hasFollowee,
-        commentPermission: hasCommentPermission,
-      },
-    },
   }
 }
 

@@ -13,7 +13,9 @@ const RemoveArticleCollectionButton = ({
 }: RemoveArticleCollectionButtonProps) => {
   return (
     <Menu.Item
-      text={<FormattedMessage defaultMessage="Remove from collection" />}
+      text={
+        <FormattedMessage defaultMessage="Remove from collection" id="0Om2Kl" />
+      }
       icon={<IconTrash20 size="mdS" />}
       onClick={() => {
         onClick()

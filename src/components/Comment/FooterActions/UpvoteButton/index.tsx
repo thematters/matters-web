@@ -1,12 +1,11 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
-import { numAbbr, translate } from '~/common/utils'
+import { numAbbr } from '~/common/utils'
 import {
   Button,
   IconUpVote16,
   IconUpVoted16,
-  LanguageContext,
   TextIcon,
   useMutation,
 } from '~/components'
@@ -52,7 +51,7 @@ const UpvoteButton = ({
   disabled,
   inCard,
 }: UpvoteButtonProps) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const [unvote] = useMutation<UnvoteCommentMutation>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
@@ -88,11 +87,9 @@ const UpvoteButton = ({
           onClick ? onClick() : unvote()
         }}
         disabled={disabled}
-        aria-label={translate({
-          zh_hant: '取消點讚',
-          zh_hans: '取消点赞',
-          en: 'Undo Upvote',
-          lang,
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Undo upvote',
+          id: 'z3uIHQ',
         })}
       >
         <TextIcon icon={<IconUpVoted16 />} color="green" weight="md">
@@ -110,11 +107,9 @@ const UpvoteButton = ({
         onClick ? onClick() : upvote()
       }}
       disabled={disabled}
-      aria-label={translate({
-        zh_hant: '點讚',
-        zh_hans: '点赞',
-        en: 'Upvote',
-        lang,
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Upvote',
+        id: 'ZD+vm/',
       })}
     >
       <TextIcon icon={<IconUpVote16 color="grey" />} color="grey" weight="md">

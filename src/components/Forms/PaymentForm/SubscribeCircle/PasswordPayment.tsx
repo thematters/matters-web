@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
@@ -48,9 +48,11 @@ const Confirm: React.FC<FormProps> = ({
   switchToResetPassword,
   closeDialog,
 }) => {
+  const intl = useIntl()
+  const { lang } = useContext(LanguageContext)
+
   const formId = 'subscirbe-circle-form'
 
-  const { lang } = useContext(LanguageContext)
   const [subscribeCircle] = useMutation<SubscribeCircleMutation>(
     SUBSCRIBE_CIRCLE,
     undefined,
@@ -84,8 +86,8 @@ const Confirm: React.FC<FormProps> = ({
         submitCallback()
       } catch (error) {
         setSubmitting(false)
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        setFieldError('password', messages[codes[0]])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        setFieldError('password', intl.formatMessage(messages[codes[0]]))
         setFieldValue('password', '', false)
       }
     },
@@ -163,7 +165,7 @@ const Confirm: React.FC<FormProps> = ({
           <>
             <Dialog.TextButton
               color="greyDarker"
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               onClick={closeDialog}
             />
             <Dialog.TextButton

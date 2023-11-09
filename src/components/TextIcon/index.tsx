@@ -22,7 +22,14 @@ export interface TextIconProps {
 
   color?: TextIconColor
   size?: 'xs' | 'sm' | 'smS' | 'mdS' | 'md' | 'xm' | 'lg' | 'xl'
-  spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
+  spacing?:
+    | 0
+    | 'xxxtight'
+    | 'xxtight'
+    | 'basexxtight'
+    | 'xtight'
+    | 'tight'
+    | 'base'
   weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
   allowUserSelect?: boolean
 
@@ -58,6 +65,7 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
   textDecoration,
 
   children,
+  ...restProps
 }) => {
   const textIconClasses = classNames({
     [styles.textIcon]: true,
@@ -77,7 +85,7 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
 
   if (textPlacement === 'left') {
     return (
-      <span className={textIconClasses}>
+      <span className={textIconClasses} {...restProps}>
         {children && <span className={styles.text}>{children}</span>}
 
         {icon}
@@ -86,7 +94,7 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
   }
 
   return (
-    <span className={textIconClasses}>
+    <span className={textIconClasses} {...restProps}>
       {icon}
 
       {children && <span className={styles.text}>{children}</span>}

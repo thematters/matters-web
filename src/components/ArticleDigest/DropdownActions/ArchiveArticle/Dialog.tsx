@@ -83,6 +83,7 @@ const ArchiveArticleDialog = ({
       message: (
         <FormattedMessage
           defaultMessage="Archived"
+          id="a/YQ1Z"
           description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
         />
       ),
@@ -104,7 +105,9 @@ const ArchiveArticleDialog = ({
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={<FormattedMessage defaultMessage="Archive works" />}
+          title={
+            <FormattedMessage defaultMessage="Archive works" id="KQi/UZ" />
+          }
         />
 
         <Dialog.Message>
@@ -112,16 +115,23 @@ const ArchiveArticleDialog = ({
             <p>
               <FormattedMessage
                 defaultMessage="Are you sure you want to archive ‘{article}’?"
+                id="mWcca9"
                 values={{
                   article: <span className="u-highlight">{article.title}</span>,
                 }}
               />
               <br />
-              <FormattedMessage defaultMessage="Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)" />
+              <FormattedMessage
+                defaultMessage="Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
+                id="A3g33H"
+              />
             </p>
           ) : (
             <p>
-              <FormattedMessage defaultMessage="This operation cannot be undone, confirm archiving?" />
+              <FormattedMessage
+                defaultMessage="This operation cannot be undone, confirm archiving?"
+                id="yBUiiy"
+              />
             </p>
           )}
         </Dialog.Message>
@@ -132,9 +142,12 @@ const ArchiveArticleDialog = ({
             <Dialog.RoundedButton
               text={
                 isPreConfirm ? (
-                  <FormattedMessage defaultMessage="Archive" />
+                  <FormattedMessage defaultMessage="Archive" id="hrgo+E" />
                 ) : (
-                  <FormattedMessage defaultMessage="Confirm Archiving" />
+                  <FormattedMessage
+                    defaultMessage="Confirm Archiving"
+                    id="HJ0iZJ"
+                  />
                 )
               }
               color={loading ? 'green' : 'red'}
@@ -146,9 +159,12 @@ const ArchiveArticleDialog = ({
             <Dialog.TextButton
               text={
                 isPreConfirm ? (
-                  <FormattedMessage defaultMessage="Archive" />
+                  <FormattedMessage defaultMessage="Archive" id="hrgo+E" />
                 ) : (
-                  <FormattedMessage defaultMessage="Confirm Archiving" />
+                  <FormattedMessage
+                    defaultMessage="Confirm Archiving"
+                    id="HJ0iZJ"
+                  />
                 )
               }
               color={loading ? 'green' : 'red'}

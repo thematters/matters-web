@@ -51,9 +51,9 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
     >
       <TextIcon weight="md" size="mdS">
         {hover ? (
-          <FormattedMessage defaultMessage="Unfollow" />
+          <FormattedMessage defaultMessage="Unfollow" id="izWS4J" />
         ) : (
-          <FormattedMessage defaultMessage="Followed" />
+          <FormattedMessage defaultMessage="Followed" id="LGox1K" />
         )}
       </TextIcon>
     </Button>

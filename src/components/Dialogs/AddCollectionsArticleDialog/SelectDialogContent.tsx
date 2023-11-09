@@ -67,7 +67,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
           type="submit"
           form={formId}
           disabled={formik.isSubmitting || checkingIds.length === 0}
-          text={<FormattedMessage defaultMessage="Confirm" />}
+          text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
           loading={formik.isSubmitting}
         />
       </>
@@ -76,7 +76,9 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<FormattedMessage defaultMessage="Add to collection" />}
+        title={
+          <FormattedMessage defaultMessage="Add to collection" id="ub1kHa" />
+        }
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />
@@ -115,7 +117,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
 
         <button className={styles.button} onClick={switchToCreating}>
           <TextIcon icon={<IconAdd20 size="mdS" />}>
-            <FormattedMessage defaultMessage="New Collection" />
+            <FormattedMessage defaultMessage="New Collection" id="L4Fcr8" />
           </TextIcon>
         </button>
       </section>
@@ -124,7 +126,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

@@ -28,6 +28,7 @@ const RevisedArticleNotPublishedNotice = ({
         <NoticeHead>
           <FormattedMessage
             defaultMessage="Failed to republish article"
+            id="QV19cI"
             description="src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
           />
         </NoticeHead>

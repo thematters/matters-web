@@ -1,6 +1,6 @@
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 
 import AppreciateButton from './AppreciateButton'
@@ -18,7 +18,7 @@ const AnonymousButton = ({
     onClick={() => {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { source: UNIVERSAL_AUTH_SOURCE.appreciation },
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.appreciation },
         })
       )
     }}

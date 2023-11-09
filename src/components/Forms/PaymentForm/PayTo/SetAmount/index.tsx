@@ -10,6 +10,7 @@ import { waitForTransaction } from 'wagmi/actions'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
+  WALLET_ERROR_MESSAGES,
 } from '~/common/enums'
 import {
   featureSupportedChains,
@@ -18,7 +19,6 @@ import {
   numRound,
   validateCurrency,
   validateDonationAmount,
-  WALLET_ERROR_MESSAGES,
 } from '~/common/utils'
 import {
   Button,
@@ -404,12 +404,18 @@ const SetAmount: React.FC<FormProps> = ({
               <CopyToClipboard
                 text={viewer.info.ethAddress || ''}
                 successMessage={
-                  <FormattedMessage defaultMessage="Address copied" />
+                  <FormattedMessage
+                    defaultMessage="Address copied"
+                    id="+aMAeT"
+                  />
                 }
               >
                 <Button
                   spacing={['xtight', 'xtight']}
-                  aria-label={intl.formatMessage({ defaultMessage: 'Copy' })}
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Copy',
+                    id: '4l6vz1',
+                  })}
                 >
                   <TextIcon
                     icon={<IconCopy16 color="black" size="xs" />}
@@ -430,7 +436,7 @@ const SetAmount: React.FC<FormProps> = ({
           <>
             <SubmitButton mode="rounded" {...submitButtonProps} />
             <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               color="greyDarker"
               onClick={back}
             />
@@ -439,7 +445,7 @@ const SetAmount: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" />}
+              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               color="greyDarker"
               onClick={back}
             />

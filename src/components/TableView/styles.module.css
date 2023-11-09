@@ -1,0 +1,27 @@
+.group {
+  & .name {
+    margin: var(--spacing-x-loose) 0 0;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-grey-dark);
+  }
+
+  & .list {
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+
+    & > li {
+      border-bottom: 1px dashed var(--color-grey-light);
+    }
+  }
+}
+
+.spacingXBase {
+  margin-right: var(--spacing-base);
+  margin-left: var(--spacing-base);
+}
+
+.spacingYXloose {
+  margin-top: var(--spacing-x-loose);
+  margin-bottom: var(--spacing-x-loose);
+}

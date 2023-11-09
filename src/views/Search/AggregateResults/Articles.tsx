@@ -51,7 +51,7 @@ const AggregateArticleResults = () => {
 
   // pagination
   const connectionPath = 'search'
-  const { edges, pageInfo, totalCount } = data?.search || {}
+  const { edges, pageInfo } = data?.search || {}
 
   const intl = useIntl()
 
@@ -106,11 +106,11 @@ const AggregateArticleResults = () => {
       <Head
         title={intl.formatMessage(
           {
-            defaultMessage:
-              '{q}: {totalCount, plural, =0 {} one {} other {# Results}} - Matters Search',
+            defaultMessage: '{q} - Matters Search',
+            id: 'l9LpDx',
             description: 'src/views/Search/AggregateResults/Articles.tsx',
           },
-          { q: stripSpaces(q), totalCount: +(totalCount?.toPrecision(2) ?? 0) }
+          { q: stripSpaces(q) }
         )}
         path={`/search?q=${stripSpaces(q)}&type=article`}
         noSuffix
@@ -121,7 +121,9 @@ const AggregateArticleResults = () => {
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
-        eof={<FormattedMessage defaultMessage="End of the results" />}
+        eof={
+          <FormattedMessage defaultMessage="End of the results" id="ui1+QC" />
+        }
       >
         <List>
           {edges.map(
@@ -134,7 +136,6 @@ const AggregateArticleResults = () => {
                         Partial<ArticleDigestFeedArticlePrivateFragment>
                     }
                     hasCircle={false}
-                    hasFollow={false}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'search_article',

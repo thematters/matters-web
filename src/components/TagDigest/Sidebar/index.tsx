@@ -52,7 +52,10 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
       testId={TEST_ID.DIGEST_TAG_SIDEBAR}
     >
       <section className={styles.container}>
-        <section className={styles.cover}>
+        <section
+          className={styles.cover}
+          data-test-id={TEST_ID.DIGEST_TAG_SIDEBAR_COVER}
+        >
           <Link {...path} legacyBehavior>
             <a>
               <VisuallyHidden>
@@ -62,6 +65,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
                 url={tag.cover || IMAGE_TAG_COVER.src}
                 width={144}
                 height={144}
+                disableAnimation={true}
               />
             </a>
           </Link>

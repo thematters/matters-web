@@ -8,13 +8,11 @@ import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
-  STORAGE_KEY_REFERRAL_CODE,
 } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
   setCookies,
-  storage,
   validateComparedPassword,
   validatePassword,
 } from '~/common/utils'
@@ -138,14 +136,6 @@ const Password: React.FC<FormProps> = ({
         })
 
         analytics.identifyUser()
-        const referralCode =
-          storage.get(STORAGE_KEY_REFERRAL_CODE)?.referralCode || undefined
-        if (referralCode) {
-          analytics.trackEvent('signup', {
-            type: 'signup',
-            referralCode,
-          })
-        }
 
         setSubmitting(false)
 
@@ -155,8 +145,8 @@ const Password: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        setFieldError('password', messages[codes[0]])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        setFieldError('password', intl.formatMessage(messages[codes[0]]))
       }
     },
   })
@@ -164,19 +154,23 @@ const Password: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<FormattedMessage defaultMessage="Password" />}
+        label={<FormattedMessage defaultMessage="Password" id="5sg7KC" />}
         type="password"
         name="password"
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Enter Password',
+          id: 'A41QIy',
         })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
         onChange={handleChange}
         hint={
-          <FormattedMessage defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed" />
+          <FormattedMessage
+            defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
+            id="ml3SZN"
+          />
         }
         spacingBottom="base"
       />
@@ -185,6 +179,7 @@ const Password: React.FC<FormProps> = ({
         label={
           <FormattedMessage
             defaultMessage="Enter password again"
+            id="NzfL1d"
             description="src/components/Forms/EmailSignUpForm/Password.tsx"
           />
         }
@@ -193,12 +188,16 @@ const Password: React.FC<FormProps> = ({
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Enter password again',
+          id: 'NzfL1d',
           description: 'src/components/Forms/EmailSignUpForm/Password.tsx',
         })}
         value={values.comparedPassword}
         error={touched.comparedPassword && errors.comparedPassword}
         hint={
-          <FormattedMessage defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed" />
+          <FormattedMessage
+            defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
+            id="ml3SZN"
+          />
         }
         onBlur={handleBlur}
         onChange={handleChange}
@@ -211,7 +210,7 @@ const Password: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting}
-      text={<FormattedMessage defaultMessage="Confirm" />}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting}
     />
   )
@@ -226,7 +225,7 @@ const Password: React.FC<FormProps> = ({
               type="submit"
               form={formId}
               disabled={isSubmitting}
-              text={<FormattedMessage defaultMessage="Confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
               loading={isSubmitting}
             />
           }
@@ -251,7 +250,7 @@ const Password: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />

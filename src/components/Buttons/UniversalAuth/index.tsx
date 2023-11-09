@@ -1,51 +1,47 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
-  CLOSE_ACTIVE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { analytics, appendTarget } from '~/common/utils'
-import { Button, Media, TextIcon, Translate } from '~/components'
+import { analytics } from '~/common/utils'
+import { Button, TextIcon } from '~/components'
 
-export const UniversalAuthButton: React.FC = () => {
-  const smUpProps = {
+type UniversalAuthButtonProps = { resideIn?: 'nav' | 'sideNav' }
+
+export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
+  resideIn,
+}) => {
+  const props = {
     onClick: () => {
       analytics.trackEvent('click_button', {
         type: 'login/signup',
       })
-      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
-    },
-  }
-  const smProps = {
-    ...appendTarget(PATHS.SIGNUP, true),
-    onClick: () => {
-      analytics.trackEvent('click_button', {
-        type: 'login/signup',
-      })
-    },
-  }
 
-  const ButtonText = () => (
-    <TextIcon color="white" weight="md">
-      <Translate id="authEntries" />
-    </TextIcon>
-  )
+      // deprecated
+      // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          ...(resideIn
+            ? { detail: { trigger: UNIVERSAL_AUTH_TRIGGER[resideIn] } }
+            : {}),
+        })
+      )
+    },
+  }
 
   return (
     <>
-      <Media lessThan="lg">
-        <Button bgColor="green" spacing={['tight', 'base']} {...smProps}>
-          <ButtonText />
-        </Button>
-      </Media>
-
-      <Media greaterThanOrEqual="lg">
-        <Button bgColor="green" spacing={['tight', 'base']} {...smUpProps}>
-          <ButtonText />
-        </Button>
-      </Media>
+      <Button bgColor="green" spacing={['tight', 'base']} {...props}>
+        <TextIcon color="white" weight="md">
+          <FormattedMessage
+            defaultMessage="Enter"
+            description="src/components/Buttons/UniversalAuth/index.tsx"
+            id="qVhxp5"
+          />
+        </TextIcon>
+      </Button>
     </>
   )
 }

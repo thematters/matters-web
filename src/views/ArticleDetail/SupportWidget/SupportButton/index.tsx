@@ -1,9 +1,12 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
+  ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   REFETCH_DONATORS,
-  UNIVERSAL_AUTH_SOURCE,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { DonationDialog, toast, Translate, ViewerContext } from '~/components'
@@ -37,7 +40,7 @@ const SupportButton = ({
       message: isAuthor ? (
         <Translate zh_hant="去支持其他用戶吧" zh_hans="去支持其他用户吧" />
       ) : (
-        <Translate id="FORBIDDEN_BY_STATE" />
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
       ),
     })
   }
@@ -59,10 +62,9 @@ const SupportButton = ({
               if (!viewer.isAuthed) {
                 window.dispatchEvent(
                   new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-                    detail: { source: UNIVERSAL_AUTH_SOURCE.support },
+                    detail: { trigger: UNIVERSAL_AUTH_TRIGGER.support },
                   })
                 )
-
                 return
               }
 

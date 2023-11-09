@@ -10,10 +10,10 @@ import {
 } from '~/common/enums'
 import {
   Button,
-  Form,
   Head,
   Layout,
   Spinner,
+  TableView,
   TextIcon,
   Translate,
   ViewerContext,
@@ -117,7 +117,7 @@ const Wallet = () => {
       </section>
 
       <Layout.Main.Spacing>
-        <Form.List spacingX={0}>
+        <TableView spacingX={0}>
           {hasPaymentPassword && (
             <>
               <PaymentPassword />
@@ -127,7 +127,7 @@ const Wallet = () => {
           <ViewStripeCustomerPortal />
           {hasStripeAccount && <ViewStripeAccount />}
           <PaymentPointer />
-        </Form.List>
+        </TableView>
       </Layout.Main.Spacing>
     </Layout.Main>
   )

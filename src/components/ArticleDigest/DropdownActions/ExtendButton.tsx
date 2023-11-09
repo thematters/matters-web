@@ -1,17 +1,19 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
+  ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   IconCollection24,
   Menu,
   toast,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -44,6 +46,7 @@ const ExtendButton = ({
   article: ExtendButtonArticleFragment
 }) => {
   const router = useRouter()
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const [collectArticle] = useMutation<ExtendArticleMutation>(EXTEND_ARTICLE, {
     variables: { title: '', collection: [article.id] },
@@ -53,32 +56,40 @@ const ExtendButton = ({
     if (!viewer.isAuthed) {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { source: UNIVERSAL_AUTH_SOURCE.collectArticle },
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.collectArticle },
         })
       )
+
       return
     }
 
     if (viewer.isInactive) {
       toast.error({
-        message: <Translate id="FORBIDDEN" />,
+        message: (
+          <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN]} />
+        ),
       })
 
       return
     }
 
     const { data } = await collectArticle()
-    const { slug = '', id } = data?.putDraft || {}
+    const { id } = data?.putDraft || {}
 
     if (id) {
-      const path = toPath({ page: 'draftDetail', slug, id })
+      const path = toPath({ page: 'draftDetail', id })
       router.push(path.href)
     }
   }
 
   return (
     <Menu.Item
-      text={<Translate id="collectArticle" />}
+      text={intl.formatMessage({
+        defaultMessage: 'Collect Article',
+        id: '8UWUW8',
+        description:
+          'src/components/ArticleDigest/DropdownActions/ExtendButton.tsx',
+      })}
       icon={<IconCollection24 size="mdS" />}
       onClick={onClick}
     />

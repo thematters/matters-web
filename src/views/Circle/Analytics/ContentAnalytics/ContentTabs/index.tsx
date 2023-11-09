@@ -21,6 +21,7 @@ const ContentTabs: React.FC<Props> = ({ type, setType }) => {
       >
         <FormattedMessage
           defaultMessage="Paywalled"
+          id="LOefol"
           description="src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
         />
       </SegmentedTabs.Tab>
@@ -28,6 +29,7 @@ const ContentTabs: React.FC<Props> = ({ type, setType }) => {
       <SegmentedTabs.Tab onClick={() => setType('public')} selected={isPublic}>
         <FormattedMessage
           defaultMessage="Public"
+          id="/podGX"
           description="src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
         />
       </SegmentedTabs.Tab>

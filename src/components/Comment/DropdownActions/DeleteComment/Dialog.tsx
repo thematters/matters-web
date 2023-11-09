@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { COMMENT_TYPE_TEXT } from '~/common/enums'
+import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import {
   CommentFormType,
   Dialog,
@@ -59,6 +59,7 @@ const DeleteCommentDialog = ({
       message: (
         <FormattedMessage
           defaultMessage="{commentType} has been deleted"
+          id="h9CG9E"
           description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
           values={{
             commentType: COMMENT_TYPE_TEXT[lang][type],
@@ -72,11 +73,16 @@ const DeleteCommentDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_COMMENT_DELETE}
+      >
         <Dialog.Header
           title={
             <FormattedMessage
               defaultMessage="Delete {commentType}"
+              id="Cdkhl8"
               description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
               values={{
                 commentType: COMMENT_TYPE_TEXT[lang][type],
@@ -89,6 +95,7 @@ const DeleteCommentDialog = ({
           <p>
             <FormattedMessage
               defaultMessage="After deletion, the {commentType} will be removed immediately"
+              id="77tYPg"
               description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
               values={{
                 commentType: COMMENT_TYPE_TEXT[lang][type],
@@ -101,7 +108,7 @@ const DeleteCommentDialog = ({
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
               color="red"
               onClick={() => {
                 onDelete()
@@ -111,7 +118,7 @@ const DeleteCommentDialog = ({
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Confirm" />}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
               color="red"
               onClick={() => {
                 onDelete()

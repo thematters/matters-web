@@ -2,7 +2,6 @@ import gql from 'graphql-tag'
 
 import { Avatar } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
-import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 
 export const fragments = {
   user: {
@@ -28,11 +27,9 @@ export const fragments = {
         id
         ...FollowStateUserPrivate
         ...FollowButtonUserPrivate
-        ...UnblockUserButtonUserPrivate
       }
       ${FollowUserButton.State.fragments.user.private}
       ${FollowUserButton.fragments.user.private}
-      ${UnblockUserButton.fragments.user.private}
     `,
   },
 }

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
 import {
@@ -57,7 +57,7 @@ const Follow = ({ circle }: FollowProps) => {
     if (!viewer.isAuthed) {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { source: UNIVERSAL_AUTH_SOURCE.followCircle },
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.followCircle },
         })
       )
       return
@@ -76,7 +76,7 @@ const Follow = ({ circle }: FollowProps) => {
       onClick={onClick}
     >
       <TextIcon weight="md" size="mdS">
-        <FormattedMessage defaultMessage="Follow" />
+        <FormattedMessage defaultMessage="Follow" id="ieGrWo" />
       </TextIcon>
     </Button>
   )

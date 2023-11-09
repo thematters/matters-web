@@ -20,6 +20,7 @@ const UserNewFollowerNotice = ({
       action={
         <FormattedMessage
           defaultMessage="followed you"
+          id="k5NnNF"
           description="src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
         />
       }
