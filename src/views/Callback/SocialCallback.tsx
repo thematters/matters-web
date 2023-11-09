@@ -82,7 +82,9 @@ const SocialCallback = ({ type }: Props) => {
     const localOauthToken = sessionStorage.get(
       OAUTH_SESSSION_STORAGE_OAUTH_TOKEN
     )
-    const localOauthType = sessionStorage.get(OAUTH_SESSSION_STORAGE_OAUTH_TYPE)
+    const localOauthType = sessionStorage.remove(
+      OAUTH_SESSSION_STORAGE_OAUTH_TYPE
+    )
 
     if (!!error) {
       window.location.href = localPath
