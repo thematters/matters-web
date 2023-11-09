@@ -34,7 +34,9 @@ export const editMetaFragment = gql`
     license
     requestForDonation
     replyToDonator
+    sensitiveByAuthor
     iscnPublish
+    canComment
   }
   ${ArticleDigestDropdown.fragments.article}
   ${assetFragment}
@@ -44,8 +46,8 @@ export const editMetaFragment = gql`
 /**
  * Fetch draft detail or assets only
  */
-export const DRAFT_DETAIL = gql`
-  query DraftDetailQuery($id: ID!) {
+export const DRAFT_DETAIL_CIRCLES = gql`
+  query DraftDetailCirclesQuery {
     viewer {
       id
       ownCircles {
@@ -54,6 +56,12 @@ export const DRAFT_DETAIL = gql`
       displayName
       avatar
     }
+  }
+  ${CircleDigest.Rich.fragments.circle.public}
+`
+
+export const DRAFT_DETAIL = gql`
+  query DraftDetailQuery($id: ID!) {
     node(input: { id: $id }) {
       id
       ... on Draft {
@@ -165,9 +173,29 @@ export const SET_SUPPORT_REQUEST_REPLY = gql`
   }
 `
 
+export const SET_SENSITIVE_BY_AUTHOR = gql`
+  mutation SetDraftSensitiveByAuthor($id: ID!, $sensitiveByAuthor: Boolean) {
+    putDraft(input: { id: $id, sensitive: $sensitiveByAuthor }) {
+      id
+      ...EditMetaDraft
+    }
+  }
+  ${editMetaFragment}
+`
+
 export const SET_PUBLISH_ISCN = gql`
   mutation SetDraftPublishISCN($id: ID!, $iscnPublish: Boolean) {
     putDraft(input: { id: $id, iscnPublish: $iscnPublish }) {
+      id
+      ...EditMetaDraft
+    }
+  }
+  ${editMetaFragment}
+`
+
+export const SET_CAN_COMMENT = gql`
+  mutation SetDraftCanComment($id: ID!, $canComment: Boolean) {
+    putDraft(input: { id: $id, canComment: $canComment }) {
       id
       ...EditMetaDraft
     }

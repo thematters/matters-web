@@ -2,15 +2,16 @@ import { useQuery } from '@apollo/react-hooks'
 import _chunk from 'lodash/chunk'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
+  Media,
   QueryError,
   ShuffleButton,
   Slides,
   Spinner,
-  Translate,
   usePublicQuery,
   UserDigest,
   ViewerContext,
@@ -21,7 +22,7 @@ import { FeedAuthorsQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import { FEED_AUTHORS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)
@@ -80,16 +81,27 @@ const Authors = () => {
   }
 
   const SlidesHeader = (
-    <SectionHeader
-      type="authors"
-      rightButton={<ShuffleButton onClick={shuffle} />}
-      viewAll={false}
-    />
+    <>
+      <Media lessThan="md">
+        <SectionHeader
+          type="authors"
+          rightButton={<ShuffleButton onClick={shuffle} />}
+          viewAll={false}
+        />
+      </Media>
+      <Media greaterThanOrEqual="md">
+        <SectionHeader
+          type="authors"
+          rightButton={<ShuffleButton onClick={shuffle} />}
+          viewAll={true}
+        />
+      </Media>
+    </>
   )
 
   return (
-    <section className="authors">
-      <Slides bgColor="yellow-lighter" header={SlidesHeader}>
+    <section className={styles.authors}>
+      <Slides header={SlidesHeader}>
         {loading && (
           <Slides.Item size="md">
             <Spinner />
@@ -106,6 +118,8 @@ const Authors = () => {
                     user={node}
                     spacing={['tight', 0]}
                     bgColor="none"
+                    hasFollow={false}
+                    hasState={false}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'authors',
@@ -121,19 +135,22 @@ const Authors = () => {
           ))}
       </Slides>
 
-      <section className="backToAll">
-        <ViewMoreCard
-          spacing={['tight', 'tight']}
-          href={PATHS.AUTHORS}
-          iconProps={{ size: 'sm' }}
-          textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
-          textAlign="center"
-        >
-          <Translate id="viewAll" />
-        </ViewMoreCard>
-      </section>
-
-      <style jsx>{styles}</style>
+      <Media lessThan="md">
+        <section className={styles.backToAll}>
+          <ViewMoreCard
+            spacing={['tight', 'tight']}
+            href={PATHS.AUTHORS}
+            textIconProps={{
+              size: 'md',
+              weight: 'semibold',
+              spacing: 'xxtight',
+            }}
+            textAlign="center"
+          >
+            <FormattedMessage defaultMessage="View All" id="wbcwKd" />
+          </ViewMoreCard>
+        </section>
+      </Media>
     </section>
   )
 }

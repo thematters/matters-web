@@ -1,7 +1,6 @@
-import { CircleDigest, Translate, UserDigest } from '~/components'
+import { CircleDigest, Translate } from '~/components'
 import { UserBroadcastCircleActivityFragment } from '~/gql/graphql'
 
-import UnfollowCircleActionButton from '../DropdownActions/UnfollowCircle'
 import FeedComment from '../FollowingFeedComment'
 import FeedHead from '../FollowingFeedHead'
 import { fragments } from './gql'
@@ -15,16 +14,18 @@ const UserBroadcastCircleActivity = ({
   <FeedComment
     header={
       <FeedHead>
-        <UserDigest.Plain user={actor} />
-        <span>
-          <Translate zh_hant="廣播於" zh_hans="广播于" en="broadcasted on" />
-        </span>
         <CircleDigest.Plain circle={target} />
+        <span>
+          <Translate
+            zh_hant="新廣播："
+            zh_hans="新广播："
+            en="new broadcast:"
+          />
+        </span>
       </FeedHead>
     }
     comment={node}
     date={createdAt}
-    actions={<UnfollowCircleActionButton circle={target} />}
   />
 )
 

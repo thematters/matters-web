@@ -1,16 +1,13 @@
 import _isNil from 'lodash/isNil'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
+import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
 import {
-  Button,
-  TextIcon,
-  Translate,
-  useMutation,
-  ViewerContext,
-} from '~/components'
+  updateCircleFollowerCount,
+  updateCircleFollowers,
+} from '~/components/GQL'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
-import updateCircleFollowerCount from '~/components/GQL/updates/circleFollowerCount'
-import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
 import {
   FollowButtonCirclePrivateFragment,
   ToggleFollowCircleMutation,
@@ -63,8 +60,12 @@ const Unfollow = ({ circle }: UnfollowCircleProps) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <TextIcon weight="md" size="md-s">
-        {hover ? <Translate id="unfollow" /> : <Translate id="followed" />}
+      <TextIcon weight="md" size="mdS">
+        {hover ? (
+          <FormattedMessage defaultMessage="Unfollow" id="izWS4J" />
+        ) : (
+          <FormattedMessage defaultMessage="Followed" id="LGox1K" />
+        )}
       </TextIcon>
     </Button>
   )

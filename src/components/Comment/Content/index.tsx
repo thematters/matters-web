@@ -1,24 +1,24 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
-import contentCommentStyles from '~/common/styles/utils/content.comment.css'
-import { captureClicks } from '~/common/utils'
-import { CommentFormType, Expandable, Translate } from '~/components'
+import { capitalizeFirstLetter, captureClicks } from '~/common/utils'
+import { CommentFormType, Expandable, LanguageContext } from '~/components'
 import {
   ContentCommentPrivateFragment,
   ContentCommentPublicFragment,
 } from '~/gql/graphql'
 
 import Collapsed from './Collapsed'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface ContentProps {
   comment: ContentCommentPublicFragment & Partial<ContentCommentPrivateFragment>
   type: CommentFormType
-  size?: 'sm' | 'md-s'
-  bgColor?: 'grey-lighter' | 'white'
-  bgActiveColor?: 'grey-lighter' | 'white'
+  size?: 'sm' | 'mdS'
+  bgColor?: 'greyLighter' | 'white'
   limit?: number
   textIndent?: boolean
   isRichShow?: boolean
@@ -50,17 +50,17 @@ const Content = ({
   type,
   size,
   bgColor,
-  bgActiveColor,
-  limit = 8,
+  limit = 10,
   textIndent = false,
   isRichShow = true,
 }: ContentProps) => {
+  const { lang } = useContext(LanguageContext)
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
 
   const contentClasses = classNames({
-    content: true,
-    [`size-${size}`]: !!size,
+    [styles.content]: true,
+    [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
   })
 
   if (state === 'collapsed' || isBlocked) {
@@ -69,11 +69,15 @@ const Content = ({
         content={content}
         collapsedContent={
           isBlocked ? (
-            <Translate zh_hant="你屏蔽了该用户" zh_hans="你封鎖了該用戶" />
+            <FormattedMessage
+              defaultMessage="You have blocked that user"
+              id="Lb0JsC"
+            />
           ) : (
-            <Translate
-              zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}被創作者闔上`}
-              zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}被创作者折叠`}
+            <FormattedMessage
+              defaultMessage="This {type} has been collapsed by the author"
+              id="us5QHt"
+              values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
             />
           )
         }
@@ -90,7 +94,6 @@ const Content = ({
           limit={limit}
           isRichShow={isRichShow}
           bgColor={bgColor}
-          bgActiveColor={bgActiveColor}
           textIndent={textIndent}
         >
           <section
@@ -102,9 +105,6 @@ const Content = ({
             data-test-id={TEST_ID.COMMENT_CONETNT}
           />
         </Expandable>
-
-        <style jsx>{styles}</style>
-        <style jsx>{contentCommentStyles}</style>
       </>
     )
   }
@@ -115,12 +115,11 @@ const Content = ({
         className={`${contentClasses} inactive`}
         data-test-id={TEST_ID.COMMENT_CONETNT}
       >
-        <Translate
-          zh_hant={`此${COMMENT_TYPE_TEXT.zh_hant[type]}因違反用戶協定而被隱藏`}
-          zh_hans={`此${COMMENT_TYPE_TEXT.zh_hans[type]}因违反用户协定而被隐藏`}
+        <FormattedMessage
+          defaultMessage="This {type} has been archived due to a violation of the user agreement"
+          id="cCsxxw"
+          values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
         />
-
-        <style jsx>{styles}</style>
       </p>
     )
   }
@@ -128,12 +127,11 @@ const Content = ({
   if (state === 'archived') {
     return (
       <p className={`${contentClasses} inactive`}>
-        <Translate
-          zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}被原作者刪除`}
-          zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}被原作者删除`}
+        <FormattedMessage
+          defaultMessage="This {type} has been deleted by the author"
+          id="fDdcbi"
+          values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
         />
-
-        <style jsx>{styles}</style>
       </p>
     )
   }

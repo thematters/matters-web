@@ -32,8 +32,11 @@ type EventArgs =
   | ['view_add_credit_dialog', ViewDialogProp]
   | ['view_donation_dialog', ViewDialogProp]
   | ['view_subscribe_circle_dialog', ViewDialogProp]
+  | ['banner_exposure', BannerExposureProp]
   | ['card_exposure', CardExposureProp]
   | ['tag_exposure', TagExposureProp]
+  | ['image_upload', ImageUploadProp]
+  | ['authenticate', AuthenticateProp]
 
 /**
  * Event: Page View
@@ -80,6 +83,7 @@ interface ClickButtonProp {
 interface LoadMoreProp {
   type:
     | ArticleFeedType
+    | CollectionFeedType
     | CommentFeedType
     | UserFeedType
     | TagFeedType
@@ -146,6 +150,17 @@ interface ClickFeedProp {
  * Event: Card Exposure
  */
 
+interface BannerExposureProp {
+  id: string
+  // feedType: FeedType
+  // contentType: ContentType | ActivityType
+  location: number | string
+  title: string
+  link: string
+  lang: Language
+  delay_msecs?: number
+}
+
 interface CardExposureProp {
   id: string
   feedType: FeedType
@@ -160,9 +175,22 @@ interface TagExposureProp {
   delay_msecs?: number
 }
 
+interface ImageUploadProp {
+  uploadURL: string
+  type: string
+  size: number | string
+  delay_msecs?: number
+}
+
+interface AuthenticateProp {
+  step: string
+  trigger?: string
+}
+
 // content type
 export type ContentType =
   | 'article'
+  | 'collection'
   | 'comment'
   | 'circle'
   | 'user'
@@ -186,12 +214,14 @@ export type ActivityType =
 // feed type
 export type FeedType =
   | ArticleFeedType
+  | CollectionFeedType
   | CommentFeedType
   | UserFeedType
   | TagFeedType
   | CircleFeedType
   | 'following'
   | 'search_history'
+  | 'user_pinned_work'
 
 type ArticleFeedType =
   | 'all_authors'
@@ -218,6 +248,8 @@ type ArticleFeedType =
   | 'wallet'
   | 'related_donations'
   | 'circle_detail'
+
+type CollectionFeedType = 'user_collection' | 'collection_article'
 
 type CommentFeedType =
   //  'follow-comment' |

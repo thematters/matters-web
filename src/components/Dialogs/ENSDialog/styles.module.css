@@ -1,0 +1,21 @@
+.content {
+  padding: var(--spacing-loose) var(--spacing-base);
+  font-size: var(--font-size-md-s);
+  color: var(--color-grey-darker);
+  text-align: center;
+
+  & > * + * {
+    margin-top: var(--spacing-loose);
+  }
+
+  & a {
+    color: var(--color-matters-green);
+    text-decoration: underline;
+  }
+}
+
+.error {
+  margin-top: var(--spacing-loose);
+  font-size: var(--font-size-xs);
+  color: var(--color-red);
+}

@@ -18,6 +18,9 @@ const fragments = {
     private: gql`
       fragment FollowButtonUserPrivate on User {
         id
+        status {
+          state
+        }
         isFollower
         isFollowee
       }
@@ -25,7 +28,7 @@ const fragments = {
   },
 }
 
-export type FollowUserButtonSize = 'lg' | 'md'
+export type FollowUserButtonSize = 'xl' | 'lg' | 'md'
 
 export const FollowUserButton = ({
   user,
@@ -40,6 +43,11 @@ export const FollowUserButton = ({
   if (user.isFollowee) {
     return <Unfollow user={user} size={size} />
   } else {
+    const isArchived = user?.status?.state === 'archived'
+    if (isArchived) {
+      return <span />
+    }
+
     return <Follow user={user} size={size} />
   }
 }

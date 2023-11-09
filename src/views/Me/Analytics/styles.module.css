@@ -1,0 +1,28 @@
+.title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--spacing-base) 0;
+  margin-bottom: var(--spacing-tight);
+}
+
+.noSupporter {
+  @mixin flex-center-start;
+
+  flex-direction: column;
+  width: 100%;
+  margin: var(--spacing-loose) 0;
+
+  & p {
+    margin-top: var(--spacing-x-tight);
+    color: var(--color-grey-darker);
+  }
+
+  @media (--sm-up) {
+    margin: var(--spacing-xx-loose) 0;
+  }
+}
+
+.noSupporterImg {
+  width: 85px;
+  height: 95px;
+}

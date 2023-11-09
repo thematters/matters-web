@@ -1,13 +1,8 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
 import { Z_INDEX } from '~/common/enums'
-import {
-  Button,
-  DropdownDialog,
-  Menu,
-  TextIcon,
-  Translate,
-  withIcon,
-} from '~/components'
+import { Button, Dropdown, Menu, TextIcon, withIcon } from '~/components'
 
 type SelectProps = {
   period: number
@@ -19,8 +14,11 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <Translate id="lately" /> 7{' '}
-          <Translate en="days" zh_hans="天" zh_hant="天" />
+          <FormattedMessage
+            defaultMessage="Last 7 days"
+            id="0iyH+q"
+            description="src/views/Me/Analytics/SelectPeriod/index.tsx"
+          />
         </>
       ),
       value: 7,
@@ -28,8 +26,11 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <Translate id="lately" /> 1{' '}
-          <Translate en="month" zh_hans="个月" zh_hant="個月" />
+          <FormattedMessage
+            defaultMessage="Last 1 month"
+            id="/BQWEh"
+            description="src/views/Me/Analytics/SelectPeriod/index.tsx"
+          />
         </>
       ),
       value: 30,
@@ -37,8 +38,11 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <Translate id="lately" /> 3{' '}
-          <Translate en="months" zh_hans="个月" zh_hant="個月" />
+          <FormattedMessage
+            defaultMessage="Last 3 months"
+            id="W0sZaX"
+            description="src/views/Me/Analytics/SelectPeriod/index.tsx"
+          />
         </>
       ),
       value: 90,
@@ -46,7 +50,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     {
       label: (
         <>
-          <Translate id="all" />
+          <FormattedMessage defaultMessage="All" id="zQvVDJ" />
         </>
       ),
       value: 0,
@@ -58,67 +62,48 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     const isOneMonthActive = period === options[1].value
     const isThreeMonthsActive = period === options[2].value
     const isAllActive = period === options[3].value
+
     return (
-      <Menu width="sm">
-        <Menu.Item onClick={() => onChange(options[0].value)}>
-          <TextIcon
-            spacing="base"
-            size="sm"
-            weight={isSevenDaysActive ? 'bold' : 'normal'}
-          >
-            {options[0].label}
-          </TextIcon>
-        </Menu.Item>
-        <Menu.Item onClick={() => onChange(options[1].value)}>
-          <TextIcon
-            spacing="base"
-            size="sm"
-            weight={isOneMonthActive ? 'bold' : 'normal'}
-          >
-            {options[1].label}
-          </TextIcon>
-        </Menu.Item>
-        <Menu.Item onClick={() => onChange(options[2].value)}>
-          <TextIcon
-            spacing="base"
-            size="sm"
-            weight={isThreeMonthsActive ? 'bold' : 'normal'}
-          >
-            {options[2].label}
-          </TextIcon>
-        </Menu.Item>
-        <Menu.Item onClick={() => onChange(options[3].value)}>
-          <TextIcon
-            spacing="base"
-            size="sm"
-            weight={isAllActive ? 'bold' : 'normal'}
-          >
-            {options[3].label}
-          </TextIcon>
-        </Menu.Item>
+      <Menu>
+        <Menu.Item
+          text={options[0].label}
+          onClick={() => onChange(options[0].value)}
+          weight={isSevenDaysActive ? 'bold' : 'normal'}
+        />
+
+        <Menu.Item
+          text={options[1].label}
+          onClick={() => onChange(options[1].value)}
+          weight={isOneMonthActive ? 'bold' : 'normal'}
+        />
+
+        <Menu.Item
+          text={options[2].label}
+          onClick={() => onChange(options[2].value)}
+          weight={isThreeMonthsActive ? 'bold' : 'normal'}
+        />
+
+        <Menu.Item
+          text={options[3].label}
+          onClick={() => onChange(options[3].value)}
+          weight={isAllActive ? 'bold' : 'normal'}
+        />
       </Menu>
     )
   }
   return (
-    <DropdownDialog
-      dropdown={{
-        appendTo: 'parent',
-        content: <AnalyticsSelectContent dropdown />,
-        placement: 'bottom-end',
-        zIndex: Z_INDEX.OVER_DIALOG,
-      }}
-      dialog={{
-        content: <AnalyticsSelectContent />,
-        title: '',
-      }}
+    <Dropdown
+      appendTo="parent"
+      content={<AnalyticsSelectContent dropdown />}
+      zIndex={Z_INDEX.OVER_DIALOG}
     >
-      {({ openDialog, type, ref }) => (
+      {({ openDropdown, ref }) => (
         <Button
+          onClick={openDropdown}
           size={[null, '1.25rem']}
           spacing={[0, 'xtight']}
           bgColor={'white'}
-          onClick={openDialog}
-          aria-haspopup={type}
+          aria-haspopup="listbox"
           ref={ref}
         >
           <TextIcon
@@ -132,7 +117,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
           </TextIcon>
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 

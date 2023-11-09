@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 
-import { Toast, Translate } from '~/components'
+import { Layout, Translate } from '~/components'
 import { StateArticleFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const fragments = {
   article: gql`
@@ -15,15 +15,15 @@ const fragments = {
 
 const BannedHeader = () => (
   <Translate
-    zh_hant="此作品因違反用戶協定而被強制隱藏。"
-    zh_hans="此作品因违反用户协定而被强制隐藏。"
+    zh_hant="此作品因違反用戶協定而被強制歸檔。"
+    zh_hans="此作品因违反用户协定而被强制封存。"
     en="This work is archived due to violation of user agreement."
   />
 )
 const ArchivedHeader = () => (
   <Translate
-    zh_hant="此作品已在站內隱藏。"
-    zh_hans="此作品已在站內隐藏。"
+    zh_hant="此作品已在站內歸檔。"
+    zh_hans="此作品已在站內封存。"
     en="This work is archived on Matters."
   />
 )
@@ -37,12 +37,11 @@ const State = ({ article }: { article: StateArticleFragment }) => {
   }
 
   return (
-    <section className="container">
-      {isBanned && <Toast.Instance color="grey" content={<BannedHeader />} />}
+    <section className={styles.container}>
+      {isBanned && <Layout.Notice color="grey" content={<BannedHeader />} />}
       {isArchived && (
-        <Toast.Instance color="grey" content={<ArchivedHeader />} />
+        <Layout.Notice color="grey" content={<ArchivedHeader />} />
       )}
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
+import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Spinner, Translate, useDialogSwitch } from '~/components'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
 import { ProfileCirclePublicFragment } from '~/gql/graphql'
 
 interface FollowersDialogProps {
@@ -20,17 +21,30 @@ const BaseFollowersDialog = ({ circle, children }: FollowersDialogProps) => {
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
-            <Translate
-              zh_hant={`${circle.displayName} 的追蹤者`}
-              zh_hans={`${circle.displayName} 的追踪者`}
-              en={`Followers of ${circle.displayName}`}
+            <FormattedMessage
+              defaultMessage="Followers of {circleName}"
+              id="WuvE8X"
+              description="src/views/Circle/Profile/FollowersDialog/index.tsx"
+              values={{
+                circleName: circle.displayName,
+              }}
             />
           }
           closeDialog={closeDialog}
-          closeTextId="close"
+          closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
         />
 
         <DynamicContent />
+
+        <Dialog.Footer
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+        />
       </Dialog>
     </>
   )

@@ -1,26 +1,25 @@
 import gql from 'graphql-tag'
 
-// TODO: Why this line don't work
-// import { TagDigest, UserDigest } from '~/components'
 import { TagDigest } from '~/components/TagDigest'
 import { UserDigest } from '~/components/UserDigest'
 
 export const QUICK_RESULT = gql`
-  query QuickResult($key: String!, $version: SearchAPIVersion = v20221212) {
+  query QuickResult($key: String!, $version: SearchAPIVersion = v20230601) {
     user: search(
       input: {
         type: User
         quicksearch: true
-        version: $version
+        record: true
         first: 5
         key: $key
+        version: $version
       }
     ) {
       edges {
         cursor
         node {
           ... on User {
-            ...UserDigestConciseUser
+            ...UserDigestRichUserPublic
           }
         }
       }
@@ -29,9 +28,10 @@ export const QUICK_RESULT = gql`
       input: {
         type: Tag
         quicksearch: true
-        version: $version
+        record: true
         first: 5
         key: $key
+        version: $version
       }
     ) {
       edges {
@@ -44,6 +44,6 @@ export const QUICK_RESULT = gql`
       }
     }
   }
-  ${UserDigest.Concise.fragments.user}
+  ${UserDigest.Rich.fragments.user.public}
   ${TagDigest.Concise.fragments.tag}
 `

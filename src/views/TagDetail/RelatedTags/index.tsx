@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import _chunk from 'lodash/chunk'
 import _get from 'lodash/get'
 import _random from 'lodash/random'
+import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -12,7 +13,6 @@ import {
   ShuffleButton,
   Slides,
   TagDigest,
-  Translate,
   usePublicQuery,
   ViewAllButton,
   ViewMoreCard,
@@ -21,7 +21,7 @@ import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { LastFetchRandomQuery, TagDetailRecommendedQuery } from '~/gql/graphql'
 
 import { RELATED_TAGS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface RelatedTagsProps {
   tagId: string
@@ -40,16 +40,19 @@ const RelatedTagsHeader = ({
   return (
     <PageHeader
       title={
-        <Translate zh_hant="相關標籤" zh_hans="相关标签" en="Related Tags" />
+        <FormattedMessage
+          defaultMessage="Related Tags"
+          id="HFVDeB"
+          description="src/views/TagDetail/RelatedTags/index.tsx"
+        />
       }
       is="h2"
-      hasNoBorder
+      hasBorder={false}
     >
-      <section className="right">
+      <section className={styles.right}>
         {hasShuffle && <ShuffleButton onClick={onShuffle} />}
         {hasViewAll && <ViewAllButton href={PATHS.TAGS} />}
       </section>
-      <style jsx>{styles}</style>
     </PageHeader>
   )
 }
@@ -95,8 +98,8 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   }
 
   const relatedTagsClasses = classNames({
-    relatedTags: true,
-    inSidebar,
+    [styles.relatedTags]: true,
+    [styles.inSidebar]: inSidebar,
   })
 
   if (!inSidebar) {
@@ -123,7 +126,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
           ))}
         </Slides>
 
-        <section className="backToAll">
+        <section className={styles.backToAll}>
           <ViewMoreCard
             spacing={['tight', 'tight']}
             href={PATHS.TAGS}
@@ -131,10 +134,9 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
             textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
             textAlign="center"
           >
-            <Translate id="backToAll" />
+            <FormattedMessage defaultMessage="Back to All" id="o2Na0B" />
           </ViewMoreCard>
         </section>
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -152,8 +154,6 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
           </List.Item>
         ))}
       </List>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -4,7 +4,7 @@ import { TEST_ID } from '~/common/enums'
 import { Card, IconChecked, IconUnChecked, Tag } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface SearchSelectTagProps {
   tag: DigestTagFragment
@@ -20,8 +20,8 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
   inStagingArea,
 }) => {
   const nodeClass = classNames({
-    node: true,
-    selectable: inStagingArea,
+    [styles.node]: true,
+    [styles.selectable]: inStagingArea,
   })
 
   return (
@@ -31,18 +31,16 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
       testId={TEST_ID.SEARCH_RESULTS_ITEM}
     >
       <section className={nodeClass}>
-        <Tag tag={tag} type="list" hasCount disabled />
+        <Tag tag={tag} type="list" hasCount is="span" />
 
-        <span className="icon-select">
+        <span className={styles.iconSelect}>
           {inStagingArea && selected && (
-            <IconChecked color="green" size="md-s" />
+            <IconChecked color="green" size="mdS" />
           )}
           {inStagingArea && !selected && (
-            <IconUnChecked color="grey-light" size="md-s" />
+            <IconUnChecked color="greyLight" size="mdS" />
           )}
         </span>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

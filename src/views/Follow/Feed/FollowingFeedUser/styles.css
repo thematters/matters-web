@@ -1,7 +1,0 @@
-.container {
-  padding: var(--spacing-base);
-}
-
-footer {
-  @mixin feed-footer-actions;
-}

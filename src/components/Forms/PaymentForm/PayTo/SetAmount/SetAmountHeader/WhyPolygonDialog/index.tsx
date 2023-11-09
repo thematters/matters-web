@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { GUIDE_LINKS } from '~/common/enums'
 import {
@@ -28,7 +29,7 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate
@@ -38,11 +39,12 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
             />
           }
           closeDialog={closeDialog}
-          closeTextId="close"
-          mode="inner"
+          closeText={
+            <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
+          }
         />
 
-        <Dialog.Message align="left">
+        <Dialog.Message align="left" smUpAlign="left">
           <ol>
             <li>
               <Translate
@@ -81,15 +83,17 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
           </ol>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="understood" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          smUpBtns={
+            <Dialog.TextButton
+              text={
+                <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
+              }
+              color="green"
+              onClick={closeDialog}
+            />
+          }
+        />
       </Dialog>
     </>
   )

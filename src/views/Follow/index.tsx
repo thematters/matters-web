@@ -5,15 +5,15 @@ import { useContext, useEffect } from 'react'
 import {
   Layout,
   Media,
+  Spacer,
   Spinner,
   useMutation,
   ViewerContext,
 } from '~/components'
-import viewerUnreadFollowing from '~/components/GQL/updates/viewerUnreadFollowing'
+import { updateViewerUnreadFollowing } from '~/components/GQL'
 import { MeFollowQuery, ReadFollowingFeedMutation } from '~/gql/graphql'
 
 import Feed from './Feed'
-import PickAuthors from './PickAuthors'
 
 const READ_FOLLOWING = gql`
   mutation ReadFollowingFeed {
@@ -39,7 +39,7 @@ const BaseFollow = () => {
   const [readFollowing] = useMutation<ReadFollowingFeedMutation>(
     READ_FOLLOWING,
     {
-      update: viewerUnreadFollowing,
+      update: updateViewerUnreadFollowing,
     }
   )
   const { data, loading } = useQuery<MeFollowQuery>(ME_FOLLOW)
@@ -58,33 +58,22 @@ const BaseFollow = () => {
     return null
   }
 
-  const followeeCount = data?.viewer?.following.users.totalCount || 0
-
-  if (followeeCount < 5) {
-    return <PickAuthors />
-  } else {
-    return <Feed />
-  }
+  return <Feed />
 }
 
 const Follow = () => {
   return (
     <Layout.Main>
-      <Layout.Header
-        left={
-          <>
-            <Media at="sm">
-              <Layout.Header.MeButton />
-            </Media>
-            <Media greaterThan="sm">
-              <Layout.Header.BackButton />
-            </Media>
-          </>
-        }
-        right={<Layout.Header.Title id="following" />}
-      />
+      <Media at="sm">
+        <Layout.Header left={<Layout.Header.Title id="following" />} />
+      </Media>
+      <Media greaterThan="sm">
+        <Spacer size="base" />
+      </Media>
 
-      <BaseFollow />
+      <Layout.Main.Spacing hasVertical={false}>
+        <BaseFollow />
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

@@ -12,7 +12,7 @@ import {
 } from '~/components'
 import { QuoteCurrency, UserDonationRecipientFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type LikeCoinChoiceProps = {
   balance: number
@@ -24,7 +24,7 @@ type LikeCoinChoiceProps = {
 
 const IconLikeDisabled = () => (
   <TextIcon
-    icon={<IconLikeCoin40 size="xl-m" color="grey" />}
+    icon={<IconLikeCoin40 size="xlM" color="grey" />}
     size="md"
     spacing="xtight"
     color="grey"
@@ -46,7 +46,7 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
 
   if (!hasLikerId) {
     return (
-      <section role="button" className="item">
+      <section role="button" className={styles.item}>
         <IconLikeDisabled />
 
         <Button
@@ -54,25 +54,23 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
           size={[null, '1.5rem']}
           borderColor="green"
           borderRadius="5rem"
-          href={PATHS.ME_SETTINGS}
+          href={PATHS.ME_SETTINGS_MISC}
         >
           <TextIcon color="green" size="xs">
             <Translate
-              zh_hant="綁定 Liker ID"
-              zh_hans="綁定 Liker ID"
+              zh_hant="綁定現有 Liker ID"
+              zh_hans="绑定现有 Liker ID"
               en="Go to link your Liker ID"
             />
           </TextIcon>
         </Button>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
 
   if (!canReceiveLike) {
     return (
-      <section className="item">
+      <section className={styles.item}>
         <IconLikeDisabled />
 
         <TextIcon size="md" color="grey">
@@ -82,8 +80,6 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
             en="The author has not opened"
           />
         </TextIcon>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
@@ -91,14 +87,10 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
   return (
     <section
       role="button"
-      className="item clickable"
+      className={`${styles.item} ${styles.clickable}`}
       onClick={switchToSetAmount}
     >
-      <TextIcon
-        icon={<IconLikeCoin40 size="xl-m" />}
-        size="md"
-        spacing="xtight"
-      >
+      <TextIcon icon={<IconLikeCoin40 size="xlM" />} size="md" spacing="xtight">
         LikeCoin
       </TextIcon>
 
@@ -108,8 +100,6 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
         subValue={formatAmount(balance * exchangeRate, 2)}
         subCurrency={currency}
       />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

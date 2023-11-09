@@ -96,12 +96,13 @@ const Password: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       password: '',
       comparedPassword: '',
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ password, comparedPassword }) =>
       _pickBy({
         password: validatePassword(password, lang),
@@ -144,8 +145,8 @@ const Password: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        setFieldError('password', messages[codes[0]])
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        setFieldError('password', intl.formatMessage(messages[codes[0]]))
       }
     },
   })
@@ -153,13 +154,13 @@ const Password: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<FormattedMessage defaultMessage="Password" description="" />}
+        label={<FormattedMessage defaultMessage="Password" id="5sg7KC" />}
         type="password"
         name="password"
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Enter Password',
-          description: '',
+          id: 'A41QIy',
         })}
         value={values.password}
         error={touched.password && errors.password}
@@ -168,15 +169,17 @@ const Password: React.FC<FormProps> = ({
         hint={
           <FormattedMessage
             defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
-            description=""
+            id="ml3SZN"
           />
         }
+        spacingBottom="base"
       />
 
       <Form.Input
         label={
           <FormattedMessage
             defaultMessage="Enter password again"
+            id="NzfL1d"
             description="src/components/Forms/EmailSignUpForm/Password.tsx"
           />
         }
@@ -185,6 +188,7 @@ const Password: React.FC<FormProps> = ({
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Enter password again',
+          id: 'NzfL1d',
           description: 'src/components/Forms/EmailSignUpForm/Password.tsx',
         })}
         value={values.comparedPassword}
@@ -192,7 +196,7 @@ const Password: React.FC<FormProps> = ({
         hint={
           <FormattedMessage
             defaultMessage="Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
-            description=""
+            id="ml3SZN"
           />
         }
         onBlur={handleBlur}
@@ -202,11 +206,11 @@ const Password: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
-      text={<FormattedMessage defaultMessage="Confirm" description="" />}
+      disabled={isSubmitting}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting}
     />
   )
@@ -215,30 +219,45 @@ const Password: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton />}
+          left={<Layout.Header.Title id="register" />}
           right={
-            <>
-              <Layout.Header.Title id="register" />
-              {SubmitButton}
-            </>
+            <Layout.Header.RightButton
+              type="submit"
+              form={formId}
+              disabled={isSubmitting}
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+              loading={isSubmitting}
+            />
           }
         />
-        {InnerForm}
+
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="register"
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="register"
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

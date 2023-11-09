@@ -1,5 +1,7 @@
 import { Page } from '@playwright/test'
 
+import { TEST_ID } from '~/common/enums'
+
 import { waitForAPIResponse } from './api'
 
 export type User = {
@@ -44,31 +46,32 @@ export const login = async ({
   }
 
   // Login with email & password
-  await page.getByRole('button', { name: 'Continue with Email' }).click()
+  await page.getByRole('button', { name: 'Email', exact: true }).click()
 
   // Fill the form
   await page.getByPlaceholder('Email').fill(email)
   await page.getByPlaceholder('Password').fill(password)
 
-  // Submit
-  await page.getByRole('button', { name: 'Confirm' }).click()
-
+  // Submit and redirect to target
   await Promise.all([
     waitForAPIResponse({
       page,
-      path: 'data.userLogin.token',
+      path: 'data.emailLogin.token',
     }),
+    page.getByRole('button', { name: 'Sign in' }).click(),
     waitForNavigation ? page.waitForNavigation() : undefined,
   ])
 }
 
 export const logout = async ({ page }: { page: Page }) => {
   // Click "My Page" button
-  await page.getByRole('button', { name: 'My Page' }).click()
+  await page.getByTestId(TEST_ID.SIDE_NAV_MY_PAGE).click()
 
   // Click "Log Out" button
   // Promise.all prevents a race condition between clicking and waiting.
   await Promise.all([
+    // Still need to wait for navigation if navigation happens to the same url
+    // https://github.com/microsoft/playwright/issues/20853
     page.waitForNavigation(),
     page.getByRole('menuitem', { name: 'Log Out' }).click(),
   ])

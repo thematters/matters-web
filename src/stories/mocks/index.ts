@@ -4,14 +4,30 @@ export const MOCK_USER = {
   id: 'user-0000',
   userName: 'matty',
   displayName: 'Matty',
+  avatar: 'https://source.unsplash.com/256x256?user',
+  liker: {
+    __typename: 'Liker' as any,
+    likerId: 'user-0000',
+    civicLiker: false,
+  },
   status: {
     __typename: 'UserStatus' as any,
     state: 'active' as any,
+    unreadNoticeCount: 0,
+    hasPaymentPassword: true,
+    role: 'user' as any,
+    hasEmailLoginPassword: true,
+    changeEmailTimesLeft: 0,
   },
-  avatar: 'https://source.unsplash.com/256x256?user',
   info: {
     __typename: 'UserInfo' as any,
     badges: null,
+    isWalletAuth: true,
+    agreeOn: true,
+    userNameEditable: false,
+    socialAccounts: [],
+    emailVerified: true,
+    group: 'a' as any,
     description: 'Matters 唯一官方帳號',
     cryptoWallet: {
       __typename: 'CryptoWallet' as any,
@@ -26,9 +42,27 @@ export const MOCK_USER = {
       ],
     },
   },
-  liker: {
-    __typename: 'Liker' as any,
-    civicLiker: false,
+  settings: {
+    language: 'en' as any,
+    currency: 'HKD' as any,
+  },
+  following: {
+    users: {
+      __typename: 'UserConnection' as any,
+      totalCount: 0,
+    },
+    tags: {
+      __typename: 'TagConnection' as any,
+      totalCount: 0,
+    },
+  },
+  followers: {
+    __typename: 'UserConnection' as any,
+    totalCount: 0,
+  },
+  articles: {
+    __typename: 'ArticleConnection' as any,
+    totalCount: 0,
   },
   ownCircles: null,
   isFollower: false,
@@ -84,10 +118,11 @@ export const MOCK_ARTILCE = {
   id: 'article-0000',
   title: '中國四川：挑戰世界最危險的公路之一 川藏公路絕美風光',
   slug: 'slug',
-  mediaHash: 'article-media-hash',
+  mediaHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
+  dataHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
   articleState: 'active' as any,
   state: 'active' as any,
-  cover: 'https://source.unsplash.com/256x256?user',
+  cover: 'https://source.unsplash.com/256x256?article',
   summary:
     '其實已經開始兩週了XD,不過最近才想說應該來記錄一下我在火箭隊的日常,順便練一下文筆,也可以讓大家了解一下火箭隊軟體培訓營裡面大概是在做些什麼事情,上課的模式及氣氛是怎樣等等...畢竟我當時得知有這個免費培訓營時,也是網路上各種爬文類似這種免費培訓工程師半年的心得及成',
   author: MOCK_USER,
@@ -97,9 +132,8 @@ export const MOCK_ARTILCE = {
     __typename: 'AppreciationConnection' as any,
     totalCount: 0,
   },
-  dataHash: 'article-data-hash',
   iscnId: '',
-  sticky: false,
+  pinned: false,
   readTime: 1234.5,
   tags: [],
   likesReceivedTotal: 1,
@@ -148,11 +182,38 @@ export const MOCK_COMMENT = {
   id: 'comment-0000',
   state: 'active' as any,
   node: MOCK_ARTILCE,
+  type: 'article' as any,
   parentComment: MOCK_PARENT_COMMENT,
   createdAt: '2020-12-24T07:29:17.682Z',
+  pinned: false,
   content:
     '今晚要跟大家說的是關於嘎嘎比森林的故事，故事是源自於安哲的繪本《不安分的石頭》。幾年前看過這本書，這不只是給孩童，也是給大人閱讀的一本好書。內容是提到關於一座從來都固守原貌的森林，突然闖入了一顆小石頭，大家原本井然有序的生活被打亂了。在這個大家都害怕「不安分」的世界，又中國傳統文學裡的「幽」傳統，對此的文論並不多，我聽說李歐梵教授在做此研究，蔡老師能否多講一些',
   author: { ...MOCK_USER, isBlocked: false },
+  fromDonator: false,
+  upvotes: 1,
+  downvotes: 2,
+}
+
+export const MOCK_DRAFT = {
+  id: 'draft-0000',
+  title: 'draft-title',
+  slug: 'draft-slug',
+  updatedAt: '2020-12-24T07:29:17.682Z',
+}
+
+export const MOCK_COLLECTON = {
+  id: 'collection-0000',
+  title: 'collection-title',
+  cover: 'https://source.unsplash.com/256x256?collection',
+  description: 'collection-description',
+  author: MOCK_USER,
+  articles: {
+    __typename: 'ArticleConnection' as any,
+    totalCount: 1,
+    edges: [{ node: MOCK_ARTILCE }],
+  },
+  pinned: false,
+  updatedAt: '2020-12-24T07:29:17.682Z',
 }
 
 export const MOCK_CIRCLE_COMMENT = {
@@ -164,18 +225,43 @@ export const MOCK_CIRCLE_COMMENT = {
 export const MOCK_TAG = {
   __typename: 'Tag' as any,
   id: 'tag-0000',
+  slug: 'tag-slug',
   editors: [MOCK_USER],
   owner: MOCK_USER,
   content: '香港',
+  cover: 'https://source.unsplash.com/256x256?collection',
   description:
     '香港（英語：Hong Kong；縮寫：HK／HKG），全稱香港特別行政區（英語：Hong Kong Special Administrative Region；縮寫：HKSAR），簡稱「港」，雅稱「香江」',
   articles: {
     __typename: 'ArticleConnection' as any,
-    totalCount: 8,
-    edges: [{ node: MOCK_ARTILCE }],
+    totalCount: 4,
+    edges: [
+      { node: MOCK_ARTILCE, cursor: 'tag-1' },
+      { node: MOCK_ARTILCE, cursor: 'tag-2' },
+      { node: MOCK_ARTILCE, cursor: 'tag-3' },
+      { node: MOCK_ARTILCE, cursor: 'tag-4' },
+    ],
   },
   numArticles: 100,
   numAuthors: 21,
+}
+
+// Collection
+export const MOCK_COLLECTION = {
+  __typename: 'Collection' as any,
+  id: 'collection-0000',
+  title: '香港',
+  author: MOCK_USER,
+  updatedAt: '2020-12-24T07:29:17.682Z',
+  pinned: false,
+  cover: 'https://source.unsplash.com/256x256?collection',
+  description:
+    'Nostrud eu est proident sit fugiat aliqua pariatur tempor proident sint. Lorem deserunt labore incididunt quis voluptate sint sit aute proident adipisicing. Labore nostrud cupidatat deserunt. Culpa anim laboris deserunt proident.',
+  articles: {
+    __typename: 'ArticleConnection' as any,
+    totalCount: 1,
+    edges: [{ node: MOCK_ARTILCE }],
+  },
 }
 
 // Transaction

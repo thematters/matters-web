@@ -1,13 +1,14 @@
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ADD_TOAST, TEST_ID } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { ERROR_CODES, ERROR_MESSAGES, TEST_ID } from '~/common/enums'
 import {
   Button,
   IconBookmarked16,
+  IconBookmarked20,
   IconSize,
-  LanguageContext,
-  Translate,
+  Menu,
+  toast,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -17,7 +18,7 @@ import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle
 
 interface UnsubscribeProps {
   articleId?: string
-  size?: Extract<IconSize, 'md-s'>
+  size?: Extract<IconSize, 'mdS' | 'md'>
   disabled?: boolean
   inCard?: boolean
 }
@@ -29,49 +30,67 @@ const Unsubscribe = ({
   inCard,
 }: UnsubscribeProps) => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const [unsubscribe] = useMutation<ToggleSubscribeArticleMutation>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
       variables: { id: articleId, enabled: false },
-      optimisticResponse: articleId
-        ? {
-            toggleSubscribeArticle: {
-              id: articleId,
-              subscribed: false,
-              __typename: 'Article',
-            },
-          }
-        : undefined,
     }
   )
+
+  const onClick = async () => {
+    if (viewer.isFrozen) {
+      toast.error({
+        message: (
+          <FormattedMessage
+            {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+          />
+        ),
+      })
+      return
+    }
+
+    await unsubscribe()
+
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="Bookmark removed"
+          id="kSt4il"
+          description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
+        />
+      ),
+    })
+  }
+
+  if (inCard) {
+    return (
+      <Menu.Item
+        text={
+          <FormattedMessage
+            defaultMessage="Remove bookmark"
+            id="FEkOVJ"
+            description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
+          />
+        }
+        icon={<IconBookmarked20 size={size} />}
+        onClick={onClick}
+        testId={TEST_ID.ARTICLE_BOOKMARK}
+      />
+    )
+  }
 
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
-      aria-label={translate({
-        zh_hant: '取消收藏',
-        zh_hans: '取消收藏',
-        en: 'Undo bookmark',
-        lang,
+      bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Remove bookmark',
+        id: 'FEkOVJ',
+        description: 'src/components/Buttons/Bookmark/Unsubscribe.tsx',
       })}
-      onClick={async () => {
-        if (viewer.isFrozen) {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: <Translate id="FORBIDDEN_BY_STATE" />,
-              },
-            })
-          )
-          return
-        }
-
-        await unsubscribe()
-      }}
+      onClick={onClick}
       disabled={disabled}
       data-test-id={TEST_ID.ARTICLE_BOOKMARK}
     >

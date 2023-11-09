@@ -1,13 +1,14 @@
 import gql from 'graphql-tag'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Card, DateTime, LinkWrapper, Title, Translate } from '~/components'
+import { Card, LinkWrapper } from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
 import DeleteButton from './DeleteButton'
-import EditButton from './EditButton'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface DraftDigestFeedProps {
   draft: DraftDigestFeedDraftFragment
@@ -20,42 +21,38 @@ const fragments = {
       title
       slug
       updatedAt
-      ...EditButtonDraft
       ...DeleteButtonDraft
     }
-    ${EditButton.fragments.draft}
     ${DeleteButton.fragments.draft}
   `,
 }
 
 const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
-  const { id, title, updatedAt, slug } = draft
-  const path = toPath({
-    page: 'draftDetail',
-    slug,
-    id,
-  })
+  const { id, title } = draft
+  const path = toPath({ page: 'draftDetail', id })
 
   return (
-    <Card {...path} spacing={['base', 'base']}>
-      <LinkWrapper {...path} textActiveColor="green">
-        <Title type="feed" is="h2">
-          {title || <Translate id="untitle" />}
-        </Title>
-      </LinkWrapper>
+    <Card
+      {...path}
+      spacing={['base', 0]}
+      bgActiveColor="none"
+      testId={TEST_ID.DIGEST_DRAFT_FEED}
+    >
+      <section className={styles.container}>
+        <section className={styles.left}>
+          <LinkWrapper {...path} textActiveColor="green">
+            <section className={styles.title}>
+              {title || (
+                <FormattedMessage defaultMessage="Untitled" id="3kbIhS" />
+              )}
+            </section>
+          </LinkWrapper>
+        </section>
 
-      <footer>
-        <section className="left">
-          <EditButton draft={draft} />
+        <section className={styles.right}>
           <DeleteButton draft={draft} />
         </section>
-
-        <section className="right">
-          <DateTime date={updatedAt} type="relative" />
-        </section>
-      </footer>
-
-      <style jsx>{styles}</style>
+      </section>
     </Card>
   )
 }

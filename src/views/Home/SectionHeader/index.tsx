@@ -1,7 +1,9 @@
-import { PATHS } from '~/common/enums'
-import { PageHeader, Translate, ViewAllButton } from '~/components'
+import { FormattedMessage } from 'react-intl'
 
-import styles from './styles.css'
+import { PATHS } from '~/common/enums'
+import { PageHeader, ViewAllButton } from '~/components'
+
+import styles from './styles.module.css'
 
 interface SidebarHeaderProps {
   type: 'authors' | 'tags'
@@ -19,19 +21,17 @@ const FeedHeader = ({
     tags: PATHS.TAGS,
   }
   const titleMap = {
-    authors: <Translate zh_hant="值得關注" zh_hans="值得关注" en="Authors" />,
-    tags: <Translate zh_hant="找你想看的" zh_hans="找你想看的" en="Topics" />,
+    authors: <FormattedMessage defaultMessage="Authors" id="XgdZSb" />,
+    tags: <FormattedMessage defaultMessage="Topics" id="kc79d3" />,
   }
   const path = pathMap[type]
 
   return (
-    <PageHeader title={titleMap[type]} is="h2" hasNoBorder>
-      <section className="right">
+    <PageHeader title={titleMap[type]} is="h2" hasBorder={false} type="base">
+      <section className={styles.right}>
         {rightButton}
 
         {path && viewAll && <ViewAllButton href={path} />}
-
-        <style jsx>{styles}</style>
       </section>
     </PageHeader>
   )

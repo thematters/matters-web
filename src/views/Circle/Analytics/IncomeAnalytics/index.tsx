@@ -1,22 +1,17 @@
 import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconAnalyticsIncome24 } from '@/public/static/icons/24px/analytics-income.svg'
 import { CHART_COLOR } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
-import {
-  QueryError,
-  Spinner,
-  StackedAreaChart,
-  Translate,
-  useRoute,
-} from '~/components'
+import { QueryError, Spinner, StackedAreaChart, useRoute } from '~/components'
 import { CircleIncomeAnalyticsQuery } from '~/gql/graphql'
 
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
 import { CIRCLE_INCOME_ANALYTICS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Content = () => {
   const { getQuery } = useRoute()
@@ -67,10 +62,10 @@ const Content = () => {
         <InfoTiles.Group primary>
           <InfoTiles.Tile
             title={
-              <Translate
-                zh_hant="本月營收"
-                zh_hans="本月营收"
-                en="This Month"
+              <FormattedMessage
+                defaultMessage="This Month"
+                id="sPgUkN"
+                description="src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
               />
             }
             value={formatAmount(income.thisMonth, 0)}
@@ -79,10 +74,10 @@ const Content = () => {
           />
           <InfoTiles.Tile
             title={
-              <Translate
-                zh_hant="下月預期營收"
-                zh_hans="下月预期营收"
-                en="Next Month (Estimation)"
+              <FormattedMessage
+                defaultMessage="Next Month (Estimation)"
+                id="Fe682o"
+                description="src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
               />
             }
             value={formatAmount(income.nextMonth, 0)}
@@ -93,7 +88,11 @@ const Content = () => {
         <InfoTiles.Group>
           <InfoTiles.Tile
             title={
-              <Translate zh_hant="目前總營收" zh_hans="目前总营收" en="Total" />
+              <FormattedMessage
+                defaultMessage="Total"
+                id="L4NXXh"
+                description="src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+              />
             }
             value={formatAmount(income.total, 0)}
             unit="HKD"
@@ -102,7 +101,7 @@ const Content = () => {
       </InfoTiles>
 
       {chartData && (
-        <section className="chart">
+        <section className={styles.chart}>
           <StackedAreaChart data={chartData}>
             {(props) => (
               <>
@@ -124,23 +123,25 @@ const Content = () => {
           </StackedAreaChart>
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }
 
 const IncomeAnalytics = () => {
   return (
-    <section className="container">
+    <section className={styles.container}>
       <SectionHead
         icon={IconAnalyticsIncome24}
-        title={<Translate zh_hant="營收" zh_hans="营收" en="Income" />}
+        title={
+          <FormattedMessage
+            defaultMessage="Income"
+            id="d4waan"
+            description="src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+          />
+        }
       />
 
       <Content />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

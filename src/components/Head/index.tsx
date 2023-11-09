@@ -2,21 +2,28 @@ import NextHead from 'next/head'
 import { useContext } from 'react'
 
 import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
-import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png'
 import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
 import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
+import IMAGE_FAVICON_128 from '@/public/static/favicon-128x128.png'
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
-import { toLocale, translate, TranslateArgs } from '~/common/utils'
+import {
+  toLocale,
+  toOGLanguage,
+  translate,
+  TranslateArgs,
+} from '~/common/utils'
 import { LanguageContext, useRoute } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
 
+const siteDomainCanonical =
+  process.env.NEXT_PUBLIC_SITE_DOMAIN_CANONICAL || 'matters.town'
 const siteDomain =
-  process.env.NEXT_PUBLIC_SITE_DOMAIN_CANONICAL || // for web-next, set this different as serving domain; suggested canonical domain ('matters.news') to robots
+  siteDomainCanonical || // for web-next, set this different as serving domain; suggested canonical domain ('matters.') to robots
   process.env.NEXT_PUBLIC_SITE_DOMAIN ||
-  'matters.news'
+  'matters.town'
 const isProdServingCanonical =
   process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production' &&
-  process.env.NEXT_PUBLIC_SITE_DOMAIN === 'matters.news' // is serving domain same as canonical domain?
+  process.env.NEXT_PUBLIC_SITE_DOMAIN === siteDomainCanonical // is serving domain same as canonical domain?
 
 interface HeadProps {
   title?: string | TranslateArgs
@@ -44,8 +51,10 @@ export const Head: React.FC<HeadProps> = (props) => {
       props.description ||
       'Matters 致力搭建去中心化的寫作社群與內容生態。基於 IPFS 技術，令創作不受制於任何平台，獨立性得到保障；引入加密貨幣，以收入的形式回饋給作者；代碼開源，建立創作者自治社區。',
     keywords: props.keywords
-      ? `${props.keywords.join(',')},matters,matters.news,創作有價`
-      : 'matters,matters.news,創作有價',
+      ? `${props.keywords.join(',')},matters,${
+          process.env.NEXT_PUBLIC_SITE_DOMAIN
+        },創作有價`
+      : `matters,${process.env.NEXT_PUBLIC_SITE_DOMAIN},創作有價`,
     url: props.path
       ? `https://${siteDomain}${props.path}`
       : `https://${siteDomain}${router.asPath || '/'}`,
@@ -54,15 +63,15 @@ export const Head: React.FC<HeadProps> = (props) => {
 
   const i18nUrl = (language: string) => {
     return props.path
-      ? `https://${siteDomain}/${language}${props.path}`
-      : `https://${siteDomain}/${language}${router.asPath || '/'}`
+      ? `https://${siteDomain}/${props.path}?locale=${language}`
+      : `https://${siteDomain}/${router.asPath || '/'}?locale=${language}`
   }
 
   if (props.jsonLdData && !props.jsonLdData.description) {
     props.jsonLdData.description = head.description
   }
 
-  const canonicalUrl = head.url?.split('?')[0]
+  const canonicalUrl = head.url?.split('#')[0].split('?')[0]
 
   return (
     <NextHead>
@@ -78,13 +87,6 @@ export const Head: React.FC<HeadProps> = (props) => {
       <link
         rel="icon"
         type="image/png"
-        href={IMAGE_FAVICON_16.src}
-        sizes="16x16"
-        key="favicon-16"
-      />
-      <link
-        rel="icon"
-        type="image/png"
         href={IMAGE_FAVICON_32.src}
         sizes="32x32"
         key="favicon-32"
@@ -97,13 +99,23 @@ export const Head: React.FC<HeadProps> = (props) => {
         key="favicon-64"
       />
       <link
+        rel="shortcut icon"
+        type="image/png"
+        href={IMAGE_FAVICON_128.src}
+        sizes="128x128"
+        // Note: With the attribute key, dapp can't get the shortcut icon.
+        // key="favicon-128"
+      />
+      <link
         rel="search"
         title="Matters"
-        href="/static/opensearch.xml"
+        href="/opensearch.xml"
         type="application/opensearchdescription+xml"
         key="opensearch"
       />
-      <link rel="canonical" href={canonicalUrl} key="canonical" />
+      {props.path && (
+        <link rel="canonical" href={canonicalUrl} key="canonical" />
+      )}
       {props.paymentPointer && (
         <meta name="monetization" content={props.paymentPointer} />
       )}
@@ -128,6 +140,7 @@ export const Head: React.FC<HeadProps> = (props) => {
         key="og:description"
         content={head.description}
       />
+      <meta property="og:locale" key="og:locale" content={toOGLanguage(lang)} />
       <meta name="twitter:url" key="twitter:url" content={head.url} />
       <meta
         name="twitter:card"
@@ -203,7 +216,13 @@ export const Head: React.FC<HeadProps> = (props) => {
         content="yes"
       />
 
-      <link rel="manifest" key="manifest" href="/static/manifest.json" />
+      <link rel="manifest" key="manifest" href="/manifest.json" />
+
+      <meta
+        name="format-detection"
+        key="format-detection"
+        content="telephone=no"
+      />
 
       {/* DNS */}
       <link rel="dns-prefetch" href="https://www.gstatic.com" />

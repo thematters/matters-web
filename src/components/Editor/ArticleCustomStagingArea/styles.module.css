@@ -1,0 +1,26 @@
+.customArticleArea {
+  padding: var(--spacing-base);
+
+  & .hint {
+    padding-bottom: var(--spacing-base);
+    font-size: var(--font-size-sm-s);
+    line-height: 1.125rem;
+    color: var(--color-grey);
+  }
+
+  & .emptyHint {
+    text-align: center;
+  }
+
+  & .node {
+    @mixin flex-start-space-between;
+
+    & section {
+      width: calc(100% - 1.5rem);
+    }
+  }
+
+  & .node + .node {
+    margin-top: var(--spacing-loose);
+  }
+}

@@ -1,10 +1,10 @@
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const PaymentPointerExplainer = () => (
   <>
-    <p>
+    <p className={styles.content}>
       <a href="https://interledger.org/" target="_blank" rel="noreferrer">
         <Translate
           zh_hant="跨賬本協議"
@@ -70,8 +70,6 @@ const PaymentPointerExplainer = () => (
         en=", applicable on both Matters website and IPFS."
       />
     </p>
-    <br />
-    <style jsx>{styles}</style>
   </>
 )
 

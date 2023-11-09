@@ -45,6 +45,8 @@ const unfollow = async (page: Page) => {
   ).toBeVisible()
 }
 
+test.describe.configure({ mode: 'serial' })
+
 test.describe('User Mutation', () => {
   authedTest(
     'Alice is followed by Bob',
@@ -56,6 +58,7 @@ test.describe('User Mutation', () => {
       // [Bob] Go to profile page
       const bobProfile = new UserProfilePage(bobPage, isMobile)
       await bobProfile.gotoMeProfile()
+      await bobPage.waitForTimeout(2 * 1000)
       const bobDisplayName = await bobProfile.displayName.innerText()
 
       // [Bob] Go to Alice's User Profile
@@ -79,7 +82,7 @@ test.describe('User Mutation', () => {
       const noticeUserNewFollowerDisplayName = await alicePage
         .getByTestId(TEST_ID.NOTICE_USER_NEW_FOLLOWER)
         .first()
-        .getByTestId(TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME)
+        .getByTestId(TEST_ID.NOTICE_USER_DISPLAY_NAME)
         .first()
         .innerText({
           // FIXME: notifications page is slow to fetch data since it's no-cache
@@ -114,7 +117,11 @@ test.describe('User Mutation', () => {
       }
 
       const followCount = await bobPage
-        .getByTestId(TEST_ID.USER_PROFILE_FOLLOWERS_COUNT)
+        .getByTestId(
+          isMobile
+            ? TEST_ID.USER_PROFILE_FOLLOWERS_COUNT
+            : TEST_ID.ASIDE_USER_PROFILE_FOLLOWERS_COUNT
+        )
         .innerText()
 
       await unfollow(bobPage)
@@ -123,7 +130,11 @@ test.describe('User Mutation', () => {
       await bobPage.waitForLoadState('networkidle')
 
       const unfollowCount = await bobPage
-        .getByTestId(TEST_ID.USER_PROFILE_FOLLOWERS_COUNT)
+        .getByTestId(
+          isMobile
+            ? TEST_ID.USER_PROFILE_FOLLOWERS_COUNT
+            : TEST_ID.ASIDE_USER_PROFILE_FOLLOWERS_COUNT
+        )
         .innerText()
 
       expect(Number(followCount) === Number(unfollowCount) + 1)
@@ -136,6 +147,7 @@ test.describe('User Mutation', () => {
       // [Alice] Go to profile page
       const aliceProfile = new UserProfilePage(alicePage, isMobile)
       await aliceProfile.gotoMeProfile()
+      await bobPage.waitForTimeout(2 * 1000)
       const aliceDisplayName = await aliceProfile.displayName.innerText()
 
       // [Bob] Go to profile page
@@ -146,7 +158,7 @@ test.describe('User Mutation', () => {
       await pageGoto(bobPage, alicePage.url())
 
       await bobPage
-        .getByTestId(TEST_ID.LAYOUT_HEADER)
+        .getByTestId(TEST_ID.ASIDE_USER_PROFILE)
         .getByRole('button', { name: 'More Actions' })
         .click()
 
@@ -162,18 +174,18 @@ test.describe('User Mutation', () => {
           }),
           bobPage
             .getByRole('menuitem', { name: 'Unblock' })
-            .locator('section')
+            .locator('div')
             .click(),
         ])
         await bobPage
-          .getByTestId(TEST_ID.LAYOUT_HEADER)
+          .getByTestId(TEST_ID.ASIDE_USER_PROFILE)
           .getByRole('button', { name: 'More Actions' })
           .click()
       }
 
       await bobPage
         .getByRole('menuitem', { name: 'Block user' })
-        .locator('section')
+        .locator('div')
         .click()
 
       await Promise.all([
@@ -212,7 +224,7 @@ test.describe('User Mutation', () => {
       // [Bob] Go to Alice's User Profile and Check Block state
       await bobPage.goto(alicePage.url(), { waitUntil: 'networkidle' })
       await bobPage
-        .getByTestId(TEST_ID.LAYOUT_HEADER)
+        .getByTestId(TEST_ID.ASIDE_USER_PROFILE)
         .getByRole('button', { name: 'More Actions' })
         .click()
       await expect(
@@ -226,11 +238,8 @@ test.describe('User Mutation', () => {
     const aliceProfile = new UserProfilePage(alicePage, isMobile)
     await aliceProfile.gotoMeProfile()
 
-    await aliceProfile.moreButton.click()
-    await alicePage
-      .getByRole('menuitem', { name: 'Edit' })
-      .locator('section')
-      .click()
+    await alicePage.waitForTimeout(2 * 1000)
+    await aliceProfile.displayName.click()
 
     await aliceProfile.setCover()
     await aliceProfile.setAvatar()

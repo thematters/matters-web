@@ -1,0 +1,9 @@
+.container {
+  padding-bottom: var(--spacing-x-tight);
+}
+
+.item {
+  @mixin border-grey;
+
+  border-radius: var(--spacing-x-tight);
+}

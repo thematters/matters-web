@@ -3,6 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
 import NoticeList from './NoticeList'
+import styles from './styles.module.css'
 
 export default {
   title: 'Components/Notice',
@@ -11,15 +12,8 @@ export default {
 
 const Template: ComponentStory<typeof NoticeList> = (args) => (
   <MockedProvider>
-    <div>
+    <div className={styles.container}>
       <NoticeList {...(args as any)} />
-
-      <style jsx>{`
-        div {
-          margin: 0 -1rem;
-          margin-bottom: var(--spacing-base);
-        }
-      `}</style>
     </div>
   </MockedProvider>
 )

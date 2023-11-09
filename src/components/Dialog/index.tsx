@@ -1,14 +1,16 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useEffect, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
-import { KEYCODES } from '~/common/enums'
-import { dom } from '~/common/utils'
+import { KEYVALUE } from '~/common/enums'
+import { capitalizeFirstLetter, dom } from '~/common/utils'
 import { Media, useOutsideClick } from '~/components'
 
+import { RoundedButton, TextButton } from './Buttons'
 import Content from './Content'
 import Footer from './Footer'
 import Handle from './Handle'
@@ -16,20 +18,20 @@ import Header from './Header'
 import Lazy from './Lazy'
 import Message from './Message'
 import Overlay from './Overlay'
-import styles from './styles.css'
-import globalStyles from './styles.global.css'
+import styles from './styles.module.css'
 
 export interface DialogOverlayProps {
   isOpen: boolean | undefined
   onDismiss: () => void
   onRest?: () => void
+  dismissOnClickOutside?: boolean
+  dismissOnHandle?: boolean
 }
 
 export type DialogProps = {
-  size?: 'sm' | 'lg'
-  smBgColor?: 'grey-lighter'
-  smUpBgColor?: 'grey-lighter'
-  fixedHeight?: boolean
+  smBgColor?: 'greyLighter'
+  smUpBgColor?: 'greyLighter'
+  hidePaddingBottom?: boolean
 
   testId?: string
 } & DialogOverlayProps
@@ -39,27 +41,31 @@ const Container: React.FC<
     {
       style?: React.CSSProperties
       setDragGoal: (val: any) => void
+      initialFocusRef: React.RefObject<any>
     } & DialogProps
   >
 > = ({
-  size = 'lg',
   smBgColor,
   smUpBgColor,
-  fixedHeight,
+  hidePaddingBottom,
   testId,
   onDismiss,
+  dismissOnClickOutside = false,
+  dismissOnHandle = true,
   children,
   style,
   setDragGoal,
+  initialFocusRef,
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
 
   const containerClasses = classNames({
-    container: true,
-    'fixed-height': !!fixedHeight,
-    [size]: true,
-    [`bg-${smBgColor}`]: !!smBgColor,
-    [`bg-${smUpBgColor}-sm-up`]: !!smUpBgColor,
+    [styles.container]: true,
+    [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
+      !!smBgColor,
+    [smUpBgColor ? styles[`bg${capitalizeFirstLetter(smUpBgColor)}SmUp`] : '']:
+      !!smUpBgColor,
+    [styles.hidePaddingBottom]: !!hidePaddingBottom,
   })
 
   const closeTopDialog = () => {
@@ -77,6 +83,14 @@ const Container: React.FC<
     onDismiss()
   }
 
+  const handleClickOutside = () => {
+    if (!dismissOnClickOutside) {
+      return
+    }
+
+    closeTopDialog()
+  }
+
   const bind = useDrag(({ down, movement: [, my] }) => {
     if (!down && my > 30) {
       onDismiss()
@@ -85,28 +99,33 @@ const Container: React.FC<
     }
   })
 
-  useOutsideClick(node, closeTopDialog)
+  useOutsideClick(node, handleClickOutside)
 
   return (
-    <div className="l-row" {...(testId ? { 'data-test-id': testId } : {})}>
-      <div
-        ref={node}
-        className={containerClasses}
-        style={style}
-        onKeyDown={(event) => {
-          if (event.keyCode === KEYCODES.escape) {
-            closeTopDialog()
-          }
-        }}
-      >
-        {children}
+    <div
+      {...(testId ? { 'data-test-id': testId } : {})}
+      ref={node}
+      className={containerClasses}
+      style={style}
+      onKeyDown={(event) => {
+        if (event.code.toLowerCase() !== KEYVALUE.escape) {
+          return
+        }
+        if (!dismissOnHandle) {
+          return
+        }
+        closeTopDialog()
+      }}
+    >
+      <VisuallyHidden>
+        <button type="button" ref={initialFocusRef} aria-hidden="true" />
+      </VisuallyHidden>
 
-        <Media at="sm">
-          <Handle closeDialog={onDismiss} {...bind()} />
-        </Media>
+      {children}
 
-        <style jsx>{styles}</style>
-      </div>
+      <Media at="sm">
+        {dismissOnHandle && <Handle closeDialog={onDismiss} {...bind()} />}
+      </Media>
     </div>
   )
 }
@@ -118,10 +137,13 @@ export const Dialog: React.ComponentType<
   Content: typeof Content
   Footer: typeof Footer
   Message: typeof Message
+  TextButton: typeof TextButton
+  RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
   const { isOpen, onRest } = props
   const [mounted, setMounted] = useState(isOpen)
+  const initialFocusRef = useRef<any>(null)
 
   // Drag
   const [{ top }, setDragGoal] = useSpring(() => ({ top: 0 }))
@@ -165,24 +187,21 @@ export const Dialog: React.ComponentType<
 
   return (
     <>
-      <AnimatedDialogOverlay className="dialog">
+      <AnimatedDialogOverlay
+        className="dialog"
+        initialFocusRef={initialFocusRef}
+      >
         <AnimatedOverlay style={{ opacity: opacity as any }} />
 
-        <DialogContent
-          className="l-container full"
-          aria-labelledby="dialog-title"
-        >
+        <DialogContent aria-labelledby="dialog-title">
           <AnimatedContainer
             style={{ opacity: opacity as any, top }}
             setDragGoal={setDragGoal}
+            initialFocusRef={initialFocusRef}
             {...props}
           />
         </DialogContent>
       </AnimatedDialogOverlay>
-
-      <style jsx global>
-        {globalStyles}
-      </style>
     </>
   )
 }
@@ -191,4 +210,6 @@ Dialog.Header = Header
 Dialog.Content = Content
 Dialog.Footer = Footer
 Dialog.Message = Message
+Dialog.TextButton = TextButton
+Dialog.RoundedButton = RoundedButton
 Dialog.Lazy = Lazy

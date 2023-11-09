@@ -1,0 +1,40 @@
+.searchingArea {
+  @media (--sm-up) {
+    margin-top: calc(var(--spacing-base) * -1);
+  }
+}
+
+.area {
+  flex-grow: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nodes {
+  min-height: 100%;
+
+  & li {
+    position: relative;
+
+    & .dragHandler {
+      @mixin flex-center-all;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      height: 100%;
+    }
+
+    &.Article {
+      & .dragHandler {
+        height: auto;
+        padding-top: var(--spacing-tight);
+      }
+    }
+
+    & + li {
+      @mixin border-top-grey;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+.footer {
+  @mixin feed-footer-actions;
+
+  margin-top: var(--spacing-x-tight);
+}

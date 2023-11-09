@@ -1,18 +1,38 @@
+import { FormattedMessage, useIntl } from 'react-intl'
+
 import { Head, Layout } from '~/components'
 
 import BaseSettingsBlocked from './SettingsBlocked'
 
-const SettingsBlocked = () => (
-  <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="settingsBlock" />}
-    />
+const SettingsBlocked = () => {
+  const intl = useIntl()
+  const title = intl.formatMessage({
+    defaultMessage: 'Settings - Blocked Users',
+    id: 'KxVlDj',
+    description: 'src/views/Me/Settings/Blocked/index.tsx',
+  })
 
-    <Head title={{ id: 'settingsBlock' }} />
+  return (
+    <Layout.Main>
+      <Layout.Header
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage
+              defaultMessage="Blocked Users"
+              id="YUXRsM"
+              description="src/views/Me/Settings/Blocked/index.tsx"
+            />
+          </Layout.Header.Title>
+        }
+      />
 
-    <BaseSettingsBlocked />
-  </Layout.Main>
-)
+      <Head title={title} />
+
+      <Layout.Main.Spacing hasVertical={false}>
+        <BaseSettingsBlocked />
+      </Layout.Main.Spacing>
+    </Layout.Main>
+  )
+}
 
 export default SettingsBlocked

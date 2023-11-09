@@ -1,10 +1,13 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST, COMMENT_TYPE_TEXT } from '~/common/enums'
+import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import {
   CommentFormType,
   Dialog,
-  Translate,
+  LanguageContext,
+  toast,
   useDialogSwitch,
   useMutation,
 } from '~/components'
@@ -36,6 +39,8 @@ const DeleteCommentDialog = ({
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const commentId = comment.id
 
+  const { lang } = useContext(LanguageContext)
+
   const [deleteComment] = useMutation<DeleteCommentMutation>(DELETE_COMMENT, {
     variables: { id: commentId },
     optimisticResponse: {
@@ -50,67 +55,78 @@ const DeleteCommentDialog = ({
   const onDelete = async () => {
     await deleteComment()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已刪除`}
-              zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已删除`}
-            />
-          ),
-
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="{commentType} has been deleted"
+          id="h9CG9E"
+          description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+          values={{
+            commentType: COMMENT_TYPE_TEXT[lang][type],
+          }}
+        />
+      ),
+    })
   }
 
   return (
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_COMMENT_DELETE}
+      >
         <Dialog.Header
           title={
-            <Translate
-              zh_hant={`刪除${COMMENT_TYPE_TEXT.zh_hant[type]}`}
-              zh_hans={`删除${COMMENT_TYPE_TEXT.zh_hans[type]}`}
+            <FormattedMessage
+              defaultMessage="Delete {commentType}"
+              id="Cdkhl8"
+              description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+              values={{
+                commentType: COMMENT_TYPE_TEXT[lang][type],
+              }}
             />
           }
-          closeDialog={closeDialog}
-          mode="inner"
         />
 
         <Dialog.Message>
           <p>
-            <Translate
-              zh_hant={`確認刪除${COMMENT_TYPE_TEXT.zh_hant[type]}，${COMMENT_TYPE_TEXT.zh_hant[type]}會馬上消失。`}
-              zh_hans={`确认删除${COMMENT_TYPE_TEXT.zh_hans[type]}，${COMMENT_TYPE_TEXT.zh_hans[type]}会马上消失。`}
+            <FormattedMessage
+              defaultMessage="After deletion, the {commentType} will be removed immediately"
+              id="77tYPg"
+              description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+              values={{
+                commentType: COMMENT_TYPE_TEXT[lang][type],
+              }}
             />
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="red"
-            onClick={() => {
-              onDelete()
-              closeDialog()
-            }}
-          >
-            <Translate id="confirm" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="cancel" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+              color="red"
+              onClick={() => {
+                onDelete()
+                closeDialog()
+              }}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+              color="red"
+              onClick={() => {
+                onDelete()
+                closeDialog()
+              }}
+            />
+          }
+        />
       </Dialog>
     </>
   )

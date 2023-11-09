@@ -2,16 +2,17 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _chunk from 'lodash/chunk'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
+  Media,
   QueryError,
   ShuffleButton,
   Slides,
   Spinner,
   TagDigest,
-  Translate,
   usePublicQuery,
   ViewerContext,
   ViewMoreCard,
@@ -20,7 +21,7 @@ import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { FeedTagsPublicQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const FEED_TAGS = gql`
   query FeedTagsPublic(
@@ -60,7 +61,7 @@ const TagsFeed = () => {
     FEED_TAGS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: { random: lastRandom || 0 },
+      variables: { random: lastRandom || 0, first: perPage },
     },
     { publicQuery: !viewer.isAuthed }
   )
@@ -88,15 +89,26 @@ const TagsFeed = () => {
   }
 
   const SlideHeader = (
-    <SectionHeader
-      type="tags"
-      rightButton={<ShuffleButton onClick={shuffle} />}
-      viewAll={false}
-    />
+    <>
+      <Media lessThan="md">
+        <SectionHeader
+          type="tags"
+          rightButton={<ShuffleButton onClick={shuffle} />}
+          viewAll={false}
+        />
+      </Media>
+      <Media greaterThanOrEqual="md">
+        <SectionHeader
+          type="tags"
+          rightButton={<ShuffleButton onClick={shuffle} />}
+          viewAll={true}
+        />
+      </Media>
+    </>
   )
 
   return (
-    <section className="tags">
+    <section className={styles.tags}>
       <Slides header={SlideHeader}>
         {loading && (
           <Slides.Item>
@@ -112,6 +124,7 @@ const TagsFeed = () => {
                   <TagDigest.Sidebar
                     key={cursor}
                     tag={node}
+                    spacing={['tight', 0]}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'tags',
@@ -126,20 +139,22 @@ const TagsFeed = () => {
             </Slides.Item>
           ))}
       </Slides>
-
-      <section className="backToAll">
-        <ViewMoreCard
-          spacing={['tight', 'tight']}
-          href={PATHS.TAGS}
-          iconProps={{ size: 'sm' }}
-          textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
-          textAlign="center"
-        >
-          <Translate id="viewAll" />
-        </ViewMoreCard>
-      </section>
-
-      <style jsx>{styles}</style>
+      <Media lessThan="md">
+        <section className={styles.backToAll}>
+          <ViewMoreCard
+            spacing={['tight', 'tight']}
+            href={PATHS.TAGS}
+            textIconProps={{
+              size: 'md',
+              weight: 'semibold',
+              spacing: 'xxtight',
+            }}
+            textAlign="center"
+          >
+            <FormattedMessage defaultMessage="View All" id="wbcwKd" />
+          </ViewMoreCard>
+        </section>
+      </Media>
     </section>
   )
 }

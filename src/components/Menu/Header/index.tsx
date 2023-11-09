@@ -1,28 +1,28 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import styles from './styles.css'
+import { capitalizeFirstLetter } from '~/common/utils'
+
+import styles from './styles.module.css'
 
 interface MenuHeaderProps {
   title: string | React.ReactNode
-  size?: 'md-s' | 'lg'
+  size?: 'mdS' | 'lg'
 }
 
 const MenuHeader: React.FC<React.PropsWithChildren<MenuHeaderProps>> = ({
   title,
-  size = 'md-s',
+  size = 'mdS',
   children,
 }) => {
   const titleClasses = classNames({
-    [`size-${size}`]: !!size,
+    [styles[`size${capitalizeFirstLetter(size)}`]]: !!size,
   })
 
   return (
-    <header>
+    <header className={styles.header}>
       <h3 className={titleClasses}>{title}</h3>
       {children}
-
-      <style jsx>{styles}</style>
     </header>
   )
 }

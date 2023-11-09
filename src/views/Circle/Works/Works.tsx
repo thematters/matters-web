@@ -6,6 +6,7 @@ import {
   ArticleDigestFeed,
   EmptyArticle,
   InfiniteScroll,
+  Layout,
   List,
   QueryError,
   Spinner,
@@ -142,14 +143,19 @@ const CircleDetailWorks = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="works">
-        <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <Layout.Main.Spacing hasVertical={false}>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          eof
+        >
           <List>
             {(edges || []).map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
                 <ArticleDigestFeed
                   article={node}
                   hasCircle={false}
+                  hasAuthor={false}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: 'circle_detail',
@@ -158,20 +164,12 @@ const CircleDetailWorks = () => {
                       id: node.id,
                     })
                   }
-                  onClickAuthor={() => {
-                    analytics.trackEvent('click_feed', {
-                      type: 'circle_detail',
-                      contentType: 'user',
-                      location: i,
-                      id: node.author.id,
-                    })
-                  }}
                 />
               </List.Item>
             ))}
           </List>
         </InfiniteScroll>
-      </section>
+      </Layout.Main.Spacing>
     </>
   )
 }

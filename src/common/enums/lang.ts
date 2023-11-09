@@ -1,7 +1,7 @@
 export const LANG_TEXT_MAP = {
-  zh_hant: '繁體中文',
-  zh_hans: '简体中文',
-  en: 'English',
+  zh_hant: '繁中',
+  zh_hans: '简中',
+  en: 'EN',
 }
 
 // This dict contains the language representations in the viewer's language
@@ -35,5 +35,3 @@ export const CONTENT_LANG_TEXT_MAP = {
     la: 'Latin',
   },
 }
-
-export const DEFAULT_LOCALE = '__defaultLocale'

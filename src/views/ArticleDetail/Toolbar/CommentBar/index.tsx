@@ -1,16 +1,15 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
-  ADD_TOAST,
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_LIKE_COIN_DIALOG,
+  ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
   REFETCH_RESPONSES,
-  UNIVERSAL_AUTH_SOURCE,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { appendTarget, numAbbr, translate } from '~/common/utils'
+import { numAbbr, translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
@@ -21,6 +20,7 @@ import {
   LanguageContext,
   Media,
   TextIcon,
+  toast,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -29,7 +29,7 @@ import {
   CommentBarArticlePublicFragment,
 } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CommentBarArticle = CommentBarArticlePublicFragment &
   Partial<CommentBarArticlePrivateFragment>
@@ -45,6 +45,7 @@ const fragments = {
       fragment CommentBarArticlePublic on Article {
         id
         responseCount
+        canComment
       }
     `,
     private: gql`
@@ -72,13 +73,13 @@ const Content = ({
       <Media at="sm">
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="grey-lighter"
+          bgActiveColor="greyLighter"
           aria-label={`${translate({ id: 'putComment', lang })}…`}
           aria-haspopup="dialog"
           {...(props as ButtonProps)}
         >
           <TextIcon
-            icon={<IconComment16 size="md-s" />}
+            icon={<IconComment16 size="mdS" />}
             weight="md"
             spacing="xtight"
             size="sm"
@@ -91,17 +92,16 @@ const Content = ({
       </Media>
       <Media greaterThan="sm">
         <Card
-          bgColor="grey-lighter"
+          bgColor="greyLighter"
           spacing={[0, 0]}
           borderRadius="base"
           role="button"
           ariaHasPopup="dialog"
           {...(props as CardProps)}
         >
-          <p>
+          <p className={styles.content}>
             <Translate id="putComment" />
             <Translate zh_hant="…" zh_hans="…" en="…" />
-            <style jsx>{styles}</style>
           </p>
         </Card>
       </Media>
@@ -120,49 +120,18 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
     return <Content article={article} disabled />
   }
 
-  if (viewer.shouldSetupLikerID) {
-    return (
-      <Content
-        article={article}
-        aria-haspopup="dialog"
-        onClick={() =>
-          window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-        }
-      />
-    )
-  }
-
-  if (viewer.isOnboarding && article.author?.id !== viewer.id) {
-    return (
-      <Content
-        article={article}
-        onClick={() => {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: <Translate id="failureCommentOnboarding" />,
-              },
-            })
-          )
-        }}
-      />
-    )
-  }
-
   if (viewer.isInactive) {
     return (
       <Content
         article={article}
         onClick={() => {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: <Translate id="FORBIDDEN" />,
-              },
-            })
-          )
+          toast.error({
+            message: (
+              <FormattedMessage
+                {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+              />
+            ),
+          })
         }}
       />
     )
@@ -173,42 +142,33 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
       <Content
         article={article}
         onClick={() => {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: <Translate id="failureCommentBlocked" />,
-              },
-            })
-          )
+          toast.error({
+            message: (
+              <FormattedMessage
+                defaultMessage="The author has disabled comments for this article"
+                id="7cwoRo"
+              />
+            ),
+          })
         }}
       />
     )
   }
 
   if (!viewer.isAuthed) {
-    const smUpProps = {
+    const props = {
       onClick: () => {
-        window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+        // deprecated
+        // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
         window.dispatchEvent(
           new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-            detail: { source: UNIVERSAL_AUTH_SOURCE.comment },
+            detail: { trigger: UNIVERSAL_AUTH_TRIGGER.comment },
           })
         )
       },
     }
-    const smProps = appendTarget(PATHS.LOGIN, true)
 
-    return (
-      <>
-        <Media at="sm">
-          <Content article={article} {...smProps} />
-        </Media>
-        <Media greaterThan="sm">
-          <Content aria-haspopup="dialog" article={article} {...smUpProps} />
-        </Media>
-      </>
-    )
+    return <Content aria-haspopup="dialog" article={article} {...props} />
   }
 
   return (

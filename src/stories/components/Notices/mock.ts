@@ -4,7 +4,6 @@ import {
   MOCK_CIRCLE_ARTICLE,
   MOCK_CIRCLE_COMMENT,
   MOCK_COMMENT,
-  MOCK_CRYPTO_WALLET,
   MOCK_PARENT_COMMENT,
   MOCK_TAG,
   MOCK_TRANSACTION,
@@ -404,26 +403,6 @@ export const MOCK_NOTICE_LIST = [
     circle: MOCK_CIRCLE,
   },
 
-  // CryptoWalletAirdrop
-  {
-    __typename: 'CryptoNotice' as any,
-    id: 'CryptoWalletAirdrop',
-    unread: false,
-    createdAt: '2021-10-26T07:29:17.682Z',
-    type: 'CryptoWalletAirdrop' as any,
-    target: MOCK_CRYPTO_WALLET,
-  },
-
-  // CryptoWalletConnected
-  {
-    __typename: 'CryptoNotice' as any,
-    id: 'CryptoWalletConnected',
-    unread: false,
-    createdAt: '2021-10-26T07:29:17.682Z',
-    type: 'CryptoWalletConnected' as any,
-    target: MOCK_CRYPTO_WALLET,
-  },
-
   /**
    * Misc
    */
@@ -444,6 +423,6 @@ export const MOCK_NOTICE_LIST = [
     createdAt: '2020-12-24T07:29:17.682Z',
     message:
       '恭喜！你的作品在社区内大获好评，现在你畅行无阻啦。快去赞赏他人并参与讨论吧。',
-    link: 'https://matters.news',
+    link: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`,
   },
 ]

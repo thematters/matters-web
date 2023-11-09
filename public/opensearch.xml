@@ -1,0 +1,10 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>Matters</ShortName>
+  <Description>Matters - 搜尋作品、標籤、作者</Description>
+  <Url type="text/html" method="get" template="https://matters.town/search?q={searchTerms}"/>
+  <Image width="64" height="64">https://matters.town/static/favicon-64x64.png</Image>
+  <InputEncoding>UTF-8</InputEncoding>
+  <moz:SearchForm>https://matters.town/search</moz:SearchForm>
+</OpenSearchDescription>
+
+

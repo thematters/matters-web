@@ -1,0 +1,20 @@
+.transaction {
+  padding: var(--spacing-base-loose) 0;
+}
+
+.header {
+  @mixin flex-center-space-between;
+
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5rem;
+}
+
+.footer {
+  @mixin flex-center-space-between;
+
+  margin-top: var(--spacing-x-tight);
+  margin-left: var(--spacing-x-loose);
+  font-size: var(--font-size-xs);
+  line-height: 1.125rem;
+}

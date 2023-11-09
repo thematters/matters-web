@@ -1,0 +1,21 @@
+.recommendedTags {
+  padding: 0 var(--spacing-base);
+  margin: var(--spacing-base) 0;
+}
+
+.hint {
+  font-size: var(--font-size-sm-s);
+  line-height: 1.125rem;
+  color: var(--color-grey);
+}
+
+.tagList {
+  margin-top: var(--spacing-base);
+
+  & li {
+    display: inline-block;
+    margin-right: var(--spacing-tight);
+    margin-bottom: var(--spacing-base);
+    line-height: 1.25rem;
+  }
+}

@@ -1,0 +1,112 @@
+.form {
+  margin-top: calc(var(--spacing-loose) * -1);
+
+  @media (--sm-up) {
+    margin-top: calc(var(--spacing-x-tight) * -1);
+  }
+}
+
+.intro {
+  margin: calc(var(--spacing-base) * -1) 0;
+
+  @media (--sm-up) {
+    margin: calc(var(--spacing-base) * -1);
+  }
+}
+
+/* Connect.tsx */
+.divider {
+  margin: var(--spacing-loose) 0;
+}
+
+.subtitle {
+  margin: var(--spacing-loose) 0 calc(var(--spacing-x-tight) * -1);
+  font-size: var(--font-size-xm);
+}
+
+.notice {
+  padding: var(--spacing-base);
+  margin: var(--spacing-loose) 0 var(--spacing-loose);
+  font-size: var(--font-size-sm-s);
+  line-height: 1.5rem;
+  text-align: center;
+  background: var(--color-yellow-lighter);
+  border: 1px solid var(--color-matters-gold);
+  border-radius: 0.5rem;
+
+  & h4 {
+    color: var(--color-matters-gold);
+  }
+
+  & p {
+    color: var(--color-grey-darker);
+  }
+}
+
+/* Dialog */
+.inDialog {
+  &.form {
+    margin-top: calc(var(--spacing-loose) * -1);
+    margin-right: calc(var(--spacing-base) * -1);
+    margin-left: calc(var(--spacing-base) * -1);
+
+    @media (--sm-up) {
+      margin-top: calc(var(--spacing-base) * -1);
+    }
+  }
+
+  & .container {
+    margin-right: var(--spacing-base);
+    margin-left: var(--spacing-base);
+  }
+}
+
+.walletInfo {
+  @mixin border-grey-light;
+  @mixin flex-center-all;
+  @mixin transition;
+
+  position: relative;
+  padding: var(--spacing-tight) var(--spacing-base);
+  margin-bottom: var(--spacing-base);
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+  color: var(--color-black);
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition-property: border-color;
+
+  /* &:hover,
+  &:focus {
+    border-color: var(--color-grey);
+  } */
+
+  & .icon {
+    position: absolute;
+    left: var(--spacing-base-loose);
+    height: 1.375rem;
+  }
+}
+
+.loadingInfo {
+  @mixin flex-center-all;
+
+  flex-direction: column;
+  gap: var(--spacing-tight);
+  align-self: stretch;
+  height: 6.88rem;
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+  color: var(--color-grey-darker);
+  background: var(--color-green-lighter);
+  border-radius: 0.5rem;
+
+  @media (--sm-up) {
+    margin-bottom: var(--spacing-xx-tight);
+  }
+}
+
+.footerSmUpBtns {
+  flex: 1;
+  @mixin flex-center-space-between;
+}

@@ -16,6 +16,7 @@ export class UserProfilePage {
 
   // profile
   displayName: Locator
+  userName: Locator
   bio: Locator
   // followButton: Locator
   // rssButton: Locator
@@ -48,6 +49,7 @@ export class UserProfilePage {
 
     // profile
     this.displayName = page.getByTestId(TEST_ID.USER_PROFILE_DISPLAY_NAME)
+    this.userName = page.getByTestId(TEST_ID.USER_PROFILE_USER_NAME)
     this.bio = page.getByTestId(TEST_ID.USER_PROFILE_BIO)
 
     // feeds
@@ -59,10 +61,10 @@ export class UserProfilePage {
     // dialog
     this.dialog = this.page.getByRole('dialog')
     this.dialogSaveButton = this.dialog.getByRole('button', {
-      name: 'Save',
+      name: 'Confirm',
     })
-    this.dialogDisplayNameInput = this.page.getByPlaceholder('Display Name')
-    this.dialogBioInput = this.page.getByPlaceholder('Enter Bio')
+    this.dialogDisplayNameInput = this.page.getByPlaceholder('Name')
+    this.dialogBioInput = this.page.getByPlaceholder('Bio')
   }
 
   async gotoMeProfile() {
@@ -70,7 +72,7 @@ export class UserProfilePage {
     await pageGoto(this.page, '/')
 
     // click "My Page" button
-    await this.page.getByRole('button', { name: 'My Page' }).click()
+    await this.page.getByTestId(TEST_ID.SIDE_NAV_MY_PAGE).click()
 
     // click "Profile" link
     await this.page.getByRole('link', { name: 'Profile' }).click()
@@ -78,6 +80,21 @@ export class UserProfilePage {
     // confirm User Profile Page
     await expect(this.page.getByTestId(TEST_ID.USER_PROFILE)).toBeVisible()
     await expect(this.feedArticles.first()).toBeVisible()
+  }
+
+  async gotoSettings() {
+    // go to homepage
+    await pageGoto(this.page, '/')
+
+    // click "My Page" button
+    await this.page.getByTestId(TEST_ID.SIDE_NAV_MY_PAGE).click()
+
+    // click "Settings" link
+    await this.page.getByRole('link', { name: 'Settings' }).click()
+    await this.page
+      .getByTestId(TEST_ID.LAYOUT_HEADER)
+      .getByRole('heading', { level: 1, name: 'Settings', exact: true })
+      .isVisible()
   }
 
   async goto(userName: string) {
@@ -91,7 +108,7 @@ export class UserProfilePage {
 
     await waitForAPIResponse({
       page: this.page,
-      path: 'data.singleFileUpload.type',
+      path: 'data.directImageUpload.type',
       isOK: (value) => value === 'profileCover',
     })
 
@@ -105,7 +122,7 @@ export class UserProfilePage {
 
     await waitForAPIResponse({
       page: this.page,
-      path: 'data.singleFileUpload.type',
+      path: 'data.directImageUpload.type',
       isOK: (value) => value === 'avatar',
     })
 

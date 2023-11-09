@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import {
@@ -6,12 +7,10 @@ import {
   IconPin24,
   IconUnPin24,
   Menu,
-  TextIcon,
-  Translate,
   useMutation,
 } from '~/components'
+import { updateCircleBroadcast } from '~/components/GQL'
 import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
-import updateCircleBroadcast from '~/components/GQL/updates/circleBroadcast'
 import {
   PinButtonCommentFragment,
   TogglePinCommentMutation,
@@ -105,22 +104,48 @@ const PinButton = ({
   if (comment.pinned) {
     return (
       <Menu.Item
+        text={
+          circle ? (
+            <FormattedMessage
+              defaultMessage="Unpin Broadcast"
+              id="RFzVUD"
+              description="src/components/Comment/DropdownActions/PinButton.tsx"
+            />
+          ) : (
+            <FormattedMessage
+              defaultMessage="Unpin Comment"
+              id="X+Xvgq"
+              description="src/components/Comment/DropdownActions/PinButton.tsx"
+            />
+          )
+        }
+        icon={<IconUnPin24 size="mdS" />}
         onClick={async () => {
           await unpinComment()
           window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
         }}
-      >
-        <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
-          <Translate
-            id={circle ? 'unpinCircleComment' : 'unpinArticleComment'}
-          />
-        </TextIcon>
-      </Menu.Item>
+      />
     )
   }
 
   return (
     <Menu.Item
+      text={
+        circle ? (
+          <FormattedMessage
+            defaultMessage="Pin Broadcast"
+            id="AGcU5J"
+            description="src/components/Comment/DropdownActions/PinButton.tsx"
+          />
+        ) : (
+          <FormattedMessage
+            defaultMessage="Pin Comment"
+            id="jJ1Brc"
+            description="src/components/Comment/DropdownActions/PinButton.tsx"
+          />
+        )
+      }
+      icon={<IconPin24 size="mdS" />}
       onClick={
         canPin
           ? async () => {
@@ -129,11 +154,7 @@ const PinButton = ({
             }
           : undefined
       }
-    >
-      <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
-        <Translate id={circle ? 'pinCircleComment' : 'pinArticleComment'} />
-      </TextIcon>
-    </Menu.Item>
+    />
   )
 }
 

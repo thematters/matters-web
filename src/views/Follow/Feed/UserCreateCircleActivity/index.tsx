@@ -2,7 +2,6 @@ import { analytics } from '~/common/utils'
 import { Translate, UserDigest } from '~/components'
 import { UserCreateCircleActivityFragment } from '~/gql/graphql'
 
-import UnfollowUserActionButton from '../DropdownActions/UnfollowUser'
 import FeedCircle from '../FollowingFeedCircle'
 import FeedHead from '../FollowingFeedHead'
 import { fragments } from './gql'
@@ -26,7 +25,6 @@ const UserCreateCircleActivity = ({
       }
       circle={node}
       date={createdAt}
-      actions={<UnfollowUserActionButton user={actor} />}
       onClick={() => {
         analytics.trackEvent('click_feed', {
           type: 'following',

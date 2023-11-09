@@ -8,16 +8,20 @@ import { ArticleDetailPage, DraftDetailPage, fuzzingRun } from '../helpers'
 export const publishDraft = async ({
   page,
   isMobile,
+  allowResponse = true,
 }: {
   page: Page
   isMobile?: boolean | undefined
+  allowResponse?: boolean
 }) => {
   const draftDetail = new DraftDetailPage(page, isMobile)
   await draftDetail.createDraft()
 
   // Required: Fill title and content
   const title = await draftDetail.fillTitle()
-  const content = await draftDetail.fillContent()
+  const content = await draftDetail.fillContent(title)
+
+  await draftDetail.checkResponse({ allow: allowResponse })
   // Optional
   const [summary, tags, , collectedArticleTitle, supportSetting, license, , ,] =
     (await fuzzingRun({
@@ -45,7 +49,7 @@ export const publishDraft = async ({
       ),
       string | undefined,
       boolean | undefined,
-      boolean | undefined
+      boolean | undefined,
     ]
 
   // Publish
@@ -74,7 +78,9 @@ export const publishDraft = async ({
 
   if (tags && tags.length > 0) {
     const articleTags = await articleDetail.getTags()
-    expect(articleTags.sort().join(',')).toBe(tags.sort().join(','))
+    expect(articleTags.sort().join(',')).toBe(
+      '#,'.repeat(tags.length) + tags.sort().join(',')
+    )
   }
 
   if (collectedArticleTitle) {
@@ -95,5 +101,11 @@ export const publishDraft = async ({
   if (license) {
     const articleLicense = await articleDetail.getLicense()
     expect(stripSpaces(articleLicense)).toBe(stripSpaces(license))
+  }
+
+  return {
+    title,
+    summary,
+    content,
   }
 }

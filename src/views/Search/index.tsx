@@ -7,7 +7,7 @@ import {
   SEARCH_HISTORY_LENGTH,
   STORAGE_KEY_SEARCH_HISTORY,
 } from '~/common/enums'
-import { storage, toPath } from '~/common/utils'
+import { storage } from '~/common/utils'
 import {
   Head,
   Layout,
@@ -19,8 +19,8 @@ import {
 } from '~/components'
 
 import AggregateResults from './AggregateResults'
-// import EmptySearch from './EmptySearch'
-import styles from './styles.css'
+import styles from './styles.module.css'
+
 const Search = () => {
   const viewer = useContext(ViewerContext)
   const storageKey = STORAGE_KEY_SEARCH_HISTORY + '_' + viewer.id
@@ -45,23 +45,11 @@ const Search = () => {
     updateSearchHistory(nsh)
   }
 
-  const { getQuery, router } = useRoute()
+  const { getQuery } = useRoute()
   const q = getQuery('q')
-  // TODO: Just test for product team, will be removed when release
-  const cancelable = getQuery('cancelable')
-
-  const onCancel = () => {
-    const path = toPath({ page: 'search' })
-    router.replace(path.href)
-  }
 
   const isHistory = !q
   const isAggregate = !isHistory
-
-  // const showBackButton = isSmallUp && isOverview
-  // const showMeButton = !isSmallUp && isOverview
-
-  const showCancelButton = !isHistory && cancelable
 
   useEffect(() => {
     if (!isHistory) return
@@ -77,38 +65,28 @@ const Search = () => {
 
   return (
     <Layout.Main>
-      <Media greaterThanOrEqual="xl">
-        <Layout.Header
-          left={<Layout.Header.BackButton />}
-          right={<Layout.Header.Title id="search" />}
-        />
-      </Media>
-      <Media lessThan="xl">
+      <Media lessThan="lg">
         <Layout.Header
           right={
-            <section className="layoutHeaderRight">
+            <section className={styles.layoutHeaderRight}>
               <SearchBar hasDropdown={false} />
-              {showCancelButton && (
-                <span style={{ marginLeft: '1rem' }}>
-                  <Layout.Header.CancelButton onClick={onCancel} />
-                </span>
-              )}
             </section>
           }
         />
       </Media>
 
       <Head title={{ id: 'search' }} />
+
       {isHistory && (
-        <Media lessThan="xl">
+        <Media lessThan="lg">
           <SearchHistory
             data={searchHistory?.slice(0, SEARCH_HISTORY_DISPLAY_LENGTH)}
             removeSearchHistoryItem={removeSearchHistory}
           />
         </Media>
       )}
+
       {isAggregate && <AggregateResults />}
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

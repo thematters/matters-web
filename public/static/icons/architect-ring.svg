@@ -1,9 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88">
-  <defs>
-    <linearGradient id="architect-ring-a" x1="90.244%" x2="17.533%" y1="3.247%" y2="105.266%">
-      <stop offset="0%" stop-color="#DC752B"/>
-      <stop offset="100%" stop-color="#F0E6B4"/>
-    </linearGradient>
-  </defs>
-  <path fill="url(#architect-ring-a)" fill-rule="evenodd" d="M82.5001475,44.000022 C82.5001475,65.263022 65.2630475,82.500122 43.9999475,82.500122 C22.7369475,82.500122 5.4998525,65.263022 5.4998525,44.000022 C5.4998525,22.737022 22.7369475,5.499878 43.9999475,5.499878 C65.2630475,5.499878 82.5001475,22.737022 82.5001475,44.000022 Z M80.0001475,44.000022 C80.0001475,63.882322 63.8823475,80.000122 43.9999475,80.000122 C24.1176475,80.000122 7.9998575,63.882322 7.9998575,44.000022 C7.9998575,24.117722 24.1176475,7.999882 43.9999475,7.999882 C63.8823475,7.999882 80.0001475,24.117722 80.0001475,44.000022 Z"/>
+<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1530_3588)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M72 36C72 55.8822 55.8822 72 36 72C16.1177 72 0 55.8822 0 36C0 16.1177 16.1177 0 36 0C55.8822 0 72 16.1177 72 36ZM69.6623 36C69.6623 54.5912 54.5912 69.6623 36 69.6623C17.4088 69.6623 2.33765 54.5912 2.33765 36C2.33765 17.4088 17.4088 2.33765 36 2.33765C54.5912 2.33765 69.6623 17.4088 69.6623 36Z" fill="url(#paint0_linear_1530_3588)"/>
+<circle cx="36" cy="36" r="33.5" stroke="white"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1530_3588" x1="64.9758" y1="2.33765" x2="12.6234" y2="75.7912" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DC752B"/>
+<stop offset="0.510417" stop-color="#F2BA4C"/>
+<stop offset="1" stop-color="#FFE460"/>
+</linearGradient>
+<clipPath id="clip0_1530_3588">
+<rect width="72" height="72" fill="white"/>
+</clipPath>
+</defs>
 </svg>

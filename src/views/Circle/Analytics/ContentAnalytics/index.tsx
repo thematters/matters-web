@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconAnalyticsContent24 } from '@/public/static/icons/24px/analytics-content.svg'
 import {
@@ -8,7 +9,6 @@ import {
   List,
   QueryError,
   Spinner,
-  Translate,
   useRoute,
 } from '~/components'
 import {
@@ -22,7 +22,7 @@ import CircleContentAnalyticsTabs, {
   CircleContentAnalyticsType,
 } from './ContentTabs'
 import { CIRCLE_CONTENT_ANALYTICS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type FeedType =
   | CircleContentAnalyticsPaywallQuery
@@ -91,14 +91,14 @@ const CircleContentAnalytics = () => {
   const [type, setType] = useState<CircleContentAnalyticsType>('paywall')
 
   return (
-    <section className="container">
+    <section className={styles.container}>
       <SectionHead
         icon={IconAnalyticsContent24}
         title={
-          <Translate
-            zh_hant="站內閱讀熱門排行"
-            zh_hans="站内阅读热门排行"
-            en="Hottest"
+          <FormattedMessage
+            defaultMessage="Hottest"
+            id="mCAIcg"
+            description="src/views/Circle/Analytics/ContentAnalytics/index.tsx"
           />
         }
       />
@@ -106,8 +106,6 @@ const CircleContentAnalytics = () => {
       <CircleContentAnalyticsTabs type={type} setType={setType} />
 
       <Feed type={type} />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

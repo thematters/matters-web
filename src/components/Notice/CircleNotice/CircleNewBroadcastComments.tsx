@@ -4,17 +4,16 @@ import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { ViewerContext } from '~/components'
+import { LinkWrapper, ViewerContext } from '~/components'
 import { CircleNewBroadcastCommentsFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeCircleCard from '../NoticeCircleCard'
 import NoticeCircleName from '../NoticeCircleName'
+import NoticeContentDigest from '../NoticeContentDigest'
 import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
+import NoticeDigest from '../NoticeDigest'
 import NoticeHeadActors from '../NoticeHeadActors'
-import NoticeTypeIcon from '../NoticeTypeIcon'
-import styles from '../styles.css'
 
 type CircleNewBroadcastCommentsType = {
   notice: CircleNewBroadcastCommentsFragment
@@ -52,65 +51,86 @@ const CircleNewBroadcastComments = ({
     circle: notice.circle,
   })
 
-  return (
-    <section
-      className="container"
-      data-test-id={TEST_ID.CIRCLE_NEW_BROADCAST_COMMENTS}
-    >
-      <section className="avatar-wrap">
-        {isMultiActors ? (
-          <NoticeTypeIcon type="circle" />
-        ) : (
-          <NoticeActorAvatar user={notice.actors[0]} />
-        )}
-      </section>
-
-      <section className="content-wrap">
-        <NoticeHead>
-          <NoticeHeadActors actors={notice.actors} />
-
+  if (isCircleOwner) {
+    return (
+      <NoticeDigest
+        notice={notice}
+        action={
           <>
-            {isCircleOwner ? (
-              <FormattedMessage
-                defaultMessage="in your circle"
-                description=""
-              />
-            ) : (
-              <FormattedMessage defaultMessage="commented in" description="" />
-            )}
-            <NoticeCircleName circle={notice.circle} path={circleCommentPath} />
             {replyCount && !mentionCount && (
               <FormattedMessage
-                defaultMessage=" commented in Broadcast"
-                description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
-              />
-            )}
-            {!replyCount && mentionCount && (
-              <FormattedMessage
-                defaultMessage="Broadcast and mentioned you in comment"
+                defaultMessage="commented in your circle broadcast"
+                id="Y+spJC"
                 description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
               />
             )}
             {replyCount && mentionCount && (
               <FormattedMessage
-                defaultMessage="Broadcast and mentioned you in comment"
+                defaultMessage="mentioned you in your circle broadcast comment"
+                id="XQTBu6"
                 description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
               />
             )}
           </>
-          {isMultiActors && (
-            <section className="multi-actor-avatars">
-              {notice.actors.map((actor, index) => (
-                <NoticeActorAvatar key={index} user={actor} size="md" />
-              ))}
-            </section>
-          )}
-        </NoticeHead>
-        <NoticeDate notice={notice} />
-      </section>
+        }
+        content={
+          !isMultiActors ? (
+            <LinkWrapper {...circleCommentPath}>
+              <NoticeContentDigest content={latestComment.content || ''} />
+            </LinkWrapper>
+          ) : undefined
+        }
+        testId={TEST_ID.NOTICE_CIRCLE_NEW_BROADCAST_COMMENTS}
+      />
+    )
+  }
 
-      <style jsx>{styles}</style>
-    </section>
+  return (
+    <NoticeDigest
+      notice={notice}
+      action={
+        <>
+          {replyCount && !mentionCount && (
+            <FormattedMessage
+              defaultMessage="commented broadcast in {circleName}"
+              id="EZMrtJ"
+              description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+              values={{
+                circleName: (
+                  <NoticeCircleName
+                    circle={notice.circle}
+                    path={circleCommentPath}
+                  />
+                ),
+              }}
+            />
+          )}
+          {replyCount && mentionCount && (
+            <FormattedMessage
+              defaultMessage="mentioned you in broadcast comment in {circleName}"
+              id="r66dXx"
+              description="src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+              values={{
+                circleName: (
+                  <NoticeCircleName
+                    circle={notice.circle}
+                    path={circleCommentPath}
+                  />
+                ),
+              }}
+            />
+          )}
+        </>
+      }
+      content={
+        !isMultiActors ? (
+          <LinkWrapper {...circleCommentPath}>
+            <NoticeContentDigest content={latestComment.content || ''} />
+          </LinkWrapper>
+        ) : undefined
+      }
+      testId={TEST_ID.NOTICE_CIRCLE_NEW_BROADCAST_COMMENTS}
+    />
   )
 }
 
@@ -129,6 +149,7 @@ CircleNewBroadcastComments.fragments = {
       comments {
         id
         type
+        content
         parentComment {
           id
         }
@@ -136,6 +157,7 @@ CircleNewBroadcastComments.fragments = {
       replies {
         id
         type
+        content
         parentComment {
           id
         }
@@ -146,6 +168,7 @@ CircleNewBroadcastComments.fragments = {
       mentions {
         id
         type
+        content
         parentComment {
           id
         }

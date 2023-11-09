@@ -1,16 +1,14 @@
-import { useContext } from 'react'
-
-import { ENTITY_TYPE, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
+import { ENTITY_TYPE } from '~/common/enums'
 import {
   Button,
   TextIcon,
   toDigestTagPlaceholder,
   Translate,
-  ViewerContext,
 } from '~/components'
 import {
   SetCollectionProps,
   SetCoverProps,
+  SetResponseProps,
   SetTagsProps,
   ToggleAccessProps,
 } from '~/components/Editor'
@@ -22,9 +20,11 @@ import {
 
 import {
   useEditDraftAccess,
+  useEditDraftCanComment,
   useEditDraftCollection,
   useEditDraftCover,
   useEditDraftPublishISCN,
+  useEditDraftSensitiveByAuthor,
   useEditDraftTags,
   useEditSupportSetting,
 } from '../hooks'
@@ -62,8 +62,6 @@ const SettingsButton = ({
   ownCircles,
   publishable,
 }: SettingsButtonProps) => {
-  const viewer = useContext(ViewerContext)
-
   const { edit: editCollection, saving: collectionSaving } =
     useEditDraftCollection(draft)
   const {
@@ -72,6 +70,8 @@ const SettingsButton = ({
     refetch,
   } = useEditDraftCover(draft)
   const { edit: editTags, saving: tagsSaving } = useEditDraftTags(draft)
+  const { edit: toggleContentSensitive, saving: contentSensitiveSaving } =
+    useEditDraftSensitiveByAuthor(draft)
   const { edit: togglePublishISCN, saving: iscnPublishSaving } =
     useEditDraftPublishISCN(draft)
   const { edit: editAccess, saving: accessSaving } = useEditDraftAccess(
@@ -81,6 +81,10 @@ const SettingsButton = ({
 
   const { edit: editSupport, saving: supportSaving } =
     useEditSupportSetting(draft)
+
+  const { edit: toggleComment, saving: canCommentSaving } =
+    useEditDraftCanComment(draft)
+  const canComment = draft.canComment
 
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
@@ -118,41 +122,45 @@ const SettingsButton = ({
     editSupportSetting: editSupport,
     supportSettingSaving: supportSaving,
     onOpenSupportSetting: () => undefined,
+    contentSensitive: draft.sensitiveByAuthor,
+    toggleContentSensitive,
+    contentSensitiveSaving,
     iscnPublish: draft.iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,
   }
 
-  if (!viewer.shouldSetupLikerID) {
-    return (
-      <EditorSettingsDialog
-        saving={false}
-        disabled={collectionSaving || coverSaving || tagsSaving || accessSaving}
-        confirmButtonText={<Translate id="publishNow" />}
-        cancelButtonText={<Translate id="publishAbort" />}
-        ConfirmStepContent={ConfirmPublishDialogContent}
-        {...coverProps}
-        {...tagsProps}
-        {...collectionProps}
-        {...accessProps}
-      >
-        {({ openDialog: openEditorSettingsDialog }) => (
-          <ConfirmButton
-            openDialog={openEditorSettingsDialog}
-            disabled={disabled}
-          />
-        )}
-      </EditorSettingsDialog>
-    )
+  const responseProps: SetResponseProps = {
+    canComment,
+    toggleComment,
   }
 
   return (
-    <ConfirmButton
-      openDialog={() =>
-        window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
+    <EditorSettingsDialog
+      saving={false}
+      disabled={
+        collectionSaving ||
+        coverSaving ||
+        tagsSaving ||
+        accessSaving ||
+        canCommentSaving
       }
-      disabled={disabled}
-    />
+      confirmButtonText={<Translate id="publishNow" />}
+      cancelButtonText={<Translate id="publishAbort" />}
+      ConfirmStepContent={ConfirmPublishDialogContent}
+      {...coverProps}
+      {...tagsProps}
+      {...collectionProps}
+      {...accessProps}
+      {...responseProps}
+    >
+      {({ openDialog: openEditorSettingsDialog }) => (
+        <ConfirmButton
+          openDialog={openEditorSettingsDialog}
+          disabled={disabled}
+        />
+      )}
+    </EditorSettingsDialog>
   )
 }
 

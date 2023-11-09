@@ -1,131 +1,94 @@
-import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
-  ADD_TOAST,
-  OPEN_LIKE_COIN_DIALOG,
+  ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
+  PATHS,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
+import { analytics } from '~/common/utils'
 import {
   Button,
-  IconPen16,
-  IconSpinner16,
-  LanguageContext,
-  Media,
-  TextIcon,
-  Translate,
-  useMutation,
+  ButtonProps,
+  IconNavCreate32,
+  toast,
+  Tooltip,
+  useRoute,
 } from '~/components'
-import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-import { CreateDraftMutation } from '~/gql/graphql'
 
 interface Props {
-  allowed: boolean
   authed?: boolean
   forbidden?: boolean
 }
 
-const BaseWriteButton = ({
-  onClick,
-  loading,
-}: {
-  onClick: () => any
-  loading?: boolean
-}) => {
-  const { lang } = useContext(LanguageContext)
-
-  const WriteIcon = loading ? (
-    <IconSpinner16 size="sm" color="white" />
-  ) : (
-    <IconPen16 size="sm" color="white" />
-  )
+const BaseWriteButton = (props: ButtonProps) => {
+  const intl = useIntl()
 
   return (
-    <>
-      <Media greaterThanOrEqual="lg">
-        <Button
-          size={['5rem', '2.25rem']}
-          bgColor="gold"
-          onClick={onClick}
-          aria-label={translate({ id: 'write', lang })}
-        >
-          <TextIcon icon={WriteIcon} weight="md" color="white">
-            <Translate id="write" />
-          </TextIcon>
-        </Button>
-      </Media>
-      <Media lessThan="lg">
-        <Button
-          size={['2rem', '2rem']}
-          bgColor="gold"
-          onClick={onClick}
-          aria-label={translate({ id: 'write', lang })}
-        >
-          <TextIcon icon={WriteIcon} weight="md" color="white" />
-        </Button>
-      </Media>
-    </>
+    <Tooltip
+      content={intl.formatMessage({
+        defaultMessage: 'Create',
+        description: 'src/components/Buttons/Write/index.tsx',
+        id: 'Bb2R0G',
+      })}
+      placement="left"
+      delay={[1000, null]}
+    >
+      <Button
+        bgActiveColor="greyLighter"
+        size={['2rem', '2rem']}
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Create',
+          description: 'src/components/Buttons/Write/index.tsx',
+          id: 'Bb2R0G',
+        })}
+        {...props}
+      >
+        <IconNavCreate32 size="lg" color="black" />
+      </Button>
+    </Tooltip>
   )
 }
 
-export const WriteButton = ({ allowed, authed, forbidden }: Props) => {
-  const router = useRouter()
-  const { lang } = useContext(LanguageContext)
-  const [putDraft, { loading }] = useMutation<CreateDraftMutation>(
-    CREATE_DRAFT,
-    {
-      variables: { title: translate({ id: 'untitle', lang }) },
-    }
-  )
-
-  if (!allowed) {
-    return (
-      <BaseWriteButton
-        onClick={() =>
-          window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-        }
-      />
-    )
-  }
+export const WriteButton = ({ authed, forbidden }: Props) => {
+  const { isInPath } = useRoute()
+  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
 
   return (
     <BaseWriteButton
+      href={
+        authed && !forbidden && !isInDraftDetail
+          ? PATHS.ME_DRAFT_NEW
+          : undefined
+      }
+      htmlHref={
+        authed && !forbidden && isInDraftDetail ? PATHS.ME_DRAFT_NEW : undefined
+      }
       onClick={async () => {
         if (!authed) {
           window.dispatchEvent(
             new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-              detail: { source: UNIVERSAL_AUTH_SOURCE.create },
+              detail: { trigger: UNIVERSAL_AUTH_TRIGGER.createDraft },
             })
           )
           return
         }
 
         if (forbidden) {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: <Translate id="FORBIDDEN_BY_STATE" />,
-              },
-            })
-          )
+          toast.error({
+            message: (
+              <FormattedMessage
+                {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+              />
+            ),
+          })
+
           return
         }
 
-        analytics.trackEvent('click_button', {
-          type: 'write',
-        })
-        const result = await putDraft()
-        const { slug, id } = result?.data?.putDraft || {}
-
-        if (slug && id) {
-          const path = toPath({ page: 'draftDetail', slug, id })
-          router.push(path.href)
-        }
+        analytics.trackEvent('click_button', { type: 'write' })
       }}
-      loading={loading}
     />
   )
 }

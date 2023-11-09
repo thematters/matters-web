@@ -1,8 +1,7 @@
-/* @styled-jsx=global */
-
 :root {
   --color-matters-gold: #c0a46b;
   --color-matters-green: #0d6763;
+  --color-matters-green-dark: #0a524f;
   --color-black: #333;
   --color-grey-darkest: #505050;
   --color-grey-darker: #808080;
@@ -11,6 +10,8 @@
   --color-grey-light: #ddd;
   --color-grey-lighter: #f7f7f7;
   --color-white: #fff;
+  --color-white-light: #fff9;
+  --color-red-dark: #a04a34;
   --color-red: #c85c41;
   --color-red-lighter: #fae7e3;
   --color-green-lighter: #f2faf7;
@@ -19,8 +20,7 @@
   --color-analytics-red: #c25050;
 
   /* hover */
-  --color-matters-gold-active: color(var(--color-matters-gold) shade(5%));
-  --color-matters-green-active: color(var(--color-matters-green) shade(5%));
+  --color-matters-gold-active: #b69c66;
   --color-grey-lighter-active: #ededed;
 
   /* line */

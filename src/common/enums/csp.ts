@@ -1,3 +1,9 @@
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+const site_domain_tld =
+    process.env.NEXT_PUBLIC_SITE_DOMAIN_TLD || 'matters.town',
+  site_domain_tld_old =
+    process.env.NEXT_PUBLIC_SITE_DOMAIN_TLD_OLD || 'matters.news'
+
 const SCRIPT_SRC = [
   "'self'",
 
@@ -12,6 +18,9 @@ const SCRIPT_SRC = [
   // ReCaptcha
   'www.google.com/recaptcha/',
   'www.gstatic.com/recaptcha/',
+
+  // Turnstile
+  'challenges.cloudflare.com',
 
   // Programmable Google Search
   'cse.google.com',
@@ -28,44 +37,59 @@ const SCRIPT_SRC = [
 
   // Stripe
   'js.stripe.com',
-] // .join(' ')
+]
 
 const STYLE_SRC = [
   "'self'",
+
+  // Next.js Assets
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
 
   // style-jsx
   "'unsafe-inline'",
 
   // Programmable Google Search
   'www.google.com/cse/',
-] // .join(' ')
-
-/* const { hostname: NEXT_PUBLIC_API_HOSTNAME } = new URL(
-  process.env.NEXT_PUBLIC_API_URL as string
-) */
+]
 
 const IMG_SRC = [
   "'self'",
 
   // Asssets
   'data:',
-  process.env.NEXT_PUBLIC_ASSET_DOMAIN,
+  process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN,
+  process.env.NEXT_PUBLIC_LEGACY_ASSET_DOMAIN,
+
+  process.env.NEXT_PUBLIC_CF_IMAGE_URL
+    ? new URL(process.env.NEXT_PUBLIC_CF_IMAGE_URL).hostname
+    : undefined,
 
   // Next.js Assets
   process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN?.replace(
+    site_domain_tld,
+    site_domain_tld_old
+  ),
 
-  // 'server-develop.matters.news',
-  // NEXT_PUBLIC_API_HOSTNAME as string,
-  process.env.NEXT_PUBLIC_API_URL
-    ? new URL(process.env.NEXT_PUBLIC_API_URL).hostname
-    : undefined,
+  // For image validation
+  // @see {@url src/common/utils/form/image.tsx}
+  'blob:',
+  `*.${site_domain_tld}`,
+  isProd ? undefined : 'localhost',
+  isProd ? undefined : '127.0.0.1',
+
+  // Alchemy NFT CDN
+  'nft-cdn.alchemy.com',
 
   // for some old articles were using this s3 urls directly
   'matters-server-production.s3-ap-southeast-1.amazonaws.com',
 
   // GA
   'www.google-analytics.com',
-] // .join(' ')
+
+  // WalletConnect
+  '*.walletconnect.com',
+]
 
 const MEDIA_SRC = IMG_SRC
 
@@ -74,8 +98,23 @@ const CONNECT_SRC = [
   'ws:',
   'wss:',
 
+  // Next.js Assets
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
+
   // API
   process.env.NEXT_PUBLIC_API_URL,
+  process.env.NEXT_PUBLIC_API_URL?.replace(
+    site_domain_tld,
+    site_domain_tld_old
+  ),
+
+  process.env.NEXT_PUBLIC_API_URL?.replace(
+    site_domain_tld,
+    site_domain_tld_old
+  ),
+
+  // Cloudflare Image Upload
+  'upload.imagedelivery.net',
 
   // Sentry
   '*.ingest.sentry.io',
@@ -100,42 +139,49 @@ const CONNECT_SRC = [
   '*.alchemy.com',
 
   // IPFS Gateways
-  'ipfs.io/ipfs/',
-  'ipfs.infura.io/ipfs/',
-  'dweb.link/ipfs/',
-  'crustwebsites.net/ipfs/',
+  'gateway.ipfs.io/ipfs/',
   'cloudflare-ipfs.com/ipfs/',
-  'ipfs.fleek.co/ipfs/',
   'gateway.pinata.cloud/ipfs/',
-  'meson.network/ipfs/',
-  'ipfs.filebase.io/ipfs/',
-] // .join(' ')
+  'ipfs.io/ipfs/',
+  '*.cf-ipfs.com',
+  'cf-ipfs.com/ipfs/',
+  '4everland.io/ipfs/',
+  '*.4everland.io',
+  'storry.tv/ipfs/',
+  '*.storry.tv',
+  'ipfs.runfission.com/ipfs/',
+  'konubinix.eu/ipfs/',
+  'starbase.gw3.io/ipfs/',
+  '*.gw3.io',
+]
 
 const FRAME_SRC = [
   "'self'",
 
   // Embed
-  'jsfiddle.net',
   'button.like.co',
   'www.youtube.com',
   'player.vimeo.com',
-  'player.youku.com',
+  'player.bilibili.com',
+  'www.bilibili.com',
+  'www.instagram.com',
+  'jsfiddle.net',
+  'codepen.io',
 
   // ReCaptcha
   'www.google.com/recaptcha/',
   'recaptcha.google.com/recaptcha/',
 
+  // Turnstile
+  'challenges.cloudflare.com',
+
   // Stripe
   'js.stripe.com',
   'hooks.stripe.com',
-] // .join(' ')
 
-const PREFETCH_SRC = [
-  "'self'",
-
-  // Next.js Assets
-  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
-] // .join(' ')
+  // WalletConnect
+  '*.walletconnect.com',
+]
 
 export const CSP_POLICY = Object.entries({
   'script-src': SCRIPT_SRC,
@@ -144,13 +190,12 @@ export const CSP_POLICY = Object.entries({
   'media-src': MEDIA_SRC,
   'connect-src': CONNECT_SRC,
   'frame-src': FRAME_SRC,
-  'prefetch-src': PREFETCH_SRC,
   'default-src': ["'self'"],
 })
   .map(
     ([k, v]) =>
       `${k} ${(Array.isArray(v)
-        ? v
+        ? Array.from(new Set(v))
             .map((s) => s?.trim())
             .filter(Boolean)
             .join(' ')

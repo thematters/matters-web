@@ -3,25 +3,20 @@ import jump from 'jump.js'
 // import _differenceBy from 'lodash/differenceBy'
 // import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
-import {
-  dom,
-  filterComments,
-  mergeConnections,
-  translate,
-} from '~/common/utils'
+import { URL_FRAGMENT } from '~/common/enums'
+import { dom, filterComments, mergeConnections } from '~/common/utils'
 import {
   CommentForm,
   EmptyComment,
   InfiniteScroll,
-  LanguageContext,
   List,
   QueryError,
   Spinner,
   ThreadComment,
   Throw404,
-  Translate,
+  toast,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -34,7 +29,7 @@ import {
   DISCUSSION_PRIVATE,
   DISCUSSION_PUBLIC,
 } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import Wall from './Wall'
 
 type Comment = NonNullable<
@@ -46,8 +41,8 @@ const RESPONSES_COUNT = 15
 const CricleDiscussion = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
   const name = getQuery('name')
+  const intl = useIntl()
 
   // public data
   const { data, loading, error, client } =
@@ -152,21 +147,16 @@ const CricleDiscussion = () => {
   )
 
   const submitCallback = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="討論已送出"
-              zh_hans="讨论已送出"
-              en="Discussion sent"
-            />
-          ),
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="Discussion sent"
+          id="9nNpKP"
+          description="src/views/Circle/Discussion/Discussion.tsx"
+        />
+      ),
+    })
+
     refetch()
   }
 
@@ -198,12 +188,17 @@ const CricleDiscussion = () => {
         offset: fragment === URL_FRAGMENT.COMMENTS ? -10 : -64,
       })
     }
-    const element = dom.$(`#${fragment}`)
 
-    if (!element) {
-      loadMore({ before: parentId }).then(jumpToFragment)
-    } else {
-      jumpToFragment()
+    try {
+      const element = dom.$(`#${fragment}`)
+
+      if (!element) {
+        loadMore({ before: parentId }).then(jumpToFragment)
+      } else {
+        jumpToFragment()
+      }
+    } catch (e) {
+      return
     }
   }, [error, privateFetched, discussionLoading, hasPermission, circle?.id])
 
@@ -250,16 +245,16 @@ const CricleDiscussion = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="discussion">
+      <section className={styles.discussion}>
         {!circle.owner.isBlocking && (
-          <header>
+          <header className={styles.header}>
             <CommentForm
               circleId={circle?.id}
               type="circleDiscussion"
-              placeholder={translate({
-                lang,
-                zh_hant: '催更、提問、分享、討論…',
-                zh_hans: '催更、提问、分享、讨论…',
+              placeholder={intl.formatMessage({
+                defaultMessage: 'Request an update, ask, share and discuss',
+                id: 'EW5R4p',
+                description: 'src/views/Circle/Discussion/Discussion.tsx',
               })}
               submitCallback={submitCallback}
             />
@@ -270,7 +265,11 @@ const CricleDiscussion = () => {
           (comments.length <= 0 && (
             <EmptyComment
               description={
-                <Translate zh_hant="還沒有眾聊" zh_hans="还没有众聊" />
+                <FormattedMessage
+                  defaultMessage="No discussion yet"
+                  id="50cquj"
+                  description="src/views/Circle/Discussion/Discussion.tsx"
+                />
               }
             />
           ))}
@@ -278,6 +277,7 @@ const CricleDiscussion = () => {
         <InfiniteScroll
           hasNextPage={!!pageInfo?.hasNextPage}
           loadMore={loadMore}
+          eof
         >
           <List spacing={['xloose', 0]}>
             {comments.map((comment) => (
@@ -295,8 +295,6 @@ const CricleDiscussion = () => {
             ))}
           </List>
         </InfiniteScroll>
-
-        <style jsx>{styles}</style>
       </section>
     </>
   )

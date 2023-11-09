@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog } from '~/components'
 import SearchingArea, {
   SelectNode,
 } from '~/components/SearchSelect/SearchingArea'
@@ -44,35 +45,51 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
   const selectedNodes = stagingNodes.filter(({ selected }) => !!selected)
   const disabled = selectedNodes.length === 0
 
+  const SubmitButton = (
+    <Dialog.TextButton
+      disabled={disabled}
+      onClick={() => save({ nodes: selectedNodes })}
+      text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title="addCircleInvitation"
         closeDialog={closeDialog}
-        closeTextId="cancel"
-        rightButton={
-          <Dialog.Header.RightButton
-            disabled={disabled}
-            onClick={() => save({ nodes: selectedNodes })}
-            text={<Translate id="confirm" />}
-          />
-        }
-      />
-      <SearchingArea
-        inSearchingArea={inSearchingArea}
-        searchType="Invitee"
-        toStagingArea={toStagingArea}
-        toSearchingArea={toSearchingArea}
-        addNodeToStaging={addNodeToStaging}
-        inviteEmail
+        rightBtn={SubmitButton}
       />
 
-      <StagingArea
-        nodes={stagingNodes}
-        setNodes={setStagingNodes}
-        hint="hintAddCircleInvitee"
-        inStagingArea={inStagingArea}
-        draggable={false}
+      <Dialog.Content noSpacing fixedHeight>
+        <SearchingArea
+          inSearchingArea={inSearchingArea}
+          searchType="Invitee"
+          toStagingArea={toStagingArea}
+          toSearchingArea={toSearchingArea}
+          addNodeToStaging={addNodeToStaging}
+          inviteEmail
+        />
+        <StagingArea
+          nodes={stagingNodes}
+          setNodes={setStagingNodes}
+          hint="hintAddCircleInvitee"
+          inStagingArea={inStagingArea}
+          draggable={false}
+        />
+      </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            {SubmitButton}
+          </>
+        }
       />
     </>
   )

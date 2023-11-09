@@ -1,5 +1,7 @@
-import { ADD_TOAST } from '~/common/enums'
-import { Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
+import { toast } from '~/components'
 
 import AppreciateButton from './AppreciateButton'
 
@@ -14,14 +16,13 @@ const ForbiddenButton = ({
     count={count}
     total={total}
     onClick={() => {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="FORBIDDEN_BY_STATE" />,
-          },
-        })
-      )
+      toast.error({
+        message: (
+          <FormattedMessage
+            {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+          />
+        ),
+      })
     }}
   />
 )

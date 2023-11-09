@@ -1,13 +1,15 @@
 import { useEffect } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
   MAX_SEARCH_RESULTS_LENGTH,
 } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptySearch,
+  Head,
   InfiniteScroll,
   List,
   Spinner,
@@ -15,18 +17,18 @@ import {
   usePublicQuery,
   useRoute,
 } from '~/components'
-import { SearchAggregateArticlesPublicQuery } from '~/gql/graphql'
+import {
+  ArticleDigestFeedArticlePrivateFragment,
+  ArticleDigestFeedArticlePublicFragment,
+  SearchAggregateArticlesPublicQuery,
+} from '~/gql/graphql'
 
-import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
-import styles from './styles.css'
 
 const AggregateArticleResults = () => {
   const { getQuery } = useRoute()
   const q = getQuery('q')
-  // TODO: Just test for team, will be removed when release
   const version = getQuery('version')
-  const coefficients = getQuery('coefficients')
 
   /**
    * Data Fetching
@@ -36,11 +38,7 @@ const AggregateArticleResults = () => {
     usePublicQuery<SearchAggregateArticlesPublicQuery>(
       SEARCH_AGGREGATE_ARTICLES_PUBLIC,
       {
-        variables: {
-          key: q,
-          version: version === '' ? undefined : version,
-          coefficients: coefficients === '' ? undefined : coefficients,
-        },
+        variables: { key: q, version: version === '' ? undefined : version },
       }
     )
 
@@ -55,6 +53,8 @@ const AggregateArticleResults = () => {
   // pagination
   const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
+
+  const intl = useIntl()
 
   /**
    * Render
@@ -103,12 +103,28 @@ const AggregateArticleResults = () => {
   }
 
   return (
-    <section className="aggregate-section">
+    <>
+      <Head
+        title={intl.formatMessage(
+          {
+            defaultMessage: '{q} - Matters Search',
+            id: 'l9LpDx',
+            description: 'src/views/Search/AggregateResults/Articles.tsx',
+          },
+          { q: stripSpaces(q) }
+        )}
+        path={`/search?q=${stripSpaces(q)}&type=article`}
+        noSuffix
+      />
+
       <InfiniteScroll
         hasNextPage={
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
+        eof={
+          <FormattedMessage defaultMessage="End of the results" id="ui1+QC" />
+        }
       >
         <List>
           {edges.map(
@@ -116,11 +132,11 @@ const AggregateArticleResults = () => {
               node.__typename === 'Article' && (
                 <List.Item key={cursor + node.id}>
                   <ArticleDigestFeed
-                    article={node}
-                    is="link"
-                    isConciseFooter={true}
+                    article={
+                      node as ArticleDigestFeedArticlePublicFragment &
+                        Partial<ArticleDigestFeedArticlePrivateFragment>
+                    }
                     hasCircle={false}
-                    hasFollow={false}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'search_article',
@@ -145,11 +161,7 @@ const AggregateArticleResults = () => {
           )}
         </List>
       </InfiniteScroll>
-      {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
-        <EndOfResults />
-      )}
-      <style jsx>{styles}</style>
-    </section>
+    </>
   )
 }
 

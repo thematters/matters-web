@@ -4,7 +4,7 @@ import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
 import { Layout, Translate, useRoute } from '~/components'
 
 import { Box } from '../../Box'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 const OAUTH_CALLBACK_ERROR_CODE = {
   userNotFound: 1,
@@ -85,9 +85,9 @@ const OAuthCallbackFailure = () => {
     <Layout.Main>
       <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
 
-      <Layout.Spacing>
+      <Layout.Main.Spacing>
         <Box avatar={avatar[provider]} title={title[provider]}>
-          <section className="content">
+          <section className={styles.content}>
             <h2>
               <Translate
                 zh_hant="出錯了"
@@ -101,11 +101,9 @@ const OAuthCallbackFailure = () => {
                 <Translate {...errorDetail} />
               </p>
             )}
-
-            <style jsx>{styles}</style>
           </section>
         </Box>
-      </Layout.Spacing>
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

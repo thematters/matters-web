@@ -1,10 +1,10 @@
-import VisuallyHidden from '@reach/visually-hidden'
+import { VisuallyHidden } from '@reach/visually-hidden'
 
 import { IconChecked } from '~/components'
 import { TextIcon } from '~/components/TextIcon'
 
 import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CheckBoxProps = {
   name: string
@@ -19,6 +19,10 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
   hint,
   error,
+  hintAlign,
+
+  spacingTop,
+  spacingBottom,
 
   ...inputProps
 }) => {
@@ -26,16 +30,16 @@ const CheckBox: React.FC<CheckBoxProps> = ({
   const fieldMsgId = `field-msg-${name}`
 
   return (
-    <Field>
-      <label htmlFor={fieldId}>
+    <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
+      <label className={styles.label} htmlFor={fieldId}>
         <TextIcon
           icon={
             <IconChecked
-              size="md-s"
+              size="mdS"
               color={inputProps.checked ? 'green' : 'grey'}
             />
           }
-          color="grey-dark"
+          color="greyDark"
           spacing="xtight"
         >
           <span>{hint}</span>
@@ -52,9 +56,11 @@ const CheckBox: React.FC<CheckBoxProps> = ({
         </VisuallyHidden>
       </label>
 
-      <Field.Footer fieldMsgId={fieldMsgId} error={error} />
-
-      <style jsx>{styles}</style>
+      <Field.Footer
+        fieldMsgId={fieldMsgId}
+        error={error}
+        hintAlign={hintAlign}
+      />
     </Field>
   )
 }

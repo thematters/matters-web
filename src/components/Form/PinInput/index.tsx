@@ -4,7 +4,7 @@ import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
 
 import Field, { FieldProps } from '../Field'
 import Item from './Item'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  * PIN Input Component
@@ -39,10 +39,14 @@ const Input: React.FC<InputProps> = ({
   value,
   label,
   extraButton,
-  labelVisHidden,
+  hasLabel,
 
   hint,
   error,
+  hintAlign,
+
+  spacingTop,
+  spacingBottom,
 }) => {
   const values = [...value.split(''), ...Array(length).fill('')].slice(
     0,
@@ -116,16 +120,16 @@ const Input: React.FC<InputProps> = ({
   }
 
   return (
-    <Field>
+    <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
       <Field.Header
         htmlFor={`field-${name}-1`}
         label={label}
         extraButton={extraButton}
-        labelVisHidden={labelVisHidden}
+        hasLabel={hasLabel}
       />
 
       <Field.Content>
-        <section className="pin-input">
+        <section className={styles.pinInput}>
           {values.map((val, index) => (
             <Item
               key={index}
@@ -147,9 +151,8 @@ const Input: React.FC<InputProps> = ({
         fieldMsgId={`field-msg-${name}`}
         hint={hint}
         error={error}
+        hintAlign={hintAlign}
       />
-
-      <style jsx>{styles}</style>
     </Field>
   )
 }

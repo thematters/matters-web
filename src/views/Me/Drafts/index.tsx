@@ -1,6 +1,4 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useEffect } from 'react'
 
 import { mergeConnections } from '~/common/utils'
 import {
@@ -12,51 +10,14 @@ import {
   List,
   QueryError,
   Spinner,
-  useCache,
 } from '~/components'
 import { MeDraftFeedQuery } from '~/gql/graphql'
 
-import { DraftsContext } from './context'
-
-const ME_DRAFTS_FEED = gql`
-  query MeDraftFeed($after: String) {
-    viewer {
-      id
-      drafts(input: { first: 20, after: $after })
-        @connection(key: "viewerDrafts") {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...DraftDigestFeedDraft
-          }
-        }
-      }
-    }
-  }
-  ${DraftDigest.Feed.fragments.draft}
-`
-
-type Edge = NonNullable<
-  NonNullable<MeDraftFeedQuery['viewer']>['drafts']['edges']
->
+import { ME_DRAFTS_FEED } from './gql'
 
 export const BaseMeDrafts = () => {
-  const [edges, setEdges, DraftsContextProvider] = useCache<Edge>(
-    [],
-    DraftsContext
-  )
-
   const { data, loading, error, fetchMore } =
     useQuery<MeDraftFeedQuery>(ME_DRAFTS_FEED)
-
-  useEffect(() => {
-    setEdges(data?.viewer?.drafts.edges ?? [])
-  }, [data?.viewer?.drafts.edges?.length])
 
   if (loading) {
     return <Spinner />
@@ -67,9 +28,9 @@ export const BaseMeDrafts = () => {
   }
 
   const connectionPath = 'viewer.drafts'
-  const { pageInfo } = data?.viewer?.drafts || {}
+  const { edges, pageInfo } = data?.viewer?.drafts || {}
 
-  if (edges.length <= 0 || !pageInfo) {
+  if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyDraft />
   }
 
@@ -85,30 +46,27 @@ export const BaseMeDrafts = () => {
     })
 
   return (
-    <DraftsContextProvider>
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List>
-          {edges.map(({ node, cursor }) => (
-            <List.Item key={cursor}>
-              <DraftDigest.Feed draft={node} />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
-    </DraftsContextProvider>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
+      <List>
+        {edges.map(({ node, cursor }) => (
+          <List.Item key={cursor}>
+            <DraftDigest.Feed draft={node} />
+          </List.Item>
+        ))}
+      </List>
+    </InfiniteScroll>
   )
 }
 
 const MeDrafts = () => (
   <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="myDrafts" />}
-    />
+    <Layout.Header left={<Layout.Header.Title id="myDrafts" />} />
 
     <Head title={{ id: 'myDrafts' }} />
 
-    <BaseMeDrafts />
+    <Layout.Main.Spacing hasVertical={false}>
+      <BaseMeDrafts />
+    </Layout.Main.Spacing>
   </Layout.Main>
 )
 

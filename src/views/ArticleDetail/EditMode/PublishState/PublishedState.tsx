@@ -3,8 +3,6 @@ import { useEffect } from 'react'
 
 import { toPath } from '~/common/utils'
 import { Dialog, ShareDialog, Translate } from '~/components'
-import { EditModeArticleQuery } from '~/gql/graphql'
-
 interface Props {
   article: {
     id: string
@@ -14,11 +12,7 @@ interface Props {
       userName?: string | null
     }
   }
-  draft: NonNullable<
-    NonNullable<
-      EditModeArticleQuery['article'] & { __typename: 'Article' }
-    >['drafts']
-  >[0]
+  newestMediaHash: string
 
   cancel: () => void
 }
@@ -35,12 +29,12 @@ const BasePublishedState = ({
   return null
 }
 
-const PublishedState = ({ article, draft, cancel }: Props) => {
+const PublishedState = ({ article, cancel, newestMediaHash }: Props) => {
   const router = useRouter()
 
   const path = toPath({
     page: 'articleDetail',
-    article: { ...article, mediaHash: draft.mediaHash },
+    article: { ...article, mediaHash: newestMediaHash },
   })
 
   return (
@@ -73,19 +67,35 @@ const PublishedState = ({ article, draft, cancel }: Props) => {
           en="Article republished"
         />
       }
-      footerButtons={
-        <Dialog.Footer.Button
+      btns={
+        <Dialog.RoundedButton
+          text={
+            <Translate
+              zh_hant="查看修訂作品"
+              zh_hans="查看修订作品"
+              en="View republished article"
+            />
+          }
           onClick={() => {
             cancel()
             router.push(path.href)
           }}
-        >
-          <Translate
-            zh_hant="查看修訂作品"
-            zh_hans="查看修订作品"
-            en="View republished article"
-          />
-        </Dialog.Footer.Button>
+        />
+      }
+      smUpBtns={
+        <Dialog.TextButton
+          text={
+            <Translate
+              zh_hant="查看修訂作品"
+              zh_hans="查看修订作品"
+              en="View republished article"
+            />
+          }
+          onClick={() => {
+            cancel()
+            router.push(path.href)
+          }}
+        />
       }
     >
       {({ openDialog }) => <BasePublishedState openShareDialog={openDialog} />}

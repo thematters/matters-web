@@ -3,8 +3,6 @@ name: Test E2E
 on: push
 
 env:
-  PLAYWRIGHT_TEST_BASE_URL: 'https://web-develop.matters.news'
-  PLAYWRIGHT_RUNTIME_ENV: 'ci'
   PLAYWRIGHT_AUTH_EMAIL_ALICE: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL_ALICE }}
   PLAYWRIGHT_AUTH_PWD_ALICE: ${{ secrets.PLAYWRIGHT_AUTH_PWD_ALICE }}
   PLAYWRIGHT_AUTH_EMAIL_BOB: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL_BOB }}
@@ -42,7 +40,7 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
       - name: Install Playwright Browsers
-        run: npm run test:prepare
+        run: npm run test:e2e:prepare
         if: steps.playwright_cache.outputs.cache-hit != 'true'
 
       - name: Generate Types (Develop)
@@ -54,7 +52,7 @@ jobs:
         run: npm run gen:type:prod
 
       - name: Run Playwright tests
-        run: npm run test
+        run: cp .env.dev .env.local && npm run test:e2e
 
       - name: Output Playwright tests
         uses: actions/upload-artifact@v3

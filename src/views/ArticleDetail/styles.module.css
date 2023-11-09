@@ -1,0 +1,23 @@
+.content {
+  min-height: 100vh;
+  padding: var(--spacing-base);
+
+  @media (--sm-up) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  &.editing {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+}
+
+.title {
+  margin-bottom: var(--spacing-base);
+}
+
+.block {
+  padding: var(--spacing-loose) 0 0;
+  margin: var(--spacing-loose) 0 var(--spacing-base);
+}

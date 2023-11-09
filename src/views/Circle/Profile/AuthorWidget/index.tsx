@@ -4,7 +4,7 @@ import CommentContent from '~/components/Comment/Content'
 import { AuthorWidgetCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type AuthorWidgetProps = {
   circle: AuthorWidgetCircleFragment
@@ -17,11 +17,11 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
     userName: circle.owner.userName || '',
   })
   return (
-    <section className="author-widget">
+    <section className={styles.authorWidget}>
       <Card
-        bgColor="grey-lighter"
+        bgColor="greyLighter"
         spacing={['base', 'base']}
-        borderColor="grey-lighter"
+        borderColor="greyLighter"
         borderRadius="base"
         {...path}
       >
@@ -29,12 +29,13 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
           user={circle.owner}
           hasFollow={false}
           spacing={[0, 0]}
-          bgColor="none"
+          bgColor="transparent"
+          bgActiveColor="transparent"
         />
 
         {pinnedBroadcast && (
-          <section className="pinnedBroadcast">
-            <span className="icon">
+          <section className={styles.pinnedBroadcast}>
+            <span className={styles.icon}>
               <IconBroadcast24 size="md" />
             </span>
 
@@ -48,7 +49,6 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
           </section>
         )}
       </Card>
-      <style jsx>{styles}</style>
     </section>
   )
 }

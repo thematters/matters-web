@@ -7,7 +7,7 @@ export * from './events'
 export * from './externalLinks'
 export * from './file'
 export * from './hardcode'
-export * from './keyCodes'
+export * from './keyValue'
 export * from './lang'
 export * from './oauth'
 export * from './payment'
@@ -48,10 +48,36 @@ export const VERIFICATION_CODE_TYPES = {
   payment_password_reset: 'payment_password_reset',
 }
 
+export const MAX_ARTICE_TITLE_LENGTH = 100
+export const MAX_ARTICE_SUMMARY_LENGTH = 200
+export const MAX_ARTICLE_CONTENT_LENGTH = 50e3
+export const MAX_ARTICLE_SUPPORT_LENGTH = 140
+
 export const MAX_ARTICLE_REVISION_COUNT = 4
 export const MAX_ARTICLE_REVISION_DIFF = 50
+export const MAX_ARTICLE_TAG_LENGTH = 3
+export const MAX_ARTICLE_COLLECT_LENGTH = 3
 
 export const MAX_TAG_CONTENT_LENGTH = 50
 export const MAX_TAG_DESCRIPTION_LENGTH = 200
 export const TAG_CONTENT_CLAMP_LENGTH = 7
 export const TAG_CONTENT_CLAMP_LATIN_LETTERS_LENGTH = 20
+
+export const MAX_COLLECTION_TITLE_LENGTH = 40
+export const MAX_COLLECTION_DESCRIPTION_LENGTH = 200
+
+export const MIN_CIRCLE_NAME_LENGTH = 2
+export const MAX_CIRCLE_NAME_LENGTH = 20
+
+export const MIN_CIRCLE_DISPLAY_NAME_LENGTH = 2
+export const MAX_CIRCLE_DISPLAY_NAME_LENGTH = 12
+
+export const MAX_DESCRIPTION_LENGTH = 200
+
+export const MIN_USER_DISPLAY_NAME_LENGTH = 2
+export const MAX_USER_DISPLAY_NAME_LENGTH = 20
+export const MAX_USER_DESCRIPTION_LENGTH = 140
+export const MIN_USER_NAME_LENGTH = 4
+export const MAX_USER_NAME_LENGTH = 15
+
+export const MAX_CHANGE_EMAIL_TIME_DAILY = 3

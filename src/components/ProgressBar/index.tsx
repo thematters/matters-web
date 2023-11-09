@@ -2,8 +2,6 @@ import { useRouter } from 'next/router'
 import NProgress from 'nprogress'
 import { useEffect } from 'react'
 
-import styles from './styles.css'
-
 const ProgressBar = () => {
   const router = useRouter()
 
@@ -35,11 +33,7 @@ const ProgressBar = () => {
     }
   }, [])
 
-  return (
-    <style jsx global>
-      {styles}
-    </style>
-  )
+  return <></>
 }
 
 export default ProgressBar

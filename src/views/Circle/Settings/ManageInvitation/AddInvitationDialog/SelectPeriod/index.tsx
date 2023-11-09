@@ -1,4 +1,6 @@
-import { Form, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Form } from '~/components'
 
 interface Props {
   period: number
@@ -12,17 +14,14 @@ const SelectPeriod = ({ period, onChange }: Props) => {
     <Form.Select
       name="select-period"
       label={
-        <Translate
-          zh_hant="免費資格時長"
-          zh_hans="免费资格时长"
-          en="Free trial period"
-        />
+        <FormattedMessage defaultMessage="Free trial period" id="FmWYRt" />
       }
       onChange={(option) => onChange(option.value)}
       options={options.map((value) => ({
         name: (
           <>
-            {value} <Translate id="days" />
+            {value}
+            <FormattedMessage defaultMessage="days" id="Bc20la" />
           </>
         ),
         value,

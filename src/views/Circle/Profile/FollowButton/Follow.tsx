@@ -1,20 +1,17 @@
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
+import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
 import {
-  Button,
-  TextIcon,
-  Translate,
-  useMutation,
-  ViewerContext,
-} from '~/components'
+  updateCircleFollowerCount,
+  updateCircleFollowers,
+} from '~/components/GQL'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
-import updateCircleFollowerCount from '~/components/GQL/updates/circleFollowerCount'
-import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
 import {
   FollowButtonCirclePrivateFragment,
   ToggleFollowCircleMutation,
@@ -60,7 +57,7 @@ const Follow = ({ circle }: FollowProps) => {
     if (!viewer.isAuthed) {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { source: UNIVERSAL_AUTH_SOURCE.followCircle },
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.followCircle },
         })
       )
       return
@@ -78,8 +75,8 @@ const Follow = ({ circle }: FollowProps) => {
       borderColor="green"
       onClick={onClick}
     >
-      <TextIcon weight="md" size="md-s">
-        <Translate id="follow" />
+      <TextIcon weight="md" size="mdS">
+        <FormattedMessage defaultMessage="Follow" id="ieGrWo" />
       </TextIcon>
     </Button>
   )

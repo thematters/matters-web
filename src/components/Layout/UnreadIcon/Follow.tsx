@@ -3,14 +3,14 @@ import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
 import {
-  IconNavFollowing24,
-  IconNavFollowingActive24,
+  IconNavFollowing32,
+  IconNavFollowingActive32,
   ViewerContext,
 } from '~/components'
 import UNREAD_FOLLOWING from '~/components/GQL/queries/unreadFollowing'
 import { UnreadFollowingQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FollowUnreadIconProps {
   active?: boolean
@@ -30,22 +30,23 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   // FIXME: https://github.com/apollographql/apollo-client/issues/3775
   useEffect(() => {
     if (viewer.isAuthed) {
-      startPolling(1000 * 60) // 60s
+      startPolling(1000 * 60 * 3) // 3 mins
     }
   }, [])
 
   const unread = data?.viewer?.status?.unreadFollowing
-  const iconClasses = classNames({ 'unread-icon': true, unread })
+  const iconClasses = classNames({
+    [styles.unreadIcon]: true,
+    [styles.unread]: unread,
+  })
 
   return (
     <span className={iconClasses}>
       {active ? (
-        <IconNavFollowingActive24 size="md" color="green" />
+        <IconNavFollowingActive32 size="lg" />
       ) : (
-        <IconNavFollowing24 size="md" />
+        <IconNavFollowing32 size="lg" />
       )}
-
-      <style jsx>{styles}</style>
     </span>
   )
 }

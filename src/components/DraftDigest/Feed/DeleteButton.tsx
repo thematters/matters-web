@@ -1,19 +1,18 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
+import { TEST_ID } from '~/common/enums'
 import {
-  Button,
   Dialog,
-  IconDraftDelete12,
-  TextIcon,
-  Translate,
+  IconTrash24,
+  toast,
   useDialogSwitch,
   useMutation,
 } from '~/components'
+import { updateUserDrafts } from '~/components/GQL'
 import { DeleteButtonDraftFragment, DeleteDraftMutation } from '~/gql/graphql'
 
-import { DraftsContext } from '../../../views/Me/Drafts/context'
+import styles from './styles.module.css'
 
 interface DeleteButtonProps {
   draft: DeleteButtonDraftFragment
@@ -34,92 +33,82 @@ const fragments = {
 
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
-  const [edges, setEdges] = useContext(DraftsContext)
+  const intl = useIntl()
 
   const [deleteDraft] = useMutation<DeleteDraftMutation>(DELETE_DRAFT, {
     variables: { id: draft.id },
-    update: () => {
-      const filteredEdges = (edges ?? []).filter(
-        ({ node }) => node.id !== draft.id
-      )
-      setEdges(filteredEdges)
+    update: (cache) => {
+      updateUserDrafts({
+        cache,
+        targetId: draft.id,
+        type: 'remove',
+      })
     },
   })
 
   const onDelete = async () => {
     await deleteDraft()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="草稿已刪除"
-              zh_hans="草稿已删除"
-              en="draft has been deleted"
-            />
-          ),
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage defaultMessage="Draft has been deleted" id="yAflVX" />
+      ),
+    })
   }
 
   return (
     <>
-      <Button
-        spacing={[0, 'xtight']}
-        size={[null, '1.25rem']}
-        bgColor="grey-lighter"
+      <button
         onClick={openDialog}
+        className={styles.deleteButton}
+        type="button"
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Delete',
+          id: 'K3r6DQ',
+        })}
       >
-        <TextIcon
-          icon={<IconDraftDelete12 size="xs" />}
-          size="xs"
-          color="grey-dark"
-          weight="md"
-        >
-          <Translate id="delete" />
-        </TextIcon>
-      </Button>
+        <IconTrash24 size="md" />
+      </button>
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
-        <Dialog.Header
-          title="deleteDraft"
-          closeDialog={closeDialog}
-          mode="inner"
-        />
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_DELETE_DRAFT}
+      >
+        <Dialog.Header title="deleteDraft" />
 
         <Dialog.Message>
           <p>
-            <Translate
-              zh_hant="確認刪除草稿，草稿會馬上消失。"
-              zh_hans="确认删除草稿，草稿会马上消失。"
-              en="Are you sure you want to delete draft?."
+            <FormattedMessage
+              defaultMessage="Are you sure you want to delete draft?"
+              id="VbxMwX"
             />
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="red"
-            onClick={() => {
-              onDelete()
-              closeDialog()
-            }}
-          >
-            <Translate id="confirm" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="cancel" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+              color="red"
+              onClick={() => {
+                onDelete()
+                closeDialog()
+              }}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+              color="red"
+              onClick={() => {
+                onDelete()
+                closeDialog()
+              }}
+            />
+          }
+        />
       </Dialog>
     </>
   )

@@ -1,12 +1,6 @@
-import { ADD_TOAST } from '~/common/enums'
-import {
-  IconMute24,
-  IconUnMute24,
-  Menu,
-  TextIcon,
-  Translate,
-  useMutation,
-} from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { IconMute20, Menu, toast, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {
   BlockUserPrivateFragment,
@@ -36,32 +30,43 @@ const BlockUserButton = ({
   )
   const onUnblock = async () => {
     await unblockUser()
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: <Translate id="successUnblock" />,
-        },
-      })
-    )
+
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="User unblocked. User can now comment on your articles."
+          id="mSAY3/"
+          description="src/components/BlockUser/Button/index.tsx"
+        />
+      ),
+    })
   }
 
   if (user.isBlocked) {
     return (
-      <Menu.Item onClick={onUnblock}>
-        <TextIcon icon={<IconUnMute24 size="md" />} size="md" spacing="base">
-          <Translate id="unblockUser" />
-        </TextIcon>
-      </Menu.Item>
+      <Menu.Item
+        text={
+          <FormattedMessage
+            defaultMessage="Unblock"
+            id="bBYO6x"
+            description="src/components/BlockUser/Button/index.tsx"
+          />
+        }
+        icon={<IconMute20 size="mdS" />}
+        onClick={onUnblock}
+      />
     )
   }
 
   return (
-    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconMute24 size="md" />} size="md" spacing="base">
-        <Translate id="blockUser" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      onClick={openDialog}
+      ariaHasPopup="dialog"
+      textColor="greyDarker"
+      textActiveColor="black"
+      text={<FormattedMessage defaultMessage="Block User" id="vAc1Bw" />}
+      icon={<IconMute20 size="mdS" />}
+    />
   )
 }
 

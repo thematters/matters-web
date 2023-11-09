@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
@@ -17,16 +18,13 @@ import {
 } from '~/components'
 import { SearchAggregateUsersPublicQuery } from '~/gql/graphql'
 
-import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_USERS_PUBLIC } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const AggregateUserResults = () => {
   const { getQuery } = useRoute()
   const q = getQuery('q')
-  // TODO: Just test for team, will be removed when release
   const version = getQuery('version')
-  const coefficients = getQuery('coefficients')
 
   /**
    * Data Fetching
@@ -35,13 +33,7 @@ const AggregateUserResults = () => {
   const { data, loading, fetchMore } =
     usePublicQuery<SearchAggregateUsersPublicQuery>(
       SEARCH_AGGREGATE_USERS_PUBLIC,
-      {
-        variables: {
-          key: q,
-          version: version === '' ? undefined : version,
-          coefficients: coefficients === '' ? undefined : coefficients,
-        },
-      }
+      { variables: { key: q, version: version === '' ? undefined : version } }
     )
 
   useEffect(() => {
@@ -103,12 +95,15 @@ const AggregateUserResults = () => {
   }
 
   return (
-    <section className="aggregate-section">
+    <section className={styles.aggregateSection}>
       <InfiniteScroll
         hasNextPage={
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
+        eof={
+          <FormattedMessage defaultMessage="End of the results" id="ui1+QC" />
+        }
       >
         <Menu>
           {edges.map(
@@ -116,11 +111,12 @@ const AggregateUserResults = () => {
               node.__typename === 'User' && (
                 <Menu.Item
                   key={cursor + node.id}
-                  spacing={['base', 'base']}
+                  spacing={['base', 0]}
                   {...toPath({
                     page: 'userProfile',
                     userName: node.userName || '',
                   })}
+                  bgActiveColor="none"
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: 'search_user',
@@ -131,16 +127,20 @@ const AggregateUserResults = () => {
                     })
                   }
                 >
-                  <UserDigest.Concise user={node} avatarSize="xl" />
+                  <UserDigest.Rich
+                    user={node}
+                    bgColor="transparent"
+                    bgActiveColor="transparent"
+                    hasFollow={false}
+                    hasState={false}
+                    spacing={[0, 0]}
+                    subtitle={`@${node.userName}`}
+                  />
                 </Menu.Item>
               )
           )}
         </Menu>
       </InfiniteScroll>
-      {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
-        <EndOfResults />
-      )}
-      <style jsx>{styles}</style>
     </section>
   )
 }

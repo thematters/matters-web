@@ -1,0 +1,161 @@
+@define-mixin line-clamp-3 {
+  @mixin line-clamp;
+
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  font-weight: var(--font-weight-normal);
+
+  & .header {
+    display: flex;
+
+    & > a {
+      margin-right: var(--spacing-x-tight);
+    }
+
+    & .singleActorInfo {
+      @mixin line-clamp-3;
+
+      align-self: center;
+    }
+  }
+
+  & .content {
+    @mixin line-clamp-3;
+
+    margin-top: var(--spacing-tight);
+  }
+
+  & .footer {
+    @mixin flex-center-end;
+
+    margin-top: var(--spacing-x-tight);
+  }
+}
+
+.avatarWrap {
+  flex-shrink: 0;
+  width: 2rem;
+  margin-right: var(--spacing-x-tight);
+
+  &.multi {
+    & .avatar {
+      border: 2px solid var(--color-white);
+    }
+
+    & > * {
+      position: relative;
+      display: inline-flex;
+
+      & + :global(*) {
+        margin-left: calc(var(--spacing-x-tight) * -1);
+      }
+
+      &:nth-child(1) {
+        z-index: 2;
+      }
+
+      &:nth-child(2) {
+        z-index: 1;
+      }
+    }
+  }
+}
+
+.contentWrap {
+  flex-grow: 1;
+  padding-top: var(--spacing-xx-tight);
+
+  &.overflowHidden {
+    overflow: hidden;
+  }
+}
+
+.headWrap {
+  margin-bottom: var(--spacing-x-tight);
+
+  & h4 {
+    font-weight: var(--font-weight-normal);
+    color: var(--color-grey);
+
+    & a {
+      font-weight: var(--font-weight-medium);
+      color: var(--color-black);
+    }
+  }
+
+  & p {
+    margin-top: var(--spacing-xx-tight);
+    color: var(--color-grey);
+  }
+}
+
+.iconWrap {
+  padding: var(--spacing-x-tight);
+}
+
+/* NoticeCircleName */
+.circleDisplayName {
+  color: var(--color-black);
+}
+
+/* NoticeTag */
+.tagContent {
+  color: var(--color-black);
+}
+
+/* NoticeMultiActors */
+.moreActors {
+  & button {
+    cursor: auto;
+  }
+}
+
+/* NoticeActorAvatar */
+.noticeActorAvatar {
+  height: 2rem;
+}
+
+/* NoticeArticleTitle */
+.noticeArticleTitle {
+  color: var(--color-black);
+}
+
+/* NoticeContentActors */
+.noticeActorsNameAndTitleInfo {
+  font-size: var(--font-size-base);
+  color: var(--color-grey);
+}
+
+.noticeActorsNameAndTitleTitle {
+  /* @mixin line-clamp-3; */
+}
+
+/* NoticeActorName */
+.displayName {
+  font-size: var(--font-size-base);
+  color: var(--color-black);
+}
+
+/* NoticeArticleCard */
+.noticeArticleCard {
+  margin-left: var(--spacing-xx-loose);
+}
+
+/* NoticeContentDigest */
+.noticeContentDigest {
+  @mixin border-left-grey;
+  @mixin line-clamp;
+
+  padding-left: var(--spacing-base);
+  margin-left: var(--spacing-xx-loose);
+  color: var(--color-black);
+  text-overflow: ellipsis;
+  border-left-style: dashed;
+  border-left-width: 3px;
+  -webkit-line-clamp: 3;
+}

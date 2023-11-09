@@ -1,5 +1,8 @@
-import { ArticleDigestDropdown, IconCollection24 } from '~/components'
-import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import {
+  ArticleDigestDropdown,
+  EditorSearchSelectDialog,
+  IconCollection24,
+} from '~/components'
 import { SetCollectionProps } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import {
@@ -7,8 +10,9 @@ import {
   SearchExclude,
 } from '~/gql/graphql'
 
+import ArticleCustomStagingArea from '../../ArticleCustomStagingArea'
 import Box from '../Box'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type SidebarCollectionProps = {
   disabled?: boolean
@@ -21,7 +25,7 @@ const SidebarCollection = ({
   disabled,
 }: SidebarCollectionProps) => {
   return (
-    <SearchSelectDialog
+    <EditorSearchSelectDialog
       title="collectArticle"
       hint="hintEditCollection"
       searchType="Article"
@@ -31,6 +35,7 @@ const SidebarCollection = ({
       }
       nodes={collection}
       saving={collectionSaving}
+      CustomStagingArea={ArticleCustomStagingArea}
     >
       {({ openDialog }) => (
         <Box
@@ -40,7 +45,7 @@ const SidebarCollection = ({
           disabled={disabled}
         >
           {collection.length > 0 && (
-            <ul>
+            <ul className={styles.list}>
               {collection.map((article) => (
                 <li key={article.id}>
                   <ArticleDigestDropdown
@@ -48,17 +53,15 @@ const SidebarCollection = ({
                     titleTextSize="sm"
                     spacing={['base', 'base']}
                     bgColor="none"
-                    bgActiveColor="grey-lighter"
+                    bgActiveColor="greyLighter"
                   />
                 </li>
               ))}
-
-              <style jsx>{styles}</style>
             </ul>
           )}
         </Box>
       )}
-    </SearchSelectDialog>
+    </EditorSearchSelectDialog>
   )
 }
 

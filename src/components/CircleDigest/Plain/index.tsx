@@ -1,11 +1,12 @@
 import React from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { IconCircle16, LinkWrapper, TextIcon } from '~/components'
 import { DigestPlainCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CircleDigestPlainProps = {
   circle: DigestPlainCircleFragment
@@ -20,18 +21,20 @@ const CircleDigestPlain = ({ circle, onClick }: CircleDigestPlainProps) => {
   })
 
   return (
-    <LinkWrapper {...path} onClick={onClick}>
+    <LinkWrapper
+      {...path}
+      onClick={onClick}
+      testId={TEST_ID.DIGRET_CIRCLE_PLAIN}
+    >
       <TextIcon
-        icon={<IconCircle16 size="sm" />}
+        icon={<IconCircle16 size="xs" />}
         color="green"
         spacing="xxtight"
         weight="normal"
-        size="sm-s"
+        size="xs"
       >
-        <span className="name">{circle.displayName}</span>
+        <span className={styles.name}>{circle.displayName}</span>
       </TextIcon>
-
-      <style jsx>{styles}</style>
     </LinkWrapper>
   )
 }

@@ -10,7 +10,7 @@ const CreateCircle = () => {
   const [circle, setCircle] = useState<PutCircleMutation['putCircle']>()
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
+    <Layout.Main>
       <Head title={{ id: 'circleCreation' }} />
 
       {currStep === 'init' && (

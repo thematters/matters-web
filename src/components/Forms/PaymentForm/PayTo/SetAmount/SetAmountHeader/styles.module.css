@@ -1,0 +1,11 @@
+.setAmountHeader {
+  @mixin flex-center-space-between;
+
+  padding-bottom: var(--spacing-base);
+  border-bottom: 0.5px solid var(--color-line-grey);
+}
+
+.changeButton {
+  display: inline-block;
+  margin-left: var(--spacing-x-tight);
+}

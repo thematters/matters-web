@@ -1,0 +1,214 @@
+.card {
+  @mixin transition;
+
+  position: relative;
+  display: block;
+  outline: none;
+  transition-property: color, background-color;
+
+  &:not(.disabled) {
+    cursor: pointer;
+  }
+}
+
+.activeOutlineAuto {
+  &:not(.disabled) {
+    &:focus {
+      outline: auto;
+    }
+  }
+}
+
+/* Background */
+.bgTransparent {
+  background: transparent;
+
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: transparent;
+    }
+  }
+}
+
+.bgWhite {
+  background: var(--color-white);
+
+  & .card.bgGreyLighter {
+    @mixin border-grey;
+
+    border-color: transparent;
+  }
+
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-grey-lighter);
+
+      & .card.bgGreyLighter {
+        @mixin border-grey;
+      }
+    }
+  }
+}
+
+.bgGreyLighter {
+  background: var(--color-grey-lighter);
+
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-grey-lighter-active);
+    }
+  }
+}
+
+.bgActiveGreyLighter {
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-grey-lighter);
+    }
+  }
+}
+
+.bgActiveNone {
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-white);
+    }
+  }
+}
+
+.bgActiveTransparent {
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: transparent;
+    }
+  }
+}
+
+/* Text color */
+.textBlack {
+  color: var(--color-black);
+}
+
+.textGreyDarker {
+  color: var(--color-grey-darker);
+}
+
+.textRed {
+  color: var(--color-red);
+}
+
+/* Text active color */
+
+.textActiveBlack {
+  &:hover,
+  &:focus {
+    color: var(--color-black);
+  }
+}
+
+.textActiveRedDark {
+  &:hover,
+  &:focus {
+    color: var(--color-red-dark);
+  }
+}
+
+/* Spacing */
+.spacingYXtight {
+  padding-top: var(--spacing-x-tight);
+  padding-bottom: var(--spacing-x-tight);
+}
+
+.spacingYBaseTight {
+  padding-top: var(--spacing-base-tight);
+  padding-bottom: var(--spacing-base-tight);
+}
+
+.spacingYTight {
+  padding-top: var(--spacing-tight);
+  padding-bottom: var(--spacing-tight);
+}
+
+.spacingYBase {
+  padding-top: var(--spacing-base);
+  padding-bottom: var(--spacing-base);
+}
+
+.spacingYBaseLoose {
+  padding-top: var(--spacing-base-loose);
+  padding-bottom: var(--spacing-base-loose);
+}
+
+.spacingYLoose {
+  padding-top: var(--spacing-loose);
+  padding-bottom: var(--spacing-loose);
+}
+
+.spacingXXtight {
+  padding-right: var(--spacing-x-tight);
+  padding-left: var(--spacing-x-tight);
+}
+
+.spacingXBaseTight {
+  padding-right: var(--spacing-base-tight);
+  padding-left: var(--spacing-base-tight);
+}
+
+.spacingXTight {
+  padding-right: var(--spacing-tight);
+  padding-left: var(--spacing-tight);
+}
+
+.spacingXBase {
+  padding-right: var(--spacing-base);
+  padding-left: var(--spacing-base);
+}
+
+.spacingXBaseLoose {
+  padding-right: var(--spacing-base-loose);
+  padding-left: var(--spacing-base-loose);
+}
+
+.spacingXLoose {
+  padding-right: var(--spacing-loose);
+  padding-left: var(--spacing-loose);
+}
+
+/* Border */
+.hasBorder {
+  overflow: hidden;
+}
+
+.borderGreyLighter {
+  border: 1px solid var(--color-grey-lighter);
+}
+
+.borderLineGreyLight {
+  border: 1px solid var(--color-line-grey-light);
+}
+
+.borderGreen {
+  border: 1px solid var(--color-matters-green);
+}
+
+.borderRadiusLoose {
+  border-radius: var(--spacing-loose);
+}
+
+.borderRadiusBase {
+  border-radius: var(--spacing-base);
+}
+
+.borderRadiusXtight {
+  border-radius: var(--spacing-x-tight);
+}
+
+.borderRadiusXxtight {
+  border-radius: var(--spacing-xx-tight);
+}

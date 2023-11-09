@@ -3,7 +3,8 @@ import IMAGE_FEATURE_2 from '@/public/static/images/migration-feature-2.svg'
 import IMAGE_FEATURE_3 from '@/public/static/images/migration-feature-3.svg'
 import { Translate } from '~/components'
 
-import styles from './styles.css'
+import layoutStyles from '../../About/layout.module.css'
+import styles from './styles.module.css'
 
 const texts: {
   zh_hant: Record<string, string>
@@ -19,7 +20,7 @@ const texts: {
     title_2: '持續的被動收入',
     content_2:
       '你的作品在 Matters 發布後，讀者就可以為作品拍手，每一筆拍手都將轉換成加密貨幣 LikeCoin，' +
-      '變成創作者的收入。拍手没有時間期限，除非你將作品隱藏，否則每一篇作品都可持續收到拍手。',
+      '變成創作者的收入。拍手没有時間期限，除非你將作品歸檔，否則每一篇作品都可持續收到拍手。',
     title_3: '優質的讀者互動',
     content_3:
       'Matters 的用戶來自中國大陸、香港、台灣、馬來西亞等地，擁有華文世界裡最優質與多元的寫作評論社區。',
@@ -35,7 +36,7 @@ const texts: {
     title_2: '持续的被动收入',
     content_2:
       '你的作品在 Matters 发布后，读者就可以为作品打赏，每一笔打赏都将转换成数字货币 LikeCoin，' +
-      '变成创作者的收入。打赏没有时间期限，除非你将作品隐藏，否则每一篇作品都可持续收到打赏。',
+      '变成创作者的收入。打赏没有时间期限，除非你将作品封存，否则每一篇作品都可持续收到打赏。',
     title_3: '优质的读者互动',
     content_3:
       'Matters 的用户来自中国大陆、香港、台湾、马来西亚等地，拥有华文世界里最优质与多元的写作评论社区。',
@@ -62,12 +63,12 @@ const texts: {
 }
 
 const likeCoinLink =
-  'https://matters.news/@likecoin/' +
+  'https://matters.town/@likecoin/' +
   '%E5%8C%96%E8%AE%9A%E7%82%BA%E8%B3%9E-%E8%AE%9A%E8%B3%9E%E5%85%AC%E6%B0%91%E6%87%B6%E4%BA%BA%E5%8C%85-' +
   'zdpuAtWT6a2rjr75JZBzwnvy67vrxw5cBRqwnHbkFehRYHLXx'
 
 const communityLink =
-  'https://matters.news/@Nikko/' +
+  'https://matters.town/@Nikko/' +
   '%E8%AE%A9%E4%B8%A7%E5%AE%B6%E4%B9%8B%E7%8A%AC%E5%86%8D%E8%B7%91%E4%B8%80%E4%BC%9A%E5%84%BF-' +
   'zdpuB2uXYrM44Q4KfzpdAsUtiqCH7vccj79m3iqvXTJH4ZS5s'
 
@@ -75,10 +76,10 @@ const Features = () => {
   const { zh_hant, zh_hans, en } = texts
 
   return (
-    <section className="features">
-      <div className="l-container">
-        <div className="l-row">
-          <div className="l-col-full">
+    <section className={styles.features}>
+      <div className={layoutStyles.container}>
+        <div className={layoutStyles.content}>
+          <div className={layoutStyles.columnFull}>
             <h2>
               <Translate
                 zh_hant={zh_hant.header}
@@ -91,9 +92,11 @@ const Features = () => {
       </div>
 
       <ul>
-        <li className="l-container">
-          <div className="l-row">
-            <section className="content">
+        <li className={layoutStyles.container}>
+          <div className={layoutStyles.content}>
+            <section
+              className={[styles.content, layoutStyles.columnFull].join(' ')}
+            >
               <h3>
                 <Translate
                   zh_hant={zh_hant.title_1}
@@ -114,9 +117,9 @@ const Features = () => {
           </div>
         </li>
 
-        <li className="l-container">
-          <div className="l-row">
-            <section className="content">
+        <li className={layoutStyles.container}>
+          <div className={layoutStyles.content}>
+            <section className={styles.content}>
               <h3>
                 <Translate
                   zh_hant={zh_hant.title_2}
@@ -151,9 +154,9 @@ const Features = () => {
           </div>
         </li>
 
-        <li className="l-container">
-          <div className="l-row">
-            <section className="content">
+        <li className={layoutStyles.container}>
+          <div className={layoutStyles.content}>
+            <section className={styles.content}>
               <h3>
                 <Translate
                   zh_hant={zh_hant.title_3}
@@ -188,8 +191,6 @@ const Features = () => {
           </div>
         </li>
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

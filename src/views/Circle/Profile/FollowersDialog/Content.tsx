@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -8,7 +9,6 @@ import {
   List,
   QueryError,
   Spinner,
-  Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -91,18 +91,14 @@ const FollowersDialogContent = () => {
     return (
       <EmptyWarning
         description={
-          <Translate
-            zh_hant="還沒有追蹤者"
-            zh_hans="还没有追踪者"
-            en="No followers yet"
-          />
+          <FormattedMessage defaultMessage="No followers yet" id="XVYrS/" />
         }
       />
     )
   }
 
   return (
-    <Dialog.Content spacing={['base', 0]}>
+    <Dialog.Content>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
@@ -117,6 +113,7 @@ const FollowersDialogContent = () => {
                     id: node.id,
                   })
                 }
+                hasFollow={false}
               />
             </List.Item>
           ))}

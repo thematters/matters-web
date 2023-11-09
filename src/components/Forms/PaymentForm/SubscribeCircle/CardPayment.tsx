@@ -8,6 +8,7 @@ import { loadStripe, StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { STRIPE_ERROR_MESSAGES } from '~/common/enums'
 import { analytics, parseFormSubmitErrors, translate } from '~/common/utils'
@@ -22,6 +23,7 @@ import {
   DigestRichCirclePrivateFragment,
   DigestRichCirclePublicFragment,
   SubscribeCircleMutation,
+  UserLanguage,
 } from '~/gql/graphql'
 
 import StripeCheckout from '../StripeCheckout'
@@ -29,11 +31,11 @@ import { SUBSCRIBE_CIRCLE } from './gql'
 import Head from './Head'
 import Hint from './Hint'
 import Processing from './Processing'
-import styles from './styles.css'
 
 interface CardPaymentProps {
   circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
   submitCallback: () => void
+  closeDialog: () => void
 }
 
 type Step = 'confirmation' | 'processing'
@@ -47,10 +49,13 @@ const stripePromise = loadStripe(
 const BaseCardPayment: React.FC<CardPaymentProps> = ({
   circle,
   submitCallback,
+  closeDialog,
 }) => {
+  const intl = useIntl()
+  const { lang } = useContext(LanguageContext)
+
   const stripe = useStripe()
   const elements = useElements()
-  const { lang } = useContext(LanguageContext)
 
   const [subscribeCircle] = useMutation<SubscribeCircleMutation>(
     SUBSCRIBE_CIRCLE,
@@ -94,9 +99,9 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
       })
       data = subscribeResult.data
     } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error as any, lang)
+      const [messages, codes] = parseFormSubmitErrors(error as any)
       codes.forEach((code) => {
-        setCheckoutError(messages[code])
+        setCheckoutError(intl.formatMessage(messages[code]))
       })
     }
 
@@ -152,27 +157,45 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
 
   return (
     <>
-      <Dialog.Content hasGrow>
-        <section>
-          <Head circle={circle} />
+      <Dialog.Header closeDialog={closeDialog} title="subscribeCircle" />
 
-          <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
+      <Dialog.Content fixedHeight>
+        <Head circle={circle} />
 
-          <Hint />
-        </section>
+        <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
+
+        <Hint />
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={handleSubmit}
-          disabled={disabled || isSubmitting || !!checkoutError}
-          loading={isSubmitting}
-        >
-          <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-
-      <style jsx>{styles}</style>
+      <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            text={
+              <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
+            }
+            disabled={disabled || isSubmitting || !!checkoutError}
+            loading={isSubmitting}
+            onClick={handleSubmit}
+          />
+        }
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
+              onClick={closeDialog}
+            />
+            <Dialog.TextButton
+              text={
+                <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
+              }
+              disabled={disabled || isSubmitting || !!checkoutError}
+              loading={isSubmitting}
+              onClick={handleSubmit}
+            />
+          </>
+        }
+      />
     </>
   )
 }
@@ -183,7 +206,7 @@ const CardPayment: React.FC<CardPaymentProps> = (props) => {
   return (
     <Elements
       stripe={stripePromise}
-      options={{ locale: lang === 'zh_hans' ? 'zh' : 'en' }}
+      options={{ locale: lang === UserLanguage.ZhHans ? 'zh' : 'en' }}
     >
       <BaseCardPayment {...props} />
     </Elements>

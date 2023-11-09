@@ -1,9 +1,0 @@
-.container {
-  padding-top: var(--spacing-x-tight);
-  background: var(--color-white);
-  border-radius: 1.25rem 1.25rem 0 0;
-
-  @media (--sm-up) {
-    padding-top: 0;
-  }
-}

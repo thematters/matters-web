@@ -1,13 +1,12 @@
 import { useState } from 'react'
 
-import { Dialog, useStep } from '~/components'
+import { useStep } from '~/components'
 
 import Binding from './Binding'
 import Complete from './Complete'
-import Generating from './Generating'
 import Select from './Select'
 
-type Step = 'select' | 'binding' | 'generating' | 'complete'
+type Step = 'select' | 'binding' | 'complete'
 
 interface Props {
   closeDialog: () => void
@@ -34,26 +33,16 @@ const LikeCoinDialogContent: React.FC<Props> = ({
 
   return (
     <>
-      <Dialog.Header
-        title="setupLikeCoin"
-        closeDialog={closeDialog}
-        closeTextId={currStep === 'complete' ? 'close' : 'cancel'}
-      />
-
       {currStep === 'select' && (
         <Select
-          startGenerate={() => forward('generating')}
           startBind={(windowRef?: Window) => {
             forward('binding')
             if (windowRef) {
               setBindingWindowRef(windowRef)
             }
           }}
+          closeDialog={closeDialog}
         />
-      )}
-
-      {currStep === 'generating' && (
-        <Generating prevStep={backToSelect} nextStep={complete} />
       )}
 
       {currStep === 'binding' && (

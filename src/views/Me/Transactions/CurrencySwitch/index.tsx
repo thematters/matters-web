@@ -1,7 +1,7 @@
 import { Z_INDEX } from '~/common/enums'
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
   IconArrowDown16,
   Menu,
   TextIcon,
@@ -20,56 +20,37 @@ interface CurrencySwitchProps {
   setCurrency: (currency: Currency) => void
 }
 
-type CurrencySwitchContentProps = CurrencySwitchProps & {
-  isInDropdown?: boolean
-}
+type CurrencySwitchContentProps = CurrencySwitchProps
 
 const CurrencySwitchContent: React.FC<CurrencySwitchContentProps> = ({
   currency,
   setCurrency,
-  isInDropdown,
 }) => {
   return (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
-      <Menu.Item onClick={() => setCurrency(Currency.ALL)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={currency === Currency.ALL ? 'bold' : 'normal'}
-        >
-          <Translate zh_hans="全部" zh_hant="全部" en="All" />
-        </TextIcon>
-      </Menu.Item>
+    <Menu>
+      <Menu.Item
+        text={<Translate zh_hans="全部" zh_hant="全部" en="All" />}
+        onClick={() => setCurrency(Currency.ALL)}
+        weight={currency === Currency.ALL ? 'bold' : 'normal'}
+      />
 
-      <Menu.Item onClick={() => setCurrency(Currency.USDT)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={currency === Currency.USDT ? 'bold' : 'normal'}
-        >
-          {Currency.USDT}
-        </TextIcon>
-      </Menu.Item>
+      <Menu.Item
+        text={Currency.USDT}
+        onClick={() => setCurrency(Currency.USDT)}
+        weight={currency === Currency.USDT ? 'bold' : 'normal'}
+      />
 
-      <Menu.Item onClick={() => setCurrency(Currency.HKD)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={currency === Currency.HKD ? 'bold' : 'normal'}
-        >
-          {Currency.HKD}
-        </TextIcon>
-      </Menu.Item>
+      <Menu.Item
+        text={Currency.HKD}
+        onClick={() => setCurrency(Currency.HKD)}
+        weight={currency === Currency.HKD ? 'bold' : 'normal'}
+      />
 
-      <Menu.Item onClick={() => setCurrency(Currency.LIKE)}>
-        <TextIcon
-          spacing="base"
-          size="md"
-          weight={currency === Currency.LIKE ? 'bold' : 'normal'}
-        >
-          {Currency.LIKE}
-        </TextIcon>
-      </Menu.Item>
+      <Menu.Item
+        text={Currency.LIKE}
+        onClick={() => setCurrency(Currency.LIKE)}
+        weight={currency === Currency.LIKE ? 'bold' : 'normal'}
+      />
     </Menu>
   )
 }
@@ -79,30 +60,14 @@ export const CurrencySwitch: React.FC<CurrencySwitchProps> = ({
   setCurrency,
 }) => {
   return (
-    <DropdownDialog
-      dropdown={{
-        content: (
-          <CurrencySwitchContent
-            isInDropdown
-            currency={currency}
-            setCurrency={setCurrency}
-          />
-        ),
-        placement: 'bottom-end',
-        zIndex: Z_INDEX.OVER_DIALOG,
-      }}
-      dialog={{
-        content: (
-          <CurrencySwitchContent
-            currency={currency}
-            setCurrency={setCurrency}
-          />
-        ),
-        title: <Translate zh_hant="幣種" zh_hans="币种" en="Currency" />,
-      }}
+    <Dropdown
+      content={
+        <CurrencySwitchContent currency={currency} setCurrency={setCurrency} />
+      }
+      zIndex={Z_INDEX.OVER_DIALOG}
     >
-      {({ openDialog, type, ref }) => (
-        <Button onClick={openDialog} aria-haspopup={type} ref={ref}>
+      {({ openDropdown, ref }) => (
+        <Button onClick={openDropdown} aria-haspopup="listbox" ref={ref}>
           <TextIcon
             icon={<IconArrowDown16 />}
             textPlacement="left"
@@ -116,6 +81,6 @@ export const CurrencySwitch: React.FC<CurrencySwitchProps> = ({
           </TextIcon>
         </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }

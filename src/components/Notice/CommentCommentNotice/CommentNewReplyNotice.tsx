@@ -9,10 +9,8 @@ import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeCircleName from '../NoticeCircleName'
 import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
+import NoticeDigest from '../NoticeDigest'
 import NoticeHeadActors from '../NoticeHeadActors'
-import NoticeTypeIcon from '../NoticeTypeIcon'
-import styles from '../styles.css'
 
 const CommentNewReplyNotice = ({
   notice,
@@ -32,64 +30,60 @@ const CommentNewReplyNotice = ({
     notice.reply?.node.__typename === 'Circle' ? notice.reply.node : null
 
   return (
-    <section className="container" data-test-id={TEST_ID.COMMENT_NEW_REPLY}>
-      <section className="avatar-wrap">
-        {isMultiActors ? (
-          <NoticeTypeIcon type="comment" />
-        ) : (
-          <NoticeActorAvatar user={notice.actors[0]} />
-        )}
-      </section>
-
-      <section className="content-wrap">
-        <NoticeHead>
-          <NoticeHeadActors actors={notice.actors} />
-
-          {replyCommentArticle && (
-            <>
-              <FormattedMessage
-                defaultMessage=" replied to your comment on "
-                description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-              />
-              <NoticeArticleTitle article={replyCommentArticle} />
-              <FormattedMessage
-                defaultMessage="comment"
-                description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-              />
-            </>
-          )}
-          {replyCommentCircle && (
-            <>
-              <FormattedMessage
-                defaultMessage=" replied to your discussion on"
-                description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-              />
-              <NoticeCircleName circle={replyCommentCircle} />
-              <FormattedMessage
-                defaultMessage="comment_circle"
-                description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-              />
-            </>
-          )}
-        </NoticeHead>
-
-        <NoticeComment
-          comment={isMultiActors ? notice.comment : notice.reply}
+    <>
+      {replyCommentArticle && (
+        <NoticeDigest
+          notice={notice}
+          action={
+            <FormattedMessage
+              defaultMessage="replied your comment in"
+              id="nNB7KU"
+              description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+            />
+          }
+          title={<NoticeArticleTitle article={replyCommentArticle} />}
+          secondAction={
+            <FormattedMessage
+              defaultMessage="comment"
+              id="ZUPQzl"
+              description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+            />
+          }
+          content={
+            <NoticeComment
+              comment={isMultiActors ? notice.comment : notice.reply}
+            />
+          }
+          testId={TEST_ID.NOTICE_COMMENT_NEW_REPLY}
         />
-
-        {isMultiActors && (
-          <section className="multi-actor-avatars">
-            {notice.actors.map((actor, index) => (
-              <NoticeActorAvatar key={index} user={actor} size="md" />
-            ))}
-          </section>
-        )}
-
-        <NoticeDate notice={notice} />
-      </section>
-
-      <style jsx>{styles}</style>
-    </section>
+      )}
+      {replyCommentCircle && (
+        <NoticeDigest
+          notice={notice}
+          action={
+            <FormattedMessage
+              defaultMessage=" replied to your discussion on"
+              id="8rMZWb"
+              description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+            />
+          }
+          title={<NoticeArticleTitle article={replyCommentArticle} />}
+          secondAction={
+            <FormattedMessage
+              defaultMessage="comment_circle"
+              id="aaUBvF"
+              description="src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+            />
+          }
+          content={
+            <NoticeComment
+              comment={isMultiActors ? notice.comment : notice.reply}
+            />
+          }
+          testId={TEST_ID.NOTICE_COMMENT_NEW_REPLY}
+        />
+      )}
+    </>
   )
 }
 CommentNewReplyNotice.fragments = {

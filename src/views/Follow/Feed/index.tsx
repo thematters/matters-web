@@ -7,7 +7,6 @@ import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyWarning,
   Head,
-  Help,
   InfiniteScroll,
   List,
   QueryError,
@@ -20,7 +19,6 @@ import { FOLLOWING_FEED } from './gql'
 import RecommendArticleActivity from './RecommendArticleActivity'
 import RecommendCircleActivity from './RecommendCircleActivity'
 import RecommendUserActivity from './RecommendUserActivity'
-import styles from './styles.css'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
 import UserCreateCircleActivity from './UserCreateCircleActivity'
@@ -83,11 +81,11 @@ const FollowingFeed = () => {
     <>
       <Head title={{ id: 'follow' }} />
 
-      <section className="help">
-        <Help hasTime />
-      </section>
-
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
         <List>
           {edges.map(({ node }, i) => (
             <List.Item key={`${node.__typename}:${i}`}>
@@ -123,8 +121,6 @@ const FollowingFeed = () => {
           ))}
         </List>
       </InfiniteScroll>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

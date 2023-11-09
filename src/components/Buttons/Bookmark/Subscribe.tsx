@@ -1,18 +1,20 @@
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
-  ADD_TOAST,
+  ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEST_ID,
-  UNIVERSAL_AUTH_SOURCE,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   Button,
   IconBookmark16,
+  IconBookmark20,
   IconSize,
-  LanguageContext,
-  Translate,
+  Menu,
+  toast,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -22,28 +24,19 @@ import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle
 
 interface SubscribeProps {
   articleId?: string
-  size?: Extract<IconSize, 'md-s'>
+  size?: Extract<IconSize, 'mdS' | 'md'>
   disabled?: boolean
   inCard?: boolean
 }
 
 const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const [subscribe] = useMutation<ToggleSubscribeArticleMutation>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
       variables: { id: articleId, enabled: true },
-      optimisticResponse: articleId
-        ? {
-            toggleSubscribeArticle: {
-              id: articleId,
-              subscribed: true,
-              __typename: 'Article',
-            },
-          }
-        : undefined,
     }
   )
 
@@ -51,36 +44,61 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
     if (!viewer.isAuthed) {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { source: UNIVERSAL_AUTH_SOURCE.bookmark },
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.bookmark },
         })
       )
       return
     }
 
     if (viewer.isFrozen) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="FORBIDDEN_BY_STATE" />,
-          },
-        })
-      )
+      toast.error({
+        message: (
+          <FormattedMessage
+            {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]}
+          />
+        ),
+      })
       return
     }
 
     await subscribe()
+
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="Bookmarked"
+          id="qE8ew4"
+          description="src/components/Buttons/Bookmark/Subscribe.tsx"
+        />
+      ),
+    })
+  }
+
+  if (inCard) {
+    return (
+      <Menu.Item
+        text={
+          <FormattedMessage
+            defaultMessage="Bookmark"
+            id="kLEWkV"
+            description="src/components/Buttons/Bookmark/Subscribe.tsx"
+          />
+        }
+        icon={<IconBookmark20 size="mdS" />}
+        onClick={onClick}
+        testId={TEST_ID.ARTICLE_BOOKMARK}
+      />
+    )
   }
 
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
-      aria-label={translate({
-        zh_hant: '收藏',
-        zh_hans: '收藏',
-        en: 'Bookmark',
-        lang,
+      bgActiveColor={'greyLighter'}
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Bookmark',
+        id: 'kLEWkV',
+        description: 'src/components/Buttons/Bookmark/Subscribe.tsx',
       })}
       onClick={onClick}
       disabled={disabled}

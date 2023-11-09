@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
-import { KEYCODES } from '~/common/enums'
+import { KEYVALUE } from '~/common/enums'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ItemProps = {
   error: boolean
@@ -29,7 +29,7 @@ const Item = forwardRef(
     }
 
     const handleKeydown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (event.keyCode !== KEYCODES.backSpace) {
+      if (event.key.toLowerCase() !== KEYVALUE.backSpace) {
         return
       }
 
@@ -42,8 +42,8 @@ const Item = forwardRef(
 
     const value = ((inputProps.value as string) || '').slice(-1)
     const pinItemClasses = classNames({
-      'pin-input-item': true,
-      error: !!error,
+      [styles.pinInputItem]: true,
+      [styles.error]: !!error,
     })
 
     return (
@@ -62,8 +62,6 @@ const Item = forwardRef(
           {...inputProps}
           value={value}
         />
-
-        <style jsx>{styles}</style>
       </>
     )
   }

@@ -1,0 +1,95 @@
+.articleEditor {
+  position: relative;
+  padding-bottom: 4rem; /* bottom bar height */
+
+  @media (--lg-up) {
+    padding-bottom: 0;
+  }
+
+  & :global(.ProseMirror),
+  & :global(.tiptap) {
+    min-height: 50vh;
+    margin-bottom: var(var(--global-nav-height));
+
+    @media (--lg-up) {
+      margin-bottom: 0;
+    }
+
+    /* outline */
+    &:focus {
+      outline: none;
+    }
+
+    /* horizontal rule */
+    & :global(hr.ProseMirror-selectednode) {
+      &::before {
+        background-image: radial-gradient(
+          circle,
+          var(--color-black) 0.25rem,
+          transparent 0.25rem
+        );
+      }
+
+      &::after {
+        position: absolute;
+        inset: 0;
+        content: '';
+        border: 1px solid var(--color-line-grey-light);
+        border-radius: 0.5rem;
+      }
+    }
+
+    /* placeholder */
+    & :global(p.is-editor-empty:first-child::before) {
+      float: left;
+      height: 0;
+      color: var(--color-grey);
+      pointer-events: none;
+      content: attr(data-placeholder);
+    }
+
+    & :global(figure.is-figure-empty::before) {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      font-size: var(--font-size-sm-s);
+      line-height: 1.5;
+      color: var(--color-grey);
+      white-space: pre-wrap;
+      cursor: text;
+      content: attr(data-figure-placeholder);
+    }
+
+    /* disable interactive */
+    & a {
+      pointer-events: none;
+    }
+
+    & :global(.figure-embed-link-input) {
+      & input {
+        display: block;
+        height: 1.875rem;
+        line-height: var(--line-height-article-base);
+        color: var(--color-grey);
+
+        &::placeholder {
+          color: var(--color-grey);
+          opacity: 1; /* Firefox */
+        }
+      }
+    }
+  }
+
+  &.revisedMode {
+    & figure {
+      cursor: not-allowed;
+      opacity: 0.5;
+
+      & > * {
+        pointer-events: none;
+      }
+    }
+  }
+}

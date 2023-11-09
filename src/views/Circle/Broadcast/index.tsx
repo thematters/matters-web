@@ -2,15 +2,14 @@ import { Layout } from '~/components'
 
 import Profile from '../Profile'
 import Broadcast from './Broadcast'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const CircleBroadcast = () => (
-  <Layout.Main smBgColor="grey-lighter">
+  <Layout.Main>
     <Profile />
 
-    <section className="container">
+    <section className={styles.container}>
       <Broadcast />
-      <style jsx>{styles}</style>
     </section>
   </Layout.Main>
 )

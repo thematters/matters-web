@@ -1,6 +1,5 @@
 import { Dialog, useDialogSwitch, useStep } from '~/components'
 
-import styles from './styles.css'
 import Success from './Success'
 import Upload from './Upload'
 
@@ -24,16 +23,16 @@ const BaseMigrationDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title="migration"
-          closeDialog={closeDialog}
-          closeTextId={currStep === 'success' ? 'close' : 'cancel'}
+          closeText={currStep === 'success' ? 'close' : 'cancel'}
         />
-        {currStep === 'upload' && <Upload nextStep={nextStep} />}
+        {currStep === 'upload' && (
+          <Upload nextStep={nextStep} closeDialog={closeDialog} />
+        )}
         {currStep === 'success' && <Success />}
       </Dialog>
-      <style jsx>{styles}</style>
     </>
   )
 }

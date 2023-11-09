@@ -69,7 +69,7 @@ const BaseMeBookmarks = () => {
     })
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
@@ -83,14 +83,13 @@ const BaseMeBookmarks = () => {
 
 const MeBookmarks = () => (
   <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="myBookmarks" />}
-    />
+    <Layout.Header left={<Layout.Header.Title id="myBookmarks" />} />
 
     <Head title={{ id: 'myBookmarks' }} />
 
-    <BaseMeBookmarks />
+    <Layout.Main.Spacing hasVertical={false}>
+      <BaseMeBookmarks />
+    </Layout.Main.Spacing>
   </Layout.Main>
 )
 

@@ -1,7 +1,5 @@
 import { Button, IconArrowDown16, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
-
 const ExpandButton = ({
   onClick,
   restCount,
@@ -12,7 +10,7 @@ const ExpandButton = ({
   <Button
     size={[null, '1.25rem']}
     spacing={[0, 'xtight']}
-    bgActiveColor="grey-lighter"
+    bgActiveColor="greyLighter"
     onClick={onClick}
   >
     <TextIcon
@@ -24,11 +22,9 @@ const ExpandButton = ({
       <Translate
         zh_hant={`查看 ${restCount} 條回應`}
         zh_hans={`查看 ${restCount} 条回应`}
-        en={`load the rest ${restCount} replies`}
+        en={`Load the rest ${restCount} replies`}
       />
     </TextIcon>
-
-    <style jsx>{styles}</style>
   </Button>
 )
 export default ExpandButton

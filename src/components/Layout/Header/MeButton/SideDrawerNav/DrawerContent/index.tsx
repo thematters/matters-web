@@ -1,13 +1,13 @@
-import VisuallyHidden from '@reach/visually-hidden'
-import { useContext, useRef } from 'react'
+import { VisuallyHidden } from '@reach/visually-hidden'
+import { useRef } from 'react'
+import { useIntl } from 'react-intl'
 
-import { KEYCODES } from '~/common/enums'
-import { translate } from '~/common/utils'
-import { Button, LanguageContext, Menu, useOutsideClick } from '~/components'
+import { KEYVALUE } from '~/common/enums'
+import { Button, Menu, useOutsideClick } from '~/components'
 
-import NavMenu from '../../../../NavMenu'
 import MeDigest from './MeDigest'
-import styles from './styles.css'
+import MeMenu from './MeMenu'
+import styles from './styles.module.css'
 
 interface DrawerContentProps {
   style: React.CSSProperties
@@ -18,8 +18,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
   onDismiss,
   ...props
 }) => {
-  const { lang } = useContext(LanguageContext)
-
+  const intl = useIntl()
   const node: React.RefObject<any> | null = useRef(null)
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
@@ -33,10 +32,11 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
 
   return (
     <nav
+      className={styles.nav}
       ref={node}
       {...props}
       onKeyDown={(event) => {
-        if (event.keyCode !== KEYCODES.enter) {
+        if (event.key.toLowerCase() !== KEYVALUE.enter) {
           return
         }
         closeOnClick(event)
@@ -46,22 +46,24 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
       <VisuallyHidden>
         <Button
           onClick={onDismiss}
-          aria-label={translate({ id: 'close', lang })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Close',
+            id: 'rbrahO',
+          })}
         />
       </VisuallyHidden>
 
-      <header>
+      <header className={styles.header}>
         <MeDigest />
 
-        <Menu.Divider spacing="loose" />
-        <NavMenu.Top isInSideDrawerNav />
+        <Menu.Divider />
+        <MeMenu.Top />
       </header>
 
-      <footer>
-        <Menu.Divider spacing="loose" />
-        <NavMenu.Bottom isInSideDrawerNav />
+      <footer className={styles.footer}>
+        <Menu.Divider />
+        <MeMenu.Bottom />
       </footer>
-      <style jsx>{styles}</style>
     </nav>
   )
 }

@@ -4,7 +4,7 @@ import { ReactComponent as IconAnalyticsChangeArrow12 } from '@/public/static/ic
 import { numRound } from '~/common/utils'
 import { TextIcon, withIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type InfoTilesGroupProps = {
   primary?: boolean
@@ -22,16 +22,11 @@ const InfoTilesGroup: React.FC<
   React.PropsWithChildren<InfoTilesGroupProps>
 > = ({ primary, children }) => {
   const groupClasses = classNames({
-    group: true,
-    primary: !!primary,
+    [styles.group]: true,
+    [styles.primary]: !!primary,
   })
 
-  return (
-    <section className={groupClasses}>
-      {children}
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <section className={groupClasses}>{children}</section>
 }
 
 const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
@@ -42,26 +37,29 @@ const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
   percentageChange,
 }) => {
   const changeClasses = classNames({
-    change: true,
-    positive: percentageChange && percentageChange > 0,
-    negative: percentageChange && percentageChange < 0,
+    [styles.change]: true,
+    [styles.positive]: percentageChange && percentageChange > 0,
+    [styles.negative]: percentageChange && percentageChange < 0,
   })
 
   const change = Math.abs(percentageChange || 0)
 
   return (
-    <section className="tile">
-      <h3 className="title">
+    <section className={styles.tile}>
+      <h3 className={styles.title}>
         {indicatorColor && (
-          <span className="indicator" style={{ color: indicatorColor }} />
+          <span
+            className={styles.indicator}
+            style={{ color: indicatorColor }}
+          />
         )}
         {title}
       </h3>
 
-      <div className="content">
-        <span className="value">{value}</span>
+      <div className={styles.content}>
+        <span className={styles.value}>{value}</span>
 
-        {unit && <span className="unit">{unit}</span>}
+        {unit && <span className={styles.unit}>{unit}</span>}
 
         {change ? (
           <span className={changeClasses}>
@@ -75,8 +73,6 @@ const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
           </span>
         ) : null}
       </div>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }
@@ -85,12 +81,7 @@ const InfoTiles: React.FC<{ children?: React.ReactNode }> & {
   Group: typeof InfoTilesGroup
   Tile: typeof InfoTilesTile
 } = ({ children }) => {
-  return (
-    <section className="container">
-      {children}
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <section className={styles.container}>{children}</section>
 }
 
 InfoTiles.Group = InfoTilesGroup

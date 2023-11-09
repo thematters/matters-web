@@ -1,26 +1,35 @@
 import classNames from 'classnames'
 
-import styles from './styles.css'
+import { capitalizeFirstLetter } from '~/common/utils'
+
+import styles from './styles.module.css'
 
 type TextIconColor =
   | 'black'
   | 'green'
   | 'gold'
   | 'grey'
-  | 'grey-light'
-  | 'grey-darker'
-  | 'grey-dark'
+  | 'greyLight'
+  | 'greyDarker'
+  | 'greyDark'
   | 'white'
   | 'red'
-  | 'likecoin-green'
-  | 'yellow-lighter'
+  | 'likecoinGreen'
+  | 'yellowLighter'
 
 export interface TextIconProps {
   icon?: React.ReactNode
 
   color?: TextIconColor
-  size?: 'xs' | 'sm' | 'sm-s' | 'md-s' | 'md' | 'xm' | 'lg' | 'xl'
-  spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
+  size?: 'xs' | 'sm' | 'smS' | 'mdS' | 'md' | 'xm' | 'lg' | 'xl'
+  spacing?:
+    | 0
+    | 'xxxtight'
+    | 'xxtight'
+    | 'basexxtight'
+    | 'xtight'
+    | 'tight'
+    | 'base'
   weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
   allowUserSelect?: boolean
 
@@ -56,38 +65,39 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
   textDecoration,
 
   children,
+  ...restProps
 }) => {
   const textIconClasses = classNames({
-    'text-icon': true,
-    'none-select': !allowUserSelect,
-    [color || '']: !!color,
-    [`text-${textPlacement}`]: true,
-    [`text-${textDecoration}`]: true,
-    [`size-${size}`]: true,
-    [spacing ? `spacing-${spacing}` : '']: !!spacing,
-    [weight ? `weight-${weight}` : '']: !!weight,
-    hasIcon: !!icon,
+    [styles.textIcon]: true,
+    textIcon: true, // global selector
+    [styles.noneSelect]: !allowUserSelect,
+    [color ? styles[color] : '']: !!color,
+    [styles[`text${capitalizeFirstLetter(textPlacement)}`]]: true,
+    [textDecoration
+      ? styles[`text${capitalizeFirstLetter(textDecoration)}`]
+      : '']: true,
+    [styles[`size${capitalizeFirstLetter(size)}`]]: true,
+    [spacing ? styles[`spacing${capitalizeFirstLetter(spacing)}`] : '']:
+      !!spacing,
+    [weight ? styles[`weight${capitalizeFirstLetter(weight)}`] : '']: !!weight,
+    [styles.hasIcon]: !!icon,
   })
 
   if (textPlacement === 'left') {
     return (
-      <span className={textIconClasses}>
-        {children && <span className="text">{children}</span>}
+      <span className={textIconClasses} {...restProps}>
+        {children && <span className={styles.text}>{children}</span>}
 
         {icon}
-
-        <style jsx>{styles}</style>
       </span>
     )
   }
 
   return (
-    <span className={textIconClasses}>
+    <span className={textIconClasses} {...restProps}>
       {icon}
 
-      {children && <span className="text">{children}</span>}
-
-      <style jsx>{styles}</style>
+      {children && <span className={styles.text}>{children}</span>}
     </span>
   )
 }

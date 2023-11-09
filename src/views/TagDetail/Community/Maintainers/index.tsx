@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Button,
@@ -7,13 +8,12 @@ import {
   Spinner,
   TagEditorDialog,
   TextIcon,
-  Translate,
   UserDigest,
 } from '~/components'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 import { TagMaintainersQuery } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 
 interface Props {
   id: string
@@ -34,7 +34,7 @@ const ManageButton = ({ id }: Props) => {
           aria-haspopup="dialog"
         >
           <TextIcon icon={<IconSettings24 />} weight="md" size={'xs'}>
-            <Translate zh_hant="管理" zh_hans="管理" en="Manage" />
+            <FormattedMessage defaultMessage="Manage" id="0Azlrb" />
           </TextIcon>
         </Button>
       )}
@@ -72,9 +72,9 @@ const Maintainers = ({ id, isOwner }: Props) => {
     <>
       {tag.owner && (
         <>
-          <section className="category">
+          <section className={styles.category}>
             <section>
-              <Translate zh_hant="主理人" zh_hans="主理人" en="Maintainer" />
+              <FormattedMessage defaultMessage="Maintainer" id="eXDZGQ" />
             </section>
             {isOwner && (
               <section>
@@ -86,7 +86,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
             <UserDigest.Rich
               user={tag.owner}
               hasFollow={false}
-              spacing={['tight', 'base']}
+              spacing={['tight', 0]}
             />
           </section>
         </>
@@ -94,10 +94,10 @@ const Maintainers = ({ id, isOwner }: Props) => {
 
       {isHavingEditors && (
         <>
-          <section className="category">
+          <section className={styles.category}>
             <section>
-              <Translate zh_hant="協作者" zh_hans="協作者" en="collaborators" />
-              <span className="count">({editors.length})</span>
+              <FormattedMessage defaultMessage="collaborators" id="dg3JCQ" />
+              <span className={styles.count}>({editors.length})</span>
             </section>
           </section>
           <ul>
@@ -106,14 +106,13 @@ const Maintainers = ({ id, isOwner }: Props) => {
                 <UserDigest.Rich
                   user={editor}
                   hasFollow={false}
-                  spacing={['tight', 'base']}
+                  spacing={['tight', 0]}
                 />
               </li>
             ))}
           </ul>
         </>
       )}
-      <style jsx>{styles}</style>
     </>
   )
 }

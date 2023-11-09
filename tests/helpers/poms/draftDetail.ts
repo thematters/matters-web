@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test'
 import _sample from 'lodash/sample'
 import _uniq from 'lodash/uniq'
 
-import { TEST_ID } from '~/common/enums'
+import { PATHS, TEST_ID } from '~/common/enums'
 
 import { waitForAPIResponse } from '../api'
 import {
@@ -14,7 +14,7 @@ import {
 } from '../text'
 import { pageGoto } from '../utils'
 
-type License = 'CC BY-NC-ND 2.0 License' | 'CC0 License' | 'All Rights Reserved'
+type License = 'CC BY-NC-ND 4.0 License' | 'CC0 License' | 'All Rights Reserved'
 
 export class DraftDetailPage {
   readonly page: Page
@@ -31,6 +31,8 @@ export class DraftDetailPage {
   readonly barToggleISCN: Locator
   readonly barSetLicense: Locator
   readonly barSupportSetting: Locator
+  readonly barResponsesAllow: Locator
+  readonly barResponsesDisallow: Locator
 
   // bottombar
   readonly bottombarManage: Locator
@@ -42,11 +44,18 @@ export class DraftDetailPage {
 
   // dialog
   readonly dialog: Locator
+  readonly dialogAddButton: Locator
   readonly dialogPublishNowButton: Locator
   readonly dialogPublishButton: Locator
   readonly dialogViewArticleButton: Locator
   readonly dialogSaveButton: Locator
   readonly dialogDoneButton: Locator
+
+  // reediting
+  readonly dialogEditButton: Locator
+  readonly nextButton: Locator
+  readonly dialogSaveRevisions: Locator
+  readonly dialogViewRepublishedArticle: Locator
 
   constructor(page: Page, isMobile?: boolean) {
     this.page = page
@@ -68,11 +77,17 @@ export class DraftDetailPage {
     this.barToggleAddToCircle = this.page.getByLabel('Add to Circle')
     this.barToggleISCN = this.page.getByLabel('Register for ISCN')
     this.barSetLicense = this.page.getByRole('button', {
-      name: 'CC BY-NC-ND 2.0 License',
+      name: 'CC BY-NC-ND 4.0 License',
     })
     this.barSupportSetting = this.page.getByRole('button', {
       name: 'Support Setting',
     })
+    this.barResponsesAllow = this.page.getByTestId(
+      TEST_ID.DRAFTS_RESPONSE_ALLOW
+    )
+    this.barResponsesDisallow = this.page.getByTestId(
+      TEST_ID.DRAFTS_RESPONSE_DISALLOW
+    )
 
     // bottombar
     this.bottombarManage = this.page.getByRole('button', {
@@ -80,12 +95,15 @@ export class DraftDetailPage {
     })
 
     // editing
-    this.titleInput = this.page.getByPlaceholder('Enter title')
-    this.summaryInput = this.page.getByPlaceholder('Enter summary')
-    this.contentInput = this.page.locator('.ql-editor')
+    this.titleInput = this.page.getByPlaceholder('Enter title ...')
+    this.summaryInput = this.page.getByPlaceholder('Enter summary…')
+    this.contentInput = this.page.locator('.tiptap')
 
     // dialog
     this.dialog = this.page.getByRole('dialog')
+    this.dialogAddButton = this.page.getByTestId(
+      TEST_ID.EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON
+    )
     this.dialogPublishNowButton = this.dialog.getByRole('button', {
       name: 'Publish Now',
     })
@@ -96,38 +114,42 @@ export class DraftDetailPage {
       name: 'View Article',
     })
     this.dialogSaveButton = this.dialog.getByRole('button', {
-      name: 'Save',
+      name: 'Confirm',
     })
     this.dialogDoneButton = this.dialog.getByRole('button', {
       name: 'Done',
     })
+
+    // reediting
+    this.dialogEditButton = this.dialog.getByRole('button', { name: 'Edit' })
+    this.nextButton = this.page.getByRole('button', { name: 'Next' })
+    this.dialogSaveRevisions = this.dialog.getByRole('button', {
+      name: 'Save Revisions',
+    })
+    this.dialogViewRepublishedArticle = this.dialog.getByRole('button', {
+      name: 'View republished article',
+    })
   }
 
   async createDraft() {
-    await pageGoto(this.page, '/')
+    await pageGoto(this.page, PATHS.ME_DRAFT_NEW)
 
-    // Promise.all prevents a race condition between clicking and waiting.
-    await Promise.all([
-      this.page.waitForNavigation(),
-      this.page.getByRole('button', { name: 'Create' }).click(),
-    ])
-    await expect(this.page).toHaveURL(/\/me\/drafts\/.*-.*/)
+    await this.page.waitForURL(`**${PATHS.ME_DRAFT_NEW}`)
+    await expect(this.page).toHaveURL(PATHS.ME_DRAFT_NEW)
   }
 
   async gotoLatestDraft() {
-    await this.page.goto('/me/drafts')
+    await this.page.goto(PATHS.ME_DRAFTS)
 
-    // Promise.all prevents a race condition between clicking and waiting.
-    await Promise.all([
-      this.page.getByRole('listitem').first().click(),
-      this.page.waitForNavigation(),
-    ])
+    await this.page.getByRole('listitem').first().click()
+    await this.page.waitForURL(`**${PATHS.ME_DRAFT_DETAIL}`)
   }
 
-  async fillTitle() {
-    const title = generateTitle()
-    await this.titleInput.fill(title)
-    return title
+  async fillTitle(title?: string) {
+    const _title = title || generateTitle()
+    await this.titleInput.focus()
+    await this.titleInput.fill(_title)
+    return _title
   }
 
   async fillSummary() {
@@ -136,9 +158,21 @@ export class DraftDetailPage {
     return summary
   }
 
-  async fillContent() {
-    const content = generateContent({})
+  async fillContent(title: string) {
+    let content = generateContent({})
     await this.contentInput.fill(content)
+
+    // Update the content to make the publish button clickable
+    while (await this.publishButton.isDisabled()) {
+      await this.contentInput.press('End')
+      await this.contentInput.press('KeyA')
+      await this.page.waitForTimeout(1000 * 2)
+      await this.contentInput.focus()
+      await this.contentInput.press('Backspace')
+      await this.page.waitForTimeout(1000 * 2)
+      await this.fillTitle(title)
+    }
+
     return content
   }
 
@@ -147,11 +181,12 @@ export class DraftDetailPage {
 
     const tags = _uniq(generateTags({ count: 3 }))
     for (const tag of tags) {
-      await this.page.getByPlaceholder('Search tags...').fill(tag)
+      await this.dialogAddButton.click()
+      await this.page.getByPlaceholder('Search tags').fill(tag)
       await this.page.getByTestId(TEST_ID.SEARCH_RESULTS_ITEM).first().click()
     }
 
-    await this.dialogSaveButton.click()
+    await this.dialogDoneButton.click()
 
     return tags
   }
@@ -217,10 +252,13 @@ export class DraftDetailPage {
 
   async setCollection() {
     await this.barCollectArticle.click()
+    await this.dialogAddButton.click()
 
     // type and search
     const searchKey = 'test'
-    await this.page.getByPlaceholder('Search articles...').fill(searchKey)
+    await this.page
+      .getByPlaceholder('Enter article title or paste article link')
+      .fill(searchKey)
 
     await waitForAPIResponse({
       page: this.page,
@@ -237,9 +275,31 @@ export class DraftDetailPage {
     }
 
     // save
-    await this.dialogSaveButton.click()
+    await this.dialogDoneButton.click()
 
     return articleTitle
+  }
+
+  async checkResponse({ allow }: { allow?: Boolean }) {
+    if (this.isMobile) {
+      await this.bottombarManage.click()
+    }
+
+    if (allow) {
+      await this.page.evaluate(() => {
+        window.scrollTo(0, 0)
+      })
+      await this.barResponsesAllow.click()
+    } else {
+      await this.page.evaluate(() => {
+        window.scrollTo(0, 0)
+      })
+      await this.barResponsesDisallow.click()
+    }
+
+    if (this.isMobile) {
+      await this.dialogDoneButton.click()
+    }
   }
 
   async checkAddToCicle() {
@@ -296,7 +356,7 @@ export class DraftDetailPage {
   async setLicense({ license }: { license?: License }) {
     license =
       license ||
-      _sample(['CC BY-NC-ND 2.0 License', 'CC0 License', 'All Rights Reserved'])
+      _sample(['CC BY-NC-ND 4.0 License', 'CC0 License', 'All Rights Reserved'])
 
     if (this.isMobile) {
       await this.bottombarManage.click()
@@ -317,5 +377,13 @@ export class DraftDetailPage {
     await this.dialogPublishNowButton.click()
     await this.dialogPublishButton.click()
     await expect(this.dialogViewArticleButton).toBeVisible()
+  }
+
+  async rePublish() {
+    await this.nextButton.click()
+    await this.dialogPublishButton.click()
+    await this.dialogPublishButton.click()
+    await this.page.waitForLoadState('networkidle')
+    await expect(this.dialogViewRepublishedArticle).toBeVisible()
   }
 }

@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { REFETCH_CIRCLE_PENDING_INVITES } from '~/common/enums'
 import {
@@ -9,7 +10,6 @@ import {
   QueryError,
   Spinner,
   Throw404,
-  Translate,
   useMutation,
   UserDigest,
   useRoute,
@@ -33,10 +33,10 @@ interface Props {
  * Usage:
  *
  * ```tsx
- *   <BaseInviteePreSend />
+ *   <InviteePreSend />
  * ```
  */
-const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
+const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
@@ -97,19 +97,39 @@ const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
     confirm()
   }
 
+  const SubmitButton = (
+    <Dialog.TextButton
+      text={<FormattedMessage defaultMessage="Confirm and Send" id="rXnmeE" />}
+      onClick={send}
+      loading={inviteLoading}
+    />
+  )
+
   return (
     <>
-      <Dialog.Message align="left">
+      <Dialog.Header
+        title={
+          <FormattedMessage
+            defaultMessage="Send"
+            id="tzq2+W"
+            description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+          />
+        }
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
+
+      <Dialog.Message>
         <p>
-          <Translate
-            zh_hant="用戶將收到你的圍爐免費資格邀請函，設置免費的時限，邀請他們一起加入吧！"
-            zh_hans="用户将收到你的围炉免费资格邀请函，设置免费的时限，邀请他们一起加入吧！"
-            en="Friends will receive free trial invitations to Circle. Set up your invitations now!"
+          <FormattedMessage
+            defaultMessage="Friends will receive free trial invitations to Circle. Set up your invitations now!"
+            id="O0QB1v"
+            description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
           />
         </p>
       </Dialog.Message>
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content>
         <List hasBorder={false}>
           {invitees.map(
             ({ node }, i) =>
@@ -133,45 +153,20 @@ const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
 
       <SelectPeriod period={period} onChange={setPeriod} />
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button onClick={() => send()} loading={inviteLoading}>
-          <Translate
-            zh_hant="確認發送"
-            zh_hans="确认发送"
-            en="Confirm and Send"
-          />
-        </Dialog.Footer.Button>
-
-        <Dialog.Footer.Button
-          bgColor="grey-lighter"
-          textColor="black"
-          onClick={closeDialog}
-        >
-          <Translate zh_hant="暫時不要" zh_hans="暂时不要" en="Not Now" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }
-
-/**
- * This is a wrapper component of invitaiton pre-send list.
- *
- * Usage:
- *
- * ```tsx
- *   <InviteePreSend closeDialog={closeDialog} confirm={confirm} invitees={[]} />
- * ```
- */
-const InviteePreSend = (props: Props) => (
-  <>
-    <Dialog.Header
-      title={<Translate zh_hant="寄出邀請" zh_hans="寄出邀请" en="Send" />}
-      closeDialog={props.closeDialog}
-      closeTextId="cancel"
-    />
-    <BaseInviteePreSend {...props} />
-  </>
-)
 
 export default InviteePreSend

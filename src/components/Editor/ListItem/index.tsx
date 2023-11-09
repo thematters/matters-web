@@ -1,8 +1,9 @@
 import classNames from 'classnames'
 
+import { toSizedImageURL } from '~/common/utils'
 import { Card, IconAdd16, IconExclaimHint } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ListItemProps = {
   title: string | React.ReactNode
@@ -12,9 +13,21 @@ type ListItemProps = {
 }
 
 const CoverIndicator = ({ cover }: { cover?: string | null }) => (
-  <span className="rect">
-    {cover ? <img src={cover} alt="cover" /> : <IconAdd16 size="xs" />}
-    <style jsx>{styles}</style>
+  <span className={styles.indicator}>
+    {cover ? (
+      <img
+        className={styles.cover}
+        src={toSizedImageURL({
+          url: cover,
+          width: 72,
+          height: 72,
+          disableAnimation: true,
+        })}
+        alt="cover"
+      />
+    ) : (
+      <IconAdd16 size="xs" />
+    )}
   </span>
 )
 
@@ -25,16 +38,12 @@ const NumberIndicator = ({
   num: number
   withHintOverlay?: boolean
 }) => (
-  <span style={{ position: 'relative', width: '2.25rem', height: '2.25rem' }}>
-    <span
-      className={`rect ${num > 0 ? 'num' : ''}`}
-      style={{ position: 'absolute', bottom: 0, left: 0 }}
-    >
-      {num}
-      <style jsx>{styles}</style>
-    </span>
+  <span className={`${styles.indicator} ${num > 0 ? styles.num : ''}`}>
+    {num}
     {withHintOverlay && num === 0 && (
-      <IconExclaimHint style={{ position: 'absolute', top: 0, right: 0 }} />
+      <span className={styles.hintOverlay}>
+        <IconExclaimHint />
+      </span>
     )}
   </span>
 )
@@ -44,24 +53,22 @@ const ListItem: React.FC<React.PropsWithChildren<ListItemProps>> & {
   NumberIndicator: typeof NumberIndicator
 } = ({ title, subTitle, hint, onClick, children }) => {
   const subtitleClasses = classNames({
-    subtitle: true,
-    hint: !!hint,
+    [styles.subtitle]: true,
+    [styles.hint]: !!hint,
   })
 
   return (
     <li role="listitem">
       <Card bgColor="white" spacing={[0, 0]} onClick={onClick}>
-        <section className="item">
+        <section className={styles.item}>
           <section>
-            <h3 className="title">{title}</h3>
+            <h3 className={styles.title}>{title}</h3>
             <p className={subtitleClasses}>{subTitle}</p>
           </section>
 
           {children}
         </section>
       </Card>
-
-      <style jsx>{styles}</style>
     </li>
   )
 }

@@ -1,8 +1,8 @@
-import { Empty, IconNavNotification24, Translate } from '~/components'
+import { Empty, IconNavNotification32, Translate } from '~/components'
 
 export const EmptyNotice = () => (
   <Empty
-    icon={<IconNavNotification24 size="xxl" />}
+    icon={<IconNavNotification32 size="xxl" />}
     description={
       <Translate
         zh_hant="還沒有通知"

@@ -1,35 +1,30 @@
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import {
   Button,
-  DropdownDialog,
+  Dropdown,
+  EditTagDialog,
   IconAdd24,
   IconEdit16,
   IconProfile24,
   IconRemove24,
   IconSettings32,
-  LanguageContext,
   Menu,
-  TagDialog,
   TagEditorDialog,
   TagLeaveDialog,
-  TextIcon,
-  Translate,
+  toast,
   useMutation,
   ViewerContext,
 } from '~/components'
 import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
+import { updateTagArticlesCount } from '~/components/GQL'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
-import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 import { AddArticlesTagsMutation, TagFragmentFragment } from '~/gql/graphql'
-
-import styles from './styles.css'
-
 interface DropdownActionsProps {
   // id: string
   isOwner: boolean
@@ -40,7 +35,7 @@ interface DropdownActionsProps {
 
 interface DialogProps {
   openTagAddSelectedArticlesDialog: () => void
-  openTagDialog: () => void
+  openEditTagDialog: () => void
   openTagEditorDialog: () => void
   openTagLeaveDialog: () => void
 }
@@ -61,99 +56,91 @@ const BaseDropdownActions = ({
   hasTagLeave,
 
   openTagAddSelectedArticlesDialog,
-  openTagDialog,
+  openEditTagDialog,
   openTagEditorDialog,
   openTagLeaveDialog,
 }: BaseDropdownActionsProps) => {
-  const { lang } = useContext(LanguageContext)
-
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const intl = useIntl()
+  const Content = () => (
+    <Menu>
       {hasEditTag && (
-        <Menu.Item onClick={openTagDialog} ariaHasPopup="dialog">
-          <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
-            <Translate id="editTag" />
-          </TextIcon>
-        </Menu.Item>
+        <Menu.Item
+          text={<FormattedMessage defaultMessage="Edit" id="wEQDC6" />}
+          icon={<IconEdit16 size="mdS" />}
+          onClick={openEditTagDialog}
+          ariaHasPopup="dialog"
+        />
       )}
       {hasAddSelectedArticle && (
         <Menu.Item
+          text={
+            <FormattedMessage
+              defaultMessage="Add Articles into Featured"
+              id="ySGgTo"
+              description="src/views/TagDetail/DropdownActions/index.tsx"
+            />
+          }
+          icon={<IconAdd24 size="mdS" />}
           onClick={openTagAddSelectedArticlesDialog}
           ariaHasPopup="dialog"
-        >
-          <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
-            <Translate
-              zh_hant="添加精選"
-              zh_hans="添加精选"
-              en="Add Articles into Trending"
-            />
-          </TextIcon>
-        </Menu.Item>
+        />
       )}
       {hasManageCommunity && (
-        <Menu.Item onClick={openTagEditorDialog} ariaHasPopup="dialog">
-          <TextIcon icon={<IconProfile24 size="md" />} size="md" spacing="base">
-            <Translate
-              zh_hant="管理社群"
-              zh_hans="管理社群"
-              en="Manage Community"
+        <Menu.Item
+          text={
+            <FormattedMessage
+              defaultMessage="Manage Community"
+              id="L7Si5/"
+              description="src/views/TagDetail/DropdownActions/index.tsx"
             />
-          </TextIcon>
-        </Menu.Item>
+          }
+          icon={<IconProfile24 size="mdS" />}
+          onClick={openTagEditorDialog}
+          ariaHasPopup="dialog"
+        />
       )}
       {hasTagLeave && (
-        <Menu.Item onClick={openTagLeaveDialog} ariaHasPopup="dialog">
-          <TextIcon
-            icon={<IconRemove24 size="md" />}
-            color="red"
-            size="md"
-            spacing="base"
-          >
-            <Translate
-              zh_hant="辭去權限"
-              zh_hans="辞去权限"
-              en="Resign From Maintainer"
+        <Menu.Item
+          text={
+            <FormattedMessage
+              defaultMessage="Resign From Maintainer"
+              id="GRtGnZ"
+              description="src/views/TagDetail/DropdownActions/index.tsx"
             />
-          </TextIcon>
-        </Menu.Item>
+          }
+          icon={<IconRemove24 size="mdS" />}
+          onClick={openTagLeaveDialog}
+          ariaHasPopup="dialog"
+        />
       )}
     </Menu>
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => (
-        <section className="container">
-          <Button
-            bgColor="half-black"
-            aria-label={translate({ id: 'moreActions', lang })}
-            onClick={openDialog}
-            aria-haspopup={type}
-            ref={ref}
-          >
-            <IconSettings32 size="lg" color="white" />
-          </Button>
-          <style jsx>{styles}</style>
-        </section>
+    <Dropdown content={<Content />}>
+      {({ openDropdown, ref }) => (
+        <Button
+          onClick={openDropdown}
+          bgColor="halfBlack"
+          aria-label={intl.formatMessage({
+            defaultMessage: 'More Actions',
+            id: 'A7ugfn',
+          })}
+          aria-haspopup="listbox"
+          ref={ref}
+        >
+          <IconSettings32 size="lg" color="white" />
+        </Button>
       )}
-    </DropdownDialog>
+    </Dropdown>
   )
 }
 
 const DropdownActions = (props: DropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
   const { tag } = props
 
+  const intl = useIntl()
   /**
    * Data
    */
@@ -179,15 +166,13 @@ const DropdownActions = (props: DropdownActionsProps) => {
         },
       })
 
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: translate({ id: 'addedArticleTag', lang }),
-            duration: 2000,
-          },
-        })
-      )
+      toast.success({
+        message: intl.formatMessage({
+          defaultMessage: 'Tags added',
+          id: 'UjKkhq',
+          description: 'src/views/TagDetail/DropdownActions/index.tsx',
+        }),
+      })
 
       window.dispatchEvent(
         new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
@@ -200,14 +185,14 @@ const DropdownActions = (props: DropdownActionsProps) => {
     }
 
   const forbid = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: <Translate id="FORBIDDEN_BY_STATE" />,
-        },
-      })
-    )
+    toast.error({
+      message: (
+        <FormattedMessage
+          defaultMessage="You do not have permission to perform this operation"
+          id="5FO4vn"
+        />
+      ),
+    })
     return
   }
 
@@ -223,10 +208,16 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   return (
-    <TagDialog {...props.tag}>
-      {({ openDialog: openTagDialog }) => (
+    <EditTagDialog {...props.tag}>
+      {({ openDialog: openEditTagDialog }) => (
         <SearchSelectDialog
-          title="tagAddSelectedArticle"
+          title={
+            <FormattedMessage
+              defaultMessage="Add Articles into Featured"
+              id="ySGgTo"
+              description="src/views/TagDetail/DropdownActions/index.tsx"
+            />
+          }
           hint="hintEditCollection"
           searchType="Article"
           onSave={addArticlesToTag(true)}
@@ -245,7 +236,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
                           ? forbid
                           : openTagAddSelectedArticlesDialog
                       }
-                      openTagDialog={viewer.isFrozen ? forbid : openTagDialog}
+                      openEditTagDialog={
+                        viewer.isFrozen ? forbid : openEditTagDialog
+                      }
                       openTagLeaveDialog={
                         viewer.isFrozen ? forbid : openTagLeaveDialog
                       }
@@ -260,7 +253,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
           )}
         </SearchSelectDialog>
       )}
-    </TagDialog>
+    </EditTagDialog>
   )
 }
 

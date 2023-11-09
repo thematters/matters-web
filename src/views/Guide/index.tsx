@@ -1,8 +1,6 @@
 import { useContext } from 'react'
 import ReactMarkdown from 'react-markdown'
 
-import contentStyles from '~/common/styles/utils/content.article.css'
-import detailsStyles from '~/common/styles/utils/details.css'
 import { captureClicks, toLocale } from '~/common/utils'
 import { Head, LanguageContext, Layout } from '~/components'
 
@@ -21,25 +19,15 @@ const Guide = () => {
 
   return (
     <Layout.Main>
-      <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="guide" />}
-      />
+      <Layout.Header left={<Layout.Header.Title id="guide" />} />
 
       <Head title={{ id: 'guide' }} />
 
-      <Layout.Spacing>
+      <Layout.Main.Spacing>
         <section className="u-content" onClick={captureClicks}>
           <ReactMarkdown>{content[toLocale(lang) || 'en']}</ReactMarkdown>
         </section>
-      </Layout.Spacing>
-
-      <style jsx global>
-        {contentStyles}
-      </style>
-      <style jsx global>
-        {detailsStyles}
-      </style>
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

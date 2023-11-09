@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -8,7 +9,6 @@ import {
   List,
   QueryError,
   Spinner,
-  Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -92,10 +92,10 @@ const MembersDialogContent = () => {
     return (
       <EmptyWarning
         description={
-          <Translate
-            zh_hant="還沒有成員"
-            zh_hans="还没有成員"
-            en="No members yet"
+          <FormattedMessage
+            defaultMessage="No members yet"
+            id="FOOymB"
+            description="src/views/Circle/Profile/MembersDialog/Content.tsx"
           />
         }
       />
@@ -103,7 +103,7 @@ const MembersDialogContent = () => {
   }
 
   return (
-    <Dialog.Content spacing={['base', 0]}>
+    <Dialog.Content>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
@@ -118,6 +118,7 @@ const MembersDialogContent = () => {
                     id: node.user.id,
                   })
                 }
+                hasFollow={false}
               />
             </List.Item>
           ))}

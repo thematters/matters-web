@@ -4,12 +4,12 @@ import { FormattedMessage } from 'react-intl'
 import { TEST_ID } from '~/common/enums'
 import { CircleNewArticleNoticeFragment } from '~/gql/graphql'
 
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorName from '../NoticeActorName'
 import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeCircleName from '../NoticeCircleName'
 import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
-import NoticeTypeIcon from '../NoticeTypeIcon'
-import styles from '../styles.css'
+import NoticeDigest from '../NoticeDigest'
 
 const CircleNewArticle = ({
   notice,
@@ -17,40 +17,28 @@ const CircleNewArticle = ({
   notice: CircleNewArticleNoticeFragment
 }) => {
   const circle = notice.article.access.circle
-
   if (!circle) {
     return null
   }
+  const actors = [notice.article.author]
 
   return (
-    <section className="container" data-test-id={TEST_ID.CIRCLE_NEW_ARTICLE}>
-      <section className="avatar-wrap">
-        <NoticeTypeIcon type="circle" />
-      </section>
-
-      <section className="content-wrap">
-        <NoticeHead
-          subtitle={
-            <FormattedMessage
-              description="src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
-              defaultMessage="A new article has been added to the circle, read it now!"
-            />
-          }
-        >
-          <NoticeCircleName circle={circle} />
-          <FormattedMessage
-            defaultMessage=" is growing"
-            description="src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
-          />
-        </NoticeHead>
-
-        <NoticeArticleCard article={notice.article} />
-
-        <NoticeDate notice={notice} />
-      </section>
-
-      <style jsx>{styles}</style>
-    </section>
+    <NoticeDigest
+      notice={notice}
+      actors={actors}
+      action={
+        <FormattedMessage
+          description="src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+          defaultMessage="published in {circleName}"
+          id="GVes61"
+          values={{
+            circleName: <NoticeCircleName circle={circle} />,
+          }}
+        />
+      }
+      content={<NoticeArticleCard article={notice.article} />}
+      testId={TEST_ID.NOTICE_CIRCLE_NEW_ARTICLE}
+    />
   )
 }
 
@@ -61,6 +49,10 @@ CircleNewArticle.fragments = {
       ...NoticeDate
       article: target {
         ...NoticeArticleCard
+        author {
+          ...NoticeActorAvatarUser
+          ...NoticeActorNameUser
+        }
         access {
           circle {
             id
@@ -70,6 +62,8 @@ CircleNewArticle.fragments = {
       }
     }
     ${NoticeArticleCard.fragments.article}
+    ${NoticeActorAvatar.fragments.user}
+    ${NoticeActorName.fragments.user}
     ${NoticeDate.fragments.notice}
     ${NoticeCircleName.fragments.circle}
   `,

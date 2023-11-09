@@ -1,7 +1,6 @@
 import { DataProxy } from 'apollo-cache'
 import _omit from 'lodash/omit'
 
-import { ERROR_CODES } from '~/common/enums'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 import { TagMaintainersQuery } from '~/gql/graphql'
 
@@ -9,7 +8,7 @@ type TagMaintainersNodeTagEditor = NonNullable<
   NonNullable<TagMaintainersQuery['node'] & { __typename: 'Tag' }>['editors']
 >[0]
 
-const update = ({
+export const updateTagMaintainers = ({
   cache,
   id,
   type,
@@ -60,12 +59,6 @@ const update = ({
       data: cacheData,
     })
   } catch (e) {
-    if ((e as any).message.startsWith("Can't find field")) {
-      console.warn(ERROR_CODES.QUERY_FIELD_NOT_FOUND)
-    } else {
-      console.error(e)
-    }
+    console.error(e)
   }
 }
-
-export default update

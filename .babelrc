@@ -1,28 +1,7 @@
 {
   "presets": [
     [
-      "next/babel",
-      {
-        "preset-env": {
-          "modules": false
-        },
-        "transform-runtime": {
-          "useESModules": false
-        },
-        "styled-jsx": {
-          "plugins": ["styled-jsx-plugin-postcss"]
-        }
-      }
-    ]
-  ],
-  "plugins": [
-    "@babel/plugin-proposal-optional-chaining",
-    [
-      "formatjs",
-      {
-        "idInterpolationPattern": "[sha512:contenthash:base64:6]",
-        "ast": true
-      }
+      "next/babel"
     ]
   ]
 }

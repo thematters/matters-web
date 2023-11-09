@@ -1,15 +1,10 @@
 import gql from 'graphql-tag'
 import _isArray from 'lodash/isArray'
+import { FormattedMessage } from 'react-intl'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import {
-  IconRemove24,
-  Menu,
-  TextIcon,
-  Translate,
-  useMutation,
-} from '~/components'
-import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
+import { IconCircleMinus20, Menu, useMutation } from '~/components'
+import { updateTagArticlesCount } from '~/components/GQL'
 import {
   DeleteArticlesTagsMutation,
   RemoveTagButtonArticleFragment,
@@ -62,6 +57,14 @@ const RemoveTagButton = ({
 
   return (
     <Menu.Item
+      text={
+        <FormattedMessage
+          defaultMessage="Remove Article"
+          id="qlki7w"
+          description="src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
+        />
+      }
+      icon={<IconCircleMinus20 size="mdS" />}
       onClick={async () => {
         await deleteArticlesTags()
 
@@ -73,11 +76,7 @@ const RemoveTagButton = ({
           })
         )
       }}
-    >
-      <TextIcon icon={<IconRemove24 size="md" />} size="md" spacing="base">
-        <Translate zh_hant="移除作品" zh_hans="移除作品" />
-      </TextIcon>
-    </Menu.Item>
+    />
   )
 }
 

@@ -1,6 +1,0 @@
-.text-active-green {
-  &:hover,
-  &:focus {
-    color: var(--color-matters-green);
-  }
-}

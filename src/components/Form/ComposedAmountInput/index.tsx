@@ -1,4 +1,4 @@
-import VisuallyHidden from '@reach/visually-hidden'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useEffect, useRef } from 'react'
 
@@ -6,7 +6,7 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount, translate } from '~/common/utils'
 
 import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  *
@@ -79,8 +79,8 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   const isActive = value === amount
 
   const amountClasses = classNames({
-    ['radio-input-item']: true,
-    active: isActive,
+    [styles.radioInputItem]: true,
+    [styles.active]: isActive,
     'u-area-disable': disabled || isBalanceInsufficient,
   })
 
@@ -111,8 +111,6 @@ const AmountOption: React.FC<AmountOptionProps> = ({
           />
         </VisuallyHidden>
       </label>
-
-      <style jsx>{styles}</style>
     </li>
   )
 }
@@ -125,9 +123,13 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
 
   hint,
   error,
+  hintAlign,
 
   lang,
   customAmount,
+
+  spacingTop,
+  spacingBottom,
 
   ...inputProps
 }) => {
@@ -150,18 +152,20 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
   } = customAmount
 
   return (
-    <section className="amount-input">
-      <Field>
-        <ul className="radio-input-options">
+    <section className={styles.amountInput}>
+      <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
+        <ul className={styles.radioInputOptions}>
           {options.map((option) => (
             <AmountOption {...baseInputProps} key={option} amount={option} />
           ))}
         </ul>
 
         {customAmount && (
-          <section className="custom-input">
+          <section className={styles.customInput}>
             <input
-              className={customAmountError ? 'error' : ''}
+              className={
+                customAmountError ? `error ${styles.input}` : styles.input
+              }
               type="number"
               name="customAmount"
               placeholder={translate({ id: 'enterCustomAmount', lang })}
@@ -173,14 +177,19 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
               {...customAmountInputProps}
             />
 
-            {customAmountHint && <div className="hint">{customAmountHint}</div>}
+            {customAmountHint && (
+              <div className={styles.hint}>{customAmountHint}</div>
+            )}
           </section>
         )}
 
-        <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+        <Field.Footer
+          fieldMsgId={fieldMsgId}
+          hint={hint}
+          error={error}
+          hintAlign={hintAlign}
+        />
       </Field>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

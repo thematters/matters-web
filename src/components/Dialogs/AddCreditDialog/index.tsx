@@ -55,25 +55,15 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog
-        size="sm"
-        isOpen={show}
-        onDismiss={closeDialog}
-        smBgColor="grey-lighter"
-      >
-        <Dialog.Header
-          title={isSetPaymentPassword ? 'paymentPassword' : 'topUp'}
-          closeDialog={closeDialog}
-          closeTextId="close"
-        />
-
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         {isSetPaymentPassword && (
           <DynamicPaymentSetPasswordForm
             submitCallback={() => forward('addCredit')}
+            closeDialog={closeDialog}
           />
         )}
 
-        {isAddCredit && <DynamicAddCreditForm />}
+        {isAddCredit && <DynamicAddCreditForm closeDialog={closeDialog} />}
       </Dialog>
     </>
   )

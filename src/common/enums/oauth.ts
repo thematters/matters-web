@@ -69,8 +69,8 @@ export const OAUTH_SCOPE_TREE = {
       },
       wallet: {
         _t: {
-          zh_hant: '錢包餘額、交易紀錄等',
-          zh_hans: '钱包余额、交易纪录等',
+          zh_hant: '錢包餘額、交易記錄等',
+          zh_hans: '钱包余额、交易记录等',
         },
       },
       notices: {
@@ -285,12 +285,6 @@ export const OAUTH_SCOPE_TREE = {
           zh_hans: '修改邮箱',
         },
       },
-      generateLikerId: {
-        _t: {
-          zh_hant: '生成 Liker ID',
-          zh_hans: '生成 Liker ID',
-        },
-      },
       clearReadHistory: {
         _t: {
           zh_hant: '清空閱讀歷史',
@@ -305,4 +299,43 @@ export const OAUTH_SCOPE_TREE = {
       },
     },
   },
+}
+
+export const OAUTH_SESSSION_STORAGE_OAUTH_TOKEN =
+  'oauth-session-storage-oauth-token'
+export const OAUTH_SESSSION_STORAGE_OAUTH_TYPE =
+  'oauth-session-storage-oauth-type'
+export const OAUTH_STORAGE_STATE = 'oauth-storage-state'
+export const OAUTH_STORAGE_NONCE = 'oauth-storage-nonce'
+export const OAUTH_STORAGE_PATH = 'oauth-storage-path'
+export const OAUTH_STORAGE_CODE_VERIFIER = 'oauth-storage-code-verifier'
+export const OAUTH_STORAGE_BIND_RESULT = 'oauth-storage-result'
+export const OAUTH_STORAGE_BIND_STATE = 'oauth-storage-bind-state'
+export const OAUTH_STORAGE_BIND_STATE_SUCCESS = 'oauth-storage-state-success'
+export const OAUTH_STORAGE_BIND_STATE_FAILURE = 'oauth-storage-state-failure'
+export const OAUTH_STORAGE_BIND_STATE_UNAVAILABLE =
+  'oauth-storage-state-unavailable'
+export const OAUTH_STORAGE_SEND_EMAIL_CODE_COUNTDOWN =
+  'oauth-storage-send-email-code-countdown'
+
+export const CALLBACK_VERIFIER = {
+  EmailVerification: 'email-verification',
+  EmailSignup: 'email-signup',
+  EmailSignin: 'email-signin',
+}
+
+export const OAUTH_CALLBACK_PROVIDERS = {
+  Google: 'google',
+  Facebook: 'facebook',
+  Twitter: 'twitter',
+}
+
+export const CALLBACK_PROVIDERS = {
+  ...OAUTH_CALLBACK_PROVIDERS,
+  ...CALLBACK_VERIFIER,
+}
+
+export const OAUTH_TYPE = {
+  login: 'lg',
+  bind: 'bd',
 }

@@ -3,8 +3,10 @@ import React from 'react'
 import { translate } from '~/common/utils'
 import { Form, Translate } from '~/components'
 
+import styles from './styles.module.css'
+
 const Forms = () => (
-  <section>
+  <section className={styles.container}>
     <ul>
       {/* Form.Input */}
       <li>
@@ -54,23 +56,6 @@ const Forms = () => (
         </Form>
       </li>
 
-      {/* Form.List */}
-      <li>
-        <Form.List spacing="xloose">
-          <Form.List.Item
-            title={
-              <Translate
-                zh_hant="沒有帳戶？"
-                zh_hans="沒有帐户？"
-                en="Not Registered?"
-              />
-            }
-            rightText={<Translate id="register" />}
-            rightTextColor="green"
-          />
-        </Form.List>
-      </li>
-
       {/* Form.CheckBox */}
       <li>
         <Form.CheckBox
@@ -110,17 +95,6 @@ const Forms = () => (
         />
       </li>
     </ul>
-
-    <style jsx>{`
-      li {
-        @mixin border-bottom-grey;
-        padding: var(--spacing-base);
-
-        @media (--sm-down) {
-          background: #f7f7f7;
-        }
-      }
-    `}</style>
   </section>
 )
 

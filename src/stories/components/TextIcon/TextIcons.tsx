@@ -9,18 +9,20 @@ import {
   Translate,
 } from '~/components'
 
+import styles from './styles.module.css'
+
 const Toasts = () => (
-  <section>
+  <section className={styles.container}>
     <ul>
       <li>
         <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
-          <Translate id="stickyArticle" />
+          <Translate id="pinArticle" />
         </TextIcon>
       </li>
 
       <li>
         <TextIcon
-          icon={<IconDonate24 size="md-s" />}
+          icon={<IconDonate24 size="mdS" />}
           weight="md"
           spacing="xtight"
           size="sm"
@@ -46,7 +48,7 @@ const Toasts = () => (
 
       <li>
         <TextIcon
-          color="grey-dark"
+          color="greyDark"
           size="sm"
           weight="normal"
           textPlacement="left"
@@ -59,13 +61,6 @@ const Toasts = () => (
         </TextIcon>
       </li>
     </ul>
-
-    <style jsx>{`
-      li {
-        @mixin border-bottom-grey;
-        padding: var(--spacing-base);
-      }
-    `}</style>
   </section>
 )
 

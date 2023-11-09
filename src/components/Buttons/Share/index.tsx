@@ -14,7 +14,7 @@ import {
 
 type ShareButtonBaseProps = {
   hasIcon?: boolean
-  iconSize?: Extract<IconSize, 'md-s'>
+  iconSize?: Extract<IconSize, 'mdS'>
   iconColor?: Extract<IconColor, 'green' | 'grey' | 'black' | 'white'>
   inCard: boolean
 } & Omit<ShareDialogProps, 'children'>
@@ -39,13 +39,13 @@ export const ShareButton: React.FC<
   const { lang } = useContext(LanguageContext)
 
   const isGreen = bgColor === 'green'
-  const isHalfBlack = bgColor === 'half-black'
+  const isHalfBlack = bgColor === 'halfBlack'
   const buttonBgActiveColor =
     isGreen || isHalfBlack
       ? undefined
       : inCard
-      ? 'grey-lighter-active'
-      : 'grey-lighter'
+      ? 'greyLighterActive'
+      : 'greyLighter'
   const buttonSpacing = spacing || ['xtight', 'xtight']
 
   return (

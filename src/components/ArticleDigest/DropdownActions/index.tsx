@@ -1,25 +1,28 @@
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import {
+  AddCollectionsArticleDialog,
   AppreciatorsDialog,
+  BookmarkButton,
   Button,
-  DropdownDialog,
+  Dropdown,
   FingerprintDialog,
   IconMore16,
   IconSize,
-  LanguageContext,
   Menu,
+  RemoveArticleCollectionDialog,
   ShareDialog,
   SupportersDialog,
-  Translate,
+  toast,
   ViewerContext,
 } from '~/components'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
+import AddCollectionButton from './AddCollectionButton'
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
 import DonatorsButton from './DonatorsButton'
@@ -27,11 +30,15 @@ import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
 import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
+import PinButton from './PinButton'
+import RemoveArticleCollectionButton from './RemoveArticleCollectionButton'
 import RemoveTagButton from './RemoveTagButton'
+import SetBottomCollectionButton from './SetBottomCollectionButton'
 import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
+import SetTopCollectionButton from './SetTopCollectionButton'
 import ShareButton from './ShareButton'
-import StickyButton from './StickyButton'
+import styles from './styles.module.css'
 
 export interface DropdownActionsControls {
   icon?: React.ReactNode
@@ -56,6 +63,20 @@ export interface DropdownActionsControls {
   hasSetTagUnselected?: boolean
   hasRemoveTag?: boolean
 
+  hasArchive?: boolean
+  hasEdit?: boolean
+  hasBookmark?: boolean
+
+  collectionId?: string
+  collectionArticleCount?: number
+  hasAddCollection?: boolean
+  hasRemoveCollection?: boolean
+  hasSetTopCollection?: boolean
+  hasSetBottomCollection?: boolean
+  onSetTopCollection?: () => void
+  onSetBottomCollection?: () => void
+  onRemoveCollection?: () => void
+
   morePublicActions?: React.ReactNode
 }
 
@@ -70,11 +91,9 @@ interface Controls {
   hasFingerprint: boolean
   hasExtend: boolean
   hasSticky: boolean
-  hasArchive: boolean
   hasSetTagSelected: boolean
   hasSetTagUnselected: boolean
   hasRemoveTag: boolean
-  hasEdit: boolean
 }
 
 interface DialogProps {
@@ -83,19 +102,22 @@ interface DialogProps {
   openAppreciatorsDialog: () => void
   openSupportersDialog: () => void
   openArchiveDialog: () => void
+  openAddCollectionsArticleDialog: () => void
+  openRemoveArticleCollectionDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 
 const BaseDropdownActions = ({
   article,
+
   tagDetailId,
+  collectionId,
+  collectionArticleCount,
 
   icon,
   size,
   inCard,
-
-  morePublicActions,
 
   hasShare,
   hasAppreciators,
@@ -108,22 +130,25 @@ const BaseDropdownActions = ({
   hasSetTagUnselected,
   hasRemoveTag,
   hasEdit,
+  hasBookmark,
+  hasAddCollection,
+  hasRemoveCollection,
+  hasSetTopCollection,
+  hasSetBottomCollection,
 
   openShareDialog,
   openFingerprintDialog,
   openAppreciatorsDialog,
   openSupportersDialog,
   openArchiveDialog,
+  openAddCollectionsArticleDialog,
+  openRemoveArticleCollectionDialog,
+  onSetBottomCollection,
+  onSetTopCollection,
+  onRemoveCollection,
 }: BaseDropdownActionsProps) => {
-  const { lang } = useContext(LanguageContext)
-
   const hasPublic =
-    hasShare ||
-    hasAppreciators ||
-    hasDonators ||
-    hasFingerprint ||
-    hasExtend ||
-    morePublicActions
+    hasShare || hasAppreciators || hasDonators || hasFingerprint || hasExtend
   const hasPrivate =
     hasSticky ||
     hasArchive ||
@@ -131,8 +156,8 @@ const BaseDropdownActions = ({
     hasSetTagUnselected ||
     hasRemoveTag
 
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
-    <Menu width={isInDropdown ? 'sm' : undefined}>
+  const Content = () => (
+    <Menu>
       {/* public */}
       {hasShare && <ShareButton openDialog={openShareDialog} />}
       {hasAppreciators && (
@@ -143,13 +168,20 @@ const BaseDropdownActions = ({
         <FingerprintButton openDialog={openFingerprintDialog} />
       )}
       {hasExtend && <ExtendButton article={article} />}
-      {morePublicActions}
 
       {/* private */}
-      {hasPublic && hasPrivate && <Menu.Divider spacing="xtight" />}
-      {hasSticky && <StickyButton article={article} />}
+      {hasPublic && hasPrivate && <Menu.Divider />}
+      {hasEdit && <EditButton article={article} />}
+      {hasAddCollection && (
+        <AddCollectionButton openDialog={openAddCollectionsArticleDialog} />
+      )}
 
-      {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
+      {hasSticky && <PinButton article={article} />}
+
+      {hasBookmark && (
+        <BookmarkButton article={article} inCard={inCard} size="mdS" />
+      )}
+
       {hasSetTagSelected && tagDetailId && (
         <SetTagSelectedButton article={article} tagId={tagDetailId} />
       )}
@@ -159,41 +191,87 @@ const BaseDropdownActions = ({
       {hasRemoveTag && tagDetailId && (
         <RemoveTagButton article={article} tagId={tagDetailId} />
       )}
-      {hasEdit && <EditButton article={article} />}
+
+      {hasArchive && <Menu.Divider />}
+      {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
+
+      {(hasSetTopCollection || hasSetBottomCollection) &&
+        collectionId &&
+        collectionArticleCount && (
+          <>
+            <Menu.Divider />
+            {hasSetTopCollection && onSetTopCollection && (
+              <SetTopCollectionButton
+                articleId={article.id}
+                collectionId={collectionId}
+                onClick={onSetTopCollection}
+              />
+            )}
+            {hasSetBottomCollection && onSetBottomCollection && (
+              <SetBottomCollectionButton
+                articleId={article.id}
+                collectionId={collectionId}
+                collectionArticleCount={collectionArticleCount}
+                onClick={onSetBottomCollection}
+              />
+            )}
+          </>
+        )}
+
+      {hasRemoveCollection && onRemoveCollection && (
+        <>
+          <Menu.Divider />
+          <RemoveArticleCollectionButton
+            onClick={onRemoveCollection}
+            openDialog={openRemoveArticleCollectionDialog}
+          />
+        </>
+      )}
     </Menu>
   )
 
+  const intl = useIntl()
+  const moreActionText = intl.formatMessage({
+    defaultMessage: 'More Actions',
+    id: 'A7ugfn',
+  })
+
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end',
-      }}
-      dialog={{
-        content: <Content />,
-        title: 'moreActions',
-      }}
-    >
-      {({ openDialog, type, ref }) => (
-        <Button
-          spacing={['xtight', 'xtight']}
-          bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
-          aria-label={translate({ id: 'moreActions', lang })}
-          aria-haspopup={type}
-          onClick={openDialog}
-          ref={ref}
-        >
-          {icon ? icon : <IconMore16 size={size} />}
-        </Button>
-      )}
-    </DropdownDialog>
+    <Dropdown content={<Content />}>
+      {({ openDropdown, ref }) =>
+        inCard ? (
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              openDropdown()
+            }}
+            aria-label={moreActionText}
+            aria-haspopup="listbox"
+            ref={ref}
+            className={styles.moreButton}
+          >
+            {icon ? icon : <IconMore16 size={size} />}
+          </button>
+        ) : (
+          <Button
+            onClick={openDropdown}
+            spacing={['xtight', 'xtight']}
+            bgActiveColor="greyLighter"
+            aria-label={moreActionText}
+            ref={ref}
+          >
+            {icon ? icon : <IconMore16 size={size} />}
+          </Button>
+        )
+      }
+    </Dropdown>
   )
 }
 
 const DropdownActions = (props: DropdownActionsProps) => {
   const {
     article,
-    morePublicActions,
+    collectionId,
 
     hasShare,
     hasFingerprint = true,
@@ -205,6 +283,14 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasSetTagSelected,
     hasSetTagUnselected,
     hasRemoveTag,
+
+    hasEdit,
+    hasArchive,
+    hasBookmark = true,
+    hasAddCollection,
+    hasRemoveCollection,
+    hasSetTopCollection,
+    hasSetBottomCollection,
   } = props
   const viewer = useContext(ViewerContext)
 
@@ -212,14 +298,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const isActive = article.articleState === 'active'
 
   const forbid = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: <Translate id="FORBIDDEN_BY_STATE" />,
-        },
-      })
-    )
+    toast.error({
+      message: (
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+      ),
+    })
   }
 
   const controls = {
@@ -229,7 +312,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasDonators: article.donationsDialog.totalCount > 0 && !inCard,
     hasFingerprint: hasFingerprint && (isActive || isArticleAuthor) && !inCard,
     hasExtend: hasExtend && !!isActive && !inCard,
-    morePublicActions,
 
     // privates
     hasSticky: !!(
@@ -238,11 +320,18 @@ const DropdownActions = (props: DropdownActionsProps) => {
       isActive &&
       !viewer.isInactive
     ),
-    hasArchive: isArticleAuthor && isActive && !viewer.isArchived,
+    hasArchive:
+      !!hasArchive && isArticleAuthor && isActive && !viewer.isArchived,
     hasSetTagSelected: !!hasSetTagSelected,
     hasSetTagUnselected: !!hasSetTagUnselected,
     hasRemoveTag: !!hasRemoveTag,
-    hasEdit: isActive && isArticleAuthor,
+    hasEdit: !!hasEdit && isActive && isArticleAuthor,
+    hasBookmark: !!hasBookmark,
+    hasAddCollection: hasAddCollection && isActive && isArticleAuthor,
+    hasRemoveCollection: hasRemoveCollection && isActive && isArticleAuthor,
+    hasSetTopCollection: hasSetTopCollection && isActive && isArticleAuthor,
+    hasSetBottomCollection:
+      hasSetBottomCollection && isActive && isArticleAuthor,
   }
 
   if (_isEmpty(_pickBy(controls))) {
@@ -260,17 +349,41 @@ const DropdownActions = (props: DropdownActionsProps) => {
                   {({ openDialog: openSupportersDialog }) => (
                     <ArchiveArticle.Dialog article={article}>
                       {({ openDialog: openArchiveDialog }) => (
-                        <BaseDropdownActions
-                          {...props}
-                          {...controls}
-                          openShareDialog={openShareDialog}
-                          openFingerprintDialog={openFingerprintDialog}
-                          openAppreciatorsDialog={openAppreciatorsDialog}
-                          openSupportersDialog={openSupportersDialog}
-                          openArchiveDialog={
-                            viewer.isFrozen ? forbid : openArchiveDialog
-                          }
-                        />
+                        <AddCollectionsArticleDialog articleId={article.id}>
+                          {({
+                            openDialog: openAddCollectionsArticleDialog,
+                          }) => (
+                            <RemoveArticleCollectionDialog
+                              articleId={article.id}
+                              articleTitle={article.title}
+                              collectionId={collectionId || ''}
+                            >
+                              {({
+                                openDialog: openRemoveArticleCollectionDialog,
+                              }) => (
+                                <BaseDropdownActions
+                                  {...props}
+                                  {...controls}
+                                  openShareDialog={openShareDialog}
+                                  openFingerprintDialog={openFingerprintDialog}
+                                  openAppreciatorsDialog={
+                                    openAppreciatorsDialog
+                                  }
+                                  openSupportersDialog={openSupportersDialog}
+                                  openArchiveDialog={
+                                    viewer.isFrozen ? forbid : openArchiveDialog
+                                  }
+                                  openAddCollectionsArticleDialog={
+                                    openAddCollectionsArticleDialog
+                                  }
+                                  openRemoveArticleCollectionDialog={
+                                    openRemoveArticleCollectionDialog
+                                  }
+                                />
+                              )}
+                            </RemoveArticleCollectionDialog>
+                          )}
+                        </AddCollectionsArticleDialog>
                       )}
                     </ArchiveArticle.Dialog>
                   )}

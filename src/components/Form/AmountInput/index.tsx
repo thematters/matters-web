@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 
 import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  *
@@ -33,12 +33,16 @@ const AmountInput = forwardRef(
       name,
       label,
       extraButton,
-      labelVisHidden,
+      hasLabel,
 
       hint,
       error,
+      hintAlign,
 
       currency,
+
+      spacingTop,
+      spacingBottom,
 
       ...inputProps
     }: AmountInputProps,
@@ -48,20 +52,20 @@ const AmountInput = forwardRef(
     const fieldMsgId = `field-msg-${name}`
 
     return (
-      <Field>
+      <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
         <Field.Header
           htmlFor={fieldId}
           label={label}
           extraButton={extraButton}
-          labelVisHidden={labelVisHidden}
+          hasLabel={hasLabel}
         />
 
-        <Field.Content noMargin>
-          <span className="currency">{currency}</span>
+        <Field.Content>
+          <span className={styles.currency}>{currency}</span>
 
           <input
             {...inputProps}
-            className={error ? 'error' : ''}
+            className={error ? `error ${styles.input}` : styles.input}
             id={fieldId}
             ref={ref}
             name={name}
@@ -74,9 +78,12 @@ const AmountInput = forwardRef(
           />
         </Field.Content>
 
-        <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
-
-        <style jsx>{styles}</style>
+        <Field.Footer
+          fieldMsgId={fieldMsgId}
+          hint={hint}
+          error={error}
+          hintAlign={hintAlign}
+        />
       </Field>
     )
   }

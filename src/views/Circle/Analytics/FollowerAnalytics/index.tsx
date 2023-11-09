@@ -1,26 +1,22 @@
 import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconAnalyticsFollower24 } from '@/public/static/icons/24px/analytics-follower.svg'
 import { CHART_COLOR } from '~/common/enums'
-import { translate } from '~/common/utils'
-import {
-  QueryError,
-  Spinner,
-  StackedAreaChart,
-  Translate,
-  useRoute,
-} from '~/components'
+import { QueryError, Spinner, StackedAreaChart, useRoute } from '~/components'
 import { CircleFollowerAnalyticsQuery } from '~/gql/graphql'
 
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
 import { CIRCLE_FOLLOWER_ANALYTICS } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Content = () => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
+
+  const intl = useIntl()
 
   const { data, error, loading } = useQuery<CircleFollowerAnalyticsQuery>(
     CIRCLE_FOLLOWER_ANALYTICS,
@@ -61,35 +57,50 @@ const Content = () => {
         <InfoTiles.Group primary>
           <InfoTiles.Tile
             title={
-              <Translate
-                zh_hant="目前總追蹤人數"
-                zh_hans="目前总追踪人数"
-                en=""
+              <FormattedMessage
+                defaultMessage="followers_empty"
+                id="Bjdw71"
+                description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
               />
             }
             value={follower.current}
-            unit={<Translate zh_hant="人" zh_hans="人" en="followers" />}
+            unit={
+              <FormattedMessage
+                defaultMessage={`{follower, plural, =1 {follower} other {followers}}`}
+                id="xWZr13"
+                description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+                values={{
+                  follower: follower.current,
+                }}
+              />
+            }
           />
           <InfoTiles.Tile
             title={
-              <Translate
-                zh_hant="本月新增追蹤人數"
-                zh_hans="本月新增追踪人数"
-                en="New Followers This Month"
+              <FormattedMessage
+                defaultMessage="New Followers This Month"
+                id="GugBCe"
+                description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
               />
             }
             value={newFollowersThisMonth}
-            unit={<Translate zh_hant="人" zh_hans="人" en="" />}
+            unit={
+              <FormattedMessage
+                defaultMessage="followers"
+                id="MDNaxs"
+                description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+              />
+            }
             percentageChange={percentageChangeThisMonth}
           />
         </InfoTiles.Group>
         <InfoTiles.Group>
           <InfoTiles.Tile
             title={
-              <Translate
-                zh_hant="已追蹤用戶佔總觀看人數比例"
-                zh_hans="已追踪用户占总观看人数比例"
-                en="Conversion Rate of Followers"
+              <FormattedMessage
+                defaultMessage="Conversion Rate of Followers"
+                id="zKOr2x"
+                description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
               />
             }
             value={`${follower.followerPercentage}%`}
@@ -98,7 +109,7 @@ const Content = () => {
       </InfoTiles>
 
       {chartData && (
-        <section className="chart">
+        <section className={styles.chart}>
           <StackedAreaChart data={chartData}>
             {(props) => (
               <>
@@ -112,10 +123,11 @@ const Content = () => {
                 <StackedAreaChart.Tooltip
                   {...props}
                   formatter={(datum: any) =>
-                    `<span>&nbsp;${datum.value}${translate({
-                      zh_hant: ' 人',
-                      zh_hans: ' 人',
-                      en: '',
+                    `<span>&nbsp;${datum.value}${intl.formatMessage({
+                      defaultMessage: 'followers',
+                      id: 'MDNaxs',
+                      description:
+                        'src/views/Circle/Analytics/FollowerAnalytics/index.tsx',
                     })}&nbsp;</span>`
                   }
                 />
@@ -124,23 +136,25 @@ const Content = () => {
           </StackedAreaChart>
         </section>
       )}
-
-      <style jsx>{styles}</style>
     </>
   )
 }
 
 const FollowerAnalytics = () => {
   return (
-    <section className="container">
+    <section className={styles.container}>
       <SectionHead
         icon={IconAnalyticsFollower24}
-        title={<Translate zh_hant="追蹤" zh_hans="追踪" en="Followers" />}
+        title={
+          <FormattedMessage
+            description="src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+            defaultMessage="Followers"
+            id="AYTnjk"
+          />
+        }
       />
 
       <Content />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

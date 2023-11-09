@@ -1,4 +1,6 @@
-import { Help, Tabs, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { SegmentedTabs } from '~/components'
 
 export type CircleContentAnalyticsType = 'public' | 'paywall'
 
@@ -12,15 +14,26 @@ const ContentTabs: React.FC<Props> = ({ type, setType }) => {
   const isPaywall = type === 'paywall'
 
   return (
-    <Tabs side={<Help hasCount />}>
-      <Tabs.Tab onClick={() => setType('paywall')} selected={isPaywall}>
-        <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
-      </Tabs.Tab>
+    <SegmentedTabs>
+      <SegmentedTabs.Tab
+        onClick={() => setType('paywall')}
+        selected={isPaywall}
+      >
+        <FormattedMessage
+          defaultMessage="Paywalled"
+          id="LOefol"
+          description="src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+        />
+      </SegmentedTabs.Tab>
 
-      <Tabs.Tab onClick={() => setType('public')} selected={isPublic}>
-        <Translate zh_hant="公開" zh_hans="公开" en="Public" />
-      </Tabs.Tab>
-    </Tabs>
+      <SegmentedTabs.Tab onClick={() => setType('public')} selected={isPublic}>
+        <FormattedMessage
+          defaultMessage="Public"
+          id="/podGX"
+          description="src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
+        />
+      </SegmentedTabs.Tab>
+    </SegmentedTabs>
   )
 }
 

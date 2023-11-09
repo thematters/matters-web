@@ -65,12 +65,12 @@ interface MainFeedProps {
 
 const horizontalFeeds: FeedLocation = {
   2: () => (
-    <Media lessThan="xl">
+    <Media lessThan="lg">
       <Tags />
     </Media>
   ),
   5: () => (
-    <Media lessThan="xl">
+    <Media lessThan="lg">
       <Authors />
     </Media>
   ),
@@ -193,7 +193,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
         {mixFeed.map((edge, i) => {
           if (edge?.__typename === 'HorizontalFeed') {
@@ -205,6 +205,8 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
             <List.Item key={`${sortBy}:${edge.node.id}`}>
               <ArticleDigestFeed
                 article={edge.node}
+                hasReadTime={true}
+                hasDonationCount={true}
                 utm_source={`homepage_${sortBy}`}
                 onClick={() =>
                   analytics.trackEvent('click_feed', {

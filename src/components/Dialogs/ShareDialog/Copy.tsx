@@ -1,37 +1,42 @@
-import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
-import {
-  CopyToClipboard,
-  IconLink16,
-  LanguageContext,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { analytics } from '~/common/utils'
+import { CopyToClipboard, IconLink16, TextIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const Copy = ({ link }: { link: string }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
+
+  // append utm_source to link
+  const utm_source = 'share_copy'
+  const url = new URL(link)
+  url.searchParams.append('utm_source', utm_source)
+  link = url.toString()
 
   return (
-    <section className="copy">
+    <section className={styles.copy}>
       <CopyToClipboard text={link}>
-        <button aria-label={translate({ id: 'copy', lang })}>
+        <button
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Copy Link',
+            id: 'u5aHb4',
+          })}
+          onClick={() => {
+            analytics.trackEvent('share', {
+              type: 'copy-url',
+            })
+          }}
+        >
           <TextIcon icon={<IconLink16 color="grey" />} spacing="base">
-            <div className="text">
+            <div className={styles.text}>
               <span>
-                <Translate
-                  zh_hant="複製鏈接"
-                  zh_hans="复制链接"
-                  en="Copy Link"
-                />
+                <FormattedMessage defaultMessage="Copy Link" id="u5aHb4" />
               </span>
             </div>
           </TextIcon>
         </button>
       </CopyToClipboard>
-      <style jsx>{styles}</style>
     </section>
   )
 }

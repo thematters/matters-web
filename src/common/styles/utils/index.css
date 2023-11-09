@@ -1,0 +1,65 @@
+/* motion */
+.u-motion-spin {
+  animation: spinning 1s infinite linear;
+}
+
+@keyframes spinning {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* interaction */
+.u-area-disable {
+  cursor: not-allowed;
+  opacity: 0.5;
+
+  & > * {
+    pointer-events: none;
+  }
+}
+
+/* details */
+.u-details {
+  & summary {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+
+    &:focus {
+      outline: 0;
+    }
+
+    & h1,
+    & h2,
+    & h3,
+    & h4 {
+      display: inline-block;
+    }
+  }
+}
+
+/* link */
+.u-link-green {
+  color: var(--color-matters-green);
+
+  &:link,
+  &:visited {
+    color: var(--color-matters-green);
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--color-matters-green-dark);
+  }
+}
+
+/* text */
+.u-highlight {
+  color: var(--color-matters-green);
+}

@@ -1,26 +1,26 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import {
-  AriaAttributes,
-  AriaRole,
-  forwardRef,
-  useContext,
-  useEffect,
-  useRef,
-} from 'react'
+import { AriaAttributes, AriaRole, forwardRef, useEffect, useRef } from 'react'
+import { useIntl } from 'react-intl'
 
-import { KEYCODES, TEST_ID } from '~/common/enums'
-import { translate } from '~/common/utils'
-import { LanguageContext } from '~/components'
+import { KEYVALUE, TEST_ID } from '~/common/enums'
+import { capitalizeFirstLetter } from '~/common/utils'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
-export type CardBgColor = 'grey-lighter' | 'white' | 'none'
-export type CardBgHoverColor = 'grey-lighter' | 'none'
-export type CardSpacing = 0 | 'xtight' | 'tight' | 'base' | 'loose'
-export type CardBorderColor = 'grey-lighter' | 'line-grey-light'
-export type CardBorderRadius = 'xtight' | 'xxtight' | 'base'
+export type CardBgColor = 'greyLighter' | 'white' | 'transparent' | 'none'
+export type CardBgHoverColor = 'greyLighter' | 'transparent' | 'none'
+export type CardSpacing =
+  | 0
+  | 'xtight'
+  | 'baseTight'
+  | 'tight'
+  | 'base'
+  | 'baseLoose'
+  | 'loose'
+export type CardBorderColor = 'greyLighter' | 'lineGreyLight' | 'green'
+export type CardBorderRadius = 'xtight' | 'xxtight' | 'base' | 'loose'
 
 export interface CardProps {
   spacing?: [CardSpacing, CardSpacing]
@@ -30,6 +30,9 @@ export interface CardProps {
 
   borderColor?: CardBorderColor
   borderRadius?: CardBorderRadius
+
+  textColor?: 'black' | 'greyDarker' | 'red'
+  textActiveColor?: 'black' | 'redDark'
 
   isActive?: boolean
   activeOutline?: 'auto'
@@ -61,6 +64,9 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       borderColor,
       borderRadius,
 
+      textColor,
+      textActiveColor,
+
       isActive,
       activeOutline,
 
@@ -82,33 +88,52 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
     ref
   ) => {
     const router = useRouter()
-    const { lang } = useContext(LanguageContext)
+    const intl = useIntl()
 
     const disabled = !href && !htmlHref && !onClick
     const fallbackRef = useRef(null)
     const cardRef = (ref || fallbackRef) as React.RefObject<any> | null
 
     const cardClasses = classNames({
-      card: true,
-      [`spacing-y-${spacing[0]}`]: !!spacing[0],
-      [`spacing-x-${spacing[1]}`]: !!spacing[1],
-      [`bg-${bgColor}`]: !!bgColor,
-      [`bg-active-${bgActiveColor}`]: !!bgActiveColor,
-      [`border-${borderColor}`]: !!borderColor,
-      [`border-radius-${borderRadius}`]: !!borderRadius,
-      ['active-outline-auto']: !!activeOutline,
+      [styles.card]: true,
+      card: true, // global selector for overriding
+      [styles[`spacingY${capitalizeFirstLetter(spacing[0] + '')}`]]:
+        !!spacing[0],
+      [styles[`spacingX${capitalizeFirstLetter(spacing[1] + '')}`]]:
+        !!spacing[1],
+      [styles[`bg${capitalizeFirstLetter(bgColor)}`]]: !!bgColor,
+      [bgActiveColor
+        ? styles[`bgActive${capitalizeFirstLetter(bgActiveColor)}`]
+        : '']: !!bgActiveColor,
+      [borderColor
+        ? styles[`border${capitalizeFirstLetter(borderColor)}`]
+        : '']: !!borderColor,
+      [borderRadius
+        ? styles[`borderRadius${capitalizeFirstLetter(borderRadius)}`]
+        : '']: !!borderRadius,
+      [styles.activeOutlineAuto]: !!activeOutline,
 
-      hasBorder: !!borderColor || !!borderRadius,
-      disabled,
+      [styles.hasBorder]: !!borderColor || !!borderRadius,
+      [styles.disabled]: disabled,
+      [styles[textColor ? `text${capitalizeFirstLetter(textColor)}` : '']]:
+        !!textColor,
+      [styles[
+        textActiveColor
+          ? `textActive${capitalizeFirstLetter(textActiveColor)}`
+          : ''
+      ]]: !!textActiveColor,
     })
     const ariaLabel =
       htmlHref || href
-        ? translate({
-            zh_hant: `跳轉至 ${href || htmlHref}`,
-            zh_hans: `跳转至 ${href || htmlHref}`,
-            en: `Go to ${href || htmlHref}`,
-            lang,
-          })
+        ? intl.formatMessage(
+            {
+              defaultMessage: 'Go to {href}',
+              id: 'mJEqC/',
+            },
+            {
+              href: href || htmlHref,
+            }
+          )
         : undefined
 
     const openLink = ({
@@ -177,44 +202,39 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       }
     }, [cardRef, isActive])
 
+    const props = {
+      className: cardClasses,
+      ref: cardRef,
+      'data-clickable': true,
+      onClick,
+      ...(ariaLabel && disabled ? { ['aria-label']: ariaLabel } : {}),
+      ...(ariaHasPopup && disabled ? { ['aria-haspopup']: ariaHasPopup } : {}),
+      ...(disabled ? { ['aria-disabled']: disabled } : {}),
+      ...(testId ? { ['data-test-id']: testId } : {}),
+    }
+
     if (is === 'link' && href) {
       return (
         <Link href={href} legacyBehavior>
-          <a
-            className={cardClasses}
-            ref={cardRef}
-            {...(testId ? { ['data-test-id']: testId } : {})}
-          >
-            {children}
-            <style jsx>{styles}</style>
-          </a>
+          <a {...props}>{children}</a>
         </Link>
       )
     }
 
     if (is === 'anchor' && htmlHref) {
       return (
-        <a
-          className={cardClasses}
-          href={htmlHref}
-          target={htmlTarget}
-          ref={cardRef}
-          {...(testId ? { ['data-test-id']: testId } : {})}
-        >
+        <a href={htmlHref} target={htmlTarget} {...props}>
           {children}
-          <style jsx>{styles}</style>
         </a>
       )
     }
 
     return (
       <section
-        className={cardClasses}
+        {...props}
         tabIndex={disabled ? -1 : 0}
-        ref={cardRef}
-        data-clickable
         onKeyDown={(event) => {
-          if (event.keyCode !== KEYCODES.enter) {
+          if (event.key.toLowerCase() !== KEYVALUE.enter) {
             return
           }
           openLink({
@@ -225,14 +245,13 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         onClick={(event) => {
           openLink({ newTab: event.metaKey, event })
         }}
-        {...(ariaLabel ? { ['aria-label']: ariaLabel } : {})}
-        {...(role ? { ['role']: role } : {})}
-        {...(ariaHasPopup ? { ['aria-haspopup']: ariaHasPopup } : {})}
-        {...(testId ? { ['data-test-id']: testId } : {})}
+        {...(role
+          ? { ['role']: role }
+          : !disabled
+          ? { ['role']: 'button' }
+          : {})}
       >
         {children}
-
-        <style jsx>{styles}</style>
       </section>
     )
   }

@@ -8,7 +8,7 @@ import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestSidebarArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ArticleDigestSidebarProps = {
   article: ArticleDigestSidebarArticleFragment
@@ -44,7 +44,7 @@ const fragments = {
 export const ArticleDigestSidebar = ({
   article,
 
-  titleTextSize = 'md-s',
+  titleTextSize = 'mdS',
   hasBackground,
   hasCover = true,
   onClick,
@@ -56,9 +56,9 @@ export const ArticleDigestSidebar = ({
   const isBanned = state === 'banned'
   const cover = !isBanned && hasCover ? article.cover : null
   const containerClasses = classNames({
-    container: true,
-    'has-cover': !!cover,
-    'has-background': !!hasBackground,
+    [styles.container]: true,
+    [styles.hasCover]: !!cover,
+    [styles.hasBackground]: !!hasBackground,
   })
   const path = toPath({
     page: 'articleDetail',
@@ -70,7 +70,7 @@ export const ArticleDigestSidebar = ({
       {...path}
       spacing={['tight', 'tight']}
       borderRadius="xtight"
-      bgColor={hasBackground ? 'grey-lighter' : 'none'}
+      bgColor={hasBackground ? 'greyLighter' : 'none'}
       onClick={onClick}
       testId={TEST_ID.DIGEST_ARTICLE_SIDEBAR}
       {...cardProps}
@@ -85,24 +85,27 @@ export const ArticleDigestSidebar = ({
         </header>
 
         {cover && (
-          <aside className="cover">
-            <ResponsiveImage url={cover} size="144w" />
+          <aside className={styles.cover}>
+            <ResponsiveImage
+              url={cover}
+              width={hasBackground ? 336 : 144}
+              height={hasBackground ? undefined : 144}
+              disableAnimation={true}
+            />
           </aside>
         )}
 
-        <footer>
+        <footer className={styles.footer}>
           <UserDigest.Mini
             user={article.author}
             avatarSize="xs"
-            textSize="sm-s"
-            nameColor="grey-darker"
+            textSize="smS"
+            nameColor="greyDarker"
             hasAvatar
             hasDisplayName
             onClick={onClickAuthor}
           />
         </footer>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

@@ -1,0 +1,11 @@
+.label {
+  @mixin inline-flex-center-all;
+
+  padding: var(--spacing-xx-tight) var(--spacing-x-tight);
+  font-size: var(--font-size-xs);
+  line-height: 1;
+  color: var(--color-white);
+  user-select: none;
+  background: var(--color-matters-gold);
+  border-radius: var(--spacing-xxx-tight);
+}

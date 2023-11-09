@@ -1,5 +1,3 @@
-/* @styled-jsx=global */
-
 /* Layouts
    ========================================================================== */
 @define-mixin flex-center-all {
@@ -73,7 +71,8 @@
 @define-mixin font-serif {
   font-family: var(--font-serif-tc);
 
-  &[lang='zh-Hans'] {
+  &[lang='zh-Hans'],
+  &[data-lang='zh-Hans'] {
     font-family: var(--font-serif-sc);
   }
 }
@@ -81,7 +80,8 @@
 @define-mixin font-sans {
   font-family: var(--font-sans-tc);
 
-  &[lang='zh-Hans'] {
+  &[lang='zh-Hans'],
+  &[data-lang='zh-Hans'] {
     font-family: var(--font-sans-sc);
   }
 }
@@ -108,6 +108,26 @@
   border-right: 1px solid var(--color-line-grey-light);
 }
 
+@define-mixin border-grey-light {
+  border: 1px solid var(--color-grey-light);
+}
+
+@define-mixin border-bottom-grey-light {
+  border-bottom: 1px solid var(--color-grey-light);
+}
+
+@define-mixin border-top-grey-light {
+  border-top: 1px solid var(--color-grey-light);
+}
+
+@define-mixin border-left-grey-light {
+  border-left: 1px solid var(--color-grey-light);
+}
+
+@define-mixin border-right-grey-light {
+  border-right: 1px solid var(--color-grey-light);
+}
+
 @define-mixin shadow-border-bottom-grey {
   box-shadow: 0 1px 0 0 var(--color-line-grey-light);
 }
@@ -119,68 +139,32 @@
 /* Form
    ========================================================================== */
 @define-mixin form-input {
-  @mixin border-top-grey;
-  @mixin border-bottom-grey;
-
-  padding: var(--spacing-base);
-  font-size: var(--font-size-md);
-  background-color: var(--color-white);
-
-  &:disabled {
-    color: var(--color-grey-darker);
-  }
-
-  &::placeholder {
-    color: var(--color-grey-light);
-    opacity: 1; /* Firefox */
-  }
-
-  &:-webkit-autofill::first-line {
-    font-size: var(--font-size-md);
-  }
-}
-
-@define-mixin form-input-grey {
   @mixin transition;
-
-  padding: var(--spacing-base);
-  font-size: var(--font-size-md);
-  background-color: var(--color-grey-lighter);
-  border-top: none;
-  border-bottom: 1px solid var(--color-grey-light);
-  border-radius: var(--spacing-xxx-tight);
-  transition-property: border-color, background-color;
-
-  &:focus,
-  &.focus {
-    background-color: var(--color-green-lighter);
-    border-bottom-color: var(--color-matters-green);
-  }
-
-  &::placeholder {
-    color: var(--color-grey);
-    opacity: 1; /* Firefox */
-  }
-
-  &:-webkit-autofill::first-line {
-    font-size: var(--font-size-md);
-  }
-}
-
-@define-mixin form-input-round {
-  @mixin transition;
+  @mixin border-grey;
 
   height: var(--input-height);
-  padding: var(--spacing-base);
-  border: 1px solid var(--color-line-grey-light);
+  padding: var(--spacing-tight);
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+  color: var(--color-black);
+  background-color: var(--color-white);
   border-radius: var(--spacing-x-tight);
-  caret-color: var(--color-matters-green);
   transition-property: border-color, background-color;
 
   &:focus,
   &.focus {
-    background-color: var(--color-green-lighter);
-    border-color: var(--color-matters-green);
+    border-color: var(--color-grey);
+  }
+
+  &:disabled {
+    color: var(--color-grey-dark);
+    background-color: var(--color-grey-lighter);
+    border-color: transparent;
+  }
+
+  &::placeholder {
+    color: var(--color-grey-dark);
+    opacity: 1; /* Firefox */
   }
 
   &.error {
@@ -192,6 +176,14 @@
       border-color: var(--color-red);
     }
   }
+
+  &:-webkit-autofill::first-line {
+    font-size: var(--font-size-md);
+  }
+}
+
+@define-mixin form-input-number {
+  caret-color: var(--color-matters-green);
 
   /* Chrome, Safari, Edge, Opera */
   &::-webkit-outer-spin-button,
@@ -212,9 +204,9 @@
   @mixin flex-center-space-between;
 
   margin-top: var(--spacing-base);
-  font-size: var(--font-size-timestamp);
-  font-weight: var(--font-weight-timestamp);
-  line-height: var(--line-height-timestamp);
+  font-size: var(--font-size-subtext);
+  font-weight: var(--font-weight-subtext);
+  line-height: var(--line-height-subtext);
 
   & .left,
   & .right {
@@ -222,19 +214,61 @@
   }
 
   & .left {
-    color: var(--color-grey-dark);
+    color: var(--color-grey);
 
-    & :global(> * + *) {
-      padding-left: var(--spacing-xx-tight);
+    & > * + * {
+      margin-left: var(--spacing-base);
     }
   }
 
   & .right {
     color: var(--color-black);
 
-    & :global(> * + *) {
-      padding-left: var(--spacing-loose);
+    & > * + * {
+      margin-left: var(--spacing-base);
     }
+  }
+}
+
+/* Scrollbar
+   ========================================================================== */
+@define-mixin hide-scrollbar {
+  /* IE 10+ */
+  -ms-overflow-style: none;
+
+  /* Firefox */
+  overflow: -moz-scrollbars-none;
+
+  /* Chrome & Safari */
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
+
+@define-mixin scrollbar-thin {
+  /* Width */
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    border: solid 6px transparent;
+    box-shadow: inset 0 0 15px 15px transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    min-height: 68px;
+    border: solid 6px transparent;
+    border-radius: 8px;
+    box-shadow: inset 0 0 15px 15px var(--color-grey-light);
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 0 0 15px 15px var(--color-grey);
   }
 }
 
@@ -242,10 +276,7 @@
    ========================================================================== */
 @define-mixin expand-to-container {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
 }
 
 @define-mixin safe-area-botttom {
@@ -258,10 +289,7 @@
 
 @define-mixin object-fit-cover {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -288,16 +316,18 @@
   overflow: hidden;
 }
 
-@define-mixin hide-scrollbar {
-  /* IE 10+ */
-  -ms-overflow-style: none;
+/* FIXME: fix cropped descenders of letters  */
+@define-mixin fix-cropped-letters {
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12rem;
+}
 
-  /* Firefox */
-  overflow: -moz-scrollbars-none;
-
-  /* Chrome & Safari */
-  &::-webkit-scrollbar {
-    width: 0 !important;
-    height: 0 !important;
-  }
+@define-mixin polka-dot-background {
+  background:
+    linear-gradient(90deg, var(--color-white) 2px, transparent 1%) center,
+    linear-gradient(var(--color-white) 2px, transparent 1%) center,
+    var(--color-grey-light);
+  background-repeat: repeat;
+  background-position: -2px -1px;
+  background-size: 3px 3px;
 }

@@ -7,19 +7,19 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
     $key: String!
     $first: first_Int_min_0 = 30
     $after: String
-    $version: SearchAPIVersion = v20230301
-    $coefficients: String
+    $version: SearchAPIVersion = v20230601
   ) {
     search(
       input: {
         type: Article
+        record: true
         first: $first
-        version: $version
         key: $key
         after: $after
-        coefficients: $coefficients
+        version: $version
       }
     ) {
+      totalCount
       pageInfo {
         startCursor
         endCursor
@@ -30,14 +30,12 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
         node {
           ... on Article {
             ...ArticleDigestFeedArticlePublic
-            ...ArticleDigestFeedArticlePrivate
           }
         }
       }
     }
   }
   ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
 `
 
 export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
@@ -45,17 +43,16 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
     $key: String!
     $first: first_Int_min_0 = 30
     $after: String
-    $version: SearchAPIVersion = v20230301
-    $coefficients: String
+    $version: SearchAPIVersion = v20230601
   ) {
     search(
       input: {
         type: Tag
-        version: $version
+        record: true
         first: $first
         key: $key
         after: $after
-        coefficients: $coefficients
+        version: $version
       }
     ) {
       pageInfo {
@@ -81,17 +78,16 @@ export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
     $key: String!
     $first: first_Int_min_0 = 30
     $after: String
-    $version: SearchAPIVersion = v20230301
-    $coefficients: String
+    $version: SearchAPIVersion = v20230601
   ) {
     search(
       input: {
         type: User
-        version: $version
+        record: true
         first: $first
         key: $key
         after: $after
-        coefficients: $coefficients
+        version: $version
       }
     ) {
       pageInfo {
@@ -103,11 +99,11 @@ export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
         cursor
         node {
           ... on User {
-            ...UserDigestConciseUser
+            ...UserDigestRichUserPublic
           }
         }
       }
     }
   }
-  ${UserDigest.Concise.fragments.user}
+  ${UserDigest.Rich.fragments.user.public}
 `

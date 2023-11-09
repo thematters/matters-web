@@ -18,7 +18,7 @@ const FingerprintButton = ({ article }: FingerprintButtonProps) => {
         <Button
           onClick={openDialog}
           spacing={['xxtight', 'xtight']}
-          bgColor="green-lighter"
+          bgColor="greenLighter"
           aria-haspopup="dialog"
         >
           <TextIcon

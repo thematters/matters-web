@@ -1,0 +1,23 @@
+.article {
+  font-size: var(--font-size-article-title);
+  font-weight: var(--font-weight-article-title);
+  line-height: var(--line-height-article-title);
+}
+
+.feed {
+  font-size: var(--font-size-feed-title);
+  font-weight: var(--font-weight-feed-title);
+  line-height: var(--line-height-feed-title);
+}
+
+.nav {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.6;
+}
+
+.base {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-base);
+}

@@ -13,20 +13,6 @@ const nextConfig = {
   pageExtensions: ['tsx'],
 
   webpack(config, { defaultLoaders, isServer }) {
-    /**
-     * Styles in regular CSS files
-     * @see {@url https://github.com/zeit/styled-jsx#styles-in-regular-css-files}
-     */
-    config.module.rules.push({
-      test: /\.css$/,
-      use: [
-        defaultLoaders.babel,
-        {
-          loader: require('styled-jsx/webpack').loader,
-        },
-      ],
-    })
-
     config.module.rules.push({
       test: /\.svg$/,
       use: [
@@ -74,12 +60,6 @@ const nextConfig = {
   reactStrictMode: true,
   compress: false,
   poweredByHeader: false,
-  i18n: {
-    locales: ['zh-Hant', 'zh-Hans', 'en', '__defaultLocale'],
-    // FIXME: Disable Next.js auto detection and prefixing since we have a fallback strategy based on user request and browser perference in `<LanguageContext>`
-    defaultLocale: '__defaultLocale',
-    localeDetection: false,
-  },
 }
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -91,6 +71,7 @@ const withPWA = require('next-pwa')({
   disable: isLocal,
   register: true,
   sw: 'service-worker.js',
+  runtimeCaching: [], // disable runtime caching
   publicExcludes: ['!static/**/*'],
   buildExcludes: [/.*\.svg/],
   cacheStartUrl: false,

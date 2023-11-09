@@ -7,9 +7,9 @@ import { PaymentReceivedDonationNoticeFragment } from '~/gql/graphql'
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeArticleCard from '../NoticeArticleCard'
+import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
-import styles from '../styles.css'
+import NoticeDigest from '../NoticeDigest'
 
 const PaymentReceivedDonationNotice = ({
   notice,
@@ -21,47 +21,34 @@ const PaymentReceivedDonationNotice = ({
   }
 
   const tx = notice.tx
-  const actor = notice.actors[0]
 
   return (
-    <section
-      className="container"
-      data-test-id={TEST_ID.PAYMENT_RECEIVE_DONATION}
-    >
-      <section className="avatar-wrap">
-        <NoticeActorAvatar user={actor} />
-      </section>
-
-      <section className="content-wrap">
-        <NoticeHead>
-          <NoticeActorName user={actor} />
-          <FormattedMessage
-            defaultMessage="supported your article"
-            description="src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
-          />
-          {tx && (
+    <NoticeDigest
+      notice={notice}
+      action={
+        <FormattedMessage
+          defaultMessage="supported"
+          id="vLEnrs"
+          description="src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+        />
+      }
+      title={
+        (tx && tx.target?.__typename === 'Article' && (
+          <>
+            <NoticeArticleTitle article={tx.target} />
+            &nbsp;
             <span
-              className="highlight"
-              data-test-id={TEST_ID.PAYMENT_RECEIVE_DONATION_AMOUNT}
+              className="u-highlight"
+              data-test-id={TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION_AMOUNT}
             >
               {tx.amount} {tx.currency}
             </span>
-          )}
-          <FormattedMessage
-            defaultMessage=". Take a look at your income"
-            description="src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
-          />
-        </NoticeHead>
-
-        {tx && tx.target?.__typename === 'Article' && (
-          <NoticeArticleCard article={tx.target} />
-        )}
-
-        <NoticeDate notice={notice} />
-      </section>
-
-      <style jsx>{styles}</style>
-    </section>
+          </>
+        )) ||
+        ''
+      }
+      testId={TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION}
+    />
   )
 }
 

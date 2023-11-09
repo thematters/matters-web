@@ -15,7 +15,7 @@ import {
   Spinner,
   useMutation,
 } from '~/components'
-import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
+import { updateViewerUnreadNoticeCount } from '~/components/GQL'
 import {
   MarkAllNoticesAsReadMutation,
   MeNotificationsQuery,
@@ -90,8 +90,8 @@ const BaseNotifications = () => {
     })
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List spacing={['xloose', 'base']}>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
+      <List spacing={['xloose', 0]}>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
             <Notice notice={node} />
@@ -105,25 +105,23 @@ const BaseNotifications = () => {
 const Notifications = () => {
   return (
     <Layout.Main>
-      <Layout.Header
-        left={
-          <>
-            <Media at="sm">
-              <Layout.Header.MeButton />
-            </Media>
-            <Media greaterThan="sm">
-              <Layout.Header.BackButton />
-            </Media>
-          </>
-        }
-        right={<Layout.Header.Title id="notifications" />}
-      />
+      <Media at="sm">
+        <Layout.Header
+          // left={<Layout.Header.MeButton />}
+          // right={<Layout.Header.Title id="notifications" />}
+          left={<Layout.Header.Title id="notifications" />}
+        />
+        <Spacer size="base" />
+      </Media>
+      <Media greaterThan="sm">
+        <Spacer size="xloose" />
+      </Media>
 
       <Head title={{ id: 'notifications' }} />
 
-      <Spacer />
-
-      <BaseNotifications />
+      <Layout.Main.Spacing hasVertical={false}>
+        <BaseNotifications />
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

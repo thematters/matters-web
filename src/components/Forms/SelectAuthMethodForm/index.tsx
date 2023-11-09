@@ -1,128 +1,92 @@
+import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
+import { useConnect } from 'wagmi'
 
-import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
+import { WalletType } from '~/common/utils'
 import {
-  Dialog,
-  Form,
-  IconEmail24,
-  IconWallet24,
-  LanguageSwitch,
-  Layout,
-  Spacer,
-  TextIcon,
+  AuthFeedType,
+  AuthNormalFeed,
+  AuthTabs,
+  AuthWalletFeed,
+  DialogBeta,
 } from '~/components'
-
-import SourceHeader from './SourceHeader'
-import styles from './styles.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
-  source: UNIVERSAL_AUTH_SOURCE
-  gotoWalletAuth: () => void
+  checkWallet: boolean
+  gotoWalletConnect: (type: WalletType) => void
   gotoEmailLogin: () => void
+  gotoEmailSignup: () => void
+
+  authFeedType: AuthFeedType
+  setAuthFeedType: (type: AuthFeedType) => void
+
+  hasUnavailable?: boolean
   closeDialog?: () => void
 }
 
 export const SelectAuthMethodForm: React.FC<FormProps> = ({
   purpose,
-  source,
-  gotoWalletAuth,
+  gotoWalletConnect,
   gotoEmailLogin,
+  gotoEmailSignup,
   closeDialog,
+  authFeedType = 'normal',
+  setAuthFeedType,
+  checkWallet,
+  hasUnavailable,
 }) => {
-  const isInPage = purpose === 'page'
+  const isInDialog = purpose === 'dialog'
+  const isNormal = authFeedType === 'normal'
+  const isWallet = authFeedType === 'wallet'
+
+  const { connectors } = useConnect()
+  const injectedConnector = connectors.find((c) => c.id === 'metaMask')
+
+  useEffect(() => {
+    if (injectedConnector?.ready && checkWallet) {
+      setAuthFeedType('wallet')
+    }
+  }, [injectedConnector?.ready])
 
   const InnerForm = (
-    <Form.List
-      groupName={
-        isInPage ? (
-          <FormattedMessage
-            defaultMessage="Choose a method to enter"
-            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-          />
-        ) : null
-      }
-    >
-      <Form.List.Item
-        title={
-          <TextIcon
-            color="black"
-            icon={<IconWallet24 size="md" />}
-            size="md"
-            spacing="xtight"
-          >
-            <FormattedMessage
-              defaultMessage="Continue with Wallet"
-              description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-            />
-          </TextIcon>
-        }
-        subtitle={
-          <FormattedMessage
-            defaultMessage="For unregistered or users enabled wallet login"
-            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-          />
-        }
-        onClick={gotoWalletAuth}
-        role="button"
+    <>
+      <AuthTabs
+        type={authFeedType}
+        setType={setAuthFeedType}
+        purpose={purpose}
       />
-      <Form.List.Item
-        title={
-          <TextIcon
-            color="black"
-            icon={<IconEmail24 size="md" />}
-            size="md"
-            spacing="xtight"
-          >
-            <FormattedMessage
-              defaultMessage="Continue with Email"
-              description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-            />
-          </TextIcon>
-        }
-        subtitle={
-          <FormattedMessage
-            defaultMessage="User registered by email can login and enable wallet login later"
-            description="src/components/Forms/SelectAuthMethodForm/index.tsx"
-          />
-        }
-        onClick={gotoEmailLogin}
-        role="button"
-      />
-    </Form.List>
-  )
 
-  if (isInPage) {
-    return (
-      <>
-        <Layout.Header
-          left={<Layout.Header.BackButton />}
-          right={<Layout.Header.Title id="authEntries" />}
+      {isNormal && (
+        <AuthNormalFeed
+          gotoEmailSignup={gotoEmailSignup}
+          gotoEmailLogin={gotoEmailLogin}
         />
-
-        {InnerForm}
-
-        <footer>
-          <LanguageSwitch />
-          <style jsx>{styles}</style>
-        </footer>
-      </>
-    )
-  }
+      )}
+      {isWallet && (
+        <AuthWalletFeed
+          submitCallback={gotoWalletConnect}
+          hasUnavailable={hasUnavailable}
+        />
+      )}
+    </>
+  )
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header title="authEntries" closeDialog={closeDialog} />
+      <DialogBeta.Content noMaxHeight={true}>{InnerForm}</DialogBeta.Content>
+
+      {isInDialog && (
+        <DialogBeta.Footer
+          smUpBtns={
+            <DialogBeta.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+              onClick={closeDialog}
+            />
+          }
+        />
       )}
-
-      <Dialog.Content hasGrow>
-        <SourceHeader source={source} />
-
-        {InnerForm}
-
-        <Spacer />
-      </Dialog.Content>
     </>
   )
 }

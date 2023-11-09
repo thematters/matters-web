@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 
+import { TEST_ID } from '~/common/enums'
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
 import { AppreciatorsDialogArticleFragment } from '~/gql/graphql'
 
@@ -12,7 +13,6 @@ interface AppreciatorsDialogProps {
 const fragments = {
   article: gql`
     fragment AppreciatorsDialogArticle on Article {
-      id
       id
       likesReceived: appreciationsReceived(input: { first: 0 }) {
         totalCount
@@ -33,7 +33,11 @@ const BaseAppreciatorsDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_APPRECIATORS}
+      >
         <DynamicContent id={article.id} closeDialog={closeDialog} />
       </Dialog>
     </>

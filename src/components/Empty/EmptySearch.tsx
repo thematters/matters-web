@@ -1,4 +1,4 @@
-import { Empty, IconNavSearch24, Translate } from '~/components'
+import { Empty, IconNavSearch32, Translate } from '~/components'
 
 export const EmptySearch = ({
   description,
@@ -6,7 +6,7 @@ export const EmptySearch = ({
   description?: string | React.ReactNode
 }) => (
   <Empty
-    icon={<IconNavSearch24 size="xxl" />}
+    icon={<IconNavSearch32 size="xxl" />}
     description={description || <Translate id="emptySearchResults" />}
   />
 )

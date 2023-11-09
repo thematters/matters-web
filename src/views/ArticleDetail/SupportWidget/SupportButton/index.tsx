@@ -1,13 +1,15 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
-  ADD_TOAST,
+  ERROR_CODES,
+  ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   REFETCH_DONATORS,
-  UNIVERSAL_AUTH_SOURCE,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { DonationDialog, Translate, ViewerContext } from '~/components'
+import { DonationDialog, toast, Translate, ViewerContext } from '~/components'
 import DonationButton from '~/components/Buttons/DonationButton'
 import {
   ArticleDetailPublicQuery,
@@ -34,18 +36,13 @@ const SupportButton = ({
   }
 
   const forbid = (isAuthor?: boolean) => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: isAuthor ? (
-            <Translate zh_hant="去支持其他用戶吧" zh_hans="去支持其他用户吧" />
-          ) : (
-            <Translate id="FORBIDDEN_BY_STATE" />
-          ),
-        },
-      })
-    )
+    toast.error({
+      message: isAuthor ? (
+        <Translate zh_hant="去支持其他用戶吧" zh_hans="去支持其他用户吧" />
+      ) : (
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+      ),
+    })
   }
 
   return (
@@ -65,10 +62,9 @@ const SupportButton = ({
               if (!viewer.isAuthed) {
                 window.dispatchEvent(
                   new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-                    detail: { source: UNIVERSAL_AUTH_SOURCE.support },
+                    detail: { trigger: UNIVERSAL_AUTH_TRIGGER.support },
                   })
                 )
-
                 return
               }
 

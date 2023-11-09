@@ -1,0 +1,11 @@
+.list {
+  padding-top: var(--spacing-base);
+
+  & li {
+    @mixin border-top-grey;
+
+    &:last-child {
+      margin-bottom: calc(var(--spacing-base) * -1);
+    }
+  }
+}

@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { URL_QS } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { IconEdit16, Menu, TextIcon, Translate } from '~/components'
+import { IconEdit20, Menu } from '~/components'
 import { EditArticleButtonArticleFragment } from '~/gql/graphql'
 
 const fragments = {
@@ -28,13 +29,17 @@ const EditArticleButton = ({
 
   return (
     <Menu.Item
+      text={
+        <FormattedMessage
+          defaultMessage="Edit"
+          id="ZVoJan"
+          description="src/components/ArticleDigest/DropdownActions/EditButton.tsx"
+        />
+      }
+      icon={<IconEdit20 size="mdS" />}
       href={`${href}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`}
       is="link"
-    >
-      <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
-        <Translate id="editArticle" />
-      </TextIcon>
-    </Menu.Item>
+    />
   )
 }
 

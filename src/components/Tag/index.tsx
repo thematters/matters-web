@@ -1,18 +1,13 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
+import { useIntl } from 'react-intl'
 
-import { clampTagLength, toPath } from '~/common/utils'
-import {
-  IconClear16,
-  IconHashTag16,
-  IconProps,
-  TextIcon,
-  TextIconProps,
-} from '~/components'
+import { clampTag, toPath } from '~/common/utils'
+import { IconClose16, IconProps, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface TagProps {
   tag: DigestTagFragment
@@ -20,11 +15,12 @@ interface TagProps {
   iconProps?: IconProps
   textIconProps?: TextIconProps
   active?: boolean
-  disabled?: boolean // disable default <a>
+
+  is?: 'a' | 'span'
   hasCount?: boolean
-  hasClose?: boolean
   canClamp?: boolean
-  removeTag?: (tag: DigestTagFragment) => void
+
+  onRemoveTag?: (tag: DigestTagFragment) => void
   onClick?: () => void
 }
 
@@ -50,7 +46,7 @@ export const toDigestTagPlaceholder = (content: string) =>
     },
     numArticles: 0,
     numAuthors: 0,
-  } as DigestTagFragment)
+  }) as DigestTagFragment
 
 export const Tag = ({
   tag,
@@ -58,22 +54,23 @@ export const Tag = ({
   iconProps: customIconProps,
   textIconProps: customTextIconProps,
   active,
-  disabled,
+  is,
   hasCount = true,
-  hasClose,
   canClamp = false,
-  removeTag,
+  onRemoveTag,
   onClick,
 }: TagProps) => {
+  const intl = useIntl()
+
   const tagClasses = classNames({
-    tag: true,
-    [type]: type,
-    active,
-    clickable: !!onClick,
-    disabled: !!disabled && !onClick,
+    [styles.tag]: true,
+    [styles[type]]: type,
+    [styles.active]: active,
+    [styles.clickable]: !!onClick,
+    [styles.disabled]: !!(is === 'span') && !onClick,
   })
 
-  const tagName = canClamp ? clampTagLength(tag.content) : tag.content
+  const tagName = canClamp ? clampTag(tag.content) : tag.content
 
   const path = toPath({
     page: 'tagDetail',
@@ -113,17 +110,17 @@ export const Tag = ({
         color: active ? 'green' : 'grey',
       }
       textIconProps = {
-        size: 'sm',
-        weight: 'md',
-        spacing: 0,
-        color: active ? 'white' : 'grey-darker',
+        size: 'smS',
+        weight: 'normal',
+        spacing: 'xxtight',
+        color: active ? 'white' : 'greyDarker',
       }
       break
     case 'plain':
       textIconProps = {
-        size: 'sm-s',
+        size: 'xs',
         weight: 'normal',
-        spacing: 'xxxtight',
+        spacing: 0,
         color: 'green',
       }
       break
@@ -141,39 +138,36 @@ export const Tag = ({
 
   const Inner = () => (
     <>
-      <TextIcon
-        icon={<IconHashTag16 {...iconProps} />}
-        {...textIconProps}
-        size={textIconProps.size}
-        allowUserSelect
-      >
-        <span className="name">{tagName}</span>
+      <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
+        <span className={styles.name}>#&nbsp;{tagName}</span>
       </TextIcon>
 
-      {hasClose && (
+      {onRemoveTag && (
         <button
-          className="close"
+          className={styles.close}
           onClick={() => {
-            removeTag?.(tag)
+            onRemoveTag(tag)
           }}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Remove',
+            id: 'Ayepqz',
+            description: 'src/components/Tag/index.tsx',
+          })}
         >
-          <IconClear16 color="grey" />
+          <IconClose16 color="grey" />
         </button>
       )}
 
       {hasCount && type === 'list' && tag?.numArticles ? (
-        <span className="count">{tag.numArticles}</span>
+        <span className={styles.count}>{tag.numArticles}</span>
       ) : null}
-
-      <style jsx>{styles}</style>
     </>
   )
 
-  if (disabled) {
+  if (is === 'span') {
     return (
       <span className={tagClasses} onClick={onClick}>
         <Inner />
-        <style jsx>{styles}</style>
       </span>
     )
   }
@@ -182,7 +176,6 @@ export const Tag = ({
     <Link {...path} legacyBehavior>
       <a className={tagClasses} onClick={onClick}>
         <Inner />
-        <style jsx>{styles}</style>
       </a>
     </Link>
   )

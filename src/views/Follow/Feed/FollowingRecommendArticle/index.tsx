@@ -8,18 +8,13 @@ import {
   ResponsiveImage,
   UserDigest,
 } from '~/components'
-import FollowButton from '~/components/ArticleDigest/Feed/FollowButton'
-import {
-  FollowingFeedRecommendArticlePrivateFragment,
-  FollowingFeedRecommendArticlePublicFragment,
-} from '~/gql/graphql'
+import { FollowingFeedRecommendArticlePublicFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type Props = {
-  article: FollowingFeedRecommendArticlePublicFragment &
-    Partial<FollowingFeedRecommendArticlePrivateFragment>
+  article: FollowingFeedRecommendArticlePublicFragment
 } & CardProps
 
 const RecommendArticle = ({ article, ...cardProps }: Props) => {
@@ -40,16 +35,16 @@ const RecommendArticle = ({ article, ...cardProps }: Props) => {
       {...path}
       {...cardProps}
     >
-      <section className="container">
-        <section className="head">
-          <section className="wrap">
-            <p className="title">
+      <section className={styles.container}>
+        <section className={styles.head}>
+          <section className={styles.wrap}>
+            <p className={styles.title}>
               <LinkWrapper textActiveColor="green" {...path}>
                 {title}
               </LinkWrapper>
             </p>
 
-            <section className="author">
+            <section className={styles.author}>
               <UserDigest.Mini
                 user={author}
                 avatarSize="xs"
@@ -57,24 +52,25 @@ const RecommendArticle = ({ article, ...cardProps }: Props) => {
                 hasAvatar
                 hasDisplayName
               />
-
-              <FollowButton user={author} />
             </section>
           </section>
 
           {cover && (
-            <section className="cover">
-              <ResponsiveImage url={cover} size="144w" />
+            <section className={styles.cover}>
+              <ResponsiveImage
+                url={cover}
+                width={144}
+                height={144}
+                disableAnimation={true}
+              />
             </section>
           )}
         </section>
 
-        <section className="content">
-          <p className="description">{cleanedSummary}</p>
+        <section className={styles.content}>
+          <p className={styles.description}>{cleanedSummary}</p>
         </section>
       </section>
-
-      <style jsx>{styles}</style>
     </Card>
   )
 }
@@ -88,10 +84,7 @@ type MemoizedRecommendArticleType = React.MemoExoticComponent<
 const MemoizedRecommendArticle = React.memo(
   RecommendArticle,
   ({ article: prevArticle }, { article }) => {
-    return (
-      prevArticle.recommendArticleState === article.recommendArticleState &&
-      prevArticle.author.isFollowee === article.author.isFollowee
-    )
+    return prevArticle.recommendArticleState === article.recommendArticleState
   }
 ) as MemoizedRecommendArticleType
 

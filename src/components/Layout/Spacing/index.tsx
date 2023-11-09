@@ -1,11 +1,21 @@
-import styles from './styles.css'
+import classNames from 'classnames'
 
-const Spacing: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
-  <section>
-    {children}
+import styles from './styles.module.css'
 
-    <style jsx>{styles}</style>
-  </section>
-)
+type SpacingProps = {
+  hasVertical?: boolean
+}
+
+const Spacing: React.FC<React.PropsWithChildren<SpacingProps>> = ({
+  hasVertical = true,
+  children,
+}) => {
+  const spacingClasses = classNames({
+    [styles.spacing]: true,
+    [styles.hasVertical]: hasVertical,
+  })
+
+  return <section className={spacingClasses}>{children}</section>
+}
 
 export default Spacing

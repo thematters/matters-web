@@ -1,4 +1,6 @@
-import { Button, IconPen16, TextIcon, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Button, IconPen16, TextIcon } from '~/components'
 
 import AddCircleArticleDialog from './Dialog'
 
@@ -21,12 +23,8 @@ const AddArticlesButton = ({ circle }: AddArticlesButtonProps) => {
           onClick={openAddCircleArticlesDialog}
           aria-haspopup="dialog"
         >
-          <TextIcon icon={<IconPen16 />} weight="md" size="md-s">
-            <Translate
-              zh_hant="添加作品"
-              zh_hans="添加作品"
-              en="Add Articles"
-            />
+          <TextIcon icon={<IconPen16 />} weight="md" size="mdS">
+            <FormattedMessage defaultMessage="Add Articles" id="k97/u7" />
           </TextIcon>
         </Button>
       )}

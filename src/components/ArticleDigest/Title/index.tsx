@@ -2,28 +2,29 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath, UtmParams } from '~/common/utils'
+import { capitalizeFirstLetter, toPath, UtmParams } from '~/common/utils'
 import { LinkWrapper, LinkWrapperProps, Translate } from '~/components'
 import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ArticleDigestTitleTextSize =
-  | 'sm-s'
+  | 'xs'
+  | 'smS'
   | 'sm'
-  | 'md-s'
+  | 'mdS'
   | 'md'
   | 'xm'
   | 'xl'
 export type ArticleDigestTitleTextWeight = 'normal' | 'md' | 'semibold'
-export type ArticleDigestTitleIs = 'h2' | 'h3' | 'h4' | 'h5'
+export type ArticleDigestTitleIs = 'h2' | 'h3'
 
 type ArticleDigestTitleProps = {
   article: ArticleDigestTitleArticleFragment
 
   textSize?: ArticleDigestTitleTextSize
   textWeight?: ArticleDigestTitleTextWeight
-  lineClamp?: boolean
+  lineClamp?: boolean | 1 | 2 | 3
   is?: ArticleDigestTitleIs
 
   disabled?: boolean
@@ -73,10 +74,11 @@ export const ArticleDigestTitle = ({
   const isBanned = state === 'banned'
   const title = isBanned ? <Translate id="articleBanned" /> : article.title
   const titleClasses = classNames({
-    title: true,
-    [`text-size-${textSize}`]: !!textSize,
-    [`text-weight-${textWeight}`]: !!textWeight,
-    'line-clamp': lineClamp,
+    [styles.title]: true,
+    [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
+    [styles[`textWeight${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
+    [styles.lineClamp]: !!lineClamp,
+    [styles[`lineClampLine${lineClamp}`]]: lineClamp === 1 || lineClamp === 3,
   })
   const isClickable = !disabled && !isBanned
 
@@ -99,8 +101,6 @@ export const ArticleDigestTitle = ({
         ) : (
           <h5 className={titleClasses}>{title}</h5>
         )}
-
-        <style jsx>{styles}</style>
       </>
     </LinkWrapper>
   )

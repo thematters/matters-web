@@ -1,4 +1,5 @@
 import { NetworkStatus } from 'apollo-client'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -6,13 +7,12 @@ import {
   List,
   QueryError,
   Spinner,
-  Translate,
   usePublicQuery,
   UserDigest,
 } from '~/components'
 import { TagParticipantsQuery } from '~/gql/graphql'
 
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import TAG_PARTICIPANTS from './gql'
 
 interface Props {
@@ -75,10 +75,10 @@ const Participants = ({ id }: Props) => {
 
   return (
     <>
-      <section className="category">
+      <section className={styles.category}>
         <section>
-          <Translate zh_hant="創作者" zh_hans="创作者" en="Creators" />
-          <span className="count">({count})</span>
+          <FormattedMessage defaultMessage="Creators" id="TzhzIH" />
+          <span className={styles.count}>({count})</span>
         </section>
       </section>
 
@@ -89,7 +89,7 @@ const Participants = ({ id }: Props) => {
               <UserDigest.Rich
                 user={node}
                 hasFollow={false}
-                spacing={['tight', 'base']}
+                spacing={['tight', 0]}
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: 'tag_detail_community',
@@ -103,8 +103,6 @@ const Participants = ({ id }: Props) => {
           ))}
         </List>
       </InfiniteScroll>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

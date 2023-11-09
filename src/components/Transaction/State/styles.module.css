@@ -1,0 +1,9 @@
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  & .stateText {
+    line-height: 1.125rem;
+  }
+}

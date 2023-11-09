@@ -1,12 +1,15 @@
 import gql from 'graphql-tag'
 
-export const USER_TABS_PUBLIC = gql`
-  query UserTabsPublic($userName: String!) {
-    user(input: { userName: $userName }) {
+export const fragments = {
+  user: gql`
+    fragment TabsUser on User {
       id
-      subscribedCircles(input: { first: 0 }) {
+      status {
+        articleCount
+      }
+      userCollections: collections(input: { first: 0 }) {
         totalCount
       }
     }
-  }
-`
+  `,
+}

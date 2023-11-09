@@ -3,14 +3,27 @@ import gql from 'graphql-tag'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
+import IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING from '@/public/static/icons/civic-liker-architect-ring.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 import LOGBOOK from '@/public/static/images/logbook.gif'
-import { IconLogbookBadge16, ResponsiveImage } from '~/components'
+import { TEST_ID } from '~/common/enums'
+import { IconLogbookBadge16, ResponsiveImage, Tooltip } from '~/components'
 import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
+export type AvatarSize =
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'mdS'
+  | 'lg'
+  | 'xl'
+  | 'xxl'
+  | 'xxxl'
+  | 'xxxlm'
+  | 'xxxll'
+  | 'xxxxl'
 
 export type AvatarLogbook = PartialDeep<AvatarUserLogbookFragment>
 
@@ -20,6 +33,7 @@ export interface AvatarProps {
   src?: string | null
   inEditor?: boolean
   inProfile?: boolean
+  title?: string
 }
 
 const fragments = {
@@ -50,7 +64,7 @@ const fragments = {
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const { user, size = 'default', src, inEditor, inProfile } = props
+  const { user, size = 'default', src, title, inEditor, inProfile } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
   const isFallback =
     (!src && !user?.avatar) || source.indexOf('data:image') >= 0
@@ -59,42 +73,68 @@ export const Avatar = (props: AvatarProps) => {
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasLogbook = !!user?.info?.cryptoWallet?.hasNFTs
   const avatarClasses = classNames({
-    avatar: true,
-    [size]: true,
-    hasRing: isCivicLiker || hasArchitectBadge,
-    hasBadge: hasLogbook,
+    [styles.avatar]: true,
+    avatar: true, // global selector for overwirting
+    [styles[size]]: true,
+    [styles.hasRing]: isCivicLiker || hasArchitectBadge,
+    [styles.hasBadge]: hasLogbook,
   })
 
+  const style = {
+    '--avatar-ring-civic-liker': `url(${IMAGE_CIVIC_LIKER_RING})`,
+    '--avatar-ring-architect': `url(${IMAGE_MATTERS_ARCHITECT_RING})`,
+    '--avatar-ring-civic-architect': `url(${IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING})`,
+  } as React.CSSProperties
+
   return (
-    <div className={avatarClasses}>
+    <div
+      className={avatarClasses}
+      style={style}
+      title={title}
+      data-test-id={TEST_ID.AVATAR}
+    >
       <ResponsiveImage
         url={source}
-        size="144w"
+        width={152}
+        height={152}
+        smUpWidth={240}
+        smUpHeight={240}
         disabled={isFallback || inEditor}
       />
 
-      {isCivicLiker && <span className="civic-liker ring" />}
-      {hasArchitectBadge && <span className="architect ring" />}
+      {isCivicLiker && !hasArchitectBadge && (
+        <span
+          data-test-id={TEST_ID.AVATAR_CIVIC_LIKER}
+          className={[styles.ring, styles.civicLiker].join(' ')}
+        />
+      )}
+      {hasArchitectBadge && !isCivicLiker && (
+        <span
+          data-test-id={TEST_ID.AVATAR_ARCHITECT}
+          className={[styles.ring, styles.architect].join(' ')}
+        />
+      )}
+      {hasArchitectBadge && isCivicLiker && (
+        <span
+          data-test-id={TEST_ID.AVATAR_CIVIC_ARCHITECT}
+          className={[styles.ring, styles.civicRrchitect].join(' ')}
+        />
+      )}
       {hasLogbook && (
-        <section className="badge">
+        <section className={styles.badge} data-test-id={TEST_ID.AVATAR_LOGBOOK}>
           {inProfile ? (
-            <img className="logbook" src={LOGBOOK.src} alt="logbook icon" />
+            <Tooltip content="Logbook">
+              <img
+                className={styles.logbook}
+                src={LOGBOOK.src}
+                alt="logbook icon"
+              />
+            </Tooltip>
           ) : (
             <IconLogbookBadge16 />
           )}
         </section>
       )}
-
-      <style jsx>{styles}</style>
-
-      <style jsx>{`
-        .civic-liker.ring {
-          background-image: url(${IMAGE_CIVIC_LIKER_RING});
-        }
-        .architect.ring {
-          background-image: url(${IMAGE_MATTERS_ARCHITECT_RING});
-        }
-      `}</style>
     </div>
   )
 }

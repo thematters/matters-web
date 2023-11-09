@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 import {
   IconArticle16,
@@ -10,7 +11,7 @@ import {
 } from '~/components'
 import { CountsCircleFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CountsProps = {
   circle: CountsCircleFragment
@@ -37,7 +38,7 @@ const Counts = ({ circle }: CountsProps) => {
   const articleCount = circle.works.totalCount
 
   return (
-    <section className="counts">
+    <section className={styles.counts}>
       <TextIcon
         icon={<IconUser16 size="xs" />}
         color="grey"
@@ -49,6 +50,7 @@ const Counts = ({ circle }: CountsProps) => {
           en: `${memberCount} members`,
           lang,
         })}
+        data-test-id={TEST_ID.DIGEST_CIRCLE_MEMBER_COUNT}
       >
         {numAbbr(memberCount)}
       </TextIcon>
@@ -64,11 +66,10 @@ const Counts = ({ circle }: CountsProps) => {
           en: `${articleCount} articles`,
           lang,
         })}
+        data-test-id={TEST_ID.DIGEST_CIRCLE_ARTICLE_COUNT}
       >
         {numAbbr(articleCount)}
       </TextIcon>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

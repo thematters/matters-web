@@ -10,7 +10,7 @@ import { analytics, toPath } from '~/common/utils'
 import {
   Media,
   Menu,
-  Spacer,
+  // Spacer,
   Spinner,
   TagDigest,
   UserDigest,
@@ -31,7 +31,6 @@ interface QuickSearchProps {
 }
 
 export const SearchQuickResult = (props: QuickSearchProps) => {
-  // TODO: Just test for team, will be removed when release
   const { getQuery } = useRoute()
   const version = getQuery('version')
 
@@ -109,13 +108,14 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
         <TriggerFullSearchItem searchKey={searchKey} />
         <Menu.Divider />
       </Media>
+
       {hasUsers &&
         userEdges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'User' && (
               <Fragment key={cursor}>
                 <Menu.Item
-                  bgActiveColor="grey-lighter"
+                  bgActiveColor="greyLighter"
                   activeOutline="auto"
                   isActive={`user${cursor}` === activeItem}
                   {...toPath({
@@ -133,18 +133,21 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
                     })
                   }}
                 >
-                  <UserDigest.Concise
+                  <UserDigest.Rich
                     user={node}
-                    avatarSize="lg"
-                    nameStyle="tight"
+                    size="sm"
+                    bgColor="transparent"
+                    bgActiveColor="transparent"
+                    hasFollow={false}
+                    hasState={false}
+                    spacing={[0, 0]}
+                    subtitle={`@${node.userName}`}
                   />
                 </Menu.Item>
               </Fragment>
             )
         )}
-      {hasUsers && <Spacer size="xtight" />}
       {hasUsers && hasTags && <Menu.Divider />}
-      {hasUsers && <Spacer size="xtight" />}
       {hasTags &&
         tagEdges.map(
           ({ node, cursor }, i) =>
@@ -152,7 +155,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
               <Fragment key={cursor}>
                 <Menu.Item
                   spacing={['base', 'base']}
-                  bgActiveColor="grey-lighter"
+                  bgActiveColor="greyLighter"
                   activeOutline="auto"
                   isActive={`tag${cursor}` === activeItem}
                   {...toPath({

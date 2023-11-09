@@ -1,9 +1,12 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { NoticeArticleTitleFragment } from '~/gql/graphql'
+
+import styles from './styles.module.css'
 
 const NoticeArticleTitle = ({
   article,
@@ -24,12 +27,17 @@ const NoticeArticleTitle = ({
   if (!isBlock) {
     return (
       <Link {...path}>
-        <a>{article.title}</a>
+        <a
+          className={styles.noticeArticleTitle}
+          data-test-id={TEST_ID.NOTICE_ARTICLE_TITLE}
+        >
+          {article.title}
+        </a>
       </Link>
     )
   }
 
-  return <ArticleDigestTitle article={article} textSize="md-s" />
+  return <ArticleDigestTitle article={article} textSize="md" lineClamp={3} />
 }
 
 NoticeArticleTitle.fragments = {

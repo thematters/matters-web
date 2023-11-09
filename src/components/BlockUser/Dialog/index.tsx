@@ -1,13 +1,19 @@
-import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { PATHS, TEST_ID } from '~/common/enums'
+import {
+  Dialog,
+  toast,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+} from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {
   BlockUserPrivateFragment,
   BlockUserPublicFragment,
   ToggleBlockUserMutation,
 } from '~/gql/graphql'
-
-import ViewBlocksButton from './ViewBlocksButton'
 
 interface BlockUserDialogProps {
   user: BlockUserPublicFragment & Partial<BlockUserPrivateFragment>
@@ -31,27 +37,28 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
   const onBlock = async () => {
     await blockUser()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: <Translate id="successBlock" />,
-          customButton: <ViewBlocksButton />,
-          buttonPlacement: 'center',
+    toast.success({
+      message: <Translate id="successBlock" />,
+      actions: [
+        {
+          content: <Translate zh_hant="查看" zh_hans="查看" />,
+          htmlHref: PATHS.ME_SETTINGS_BLOCKED,
         },
-      })
-    )
+      ],
+    })
   }
 
   return (
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_BLOCK_USER}
+      >
         <Dialog.Header
-          title="blockUser"
-          closeDialog={closeDialog}
-          mode="inner"
+          title={<FormattedMessage defaultMessage="Block User" id="vAc1Bw" />}
         />
 
         <Dialog.Message>
@@ -64,25 +71,29 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="red"
-            onClick={() => {
-              onBlock()
-              closeDialog()
-            }}
-          >
-            <Translate id="block" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="cancel" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={<Translate id="block" />}
+              color="red"
+              onClick={() => {
+                onBlock()
+                closeDialog()
+              }}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={<Translate id="block" />}
+              color="red"
+              onClick={() => {
+                onBlock()
+                closeDialog()
+              }}
+            />
+          }
+        />
       </Dialog>
     </>
   )

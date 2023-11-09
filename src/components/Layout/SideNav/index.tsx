@@ -1,169 +1,140 @@
-import VisuallyHidden from '@reach/visually-hidden'
-import Link from 'next/link'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import { useContext } from 'react'
-import FocusLock from 'react-focus-lock'
+import { FormattedMessage } from 'react-intl'
 
-import { PATHS, Z_INDEX } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
+import { PATHS, TEST_ID, Z_INDEX } from '~/common/enums'
 import {
   Dropdown,
   hidePopperOnClick,
-  IconLogo,
-  IconLogoGraph,
-  IconNavHome24,
-  IconNavHomeActive24,
-  IconNavSearch24,
-  IconNavSettings24,
-  LanguageContext,
+  IconNavMe32,
+  IconNavMeActive32,
   Media,
-  Menu,
-  Translate,
+  UniversalAuthButton,
   useRoute,
   ViewerContext,
   WriteButton,
 } from '~/components'
 
-import MeAvatar from '../MeAvatar'
-import NavMenu from '../NavMenu'
 import UnreadIcon from '../UnreadIcon'
+import { NavListItemHome, NavListItemSearch } from './Items'
+import Logo from './Logo'
+import MeMenu from './MeMenu'
 import NavListItem from './NavListItem'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
-const SideNav = () => {
-  const { lang } = useContext(LanguageContext)
-
-  const { router, isInPath, isPathStartWith, getQuery } = useRoute()
+const SideNavMenu = () => {
+  const { isInPath, isPathStartWith, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
-  const userName = getQuery('name')
+  const name = getQuery('name')
   const viewerUserName = viewer.userName || ''
+  const viewerCircle = viewer.ownCircles && viewer.ownCircles[0]
 
-  const isInHome = isInPath('HOME')
   const isInFollow = isInPath('FOLLOW')
   const isInNotification = isInPath('ME_NOTIFICATIONS')
-  const isInSearch = isInPath('SEARCH')
-  const isInSettings = isInPath('SETTINGS')
-  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+
+  const isMyProfile = isPathStartWith('/@', true) && name === viewerUserName
+  const isMyCircle = isPathStartWith('/~', true) && name === viewerCircle?.name
   const isInMe =
-    (!isInNotification && isPathStartWith('/me')) || userName === viewerUserName
+    (!isInNotification && isPathStartWith('/me')) || isMyProfile || isMyCircle
 
   return (
-    <section className="side-nav">
-      <section className="logo">
-        <Link href={PATHS.HOME} legacyBehavior>
-          <a aria-label={translate({ id: 'discover', lang })}>
-            <Media at="md">
-              <IconLogoGraph />
-            </Media>
-            <Media greaterThan="md">
-              <IconLogo />
-            </Media>
-          </a>
-        </Link>
-      </section>
+    <ul role="menu" className={styles.list}>
+      <NavListItemHome />
 
-      <ul role="menu">
-        <NavListItem
-          name={<Translate id="discover" />}
-          icon={<IconNavHome24 size="md" />}
-          activeIcon={<IconNavHomeActive24 size="md" />}
-          active={isInHome}
-          href={PATHS.HOME}
-        />
+      <NavListItem
+        name={
+          <FormattedMessage
+            defaultMessage="Following"
+            id="32bml8"
+            description="src/components/Layout/SideNav/index.tsx"
+          />
+        }
+        icon={<UnreadIcon.Follow />}
+        activeIcon={<UnreadIcon.Follow active />}
+        active={isInFollow}
+        href={PATHS.FOLLOW}
+      />
 
-        <NavListItem
-          name={<Translate zh_hant="追蹤" zh_hans="追踪" en="Following" />}
-          icon={<UnreadIcon.Follow />}
-          activeIcon={<UnreadIcon.Follow active />}
-          active={isInFollow}
-          href={PATHS.FOLLOW}
-        />
+      <NavListItem
+        name={<FormattedMessage defaultMessage="Notifications" id="NAidKb" />}
+        icon={<UnreadIcon.Notification />}
+        activeIcon={<UnreadIcon.Notification active />}
+        active={isInNotification}
+        href={PATHS.ME_NOTIFICATIONS}
+        testId={TEST_ID.SIDE_NAV_NOTIFICATIONS}
+      />
 
-        {viewer.isAuthed && (
+      <Media lessThan="lg">
+        <NavListItemSearch />
+      </Media>
+
+      <Dropdown
+        content={
+          <section>
+            <VisuallyHidden>
+              <button type="button">
+                <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+              </button>
+            </VisuallyHidden>
+            <MeMenu />
+          </section>
+        }
+        placement="right-start"
+        offset={[-16, 16]}
+        zIndex={Z_INDEX.OVER_BOTTOM_BAR}
+        onShown={hidePopperOnClick}
+      >
+        {({ openDropdown, ref }) => (
           <NavListItem
-            name={<Translate id="notifications" />}
-            icon={<UnreadIcon.Notification />}
-            activeIcon={<UnreadIcon.Notification active />}
-            active={isInNotification}
-            href={PATHS.ME_NOTIFICATIONS}
+            onClick={openDropdown}
+            name={<FormattedMessage defaultMessage="My Page" id="enMIYK" />}
+            icon={<IconNavMe32 size="lg" />}
+            activeIcon={<IconNavMeActive32 size="lg" />}
+            active={isInMe}
+            canScrollTop={false}
+            aira-haspopup="menu"
+            ref={ref}
+            testId={TEST_ID.SIDE_NAV_MY_PAGE}
           />
         )}
+      </Dropdown>
 
-        <Media lessThan="xl">
-          <NavListItem
-            name={<Translate id="search" />}
-            icon={<IconNavSearch24 size="md" />}
-            activeIcon={<IconNavSearch24 size="md" color="green" />}
-            active={isInSearch}
-            onClick={() => {
-              const path = toPath({
-                page: 'search',
-              })
+      <li
+        role="menuitem"
+        className={styles.listItem}
+        data-test-id={TEST_ID.SIDE_NAY_WRITE_BUTTON}
+      >
+        <WriteButton authed={viewer.isAuthed} forbidden={viewer.isInactive} />
+      </li>
+    </ul>
+  )
+}
 
-              if (isInSearch) {
-                router.replace(path.href)
-              } else {
-                router.push(path.href)
-              }
-            }}
-          />
-        </Media>
+const VisitorSideNavMenu = () => {
+  return (
+    <ul role="menu" className={styles.list}>
+      <Media lessThan="lg">
+        <NavListItemHome />
 
-        {!viewer.isAuthed && (
-          <NavListItem
-            name={<Translate id="settings" />}
-            icon={<IconNavSettings24 size="md" />}
-            activeIcon={<IconNavSettings24 size="md" color="green" />}
-            active={isInSettings}
-            href={PATHS.ME_SETTINGS}
-          />
-        )}
+        <NavListItemSearch />
+      </Media>
 
-        {viewer.isAuthed && (
-          <Dropdown
-            content={
-              <FocusLock>
-                <section className="dropdown-menu">
-                  <VisuallyHidden>
-                    <button type="button">
-                      <Translate id="close" />
-                    </button>
-                  </VisuallyHidden>
-                  <NavMenu.Top />
-                  <Menu.Divider />
-                  <NavMenu.Bottom />
-                </section>
-              </FocusLock>
-            }
-            placement="right-start"
-            appendTo={typeof window !== 'undefined' ? document.body : undefined}
-            offset={[-24, 24]}
-            zIndex={Z_INDEX.OVER_BOTTOM_BAR}
-            onShown={hidePopperOnClick}
-          >
-            <NavListItem
-              name={<Translate id="myPage" />}
-              icon={<MeAvatar user={viewer} />}
-              activeIcon={<MeAvatar user={viewer} active />}
-              active={isInMe}
-              canScrollTop={false}
-              aira-haspopup="menu"
-            />
-          </Dropdown>
-        )}
+      <li role="menuitem" className={styles.listItem}>
+        <UniversalAuthButton resideIn="sideNav" />
+      </li>
+    </ul>
+  )
+}
 
-        {!isInDraftDetail && (
-          <li role="menuitem">
-            <WriteButton
-              allowed={!viewer.shouldSetupLikerID}
-              authed={viewer.isAuthed}
-              forbidden={viewer.isInactive}
-            />
-          </li>
-        )}
-      </ul>
+const SideNav = () => {
+  const viewer = useContext(ViewerContext)
 
-      <style jsx>{styles}</style>
+  return (
+    <section className={styles.sideNav}>
+      <Logo />
+
+      {viewer.isAuthed ? <SideNavMenu /> : <VisitorSideNavMenu />}
     </section>
   )
 }

@@ -122,6 +122,7 @@ tsconfig.tsbuildinfo
 
 # playwright test result
 /test-results/
+/test-storage-state/
 /playwright-report/
 /playwright/.cache/
 
@@ -130,3 +131,8 @@ tsconfig.tsbuildinfo
 
 # i18n
 compiled-lang
+
+# Relay build output
+
+*__generated__*
+*.diff

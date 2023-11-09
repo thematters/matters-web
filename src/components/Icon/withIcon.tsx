@@ -1,27 +1,32 @@
 import classNames from 'classnames'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type IconSize =
   | 'xxs'
   | 'xs'
-  | 'sm-s'
+  | 'smS'
   | 'sm'
-  | 'md-s'
+  | 'mdXS'
+  | 'mdS'
+  | 'mdM'
   | 'md'
   | 'lg'
-  | 'xl-m'
+  | 'xlM'
   | 'xl'
   | 'xxl'
+  | 'xxxl'
+  | 'xxxlM'
 
 export type IconColor =
   | 'white'
+  | 'whiteLight'
   | 'black'
-  | 'grey-dark'
-  | 'grey-darker'
+  | 'greyDark'
+  | 'greyDarker'
   | 'grey'
-  | 'grey-light'
-  | 'grey-lighter'
+  | 'greyLight'
+  | 'greyLighter'
   | 'green'
   | 'gold'
   | 'red'
@@ -40,9 +45,10 @@ export const withIcon = (
   const InnerIcon = (props: IconProps) => {
     const { size = '', color = '', className, ...restProps } = props
     const iconClasses = classNames({
-      icon: true,
-      [size]: !!size,
-      [color]: !!color,
+      [styles.icon]: true,
+      icon: true, // global selector
+      [styles[size]]: !!size,
+      [styles[color]]: !!color,
       [className]: !!className,
     })
 
@@ -53,10 +59,6 @@ export const withIcon = (
           aria-hidden="true"
           {...restProps}
         />
-
-        <style jsx global>
-          {styles}
-        </style>
       </>
     )
   }

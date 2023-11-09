@@ -4,7 +4,7 @@ import { PublishStateDraftFragment } from '~/gql/graphql'
 import ErrorState from './ErrorState'
 import PendingState from './PendingState'
 import PublishedState from './PublishedState'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const PublishState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   const isPending = draft.publishState === 'pending'
@@ -16,12 +16,10 @@ const PublishState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   }
 
   return (
-    <section className="container">
+    <section className={styles.container}>
       {isPending && <PendingState draft={draft} />}
       {isError && <ErrorState draft={draft} />}
       {isPublished && <PublishedState draft={draft} />}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

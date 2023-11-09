@@ -1,11 +1,11 @@
-import VisuallyHidden from '@reach/visually-hidden'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { Translate } from '~/components'
 
 import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 /**
  *
@@ -56,9 +56,9 @@ const CurrencyOption: React.FC<CurrencyOptionProps> = ({
 }) => {
   const fieldId = `field-${name}-${currency}`
   const classes = classNames({
-    currency: true,
-    [isLike ? 'like' : 'hkd']: true,
-    inactive,
+    [styles.currency]: true,
+    [styles[isLike ? 'like' : 'hkd']]: true,
+    [styles.inactive]: inactive,
     'u-area-disable': disabled,
   })
 
@@ -78,7 +78,6 @@ const CurrencyOption: React.FC<CurrencyOptionProps> = ({
           />
         </VisuallyHidden>
       </label>
-      <style jsx>{styles}</style>
     </li>
   )
 }
@@ -88,6 +87,10 @@ const CurrencyRadioInput: React.FC<CurrencyRadioInputProps> = ({
 
   hint,
   error,
+  hintAlign,
+
+  spacingTop,
+  spacingBottom,
 
   ...inputProps
 }) => {
@@ -99,7 +102,7 @@ const CurrencyRadioInput: React.FC<CurrencyRadioInputProps> = ({
   }
 
   return (
-    <Field>
+    <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
       <ul>
         <CurrencyOption
           {...baseInputProps}
@@ -115,9 +118,12 @@ const CurrencyRadioInput: React.FC<CurrencyRadioInputProps> = ({
         />
       </ul>
 
-      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
-
-      <style jsx>{styles}</style>
+      <Field.Footer
+        fieldMsgId={fieldMsgId}
+        hint={hint}
+        error={error}
+        hintAlign={hintAlign}
+      />
     </Field>
   )
 }

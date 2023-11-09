@@ -6,11 +6,9 @@ import { CircleNewUserNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
+import NoticeDigest from '../NoticeDigest'
 import NoticeHeadActors from '../NoticeHeadActors'
-import NoticeTypeIcon from '../NoticeTypeIcon'
 import NoticeUserCard from '../NoticeUserCard'
-import styles from '../styles.css'
 
 type CircleNewUserNotice = {
   notice: CircleNewUserNoticeFragment
@@ -24,64 +22,51 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
 
   const isNewFollower = userType === 'follower'
   const isNewSubscriber = userType === 'subscriber'
-  const isNewUnsubscriber = userType === 'unsubscriber'
-  const actorsCount = notice.actors.length
-  const isMultiActors = actorsCount > 1
+
+  if (isNewFollower) {
+    return (
+      <NoticeDigest
+        notice={notice}
+        action={
+          <FormattedMessage
+            defaultMessage="followed your circle"
+            id="hk2aiz"
+            description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+          />
+        }
+        testId={TEST_ID.NOTICE_CIRCLE_NEW_FOLLOWER}
+      />
+    )
+  }
+
+  if (isNewSubscriber) {
+    return (
+      <NoticeDigest
+        notice={notice}
+        action={
+          <FormattedMessage
+            defaultMessage="subscribed your circle"
+            id="mPe6DK"
+            description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+          />
+        }
+        testId={TEST_ID.NOTICE_CIRCLE_NEW_SUBSCRIBER}
+      />
+    )
+  }
 
   return (
-    <section
-      className="container"
-      data-test-id={
-        isNewFollower
-          ? TEST_ID.CIRCLE_NEW_FOLLOWER
-          : isNewSubscriber
-          ? TEST_ID.CIRCLE_NEW_SUBSCRIBER
-          : TEST_ID.CIRCLE_NEW_UNSUBSCRIBER
+    <NoticeDigest
+      notice={notice}
+      action={
+        <FormattedMessage
+          defaultMessage="unsubscribed your circle"
+          id="qYzBk8"
+          description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+        />
       }
-    >
-      <section className="avatar-wrap">
-        <NoticeTypeIcon type="circle" />
-      </section>
-
-      <section className="content-wrap">
-        <NoticeHead>
-          <NoticeHeadActors actors={notice.actors} />
-
-          {isNewFollower && (
-            <FormattedMessage
-              defaultMessage="followed your circle"
-              description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
-            />
-          )}
-          {isNewSubscriber && (
-            <FormattedMessage
-              defaultMessage="subscribed your circle"
-              description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
-            />
-          )}
-          {isNewUnsubscriber && (
-            <FormattedMessage
-              defaultMessage="unsubscribed your circle"
-              description="src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
-            />
-          )}
-        </NoticeHead>
-
-        {isMultiActors ? (
-          <section className="multi-actor-avatars">
-            {notice.actors.map((actor, index) => (
-              <NoticeActorAvatar key={index} user={actor} size="md" />
-            ))}
-          </section>
-        ) : (
-          <NoticeUserCard user={notice.actors[0]} />
-        )}
-
-        <NoticeDate notice={notice} />
-      </section>
-
-      <style jsx>{styles}</style>
-    </section>
+      testId={TEST_ID.NOTICE_CIRCLE_NEW_UNSUBSCRIBER}
+    />
   )
 }
 

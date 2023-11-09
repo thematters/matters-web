@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { toPath } from '~/common/utils'
-import { Tabs, Translate, useRoute } from '~/components'
+import { SegmentedTabs, useRoute } from '~/components'
 
 const CircleDetailTabs = () => {
   const { isInPath, getQuery } = useRoute()
@@ -19,25 +21,28 @@ const CircleDetailTabs = () => {
   })
 
   return (
-    <Tabs sticky>
-      <Tabs.Tab {...circleDetailPath} selected={isInPath('CIRCLE_DETAIL')}>
-        <Translate id="article" />
-      </Tabs.Tab>
+    <SegmentedTabs sticky>
+      <SegmentedTabs.Tab
+        {...circleDetailPath}
+        selected={isInPath('CIRCLE_DETAIL')}
+      >
+        <FormattedMessage defaultMessage="Articles" id="3KNMbJ" />
+      </SegmentedTabs.Tab>
 
-      <Tabs.Tab
+      <SegmentedTabs.Tab
         {...circleDiscussionPath}
         selected={isInPath('CIRCLE_DISCUSSION')}
       >
-        <Translate id="circleDiscussion" />
-      </Tabs.Tab>
+        <FormattedMessage defaultMessage="Discussion" id="20bImY" />
+      </SegmentedTabs.Tab>
 
-      <Tabs.Tab
+      <SegmentedTabs.Tab
         {...circleBroadcastPath}
         selected={isInPath('CIRCLE_BROADCAST')}
       >
-        <Translate id="circleBroadcast" />
-      </Tabs.Tab>
-    </Tabs>
+        <FormattedMessage defaultMessage="Broadcast" id="beLe/F" />
+      </SegmentedTabs.Tab>
+    </SegmentedTabs>
   )
 }
 

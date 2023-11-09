@@ -1,9 +1,0 @@
-section {
-  & :global(svg) {
-    opacity: 0.5;
-  }
-}
-
-.name {
-  @mixin line-clamp;
-}

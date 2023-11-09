@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { toPath } from '~/common/utils'
 import { Avatar, ViewerContext } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const MeDigest = () => {
   const viewer = useContext(ViewerContext)
@@ -15,19 +15,17 @@ const MeDigest = () => {
   })
 
   return (
-    <section className="me-digest">
+    <section className={styles.meDigest}>
       <Link {...viewerPath} legacyBehavior>
-        <a className="header">
+        <a className={styles.header}>
           <Avatar user={viewer} size="xl" />
 
-          <section className="names">
-            <h1 className="display-name">{viewer.displayName}</h1>
-            <p className="username">@{viewer.userName}</p>
+          <section className={styles.names}>
+            <h1 className={styles.displayName}>{viewer.displayName}</h1>
+            <p className={styles.username}>@{viewer.userName}</p>
           </section>
         </a>
       </Link>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

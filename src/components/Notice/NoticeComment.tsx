@@ -1,12 +1,11 @@
 import gql from 'graphql-tag'
 
-import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Card, useHover } from '~/components'
+import { LinkWrapper } from '~/components'
 import CommentContent from '~/components/Comment/Content'
 import { NoticeCommentFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import NoticeContentDigest from './NoticeContentDigest'
 
 const fragments = {
   comment: gql`
@@ -51,8 +50,6 @@ const NoticeComment = ({
   const circle =
     comment?.node.__typename === 'Circle' ? comment.node : undefined
 
-  const [hoverRef, isHovered] = useHover<HTMLDivElement>()
-
   if (!comment) {
     return null
   }
@@ -65,28 +62,14 @@ const NoticeComment = ({
           article,
           circle,
         })
-      : {}
+      : { href: '' }
 
   return (
-    <section className="sub-content" ref={hoverRef}>
-      <Card
-        {...path}
-        bgColor="grey-lighter"
-        spacing={['xtight', 'base']}
-        borderRadius="xtight"
-        testId={TEST_ID.DIGEST_COMMENT_NOTICE}
-      >
-        <CommentContent
-          comment={comment}
-          type="article"
-          size="sm"
-          bgColor="grey-lighter"
-          bgActiveColor={isHovered ? 'grey-lighter' : undefined}
-        />
-      </Card>
-
-      <style jsx>{styles}</style>
-    </section>
+    <LinkWrapper {...path}>
+      <section>
+        <NoticeContentDigest content={comment.content || ''} />
+      </section>
+    </LinkWrapper>
   )
 }
 

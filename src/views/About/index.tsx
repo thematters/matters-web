@@ -5,8 +5,7 @@ import Hero from './Hero'
 import Intro from './Intro'
 import JoinUs from './JoinUs'
 import Stats from './Stats'
-import styles from './styles.css'
-import Team from './Team'
+// import Team from './Team'
 import Timeline from './Timeline'
 
 const About = () => {
@@ -18,11 +17,9 @@ const About = () => {
       <Intro />
       <Stats />
       <Timeline />
-      <Team />
+      {/* <Team /> */}
       <JoinUs />
       <Footer />
-
-      <style jsx>{styles}</style>
     </main>
   )
 }

@@ -4,6 +4,7 @@ import { analytics, mergeConnections, toPath } from '~/common/utils'
 import {
   EmptyTag,
   InfiniteScroll,
+  Layout,
   QueryError,
   Spinner,
   TagDigest,
@@ -12,7 +13,7 @@ import {
 import { AllTagsHottestQuery } from '~/gql/graphql'
 
 import { ALL_TAGS_HOTTEST } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type FeedType = 'recommended' | 'hottest'
 
@@ -63,34 +64,38 @@ const Feed = ({ type }: Props) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul>
-        {edges.map(({ node: tag }, i) => (
-          <li key={tag.id}>
-            <TagDigest.Feed
-              tag={tag}
-              spacing={['xtight', 'xtight']}
-              href={
-                toPath({
-                  page: 'tagDetail',
-                  tag, // : node,
-                }).href
-              }
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: trackingType,
-                  contentType: 'tag',
-                  location: i,
-                  id: tag.id,
-                })
-              }
-            />
-          </li>
-        ))}
-      </ul>
-
-      <style jsx>{styles}</style>
-    </InfiniteScroll>
+    <Layout.Main.Spacing hasVertical={false}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
+        <ul className={styles.list}>
+          {edges.map(({ node: tag }, i) => (
+            <li key={tag.id} className={styles.listItem}>
+              <TagDigest.Feed
+                tag={tag}
+                spacing={['xtight', 0]}
+                href={
+                  toPath({
+                    page: 'tagDetail',
+                    tag, // : node,
+                  }).href
+                }
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: trackingType,
+                    contentType: 'tag',
+                    location: i,
+                    id: tag.id,
+                  })
+                }
+              />
+            </li>
+          ))}
+        </ul>
+      </InfiniteScroll>
+    </Layout.Main.Spacing>
   )
 }
 

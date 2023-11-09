@@ -1,6 +1,6 @@
-Contact: mailto:security@matters.news
+Contact: mailto:security@matters.town
 Expires: 2023-11-08T16:00:00.000Z
 Acknowledgments: https://github.com/thematters/developer-resource#hall-of-fame=
 Preferred-Languages: en, zh
-Canonical: https://matters.news/.well-known/security.txt
+Canonical: https://matters.town/.well-known/security.txt
 Policy: https://github.com/thematters/developer-resource/blob/master/SECURITY.md

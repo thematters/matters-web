@@ -56,12 +56,12 @@ jobs:
       # === `develop` branch ===
       - name: Build (develop)
         if: github.base_ref == 'develop'
-        run: cp .env.dev .env && npm run build
+        run: cp .env.dev .env.local && npm run build
 
       # === `master` branch ===
       - name: Build (production)
         if: github.base_ref == 'master'
-        run: cp .env.prod .env && npm run build
+        run: cp .env.prod .env.local && npm run build
 
       - name: Setup AWS
         if: github.base_ref == 'develop' || github.base_ref == 'master'
@@ -80,7 +80,7 @@ jobs:
 
       - name: Upload Assets (develop - R2)
         if: github.base_ref == 'develop'
-        uses: wei/rclone@v1
+        uses: andreiio/rclone-action@v1
         env:
           RCLONE_CONFIG_R2_TYPE: s3
           RCLONE_CONFIG_R2_PROVIDER: Cloudflare
@@ -107,7 +107,7 @@ jobs:
 
       - name: Upload Assets (production - R2)
         if: github.base_ref == 'master'
-        uses: wei/rclone@v1
+        uses: andreiio/rclone-action@v1
         env:
           RCLONE_CONFIG_R2_TYPE: s3
           RCLONE_CONFIG_R2_PROVIDER: Cloudflare

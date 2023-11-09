@@ -1,0 +1,19 @@
+.spacingTopBase {
+  margin-top: var(--spacing-base);
+}
+
+.spacingTopLoose {
+  margin-top: var(--spacing-loose);
+}
+
+.spacingBottomBase {
+  margin-bottom: var(--spacing-base);
+}
+
+.spacingBottomBaseLoose {
+  margin-bottom: var(--spacing-base-loose);
+}
+
+.spacingBottomLoose {
+  margin-bottom: var(--spacing-loose);
+}

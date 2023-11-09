@@ -1,12 +1,15 @@
-import { IconRemove24, Menu, TextIcon, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { IconRemove24, Menu } from '~/components'
 
 const DeleteCommentButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
-    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconRemove24 size="md" />} size="md" spacing="base">
-        <Translate id="delete" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
+      icon={<IconRemove24 size="mdS" />}
+      onClick={openDialog}
+      ariaHasPopup="dialog"
+    />
   )
 }
 

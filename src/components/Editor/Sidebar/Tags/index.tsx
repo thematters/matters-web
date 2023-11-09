@@ -1,7 +1,7 @@
 import { analytics } from '~/common/utils'
 import {
+  EditorSearchSelectDialog,
   IconHashTag24,
-  SearchSelectDialog,
   // SearchSelectNode,
   Tag,
 } from '~/components'
@@ -10,7 +10,7 @@ import { DigestTagFragment } from '~/gql/graphql'
 
 import TagCustomStagingArea from '../../TagCustomStagingArea'
 import Box from '../Box'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface SidebarTagsProps {
   tags: DigestTagFragment[]
@@ -26,8 +26,7 @@ const SidebarTags = ({
   disabled,
 }: SidebarTagsProps) => {
   return (
-    <SearchSelectDialog
-      size="sm"
+    <EditorSearchSelectDialog
       title="addTag"
       hint="hintAddTag"
       searchType="Tag"
@@ -48,15 +47,14 @@ const SidebarTags = ({
           disabled={disabled}
         >
           {tags.length > 0 && (
-            <ul>
+            <ul className={styles.list}>
               {tags.map((tag) => (
                 <li key={tag.id}>
                   <Tag
                     tag={tag}
                     type="inline"
-                    disabled
-                    hasClose
-                    removeTag={() => {
+                    is="span"
+                    onRemoveTag={() => {
                       editTags(tags.filter((t) => t.content !== tag.content))
                       analytics.trackEvent('click_button', {
                         type: 'remove_tag',
@@ -66,13 +64,11 @@ const SidebarTags = ({
                   />
                 </li>
               ))}
-
-              <style jsx>{styles}</style>
             </ul>
           )}
         </Box>
       )}
-    </SearchSelectDialog>
+    </EditorSearchSelectDialog>
   )
 }
 

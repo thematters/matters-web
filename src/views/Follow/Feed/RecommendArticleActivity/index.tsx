@@ -11,7 +11,7 @@ import {
 import FollowingRecommendArticle from '../FollowingRecommendArticle'
 import FollowingRecommendHead from '../FollowingRecommendHead'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   articles: RecommendArticleActivityFragment['recommendArticles'] | null
@@ -35,11 +35,8 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
       : 'ArticleRecommendationActivity'
 
   return (
-    <>
-      <Slides
-        bgColor="grey-lighter"
-        header={<FollowingRecommendHead type={type} />}
-      >
+    <section className={styles.container}>
+      <Slides header={<FollowingRecommendHead type={type} />}>
         {articles.map((article, index) => (
           <Slides.Item
             size="md"
@@ -53,7 +50,7 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
               })
             }}
           >
-            <section className="item">
+            <section className={styles.item}>
               <FollowingRecommendArticle article={article} />
               {mountTracker && (
                 <CardExposureTracker
@@ -67,10 +64,9 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
             </section>
           </Slides.Item>
         ))}
-        <style jsx>{styles}</style>
       </Slides>
       <Waypoint onEnter={() => setMountTracker(true)} />
-    </>
+    </section>
   )
 }
 

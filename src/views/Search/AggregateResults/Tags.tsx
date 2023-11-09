@@ -1,4 +1,5 @@
 import { Fragment, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
@@ -17,16 +18,13 @@ import {
 } from '~/components'
 import { SearchAggregateTagsPublicQuery } from '~/gql/graphql'
 
-import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_TAGS_PUBLIC } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const AggregateTagResults = () => {
   const { getQuery } = useRoute()
   const q = getQuery('q')
-  // TODO: Just test for team, will be removed when release
   const version = getQuery('version')
-  const coefficients = getQuery('coefficients')
 
   /**
    * Data Fetching
@@ -35,13 +33,7 @@ const AggregateTagResults = () => {
   const { data, loading, fetchMore } =
     usePublicQuery<SearchAggregateTagsPublicQuery>(
       SEARCH_AGGREGATE_TAGS_PUBLIC,
-      {
-        variables: {
-          key: q,
-          version: version === '' ? undefined : version,
-          coefficients: coefficients === '' ? undefined : coefficients,
-        },
-      }
+      { variables: { key: q, version: version === '' ? undefined : version } }
     )
 
   useEffect(() => {
@@ -103,12 +95,15 @@ const AggregateTagResults = () => {
   }
 
   return (
-    <section className="aggregate-section">
+    <section className={styles.aggregateSection}>
       <InfiniteScroll
         hasNextPage={
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
+        eof={
+          <FormattedMessage defaultMessage="End of the results" id="ui1+QC" />
+        }
       >
         <Menu>
           {edges.map(
@@ -116,11 +111,12 @@ const AggregateTagResults = () => {
               node.__typename === 'Tag' && (
                 <Fragment key={cursor + node.id}>
                   <Menu.Item
-                    spacing={['base', 'base']}
+                    spacing={['base', 0]}
                     {...toPath({
                       page: 'tagDetail',
                       tag: node,
                     })}
+                    bgActiveColor="none"
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'search_tag',
@@ -138,10 +134,6 @@ const AggregateTagResults = () => {
           )}
         </Menu>
       </InfiniteScroll>
-      {(!pageInfo.hasNextPage || edges.length >= MAX_SEARCH_RESULTS_LENGTH) && (
-        <EndOfResults />
-      )}
-      <style jsx>{styles}</style>
     </section>
   )
 }

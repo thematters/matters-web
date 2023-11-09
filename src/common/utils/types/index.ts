@@ -23,22 +23,14 @@ export default gql`
   type ClientPreference {
     id: ID!
 
-    "Whether civic liker dialog is hidden"
-    readCivicLikerDialog: Boolean!
-
     "Login or sign up wall in article detail page"
     wall: Boolean!
 
     "Log route history for page back button"
     routeHistory: [String!]
 
-    onboardingTasks: OnboardingTasks!
-
     "Whether cicle banner is shown"
     circleBanner: Boolean!
-
-    "Whether announcement is shown"
-    announcement: Int
 
     "Local language setting"
     language: Language

@@ -1,13 +1,14 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Card, CardProps } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ArticleDigestDropdownProps = {
   article: ArticleDigestDropdownArticleFragment
@@ -15,6 +16,7 @@ export type ArticleDigestDropdownProps = {
   titleTextSize?: ArticleDigestTitleTextSize
   disabled?: boolean
   extraButton?: React.ReactNode
+  lineClamp?: boolean
 } & Pick<
   CardProps,
   'spacing' | 'bgColor' | 'bgActiveColor' | 'borderRadius' | 'onClick'
@@ -47,6 +49,7 @@ export const ArticleDigestDropdown = ({
   titleTextSize,
   disabled,
   extraButton,
+  lineClamp,
 
   // Card Props
   ...cardProps
@@ -54,8 +57,8 @@ export const ArticleDigestDropdown = ({
   const { articleState: state } = article
   const isBanned = state === 'banned'
   const containerClasses = classNames({
-    container: true,
-    'has-extra-button': !!extraButton,
+    [styles.container]: true,
+    [styles.hasExtraButton]: !!extraButton,
   })
   const path = toPath({
     page: 'articleDetail',
@@ -64,7 +67,12 @@ export const ArticleDigestDropdown = ({
   const cardDisabled = isBanned || disabled
 
   return (
-    <Card href={cardDisabled ? undefined : path.href} {...cardProps}>
+    <Card
+      {...cardProps}
+      href={cardDisabled ? undefined : path.href}
+      onClick={cardDisabled ? undefined : cardProps.onClick}
+      testId={TEST_ID.DIGEST_ARTICLE_DROPDOWN}
+    >
       <section className={containerClasses}>
         <header>
           <ArticleDigestTitle
@@ -72,24 +80,25 @@ export const ArticleDigestDropdown = ({
             textSize={titleTextSize}
             disabled={cardDisabled}
             is="h3"
+            lineClamp={lineClamp}
           />
 
-          <section className="extra-button">{!isBanned && extraButton}</section>
+          <section className={styles.extraButton}>
+            {!isBanned && extraButton}
+          </section>
         </header>
 
-        <footer>
+        <footer className={styles.footer}>
           <UserDigest.Mini
             user={article.author}
             avatarSize="xs"
-            textSize="sm-s"
+            textSize="smS"
             hasAvatar
             hasUserName
             hasDisplayName
             disabled={cardDisabled}
           />
         </footer>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

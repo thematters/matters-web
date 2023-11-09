@@ -1,0 +1,23 @@
+.book {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 7.5rem;
+  height: 10rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  & .cover {
+    position: relative;
+    z-index: -1;
+    flex-grow: 1;
+
+    & img {
+      @mixin object-fit-cover;
+
+      background-color: var(--color-grey-lighter);
+    }
+  }
+}

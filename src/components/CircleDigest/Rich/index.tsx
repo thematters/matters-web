@@ -1,7 +1,8 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import { toPath } from '~/common/utils'
+import { TEST_ID } from '~/common/enums'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
@@ -17,7 +18,7 @@ import {
 
 import Footer, { FooterControls } from './Footer'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CircleDigestRichControls = {
   hasOwner?: boolean
@@ -31,7 +32,7 @@ export type CircleDigestRichProps = {
   circle: DigestRichCirclePublicFragment &
     Partial<DigestRichCirclePrivateFragment>
   avatarSize?: CircleAvatarSize
-  textSize?: 'md-s' | 'xm'
+  textSize?: 'mdS' | 'xm'
 } & CircleDigestRichControls &
   CardProps
 
@@ -58,11 +59,11 @@ const Rich = ({
   })
 
   const containerClasses = classNames({
-    container: true,
+    [styles.styles]: true,
   })
   const titleClasses = classNames({
-    title: true,
-    [`text-size-${textSize}`]: !!textSize,
+    [styles.title]: true,
+    [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
   })
 
   return (
@@ -70,17 +71,20 @@ const Rich = ({
       href={disabled ? undefined : path.href}
       spacing={['base', 'base']}
       {...cardProps}
+      onClick={disabled ? undefined : cardProps.onClick}
+      testId={TEST_ID.DIGEST_CIRCLE_RICH}
     >
       <section className={containerClasses}>
-        <section className="content">
+        <section className={styles.content}>
           <CircleAvatar circle={circle} size={avatarSize} />
 
-          <header>
+          <header className={styles.header}>
             <h3 className={titleClasses}>
               <LinkWrapper
                 {...path}
                 textActiveColor="green"
                 disabled={disabled}
+                testId={TEST_ID.DIGEST_CIRCLE_DISPLAY_NAME}
               >
                 {displayName}
               </LinkWrapper>
@@ -91,7 +95,7 @@ const Rich = ({
                 user={owner}
                 avatarSize="sm"
                 textSize="sm"
-                nameColor="grey-darker"
+                nameColor="greyDarker"
                 hasAvatar
                 hasDisplayName
                 disabled={disabled}
@@ -101,7 +105,7 @@ const Rich = ({
         </section>
 
         {hasDescription && description && (
-          <p className="description">{description}</p>
+          <p className={styles.description}>{description}</p>
         )}
 
         {hasFooter && (
@@ -111,8 +115,6 @@ const Rich = ({
             onClickPrice={onClickPrice}
           />
         )}
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

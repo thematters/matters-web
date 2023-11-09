@@ -1,10 +1,9 @@
 import { DataProxy } from 'apollo-cache'
 
-import { ERROR_CODES } from '~/common/enums'
 import CIRCLE_FOLLOWER_COUNT from '~/components/GQL/queries/circleFollowerCount'
 import { CircleFollowerCountQuery } from '~/gql/graphql'
 
-const update = ({
+export const updateCircleFollowerCount = ({
   cache,
   type,
   name,
@@ -40,12 +39,6 @@ const update = ({
       data: cacheData,
     })
   } catch (e) {
-    if ((e as any).message.startsWith("Can't find field")) {
-      console.warn(ERROR_CODES.QUERY_FIELD_NOT_FOUND)
-    } else {
-      console.error(e)
-    }
+    console.error(e)
   }
 }
-
-export default update

@@ -2,16 +2,22 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { forwardRef, RefObject, useRef } from 'react'
 
-import styles from './styles.css'
+import { capitalizeFirstLetter } from '~/common/utils'
+
+import styles from './styles.module.css'
 
 export type ButtonWidth =
   | '2rem'
+  | '2.5rem'
   | '3rem'
   | '3.25rem'
   | '4rem'
   | '5rem'
+  | '5.3125rem'
+  | '5.5rem'
   | '6rem'
   | '7rem'
+  | '7.5rem'
   | '8rem'
   | '10.5rem'
   | '19.5rem'
@@ -43,63 +49,83 @@ export type ButtonSpacingX =
 
 type ButtonColor =
   | 'white'
+  | 'whiteLight'
   | 'black'
-  | 'half-black'
-  | 'grey-darkest'
+  | 'halfBlack'
+  | 'greyDark'
+  | 'greyDarker'
+  | 'greyDarkest'
   | 'grey'
-  | 'grey-light'
-  | 'grey-lighter'
-  | 'grey-lighter-active'
-  | 'green-lighter'
+  | 'greyLight'
+  | 'greyLighter'
+  | 'greyLighterActive'
+  | 'greenLighter'
+  | 'greenDark'
   | 'green'
   | 'gold'
   | 'red'
-  | 'likecoin-green'
-  | 'yellow-lighter'
-  | 'gold-linear-gradient'
+  | 'redDark'
+  | 'likecoinGreen'
+  | 'yellowLighter'
+  | 'goldLinearGradient'
 
 type ButtonTextColor = Extract<
   ButtonColor,
-  'white' | 'black' | 'green' | 'gold' | 'red' | 'grey'
+  | 'white'
+  | 'whiteLight'
+  | 'black'
+  | 'green'
+  | 'gold'
+  | 'red'
+  | 'grey'
+  | 'greyDarker'
+>
+
+type ButtonTextActiveColor = Extract<
+  ButtonColor,
+  'white' | 'black' | 'green' | 'greenDark' | 'redDark'
 >
 
 export type ButtonBgColor = Extract<
   ButtonColor,
-  | 'grey-darkest'
+  | 'greyDarkest'
   | 'grey'
-  | 'grey-lighter'
-  | 'green-lighter'
+  | 'greyLighter'
+  | 'greenLighter'
   | 'green'
   | 'gold'
   | 'red'
   | 'white'
-  | 'half-black'
+  | 'halfBlack'
   | 'black'
-  | 'yellow-lighter'
-  | 'gold-linear-gradient'
+  | 'yellowLighter'
+  | 'goldLinearGradient'
 >
 
 type ButtonBgActiveColor = Extract<
   ButtonColor,
-  | 'grey-lighter'
-  | 'green-lighter'
-  | 'grey-lighter-active'
+  | 'greyLighter'
+  | 'greenLighter'
+  | 'greyLighterActive'
   | 'green'
   | 'gold'
   | 'red'
 >
+
+type ButtonBorderActiveColor = Extract<ButtonColor, 'greenDark' | 'black'>
 
 export type ButtonProps = {
   size?: [ButtonWidth, ButtonHeight]
   spacing?: [ButtonSpacingY, ButtonSpacingX]
 
   textColor?: ButtonTextColor
-  textActiveColor?: ButtonTextColor
+  textActiveColor?: ButtonTextActiveColor
 
   bgColor?: ButtonBgColor
   bgActiveColor?: ButtonBgActiveColor
 
   borderColor?: ButtonColor
+  borderActiveColor?: ButtonBorderActiveColor
   borderWidth?: 'sm' | 'md'
   borderRadius?: 0 | '5rem'
 
@@ -107,7 +133,7 @@ export type ButtonProps = {
   replace?: boolean
 
   is?: 'span'
-
+  className?: string
   ref?: RefObject<any> | ((instance: any) => void) | null | undefined
 
   // navtive props
@@ -117,6 +143,7 @@ export type ButtonProps = {
   disabled?: boolean
   form?: string
   rel?: string
+  testId?: string
   tabIndex?: number
   onClick?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
   onMouseEnter?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
@@ -166,6 +193,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         bgActiveColor,
 
         borderColor,
+        borderActiveColor,
         borderWidth = 'md',
         borderRadius = '5rem',
 
@@ -173,12 +201,13 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         replace,
 
         is,
-
+        className,
         htmlHref,
         htmlTarget,
         type = 'button',
 
         children,
+        testId,
         ...restProps
       },
       ref
@@ -193,18 +222,31 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
 
       // container
       const containerClasses = classNames({
-        container: true,
-        isTransparent,
-        'centering-x': width && isTransparent,
-        'centering-y': height && isTransparent,
-        [`spacing-y-${spacingY}`]: !!spacingY,
-        [`spacing-x-${spacingX}`]: !!spacingX,
-        [`bg-${bgColor}`]: !!bgColor,
-        [`bg-active-${bgActiveColor}`]: !!bgActiveColor && isClickable,
-        [`border-${borderColor}`]: !!borderColor,
-        [`border-${borderWidth}`]: borderWidth && borderColor,
-        [`text-${textColor}`]: !!textColor,
-        [`text-active-${textActiveColor}`]: !!textActiveColor && isClickable,
+        [styles.container]: true,
+        [styles.isTransparent]: isTransparent,
+        [styles.centeringX]: width && isTransparent,
+        [styles.centeringY]: height && isTransparent,
+        [styles[`spacingY${capitalizeFirstLetter(spacingY + '')}`]]: !!spacingY,
+        [styles[`spacingX${capitalizeFirstLetter(spacingX + '')}`]]: !!spacingX,
+        [bgColor ? styles[`bg${capitalizeFirstLetter(bgColor)}`] : '']:
+          !!bgColor,
+        [bgActiveColor
+          ? styles[`bgActive${capitalizeFirstLetter(bgActiveColor)}`]
+          : '']: !!bgActiveColor && isClickable,
+        [borderColor
+          ? styles[`border${capitalizeFirstLetter(borderColor)}`]
+          : '']: !!borderColor,
+        [borderActiveColor
+          ? styles[`borderActive${capitalizeFirstLetter(borderActiveColor)}`]
+          : '']: !!borderActiveColor && isClickable,
+        [styles[`border${capitalizeFirstLetter(borderWidth)}`]]:
+          borderWidth && borderColor,
+        [textColor ? styles[`text${capitalizeFirstLetter(textColor)}`] : '']:
+          !!textColor,
+        [textActiveColor
+          ? styles[`textActive${capitalizeFirstLetter(textActiveColor)}`]
+          : '']: !!textActiveColor && isClickable,
+        [`${className}`]: !!className,
       })
 
       // handle click
@@ -224,6 +266,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         onClick,
         ref: buttonRef as React.RefObject<any>,
         className: containerClasses,
+        ...(testId ? { ['data-test-id']: testId } : {}),
       }
 
       // content
@@ -243,11 +286,10 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       if (is === 'span') {
         return (
           <span {...containerProps}>
-            <div className="content" style={contentStyle}>
-              <div className="hotarea" style={hotAreaStyle} />
+            <div className={styles.content} style={contentStyle}>
+              <div className={styles.hotarea} style={hotAreaStyle} />
               {children}
             </div>
-            <style jsx>{styles}</style>
           </span>
         )
       }
@@ -256,11 +298,10 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       if (htmlHref) {
         return (
           <a href={htmlHref} target={htmlTarget} {...containerProps}>
-            <div className="content" style={contentStyle}>
-              <div className="hotarea" style={hotAreaStyle} />
+            <div className={styles.content} style={contentStyle}>
+              <div className={styles.hotarea} style={hotAreaStyle} />
               {children}
             </div>
-            <style jsx>{styles}</style>
           </a>
         )
       }
@@ -270,11 +311,10 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         return (
           <Link href={href} replace={replace} legacyBehavior>
             <a {...containerProps}>
-              <div className="content" style={contentStyle}>
-                <div className="hotarea" style={hotAreaStyle} />
+              <div className={styles.content} style={contentStyle}>
+                <div className={styles.hotarea} style={hotAreaStyle} />
                 {children}
               </div>
-              <style jsx>{styles}</style>
             </a>
           </Link>
         )
@@ -283,11 +323,10 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       // button
       return (
         <button {...containerProps} type={type}>
-          <div className="content" style={contentStyle}>
-            <div className="hotarea" style={hotAreaStyle} />
+          <div className={styles.content} style={contentStyle}>
+            <div className={styles.hotarea} style={hotAreaStyle} />
             {children}
           </div>
-          <style jsx>{styles}</style>
         </button>
       )
     }

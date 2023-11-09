@@ -33,4 +33,4 @@ jobs:
           && npm run format:check
 
       - name: Build
-        run: cp .env.dev .env && npm run build
+        run: cp .env.dev .env.local && npm run build

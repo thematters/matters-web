@@ -9,13 +9,15 @@ import {
 
 import {
   useEditDraftAccess,
+  useEditDraftCanComment,
   useEditDraftCollection,
   useEditDraftCover,
   useEditDraftPublishISCN,
+  useEditDraftSensitiveByAuthor,
   useEditDraftTags,
   useEditSupportSetting,
 } from '../hooks'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface BaseSidebarProps {
   draft: EditMetaDraftFragment
@@ -80,6 +82,10 @@ const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
 
   const { edit: togglePublishISCN, saving: iscnPublishSaving } =
     useEditDraftPublishISCN(draft)
+
+  const { edit: toggleContentSensitive, saving: contentSensitiveSaving } =
+    useEditDraftSensitiveByAuthor(draft)
+
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
 
   return (
@@ -96,6 +102,9 @@ const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
           editAccess={edit}
           accessSaving={saving}
           canToggleCircle={!!hasOwnCircle}
+          contentSensitive={draft?.sensitiveByAuthor}
+          toggleContentSensitive={toggleContentSensitive}
+          contentSensitiveSaving={contentSensitiveSaving}
           iscnPublish={draft?.iscnPublish}
           togglePublishISCN={togglePublishISCN}
           iscnPublishSaving={iscnPublishSaving}
@@ -109,19 +118,27 @@ const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
   )
 }
 
+const EditDraftResponse = ({ draft }: SidebarProps) => {
+  const { edit: toggleComment } = useEditDraftCanComment(draft)
+  const canComment = draft.canComment
+
+  return (
+    <Sidebar.Response canComment={canComment} toggleComment={toggleComment} />
+  )
+}
+
 const EditDraftSidebar = (props: BaseSidebarProps) => {
   const isPending = props.draft.publishState === 'pending'
   const isPublished = props.draft.publishState === 'published'
   const disabled = isPending || isPublished
 
   return (
-    <section className="sidebar">
+    <section className={styles.sidebar}>
       <EditDraftTags {...props} disabled={disabled} />
       <EditDraftCover {...props} disabled={disabled} />
       <EditDraftCollection {...props} disabled={disabled} />
+      <EditDraftResponse {...props} disabled={disabled} />
       <EditDraftCircle {...props} disabled={disabled} />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

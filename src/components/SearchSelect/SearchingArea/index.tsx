@@ -7,7 +7,7 @@ import {
   analytics,
   isValidEmail,
   mergeConnections,
-  normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
+  normalizeTag, // stripTagAllPunct, // stripPunctPrefixSuffix,
 } from '~/common/utils'
 import {
   EmptySearch,
@@ -26,11 +26,14 @@ import {
 } from '~/gql/graphql'
 
 import SearchSelectNode from '../SearchSelectNode'
-import styles from '../styles.css'
+import styles from '../styles.module.css'
 import CreateTag from './CreateTag'
 import { LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
 import InviteEmail from './InviteEmail'
-import SearchInput, { SearchType as SearchInputType } from './SearchInput'
+import SearchInput, {
+  SearchInputProps,
+  SearchType as SearchInputType,
+} from './SearchInput'
 
 /**
  * This is a sub-component of search-and-select, and it will show
@@ -52,7 +55,7 @@ export type SelectUser = NonNullable<
   SelectSearchQuery['search']['edges']
 >[0]['node'] & { __typename: 'User' }
 
-interface SearchingAreaProps {
+type SearchingAreaProps = {
   searchType: SearchType
   searchFilter?: SearchFilter
   searchExclude?: SearchExclude
@@ -64,7 +67,7 @@ interface SearchingAreaProps {
 
   createTag?: boolean
   inviteEmail?: boolean
-}
+} & Pick<SearchInputProps, 'autoFocus'>
 
 type Mode = 'search' | 'list'
 
@@ -80,6 +83,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
 
   createTag,
   inviteEmail,
+  autoFocus,
 }) => {
   const viewer = useContext(ViewerContext)
 
@@ -95,10 +99,10 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const [searchingNodes, setSearchingNodes] = useState<SelectNode[]>([])
 
   const [searchKey, setSearchKey] = useState('')
-  const [debouncedSearchKey, setdebouncedSearchKey] = useState('')
+  const [debouncedSearchKey, setDebouncedSearchKey] = useState('')
   const debouncedSetSearchKey = useDebouncedCallback((sk0) => {
-    const sk = isTag ? normalizeTagInput(sk0) : sk0
-    setdebouncedSearchKey(sk)
+    const sk = isTag ? normalizeTag(sk0) : sk0
+    setDebouncedSearchKey(sk)
     setSearchKey(sk)
   }, INPUT_DEBOUNCE)
 
@@ -172,18 +176,15 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const onSearchInputChange = (value: string) => {
     setSearchKey(value)
     debouncedSetSearchKey(value)
+    if (value === '') {
+      toStagingArea()
+    } else {
+      toSearchingArea()
+    }
 
     if (hasListMode) {
       setMode(value ? 'search' : 'list')
-      toSearchingArea()
       return
-    }
-
-    if (value) {
-      toSearchingArea()
-    } else {
-      toStagingArea()
-      setSearchingNodes([])
     }
   }
   const onSearchInputFocus = () => {
@@ -194,8 +195,6 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
     } else if (searchingNodes.length <= 0) {
       return
     }
-
-    toSearchingArea()
   }
   const onSearchInputBlur = () => {
     if (isSearchMode) {
@@ -259,7 +258,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
    * Render
    */
   return (
-    <>
+    <section className={styles.searchingArea}>
       <SearchInput
         type={searchType}
         value={searchKey}
@@ -267,14 +266,16 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
         onSubmit={search}
         onFocus={onSearchInputFocus}
         onBlur={onSearchInputBlur}
+        autoFocus
       />
 
       {inSearchingArea && (
-        <section className="area">
+        <section className={styles.area}>
           {searching && <Spinner />}
 
           {/* Search */}
-          {isSearchMode &&
+          {searchKey.length > 0 &&
+            isSearchMode &&
             !searching &&
             !hasNodes &&
             !canCreateTag &&
@@ -287,13 +288,11 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
                 hasNextPage={!!searchPageInfo?.hasNextPage}
                 loadMore={loadMore}
               >
-                <ul className="nodes">
+                <ul className={styles.nodes}>
                   {canCreateTag && (
                     <li>
                       <CreateTag
-                        tag={toDigestTagPlaceholder(
-                          normalizeTagInput(searchKey)
-                        )}
+                        tag={toDigestTagPlaceholder(normalizeTag(searchKey))}
                         onClick={addNodeToStaging}
                       />
                     </li>
@@ -327,7 +326,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
               hasNextPage={!!listPageInfo?.hasNextPage}
               loadMore={loadMoreList}
             >
-              <ul className="nodes">
+              <ul className={styles.nodes}>
                 {searchingNodes.map((node) => (
                   <li key={node.id}>
                     <SearchSelectNode node={node} onClick={addNodeToStaging} />
@@ -336,11 +335,9 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
               </ul>
             </InfiniteScroll>
           )}
-
-          <style jsx>{styles}</style>
         </section>
       )}
-    </>
+    </section>
   )
 }
 

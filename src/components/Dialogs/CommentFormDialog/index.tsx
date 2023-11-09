@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { Dialog, useDialogSwitch } from '~/components'
 
 import CommentForm, { CommentFormProps } from './CommentForm'
@@ -21,7 +22,7 @@ const BaseCommentFormDialog = ({
       return
     }
 
-    const $editor = ref.current?.querySelector('.ql-editor') as HTMLElement
+    const $editor = ref.current?.querySelector('.ProseMirror') as HTMLElement
     if ($editor) {
       $editor.focus()
     }
@@ -35,7 +36,7 @@ const BaseCommentFormDialog = ({
         isOpen={show}
         onDismiss={closeDialog}
         onRest={focusEditor}
-        fixedHeight
+        testId={TEST_ID.DIALOG_COMMENT_FORM}
       >
         <CommentForm {...props} closeDialog={closeDialog} />
       </Dialog>

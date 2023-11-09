@@ -1,0 +1,8 @@
+.menu {
+  padding: var(--spacing-base-xx-tight) 0;
+  text-align: left;
+}
+
+.widthMd {
+  width: var(--sizing-menu);
+}

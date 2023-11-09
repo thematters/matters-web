@@ -3,13 +3,14 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Card, CardProps, CircleAvatar } from '~/components'
 import { DigestMiniCircleFragment } from '~/gql/graphql'
 
 import Counts from '../Counts'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CircleDigestMiniProps = {
   circle: DigestMiniCircleFragment
@@ -23,14 +24,19 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
   })
 
   const containerClasses = classNames({
-    container: true,
+    [styles.container]: true,
   })
 
   return (
-    <Card {...path} spacing={[0, 0]} {...cardProps}>
+    <Card
+      {...path}
+      spacing={[0, 0]}
+      {...cardProps}
+      testId={TEST_ID.DIGEST_CIRCLE_MINI}
+    >
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
-          <a className="avatar">
+          <a className={styles.avatar}>
             <VisuallyHidden>
               <span>{circle.displayName}</span>
             </VisuallyHidden>
@@ -38,21 +44,24 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
           </a>
         </Link>
 
-        <section className="content">
-          <header>
+        <section className={styles.content}>
+          <header className={styles.header}>
             <Link {...path} legacyBehavior>
-              <a className="name">{displayName}</a>
+              <a
+                className={styles.name}
+                data-test-id={TEST_ID.DIGEST_CIRCLE_DISPLAY_NAME}
+              >
+                {displayName}
+              </a>
             </Link>
 
-            <section className="info">
+            <section className={styles.info}>
               <Counts circle={circle} />
             </section>
           </header>
 
-          {description && <p className="description">{description}</p>}
+          {description && <p className={styles.description}>{description}</p>}
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

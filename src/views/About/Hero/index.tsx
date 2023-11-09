@@ -3,7 +3,6 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
 import { useCallback, useContext, useEffect, useState } from 'react'
 
-import IMAGE_ARROW_DOWN from '@/public/static/images/about/arrow-down.svg'
 import { ReactComponent as IconButtonLeft } from '@/public/static/images/about/button-left.svg'
 import { ReactComponent as IconButtonRight } from '@/public/static/images/about/button-right.svg'
 import SLIDE_CURSOR from '@/public/static/images/about/cursor.svg'
@@ -23,7 +22,8 @@ import {
   withIcon,
 } from '~/components'
 
-import styles from './styles.css'
+import layoutStyles from '../layout.module.css'
+import styles from './styles.module.css'
 
 const Hero = () => {
   const { lang } = useContext(LanguageContext)
@@ -58,69 +58,72 @@ const Hero = () => {
     onSelect()
   }, [emblaApi, onSelect])
 
+  const style = {
+    '--about-hero-bg': `url(${IMAGE_ILLUSTRATION_1.src}), url(${IMAGE_WAVE_1}), url(${IMAGE_WAVE_2})`,
+    '--about-city-bg': `url(${IMAGE_ILLUSTRATION_2.src})`,
+  } as React.CSSProperties
+
   return (
-    <section className="hero">
-      <header className="logo">
-        <div className="l-container">
-          <div className="l-row">
-            <div className="l-col-full">
-              <Link href={PATHS.HOME} legacyBehavior>
-                <a>
-                  <VisuallyHidden>
-                    <span>{translate({ id: 'discover', lang })}</span>
-                  </VisuallyHidden>
-                  <IconLogo />
-                </a>
-              </Link>
-            </div>
+    <section className={styles.hero} style={style}>
+      <header className={styles.logo}>
+        <div className={layoutStyles.container}>
+          <div className={layoutStyles.content}>
+            <Link href={PATHS.HOME} legacyBehavior>
+              <a>
+                <VisuallyHidden>
+                  <span>{translate({ id: 'discover', lang })}</span>
+                </VisuallyHidden>
+                <IconLogo />
+              </a>
+            </Link>
           </div>
         </div>
       </header>
 
-      <div className="l-container">
-        <div className="l-row">
-          <div className="l-col-full">
-            <section className="slogan">
-              <section>
-                <h2>
-                  <Translate
-                    zh_hant="去中心化的"
-                    zh_hans="去中心化的"
-                    en="The Future of Web3 is&nbsp;"
-                  />
-                  <br />
-                  <Translate
-                    zh_hant="創作社群與內容生態"
-                    zh_hans="创作社群与内容生态"
-                    en="at Matters.News"
-                  />
-                </h2>
+      <div className={layoutStyles.container}>
+        <div className={layoutStyles.content}>
+          <section
+            className={[layoutStyles.columnFull, styles.slogan].join(' ')}
+          >
+            <section className={styles.text}>
+              <h2>
+                <Translate
+                  zh_hant="去中心化的"
+                  zh_hans="去中心化的"
+                  en="The Future of Web3 is&nbsp;"
+                />
+                <br />
+                <Translate
+                  zh_hant="創作社群與內容生態"
+                  zh_hans="创作社群与内容生态"
+                  en="at Matters"
+                />
+              </h2>
 
-                <Button
-                  size={[null, '2.25rem']}
-                  spacing={[0, 'base']}
-                  bgColor="green"
-                  href={PATHS.HOME}
-                >
-                  <TextIcon color="white" weight="md">
-                    <Translate
-                      zh_hant="開始創作"
-                      zh_hans="开始创作"
-                      en="Start Creating"
-                    />
-                  </TextIcon>
-                </Button>
-              </section>
-
-              <div className="ilusCity" />
+              <Button
+                size={[null, '2.25rem']}
+                spacing={[0, 'base']}
+                bgColor="green"
+                href={PATHS.HOME}
+              >
+                <TextIcon color="white" weight="md">
+                  <Translate
+                    zh_hant="開始創作"
+                    zh_hans="开始创作"
+                    en="Start Creating"
+                  />
+                </TextIcon>
+              </Button>
             </section>
-          </div>
+
+            <div className={styles.ilusCity} />
+          </section>
         </div>
       </div>
 
-      <section className="reports">
-        <section className="container">
-          <section className="scrollButton scrollLeft">
+      <section className={styles.reports}>
+        <section className={styles.container}>
+          <section className={`${styles.scrollButton} ${styles.scrollLeft}`}>
             <Button onClick={scrollPrev} disabled={!prevBtnEnabled}>
               <Media at="sm">{withIcon(IconButtonLeft)({ size: 'md' })}</Media>
               <Media greaterThan="sm">
@@ -128,8 +131,12 @@ const Hero = () => {
               </Media>
             </Button>
           </section>
-          <section className="emblaViewport" ref={emblaRef}>
-            <ul className="emblaContainer">
+          <section
+            className={styles.emblaViewport}
+            ref={emblaRef}
+            style={{ cursor: `url(${SLIDE_CURSOR}), auto` }}
+          >
+            <ul className={styles.emblaContainer}>
               <li>
                 <a
                   href="https://restofworld.org/2020/chinas-fugitive-writers-find-a-home-online/"
@@ -304,7 +311,7 @@ const Hero = () => {
               </li>
             </ul>
           </section>
-          <section className="scrollButton scrollRight">
+          <section className={`${styles.scrollButton} ${styles.scrollRight}`}>
             <Button onClick={scrollNext} disabled={!nextBtnEnabled}>
               <Media at="sm">{withIcon(IconButtonRight)({ size: 'md' })}</Media>
               <Media greaterThan="sm">
@@ -314,23 +321,6 @@ const Hero = () => {
           </section>
         </section>
       </section>
-
-      <style jsx>{styles}</style>
-      <style jsx>{`
-        .hero {
-          background-image: url(${IMAGE_WAVE_1}),
-            url(${IMAGE_ILLUSTRATION_1.src}), url(${IMAGE_WAVE_2});
-        }
-        .ilusCity {
-          background-image: url(${IMAGE_ILLUSTRATION_2.src});
-        }
-        .scrollHint {
-          background-image: url(${IMAGE_ARROW_DOWN});
-        }
-        .emblaViewport {
-          cursor: url(${SLIDE_CURSOR}), auto;
-        }
-      `}</style>
     </section>
   )
 }

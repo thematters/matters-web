@@ -9,7 +9,7 @@ import {
   TextIconProps,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ViewMoreCardProps = {
   iconProps?: IconProps
@@ -27,15 +27,21 @@ export const ViewMoreCard: React.FC<
   ...cardProps
 }) => {
   const viewMoreCardClasses = classNames({
-    viewMoreCard: true,
-    [`${textAlign}`]: !!textAlign,
+    [styles.viewMoreCard]: true,
+    [styles[textAlign]]: !!textAlign,
   })
 
   return (
     <section className={viewMoreCardClasses}>
-      <Card spacing={['base', 'base']} {...cardProps}>
+      <Card
+        spacing={['base', 'base']}
+        borderColor="green"
+        borderRadius="loose"
+        bgActiveColor="none"
+        {...cardProps}
+      >
         <TextIcon
-          icon={<IconArrowRight16 size="xs" {...iconProps} />}
+          icon={<IconArrowRight16 {...iconProps} />}
           textPlacement="left"
           color="green"
           {...textIconProps}
@@ -43,8 +49,6 @@ export const ViewMoreCard: React.FC<
           {children}
         </TextIcon>
       </Card>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

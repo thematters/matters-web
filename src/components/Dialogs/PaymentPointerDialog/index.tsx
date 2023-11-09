@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 
@@ -16,29 +17,25 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
   const [isValid, setIsValid] = useState(false)
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
+  const SubmitButton = (
+    <Dialog.TextButton
+      type="submit"
+      form={formId}
+      disabled={isSubmitting || !isValid}
+      text={<Translate zh_hant="確認" zh_hans="确认" en="Submit" />}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
       {children({ openDialog })}
 
-      <Dialog
-        size="sm"
-        isOpen={show}
-        onDismiss={closeDialog}
-        smBgColor="grey-lighter"
-      >
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title="paymentPointer"
           closeDialog={closeDialog}
-          closeTextId="close"
-          rightButton={
-            <Dialog.Header.RightButton
-              type="submit"
-              form={formId}
-              disabled={isSubmitting || !isValid}
-              text={<Translate zh_hant="確認" zh_hans="确认" en="Submit" />}
-              loading={isSubmitting}
-            />
-          }
+          rightBtn={SubmitButton}
         />
 
         <SetPaymentPointerForm
@@ -46,6 +43,19 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
           setIsValid={setIsValid}
           formId={formId}
           closeDialog={closeDialog}
+        />
+
+        <Dialog.Footer
+          smUpBtns={
+            <>
+              <Dialog.TextButton
+                text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+              {SubmitButton}
+            </>
+          }
         />
       </Dialog>
     </>

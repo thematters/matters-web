@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { toSizedImageURL, ToSizedImageURLSize } from '~/common/utils'
 
 /**
@@ -8,18 +9,26 @@ import { toSizedImageURL, ToSizedImageURLSize } from '~/common/utils'
 
 interface ResponsiveImageProps {
   url: string
-  size: ToSizedImageURLSize
-  smUpSize?: ToSizedImageURLSize
+  width: ToSizedImageURLSize
+  height?: ToSizedImageURLSize
+  smUpWidth?: ToSizedImageURLSize
+  smUpHeight?: ToSizedImageURLSize
   disabled?: boolean
   loading?: 'eager' | 'lazy'
+  anonymous?: boolean
+  disableAnimation?: boolean
 }
 
 const BaseResponsiveImage = ({
   url,
-  size,
-  smUpSize,
+  width,
+  smUpWidth,
+  height,
+  smUpHeight,
   disabled,
   loading,
+  anonymous,
+  disableAnimation,
 }: ResponsiveImageProps) => {
   const [error, setError] = useState(false)
 
@@ -31,39 +40,39 @@ const BaseResponsiveImage = ({
   }
 
   return (
-    <picture onError={() => setError(true)}>
-      {smUpSize && (
+    <picture
+      onError={() => setError(true)}
+      data-test-id={TEST_ID.RESPONSIVE_IMG}
+    >
+      {smUpWidth && (
         <>
           <source
-            type="image/webp"
-            media="(min-width: 768px)"
+            media="(min-width: 475px)"
             srcSet={toSizedImageURL({
               url,
-              size: smUpSize,
-              ext: 'webp',
+              width: smUpWidth,
+              height: smUpHeight,
+              disableAnimation,
             })}
-          />
-          <source
-            media="(min-width: 768px)"
-            srcSet={toSizedImageURL({ url, size: smUpSize })}
           />
         </>
       )}
 
       <source
-        type="image/webp"
         srcSet={toSizedImageURL({
           url,
-          size,
-          ext: 'webp',
+          width,
+          height,
+          disableAnimation,
         })}
       />
 
       <img
         src={url}
-        srcSet={toSizedImageURL({ url, size })}
+        srcSet={toSizedImageURL({ url, width, height, disableAnimation })}
         loading={loading}
         alt=""
+        crossOrigin={anonymous ? 'anonymous' : undefined}
       />
     </picture>
   )
@@ -81,9 +90,12 @@ export const ResponsiveImage = React.memo(
   (prevProps, props) => {
     return (
       prevProps.url === props.url &&
-      prevProps.size === props.size &&
-      prevProps.smUpSize === props.smUpSize &&
-      prevProps.disabled === props.disabled
+      prevProps.width === props.width &&
+      prevProps.height === props.height &&
+      prevProps.smUpWidth === props.smUpWidth &&
+      prevProps.smUpHeight === props.smUpHeight &&
+      prevProps.disabled === props.disabled &&
+      prevProps.disableAnimation === props.disableAnimation
     )
   }
 ) as MemoizedResponsiveImage

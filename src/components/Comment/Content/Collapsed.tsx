@@ -1,11 +1,12 @@
+import classNames from 'classnames'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
-import { Button, IconExpand16, TextIcon, Translate } from '~/components'
+import { Button, IconArrowDown16, TextIcon } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface CollapsedProps {
   content?: string | null
@@ -22,46 +23,45 @@ const Collapsed = ({
 
   if (!collapsed) {
     return (
-      <>
-        <div
-          className={`${className} u-content-comment`}
-          dangerouslySetInnerHTML={{
-            __html: content || '',
-          }}
-          onClick={captureClicks}
-          data-test-id={TEST_ID.COMMENT_CONETNT}
-        />
-
-        <style jsx>{styles}</style>
-        <style jsx>{contentCommentStyles}</style>
-      </>
+      <div
+        className={`${className} u-content-comment`}
+        dangerouslySetInnerHTML={{
+          __html: content || '',
+        }}
+        onClick={captureClicks}
+        data-test-id={TEST_ID.COMMENT_CONETNT}
+      />
     )
   }
 
+  const inActiveClasses = classNames({
+    [styles.inactive]: true,
+    [className]: true,
+    'u-content-comment': true,
+  })
+
   return (
-    <p className={`${className} u-content-comment inactive`}>
+    <p className={inActiveClasses}>
       <span>{collapsedContent}</span>
 
       {collapsed && (
         <Button
           spacing={['xxtight', 'xtight']}
-          bgActiveColor="grey-lighter"
+          bgActiveColor="greyLighter"
           onClick={() => {
             setCollapsed(false)
           }}
         >
           <TextIcon
-            icon={<IconExpand16 size="xs" />}
+            icon={<IconArrowDown16 size="xs" />}
             textPlacement="left"
             weight="normal"
-            color="grey"
+            color="greyDarker"
           >
-            <Translate zh_hant="打開" zh_hans="展开" en="Expand" />
+            <FormattedMessage defaultMessage="Expand" id="0oLj/t" />
           </TextIcon>
         </Button>
       )}
-
-      <style jsx>{styles}</style>
     </p>
   )
 }

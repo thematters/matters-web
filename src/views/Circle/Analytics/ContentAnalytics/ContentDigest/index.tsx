@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
 import {
@@ -8,12 +9,11 @@ import {
   LinkWrapper,
   TextIcon,
   Tooltip,
-  Translate,
 } from '~/components'
 import { CircleContentAnalyticsArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface CircleAnalyticsContentProps {
   article: CircleContentAnalyticsArticleFragment
@@ -23,12 +23,14 @@ interface CircleAnalyticsContentProps {
 
 const Count = ({ count }: { count: number }) => {
   return (
-    <Tooltip content={<Translate id="readCount" />} trigger="click">
-      <button type="button" className="count">
-        <TextIcon icon={<IconRead16 />} size="xs" color="grey-dark">
+    <Tooltip
+      content={<FormattedMessage defaultMessage="Read Counts" id="8KFsZN" />}
+      trigger="click"
+    >
+      <button type="button" className={styles.count}>
+        <TextIcon icon={<IconRead16 />} size="xs" color="greyDark">
           {count}
         </TextIcon>
-        <style jsx>{styles}</style>
       </button>
     </Tooltip>
   )
@@ -46,14 +48,14 @@ const ContentDigest = ({
   })
   return (
     <Card {...path} spacing={[0, 0]}>
-      <section className="container">
-        <section className="number">{index + 1}</section>
+      <section className={styles.container}>
+        <section className={styles.number}>{index + 1}</section>
 
-        <section className="article">
-          <section className="content">
-            <section className="title-wrap">
+        <section className={styles.article}>
+          <section className={styles.content}>
+            <section className={styles.titleWrap}>
               <LinkWrapper {...path} textActiveColor="green">
-                <h3 className="title">{title}</h3>
+                <h3 className={styles.title}>{title}</h3>
               </LinkWrapper>
             </section>
 
@@ -63,7 +65,6 @@ const ContentDigest = ({
           <DateTime date={createdAt} />
         </section>
       </section>
-      <style jsx>{styles}</style>
     </Card>
   )
 }

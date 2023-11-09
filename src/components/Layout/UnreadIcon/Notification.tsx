@@ -3,14 +3,14 @@ import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
 import {
-  IconNavNotification24,
-  IconNavNotificationActive24,
+  IconNavNotification32,
+  IconNavNotificationActive32,
   ViewerContext,
 } from '~/components'
 import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
 import { UnreadNoticeCountQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface UnreadIconProps {
   active?: boolean
@@ -35,17 +35,18 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
   }, [])
 
   const unread = (data?.viewer?.status?.unreadNoticeCount || 0) >= 1
-  const iconClasses = classNames({ 'unread-icon': true, unread })
+  const iconClasses = classNames({
+    [styles.unreadIcon]: true,
+    [styles.unread]: unread,
+  })
 
   return (
     <span className={iconClasses}>
       {active ? (
-        <IconNavNotificationActive24 size="md" color="green" />
+        <IconNavNotificationActive32 size="lg" />
       ) : (
-        <IconNavNotification24 size="md" />
+        <IconNavNotification32 size="lg" />
       )}
-
-      <style jsx>{styles}</style>
     </span>
   )
 }

@@ -39,12 +39,20 @@ export const EDIT_MODE_ARTICLE = gql`
           }
         }
         license
+        sensitiveByAuthor
         requestForDonation
         replyToDonator
         revisionCount
         drafts {
           id
           mediaHash
+          publishState
+          ...EditorDraft
+        }
+        newestPublishedDraft {
+          id
+          mediaHash
+          tags
           publishState
           ...EditorDraft
         }

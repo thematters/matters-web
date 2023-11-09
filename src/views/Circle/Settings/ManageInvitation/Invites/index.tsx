@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { Spacer, Tabs, Translate } from '~/components'
+import { SegmentedTabs } from '~/components'
 
 import AcceptedInvites from './Accepted'
 import PendingInvites from './Pending'
@@ -15,17 +16,29 @@ const InvitesFeed: React.FC = () => {
 
   return (
     <>
-      <Spacer size="xtight" />
+      <SegmentedTabs sticky>
+        <SegmentedTabs.Tab
+          onClick={() => setType('pending')}
+          selected={isPending}
+        >
+          <FormattedMessage
+            defaultMessage="Pending"
+            id="fWDtpq"
+            description="src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+          />
+        </SegmentedTabs.Tab>
 
-      <Tabs sticky>
-        <Tabs.Tab onClick={() => setType('pending')} selected={isPending}>
-          <Translate zh_hant="邀請中" zh_hans="邀请中" en="Pending" />
-        </Tabs.Tab>
-
-        <Tabs.Tab onClick={() => setType('accepted')} selected={isAccepted}>
-          <Translate zh_hant="已接受" zh_hans="已接受" en="Accepted" />
-        </Tabs.Tab>
-      </Tabs>
+        <SegmentedTabs.Tab
+          onClick={() => setType('accepted')}
+          selected={isAccepted}
+        >
+          <FormattedMessage
+            defaultMessage="Accepted"
+            id="JpS59y"
+            description="src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+          />
+        </SegmentedTabs.Tab>
+      </SegmentedTabs>
 
       {isPending && <PendingInvites />}
       {isAccepted && <AcceptedInvites />}

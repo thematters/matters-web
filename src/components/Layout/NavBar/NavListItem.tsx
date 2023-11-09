@@ -3,7 +3,7 @@ import jump from 'jump.js'
 
 import { Button, ButtonProps } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type NavListItemProps = {
   name: React.ReactNode
@@ -32,20 +32,19 @@ const NavListItem = ({
   }
 
   return (
-    <li>
+    <li className={styles.listItem}>
       <Button
-        bgActiveColor="grey-lighter"
+        bgActiveColor="greyLighter"
         size={['2rem', '2rem']}
         {...props}
         onClick={onClick}
       >
         {active ? activeIcon : icon}
+
         <VisuallyHidden>
           <span>{name}</span>
         </VisuallyHidden>
       </Button>
-
-      <style jsx>{styles}</style>
     </li>
   )
 }

@@ -1,0 +1,27 @@
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: var(--spacing-x-loose);
+}
+
+.logo {
+  & a {
+    display: inline-flex;
+  }
+}
+
+.list {
+  @mixin flex-center-all;
+
+  flex-direction: column;
+
+  @media (--md-up) {
+    display: initial;
+  }
+
+  & .listItem {
+    margin-top: var(--spacing-x-loose);
+    font-size: 0;
+  }
+}

@@ -73,3 +73,14 @@ export const LIST_VIEWER_ARTICLES = gql`
   }
   ${ArticleDigestDropdown.fragments.article}
 `
+
+export const ARTICLE_URL_QUERY = gql`
+  query ArticleUrlQuery($id: ID!) {
+    node(input: { id: $id }) {
+      ... on Article {
+        ...ArticleDigestDropdownArticle
+      }
+    }
+  }
+  ${ArticleDigestDropdown.fragments.article}
+`

@@ -1,9 +1,9 @@
-import { DateTime, IconPaywall16, Translate } from '~/components'
+import { DateTime, IconPaywall24, Translate } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import TranslationButton from './TranslationButton'
 
 type MetaInfoProps = {
@@ -24,11 +24,11 @@ const MetaInfo = ({
   const originalLanguage = article?.language ? article.language : ''
 
   return (
-    <section className="info">
-      <section className="time">
+    <section className={styles.info}>
+      <section className={styles.time}>
         <DateTime date={article.createdAt} />
         {article.revisedAt && (
-          <span>
+          <span className={styles.edited}>
             <Translate
               zh_hant="（編輯過）"
               zh_hans="（编辑过）"
@@ -51,9 +51,7 @@ const MetaInfo = ({
         </>
       )}
 
-      {article.access.type === 'paywall' && <IconPaywall16 color="grey" />}
-
-      <style jsx>{styles}</style>
+      {article.access.type === 'paywall' && <IconPaywall24 color="grey" />}
     </section>
   )
 }

@@ -1,5 +1,0 @@
-.rate-hint {
-  @mixin flex-center-end;
-
-  padding: var(--spacing-x-tight) var(--spacing-x-tight) 0;
-}

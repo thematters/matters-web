@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-import { Dialog, Spinner, WagmiProvider } from '~/components'
+import { Spinner } from '~/components'
 
 import { BaseENSDialogProps, Step } from './types'
 
@@ -42,11 +42,7 @@ const ENSDialogContent: React.FC<ENSDialogContentProps> = ({
   const [txHash, setTxHash] = useState('')
 
   return (
-    <WagmiProvider>
-      {!isWalletSelect && (
-        <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
-      )}
-
+    <>
       {isConfirmAddress && (
         <DynamicConnectWallet
           switchToWalletSelect={() => {
@@ -55,6 +51,7 @@ const ENSDialogContent: React.FC<ENSDialogContentProps> = ({
           switchToLinkENS={() => {
             forward('linkENS')
           }}
+          closeDialog={closeDialog}
         />
       )}
 
@@ -78,11 +75,12 @@ const ENSDialogContent: React.FC<ENSDialogContentProps> = ({
             setTxHash(hash)
             forward('complete')
           }}
+          closeDialog={closeDialog}
         />
       )}
 
       {isComplete && txHash && <DynamicComplete txHash={txHash} />}
-    </WagmiProvider>
+    </>
   )
 }
 

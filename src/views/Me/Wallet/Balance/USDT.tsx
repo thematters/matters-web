@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useContext } from 'react'
 
 import { PATHS } from '~/common/enums'
@@ -13,7 +14,7 @@ import {
 } from '~/components'
 import { QuoteCurrency } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface USDTBalanceProps {
   currency: QuoteCurrency
@@ -26,11 +27,16 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   const { data: balanceUSDTData } = useBalanceUSDT({})
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
 
+  const classes = classNames({
+    [styles.assetsItem]: true,
+    assetsItem: true, // global selector for overriding
+  })
+
   if (!address) {
     return (
-      <section className="assetsItem">
+      <section className={classes}>
         <TextIcon
-          icon={<IconUSDTActive40 size="xl-m" />}
+          icon={<IconUSDTActive40 size="xlM" />}
           size="md"
           spacing="xtight"
         >
@@ -41,22 +47,20 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
           spacing={[0, 'tight']}
           size={[null, '1.5rem']}
           borderColor="black"
-          href={PATHS.ME_SETTINGS_CONNECT_WALLET}
+          href={PATHS.ME_SETTINGS}
         >
           <TextIcon color="black" size="xs">
             <Translate zh_hant="前往設置" zh_hans="前往设置" en="Setup" />
           </TextIcon>
         </Button>
-
-        <style jsx>{styles}</style>
       </section>
     )
   }
 
   return (
-    <section className="assetsItem">
+    <section className={classes}>
       <TextIcon
-        icon={<IconUSDTActive40 size="xl-m" />}
+        icon={<IconUSDTActive40 size="xlM" />}
         size="md"
         spacing="xtight"
       >
@@ -69,8 +73,6 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
         subCurrency={currency}
         subValue={formatAmount(balanceUSDT * exchangeRate, 2)}
       />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

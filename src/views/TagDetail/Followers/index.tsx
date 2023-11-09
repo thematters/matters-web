@@ -1,47 +1,34 @@
-import { IMAGE_PIXEL } from '~/common/enums'
+import { FormattedMessage } from 'react-intl'
+
 import { numAbbr } from '~/common/utils'
-import { Translate } from '~/components'
-import { Avatar } from '~/components/Avatar'
 import tagFragments from '~/components/GQL/fragments/tag'
 import { FollowersTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FollowersProps {
   tag: FollowersTagFragment
 }
 
 const Followers = ({ tag }: FollowersProps) => {
-  const { edges, totalCount } = tag.followers || {
+  const { totalCount } = tag.followers || {
     edges: [],
     totalCount: 0,
   }
-  const followers = (
-    edges?.map(({ node }) => node).filter((user) => !!user) || []
-  ).slice(0, 5)
 
   return (
-    <section className="container">
-      <section className="avatar-list">
-        {followers.map((user, index) => (
-          <Avatar
-            user={user || undefined}
-            src={user ? undefined : IMAGE_PIXEL}
-            size="md"
-            key={index}
-          />
-        ))}
-      </section>
-
-      <section className="count">
+    <section className={styles.container}>
+      <section className={styles.count}>
         <b>{numAbbr(totalCount)}</b>
         <span>
           &nbsp;
-          <Translate zh_hant="人追蹤" zh_hans="人追踪" en="Followers" />
+          <FormattedMessage
+            defaultMessage="are following"
+            id="hYG5fb"
+            description="src/views/TagDetail/Followers/index.tsx"
+          />
         </span>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

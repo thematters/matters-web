@@ -1,7 +1,8 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import React from 'react'
 
-import { AvatarSize, CommentFormType, UserDigest } from '~/components'
+import { TEST_ID } from '~/common/enums'
+import { AvatarSize, CommentFormType, Media, UserDigest } from '~/components'
 import {
   FeedCommentPrivateFragment,
   FeedCommentPublicFragment,
@@ -15,7 +16,7 @@ import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
 import ReplyTo from '../ReplyTo'
 import { fragments, REFETCH_COMMENT } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type CommentControls = {
   avatarSize?: Extract<AvatarSize, 'md' | 'lg'>
@@ -52,19 +53,23 @@ export const BaseCommentFeed = ({
   }
 
   return (
-    <article id={actionControls.hasLink ? nodeId : ''}>
-      <header>
+    <article
+      className={styles.comment}
+      id={actionControls.hasLink ? nodeId : ''}
+      data-test-id={TEST_ID.ARTICLE_COMMENT_FEED}
+    >
+      <header className={styles.header}>
         <UserDigest.Mini
           user={author}
           avatarSize={avatarSize}
-          textSize="md-s"
+          textSize="mdS"
           textWeight="md"
           hasAvatar
           hasDisplayName
           hasUserName={hasUserName}
         />
 
-        <section className="right">
+        <section className={styles.right}>
           <DonatorLabel comment={comment} />
           <PinnedLabel comment={comment} />
           <DropdownActions
@@ -77,13 +82,19 @@ export const BaseCommentFeed = ({
       </header>
 
       {replyTo && (!parentComment || replyTo.id !== parentComment.id) && (
-        <section className="reply-to-container">
+        <section className={styles.replyToContainer}>
           <ReplyTo user={replyTo.author} />
         </section>
       )}
 
-      <section className="content-container">
-        <Content comment={comment} type={type} size="md-s" />
+      <section className={styles.contentContainer}>
+        <Media at="sm">
+          <Content comment={comment} type={type} size="mdS" limit={17} />
+        </Media>
+        <Media greaterThan="sm">
+          <Content comment={comment} type={type} size="mdS" limit={13} />
+        </Media>
+
         <FooterActions
           comment={comment}
           type={type}
@@ -91,8 +102,6 @@ export const BaseCommentFeed = ({
           {...actionControls}
         />
       </section>
-
-      <style jsx>{styles}</style>
     </article>
   )
 }
@@ -110,6 +119,7 @@ const CommentFeed = React.memo(
     return (
       prevComment.content === comment.content &&
       prevComment.upvotes === comment.upvotes &&
+      prevComment.myVote === comment.myVote &&
       prevComment.state === comment.state &&
       prevComment.pinned === comment.pinned &&
       prevComment.author.isBlocked === comment.author.isBlocked &&

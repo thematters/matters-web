@@ -1,57 +1,76 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import Link from 'next/link'
-import { useContext } from 'react'
+// import Script from 'next/script'
+import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
+import { ERROR_CODES } from '~/common/enums'
 import {
   parseFormSubmitErrors,
-  validateDisplayName,
+  signupCallbackUrl,
   validateEmail,
-  validateToS,
 } from '~/common/utils'
+import { WalletType } from '~/common/utils'
 import {
-  Dialog,
+  AuthFeedType,
+  AuthTabs,
+  AuthWalletFeed,
+  DialogBeta,
   Form,
+  IconLeft20,
   LanguageContext,
-  LanguageSwitch,
-  Layout,
+  Media,
   ReCaptchaContext,
+  TextIcon,
+  Turnstile,
+  // TURNSTILE_DEFAULT_SCRIPT_ID,
+  TurnstileInstance,
   useMutation,
+  ViewerContext,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
+// import { UserGroup } from '~/gql/graphql'
 import { SendVerificationCodeMutation } from '~/gql/graphql'
 
-import { EmailLoginButton } from './Buttons'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
-  submitCallback: () => void
-  gotoEmailLogin: () => void
+  submitCallback: (email: string) => void
+  gotoWalletConnect: (type: WalletType) => void
   closeDialog?: () => void
-  back?: () => void
+
+  authFeedType: AuthFeedType
+  setAuthFeedType: (type: AuthFeedType) => void
+
+  back: () => void
 }
 
 interface FormValues {
-  displayName: string
   email: string
-  tos: boolean
 }
 
 const Init: React.FC<FormProps> = ({
   purpose,
   submitCallback,
-  gotoEmailLogin,
+  gotoWalletConnect,
   closeDialog,
+  authFeedType,
+  setAuthFeedType,
   back,
 }) => {
+  const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
-  const isInPage = purpose === 'page'
   const formId = 'email-sign-up-init-form'
 
-  const { token, refreshToken } = useContext(ReCaptchaContext)
+  const isInPage = purpose === 'page'
+
+  const isNormal = authFeedType === 'normal'
+  const isWallet = authFeedType === 'wallet'
+  const { token: reCaptchaToken, refreshToken } = useContext(ReCaptchaContext)
+  const turnstileRef = useRef<TurnstileInstance>(null)
+  const [turnstileToken, setTurnstileToken] = useState<string>()
+
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
     SEND_CODE,
     undefined,
@@ -64,164 +83,194 @@ const Init: React.FC<FormProps> = ({
     values,
     errors,
     touched,
-    handleBlur,
+    // handleBlur,
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
   } = useFormik<FormValues>({
     initialValues: {
-      displayName: '',
       email: '',
-      tos: true,
     },
-    validate: ({ displayName, email, tos }) =>
+    validateOnBlur: false,
+    validateOnChange: true, // enable for signup form
+    validate: ({ email }) =>
       _pickBy({
-        displayName: validateDisplayName(displayName, lang),
         email: validateEmail(email, lang, { allowPlusSign: false }),
-        tos: validateToS(tos, lang),
       }),
-    onSubmit: async (
-      { displayName, email },
-      { setFieldError, setSubmitting }
-    ) => {
-      const redirectUrl = `${
-        window.location.origin
-      }/signup?email=${encodeURIComponent(
-        email
-      )}&displayName=${encodeURIComponent(displayName)}`
-
+    onSubmit: async ({ email }, { setFieldError, setSubmitting }) => {
       try {
+        const redirectUrl = signupCallbackUrl(email)
         await sendCode({
-          variables: { input: { email, type: 'register', token, redirectUrl } },
+          variables: {
+            input: {
+              email,
+              type: 'register',
+              token:
+                // (viewer.info.group === UserGroup.A && turnstileToken) ||
+                // turnstileRef.current?.getResponse() || // fallback to ReCaptchaContext token
+                turnstileToken
+                  ? `${reCaptchaToken} ${turnstileToken}`
+                  : reCaptchaToken,
+              redirectUrl,
+              language: lang,
+            },
+          },
         })
 
         setSubmitting(false)
-        submitCallback()
+        submitCallback(email)
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        setFieldError('email', messages[codes[0]])
-
-        if (refreshToken) {
-          refreshToken()
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        if (codes[0].includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
+          setFieldError(
+            'email',
+            intl.formatMessage({
+              defaultMessage: 'Unavailable',
+              id: 'rADhX5',
+              description: 'FORBIDDEN_BY_STATE',
+            })
+          )
+        } else {
+          setFieldError('email', intl.formatMessage(messages[codes[0]]))
         }
+
+        refreshToken?.()
+        turnstileRef.current?.reset()
       }
     },
   })
 
+  // useEffect(() => { console.log('turnstileToken changed to:', turnstileToken); }, [turnstileRef, turnstileToken])
+
+  const siteKey = process.env
+    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <Form.Input
-        label={
-          <FormattedMessage
-            defaultMessage="Display Name"
-            description="src/components/Forms/EmailSignUpForm/Init.tsx"
-          />
-        }
-        type="text"
-        name="displayName"
-        required
-        placeholder={intl.formatMessage({
-          defaultMessage: 'Your Matters display name, can be changed later',
-          description: 'src/components/Forms/EmailSignUpForm/Init.tsx',
-        })}
-        value={values.displayName}
-        error={touched.displayName && errors.displayName}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={siteKey}
+        options={{
+          action: 'register',
+          cData: `user-group-${viewer.info.group}`,
+          // refreshExpired: 'manual',
+          size: 'invisible',
+        }}
+        // injectScript={false}
 
+        scriptOptions={{
+          compat: 'recaptcha',
+          appendTo: 'body',
+        }}
+        onSuccess={(token) => {
+          setTurnstileToken(token)
+          // console.log('setTurnstileToken:', token)
+        }}
+      />
       <Form.Input
-        label={<FormattedMessage defaultMessage="Email" description="" />}
+        label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
         type="email"
         name="email"
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Email',
-          description: '',
+          id: 'sy+pv5',
         })}
+        hintSize="sm"
+        hintAlign="center"
+        hintSpace="baseLoose"
         value={values.email}
         error={touched.email && errors.email}
-        onBlur={handleBlur}
+        // FIXME: handleBlur will cause the component to re-render
+        // onBlur={handleBlur}
         onChange={handleChange}
+        spacingBottom="base"
+        autoFocus
       />
-
-      <Form.CheckBox
-        name="tos"
-        checked={values.tos}
-        error={touched.tos && errors.tos}
-        onChange={handleChange}
-        hint={
-          <>
-            <FormattedMessage
-              defaultMessage="I have read and agree to"
-              description=""
-            />
-            <Link href={PATHS.TOS} legacyBehavior>
-              <a className="u-link-green" target="_blank">
-                &nbsp;
-                <FormattedMessage
-                  defaultMessage="Terms and Privacy Policy"
-                  description="src/components/Forms/EmailSignUpForm/Init.tsx"
-                />
-              </a>
-            </Link>
-          </>
-        }
-        required
-      />
-
-      <EmailLoginButton gotoEmailLogin={gotoEmailLogin} />
     </Form>
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <DialogBeta.TextButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
-      text={<FormattedMessage defaultMessage="Next" description="" />}
+      disabled={
+        values.email === '' || errors.email !== undefined || isSubmitting
+      }
+      text={
+        <FormattedMessage
+          defaultMessage="Continue"
+          id="wK4kLf"
+          description="src/components/Forms/EmailSignUpForm/Init.tsx"
+        />
+      }
       loading={isSubmitting}
     />
   )
 
-  if (isInPage) {
-    return (
-      <>
-        <Layout.Header
-          left={<Layout.Header.BackButton onClick={back} />}
-          right={
-            <>
-              <Layout.Header.Title id="register" />
-              {SubmitButton}
-            </>
-          }
-        />
-
-        {InnerForm}
-
-        <footer>
-          <LanguageSwitch />
-          <style jsx>{styles}</style>
-        </footer>
-      </>
-    )
-  }
-
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="register"
-          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
+      <DialogBeta.Header
+        title={<FormattedMessage defaultMessage="Sign Up" id="39AHJm" />}
+        hasSmUpTitle={false}
+        leftBtn={
+          <DialogBeta.TextButton
+            text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
+            color="greyDarker"
+            onClick={back}
+          />
+        }
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
+
+      <DialogBeta.Content>
+        <Media at="sm">{InnerForm}</Media>
+        <Media greaterThan="sm">
+          <AuthTabs
+            purpose={purpose}
+            type={authFeedType}
+            setType={setAuthFeedType}
+            normalText={
+              <FormattedMessage defaultMessage="Sign Up" id="39AHJm" />
+            }
+          />
+          {isNormal && <>{InnerForm}</>}
+          {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
+        </Media>
+      </DialogBeta.Content>
+
+      {isNormal && (
+        <DialogBeta.Footer
+          smUpBtns={
+            <section className={styles.footerBtns}>
+              <DialogBeta.TextButton
+                text={
+                  <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
+                    <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
+                  </TextIcon>
+                }
+                color="greyDarker"
+                onClick={back}
+              />
+
+              {SubmitButton}
+            </section>
+          }
         />
       )}
-
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      {isWallet && !isInPage && (
+        <DialogBeta.Footer
+          smUpBtns={
+            <DialogBeta.TextButton
+              color="greyDarker"
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+              onClick={closeDialog}
+            />
+          }
+        />
+      )}
     </>
   )
 }

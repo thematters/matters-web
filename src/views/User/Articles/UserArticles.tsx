@@ -2,17 +2,17 @@ import { useContext, useEffect } from 'react'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
-import { URL_QS } from '~/common/enums'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
+  ArticleDigestArchived,
   ArticleDigestFeed,
+  Empty,
   EmptyArticle,
   Head,
-  IconDotDivider,
   InfiniteScroll,
+  Layout,
   List,
   QueryError,
-  Spinner,
   Translate,
   usePublicQuery,
   useRoute,
@@ -20,40 +20,14 @@ import {
 } from '~/components'
 import { UserArticlesPublicQuery } from '~/gql/graphql'
 
-import UserTabs from '../UserTabs'
 import {
   USER_ARTICLES_PRIVATE,
   USER_ARTICLES_PUBLIC,
   VIEWER_ARTICLES,
 } from './gql'
-import styles from './styles.css'
-
-const ArticleSummaryInfo = ({
-  user,
-}: {
-  user: NonNullable<UserArticlesPublicQuery['user']>
-}) => {
-  const { articleCount: articles, totalWordCount: words } = user.status || {
-    articleCount: 0,
-    totalWordCount: 0,
-  }
-
-  return (
-    <div className="info">
-      <Translate zh_hant="創作了" zh_hans="创作了" en="Created" />
-      <span className="num">&nbsp;{articles}&nbsp;</span>
-      <Translate zh_hant="篇作品" zh_hans="篇作品" en="articles" />
-
-      <IconDotDivider />
-
-      <Translate zh_hant="累積創作" zh_hans="累积创作" en="In total" />
-      <span className="num">&nbsp;{words}&nbsp;</span>
-      <Translate zh_hant="字" zh_hans="字" en="words" />
-
-      <style jsx>{styles}</style>
-    </div>
-  )
-}
+import PinBoard from './PinBoard'
+import Placeholder from './Placeholder'
+import StartWriting from './StartWirting'
 
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
@@ -130,53 +104,47 @@ const UserArticles = () => {
    */
   if (loading) {
     return (
-      <>
-        <UserTabs />
-        <Spinner />
-      </>
+      <Layout.Main.Spacing hasVertical={false}>
+        <Placeholder />
+      </Layout.Main.Spacing>
     )
   }
 
   if (error) {
-    return (
-      <>
-        <UserTabs />
-        <QueryError error={error} />
-      </>
-    )
+    return <QueryError error={error} />
   }
 
-  if (!user || user?.status?.state === 'archived') {
+  if (!user) {
+    return <></>
+  }
+
+  if (user?.status?.state === 'archived') {
     return (
-      <>
-        <UserTabs />
-        <EmptyArticle />
-      </>
+      <Empty
+        spacingY="xxxloose"
+        description={
+          <Translate
+            en="Deleted user"
+            zh_hans="用户已注销"
+            zh_hant="用戶已註銷"
+          />
+        }
+      />
     )
   }
 
   // customize title
-  const shareSource = getQuery(URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key)
-  const isShareOnboardingTasks =
-    shareSource === URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.value
 
   const description = stripSpaces(user.info.description)
 
   const CustomHead = () => (
     <Head
       title={{
-        zh_hant: isShareOnboardingTasks
-          ? `${user.displayName} 已解鎖新手獎賞，快點加入 Matters 獲得創作者獎勵吧`
-          : `${user.displayName} 的創作空間站`,
-        zh_hans: isShareOnboardingTasks
-          ? `${user.displayName} 已解锁新手奖赏，快点加入 Matters 获得创作者奖励吧`
-          : `${user.displayName} 的创作空间站`,
-        en: isShareOnboardingTasks
-          ? `${user.displayName} has unlocked new user reward, join Matters to get creator reward`
-          : `${user.displayName}'s creative space`,
+        zh_hant: `${user.displayName} 的創作空間站`,
+        zh_hans: `${user.displayName} 的创作空间站`,
+        en: `${user.displayName}'s creative space`,
       }}
       // title={`Matters - ${user.displayName} (@${user.userName})`}
-      noSuffix={isShareOnboardingTasks}
       description={description}
       // keywords={...} // show user's top10 most used tags?
       image={
@@ -200,8 +168,8 @@ const UserArticles = () => {
     return (
       <>
         <CustomHead />
-        <UserTabs />
         <EmptyArticle />
+        {isViewer && <StartWriting />}
       </>
     )
   }
@@ -214,38 +182,43 @@ const UserArticles = () => {
     <>
       <CustomHead />
 
-      <UserTabs />
+      <PinBoard user={user} />
 
-      <ArticleSummaryInfo user={user} />
-
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List>
-          {articleEdges.map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <ArticleDigestFeed
-                article={node}
-                inUserArticles
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'user_article',
-                    contentType: 'article',
-                    location: i,
-                    id: node.id,
-                  })
-                }
-                onClickAuthor={() => {
-                  analytics.trackEvent('click_feed', {
-                    type: 'user_article',
-                    contentType: 'user',
-                    location: i,
-                    id: node.author.id,
-                  })
-                }}
-              />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
+      <Layout.Main.Spacing hasVertical={false}>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          loader={<Placeholder />}
+          eof
+        >
+          <List>
+            {articleEdges.map(({ node, cursor }, i) => (
+              <List.Item key={cursor}>
+                {node.articleState !== 'active' ? (
+                  <ArticleDigestArchived article={node} />
+                ) : (
+                  <ArticleDigestFeed
+                    article={node}
+                    inUserArticles
+                    hasAuthor={false}
+                    hasEdit={true}
+                    hasAddCollection={true}
+                    hasArchive={true}
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'user_article',
+                        contentType: 'article',
+                        location: i,
+                        id: node.id,
+                      })
+                    }
+                  />
+                )}
+              </List.Item>
+            ))}
+          </List>
+        </InfiniteScroll>
+      </Layout.Main.Spacing>
     </>
   )
 }

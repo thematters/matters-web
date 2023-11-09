@@ -1,19 +1,18 @@
 import classNames from 'classnames'
 
 import { TEST_ID } from '~/common/enums'
-import { subString, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 import { LinkWrapper } from '~/components'
 import { UserDigestPlainUserFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type UserDigestPlainProps = {
   user: UserDigestPlainUserFragment
 
   disabled?: boolean
   hasUnderline?: boolean
-  displayNameLimit?: number
   onClick?: () => void
 }
 
@@ -22,7 +21,6 @@ const Plain = ({
   disabled,
   onClick,
   hasUnderline,
-  displayNameLimit,
 }: UserDigestPlainProps) => {
   const path = toPath({
     page: 'userProfile',
@@ -30,13 +28,13 @@ const Plain = ({
   })
 
   const containerClasses = classNames({
-    container: true,
-    disabled,
+    [styles.container]: true,
+    [styles.disabled]: disabled,
   })
 
   const displayNameClasses = classNames({
-    name: true,
-    hasUnderline,
+    [styles.name]: true,
+    [styles.hasUnderline]: hasUnderline,
   })
 
   return (
@@ -44,14 +42,10 @@ const Plain = ({
       {...path}
       disabled={disabled}
       onClick={onClick}
-      testId={TEST_ID.DIGEST_USER_MINI}
+      testId={TEST_ID.DIGEST_USER_PLAIN}
     >
       <section className={containerClasses}>
-        <span className={displayNameClasses}>
-          {displayNameLimit && subString(user.displayName!, displayNameLimit)}
-          {!displayNameLimit && user.displayName}
-        </span>
-        <style jsx>{styles}</style>
+        <span className={displayNameClasses}>{user.displayName}</span>
       </section>
     </LinkWrapper>
   )

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
-import { TEST_ID } from '@/src/common/enums'
-import { stripAllPunct, toLocale, toPath } from '~/common/utils'
+import { TEST_ID } from '~/common/enums'
+import { normalizeTag, toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,
   Media,
@@ -20,7 +20,7 @@ import {
 import AppreciationButton from '../AppreciationButton'
 import CommentBar from './CommentBar'
 import DonationButton from './DonationButton'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ToolbarProps = {
   article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
@@ -76,20 +76,23 @@ const Toolbar = ({
   const path = toPath({ page: 'articleDetail', article })
   const sharePath =
     translated && translatedLanguage
-      ? `/${toLocale(translatedLanguage)}${path.href}`
+      ? `${path.href}?locale=${toLocale(translatedLanguage)}`
       : path.href
 
   const dropdonwActionsProps: DropdownActionsControls = {
-    size: 'md-s',
+    size: 'mdS',
     inCard: false,
     sharePath,
     hasExtend: !lock,
+    hasEdit: true,
+    hasArchive: true,
+    hasAddCollection: true,
     ...props,
   }
 
   return (
-    <section className="toolbar" data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
-      <section className="buttons">
+    <section className={styles.toolbar} data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
+      <section className={styles.buttons}>
         <ReCaptchaProvider action="appreciateArticle">
           <AppreciationButton
             article={article}
@@ -104,15 +107,18 @@ const Toolbar = ({
           articleDetail={articleDetails}
         />
 
-        <section className="comment-bar">
-          <CommentBar article={article} disabled={lock} />
+        <section className={styles.commentBar}>
+          <CommentBar
+            article={article}
+            disabled={lock || !article.canComment}
+          />
         </section>
 
-        <BookmarkButton article={article} size="md-s" inCard={false} />
+        <BookmarkButton article={article} size="mdS" inCard={false} />
 
         <Media greaterThan="sm">
           <ShareButton
-            iconSize="md-s"
+            iconSize="mdS"
             inCard={false}
             // title={makeTitle(article.title)}
             path={sharePath}
@@ -120,7 +126,7 @@ const Toolbar = ({
               ?.map(({ content }) => content)
               .join(' ')
               .split(/\s+/)
-              .map(stripAllPunct)}
+              .map(normalizeTag)}
           />
         </Media>
 
@@ -129,14 +135,17 @@ const Toolbar = ({
             article={article}
             {...dropdonwActionsProps}
             hasShare
+            hasBookmark={false}
           />
         </Media>
         <Media greaterThan="sm">
-          <DropdownActions article={article} {...dropdonwActionsProps} />
+          <DropdownActions
+            article={article}
+            {...dropdonwActionsProps}
+            hasBookmark={false}
+          />
         </Media>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

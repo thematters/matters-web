@@ -1,4 +1,6 @@
-import { IconEdit16, Menu, TextIcon, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { IconEdit16, Menu } from '~/components'
 
 interface EditButtonProps {
   openEditCommentDialog: () => void
@@ -6,11 +8,18 @@ interface EditButtonProps {
 
 const EditButton = ({ openEditCommentDialog }: EditButtonProps) => {
   return (
-    <Menu.Item onClick={openEditCommentDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
-        <Translate id="edit" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      text={
+        <FormattedMessage
+          defaultMessage="Edit"
+          id="mikY/9"
+          description="src/components/Comment/DropdownActions/EditButton.tsx"
+        />
+      }
+      icon={<IconEdit16 size="mdS" />}
+      onClick={openEditCommentDialog}
+      ariaHasPopup="dialog"
+    />
   )
 }
 

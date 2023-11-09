@@ -1,15 +1,9 @@
 import gql from 'graphql-tag'
 import _filter from 'lodash/filter'
 import _get from 'lodash/get'
+import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
-import {
-  IconUnPin24,
-  Menu,
-  TextIcon,
-  Translate,
-  useMutation,
-} from '~/components'
+import { IconUnSelected20, Menu, toast, useMutation } from '~/components'
 import {
   SetTagUnselectedButtonArticleFragment,
   SetTagUnselectedMutation,
@@ -101,29 +95,31 @@ const SetTagUnselectedButton = ({
   })
 
   const sync = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate zh_hant="作品已取消精選" zh_hans="作品已取消精选" />
-          ),
-          duration: 2000,
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="This article has been removed from Trending"
+          id="Js/Fij"
+          description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+        />
+      ),
+    })
   }
 
   return (
     <Menu.Item
+      text={
+        <FormattedMessage
+          defaultMessage="Unpin from Trending"
+          id="aa0nss"
+          description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+        />
+      }
+      icon={<IconUnSelected20 size="mdS" />}
       onClick={async () => {
         await update()
       }}
-    >
-      <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
-        <Translate zh_hant="取消精選" zh_hans="取消精选" />
-      </TextIcon>
-    </Menu.Item>
+    />
   )
 }
 

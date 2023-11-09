@@ -1,13 +1,12 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { ERROR_CODES } from '~/common/enums'
 import {
   fromGlobalId,
-  // makeTitle,
-  // stripPunctPrefixSuffix,
-  stripAllPunct,
+  normalizeTag,
   stripSpaces,
   toGlobalId,
   toPath,
@@ -18,17 +17,15 @@ import {
   Expandable,
   Head,
   Layout,
+  SegmentedTabs,
   Spinner,
-  Tabs,
   Throw404,
-  Translate,
   useFeatures,
   usePublicQuery,
   useRoute,
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
-import ShareButton from '~/components/Layout/Header/ShareButton'
 import {
   TagDetailPublicBySearchQuery,
   TagDetailPublicQuery,
@@ -48,7 +45,7 @@ import {
 } from './gql'
 import Owner from './Owner'
 import RelatedTags from './RelatedTags'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const DynamicCommunity = dynamic(() => import('./Community'), {
   ssr: false,
@@ -110,16 +107,12 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   // define permission
   const isOwner = tag?.owner?.id === viewer.id
   const isEditor = (tag?.editors || []).some((t) => t.id === viewer.id)
-  const isMatty = viewer.info.email === 'hi@matters.news'
-  const isMaintainer = isOwner || isEditor || isMatty
-  const isOfficial = !!tag?.isOfficial
-  const canAdd = !isOfficial || (isOfficial && isMatty)
+  const isAdmin = viewer.status?.role === 'admin' // viewer.info.email === 'hi@matters.town'
+  const isMaintainer = isOwner || isEditor || isAdmin // Matty
 
-  const title =
-    // (tag.description ? `${makeTitle(tag.description, 80)} ` : '') +
-    '#' + stripAllPunct(tag.content)
-  const keywords = tag.content.split(/\s+/).filter(Boolean).map(stripAllPunct) // title.includes(tag.content) ??
-  const description = stripSpaces(tag.description) // || stripAllPunct(tag.content)
+  const title = '#' + normalizeTag(tag.content)
+  const keywords = tag.content.split(/\s+/).filter(Boolean).map(normalizeTag)
+  const description = stripSpaces(tag.description)
   const path = toPath({ page: 'tagDetail', tag })
 
   /**
@@ -128,32 +121,31 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   return (
     <Layout.Main aside={<RelatedTags tagId={tag.id} inSidebar />}>
       <Layout.Header
-        left={<Layout.Header.BackButton mode="black-solid" />}
         right={
           <>
             <span />
-
-            <ShareButton
-              title={title}
-              tags={title.endsWith(tag.content) ? undefined : keywords}
-            />
-
-            <DropdownActions
-              isOwner={isOwner}
-              isEditor={isEditor}
-              isMaintainer={isMaintainer}
-              tag={tag}
-            />
+            <section className={styles.buttons}>
+              <Layout.Header.ShareButton
+                title={title}
+                tags={title.endsWith(tag.content) ? undefined : keywords}
+              />
+              <DropdownActions
+                isOwner={isOwner}
+                isEditor={isEditor}
+                isMaintainer={isMaintainer}
+                tag={tag}
+              />
+            </section>
           </>
         }
-        mode="transparent-absolute"
+        mode="transparent"
       />
 
       <Head
-        // title={`#${stripAllPunct(tag.content)}`}
+        // title={`#${normalizeTag(tag.content)}`}
         // description={tag.description}
         title={title}
-        path={path.href}
+        path={qsType ? `${path.href}?type=${qsType}` : path.href}
         description={description}
         keywords={keywords} // add top10 most using author names?
         image={
@@ -163,7 +155,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'ItemList', // should follow with some recent articles under 'itemListElement'
-          name: title, // stripAllPunct(tag.content),
+          name: title,
           description,
           keywords,
           image:
@@ -176,61 +168,69 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
 
       <TagCover tag={tag} />
 
-      <section className="info">
-        {features.tag_adoption && <Owner tag={tag} />}
+      <section className={styles.info}>
+        {features.NOTICE_TAG_ADOPTION && <Owner tag={tag} />}
 
-        <section className="statistics">
-          <Followers tag={tag} />
-          <ArticlesCount tag={tag} />
+        <section className={styles.top}>
+          <section className={styles.statistics}>
+            <Followers tag={tag} />
+            <ArticlesCount tag={tag} />
+          </section>
+
+          <section>
+            <TagDetailButtons.FollowButton tag={tag} />
+          </section>
         </section>
 
         {tag.description && (
           <Expandable
             content={tag.description}
-            color="grey-darker"
+            color="greyDarker"
             spacingTop="base"
-            size="md-s"
+            size="mdS"
           >
             <p>{tag.description}</p>
           </Expandable>
         )}
-
-        <section className="buttons">
-          {canAdd && <TagDetailButtons.AddButton tag={tag} />}
-          <TagDetailButtons.FollowButton tag={tag} />
-        </section>
       </section>
 
-      <Tabs sticky>
-        <Tabs.Tab selected={isHottest} onClick={() => changeFeed('hottest')}>
-          <Translate id="hottest" />
-        </Tabs.Tab>
+      <SegmentedTabs sticky>
+        <SegmentedTabs.Tab
+          selected={isHottest}
+          onClick={() => changeFeed('hottest')}
+        >
+          <FormattedMessage defaultMessage="Trending" id="ll/ufR" />
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab selected={isLatest} onClick={() => changeFeed('latest')}>
-          <Translate id="latest" />
-        </Tabs.Tab>
+        <SegmentedTabs.Tab
+          selected={isLatest}
+          onClick={() => changeFeed('latest')}
+        >
+          <FormattedMessage defaultMessage="Latest" id="adThp5" />
+        </SegmentedTabs.Tab>
 
         {hasSelectedFeed && (
-          <Tabs.Tab
+          <SegmentedTabs.Tab
             selected={isSelected}
             onClick={() => changeFeed('selected')}
           >
-            <Translate zh_hant="精選" zh_hans="精选" en="Featured" />
-          </Tabs.Tab>
+            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+          </SegmentedTabs.Tab>
         )}
 
-        <Tabs.Tab selected={isCreators} onClick={() => changeFeed('creators')}>
-          <Translate zh_hant="創作者" zh_hans="创作者" en="Creators" />
-        </Tabs.Tab>
-      </Tabs>
+        <SegmentedTabs.Tab
+          selected={isCreators}
+          onClick={() => changeFeed('creators')}
+        >
+          <FormattedMessage defaultMessage="Creators" id="TzhzIH" />
+        </SegmentedTabs.Tab>
+      </SegmentedTabs>
 
       {(isHottest || isLatest || isSelected) && (
         <TagDetailArticles tag={tag} feedType={feedType} />
       )}
 
       {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
-
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

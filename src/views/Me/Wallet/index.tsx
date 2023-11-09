@@ -4,16 +4,19 @@ import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
 
 import {
+  PATHS,
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MINIMAL_PAYOUT_AMOUNT,
 } from '~/common/enums'
 import {
-  Form,
+  Button,
   Head,
   Layout,
   Spinner,
+  TableView,
+  TextIcon,
+  Translate,
   ViewerContext,
-  WagmiProvider,
 } from '~/components'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -22,8 +25,7 @@ import { ExchangeRatesQuery, WalletBalanceQuery } from '~/gql/graphql'
 import { FiatCurrencyBalance, LikeCoinBalance, USDTBalance } from './Balance'
 import PaymentPassword from './PaymentPassword'
 import PaymentPointer from './PaymentPointer'
-import styles from './styles.css'
-import TotalAssets from './TotalAssets'
+import styles from './styles.module.css'
 import ViewStripeAccount from './ViewStripeAccount'
 import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 
@@ -67,27 +69,36 @@ const Wallet = () => {
   if (exchangeRateLoading || loading) {
     return (
       <Layout.Main>
-        <Layout.Header
-          left={<Layout.Header.BackButton />}
-          right={<Layout.Header.Title id="myWallet" />}
-        />
+        <Layout.Header left={<Layout.Header.Title id="myWallet" />} />
         <Spinner />
       </Layout.Main>
     )
   }
 
   return (
-    <Layout.Main smBgColor="grey-lighter">
+    <Layout.Main>
       <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="myWallet" />}
+        left={<Layout.Header.Title id="myWallet" />}
+        right={
+          <>
+            <span />
+            <Button
+              spacing={[0, 'tight']}
+              size={[null, '2rem']}
+              bgColor="green"
+              href={PATHS.ME_WALLET_TRANSACTIONS}
+            >
+              <TextIcon color="white" weight="md">
+                <Translate id="paymentTransactions" />
+              </TextIcon>
+            </Button>
+          </>
+        }
       />
 
       <Head title={{ id: 'myWallet' }} />
 
-      <TotalAssets />
-
-      <section className="assetsContainer">
+      <section className={styles.assetsContainer}>
         <FiatCurrencyBalance
           balanceHKD={balanceHKD}
           canPayout={canPayout}
@@ -99,21 +110,25 @@ const Wallet = () => {
           currency={currency}
           exchangeRate={exchangeRateLIKE?.rate || 0}
         />
-        <WagmiProvider>
-          <USDTBalance
-            currency={currency}
-            exchangeRate={exchangeRateUSDT?.rate || 0}
-          />
-        </WagmiProvider>
+        <USDTBalance
+          currency={currency}
+          exchangeRate={exchangeRateUSDT?.rate || 0}
+        />
       </section>
 
-      <Form.List>
-        {hasPaymentPassword && <PaymentPassword />}
-        <ViewStripeCustomerPortal />
-        {hasStripeAccount && <ViewStripeAccount />}
-        <PaymentPointer />
-      </Form.List>
-      <style jsx>{styles}</style>
+      <Layout.Main.Spacing>
+        <TableView spacingX={0}>
+          {hasPaymentPassword && (
+            <>
+              <PaymentPassword />
+              <hr className={styles.dashedLine} />
+            </>
+          )}
+          <ViewStripeCustomerPortal />
+          {hasStripeAccount && <ViewStripeAccount />}
+          <PaymentPointer />
+        </TableView>
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

@@ -5,5 +5,7 @@ export default gql`
     id
     type
     path
+    draft
+    uploadURL
   }
 `

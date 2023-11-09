@@ -11,15 +11,13 @@ const PayoutButton: React.FC<PayoutButtonProps> = ({
   return (
     <PayoutDialog hasStripeAccount={hasStripeAccount}>
       {({ openDialog: openPayoutDialog }) => (
-        <Dialog.Footer.Button
+        <Dialog.RoundedButton
           {...buttonProps}
-          bgColor="grey-lighter"
-          textColor="black"
+          text={<Translate id="paymentPayout" />}
+          color="greyDarker"
           aria-haspopup="dialog"
           onClick={openPayoutDialog}
-        >
-          <Translate id="paymentPayout" />
-        </Dialog.Footer.Button>
+        />
       )}
     </PayoutDialog>
   )

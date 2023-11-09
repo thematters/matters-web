@@ -1,39 +1,38 @@
 import C2C from 'react-copy-to-clipboard'
+import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST } from '~/common/enums'
-import { Translate } from '~/components'
+import { toast } from '~/components'
 
 interface CopyToClipboardProps {
   text: string
+  successMessage?: React.ReactNode
 }
 
 export const CopyToClipboard: React.FC<
   React.PropsWithChildren<CopyToClipboardProps>
-> = ({ text, children }) => {
+> = ({ text, successMessage, children }) => {
   return (
     <C2C
       text={text}
       onCopy={(_, copied) => {
         if (!copied) {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: <Translate id="failureCopy" />,
-              },
-            })
-          )
+          toast.error({
+            message: (
+              <FormattedMessage
+                defaultMessage="Failed to copy, please try again."
+                id="JRkgKV"
+              />
+            ),
+          })
+
           return
         }
 
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: <Translate id="successCopy" />,
-            },
-          })
-        )
+        toast.success({
+          message: successMessage || (
+            <FormattedMessage defaultMessage="Copied successful" id="SYyBFF" />
+          ),
+        })
       }}
     >
       {children}

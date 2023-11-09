@@ -1,0 +1,29 @@
+.assetsContainer {
+  margin-top: var(--spacing-base);
+  margin-bottom: var(--spacing-base);
+  background: white;
+
+  @media (--sm-up) {
+    margin-bottom: var(--spacing-loose);
+  }
+
+  & :global(.assetsItem + .assetsItem),
+  & :global(.fresnel-container + .assetsItem) {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      width: calc(100% - var(--spacing-base) * 2);
+      content: '';
+      border-top: 1px dashed var(--color-grey-light);
+      @media (--sm-up) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.dashedLine {
+  border-top: 1px dashed var(--color-grey-light);
+}

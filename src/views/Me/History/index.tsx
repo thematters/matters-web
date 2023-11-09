@@ -1,18 +1,28 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
-  ArticleDigestFeed,
-  EmptyHistory,
+  ArticleDigestList,
+  Button,
+  EmptyArticle,
   Head,
+  HorizontalRule,
   InfiniteScroll,
   Layout,
   List,
   QueryError,
   Spinner,
+  TextIcon,
+  Translate,
+  useMutation,
 } from '~/components'
-import { MeHistoryFeedQuery } from '~/gql/graphql'
+import { ClearReadHistoryMutation, MeHistoryFeedQuery } from '~/gql/graphql'
+
+import HistoryTabs from './HistoryTabs'
+import styles from './styles.module.css'
 
 const ME_HISTORY_FEED = gql`
   query MeHistoryFeed($after: String) {
@@ -29,8 +39,7 @@ const ME_HISTORY_FEED = gql`
             cursor
             node {
               article {
-                ...ArticleDigestFeedArticlePublic
-                ...ArticleDigestFeedArticlePrivate
+                ...ArticleDigestListArticle
               }
             }
           }
@@ -38,27 +47,65 @@ const ME_HISTORY_FEED = gql`
       }
     }
   }
-  ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
+  ${ArticleDigestList.fragments.article}
+`
+
+const CLEAR_READ_HISTORY = gql`
+  mutation ClearReadHistory {
+    clearReadHistory(input: {}) {
+      activity {
+        history(input: { first: 10 }) {
+          totalCount
+        }
+      }
+    }
+  }
 `
 
 const BaseMeHistory = () => {
+  const intl = useIntl()
   const { data, loading, error, fetchMore } =
     useQuery<MeHistoryFeedQuery>(ME_HISTORY_FEED)
 
+  const [emptyHistory, setEmptyHistory] = useState(false)
+
+  const [clear] = useMutation<ClearReadHistoryMutation>(CLEAR_READ_HISTORY, {
+    update: () => setEmptyHistory(true),
+  })
+
+  const handlerClear = async () => {
+    await clear()
+  }
+
   if (loading) {
-    return <Spinner />
+    return (
+      <>
+        <Spinner />
+      </>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <>
+        <QueryError error={error} />
+      </>
+    )
   }
 
   const connectionPath = 'viewer.activity.history'
   const { edges, pageInfo } = data?.viewer?.activity.history || {}
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyHistory />
+  if (!edges || edges.length <= 0 || !pageInfo || emptyHistory) {
+    return (
+      <EmptyArticle
+        description={intl.formatMessage({
+          defaultMessage: 'No data yet',
+          id: '1Z1M77',
+          description: 'src/views/Me/History/index.tsx',
+        })}
+      />
+    )
   }
 
   const loadMore = () => {
@@ -78,47 +125,79 @@ const BaseMeHistory = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List>
-        {edges.map(({ node, cursor }, i) => (
-          <List.Item key={cursor}>
-            <ArticleDigestFeed
-              article={node.article}
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: 'read_history',
-                  contentType: 'article',
-                  location: i,
-                  id: node.article.id,
-                })
-              }
-              onClickAuthor={() => {
-                analytics.trackEvent('click_feed', {
-                  type: 'read_history',
-                  contentType: 'user',
-                  location: i,
-                  id: node.article.author.id,
-                })
-              }}
-            />
-          </List.Item>
-        ))}
-      </List>
-    </InfiniteScroll>
+    <>
+      <section className={styles.clear}>
+        <Button
+          textColor="greyDarker"
+          textActiveColor="black"
+          onClick={handlerClear}
+        >
+          <TextIcon size="sm">
+            <Translate id="clear" />
+          </TextIcon>
+        </Button>
+      </section>
+
+      <HorizontalRule />
+
+      <Layout.Main.Spacing hasVertical={false}>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          eof
+        >
+          <List>
+            {edges.map(({ node, cursor }, i) => (
+              <List.Item key={cursor}>
+                <ArticleDigestList
+                  article={node.article}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'read_history',
+                      contentType: 'article',
+                      location: i,
+
+                      id: node.article.id,
+                    })
+                  }
+                  onClickAuthor={() => {
+                    analytics.trackEvent('click_feed', {
+                      type: 'read_history',
+                      contentType: 'user',
+                      location: i,
+                      id: node.article.author.id,
+                    })
+                  }}
+                />
+              </List.Item>
+            ))}
+          </List>
+        </InfiniteScroll>
+      </Layout.Main.Spacing>
+    </>
   )
 }
 
-const MeHistory = () => (
-  <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="readHistory" />}
-    />
+const MeHistory = () => {
+  const intl = useIntl()
+  const title = intl.formatMessage({
+    defaultMessage: 'History',
+    id: 'djJp6c',
+  })
 
-    <Head title={{ id: 'readHistory' }} />
+  return (
+    <Layout.Main>
+      <Layout.Header
+        left={<Layout.Header.Title>{title}</Layout.Header.Title>}
+      />
 
-    <BaseMeHistory />
-  </Layout.Main>
-)
+      <Head title={title} />
+
+      <HistoryTabs />
+
+      <BaseMeHistory />
+    </Layout.Main>
+  )
+}
 
 export default MeHistory

@@ -9,8 +9,7 @@ import NoticeActorName from '../NoticeActorName'
 import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
-import styles from '../styles.css'
+import NoticeDigest from '../NoticeDigest'
 
 const ArticleNewCollectedNotice = ({
   notice,
@@ -21,35 +20,20 @@ const ArticleNewCollectedNotice = ({
     return null
   }
 
-  const actor = notice.actors[0]
-
   return (
-    <section
-      className="container"
-      data-test-id={TEST_ID.NOTICE_ARTICLE_NEW_COLLECTED}
-    >
-      <section className="avatar-wrap">
-        <NoticeActorAvatar user={actor} />
-      </section>
-
-      <section className="content-wrap">
-        <NoticeHead>
-          <NoticeActorName user={actor} />
-          <FormattedMessage
-            defaultMessage=" replied to "
-            description="src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
-          />
-
-          <NoticeArticleTitle article={notice.article} />
-        </NoticeHead>
-
-        <NoticeArticleCard article={notice.collection} />
-
-        <NoticeDate notice={notice} />
-      </section>
-
-      <style jsx>{styles}</style>
-    </section>
+    <NoticeDigest
+      notice={notice}
+      action={
+        <FormattedMessage
+          defaultMessage="connected"
+          id="YlPCRU"
+          description="src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
+        />
+      }
+      title={<NoticeArticleTitle article={notice.article} />}
+      content={<NoticeArticleCard article={notice.collection} />}
+      testId={TEST_ID.NOTICE_ARTICLE_NEW_COLLECTED}
+    />
   )
 }
 

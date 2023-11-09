@@ -1,11 +1,12 @@
 import classNames from 'classnames'
+import { FormattedMessage } from 'react-intl'
 
 import { TextId } from '~/common/enums'
-import { toLocale } from '~/common/utils'
-import { Dialog, ShareButtons, Translate } from '~/components'
+import { Dialog, Translate } from '~/components'
 
+import { ShareButtons } from './Buttons'
 import Copy from './Copy'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export interface ShareDialogContentProps {
   closeDialog: () => void
@@ -16,7 +17,8 @@ export interface ShareDialogContentProps {
 
   headerTitle?: TextId | React.ReactNode
   description?: React.ReactNode
-  footerButtons?: React.ReactNode
+  btns?: React.ReactNode
+  smUpBtns?: React.ReactNode
 }
 
 const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
@@ -28,12 +30,11 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
 
   headerTitle,
   description,
-  footerButtons,
+  btns,
+  smUpBtns,
 }) => {
   const url = new URL(shareLink)
-  const pathnames = url.pathname.split('/')
-  const showTranslation = toLocale(pathnames[1]) !== ''
-  if (showTranslation) {
+  if (url.searchParams.get('locale')) {
     description = (
       <Translate
         zh_hant="分享這篇文章的翻譯版本"
@@ -43,41 +44,23 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
     )
   }
   const containerClasses = classNames({
-    'socials-container': true,
+    [styles.socialsContainer]: true,
   })
   return (
     <>
       {headerTitle ? (
-        <Dialog.Header
-          title={headerTitle}
-          closeDialog={closeDialog}
-          closeTextId="close"
-          mode="inner"
-        />
+        <Dialog.Header title={headerTitle} />
       ) : (
-        <Dialog.Header
-          title={'share'}
-          closeDialog={closeDialog}
-          leftButton={
-            <Dialog.Header.CloseButton
-              closeDialog={closeDialog}
-              textId="close"
-            />
-          }
-        />
+        <Dialog.Header title="share" />
       )}
 
-      <Dialog.Content>
+      <Dialog.Content noSpacing smExtraSpacing={false}>
         {description && (
-          <section className="description">
-            {description}
-
-            <style jsx>{styles}</style>
-          </section>
+          <section className={styles.description}>{description}</section>
         )}
 
         <section className={containerClasses}>
-          <section className="left">
+          <section className={styles.left}>
             <ShareButtons.LINE title={shareTitle} link={shareLink} />
             <ShareButtons.WhatsApp title={shareTitle} link={shareLink} />
             <ShareButtons.Telegram title={shareTitle} link={shareLink} />
@@ -85,7 +68,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
             <Copy link={shareLink} />
           </section>
 
-          <section className="right">
+          <section className={styles.right}>
             <ShareButtons.Twitter
               title={shareTitle}
               link={shareLink}
@@ -95,12 +78,29 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
             <ShareButtons.Weibo title={shareTitle} link={shareLink} />
             <ShareButtons.Email title={shareTitle} link={shareLink} />
           </section>
-
-          <style jsx>{styles}</style>
         </section>
       </Dialog.Content>
 
-      {footerButtons && <Dialog.Footer>{footerButtons}</Dialog.Footer>}
+      {btns || smUpBtns ? (
+        <Dialog.Footer btns={btns} smUpBtns={smUpBtns} />
+      ) : (
+        <Dialog.Footer
+          btns={
+            <Dialog.RoundedButton
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+          }
+        />
+      )}
     </>
   )
 }

@@ -6,10 +6,9 @@ import { CircleInvitationNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorName from '../NoticeActorName'
 import NoticeCircleCard from '../NoticeCircleCard'
+import NoticeCircleName from '../NoticeCircleName'
 import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
-import NoticeTypeIcon from '../NoticeTypeIcon'
-import styles from '../styles.css'
+import NoticeDigest from '../NoticeDigest'
 
 const CircleInvitationNotice = ({
   notice,
@@ -21,37 +20,23 @@ const CircleInvitationNotice = ({
   }
 
   const circle = notice.circle
-  const actor = notice.actors[0]
 
   return (
-    <section className="container" data-test-id={TEST_ID.CIRCLE_INVITATION}>
-      <section className="avatar-wrap">
-        <NoticeTypeIcon type="circle" />
-      </section>
-
-      <section className="content-wrap">
-        <NoticeHead>
-          <FormattedMessage
-            defaultMessage="Congrats!"
-            description="src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-          />
-          <NoticeActorName user={actor} />
-          <FormattedMessage
-            defaultMessage="invites you to join Circle for"
-            description="src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-          />
-          {circle?.invitedBy?.freePeriod}
-          <FormattedMessage
-            defaultMessage="days for free. Try it and have fun!"
-            description="src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
-          />
-        </NoticeHead>
-
-        <NoticeCircleCard circle={circle} />
-        <NoticeDate notice={notice} />
-      </section>
-      <style jsx>{styles}</style>
-    </section>
+    <NoticeDigest
+      notice={notice}
+      action={
+        <FormattedMessage
+          defaultMessage="invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free"
+          id="ItUuuX"
+          description="src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
+          values={{
+            circleName: <NoticeCircleName circle={notice.circle} />,
+            freePeriod: circle?.invitedBy?.freePeriod,
+          }}
+        />
+      }
+      testId={TEST_ID.NOTICE_CIRCLE_INVITATION}
+    />
   )
 }
 

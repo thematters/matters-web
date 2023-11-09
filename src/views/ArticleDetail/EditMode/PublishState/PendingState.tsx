@@ -1,42 +1,52 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useEffect } from 'react'
 
-import { Toast, Translate } from '~/components'
-import { EditModeArticleDraftsQuery, EditModeArticleQuery } from '~/gql/graphql'
+import { Layout, Translate } from '~/components'
+import { EditModeArticleNewestPublishDraftQuery } from '~/gql/graphql'
 
-import EDIT_MODE_ARTICLE_DRAFTS from './gql'
+import EDIT_MODE_ARTICLE_NEWEST_PUBLISH_DRAFT from './gql'
 
 const PendingState = ({
-  draft,
+  articleMediaHash,
+  updatePublishState,
   id,
 }: {
-  draft: NonNullable<
-    NonNullable<
-      EditModeArticleQuery['article'] & { __typename: 'Article' }
-    >['drafts']
-  >[0]
+  articleMediaHash: string
+  updatePublishState: (mediaHash: string) => void
   id: string
 }) => {
-  const { startPolling, stopPolling } = useQuery<EditModeArticleDraftsQuery>(
-    EDIT_MODE_ARTICLE_DRAFTS,
-    {
-      variables: { id },
-      errorPolicy: 'none',
-      fetchPolicy: 'network-only',
-      skip: typeof window === 'undefined',
-    }
-  )
+  const { data, startPolling, stopPolling, refetch } =
+    useQuery<EditModeArticleNewestPublishDraftQuery>(
+      EDIT_MODE_ARTICLE_NEWEST_PUBLISH_DRAFT,
+      {
+        variables: { id },
+        errorPolicy: 'none',
+        fetchPolicy: 'network-only',
+        skip: typeof window === 'undefined',
+      }
+    )
 
   useEffect(() => {
     startPolling(1000 * 2)
+
+    refetch && refetch()
 
     return () => {
       stopPolling()
     }
   }, [])
 
+  if (
+    data?.article?.__typename === 'Article' &&
+    data.article.newestPublishedDraft.publishState === 'published' &&
+    data.article.newestPublishedDraft.mediaHash !== articleMediaHash
+  ) {
+    stopPolling()
+    updatePublishState(data.article.newestPublishedDraft.mediaHash || '')
+  }
+
   return (
-    <Toast.Instance
+    <Layout.Notice
       color="green"
       content={<Translate id="publishing" />}
       subDescription={

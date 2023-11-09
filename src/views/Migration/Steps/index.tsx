@@ -15,7 +15,8 @@ import {
   ViewerContext,
 } from '~/components'
 
-import styles from './styles.css'
+import layoutStyles from '../../About/layout.module.css'
+import styles from './styles.module.css'
 
 const texts: {
   zh_hant: Record<string, string>
@@ -84,17 +85,17 @@ const Step = ({
   const contentId2 = `content_${step}_2`
 
   return (
-    <section className="step">
+    <section className={styles.step}>
       <img src={src} alt="illustration" />
-      <p className="title">
-        <span className="number">{step}.</span>
+      <p className={styles.title}>
+        <span className={styles.number}>{step}.</span>
         <Translate
           zh_hant={zh_hant[titleId]}
           zh_hans={zh_hans[titleId]}
           en={en[titleId]}
         />
       </p>
-      <p className="content">
+      <p className={styles.content}>
         <Translate
           zh_hant={zh_hant[contentId1]}
           zh_hans={zh_hans[contentId1]}
@@ -108,7 +109,6 @@ const Step = ({
         />
       </p>
       {children}
-      <style jsx>{styles}</style>
     </section>
   )
 }
@@ -123,32 +123,30 @@ const Steps = () => {
   }
 
   return (
-    <section id="steps" className="steps">
-      <div className="l-container">
-        <div className="l-row">
-          <div className="l-col-full">
-            <h2>
-              <Translate
-                zh_hant={zh_hant.header}
-                zh_hans={zh_hans.header}
-                en={en.header}
-              />
-            </h2>
-          </div>
+    <section id="steps" className={styles.steps}>
+      <div className={layoutStyles.container}>
+        <div className={layoutStyles.content}>
+          <h2 className={layoutStyles.columnFull}>
+            <Translate
+              zh_hant={zh_hant.header}
+              zh_hans={zh_hans.header}
+              en={en.header}
+            />
+          </h2>
         </div>
       </div>
 
-      <div className="l-container">
-        <div className="l-row">
+      <div className={layoutStyles.container}>
+        <div className={layoutStyles.content}>
           <Step src={IMAGE_STEP_1} step={1}>
             {viewer.isAuthed ? (
-              <section className="avatar">
+              <section className={styles.avatar}>
                 <Avatar
                   size="lg"
                   user={viewer.isInactive ? undefined : viewer}
                 />
-                <section className="info">
-                  <span className="username">{viewer.displayName}</span>
+                <section className={styles.info}>
+                  <span className={styles.username}>{viewer.displayName}</span>
                 </section>
               </section>
             ) : (
@@ -158,15 +156,16 @@ const Steps = () => {
                   iconSize="md"
                   size={['7rem', '2.5rem']}
                   spacing={[0, 0]}
+                  resideIn="migration"
                 />
-                <p className="sub-content">
+                <p className={styles.subContent}>
                   <Translate
                     zh_hant={zh_hant.sub_content_1_1}
                     zh_hans={zh_hans.sub_content_1_1}
                     en={en.sub_content_1_1}
                   />
                 </p>
-                <section className="sub-content-link">
+                <section className={styles.subContentLink}>
                   <SignUpButton isPlain>
                     <Translate
                       zh_hant={zh_hant.sub_content_1_2}
@@ -183,7 +182,7 @@ const Steps = () => {
             <Button
               aria-haspopup="false"
               borderColor="green"
-              htmlHref="https://medium.com/me/export"
+              htmlHref="https://medium.com/me/settings/security"
               htmlTarget="_blank"
               rel="noopener"
               {...buttonProps}
@@ -221,8 +220,6 @@ const Steps = () => {
           </Step>
         </div>
       </div>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -41,6 +41,7 @@ export class ArticleDetailPage {
   readonly toolbarViewSupportersButton: Locator
   readonly toolbarIPFSButton: Locator
   readonly toolbarCollectButton: Locator
+  readonly toolbarEditButton: Locator
 
   // dialog
   readonly dialog: Locator
@@ -99,10 +100,11 @@ export class ArticleDetailPage {
     this.toolbarCollectButton = this.page.getByRole('menuitem', {
       name: 'Collect Article',
     })
+    this.toolbarEditButton = this.page.getByRole('link', { name: 'Edit' })
 
     // dialog
     this.dialog = this.page.getByRole('dialog')
-    this.dialogCommentInput = this.dialog.locator('.ql-editor')
+    this.dialogCommentInput = this.dialog.locator('.tiptap')
   }
 
   async getTitle() {
@@ -143,7 +145,7 @@ export class ArticleDetailPage {
     return (
       {
         'NO RIGHTS RESERVED': 'CC0 License',
-        'CC BY-NC-ND 2.0': 'CC BY-NC-ND 2.0 License',
+        'CC BY-NC-ND 4.0': 'CC BY-NC-ND 4.0 License',
         'ALL RIGHTS RESERVED': 'All Rights Reserved',
       }[licenseText] || ''
     )
@@ -186,6 +188,11 @@ export class ArticleDetailPage {
     await this.toolbarCollectButton.click()
   }
 
+  async editArticle() {
+    await this.toolbarMoreButton.click()
+    await this.toolbarEditButton.click()
+  }
+
   async supportHKD(password: string, amount: number) {
     // Open support dialog
     await this.supportButton.click()
@@ -204,14 +211,20 @@ export class ArticleDetailPage {
     await this.dialog.locator('#field-checkout').click() // activate form to fillable
     await this.dialog
       .frameLocator('iframe')
+      .first()
       .getByPlaceholder('Card number')
       .fill('4242424242424242')
     const YY = new Date(Date.now()).getFullYear() - 2000 + 1
     await this.dialog
       .frameLocator('iframe')
+      .first()
       .getByPlaceholder('MM / YY')
       .fill(`12${YY}`)
-    await this.dialog.frameLocator('iframe').getByPlaceholder('CVC').fill('123')
+    await this.dialog
+      .frameLocator('iframe')
+      .first()
+      .getByPlaceholder('CVC')
+      .fill('123')
     await this.dialog.getByRole('button', { name: 'Confirm' }).click()
     await this.dialog.getByRole('button', { name: 'Back to support' }).click()
 
@@ -221,9 +234,17 @@ export class ArticleDetailPage {
       .fill(amount.toString())
 
     // click next step
-    await this.dialog.getByRole('button', { name: 'Next' }).click()
+    await this.dialog.getByRole('button', { name: 'Next Step' }).click()
 
-    // fill payment password
+    // fill incorrect payment password
+    await this.dialog.locator('#field-password-1').fill(password[0])
+    await this.dialog.locator('#field-password-2').fill(password[0])
+    await this.dialog.locator('#field-password-3').fill(password[0])
+    await this.dialog.locator('#field-password-4').fill(password[0])
+    await this.dialog.locator('#field-password-5').fill(password[0])
+    await this.dialog.locator('#field-password-6').fill(password[0])
+
+    // fill correct payment password
     await this.dialog.locator('#field-password-1').fill(password[0])
     await this.dialog.locator('#field-password-2').fill(password[1])
     await this.dialog.locator('#field-password-3').fill(password[2])

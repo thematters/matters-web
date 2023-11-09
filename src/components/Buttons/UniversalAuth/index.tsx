@@ -1,76 +1,47 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
-  CLOSE_ACTIVE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
+  UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { analytics, appendTarget } from '~/common/utils'
-import { Button, ButtonProps, Media, TextIcon, Translate } from '~/components'
+import { analytics } from '~/common/utils'
+import { Button, TextIcon } from '~/components'
 
-type UniversalAuthButtonProps = {
-  isPlain?: boolean
-} & Pick<ButtonProps, 'size'>
+type UniversalAuthButtonProps = { resideIn?: 'nav' | 'sideNav' }
 
-export const UniversalAuthButton: React.FC<
-  React.PropsWithChildren<UniversalAuthButtonProps>
-> = ({ children, isPlain, size }) => {
-  const smUpProps = {
+export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
+  resideIn,
+}) => {
+  const props = {
     onClick: () => {
       analytics.trackEvent('click_button', {
         type: 'login/signup',
       })
-      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+
+      // deprecated
+      // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          ...(resideIn
+            ? { detail: { trigger: UNIVERSAL_AUTH_TRIGGER[resideIn] } }
+            : {}),
+        })
+      )
     },
   }
-  const smProps = {
-    ...appendTarget(PATHS.SIGNUP, true),
-    onClick: () => {
-      analytics.trackEvent('click_button', {
-        type: 'login/signup',
-      })
-    },
-  }
-
-  if (isPlain) {
-    return (
-      <>
-        <Media at="sm">
-          <Button {...smProps}>{children}</Button>
-        </Media>
-        <Media greaterThan="sm">
-          <Button aria-haspopup="dialog" {...smUpProps}>
-            {children}
-          </Button>
-        </Media>
-      </>
-    )
-  }
-
-  const buttonProps: ButtonProps = {
-    bgColor: 'green',
-    size: size || [null, '2rem'],
-    spacing: [0, 'loose'],
-  }
-  const ButtonText = () => (
-    <TextIcon color="white" weight="md">
-      <Translate id="authEntries" />
-    </TextIcon>
-  )
 
   return (
     <>
-      <Media at="sm">
-        <Button {...buttonProps} {...smProps}>
-          <ButtonText />
-        </Button>
-      </Media>
-      <Media greaterThan="sm">
-        <Button aria-haspopup="dialog" {...buttonProps} {...smUpProps}>
-          <ButtonText />
-        </Button>
-      </Media>
+      <Button bgColor="green" spacing={['tight', 'base']} {...props}>
+        <TextIcon color="white" weight="md">
+          <FormattedMessage
+            defaultMessage="Enter"
+            description="src/components/Buttons/UniversalAuth/index.tsx"
+            id="qVhxp5"
+          />
+        </TextIcon>
+      </Button>
     </>
   )
 }

@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -12,15 +13,14 @@ import {
   InfiniteScroll,
   Layout,
   List,
+  SegmentedTabs,
   Spinner,
-  Tabs,
   Transaction,
-  Translate,
 } from '~/components'
 import { MeTransactionsQuery } from '~/gql/graphql'
 
 import { Currency, CurrencySwitch } from './CurrencySwitch'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 const ME_TRANSACTIONS = gql`
   query MeTransactions(
@@ -129,7 +129,7 @@ const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
@@ -137,7 +137,6 @@ const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
           </List.Item>
         ))}
       </List>
-      <style jsx>{styles}</style>
     </InfiniteScroll>
   )
 }
@@ -150,19 +149,24 @@ const Transactions = () => {
   const isDonaion = purpose === Purpose.DONATION
   const isSubscription = purpose === Purpose.SUBSCRIPTION
 
+  const intl = useIntl()
+  const title = intl.formatMessage({
+    defaultMessage: 'Transactions',
+    id: '/jJLYy',
+  })
+
   return (
     <Layout.Main>
       <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="paymentTransactions" />}
+        right={<Layout.Header.Title>{title}</Layout.Header.Title>}
       />
 
-      <Head title={{ id: 'paymentTransactions' }} />
+      <Head title={title} />
 
-      <Tabs
+      <SegmentedTabs
         sticky
         side={
-          <section className="CurrencySwitch">
+          <section className={styles.currencySwitch}>
             <CurrencySwitch
               currency={currency}
               setCurrency={(c) => setCurrency(c)}
@@ -170,25 +174,43 @@ const Transactions = () => {
           </section>
         }
       >
-        <Tabs.Tab selected={isALL} onClick={() => setPurpose(Purpose.ALL)}>
-          <Translate zh_hans="全部" zh_hant="全部" en="All" />
-        </Tabs.Tab>
+        <SegmentedTabs.Tab
+          selected={isALL}
+          onClick={() => setPurpose(Purpose.ALL)}
+        >
+          <FormattedMessage
+            defaultMessage="All"
+            id="6aE6hr"
+            description="src/views/Me/Transactions/index.tsx"
+          />
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab
+        <SegmentedTabs.Tab
           selected={isDonaion}
           onClick={() => setPurpose(Purpose.DONATION)}
         >
-          <Translate zh_hans="支持" zh_hant="支持" en="Supports" />
-        </Tabs.Tab>
+          <FormattedMessage
+            defaultMessage="Supports"
+            id="NCBtyI"
+            description="src/views/Me/Transactions/index.tsx"
+          />
+        </SegmentedTabs.Tab>
 
-        <Tabs.Tab
+        <SegmentedTabs.Tab
           selected={isSubscription}
           onClick={() => setPurpose(Purpose.SUBSCRIPTION)}
         >
-          <Translate id="subscriptions" />
-        </Tabs.Tab>
-      </Tabs>
-      <BaseTransactions currency={currency} purpose={purpose} />
+          <FormattedMessage
+            defaultMessage="Subscriptions"
+            id="T73SwS"
+            description="src/views/Me/Transactions/index.tsx"
+          />
+        </SegmentedTabs.Tab>
+      </SegmentedTabs>
+
+      <Layout.Main.Spacing hasVertical={false}>
+        <BaseTransactions currency={currency} purpose={purpose} />
+      </Layout.Main.Spacing>
     </Layout.Main>
   )
 }

@@ -1,0 +1,7 @@
+.counts {
+  @mixin inline-flex-center-all;
+
+  & > * + * {
+    padding-left: var(--spacing-base);
+  }
+}

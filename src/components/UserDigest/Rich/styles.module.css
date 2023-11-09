@@ -1,0 +1,92 @@
+.container {
+  @mixin flex-center-start;
+
+  position: relative;
+}
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  margin-right: var(--spacing-x-tight);
+
+  & .badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-flex;
+  }
+}
+
+.content {
+  overflow: hidden;
+
+  &.hasExtraButton {
+    padding-right: 5rem; /* width of extra button */
+  }
+}
+
+.header {
+  @mixin flex-center-start;
+
+  & > * + * {
+    margin-left: var(--spacing-xx-tight);
+  }
+}
+
+.name {
+  @mixin line-clamp;
+  @mixin fix-cropped-letters;
+
+  font-weight: var(--font-weight-medium);
+  color: var(--color-black);
+}
+
+.subtitle {
+  @mixin line-clamp;
+
+  font-size: var(--font-size-sm-s);
+  color: var(--color-grey-dark);
+}
+
+.extraButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.sizeSm {
+  & .content:not(.archived) {
+    height: 2rem;
+  }
+
+  & .name,
+  & .subtitle {
+    line-height: 1rem; /* 16px, half of the avatar height */
+  }
+
+  & .name {
+    font-size: var(--font-size-sm);
+  }
+
+  & .extraButton {
+    align-items: middle;
+  }
+}
+
+.sizeLg {
+  & .content:not(.archived) {
+    height: 3rem;
+  }
+
+  & .name,
+  & .subtitle {
+    line-height: 1.5rem; /* 24px, half of the avatar height */
+  }
+
+  & .name {
+    font-size: var(--font-size-md-s);
+  }
+}

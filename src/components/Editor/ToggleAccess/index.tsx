@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { translate } from '~/common/utils'
 import {
@@ -8,6 +9,7 @@ import {
   LanguageContext,
   Switch,
   Translate,
+  ViewerContext,
 } from '~/components'
 import {
   ArticleAccessType,
@@ -18,7 +20,7 @@ import {
 } from '~/gql/graphql'
 
 import SelectLicense from './SelectLicense'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type ToggleAccessProps = {
   circle?: DigestRichCirclePublicFragment | null
@@ -43,6 +45,10 @@ export type ToggleAccessProps = {
   supportSettingSaving: boolean
   onOpenSupportSetting: () => void
 
+  contentSensitive?: boolean | null
+  toggleContentSensitive: (contentSensitive: boolean) => void
+  contentSensitiveSaving: boolean
+
   iscnPublish?: boolean | null
   togglePublishISCN: (iscnPublish: boolean) => void
   iscnPublishSaving: boolean
@@ -62,6 +68,10 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
   article,
   onOpenSupportSetting,
 
+  contentSensitive,
+  toggleContentSensitive,
+  contentSensitiveSaving,
+
   iscnPublish,
   togglePublishISCN,
   iscnPublishSaving,
@@ -70,14 +80,16 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
   const content = draft ? draft : article
+  const viewer = useContext(ViewerContext)
+  const likerId = viewer.liker.likerId
 
   return (
-    <section className={inSidebar ? 'inSidebar' : ''}>
+    <section className={inSidebar ? styles.inSidebar : ''}>
       {canToggleCircle && (
-        <section className="circle">
-          <section className="switch">
-            <header>
-              <h3>
+        <section className={styles.circle}>
+          <section className={styles.switch}>
+            <header className={styles.header}>
+              <h3 className={styles.title}>
                 <Translate id="addToCircle" />
               </h3>
 
@@ -90,7 +102,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
                     !circle,
                     false,
                     circle && license === ArticleLicenseType.Arr
-                      ? ArticleLicenseType.CcByNcNd_2
+                      ? ArticleLicenseType.CcByNcNd_4
                       : license
                   )
                 }
@@ -103,10 +115,10 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           {circle && (
             <CircleDigest.Rich
               circle={circle}
-              bgColor="grey-lighter"
+              bgColor="greyLighter"
               borderRadius="xtight"
               avatarSize="xl"
-              textSize="md-s"
+              textSize="mdS"
               hasOwner={false}
               hasDescription={false}
               disabled
@@ -115,12 +127,12 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         </section>
       )}
 
-      <section className="widget">
-        <h3>
+      <section className={styles.license}>
+        <h3 className={styles.title}>
           <Translate id="license" />
         </h3>
 
-        <section className="license">
+        <section className={styles.select}>
           <SelectLicense
             isInCircle={!!circle}
             license={license}
@@ -135,17 +147,18 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         </section>
       </section>
 
-      <section className="support-setting">
+      <section className={styles.supportSetting}>
         <button type="button" onClick={onOpenSupportSetting}>
-          <section className="support">
-            <section className="left">
-              <h3>
+          <section className={styles.support}>
+            <section className={styles.left}>
+              <h3 className={styles.title}>
                 <Translate
                   zh_hans="设定支持"
                   zh_hant="設定支持"
                   en="Support Setting"
                 />
               </h3>
+
               {content &&
               (content.replyToDonator || content.requestForDonation) ? (
                 <IconChecked32 size="md" />
@@ -153,7 +166,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
                 <IconArrowRight16 />
               )}
             </section>
-            <p className="hint">
+
+            <p className={styles.hint}>
               <Translate
                 zh_hans="可自订号召支持的内容，以及收到支持后的感谢文字"
                 zh_hant="可自訂號召支持的內容，以及收到支持後的感謝文字"
@@ -164,33 +178,63 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         </button>
       </section>
 
-      <section className="iscn">
-        <header>
-          <h3 className="title">
-            <Translate id="publishToISCN" />
+      <section className={styles.sensitive}>
+        <header className={styles.header}>
+          <h3 className={styles.title}>
+            <Translate id="restrictedContent" />
           </h3>
 
           <Switch
-            name="iscn"
-            label={translate({ id: 'publishToISCN', lang })}
-            checked={!!iscnPublish}
+            name="sensitive"
+            label={translate({ id: 'restrictedContent', lang })}
+            checked={!!contentSensitive}
             onChange={() => {
-              togglePublishISCN(!iscnPublish)
+              toggleContentSensitive(!contentSensitive)
             }}
-            loading={iscnPublishSaving}
+            loading={contentSensitiveSaving}
           />
         </header>
 
-        <p className="hint">
-          <Translate id="publishToISCNHint_1" />
-          <a href="https://iscn.io/" target="_blank" rel="noreferrer">
-            ISCN
-          </a>
-          <Translate id="publishToISCNHint_2" />
+        <p className={styles.hint}>
+          <FormattedMessage
+            defaultMessage="Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)"
+            id="Vn5KLr"
+            description="src/components/Editor/ToggleAccess/index.tsx"
+          />
         </p>
       </section>
 
-      <style jsx>{styles}</style>
+      {likerId && (
+        <section className={styles.iscn}>
+          <header className={styles.header}>
+            <h3 className={styles.title}>
+              <Translate id="publishToISCN" />
+            </h3>
+
+            <Switch
+              name="iscn"
+              label={translate({ id: 'publishToISCN', lang })}
+              checked={!!iscnPublish}
+              onChange={() => {
+                togglePublishISCN(!iscnPublish)
+              }}
+              loading={iscnPublishSaving}
+            />
+          </header>
+
+          <p className={styles.hint}>
+            <Translate id="publishToISCNHint_1" />
+            <a
+              href="https://docs.like.co/v/zh/general-guides/writing-nft/nft-portal#publish-writing-nft-with-iscn-id"
+              target="_blank"
+              rel="noreferrer"
+            >
+              ISCN
+            </a>
+            <Translate id="publishToISCNHint_2" />
+          </p>
+        </section>
+      )}
     </section>
   )
 }

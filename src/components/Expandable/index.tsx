@@ -1,9 +1,8 @@
-import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
 import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import TextTruncate from 'react-text-truncate'
 
-import { stripHtml } from '~/common/utils/text'
+import { capitalizeFirstLetter, collapseContent } from '~/common/utils'
 import {
   Button,
   IconArrowDown16,
@@ -12,14 +11,14 @@ import {
   Translate,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CollapseTextColor =
   | 'black'
   | 'grey'
-  | 'grey-light'
-  | 'grey-darker'
-  | 'grey-dark'
+  | 'greyLight'
+  | 'greyDarker'
+  | 'greyDark'
   | 'white'
 
 interface ExpandableProps {
@@ -28,12 +27,12 @@ interface ExpandableProps {
   limit?: number
   buffer?: number
   color?: CollapseTextColor
-  size?: 'sm' | 'md-s' | 'md'
-  spacingTop?: 'base'
+  size?: 'sm' | 'mdS' | 'md'
+  spacingTop?: 'tight' | 'base'
   textIndent?: boolean
   isRichShow?: boolean
-  bgColor?: 'grey-lighter' | 'white'
-  bgActiveColor?: 'grey-lighter' | 'white'
+  collapseable?: boolean
+  bgColor?: 'greyLighter' | 'white'
 }
 
 export const Expandable: React.FC<ExpandableProps> = ({
@@ -46,30 +45,34 @@ export const Expandable: React.FC<ExpandableProps> = ({
   spacingTop,
   textIndent = false,
   isRichShow = false,
+  collapseable = true,
   bgColor = 'white',
-  bgActiveColor,
 }) => {
   const [expandable, setExpandable] = useState(false)
   const [lineHeight, setLineHeight] = useState(24)
   const [expand, setExpand] = useState(true)
   const [truncated, setTruncated] = useState(false)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
-  const collapseContent = stripHtml(
-    content && content.replace(/\r?\n|\r|\s\s/g, ''),
-    ''
-  )
+  const collapsedContent = collapseContent(content)
+
   const contentClasses = classNames({
-    expandable: true,
-    [`${color}`]: !!color,
-    [`size-${size}`]: !!size,
-    [`spacing-top-${spacingTop}`]: !!spacingTop,
-    [`textIndent`]: textIndent,
+    [styles.expandable]: true,
+    [styles[`${color}`]]: !!color,
+    [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
+    [spacingTop
+      ? styles[`spacingTop${capitalizeFirstLetter(spacingTop)}`]
+      : '']: !!spacingTop,
+    [styles.textIndent]: textIndent,
   })
 
   const richWrapperClasses = classNames({
-    richWrapper: true,
-    [`${bgColor}`]: !!bgColor,
-    [`${bgActiveColor}-active`]: !!bgActiveColor,
+    [styles.richWrapper]: true,
+    [styles[`${bgColor}`]]: !!bgColor,
+  })
+
+  const richShowMoreButtonClasses = classNames({
+    [styles.richShowMoreButton]: true,
+    [styles[`${bgColor}`]]: !!bgColor,
   })
 
   useEffect(() => {
@@ -95,36 +98,33 @@ export const Expandable: React.FC<ExpandableProps> = ({
 
   return (
     <section className={contentClasses}>
-      <VisuallyHidden>
-        <div>{children}</div>
-      </VisuallyHidden>
       <div ref={node}>
         {(!expandable || (expandable && expand)) && <div>{children}</div>}
       </div>
-      {expandable && expand && (
-        <section className="collapseWrapper">
+      {expandable && collapseable && expand && !isRichShow && (
+        <section className={styles.collapseWrapper}>
           <Button
             spacing={['xxtight', 'xtight']}
-            bgColor="grey-lighter"
+            bgColor="greyLighter"
             textColor="grey"
             onClick={() => {
               setExpand(!expand)
             }}
           >
-            <TextIcon icon={<IconArrowUp16 />}>
+            <TextIcon icon={<IconArrowUp16 />} textPlacement="left">
               <Translate zh_hans="收起" zh_hant="收合" en="collapse" />
             </TextIcon>
           </Button>
         </section>
       )}
       {expandable && !expand && (
-        <p>
+        <p className={styles.unexpandWrapper}>
           {!isRichShow && (
             <TextTruncate
               line={limit}
               element="span"
               truncateText=""
-              text={collapseContent}
+              text={collapsedContent}
               onTruncated={() => {
                 setTruncated(true)
               }}
@@ -134,7 +134,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
                     setExpand(!expand)
                     e.stopPropagation()
                   }}
-                  className="expandButton"
+                  className={styles.expandButton}
                 >
                   ...
                   <Translate id="expand" />
@@ -148,7 +148,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
                 setExpand(!expand)
                 e.stopPropagation()
               }}
-              className="expandButton"
+              className={styles.expandButton}
             >
               ...
               <Translate id="expand" />
@@ -162,25 +162,20 @@ export const Expandable: React.FC<ExpandableProps> = ({
               >
                 {children}
               </div>
-              <section className="collapseWrapper">
-                <Button
-                  spacing={['xxtight', 'xtight']}
-                  bgColor="grey-lighter"
-                  textColor="grey"
-                  onClick={() => {
-                    setExpand(!expand)
-                  }}
-                >
-                  <TextIcon icon={<IconArrowDown16 />}>
-                    <Translate id="expand" />
-                  </TextIcon>
-                </Button>
-              </section>
+              <button
+                className={richShowMoreButtonClasses}
+                onClick={() => {
+                  setExpand(!expand)
+                }}
+              >
+                <TextIcon icon={<IconArrowDown16 />}>
+                  <Translate id="expand" />
+                </TextIcon>
+              </button>
             </>
           )}
         </p>
       )}
-      <style jsx>{styles}</style>
     </section>
   )
 }

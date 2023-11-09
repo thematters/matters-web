@@ -1,16 +1,12 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import { md2html } from '@matters/matters-editor'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { ADD_TOAST, DEFAULT_LOCALE, URL_QS } from '~/common/enums'
-import {
-  stripAllPunct,
-  toGlobalId,
-  toPath,
-  toUserLanguage,
-} from '~/common/utils'
+import { URL_QS } from '~/common/enums'
+import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
   EmptyLayout,
@@ -23,6 +19,7 @@ import {
   Spinner,
   Throw404,
   Title,
+  toast,
   Translate,
   useFeatures,
   usePublicQuery,
@@ -54,7 +51,7 @@ import License from './License'
 import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
-import styles from './styles.css'
+import styles from './styles.module.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationToast from './TranslationToast'
@@ -86,6 +83,12 @@ const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
   loading: Spinner,
 })
+
+const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
+  ssr: true, // enable for first screen
+  loading: Spinner,
+})
+
 const DynamicSubscribeCircleDialog = dynamic(
   () =>
     import('~/components/Dialogs/SubscribeCircleDialog').then(
@@ -114,13 +117,15 @@ const BaseArticleDetail = ({
   article: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
 }) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   const features = useFeatures()
   const [fixedWall, setFixedWall] = useState(false)
+  const [isSensitive, setIsSensitive] = useState<boolean>(
+    article.sensitiveByAuthor || article.sensitiveByAdmin
+  )
 
   const authorId = article.author?.id
   const paymentPointer = article.author?.paymentPointer
@@ -144,7 +149,7 @@ const BaseArticleDetail = ({
 
   // translation
   const [autoTranslation] = useState(article.translation) // cache initial article data since it will be overwrote by newly's if URL is shadow replaced
-  const [translated, setTranslate] = useState(!!locale)
+  const [translated, setTranslate] = useState(!!routerLang)
   const originalLang = article.language
   const {
     lang: preferredLang,
@@ -158,20 +163,15 @@ const BaseArticleDetail = ({
   const translate = () => {
     getTranslation({ variables: { mediaHash, language: preferredLang } })
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="正在透過 Google 翻譯..."
-              zh_hans="正在通过 Google 翻译..."
-              en="Translating by Google..."
-            />
-          ),
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <Translate
+          zh_hant="正在透過 Google 翻譯..."
+          zh_hans="正在通过 Google 翻译..."
+          en="Translating by Google..."
+        />
+      ),
+    })
   }
 
   const toggleTranslate = () => {
@@ -181,36 +181,36 @@ const BaseArticleDetail = ({
       translate()
     }
   }
+
   useEffect(() => {
     if (!!autoTranslation) {
-      setTimeout(() => {
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'black',
-              placement: 'bottom',
-              duration: 8 * 1000,
-              clearable: true,
-              content: (
-                <TranslationToast.Content language={autoTranslation.language} />
-              ),
-              switchContent: (
-                <TranslationToast.SwitchContent onClick={toggleTranslate} />
-              ),
-            },
-          })
-        )
+      toast.success({
+        message: (
+          <TranslationToast.Content language={autoTranslation.language} />
+        ),
+        actions: [
+          {
+            content: (
+              <Translate
+                zh_hans="阅读原文"
+                zh_hant="閱讀原文"
+                en="View original content"
+              />
+            ),
+            onClick: toggleTranslate,
+          },
+        ],
       })
     }
   }, [])
 
   // set language cookie for anonymous if it doesn't exist
   useEffect(() => {
-    if (cookieLang || viewer.isAuthed || !locale) {
+    if (cookieLang || viewer.isAuthed || !routerLang) {
       return
     }
 
-    setLang(toUserLanguage(locale) as UserLanguage)
+    setLang(routerLang)
   }, [])
 
   const {
@@ -222,16 +222,19 @@ const BaseArticleDetail = ({
   const title = translated && translatedTitle ? translatedTitle : article.title
   const summary =
     translated && translatedSummary ? translatedSummary : article.summary
+  const isEnableMd = !!getQuery('md') // feature flag
+  const originalContent =
+    isEnableMd && article.contents.markdown
+      ? md2html(article.contents.markdown)
+      : article.contents.html
   const content =
-    translated && translatedContent ? translatedContent : article.content
-  const keywords = (article.tags || []).map(({ content: c }) =>
-    stripAllPunct(c)
-  )
+    translated && translatedContent ? translatedContent : originalContent
+  const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
 
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header
-        left={<Layout.Header.BackButton />}
+        mode="compact"
         right={
           <UserDigest.Rich
             user={article.author}
@@ -274,9 +277,9 @@ const BaseArticleDetail = ({
 
       <State article={article} />
 
-      <section className="content">
+      <section className={styles.content}>
         <TagList article={article} />
-        <section className="title">
+        <section className={styles.title}>
           <Title type="article">{title}</Title>
 
           <Waypoint
@@ -296,29 +299,49 @@ const BaseArticleDetail = ({
             canReadFullContent={canReadFullContent}
           />
         </section>
+
         {article?.summaryCustomized && <CustomizedSummary summary={summary} />}
-        <Content
-          article={article}
-          content={content}
-          translating={translating}
-        />
-        <License license={article.license} />
-        {circle && !canReadFullContent && <DynamicCircleWall circle={circle} />}
-        {features.payment && canReadFullContent && (
-          <DynamicSupportWidget article={article} />
+
+        {isSensitive && (
+          <DynamicSensitiveWall
+            sensitiveByAuthor={article.sensitiveByAuthor}
+            sensitiveByAdmin={article.sensitiveByAdmin}
+            expandAll={() => setIsSensitive(false)}
+          />
         )}
+        {!isSensitive && (
+          <>
+            <Content
+              article={article}
+              content={content}
+              translating={translating}
+            />
+            <License license={article.license} />
+
+            {circle && !canReadFullContent && (
+              <DynamicCircleWall circle={circle} />
+            )}
+
+            {features.payment && canReadFullContent && (
+              <DynamicSupportWidget article={article} />
+            )}
+          </>
+        )}
+
         {collectionCount > 0 && (
-          <section className="block">
+          <section className={styles.block}>
             <DynamicCollection
               article={article}
               collectionCount={collectionCount}
             />
           </section>
         )}
-        <section className="block">
+
+        <section className={styles.block}>
           <DynamicResponse id={article.id} lock={!canReadFullContent} />
         </section>
-        <Media lessThan="xl">
+
+        <Media lessThan="lg">
           <RelatedArticles article={article} />
         </Media>
       </section>
@@ -339,8 +362,6 @@ const BaseArticleDetail = ({
       {article.access.circle && (
         <DynamicSubscribeCircleDialog circle={article.access.circle} />
       )}
-
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }
@@ -350,17 +371,21 @@ const ArticleDetail = ({
 }: {
   includeTranslation: boolean
 }) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, router, routerLang } = useRoute()
+  const [needRefetchData, setNeedRefetchData] = useState(false)
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   /**
    * fetch public data
    */
-  const isQueryByHash = !!(mediaHash && isMediaHashPossiblyValid(mediaHash))
+  const isQueryByHash = !!(
+    mediaHash &&
+    isMediaHashPossiblyValid(mediaHash) &&
+    !articleId
+  )
 
   // backward compatible with:
   // - `/:username:/:articleId:-:slug:-:mediaHash`
@@ -371,7 +396,7 @@ const ArticleDetail = ({
     {
       variables: {
         mediaHash,
-        language: locale ? toUserLanguage(locale) : UserLanguage.ZhHant,
+        language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
       skip: !isQueryByHash,
@@ -382,7 +407,7 @@ const ArticleDetail = ({
     {
       variables: {
         id: toGlobalId({ type: 'Article', id: articleId }),
-        language: locale ? toUserLanguage(locale) : UserLanguage.ZhHant,
+        language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
       skip: isQueryByHash,
@@ -422,9 +447,19 @@ const ArticleDetail = ({
     setPrivateFetched(true)
   }
 
-  // reset state to private fetchable when URL query is changed
   useEffect(() => {
+    // reset state to private fetchable when URL query is changed
     setPrivateFetched(false)
+
+    // refetch data when URL query is changed
+    ;(async () => {
+      if (!needRefetchData) {
+        return
+      }
+      await refetchPublic()
+      await loadPrivate()
+      setNeedRefetchData(false)
+    })()
   }, [mediaHash])
 
   // fetch private data when mediaHash of public data is changed
@@ -465,10 +500,7 @@ const ArticleDetail = ({
     const nsearch = rems.length > 0 ? `?${new URLSearchParams(rems)}` : ''
     const nhref = `${n.pathname}${nsearch}${n.hash || u.hash}`
 
-    if (
-      nhref !== router.asPath ||
-      (router.locale && router.locale !== DEFAULT_LOCALE)
-    ) {
+    if (nhref !== router.asPath || routerLang) {
       router.replace(nhref, undefined, { shallow: true, locale: false })
     }
   }, [latestHash])
@@ -482,6 +514,7 @@ const ArticleDetail = ({
       return
     }
 
+    setNeedRefetchData(true)
     const path = toPath({ page: 'articleDetail', article })
     router.replace(path.href)
   }
@@ -542,7 +575,6 @@ const ArticleDetail = ({
     return (
       <EmptyLayout>
         <Error
-          statusCode={404}
           message={
             article.state === 'archived' ? (
               <Translate
@@ -552,8 +584,8 @@ const ArticleDetail = ({
               />
             ) : article.state === 'banned' ? (
               <Translate
-                zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
-                zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
+                zh_hant="該作品因違反社區約章，已被站方強制歸檔。"
+                zh_hans="该作品因违反社区约章，已被站方强制封存。"
                 en="This work is archived due to violation of community guidelines."
               />
             ) : null
@@ -585,13 +617,17 @@ const ArticleDetail = ({
 }
 
 const ArticleDetailOuter = () => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
-  const isQueryByHash = !!(mediaHash && isMediaHashPossiblyValid(mediaHash))
+  const isQueryByHash = !!(
+    mediaHash &&
+    isMediaHashPossiblyValid(mediaHash) &&
+    !articleId
+  )
+
   const resultByHash = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS,
     { variables: { mediaHash }, skip: !isQueryByHash }
@@ -606,10 +642,8 @@ const ArticleDetailOuter = () => {
   const { data } = resultByHash.data ? resultByHash : resultByNodeId
   const loading = resultByHash.loading || resultByNodeId.loading
   const includeTranslation =
-    !!locale &&
-    (data?.article?.availableTranslations || []).includes(
-      toUserLanguage(locale) as UserLanguage
-    )
+    !!routerLang &&
+    (data?.article?.availableTranslations || []).includes(routerLang)
 
   /**
    * Rendering

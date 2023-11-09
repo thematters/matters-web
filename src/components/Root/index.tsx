@@ -3,7 +3,9 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
 import React from 'react'
+import { WagmiConfig } from 'wagmi'
 
+import { wagmiConfig } from '~/common/utils'
 import {
   Error,
   FeaturesProvider,
@@ -14,14 +16,13 @@ import {
   TranslationsProvider,
   useRoute,
   ViewerProvider,
-  ViewerUser,
 } from '~/components'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
 
-const DynamicToastContainer = dynamic(
-  () => import('~/components/Toast').then((mod) => mod.Toast.Container),
+const DynamicToaster = dynamic(
+  () => import('~/components/Toast').then((mod) => mod.Toaster),
   { ssr: false }
 )
 const DynamicAnalyticsInitilizer = dynamic(
@@ -35,6 +36,10 @@ const DynamicGlobalDialogs = dynamic(
   () => import('~/components/GlobalDialogs'),
   { ssr: false }
 )
+
+const DynamicGlobalToasts = dynamic(() => import('~/components/GlobalToasts'), {
+  ssr: false,
+})
 const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
   ssr: false,
 })
@@ -64,7 +69,10 @@ const Root = ({
   const { isInPath } = useRoute()
   const isInAbout = isInPath('ABOUT')
   const isInMigration = isInPath('MIGRATION')
-  const shouldApplyLayout = !isInAbout && !isInMigration
+  const isInAuthCallback = isInPath('CALLBACK_PROVIDER')
+  const isInAuth = isInPath('LOGIN') || isInPath('SIGNUP')
+  const shouldApplyLayout =
+    !isInAbout && !isInMigration && !isInAuthCallback && !isInAuth
 
   const { loading, data, error } =
     useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)
@@ -87,23 +95,26 @@ const Root = ({
   }
 
   return (
-    <ViewerProvider viewer={viewer as ViewerUser}>
-      <LanguageProvider headers={headers}>
-        <FeaturesProvider official={official}>
-          <MediaContextProvider>
-            <TranslationsProvider>
-              {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+    <WagmiConfig config={wagmiConfig}>
+      <ViewerProvider viewer={viewer}>
+        <LanguageProvider headers={headers}>
+          <FeaturesProvider official={official}>
+            <MediaContextProvider>
+              <TranslationsProvider>
+                {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-              <DynamicToastContainer />
-              <DynamicAnalyticsInitilizer user={viewer || {}} />
-              <DynamicGlobalDialogs />
-              <DynamicProgressBar />
-              <DynamicFingerprint />
-            </TranslationsProvider>
-          </MediaContextProvider>
-        </FeaturesProvider>
-      </LanguageProvider>
-    </ViewerProvider>
+                <DynamicToaster />
+                <DynamicAnalyticsInitilizer user={viewer || {}} />
+                <DynamicGlobalDialogs />
+                <DynamicGlobalToasts />
+                <DynamicProgressBar />
+                <DynamicFingerprint />
+              </TranslationsProvider>
+            </MediaContextProvider>
+          </FeaturesProvider>
+        </LanguageProvider>
+      </ViewerProvider>
+    </WagmiConfig>
   )
 }
 

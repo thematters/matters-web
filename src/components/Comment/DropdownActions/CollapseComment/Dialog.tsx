@@ -1,9 +1,11 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
-import { ADD_TOAST, COMMENT_TYPE_TEXT } from '~/common/enums'
+import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import {
   CommentFormType,
   Dialog,
+  toast,
   Translate,
   useDialogSwitch,
   useMutation,
@@ -55,26 +57,25 @@ const CollapseCommentDialog = ({
   const onCollapse = async () => {
     await collapseComment()
 
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant={`已成功闔上${COMMENT_TYPE_TEXT.zh_hant[type]}`}
-              zh_hans={`已成功折叠${COMMENT_TYPE_TEXT.zh_hans[type]}`}
-            />
-          ),
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <Translate
+          zh_hant={`已成功闔上${COMMENT_TYPE_TEXT.zh_hant[type]}`}
+          zh_hans={`已成功折叠${COMMENT_TYPE_TEXT.zh_hans[type]}`}
+        />
+      ),
+    })
   }
 
   return (
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_COMMENT_COLLAPSE}
+      >
         <Dialog.Header
           title={
             <Translate
@@ -82,8 +83,6 @@ const CollapseCommentDialog = ({
               zh_hans={`折叠${COMMENT_TYPE_TEXT.zh_hans[type]}`}
             />
           }
-          closeDialog={closeDialog}
-          mode="inner"
         />
 
         <Dialog.Message>
@@ -95,23 +94,29 @@ const CollapseCommentDialog = ({
           </p>
         </Dialog.Message>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            onClick={() => {
-              onCollapse()
-              closeDialog()
-            }}
-          >
-            <Translate id="confirm" />
-          </Dialog.Footer.Button>
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={closeDialog}
-          >
-            <Translate id="cancel" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+              color="red"
+              onClick={() => {
+                onCollapse()
+                closeDialog()
+              }}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+              color="red"
+              onClick={() => {
+                onCollapse()
+                closeDialog()
+              }}
+            />
+          }
+        />
       </Dialog>
     </>
   )

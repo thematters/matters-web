@@ -6,6 +6,7 @@
   ],
   "plugins": ["stylelint-prettier"],
   "rules": {
+    "number-max-precision": 7,
     "at-rule-no-unknown": null,
     "no-descending-specificity": null,
     "prettier/prettier": true,

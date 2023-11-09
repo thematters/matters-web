@@ -1,3 +1,6 @@
+commit_message: 'docs: new translation %original_file_name% (%language%) [ci skip]'
+append_commit_message: false
+
 files:
-  - source: /lang/en.json
+  - source: /lang/default.json
     translation: /lang/%locale%.json

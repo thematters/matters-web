@@ -2,25 +2,20 @@ import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
-import {
-  dom,
-  filterComments,
-  mergeConnections,
-  translate,
-} from '~/common/utils'
+import { URL_FRAGMENT } from '~/common/enums'
+import { dom, filterComments, mergeConnections } from '~/common/utils'
 import {
   CommentForm,
   EmptyComment,
   InfiniteScroll,
-  LanguageContext,
   List,
   QueryError,
   Spinner,
   ThreadComment,
   Throw404,
-  Translate,
+  toast,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -29,7 +24,7 @@ import { BroadcastPrivateQuery, BroadcastPublicQuery } from '~/gql/graphql'
 
 import CircleDetailTabs from '../CircleDetailTabs'
 import { BROADCAST_PRIVATE, BROADCAST_PUBLIC } from './gql'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type CommentPublic = NonNullable<
   NonNullable<BroadcastPublicQuery['circle']>['broadcast']['edges']
@@ -44,9 +39,9 @@ const RESPONSES_COUNT = 15
 const CricleBroadcast = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
   const name = getQuery('name')
 
+  const intl = useIntl()
   /**
    * Data Fetching
    */
@@ -156,12 +151,17 @@ const CricleBroadcast = () => {
         offset: fragment === URL_FRAGMENT.COMMENTS ? -10 : -64,
       })
     }
-    const element = dom.$(`#${fragment}`)
 
-    if (!element) {
-      loadMore({ before: parentId }).then(jumpToFragment)
-    } else {
-      jumpToFragment()
+    try {
+      const element = dom.$(`#${fragment}`)
+
+      if (!element) {
+        loadMore({ before: parentId }).then(jumpToFragment)
+      } else {
+        jumpToFragment()
+      }
+    } catch (e) {
+      return
     }
   }, [circle?.id])
 
@@ -199,21 +199,15 @@ const CricleBroadcast = () => {
   const isMember = circle?.circleIsMember
   const lock = viewer.isAuthed && !isOwner && !isMember
   const submitCallback = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="廣播已送出"
-              zh_hans="广播已送出"
-              en="Broadcast sent"
-            />
-          ),
-          buttonPlacement: 'center',
-        },
-      })
-    )
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="Broadcast sent"
+          id="TjWWxF"
+          description="src/views/Circle/Broadcast/Broadcast.tsx"
+        />
+      ),
+    })
     refetch()
   }
 
@@ -221,16 +215,15 @@ const CricleBroadcast = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="broadcast">
+      <section className={styles.broadcast}>
         {isOwner && (
-          <header>
+          <header className={styles.header}>
             <CommentForm
               circleId={circle?.id}
               type="circleBroadcast"
-              placeholder={translate({
-                lang,
-                zh_hant: '公告、提醒、碎碎念…',
-                zh_hans: '公告、提醒、碎碎念…',
+              placeholder={intl.formatMessage({
+                defaultMessage: 'Announcement, reminder, chattering...',
+                id: 'zb8Kx1',
               })}
               submitCallback={submitCallback}
             />
@@ -241,12 +234,20 @@ const CricleBroadcast = () => {
           (comments.length <= 0 && (
             <EmptyComment
               description={
-                <Translate zh_hant="還沒有廣播" zh_hans="还没有广播" />
+                <FormattedMessage
+                  defaultMessage="No broadcast yet."
+                  id="mWjpk9"
+                  description="src/views/Circle/Broadcast/Broadcast.tsx"
+                />
               }
             />
           ))}
 
-        <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          eof
+        >
           <List spacing={['xloose', 0]}>
             {comments.map((comment) => (
               <List.Item key={comment.id}>
@@ -263,8 +264,6 @@ const CricleBroadcast = () => {
             ))}
           </List>
         </InfiniteScroll>
-
-        <style jsx>{styles}</style>
       </section>
     </>
   )

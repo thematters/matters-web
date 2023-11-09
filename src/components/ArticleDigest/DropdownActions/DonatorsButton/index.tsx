@@ -1,16 +1,26 @@
-import { IconDonate24, Menu, TextIcon, Translate } from '~/components'
+import { useIntl } from 'react-intl'
+
+import { IconDonate24, Menu } from '~/components'
 
 interface DonatorsButtonProps {
   openDialog: () => void
 }
 
 const DonatorsButton = ({ openDialog }: DonatorsButtonProps) => {
+  const intl = useIntl()
+
   return (
-    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconDonate24 size="md" />} size="md" spacing="base">
-        <Translate id="viewSupporters" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      text={intl.formatMessage({
+        defaultMessage: 'Supporters',
+        id: '/qgntf',
+        description:
+          'src/components/ArticleDigest/DropdownActions/DonatorsButton/index.tsx',
+      })}
+      icon={<IconDonate24 size="mdS" />}
+      onClick={openDialog}
+      ariaHasPopup="dialog"
+    />
   )
 }
 

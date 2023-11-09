@@ -1,20 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
-import {
-  Button,
-  CopyToClipboard,
-  IconCopy16,
-  IconLocked24,
-  LanguageContext,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { CopyToClipboard, IconCopy16, TextIcon, Translate } from '~/components'
 import { ArticleSecretQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type ArticleSecretSectionProps = {
   id: string
@@ -34,7 +25,7 @@ export const QUERY_SECRET = gql`
 `
 
 const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const { data } = useQuery<ArticleSecretQuery>(QUERY_SECRET, {
     variables: { id },
   })
@@ -47,8 +38,8 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
   }
 
   return (
-    <section className="secret">
-      <p className="description">
+    <section className={styles.secret}>
+      <p className={styles.description}>
         <Translate
           zh_hant="上鎖內容密鑰，請妥善保管"
           zh_hans="上鎖內容密鑰，請妥善保管"
@@ -56,27 +47,25 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
         />
       </p>
 
-      <section className="key">
+      <section className={styles.key}>
         <CopyToClipboard text={secret}>
-          <Button
-            aria-label={translate({ id: 'copy', lang })}
-            spacing={['xtight', 'base']}
-            bgColor="yellow-lighter"
+          <button
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Copy',
+              id: '4l6vz1',
+            })}
+            className={styles.copyButton}
           >
-            <TextIcon icon={<IconLocked24 size="md" />} spacing="xxtight">
-              <TextIcon
-                icon={<IconCopy16 />}
-                textPlacement="left"
-                spacing="xtight"
-              >
-                {secret.slice(0, 3)}...{secret.slice(-2)}
-              </TextIcon>
+            <TextIcon
+              icon={<IconCopy16 />}
+              textPlacement="left"
+              spacing="xtight"
+            >
+              {secret.slice(0, 4)}...{secret.slice(-4)}
             </TextIcon>
-          </Button>
+          </button>
         </CopyToClipboard>
       </section>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

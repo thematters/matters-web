@@ -1,32 +1,33 @@
-import { useQuery } from '@apollo/react-hooks'
-import { useContext, useState } from 'react'
+// import Script from 'next/script'
+import { useContext, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { ADD_TOAST, APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
+import { APPRECIATE_DEBOUNCE, EXTERNAL_LINKS, Z_INDEX } from '~/common/enums'
 import {
   ReCaptchaContext,
+  toast,
   Tooltip,
   Translate,
+  Turnstile,
+  // TURNSTILE_DEFAULT_SCRIPT_ID,
+  // TURNSTILE_SCRIPT_URL,
+  TurnstileInstance,
   useMutation,
   ViewerContext,
 } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import updateAppreciation from '~/components/GQL/updates/appreciation'
+import { updateAppreciation } from '~/components/GQL'
+// import { UserGroup } from '~/gql/graphql'
 import {
   AppreciateArticleMutation,
   AppreciationButtonArticlePrivateFragment,
   AppreciationButtonArticlePublicFragment,
-  ClientPreferenceQuery,
 } from '~/gql/graphql'
 
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
 import BlockedButton from './BlockedButton'
-import CivicLikerButton from './CivicLikerButton'
 import ForbiddenButton from './ForbiddenButton'
 import { APPRECIATE_ARTICLE, fragments } from './gql'
-import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
-import ViewSuperLikeButton from './ViewSuperLikeButton'
 
 interface AppreciationButtonProps {
   article: AppreciationButtonArticlePublicFragment &
@@ -41,10 +42,10 @@ const AppreciationButton = ({
   disabled,
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
+
+  const turnstileRef = useRef<TurnstileInstance>(null)
   const { token, refreshToken } = useContext(ReCaptchaContext)
-  const { data, client } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
+
   const isArticleAuthor = article.author.id === viewer.id
 
   /**
@@ -67,11 +68,17 @@ const AppreciationButton = ({
         variables: {
           id: article.id,
           amount,
-          token,
+          token:
+            // (viewer.info.group === UserGroup.A &&
+            // turnstileRef.current?.getResponse()) || // fallback to ReCaptchaContext token
+            `${token} ${turnstileRef.current?.getResponse()}`,
         },
-      }).then(refreshToken)
+      }) // .then(refreshToken)
     } catch (e) {
       console.error(e)
+    } finally {
+      refreshToken?.()
+      turnstileRef.current?.reset()
     }
   }, APPRECIATE_DEBOUNCE)
 
@@ -87,7 +94,10 @@ const AppreciationButton = ({
         variables: {
           id: article.id,
           amount: 1,
-          token,
+          token:
+            // (viewer.info.group === UserGroup.A &&
+            // turnstileRef.current?.getResponse()) || // fallback to ReCaptchaContext token
+            `${token} ${turnstileRef.current?.getResponse()}`,
           superLike: true,
         },
         update: (cache) => {
@@ -101,22 +111,23 @@ const AppreciationButton = ({
           })
         },
       })
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: (
-              <Translate
-                zh_hant="你對作品送出了一個 Super Like！"
-                zh_hans="你对作品送出了一个 Super Like！"
-                en="You sent a Super Like to this article!"
-              />
-            ),
-            customButton: <ViewSuperLikeButton />,
-            buttonPlacement: 'center',
+
+      toast.success({
+        message: (
+          <Translate
+            zh_hant="你對作品送出了一個 Super Like！"
+            zh_hans="你对作品送出了一个 Super Like！"
+            en="You sent a Super Like to this article!"
+          />
+        ),
+        actions: [
+          {
+            content: <Translate zh_hant="詳情" zh_hans="详情" en="More info" />,
+            htmlHref: EXTERNAL_LINKS.SUPER_LIKE,
+            htmlTarget: '_blank',
           },
-        })
-      )
+        ],
+      })
     } catch (e) {
       setSuperLiked(false)
       console.error(e)
@@ -132,9 +143,6 @@ const AppreciationButton = ({
    *
    * Article Author:
    *   1) Disabled, show tooltip on hover
-   *
-   * No LikerID:
-   *   1) Show Setup LikerID modal on click
    *
    * Non-Civic Liker:
    *   1) Allow to like 5 times
@@ -161,11 +169,8 @@ const AppreciationButton = ({
     }
   }
 
-  const readCivicLikerDialog =
-    viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
-    (!isReachLimit && !viewer.isArchived && viewer.liker.likerId) ||
-    (isSuperLike && canSuperLike)
+    (!isReachLimit && !viewer.isArchived) || (isSuperLike && canSuperLike)
 
   // Anonymous
   if (!viewer.isAuthed) {
@@ -202,43 +207,41 @@ const AppreciationButton = ({
     )
   }
 
-  // Liker ID
-  if (viewer.shouldSetupLikerID) {
-    return <SetupLikerIdAppreciateButton total={total} />
-  }
-
   // Blocked by private query
   if (!privateFetched) {
     return <AppreciateButton total={total} disabled />
   }
 
+  const siteKey = process.env
+    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
+
   // Appreciable
   if (canAppreciate && !disabled) {
     return (
-      <AppreciateButton
-        onClick={appreciate}
-        count={appreciatedCount > 0 ? appreciatedCount : undefined}
-        total={total}
-        isSuperLike={isSuperLike}
-        superLiked={superLiked}
-      />
-    )
-  }
-
-  // Civic Liker
-  if (isReachLimit && !readCivicLikerDialog) {
-    return (
-      <CivicLikerButton
-        user={article.author}
-        onClose={() => {
-          client.writeData({
-            id: 'ClientPreference:local',
-            data: { readCivicLikerDialog: true },
-          })
-        }}
-        count={appreciatedCount > 0 ? appreciatedCount : undefined}
-        total={total}
-      />
+      <section>
+        <Turnstile
+          ref={turnstileRef}
+          options={{
+            action: 'appreciate',
+            cData: `user-group-${viewer.info.group}`,
+            // refreshExpired: 'manual',
+            size: 'invisible',
+          }}
+          siteKey={siteKey}
+          // injectScript={false}
+          scriptOptions={{
+            compat: 'recaptcha',
+            appendTo: 'body',
+          }}
+        />
+        <AppreciateButton
+          onClick={appreciate}
+          count={appreciatedCount > 0 ? appreciatedCount : undefined}
+          total={total}
+          isSuperLike={isSuperLike}
+          superLiked={superLiked}
+        />
+      </section>
     )
   }
 
@@ -249,22 +252,24 @@ const AppreciationButton = ({
         count="MAX"
         total={total}
         onClick={() => {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'green',
+          toast.success({
+            message: (
+              <Translate
+                zh_hant="12:00 或 00:00 就可以再次送出 Super Like 啦！"
+                zh_hans="12:00 或 00:00 就可以再次送出 Super Like 啦！"
+                en="You can send another Super Like after 12:00 or 00:00"
+              />
+            ),
+            actions: [
+              {
                 content: (
-                  <Translate
-                    zh_hant="12:00 或 00:00 就可以再次送出 Super Like 啦！"
-                    zh_hans="12:00 或 00:00 就可以再次送出 Super Like 啦！"
-                    en="You can send another Super Like after 12:00 or 00:00"
-                  />
+                  <Translate zh_hant="詳情" zh_hans="详情" en="More info" />
                 ),
-                customButton: <ViewSuperLikeButton />,
-                buttonPlacement: 'center',
+                htmlHref: EXTERNAL_LINKS.SUPER_LIKE,
+                htmlTarget: '_blank',
               },
-            })
-          )
+            ],
+          })
         }}
         isSuperLike={isSuperLike}
         superLiked={superLiked}

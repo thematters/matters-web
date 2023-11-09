@@ -1,9 +1,10 @@
 import jump from 'jump.js'
 import { forwardRef } from 'react'
 
-import { Button, ButtonProps, Media, TextIcon } from '~/components'
+import { Z_INDEX } from '~/common/enums'
+import { Button, ButtonProps, TextIcon, Tooltip } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 type NavListItemProps = {
   name: React.ReactNode
@@ -13,8 +14,6 @@ type NavListItemProps = {
   canScrollTop?: boolean
 } & ButtonProps
 
-type NavListItemButtonProps = NavListItemProps & { isMdUp?: boolean }
-
 const NavListItemButton = forwardRef(
   (
     {
@@ -23,31 +22,34 @@ const NavListItemButton = forwardRef(
       activeIcon,
       active,
       onClick,
-      isMdUp,
       canScrollTop,
       ...props
-    }: NavListItemButtonProps,
+    }: NavListItemProps,
     ref
   ) => {
     return (
-      <Button
-        bgActiveColor="grey-lighter"
-        spacing={isMdUp ? ['xtight', 'base'] : undefined}
-        size={isMdUp ? undefined : ['2rem', '2rem']}
-        ref={ref}
-        {...props}
-        onClick={onClick}
+      <Tooltip
+        content={name}
+        placement="left"
+        delay={[1000, null]}
+        zIndex={Z_INDEX.OVER_STICKY_TABS}
       >
-        <TextIcon
-          icon={active ? activeIcon : icon}
-          size="lg"
-          weight="semibold"
-          spacing="tight"
-          color={active ? 'green' : 'black'}
+        <Button
+          bgActiveColor="greyLighter"
+          size={['2rem', '2rem']}
+          ref={ref}
+          {...props}
+          onClick={onClick}
         >
-          {isMdUp && name}
-        </TextIcon>
-      </Button>
+          <TextIcon
+            icon={active ? activeIcon : icon}
+            size="lg"
+            weight="semibold"
+            spacing="tight"
+            color="black"
+          />
+        </Button>
+      </Tooltip>
     )
   }
 )
@@ -68,15 +70,8 @@ const NavListItem = forwardRef((props: NavListItemProps, ref) => {
   }
 
   return (
-    <li role="menuitem">
-      <Media greaterThanOrEqual="lg">
-        <NavListItemButton {...props} onClick={onClick} ref={ref} isMdUp />
-      </Media>
-      <Media lessThan="lg">
-        <NavListItemButton {...props} onClick={onClick} ref={ref} />
-      </Media>
-
-      <style jsx>{styles}</style>
+    <li role="menuitem" className={styles.listItem}>
+      <NavListItemButton {...props} onClick={onClick} ref={ref} />
     </li>
   )
 })

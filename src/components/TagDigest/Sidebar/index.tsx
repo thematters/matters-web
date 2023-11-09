@@ -16,7 +16,7 @@ import {
 } from '~/components'
 import { TagDigestSidebarTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 export type TagDigestSidebarProps = {
   tag: TagDigestSidebarTagFragment
@@ -46,13 +46,16 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
       {...path}
       spacing={['xtight', 'xtight']}
       bgColor="none"
-      bgActiveColor="grey-lighter"
+      bgActiveColor="none"
       borderRadius="xtight"
       {...cardProps}
       testId={TEST_ID.DIGEST_TAG_SIDEBAR}
     >
-      <section className="container">
-        <section className="cover">
+      <section className={styles.container}>
+        <section
+          className={styles.cover}
+          data-test-id={TEST_ID.DIGEST_TAG_SIDEBAR_COVER}
+        >
           <Link {...path} legacyBehavior>
             <a>
               <VisuallyHidden>
@@ -60,44 +63,44 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
               </VisuallyHidden>
               <ResponsiveImage
                 url={tag.cover || IMAGE_TAG_COVER.src}
-                size="360w"
+                width={144}
+                height={144}
+                disableAnimation={true}
               />
             </a>
           </Link>
         </section>
 
-        <section className="content">
-          <header>
+        <section className={styles.content}>
+          <header className={styles.header}>
             <Tag
               tag={tag}
               type="plain"
-              iconProps={{ color: 'grey-darker' }}
+              iconProps={{ color: 'greyDarker' }}
               textIconProps={{ color: 'black', weight: 'md', size: 'sm' }}
             />
           </header>
 
-          <section className="nums">
+          <section className={styles.nums}>
             <TextIcon
-              icon={<IconUser16 color="grey-dark" />}
+              icon={<IconUser16 color="greyDark" size="xs" />}
               size="xs"
               spacing="xxtight"
-              color="grey-dark"
+              color="greyDark"
             >
               {numAbbr(tag.numAuthors)}
             </TextIcon>
 
             <TextIcon
-              icon={<IconArticle16 color="grey-dark" />}
+              icon={<IconArticle16 color="greyDark" size="xs" />}
               size="xs"
               spacing="xxtight"
-              color="grey-dark"
+              color="greyDark"
             >
               {numAbbr(tag.numArticles)}
             </TextIcon>
           </section>
         </section>
-
-        <style jsx>{styles}</style>
       </section>
     </Card>
   )

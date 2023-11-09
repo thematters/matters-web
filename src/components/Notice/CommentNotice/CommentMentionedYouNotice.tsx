@@ -10,10 +10,8 @@ import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeCircleName from '../NoticeCircleName'
 import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
+import NoticeDigest from '../NoticeDigest'
 import NoticeHeadActors from '../NoticeHeadActors'
-import NoticeTypeIcon from '../NoticeTypeIcon'
-import styles from '../styles.css'
 
 const CommentMentionedYouNotice = ({
   notice,
@@ -23,9 +21,6 @@ const CommentMentionedYouNotice = ({
   if (!notice.actors) {
     return null
   }
-
-  const actorsCount = notice.actors.length
-  const isMultiActors = actorsCount > 1
 
   const commentArticle =
     notice.comment?.node.__typename === 'Article' ? notice.comment.node : null
@@ -51,77 +46,62 @@ const CommentMentionedYouNotice = ({
   })
 
   return (
-    <section className="container" data-test-id={TEST_ID.COMMENT_MENTIONED_YOU}>
-      <section className="avatar-wrap">
-        {isMultiActors ? (
-          <NoticeTypeIcon type="comment" />
-        ) : (
-          <NoticeActorAvatar user={notice.actors[0]} />
-        )}
-      </section>
-
-      <section className="content-wrap">
-        <NoticeHead>
-          <NoticeHeadActors actors={notice.actors} />
-
-          {commentArticle && (
-            <>
+    <>
+      {commentArticle && (
+        <NoticeDigest
+          notice={notice}
+          action={
+            <FormattedMessage
+              defaultMessage="mentioned you in a comment at {commentArticle}"
+              id="1zVIWy"
+              description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+              values={{
+                commentArticle: <NoticeArticleTitle article={commentArticle} />,
+              }}
+            />
+          }
+          content={<NoticeComment comment={notice.comment} />}
+          testId={TEST_ID.NOTICE_COMMENT_MENTIONED_YOU}
+        />
+      )}
+      {commentCircle && (
+        <NoticeDigest
+          notice={notice}
+          action={
+            <FormattedMessage
+              defaultMessage="commented in {commentCircle}"
+              id="BHFHeY"
+              description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+              values={{
+                commentCircle: (
+                  <NoticeCircleName
+                    circle={commentCircle}
+                    path={circleCommentPath}
+                  />
+                ),
+              }}
+            />
+          }
+          secondAction={
+            commentCircleDiscussion ? (
               <FormattedMessage
-                defaultMessage="mentioned you in a comment on {commentArticle}"
+                defaultMessage="discussion and mentioned you"
+                id="yZfKI4"
                 description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-                values={{
-                  commentArticle: (
-                    <NoticeArticleTitle article={commentArticle} />
-                  ),
-                }}
               />
-            </>
-          )}
-          {commentCircle && (
-            <>
+            ) : commentCircleBroadcast ? (
               <FormattedMessage
-                defaultMessage="commented in {commentCircle}"
+                defaultMessage="broadcast and mentioned you"
+                id="Xz/AHp"
                 description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-                values={{
-                  commentCircle: (
-                    <NoticeCircleName
-                      circle={commentCircle}
-                      path={circleCommentPath}
-                    />
-                  ),
-                }}
               />
-              {commentCircleDiscussion && (
-                <FormattedMessage
-                  defaultMessage="discussion and mentioned you"
-                  description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-                />
-              )}
-              {commentCircleBroadcast && (
-                <FormattedMessage
-                  defaultMessage="broadcast and mentioned you"
-                  description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-                />
-              )}
-            </>
-          )}
-        </NoticeHead>
-
-        <NoticeComment comment={notice.comment} />
-
-        {isMultiActors && (
-          <section className="multi-actor-avatars">
-            {notice.actors.map((actor, index) => (
-              <NoticeActorAvatar key={index} user={actor} size="md" />
-            ))}
-          </section>
-        )}
-
-        <NoticeDate notice={notice} />
-      </section>
-
-      <style jsx>{styles}</style>
-    </section>
+            ) : undefined
+          }
+          content={<NoticeComment comment={notice.comment} />}
+          testId={TEST_ID.NOTICE_COMMENT_MENTIONED_YOU}
+        />
+      )}
+    </>
   )
 }
 

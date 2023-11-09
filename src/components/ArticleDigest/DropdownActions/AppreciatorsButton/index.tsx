@@ -1,16 +1,26 @@
-import { IconClap16, Menu, TextIcon, Translate } from '~/components'
+import { useIntl } from 'react-intl'
+
+import { IconClap16, Menu } from '~/components'
 
 interface AppreciatorsButtonProps {
   openDialog: () => void
 }
 
 const AppreciatorsButton = ({ openDialog }: AppreciatorsButtonProps) => {
+  const intl = useIntl()
+
   return (
-    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconClap16 size="md" />} size="md" spacing="base">
-        <Translate id="viewLikers" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      text={intl.formatMessage({
+        defaultMessage: 'Likers',
+        description:
+          'src/components/ArticleDigest/DropdownActions/AppreciatorsButton/index.tsx',
+        id: 'dZQ+ba',
+      })}
+      icon={<IconClap16 size="mdS" />}
+      onClick={openDialog}
+      ariaHasPopup="dialog"
+    />
   )
 }
 

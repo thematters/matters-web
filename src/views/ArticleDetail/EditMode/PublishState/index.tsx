@@ -1,8 +1,8 @@
-import { EditModeArticleQuery } from '~/gql/graphql'
+import { useState } from 'react'
 
 import PendingState from './PendingState'
 import PublishedState from './PublishedState'
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface Props {
   article: {
@@ -14,43 +14,38 @@ interface Props {
       userName?: string | null
     }
   }
-  draft: NonNullable<
-    NonNullable<
-      EditModeArticleQuery['article'] & { __typename: 'Article' }
-    >['drafts']
-  >[0]
-
-  isSameHash: boolean
-
   cancel: () => void
 }
 
-const PublishState = ({
-  article,
-  draft,
-
-  isSameHash,
-
-  cancel,
-}: Props) => {
-  const isPending = draft.publishState === 'pending'
-  const isPublished = draft.publishState === 'published'
-  const isValidHash = typeof draft.mediaHash === 'string' && !!draft.mediaHash
+const PublishState = ({ article, cancel }: Props) => {
+  const [publishState, setPublishState] = useState('pending')
+  const isPending = publishState === 'pending'
+  const isPublished = publishState === 'published'
+  const [mediaHash, setMediaHash] = useState('')
 
   if (!isPending && !isPublished) {
     return null
   }
 
   return (
-    <section className="container">
-      {(isPending || isPublished) && !isValidHash && (
-        <PendingState draft={draft} id={article.id} />
+    <section className={styles.container}>
+      {isPending && (
+        <PendingState
+          id={article.id}
+          articleMediaHash={article.mediaHash}
+          updatePublishState={(media) => {
+            setPublishState('published')
+            setMediaHash(media)
+          }}
+        />
       )}
-      {isPublished && !isSameHash && isValidHash && (
-        <PublishedState article={article} draft={draft} cancel={cancel} />
+      {isPublished && (
+        <PublishedState
+          article={article}
+          cancel={cancel}
+          newestMediaHash={mediaHash}
+        />
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -5,7 +5,7 @@ import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { Cover, Tag } from '~/components'
 import { CoverTagFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface TagCoverProps {
   tag: CoverTagFragment
@@ -13,18 +13,16 @@ interface TagCoverProps {
 
 const TagCover = ({ tag }: TagCoverProps) => {
   const titleClasses = classNames({
-    title: true,
-    mask: !!tag.cover,
+    [styles.title]: true,
+    [styles.mask]: !!tag.cover,
   })
 
   return (
     <Cover cover={tag.cover} fallbackCover={IMAGE_TAG_COVER.src}>
       <div className={titleClasses}>
-        <div className="content">
-          <Tag tag={tag} type="title" disabled />
+        <div className={styles.content}>
+          <Tag tag={tag} type="title" is="span" />
         </div>
-
-        <style jsx>{styles}</style>
       </div>
     </Cover>
   )

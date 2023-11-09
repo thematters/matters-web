@@ -42,20 +42,40 @@ const persistedQueryLink = createPersistedQueryLink({
   useGETForHashedQueries: true,
 })
 
+const site_domain_tld =
+    process.env.NEXT_PUBLIC_SITE_DOMAIN_TLD || 'matters.town',
+  site_domain_tld_old =
+    process.env.NEXT_PUBLIC_SITE_DOMAIN_TLD_OLD || 'matters.news'
+
 /**
  * Dynamic API endpoint based on hostname
  */
 const httpLink = ({ host, headers }: { host: string; headers: any }) => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+  let apiUrl = process.env.NEXT_PUBLIC_API_URL as string
 
-  const hostname = new URL(apiUrl as string).hostname
+  let hostname = new URL(apiUrl).hostname
+  if (
+    // hostname.endsWith(site_domain_tld) &&
+    host.endsWith(site_domain_tld_old) // configured new tld but running on old tld
+  ) {
+    console.log('serving on different hostname:', {
+      apiUrl,
+      hostname,
+      host,
+      site_domain_tld,
+      site_domain_tld_old,
+    })
+    apiUrl = apiUrl.replace(site_domain_tld, site_domain_tld_old)
+    hostname = hostname.replace(site_domain_tld, site_domain_tld_old)
+    console.log('updated hostname:', { apiUrl, hostname })
+  }
 
   // toggle http for local dev
   const agent =
     (apiUrl || '').split(':')[0] === 'http'
       ? new http.Agent()
       : new https.Agent({
-          rejectUnauthorized: isProd, // allow access to https:...matters.news in localhost
+          rejectUnauthorized: isProd, // allow access to https:...matters... in localhost
         })
 
   return createUploadLink({
@@ -63,6 +83,7 @@ const httpLink = ({ host, headers }: { host: string; headers: any }) => {
     headers: {
       ...headers,
       host: hostname,
+      'Apollo-Require-Preflight': 'true',
     },
     fetchOptions: {
       agent,

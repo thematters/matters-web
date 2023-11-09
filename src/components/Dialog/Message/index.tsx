@@ -1,13 +1,17 @@
 import classNames from 'classnames'
 
+import { capitalizeFirstLetter } from '~/common/utils'
 import { Dialog } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface DialogMessageProps {
-  align?: 'left'
-  type?: 'error' | 'info'
-  spacing?: 'md' | 'xxl'
+  align?: 'left' | 'center'
+  smUpAlign?: 'left' | 'center'
+  type?: 'error'
+
+  noSpacing?: boolean
+  noSpacingBottom?: boolean
 }
 
 /**
@@ -26,24 +30,26 @@ interface DialogMessageProps {
  *
  */
 const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
-  align,
+  align = 'center',
+  smUpAlign = 'left',
   type,
-  spacing = 'base',
+
+  noSpacing,
+  noSpacingBottom,
 
   children,
 }) => {
   const contentClasses = classNames({
-    content: true,
-    [`${type}`]: !!type,
-    [`align-${align}`]: !!align,
-    [`spacing-${spacing}`]: !!spacing,
+    [styles.content]: true,
+    [styles[`${type}`]]: !!type,
+    [align ? styles[`align${capitalizeFirstLetter(align)}`] : '']: !!align,
+    [smUpAlign ? styles[`alignSmUp${capitalizeFirstLetter(smUpAlign)}`] : '']:
+      !!smUpAlign,
   })
 
   return (
-    <Dialog.Content spacing={['base', 'base']} hasFixed>
+    <Dialog.Content noSpacing={noSpacing} noSpacingBottom={noSpacingBottom}>
       <section className={contentClasses}>{children}</section>
-
-      <style jsx>{styles}</style>
     </Dialog.Content>
   )
 }

@@ -1,8 +1,27 @@
-import { Empty, IconEmptyWarning72, Translate } from '~/components'
+import { useIntl } from 'react-intl'
 
-export const EmptyArticle = () => (
-  <Empty
-    icon={<IconEmptyWarning72 size="xxl" />}
-    description={<Translate id="noArticlesYet" />}
-  />
-)
+import { ReactComponent as IconFile88 } from '@/public/static/icons/88px/file.svg'
+import { Empty, withIcon } from '~/components'
+
+export const EmptyArticle = ({
+  description,
+}: {
+  description?: React.ReactNode
+}) => {
+  const intl = useIntl()
+
+  return (
+    <Empty
+      spacingY="xxloose"
+      icon={withIcon(IconFile88)({ size: 'xxxlM' })}
+      description={
+        description ||
+        intl.formatMessage({
+          defaultMessage: 'No published articles yet',
+          id: 'yIlC0R',
+          description: 'src/components/Empty/EmptyArticle.tsx',
+        })
+      }
+    />
+  )
+}

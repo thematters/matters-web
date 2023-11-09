@@ -1,0 +1,7 @@
+.container {
+  &:not(.disabled) {
+    & .hasUnderline {
+      text-decoration: underline;
+    }
+  }
+}

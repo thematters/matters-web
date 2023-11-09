@@ -1,0 +1,5 @@
+.name {
+  @mixin line-clamp;
+
+  @mixin fix-cropped-letters;
+}

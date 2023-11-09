@@ -1,3 +1,5 @@
+import { URL_COLLECTION_DETAIL } from '../enums'
+
 const pattern = /^(:?\/\/|https?:\/\/)?([^/]*@)?(.+?)(:\d{2,5})?([/?].*)?$/
 
 export const extractDomain = (url: string) => {
@@ -24,15 +26,15 @@ export const parseURL = (url: string) => {
 /**
  * Responsive Image
  */
-export type ToSizedImageURLSize = '144w' | '360w' | '540w' | '1080w'
+export type ToSizedImageURLSize = number
 
 interface ToSizedImageURLProps {
   url: string
-  size?: ToSizedImageURLSize
+  width: ToSizedImageURLSize
+  height?: ToSizedImageURLSize
   ext?: 'webp'
+  disableAnimation?: boolean
 }
-
-const PROCESSED_PREFIX = 'processed'
 
 export const changeExt = ({ key, ext }: { key: string; ext?: 'webp' }) => {
   const list = key.split('.')
@@ -46,19 +48,96 @@ export const changeExt = ({ key, ext }: { key: string; ext?: 'webp' }) => {
   return `${key}${ext ? '.' + ext : ''}`
 }
 
-export const toSizedImageURL = ({ url, size, ext }: ToSizedImageURLProps) => {
-  const assetDomain = process.env.NEXT_PUBLIC_ASSET_DOMAIN
-    ? `https://${process.env.NEXT_PUBLIC_ASSET_DOMAIN}`
+export const toSizedImageURL = ({
+  url,
+  width,
+  height,
+  ext,
+  disableAnimation,
+}: ToSizedImageURLProps) => {
+  const assetDomain = process.env.NEXT_PUBLIC_CF_IMAGE_URL
+    ? `${process.env.NEXT_PUBLIC_CF_IMAGE_URL}`
     : ''
-  const isOutsideLink = url.indexOf(assetDomain) < 0
+  let urlDomain = assetDomain
+  let isOutsideLink = url.indexOf(assetDomain) < 0
+
+  // fallback to check if it's legacy asset url
+  // e.g. https://assets.matters.news/cover/63049798-ea19-4ba1-9325-d93ae4cc4857.jpeg
+  if (isOutsideLink) {
+    urlDomain = process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN
+      ? `https://${process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN}`
+      : ''
+    isOutsideLink =
+      url.indexOf(`${process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN}`) < 0
+  }
 
   if (!assetDomain || isOutsideLink) {
     return url
   }
 
-  const key = url.replace(assetDomain, ``)
+  const hostnameless = url.replace(urlDomain, ``)
+  const key = hostnameless.replace('/public', '')
   const extedUrl = changeExt({ key, ext })
-  const prefix = size ? '/' + PROCESSED_PREFIX + '/' + size : ''
+  let postfix = height
+    ? `w=${width},h=${height},fit=crop`
+    : `w=${width},h=${width * 4},fit=scale-down`
 
-  return assetDomain + prefix + extedUrl
+  if (disableAnimation) {
+    postfix += ',anim=false'
+  }
+
+  return assetDomain + extedUrl + '/' + postfix
+}
+
+export const isUrl = (key: string) => {
+  let valid = false
+
+  try {
+    valid = Boolean(new URL(key))
+  } catch (e) {
+    // do nothing
+  }
+
+  if (valid) {
+    return valid
+  }
+
+  // fallback to match url w/o protocol
+  const pattern = new RegExp(
+    '^([a-zA-Z]+:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR IP (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$', // fragment locator
+    'i'
+  )
+  return pattern.test(key)
+}
+
+export const parseSorter = (sorterStr: string) => {
+  const sorter: any = {}
+  if (sorterStr === '') {
+    return sorter
+  }
+  const sorters = sorterStr.split(URL_COLLECTION_DETAIL.SORTER_SEPARATOR)
+  sorters.map((s) => {
+    const [key, value] = s.split(URL_COLLECTION_DETAIL.SORTER_TYPE_SEPARATOR)
+    sorter[key] = value
+  })
+  return sorter
+}
+
+export const stringifySorter = (sorter: any) => {
+  let sorterStr = ''
+  const keys = Object.keys(sorter)
+  keys.map((key, index) => {
+    sorterStr += `${key}${URL_COLLECTION_DETAIL.SORTER_TYPE_SEPARATOR}${sorter[
+      key
+    ].toString()}`
+    if (index < keys.length - 1) {
+      sorterStr += URL_COLLECTION_DETAIL.SORTER_SEPARATOR
+    }
+  })
+  return sorterStr
 }

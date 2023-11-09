@@ -1,9 +1,0 @@
-.empty {
-  padding: var(--spacing-xxx-loose) var(--spacing-base);
-  color: var(--color-grey-light);
-  text-align: center;
-}
-
-.description {
-  margin-top: var(--spacing-x-tight);
-}

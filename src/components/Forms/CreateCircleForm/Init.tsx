@@ -1,16 +1,19 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
+  MAX_CIRCLE_DISPLAY_NAME_LENGTH,
+  MAX_CIRCLE_NAME_LENGTH,
   PAYMENT_CURRENCY,
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
   PAYMENT_MINIMAL_CIRCLE_AMOUNT,
 } from '~/common/enums'
 import {
   analytics,
+  normalizeName,
   parseFormSubmitErrors,
-  translate,
   validateCircleAmount,
   validateCircleDisplayName,
   validateCircleName,
@@ -20,13 +23,12 @@ import {
   Form,
   LanguageContext,
   Layout,
-  Translate,
   useMutation,
 } from '~/components'
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
 import { PutCircleMutation } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -45,6 +47,7 @@ const Init: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
+  const intl = useIntl()
   const [create] = useMutation<PutCircleMutation>(PUT_CIRCLE, undefined, {
     showToast: false,
   })
@@ -63,13 +66,14 @@ const Init: React.FC<FormProps> = ({
     handleSubmit,
     setFieldValue,
     isSubmitting,
-    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       name: '',
       displayName: '',
       amount: PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD,
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate: ({ name, displayName, amount }) =>
       _pickBy({
         name: validateCircleName(name, lang),
@@ -96,26 +100,37 @@ const Init: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        codes.forEach((c) => {
-          if (c === 'NAME_EXISTS') {
+        const [messages, codes] = parseFormSubmitErrors(error as any)
+        codes.forEach((code) => {
+          if (code === 'NAME_EXISTS') {
             setFieldError(
               'name',
-              translate({
-                zh_hant: 'Oops！此網址已被使用了，換一個試試',
-                zh_hans: 'Oops！此网址名称已被使用了，换一个试试',
-                lang,
+              intl.formatMessage({
+                defaultMessage:
+                  'This URL name has already been used, try another one',
+                id: 'VwuiYK',
+                description: 'src/components/Forms/CreateCircleForm/Init.tsx',
               })
             )
-          } else if (c === 'NAME_INVALID') {
-            setFieldError('name', translate({ id: 'hintCircleName', lang }))
-          } else if (c === 'DISPLAYNAME_INVALID') {
+          } else if (code === 'NAME_INVALID') {
             setFieldError(
               'name',
-              translate({ id: 'hintCircleDisplayName', lang })
+              intl.formatMessage({
+                defaultMessage:
+                  'Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed.',
+                id: 'CBDDR5',
+              })
+            )
+          } else if (code === 'DISPLAYNAME_INVALID') {
+            setFieldError(
+              'name',
+              intl.formatMessage({
+                defaultMessage: 'Must be between 2-12 characters long.',
+                id: '+7SAix',
+              })
             )
           } else {
-            setFieldError('name', messages[c])
+            setFieldError('name', intl.formatMessage(messages[code]))
           }
         })
       }
@@ -125,57 +140,70 @@ const Init: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<Translate zh_hant="圍爐名稱" zh_hans="围炉名称" />}
+        label={<FormattedMessage defaultMessage="Circle Name" id="q9oMKE" />}
+        hasLabel
         type="text"
         name="displayName"
         required
-        placeholder={translate({
-          zh_hant: '給圍爐取一個吸引人的名字吧',
-          zh_hans: '给围炉取一个吸引人的名字吧',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter the name of your Circle',
+          id: 'wXzTZ0',
         })}
         value={values.displayName}
+        hint={`${values.displayName.length}/${MAX_CIRCLE_DISPLAY_NAME_LENGTH}`}
         error={touched.displayName && errors.displayName}
+        hintAlign={touched.displayName && errors.displayName ? 'left' : 'right'}
+        maxLength={MAX_CIRCLE_DISPLAY_NAME_LENGTH}
         onBlur={handleBlur}
         onChange={handleChange}
+        spacingBottom="base"
       />
 
-      <section className="displayNameInput">
+      <section className={styles.nameInput}>
         <Form.Input
           label={
-            <Translate
-              zh_hant="設置圍爐網址（創建後不可修改）"
-              zh_hans="设置围炉网址（创建后不可修改）"
+            <FormattedMessage
+              defaultMessage="Set the Circle URL (cannot be modified after creation)"
+              id="QZXKhG"
+              description="src/components/Forms/CreateCircleForm/Init.tsx"
             />
           }
+          hasLabel
           type="text"
           name="name"
           required
-          placeholder={translate({
-            zh_hant: '自定義網址名稱',
-            zh_hans: '自定义网址名称',
-            lang,
+          placeholder={intl.formatMessage({
+            defaultMessage: 'Custom URL Name',
+            id: 'eov+J2',
           })}
           value={values.name}
+          hint={`${values.name.length}/${MAX_CIRCLE_NAME_LENGTH}`}
           error={touched.name && errors.name}
+          hintAlign={touched.name && errors.name ? 'left' : 'right'}
+          maxLength={MAX_CIRCLE_NAME_LENGTH}
           onBlur={handleBlur}
-          onChange={handleChange}
+          onChange={(e) => {
+            const name = normalizeName(e.target.value)
+            setFieldValue('name', name)
+            return name
+          }}
+          spacingBottom="base"
         />
-
-        <style jsx>{styles}</style>
       </section>
 
       <Form.AmountInput
+        label={
+          <FormattedMessage
+            defaultMessage="Set threshold for circle (per month)"
+            id="6BXcdo"
+            description="src/components/Forms/CreateCircleForm/Init.tsx"
+          />
+        }
+        hasLabel
         required
         min={PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}
         max={PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}
         currency={PAYMENT_CURRENCY.HKD}
-        label={
-          <Translate
-            zh_hant="設定圍爐門檻（每月）"
-            zh_hans="设定围炉门槛（每月）"
-          />
-        }
         name="amount"
         value={values.amount}
         error={touched.amount && errors.amount}
@@ -199,11 +227,11 @@ const Init: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <Dialog.Header.RightButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
-      text={<Translate id="nextStep" />}
+      disabled={isSubmitting}
+      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
       loading={isSubmitting}
     />
   )
@@ -212,30 +240,50 @@ const Init: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton />}
           right={
             <>
               <Layout.Header.Title id="circleCreation" />
-              {SubmitButton}
+              <Layout.Header.RightButton
+                type="submit"
+                form={formId}
+                disabled={isSubmitting}
+                text={
+                  <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />
+                }
+                loading={isSubmitting}
+              />
             </>
           }
         />
-        {InnerForm}
+
+        <Layout.Main.Spacing>{InnerForm}</Layout.Main.Spacing>
       </>
     )
   }
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="circleCreation"
-          closeDialog={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title="circleCreation"
+        closeDialog={closeDialog}
+        rightBtn={SubmitButton}
+      />
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content>{InnerForm}</Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <>
+            <Dialog.TextButton
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
+              color="greyDarker"
+              onClick={closeDialog}
+            />
+
+            {SubmitButton}
+          </>
+        }
+      />
     </>
   )
 }

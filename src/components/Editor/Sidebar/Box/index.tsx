@@ -11,7 +11,7 @@ import {
   Translate,
 } from '~/components'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface BoxProps {
   icon: React.ReactNode
@@ -19,6 +19,7 @@ interface BoxProps {
   subtitle?: TextId
   onClick?: () => any
   disabled?: boolean
+  footerSpacing?: boolean
 }
 
 const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
@@ -27,18 +28,20 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
   subtitle,
   onClick,
   disabled,
+  footerSpacing = true,
   children,
 }) => {
   const { lang } = useContext(LanguageContext)
 
   const boxClasses = classNames({
-    box: true,
+    [styles.box]: true,
+    [styles.footerSpacing]: !!footerSpacing,
     'u-area-disable': disabled,
   })
 
   return (
     <section className={boxClasses}>
-      <header>
+      <header className={styles.header}>
         <TextIcon icon={icon} size="md" weight="md" spacing="xtight">
           <Translate id={title} />
         </TextIcon>
@@ -46,7 +49,7 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
         {onClick && (
           <Button
             onClick={onClick}
-            bgActiveColor="grey-lighter"
+            bgActiveColor="greyLighter"
             spacing={['xtight', 'xtight']}
             aria-haspopup="dialog"
             aria-label={translate({ id: title, lang })}
@@ -57,14 +60,12 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
       </header>
 
       {subtitle && (
-        <p className="subtitle">
+        <p className={styles.subtitle}>
           <Translate id={subtitle} />
         </p>
       )}
 
       {children}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

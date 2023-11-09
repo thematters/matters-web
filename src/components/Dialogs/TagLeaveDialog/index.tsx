@@ -1,5 +1,10 @@
-import { ADD_TOAST } from '~/common/enums'
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import {
+  Dialog,
+  toast,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+} from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import { UpdateTagSettingMutation } from '~/gql/graphql'
 
@@ -15,11 +20,35 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
   const [update, { loading }] =
     useMutation<UpdateTagSettingMutation>(UPDATE_TAG_SETTING)
 
+  const onClick = async () => {
+    const result = await update({
+      variables: {
+        input: { id, type: isOwner ? 'leave' : 'leave_editor' },
+      },
+    })
+
+    if (!result) {
+      throw new Error('tag leave failed')
+    }
+
+    toast.success({
+      message: (
+        <Translate
+          zh_hant="辭去權限成功"
+          zh_hans="辞去权限成功"
+          en="Resignation Success"
+        />
+      ),
+    })
+
+    closeDialog()
+  }
+
   return (
     <>
       {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate
@@ -28,9 +57,8 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
               en="resign as tag maintainer"
             />
           }
-          closeDialog={closeDialog}
-          closeTextId="cancel"
         />
+
         <Dialog.Message>
           <h3>
             <Translate
@@ -48,56 +76,38 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
             />
           </p>
         </Dialog.Message>
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            textColor="white"
-            bgColor="red"
-            loading={loading}
-            onClick={async () => {
-              const result = await update({
-                variables: {
-                  input: { id, type: isOwner ? 'leave' : 'leave_editor' },
-                },
-              })
 
-              if (!result) {
-                throw new Error('tag leave failed')
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={
+                <Translate
+                  zh_hant="確認辭去"
+                  zh_hans="确认辞去"
+                  en="Confirm Resignation"
+                />
               }
-
-              window.dispatchEvent(
-                new CustomEvent(ADD_TOAST, {
-                  detail: {
-                    color: 'green',
-                    content: (
-                      <Translate
-                        zh_hant="辭去權限成功"
-                        zh_hans="辞去权限成功"
-                        en="Resignation Success"
-                      />
-                    ),
-                    duration: 2000,
-                  },
-                })
-              )
-
-              closeDialog()
-            }}
-          >
-            <Translate
-              zh_hant="確認辭去"
-              zh_hans="确认辞去"
-              en="Confirm Resignation"
+              color={loading ? 'green' : 'red'}
+              onClick={onClick}
+              loading={loading}
             />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            textColor="black"
-            bgColor="grey-lighter"
-            onClick={closeDialog}
-          >
-            <Translate zh_hant="取消" zh_hans="取消" en="cancel" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={
+                <Translate
+                  zh_hant="確認辭去"
+                  zh_hans="确认辞去"
+                  en="Confirm Resignation"
+                />
+              }
+              color={loading ? 'green' : 'red'}
+              onClick={onClick}
+              loading={loading}
+            />
+          }
+        />
       </Dialog>
     </>
   )

@@ -1,11 +1,11 @@
 import { useContext } from 'react'
 
 import { ASSET_TYPE } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { toSizedImageURL, translate } from '~/common/utils'
 import { IconChecked, LanguageContext, Translate } from '~/components'
 import { AssetFragment } from '~/gql/graphql'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 
 interface SelectorProps {
   assets: AssetFragment[]
@@ -26,7 +26,7 @@ const Selector: React.FC<SelectorProps> = ({
   )
 
   return (
-    <section className="selector">
+    <section className={styles.selector}>
       <h3>
         <Translate
           zh_hant="你也可以選擇一張已有的圖片作為封面"
@@ -53,7 +53,15 @@ const Selector: React.FC<SelectorProps> = ({
                 lang,
               })}
             >
-              <img src={asset.path} alt="cover" />
+              <img
+                src={toSizedImageURL({
+                  url: asset.path,
+                  width: 72,
+                  height: 72,
+                  disableAnimation: true,
+                })}
+                alt="cover"
+              />
 
               {asset.path === selected?.path && (
                 <IconChecked size="md" color="green" />
@@ -62,8 +70,6 @@ const Selector: React.FC<SelectorProps> = ({
           </li>
         ))}
       </ul>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

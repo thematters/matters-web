@@ -1,0 +1,59 @@
+.fixedMain {
+  position: fixed;
+  right: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-areas: 'spacingLeft main spacingRight';
+  grid-template-columns: minmax(0, 1fr) minmax(0, 100%) minmax(0, 1fr);
+  margin: 0;
+
+  @media (--sm-up) {
+    margin: 0 var(--spacing-base);
+  }
+
+  @media (--md-up) {
+    margin: 0 var(--spacing-xx-loose);
+  }
+
+  @media (--lg-up) {
+    grid-template-columns: minmax(0, 1fr) 1105px minmax(0, 1fr);
+    margin: 0 auto;
+  }
+}
+
+.main {
+  grid-column: main;
+
+  @media (--sm-up) {
+    display: grid;
+    grid-template-areas: 'left content';
+    grid-template-columns: 3rem minmax(0, 100%);
+    grid-column-gap: 1.25rem;
+  }
+
+  @media (--md-up) {
+    grid-template-areas: 'left content right';
+    grid-template-columns: 4rem minmax(0, 100%) 17rem;
+    grid-column-gap: 2.5rem;
+  }
+
+  @media (--lg-up) {
+    grid-template-areas: 'left content content content content content content content right right right';
+    grid-template-columns: repeat(11, [col-start] minmax(0, 1fr));
+  }
+}
+
+.article {
+  position: relative;
+  grid-column: content;
+  pointer-events: initial;
+
+  @media (--sm-up) {
+    grid-column: content;
+    padding-bottom: 0;
+  }
+}

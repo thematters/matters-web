@@ -1,23 +1,22 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
 import {
-  CircleInvitation,
   EmptyWarning,
   InfiniteScroll,
   List,
   QueryError,
   Spinner,
   Throw404,
-  Translate,
   useRoute,
   ViewerContext,
 } from '~/components'
-import CIRCLE_ACCEPTED_INVITES from '~/components/GQL/queries/circleAcceptedInvites'
 import { CircleAcceptedInvitesQuery } from '~/gql/graphql'
 
-import styles from './styles.css'
+import { CircleInvitation } from '../CircleInvitation'
+import { CIRCLE_ACCEPTED_INVITES } from './gql'
 
 /**
  * This component is for listing circle accepted invitations.
@@ -79,10 +78,10 @@ const AcceptedInvites = () => {
     return (
       <EmptyWarning
         description={
-          <Translate
-            zh_hant="還沒有任何用戶回覆你的邀請喔！"
-            zh_hans="还没有任何用户回覆你的邀请喔！"
-            en="friends have not accepted your inivtations."
+          <FormattedMessage
+            defaultMessage="friends have not accepted your invitations."
+            id="RxiHr/"
+            description="src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
           />
         }
       />
@@ -90,19 +89,15 @@ const AcceptedInvites = () => {
   }
 
   return (
-    <section className="container">
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List hasBorder={false}>
-          {(edges || []).map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <CircleInvitation invitation={node} />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
-
-      <style jsx>{styles}</style>
-    </section>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List hasBorder={false}>
+        {(edges || []).map(({ node, cursor }, i) => (
+          <List.Item key={cursor}>
+            <CircleInvitation invitation={node} />
+          </List.Item>
+        ))}
+      </List>
+    </InfiniteScroll>
   )
 }
 

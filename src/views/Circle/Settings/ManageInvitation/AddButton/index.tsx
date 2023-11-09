@@ -1,4 +1,6 @@
-import { Button, TextIcon, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Button, TextIcon } from '~/components'
 
 import AddInvitationDialog from '../AddInvitationDialog'
 
@@ -17,12 +19,16 @@ const CircleInvitationAddButton = () => {
       {({ openDialog }) => (
         <Button
           size={['6rem', '2rem']}
-          bgActiveColor="grey-lighter"
+          bgColor={'green'}
           onClick={openDialog}
           aria-haspopup="dialog"
         >
-          <TextIcon color="green" size="md" weight="md">
-            <Translate id="addCircleInvitation" />
+          <TextIcon color="white" size="mdS" weight="md">
+            <FormattedMessage
+              defaultMessage="Add Invitation"
+              id="b8ogKp"
+              description="src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
+            />
           </TextIcon>
         </Button>
       )}

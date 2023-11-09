@@ -1,16 +1,24 @@
-import { IconShare16, Menu, TextIcon, Translate } from '~/components'
+import { useIntl } from 'react-intl'
+
+import { IconShare16, Menu } from '~/components'
 
 interface ShareButtonProps {
   openDialog: () => void
 }
 
 const ShareButton = ({ openDialog }: ShareButtonProps) => {
+  const intl = useIntl()
+
   return (
-    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
-      <TextIcon icon={<IconShare16 size="md" />} size="md" spacing="base">
-        <Translate id="shareArticle" />
-      </TextIcon>
-    </Menu.Item>
+    <Menu.Item
+      text={intl.formatMessage({
+        defaultMessage: 'Share Article',
+        id: '/GyMKa',
+      })}
+      icon={<IconShare16 size="mdS" />}
+      onClick={openDialog}
+      ariaHasPopup="dialog"
+    />
   )
 }
 
