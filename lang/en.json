@@ -551,10 +551,6 @@
     "defaultMessage": "Unblock",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
-  "Dt1o78": {
-    "defaultMessage": "Wallet is linked to a different account",
-    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
-  },
   "DyuHBH": {
     "defaultMessage": "Unpin from profile",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
@@ -760,9 +756,6 @@
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
-  "KuP/6B": {
-    "defaultMessage": "Images have a {sizeInMB} megabyte (MB) size limit."
   },
   "KxVlDj": {
     "defaultMessage": "Settings - Blocked Users",
@@ -1262,6 +1255,9 @@
   "bBYO6x": {
     "defaultMessage": "Unblock",
     "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "bSqeXm": {
+    "defaultMessage": "{ext, select, gif {GIF format i} other {I} }mages have a {sizeInMB} megabyte (MB) size limit."
   },
   "beLe/F": {
     "defaultMessage": "Broadcast"
@@ -1795,7 +1791,7 @@
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
   "v8dGSd": {
-    "defaultMessage": "Wallet is linked to a different account",
+    "defaultMessage": "This wallet is linked to a different account",
     "description": "CRYPTO_WALLET_EXISTS"
   },
   "vAc1Bw": {
