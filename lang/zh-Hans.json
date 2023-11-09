@@ -551,10 +551,6 @@
     "defaultMessage": "解除屏蔽",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
-  "Dt1o78": {
-    "defaultMessage": "该钱包已关联至其他帐号",
-    "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
-  },
   "DyuHBH": {
     "defaultMessage": "取消代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
