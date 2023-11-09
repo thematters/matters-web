@@ -200,6 +200,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
             const { Feed } = edge
             return <Feed key={edge.__typename + i} />
           }
+          const isFirstFold = i <= 3 // TODO: better guess'ing of first fold on different screens
 
           return (
             <List.Item key={`${sortBy}:${edge.node.id}`}>
@@ -224,6 +225,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                     id: edge.node.author.id,
                   })
                 }}
+                isFirstFold={isFirstFold}
               />
               <CardExposureTracker
                 contentType="article"
