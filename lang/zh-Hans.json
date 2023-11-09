@@ -602,7 +602,7 @@
     "defaultMessage": "查看"
   },
   "FhWC22": {
-    "defaultMessage": "共建协作"
+    "defaultMessage": "社区共建基地"
   },
   "FmWYRt": {
     "defaultMessage": "免费资格时长"
@@ -922,7 +922,7 @@
     "description": "USER_EMAIL_NOT_FOUND"
   },
   "Q8Qw5B": {
-    "defaultMessage": "描述"
+    "defaultMessage": "个人简介"
   },
   "QUqfbW": {
     "defaultMessage": "说说围炉的有趣之处，吸引支持者加入",
@@ -1212,7 +1212,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
-    "defaultMessage": "修订",
+    "defaultMessage": "修订作品",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZYvVYX": {
@@ -1424,7 +1424,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hrgo+E": {
-    "defaultMessage": "归档"
+    "defaultMessage": "隐藏"
   },
   "icdrwy": {
     "defaultMessage": "追踪了你",
@@ -1716,7 +1716,7 @@
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "rfz/fN": {
-    "defaultMessage": "建議尺寸 1600 x 900 像素"
+    "defaultMessage": "建议封面尺寸 1600 x 900 像素"
   },
   "rqS2aA": {
     "defaultMessage": "请登录该帐户解绑钱包后再试",
