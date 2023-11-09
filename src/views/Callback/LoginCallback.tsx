@@ -26,14 +26,14 @@ const LoginCallback = () => {
   const { getQuery } = useRoute()
   const email = getQuery('email')
   const code = getQuery('code')
-  const referralCode =
-    getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
-    storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
-    undefined
 
   useEffect(() => {
     ;(async () => {
       try {
+        const referralCode =
+          getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
+          storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+          undefined
         const { data } = await login({
           variables: {
             input: {
