@@ -181,7 +181,7 @@
     "defaultMessage": "最多可設置 3 個代表作"
   },
   "2slIPX": {
-    "defaultMessage": "讚賞"
+    "defaultMessage": "我的讚賞"
   },
   "2vpUYs": {
     "defaultMessage": "回覆留言",
@@ -602,7 +602,7 @@
     "defaultMessage": "查看"
   },
   "FhWC22": {
-    "defaultMessage": "共建協作"
+    "defaultMessage": "社區共建基地"
   },
   "FmWYRt": {
     "defaultMessage": "免費資格時長"
@@ -922,7 +922,7 @@
     "description": "USER_EMAIL_NOT_FOUND"
   },
   "Q8Qw5B": {
-    "defaultMessage": "描述"
+    "defaultMessage": "個人簡介"
   },
   "QUqfbW": {
     "defaultMessage": "說說圍爐的有趣之處，吸引支持者加入",
@@ -1212,7 +1212,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
-    "defaultMessage": "修訂",
+    "defaultMessage": "修訂作品",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZYvVYX": {
@@ -1257,7 +1257,7 @@
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
   },
   "bBYO6x": {
-    "defaultMessage": "取消封鎖",
+    "defaultMessage": "取消封鎖k",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
   "bSqeXm": {
@@ -1424,7 +1424,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hrgo+E": {
-    "defaultMessage": "封存"
+    "defaultMessage": "隱藏"
   },
   "icdrwy": {
     "defaultMessage": "追蹤了你",
@@ -1716,7 +1716,7 @@
     "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "rfz/fN": {
-    "defaultMessage": "建議尺寸 1600 x 900 像素"
+    "defaultMessage": "建議封面尺寸 1600 x 900 像素"
   },
   "rqS2aA": {
     "defaultMessage": "請登入該帳戶解綁錢包後再試",
@@ -1766,7 +1766,7 @@
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "u5aHb4": {
-    "defaultMessage": "複製連結"
+    "defaultMessage": "複製鏈接"
   },
   "uJkv2X": {
     "defaultMessage": "編輯標籤"
