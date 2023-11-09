@@ -18,6 +18,8 @@ import {
   OAUTH_STORAGE_STATE,
   OAUTH_TYPE,
   PATHS,
+  REFERRAL_QUERY_REFERRAL_KEY,
+  REFERRAL_STORAGE_REFERRAL_CODE,
 } from '~/common/enums'
 import { analytics, sessionStorage, setCookies, storage } from '~/common/utils'
 import {
@@ -66,6 +68,11 @@ const SocialCallback = ({ type }: Props) => {
   // Twitter
   const oauthToken = getQuery('oauth_token')
   const oauthVerifier = getQuery('oauth_verifier')
+  const referralCode =
+    getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
+    storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+    undefined
+
   useEffect(() => {
     const localState = storage.get(OAUTH_STORAGE_STATE)
     const localNonce = storage.get(OAUTH_STORAGE_NONCE)
@@ -117,6 +124,7 @@ const SocialCallback = ({ type }: Props) => {
                 type,
                 language: lang,
                 ...input,
+                referralCode,
               },
             },
           })

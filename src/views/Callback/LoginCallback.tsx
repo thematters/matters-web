@@ -4,8 +4,10 @@ import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
+  REFERRAL_QUERY_REFERRAL_KEY,
+  REFERRAL_STORAGE_REFERRAL_CODE,
 } from '~/common/enums'
-import { redirectToTarget, setCookies } from '~/common/utils'
+import { redirectToTarget, setCookies, storage } from '~/common/utils'
 import { LanguageContext, useMutation, useRoute } from '~/components'
 import { EMAIL_LOGIN } from '~/components/GQL/mutations/emailLogin'
 import { EmailLoginMutation } from '~/gql/graphql'
@@ -24,6 +26,10 @@ const LoginCallback = () => {
   const { getQuery } = useRoute()
   const email = getQuery('email')
   const code = getQuery('code')
+  const referralCode =
+    getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
+    storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+    undefined
 
   useEffect(() => {
     ;(async () => {
@@ -34,6 +40,7 @@ const LoginCallback = () => {
               email,
               passwordOrCode: code,
               language: lang,
+              referralCode,
             },
           },
         })

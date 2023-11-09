@@ -9,6 +9,8 @@ import {
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
   ERROR_CODES,
+  REFERRAL_QUERY_REFERRAL_KEY,
+  REFERRAL_STORAGE_REFERRAL_CODE,
   WALLET_ERROR_MESSAGES,
 } from '~/common/enums'
 import {
@@ -17,6 +19,7 @@ import {
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
+  storage,
   WalletType,
 } from '~/common/utils'
 import {
@@ -32,6 +35,7 @@ import {
   TextIcon,
   toast,
   useMutation,
+  useRoute,
 } from '~/components'
 import {
   AddWalletLoginMutation,
@@ -79,6 +83,12 @@ const Connect: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const isLogin = type === 'login'
   const isConnect = type === 'connect'
+
+  const { getQuery } = useRoute()
+  const referralCode =
+    getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
+    storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+    undefined
 
   const [authTypeFeed] = useState<AuthFeedType>('wallet')
 
@@ -191,7 +201,9 @@ const Connect: React.FC<FormProps> = ({
         if (isLogin) {
           // confirm auth
           const { data: loginData } = await walletLogin({
-            variables: { input: { ...variables.input, language: lang } },
+            variables: {
+              input: { ...variables.input, language: lang, referralCode },
+            },
           })
 
           const token = loginData?.walletLogin.token || ''
