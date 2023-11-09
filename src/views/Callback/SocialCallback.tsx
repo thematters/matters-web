@@ -68,12 +68,12 @@ const SocialCallback = ({ type }: Props) => {
   // Twitter
   const oauthToken = getQuery('oauth_token')
   const oauthVerifier = getQuery('oauth_verifier')
-  const referralCode =
-    getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
-    storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
-    undefined
 
   useEffect(() => {
+    const referralCode =
+      getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
+      storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+      undefined
     const localState = storage.get(OAUTH_STORAGE_STATE)
     const localNonce = storage.get(OAUTH_STORAGE_NONCE)
     const localCodeVerifier = storage.get(OAUTH_STORAGE_CODE_VERIFIER)
