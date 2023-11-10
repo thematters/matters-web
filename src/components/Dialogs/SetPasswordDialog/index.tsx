@@ -6,7 +6,9 @@ interface SetPasswordDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseSetPasswordDialog = ({ children }: SetPasswordDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)

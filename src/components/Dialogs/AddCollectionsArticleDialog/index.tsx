@@ -32,7 +32,7 @@ interface AddCollectionsArticleDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('../AddCollectionDialog/Content'), {
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const BaseAddCollectionsArticleDialog = ({

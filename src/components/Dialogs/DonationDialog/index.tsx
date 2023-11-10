@@ -12,7 +12,9 @@ type DonationDialogProps = BaseDonationDialogProps & {
   defaultStep?: Step
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseDonationDialog = ({
   children,

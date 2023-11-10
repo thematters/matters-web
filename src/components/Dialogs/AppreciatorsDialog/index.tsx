@@ -21,7 +21,9 @@ const fragments = {
   `,
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseAppreciatorsDialog = ({
   article,

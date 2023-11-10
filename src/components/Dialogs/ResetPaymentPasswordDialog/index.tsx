@@ -8,7 +8,7 @@ interface ResetPaymentPasswordProps {
 
 const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 
 const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({

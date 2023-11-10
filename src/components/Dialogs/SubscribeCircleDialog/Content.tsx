@@ -15,15 +15,15 @@ type SubscribeCircleDialogContentProps = BaseSubscribeCircleDialogProps & {
 
 const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 const DynamicPaymentSetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/SetPassword'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 const DynamicSubscribeCircleForm = dynamic(
   () => import('~/components/Forms/PaymentForm/SubscribeCircle'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 
 const SubscribeCircleDialogContent = ({

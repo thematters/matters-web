@@ -19,7 +19,6 @@ import {
   IconClose2V32,
   LanguageContext,
   Spinner,
-  SpinnerWhite,
   toast,
   Translate,
   useDirectImageUpload,
@@ -185,7 +184,7 @@ export const CoverUploader = ({
     return (
       <div className={maskClasses}>
         {loading || uploading ? (
-          <>{cover ? <Spinner /> : <SpinnerWhite />}</>
+          <Spinner color={cover ? 'greyLight' : 'white'} />
         ) : (
           <section className={styles.userProfileCover}>
             <IconCamera32 color="white" size="lg" />

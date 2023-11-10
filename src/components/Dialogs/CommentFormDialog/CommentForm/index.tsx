@@ -21,7 +21,7 @@ import styles from './styles.module.css'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 export interface CommentFormProps {
