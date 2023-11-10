@@ -578,10 +578,6 @@
     "defaultMessage": "你無權限進行該操作",
     "description": "FORBIDDEN_BY_STATE"
   },
-  "EwbNbl": {
-    "defaultMessage": "Oops！連結已失效",
-    "description": "src/views/Callback/GoogleCallback.tsx"
-  },
   "F3zk7E": {
     "defaultMessage": "(草稿刪除後無法恢復)",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
@@ -883,13 +879,13 @@
     "defaultMessage": "豆瓣",
     "description": "src/components/Share/Buttons/Douban.tsx"
   },
-  "NfCbnZ": {
-    "defaultMessage": "支持者數量",
-    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
-  },
   "NdtzIs": {
     "defaultMessage": "郵件地址驗證連結已發送至 {email}",
     "description": "src/components/GlobalToast/index.tsx"
+  },
+  "NfCbnZ": {
+    "defaultMessage": "支持者數量",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
   "NzfL1d": {
     "defaultMessage": "再次輸入密碼",
@@ -926,13 +922,13 @@
     "defaultMessage": "登入密碼",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
-  "PmLGMc": {
-    "defaultMessage": "尚無草稿",
-    "description": "src/components/Empty/EmptyDraft.tsx"
-  },
   "PliM8z": {
     "defaultMessage": "請移步相關頁面重新獲取連結，您也可以",
     "description": "src/views/Callback/UI.tsx"
+  },
+  "PmLGMc": {
+    "defaultMessage": "尚無草稿",
+    "description": "src/components/Empty/EmptyDraft.tsx"
   },
   "Pp/0po": {
     "defaultMessage": "換一批"
@@ -1086,9 +1082,6 @@
     "defaultMessage": "草稿",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
-  "VbxMwX": {
-    "defaultMessage": "確認刪除草稿，草稿會馬上消失。"
-  },
   "VefaFQ": {
     "defaultMessage": "內容長度超出限制 ({length}/{limit})"
   },
@@ -1216,13 +1209,13 @@
     "defaultMessage": "已封鎖用戶",
     "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
-  "YgZOAm": {
-    "defaultMessage": "我的創作 - 已封存",
-    "description": "src/views/Me/Works/Archived/index.tsx"
-  },
   "YWQTXE": {
     "defaultMessage": "查看作品",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
+  },
+  "YgZOAm": {
+    "defaultMessage": "我的創作 - 已封存",
+    "description": "src/views/Me/Works/Archived/index.tsx"
   },
   "YlPCRU": {
     "defaultMessage": "關聯了",
@@ -1513,12 +1506,12 @@
   "k0ooDW": {
     "defaultMessage": "標籤描述"
   },
-  "k2veDA": {
-    "defaultMessage": "創作"
-  },
   "k1SWZ2": {
     "defaultMessage": "取消闔上",
     "description": "src/components/Comment/DropdownActions/UncollapseButton.tsx"
+  },
+  "k2veDA": {
+    "defaultMessage": "創作"
   },
   "k5NnNF": {
     "defaultMessage": "追蹤了你",
@@ -1976,12 +1969,12 @@
     "defaultMessage": "該名稱已被其他使用者使用",
     "description": "NAME_EXISTS"
   },
+  "yAflVX": {
+    "defaultMessage": "草稿已刪除"
+  },
   "yBCdku": {
     "defaultMessage": "我的創作 - 已發布",
     "description": "src/views/Me/Works/Published/index.tsx"
-  },
-  "yAflVX": {
-    "defaultMessage": "草稿已刪除"
   },
   "yBUiiy": {
     "defaultMessage": "操作無法撤銷，確認封存嗎？"
