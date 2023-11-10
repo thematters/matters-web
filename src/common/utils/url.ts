@@ -33,6 +33,7 @@ interface ToSizedImageURLProps {
   width: ToSizedImageURLSize
   height?: ToSizedImageURLSize
   ext?: 'webp'
+  disableAnimation?: boolean
 }
 
 export const changeExt = ({ key, ext }: { key: string; ext?: 'webp' }) => {
@@ -52,6 +53,7 @@ export const toSizedImageURL = ({
   width,
   height,
   ext,
+  disableAnimation,
 }: ToSizedImageURLProps) => {
   const assetDomain = process.env.NEXT_PUBLIC_CF_IMAGE_URL
     ? `${process.env.NEXT_PUBLIC_CF_IMAGE_URL}`
@@ -76,19 +78,41 @@ export const toSizedImageURL = ({
   const hostnameless = url.replace(urlDomain, ``)
   const key = hostnameless.replace('/public', '')
   const extedUrl = changeExt({ key, ext })
-  const postfix = height
+  let postfix = height
     ? `w=${width},h=${height},fit=crop`
     : `w=${width},h=${width * 4},fit=scale-down`
+
+  if (disableAnimation) {
+    postfix += ',anim=false'
+  }
 
   return assetDomain + extedUrl + '/' + postfix
 }
 
 export const isUrl = (key: string) => {
+  let valid = false
+
   try {
-    return Boolean(new URL(key))
+    valid = Boolean(new URL(key))
   } catch (e) {
-    return false
+    // do nothing
   }
+
+  if (valid) {
+    return valid
+  }
+
+  // fallback to match url w/o protocol
+  const pattern = new RegExp(
+    '^([a-zA-Z]+:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR IP (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$', // fragment locator
+    'i'
+  )
+  return pattern.test(key)
 }
 
 export const parseSorter = (sorterStr: string) => {

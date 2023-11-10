@@ -1,6 +1,7 @@
 import C2C from 'react-copy-to-clipboard'
+import { FormattedMessage } from 'react-intl'
 
-import { toast, Translate } from '~/components'
+import { toast } from '~/components'
 
 interface CopyToClipboardProps {
   text: string
@@ -16,14 +17,21 @@ export const CopyToClipboard: React.FC<
       onCopy={(_, copied) => {
         if (!copied) {
           toast.error({
-            message: <Translate id="failureCopy" />,
+            message: (
+              <FormattedMessage
+                defaultMessage="Failed to copy, please try again."
+                id="JRkgKV"
+              />
+            ),
           })
 
           return
         }
 
         toast.success({
-          message: successMessage || <Translate id="successCopy" />,
+          message: successMessage || (
+            <FormattedMessage defaultMessage="Copied successful" id="SYyBFF" />
+          ),
         })
       }}
     >

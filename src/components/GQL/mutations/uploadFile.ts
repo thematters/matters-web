@@ -12,7 +12,7 @@ export const SINGLE_FILE_UPLOAD = gql`
 `
 
 export const DIRECT_IMAGE_UPLOAD = gql`
-  mutation DirectImageUpload($input: SingleFileUploadInput!) {
+  mutation DirectImageUpload($input: DirectImageUploadInput!) {
     directImageUpload(input: $input) {
       ...Asset
     }

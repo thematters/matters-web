@@ -53,9 +53,8 @@ const SidebarTags = ({
                   <Tag
                     tag={tag}
                     type="inline"
-                    disabled
-                    hasClose
-                    removeTag={() => {
+                    is="span"
+                    onRemoveTag={() => {
                       editTags(tags.filter((t) => t.content !== tag.content))
                       analytics.trackEvent('click_button', {
                         type: 'remove_tag',

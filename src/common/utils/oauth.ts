@@ -73,7 +73,7 @@ export const googleOauthUrl = async (type: OauthType) => {
   const { state, nonce } = await generateSocialOauthParams(type)
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
   const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${CALLBACK_PROVIDERS.Google}`
-  const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&scope=openid%20email&redirect_uri=${redirectUri}&state=${state}&nonce=${nonce}`
+  const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${clientId}&scope=openid%20email&redirect_uri=${redirectUri}&state=${state}&nonce=${nonce}&prompt=select_account`
   return url
 }
 

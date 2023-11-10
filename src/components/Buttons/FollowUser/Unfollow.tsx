@@ -1,5 +1,6 @@
 import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Button,
@@ -8,7 +9,6 @@ import {
   ButtonSpacingY,
   ButtonWidth,
   TextIcon,
-  Translate,
   useMutation,
 } from '~/components'
 import {
@@ -77,7 +77,11 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
         weight="md"
         size={size === 'xl' ? 'md' : size === 'lg' ? 'sm' : 'xs'}
       >
-        <Translate id="followed" />
+        <FormattedMessage
+          defaultMessage="Followed"
+          id="91IQdk"
+          description="src/components/Buttons/FollowUser/Unfollow.tsx"
+        />
       </TextIcon>
     </Button>
   )

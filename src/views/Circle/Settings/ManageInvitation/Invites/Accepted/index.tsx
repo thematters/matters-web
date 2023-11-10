@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
 import {
-  CircleInvitation,
   EmptyWarning,
   InfiniteScroll,
   List,
@@ -14,8 +13,10 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import CIRCLE_ACCEPTED_INVITES from '~/components/GQL/queries/circleAcceptedInvites'
 import { CircleAcceptedInvitesQuery } from '~/gql/graphql'
+
+import { CircleInvitation } from '../CircleInvitation'
+import { CIRCLE_ACCEPTED_INVITES } from './gql'
 
 /**
  * This component is for listing circle accepted invitations.

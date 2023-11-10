@@ -575,7 +575,6 @@ const ArticleDetail = ({
     return (
       <EmptyLayout>
         <Error
-          statusCode={404}
           message={
             article.state === 'archived' ? (
               <Translate

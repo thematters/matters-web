@@ -111,8 +111,8 @@ export const AuthWalletFeed: React.FC<Props> = ({
             <p>
               <FormattedMessage
                 defaultMessage="Wallet is linked to a different account"
-                id="Dt1o78"
-                description="src/components/AuthMethodFeed/AuthWalletFeed.tsx"
+                id="v8dGSd"
+                description="CRYPTO_WALLET_EXISTS"
               />
             </p>
             <p>

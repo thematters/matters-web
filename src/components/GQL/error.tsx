@@ -70,6 +70,10 @@ export const toastMutationErrors = (
   const customErrorMessage = customErrors ? customErrors[errorCode] : ''
   const errorMessage = ERROR_MESSAGES[errorCode]
 
+  if (!customErrorMessage || !errorMessage) {
+    throw error
+  }
+
   /**
    * Catch auth errors
    */
@@ -122,7 +126,7 @@ export const QueryError = ({ error }: { error: ApolloError }) => {
     Sentry.captureException(error)
   })
 
-  const errorCodes = getErrorCodes(error)
+  // const errorCodes = getErrorCodes(error)
 
-  return <Error statusCode={errorCodes[0]} type="network" error={error} />
+  return <Error type="network" error={error} />
 }

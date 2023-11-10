@@ -2,8 +2,9 @@ import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
 import { TextId } from '~/common/enums'
-import { Dialog, ShareButtons, Translate } from '~/components'
+import { Dialog, Translate } from '~/components'
 
+import { ShareButtons } from './Buttons'
 import Copy from './Copy'
 import styles from './styles.module.css'
 

@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
-import { IconExpand16, Menu, Translate, useMutation } from '~/components'
+import { IconExpand16, Menu, useMutation } from '~/components'
 import { UncollapseCommentMutation } from '~/gql/graphql'
 
 const UNCOLLAPSE_COMMENT = gql`
@@ -31,7 +32,13 @@ const UncollapseButton = ({ commentId }: { commentId: string }) => {
 
   return (
     <Menu.Item
-      text={<Translate zh_hant="取消闔上" zh_hans="取消折叠" />}
+      text={
+        <FormattedMessage
+          defaultMessage="Uncollapse"
+          id="k1SWZ2"
+          description="src/components/Comment/DropdownActions/UncollapseButton.tsx"
+        />
+      }
       icon={<IconExpand16 size="mdS" />}
       onClick={uncollapseComment}
     />

@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { DateTime, LinkWrapper, Translate } from '~/components'
+import { DateTime, LinkWrapper } from '~/components'
 import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
 import DeleteButton from './DeleteButton'
@@ -39,7 +40,9 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
         <section className={styles.content}>
           <LinkWrapper {...path} textActiveColor="green">
             <section className={styles.title}>
-              {title || <Translate id="untitle" />}
+              {title || (
+                <FormattedMessage defaultMessage="Untitled" id="3kbIhS" />
+              )}
             </section>
           </LinkWrapper>
         </section>

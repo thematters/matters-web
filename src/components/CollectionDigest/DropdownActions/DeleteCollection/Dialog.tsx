@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Dialog,
@@ -137,7 +138,11 @@ const DeleteCollectionDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_DELETE_COLLECTION}
+      >
         <Dialog.Header
           title={
             <FormattedMessage defaultMessage="Delete collection" id="m4GG4b" />

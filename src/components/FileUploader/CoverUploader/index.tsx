@@ -4,8 +4,7 @@ import _omit from 'lodash/omit'
 import { useContext, useState } from 'react'
 
 import {
-  ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES,
-  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  ACCEPTED_COVER_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
   ENTITY_TYPE,
 } from '~/common/enums'
@@ -105,10 +104,7 @@ export const CoverUploader = ({
   )
   const { upload: uploadImage, uploading } = useDirectImageUpload()
 
-  const acceptTypes =
-    type === 'collection'
-      ? ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES.join(',')
-      : ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
+  const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'cover-upload-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -121,8 +117,8 @@ export const CoverUploader = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    const isValidImage = await validateImage(file)
-    if (!isValidImage) {
+    const mime = await validateImage(file)
+    if (!mime) {
       return
     }
 
@@ -132,9 +128,11 @@ export const CoverUploader = ({
       }
 
       const variables = {
-        input: { file, type: assetType, entityId, entityType },
+        input: { file, mime, type: assetType, entityId, entityType },
       }
-      const { data } = await upload({ variables })
+      const { data } = await upload({
+        variables: _omit(variables, ['input.file']),
+      })
       const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
       if (assetId && path && uploadURL) {

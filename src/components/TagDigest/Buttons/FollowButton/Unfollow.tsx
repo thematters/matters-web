@@ -1,7 +1,8 @@
 import _isNil from 'lodash/isNil'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { Button, TextIcon, Translate, useMutation } from '~/components'
+import { Button, TextIcon, useMutation } from '~/components'
 import { updateViewerFollowingTagCount } from '~/components/GQL'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import {
@@ -44,7 +45,11 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
       onMouseLeave={() => setHover(false)}
     >
       <TextIcon weight="md" size="xs">
-        {hover ? <Translate id="unfollow" /> : <Translate id="followed" />}
+        {hover ? (
+          <FormattedMessage defaultMessage="Unfollow" id="izWS4J" />
+        ) : (
+          <FormattedMessage defaultMessage="Followed" id="LGox1K" />
+        )}
       </TextIcon>
     </Button>
   )
