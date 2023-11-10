@@ -33,6 +33,10 @@
   }
 }
 
+.headerWithoutCover {
+  margin-top: calc(var(--spacing-base-loose) + var(--spacing-loose));
+}
+
 .info {
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-tight);
