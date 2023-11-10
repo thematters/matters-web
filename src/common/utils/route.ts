@@ -184,7 +184,6 @@ export const toPath = (
     case 'commentDetail': {
       const { parentComment, id, type } = args.comment || {}
       const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
-
       switch (type) {
         case 'article':
           return toPath({
@@ -199,6 +198,8 @@ export const toPath = (
             circle: args.circle!, // as { name: string },
             fragment,
           })
+        default:
+          throw new Error(`unknown comment type: ${type}`)
       }
     }
     case 'draftDetail': {

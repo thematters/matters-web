@@ -18,6 +18,8 @@ import {
   OAUTH_STORAGE_STATE,
   OAUTH_TYPE,
   PATHS,
+  REFERRAL_QUERY_REFERRAL_KEY,
+  REFERRAL_STORAGE_REFERRAL_CODE,
 } from '~/common/enums'
 import { analytics, sessionStorage, setCookies, storage } from '~/common/utils'
 import {
@@ -66,7 +68,12 @@ const SocialCallback = ({ type }: Props) => {
   // Twitter
   const oauthToken = getQuery('oauth_token')
   const oauthVerifier = getQuery('oauth_verifier')
+
   useEffect(() => {
+    const referralCode =
+      getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
+      storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+      undefined
     const localState = storage.get(OAUTH_STORAGE_STATE)
     const localNonce = storage.get(OAUTH_STORAGE_NONCE)
     const localCodeVerifier = storage.get(OAUTH_STORAGE_CODE_VERIFIER)
@@ -75,7 +82,9 @@ const SocialCallback = ({ type }: Props) => {
     const localOauthToken = sessionStorage.get(
       OAUTH_SESSSION_STORAGE_OAUTH_TOKEN
     )
-    const localOauthType = sessionStorage.get(OAUTH_SESSSION_STORAGE_OAUTH_TYPE)
+    const localOauthType = sessionStorage.remove(
+      OAUTH_SESSSION_STORAGE_OAUTH_TYPE
+    )
 
     if (!!error) {
       window.location.href = localPath
@@ -115,6 +124,7 @@ const SocialCallback = ({ type }: Props) => {
                 type,
                 language: lang,
                 ...input,
+                referralCode,
               },
             },
           })

@@ -2,7 +2,6 @@ import { FormattedMessage } from 'react-intl'
 
 import { Dialog, TableView, Translate } from '~/components'
 
-import Hint from './Hint'
 import Intro from './Intro'
 
 interface SelectProps {
@@ -20,8 +19,6 @@ const Select: React.FC<SelectProps> = ({ startBind, closeDialog }) => {
       />
 
       <Dialog.Content>
-        <Hint />
-
         <TableView spacingX={0}>
           <TableView.Cell
             title={

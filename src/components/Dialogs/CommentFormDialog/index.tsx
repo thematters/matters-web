@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 
+import { TEST_ID } from '~/common/enums'
 import { Dialog, useDialogSwitch } from '~/components'
 
 import CommentForm, { CommentFormProps } from './CommentForm'
@@ -31,7 +32,12 @@ const BaseCommentFormDialog = ({
     <div ref={ref}>
       {children && children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} onRest={focusEditor}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        onRest={focusEditor}
+        testId={TEST_ID.DIALOG_COMMENT_FORM}
+      >
         <CommentForm {...props} closeDialog={closeDialog} />
       </Dialog>
     </div>

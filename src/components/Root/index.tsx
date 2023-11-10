@@ -2,10 +2,14 @@ import { useQuery } from '@apollo/react-hooks'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { WagmiConfig } from 'wagmi'
 
-import { wagmiConfig } from '~/common/utils'
+import {
+  REFERRAL_QUERY_REFERRAL_KEY,
+  REFERRAL_STORAGE_REFERRAL_CODE,
+} from '~/common/enums'
+import { storage, wagmiConfig } from '~/common/utils'
 import {
   Error,
   FeaturesProvider,
@@ -66,7 +70,8 @@ const Root = ({
   headers?: any
   children: React.ReactNode
 }) => {
-  const { isInPath } = useRoute()
+  const { getQuery, isInPath } = useRoute()
+
   const isInAbout = isInPath('ABOUT')
   const isInMigration = isInPath('MIGRATION')
   const isInAuthCallback = isInPath('CALLBACK_PROVIDER')
@@ -74,10 +79,18 @@ const Root = ({
   const shouldApplyLayout =
     !isInAbout && !isInMigration && !isInAuthCallback && !isInAuth
 
+  const referralCode = getQuery(REFERRAL_QUERY_REFERRAL_KEY)
+
   const { loading, data, error } =
     useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)
   const viewer = data?.viewer
   const official = data?.official
+
+  useEffect(() => {
+    if (referralCode) {
+      storage.set(REFERRAL_STORAGE_REFERRAL_CODE, { referralCode })
+    }
+  }, [])
 
   /**
    * Render

@@ -113,7 +113,10 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
             ))}
           </ul>
 
-          <section className={styles.cover}>
+          <section
+            className={styles.cover}
+            data-test-id={TEST_ID.DIGEST_TAG_FEED_COVER}
+          >
             <Link {...path} legacyBehavior>
               <a>
                 <VisuallyHidden>
@@ -123,6 +126,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
                   url={tag.cover || IMAGE_TAG_COVER.src}
                   width={144}
                   height={144}
+                  disableAnimation={true}
                 />
               </a>
             </Link>

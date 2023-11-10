@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 
+import { toSizedImageURL } from '~/common/utils'
 import { Card, IconAdd16, IconExclaimHint } from '~/components'
 
 import styles from './styles.module.css'
@@ -14,7 +15,16 @@ type ListItemProps = {
 const CoverIndicator = ({ cover }: { cover?: string | null }) => (
   <span className={styles.indicator}>
     {cover ? (
-      <img className={styles.cover} src={cover} alt="cover" />
+      <img
+        className={styles.cover}
+        src={toSizedImageURL({
+          url: cover,
+          width: 72,
+          height: 72,
+          disableAnimation: true,
+        })}
+        alt="cover"
+      />
     ) : (
       <IconAdd16 size="xs" />
     )}

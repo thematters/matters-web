@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
+import { useIntl } from 'react-intl'
 
 import { clampTag, toPath } from '~/common/utils'
 import { IconClose16, IconProps, TextIcon, TextIconProps } from '~/components'
@@ -14,11 +15,12 @@ interface TagProps {
   iconProps?: IconProps
   textIconProps?: TextIconProps
   active?: boolean
-  disabled?: boolean // disable default <a>
+
+  is?: 'a' | 'span'
   hasCount?: boolean
-  hasClose?: boolean
   canClamp?: boolean
-  removeTag?: (tag: DigestTagFragment) => void
+
+  onRemoveTag?: (tag: DigestTagFragment) => void
   onClick?: () => void
 }
 
@@ -52,19 +54,20 @@ export const Tag = ({
   iconProps: customIconProps,
   textIconProps: customTextIconProps,
   active,
-  disabled,
+  is,
   hasCount = true,
-  hasClose,
   canClamp = false,
-  removeTag,
+  onRemoveTag,
   onClick,
 }: TagProps) => {
+  const intl = useIntl()
+
   const tagClasses = classNames({
     [styles.tag]: true,
     [styles[type]]: type,
     [styles.active]: active,
     [styles.clickable]: !!onClick,
-    [styles.disabled]: !!disabled && !onClick,
+    [styles.disabled]: !!(is === 'span') && !onClick,
   })
 
   const tagName = canClamp ? clampTag(tag.content) : tag.content
@@ -139,12 +142,17 @@ export const Tag = ({
         <span className={styles.name}>#&nbsp;{tagName}</span>
       </TextIcon>
 
-      {hasClose && (
+      {onRemoveTag && (
         <button
           className={styles.close}
           onClick={() => {
-            removeTag?.(tag)
+            onRemoveTag(tag)
           }}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Remove',
+            id: 'Ayepqz',
+            description: 'src/components/Tag/index.tsx',
+          })}
         >
           <IconClose16 color="grey" />
         </button>
@@ -156,7 +164,7 @@ export const Tag = ({
     </>
   )
 
-  if (disabled) {
+  if (is === 'span') {
     return (
       <span className={tagClasses} onClick={onClick}>
         <Inner />

@@ -8,6 +8,8 @@ import {
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
   ERROR_CODES,
+  REFERRAL_QUERY_REFERRAL_KEY,
+  REFERRAL_STORAGE_REFERRAL_CODE,
   SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
 import {
@@ -16,7 +18,9 @@ import {
   redirectToTarget,
   setCookies,
   signinCallbackUrl,
+  storage,
   validateEmail,
+  WalletType,
   // validatePassword,
 } from '~/common/utils'
 import {
@@ -34,6 +38,7 @@ import {
   useCountdown,
   // toast,
   useMutation,
+  useRoute,
 } from '~/components'
 import { EMAIL_LOGIN } from '~/components/GQL/mutations/emailLogin'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -49,12 +54,12 @@ interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
   gotoEmailSignup: () => void
-  gotoWalletConnect: () => void
+  gotoWalletConnect: (type: WalletType) => void
 
   authFeedType: AuthFeedType
   setAuthFeedType: (type: AuthFeedType) => void
 
-  closeDialog: () => void
+  closeDialog?: () => void
   back?: () => void
 }
 
@@ -77,6 +82,12 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)
+
+  const { getQuery } = useRoute()
+  const referralCode =
+    getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
+    storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+    undefined
 
   const isInPage = purpose === 'page'
   const formId = 'email-login-form'
@@ -125,7 +136,12 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         setIsSubmitting(true)
         const { data } = await login({
           variables: {
-            input: { email, passwordOrCode: password, language: lang },
+            input: {
+              email,
+              passwordOrCode: password,
+              language: lang,
+              referralCode,
+            },
           },
         })
 

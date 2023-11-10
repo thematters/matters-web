@@ -8,7 +8,7 @@ import { BackToHomeButton, Error as ErrorComponent } from '~/components'
  */
 export const Throw404 = () => {
   return (
-    <ErrorComponent statusCode={404} type="not_found">
+    <ErrorComponent type="not_found">
       <BackToHomeButton />
     </ErrorComponent>
   )

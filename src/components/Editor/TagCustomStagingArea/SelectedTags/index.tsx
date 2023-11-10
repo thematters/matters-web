@@ -26,10 +26,9 @@ const SelectedTags: React.FC<SelectedTagsProps> = ({ tags, onRemoveTag }) => {
             <Tag
               tag={tag}
               type="inline"
-              hasClose
               active
-              disabled
-              removeTag={() => onRemoveTag(tag)}
+              is="span"
+              onRemoveTag={() => onRemoveTag(tag)}
             />
           </li>
         ))}

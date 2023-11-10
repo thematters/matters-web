@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { COMMENT_TYPE_TEXT } from '~/common/enums'
+import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import {
   CommentFormType,
   Dialog,
@@ -73,7 +73,11 @@ const DeleteCommentDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        testId={TEST_ID.DIALOG_COMMENT_DELETE}
+      >
         <Dialog.Header
           title={
             <FormattedMessage

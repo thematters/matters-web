@@ -1,13 +1,9 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import {
-  Dialog,
-  ShareDialog,
-  Translate,
-  useImperativeQuery,
-} from '~/components'
+import { Dialog, ShareDialog, useImperativeQuery } from '~/components'
 import { MeDraftFeedQuery, PublishStateDraftFragment } from '~/gql/graphql'
 
 import { ME_DRAFTS_FEED } from '../../Drafts/gql'
@@ -50,37 +46,28 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
       title={draft.article.title}
       path={encodeURI(path.href)}
       description={
-        <>
-          <p>
-            <Translate
-              zh_hant="作品發布成功，快把作品分享到不同渠道，"
-              zh_hans="作品发布成功，快把作品分享到不同渠道，"
-              en="Article successfully published."
-            />
-          </p>
-          <p>
-            <Translate
-              zh_hant="吸引更多人為你拍手！"
-              zh_hans="吸引更多人为你拍手！"
-              en="Share it on different platforms to receive more likes and donations!"
-            />
-          </p>
-        </>
+        <p>
+          <FormattedMessage
+            defaultMessage="Article successfully published. Share it on different platforms to receive more likes and donations!"
+            id="0zZd0T"
+            description="src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
+          />
+        </p>
       }
       headerTitle={
-        <Translate
-          zh_hant="作品已發布"
-          zh_hans="作品已发布"
-          en="Article published"
+        <FormattedMessage
+          defaultMessage="Article published"
+          id="Lhhi5l"
+          description="src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
         />
       }
       btns={
         <Dialog.RoundedButton
           text={
-            <Translate
-              zh_hant="查看作品"
-              zh_hans="查看作品"
-              en="View article"
+            <FormattedMessage
+              defaultMessage="View article"
+              id="YWQTXE"
+              description="src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
             />
           }
           onClick={() => router.replace(path.href)}
@@ -89,10 +76,10 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
       smUpBtns={
         <Dialog.TextButton
           text={
-            <Translate
-              zh_hant="查看作品"
-              zh_hans="查看作品"
-              en="View article"
+            <FormattedMessage
+              defaultMessage="View article"
+              id="YWQTXE"
+              description="src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
             />
           }
           onClick={() => router.replace(path.href)}

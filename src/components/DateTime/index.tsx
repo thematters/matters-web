@@ -10,7 +10,7 @@ interface DateTimeProps {
   date: Date | string | number
   size?: 'xs' | 'sm'
   color?: 'grey' | 'greyDark'
-  type?: 'absolute' | 'relative' | 'standard'
+  type?: 'absolute' | 'relative'
 }
 
 /**
