@@ -1,16 +1,15 @@
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath, UtmParams } from '~/common/utils'
-import { Card } from '~/components'
+import { UtmParams } from '~/common/utils'
+import { DateTime } from '~/components'
 import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
 import styles from './styles.module.css'
 
 export type ArticleDigestArchivedProps = {
-  article: ArticleDigestTitleArticleFragment
+  article: ArticleDigestTitleArticleFragment & { createdAt: string }
 } & UtmParams
 
 export const ArticleDigestArchived = ({
@@ -18,37 +17,21 @@ export const ArticleDigestArchived = ({
   utm_source,
   utm_medium,
 }: ArticleDigestArchivedProps) => {
-  const path = toPath({
-    page: 'articleDetail',
-    article,
-    utm_source,
-    utm_medium,
-  })
-
   return (
-    <Card
-      {...path}
-      spacing={['base', 0]}
-      bgActiveColor="none"
-      testId={TEST_ID.DIGEST_ARTICLE_ARCHIVED}
+    <section
+      className={styles.container}
+      data-test-id={TEST_ID.DIGEST_ARTICLE_ARCHIVED}
     >
-      <section className={styles.container}>
-        <section className={styles.left}>
-          <ArticleDigestTitle
-            article={article}
-            textSize="sm"
-            textWeight="normal"
-            lineClamp={1}
-          />
-        </section>
-        <section className={styles.right}>
-          <FormattedMessage
-            defaultMessage="Archived"
-            id="RNKSCj"
-            description="src/components/ArticleDigest/Archive/index.tsx"
-          />
-        </section>
+      <header>
+        <DateTime date={article.createdAt} color="grey" />
+      </header>
+      <section className={styles.left}>
+        <ArticleDigestTitle
+          article={article}
+          textWeight="normal"
+          lineClamp={1}
+        />
       </section>
-    </Card>
+    </section>
   )
 }

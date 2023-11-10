@@ -3,13 +3,14 @@ import { useMutation } from '~/components/GQL'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 import { CreateDraftMutation } from '~/gql/graphql'
 import { ME_DRAFTS_FEED } from '~/views/Me/Drafts/gql'
+import { ME_WORKS_TABS } from '~/views/Me/Works/WorksTabs/gql'
 
 export const useCreateDraft = () => {
   const { router } = useRoute()
 
   // refetch /me/drafts after creating a new draft
   const [create] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
-    refetchQueries: [{ query: ME_DRAFTS_FEED }],
+    refetchQueries: [{ query: ME_DRAFTS_FEED }, { query: ME_WORKS_TABS }],
   })
 
   // create draft and redirect to draft detail page

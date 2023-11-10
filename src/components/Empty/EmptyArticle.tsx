@@ -1,11 +1,13 @@
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconFile88 } from '@/public/static/icons/88px/file.svg'
-import { Empty, withIcon } from '~/components'
+import { Empty, StartWriting, withIcon } from '~/components'
 
 export const EmptyArticle = ({
+  isMe,
   description,
 }: {
+  isMe?: boolean
   description?: React.ReactNode
 }) => {
   const intl = useIntl()
@@ -22,6 +24,7 @@ export const EmptyArticle = ({
           description: 'src/components/Empty/EmptyArticle.tsx',
         })
       }
+      footer={isMe ? <StartWriting /> : undefined}
     />
   )
 }
