@@ -254,6 +254,10 @@
   "5sg7KC": {
     "defaultMessage": "Password"
   },
+  "6+eeJ4": {
+    "defaultMessage": "Lowercase letters, numbers and underscores",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
   "63HuBz": {
     "defaultMessage": "This tag has no manager currently",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -1538,10 +1542,6 @@
   },
   "kc79d3": {
     "defaultMessage": "Topics"
-  },
-  "kf5NAv": {
-    "defaultMessage": "English letters, numbers, and underscores",
-    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "kkZioy": {
     "defaultMessage": "Remove",
