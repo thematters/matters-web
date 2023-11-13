@@ -6,8 +6,13 @@ export const fragments = {
   user: gql`
     fragment UserArticlesUser on User {
       id
-      articles(input: { first: 1000 }) {
+      articles(input: { first: 100, after: $after }) {
         totalCount
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
         edges {
           cursor
           node {
@@ -23,7 +28,7 @@ export const fragments = {
 }
 
 export const ADD_ARTICLES_COLLECTION_USER = gql`
-  query AddArticlesCollectionUser($userName: String) {
+  query AddArticlesCollectionUser($userName: String, $after: String) {
     user(input: { userName: $userName }) {
       ...UserArticlesUser
     }

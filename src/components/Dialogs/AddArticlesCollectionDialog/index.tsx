@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
   QueryError,
@@ -63,7 +64,7 @@ const BaseAddArticlesCollectionDialog = ({
   const { getQuery } = useRoute()
 
   const userName = getQuery('name')
-  const { data, loading, error } =
+  const { data, loading, error, fetchMore } =
     usePublicQuery<AddArticlesCollectionUserQuery>(
       ADD_ARTICLES_COLLECTION_USER,
       {
@@ -167,6 +168,27 @@ const BaseAddArticlesCollectionDialog = ({
     return <>{children({ openDialog })}</>
   }
 
+  // pagination
+  const connectionPath = 'user.articles'
+  const { edges, pageInfo } = data?.user?.articles || {}
+
+  // load next page
+  const loadMore = async () => {
+    analytics.trackEvent('load_more', {
+      type: 'user-collection-articles',
+      location: edges?.length || 0,
+    })
+
+    await fetchMore({
+      variables: { after: pageInfo?.endCursor },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+  }
   return (
     <>
       {children({ openDialog })}
@@ -193,6 +215,8 @@ const BaseAddArticlesCollectionDialog = ({
               collection={collection}
               checkingIds={formik.values.checked}
               formId={formId}
+              loadMore={loadMore}
+              pageInfo={pageInfo}
             />
           )}
 
