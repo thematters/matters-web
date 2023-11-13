@@ -31,7 +31,7 @@ type BaseShareDialogProps = {
 
 const DynamicContent = dynamic(() => import('./Content'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const BaseShareDialog = ({

@@ -52,7 +52,7 @@ const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
   {
     ssr: false,
-    loading: Spinner,
+    loading: () => <Spinner />,
   }
 )
 

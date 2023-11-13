@@ -8,7 +8,9 @@ interface RemoveSocialLoginDialogProps {
   type: SocialAccountType
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseRemoveSocialLoginDialog = ({
   children,

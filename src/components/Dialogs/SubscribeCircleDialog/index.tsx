@@ -19,7 +19,9 @@ type SubscribeCircleDialogProps = BaseSubscribeCircleDialogProps & {
   children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseSubscribeCircleDialog = ({
   children,
