@@ -108,8 +108,8 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         name="mattersID"
         autoFocus
         placeholder={intl.formatMessage({
-          defaultMessage: 'English letters, numbers, and underscores',
-          id: 'kf5NAv',
+          defaultMessage: 'Lowercase letters, numbers and underscores',
+          id: '6+eeJ4',
           description: 'src/components/Dialogs/SetUserNameDialog/Content.tsx',
         })}
         value={values.mattersID}
