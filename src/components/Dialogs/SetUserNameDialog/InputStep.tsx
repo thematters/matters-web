@@ -38,7 +38,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
   )
 
   useEffect(() => {
-    setFieldValue('mattersID', userName.toLowerCase())
+    setFieldValue('mattersID', userName)
   }, [userName])
 
   const intl = useIntl()
