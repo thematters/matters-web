@@ -22,7 +22,7 @@ const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const isLegacyUserConfirm = viewer.userName && viewer.info.userNameEditable
 
   const [userName, setUserName] = useState(
-    isLegacyUserConfirm ? viewer.userName?.toLowerCase() || '' : ''
+    isLegacyUserConfirm ? viewer.userName || '' : ''
   )
   const { loading, availableUserName } = useAvailableUserName({
     enable: !isLegacyUserConfirm,
