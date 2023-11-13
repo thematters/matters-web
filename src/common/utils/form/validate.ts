@@ -24,7 +24,7 @@ import {
   ValidEmailOptions,
 } from '~/common/utils'
 
-import { isValidPaymentPointer } from '../validator'
+import { hasUpperCase, isValidPaymentPointer } from '../validator'
 
 const PUNCTUATION_CHINESE =
   '\u3002\uff1f\uff01\uff0c\u3001\uff1b\uff1a\u201c\u201d\u2018\u2019\uff08\uff09\u300a\u300b\u3008\u3009\u3010\u3011\u300e\u300f\u300c\u300d\ufe43\ufe44\u3014\u3015\u2026\u2014\uff5e\ufe4f\uffe5'
@@ -117,6 +117,15 @@ export const validateUserName = (value: string, lang: Language) => {
       zh_hant: `ID 字符數須介於 ${MIN_USER_NAME_LENGTH} 到 ${MAX_USER_NAME_LENGTH} 之間`,
       zh_hans: `ID 字符数须介于 ${MIN_USER_NAME_LENGTH} 到 ${MAX_USER_NAME_LENGTH} 之间`,
       en: `ID must be between ${MIN_USER_NAME_LENGTH} and ${MAX_USER_NAME_LENGTH} characters long`,
+      lang,
+    })
+  }
+
+  if (hasUpperCase(value)) {
+    return translate({
+      zh_hant: 'ID 可使用小寫英文、數字及下劃線',
+      zh_hans: 'ID 可使用小写英文、数字及下划线',
+      en: 'ID can be in lowercase letters, numbers and underscores',
       lang,
     })
   }

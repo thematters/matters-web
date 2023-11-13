@@ -160,7 +160,8 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
       disabled={
         isSubmitting ||
         values.mattersID.length < MIN_USER_NAME_LENGTH ||
-        values.mattersID.length > MAX_USER_NAME_LENGTH
+        values.mattersID.length > MAX_USER_NAME_LENGTH ||
+        !!errors.mattersID
       }
       text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting}
