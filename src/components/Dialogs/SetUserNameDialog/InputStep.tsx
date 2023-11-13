@@ -108,8 +108,8 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         name="mattersID"
         autoFocus
         placeholder={intl.formatMessage({
-          defaultMessage: 'English letters, numbers, and underscores',
-          id: 'kf5NAv',
+          defaultMessage: 'Lowercase letters, numbers and underscores',
+          id: '6+eeJ4',
           description: 'src/components/Dialogs/SetUserNameDialog/Content.tsx',
         })}
         value={values.mattersID}
@@ -160,7 +160,8 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
       disabled={
         isSubmitting ||
         values.mattersID.length < MIN_USER_NAME_LENGTH ||
-        values.mattersID.length > MAX_USER_NAME_LENGTH
+        values.mattersID.length > MAX_USER_NAME_LENGTH ||
+        !!errors.mattersID
       }
       text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting}
