@@ -254,6 +254,10 @@
   "5sg7KC": {
     "defaultMessage": "密码"
   },
+  "6+eeJ4": {
+    "defaultMessage": "可使用小写英文、数字及下划线",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
   "63HuBz": {
     "defaultMessage": "此标签目前无人主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -1538,10 +1542,6 @@
   },
   "kc79d3": {
     "defaultMessage": "找你想看的"
-  },
-  "kf5NAv": {
-    "defaultMessage": "可使用英文、数字及下划线",
-    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "kkZioy": {
     "defaultMessage": "确认移出",
