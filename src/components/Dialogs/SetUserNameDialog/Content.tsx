@@ -19,11 +19,10 @@ const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const isConfirm = step === 'confirm'
 
   const viewer = useContext(ViewerContext)
-  // const isLegacyUserConfirm = viewer.userName && viewer.info.userNameEditable
-  const isLegacyUserConfirm = true
+  const isLegacyUserConfirm = viewer.userName && viewer.info.userNameEditable
 
   const [userName, setUserName] = useState(
-    isLegacyUserConfirm ? 'HelloMatty' || viewer.userName || '' : ''
+    isLegacyUserConfirm ? viewer.userName || '' : ''
   )
   const { loading, availableUserName } = useAvailableUserName({
     enable: !isLegacyUserConfirm,
