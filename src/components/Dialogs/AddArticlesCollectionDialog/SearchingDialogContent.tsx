@@ -124,11 +124,18 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
                     {...formik.getFieldProps('checked')}
                     value={node.id}
                     content={(() => {
-                      const index = node.title.indexOf(searchValue)
+                      const index = node.title
+                        .toLowerCase()
+                        .indexOf(searchValue.toLowerCase())
                       const content = (
                         <>
                           {node.title.slice(0, index)}
-                          <span className="u-highlight">{searchValue}</span>
+                          <span className="u-highlight">
+                            {node.title.slice(
+                              index,
+                              index + searchValue.length
+                            )}
+                          </span>
                           {node.title.slice(index + searchValue.length)}
                         </>
                       )
