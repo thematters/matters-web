@@ -253,6 +253,7 @@ type CollectionFeedType =
   | 'user_collection'
   | 'collection_article'
   | 'user-collection-articles'
+  | 'user-collection-articles-search'
 
 type CommentFeedType =
   //  'follow-comment' |

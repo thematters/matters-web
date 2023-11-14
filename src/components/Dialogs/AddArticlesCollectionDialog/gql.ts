@@ -36,6 +36,39 @@ export const ADD_ARTICLES_COLLECTION_USER = gql`
   ${fragments.user}
 `
 
+export const USER_ARTICLES_SEARCH = gql`
+  query UserArticlesSearch($authorId: ID!, $key: String!, $after: String) {
+    search(
+      input: {
+        key: $key
+        type: Article
+        first: 10
+        after: $after
+        filter: { authorId: $authorId }
+        quicksearch: true
+      }
+    ) {
+      totalCount
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+      }
+      edges {
+        cursor
+        node {
+          ... on Article {
+            id
+            title
+            state
+            createdAt
+          }
+        }
+      }
+    }
+  }
+`
+
 export const ADD_ARTICLES_COLLECTION = gql`
   mutation AddArticlesCollection(
     $input: AddCollectionsArticlesInput!
