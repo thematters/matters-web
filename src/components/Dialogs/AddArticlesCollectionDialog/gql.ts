@@ -42,7 +42,7 @@ export const USER_ARTICLES_SEARCH = gql`
       input: {
         key: $key
         type: Article
-        first: 10
+        first: 20
         after: $after
         filter: { authorId: $authorId }
         quicksearch: true
