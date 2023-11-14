@@ -9,7 +9,7 @@ export const fragments = {
       id
       updatedAt
       pinned
-      articleList: articles(input: { first: 100 }) {
+      articleList: articles(input: { first: 200 }) {
         totalCount
         edges {
           cursor

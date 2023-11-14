@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
@@ -85,7 +86,7 @@ const BaseAddArticlesCollectionDialog = ({
 
       const addChecked = checked.slice(
         0,
-        100 - collection.articles.totalCount - 1
+        MAX_COLLECTION_ARTICLES_COUNT - collection.articles.totalCount
       )
 
       onUpdate()
