@@ -1,9 +1,10 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useEffect, useRef } from 'react'
+import { useIntl } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount, translate } from '~/common/utils'
+import { formatAmount } from '~/common/utils'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.module.css'
@@ -29,7 +30,7 @@ interface BaseOptionProps {
 }
 
 type CustomAmountProps = {
-  customAmount: {
+  customAmount?: {
     error?: string
     hint?: React.ReactNode
   } & React.DetailedHTMLProps<
@@ -40,6 +41,8 @@ type CustomAmountProps = {
 
 type AmountOptionProps = {
   amount: number
+  currentAmount: number
+  defaultAmount?: number
 } & BaseOptionProps &
   FieldProps &
   React.DetailedHTMLProps<
@@ -49,7 +52,8 @@ type AmountOptionProps = {
 
 type ComposedAmountInputProps = {
   amounts: { [key in CURRENCY]: number[] }
-  lang: Language
+  currentAmount: number
+  defaultAmount?: number
 } & BaseOptionProps &
   Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
@@ -65,7 +69,8 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   name,
 
   fieldMsgId,
-  value,
+  currentAmount,
+  defaultAmount,
 
   disabled,
   ...inputProps
@@ -76,7 +81,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
 
   const isBalanceInsufficient =
     typeof balance === 'number' ? balance < amount : false
-  const isActive = value === amount
+  const isActive = currentAmount === amount
 
   const amountClasses = classNames({
     [styles.radioInputItem]: true,
@@ -104,8 +109,9 @@ const AmountOption: React.FC<AmountOptionProps> = ({
             aria-describedby={fieldMsgId}
             disabled={disabled}
             id={fieldId}
-            name={name}
+            name={name} // share the same name for single selection
             value={amount}
+            defaultChecked={defaultAmount === amount}
             type="radio"
             ref={inputRef}
           />
@@ -133,6 +139,7 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
 
   ...inputProps
 }) => {
+  const intl = useIntl()
   const fieldMsgId = `field-msg-${name}`
 
   const options = amounts[currency]
@@ -149,7 +156,7 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
     error: customAmountError,
     hint: customAmountHint,
     ...customAmountInputProps
-  } = customAmount
+  } = customAmount || {}
 
   return (
     <section className={styles.amountInput}>
@@ -168,7 +175,10 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
               }
               type="number"
               name="customAmount"
-              placeholder={translate({ id: 'enterCustomAmount', lang })}
+              placeholder={intl.formatMessage({
+                defaultMessage: 'Enter a custom amount',
+                id: 'y1AhBH',
+              })}
               value={undefined}
               autoComplete="nope"
               autoCorrect="off"
@@ -185,8 +195,8 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
 
         <Field.Footer
           fieldMsgId={fieldMsgId}
-          hint={hint}
           error={error}
+          hint={hint}
           hintAlign={hintAlign}
         />
       </Field>

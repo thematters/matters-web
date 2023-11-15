@@ -3,6 +3,10 @@
   align-items: center;
   font-size: 0;
 
+  &.disabled {
+    cursor: not-allowed;
+  }
+
   & .hint {
     line-height: 1.375rem;
   }
@@ -10,14 +14,9 @@
   & .lineClamp {
     @mixin line-clamp;
   }
-
-  &.disabled {
-    cursor: not-allowed;
-  }
 }
 
 .wrapper {
-  padding: var(--spacing-x-tight) 0;
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
 }

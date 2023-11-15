@@ -7,6 +7,10 @@
   }
 }
 
+.item {
+  padding: var(--spacing-x-tight) 0;
+}
+
 .createCollection {
   padding: 0 var(--spacing-base) var(--spacing-base);
   background: white;

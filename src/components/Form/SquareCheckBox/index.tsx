@@ -1,19 +1,27 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
-import { useField } from 'formik'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { IconSquireCheck20, IconSquireChecked20, Tooltip } from '~/components'
-import { TextIcon } from '~/components/TextIcon'
+import {
+  IconSquireCheck20,
+  IconSquireChecked20,
+  TextIcon,
+  Tooltip,
+} from '~/components'
 
 import { FieldProps } from '../Field'
 import styles from './styles.module.css'
 
-type SquareCheckBoxBoxProps = {
+export type SquareCheckBoxBoxProps = {
   name: string
   value: string
   content?: React.ReactNode
+
+  icon?: React.ReactNode
+  sup?: React.ReactNode
+  supHeight?: number
+
   hasTooltip?: boolean
   full?: boolean
 } & Omit<FieldProps, 'fieldMsgId'> &
@@ -23,19 +31,22 @@ type SquareCheckBoxBoxProps = {
   >
 
 const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
-  hint,
+  content,
   error,
+  hint,
+
+  icon,
+  sup,
+  supHeight,
+
   hasTooltip = false,
   full = false,
-  content,
 
   ...inputProps
 }) => {
-  const fieldId = `field-${inputProps.value}`
-  const fieldMsgId = `field-msg-${inputProps.value}`
-  const disabled = inputProps.disabled
-
-  const [field] = useField({ ...inputProps, type: 'checkbox' })
+  const { value, disabled, checked } = inputProps
+  const fieldId = `field-${value}`
+  const fieldMsgId = `field-msg-${value}`
 
   const [lineClampable, setLineClampable] = useState(false)
   const [firstRender, setFirstRender] = useState(true)
@@ -49,7 +60,8 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
     const computedStyle = window.getComputedStyle(node.current, null)
     height -=
       parseInt(computedStyle.paddingTop, 10) +
-      parseInt(computedStyle.paddingBottom, 10)
+      parseInt(computedStyle.paddingBottom, 10) +
+      (supHeight || 0)
     const lineHeight = computedStyle.getPropertyValue('line-height')
     const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
     if (lines > 1) {
@@ -68,65 +80,52 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
     [styles.lineClamp]: !firstRender,
   })
 
-  const Content = (
-    <label className={labelClasses}>
-      <TextIcon
-        icon={
-          inputProps.checked ? (
-            <IconSquireChecked20
-              size="mdS"
-              color={disabled ? 'grey' : 'green'}
-            />
-          ) : (
-            <IconSquireCheck20 size="mdS" color="greyDark" />
-          )
-        }
-        color={disabled ? 'grey' : 'black'}
-        spacing="xtight"
-        size="sm"
-      >
-        <span className={hintClasses}>
-          {!!full && (
-            <span className={styles.full}>
-              <FormattedMessage
-                defaultMessage="FULL"
-                id="Jxr/TM"
-                description="src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
-              />
-            </span>
-          )}
-          {!!content && content}
-          {!content && hint}
-        </span>
-      </TextIcon>
-
-      <VisuallyHidden>
-        <input
-          id={fieldId}
-          type="checkbox"
-          aria-describedby={fieldMsgId}
-          {...field}
-          {...inputProps}
-        />
-      </VisuallyHidden>
-    </label>
+  const checkboxIcon = checked ? (
+    <IconSquireChecked20 size="mdS" color={disabled ? 'grey' : 'green'} />
+  ) : (
+    <IconSquireCheck20 size="mdS" color="greyDark" />
   )
 
   return (
-    <>
-      <Tooltip
-        content={hint}
-        appendTo="parent"
-        zIndex={100}
-        placement="auto-start"
-        delay={[1000, null]}
-        disabled={!hasTooltip || !lineClampable}
-      >
-        <p className={styles.wrapper} ref={node}>
-          {Content}
-        </p>
-      </Tooltip>
-    </>
+    <Tooltip
+      content={hint}
+      appendTo="parent"
+      zIndex={100}
+      placement="auto-start"
+      delay={[1000, null]}
+      disabled={!hasTooltip || !lineClampable}
+    >
+      <section className={styles.wrapper} ref={node}>
+        <label className={labelClasses}>
+          <TextIcon spacing="xtight" size="sm" icon={icon || checkboxIcon}>
+            <section className={styles.content}>
+              {sup}
+              <span className={hintClasses}>
+                {!!full && (
+                  <span className={styles.full}>
+                    <FormattedMessage
+                      defaultMessage="FULL"
+                      id="Jxr/TM"
+                      description="src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
+                    />
+                  </span>
+                )}
+                {content || hint}
+              </span>
+            </section>
+          </TextIcon>
+
+          <VisuallyHidden>
+            <input
+              {...inputProps}
+              id={fieldId}
+              type="checkbox"
+              aria-describedby={fieldMsgId}
+            />
+          </VisuallyHidden>
+        </label>
+      </section>
+    </Tooltip>
   )
 }
 

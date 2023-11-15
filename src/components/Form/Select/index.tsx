@@ -19,7 +19,7 @@ import styles from './styles.module.css'
  * ```
  *
  */
-type Option = {
+export type FormSelectOption = {
   name: string | React.ReactNode
   subtitle?: string | React.ReactNode
   extra?: string | React.ReactNode
@@ -27,15 +27,15 @@ type Option = {
   selected?: boolean
 }
 
-type SelectProps = {
+export type FormSelectProps = {
   name: string
   title?: React.ReactNode
-  options: Option[]
+  options: FormSelectOption[]
   size?: 'md' | 'sm'
-  onChange: (option: Option) => void
+  onChange: (option: FormSelectOption) => void
 } & Omit<FieldProps, 'fieldMsgId'>
 
-const Select: React.FC<SelectProps> = ({
+const Select: React.FC<FormSelectProps> = ({
   name,
   title,
   label,

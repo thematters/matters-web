@@ -1,4 +1,4 @@
-import { FormikProvider } from 'formik'
+import { FieldInputProps, FormikProvider, useField } from 'formik'
 import { FormattedMessage } from 'react-intl'
 
 import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
@@ -11,6 +11,7 @@ import {
   usePublicQuery,
   useRoute,
 } from '~/components'
+import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
 import { AddCollectionsArticleUserPublicQuery } from '~/gql/graphql'
 
 import { ADD_COLLECTIONS_ARTICLE_USER_PUBLIC } from './gql'
@@ -22,6 +23,11 @@ interface SelectDialogContentProps {
   checkingIds: string[]
   closeDialog: () => void
   switchToCreating: () => void
+}
+
+const SquareCheckBoxField: React.FC<SquareCheckBoxBoxProps> = (props) => {
+  const [field] = useField({ name: props.name, type: 'checkbox' })
+  return <Form.SquareCheckBox {...field} {...props} />
 }
 
 const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
@@ -92,24 +98,29 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
                 className={styles.listForm}
               >
                 {collectionEdges.map(({ node }) => (
-                  <Form.SquareCheckBox
-                    key={node.id}
-                    hasTooltip={true}
-                    checked={
-                      hasChecked.includes(node.id) ||
-                      checkingIds.includes(node.id)
-                    }
-                    full={
-                      node.articles.totalCount >= MAX_COLLECTION_ARTICLES_COUNT
-                    }
-                    hint={node.title}
-                    disabled={
-                      hasChecked.includes(node.id) ||
-                      node.articles.totalCount >= MAX_COLLECTION_ARTICLES_COUNT
-                    }
-                    {...formik.getFieldProps('checked')}
-                    value={node.id}
-                  />
+                  <section key={node.id} className={styles.item}>
+                    <SquareCheckBoxField
+                      hasTooltip={true}
+                      checked={
+                        hasChecked.includes(node.id) ||
+                        checkingIds.includes(node.id)
+                      }
+                      full={
+                        node.articles.totalCount >=
+                        MAX_COLLECTION_ARTICLES_COUNT
+                      }
+                      hint={node.title}
+                      disabled={
+                        hasChecked.includes(node.id) ||
+                        node.articles.totalCount >=
+                          MAX_COLLECTION_ARTICLES_COUNT
+                      }
+                      {...(formik.getFieldProps(
+                        'checked'
+                      ) as FieldInputProps<any>)}
+                      value={node.id}
+                    />
+                  </section>
                 ))}
               </Form>
             </FormikProvider>

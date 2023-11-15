@@ -1973,6 +1973,9 @@
     "defaultMessage": "付費",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "y1AhBH": {
+    "defaultMessage": "輸入金額"
+  },
   "y4Lyf1": {
     "defaultMessage": "該名稱已被其他使用者使用",
     "description": "NAME_EXISTS"

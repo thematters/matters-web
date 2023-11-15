@@ -1,9 +1,16 @@
-import { FormikProvider } from 'formik'
+import { FieldInputProps, FormikProvider, useField } from 'formik'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
-import { Form, InfiniteScroll, Spinner, usePublicQuery } from '~/components'
+import {
+  DateTime,
+  Form,
+  InfiniteScroll,
+  Spinner,
+  usePublicQuery,
+} from '~/components'
+import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
 import {
   CollectionArticlesCollectionFragment,
   UserArticlesSearchQuery,
@@ -20,6 +27,11 @@ interface SearchingDialogContentProps {
   checkingIds: string[]
   searchValue: string
   formId: string
+}
+
+const SquareCheckBoxField: React.FC<SquareCheckBoxBoxProps> = (props) => {
+  const [field] = useField({ name: props.name, type: 'checkbox' })
+  return <Form.SquareCheckBox {...field} {...props} />
 }
 
 const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
@@ -103,49 +115,51 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
           loadMore={loadMore}
           eof
         >
-          {searchingEdges.map(({ node }, index) => (
-            <>
-              {node.__typename === 'Article' && (
-                <section key={index} className={styles.item}>
-                  <Form.IndexSquareCheckBox
-                    hasTooltip={true}
-                    checked={
-                      hasChecked.includes(node.id) ||
-                      checkingIds.includes(node.id)
-                    }
-                    index={
-                      checkingIds.includes(node.id)
-                        ? checkingIds.indexOf(node.id) + 1
-                        : undefined
-                    }
-                    createAt={node.createdAt}
-                    hint={node.title}
-                    disabled={hasChecked.includes(node.id)}
-                    {...formik.getFieldProps('checked')}
-                    value={node.id}
-                    content={(() => {
-                      const index = node.title
-                        .toLowerCase()
-                        .indexOf(searchValue.toLowerCase())
-                      const content = (
-                        <>
-                          {node.title.slice(0, index)}
-                          <span className="u-highlight">
-                            {node.title.slice(
-                              index,
-                              index + searchValue.length
-                            )}
-                          </span>
-                          {node.title.slice(index + searchValue.length)}
-                        </>
-                      )
-                      return content
-                    })()}
-                  />
-                </section>
-              )}
-            </>
-          ))}
+          {searchingEdges.map(({ node }, index) => {
+            if (node.__typename !== 'Article') {
+              return null
+            }
+            const checked =
+              hasChecked.includes(node.id) || checkingIds.includes(node.id)
+            const checkedIndex = checkingIds.includes(node.id)
+              ? checkingIds.indexOf(node.id) + 1
+              : undefined
+            const disabled = hasChecked.includes(node.id)
+            return (
+              <section key={index} className={styles.item}>
+                <SquareCheckBoxField
+                  hasTooltip={true}
+                  checked={checked}
+                  icon={
+                    checked && !disabled && checkedIndex !== undefined ? (
+                      <span className={styles.indexIcon}>{checkedIndex}</span>
+                    ) : undefined
+                  }
+                  sup={<DateTime date={node.createdAt} color="grey" />}
+                  supHeight={18}
+                  hint={node.title}
+                  disabled={disabled}
+                  {...(formik.getFieldProps('checked') as FieldInputProps<any>)}
+                  value={node.id}
+                  content={(() => {
+                    const index = node.title
+                      .toLowerCase()
+                      .indexOf(searchValue.toLowerCase())
+                    const content = (
+                      <>
+                        {node.title.slice(0, index)}
+                        <span className="u-highlight">
+                          {node.title.slice(index, index + searchValue.length)}
+                        </span>
+                        {node.title.slice(index + searchValue.length)}
+                      </>
+                    )
+                    return content
+                  })()}
+                />
+              </section>
+            )
+          })}
         </InfiniteScroll>
       </Form>
     </FormikProvider>
