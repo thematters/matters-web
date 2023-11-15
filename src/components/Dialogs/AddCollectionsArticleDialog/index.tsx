@@ -45,7 +45,7 @@ const BaseAddCollectionsArticleDialog = ({
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
 
-  const userName = getQuery('name')
+  const userName = viewer.userName || getQuery('name')
   const [update] = useMutation<AddCollectionsArticlesMutation>(
     ADD_COLLECTIONS_ARTICLES,
     undefined,
