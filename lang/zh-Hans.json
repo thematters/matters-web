@@ -1701,6 +1701,9 @@
     "defaultMessage": "折叠",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   },
+  "phAZoj": {
+    "defaultMessage": "选集"
+  },
   "pjunBi": {
     "defaultMessage": "导入作品累計超过 1MB",
     "description": "MIGRATION_REACH_LIMIT"

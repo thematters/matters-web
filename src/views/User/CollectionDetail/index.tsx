@@ -18,8 +18,8 @@ const BaseCollectionDetail = () => {
 
   const intl = useIntl()
   const prefix = intl.formatMessage({
-    defaultMessage: 'Collections',
-    id: 'ulh3kf',
+    defaultMessage: 'Collection',
+    id: 'phAZoj',
   })
 
   /**

@@ -1701,6 +1701,9 @@
     "defaultMessage": "Collapse",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   },
+  "phAZoj": {
+    "defaultMessage": "Collection"
+  },
   "pjunBi": {
     "defaultMessage": "1 MB maximum",
     "description": "MIGRATION_REACH_LIMIT"
