@@ -46,7 +46,9 @@ const AuthorRssFeedGQL = gql`
   ${fragments.user}
 `
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 export type SearchSelectFormProps = {
   title: string | React.ReactNode

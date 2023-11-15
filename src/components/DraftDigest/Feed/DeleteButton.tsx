@@ -9,7 +9,7 @@ import {
   useDialogSwitch,
   useMutation,
 } from '~/components'
-import { updateUserDrafts } from '~/components/GQL'
+import { updateUserDrafts, updateViewerWorksTabs } from '~/components/GQL'
 import { DeleteButtonDraftFragment, DeleteDraftMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -27,6 +27,7 @@ const fragments = {
   draft: gql`
     fragment DeleteButtonDraft on Draft {
       id
+      title
     }
   `,
 }
@@ -42,6 +43,10 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         cache,
         targetId: draft.id,
         type: 'remove',
+      })
+      updateViewerWorksTabs({
+        cache,
+        type: 'decreaseDraft',
       })
     },
   })
@@ -80,8 +85,18 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         <Dialog.Message>
           <p>
             <FormattedMessage
-              defaultMessage="Are you sure you want to delete draft?"
-              id="VbxMwX"
+              defaultMessage="Are you sure you want to delete draft ‘{title}’?"
+              id="hpIFGj"
+              description="src/components/DraftDigest/Feed/DeleteButton.tsx"
+              values={{
+                title: <span className="u-highlight">{draft.title}</span>,
+              }}
+            />
+            <br />
+            <FormattedMessage
+              defaultMessage="(This action cannot be undone)"
+              id="F3zk7E"
+              description="src/components/DraftDigest/Feed/DeleteButton.tsx"
             />
           </p>
         </Dialog.Message>
@@ -90,7 +105,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+              text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
               color="red"
               onClick={() => {
                 onDelete()
@@ -100,7 +115,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+              text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
               color="red"
               onClick={() => {
                 onDelete()

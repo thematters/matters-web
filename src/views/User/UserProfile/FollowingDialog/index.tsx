@@ -9,7 +9,9 @@ interface FollowingDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)

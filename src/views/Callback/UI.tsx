@@ -21,21 +21,21 @@ const UI = ({ hasError }: Props) => {
             <section className={styles.title}>
               <FormattedMessage
                 defaultMessage="Oops！This link has expired"
-                id="EwbNbl"
-                description="src/views/Callback/GoogleCallback.tsx"
+                id="0JlaP1"
+                description="src/views/Callback/UI.tsx"
               />
             </section>
             <section className={styles.content}>
               <FormattedMessage
                 defaultMessage="Please go to the relevant page to resend the link. You can also "
-                id="GG9uXH"
-                description="src/views/Callback/GoogleCallback.tsx"
+                id="PliM8z"
+                description="src/views/Callback/UI.tsx"
               />
               <a className={styles.link} href={PATHS.HOME}>
                 <FormattedMessage
                   defaultMessage="go to the homepage"
-                  id="tQimre"
-                  description="src/views/Callback/GoogleCallback.tsx"
+                  id="aqX2Bt"
+                  description="src/views/Callback/UI.tsx"
                 />
               </a>
             </section>

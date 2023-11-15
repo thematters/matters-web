@@ -1,19 +1,22 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
+import classNames from 'classnames'
 import _omit from 'lodash/omit'
 import { useContext, useState } from 'react'
 
 import {
-  ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES,
-  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  ACCEPTED_COVER_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
   ENTITY_TYPE,
 } from '~/common/enums'
 import { translate, validateImage } from '~/common/utils'
 import {
   Book,
+  Button,
   Cover,
   CoverProps,
   IconCamera24,
+  IconCamera32,
+  IconClose2V32,
   LanguageContext,
   Spinner,
   toast,
@@ -65,7 +68,7 @@ export type CoverUploaderProps = {
   onUploaded: (assetId: string | null) => void
   onUploadStart: () => void
   onUploadEnd: () => void
-  type?: 'circle' | 'collection'
+  type?: 'circle' | 'collection' | 'userProfile'
 
   bookTitle?: string
   bookArticleCount?: number
@@ -100,10 +103,7 @@ export const CoverUploader = ({
   )
   const { upload: uploadImage, uploading } = useDirectImageUpload()
 
-  const acceptTypes =
-    type === 'collection'
-      ? ACCEPTED_COLLECTION_UPLOAD_IMAGE_TYPES.join(',')
-      : ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
+  const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'cover-upload-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -116,8 +116,8 @@ export const CoverUploader = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    const isValidImage = await validateImage(file)
-    if (!isValidImage) {
+    const mime = await validateImage(file)
+    if (!mime) {
       return
     }
 
@@ -127,9 +127,11 @@ export const CoverUploader = ({
       }
 
       const variables = {
-        input: { file, type: assetType, entityId, entityType },
+        input: { file, mime, type: assetType, entityId, entityType },
       }
-      const { data } = await upload({ variables })
+      const { data } = await upload({
+        variables: _omit(variables, ['input.file']),
+      })
       const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
       if (assetId && path && uploadURL) {
@@ -158,6 +160,12 @@ export const CoverUploader = ({
     }
   }
 
+  const removeCover = (event: any) => {
+    event.preventDefault()
+    setCover(undefined)
+    onUploaded(null)
+  }
+
   const Mask = () => (
     <div className={styles.mask}>
       {loading || uploading ? (
@@ -168,19 +176,42 @@ export const CoverUploader = ({
     </div>
   )
 
-  const isCircle = type === 'circle'
+  const UserProfileMask = () => {
+    const maskClasses = classNames({
+      [styles.mask]: true,
+      [styles.emptyMask]: !cover,
+    })
+    return (
+      <div className={maskClasses}>
+        {loading || uploading ? (
+          <Spinner color={cover ? 'greyLight' : 'white'} />
+        ) : (
+          <section className={styles.userProfileCover}>
+            <IconCamera32 color="white" size="lg" />
+            {cover && (
+              <Button onClick={removeCover}>
+                <IconClose2V32 color="white" size="lg" />
+              </Button>
+            )}
+          </section>
+        )}
+      </div>
+    )
+  }
+
   const isCollection = type === 'collection'
+  const isUserProfile = type === 'userProfile'
 
   return (
     <label className={styles.label} htmlFor={fieldId}>
-      {!isCircle && !isCollection && (
+      {!isCollection && !isUserProfile && (
         <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
           <Mask />
         </Cover>
       )}
-      {isCircle && (
-        <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
-          <Mask />
+      {isUserProfile && (
+        <Cover cover={cover} inEditor={inEditor}>
+          <UserProfileMask />
         </Cover>
       )}
       {isCollection && (

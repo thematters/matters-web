@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import router from 'next/router'
 import { useEffect, useState } from 'react'
 import { useConnect } from 'wagmi'
@@ -14,38 +13,18 @@ import { analytics, appendTarget, WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   DialogBeta,
+  EmailLoginForm,
+  EmailSignUpForm,
   ReCaptchaProvider,
-  Spinner,
+  SelectAuthMethodForm,
   useDialogSwitch,
   useEventListener,
   useMediaQuery,
   useStep,
   VerificationLinkSent,
+  WalletAuthForm,
 } from '~/components'
 
-const DynamicSelectAuthMethodForm = dynamic<any>(
-  () =>
-    import('~/components/Forms/SelectAuthMethodForm').then(
-      (mod) => mod.SelectAuthMethodForm
-    ),
-  { ssr: false, loading: Spinner }
-)
-const DynamicEmailLoginForm = dynamic<any>(
-  () =>
-    import('~/components/Forms/EmailLoginForm').then(
-      (mod) => mod.EmailLoginForm
-    ),
-  { ssr: false, loading: Spinner }
-)
-const DynamicEmailSignUpFormInit = dynamic(
-  () => import('~/components/Forms/EmailSignUpForm/Init'),
-  { ssr: false, loading: Spinner }
-)
-
-const DynamicWalletAuthFormConnect = dynamic(
-  () => import('~/components/Forms/WalletAuthForm/Connect'),
-  { ssr: false, loading: Spinner }
-)
 type Step =
   | 'select-login-method'
   // wallet
@@ -125,7 +104,7 @@ const BaseUniversalAuthDialog = () => {
       scrollable={true}
     >
       {currStep === 'select-login-method' && (
-        <DynamicSelectAuthMethodForm
+        <SelectAuthMethodForm
           purpose="dialog"
           gotoWalletConnect={(type: WalletType) => {
             setWalletType(type)
@@ -144,7 +123,7 @@ const BaseUniversalAuthDialog = () => {
       {/* Wallet */}
       {currStep === 'wallet-connect' && (
         <ReCaptchaProvider>
-          <DynamicWalletAuthFormConnect
+          <WalletAuthForm.Connect
             type="login"
             purpose="dialog"
             walletType={walletType}
@@ -163,7 +142,7 @@ const BaseUniversalAuthDialog = () => {
 
       {/* Email */}
       {currStep === 'email-login' && (
-        <DynamicEmailLoginForm
+        <EmailLoginForm
           purpose="dialog"
           closeDialog={closeDialog}
           gotoEmailSignup={() => forward('email-sign-up-init')}
@@ -178,7 +157,7 @@ const BaseUniversalAuthDialog = () => {
       )}
       {currStep === 'email-sign-up-init' && (
         <ReCaptchaProvider>
-          <DynamicEmailSignUpFormInit
+          <EmailSignUpForm.Init
             purpose="dialog"
             submitCallback={(email: string) => {
               setEmail(email)

@@ -1,47 +1,24 @@
 import classNames from 'classnames'
-import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
 import { PATHS } from '~/common/enums'
-import { analytics, WalletType } from '~/common/utils'
+import { analytics, redirectToTarget, WalletType } from '~/common/utils'
 import {
   AuthFeedType,
+  EmailLoginForm,
+  EmailSignUpForm,
   Head,
   LanguageSwitch,
   ReCaptchaProvider,
-  Spinner,
+  SelectAuthMethodForm,
   useRoute,
   useStep,
   VerificationLinkSent,
   ViewerContext,
+  WalletAuthForm,
 } from '~/components'
 
 import styles from './styles.module.css'
-
-const DynamicSelectAuthMethodForm = dynamic<any>(
-  () =>
-    import('~/components/Forms/SelectAuthMethodForm').then(
-      (mod) => mod.SelectAuthMethodForm
-    ),
-  { ssr: true }
-)
-
-const DynamicEmailLoginForm = dynamic<any>(
-  () =>
-    import('~/components/Forms/EmailLoginForm').then(
-      (mod) => mod.EmailLoginForm
-    ),
-  { ssr: false, loading: Spinner }
-)
-const DynamicEmailSignUpFormInit = dynamic(
-  () => import('~/components/Forms/EmailSignUpForm/Init'),
-  { ssr: false, loading: Spinner }
-)
-
-const DynamicWalletAuthFormConnect = dynamic(
-  () => import('~/components/Forms/WalletAuthForm/Connect'),
-  { ssr: false, loading: Spinner }
-)
 
 type Step =
   | 'select-login-method'
@@ -76,7 +53,7 @@ const UniversalAuth = () => {
   useEffect(() => {
     if (!viewer.id) return
 
-    router.push(PATHS.HOME)
+    redirectToTarget({ fallback: 'homepage' })
   }, [viewer.id])
 
   useEffect(() => {
@@ -108,7 +85,7 @@ const UniversalAuth = () => {
         <section className={containerClasses}>
           {currStep === 'select-login-method' && (
             <>
-              <DynamicSelectAuthMethodForm
+              <SelectAuthMethodForm
                 purpose="page"
                 gotoWalletConnect={(type: WalletType) => {
                   setWalletType(type)
@@ -129,7 +106,7 @@ const UniversalAuth = () => {
           {/* Wallet */}
           {currStep === 'wallet-connect' && (
             <ReCaptchaProvider>
-              <DynamicWalletAuthFormConnect
+              <WalletAuthForm.Connect
                 type="login"
                 purpose="page"
                 walletType={walletType}
@@ -144,7 +121,7 @@ const UniversalAuth = () => {
 
           {/* Email */}
           {currStep === 'email-login' && (
-            <DynamicEmailLoginForm
+            <EmailLoginForm
               purpose="page"
               gotoEmailSignup={() => forward('email-sign-up-init')}
               gotoWalletConnect={(type: WalletType) => {
@@ -159,7 +136,7 @@ const UniversalAuth = () => {
 
           {currStep === 'email-sign-up-init' && (
             <ReCaptchaProvider>
-              <DynamicEmailSignUpFormInit
+              <EmailSignUpForm.Init
                 purpose="page"
                 submitCallback={(email: string) => {
                   setEmail(email)

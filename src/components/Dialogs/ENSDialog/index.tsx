@@ -9,7 +9,9 @@ type ENSDialogProps = BaseENSDialogProps & {
   defaultStep?: Step
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseENSDilaog = ({
   children,

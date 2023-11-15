@@ -13,19 +13,19 @@ type ENSDialogContentProps = BaseENSDialogProps & {
 
 const DynamicConnectWallet = dynamic(() => import('./ConnectWallet'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 const DynamicWalletAuthFormSelect = dynamic(
   () => import('~/components/Forms/WalletAuthForm/Select'),
-  { ssr: false, loading: Spinner }
+  { ssr: false, loading: () => <Spinner /> }
 )
 const DynamicLinkENS = dynamic(() => import('./LinkENS'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 const DynamicComplete = dynamic(() => import('./Complete'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const ENSDialogContent: React.FC<ENSDialogContentProps> = ({

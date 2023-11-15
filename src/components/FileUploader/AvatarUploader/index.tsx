@@ -85,8 +85,8 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    const isValidImage = await validateImage(file)
-    if (!isValidImage) {
+    const mime = await validateImage(file, true)
+    if (!mime) {
       return
     }
 
@@ -101,9 +101,12 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
           type: isCircle ? ASSET_TYPE.circleAvatar : ASSET_TYPE.avatar,
           entityType: isCircle ? ENTITY_TYPE.circle : ENTITY_TYPE.user,
           entityId,
+          mime,
         },
       }
-      const { data } = await upload({ variables })
+      const { data } = await upload({
+        variables: _omit(variables, ['input.file']),
+      })
       const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 
       if (assetId && path && uploadURL) {

@@ -52,7 +52,7 @@ const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
   {
     ssr: false,
-    loading: Spinner,
+    loading: () => <Spinner />,
   }
 )
 
@@ -181,7 +181,9 @@ const DraftDetail = () => {
 
     // upload via directImageUpload
     if (isImage && !isForceSingleFileUpload) {
-      const result = await directImageUpload({ variables })
+      const result = await directImageUpload({
+        variables: _omit(variables, ['input.file']),
+      })
       const {
         id: assetId,
         path,

@@ -138,6 +138,10 @@ export const MOCK_ARTILCE = {
   tags: [],
   likesReceivedTotal: 1,
   responseCount: 10,
+  readerCount: 100,
+  appreciationsReceivedTotal: 1000,
+  commentCount: 9999,
+  donationCount: 234,
   transactionsReceivedBy: {
     __typename: 'AppreciationConnection' as any,
     totalCount: 190,
