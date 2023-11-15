@@ -1,5 +1,4 @@
 import { FieldInputProps, FormikProvider, useField } from 'formik'
-import { memo } from 'react'
 
 import { DateTime, Form, InfiniteScroll } from '~/components'
 import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
