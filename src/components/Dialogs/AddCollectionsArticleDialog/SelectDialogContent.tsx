@@ -1,4 +1,5 @@
 import { FieldInputProps, FormikProvider, useField } from 'formik'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
@@ -10,6 +11,7 @@ import {
   TextIcon,
   usePublicQuery,
   useRoute,
+  ViewerContext,
 } from '~/components'
 import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
 import { AddCollectionsArticleUserPublicQuery } from '~/gql/graphql'
@@ -37,9 +39,11 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   closeDialog,
   switchToCreating,
 }) => {
+  const viewer = useContext(ViewerContext)
+
   const { getQuery } = useRoute()
 
-  const userName = getQuery('name')
+  const userName = viewer.userName || getQuery('name')
   const { data, loading } =
     usePublicQuery<AddCollectionsArticleUserPublicQuery>(
       ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
