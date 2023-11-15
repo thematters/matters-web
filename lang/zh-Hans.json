@@ -747,6 +747,10 @@
     "defaultMessage": "作品已取消精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
+  "Jxr/TM": {
+    "defaultMessage": "已满",
+    "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
+  },
   "K2/mHF": {
     "defaultMessage": "暂时无法解绑 {type}，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -795,6 +799,10 @@
   "L7Si5/": {
     "defaultMessage": "管理社群",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "LETb4b": {
+    "defaultMessage": "选集暂时不允许超过 {count} 篇",
+    "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
   },
   "LGox1K": {
     "defaultMessage": "已追踪"
@@ -1693,6 +1701,9 @@
     "defaultMessage": "折叠",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   },
+  "phAZoj": {
+    "defaultMessage": "选集"
+  },
   "pjunBi": {
     "defaultMessage": "导入作品累計超过 1MB",
     "description": "MIGRATION_REACH_LIMIT"
@@ -1985,10 +1996,6 @@
   "yIlC0R": {
     "defaultMessage": "尚未发布作品",
     "description": "src/components/Empty/EmptyArticle.tsx"
-  },
-  "yJsERg": {
-    "defaultMessage": "选集暂时不允许超过 100 篇",
-    "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
   },
   "yOKEVx": {
     "defaultMessage": "储值",

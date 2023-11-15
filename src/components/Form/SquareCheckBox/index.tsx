@@ -18,6 +18,7 @@ export type SquareCheckBoxBoxProps = {
   content?: React.ReactNode
 
   icon?: React.ReactNode
+  left?: React.ReactNode
   sup?: React.ReactNode
   supHeight?: number
 
@@ -34,6 +35,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   hint,
 
   icon,
+  left,
   sup,
   supHeight,
 
@@ -97,7 +99,10 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
           <TextIcon spacing="xtight" size="sm" icon={icon || checkboxIcon}>
             <section className={styles.content}>
               {sup}
-              <span className={hintClasses}>{content || hint}</span>
+              <span className={hintClasses}>
+                {left}
+                {content || hint}
+              </span>
             </section>
           </TextIcon>
 

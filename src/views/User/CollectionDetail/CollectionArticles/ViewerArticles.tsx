@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { arrayMove, List as DnDList } from 'react-movable'
 
+import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   AddArticlesCollectionDialog,
@@ -37,7 +38,7 @@ const REORDER_COLLECTION_ARTICLES = gql`
       }
     ) {
       id
-      articles(input: { first: 100 }) {
+      articles(input: { first: 200 }) {
         edges {
           cursor
           node {
@@ -94,13 +95,16 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
           <DropdownActions collection={collection} />
         </section>
       </section>
-      {collection.articles.totalCount >= 100 && (
+      {collection.articles.totalCount >= MAX_COLLECTION_ARTICLES_COUNT && (
         <Tooltip
           content={
             <FormattedMessage
-              defaultMessage="Collections allow up to 100 articles currently"
-              id="yJsERg"
+              defaultMessage="Collections allow up to {count} articles currently"
+              id="LETb4b"
               description="src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
+              values={{
+                count: MAX_COLLECTION_ARTICLES_COUNT,
+              }}
             />
           }
           placement="top"
@@ -112,7 +116,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
           </section>
         </Tooltip>
       )}
-      {collection.articles.totalCount < 100 && (
+      {collection.articles.totalCount < MAX_COLLECTION_ARTICLES_COUNT && (
         <AddArticlesCollectionDialog
           collection={collection}
           onUpdate={() => setHasReset(true)}

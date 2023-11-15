@@ -1,7 +1,10 @@
 import { useFormik } from 'formik'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
+import { useDebounce } from 'use-debounce'
 
+import { INPUT_DEBOUNCE, MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
   QueryError,
@@ -59,11 +62,15 @@ const BaseAddArticlesCollectionDialog = ({
   const inSelectingArea = area === 'selecting'
   const inSearchingArea = area === 'searching'
   const [searchValue, setSearchValue] = useState('')
+  const [debouncedSearchValue, setDebouncedSearchValue] = useDebounce(
+    searchValue,
+    INPUT_DEBOUNCE
+  )
 
   const { getQuery } = useRoute()
 
   const userName = getQuery('name')
-  const { data, loading, error } =
+  const { data, loading, error, fetchMore } =
     usePublicQuery<AddArticlesCollectionUserQuery>(
       ADD_ARTICLES_COLLECTION_USER,
       {
@@ -84,7 +91,7 @@ const BaseAddArticlesCollectionDialog = ({
 
       const addChecked = checked.slice(
         0,
-        100 - collection.articles.totalCount - 1
+        MAX_COLLECTION_ARTICLES_COUNT - collection.articles.totalCount
       )
 
       onUpdate()
@@ -127,6 +134,10 @@ const BaseAddArticlesCollectionDialog = ({
   }
 
   useEffect(() => {
+    setSearchValue(debouncedSearchValue)
+  }, [debouncedSearchValue])
+
+  useEffect(() => {
     if (searchValue === '') {
       setArea('selecting')
     } else {
@@ -167,6 +178,27 @@ const BaseAddArticlesCollectionDialog = ({
     return <>{children({ openDialog })}</>
   }
 
+  // pagination
+  const connectionPath = 'user.articles'
+  const { edges, pageInfo } = data?.user?.articles || {}
+
+  // load next page
+  const loadMore = async () => {
+    analytics.trackEvent('load_more', {
+      type: 'user-collection-articles',
+      location: edges?.length || 0,
+    })
+
+    await fetchMore({
+      variables: { after: pageInfo?.endCursor },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+  }
   return (
     <>
       {children({ openDialog })}
@@ -182,8 +214,8 @@ const BaseAddArticlesCollectionDialog = ({
 
         <Dialog.Content fixedHeight>
           <SearchInput
-            value={searchValue}
-            onChange={(value) => setSearchValue(value)}
+            value={debouncedSearchValue}
+            onChange={(value) => setDebouncedSearchValue(value)}
           />
 
           {inSelectingArea && (
@@ -193,6 +225,8 @@ const BaseAddArticlesCollectionDialog = ({
               collection={collection}
               checkingIds={formik.values.checked}
               formId={formId}
+              loadMore={loadMore}
+              pageInfo={pageInfo}
             />
           )}
 

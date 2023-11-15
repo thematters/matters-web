@@ -36,6 +36,7 @@ export const FEED_TYPE = {
   COLLECTED: 'collected',
   // collection
   USER_COLLECTION: 'user-collection',
+  USER_COLLECTION_ARTICLES: 'user-collection-articles',
   // user
   AUTHORS: 'authors',
   ALL_AUTHORS: 'all-authors',
