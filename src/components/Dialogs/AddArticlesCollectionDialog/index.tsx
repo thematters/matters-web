@@ -1,8 +1,9 @@
 import { useFormik } from 'formik'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
+import { useDebounce } from 'use-debounce'
 
-import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
+import { INPUT_DEBOUNCE, MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
@@ -61,6 +62,10 @@ const BaseAddArticlesCollectionDialog = ({
   const inSelectingArea = area === 'selecting'
   const inSearchingArea = area === 'searching'
   const [searchValue, setSearchValue] = useState('')
+  const [debouncedSearchValue, setDebouncedSearchValue] = useDebounce(
+    searchValue,
+    INPUT_DEBOUNCE
+  )
 
   const { getQuery } = useRoute()
 
@@ -127,6 +132,10 @@ const BaseAddArticlesCollectionDialog = ({
     setArea('selecting')
     cd()
   }
+
+  useEffect(() => {
+    setSearchValue(debouncedSearchValue)
+  }, [debouncedSearchValue])
 
   useEffect(() => {
     if (searchValue === '') {
@@ -205,8 +214,8 @@ const BaseAddArticlesCollectionDialog = ({
 
         <Dialog.Content fixedHeight>
           <SearchInput
-            value={searchValue}
-            onChange={(value) => setSearchValue(value)}
+            value={debouncedSearchValue}
+            onChange={(value) => setDebouncedSearchValue(value)}
           />
 
           {inSelectingArea && (
