@@ -45,6 +45,7 @@
   font-weight: var(--font-weight-medium);
   line-height: 1.375rem;
   color: var(--color-white);
+  word-break: keep-all;
   background: var(--color-matters-green);
   border-radius: 0.25rem;
 }
