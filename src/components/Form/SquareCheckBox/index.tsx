@@ -1,7 +1,6 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useLayoutEffect, useRef, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import {
   IconSquireCheck20,
@@ -19,11 +18,11 @@ export type SquareCheckBoxBoxProps = {
   content?: React.ReactNode
 
   icon?: React.ReactNode
+  left?: React.ReactNode
   sup?: React.ReactNode
   supHeight?: number
 
   hasTooltip?: boolean
-  full?: boolean
 } & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -36,11 +35,11 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   hint,
 
   icon,
+  left,
   sup,
   supHeight,
 
   hasTooltip = false,
-  full = false,
 
   ...inputProps
 }) => {
@@ -101,15 +100,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
             <section className={styles.content}>
               {sup}
               <span className={hintClasses}>
-                {!!full && (
-                  <span className={styles.full}>
-                    <FormattedMessage
-                      defaultMessage="FULL"
-                      id="Jxr/TM"
-                      description="src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
-                    />
-                  </span>
-                )}
+                {left}
                 {content || hint}
               </span>
             </section>

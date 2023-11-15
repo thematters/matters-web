@@ -105,9 +105,17 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
                         hasChecked.includes(node.id) ||
                         checkingIds.includes(node.id)
                       }
-                      full={
+                      left={
                         node.articles.totalCount >=
-                        MAX_COLLECTION_ARTICLES_COUNT
+                        MAX_COLLECTION_ARTICLES_COUNT ? (
+                          <span className={styles.full}>
+                            <FormattedMessage
+                              defaultMessage="FULL"
+                              id="Jxr/TM"
+                              description="src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
+                            />
+                          </span>
+                        ) : undefined
                       }
                       hint={node.title}
                       disabled={

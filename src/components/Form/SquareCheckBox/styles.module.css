@@ -20,13 +20,3 @@
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
 }
-
-.full {
-  @mixin border-grey;
-
-  padding: var(--spacing-xxx-tightest) var(--spacing-base-xx-tight);
-  margin-right: var(--spacing-x-tight);
-  font-size: var(--font-size-xs);
-  color: var(--color-grey);
-  border-radius: 0.25rem;
-}
